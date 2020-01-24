@@ -1,5 +1,5 @@
 trigger:
-- master
+- rscohn2-ci
   
 pool:
   vmImage: 'ubuntu-latest'
@@ -13,7 +13,7 @@ variables:
 steps:
   - checkout: self
   - script: |
-      git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" https://onespec@dev.azure.com/onespec/oneapi-spec/_git/tbb-doc
+      #git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" https://onespec@dev.azure.com/onespec/oneapi-spec/_git/tbb-doc
       make public
   # Deploy the static web pages
   - task: AzureWebApp@1
