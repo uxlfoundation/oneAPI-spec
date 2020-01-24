@@ -6,6 +6,7 @@ jobs:
   build:
     container:
       image: rscohn2/sphinx-tools:latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: Run a multi-line script
