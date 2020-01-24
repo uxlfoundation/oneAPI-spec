@@ -1,0 +1,25 @@
+trigger:
+- master
+  
+pool:
+  vmImage: 'ubuntu-latest'
+
+container: rscohn2/sphinx-tools:latest
+
+variables: 
+    azureSubscription: 'azure-webapp'
+    appName: onespec
+
+steps:
+  - checkout: self
+  - script: |
+      git clone -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" https://onespec@dev.azure.com/onespec/oneapi-spec/_git/tbb-doc
+      make public
+  # Deploy the static web pages
+  - task: AzureWebApp@1
+    displayName: 'Azure Web App Deploy'
+    inputs:
+      azureSubscription: $(azureSubscription)
+      appType: webAppLinux
+      appName: $(appName)
+      package: $(System.DefaultWorkingDirectory)/webapp.zip

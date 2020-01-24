@@ -1,0 +1,6 @@
+# This is the minimal set of components required and using the latest
+#  versions
+
+sphinx
+sphinx-rtd-theme
+breathe

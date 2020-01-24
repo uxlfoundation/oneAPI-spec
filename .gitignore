@@ -1,0 +1,10 @@
+doxygen
+build
+*~
+
+/spec-venv
+/repos/*
+/.vscode
+/public
+
+__pycache__
