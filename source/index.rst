@@ -19,11 +19,11 @@ oneAPI Specification
    elements/oneDNN/source/index
    elements/oneCCL/source/index
    elements/oneDAL/source/index
-   elements/oneTBB/specification/nested-index
    elements/oneVPL/source/index
    elements/oneMKL/source/index
    contributors
    notices
 
+..   elements/oneTBB/specification/nested-index
 .. elements/l0/source/index
    
