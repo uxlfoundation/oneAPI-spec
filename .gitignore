@@ -1,0 +1,11 @@
+doxygen
+build
+*~
+
+/spec-venv
+/repos/*
+/.vscode
+/public
+/tarballs
+
+__pycache__

@@ -1,0 +1,26 @@
+commit 5009b05c18bda4accfb7bedaffe56eb8d33c7fb8
+Merge: e1875fc 43dfd3c
+Author: Robert Cohn <rscohn2@gmail.com>
+Date:   Fri Jan 24 16:27:58 2020 -0500
+
+    Merge pull request #1 from oneapi-src/feature/ci
+    
+    Feature/ci
+
+commit 43dfd3cf89b2e1e0eac819bbf906e1118ff86377
+Author: Robert Cohn <rscohn2@gmail.com>
+Date:   Fri Jan 24 14:33:18 2020 -0500
+
+    add gitlab CI
+
+commit f7010c3cdf89942c0e14beadbca5947ab9cbb02c
+Author: Robert Cohn <rscohn2@gmail.com>
+Date:   Fri Jan 24 14:32:31 2020 -0500
+
+    update README
+
+commit e1875fca83a8c9d382e709d5202f94c978758b13
+Author: Robert Cohn <rscohn2@gmail.com>
+Date:   Fri Jan 24 13:38:52 2020 -0500
+
+    initial
