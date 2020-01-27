@@ -1,12 +1,13 @@
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-
-public:
+oneapi-spec:
   image: rscohn2/sphinx-tools
-  script:
-  - make clones TBB_URI=https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.devtools.intel.com/DeveloperProducts/Analyzers/Toolkits/oneAPISpecifications/tbb-doc.git
-  - make public
-  - scripts/deploy.sh
+  script: "Clone support repos"
+    - make clones
+  script: "Build html"
+    - make html
+  script: "Build pdf"
+    - make latexpdf
+  script: "Build web site"
+    - make public
   artifacts:
     paths:
     - public
