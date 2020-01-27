@@ -37,8 +37,7 @@ prep: $(SUBDIR_PATHS)
 $(SUBDIR_PATHS):
 	cd $@ && $(PYTHON) $(BUILDER) $(MAKECMDGOALS)
 
-$(FORMATS):
-	$(MAKE) -j4 prep
+$(FORMATS): prep
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
 
 # Only clean sphinx in the top level
