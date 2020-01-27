@@ -9,7 +9,7 @@ provides portability and performance across accelerators and
 generations of hardware.  oneAPI consists of a language and libraries
 for creating parallel applications:
 
-.. include:: Elements/element_list.rst
+.. include:: elements/element_list.rst
 
 oneAPI simplifies software development by providing the same languages
 and programming models across accelerator architectures. In this
