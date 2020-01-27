@@ -213,11 +213,9 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 todo_include_todos = True
 
 breathe_projects = {
-    "l0"    : "Elements/l0/doxygen/xml",
-    "oneCCL": "Elements/oneCCL/doxygen/xml",
-    "oneDAL": "Elements/oneDAL/doxygen/xml",
-    "oneDNN": "Elements/oneDNN/doxygen/xml",
-    "oneVPL": "Elements/oneVPL/doxygen/xml",
+    "oneCCL": "elements/oneCCL/doxygen/xml",
+    "oneDNN": "elements/oneDNN/doxygen/xml",
+    "oneVPL": "elements/oneVPL/doxygen/xml",
 }
 breathe_default_project = 'oneAPI'
 
