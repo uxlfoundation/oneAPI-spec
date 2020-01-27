@@ -17,6 +17,10 @@ SUBDIRS       := oneCCL oneDAL oneMKL oneTBB oneVPL dpcpp oneDPL oneDNN
 SUBDIR_PATHS   := $(foreach subdir,$(SUBDIRS),source/elements/$(subdir))
 # Need absolute path in case we cd before invoking the builder
 BUILDER       := $(realpath source/elements/build.py)
+# subdirectory for publishing
+PUBLISH_DIR := default
+PUBLISH_PATH := /var/www/html/oneapi/$(PUBLISH_DIR)
+PUBLISH_KEY_FILE := oneapi_rsa
 
 .PHONY: clones help $(TOPTARGETS) $(SUBDIR_PATHS)
 
@@ -61,3 +65,7 @@ clean-sphinx:
 clean: $(SUBDIR_PATHS) clean-sphinx
 	rm -rf $(PUBLICDIR)
 
+
+publish:
+	ssh -o StrictHostKeyChecking=no -i ${PUBLISH_KEY_FILE} oneapi@ansatnuc02.an.intel.com rm -rf ${PUBLISH_PATH}
+	scp -r -i ${PUBLISH_KEY_FILE} public oneapi@ansatnuc02.an.intel.com:${PUBLISH_PATH}
