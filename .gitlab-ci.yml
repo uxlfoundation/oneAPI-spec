@@ -1,14 +1,11 @@
 build:
   image: rscohn2/sphinx-tools
-  stage: Clone support repos
+  stage: build
   script: 
     - make clones
-  stage: Build html
   script: 
     - make html
-  stage: Build pdf
   script: 
     - make latexpdf
-  stage: Build web site
   script: 
     - make public
