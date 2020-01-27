@@ -15,8 +15,8 @@ DOXYGENDIR    := doxygen
 TOPTARGETS    := clean prep
 SUBDIRS       := oneCCL oneDAL oneMKL oneTBB oneVPL dpcpp oneDPL oneDNN
 SUBDIR_PATHS   := $(foreach subdir,$(SUBDIRS),source/elements/$(subdir))
+# Need absolute path in case we cd before invoking the builder
 BUILDER       := $(realpath source/elements/build.py)
-TBB_URI       := ssh://git@gitlab.devtools.intel.com:29418/DeveloperProducts/Runtimes/Threading/tbb-doc.git
 
 .PHONY: clones help $(TOPTARGETS) $(SUBDIR_PATHS)
 
@@ -26,9 +26,11 @@ spec-venv:
 	. spec-venv/bin/activate && pip install -r requirements.txt
 
 clones:
-	cd repos && git clone $(TBB_URI)
-	cd repos/tbb-doc && git checkout onetbb-spec
+	cd repos && git clone https://gitlab.devtools.intel.com/DeveloperProducts/Analyzers/Toolkits/oneAPISpecifications/onetbb-spec.git
+	cd repos/onetbb-spec && git checkout onetbb-spec
+	cd repos && git clone --depth 1 https://gitlab.devtools.intel.com/DeveloperProducts/Analyzers/Toolkits/oneAPISpecifications/oneapi-spec-tarballs.git
 
+# Everything that must be done before invoking sphinx (e.g. run doxygen)
 prep: $(SUBDIR_PATHS)
 
 # make same target in all subdirectories
@@ -39,6 +41,7 @@ $(FORMATS):
 	$(MAKE) -j4 prep
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
 
+# Only clean sphinx in the top level
 clean-sphinx:
 	@$(SPHINXBUILD) -M clean "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
 
@@ -50,5 +53,5 @@ public: html latexpdf
 	mkdir public
 	cp -r build/html/* public
 	cp -r build/latex/*.pdf public
-	tar -C public -xf tarballs/oneMKL.tgz
-	tar -C public -xf tarballs/oneDAL.tgz
+	tar -C public -xf repos/oneapi-spec-tarballs/tarballs/oneMKL.tgz
+	tar -C public -xf repos/oneapi-spec-tarballs/tarballs/oneDAL.tgz
