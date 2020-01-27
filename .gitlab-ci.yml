@@ -1,13 +1,18 @@
-oneapi-spec:
+build:
   image: rscohn2/sphinx-tools
-  script: "Clone support repos"
+  stage: build
+  script: Clone support repos
     - make clones
-  script: "Build html"
+  script: Build html
     - make html
-  script: "Build pdf"
+  script: Build pdf
     - make latexpdf
-  script: "Build web site"
+  script: Build web site
     - make public
-  artifacts:
-    paths:
-    - public
+
+deploy:
+  stage: deploy
+  script:
+    - ls
+  only:
+    - master
