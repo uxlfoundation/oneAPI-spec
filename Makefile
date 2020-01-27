@@ -40,7 +40,7 @@ spec-venv:
 
 # Support repos
 clones:
-	cd repos && git clone https://gitlab.devtools.intel.com/DeveloperProducts/Analyzers/Toolkits/oneAPISpecifications/onetbb-spec.git
+	cd repos && git clone --depth 1 https://gitlab.devtools.intel.com/DeveloperProducts/Analyzers/Toolkits/oneAPISpecifications/onetbb-spec.git
 	cd repos/onetbb-spec && git checkout onetbb-spec
 	cd repos && git clone --depth 1 https://gitlab.devtools.intel.com/DeveloperProducts/Analyzers/Toolkits/oneAPISpecifications/oneapi-spec-tarballs.git
 

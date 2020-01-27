@@ -4,4 +4,5 @@ build:
   script: 
     - make clones
     - make public
+    - chmod 600 ${PUBLISH_KEY_FILE}
     - make publish PUBLISH_DIR=${CI_COMMIT_REF_NAME} PUBLISH_KEY_FILE=${PUBLISH_KEY_FILE}
