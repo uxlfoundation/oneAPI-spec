@@ -21,7 +21,7 @@ BUILDER       := $(realpath source/elements/build.py)
 .PHONY: clones help $(TOPTARGETS) $(SUBDIR_PATHS)
 
 # Build the web site
-public: html latexpf
+public: html latexpdf
 	rm -rf public
 	mkdir public
 	cp -r build/html/* public

@@ -3,6 +3,4 @@ build:
   stage: build
   script: 
     - make clones
-    - make html
-    - make latexpdf
     - make public
