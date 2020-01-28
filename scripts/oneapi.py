@@ -5,6 +5,8 @@ import os.path
 from os.path import join
 import shutil
 from string import Template
+import stat
+import string
 import subprocess
 import sys
 import tarfile
@@ -53,6 +55,17 @@ def build(target):
 
 def ci_publish(target):
     print(target)
+    with open('id_rsa', 'w') as fout:
+        fout.write(os.environ['CI_PUBLISH_KEY_FILE'])
+    os.chmod('id_rsa', stat.S_IREAD | stat.S_IWRITE)
+    table = "".maketrans('/','_')
+    publish_path = '/var/www/html/oneapi/%s' % Repo('.').active_branch.name.translate(table)
+    shell('ssh -o StrictHostKeyChecking=no -i id_rsa oneapi@ansatnuc02.an.intel.com rm -rf %s'
+          % (publish_path))
+    shell('scp -r -i id_rsa site oneapi@ansatnuc02.an.intel.com:%s'
+          % (publish_path))
+    element.rm('id_rsa')
+    
     
 def prod_publish(target):
     print(target)
