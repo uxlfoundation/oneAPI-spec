@@ -2,16 +2,4 @@ build:
   image: rscohn2/sphinx-tools
   stage: build
   script: 
-    - python scripts/oneapi.py clones
-    - python scripts/oneapi.py site
-    - python scripts/oneapi.py ci-publish
-  artifacts:
-    paths:
-      - site/
-
-publish:
-  script:
-    - pip install awscli
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == publish'
-      when: always
+    - python scripts/oneapi.py ci

@@ -20,6 +20,8 @@ import element
 sys.path.insert(0, os.path.abspath(join('source','conf')))
 import common_conf
 
+branch_name = Repo('.').active_branch.name
+
 class cd:
     """Context manager for changing the current working directory"""
     def __init__(self, newPath):
@@ -59,7 +61,7 @@ def ci_publish(target):
         fout.write(os.environ['CI_PUBLISH_KEY_FILE'])
     os.chmod('id_rsa', stat.S_IREAD | stat.S_IWRITE)
     table = "".maketrans('/','_')
-    publish_path = '/var/www/html/oneapi/%s' % Repo('.').active_branch.name.translate(table)
+    publish_path = '/var/www/html/oneapi/%s' % branch_name.translate(table)
     shell('ssh -o StrictHostKeyChecking=no -i id_rsa oneapi@ansatnuc02.an.intel.com rm -rf %s'
           % (publish_path))
     shell('scp -r -i id_rsa site oneapi@ansatnuc02.an.intel.com:%s'
@@ -87,10 +89,13 @@ def spec_venv(target):
 def clones(target):
     print(target)
     for repo_base in repos:
+        dir = join('repos',repo_base)
+        if os.path.exists(dir):
+            continue
         uri = ('https://gitlab.devtools.intel.com/DeveloperProducts/'
                'Analyzers/Toolkits/oneAPISpecifications/%s.git' % repo_base)
         print('clone:', uri)
-        Repo.clone_from(uri, join('repos',repo_base), multi_options=['--depth','1'])
+        Repo.clone_from(uri, dir, multi_options=['--depth','1'])
     
 def redirect(target):
     print(target)
@@ -114,9 +119,18 @@ def site(target):
         with tarfile.open(tf) as tar:
             tar.extractall('site')
 
+def ci(target):
+    clones('clones')
+    site('site')
+    if branch_name == 'publish':
+        stage_publish('stage_publish')
+    else:
+        ci_publish('ci_publish')
+    
 staging_host = 'staging.spec.oneapi.com'
 
-commands = {'ci-publish': ci_publish,
+commands = {'ci': ci,
+            'ci-publish': ci_publish,
             'clean': clean,
             'clones': clones,
             'html': build,
@@ -142,6 +156,7 @@ tarballs = ['oneMKL',
 
 repos = ['onetbb-spec',
          'oneapi-spec-tarballs']
+
 
 def main():
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
