@@ -1,5 +1,5 @@
 build:
-  image: rscohn2/sphinx-tools
+  image: rscohn2/oneapi-spec
   stage: build
-  script: 
-    - python scripts/oneapi.py ci
+  script:
+    - python3 scripts/oneapi.py ci
