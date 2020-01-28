@@ -64,6 +64,13 @@ clean-sphinx:
 clean: $(SUBDIR_PATHS) clean-sphinx
 	rm -rf site
 
+staging_publish:
+	aws s3 sync --only-show-errors --delete site s3://staging.spec.oneapi.com/versions/${PUBLISH_VERSION}
+	aws s3 sync --only-show-errors --delete site/redirect.html s3://staging.spec.oneapi.com/index.html
+
+prod_publish:
+	aws s3 sync --only-show-errors --delete s3://staging.spec.oneapi.com/versions/${PUBLISH_VERSION} s3://spec.oneapi.com/versions/${PUBLISH_VERSION}
+	aws s3 sync --only-show-errors --delete s3://staging.spec.oneapi.com/index.html s3://spec.oneapi.com/index.html
 
 ci_publish:
 	ssh -o StrictHostKeyChecking=no -i ${CI_PUBLISH_KEY_FILE} oneapi@ansatnuc02.an.intel.com rm -rf ${CI_PUBLISH_PATH}

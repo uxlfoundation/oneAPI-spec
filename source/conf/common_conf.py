@@ -11,3 +11,4 @@ rst_prolog = """
 .. |github_prefix| replace:: https://github.com/rscohn2/onespec
 """
 
+oneapi_spec_version = '0.6.0'

@@ -5,7 +5,7 @@ build
 /spec-venv
 /repos/*
 /.vscode
-/public
+/site
 /tarballs
 
 __pycache__

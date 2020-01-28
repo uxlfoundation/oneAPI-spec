@@ -120,6 +120,7 @@ html_static_path = ['_static']
 
 html_logo = '_static/oneapi-logo1.png'
 html_favicon = '_static/favicons.png'
+latex_logo = html_logo
 
 # Causing long page loads because it loads utag.js, which times out
 #html_js_files = ['custom.js']
