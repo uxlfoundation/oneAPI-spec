@@ -1,6 +1,8 @@
 # This is the minimal set of components required and using the latest
 #  versions
 
+
+aws-shell # Only needed for deploying the site
+breathe
 sphinx
 sphinx-rtd-theme
-breathe

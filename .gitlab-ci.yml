@@ -3,6 +3,16 @@ build:
   stage: build
   script: 
     - make clones
-    - make public
-    - chmod 600 ${PUBLISH_KEY_FILE}
-    - make publish PUBLISH_DIR=`echo ${CI_COMMIT_REF_NAME}|tr / _` PUBLISH_KEY_FILE=${PUBLISH_KEY_FILE}
+    - make site
+    - chmod 600 ${CI_PUBLISH_KEY_FILE}
+    - make publish CI_PUBLISH_DIR=`echo ${CI_COMMIT_REF_NAME}|tr / _` CI_PUBLISH_KEY_FILE=${CI_PUBLISH_KEY_FILE}
+  artifacts:
+    paths:
+      - site/
+
+publish:
+  script:
+    - pip install awscli
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == publish'
+      when: always

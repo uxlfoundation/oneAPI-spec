@@ -9,7 +9,6 @@ SPHINXOPTS    := -q -j auto
 SPHINXBUILD   := sphinx-build
 SOURCEDIR     := source
 BUILDDIR      := build
-PUBLICDIR     := public
 FORMATS       := html latexpdf
 DOXYGENDIR    := doxygen
 TOPTARGETS    := clean prep
@@ -18,20 +17,20 @@ SUBDIR_PATHS   := $(foreach subdir,$(SUBDIRS),source/elements/$(subdir))
 # Need absolute path in case we cd before invoking the builder
 BUILDER       := $(realpath source/elements/build.py)
 # subdirectory for publishing
-PUBLISH_DIR := default
-PUBLISH_PATH := /var/www/html/oneapi/$(PUBLISH_DIR)
-PUBLISH_KEY_FILE := oneapi_rsa
+CI_PUBLISH_DIR := default
+CI_PUBLISH_PATH := /var/www/html/oneapi/$(CI_PUBLISH_DIR)
+CI_PUBLISH_KEY_FILE := oneapi_rsa
 
 .PHONY: clones help $(TOPTARGETS) $(SUBDIR_PATHS)
 
 # Build the web site
-public: html latexpdf
-	rm -rf public
-	mkdir public
-	cp -r build/html/* public
-	cp -r build/latex/*.pdf public
-	tar -C public -xf repos/oneapi-spec-tarballs/tarballs/oneMKL.tgz
-	tar -C public -xf repos/oneapi-spec-tarballs/tarballs/oneDAL.tgz
+site: html latexpdf
+	rm -rf site
+	mkdir site
+	cp -r build/html/* site
+	cp -r build/latex/*.pdf site
+	tar -C site -xf repos/oneapi-spec-tarballs/tarballs/oneMKL.tgz
+	tar -C site -xf repos/oneapi-spec-tarballs/tarballs/oneDAL.tgz
 
 # Virtual environment with all dependencies installed
 spec-venv:
@@ -63,9 +62,9 @@ clean-sphinx:
 
 # clean the subdirectories then clean the master document
 clean: $(SUBDIR_PATHS) clean-sphinx
-	rm -rf $(PUBLICDIR)
+	rm -rf site
 
 
-publish:
-	ssh -o StrictHostKeyChecking=no -i ${PUBLISH_KEY_FILE} oneapi@ansatnuc02.an.intel.com rm -rf ${PUBLISH_PATH}
-	scp -r -i ${PUBLISH_KEY_FILE} public oneapi@ansatnuc02.an.intel.com:${PUBLISH_PATH}
+ci_publish:
+	ssh -o StrictHostKeyChecking=no -i ${CI_PUBLISH_KEY_FILE} oneapi@ansatnuc02.an.intel.com rm -rf ${CI_PUBLISH_PATH}
+	scp -r -i ${CI_PUBLISH_KEY_FILE} site oneapi@ansatnuc02.an.intel.com:${CI_PUBLISH_PATH}
