@@ -1,8 +1,9 @@
 build:
-  image: rscohn2/sphinx-tools
+  image: rscohn2/oneapi-spec
   stage: build
-  script: 
-    - make clones
-    - make public
-    - chmod 600 ${PUBLISH_KEY_FILE}
-    - make publish PUBLISH_DIR=`echo ${CI_COMMIT_REF_NAME}|tr / _` PUBLISH_KEY_FILE=${PUBLISH_KEY_FILE}
+  script:
+    - export no_proxy=.intel.com
+    - export NO_PROXY=$no_proxy
+    - export http_proxy=http://proxy-us.intel.com:911
+    - export https_proxy=$http_proxy
+    - python3 scripts/oneapi.py --branch $CI_COMMIT_REF_NAME ci

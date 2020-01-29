@@ -27,7 +27,7 @@ author = u'Intel'
 
 # The short X.Y version
 #version = u'0.61 <' + str(datetime.date.today()) + '>'
-version = u'0.5' 
+version = u'0.6.0' 
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -120,6 +120,7 @@ html_static_path = ['_static']
 
 html_logo = '_static/oneapi-logo1.png'
 html_favicon = '_static/favicons.png'
+latex_logo = html_logo
 
 # Causing long page loads because it loads utag.js, which times out
 #html_js_files = ['custom.js']
