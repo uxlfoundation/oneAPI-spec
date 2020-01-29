@@ -20,7 +20,7 @@ import element
 sys.path.insert(0, os.path.abspath(join('source','conf')))
 import common_conf
 
-branch_name = Repo('.').active_branch.name
+args = None
 
 class cd:
     """Context manager for changing the current working directory"""
@@ -57,7 +57,7 @@ def build(target):
 
 def ci_publish(target='ci-publish'):
     print(target)
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/branches/%s' % (staging_host, branch_name))
+    shell('aws s3 sync --only-show-errors --delete site s3://%s/branches/%s' % (staging_host, args.branch))
     
 def prod_publish(target='prod-publish'):
     print(target)
@@ -114,7 +114,7 @@ def ci(target='ci'):
     print(target)
     clones()
     site()
-    if branch_name == 'publish':
+    if args.branch == 'publish':
         stage_publish()
     else:
         ci_publish()
@@ -151,8 +151,10 @@ repos = ['onetbb-spec',
 
 
 def main():
+    global args
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
     parser.add_argument('action',choices=commands.keys())
+    parser.add_argument('--branch')
     args = parser.parse_args()
 
     commands[args.action](args.action)
