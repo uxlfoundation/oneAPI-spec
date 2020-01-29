@@ -58,6 +58,8 @@ def build(target):
 def ci_publish(target='ci-publish'):
     print(target)
     shell('aws s3 sync --only-show-errors --delete site s3://%s/branches/%s' % (staging_host, args.branch))
+    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/branches/%s/'
+          % (args.branch))
     
 def prod_publish(target='prod-publish'):
     print(target)
@@ -65,11 +67,14 @@ def prod_publish(target='prod-publish'):
           % (staging_host,common_conf.oneapi_spec_version, common_conf.oneapi_spec_version))
     shell('aws s3 cp s3://%s/index.html s3://spec.oneapi.com/index.html'
           % (staging_host))
+    print('published at http://spec.oneapi.com/')
     
 def stage_publish(target='stage-publish'):
     print(target)
     shell('aws s3 sync --only-show-errors --delete site s3://%s/versions/%s' % (staging_host,common_conf.oneapi_spec_version))
     shell('aws s3 cp site/redirect.html s3://%s/index.html' % staging_host)
+    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/')
+
     
 def spec_venv(target='spec-venv'):
     print(target)
