@@ -154,6 +154,7 @@ dirs = ['oneCCL',
         'oneDNN']
 
 tarballs = ['oneMKL',
+            'oneL0',
             'oneDAL']
 
 repos = ['onetbb-spec',
