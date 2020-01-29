@@ -37,7 +37,7 @@ to do the same task manually.
 Setup
 -----
 
-Install python and doxygen.  To install on **Ubuntu**::
+Install python 3 and doxygen.  To install on **Ubuntu**::
 
    sudo scripts/install.sh
 
@@ -50,6 +50,11 @@ To install directly with pip::
 
   pip install -r requirements.txt
 
+On windows::
+
+  python scripts\oneapi.py spec-venv
+  spec-venv\Scripts\activate
+  
 MKL, DAL, and Level Zero are in other repos. To clone them::
 
   python scripts/oneapi.py clones
@@ -60,6 +65,10 @@ Building the docs
 To build the html document::
 
   python scripts/oneapi.py html
+
+This will not work on windows because we are using symbolic links for
+the elements that are in separate repos. However, windows can build
+individual specs for individual elements.
 
 The document is organized as a book with chapters. Each element of
 oneAPI is its own chapter and can be built separately. For example, to

@@ -1,18 +1,20 @@
+import sys
+if sys.version_info[0] < 3:
+    exit('Python 3 is required')
+    
 import argparse
 import glob
 import os
 import os.path
 from os.path import join
+import platform
 import shutil
 from string import Template
 import stat
 import string
 import subprocess
-import sys
 import tarfile
 import venv
-
-from git import Repo
 
 from element import shell,sphinx
 import element
@@ -79,9 +81,12 @@ def stage_publish(target='stage-publish'):
 def spec_venv(target='spec-venv'):
     print(target)
     venv.create('spec-venv', with_pip=True, clear=True)
-    shell('. spec-venv/bin/activate && pip install -r requirements.txt')
+    pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
+    shell('%s install -r requirements.txt' % pip)
     
 def clones(target='clones'):
+    # defer loading this so script can be invoked without installing packages
+    from git import Repo
     print(target)
     for repo_base in repos:
         dir = join('repos',repo_base)
