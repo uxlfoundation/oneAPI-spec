@@ -11,20 +11,13 @@ the Docs`_
 Layout of the Documents in the Repo
 -----------------------------------
 
-The specification is in the source directory. Some of the
-specifications have companion documents which are saved as tarballs in
-the tarballs directory.
+The specification is in the source directory. MKL, TBB, and Level Zero
+are in separate repos. See clones function in scripts/oneapi.py on how
+to clone them.
 
-----------------
-Viewing the docs
-----------------
-
--------
-Editing
--------
-
-Using Github Web Interface
---------------------------
+---------------------------------
+Editing with Github Web Interface
+---------------------------------
 
 The simplest and quickest way to edit is directly in the github web
 interface. It has an editor, previewer, and lets you commit
@@ -32,62 +25,58 @@ changes. You won't need to install any local tools. The previewer
 knows how to render RST, but not the sphinx directives so it will not
 display exactly as the real manual.
 
+-------------------------
 Working with a Local Copy
 -------------------------
 
-For bigger edits, you will need a local version of the tools.
+For bigger edits, you will need a local version of the tools. Clone
+this repo to your local system. scripts/oneapi.py is a helper script
+for the maintenance tasks. You can also look at the source if you want
+to do the same task manually.
 
 Setup
-~~~~~
+-----
 
-First, install python and doxygen. Then install the python packages::
+Install python and doxygen.  To install on **Ubuntu**::
+
+   sudo scripts/install.sh
+
+Create and activate a python virtual environment with all required tools::
+
+  python scripts/oneapi.py spec-venv
+  source spec-venv/bin/activate
+  
+To install directly with pip::
 
   pip install -r requirements.txt
 
-The Makefile will create a python virtual environment with the required packages::
+MKL, DAL, and Level Zero are in other repos. To clone them::
 
-  make spec-venv
-
-Use the virtual environment::
-
-  source spec-venv/bin/activate
-  
-To install on **Ubuntu**::
-
-   sudo scripts/install.sh
-        
-You can build a **Docker container** image with::
-
-   scripts/build-image.sh
-
-The tag will be oneapi-spec.  The script copies your proxy settings in
-the invoking shell so it will work inside the firewall.
+  python scripts/oneapi.py clones
 
 Building the docs
-~~~~~~~~~~~~~~~~~
+-----------------
 
-To build the html document on Linux, do::
+To build the html document::
 
-  make html
+  python scripts/oneapi.py html
 
 The document is organized as a book with chapters. Each element of
 oneAPI is its own chapter and can be built separately. For example, to
 build the oneVPL chapter, do::
 
   cd source/elements/oneVPL
-  python ../build.py html
+  python ../../../scripts/element.py html
   
-The build.py script works on windows, linux, & mac.
-
 To see the docs, visit build/html/index.html in your browser using a
 file:// URL. Build the pdf version with::
 
-  make latexpdf
+  python scripts/oneapi.py latexpdf
 
 And then view build/latexpdf/oneAPI-spec.pdf
 
 Checking for Errors
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 There are rst linting tools to check for errors::
 
@@ -114,11 +103,50 @@ size of the text. Probably a lot more.
 linting. I could not find any support for rejustifying paragraphs to
 80 characters, which makes it difficult to use.
 
-CI configuration
-----------------
+------
+Docker
+------
 
-CI runs inside Intel until all parts of the spec are published here.
+You can build a **Docker container** image with::
 
+   scripts/build-image.sh
+
+The tag will be oneapi-spec.  The script copies your proxy settings in
+the invoking shell so it will work inside the firewall.
+
+--
+CI
+--
+
+We are currently using gitlab CI inside the intel firewall. See
+.gitlab-ci.yml for the configuration. When all the documents sources
+have been externally published, we will move it to public CI
+infrastructure.
+
+On every commit, the CI system builds and publishes the document to a
+http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/branches
+with a different directory for the latest build of every branch.
+
+For commits to the publish branch, the document is published at:
+http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/versions. with
+a different directory for every version. The version is obtained from
+source/conf/common_conf.py
+
+To publish on AWS, the CI system configuration sets
+AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
+
+----------
+Publishing
+----------
+
+Commit to the publish branch. View the results on staging server. Push to production with::
+
+  python scripts/oneapi.py prod-publish
+
+It will use the version number from source/conf/common_conf.py so you
+must checkout the publish branch for this to work.
+
+------------
 More Reading
 ------------
 
