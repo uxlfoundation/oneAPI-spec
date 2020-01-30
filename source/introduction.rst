@@ -123,12 +123,15 @@ Signed-off-by: Joe Smith joe.smith@email.com
 Versions
 --------
 
-========  ==========  ===========
-Version   Date        Notes
-========  ==========  ===========
-0.5.0     11/17/2019  First Public Release
-0.6.0     01/31/2019  Publish specification sources
-========  ==========  ===========
+.. |root| replace:: https://spec.oneapi.com/versions
+.. |pdf|  replace:: oneAPI-spec.pdf
+
+========  ==========  ================================================================================================================  =====
+Version   Date        View                                                                                                              Notes
+========  ==========  ================================================================================================================  =====
+0.5.0     11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0>`_                                                                  First Public Release
+0.6.0     01/31/2019  `HTML <https://spec.oneapi.com/versions/0.6.0>`_ `PDF <https://spec.oneapi.com/versions/0.6.0/oneAPI-spec.pdf>`_  Publish specification sources
+========  ==========  ================================================================================================================  =====
 
 .. todolist::
 

@@ -59,23 +59,28 @@ def build(target):
 
 def ci_publish(target='ci-publish'):
     print(target)
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/branches/%s' % (staging_host, args.branch))
-    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/branches/%s/'
+    shell('aws s3 sync --only-show-errors --delete site s3://%s/ci/branches/%s' % (staging_host, args.branch))
+    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/ci/branches/%s/'
           % (args.branch))
     
 def prod_publish(target='prod-publish'):
     print(target)
-    shell('aws s3 sync --only-show-errors --delete s3://%s/oneAPI/versions/%s s3://spec.oneapi.com/oneAPI/versions/%s'
-          % (staging_host,common_conf.oneapi_spec_version, common_conf.oneapi_spec_version))
-    shell('aws s3 cp s3://%s/oneAPI/index.html s3://spec.oneapi.com/oneAPI/index.html'
-          % (staging_host))
+    # sync staging to prod
+    shell('aws s3 sync --only-show-errors --delete s3://%s/prod s3://spec.oneapi.com/' % (staging_host))
     print('published at http://spec.oneapi.com/')
     
 def stage_publish(target='stage-publish'):
     print(target)
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/oneAPI/versions/%s' % (staging_host,common_conf.oneapi_spec_version))
-    shell('aws s3 cp site/redirect.html s3://%s/oneAPI/index.html' % staging_host)
-    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/')
+    top = 's3://%s/prod' % staging_host
+    version_top = '%s/versions/%s' % (top,common_conf.oneapi_spec_version)
+
+    # Copy the full tree into a versioned directory
+    shell('aws s3 sync --only-show-errors --delete site %s' % version_top)
+    # Put latest pdf in top
+    shell('aws s3 cp %s/oneAPI-spec.pdf %s/oneAPI-spec.pdf' % (version_top, top))
+    # Put redirect in top to versioned directory
+    shell('aws s3 cp site/redirect.html s3://%s/prod/index.html' % staging_host)
+    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/prod')
 
     
 def spec_venv(target='spec-venv'):
