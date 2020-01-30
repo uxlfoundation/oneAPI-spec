@@ -123,7 +123,7 @@ html_favicon = '_static/favicons.png'
 latex_logo = '_static/oneAPI-rgb-3000.png'
 
 # Causing long page loads because it loads utag.js, which times out
-#html_js_files = ['custom.js']
+html_js_files = ['custom.js']
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
