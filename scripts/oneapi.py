@@ -65,16 +65,16 @@ def ci_publish(target='ci-publish'):
     
 def prod_publish(target='prod-publish'):
     print(target)
-    shell('aws s3 sync --only-show-errors --delete s3://%s/versions/%s s3://spec.oneapi.com/versions/%s'
+    shell('aws s3 sync --only-show-errors --delete s3://%s/oneAPI/versions/%s s3://spec.oneapi.com/oneAPI/versions/%s'
           % (staging_host,common_conf.oneapi_spec_version, common_conf.oneapi_spec_version))
-    shell('aws s3 cp s3://%s/index.html s3://spec.oneapi.com/index.html'
+    shell('aws s3 cp s3://%s/oneAPI/index.html s3://spec.oneapi.com/oneAPI/index.html'
           % (staging_host))
     print('published at http://spec.oneapi.com/')
     
 def stage_publish(target='stage-publish'):
     print(target)
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/versions/%s' % (staging_host,common_conf.oneapi_spec_version))
-    shell('aws s3 cp site/redirect.html s3://%s/index.html' % staging_host)
+    shell('aws s3 sync --only-show-errors --delete site s3://%s/oneAPI/versions/%s' % (staging_host,common_conf.oneapi_spec_version))
+    shell('aws s3 cp site/redirect.html s3://%s/oneAPI/index.html' % staging_host)
     print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/')
 
     

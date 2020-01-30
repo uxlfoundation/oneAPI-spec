@@ -126,7 +126,8 @@ Versions
 ========  ==========  ===========
 Version   Date        Notes
 ========  ==========  ===========
-0.50      11/17/2019  First Public Release
+0.5.0     11/17/2019  First Public Release
+0.6.0     01/31/2019  Publish specification sources
 ========  ==========  ===========
 
 .. todolist::

@@ -137,7 +137,7 @@ http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/branches
 with a different directory for the latest build of every branch.
 
 For commits to the publish branch, the document is published at:
-http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/versions. with
+http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/oneAPI/versions. with
 a different directory for every version. The version is obtained from
 source/conf/common_conf.py
 
@@ -168,6 +168,6 @@ More Reading
 .. _`rst tutorial`: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 .. _`rst docs`: http://docutils.sourceforge.net/rst.html
 .. _`online editor/viewer`: http://rst.aaroniles.net/
-.. _`oneAPI Specification`: https://spec.oneapi.org
+.. _`oneAPI Specification`: https://spec.oneapi.com
 .. _`Sphinx`: http://www.sphinx-doc.org/en/master/
 .. _`Read the Docs`: https://readthedocs.org/
