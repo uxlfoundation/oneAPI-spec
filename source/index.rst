@@ -18,6 +18,7 @@ oneAPI Specification
    elements/oneDPL/source/index
    elements/oneDNN/source/index
    elements/oneCCL/source/index
+   elements/l0/source/index
    elements/oneDAL/source/index
    elements/oneTBB/specification/nested-index
    elements/oneVPL/source/index
@@ -25,5 +26,4 @@ oneAPI Specification
    contributors
    notices
 
-.. elements/l0/source/index
    
