@@ -126,8 +126,8 @@ Versions
 ========  ==========  =========
 Version   Date        View                                                                                                            
 ========  ==========  =========
-0.6.0_    01/31/2019  `HTML <https://spec.oneapi.com/versions/0.6.0>`__ `PDF <https://spec.oneapi.com/versions/0.6.0/oneAPI-spec.pdf>`__
-0.5.0_    11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0>`__                                                                
+0.6.0_    01/31/2019  `HTML <https://spec.oneapi.com/versions/0.6.0/>`__ `PDF <https://spec.oneapi.com/versions/0.6.0/oneAPI-spec.pdf>`__
+0.5.0_    11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0/>`__                                                                
 ========  ==========  =========
 
 0.6.0
