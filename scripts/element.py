@@ -23,7 +23,7 @@ def action(func):
     @wraps(func)
     def wrapped(*args, **kwargs):
         global indent
-        log(args[0])
+        log(args[0] if len(args) > 0 and args[0] else wrapped.__name__)
         indent += 2
         x = func(*args, **kwargs)
         indent -= 2
@@ -79,7 +79,7 @@ def makedirs(path):
 def sphinx(target):
     shell('%s -M %s %s %s %s' % (sphinx_build, target, source_dir, build_dir, sphinx_opts))
     
-def clean(target):
+def clean(target=None):
     rm(doxygen_dir)
     sphinx('clean')
 
@@ -94,14 +94,14 @@ def up_to_date(target, deps):
 def doxygen_files():
     return ['Doxyfile'] + glob.glob('include/**', recursive=True)
 
-def doxygen():
+def doxygen(target=None):
     if (not exists('Doxyfile') or
         up_to_date(doxygen_xml, doxygen_files())):
         return
     shell('doxygen Doxyfile')
     
 @action
-def prep(target):
+def prep(target=None):
     doxygen()
     
 def build(target):

@@ -26,7 +26,7 @@ args = None
 
         
 @element.action
-def clean(target='clean'):
+def clean(target=None):
     apply_dirs('clean')
     sphinx('clean')
 
@@ -35,7 +35,7 @@ def apply_dirs(target):
         with element.cd(join('source','elements',dir)):
             element.command(target)
 
-def prep(target='prep'):
+def prep(target=None):
     apply_dirs('prep')
     
 @element.action
@@ -44,7 +44,7 @@ def build(target):
     sphinx(target)
 
 @element.action
-def ci_publish(target='ci-publish'):
+def ci_publish(target=None):
     if not args.branch:
         exit('Error: --branch <branchname> is required')
     shell('aws s3 sync --only-show-errors --delete site s3://%s/ci/branches/%s' % (staging_host, args.branch))
@@ -52,13 +52,13 @@ def ci_publish(target='ci-publish'):
           % (args.branch))
     
 @element.action
-def prod_publish(target='prod-publish'):
+def prod_publish(target=None):
     # sync staging to prod
     shell('aws s3 sync --only-show-errors --delete s3://%s/site s3://spec.oneapi.com/' % (staging_host))
     element.log('published at http://spec.oneapi.com/')
     
 @element.action
-def stage_publish(target='stage-publish'):
+def stage_publish(target=None):
     local_top = 'site'
     local_versions = join(local_top, 'versions')
     local_versions_x = join(local_versions, common_conf.oneapi_spec_version)
@@ -69,7 +69,9 @@ def stage_publish(target='stage-publish'):
     s3_versions_latest = '%s/latest' % s3_versions
 
     # Sync everything but versions
-    shell(('aws s3 sync --only-show-errors --delete'
+    # Do not use --delete, it will delete old versions
+    #  even with the --exclude
+    shell(('aws s3 sync --only-show-errors'
            ' --exclude \'site/versions/*\''
            ' %s %s')
           % (local_top, s3_top))
@@ -85,13 +87,13 @@ def stage_publish(target='stage-publish'):
 
     
 @element.action
-def spec_venv(target='spec-venv'):
+def spec_venv(target=None):
     venv.create('spec-venv', with_pip=True, clear=True)
     pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
     shell('%s install -r requirements.txt' % pip)
     
 @element.action
-def clones(target='clones'):
+def clones(target=None):
     # defer loading this so script can be invoked without installing packages
     from git import Repo
     for repo_base in repos:
@@ -105,14 +107,7 @@ def clones(target='clones'):
             Repo.clone_from(uri, dir, multi_options=['--depth','1'])
     
 @element.action
-def redirect(target='redirect'):
-    with open(join('source','redirect.tpl')) as fin:
-        with open(join('site','redirect.html'), 'w') as fout:
-            for line in fin.readlines():
-                fout.write(Template(line).substitute(version=common_conf.oneapi_spec_version))
-            
-@element.action
-def site(target='site'):
+def site(target=None):
     # Build the docs
     prep()
     sphinx('html')
@@ -129,16 +124,16 @@ def site(target='site'):
     element.makedirs(versions)
     element.copytree(html, versions_x)
     element.copy(pdf, versions_x)
-    element.copytree(versions_x, join(versions, 'latest'))
     for t in tarballs:
         tf = join('repos','oneapi-spec-tarballs','tarballs','%s.tgz' % t)
         element.log('cd',versions_x,'&& tar zxf',tf)
         if not args.dry_run:
             with tarfile.open(tf) as tar:
                 tar.extractall(versions_x)
+    element.copytree(versions_x, join(versions, 'latest'))
 
 @element.action
-def ci(target='ci'):
+def ci(target=None):
     clones()
     site()
     if args.branch == 'publish':
@@ -156,7 +151,6 @@ commands = {'ci': ci,
             'latexpdf': build,
             'prep': prep,
             'prod-publish': prod_publish,
-            'redirect': redirect,
             'site': site,
             'spec-venv': spec_venv,
             'stage-publish': stage_publish}
