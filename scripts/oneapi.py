@@ -24,109 +24,116 @@ import common_conf
 
 args = None
 
-class cd:
-    """Context manager for changing the current working directory"""
-    def __init__(self, newPath):
-        self.newPath = os.path.expanduser(newPath)
-
-    def __enter__(self):
-        self.savedPath = os.getcwd()
-        print('pushd ' + self.newPath)
-        os.chdir(self.newPath)
-
-    def __exit__(self, etype, value, traceback):
-        print('popd')
-        os.chdir(self.savedPath)
         
-def clean(target='clean'):
-    print(target)
+@element.action
+def clean(target=None):
     apply_dirs('clean')
     sphinx('clean')
 
 def apply_dirs(target):
     for dir in dirs:
-        with cd(join('source','elements',dir)):
+        with element.cd(join('source','elements',dir)):
             element.command(target)
 
-def prep(target='prep'):
-    print(target)
+def prep(target=None):
     apply_dirs('prep')
     
+@element.action
 def build(target):
-    print(target)
     prep()
     sphinx(target)
 
-def ci_publish(target='ci-publish'):
-    print(target)
+@element.action
+def ci_publish(target=None):
+    if not args.branch:
+        exit('Error: --branch <branchname> is required')
     shell('aws s3 sync --only-show-errors --delete site s3://%s/ci/branches/%s' % (staging_host, args.branch))
-    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/ci/branches/%s/'
+    element.log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/ci/branches/%s/'
           % (args.branch))
     
-def prod_publish(target='prod-publish'):
-    print(target)
+@element.action
+def prod_publish(target=None):
     # sync staging to prod
-    shell('aws s3 sync --only-show-errors --delete s3://%s/prod s3://spec.oneapi.com/' % (staging_host))
-    print('published at http://spec.oneapi.com/')
+    shell('aws s3 sync --only-show-errors --delete s3://%s/site s3://spec.oneapi.com/' % (staging_host))
+    element.log('published at http://spec.oneapi.com/')
     
-def stage_publish(target='stage-publish'):
-    print(target)
-    top = 's3://%s/prod' % staging_host
-    version_top = '%s/versions/%s' % (top,common_conf.oneapi_spec_version)
+@element.action
+def stage_publish(target=None):
+    local_top = 'site'
+    local_versions = join(local_top, 'versions')
+    local_versions_x = join(local_versions, common_conf.oneapi_spec_version)
+    local_versions_latest = join(local_versions, 'latest')
+    s3_top = 's3://%s/%s' % (staging_host,local_top)
+    s3_versions = '%s/versions' % s3_top
+    s3_versions_x = '%s/%s' % (s3_versions,common_conf.oneapi_spec_version)
+    s3_versions_latest = '%s/latest' % s3_versions
 
-    # Copy the full tree into a versioned directory
-    shell('aws s3 sync --only-show-errors --delete site %s' % version_top)
-    # Put latest pdf in top
-    shell('aws s3 cp %s/oneAPI-spec.pdf %s/oneAPI-spec.pdf' % (version_top, top))
-    # Put redirect in top to versioned directory
-    shell('aws s3 cp site/redirect.html s3://%s/prod/index.html' % staging_host)
-    print('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/prod')
+    # Sync everything but versions
+    # Do not use --delete, it will delete old versions
+    #  even with the --exclude
+    shell(('aws s3 sync --only-show-errors'
+           ' --exclude \'site/versions/*\''
+           ' %s %s')
+          % (local_top, s3_top))
+    # Sync the newly created version directory
+    shell(('aws s3 sync --only-show-errors --delete'
+           ' %s %s')
+          % (local_versions_x, s3_versions_x))
+    shell(('aws s3 sync --only-show-errors --delete'
+           ' %s %s')
+          % (local_versions_latest, s3_versions_latest))
+
+    element.log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/%s' % local_top)
 
     
-def spec_venv(target='spec-venv'):
-    print(target)
+@element.action
+def spec_venv(target=None):
     venv.create('spec-venv', with_pip=True, clear=True)
     pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
     shell('%s install -r requirements.txt' % pip)
     
-def clones(target='clones'):
+@element.action
+def clones(target=None):
     # defer loading this so script can be invoked without installing packages
     from git import Repo
-    print(target)
     for repo_base in repos:
         dir = join('repos',repo_base)
         if os.path.exists(dir):
             continue
         uri = ('https://gitlab.devtools.intel.com/DeveloperProducts/'
                'Analyzers/Toolkits/oneAPISpecifications/%s.git' % repo_base)
-        print('clone:', uri)
-        Repo.clone_from(uri, dir, multi_options=['--depth','1'])
+        element.log('clone:', uri)
+        if not args.dry_run:
+            Repo.clone_from(uri, dir, multi_options=['--depth','1'])
     
-def redirect(target='redirect'):
-    print(target)
-    with open(join('source','redirect.tpl')) as fin:
-        with open(join('site','redirect.html'), 'w') as fout:
-            for line in fin.readlines():
-                fout.write(Template(line).substitute(version=common_conf.oneapi_spec_version))
-            
-def site(target='site'):
-    print(target)
+@element.action
+def site(target=None):
+    # Build the docs
     prep()
     sphinx('html')
     sphinx('latexpdf')
-    element.rm('site')
-    print('copying generated files')
-    shutil.copytree(join('build','html'),'site')
-    shutil.copy('build/latex/oneAPI-spec.pdf', 'site')
-    redirect()
+
+    # Build the site. It will have everything but the older versions
+    site = 'site'
+    versions = join(site,'versions')
+    versions_x = join(versions, common_conf.oneapi_spec_version)
+    pdf = join('build','latex','oneAPI-spec.pdf')
+    html = join('build','html')
+    element.rm(site)
+    element.copytree('site-root','site')
+    element.makedirs(versions)
+    element.copytree(html, versions_x)
+    element.copy(pdf, versions_x)
     for t in tarballs:
         tf = join('repos','oneapi-spec-tarballs','tarballs','%s.tgz' % t)
-        print('untar:',tf)
-        with tarfile.open(tf) as tar:
-            tar.extractall('site')
+        element.log('cd',versions_x,'&& tar zxf',tf)
+        if not args.dry_run:
+            with tarfile.open(tf) as tar:
+                tar.extractall(versions_x)
+    element.copytree(versions_x, join(versions, 'latest'))
 
-def ci(target='ci'):
-    print(target)
+@element.action
+def ci(target=None):
     clones()
     site()
     if args.branch == 'publish':
@@ -144,7 +151,6 @@ commands = {'ci': ci,
             'latexpdf': build,
             'prep': prep,
             'prod-publish': prod_publish,
-            'redirect': redirect,
             'site': site,
             'spec-venv': spec_venv,
             'stage-publish': stage_publish}
@@ -171,7 +177,9 @@ def main():
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
     parser.add_argument('action',choices=commands.keys())
     parser.add_argument('--branch')
+    parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
+    element.dry_run = args.dry_run
 
     commands[args.action](args.action)
 
