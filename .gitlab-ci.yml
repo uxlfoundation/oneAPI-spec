@@ -7,5 +7,3 @@ build:
     - export http_proxy=http://proxy-us.intel.com:911
     - export https_proxy=$http_proxy
     - python3 scripts/oneapi.py --branch $CI_COMMIT_REF_NAME ci
-    - ls site/versions/latest
-    - ls site/versions/0.6.0
