@@ -18,8 +18,8 @@ standard bodies, including The Khronos Group under their respective
 submission policies.
 
 Contribute to the oneAPI Specification by opening issues in the oneAPI
-Specification `GitHub repository`_ or providing feedback in any other
-oneAPI Specification forum.
+Specification `GitHub repository
+<https://github.com/oneapi-src/oneapi-spec>`__.
 
 
 ------------------
@@ -54,20 +54,8 @@ If you agree to the above, every contribution of your feedback
 must include the following line using your real name and email 
 address: Signed-off-by: Joe Smith joe.smith@email.com
 
--------
-Testing
--------
-
-Before submitting a pull request, very that the document builds
-correctly by running::
-
-  make public
-
-Inspect the areas that you changed to verify it formats correctly.
-
+-----
 Style
 -----
 
 See the `Style Guide <style-guide.rst>`_.
-
-.. _`GitHub repository`: https://github.com/oneapispec/spec
