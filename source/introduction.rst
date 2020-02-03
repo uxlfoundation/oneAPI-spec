@@ -100,8 +100,8 @@ standard bodies, including The Khronos Group under their respective
 submission policies.
 
 Contribute to the oneAPI Specification by opening issues in the oneAPI
-Specification `GitHub repository`_ or providing feedback in any other
-oneAPI Specification forum.
+Specification `GitHub repository
+<https://github.com/oneapi-src/oneapi-spec>`__.
 
 Sign your work
 ++++++++++++++
@@ -144,5 +144,3 @@ Initial public release
 
 .. [*]: Other names and brands may be claimed as the property of others.
 .. _`RFC 2119`: https://tools.ietf.org/html/rfc2119
-.. _`GitHub repository`: |github_prefix|
-

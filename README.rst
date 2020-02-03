@@ -132,15 +132,15 @@ We are currently using gitlab CI inside the intel firewall. See
 have been externally published, we will move it to public CI
 infrastructure.
 
-On every commit, the CI system builds and publishes the document to a
+On every commit, the CI system builds and publishes the document to
 http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/ci/branches
 with a different directory for the latest build of every branch.
 
 For commits to the publish branch, the document is staged at:
-http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/prod/versions. with
+http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/site/versions. with
 a different directory for every version. The version is obtained from
 source/conf/common_conf.py. There is a redirect from:
-http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/prod/index.html
+http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/site/
 to the latest version.
 
 To push to S3, the CI system configuration sets AWS_ACCESS_KEY_ID and
