@@ -8,7 +8,6 @@ rst_prolog = """
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
 .. |vpl_full_name| replace:: oneAPI Video Processing Library
-.. |github_prefix| replace:: https://github.com/oneapi-src/oneapi-spec
 """
 
 oneapi_spec_version = '0.6.0'
