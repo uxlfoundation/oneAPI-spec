@@ -50,7 +50,7 @@ def shell(c):
     log(c)
     if dry_run:
         return
-    subprocess.check_output(c, shell=True)
+    subprocess.check_call(c, shell=True)
 
 def rm(dir):
     log('rm -rf', dir)

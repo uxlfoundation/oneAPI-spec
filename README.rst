@@ -37,7 +37,7 @@ to do the same task manually.
 Setup
 -----
 
-Install python 3 and doxygen.  To install on **Ubuntu**::
+Install python 3 and doxygen (>= 1.8.17).  To install on **Ubuntu**::
 
    sudo scripts/install.sh
 
