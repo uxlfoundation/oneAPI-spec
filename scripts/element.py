@@ -77,7 +77,7 @@ def makedirs(path):
     os.makedirs(path)
     
 def sphinx(target):
-    shell('%s -M %s %s %s %s' % (sphinx_build, target, source_dir, build_dir, sphinx_opts))
+    shell('%s -q -M %s %s %s %s' % (sphinx_build, target, source_dir, build_dir, sphinx_opts))
     
 def clean(target=None):
     rm(doxygen_dir)
