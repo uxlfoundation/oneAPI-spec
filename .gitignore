@@ -2,6 +2,9 @@ doxygen
 build
 *~
 
+/docker/requirements.txt
+/docker/install.sh
+
 /spec-venv
 /repos/*
 /.vscode

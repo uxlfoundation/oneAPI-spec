@@ -25,6 +25,33 @@ import common_conf
 args = None
 
         
+def get_env(var):
+    return os.environ[var] if var in os.environ else ''
+    
+@element.action
+def dockerbuild(target=None):
+    element.copy('requirements.txt', 'docker')
+    element.copy('scripts/install.sh', 'docker')
+    element.shell('docker build'
+                  ' --build-arg http_proxy=%s'
+                  ' --build-arg https_proxy=%s'
+                  ' --build-arg no_proxy=%s'
+                  ' --tag rscohn2/oneapi-spec docker'
+                  % (get_env('http_proxy'), get_env('https_proxy'), get_env('no_proxy')))
+
+@element.action
+def dockerpush(target=None):
+    element.shell('docker push rscohn2/oneapi-spec')
+
+@element.action
+def dockerrun(target=None):
+    element.shell('docker run --rm -it'
+                  ' --user %s:%s'
+                  ' --volume=%s:/build'
+                  ' --workdir=/build'
+                  ' rscohn2/oneapi-spec'
+                  % (os.getuid(), os.getgid(), os.getcwd()))
+
 @element.action
 def clean(target=None):
     apply_dirs('clean')
@@ -147,6 +174,9 @@ commands = {'ci': ci,
             'ci-publish': ci_publish,
             'clean': clean,
             'clones': clones,
+            'dockerbuild': dockerbuild,
+            'dockerpush': dockerpush,
+            'dockerrun': dockerrun,
             'html': build,
             'latexpdf': build,
             'prep': prep,

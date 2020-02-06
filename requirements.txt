@@ -6,4 +6,5 @@ aws-shell # Only needed for deploying the site
 breathe
 gitpython
 sphinx
+sphinx-notfound-page
 sphinx-rtd-theme

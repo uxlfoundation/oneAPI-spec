@@ -1181,7 +1181,7 @@ struct convolution_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for a convolution forward propagation
         /// primitive without bias using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), @p
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), @p
         /// algorithm, memory descriptors, @p strides, @p padding_l, and @p
         /// padding_r.
         ///
@@ -1196,7 +1196,7 @@ struct convolution_forward : public primitive {
 
         /// Constructs a descriptor for a convolution forward propagation
         /// primitive with bias using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), @p
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), @p
         /// algorithm, memory descriptors, @p strides, @p padding_l, and @p
         /// padding_r.
         ///
@@ -1210,7 +1210,7 @@ struct convolution_forward : public primitive {
 
         /// Constructs a descriptor for dilated convolution forward
         /// propagation primitive without bias using @p prop_kind (possible
-        /// values are #dnnl::forward_training and #dnnl::forward_inference),
+        /// values are #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference),
         /// @p algorithm, memory descriptors, @p strides, @p dilates, @p
         /// padding_l, and @p padding_r.
         ///
@@ -1225,7 +1225,7 @@ struct convolution_forward : public primitive {
 
         /// Constructs a descriptor for dilated convolution forward
         /// propagation primitive with bias using @p prop_kind (possible
-        /// values are #dnnl::forward_training and #dnnl::forward_inference),
+        /// values are #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference),
         /// @p algorithm, memory descriptors, @p strides, @p dilates, @p
         /// padding_l, and @p padding_r.
         ///
@@ -1508,7 +1508,7 @@ struct deconvolution_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for a deconvolution forward propagation
         /// primitive with bias using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), @p
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), @p
         /// algorithm, memory descriptors, @p strides, @p padding_l, and @p
         /// padding_r.
         ///
@@ -1523,7 +1523,7 @@ struct deconvolution_forward : public primitive {
 
         /// Constructs a descriptor for a deconvolution forward propagation
         /// primitive without bias using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), @p
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), @p
         /// algorithm, memory descriptors, @p strides, @p padding_l, and @p
         /// padding_r.
         ///
@@ -1537,7 +1537,7 @@ struct deconvolution_forward : public primitive {
 
         /// Constructs a descriptor for dilated deconvolution forward
         /// propagation primitive with bias using @p prop_kind (possible
-        /// values are #dnnl::forward_training and #dnnl::forward_inference),
+        /// values are #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference),
         /// @p algorithm memory descriptors, @p strides, @p dilates, @p
         /// padding_l, and @p padding_r.
         ///
@@ -1552,7 +1552,7 @@ struct deconvolution_forward : public primitive {
 
         /// Constructs a descriptor for dilated deconvolution forward
         /// propagation primitive without bias using @p prop_kind (possible
-        /// values are #dnnl::forward_training and #dnnl::forward_inference),
+        /// values are #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference),
         /// @p algorithm, memory descriptors, @p strides, @p dilates, @p
         /// padding_l, and @p padding_r.
         ///
@@ -1833,8 +1833,8 @@ struct lrn_forward : public primitive {
     /// Descriptor for LRN forward propagation primitive.
     struct desc {
         /// Constructs a descriptor for LRN forward propagation primitive
-        /// using @p prop_kind (acceptable values are #dnnl::forward_training
-        /// and #dnnl::forward_inference), @p algorithm, memory descriptor @p
+        /// using @p prop_kind (acceptable values are #dnnl::prop_kind::forward_training
+        /// and #dnnl::prop_kind::forward_inference), @p algorithm, memory descriptor @p
         /// data_desc, and regularization parameters @p local_size, @p alpha,
         /// @p beta, and @p k.
         desc(prop_kind prop_kind, algorithm algorithm,
@@ -1969,8 +1969,8 @@ struct pooling_forward : public primitive {
     /// Descriptor for pooling forward propagation primitive.
     struct desc {
         /// Constructs a descriptor for pooling forward propagation primitive
-        /// using @p prop_kind (acceptable values are #dnnl::forward_training
-        /// and #dnnl::forward_inference), @p algorithm, memory descriptors,
+        /// using @p prop_kind (acceptable values are #dnnl::prop_kind::forward_training
+        /// and #dnnl::prop_kind::forward_inference), @p algorithm, memory descriptors,
         /// and pooling parameters in the spatial domain: @p strides, @p
         /// kernel sizes, @p padding_l, and @p padding_r.
         desc(prop_kind prop_kind, algorithm algorithm,
@@ -2117,7 +2117,7 @@ struct eltwise_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for elementwise forward propagation
         /// primitive using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), @p
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), @p
         /// algorithm algorithm, memory descriptor @p data_desc, @p alpha, and
         /// @p beta parameters.
         desc(prop_kind prop_kind, algorithm algorithm,
@@ -2248,8 +2248,8 @@ struct softmax_forward : public primitive {
     /// Descriptor for softmax forward propagation primitive.
     struct desc {
         /// Constructs a softmax descriptor for forward propagation using @p
-        /// prop_kind (acceptable values are #dnnl::forward_training and
-        /// #dnnl::forward_inference) and memory descriptor @p data_desc.
+        /// prop_kind (acceptable values are #dnnl::prop_kind::forward_training and
+        /// #dnnl::prop_kind::forward_inference) and memory descriptor @p data_desc.
         desc(prop_kind prop_kind, const memory::desc &data_desc,
                 int softmax_axis);
     };
@@ -2376,7 +2376,7 @@ struct batch_normalization_forward : public primitive {
     struct desc {
         /// Constructs a batch normalization descriptor for forward
         /// propagation using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), memory
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), memory
         /// descriptor @p data_desc, normalization parameter @p epsilon, and
         /// flags set using bit @p flags.
         desc(prop_kind prop_kind, const memory::desc &src_desc, float epsilon,
@@ -2545,7 +2545,7 @@ struct layer_normalization_forward : public primitive {
     struct desc {
         /// Constructs a layer normalization descriptor for forward
         /// propagation using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), data memory
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), data memory
         /// descriptor @p data_desc, statistics memory descriptor @p
         /// stat_desc, normalization parameter @p epsilon, and flags set
         /// using bit @p flags.
@@ -2555,7 +2555,7 @@ struct layer_normalization_forward : public primitive {
 
         /// Constructs a layer normalization descriptor for forward
         /// propagation using @p prop_kind (acceptable values are
-        /// #dnnl::forward_training and #dnnl::forward_inference), data memory
+        /// #dnnl::prop_kind::forward_training and #dnnl::prop_kind::forward_inference), data memory
         /// descriptor @p data_desc, statistics memory descriptor @p
         /// stat_desc, normalization parameter @p epsilon, and flags set
         /// using bit @p flags.
@@ -3001,7 +3001,7 @@ struct vanilla_rnn_forward : public primitive {
         /// primitive using @p prop_kind, @p activation, @p direction, and
         /// memory descriptors.
         ///
-        /// If @p activation is #eltwise_relu, @p alpha represents the
+        /// If @p activation is #algorithm::eltwise_relu, @p alpha represents the
         /// negative slope. The @p beta and @p flags are currently ignored.
         ///
         /// The @p src_iter_desc, @p bias_desc, and @p dst_iter_desc are
@@ -3009,7 +3009,7 @@ struct vanilla_rnn_forward : public primitive {
         /// that the primitive should not use them.
         ///
         /// @note
-        ///     If @p prop_kind equals #dnnl::forward_training, you must
+        ///     If @p prop_kind equals #dnnl::prop_kind::forward_training, you must
         ///     query for workspace memory descriptor before creating the
         ///     primitive.
         ///
@@ -3113,7 +3113,7 @@ struct vanilla_rnn_backward : public primitive {
         /// primitive using @p prop_kind, @p activation, @p direction, and
         /// memory descriptors.
         ///
-        /// If @p activation is #eltwise_relu, @p alpha represents the
+        /// If @p activation is #algorithm::eltwise_relu, @p alpha represents the
         /// negative slope. The @p beta and @p flags are currently ignored.
         ///
         /// The @p src_iter_desc (simultaneously with @p diff_src_iter_desc),
@@ -3277,7 +3277,7 @@ struct lstm_forward : public primitive {
         ///     format_tag.
         ///
         /// @note
-        ///     If @p prop_kind equals #dnnl::forward_training, you must query
+        ///     If @p prop_kind equals #dnnl::prop_kind::forward_training, you must query
         ///     for workspace memory descriptor before creating the primitive.
         ///
         desc(prop_kind prop_kind, rnn_direction direction,
@@ -3559,7 +3559,7 @@ struct gru_forward : public primitive {
         ///     format_tag.
         ///
         /// @note
-        ///     If @p prop_kind equals #dnnl::forward_training, you must query
+        ///     If @p prop_kind equals #dnnl::prop_kind::forward_training, you must query
         ///     a workspace memory descriptor before creating the primitive.
         ///
         desc(prop_kind prop_kind, rnn_direction direction,
@@ -3814,7 +3814,7 @@ struct lbr_gru_forward : public primitive {
         ///     format_tag.
         ///
         /// @note
-        ///     If @p prop_kind equals #dnnl::forward_training, you must query
+        ///     If @p prop_kind equals #dnnl::prop_kind::forward_training, you must query
         ///     a workspace memory descriptor before creating the primitive.
         ///
         desc(prop_kind prop_kind, rnn_direction direction,

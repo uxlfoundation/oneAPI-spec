@@ -20,7 +20,7 @@ oneAPI Specification
    elements/oneCCL/source/index
    elements/l0/source/index
    elements/oneDAL/source/index
-   elements/oneTBB/specification/nested-index
+   elements/oneTBB/source/nested-index
    elements/oneVPL/source/index
    elements/oneMKL/source/index
    contributors
