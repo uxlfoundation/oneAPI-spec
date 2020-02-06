@@ -110,7 +110,7 @@ def stage_publish(target=None):
            ' %s %s')
           % (local_versions_latest, s3_versions_latest))
 
-    element.log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/%s' % local_top)
+    element.log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/')
 
     
 @element.action
