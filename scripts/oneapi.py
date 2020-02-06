@@ -74,14 +74,14 @@ def build(target):
 def ci_publish(target=None):
     if not args.branch:
         exit('Error: --branch <branchname> is required')
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/ci/branches/%s' % (staging_host, args.branch))
-    element.log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/ci/branches/%s/'
+    shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
+    element.log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
           % (args.branch))
     
 @element.action
 def prod_publish(target=None):
     # sync staging to prod
-    shell('aws s3 sync --only-show-errors --delete s3://%s/site s3://spec.oneapi.com/' % (staging_host))
+    shell("aws s3 sync --only-show-errors --delete s3://%s/ s3://spec.oneapi.com/ --exclude 'exclude/*'" % (staging_host))
     element.log('published at http://spec.oneapi.com/')
     
 @element.action
@@ -90,7 +90,7 @@ def stage_publish(target=None):
     local_versions = join(local_top, 'versions')
     local_versions_x = join(local_versions, common_conf.oneapi_spec_version)
     local_versions_latest = join(local_versions, 'latest')
-    s3_top = 's3://%s/%s' % (staging_host,local_top)
+    s3_top = 's3://%s' % (staging_host)
     s3_versions = '%s/versions' % s3_top
     s3_versions_x = '%s/%s' % (s3_versions,common_conf.oneapi_spec_version)
     s3_versions_latest = '%s/latest' % s3_versions
@@ -99,7 +99,7 @@ def stage_publish(target=None):
     # Do not use --delete, it will delete old versions
     #  even with the --exclude
     shell(('aws s3 sync --only-show-errors'
-           ' --exclude \'site/versions/*\''
+           ' --exclude \'versions/*\''
            ' %s %s')
           % (local_top, s3_top))
     # Sync the newly created version directory
