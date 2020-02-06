@@ -8,7 +8,7 @@ from os.path import join
 import shutil
 import subprocess
 
-sphinx_opts    = ''
+sphinx_opts    = '-q'
 sphinx_build   = 'sphinx-build'
 source_dir     = 'source'
 build_dir      = 'build'
@@ -77,7 +77,7 @@ def makedirs(path):
     os.makedirs(path)
     
 def sphinx(target):
-    shell('%s -q -M %s %s %s %s' % (sphinx_build, target, source_dir, build_dir, sphinx_opts))
+    shell('%s -M %s %s %s %s' % (sphinx_build, target, source_dir, build_dir, sphinx_opts))
     
 def clean(target=None):
     rm(doxygen_dir)
