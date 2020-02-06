@@ -42,6 +42,7 @@ release = version
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'notfound.extension',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
 #    'sphinx.ext.intersphinx',
@@ -219,6 +220,8 @@ breathe_projects = {
     "oneVPL": "elements/oneVPL/doxygen/xml",
 }
 breathe_default_project = 'oneAPI'
+
+notfound_default_language = 'versions'
 
 def setup(app):
     app.add_css_file('custom.css')
