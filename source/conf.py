@@ -221,6 +221,8 @@ breathe_projects = {
 }
 breathe_default_project = 'oneAPI'
 
+notfound_default_language = 'versions'
+
 def setup(app):
     app.add_css_file('custom.css')
 
