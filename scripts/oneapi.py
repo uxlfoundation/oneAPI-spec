@@ -163,7 +163,7 @@ def doxygen(root, target=None):
         shell('doxygen %s' % doxyfile)
     
 @action
-def prep(root, target=None):
+def prep(root='.', target=None):
     apply_dirs(root, 'prep')
     doxygen(root)
     
@@ -225,7 +225,7 @@ def spec_venv(root, target=None):
     shell('%s install -r requirements.txt' % pip)
     
 @action
-def clones(root, target=None):
+def clones(root='.', target=None):
     root_only(root)
     # defer loading this so script can be invoked without installing packages
     from git import Repo
@@ -243,9 +243,9 @@ def clones(root, target=None):
 def site(root, target=None):
     root_only(root)
     # Build the docs
-    prep()
-    sphinx('html')
-    sphinx('latexpdf')
+    prep(root)
+    sphinx(root, 'html')
+    sphinx(root, 'latexpdf')
 
     # Build the site. It will have everything but the older versions
     site = 'site'
@@ -269,12 +269,12 @@ def site(root, target=None):
 @action
 def ci(root, target=None):
     root_only(root)
-    clones()
-    site()
+    clones(root)
+    site(root)
     if args.branch == 'publish':
-        stage_publish()
+        stage_publish(root)
     else:
-        ci_publish()
+        ci_publish(root)
     
 staging_host = 'staging.spec.oneapi.com'
 
