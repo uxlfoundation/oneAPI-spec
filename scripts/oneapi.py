@@ -224,7 +224,7 @@ def spec_venv(root, target=None):
     root_only(root)
     venv.create('spec-venv', with_pip=True, clear=True)
     pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
-    shell('%s install -r requirements.txt' % pip)
+    shell('%s install --quiet -r requirements.txt' % pip)
     
 @action
 def clones(root='.', target=None):
