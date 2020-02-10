@@ -6,6 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y \
                     python3-pip \
+                    python3-venv \
                     python3 \
                     wget
 apt-get install -y  \

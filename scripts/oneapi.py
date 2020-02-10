@@ -90,6 +90,8 @@ def makedirs(path):
     os.makedirs(path)
 
 def sphinx(root, target):
+    os.environ['LATEXMKOPTS'] = '--silent'
+    os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
@@ -222,7 +224,7 @@ def spec_venv(root, target=None):
     root_only(root)
     venv.create('spec-venv', with_pip=True, clear=True)
     pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
-    shell('%s install -r requirements.txt' % pip)
+    shell('%s install --quiet -r requirements.txt' % pip)
     
 @action
 def clones(root='.', target=None):
