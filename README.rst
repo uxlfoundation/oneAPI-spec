@@ -74,8 +74,7 @@ The document is organized as a book with chapters. Each element of
 oneAPI is its own chapter and can be built separately. For example, to
 build the oneVPL chapter, do::
 
-  cd source/elements/oneVPL
-  python ../../../scripts/element.py html
+  python scripts/oneapi.py html source/elements/oneVPL
   
 To see the docs, visit build/html/index.html in your browser using a
 file:// URL. Build the pdf version with::
@@ -118,10 +117,14 @@ Docker
 
 You can build a **Docker container** image with::
 
-   scripts/build-image.sh
+   python scripts/oneapi.py dockerbuild
 
-The tag will be oneapi-spec.  The script copies your proxy settings in
+The tag will be rscohn2/oneapi-spec.  The script copies your proxy settings in
 the invoking shell so it will work inside the firewall.
+
+You can run a docker container with::
+
+    python scripts/oneapi.py dockerrun
 
 --
 CI
