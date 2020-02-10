@@ -90,6 +90,8 @@ def makedirs(path):
     os.makedirs(path)
 
 def sphinx(root, target):
+    os.environ['LATEXMKOPTS'] = '--silent'
+    os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
