@@ -118,6 +118,9 @@ feedback.
 
 All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
+- DPC++
+
+  - Updated extensions table and description
 - oneMKL
 
   - Draft suitable for review so we can distribute to reviewers before ISC (6/28/2020).
@@ -129,6 +132,9 @@ placeholders for missing sections.
 
 Final Gold Preview. Expectation is that everything is done and only 
 small edits will be made. Incorporates all external feedback.
+- DPC++
+
+  - Updated extensions table and description
 
 1.0.0
 -----
@@ -137,6 +143,9 @@ small edits will be made. Incorporates all external feedback.
 
 API's frozen: backwards compatible
 changes at discretion of project owner, non-backwards compatible change by exception only
+- DPC++
+
+  - Updated extensions table and description
 
 
 
