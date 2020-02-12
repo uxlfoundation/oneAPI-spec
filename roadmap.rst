@@ -109,26 +109,34 @@ feedback.
 0.7.0
 -----
 
-TBD
+3/12/2020: Cutoff date for accepting feedback for inclusion in this version
 
 0.8.0
 -----
 
+5/14/2020: Cutoff date for accepting feedback for inclusion in this version
+
 All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
+- oneMKL
+
+  - Draft suitable for review so we can distribute to reviewers before ISC (6/28/2020).
 
 0.9.0
 -----
 
+7/16/2020: Cutoff date for accepting feedback for inclusion in this version
+
 Final Gold Preview. Expectation is that everything is done and only 
-small edits will be made.
+small edits will be made. Incorporates all external feedback.
 
 1.0.0
 -----
 
-2 months before product gold. API's frozen: backwards compatible
-changes at discretion of project owner, non-backwards compatible
-approved at PXT level.
+8/17/2020: Cutoff date for accepting feedback for inclusion in this version
+
+API's frozen: backwards compatible
+changes at discretion of project owner, non-backwards compatible change by exception only
 
 
 
