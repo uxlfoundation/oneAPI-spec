@@ -47,6 +47,7 @@ feedback.
     - Editing updates
     
   - Future
+
 - DPL
 
   - New
@@ -118,6 +119,7 @@ feedback.
 
 All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
+
 - DPC++
 
   - Updated extensions table and description
@@ -132,6 +134,7 @@ placeholders for missing sections.
 
 Final Gold Preview. Expectation is that everything is done and only 
 small edits will be made. Incorporates all external feedback.
+
 - DPC++
 
   - Updated extensions table and description
@@ -143,6 +146,7 @@ small edits will be made. Incorporates all external feedback.
 
 API's frozen: backwards compatible
 changes at discretion of project owner, non-backwards compatible change by exception only
+
 - DPC++
 
   - Updated extensions table and description
