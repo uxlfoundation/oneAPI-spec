@@ -113,6 +113,7 @@ feedback.
 3/12/2020: Cutoff date for accepting feedback for inclusion in this version
 
 - oneDNN
+
   - Rework API presentation into multiple sections
   - Add introduction, execution, primitive lifecycle, and programming model
     sections
@@ -133,6 +134,7 @@ placeholders for missing sections.
   - Draft suitable for review so we can distribute to reviewers before ISC (6/28/2020).
 
 - oneDNN
+
   - Add sections on primitive attributes, data types, and memory formats
   - Start extending individual primitives' pages with detailed information
     about underlying math and with usage examples
@@ -150,6 +152,7 @@ small edits will be made. Incorporates all external feedback.
   - Updated extensions table and description
 
 - oneDNN
+
   - Finish extending individual primitives' pages with detailed information
     about underlying math and with usage examples
 
