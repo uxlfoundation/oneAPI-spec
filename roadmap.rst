@@ -118,6 +118,14 @@ feedback.
   - Add introduction, execution, primitive lifecycle, and programming model
     sections
 
+- oneDAL
+
+  - Add overall spec skeleton, introduction and algorithm classes sections
+  - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
+    compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
+
+  - Add API for 3 oneDAL algorithms
+
 0.8.0
 -----
 
@@ -129,6 +137,7 @@ placeholders for missing sections.
 - DPC++
 
   - Updated extensions table and description
+
 - oneMKL
 
   - Draft suitable for review so we can distribute to reviewers before ISC (6/28/2020).
@@ -138,6 +147,12 @@ placeholders for missing sections.
   - Add sections on primitive attributes, data types, and memory formats
   - Start extending individual primitives' pages with detailed information
     about underlying math and with usage examples
+
+- oneDAL
+
+  - Extend API description to 18 algorithms
+  - Add first version for sections on programming model, algorithmics
+  - Extend numeric tables and data structure sections
 
 0.9.0
 -----
@@ -155,6 +170,10 @@ small edits will be made. Incorporates all external feedback.
 
   - Finish extending individual primitives' pages with detailed information
     about underlying math and with usage examples
+
+- oneDAL
+
+  - Finalize on sections content and details
 
 1.0.0
 -----
