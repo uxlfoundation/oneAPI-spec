@@ -110,7 +110,22 @@ feedback.
 0.7.0
 -----
 
-3/12/2020: Cutoff date for accepting feedback for inclusion in this version
+Summary
++++++++
+
+Schedule
+++++++++
+
+=========  ==========
+Date       Milestone
+=========  ==========
+3/12/2020  Cutoff date for accepting feedback for inclusion in this version
+3/24/2020  Code freeze
+3/26/2020  Release
+=========  ==========
+
+Elements
+++++++++
 
 - oneDNN
 
@@ -129,10 +144,25 @@ feedback.
 0.8.0
 -----
 
-5/14/2020: Cutoff date for accepting feedback for inclusion in this version
+Summary
++++++++
 
 All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
+
+Schedule
+++++++++
+
+=========  ==========
+Date       Milestone
+=========  ==========
+5/14/2020  Cutoff date for accepting feedback for inclusion in this version
+5/26/2020  Code freeze
+5/28/2020  Release
+=========  ==========
+
+Elements
+++++++++
 
 - DPC++
 
@@ -157,10 +187,25 @@ placeholders for missing sections.
 0.9.0
 -----
 
-7/16/2020: Cutoff date for accepting feedback for inclusion in this version
+Summary
++++++++
 
 Final Gold Preview. Expectation is that everything is done and only 
 small edits will be made. Incorporates all external feedback.
+
+Schedule
+++++++++
+
+=========  ==========
+Date       Milestone
+=========  ==========
+7/16/2020  Cutoff date for accepting feedback for inclusion in this version
+7/28/2020  Code freeze
+7/30/2020  Release
+=========  ==========
+
+Elements
+++++++++
 
 - DPC++
 
@@ -178,14 +223,26 @@ small edits will be made. Incorporates all external feedback.
 1.0.0
 -----
 
-8/17/2020: Cutoff date for accepting feedback for inclusion in this version
+Summary
++++++++
 
 API's frozen: backwards compatible
 changes at discretion of project owner, non-backwards compatible change by exception only
 
+Schedule
+++++++++
+
+=========  ==========
+Date       Milestone
+=========  ==========
+8/17/2020  Cutoff date for accepting feedback for inclusion in this version
+8/28/2020  Code freeze
+8/30/2020  Release
+=========  ==========
+
+Elements
+++++++++
+
 - DPC++
 
   - Updated extensions table and description
-
-
-
