@@ -235,8 +235,7 @@ def clones(root='.', target=None):
         dir = join('repos',repo_base)
         if os.path.exists(dir):
             continue
-        uri = ('https://gitlab.devtools.intel.com/DeveloperProducts/'
-               'Analyzers/Toolkits/oneAPISpecifications/%s.git' % repo_base)
+        uri = '%s/%s.git' % (os.environ['EXTRA_REPOS'], repo_base)
         log('clone:', uri)
         if not args.dry_run:
             Repo.clone_from(uri, dir, multi_options=['--depth','1'])
