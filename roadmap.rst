@@ -110,7 +110,13 @@ feedback.
 0.7.0
 -----
 
-3/12/2020: Cutoff date for accepting feedback for inclusion in this version
+=========  ==========
+Date       Milestone
+=========  ==========
+3/12/2020  Cutoff date for accepting feedback for inclusion in this version
+3/24/2020  Code freeze for elements
+3/26/2020  Release
+=========  ==========
 
 - oneDNN
 
@@ -129,7 +135,13 @@ feedback.
 0.8.0
 -----
 
-5/14/2020: Cutoff date for accepting feedback for inclusion in this version
+=========  ==========
+Date       Milestone
+=========  ==========
+5/14/2020  Cutoff date for accepting feedback for inclusion in this version
+5/26/2020  Code freeze for elements
+5/28/2020  Release
+=========  ==========
 
 All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
@@ -157,7 +169,13 @@ placeholders for missing sections.
 0.9.0
 -----
 
-7/16/2020: Cutoff date for accepting feedback for inclusion in this version
+=========  ==========
+Date       Milestone
+=========  ==========
+7/16/2020  Cutoff date for accepting feedback for inclusion in this version
+7/28/2020  Code freeze for elements
+7/30/2020  Release
+=========  ==========
 
 Final Gold Preview. Expectation is that everything is done and only 
 small edits will be made. Incorporates all external feedback.
@@ -178,7 +196,13 @@ small edits will be made. Incorporates all external feedback.
 1.0.0
 -----
 
-8/17/2020: Cutoff date for accepting feedback for inclusion in this version
+=========  ==========
+Date       Milestone
+=========  ==========
+8/17/2020  Cutoff date for accepting feedback for inclusion in this version
+8/28/2020  Code freeze for elements
+8/30/2020  Release
+=========  ==========
 
 API's frozen: backwards compatible
 changes at discretion of project owner, non-backwards compatible change by exception only
