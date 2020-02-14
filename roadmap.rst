@@ -120,7 +120,7 @@ Schedule
 Date       Milestone
 =========  ==========
 3/12/2020  Cutoff date for accepting feedback for inclusion in this version
-3/24/2020  Code freeze for elements
+3/24/2020  Code freeze
 3/26/2020  Release
 =========  ==========
 
@@ -157,7 +157,7 @@ Schedule
 Date       Milestone
 =========  ==========
 5/14/2020  Cutoff date for accepting feedback for inclusion in this version
-5/26/2020  Code freeze for elements
+5/26/2020  Code freeze
 5/28/2020  Release
 =========  ==========
 
@@ -200,7 +200,7 @@ Schedule
 Date       Milestone
 =========  ==========
 7/16/2020  Cutoff date for accepting feedback for inclusion in this version
-7/28/2020  Code freeze for elements
+7/28/2020  Code freeze
 7/30/2020  Release
 =========  ==========
 
@@ -236,7 +236,7 @@ Schedule
 Date       Milestone
 =========  ==========
 8/17/2020  Cutoff date for accepting feedback for inclusion in this version
-8/28/2020  Code freeze for elements
+8/28/2020  Code freeze
 8/30/2020  Release
 =========  ==========
 
