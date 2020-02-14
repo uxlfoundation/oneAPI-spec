@@ -110,6 +110,12 @@ feedback.
 0.7.0
 -----
 
+Summary
++++++++
+
+Schedule
+++++++++
+
 =========  ==========
 Date       Milestone
 =========  ==========
@@ -117,6 +123,9 @@ Date       Milestone
 3/24/2020  Code freeze for elements
 3/26/2020  Release
 =========  ==========
+
+Elements
+++++++++
 
 - oneDNN
 
@@ -135,6 +144,15 @@ Date       Milestone
 0.8.0
 -----
 
+Summary
++++++++
+
+All document structuring issues resolved. Content mostly complete with
+placeholders for missing sections.
+
+Schedule
+++++++++
+
 =========  ==========
 Date       Milestone
 =========  ==========
@@ -143,8 +161,8 @@ Date       Milestone
 5/28/2020  Release
 =========  ==========
 
-All document structuring issues resolved. Content mostly complete with
-placeholders for missing sections.
+Elements
+++++++++
 
 - DPC++
 
@@ -169,6 +187,15 @@ placeholders for missing sections.
 0.9.0
 -----
 
+Summary
++++++++
+
+Final Gold Preview. Expectation is that everything is done and only 
+small edits will be made. Incorporates all external feedback.
+
+Schedule
+++++++++
+
 =========  ==========
 Date       Milestone
 =========  ==========
@@ -177,8 +204,8 @@ Date       Milestone
 7/30/2020  Release
 =========  ==========
 
-Final Gold Preview. Expectation is that everything is done and only 
-small edits will be made. Incorporates all external feedback.
+Elements
+++++++++
 
 - DPC++
 
@@ -196,6 +223,15 @@ small edits will be made. Incorporates all external feedback.
 1.0.0
 -----
 
+Summary
++++++++
+
+API's frozen: backwards compatible
+changes at discretion of project owner, non-backwards compatible change by exception only
+
+Schedule
+++++++++
+
 =========  ==========
 Date       Milestone
 =========  ==========
@@ -204,12 +240,9 @@ Date       Milestone
 8/30/2020  Release
 =========  ==========
 
-API's frozen: backwards compatible
-changes at discretion of project owner, non-backwards compatible change by exception only
+Elements
+++++++++
 
 - DPC++
 
   - Updated extensions table and description
-
-
-
