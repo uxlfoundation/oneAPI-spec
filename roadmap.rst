@@ -141,6 +141,10 @@ Elements
 
   - Add API for 3 oneDAL algorithms
 
+- oneCCL
+
+  - Add initial version of API for scale-up
+
 0.8.0
 -----
 
@@ -184,6 +188,12 @@ Elements
   - Add first version for sections on programming model, algorithmics
   - Extend numeric tables and data structure sections
 
+- oneCCL
+
+  - Update page with API for scale-up
+  - Update page with GPU programming model
+  - Extend page with collective operations
+
 0.9.0
 -----
 
@@ -217,6 +227,10 @@ Elements
     about underlying math and with usage examples
 
 - oneDAL
+
+  - Finalize on sections content and details
+
+- oneCCL
 
   - Finalize on sections content and details
 
