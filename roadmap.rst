@@ -161,7 +161,7 @@ Elements
 - oneTBB
 
   - Integrate sources to the oneapi-spec repository
-  - Rework sections for general information, algorithms, memory allocation, synchronization, and timing
+  - Rework sections for general information, memory allocation, synchronization, and timing
   
 - oneVPL
   
@@ -228,7 +228,7 @@ Elements
 
 - oneTBB
 
-  - Rework sections for flow graph, task scheduler controls, thread local storage
+  - Rework sections for algorithms, flow graph, thread local storage
 
 0.9.0
 -----
@@ -280,7 +280,7 @@ Elements
 
 - oneTBB
 
-  - Rework remaining sections: containers, exceptions
+  - Rework sections for containers, task scheduler controls, exceptions
   - Integrate all known feedback
 
 - oneVPL
