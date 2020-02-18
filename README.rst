@@ -172,7 +172,7 @@ production with::
 More Reading
 ------------
 
-* `oneAPI Specification Style Guide <https:style-guide.rst>`_
+* `oneAPI Specification Style Guide <style-guide.rst>`_
 * `Sphinx Documentation <http://www.sphinx-doc.org/en/master/>`_
 * `rst docs`_: User and reference manuals.
 * `online editor/viewer`_: Web page that lets you type in some rst fragments
