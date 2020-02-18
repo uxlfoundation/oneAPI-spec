@@ -113,6 +113,8 @@ feedback.
 Summary
 +++++++
 
+50% content
+
 Schedule
 ++++++++
 
@@ -124,12 +126,16 @@ Date       Milestone
 3/26/2020  Release
 =========  ==========
 
-Elements
-++++++++
+- Overall
 
+  - All documents inline, no tarballs
+  - Built from source from single repo
+  - CI moved to public infrastructure, internal fork with CI for testing
+    
 - DPC++
 
   - Updated extensions table and description
+  - more details about extensions through June
 
 - oneDPL
 
@@ -145,10 +151,12 @@ Elements
 
 - Level Zero
 
-  - Switched to RST as format, using oneapi-spec as upstream repo
+  - Inline document
+  - Using oneapi-spec as upstream repo
   
 - oneDAL
 
+  - Inline document
   - Add overall spec skeleton, introduction and algorithm classes sections
   - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
     compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
@@ -162,7 +170,12 @@ Elements
   
 - oneMKL
 
+  - Inline document
   - API descriptions in structured list
+  - Spec skeleton by domain
+  - subset of domains with high level description and APIs
+  - oneMKL-wide sections filled in
+  - will follow open source schedule
   
 0.8.0
 -----
@@ -170,7 +183,7 @@ Elements
 Summary
 +++++++
 
-All document structuring issues resolved. Content mostly complete with
+80% content. All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
 
 Schedule
@@ -183,9 +196,6 @@ Date       Milestone
 5/26/2020  Code freeze
 5/28/2020  Release
 =========  ==========
-
-Elements
-++++++++
 
 - DPC++
 
@@ -238,9 +248,6 @@ Date       Milestone
 7/30/2020  Release
 =========  ==========
 
-Elements
-++++++++
-
 - DPC++
 
   - Updated extensions table and description
@@ -288,9 +295,6 @@ Date       Milestone
 8/30/2020  Release
 =========  ==========
 
-Elements
-++++++++
+- All
 
-- DPC++
-
-  - Updated extensions table and description
+  - Minor edits and additions
