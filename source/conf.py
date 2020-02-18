@@ -77,7 +77,8 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['elements/oneTBB/source/index.rst',
+exclude_patterns = ['404.rst',
+                    'elements/oneTBB/source/index.rst',
                     'elements/oneTBB/source/uncategorized.rst',
                     'elements/oneTBB/source/uncategorized/**',
                     'elements/oneTBB/source/low_level_task_api.rst',
@@ -227,14 +228,6 @@ breathe_projects = {
 breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
-notfound_context = {'title': 'Page not found', 'body': '''
-<h1>Page not found</h1>
-We cannot find the page. This usually happens when we rename a page. Please try:
-<li>Starting the navigation from <a href='https://spec.oneapi.com'>spec.oneapi.com  </a></li>
-<li><a href=https://clear-my-cache.com/> Clearing your browser cache</a> and starting the navigation from <a href='https://spec.oneapi.com'>spec.oneapi.com  </a></li>
-<li>Filing an issue in <a href=https://github.com/oneapi-src/oneapi-spec/issues> github</a></li>
-<li> Emailing to <a href=mailto:oneAPI@intel.com> oneAPI@intel.com</a></li>
-'''}
 def setup(app):
     app.add_css_file('custom.css')
 
