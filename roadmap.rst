@@ -10,8 +10,8 @@ Version    Date        Notes
 ========   ==========  ===========
 0.5.0      11/17/2019  First Public Release
 0.6.0_     01/30/2020  Open source Release
-0.7.0_     03/26/2020  50%
-0.8.0_     05/28/2020  80%
+0.7.0_     03/26/2020  50% content
+0.8.0_     05/28/2020  80% content
 0.9.0_     07/30/2020  Final Gold Preview
 1.0.0_     08/30/2020  Gold Release
 ========   ==========  ===========
@@ -113,6 +113,8 @@ feedback.
 Summary
 +++++++
 
+50% content.
+
 Schedule
 ++++++++
 
@@ -124,12 +126,16 @@ Date       Milestone
 3/26/2020  Release
 =========  ==========
 
-Elements
-++++++++
+- Overall
+
+  - All documents inline, no tarballs
+  - Built from source from single repo
+  - CI moved to public infrastructure, internal fork with CI for testing
 
 - DPC++
 
   - Updated extensions table and description
+  - TODO: more specific about extensions
 
 - oneDPL
 
@@ -165,9 +171,13 @@ Elements
   
 - oneVPL
   
+  - 80% content
+    
 - oneMKL
 
-  - API descriptions in structured list
+  - Skeleton of spec, breadown by domain
+  - Sections that apply to all domains
+  - subset of domains with high-level description and APIs, as determined by open source schedule
   
 0.8.0
 -----
@@ -175,7 +185,7 @@ Elements
 Summary
 +++++++
 
-All document structuring issues resolved. Content mostly complete with
+80% content. All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
 
 Schedule
@@ -189,12 +199,10 @@ Date       Milestone
 5/28/2020  Release
 =========  ==========
 
-Elements
-++++++++
-
 - DPC++
 
   - Updated extensions table and description
+  - TODO: more specific about extensions
 
 - oneDPL
 
@@ -221,14 +229,19 @@ Elements
   - Add first version for sections on programming model, algorithmics
   - Extend numeric tables and data structure sections
 
-- oneMKL
-
-  - Draft suitable for review so we can distribute to reviewers before
-    ISC (6/28/2020).
-
 - oneTBB
 
   - Rework sections for algorithms, flow graph, thread local storage
+
+- oneVPL
+
+  - 95% content
+    
+- oneMKL
+
+  - All domains complete
+  - Draft suitable for review so we can distribute to reviewers before
+    ISC (6/28/2020).
 
 0.9.0
 -----
@@ -256,6 +269,7 @@ Elements
 - DPC++
 
   - Updated extensions table and description
+  - TODO: more specific about extensions
 
 - oneDPL
 
@@ -307,17 +321,7 @@ Date       Milestone
 8/30/2020  Release
 =========  ==========
 
-Elements
-++++++++
-
-- DPC++
-
-  - Updated extensions table and description
-
-- oneDPL
+- Overall
 
   - Minor cleanup and integration of remaining feedback if any
 
-- oneTBB
-
-  - Minor cleanup and integration of remaining feedback if any
