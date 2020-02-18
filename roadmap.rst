@@ -48,7 +48,7 @@ feedback.
     
   - Future
 
-- DPL
+- oneDPL
 
   - New
   
@@ -133,6 +133,10 @@ Elements
 
 - oneDPL
 
+  - Rework the section for execution policies and buffer wrappers
+  - Add API descriptions for oneDPL specific algorithms
+  - Add API descriptions for iterator and functor classes
+
 - oneDNN
 
   - Rework API presentation into multiple sections
@@ -156,7 +160,8 @@ Elements
 
 - oneTBB
 
-  - Using oneapi-spec as upstream repo
+  - Integrate sources to the oneapi-spec repository
+  - Rework sections for general information, memory allocation, synchronization, and timing
   
 - oneVPL
   
@@ -192,7 +197,10 @@ Elements
   - Updated extensions table and description
 
 - oneDPL
-  
+
+  - Specify USM support
+  - Specify range-based API to the algorithms
+
 - oneDNN
 
   - Add sections on primitive attributes, data types, and memory formats
@@ -217,6 +225,10 @@ Elements
 
   - Draft suitable for review so we can distribute to reviewers before
     ISC (6/28/2020).
+
+- oneTBB
+
+  - Rework sections for algorithms, flow graph, thread local storage
 
 0.9.0
 -----
@@ -246,7 +258,11 @@ Elements
   - Updated extensions table and description
 
 - oneDPL
-  
+
+  - Specify C++ standard library APIs (or analogues) supported in DPC++ kernels
+  - Specify all remaining and late-added extension APIs
+  - Integrate all known feedback
+
 - oneDNN
 
   - Finish extending individual primitives' pages with detailed information
@@ -263,6 +279,9 @@ Elements
   - Finalize on sections content and details
 
 - oneTBB
+
+  - Rework sections for containers, task scheduler controls, exceptions
+  - Integrate all known feedback
 
 - oneVPL
 
@@ -294,3 +313,11 @@ Elements
 - DPC++
 
   - Updated extensions table and description
+
+- oneDPL
+
+  - Minor cleanup and integration of remaining feedback if any
+
+- oneTBB
+
+  - Minor cleanup and integration of remaining feedback if any
