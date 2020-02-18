@@ -10,8 +10,8 @@ Version    Date        Notes
 ========   ==========  ===========
 0.5.0      11/17/2019  First Public Release
 0.6.0_     01/30/2020  Open source Release
-0.7.0_     03/26/2020  50%
-0.8.0_     05/28/2020  80%
+0.7.0_     03/26/2020  
+0.8.0_     05/28/2020  
 0.9.0_     07/30/2020  Final Gold Preview
 1.0.0_     08/30/2020  Gold Release
 ========   ==========  ===========
@@ -113,8 +113,6 @@ feedback.
 Summary
 +++++++
 
-50% content
-
 Schedule
 ++++++++
 
@@ -126,18 +124,8 @@ Date       Milestone
 3/26/2020  Release
 =========  ==========
 
-- Overall
-
-  - All documents inline, no tarballs
-  - Built from source from single repo
-  - CI moved to public infrastructure, internal fork with CI for testing
-    
-- DPC++
-
-  - Updated extensions table and description
-  - more details about extensions through June
-
-- oneDPL
+Elements
+++++++++
 
 - oneDNN
 
@@ -145,45 +133,25 @@ Date       Milestone
   - Add introduction, execution, primitive lifecycle, and programming model
     sections
 
+- oneDAL
+
+  - Add overall spec skeleton, introduction and algorithm classes sections
+  - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
+    compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
+
+  - Add API for 3 oneDAL algorithms
+
 - oneCCL
 
   - Add initial version of API for scale-up
 
-- Level Zero
-
-  - Inline document
-  - Using oneapi-spec as upstream repo
-  
-- oneDAL
-
-  - Inline document
-  - Add overall spec skeleton, introduction and algorithm classes sections
-  - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
-    compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
-  - Add API for 3 oneDAL algorithms
-
-- oneTBB
-
-  - Using oneapi-spec as upstream repo
-  
-- oneVPL
-  
-- oneMKL
-
-  - Inline document
-  - API descriptions in structured list
-  - Spec skeleton by domain
-  - subset of domains with high level description and APIs
-  - oneMKL-wide sections filled in
-  - will follow open source schedule
-  
 0.8.0
 -----
 
 Summary
 +++++++
 
-80% content. All document structuring issues resolved. Content mostly complete with
+All document structuring issues resolved. Content mostly complete with
 placeholders for missing sections.
 
 Schedule
@@ -197,36 +165,34 @@ Date       Milestone
 5/28/2020  Release
 =========  ==========
 
+Elements
+++++++++
+
 - DPC++
 
   - Updated extensions table and description
 
-- oneDPL
-  
+- oneMKL
+
+  - Draft suitable for review so we can distribute to reviewers before ISC (6/28/2020).
+
 - oneDNN
 
   - Add sections on primitive attributes, data types, and memory formats
   - Start extending individual primitives' pages with detailed information
     about underlying math and with usage examples
 
-- oneCCL
-
-  - Update page with API for scale-up
-  - Update page with GPU programming model
-  - Extend page with collective operations
-
-- Level Zero
-  
 - oneDAL
 
   - Extend API description to 18 algorithms
   - Add first version for sections on programming model, algorithmics
   - Extend numeric tables and data structure sections
 
-- oneMKL
+- oneCCL
 
-  - Draft suitable for review so we can distribute to reviewers before
-    ISC (6/28/2020).
+  - Update page with API for scale-up
+  - Update page with GPU programming model
+  - Extend page with collective operations
 
 0.9.0
 -----
@@ -248,33 +214,26 @@ Date       Milestone
 7/30/2020  Release
 =========  ==========
 
+Elements
+++++++++
+
 - DPC++
 
   - Updated extensions table and description
 
-- oneDPL
-  
 - oneDNN
 
   - Finish extending individual primitives' pages with detailed information
     about underlying math and with usage examples
 
-- oneCCL
-
-  - Finalize on sections content and details
-
-- Level Zero
-  
 - oneDAL
 
   - Finalize on sections content and details
 
-- oneTBB
+- oneCCL
 
-- oneVPL
+  - Finalize on sections content and details
 
-- oneMKL
-  
 1.0.0
 -----
 
@@ -295,6 +254,9 @@ Date       Milestone
 8/30/2020  Release
 =========  ==========
 
-- All
+Elements
+++++++++
 
-  - Minor edits and additions
+- DPC++
+
+  - Updated extensions table and description
