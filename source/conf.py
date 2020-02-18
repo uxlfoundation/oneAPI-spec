@@ -77,7 +77,8 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['elements/oneTBB/source/index.rst',
+exclude_patterns = [#'404.rst',
+                    'elements/oneTBB/source/index.rst',
                     'elements/oneTBB/source/uncategorized.rst',
                     'elements/oneTBB/source/uncategorized/**',
                     'elements/oneTBB/source/low_level_task_api.rst',
@@ -227,7 +228,6 @@ breathe_projects = {
 breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
-
 def setup(app):
     app.add_css_file('custom.css')
 
