@@ -7,14 +7,6 @@ This repo contains the sources for the `oneAPI Specification`_
 The document is built with `Sphinx`_ using a theme provided by `Read
 the Docs`_
 
------------------------------------
-Layout of the Documents in the Repo
------------------------------------
-
-The specification is in the source directory. MKL, TBB, and Level Zero
-are in separate repos. See clones function in scripts/oneapi.py on how
-to clone them.
-
 ---------------------------------
 Editing with Github Web Interface
 ---------------------------------
@@ -55,7 +47,7 @@ On windows::
   python scripts\oneapi.py spec-venv
   spec-venv\Scripts\activate
   
-MKL, DAL, and Level Zero are in other repos. To clone them::
+MKL, DAL, and Level Zero are temporarily in separate private repos. If you have access to the repos you can clone them::
 
   python scripts/oneapi.py clones
 
@@ -172,6 +164,7 @@ production with::
 More Reading
 ------------
 
+* `oneAPI Specification Roadmap <roadmap.rst>`__
 * `oneAPI Specification Style Guide <style-guide.rst>`_
 * `Sphinx Documentation <http://www.sphinx-doc.org/en/master/>`_
 * `rst docs`_: User and reference manuals.
