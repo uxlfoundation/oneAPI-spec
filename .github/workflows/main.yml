@@ -9,8 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: docker://rscohn2/sphinx-tools
     - name: Build the docs
+      uses: docker://rscohn2/sphinx-tools
       run: |
         python3 scripts/oneapi.py spec-venv
         source spec-venv/bin/activate
