@@ -1,0 +1,20 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    container: rscohn2/oneapi-spec:latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build in container
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+      run: |
+          python3 scripts/oneapi.py spec-venv
+          . spec-venv/bin/activate
+          python scripts/oneapi.py --branch $GITHUB_REF ci
