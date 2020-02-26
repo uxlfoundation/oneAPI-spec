@@ -205,9 +205,12 @@ def ci_publish(root, target=None):
     root_only(root)
     if not args.branch:
         exit('Error: --branch <branchname> is required')
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
-    log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
-          % (args.branch))
+    if 'AWS_SECRET_ACCESS_KEY' in os.environ:
+        shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
+        log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
+            % (args.branch))
+    else:
+        log('Skipping publishing the site because AWS access key is not available. This is expected when building a fork')
     
 @action
 def prod_publish(root, target=None):
@@ -255,8 +258,10 @@ def spec_venv(root, target=None):
 @action
 def get_tarballs(root='.', target=None):
     root_only(root)
-    if not os.path.exists('tarballs'):
-        makedirs('tarballs')
+    print('exists',os.path.exists('tarballs'))
+    if args.dry_run or os.path.exists('tarballs'):
+        return
+    makedirs('tarballs')
     for t in tarballs:
         tf = join('tarballs','%s.tgz' % t)
         url = 'https://spec.oneapi.com/tarballs/%s.tgz' % t
