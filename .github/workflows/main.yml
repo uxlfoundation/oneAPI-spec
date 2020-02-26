@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker://rscohn2/sphinx-tools
+    - name: Build the docs
+      run: |
+        python3 scripts/oneapi.py spec-venv
+        source spec-venv/bin/activate
+        python scripts/oneapi.py --branch $GITHUB_REF ci
