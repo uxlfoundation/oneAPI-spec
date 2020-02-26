@@ -13,5 +13,5 @@ jobs:
     - name: build in container
       run: |
           python3 scripts/oneapi.py spec-venv
-          source spec-venv/bin/activate
+          . spec-venv/bin/activate
           python scripts/oneapi.py --branch $GITHUB_REF ci
