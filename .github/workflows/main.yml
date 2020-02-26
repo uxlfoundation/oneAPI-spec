@@ -4,14 +4,13 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the docs
-      uses: docker://rscohn2/sphinx-tools
-      run: |
-        python3 scripts/oneapi.py spec-venv
-        source spec-venv/bin/activate
-        python scripts/oneapi.py --branch $GITHUB_REF ci
+    container:
+      image: rscohn2/sphinx-tools:latest
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/checkout@v2
+  - name: Build the docs
+    run: |
+      python3 scripts/oneapi.py spec-venv
+      source spec-venv/bin/activate
+      python scripts/oneapi.py --branch $GITHUB_REF ci
