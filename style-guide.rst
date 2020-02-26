@@ -19,12 +19,7 @@ Convention for titles::
    ~~~~~~~~~~~~~~~~~~~
 
 
-By default, Gitlab will show you the rendered text. Click on </> to
-see the ascii version.
-
 Follow the `Python Style Guide https://devguide.python.org/documenting/#style-guide`_
 
 
-
-.. todo:: Finish this item
-
+This section needs work.

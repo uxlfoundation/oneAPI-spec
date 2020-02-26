@@ -7,14 +7,6 @@ This repo contains the sources for the `oneAPI Specification`_
 The document is built with `Sphinx`_ using a theme provided by `Read
 the Docs`_
 
------------------------------------
-Layout of the Documents in the Repo
------------------------------------
-
-The specification is in the source directory. MKL, TBB, and Level Zero
-are in separate repos. See clones function in scripts/oneapi.py on how
-to clone them.
-
 ---------------------------------
 Editing with Github Web Interface
 ---------------------------------
@@ -55,7 +47,7 @@ On windows::
   python scripts\oneapi.py spec-venv
   spec-venv\Scripts\activate
   
-MKL, DAL, and Level Zero are in other repos. To clone them::
+MKL, DAL, and Level Zero are temporarily in separate private repos. If you have access to the repos you can clone them::
 
   python scripts/oneapi.py clones
 
@@ -74,8 +66,7 @@ The document is organized as a book with chapters. Each element of
 oneAPI is its own chapter and can be built separately. For example, to
 build the oneVPL chapter, do::
 
-  cd source/elements/oneVPL
-  python ../../../scripts/element.py html
+  python scripts/oneapi.py html source/elements/oneVPL
   
 To see the docs, visit build/html/index.html in your browser using a
 file:// URL. Build the pdf version with::
@@ -118,30 +109,38 @@ Docker
 
 You can build a **Docker container** image with::
 
-   scripts/build-image.sh
+   python scripts/oneapi.py dockerbuild
 
-The tag will be oneapi-spec.  The script copies your proxy settings in
+The tag will be rscohn2/oneapi-spec.  The script copies your proxy settings in
 the invoking shell so it will work inside the firewall.
+
+You can run a docker container with::
+
+    python scripts/oneapi.py dockerrun
 
 --
 CI
 --
 
-We are currently using gitlab CI inside the intel firewall. See
-.gitlab-ci.yml for the configuration. When all the documents sources
-have been externally published, we will move it to public CI
-infrastructure.
+We are currently using gitlab CI inside the intel firewall. We expect
+all the sources to be in this repo by the 3/26/2020 release, and will
+move the CI system to a public service.
+
+See .gitlab-ci.yml for the CI configuration. The CI monitors and
+builds 2 repo's inside Intel. oneapi-spec-mirror is a mirror of the
+repo on github. Turnaround for testing depends on the interval between
+mirroring updates, which appears to be ~30 minutes. For quick
+turnaround, you can push your branch to the oneapi-spec-test repo,
+which will be built immmediately.
 
 On every commit, the CI system builds and publishes the document to
-http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/ci/branches
-with a different directory for the latest build of every branch.
+the staging server. To see the URL, look at the end of the log in the
+CI system.
 
-For commits to the publish branch, the document is staged at:
-http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/site/versions. with
-a different directory for every version. The version is obtained from
-source/conf/common_conf.py. There is a redirect from:
-http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/site/
-to the latest version.
+For commits to the publish branch, the document is staged inside a
+full copy of the spec.oneapi.com site, which includes redirects and
+older versions of the doc. To see the URL, look at the end of the log
+in the CI system.
 
 To push to S3, the CI system configuration sets AWS_ACCESS_KEY_ID and
 AWS_SECRET_ACCESS_KEY environment variables.
@@ -150,7 +149,14 @@ AWS_SECRET_ACCESS_KEY environment variables.
 Publishing
 ----------
 
-Commit to the publish branch. View the results on staging server. Push to production with::
+Merge from master to publish::
+  
+  git checkout publish
+  git merge master
+  git commit -m 'merge from master'
+  
+After CI completes, view the results on staging server. Push to
+production with::
 
   python scripts/oneapi.py prod-publish
 
@@ -158,7 +164,8 @@ Commit to the publish branch. View the results on staging server. Push to produc
 More Reading
 ------------
 
-* `oneAPI Specification Style Guide <https:style-guide.rst>`_
+* `oneAPI Specification Roadmap <roadmap.rst>`__
+* `oneAPI Specification Style Guide <style-guide.rst>`_
 * `Sphinx Documentation <http://www.sphinx-doc.org/en/master/>`_
 * `rst docs`_: User and reference manuals.
 * `online editor/viewer`_: Web page that lets you type in some rst fragments

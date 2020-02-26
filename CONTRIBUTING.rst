@@ -21,6 +21,15 @@ Contribute to the oneAPI Specification by opening issues in the oneAPI
 Specification `GitHub repository
 <https://github.com/oneapi-src/oneapi-spec>`__.
 
+----------------
+General Feedback
+----------------
+
+Questions and feature requests can be submitted as issues in the `GitHub repository
+<https://github.com/oneapi-src/oneapi-spec>`__. Writing changes can be submitted as 
+an issue or a pull request. See the the next section on how to submit changes. If 
+none of these methods are appropriate, you may also email to 
+`oneapi@intel.com <mailto:oneapi@intel.com>`__.
 
 ------------------
 Submitting changes
@@ -41,14 +50,14 @@ Please include a signed-off-by tag in every contribution of
 your feedback. By including a signed-off-by tag, you agree 
 that:
 
-  (a) You have a right to license your feedback to Intel.
-  (b) Intel will be free to use, disclose, reproduce, modify, license,
-      or otherwise distribute your feedback at its sole discretion
-      without any obligations or restrictions of any kind, including
-      without limitation, intellectual property rights or licensing
-      obligations.
-  (c) Your feedback will be public and that a record of your feedback
-      may be maintained indefinitely.
+1. You have a right to license your feedback to Intel.
+2. Intel will be free to use, disclose, reproduce, modify, license,
+   or otherwise distribute your feedback at its sole discretion
+   without any obligations or restrictions of any kind, including
+   without limitation, intellectual property rights or licensing
+   obligations.
+3. Your feedback will be public and that a record of your feedback
+   may be maintained indefinitely.
 
 If you agree to the above, every contribution of your feedback 
 must include the following line using your real name and email 
