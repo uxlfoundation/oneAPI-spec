@@ -301,7 +301,7 @@ def ci(root, target=None):
     root_only(root)
     get_tarballs(root)
     site(root)
-    if args.branch == 'publish':
+    if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
         ci_publish(root)
