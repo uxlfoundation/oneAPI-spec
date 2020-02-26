@@ -12,4 +12,3 @@ jobs:
             python3 scripts/oneapi.py spec-venv
             source spec-venv/bin/activate
             python scripts/oneapi.py --branch $GITHUB_REF ci
-	  name: Build
