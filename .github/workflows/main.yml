@@ -7,7 +7,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container: rscohn2/sphinx-tools:latest
+    container: rscohn2/oneapi-spec:latest
     steps:
     - uses: actions/checkout@v2
     - name: build in container
