@@ -3,13 +3,15 @@ name: CI
 on: [push]
 
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      container:
-        image: rscohn2/sphinx-tools:latest
-      steps:
-        - uses: actions/checkout@v2
-        - run: |
-            python3 scripts/oneapi.py spec-venv
-            source spec-venv/bin/activate
-            python scripts/oneapi.py --branch $GITHUB_REF ci
+  build:
+
+    runs-on: ubuntu-latest
+
+    container: rscohn2/sphinx-tools:latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build in container
+      run: |
+          python3 scripts/oneapi.py spec-venv
+          source spec-venv/bin/activate
+          python scripts/oneapi.py --branch $GITHUB_REF ci
