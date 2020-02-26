@@ -3,9 +3,10 @@ name: CI
 on: [push]
 
 jobs:
-    container:
+    build:
       runs-on: ubuntu-latest
-      container: rscohn2/sphinx-tools:latest
+      container:
+        image: rscohn2/sphinx-tools:latest
       steps:
         - uses: actions/checkout@v2
         - run: |
