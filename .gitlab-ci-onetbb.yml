@@ -1,0 +1,18 @@
+build_tbb_spec:
+  stage: build
+  tags: [python-sphinx]
+  script:
+    - sphinx-build -b html source/elements/oneTBB/source onetbb_spec
+  artifacts:
+    paths: [onetbb_spec]
+    expire_in: 3d
+
+pages:
+  stage: deploy
+  tags: [linux]
+  needs: [build_tbb_spec]
+  only: [develop]
+  script:
+  - mv onetbb_spec public
+  artifacts:
+    paths: [public]
