@@ -34,6 +34,7 @@ import os
 import os.path
 from os.path import join
 import platform
+import requests
 import shutil
 from string import Template
 import stat
@@ -82,7 +83,7 @@ class cd:
         os.chdir(self.savedPath)
 
 def log(*args, **kwargs):
-    print(indent * ' ' + ' '.join(map(str,args)), **kwargs)
+    print(indent * ' ' + ' '.join(map(str,args)), flush = True, **kwargs)
     
 def shell(c):
     log(c)
@@ -204,9 +205,12 @@ def ci_publish(root, target=None):
     root_only(root)
     if not args.branch:
         exit('Error: --branch <branchname> is required')
-    shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
-    log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
-          % (args.branch))
+    if 'AWS_SECRET_ACCESS_KEY' in os.environ:
+        shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
+        log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
+            % (args.branch))
+    else:
+        log('Skipping publishing the site because AWS access key is not available. This is expected when building a fork')
     
 @action
 def prod_publish(root, target=None):
@@ -252,18 +256,23 @@ def spec_venv(root, target=None):
     shell('%s install --quiet -r requirements.txt' % pip)
     
 @action
-def clones(root='.', target=None):
+def get_tarballs(root='.', target=None):
     root_only(root)
-    # defer loading this so script can be invoked without installing packages
-    from git import Repo
-    for repo_base in repos:
-        dir = join('repos',repo_base)
-        if os.path.exists(dir):
-            continue
-        uri = '%s/%s.git' % (os.environ['EXTRA_REPOS'], repo_base)
-        log('clone:', uri)
-        if not args.dry_run:
-            Repo.clone_from(uri, dir, multi_options=['--depth','1'])
+    print('exists',os.path.exists('tarballs'))
+    if args.dry_run or os.path.exists('tarballs'):
+        return
+    makedirs('tarballs')
+    for t in tarballs:
+        tf = join('tarballs','%s.tgz' % t)
+        url = 'https://spec.oneapi.com/tarballs/%s.tgz' % t
+        r = requests.get(url, stream = True)
+        log('wget', url, end = ' ')
+        with open(tf, 'wb') as tb:
+            for chunk in r.iter_content(chunk_size = 4 * 1024 * 1024):
+                if chunk:
+                    tb.write(chunk)
+                    log('.', end = '')
+            log('.')
     
 @action
 def site(root, target=None):
@@ -285,7 +294,7 @@ def site(root, target=None):
     copytree(html, versions_x)
     copy(pdf, versions_x)
     for t in tarballs:
-        tf = join('repos','oneapi-spec-tarballs','tarballs','%s.tgz' % t)
+        tf = join('tarballs','%s.tgz' % t)
         log('cd',versions_x,'&& tar zxf',tf)
         if not args.dry_run:
             with tarfile.open(tf) as tar:
@@ -295,9 +304,9 @@ def site(root, target=None):
 @action
 def ci(root, target=None):
     root_only(root)
-    clones(root)
+    get_tarballs(root)
     site(root)
-    if args.branch == 'publish':
+    if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
         ci_publish(root)
@@ -307,7 +316,7 @@ staging_host = 'staging.spec.oneapi.com'
 commands = {'ci': ci,
             'ci-publish': ci_publish,
             'clean': clean,
-            'clones': clones,
+            'get-tarballs': get_tarballs,
             'dockerbuild': dockerbuild,
             'dockerpush': dockerpush,
             'dockerrun': dockerrun,
@@ -331,10 +340,6 @@ dirs = ['oneCCL',
 tarballs = ['oneMKL',
             'oneL0',
             'oneDAL']
-
-repos = ['onetbb-spec',
-         'oneapi-spec-tarballs']
-
 
 def main():
     global args

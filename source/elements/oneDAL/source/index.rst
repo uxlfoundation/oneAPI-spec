@@ -124,5 +124,5 @@ The detailed specification for oneDAL is available `online`_.
 
 .. _`open source implementation`: https://github.com/intel/daal
 .. _`README`: https://github.com/intel/daal/blob/master/README.md
-.. _`online`: ../../../oneDAL/index.html
+.. _`online`: https://spec.oneapi.com/versions/0.6.0/oneDAL/index.html
 
