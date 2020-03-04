@@ -35,4 +35,4 @@ Detailed API Descriptions
 The detailed list of functions and their specification can be found in
 the `oneMKL specification`_.
 
-.. _`oneMKL specification`: ../../../oneMKL/index.htm
+.. _`oneMKL specification`: https://spec.oneapi.com/versions/0.6.0/oneMKL/index.htm

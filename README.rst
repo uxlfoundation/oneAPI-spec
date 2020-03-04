@@ -2,6 +2,9 @@
 oneAPI Specifications
 =====================
 
+.. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
+   :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
+
 This repo contains the sources for the `oneAPI Specification`_
 
 The document is built with `Sphinx`_ using a theme provided by `Read
@@ -122,28 +125,19 @@ You can run a docker container with::
 CI
 --
 
-We are currently using gitlab CI inside the intel firewall. We expect
-all the sources to be in this repo by the 3/26/2020 release, and will
-move the CI system to a public service.
-
-See .gitlab-ci.yml for the CI configuration. The CI monitors and
-builds 2 repo's inside Intel. oneapi-spec-mirror is a mirror of the
-repo on github. Turnaround for testing depends on the interval between
-mirroring updates, which appears to be ~30 minutes. For quick
-turnaround, you can push your branch to the oneapi-spec-test repo,
-which will be built immmediately.
+We use Github actions. See .github/workflows/main.yml
 
 On every commit, the CI system builds and publishes the document to
-the staging server. To see the URL, look at the end of the log in the
-CI system.
+the staging server. To see the URL, look at the end of the log for the
+build step in the CI system. The staging server is an s3 bucket, and
+the access keys are managed as github action secrets. PR's based on
+forks do not have access to the keys and will not publish on the
+staging server.
 
 For commits to the publish branch, the document is staged inside a
 full copy of the spec.oneapi.com site, which includes redirects and
 older versions of the doc. To see the URL, look at the end of the log
-in the CI system.
-
-To push to S3, the CI system configuration sets AWS_ACCESS_KEY_ID and
-AWS_SECRET_ACCESS_KEY environment variables.
+for the build step in the CI system.
 
 ----------
 Publishing
