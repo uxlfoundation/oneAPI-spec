@@ -301,6 +301,20 @@ def site(root, target=None):
                 tar.extractall(versions_x)
     copytree(versions_x, join(versions, 'latest'))
 
+def remove_elements(l, elements):
+    for e in elements:
+        if e in l:
+            l.remove(e)
+    return l
+
+def purge(root, target=None):
+    root_only(root)
+    for (r,dirs,files) in os.walk('site', topdown=True):
+        r = r.replace('site/','')
+        dirs = remove_elements(dirs,['oneDAL', 'oneL0', 'oneMKL'])
+        for file in files:
+            print('http://spec.oneapi.com/%s/%s' % (r, file))
+    
 @action
 def ci(root, target=None):
     root_only(root)
@@ -324,6 +338,7 @@ commands = {'ci': ci,
             'latexpdf': build,
             'prep': prep,
             'prod-publish': prod_publish,
+            'purge': purge,
             'site': site,
             'spec-venv': spec_venv,
             'stage-publish': stage_publish}
