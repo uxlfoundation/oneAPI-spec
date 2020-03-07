@@ -154,6 +154,10 @@ production with::
 
   python scripts/oneapi.py prod-publish
 
+Then purge the CDN. Generate a list of URLs with::
+
+  python scripts/oneapi.py purge
+
 ------------
 More Reading
 ------------
