@@ -20,4 +20,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
           name: site
-          path: site
+          path: site.zip
