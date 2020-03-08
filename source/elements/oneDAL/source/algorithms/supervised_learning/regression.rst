@@ -1,4 +1,4 @@
 Regression
 =========================
 
-This section will explain regression topic
+This section explains regression topic

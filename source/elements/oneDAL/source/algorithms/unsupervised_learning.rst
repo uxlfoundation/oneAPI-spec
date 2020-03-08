@@ -1,4 +1,4 @@
 Unsupervised learning
 =========================
 
-This section will explains algorithms of unsupervised learning class
+This section explains algorithms of unsupervised learning class

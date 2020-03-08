@@ -1,4 +1,4 @@
 Algorithm inputs
 =========================
 
-This section will explains
+This section explains..

@@ -1,7 +1,7 @@
 Algorithm processing
 =========================
 
-This section will explains different computation modes
+This section explains different Algorithm processing blocks
 
 .. toctree::
    :maxdepth: 2

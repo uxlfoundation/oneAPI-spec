@@ -1,7 +1,7 @@
 Analysis
 =========================
 
-This section will explains
+This section explains
 
 .. toctree::
    :maxdepth: 2

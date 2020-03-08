@@ -1,7 +1,7 @@
 Classification
 =========================
 
-This sectiction will cover Classification
+This sectiction explains Classification
 
 .. toctree::
    :maxdepth: 2

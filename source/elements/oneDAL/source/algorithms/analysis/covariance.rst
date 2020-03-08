@@ -1,4 +1,4 @@
 Covariance
 =========================
 
-This section will explain covariance algorithm
+This section explains covariance algorithm

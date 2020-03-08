@@ -1,4 +1,4 @@
-Classes of ML algorithms
+Classes of Machine Learning algorithms
 =========================
 
-In this section we will cover classes of machine learning algorithms 
+This sectiction explains classes of machine learning algorithms 

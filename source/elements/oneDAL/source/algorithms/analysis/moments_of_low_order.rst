@@ -1,4 +1,4 @@
 Moments of low order
 =========================
 
-This sectiction will cover Moments of low order
+This sectiction explains Moments of low order

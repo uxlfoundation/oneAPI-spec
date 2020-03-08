@@ -1,4 +1,4 @@
 Algoritmics
 =========================
 
-This sectiction will cover algoritmics for Classical Machine Learning 
+This sectiction explains algoritmics for Classical Machine Learning 

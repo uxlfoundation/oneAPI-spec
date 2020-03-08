@@ -1,4 +1,4 @@
 Algorithm outputs
 =========================
 
-This section will explains 
+This section explains

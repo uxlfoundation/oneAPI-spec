@@ -1,4 +1,4 @@
 Data Structures
 =========================
 
-This section will cover Data structures for machine learning algorithms
+This section explains Data structures for machine learning algorithms

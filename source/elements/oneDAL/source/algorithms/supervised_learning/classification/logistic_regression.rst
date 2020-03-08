@@ -42,6 +42,10 @@ If the categorical variable is binary, the model is defined as a single vector :
 Parameters
 ****************
 
+.. list-table::
+   :widths: 25 25 25
+   :header-rows: 1
+   :align: left
 
    * - Parameter
      - Default Value

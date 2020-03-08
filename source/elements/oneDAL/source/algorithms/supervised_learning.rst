@@ -1,7 +1,7 @@
 Supervised learning
 =========================
 
-This section will explains algrithms of Supervised learning class
+This section explains algrithms of Supervised learning class
 
 
 .. toctree::

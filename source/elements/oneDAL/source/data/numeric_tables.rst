@@ -1,4 +1,4 @@
 Numeric Tables
 =========================
 
-This sectiction will cover Numeric Tables
+This sectiction explains Numeric Tables

@@ -1,4 +1,4 @@
 Online mode
 =========================
 
-In this section we will cover online compute mode
+In this section we explains online compute mode
