@@ -4,20 +4,20 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     container: rscohn2/oneapi-spec:latest
     steps:
     - uses: actions/checkout@v2
-    - name: build in container
+    - name: Build
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
-          set
-          printenv AWS_ACCESS_KEY_ID
-          printenv AWS_SECRET_ACCESS_KEY
           python3 scripts/oneapi.py spec-venv
           . spec-venv/bin/activate
           python scripts/oneapi.py --branch $GITHUB_REF ci
+    - name: Archive site
+      uses: actions/upload-artifact@v1
+      with:
+          name: site
+          path: site
