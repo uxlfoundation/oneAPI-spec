@@ -205,7 +205,7 @@ def ci_publish(root, target=None):
     root_only(root)
     if not args.branch:
         exit('Error: --branch <branchname> is required')
-    if 'AWS_SECRET_ACCESS_KEY' in os.environ:
+    if 'AWS_SECRET_ACCESS_KEY' in os.environ and os.environ['AWS_SECRET_ACCESS_KEY'] != '':
         shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
         log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
             % (args.branch))
