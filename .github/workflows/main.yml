@@ -15,6 +15,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
+          set
           printenv AWS_ACCESS_KEY_ID
           printenv AWS_SECRET_ACCESS_KEY
           python3 scripts/oneapi.py spec-venv
