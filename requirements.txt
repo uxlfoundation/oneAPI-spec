@@ -8,3 +8,6 @@ gitpython
 Sphinx>=2.4.0
 sphinx-notfound-page
 sphinx-rtd-theme
+sphinx-prompt
+sphinx_substitution_extensions
+sphinx_tabs
