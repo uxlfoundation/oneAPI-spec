@@ -1,7 +1,7 @@
 Classification
 =========================
 
-This sectiction explains Classification
+This section explains Classification
 
 .. toctree::
    :maxdepth: 2

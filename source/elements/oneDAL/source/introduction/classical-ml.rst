@@ -1,4 +1,4 @@
 Classical Machine Learning
 ===========================
 
-This sectiction will includie introduction in to ML and Data Analytic Library
+This section includes an introduction to ML and the Data Analytic Library.

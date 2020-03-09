@@ -3,15 +3,13 @@
 
 .. _oneDAL-section:
 
-==============================================
-Intel oneAPI Data Analytics Library
-==============================================
+==========================
+ |dal_full_name| (oneDAL)
+==========================
 
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
 
-Intel oneAPI Data Analytics Library
-------------------------------------------------------
 This document specifies requirements for implementations of Intel oneAPI Data Analytics Library (oneDAL).
 
 oneDAL is a library
@@ -25,57 +23,10 @@ Data Parallel C++ (DPC++) API extensions to the traditional C++ interface.
 For general information, visit |github|.
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Introduction
 
-   introduction/classical-ml.rst
-   introduction/classes.rst
-   introduction/building-blocks.rst
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Programming model
-
-   programming/model.rst
-   programming/algoritmics.rst
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Data management
-
-   data/numeric_tables.rst
-   data/structures.rst
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Algorithms
-
-   algorithms/modes.rst
-   algorithms/algorithm_inputs.rst
-   algorithms/algorithm_outputs.rst
-   algorithms/algorithm_descriptor.rst
-   algorithms/algorithm_processing.rst
-   algorithms/analysis.rst
-   algorithms/unsupervised_learning.rst
-   algorithms/supervised_learning.rst
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Services
-
+   introduction/index.rst
+   programming/index.rst
+   data/index.rst
+   algorithms/index.rst
    services.rst
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Bibliography
-
    bibliography.rst
-
-
-.. _'full_name': Intel\ |reg|\  oneAPI Data Analytics Library
-.. _'shourt_name' : oneDAL
-.. _'product': oneDAL
-.. _'namespace': daal
-.. _'daal_in_code': daal
-.. _'base_tk': Intel\ |reg|\  oneAPI Base Toolkit
-.. _'dpcpp': Intel\ |reg|\  oneAPI DPC++ Compiler
