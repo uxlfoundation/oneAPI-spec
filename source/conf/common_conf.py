@@ -1,3 +1,18 @@
+extensions = [
+    'notfound.extension',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+#    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages',
+    'sphinx_substitution_extensions',
+    'breathe',
+]
+
 rst_prolog = """
 .. |ccl_full_name| replace:: Collective Communications Library
 .. |dal_full_name| replace:: Data Analytics Library
