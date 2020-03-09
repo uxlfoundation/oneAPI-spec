@@ -1,6 +1,8 @@
 ..
   Copyright 2019 Intel Corporation
 
+.. default-domain:: cpp
+
 .. _oneDNN-section:
 
 ========================
@@ -83,6 +85,19 @@ Open Source Implementation
 Intel has published an `open source implementation`_ with the Apache
 license.
 
+---
+API
+---
+
+.. toctree::
+   :maxdepth: 2
+
+   api/engine.rst
+   api/stream.rst
+   api/memory.rst
+   api/primitives.rst
+   api/utilities.rst
+
 -------
 Testing
 -------
@@ -93,13 +108,7 @@ can be used to test library functionality.
 The `open source implementation`_ includes a comprehensive test suite.
 Consult the `README`_ for directions.
 
----
-API
----
-
-.. doxygenindex::
-   :project: oneDNN
-
 .. _`open source implementation`: https://github.com/intel/mkl-dnn
 .. _`README`: https://github.com/intel/mkl-dnn/blob/master/README.md
 
+.. vim: ts=3 sw=3 et
