@@ -1,4 +1,4 @@
 Numeric Tables
 =========================
 
-This sectiction explains Numeric Tables
+This section explains Numeric Tables

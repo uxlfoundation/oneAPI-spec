@@ -3,4 +3,4 @@
 Bibliography
 ============
 
-For more information about algorithms implemented in |short_name|, refer to the following publications:
+For more information about algorithms implemented in |dal_short_name|, refer to the following publications:

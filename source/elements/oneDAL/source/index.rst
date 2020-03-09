@@ -3,15 +3,13 @@
 
 .. _oneDAL-section:
 
-==============================================
-Intel oneAPI Data Analytics Library
-==============================================
+==========================
+ |dal_full_name| (oneDAL)
+==========================
 
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
 
-Intel oneAPI Data Analytics Library
-------------------------------------------------------
 This document specifies requirements for implementations of Intel oneAPI Data Analytics Library (oneDAL).
 
 oneDAL is a library
@@ -70,12 +68,3 @@ For general information, visit |github|.
    :caption: Bibliography
 
    bibliography.rst
-
-
-.. _'full_name': Intel\ |reg|\  oneAPI Data Analytics Library
-.. _'shourt_name' : oneDAL
-.. _'product': oneDAL
-.. _'namespace': daal
-.. _'daal_in_code': daal
-.. _'base_tk': Intel\ |reg|\  oneAPI Base Toolkit
-.. _'dpcpp': Intel\ |reg|\  oneAPI DPC++ Compiler

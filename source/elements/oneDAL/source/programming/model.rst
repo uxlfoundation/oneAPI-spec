@@ -4,7 +4,7 @@ Programming Model
 Basic Usage Scenario
 ~~~~~~~~~~~~~~~~~~~~~
 
-Below you can find a typical workflow of using |short_name| algorithm on GPU.
+Below you can find a typical workflow of using |dal_short_name| algorithm on GPU.
 The example is provided for Principal Component Analysis algorithm (PCA).
 
 The following steps depict how to:
@@ -16,7 +16,7 @@ The following steps depict how to:
 - Get calculated eigenvalues and eigenvectors
 
 #. Include the following header file to enable the DPC++ interface for
-   |short_name|:
+   |dal_short_name|:
 
    .. substitution-code-block::
 
@@ -30,14 +30,14 @@ The following steps depict how to:
       cl::sycl::queue queue { cl::sycl::gpu_selector() };
 
 #. Create an execution context from the DPC++ queue and set up as the
-   default for all algorithms. The execution context is the |short_name|
+   default for all algorithms. The execution context is the |dal_short_name|
    concept that is intended for delivering queue and device information
    to the algorithm kernel:
 
    .. parsed-literal::
 
-      |namespace|::services::Environment::getInstance()->setDefaultExecutionContext(
-            |namespace|::services::SyclExecutionContext(queue) );
+      |dal_namespace|::services::Environment::getInstance()->setDefaultExecutionContext(
+            |dal_namespace|::services::SyclExecutionContext(queue) );
 
 #. Create a DPC++ buffer from the data allocated on host:
 
@@ -62,11 +62,11 @@ The following steps depict how to:
 #. Create a DPC++ numeric table from a DPC++ buffer. DPC++ numeric table is a new concept
    introduced as a part of DPC++ interfaces to work with data stored in DPC++ buffer.
    It implements an interface of a classical numeric table acting as an adapter between DPC++
-   and |product| APIs for data representation.
+   and |dal_short_name| APIs for data representation.
 
    .. parsed-literal::
 
-      auto data = |namespace|::data_management::SyclHomogenNumericTable<float>::create(
+      auto data = |dal_namespace|::data_management::SyclHomogenNumericTable<float>::create(
             dataBuffer, nCols, nRows);
 
 
@@ -75,13 +75,13 @@ The following steps depict how to:
 
    .. parsed-literal::
 
-      |namespace|::algorithms::pca::Batch<float> pca;
+      |dal_namespace|::algorithms::pca::Batch<float> pca;
 
       pca.parameter.nComponents = 3;
-      pca.parameter.resultsToCompute = |namespace|::algorithms::pca::mean |
-      |namespace|::algorithms::pca::variance |
-      |namespace|::algorithms::pca::eigenvalue;
-      pca.input.set(|namespace|::algorithms::pca::data, data);
+      pca.parameter.resultsToCompute = |dal_namespace|::algorithms::pca::mean |
+      |dal_namespace|::algorithms::pca::variance |
+      |dal_namespace|::algorithms::pca::eigenvalue;
+      pca.input.set(|dal_namespace|::algorithms::pca::data, data);
 
       pca.compute();
 
@@ -90,8 +90,8 @@ The following steps depict how to:
    .. parsed-literal::
 
       auto result = pca.getResult();
-      NumericTablePtr eigenvalues = result->get(|namespace|::algorithms::pca::eigenvalues);
-      NumericTablePtr eigenvectors = result->get(|namespace|::algorithms::pca::eigenvectors);
+      NumericTablePtr eigenvalues = result->get(|dal_namespace|::algorithms::pca::eigenvalues);
+      NumericTablePtr eigenvectors = result->get(|dal_namespace|::algorithms::pca::eigenvectors);
 
 #. Get the raw data as DPC++ buffer from the resulting numeric tables:
 

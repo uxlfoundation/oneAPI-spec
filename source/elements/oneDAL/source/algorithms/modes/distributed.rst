@@ -1,4 +1,4 @@
 Distributed mode
 =========================
 
-This sectiction explains Distributed compute mode
+This section explains Distributed compute mode
