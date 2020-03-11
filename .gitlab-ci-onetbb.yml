@@ -1,20 +1,29 @@
-build_tbb_dpl_spec:
+build_oneTBB_html:
   stage: build
   tags: [docker_linux]
-  image: tr_ubuntu18.04:base
+  image: tr_ubuntu18.04:oneapi-spec
   script:
-    - apt install -y python3 python3-pip
     - python3 -m pip install -r requirements.txt
     - python3 scripts/oneapi.py html source/elements/oneTBB
+  artifacts:
+    paths: [source/elements/oneTBB/build/html]
+    expire_in: 3d
+
+build_oneDPL_html:
+  stage: build
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
+  script:
+    - python3 -m pip install -r requirements.txt
     - python3 scripts/oneapi.py html source/elements/oneDPL
   artifacts:
-    paths: [source/elements/oneTBB/build/html, source/elements/oneDPL/build/html]
+    paths: [source/elements/oneDPL/build/html]
     expire_in: 3d
 
 pages:
   stage: deploy
   tags: [linux]
-  needs: [build_tbb_dpl_spec]
+  needs: [build_oneTBB_html, build_oneDPL_html]
   only: [develop]
   script:
   - mkdir -p public
