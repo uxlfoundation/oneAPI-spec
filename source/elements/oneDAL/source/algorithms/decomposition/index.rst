@@ -1,0 +1,5 @@
+Decomposition
+=============
+
+.. toctree::
+   pca.rst
