@@ -1,5 +1,6 @@
 doxygen
 build
+_build
 *~
 
 /docker/requirements.txt
