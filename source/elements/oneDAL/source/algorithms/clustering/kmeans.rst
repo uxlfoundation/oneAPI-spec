@@ -1,3 +1,4 @@
+=======
 K-Means
 =======
 
@@ -17,12 +18,12 @@ minimize the objective function
 where :math:`d(x_i, C)` is the distance from :math:`x_i` to the closest center
 in :math:`C`.
 
-
+---
 API
 ---
 
 Descriptor
-++++++++++
+----------
 .. code-block:: c++
 
    namespace onedal::kmeans {
@@ -51,7 +52,7 @@ Descriptor
 
 
 Model
-+++++
+-----
 .. code-block:: c++
 
    class model {
@@ -61,7 +62,7 @@ Model
 
 
 Training
-++++++++
+--------
 
 Input
 ~~~~~
@@ -113,7 +114,7 @@ Usage example
 
 
 Inference
-+++++++++
+---------
 
 Input
 ~~~~~
