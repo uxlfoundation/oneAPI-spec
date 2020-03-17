@@ -11,3 +11,26 @@ rst_prolog = """
 """
 
 oneapi_spec_version = '0.6.0'
+
+latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    'preamble': '\\DeclareUnicodeCharacter{2208}{$\\in$}',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+    'extraclassoptions': 'openany,oneside'
+}
+
+def setup(app):
+    add_custom_css = getattr(app,'add_css_file',getattr(app,'add_stylesheet'))
+    add_custom_css('custom.css')

@@ -9,6 +9,17 @@ build_oneTBB_html:
     paths: [source/elements/oneTBB/build/html]
     expire_in: 3d
 
+build_oneTBB_pdf:
+  stage: build
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
+  script:
+    - python3 -m pip install -r requirements.txt
+    - python3 scripts/oneapi.py latexpdf source/elements/oneTBB
+  artifacts:
+    paths: [source/elements/oneTBB/build/latex/*.pdf]
+    expire_in: 3d
+
 build_oneDPL_html:
   stage: build
   tags: [docker_linux]
@@ -18,6 +29,17 @@ build_oneDPL_html:
     - python3 scripts/oneapi.py html source/elements/oneDPL
   artifacts:
     paths: [source/elements/oneDPL/build/html]
+    expire_in: 3d
+
+build_oneDPL_pdf:
+  stage: build
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
+  script:
+    - python3 -m pip install -r requirements.txt
+    - python3 scripts/oneapi.py latexpdf source/elements/oneDPL
+  artifacts:
+    paths: [source/elements/oneDPL/build/latex/*.pdf]
     expire_in: 3d
 
 pages:
