@@ -23,6 +23,8 @@ Data Parallel C++ (DPC++) API extensions to the traditional C++ interface.
 For general information, visit |github|.
 
 .. toctree::
+   :maxdepth: 3
+
    introduction.rst
    programming_model/index.rst
    common_interface/index.rst
