@@ -1,8 +1,6 @@
-Programming Model
-=========================
-
-Basic Usage Scenario
-~~~~~~~~~~~~~~~~~~~~~
+====================
+Basic usage scenario
+====================
 
 Below you can find a typical workflow of using |dal_short_name| algorithm on GPU.
 The example is provided for Principal Component Analysis algorithm (PCA).
