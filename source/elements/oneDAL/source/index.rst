@@ -31,3 +31,4 @@ For general information, visit |github|.
    data_management/index.rst
    algorithms/index.rst
    bibliography.rst
+   terminology.rst
