@@ -26,9 +26,10 @@ For general information, visit |github|.
    :maxdepth: 3
 
    introduction.rst
+   terminology.rst
    programming_model/index.rst
    common_interface/index.rst
    data_management/index.rst
    algorithms/index.rst
    bibliography.rst
-   terminology.rst
+

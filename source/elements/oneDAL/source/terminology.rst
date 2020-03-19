@@ -4,61 +4,72 @@
 Terminology
 ============
 
-@table-begin:
-   column-sizes: [ 25% ]
-Term | Definition \\
+.. list-table::
+   :widths: 25 25 25
+   :header-rows: 1
+   :align: left
 
-Batch Mode | The computation mode for an algorithm in oneDAL, where all the data needed for
+   * - Term
+     - Definition
+   * - Batch Mode 
+     - The computation mode for an algorithm in oneDAL, where all the data needed for
 computation are available at the start and fits the memory of the device where computations will
-be performed. \\
+be performed.
 
-Dataset | A pair of a matrix $X$ of size $N \times p$ and a vector $Y$ of size $N$, where $X$
+   * - Dataset
+     - A pair of a matrix $X$ of size $N \times p$ and a vector $Y$ of size $N$, where $X$
 contains $N$ feature vectors in rows and $Y$ stores all corresponding responses. Vector $Y$ is
-optional and may not be present if responses are unknown. \\
+optional and may not be present if responses are unknown.
 
-DPC++ | DPC++ --- Technology (programming language, compiler and runtime) that
-is based on SYCL specification and extends it. \\
+   * - DPC++
+     - DPC++ --- Technology (programming language, compiler, and runtime) that
+is based on SYCL* specification and extends it.
 
-Feature | A single column of matrix $X$ from a dataset. \\
-Feature vector | A single real-valued vector of length $p$ that encodes information about a real
-object or an event. \\
+   * - Feature
+     - A single column of matrix $X$ from a dataset.
 
-GEMM | General Matrix Multiplication --- matrix multiplication algorithms in the following form $$C
-= \alpha A^\dagger B^\dagger + \beta C, \; \dagger \in \{1, T\}.$$ \\
-Gen9 | Codename of Intel GPU microarchitecture was used for performance analysis of the algorithms
-in the report. \\
+   * - Feature vector
+     - A single real-valued vector of length $p$ that encodes information about a real
+object or an event.
 
-Host/Device | OpenCL terms for referring to CPU that controls the connected GPU executing kernels. \\
-JIT | Just in Time Compilation --- compilation during execution of program. In the report, term is
-used to refer to the compilation of OpenCL(TM) kernels. \\
+   * - Host/Device
+     - OpenCL terms for referring to CPU that controls the connected GPU executing kernels.
 
-Kernel | Code written in OpenCL or SYCL and executed on a GPU device. \\
+   * - JIT
+     - Just in Time Compilation --- compilation during execution of program.
 
-oneMKL | Intel(R) oneAPI Math Kernel Library (Intel(R) oneMKL). \\
+   * - Kernel
+     - Code written in OpenCL or SYCL and executed on a GPU device.
 
-Observation | A pair of a feature vector and a response if response is known, otherwise a feature
-vector. \\
+   * - Observation
+     - A pair of a feature vector and a response if response is known, otherwise a feature
+vector.
 
-Model | A result of training machine-learning algorithm that stores information necessary to run
-inference (prediction) on new dataset. \\
+   * - Model
+     - A result of training machine-learning algorithm that stores information necessary to run
+inference (prediction) on a new dataset.
 
-oneDAL | oneAPI Data Analytics Library (oneDAL). \\
+   * - oneDAL
+     - Intel(R) oneAPI Data Analytics Library (oneDAL).
 
-Online Mode | The computation mode for an algorithm in oneDAL, where the data needed for computation
-becomes available in parts during the time. \\
+   * - Online Mode
+     - The computation mode for an algorithm in oneDAL, where the data needed for computation
+becomes available in parts during the time.
 
-Response | A single value corresponding to an observation. For example, response may be a label
-indicating that an observation belongs to a particular class. \\
+   * - Response
+     - A single value corresponding to an observation. For example, response may be a label
+indicating that an observation belongs to a particular class.
 
-Skylake | Codename of Intel CPU microarchitecture was used for performance analysis of the
-algorithms in the report. \\
+   * - SPIR-V
+     - Language for intermediate representation of compute kernels.
 
-SPIR-V | Language for intermediate representation of compute kernels. \\
+   * - SYCL
+     - SYCL(TM) --- high-level programming model for OpenCL(TM) that enables code for heterogeneous
+processors to be written in a "single-source" style using completely standard C++.
 
-SYCL | SYCL(TM) --- high-level programming model for OpenCL(TM) that enables code for heterogeneous
-processors to be written in a "single-source" style using completely standard C++. \\
+   * - Use case
+     - A scenario that describes how a user might interact with a data analytics algorithm.
 
-Use case | A scenario that describes how a user might interact with a data analytics algorithm. \\
+   * - Workload
+     - A task of applying a data analytics algorithm to a dataset.
 
-Workload | A task of applying a data analytics algorithm to a dataset. \\
-@table-end
