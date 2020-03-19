@@ -5,7 +5,7 @@ Terminology
 ============
 
 .. list-table::
-   :widths: 25 25 25
+   :widths: 25 50
    :header-rows: 1
    :align: left
 
@@ -33,10 +33,10 @@ is based on SYCL* specification and extends it.
 object or an event.
 
    * - Host/Device
-     - OpenCL terms for referring to CPU that controls the connected GPU executing kernels.
+     - OpenCL [OpenCL Spec] terms for referring to CPU that controls the connected GPU executing kernels. 
 
    * - JIT
-     - Just in Time Compilation --- compilation during execution of program.
+     - Just in Time Compilation --- compilation during execution of a program.
 
    * - Kernel
      - Code written in OpenCL or SYCL and executed on a GPU device.
@@ -61,14 +61,14 @@ becomes available in parts during the time.
 indicating that an observation belongs to a particular class.
 
    * - SPIR-V
-     - Language for intermediate representation of compute kernels.
+     - Standard Portable Intermediate Representation - V is a language for intermediate representation of compute kernels.
 
    * - SYCL
-     - SYCL(TM) --- high-level programming model for OpenCL(TM) that enables code for heterogeneous
+     - SYCL(TM) [SYCL Spec] --- high-level programming model for OpenCL(TM) that enables code for heterogeneous
 processors to be written in a "single-source" style using completely standard C++.
 
    * - Use case
-     - A scenario that describes how a user might interact with a data analytics algorithm.
+     - A scenario that describes how a user might interact with a oneDAL algorithm.
 
    * - Workload
      - A task of applying a data analytics algorithm to a dataset.

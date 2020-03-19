@@ -4,16 +4,15 @@
 .. _oneDAL-section:
 
 ==========================
- |dal_full_name| (oneDAL)
+ |dal_full_name| (|dal_short_name|)
 ==========================
 
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
 
-This document specifies requirements for implementations of Intel oneAPI Data Analytics Library (oneDAL).
+This document specifies requirements for implementations of |dal_full_name|  (|dal_short_name|).
 
-oneDAL is a library
-that helps speed up big data analysis by providing highly optimized
+oneDAL is a library that helps speed up big data analysis by providing highly optimized
 algorithmic building blocks for all stages of data analytics
 (preprocessing, transformation, analysis, modeling, validation, and
 decision making) in batch, online, and distributed processing modes of
