@@ -35,3 +35,5 @@ substitutions = [
     ]
 
 oneapi_spec_version = '0.6.0'
+
+primary_domain = 'cpp'

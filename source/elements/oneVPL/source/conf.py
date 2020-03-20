@@ -22,4 +22,3 @@ project = 'oneVPL'
 
 from element_conf import *
 
-primary_domain = 'cpp'
