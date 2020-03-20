@@ -3,20 +3,20 @@
 
 .. _oneDAL-section:
 
-==========================
+====================================
  |dal_full_name| (|dal_short_name|)
-==========================
+====================================
 
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
 
-This document specifies requirements for implementations of |dal_full_name|  (|dal_short_name|).
+This document specifies requirements for implementations of |dal_full_name| (|dal_short_name|).
 
-oneDAL is a library that helps speed up big data analysis by providing highly optimized
+|dal_short_name| is a library that helps speed up big data analysis by providing highly optimized
 algorithmic building blocks for all stages of data analytics
 (preprocessing, transformation, analysis, modeling, validation, and
 decision making) in batch, online, and distributed processing modes of
-computation. The current version of oneDAL provides
+computation. The current version of |dal_short_name| provides
 Data Parallel C++ (DPC++) API extensions to the traditional C++ interface.
 
 For general information, visit |github|.
