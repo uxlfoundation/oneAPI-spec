@@ -13,8 +13,8 @@ Terminology
 
    Dataset
      A pair of a matrix :math:`X` of size :math:`N * p` and a vector :math:`Y` of size :math:`N`, where :math:`X`
-     contains :math:`N` feature vectors in rows and :math:`Y` stores all corresponding responses. Vector :math:`Y` is
-     optional and may not be present if responses are unknown.
+     contains :math:`N` :term:`feature vectors <feature vector>` in rows and :math:`Y` stores all corresponding
+     responses. Vector :math:`Y` is optional and may not be present if responses are unknown.
 
    DPC++
      DPC++ --- Technology (programming language, compiler, and runtime) that
@@ -37,7 +37,7 @@ Terminology
      Code written in OpenCL or SYCL and executed on a GPU device.
 
    Observation
-     A pair of a feature vector and a response if response is known, otherwise a feature
+     A pair of a :term:`feature vector <feature vector>` and a response if response is known, otherwise a feature
      vector.
 
    Model
