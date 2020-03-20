@@ -152,11 +152,15 @@ def dockerpush(root, target=None):
 def dockerrun(root, target=None):
     root_only(root)
     shell('docker run --rm -it'
+          ' -e http_proxy=%s'
+          ' -e https_proxy=%s'
+          ' -e no_proxy=%s'
           ' --user %s:%s'
           ' --volume=%s:/build'
           ' --workdir=/build'
           ' rscohn2/oneapi-spec'
-          % (os.getuid(), os.getgid(), os.getcwd()))
+          % (get_env('http_proxy'), get_env('https_proxy'), get_env('no_proxy'),
+             os.getuid(), os.getgid(), os.getcwd()))
 
 @action
 def clean(root, target=None):

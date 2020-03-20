@@ -9,6 +9,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.graphviz',
     'sphinx_substitution_extensions',
     'breathe',
 ]
@@ -34,3 +35,5 @@ substitutions = [
     ]
 
 oneapi_spec_version = '0.6.0'
+
+primary_domain = 'cpp'

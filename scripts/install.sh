@@ -46,6 +46,7 @@ make install
 set -e
 popd
 apt-get install -y \
+                    graphviz \
                     latexmk \
                     texlive-latex-base \
                     texlive-fonts-recommended \
