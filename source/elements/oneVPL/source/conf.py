@@ -21,3 +21,5 @@ sys.path.insert(0, os.path.abspath('.'))
 project = 'oneVPL'
 
 from element_conf import *
+
+primary_domain = 'cpp'

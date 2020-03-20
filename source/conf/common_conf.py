@@ -9,6 +9,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.graphviz',
     'sphinx_substitution_extensions',
     'breathe',
 ]
