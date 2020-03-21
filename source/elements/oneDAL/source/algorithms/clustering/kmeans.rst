@@ -113,13 +113,13 @@ Model
    };
 
 centroids ``table`` ``[read-only]``
-   :math:`[\text{cluster_count} \times \text{feature_count}]` table with the
+   :math:`[\mathrm{cluster\_count} \times \mathrm{feature\_count}]` table with the
    cluster centroids. Each row of the table stores one centroid.
 
    Invariants
       | ``centroids.is_empty() == false``
 
-cluster_count, ``int64_t`` ``[read-only]``
+cluster_count ``int64_t`` ``[read-only]``
    Number of clusters in the trained model.
 
    Invariants
@@ -146,11 +146,11 @@ Input
    };
 
 data ``table`` ``default = table()``
-   :math:`[\text{observation_count} \times \text{feature_count}]` table with the data
+   :math:`[\mathrm{observation\_count} \times \mathrm{feature\_count}]` table with the data
    to be clustered, where each row stores one observation.
 
 initial_centroids ``table`` ``default = table()``
-   :math:`[\text{cluster_count} \times \text{feature_count}]` table with the
+   :math:`[\mathrm{cluster\_count} \times \mathrm{feature\_count}]` table with the
    initial centroids, where each row stores one centroid.
 
 Result
@@ -169,7 +169,7 @@ model ``kmeans::model`` ``[read-only]``
    The trained K-means model.
 
 labels ``table`` ``[read-only]``
-   :math:`[\text{observation_count} \times 1]` table with assignments of cluster
+   :math:`[\mathrm{observation\_count} \times 1]` table with assignments of cluster
    indices to feature vectors in the input data.
 
    Invariants
