@@ -2,6 +2,8 @@
 Computational modes
 ===================
 
+.. _Batch:
+
 -----
 Batch
 -----
@@ -10,6 +12,8 @@ In the batch processing mode, the algorithm works with the entire data set to pr
 result. A more complex scenario occurs when the entire data set is not available at the moment
 or the data set does not fit into the device memory.
 
+.. _Online:
+
 ------
 Online
 ------
@@ -17,6 +21,8 @@ Online
 In the online processing mode, the algorithm processes a data set in blocks streamed into the
 device's memory. Partial results are updated incrementally and finalized when the last data block
 is processed.
+
+.. _Distributed:
 
 -----------
 Distributed

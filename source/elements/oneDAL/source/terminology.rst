@@ -14,12 +14,12 @@ Terminology
    Dataset
      A pair of a matrix :math:`X` of size :math:`N * p` and a vector :math:`Y` of size :math:`N`, where :math:`X`
      contains :math:`N` :term:`feature vectors <feature vector>` in rows and :math:`Y` stores all corresponding
-     responses. Vector :math:`Y` is optional and may not be present if responses are unknown.
+     :term:`responses <response>`. Vector :math:`Y` is optional and may not be present if responses are unknown.
 
    DPC++
-     DPC++ --- Technology (programming language, compiler, and runtime) that
-     is based on SYCL* specification and extends it.
-
+     Data Parallel C++ (DPC++) is a high-level language designed for data parallel programming productivity.
+     DPC++ is based on :term:`SYCL* <sycl>` from the Khronos* Group to support data parallelism and heterogeneous programming.
+     
    Feature
      A single column of matrix :math:`X` from a dataset.
 
