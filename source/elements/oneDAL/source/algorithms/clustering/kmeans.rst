@@ -117,13 +117,13 @@ centroids ``table`` ``[read-only]``
    cluster centroids. Each row of the table stores one centroid.
 
    Invariants
-      | ``centroids.is_empty() == false``
+      | ``centroids.is_empty == false``
 
 cluster_count ``int64_t`` ``[read-only]``
    Number of clusters in the trained model.
 
    Invariants
-      | ``cluster_count == centroids.get_row_count()``
+      | ``cluster_count == centroids.row_count``
 
 
 Training ``onedal::train(...)``
@@ -173,7 +173,7 @@ labels ``table`` ``[read-only]``
    indices to feature vectors in the input data.
 
    Invariants
-      | ``labels.is_empty() == false``
+      | ``labels.is_empty == false``
 
 iteration_count ``int64_t`` ``[read-only]``
    Actual number of iterations performed by the algorithm.
@@ -195,14 +195,14 @@ Operation semantics
    kmeans::train_result train(const kmeans::desc&, const kmeans::train_input&);
 
 **Preconditions**
-   | ``input.get_data().is_empty() == false``
-   | ``input.get_initial_centroids().is_empty() == false``
-   | ``input.get_data().get_column_count() == input.get_initial_centroids().get_column_count()``
+   | ``input.data.is_empty == false``
+   | ``input.initial_centroids.is_empty == false``
+   | ``input.data.column_count == input.initial_centroids.column_count``
 
 **Postconditions**
-   | ``result.get_labels().get_row_count() == input.get_data().get_row_count()``
-   | ``result.get_model().get_clusters().get_row_count() == desc.get_cluster_count()``
-   | ``result.get_model().get_clusters().get_column_count() == input.get_data().get_column_count()``
+   | ``result.labels.row_count == input.data.row_count``
+   | ``result.model.clusters.row_count == desc.cluster_count``
+   | ``result.model.clusters.column_count == input.data.column_count``
 
 
 Inference ``onedal::infer(...)``
