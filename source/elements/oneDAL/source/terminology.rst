@@ -8,11 +8,10 @@ Terminology
 
    Batch Mode 
      The computation mode for an algorithm in |dal_short_name|, where all the data needed for
-     computation are available at the start and fits the memory of the device where computations will
-     be performed.
+     computation is available at the start and fits the memory of the device on which the computations are performed.
 
    Dataset
-     A pair of a matrix :math:`X` of size :math:`N * p` and a vector :math:`Y` of size :math:`N`, where :math:`X`
+     A pair of a matrix :math:`X` of size :math:`N \times p` and a vector :math:`Y` of size :math:`N`, where :math:`X`
      contains :math:`N` :term:`feature vectors <feature vector>` in rows and :math:`Y` stores all corresponding
      :term:`responses <response>`. Vector :math:`Y` is optional and may not be present if responses are unknown.
 
@@ -28,16 +27,16 @@ Terminology
      object or an event.
 
    Host/Device
-     OpenCL [OpenCLSpec]_ terms for referring to CPU that controls the connected GPU executing kernels. 
+     OpenCL [OpenCLSpec]_ refers to CPU that controls the connected GPU executing kernels. 
 
    JIT
      Just in Time Compilation --- compilation during execution of a program.
 
    Kernel
-     Code written in OpenCL or SYCL and executed on a GPU device.
+     Code written in OpenCL [OpenCLSpec]_ or :term:`SYCL` and executed on a GPU device.
 
    Observation
-     A pair of a :term:`feature vector <feature vector>` and a response if response is known, otherwise a feature
+     A pair of a :term:`feature vector <feature vector>` and a :term:`response` if response is known, otherwise a feature
      vector.
 
    Model
@@ -49,10 +48,10 @@ Terminology
 
    Online Mode
      The computation mode for an algorithm in |dal_short_name|, where the data needed for computation
-     becomes available in parts during the time.
+     becomes available in parts over time.
 
    Response
-     A single value corresponding to an observation. For example, response may be a label
+     A single value corresponding to an :term:`observation`. For example, response may be a label
      indicating that an observation belongs to a particular class.
 
    SPIR-V

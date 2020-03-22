@@ -19,7 +19,7 @@ decision making) in batch, online, and distributed processing modes of
 computation. The current version of |dal_short_name| provides
 Data Parallel C++ (DPC++) API extensions to the traditional C++ interface.
 
-For general information, visit |github|.
+For general information, visit |github|_.
 
 .. toctree::
    :maxdepth: 3
