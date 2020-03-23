@@ -11,7 +11,7 @@ There are four subclasses of :class:`vpl::Workstream` that perform the following
 - :class:`vpl::Encode`: encode raw frames to a bitstream 
 
 In the :class:`vpl::VideoProcess` subclass, a sequence of filters with single input and single output running on the same device context can be fused to the same workstream. 
-Operations executing on different device contexts are seperated to different worksteams such that each workstream can be dispatched to a single device context. 
+Operations executing on different device contexts are separated to different worksteams such that each workstream can be dispatched to a single device context. 
 
 Workstream Internals
 --------------------

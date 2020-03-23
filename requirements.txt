@@ -11,4 +11,5 @@ sphinx-rtd-theme
 sphinx-prompt
 sphinx_substitution_extensions
 sphinx_tabs
+sphinxcontrib-spelling
 graphviz

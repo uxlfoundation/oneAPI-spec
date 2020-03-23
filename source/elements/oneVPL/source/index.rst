@@ -66,7 +66,7 @@ Encode
 ------
 .. include:: VPL_encode.rst
 
-Vidoe Processing
+Video Processing
 ----------------
 .. include:: VPL_processframe.rst
 
