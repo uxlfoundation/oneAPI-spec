@@ -187,7 +187,7 @@ Descriptor
 
    .. member:: double accuracy_threshold = 0.0
 
-      The maximum number of iterations :math:`T`.
+      The threshold :math:`\varepsilon` for the stop condition.
 
       Getter & Setter
          | :expr:`double get_accuracy_threshold() const`
@@ -333,11 +333,8 @@ Result
       Getter
          | :expr:`const table& get_labels() const`
 
-      Invariants
-         | :expr:`labels.is_empty == false`
 
-
-   .. member:: std::int64_t iteration_count = table()
+   .. member:: std::int64_t iteration_count = 0
 
       Actual number of iterations performed by the algorithm.
 
@@ -367,9 +364,10 @@ Operation semantics
       | :expr:`input.data.is_empty == false`
       | :expr:`input.initial_centroids.is_empty == false`
       | :expr:`input.initial_centroids.row_count == desc.cluster_count`
-      | :expr:`input.data.column_count == input.initial_centroids.column_count`
+      | :expr:`input.initial_centroids.column_count == input.data.column_count`
 
    Postconditions
+      | :expr:`result.labels.is_empty == false`
       | :expr:`result.labels.row_count == input.data.row_count`
       | :expr:`result.model.centroids.is_empty == false`
       | :expr:`result.model.clusters.row_count == desc.cluster_count`
@@ -390,9 +388,51 @@ Input
       infer_input(const model& m);
       infer_input(const model& m, const table& data);
 
+      const model& get_model() const;
+      const table& get_data() const;
+
       infer_input& set_model(const model&);
       infer_input& set_data(const table&);
    };
+
+.. namespace:: onedal::kmeans
+.. class:: infer_input
+
+   .. function:: infer_input()
+
+      Creates input for the inference operation with the default attribute
+      values.
+
+
+   .. function:: infer_input(const kmeans::model& model)
+
+      Creates input for the inference operation with the given :expr:`model`, the
+      other attributes get default values.
+
+
+   .. function:: infer_input(const kmeans::model& model, const table& data)
+
+      Creates input for the inference operation with the given :expr:`model` and
+      :expr:`data`.
+
+
+   .. member:: table data = table()
+
+      :math:`n \times p` table with the data to be assigned to the clusters,
+      where each row stores one sample.
+
+      Getter & Setter
+         | :expr:`const table& get_data() const`
+         | :expr:`infer_input& set_data(const table&)`
+
+
+   .. member:: kmeans::model model = kmeans::model()
+
+      The trained K-Means model (see :expr:`kmeans::model`).
+
+      Getter & Setter
+         | :expr:`const kmeans::model& get_model() const`
+         | :expr:`infer_input& set_model(const kmeans::model&)`
 
 
 Result
@@ -404,5 +444,51 @@ Result
       infer_result();
 
       const table& get_labels() const;
+      double get_objective_function_value() const;
    };
 
+
+.. class:: infer_result
+
+   .. function:: infer_result()
+
+      Creates result of the inference operation with the default attribute
+      values.
+
+
+   .. member:: table labels = table()
+
+      :math:`n \times 1` table with assignments of cluster indices to samples in
+      the input data.
+
+      Getter
+         | :expr:`const table& get_labels() const`
+
+
+   .. member:: double objective_function_value = 0.0
+
+      The value of the objective function :math:`\Phi_X(C)`, where :math:`C` is
+      defined by the corresponding :expr:`infer_input::model::centroids`.
+
+      Invariants
+         | :expr:`objective_function_value >= 0.0`
+
+
+Operation semantics
+~~~~~~~~~~~~~~~~~~~
+.. namespace:: onedal
+.. function:: template <typename Descriptor> \
+              kmeans::infer_result infer(const Descriptor& desc, \
+                                         const kmeans::infer_input& input)
+
+   :tparam Descriptor: K-Means algorithm descriptor :expr:`kmeans::desc`.
+
+   Preconditions
+      | :expr:`input.data.is_empty == false`
+      | :expr:`input.model.centroids.is_empty == false`
+      | :expr:`input.model.centroids.row_count == desc.cluster_count`
+      | :expr:`input.model.centroids.column_count == input.data.column_count`
+
+   Postconditions
+      | :expr:`result.labels.is_empty == false`
+      | :expr:`result.labels.row_count == input.data.row_count`
