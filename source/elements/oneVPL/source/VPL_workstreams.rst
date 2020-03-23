@@ -7,22 +7,22 @@ There are four subclasses of :class:`vpl::Workstream` that perform the following
 
 - :class:`vpl::Decode`: decode a bitstream to raw frames 
 - :class:`vpl::VideoProcess`: implement a video processing filter operation with raw frame input and output
-- :code:`vpl::Infer`: invoke a Deep Learning model to infer on raw frame. Details of this subclass will be provided in a future release.
+- :code:`vpl::Infer`: invoke a Deep Learning model to infer on a raw frame. Details of this subclass will be provided in a future release.
 - :class:`vpl::Encode`: encode raw frames to a bitstream 
 
-In the :class:`vpl::VideoProcess` subclass, a sequence of filters with single input and single output running on the same device context can be fused to the same workstream. 
-Operations executing on different device contexts are separated to different worksteams such that each workstream can be dispatched to a single device context. 
+In the :class:`vpl::VideoProcess` subclass, a sequence of filters with single input and single output running on the same device context can be fused into a single workstream. 
+Operations executing on different device contexts are separated to different worksteams such that each workstream can always be dispatched to a single device. 
 
 Workstream Internals
 --------------------
 
-Each :class:`vpl::Workstream` contains the following information
+Each :class:`vpl::Workstream` contains the following members:
 
 - :class:`vpl::VplParams`: the parameter settings of the workstream, i.e., resolution of the output per session or per frame.
-- :class:`vpl::DeviceContext`: contains the execution device context of the workstream, i.e., VAAPI, DX, OCL, GL contexts for media, compute and rendering operations
+- :class:`vpl::DeviceContext`: the execution device context of the workstream, i.e., VAAPI, DX, OCL, GL contexts for media, compute and rendering operations
 
-The :class:`vpl::VplParams` provides the interface for setting the workstream configuration during initialization
-and dynamically changing workstream settings during processing for frame level control.
+Workstream per session configurations are set up during workstream instialization using :class:`vpl::VplParams`. User program can also dynamically modify a workstream's configuration
+frame level control.
 
 Initialization Sequence
 -----------------------
@@ -36,7 +36,7 @@ The standard sequence to create a workstream consists of the following steps:
 #. Get the configuration presets for the selected device
 #. Create the workstream with the configuration setting :class:`vpl::config::VPLParams` and :class:`vpl::DeviceContext`.
 
-The following transcoding example uses three workstreams: :class:`vpl::Decode`, :class:`vpl::Process` and :class:`vpl::Encode`, and shares a single context to execute them together:
+The following transcoding example uses three workstreams: :class:`vpl::Decode`, :class:`vpl::VideoProcess` and :class:`vpl::Encode`, and shares a single context to execute them together:
 
 .. code-block:: c++
 
@@ -103,9 +103,9 @@ Dynamic Setting Control
 -----------------------
 
 The :class:`vpl::VplParams` defines the workstream settings for the device. 
-User program can use its access functions to read and set the settings for the workstream.
-After changing the configuration setting, user program then call the :cpp:func:`vpl::Workstream::UpdateDeviceConfig` function to propapge the setting to
-device context. Configuration setting change takes effect for the subsequent calls to the worksteam.
+User program can use its access functions to read and set the parameters for the workstream.
+After modifying configuration settings, a user program needs to call :cpp:func:`vpl::Workstream::UpdateDeviceConfig` function to propapge the setting to the
+device context. Configuration setting change takes effect in the next processing operation.
 The following example changes the output resolution in the middle of a decoding sequence.
 
 .. code-block:: c++
@@ -124,6 +124,4 @@ The following example changes the output resolution in the middle of a decoding 
       }
    }
 
-In the future releases, serialization operations of :class:`vpl::VplParams`
-will be added to support the configuration synchronization to accelerator drivers
-that are running autonomously on remote nodes.  
+
