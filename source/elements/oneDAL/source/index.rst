@@ -4,13 +4,13 @@
 .. _oneDAL-section:
 
 ====================================
- |dal_full_name| (|dal_short_name|)
+ oneAPI |dal_full_name| (|dal_short_name|)
 ====================================
 
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
 
-This document specifies requirements for implementations of |dal_full_name| (|dal_short_name|).
+This document specifies requirements for implementations of oneAPI |dal_full_name| (|dal_short_name|).
 
 |dal_short_name| is a library that helps speed up big data analysis by providing highly optimized
 algorithmic building blocks for all stages of data analytics

@@ -2,7 +2,7 @@
 Introduction
 ============
 
-|dal_full_name| (|dal_short_name|) is a library that provides building blocks covering all stages of data analytics: data acquisition
+oneAPI |dal_full_name| (|dal_short_name|) is a library that provides building blocks covering all stages of data analytics: data acquisition
 from a data source, preprocessing, transformation, data mining, modeling, validation, and decision making.
 
 .. image:: _static/data_analytics_stages.png
@@ -24,8 +24,7 @@ communication technology and, therefore, can be used within different end-to-end
    for data conversion into numeric formats (performed by one of supported Data Sources), and for model representation.
 
  - The :ref:`Algorithms <algorithms>` component consists of classes that implement algorithms for data analysis (data mining) and data modeling
-   (training and prediction). These algorithms include matrix decompositions, clustering, classification, and regression
-   algorithms, as well as association rules discovery. 
+   (training and prediction). These algorithms include clustering, classification, regression, and recommendation algorithms. 
    Algorithms support the following computation modes:
 
    - :ref:`Batch processing <Batch>`: algorithms work with the entire data set to produce the final result
