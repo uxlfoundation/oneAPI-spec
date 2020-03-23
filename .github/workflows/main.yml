@@ -21,3 +21,8 @@ jobs:
       with:
           name: oneapi-spec-artifacts
           path: site.zip
+    - name: Archive spellcheck
+      uses: actions/upload-artifact@v1
+      with:
+          name: spell check
+          path: build/spelling/output.txt

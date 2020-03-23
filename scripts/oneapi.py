@@ -332,6 +332,7 @@ def ci(root, target=None):
     root_only(root)
     get_tarballs(root)
     site(root)
+    build('.', 'spelling')
     if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
@@ -348,6 +349,7 @@ commands = {'ci': ci,
             'dockerrun': dockerrun,
             'html': build,
             'latexpdf': build,
+            'spelling': build,
             'prep': prep,
             'prod-publish': prod_publish,
             'purge': purge,
@@ -370,7 +372,7 @@ tarballs = ['oneMKL',
 def main():
     global args
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
-    parser.add_argument('action',choices=commands.keys())
+    parser.add_argument('action',choices=commands.keys(), default='html', nargs='?')
     parser.add_argument('root', nargs='?', default='.')
     parser.add_argument('--branch')
     parser.add_argument('--dry-run', action='store_true')

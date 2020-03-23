@@ -1,7 +1,7 @@
 oneCCL Collective Communication
 ===============================
 
-Thi section covers collective communcation operations implemented in |ccl_full_name|.
+This section covers collective communication operations implemented in |ccl_full_name|.
 
 .. toctree::
    :maxdepth: 1

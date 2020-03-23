@@ -46,6 +46,7 @@ make install
 set -e
 popd
 apt-get install -y \
+                    enchant \
                     graphviz \
                     latexmk \
                     texlive-latex-base \
