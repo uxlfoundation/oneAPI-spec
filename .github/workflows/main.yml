@@ -13,7 +13,6 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
-          apt-get install -y enchant
           python3 scripts/oneapi.py spec-venv
           . spec-venv/bin/activate
           python scripts/oneapi.py --branch $GITHUB_REF ci
@@ -22,3 +21,8 @@ jobs:
       with:
           name: oneapi-spec-artifacts
           path: site.zip
+    - name: Archive spellcheck
+      uses: actions/upload-artifact@v1
+      with:
+          name: spell check
+          path: build/spelling/output.txt

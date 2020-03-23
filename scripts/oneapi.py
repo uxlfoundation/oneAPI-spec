@@ -332,6 +332,7 @@ def ci(root, target=None):
     root_only(root)
     get_tarballs(root)
     site(root)
+    build('.', 'spelling')
     if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
