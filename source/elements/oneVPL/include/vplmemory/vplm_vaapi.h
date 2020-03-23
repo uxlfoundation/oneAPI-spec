@@ -58,7 +58,7 @@ typedef struct _vplm_va_vtable {
  * If memory object does not have OpenCL representation yet, it will be generated or
  * an error returned if that's not possible for some reason. Under the hood VPL Memory
  * library uses one of OpenCL memory sharing APIs unless memory object wasn't initially
- * created as an OpenCL object. #vplm_cl_begin_image_access and #vplm_cl_end_image_access
+ * created as an OpenCL object. vplm_cl_begin_image_access and vplm_cl_end_image_access
  * functions should further be used to mark access period to the OpenCL object in the
  * OpenCL queue(s).
  */

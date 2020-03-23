@@ -152,11 +152,15 @@ def dockerpush(root, target=None):
 def dockerrun(root, target=None):
     root_only(root)
     shell('docker run --rm -it'
+          ' -e http_proxy=%s'
+          ' -e https_proxy=%s'
+          ' -e no_proxy=%s'
           ' --user %s:%s'
           ' --volume=%s:/build'
           ' --workdir=/build'
           ' rscohn2/oneapi-spec'
-          % (os.getuid(), os.getgid(), os.getcwd()))
+          % (get_env('http_proxy'), get_env('https_proxy'), get_env('no_proxy'),
+             os.getuid(), os.getgid(), os.getcwd()))
 
 @action
 def clean(root, target=None):
@@ -328,6 +332,7 @@ def ci(root, target=None):
     root_only(root)
     get_tarballs(root)
     site(root)
+    build('.', 'spelling')
     if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
@@ -344,6 +349,7 @@ commands = {'ci': ci,
             'dockerrun': dockerrun,
             'html': build,
             'latexpdf': build,
+            'spelling': build,
             'prep': prep,
             'prod-publish': prod_publish,
             'purge': purge,
@@ -366,7 +372,7 @@ tarballs = ['oneMKL',
 def main():
     global args
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
-    parser.add_argument('action',choices=commands.keys())
+    parser.add_argument('action',choices=commands.keys(), default='html', nargs='?')
     parser.add_argument('root', nargs='?', default='.')
     parser.add_argument('--branch')
     parser.add_argument('--dry-run', action='store_true')
