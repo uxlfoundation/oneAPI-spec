@@ -166,8 +166,8 @@ Descriptor
       The number of clusters :math:`k`.
 
       Getter & Setter
-         | :expr:`std::int64_t get_cluster_count() const`
-         | :expr:`desc& set_cluster_count(std::int64_t)`
+         | ``std::int64_t get_cluster_count() const``
+         | ``desc& set_cluster_count(std::int64_t)``
 
       Invariants
          | :expr:`cluster_count > 0`
@@ -178,8 +178,8 @@ Descriptor
       The maximum number of iterations :math:`T`.
 
       Getter & Setter
-         | :expr:`std::int64_t get_max_iteration_count() const`
-         | :expr:`desc& set_max_iteration_count(std::int64_t)`
+         | ``std::int64_t get_max_iteration_count() const``
+         | ``desc& set_max_iteration_count(std::int64_t)``
 
       Invariants
          | :expr:`max_iteration_count >= 0`
@@ -190,8 +190,8 @@ Descriptor
       The threshold :math:`\varepsilon` for the stop condition.
 
       Getter & Setter
-         | :expr:`double get_accuracy_threshold() const`
-         | :expr:`desc& set_accuracy_threshold(double)`
+         | ``double get_accuracy_threshold() const``
+         | ``desc& set_accuracy_threshold(double)``
 
       Invariants
          | :expr:`accuracy_threshold >= 0.0`
@@ -222,7 +222,7 @@ Model
       stores one centroid.
 
       Getter
-         | :expr:`const table& get_centroids() const`
+         | ``const table& get_centroids() const``
 
 
    .. member:: std::int64_t cluster_count = 0
@@ -230,7 +230,7 @@ Model
       Number of clusters :math:`k` in the trained model.
 
       Getter
-         | :expr:`std::int64_t get_cluster_count() const`
+         | ``std::int64_t get_cluster_count() const``
 
       Invariants
          | :expr:`cluster_count == centroids.row_count`
@@ -281,8 +281,8 @@ Input
       stores one sample.
 
       Getter & Setter
-         | :expr:`const table& get_data() const`
-         | :expr:`train_input& set_data(const table&)`
+         | ``const table& get_data() const``
+         | ``train_input& set_data(const table&)``
 
 
    .. member:: table initial_centroids = table()
@@ -291,8 +291,8 @@ Input
       stores one centroid.
 
       Getter & Setter
-         | :expr:`const table& get_initial_centroids() const`
-         | :expr:`train_input& set_initial_centroids(const table&)`
+         | ``const table& get_initial_centroids() const``
+         | ``train_input& set_initial_centroids(const table&)``
 
 
 Result
@@ -322,7 +322,7 @@ Result
       The trained K-means model.
 
       Getter
-         | :expr:`const model& get_model() const`
+         | ``const model& get_model() const``
 
 
    .. member:: table labels = table()
@@ -331,7 +331,7 @@ Result
       the input data.
 
       Getter
-         | :expr:`const table& get_labels() const`
+         | ``const table& get_labels() const``
 
 
    .. member:: std::int64_t iteration_count = 0
@@ -422,8 +422,8 @@ Input
       where each row stores one sample.
 
       Getter & Setter
-         | :expr:`const table& get_data() const`
-         | :expr:`infer_input& set_data(const table&)`
+         | ``const table& get_data() const``
+         | ``infer_input& set_data(const table&)``
 
 
    .. member:: kmeans::model model = kmeans::model()
@@ -431,8 +431,8 @@ Input
       The trained K-Means model (see :expr:`kmeans::model`).
 
       Getter & Setter
-         | :expr:`const kmeans::model& get_model() const`
-         | :expr:`infer_input& set_model(const kmeans::model&)`
+         | ``const kmeans::model& get_model() const``
+         | ``infer_input& set_model(const kmeans::model&)``
 
 
 Result
@@ -462,7 +462,7 @@ Result
       the input data.
 
       Getter
-         | :expr:`const table& get_labels() const`
+         | ``const table& get_labels() const``
 
 
    .. member:: double objective_function_value = 0.0
