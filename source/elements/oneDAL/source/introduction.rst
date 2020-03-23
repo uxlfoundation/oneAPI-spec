@@ -2,7 +2,7 @@
 Introduction
 ============
 
-oneAPI |dal_full_name| (|dal_short_name|) is a library that provides building blocks covering all stages of data analytics: data acquisition
+|dal_full_name| (|dal_short_name|) is a library that provides building blocks covering all stages of data analytics: data acquisition
 from a data source, preprocessing, transformation, data mining, modeling, validation, and decision making.
 
 .. image:: _static/data_analytics_stages.png
