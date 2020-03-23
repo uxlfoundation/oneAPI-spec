@@ -7,7 +7,7 @@ Terminology
 .. glossary::
 
    API 
-     Application Program Interface
+     Application Programming Interface
 
    Batch Mode 
      The computation mode for an algorithm in |dal_short_name|, where all the data needed for
