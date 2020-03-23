@@ -50,7 +50,7 @@ On windows::
   python scripts\oneapi.py spec-venv
   spec-venv\Scripts\activate
   
-MKL, DAL, and Level Zero are temporarily in separate private repos. If you have access to the repos you can clone them::
+MKL and Level Zero are temporarily in separate private repos. If you have access to the repos you can clone them::
 
   python scripts/oneapi.py clones
 
