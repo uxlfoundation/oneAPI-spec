@@ -198,8 +198,8 @@ are stored inside the table and how efficiently access them.
       int64_t get_feature_count() const noexcept;
       table_meta& set_features_count(int64_t);
 
-      const feature& get_feature(std::int64_t index) const;
-      table_meta& add_feature(const feature&);
+      const feature_info& get_feature(std::int64_t index) const;
+      table_meta& add_feature(const feature_info&);
 
       data_layout get_layout() const noexcept;
       table_meta& set_layout(data_layout);
@@ -219,32 +219,23 @@ feature_count ``int64_t`` ``default = 0``
    Invariants
       | ``feature_count >= 0``
 
-feature ``feature``
+feature ``feature_info``
    An info about particular feature in the table
 
 layout ``data_layout`` ``default = data_layout::row_major``
    Flag indicating whether the data are in C or Fortran format.
 
 is_continuous ``bool`` ``default=true``
-   Indicates whether the data are stored in continuous block of memory.
+   Indicates whether the data are stored in continuous blocks of memory by
+   the axis of ``layout``.
    E.g., if ``is_continuous == true`` and ``data_layout`` is ``row_major``,
-   the data are stored continuously row-by-row.
+   the data are stored continuously in each row.
 
 is_homogeneous ``bool`` ``default=true``
    True if all features has the same ``data_type``
 
 format ``data_format`` ``default=dense``
    Description of format used for data representation inside the table
-
-Feature
--------
-::
-
-   class feature {
-   public:
-      dal::data_type get_data_type() const noexcept;
-      dal::feature_type get_type() const noexcept;
-   };
 
 Data layout
 -----------
@@ -264,9 +255,27 @@ Data format
       csr
    };
 
+Feature info
+------------
+::
+
+   class feature_info {
+   public:
+      feature(data_type, feature_type);
+
+      data_type get_data_type() const noexcept;
+      feature_type get_type() const noexcept;
+   };
+
+feature_info
+   Invariants:
+      | ``feature_type::nominal`` or ``feature_type::ordinal``
+        are avaliable only with integer ``data_type``
+      | ``feature_type::continuous`` avaliable only with floating-point ``data_type``
+
 Data type
 ---------
-Structure representing runtime information about feature type.
+Structure representing runtime information about feature data type.
 
 |dal_short_name| supports signed/unsigned 32/64 bit integer types
 and 32/64 bit floating point types for table data.
@@ -281,6 +290,8 @@ and 32/64 bit floating point types for table data.
 
 Feature type
 ------------
+Structure representing runtime information about feature logical type.
+
 ::
 
    enum class feature_type : std::int64_t {
@@ -288,3 +299,12 @@ Feature type
       ordinal,
       continuous
    };
+
+feature_type::nominal
+   Discrete feature type, non-ordered
+
+feature_type::ordinal
+   Discrete feature type, ordered
+
+feature_type::continuous
+   Continuous feature type
