@@ -7,23 +7,23 @@
 |vpl_full_name| (oneVPL)
 ************************
 
-The |vpl_full_name| is a programming interface for all video/image
-related usages, with focus on portable media pipeline on CPU, GPU, AI
-accelerators and FPGA, media, compute and render interoperability, to
-provide the best cross domain pipeline experience.  oneVPL libary provides
-the following features:
+The |vpl_full_name| is a programming interface for video processing and video analytics,
+focusing on building portable media pipeline on CPU, GPU, Deep Learning (DL) 
+accelerators and FPGA. It aims for function and performance portabilities such that
+applications built with oneVPL can be efficiently executed on the current and future 
+generation hardware without modification. oneVPL libary provides the following features:
 
-1. Cross architecture building blocks for Decode, Video Processing, 
-   Deep Learning (DL) based video analytics and Encode.
-2. A VPL-Memory Library provides image object passing among media, compute and graphics render.
-   phases of a video analytics pipeline, and, enables zero-copy buffer sharing
-   among CPU, GPU and various hardware accelerators.
-3. Device discovery and device selection query interface for video operations. 
+1. Cross architecture building blocks for Decode, Video Processing, Encode and 
+   DL based video analytics.
+2. A VPL-Memory Library for image object passing among media, compute and 3D rendering
+   phases of a video analytics pipeline, with zero-copying buffer sharing
+   among CPU, GPU, DL accelerators and FPGA. 
+3. Device discovery and device selection query interface for video and DL operations. 
 
 Intel's implementation of VPL will be hosted at 
-https://software.intel.com/en-us/oneapi/vpl# after release to public.
+https://software.intel.com/en-us/oneapi/vpl# with each public release.
 
-See `VPL API Reference`_ for a detailed API description.
+See `VPL API Reference`_ for the detailed API description.
 
 Device Discovery
 ================
@@ -37,26 +37,10 @@ Workstream Settings
 ===================
 .. include:: VPL_parameters.rst
 
-Workstreams
-===========
+Workstream
+==========
+.. _workstream:
 .. include:: VPL_workstreams.rst
-
-The VPL API is defined around workstreams, which are referenced by
-:cpp:type:`vplWorkstream`, an opaque pointer. See
-:ref:`workstream-api` for all workstream APIs.
-
-A Workstream defines a set of settable and gettable properties to configure:
-
-* *Input and output*: image formats, frame rates, resolutions,
-  cropping, aspect ratios
-* *Internal settings*: maximum number of decoded image buffers,
-  internal input raw data buffer size
-* *Encoding preset and heuristics*: encoding bitrates, scenarios and
-  target usage
-
-:cpp:type:`VplWorkstreamProp` names all the properties. Get and set
-the properites with :cpp:type:`vplGetConfigProperty` and
-:cpp:func:`vplSetConfigProperty`.
 
 Decode
 ------
@@ -74,10 +58,8 @@ VPL Memory
 ==========
 .. include:: VPL_memory.rst
 
-
 VPL API Reference
 =================
-
 .. _device-api:
 
 Device
