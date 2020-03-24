@@ -5,30 +5,30 @@ Tables
 ======
 
 Table is a generic |dal_short_name| concept over numerical data. It provides uniformed way
-to pass the data to the library as *inputs* or *parameters* or get them as *results*.
+to pass the data to the library as :ref:`inputs <Input>` or :ref:`parameters <Descriptor>` or get them as :ref:`results <Result>`.
 
-Table object is a container of two entities: *data* and *metadata*.
+Table object is a container of two entities: data and metadata.
 
-- *Data* are organized in a shape of :math:`(N \times p)`,
-  where :math:`N` is a number of observations in a table and :math:`p`
-  is a number of *features*. Each feature has :math:`N` values of concrete
-  data type, while any two features can have different data types.
+- Data are organized in a shape of :math:`(N \times p)`,
+  where :math:`N` is a number of :term:`observations <Observation>` in a table and :math:`p`
+  is a number of :term:`features <Feature>`.
 
-- *Metadata* defines detailed structure of the data and therefore
+- Metadata defines detailed structure of the data and therefore
   |dal_short_name| knows how to access them efficiently (see :ref:`Metadata API` section for details).
 
 -------------------------------
 Table types in |dal_short_name|
 -------------------------------
-|dal_short_name| defines a set of classes, each implement table contact for a restricted set of metadata values:
+|dal_short_name| defines a set of classes, each implement table contact for a restricted set
+of metadata values (see :ref:`Metadata API` for details):
 
 .. list-table::
   :header-rows: 1
 
   * - Table type
-    - Data layout
-    - Data format
-    - Is continuous
+    - :ref:`Data layout <Data layout API>`
+    - :ref:`Data format <Data format API>`
+    - Is contiguous
     - Is homogeneous
   * - homogen_table_
     - row_major/column_major
@@ -56,18 +56,35 @@ Requirements on table objects
 -----------------------------
 Each table object in |dal_short_name| must follow next requirements:
 
-1. Table objects in |dal_short_name| are **immutable**. This means, when created, it is not possible
-   to change data or metadata values inside the table. To create compex table types,
-   *builders* can be used.
+1. Table objects in |dal_short_name| are :term:`immutable <Immutability>` (it is not possible
+   to change data or metadata values inside the table).
 
-2. Table objects in |dal_short_name| are **reference-counted**. One can use assignment operator on table
-   objects to create another reference on it. Hense no data copy is made.
+2. To create compex table types or modify table data, :ref:`builders <Builders>` should be used.
 
-3. Every table type must be inherited from the base ``table`` class, which represents
+3. Table objects in |dal_short_name| are reference-counted. One can use assignment operator or copy constructor
+   on table objects to create another reference on it.
+   ::
+
+      onedal::table table2 = table1;
+      // table1 and table2 share the data (no data copy is performed)
+
+      table3 = table2;
+      // table1, table2 and table3 share the same data
+
+4. Every table type must be inherited from the base ``table`` class, which represents
    a generalized table API. (see :ref:`Table API` for details)
 
-4. Every table type is implemented over particular set of metadata values and must hide other
+5. Every table type is implemented over particular set of metadata values and must hide other
    implementation details from public API.
+
+-------------------------------
+Entities and their dependencies
+-------------------------------
+
+This section describes dependencies between all the classes and structures
+related to tables.
+
+TBD
 
 .. _Table API:
 
@@ -81,7 +98,7 @@ Table API
       table() = default;
 
       template <typename TableImpl,
-               typename = std::enable_if_t<is_table_contract_v<TableImpl>>>
+               typename = std::enable_if_t<is_table_impl_v<TableImpl>>>
       table(TableImpl&&);
 
       table(const table&);
@@ -89,39 +106,77 @@ Table API
 
       table& operator=(const table&);
 
-      int64_t get_feature_count() const noexcept;
-      int64_t get_observation_count() const noexcept;
+      std::int64_t get_feature_count() const noexcept;
+      std::int64_t get_observation_count() const noexcept;
       bool is_empty() const noexcept;
       const dal::table_meta& get_metadata() const noexcept;
    };
 
-TableImpl ``template``
-   The class, containing some table implementation
+.. namespace:: onedal
+.. class:: table
 
-   Invariants
-      | contract ``is_table_contract`` is satisfied
+   .. function:: table()
 
-feature_count ``int64_t`` ``default = 0``
-   The number of features :math:`p` in the table.
+      Creates an empty table with no data and ``table_meta`` constructed by default
 
-   Invariants
-      | ``feature_count >= 0``
+   .. function:: table(TableImpl&&)
 
-observation_count ``int64_t`` ``default = 0``
-   The number of observations :math:`N` in the table.
+      Creates a table object using the implementation passes an a parameter
 
-   Invariants
-      | ``observation_count >= 0``
+      :tparam TableImpl: The class, containing some table implementation
 
-is_empty ``bool`` ``default = true``
-   If ``feature_count`` or ``observation_count`` are zero, the
-   table is empty.
+      Invariants
+         | contract ``is_table_impl`` is satisfied
 
-metadata ``table_metadata`` ``default = table_metadata()`` ``[read-only]``
-   The object represents data structure inside the table
+   .. function:: table(const table&)
 
-   Invariants
-      | ``is_empty = false``
+      Creates new reference object on the table data
+
+   .. function:: table(table&&)
+
+      Moves current reference object into another
+
+   .. function:: table& operator=(const table&)
+
+      Sets the current object reference to point to another
+
+   .. member:: std::int64_t feature_count = 0
+
+      The number of :term:`features <Feature>` :math:`p` in the table.
+
+      Getter
+         | ``std::int64_t get_feature_count() const noexcept``
+
+      Invariants
+         | ``feature_count >= 0``
+
+   .. member:: std::int64_t observation_count = 0
+
+      The number of :term:`observations <Observation>` :math:`N` in the table.
+
+      Getter
+         | ``std::int64_t get_observation_count() const noexcept``
+
+      Invariants
+         | ``observation_count >= 0``
+
+   .. member:: bool is_empty = true
+
+      If ``feature_count`` or ``observation_count`` are zero, the
+      table is empty.
+
+      Getter
+         | ``bool is_empty() const noexcept``
+
+   .. member:: table_meta metadata = table_meta()
+
+      The object represents data structure inside the table
+
+      Getter
+         | ``const dal::table_meta& get_metadata() const noexcept``
+
+      Invariants
+         | ``is_empty = false``
 
 .. _homogen_table:
 
@@ -129,39 +184,83 @@ Homogeneous table
 -----------------
 Class ``homogen_table`` is an implementation of table which data:
 
-- Are dense and stored as one continuous memory block
+- Are dense and stored as one contiguous memory block
 - All features have the same data type (but feature types may differ)
 
 ::
 
    class homogen_table : public table {
    public:
+      // TODO:
+      // Consider constructors with user-provided allocators & deleters
+
       homogen_table(const homogen_table&);
       homogen_table(homogen_table&&);
 
-      homogen_table(int64_t N, int64_t p, data_layout layout);
+      homogen_table(std::int64_t N, std::int64_t p, data_layout layout);
 
       template <typename T>
-      homogen_table(T* data_pointer, int64_t N, int64_t p, data_layout layout);
+      homogen_table(const T* const data_pointer, std::int64_t N, std::int64_t p, data_layout layout);
 
       homogen_table& operator=(const homogen_table&);
 
       data_type get_data_type() const noexcept;
-      bool is_feature_types_equal() const noexcept;
+      bool has_equal_feature_types() const noexcept;
 
       template <typename T>
       const T* get_data_pointer() const noexcept;
    };
 
-data_type ``data_type`` ``[read-only]``
-   The actual type of underlying data
+.. namespace:: onedal
+.. class:: homogen_table
 
-feature_types_equal ``bool``
-   Flag indication whether the `feature_type` fields
-   of `metadata` are all equal
+   .. function:: homogen_table(const homogen_table&)
 
-data_pointer ``const T*``
-   The pointer to underlying data
+      Creates new reference object on the table data
+
+   .. function:: homogen_table(homogen_table&&)
+
+      Moves current reference object into another
+
+   .. function:: homogen_table(std::int64_t N, std::int64_t p, data_layout layout)
+
+      Creates a homogeneous table with shape of :math:`(N \times p)` with
+      default |dal_short_name| allocator
+
+   .. function:: homogen_table(const T* const data_pointer, std::int64_t N, std::int64_t p, data_layout layout)
+
+      :tparam T: The type of pointer to the data
+
+      Creates a homogeneous table with shape of :math:`(N \times p)` with
+      the user-defined data. Uses the provided pointer to access data (no copy is performed).
+
+   .. function:: homogen_table& operator=(const homogen_table&)
+
+      Sets the current object reference to point to another
+
+   .. member:: onedal::data_type data_type
+
+      The actual type of underlying data
+
+      Getter
+         | ``data_type get_data_type() const noexcept``
+
+   .. member:: bool feature_types_equal
+
+      Flag indication whether the `feature_type` fields
+      of `metadata` are all equal
+
+      Getter
+         | ``bool has_equal_feature_types() const noexcept``
+
+   .. member:: const T* data_pointer
+
+      :tparam T: The type of pointer to the data
+
+      The pointer to underlying data
+
+      Getter
+         | ``const T* get_data_pointer() const noexcept``
 
 .. _soa_table:
 
@@ -195,8 +294,8 @@ are stored inside the table and how efficiently access them.
    public:
       table_meta();
 
-      int64_t get_feature_count() const noexcept;
-      table_meta& set_features_count(int64_t);
+      std::int64_t get_feature_count() const noexcept;
+      table_meta& set_feature_count(std::int64_t);
 
       const feature_info& get_feature(std::int64_t index) const;
       table_meta& add_feature(const feature_info&);
@@ -204,8 +303,8 @@ are stored inside the table and how efficiently access them.
       data_layout get_layout() const noexcept;
       table_meta& set_layout(data_layout);
 
-      bool is_continuous() const noexcept;
-      table_meta& set_continuous(bool);
+      bool is_contiguous() const noexcept;
+      table_meta& set_contiguous(bool);
 
       bool is_homogeneous() const noexcept;
 
@@ -213,29 +312,60 @@ are stored inside the table and how efficiently access them.
       table_meta& set_format(data_format);
    };
 
-feature_count ``int64_t`` ``default = 0``
-   The number of features :math:`p` in the table.
+.. namespace:: onedal
+.. class:: table_meta
 
-   Invariants
-      | ``feature_count >= 0``
+   .. member:: std::int64_t feature_count = 0
 
-feature ``feature_info``
-   An info about particular feature in the table
+      The number of :term:`features <Feature>` :math:`p` in the table.
 
-layout ``data_layout`` ``default = data_layout::row_major``
-   Flag indicating whether the data are in C or Fortran format.
+      Getter & Setter
+         | ``std::int64_t get_feature_count() const noexcept``
+         | ``table_meta& set_feature_count(std::int64_t)``
 
-is_continuous ``bool`` ``default=true``
-   Indicates whether the data are stored in continuous blocks of memory by
-   the axis of ``layout``.
-   E.g., if ``is_continuous == true`` and ``data_layout`` is ``row_major``,
-   the data are stored continuously in each row.
+      Invariants
+         | ``feature_count >= 0``
 
-is_homogeneous ``bool`` ``default=true``
-   True if all features has the same ``data_type``
+   .. member:: feature_info feature
 
-format ``data_format`` ``default=dense``
-   Description of format used for data representation inside the table
+      An info about particular :term:`feature` in the table
+
+      Getter & Setter
+         | ``const feature_info& get_feature(std::int64_t index) const``
+         | ``table_meta& add_feature(const feature_info&)``
+
+   .. member:: data_layout layout = data_layout::row_major
+
+      Flag indicating whether the data are in a row-major or column-major format.
+
+      Getter & Setter
+         | ``data_layout get_layout() const noexcept``
+         | ``table_meta& set_layout(data_layout)``
+
+   .. member:: bool is_contiguous = true
+
+      Indicates whether the data are stored in contiguous blocks of memory by
+      the axis of ``layout``.
+      E.g., if ``is_contiguous == true`` and ``data_layout`` is ``row_major``,
+      the data are stored contiguously in each row.
+
+      Getter & Setter
+         | ``bool is_contiguous() const noexcept``
+         | ``table_meta& set_contiguous(bool)``
+
+   .. function:: bool is_homogeneous() const noexcept
+
+      Returns true if all features has the same ``data_type``
+
+   .. member:: data_format format = data_format::dense
+
+      Description of format used for data representation inside the table
+
+      Getter & Setter
+         | ``data_format get_format() const noexcept``
+         | ``table_meta& set_format(data_format)``
+
+.. _Data layout API:
 
 Data layout
 -----------
@@ -246,6 +376,13 @@ Data layout
       column_major
    };
 
+.. namespace:: onedal
+.. class:: data_layout
+
+   Structure representing underlying data layout
+
+.. _Data format API:
+
 Data format
 -----------
 ::
@@ -254,6 +391,11 @@ Data format
       dense,
       csr
    };
+
+.. namespace:: onedal
+.. class:: data_format
+
+   Structure representing underlying format of the data
 
 Feature info
 ------------
@@ -267,19 +409,18 @@ Feature info
       feature_type get_type() const noexcept;
    };
 
-feature_info
+.. namespace:: onedal
+.. class:: feature_info
+
+   Structure representing information about particular :term:`feature`
+
    Invariants:
       | ``feature_type::nominal`` or ``feature_type::ordinal``
         are avaliable only with integer ``data_type``
-      | ``feature_type::continuous`` avaliable only with floating-point ``data_type``
+      | ``feature_type::contiguous`` avaliable only with floating-point ``data_type``
 
 Data type
 ---------
-Structure representing runtime information about feature data type.
-
-|dal_short_name| supports signed/unsigned 32/64 bit integer types
-and 32/64 bit floating point types for table data.
-
 ::
 
    enum class data_type : std::int64_t {
@@ -288,23 +429,39 @@ and 32/64 bit floating point types for table data.
       f32, f64
    };
 
+.. namespace:: onedal
+.. class:: data_type
+
+   Structure representing runtime information about feature data type.
+
+   |dal_short_name| supports next data types:
+   - `std::uint32_t`
+   - `std::uint64_t`
+   - `std::int32_t`
+   - `std::int64_t`
+   - `float`
+   - `double`
+
 Feature type
 ------------
-Structure representing runtime information about feature logical type.
-
 ::
 
    enum class feature_type : std::int64_t {
       nominal,
       ordinal,
-      continuous
+      contiguous
    };
 
-feature_type::nominal
-   Discrete feature type, non-ordered
+.. namespace:: onedal
+.. class:: feature_type
 
-feature_type::ordinal
-   Discrete feature type, ordered
+   Structure representing runtime information about feature logical type.
 
-feature_type::continuous
-   Continuous feature type
+   feature_type::nominal
+      Discrete feature type, non-ordered
+
+   feature_type::ordinal
+      Discrete feature type, ordered
+
+   feature_type::contiguous
+      Contiguous feature type
