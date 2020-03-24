@@ -7,32 +7,14 @@
 |mkl_full_name| (oneMKL)
 ========================
 
-The |mkl_full_name| (oneMKL) is a computing math library of highly
-optimized and extensively parallelized routines for applications that
-require maximum performance. oneMKL contains the high performance
-optimizations from the full Intel® Math Kernel Library for CPU
-architectures (with C/Fortran programming language interfaces) and
-adds to them a set of Data Parallel C++ (DPC++) programming language
-interfaces for achieving performance on various CPU and Intel® GPU
-architectures for certain key functionalities. The new DPC++
-interfaces with optimizations for CPU and Intel® GPU architectures
-have been added for key functionality in the following major areas of
-computation:
+The |mkl_full_name| (oneMKL) defines a set of fundamental mathematical routines for use in high-performance computing and other applications. As part of oneAPI, oneMKL is designed to allow execution on a wide variety of computational devices: CPUs, GPUs, FPGAs, and other accelerators. The functionality is subdivided into several domains: dense linear algebra, sparse linear algebra, discrete Fourier transforms, random number generators and vector math.
 
-- BLAS and LAPACK - dense linear algebra routine
+The general assumptions, design features and requirements for the oneMKL library and its routines will be described in :ref:`onemkl_architecture`.  The individual domains and their APIs are described in :ref:`onemkl_domains`.
 
-- Sparse BLAS - sparse linear algebra routines
 
-- Fast Fourier Transform (FFT)
+.. toctree::
+   :maxdepth: 2
+   :numbered:
 
-- Random number generators (RNG)
-
-- Vector Mathematics (VM) routines for optimized mathematical operations on vectors
-
-Detailed API Descriptions
--------------------------
-
-The detailed list of functions and their specification can be found in
-the `oneMKL specification`_.
-
-.. _`oneMKL specification`: https://spec.oneapi.com/versions/0.6.0/oneMKL/index.htm
+   architecture/architecture.rst
+   domains/domains.rst

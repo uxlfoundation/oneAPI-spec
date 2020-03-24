@@ -70,6 +70,7 @@ exclude_patterns = [#'404.rst',
                     'elements/oneTBB/source/uncategorized/**',
                     'elements/oneTBB/source/low_level_task_api.rst',
                     'elements/oneTBB/source/low_level_tasking/**',
+                    '**/*.inc.rst',
 ]
 
 # The name of the Pygments (syntax highlighting) style to use.
