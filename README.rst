@@ -5,16 +5,16 @@ oneAPI Specifications
 .. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
    :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
 
-This repo contains the sources for the `oneAPI Specification`_
+This repo contains the sources for the `oneAPI Specification`_.
 
 The document is built with `Sphinx`_ using a theme provided by `Read
-the Docs`_
+the Docs`_.
 
 ---------------------------------
-Editing with Github Web Interface
+Editing with GitHub Web Interface
 ---------------------------------
 
-The simplest and quickest way to edit is directly in the github web
+The simplest and quickest way to edit is directly in the GitHub web
 interface. It has an editor, previewer, and lets you commit
 changes. You won't need to install any local tools. The previewer
 knows how to render RST, but not the sphinx directives so it will not
@@ -32,11 +32,11 @@ to do the same task manually.
 Setup
 -----
 
-Install python 3 and doxygen (>= 1.8.17).  To install on **Ubuntu**::
+Install Python 3 and doxygen (>= 1.8.17).  To install on **Ubuntu**::
 
    sudo scripts/install.sh
 
-Create and activate a python virtual environment with all required tools::
+Create and activate a Python virtual environment with all required tools::
 
   python scripts/oneapi.py spec-venv
   source spec-venv/bin/activate
@@ -45,12 +45,12 @@ To install directly with pip::
 
   pip install -r requirements.txt
 
-On windows::
+On Windows::
 
   python scripts\oneapi.py spec-venv
   spec-venv\Scripts\activate
   
-MKL and Level Zero are temporarily in separate private repos. If you have access to the repos you can clone them::
+MKL and Level Zero are temporarily in separate private repos. If you have access to the repos, you can clone them::
 
   python scripts/oneapi.py clones
 
@@ -61,8 +61,8 @@ To build the html document::
 
   python scripts/oneapi.py html
 
-This will not work on windows because we are using symbolic links for
-the elements that are in separate repos. However, windows can build
+This will not work on Windows because we are using symbolic links for
+the elements that are in separate repos. However, Windows can build
 individual specs for individual elements.
 
 The document is organized as a book with chapters. Each element of
@@ -91,7 +91,7 @@ examples. We may not want to try to correct them.
 Editing Tools
 -------------
 
-For simple edits to individual files, you can use the github web
+For simple edits to individual files, you can use the GitHub web
 interface.
 
 **Emacs** has a built-in ReST mode. It does some syntax highlighting and
@@ -125,12 +125,12 @@ You can run a docker container with::
 CI
 --
 
-We use Github actions. See .github/workflows/main.yml
+We use GitHub actions. See `<.github/workflows/main.yml>`_
 
 On every commit, the CI system builds and publishes the document to
 the staging server. To see the URL, look at the end of the log for the
 build step in the CI system. The staging server is an s3 bucket, and
-the access keys are managed as github action secrets. PR's based on
+the access keys are managed as GitHub action secrets. PR's based on
 forks do not have access to the keys and will not publish on the
 staging server.
 
