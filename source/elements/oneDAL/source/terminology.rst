@@ -33,7 +33,7 @@ Terminology
      OpenCL [OpenCLSpec]_ refers to CPU that controls the connected GPU executing kernels.
 
    Immutability
-     The object is immutable when it is not possible to change its state after it is constructed
+     The object is immutable when it is not possible to change its state after it is constructed.
 
    JIT
      Just in Time Compilation --- compilation during execution of a program.

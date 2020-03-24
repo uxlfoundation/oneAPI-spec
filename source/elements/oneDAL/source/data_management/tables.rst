@@ -20,7 +20,7 @@ Table object is a container of two entities: data and metadata.
 -------------------------------
 Table types in |dal_short_name|
 -------------------------------
-|dal_short_name| defines a set of classes, each class implements a table contact
+|dal_short_name| defines a set of classes, each class implements a table contract
 with a specific set of metadata values (see :ref:`Metadata API` for details):
 
 .. list-table::
@@ -55,7 +55,7 @@ with a specific set of metadata values (see :ref:`Metadata API` for details):
 -----------------------------
 Requirements on table objects
 -----------------------------
-Each table object in |dal_short_name| follow these requirements:
+Each table object in |dal_short_name| follows these requirements:
 
 1. Table objects in |dal_short_name| are :term:`immutable <Immutability>` (it is not possible
    to change data or metadata values inside the table).
@@ -72,8 +72,8 @@ Each table object in |dal_short_name| follow these requirements:
       table3 = table2;
       // table1, table2 and table3 share the same data
 
-4. Every table type must be inherited from the base ``table`` class, which represents
-   a generalized table API. (see :ref:`Table API` for details)
+4. Every table type must be inherited from the base ``table`` class,
+   which represents a generalized :ref:`table API <Table API>`.
 
 5. Every table type is implemented over particular set of metadata values and must hide other
    implementation details from public API.
@@ -122,7 +122,7 @@ Table API
 
    .. function:: table(TableImpl&&)
 
-      Creates a table object using the implementation passes an a parameter
+      Creates a table object using the entity passed as a parameter
 
       :tparam TableImpl: The class that contains the table's implementation
 
@@ -135,7 +135,7 @@ Table API
 
    .. function:: table(table&&)
 
-      Moves current reference object into another one
+      Moves one table object into another
 
    .. function:: table& operator=(const table&)
 
@@ -227,14 +227,14 @@ for which the following is true:
 
    .. function:: homogen_table(std::int64_t N, std::int64_t p, data_layout layout)
 
-      Creates a homogeneous table with shape of :math:`(N \times p)` with
+      Creates a homogeneous table of shape :math:`N \times p` with
       default |dal_short_name| allocator
 
    .. function:: homogen_table(const T* const data_pointer, std::int64_t N, std::int64_t p, data_layout layout)
 
       :tparam T: The type of pointer to the data
 
-      Creates a homogeneous table with shape of :math:`(N \times p)` with
+      Creates a homogeneous table of shape :math:`N \times p` with
       the user-defined data. Uses the provided pointer to access data (no copy is performed).
 
    .. function:: homogen_table& operator=(const homogen_table&)
