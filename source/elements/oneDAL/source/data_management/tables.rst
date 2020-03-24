@@ -14,8 +14,8 @@ Table object is a container of two entities: data and metadata.
   is a number of :term:`features <Feature>`.
 
 - Metadata defines the detailed structure of the data and,
-therefore, helps |dal_short_name| to access the data efficiently
-(see :ref:`Metadata API` section for details).
+  therefore, helps |dal_short_name| to access the data efficiently
+  (see :ref:`Metadata API` section for details).
 
 -------------------------------
 Table types in |dal_short_name|
@@ -187,8 +187,8 @@ Class ``homogen_table`` is an implementation of a table type
 for which the following is true:
 
 - Its data is dense and it is stored as one contiguous memory block
-- All features have the same :ref:`data type`
-(but :ref:`feature types <Feature type>` may differ)
+- All features have the same :ref:`data type <Data type>`
+  (but :ref:`feature types <Feature type>` may differ)
 
 ::
 
@@ -440,12 +440,13 @@ Data type
    Structure that represents runtime information about feature data type.
 
    |dal_short_name| supports next data types:
-   - `std::uint32_t`
-   - `std::uint64_t`
-   - `std::int32_t`
-   - `std::int64_t`
-   - `float`
-   - `double`
+
+   - ``std::uint32_t``
+   - ``std::uint64_t``
+   - ``std::int32_t``
+   - ``std::int64_t``
+   - ``float``
+   - ``double``
 
 .. _Feature type:
 
