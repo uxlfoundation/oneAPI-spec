@@ -20,3 +20,8 @@ For more information about algorithms implemented in |dal_full_name|
 .. [Lloyd82]
    Stuart P Lloyd. *Least squares quantization in PCM*. IEEE Transactions on
    Information Theory 1982, 28 (2): 1982pp: 129–137.
+
+.. [Bro07]
+   Bro, R.; Acar, E.; Kolda, T.. *Resolving the sign ambiguity in the singular
+   value decomposition*. SANDIA Report, SAND2007-6422, Unlimited Release,
+   October, 2007.
