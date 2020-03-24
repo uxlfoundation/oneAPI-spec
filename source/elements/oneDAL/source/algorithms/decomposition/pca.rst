@@ -5,17 +5,29 @@
 Principal Components Analysis (PCA)
 ===================================
 
+.. TODO: we either need to refer to the literature that describe the algorithm
+.. (in present daal docs we do not always do that) or specify somewhere a single
+.. source that contain all such descriptions and add more refs in individual algos
+.. when necessary. It would help avoid different interpretation of the possible
+.. minor differences and precisely say-we rely on that specific scheme
+
 Principal Component Analysis (PCA) is an algorithm for exploratory data analysis
-and dimensionality reduction. PCA transforms a set of observations of possibly
-correlated variables to a new set of uncorrelated variables, called principal
-components. Principal components are the directions of the largest variance,
-that is, the directions where the data is mostly spread out.
+and dimensionality reduction. PCA transforms a set of feature vectors of
+possibly correlated features to a new set of uncorrelated features, called
+principal components. Principal components are the directions of the largest
+variance, that is, the directions where the data is mostly spread out.
 
 Given the training set :math:`X = \{ x_1, \ldots, x_n \}` of
-:math:`p`-dimensional samples and the number of principal components :math:`r`,
-the problem is to compute :math:`r` principal directions (:math:`p`-dimensional
-eigenvectors) for the training set. The eigenvectors can be grouped into the
-:math:`r \times p` matrix :math:`T` that contains one eigenvectors in each row.
+:math:`p`-dimensional feature vectors and the number of principal components
+:math:`r`, the problem is to compute :math:`r` principal directions
+(:math:`p`-dimensional eigenvectors) for the training set. The eigenvectors can
+be grouped into the :math:`r \times p` matrix :math:`T` that contains one
+eigenvector in each row.
+
+oneDAL specifies two methods for PCA computation:
+
+#. `Covariance-based method`_
+#. `SVD-based method`_
 
 -----------------------
 Covariance-based method
@@ -33,14 +45,14 @@ Sign-flip technique
 Eigenvectors computed by some eigenvalue solvers are not uniquely defined due to
 sign ambiguity. To get the deterministic result, a sign-flip technique should be
 applied. One of the sign-flip techniques proposed in [Bro07]_ requires the
-following modification of eigenvectors matrix :math:`T`,
+following modification of matrix :math:`T`:
 
 .. math::
    \hat{T}_i = T_i \cdot \mathrm{sgn}(\max_{1 \leq j \leq p } |{T}_{ij}|), \quad 1 \leq i \leq r,
 
-where :math:`T` is eigenvectors matrix, :math:`T_i` is :math:`i`-th row,
-:math:`T_{ij}` is the element in the :math:`i`-th and :math:`j`-th column,
-:math:`\mathrm{sgn}(\cdot)` is signum function,
+where :math:`T_i` is :math:`i`-th row, :math:`T_{ij}` is the element in the
+:math:`i`-th row and :math:`j`-th column, :math:`\mathrm{sgn}(\cdot)` is the
+signum function,
 
 .. math::
    \mathrm{sgn}(x) =
@@ -51,10 +63,9 @@ where :math:`T` is eigenvectors matrix, :math:`T_i` is :math:`i`-th row,
       \end{cases}
 
 .. note::
-   The sign-flip technique described above is provided as an example. oneDAL
-   spec does not require implementation of this sign-flip technique.
-   Implementers can choose an arbitrary technique that modifies sign of the
-   eigenvectors or use deterministic algorithm for eigenvectors computations.
+   The sign-flip technique described above is an example. oneDAL spec does not
+   require implementation of this sign-flip technique. Implementer can choose an
+   arbitrary technique that modifies the eigenvectors' signs.
 
 
 -------------
@@ -66,7 +77,7 @@ Usage example
 
       const auto pca_desc = onedal::pca::desc<float>{}
          .set_component_count(5)
-         .set_is_deterministic(true);
+         .set_deterministic(true);
 
       const auto result = onedal::train(pca_desc, data);
 
@@ -103,7 +114,7 @@ Methods
    namespace method {
       struct cov {};
       struct svd {};
-      using by_default = svd;
+      using by_default = cov;
    } // namespace method
 
 
@@ -119,9 +130,9 @@ Methods
    Tag-type that denotes `SVD-based method`_.
 
 
-.. type:: by_default = svd
+.. type:: by_default = cov
 
-   Alias tag-type for the `SVD-based method`_.
+   Alias tag-type for the `Covariance-based method`_.
 
 
 Descriptor
@@ -135,10 +146,10 @@ Descriptor
       desc();
 
       int64_t get_component_count() const;
-      bool get_is_deterministic() const;
+      bool get_deterministic() const;
 
       desc& set_component_count(int64_t);
-      desc& set_is_deterministic(bool);
+      desc& set_deterministic(bool);
    };
 
 .. namespace:: onedal::pca
@@ -150,18 +161,20 @@ Descriptor
    :tparam Float: The floating-point type that the algorithm uses for
                   intermediate computations. Can be :expr:`float` or :expr:`double`.
 
-   :tparam Method: Tag-type that specifies variant of PCA algorithm. Can be
-                   :expr:`method::cov`, :expr:`method::svd` or :expr:`method::by_default`.
+   :tparam Method: Tag-type that specifies an implementation of PCA algorithm.
+                   Can be :expr:`method::cov`, :expr:`method::svd` or
+                   :expr:`method::by_default`.
 
    .. function:: desc()
 
-      Creates new instance of descriptor with the default attribute values.
+      Creates a new instance of the descriptor with the default attribute
+      values.
 
 
    .. member:: std::int64_t component_count = 0
 
       The number of principal components :math:`r`. If it is zero, the algorithm
-      will compute the eigenvectors for all features, :math:`r = p`.
+      computes the eigenvectors for all features, :math:`r = p`.
 
       Getter & Setter
          | ``std::int64_t get_component_count() const``
@@ -171,15 +184,15 @@ Descriptor
          | :expr:`component_count >= 0`
 
 
-   .. member:: bool set_is_deterministic = true
+   .. member:: bool set_deterministic = true
 
-      Specifies whether the algorithm applies `Sign-flip technique`_ or uses
-      deterministic eigenvalues solver. If it is `true`, directions of the
+      Specifies whether the algorithm applies the `Sign-flip technique`_ or uses
+      a deterministic eigenvalues solver. If it is `true`, directions of the
       eigenvectors must be deterministic.
 
       Getter & Setter
-         | ``bool get_is_deterministic() const``
-         | ``desc& set_is_deterministic(bool)``
+         | ``bool get_deterministic() const``
+         | ``desc& set_deterministic(bool)``
 
 
 Model
@@ -198,7 +211,7 @@ Model
 
    .. function:: model()
 
-      Creates model with default attribute values.
+      Creates a model with the default attribute values.
 
 
    .. member:: table eigenvectors = table()
@@ -218,7 +231,7 @@ Model
          | ``std::int64_t get_component_count() const``
 
       Invariants
-         | :expr:`component_count == centroids.row_count`
+         | :expr:`component_count == eigenvectors.row_count`
 
 
 
@@ -253,8 +266,8 @@ Input
 
    .. member:: table data = table()
 
-      :math:`n \times p` table with the data to be clustered, where each row
-      stores one sample.
+      :math:`n \times p` table with the training data, where each row stores one
+      feature vector.
 
       Getter & Setter
          | ``const table& get_data() const``
@@ -285,7 +298,7 @@ Result
 
    .. member:: pca::model model = pca::model()
 
-      The trained K-means model.
+      The trained PCA model.
 
       Getter
          | ``const model& get_model() const``
@@ -293,7 +306,8 @@ Result
 
    .. member:: table means = table()
 
-      :math:`1 \times r` table that contains mean value for each feature.
+      :math:`1 \times r` table that contains mean value for the first :math:`r`
+      features.
 
       Getter
          | ``const table& get_means() const``
@@ -301,7 +315,8 @@ Result
 
    .. member:: table variances = table()
 
-      :math:`1 \times r` table that contains variance for each feature.
+      :math:`1 \times r` table that contains variance for the first :math:`r`
+      features.
 
       Getter
          | ``const table& get_variances() const``
@@ -309,7 +324,8 @@ Result
 
    .. member:: table eigenvalues = table()
 
-      :math:`1 \times r` table that contains eigenvalue for each feature.
+      :math:`1 \times r` table that contains eigenvalue for for the first
+      :math:`r` features.
 
       Getter
          | ``const table& get_eigenvalues() const``
@@ -333,6 +349,7 @@ Operation semantics
       | :expr:`result.means.column_count == desc.component_count`
       | :expr:`result.variances.row_count == 1`
       | :expr:`result.variances.column_count == desc.component_count`
+      | :expr:`result.variances >= 0.0`
       | :expr:`result.eigenvalues.row_count == 1`
       | :expr:`result.eigenvalues.column_count == desc.component_count`
       | :expr:`result.model.eigenvectors.row_count == 1`
