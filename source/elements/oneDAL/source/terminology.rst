@@ -6,10 +6,10 @@ Terminology
 
 .. glossary::
 
-   API 
+   API
      Application Programming Interface
 
-   Batch Mode 
+   Batch Mode
      The computation mode for an algorithm in |dal_short_name|, where all the data needed for
      computation is available at the start and fits the memory of the device on which the computations are performed.
 
@@ -21,16 +21,19 @@ Terminology
    DPC++
      Data Parallel C++ (DPC++) is a high-level language designed for data parallel programming productivity.
      DPC++ is based on :term:`SYCL* <sycl>` from the Khronos* Group to support data parallelism and heterogeneous programming.
-     
+
    Feature
-     A single column of matrix :math:`X` from a dataset.
+     A single vector of length `N` that encodes information about values of a single :term:`variable`.
 
    Feature vector
      A single real-valued vector of length :math:`p` that encodes information about a real
      object or an event.
 
    Host/Device
-     OpenCL [OpenCLSpec]_ refers to CPU that controls the connected GPU executing kernels. 
+     OpenCL [OpenCLSpec]_ refers to CPU that controls the connected GPU executing kernels.
+
+   Immutability
+     The object is immutable when it is not possible to change its state after it is constructed.
 
    JIT
      Just in Time Compilation --- compilation during execution of a program.
@@ -66,6 +69,9 @@ Terminology
 
    Use case
      A scenario that describes how a user might interact with a |dal_short_name| algorithm.
+
+   Variable
+     A single attribute of described object with defined type and domain.
 
    Workload
      A task of applying a |dal_short_name| algorithm to a dataset.

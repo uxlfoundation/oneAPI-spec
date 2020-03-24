@@ -13,3 +13,4 @@ and for model representation.
 
    tables.rst
    accessors.rst
+   builders.rst
