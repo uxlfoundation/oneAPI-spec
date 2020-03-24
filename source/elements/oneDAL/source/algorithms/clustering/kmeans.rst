@@ -5,25 +5,26 @@
 K-Means
 =======
 
-The K-Means algorithm partitions :math:`n` samples into :math:`k` *clusters*
-minimizing some criterion. Each cluster is characterized by a representative
-point, called *a centroid*.
+The K-Means algorithm partitions :math:`n` feature vectors into :math:`k`
+*clusters* minimizing some criterion. Each cluster is characterized by a
+representative point, called *a centroid*.
 
 Given the training set :math:`X = \{ x_1, \ldots, x_n \}` of
-:math:`p`-dimensional samples and a positive integer :math:`k`, the problem is
-to find a set :math:`C = \{ c_1, \ldots, c_k \}` of :math:`p`-dimensional
-centroids that minimize the objective function
+:math:`p`-dimensional feature vectors and a positive integer :math:`k`, the
+problem is to find a set :math:`C = \{ c_1, \ldots, c_k \}` of
+:math:`p`-dimensional centroids that minimize the objective function
 
 .. math::
    \Phi_{X}(C) = \sum_{i = 1}^n d^2(x_i, C),
 
-where :math:`d^2(x_i, C)` is the squared Euclidean distance from :math:`x_i`
-to the closest center in :math:`C`,
+where :math:`d^2(x_i, C)` is the squared Euclidean distance from :math:`x_i` to
+the closest centroid in :math:`C`,
 
 .. math::
-   d^2(x_i, C) = \min_{1 \leq j \leq k} \| x_i - c_j \|^2, \quad 1 \leq i \leq k.
+   d^2(x_i, C) = \min_{1 \leq j \leq k} \| x_i - c_j \|^2, \quad 1 \leq i \leq n.
 
-Expression :math:`\|\cdot\|` denotes :math:`L_2` norm.
+Expression :math:`\|\cdot\|` denotes :math:`L_2` `norm
+<https://mathworld.wolfram.com/L2-Norm.html>`_.
 
 .. note::
    In the general case, :math:`d` may be an arbitrary distance function. Current
@@ -36,24 +37,26 @@ Lloyd's method
 
 The Lloyd's method [Lloyd82]_ consists in iterative updates of centroids by
 applying the alternating *Assignment* and *Update* steps, where :math:`t`
-denotes a number of the current iteration, e.g., :math:`C^{(t)} = \{ c_1^{(t)},
+denotes a index of the current iteration, e.g., :math:`C^{(t)} = \{ c_1^{(t)},
 \ldots, c_k^{(t)} \}` is the set of centroids at the :math:`t`-th iteration. The
-method requires the initial centroids :math:`C^{(1)}` to be specified.
+method requires the initial centroids :math:`C^{(1)}` to be specified at the
+beginning of the algorithm (:math:`t = 1`).
 
-**(1) Assignment step:** Each sample :math:`x_i` is assigned to the nearest centroid.
+**(1) Assignment step:** Assign each feature vector :math:`x_i` to the nearest
+centroid. :math:`y_i^{(t)}` denotes the assigned label (cluster index) to the
+feature vector :math:`x_i`.
 
 .. math::
    y_i^{(t)} = \mathrm{arg}\min_{1 \leq j \leq k} \| x_i - c_j^{(t)} \|^2, \quad 1 \leq i \leq n.
 
-Each observation from the training set :math:`X` is assigned to exactly one
-centroid such that :math:`X` is partitioned to :math:`k` disjoint sets
-(clusters)
+Each feature vector from the training set :math:`X` is assigned to exactly one
+centroid so that :math:`X` is partitioned to :math:`k` disjoint sets (clusters)
 
 .. math::
    S_j^{(t)} = \big\{ \; x_i \in X : \; y_i^{(t)} = j \; \big\}, \quad 1 \leq j \leq k.
 
-**(2) Update step:** Recalculate centroids by averaging samples assigned to each
-cluster.
+**(2) Update step:** Recalculate centroids by averaging feature vectors assigned
+to each cluster.
 
 .. math::
    c_j^{(t + 1)} = \frac{1}{|S_j^{(t)}|} \sum_{x \in S_j^{(t)}} x, \quad 1 \leq j \leq k.
@@ -124,7 +127,7 @@ Methods
 
 .. type:: by_default = lloyd
 
-   Alias tag-type for the Lloyd's method.
+   Alias tag-type for the `Lloyd's method`_.
 
 
 Descriptor
@@ -154,8 +157,9 @@ Descriptor
    :tparam Float: The floating-point type that the algorithm uses for
                   intermediate computations. Can be :expr:`float` or :expr:`double`.
 
-   :tparam Method: Tag-type that specifies variant of K-Means algorithm. Can be
-                   :expr:`method::lloyd` or :expr:`method::by_default`.
+   :tparam Method: Tag-type that specifies an implementation of K-Means
+                   algorithm. Can be :expr:`method::lloyd` or
+                   :expr:`method::by_default`.
 
    .. function:: desc()
 
@@ -213,7 +217,7 @@ Model
 
    .. function:: model()
 
-      Creates model with default attribute values.
+      Creates a model with the default attribute values.
 
 
    .. member:: table centroids = table()
@@ -278,7 +282,7 @@ Input
    .. member:: table data = table()
 
       :math:`n \times p` table with the data to be clustered, where each row
-      stores one sample.
+      stores one feature vector.
 
       Getter & Setter
          | ``const table& get_data() const``
@@ -327,8 +331,8 @@ Result
 
    .. member:: table labels = table()
 
-      :math:`n \times 1` table with assignments of cluster indices to samples in
-      the input data.
+      :math:`n \times 1` table with the labels :math:`y_i` assigned to the
+      samples :math:`x_i` in the input data, :math:`1 \leq 1 \leq n`.
 
       Getter
          | ``const table& get_labels() const``
@@ -336,7 +340,7 @@ Result
 
    .. member:: std::int64_t iteration_count = 0
 
-      Actual number of iterations performed by the algorithm.
+      The number of iterations performed by the algorithm.
 
       Invariants
          | :expr:`iteration_count >= 0`
@@ -419,7 +423,7 @@ Input
    .. member:: table data = table()
 
       :math:`n \times p` table with the data to be assigned to the clusters,
-      where each row stores one sample.
+      where each row stores one feature vector.
 
       Getter & Setter
          | ``const table& get_data() const``
@@ -458,8 +462,8 @@ Result
 
    .. member:: table labels = table()
 
-      :math:`n \times 1` table with assignments of cluster indices to samples in
-      the input data.
+      :math:`n \times 1` table with assignments labels to feature vectors in the
+      input data.
 
       Getter
          | ``const table& get_labels() const``
