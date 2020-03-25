@@ -54,7 +54,7 @@ computations with this memory. For example:
   concat dimension / axis.
 
 * A forward convolution with a source memory object with zero in the minibatch
-  dimension would always produce a detination memory object with a zero in the
+  dimension would always produce a destination memory object with a zero in the
   minibatch dimension and perform no computations.
 
 * However, a forward convolution with a zero in one of the weights dimensions

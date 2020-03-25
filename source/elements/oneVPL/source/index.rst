@@ -9,9 +9,9 @@
 
 The |vpl_full_name| is a programming interface for video processing and video analytics,
 focusing on building portable media pipeline on CPU, GPU, Deep Learning (DL) 
-accelerators and FPGA. It aims for function and performance portabilities such that
+accelerators and FPGA. It aims for function and performance portability such that
 applications built with oneVPL can be efficiently executed on the current and future 
-generation hardware without modification. oneVPL libary provides the following features:
+generation hardware without modification. oneVPL library provides the following features:
 
 1. Cross architecture building blocks for Decode, Video Processing, Encode and 
    DL based video analytics.

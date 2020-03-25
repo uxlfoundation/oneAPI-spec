@@ -53,7 +53,7 @@ Target Audience
 The expected audience for this specification includes: application
 developers, middleware developers, system software providers, and
 hardware providers. As a *contributor* to this specification, you will
-shape the accelerator software eco-system. A productive and high
+shape the accelerator software ecosystem. A productive and high
 performing system must take into account the constraints at all levels
 of the software stack. As a *user* of this document, you can ensure
 that your components will inter-operate with applications and system

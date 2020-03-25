@@ -25,7 +25,7 @@ capabilities such as:
 * User-defined pre-/post-processing of incoming buffers and reduction
   operation
 * Prioritization for communication operations
-* Persistent communication operations (enables de-coupling one-time
+* Persistent communication operations (enables decoupling one-time
   initialization and repetitive execution)
 * Fusion of multiple communication operations into the single one
 * Unordered communication operations

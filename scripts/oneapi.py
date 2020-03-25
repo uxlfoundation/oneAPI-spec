@@ -328,6 +328,14 @@ def purge(root, target=None):
             print('http://spec.oneapi.com/%s/%s' % (r, file))
     
 @action
+def sort_words(root, target=None):
+    with open(join('source', 'spelling_wordlist.txt')) as fin:
+        lines = fin.readlines()
+    with open(join('source', 'spelling_wordlist.txt'), 'w') as fout:
+        for l in sorted(list(set(lines))):
+            fout.write(l)
+        
+@action
 def ci(root, target=None):
     root_only(root)
     get_tarballs(root)
@@ -354,6 +362,7 @@ commands = {'ci': ci,
             'prod-publish': prod_publish,
             'purge': purge,
             'site': site,
+            'sort-words': sort_words,
             'spec-venv': spec_venv,
             'stage-publish': stage_publish}
     

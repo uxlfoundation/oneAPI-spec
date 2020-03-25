@@ -4,14 +4,14 @@ GPU support
 The choice between CPU and GPU backends is performed by specifying ``ccl_stream_type`` value at the moment when ccl stream object is created:
 
 - For GPU backend you should specify ``ccl_stream_sycl`` as the first argument. 
-- For collective operations, which operate on SYCL* stream, C version of oneCCL API expects communication buffers to be ``sycl::buffer*`` objects casted to ``void*``.
+- For collective operations, which operate on SYCL* stream, C version of oneCCL API expects communication buffers to be ``sycl::buffer*`` objects cast to ``void*``.
 
 The example below demonstrates these concepts.
 
 Example
 -------
 
-Conisider simple ``allreduce`` example for GPU. 
+Consider simple ``allreduce`` example for GPU. 
 
 #. Create GPU ccl stream object:
 
@@ -38,7 +38,7 @@ Conisider simple ``allreduce`` example for GPU.
             host_acc_sbuf[i] = rank;
         }
 
-#. For demostration purposes only, modify the ``sendbuf`` on the GPU side:
+#. For demonstration purposes only, modify the ``sendbuf`` on the GPU side:
 
     ::
 

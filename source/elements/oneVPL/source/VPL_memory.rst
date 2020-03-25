@@ -172,7 +172,7 @@ This helper class issues acquire and release operations to mark
 start/stop data access in constructor and destructor.  Another
 "feature" of these helper classes is that they accept base
 memory object (:cpp:class:`vplm::memory`) in constructors. This means that we can
-use helper classes to make implicit convertion between different
+use helper classes to make implicit conversion between different
 framework objects. For example, with the following we will map our
 VAAPI image on to CPU:
 

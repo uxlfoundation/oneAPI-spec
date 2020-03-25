@@ -78,7 +78,7 @@ Description
 
 With this extension the ``function_node``, the
 ``multifunction_node``, the ``async_node`` and the
-``continue_node`` accept additional contstructor parameter of
+``continue_node`` accept additional constructor parameter of
 ``node_priority_t`` type, which sets the node priority in the graph: the larger
 the specified value for the parameter, the higher the priority. The special constant value
 ``no_priority``, also the default value of the parameter, switches priority off
@@ -90,7 +90,7 @@ task to execute, a thread will choose the one with the highest priority from tho
 graph which are available to be executed.
 
 If a node with priority has nested parallel construct the thread that waits this parallel
-contruct to complete might take tasks with no priority, but may not take another priority
+construct to complete might take tasks with no priority, but may not take another priority
 task. If such behavior is undesirable, we recommend to either use isolation or specify a
 priority for each node.
 
@@ -109,7 +109,7 @@ mechanism in the library.
 Example
 -------
 
-The following basic example demostrates prioritization of one path in the graph over the
+The following basic example demonstrates prioritization of one path in the graph over the
 other, which may help to improve overall performance of the graph.
 
 .. figure:: ../Resources/critical_path_in_graph.png

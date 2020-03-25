@@ -83,7 +83,7 @@ public:
    */
   VplDeviceProperty* GetDeviceProperty(VplDeviceType dtype, uint32_t id);
 
-  /** \brief Get prefered device
+  /** \brief Get preferred device
    * 
    * \param[in] wstypes a bit mask of workstream types
    * \return preferred device instance for the workstream type

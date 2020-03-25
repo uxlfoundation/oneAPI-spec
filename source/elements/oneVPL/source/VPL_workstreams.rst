@@ -11,7 +11,7 @@ There are four subclasses of :class:`vpl::Workstream` that perform the following
 - :class:`vpl::Encode`: encode raw frames to a bitstream 
 
 In the :class:`vpl::VideoProcess` subclass, a sequence of filters with single input and single output running on the same device context can be fused into a single workstream. 
-Operations executing on different device contexts are separated to different worksteams such that each workstream can always be dispatched to a single device. 
+Operations executing on different device contexts are separated to different workstreams such that each workstream can always be dispatched to a single device. 
 
 Workstream Internals
 --------------------
@@ -21,7 +21,7 @@ Each :class:`vpl::Workstream` contains the following members:
 - :class:`vpl::VplParams`: the parameter settings of the workstream, i.e., resolution of the output per session or per frame.
 - :class:`vpl::DeviceContext`: the execution device context of the workstream, i.e., VAAPI, DX, OCL, GL contexts for media, compute and rendering operations
 
-Workstream per session configurations are set up during workstream instialization using :class:`vpl::VplParams`. User program can also dynamically modify a workstream's configuration
+Workstream per session configurations are set up during workstream initialization using :class:`vpl::VplParams`. User program can also dynamically modify a workstream's configuration
 frame level control.
 
 Initialization Sequence
@@ -104,7 +104,7 @@ Dynamic Setting Control
 
 The :class:`vpl::VplParams` defines the workstream settings for the device. 
 User program can use its access functions to read and set the parameters for the workstream.
-After modifying configuration settings, a user program needs to call :cpp:func:`vpl::Workstream::UpdateDeviceConfig` function to propapge the setting to the
+After modifying configuration settings, a user program needs to call :cpp:func:`vpl::Workstream::UpdateDeviceConfig` function to propagate the setting to the
 device context. Configuration setting change takes effect in the next processing operation.
 The following example changes the output resolution in the middle of a decoding sequence.
 

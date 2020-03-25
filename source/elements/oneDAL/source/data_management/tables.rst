@@ -60,7 +60,7 @@ Each table object in |dal_short_name| follows these requirements:
 1. Table objects in |dal_short_name| are :term:`immutable <Immutability>` (it is not possible
    to change data or metadata values inside the table).
 
-2. To create compex table types or modify table data, :ref:`builders <Builders>` should be used.
+2. To create complex table types or modify table data, :ref:`builders <Builders>` should be used.
 
 3. Table objects in |dal_short_name| are reference-counted. One can use an assignment operator or copy constructor
    on table objects to create another reference to it.

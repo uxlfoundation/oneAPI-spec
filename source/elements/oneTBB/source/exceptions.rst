@@ -15,7 +15,7 @@ The exact exception is captured when both of the following conditions are true:
 * The task's ``task_group_context`` was created in a translation unit compiled with ``TBB_USE_CAPTURED_EXCEPTION=0``.
 * The TBB library was built with a compiler that supports the ``std::exception_ptr`` feature of C++11.
 
-Otherwise an appoximation of the original exception *x* is captured as follows:
+Otherwise an approximation of the original exception *x* is captured as follows:
 
 * If ``x`` is a ``tbb_exception``, it
   is captured by ``x.move()``.

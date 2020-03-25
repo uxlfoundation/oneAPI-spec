@@ -29,5 +29,5 @@ Collective Call Attributes
         const char* match_id;
     } ccl_coll_attr_t;
 
-``ccl_coll_attr_t`` (``ccl::coll_attr`` in C++ version of API) is extendable structure which serves as a modificator of communication primitive behaviour. 
+``ccl_coll_attr_t`` (``ccl::coll_attr`` in C++ version of API) is extendable structure which serves as a modifier of communication primitive behavior. 
 It can be optionally passed into any collective operation exposed by oneCCL.

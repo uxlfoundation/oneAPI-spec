@@ -189,7 +189,7 @@ public:
  * getting/setting properties.
  *
  * To access underlying memory object within some framework (like
- * Opencl or VAAPI), VPL Memory C++ API defines framework specific
+ * OpenCL or VAAPI), VPL Memory C++ API defines framework specific
  * memory handlers inherited from this base class. The key thing
  * to note is that end user can construct framework handler from
  * the base memory object. For example:

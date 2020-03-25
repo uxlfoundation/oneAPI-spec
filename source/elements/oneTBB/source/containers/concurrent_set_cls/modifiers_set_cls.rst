@@ -51,7 +51,7 @@ The following table provides information on the members of the
 \ ``std::pair<iterator, bool> insert(node_type&& nh)``.
   \
   Attempts to insert the node owned by ``nh`` into the set.
-  If the attempt fails because an equvalent item already exists,
+  If the attempt fails because an equivalent item already exists,
   ownership of the node remains at ``nh``.
   Otherwise ``nh`` is left in an empty state.
   
@@ -98,7 +98,7 @@ The following table provides information on the members of the
 
      The ``merge`` operation is concurrency-safe for the target set
      (i.e. the instance for which the method is called), but not for the source set.
-     The behaviour is underfined if ``source`` is concurrently
+     The behavior is undefined if ``source`` is concurrently
      modified or merged into more than one target set.
   
 ------------------------------------------------------------------------------------------
