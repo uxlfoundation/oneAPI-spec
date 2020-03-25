@@ -50,7 +50,6 @@ import common_conf
 args = None
 
         
-sphinx_opts    = '-q'
 sphinx_build   = 'sphinx-build'
 source_dir     = 'source'
 build_dir      = 'build'
@@ -117,13 +116,14 @@ def makedirs(path):
     os.makedirs(path)
 
 def sphinx(root, target):
-    os.environ['LATEXMKOPTS'] = '--silent'
-    os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
+    if not args.verbose:
+        os.environ['LATEXMKOPTS'] = '--silent'
+        os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
                                  join(root,build_dir),
-                                 sphinx_opts))
+                                 '' if args.verbose else '-q'))
 
 def get_env(var):
     return os.environ[var] if var in os.environ else ''
@@ -375,6 +375,7 @@ def main():
     parser.add_argument('action',choices=commands.keys(), default='html', nargs='?')
     parser.add_argument('root', nargs='?', default='.')
     parser.add_argument('--branch')
+    parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
 
