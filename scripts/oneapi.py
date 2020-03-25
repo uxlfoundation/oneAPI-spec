@@ -323,7 +323,7 @@ def purge(root, target=None):
     root_only(root)
     for (r,dirs,files) in os.walk('site', topdown=True):
         r = r.replace('site/','')
-        dirs = remove_elements(dirs,['oneL0', 'oneMKL'])
+        dirs = remove_elements(dirs,['oneL0'])
         for file in files:
             print('http://spec.oneapi.com/%s/%s' % (r, file))
     
@@ -375,8 +375,7 @@ dirs = ['oneCCL',
         'oneDPL',
         'oneDNN']
 
-tarballs = ['oneMKL',
-            'oneL0']
+tarballs = ['oneL0']
 
 def main():
     global args
