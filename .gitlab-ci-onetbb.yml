@@ -1,18 +1,55 @@
-build_tbb_spec:
+build_oneTBB_html:
   stage: build
-  tags: [python-sphinx]
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
   script:
-    - sphinx-build -b html source/elements/oneTBB/source onetbb_spec
+    - python3 -m pip install -r requirements.txt
+    - python3 scripts/oneapi.py html source/elements/oneTBB
   artifacts:
-    paths: [onetbb_spec]
+    paths: [source/elements/oneTBB/build/html]
+    expire_in: 3d
+
+build_oneTBB_pdf:
+  stage: build
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
+  script:
+    - python3 -m pip install -r requirements.txt
+    - python3 scripts/oneapi.py latexpdf source/elements/oneTBB
+  artifacts:
+    paths: [source/elements/oneTBB/build/latex/*.pdf]
+    expire_in: 3d
+
+build_oneDPL_html:
+  stage: build
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
+  script:
+    - python3 -m pip install -r requirements.txt
+    - python3 scripts/oneapi.py html source/elements/oneDPL
+  artifacts:
+    paths: [source/elements/oneDPL/build/html]
+    expire_in: 3d
+
+build_oneDPL_pdf:
+  stage: build
+  tags: [docker_linux]
+  image: tr_ubuntu18.04:oneapi-spec
+  script:
+    - python3 -m pip install -r requirements.txt
+    - python3 scripts/oneapi.py latexpdf source/elements/oneDPL
+  artifacts:
+    paths: [source/elements/oneDPL/build/latex/*.pdf]
     expire_in: 3d
 
 pages:
   stage: deploy
   tags: [linux]
-  needs: [build_tbb_spec]
+  needs: [build_oneTBB_html, build_oneDPL_html]
   only: [develop]
   script:
-  - mv onetbb_spec public
+  - mkdir -p public
+  - mv source/elements/oneTBB/build/html public/oneTBB
+  - mv source/elements/oneDPL/build/html public/oneDPL
   artifacts:
     paths: [public]
