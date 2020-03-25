@@ -104,7 +104,7 @@ The table below shows the requirements on type ``Body``.
    
    * If ``Body::operator()`` accepts its argument by value, or if the
      ``InputIterator`` type does not also satisfy the requirements
-     of a forward iterator, then derefencing an ``InputIterator``
+     of a forward iterator, then dereferencing an ``InputIterator``
      must produce an rvalue reference.
    * Additional work items should be passed to the feeder as rvalues,
      for example via the ``std::move`` function.

@@ -144,7 +144,7 @@ The following table provides additional information on the members of this templ
 \ ``concurrent_queue( concurrent_queue&& src, const allocator_type& a )``
   \
   Supported since C++11. Constructs new queue by moving content from *src* using
-  specifed allocator. *src* is left in an unspecified state, but can be safely
+  specified allocator. *src* is left in an unspecified state, but can be safely
   destroyed.
 ------------------------------------------------------------------------------------------
 \ ``~concurrent_queue()``

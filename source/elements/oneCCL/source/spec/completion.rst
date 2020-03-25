@@ -68,7 +68,7 @@ is_completed
 
     bool request::test();
 
-Returnes the value that indicates the status: 
+Returns the value that indicates the status: 
 
 - 0 - operation is in progress 
 - otherwise, the operation is completed.

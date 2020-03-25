@@ -1,5 +1,6 @@
 doxygen
 build
+_build
 *~
 
 /docker/requirements.txt
@@ -10,5 +11,6 @@ build
 /.vscode
 /site
 /tarballs
+/site.zip
 
 __pycache__

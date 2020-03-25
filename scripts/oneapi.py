@@ -42,6 +42,7 @@ import string
 import subprocess
 import tarfile
 import venv
+from zipfile import ZipFile
 
 sys.path.insert(0, os.path.abspath(join('source','conf')))
 import common_conf
@@ -49,7 +50,6 @@ import common_conf
 args = None
 
         
-sphinx_opts    = '-q'
 sphinx_build   = 'sphinx-build'
 source_dir     = 'source'
 build_dir      = 'build'
@@ -116,13 +116,14 @@ def makedirs(path):
     os.makedirs(path)
 
 def sphinx(root, target):
-    os.environ['LATEXMKOPTS'] = '--silent'
-    os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
+    if not args.verbose:
+        os.environ['LATEXMKOPTS'] = '--silent'
+        os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
                                  join(root,build_dir),
-                                 sphinx_opts))
+                                 '' if args.verbose else '-q'))
 
 def get_env(var):
     return os.environ[var] if var in os.environ else ''
@@ -151,11 +152,15 @@ def dockerpush(root, target=None):
 def dockerrun(root, target=None):
     root_only(root)
     shell('docker run --rm -it'
+          ' -e http_proxy=%s'
+          ' -e https_proxy=%s'
+          ' -e no_proxy=%s'
           ' --user %s:%s'
           ' --volume=%s:/build'
           ' --workdir=/build'
           ' rscohn2/oneapi-spec'
-          % (os.getuid(), os.getgid(), os.getcwd()))
+          % (get_env('http_proxy'), get_env('https_proxy'), get_env('no_proxy'),
+             os.getuid(), os.getgid(), os.getcwd()))
 
 @action
 def clean(root, target=None):
@@ -203,9 +208,16 @@ def build(root, target):
 @action
 def ci_publish(root, target=None):
     root_only(root)
+    with ZipFile('site.zip', 'w') as site_zip:
+        for r, dirs, files in os.walk('site', topdown=True):
+            # Exclude DAL API because it is 1.7G
+            if os.path.basename(r) == 'oneDAL':
+                dirs = remove_elements(dirs, ['api', '_sources'])
+            for file in files:
+                site_zip.write(join(r, file))
     if not args.branch:
         exit('Error: --branch <branchname> is required')
-    if 'AWS_SECRET_ACCESS_KEY' in os.environ:
+    if 'AWS_SECRET_ACCESS_KEY' in os.environ and os.environ['AWS_SECRET_ACCESS_KEY'] != '':
         shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
         log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
             % (args.branch))
@@ -301,11 +313,34 @@ def site(root, target=None):
                 tar.extractall(versions_x)
     copytree(versions_x, join(versions, 'latest'))
 
+def remove_elements(l, elements):
+    for e in elements:
+        if e in l:
+            l.remove(e)
+    return l
+
+def purge(root, target=None):
+    root_only(root)
+    for (r,dirs,files) in os.walk('site', topdown=True):
+        r = r.replace('site/','')
+        dirs = remove_elements(dirs,['oneL0'])
+        for file in files:
+            print('http://spec.oneapi.com/%s/%s' % (r, file))
+    
+@action
+def sort_words(root, target=None):
+    with open(join('source', 'spelling_wordlist.txt')) as fin:
+        lines = fin.readlines()
+    with open(join('source', 'spelling_wordlist.txt'), 'w') as fout:
+        for l in sorted(list(set(lines))):
+            fout.write(l)
+        
 @action
 def ci(root, target=None):
     root_only(root)
     get_tarballs(root)
     site(root)
+    build('.', 'spelling')
     if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
@@ -322,9 +357,12 @@ commands = {'ci': ci,
             'dockerrun': dockerrun,
             'html': build,
             'latexpdf': build,
+            'spelling': build,
             'prep': prep,
             'prod-publish': prod_publish,
+            'purge': purge,
             'site': site,
+            'sort-words': sort_words,
             'spec-venv': spec_venv,
             'stage-publish': stage_publish}
     
@@ -337,16 +375,15 @@ dirs = ['oneCCL',
         'oneDPL',
         'oneDNN']
 
-tarballs = ['oneMKL',
-            'oneL0',
-            'oneDAL']
+tarballs = ['oneL0']
 
 def main():
     global args
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
-    parser.add_argument('action',choices=commands.keys())
+    parser.add_argument('action',choices=commands.keys(), default='html', nargs='?')
     parser.add_argument('root', nargs='?', default='.')
     parser.add_argument('--branch')
+    parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
 

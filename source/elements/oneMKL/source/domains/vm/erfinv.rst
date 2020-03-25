@@ -1,0 +1,316 @@
+.. _erfinv:
+
+erfinv
+======
+
+
+.. container::
+
+
+   Computes inverse error function value of vector elements.
+
+
+   .. container:: section
+      :name: GUID-2527E9AC-23A0-4A39-9485-EE9CD4C48CC4
+
+
+      .. rubric:: Syntax
+         :name: syntax
+         :class: sectiontitle
+
+
+      Buffer API:
+
+
+      .. cpp:function::  void erfinv(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+
+      USM API:
+
+
+      .. cpp:function::  event erfinv(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+
+      ``erfinv`` supports the following precisions.
+
+
+      .. list-table:: 
+         :header-rows: 1
+
+         * -  T 
+         * -  ``float`` 
+         * -  ``double`` 
+
+
+
+
+.. container:: section
+   :name: GUID-16B0A421-303F-4559-8B48-87662E21759B
+
+
+   .. rubric:: Description
+      :name: description
+      :class: sectiontitle
+
+
+   The erfinv(a) function computes the inverse error function values for
+   elements of the input vector ``a`` and writes them to the output
+   vector ``y``
+
+
+   ``y = erf-1(a)``,
+
+
+   | where ``erf(x)`` is the error function defined as given by:
+
+
+   .. container:: imagecenter
+
+
+      |image0|
+
+
+   Useful relations:
+
+
+   |image1|
+
+
+   where erfc is the complementary error function.
+
+
+   |image2|
+
+
+   where
+
+
+   |image3|
+
+
+   is the cumulative normal distribution function.
+
+
+   |image4|
+
+
+   where ``Φ-1(x)`` and ``erf-1(x)`` are the inverses to ``Φ(x)`` and
+   ``erf(x)``, respectively.
+
+
+   The following figure illustrates the relationships among erfinv
+   family functions (erfinv, erfcinv, cdfnorminv).
+
+
+   .. container:: figtop
+      :name: GUID-74857793-0E1E-4839-A913-8EC1C23DB719
+
+
+      erfinv Family Functions Relationship
+      | 
+
+
+      .. container:: imagecenter
+
+
+         |image5|
+
+
+   Useful relations for these functions:
+
+
+   |image6|
+
+
+   | 
+
+
+   .. container:: imagecenter
+
+
+      |image7|
+
+
+   .. container:: tablenoborder
+
+
+      .. list-table:: 
+         :header-rows: 1
+
+         * -  Argument 
+           -  Result 
+           -  Error Code 
+         * -  +0 
+           -  +0 
+           -    
+         * -  -0 
+           -  -0 
+           -    
+         * -  +1 
+           -  +∞ 
+           -  ``status::sing`` 
+         * -  -1 
+           -  -∞ 
+           -  ``status::sing`` 
+         * -  \|a\| > 1 
+           -  QNAN 
+           -  ``status::errdom`` 
+         * -  +∞ 
+           -  QNAN 
+           -  ``status::errdom`` 
+         * -  -∞ 
+           -  QNAN 
+           -  ``status::errdom`` 
+         * -  QNAN 
+           -  QNAN 
+           -    
+         * -  SNAN 
+           -  QNAN 
+           -    
+
+
+
+
+.. container:: section
+   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
+
+
+   .. rubric:: Input Parameters
+      :name: input-parameters
+      :class: sectiontitle
+
+
+   Buffer API:
+
+
+   exec_queue
+      The queue where the routine should be executed.
+
+
+   n
+      Specifies the number of elements to be calculated.
+
+
+   a
+      The buffer ``a`` containing input vector of size ``n``.
+
+
+   mode
+      Overrides the global VM mode setting for this function call. See
+      `set_mode <setmode.html>`__
+      function for possible values and their description. This is an
+      optional parameter. The default value is ``mode::not_defined``.
+
+
+   errhandler
+      Sets local error handling mode for this function call. See the
+      `create_error_handler <create_error_handler.html>`__
+      function for arguments and their descriptions. This is an optional
+      parameter. The local error handler is disabled by default.
+
+
+   USM API:
+
+
+   exec_queue
+      The queue where the routine should be executed.
+
+
+   n
+      Specifies the number of elements to be calculated.
+
+
+   a
+      Pointer ``a`` to the input vector of size ``n``.
+
+
+   depends
+      Vector of dependent events (to wait for input data to be ready).
+
+
+   mode
+      Overrides the global VM mode setting for this function call. See
+      the `set_mode <setmode.html>`__
+      function for possible values and their description. This is an
+      optional parameter. The default value is ``mode::not_defined``.
+
+
+   errhandler
+      Sets local error handling mode for this function call. See the
+      `create_error_handler <create_error_handler.html>`__
+      function for arguments and their descriptions. This is an optional
+      parameter. The local error handler is disabled by default.
+
+
+.. container:: section
+   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
+
+
+   .. rubric:: Output Parameters
+      :name: output-parameters
+      :class: sectiontitle
+
+
+   Buffer API:
+
+
+   y
+      The buffer ``y`` containing the output vector of size ``n``.
+
+
+   USM API:
+
+
+   y
+      Pointer ``y`` to the output vector of size ``n``.
+
+
+   return value (event)
+      Function end event.
+
+
+.. container:: section
+   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
+
+
+   .. rubric:: Example
+      :name: example
+      :class: sectiontitle
+
+
+   An example of how to use erfinvcan be found in the oneMKL
+   installation directory, under:
+
+
+   ::
+
+
+      examples/sycl/vml/verfinv.cpp
+
+
+.. container:: familylinks
+
+
+   .. container:: parentlink
+
+
+      **Parent topic:** `Special
+      Functions <special-functions.html>`__
+
+
+.. container::
+
+
+.. |image0| image:: ../equations/GUID-4835D5B4-6232-45CD-9A49-0264F8B0DBF4-low.gif
+   :class: .eq
+.. |image1| image:: ../equations/GUID-0A406EAC-6A1D-4D81-977C-08C018161E3F-low.jpg
+   :class: .eq
+.. |image2| image:: ../equations/GUID-0026D841-74F3-43C0-8EB5-F9E4107EF95D-low.gif
+   :class: .eq
+.. |image3| image:: ../equations/GUID-F928F918-624A-444A-BB76-7D26D1E1BC62-low.gif
+   :class: .eq
+.. |image4| image:: ../equations/GUID-02EEA5FC-8F46-4034-86D9-99900F93373C-low.gif
+   :class: .eq
+.. |image5| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg
+.. |image6| image:: ../equations/GUID-D4002137-8BA4-4D20-871B-550F2C6F9CE8-low.gif
+   :class: .eq
+.. |image7| image:: ../equations/GUID-CF961E8B-3127-4493-839A-C045E325BC42-low.jpg
+

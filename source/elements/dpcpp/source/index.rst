@@ -55,16 +55,16 @@ required if covered by newer C++ or SYCL versions directly.
    =====================   ================  ================  ================  =============
    Extension               CPU               GPU               FPGA              Test [#test]_
    =====================   ================  ================  ================  =============
-   USM                     Required [#usm]_  Required [#usm]_  Required [#usm]_  usm
+   USM                     Required [#USM]_  Required [#USM]_  Required [#USM]_  USM
    In-order queues         Required          Required          Required          NA [#na]_
    Optional lambda name    Required          Required          Required          NA [#na]_
    Reduction               Required          Required          Required          NA [#na]_
    Subgroups               Required          Required          Not required      sub_group
-   Data flow pipes         Not required      Not required      Required          fpga_tests
+   Data flow pipes         Not required      Not required      Required          FPGA_tests
    =====================   ================  ================  ================  =============
 
 .. [#test] Test directory within `extension tests`_
-.. [#usm] Minimum explicit USM support
+.. [#USM] Minimum explicit USM support
 .. [#na] Not yet available.
 
 Detailed API and Language Descriptions

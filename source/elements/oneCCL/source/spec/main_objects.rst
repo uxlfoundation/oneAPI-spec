@@ -10,7 +10,7 @@ oneCCL Concepts
 oneCCL Environment
 ******************
 
-oneCCL Enviroment is a singleton object which is used as an entry
+oneCCL Environment is a singleton object which is used as an entry
 point into the oneCCL library and which is defined only for C++
 version of API.  oneCCL Environment exposes a number of helper methods
 to manage other oneCCL objects, such as streams, communicators, etc.
@@ -103,7 +103,7 @@ oneCCL Communicator defines participants of collective communication operations.
         communicator_t create_communicator(const ccl::comm_attr* attr = nullptr) const;
     }
 
-When you create oneCCL Communicator, you can optionally specify attributes that control the runtime behaviour of oneCCL implementation.
+When you create oneCCL Communicator, you can optionally specify attributes that control the runtime behavior of oneCCL implementation.
 
 oneCCL Communicator Attributes
 ------------------------------
@@ -119,4 +119,4 @@ oneCCL Communicator Attributes
         int color;
     } ccl_comm_attr_t;
 
-``ccl_comm_attr_t`` (``ccl::comm_attr`` in C++ version of API) is extendable structure that serves as a modificator of communicator behaviour. 
+``ccl_comm_attr_t`` (``ccl::comm_attr`` in C++ version of API) is extendable structure that serves as a modifier of communicator behavior. 

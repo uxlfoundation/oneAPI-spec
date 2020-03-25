@@ -3,6 +3,7 @@
   #
   # SPDX-License-Identifier: MIT
   ############################################################################*/
+
 /**
      * @brief Utility functions for file I/O
      * @file vpl_utils.h
@@ -30,7 +31,7 @@ VPL_EXPORT vplStatus vplCloseFile(VplFile* fFile);
 VPL_EXPORT vplStatus vplWriteData(VplFile* fOutput, vplm_mem* mem);
 
 /// @brief read a vplm_mem* image from file
-VPL_EXPORT vplm_mem* vplReadImage(VplFile* fInput, vplm_image_info* desc);
+VPL_EXPORT vplStatus vplReadData(VplFile* fInput, vplm_mem* mem);
 
 #ifdef __cplusplus
 }

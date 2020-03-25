@@ -53,7 +53,7 @@ Target Audience
 The expected audience for this specification includes: application
 developers, middleware developers, system software providers, and
 hardware providers. As a *contributor* to this specification, you will
-shape the accelerator software eco-system. A productive and high
+shape the accelerator software ecosystem. A productive and high
 performing system must take into account the constraints at all levels
 of the software stack. As a *user* of this document, you can ensure
 that your components will inter-operate with applications and system
@@ -120,25 +120,6 @@ If you agree to the above, every contribution of your feedback must
 include the following line using your real name and email address:
 Signed-off-by: Joe Smith joe.smith@email.com
 
-Versions
---------
-
-========  ==========  =========
-Version   Date        View                                                                                                            
-========  ==========  =========
-0.6.0_    01/31/2019  `HTML <https://spec.oneapi.com/versions/0.6.0/>`__ `PDF <https://spec.oneapi.com/versions/0.6.0/oneAPI-spec.pdf>`__
-0.5.0_    11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0/>`__                                                                
-========  ==========  =========
-
-0.6.0
-+++++
-
-Open source release
-
-0.5.0
-+++++
-
-Initial public release
 
 .. todolist::
 
