@@ -70,6 +70,7 @@ exclude_patterns = [#'404.rst',
                     'elements/oneTBB/source/uncategorized/**',
                     'elements/oneTBB/source/low_level_task_api.rst',
                     'elements/oneTBB/source/low_level_tasking/**',
+                    '**/*.inc.rst',
 ]
 
 # The name of the Pygments (syntax highlighting) style to use.
@@ -139,7 +140,28 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    'preamble': '\\DeclareUnicodeCharacter{2208}{$\\in$}',
+    'preamble': ('\\DeclareUnicodeCharacter{2208}{$\\in$}'
+                 '\\DeclareUnicodeCharacter{222A}{$\\cup$}'
+                 '\\DeclareUnicodeCharacter{2236}{$\\colon$}'
+                 '\\DeclareUnicodeCharacter{2260}{$\\neq$}'
+                 '\\DeclareUnicodeCharacter{2264}{$\\leq$}'
+                 '\\DeclareUnicodeCharacter{2265}{$\\geq$}'
+                 '\\DeclareUnicodeCharacter{393}{$\\gamma$}'
+                 '\\DeclareUnicodeCharacter{39B}{$\\Lambda$}'
+                 '\\DeclareUnicodeCharacter{3A3}{$\\Sigma$}'
+                 '\\DeclareUnicodeCharacter{3A6}{$\\phi$}'
+                 '\\DeclareUnicodeCharacter{3B1}{$\\alpha$}'
+                 '\\DeclareUnicodeCharacter{3B2}{$\\beta$}'
+                 '\\DeclareUnicodeCharacter{3B4}{$\\delta$}'
+                 '\\DeclareUnicodeCharacter{3BB}{$\\lambda$}'
+                 '\\DeclareUnicodeCharacter{3BC}{$\\mu$}'
+                 '\\DeclareUnicodeCharacter{3BD}{$\\nu$}'
+                 '\\DeclareUnicodeCharacter{3C0}{$\\pi$}'
+                 '\\DeclareUnicodeCharacter{3C3}{$\\sigma$}'
+                 '\\DeclareUnicodeCharacter{FB01}{$fi$}'
+                 '\\DeclareUnicodeCharacter{FB02}{$fl$}'
+    ),
+
 
     # Latex figure (float) alignment
     #
