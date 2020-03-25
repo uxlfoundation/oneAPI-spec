@@ -42,7 +42,7 @@ extern "C" {
 #endif
 #endif
 
-/** \brief VPL Memory success status and error codes. See #_vplm_status. */
+/** \brief VPL Memory success status and error codes. See _vplm_status. */
 typedef int32_t vplm_status;
 
 /** \brief Major VPL Memory object handle. */
@@ -293,7 +293,7 @@ typedef enum {
 
 /** \brief Specifies user-defined on destroy callback.
  *
- * User-defined callback function (see #vplm_on_destroy_cb for prototype) will be called
+ * User-defined callback function (see vplm_on_destroy_cb for prototype) will be called
  * once object reference counter will reach 0, but before object will actually will be
  * destroyed. In this way user can intersect with the object destruction and "save" it
  * increasing reference counter and placing it in some pool. Library will check object
@@ -318,12 +318,12 @@ VPLM_API vplm_status vplm_create_cpu_buffer(const vplm_buffer_info* info, vplm_m
 
 /** \brief Allocates image in system memory and returns vpl memory handle
  *
- * Memory will be allocated according to provided #info description. If #vplm_image_info.aligned_width
- * and/or #info->aligned_height are equal to 0, library will select alignment for #vplm_image_info.width
- * and/or #vplm_image_info.height on its own. If these values are not zero they will be respected.
+ * Memory will be allocated according to provided info description. If vplm_image_info.aligned_width
+ * and/or info->aligned_height are equal to 0, library will select alignment for vplm_image_info.width
+ * and/or vplm_image_info.height on its own. If these values are not zero they will be respected.
  * However, library may still additionally align them to the higher values. If application needs to
  * strictly specify image padding, then it should allocate image on its own and pass it to
- * #vplm_create_from_cpu_image.
+ * vplm_create_from_cpu_image.
  */
 VPLM_API vplm_status vplm_create_cpu_image(const vplm_image_info* info, vplm_mem** memory);
 
@@ -336,7 +336,7 @@ typedef struct _vplm_cl_vtable vplm_cl_vtable;
 typedef struct _vplm_dx11_vtable vplm_dx11_vtable;
 typedef struct _vplm_dmabuf_vtable vplm_dmabuf_vtable;
 
-/** \brief VPL Memory object, aka #vplm_mem.*/
+/** \brief VPL Memory object, aka vplm_mem.*/
 typedef struct _vplm_vtable {
     uintptr_t priv;
 
@@ -367,7 +367,7 @@ typedef struct _vplm_vtable {
  *
  * This function call effectively marks one more user of the object making
  * sure object won't be deleted while this user won't decrease refence counter
- * by #vplm_unref.
+ * by vplm_unref.
  */
 static inline uint32_t vplm_ref(const vplm_mem* memory)
 {
@@ -379,7 +379,7 @@ static inline uint32_t vplm_ref(const vplm_mem* memory)
 /** \brief Decreases reference counter of the memory object.
  *
  * Once reference counter will reach 0 object will be destroyed. However,
- * user might install #VPLM_PROPERTY_CALLBACK_ON_DESTROY to intersect object
+ * user might install VPLM_PROPERTY_CALLBACK_ON_DESTROY to intersect object
  * release procedure and effectively "save" the object and reuse it via some
  * objects pool.
  */

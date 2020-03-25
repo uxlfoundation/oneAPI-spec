@@ -19,7 +19,7 @@ Convention for titles::
    ~~~~~~~~~~~~~~~~~~~
 
 
-Follow the `Python Style Guide https://devguide.python.org/documenting/#style-guide`_
+Follow the `Python Style Guide <https://devguide.python.org/documenting/#style-guide>`_
 
 
 This section needs work.

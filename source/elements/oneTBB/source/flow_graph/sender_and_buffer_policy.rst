@@ -1,6 +1,6 @@
-=========================================
-Fowarding, Buffering and Reception Policy
-=========================================
+==========================================
+Forwarding, Buffering and Reception Policy
+==========================================
 
 In an oneAPI Threading Building Blocks flow::graph, nodes which
 forward messages to successors have one of two possible forwarding policies, which are a

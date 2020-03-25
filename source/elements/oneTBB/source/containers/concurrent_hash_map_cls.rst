@@ -82,7 +82,7 @@ Example
 
 When keys are pointers, simply casting the pointer to a hash code may cause poor performance
 because the low-order bits of the hash code will be always zero if the pointer points to a
-type with alignment restrictions. A way to remove this bias is to divide the casted pointer
+type with alignment restrictions. A way to remove this bias is to divide the cast pointer
 by the size of the type, as indicated below in
 ``bold italic font``.
 

@@ -24,6 +24,13 @@ oneAPI Specification
    elements/oneVPL/source/index
    elements/oneMKL/source/index
    contributors
+   versions
    notices
 
-   
+.. sphinx warns about rst files that are not reachable from the top
+   level toc. Put them here:
+
+.. toctree::
+   :hidden:
+
+   404

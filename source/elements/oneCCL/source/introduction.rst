@@ -25,7 +25,7 @@ capabilities such as:
 * User-defined pre-/post-processing of incoming buffers and reduction
   operation
 * Prioritization for communication operations
-* Persistent communication operations (enables de-coupling one-time
+* Persistent communication operations (enables decoupling one-time
   initialization and repetitive execution)
 * Fusion of multiple communication operations into the single one
 * Unordered communication operations
@@ -35,6 +35,6 @@ Intel has published an `open source implementation`_ with the Apache
 license. The `open source implementation`_ includes a comprehensive
 test suite.  Consult the `README`_ for directions.
 
-.. _`open source implementation`: https://github.com/intel/oneccl
-.. _`README`: https://github.com/intel/oneccl/blob/master/README.md
+.. _`open source implementation`: https://github.com/oneapi-src/oneCCL
+.. _`README`: https://github.com/oneapi-src/oneCCL/blob/master/README.md
 

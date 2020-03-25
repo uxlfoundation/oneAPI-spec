@@ -77,7 +77,7 @@ concurrent_unordered_set
 \ ``concurrent_unordered_set(concurrent_unordered_set&& m, const allocator_type& a)``
   \
   Supported since C++11. Constructs a new table by moving content from *m* using
-  specifed allocator. *m* is left in an unspecified state, but can be safely
+  specified allocator. *m* is left in an unspecified state, but can be safely
   destroyed.
 ------------------------------------------------------------------------------------------
 \ ``~concurrent_unordered_set()``
@@ -182,7 +182,7 @@ concurrent_unordered_multiset
 \ ``concurrent_unordered_multiset(concurrent_unordered_multiset&& m, const allocator_type& a)``
   \
   Supported since C++11. Constructs a new table by moving content from *m* using
-  specifed allocator. *m* is left in an unspecified state, but can be safely
+  specified allocator. *m* is left in an unspecified state, but can be safely
   destroyed.
 ------------------------------------------------------------------------------------------
 \ ``~concurrent_unordered_multiset()``

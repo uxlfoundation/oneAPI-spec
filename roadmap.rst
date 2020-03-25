@@ -149,10 +149,6 @@ Date       Milestone
   - Add introduction, execution, primitive lifecycle, and programming model
     sections
 
-- oneCCL
-
-  - Add initial version of API for scale-up
-
 - Level Zero
 
   - Switched to RST as format, using oneapi-spec as upstream repo
@@ -217,8 +213,8 @@ Date       Milestone
 
 - oneCCL
 
-  - Update page with API for scale-up
-  - Update page with GPU programming model
+  - Add page with API for multi-GPU
+  - Add page with multi-GPU programming model
   - Extend page with collective operations
 
 - Level Zero
