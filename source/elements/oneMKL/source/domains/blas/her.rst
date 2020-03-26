@@ -125,9 +125,9 @@ her
 
 
    a
-      Buffer holding the updated upper triangular part of theHermitian
+      Buffer holding the updated upper triangular part of the Hermitian
       matrix ``A`` if ``upper_lower = upper`` or the updated
-      lowertriangular part of the Hermitian matrix ``A`` if
+      lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower = lower``.
 
 

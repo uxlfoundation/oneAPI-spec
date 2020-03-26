@@ -198,7 +198,7 @@ gemmt
 
       c
          Output buffer, overwritten by the upper or lower triangular
-         part ofalpha\*op(``A``)*op(``B``) + beta\*\ ``C``.
+         part of alpha\*op(``A``)*op(``B``) + beta\*\ ``C``.
 
 
    .. container:: section

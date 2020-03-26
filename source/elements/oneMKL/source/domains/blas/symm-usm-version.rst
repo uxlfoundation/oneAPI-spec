@@ -7,8 +7,8 @@ symm (USM Version)
 .. container::
 
 
-   Computes a matrix-matrix product where one input matrix is symmetrica
-   nd one matrix is general.
+   Computes a matrix-matrix product where one input matrix is
+   symmetric and one matrix is general.
 
 
    .. container:: section

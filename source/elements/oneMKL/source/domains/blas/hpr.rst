@@ -124,7 +124,7 @@ hpr
 
 
    a
-      Buffer holding the updated upper triangularpart of the Hermitian
+      Buffer holding the updated upper triangular part of the Hermitian
       matrix ``A`` if ``upper_lower =upper``, or the updated lower
       triangular part of theHermitian matrix ``A`` if
       ``upper_lower =lower``.

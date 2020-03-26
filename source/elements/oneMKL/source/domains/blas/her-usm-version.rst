@@ -141,7 +141,7 @@ her (USM Version)
          ``upper_lower = lower``.
 
 
-         The imaginary parts of the diagonal elementsare set to zero.
+         The imaginary parts of the diagonal elements are set to zero.
 
 
    .. container:: section
