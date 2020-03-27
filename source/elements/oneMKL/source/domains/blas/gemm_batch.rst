@@ -15,7 +15,6 @@ gemm_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ gemm_batch
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -125,7 +123,6 @@ gemm_batch
 
 
    .. rubric:: Input Parameters - Group API
-      :name: input-parameters---group-api
       :class: sectiontitle
 
 
@@ -272,7 +269,6 @@ gemm_batch
 
 
    .. rubric:: Output Parameters - Group API
-      :name: output-parameters---group-api
       :class: sectiontitle
 
 
@@ -286,7 +282,6 @@ gemm_batch
 
 
    .. rubric:: Input Parameters - Strided API
-      :name: input-parameters---strided-api
       :class: sectiontitle
 
 
@@ -394,7 +389,6 @@ gemm_batch
 
 
    .. rubric:: Output Parameters - Strided API
-      :name: output-parameters---strided-api
       :class: sectiontitle
 
 
@@ -408,7 +402,6 @@ gemm_batch
 
 
    .. rubric:: Notes
-      :name: notes
       :class: sectiontitle
 
 

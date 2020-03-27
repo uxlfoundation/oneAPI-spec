@@ -15,7 +15,6 @@ cosd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ cosd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -104,7 +102,6 @@ cosd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -175,7 +172,6 @@ cosd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,7 +198,6 @@ cosd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

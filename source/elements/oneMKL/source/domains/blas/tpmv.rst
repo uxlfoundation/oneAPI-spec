@@ -15,7 +15,6 @@ tpmv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ tpmv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -74,7 +72,6 @@ tpmv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -128,7 +125,6 @@ tpmv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

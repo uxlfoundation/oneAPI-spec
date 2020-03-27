@@ -15,7 +15,6 @@ onemkl::rng::bernoulli
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -38,7 +37,6 @@ onemkl::rng::bernoulli
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ onemkl::rng::bernoulli
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -90,7 +87,6 @@ onemkl::rng::bernoulli
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ ceil
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ ceil
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -99,7 +97,6 @@ ceil
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -156,7 +153,6 @@ ceil
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -183,7 +179,6 @@ ceil
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

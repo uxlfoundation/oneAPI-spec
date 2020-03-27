@@ -15,7 +15,6 @@ copy
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ copy
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -62,7 +60,6 @@ copy
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -94,7 +91,6 @@ copy
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

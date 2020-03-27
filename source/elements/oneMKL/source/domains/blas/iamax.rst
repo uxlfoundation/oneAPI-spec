@@ -16,7 +16,6 @@ iamax
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ iamax
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -56,7 +54,6 @@ iamax
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 
@@ -80,7 +77,6 @@ iamax
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -108,7 +104,6 @@ iamax
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

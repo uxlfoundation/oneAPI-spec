@@ -15,7 +15,6 @@ tanpi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ tanpi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -120,7 +118,6 @@ tanpi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -191,7 +188,6 @@ tanpi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -218,7 +214,6 @@ tanpi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

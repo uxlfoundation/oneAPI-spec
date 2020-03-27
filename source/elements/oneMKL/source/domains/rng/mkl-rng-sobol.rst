@@ -16,7 +16,6 @@ onemkl::rng::sobol
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ onemkl::rng::sobol
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +46,6 @@ onemkl::rng::sobol
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -59,7 +56,6 @@ onemkl::rng::sobol
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

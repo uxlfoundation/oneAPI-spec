@@ -15,7 +15,6 @@ atan
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ atan
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -102,7 +100,6 @@ atan
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -159,7 +156,6 @@ atan
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -186,7 +182,6 @@ atan
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

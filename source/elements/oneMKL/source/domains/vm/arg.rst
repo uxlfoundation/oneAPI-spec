@@ -15,7 +15,6 @@ arg
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ arg
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -137,7 +135,6 @@ arg
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 
@@ -152,7 +149,6 @@ arg
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -209,7 +205,6 @@ arg
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -236,7 +231,6 @@ arg
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

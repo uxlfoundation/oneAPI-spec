@@ -16,7 +16,6 @@ getrf_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -45,7 +44,6 @@ getrf_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -69,7 +67,6 @@ getrf_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -103,7 +100,6 @@ getrf_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -135,7 +131,6 @@ getrf_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ symm
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ symm
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -87,7 +85,6 @@ symm
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -168,7 +165,6 @@ symm
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -184,7 +180,6 @@ symm
 
 
    .. rubric:: Notes
-      :name: notes
       :class: sectiontitle
 
 

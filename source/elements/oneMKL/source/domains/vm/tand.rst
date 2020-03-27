@@ -15,7 +15,6 @@ tand
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ tand
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -104,7 +102,6 @@ tand
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -175,7 +172,6 @@ tand
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,7 +198,6 @@ tand
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

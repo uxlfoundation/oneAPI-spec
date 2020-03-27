@@ -15,7 +15,6 @@ onemkl::rng::gaussian
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ onemkl::rng::gaussian
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +46,6 @@ onemkl::rng::gaussian
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -91,7 +88,6 @@ onemkl::rng::gaussian
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

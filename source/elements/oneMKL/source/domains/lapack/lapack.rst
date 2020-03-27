@@ -51,7 +51,6 @@ LAPACK Routines
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 

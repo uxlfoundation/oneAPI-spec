@@ -15,7 +15,6 @@ onemkl::rng::gamma
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ onemkl::rng::gamma
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -50,7 +48,6 @@ onemkl::rng::gamma
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -70,7 +67,6 @@ onemkl::rng::gamma
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

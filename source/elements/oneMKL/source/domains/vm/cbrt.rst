@@ -15,7 +15,6 @@ cbrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ cbrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -93,7 +91,6 @@ cbrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -150,7 +147,6 @@ cbrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -177,7 +173,6 @@ cbrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

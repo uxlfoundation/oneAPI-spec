@@ -15,7 +15,6 @@ sinh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ sinh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -204,7 +202,6 @@ sinh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -275,7 +272,6 @@ sinh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -302,7 +298,6 @@ sinh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

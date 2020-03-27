@@ -16,7 +16,6 @@ erfcinv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ erfcinv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -172,7 +170,6 @@ erfcinv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -243,7 +240,6 @@ erfcinv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -270,7 +266,6 @@ erfcinv
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

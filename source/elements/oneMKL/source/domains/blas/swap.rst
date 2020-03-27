@@ -15,7 +15,6 @@ swap
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ swap
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -61,7 +59,6 @@ swap
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -100,7 +97,6 @@ swap
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

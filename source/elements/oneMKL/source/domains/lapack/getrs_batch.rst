@@ -17,7 +17,6 @@ getrs_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ getrs_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -79,7 +77,6 @@ getrs_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -133,7 +130,6 @@ getrs_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -161,7 +157,6 @@ getrs_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ tpsv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ tpsv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -76,7 +74,6 @@ tpsv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -131,7 +128,6 @@ tpsv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

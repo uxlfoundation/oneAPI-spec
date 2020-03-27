@@ -15,7 +15,6 @@ sdsdot (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -25,7 +24,6 @@ sdsdot (USM Version)
          .. cpp:function::  event sdsdot(queue &exec_queue, std::int64_t         n, float sb, const float \*x, std::int64_t incx, const float         \*y, std::int64_t incy, float \*result, const         vector_class<event> &dependencies = {})
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -37,7 +35,6 @@ sdsdot (USM Version)
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -83,7 +80,6 @@ sdsdot (USM Version)
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 

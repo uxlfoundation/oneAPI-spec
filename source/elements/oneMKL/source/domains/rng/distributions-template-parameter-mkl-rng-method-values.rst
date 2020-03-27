@@ -77,7 +77,6 @@ Distributions Template Parameter onemkl::rng::method Values
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 

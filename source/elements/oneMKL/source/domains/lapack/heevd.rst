@@ -17,7 +17,6 @@ heevd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ heevd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -69,7 +67,6 @@ heevd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -133,7 +130,6 @@ heevd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -185,7 +181,6 @@ heevd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

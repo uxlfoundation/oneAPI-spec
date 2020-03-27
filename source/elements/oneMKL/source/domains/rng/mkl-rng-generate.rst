@@ -16,7 +16,6 @@ onemkl::rng::generate
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -38,7 +37,6 @@ onemkl::rng::generate
          .. cpp:function::  cl::sycl::event generate (const Distr<T,         Method>& distr, EngineType& engine, const std::int64_t n, T \*         r , const cl::sycl::vector_class<cl::sycl::event> &         dependencies)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ onemkl::rng::generate
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -74,7 +71,6 @@ onemkl::rng::generate
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 

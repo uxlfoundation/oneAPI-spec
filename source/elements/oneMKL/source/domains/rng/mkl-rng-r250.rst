@@ -16,7 +16,6 @@ onemkl::rng::r250
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ onemkl::rng::r250
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +46,6 @@ onemkl::rng::r250
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -58,7 +55,6 @@ onemkl::rng::r250
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

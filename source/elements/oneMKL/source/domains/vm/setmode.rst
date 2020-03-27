@@ -16,14 +16,12 @@ setmode
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint64_t set_mode(queue& exec_queue, uint64_t      new_mode )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -88,7 +86,6 @@ setmode
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -105,7 +102,6 @@ setmode
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -118,7 +114,6 @@ setmode
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

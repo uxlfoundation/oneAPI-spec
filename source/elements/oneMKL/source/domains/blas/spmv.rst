@@ -15,7 +15,6 @@ spmv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ spmv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -71,7 +69,6 @@ spmv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -131,7 +128,6 @@ spmv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

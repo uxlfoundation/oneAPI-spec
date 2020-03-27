@@ -16,7 +16,6 @@ iamax (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -45,7 +44,6 @@ iamax (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -59,7 +57,6 @@ iamax (USM Version)
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -84,7 +81,6 @@ iamax (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -118,7 +114,6 @@ iamax (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 

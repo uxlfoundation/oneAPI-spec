@@ -18,7 +18,6 @@ sygvd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ sygvd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -66,7 +64,6 @@ sygvd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -149,7 +146,6 @@ sygvd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -234,7 +230,6 @@ sygvd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

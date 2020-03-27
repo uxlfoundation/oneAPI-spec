@@ -16,7 +16,6 @@ gemmt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -45,7 +44,6 @@ gemmt
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -82,7 +80,6 @@ gemmt
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -192,7 +189,6 @@ gemmt
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -206,7 +202,6 @@ gemmt
 
 
       .. rubric:: Notes
-         :name: notes
          :class: sectiontitle
 
 

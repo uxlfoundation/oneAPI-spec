@@ -38,7 +38,6 @@ oneMKL RNG Usage Model
 
 
       .. rubric:: Example of RNG Usage
-         :name: example-of-rng-usage
          :class: sectiontitle
 
 

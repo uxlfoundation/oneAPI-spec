@@ -16,7 +16,6 @@ onemkl::rng::nondeterministic
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -38,7 +37,6 @@ onemkl::rng::nondeterministic
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ onemkl::rng::nondeterministic
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -55,7 +52,6 @@ onemkl::rng::nondeterministic
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

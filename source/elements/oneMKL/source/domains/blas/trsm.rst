@@ -15,7 +15,6 @@ trsm
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ trsm
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -89,7 +87,6 @@ trsm
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -170,7 +167,6 @@ trsm
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -183,7 +179,6 @@ trsm
 
 
    .. rubric:: Notes
-      :name: notes
       :class: sectiontitle
 
 

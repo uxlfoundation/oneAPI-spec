@@ -16,7 +16,6 @@ fmin
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ fmin
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -92,7 +90,6 @@ fmin
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -157,7 +154,6 @@ fmin
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -184,7 +180,6 @@ fmin
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

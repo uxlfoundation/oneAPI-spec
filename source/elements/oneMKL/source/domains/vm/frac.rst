@@ -15,7 +15,6 @@ frac
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ frac
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -98,7 +96,6 @@ frac
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -155,7 +152,6 @@ frac
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -182,7 +178,6 @@ frac
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

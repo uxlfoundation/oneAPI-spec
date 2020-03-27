@@ -16,7 +16,6 @@ hemm (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +42,6 @@ hemm (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -89,7 +87,6 @@ hemm (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -183,7 +180,6 @@ hemm (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -200,7 +196,6 @@ hemm (USM Version)
 
 
       .. rubric:: Notes
-         :name: notes
          :class: sectiontitle
 
 

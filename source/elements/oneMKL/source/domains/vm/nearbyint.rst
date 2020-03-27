@@ -16,7 +16,6 @@ nearbyint
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ nearbyint
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -95,7 +93,6 @@ nearbyint
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -152,7 +149,6 @@ nearbyint
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -179,7 +175,6 @@ nearbyint
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -26,7 +25,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
          .. cpp:function::  onemkl::dft::ErrCode descriptor.init (dimension )         
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -59,7 +56,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Input Parameters: 1-Dimensional
-            :name: input-parameters-1-dimensional
             :class: sectiontitle
 
 
@@ -81,7 +77,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Input Parameters: N-Dimensional
-            :name: input-parameters-n-dimensional
             :class: sectiontitle
 
 
@@ -103,7 +98,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 

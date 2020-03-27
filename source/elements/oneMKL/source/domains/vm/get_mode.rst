@@ -15,14 +15,12 @@ get_mode
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint64_t get_mode( queue& exec_queue )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -65,7 +63,6 @@ get_mode
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -78,7 +75,6 @@ get_mode
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -91,7 +87,6 @@ get_mode
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

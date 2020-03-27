@@ -15,7 +15,6 @@ tan
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ tan
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -109,7 +107,6 @@ tan
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -180,7 +177,6 @@ tan
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -207,7 +203,6 @@ tan
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

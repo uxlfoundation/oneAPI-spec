@@ -15,7 +15,6 @@ syrk
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ syrk
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -76,7 +74,6 @@ syrk
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -149,7 +146,6 @@ syrk
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

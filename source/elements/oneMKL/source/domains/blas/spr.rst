@@ -15,7 +15,6 @@ spr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ spr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -70,7 +68,6 @@ spr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -115,7 +112,6 @@ spr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

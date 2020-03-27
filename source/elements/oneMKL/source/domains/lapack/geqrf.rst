@@ -16,7 +16,6 @@ geqrf
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ geqrf
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -61,7 +59,6 @@ geqrf
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -97,7 +94,6 @@ geqrf
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -137,7 +133,6 @@ geqrf
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ modf
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ modf
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -106,7 +104,6 @@ modf
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -163,7 +160,6 @@ modf
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,7 +198,6 @@ modf
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

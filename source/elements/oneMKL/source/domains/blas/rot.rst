@@ -15,7 +15,6 @@ rot
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ rot
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -66,7 +64,6 @@ rot
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -113,7 +110,6 @@ rot
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

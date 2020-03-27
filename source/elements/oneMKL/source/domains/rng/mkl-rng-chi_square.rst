@@ -15,7 +15,6 @@ onemkl::rng::chi_square
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -38,7 +37,6 @@ onemkl::rng::chi_square
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ onemkl::rng::chi_square
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -69,7 +66,6 @@ onemkl::rng::chi_square
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

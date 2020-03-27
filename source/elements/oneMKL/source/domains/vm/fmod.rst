@@ -16,7 +16,6 @@ fmod
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ fmod
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -109,7 +107,6 @@ fmod
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -188,7 +185,6 @@ fmod
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -215,7 +211,6 @@ fmod
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

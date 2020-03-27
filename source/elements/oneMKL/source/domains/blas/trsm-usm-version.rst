@@ -15,7 +15,6 @@ trsm (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,7 +43,6 @@ trsm (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -92,7 +90,6 @@ trsm (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -179,7 +176,6 @@ trsm (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -193,7 +189,6 @@ trsm (USM Version)
 
 
       .. rubric:: Notes
-         :name: notes
          :class: sectiontitle
 
 

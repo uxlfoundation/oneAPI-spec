@@ -15,7 +15,6 @@ onemkl::rng::weibull
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ onemkl::rng::weibull
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -50,7 +48,6 @@ onemkl::rng::weibull
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -75,7 +72,6 @@ onemkl::rng::weibull
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

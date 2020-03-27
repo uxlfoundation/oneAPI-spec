@@ -15,7 +15,6 @@ onemkl::rng::binomial
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ onemkl::rng::binomial
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +46,6 @@ onemkl::rng::binomial
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -83,7 +80,6 @@ onemkl::rng::binomial
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

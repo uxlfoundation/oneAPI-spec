@@ -18,7 +18,6 @@ onemkl::rng::mt2203
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ onemkl::rng::mt2203
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -50,7 +48,6 @@ onemkl::rng::mt2203
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -64,7 +61,6 @@ onemkl::rng::mt2203
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

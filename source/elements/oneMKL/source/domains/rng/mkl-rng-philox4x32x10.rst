@@ -16,7 +16,6 @@ onemkl::rng::philox4x32x10
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ onemkl::rng::philox4x32x10
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +46,6 @@ onemkl::rng::philox4x32x10
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -57,7 +54,6 @@ onemkl::rng::philox4x32x10
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

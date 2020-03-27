@@ -15,7 +15,6 @@ iamin
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ iamin
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -55,7 +53,6 @@ iamin
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 
@@ -79,7 +76,6 @@ iamin
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -107,7 +103,6 @@ iamin
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

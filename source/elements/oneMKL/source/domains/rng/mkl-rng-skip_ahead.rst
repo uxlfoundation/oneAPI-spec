@@ -15,7 +15,6 @@ onemkl::rng::skip_ahead
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,7 +43,6 @@ onemkl::rng::skip_ahead
       .. cpp:function::  void skip_ahead (EngineType& engine,      std::initializer_list<std::uint64_t> num_to_skip)
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -52,7 +50,6 @@ onemkl::rng::skip_ahead
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -99,7 +96,6 @@ onemkl::rng::skip_ahead
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 

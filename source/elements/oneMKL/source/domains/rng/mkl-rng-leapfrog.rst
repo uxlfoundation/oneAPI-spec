@@ -15,7 +15,6 @@ onemkl::rng::leapfrog
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -24,7 +23,6 @@ onemkl::rng::leapfrog
       .. cpp:function::  void leapfrog (EngineType& engine, std::uint64_t      idx, std::uint64_t stride)
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -32,7 +30,6 @@ onemkl::rng::leapfrog
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -60,7 +57,6 @@ onemkl::rng::leapfrog
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 

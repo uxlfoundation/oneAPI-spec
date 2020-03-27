@@ -16,7 +16,6 @@ onemkl::rng::niederreiter
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ onemkl::rng::niederreiter
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +46,6 @@ onemkl::rng::niederreiter
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -58,7 +55,6 @@ onemkl::rng::niederreiter
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

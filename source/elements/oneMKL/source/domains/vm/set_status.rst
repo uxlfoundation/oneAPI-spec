@@ -16,14 +16,12 @@ set_status
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint8_t set_status (queue& exec_queue,uint_8      new_status )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -67,7 +65,6 @@ set_status
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -84,7 +81,6 @@ set_status
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -97,7 +93,6 @@ set_status
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
