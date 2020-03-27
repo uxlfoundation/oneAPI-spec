@@ -1,7 +1,7 @@
 .. _mkl-rng-uniform-discrete:
 
 onemkl::rng::uniform (Discrete)
-============================
+===============================
 
 
 .. container::

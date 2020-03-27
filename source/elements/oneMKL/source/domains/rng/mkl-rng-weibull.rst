@@ -1,7 +1,7 @@
 .. _mkl-rng-weibull:
 
 onemkl::rng::weibull
-=================
+====================
 
 
 .. container::

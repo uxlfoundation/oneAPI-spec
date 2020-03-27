@@ -1,7 +1,7 @@
 .. _mkl-rng-gumbel:
 
 onemkl::rng::gumbel
-================
+===================
 
 
 .. container::

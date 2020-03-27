@@ -1,7 +1,7 @@
 .. _mkl-rng-generate:
 
 onemkl::rng::generate
-==================
+=====================
 
 
 .. container::

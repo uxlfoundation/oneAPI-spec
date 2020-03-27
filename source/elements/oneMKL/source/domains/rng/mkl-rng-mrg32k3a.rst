@@ -1,7 +1,7 @@
 .. _mkl-rng-mrg32k3a:
 
 onemkl::rng::mrg32k3a
-==================
+=====================
 
 
 .. container::

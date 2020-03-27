@@ -1,7 +1,7 @@
 .. _mkl-rng-wichmann_hill:
 
 onemkl::rng::wichmann_hill
-=======================
+==========================
 
 
 .. container::

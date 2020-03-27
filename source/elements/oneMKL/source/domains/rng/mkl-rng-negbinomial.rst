@@ -1,7 +1,7 @@
 .. _mkl-rng-negbinomial:
 
 onemkl::rng::negbinomial
-=====================
+========================
 
 
 .. container::

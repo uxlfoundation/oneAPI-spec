@@ -1,7 +1,7 @@
 .. _mkl-rng-geometric:
 
 onemkl::rng::geometric
-===================
+======================
 
 
 .. container::

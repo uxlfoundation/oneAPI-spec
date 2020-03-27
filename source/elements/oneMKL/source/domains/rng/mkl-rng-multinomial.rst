@@ -1,7 +1,7 @@
 .. _mkl-rng-multinomial:
 
 onemkl::rng::multinomial
-=====================
+========================
 
 
 .. container::

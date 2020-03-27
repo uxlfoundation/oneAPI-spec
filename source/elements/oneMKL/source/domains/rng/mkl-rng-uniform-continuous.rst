@@ -1,7 +1,7 @@
 .. _mkl-rng-uniform-continuous:
 
 onemkl::rng::uniform (Continuous)
-==============================
+=================================
 
 
 .. container::

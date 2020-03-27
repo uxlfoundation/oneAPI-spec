@@ -1,7 +1,7 @@
 .. _mkl-rng-ars5:
 
 onemkl::rng::ars5
-==============
+=================
 
 
 .. container::

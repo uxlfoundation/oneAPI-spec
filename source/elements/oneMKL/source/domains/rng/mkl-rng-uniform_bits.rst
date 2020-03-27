@@ -1,7 +1,7 @@
 .. _mkl-rng-uniform_bits:
 
 onemkl::rng::uniform_bits
-======================
+=========================
 
 
 .. container::

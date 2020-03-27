@@ -1,7 +1,7 @@
 .. _mkl-rng-cauchy:
 
 onemkl::rng::cauchy
-================
+===================
 
 
 .. container::

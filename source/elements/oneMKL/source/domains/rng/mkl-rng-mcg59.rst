@@ -1,7 +1,7 @@
 .. _mkl-rng-mcg59:
 
 onemkl::rng::mcg59
-===============
+==================
 
 
 .. container::

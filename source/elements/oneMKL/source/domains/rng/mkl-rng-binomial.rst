@@ -1,7 +1,7 @@
 .. _mkl-rng-binomial:
 
 onemkl::rng::binomial
-==================
+=====================
 
 
 .. container::

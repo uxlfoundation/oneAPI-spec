@@ -1,7 +1,7 @@
 .. _distributions-template-parameter-mkl-rng-method-values:
 
 Distributions Template Parameter onemkl::rng::method Values
-========================================================
+===========================================================
 
 
 .. container::

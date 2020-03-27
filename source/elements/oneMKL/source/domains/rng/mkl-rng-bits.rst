@@ -1,7 +1,7 @@
 .. _mkl-rng-bits:
 
 onemkl::rng::bits
-==============
+=================
 
 
 .. container::

@@ -1,7 +1,7 @@
 .. _mkl-rng-bernoulli:
 
 onemkl::rng::bernoulli
-===================
+======================
 
 
 .. container::

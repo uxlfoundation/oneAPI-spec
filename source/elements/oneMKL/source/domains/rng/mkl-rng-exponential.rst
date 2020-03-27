@@ -1,7 +1,7 @@
 .. _mkl-rng-exponential:
 
 onemkl::rng::exponential
-=====================
+========================
 
 
 .. container::
