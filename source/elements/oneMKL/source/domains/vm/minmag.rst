@@ -218,5 +218,3 @@ minmag
       Functions <miscellaneous-vm-functions.html>`__
 
 
-.. container::
-

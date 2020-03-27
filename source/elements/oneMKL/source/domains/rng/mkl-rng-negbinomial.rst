@@ -113,8 +113,6 @@ onemkl::rng::negbinomial
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-A7CA23B7-756F-45C6-85B3-3A8924939D7D-low.jpg
    :class: .eq

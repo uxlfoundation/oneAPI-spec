@@ -203,5 +203,3 @@ nearbyint
       Functions <rounding-functions.html>`__
 
 
-.. container::
-

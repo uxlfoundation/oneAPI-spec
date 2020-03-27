@@ -183,5 +183,3 @@ sbmv (USM Version)
       
 
 
-.. container::
-

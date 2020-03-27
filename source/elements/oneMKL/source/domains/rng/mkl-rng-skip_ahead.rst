@@ -230,8 +230,6 @@ onemkl::rng::skip_ahead
       Routines <service-routines.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-061AF9F8-B166-4154-9BF1-4E2C99F1CE1F-low.png
 

@@ -106,5 +106,3 @@ onemkl::rng::gamma
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-

@@ -153,5 +153,3 @@ orgtr
       Routines <lapack.html>`__
 
 
-.. container::
-

@@ -185,5 +185,3 @@ potrf
       Routines <lapack.html>`__
 
 
-.. container::
-

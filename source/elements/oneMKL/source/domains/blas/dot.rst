@@ -128,8 +128,6 @@ dot
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-93DA36DC-40CA-4C01-B883-DABAB0D37ee1.png
    :class: img-middle

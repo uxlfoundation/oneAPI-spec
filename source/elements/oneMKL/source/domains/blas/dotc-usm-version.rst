@@ -135,8 +135,6 @@ dotc (USM Version)
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-B2211D34-A472-4FB8-9CFB-1E11AF4F0ee1.png
    :class: img-middle

@@ -118,8 +118,6 @@ onemkl::rng::lognormal
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-4D962DF4-16F2-438B-8866-4F105DC41242-low.jpg
    :class: .eq

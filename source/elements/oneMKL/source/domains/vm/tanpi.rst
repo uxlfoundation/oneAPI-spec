@@ -242,5 +242,3 @@ tanpi
       Functions <trigonometric-functions.html>`__
 
 
-.. container::
-

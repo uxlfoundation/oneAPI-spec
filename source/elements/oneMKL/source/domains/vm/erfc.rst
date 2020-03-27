@@ -281,8 +281,6 @@ erfc
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-FB387120-1A86-45B9-BE20-97247EF0ABB5-low.gif
    :class: .eq

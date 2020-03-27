@@ -213,5 +213,3 @@ ormtr
       Routines <lapack.html>`__
 
 
-.. container::
-

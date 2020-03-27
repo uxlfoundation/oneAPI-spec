@@ -227,5 +227,3 @@ onemkl::sparse::gemv
       Routines <spblas.html>`__
 
 
-.. container::
-

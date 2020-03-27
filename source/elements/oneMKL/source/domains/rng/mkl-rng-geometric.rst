@@ -106,8 +106,6 @@ onemkl::rng::geometric
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-2D60A1A4-9522-40FC-AEEA-B64EB795144C-low.gif
    :class: .eq

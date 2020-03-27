@@ -118,8 +118,6 @@ onemkl::rng::beta
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-CD24FF51-197B-40A1-83A8-514788192ee1.png
    :class: img-middle

@@ -182,5 +182,3 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeBac
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-

@@ -182,5 +182,3 @@ sytrd
       Routines <lapack.html>`__
 
 
-.. container::
-

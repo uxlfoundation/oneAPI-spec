@@ -204,5 +204,4 @@ onemkl::sparse::gemm
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

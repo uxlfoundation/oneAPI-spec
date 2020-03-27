@@ -111,8 +111,6 @@ onemkl::rng::weibull
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-8F2DCE6A-CB54-4CEA-A5EB-937893A3DB34-low.gif
    :class: .eq

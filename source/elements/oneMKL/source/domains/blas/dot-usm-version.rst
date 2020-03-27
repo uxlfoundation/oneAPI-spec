@@ -150,8 +150,6 @@ dot (USM Version)
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-75532DED-BE44-4D85-B9C0-99C825778ee1.png
    :class: img-middle

@@ -174,8 +174,6 @@ rotmg (USM Version)
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-DA21ECDC-F63E-4971-BA3F-492E69335ee1.png
 .. |image1| image:: ../equations/GUID-DA21ECDC-F63E-4971-BA3F-492E69335ee2.png

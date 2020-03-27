@@ -142,5 +142,3 @@ scal (USM Version)
       
 
 
-.. container::
-

@@ -226,8 +226,6 @@ expint1
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-B229F6A5-0619-4F06-994B-8A734C356ee1.png
    :class: img-middle

@@ -134,8 +134,6 @@ dotu (USM Version)
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-42AF2BFE-F8F1-4F96-A4E0-05D4FB5A7ee1.png
    :class: img-middle

@@ -207,8 +207,6 @@ trunc
       Functions <rounding-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-CA113DF0-DE46-42A1-99AF-93F6F76E72EA-low.gif
 

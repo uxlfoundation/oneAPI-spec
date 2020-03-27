@@ -184,5 +184,3 @@ hetrd
       Routines <lapack.html>`__
 
 
-.. container::
-

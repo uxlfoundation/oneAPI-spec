@@ -426,8 +426,6 @@ gemm_batch
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-D797E8FA-B0CE-417C-98F1-896CDFB4Fee1.png
    :class: img-middle

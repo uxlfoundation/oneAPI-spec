@@ -146,5 +146,3 @@ sytrf
       Routines <lapack.html>`__
 
 
-.. container::
-

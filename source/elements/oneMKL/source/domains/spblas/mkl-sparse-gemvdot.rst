@@ -204,5 +204,4 @@ onemkl::sparse::gemvdot
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

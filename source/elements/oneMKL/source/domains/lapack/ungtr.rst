@@ -153,5 +153,3 @@ ungtr
       Routines <lapack.html>`__
 
 
-.. container::
-

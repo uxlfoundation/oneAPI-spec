@@ -110,8 +110,6 @@ onemkl::rng::laplace
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-1D36B5CE-3BF3-4762-926B-05C5527FAE45-low.gif
    :class: .eq

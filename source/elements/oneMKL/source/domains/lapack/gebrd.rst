@@ -227,8 +227,6 @@ gebrd
       Routines <lapack.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-03C78F41-D16C-4BFE-B087-BE4F5A6A0ee1.png
    :class: img-middle

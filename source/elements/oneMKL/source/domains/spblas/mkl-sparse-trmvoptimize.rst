@@ -168,5 +168,4 @@ onemkl::sparse::trmvOptimize
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

@@ -326,5 +326,3 @@ sinh
       Functions <hyperbolic-functions.html>`__
 
 
-.. container::
-

@@ -193,5 +193,3 @@ ungqr
       Routines <lapack.html>`__
 
 
-.. container::
-

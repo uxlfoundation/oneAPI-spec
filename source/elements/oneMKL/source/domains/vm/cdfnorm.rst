@@ -272,8 +272,6 @@ cdfnorm
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-817D9F12-6BD9-4B74-BFA0-39A03D0660C3-low.jpg
    :class: .eq

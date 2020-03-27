@@ -296,8 +296,6 @@ erfinv
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-4835D5B4-6232-45CD-9A49-0264F8B0DBF4-low.gif
    :class: .eq

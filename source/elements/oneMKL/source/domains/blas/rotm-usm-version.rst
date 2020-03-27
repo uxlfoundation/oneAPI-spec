@@ -181,8 +181,6 @@ rotm (USM Version)
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-67FC4AB3-40CB-441F-BA9F-88BAAC78Cee1.png
 .. |image1| image:: ../equations/GUID-67FC4AB3-40CB-441F-BA9F-88BAAC78Cee2.png

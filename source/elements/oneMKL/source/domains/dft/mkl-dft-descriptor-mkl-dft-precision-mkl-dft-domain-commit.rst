@@ -156,5 +156,3 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::commit
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-

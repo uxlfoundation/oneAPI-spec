@@ -104,8 +104,6 @@ onemkl::rng::uniform (Discrete)
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-A5408434-7126-4EEC-8AD1-856204EBF263-low.jpg
    :class: .eq

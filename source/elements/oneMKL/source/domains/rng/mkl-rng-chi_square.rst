@@ -99,8 +99,6 @@ onemkl::rng::chi_square
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-482EEED2-95DF-4AA3-A484-E2CC41F29ee1.png
    :class: img-middle

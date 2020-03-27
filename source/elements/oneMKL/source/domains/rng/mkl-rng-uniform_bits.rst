@@ -72,5 +72,3 @@ onemkl::rng::uniform_bits
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-

@@ -303,5 +303,3 @@ gesvd
       Routines <lapack.html>`__
 
 
-.. container::
-

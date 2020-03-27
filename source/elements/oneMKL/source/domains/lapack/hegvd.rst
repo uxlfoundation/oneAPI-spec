@@ -257,5 +257,3 @@ hegvd
       Routines <lapack.html>`__
 
 
-.. container::
-

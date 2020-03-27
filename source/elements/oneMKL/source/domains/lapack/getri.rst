@@ -163,5 +163,3 @@ getri
       Routines <lapack.html>`__
 
 
-.. container::
-

@@ -128,5 +128,4 @@ onemkl::rng::generate
          Routine <generate-routine.html>`__
 
 
-   .. container::
-
+   

@@ -113,8 +113,6 @@ dotc
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-AED001B6-9056-491F-ACBE-E06C82D17ee1.png
    :class: img-middle

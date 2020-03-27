@@ -163,5 +163,4 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-
+   

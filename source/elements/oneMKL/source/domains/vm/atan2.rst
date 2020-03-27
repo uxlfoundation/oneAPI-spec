@@ -357,5 +357,3 @@ atan2
       Functions <trigonometric-functions.html>`__
 
 
-.. container::
-

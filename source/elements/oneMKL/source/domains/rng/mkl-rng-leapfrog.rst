@@ -139,8 +139,6 @@ onemkl::rng::leapfrog
       Routines <service-routines.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-D90F2CB0-58B4-42F5-A1F9-FD1EA859DD44-low.png
 

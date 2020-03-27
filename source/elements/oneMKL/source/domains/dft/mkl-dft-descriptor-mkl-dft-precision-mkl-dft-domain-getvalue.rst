@@ -152,5 +152,4 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-
+   

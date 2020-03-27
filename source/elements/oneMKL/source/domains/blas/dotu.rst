@@ -111,8 +111,6 @@ dotu
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-3605ACD9-02D1-46D7-B791-F2F76F0D9ee1.png
    :class: img-middle

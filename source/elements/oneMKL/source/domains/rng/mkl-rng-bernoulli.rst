@@ -120,8 +120,6 @@ onemkl::rng::bernoulli
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-7F65198B-719A-44FB-8983-BBD3C196A663-low.jpg
    :class: .eq

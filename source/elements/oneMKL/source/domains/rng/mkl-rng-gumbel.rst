@@ -106,8 +106,6 @@ onemkl::rng::gumbel
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-09FC1496-B5B3-4DF6-A3EE-E6410BE1EFD2-low.jpg
    :class: .eq

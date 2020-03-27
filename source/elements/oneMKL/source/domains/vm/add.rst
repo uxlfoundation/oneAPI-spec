@@ -263,5 +263,3 @@ add
       Functions <arithmetic-functions.html>`__
 
 
-.. container::
-

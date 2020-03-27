@@ -117,5 +117,3 @@ nrm2
       
 
 
-.. container::
-

@@ -159,8 +159,6 @@ getrf_batch
       Routines <lapack.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-0F47CAD3-006C-4A78-B229-413313667ee1.png
    :class: img-middle

@@ -294,8 +294,6 @@ ln
       Functions <exponential-and-logarithmic-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-6FB20CE7-1E2A-4340-995F-0E621DEF0E2D-low.jpg
 .. |image1| image:: ../equations/GUID-0C4BC54F-4C29-4577-80AA-BCBCD291582A-low.jpg

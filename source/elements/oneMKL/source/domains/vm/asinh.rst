@@ -287,5 +287,3 @@ asinh
       Functions <hyperbolic-functions.html>`__
 
 
-.. container::
-

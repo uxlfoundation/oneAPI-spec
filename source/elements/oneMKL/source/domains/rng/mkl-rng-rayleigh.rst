@@ -111,8 +111,6 @@ onemkl::rng::rayleigh
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-96DF4ACE-8587-423F-B50A-E9A58BE272F9-low.gif
    :class: .eq

@@ -99,8 +99,6 @@ onemkl::rng::poisson_v
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-19F7C7EA-5657-4016-87A6-4E2721994C56-low.gif
    :class: .eq

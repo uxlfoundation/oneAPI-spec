@@ -294,8 +294,6 @@ erfcinv
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-9BCB2B87-3DED-4764-A182-30A4FAA4A2E2-low.gif
    :class: .eq

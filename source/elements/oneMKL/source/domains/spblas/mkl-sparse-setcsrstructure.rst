@@ -158,5 +158,3 @@ onemkl::sparse::setCSRstructure
       Routines <spblas.html>`__
 
 
-.. container::
-

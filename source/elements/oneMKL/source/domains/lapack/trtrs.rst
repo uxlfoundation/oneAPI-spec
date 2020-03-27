@@ -183,5 +183,3 @@ trtrs
       Routines <lapack.html>`__
 
 
-.. container::
-

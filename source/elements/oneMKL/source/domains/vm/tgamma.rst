@@ -223,5 +223,3 @@ tgamma
       Functions <special-functions.html>`__
 
 
-.. container::
-

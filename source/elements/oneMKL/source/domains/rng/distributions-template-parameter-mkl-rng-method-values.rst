@@ -95,8 +95,6 @@ Distributions Template Parameter onemkl::rng::method Values
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-50960934-BF9F-4070-BC8E-AE05FD9AFee1.png
    :class: img-middle

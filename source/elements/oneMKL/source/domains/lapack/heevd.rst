@@ -209,5 +209,3 @@ heevd
       Routines <lapack.html>`__
 
 
-.. container::
-

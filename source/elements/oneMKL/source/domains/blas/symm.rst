@@ -202,5 +202,3 @@ symm
       
 
 
-.. container::
-
