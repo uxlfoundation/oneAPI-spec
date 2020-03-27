@@ -165,7 +165,7 @@ getrs_batch
          :class: sectiontitle
 
 
-      An example of how to use getrs_batchcan be found in the oneMKL
+      An example of how to use getrs_batch can be found in the oneMKL
       installation directory, under:
 
 

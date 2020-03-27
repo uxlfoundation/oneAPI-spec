@@ -196,7 +196,7 @@ logb
       :class: sectiontitle
 
 
-   An example of how to use logbcan be found in the oneMKL installation
+   An example of how to use logb can be found in the oneMKL installation
    directory, under:
 
 

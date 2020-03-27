@@ -52,7 +52,7 @@ modf
       :class: sectiontitle
 
 
-   The modf(a) functioncomputes a truncated integer value and the
+   The modf(a) function computes a truncated integer value and the
    remaining fraction part for each vector element.
 
 
@@ -206,7 +206,7 @@ modf
       :class: sectiontitle
 
 
-   An example of how to use modfcan be found in the oneMKL installation
+   An example of how to use modf can be found in the oneMKL installation
    directory, under:
 
 

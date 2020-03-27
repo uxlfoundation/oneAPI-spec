@@ -147,13 +147,13 @@ hpr2 (USM Version)
 
 
       a
-         Pointer to the updated upper triangularpart of the Hermitian
+         Pointer to the updated upper triangular part of the Hermitian
          matrix ``A`` if ``upper_lower =upper``, or the updated lower
-         triangular part of theHermitian matrix ``A`` if
+         triangular part of the Hermitian matrix ``A`` if
          ``upper_lower =lower``.
 
 
-         The imaginary parts of the diagonal elements are set tozero.
+         The imaginary parts of the diagonal elements are set to zero.
 
 
    .. container:: section

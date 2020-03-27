@@ -62,7 +62,7 @@ syr2k (USM Version)
       where ``A`` is ``n`` x ``k`` and ``B`` is ``k`` x ``n``.
 
 
-      If ``trans`` = ``transpose::trans``, the operationis defined as:
+      If ``trans`` = ``transpose::trans``, the operation is defined as:
 
 
      

@@ -203,7 +203,7 @@ tgamma
       :class: sectiontitle
 
 
-   An example of how to use tgammacan be found in the oneMKL
+   An example of how to use tgamma can be found in the oneMKL
    installation directory, under:
 
 

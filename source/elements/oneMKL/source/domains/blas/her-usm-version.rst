@@ -135,13 +135,13 @@ her (USM Version)
 
 
       a
-         Pointer to the updated upper triangular part of theHermitian
+         Pointer to the updated upper triangular part of the Hermitian
          matrix ``A`` if ``upper_lower = upper`` or the updated
-         lowertriangular part of the Hermitian matrix ``A`` if
+         lower triangular part of the Hermitian matrix ``A`` if
          ``upper_lower = lower``.
 
 
-         The imaginary parts of the diagonal elementsare set to zero.
+         The imaginary parts of the diagonal elements are set to zero.
 
 
    .. container:: section

@@ -68,16 +68,16 @@ nextafter
 
          * -  Arguments/Results 
            -  Error Code 
-         * -  Input vector argument element is ﬁnite and the corresponding       result vector element value is inﬁnite
+         * -  Input vector argument element is finite and the corresponding result vector element value is infinite
            -  ``status::overflow`` 
-         * -  Result vector element value is subnormal or zero, and       different from the corresponding input vector argument element
+         * -  Result vector element value is subnormal or zero, and different from the corresponding input vector argument element
            -  ``status::underflow`` 
 
 
 
 
-   Even though underﬂow or overﬂow canoccur, the returned value is
-   independent of the current roundingdirection mode.
+   Even though underflow or overflow can occur, the returned value is
+   independent of the current rounding direction mode.
 
 
 .. container:: section
@@ -195,7 +195,7 @@ nextafter
       :class: sectiontitle
 
 
-   An example of how to use nextaftercan be found in the oneMKL
+   An example of how to use nextafter can be found in the oneMKL
    installation directory, under:
 
 

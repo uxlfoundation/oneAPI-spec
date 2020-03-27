@@ -7,7 +7,7 @@ trunc
 .. container::
 
 
-   Computes an integer valuerounded towards zero for each vector
+   Computes an integer value rounded towards zero for each vector
    element.
 
 
@@ -52,7 +52,7 @@ trunc
       :class: sectiontitle
 
 
-   The trunc(a)functioncomputes an integer valuerounded towards zero for
+   The trunc(a) function computes an integer value rounded towards zero for
    each vector element.
 
 
@@ -187,7 +187,7 @@ trunc
       :class: sectiontitle
 
 
-   An example of how to use trunccan be found in the oneMKL installation
+   An example of how to use trunc can be found in the oneMKL installation
    directory, under:
 
 

@@ -276,7 +276,7 @@ erfinv
       :class: sectiontitle
 
 
-   An example of how to use erfinvcan be found in the oneMKL
+   An example of how to use erfinv can be found in the oneMKL
    installation directory, under:
 
 

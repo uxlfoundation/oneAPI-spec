@@ -51,7 +51,7 @@ gebrd_get_lwork
 
 
       Computes the worksize needed for the reduction of a general matrix
-      to bidagonal form
+      to bidiagonal form
       (`gebrd <gebrd.html>`__).
       Calls to this routine must specify the template parameter
       explicitly.

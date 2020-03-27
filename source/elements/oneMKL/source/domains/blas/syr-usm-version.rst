@@ -136,9 +136,9 @@ syr (USM Version)
 
 
       a
-         Pointer to the updated upper triangularpart of the symmetric
+         Pointer to the updated upper triangular part of the symmetric
          matrix ``A`` if ``upper_lower =upper`` or the updated lower
-         triangular part of thesymmetric matrix ``A`` if
+         triangular part of the symmetric matrix ``A`` if
          ``upper_lower =lower``.
 
 

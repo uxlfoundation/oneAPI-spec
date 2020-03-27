@@ -252,7 +252,7 @@ cdfnorm
       :class: sectiontitle
 
 
-   An example of how to use cdfnormcan be found in the oneMKL
+   An example of how to use cdfnorm can be found in the oneMKL
    installation directory, under:
 
 

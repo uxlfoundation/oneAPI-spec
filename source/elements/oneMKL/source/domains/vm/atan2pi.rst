@@ -340,7 +340,7 @@ atan2pi
       :class: sectiontitle
 
 
-   An example of how to use atan2pican be found in the oneMKL
+   An example of how to use atan2pi can be found in the oneMKL
    installation directory, under:
 
 

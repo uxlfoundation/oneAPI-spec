@@ -136,13 +136,13 @@ her2
 
 
    a
-      Buffer holding the updated upper triangular part of theHermitian
+      Buffer holding the updated upper triangular part of the Hermitian
       matrix ``A`` if ``upper_lower = upper``, or the updated
-      lowertriangular part of the Hermitian matrix ``A`` if
+      lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower = lower``.
 
 
-      The imaginary parts of the diagonal elementsare set to zero.
+      The imaginary parts of the diagonal elements are set to zero.
 
 
 .. container:: familylinks

@@ -158,7 +158,7 @@ mulbyconj
       :class: sectiontitle
 
 
-   An example of how to use mulbyconjcan be found in the oneMKL
+   An example of how to use mulbyconj can be found in the oneMKL
    installation directory, under:
 
 

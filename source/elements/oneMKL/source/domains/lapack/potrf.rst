@@ -171,7 +171,7 @@ potrf
    GPU support is for only real precisions.
 
 
-   GPU support for this function does not include error reportingthrough
+   GPU support for this function does not include error reporting through
    the info parameter.
 
 

@@ -204,7 +204,7 @@ gemmt (USM Version)
 
       c
          Pointer to the output matrix, overwritten by the upper or lower
-         triangular part ofalpha\*op(``A``)*op(``B``) + beta\*\ ``C``.
+         triangular part of alpha\*op(``A``)*op(``B``) + beta\*\ ``C``.
 
 
    .. container:: section

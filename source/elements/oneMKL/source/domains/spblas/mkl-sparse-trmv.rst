@@ -1,7 +1,7 @@
 .. _mkl-sparse-trmv:
 
 onemkl::sparse::trmv
-=================
+====================
 
 
 .. container::

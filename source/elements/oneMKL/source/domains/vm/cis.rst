@@ -197,7 +197,7 @@ cis
       :class: sectiontitle
 
 
-   An example of how to use ciscan be found in the oneMKL installation
+   An example of how to use cis can be found in the oneMKL installation
    directory, under:
 
 

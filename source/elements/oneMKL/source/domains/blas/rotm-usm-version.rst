@@ -108,11 +108,11 @@ rotm (USM Version)
 
 
          ``param``\ [1-4] contain *h\ 11*,\ *h\ 21*, *h\ 12*,\ *h\ 22*
-         respectively, the components ofthe modified Givens
+         respectively, the components of the modified Givens
          transformation matrix ``H``.
 
 
-         Depending on the values of ``flag``, thecomponents of ``H`` are
+         Depending on the values of ``flag``, the components of ``H`` are
          set as follows:
 
 

@@ -86,7 +86,7 @@ nrm2 (USM Version)
 
 
       x
-         Pointer to input vector ``x``. The array holding input vectro
+         Pointer to input vector ``x``. The array holding input vector
          ``x`` must be of size at least (1 + (``n`` - 1)*abs(``incx``)).
          See `Matrix and Vector
          Storage <../matrix-storage.html>`__ for

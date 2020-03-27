@@ -52,7 +52,7 @@ nearbyint
       :class: sectiontitle
 
 
-   The nearbyint(a) functioncomputes a rounded integer value in a
+   The nearbyint(a) function computes a rounded integer value in a
    current rounding mode for each vector element.
 
 
@@ -183,7 +183,7 @@ nearbyint
       :class: sectiontitle
 
 
-   An example of how to use nearbyintcan be found in the oneMKL
+   An example of how to use nearbyint can be found in the oneMKL
    installation directory, under:
 
 

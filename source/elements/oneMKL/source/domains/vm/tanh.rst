@@ -266,7 +266,7 @@ tanh
       :class: sectiontitle
 
 
-   An example of how to use tanhcan be found in the oneMKL installation
+   An example of how to use tanh can be found in the oneMKL installation
    directory, under:
 
 

@@ -284,7 +284,7 @@ atanh
       :class: sectiontitle
 
 
-   An example of how to use atanhcan be found in the oneMKL installation
+   An example of how to use atanh can be found in the oneMKL installation
    directory, under:
 
 

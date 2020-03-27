@@ -274,7 +274,7 @@ erfcinv
       :class: sectiontitle
 
 
-   An example of how to use erfcinvcan be found in the oneMKL
+   An example of how to use erfcinv can be found in the oneMKL
    installation directory, under:
 
 

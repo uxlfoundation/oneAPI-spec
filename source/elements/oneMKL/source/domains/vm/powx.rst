@@ -67,7 +67,7 @@ powx
 
 
    Special values and VM Error Status treatment are the same as for the
-   powfunction.
+   pow function.
 
 
 .. container:: section
@@ -185,7 +185,7 @@ powx
       :class: sectiontitle
 
 
-   An example of how to use powxcan be found in the oneMKL installation
+   An example of how to use powx can be found in the oneMKL installation
    directory, under:
 
 

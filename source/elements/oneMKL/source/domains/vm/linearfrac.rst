@@ -65,7 +65,7 @@ linearfrac
    therefore no special values are defined for this function. If used in
    HA or LA mode, linearfrac sets the VM Error Status to
    status::accuracy_warning. Correctness is guaranteed within the
-   threshold limitationsdefined for each input parameter (see the table
+   threshold limitations defined for each input parameter (see the table
    below); otherwise, the behavior is unspecified.
 
 
@@ -187,7 +187,7 @@ linearfrac
 
 
    a
-      The pointer ``a`` to thie 1st input vector of size ``n``.
+      The pointer ``a`` to the 1st input vector of size ``n``.
 
 
    b
@@ -264,7 +264,7 @@ linearfrac
       :class: sectiontitle
 
 
-   An example of how to use linearfraccan be found in the oneMKL
+   An example of how to use linearfrac can be found in the oneMKL
    installation directory, under:
 
 

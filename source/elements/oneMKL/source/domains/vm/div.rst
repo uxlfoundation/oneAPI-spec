@@ -248,7 +248,7 @@ div
       :class: sectiontitle
 
 
-   An example of how to use divcan be found in the oneMKL installation
+   An example of how to use div can be found in the oneMKL installation
    directory, under:
 
 

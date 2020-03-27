@@ -275,7 +275,7 @@ acosh
       :class: sectiontitle
 
 
-   An example of how to use acoshcan be found in the oneMKL installation
+   An example of how to use acosh can be found in the oneMKL installation
    directory, under:
 
 

@@ -24,6 +24,6 @@ Unified Shared Memory model
 
 While the buffer model is powerful and elegantly expresses the data dependencies, it can be a burden for programmers to replace all pointers and arrays by buffers in their C++ applications.  A pointer-based model called Unified Shared Memory (USM) has also been provided in the DPC++ language. This alternative approach allows the programmer to use standard C++ pointers that have been allocated using one of the DPC++ provided memory allocation routines (e.g., ``malloc_shared()``). The USM pointers, however, do not manage data dependencies between enqueued actions on the USM data, so DPC++ language provides ``sycl::event`` objects associated with each enqueued submission which can be used to explicitly manage the dependencies.
 
-oneMKL provides APIs where USM pointers contain the memory for all non scalar input and output data arguments. Additionally, oneMKL APIs with USM pointers shall provide means to pass ``sycl::events`` to manage the data depednencies.  See :ref:`onemkl_synchronization_with_usm` for the details.
+oneMKL provides APIs where USM pointers contain the memory for all non scalar input and output data arguments. Additionally, oneMKL APIs with USM pointers shall provide means to pass ``sycl::events`` to manage the data dependencies.  See :ref:`onemkl_synchronization_with_usm` for the details.
 
 

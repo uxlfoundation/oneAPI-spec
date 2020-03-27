@@ -193,7 +193,7 @@ inv
       :class: sectiontitle
 
 
-   An example of how to use invcan be found in the oneMKL installation
+   An example of how to use inv can be found in the oneMKL installation
    directory, under:
 
 

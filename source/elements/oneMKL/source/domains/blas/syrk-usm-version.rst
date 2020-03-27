@@ -24,7 +24,7 @@ syrk (USM Version)
 
          .. cpp:function::  event syrk(queue &exec_queue, uplo         upper_lower, transpose trans, std::int64_t n, std::int64_t k, T         alpha, const T\* a, std::int64_t lda, T beta, T\* c,         std::int64_t ldc, const vector_class<event> &dependencies =         {})
 
-         The USM version ofsyrk supports the following precisions.
+         The USM version of syrk supports the following precisions.
 
 
          .. list-table:: 

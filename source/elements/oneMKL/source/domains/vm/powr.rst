@@ -290,7 +290,7 @@ powr
       :class: sectiontitle
 
 
-   An example of how to use powrcan be found in the oneMKL installation
+   An example of how to use powr can be found in the oneMKL installation
    directory, under:
 
 

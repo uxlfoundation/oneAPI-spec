@@ -51,7 +51,7 @@ rint
       :class: sectiontitle
 
 
-   The rint(a)functioncomputes a rounded floating-point integer value
+   The rint(a) function computes a rounded floating-point integer value
    using the current rounding mode for each vector element.
 
 
@@ -70,7 +70,7 @@ rint
       minus infinity.
 
 
-   -  ``f(-1.5) = -1``, for rounding modes set to roundtoward zero or to
+   -  ``f(-1.5) = -1``, for rounding modes set to round toward zero or to
       plus infinity.
 
 
@@ -201,7 +201,7 @@ rint
       :class: sectiontitle
 
 
-   An example of how to use rintcan be found in the oneMKL installation
+   An example of how to use rint can be found in the oneMKL installation
    directory, under:
 
 

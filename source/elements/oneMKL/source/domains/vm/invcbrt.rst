@@ -193,7 +193,7 @@ invcbrt
       :class: sectiontitle
 
 
-   An example of how to use invcbrtcan be found in the oneMKL
+   An example of how to use invcbrt can be found in the oneMKL
    installation directory, under:
 
 

@@ -55,7 +55,7 @@ atan2
    elements of two vectors.
 
 
-   The elements of the output vectory are computed as the four-quadrant
+   The elements of the output vector are computed as the four-quadrant
    arctangent of ``a[i] / b[i]``.
 
 

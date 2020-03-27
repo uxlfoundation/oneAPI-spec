@@ -188,7 +188,7 @@ fmax
       :class: sectiontitle
 
 
-   An example of how to use fmaxcan be found in the oneMKL installation
+   An example of how to use fmax can be found in the oneMKL installation
    directory, under:
 
 

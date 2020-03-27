@@ -210,7 +210,7 @@ lgamma
       :class: sectiontitle
 
 
-   An example of how to use lgammacan be found in the oneMKL
+   An example of how to use lgamma can be found in the oneMKL
    installation directory, under:
 
 

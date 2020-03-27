@@ -1,7 +1,7 @@
 .. _mkl-sparse-matrixinit:
 
 onemkl::sparse::matrixInit
-=======================
+==========================
 
 
 .. container::
