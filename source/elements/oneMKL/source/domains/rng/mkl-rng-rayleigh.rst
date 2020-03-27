@@ -1,7 +1,7 @@
 .. _mkl-rng-rayleigh:
 
 onemkl::rng::rayleigh
-==================
+=====================
 
 
 .. container::

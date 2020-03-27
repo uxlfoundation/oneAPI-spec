@@ -1,7 +1,7 @@
 .. _mkl-rng-skip_ahead:
 
 onemkl::rng::skip_ahead
-====================
+=======================
 
 
 .. container::

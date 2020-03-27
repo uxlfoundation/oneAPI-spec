@@ -1,7 +1,7 @@
 .. _mkl-rng-philox4x32x10:
 
 onemkl::rng::philox4x32x10
-=======================
+==========================
 
 
 .. container::

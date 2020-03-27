@@ -1,7 +1,7 @@
 .. _mkl-rng-gamma:
 
 onemkl::rng::gamma
-===============
+==================
 
 
 .. container::

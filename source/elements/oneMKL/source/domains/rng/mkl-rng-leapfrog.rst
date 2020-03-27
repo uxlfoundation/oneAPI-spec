@@ -1,7 +1,7 @@
 .. _mkl-rng-leapfrog:
 
 onemkl::rng::leapfrog
-==================
+=====================
 
 
 .. container::

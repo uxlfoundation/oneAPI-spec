@@ -1,7 +1,7 @@
 .. _mkl-rng-mcg31m1:
 
 onemkl::rng::mcg31m1
-=================
+====================
 
 
 .. container::

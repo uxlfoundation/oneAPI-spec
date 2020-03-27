@@ -1,7 +1,7 @@
 .. _mkl-sparse-gemvoptimize:
 
 onemkl::sparse::gemvOptimize
-=========================
+============================
 
 
 .. container::

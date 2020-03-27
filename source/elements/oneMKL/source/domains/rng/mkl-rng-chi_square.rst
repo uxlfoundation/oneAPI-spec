@@ -1,7 +1,7 @@
 .. _mkl-rng-chi_square:
 
 onemkl::rng::chi_square
-====================
+=======================
 
 
 .. container::

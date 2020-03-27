@@ -1,7 +1,7 @@
 .. _mkl-rng-nondeterministic:
 
 onemkl::rng::nondeterministic
-==========================
+=============================
 
 
 .. container::

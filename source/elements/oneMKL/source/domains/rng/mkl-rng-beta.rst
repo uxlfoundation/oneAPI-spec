@@ -1,7 +1,7 @@
 .. _mkl-rng-beta:
 
 onemkl::rng::beta
-==============
+=================
 
 
 .. container::

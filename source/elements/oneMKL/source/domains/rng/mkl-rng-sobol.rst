@@ -1,7 +1,7 @@
 .. _mkl-rng-sobol:
 
 onemkl::rng::sobol
-===============
+==================
 
 
 .. container::

@@ -1,7 +1,7 @@
 .. _mkl-sparse-gemm:
 
 onemkl::sparse::gemm
-=================
+====================
 
 
 .. container::

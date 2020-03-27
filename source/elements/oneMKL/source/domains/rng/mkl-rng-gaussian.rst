@@ -1,7 +1,7 @@
 .. _mkl-rng-gaussian:
 
 onemkl::rng::gaussian
-==================
+=====================
 
 
 .. container::

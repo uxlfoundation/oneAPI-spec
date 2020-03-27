@@ -1,7 +1,7 @@
 .. _mkl-rng-poisson_v:
 
 onemkl::rng::poisson_v
-===================
+======================
 
 
 .. container::

@@ -1,7 +1,7 @@
 .. _mkl-rng-niederreiter:
 
 onemkl::rng::niederreiter
-======================
+=========================
 
 
 .. container::

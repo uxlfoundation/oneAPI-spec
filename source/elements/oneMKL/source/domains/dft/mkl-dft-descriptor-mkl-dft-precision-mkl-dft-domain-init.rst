@@ -1,7 +1,7 @@
 .. _mkl-dft-descriptor-mkl-dft-precision-mkl-dft-domain-init:
 
 onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
-=================================================================
+==========================================================================
 
 
 .. container::

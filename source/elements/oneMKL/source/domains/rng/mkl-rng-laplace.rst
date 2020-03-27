@@ -1,7 +1,7 @@
 .. _mkl-rng-laplace:
 
 onemkl::rng::laplace
-=================
+====================
 
 
 .. container::

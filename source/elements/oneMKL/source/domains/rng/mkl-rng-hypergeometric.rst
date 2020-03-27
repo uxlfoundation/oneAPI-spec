@@ -1,7 +1,7 @@
 .. _mkl-rng-hypergeometric:
 
 onemkl::rng::hypergeometric
-========================
+===========================
 
 
 .. container::
