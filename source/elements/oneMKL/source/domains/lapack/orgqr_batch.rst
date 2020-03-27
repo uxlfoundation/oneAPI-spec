@@ -241,5 +241,3 @@ orgqr_batch
       Routines <lapack.html>`__
 
 
-.. container::
-

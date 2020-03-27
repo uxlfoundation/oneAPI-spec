@@ -129,5 +129,3 @@ potri
       Routines <lapack.html>`__
 
 
-.. container::
-

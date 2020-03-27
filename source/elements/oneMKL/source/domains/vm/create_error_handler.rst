@@ -409,5 +409,3 @@ create_error_handler
       Functions <vm-service-functions.html>`__
 
 
-.. container::
-

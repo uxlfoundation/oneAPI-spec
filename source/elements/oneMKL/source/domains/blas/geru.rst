@@ -150,5 +150,3 @@ geru
       
 
 
-.. container::
-

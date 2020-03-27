@@ -212,5 +212,3 @@ gemm
       
 
 
-.. container::
-

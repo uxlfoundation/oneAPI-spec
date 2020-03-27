@@ -228,5 +228,3 @@ ungbr
       Routines <lapack.html>`__
 
 
-.. container::
-

@@ -360,5 +360,3 @@ atan2pi
       Functions <trigonometric-functions.html>`__
 
 
-.. container::
-

@@ -106,8 +106,6 @@ onemkl::rng::cauchy
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-04615D14-A026-4BF0-ACD6-0FC822FEC64E-low.gif
    :class: .eq

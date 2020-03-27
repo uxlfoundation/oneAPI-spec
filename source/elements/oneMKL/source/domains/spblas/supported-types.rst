@@ -27,5 +27,3 @@ Supported Types
 
 
 
-.. container::
-

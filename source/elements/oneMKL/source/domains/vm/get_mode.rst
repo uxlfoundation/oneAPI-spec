@@ -112,5 +112,3 @@ get_mode
       Functions <vm-service-functions.html>`__
 
 
-.. container::
-

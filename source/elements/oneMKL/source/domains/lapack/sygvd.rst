@@ -258,5 +258,3 @@ sygvd
       Routines <lapack.html>`__
 
 
-.. container::
-

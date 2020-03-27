@@ -197,5 +197,3 @@ ormqr
       Routines <lapack.html>`__
 
 
-.. container::
-

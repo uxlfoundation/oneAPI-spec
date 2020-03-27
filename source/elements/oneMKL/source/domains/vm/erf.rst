@@ -263,8 +263,6 @@ erf
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-8742E2B1-94AF-4622-B964-181611E3D1F2-low.jpg
    :class: .eq

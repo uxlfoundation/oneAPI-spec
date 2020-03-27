@@ -220,5 +220,3 @@ unmtr
       Routines <lapack.html>`__
 
 
-.. container::
-

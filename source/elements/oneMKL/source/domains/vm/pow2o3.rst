@@ -213,5 +213,3 @@ pow2o3
       Functions <power-and-root-functions.html>`__
 
 
-.. container::
-

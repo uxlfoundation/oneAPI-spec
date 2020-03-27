@@ -82,5 +82,4 @@ onemkl::rng::bits
          topic:** `Distributions <distributions.html>`__
 
 
-   .. container::
-
+   

@@ -193,5 +193,3 @@ orgqr
       Routines <lapack.html>`__
 
 
-.. container::
-

@@ -123,5 +123,3 @@ get_status
       Functions <vm-service-functions.html>`__
 
 
-.. container::
-

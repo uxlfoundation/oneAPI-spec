@@ -116,8 +116,6 @@ onemkl::rng::binomial
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-D703292D-2A37-42C6-B713-E38B801F0114-low.gif
    :class: .eq

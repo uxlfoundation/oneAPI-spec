@@ -203,5 +203,3 @@ atanpi
       Functions <trigonometric-functions.html>`__
 
 
-.. container::
-

@@ -154,8 +154,6 @@ rotmg
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-D6A2FFBB-116D-4A37-A278-47F163915ee1.png
 .. |image1| image:: ../equations/GUID-D6A2FFBB-116D-4A37-A278-47F163915ee2.png

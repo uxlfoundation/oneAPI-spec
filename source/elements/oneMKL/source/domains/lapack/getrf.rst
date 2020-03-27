@@ -152,5 +152,3 @@ getrf
       Routines <lapack.html>`__
 
 
-.. container::
-

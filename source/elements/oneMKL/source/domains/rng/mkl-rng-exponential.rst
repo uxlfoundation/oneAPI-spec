@@ -106,8 +106,6 @@ onemkl::rng::exponential
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-12315BD9-4F4D-42B0-A9B5-68A22D40756D-low.jpg
    :class: .eq

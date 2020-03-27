@@ -219,5 +219,3 @@ onemkl::sparse::trsv
       Routines <spblas.html>`__
 
 
-.. container::
-

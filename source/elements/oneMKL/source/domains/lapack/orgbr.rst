@@ -226,5 +226,3 @@ orgbr
       Routines <lapack.html>`__
 
 
-.. container::
-

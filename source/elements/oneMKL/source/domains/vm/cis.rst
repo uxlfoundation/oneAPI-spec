@@ -217,5 +217,3 @@ cis
       Functions <trigonometric-functions.html>`__
 
 
-.. container::
-

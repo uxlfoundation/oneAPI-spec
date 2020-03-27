@@ -239,5 +239,3 @@ fmod
       Functions <arithmetic-functions.html>`__
 
 
-.. container::
-

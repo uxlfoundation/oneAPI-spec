@@ -159,8 +159,6 @@ rotm
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-608D9BA6-827F-48DE-A01F-0EE5991F7ee1.png
 .. |image1| image:: ../equations/GUID-608D9BA6-827F-48DE-A01F-0EE5991F7ee2.png

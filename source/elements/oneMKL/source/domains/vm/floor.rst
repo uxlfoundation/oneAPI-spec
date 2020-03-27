@@ -207,8 +207,6 @@ floor
       Functions <rounding-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-41F8B94B-EEFA-4308-925A-D2DF486FBF8B-low.gif
 

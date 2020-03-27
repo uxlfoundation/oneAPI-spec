@@ -122,8 +122,6 @@ onemkl::rng::hypergeometric
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-5159E8DD-25FF-473A-86AA-1E71FFCD018C-low.jpg
    :class: .eq

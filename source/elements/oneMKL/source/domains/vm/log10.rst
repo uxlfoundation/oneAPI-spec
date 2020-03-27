@@ -295,8 +295,6 @@ log10
       Functions <exponential-and-logarithmic-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-2293B947-42D6-4E5F-BBB3-9DC135AA724A-low.gif
 .. |image1| image:: ../equations/GUID-7AE86F5B-8BE2-42D5-B6C7-AF9FF41CCE11-low.jpg

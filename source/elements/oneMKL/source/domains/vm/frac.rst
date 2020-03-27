@@ -206,8 +206,6 @@ frac
       Functions <rounding-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-A43FDBB0-21D0-4087-AAD9-4289019DD4C3-low.gif
 

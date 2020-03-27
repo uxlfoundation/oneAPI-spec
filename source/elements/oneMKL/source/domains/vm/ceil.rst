@@ -207,8 +207,6 @@ ceil
       Functions <rounding-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-A3089763-5ACF-46DB-AFFF-197043DD5932-low.gif
 

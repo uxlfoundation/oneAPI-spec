@@ -98,8 +98,6 @@ onemkl::rng::multinomial
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-749B9421-ABAF-41EA-B8B9-3C9941EF5B72-low.png
    :class: .eq

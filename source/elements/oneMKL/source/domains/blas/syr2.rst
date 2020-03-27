@@ -153,5 +153,3 @@ syr2
       
 
 
-.. container::
-

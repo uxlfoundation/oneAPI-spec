@@ -171,5 +171,3 @@ potrf (USM Version)
       Routines <lapack.html>`__
 
 
-.. container::
-

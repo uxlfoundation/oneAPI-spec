@@ -161,5 +161,3 @@ geqrf
       Routines <lapack.html>`__
 
 
-.. container::
-

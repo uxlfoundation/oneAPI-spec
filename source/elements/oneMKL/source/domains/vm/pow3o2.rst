@@ -232,5 +232,3 @@ pow3o2
       Functions <power-and-root-functions.html>`__
 
 
-.. container::
-

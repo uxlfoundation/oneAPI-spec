@@ -201,5 +201,3 @@ getrs
       Routines <lapack.html>`__
 
 
-.. container::
-

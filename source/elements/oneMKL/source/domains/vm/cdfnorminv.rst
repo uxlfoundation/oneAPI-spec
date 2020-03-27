@@ -292,8 +292,6 @@ cdfnorminv
       Functions <special-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-A3054E0D-CFC1-44E8-89F7-B5A232903EE9-low.jpg
    :class: .eq

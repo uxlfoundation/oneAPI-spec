@@ -124,8 +124,6 @@ onemkl::rng::gaussian
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-281DBA27-691A-4B62-A255-FC33EA28D8D5-low.jpg
    :class: .eq

@@ -231,5 +231,4 @@ onemkl::sparse::trmv
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

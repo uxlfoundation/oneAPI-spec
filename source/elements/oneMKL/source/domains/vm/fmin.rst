@@ -208,5 +208,3 @@ fmin
       Functions <miscellaneous-vm-functions.html>`__
 
 
-.. container::
-

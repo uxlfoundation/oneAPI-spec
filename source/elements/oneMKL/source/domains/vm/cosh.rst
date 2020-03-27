@@ -326,5 +326,3 @@ cosh
       Functions <hyperbolic-functions.html>`__
 
 
-.. container::
-

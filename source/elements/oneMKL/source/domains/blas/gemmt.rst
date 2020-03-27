@@ -224,5 +224,3 @@ gemmt
       
 
 
-.. container::
-

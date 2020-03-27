@@ -474,5 +474,3 @@ pow
       Functions <power-and-root-functions.html>`__
 
 
-.. container::
-

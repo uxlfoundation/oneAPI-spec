@@ -201,5 +201,3 @@ syevd
       Routines <lapack.html>`__
 
 
-.. container::
-

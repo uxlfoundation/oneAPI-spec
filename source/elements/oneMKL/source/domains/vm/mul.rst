@@ -303,5 +303,3 @@ mul
       Functions <arithmetic-functions.html>`__
 
 
-.. container::
-

@@ -168,5 +168,3 @@ syrk
       
 
 
-.. container::
-

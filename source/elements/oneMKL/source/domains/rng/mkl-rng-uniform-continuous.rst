@@ -103,8 +103,6 @@ onemkl::rng::uniform (Continuous)
       topic:** `Distributions <distributions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-8AD223ED-624A-4390-9514-D8EF20BD04EE-low.gif
    :class: .eq

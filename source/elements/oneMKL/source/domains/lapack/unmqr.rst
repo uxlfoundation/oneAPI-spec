@@ -200,5 +200,3 @@ unmqr
       Routines <lapack.html>`__
 
 
-.. container::
-

@@ -219,5 +219,3 @@ log2
       Functions <exponential-and-logarithmic-functions.html>`__
 
 
-.. container::
-

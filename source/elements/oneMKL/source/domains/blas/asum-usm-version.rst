@@ -135,8 +135,6 @@ asum (USM Version)
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-4F76F5A1-251F-4AC0-A2E0-A3B4B6F39ee1.png
    :class: img-middle

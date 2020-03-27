@@ -230,5 +230,3 @@ lgamma
       Functions <special-functions.html>`__
 
 
-.. container::
-

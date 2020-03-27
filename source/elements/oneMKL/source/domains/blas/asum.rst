@@ -113,9 +113,6 @@ asum
       
 
 
-.. container::
-
-
 .. |image0| image:: ../equations/GUID-684BB993-83CA-4605-BD49-E493806C1ee1.png
    :class: img-middle
 

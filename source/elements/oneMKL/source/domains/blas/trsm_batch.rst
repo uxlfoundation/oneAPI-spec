@@ -424,8 +424,6 @@ trsm_batch
       
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-D352DB8F-BC76-4A5E-A7CA-5B4CAAA90ee1.png
    :class: img-middle

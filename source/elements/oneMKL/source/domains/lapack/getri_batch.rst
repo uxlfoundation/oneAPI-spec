@@ -147,5 +147,3 @@ getri_batch
       Routines <lapack.html>`__
 
 
-.. container::
-

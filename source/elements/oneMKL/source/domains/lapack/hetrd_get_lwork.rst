@@ -133,5 +133,3 @@ hetrd_get_lwork
       Routines <lapack.html>`__
 
 
-.. container::
-

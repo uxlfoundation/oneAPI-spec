@@ -303,5 +303,3 @@ acos
       Functions <trigonometric-functions.html>`__
 
 
-.. container::
-

@@ -226,8 +226,6 @@ modf
       Functions <rounding-functions.html>`__
 
 
-.. container::
-
 
 .. |image0| image:: ../equations/GUID-38C12345-5E6E-4D94-8072-460502CB52EC-low.gif
 

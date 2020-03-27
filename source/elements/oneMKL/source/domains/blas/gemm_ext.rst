@@ -331,5 +331,3 @@ gemm_ext
       
 
 
-.. container::
-
