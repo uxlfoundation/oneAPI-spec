@@ -3,9 +3,9 @@
 
 .. _oneDAL-section:
 
-==========================================
-|dal_full_name| (|dal_short_name|)
-==========================================
+==============================
+|dal_short_name| |dal_version|
+==============================
 
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
