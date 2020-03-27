@@ -54,26 +54,44 @@ required if covered by newer C++ or SYCL versions directly.
            implementations supporting specific classes of devices
    :name: Extensions Table
 
-   =======================    ================  ================  ====================  =============  =========================
-   Extension                  CPU               GPU               FPGA                  Test [#test]_  `SYCL Extensions`_ folder
-   =======================    ================  ================  ====================  =============  =========================
-   Unified Shared Memory      Required [#USM]_  Required [#USM]_  Required [#USM]_      USM            USM
-   In-order queues            Required          Required          Required              NA [#na]_      OrderedQueue
-   Optional lambda name       Required          Required          Required              NA [#na]_      UnnamedKernelLambda
-   Deduction guides           Required          Required          Required              NA [#na]_      deduction_guides
-   Reductions                 Required          Required          Required              NA [#na]_      Reduction
-   Sub-groups                 Required          Required          Not required [#tmp]_  sub_group      SubGroup
-   Sub-group algorithms       Required          Required          Not required [#tmp]_  sub_group      SubGroupAlgorithms
-   Enqueued barriers          Required          Required          Required              NA             EnqueueBarrier
-   Extended atomics           Required          Required          Required              NA             ExtendedAtomics
-   Group algorithms           Required          Required          Required              NA             GroupAlgorithms
-   Group mask                 Required          Required          Required              NA             GroupMask
-   Restrict all arguments     Required          Required          Required              NA             KernelRestrictAll
-   Standard layout relaxed    Required          Required          Required              NA             RelaxStdLayout
-   Queue shortcuts            Required          Required          Required              NA             QueueShortcuts
-   Required work-group size   Required          Required          Required              NA             ReqdWorkGroupSize
-   Data flow pipes            Not required      Not required      Required              FPGA_tests     DataFlowPipes
-   =======================   ================  ================  ====================  =============   =========================
+   ==========================  ================  ================  ====================  =============
+   Extension                   CPU               GPU               FPGA                  Test [#test]_
+   ==========================  ================  ================  ====================  =============
+   `Unified Shared Memory`_    Required [#USM]_  Required [#USM]_  Required [#USM]_      `usm <https://github.com/intel/llvm/tree/sycl/sycl/test/usm>`__
+   `In-order queues`_          Required          Required          Required              NA [#na]_    
+   `Optional lambda name`_     Required          Required          Required              NA [#na]_    
+   `Deduction guides`_         Required          Required          Required              NA [#na]_    
+   `Reductions`_               Required          Required          Required              NA [#na]_    
+   `Sub-groups`_               Required          Required          Not required [#tmp]_  `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
+   `Sub-group algorithms`_     Required          Required          Not required [#tmp]_  `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
+   `Enqueued barriers`_        Required          Required          Required              NA           
+   `Extended atomics`_         Required          Required          Required              NA           
+   `Group algorithms`_         Required          Required          Required              NA           
+   `Group mask`_               Required          Required          Required              NA           
+   `Restrict all arguments`_   Required          Required          Required              NA           
+   `Standard layout relaxed`_  Required          Required          Required              NA           
+   `Queue shortcuts`_          Required          Required          Required              NA           
+   `Reqd work-group size`_     Required          Required          Required              NA           
+   `Data flow pipes`_          Not required      Not required      Required              `fpga_tests <https://github.com/intel/llvm/tree/sycl/sycl/test/fpga_tests>`__
+   ==========================  ================  ================  ====================  =============
+
+.. _`Unified Shared Memory`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/USM
+.. _`In-order queues`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/OrderedQueue
+.. _`Optional lambda name`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/UnnamedKernelLambda
+.. _`Deduction guides`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/guides
+.. _`Reductions`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/Reduction
+.. _`Sub-groups`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/SubGroup
+.. _`Sub-group algorithms`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/SubGroupAlgorithms
+.. _`Enqueued barriers`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/EnqueueBarrier
+.. _`Extended atomics`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/ExtendedAtomics
+.. _`Group algorithms`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/GroupAlgorithms
+.. _`Group mask`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/GroupMask
+.. _`Restrict all arguments`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/KernelRestrictAll
+.. _`Standard layout relaxed`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/RelaxStdLayout
+.. _`Queue shortcuts`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/QueueShortcuts
+.. _`Reqd work-group size`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/ReqdWorkGroupSize
+.. _`Data flow pipes`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/DataFlowPipes
+
 
 .. [#test] Test directory within `extension tests`_
 .. [#USM] Minimum of explicit USM support
