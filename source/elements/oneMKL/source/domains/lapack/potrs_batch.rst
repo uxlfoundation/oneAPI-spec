@@ -17,7 +17,6 @@ potrs_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ potrs_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -82,7 +80,6 @@ potrs_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -143,7 +140,6 @@ potrs_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -170,7 +166,6 @@ potrs_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 

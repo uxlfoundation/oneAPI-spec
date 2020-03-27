@@ -16,7 +16,6 @@ round
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ round
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -97,7 +95,6 @@ round
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -154,7 +151,6 @@ round
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -181,7 +177,6 @@ round
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -15,7 +15,6 @@ cospi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ cospi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -106,7 +104,6 @@ cospi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -177,7 +174,6 @@ cospi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -204,7 +200,6 @@ cospi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

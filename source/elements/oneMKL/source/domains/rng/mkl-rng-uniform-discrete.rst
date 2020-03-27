@@ -16,7 +16,6 @@ onemkl::rng::uniform (Discrete)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ onemkl::rng::uniform (Discrete)
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -49,7 +47,6 @@ onemkl::rng::uniform (Discrete)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -74,7 +71,6 @@ onemkl::rng::uniform (Discrete)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

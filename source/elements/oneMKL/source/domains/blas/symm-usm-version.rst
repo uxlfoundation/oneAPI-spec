@@ -16,7 +16,6 @@ symm (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -45,7 +44,6 @@ symm (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -91,7 +89,6 @@ symm (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -181,7 +178,6 @@ symm (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -198,7 +194,6 @@ symm (USM Version)
 
 
       .. rubric:: Notes
-         :name: notes
          :class: sectiontitle
 
 

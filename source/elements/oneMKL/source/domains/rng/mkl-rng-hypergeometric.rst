@@ -15,7 +15,6 @@ onemkl::rng::hypergeometric
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ onemkl::rng::hypergeometric
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -50,7 +48,6 @@ onemkl::rng::hypergeometric
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -86,7 +83,6 @@ onemkl::rng::hypergeometric
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

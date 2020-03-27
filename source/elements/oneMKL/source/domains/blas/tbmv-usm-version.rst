@@ -15,7 +15,6 @@ tbmv (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,7 +43,6 @@ tbmv (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -77,7 +75,6 @@ tbmv (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -149,7 +146,6 @@ tbmv (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 

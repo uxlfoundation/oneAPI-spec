@@ -15,7 +15,6 @@ rotmg (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ rotmg (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -61,7 +59,6 @@ rotmg (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -97,7 +94,6 @@ rotmg (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 

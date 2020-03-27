@@ -15,7 +15,6 @@ atanh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ atanh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -182,7 +180,6 @@ atanh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -253,7 +250,6 @@ atanh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -280,7 +276,6 @@ atanh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

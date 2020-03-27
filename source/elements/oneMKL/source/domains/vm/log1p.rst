@@ -16,7 +16,6 @@ log1p
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ log1p
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -98,7 +96,6 @@ log1p
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -169,7 +166,6 @@ log1p
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -196,7 +192,6 @@ log1p
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

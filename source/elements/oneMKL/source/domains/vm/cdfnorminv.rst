@@ -16,7 +16,6 @@ cdfnorminv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ cdfnorminv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -170,7 +168,6 @@ cdfnorminv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -241,7 +238,6 @@ cdfnorminv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -268,7 +264,6 @@ cdfnorminv
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

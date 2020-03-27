@@ -15,7 +15,6 @@ onemkl::rng::poisson
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -38,7 +37,6 @@ onemkl::rng::poisson
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ onemkl::rng::poisson
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -71,7 +68,6 @@ onemkl::rng::poisson
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

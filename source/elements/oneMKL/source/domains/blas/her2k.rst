@@ -15,7 +15,6 @@ her2k
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ her2k
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -89,7 +87,6 @@ her2k
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -176,7 +173,6 @@ her2k
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

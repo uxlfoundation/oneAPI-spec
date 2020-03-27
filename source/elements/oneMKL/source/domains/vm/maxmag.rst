@@ -16,7 +16,6 @@ maxmag
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ maxmag
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -102,7 +100,6 @@ maxmag
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -167,7 +164,6 @@ maxmag
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -194,7 +190,6 @@ maxmag
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

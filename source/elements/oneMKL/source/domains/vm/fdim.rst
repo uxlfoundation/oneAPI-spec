@@ -17,7 +17,6 @@ fdim
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ fdim
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -96,7 +94,6 @@ fdim
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -161,7 +158,6 @@ fdim
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -188,7 +184,6 @@ fdim
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

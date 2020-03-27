@@ -17,7 +17,6 @@ potrs (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ potrs (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -84,7 +82,6 @@ potrs (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -147,7 +144,6 @@ potrs (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 

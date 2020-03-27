@@ -15,7 +15,6 @@ pow2o3
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ pow2o3
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -91,7 +89,6 @@ pow2o3
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -162,7 +159,6 @@ pow2o3
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -189,7 +185,6 @@ pow2o3
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -15,7 +15,6 @@ acos
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ acos
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -181,7 +179,6 @@ acos
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -252,7 +249,6 @@ acos
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -279,7 +275,6 @@ acos
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -15,7 +15,6 @@ axpy
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ axpy
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -69,7 +67,6 @@ axpy
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -112,7 +109,6 @@ axpy
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

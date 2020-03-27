@@ -15,7 +15,6 @@ syrk (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,7 +43,6 @@ syrk (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -79,7 +77,6 @@ syrk (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -154,7 +151,6 @@ syrk (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 

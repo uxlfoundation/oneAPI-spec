@@ -15,7 +15,6 @@ onemkl::rng::uniform_bits
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -24,7 +23,6 @@ onemkl::rng::uniform_bits
       .. cpp:function::  class uniform_bits {}
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -32,7 +30,6 @@ onemkl::rng::uniform_bits
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -45,7 +42,6 @@ onemkl::rng::uniform_bits
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

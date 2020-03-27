@@ -15,7 +15,6 @@ exp
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ exp
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -198,7 +196,6 @@ exp
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -269,7 +266,6 @@ exp
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -296,7 +292,6 @@ exp
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -26,7 +25,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
          .. cpp:function::  onemkl::dft::ErrCode descriptor.getValue         (onemkl::dft::ConfigParam param , ...) 
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -48,7 +45,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -64,7 +60,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -89,7 +84,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 

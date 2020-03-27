@@ -15,7 +15,6 @@ asum
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ asum
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -66,7 +64,6 @@ asum
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -94,7 +91,6 @@ asum
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

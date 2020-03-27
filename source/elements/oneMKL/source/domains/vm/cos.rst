@@ -15,7 +15,6 @@ cos
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ cos
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -109,7 +107,6 @@ cos
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -180,7 +177,6 @@ cos
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -207,7 +203,6 @@ cos
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

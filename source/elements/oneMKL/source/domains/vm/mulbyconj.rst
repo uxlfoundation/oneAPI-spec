@@ -16,7 +16,6 @@ mulbyconj
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ mulbyconj
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -127,7 +125,6 @@ mulbyconj
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -154,7 +151,6 @@ mulbyconj
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

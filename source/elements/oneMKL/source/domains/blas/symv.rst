@@ -15,7 +15,6 @@ symv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ symv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -71,7 +69,6 @@ symv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -132,7 +129,6 @@ symv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

@@ -16,7 +16,6 @@ floor
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ floor
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -99,7 +97,6 @@ floor
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -156,7 +153,6 @@ floor
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -183,7 +179,6 @@ floor
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

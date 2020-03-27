@@ -16,7 +16,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -26,7 +25,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
          .. cpp:function::  onemkl::dft::Descriptor<PRECISION , DOMAIN>         descriptor
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 

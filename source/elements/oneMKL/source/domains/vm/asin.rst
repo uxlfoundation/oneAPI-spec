@@ -15,7 +15,6 @@ asin
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ asin
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -108,7 +106,6 @@ asin
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -179,7 +176,6 @@ asin
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -206,7 +202,6 @@ asin
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

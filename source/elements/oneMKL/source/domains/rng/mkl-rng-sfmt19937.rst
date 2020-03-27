@@ -17,7 +17,6 @@ onemkl::rng::sfmt19937
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ onemkl::rng::sfmt19937
          .. cpp:function::  }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -49,7 +47,6 @@ onemkl::rng::sfmt19937
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -61,7 +58,6 @@ onemkl::rng::sfmt19937
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 

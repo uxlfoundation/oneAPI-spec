@@ -15,7 +15,6 @@ div
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ div
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -138,7 +136,6 @@ div
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -217,7 +214,6 @@ div
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -244,7 +240,6 @@ div
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

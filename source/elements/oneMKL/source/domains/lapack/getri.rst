@@ -17,7 +17,6 @@ getri
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +42,6 @@ getri
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -58,7 +56,6 @@ getri
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -96,7 +93,6 @@ getri
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -123,7 +119,6 @@ getri
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

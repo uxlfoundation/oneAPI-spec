@@ -16,7 +16,6 @@ copysign
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ copysign
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -87,7 +85,6 @@ copysign
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -152,7 +149,6 @@ copysign
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -179,7 +175,6 @@ copysign
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

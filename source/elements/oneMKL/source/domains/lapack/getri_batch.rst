@@ -17,7 +17,6 @@ getri_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ getri_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -63,7 +61,6 @@ getri_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -99,7 +96,6 @@ getri_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -123,7 +119,6 @@ getri_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 

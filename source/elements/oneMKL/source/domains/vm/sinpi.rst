@@ -15,7 +15,6 @@ sinpi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ sinpi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -109,7 +107,6 @@ sinpi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -180,7 +177,6 @@ sinpi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -207,7 +203,6 @@ sinpi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

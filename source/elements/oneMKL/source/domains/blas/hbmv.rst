@@ -15,7 +15,6 @@ hbmv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ hbmv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -72,7 +70,6 @@ hbmv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -142,7 +139,6 @@ hbmv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

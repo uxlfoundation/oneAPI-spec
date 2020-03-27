@@ -15,7 +15,6 @@ onemkl::sparse::matrixInit
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -25,7 +24,6 @@ onemkl::sparse::matrixInit
          .. cpp:function::  void onemkl::sparse::matrixInit (matrixHandle_t         hMatrix)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -33,7 +31,6 @@ onemkl::sparse::matrixInit
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -43,7 +40,6 @@ onemkl::sparse::matrixInit
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 

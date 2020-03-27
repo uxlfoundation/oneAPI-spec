@@ -15,7 +15,6 @@ rint
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ rint
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -113,7 +111,6 @@ rint
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -170,7 +167,6 @@ rint
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -197,7 +193,6 @@ rint
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

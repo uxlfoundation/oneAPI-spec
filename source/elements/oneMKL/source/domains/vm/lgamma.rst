@@ -16,7 +16,6 @@ lgamma
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ lgamma
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -108,7 +106,6 @@ lgamma
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -179,7 +176,6 @@ lgamma
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -206,7 +202,6 @@ lgamma
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -18,7 +18,6 @@ orgbr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +41,6 @@ orgbr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -101,7 +99,6 @@ orgbr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -173,7 +170,6 @@ orgbr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,7 +198,6 @@ orgbr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

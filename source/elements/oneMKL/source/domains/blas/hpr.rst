@@ -15,7 +15,6 @@ hpr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ hpr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -70,7 +68,6 @@ hpr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -119,7 +116,6 @@ hpr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

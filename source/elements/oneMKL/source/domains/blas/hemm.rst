@@ -16,7 +16,6 @@ hemm
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ hemm
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -86,7 +84,6 @@ hemm
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -171,7 +168,6 @@ hemm
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -192,7 +188,6 @@ hemm
 
 
    .. rubric:: Notes
-      :name: notes
       :class: sectiontitle
 
 

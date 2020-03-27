@@ -15,7 +15,6 @@ nrm2
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ nrm2
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -70,7 +68,6 @@ nrm2
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -98,7 +95,6 @@ nrm2
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

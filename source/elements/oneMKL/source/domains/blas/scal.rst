@@ -15,7 +15,6 @@ scal
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -50,7 +49,6 @@ scal
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -77,7 +75,6 @@ scal
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -109,7 +106,6 @@ scal
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

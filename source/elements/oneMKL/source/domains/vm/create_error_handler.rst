@@ -15,7 +15,6 @@ create_error_handler
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -52,7 +51,6 @@ create_error_handler
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -165,7 +163,6 @@ create_error_handler
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -200,7 +197,6 @@ create_error_handler
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -213,7 +209,6 @@ create_error_handler
 
 
       .. rubric:: Examples
-         :name: examples
          :class: sectiontitle
 
 

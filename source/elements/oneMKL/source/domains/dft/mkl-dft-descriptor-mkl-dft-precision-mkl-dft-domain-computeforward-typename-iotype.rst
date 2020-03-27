@@ -15,7 +15,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +26,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
          .. cpp:function::  onemkl::dft::ErrCode descriptor.computeForward         (cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1>         &out , cl::sycl::event\* event = nullptr) 
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -35,7 +33,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -70,7 +67,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -103,7 +99,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 

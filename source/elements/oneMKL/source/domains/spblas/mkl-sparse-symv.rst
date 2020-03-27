@@ -15,7 +15,6 @@ onemkl::sparse::symv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -23,7 +22,6 @@ onemkl::sparse::symv
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -44,7 +42,6 @@ onemkl::sparse::symv
          .. cpp:function::  void onemkl::sparse::symv (cl::sycl::queue &         queue, onemkl::uplo uplo_val, fp alpha, matrixHandle_t handle, fp         \*x, fp beta, fp \*y)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -52,12 +49,10 @@ onemkl::sparse::symv
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
          .. rubric:: Note
-            :name: note-1
             :class: NoteTipHead
 
 
@@ -88,7 +83,6 @@ onemkl::sparse::symv
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -129,7 +123,6 @@ onemkl::sparse::symv
 
 
                .. rubric:: Note
-                  :name: note-2
                   :class: NoteTipHead
 
 
@@ -156,7 +149,6 @@ onemkl::sparse::symv
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -169,7 +161,6 @@ onemkl::sparse::symv
 
 
          .. rubric:: Example
-            :name: example
             :class: sectiontitle
 
 

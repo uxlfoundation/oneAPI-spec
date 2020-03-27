@@ -15,7 +15,6 @@ tanh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ tanh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -178,7 +176,6 @@ tanh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -235,7 +232,6 @@ tanh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -262,7 +258,6 @@ tanh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -17,7 +17,6 @@ remainder
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ remainder
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -110,7 +108,6 @@ remainder
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -189,7 +186,6 @@ remainder
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -216,7 +212,6 @@ remainder
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -15,7 +15,6 @@ gbmv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +40,6 @@ gbmv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -78,7 +76,6 @@ gbmv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -163,7 +160,6 @@ gbmv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

@@ -16,14 +16,12 @@ clear_status
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint8_t clear_status (queue& exec_queue )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -67,7 +65,6 @@ clear_status
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -80,7 +77,6 @@ clear_status
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -93,7 +89,6 @@ clear_status
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

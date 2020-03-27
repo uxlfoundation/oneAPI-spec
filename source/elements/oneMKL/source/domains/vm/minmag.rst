@@ -16,7 +16,6 @@ minmag
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ minmag
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -102,7 +100,6 @@ minmag
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -167,7 +164,6 @@ minmag
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -194,7 +190,6 @@ minmag
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

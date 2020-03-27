@@ -15,14 +15,12 @@ get_status
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint8_t get_status (queue& exec_queue )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -65,7 +63,6 @@ get_status
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -78,7 +75,6 @@ get_status
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -91,7 +87,6 @@ get_status
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

@@ -15,7 +15,6 @@ sincos
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ sincos
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -107,7 +105,6 @@ sincos
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -178,7 +175,6 @@ sincos
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -215,7 +211,6 @@ sincos
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

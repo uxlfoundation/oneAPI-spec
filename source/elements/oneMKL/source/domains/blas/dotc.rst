@@ -16,7 +16,6 @@ dotc
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ dotc
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -56,7 +54,6 @@ dotc
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -95,7 +92,6 @@ dotc
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

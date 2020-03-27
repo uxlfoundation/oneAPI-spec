@@ -16,7 +16,6 @@ onemkl::sparse::trmvOptimize
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -24,7 +23,6 @@ onemkl::sparse::trmvOptimize
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -40,7 +38,6 @@ onemkl::sparse::trmvOptimize
          .. cpp:function::  void onemkl::sparse::trmvOptimize         (cl::sycl::queue & queue, onemkl::uplo uplo_val, onemkl::transpose         transpose_val, onemkl::diag diag_val, matrixHandle_t handle)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,12 +45,10 @@ onemkl::sparse::trmvOptimize
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
          .. rubric:: Note
-            :name: note-1
             :class: NoteTipHead
 
 
@@ -66,7 +61,6 @@ onemkl::sparse::trmvOptimize
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -114,7 +108,6 @@ onemkl::sparse::trmvOptimize
 
 
                .. rubric:: Note
-                  :name: note-2
                   :class: NoteTipHead
 
 
@@ -150,7 +143,6 @@ onemkl::sparse::trmvOptimize
 
 
                .. rubric:: Note
-                  :name: note-3
                   :class: NoteTipHead
 
 

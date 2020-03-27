@@ -15,7 +15,6 @@ onemkl::rng::geometric
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -38,7 +37,6 @@ onemkl::rng::geometric
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ onemkl::rng::geometric
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -76,7 +73,6 @@ onemkl::rng::geometric
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

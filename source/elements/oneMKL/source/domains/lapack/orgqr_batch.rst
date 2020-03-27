@@ -17,7 +17,6 @@ orgqr_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +45,6 @@ orgqr_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -148,7 +146,6 @@ orgqr_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -193,7 +190,6 @@ orgqr_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -217,7 +213,6 @@ orgqr_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 

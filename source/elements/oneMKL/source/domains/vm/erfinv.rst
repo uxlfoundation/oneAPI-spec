@@ -15,7 +15,6 @@ erfinv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ erfinv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -174,7 +172,6 @@ erfinv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -245,7 +242,6 @@ erfinv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -272,7 +268,6 @@ erfinv
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

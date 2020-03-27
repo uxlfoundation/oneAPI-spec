@@ -16,7 +16,6 @@ ungqr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ ungqr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -96,7 +94,6 @@ ungqr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -141,7 +138,6 @@ ungqr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -169,7 +165,6 @@ ungqr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

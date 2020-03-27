@@ -15,7 +15,6 @@ sqrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -49,7 +48,6 @@ sqrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -175,7 +173,6 @@ sqrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -246,7 +243,6 @@ sqrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -273,7 +269,6 @@ sqrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

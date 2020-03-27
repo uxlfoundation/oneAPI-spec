@@ -15,7 +15,6 @@ gerc
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ gerc
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -73,7 +71,6 @@ gerc
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -132,7 +129,6 @@ gerc
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

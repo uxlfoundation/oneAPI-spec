@@ -15,14 +15,12 @@ sdsdot
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  void sdsdot(queue &exec_queue, std::int64_t n,      float sb, buffer<float,1> &x, std::int64_t incx, buffer<float,1>      &y, std::int64_t incy, buffer<float,1> &result)
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ sdsdot
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -75,7 +72,6 @@ sdsdot
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 

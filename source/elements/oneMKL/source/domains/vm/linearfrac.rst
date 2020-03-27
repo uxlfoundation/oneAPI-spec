@@ -16,7 +16,6 @@ linearfrac
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -48,7 +47,6 @@ linearfrac
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -122,7 +120,6 @@ linearfrac
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -233,7 +230,6 @@ linearfrac
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -260,7 +256,6 @@ linearfrac
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

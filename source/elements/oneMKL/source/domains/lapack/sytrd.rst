@@ -16,7 +16,6 @@ sytrd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +39,6 @@ sytrd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -56,7 +54,6 @@ sytrd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -103,7 +100,6 @@ sytrd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -158,7 +154,6 @@ sytrd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

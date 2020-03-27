@@ -15,7 +15,6 @@ hemv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -39,7 +38,6 @@ hemv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -71,7 +69,6 @@ hemv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -136,7 +133,6 @@ hemv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 

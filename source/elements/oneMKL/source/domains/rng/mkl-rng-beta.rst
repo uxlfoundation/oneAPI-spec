@@ -15,7 +15,6 @@ onemkl::rng::beta
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,7 +43,6 @@ onemkl::rng::beta
       .. cpp:function::  }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -52,7 +50,6 @@ onemkl::rng::beta
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -79,7 +76,6 @@ onemkl::rng::beta
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 

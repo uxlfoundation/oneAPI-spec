@@ -15,7 +15,6 @@ invsqrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -47,7 +46,6 @@ invsqrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -94,7 +92,6 @@ invsqrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -165,7 +162,6 @@ invsqrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -192,7 +188,6 @@ invsqrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 

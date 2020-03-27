@@ -18,7 +18,6 @@ nextafter
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -50,7 +49,6 @@ nextafter
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -85,7 +83,6 @@ nextafter
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -164,7 +161,6 @@ nextafter
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -191,7 +187,6 @@ nextafter
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
