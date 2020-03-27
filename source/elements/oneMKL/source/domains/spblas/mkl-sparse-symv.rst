@@ -1,7 +1,7 @@
 .. _mkl-sparse-symv:
 
 onemkl::sparse::symv
-=================
+====================
 
 
 .. container::

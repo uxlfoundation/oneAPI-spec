@@ -1,7 +1,7 @@
 .. _mkl-rng-lognormal:
 
 onemkl::rng::lognormal
-===================
+======================
 
 
 .. container::

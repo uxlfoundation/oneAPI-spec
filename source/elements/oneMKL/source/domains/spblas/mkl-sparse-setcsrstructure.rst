@@ -1,7 +1,7 @@
 .. _mkl-sparse-setcsrstructure:
 
 onemkl::sparse::setCSRstructure
-============================
+===============================
 
 
 .. container::

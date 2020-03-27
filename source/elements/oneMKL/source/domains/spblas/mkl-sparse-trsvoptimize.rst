@@ -1,7 +1,7 @@
 .. _mkl-sparse-trsvoptimize:
 
 onemkl::sparse::trsvOptimize
-=========================
+============================
 
 
 .. container::
