@@ -114,7 +114,6 @@ dotc (USM Version)
 
 
       .. rubric:: Return Values
-         :name: return-values
          :class: sectiontitle
 
 

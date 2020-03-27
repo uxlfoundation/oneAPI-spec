@@ -137,7 +137,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeBac
 
 
          .. rubric:: Return Values
-            :name: return-values
             :class: sectiontitle
 
 

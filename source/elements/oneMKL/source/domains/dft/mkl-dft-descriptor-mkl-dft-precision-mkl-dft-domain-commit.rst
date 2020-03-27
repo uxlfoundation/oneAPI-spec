@@ -110,7 +110,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::commit
 
 
          .. rubric:: Return Values
-            :name: return-values
             :class: sectiontitle
 
 

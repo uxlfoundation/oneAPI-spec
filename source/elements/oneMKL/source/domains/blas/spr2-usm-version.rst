@@ -150,7 +150,6 @@ spr2 (USM Version)
 
 
       .. rubric:: Return Values
-         :name: return-values
          :class: sectiontitle
 
 

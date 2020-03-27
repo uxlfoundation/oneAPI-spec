@@ -176,7 +176,6 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Return Values
-         :name: return-values
          :class: sectiontitle
 
 

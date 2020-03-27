@@ -108,7 +108,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
 
 
          .. rubric:: Return Values
-            :name: return-values
             :class: sectiontitle
 
 
