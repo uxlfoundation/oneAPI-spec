@@ -5,7 +5,7 @@ Sparse BLAS Routines
 
 .. container::
 
-   Sparse BLAS Routines provide basic operations on sparse vectors and matrice
+   Sparse BLAS Routines provide basic operations on sparse vectors and matrices
 
 .. container::
 

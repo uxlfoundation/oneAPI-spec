@@ -196,7 +196,7 @@ invsqrt
       :class: sectiontitle
 
 
-   An example of how to use invsqrtcan be found in the oneMKL
+   An example of how to use invsqrt can be found in the oneMKL
    installation directory, under:
 
 

@@ -7,7 +7,7 @@ round
 .. container::
 
 
-   Computes a valuerounded to the nearest integer for each vector
+   Computes a value rounded to the nearest integer for each vector
    element.
 
 
@@ -52,8 +52,8 @@ round
       :class: sectiontitle
 
 
-   The round(a) functioncomputes a valuerounded to the nearest
-   integerfor each vector element. Input elements that are halfway
+   The round(a) function computes a value rounded to the nearest
+   integer for each vector element. Input elements that are halfway
    between two consecutive integers are always rounded away from zero
    regardless of the rounding mode.
 
@@ -185,7 +185,7 @@ round
       :class: sectiontitle
 
 
-   An example of how to use roundcan be found in the oneMKL installation
+   An example of how to use round can be found in the oneMKL installation
    directory, under:
 
 

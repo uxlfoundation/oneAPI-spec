@@ -219,7 +219,7 @@ fmod
       :class: sectiontitle
 
 
-   An example of how to use fmodcan be found in the oneMKL installation
+   An example of how to use fmod can be found in the oneMKL installation
    directory, under:
 
 

@@ -129,8 +129,8 @@ trsm_batch
 
 
    ``A`` is either ``m`` x ``m`` or ``n`` x ``n``,depending on whether
-   it multiplies ``X`` on the leftor right. On return, the matrix ``B``
-   is overwrittenby the solution matrix ``X``.
+   it multiplies ``X`` on the left or right. On return, the matrix ``B``
+   is overwritten by the solution matrix ``X``.
 
 
 .. container:: section

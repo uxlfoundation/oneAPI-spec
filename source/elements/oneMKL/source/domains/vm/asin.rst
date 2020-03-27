@@ -96,7 +96,7 @@ asin
 
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -210,7 +210,7 @@ asin
       :class: sectiontitle
 
 
-   An example of how to use asincan be found in the oneMKL installation
+   An example of how to use asin can be found in the oneMKL installation
    directory, under:
 
 

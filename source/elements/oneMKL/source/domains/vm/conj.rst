@@ -152,7 +152,7 @@ conj
       :class: sectiontitle
 
 
-   An example of how to use conjcan be found in the oneMKL installation
+   An example of how to use conj can be found in the oneMKL installation
    directory, under:
 
 

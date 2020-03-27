@@ -40,7 +40,7 @@ setmode
       numbers.
 
 
-      The mode::ftzdazonis specifically designed to improve the
+      The mode::ftzdazon is specifically designed to improve the
       performance of computations that involve denormalized numbers at
       the cost of reasonable accuracy loss. This mode changes the
       numeric behavior of the functions: denormalized input values are

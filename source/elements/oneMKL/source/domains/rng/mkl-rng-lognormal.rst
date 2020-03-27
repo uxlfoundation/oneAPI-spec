@@ -7,7 +7,7 @@ onemkl::rng::lognormal
 .. container::
 
 
-   Generates lognormally distributed random numbers.
+   Generates log-normally distributed random numbers.
 
 
    .. container:: section

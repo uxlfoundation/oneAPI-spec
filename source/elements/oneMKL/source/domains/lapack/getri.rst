@@ -23,7 +23,7 @@ getri
 
       .. cpp:function::  void getri_get_lwork(queue &exec_queue,      std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<std::int64_t,1> &ipiv, buffer<T,1> &work, std::int64_t      lwork, buffer<std::int64_t,1> &info)
 
-      ``getri`` supports the following precisionss.
+      ``getri`` supports the following precisions.
 
 
       .. list-table:: 
@@ -149,7 +149,7 @@ getri
    GPU support is for only real precisions.
 
 
-   For GPU support, errors are reportedthrough the info parameter, but
+   For GPU support, errors are reported through the info parameter, but
    computation does not halt for an algorithmic error.
 
 

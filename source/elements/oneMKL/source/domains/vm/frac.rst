@@ -51,7 +51,7 @@ frac
       :class: sectiontitle
 
 
-   The frac(a) functioncomputes a signed fractional part for each vector
+   The frac(a) function computes a signed fractional part for each vector
    element.
 
 
@@ -186,7 +186,7 @@ frac
       :class: sectiontitle
 
 
-   An example of how to use fraccan be found in the oneMKL installation
+   An example of how to use frac can be found in the oneMKL installation
    directory, under:
 
 

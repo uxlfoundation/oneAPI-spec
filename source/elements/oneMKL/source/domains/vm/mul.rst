@@ -283,7 +283,7 @@ mul
       :class: sectiontitle
 
 
-   An example of how to use mulcan be found in the oneMKL installation
+   An example of how to use mul can be found in the oneMKL installation
    directory, under:
 
 

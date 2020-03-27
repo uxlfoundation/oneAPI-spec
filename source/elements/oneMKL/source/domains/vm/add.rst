@@ -243,7 +243,7 @@ add
       :class: sectiontitle
 
 
-   An example of how to use addcan be found in the oneMKL installation
+   An example of how to use add can be found in the oneMKL installation
    directory, under:
 
 

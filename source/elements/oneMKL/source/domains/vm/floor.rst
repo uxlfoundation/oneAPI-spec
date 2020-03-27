@@ -7,7 +7,7 @@ floor
 .. container::
 
 
-   Computes an integer valuerounded towards minus infinity for each
+   Computes an integer value rounded towards minus infinity for each
    vector element.
 
 
@@ -52,7 +52,7 @@ floor
       :class: sectiontitle
 
 
-   The floor(a)functioncomputes an integer valuerounded towards minus
+   The floor(a)function computes an integer value rounded towards minus
    infinity for each vector element.
 
 
@@ -187,7 +187,7 @@ floor
       :class: sectiontitle
 
 
-   An example of how to use floorcan be found in the oneMKL installation
+   An example of how to use floor can be found in the oneMKL installation
    directory, under:
 
 

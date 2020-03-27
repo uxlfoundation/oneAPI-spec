@@ -219,7 +219,7 @@ sincos
       :class: sectiontitle
 
 
-   An example of how to use sincoscan be found in the oneMKL
+   An example of how to use sincos can be found in the oneMKL
    installation directory, under:
 
 

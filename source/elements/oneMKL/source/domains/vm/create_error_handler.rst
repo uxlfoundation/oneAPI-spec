@@ -249,7 +249,7 @@ create_error_handler
 
 
       The ``st`` contains either ``status::success`` or accumulated
-      error statuses if computational errors occured in ``vm::erfinv``.
+      error statuses if computational errors occurred in ``vm::erfinv``.
 
 
       Multiple status mode with create_error_handler():

@@ -221,7 +221,7 @@ hypot
       :class: sectiontitle
 
 
-   An example of how to use hypotcan be found in the oneMKL installation
+   An example of how to use hypot can be found in the oneMKL installation
    directory, under:
 
 

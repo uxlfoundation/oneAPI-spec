@@ -51,7 +51,7 @@ sqr
       :class: sectiontitle
 
 
-   The sqr() function performs element by element sqaring of the vector.
+   The sqr() function performs element by element squaring of the vector.
 
 
    .. container:: tablenoborder
@@ -181,7 +181,7 @@ sqr
       :class: sectiontitle
 
 
-   An example of how to use sqrcan be found in the oneMKL installation
+   An example of how to use sqr can be found in the oneMKL installation
    directory, under:
 
 

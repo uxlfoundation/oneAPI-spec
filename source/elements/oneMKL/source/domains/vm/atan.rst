@@ -90,7 +90,7 @@ atan
    The atan function does not generate any errors.
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -190,7 +190,7 @@ atan
       :class: sectiontitle
 
 
-   An example of how to use atancan be found in the oneMKL installation
+   An example of how to use atan can be found in the oneMKL installation
    directory, under:
 
 

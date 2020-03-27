@@ -46,9 +46,9 @@ sytrf
       :class: sectiontitle
 
 
-   The routine computes thefactorization of a real/complex symmetric
-   matrix ``A`` usingthe Bunch-Kaufman diagonal pivoting method. The
-   form of thefactorization is:
+   The routine computes the factorization of a real/complex symmetric
+   matrix ``A`` using the Bunch-Kaufman diagonal pivoting method. The
+   form of the factorization is:
 
 
    -  if ``upper_lower=uplo::upper``, ``A`` = ``U*D*U``\ :sup:`T`

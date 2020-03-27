@@ -203,7 +203,7 @@ acospi
       :class: sectiontitle
 
 
-   An example of how to use acospican be found in the oneMKL
+   An example of how to use acospi can be found in the oneMKL
    installation directory, under:
 
 

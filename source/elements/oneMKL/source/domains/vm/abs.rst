@@ -87,7 +87,7 @@ abs
 
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -190,7 +190,7 @@ abs
       :class: sectiontitle
 
 
-   An example of how to use abscan be found in the oneMKL installation
+   An example of how to use abs can be found in the oneMKL installation
    directory, under:
 
 

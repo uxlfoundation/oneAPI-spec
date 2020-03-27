@@ -107,7 +107,7 @@ rotm
       matrix ``H``.
 
 
-      Depending on the values of ``flag``, thecomponents of ``H`` are
+      Depending on the values of ``flag``, the components of ``H`` are
       set as follows:
 
 

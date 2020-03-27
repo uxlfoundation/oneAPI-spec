@@ -243,7 +243,7 @@ sub
       :class: sectiontitle
 
 
-   An example of how to use subcan be found in the oneMKL installation
+   An example of how to use sub can be found in the oneMKL installation
    directory, under:
 
 

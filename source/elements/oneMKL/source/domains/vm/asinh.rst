@@ -267,7 +267,7 @@ asinh
       :class: sectiontitle
 
 
-   An example of how to use asinhcan be found in the oneMKL installation
+   An example of how to use asinh can be found in the oneMKL installation
    directory, under:
 
 

@@ -7,7 +7,7 @@ ceil
 .. container::
 
 
-   Computes an integer valuerounded towards plus infinity for each
+   Computes an integer value rounded towards plus infinity for each
    vector element.
 
 
@@ -52,7 +52,7 @@ ceil
       :class: sectiontitle
 
 
-   The ceil(a) functioncomputes an integer valuerounded towards plus
+   The ceil(a) function computes an integer value rounded towards plus
    infinity for each vector element.
 
 
@@ -187,7 +187,7 @@ ceil
       :class: sectiontitle
 
 
-   An example of how to use ceilcan be found in the oneMKL installation
+   An example of how to use ceil can be found in the oneMKL installation
    directory, under:
 
 

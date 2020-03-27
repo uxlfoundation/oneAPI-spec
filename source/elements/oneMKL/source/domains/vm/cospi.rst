@@ -208,7 +208,7 @@ cospi
       :class: sectiontitle
 
 
-   An example of how to use cospican be found in the oneMKL installation
+   An example of how to use cospi can be found in the oneMKL installation
    directory, under:
 
 

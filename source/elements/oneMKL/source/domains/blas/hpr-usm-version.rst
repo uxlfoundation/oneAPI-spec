@@ -136,7 +136,7 @@ hpr (USM Version)
 
 
       a
-         Pointer to the updated upper triangularpart of the Hermitian
+         Pointer to the updated upper triangular part of the Hermitian
          matrix ``A`` if ``upper_lower =upper``, or the updated lower
          triangular part of the Hermitian matrix ``A`` if
          ``upper_lower =lower``.

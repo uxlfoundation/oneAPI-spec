@@ -53,8 +53,8 @@ copysign
 
 
    The copysign(a,b) function returns the first vector argument elements
-   withthe sign changed to match the sign of the second vector
-   argument'scorresponding elements.
+   with the sign changed to match the sign of the second vector
+   argument's corresponding elements.
 
 
    .. container:: tablenoborder
@@ -183,7 +183,7 @@ copysign
       :class: sectiontitle
 
 
-   An example of how to use copysigncan be found in the oneMKL
+   An example of how to use copysign can be found in the oneMKL
    installation directory, under:
 
 

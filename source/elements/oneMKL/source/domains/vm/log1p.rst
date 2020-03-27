@@ -200,7 +200,7 @@ log1p
       :class: sectiontitle
 
 
-   An example of how to use log1pcan be found in the oneMKL installation
+   An example of how to use log1p can be found in the oneMKL installation
    directory, under:
 
 

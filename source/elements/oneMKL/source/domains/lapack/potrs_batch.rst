@@ -174,7 +174,7 @@ potrs_batch
          :class: sectiontitle
 
 
-      An example of how to use potrs_batchcan be found in the oneMKL
+      An example of how to use potrs_batch can be found in the oneMKL
       installation directory, under:
 
 

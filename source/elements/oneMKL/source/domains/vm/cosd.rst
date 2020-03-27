@@ -51,7 +51,7 @@ cosd
       :class: sectiontitle
 
 
-   The cosd(a) function is a degree argument trigonometric fuction. It
+   The cosd(a) function is a degree argument trigonometric function. It
    computes the cosine of vector elements multiplied by ``π``/180. For
    an argument ``a``, the function computes cos(``π``\ \*\ ``a``/180).
 
@@ -206,7 +206,7 @@ cosd
       :class: sectiontitle
 
 
-   An example of how to use cosdcan be found in the oneMKL installation
+   An example of how to use cosd can be found in the oneMKL installation
    directory, under:
 
 

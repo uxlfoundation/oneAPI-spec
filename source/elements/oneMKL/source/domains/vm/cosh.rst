@@ -306,7 +306,7 @@ cosh
       :class: sectiontitle
 
 
-   An example of how to use coshcan be found in the oneMKL installation
+   An example of how to use cosh can be found in the oneMKL installation
    directory, under:
 
 

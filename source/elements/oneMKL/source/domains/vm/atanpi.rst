@@ -183,7 +183,7 @@ atanpi
       :class: sectiontitle
 
 
-   An example of how to use atanpican be found in the oneMKL
+   An example of how to use atanpi can be found in the oneMKL
    installation directory, under:
 
 

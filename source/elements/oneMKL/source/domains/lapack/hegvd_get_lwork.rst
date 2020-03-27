@@ -49,7 +49,7 @@ hegvd_get_lwork
 
 
       Computes the worksize needed for the computation of eigenvalues or
-      eigenvectors of a complex generalized Hermition positive-definite
+      eigenvectors of a complex generalized Hermitian positive-definite
       eigenproblem using a divide and conquer method
       (`hegvd <hegvd.html>`__).
       Calls to this routine must specify the template parameter

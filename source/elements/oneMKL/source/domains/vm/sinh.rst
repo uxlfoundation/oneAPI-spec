@@ -306,7 +306,7 @@ sinh
       :class: sectiontitle
 
 
-   An example of how to use sinhcan be found in the oneMKL installation
+   An example of how to use sinh can be found in the oneMKL installation
    directory, under:
 
 
