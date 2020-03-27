@@ -3,11 +3,11 @@
 
 .. _oneDPL-section:
 
-========================
-|dpl_full_name| (oneDPL)
-========================
+====================
+oneDPL |dpl_version|
+====================
 
-The oneAPI Data Parallel C++ Library (oneDPL) provides the functionality
+The |dpl_full_name| (oneDPL) provides the functionality
 specified in the C++ standard, with extensions to support data parallelism
 and offloading to devices, and with extensions to simplify its usage for 
 implementing data parallel algorithms.

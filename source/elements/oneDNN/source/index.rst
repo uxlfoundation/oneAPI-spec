@@ -5,9 +5,9 @@
 
 .. _oneDNN-section:
 
-========================
-|dnn_full_name| (oneDNN)
-========================
+====================
+oneDNN |dnn_version|
+====================
 
 |dnn_full_name| (oneDNN) is an open-source performance library for
 deep learning applications.  The library includes building blocks for

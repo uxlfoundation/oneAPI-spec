@@ -3,8 +3,9 @@
 
 .. _l0-section:
 
-|l0_full_name| (Level Zero)
-===========================
+=======================
+Level Zero |l0_version|
+=======================
 
 The |l0_full_name| (Level Zero) provides low-level
 direct-to-metal interfaces that are tailored to the devices in a

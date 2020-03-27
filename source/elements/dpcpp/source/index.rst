@@ -4,16 +4,16 @@
 .. _onedpcpp-section:
 
 =========================
-|dpcpp_full_name| (DPC++)
+DPC++ |dpcpp_version|
 =========================
 
 Overview
 --------
 
-DPC++ is the direct programming language and associated direct
-programming APIs of oneAPI.  It provides the features
-needed to define data parallel functions and to launch them on 
-devices.  The language is comprised of the following components:
+|dpcpp_full_name_| (DPC++) is the direct programming language and
+associated direct programming APIs of oneAPI.  It provides the
+features needed to define data parallel functions and to launch them
+on devices.  The language is comprised of the following components:
 
 - C++.  Every DPC++ program is also a C++ program.  A
   compliant DPC++ implementation must support the C++17 Core Language
