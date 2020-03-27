@@ -1,4 +1,3 @@
-.. _sytrf_get_lwork:
 
 sytrf_get_lwork
 ===============

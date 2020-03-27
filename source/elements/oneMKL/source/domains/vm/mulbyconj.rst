@@ -1,4 +1,3 @@
-.. _mulbyconj:
 
 mulbyconj
 =========

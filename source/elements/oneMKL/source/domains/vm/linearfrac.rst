@@ -1,4 +1,3 @@
-.. _linearfrac:
 
 linearfrac
 ==========

@@ -1,4 +1,3 @@
-.. _getrs_batch:
 
 getrs_batch
 ===========

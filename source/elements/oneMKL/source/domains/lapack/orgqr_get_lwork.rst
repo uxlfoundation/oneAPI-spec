@@ -1,4 +1,3 @@
-.. _orgqr_get_lwork:
 
 orgqr_get_lwork
 ===============

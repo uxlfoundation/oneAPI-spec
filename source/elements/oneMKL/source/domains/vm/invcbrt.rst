@@ -1,4 +1,3 @@
-.. _invcbrt:
 
 invcbrt
 =======

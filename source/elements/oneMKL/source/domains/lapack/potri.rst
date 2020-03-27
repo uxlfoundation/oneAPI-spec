@@ -1,4 +1,3 @@
-.. _potri:
 
 potri
 =====

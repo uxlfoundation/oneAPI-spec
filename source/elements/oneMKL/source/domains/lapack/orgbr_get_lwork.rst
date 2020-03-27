@@ -1,4 +1,3 @@
-.. _orgbr_get_lwork:
 
 orgbr_get_lwork
 ===============

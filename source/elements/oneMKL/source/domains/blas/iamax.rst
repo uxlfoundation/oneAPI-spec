@@ -1,4 +1,3 @@
-.. _iamax:
 
 iamax
 =====

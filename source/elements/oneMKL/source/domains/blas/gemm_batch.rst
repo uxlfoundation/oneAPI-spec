@@ -1,4 +1,3 @@
-.. _gemm_batch:
 
 gemm_batch
 ==========

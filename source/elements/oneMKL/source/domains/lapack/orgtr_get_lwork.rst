@@ -1,4 +1,3 @@
-.. _orgtr_get_lwork:
 
 orgtr_get_lwork
 ===============

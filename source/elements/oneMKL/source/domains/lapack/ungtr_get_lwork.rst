@@ -1,4 +1,3 @@
-.. _ungtr_get_lwork:
 
 ungtr_get_lwork
 ===============

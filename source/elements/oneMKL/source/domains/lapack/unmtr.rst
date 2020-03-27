@@ -1,4 +1,3 @@
-.. _unmtr:
 
 unmtr
 =====

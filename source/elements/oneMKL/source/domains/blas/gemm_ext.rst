@@ -1,4 +1,3 @@
-.. _gemm_ext:
 
 gemm_ext
 ========

@@ -1,4 +1,3 @@
-.. _ormqr_get_lwork:
 
 ormqr_get_lwork
 ===============

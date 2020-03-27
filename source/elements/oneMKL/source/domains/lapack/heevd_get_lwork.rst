@@ -1,4 +1,3 @@
-.. _heevd_get_lwork:
 
 heevd_get_lwork
 ===============

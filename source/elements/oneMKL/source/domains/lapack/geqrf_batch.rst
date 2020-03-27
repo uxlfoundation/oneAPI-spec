@@ -1,4 +1,3 @@
-.. _geqrf_batch:
 
 geqrf_batch
 ===========

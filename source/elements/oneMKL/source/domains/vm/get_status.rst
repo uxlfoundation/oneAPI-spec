@@ -1,4 +1,3 @@
-.. _get_status:
 
 get_status
 ==========

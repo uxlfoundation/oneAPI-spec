@@ -1,4 +1,3 @@
-.. _gesvd_get_lwork:
 
 gesvd_get_lwork
 ===============

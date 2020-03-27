@@ -1,4 +1,3 @@
-.. _sdsdot:
 
 sdsdot
 ======

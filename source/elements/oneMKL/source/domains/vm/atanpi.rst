@@ -1,4 +1,3 @@
-.. _atanpi:
 
 atanpi
 ======

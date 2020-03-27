@@ -1,4 +1,3 @@
-.. _get_mode:
 
 get_mode
 ========

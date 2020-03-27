@@ -1,4 +1,3 @@
-.. _nearbyint:
 
 nearbyint
 =========

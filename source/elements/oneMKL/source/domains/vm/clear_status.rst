@@ -1,4 +1,3 @@
-.. _clear_status:
 
 clear_status
 ============

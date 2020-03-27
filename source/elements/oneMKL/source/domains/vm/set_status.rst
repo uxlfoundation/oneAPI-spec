@@ -1,4 +1,3 @@
-.. _set_status:
 
 set_status
 ==========

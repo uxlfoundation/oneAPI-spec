@@ -1,4 +1,3 @@
-.. _getri_batch:
 
 getri_batch
 ===========

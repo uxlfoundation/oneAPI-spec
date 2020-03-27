@@ -1,4 +1,3 @@
-.. _sytrd_get_lwork:
 
 sytrd_get_lwork
 ===============

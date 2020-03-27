@@ -1,4 +1,3 @@
-.. _ungqr:
 
 ungqr
 =====

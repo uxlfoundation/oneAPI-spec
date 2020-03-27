@@ -1,4 +1,3 @@
-.. _tgamma:
 
 tgamma
 ======

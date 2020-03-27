@@ -1,4 +1,3 @@
-.. _unmqr_get_lwork:
 
 unmqr_get_lwork
 ===============

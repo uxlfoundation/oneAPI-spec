@@ -1,4 +1,3 @@
-.. _ormqr:
 
 ormqr
 =====

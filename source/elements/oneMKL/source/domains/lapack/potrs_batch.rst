@@ -1,4 +1,3 @@
-.. _potrs_batch:
 
 potrs_batch
 ===========

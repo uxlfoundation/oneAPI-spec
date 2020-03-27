@@ -1,4 +1,3 @@
-.. _orgqr_batch:
 
 orgqr_batch
 ===========

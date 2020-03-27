@@ -1,4 +1,3 @@
-.. _sytrd:
 
 sytrd
 =====
