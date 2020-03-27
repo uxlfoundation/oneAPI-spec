@@ -26,8 +26,7 @@ copyright = u'2020, Intel Corporation'
 author = u'Intel'
 
 # The short X.Y version
-#version = u'0.61 <' + str(datetime.date.today()) + '>'
-version = u'0.6.1' 
+version = u'0.7' 
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -238,6 +237,4 @@ breathe_projects = {
 breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
-def setup(app):
-    app.add_css_file('custom.css')
 
