@@ -1,4 +1,3 @@
-.. _setmode:
 
 setmode
 =======

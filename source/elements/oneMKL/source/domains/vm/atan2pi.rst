@@ -1,4 +1,3 @@
-.. _atan2pi:
 
 atan2pi
 =======

@@ -1,4 +1,3 @@
-.. _expint1:
 
 expint1
 =======

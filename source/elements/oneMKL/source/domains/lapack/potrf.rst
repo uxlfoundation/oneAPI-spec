@@ -1,4 +1,3 @@
-.. _potrf:
 
 potrf
 =====

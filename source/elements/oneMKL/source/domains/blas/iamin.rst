@@ -1,4 +1,3 @@
-.. _iamin:
 
 iamin
 =====

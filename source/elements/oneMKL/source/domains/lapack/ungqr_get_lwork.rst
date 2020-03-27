@@ -1,4 +1,3 @@
-.. _ungqr_get_lwork:
 
 ungqr_get_lwork
 ===============

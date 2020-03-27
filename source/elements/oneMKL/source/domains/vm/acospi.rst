@@ -1,4 +1,3 @@
-.. _acospi:
 
 acospi
 ======

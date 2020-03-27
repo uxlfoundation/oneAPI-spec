@@ -1,4 +1,3 @@
-.. _gebrd_get_lwork:
 
 gebrd_get_lwork
 ===============

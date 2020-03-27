@@ -1,4 +1,3 @@
-.. _sygvd_get_lwork:
 
 sygvd_get_lwork
 ===============

@@ -1,4 +1,3 @@
-.. _gesvd:
 
 gesvd
 =====

@@ -1,4 +1,3 @@
-.. _trsm_batch:
 
 trsm_batch
 ==========

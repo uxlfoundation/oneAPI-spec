@@ -1,4 +1,3 @@
-.. _create_error_handler:
 
 create_error_handler
 ====================

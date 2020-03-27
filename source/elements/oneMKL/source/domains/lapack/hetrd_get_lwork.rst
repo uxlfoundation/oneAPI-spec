@@ -1,4 +1,3 @@
-.. _hetrd_get_lwork:
 
 hetrd_get_lwork
 ===============

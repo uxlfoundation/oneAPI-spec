@@ -1,4 +1,3 @@
-.. _syevd_get_lwork:
 
 syevd_get_lwork
 ===============

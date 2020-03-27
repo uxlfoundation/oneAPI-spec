@@ -1,4 +1,3 @@
-.. _potrf_batch:
 
 potrf_batch
 ===========

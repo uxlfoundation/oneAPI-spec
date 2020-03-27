@@ -1,4 +1,3 @@
-.. _atanh:
 
 atanh
 =====

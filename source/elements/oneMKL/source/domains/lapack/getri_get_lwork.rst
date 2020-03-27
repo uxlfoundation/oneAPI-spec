@@ -1,4 +1,3 @@
-.. _getri_get_lwork:
 
 getri_get_lwork
 ===============

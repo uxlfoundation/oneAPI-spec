@@ -1,4 +1,3 @@
-.. _acosh:
 
 acosh
 =====

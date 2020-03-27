@@ -1,4 +1,3 @@
-.. _geqrf_get_lwork:
 
 geqrf_get_lwork
 ===============

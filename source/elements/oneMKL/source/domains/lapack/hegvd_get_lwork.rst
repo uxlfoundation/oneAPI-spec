@@ -1,4 +1,3 @@
-.. _hegvd_get_lwork:
 
 hegvd_get_lwork
 ===============

@@ -1,4 +1,3 @@
-.. _sincos:
 
 sincos
 ======

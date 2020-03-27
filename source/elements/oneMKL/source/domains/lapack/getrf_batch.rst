@@ -1,4 +1,3 @@
-.. _getrf_batch:
 
 getrf_batch
 ===========
