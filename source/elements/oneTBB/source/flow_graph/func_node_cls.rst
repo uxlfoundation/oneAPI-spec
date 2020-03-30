@@ -139,7 +139,7 @@ Example
 -------
 
 :doc:`Data Flow Graph example <message_flow_graph_example>`
-ilustrates how ``function_node`` could do computation on input data
+illustrates how ``function_node`` could do computation on input data
 and pass the result to successors.
 
 Members

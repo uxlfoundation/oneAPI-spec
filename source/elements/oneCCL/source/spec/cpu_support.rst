@@ -11,7 +11,7 @@ The example below demonstrates these concepts.
 Example
 -------
 
-Conisider simple ``allreduce`` example for CPU. 
+Consider simple ``allreduce`` example for CPU. 
 
 #. Create CPU ccl stream object:
 

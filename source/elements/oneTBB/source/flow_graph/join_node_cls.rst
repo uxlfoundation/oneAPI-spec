@@ -79,7 +79,7 @@ the table below.
   possibly available, the
   ``join_node`` will try to reserve a message at
   each port from their known predecessors. If it is unable to reserve a message
-  at a port, it un-marks that port, and releases all previously acquired
+  at a port, it unmarks that port, and releases all previously acquired
   reservations. If it is able to reserve a message at all ports, it broadcasts a
   tuple containing these messages to all successors. If at least one successor
   accepts the tuple, the reservations are consumed; otherwise, they are released.

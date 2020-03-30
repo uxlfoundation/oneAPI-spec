@@ -1,5 +1,5 @@
-Collective Opertations
-======================
+Collective Operations
+=====================
 
 |ccl_full_name| introduces the following list of communication primitives:
 

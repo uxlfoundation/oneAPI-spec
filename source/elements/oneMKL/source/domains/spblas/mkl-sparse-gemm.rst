@@ -1,0 +1,198 @@
+.. _mkl-sparse-gemm:
+
+onemkl::sparse::gemm
+====================
+
+
+.. container::
+
+
+   Computes a sparse matrix-dense matrix product. Currently, only
+   ROW-MAJOR layout for dense matrix storage in Data Parallel C++
+   onemkl::sparse::gemm functionality is supported.
+
+
+   .. container:: section
+      :name: GUID-8FF718C9-D9AE-42A7-9A2A-A47DCEBB13D4
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: Note
+
+
+         .. rubric:: Note
+            :class: NoteTipHead
+
+
+         Currently, complex types are not supported.
+
+
+      **Using SYCL buffers:**
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  void onemkl::sparse::gemm (cl::sycl::queue &         queue, onemkl::transpose transpose_val, const fp alpha,         matrixHandle_t handle, cl::sycl::buffer<fp, 1> & b, const         std::int64_t columns, const std::int64_t ldb, const fp beta,         cl::sycl::buffer<fp, 1> & c, const std::int64_t ldc)
+
+         **Using USM pointers:**
+
+
+         .. cpp:function::  void onemkl::sparse::gemm (cl::sycl::queue &         queue, onemkl::transpose transpose_val, const fp alpha,         matrixHandle_t handle, const fp \*b, const std::int64_t         columns, const std::int64_t ldb, const fp beta, fp \*c, const         std::int64_t ldc)
+
+         .. rubric:: Include Files
+            :class: sectiontitle
+
+
+         -  mkl_spblas_sycl.hpp
+
+
+         .. rubric:: Description
+            :class: sectiontitle
+
+
+         .. rubric:: Note
+            :class: NoteTipHead
+
+
+         Refer to `Supported
+         Types <supported-types.html>`__ for a
+         list of supported ``<fp>`` and ``<intType>`` and refer to
+         `Exceptions <exceptions.html>`__
+         for a detailed description of the exceptions thrown.
+         The onemkl::sparse::gemm routine computes a sparse matrix-dense
+         matrix defined as
+
+
+         ::
+
+
+                                c := alpha*op(A)*b + beta*c
+                            
+
+
+
+         where:
+
+
+         ``alpha`` and ``beta`` are scalars, ``b`` and ``c`` are dense
+         matrices.
+
+
+      .. container:: section
+         :name: GUID-7F07A52E-4DDB-4C1B-AB92-E66C7641AED3
+
+
+         .. rubric:: Input Parameters
+            :class: sectiontitle
+
+
+         queue
+            Specifies the SYCL command queue which will be used for SYCL
+            kernels execution.
+
+
+         transpose_val
+            Specifies operation ``op()`` on input matrix.
+
+
+            .. container:: tablenoborder
+
+
+               .. list-table:: 
+                  :header-rows: 1
+
+                  * -  onemkl::transpose::nontrans 
+                    -     Non-transpose, ``op(A)`` = ``A``.    
+                  * -  onemkl::transpose::trans 
+                    -     Transpose, ``op(A)`` =                ``A``\ :sup:`T`.   
+                  * -  onemkl::transpose::conjtrans 
+                    -     Conjugate transpose, ``op(A)`` =                ``A``\ :sup:`H`.   
+
+
+
+
+            .. container:: Note
+
+
+               .. rubric:: Note
+                  :class: NoteTipHead
+
+
+               Currently, the only supported case for operation is
+               onemkl::transpose::nontrans.
+
+
+         alpha
+            Specifies the scalar ``alpha``.
+
+
+         handle
+            Handle to object containing sparse matrix and other internal
+            data. Created using one of the
+            onemkl::sparse::set<sparse_matrix_type>structure routines.
+
+
+            .. container:: Note
+
+
+               .. rubric:: Note
+                  :class: NoteTipHead
+
+
+               Currently, the only supported case for
+               <sparse_matrix_type> is CSR.
+
+
+         b
+            SYCL or USM memory object containing an array of size at
+            least ``rows*ldb``, where ``rows`` = the number of columns
+            of matrix ``A`` if ``op`` = onemkl::transpose::nontrans, or
+            ``rows`` = the number of rows of matrix ``A`` otherwise.
+
+
+         columns
+            Number of columns of matrix ``c``.
+
+
+         ldb
+            Specifies the leading dimension of matrix ``b``.
+
+
+         beta
+            Specifies the scalar ``beta``.
+
+
+         c
+            SYCL or USM memory object containing an array of size at
+            least ``rows*ldc``, where ``rows`` = the number of columns
+            of matrix ``A`` if ``op`` = onemkl::transpose::nontrans, or
+            ``rows`` = the number of columns of matrix ``A`` otherwise.
+
+
+      .. container:: section
+         :name: GUID-2D7BA49D-E937-40A4-AC2F-19685DC4E918
+
+
+         .. rubric:: Output Parameters
+            :class: sectiontitle
+
+
+         c
+            Overwritten by the updated matrix ``c``.
+
+
+   .. container:: familylinks
+
+
+      .. container:: parentlink
+
+
+         **Parent topic:** `Sparse BLAS
+         Routines <spblas.html>`__
+
+
+   

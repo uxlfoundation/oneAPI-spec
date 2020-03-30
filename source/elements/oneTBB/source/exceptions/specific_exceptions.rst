@@ -38,7 +38,7 @@ Classes for Specific Exceptions.
 **Exception**               **Thrown when...**
 =========================== =====================================================
 bad_last_alloc              * A ``pop`` operation on a ``concurrent_queue`` or 
-                              ``concurrent_bounded_queue`` corrersponds to a
+                              ``concurrent_bounded_queue`` corresponds to a
                               push that threw an exception.
                             * An operation on a ``concurrent_vector``
                               cannot be performed because a prior

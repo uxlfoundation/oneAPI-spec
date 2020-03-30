@@ -1,0 +1,168 @@
+
+conj
+====
+
+
+.. container::
+
+
+   Performs element by element conjugation of the vector.
+
+
+   .. container:: section
+      :name: GUID-3EEB696F-604F-42BC-B1E8-B6F55261DD02
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      Buffer API:
+
+
+      .. cpp:function::  void conj(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined      )
+
+      USM API:
+
+
+      .. cpp:function::  event conj( queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+
+      ``conj`` supports the following precisions.
+
+
+      .. list-table:: 
+         :header-rows: 1
+
+         * -  T 
+         * -  ``std::complex<float>`` 
+         * -  ``std::complex<double>`` 
+
+
+
+
+.. container:: section
+   :name: GUID-4C759AF5-F683-48FE-8C47-42489060712D
+
+
+   .. rubric:: Description
+      :class: sectiontitle
+
+
+   The conj function performs element by element conjugation of the
+   vector.
+
+
+   No special values are specified. The conj function does not generate
+   any errors.
+
+
+.. container:: section
+   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
+
+
+   .. rubric:: Input Parameters
+      :class: sectiontitle
+
+
+   Buffer API:
+
+
+   exec_queue
+      The queue where the routine should be executed.
+
+
+   n
+      Specifies the number of elements to be calculated.
+
+
+   a
+      The buffer ``a`` containing input vector of size ``n``.
+
+
+   mode
+      Overrides the global VM mode setting for this function call. See
+      `set_mode <setmode.html>`__
+      function for possible values and their description. This is an
+      optional parameter. The default value is ``mode::not_defined``.
+
+
+   USM API:
+
+
+   exec_queue
+      The queue where the routine should be executed.
+
+
+   n
+      Specifies the number of elements to be calculated.
+
+
+   a
+      Pointer ``a`` to the input vector of size ``n``.
+
+
+   depends
+      Vector of dependent events (to wait for input data to be ready).
+
+
+   mode
+      Overrides the global VM mode setting for this function call. See
+      the `set_mode <setmode.html>`__
+      function for possible values and their description. This is an
+      optional parameter. The default value is ``mode::not_defined``.
+
+
+.. container:: section
+   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   Buffer API:
+
+
+   y
+      The buffer ``y`` containing the output vector of size ``n``.
+
+
+   USM API:
+
+
+   y
+      Pointer ``y`` to the output vector of size ``n``.
+
+
+   return value (event)
+      Function end event.
+
+
+.. container:: section
+   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
+
+
+   .. rubric:: Example
+      :class: sectiontitle
+
+
+   An example of how to use conj can be found in the oneMKL installation
+   directory, under:
+
+
+   ::
+
+
+      examples/sycl/vml/vconj.cpp
+
+
+.. container:: familylinks
+
+
+   .. container:: parentlink
+
+
+      **Parent topic:** `Arithmetic
+      Functions <arithmetic-functions.html>`__
+
+

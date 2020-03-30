@@ -8,7 +8,6 @@ oneAPI Specification
 
 .. toctree::
    :maxdepth: 6
-   :caption: Contents:
 
    introduction
    architecture
