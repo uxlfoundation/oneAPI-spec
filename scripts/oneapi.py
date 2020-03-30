@@ -205,9 +205,7 @@ def build(root, target):
     prep(root)
     sphinx(root, target)
 
-@action
-def ci_publish(root, target=None):
-    root_only(root)
+def site_zip():
     with ZipFile('site.zip', 'w') as site_zip:
         for r, dirs, files in os.walk('site', topdown=True):
             # Exclude DAL API because it is 1.7G
@@ -215,6 +213,10 @@ def ci_publish(root, target=None):
                 dirs = remove_elements(dirs, ['api', '_sources'])
             for file in files:
                 site_zip.write(join(r, file))
+    
+@action
+def ci_publish(root, target=None):
+    root_only(root)
     if not args.branch:
         exit('Error: --branch <branchname> is required')
     if 'AWS_SECRET_ACCESS_KEY' in os.environ and os.environ['AWS_SECRET_ACCESS_KEY'] != '':
@@ -341,6 +343,7 @@ def ci(root, target=None):
     get_tarballs(root)
     site(root)
     build('.', 'spelling')
+    site_zip()
     if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
