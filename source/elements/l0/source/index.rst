@@ -43,4 +43,4 @@ Detailed API Descriptions
 
 The detailed specification for Level Zero is available `online`_.
 
-.. _`online`: https://spec.oneapi.com/versions/0.6.0/oneL0/index.html
+.. _`online`: https://spec.oneapi.com/versions/latest/oneL0/index.html
