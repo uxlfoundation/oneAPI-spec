@@ -44,7 +44,7 @@ substitutions = [
     ('|daal_in_code|', 'daal')
     ]
 
-oneapi_spec_version = '0.6.0'
+oneapi_spec_version = '0.7'
 
 primary_domain = 'cpp'
 
