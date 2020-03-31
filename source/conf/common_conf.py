@@ -1,3 +1,5 @@
+import string
+
 extensions = [
     'notfound.extension',
     'sphinx.ext.autodoc',
@@ -15,28 +17,36 @@ extensions = [
     'breathe',
 ]
 
-rst_prolog = """
+env = {
+    'oneapi_version': '0.7',
+    'l0_version': '0.91',
+}
+
+prolog_template = string.Template("""
 .. |dpcpp_full_name| replace:: oneAPI Data Parallel C++
-.. |dpcpp_version| replace:: 0.7
+.. |dpcpp_version| replace:: $oneapi_version
 .. |dpl_full_name| replace:: oneAPI DPC++ Library
-.. |dpl_version| replace:: 0.7
+.. |dpl_version| replace:: $oneapi_version
 .. |ccl_full_name| replace:: oneAPI Collective Communications Library
-.. |ccl_version| replace:: 0.7
+.. |ccl_version| replace:: $oneapi_version
 .. |dal_full_name| replace:: oneAPI Data Analytics Library
 .. |dal_short_name| replace:: oneDAL
-.. |dal_version| replace:: 0.7
+.. |dal_version| replace:: $oneapi_version
 .. |dal_namespace| replace:: daal
 .. |dnn_full_name| replace:: oneAPI Deep Neural Network Library
-.. |dnn_version| replace:: 0.7
+.. |dnn_version| replace:: $oneapi_version
 .. |l0_full_name| replace:: oneAPI Level Zero
-.. |l0_version| replace:: 0.91
+.. |l0_version| replace:: $l0_version
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
-.. |tbb_version| replace:: 0.7
+.. |tbb_version| replace:: $oneapi_version
 .. |vpl_full_name| replace:: oneAPI Video Processing Library
-.. |vpl_version| replace:: 0.7
+.. |vpl_version| replace:: $oneapi_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
-.. |mkl_version| replace:: 0.7
-"""
+.. |mkl_version| replace:: $oneapi_version
+""")
+
+rst_prolog = prolog_template.substitute(env)
+
 
 # for substitutions in code blocks and sphinx-prompts:
 substitutions = [
@@ -44,7 +54,6 @@ substitutions = [
     ('|daal_in_code|', 'daal')
     ]
 
-oneapi_spec_version = '0.7'
 
 primary_domain = 'cpp'
 
