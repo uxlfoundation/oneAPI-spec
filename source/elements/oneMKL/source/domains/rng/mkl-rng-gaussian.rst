@@ -18,25 +18,18 @@ onemkl::rng::gaussian
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      box_muller2>
-
-      .. cpp:function::  class gaussian {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  gaussian(): gaussian((T)0.0, (T)1.0){}
-
-      .. cpp:function::  gaussian(T mean, T stddev)
-
-      .. cpp:function::  gaussian(const gaussian<T, Method>& other)
-
-      .. cpp:function::  T mean() const
-
-      .. cpp:function::  T stddev() const
-
-      .. cpp:function::  gaussian<T, Method>& operator=(const gaussian<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      box_muller2>
+          class gaussian {
+          public:
+            gaussian(): gaussian((T)0.0, (T)1.0){}
+            gaussian(T mean, T stddev)
+            gaussian(const gaussian<T, Method>& other)
+            T mean() const
+            T stddev() const
+            gaussian<T, Method>& operator=(const gaussian<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

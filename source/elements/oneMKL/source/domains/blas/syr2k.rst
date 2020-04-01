@@ -50,7 +50,7 @@ syr2k
   
 
 
-      C <- alpha*(A*B :sup:`T` + B*A :sup:`T`) + beta*C
+      C <- alpha*(A*B :sup:``T`` + B*A :sup:``T``) + beta*C
 
 
    where ``A`` is ``n`` x ``k`` and ``B`` is ``k`` x ``n``.
@@ -62,7 +62,7 @@ syr2k
   
 
 
-      C <- alpha*(A :sup:`T`*B + B :sup:`T`*A) + beta*C
+      C <- alpha*(A :sup:``T``*B + B :sup:``T``*A) + beta*C
 
 
    where ``A`` is ``k`` x ``n`` and ``B`` is ``n`` x ``k``.

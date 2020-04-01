@@ -21,9 +21,9 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeBac
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.computeBackward         (cl::sycl::buffer<IOType, 1> &inout , cl::sycl::event\* event =         nullptr) 
+         .. cpp:function::  onemkl::dft::ErrCode computeBackward         (cl::sycl::buffer<IOType, 1> &inout , cl::sycl::event\* event =         nullptr) 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.computeBackward         (cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1>         &out , cl::sycl::event\* event = nullptr) 
+         .. cpp:function::  onemkl::dft::ErrCode computeBackward         (cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1>         &out , cl::sycl::event\* event = nullptr) 
 
          .. rubric:: Include Files
             :class: sectiontitle

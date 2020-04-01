@@ -18,25 +18,18 @@ onemkl::rng::exponential
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
+      ::
 
-      .. cpp:function::  class exponential {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  exponential(): exponential((T)0.0, (T)1.0){}
-
-      .. cpp:function::  exponential(T a, T beta)
-
-      .. cpp:function::  exponential(const exponential<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T beta() const
-
-      .. cpp:function::  exponential<T, Method>& operator=(const      exponential<T, Method>& other)
-
-      .. cpp:function::  }
+        template<typename T = float, method Method =      inverse_function>
+          class exponential {
+          public:
+            exponential(): exponential((T)0.0, (T)1.0){}
+            exponential(T a, T beta)
+            exponential(const exponential<T, Method>& other)
+            T a() const
+            T beta() const
+            exponential<T, Method>& operator=(const      exponential<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

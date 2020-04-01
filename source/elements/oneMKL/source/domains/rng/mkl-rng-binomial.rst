@@ -18,25 +18,18 @@ onemkl::rng::binomial
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = btpe>
 
-      .. cpp:function::  class binomial {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  binomial(): binomial(5, 0.5){}
-
-      .. cpp:function::  binomial(std::int32_t ntrial, double p)
-
-      .. cpp:function::  binomial(const binomial<T, Method>& other)
-
-      .. cpp:function::  std::int32_t ntrial() const
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  binomial<T, Method>& operator=(const binomial<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+        template<typename T = std::int32_t, method Method      = btpe>
+          class binomial {
+          public:
+            binomial(): binomial(5, 0.5){}
+            binomial(std::int32_t ntrial, double p)
+            binomial(const binomial<T, Method>& other)
+            std::int32_t ntrial() const
+            double p() const
+            binomial<T, Method>& operator=(const binomial<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle
