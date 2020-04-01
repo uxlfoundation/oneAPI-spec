@@ -18,9 +18,10 @@ onemkl::rng::uniform_bits
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::uint32_t, method      Method = standard>
-
-      .. cpp:function::  class uniform_bits {}
+      ::
+	 
+        template<typename T = std::uint32_t, method      Method = standard>
+          class uniform_bits {}
 
       .. rubric:: Include Files
          :class: sectiontitle

@@ -24,21 +24,16 @@ onemkl::rng::mt2203
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class mt2203 : internal::engine_base<mt2203>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  mt2203 (cl::sycl::queue& queue, std::uint32_t         seed, std::uint32_t engine_idx)
-
-         .. cpp:function::  mt2203 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed, std::uint32_t         engine_idx)
-
-         .. cpp:function::  mt2203 (const mt2203& other)
-
-         .. cpp:function::  mt2203& operator=(const mt2203& other)
-
-         .. cpp:function::  ~mt2203()
-
-         .. cpp:function::  }
+         ::
+	    
+           class mt2203 : internal::engine_base<mt2203>{
+           public:
+             mt2203 (cl::sycl::queue& queue, std::uint32_t         seed, std::uint32_t engine_idx)
+             mt2203 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed, std::uint32_t         engine_idx)
+             mt2203 (const mt2203& other)
+             mt2203& operator=(const mt2203& other)
+             ~mt2203()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle

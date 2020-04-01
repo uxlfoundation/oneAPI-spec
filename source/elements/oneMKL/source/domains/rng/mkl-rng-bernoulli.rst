@@ -19,6 +19,7 @@ onemkl::rng::bernoulli
 
 
       ::
+	 
         template<typename T = std::int32_t, method Method = inverse_function>
           class bernoulli {
           public:

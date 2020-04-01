@@ -18,27 +18,19 @@ onemkl::rng::weibull
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class weibull {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  weibull(): weibull((T)0.0, (T)1.0){}
-
-      .. cpp:function::  weibull(T alpha, T a, T beta)
-
-      .. cpp:function::  weibull(const weibull<T, Method>& other)
-
-      .. cpp:function::  T alpha() const
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T beta() const
-
-      .. cpp:function::  weibull<T, Method>& operator=(const weibull<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class weibull {
+          public:
+            weibull(): weibull((T)0.0, (T)1.0){}
+            weibull(T alpha, T a, T beta)
+            weibull(const weibull<T, Method>& other)
+            T alpha() const
+            T a() const
+            T beta() const
+           weibull<T, Method>& operator=(const weibull<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

@@ -19,18 +19,19 @@ onemkl::rng::beta
 
 
       ::
-      template<typename T = float, method Method = cheng_johnk_atkinson>
-        class beta {
-        public:
-          beta(): beta((T)1.0, (T)1.0, (T)(0.0),      (T)(1.0)){}
-          beta(T p, T q, T a, T b)
-          beta(const beta<T, Method>& other)
-          T p() const
-          T q() const
-          T a() const
-          T b() const
-          beta<T, Method>& operator=(const beta<T, Method>&      other)
-        }
+
+        template<typename T = float, method Method = cheng_johnk_atkinson>
+          class beta {
+          public:
+            beta(): beta((T)1.0, (T)1.0, (T)(0.0),      (T)(1.0)){}
+            beta(T p, T q, T a, T b)
+            beta(const beta<T, Method>& other)
+            T p() const
+            T q() const
+            T a() const
+            T b() const
+            beta<T, Method>& operator=(const beta<T, Method>&      other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

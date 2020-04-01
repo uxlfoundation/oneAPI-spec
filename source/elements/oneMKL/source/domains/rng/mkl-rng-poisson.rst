@@ -18,23 +18,17 @@ onemkl::rng::poisson
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = ptpe>
-
-      .. cpp:function::  class poisson {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  poisson(): poisson(0.5){}
-
-      .. cpp:function::  poisson(double lambda)
-
-      .. cpp:function::  poisson(const poisson<T, Method>& other)
-
-      .. cpp:function::  double lambda() const
-
-      .. cpp:function::  poisson<T, Method>& operator=(const poisson<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = ptpe>
+          class poisson {
+          public:
+            poisson(): poisson(0.5){}
+            poisson(double lambda)
+            poisson(const poisson<T, Method>& other)
+            double lambda() const
+            poisson<T, Method>& operator=(const poisson<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

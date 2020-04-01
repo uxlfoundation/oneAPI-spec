@@ -20,6 +20,7 @@ onemkl::rng::binomial
 
 
       ::
+	 
         template<typename T = std::int32_t, method Method      = btpe>
           class binomial {
           public:

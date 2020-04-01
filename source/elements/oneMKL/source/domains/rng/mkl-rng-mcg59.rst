@@ -22,19 +22,15 @@ onemkl::rng::mcg59
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class mcg59 : internal::engine_base<mcg59>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  mcg59 (cl::sycl::queue& queue, std::uint64_t         seed)
-
-         .. cpp:function::  mcg59 (const mcg59&other)
-
-         .. cpp:function::  mcg59& operator=(const mcg59& other)
-
-         .. cpp:function::  ~mcg59()
-
-         .. cpp:function::  }
+         ::
+	    
+           class mcg59 : internal::engine_base<mcg59>{
+           public:
+             mcg59 (cl::sycl::queue& queue, std::uint64_t         seed)
+             mcg59 (const mcg59&other)
+             mcg59& operator=(const mcg59& other)
+             ~mcg59()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle
