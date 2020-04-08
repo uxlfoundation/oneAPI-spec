@@ -54,7 +54,7 @@ syr2k (USM Version)
      
 
 
-         C <- alpha*(A*B :sup:``T`` + B*A :sup:``T``) + beta*C
+         C <- alpha*(A*B :sup:`T` + B * A :sup:`T`) + beta*C
 
 
       where ``A`` is ``n`` x ``k`` and ``B`` is ``k`` x ``n``.
