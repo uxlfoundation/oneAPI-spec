@@ -23,21 +23,16 @@ onemkl::rng::sfmt19937
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class sfmt19937 :         internal::engine_base<sfmt19937>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  sfmt19937 (cl::sycl::queue& queue,         std::uint32_t seed)
-
-         .. cpp:function::  sfmt19937 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-
-         .. cpp:function::  sfmt19937 (const sfmt19937& other)
-
-         .. cpp:function::  sfmt19937& operator=(const sfmt19937& other)
-
-         .. cpp:function::  ~sfmt19937()
-
-         .. cpp:function::  }
+         ::
+	    
+           class sfmt19937 :         internal::engine_base<sfmt19937>{
+           public:
+             sfmt19937 (cl::sycl::queue& queue,         std::uint32_t seed)
+             sfmt19937 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
+             sfmt19937 (const sfmt19937& other)
+             sfmt19937& operator=(const sfmt19937& other)
+             ~sfmt19937()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle

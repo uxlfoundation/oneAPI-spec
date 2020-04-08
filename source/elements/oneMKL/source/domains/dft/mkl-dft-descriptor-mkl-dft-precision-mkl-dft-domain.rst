@@ -22,7 +22,7 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::Descriptor<PRECISION , DOMAIN>         descriptor
+         .. cpp:var::  onemkl::dft::Descriptor<PRECISION, DOMAIN> descriptor
 
          .. rubric:: Include Files
             :class: sectiontitle

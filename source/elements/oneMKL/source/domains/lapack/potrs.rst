@@ -144,7 +144,6 @@ potrs
 
 
    .. rubric:: Known Limitations
-      :name: known-limitations
       :class: sectiontitle
 
 

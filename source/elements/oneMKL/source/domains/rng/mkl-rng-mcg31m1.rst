@@ -22,19 +22,15 @@ onemkl::rng::mcg31m1
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class mcg31m1 :         internal::engine_base<mcg31m1>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  mcg31m1 (cl::sycl::queue& queue, std::uint32_t         seed)
-
-         .. cpp:function::  mcg31m1 (const mcg31m1& other)
-
-         .. cpp:function::  mcg31m1& operator=(const mcg31m1& other)
-
-         .. cpp:function::  ~mcg31m1()
-
-         .. cpp:function::  }
+         ::
+	    
+           class mcg31m1 :         internal::engine_base<mcg31m1>{
+           public:
+             mcg31m1 (cl::sycl::queue& queue, std::uint32_t         seed)
+             mcg31m1 (const mcg31m1& other)
+             mcg31m1& operator=(const mcg31m1& other)
+             ~mcg31m1()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle

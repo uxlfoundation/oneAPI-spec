@@ -18,25 +18,18 @@ onemkl::rng::uniform (Continuous)
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      standard>
-
-      .. cpp:function::  class uniform {
-
-      .. cpp:function::  Public:
-
-      .. cpp:function::  uniform(): uniform((T)0.0, (T)1.0){}
-
-      .. cpp:function::  uniform(Ta, T b)
-
-      .. cpp:function::  uniform(const uniform<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  uniform<T, Method>& operator=(const uniform<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      standard>
+          class uniform {
+          public:
+            uniform(): uniform((T)0.0, (T)1.0){}
+            uniform(Ta, T b)
+            uniform(const uniform<T, Method>& other)
+            T a() const
+            T b() const
+            uniform<T, Method>& operator=(const uniform<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

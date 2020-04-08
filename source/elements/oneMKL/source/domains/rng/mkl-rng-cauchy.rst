@@ -18,25 +18,18 @@ onemkl::rng::cauchy
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
+      ::
 
-      .. cpp:function::  class cauchy {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  cauchy(): cauchy((T)0.0, (T)1.0){}
-
-      .. cpp:function::  cauchy(T a, T b)
-
-      .. cpp:function::  cauchy(const cauchy<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  cauchy<T, Method>& operator=(const cauchy<T,      Method>& other)
-
-      .. cpp:function::  }
+        template<typename T = float, method Method =      inverse_function>
+          class cauchy {
+          public:
+            cauchy(): cauchy((T)0.0, (T)1.0){}
+            cauchy(T a, T b)
+            cauchy(const cauchy<T, Method>& other)
+            T a() const
+            T b() const
+            cauchy<T, Method>& operator=(const cauchy<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

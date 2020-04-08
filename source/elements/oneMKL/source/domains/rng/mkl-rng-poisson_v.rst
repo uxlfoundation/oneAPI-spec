@@ -18,21 +18,16 @@ onemkl::rng::poisson_v
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = gaussian_inverse>
-
-      .. cpp:function::  class poisson_v {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  poisson_v(std::vector<double> lambda
-
-      .. cpp:function::  poisson_v(const poisson_v<T, Method>& other)
-
-      .. cpp:function::  std::vector<double> lambda() const
-
-      .. cpp:function::  poisson_v<T, Method>& operator=(const      poisson_v<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = gaussian_inverse>
+          class poisson_v {
+          public:
+            poisson_v(std::vector<double> lambda
+            poisson_v(const poisson_v<T, Method>& other)
+            std::vector<double> lambda() const
+            poisson_v<T, Method>& operator=(const      poisson_v<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

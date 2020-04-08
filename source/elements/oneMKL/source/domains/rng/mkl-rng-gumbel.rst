@@ -18,25 +18,18 @@ onemkl::rng::gumbel
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class gumbel {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  gumbel(): gumbel((T)0.0, (T)1.0){}
-
-      .. cpp:function::  gumbel(T a, T b)
-
-      .. cpp:function::  gumbel(const gumbel<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  gumbel<T, Method>& operator=(const gumbel<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class gumbel {
+          public:
+            gumbel(): gumbel((T)0.0, (T)1.0){}
+            gumbel(T a, T b)
+            gumbel(const gumbel<T, Method>& other)
+            T a() const
+            T b() const
+            gumbel<T, Method>& operator=(const gumbel<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

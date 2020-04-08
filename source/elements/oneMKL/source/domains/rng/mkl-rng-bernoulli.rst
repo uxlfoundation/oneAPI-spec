@@ -18,23 +18,17 @@ onemkl::rng::bernoulli
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = inverse_function>
-
-      .. cpp:function::  class bernoulli {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  bernoulli(): bernoulli(0.5){}
-
-      .. cpp:function::  bernoulli(double p)
-
-      .. cpp:function::  bernoulli(const bernoulli<T, Method>& other)
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  bernoulli<T, Method>& operator=(const      bernoulli<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method = inverse_function>
+          class bernoulli {
+          public:
+            bernoulli(): bernoulli(0.5){}
+            bernoulli(double p)
+            bernoulli(const bernoulli<T, Method>& other)
+            double p() const
+            bernoulli<T, Method>& operator=(const  bernoulli<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

@@ -18,25 +18,18 @@ onemkl::rng::laplace
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class laplace {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  laplace(): laplace((T)0.0, (T)1.0){}
-
-      .. cpp:function::  laplace(T a, T b)
-
-      .. cpp:function::  laplace(const laplace<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  laplace<T, Method>& operator=(const laplace<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class laplace {
+          public:
+            laplace(): laplace((T)0.0, (T)1.0){}
+            laplace(T a, T b)
+            laplace(const laplace<T, Method>& other)
+            T a() const
+            T b() const
+            laplace<T, Method>& operator=(const laplace<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

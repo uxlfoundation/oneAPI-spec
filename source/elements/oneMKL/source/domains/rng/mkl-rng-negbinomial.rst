@@ -18,25 +18,18 @@ onemkl::rng::negbinomial
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = nbar>
-
-      .. cpp:function::  class negbinomial {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  negbinomial(): negbinomial(0.1, 0.5){}
-
-      .. cpp:function::  negbinomial(double a, double p)
-
-      .. cpp:function::  negbinomial(const negbinomial<T, Method>& other)
-
-      .. cpp:function::  double a() const
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  negbinomial<T, Method>& operator=(const      negbinomial<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = nbar>
+          class negbinomial {
+          public:
+            negbinomial(): negbinomial(0.1, 0.5){}
+            negbinomial(double a, double p)
+            negbinomial(const negbinomial<T, Method>& other)
+            double a() const
+            double p() const
+            negbinomial<T, Method>& operator=(const      negbinomial<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

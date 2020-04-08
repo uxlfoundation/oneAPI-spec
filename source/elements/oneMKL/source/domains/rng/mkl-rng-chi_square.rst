@@ -18,23 +18,17 @@ onemkl::rng::chi_square
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      gamma_marsaglia>
+      ::
 
-      .. cpp:function::  class chi_square {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  chi_square(): chi_square(5){}
-
-      .. cpp:function::  chi_square(std::int32_t n)
-
-      .. cpp:function::  chi_square(const chi_square<T, Method>& other)
-
-      .. cpp:function::  std::int32_t n() const
-
-      .. cpp:function::  chi_square<T, Method>& operator=(const      chi_square<T, Method>& other)
-
-      .. cpp:function::  }
+        template<typename T = float, method Method =      gamma_marsaglia>
+          class chi_square {
+          public:
+            chi_square(): chi_square(5){}
+            chi_square(std::int32_t n)
+            chi_square(const chi_square<T, Method>& other)
+            std::int32_t n() const
+            chi_square<T, Method>& operator=(const chi_square<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

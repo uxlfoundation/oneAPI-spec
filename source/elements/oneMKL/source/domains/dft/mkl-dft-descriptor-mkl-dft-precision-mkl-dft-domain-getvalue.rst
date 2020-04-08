@@ -22,7 +22,7 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::getValue
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.getValue         (onemkl::dft::ConfigParam param , ...) 
+         .. cpp:function::  onemkl::dft::ErrCode getValue         (onemkl::dft::ConfigParam param , ...) 
 
          .. rubric:: Include Files
             :class: sectiontitle

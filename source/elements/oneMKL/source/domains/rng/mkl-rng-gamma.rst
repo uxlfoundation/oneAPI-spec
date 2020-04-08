@@ -18,27 +18,19 @@ onemkl::rng::gamma
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      marsaglia>
-
-      .. cpp:function::  class gamma {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  gamma(): gamma((T)1.0, (T)0.0, (T)1.0){}
-
-      .. cpp:function::  gamma(T alpha, T a, T beta)
-
-      .. cpp:function::  gamma(const gamma<T, Method>& other)
-
-      .. cpp:function::  T alpha() const
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T beta() const
-
-      .. cpp:function::  gamma<T, Method>& operator=(const gamma<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      marsaglia>
+          class gamma {
+          public:
+            gamma(): gamma((T)1.0, (T)0.0, (T)1.0){}
+            gamma(T alpha, T a, T beta)
+            gamma(const gamma<T, Method>& other)
+            T alpha() const
+            T a() const
+            T beta() const
+            gamma<T, Method>& operator=(const gamma<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle
