@@ -21,9 +21,9 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode computeForward         (cl::sycl::buffer<IOType, 1> &inout , cl::sycl::event\* event =         nullptr) 
+         .. cpp:function::  onemkl::dft::ErrCode computeForward(cl::sycl::buffer<IOType, 1> &inout , cl::sycl::event* event = nullptr) 
 
-         .. cpp:function::  onemkl::dft::ErrCode computeForward         (cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1>         &out , cl::sycl::event\* event = nullptr) 
+         .. cpp:function::  onemkl::dft::ErrCode computeForward(cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1> &out , cl::sycl::event* event = nullptr) 
 
          .. rubric:: Include Files
             :class: sectiontitle
@@ -112,7 +112,7 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
               -     cl::sycl::buffer<IOType, 1>    
               -     Sycl buffer containing an array of length no less          than specified at onemkl::dft::Descriptor<onemkl::dft::Precision,         onemkl::dft::Domain>::init call.   
             * -     Event    
-              -     cl::sycl::event\*    
+              -     cl::sycl::event*    
               -     If no event pointer is passed, then it defaults to          nullptr. If a non-nullptr value is passed, it is set to the         event associated with the enqueued computation job.   
             * -     Status    
               -     onemkl::dft::ErrCode    

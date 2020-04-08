@@ -30,7 +30,7 @@ onemkl::rng::generate
          USM API
 
 
-         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType> cl::sycl::event generate (const Distr<T,         Method>& distr, EngineType& engine, const std::int64_t n, T \*         r , const cl::sycl::vector_class<cl::sycl::event> &         dependencies)
+         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType> cl::sycl::event generate (const Distr<T,         Method>& distr, EngineType& engine, const std::int64_t n, T *         r , const cl::sycl::vector_class<cl::sycl::event> &         dependencies)
 
          .. rubric:: Include Files
             :class: sectiontitle

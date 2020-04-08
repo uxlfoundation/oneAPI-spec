@@ -21,7 +21,7 @@ her2 (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event her2(queue &exec_queue, uplo         upper_lower, std::int64_t n, T alpha, const T \*x, std::int64_t         incx, const T \*y, std::int64_t incy, T \*a, std::int64_t lda,         const vector_class<event> &dependencies = {})
+         .. cpp:function::  event her2(queue &exec_queue, uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *a, std::int64_t lda, const vector_class<event> &dependencies = {})
 
          The USM version of ``her2`` supports the following precisions.
 

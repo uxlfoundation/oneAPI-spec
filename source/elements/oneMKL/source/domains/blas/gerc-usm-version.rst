@@ -21,7 +21,7 @@ gerc (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event gerc(queue &exec_queue, std::int64_t m,         std::int64_t n, T alpha, const T \*x, std::int64_t incx, const         T \*y, std::int64_t incy, T \*a, std::int64_t lda, const         vector_class<event> &dependencies = {})
+         .. cpp:function::  event gerc(queue &exec_queue, std::int64_t m, std::int64_t n, T alpha, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *a, std::int64_t lda, const vector_class<event> &dependencies = {})
 
          The USM version of ``gerc`` supports the following precisions.
 

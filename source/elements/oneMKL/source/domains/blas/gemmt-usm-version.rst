@@ -22,7 +22,7 @@ gemmt (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event gemmt(queue &exec_queue, uplo         upper_lower, transpose transa, transpose transb, std::int64_t         n, std::int64_t k, T alpha, const T\* a, std::int64_t lda,         const T\* b, std::int64_t ldb, T beta, T\* c, std::int64_t ldc,         const vector_class<event> &dependencies = {})
+         .. cpp:function::  event gemmt(queue &exec_queue, uplo upper_lower, transpose transa, transpose transb, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const vector_class<event> &dependencies = {})
 
          The USM version of\ ``gemmt`` supports the following
          precisions.

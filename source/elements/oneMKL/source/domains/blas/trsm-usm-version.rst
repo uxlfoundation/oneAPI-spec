@@ -21,7 +21,7 @@ trsm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event trsm(queue &exec_queue, side left_right,         uplo upper_lower, transpose transa, diag unit_diag,         std::int64_t m, std::int64_t n, T alpha, const T\* a,         std::int64_t lda, T\* b, std::int64_t ldb, const         vector_class<event> &dependencies = {})
+         .. cpp:function::  event trsm(queue &exec_queue, side left_right,         uplo upper_lower, transpose transa, diag unit_diag,         std::int64_t m, std::int64_t n, T alpha, const T* a,         std::int64_t lda, T* b, std::int64_t ldb, const         vector_class<event> &dependencies = {})
 
          The USM version of trsm supports the following precisions.
 

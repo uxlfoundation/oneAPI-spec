@@ -26,7 +26,7 @@ fmod
       USM API:
 
 
-      .. cpp:function::  event fmod( queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, uint64_t mode = mode::not_defined, error_handler<T>      errhandler = {} )
+      .. cpp:function::  event fmod( queue& exec_queue, int64_t n, T* a,      T* b, T* y, uint64_t mode = mode::not_defined, error_handler<T>      errhandler = {} )
 
       ``fmod`` supports the following precisions.
 

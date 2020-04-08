@@ -21,7 +21,7 @@ axpy (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event axpy(queue &exec_queue, std::int64_t n,         T alpha, const T \*x, std::int64_t incx, T \*y, std::int64_t         incy, const vector_class<event> &dependencies = {})
+         .. cpp:function::  event axpy(queue &exec_queue, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *y, std::int64_t incy, const vector_class<event> &dependencies = {})
 
          The USM version of ``axpy`` supports the following precisions.
 

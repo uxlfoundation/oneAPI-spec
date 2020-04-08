@@ -25,7 +25,7 @@ sincos
       USM API:
 
 
-      .. cpp:function::  event sincos(queue& exec_queue, int64_t n, T\* a,      T\* y, T\* z, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event sincos(queue& exec_queue, int64_t n, T* a,      T* y, T* z, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``sincos`` supports the following precisions.
 

@@ -28,7 +28,7 @@ create_error_handler
          USM API:
 
 
-         .. cpp:function::  error_handler<T> create_error_handler(         uint8_t\* errarray, int64_t length = 1, uint8_t errstatus =         status::not_defined, T fixup = 0.0, bool copysign = false )
+         .. cpp:function::  error_handler<T> create_error_handler(         uint8_t* errarray, int64_t length = 1, uint8_t errstatus =         status::not_defined, T fixup = 0.0, bool copysign = false )
 
          ``create_error_handler`` supports the following precisions.
 

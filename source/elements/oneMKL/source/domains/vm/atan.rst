@@ -25,7 +25,7 @@ atan
       USM API:
 
 
-      .. cpp:function::  event atan(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event atan(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``atan`` supports the following precisions.
 

@@ -21,7 +21,7 @@ scal (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event scal(queue &exec_queue, std::int64_t n,         T_scalar alpha, T \*x, std::int64_t incx, const         vector_class<event> &dependencies = {})
+         .. cpp:function::  event scal(queue &exec_queue, std::int64_t n, T_scalar alpha, T *x, std::int64_t incx, const         vector_class<event> &dependencies = {})
 
          The USM version of ``scal`` supports the following precisions.
 

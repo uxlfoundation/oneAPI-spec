@@ -21,7 +21,7 @@ herk (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event herk(queue &exec_queue, uplo         upper_lower, transpose trans, std::int64_t n, std::int64_t k,         T_real alpha, const T\* a, std::int64_t lda, T_real beta, T\*         c, std::int64_t ldc, const vector_class<event> &dependencies =         {})
+         .. cpp:function::  event herk(queue &exec_queue, uplo upper_lower, transpose trans, std::int64_t n, std::int64_t k, T_real alpha, const T* a, std::int64_t lda, T_real beta, T* c, std::int64_t ldc, const vector_class<event> &dependencies = {})
 
          herk supports the following precisions:
 

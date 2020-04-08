@@ -21,7 +21,7 @@ spmv (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event spmv(queue &exec_queue, uplo         upper_lower, std::int64_t n, T alpha, const T \*a, const T \*x,         std::int64_t incx, T beta, T \*y, std::int64_t incy, const         vector_class<event> &dependencies = {})
+         .. cpp:function::  event spmv(queue &exec_queue, uplo         upper_lower, std::int64_t n, T alpha, const T *a, const T *x,         std::int64_t incx, T beta, T *y, std::int64_t incy, const         vector_class<event> &dependencies = {})
 
          The USM version of ``spmv`` supports the following precisions.
 

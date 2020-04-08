@@ -26,7 +26,7 @@ cis
       USM API:
 
 
-      .. cpp:function::  event cis(queue& exec_queue, int64_t n, A\* a,      R\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cis(queue& exec_queue, int64_t n, A* a,      R* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cis`` supports the following precisions.
 

@@ -40,7 +40,7 @@ onemkl::sparse::trmv
          **Using USM pointers:**
 
 
-         .. cpp:function::  void onemkl::sparse::trmv (cl::sycl::queue &         queue, onemkl::uplo uplo_val, onemkl::transpose transpose_val,         onemkl::diag diag_val, fp alpha, matrixHandle_t handle, fp \*x, fp         beta, fp \*y)
+         .. cpp:function::  void onemkl::sparse::trmv (cl::sycl::queue &         queue, onemkl::uplo uplo_val, onemkl::transpose transpose_val,         onemkl::diag diag_val, fp alpha, matrixHandle_t handle, fp *x, fp         beta, fp *y)
 
          .. rubric:: Include Files
             :class: sectiontitle

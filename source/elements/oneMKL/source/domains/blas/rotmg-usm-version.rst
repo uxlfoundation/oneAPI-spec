@@ -21,7 +21,7 @@ rotmg (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event rotmg(queue &exec_queue, T \*d1, T \*d2,         T \*x1, T \*y1, T \*param, const vector_class<event>         &dependencies = {})
+         .. cpp:function::  event rotmg(queue &exec_queue, T *d1, T *d2, T *x1, T *y1, T *param, const vector_class<event> &dependencies = {})
 
          The USM version of ``rotmg`` supports the following precisions.
 

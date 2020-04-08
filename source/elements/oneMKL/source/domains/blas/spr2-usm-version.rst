@@ -21,7 +21,7 @@ spr2 (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event spr2(queue &exec_queue, uplo         upper_lower, std::int64_t n, T alpha, const T \*x, std::int64_t         incx, const T \*y, std::int64_t incy, T \*a)
+         .. cpp:function::  event spr2(queue &exec_queue, uplo         upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t         incx, const T *y, std::int64_t incy, T *a)
 
          The USM version of\ ``spr`` supports the following precisions.
 

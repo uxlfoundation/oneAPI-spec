@@ -21,7 +21,7 @@ dotu (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event dotu(queue &exec_queue, std::int64_t n,         const T \*x, std::int64_t incx, const T \*y, std::int64_t incy,         T \*result, const vector_class<event> &dependencies = {})
+         .. cpp:function::  event dotu(queue &exec_queue, std::int64_t n, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *result, const vector_class<event> &dependencies = {})
 
          The USM version of ``dotu`` supports the following precisions.
 
