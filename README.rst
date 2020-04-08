@@ -5,7 +5,13 @@ oneAPI Specifications
 .. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
    :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
 
-This repo contains the sources for the `oneAPI Specification`_.
+This repo contains the sources for the `oneAPI Specification`_. For
+more information about oneAPI, see `oneapi.com
+<https://oneapi.com>`__. For information about future releases of the
+oneAPI specification, see the `roadmap <roadmap.rst>`__. To be
+notified about new releases, become a release-only watcher of this
+repo. See `contribute <CONTRIBUTING.rst>`__ for information about
+contributing.
 
 The document is built with `Sphinx`_ using a theme provided by `Read
 the Docs`_.
