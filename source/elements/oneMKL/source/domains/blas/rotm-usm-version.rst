@@ -21,7 +21,7 @@ rotm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event rotm(queue &exec_queue, std::int64_t n,         T \*x, std::int64_t incx, T \*y, std::int64_t incy, T \*param,         const vector_class<event> &dependencies = {})
+         .. cpp:function::  event rotm(queue &exec_queue, std::int64_t n, T *x, std::int64_t incx, T *y, std::int64_t incy, T *param, const vector_class<event> &dependencies = {})
 
          The USM version of ``rotm`` supports the following precisions.
 

@@ -26,7 +26,7 @@ fmin
       USM API:
 
 
-      .. cpp:function::  event fmin(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event fmin(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``fmin`` supports the following precisions.
 

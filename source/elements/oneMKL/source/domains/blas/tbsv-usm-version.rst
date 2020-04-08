@@ -22,7 +22,7 @@ tbsv (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event tbsv(queue &exec_queue, uplo         upper_lower, transpose trans, diag unit_nonunit, std::int64_t         n, std::int64_t k, const T \*a, std::int64_t lda, T \*x,         std::int64_t incx, const vector_class<event> &dependencies =         {})
+         .. cpp:function::  event tbsv(queue &exec_queue, uplo         upper_lower, transpose trans, diag unit_nonunit, std::int64_t         n, std::int64_t k, const T *a, std::int64_t lda, T *x,         std::int64_t incx, const vector_class<event> &dependencies =         {})
 
          The USM version of ``tbsv`` supports the following precisions.
 

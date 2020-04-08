@@ -26,7 +26,7 @@ onemkl::sparse::setCSRstructure
       **Using USM pointers:**
 
 
-      .. cpp:function::  void onemkl::sparse::setCSRstructure (matrixHandle_t      handle, intType nRows, intType nCols, onemkl::index_base index,      intType \*rowIndex, intType \*colIndex, fp \*values)
+      .. cpp:function::  void onemkl::sparse::setCSRstructure (matrixHandle_t      handle, intType nRows, intType nCols, onemkl::index_base index,      intType *rowIndex, intType *colIndex, fp *values)
 
       .. rubric:: Include Files
          :class: sectiontitle

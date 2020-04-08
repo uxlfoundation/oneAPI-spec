@@ -39,7 +39,7 @@ onemkl::sparse::gemvdot
          **Using USM pointers:**
 
 
-         .. cpp:function::  void onemkl::sparse::gemvdot (cl::sycl::queue &         queue, onemkl::transpose transpose_val, fp alpha, matrixHandle_t         handle, fp \*x, fp beta, fp \*y, fp \*d)
+         .. cpp:function::  void onemkl::sparse::gemvdot (cl::sycl::queue &         queue, onemkl::transpose transpose_val, fp alpha, matrixHandle_t         handle, fp *x, fp beta, fp *y, fp *d)
 
          .. rubric:: Include Files
             :class: sectiontitle

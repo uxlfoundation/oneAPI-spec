@@ -21,7 +21,7 @@ sbmv (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event sbmv(queue &exec_queue, uplo         upper_lower, std::int64_t n, std::int64_t k, T alpha, const T         \*a, std::int64_t lda, const T \*x, std::int64_t incx, T beta,         T \*y, std::int64_t incy, const vector_class<event>         &dependencies = {})
+         .. cpp:function::  event sbmv(queue &exec_queue, uplo upper_lower, std::int64_t n, std::int64_t k, T alpha, const T *a, std::int64_t lda, const T *x, std::int64_t incx, T beta, T *y, std::int64_t incy, const vector_class<event> &dependencies = {})
 
          The USM version of ``sbmv`` supports the following precisions.
 

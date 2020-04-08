@@ -22,7 +22,7 @@ trmm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event trmm(queue &exec_queue, uplo         upper_lower, transpose transa, diag unit_diag, std::int64_t m,         std::int64_t n, T alpha, const T\* a, std::int64_t lda, T\* b,         std::int64_t ldb, const vector_class<event> &dependencies =         {})
+         .. cpp:function::  event trmm(queue &exec_queue, uplo         upper_lower, transpose transa, diag unit_diag, std::int64_t m,         std::int64_t n, T alpha, const T* a, std::int64_t lda, T* b,         std::int64_t ldb, const vector_class<event> &dependencies =         {})
 
          trmm supports the following precisions.
 

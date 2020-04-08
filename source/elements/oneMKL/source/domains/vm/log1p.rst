@@ -26,7 +26,7 @@ log1p
       USM API:
 
 
-      .. cpp:function::  event log1p(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event log1p(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``log1p`` supports the following precisions.
 

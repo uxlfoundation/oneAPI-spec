@@ -21,7 +21,7 @@ hpr (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event hpr(queue &exec_queue, uplo upper_lower,         std::int64_t n, T alpha, const T \*x, std::int64_t incx, T \*a,         const vector_class<event> &dependencies = {})
+         .. cpp:function::  event hpr(queue &exec_queue, uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, const vector_class<event> &dependencies = {})
 
          The USM version of\ ``hpr`` supports the following precisions.
 

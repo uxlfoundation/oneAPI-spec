@@ -21,7 +21,7 @@ gbmv (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event gbmv(queue &exec_queue, transpose trans,         std::int64_t m, std::int64_t n, std::int64_t kl, std::int64_t         ku, T alpha, const T \*a, std::int64_t lda, const T \*x,         std::int64_t incx, T beta, T \*y, std::int64_t incy, const         vector_class<event> &dependencies = {})
+         .. cpp:function::  event gbmv(queue &exec_queue, transpose trans, std::int64_t m, std::int64_t n, std::int64_t kl, std::int64_t ku, T alpha, const T *a, std::int64_t lda, const T *x, std::int64_t incx, T beta, T *y, std::int64_t incy, const vector_class<event> &dependencies = {})
 
          The USM version of ``gbmv`` supports the following precisions.
 

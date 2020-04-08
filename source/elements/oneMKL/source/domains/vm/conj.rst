@@ -25,7 +25,7 @@ conj
       USM API:
 
 
-      .. cpp:function::  event conj( queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event conj( queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``conj`` supports the following precisions.
 

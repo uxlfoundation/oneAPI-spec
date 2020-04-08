@@ -22,7 +22,7 @@ dotc (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  void dotc(queue &exec_queue, std::int64_t n,         const T \*x, std::int64_t incx, const T \*y, std::int64_t incy,         T \*result, const vector_class<event> &dependencies = {})
+         .. cpp:function::  void dotc(queue &exec_queue, std::int64_t n, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *result, const vector_class<event> &dependencies = {})
 
          The USM version of ``dotc`` supports the following precisions.
 

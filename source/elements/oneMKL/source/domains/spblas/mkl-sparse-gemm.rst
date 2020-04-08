@@ -41,7 +41,7 @@ onemkl::sparse::gemm
          **Using USM pointers:**
 
 
-         .. cpp:function::  void onemkl::sparse::gemm (cl::sycl::queue &         queue, onemkl::transpose transpose_val, const fp alpha,         matrixHandle_t handle, const fp \*b, const std::int64_t         columns, const std::int64_t ldb, const fp beta, fp \*c, const         std::int64_t ldc)
+         .. cpp:function::  void onemkl::sparse::gemm (cl::sycl::queue &         queue, onemkl::transpose transpose_val, const fp alpha,         matrixHandle_t handle, const fp *b, const std::int64_t         columns, const std::int64_t ldb, const fp beta, fp *c, const         std::int64_t ldc)
 
          .. rubric:: Include Files
             :class: sectiontitle

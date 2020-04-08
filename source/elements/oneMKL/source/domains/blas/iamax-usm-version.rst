@@ -22,7 +22,7 @@ iamax (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  event iamax(queue &exec_queue, std::int64_t n,         const T \*x, std::int64_t incx, T_res \*result, const         vector_class<event> &dependencies = {})
+         .. cpp:function::  event iamax(queue &exec_queue, std::int64_t n, const T *x, std::int64_t incx, T_res *result, const vector_class<event> &dependencies = {})
 
          The USM version of iamax supports the following precisions.
 

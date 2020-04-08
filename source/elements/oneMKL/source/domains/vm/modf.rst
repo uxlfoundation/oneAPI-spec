@@ -26,7 +26,7 @@ modf
       USM API:
 
 
-      .. cpp:function::  event modf(queue& exec_queue, int64_t n, T\* a,      T\* y, T\* z, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event modf(queue& exec_queue, int64_t n, T* a,      T* y, T* z, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``modf`` supports the following precisions.
 

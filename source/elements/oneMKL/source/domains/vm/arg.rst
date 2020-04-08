@@ -25,7 +25,7 @@ arg
       USM API:
 
 
-      .. cpp:function::  event arg(queue& exec_queue, int64_t n, A\* a,      R\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event arg(queue& exec_queue, int64_t n, A* a,      R* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``arg`` supports the following precisions.
 
