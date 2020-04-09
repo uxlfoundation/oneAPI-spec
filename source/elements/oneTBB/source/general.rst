@@ -1,6 +1,7 @@
 ===================
 General Information
 ===================
+**[general_information]**
 
 C++11 is the minimal version of the C++ standard required by oneTBB.
 An implementation of oneTBB shall not require newer versions of the standard
@@ -20,7 +21,7 @@ can build larger parallel components from smaller parallel components.
 
 .. toctree::
 
-   general/terminology.rst
+   general/named_requirements.rst
    general/notation.rst
    general/identifiers.rst
    general/thread_safety.rst
