@@ -81,4 +81,4 @@ See "Range Concept" for an example of proportional splitting constructor impleme
 See also:
 
 * :doc:`split <split_cls>`
-* :doc:`Range Concept <../range_concept>`
+* :doc:`Range Concept <../../../general/named_requirements/range>`

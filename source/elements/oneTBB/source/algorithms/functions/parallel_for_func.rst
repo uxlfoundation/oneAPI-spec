@@ -230,5 +230,5 @@ Because the algorithm moves many locations, it tends to be bandwidth limited. Sp
 
 See also:
 
-* :doc:`Range Concept <range_concept>`
-* :doc:`Bound groups (task_group_context Class) <../task_scheduler/task_group_context>`
+* :doc:`Range Concept <../../general/named_requirements/range>`
+* :doc:`Bound groups (task_group_context Class) <../../task_scheduler/task_group_context>`

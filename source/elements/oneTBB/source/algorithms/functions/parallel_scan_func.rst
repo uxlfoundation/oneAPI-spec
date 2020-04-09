@@ -159,7 +159,7 @@ needed to process the next subrange if no worker thread has prescanned it yet.
 
 **Example Execution of parallel_scan**
 
-.. image:: ../Resources/parll_scan.jpg
+.. image:: ../../Resources/parll_scan.jpg
 
 
 Example (Imperative Form)

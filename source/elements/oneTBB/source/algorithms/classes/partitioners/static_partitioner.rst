@@ -94,7 +94,6 @@ The following table provides additional information on the members of this class
 
 See also:
 
-* :doc:`Partitioners <../partitioners>`
-* :doc:`proportional_split Class <../splittable_concept/proportional_split_cls>`
-* :doc:`Range Concept <../range_concept>`
-* :doc:`task_arena Class <../../task_scheduler/task_arena_cls>`
+* :doc:`proportional_split Class <../split_tags/proportional_split_cls>`
+* :doc:`Range Concept <../../../general/named_requirements/range>`
+* :doc:`task_arena Class <../../../task_scheduler/task_arena_cls>`

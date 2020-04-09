@@ -83,4 +83,4 @@ this template class.
 
 See also:
 
-* :doc:`task_arena Class <../../task_scheduler/task_arena_cls>`
+* :doc:`task_arena Class <../../../task_scheduler/task_arena_cls>`

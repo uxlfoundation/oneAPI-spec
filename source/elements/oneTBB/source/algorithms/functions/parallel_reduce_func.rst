@@ -122,7 +122,7 @@ and b\ :sub:`0`.join(b\ :sub:`2`) to merge the results of the leaves.
 
 **Execution of parallel_reduce over blocked_range<int>(0,20,5)**
 
-.. image:: ../Resources/parll_red.jpg
+.. image:: ../../Resources/parll_red.jpg
 
 The figure above shows only one possible execution. Other valid executions include
 splitting b\ :sub:`2` into b\ :sub:`2` and b\ :sub:`3`, or doing no splitting
@@ -137,7 +137,7 @@ choice of body splitting nondeterministically.
 
 **Example where Body b0 processes non-consecutive subranges.**
 
-.. image:: ../Resources/non_consq_rng.jpg
+.. image:: ../../Resources/non_consq_rng.jpg
 
 The subranges evaluated by a given body are not consecutive if there is an
 intervening ``join``. The joined information represents processing of a

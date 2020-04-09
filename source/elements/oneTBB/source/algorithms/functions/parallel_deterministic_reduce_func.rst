@@ -68,7 +68,7 @@ because other partitioners react to random work stealing behavior.
 invokes the Body splitting constructor for each range split.
 
 
-.. figure:: ../Resources/reference-latest-19.jpg
+.. figure:: ../../Resources/reference-latest-19.jpg
    :width: 403px
    :height: 135px
    :align: left
@@ -140,6 +140,6 @@ The example below is taken from
 
 See also:
 
-* :doc:`simple_partitioner Class <partitioners/simple_partitioner_cls>`
-* :doc:`Partitioners <partitioners>`
+* :doc:`simple_partitioner Class <../classes/partitioners/simple_partitioner_cls>`
+* :ref:`Partitioners`
 * :doc:`parallel_reduce Template Function <parallel_reduce_func>`

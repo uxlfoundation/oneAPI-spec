@@ -153,7 +153,7 @@ two-argument form of ``operator()``.
 
 See also:
 
-* :doc:`Bound groups (task_group_context Class) <../task_scheduler/task_group_context>`
+* :doc:`Bound groups (task_group_context Class) <../../task_scheduler/task_group_context>`
 
 .. toctree::
 

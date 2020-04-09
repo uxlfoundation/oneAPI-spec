@@ -323,6 +323,6 @@ members of this template class.
 
 See also:
 
-* :doc:`parallel_for Template Function <../parallel_for_func>`
-* :doc:`parallel_reduce Template Function <../parallel_reduce_func>`
-* :doc:`parallel_scan Template Function <../parallel_scan_func>`
+* :doc:`parallel_for Template Function <../../functions/parallel_for_func>`
+* :doc:`parallel_reduce Template Function <../../functions/parallel_reduce_func>`
+* :doc:`parallel_scan Template Function <../../functions/parallel_scan_func>`

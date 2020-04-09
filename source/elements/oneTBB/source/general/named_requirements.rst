@@ -51,3 +51,5 @@ A type *models* a named requirement if all requirements are met.
 .. toctree::
 
    named_requirements/copy_constructible.rst
+   named_requirements/range.rst
+   named_requirements/splittable.rst

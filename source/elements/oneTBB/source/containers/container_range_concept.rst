@@ -71,9 +71,9 @@ See also:
 
 * :doc:`concurrent_hash_map <concurrent_hash_map_cls>`
 * :doc:`concurrent_vector <concurrent_vector>`
-* :doc:`parallel_for <../algorithms/parallel_for_func>`
-* :doc:`parallel_reduce <../algorithms/parallel_reduce_func>`
-* :doc:`parallel_scan <../algorithms/parallel_scan_func>`
-* :doc:`Range <../algorithms/range_concept>`
+* :doc:`parallel_for <../algorithms/functions/parallel_for_func>`
+* :doc:`parallel_reduce <../algorithms/functions/parallel_reduce_func>`
+* :doc:`parallel_scan <../algorithms/functions/parallel_scan_func>`
+* :doc:`Range Concept <../general/named_requirements/range>`
 * :doc:`Capacity <concurrent_hash_map_cls/capacity_map_cls>`
 * :doc:`Parallel Iteration <concurrent_vector/parallel_iteration>`

@@ -103,7 +103,7 @@ of ``parallel_pipeline``.
 
 See also:
 
-* :doc:`task_group_context <../task_scheduler/task_group_context>`
+* :doc:`task_group_context <../../task_scheduler/task_group_context>`
 
 .. toctree::
 
