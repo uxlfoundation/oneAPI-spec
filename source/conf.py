@@ -14,8 +14,13 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('conf'))
 import datetime
+
+sys.path.insert(0, os.path.abspath('conf'))
+
+# oneDAL uses custom API generator based on `breathe`.
+# Extend path to let Sphinx find `dalapi` module:
+sys.path.insert(0, os.path.abspath('elements/oneDAL'))
 
 from common_conf import *
 
@@ -89,7 +94,7 @@ html_theme = 'sphinx_rtd_theme'
 #
 html_theme_options = {
   'includehidden': False
-} 
+}
 
 html_context = {
     'display_github': True,

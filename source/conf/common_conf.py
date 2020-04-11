@@ -1,3 +1,5 @@
+import os
+import sys
 import string
 
 extensions = [
@@ -15,6 +17,7 @@ extensions = [
     'sphinxcontrib.spelling',
     'sphinx_substitution_extensions',
     'breathe',
+    'dalapi', # oneDAL API generator
 ]
 
 env = {
