@@ -37,8 +37,13 @@ class ProjectWatcher(object):
         full_path = self._path_resolver(f'{docname}.rst')
         self._linked_docnames[docname] = (full_path, time.time())
 
-    def get_outdated_docnames(self):
-        self._update_linked_docnames()
+    def get_outdated_docnames(self, modified_docnames):
+        # We do not need to check the modified documents,
+        # they should be updated by Sphinx in any way
+        for docname in modified_docnames:
+            if docname in self._linked_docnames:
+                del self._linked_docnames[docname]
+
         xml_mtime = self._xml_timer()
         hpp_mtime = self._hpp_timer()
         if xml_mtime < hpp_mtime:
@@ -48,8 +53,8 @@ class ProjectWatcher(object):
 
         outdated_docnames = []
         for docname, info in self._linked_docnames.items():
-            filename, mtime = info
-            if mtime < xml_mtime:
+            filename, link_time = info
+            if link_time < xml_mtime:
                 outdated_docnames.append(docname)
 
         if self.ctx.debug:
@@ -127,7 +132,7 @@ class EventHandler(object):
         self.ctx = ctx
 
     def env_get_outdated(self, app, env, added, changed, removed):
-        x = self.ctx.watcher.get_outdated_docnames()
+        x = self.ctx.watcher.get_outdated_docnames(added | changed | removed)
         return list(set(x).difference(removed))
 
 
