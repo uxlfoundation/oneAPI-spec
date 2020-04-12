@@ -1,9 +1,7 @@
 from os.path import join
 from lxml import etree
-
 from .doxymodel import Index
-
-
+from .utils import FileModificationTimer
 
 def parse(doxygen_xml_directory: str) -> Index:
     all = _combine_to_xml_all(doxygen_xml_directory)

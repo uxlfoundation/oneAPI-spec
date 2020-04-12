@@ -1,7 +1,7 @@
 import os
 import subprocess
 from typing import (
-    Any, Union, List, Dict
+    Union, Iterable
 )
 from glob import iglob
 
@@ -28,20 +28,21 @@ class ProcessHandle(object):
 
 
 class FileModificationTimer(object):
-    def __init__(self, base_dir: str, pattern: str):
-        self._base_dir = os.path.abspath(base_dir)
-        self._pattern = pattern
+    def __init__(self, base_dir_or_files: Union[str, Iterable[str]],
+                       pattern: str = '*'):
+        if isinstance(base_dir_or_files, str):
+            self._base_dir = os.path.abspath(base_dir_or_files)
+            self._pattern = pattern
+        else:
+            self._files = base_dir_or_files
 
     def __call__(self):
         mtimes = [os.path.getmtime(x) for x in self._get_files()]
         return max(mtimes) if len(mtimes) > 0 else 0
 
     def _get_files(self):
-        glob_str = f'{self._base_dir}/**/{self._pattern}'
-        return iglob(glob_str, recursive=True)
-
-    def __lt__(self, dependency):
-        return self() < dependency()
-
-    def __gt__(self, dependency):
-        return self() > dependency()
+        if hasattr(self, '_base_dir'):
+            glob_str = f'{self._base_dir}/**/{self._pattern}'
+            return iglob(glob_str, recursive=True)
+        else:
+            return self._files
