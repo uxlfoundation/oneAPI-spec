@@ -26,7 +26,6 @@ training set.
 .. |i_result| replace:: `infer_result <i_api_result_>`_
 .. |i_op| replace:: `infer(...) <i_api_>`_
 
-
 =============== ============= ============= ======== =========== ============
  **Operation**  **Computational methods**     **Programming Interface**
 --------------- --------------------------- ---------------------------------

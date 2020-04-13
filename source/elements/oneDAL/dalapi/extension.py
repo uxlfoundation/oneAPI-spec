@@ -199,7 +199,7 @@ class Context(object):
     @property
     def listing(self) -> doxypy.ListingReader:
         if self._listing is None:
-            self._listing = doxypy.ListingReader()
+            self._listing = doxypy.ListingReader(self._paths.project_dir)
         return self._listing
 
     def log(self, *args):

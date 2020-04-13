@@ -35,14 +35,16 @@ class DeclarationError(Exception):
 
 
 class _ListingEntry(object):
-    def __init__(self, model_object):
+    def __init__(self, base_dir, model_object):
+        self._base_dir = base_dir
         self._filename = model_object.location.file
         self._model_object = model_object
         self._content = None
 
     def read(self):
         if not self._content:
-            with open(self._filename, 'r') as f:
+            filename = os.path.join(self._base_dir, self._filename)
+            with open(filename, 'r') as f:
                 self._content = self._read(f.readlines())
         return self._content
 
@@ -102,11 +104,12 @@ class _ListingEntry(object):
 
 
 class ListingReader(object):
-    def __init__(self):
+    def __init__(self, base_dir):
+        self._base_dir = base_dir
         self._cache = {}
 
     def read(self, model_object) -> List[Text]:
         fqn = model_object.fully_qualified_name
         if fqn not in self._cache:
-            self._cache[fqn] = _ListingEntry(model_object)
+            self._cache[fqn] = _ListingEntry(self._base_dir, model_object)
         return self._cache[fqn].read()
