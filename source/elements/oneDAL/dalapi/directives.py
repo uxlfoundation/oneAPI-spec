@@ -52,3 +52,18 @@ class ClassDirective(CppDirective):
     def rst(self, x: RstBuilder):
         class_def = self.ctx.index.find_class(self.arguments[0])
         x.add_class(class_def.namespace, class_def.name)
+        self._rst_methods(class_def, x)
+        self._rst_properties(class_def, x)
+
+    def _rst_methods(self, class_def, x: RstBuilder):
+        for method_def in class_def.methods:
+            x.add_function(method_def.definition, level=1)
+
+    def _rst_properties(self, class_def, x: RstBuilder):
+        if len(class_def.properties) > 0:
+            x('**Properties**', level=1)
+            x()
+        for property_def in class_def.properties:
+            x.add_property(property_def.definition, level=1)
+            if property_def.doc:
+                x.add_doc_description(property_def.doc.description, level=2)

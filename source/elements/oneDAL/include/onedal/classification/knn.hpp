@@ -15,9 +15,14 @@ class desc {
 public:
    desc();
 
+   /// The number of classes $c$
+   /// @remark default = 2
+   /// @invariant class_count > 1
    std::int64_t get_class_count() const;
 
-   /// Retuns the number of neighbors :math:`k`
+   /// The number of neighbors $k$
+   /// @remark default = 5
+   /// @invariant neighbor_count > 0
    std::int64_t get_neighbor_count() const;
 
    desc& set_class_count(std::int64_t);
@@ -31,8 +36,16 @@ public:
 
 class train_input {
 public:
-   train_input(const table& data = table(),
-               const table& labels = table());
+   train_input(const table& data = table{},
+               const table& labels = table{});
+
+   /// The training set $X$
+   /// @remark default = table{}
+   const table& get_data() const;
+
+   /// Vector of labels $y$ for the training set $X$
+   /// @remark default = table{}
+   const table& get_labels() const;
 
    train_input& set_data(const table&);
    train_input& set_labels(const table&);
@@ -47,8 +60,11 @@ public:
 
 class infer_input {
 public:
-   infer_input(const model& model = model(),
-               const table& data = table());
+   infer_input(const model& m = model{},
+               const table& data = table{});
+
+   const model& get_model() const;
+   const table& get_data() const;
 
    infer_input& set_model(const model&);
    infer_input& set_data(const table&);

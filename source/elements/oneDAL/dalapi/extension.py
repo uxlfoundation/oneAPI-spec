@@ -49,12 +49,12 @@ class ProjectWatcher(object):
         if xml_mtime < hpp_mtime:
             self.ctx.log('Run Doxygen')
             self._doxygen.run()
-            xml_mtime = self._xml_timer()
 
         outdated_docnames = []
         for docname, info in self._linked_docnames.items():
             filename, link_time = info
-            if link_time < xml_mtime:
+            if (self.ctx.always_rebuild or
+                link_time < xml_mtime or link_time < hpp_mtime):
                 outdated_docnames.append(docname)
 
         if self.ctx.debug:
@@ -98,6 +98,7 @@ class Context(object):
             relative_doxygen_dir,
             relative_include_dir
         )
+        self._read_env()
 
     @property
     def current_docname(self):
@@ -117,14 +118,16 @@ class Context(object):
                 self, self._path_resolver)
         return self._watcher
 
-    @property
-    def debug(self):
-        is_debug = os.environ.get('DALAPI_DEBUG', '0')
-        return is_debug.lower() in ['1', 'yes', 'y']
-
     def log(self, *args):
         if self.debug:
             print('[dalapi]:', *args)
+
+    def _read_env(self):
+        def get_env_flag(env_var):
+            value = os.environ.get(env_var, '0')
+            return value.lower() in ['1', 'yes', 'y']
+        self.debug = get_env_flag('DALAPI_DEBUG')
+        self.always_rebuild = get_env_flag('DALAPI_ALWAYS_REBUILD')
 
 
 class EventHandler(object):
@@ -132,8 +135,7 @@ class EventHandler(object):
         self.ctx = ctx
 
     def env_get_outdated(self, app, env, added, changed, removed):
-        x = self.ctx.watcher.get_outdated_docnames(added | changed | removed)
-        return list(set(x).difference(removed))
+        return self.ctx.watcher.get_outdated_docnames(added | changed | removed)
 
 
 def setup(app):
