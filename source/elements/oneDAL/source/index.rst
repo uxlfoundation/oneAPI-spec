@@ -30,5 +30,6 @@ For general information, visit |github|_.
    common_interface/index.rst
    data_management/index.rst
    algorithms/index.rst
+   appendix/index.rst
    bibliography.rst
 
