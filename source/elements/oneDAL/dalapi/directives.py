@@ -51,6 +51,7 @@ class ClassDirective(CppDirective):
 
     def rst(self, x: RstBuilder):
         class_def = self.ctx.index.find_class(self.arguments[0])
+        self._rst_listing(class_def, x)
         x.add_class(class_def.namespace, class_def.name)
         self._rst_methods(class_def, x)
         self._rst_properties(class_def, x)
@@ -64,6 +65,29 @@ class ClassDirective(CppDirective):
             x('**Properties**', level=1)
             x()
         for property_def in class_def.properties:
-            x.add_property(property_def.definition, level=1)
-            if property_def.doc:
-                x.add_doc_description(property_def.doc.description, level=2)
+            self._rst_property(property_def, x)
+
+    def _rst_property(self, property_def, x: RstBuilder):
+        x.add_property(property_def.definition, level=1)
+        if property_def.doc:
+            x.add_doc(property_def.doc.description, level=2)
+        if property_def.getter or property_def.setter:
+            x('Getter & Setter', level=2)
+            if property_def.getter:
+                x(f'| ``{property_def.getter.definition}``', level=3)
+            if property_def.setter:
+                x(f'| ``{property_def.setter.definition}``', level=3)
+            x()
+        if property_def.doc:
+            invariants = property_def.doc.invariants
+            if invariants and len(invariants) > 0:
+                x('Invariants', level=2)
+                for invariant in invariants:
+                    x(f'| :cpp:expr:`{invariant}`', level=3)
+                x()
+
+
+    def _rst_listing(self, class_def, x: RstBuilder):
+        listing = self.ctx.listing.get_class_listing(class_def)
+        x.add_code_block(listing)
+

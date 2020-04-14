@@ -4,6 +4,7 @@ from typing import (Dict, Tuple, Text)
 from . import directives
 from . import doxymodel
 from . import utils
+from .listingreader import ListingReader
 
 class PathResolver(object):
     def __init__(self, app,
@@ -92,6 +93,7 @@ class Context(object):
         self._index = None
         self._watcher = None
         self._doxygen = None
+        self._listing = None
         self._path_resolver = PathResolver(
             app,
             relative_project_dir,
@@ -117,6 +119,13 @@ class Context(object):
             self._watcher = ProjectWatcher(
                 self, self._path_resolver)
         return self._watcher
+
+    @property
+    def listing(self) -> ListingReader:
+        if self._listing is None:
+            self._listing = ListingReader(
+                self._path_resolver.project_dir)
+        return self._listing
 
     def log(self, *args):
         if self.debug:

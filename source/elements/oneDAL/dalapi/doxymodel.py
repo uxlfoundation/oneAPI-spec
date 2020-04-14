@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from multimethod import multimethod
 from typing import (
     Any, Union, List, Dict
 )
@@ -15,6 +14,12 @@ class Doc(object):
 
     def add_invariant(self, text):
         self.invariants.append(text)
+
+@dataclass
+class Location(object):
+    filename: str = ''
+    bodystart: int = -1
+    bodyend: int = -1
 
 @dataclass
 class Parameter(object):
@@ -72,9 +77,11 @@ class Class(object):
     name: str = ''
     kind: str = ''
     namespace: str = ''
+    fully_qualified_name: str = ''
     methods: List[Method] = field(default_factory=list)
     properties: List[Property] = field(default_factory=list)
     template_parameters: List[Parameter] = field(default_factory=list)
+    location: Location = None
 
     def __post_init__(self):
         self._properties_map = {}
@@ -93,6 +100,11 @@ class Class(object):
         self._properties_map[name] = property_def
         return property_def
 
+    def add_location(self):
+        self.location = Location()
+        return self.location
+
+
 
 class Index(object):
     def __init__(self):
@@ -104,6 +116,7 @@ class Index(object):
 
     def add_class(self, fully_qualified_name):
         class_def = Class()
+        class_def.fully_qualified_name = fully_qualified_name
         self._classes[fully_qualified_name] = class_def
         return class_def
 

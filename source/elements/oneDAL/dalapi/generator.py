@@ -1,3 +1,4 @@
+from typing import (List, Text)
 
 class RstBuilder(object):
     def __init__(self):
@@ -17,10 +18,17 @@ class RstBuilder(object):
         self(f'.. cpp:member:: {definition}', level)
         self()
 
-    def add_doc_description(self, description: str, level=0):
+    def add_doc(self, description: str, level=0):
         if len(description) > 0:
             self(self._format_description(description), level)
             self()
+
+    def add_code_block(self, listing: List[Text], level=0):
+        self(f'.. code-block:: cpp', level)
+        self()
+        for line in listing:
+            self(line, level + 1)
+        self()
 
     def __call__(self, string: str = '', level:int = 0):
         self._rst_list.append(' ' * level * 3 + string)

@@ -55,6 +55,8 @@ class train_result {
 public:
    train_result();
 
+   /// The trained $k$-NN model
+   /// @remark default = model{}
    const model& get_model() const;
 };
 
@@ -63,7 +65,12 @@ public:
    infer_input(const model& m = model{},
                const table& data = table{});
 
+   /// The trained $k$-NN model
+   /// @remark default = model{}
    const model& get_model() const;
+
+   /// The dataset for inference $X'$
+   /// @remark default = table{}
    const table& get_data() const;
 
    infer_input& set_model(const model&);
@@ -74,7 +81,17 @@ class infer_result {
 public:
    infer_result();
 
+   /// The predicted labels
+   /// @remark default = model{}
    const table& get_labels() const;
 };
 
 } // namespace onedal::classification::knn
+
+namespace onedal::classification::knn::example {
+
+knn::model run_training(const table& data, const table& labels) {
+   // onedal::train()
+}
+
+} // onedal::classification::knn::example

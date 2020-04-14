@@ -32,6 +32,11 @@ def _parse_class(compounddef, index):
     class_def.name = name
     class_def.kind = compounddef.get('kind')
     class_def.namespace = namespace
+    location = compounddef.find('location')
+    location_def = class_def.add_location()
+    location_def.filename = location.get('file')
+    location_def.bodystart = int(location.get('bodystart'))
+    location_def.bodyend = int(location.get('bodyend'))
     _parse_class_members(compounddef, class_def)
 
 _property_re = re.compile(r'(get|set)_(\w+)')
@@ -60,7 +65,7 @@ def _parse_property(memberdef, property_def, direction):
         property_def.doc = method_def.doc
         property_def.default = _extract_property_default(method_def.doc)
         method_def.doc = None
-    if property_def.typename:
+    if property_def.typename and property_def.name:
         property_def.definition = f'{property_def.typename} {property_def.name}'
         if property_def.default:
             property_def.definition += f' = {property_def.default}'
@@ -97,7 +102,7 @@ def _parse_inner_text(xml):
             text += tag.text
     return _preprocess_text(text)
 
-_latex_re = re.compile(r'\$([^\$])\$')
+_latex_re = re.compile(r'\$([^\$]+)\$')
 def _preprocess_text(text):
     return _latex_re.sub(r':math:`\1`', text.strip())
 
