@@ -1,13 +1,12 @@
-from dataclasses import dataclass, field
 from typing import (
     Any, Union, List, Dict
 )
 
-@dataclass
 class Doc(object):
-    description: str = ''
-    invariants: List[str] = field(default_factory=list)
-    remarks: List[str] = field(default_factory=list)
+    def __init__(self):
+        self.description = ''
+        self.invariants = []
+        self.remarks = []
 
     def add_remark(self, text):
         self.remarks.append(text)
@@ -15,25 +14,28 @@ class Doc(object):
     def add_invariant(self, text):
         self.invariants.append(text)
 
-@dataclass
+
 class Location(object):
-    filename: str = ''
-    bodystart: int = -1
-    bodyend: int = -1
+    def __init__(self):
+        self.filename = ''
+        self.bodystart = -1
+        self.bodyend = -1
 
-@dataclass
+
 class Parameter(object):
-    name: str = ''
-    typename: str = ''
-    default: str = ''
+    def __init__(self):
+        self.name = ''
+        self.typename = ''
+        self.default = ''
 
-@dataclass
+
 class Method(object):
-    name: str = ''
-    definition: str = ''
-    return_type: str = ''
-    parameters: List[Parameter] = field(default_factory=list)
-    doc: Doc = None
+    def __init__(self):
+        self.name = ''
+        self.definition = ''
+        self.return_type = ''
+        self.parameters = []
+        self.doc = None
 
     def add_parameter(self):
         parameter_def = Parameter()
@@ -45,15 +47,15 @@ class Method(object):
         return self.doc
 
 
-@dataclass
 class Property(object):
-    name: str = ''
-    typename: str = ''
-    definition: str = ''
-    default: str = ''
-    getter: Method = None
-    setter: Method = None
-    doc: Doc = None
+    def __init__(self):
+        self.name = ''
+        self.typename = ''
+        self.definition = ''
+        self.default = ''
+        self.getter = None
+        self.setter = None
+        self.doc = None
 
     def add_setter(self):
         self.setter = Method()
@@ -64,26 +66,25 @@ class Property(object):
         return self.getter
 
 
-@dataclass
 class Function(object):
-    name: str = ''
-    namespace: str = ''
-    definition: str = ''
-    return_type: str = ''
-    parameters: List[Parameter] = field(default_factory=list)
+    def __init__(self):
+        self.name = ''
+        self.namespace = ''
+        self.definition = ''
+        self.return_type = ''
+        self.parameters = []
 
-@dataclass
+
 class Class(object):
-    name: str = ''
-    kind: str = ''
-    namespace: str = ''
-    fully_qualified_name: str = ''
-    methods: List[Method] = field(default_factory=list)
-    properties: List[Property] = field(default_factory=list)
-    template_parameters: List[Parameter] = field(default_factory=list)
-    location: Location = None
-
-    def __post_init__(self):
+    def __init__(self):
+        self.name = ''
+        self.kind = ''
+        self.namespace = ''
+        self.fully_qualified_name = ''
+        self.methods = []
+        self.properties = []
+        self.template_parameters = []
+        self.location = None
         self._properties_map = {}
 
     def add_method(self):
@@ -103,7 +104,6 @@ class Class(object):
     def add_location(self):
         self.location = Location()
         return self.location
-
 
 
 class Index(object):
