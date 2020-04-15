@@ -1,25 +1,12 @@
 ==========
 Algorithms
 ==========
+**[algorithms]**
 
-Most parallel algorithms provided by oneAPI Threading Building Blocks are generic. They operate on all
-types that model the necessary concepts. Parallel algorithms may be nested. For
-example, the body of a ``parallel_for`` can invoke another ``parallel_for``.
+oneAPI Threading Building Blocks provides a set of generic parallel algorithms.
 
-.. caution::
-
-   When the body of an outer parallel algorithm invokes another parallel
-   algorithm, it may cause the outer body to be re-entered for a different
-   iteration of the outer algorithm.
-   
-   For example, if the outer body holds a global lock while calling an
-   inner parallel algorithm, the body will deadlock if the re-entrant invocation
-   attempts to acquire the same global lock. This ill-formed example is a special
-   case of a general rule that code should not hold a lock while calling code
-   written by another author.
-
-Functions
----------
+Parallel Functions
+------------------
 
 .. toctree::
    :titlesonly:
@@ -37,44 +24,40 @@ Functions
    algorithms/functions/parallel_pipeline_func.rst
    algorithms/functions/parallel_sort_func.rst
 
-Classes
--------
+Blocked Ranges
+--------------
 
-Blocked ranges
-~~~~~~~~~~~~~~
-
-Predefined models of range concept.
+Predefined models of the :doc:`Range requirements <../general/named_requirements/algorithms/range>`.
 
 .. toctree::
    :titlesonly:
 
-   algorithms/classes/blocked_ranges/blocked_range_cls.rst
-   algorithms/classes/blocked_ranges/blocked_range2d_cls.rst
-   algorithms/classes/blocked_ranges/blocked_range3d_cls.rst
-   algorithms/classes/blocked_ranges/blocked_rangeNd_cls.rst
+   algorithms/blocked_ranges/blocked_range_cls.rst
+   algorithms/blocked_ranges/blocked_range2d_cls.rst
+   algorithms/blocked_ranges/blocked_range3d_cls.rst
+   algorithms/blocked_ranges/blocked_rangeNd_cls.rst
 
 .. _Partitioners:
 
 Partitioners
-~~~~~~~~~~~~
+------------
 
-The default behavior of the loop templates ``parallel_for``, ``parallel_reduce``, and ``parallel_scan``
-tries to recursively split a range into enough parts to keep processors busy, not necessarily splitting
-as finely as possible. An optional partitioner parameter enables other behaviors to be specified.
+A partitioner specifies how a loop template should partition its work among threads.
 
 .. toctree::
    :titlesonly:
 
-   algorithms/classes/partitioners/auto_partitioner_cls.rst
-   algorithms/classes/partitioners/affinity_partitioner.rst
-   algorithms/classes/partitioners/static_partitioner.rst
-   algorithms/classes/partitioners/simple_partitioner_cls.rst
+   algorithms/partitioners/auto_partitioner.rst
+   algorithms/partitioners/affinity_partitioner.rst
+   algorithms/partitioners/static_partitioner.rst
+   algorithms/partitioners/simple_partitioner.rst
 
-Split tags
-~~~~~~~~~~
+Split Tags
+----------
 
 .. toctree::
    :titlesonly:
 
-   algorithms/classes/split_tags/proportional_split_cls.rst
-   algorithms/classes/split_tags/split_cls.rst
+   algorithms/split_tags/proportional_split_cls.rst
+   algorithms/split_tags/split_cls.rst
+

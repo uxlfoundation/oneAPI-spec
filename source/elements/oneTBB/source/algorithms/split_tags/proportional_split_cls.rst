@@ -75,10 +75,9 @@ The following table provides additional information on the members of this class
 ------------------------------------------------------------------------------------------
 = ========================================================================================
 
-
 See "Range Concept" for an example of proportional splitting constructor implementation.
 
 See also:
 
 * :doc:`split <split_cls>`
-* :doc:`Range Concept <../../../general/named_requirements/range>`
+* :doc:`Range Concept <../../../general/named_requirements/algorithms/range>`

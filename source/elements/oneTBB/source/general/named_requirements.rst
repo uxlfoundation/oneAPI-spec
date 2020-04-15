@@ -10,8 +10,8 @@ The *named_requirement* term is similar to “Requirements on types and expressi
 by the ISO C++ Standard (chapter “Library Introduction”) or `“Named Requirements” section <https://en.cppreference.com/w/cpp/named_req>`_
 on the cppreference.com site.
 
-For example, the named requirement of “*sortable*” could be defined as a set of requirements that enable
-an array to be sorted. A type ``T`` would be sortable if:
+For example, the named requirement of *sortable* could be defined as a set of requirements that enable
+an array to be sorted. A type ``T`` would be *sortable* if:
 
 * ``x < y`` returns a boolean value, and represents a total order on items of type ``T``.
 * ``swap(x,y)`` swaps items ``x`` and ``y``
@@ -50,6 +50,8 @@ A type *models* a named requirement if all requirements are met.
 
 .. toctree::
 
-   named_requirements/copy_constructible.rst
-   named_requirements/range.rst
-   named_requirements/splittable.rst
+   named_requirements/algorithms/range.rst
+   named_requirements/algorithms/splittable.rst
+   named_requirements/algorithms/par_for_body.rst
+   named_requirements/algorithms/par_reduce.rst
+

@@ -1,7 +1,7 @@
 ==========
 Splittable
 ==========
-**[general_information.named_requirements.splittable]**
+**[req.splittable]**
 
 A type is splittable if it has a *splitting constructor* that allows an instance to be split into
 two pieces. The splitting constructor takes as arguments a reference to the original object,
