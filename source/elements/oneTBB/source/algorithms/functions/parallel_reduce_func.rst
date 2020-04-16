@@ -3,7 +3,7 @@ parallel_reduce
 ===============
 **[algorithms.parallel_reduce]**
 
-Computes reduction over a range.
+Template function that computes reduction over a range.
 
 .. code:: cpp
 
@@ -90,30 +90,30 @@ The following code sums the values in an array.
 
 .. code:: cpp
 
-   #include "tbb/parallel_reduce.h"
-   #include "tbb/blocked_range.h"
+    #include "tbb/parallel_reduce.h"
+    #include "tbb/blocked_range.h"
 
-   using namespace tbb;
+    using namespace tbb;
 
-   struct Sum {
-       float value;
-       Sum() : value(0) {}
-       Sum( Sum& s, split ) {value = 0;}
-       void operator()( const blocked_range<float*>& r ) {
-           float temp = value;
-           for( float* a=r.begin(); a!=r.end(); ++a ) {
-               temp += *a;
-           }
-           value = temp;
-       }
-       void join( Sum& rhs ) {value += rhs.value;}
-   };
+    struct Sum {
+        float value;
+        Sum() : value(0) {}
+        Sum( Sum& s, split ) {value = 0;}
+        void operator()( const blocked_range<float*>& r ) {
+            float temp = value;
+            for( float* a=r.begin(); a!=r.end(); ++a ) {
+                temp += *a;
+            }
+            value = temp;
+        }
+        void join( Sum& rhs ) {value += rhs.value;}
+    };
 
-   float ParallelSum( float array[], size_t n ) {
-       Sum total;
-       parallel_reduce( blocked_range<float*>( array, array+n ), total );
-       return total.value;
-   }
+    float ParallelSum( float array[], size_t n ) {
+        Sum total;
+        parallel_reduce( blocked_range<float*>( array, array+n ), total );
+        return total.value;
+    }
 
 The example generalizes to reduction for any associative operation *op* as follows:
 
@@ -131,25 +131,25 @@ expressions and the functional form of ``parallel_reduce``.
 
 .. code:: cpp
 
-   #include "tbb/parallel_reduce.h"
-   #include "tbb/blocked_range.h"
+    #include "tbb/parallel_reduce.h"
+    #include "tbb/blocked_range.h"
 
-   using namespace tbb;
+    using namespace tbb;
 
-   float ParallelSum( float array[], size_t n ) {
-       return parallel_reduce(
-           blocked_range<float*>( array, array+n ),
-           0.f,
-           [](const blocked_range<float*>& r, float init)->float {
-               for( float* a=r.begin(); a!=r.end(); ++a )
-                   init += *a;
-               return init;
-           },
-           []( float x, float y )->float {
-               return x+y;
-           }
-       );
-   }
+    float ParallelSum( float array[], size_t n ) {
+        return parallel_reduce(
+            blocked_range<float*>( array, array+n ),
+            0.f,
+            [](const blocked_range<float*>& r, float init)->float {
+                for( float* a=r.begin(); a!=r.end(); ++a )
+                    init += *a;
+                return init;
+            },
+            []( float x, float y )->float {
+                return x+y;
+            }
+        );
+    }
 
 See also:
 

@@ -16,7 +16,6 @@ Parallel Functions
    algorithms/functions/parallel_deterministic_reduce_func.rst
    algorithms/functions/parallel_scan_func.rst
 
-   algorithms/functions/parallel_do_func.rst
    algorithms/functions/parallel_for_each_func.rst
 
    algorithms/functions/parallel_invoke_func.rst
@@ -60,4 +59,3 @@ Split Tags
 
    algorithms/split_tags/proportional_split_cls.rst
    algorithms/split_tags/split_cls.rst
-

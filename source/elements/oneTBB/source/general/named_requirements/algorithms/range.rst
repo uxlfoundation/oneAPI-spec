@@ -37,27 +37,27 @@ other constructor to create an instance of Range type in the program.
 
 .. cpp:function:: R::R( const R& )
 
-  Copy constructor.
+    Copy constructor.
 
 .. cpp:function:: R::~R()
 
-  Destructor.
+    Destructor.
 
 .. cpp:function:: bool R::empty() const
 
-  True if range is empty.
+    True if range is empty.
 
 .. cpp:function:: bool R::is_divisible() const
 
-  True if range can be partitioned into two subranges.
+    True if range can be partitioned into two subranges.
 
 .. cpp:function:: R::R( R& r, split )
 
-  Basic splitting constructor. Splits ``r`` into two subranges.
+    Basic splitting constructor. Splits ``r`` into two subranges.
 
 .. cpp:function:: R::R( R& r, proportional_split proportion )
 
-  **Optional**. Proportional splitting constructor. Splits ``r`` into two subranges in accordance with ``proportion``.
+    **Optional**. Proportional splitting constructor. Splits ``r`` into two subranges in accordance with ``proportion``.
 
 See also:
 

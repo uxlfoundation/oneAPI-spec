@@ -23,4 +23,4 @@ Template Class sections for more info.
 
 .. cpp:function:: X::X(X& x, split)
 
-  Split ``x`` into ``x`` and newly constructed object.
+    Split ``x`` into ``x`` and newly constructed object.

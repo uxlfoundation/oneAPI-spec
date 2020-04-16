@@ -3,7 +3,7 @@ parallel_deterministic_reduce
 =============================
 **[algorithms.parallel_deterministic_reduce]**
 
-Computes reduction over a range, with deterministic split/join behavior.
+Template function that computes reduction over a range, with deterministic split/join behavior.
 
 .. code:: cpp
 
@@ -47,8 +47,8 @@ because other partitioners react to random work stealing behavior.
 
 .. caution::
 
-   Since ``simple_partitioner`` does not automatically coarsen ranges, make sure to specify an appropriate grain size.
-   See :ref:`Partitioners section <Partitioners>` for more information.
+    Since ``simple_partitioner`` does not automatically coarsen ranges, make sure to specify an appropriate grain size.
+    See :ref:`Partitioners section <Partitioners>` for more information.
 
 ``parallel_deterministic_reduce`` always invokes the ``Body`` splitting constructor for each range split.
 

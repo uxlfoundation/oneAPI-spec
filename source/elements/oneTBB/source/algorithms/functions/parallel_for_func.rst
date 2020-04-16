@@ -47,7 +47,7 @@ Template function that performs parallel iteration over a range of values.
 * ``const static_partitioner&``
 * ``affinity_partitioner&``
 
-**Requirements**:
+Requirements:
 
 * The ``Range`` type shall meet the :doc:`Range requirements <../../general/named_requirements/algorithms/range>`.
 * The ``Body`` type shall meet the :doc:`parallel_for body requirements <../../general/named_requirements/algorithms/par_for_body>`.
@@ -56,7 +56,7 @@ A ``tbb::parallel_for(first,last,step,f)`` overload represents parallel executio
 
 .. code:: cpp
 
-   for (auto i = first; i < last; i += step) f(i);
+    for (auto i = first; i < last; i += step) f(i);
 
 The index type must be an integral type. The loop must not wrap around. The step value must be
 positive. If omitted, it is implicitly 1. There is no guarantee that the iterations

@@ -48,10 +48,15 @@ because C++ permits implicit addition of a const qualifier to a reference type.
 
 A type *models* a named requirement if all requirements are met.
 
+Algorithms
+----------
 .. toctree::
+   :titlesonly:
 
    named_requirements/algorithms/range.rst
    named_requirements/algorithms/splittable.rst
    named_requirements/algorithms/par_for_body.rst
    named_requirements/algorithms/par_reduce.rst
+   named_requirements/algorithms/par_for_each_body.rst
+   named_requirements/algorithms/container_based_sequence.rst
 

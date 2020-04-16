@@ -20,6 +20,7 @@ On CPU, an implementation shall support nested parallelism, so that one
 can build larger parallel components from smaller parallel components. 
 
 .. toctree::
+   :titlesonly:
 
    general/named_requirements.rst
    general/notation.rst
