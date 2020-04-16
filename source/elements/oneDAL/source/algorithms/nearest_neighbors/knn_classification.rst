@@ -89,7 +89,7 @@ following steps:
 
       P(y_i' = l \; | \; x_i') = \frac{1}{| N(x_i') |}
       \Big| \big\{ x_r \in N(x_i') : y_r = l \big\} \Big|,
-      \quad 1 \leq i \leq m, \; 0 \leq l \lt c.
+      \quad 1 \leq i \leq m, \; 0 \leq l < c.
 
 #. Use the class with the largest probability as prediction for the feature
    vector :math:`x_i'`:
@@ -97,7 +97,7 @@ following steps:
    .. math::
       :label: y_predict
 
-      y_i' = \mathrm{arg}\max_{0 \leq l \lt c} P(y_i' = l \; | \; x_i'),
+      y_i' = \mathrm{arg}\max_{0 \leq l < c} P(y_i' = l \; | \; x_i'),
       \quad 1 \leq i \leq m.
 
 
