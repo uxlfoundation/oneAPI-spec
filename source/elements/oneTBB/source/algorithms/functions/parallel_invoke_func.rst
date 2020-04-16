@@ -1,89 +1,54 @@
-=================================
-parallel_invoke Template Function
-=================================
+===============
+parallel_invoke
+===============
+**[algortihms.parallel_invoke]**
 
-
-Summary
--------
 Template function that evaluates several functions in parallel.
 
-Header
-------
-
 .. code:: cpp
 
-   #include "tbb/parallel_invoke.h"
+    // Defined in header <tbb/parallel_invoke.h>
 
+    namespace tbb {
 
-Syntax
-------
+        template<typename... Functions>
+        void parallel_invoke(Functions&&... fs);
 
-.. code:: cpp
+    } // namespace tbb
 
-   template<typename Func0, typename Func1>
-   void parallel_invoke(const Func0& f0, const Func1& f1);
-   
-   template<typename Func0, typename Func1, typename Func2>
-   void parallel_invoke(const Func0& f0, const Func1& f1, const Func2& f2);
-   template<typename Func0, typename Func1, ..., typename Func9>
-   void parallel_invoke(const Func0& f0, const Func1& f1, ..., const Func9& f9);
+Requirements:
 
+* All members of ``Functions`` parameter pack shall meet ``Function Objects``
+  requiremnts from [function.objects] ISO C++ Standard section or be a pointer to a function.
+* Last member of ``Functions`` parameter pack may be a ``task_group_context&`` type.
 
-Description
------------
+Evaluates each member passed to ``parrallel_invoke`` possibly in parallel. Return values are ignored.
 
-The expression parallel_invoke(f\ :sub:`0`,f\ :sub:`1`,...,f\ :sub:`k`) evaluates
-f\ :sub:`0`(), f\ :sub:`1`(), ..., f\ :sub:`k`() possibly in parallel. There can be from 2
-to 10 arguments. Each argument must have a type for which ``operator()`` is
-defined. Typically the arguments are either function objects or pointers to functions. Return
-values are ignored.
+The algoritm can accept a :doc:`task_group_context <../../task_scheduler/task_group_context>` object
+so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
 
 Example
 -------
 
-The following example evaluates ``f(), g(),`` and
-``h()`` in parallel. Notice how ``g`` and ``h`` are
-function objects that can hold local state.
+The following example evaluates ``f()``, ``g()``, ``h()``, and ``bar(1)`` in parallel.
 
 .. code:: cpp
 
-   #include "tbb/parallel_invoke.h"
-   
-   using namespace tbb;
-   
-   void f();
-   extern void bar(int);
-   
-   class MyFunctor {
-       int arg;
-   public:
-       MyFunctor(int a) : arg(a) {}
-       void operator()() const {bar(arg);}
-   };
-   
-   void RunFunctionsInParallel() {
-       MyFunctor g(2);
-       MyFunctor h(3);
-       tbb::parallel_invoke(f, g, h );
-   }
-     
+    #include "tbb/parallel_invoke.h"
 
+    extern void f();
+    extern void bar(int);
 
-Example with Lambda Expressions
--------------------------------
+    class MyFunctor {
+        int arg;
+    public:
+        MyFunctor(int a) : arg(a) {}
+        void operator()() const {bar(arg);}
+    };
 
-Here is the previous example rewritten with C++11 lambda expressions, which generate function objects.
+    void RunFunctionsInParallel() {
+        MyFunctor g(2);
+        MyFunctor h(3);
 
-.. code:: cpp
-
-   #include "tbb/parallel_invoke.h"
-   
-   using namespace tbb;
-   
-   void f();
-   extern void bar(int);
-   
-   void RunFunctionsInParallel() {
-       tbb::parallel_invoke(f, []{bar(2);}, []{bar(3);} );
-   }
-     
+        tbb::parallel_invoke(f, g, h, []{bar(1);});
+    }

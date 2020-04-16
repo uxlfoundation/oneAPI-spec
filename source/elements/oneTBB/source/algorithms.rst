@@ -19,7 +19,6 @@ Parallel Functions
    algorithms/functions/parallel_for_each_func.rst
 
    algorithms/functions/parallel_invoke_func.rst
-   algorithms/functions/variadic_parallel_invoke_func.rst
    algorithms/functions/parallel_pipeline_func.rst
    algorithms/functions/parallel_sort_func.rst
 

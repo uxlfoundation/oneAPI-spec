@@ -75,7 +75,7 @@ given body object being consecutive. ``parallel_reduce`` makes the choice of bod
 When executed serially ``parallel_reduce`` run sequentially from left to right in the same sense as for ``parallel_for``.
 Sequential execution never invokes the splitting constructor or method join.
 
-All overloads can be passed a :doc:`task_group_context <../../task_scheduler/task_group_context>` object
+All overloads can accept a :doc:`task_group_context <../../task_scheduler/task_group_context>` object
 so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
 
 **Complexity**

@@ -36,9 +36,8 @@ sequence [``first,last``). Items may be processed in parallel.
 
 The container form ``parallel_for_each(c, body)`` is equivalent to ``parallel_for_each(std::begin(c), std::end(c), body)``.
 
-The algorithm can be passed a :doc:`task_group_context <../../task_scheduler/task_group_context>`
-object so that its tasks are executed in this group. By default the algorithm
-is executed in a bound group of its own.
+All overloads can accept a :doc:`task_group_context <../../task_scheduler/task_group_context>` object
+so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
 
 feeder Class
 ------------
