@@ -145,6 +145,7 @@ Date       Milestone
 
 - oneDNN
 
+  - API's 95% complete
   - Rework API presentation into multiple sections
   - Add introduction, execution, primitive lifecycle, and programming model
     sections
@@ -171,6 +172,7 @@ Date       Milestone
     
 - oneMKL
 
+  - USM support
   - Skeleton of spec, breadown by domain
   - Sections that apply to all domains
   - subset of domains with high-level description and APIs, as determined by open source schedule
@@ -218,6 +220,8 @@ Date       Milestone
   - Extend page with collective operations
 
 - Level Zero
+
+  - Command queue groups, module linking, extensions, and improved profiling support
   
 - oneDAL
 
@@ -236,6 +240,7 @@ Date       Milestone
 - oneMKL
 
   - All domains complete
+  - Finalized BLAS, LAPACK domains
   - Draft suitable for review so we can distribute to reviewers before
     ISC (6/28/2020).
 
@@ -277,12 +282,15 @@ Elements
 
   - Finish extending individual primitives' pages with detailed information
     about underlying math and with usage examples
+  - explanation of principles complete
 
 - oneCCL
 
   - Finalize on sections content and details
 
 - Level Zero
+
+  - 1.0 release, support for OpenCL interoperability
   
 - oneDAL
 
@@ -296,6 +304,8 @@ Elements
 - oneVPL
 
 - oneMKL
+
+  - finalize FFT, sparse BLAS, RNG, and VM domains
   
 1.0.0
 -----
