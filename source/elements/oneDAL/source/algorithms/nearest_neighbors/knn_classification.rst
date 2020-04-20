@@ -44,7 +44,7 @@ Training
 Given the training set :math:`X = \{ x_1, \ldots, x_n \}` of
 :math:`p`-dimensional feature vectors, the vector of class labels :math:`y` and
 a positive integer :math:`k`, where :math:`y_i \in \{ 0, \ldots, c-1 \}`,
-:math:`1 \leq i \leq n`, :math:`c` is the number of classes and :math:`k` is
+:math:`1 \leq i \leq n`, :math:`c` is the number of classes and :math:`k` is the
 number of nearest neighbors specified by the user. The problem is to build a
 model that allows efficient distance computation between the feature vectors in
 :math:`X` and :math:`X'` at the inference stage.
@@ -62,8 +62,8 @@ feature vectors from the initial training set :math:`X`.
 
 Training method: *k-d tree*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The training operation builds a :math:`k`-:math:`d` tree (for more details, see
-:ref:`kd_tree`) that partitions the training set :math:`X`.
+The training operation builds a :math:`k`-:math:`d` tree that partitions the
+training set :math:`X` (for more details, see :ref:`kd_tree`).
 
 
 .. _i_math:
@@ -71,9 +71,9 @@ The training operation builds a :math:`k`-:math:`d` tree (for more details, see
 Inference
 ---------
 Given the set :math:`X' = \{ x_1', \ldots, x_m' \}` of :math:`p`-dimensional
-feature vectors, the user defined number of nearest neighbors :math:`k` and the
-model produced by the training operation. The inference operation predicts the
-label for each :math:`x_i'`, :math:`1 \leq i \leq n`, by performing the
+feature vectors, the user-defined number of nearest neighbors :math:`k`, and the
+model produced by the training operation, the problem is to predicts the label
+:math:`y_i'` for each :math:`x_i'`, :math:`1 \leq i \leq m`, by performing the
 following steps:
 
 #. Identify the set :math:`N(x_i') \subseteq X` of the :math:`k` feature vectors
@@ -91,8 +91,8 @@ following steps:
       \Big| \big\{ x_r \in N(x_i') : y_r = l \big\} \Big|,
       \quad 1 \leq i \leq m, \; 0 \leq l < c.
 
-#. Use the class with the largest probability as prediction for the feature
-   vector :math:`x_i'`:
+#. Predict the class that has the highest probability for the feature vector
+   :math:`x_i'`:
 
    .. math::
       :label: y_predict
@@ -133,7 +133,7 @@ Computational methods
    namespace method {
       struct bruteforce {};
       struct kd_tree {};
-      using by_default = brutforce;
+      using by_default = bruteforce;
    } // namespace method
 
 

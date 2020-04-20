@@ -1,8 +1,8 @@
 .. _kd_tree:
 
-==================
-Appendix: k-d Tree
-==================
+========
+k-d Tree
+========
 
 :math:`k`-:math:`d` tree is a space-partitioning binary tree [Bentley80]_, where
 
