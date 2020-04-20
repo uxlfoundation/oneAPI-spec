@@ -41,4 +41,3 @@ The ``auto_partitioner`` class satisfies the *CopyConstructibe* requirement from
         };
 
     }
-

@@ -49,8 +49,8 @@ Template function that performs parallel iteration over a range of values.
 
 Requirements:
 
-* The ``Range`` type shall meet the :doc:`Range requirements <../../general/named_requirements/algorithms/range>`.
-* The ``Body`` type shall meet the :doc:`parallel_for body requirements <../../general/named_requirements/algorithms/par_for_body>`.
+* The ``Range`` type shall meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
+* The ``Body`` type shall meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
 
 A ``tbb::parallel_for(first,last,step,f)`` overload represents parallel execution of the loop:
 

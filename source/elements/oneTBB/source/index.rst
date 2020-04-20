@@ -7,7 +7,10 @@ oneAPI Threading Building Blocks Specification
    :caption: General Information:
 
    intro.rst
-   general.rst
+   notation.rst
+   identifiers.rst
+   named_requirements.rst
+   thread_safety.rst
 
 .. toctree::
    :maxdepth: 2

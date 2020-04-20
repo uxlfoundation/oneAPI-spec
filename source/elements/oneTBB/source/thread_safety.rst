@@ -1,7 +1,7 @@
 =============
 Thread Safety
 =============
-**[general_information.thread_safety]**
+**[thread_safety]**
 
 Unless otherwise stated, the thread safety rules for the library are as follows:
 

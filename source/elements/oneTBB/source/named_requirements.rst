@@ -1,7 +1,7 @@
 ==================
 Named Requirements
 ==================
-**[general_information.named_requirements]**
+**[named_requirements]**
 
 This section describes named requirements used in the oneAPI Threading Building Blocks Specification.
 
@@ -46,8 +46,6 @@ because C++ permits implicit conversion from ``int`` to ``bool``, and implicit c
 to (``const U&``). Similarly, the real signature ``bool operator<( U& x, U& y )`` is acceptable
 because C++ permits implicit addition of a const qualifier to a reference type.
 
-A type *models* a named requirement if all requirements are met.
-
 Algorithms
 ----------
 .. toctree::
@@ -56,7 +54,9 @@ Algorithms
    named_requirements/algorithms/range.rst
    named_requirements/algorithms/splittable.rst
    named_requirements/algorithms/par_for_body.rst
-   named_requirements/algorithms/par_reduce.rst
+   named_requirements/algorithms/par_reduce_body.rst
+   named_requirements/algorithms/par_reduce_func.rst
+   named_requirements/algorithms/par_reduce_reduction.rst
    named_requirements/algorithms/par_for_each_body.rst
    named_requirements/algorithms/container_based_sequence.rst
 

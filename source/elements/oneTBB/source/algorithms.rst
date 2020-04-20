@@ -25,7 +25,7 @@ Parallel Functions
 Blocked Ranges
 --------------
 
-Predefined models of the :doc:`Range requirements <../general/named_requirements/algorithms/range>`.
+Types that meet the :doc:`Range requirements <../named_requirements/algorithms/range>`.
 
 .. toctree::
    :titlesonly:

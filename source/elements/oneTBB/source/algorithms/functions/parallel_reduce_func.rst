@@ -42,9 +42,10 @@ Template function that computes reduction over a range.
 
 Requirements:
 
-* The ``Range`` type shall meet the :doc:`Range requirements <../../general/named_requirements/algorithms/range>`.
-* The ``Body`` type shall meet the :ref:`parallel_reduce Body requirements <par_reduce_body>`.
-* ``Func`` and ``Reduction`` types shall meet :ref:`certain requirements <par_reduce_func_reduction>`.
+* The ``Range`` type shall meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
+* The ``Body`` type shall meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
+* The ``Func`` type shall meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
+* The ``Reduction`` types shall meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_func>`.
 
 The ``parallel_reduce`` template has two forms.
 The functional form is designed to be easy to use in conjunction with lambda expressions.

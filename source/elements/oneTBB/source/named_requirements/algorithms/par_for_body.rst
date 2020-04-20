@@ -1,11 +1,13 @@
-=================
-parallel_for Body
-=================
+===============
+ParallelForBody
+===============
 **[req.parallel_for_body]**
+
+A type `Body` satisfies the `ParallelForBody` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
-**Requirements for parallel_for Body: Pseudo-Signature, Semantics**
+**ParallelForBody Requirements: Pseudo-Signature, Semantics**
 
 .. cpp:function:: Body::Body( const Body& )
 
@@ -19,3 +21,6 @@ parallel_for Body
 
     Apply body to range. ``Range`` type shall meet the :doc:`Range requirements <range>`.
 
+See also:
+
+* :doc:`parallel_for algorithm <../../algorithms/functions/parallel_for_func>`

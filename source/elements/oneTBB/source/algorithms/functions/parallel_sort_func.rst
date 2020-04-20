@@ -28,7 +28,7 @@ Requirements:
 * The ``RandomAccessIterator`` type shall meet the `Random Access Iterators` requirements from
   [random.access.iterators]  and `Swappable` requirements from [swappable.requirements] ISO C++ Standard section.
 * The ``Compare`` type shall meet the `Compare` type requirements from [alg.sorting] ISO C++ Standard section.
-* The ``Container`` type shall meet the :doc:`Container based sequence requirements <../../general/named_requirements/algorithms/container_based_sequence>`
+* The ``Container`` type shall meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`
 
 Sorts a sequence or a container. The sort is neither stable nor deterministic: relative
 ordering of elements with equal keys is not preserved and not guaranteed to repeat if the same

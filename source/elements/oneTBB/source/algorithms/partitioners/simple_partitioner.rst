@@ -33,5 +33,5 @@ The ``simple_partitioner`` class satisfies the *CopyConstructibe* requirement fr
 
 See also:
 
-* :doc:`Range <../../general/named_requirements/algorithms/range>`
+* :doc:`Range named requirement <../../named_requirements/algorithms/range>`
 

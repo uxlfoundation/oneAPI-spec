@@ -1,7 +1,7 @@
 ======================
 Notational Conventions
 ======================
-**[general_information.notational_conventions]**
+**[notational_conventions]**
 
 The following conventions may be used in this
 document.

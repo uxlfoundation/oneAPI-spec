@@ -25,9 +25,9 @@ Template function that processes work items in parallel.
 
 Requirements:
 
-* The ``Body`` shall meet the :doc:`parallel_for_each body requirements <../../general/named_requirements/algorithms/par_for_each_body>`.
-* The ``InputIterator`` shall meet the `Input Iterators` requirements from [input.iterators] ISO C++ Standard section.
-* The ``Container`` shall meet the :doc:`Container based sequence requirements <../../general/named_requirements/algorithms/container_based_sequence>`
+* The ``Body`` type shall meet the :doc:`ParallelForEachBody requirements <../../named_requirements/algorithms/par_for_each_body>`.
+* The ``InputIterator`` type shall meet the `Input Iterator` requirements from [input.iterators] ISO C++ Standard section.
+* The ``Container`` type shall meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`
 
 The ``parallel_for_each`` template has two forms.
 
