@@ -19,7 +19,7 @@ Template function that evaluates several functions in parallel.
 Requirements:
 
 * All members of ``Functions`` parameter pack shall meet ``Function Objects``
-  requiremnts from [function.objects] ISO C++ Standard section or be a pointer to a function.
+  requirements from [function.objects] ISO C++ Standard section or be a pointer to a function.
 * Last member of ``Functions`` parameter pack may be a ``task_group_context&`` type.
 
 Evaluates each member passed to ``parrallel_invoke`` possibly in parallel. Return values are ignored.
