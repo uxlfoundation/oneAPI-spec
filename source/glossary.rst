@@ -1,10 +1,11 @@
-.. _terminology:
-
-============
-Terminology
-============
+.. _glossary:
+   
+========
+Glossary
+========
 
 .. glossary::
+   :sorted:
 
    API
      Application Programming Interface

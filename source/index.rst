@@ -18,10 +18,12 @@ oneAPI Specification
    elements/oneDNN/source/index
    elements/oneCCL/source/index
    elements/l0/source/index
-   elements/oneDAL/source/index
+   elements/oneDAL/source/nested-index
    elements/oneTBB/source/nested-index
    elements/oneVPL/source/index
    elements/oneMKL/source/index
+   glossary
+   bibliography
    contributors
    versions
    notices

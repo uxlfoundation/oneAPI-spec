@@ -21,3 +21,6 @@ sys.path.insert(0, os.path.abspath('.'))
 project = 'oneDAL'
 
 from element_conf import *
+
+exclude_patterns = ['nested-*.rst',
+]

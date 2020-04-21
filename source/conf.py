@@ -70,6 +70,9 @@ exclude_patterns = [#'404.rst',
                     'elements/oneTBB/source/low_level_task_api.rst',
                     'elements/oneTBB/source/low_level_tasking/**',
                     '**/*.inc.rst',
+                    'elements/oneDAL/source/index.rst',
+                    'elements/oneDAL/source/glossary.rst',
+                    'elements/oneDAL/source/bibliography.rst'
 ]
 
 # The name of the Pygments (syntax highlighting) style to use.
@@ -238,3 +241,5 @@ breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
 
+# Used if ifconfig directive to configure document for standalone or unified spec
+standalone = False

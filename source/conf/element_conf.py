@@ -161,3 +161,5 @@ breathe_projects = {
 }
 breathe_default_project = 'none'
 
+# Used if ifconfig directive to configure document for standalone or unified spec
+standalone = True
