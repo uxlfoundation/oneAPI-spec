@@ -72,40 +72,39 @@ Inference
 ---------
 Given the set :math:`X' = \{ x_1', \ldots, x_m' \}` of :math:`p`-dimensional
 feature vectors, the user-defined number of nearest neighbors :math:`k`, and the
-model produced by the training operation, the problem is to predicts the label
-:math:`y_i'` for each :math:`x_i'`, :math:`1 \leq i \leq m`, by performing the
+model produced by the training operation, the problem is to predict the label
+:math:`y_j'` for each :math:`x_j'`, :math:`1 \leq j \leq m`, by performing the
 following steps:
 
-#. Identify the set :math:`N(x_i') \subseteq X` of the :math:`k` feature vectors
-   in the training set that are nearest to :math:`x_i'` with respect to the
+#. Identify the set :math:`N(x_j') \subseteq X` of the :math:`k` feature vectors
+   in the training set that are nearest to :math:`x_j'` with respect to the
    Euclidean distance.
 
 #. Estimate the conditional probability for the :math:`l`-th class as the
-   fraction of vectors in :math:`N(x_i')` whose labels :math:`y_i` are equal to
+   fraction of vectors in :math:`N(x_j')` whose labels :math:`y_j` are equal to
    :math:`l`:
 
    .. math::
       :label: p_predict
 
-      P(y_i' = l \; | \; x_i') = \frac{1}{| N(x_i') |}
-      \Big| \big\{ x_r \in N(x_i') : y_r = l \big\} \Big|,
-      \quad 1 \leq i \leq m, \; 0 \leq l < c.
+      P(y_j' = l \; | \; x_j') = \frac{1}{| N(x_j') |}
+      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
+      \quad 1 \leq j \leq m, \; 0 \leq l < c.
 
 #. Predict the class that has the highest probability for the feature vector
-   :math:`x_i'`:
+   :math:`x_j'`:
 
    .. math::
       :label: y_predict
 
-      y_i' = \mathrm{arg}\max_{0 \leq l < c} P(y_i' = l \; | \; x_i'),
-      \quad 1 \leq i \leq m.
+      y_j' = \mathrm{arg}\max_{0 \leq l < c} P(y_j' = l \; | \; x_j'),
+      \quad 1 \leq j \leq m.
 
 
 .. _i_math_brute_force:
 
 Inference method: *brute-force*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 The inference operation determines the set :math:`N(x_j')` of the nearest
 feature vectors by iterating over all the pairs :math:`(x_j', x_i)` in the
 implementation defined order, :math:`1 \leq i \leq n`, :math:`1 \leq j \leq m`.
@@ -118,6 +117,16 @@ The final prediction is computed according to the equations :eq:`p_predict` and
 Inference method: *k-d tree*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The inference operation traverses the :math:`k`-:math:`d` tree to find feature
+vectors associated with a leaf node that are closest to :math:`x_j'`, :math:`1
+\leq j \leq m`. The set :math:`\tilde{n}(x_j')` of the currently-known nearest
+:math:`k`-th neighbors is progressively updated during tree traversal. The
+search algorithm limits exploration of the nodes for which the distance between
+the :math:`x_j'` and respective part of the feature space is not less than the
+distance between :math:`x_j'` and the most distant feature vector from
+:math:`\tilde{n}(x_j')`. Once tree traversal is finished, :math:`\tilde{n}(x_j')
+\equiv N(x_j')`. The final prediction is computed according to the equations
+:eq:`p_predict` and :eq:`y_predict`.
 
 
 ---------------------
