@@ -1,7 +1,8 @@
 #include <cstdint>
 #include "onedal/table.hpp"
+#include "onedal/train.hpp"
 
-namespace onedal::classification::knn {
+namespace onedal::knn_classification {
 
 namespace method {
    struct bruteforce {};
@@ -60,6 +61,15 @@ public:
    const model& get_model() const;
 };
 
+/// Runs the training operation for kNN classifier. For more details see
+/// `onedal::train`.
+/// @pre  input.data.is_empty == false
+/// @post result.model.is_empty == false
+template <typename Float, typename Method>
+train_result train(const desc<Float, Method>& desc,
+                   const train_input& input);
+
+
 class infer_input {
 public:
    infer_input(const model& m = model{},
@@ -86,12 +96,11 @@ public:
    const table& get_labels() const;
 };
 
-} // namespace onedal::classification::knn
+} // namespace onedal::knn_classification
 
-namespace onedal::classification::knn::example {
+namespace onedal::knn_classification::example {
 
-knn::model run_training(const table& data, const table& labels) {
-   // onedal::train()
+knn_classification::model run_training(const table& data, const table& labels) {
 }
 
-} // onedal::classification::knn::example
+} // onedal::knn_classification::example

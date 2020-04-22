@@ -173,8 +173,8 @@ Model
 
 .. _t_api:
 
-Training ``train(...)``
------------------------
+Training :expr:`train(...)`
+--------------------------------
 .. _t_api_input:
 
 Input
@@ -187,6 +187,29 @@ Input
 Result
 ~~~~~~
 .. onedal_class:: classification::knn::train_result
+
+
+Operation semantics
+~~~~~~~~~~~~~~~~~~~
+::
+
+   auto result = onedal::train(desc, input);
+
+
+.. namespace:: onedal::classification::knn::train_semantics
+
+.. var:: desc<Float, Method>   desc
+
+   Description of desc parameter
+
+.. var:: train_input   input
+
+   Description of input parameter
+
+.. var:: train_result   result
+
+   Description of input parameter
+
 
 
 .. _i_api:

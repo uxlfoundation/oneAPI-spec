@@ -2,60 +2,101 @@ from typing import (
     Any, Union, List, Dict
 )
 
-class Doc(object):
+class Doxy(object):
+    pass
+
+class Run(Doxy):
+    def __init__(self, content, kind):
+        self.content = content
+        self.kind = kind
+
+
+class Description(Doxy):
     def __init__(self):
-        self.description = ''
+        self.runs = []
+
+    def add_text(self, text):
+        self.runs.append(Run(text, 'text'))
+        return self.runs[-1]
+
+    def add_math(self, math):
+        self.runs.append(Run(math, 'math'))
+        return self.runs[-1]
+
+    def add_code(self, code):
+        self.runs.append(Run(code, 'code'))
+        return self.runs[-1]
+
+
+class Doc(Doxy):
+    def __init__(self):
+        self.description = None
         self.invariants = []
+        self.postconditions = []
+        self.preconditions = []
         self.remarks = []
+
+    def add_description(self):
+        self.description = Description()
+        return self.description
 
     def add_remark(self, text):
         self.remarks.append(text)
+        return self.remarks[-1]
 
     def add_invariant(self, text):
         self.invariants.append(text)
+        return self.invariants[-1]
+
+    def add_precondition(self, text):
+        self.preconditions.append(text)
+        return self.preconditions[-1]
+
+    def add_postcondition(self, text):
+        self.postconditions.append(text)
+        return self.postconditions[-1]
 
 
-class Location(object):
+class Location(Doxy):
     def __init__(self):
-        self.filename = ''
-        self.bodystart = -1
         self.bodyend = -1
+        self.bodystart = -1
+        self.filename = None
 
 
-class Parameter(object):
+class Parameter(Doxy):
     def __init__(self):
-        self.name = ''
-        self.typename = ''
-        self.default = ''
+        self.default = None
+        self.name = None
+        self.typename = None
 
 
-class Method(object):
+class Method(Doxy):
     def __init__(self):
-        self.name = ''
-        self.definition = ''
-        self.return_type = ''
-        self.parameters = []
+        self.definition = None
         self.doc = None
+        self.name = None
+        self.parameters = []
+        self.return_type = None
 
     def add_parameter(self):
-        parameter_def = Parameter()
-        self.parameters.append(parameter_def)
-        return parameter_def
+        self.parameters.append(Parameter())
+        return self.parameters[-1]
 
     def add_doc(self):
         self.doc = Doc()
         return self.doc
 
 
-class Property(object):
+class Property(Doxy):
     def __init__(self):
-        self.name = ''
-        self.typename = ''
-        self.definition = ''
-        self.default = ''
-        self.getter = None
-        self.setter = None
+        self.default = None
+        self.definition = None
         self.doc = None
+        self.getter = None
+        self.name = None
+        self.setter = None
+        self.typename = None
 
     def add_setter(self):
         self.setter = Method()
@@ -66,25 +107,35 @@ class Property(object):
         return self.getter
 
 
-class Function(object):
+class Function(Doxy):
     def __init__(self):
-        self.name = ''
-        self.namespace = ''
-        self.definition = ''
-        self.return_type = ''
+        self.definition = None
+        self.doc = None
+        self.fully_qualified_name = None
+        self.name = None
+        self.namespace = None
         self.parameters = []
+        self.return_type = None
+
+    def add_parameter(self):
+        self.parameters.append(Parameter)
+        return self.parameters[-1]
+
+    def add_doc(self):
+        self.doc = Doc()
+        return self.doc
 
 
-class Class(object):
+class Class(Doxy):
     def __init__(self):
-        self.name = ''
-        self.kind = ''
-        self.namespace = ''
-        self.fully_qualified_name = ''
+        self.fully_qualified_name = None
+        self.kind = None
+        self.location = None
         self.methods = []
+        self.name = None
+        self.namespace = None
         self.properties = []
         self.template_parameters = []
-        self.location = None
         self._properties_map = {}
 
     def add_method(self):
@@ -120,5 +171,42 @@ class Index(object):
         self._classes[fully_qualified_name] = class_def
         return class_def
 
-    def __repr__(self):
-        return f'{{ {self._classes} }}'
+    def add_function(self, fully_qualified_name):
+        func_def = Function()
+        func_def.fully_qualified_name = fully_qualified_name
+        self._functions[fully_qualified_name] = func_def
+        return func_def
+
+    def to_dict(self):
+        return {
+            'classes': self._to_dict(self._classes),
+            'functions': self._to_dict(self._functions),
+        }
+
+    def to_json(self):
+        import json
+        return json.dumps(self.to_dict(), indent=2, sort_keys=True)
+
+    def to_yaml(self):
+        import yaml
+        return yaml.dump(self.to_dict(), sort_keys=True)
+
+    def _to_dict(self, obj):
+        if isinstance(obj, list):
+            return [self._to_dict(x) for x in obj]
+        elif isinstance(obj, dict):
+            return {k: self._to_dict(x) for k, x in obj.items()}
+        elif isinstance(obj, Doxy):
+            obj_dict = {}
+            for attr in self._get_public_fields(obj):
+                attr_value = getattr(obj, attr)
+                obj_dict[attr] = self._to_dict(attr_value)
+            return obj_dict
+        return obj
+
+    def _get_public_fields(self, obj):
+        for attr in dir(obj):
+            is_public = not attr.startswith('_')
+            is_callable = callable(getattr(obj, attr))
+            if is_public and not is_callable:
+                yield attr
