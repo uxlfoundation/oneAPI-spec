@@ -1,6 +1,7 @@
 import re
 from os.path import join
 from lxml import etree
+from collections import OrderedDict
 from .doxymodel import Index
 from .utils import FileModificationTimer
 
@@ -71,7 +72,8 @@ def _parse_class_members(compounddef, class_def):
         if property_match:
             property_name = property_match.group(2)
             property_direction = property_match.group(1)
-            property_def = class_def.add_property(property_name)
+            property_def = (class_def.get_property(property_name) or
+                            class_def.add_property(property_name))
             _parse_property(memberdef, property_def, property_direction)
         else:
             method_def = class_def.add_method()
@@ -106,8 +108,18 @@ def _parse_function(memberdef, function_def):
     _parse_function_doc(memberdef, function_def)
     _parse_function_parameters(memberdef, function_def)
 
-def _parse_function_parameters(memberdef, method_def):
-    pass
+def _parse_function_parameters(memberdef, function_def):
+    for param in memberdef.iterchildren('param'):
+        declname = param.findtext('declname').strip()
+        function_def.add_parameter(declname)
+    param_doc_xpath = './/detaileddescription/para/parameterlist[@kind="param"]/parameteritem'
+    for parameteritem in memberdef.iterfind(param_doc_xpath):
+        parametername = parameteritem.findtext('.//parametername').strip()
+        parameterdescription = parameteritem.find('parameterdescription')
+        param_def = (function_def.get_parameter(parametername) or
+                     function_def.add_parameter(parametername))
+        desc_def = param_def.add_description()
+        _parse_doc_description(parameterdescription, desc_def)
 
 def _parse_function_doc(memberdef, method_def):
     desc = memberdef.find('detaileddescription')
@@ -143,12 +155,12 @@ def _parse_doc_attributes(xml, doc_def):
         'pre': doc_def.add_precondition,
         'post': doc_def.add_postcondition,
     }
-    for para in xml.iterchildren():
-        for node in para.iterchildren():
-            if node.tag != 'simplesect':
-                continue
-            kind = node.get('kind')
-            text = _parse_inner_text(node)
+    for node in xml.iterfind('.//simplesect'):
+        kind = node.get('kind')
+        if kind not in kind_map:
+            continue
+        for inner_para in node.iterchildren('para'):
+            text = _parse_inner_text(inner_para)
             kind_map[kind](text)
 
 def _parse_inner_text(xml):

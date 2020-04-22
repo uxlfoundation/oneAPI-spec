@@ -66,26 +66,45 @@ class Location(Doxy):
 
 class Parameter(Doxy):
     def __init__(self):
-        self.default = None
         self.name = None
-        self.typename = None
+        self.description = None
 
+    def add_description(self):
+        self.description = Description()
+        return self.description
 
-class Method(Doxy):
+class BaseFunction(Doxy):
     def __init__(self):
         self.definition = None
         self.doc = None
         self.name = None
         self.parameters = []
         self.return_type = None
+        self._parameters_map = {}
 
-    def add_parameter(self):
-        self.parameters.append(Parameter())
-        return self.parameters[-1]
+    def add_parameter(self, name):
+        param_def = Parameter()
+        param_def.name = name
+        self.parameters.append(param_def)
+        self._parameters_map[name] = param_def
+        return param_def
 
     def add_doc(self):
         self.doc = Doc()
         return self.doc
+
+    def get_parameter(self, name):
+        return self._parameters_map.get(name)
+
+
+class Method(BaseFunction):
+    pass
+
+
+class Function(BaseFunction):
+    def __init__(self):
+        super().__init__()
+        self.namespace = None
 
 
 class Property(Doxy):
@@ -107,25 +126,6 @@ class Property(Doxy):
         return self.getter
 
 
-class Function(Doxy):
-    def __init__(self):
-        self.definition = None
-        self.doc = None
-        self.fully_qualified_name = None
-        self.name = None
-        self.namespace = None
-        self.parameters = []
-        self.return_type = None
-
-    def add_parameter(self):
-        self.parameters.append(Parameter)
-        return self.parameters[-1]
-
-    def add_doc(self):
-        self.doc = Doc()
-        return self.doc
-
-
 class Class(Doxy):
     def __init__(self):
         self.fully_qualified_name = None
@@ -144,8 +144,6 @@ class Class(Doxy):
         return method_def
 
     def add_property(self, name):
-        if name in self._properties_map:
-            return self._properties_map[name]
         property_def = Property()
         property_def.name = name
         self.properties.append(property_def)
@@ -155,6 +153,9 @@ class Class(Doxy):
     def add_location(self):
         self.location = Location()
         return self.location
+
+    def get_property(self, name):
+        return self._properties_map.get(name)
 
 
 class Index(object):

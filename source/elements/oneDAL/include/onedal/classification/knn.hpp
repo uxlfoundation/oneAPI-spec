@@ -63,7 +63,13 @@ public:
 
 /// Runs the training operation for kNN classifier. For more details see
 /// `onedal::train`.
-/// @pre  input.data.is_empty == false
+///
+/// @param[in] desc Descriptor for the algorithm
+/// @param[in] input Input values for the algorithm
+/// @return result Result of the training
+///
+/// @pre input.data.is_empty == false
+/// @post result.model.is_empty == false
 /// @post result.model.is_empty == false
 template <typename Float, typename Method>
 train_result train(const desc<Float, Method>& desc,
