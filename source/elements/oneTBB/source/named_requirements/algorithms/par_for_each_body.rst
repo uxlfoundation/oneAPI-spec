@@ -5,7 +5,7 @@ ParallelForEachBody
 
 A type `Body` satisfies the `ParallelForBody` if it meet the `Function Objects`
 requirements from [function.objects] ISO C++ Standard section.
-Also it should meet the following requirements:
+Also it should meet one of the following requirements:
 
 ----------------------------------------------------------------
 

@@ -1,6 +1,7 @@
-==========================
-parallel_pipeline Function
-==========================
+=================
+parallel_pipeline
+=================
+**[algorithms.parallel_pipeline]**
 
 Strongly-typed interface for pipelined execution.
 
@@ -10,13 +11,13 @@ Strongly-typed interface for pipelined execution.
 
     namespace tbb {
 
-    void parallel_pipeline( size_t max_number_of_live_tokens, const filter_t<void,void>& filter_chain );
-    void parallel_pipeline( size_t max_number_of_live_tokens, const filter_t<void,void>& filter_chain, task_group_context& group] );
+        void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain );
+        void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain, task_group_context& group );
 
     } // namespace tbb
 
-A `parallel_pipeline` algorithm represents pipelined application of a series of filters to a stream of items.
-Each filter operates in a particular mode: parallel, serial in-order, or serial out-of-order (MacDonald 2004).
+A ``parallel_pipeline`` algorithm represents pipelined application of a series of filters to a stream of items.
+Each filter operates in a particular mode: parallel, serial in-order, or serial out-of-order.
 
 To build and run a pipeline from functors *g*\ :sub:`0`, *g*\ :sub:`1`, *g*\ :sub:`2`, ..., *g*\ :sub:`n`, write:
 
@@ -31,15 +32,21 @@ To build and run a pipeline from functors *g*\ :sub:`0`, *g*\ :sub:`1`, *g*\ :su
 
 In general, functor *g*\ :sub:`i` should define its ``operator()`` to map objects of type
 *I*\ :sub:`i` to objects of type *I*\ :sub:`i+1`. Functor *g*\ :sub:`0` is a special case, because
-it notifies the pipeline when the end of the input stream is reached. Functor *g*\ :sub:`0` must
+it notifies the pipeline when the end of an input stream is reached. Functor *g*\ :sub:`0` must
 be defined such that for a *flow_control* object *fc*, the expression *g*\ :sub:`0` (*fc* ) either
-returns the next value in the input stream, or if at the end of the input stream, invokes *fc.stop()*
+returns the next value in an input stream, or if at the end of an input stream, invokes *fc.stop()*
 and returns a dummy value.
 
-Each `filter_t` should be instantiated by a special way...(TODO)
+Each `filter` should be specified by two template arguments. These arguments define filters input
+and output types. The first and last filters are special cases. Input type of the first filter must be `void`,
+output type of the last filter must be `void` too.
+
+Before passing to `parallel_pipeline` all filters must be concatenated to one(``filter<void, void>``)
+by `filter::opeartor&()`. Operator `&` requires that the second template argument of its left operand matches
+the first template argument of its second operand.
 
 The number of items processed in parallel depends upon the structure of the pipeline and number of available threads.
-At most *max_number_of_live_tokens* set the threshold for number of concurrently processed tokens.
+*max_number_of_live_tokens* sets the threshold for concurrently processed items.
 
 If the *group* argument is specified, pipeline's tasks are executed in this group. By default the algorithm
 is executed in a bound group of its own.
@@ -48,26 +55,23 @@ Example
 -------
 
 The following example uses ``parallel_pipeline`` compute the root-mean-square of a sequence defined
-by [ *first* , *last* ). The example is only for demonstrating syntactic mechanics. It is not as a
-practical way to do the calculation because parallel overhead would be vastly higher than useful
-work. Operator `&` requires that the output type of its first ``filter_t`` argument matches the input
-type of its second ``filter_t`` argument.
+by [ *first* , *last* ).
 
 .. code:: cpp
 
     float RootMeanSquare( float* first, float* last ) {
         float sum=0;
-        parallel_pipeline( /*max_number_of_live_token=*/16,       
+        parallel_pipeline( /*max_number_of_live_token=*/16,
             make_filter<void,float*>(
                 filter::serial,
                 [&](flow_control& fc)-> float*{
                     if( first<last ) {
                         return first++;
-                     } else {
+                    } else {
                         fc.stop();
-                        return NULL;
+                        return nullptr;
                     }
-                }    
+                }
             ) &
             make_filter<float*,float>(
                 filter::parallel,
@@ -81,22 +85,21 @@ type of its second ``filter_t`` argument.
         return sqrt(sum);
     }
 
-
-See the oneAPI Threading Building Blocks Tutorial for a non-trivial example of ``parallel_pipeline``.
-
-filter_t Template Class
------------------------
+filter Class Template
+---------------------
 
 .. toctree::
+    :titlesonly:
 
-    parallel_pipeline_func/filter_t_cls.rst
+    parallel_pipeline_func/filter_cls.rst
 
 flow_control Class
 ------------------
 
 .. toctree::
+    :titlesonly:
 
-   parallel_pipeline_func/flow_control_cls.rst
+    parallel_pipeline_func/flow_control_cls.rst
 
 See also:
 

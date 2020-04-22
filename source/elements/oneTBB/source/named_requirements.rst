@@ -63,4 +63,4 @@ Algorithms
    named_requirements/algorithms/par_scan_combine.rst
    named_requirements/algorithms/par_scan_func.rst
    named_requirements/algorithms/blocked_range_val.rst
-
+   named_requirements/algorithms/filter_body.rst

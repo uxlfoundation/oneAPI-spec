@@ -1,44 +1,35 @@
-==================
-flow_control Class
-==================
+============
+flow_control
+============
+**[algorithms.parallel_pipeline.flow_control]**
 
+Enables the first filter in a composite filter to indicate when the end of input stream has been reached.
 
-Summary
--------
-Enables the first filter in a composite filter to indicate when the
-end of input has been reached.
-
-Header
-------
+Template function ``parallel_pipeline`` passes a ``flow_control`` object to the functor
+of the first filter. When the functor reaches the end of its input stream, it should invoke ``fc.stop()``
+and return a dummy value that will not be passed to the next filter.
 
 .. code:: cpp
 
-   #include "tbb/pipeline.h" 
+    // Defined in header <tbb/parallel_pipeline.h>
 
+    namespace tbb {
 
-Syntax
-------
+        class flow_control {
+        public:
+            void stop();
+        };
 
-.. code:: cpp
+    }
 
-   class flow_control;
+Member functions
+----------------
 
+.. cpp:function:: void stop()
 
-Description
------------
+    Indicates that first filter of the pipeline reaches the end of its output.
 
-Template function ``parallel_pipeline`` passes a ``flow_control`` object``fc`` to the input functor of a ``filter_t``. When the input functor
-reaches the end of its input, it should invoke ``fc.stop()`` and return a
-dummy value.
+See also:
 
-Members
--------
-
-.. code:: cpp
-
-   namespace tbb {
-       class flow_control {
-       public:
-           void stop();
-       };
-   }
+* :doc:`FilterBody requiremnts <../../../named_requirements/algorithms/filter_body>`
+* :doc:`filter class <filter_cls>`
