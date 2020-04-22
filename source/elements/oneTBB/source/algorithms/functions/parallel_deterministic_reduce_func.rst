@@ -3,7 +3,7 @@ parallel_deterministic_reduce
 =============================
 **[algorithms.parallel_deterministic_reduce]**
 
-Template function that computes reduction over a range, with deterministic split/join behavior.
+Function template that computes reduction over a range, with deterministic split/join behavior.
 
 .. code:: cpp
 
@@ -12,18 +12,18 @@ Template function that computes reduction over a range, with deterministic split
     namespace tbb {
 
         template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, Partitioner partitioner, task_group_context& group);
+        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
         template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, Partitioner partitioner);
+        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
         template<typename Range, typename Value, typename Func, typename Reduction>
         Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
         template<typename Range, typename Value, typename Func, typename Reduction>
         Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
         template<typename Range, typename Body>
-        void parallel_deterministic_reduce( const Range& range, Body& body, Partitioner partitioner, task_group_context& group);
+        void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
         template<typename Range, typename Body>
-        void parallel_deterministic_reduce( const Range& range, Body& body, Partitioner partitioner);
+        void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner);
         template<typename Range, typename Body>
         void parallel_deterministic_reduce( const Range& range, Body& body, task_group_context& group);
         template<typename Range, typename Body>
@@ -31,12 +31,12 @@ Template function that computes reduction over a range, with deterministic split
 
     } // namespace tbb
 
-``Partitioner`` type may be one of the following entities:
+A ``partitioner`` type may be one of the following entities:
 
-* ``const simple_partitioner&`` - the default partitioner type if not specified.
+* ``const simple_partitioner&``
 * ``const static_partitioner&``
 
-The ``parallel_deterministic_reduce`` template is very similar to the ``parallel_reduce`` template.
+The function template ``parallel_deterministic_reduce`` is very similar to the ``parallel_reduce`` template.
 It also has the functional and imperative forms and has :ref:`similar requirements <par_reduce_requirements>`.
 
 Unlike ``parallel_reduce``, ``parallel_deterministic_reduce`` has deterministic behavior

@@ -3,7 +3,7 @@ parallel_for
 ============
 **[algorithms.parallel_for]**
 
-Template function that performs parallel iteration over a range of values.
+Function template that performs parallel iteration over a range of values.
 
 .. code:: cpp
 
@@ -12,37 +12,37 @@ Template function that performs parallel iteration over a range of values.
     namespace tbb {
 
         template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, const Func& f, Partitioner partitioner, task_group_context& group);
+        void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner, task_group_context& group);
         template<typename Index, typename Func>
         void parallel_for(Index first, Index last, const Func& f, task_group_context& group);
         template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, const Func& f, Partitioner partitioner);
+        void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner);
         template<typename Index, typename Func>
         void parallel_for(Index first, Index last, const Func& f);
 
         template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, Index step, const Func& f, Partitioner partitioner, task_group_context& group);
+        void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner, task_group_context& group);
         template<typename Index, typename Func>
         void parallel_for(Index first, Index last, Index step, const Func& f, task_group_context& group);
         template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, Index step, const Func& f, Partitioner partitioner);
+        void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner);
         template<typename Index, typename Func>
         void parallel_for(Index first, Index last, Index step, const Func& f);
 
         template<typename Range, typename Body>
-        void parallel_for(const Range& range, const Body& body, Partitioner partitioner, task_group_context& group);
+        void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner, task_group_context& group);
         template<typename Range, typename Body>
         void parallel_for(const Range& range, const Body& body, task_group_context& group);
         template<typename Range, typename Body>
-        void parallel_for(const Range& range, const Body& body, Partitioner partitioner);
+        void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner);
         template<typename Range, typename Body>
         void parallel_for(const Range& range, const Body& body);
 
     } // namespace tbb
 
-``Partitioner`` type may be one of the following entities:
+A ``partitioner`` type may be one of the following entities:
 
-* ``const auto_partitioner&`` - the default partitioner type if not specified.
+* ``const auto_partitioner&``
 * ``const simple_partitioner&``
 * ``const static_partitioner&``
 * ``affinity_partitioner&``

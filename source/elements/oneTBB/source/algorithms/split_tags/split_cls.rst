@@ -1,42 +1,24 @@
-===========
-split Class
-===========
+=====
+split
+=====
+**[algorithms.split]**
 
-
-Summary
--------
-
-Type for dummy argument of a splitting constructor.
-
-Header
-------
-
-
-.. code:: cpp
-
-   #include "tbb/tbb_stddef.h"
-
-
-Syntax
-------
-
-.. code:: cpp
-
-   class split;
-
-
-Description
------------
-
+Type of an argument for a splitting constructor of :doc:`Range <../../../named_requirements/algorithms/range>`.
 An argument of type ``split`` is used to distinguish a splitting constructor from a copy constructor.
 
-Members
--------
-
 .. code:: cpp
 
-    
-   namespace tbb {
-       class split {
-       };
-   }
+    // Defined in header <tbb/blocked_range.h>
+    // Defined in header <tbb/blocked_range2d.h>
+    // Defined in header <tbb/blocked_range3d.h>
+    // Defined in header <tbb/partitioner.h>
+    // Defined in header <tbb/parallel_for.h>
+    // Defined in header <tbb/parallel_reduce.h>
+    // Defined in header <tbb/parallel_scan.h>
+
+    class split;
+
+See also:
+
+* :doc:`Range requirements <../../named_requirements/algorithms/range>`
+

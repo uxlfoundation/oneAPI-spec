@@ -3,7 +3,7 @@ parallel_reduce
 ===============
 **[algorithms.parallel_reduce]**
 
-Template function that computes reduction over a range.
+Function template that computes reduction over a range.
 
 .. code:: cpp
 
@@ -12,18 +12,18 @@ Template function that computes reduction over a range.
     namespace tbb {
 
         template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, Partitioner partitioner, task_group_context& group);
+        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
         template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, Partitioner partitioner);
+        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
         template<typename Range, typename Value, typename Func, typename Reduction>
         Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
         template<typename Range, typename Value, typename Func, typename Reduction>
         Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
         template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, Partitioner partitioner, task_group_context& group);
+        void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
         template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, Partitioner partitioner);
+        void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner);
         template<typename Range, typename Body>
         void parallel_reduce(const Range& range, Body& body, task_group_context& group);
         template<typename Range, typename Body>
@@ -31,9 +31,9 @@ Template function that computes reduction over a range.
 
     } // namespace tbb
 
-``Partitioner`` type may be one of the following entities:
+A ``partitioner`` type may be one of the following entities:
 
-* ``const auto_partitioner&`` - the default partitioner type if not specified.
+* ``const auto_partitioner&``
 * ``const simple_partitioner&``
 * ``const static_partitioner&``
 * ``affinity_partitioner&``
@@ -47,7 +47,7 @@ Requirements:
 * The ``Func`` type shall meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
 * The ``Reduction`` types shall meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_func>`.
 
-The ``parallel_reduce`` template has two forms.
+The function template ``parallel_reduce`` has two forms.
 The functional form is designed to be easy to use in conjunction with lambda expressions.
 The imperative form is designed to minimize copying of data.
 

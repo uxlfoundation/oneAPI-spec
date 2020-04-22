@@ -3,7 +3,7 @@ parallel_for_each
 =================
 **[algorithms.parallel_for_each]**
 
-Template function that processes work items in parallel.
+Function template that processes work items in parallel.
 
 .. code:: cpp
 

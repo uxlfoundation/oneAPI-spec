@@ -3,7 +3,7 @@ parallel_invoke
 ===============
 **[algortihms.parallel_invoke]**
 
-Template function that evaluates several functions in parallel.
+Function template that evaluates several functions in parallel.
 
 .. code:: cpp
 

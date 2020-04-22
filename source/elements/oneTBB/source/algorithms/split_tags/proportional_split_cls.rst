@@ -1,83 +1,59 @@
-========================
-proportional split Class
-========================
+==================
+proportional split
+==================
+**[algorithms.proportional_split]**
 
+Type of an argument for a proportional splitting constructor of :doc:`Range <../../../named_requirements/algorithms/range>`.
 
-Summary
--------
-
-Type of an argument for a proportional splitting constructor of Range.
-
-Header
-------
-
-
-.. code:: cpp
-
-   #include "tbb/tbb_stddef.h"
-
-
-Syntax
-------
-
-.. code:: cpp
-
-   class proportional_split;
-
-
-Description
------------
-
-An argument of type ``proportional_split`` may be used by classes that implement Range concept to distinguish a proportional
+An argument of type ``proportional_split`` may be used by classes that satisfies
+:doc:`Range requirements <../../../named_requirements/algorithms/range>` to distinguish a proportional
 splitting constructor from a basic splitting constructor and from a copy constructor, and to suggest a ratio in which a particular instance of
 the class should be split.
 
-Members
--------
-
 .. code:: cpp
 
-   namespace tbb {
-           class proportional_split {
-           public:
-               proportional_split(size_t _left = 1, size_t _right = 1);
-   
-               size_t left() const;
-               size_t right() const;
-   
-               operator split() const;
-           };
-   }
-         
+    // Defined in header <tbb/blocked_range.h>
+    // Defined in header <tbb/blocked_range2d.h>
+    // Defined in header <tbb/blocked_range3d.h>
+    // Defined in header <tbb/partitioner.h>
+    // Defined in header <tbb/parallel_for.h>
+    // Defined in header <tbb/parallel_reduce.h>
+    // Defined in header <tbb/parallel_scan.h>
 
+    namespace tbb {
+       class proportional_split {
+       public:
+           proportional_split(std::size_t _left = 1, std::size_t _right = 1);
 
-The following table provides additional information on the members of this class.
+           std::size_t left() const;
+           std::size_t right() const;
 
-= ========================================================================================
-\ Member, Description
-==========================================================================================
-\ ``proportional_split( size_t _left = 1, size_t _right = 1 )``
-  \
-  Constructs a proportion with the ratio specified by coefficients *_left* and *_right*.
-------------------------------------------------------------------------------------------
-\ ``size_t left() const``
-  \
-  Returns size of the left part of the proportion.
-------------------------------------------------------------------------------------------
-\ ``size_t right() const``
-  \
-  Returns size of the right part of the proportion.
-------------------------------------------------------------------------------------------
-\ ``operator split() const``
-  \
-  Makes ``proportional_split`` implicitly convertible to ``split`` type to use with
-  ranges that do not support proportional splitting.
-------------------------------------------------------------------------------------------
-= ========================================================================================
+           operator split() const;
+       };
+    }
 
-See "Range Concept" for an example of proportional splitting constructor implementation.
+Member Functions
+----------------
+
+.. cpp:function:: proportional_split( std::size_t _left = 1, std::size_t _right = 1 )
+
+    Constructs a proportion with the ratio specified by coefficients *_left* and *_right*.
+
+.. cpp:function:: std::size_t left() const
+
+    Returns size of the left part of the proportion.
+
+.. cpp:function:: std::size_t right() const
+
+    Returns size of the right part of the proportion.
+
+.. cpp:function:: operator split() const
+
+    Makes ``proportional_split`` implicitly convertible to ``split`` type to use with
+    ranges that do not support proportional splitting.
 
 See also:
 
 * :doc:`split <split_cls>`
-* :doc:`Range Concept <../../../general/named_requirements/algorithms/range>`
+* :doc:`Range requirements <../../../general/named_requirements/algorithms/range>`
+

@@ -59,4 +59,8 @@ Algorithms
    named_requirements/algorithms/par_reduce_reduction.rst
    named_requirements/algorithms/par_for_each_body.rst
    named_requirements/algorithms/container_based_sequence.rst
+   named_requirements/algorithms/par_scan_body.rst
+   named_requirements/algorithms/par_scan_combine.rst
+   named_requirements/algorithms/par_scan_func.rst
+   named_requirements/algorithms/blocked_range_val.rst
 
