@@ -70,7 +70,7 @@ class ClassDirective(CppDirective):
     def _rst_property(self, property_def, x: RstBuilder):
         x.add_property(property_def.definition, level=1)
         if property_def.doc:
-            x.add_doc(property_def.doc.description, level=2)
+            self._rst_description(property_def.doc.description, x)
         if property_def.getter or property_def.setter:
             x('Getter & Setter', level=2)
             if property_def.getter:
@@ -86,8 +86,17 @@ class ClassDirective(CppDirective):
                     x(f'| :cpp:expr:`{invariant}`', level=3)
                 x()
 
-
     def _rst_listing(self, class_def, x: RstBuilder):
         listing = self.ctx.listing.get_class_listing(class_def)
         x.add_code_block(listing)
 
+    def _rst_description(self, desc_def, x: RstBuilder):
+        rst = ''
+        for run in desc_def.runs:
+            if run.kind == 'text':
+                rst += run.content
+            elif run.kind == 'math':
+                rst += f':math:`{run.content}`'
+            elif run.kind == 'code':
+                rst += f':cpp:expr:`{run.content}`'
+        x.add_doc(rst.strip(), level=2)

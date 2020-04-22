@@ -110,8 +110,9 @@ def _parse_function(memberdef, function_def):
 
 def _parse_function_parameters(memberdef, function_def):
     for param in memberdef.iterchildren('param'):
-        declname = param.findtext('declname').strip()
-        function_def.add_parameter(declname)
+        declname = param.findtext('declname')
+        if declname:
+            function_def.add_parameter(declname.strip())
     param_doc_xpath = './/detaileddescription/para/parameterlist[@kind="param"]/parameteritem'
     for parameteritem in memberdef.iterfind(param_doc_xpath):
         parametername = parameteritem.findtext('.//parametername').strip()
@@ -166,14 +167,8 @@ def _parse_doc_attributes(xml, doc_def):
 def _parse_inner_text(xml):
     return ''.join(xml.itertext()).strip()
 
-_latex_re = re.compile(r'\$([^\$]+)\$')
-def _preprocess_text(text):
-    text = _latex_re.sub(r':math:`\1`', text.strip())
-    return text
-
 _default_remark_re = re.compile(r'default *= *(.+)')
 def _extract_property_default(doc):
-    print('_extract_property_default')
     default_value = None
     default_remark = None
     for remark in doc.remarks:

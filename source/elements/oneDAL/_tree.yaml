@@ -1,0 +1,491 @@
+classes:
+  onedal::knn_classification::desc:
+    fully_qualified_name: onedal::knn_classification::desc
+    kind: class
+    location:
+      bodyend: 31
+      bodystart: 15
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/classification/knn.hpp
+    methods:
+    - definition: desc()
+      doc:
+        description:
+          runs: []
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      name: desc
+      parameters: []
+      return_type: ''
+    name: desc
+    namespace: onedal::knn_classification
+    properties:
+    - default: '2'
+      definition: std::int64_t class_count = 2
+      doc:
+        description:
+          runs:
+          - content: 'The number of classes '
+            kind: text
+          - content: c
+            kind: math
+          - content: ' '
+            kind: text
+        invariants:
+        - class_count > 1
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: std::int64_t get_class_count() const
+        doc: null
+        name: get_class_count
+        parameters: []
+        return_type: std::int64_t
+      name: class_count
+      setter:
+        definition: desc & set_class_count(std::int64_t)
+        doc:
+          description:
+            runs: []
+          invariants: []
+          postconditions: []
+          preconditions: []
+          remarks: []
+        name: set_class_count
+        parameters: []
+        return_type: desc &
+      typename: std::int64_t
+    - default: '5'
+      definition: std::int64_t neighbor_count = 5
+      doc:
+        description:
+          runs:
+          - content: 'The number of neighbors '
+            kind: text
+          - content: k
+            kind: math
+          - content: ' '
+            kind: text
+        invariants:
+        - neighbor_count > 0
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: std::int64_t get_neighbor_count() const
+        doc: null
+        name: get_neighbor_count
+        parameters: []
+        return_type: std::int64_t
+      name: neighbor_count
+      setter:
+        definition: desc & set_neighbor_count(std::int64_t)
+        doc:
+          description:
+            runs: []
+          invariants: []
+          postconditions: []
+          preconditions: []
+          remarks: []
+        name: set_neighbor_count
+        parameters: []
+        return_type: desc &
+      typename: std::int64_t
+    template_parameters: []
+  onedal::knn_classification::infer_input:
+    fully_qualified_name: onedal::knn_classification::infer_input
+    kind: class
+    location:
+      bodyend: 94
+      bodystart: 79
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/classification/knn.hpp
+    methods:
+    - definition: infer_input(const model &m=model{}, const table &data=table{})
+      doc:
+        description:
+          runs: []
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      name: infer_input
+      parameters:
+      - description: null
+        name: m
+      - description: null
+        name: data
+      return_type: ''
+    name: infer_input
+    namespace: onedal::knn_classification
+    properties:
+    - default: model{}
+      definition: const model & model = model{}
+      doc:
+        description:
+          runs:
+          - content: 'The trained '
+            kind: text
+          - content: k
+            kind: math
+          - content: '-NN model '
+            kind: text
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: const model & get_model() const
+        doc: null
+        name: get_model
+        parameters: []
+        return_type: const model &
+      name: model
+      setter:
+        definition: infer_input & set_model(const model &)
+        doc:
+          description:
+            runs: []
+          invariants: []
+          postconditions: []
+          preconditions: []
+          remarks: []
+        name: set_model
+        parameters: []
+        return_type: infer_input &
+      typename: const model &
+    - default: table{}
+      definition: const table & data = table{}
+      doc:
+        description:
+          runs:
+          - content: 'The dataset for inference '
+            kind: text
+          - content: X'
+            kind: math
+          - content: ' '
+            kind: text
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: const table & get_data() const
+        doc: null
+        name: get_data
+        parameters: []
+        return_type: const table &
+      name: data
+      setter:
+        definition: infer_input & set_data(const table &)
+        doc:
+          description:
+            runs: []
+          invariants: []
+          postconditions: []
+          preconditions: []
+          remarks: []
+        name: set_data
+        parameters: []
+        return_type: infer_input &
+      typename: const table &
+    template_parameters: []
+  onedal::knn_classification::infer_result:
+    fully_qualified_name: onedal::knn_classification::infer_result
+    kind: class
+    location:
+      bodyend: 103
+      bodystart: 96
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/classification/knn.hpp
+    methods:
+    - definition: infer_result()
+      doc:
+        description:
+          runs: []
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      name: infer_result
+      parameters: []
+      return_type: ''
+    name: infer_result
+    namespace: onedal::knn_classification
+    properties:
+    - default: model{}
+      definition: const table & labels = model{}
+      doc:
+        description:
+          runs:
+          - content: 'The predicted labels '
+            kind: text
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: const table & get_labels() const
+        doc: null
+        name: get_labels
+        parameters: []
+        return_type: const table &
+      name: labels
+      setter: null
+      typename: const table &
+    template_parameters: []
+  onedal::knn_classification::model:
+    fully_qualified_name: onedal::knn_classification::model
+    kind: class
+    location:
+      bodyend: 36
+      bodystart: 33
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/classification/knn.hpp
+    methods:
+    - definition: model()
+      doc:
+        description:
+          runs: []
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      name: model
+      parameters: []
+      return_type: ''
+    name: model
+    namespace: onedal::knn_classification
+    properties: []
+    template_parameters: []
+  onedal::knn_classification::train_input:
+    fully_qualified_name: onedal::knn_classification::train_input
+    kind: class
+    location:
+      bodyend: 53
+      bodystart: 38
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/classification/knn.hpp
+    methods:
+    - definition: train_input(const table &data=table{}, const table &labels=table{})
+      doc:
+        description:
+          runs: []
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      name: train_input
+      parameters:
+      - description: null
+        name: data
+      - description: null
+        name: labels
+      return_type: ''
+    name: train_input
+    namespace: onedal::knn_classification
+    properties:
+    - default: table{}
+      definition: const table & data = table{}
+      doc:
+        description:
+          runs:
+          - content: 'The training set '
+            kind: text
+          - content: X
+            kind: math
+          - content: ' '
+            kind: text
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: const table & get_data() const
+        doc: null
+        name: get_data
+        parameters: []
+        return_type: const table &
+      name: data
+      setter:
+        definition: train_input & set_data(const table &)
+        doc:
+          description:
+            runs: []
+          invariants: []
+          postconditions: []
+          preconditions: []
+          remarks: []
+        name: set_data
+        parameters: []
+        return_type: train_input &
+      typename: const table &
+    - default: table{}
+      definition: const table & labels = table{}
+      doc:
+        description:
+          runs:
+          - content: 'Vector of labels '
+            kind: text
+          - content: y
+            kind: math
+          - content: ' for the training set '
+            kind: text
+          - content: X
+            kind: math
+          - content: ' '
+            kind: text
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: const table & get_labels() const
+        doc: null
+        name: get_labels
+        parameters: []
+        return_type: const table &
+      name: labels
+      setter:
+        definition: train_input & set_labels(const table &)
+        doc:
+          description:
+            runs: []
+          invariants: []
+          postconditions: []
+          preconditions: []
+          remarks: []
+        name: set_labels
+        parameters: []
+        return_type: train_input &
+      typename: const table &
+    template_parameters: []
+  onedal::knn_classification::train_result:
+    fully_qualified_name: onedal::knn_classification::train_result
+    kind: class
+    location:
+      bodyend: 62
+      bodystart: 55
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/classification/knn.hpp
+    methods:
+    - definition: train_result()
+      doc:
+        description:
+          runs: []
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      name: train_result
+      parameters: []
+      return_type: ''
+    name: train_result
+    namespace: onedal::knn_classification
+    properties:
+    - default: model{}
+      definition: const model & model = model{}
+      doc:
+        description:
+          runs:
+          - content: 'The trained '
+            kind: text
+          - content: k
+            kind: math
+          - content: '-NN model '
+            kind: text
+        invariants: []
+        postconditions: []
+        preconditions: []
+        remarks: []
+      getter:
+        definition: const model & get_model() const
+        doc: null
+        name: get_model
+        parameters: []
+        return_type: const model &
+      name: model
+      setter: null
+      typename: const model &
+    template_parameters: []
+  onedal::table:
+    fully_qualified_name: onedal::table
+    kind: class
+    location:
+      bodyend: 3
+      bodystart: 3
+      filename: /mnt/c/locrepo/oneapi-spec/source/elements/oneDAL/include/onedal/table.hpp
+    methods: []
+    name: table
+    namespace: onedal
+    properties: []
+    template_parameters: []
+functions:
+  onedal::knn_classification::example::run_training:
+    definition: knn_classification::model run_training(const table &data, const table
+      &labels)
+    doc:
+      description:
+        runs: []
+      invariants: []
+      postconditions: []
+      preconditions: []
+      remarks: []
+    fully_qualified_name: onedal::knn_classification::example::run_training
+    name: run_training
+    namespace: onedal::knn_classification::example
+    parameters:
+    - description: null
+      name: data
+    - description: null
+      name: labels
+    return_type: knn_classification::model
+  onedal::knn_classification::train:
+    definition: train_result train(const desc< Float, Method > &desc, const train_input
+      &input)
+    doc:
+      description:
+        runs:
+        - content: 'Runs the training operation for kNN classifier. For more details
+            see '
+          kind: text
+        - content: onedal::train
+          kind: code
+        - content: .
+          kind: text
+      invariants: []
+      postconditions:
+      - result.model.is_empty == false
+      - result.model.is_empty == false
+      preconditions:
+      - input.data.is_empty == false
+      remarks: []
+    fully_qualified_name: onedal::knn_classification::train
+    name: train
+    namespace: onedal::knn_classification
+    parameters:
+    - description:
+        runs:
+        - content: 'Descriptor for the algorithm '
+          kind: text
+      name: desc
+    - description:
+        runs:
+        - content: 'Input values for the algorithm '
+          kind: text
+      name: input
+    return_type: train_result
+  onedal::train:
+    definition: auto train(Args &&...args)
+    doc:
+      description:
+        runs: []
+      invariants: []
+      postconditions: []
+      preconditions: []
+      remarks: []
+    fully_qualified_name: onedal::train
+    name: train
+    namespace: onedal
+    parameters:
+    - description: null
+      name: args
+    return_type: auto
+

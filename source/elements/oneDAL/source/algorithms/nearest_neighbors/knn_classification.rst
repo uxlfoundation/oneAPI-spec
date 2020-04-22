@@ -135,7 +135,7 @@ Programming Interface
 
 Computational methods
 ---------------------
-.. namespace:: onedal::classification::knn::method
+.. namespace:: onedal::knn_classification::method
 
 ::
 
@@ -164,11 +164,11 @@ Computational methods
 
 Descriptor
 ----------
-.. onedal_class:: classification::knn::desc
+.. onedal_class:: knn_classification::desc
 
 Model
 -----
-.. onedal_class:: classification::knn::model
+.. onedal_class:: knn_classification::model
 
 
 .. _t_api:
@@ -179,37 +179,19 @@ Training :expr:`train(...)`
 
 Input
 ~~~~~
-.. onedal_class:: classification::knn::train_input
+.. onedal_class:: knn_classification::train_input
 
 
 .. _t_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: classification::knn::train_result
+.. onedal_class:: knn_classification::train_result
 
 
 Operation semantics
 ~~~~~~~~~~~~~~~~~~~
-::
-
-   auto result = onedal::train(desc, input);
-
-
-.. namespace:: onedal::classification::knn::train_semantics
-
-.. var:: desc<Float, Method>   desc
-
-   Description of desc parameter
-
-.. var:: train_input   input
-
-   Description of input parameter
-
-.. var:: train_result   result
-
-   Description of input parameter
-
+.. onedal_func:: knn_classification::train
 
 
 .. _i_api:
@@ -220,11 +202,11 @@ Inference ``infer(...)``
 
 Input
 ~~~~~
-.. onedal_class:: classification::knn::infer_input
+.. onedal_class:: knn_classification::infer_input
 
 
 .. _i_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: classification::knn::infer_result
+.. onedal_class:: knn_classification::infer_result
