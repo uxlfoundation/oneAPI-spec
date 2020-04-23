@@ -1,60 +1,80 @@
-=================================
-scalable allocator Template Class
-=================================
+==================
+scalable_allocator
+==================
+**[memory_allocation.scalable_allocator]**
 
+A ``scalable_allocator`` is a class template that models the allocator requirements from the [allocator.requirements] ISO C++ section.
 
-Summary
--------
-
-Template class for scalable memory allocation.
-
-Syntax
-------
+The ``scalable_allocator`` allocates and frees memory in a way that scales with the number of processors.
+Memory allocated by a ``scalable_allocator`` should be freed by a ``scalable_allocator``, not by a ``std::allocator``.
 
 .. code:: cpp
 
-   template<typename T> class scalable_allocator;
+    // Defined in header <tbb/scalable_allocator.h>
 
+    namespace tbb {
+        template<typename T> class scalable_allocator {
+        public:
+            using value_type = T;
+            using size_type = std::size_t;
+            using propagate_on_container_move_assignment = std::true_type;
+            using is_always_equal = std::true_type;
 
-Header
-------
+            scalable_allocator() = default;
+            template<typename U>
+            scalable_allocator(const scalable_allocator<U>&) noexcept;
 
-.. code:: cpp
-
-   #include "tbb/scalable_allocator.h"
-
-
-Description
------------
-
-A 
-``scalable_allocator`` allocates and frees memory in a way
-that scales with the number of processors. A 
-``scalable_allocator`` models the Allocator Concept. Using
-a 
-``scalable_allocator`` in place of 
-``std::allocator`` may improve program performance. Memory
-allocated by a 
-``scalable_allocator`` should be freed by a 
-``scalable_allocator``, not by a 
-``std::allocator``.
+            T* allocate(size_type);
+            void deallocate(T*, size_type);
+        };
+    }
 
 .. caution::
 
-   The 
-   ``scalable_allocator`` requires the memory allocator
-   library. If the library is missing, calls to the scalable allocator fail. In
-   contrast, if the memory allocator library is not available, 
-   ``tbb_allocator`` falls back on 
-   ``malloc`` and 
-   ``free``.
+   The ``scalable_allocator`` requires the memory allocator library. If the library is missing, calls to the scalable allocator fail. In
+   contrast, if the memory allocator library is not available, ``tbb_allocator`` falls back on ``std::malloc`` and ``std::free``.
 
+Member Functions
+----------------
 
-Members
--------
+.. cpp:function:: value_type* allocate(size_type n)
 
-See Allocator concept.
+    Allocates ``n * sizeof(T)`` bytes of memory. Returns a pointer to the allocated memory.
 
-See also:
+.. cpp:function:: void deallocate(value_type* p, size_type n)
 
-* :doc:`C Interface to Scalable Allocator <c_interface_to_scalable_allocator>`
+    Deallocates memory pointed to by ``p``.
+    The behavior is undefined if the pointer ``p`` is not the result of the ``allocate(n)`` method.
+    The behavior is undefined if the memory has been already deallocated.
+
+Non-member Functions
+--------------------
+
+These functions provide comparison operations between two ``scalable_allocator`` instances.
+
+.. code:: cpp
+
+    namespace tbb {
+        template<typename T, typename U>
+        bool operator==(const scalable_allocator<T>&,
+                        const scalable_allocator<U>&) noexcept;
+
+        template<typename T, typename U>
+        bool operator!=(const scalable_allocator<T>&,
+                        const scalable_allocator<U>&) noexcept;
+    }
+
+The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``scalable_allocator`` objects.
+For example, an implementation may define the classes and functions in the same unspecified internal namespace,
+and define ``tbb::scalable_allocator`` as a type alias for which the non-member functions are reachable only via argument dependent lookup.
+
+.. cpp:function:: template<typename T, typename U> \
+    bool operator==(const scalable_allocator<T>&, const scalable_allocator<U>&) noexcept
+
+    Returns **true**.
+
+.. cpp:function:: template<typename T, typename U> \
+    bool operator!=(const scalable_allocator<T>&, const scalable_allocator<U>&) noexcept
+
+    Returns **false**.
+

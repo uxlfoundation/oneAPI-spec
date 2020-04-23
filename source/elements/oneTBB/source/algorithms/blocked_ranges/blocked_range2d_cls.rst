@@ -49,7 +49,7 @@ A ``blocked_range2d`` meets the :doc:`Range requirements <../../named_requiremen
 
 Requirements:
 
-* The *RowValue* and *ColValue* shall meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range>`
+* The *RowValue* and *ColValue* shall meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
 
 Member Functions
 ----------------

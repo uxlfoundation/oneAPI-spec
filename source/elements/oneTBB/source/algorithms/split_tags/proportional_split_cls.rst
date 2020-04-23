@@ -3,10 +3,10 @@ proportional split
 ==================
 **[algorithms.proportional_split]**
 
-Type of an argument for a proportional splitting constructor of :doc:`Range <../../../named_requirements/algorithms/range>`.
+Type of an argument for a proportional splitting constructor of :doc:`Range <../../named_requirements/algorithms/range>`.
 
 An argument of type ``proportional_split`` may be used by classes that satisfies
-:doc:`Range requirements <../../../named_requirements/algorithms/range>` to distinguish a proportional
+:doc:`Range requirements <../../named_requirements/algorithms/range>` to distinguish a proportional
 splitting constructor from a basic splitting constructor and from a copy constructor, and to suggest a ratio in which a particular instance of
 the class should be split.
 
@@ -55,5 +55,5 @@ Member Functions
 See also:
 
 * :doc:`split <split_cls>`
-* :doc:`Range requirements <../../../general/named_requirements/algorithms/range>`
+* :doc:`Range requirements <../../named_requirements/algorithms/range>`
 
