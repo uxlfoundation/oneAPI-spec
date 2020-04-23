@@ -26,7 +26,7 @@ See the example in the :doc:`parallel_scan <parallel_scan_func>` section for how
 
     }
 
-Member Functions
+Member functions
 ----------------
 
 .. cpp:function:: bool is_final_scan()

@@ -1,9 +1,9 @@
-============================
-cache_aligned_resource class
-============================
+======================
+cache_aligned_resource
+======================
 **[memory_allocation.cache_aligned_resource]**
 
-A ``cache_aligned_resource`` is a general-pupose memory resource class, which acts as a wrapper to another memory resource
+A ``cache_aligned_resource`` is a general-purpose memory resource class, which acts as a wrapper to another memory resource
 to ensure that all allocations are aligned on cache line boundaries to avoid false sharing.
 
 See the :doc:`cache_aligned_allocator template class <cache_aligned_allocator_cls>` section for more information about false sharing avoidance.

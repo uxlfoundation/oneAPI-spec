@@ -29,6 +29,6 @@ oneAPI Threading Building Blocks Specification
    :caption: oneTBB Auxiliary Interfaces:
 
    memory_allocation.rst
-   synchronization.rst
+   mutual_exclusion.rst
    timing.rst
 

@@ -32,7 +32,7 @@ the class should be split.
        };
     }
 
-Member Functions
+Member functions
 ----------------
 
 .. cpp:function:: proportional_split( std::size_t _left = 1, std::size_t _right = 1 )

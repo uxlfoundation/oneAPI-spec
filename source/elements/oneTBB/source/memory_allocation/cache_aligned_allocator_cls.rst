@@ -1,9 +1,9 @@
-======================================
-cache_aligned_allocator template class
-======================================
+=======================
+cache_aligned_allocator
+=======================
 **[memory_allocation.cache_aligned_allocator]**
 
-A ``cache_aligned_allocator`` is a template class that models the allocator requirements from the [allocator.requirements] ISO C++ section.
+A ``cache_aligned_allocator`` is a class template that models the allocator requirements from the [allocator.requirements] ISO C++ section.
 
 The ``cache_aligned_allocator`` allocates memory on cache line boundaries, in order to avoid false sharing and potentially improve performance.
 False sharing is a situation when logically distinct items occupy the same cache line,

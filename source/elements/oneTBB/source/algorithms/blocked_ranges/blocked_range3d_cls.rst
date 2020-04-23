@@ -47,7 +47,7 @@ Requirements:
 
 * The *PageValue*, *RowValue* and *ColValue* shall meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
 
-Member Functions
+Member functions
 ----------------
 
 .. code:: cpp

@@ -64,3 +64,12 @@ Algorithms
    named_requirements/algorithms/par_scan_func.rst
    named_requirements/algorithms/blocked_range_val.rst
    named_requirements/algorithms/filter_body.rst
+
+Mutexes
+-------
+.. toctree::
+   :titlesonly:
+
+   named_requirements/mutexes/mutex.rst
+   named_requirements/mutexes/rw_mutex.rst
+

@@ -51,7 +51,7 @@ Requirements:
 
 * The ``Value`` type shall meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`.
 
-Member Functions
+Member functions
 ----------------
 
 .. cpp:type:: size_type

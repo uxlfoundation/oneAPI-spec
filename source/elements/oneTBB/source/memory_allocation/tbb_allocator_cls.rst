@@ -1,9 +1,9 @@
-============================
-tbb_allocator template class
-============================
+=============
+tbb_allocator
+=============
 **[memory_allocation.tbb_allocator]**
 
-A ``tbb_allocator`` is a template class that models the allocator requirements from the [allocator.requirements] ISO C++ section.
+A ``tbb_allocator`` is a class template that models the allocator requirements from the [allocator.requirements] ISO C++ section.
 
 The ``tbb_allocator`` allocates and frees memory via the oneAPI Threading Building Blocks malloc library if it is available,
 otherwise it reverts to using ``std::malloc`` and ``std::free``.
