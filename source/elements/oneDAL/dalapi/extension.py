@@ -85,22 +85,22 @@ class ProjectWatcher(object):
 
 
 class Context(object):
-    def __init__(self, app,
-                 relative_project_dir,
-                 relative_doxygen_dir,
-                 relative_include_dir):
+    def __init__(self, app):
         self.app = app
         self._index = None
         self._watcher = None
         self._doxygen = None
         self._listing = None
-        self._path_resolver = PathResolver(
-            app,
-            relative_project_dir,
-            relative_doxygen_dir,
-            relative_include_dir
-        )
+        self._path_resolver = None
         self._read_env()
+
+    def configure(self, project_dir):
+        self._path_resolver = PathResolver(
+            self.app,
+            project_dir,
+            'doxygen/xml',
+            'include/onedal'
+        )
 
     @property
     def current_docname(self):
@@ -110,26 +110,30 @@ class Context(object):
     def index(self) -> doxymodel.Index:
         if self._index is None:
             from .doxyparser import parse
-            self._index = parse(self._path_resolver.doxygen_dir)
+            self._index = parse(self._paths.doxygen_dir)
         return self._index
 
     @property
     def watcher(self) -> ProjectWatcher:
         if self._watcher is None:
-            self._watcher = ProjectWatcher(
-                self, self._path_resolver)
+            self._watcher = ProjectWatcher(self, self._paths)
         return self._watcher
 
     @property
     def listing(self) -> ListingReader:
         if self._listing is None:
-            self._listing = ListingReader(
-                self._path_resolver.project_dir)
+            self._listing = ListingReader(self._paths.project_dir)
         return self._listing
 
     def log(self, *args):
         if self.debug:
             print('[dalapi]:', *args)
+
+    @property
+    def _paths(self):
+        if not self._path_resolver:
+            raise Exception('Context is not configured')
+        return self._path_resolver
 
     def _read_env(self):
         def get_env_flag(env_var):
@@ -146,14 +150,19 @@ class EventHandler(object):
     def env_get_outdated(self, app, env, added, changed, removed):
         return self.ctx.watcher.get_outdated_docnames(added | changed | removed)
 
+    def get_config_values(self, app):
+        self.ctx.configure(app.config.onedal_project_dir)
+
 
 def setup(app):
-    ctx = Context(app,
-        relative_project_dir='elements/oneDAL',
-        relative_doxygen_dir='doxygen/xml',
-        relative_include_dir='include/onedal',
-    )
+    ctx = Context(app)
+
     app.add_directive('onedal_class', directives.ClassDirective(ctx))
+    app.add_directive('onedal_func', directives.FunctionDirective(ctx))
+    app.add_directive('onedal_code', directives.ListingDirective(ctx))
+
+    app.add_config_value('onedal_project_dir', '.', 'env')
 
     handler = EventHandler(ctx)
+    app.connect("builder-inited", handler.get_config_values)
     app.connect('env-get-outdated', handler.env_get_outdated)

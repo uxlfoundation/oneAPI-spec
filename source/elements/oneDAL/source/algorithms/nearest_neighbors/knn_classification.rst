@@ -164,7 +164,7 @@ Computational methods
 
 Descriptor
 ----------
-.. onedal_class:: knn_classification::desc
+.. onedal_class:: knn_classification::descriptor
 
 Model
 -----
@@ -189,8 +189,8 @@ Result
 .. onedal_class:: knn_classification::train_result
 
 
-Operation semantics
-~~~~~~~~~~~~~~~~~~~
+Operation
+~~~~~~~~~
 .. onedal_func:: knn_classification::train
 
 

@@ -4,14 +4,18 @@ class RstBuilder(object):
     def __init__(self):
         self._rst_list = []
 
-    def add_class(self, namespace: str, class_declaration: str, level=0):
-        self(f'.. cpp:namespace:: {namespace}', level)
-        self()
-        self(f'.. cpp:class:: {class_declaration}', level)
+    def add_class(self, declaration: str, namespace: str=None, level=0):
+        if namespace:
+            self(f'.. cpp:namespace:: {namespace}', level)
+            self()
+        self(f'.. cpp:class:: {declaration}', level)
         self()
 
-    def add_function(self, definition: str, level=0):
-        self(f'.. cpp:function:: {definition}', level)
+    def add_function(self, declaration: str, namespace: str = None, level=0):
+        if namespace:
+            self(f'.. cpp:namespace:: {namespace}', level)
+            self()
+        self(f'.. cpp:function:: {declaration}', level)
         self()
 
     def add_property(self, definition: str, level=0):
@@ -19,9 +23,15 @@ class RstBuilder(object):
         self()
 
     def add_doc(self, description: str, level=0):
-        if len(description) > 0:
+        if description:
             self(self._format_description(description), level)
             self()
+
+    def add_param(self, name: str, description: str, level=0):
+        self._add_param('param', name, description, level)
+
+    def add_tparam(self, name: str, description: str, level=0):
+        self._add_param('tparam', name, description, level)
 
     def add_code_block(self, listing: List[Text], level=0):
         self(f'.. code-block:: cpp', level)
@@ -35,6 +45,11 @@ class RstBuilder(object):
 
     def build(self):
         return self._rst_list
+
+    def _add_param(self, tag: str, name: str, description: str, level=0):
+        if description:
+            formatted = self._format_description(description)
+            self(f':{tag} {name}: {formatted}', level)
 
     def _format_description(self, description):
         if not description.endswith('.'):

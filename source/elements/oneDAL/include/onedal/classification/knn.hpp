@@ -2,7 +2,7 @@
 #include "onedal/table.hpp"
 #include "onedal/train.hpp"
 
-namespace onedal::knn_classification {
+namespace onedal::knn {
 
 namespace method {
    struct bruteforce {};
@@ -12,8 +12,10 @@ namespace method {
 
 template <typename Float = float,
           typename Method = method::by_default>
-class desc {
+class descriptor {
 public:
+   /// Creates a new instance of `descriptor`
+   /// with the default property values
    desc();
 
    /// The number of classes $c$
@@ -26,8 +28,8 @@ public:
    /// @invariant neighbor_count > 0
    std::int64_t get_neighbor_count() const;
 
-   desc& set_class_count(std::int64_t);
-   desc& set_neighbor_count(std::int64_t);
+   descriptor& set_class_count(std::int64_t);
+   descriptor& set_neighbor_count(std::int64_t);
 };
 
 class model {
@@ -61,18 +63,22 @@ public:
    const model& get_model() const;
 };
 
+
 /// Runs the training operation for kNN classifier. For more details see
 /// `onedal::train`.
 ///
-/// @param[in] desc Descriptor for the algorithm
+/// @tparam Float Floating point type
+/// @tparam Method Computation method
+///
+/// @param[in] desc  Descriptor for the algorithm
 /// @param[in] input Input values for the algorithm
 /// @return result Result of the training
 ///
 /// @pre input.data.is_empty == false
 /// @post result.model.is_empty == false
 /// @post result.model.is_empty == false
-template <typename Float, typename Method>
-train_result train(const desc<Float, Method>& desc,
+template <typename Float = float, typename Method>
+train_result train(const descriptor<Float, Method>& desc,
                    const train_input& input);
 
 
@@ -102,11 +108,11 @@ public:
    const table& get_labels() const;
 };
 
-} // namespace onedal::knn_classification
+} // namespace onedal::knn
 
-namespace onedal::knn_classification::example {
+namespace onedal::knn::example {
 
-knn_classification::model run_training(const table& data, const table& labels) {
+knn::model run_training(const table& data, const table& labels) {
 }
 
-} // onedal::knn_classification::example
+} // onedal::knn::example

@@ -14,13 +14,8 @@
 #
 import os
 import sys
-import datetime
-
 sys.path.insert(0, os.path.abspath('conf'))
-
-# oneDAL uses custom API generator based on `breathe`.
-# Extend path to let Sphinx find `dalapi` module:
-sys.path.insert(0, os.path.abspath('elements/oneDAL'))
+import datetime
 
 from common_conf import *
 
@@ -243,3 +238,5 @@ breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
 
+# oneDAL project directory is needed for `dalapi` extension
+onedal_project_dir = 'elements/oneDAL'

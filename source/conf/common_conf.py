@@ -2,6 +2,15 @@ import os
 import sys
 import string
 
+def path_relative_to_repo_root(relative_path):
+    this_dir = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.abspath(os.path.join(this_dir, '../..'))
+    return os.path.abspath(os.path.join(root_dir, relative_path))
+
+# oneDAL uses custom API generator based on `breathe`.
+# Extend path to let Sphinx find `dalapi` module:
+sys.path.insert(0, path_relative_to_repo_root('source/elements/oneDAL'))
+
 extensions = [
     'notfound.extension',
     'sphinx.ext.autodoc',
