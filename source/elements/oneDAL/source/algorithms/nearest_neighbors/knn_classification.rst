@@ -135,7 +135,7 @@ Programming Interface
 
 Computational methods
 ---------------------
-.. namespace:: onedal::knn_classification::method
+.. namespace:: onedal::onedal::knn::method
 
 ::
 
@@ -164,11 +164,11 @@ Computational methods
 
 Descriptor
 ----------
-.. onedal_class:: knn_classification::descriptor
+.. onedal_class:: onedal::knn::descriptor
 
 Model
 -----
-.. onedal_class:: knn_classification::model
+.. onedal_class:: onedal::knn::model
 
 
 .. _t_api:
@@ -179,19 +179,19 @@ Training :expr:`train(...)`
 
 Input
 ~~~~~
-.. onedal_class:: knn_classification::train_input
+.. onedal_class:: onedal::knn::train_input
 
 
 .. _t_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: knn_classification::train_result
+.. onedal_class:: onedal::knn::train_result
 
 
 Operation
 ~~~~~~~~~
-.. onedal_func:: knn_classification::train
+.. onedal_func:: onedal::knn::train
 
 
 .. _i_api:
@@ -202,11 +202,11 @@ Inference ``infer(...)``
 
 Input
 ~~~~~
-.. onedal_class:: knn_classification::infer_input
+.. onedal_class:: onedal::knn::infer_input
 
 
 .. _i_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: knn_classification::infer_result
+.. onedal_class:: onedal::knn::infer_result

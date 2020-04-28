@@ -89,7 +89,7 @@ class Index(object):
         model = self._index[parent_name].__model__
         if hasattr(model, 'functions'):
             for func in model.functions:
-                if func.name == 'name':
+                if func.name == name:
                     return func
         raise KeyError(f'Cannot find {name} inside {parent_name}')
 

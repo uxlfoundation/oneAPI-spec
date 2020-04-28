@@ -2,9 +2,8 @@ import os
 import time
 from typing import (Dict, Tuple, Text)
 from . import directives
-from . import doxymodel
+from . import doxypy
 from . import utils
-from .listingreader import ListingReader
 
 class PathResolver(object):
     def __init__(self, app,
@@ -53,7 +52,7 @@ class ProjectWatcher(object):
 
         outdated_docnames = []
         for docname, info in self._linked_docnames.items():
-            filename, link_time = info
+            _, link_time = info
             if (self.ctx.always_rebuild or
                 link_time < xml_mtime or link_time < hpp_mtime):
                 outdated_docnames.append(docname)
@@ -107,10 +106,9 @@ class Context(object):
         return self.app.env.docname
 
     @property
-    def index(self) -> doxymodel.Index:
+    def index(self) -> doxypy.Index:
         if self._index is None:
-            from .doxyparser import parse
-            self._index = parse(self._paths.doxygen_dir)
+            self._index = doxypy.index(self._paths.doxygen_dir)
         return self._index
 
     @property
@@ -120,9 +118,9 @@ class Context(object):
         return self._watcher
 
     @property
-    def listing(self) -> ListingReader:
+    def listing(self) -> doxypy.ListingReader:
         if self._listing is None:
-            self._listing = ListingReader(self._paths.project_dir)
+            self._listing = doxypy.ListingReader()
         return self._listing
 
     def log(self, *args):

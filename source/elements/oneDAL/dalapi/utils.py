@@ -1,11 +1,12 @@
 import os
 import subprocess
 from typing import (
-    Union, Iterable
+    Iterable,
+    Union,
 )
 from glob import iglob
 
-class cd:
+class _cd:
     def __init__(self, new_path):
         self.new_path = os.path.abspath(new_path)
 
@@ -23,7 +24,7 @@ class ProcessHandle(object):
         self._startup_dir = startup_dir
 
     def run(self):
-        with cd(self._startup_dir):
+        with _cd(self._startup_dir):
             subprocess.check_call(self._command, shell=True)
 
 

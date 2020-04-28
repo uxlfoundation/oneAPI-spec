@@ -28,6 +28,13 @@ class _BuilderMixins(object):
     def split_compound_name(self, compoundname):
         return utils.split_compound_name(compoundname)
 
+    def find_parent(self, matcher):
+        current = self.src
+        while current:
+            current = current.parent_object_
+            if matcher(current):
+                return current
+
     def build_doc(self):
         brief = self.src.briefdescription
         detailed = self.src.detaileddescription
@@ -35,17 +42,21 @@ class _BuilderMixins(object):
         return build(DocBuilder, description)
 
     def build_template(self):
-        template_params = self.build_template_parameters()
-        template_decl = self.build_template_declaration(template_params)
+        template_params = self._build_template_parameters()
+        template_decl = self._build_template_declaration(template_params)
         return template_decl, template_params
 
+    def build_location(self):
+        if self.src.location:
+            return build(LocationBuilder, self.src.location)
+
     @utils.return_list
-    def build_template_parameters(self):
+    def _build_template_parameters(self):
         if self.src.templateparamlist:
             for param in self.src.templateparamlist.param:
                 yield build(ParameterBuilder, param, is_template=True)
 
-    def build_template_declaration(self, template_parameters):
+    def _build_template_declaration(self, template_parameters):
         template_entries = []
         for param in template_parameters:
             template_entry = f'{param.type} {param.name}'
@@ -54,13 +65,6 @@ class _BuilderMixins(object):
             template_entries.append(template_entry)
         return (f'template <{", ".join(template_entries)}>'
                 if template_entries else None)
-
-    def find_parent(self, matcher):
-        current = self.src
-        while current:
-            current = current.parent_object_
-            if matcher(current):
-                return current
 
     def _read_inner_text(self, text_like) -> Text:
         text = ''
@@ -76,9 +80,9 @@ class _BuilderMixins(object):
 
 class DescriptionBuilder(_BuilderMixins):
     def build(self):
-        description_def = model.Description()
-        description_def.runs = self._build_runs()
-        return description_def
+        return model.Description(
+            runs = self._build_runs(),
+        )
 
     @utils.return_list
     def _build_runs(self):
@@ -93,14 +97,25 @@ class DescriptionBuilder(_BuilderMixins):
                     yield model.Run(content.value, 'text')
 
 
+class LocationBuilder(_BuilderMixins):
+    def build(self):
+        return model.Location(
+            file = self.src.file,
+            line = int(self.src.line) if self.src.line else None,
+            bodyfile = self.src.bodyfile if self.src.bodyfile else None,
+            bodystart = int(self.src.bodystart) if self.src.bodystart else None,
+            bodyend = int(self.src.bodyend) if self.src.bodyend else None,
+        )
+
+
 class DocBuilder(_BuilderMixins):
     def build(self):
-        doc_def = model.Doc()
-        doc_def.description = DescriptionBuilder(self.src).build()
-        doc_def.invariants = self._build_simplesect('invariant')
-        doc_def.preconditions = self._build_simplesect('pre')
-        doc_def.postconditions = self._build_simplesect('post')
-        return doc_def
+        return model.Doc(
+            description = build(DescriptionBuilder, self.src),
+            invariants = self._build_simplesect('invariant'),
+            preconditions = self._build_simplesect('pre'),
+            postconditions = self._build_simplesect('post'),
+        )
 
     @utils.return_list
     def _build_simplesect(self, kind: str):
@@ -151,6 +166,7 @@ class FunctionBuilder(_BuilderMixins):
         return model.Function(
             doc = self.build_doc(),
             name = name,
+            location = self.build_location(),
             argstring = argstring,
             parameters = self._build_params(),
             declaration = decl,
@@ -197,6 +213,7 @@ class ClassBuilder(_BuilderMixins):
             doc = self.build_doc(),
             name = name,
             kind = self.textify(self.src.kind),
+            location = self.build_location(),
             functions = self._build_methods(),
             declaration = decl,
             template_parameters = template_params,
@@ -235,6 +252,7 @@ class NamespaceBuilder(_BuilderMixins):
         return model.Namespace(
             doc = self.build_doc(),
             name = name,
+            location = self.build_location(),
             functions = self._build_functions(),
             fully_qualified_name = fqn,
             parent_fully_qualified_name = parent_name,

@@ -61,24 +61,25 @@ class ClassDirective(DoxyDirective):
     has_content = False
 
     def rst(self, x: RstBuilder):
-        class_def = self.ctx.index.find_class(self.arguments[0])
+        class_def = self.ctx.index.find(self.arguments[0])
         self._rst_listing(class_def, x)
         sphinx_class_decl = (f'{class_def.template_declaration} {class_def.name}'
                              if class_def.template_declaration else class_def.name)
-        x.add_class(sphinx_class_decl, class_def.namespace)
+        x.add_class(sphinx_class_decl, class_def.parent_fully_qualified_name)
         self._rst_methods(class_def, x)
         self._rst_properties(class_def, x)
 
     def _rst_methods(self, class_def, x: RstBuilder):
-        for method_def in class_def.methods:
+        for method_def in class_def.functions:
             x.add_function(method_def.declaration, level=1)
 
     def _rst_properties(self, class_def, x: RstBuilder):
-        if len(class_def.properties) > 0:
-            x('**Properties**', level=1)
-            x()
-        for property_def in class_def.properties:
-            self._rst_property(property_def, x)
+        # if len(class_def.properties) > 0:
+        #     x('**Properties**', level=1)
+        #     x()
+        # for property_def in class_def.properties:
+        #     self._rst_property(property_def, x)
+        pass
 
     def _rst_property(self, property_def, x: RstBuilder):
         x.add_property(property_def.declaration, level=1)
@@ -101,7 +102,7 @@ class ClassDirective(DoxyDirective):
                 x()
 
     def _rst_listing(self, class_def, x: RstBuilder):
-        listing = self.ctx.listing.get_class_listing(class_def)
+        listing = self.ctx.listing.read(class_def)
         x.add_code_block(listing)
 
 
@@ -112,8 +113,8 @@ class FunctionDirective(DoxyDirective):
     has_content = False
 
     def rst(self, x: RstBuilder):
-        func_def = self.ctx.index.find_function(self.arguments[0])
-        x.add_function(func_def.declaration, func_def.namespace)
+        func_def = self.ctx.index.find(self.arguments[0])
+        x.add_function(func_def.declaration, func_def.parent_fully_qualified_name)
         if func_def.doc and func_def.doc.description:
             desc = self.format_description(func_def.doc.description)
             x.add_doc(desc, level=1)

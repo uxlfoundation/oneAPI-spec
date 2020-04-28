@@ -95,9 +95,11 @@ class Doc(object):
 
 @_model_object
 class Location(object):
+    file: Text = None
+    line: int = -1
+    bodyfile: Text = None
     bodyend: int = -1
     bodystart: int = -1
-    filename: Text = None
 
 @_model_object
 class Parameter(object):
@@ -110,6 +112,7 @@ class Parameter(object):
 class Function(object):
     doc: Doc = None
     name: Text = None
+    location: Location = None
     argstring: Text = None
     parameters: List[Parameter] = []
     declaration: Text = None
@@ -124,9 +127,9 @@ class Class(object):
     doc: Doc = None
     kind: Text = None
     name: Text = None
-    declaration: Text = None
     location: Location = None
     functions: List[Function] = []
+    declaration: Text = None
     template_parameters: List[Parameter] = []
     template_declaration: Text = None
     fully_qualified_name: Text = None
@@ -137,6 +140,7 @@ class Namespace(object):
     doc: Doc = None
     name: Text = None
     classes: List[Text] = []
+    location: Location = None
     functions: List[Function] = []
     fully_qualified_name: Text = None
     parent_fully_qualified_name: Text = None
