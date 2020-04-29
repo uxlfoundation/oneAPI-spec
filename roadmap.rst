@@ -225,8 +225,8 @@ Date       Milestone
   
 - oneDAL
 
-  - Extend API description to 18 algorithms
-  - Add first version for sections on programming model, algorithmics
+  - Extend API description to 3 additional algorithms
+  - Add first version for sections on programming model, error handling, namespaces
   - Extend numeric tables and data structure sections
 
 - oneTBB
