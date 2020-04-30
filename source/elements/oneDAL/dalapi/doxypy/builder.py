@@ -38,7 +38,7 @@ class _BuilderMixins(object):
     def build_doc(self):
         brief = self.src.briefdescription
         detailed = self.src.detaileddescription
-        description = detailed if len(detailed.content_) > 0 else brief
+        description = detailed if len(detailed.para) > 0 else brief
         return build(DocBuilder, description)
 
     def build_template(self):
@@ -92,9 +92,19 @@ class DescriptionBuilder(_BuilderMixins):
             if content.name == 'computeroutput':
                 code = self.textify(content.value)
                 yield model.Run(code, 'code')
+            if content.name == 'formula':
+                code = self.textify(content.value)
+                yield model.Run(code, 'math')
             elif not content.name:
                 if content.value.strip():
-                    yield model.Run(content.value, 'text')
+                    yield from self._split_math(content.value)
+
+    def _split_math(self, text):
+        for i, chunk in enumerate(text.split('$')):
+            if i % 2 and chunk:
+                yield model.Run(chunk, 'math')
+            elif chunk:
+                yield model.Run(chunk, 'text')
 
 
 class LocationBuilder(_BuilderMixins):
@@ -115,6 +125,7 @@ class DocBuilder(_BuilderMixins):
             invariants = self._build_simplesect('invariant'),
             preconditions = self._build_simplesect('pre'),
             postconditions = self._build_simplesect('post'),
+            remarks = self._build_simplesect('remark'),
         )
 
     @utils.return_list
@@ -151,7 +162,39 @@ class ParameterBuilder(_BuilderMixins):
             name = name if name else None,
             type = type_ if type_ else None,
             default = default if default else None,
+            description = self._build_description(name),
         )
+
+    def _build_description(self, param_name):
+        try:
+            doc = self._find_parent_doc()
+            param_desc = self._find_param_description(doc, param_name)
+            return build(DescriptionBuilder, param_desc)
+        except (AttributeError, IndexError):
+            pass
+
+    def _find_param_description(self, doc, param_name):
+        param_kind = 'templateparam' if self.is_template else 'param'
+        param_list = self._find_parameter_list(doc, param_kind)
+        for parameteritem in param_list.parameteritem:
+            parametername = parameteritem.parameternamelist[0].parametername[0]
+            if self.textify(parametername) == param_name:
+                return parameteritem.parameterdescription
+
+    def _find_parent_doc(self):
+        def has_detailed_description(node):
+            return hasattr(node, 'detaileddescription')
+        parent = self.find_parent(has_detailed_description)
+        return parent.detaileddescription
+
+    def _find_parameter_list(self, doc, kind):
+        parameterlist_ = (parameterlist
+            for para in doc.para
+            for parameterlist in para.parameterlist
+        )
+        for parameterlist in parameterlist_:
+            if parameterlist.kind == kind:
+                return parameterlist
 
 
 class FunctionBuilder(_BuilderMixins):

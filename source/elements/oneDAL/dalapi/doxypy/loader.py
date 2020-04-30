@@ -7,20 +7,8 @@ class TransformerPass(object):
     def enter(self, node): ...
     def transform(self, node): ...
 
-class PopulateParameterDescription(TransformerPass):
-    def enter(self, node):
-        return (isinstance(node, model.Namespace) or
-                isinstance(node, model.Class) or
-                isinstance(node, model.Function))
-
-    def transform(self, node):
-        pass
-
-
 class Transformer(model.Visitor):
-    default_passes = [
-        PopulateParameterDescription(),
-    ]
+    default_passes = []
 
     def __init__(self, passes: List[TransformerPass] = []):
         assert passes is not None

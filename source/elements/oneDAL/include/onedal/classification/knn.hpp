@@ -10,30 +10,34 @@ namespace method {
    using by_default = bruteforce;
 } // namespace method
 
+
+/// @tparam Float  The floating-point type that the algorithm uses for
+///                intermediate computations. Can be `float` or `double`.
+/// @tparam Method Tag-type that specifies an implementation of algorithm. Can
+///                be `method::bruteforce` or `method::kd_tree`.
 template <typename Float = float,
           typename Method = method::by_default>
 class descriptor {
 public:
-   /// Creates a new instance of `descriptor`
-   /// with the default property values
-   desc();
+   /// Creates a new instance of class with the default property values.
+   descriptor();
 
    /// The number of classes $c$
    /// @remark default = 2
    /// @invariant class_count > 1
    std::int64_t get_class_count() const;
+   descriptor& set_class_count(std::int64_t);
 
    /// The number of neighbors $k$
    /// @remark default = 5
    /// @invariant neighbor_count > 0
    std::int64_t get_neighbor_count() const;
-
-   descriptor& set_class_count(std::int64_t);
    descriptor& set_neighbor_count(std::int64_t);
 };
 
 class model {
 public:
+   /// Creates a new instance of class with the default property values.
    model();
 };
 
@@ -45,12 +49,11 @@ public:
    /// The training set $X$
    /// @remark default = table{}
    const table& get_data() const;
+   train_input& set_data(const table&);
 
    /// Vector of labels $y$ for the training set $X$
    /// @remark default = table{}
    const table& get_labels() const;
-
-   train_input& set_data(const table&);
    train_input& set_labels(const table&);
 };
 
@@ -67,8 +70,10 @@ public:
 /// Runs the training operation for kNN classifier. For more details see
 /// `onedal::train`.
 ///
-/// @tparam Float Floating point type
-/// @tparam Method Computation method
+/// @tparam Float  The floating-point type that the algorithm uses for
+///                intermediate computations. Can be `float` or `double`.
+/// @tparam Method Tag-type that specifies an implementation of algorithm. Can
+///                be `method::bruteforce` or `method::kd_tree`.
 ///
 /// @param[in] desc  Descriptor for the algorithm
 /// @param[in] input Input values for the algorithm
@@ -77,7 +82,7 @@ public:
 /// @pre input.data.is_empty == false
 /// @post result.model.is_empty == false
 /// @post result.model.is_empty == false
-template <typename Float = float, typename Method>
+template <typename Float, typename Method>
 train_result train(const descriptor<Float, Method>& desc,
                    const train_input& input);
 
@@ -90,12 +95,11 @@ public:
    /// The trained $k$-NN model
    /// @remark default = model{}
    const model& get_model() const;
+   infer_input& set_model(const model&);
 
    /// The dataset for inference $X'$
    /// @remark default = table{}
    const table& get_data() const;
-
-   infer_input& set_model(const model&);
    infer_input& set_data(const table&);
 };
 

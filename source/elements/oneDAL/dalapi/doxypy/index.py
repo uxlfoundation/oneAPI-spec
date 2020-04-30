@@ -135,9 +135,9 @@ def _index_to_dict(obj, discard_empty=False):
         return [_index_to_dict(x) for x in obj]
     elif isinstance(obj, dict):
         return {k: _index_to_dict(x) for k, x in obj.items()}
-    elif hasattr(obj, '__fields__'):
+    elif model.has_fields(obj):
         obj_dict = {}
-        for field in obj.__fields__:
+        for field in obj.iter():
             value = getattr(obj, field)
             obj_dict[field] = _index_to_dict(value)
         return obj_dict

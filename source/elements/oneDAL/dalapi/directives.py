@@ -11,12 +11,10 @@ def directive(cls):
             return cls(self._ctx, *args, **kwargs)
     return DirectiveFactory
 
-
 class BaseDirective(Directive):
     def __init__(self, ctx, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ctx = ctx
-
 
 class MacroDirective(BaseDirective):
     def init(self): ...
@@ -25,17 +23,15 @@ class MacroDirective(BaseDirective):
     def run(self):
         self.init()
         content = ViewList()
-        for i, line in enumerate(self._get_rst()):
-            content.append(line, '', i + 1)
+        self._get_rst(content)
         node = nodes.section()
         node.document = self.state.document
         self.state.nested_parse(content, 0, node)
         return node.children
 
-    def _get_rst(self):
-        x = RstBuilder()
+    def _get_rst(self, placeholder):
+        x = RstBuilder(placeholder, self.ctx.current_docname, self.lineno)
         self.rst(x)
-        return x.build()
 
 
 class DoxyDirective(MacroDirective):
@@ -53,6 +49,30 @@ class DoxyDirective(MacroDirective):
                 rst += f':cpp:expr:`{run.content}`'
         return rst.strip()
 
+    def add_description(self, description, x: RstBuilder, level=0):
+        desc_str = self.format_description(description)
+        if desc_str:
+            x.add_doc(desc_str, level=level)
+
+    def add_function_base(self, func, x: RstBuilder, is_free=True, level=0):
+        namespace = func.parent_fully_qualified_name if is_free else None
+        x.add_function(func.declaration, namespace, level=level)
+        if func.doc and func.doc.description:
+            self.add_description(func.doc.description, x, level=level + 1)
+        self.add_params('tparam', func.template_parameters, x, level=level + 1)
+        self.add_params('param', func.parameters, x, level=level + 1)
+        x.add_blank_like()
+
+    def add_params(self, tag, params, x: RstBuilder, level=0):
+        for param in params:
+            if param.description:
+                desc_str = self.format_description(param.description)
+                x.add_param(tag, param.name, desc_str, level=level)
+
+    def add_listing(self, model_object, x: RstBuilder):
+        listing = self.ctx.listing.read(model_object)
+        x.add_code_block(listing)
+
 
 @directive
 class ClassDirective(DoxyDirective):
@@ -61,28 +81,44 @@ class ClassDirective(DoxyDirective):
     has_content = False
 
     def rst(self, x: RstBuilder):
-        class_def = self.ctx.index.find(self.arguments[0])
-        self._rst_listing(class_def, x)
-        sphinx_class_decl = (f'{class_def.template_declaration} {class_def.name}'
-                             if class_def.template_declaration else class_def.name)
-        x.add_class(sphinx_class_decl, class_def.parent_fully_qualified_name)
-        self._rst_methods(class_def, x)
-        self._rst_properties(class_def, x)
+        class_ = self.ctx.index.find(self.arguments[0])
+        self.add_listing(class_, x)
+        sphinx_class_decl = (f'{class_.template_declaration} {class_.name}'
+                             if class_.template_declaration else class_.name)
+        x.add_class(sphinx_class_decl, class_.parent_fully_qualified_name)
+        self.add_params('tparam', class_.template_parameters, x, level=1)
+        x.add_blank_like()
+        self.add_constructors(class_, x)
+        self.add_methods(class_, x)
+        self.add_properties(class_, x)
 
-    def _rst_methods(self, class_def, x: RstBuilder):
-        for method_def in class_def.functions:
-            x.add_function(method_def.declaration, level=1)
+    def add_constructors(self, class_, x: RstBuilder):
+        ctors = [func for func in class_.functions
+                 if not func.return_type.strip()]
+        if ctors:
+            x.add('**Constructors**', level=1)
+            x.add_blank_like()
+        for ctor in ctors:
+            self.add_function_base(ctor, x, level=1)
 
-    def _rst_properties(self, class_def, x: RstBuilder):
-        # if len(class_def.properties) > 0:
-        #     x('**Properties**', level=1)
-        #     x()
-        # for property_def in class_def.properties:
-        #     self._rst_property(property_def, x)
-        pass
+    def add_methods(self, class_, x: RstBuilder):
+        methods = [func for func in class_.functions
+                   if func.return_type.strip()]
+        if methods:
+            x.add('**Public Methods**', level=1)
+            x.add_blank_like()
+        for method in methods:
+            self.add_function_base(method, x, level=1)
 
-    def _rst_property(self, property_def, x: RstBuilder):
-        x.add_property(property_def.declaration, level=1)
+    def add_properties(self, class_def, x: RstBuilder):
+        if class_def.properties:
+            x.add('**Properties**', level=1)
+            x.add_blank_like()
+        for property_def in class_def.properties:
+            self.add_property(property_def, x)
+
+    def add_property(self, property_def, x: RstBuilder):
+        x.add_member(property_def.declaration, level=1)
         if property_def.doc and property_def.doc.description:
             desc = self.format_description(property_def.doc.description)
             x.add_doc(desc, level=2)
@@ -101,10 +137,6 @@ class ClassDirective(DoxyDirective):
                     x(f'| :cpp:expr:`{invariant}`', level=3)
                 x()
 
-    def _rst_listing(self, class_def, x: RstBuilder):
-        listing = self.ctx.listing.read(class_def)
-        x.add_code_block(listing)
-
 
 @directive
 class FunctionDirective(DoxyDirective):
@@ -113,20 +145,10 @@ class FunctionDirective(DoxyDirective):
     has_content = False
 
     def rst(self, x: RstBuilder):
-        func_def = self.ctx.index.find(self.arguments[0])
-        x.add_function(func_def.declaration, func_def.parent_fully_qualified_name)
-        if func_def.doc and func_def.doc.description:
-            desc = self.format_description(func_def.doc.description)
-            x.add_doc(desc, level=1)
-        for tparam_def in func_def.template_parameters:
-            if tparam_def.description:
-                desc = self.format_description(tparam_def.description)
-                x.add_tparam(tparam_def.name, desc, level=1)
-        for param_def in func_def.parameters:
-            if param_def.description:
-                desc = self.format_description(param_def.description)
-                x.add_param(param_def.name, desc, level=1)
-        x()
+        func = self.ctx.index.find(self.arguments[0])
+        # TODO: Add option to include listing
+        # self.add_listing(func, x)
+        self.add_function_base(func, x, is_free=True)
 
 
 @directive
@@ -136,4 +158,6 @@ class ListingDirective(DoxyDirective):
     has_content = False
 
     def rst(self, x: RstBuilder):
-        pass
+        model_object = self.ctx.index.find(self.arguments[0])
+        listing = self.ctx.listing.read(model_object)
+        x.add_code_block(listing)

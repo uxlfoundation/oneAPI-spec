@@ -61,7 +61,9 @@ class _ListingEntry(object):
                 f'{self._model_object.fully_qualified_name} in {self._filename}'
             )
         for i in range(start_index, end_index + 1):
-            yield lines[i]
+            line = lines[i].strip()
+            if not line.startswith('/'):
+                yield lines[i].rstrip()
 
     def _find_start_index(self, lines):
         assert self._model_object.location.line > 0
@@ -95,7 +97,7 @@ class _ListingEntry(object):
 
     def _find_line_index(self, lines, start_index, trigger):
         for i in range(start_index, len(lines)):
-            if lines[i].contains(trigger):
+            if trigger in lines[i]:
                 return i
 
 

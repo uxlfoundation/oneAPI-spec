@@ -8,7 +8,10 @@ from typing import (
 
 from collections import namedtuple
 
-def _get_public_attrs(obj):
+def has_fields(obj):
+    return hasattr(obj, '__fields__')
+
+def iter_fields(obj):
     for attr in dir(obj):
         is_public = not attr.startswith('_')
         is_callable = callable(getattr(obj, attr))
@@ -22,9 +25,9 @@ def _iter_model_object(obj, is_root=True):
     elif isinstance(obj, dict):
         for k, v in obj.items():
             yield from _iter_model_object(v, is_root=False)
-    elif hasattr(obj, '__fields__'):
+    elif has_fields(obj):
         if is_root:
-            for field in obj.__fields__:
+            for field in iter_fields(obj):
                 yield from _iter_model_object(getattr(obj, field),
                                               is_root=False)
         else:
@@ -46,8 +49,8 @@ class _ModelProperty(object):
         return self
 
 
-def _model_object(cls):
-    fields = tuple(_get_public_attrs(cls))
+def model_object(cls):
+    fields = tuple(iter_fields(cls))
     defaults = tuple(getattr(cls, f) for f in fields)
 
     for field, default in zip(fields, defaults):
@@ -70,30 +73,28 @@ def _model_object(cls):
     cls.__init__ = namespace['__init__']
     cls.__init__.__defaults__ = defaults
     cls.__repr__ = namespace['__repr__']
-    cls.iter = _iter_model_object
+    cls.iter = iter_fields
     return cls
 
 
-@_model_object
+@model_object
 class Run(object):
     content: Text = None
     kind: Text = 'unknown'
 
-@_model_object
+@model_object
 class Description(object):
     runs: List[Run] = []
 
-@_model_object
+@model_object
 class Doc(object):
     invariants: List[Text] = []
     postconditions: List[Text] = []
     preconditions: List[Text] = []
     remarks: List[Text] = []
-    params: List[Text] = []
-    template_params: List[Text] = []
     description: Description = None
 
-@_model_object
+@model_object
 class Location(object):
     file: Text = None
     line: int = -1
@@ -101,14 +102,14 @@ class Location(object):
     bodyend: int = -1
     bodystart: int = -1
 
-@_model_object
+@model_object
 class Parameter(object):
     name: Text = None
     type: Text = None
     description: Description = None
     default: Text = None
 
-@_model_object
+@model_object
 class Function(object):
     doc: Doc = None
     name: Text = None
@@ -122,7 +123,7 @@ class Function(object):
     fully_qualified_name: Text = None
     parent_fully_qualified_name: Text = None
 
-@_model_object
+@model_object
 class Class(object):
     doc: Doc = None
     kind: Text = None
@@ -135,7 +136,7 @@ class Class(object):
     fully_qualified_name: Text = None
     parent_fully_qualified_name: Text = None
 
-@_model_object
+@model_object
 class Namespace(object):
     doc: Doc = None
     name: Text = None

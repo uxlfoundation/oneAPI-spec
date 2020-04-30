@@ -9,6 +9,7 @@ k-Nearest Neighbors Classification (k-NN)
 vector by computing majority vote of the :math:`k` nearest observations from the
 training set.
 
+
 .. |t_math| replace:: `Training <t_math_>`_
 .. |t_api| replace:: `API <t_api_>`_
 .. |t_brute_f| replace:: `Brute-force <t_math_brute_force_>`_
@@ -133,26 +134,23 @@ distance between :math:`x_j'` and the most distant feature vector from
 Programming Interface
 ---------------------
 
+Descriptor
+----------
+.. onedal_class:: onedal::knn::descriptor
+
+
 Computational methods
 ---------------------
-.. namespace:: onedal::onedal::knn::method
+.. namespace:: onedal::knn::method
+.. onedal_code:: onedal::knn::method
 
-::
-
-   namespace method {
-      struct bruteforce {};
-      struct kd_tree {};
-      using by_default = bruteforce;
-   } // namespace method
-
-
-.. type:: bruteforce
+.. struct:: bruteforce
 
    Tag-type that denotes `brute-force <t_math_brute_force_>`_ computational
    method.
 
 
-.. type:: kd_tree
+.. struct:: kd_tree
 
    Tag-type that denotes `k-d tree <t_math_kd_tree>`_ computational method.
 
@@ -161,10 +159,6 @@ Computational methods
 
    Alias tag-type for `brute-force <t_math_brute_force_>`_ computational method.
 
-
-Descriptor
-----------
-.. onedal_class:: onedal::knn::descriptor
 
 Model
 -----

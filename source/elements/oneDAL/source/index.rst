@@ -7,6 +7,11 @@
 |dal_short_name| |dal_version|
 ==============================
 
+
+.. |default_ctor_doc| replace:: Creates a new instance of class \
+                                with the default property values.
+
+
 .. |github| replace:: oneDAL GitHub\* page
 .. _github: https://github.com/intel/daal
 
@@ -26,6 +31,7 @@ For general information, visit |github|_.
 
    introduction.rst
    terminology.rst
+   notations.rst
    programming_model/index.rst
    common_interface/index.rst
    data_management/index.rst
