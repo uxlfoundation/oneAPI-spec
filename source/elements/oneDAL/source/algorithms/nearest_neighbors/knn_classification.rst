@@ -41,14 +41,13 @@ Mathematical formulation
 
 Training
 --------
-Given the training set :math:`X = \{ x_1, \ldots, x_n \}` of
-:math:`p`-dimensional feature vectors, the vector of class labels :math:`y` and
-a positive integer :math:`k`, where :math:`y_i \in \{ 0, \ldots, c-1 \}`,
-:math:`1 \leq i \leq n`, :math:`c` is the number of classes and :math:`k` is the
-number of nearest neighbors specified by the user. The problem is to build a
-model that allows efficient distance computation between the feature vectors in
-:math:`X` and :math:`X'` at the inference stage.
-
+Let :math:`X = \{ x_1, \ldots, x_n \}` be the training set of
+:math:`p`-dimensional feature vectors, let :math:`Y = \{ y_1, \ldots, y_n \}` be
+the set of class labels, where :math:`y_i \in \{ 0, \ldots, c-1 \}`, :math:`1
+\leq i \leq n`. Given :math:`X`, :math:`Y` and the number of nearest neighbors
+:math:`k`, the problem is to build a model that allows efficient distance
+computation between the feature vectors in training and inference sets at the
+inference stage.
 
 .. _t_math_brute_force:
 
@@ -70,11 +69,11 @@ training set :math:`X` (for more details, see :ref:`kd_tree`).
 
 Inference
 ---------
-Given the set :math:`X' = \{ x_1', \ldots, x_m' \}` of :math:`p`-dimensional
-feature vectors, the user-defined number of nearest neighbors :math:`k`, and the
-model produced by the training operation, the problem is to predict the label
-:math:`y_j'` for each :math:`x_j'`, :math:`1 \leq j \leq m`, by performing the
-following steps:
+Let :math:`X' = \{ x_1', \ldots, x_m' \}` be the inference set of
+:math:`p`-dimensional feature vectors. Given :math:`X'`, the model produced
+at the training stage and the number of nearest neighbors :math:`k`, the problem
+is to predict the label :math:`y_j'` for each :math:`x_j'`, :math:`1 \leq j \leq
+m`, by performing the following steps:
 
 #. Identify the set :math:`N(x_j') \subseteq X` of the :math:`k` feature vectors
    in the training set that are nearest to :math:`x_j'` with respect to the
