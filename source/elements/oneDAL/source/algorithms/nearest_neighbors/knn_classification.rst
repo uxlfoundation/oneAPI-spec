@@ -171,6 +171,14 @@ m`, by performing the following steps:
       \quad 1 \leq j \leq m, \; 0 \leq l < c.
 
 
+   **Option 5: Super lite.** Do not say anything about conditional probability:
+
+   .. math::
+      :label: p_predict_5
+
+      P_{jl} = \frac{1}{| N(x_j') |} \Big| \big\{ x_r \in N(x_j') : y_r = l
+      \big\} \Big|, \quad 1 \leq j \leq m, \; 0 \leq l < c.
+
 
 #. Predict the class that has the highest probability for the feature vector
    :math:`x_j'`:
