@@ -84,12 +84,94 @@ following steps:
    fraction of vectors in :math:`N(x_j')` whose labels :math:`y_j` are equal to
    :math:`l`:
 
+   **Option 1: Detailed.** All mathematical formalism is preserved. There is a
+   need for :math:`\Omega, \mathcal{X}, \mathcal{Y}`, etc. definition in math
+   notations section.
+
    .. math::
       :label: p_predict
+      :nowrap:
 
-      P(y_j' = l \; | \; x_j') = \frac{1}{| N(x_j') |}
+      \begin{align*}
+      & \Omega = \mathcal{X} \times \mathcal{Y}, \quad
+      X, X' \subset \mathcal{X}, \quad
+      Y, Y' \subset \mathcal{Y}. \\
+
+      & P(\{ (x, y) \in \Omega : y = l    \} \; | \;
+        \{ (x, y) \in \Omega : x = x_j' \}) = \frac{1}{| N(x_j') |}
       \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
       \quad 1 \leq j \leq m, \; 0 \leq l < c.
+      \end{align*}
+
+
+   **Option 2: Less detailed.** All mathematical formalism is preserved. There
+   is a need for :math:`\Omega, \omega, \mathcal{X}, \mathcal{Y}`, etc.
+   definition in math notations section. The problem is that the :math:`\omega`
+   meaning is not clear.
+
+   .. math::
+      :label: p_predict_2
+      :nowrap:
+
+      \begin{align*}
+      & X, X' \subset \mathcal{X}, \quad
+      Y, Y' \subset \mathcal{Y}, \quad
+      \omega = (x, y) \in \mathcal{X} \times \mathcal{Y}. \\
+
+      & P(\{ \omega : y = l    \} \; | \;
+        \{ \omega : x = x_j' \}) = \frac{1}{| N(x_j') |}
+      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
+      \quad 1 \leq j \leq m, \; 0 \leq l < c.
+      \end{align*}
+
+
+   **Option 3: The least detailed.** Some math formalism is omitted, curvy brackets
+   are still there. Not clear what is :math:`(x, l)` here. Need definitions for
+   :math:`\mathcal{X}, \mathcal{Y}`.
+
+   .. math::
+      :label: p_predict_3
+      :nowrap:
+
+      \begin{align*}
+      & \Omega = \mathcal{X} \times \mathcal{Y}, \quad
+      X, X' \subset \mathcal{X}, \quad
+      Y, Y' \subset \mathcal{Y}. \\
+
+      & P(\{ (x, l) : x \in \mathcal{X}   \} \; | \;
+        \{ (x_j', y) : y \in \mathcal{Y} \}) = \frac{1}{| N(x_j') |}
+      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
+      \quad 1 \leq j \leq m, \; 0 \leq l < c.
+      \end{align*}
+
+
+   **Option 4: Lite.** Minimize mathematical formalism, focus on meaning. Add
+   formal definition of :math:`P(\cdot)` (see option 1) to math notations:
+
+   .. math::
+      :label: p_predict_4
+      :nowrap:
+
+      \begin{align*}
+      & \Omega = \mathcal{X} \times \mathcal{Y}, \quad
+      X, X' \subset \mathcal{X}, \quad
+      Y, Y' \subset \mathcal{Y}. \\
+
+      &P(y = l \; | \; x = x_j') = P(\{ (x, y) \in \Omega : y = l    \} \; | \;
+                                     \{ (x, y) \in \Omega : x = x_j' \}).
+      \end{align*}
+
+
+   Use the simplified form across oneDAL spec.
+
+   .. math::
+      :label: p_predict_4_2
+
+      P(y = l \; | \; x = x_j') = \frac{1}{| N(x_j') |}
+      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
+      \quad 1 \leq j \leq m, \; 0 \leq l < c.
+
+
 
 #. Predict the class that has the highest probability for the feature vector
    :math:`x_j'`:
@@ -97,7 +179,7 @@ following steps:
    .. math::
       :label: y_predict
 
-      y_j' = \mathrm{arg}\max_{0 \leq l < c} P(y_j' = l \; | \; x_j'),
+      y_j' = \mathrm{arg}\max_{0 \leq l < c} P(y = l \; | \; x = x_j'),
       \quad 1 \leq j \leq m.
 
 
