@@ -19,17 +19,17 @@ template <typename Float = float,
           typename Method = method::by_default>
 class descriptor {
 public:
-   /// Creates a new instance of class with the default property values.
-   descriptor();
+   /// Creates a new instance of the class with the given `class_count`,
+   /// `neighbor_count` property values
+   explicit descriptor(std::int64_t class_count,
+                       std::int64_t neighbor_count);
 
    /// The number of classes $c$
-   /// @remark default = 2
    /// @invariant class_count > 1
    std::int64_t get_class_count() const;
    descriptor& set_class_count(std::int64_t);
 
    /// The number of neighbors $k$
-   /// @remark default = 5
    /// @invariant neighbor_count > 0
    std::int64_t get_neighbor_count() const;
    descriptor& set_neighbor_count(std::int64_t);
@@ -67,7 +67,7 @@ public:
 };
 
 
-/// Runs the training operation for kNN classifier. For more details see
+/// Runs the training operation for $k$-NN classifier. For more details see
 /// `onedal::train`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
