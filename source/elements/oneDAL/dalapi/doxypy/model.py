@@ -106,8 +106,20 @@ class Location(object):
 class Parameter(object):
     name: Text = None
     type: Text = None
-    description: Description = None
     default: Text = None
+    description: Description = None
+
+@model_object
+class Typedef(object):
+    doc: Doc = None
+    name: Text = None
+    type: Text = None
+    location: Location = None
+    declaration: Text = None
+    template_declaration: Text = None
+    template_parameters: List[Parameter] = []
+    fully_qualified_name: Text = None
+    parent_fully_qualified_name: Text = None
 
 @model_object
 class Function(object):
@@ -137,15 +149,21 @@ class Class(object):
     parent_fully_qualified_name: Text = None
 
 @model_object
-class Namespace(object):
-    doc: Doc = None
+class ClassRef(object):
     name: Text = None
-    classes: List[Text] = []
-    location: Location = None
-    functions: List[Function] = []
     fully_qualified_name: Text = None
     parent_fully_qualified_name: Text = None
 
+@model_object
+class Namespace(object):
+    doc: Doc = None
+    name: Text = None
+    typedefs: List[Typedef] = []
+    location: Location = None
+    functions: List[Function] = []
+    class_refs: List[ClassRef] = []
+    fully_qualified_name: Text = None
+    parent_fully_qualified_name: Text = None
 
 class Visitor(object):
     def enter(self, node): ...

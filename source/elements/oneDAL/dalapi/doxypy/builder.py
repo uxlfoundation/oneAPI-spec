@@ -283,9 +283,53 @@ class ClassBuilder(_BuilderMixins):
         decl += f'class {name}'
         return decl
 
-    def _public_func_memberdef(self):
-        return (
+
+class ClassRefBuilder(_BuilderMixins):
+    def build(self):
+        fqn = self.textify(self.src)
+        parent_fqn, name = self.split_compound_name(fqn)
+        return model.ClassRef(
+            name = name,
+            fully_qualified_name = fqn,
+            parent_fully_qualified_name = parent_fqn,
         )
+
+
+class TypedefBuilder(_BuilderMixins):
+    def build(self):
+        name = self.textify(self.src.name)
+        decl = self.textify(self.src.definition)
+        template_decl, template_params = self.build_template()
+        parent_fqn, fqn = self._build_fqn(name)
+        return model.Typedef(
+            doc = self.build_doc(),
+            name = name,
+            type = self.textify(self.src.type_),
+            location = self.build_location(),
+            declaration= self._build_declaration(template_decl, decl),
+            template_parameters = template_params,
+            template_declaration = template_decl,
+            fully_qualified_name = fqn,
+            parent_fully_qualified_name = parent_fqn,
+        )
+
+    def _build_fqn(self, name):
+        compound = self._find_parent_compound()
+        parent_fqn = self.textify(compound.compoundname)
+        fqn = f'{parent_fqn}::{name}' if parent_fqn else name
+        return parent_fqn, fqn
+
+    def _find_parent_compound(self):
+        def compound_matcher(node):
+            return isinstance(node, _CompoundDefType)
+        return self.find_parent(compound_matcher)
+
+    def _build_declaration(self, template_decl, nob_template_decl):
+        decl = ''
+        if template_decl:
+            decl += template_decl + ' '
+        decl += nob_template_decl
+        return decl
 
 
 class NamespaceBuilder(_BuilderMixins):
@@ -296,7 +340,9 @@ class NamespaceBuilder(_BuilderMixins):
             doc = self.build_doc(),
             name = name,
             location = self.build_location(),
+            typedefs = self._build_typedefs(),
             functions = self._build_functions(),
+            class_refs = self._build_class_refs(),
             fully_qualified_name = fqn,
             parent_fully_qualified_name = parent_name,
         )
@@ -312,6 +358,22 @@ class NamespaceBuilder(_BuilderMixins):
         for memberdef in func_memberdef:
             yield build(FunctionBuilder, memberdef)
 
+    @utils.return_list
+    def _build_typedefs(self):
+        typedef_memberdef = (memberdef
+            for sectiondef in self.src.sectiondef
+                if sectiondef.kind == 'typedef'
+            for memberdef in sectiondef.memberdef
+                   if memberdef.kind == 'typedef'
+        )
+        for typedef in typedef_memberdef:
+            yield build(TypedefBuilder, typedef)
+
+    @utils.return_list
+    def _build_class_refs(self):
+        for innerclass in self.src.innerclass:
+            yield build(ClassRefBuilder, innerclass)
+
 
 class ModelBuilder(_BuilderMixins):
     builder_map = {
@@ -319,6 +381,7 @@ class ModelBuilder(_BuilderMixins):
         'struct': ClassBuilder,
         'func': FunctionBuilder,
         'namespace': NamespaceBuilder,
+        'typedef': TypedefBuilder,
     }
 
     def build(self):

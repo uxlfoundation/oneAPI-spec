@@ -226,27 +226,9 @@ Descriptor
 ----------
 .. onedal_class:: onedal::knn::descriptor
 
-
 Computational methods
 ---------------------
-.. namespace:: onedal::knn::method
-.. onedal_code:: onedal::knn::method
-
-.. struct:: bruteforce
-
-   Tag-type that denotes `brute-force <t_math_brute_force_>`_ computational
-   method.
-
-
-.. struct:: kd_tree
-
-   Tag-type that denotes `k-d tree <t_math_kd_tree>`_ computational method.
-
-
-.. type:: by_default = bruteforce
-
-   Alias tag-type for `brute-force <t_math_brute_force_>`_ computational method.
-
+.. onedal_compute_methods:: onedal::knn
 
 Model
 -----
@@ -278,8 +260,8 @@ Operation
 
 .. _i_api:
 
-Inference ``infer(...)``
-------------------------
+Inference :expr:`infer(...)`
+----------------------------
 .. _i_api_input:
 
 Input

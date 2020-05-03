@@ -46,7 +46,7 @@ class DoxyDirective(MacroDirective):
             elif run.kind == 'math':
                 rst += f':math:`{run.content}`'
             elif run.kind == 'code':
-                rst += f':cpp:expr:`{run.content}`'
+                rst += f'`{run.content}`'
         return rst.strip()
 
     def add_description(self, description, x: RstBuilder, level=0):
@@ -69,8 +69,8 @@ class DoxyDirective(MacroDirective):
                 desc_str = self.format_description(param.description)
                 x.add_param(tag, param.name, desc_str, level=level)
 
-    def add_listing(self, model_object, x: RstBuilder):
-        listing = self.ctx.listing.read(model_object)
+    def add_listing(self, model_object, x: RstBuilder, remove_empty_lines=False):
+        listing = self.ctx.listing.read(model_object, remove_empty_lines)
         x.add_code_block(listing)
 
 
@@ -85,7 +85,8 @@ class ClassDirective(DoxyDirective):
         self.add_listing(class_, x)
         sphinx_class_decl = (f'{class_.template_declaration} {class_.name}'
                              if class_.template_declaration else class_.name)
-        x.add_class(sphinx_class_decl, class_.parent_fully_qualified_name)
+        x.add_class(class_.kind, sphinx_class_decl,
+                    class_.parent_fully_qualified_name)
         self.add_params('tparam', class_.template_parameters, x, level=1)
         x.add_blank_like()
         self.add_constructors(class_, x)
@@ -161,3 +162,32 @@ class ListingDirective(DoxyDirective):
         model_object = self.ctx.index.find(self.arguments[0])
         listing = self.ctx.listing.read(model_object)
         x.add_code_block(listing)
+
+
+@directive
+class ComputeMethodsDirective(DoxyDirective):
+    required_arguments = 1
+    optional_arguments = 0
+    has_content = False
+
+    def rst(self, x: RstBuilder):
+        methods_namespace = self.arguments[0] + '::method'
+        method_ns = self.ctx.index.find(methods_namespace)
+        self.add_listing(method_ns, x, remove_empty_lines=True)
+        self._add_classes(method_ns, x)
+        self._add_typedefs(method_ns, x)
+
+    def _add_classes(self, method_ns, x: RstBuilder):
+        for class_ref in method_ns.class_refs:
+            class_fqn = class_ref.fully_qualified_name
+            class_ = self.ctx.index.find(class_fqn)
+            x.add_class(class_.kind, class_.name, class_.parent_fully_qualified_name)
+            if class_.doc and class_.doc.description:
+                self.add_description(class_.doc.description, x, level=1)
+
+    def _add_typedefs(self, method_ns, x: RstBuilder):
+        for typedef in method_ns.typedefs:
+            sphinx_decl = f'{typedef.name} = {typedef.type}'
+            x.add_typedef(sphinx_decl, typedef.parent_fully_qualified_name)
+            if typedef.doc and typedef.doc.description:
+                self.add_description(typedef.doc.description, x, level=1)

@@ -4,14 +4,14 @@ from . import model
 from .parser import Parser
 from .loader import ModelLoader, Transformer, TransformerPass
 
-class _LazyModelObject(object):
+class _IndexEntry(object):
     def __init__(self, loader: ModelLoader, refid: Text):
         self._loader = loader
         self._refid = refid
         self._model = None
 
     @property
-    def __model__(self):
+    def model(self):
         if not self._model:
             self._model = self._loader.load(self._refid)
             try:
@@ -20,42 +20,6 @@ class _LazyModelObject(object):
                 pass
         return self._model
 
-
-class _LazyModelProperty(object):
-    def __init__(self, wrapped_descriptor):
-        self._desc = wrapped_descriptor
-
-    def __get__(self, instance, owner):
-        return self._desc.__get__(instance.__model__, owner)
-
-    def __set__(self, instance, value):
-        return self._desc.__set__(instance.__model__, value)
-
-
-def _lazy_model(model_cls):
-    def wrapper(user_cls):
-        class Lazy(_LazyModelObject, model_cls, user_cls):
-            def __init__(self, loader: ModelLoader, refid: Text,
-                               *args, **kwargs):
-                _LazyModelObject.__init__(self, loader, refid)
-                user_cls.__init__(self, *args, **kwargs)
-                model_cls.__init__(self)
-
-        for field in model_cls.__fields__:
-            desc = getattr(Lazy, field)
-            setattr(Lazy, field, _LazyModelProperty(desc))
-
-        return Lazy
-    return wrapper
-
-
-@_lazy_model(model.Class)
-class LazyClass(object):
-    pass
-
-@_lazy_model(model.Namespace)
-class LazyNamespace(object):
-    pass
 
 class Index(object):
     def __init__(self, parser: Parser, loader: ModelLoader):
@@ -67,7 +31,7 @@ class Index(object):
 
     def find(self, query: str):
         try:
-            model = self._index[query].__model__
+            model = self._index[query].model
         except KeyError:
             try:
                 model = self._find_inner(query)
@@ -78,19 +42,23 @@ class Index(object):
     @utils.return_dict
     def _initialize(self):
         index = self._parser.parse('index')
-        allowed_kinds = {'class', 'strcut', 'namespace'}
+        allowed_kinds = {'class', 'struct', 'namespace', 'typedef'}
         for entry in index.compound:
             if entry.kind in allowed_kinds:
-                model_object = _LazyModelObject(self._loader, entry.refid)
+                model_object = _IndexEntry(self._loader, entry.refid)
                 yield entry.name, model_object
 
     def _find_inner(self, query):
         parent_name, name = utils.split_compound_name(query)
-        model = self._index[parent_name].__model__
-        if hasattr(model, 'functions'):
-            for func in model.functions:
-                if func.name == name:
-                    return func
+        model = self._index[parent_name].model
+        attrs_to_check = [ 'functions', 'typedefs' ]
+        try:
+            for attr in attrs_to_check:
+                for inner in getattr(model, attr):
+                    if inner.name == name:
+                        return inner
+        except AttributeError:
+            pass
         raise KeyError(f'Cannot find {name} inside {parent_name}')
 
 
@@ -118,7 +86,7 @@ def to_yaml(index: Index, discard_empty=False, **kwargs):
 @utils.return_dict
 def _to_dict(index: Index):
     for k, v in index._index.items():
-        yield k, _index_to_dict(v.__model__)
+        yield k, _index_to_dict(v.model)
 
 def _discard_empty(obj):
     if isinstance(obj, list):

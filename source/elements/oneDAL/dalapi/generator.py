@@ -7,21 +7,14 @@ class RstBuilder(object):
         self._filename = filename
         self._lineno = lineno
 
-    def add_class(self, declaration: str, namespace: str = None, level=0):
-        assert declaration
-        if namespace:
-            self(f'.. cpp:namespace:: {namespace}', level)
-            self.add_blank_like()
-        self(f'.. cpp:class:: {declaration}', level)
-        self.add_blank_like()
+    def add_class(self, kind: str, declaration: str, namespace: str = None, level=0):
+        self._add_name(kind, declaration, namespace, level)
+
+    def add_typedef(self, declaration: str, namespace: str = None, level=0):
+        self._add_name('type', declaration, namespace, level)
 
     def add_function(self, declaration: str, namespace: str = None, level=0):
-        assert declaration
-        if namespace:
-            self(f'.. cpp:namespace:: {namespace}', level)
-            self.add_blank_like()
-        self(f'.. cpp:function:: {declaration}', level)
-        self.add_blank_like()
+        self._add_name('function', declaration, namespace, level)
 
     def add_param(self, tag: str, name: str, doc_text: str, level=0):
         assert tag in ['param', 'tparam']
@@ -57,6 +50,14 @@ class RstBuilder(object):
     # TODO: Remove
     def __call__(self, string: str = '', level:int = 0):
         self._rst_list.append(' ' * level * 3 + string, self._filename, self._lineno)
+
+    def _add_name(self, tag: str, declaration: str, namespace: str = None, level=0):
+        assert declaration
+        if namespace:
+            self(f'.. cpp:namespace:: {namespace}', level)
+            self.add_blank_like()
+        self(f'.. cpp:{tag}:: {declaration}', level)
+        self.add_blank_like()
 
     def _format_text(self, text):
         text = text.strip()

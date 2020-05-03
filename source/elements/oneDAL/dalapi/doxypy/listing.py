@@ -41,12 +41,18 @@ class _ListingEntry(object):
         self._model_object = model_object
         self._content = None
 
-    def read(self):
+    @utils.return_list
+    def read(self, remove_empty_lines: bool):
         if not self._content:
             filename = os.path.join(self._base_dir, self._filename)
             with open(filename, 'r') as f:
                 self._content = self._read(f.readlines())
-        return self._content
+        if remove_empty_lines:
+            for line in self._content:
+                if line.strip():
+                    yield line
+        else:
+            yield from self._content
 
     @utils.return_list
     def _read(self, lines):
@@ -108,8 +114,8 @@ class ListingReader(object):
         self._base_dir = base_dir
         self._cache = {}
 
-    def read(self, model_object) -> List[Text]:
+    def read(self, model_object, remove_empty_lines=False) -> List[Text]:
         fqn = model_object.fully_qualified_name
         if fqn not in self._cache:
             self._cache[fqn] = _ListingEntry(self._base_dir, model_object)
-        return self._cache[fqn].read()
+        return self._cache[fqn].read(remove_empty_lines)

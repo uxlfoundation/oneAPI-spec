@@ -5,16 +5,24 @@
 namespace onedal::knn {
 
 namespace method {
+   /// Tag-type that denotes `brute-force <t_math_brute_force_>`_ computational
+   /// method.
    struct bruteforce {};
+
+   /// Tag-type that denotes `k-d tree <t_math_kd_tree>`_ computational method.
    struct kd_tree {};
+
+   /// Alias tag-type for `brute-force <t_math_brute_force_>`_ computational
+   /// method.
    using by_default = bruteforce;
 } // namespace method
 
-
 /// @tparam Float  The floating-point type that the algorithm uses for
-///                intermediate computations. Can be `float` or `double`.
+///                intermediate computations. Can be :cpp:expr:`float` or
+///                :cpp:expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
-///                be `method::bruteforce` or `method::kd_tree`.
+///                be :cpp:expr:`method::bruteforce` or
+///                :cpp:expr:`method::kd_tree`.
 template <typename Float = float,
           typename Method = method::by_default>
 class descriptor {
@@ -37,7 +45,7 @@ public:
 
 class model {
 public:
-   /// Creates a new instance of class with the default property values.
+   /// Creates a new instance of the class with the default property values.
    model();
 };
 
@@ -66,14 +74,15 @@ public:
    const model& get_model() const;
 };
 
-
 /// Runs the training operation for $k$-NN classifier. For more details see
 /// `onedal::train`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
-///                intermediate computations. Can be `float` or `double`.
+///                intermediate computations. Can be :cpp:expr:`float` or
+///                :cpp:expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
-///                be `method::bruteforce` or `method::kd_tree`.
+///                be :cpp:expr:`method::bruteforce` or
+///                :cpp:expr:`method::kd_tree`.
 ///
 /// @param[in] desc  Descriptor for the algorithm
 /// @param[in] input Input values for the algorithm
