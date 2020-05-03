@@ -252,7 +252,6 @@ Result
 ~~~~~~
 .. onedal_class:: onedal::knn::train_result
 
-
 Operation
 ~~~~~~~~~
 .. onedal_func:: onedal::knn::train
@@ -274,3 +273,7 @@ Input
 Result
 ~~~~~~
 .. onedal_class:: onedal::knn::infer_result
+
+Operation
+~~~~~~~~~
+.. onedal_func:: onedal::knn::infer

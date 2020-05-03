@@ -75,7 +75,7 @@ public:
 };
 
 /// Runs the training operation for $k$-NN classifier. For more details see
-/// `onedal::train`.
+/// :cpp:expr:`onedal::train`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
 ///                intermediate computations. Can be :cpp:expr:`float` or
@@ -87,10 +87,6 @@ public:
 /// @param[in] desc  Descriptor for the algorithm
 /// @param[in] input Input values for the algorithm
 /// @return result Result of the training
-///
-/// @pre input.data.is_empty == false
-/// @post result.model.is_empty == false
-/// @post result.model.is_empty == false
 template <typename Float, typename Method>
 train_result train(const descriptor<Float, Method>& desc,
                    const train_input& input);
@@ -120,6 +116,23 @@ public:
    /// @remark default = model{}
    const table& get_labels() const;
 };
+
+/// Runs the inference operation for $k$-NN classifier. For more details see
+/// :cpp:expr:`onedal::infer`.
+///
+/// @tparam Float  The floating-point type that the algorithm uses for
+///                intermediate computations. Can be :cpp:expr:`float` or
+///                :cpp:expr:`double`.
+/// @tparam Method Tag-type that specifies an implementation of algorithm. Can
+///                be :cpp:expr:`method::bruteforce` or
+///                :cpp:expr:`method::kd_tree`.
+///
+/// @param[in] desc  Descriptor of the algorithm
+/// @param[in] input Input values for the inference operation
+/// @return result Result of the inference
+template <typename Float, typename Method>
+infer_result infer(const descriptor<Float, Method>& desc,
+                   const infer_input& input);
 
 } // namespace onedal::knn
 
