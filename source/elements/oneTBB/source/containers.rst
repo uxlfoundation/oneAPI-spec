@@ -20,8 +20,21 @@ Queues
 Unordered associative containers
 --------------------------------
 
+.. toctree::
+    :maxdepth: 1
+
+    containers/concurrent_unordered_map_cls.rst
+    containers/concurrent_unordered_multimap.rst
+    containers/concurrent_unordered_set_cls.rst
+    containers/concurrent_unordered_multiset.rst
+
 Ordered associative containers
 ------------------------------
 
 Auxiliary classes
------------------ 
+-----------------
+
+.. toctree::
+    :maxdepth: 1
+
+    containers/node_handles_cls.rst

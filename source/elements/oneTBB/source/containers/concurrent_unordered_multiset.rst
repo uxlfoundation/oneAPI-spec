@@ -1,10 +1,11 @@
-========================
-concurrent_unordered_set
-========================
-**[containers.concurrent_unordered_set]**
+=============================
+concurrent_unordered_multiset
+=============================
+**[containers.concurrent_unordered_multiset]**
 
-``tbb::concurrent_unordered_set`` is a class template represents an unordered sequence of unique elements
+``tbb::concurrent_unordered_multiset`` is a class template represents an unordered sequence of elements
 which supports concurrent insertion, lookup and traversal, but not concurrent erasure.
+The container allows to store multiple equivalent elements.
 
 Class Template Synopsis
 -----------------------
@@ -18,7 +19,7 @@ Class Template Synopsis
                   typename Hash = std::hash<Key>,
                   typename KeyEqual = std::equal_to<Key>,
                   typename Allocator = tbb_allocator<std::pair<const Key, T>>>
-        class concurrent_unordered_set {
+        class concurrent_unordered_multiset {
         public:
             using key_type = Key;
             using value_type = Key;
@@ -49,62 +50,62 @@ Class Template Synopsis
             using const_range_type = <implementation-defined constant ContainerRange>;
 
             // Construction, destruction, copying
-            concurrent_unordered_set();
+            concurrent_unordered_multiset();
 
-            explicit concurrent_unordered_set( size_type bucket_count, const hasher& hash = hasher(),
-                                               const key_equal& equal = key_equal(),
-                                               const allocator_type& alloc = allocator_type() );
+            explicit concurrent_unordered_multiset( size_type bucket_count, const hasher& hash = hasher(),
+                                                    const key_equal& equal = key_equal(),
+                                                    const allocator_type& alloc = allocator_type() );
 
-            concurrent_unordered_set( size_type bucket_count, const allocator_type& alloc );
+            concurrent_unordered_multiset( size_type bucket_count, const allocator_type& alloc );
 
-            concurrent_unordered_set( size_type bucket_count, const hasher& hash,
-                                      const allocator_type& alloc );
+            concurrent_unordered_multiset( size_type bucket_count, const hasher& hash,
+                                           const allocator_type& alloc );
 
-            explicit concurrent_unordered_set( const allocator_type& alloc );
+            explicit concurrent_unordered_multiset( const allocator_type& alloc );
 
             template <typename InputIterator>
-            concurrent_unordered_set( InputIterator first, InputIterator last,
-                                      size_type bucket_count = /*implementation-defined*/,
-                                      const hasher& hash = hasher(),
-                                      const key_equal& equal = key_equal(),
-                                      const allocator_type& alloc = allocator_type() );
+            concurrent_unordered_multiset( InputIterator first, InputIterator last,
+                                           size_type bucket_count = /*implementation-defined*/,
+                                           const hasher& hash = hasher(),
+                                           const key_equal& equal = key_equal(),
+                                           const allocator_type& alloc = allocator_type() );
 
             template <typename Inputiterator>
-            concurrent_unordered_set( InputIterator first, InputIterator last,
-                                      size_type bucket_count, const allocator_type& alloc );
+            concurrent_unordered_multiset( InputIterator first, InputIterator last,
+                                           size_type bucket_count, const allocator_type& alloc );
 
             template <typename InputIterator>
-            concurrent_unordered_set( InputIterator first, InputIterator last,
-                                      size_type bucket_count, const hasher& hash,
-                                      const allocator_type& alloc );
+            concurrent_unordered_multiset( InputIterator first, InputIterator last,
+                                           size_type bucket_count, const hasher& hash,
+                                           const allocator_type& alloc );
 
-            concurrent_unordered_set( std::initializer_list<value_type> init,
-                                      size_type bucket_count = /*implementation-defined*/,
-                                      const hasher& hash = hasher(),
-                                      const key_equal& equal = key_equal(),
-                                      const allocator_type& alloc = allocator_type() );
+            concurrent_unordered_multiset( std::initializer_list<value_type> init,
+                                           size_type bucket_count = /*implementation-defined*/,
+                                           const hasher& hash = hasher(),
+                                           const key_equal& equal = key_equal(),
+                                           const allocator_type& alloc = allocator_type() );
 
-            concurrent_unordered_set( std::initializer_list<value_type> init,
-                                      size_type bucket_count, const allocator_type& alloc );
+            concurrent_unordered_multiset( std::initializer_list<value_type> init,
+                                           size_type bucket_count, const allocator_type& alloc );
 
-            concurrent_unordered_set( std::initializer_list<value_type> init,
-                                      size_type bucket_count, const hasher& hash,
-                                      const allocator_type& alloc );
+            concurrent_unordered_multiset( std::initializer_list<value_type> init,
+                                           size_type bucket_count, const hasher& hash,
+                                           const allocator_type& alloc );
 
-            concurrent_unordered_set( const concurrent_unordered_set& other );
-            concurrent_unordered_set( const concurrent_unordered_set& other,
-                                      const allocator_type& alloc );
+            concurrent_unordered_multiset( const concurrent_unordered_multiset& other );
+            concurrent_unordered_multiset( const concurrent_unordered_multiset& other,
+                                           const allocator_type& alloc );
 
-            concurrent_unordered_set( concurrent_unordered_set&& other );
-            concurrent_unordered_set( concurrent_unordered_set&& other,
-                                      const allocator_type& alloc );
+            concurrent_unordered_multiset( concurrent_unordered_multiset&& other );
+            concurrent_unordered_multiset( concurrent_unordered_multiset&& other,
+                                           const allocator_type& alloc );
 
-            ~concurrent_unordered_set();
+            ~concurrent_unordered_multiset();
 
-            concurrent_unordered_set& operator=( const concurrent_unordered_set& other );
-            concurrent_unordered_set& operator=( concurrent_unordered_set&& other ) noexcept(/*See details*/);
+            concurrent_unordered_multiset& operator=( const concurrent_unordered_multiset& other );
+            concurrent_unordered_multiset& operator=( concurrent_unordered_multiset&& other ) noexcept(/*See details*/);
 
-            concurrent_unordered_set& operator=( std::initializer_list<value_type> init );
+            concurrent_unordered_multiset& operator=( std::initializer_list<value_type> init );
 
             allocator_type get_allocator() const;
 
@@ -176,7 +177,7 @@ Class Template Synopsis
             template <typename K>
             node_type unsafe_extract( const K& key );
 
-            void swap( concurrent_unordered_set& other );
+            void swap( concurrent_unordered_multiset& other );
 
             // Lookup
             size_type count( const key_type& key ) const;
@@ -240,7 +241,7 @@ Class Template Synopsis
             // Parallel iteration
             range_type range();
             const_range_type range() const;
-        }; // class concurrent_unordered_set
+        }; // class concurrent_unordered_multiset
     } // namespace tbb
 
 Requirements:
@@ -255,18 +256,18 @@ Requirements:
 Description
 -----------
 
-``tbb::concurrent_unordered_set`` is an unordered sequence, which elements are organized into
+``tbb::concurrent_unordered_multiset`` is an unordered sequence, which elements are organized into
 buckets. The value of the hash function ``Hash`` for ``Key`` object determines the number of the bucket
 in which the corresponding element would be placed.
 
 If the qualified-id ``Hash::transparent_key_equal`` is valid and denotes a type, member type
-``concurrent_unordered_set::key_equal`` defines as the value of this qualified-id.
+``concurrent_unordered_multiset::key_equal`` defines as the value of this qualified-id.
 In this case the program is ill-formed if any of the following conditions are met:
 
 * The template parameter ``KeyEqual`` is different from ``std::equal_to<Key>``.
 * Qualified-id ``Hash::transparent_key_equal::is_transparent`` is not valid or not denotes a type.
 
-Otherwise, member type ``concurrent_unordered_set::key_equal`` defines as the value of the
+Otherwise, member type ``concurrent_unordered_multiset::key_equal`` defines as the value of the
 template parameter ``KeyEqual``.
 
 Member functions
@@ -275,50 +276,50 @@ Member functions
 .. toctree::
     :maxdepth: 1
 
-    concurrent_unordered_set_cls/construction_destruction_copying.rst
-    concurrent_unordered_set_cls/iterators.rst
-    concurrent_unordered_set_cls/size_and_capacity.rst
-    concurrent_unordered_set_cls/safe_modifiers.rst
-    concurrent_unordered_set_cls/unsafe_modifiers.rst
-    concurrent_unordered_set_cls/lookup.rst
-    concurrent_unordered_set_cls/bucket_interface.rst
-    concurrent_unordered_set_cls/hash_policy.rst
-    concurrent_unordered_set_cls/observers.rst
-    concurrent_unordered_set_cls/parallel_iteration.rst
+    concurrent_unordered_multiset_cls/construction_destruction_copying.rst
+    concurrent_unordered_multiset_cls/iterators.rst
+    concurrent_unordered_multiset_cls/size_and_capacity.rst
+    concurrent_unordered_multiset_cls/safe_modifiers.rst
+    concurrent_unordered_multiset_cls/unsafe_modifiers.rst
+    concurrent_unordered_multiset_cls/lookup.rst
+    concurrent_unordered_multiset_cls/bucket_interface.rst
+    concurrent_unordered_multiset_cls/hash_policy.rst
+    concurrent_unordered_multiset_cls/observers.rst
+    concurrent_unordered_multiset_cls/parallel_iteration.rst
 
 Non-member functions
 --------------------
 
 These functions provides binary comparison and swap operations
-on ``tbb::concurrent_unordered_set`` objects.
+on ``tbb::concurrent_unordered_multiset`` objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_unordered_set`` as a type alias for which
+in the same internal namespace and define ``tbb::concurrent_unordered_multiset`` as a type alias for which
 the non-member functions are reachable only via argument dependent lookup.
 
 .. code:: cpp
 
     template <typename T, typename Hash,
               typename KeyEqual, typename Allocator>
-    void swap( concurrent_unordered_set<T, Hash, KeyEqual, Allocator>& lhs,
-               concurrent_unordered_set<T, Hash, KeyEqual, Allocator>& rhs );
+    void swap( concurrent_unordered_multiset<T, Hash, KeyEqual, Allocator>& lhs,
+               concurrent_unordered_multiset<T, Hash, KeyEqual, Allocator>& rhs );
 
     template <typename T, typename Hash,
               typename KeyEqual, typename Allocator>
-    bool operator==( const concurrent_unordered_set<T, Hash, KeyEqual, Allocator>& lhs,
-                     const concurrent_unordered_set<T, Hash, KeyEqual, Allocator>& rhs );
+    bool operator==( const concurrent_unordered_multiset<T, Hash, KeyEqual, Allocator>& lhs,
+                     const concurrent_unordered_multiset<T, Hash, KeyEqual, Allocator>& rhs );
 
     template <typename T, typename Hash,
               typename KeyEqual, typename Allocator>
-    bool operator==( const concurrent_unordered_set<T, Hash, KeyEqual, Allocator>& lhs,
-                     const concurrent_unordered_set<T, Hash, KeyEqual, Allocator>& rhs );
+    bool operator==( const concurrent_unordered_multiset<T, Hash, KeyEqual, Allocator>& lhs,
+                     const concurrent_unordered_multiset<T, Hash, KeyEqual, Allocator>& rhs );
 
 .. toctree::
     :maxdepth: 1
 
-    concurrent_unordered_set_cls/non_member_swap.rst
-    concurrent_unordered_set_cls/non_member_binary_comparisons.rst
+    concurrent_unordered_multiset_cls/non_member_swap.rst
+    concurrent_unordered_multiset_cls/non_member_binary_comparisons.rst
 
 Other
 -----
@@ -326,4 +327,4 @@ Other
 .. toctree::
     :maxdepth: 1
 
-    concurrent_unordered_set_cls/deduction_guides.rst
+    concurrent_unordered_multiset_cls/deduction_guides.rst
