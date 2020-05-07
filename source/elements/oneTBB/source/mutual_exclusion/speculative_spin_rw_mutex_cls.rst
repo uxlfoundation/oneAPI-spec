@@ -1,7 +1,7 @@
 =========================
 speculative_spin_rw_mutex
 =========================
-**[synchronization.speculative_spin_rw_mutex]**
+**[mutex.speculative_spin_rw_mutex]**
 
 A ``speculative_spin_rw_mutex`` is a class that models the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`,
 and for processors which support hardware transactional memory (such as Intel® Transactional Synchronization Extensions (Intel® TSX))

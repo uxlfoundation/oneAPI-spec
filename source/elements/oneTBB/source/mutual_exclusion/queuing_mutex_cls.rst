@@ -1,7 +1,7 @@
 =============
 queuing_mutex
 =============
-**[synchronization.queuing_mutex]**
+**[mutex.queuing_mutex]**
 
 A ``queuing_mutex`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`. The ``queuing_mutex`` is not recursive.
 The ``queuing_mutex`` is fair, threads acquire a lock on a mutex in the order that they request it.

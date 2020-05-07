@@ -9,8 +9,8 @@ A loop template with an ``auto_partitioner`` attempts to minimize range splittin
 ample opportunities for work-stealing.
 
 The range subdivision is initially limited to S subranges, where S is proportional to the number of
-threads specified by the :doc:`global_contol <../../task_scheduler/tbb_global_control>`
-or :doc:`task_arena <../../task_scheduler/task_arena_cls>`.
+threads specified by the :doc:`global_contol <../../task_scheduler/scheduling_controls/global_control_cls>`
+or :doc:`task_arena <../../task_scheduler/task_arena/task_arena_cls>`.
 Each of these subranges is not divided further unless it is stolen by an idle thread.
 If stolen, it is further subdivided to create additional subranges. Thus a loop template with an
 ``auto_partitioner`` creates additional subranges only when necessary to balance a load.

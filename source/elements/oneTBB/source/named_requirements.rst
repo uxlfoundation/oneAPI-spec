@@ -80,3 +80,11 @@ Containers
    :titlesonly:
 
    named_requirements/containers/container_range.rst
+
+Task scheduler
+--------------
+.. toctree::
+   :titlesonly:
+
+   named_requirements/task_scheduler/suspend_func.rst
+

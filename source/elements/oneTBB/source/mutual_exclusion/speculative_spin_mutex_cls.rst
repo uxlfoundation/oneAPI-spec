@@ -1,7 +1,7 @@
 ======================
 speculative_spin_mutex
 ======================
-**[synchronization.speculative_spin_mutex]**
+**[mutex.speculative_spin_mutex]**
 
 A ``speculative_spin_mutex`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>` using a spin lock,
 and for processors which support hardware transactional memory (such as Intel® Transactional Synchronization Extensions (Intel® TSX))

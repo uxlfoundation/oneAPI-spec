@@ -1,7 +1,7 @@
 ==========
 null_mutex
 ==========
-**[synchronization.null_mutex]**
+**[mutex.null_mutex]**
 
 A ``null_mutex`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>` concept syntactically, but does nothing.
 It is useful for instantiating a template that expects a Mutex, but no mutual exclusion is actually needed for that instance.

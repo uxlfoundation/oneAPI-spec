@@ -1,7 +1,7 @@
 ================
 queuing_rw_mutex
 ================
-**[synchronization.queuing_rw_mutex]**
+**[mutex.queuing_rw_mutex]**
 
 A ``queuing_rw_mutex`` is a class that models the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>` concept.
 The ``queuing_rw_mutex`` is not recursive. The ``queuing_rw_mutex`` is fair, threads acquire a lock on a mutex in the order that they request it.

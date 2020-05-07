@@ -103,4 +103,4 @@ flow_control Class
 
 See also:
 
-* :doc:`task_group_context <../../task_scheduler/task_group_context>`
+* :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>`

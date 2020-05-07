@@ -1,7 +1,7 @@
 =============
 null_rw_mutex
 =============
-**[synchronization.null_rw_mutex]**
+**[mutex.null_rw_mutex]**
 
 A ``null_rw_mutex`` is a class that models the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>` syntactically, but does nothing.
 The ``null_rw_mutex`` class also satisfies all syntatic requirements of shared mutex type from the [thread.sharedmutex.requirements] ISO C++ section, but does nothing.

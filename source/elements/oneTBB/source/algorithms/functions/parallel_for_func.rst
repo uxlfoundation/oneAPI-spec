@@ -81,7 +81,7 @@ Do not rely upon any particular execution order for correctness. However, for ef
 
 In case of serial execution ``parallel_for`` performs iterations from left to right in the following sense.
 
-All overloads can accept a :doc:`task_group_context <../../task_scheduler/task_group_context>` object
+All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
 so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
 
 **Complexity**

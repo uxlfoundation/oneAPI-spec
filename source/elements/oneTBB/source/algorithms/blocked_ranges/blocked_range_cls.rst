@@ -25,8 +25,8 @@ to the loop templates ``parallel_for``, ``parallel_reduce``, or ``parallel_scan`
         class blocked_range {
         public:
             // types
-            typedef size_t size_type;
-            typedef Value const_iterator;
+            using size_type = size_t;
+            using const_iterator = Value;
 
             // constructors
             blocked_range( Value begin, Value end, size_type grainsize=1 );

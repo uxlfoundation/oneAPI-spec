@@ -118,7 +118,7 @@ The following table summarizes the library classes that model the `ReaderWriterM
 
 See also:
 
-* :doc:`spin_rw_mutex <../../mutual_exclusion/spin_mutex_rw_cls>`
+* :doc:`spin_rw_mutex <../../mutual_exclusion/spin_rw_mutex_cls>`
 * :doc:`speculative_spin_rw_mutex <../../mutual_exclusion/speculative_spin_rw_mutex_cls>`
 * :doc:`queuing_rw_mutex <../../mutual_exclusion/queuing_rw_mutex_cls>`
 * :doc:`null_rw_mutex <../../mutual_exclusion/null_rw_mutex_cls>`

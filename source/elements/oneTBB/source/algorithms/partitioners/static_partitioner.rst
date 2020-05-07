@@ -9,7 +9,8 @@ should not do additional load balancing.
 An algorithm with a ``static_partitioner`` distributes the range across threads in subranges
 of approximately equal size.  The number of subranges is equal to the number of
 threads that can possibly participate in task execution, as specified by
-:doc:`global_contol <../../task_scheduler/tbb_global_control>` or :doc:`task_arena <../../task_scheduler/task_arena_cls>` classes.
+:doc:`global_contol <../../task_scheduler/scheduling_controls/global_control_cls>`
+or :doc:`task_arena <../../task_scheduler/task_arena/task_arena_cls>` classes.
 These subranges are not further split.
 
 .. caution::

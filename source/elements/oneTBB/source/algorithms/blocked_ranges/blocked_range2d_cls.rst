@@ -51,8 +51,8 @@ Requirements:
 
 * The *RowValue* and *ColValue* shall meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
 
-Member functions
-----------------
+Member types
+------------
 
 .. code:: cpp
 
@@ -65,6 +65,9 @@ The type of the row values.
     using col_range_type = blocked_range<ColValue>;
 
 The type of the column values.
+
+Member functions
+----------------
 
 .. code:: cpp
 

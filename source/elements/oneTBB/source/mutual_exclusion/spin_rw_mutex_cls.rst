@@ -1,7 +1,7 @@
 =============
 spin_rw_mutex
 =============
-**[synchronization.spin_rw_mutex]**
+**[mutex.spin_rw_mutex]**
 
 A ``spin_rw_mutex`` is a class that models the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`
 and satisfies all requirements of shared mutex type from the [thread.sharedmutex.requirements] ISO C++ section.
