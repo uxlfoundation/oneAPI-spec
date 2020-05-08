@@ -25,6 +25,7 @@ Unordered associative containers
 .. toctree::
     :maxdepth: 1
 
+    containers/concurrent_hash_map_cls.rst
     containers/concurrent_unordered_map_cls.rst
     containers/concurrent_unordered_multimap.rst
     containers/concurrent_unordered_set_cls.rst
@@ -39,4 +40,5 @@ Auxiliary classes
 .. toctree::
     :maxdepth: 1
 
-    containers/node_handles_cls.rst
+    containers/auxiliary/tbb_hash_compare_cls.rst
+    containers/auxiliary/node_handles_cls.rst

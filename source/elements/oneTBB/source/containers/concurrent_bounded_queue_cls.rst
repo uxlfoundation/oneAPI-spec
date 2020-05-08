@@ -94,7 +94,7 @@ Requirements:
 
 * The type ``T`` shall meet the ``Erasable`` requirements from [container.requirements] ISO C++
   Standard section. Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ section.
+* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ Standard section.
 
 Member functions
 ----------------

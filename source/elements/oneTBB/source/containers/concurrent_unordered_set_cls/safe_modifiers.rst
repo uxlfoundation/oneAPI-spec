@@ -155,7 +155,7 @@ Emplacing elements
     ``false`` otherwise.
 
     **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ section.
+    from [container.requirements] ISO C++ Standard section.
 
 -----------------------------------------------------------------------------
 
@@ -171,7 +171,7 @@ Emplacing elements
     **Returns**: an ``iterator`` to the inserted element or to an existing equal element.
 
     **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ section.
+    from [container.requirements] ISO C++ Standard section.
 
 Merging containers
 ------------------

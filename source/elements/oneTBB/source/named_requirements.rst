@@ -79,6 +79,7 @@ Containers
 .. toctree::
    :titlesonly:
 
+   named_requirements/containers/hash_compare.rst
    named_requirements/containers/container_range.rst
 
 Task scheduler

@@ -27,7 +27,7 @@ operator[]
     ``std::piecewise_construct, std::forward_as_tuple(key), std::tuple<>()``.
 
     **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ section.
+    from [container.requirements] ISO C++ Standard section.
 
     **Returns**: a reference to ``item.second`` where ``item`` is the element with the key equal to ``key``.
 
@@ -42,6 +42,6 @@ operator[]
     ``std::piecewise_construct, std::forward_as_tuple(std::move(key)), std::tuple<>()``.
 
     **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ section.
+    from [container.requirements] ISO C++ Standard section.
 
     **Returns**: a reference to ``item.second`` where ``item`` is the element with the key equal to ``key``.

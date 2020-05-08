@@ -45,6 +45,7 @@ A ``node handle`` is a container-specific move-only nested type (exposed as `con
 represents a node outside of any container instance. It allows reading and modifying the data stored in the node,
 and inserting the node into a compatible container instance. The following containers have compatible node types and
 may exchange nodes:
+
 * ``concurrent_map`` and ``concurrent_multimap`` with the same ``key_type``, ``mapped_type`` and
   ``allocator_type``.
 * ``concurrent_set`` and ``concurrent_multiset`` with the same ``value_type`` and ``allocator_type``.
@@ -69,11 +70,25 @@ Constructors
 
     Constructs an empty node handle.
 
+-----------------------------------------------------------------------------
+
     .. code:: cpp
 
         node-handle( node-handle&& other );
 
     Constructs a node handle that takes ownership of the node from ``other``.
+
+    ``other`` is left in an empty state.
+
+Assignment
+~~~~~~~~~~
+
+    .. code:: cpp
+
+        node-handle& operator=( node-handle&& other );
+
+    Transfers ownership of the node from ``other`` to ``*this``.
+    If ``*this`` was not empty before transfering, destroys and deallocates the stored node.
 
     Move assignes the stored allocator if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
     is ``true``.
@@ -107,7 +122,9 @@ State
 
         bool empty() const;
 
-    ``Returns``: ``true`` if the node handle is empty, ``false`` otherwise.
+    **Returns**: ``true`` if the node handle is empty, ``false`` otherwise.
+
+-----------------------------------------------------------------------------
 
     .. code:: cpp
 
@@ -128,6 +145,8 @@ Access to the stored element
 
     The behavior is undefined if the node handle is empty.
 
+-----------------------------------------------------------------------------
+
     .. code:: cpp
 
         mapped_type& mapped() const;
@@ -137,6 +156,8 @@ Access to the stored element
     **Returns**: a reference to the value of the element stored in the owned node.
 
     The behavior is undefined if the node handle is empty.
+
+-----------------------------------------------------------------------------
 
     .. code:: cpp
 
