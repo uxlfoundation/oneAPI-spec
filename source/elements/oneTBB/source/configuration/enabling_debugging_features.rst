@@ -1,8 +1,9 @@
 ===========================
 Enabling Debugging Features
 ===========================
+**[configuration.debug_features]**
 
-Four macros control certain debugging features. In general, it is useful to compile with
+The following macros control certain debugging features. In general, it is useful to compile with
 these features on for development code, and off for production code, because the features
 may decrease performance. The table below summarizes the macros and their default values. A
 value of 1 enables the corresponding feature; a value of 0 disables the feature.
@@ -18,9 +19,7 @@ value of 1 enables the corresponding feature; a value of 0 disables the feature.
    -------------------------------- ------------------------------------------ ------------------------------
    ``TBB_USE_ASSERT``               ``TBB_USE_DEBUG``                          Enable internal assertion checking. Can significantly slow performance.
    -------------------------------- ------------------------------------------ ------------------------------
-   ``TBB_USE_THREADING_TOOLS``      ``TBB_USE_DEBUG``                          Enable full support for analysis tools.
-   -------------------------------- ------------------------------------------ ------------------------------
-   ``TBB_USE_PERFORMANCE_WARNINGS`` ``TBB_USE_DEBUG``                          Enable warnings about performance issues.
+   ``TBB_USE_PROFILING_TOOLS``      ``TBB_USE_DEBUG``                          Enable full support for analysis tools.
    ================================ ========================================== ==============================
 
 
@@ -28,35 +27,18 @@ TBB_USE_ASSERT Macro
 --------------------
 
 The macro ``TBB_USE_ASSERT`` controls whether error checking is enabled in the
-header files. Define ``TBB_USE_ASSERT`` as ``1`` to enable error
-checking.
+header files. Define ``TBB_USE_ASSERT`` as ``1`` to enable error checking.
 
 If an error is detected, the library prints an error message on ``stderr`` and
 calls the standard C routine ``abort``. To stop a program when internal error
 checking detects a failure, place a breakpoint on ``tbb::assertion_failure``.
 
-.. tip::
-
-   On Microsoft Windows* operating systems, debug builds implicitly set
-   ``TBB_USE_ASSERT`` to 1 by default
-
-
-TBB_USE_THREADING_TOOLS Macro
+TBB_USE_PROFILING_TOOLS Macro
 -----------------------------
 
-The macro ``TBB_USE_THREADING_TOOLS`` controls support for Intel®
+The macro ``TBB_USE_PROFILING_TOOLS`` controls support for Intel®
 Inspector XE, Intel® VTune™ Amplifier XE and Intel® Advisor.
 
-Define ``TBB_USE_THREADING_TOOLS`` as ``1`` to enable full support
-for these tools. Leave ``TBB_USE_THREADING_TOOLS`` undefined or zero to enable
+Define ``TBB_USE_PROFILING_TOOLS`` as ``1`` to enable full support
+for these tools. Leave ``TBB_USE_PROFILING_TOOLS`` undefined or zero to enable
 top performance in release builds, at the expense of turning off some support for tools.
-
-TBB_USE_PERFORMANCE_WARNINGS Macro
-----------------------------------
-
-The macro ``TBB_USE_PERFORMANCE_WARNINGS`` controls performance
-warnings. Define it to be 1 to enable the warnings. Currently, the warnings affected are:
-
-* Some that report poor hash functions for ``concurrent_hash_map``. Enabling
-  the warnings may impact performance.
-* Slow misaligned 8-byte atomic stores in 32-bit programs for Intel® processors.
