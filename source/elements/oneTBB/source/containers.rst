@@ -9,6 +9,11 @@ simultaneously invoke certain methods on the same container.
 Sequences
 ---------
 
+.. toctree::
+    :maxdepth: 1
+
+    containers/concurrent_vector_cls.rst
+
 Queues
 ------
 
