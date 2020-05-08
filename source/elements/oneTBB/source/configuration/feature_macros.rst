@@ -30,6 +30,3 @@ it can be obtained with ``'gcc -dumpversion'`` command).
 For example, if you use libstdc++ from GCC 4.9.2, define
 ``TBB_USE_GLIBCXX_VERSION=40902``.
 
-See also:
-
-* :doc:`Exceptions <../exceptions>`

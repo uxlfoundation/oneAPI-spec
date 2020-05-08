@@ -26,9 +26,9 @@ In this regard, this function acts as a signal for the task scheduler.
 
 .. note::
 
-   Note, that there are no guarantees, that the same thread that called ``tbb::task::suspend`` will continue execution after the suspended point.
-   However, these guarantees are provided for the outermost blocking oneTBB calls
-   (such as ``tbb::parallel_for`` and ``tbb::flow::graph::wait_for_all``) and ``tbb::task_arena::execute`` calls.
+    Note, that there are no guarantees, that the same thread that called ``tbb::task::suspend`` will continue execution after the suspended point.
+    However, these guarantees are provided for the outermost blocking oneTBB calls
+    (such as ``tbb::parallel_for`` and ``tbb::flow::graph::wait_for_all``) and ``tbb::task_arena::execute`` calls.
 
 Example
 -------
