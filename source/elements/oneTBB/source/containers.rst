@@ -15,6 +15,8 @@ Queues
 .. toctree::
     :maxdepth: 1
 
+    containers/concurrent_queue_cls.rst
+    containers/concurrent_bounded_queue_cls.rst
     containers/concurrent_priority_queue_cls.rst
 
 Unordered associative containers
