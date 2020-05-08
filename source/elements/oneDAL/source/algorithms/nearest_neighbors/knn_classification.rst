@@ -45,16 +45,16 @@ Let :math:`X = \{ x_1, \ldots, x_n \}` be the training set of
 :math:`p`-dimensional feature vectors, let :math:`Y = \{ y_1, \ldots, y_n \}` be
 the set of class labels, where :math:`y_i \in \{ 0, \ldots, c-1 \}`, :math:`1
 \leq i \leq n`. Given :math:`X`, :math:`Y` and the number of nearest neighbors
-:math:`k`, the problem is to build a model that allows efficient distance
-computation between the feature vectors in training and inference sets at the
-inference stage.
+:math:`k`, the problem is to build a model that allows distance computation
+between the feature vectors in training and inference sets at the inference
+stage.
 
 .. _t_math_brute_force:
 
 Training method: *brute-force*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The training operation produces the model that simply stores all the
-feature vectors from the initial training set :math:`X`.
+The training operation produces the model that stores all the feature vectors
+from the initial training set :math:`X`.
 
 
 .. _t_math_kd_tree:
@@ -70,9 +70,9 @@ training set :math:`X` (for more details, see :ref:`kd_tree`).
 Inference
 ---------
 Let :math:`X' = \{ x_1', \ldots, x_m' \}` be the inference set of
-:math:`p`-dimensional feature vectors. Given :math:`X'`, the model produced
-at the training stage and the number of nearest neighbors :math:`k`, the problem
-is to predict the label :math:`y_j'` for each :math:`x_j'`, :math:`1 \leq j \leq
+:math:`p`-dimensional feature vectors. Given :math:`X'`, the model produced at
+the training stage and the number of nearest neighbors :math:`k`, the problem is
+to predict the label :math:`y_j'` for each :math:`x_j'`, :math:`1 \leq j \leq
 m`, by performing the following steps:
 
 #. Identify the set :math:`N(x_j') \subseteq X` of the :math:`k` feature vectors
@@ -83,98 +83,8 @@ m`, by performing the following steps:
    fraction of vectors in :math:`N(x_j')` whose labels :math:`y_j` are equal to
    :math:`l`:
 
-   **Option 1: Detailed.** All mathematical formalism is preserved. There is a
-   need for :math:`\Omega, \mathcal{X}, \mathcal{Y}`, etc. definition in math
-   notations section.
-
    .. math::
       :label: p_predict
-      :nowrap:
-
-      \begin{align*}
-      & \Omega = \mathcal{X} \times \mathcal{Y}, \quad
-      X, X' \subset \mathcal{X}, \quad
-      Y, Y' \subset \mathcal{Y}. \\
-
-      & P(\{ (x, y) \in \Omega : y = l    \} \; | \;
-        \{ (x, y) \in \Omega : x = x_j' \}) = \frac{1}{| N(x_j') |}
-      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
-      \quad 1 \leq j \leq m, \; 0 \leq l < c.
-      \end{align*}
-
-
-   **Option 2: Less detailed.** All mathematical formalism is preserved. There
-   is a need for :math:`\Omega, \omega, \mathcal{X}, \mathcal{Y}`, etc.
-   definition in math notations section. The problem is that the :math:`\omega`
-   meaning is not clear.
-
-   .. math::
-      :label: p_predict_2
-      :nowrap:
-
-      \begin{align*}
-      & X, X' \subset \mathcal{X}, \quad
-      Y, Y' \subset \mathcal{Y}, \quad
-      \omega = (x, y) \in \mathcal{X} \times \mathcal{Y}. \\
-
-      & P(\{ \omega : y = l    \} \; | \;
-        \{ \omega : x = x_j' \}) = \frac{1}{| N(x_j') |}
-      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
-      \quad 1 \leq j \leq m, \; 0 \leq l < c.
-      \end{align*}
-
-
-   **Option 3: The least detailed.** Some math formalism is omitted, curvy brackets
-   are still there. Not clear what is :math:`(x, l)` here. Need definitions for
-   :math:`\mathcal{X}, \mathcal{Y}`.
-
-   .. math::
-      :label: p_predict_3
-      :nowrap:
-
-      \begin{align*}
-      & \Omega = \mathcal{X} \times \mathcal{Y}, \quad
-      X, X' \subset \mathcal{X}, \quad
-      Y, Y' \subset \mathcal{Y}. \\
-
-      & P(\{ (x, l) : x \in \mathcal{X}   \} \; | \;
-        \{ (x_j', y) : y \in \mathcal{Y} \}) = \frac{1}{| N(x_j') |}
-      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
-      \quad 1 \leq j \leq m, \; 0 \leq l < c.
-      \end{align*}
-
-
-   **Option 4: Lite.** Minimize mathematical formalism, focus on meaning. Add
-   formal definition of :math:`P(\cdot)` (see option 1) to math notations:
-
-   .. math::
-      :label: p_predict_4
-      :nowrap:
-
-      \begin{align*}
-      & \Omega = \mathcal{X} \times \mathcal{Y}, \quad
-      X, X' \subset \mathcal{X}, \quad
-      Y, Y' \subset \mathcal{Y}. \\
-
-      &P(y = l \; | \; x = x_j') = P(\{ (x, y) \in \Omega : y = l    \} \; | \;
-                                     \{ (x, y) \in \Omega : x = x_j' \}).
-      \end{align*}
-
-
-   Use the simplified form across oneDAL spec.
-
-   .. math::
-      :label: p_predict_4_2
-
-      P(y = l \; | \; x = x_j') = \frac{1}{| N(x_j') |}
-      \Big| \big\{ x_r \in N(x_j') : y_r = l \big\} \Big|,
-      \quad 1 \leq j \leq m, \; 0 \leq l < c.
-
-
-   **Option 5: Super lite.** Do not say anything about conditional probability:
-
-   .. math::
-      :label: p_predict_5
 
       P_{jl} = \frac{1}{| N(x_j') |} \Big| \big\{ x_r \in N(x_j') : y_r = l
       \big\} \Big|, \quad 1 \leq j \leq m, \; 0 \leq l < c.
@@ -186,7 +96,7 @@ m`, by performing the following steps:
    .. math::
       :label: y_predict
 
-      y_j' = \mathrm{arg}\max_{0 \leq l < c} P(y = l \; | \; x = x_j'),
+      y_j' = \mathrm{arg}\max_{0 \leq l < c} P_{jl},
       \quad 1 \leq j \leq m.
 
 
