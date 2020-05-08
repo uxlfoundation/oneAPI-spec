@@ -1,7 +1,7 @@
 =================
 ReaderWriterMutex
 =================
-**[general_information.named_requirements.rw_mutex]**
+**[req.rw_mutex]**
 
 The `ReaderWriterMutex` requirement extends the :doc:`Mutex Requirement <mutex>` to include the notion of reader-writer locks.
 It introduces a boolean parameter ``write`` that specifies whether a writer lock (``write = true``) or reader lock (``write = false``) is being requested.

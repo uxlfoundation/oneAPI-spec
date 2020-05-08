@@ -1,7 +1,7 @@
 =====
 Mutex
 =====
-**[general_information.named_requirements.mutex]**
+**[req.mutex]**
 
 The mutexes and locks here have relatively spartan interfaces that are designed for high performance.
 The interfaces enforce the *scoped locking pattern*, which is widely used in C++ libraries because:
