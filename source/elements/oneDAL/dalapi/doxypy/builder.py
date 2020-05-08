@@ -81,8 +81,16 @@ class _BuilderMixins(object):
 class DescriptionBuilder(_BuilderMixins):
     def build(self):
         return model.Description(
-            runs = self._build_runs(),
+            runs = self._remove_trailing_runs(self._build_runs()),
         )
+
+    def _remove_trailing_runs(self, runs):
+        end_index = - 1
+        for i in range(len(runs) - 1, -1, -1):
+            if runs[i].content.strip():
+               end_index = i
+               break
+        return runs[:end_index + 1]
 
     @utils.return_list
     def _build_runs(self):
@@ -93,10 +101,10 @@ class DescriptionBuilder(_BuilderMixins):
                 code = self.textify(content.value)
                 yield model.Run(code, 'code')
             if content.name == 'formula':
-                code = self.textify(content.value)
-                yield model.Run(code, 'math')
+                formula = self.textify(content.value)
+                yield model.Run(formula.replace('$', ''), 'math')
             elif not content.name:
-                if content.value.strip():
+                if content.value.strip('\n\r\t'):
                     yield from self._split_math(content.value)
 
     def _split_math(self, text):
@@ -130,15 +138,14 @@ class DocBuilder(_BuilderMixins):
 
     @utils.return_list
     def _build_simplesect(self, kind: str):
-        for para in self._filter_simplesect_para(kind):
-            yield self.textify(para)
+        for simplesect in self._filter_simplesect(kind):
+            yield build(DescriptionBuilder, simplesect)
 
-    def _filter_simplesect_para(self, kind: str):
-        return (para_inner
+    def _filter_simplesect(self, kind: str):
+        return (simplesect
             for para in self.src.para
             for simplesect in para.simplesect
                 if simplesect.kind == kind
-            for para_inner in simplesect.para
         )
 
 

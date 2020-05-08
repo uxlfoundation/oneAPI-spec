@@ -18,27 +18,26 @@ namespace method {
 } // namespace method
 
 /// @tparam Float  The floating-point type that the algorithm uses for
-///                intermediate computations. Can be :cpp:expr:`float` or
-///                :cpp:expr:`double`.
+///                intermediate computations. Can be :expr:`float` or
+///                :expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
-///                be :cpp:expr:`method::bruteforce` or
-///                :cpp:expr:`method::kd_tree`.
+///                be :expr:`method::bruteforce` or :expr:`method::kd_tree`.
 template <typename Float = float,
           typename Method = method::by_default>
 class descriptor {
 public:
-   /// Creates a new instance of the class with the given `class_count`,
-   /// `neighbor_count` property values
+   /// Creates a new instance of the class with the given :literal:`class_count`
+   /// and :literal:`neighbor_count` property values
    explicit descriptor(std::int64_t class_count,
                        std::int64_t neighbor_count);
 
    /// The number of classes $c$
-   /// @invariant class_count > 1
+   /// @invariant :expr:`class_count > 1`
    std::int64_t get_class_count() const;
    descriptor& set_class_count(std::int64_t);
 
    /// The number of neighbors $k$
-   /// @invariant neighbor_count > 0
+   /// @invariant :expr:`neighbor_count > 0`
    std::int64_t get_neighbor_count() const;
    descriptor& set_neighbor_count(std::int64_t);
 };
@@ -75,18 +74,23 @@ public:
 };
 
 /// Runs the training operation for $k$-NN classifier. For more details see
-/// :cpp:expr:`onedal::train`.
+/// :expr:`onedal::train`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
-///                intermediate computations. Can be :cpp:expr:`float` or
-///                :cpp:expr:`double`.
+///                intermediate computations. Can be :expr:`float` or
+///                :expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
-///                be :cpp:expr:`method::bruteforce` or
-///                :cpp:expr:`method::kd_tree`.
+///                be :expr:`method::bruteforce` or :expr:`method::kd_tree`.
 ///
-/// @param[in] desc  Descriptor for the algorithm
-/// @param[in] input Input values for the algorithm
-/// @return result Result of the training
+/// @param[in] desc  Descriptor of the algorithm
+/// @param[in] input Input data for the training operation
+/// @return result Result of the training operation
+///
+/// @pre :expr:`input.data.has_data == true`
+/// @pre :expr:`input.labels.has_data == true`
+/// @pre :expr:`input.data.rows == input.labels.rows`
+/// @pre :expr:`input.labels[i] >= 0`
+/// @pre :expr:`input.labels[i] < desc.class_count`
 template <typename Float, typename Method>
 train_result train(const descriptor<Float, Method>& desc,
                    const train_input& input);
@@ -118,18 +122,18 @@ public:
 };
 
 /// Runs the inference operation for $k$-NN classifier. For more details see
-/// :cpp:expr:`onedal::infer`.
+/// :expr:`onedal::infer`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
-///                intermediate computations. Can be :cpp:expr:`float` or
-///                :cpp:expr:`double`.
+///                intermediate computations. Can be :expr:`float` or
+///                :expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
-///                be :cpp:expr:`method::bruteforce` or
-///                :cpp:expr:`method::kd_tree`.
+///                be :expr:`method::bruteforce` or
+///                :expr:`method::kd_tree`.
 ///
 /// @param[in] desc  Descriptor of the algorithm
-/// @param[in] input Input values for the inference operation
-/// @return result Result of the inference
+/// @param[in] input Input data for the inference operation
+/// @return result Result of the inference operation
 template <typename Float, typename Method>
 infer_result infer(const descriptor<Float, Method>& desc,
                    const infer_input& input);

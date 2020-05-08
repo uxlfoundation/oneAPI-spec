@@ -88,10 +88,10 @@ class Description(object):
 
 @model_object
 class Doc(object):
-    invariants: List[Text] = []
-    postconditions: List[Text] = []
-    preconditions: List[Text] = []
-    remarks: List[Text] = []
+    invariants: List[Description] = []
+    postconditions: List[Description] = []
+    preconditions: List[Description] = []
+    remarks: List[Description] = []
     description: Description = None
 
 @model_object
@@ -171,6 +171,6 @@ class Visitor(object):
 
 def visit(node, visitor: Visitor):
     if visitor.enter(node):
-        for child in node.iter():
+        for child in _iter_model_object(node):
             visit(child, visitor)
         visitor.leave(node)

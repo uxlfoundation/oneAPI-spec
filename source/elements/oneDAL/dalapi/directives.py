@@ -46,7 +46,10 @@ class DoxyDirective(MacroDirective):
             elif run.kind == 'math':
                 rst += f':math:`{run.content}`'
             elif run.kind == 'code':
-                rst += f'`{run.content}`'
+                if hasattr(run, 'directive'):
+                    rst += f'{run.directive}`{run.content}`'
+                else:
+                    rst += f'`{run.content}`'
         return rst.strip()
 
     def add_description(self, description, x: RstBuilder, level=0):
@@ -62,6 +65,9 @@ class DoxyDirective(MacroDirective):
         self.add_params('tparam', func.template_parameters, x, level=level + 1)
         self.add_params('param', func.parameters, x, level=level + 1)
         x.add_blank_like()
+        if func.doc:
+            self.add_preconditions(func.doc.preconditions, x, level=level + 1)
+            self.add_preconditions(func.doc.postconditions, x, level=level + 1)
 
     def add_params(self, tag, params, x: RstBuilder, level=0):
         for param in params:
@@ -72,6 +78,27 @@ class DoxyDirective(MacroDirective):
     def add_listing(self, model_object, x: RstBuilder, remove_empty_lines=False):
         listing = self.ctx.listing.read(model_object, remove_empty_lines)
         x.add_code_block(listing)
+
+    def add_invariants(self, invariants, x: RstBuilder, level=0):
+        if invariants:
+            x('Invariants', level=level)
+            for invariant in invariants:
+                x.add(f'| ' + self.format_description(invariant), level=level + 1)
+            x.add_blank_like()
+
+    def add_preconditions(self, preconditions, x: RstBuilder, level=0):
+        if preconditions:
+            x('Preconditions', level=level)
+            for precondition in preconditions:
+                x.add(f'| ' + self.format_description(precondition), level=level + 1)
+            x.add_blank_like()
+
+    def add_postconditions(self, postconditions, x: RstBuilder, level=0):
+        if postconditions:
+            x('Postconditions', level=level)
+            for postcondition in postconditions:
+                x.add(f'| ' + self.format_description(postcondition), level=level + 1)
+            x.add_blank_like
 
 
 @directive
@@ -132,11 +159,7 @@ class ClassDirective(DoxyDirective):
             x()
         if property_def.doc:
             invariants = property_def.doc.invariants
-            if invariants and len(invariants) > 0:
-                x('Invariants', level=2)
-                for invariant in invariants:
-                    x(f'| :cpp:expr:`{invariant}`', level=3)
-                x()
+            self.add_invariants(invariants, x, level=2)
 
 
 @directive

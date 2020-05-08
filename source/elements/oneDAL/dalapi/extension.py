@@ -62,9 +62,10 @@ class PropertyTransformer(doxypy.TransformerPass):
     def _find_default(cls, info):
         if info.getter.doc:
             for remark in info.getter.doc.remarks:
-                match = cls._default_re.match(remark)
-                if match:
-                    return match.group(1)
+                if len(remark.runs) == 1 and remark.runs[0].kind == 'text':
+                    match = cls._default_re.match(remark.runs[0].content)
+                    if match:
+                        return match.group(1)
 
     @classmethod
     def _get_properties_info(cls, node):
@@ -80,6 +81,48 @@ class PropertyTransformer(doxypy.TransformerPass):
             match = cls._accessor_re.match(func.name)
             if match and match.group(1) == direction:
                 yield match.group(2), func
+
+
+class RstDescriptionTransformer(doxypy.TransformerPass):
+    _sphinx_directive_re = re.compile(r':([\w:]+):$')
+
+    def enter(self, node):
+        return True
+
+    def transform(self, node):
+        if isinstance(node, doxypy.model.Description):
+            self._transform_runs(node)
+
+    @classmethod
+    def _transform_runs(cls, desc: doxypy.model.Description):
+        for i in range(1, len(desc.runs)):
+            pre_run = desc.runs[i - 1]
+            cur_run = desc.runs[i]
+            if pre_run.kind == 'text' and cur_run.kind == 'code':
+                new_content, directive = cls._try_remove_sphinx_directive(pre_run.content)
+                if directive:
+                    pre_run.content = new_content
+                    cur_run.directive = cls._map_directive(directive)
+
+    @classmethod
+    def _try_remove_sphinx_directive(cls, text):
+        match = None
+        def rep_f(m):
+            nonlocal match
+            match = m
+            return ''
+        new_text = cls._sphinx_directive_re.sub(rep_f, text)
+        return new_text, match.group(1) if match else None
+
+    @classmethod
+    def _map_directive(cls, directive):
+        cpp_directives = { 'expr', 'texpr', 'any', 'class',
+                           'struct', 'func', 'member', 'var',
+                           'type', 'concept', 'enum', 'enumerator' }
+        if directive in cpp_directives:
+            return f':cpp:{directive}:'
+        else:
+            return f':{directive}:'
 
 
 class PathResolver(object):
@@ -187,6 +230,7 @@ class Context(object):
         if self._index is None:
             self._index = doxypy.index(self._paths.doxygen_dir, [
                 PropertyTransformer(),
+                RstDescriptionTransformer(),
             ])
         return self._index
 
