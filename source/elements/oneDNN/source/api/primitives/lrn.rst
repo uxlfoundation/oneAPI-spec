@@ -1,5 +1,5 @@
 ..
-  Copyright 2019 Intel Corporation
+  Copyright 2019-2020 Intel Corporation
 
 .. default-domain:: cpp
 
