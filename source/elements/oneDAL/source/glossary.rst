@@ -10,40 +10,40 @@ Machine learning terms
 .. glossary::
     :sorted:
 
-    Attribute
-        A particular property or quality of a real object or an event.
-        Has a defined type and domain.
+    Categorical feature
+        An :term:`feature` with a discrete set of possible values.
 
-    Categorical attibute
-        An :term:`attribute` with a discrete set of possible values.
-
-    Continuous attribute
-        An :term:`attribute` with values in a domain of real numbers.
+    Continuous feature
+        An :term:`feature` with values in a domain of real numbers.
 
     Classification
         A :term:`supervised machine-learning problem<Supervised learning>` to assign
-        :term:`categorical<Categorical attribute>` :term:`labels<Label>` to
+        :term:`categorical<Categorical feature>` :term:`labels<Label>` to
         :term:`feature vectors<Feature vector>` describing input objects.
 
     Dataset
-        A collection of :term:`instances<Instance>`.
+        A collection of :term:`observations<Observation>`.
 
     Feature
-        A pair of :term:`attribute` information and a corresponding value.
+        A particular property or quality of a real object or an event.
+        Has a defined type and domain.
+
+        Synonyms: attribute, variable
+
+    Feature value
+        A single point in the domain of the :term:`feature`.
 
     Feature vector
         A vector that encodes information about single real object or an event.
-        Contains at least one :term:`feature`.
+        Contains at least one :term:`feature value`.
 
     Inference
         A process of obtaining outputs from the :term:`model` created on the :term:`training` stage.
 
+        Synonyms: prediction.
+
     Inference set
         A :term:`dataset` used on the :term:`inference` stage to make an outputs from the :term:`model`.
-
-    Instance
-        A vector of at least one :term:`feature` value and zero or more :term:`label<Label>` values.
-        Each of :term:`labels<Label>` and :term:`features<Feature>` can encode different objects or events.
 
     Label
         :term:`Feature` of some object or event which is unavailable on the :term:`inference` stage
@@ -54,11 +54,10 @@ Machine learning terms
         :term:`inference` on a new :term:`dataset`.
 
     Observation
-        A synonym for :term:`instance`.
+        A vector of at least one :term:`feature` value and zero or more :term:`label<Label>` values.
+        Each of :term:`labels<Label>` and :term:`features<Feature>` can encode different objects or events.
 
-    Prediction
-        - A synonym for :term:`inference`.
-        - An output of the :term:`trained<Training>` :term:`model` when provided with an input :term:`instance`.
+        Synonyms: instance, sample.
 
     Regression
         A :term:`supervised machine-learning problem<Supervised learning>` to assign
@@ -67,9 +66,6 @@ Machine learning terms
     Response
         A value of a single :term:`label`. For example, response may be a flag
         indicating that an observation belongs to a particular class.
-
-    Sample
-        A synonym for :term:`instance`.
 
     Supervised learning
         :term:`Training` process with :term:`labeled<Label>` training set.
@@ -82,9 +78,6 @@ Machine learning terms
 
     Training set
         A :term:`dataset` used on the :term:`training` stage to create a :term:`model`.
-
-    Variable
-        A synonym for an :term:`attribute`.
 
 |dal_short_name| library terms
 ==============================
