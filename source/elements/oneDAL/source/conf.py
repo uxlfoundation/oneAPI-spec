@@ -14,10 +14,13 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join('..','..','..','conf')))
+sys.path.insert(0, os.path.abspath(os.path.join('../../../conf')))
 # element_conf needs to import this conf
 sys.path.insert(0, os.path.abspath('.'))
 
 project = 'oneDAL'
 
 from element_conf import *
+
+# oneDAL project directory is needed for `dalapi` extension
+onedal_project_dir = '../'

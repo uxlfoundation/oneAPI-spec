@@ -89,7 +89,7 @@ html_theme = 'sphinx_rtd_theme'
 #
 html_theme_options = {
   'includehidden': False
-} 
+}
 
 html_context = {
     'display_github': True,
@@ -238,3 +238,5 @@ breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
 
+# oneDAL project directory is needed for `dalapi` extension
+onedal_project_dir = 'elements/oneDAL'
