@@ -486,7 +486,6 @@ Operation semantics
                                          const kmeans::infer_input& input)
 
    :tparam Descriptor: K-Means algorithm descriptor :expr:`kmeans::desc`.
-   :param desc: Dssndscsnc
 
    Preconditions
       | :expr:`input.data.is_empty == false`

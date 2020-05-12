@@ -89,6 +89,7 @@ public:
 /// @pre :expr:`input.data.has_data == true`
 /// @pre :expr:`input.labels.has_data == true`
 /// @pre :expr:`input.data.rows == input.labels.rows`
+/// @pre :expr:`input.data.columns == 1`
 /// @pre :expr:`input.labels[i] >= 0`
 /// @pre :expr:`input.labels[i] < desc.class_count`
 template <typename Float, typename Method>
@@ -134,6 +135,12 @@ public:
 /// @param[in] desc  Descriptor of the algorithm
 /// @param[in] input Input data for the inference operation
 /// @return result Result of the inference operation
+///
+/// @pre  :expr:`input.data.has_data == true`
+/// @post :expr:`result.labels.rows == input.data.rows`
+/// @post :expr:`result.labels.columns == 1`
+/// @post :expr:`result.labels[i] >= 0`
+/// @post :expr:`result.labels[i] < desc.class_count`
 template <typename Float, typename Method>
 infer_result infer(const descriptor<Float, Method>& desc,
                    const infer_input& input);
