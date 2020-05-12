@@ -12,6 +12,11 @@ Machine learning terms
 
     Attribute
         A particular property or quality of a real object or an event.
+        Has a defined type and domain.
+
+    Classification
+        A supervised machine-learning problem to assign categorical :term:`labels<Label>`
+        to :term:`feature vectors<Feature vector>` describing input objects.
 
     Dataset
         A collection of :term:`instances<Instance>`.
@@ -23,23 +28,30 @@ Machine learning terms
         A vector that encodes information about single real object or an event.
         Contains at least one :term:`feature`.
 
+    Inference
+        A process of obtaining outputs from the :term:`model` created on the :term:`training` stage
+
     Instance
-        A vector of at least one :term:`feature` values and zero or more :term:`label<Label>` values.
+        A vector of at least one :term:`feature` value and zero or more :term:`label<Label>` values.
         Each of :term:`labels<Label>` and :term:`features<Feature>` can encode different objects or events.
 
     Label
         :term:`Feature` of some object or event which is present on the :term:`training` stage but
-        unavaliable on the :term:`prediction` stage.
+        unavaliable on the :term:`inference` stage.
+
+    Model
+        A result of :term:`training` machine-learning algorithm that stores information necessary to run
+        :term:`inference` on a new :term:`dataset`.
 
     Observation
         A synonym for :term:`instance`.
 
     Prediction
-        - A process of obtaining outputs from the :term:`model` created on the :term:`training` stage.
+        - A synonym for :term:`inference`.
         - An output of the :term:`trained<Training>` :term:`model` when provided with an input :term:`instance`.
 
     Response
-        A single value corresponding to an :term:`observation`. For example, response may be a label
+        A value of a single :term:`label`. For example, response may be a flag
         indicating that an observation belongs to a particular class.
 
     Sample
@@ -49,10 +61,7 @@ Machine learning terms
         A search process of the best parameter values of the :term:`model`.
 
     Variable
-        A single attribute of described object with defined type and domain.
-
-    Workload
-        A task of applying a |dal_short_name| algorithm to a dataset.
+        A synonym for an :term:`attribute`.
 
 |dal_short_name| library terms
 ==============================
@@ -67,13 +76,12 @@ Machine learning terms
     Immutability
         The object is immutable when it is not possible to change its state after it is constructed.
 
-    Model
-        A result of training machine-learning algorithm that stores information necessary to run
-        inference (prediction) on a new dataset.
-
     Online Mode
         The computation mode for an algorithm in |dal_short_name|, where the data needed for computation
         becomes available in parts over time.
+
+    Workload
+        A task of applying a |dal_short_name| algorithm to a dataset.
 
 Other
 =====
