@@ -14,9 +14,16 @@ Machine learning terms
         A particular property or quality of a real object or an event.
         Has a defined type and domain.
 
+    Categorical attibute
+        An :term:`attribute` with a discrete set of possible values.
+
+    Continuous attribute
+        An :term:`attribute` with values in a domain of real numbers.
+
     Classification
-        A supervised machine-learning problem to assign categorical :term:`labels<Label>`
-        to :term:`feature vectors<Feature vector>` describing input objects.
+        A :term:`supervised machine-learning problem<Supervised learning>` to assign
+        :term:`categorical<Categorical attribute>` :term:`labels<Label>` to
+        :term:`feature vectors<Feature vector>` describing input objects.
 
     Dataset
         A collection of :term:`instances<Instance>`.
@@ -29,15 +36,18 @@ Machine learning terms
         Contains at least one :term:`feature`.
 
     Inference
-        A process of obtaining outputs from the :term:`model` created on the :term:`training` stage
+        A process of obtaining outputs from the :term:`model` created on the :term:`training` stage.
+
+    Inference set
+        A :term:`dataset` used on the :term:`inference` stage to make an outputs from the :term:`model`.
 
     Instance
         A vector of at least one :term:`feature` value and zero or more :term:`label<Label>` values.
         Each of :term:`labels<Label>` and :term:`features<Feature>` can encode different objects or events.
 
     Label
-        :term:`Feature` of some object or event which is present on the :term:`training` stage but
-        unavaliable on the :term:`inference` stage.
+        :term:`Feature` of some object or event which is unavailable on the :term:`inference` stage
+        and needs to be predicted.
 
     Model
         A result of :term:`training` machine-learning algorithm that stores information necessary to run
@@ -50,6 +60,10 @@ Machine learning terms
         - A synonym for :term:`inference`.
         - An output of the :term:`trained<Training>` :term:`model` when provided with an input :term:`instance`.
 
+    Regression
+        A :term:`supervised machine-learning problem<Supervised learning>` to assign
+        continuous :term:`labels<Label>` to :term:`feature vectors<Feature vector>` describing input objects.
+
     Response
         A value of a single :term:`label`. For example, response may be a flag
         indicating that an observation belongs to a particular class.
@@ -57,8 +71,17 @@ Machine learning terms
     Sample
         A synonym for :term:`instance`.
 
+    Supervised learning
+        :term:`Training` process with :term:`labeled<Label>` training set.
+
+    Unsupervised learning
+        :term:`Training` process where target :term:`labels<Label>` are not present in the training set.
+
     Training
         A search process of the best parameter values of the :term:`model`.
+
+    Training set
+        A :term:`dataset` used on the :term:`training` stage to create a :term:`model`.
 
     Variable
         A synonym for an :term:`attribute`.
