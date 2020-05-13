@@ -99,6 +99,7 @@ Flow Graph
    named_requirements/flow_graph/continue_node_body.rst
    named_requirements/flow_graph/gateway_type.rst
    named_requirements/flow_graph/function_node_body.rst
+   named_requirements/flow_graph/join_node_func_obj.rst
    named_requirements/flow_graph/input_node_body.rst
    named_requirements/flow_graph/multifunction_node_body.rst
    named_requirements/flow_graph/sequencer.rst
