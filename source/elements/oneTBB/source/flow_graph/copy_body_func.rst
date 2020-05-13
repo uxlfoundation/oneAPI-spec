@@ -1,39 +1,25 @@
-===========================
-copy_body Template Function
-===========================
+=========
+copy_body
+=========
+**[flow_graph.copy_body]**
 
+``copy_body`` is a function template that returns a copy of the body function object from the following
+nodes:
 
-Summary
--------
-
-A template function that returns a copy of the body function object
-from a 
-``continue_node``,
-``function_node``,
-``multifunction_node``,
-or 
-``source_node``.
-
-Syntax
-------
+* :doc:`continue_node <continue_node_cls>`
+* :doc:`function_node <func_node_cls>`
+* :doc:`multifunction_node <multifunc_node_cls>`
+* :doc:`input_node <input_node_cls>`
 
 .. code:: cpp
 
-   template< typename Body, typename Node >
-   Body copy_body( Node &n );
+    namespace tbb {
+    namespace flow {
 
+        // Defined in header <tbb/flow_graph.h>
 
-Header
-------
+        template< typename Body, typename Node >
+        Body copy_body( Node &n );
 
-.. code:: cpp
-
-   #include "tbb/flow_graph.h"
-
-
-See also:
-
-* :doc:`continue_node Template Class <continue_node_cls>`
-* :doc:`function_node Template Class <func_node_cls>`
-* :doc:`multifunction_node Template Class <multifunc_node_cls>`
-* :doc:`source_node Template Class <source_node_cls>`
+    } // namespace flow
+    } // namespace tbb

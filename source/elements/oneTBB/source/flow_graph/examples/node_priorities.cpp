@@ -1,10 +1,9 @@
 #include <iostream>
 #include <cmath>
 
-#include "tbb/task_scheduler_init.h"
 #include "tbb/tick_count.h"
+#include "tbb/global_control.h"
 
-#define TBB_PREVIEW_FLOW_GRAPH_FEATURES 1
 #include "tbb/flow_graph.h"
 
 void spin_for( double delta_seconds ) {
@@ -27,7 +26,7 @@ int main() {
     using namespace tbb::flow;
 
     const int max_threads = 2;
-    tbb::task_scheduler_init s(max_threads);
+    tbb::global_control control(tbb::global_control::max_allowed_parallelism, max_threads);
 
     graph g;
 

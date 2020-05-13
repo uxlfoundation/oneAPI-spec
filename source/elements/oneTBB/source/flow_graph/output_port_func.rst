@@ -1,32 +1,24 @@
-=============================
-output_port Template Function
-=============================
+===========
+output_port
+===========
+**[flow_graph.output_port]**
 
-
-Summary
--------
-
-A template function that given a ``split_node``, ``multifunction_node`` or ``composite_node`` returns a reference to a specific output port.
-
-Syntax
-------
+A template function that returns a reference to a specific output port of a given
+``join_node``, ``indexer_node`` or ``composite_node``.
 
 .. code:: cpp
 
-   template<size_t N, typename NT>
-   typename flow::tuple_element<N, typename NT::output_ports_type>::type&
-   output_port(NT &n);
-           
+    // Defined in header <tbb/flow_graph.h>
 
+    namespace tbb {
+    namespace flow {
 
-Header
-------
+        template<size_t N, typename NodeType>
+        /*implementation-defined*/& output_port(NodeType &n);
 
-.. code:: cpp
-
-   #include "tbb/flow_graph.h"
-
-
+    } // namespace flow
+    } // namespace tbb
+ 
 See also:
 
 * :doc:`split_node Template Class <split_node_cls>`
