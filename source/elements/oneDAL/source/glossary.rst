@@ -15,18 +15,15 @@ Machine learning terms
 
         Synonyms: nominal feature.
 
+    Classification
+        A :term:`supervised machine-learning problem<Supervised learning>` of assigning
+        discrete :term:`labels<Label>` (:term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`)
+        to :term:`feature vectors<Feature vector>`.
+
     Continuous feature
         A :term:`feature` with values in a domain of real numbers.
 
         Synonyms: quantitative feature.
-
-    Ordinal feature
-        A :term:`feature` with a discrete set of possible values and some ordering between them.
-
-    Classification
-        A :term:`supervised machine-learning problem<Supervised learning>` to assign
-        discrete :term:`labels<Label>` (:term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`)
-        to :term:`feature vectors<Feature vector>` describing input objects.
 
     Dataset
         A collection of :term:`observations<Observation>`.
@@ -45,15 +42,16 @@ Machine learning terms
         Contains at least one :term:`feature value`.
 
     Inference
-        A process of obtaining outputs from the :term:`model` created on the :term:`training` stage.
+        A process of applying a :term:`trained<Training>` :term:`model` to the :term:`inference set` with a goal to
+        predict :term:`responses<Response>` of the :term:`labels<Label>`.
 
         Synonyms: prediction.
 
     Inference set
-        A :term:`dataset` used on the :term:`inference` stage to make an outputs from the :term:`model`.
+        An unlabeled :term:`dataset` used at the :term:`inference` stage to make an outputs from the :term:`model`.
 
     Label
-        :term:`Feature` of some object or event which is unavailable on the :term:`inference` stage
+        :term:`Feature` of some object or event which is unavailable at the :term:`inference` stage
         and needs to be predicted.
 
     Model
@@ -66,10 +64,13 @@ Machine learning terms
 
         Synonyms: instance, sample.
 
+    Ordinal feature
+        A :term:`feature` with a discrete set of possible values and some ordering between them.
+
     Regression
-        A :term:`supervised machine-learning problem<Supervised learning>` to assign
+        A :term:`supervised machine-learning problem<Supervised learning>` of assigning
         :term:`continuous<Continuous feature>` :term:`labels<Label>` to
-        :term:`feature vectors<Feature vector>` describing input objects.
+        :term:`feature vectors<Feature vector>`.
 
     Response
         A value of a single :term:`label`. For example, response may be a flag
@@ -78,14 +79,14 @@ Machine learning terms
     Supervised learning
         :term:`Training` process with :term:`labeled<Label>` training set.
 
-    Unsupervised learning
-        :term:`Training` process where target :term:`labels<Label>` are not present in the training set.
-
     Training
-        A search process of the best parameter values of the :term:`model`.
+        A search process of the best :term:`model`.
 
     Training set
-        A :term:`dataset` used on the :term:`training` stage to create a :term:`model`.
+        A :term:`dataset` used at the :term:`training` stage to create a :term:`model`.
+
+    Unsupervised learning
+        :term:`Training` process where target :term:`labels<Label>` are not present in the training set.
 
 |dal_short_name| library terms
 ==============================
@@ -97,29 +98,29 @@ Machine learning terms
         The computation mode for an algorithm in |dal_short_name|, where all the data needed for
         computation is available at the start and fits the memory of the device on which the computations are performed.
 
-    Data type
-        An integral or floating-point type which is used to physically store the data.
+    Contiguous data
+        A special property of the :term:`data format`: the data are stored as one contiguous memory block.
 
     Data format
         The representation of internal structure of the data: this information is enough to efficiently access them.
 
-    Contiguous data
-        A special property of the :term:`data format`: the data are stored as one contiguous memory block.
+    Data type
+        An integral or floating-point type which is used to physically store the data.
 
     Homogeneous data
         A special property of the :term:`data format`: all the :term:`features<Feature>` have the same type and domain.
+
+    Immutability
+        The object is immutable if it is not possible to change its state after creation.
+
+    Online Mode
+        The computation mode for an algorithm in |dal_short_name|, where the data needed for computation
+        becomes available in parts over time.
 
     Reference-counted object
         A |dal_short_name| object which stores the number of references to the unique implementation.
         Such object has a lightweight copy constructor and assignment operator, which simply increases the number of references.
         Implementation is automatically freed when the number of references becomes equal to zero.
-
-    Immutability
-        The object is immutable when it is not possible to change its state after it is constructed.
-
-    Online Mode
-        The computation mode for an algorithm in |dal_short_name|, where the data needed for computation
-        becomes available in parts over time.
 
     Workload
         A task of applying a |dal_short_name| algorithm to a dataset.
