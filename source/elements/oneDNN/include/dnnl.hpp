@@ -92,7 +92,7 @@ struct primitive {
         layer_normalization,
         /// An inner product primitive.
         inner_product,
-        /// A rnn primitive.
+        /// An RNN primitive.
         rnn,
         /// A binary primitive.
         binary,
@@ -119,12 +119,12 @@ struct primitive {
 
     /// Executes computations specified by the primitive in a specified stream.
     ///
-    /// Arguments are passed via an arguments map containing <index,
-    /// memory object> pairs. The index must be one of the `DNNL_ARG_*` values
-    /// such as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
+    /// Arguments are passed via an arguments map containing <index, memory
+    /// object> pairs. The index must be one of the `DNNL_ARG_*` values such
+    /// as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
     /// matching the one returned by
-    /// primitive_desc::query_md(#query::exec_arg_md, index) unless using
-    /// dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
+    /// #dnnl::primitive_desc_base::query_md(#query::exec_arg_md, index)
+    /// unless using dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
     ///
     /// @param stream Stream object. The stream must belong to the same engine
     ///     as the primitive.
@@ -134,12 +134,12 @@ struct primitive {
 
     /// Executes computations specified by the primitive in a specified stream.
     ///
-    /// Arguments are passed via an arguments map containing <index,
-    /// memory object> pairs. The index must be one of the `DNNL_ARG_*` values
-    /// such as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
+    /// Arguments are passed via an arguments map containing <index, memory
+    /// object> pairs. The index must be one of the `DNNL_ARG_*` values such
+    /// as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
     /// matching the one returned by
-    /// primitive_desc::query_md(#query::exec_arg_md, index) unless using
-    /// dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
+    /// #dnnl::primitive_desc::query_md(#query::exec_arg_md, index) unless
+    /// using dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
     ///
     /// @param stream Stream object. The stream must belong to the same engine
     ///     as the primitive.
@@ -678,11 +678,12 @@ struct memory {
     enum class data_type {
         /// Undefined data type (used for empty memory descriptors).
         undef,
-        /// 16-bit/half-precision floating point.
+        /// [16-bit/half-precision floating point](https://en.wikipedia.org/wiki/Half-precision_floating-point_format).
         f16,
-        /// non-standard 16-bit floating point with 7-bit mantissa.
+        /// non-standard
+        /// [16-bit floating point with 7-bit mantissa](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format).
         bf16,
-        /// 32-bit/single-precision floating point.
+        /// [32-bit/single-precision floating point](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
         f32,
         /// 32-bit signed integer.
         s32,
@@ -698,7 +699,7 @@ struct memory {
     ///
     ///  - Domain-agnostic names, i.e. names that do not depend on the tensor
     ///    usage in the specific primitive. These names use letters from `a`
-    ///    to `l` to denote logical dimensions and form the order in which the
+    ///    to `f` to denote logical dimensions and form the order in which the
     ///    dimensions are laid in memory. For example,
     ///    #dnnl::memory::format_tag::ab is used to denote a 2D tensor where the
     ///    second logical dimension (denoted as `b`) is the innermost, i.e.
@@ -1060,7 +1061,7 @@ struct memory {
         /// An equality operator.
         /// @param other Another memory descriptor.
         /// @returns Whether this and the other memory descriptors have
-        ///     the same format tag, dimensions, strides, blocking, etc.
+        ///     the same format tag, dimensions, strides, etc.
         bool operator==(const desc &other) const;
 
         /// An inequality operator.
@@ -1148,7 +1149,7 @@ struct memory {
     /// @param stream Stream to use to execute padding in.
     void set_data_handle(void *handle, const stream &stream) const;
 
-    /// Sets data handle.
+    /// Sets the underlying memory buffer.
     ///
     /// See documentation for
     /// #dnnl::memory::set_data_handle(void *, const stream &) const
@@ -1239,10 +1240,9 @@ struct post_ops {
     /// The kind of this post-op is #dnnl::primitive::kind::eltwise.
     ///
     /// In the simplest case when the elementwise is the only post-op, the
-    /// computations would be `dst[:] := scale * eltwise_op (op(...))`
-    /// instead of `dst[:] <- op(...)`.
-    ///
-    /// where eltwise_op is configured with the given parameters.
+    /// computations would be `dst[:] := scale * eltwise_op (op(...))` instead
+    /// of `dst[:] <- op(...)`, where eltwise_op is configured with the given
+    /// parameters.
     ///
     /// @param scale Scaling factor.
     /// @param algorithm Elementwise algorithm.
@@ -4970,7 +4970,7 @@ struct vanilla_rnn_forward : public primitive {
 
 /// Vanilla RNN backward propagation primitive.
 struct vanilla_rnn_backward : public primitive {
-    /// Vanilla RNN descriptor backward propagation primitive.
+    /// Descriptor for a vanilla RNN backward propagation primitive.
     struct desc {
         /// Constructs a descriptor for a vanilla RNN backward propagation
         /// primitive.
@@ -5066,7 +5066,7 @@ struct vanilla_rnn_backward : public primitive {
                 float beta = 0.0f);
     };
 
-    /// Primitive descriptor for a RNN backward propagation primitive.
+    /// Primitive descriptor for an RNN backward propagation primitive.
     struct primitive_desc : public rnn_primitive_desc_base {
         /// Default constructor. Produces an empty object.
         primitive_desc();
