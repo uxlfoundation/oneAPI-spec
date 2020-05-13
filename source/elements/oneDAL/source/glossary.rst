@@ -11,15 +11,22 @@ Machine learning terms
     :sorted:
 
     Categorical feature
-        An :term:`feature` with a discrete set of possible values.
+        A :term:`feature` with a discrete set of possible values without ordering.
+
+        Synonyms: nominal feature.
 
     Continuous feature
-        An :term:`feature` with values in a domain of real numbers.
+        A :term:`feature` with values in a domain of real numbers.
+
+        Synonyms: quantitative feature.
+
+    Ordinal feature
+        A :term:`feature` with a discrete set of possible values and some ordering between them.
 
     Classification
         A :term:`supervised machine-learning problem<Supervised learning>` to assign
-        :term:`categorical<Categorical feature>` :term:`labels<Label>` to
-        :term:`feature vectors<Feature vector>` describing input objects.
+        discrete :term:`labels<Label>` (:term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`)
+        to :term:`feature vectors<Feature vector>` describing input objects.
 
     Dataset
         A collection of :term:`observations<Observation>`.
@@ -61,7 +68,8 @@ Machine learning terms
 
     Regression
         A :term:`supervised machine-learning problem<Supervised learning>` to assign
-        continuous :term:`labels<Label>` to :term:`feature vectors<Feature vector>` describing input objects.
+        :term:`continuous<Continuous feature>` :term:`labels<Label>` to
+        :term:`feature vectors<Feature vector>` describing input objects.
 
     Response
         A value of a single :term:`label`. For example, response may be a flag
@@ -88,6 +96,23 @@ Machine learning terms
     Batch Mode
         The computation mode for an algorithm in |dal_short_name|, where all the data needed for
         computation is available at the start and fits the memory of the device on which the computations are performed.
+
+    Data type
+        An integral or floating-point type which is used to physically store the data.
+
+    Data format
+        The representation of internal structure of the data: this information is enough to efficiently access them.
+
+    Contiguous data
+        A special property of the :term:`data format`: the data are stored as one contiguous memory block.
+
+    Homogeneous data
+        A special property of the :term:`data format`: all the :term:`features<Feature>` have the same type and domain.
+
+    Reference-counted object
+        A |dal_short_name| object which stores the number of references to the unique implementation.
+        Such object has a lightweight copy constructor and assignment operator, which simply increases the number of references.
+        Implementation is automatically freed when the number of references becomes equal to zero.
 
     Immutability
         The object is immutable when it is not possible to change its state after it is constructed.
