@@ -33,19 +33,19 @@ Erasing elements
     **Requirements**: the iterator ``pos`` should be valid, dereferenceable
     and point to the element in ``*this``.
 
----------------------------------------------------------------------------------------------
+-----------------------------------------------------
 
     .. code:: cpp
 
         size_type unsafe_erase( const key_type& key );
 
-    Removes all elements with the key equal to ``key`` if it exists in the container.
+    Removes all element with the key equal to ``key`` if it exists in the container.
 
     Invalidates all iterators and references to the removed elements.
 
     **Returns**: the number of removed elements.
 
----------------------------------------------------------------------------------------------
+-----------------------------------------------------
 
     .. code:: cpp
 
@@ -59,7 +59,7 @@ Erasing elements
 
     This overload only participates in overload resolution if all of the following statements are ``true``:
 
-    - The qualified-id ``hasher::transparent_key_equal`` is valid and denotes a type.
+    - The qualified-id ``key_compare::is_transparent`` is valid and denotes a type.
     - ``std::is_convertible<K, iterator>::value`` is ``false``.
     - ``std::is_convertible<K, const_iterator>::value`` is ``false``.
 
@@ -98,13 +98,13 @@ Extracting nodes
     **Requirements**: the iterator ``pos`` should be valid, dereferenceable
     and point to the element in ``*this``.
 
----------------------------------------------------------------------------------------------
+-----------------------------------------------------
 
     .. code:: cpp
 
         node_type unsafe_extract( const key_type& key );
 
-    If at least one element with the key equal to ``key`` exists, transfers ownership of one of these element
+    If at least one element with the key equal to ``key`` exists, transfers ownership of this element
     from the container to the node handle.
 
     No copy or move constructors of ``value_type`` are performed.
@@ -118,7 +118,7 @@ Extracting nodes
     **Returns**: the node handle that owns the extracted element or an empty node handle
     if an element with the key equal to ``key`` was not found.
 
----------------------------------------------------------------------------------------------
+-----------------------------------------------------
 
     .. code:: cpp
 
@@ -138,7 +138,7 @@ Extracting nodes
 
     This overload only participates in overload resolution if all of the following statements are ``true``:
 
-    - The qualified-id ``hasher::transparent_key_equal`` is valid and denotes a type.
+    - The qualified-id ``key_compare::is_transparent`` is valid and denotes a type.
     - ``std::is_convertible<K, iterator>::value`` is ``false``.
     - ``std::is_convertible<K, const_iterator>::value`` is ``false``.
 
@@ -150,18 +150,10 @@ swap
 
     .. code:: cpp
 
-        void swap( concurrent_unordered_multimap& other ) noexcept(/*See below*/);
+        void swap( concurrent_multimap& other );
 
     Swaps contents of ``*this`` and ``other``.
 
     Swaps allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_swap::value`` is ``true``.
 
     Otherwise if ``get_allocator() != other.get_allocator()`` the behavior is undefined.
-
-    **Exceptions**: ``noexcept`` specification:
-
-        .. code:: cpp
-
-            noexcept(std::allocator_traits<allocator_type>::is_always_equal::value &&
-                     std::is_nothrow_swappable<hasher>::value &&
-                     std::is_nothrow_swappable<key_equal>::value

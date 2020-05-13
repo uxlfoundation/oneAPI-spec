@@ -1,10 +1,11 @@
-==============
-concurrent_set
-==============
-**[containers.concurrent_set]**
+===================
+concurrent_multiset
+===================
+**[containers.concurrent_multiset]**
 
-``tbb::concurrent_set`` is a class template represents an unordered sequence of unique elements
+``tbb::concurrent_multiset`` is a class template represents an unordered sequence of unique elements
 which supports concurrent insertion, lookup and traversal, but not concurrent erasure.
+The container allows to store multiple equivalent elements.
 
 
 Class Template Synopsis
@@ -19,7 +20,7 @@ Class Template Synopsis
         template <typename T,
                   typename Compare = std::less<T>,
                   typename Allocator = tbb_allocator<T>>
-        class concurrent_set {
+        class concurrent_multiset {
         public:
             using key_type = T;
             using value_type = T;
@@ -46,40 +47,40 @@ Class Template Synopsis
             using const_range_type = <implementation-defined constant node handle>;
 
             // Construction, destruction, copying
-            concurrent_set();
-            explicit concurrent_set( const key_compare& comp,
-                                    const allocator_type& alloc = allocator_type() );
+            concurrent_multiset();
+            explicit concurrent_multiset( const key_compare& comp,
+                                          const allocator_type& alloc = allocator_type() );
 
-            explicit concurrent_set( const allocator_type& alloc );
-
-            template <typename InputIterator>
-            concurrent_set( InputIterator first, InputIterator last,
-                            const key_compare& comp = key_compare(),
-                            const allocator_type& alloc = allocator_type() );
+            explicit concurrent_multiset( const allocator_type& alloc );
 
             template <typename InputIterator>
-            concurrent_set( InputIterator first, InputIterator last,
-                            const allocator_type& alloc );
+            concurrent_multiset( InputIterator first, InputIterator last,
+                                 const key_compare& comp = key_compare(),
+                                 const allocator_type& alloc = allocator_type() );
 
-            concurrent_set( std::initializer_list<value_type> init,
-                            const key_compare& comp = key_compare(),
-                            const allocator_type& alloc = allocator_type() );
+            template <typename InputIterator>
+            concurrent_multiset( InputIterator first, InputIterator last,
+                                 const allocator_type& alloc );
 
-            concurrent_set( std::initializer_list<value_type> init, const allocator_type& alloc );
+            concurrent_multiset( std::initializer_list<value_type> init,
+                                 const key_compare& comp = key_compare(),
+                                 const allocator_type& alloc = allocator_type() );
 
-            concurrent_set( const concurrent_set& other );
-            concurrent_set( const concurrent_set& other,
-                            const allocator_type& alloc );
+            concurrent_multiset( std::initializer_list<value_type> init, const allocator_type& alloc );
 
-            concurrent_set( concurrent_set&& other );
-            concurrent_set( concurrent_set&& other,
-                            const allocator_type& alloc );
+            concurrent_multiset( const concurrent_multiset& other );
+            concurrent_multiset( const concurrent_multiset& other,
+                                 const allocator_type& alloc );
 
-            ~concurrent_set();
+            concurrent_multiset( concurrent_multiset&& other );
+            concurrent_multiset( concurrent_multiset&& other,
+                                 const allocator_type& alloc );
 
-            concurrent_set& operator=( const concurrent_set& other );
-            concurrent_set& operator=( concurrent_set&& other );
-            concurrent_set& operator=( std::initializer_list<value_type> init );
+            ~concurrent_multiset();
+
+            concurrent_multiset& operator=( const concurrent_multiset& other );
+            concurrent_multiset& operator=( concurrent_multiset&& other );
+            concurrent_multiset& operator=( std::initializer_list<value_type> init );
 
             allocator_type get_allocator() const;
 
@@ -153,7 +154,7 @@ Class Template Synopsis
             template <typename K>
             node_type unsafe_extract( const K& key );
 
-            void swap( concurrent_set& other );
+            void swap( concurrent_multiset& other );
 
             // Lookup
             size_type count( const key_type& key );
@@ -208,7 +209,7 @@ Class Template Synopsis
             // Parallel iteration
             range_type range();
             const_range_type range() const;
-        }; // class concurrent_set
+        }; // class concurrent_multiset
 
     } // namespace tbb
 
@@ -228,62 +229,62 @@ Member functions
 .. toctree::
     :maxdepth: 1
 
-    concurrent_set_cls/construction_destruction_copying.rst
-    concurrent_set_cls/iterators.rst
-    concurrent_set_cls/size_and_capacity.rst
-    concurrent_set_cls/safe_modifiers.rst
-    concurrent_set_cls/unsafe_modifiers.rst
-    concurrent_set_cls/lookup.rst
-    concurrent_set_cls/observers.rst
-    concurrent_set_cls/parallel_iteration.rst
+    concurrent_multiset_cls/construction_destruction_copying.rst
+    concurrent_multiset_cls/iterators.rst
+    concurrent_multiset_cls/size_and_capacity.rst
+    concurrent_multiset_cls/safe_modifiers.rst
+    concurrent_multiset_cls/unsafe_modifiers.rst
+    concurrent_multiset_cls/lookup.rst
+    concurrent_multiset_cls/observers.rst
+    concurrent_multiset_cls/parallel_iteration.rst
 
 Non-member functions
 --------------------
 
 These functions provides binary and lexicographical comparison and swap operations
-on ``tbb::concurrent_set`` objects.
+on ``tbb::concurrent_multiset`` objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_set`` as a type alias for which
+in the same internal namespace and define ``tbb::concurrent_multiset`` as a type alias for which
 the non-member functions are reachable only via argument dependent lookup.
 
 .. code:: cpp
 
     template <typename T, typename Compare, typename Allocator>
-    void swap( concurrent_set<T, Compare, Allocator>& lhs,
-               concurrent_set<T, Compare, Allocator>& rhs );
+    void swap( concurrent_multiset<T, Compare, Allocator>& lhs,
+               concurrent_multiset<T, Compare, Allocator>& rhs );
 
     template <typename T, typename Compare, typename Allocator>
-    bool operator==( const concurrent_set<T, Compare, Allocator>& lhs,
-                    const concurrent_set<T, Compare, Allocator>& rhs );
+    bool operator==( const concurrent_multiset<T, Compare, Allocator>& lhs,
+                     const concurrent_multiset<T, Compare, Allocator>& rhs );
 
     template <typename T, typename Compare, typename Allocator>
-    bool operator!=( const concurrent_set<T, Compare, Allocator>& lhs,
-                    const concurrent_set<T, Compare, Allocator>& rhs );
+    bool operator!=( const concurrent_multiset<T, Compare, Allocator>& lhs,
+                     const concurrent_multiset<T, Compare, Allocator>& rhs );
 
     template <typename T, typename Compare, typename Allocator>
-    bool operator<( const concurrent_set<T, Compare, Allocator>& lhs,
-                    const concurrent_set<T, Compare, Allocator>& rhs );
+    bool operator<( const concurrent_multiset<T, Compare, Allocator>& lhs,
+                    const concurrent_multiset<T, Compare, Allocator>& rhs );
 
     template <typename T, typename Compare, typename Allocator>
-    bool operator>( const concurrent_set<T, Compare, Allocator>& lhs,
-                    const concurrent_set<T, Compare, Allocator>& rhs );
+    bool operator>( const concurrent_multiset<T, Compare, Allocator>& lhs,
+                    const concurrent_multiset<T, Compare, Allocator>& rhs );
 
     template <typename T, typename Compare, typename Allocator>
-    bool operator<=( const concurrent_set<T, Compare, Allocator>& lhs,
-                     const concurrent_set<T, Compare, Allocator>& rhs );
+    bool operator<=( const concurrent_multiset<T, Compare, Allocator>& lhs,
+                     const concurrent_multiset<T, Compare, Allocator>& rhs );
 
     template <typename Key, typename T, typename Compare, typename Allocator>
-    bool operator>=( const concurrent_set<T, Compare, Allocator>& lhs,
-                     const concurrent_set<T, Compare, Allocator>& rhs );
+    bool operator>=( const concurrent_multiset<T, Compare, Allocator>& lhs,
+                     const concurrent_multiset<T, Compare, Allocator>& rhs );
 
 .. toctree::
     :maxdepth: 1
 
-    concurrent_set_cls/non_member_swap.rst
-    concurrent_set_cls/non_member_binary_comparisons.rst
-    concurrent_set_cls/non_member_lexicographical_comparisons.rst
+    concurrent_multiset_cls/non_member_swap.rst
+    concurrent_multiset_cls/non_member_binary_comparisons.rst
+    concurrent_multiset_cls/non_member_lexicographical_comparisons.rst
 
 Other
 -----
@@ -291,4 +292,4 @@ Other
 .. toctree::
     :maxdepth: 1
 
-    concurrent_set_cls/deduction_guides.rst
+    concurrent_multiset_cls/deduction_guides.rst

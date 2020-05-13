@@ -39,6 +39,14 @@ Unordered associative containers
 Ordered associative containers
 ------------------------------
 
+.. toctree::
+    :maxdepth: 1
+    
+    containers/concurrent_map_cls.rst
+    containers/concurrent_multimap_cls.rst
+    containers/concurrent_set_cls.rst
+    containers/concurrent_multiset_cls.rst
+
 Auxiliary classes
 -----------------
 

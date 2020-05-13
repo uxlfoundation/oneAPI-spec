@@ -126,7 +126,7 @@ abort
         void abort();
 
     Wakes up any threads that are waiting on the queue via ``push``, ``pop`` or ``emplace``
-    operations and raises an unspecified exception on those threads.
+    operations and raises `tbb::user_abort``` exception on those threads.
 
 Capacity of the queue
 ---------------------
