@@ -54,6 +54,7 @@ On the logical level, the library provides the following abstractions:
    primitives/convolution.rst
    primitives/deconvolution.rst
    primitives/inner_product.rst
+   primitives/matmul.rst
    primitives/rnn.rst
    primitives/batch_normalization.rst
    primitives/binary.rst
