@@ -1,6 +1,7 @@
 =================
 task_group_status
 =================
+**[scheduler.task_group_status]**
 
 A ``task_group_status`` type represents the status of a ``task_group``.
 
