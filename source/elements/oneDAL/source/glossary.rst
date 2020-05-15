@@ -20,6 +20,11 @@ Machine learning terms
         discrete :term:`labels<Label>` (:term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`)
         to :term:`feature vectors<Feature vector>`.
 
+    Clustering
+        An :term:`unsupervised machine-learning problem<Unsupervised learning>` of grouping
+        :term:`feature vectors<Feature vector>` onto (usually
+        :term:`categorical<Categorical feature>`) groups without prior information on them.
+
     Continuous feature
         A :term:`feature` with values in a domain of real numbers.
 
@@ -43,7 +48,7 @@ Machine learning terms
 
     Inference
         A process of applying a :term:`trained<Training>` :term:`model` to the :term:`inference set` with a goal to
-        predict :term:`responses<Response>` of the :term:`labels<Label>`.
+        make outputs based on input :term:`feature vectors<Feature vector>`.
 
         Synonyms: prediction.
 
@@ -79,7 +84,9 @@ Machine learning terms
         indicating that an observation belongs to a particular class.
 
     Supervised learning
-        :term:`Training` process with :term:`labeled<Label>` training set.
+        :term:`Training` process with :term:`labeled<Label>` :term:`training set`.
+        The best :term:`model` of dependencies between input :term:`feature vector`
+        and :term:`labels<Label>` is selected.
 
     Training
         A process of creating a best :term:`model` (in terms of some quality criteria) based on
@@ -89,10 +96,12 @@ Machine learning terms
         A :term:`dataset` used at the :term:`training` stage to create a :term:`model`.
 
     Unsupervised learning
-        :term:`Training` process where target :term:`labels<Label>` are not present in the training set.
+        :term:`Training` process where :term:`training set` do not contain information
+        of dependencies between :term:`feature vectors<Feature vector>` and outputs need
+        to be produced by :term:`model`.
 
 |dal_short_name| terms
-==============================
+======================
 
 .. glossary::
     :sorted:
@@ -129,8 +138,7 @@ Machine learning terms
         A task of applying a |dal_short_name| algorithm to a dataset.
 
 Common oneAPI terms
-=====
-TODO: this section looks like a general one for the whole oneAPI spec.
+===================
 
 .. glossary::
     :sorted:
