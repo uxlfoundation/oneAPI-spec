@@ -7,7 +7,7 @@ oneAPI Specifications
 
 This repo contains the sources for the `oneAPI Specification`_.
 
-For the latest build from master repo, see `this
+For the latest build from master branch, see `this
 <http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/refs/heads/master/versions/latest/index.html>`__.
 
 For more information about oneAPI, see `oneapi.com
