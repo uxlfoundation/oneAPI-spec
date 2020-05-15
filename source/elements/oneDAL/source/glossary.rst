@@ -11,7 +11,7 @@ Machine learning terms
     :sorted:
 
     Categorical feature
-        A :term:`feature` with a discrete set of possible values without ordering.
+        A :term:`feature` with a discrete domain without ordering between values.
 
         Synonyms: nominal feature.
 
@@ -23,7 +23,7 @@ Machine learning terms
     Continuous feature
         A :term:`feature` with values in a domain of real numbers.
 
-        Synonyms: quantitative feature.
+        Synonyms: quantitative feature, numerical feature.
 
     Dataset
         A collection of :term:`observations<Observation>`.
@@ -51,8 +51,10 @@ Machine learning terms
         An unlabeled :term:`dataset` used at the :term:`inference` stage to make an outputs from the :term:`model`.
 
     Label
-        :term:`Feature` of some object or event which is unavailable at the :term:`inference` stage
-        and needs to be predicted.
+        A :term:`feature` of some object or event which value is target to be predicted in :term:`supervised learning` task.
+        On the :term:`training` stage, the model which finds the best dependency between input :term:`feature vector` and
+        :term:`labels<Label>` is selected. :term:`Label` is one of outputs can be made by :term:`model`
+        on the :term:`inference` stage.
 
     Model
         A result of :term:`training` machine-learning algorithm that stores information necessary to run
@@ -80,7 +82,8 @@ Machine learning terms
         :term:`Training` process with :term:`labeled<Label>` training set.
 
     Training
-        A search process of the best :term:`model`.
+        A process of creating a best :term:`model` (in terms of some quality criteria) based on
+        information extracted from a :term:`training set`.
 
     Training set
         A :term:`dataset` used at the :term:`training` stage to create a :term:`model`.
@@ -88,7 +91,7 @@ Machine learning terms
     Unsupervised learning
         :term:`Training` process where target :term:`labels<Label>` are not present in the training set.
 
-|dal_short_name| library terms
+|dal_short_name| terms
 ==============================
 
 .. glossary::
@@ -125,7 +128,7 @@ Machine learning terms
     Workload
         A task of applying a |dal_short_name| algorithm to a dataset.
 
-Other
+Common oneAPI terms
 =====
 TODO: this section looks like a general one for the whole oneAPI spec.
 
