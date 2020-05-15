@@ -96,9 +96,9 @@ Machine learning terms
         A :term:`dataset` used at the :term:`training` stage to create a :term:`model`.
 
     Unsupervised learning
-        :term:`Training` process where :term:`training set` do not contain information
+        :term:`Training` process where :term:`training set` does not contain information
         of dependencies between :term:`feature vectors<Feature vector>` and outputs need
-        to be produced by :term:`model`.
+        to be produced by the :term:`model`.
 
 |dal_short_name| terms
 ======================
