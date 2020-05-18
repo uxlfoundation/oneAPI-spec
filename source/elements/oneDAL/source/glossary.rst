@@ -48,14 +48,15 @@ Machine learning terms
         Contains at least one :term:`feature`.
 
     Inference
-        A process of applying a :term:`trained<Training>` :term:`model` to the :term:`inference set` with a goal to
-        make outputs based on input :term:`feature vectors<Feature vector>`.
+        A process of applying a :term:`trained<Training>` :term:`model`
+        to the :term:`dataset` with a goal to make predictions of
+        :term:`responce` values based on input :term:`feature vectors<Feature vector>`.
 
         Synonyms: prediction.
 
     Inference set
         A :term:`dataset` (usually without :term:`responses<Response>` present)
-        used at the :term:`inference` stage to make an outputs from the :term:`model`.
+        used at the :term:`inference` stage.
 
     Label
         A :term:`response` with :term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`
