@@ -87,7 +87,7 @@ Machine learning terms
         Synonyms: dependent variable.
 
     Supervised learning
-        :term:`Training` process with a :term:`dataset` containing information of dependencies
+        :term:`Training` process with a :term:`dataset` containing information on dependencies
         between :term:`features<Feature>` and :term:`responses<Response>`.
         The goal is to get a :term:`model` of dependencies between input :term:`feature vector`
         and :term:`responses<Response>`.
@@ -101,7 +101,7 @@ Machine learning terms
 
     Unsupervised learning
         :term:`Training` process where :term:`training set` does not contain information
-        of dependencies between :term:`feature vectors<Feature vector>` and :term:`responses<Response>`.
+        on dependencies between :term:`feature vectors<Feature vector>` and :term:`responses<Response>`.
         The goal is to get a :term:`model` matching :term:`feature vectors<Feature vector>` into groups.
 
 |dal_short_name| terms
@@ -134,9 +134,10 @@ Machine learning terms
         becomes available in parts over time.
 
     Reference-counted object
-        A |dal_short_name| object which stores the number of references to the unique implementation.
-        Such object has a lightweight copy constructor and assignment operator, which simply increases the number of references.
-        Implementation is automatically freed when the number of references becomes equal to zero.
+        A copy-constructible and copy-assignable |dal_short_name| object
+        which stores the number of references to the unique implementation.
+        Has lightweight copy operations which increases the number of references.
+        An implementation is automatically freed when the number of references becomes equal to zero.
 
     Workload
         A task of applying a |dal_short_name| algorithm to a dataset.
