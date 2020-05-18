@@ -21,10 +21,15 @@ Machine learning terms
         A :term:`supervised machine-learning problem<Supervised learning>` of assigning
         :term:`labels<Label>` to :term:`feature vectors<Feature vector>`.
 
+        Examples: prediction of the object on the picture (dog or cat?),
+        prediction of the email type (spam or not?).
+
     Clustering
         An :term:`unsupervised machine-learning problem<Unsupervised learning>` of grouping
         :term:`feature vectors<Feature vector>` onto (usually
         :term:`categorical<Categorical feature>`) groups without prior information on them.
+
+        Examples: A task of marking big star clusters at the space images.
 
     Continuous feature
         A :term:`feature` with values in a domain of real numbers.
@@ -47,6 +52,8 @@ Machine learning terms
         A vector that encodes information about single real object or an event.
         Contains at least one :term:`feature`.
 
+        Examples: A rectangle can be described by two features: its width and height.
+
     Inference
         A process of applying a :term:`trained<Training>` :term:`model`
         to the :term:`dataset` with a goal to make predictions of
@@ -62,9 +69,14 @@ Machine learning terms
         A :term:`response` with :term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`
         values. This is an output in :term:`classification` and :term:`clustering` tasks.
 
+        Examples: the spam-detection task has a binary label indicating whether the email is spam or not.
+
     Model
         A result of :term:`training` machine-learning algorithm that stores information necessary to run
         :term:`inference` on a new :term:`dataset`.
+
+        Examples: in linear regression algorithm, the model contains weight values for each input feature
+        and single bias value.
 
     Observation
         A vector of at least one :term:`feature` and zero or more :term:`responses<Response>`.
@@ -75,10 +87,14 @@ Machine learning terms
     Ordinal feature
         A :term:`feature` with a discrete set of possible values and some ordering between them.
 
+        Examples: student's grade.
+
     Regression
         A :term:`supervised machine-learning problem<Supervised learning>` of assigning
         :term:`continuous<Continuous feature>` :term:`responses<Response>` to
         :term:`feature vectors<Feature vector>`.
+
+        Examples: prediction of the temperature based on weather conditions.
 
     Response
         A property of some real object or event which value is target to be predicted in the
