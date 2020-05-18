@@ -13,12 +13,13 @@ Machine learning terms
     Categorical feature
         A :term:`feature` with a discrete domain without ordering between values.
 
-        Synonyms: nominal feature.
+        Synonyms: nominal feature, qualitative feature.
+
+        Examples: a person's gender, color of a car.
 
     Classification
         A :term:`supervised machine-learning problem<Supervised learning>` of assigning
-        discrete :term:`labels<Label>` (:term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`)
-        to :term:`feature vectors<Feature vector>`.
+        :term:`labels<Label>` to :term:`feature vectors<Feature vector>`.
 
     Clustering
         An :term:`unsupervised machine-learning problem<Unsupervised learning>` of grouping
@@ -30,21 +31,21 @@ Machine learning terms
 
         Synonyms: quantitative feature, numerical feature.
 
+        Examples: a person's height, the price on the house.
+
     Dataset
         A collection of :term:`observations<Observation>`.
 
     Feature
         A particular property or quality of a real object or an event.
-        Has a defined type and domain.
+        Has a defined type and domain. In machine learning tasks, feature is
+        considered as input variable independent from others.
 
-        Synonyms: attribute, variable
-
-    Feature value
-        A single point in the domain of the :term:`feature`.
+        Synonyms: attribute, variable, input variable.
 
     Feature vector
         A vector that encodes information about single real object or an event.
-        Contains at least one :term:`feature value`.
+        Contains at least one :term:`feature`.
 
     Inference
         A process of applying a :term:`trained<Training>` :term:`model` to the :term:`inference set` with a goal to
@@ -53,21 +54,20 @@ Machine learning terms
         Synonyms: prediction.
 
     Inference set
-        An unlabeled :term:`dataset` used at the :term:`inference` stage to make an outputs from the :term:`model`.
+        A :term:`dataset` (usually without :term:`responses<Response>` present)
+        used at the :term:`inference` stage to make an outputs from the :term:`model`.
 
     Label
-        A :term:`feature` of some object or event which value is target to be predicted in :term:`supervised learning` task.
-        On the :term:`training` stage, the model which finds the best dependency between input :term:`feature vector` and
-        :term:`labels<Label>` is selected. :term:`Label` is one of outputs can be made by :term:`model`
-        on the :term:`inference` stage.
+        A :term:`response` with :term:`categorical<Categorical feature>` or :term:`ordinal<Ordinal feature>`
+        values. This is an output in :term:`classification` and :term:`clustering` tasks.
 
     Model
         A result of :term:`training` machine-learning algorithm that stores information necessary to run
         :term:`inference` on a new :term:`dataset`.
 
     Observation
-        A vector of at least one :term:`feature` value and zero or more :term:`label<Label>` values.
-        Each of :term:`labels<Label>` and :term:`features<Feature>` can encode different objects or events.
+        A vector of at least one :term:`feature` and zero or more :term:`responses<Response>`.
+        Each of them can encode different objects or events.
 
         Synonyms: instance, sample.
 
@@ -76,17 +76,23 @@ Machine learning terms
 
     Regression
         A :term:`supervised machine-learning problem<Supervised learning>` of assigning
-        :term:`continuous<Continuous feature>` :term:`labels<Label>` to
+        :term:`continuous<Continuous feature>` :term:`responses<Response>` to
         :term:`feature vectors<Feature vector>`.
 
     Response
-        A value of a single :term:`label`. For example, response may be a flag
-        indicating that an observation belongs to a particular class.
+        A property of some real object or event which value is target to be predicted in the
+        :term:`supervised learning` task. On the :term:`training` stage, the model which finds
+        the best dependency between input :term:`feature vector` and responses is selected. While
+        :term:`feature` is an input in machine learning tasks, response is one of outputs
+        can be made by :term:`model` on the :term:`inference` stage.
+
+        Synonyms: dependent variable.
 
     Supervised learning
-        :term:`Training` process with :term:`labeled<Label>` :term:`training set`.
+        :term:`Training` process with a :term:`dataset` containing information of dependencies
+        between :term:`features<Feature>` and :term:`responses<Response>`.
         The best :term:`model` of dependencies between input :term:`feature vector`
-        and :term:`labels<Label>` is selected.
+        and :term:`responses<Response>` is selected.
 
     Training
         A process of creating a best :term:`model` (in terms of some quality criteria) based on
