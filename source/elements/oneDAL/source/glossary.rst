@@ -135,10 +135,14 @@ Machine learning terms
         A special property of the :term:`data format`: the data are stored as one contiguous memory block.
 
     Data format
-        The representation of internal structure of the data: this information is enough to efficiently access them.
+        The representation of internal structure of the data.
+
+        Examples: data can be stored in array-of-structures or compressed-sparse-row format.
 
     Data type
         An integral or floating-point type which is used to physically store the data.
+
+        Examples: `int32_t`, `float`, `double`.
 
     Homogeneous data
         A special property of the :term:`data format`: all the :term:`features<Feature>` have the same type and domain.
