@@ -159,7 +159,7 @@ Date       Milestone
   - Add overall spec skeleton, introduction and algorithm classes sections
   - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
     compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
-  - Add API for kNN classification
+  - Add API for 3 oneDAL algorithms
 
 - oneTBB
 
@@ -225,7 +225,7 @@ Date       Milestone
   
 - oneDAL
 
-  - Extend API description to 3 additional algorithms 
+  - Extend API description to kNN classification
   - Add first version for sections on error handling, namespaces, terminology, math notations
   - Extend numeric tables and data structure sections
 
@@ -294,7 +294,7 @@ Elements
   
 - oneDAL
 
-  - Extend algorithms section to cover Random Forest, kNN, K-Means, SVM, PCA algorithms
+  - Extend algorithms section to cover Random Forest, K-Means, SVM, PCA algorithms
   - Finalize on sections content and details
 
 - oneTBB
