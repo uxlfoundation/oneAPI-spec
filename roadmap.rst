@@ -159,7 +159,7 @@ Date       Milestone
   - Add overall spec skeleton, introduction and algorithm classes sections
   - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
     compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
-  - Add API for 3 oneDAL algorithms
+  - Add API for kNN classification
 
 - oneTBB
 
