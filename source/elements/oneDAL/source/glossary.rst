@@ -81,30 +81,28 @@ Machine learning terms
 
     Response
         A property of some real object or event which value is target to be predicted in the
-        :term:`supervised learning` task. On the :term:`training` stage, the model which finds
-        the best dependency between input :term:`feature vector` and responses is selected. While
-        :term:`feature` is an input in machine learning tasks, response is one of outputs
-        can be made by :term:`model` on the :term:`inference` stage.
+        :term:`supervised learning` task. While the :term:`feature` is an input in the machine learning task,
+        the response is one of the outputs can be made by the :term:`model` on the :term:`inference` stage.
 
         Synonyms: dependent variable.
 
     Supervised learning
         :term:`Training` process with a :term:`dataset` containing information of dependencies
         between :term:`features<Feature>` and :term:`responses<Response>`.
-        The best :term:`model` of dependencies between input :term:`feature vector`
-        and :term:`responses<Response>` is selected.
+        The goal is to get a :term:`model` of dependencies between input :term:`feature vector`
+        and :term:`responses<Response>`.
 
     Training
-        A process of creating a best :term:`model` (in terms of some quality criteria) based on
-        information extracted from a :term:`training set`.
+        A process of creating a :term:`model` based on information extracted from a :term:`training set`.
+        Resulting :term:`model` is selected in accordance with some quality criteria.
 
     Training set
         A :term:`dataset` used at the :term:`training` stage to create a :term:`model`.
 
     Unsupervised learning
         :term:`Training` process where :term:`training set` does not contain information
-        of dependencies between :term:`feature vectors<Feature vector>` and outputs need
-        to be produced by the :term:`model`.
+        of dependencies between :term:`feature vectors<Feature vector>` and :term:`responses<Response>`.
+        The goal is to get a :term:`model` matching :term:`feature vectors<Feature vector>` into groups.
 
 |dal_short_name| terms
 ======================
