@@ -142,7 +142,7 @@ Machine learning terms
     Data type
         An integral or floating-point type which is used to physically store the data.
 
-        Examples: `int32_t`, `float`, `double`.
+        Examples: int32_t, float, double.
 
     Homogeneous data
         A special property of the :term:`data format`: all the :term:`features<Feature>` have the same type and domain.
