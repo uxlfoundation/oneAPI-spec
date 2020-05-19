@@ -176,7 +176,7 @@ Machine learning terms
         compressed-sparse-row format.
 
     Data layout
-        A :term:`data format` of :term:`contiguous data`. Describes an
+        A property :term:`data format` of :term:`contiguous data`. Describes an
         order of elements inside contiguous data block.
 
         Examples: row-major format, where elements are stored row by row.
@@ -187,13 +187,22 @@ Machine learning terms
 
         Examples: int32_t, float, double.
 
+    Heterogeneous data
+        A property of the :term:`data format`, where :term:`features<Feature>`
+        have different :term:`data types<Data type>` and/or operations defined
+        between values.
+
+        Examples: A :term:`dataset` with 100 :term:`observations<Observation>`
+        of 3 :term:`interval features<Interval feature>`. The first two features
+        have data type of float32, but the third one of float64.
+
     Homogeneous data
         A special property of the :term:`data format`: all the types of the
         :term:`features<Feature>` are the same. This means that they have
         similar :term:`data type` and defined set of available operations.
 
-        Examples: A :term:`dataset` with 100 :term:`observations<Observation>` of
-        3 :term:`interval features<Interval feature>` of type float32.
+        Examples: A :term:`dataset` with 100 :term:`observations<Observation>`
+        of 3 :term:`interval features<Interval feature>` of type float32.
 
     Immutability
         The object is immutable if it is not possible to change its state after
@@ -206,8 +215,8 @@ Machine learning terms
     Reference-counted object
         A copy-constructible and copy-assignable |dal_short_name| object which
         stores the number of references to the unique implementation. Has
-        lightweight copy operations which increases the number of references. An
-        implementation is automatically freed when the number of references
+        lightweight copy operations which increases the number of references.
+        An implementation is automatically freed when the number of references
         becomes equal to zero.
 
     Workload
