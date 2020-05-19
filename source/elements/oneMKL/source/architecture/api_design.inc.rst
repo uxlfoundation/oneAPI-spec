@@ -30,8 +30,9 @@ Standard C++ datatype usage
 +++++++++++++++++++++++++++
 
 oneMKL uses C++ STL data types for scalars where applicable:
-    * Integer scalars are C++ fixed-size integer types (``std::intN_t``, ``std::uintN_t``).
-    * Complex numbers are represented by C++ ``std::complex`` types.
+
+* Integer scalars are C++ fixed-size integer types (``std::intN_t``, ``std::uintN_t``).
+* Complex numbers are represented by C++ ``std::complex`` types.
 
 In general, scalar integer arguments to oneMKL routines are 64 bit integers (``std::int64_t`` or ``std::uint64_t``). Integer vectors and matrices may have varying bit widths, defined on a per-routine basis.
 
@@ -41,11 +42,12 @@ DPC++ datatype usage
 ++++++++++++++++++++
 
 oneMKL uses following SYCL Language data types and DPC++ Language Extensions data types:
-    * SYCL queue ``sycl::queue`` for scheduling kernels on a SYCL device. See :ref:`onemkl_queues` for more details.
-    * SYCL buffer ``sycl::buffer`` for buffer based memory access. See :ref:`onemkl_buffers` for more details.
-    * DPC++ Extension Unified Shared Memory (USM) for pointer based memory access. See :ref:`onemkl_usm` for more details.
-    * SYCL event ``sycl::event`` for output event synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
-    * Vector of SYCL events ``sycl::vector_class<sycl::event>`` for input events synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
+
+* SYCL queue ``sycl::queue`` for scheduling kernels on a SYCL device. See :ref:`onemkl_queues` for more details.
+* SYCL buffer ``sycl::buffer`` for buffer based memory access. See :ref:`onemkl_buffers` for more details.
+* DPC++ Extension Unified Shared Memory (USM) for pointer based memory access. See :ref:`onemkl_usm` for more details.
+* SYCL event ``sycl::event`` for output event synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
+* Vector of SYCL events ``sycl::vector_class<sycl::event>`` for input events synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
 
 .. _onemkl_datatypes:
 
