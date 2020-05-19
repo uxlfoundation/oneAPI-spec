@@ -89,16 +89,16 @@ Machine learning terms
         the email is spam or not.
 
     Model
-        A result of :term:`training` machine-learning algorithm that stores
-        information necessary to run :term:`inference` on a new :term:`dataset`.
+        An entiry which stores an information necessary to run :term:`inference`
+        on a new :term:`dataset`. Typically a result of :term:`training`
+        process.
 
         Examples: in linear regression algorithm, the model contains weight
         values for each input feature and single bias value.
 
     Observation
-        A vector of at least one :term:`feature` and zero or more
-        :term:`responses<Response>`. Each of them can encode different objects
-        or events.
+        A :term:`feature vector` and zero or more :term:`responses<Response>`.
+        Each of them can encode different objects or events.
 
         Synonyms: instance, sample.
 
@@ -175,6 +175,12 @@ Machine learning terms
         Examples: data can be stored in array-of-structures or
         compressed-sparse-row format.
 
+    Data layout
+        A :term:`data format` of :term:`contiguous data`. Describes an
+        order of elements inside contiguous data block.
+
+        Examples: row-major format, where elements are stored row by row.
+
     Data type
         An integral or floating-point type which is used to physically store the
         data.
@@ -182,8 +188,12 @@ Machine learning terms
         Examples: int32_t, float, double.
 
     Homogeneous data
-        A special property of the :term:`data format`: all the
-        :term:`features<Feature>` have the same type and domain.
+        A special property of the :term:`data format`: all the types of the
+        :term:`features<Feature>` are the same. This means that they have
+        similar :term:`data type` and defined set of available operations.
+
+        Examples: A :term:`dataset` with 100 :term:`observations<Observation>` of
+        3 :term:`interval features<Interval feature>` of type float32.
 
     Immutability
         The object is immutable if it is not possible to change its state after
