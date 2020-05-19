@@ -11,10 +11,14 @@ Machine learning terms
     :sorted:
 
     Categorical feature
-        A :term:`feature` with a discrete domain without ordering between
-        values.
+        A :term:`feature` with a discrete domain. Can be :term:`nominal<Nominal
+        feature>` or :term:`ordinal<Ordinal feature>`.
 
-        Synonyms: nominal feature, qualitative feature.
+        Synonyms: discrete feature, qualitative feature.
+
+    Nominal feature
+        A :term:`categorical feature` without ordering between values. Only
+        equality operation is defined for nominal features.
 
         Examples: a person's gender, color of a car.
 
@@ -35,7 +39,8 @@ Machine learning terms
         Examples: A task of marking big star clusters at the space images.
 
     Continuous feature
-        A :term:`feature` with values in a domain of real numbers.
+        A :term:`feature` with values in a domain of real numbers. Can be
+        :term:`interval<Interval feature>` or :term:`ratio<Ratio feature>`
 
         Synonyms: quantitative feature, numerical feature.
 
@@ -69,6 +74,12 @@ Machine learning terms
         A :term:`dataset` (usually without :term:`responses<Response>` present)
         used at the :term:`inference` stage.
 
+    Interval feature
+        A :term:`continuous feature` which values can be compared, added or
+        subtracted, but cannot be multiplied or divided.
+
+        Examples: a timeframe scale, a temperature in Celcius or Fahrenheit.
+
     Label
         A :term:`response` with :term:`categorical<Categorical feature>` or
         :term:`ordinal<Ordinal feature>` values. This is an output in
@@ -92,10 +103,17 @@ Machine learning terms
         Synonyms: instance, sample.
 
     Ordinal feature
-        A :term:`feature` with a discrete set of possible values and some
-        ordering between them.
+        A :term:`categorical feature` with defined operations of equality an
+        ordering between values.
 
         Examples: student's grade.
+
+    Ratio feature
+        A :term:`continuous feature` with defined operations of equality,
+        comparison, addition, substraction, multiplication and division.
+        Has a zero value element which means the absence of value.
+
+        Examples: the height of a tower.
 
     Regression
         A :term:`supervised machine-learning problem<Supervised learning>` of
