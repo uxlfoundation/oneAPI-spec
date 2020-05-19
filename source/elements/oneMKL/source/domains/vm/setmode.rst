@@ -53,6 +53,7 @@ setmode
          * -  Value of mode 
            -  Description 
          * -  Accuracy Control 
+           -   
          * -  ``mode::ha`` 
            -  High accuracy versions of VM functions. 
          * -  ``mode::la`` 
@@ -60,11 +61,13 @@ setmode
          * -  ``mode::ep`` 
            -  Enhanced performance accuracy versions of VM functions. 
          * -  Denormalized Numbers Handling Control 
+           -   
          * -  ``mode::ftzdazon`` 
            -  Faster processing of denormalized inputs is enabled. 
          * -  ``mode::ftzdazoff`` 
            -  Faster processing of denormalized inputs is disabled. 
          * -  Other 
+           -   
          * -  ``mode::not_defined`` 
            -  VM status not defined. 
 

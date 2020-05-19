@@ -1,6 +1,11 @@
+.. _onemkl_blas_gemm_ext:
 
 gemm_ext
 ========
+
+gemm_ext (BUFFER Version)
+-------------------------
+
 
 
 .. container::
@@ -10,7 +15,6 @@ gemm_ext
 
 
    .. container:: section
-      :name: GUID-7885D940-FAC1-4F37-9E1C-A022DED99EBD
 
 
       .. rubric:: Syntax
@@ -23,7 +27,7 @@ gemm_ext
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  void gemm_ext(queue &exec_queue, transpose         transa, transpose transb, std::int64_t m, std::int64_t n,         std::int64_t k, Ts alpha, buffer<Ta,1> &a, std::int64_t lda,         buffer<Tb,1> &b, std::int64_t ldb, Ts beta, buffer<Tc,1> &c,         std::int64_t ldc)
+         .. cpp:function::  void onemkl::blas::gemm_ext(sycl::queue &queue, transpose         transa, transpose transb, std::int64_t m, std::int64_t n,         std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda,         sycl::buffer<Tb,1> &b, std::int64_t ldb, Ts beta, sycl::buffer<Tc,1> &c,         std::int64_t ldc)
 
          ``gemm_ext`` supports the following precisions and devices.
 
@@ -69,7 +73,7 @@ gemm_ext
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  void gemm_ext(queue &exec_queue, transpose         transa, transpose transb, offset offset_type, std::int64_t m,         std::int64_t n, std::int64_t k, Ts alpha, buffer<Ta,1> &a,         std::int64_t lda, Ta ao, buffer<Tb,1> &b, std::int64_t ldb, Tb         bo, Ts beta, buffer<Tc,1> &c, std::int64_t ldc, buffer<Tc,1>         &co)
+         .. cpp:function::  void onemkl::blas::gemm_ext(sycl::queue &queue, transpose         transa, transpose transb, offset offset_type, std::int64_t m,         std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a,         std::int64_t lda, Ta ao, sycl::buffer<Tb,1> &b, std::int64_t ldb, Tb         bo, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc, sycl::buffer<Tc,1>         &co)
 
          ``gemm_ext`` supports the following precisions.
 
@@ -90,7 +94,6 @@ gemm_ext
 
 
    .. container:: section
-      :name: GUID-14237C95-6322-47A4-BC11-D3CDD2118C42
 
 
       .. rubric:: Description
@@ -147,14 +150,13 @@ gemm_ext
 
 
    .. container:: section
-      :name: GUID-863264A0-4CE9-495F-A617-102E46D7A41A
 
 
       .. rubric:: Input Parameters
          :class: sectiontitle
 
 
-      exec_queue
+      queue
          The queue where the routine should be executed.
 
 
@@ -165,6 +167,7 @@ gemm_ext
          more details.
 
 
+
       transb
          Specifies op(``B``), the transposition operation applied to
          ``B``. See
@@ -172,11 +175,13 @@ gemm_ext
          more details.
 
 
+
       offset_type (offset API only)
          Specifies the form of ``C_offset`` used in the matrix
          multiplication. See
          :ref:`onemkl_datatypes` for
          more details.
+
 
 
       m
@@ -280,16 +285,16 @@ gemm_ext
 
 
          If ``offset_type = offset::row``, the ``co`` array must have
-         size at least ``max(1,n)``.
-
-
-         See
+         size at least ``max(1,n)``. See
          :ref:`onemkl_datatypes` for
          more details.
 
 
+
+        
+
+
    .. container:: section
-      :name: GUID-1E4953E6-F7B1-4FEE-BA5A-8C4BD51DC700
 
 
       .. rubric:: Output Parameters
@@ -304,7 +309,6 @@ gemm_ext
 
 
    .. container:: section
-      :name: GUID-AC72653A-4AC8-4B9D-B7A9-13A725AA19BF
 
 
       .. rubric:: Notes
