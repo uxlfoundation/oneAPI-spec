@@ -1,3 +1,4 @@
+.. _onemkl_blas_nrm2:
 
 nrm2
 ====
@@ -9,15 +10,6 @@ nrm2
    Computes the Euclidean norm of a vector.
 
 
-   .. container:: section
-      :name: GUID-F55A15D5-CCDA-4C44-B86F-C9A5FB36725E
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void nrm2(queue &exec_queue, std::int64_t n,      buffer<T,1> &x, std::int64_t incx, buffer<T_res,1> &result)
 
       ``nrm2`` supports the following precisions.
 
@@ -40,14 +32,13 @@ nrm2
 
 
 .. container:: section
-   :name: GUID-2BF2C965-5A8C-47F1-9C73-FB0E485CE32A
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The nrm2 routines computes Euclidean norm of a vector
+   The ``nrm2`` routines computes Euclidean norm of a vector
 
 
   
@@ -62,15 +53,27 @@ nrm2
    ``x`` is a vector of ``n`` elements.
 
 
+nrm2 (BUFFER Version)
+---------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::blas::nrm2(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T_res,1> &result)
 .. container:: section
-   :name: GUID-A615800D-734E-4997-BB91-1C76AEEE9EC2
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -86,11 +89,10 @@ nrm2
 
 
    incx
-      Stride of vector x.
+      Stride of vector ``x``.
 
 
 .. container:: section
-   :name: GUID-2B160DEB-ADBB-4044-8078-4B613A0DA4E1
 
 
    .. rubric:: Output Parameters
@@ -102,6 +104,76 @@ nrm2
       stored.
 
 
+nrm2 (USM Version)
+------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  sycl::event onemkl::blas::nrm2(sycl::queue &queue, std::int64_t n, const T *x, std::int64_t incx, T_res *result, const sycl::vector_class<sycl::event> &dependencies = {})
+   .. container:: section
+
+
+      .. rubric:: Input Parameters
+         :class: sectiontitle
+
+
+      queue
+         The queue where the routine should be executed.
+
+
+      n
+         Number of elements in vector ``x``.
+
+
+      x
+         Pointer to input vector ``x``. The array holding input vector
+         ``x`` must be of size at least (1 + (``n`` - 1)*abs(``incx``)).
+         See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+      incx
+         Stride of vector ``x``.
+
+
+      dependencies
+         List of events to wait for before starting computation, if any.
+         If omitted, defaults to no dependencies.
+
+
+   .. container:: section
+
+
+      .. rubric:: Output Parameters
+         :class: sectiontitle
+
+
+      result
+         Pointer to where the Euclidean norm of the vector ``x`` will be
+         stored.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
+
+
 .. container:: familylinks
 
 
@@ -109,6 +181,3 @@ nrm2
 
 
       **Parent topic:** :ref:`blas-level-1-routines`
-      
-
-

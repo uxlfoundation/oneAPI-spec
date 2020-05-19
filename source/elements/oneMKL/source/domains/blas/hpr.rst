@@ -1,3 +1,4 @@
+.. _onemkl_blas_hpr:
 
 hpr
 ===
@@ -9,15 +10,6 @@ hpr
    Computes a rank-1 update of a Hermitian packed matrix.
 
 
-   .. container:: section
-      :name: GUID-61DC4DBA-9357-4129-B8A3-931E2E7335D4
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void hpr(queue &exec_queue, uplo upper_lower,      std::int64_t n, T alpha, buffer<T,1> &x, std::int64_t incx,      buffer<T,1> &a)
 
       ``hpr`` supports the following precisions.
 
@@ -33,14 +25,13 @@ hpr
 
 
 .. container:: section
-   :name: GUID-02B8128C-02CE-4D5C-BE5D-DFD088C90475
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The hpr routines compute a scalar-vector-vector product and add the
+   The ``hpr`` routines compute a scalar-vector-vector product and add the
    result to a Hermitian packed matrix. The operation is defined as
 
 
@@ -62,22 +53,32 @@ hpr
    ``x`` is a vector of length ``n``.
 
 
+hpr (BUFFER Version)
+--------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::blas::hpr(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &a)
 .. container:: section
-   :name: GUID-E1436726-01FE-4206-871E-B905F59A96B4
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
    upper_lower
-      Specifies whether ``A`` is upper or lower triangular. See
-      :ref:`onemkl_datatypes` for more
-      details.
+      Specifies whether ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
 
    n
@@ -107,11 +108,10 @@ hpr
 
 
       The imaginary part of the diagonal elements need not be set and
-      are assumed to be zero
+      are assumed to be zero.
 
 
 .. container:: section
-   :name: GUID-7261182A-450B-46F5-8C61-7133597D3530
 
 
    .. rubric:: Output Parameters
@@ -128,6 +128,101 @@ hpr
       The imaginary parts of the diagonal elements are set to zero.
 
 
+hpr (USM Version)
+-----------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  sycl::event onemkl::blas::hpr(sycl::queue &queue, uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, const sycl::vector_class<sycl::event> &dependencies = {})
+   .. container:: section
+
+
+      .. rubric:: Input Parameters
+         :class: sectiontitle
+
+
+      queue
+         The queue where the routine should be executed.
+
+
+      upper_lower
+         Specifies whether ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
+
+
+      n
+         Number of rows and columns of ``A``. Must be at least zero.
+
+
+      alpha
+         Scaling factor for the matrix-vector product.
+
+
+      x
+         Pointer to input vector ``x``. The array holding input vector
+         ``x`` must be of size at least (1 + (``n`` - 1)*abs(``incx``)).
+         See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+      incx
+         Stride of vector ``x``.
+
+
+      a
+         Pointer to input matrix ``A``. The array holding input matrix
+         ``A`` must have size at least (``n``\ \*(``n``-1))/2. See
+         `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+         The imaginary part of the diagonal elements need not be set and
+         are assumed to be zero.
+
+
+      dependencies
+         List of events to wait for before starting computation, if any.
+         If omitted, defaults to no dependencies.
+
+
+   .. container:: section
+
+
+      .. rubric:: Output Parameters
+         :class: sectiontitle
+
+
+      a
+         Pointer to the updated upper triangular part of the Hermitian
+         matrix ``A`` if ``upper_lower =upper``, or the updated lower
+         triangular part of the Hermitian matrix ``A`` if
+         ``upper_lower =lower``.
+
+
+         The imaginary parts of the diagonal elements are set to zero.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
+
+
 .. container:: familylinks
 
 
@@ -135,6 +230,3 @@ hpr
 
 
       **Parent topic:** :ref:`blas-level-2-routines`
-      
-
-

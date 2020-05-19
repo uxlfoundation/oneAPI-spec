@@ -1,3 +1,4 @@
+.. _onemkl_blas_iamax:
 
 iamax
 =====
@@ -10,17 +11,8 @@ iamax
    vector.
 
 
-   .. container:: section
-      :name: GUID-D1ABF76D-DB39-4C23-A217-EA2C7C6D1325
 
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void iamax(queue &exec_queue, std::int64_t n,      buffer<T, 1> &x, std::int64_t incx, buffer<std::int64_t, 1>      &result)
-
-      iamax supports the following precisions.
+      ``iamax`` supports the following precisions.
 
 
       .. list-table:: 
@@ -36,14 +28,13 @@ iamax
 
 
 .. container:: section
-   :name: GUID-822D7950-256E-406D-9305-61F761080E69
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The iamax routines return an index ``i``\ such that ``x``\ [``i``]
+   The ``iamax`` routines return an index ``i``\ such that ``x``\ [``i``]
    has the maximum absolute value of all elements in vector ``x`` (real
    variants), or such that ``|Re(x[i])| + |Im(x[i])|`` is maximal
    (complex variants).
@@ -71,15 +62,27 @@ iamax
    index of the first ``NaN``.
 
 
+iamax (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::blas::iamax(sycl::queue &queue, std::int64_t n,      sycl::buffer<T, 1> &x, std::int64_t incx, sycl::buffer<std::int64_t, 1>      &result)
 .. container:: section
-   :name: GUID-CE43FE84-2066-4095-BB7E-0691CD045443
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -99,7 +102,6 @@ iamax
 
 
 .. container:: section
-   :name: ARGUMENTS_EC9F05BE9B09443F8BC59207D5EA40F1
 
 
    .. rubric:: Output Parameters
@@ -111,6 +113,75 @@ iamax
       is stored.
 
 
+iamax (USM Version)
+-------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  sycl::event onemkl::blas::iamax(sycl::queue &queue, std::int64_t n, const T *x, std::int64_t incx, T_res *result, const sycl::vector_class<sycl::event> &dependencies = {})
+   .. container:: section
+
+
+      .. rubric:: Input Parameters
+         :class: sectiontitle
+
+
+      queue
+         The queue where the routine should be executed.
+
+
+      n
+         The number of elements in vector ``x``.
+
+
+      x
+         The pointer to the input vector ``x``. The array holding the
+         input vector ``x`` must be of size at least (1 + (``n`` -
+         1)*abs(``incx``)). See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+      incx
+         The stride of vector ``x``.
+
+
+      dependencies
+         List of events to wait for before starting computation, if any.
+         If omitted, defaults to no dependencies.
+
+
+   .. container:: section
+
+
+      .. rubric:: Output Parameters
+         :class: sectiontitle
+
+
+      result
+         The pointer to where the zero-based index ``i`` of the maximal
+         element is stored.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
+
 
 .. container:: familylinks
 
@@ -119,6 +190,3 @@ iamax
 
 
       **Parent topic:** :ref:`blas-level-1-routines`
-      
-
-
