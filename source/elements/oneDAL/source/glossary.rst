@@ -160,10 +160,19 @@ Machine learning terms
 .. glossary::
     :sorted:
 
+    Accessor
+        An |dal_short_name| concept of an object, which provides an access in the
+        special :term:`data format` to the data of another object.
+
     Batch Mode
         The computation mode for an algorithm in |dal_short_name|, where all the
         data needed for computation is available at the start and fits the
         memory of the device on which the computations are performed.
+
+    Builder
+        An |dal_short_name| concept of an object which encapsulates the creation
+        process of another object and provides an ability to create it
+        iteratively.
 
     Contiguous data
         A special property of the :term:`data format`: the data are stored as
@@ -218,6 +227,11 @@ Machine learning terms
         lightweight copy operations which increases the number of references.
         An implementation is automatically freed when the number of references
         becomes equal to zero.
+
+    Table
+        A |dal_short_name| concept of a :term:`dataset` which contains only
+        numerical data, :term:`categorical<Categorical feature>` or
+        :term:`continuous<Continuous feature>`.
 
     Workload
         A task of applying a |dal_short_name| algorithm to a dataset.
