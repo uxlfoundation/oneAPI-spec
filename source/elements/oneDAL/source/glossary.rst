@@ -27,8 +27,8 @@ Machine learning terms
         assigning :term:`labels <Label>` to :term:`feature vectors <Feature
         vector>`.
 
-        **Examples:** prediction of the object on the picture (dog or cat?),
-        prediction of the email type (spam or not?)
+        **Examples:** predict what type of object is on the picture (a dog or a cat?),
+        predict whether or not an email is spam
 
     Clustering
         An :term:`unsupervised machine learning problem <Unsupervised learning>`
@@ -44,7 +44,7 @@ Machine learning terms
 
         **Synonyms:** quantitative feature, numerical feature
 
-        **Examples:** a person's height, the price on the house
+        **Examples:** a person's height, the price of the house
 
     Dataset
         A collection of :term:`observations <Observation>`.
@@ -94,7 +94,7 @@ Machine learning terms
         process.
 
         **Example:** in linear regression algorithm, the model contains weight
-        values for each input feature and single bias value
+        values for each input feature and a single bias value
 
     Observation
         A :term:`feature vector` and zero or more :term:`responses<Response>`.
@@ -120,7 +120,7 @@ Machine learning terms
         assigning :term:`continuous <Continuous feature>`
         :term:`responses<Response>` for :term:`feature vectors <Feature vector>`.
 
-        **Example:** prediction of the temperature based on weather conditions
+        **Example:** predict temperature based on weather conditions
 
     Response
         A property of some real object or event which value is target to be
@@ -201,9 +201,9 @@ Machine learning terms
         between values.
 
         **Example:** A :term:`dataset` with 100
-        :term:`observations<Observation>` of 3 :term:`interval features<Interval
-        feature>`. The first two features have data type of float32, but the
-        third one of float64
+        :term:`observations <Observation>` of three :term:`interval features <Interval
+        feature>`. The first two features are of float32 :term:`data type`, while the
+        third one is of float64 data type.
 
     Homogeneous data
         A special property of the :term:`data format`: all the types of the
@@ -211,8 +211,8 @@ Machine learning terms
         similar :term:`data type` and defined set of available operations.
 
         **Example:** A :term:`dataset` with 100
-        :term:`observations<Observation>` of 3 :term:`interval features<Interval
-        feature>` of type float32
+        :term:`observations <Observation>` of three  :term:`interval features <Interval
+        feature>`, each of type float32
 
     Immutability
         The object is immutable if it is not possible to change its state after
@@ -271,5 +271,4 @@ Common oneAPI terms
         SYCL(TM) [SYCLSpec]_ --- high-level programming model for OpenCL(TM)
         that enables code for heterogeneous processors to be written in a
         "single-source" style using completely standard C++.
-
 
