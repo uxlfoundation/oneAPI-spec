@@ -147,10 +147,9 @@ Machine learning terms
         :term:`model`.
 
     Unsupervised learning
-        :term:`Training` process where :term:`training set` does not contain
-        information on dependencies between :term:`feature vectors<Feature
-        vector>` and :term:`responses<Response>`. The goal is to get a
-        :term:`model` matching :term:`feature vectors<Feature vector>` into
+        :term:`Training` process that uses a :term:`training set` with no
+        :term:`responses <Response>`. The goal is to get a
+        :term:`model` that allocates :term:`feature vectors <Feature vector>`  into
         groups.
 
 |dal_short_name| terms
@@ -274,4 +273,3 @@ Common oneAPI terms
         SYCL(TM) [SYCLSpec]_ --- high-level programming model for OpenCL(TM)
         that enables code for heterogeneous processors to be written in a
         "single-source" style using completely standard C++.
-
