@@ -36,7 +36,7 @@ Machine learning terms
         usually :term:`categorical <Categorical feature>`,
         without prior information about them.
 
-        **Example:** A problem of marking big star clusters at the space images
+        **Example:** find big star clusters in the space images
 
     Continuous feature
         A :term:`feature` with values in a domain of real numbers. Can be
@@ -57,8 +57,8 @@ Machine learning terms
         **Synonyms:** attribute, variable, input variable
 
     Feature vector
-        A vector that encodes information about a single real object or an event.
-        Contains at least one :term:`feature`.
+        A vector that encodes information about real object, an event or a group
+        of objects or events. Contains at least one :term:`feature`.
 
         **Example:** A rectangle can be described by two features: its width and
         height
@@ -98,7 +98,6 @@ Machine learning terms
 
     Observation
         A :term:`feature vector` and zero or more :term:`responses<Response>`.
-        Each of them can encode different objects or events.
 
         **Synonyms:** instance, sample
 
@@ -174,8 +173,8 @@ Machine learning terms
         process of another object and enables its iterative creation.
 
     Contiguous data
-        A special property of the :term:`data format`: the data are stored as
-        one contiguous memory block.
+        Data that are stored as one contiguous memory block. One of the
+        characteristics of a :term:`data format`.
 
     Data format
         Representation of the internal structure of the data.
@@ -184,8 +183,8 @@ Machine learning terms
         compressed-sparse-row format
 
     Data layout
-        A property :term:`data format` of :term:`contiguous data`. Describes an
-        order of elements inside contiguous data block.
+        A characteristic of :term:`data format` which describes the
+        order of elements in a :term:`contiguous data` block.
 
         **Example:** row-major format, where elements are stored row by row
 
@@ -200,15 +199,19 @@ Machine learning terms
         have different :term:`data types<Data type>` and/or operations defined
         between values.
 
+        Data which contain values either of different :term:`data types <Data
+        type>` or different sets of operations defined on them. One of the
+        characteristics of a :term:`data format`.
+
         **Example:** A :term:`dataset` with 100
         :term:`observations <Observation>` of three :term:`interval features <Interval
         feature>`. The first two features are of float32 :term:`data type`, while the
         third one is of float64 data type.
 
     Homogeneous data
-        A special property of the :term:`data format`: all the types of the
-        :term:`features<Feature>` are the same. This means that they have
-        similar :term:`data type` and defined set of available operations.
+        Data with values of single :term:`data type` and the same set of
+        available operations defined on them. One of the characteristics of a
+        :term:`data format`.
 
         **Example:** A :term:`dataset` with 100
         :term:`observations <Observation>` of three  :term:`interval features <Interval
