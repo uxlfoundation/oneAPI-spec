@@ -11,8 +11,8 @@ Machine learning terms
     :sorted:
 
     Categorical feature
-        A :term:`feature` with a discrete domain. Can be :term:`nominal<Nominal
-        feature>` or :term:`ordinal<Ordinal feature>`.
+        A :term:`feature` with a discrete domain. Can be :term:`nominal <Nominal
+        feature>` or :term:`ordinal <Ordinal feature>`.
 
         **Synonyms:** discrete feature, qualitative feature
 
@@ -23,74 +23,74 @@ Machine learning terms
         **Examples:** a person's gender, color of a car
 
     Classification
-        A :term:`supervised machine-learning problem<Supervised learning>` of
-        assigning :term:`labels<Label>` to :term:`feature vectors<Feature
+        A :term:`supervised machine learning problem <Supervised learning>` of
+        assigning :term:`labels <Label>` to :term:`feature vectors <Feature
         vector>`.
 
         **Examples:** prediction of the object on the picture (dog or cat?),
         prediction of the email type (spam or not?)
 
     Clustering
-        An :term:`unsupervised machine-learning problem<Unsupervised learning>`
-        of grouping :term:`feature vectors<Feature vector>` onto (usually
-        :term:`categorical<Categorical feature>`) groups without prior
-        information on them.
+        An :term:`unsupervised machine learning problem <Unsupervised learning>`
+        of grouping :term:`feature vectors <Feature vector>` into groups,
+        usually :term:`categorical <Categorical feature>`,
+        without prior information about them.
 
         **Example:** A task of marking big star clusters at the space images
 
     Continuous feature
         A :term:`feature` with values in a domain of real numbers. Can be
-        :term:`interval<Interval feature>` or :term:`ratio<Ratio feature>`
+        :term:`interval <Interval feature>` or :term:`ratio <Ratio feature>`
 
         **Synonyms:** quantitative feature, numerical feature
 
         **Examples:** a person's height, the price on the house
 
     Dataset
-        A collection of :term:`observations<Observation>`.
+        A collection of :term:`observations <Observation>`.
 
     Feature
         A particular property or quality of a real object or an event. Has a
-        defined type and domain. In machine learning tasks, feature is
-        considered as input variable independent from others.
+        defined type and domain. In machine learning tasks, features are
+        considered as input variable that are independent from each other.
 
         **Synonyms:** attribute, variable, input variable
 
     Feature vector
-        A vector that encodes information about single real object or an event.
+        A vector that encodes information about a single real object or an event.
         Contains at least one :term:`feature`.
 
         **Example:** A rectangle can be described by two features: its width and
         height
 
     Inference
-        A process of applying a :term:`trained<Training>` :term:`model` to the
-        :term:`dataset` with a goal to make predictions of :term:`responce`
-        values based on input :term:`feature vectors<Feature vector>`.
+        A process of applying a :term:`trained <Training>` :term:`model` to the
+        :term:`dataset` in order to predict :term:`response`
+        values based on input :term:`feature vectors <Feature vector>`.
 
         **Synonym:** prediction
 
     Inference set
-        A :term:`dataset` (usually without :term:`responses<Response>` present)
-        used at the :term:`inference` stage.
+        A :term:`dataset` used at the :term:`inference` stage.
+        Usually without :term:`responses <Response>`.
 
     Interval feature
-        A :term:`continuous feature` which values can be compared, added or
+        A :term:`continuous feature` with values that can be compared, added or
         subtracted, but cannot be multiplied or divided.
 
         **Examples:** a timeframe scale, a temperature in Celcius or Fahrenheit
 
     Label
-        A :term:`response` with :term:`categorical<Categorical feature>` or
-        :term:`ordinal<Ordinal feature>` values. This is an output in
+        A :term:`response` with :term:`categorical <Categorical feature>` or
+        :term:`ordinal <Ordinal feature>` values. This is an output in
         :term:`classification` and :term:`clustering` tasks.
 
         **Example:** the spam-detection task has a binary label indicating whether
         the email is spam or not
 
     Model
-        An entiry which stores an information necessary to run :term:`inference`
-        on a new :term:`dataset`. Typically a result of :term:`training`
+        An entity that stores information necessary to run :term:`inference`
+        on a new :term:`dataset`. Typically a result of a :term:`training`
         process.
 
         **Example:** in linear regression algorithm, the model contains weight
@@ -103,22 +103,22 @@ Machine learning terms
         **Synonyms:** instance, sample
 
     Ordinal feature
-        A :term:`categorical feature` with defined operations of equality an
+        A :term:`categorical feature` with defined operations of equality and
         ordering between values.
 
         **Example:** student's grade
 
     Ratio feature
         A :term:`continuous feature` with defined operations of equality,
-        comparison, addition, substraction, multiplication and division.
-        Has a zero value element which means the absence of value.
+        comparison, addition, subtraction, multiplication, and division.
+        Zero value element means the absence of any value.
 
         **Example:** the height of a tower
 
     Regression
-        A :term:`supervised machine-learning problem<Supervised learning>` of
-        assigning :term:`continuous<Continuous feature>`
-        :term:`responses<Response>` to :term:`feature vectors<Feature vector>`.
+        A :term:`supervised machine learning problem <Supervised learning>` of
+        assigning :term:`continuous <Continuous feature>`
+        :term:`responses<Response>` for :term:`feature vectors <Feature vector>`.
 
         **Example:** prediction of the temperature based on weather conditions
 
@@ -132,11 +132,11 @@ Machine learning terms
         **Synonym:** dependent variable
 
     Supervised learning
-        :term:`Training` process with a :term:`dataset` containing information
-        on dependencies between :term:`features<Feature>` and
-        :term:`responses<Response>`. The goal is to get a :term:`model` of
+        :term:`Training` process that uses a :term:`dataset` with information
+        about dependencies between :term:`features <Feature>` and
+        :term:`responses <Response>`. The goal is to get a :term:`model` of
         dependencies between input :term:`feature vector` and
-        :term:`responses<Response>`.
+        :term:`responses <Response>`.
 
     Training
         A process of creating a :term:`model` based on information extracted
@@ -161,8 +161,8 @@ Machine learning terms
     :sorted:
 
     Accessor
-        An |dal_short_name| concept of an object, which provides an access in the
-        special :term:`data format` to the data of another object.
+        A |dal_short_name| concept of an object that provides access to the data
+        of another object in the special :term:`data format` .
 
     Batch Mode
         The computation mode for an algorithm in |dal_short_name|, where all the
@@ -170,16 +170,15 @@ Machine learning terms
         memory of the device on which the computations are performed.
 
     Builder
-        An |dal_short_name| concept of an object which encapsulates the creation
-        process of another object and provides an ability to create it
-        iteratively.
+        A |dal_short_name| concept of an object that encapsulates the creation
+        process of another object and enables its iterative creation.
 
     Contiguous data
         A special property of the :term:`data format`: the data are stored as
         one contiguous memory block.
 
     Data format
-        The representation of internal structure of the data.
+        Representation of the internal structure of the data.
 
         **Examples:** data can be stored in array-of-structures or
         compressed-sparse-row format
@@ -191,7 +190,7 @@ Machine learning terms
         **Example:** row-major format, where elements are stored row by row
 
     Data type
-        An integral or floating-point type which is used to physically store the
+        An integral or a floating-point type used to physically store the
         data.
 
         **Examples:** int32_t, float, double
@@ -231,9 +230,9 @@ Machine learning terms
         becomes equal to zero.
 
     Table
-        A |dal_short_name| concept of a :term:`dataset` which contains only
-        numerical data, :term:`categorical<Categorical feature>` or
-        :term:`continuous<Continuous feature>`.
+        A |dal_short_name| concept of a :term:`dataset` that contains only
+        numerical data, :term:`categorical <Categorical feature>` or
+        :term:`continuous <Continuous feature>`.
 
     Workload
         A task of applying a |dal_short_name| algorithm to a dataset.
@@ -272,6 +271,5 @@ Common oneAPI terms
         SYCL(TM) [SYCLSpec]_ --- high-level programming model for OpenCL(TM)
         that enables code for heterogeneous processors to be written in a
         "single-source" style using completely standard C++.
-
 
 
