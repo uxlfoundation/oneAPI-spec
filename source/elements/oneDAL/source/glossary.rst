@@ -36,7 +36,7 @@ Machine learning terms
         usually :term:`categorical <Categorical feature>`,
         without prior information about them.
 
-        **Example:** A task of marking big star clusters at the space images
+        **Example:** A problem of marking big star clusters at the space images
 
     Continuous feature
         A :term:`feature` with values in a domain of real numbers. Can be
@@ -51,7 +51,7 @@ Machine learning terms
 
     Feature
         A particular property or quality of a real object or an event. Has a
-        defined type and domain. In machine learning tasks, features are
+        defined type and domain. In machine learning problems, features are
         considered as input variable that are independent from each other.
 
         **Synonyms:** attribute, variable, input variable
@@ -83,10 +83,10 @@ Machine learning terms
     Label
         A :term:`response` with :term:`categorical <Categorical feature>` or
         :term:`ordinal <Ordinal feature>` values. This is an output in
-        :term:`classification` and :term:`clustering` tasks.
+        :term:`classification` and :term:`clustering` problems.
 
-        **Example:** the spam-detection task has a binary label indicating whether
-        the email is spam or not
+        **Example:** the spam-detection problem has a binary label indicating
+        whether the email is spam or not
 
     Model
         An entity that stores information necessary to run :term:`inference`
@@ -124,9 +124,9 @@ Machine learning terms
 
     Response
         A property of some real object or event which value is target to be
-        predicted in the :term:`supervised learning` task. While the
-        :term:`feature` is an input in the machine learning task, the response
-        is one of the outputs can be made by the :term:`model` on the
+        predicted in the :term:`supervised learning` problem. While the
+        :term:`feature` is an input in the machine learning problem, the
+        response is one of the outputs can be made by the :term:`model` on the
         :term:`inference` stage.
 
         **Synonym:** dependent variable
@@ -235,7 +235,7 @@ Machine learning terms
         :term:`continuous <Continuous feature>`.
 
     Workload
-        A task of applying a |dal_short_name| algorithm to a dataset.
+        A problem of applying a |dal_short_name| algorithm to a :term:`dataset`.
 
 Common oneAPI terms
 ===================
