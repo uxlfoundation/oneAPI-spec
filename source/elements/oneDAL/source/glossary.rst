@@ -161,7 +161,7 @@ Machine learning terms
     :sorted:
 
     Accessor
-        A |dal_short_name| concept of an object that provides access to the data
+        A |dal_short_name| concept for an object that provides access to the data
         of another object in the special :term:`data format` .
 
     Batch Mode
@@ -170,7 +170,7 @@ Machine learning terms
         memory of the device on which the computations are performed.
 
     Builder
-        A |dal_short_name| concept of an object that encapsulates the creation
+        A |dal_short_name| concept for an object that encapsulates the creation
         process of another object and enables its iterative creation.
 
     Contiguous data
@@ -230,7 +230,7 @@ Machine learning terms
         becomes equal to zero.
 
     Table
-        A |dal_short_name| concept of a :term:`dataset` that contains only
+        A |dal_short_name| concept for a :term:`dataset` that contains only
         numerical data, :term:`categorical <Categorical feature>` or
         :term:`continuous <Continuous feature>`.
 
