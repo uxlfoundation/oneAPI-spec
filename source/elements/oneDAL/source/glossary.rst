@@ -157,8 +157,10 @@ Machine learning terms
     :sorted:
 
     Accessor
-        A |dal_short_name| concept for an object that provides access to the data
-        of another object in the special :term:`data format` .
+        A |dal_short_name| concept for an object that provides access to the
+        data of another object in the special :term:`data format`. It abstracts
+        data access from interface of an object and provides uniform access to
+        the data stored in objects of different types.
 
     Batch Mode
         The computation mode for an algorithm in |dal_short_name|, where all the
@@ -219,6 +221,17 @@ Machine learning terms
         The object is immutable if it is not possible to change its state after
         creation.
 
+    Metadata
+        An information about logical and physical structure of an object. All
+        possible combinations of metadata values present the full set of
+        possible objects of a given type. Metadata do not expose an information
+        which is not a part of type definition, e.g. implementation details.
+
+        Example: :term:`table` object can contain three :term:`nominal features
+        <Nominal feature>` with 100 :term:`observations <Observation>` (logical
+        part of metadata). This object can store data as sparse csr array and
+        provides direct access to them (physical part).
+
     Online Mode
         The computation mode for an algorithm in |dal_short_name|, where the
         data needed for computation becomes available in parts over time.
@@ -234,7 +247,9 @@ Machine learning terms
     Table
         A |dal_short_name| concept for a :term:`dataset` that contains only
         numerical data, :term:`categorical <Categorical feature>` or
-        :term:`continuous <Continuous feature>`.
+        :term:`continuous <Continuous feature>`. Serves as a transfer of data
+        between user's application and computations inside |dal_short_name|.
+        Hides details of :term:`data format` and generalizes access to the data.
 
     Workload
         A problem of applying a |dal_short_name| algorithm to a :term:`dataset`.
