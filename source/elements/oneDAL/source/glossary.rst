@@ -32,9 +32,8 @@ Machine learning terms
 
     Clustering
         An :term:`unsupervised machine learning problem <Unsupervised learning>`
-        of grouping :term:`feature vectors <Feature vector>` into groups,
-        usually :term:`categorical <Categorical feature>`,
-        without prior information about them.
+        of grouping :term:`feature vectors <Feature vector>` into bunches, which
+        are usually encoded as :term:`nominal <Nominal feature>` values.
 
         **Example:** find big star clusters in the space images
 
@@ -148,9 +147,8 @@ Machine learning terms
 
     Unsupervised learning
         :term:`Training` process that uses a :term:`training set` with no
-        :term:`responses <Response>`. The goal is to get a
-        :term:`model` that allocates :term:`feature vectors <Feature vector>`  into
-        groups.
+        :term:`responses <Response>`. The goal is to find hidden patters inside
+        :term:`feature vectors <Feature vector>` and dependencies between them.
 
 |dal_short_name| terms
 ======================
@@ -188,8 +186,9 @@ Machine learning terms
         **Example:** row-major format, where elements are stored row by row
 
     Data type
-        An integral or a floating-point type used to physically store the
-        data.
+        An attribute of data used by a compiler to store and access them.
+        Includes size in bytes, encoding principles, and available operations
+        (in terms of a programming language).
 
         **Examples:** int32_t, float, double
 
