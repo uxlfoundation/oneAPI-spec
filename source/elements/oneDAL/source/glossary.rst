@@ -195,10 +195,6 @@ Machine learning terms
         **Examples:** int32_t, float, double
 
     Heterogeneous data
-        A property of the :term:`data format`, where :term:`features<Feature>`
-        have different :term:`data types<Data type>` and/or operations defined
-        between values.
-
         Data which contain values either of different :term:`data types <Data
         type>` or different sets of operations defined on them. One of the
         characteristics of a :term:`data format`.
