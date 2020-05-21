@@ -121,11 +121,11 @@ Machine learning terms
         **Example:** predict temperature based on weather conditions
 
     Response
-        A property of some real object or event which value is target to be
-        predicted in the :term:`supervised learning` problem. While the
-        :term:`feature` is an input in the machine learning problem, the
-        response is one of the outputs can be made by the :term:`model` on the
-        :term:`inference` stage.
+        A property of some real object or event which dependency from
+        :term:`feature vector` need to be defined in :term:`supervised learning`
+        problem. While a :term:`feature` is an input in the machine learning
+        problem, the response is one of the outputs can be made by the
+        :term:`model` on the :term:`inference` stage.
 
         **Synonym:** dependent variable
 
@@ -225,10 +225,11 @@ Machine learning terms
 
     Reference-counted object
         A copy-constructible and copy-assignable |dal_short_name| object which
-        stores the number of references to the unique implementation. Has
-        lightweight copy operations which increases the number of references.
-        An implementation is automatically freed when the number of references
-        becomes equal to zero.
+        stores the number of references to the unique implementation. Both copy
+        operations defined for this object are lightweight, which means that
+        each time a new object is created, only the number of references is
+        increased. An implementation is automatically freed when the number of
+        references becomes equal to zero.
 
     Table
         A |dal_short_name| concept for a :term:`dataset` that contains only
