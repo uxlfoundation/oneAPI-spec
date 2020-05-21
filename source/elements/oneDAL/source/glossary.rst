@@ -222,10 +222,10 @@ Machine learning terms
         creation.
 
     Metadata
-        An information about logical and physical structure of an object. All
+        Information about logical and physical structure of an object. All
         possible combinations of metadata values present the full set of
-        possible objects of a given type. Metadata do not expose an information
-        which is not a part of type definition, e.g. implementation details.
+        possible objects of a given type. Metadata do not expose information
+        that is not a part of a type definition, e.g. implementation details.
 
         **Example:** :term:`table` object can contain three :term:`nominal features
         <Nominal feature>` with 100 :term:`observations <Observation>` (logical
