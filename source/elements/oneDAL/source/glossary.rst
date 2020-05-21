@@ -227,10 +227,10 @@ Machine learning terms
         possible objects of a given type. Metadata do not expose an information
         which is not a part of type definition, e.g. implementation details.
 
-        Example: :term:`table` object can contain three :term:`nominal features
+        **Example:** :term:`table` object can contain three :term:`nominal features
         <Nominal feature>` with 100 :term:`observations <Observation>` (logical
         part of metadata). This object can store data as sparse csr array and
-        provides direct access to them (physical part).
+        provides direct access to them (physical part)
 
     Online Mode
         The computation mode for an algorithm in |dal_short_name|, where the
