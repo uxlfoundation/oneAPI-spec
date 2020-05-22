@@ -72,7 +72,8 @@ Table builder
 Some :term:`table` objects require complex procedures to create them. To make
 easy-of-use table creation from data of various :term:`data formats <Data
 format>` or other objects of different types, |dal_short_name| introduces a
-special :term:`builder` concept for table types.
+special :term:`builder` concept for table types. See :ref:`table builders
+<table_builders>` section for details.
 
 Accessor
 --------
@@ -126,12 +127,16 @@ table object is immutable, this is not possible to change the data inside it.
 To change the data of table object, its data should be moved inside builder
 object. Once it done, data inside builder can be changed by the accessor.
 
-See sections about :ref:`tables`, :ref:`table builders`, and :ref:`accessors`
-for details.
+See sections about :ref:`tables`, :ref:`table builders <table_builders>`, and
+:ref:`accessors` for details.
 
 .. image:: _static/table_builder_accessor_sequence.png
   :width: 800
   :alt: Sequence diagram of accessor-builder-table relations
+
+Details
+=======
+
 .. toctree::
 
    tables.rst
