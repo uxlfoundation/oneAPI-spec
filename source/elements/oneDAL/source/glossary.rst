@@ -106,6 +106,9 @@ Machine learning terms
 
         **Example:** student's grade
 
+    Outlier
+        The value that has an abnormal deviation from typical values
+
     Ratio feature
         A :term:`continuous feature` with defined operations of equality,
         comparison, addition, subtraction, multiplication, and division.
