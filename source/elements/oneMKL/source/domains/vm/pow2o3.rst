@@ -1,4 +1,3 @@
-.. _pow2o3:
 
 pow2o3
 ======
@@ -15,7 +14,6 @@ pow2o3
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ pow2o3
       USM API:
 
 
-      .. cpp:function::  event pow2o3(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event pow2o3(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``pow2o3`` supports the following precisions.
 
@@ -47,7 +45,6 @@ pow2o3
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -91,7 +88,6 @@ pow2o3
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -162,7 +158,6 @@ pow2o3
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -189,7 +184,6 @@ pow2o3
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -212,6 +206,4 @@ pow2o3
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

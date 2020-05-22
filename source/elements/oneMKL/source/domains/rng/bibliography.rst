@@ -118,5 +118,3 @@ Bibliography
             http://software.intel.com/en-us/articles/intel-math-kernel-library-documentation/
 
 
-.. container::
-

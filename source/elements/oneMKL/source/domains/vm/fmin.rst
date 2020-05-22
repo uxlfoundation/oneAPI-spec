@@ -1,4 +1,3 @@
-.. _fmin:
 
 fmin
 ====
@@ -16,7 +15,6 @@ fmin
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ fmin
       USM API:
 
 
-      .. cpp:function::  event fmin(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event fmin(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``fmin`` supports the following precisions.
 
@@ -48,7 +46,6 @@ fmin
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -92,7 +89,6 @@ fmin
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -157,7 +153,6 @@ fmin
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -184,11 +179,10 @@ fmin
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use fmincan be found in the oneMKL installation
+   An example of how to use fmin can be found in the oneMKL installation
    directory, under:
 
 
@@ -207,6 +201,4 @@ fmin
       **Parent topic:** `Miscellaneous VM
       Functions <miscellaneous-vm-functions.html>`__
 
-
-.. container::
 

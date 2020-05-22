@@ -1,4 +1,3 @@
-.. _acos:
 
 acos
 ====
@@ -15,7 +14,6 @@ acos
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ acos
       USM API:
 
 
-      .. cpp:function::  event acos(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event acos(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``acos`` supports the following precisions.
 
@@ -49,7 +47,6 @@ acos
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -181,7 +178,6 @@ acos
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -252,7 +248,6 @@ acos
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -279,11 +274,10 @@ acos
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use acoscan be found in the oneMKL installation
+   An example of how to use acos can be found in the oneMKL installation
    directory, under:
 
 
@@ -302,6 +296,4 @@ acos
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

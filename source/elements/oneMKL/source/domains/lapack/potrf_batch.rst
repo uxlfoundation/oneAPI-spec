@@ -1,4 +1,3 @@
-.. _potrf_batch:
 
 potrf_batch
 ===========
@@ -17,7 +16,6 @@ potrf_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ potrf_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -81,7 +78,6 @@ potrf_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -126,7 +122,6 @@ potrf_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -157,11 +152,10 @@ potrf_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
-      An example of how to use potrf_batchcan be found in the oneMKL
+      An example of how to use potrf_batch can be found in the oneMKL
       installation directory, under:
 
 
@@ -180,6 +174,4 @@ potrf_batch
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

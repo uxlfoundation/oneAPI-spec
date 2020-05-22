@@ -1,7 +1,7 @@
 .. _mkl-rng-weibull:
 
 onemkl::rng::weibull
-=================
+====================
 
 
 .. container::
@@ -15,34 +15,24 @@ onemkl::rng::weibull
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class weibull {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  weibull(): weibull((T)0.0, (T)1.0){}
-
-      .. cpp:function::  weibull(T alpha, T a, T beta)
-
-      .. cpp:function::  weibull(const weibull<T, Method>& other)
-
-      .. cpp:function::  T alpha() const
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T beta() const
-
-      .. cpp:function::  weibull<T, Method>& operator=(const weibull<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class weibull {
+          public:
+            weibull(): weibull((T)0.0, (T)1.0){}
+            weibull(T alpha, T a, T beta)
+            weibull(const weibull<T, Method>& other)
+            T alpha() const
+            T a() const
+            T beta() const
+           weibull<T, Method>& operator=(const weibull<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -50,7 +40,6 @@ onemkl::rng::weibull
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -75,7 +64,6 @@ onemkl::rng::weibull
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -110,8 +98,6 @@ onemkl::rng::weibull
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-8F2DCE6A-CB54-4CEA-A5EB-937893A3DB34-low.gif

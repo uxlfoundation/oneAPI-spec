@@ -1,4 +1,3 @@
-.. _maxmag:
 
 maxmag
 ======
@@ -16,7 +15,6 @@ maxmag
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ maxmag
       USM API:
 
 
-      .. cpp:function::  event maxmag(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event maxmag(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``maxmag`` supports the following precisions.
 
@@ -48,7 +46,6 @@ maxmag
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -102,7 +99,6 @@ maxmag
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -167,7 +163,6 @@ maxmag
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -194,11 +189,10 @@ maxmag
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use maxmagcan be found in the oneMKL
+   An example of how to use maxmag can be found in the oneMKL
    installation directory, under:
 
 
@@ -217,6 +211,4 @@ maxmag
       **Parent topic:** `Miscellaneous VM
       Functions <miscellaneous-vm-functions.html>`__
 
-
-.. container::
 

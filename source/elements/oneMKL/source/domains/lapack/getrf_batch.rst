@@ -1,4 +1,3 @@
-.. _getrf_batch:
 
 getrf_batch
 ===========
@@ -16,7 +15,6 @@ getrf_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -45,7 +43,6 @@ getrf_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -69,7 +66,6 @@ getrf_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -103,7 +99,6 @@ getrf_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -135,11 +130,10 @@ getrf_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
-      An example of how to use getrf_batchcan be found in the oneMKL
+      An example of how to use getrf_batch can be found in the oneMKL
       installation directory, under:
 
 
@@ -158,8 +152,6 @@ getrf_batch
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-0F47CAD3-006C-4A78-B229-413313667ee1.png

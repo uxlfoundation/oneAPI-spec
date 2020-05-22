@@ -1,4 +1,3 @@
-.. _powr:
 
 powr
 ====
@@ -16,7 +15,6 @@ powr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ powr
       USM API:
 
 
-      .. cpp:function::  event powr(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event powr(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``powr`` supports the following precisions.
 
@@ -48,7 +46,6 @@ powr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -180,7 +177,6 @@ powr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -259,7 +255,6 @@ powr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -286,11 +281,10 @@ powr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use powrcan be found in the oneMKL installation
+   An example of how to use powr can be found in the oneMKL installation
    directory, under:
 
 
@@ -309,6 +303,4 @@ powr
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

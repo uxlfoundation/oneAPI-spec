@@ -1,7 +1,7 @@
 .. _mkl-rng-chi_square:
 
 onemkl::rng::chi_square
-====================
+=======================
 
 
 .. container::
@@ -15,30 +15,22 @@ onemkl::rng::chi_square
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      gamma_marsaglia>
+      ::
 
-      .. cpp:function::  class chi_square {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  chi_square(): chi_square(5){}
-
-      .. cpp:function::  chi_square(std::int32_t n)
-
-      .. cpp:function::  chi_square(const chi_square<T, Method>& other)
-
-      .. cpp:function::  std::int32_t n() const
-
-      .. cpp:function::  chi_square<T, Method>& operator=(const      chi_square<T, Method>& other)
-
-      .. cpp:function::  }
+        template<typename T = float, method Method =      gamma_marsaglia>
+          class chi_square {
+          public:
+            chi_square(): chi_square(5){}
+            chi_square(std::int32_t n)
+            chi_square(const chi_square<T, Method>& other)
+            std::int32_t n() const
+            chi_square<T, Method>& operator=(const chi_square<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +38,6 @@ onemkl::rng::chi_square
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -69,7 +60,6 @@ onemkl::rng::chi_square
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -98,8 +88,6 @@ onemkl::rng::chi_square
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-482EEED2-95DF-4AA3-A484-E2CC41F29ee1.png

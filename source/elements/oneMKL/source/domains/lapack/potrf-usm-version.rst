@@ -17,16 +17,13 @@ potrf (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  template<typename data_t>
-
-         .. cpp:function::  cl::sycl::event potrf(cl::sycl::queue &queue,         onemkl::uplo upper_lower, std::int64_t n, data_t \*a, std::int64_t         lda, std::int64_t &info, cl::sycl::event &e_a_ready)
+         .. cpp:function::  template<typename data_t> potrf(cl::sycl::queue &queue,         onemkl::uplo upper_lower, std::int64_t n, data_t *a, std::int64_t         lda, std::int64_t &info, cl::sycl::event &e_a_ready)
 
          The USM version of ``potrf`` supports the following precisions.
 
@@ -48,7 +45,6 @@ potrf (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -77,7 +73,6 @@ potrf (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -124,7 +119,6 @@ potrf (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -154,7 +148,6 @@ potrf (USM Version)
 
 
       .. rubric:: Return Values
-         :name: return-values
          :class: sectiontitle
 
 
@@ -170,6 +163,4 @@ potrf (USM Version)
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

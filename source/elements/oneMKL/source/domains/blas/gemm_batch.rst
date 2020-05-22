@@ -1,7 +1,11 @@
-.. _gemm_batch:
+.. _onemkl_blas_gemm_batch:
 
 gemm_batch
 ==========
+
+gemm_batch (BUFFER Version)
+---------------------------
+
 
 
 .. container::
@@ -11,23 +15,21 @@ gemm_batch
 
 
    .. container:: section
-      :name: GUID-7885D940-FAC1-4F37-9E1C-A022DED99EBD
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       **Group API**
 
 
-      .. cpp:function::  void gemm_batch(queue &exec_queue,      buffer<transpose, 1> &transa_array, buffer<transpose,1>      &transb_array, buffer<std::int64_t,1> &m_array,      buffer<std::int64_t,1> &n_array, buffer<std::int64_t,1> &k_array,      buffer<T,1> alpha_array, buffer<T,1> &a_array,      buffer<std::int64_t,1> &lda_array, buffer<T,1> &b_array,      buffer<std::int64_t,1> ldb_array, buffer<T,1> &beta_array,      buffer<T,1> &c, buffer<std::int64_t,1> &ldc_array, std::int64_t      group_count, buffer<std::int64_t,1> &group_size_array)
+      .. cpp:function::  void onemkl::blas::gemm_batch(sycl::queue &queue,      sycl::buffer<transpose, 1> &transa_array, sycl::buffer<transpose,1>      &transb_array, sycl::buffer<std::int64_t,1> &m_array,      sycl::buffer<std::int64_t,1> &n_array, sycl::buffer<std::int64_t,1> &k_array,      sycl::buffer<T,1> alpha_array, sycl::buffer<T,1> &a_array,      sycl::buffer<std::int64_t,1> &lda_array, sycl::buffer<T,1> &b_array,      sycl::buffer<std::int64_t,1> ldb_array, sycl::buffer<T,1> &beta_array,      sycl::buffer<T,1> &c, sycl::buffer<std::int64_t,1> &ldc_array, std::int64_t      group_count, sycl::buffer<std::int64_t,1> &group_size_array)
 
       **Strided API**
 
 
-      .. cpp:function::  void gemm_batch(queue &exec_queue, transpose      transa, transpose transb, std::int64_t m, std::int64_t n,      std::int64_t k, T alpha, buffer<T,1> &a, std::int64_t &lda,      std::int64_t stridea, buffer<T,1> &b, std::int64_t ldb,      std::int64_t strideb, T beta, buffer<T,1> &c, std::int64_t ldc,      std::int64_t stridec, std::int64_t batch_size)
+      .. cpp:function::  void onemkl::blas::gemm_batch(sycl::queue &queue, transpose      transa, transpose transb, std::int64_t m, std::int64_t n,      std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t &lda,      std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb,      std::int64_t strideb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc,      std::int64_t stridec, std::int64_t batch_size)
 
       ``gemm_batch`` supports the following precisions.
 
@@ -45,17 +47,15 @@ gemm_batch
 
 
 .. container:: section
-   :name: GUID-14237C95-6322-47A4-BC11-D3CDD2118C42
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The gemm_batch routines perform a series of matrix-matrix operations
+   The ``gemm_batch`` routines perform a series of matrix-matrix operations
    with general matrices. They are similar to the gemm routine
-   counterparts, but the gemm_batch routines perform matrix-matrix
+   counterparts, but the ``gemm_batch`` routines perform matrix-matrix
    operations with groups of matrices. The groups contain matrices with
    the same parameters.
 
@@ -121,11 +121,9 @@ gemm_batch
 
 
 .. container:: section
-   :name: GUID-863264A0-4CE9-495F-A617-102E46D7A41A
 
 
    .. rubric:: Input Parameters - Group API
-      :name: input-parameters---group-api
       :class: sectiontitle
 
 
@@ -140,6 +138,7 @@ gemm_batch
       details.
 
 
+
    transb_array
       Buffer holding ``group_count onemkl::transpose`` value.
 
@@ -149,6 +148,7 @@ gemm_batch
       the matrix multiplication. See
       :ref:`onemkl_datatypes` for more
       details.
+
 
 
    m_array
@@ -268,11 +268,9 @@ gemm_batch
 
 
 .. container:: section
-   :name: GUID-1E4953E6-F7B1-4FEE-BA5A-8C4BD51DC700
 
 
    .. rubric:: Output Parameters - Group API
-      :name: output-parameters---group-api
       :class: sectiontitle
 
 
@@ -282,11 +280,9 @@ gemm_batch
 
 
 .. container:: section
-   :name: GUID-D067773A-45A3-4D24-B10A-46E27834947E
 
 
    .. rubric:: Input Parameters - Strided API
-      :name: input-parameters---strided-api
       :class: sectiontitle
 
 
@@ -297,11 +293,13 @@ gemm_batch
       details.
 
 
+
    transb
       Specifies ``op(B)`` the transposition operation applied to the
       matrices B. See
       :ref:`onemkl_datatypes` for more
       details.
+
 
 
    m
@@ -390,11 +388,9 @@ gemm_batch
 
 
 .. container:: section
-   :name: GUID-98C3DE17-4F5F-41A1-B431-48148153ABBA
 
 
    .. rubric:: Output Parameters - Strided API
-      :name: output-parameters---strided-api
       :class: sectiontitle
 
 
@@ -404,16 +400,14 @@ gemm_batch
 
 
 .. container:: section
-   :name: GUID-AC72653A-4AC8-4B9D-B7A9-13A725AA19BF
 
 
    .. rubric:: Notes
-      :name: notes
       :class: sectiontitle
 
 
    If ``beta`` = 0, matrix ``C`` does not need to be initialized before
-   calling gemm_batch.
+   calling ``gemm_batch``.
 
 
 .. container:: familylinks
@@ -425,8 +419,6 @@ gemm_batch
       **Parent topic:** :ref:`blas-like-extensions`
       
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-D797E8FA-B0CE-417C-98F1-896CDFB4Fee1.png

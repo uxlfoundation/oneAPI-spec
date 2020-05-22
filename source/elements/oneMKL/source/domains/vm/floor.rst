@@ -1,4 +1,3 @@
-.. _floor:
 
 floor
 =====
@@ -7,7 +6,7 @@ floor
 .. container::
 
 
-   Computes an integer valuerounded towards minus infinity for each
+   Computes an integer value rounded towards minus infinity for each
    vector element.
 
 
@@ -16,7 +15,6 @@ floor
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ floor
       USM API:
 
 
-      .. cpp:function::  event floor(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event floor(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``floor`` supports the following precisions.
 
@@ -48,11 +46,10 @@ floor
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The floor(a)functioncomputes an integer valuerounded towards minus
+   The floor(a)function computes an integer value rounded towards minus
    infinity for each vector element.
 
 
@@ -99,7 +96,6 @@ floor
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -156,7 +152,6 @@ floor
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -183,11 +178,10 @@ floor
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use floorcan be found in the oneMKL installation
+   An example of how to use floor can be found in the oneMKL installation
    directory, under:
 
 
@@ -206,8 +200,6 @@ floor
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-41F8B94B-EEFA-4308-925A-D2DF486FBF8B-low.gif

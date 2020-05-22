@@ -1,4 +1,3 @@
-.. _orgqr_batch:
 
 orgqr_batch
 ===========
@@ -17,7 +16,6 @@ orgqr_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ orgqr_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -148,7 +145,6 @@ orgqr_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -193,7 +189,6 @@ orgqr_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -217,11 +212,10 @@ orgqr_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
-      An example of how to use orgqr_batchcan be found in the oneMKL
+      An example of how to use orgqr_batch can be found in the oneMKL
       installation directory, under:
 
 
@@ -240,6 +234,4 @@ orgqr_batch
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

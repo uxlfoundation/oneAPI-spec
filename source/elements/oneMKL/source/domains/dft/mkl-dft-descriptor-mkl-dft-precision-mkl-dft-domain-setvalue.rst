@@ -1,7 +1,7 @@
 .. _mkl-dft-descriptor-mkl-dft-precision-mkl-dft-domain-setvalue:
 
 onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
-=====================================================================
+==============================================================================
 
 
 .. container::
@@ -16,17 +16,15 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.setValue         (onemkl::dft::ConfigParam param , ...) 
+         .. cpp:function::  onemkl::dft::ErrCode setValue         (onemkl::dft::ConfigParam param , ...) 
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -48,7 +45,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -89,7 +85,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -114,7 +109,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -136,7 +130,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
 
 
          .. rubric:: Return Values
-            :name: return-values
             :class: sectiontitle
 
 
@@ -174,5 +167,4 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::setValue
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-
+   

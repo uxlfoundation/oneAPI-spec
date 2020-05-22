@@ -1,7 +1,7 @@
 .. _mkl-rng-geometric:
 
 onemkl::rng::geometric
-===================
+======================
 
 
 .. container::
@@ -15,30 +15,22 @@ onemkl::rng::geometric
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = inverse_function>
-
-      .. cpp:function::  class geometric {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  geometric(): geometric(0.5){}
-
-      .. cpp:function::  geometric(double p)
-
-      .. cpp:function::  geometric(const geometric<T, Method>& other)
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  geometric<T, Method>& operator=(const      geometric<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = inverse_function>
+          class geometric {
+          public:
+            geometric(): geometric(0.5){}
+            geometric(double p)
+            geometric(const geometric<T, Method>& other)
+            double p() const
+            geometric<T, Method>& operator=(const      geometric<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +38,6 @@ onemkl::rng::geometric
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -76,7 +67,6 @@ onemkl::rng::geometric
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -105,8 +95,6 @@ onemkl::rng::geometric
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-2D60A1A4-9522-40FC-AEEA-B64EB795144C-low.gif

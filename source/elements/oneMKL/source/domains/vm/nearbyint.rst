@@ -1,4 +1,3 @@
-.. _nearbyint:
 
 nearbyint
 =========
@@ -16,7 +15,6 @@ nearbyint
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ nearbyint
       USM API:
 
 
-      .. cpp:function::  event nearbyint(queue& exec_queue, int64_t n, T\*      a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event nearbyint(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``nearbyint`` supports the following precisions.
 
@@ -48,11 +46,10 @@ nearbyint
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The nearbyint(a) functioncomputes a rounded integer value in a
+   The nearbyint(a) function computes a rounded integer value in a
    current rounding mode for each vector element.
 
 
@@ -95,7 +92,6 @@ nearbyint
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -152,7 +148,6 @@ nearbyint
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -179,11 +174,10 @@ nearbyint
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use nearbyintcan be found in the oneMKL
+   An example of how to use nearbyint can be found in the oneMKL
    installation directory, under:
 
 
@@ -202,6 +196,4 @@ nearbyint
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 

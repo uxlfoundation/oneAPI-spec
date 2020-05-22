@@ -1,4 +1,3 @@
-.. _linearfrac:
 
 linearfrac
 ==========
@@ -16,7 +15,6 @@ linearfrac
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ linearfrac
       USM API:
 
 
-      .. cpp:function::  event linearfrac(queue& exec_queue, int64_t n,      T\* a, T\* b, T scalea, T shifta, T scaleb, T shiftb, T\* y,      vector_class<event>\* depends, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function::  event linearfrac(queue& exec_queue, int64_t n,      T* a, T* b, T scalea, T shifta, T scaleb, T shiftb, T* y,      vector_class<event>* depends, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
 
       ``linearfrac`` supports the following precisions.
 
@@ -48,7 +46,6 @@ linearfrac
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -65,7 +62,7 @@ linearfrac
    therefore no special values are defined for this function. If used in
    HA or LA mode, linearfrac sets the VM Error Status to
    status::accuracy_warning. Correctness is guaranteed within the
-   threshold limitationsdefined for each input parameter (see the table
+   threshold limitations defined for each input parameter (see the table
    below); otherwise, the behavior is unspecified.
 
 
@@ -122,7 +119,6 @@ linearfrac
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -187,7 +183,7 @@ linearfrac
 
 
    a
-      The pointer ``a`` to thie 1st input vector of size ``n``.
+      The pointer ``a`` to the 1st input vector of size ``n``.
 
 
    b
@@ -233,7 +229,6 @@ linearfrac
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -260,11 +255,10 @@ linearfrac
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use linearfraccan be found in the oneMKL
+   An example of how to use linearfrac can be found in the oneMKL
    installation directory, under:
 
 
@@ -283,6 +277,4 @@ linearfrac
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

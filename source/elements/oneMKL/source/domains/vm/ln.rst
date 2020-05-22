@@ -1,4 +1,3 @@
-.. _ln:
 
 ln
 ==
@@ -15,7 +14,6 @@ ln
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ ln
       USM API:
 
 
-      .. cpp:function::  event ln(queue& exec_queue, int64_t n, T\* a, T\*      y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event ln(queue& exec_queue, int64_t n, T* a, T*      y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``ln`` supports the following precisions.
 
@@ -49,7 +47,6 @@ ln
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -172,7 +169,6 @@ ln
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -243,7 +239,6 @@ ln
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -270,11 +265,10 @@ ln
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use lncan be found in the oneMKL installation
+   An example of how to use ln can be found in the oneMKL installation
    directory, under:
 
 
@@ -293,8 +287,6 @@ ln
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-6FB20CE7-1E2A-4340-995F-0E621DEF0E2D-low.jpg

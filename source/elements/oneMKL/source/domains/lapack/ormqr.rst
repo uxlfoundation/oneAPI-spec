@@ -1,4 +1,3 @@
-.. _ormqr:
 
 ormqr
 =====
@@ -17,7 +16,6 @@ ormqr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ ormqr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -63,7 +60,6 @@ ormqr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -144,7 +140,6 @@ ormqr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -173,7 +168,6 @@ ormqr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -196,6 +190,4 @@ ormqr
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

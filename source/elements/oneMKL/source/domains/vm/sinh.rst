@@ -1,4 +1,3 @@
-.. _sinh:
 
 sinh
 ====
@@ -15,7 +14,6 @@ sinh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ sinh
       USM API:
 
 
-      .. cpp:function::  event sinh(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event sinh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``sinh`` supports the following precisions.
 
@@ -49,7 +47,6 @@ sinh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -204,7 +201,6 @@ sinh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -275,7 +271,6 @@ sinh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -302,11 +297,10 @@ sinh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use sinhcan be found in the oneMKL installation
+   An example of how to use sinh can be found in the oneMKL installation
    directory, under:
 
 
@@ -325,6 +319,4 @@ sinh
       **Parent topic:** `Hyperbolic
       Functions <hyperbolic-functions.html>`__
 
-
-.. container::
 

@@ -1,4 +1,3 @@
-.. _cosh:
 
 cosh
 ====
@@ -15,7 +14,6 @@ cosh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ cosh
       USM API:
 
 
-      .. cpp:function::  event cosh(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cosh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cosh`` supports the following precisions.
 
@@ -49,7 +47,6 @@ cosh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -204,7 +201,6 @@ cosh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -275,7 +271,6 @@ cosh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -302,11 +297,10 @@ cosh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use coshcan be found in the oneMKL installation
+   An example of how to use cosh can be found in the oneMKL installation
    directory, under:
 
 
@@ -325,6 +319,4 @@ cosh
       **Parent topic:** `Hyperbolic
       Functions <hyperbolic-functions.html>`__
 
-
-.. container::
 

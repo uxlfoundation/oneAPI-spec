@@ -1,4 +1,3 @@
-.. _sytrf:
 
 sytrf
 =====
@@ -16,7 +15,6 @@ sytrf
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,13 +40,12 @@ sytrf
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The routine computes thefactorization of a real/complex symmetric
-   matrix ``A`` usingthe Bunch-Kaufman diagonal pivoting method. The
-   form of thefactorization is:
+   The routine computes the factorization of a real/complex symmetric
+   matrix ``A`` using the Bunch-Kaufman diagonal pivoting method. The
+   form of the factorization is:
 
 
    -  if ``upper_lower=uplo::upper``, ``A`` = ``U*D*U``\ :sup:`T`
@@ -70,7 +67,6 @@ sytrf
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -98,7 +94,6 @@ sytrf
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -122,7 +117,6 @@ sytrf
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -145,6 +139,4 @@ sytrf
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

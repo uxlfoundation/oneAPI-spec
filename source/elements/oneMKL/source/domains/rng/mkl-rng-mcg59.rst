@@ -1,7 +1,7 @@
 .. _mkl-rng-mcg59:
 
 onemkl::rng::mcg59
-===============
+==================
 
 
 .. container::
@@ -16,29 +16,23 @@ onemkl::rng::mcg59
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class mcg59 : internal::engine_base<mcg59>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  mcg59 (cl::sycl::queue& queue, std::uint64_t         seed)
-
-         .. cpp:function::  mcg59 (const mcg59&other)
-
-         .. cpp:function::  mcg59& operator=(const mcg59& other)
-
-         .. cpp:function::  ~mcg59()
-
-         .. cpp:function::  }
+         ::
+	    
+           class mcg59 : internal::engine_base<mcg59>{
+           public:
+             mcg59 (cl::sycl::queue& queue, std::uint64_t         seed)
+             mcg59 (const mcg59&other)
+             mcg59& operator=(const mcg59& other)
+             ~mcg59()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -46,7 +40,6 @@ onemkl::rng::mcg59
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -56,7 +49,6 @@ onemkl::rng::mcg59
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -91,5 +83,4 @@ onemkl::rng::mcg59
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

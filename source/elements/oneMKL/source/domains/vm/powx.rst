@@ -1,4 +1,3 @@
-.. _powx:
 
 powx
 ====
@@ -15,7 +14,6 @@ powx
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ powx
       USM API:
 
 
-      .. cpp:function::  event powx(queue& exec_queue, int64_t n, T\* a, T      b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event powx(queue& exec_queue, int64_t n, T* a, T      b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``powx`` supports the following precisions.
 
@@ -49,7 +47,6 @@ powx
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -67,7 +64,7 @@ powx
 
 
    Special values and VM Error Status treatment are the same as for the
-   powfunction.
+   pow function.
 
 
 .. container:: section
@@ -75,7 +72,6 @@ powx
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -154,7 +150,6 @@ powx
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -181,11 +176,10 @@ powx
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use powxcan be found in the oneMKL installation
+   An example of how to use powx can be found in the oneMKL installation
    directory, under:
 
 
@@ -204,6 +198,4 @@ powx
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

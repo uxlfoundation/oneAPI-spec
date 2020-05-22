@@ -1,4 +1,3 @@
-.. _orgtr:
 
 orgtr
 =====
@@ -17,7 +16,6 @@ orgtr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +39,6 @@ orgtr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -58,7 +55,6 @@ orgtr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -102,7 +98,6 @@ orgtr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -129,7 +124,6 @@ orgtr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -152,6 +146,4 @@ orgtr
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

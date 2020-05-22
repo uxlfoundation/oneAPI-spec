@@ -212,7 +212,7 @@ VM Mathematical Functions
            -  Computes the inverse tangent of vector elements divided by       ``π``
          * -        `atan2pi <atan2pi.html>`__
            -  s, d 
-           -  Computes the four-quadrant inverse tangent of the ratios of       the corresponding elementss of two vectors divided by ``π``
+           -  Computes the four-quadrant inverse tangent of the ratios of the corresponding elements of two vectors divided by ``π``
          * -        `cosd <cosd.html>`__
            -  s, d 
            -  Computes the cosine of vector elements multiplied by ``π``/180 

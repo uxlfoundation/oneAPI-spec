@@ -1,4 +1,3 @@
-.. _log2:
 
 log2
 ====
@@ -15,7 +14,6 @@ log2
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ log2
       USM API:
 
 
-      .. cpp:function::  event log2(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event log2(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``log2`` supports the following precisions.
 
@@ -47,7 +45,6 @@ log2
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -97,7 +94,6 @@ log2
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -168,7 +164,6 @@ log2
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -195,7 +190,6 @@ log2
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -218,6 +212,4 @@ log2
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 

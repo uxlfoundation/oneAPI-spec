@@ -1,7 +1,7 @@
 .. _mkl-rng-skip_ahead:
 
 onemkl::rng::skip_ahead
-====================
+=======================
 
 
 .. container::
@@ -15,7 +15,6 @@ onemkl::rng::skip_ahead
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -32,19 +31,14 @@ onemkl::rng::skip_ahead
       **Common Interface**
 
 
-      .. cpp:function::  template<typename EngineType>
-
-      .. cpp:function::  void skip_ahead (EngineType& engine,      std::uint64_t num_to_skip)
+      .. cpp:function::  template<typename EngineType> void skip_ahead (EngineType& engine,      std::uint64_t num_to_skip)
 
       **Interface with Partitioned Number of Skipped Elements**
 
 
-      .. cpp:function::  template<typename EngineType>
-
-      .. cpp:function::  void skip_ahead (EngineType& engine,      std::initializer_list<std::uint64_t> num_to_skip)
+      .. cpp:function::  template<typename EngineType> void skip_ahead (EngineType& engine,      std::initializer_list<std::uint64_t> num_to_skip)
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -52,7 +46,6 @@ onemkl::rng::skip_ahead
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -99,7 +92,6 @@ onemkl::rng::skip_ahead
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -229,8 +221,6 @@ onemkl::rng::skip_ahead
       **Parent topic:** `Service
       Routines <service-routines.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-061AF9F8-B166-4154-9BF1-4E2C99F1CE1F-low.png

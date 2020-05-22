@@ -1,4 +1,3 @@
-.. _cis:
 
 cis
 ===
@@ -16,7 +15,6 @@ cis
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ cis
       USM API:
 
 
-      .. cpp:function::  event cis(queue& exec_queue, int64_t n, A\* a,      R\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cis(queue& exec_queue, int64_t n, A* a,      R* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cis`` supports the following precisions.
 
@@ -51,7 +49,6 @@ cis
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -95,7 +92,6 @@ cis
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -166,7 +162,6 @@ cis
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -193,11 +188,10 @@ cis
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use ciscan be found in the oneMKL installation
+   An example of how to use cis can be found in the oneMKL installation
    directory, under:
 
 
@@ -216,6 +210,4 @@ cis
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

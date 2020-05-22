@@ -1,4 +1,3 @@
-.. _sub:
 
 sub
 ===
@@ -16,7 +15,6 @@ sub
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,9 @@ sub
       USM API:
 
 
-      .. cpp:function::  event sub( queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler - {} )
+      ::
+
+        event sub( queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event>* depends, uint64_t mode = mode::not_defined, error_handler<T> errhandler - {} )
 
       ``sub`` supports the following precisions.
 
@@ -50,7 +50,6 @@ sub
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -133,7 +132,6 @@ sub
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -212,7 +210,6 @@ sub
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -239,11 +236,10 @@ sub
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use subcan be found in the oneMKL installation
+   An example of how to use sub can be found in the oneMKL installation
    directory, under:
 
 
@@ -262,6 +258,4 @@ sub
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

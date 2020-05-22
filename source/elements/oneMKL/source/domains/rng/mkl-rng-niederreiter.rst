@@ -1,7 +1,7 @@
 .. _mkl-rng-niederreiter:
 
 onemkl::rng::niederreiter
-======================
+=========================
 
 
 .. container::
@@ -16,31 +16,24 @@ onemkl::rng::niederreiter
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class niederreiter :         internal::engine_base<niederreiter>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  niederreiter (cl::sycl::queue& queue,         std::uint32_t dimensions)
-
-         .. cpp:function::  niederreiter (cl::sycl::queue& queue,         std::vector<std::uint32_t> irred_polynomials)
-
-         .. cpp:function::  niederreiter (const niederreiter& other)
-
-         .. cpp:function::  niederreiter& operator=(const niederreiter&         other)
-
-         .. cpp:function::  ~niederreiter()
-
-         .. cpp:function::  }
+         ::
+	    
+           class niederreiter :         internal::engine_base<niederreiter>{
+           public:
+             niederreiter (cl::sycl::queue& queue,         std::uint32_t dimensions)
+             niederreiter (cl::sycl::queue& queue,         std::vector<std::uint32_t> irred_polynomials)
+             niederreiter (const niederreiter& other)
+             niederreiter& operator=(const niederreiter&         other)
+             ~niederreiter()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +41,6 @@ onemkl::rng::niederreiter
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -58,7 +50,6 @@ onemkl::rng::niederreiter
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -96,5 +87,4 @@ onemkl::rng::niederreiter
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

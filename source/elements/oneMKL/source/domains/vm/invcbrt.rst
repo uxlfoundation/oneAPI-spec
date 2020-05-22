@@ -1,4 +1,3 @@
-.. _invcbrt:
 
 invcbrt
 =======
@@ -15,7 +14,6 @@ invcbrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ invcbrt
       USM API:
 
 
-      .. cpp:function::  event invcbrt(queue& exec_queue, int64_t n, T\*      a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event invcbrt(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``invcbrt`` supports the following precisions.
 
@@ -47,7 +45,6 @@ invcbrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -91,7 +88,6 @@ invcbrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -162,7 +158,6 @@ invcbrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -189,11 +184,10 @@ invcbrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use invcbrtcan be found in the oneMKL
+   An example of how to use invcbrt can be found in the oneMKL
    installation directory, under:
 
 
@@ -212,6 +206,4 @@ invcbrt
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

@@ -1,4 +1,3 @@
-.. _atanh:
 
 atanh
 =====
@@ -15,7 +14,6 @@ atanh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ atanh
       USM API:
 
 
-      .. cpp:function::  event atanh(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event atanh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``atanh`` supports the following precisions.
 
@@ -49,7 +47,6 @@ atanh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -182,7 +179,6 @@ atanh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -253,7 +249,6 @@ atanh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -280,11 +275,10 @@ atanh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use atanhcan be found in the oneMKL installation
+   An example of how to use atanh can be found in the oneMKL installation
    directory, under:
 
 
@@ -303,6 +297,4 @@ atanh
       **Parent topic:** `Hyperbolic
       Functions <hyperbolic-functions.html>`__
 
-
-.. container::
 

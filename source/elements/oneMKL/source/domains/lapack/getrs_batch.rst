@@ -1,4 +1,3 @@
-.. _getrs_batch:
 
 getrs_batch
 ===========
@@ -17,7 +16,6 @@ getrs_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ getrs_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -79,7 +76,6 @@ getrs_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -133,7 +129,6 @@ getrs_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -161,11 +156,10 @@ getrs_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
-      An example of how to use getrs_batchcan be found in the oneMKL
+      An example of how to use getrs_batch can be found in the oneMKL
       installation directory, under:
 
 
@@ -184,6 +178,4 @@ getrs_batch
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

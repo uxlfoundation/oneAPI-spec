@@ -1,7 +1,7 @@
 .. _mkl-rng-bits:
 
 onemkl::rng::bits
-==============
+=================
 
 
 .. container::
@@ -15,19 +15,18 @@ onemkl::rng::bits
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  template<typename T = std::uint32_t, method         Method = standard>
+         ::
 
-         .. cpp:function::  class bits {}
+           template<typename T = std::uint32_t, method Method = standard>
+             class bits {}
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -35,7 +34,6 @@ onemkl::rng::bits
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -55,7 +53,6 @@ onemkl::rng::bits
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -82,5 +79,4 @@ onemkl::rng::bits
          topic:** `Distributions <distributions.html>`__
 
 
-   .. container::
-
+   

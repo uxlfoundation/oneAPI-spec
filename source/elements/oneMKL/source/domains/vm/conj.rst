@@ -1,4 +1,3 @@
-.. _conj:
 
 conj
 ====
@@ -15,7 +14,6 @@ conj
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ conj
       USM API:
 
 
-      .. cpp:function::  event conj( queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event conj( queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``conj`` supports the following precisions.
 
@@ -47,7 +45,6 @@ conj
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -64,7 +61,6 @@ conj
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -121,7 +117,6 @@ conj
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -148,11 +143,10 @@ conj
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use conjcan be found in the oneMKL installation
+   An example of how to use conj can be found in the oneMKL installation
    directory, under:
 
 
@@ -171,6 +165,4 @@ conj
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

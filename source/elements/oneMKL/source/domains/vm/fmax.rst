@@ -1,4 +1,3 @@
-.. _fmax:
 
 fmax
 ====
@@ -16,7 +15,6 @@ fmax
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ fmax
       USM API:
 
 
-      .. cpp:function::  event fmax(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event fmax(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``fmax`` supports the following precisions.
 
@@ -48,7 +46,6 @@ fmax
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -92,7 +89,6 @@ fmax
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -157,7 +153,6 @@ fmax
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -184,11 +179,10 @@ fmax
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use fmaxcan be found in the oneMKL installation
+   An example of how to use fmax can be found in the oneMKL installation
    directory, under:
 
 
@@ -207,6 +201,4 @@ fmax
       **Parent topic:** `Miscellaneous VM
       Functions <miscellaneous-vm-functions.html>`__
 
-
-.. container::
 

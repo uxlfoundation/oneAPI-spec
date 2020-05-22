@@ -1,4 +1,3 @@
-.. _rint:
 
 rint
 ====
@@ -15,7 +14,6 @@ rint
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ rint
       USM API:
 
 
-      .. cpp:function::  event rint(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event rint(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``rint`` supports the following precisions.
 
@@ -47,11 +45,10 @@ rint
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The rint(a)functioncomputes a rounded floating-point integer value
+   The rint(a) function computes a rounded floating-point integer value
    using the current rounding mode for each vector element.
 
 
@@ -70,7 +67,7 @@ rint
       minus infinity.
 
 
-   -  ``f(-1.5) = -1``, for rounding modes set to roundtoward zero or to
+   -  ``f(-1.5) = -1``, for rounding modes set to round toward zero or to
       plus infinity.
 
 
@@ -113,7 +110,6 @@ rint
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -170,7 +166,6 @@ rint
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -197,11 +192,10 @@ rint
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use rintcan be found in the oneMKL installation
+   An example of how to use rint can be found in the oneMKL installation
    directory, under:
 
 
@@ -220,6 +214,4 @@ rint
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 

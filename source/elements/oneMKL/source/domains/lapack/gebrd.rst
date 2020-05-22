@@ -1,4 +1,3 @@
-.. _gebrd:
 
 gebrd
 =====
@@ -16,7 +15,6 @@ gebrd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -50,7 +48,6 @@ gebrd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -104,7 +101,6 @@ gebrd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -140,7 +136,6 @@ gebrd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -203,7 +198,6 @@ gebrd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -226,8 +220,6 @@ gebrd
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-03C78F41-D16C-4BFE-B087-BE4F5A6A0ee1.png

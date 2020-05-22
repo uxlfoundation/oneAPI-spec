@@ -1,4 +1,3 @@
-.. _geqrf_batch:
 
 geqrf_batch
 ===========
@@ -16,7 +15,6 @@ geqrf_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -45,7 +43,6 @@ geqrf_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -65,7 +62,6 @@ geqrf_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -99,7 +95,6 @@ geqrf_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -137,11 +132,10 @@ geqrf_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
-      An example of how to use geqrf_batchcan be found in the oneMKL
+      An example of how to use geqrf_batch can be found in the oneMKL
       installation directory, under:
 
 
@@ -160,6 +154,4 @@ geqrf_batch
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

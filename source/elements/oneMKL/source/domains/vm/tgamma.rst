@@ -1,4 +1,3 @@
-.. _tgamma:
 
 tgamma
 ======
@@ -15,7 +14,6 @@ tgamma
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ tgamma
       USM API:
 
 
-      .. cpp:function::  event tgamma(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event tgamma(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``tgamma`` supports the following precisions.
 
@@ -47,7 +45,6 @@ tgamma
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -101,7 +98,6 @@ tgamma
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -172,7 +168,6 @@ tgamma
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -199,11 +194,10 @@ tgamma
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use tgammacan be found in the oneMKL
+   An example of how to use tgamma can be found in the oneMKL
    installation directory, under:
 
 
@@ -222,6 +216,4 @@ tgamma
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 

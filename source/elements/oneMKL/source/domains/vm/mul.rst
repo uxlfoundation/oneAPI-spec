@@ -1,4 +1,3 @@
-.. _mul:
 
 mul
 ===
@@ -16,7 +15,6 @@ mul
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ mul
       USM API:
 
 
-      .. cpp:function::  event mul(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event mul(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``mul`` supports the following precisions.
 
@@ -50,7 +48,6 @@ mul
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -173,7 +170,6 @@ mul
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -252,7 +248,6 @@ mul
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -279,11 +274,10 @@ mul
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use mulcan be found in the oneMKL installation
+   An example of how to use mul can be found in the oneMKL installation
    directory, under:
 
 
@@ -302,6 +296,4 @@ mul
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

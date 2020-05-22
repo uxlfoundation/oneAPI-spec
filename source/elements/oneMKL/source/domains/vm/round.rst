@@ -1,4 +1,3 @@
-.. _round:
 
 round
 =====
@@ -7,7 +6,7 @@ round
 .. container::
 
 
-   Computes a valuerounded to the nearest integer for each vector
+   Computes a value rounded to the nearest integer for each vector
    element.
 
 
@@ -16,7 +15,6 @@ round
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ round
       USM API:
 
 
-      .. cpp:function::  event round(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event round(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``round`` supports the following precisions.
 
@@ -48,12 +46,11 @@ round
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The round(a) functioncomputes a valuerounded to the nearest
-   integerfor each vector element. Input elements that are halfway
+   The round(a) function computes a value rounded to the nearest
+   integer for each vector element. Input elements that are halfway
    between two consecutive integers are always rounded away from zero
    regardless of the rounding mode.
 
@@ -97,7 +94,6 @@ round
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -154,7 +150,6 @@ round
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -181,11 +176,10 @@ round
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use roundcan be found in the oneMKL installation
+   An example of how to use round can be found in the oneMKL installation
    directory, under:
 
 
@@ -204,6 +198,4 @@ round
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 

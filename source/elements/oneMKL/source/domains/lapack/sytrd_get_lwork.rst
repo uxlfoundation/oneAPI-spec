@@ -1,4 +1,3 @@
-.. _sytrd_get_lwork:
 
 sytrd_get_lwork
 ===============
@@ -17,7 +16,6 @@ sytrd_get_lwork
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,7 +42,6 @@ sytrd_get_lwork
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -60,7 +57,6 @@ sytrd_get_lwork
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -93,7 +89,6 @@ sytrd_get_lwork
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -108,7 +103,6 @@ sytrd_get_lwork
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
@@ -131,6 +125,4 @@ sytrd_get_lwork
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

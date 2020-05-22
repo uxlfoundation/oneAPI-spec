@@ -1,4 +1,3 @@
-.. _set_status:
 
 set_status
 ==========
@@ -16,14 +15,12 @@ set_status
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint8_t set_status (queue& exec_queue,uint_8      new_status )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -42,14 +39,17 @@ set_status
          * -  Status 
            -  Description 
          * -  Successful Execution 
+           -   
          * -  ``status::success`` 
            -  VM function execution completed successfully 
          * -  ``status::not_defined`` 
            -  VM status not defined 
          * -  Warnings 
+           -   
          * -  ``status::accuracy_warning`` 
            -  VM function execution completed successfully in a different       accuracy mode
          * -  Computational Errors 
+           -   
          * -  ``status::errdom`` 
            -  Values are out of a range of definition producing invalid       (QNaN) result
          * -  ``status::sing`` 
@@ -67,7 +67,6 @@ set_status
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -84,7 +83,6 @@ set_status
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -97,7 +95,6 @@ set_status
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -128,6 +125,4 @@ set_status
       **Parent topic:** `VM Service
       Functions <vm-service-functions.html>`__
 
-
-.. container::
 

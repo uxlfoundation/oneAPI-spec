@@ -1,4 +1,3 @@
-.. _fmod:
 
 fmod
 ====
@@ -16,7 +15,6 @@ fmod
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ fmod
       USM API:
 
 
-      .. cpp:function::  event fmod( queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, uint64_t mode = mode::not_defined, error_handler<T>      errhandler = {} )
+      .. cpp:function::  event fmod( queue& exec_queue, int64_t n, T* a,      T* b, T* y, uint64_t mode = mode::not_defined, error_handler<T>      errhandler = {} )
 
       ``fmod`` supports the following precisions.
 
@@ -48,7 +46,6 @@ fmod
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -109,7 +106,6 @@ fmod
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -188,7 +184,6 @@ fmod
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -215,11 +210,10 @@ fmod
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use fmodcan be found in the oneMKL installation
+   An example of how to use fmod can be found in the oneMKL installation
    directory, under:
 
 
@@ -238,6 +232,4 @@ fmod
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

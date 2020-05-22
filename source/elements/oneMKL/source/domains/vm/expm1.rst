@@ -1,4 +1,3 @@
-.. _expm1:
 
 expm1
 =====
@@ -15,7 +14,6 @@ expm1
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ expm1
       USM API:
 
 
-      .. cpp:function::  event expm1(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event expm1(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``expm1`` supports the following precisions.
 
@@ -47,7 +45,6 @@ expm1
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -110,7 +107,6 @@ expm1
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -181,7 +177,6 @@ expm1
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -208,7 +203,6 @@ expm1
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -231,6 +225,4 @@ expm1
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 

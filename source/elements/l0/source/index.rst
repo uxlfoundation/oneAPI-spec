@@ -3,8 +3,9 @@
 
 .. _l0-section:
 
-|l0_full_name| (Level Zero)
-===========================
+=======================
+Level Zero |l0_version|
+=======================
 
 The |l0_full_name| (Level Zero) provides low-level
 direct-to-metal interfaces that are tailored to the devices in a
@@ -40,6 +41,5 @@ architectures, such as FPGAs.
 Detailed API Descriptions
 -------------------------
 
-The detailed specification for Level Zero is available `online`_.
-
-.. _`online`: https://spec.oneapi.com/versions/0.6.0/oneL0/index.html
+The detailed specification can be found online in the `Level Zero
+Specification`_.

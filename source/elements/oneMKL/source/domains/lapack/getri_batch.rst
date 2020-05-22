@@ -1,4 +1,3 @@
-.. _getri_batch:
 
 getri_batch
 ===========
@@ -17,7 +16,6 @@ getri_batch
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ getri_batch
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -63,7 +60,6 @@ getri_batch
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -99,7 +95,6 @@ getri_batch
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -123,11 +118,10 @@ getri_batch
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
-      An example of how to use getri_batchcan be found in the oneMKL
+      An example of how to use getri_batch can be found in the oneMKL
       installation directory, under:
 
 
@@ -146,6 +140,4 @@ getri_batch
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

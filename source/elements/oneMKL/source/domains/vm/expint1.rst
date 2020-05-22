@@ -1,4 +1,3 @@
-.. _expint1:
 
 expint1
 =======
@@ -15,7 +14,6 @@ expint1
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ expint1
       USM API:
 
 
-      .. cpp:function::  event expint1(queue& exec_queue, int64_t n, T\*      a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event expint1(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``expint1`` supports the following precisions.
 
@@ -47,7 +45,6 @@ expint1
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -104,7 +101,6 @@ expint1
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -175,7 +171,6 @@ expint1
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,7 +197,6 @@ expint1
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -225,8 +219,6 @@ expint1
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-B229F6A5-0619-4F06-994B-8A734C356ee1.png

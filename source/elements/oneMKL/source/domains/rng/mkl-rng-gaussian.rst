@@ -1,7 +1,7 @@
 .. _mkl-rng-gaussian:
 
 onemkl::rng::gaussian
-==================
+=====================
 
 
 .. container::
@@ -15,32 +15,23 @@ onemkl::rng::gaussian
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      box_muller2>
-
-      .. cpp:function::  class gaussian {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  gaussian(): gaussian((T)0.0, (T)1.0){}
-
-      .. cpp:function::  gaussian(T mean, T stddev)
-
-      .. cpp:function::  gaussian(const gaussian<T, Method>& other)
-
-      .. cpp:function::  T mean() const
-
-      .. cpp:function::  T stddev() const
-
-      .. cpp:function::  gaussian<T, Method>& operator=(const gaussian<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      box_muller2>
+          class gaussian {
+          public:
+            gaussian(): gaussian((T)0.0, (T)1.0){}
+            gaussian(T mean, T stddev)
+            gaussian(const gaussian<T, Method>& other)
+            T mean() const
+            T stddev() const
+            gaussian<T, Method>& operator=(const gaussian<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +39,6 @@ onemkl::rng::gaussian
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -91,7 +81,6 @@ onemkl::rng::gaussian
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -123,8 +112,6 @@ onemkl::rng::gaussian
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-281DBA27-691A-4B62-A255-FC33EA28D8D5-low.jpg

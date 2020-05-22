@@ -3,9 +3,9 @@
 
 .. _oneVPL-section:
 
-************************
-|vpl_full_name| (oneVPL)
-************************
+********************
+oneVPL |vpl_version|
+********************
 
 The |vpl_full_name| is a programming interface for video processing and video analytics,
 focusing on building portable media pipeline on CPU, GPU, Deep Learning (DL) 

@@ -1,4 +1,3 @@
-.. _trtrs:
 
 trtrs
 =====
@@ -17,7 +16,6 @@ trtrs
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ trtrs
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -73,7 +70,6 @@ trtrs
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -109,7 +105,6 @@ trtrs
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -146,7 +141,6 @@ trtrs
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -165,7 +159,6 @@ trtrs
 
 
    .. rubric:: Known Limitations
-      :name: known-limitations
       :class: sectiontitle
 
 
@@ -182,6 +175,4 @@ trtrs
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

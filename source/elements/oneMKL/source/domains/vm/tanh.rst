@@ -1,4 +1,3 @@
-.. _tanh:
 
 tanh
 ====
@@ -15,7 +14,6 @@ tanh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ tanh
       USM API:
 
 
-      .. cpp:function::  event tanh(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event tanh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``tanh`` supports the following precisions.
 
@@ -49,7 +47,6 @@ tanh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -178,7 +175,6 @@ tanh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -235,7 +231,6 @@ tanh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -262,11 +257,10 @@ tanh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use tanhcan be found in the oneMKL installation
+   An example of how to use tanh can be found in the oneMKL installation
    directory, under:
 
 
@@ -285,6 +279,4 @@ tanh
       **Parent topic:** `Hyperbolic
       Functions <hyperbolic-functions.html>`__
 
-
-.. container::
 

@@ -1,7 +1,7 @@
 .. _mkl-rng-uniform-continuous:
 
 onemkl::rng::uniform (Continuous)
-==============================
+=================================
 
 
 .. container::
@@ -15,32 +15,23 @@ onemkl::rng::uniform (Continuous)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      standard>
-
-      .. cpp:function::  class uniform {
-
-      .. cpp:function::  Public:
-
-      .. cpp:function::  uniform(): uniform((T)0.0, (T)1.0){}
-
-      .. cpp:function::  uniform(Ta, T b)
-
-      .. cpp:function::  uniform(const uniform<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  uniform<T, Method>& operator=(const uniform<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      standard>
+          class uniform {
+          public:
+            uniform(): uniform((T)0.0, (T)1.0){}
+            uniform(Ta, T b)
+            uniform(const uniform<T, Method>& other)
+            T a() const
+            T b() const
+            uniform<T, Method>& operator=(const uniform<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +39,6 @@ onemkl::rng::uniform (Continuous)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -73,7 +63,6 @@ onemkl::rng::uniform (Continuous)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -102,8 +91,6 @@ onemkl::rng::uniform (Continuous)
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-8AD223ED-624A-4390-9514-D8EF20BD04EE-low.gif

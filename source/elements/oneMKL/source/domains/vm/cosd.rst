@@ -1,4 +1,3 @@
-.. _cosd:
 
 cosd
 ====
@@ -15,7 +14,6 @@ cosd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ cosd
       USM API:
 
 
-      .. cpp:function::  event cosd(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cosd(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cosd`` supports the following precisions.
 
@@ -47,11 +45,10 @@ cosd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The cosd(a) function is a degree argument trigonometric fuction. It
+   The cosd(a) function is a degree argument trigonometric function. It
    computes the cosine of vector elements multiplied by ``π``/180. For
    an argument ``a``, the function computes cos(``π``\ \*\ ``a``/180).
 
@@ -104,7 +101,6 @@ cosd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -175,7 +171,6 @@ cosd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,11 +197,10 @@ cosd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use cosdcan be found in the oneMKL installation
+   An example of how to use cosd can be found in the oneMKL installation
    directory, under:
 
 
@@ -225,6 +219,4 @@ cosd
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

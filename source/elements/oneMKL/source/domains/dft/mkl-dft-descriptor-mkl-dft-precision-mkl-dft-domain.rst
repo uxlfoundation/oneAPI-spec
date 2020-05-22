@@ -1,7 +1,7 @@
 .. _mkl-dft-descriptor-mkl-dft-precision-mkl-dft-domain:
 
 onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
-===========================================================
+====================================================================
 
 
 .. container::
@@ -16,17 +16,15 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::Descriptor<PRECISION , DOMAIN>         descriptor
+         .. cpp:var::  onemkl::dft::Descriptor<PRECISION, DOMAIN> descriptor
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -74,5 +71,4 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-
+   

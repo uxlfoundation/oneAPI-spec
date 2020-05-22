@@ -1,7 +1,7 @@
 .. _mkl-sparse-gemv:
 
 onemkl::sparse::gemv
-=================
+====================
 
 
 .. container::
@@ -15,7 +15,6 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -23,7 +22,6 @@ onemkl::sparse::gemv
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -38,10 +36,9 @@ onemkl::sparse::gemv
       **Using USM pointers:**
 
 
-      .. cpp:function::  void onemkl::sparse::gemv (cl::sycl::queue & queue,      onemkl::transpose transpose_val, fp alpha, matrixHandle_t handle, fp      \*x, fp beta, fp \*y)
+      .. cpp:function::  void onemkl::sparse::gemv (cl::sycl::queue & queue,      onemkl::transpose transpose_val, fp alpha, matrixHandle_t handle, fp      *x, fp beta, fp *y)
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -49,12 +46,10 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
       .. rubric:: Note
-         :name: note-1
          :class: NoteTipHead
 
 
@@ -86,7 +81,6 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -119,7 +113,6 @@ onemkl::sparse::gemv
 
 
             .. rubric:: Note
-               :name: note-2
                :class: NoteTipHead
 
 
@@ -141,7 +134,6 @@ onemkl::sparse::gemv
 
 
             .. rubric:: Note
-               :name: note-3
                :class: NoteTipHead
 
 
@@ -172,7 +164,6 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -185,7 +176,6 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Return Values
-         :name: return-values
          :class: sectiontitle
 
 
@@ -197,7 +187,6 @@ onemkl::sparse::gemv
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
@@ -226,6 +215,4 @@ onemkl::sparse::gemv
       **Parent topic:** `Sparse BLAS
       Routines <spblas.html>`__
 
-
-.. container::
 

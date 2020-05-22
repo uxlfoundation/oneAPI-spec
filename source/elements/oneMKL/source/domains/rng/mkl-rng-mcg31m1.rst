@@ -1,7 +1,7 @@
 .. _mkl-rng-mcg31m1:
 
 onemkl::rng::mcg31m1
-=================
+====================
 
 
 .. container::
@@ -16,29 +16,23 @@ onemkl::rng::mcg31m1
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class mcg31m1 :         internal::engine_base<mcg31m1>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  mcg31m1 (cl::sycl::queue& queue, std::uint32_t         seed)
-
-         .. cpp:function::  mcg31m1 (const mcg31m1& other)
-
-         .. cpp:function::  mcg31m1& operator=(const mcg31m1& other)
-
-         .. cpp:function::  ~mcg31m1()
-
-         .. cpp:function::  }
+         ::
+	    
+           class mcg31m1 :         internal::engine_base<mcg31m1>{
+           public:
+             mcg31m1 (cl::sycl::queue& queue, std::uint32_t         seed)
+             mcg31m1 (const mcg31m1& other)
+             mcg31m1& operator=(const mcg31m1& other)
+             ~mcg31m1()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -46,7 +40,6 @@ onemkl::rng::mcg31m1
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -56,7 +49,6 @@ onemkl::rng::mcg31m1
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -91,5 +83,4 @@ onemkl::rng::mcg31m1
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

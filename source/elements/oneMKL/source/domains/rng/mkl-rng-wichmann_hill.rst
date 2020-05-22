@@ -1,7 +1,7 @@
 .. _mkl-rng-wichmann_hill:
 
 onemkl::rng::wichmann_hill
-=======================
+==========================
 
 
 .. container::
@@ -16,31 +16,24 @@ onemkl::rng::wichmann_hill
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class wichmann_hill :         internal::engine_base<wichmann_hill>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  wichmann_hill (cl::sycl::queue& queue,         std::uint32_t seed, std::uint32_t engine_idx)
-
-         .. cpp:function::  wichmann_hill (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed, std::uint32_t         engine_idx)
-
-         .. cpp:function::  wichmann_hill (const wichmann_hill& other)
-
-         .. cpp:function::  wichmann_hill& operator=(const wichmann_hill&         other)
-
-         .. cpp:function::  ~wichmann_hill()
-
-         .. cpp:function::  }
+         ::
+	    
+           class wichmann_hill :         internal::engine_base<wichmann_hill>{
+           public:
+             wichmann_hill (cl::sycl::queue& queue,         std::uint32_t seed, std::uint32_t engine_idx)
+             wichmann_hill (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed, std::uint32_t         engine_idx)
+             wichmann_hill (const wichmann_hill& other)
+             wichmann_hill& operator=(const wichmann_hill&         other)
+             ~wichmann_hill()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +41,6 @@ onemkl::rng::wichmann_hill
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -58,7 +50,6 @@ onemkl::rng::wichmann_hill
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -96,5 +87,4 @@ onemkl::rng::wichmann_hill
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

@@ -1,4 +1,3 @@
-.. _cdfnorm:
 
 cdfnorm
 =======
@@ -16,7 +15,6 @@ cdfnorm
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ cdfnorm
       USM API:
 
 
-      .. cpp:function::  event cdfnorm(queue& exec_queue, int64_t n, T\*      a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cdfnorm(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cdfnorm`` supports the following precisions.
 
@@ -48,7 +46,6 @@ cdfnorm
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -150,7 +147,6 @@ cdfnorm
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -221,7 +217,6 @@ cdfnorm
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -248,11 +243,10 @@ cdfnorm
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use cdfnormcan be found in the oneMKL
+   An example of how to use cdfnorm can be found in the oneMKL
    installation directory, under:
 
 
@@ -271,8 +265,6 @@ cdfnorm
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-817D9F12-6BD9-4B74-BFA0-39A03D0660C3-low.jpg

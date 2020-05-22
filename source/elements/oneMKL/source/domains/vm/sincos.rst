@@ -1,4 +1,3 @@
-.. _sincos:
 
 sincos
 ======
@@ -15,7 +14,6 @@ sincos
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ sincos
       USM API:
 
 
-      .. cpp:function::  event sincos(queue& exec_queue, int64_t n, T\* a,      T\* y, T\* z, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event sincos(queue& exec_queue, int64_t n, T* a,      T* y, T* z, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``sincos`` supports the following precisions.
 
@@ -47,7 +45,6 @@ sincos
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -107,7 +104,6 @@ sincos
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -178,7 +174,6 @@ sincos
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -215,11 +210,10 @@ sincos
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use sincoscan be found in the oneMKL
+   An example of how to use sincos can be found in the oneMKL
    installation directory, under:
 
 
@@ -238,6 +232,4 @@ sincos
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

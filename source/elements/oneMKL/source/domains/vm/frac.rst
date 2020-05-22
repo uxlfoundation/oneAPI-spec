@@ -1,4 +1,3 @@
-.. _frac:
 
 frac
 ====
@@ -15,7 +14,6 @@ frac
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ frac
       USM API:
 
 
-      .. cpp:function::  event frac(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event frac(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``frac`` supports the following precisions.
 
@@ -47,11 +45,10 @@ frac
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The frac(a) functioncomputes a signed fractional part for each vector
+   The frac(a) function computes a signed fractional part for each vector
    element.
 
 
@@ -98,7 +95,6 @@ frac
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -155,7 +151,6 @@ frac
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -182,11 +177,10 @@ frac
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use fraccan be found in the oneMKL installation
+   An example of how to use frac can be found in the oneMKL installation
    directory, under:
 
 
@@ -205,8 +199,6 @@ frac
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-A43FDBB0-21D0-4087-AAD9-4289019DD4C3-low.gif

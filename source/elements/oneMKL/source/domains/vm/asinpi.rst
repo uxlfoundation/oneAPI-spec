@@ -1,4 +1,3 @@
-.. _asinpi:
 
 asinpi
 ======
@@ -15,7 +14,6 @@ asinpi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ asinpi
       USM API:
 
 
-      .. cpp:function::  event asinpi(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event asinpi(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``asinpi`` supports the following precisions.
 
@@ -47,7 +45,6 @@ asinpi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -101,7 +98,6 @@ asinpi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -172,7 +168,6 @@ asinpi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -199,11 +194,10 @@ asinpi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use asinpican be found in the oneMKL
+   An example of how to use asinpi can be found in the oneMKL
    installation directory, under:
 
 
@@ -222,6 +216,4 @@ asinpi
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

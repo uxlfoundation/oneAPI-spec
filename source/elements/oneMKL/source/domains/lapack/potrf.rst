@@ -1,4 +1,3 @@
-.. _potrf:
 
 potrf
 =====
@@ -17,7 +16,6 @@ potrf
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ potrf
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -72,7 +69,6 @@ potrf
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -115,7 +111,6 @@ potrf
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -145,7 +140,6 @@ potrf
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -164,14 +158,13 @@ potrf
 
 
    .. rubric:: Known Limitations
-      :name: known-limitations
       :class: sectiontitle
 
 
    GPU support is for only real precisions.
 
 
-   GPU support for this function does not include error reportingthrough
+   GPU support for this function does not include error reporting through
    the info parameter.
 
 
@@ -184,6 +177,4 @@ potrf
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

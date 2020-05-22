@@ -1,4 +1,3 @@
-.. _abs:
 
 abs
 ===
@@ -15,7 +14,6 @@ abs
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ abs
       USM API:
 
 
-      .. cpp:function::  event abs(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event abs(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``abs`` supports the following precisions.
 
@@ -49,7 +47,6 @@ abs
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -87,7 +84,7 @@ abs
 
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -102,7 +99,6 @@ abs
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -159,7 +155,6 @@ abs
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -186,11 +181,10 @@ abs
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use abscan be found in the oneMKL installation
+   An example of how to use abs can be found in the oneMKL installation
    directory, under:
 
 
@@ -209,6 +203,4 @@ abs
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

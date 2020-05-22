@@ -1,7 +1,7 @@
 .. _mkl-rng-leapfrog:
 
 onemkl::rng::leapfrog
-==================
+=====================
 
 
 .. container::
@@ -15,16 +15,12 @@ onemkl::rng::leapfrog
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename EngineType>
-
-      .. cpp:function::  void leapfrog (EngineType& engine, std::uint64_t      idx, std::uint64_t stride)
+      .. cpp:function:: template<typename EngineType> void leapfrog (EngineType& engine, std::uint64_t      idx, std::uint64_t stride)
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -32,7 +28,6 @@ onemkl::rng::leapfrog
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -60,7 +55,6 @@ onemkl::rng::leapfrog
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -138,8 +132,6 @@ onemkl::rng::leapfrog
       **Parent topic:** `Service
       Routines <service-routines.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-D90F2CB0-58B4-42F5-A1F9-FD1EA859DD44-low.png

@@ -1,4 +1,3 @@
-.. _minmag:
 
 minmag
 ======
@@ -16,7 +15,6 @@ minmag
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ minmag
       USM API:
 
 
-      .. cpp:function::  event minmag(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event minmag(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``minmag`` supports the following precisions.
 
@@ -48,7 +46,6 @@ minmag
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -102,7 +99,6 @@ minmag
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -167,7 +163,6 @@ minmag
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -194,11 +189,10 @@ minmag
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use minmagcan be found in the oneMKL
+   An example of how to use minmag can be found in the oneMKL
    installation directory, under:
 
 
@@ -217,6 +211,4 @@ minmag
       **Parent topic:** `Miscellaneous VM
       Functions <miscellaneous-vm-functions.html>`__
 
-
-.. container::
 

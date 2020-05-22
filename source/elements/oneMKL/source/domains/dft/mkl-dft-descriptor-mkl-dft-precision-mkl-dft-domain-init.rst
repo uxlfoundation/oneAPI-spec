@@ -1,7 +1,7 @@
 .. _mkl-dft-descriptor-mkl-dft-precision-mkl-dft-domain-init:
 
 onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
-=================================================================
+==========================================================================
 
 
 .. container::
@@ -16,17 +16,15 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.init (dimension )         
+         .. cpp:function::  onemkl::dft::ErrCode init (dimension )         
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -34,7 +32,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -59,7 +56,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Input Parameters: 1-Dimensional
-            :name: input-parameters-1-dimensional
             :class: sectiontitle
 
 
@@ -81,7 +77,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Input Parameters: N-Dimensional
-            :name: input-parameters-n-dimensional
             :class: sectiontitle
 
 
@@ -103,7 +98,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -125,7 +119,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
 
 
          .. rubric:: Return Values
-            :name: return-values
             :class: sectiontitle
 
 
@@ -163,5 +156,4 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
          Functions <fourier-transform-functions.html>`__
 
 
-   .. container::
-
+   

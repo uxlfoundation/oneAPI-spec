@@ -26,5 +26,3 @@ Bibliography
             ANSI/IEEE Std 754-2008.
 
 
-.. container::
-

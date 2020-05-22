@@ -1,4 +1,3 @@
-.. _gesvd:
 
 gesvd
 =====
@@ -16,7 +15,6 @@ gesvd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -50,7 +48,6 @@ gesvd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -78,7 +75,6 @@ gesvd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -168,7 +164,6 @@ gesvd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -279,7 +274,6 @@ gesvd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -302,6 +296,4 @@ gesvd
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

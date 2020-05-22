@@ -1,4 +1,3 @@
-.. _getrs:
 
 getrs
 =====
@@ -17,7 +16,6 @@ getrs
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ getrs
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -74,7 +71,6 @@ getrs
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -137,7 +133,6 @@ getrs
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -164,7 +159,6 @@ getrs
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -183,7 +177,6 @@ getrs
 
 
    .. rubric:: Known Limitations
-      :name: known-limitations
       :class: sectiontitle
 
 
@@ -200,6 +193,4 @@ getrs
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

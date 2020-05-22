@@ -1,4 +1,3 @@
-.. _hegvd_get_lwork:
 
 hegvd_get_lwork
 ===============
@@ -17,7 +16,6 @@ hegvd_get_lwork
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -44,12 +42,11 @@ hegvd_get_lwork
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
       Computes the worksize needed for the computation of eigenvalues or
-      eigenvectors of a complex generalized Hermition positive-definite
+      eigenvectors of a complex generalized Hermitian positive-definite
       eigenproblem using a divide and conquer method
       (`hegvd <hegvd.html>`__).
       Calls to this routine must specify the template parameter
@@ -61,7 +58,6 @@ hegvd_get_lwork
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -125,7 +121,6 @@ hegvd_get_lwork
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -152,7 +147,6 @@ hegvd_get_lwork
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
@@ -175,6 +169,4 @@ hegvd_get_lwork
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

@@ -1,13 +1,13 @@
 .. _mkl-rng-lognormal:
 
 onemkl::rng::lognormal
-===================
+======================
 
 
 .. container::
 
 
-   Generates lognormally distributed random numbers.
+   Generates log-normally distributed random numbers.
 
 
    .. container:: section
@@ -15,36 +15,25 @@ onemkl::rng::lognormal
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      box_muller2>
-
-      .. cpp:function::  class lognormal {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  lognormal(): lognormal((T)0.0, (T)1.0, (T) 0.0,      (T)1.0){}
-
-      .. cpp:function::  lognormal(Tm, T s, T displ, T scale)
-
-      .. cpp:function::  lognormal(const lognormal<T, Method>& other)
-
-      .. cpp:function::  T m() const
-
-      .. cpp:function::  T s() const
-
-      .. cpp:function::  T displ() const
-
-      .. cpp:function::  T scale() const
-
-      .. cpp:function::  lognormal<T, Method>& operator=(const      lognormal<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      box_muller2>
+          class lognormal {
+          public:
+            lognormal(): lognormal((T)0.0, (T)1.0, (T) 0.0,      (T)1.0){}
+            lognormal(Tm, T s, T displ, T scale)
+            lognormal(const lognormal<T, Method>& other)
+            T m() const
+            T s() const
+            T displ() const
+            T scale() const
+            lognormal<T, Method>& operator=(const      lognormal<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -52,7 +41,6 @@ onemkl::rng::lognormal
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -79,7 +67,6 @@ onemkl::rng::lognormal
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -117,8 +104,6 @@ onemkl::rng::lognormal
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-4D962DF4-16F2-438B-8866-4F105DC41242-low.jpg

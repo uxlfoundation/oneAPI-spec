@@ -1,4 +1,3 @@
-.. _erfc:
 
 erfc
 ====
@@ -15,7 +14,6 @@ erfc
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ erfc
       USM API:
 
 
-      .. cpp:function::  event erfc(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event erfc(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``erfc`` supports the following precisions.
 
@@ -47,7 +45,6 @@ erfc
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -159,7 +156,6 @@ erfc
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -230,7 +226,6 @@ erfc
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -257,11 +252,10 @@ erfc
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use erfccan be found in the oneMKL installation
+   An example of how to use erfc can be found in the oneMKL installation
    directory, under:
 
 
@@ -280,8 +274,6 @@ erfc
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-FB387120-1A86-45B9-BE20-97247EF0ABB5-low.gif

@@ -1,4 +1,3 @@
-.. _setmode:
 
 setmode
 =======
@@ -16,14 +15,12 @@ setmode
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint64_t set_mode(queue& exec_queue, uint64_t      new_mode )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -40,7 +37,7 @@ setmode
       numbers.
 
 
-      The mode::ftzdazonis specifically designed to improve the
+      The mode::ftzdazon is specifically designed to improve the
       performance of computations that involve denormalized numbers at
       the cost of reasonable accuracy loss. This mode changes the
       numeric behavior of the functions: denormalized input values are
@@ -56,6 +53,7 @@ setmode
          * -  Value of mode 
            -  Description 
          * -  Accuracy Control 
+           -   
          * -  ``mode::ha`` 
            -  High accuracy versions of VM functions. 
          * -  ``mode::la`` 
@@ -63,11 +61,13 @@ setmode
          * -  ``mode::ep`` 
            -  Enhanced performance accuracy versions of VM functions. 
          * -  Denormalized Numbers Handling Control 
+           -   
          * -  ``mode::ftzdazon`` 
            -  Faster processing of denormalized inputs is enabled. 
          * -  ``mode::ftzdazoff`` 
            -  Faster processing of denormalized inputs is disabled. 
          * -  Other 
+           -   
          * -  ``mode::not_defined`` 
            -  VM status not defined. 
 
@@ -88,7 +88,6 @@ setmode
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -105,7 +104,6 @@ setmode
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -118,7 +116,6 @@ setmode
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -138,6 +135,4 @@ setmode
       **Parent topic:** `VM Service
       Functions <vm-service-functions.html>`__
 
-
-.. container::
 
