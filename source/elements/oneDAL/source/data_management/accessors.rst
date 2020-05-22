@@ -1,3 +1,5 @@
+.. _accessors:
+
 =========
 Accessors
 =========
