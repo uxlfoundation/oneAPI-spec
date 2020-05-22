@@ -1,4 +1,3 @@
-.. _hetrd:
 
 hetrd
 =====
@@ -16,7 +15,6 @@ hetrd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ hetrd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -59,7 +56,6 @@ hetrd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -106,7 +102,6 @@ hetrd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -160,7 +155,6 @@ hetrd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -183,6 +177,4 @@ hetrd
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

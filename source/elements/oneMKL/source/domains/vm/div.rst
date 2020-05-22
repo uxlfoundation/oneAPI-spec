@@ -1,4 +1,3 @@
-.. _div:
 
 div
 ===
@@ -15,7 +14,6 @@ div
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ div
       USM API:
 
 
-      .. cpp:function::  event div(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event div(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``div`` supports the following precisions.
 
@@ -49,7 +47,6 @@ div
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -138,7 +135,6 @@ div
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -217,7 +213,6 @@ div
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -244,11 +239,10 @@ div
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use divcan be found in the oneMKL installation
+   An example of how to use div can be found in the oneMKL installation
    directory, under:
 
 
@@ -267,6 +261,4 @@ div
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

@@ -1,4 +1,3 @@
-.. _add:
 
 add
 ===
@@ -16,7 +15,6 @@ add
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ add
       USM API:
 
 
-      .. cpp:function::  event add( queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event add( queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``add`` supports the following precisions.
 
@@ -50,7 +48,6 @@ add
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -133,7 +130,6 @@ add
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -212,7 +208,6 @@ add
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -239,11 +234,10 @@ add
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use addcan be found in the oneMKL installation
+   An example of how to use add can be found in the oneMKL installation
    directory, under:
 
 
@@ -262,6 +256,4 @@ add
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

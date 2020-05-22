@@ -1,4 +1,3 @@
-.. _hypot:
 
 hypot
 =====
@@ -15,7 +14,6 @@ hypot
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ hypot
       USM API:
 
 
-      .. cpp:function::  event hypot(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event hypot(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``hypot`` supports the following precisions.
 
@@ -47,7 +45,6 @@ hypot
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -125,7 +122,6 @@ hypot
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -190,7 +186,6 @@ hypot
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -217,11 +212,10 @@ hypot
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use hypotcan be found in the oneMKL installation
+   An example of how to use hypot can be found in the oneMKL installation
    directory, under:
 
 
@@ -240,6 +234,4 @@ hypot
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

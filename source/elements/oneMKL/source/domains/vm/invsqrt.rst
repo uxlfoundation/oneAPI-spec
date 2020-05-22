@@ -1,4 +1,3 @@
-.. _invsqrt:
 
 invsqrt
 =======
@@ -15,7 +14,6 @@ invsqrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ invsqrt
       USM API:
 
 
-      .. cpp:function::  event invsqrt(queue& exec_queue, int64_t n, T\*      a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event invsqrt(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``invsqrt`` supports the following precisions.
 
@@ -47,7 +45,6 @@ invsqrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -94,7 +91,6 @@ invsqrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -165,7 +161,6 @@ invsqrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -192,11 +187,10 @@ invsqrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use invsqrtcan be found in the oneMKL
+   An example of how to use invsqrt can be found in the oneMKL
    installation directory, under:
 
 
@@ -215,6 +209,4 @@ invsqrt
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

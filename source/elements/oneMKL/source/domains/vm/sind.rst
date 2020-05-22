@@ -1,4 +1,3 @@
-.. _sind:
 
 sind
 ====
@@ -15,7 +14,6 @@ sind
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ sind
       USM API:
 
 
-      .. cpp:function::  event sind(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event sind(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``sind`` supports the following precisions.
 
@@ -47,7 +45,6 @@ sind
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -104,7 +101,6 @@ sind
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -175,7 +171,6 @@ sind
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,11 +197,10 @@ sind
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use sindcan be found in the oneMKL installation
+   An example of how to use sind can be found in the oneMKL installation
    directory, under:
 
 
@@ -225,6 +219,4 @@ sind
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

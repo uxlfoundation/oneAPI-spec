@@ -1,7 +1,7 @@
 .. _mkl-rng-negbinomial:
 
 onemkl::rng::negbinomial
-=====================
+========================
 
 
 .. container::
@@ -15,32 +15,23 @@ onemkl::rng::negbinomial
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = nbar>
-
-      .. cpp:function::  class negbinomial {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  negbinomial(): negbinomial(0.1, 0.5){}
-
-      .. cpp:function::  negbinomial(double a, double p)
-
-      .. cpp:function::  negbinomial(const negbinomial<T, Method>& other)
-
-      .. cpp:function::  double a() const
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  negbinomial<T, Method>& operator=(const      negbinomial<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = nbar>
+          class negbinomial {
+          public:
+            negbinomial(): negbinomial(0.1, 0.5){}
+            negbinomial(double a, double p)
+            negbinomial(const negbinomial<T, Method>& other)
+            double a() const
+            double p() const
+            negbinomial<T, Method>& operator=(const      negbinomial<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +39,6 @@ onemkl::rng::negbinomial
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -80,7 +70,6 @@ onemkl::rng::negbinomial
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -112,8 +101,6 @@ onemkl::rng::negbinomial
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-A7CA23B7-756F-45C6-85B3-3A8924939D7D-low.jpg

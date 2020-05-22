@@ -1,3 +1,16 @@
+import os
+import sys
+import string
+
+def path_relative_to_repo_root(relative_path):
+    this_dir = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.abspath(os.path.join(this_dir, '../..'))
+    return os.path.abspath(os.path.join(root_dir, relative_path))
+
+# oneDAL uses custom API generator based on `breathe`.
+# Extend path to let Sphinx find `dalapi` module:
+sys.path.insert(0, path_relative_to_repo_root('source/elements/oneDAL'))
+
 extensions = [
     'notfound.extension',
     'sphinx.ext.autodoc',
@@ -13,21 +26,40 @@ extensions = [
     'sphinxcontrib.spelling',
     'sphinx_substitution_extensions',
     'breathe',
+    'dalapi', # oneDAL API generator
 ]
 
-rst_prolog = """
+env = {
+    'oneapi_version': '0.7',
+    'l0_version': '0.91',
+}
+
+prolog_template = string.Template("""
+.. |dpcpp_full_name| replace:: oneAPI Data Parallel C++
+.. |dpcpp_version| replace:: $oneapi_version
+.. |dpl_full_name| replace:: oneAPI DPC++ Library
+.. |dpl_version| replace:: $oneapi_version
 .. |ccl_full_name| replace:: oneAPI Collective Communications Library
+.. |ccl_version| replace:: $oneapi_version
 .. |dal_full_name| replace:: oneAPI Data Analytics Library
 .. |dal_short_name| replace:: oneDAL
+.. |dal_version| replace:: $oneapi_version
 .. |dal_namespace| replace:: daal
 .. |dnn_full_name| replace:: oneAPI Deep Neural Network Library
-.. |dpl_full_name| replace:: oneAPI DPC++ Library
-.. |dpcpp_full_name| replace:: DPC++
+.. |dnn_version| replace:: $oneapi_version
 .. |l0_full_name| replace:: oneAPI Level Zero
-.. |mkl_full_name| replace:: oneAPI Math Kernel Library
+.. |l0_version| replace:: $l0_version
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
+.. |tbb_version| replace:: $oneapi_version
 .. |vpl_full_name| replace:: oneAPI Video Processing Library
-"""
+.. |vpl_version| replace:: $oneapi_version
+.. |mkl_full_name| replace:: oneAPI Math Kernel Library
+.. |mkl_version| replace:: $oneapi_version
+.. _`Level Zero Specification`: https://spec.oneapi.com/versions/$oneapi_version/oneL0/index.html
+""")
+
+rst_prolog = prolog_template.substitute(env)
+
 
 # for substitutions in code blocks and sphinx-prompts:
 substitutions = [
@@ -35,7 +67,6 @@ substitutions = [
     ('|daal_in_code|', 'daal')
     ]
 
-oneapi_spec_version = '0.6.0'
 
 primary_domain = 'cpp'
 

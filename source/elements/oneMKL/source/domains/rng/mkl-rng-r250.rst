@@ -1,7 +1,7 @@
 .. _mkl-rng-r250:
 
 onemkl::rng::r250
-==============
+=================
 
 
 .. container::
@@ -16,31 +16,24 @@ onemkl::rng::r250
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class r250 : internal::engine_base<r250>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  r250 (cl::sycl::queue& queue, std::uint32_t         seed)
-
-         .. cpp:function::  r250 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-
-         .. cpp:function::  r250 (const r250& other)
-
-         .. cpp:function::  r250& operator=(const r250& other)
-
-         .. cpp:function::  ~r250()
-
-         .. cpp:function::  }
+         ::
+	    
+           class r250 : internal::engine_base<r250>{
+           public:
+             r250 (cl::sycl::queue& queue, std::uint32_t         seed)
+             r250 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
+             r250 (const r250& other)
+             r250& operator=(const r250& other)
+             ~r250()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +41,6 @@ onemkl::rng::r250
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -58,7 +50,6 @@ onemkl::rng::r250
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -93,5 +84,4 @@ onemkl::rng::r250
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

@@ -1,7 +1,7 @@
 .. _mkl-rng-laplace:
 
 onemkl::rng::laplace
-=================
+====================
 
 
 .. container::
@@ -15,32 +15,23 @@ onemkl::rng::laplace
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class laplace {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  laplace(): laplace((T)0.0, (T)1.0){}
-
-      .. cpp:function::  laplace(T a, T b)
-
-      .. cpp:function::  laplace(const laplace<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  laplace<T, Method>& operator=(const laplace<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class laplace {
+          public:
+            laplace(): laplace((T)0.0, (T)1.0){}
+            laplace(T a, T b)
+            laplace(const laplace<T, Method>& other)
+            T a() const
+            T b() const
+            laplace<T, Method>& operator=(const laplace<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +39,6 @@ onemkl::rng::laplace
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -77,7 +67,6 @@ onemkl::rng::laplace
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -109,8 +98,6 @@ onemkl::rng::laplace
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-1D36B5CE-3BF3-4762-926B-05C5527FAE45-low.gif

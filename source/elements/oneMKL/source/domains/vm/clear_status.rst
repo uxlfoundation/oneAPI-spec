@@ -1,4 +1,3 @@
-.. _clear_status:
 
 clear_status
 ============
@@ -16,14 +15,12 @@ clear_status
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint8_t clear_status (queue& exec_queue )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -42,14 +39,17 @@ clear_status
          * -  Status 
            -  Description 
          * -  Successful Execution 
+           -   
          * -  ``status::success`` 
            -  VM function execution completed successfully 
          * -  ``status::not_defined`` 
            -  VM status not defined 
          * -  Warnings 
+           -   
          * -  ``status::accuracy_warning`` 
            -  VM function execution completed successfully in a different       accuracy mode
          * -  Computational Errors 
+           -   
          * -  ``status::errdom`` 
            -  Values are out of a range of definition producing invalid       (QNaN) result
          * -  ``status::sing`` 
@@ -67,7 +67,6 @@ clear_status
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -80,7 +79,6 @@ clear_status
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -93,7 +91,6 @@ clear_status
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -112,6 +109,4 @@ clear_status
       **Parent topic:** `VM Service
       Functions <vm-service-functions.html>`__
 
-
-.. container::
 

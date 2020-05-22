@@ -1,4 +1,3 @@
-.. _asinh:
 
 asinh
 =====
@@ -15,7 +14,6 @@ asinh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ asinh
       USM API:
 
 
-      .. cpp:function::  event asinh(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event asinh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``asinh`` supports the following precisions.
 
@@ -49,7 +47,6 @@ asinh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -179,7 +176,6 @@ asinh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -236,7 +232,6 @@ asinh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -263,11 +258,10 @@ asinh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use asinhcan be found in the oneMKL installation
+   An example of how to use asinh can be found in the oneMKL installation
    directory, under:
 
 
@@ -286,6 +280,4 @@ asinh
       **Parent topic:** `Hyperbolic
       Functions <hyperbolic-functions.html>`__
 
-
-.. container::
 

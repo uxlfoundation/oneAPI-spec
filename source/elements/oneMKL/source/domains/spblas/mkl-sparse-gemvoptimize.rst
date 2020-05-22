@@ -1,7 +1,7 @@
 .. _mkl-sparse-gemvoptimize:
 
 onemkl::sparse::gemvOptimize
-=========================
+============================
 
 
 .. container::
@@ -16,7 +16,6 @@ onemkl::sparse::gemvOptimize
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -24,7 +23,6 @@ onemkl::sparse::gemvOptimize
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -40,7 +38,6 @@ onemkl::sparse::gemvOptimize
          .. cpp:function::  void onemkl::sparse::gemvOptimize         (cl::sycl::queue & queue, onemkl::transpose transpose_val,         matrixHandle_t handle)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,12 +45,10 @@ onemkl::sparse::gemvOptimize
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
          .. rubric:: Note
-            :name: note-1
             :class: NoteTipHead
 
 
@@ -66,7 +61,6 @@ onemkl::sparse::gemvOptimize
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -96,7 +90,6 @@ onemkl::sparse::gemvOptimize
 
 
                .. rubric:: Note
-                  :name: note-2
                   :class: NoteTipHead
 
 
@@ -114,7 +107,6 @@ onemkl::sparse::gemvOptimize
 
 
                .. rubric:: Note
-                  :name: note-3
                   :class: NoteTipHead
 
 
@@ -132,5 +124,4 @@ onemkl::sparse::gemvOptimize
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

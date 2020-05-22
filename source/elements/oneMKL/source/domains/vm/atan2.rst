@@ -1,4 +1,3 @@
-.. _atan2:
 
 atan2
 =====
@@ -15,7 +14,6 @@ atan2
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ atan2
       USM API:
 
 
-      .. cpp:function::  event atan2(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event atan2(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``ad2d`` supports the following precisions.
 
@@ -47,7 +45,6 @@ atan2
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -55,7 +52,7 @@ atan2
    elements of two vectors.
 
 
-   The elements of the output vectory are computed as the four-quadrant
+   The elements of the output vector are computed as the four-quadrant
    arctangent of ``a[i] / b[i]``.
 
 
@@ -241,7 +238,6 @@ atan2
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -306,7 +302,6 @@ atan2
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -333,7 +328,6 @@ atan2
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -356,6 +350,4 @@ atan2
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

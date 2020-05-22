@@ -1,4 +1,3 @@
-.. _modf:
 
 modf
 ====
@@ -16,7 +15,6 @@ modf
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ modf
       USM API:
 
 
-      .. cpp:function::  event modf(queue& exec_queue, int64_t n, T\* a,      T\* y, T\* z, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event modf(queue& exec_queue, int64_t n, T* a,      T* y, T* z, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``modf`` supports the following precisions.
 
@@ -48,11 +46,10 @@ modf
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The modf(a) functioncomputes a truncated integer value and the
+   The modf(a) function computes a truncated integer value and the
    remaining fraction part for each vector element.
 
 
@@ -106,7 +103,6 @@ modf
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -163,7 +159,6 @@ modf
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,11 +197,10 @@ modf
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use modfcan be found in the oneMKL installation
+   An example of how to use modf can be found in the oneMKL installation
    directory, under:
 
 
@@ -225,8 +219,6 @@ modf
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-38C12345-5E6E-4D94-8072-460502CB52EC-low.gif

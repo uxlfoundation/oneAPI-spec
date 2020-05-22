@@ -26,8 +26,7 @@ copyright = u'2020, Intel Corporation'
 author = u'Intel'
 
 # The short X.Y version
-#version = u'0.61 <' + str(datetime.date.today()) + '>'
-version = u'0.6.1' 
+version = env['oneapi_version']
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -90,7 +89,7 @@ html_theme = 'sphinx_rtd_theme'
 #
 html_theme_options = {
   'includehidden': False
-} 
+}
 
 html_context = {
     'display_github': True,
@@ -239,3 +238,5 @@ breathe_default_project = 'oneAPI'
 
 notfound_default_language = 'versions'
 
+# oneDAL project directory is needed for `dalapi` extension
+onedal_project_dir = 'elements/oneDAL'

@@ -1,7 +1,7 @@
 .. _mkl-rng-gumbel:
 
 onemkl::rng::gumbel
-================
+===================
 
 
 .. container::
@@ -15,32 +15,23 @@ onemkl::rng::gumbel
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class gumbel {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  gumbel(): gumbel((T)0.0, (T)1.0){}
-
-      .. cpp:function::  gumbel(T a, T b)
-
-      .. cpp:function::  gumbel(const gumbel<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  gumbel<T, Method>& operator=(const gumbel<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class gumbel {
+          public:
+            gumbel(): gumbel((T)0.0, (T)1.0){}
+            gumbel(T a, T b)
+            gumbel(const gumbel<T, Method>& other)
+            T a() const
+            T b() const
+            gumbel<T, Method>& operator=(const gumbel<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +39,6 @@ onemkl::rng::gumbel
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -73,7 +63,6 @@ onemkl::rng::gumbel
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -105,8 +94,6 @@ onemkl::rng::gumbel
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-09FC1496-B5B3-4DF6-A3EE-E6410BE1EFD2-low.jpg

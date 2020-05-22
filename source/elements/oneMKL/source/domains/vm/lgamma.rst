@@ -1,4 +1,3 @@
-.. _lgamma:
 
 lgamma
 ======
@@ -16,7 +15,6 @@ lgamma
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ lgamma
       USM API:
 
 
-      .. cpp:function::  event lgamma(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event lgamma(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``lgamma`` supports the following precisions.
 
@@ -48,7 +46,6 @@ lgamma
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -108,7 +105,6 @@ lgamma
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -179,7 +175,6 @@ lgamma
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -206,11 +201,10 @@ lgamma
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use lgammacan be found in the oneMKL
+   An example of how to use lgamma can be found in the oneMKL
    installation directory, under:
 
 
@@ -229,6 +223,4 @@ lgamma
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 

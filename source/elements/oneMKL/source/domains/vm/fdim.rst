@@ -1,4 +1,3 @@
-.. _fdim:
 
 fdim
 ====
@@ -17,7 +16,6 @@ fdim
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -29,7 +27,7 @@ fdim
       USM API:
 
 
-      .. cpp:function::  event fdim(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event fdim(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``fdim`` supports the following precisions.
 
@@ -49,7 +47,6 @@ fdim
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -96,7 +93,6 @@ fdim
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -161,7 +157,6 @@ fdim
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -188,11 +183,10 @@ fdim
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use fdimcan be found in the oneMKL installation
+   An example of how to use fdim can be found in the oneMKL installation
    directory, under:
 
 
@@ -211,6 +205,4 @@ fdim
       **Parent topic:** `Miscellaneous VM
       Functions <miscellaneous-vm-functions.html>`__
 
-
-.. container::
 

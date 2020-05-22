@@ -1,7 +1,7 @@
 .. _mkl-rng-philox4x32x10:
 
 onemkl::rng::philox4x32x10
-=======================
+==========================
 
 
 .. container::
@@ -16,31 +16,24 @@ onemkl::rng::philox4x32x10
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class philox4x32x10 :         internal::engine_base<philox4x32x10>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  philox4x32x10 (cl::sycl::queue& queue,         std::uint64_t seed)
-
-         .. cpp:function::  philox4x32x10 (cl::sycl::queue& queue,         std::initializer_list<std::uint64_t> seed)
-
-         .. cpp:function::  philox4x32x10 (const philox4x32x10& other)
-
-         .. cpp:function::  philox4x32x10& operator=(const philox4x32x10&         other)
-
-         .. cpp:function::  ~philox4x32x10()
-
-         .. cpp:function::  }
+         ::
+	    
+           class philox4x32x10 :         internal::engine_base<philox4x32x10>{
+           public:
+             philox4x32x10 (cl::sycl::queue& queue,         std::uint64_t seed)
+             philox4x32x10 (cl::sycl::queue& queue,         std::initializer_list<std::uint64_t> seed)
+             philox4x32x10 (const philox4x32x10& other)
+             philox4x32x10& operator=(const philox4x32x10&         other)
+             ~philox4x32x10()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +41,6 @@ onemkl::rng::philox4x32x10
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -57,7 +49,6 @@ onemkl::rng::philox4x32x10
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -92,5 +83,4 @@ onemkl::rng::philox4x32x10
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

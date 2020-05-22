@@ -1,4 +1,3 @@
-.. _orgqr:
 
 orgqr
 =====
@@ -16,7 +15,6 @@ orgqr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -40,7 +38,6 @@ orgqr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -96,7 +93,6 @@ orgqr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -141,7 +137,6 @@ orgqr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -169,7 +164,6 @@ orgqr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -192,6 +186,4 @@ orgqr
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

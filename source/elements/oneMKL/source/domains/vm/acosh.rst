@@ -1,4 +1,3 @@
-.. _acosh:
 
 acosh
 =====
@@ -15,7 +14,6 @@ acosh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ acosh
       USM API:
 
 
-      .. cpp:function::  event acosh(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event acosh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``acosh`` supports the following precisions.
 
@@ -49,7 +47,6 @@ acosh
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -173,7 +170,6 @@ acosh
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -244,7 +240,6 @@ acosh
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -271,11 +266,10 @@ acosh
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use acoshcan be found in the oneMKL installation
+   An example of how to use acosh can be found in the oneMKL installation
    directory, under:
 
 
@@ -294,8 +288,6 @@ acosh
       **Parent topic:** `Hyperbolic
       Functions <hyperbolic-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-6FB20CE7-1E2A-4340-995F-0E621DEF0E2D-low.jpg

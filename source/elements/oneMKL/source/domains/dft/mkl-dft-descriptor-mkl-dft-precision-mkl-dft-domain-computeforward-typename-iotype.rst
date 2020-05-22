@@ -1,7 +1,7 @@
 .. _mkl-dft-descriptor-mkl-dft-precision-mkl-dft-domain-computeforward-typename-iotype:
 
 onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeForward<typename IOType>
-============================================================================================
+=====================================================================================================
 
 
 .. container::
@@ -15,19 +15,17 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.computeForward         (cl::sycl::buffer<IOType, 1> &inout , cl::sycl::event\* event =         nullptr) 
+         .. cpp:function::  onemkl::dft::ErrCode computeForward(cl::sycl::buffer<IOType, 1> &inout , cl::sycl::event* event = nullptr) 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.computeForward         (cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1>         &out , cl::sycl::event\* event = nullptr) 
+         .. cpp:function::  onemkl::dft::ErrCode computeForward(cl::sycl::buffer<IOType, 1> &in , cl::sycl::buffer<IOType, 1> &out , cl::sycl::event* event = nullptr) 
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -35,7 +33,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -70,7 +67,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -103,7 +99,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -117,7 +112,7 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
               -     cl::sycl::buffer<IOType, 1>    
               -     Sycl buffer containing an array of length no less          than specified at onemkl::dft::Descriptor<onemkl::dft::Precision,         onemkl::dft::Domain>::init call.   
             * -     Event    
-              -     cl::sycl::event\*    
+              -     cl::sycl::event*    
               -     If no event pointer is passed, then it defaults to          nullptr. If a non-nullptr value is passed, it is set to the         event associated with the enqueued computation job.   
             * -     Status    
               -     onemkl::dft::ErrCode    
@@ -141,7 +136,6 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
 
 
          .. rubric:: Return Values
-            :name: return-values
             :class: sectiontitle
 
 
@@ -180,6 +174,4 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::computeFor
          **Parent topic:** `Fourier Transform
          Functions <fourier-transform-functions.html>`__
 
-
-   .. container::
 

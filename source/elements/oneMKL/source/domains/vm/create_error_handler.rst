@@ -1,4 +1,3 @@
-.. _create_error_handler:
 
 create_error_handler
 ====================
@@ -15,7 +14,6 @@ create_error_handler
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -30,7 +28,7 @@ create_error_handler
          USM API:
 
 
-         .. cpp:function::  error_handler<T> create_error_handler(         uint8_t\* errarray, int64_t length = 1, uint8_t errstatus =         status::not_defined, T fixup = 0.0, bool copysign = false )
+         .. cpp:function::  error_handler<T> create_error_handler(         uint8_t* errarray, int64_t length = 1, uint8_t errstatus =         status::not_defined, T fixup = 0.0, bool copysign = false )
 
          ``create_error_handler`` supports the following precisions.
 
@@ -52,7 +50,6 @@ create_error_handler
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -119,14 +116,17 @@ create_error_handler
             * -  Status 
               -  Description 
             * -  Successful Execution 
+              -   
             * -  ``status::success`` 
               -  VM function execution completed successfully 
             * -  ``status::not_defined`` 
               -  VM status not defined 
             * -  Warnings 
+              -   
             * -  ``status::accuracy_warning`` 
               -  VM function execution completed successfully in a different          accuracy mode
             * -  Computational Errors 
+              -   
             * -  ``status::errdom`` 
               -  Values are out of a range of definition producing invalid          (QNaN) result
             * -  ``status::sing`` 
@@ -165,7 +165,6 @@ create_error_handler
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -200,7 +199,6 @@ create_error_handler
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -213,7 +211,6 @@ create_error_handler
 
 
       .. rubric:: Examples
-         :name: examples
          :class: sectiontitle
 
 
@@ -249,7 +246,7 @@ create_error_handler
 
 
       The ``st`` contains either ``status::success`` or accumulated
-      error statuses if computational errors occured in ``vm::erfinv``.
+      error statuses if computational errors occurred in ``vm::erfinv``.
 
 
       Multiple status mode with create_error_handler():
@@ -408,6 +405,4 @@ create_error_handler
       **Parent topic:** `VM Service
       Functions <vm-service-functions.html>`__
 
-
-.. container::
 

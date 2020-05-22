@@ -1,4 +1,3 @@
-.. _asin:
 
 asin
 ====
@@ -15,7 +14,6 @@ asin
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ asin
       USM API:
 
 
-      .. cpp:function::  event asin(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event asin(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``asin`` supports the following precisions.
 
@@ -49,7 +47,6 @@ asin
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -96,7 +93,7 @@ asin
 
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -108,7 +105,6 @@ asin
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -179,7 +175,6 @@ asin
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -206,11 +201,10 @@ asin
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use asincan be found in the oneMKL installation
+   An example of how to use asin can be found in the oneMKL installation
    directory, under:
 
 
@@ -229,6 +223,4 @@ asin
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

@@ -1,4 +1,3 @@
-.. _potri:
 
 potri
 =====
@@ -17,7 +16,6 @@ potri
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ potri
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -59,7 +56,6 @@ potri
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -85,7 +81,6 @@ potri
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -105,7 +100,6 @@ potri
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -128,6 +122,4 @@ potri
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

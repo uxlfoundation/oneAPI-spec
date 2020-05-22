@@ -17,16 +17,16 @@ potrs (USM Version)
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  template<typename data_t>
+         ::
 
-         .. cpp:function::  cl::sycl::event potrs(cl::sycl::queue &queue,         onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs,         data_t \*a, std::int64_t lda, data_t \*b, std::int64_t ldb,         std::int64_t &info, cl::sycl::event &e_a_ready, cl::sycl::event         &e_b_ready)
+           template<typename data_t>
+             cl::sycl::event potrs(cl::sycl::queue &queue,         onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs,         data_t \*a, std::int64_t lda, data_t \*b, std::int64_t ldb,         std::int64_t &info, cl::sycl::event &e_a_ready, cl::sycl::event         &e_b_ready)
 
          The USM version of ``potrs`` supports the following precisions.
 
@@ -48,7 +48,6 @@ potrs (USM Version)
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -84,7 +83,6 @@ potrs (USM Version)
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -147,7 +145,6 @@ potrs (USM Version)
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -179,6 +176,4 @@ potrs (USM Version)
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

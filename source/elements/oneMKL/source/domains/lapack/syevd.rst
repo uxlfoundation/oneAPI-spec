@@ -1,4 +1,3 @@
-.. _syevd:
 
 syevd
 =====
@@ -17,7 +16,6 @@ syevd
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -41,7 +39,6 @@ syevd
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -69,7 +66,6 @@ syevd
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -128,7 +124,6 @@ syevd
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -177,7 +172,6 @@ syevd
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -200,6 +194,4 @@ syevd
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

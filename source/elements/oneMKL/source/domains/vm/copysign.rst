@@ -1,4 +1,3 @@
-.. _copysign:
 
 copysign
 ========
@@ -16,7 +15,6 @@ copysign
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ copysign
       USM API:
 
 
-      .. cpp:function::  event copysign(queue& exec_queue, int64_t n, T\*      a, T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event copysign(queue& exec_queue, int64_t n, T*      a, T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``copysign`` supports the following precisions.
 
@@ -48,13 +46,12 @@ copysign
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
    The copysign(a,b) function returns the first vector argument elements
-   withthe sign changed to match the sign of the second vector
-   argument'scorresponding elements.
+   with the sign changed to match the sign of the second vector
+   argument's corresponding elements.
 
 
    .. container:: tablenoborder
@@ -87,7 +84,6 @@ copysign
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -152,7 +148,6 @@ copysign
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -179,11 +174,10 @@ copysign
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use copysigncan be found in the oneMKL
+   An example of how to use copysign can be found in the oneMKL
    installation directory, under:
 
 
@@ -202,6 +196,4 @@ copysign
       **Parent topic:** `Miscellaneous VM
       Functions <miscellaneous-vm-functions.html>`__
 
-
-.. container::
 

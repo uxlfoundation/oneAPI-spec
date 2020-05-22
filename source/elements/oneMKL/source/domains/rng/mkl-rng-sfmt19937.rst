@@ -1,7 +1,7 @@
 .. _mkl-rng-sfmt19937:
 
 onemkl::rng::sfmt19937
-===================
+======================
 
 
 .. container::
@@ -17,31 +17,24 @@ onemkl::rng::sfmt19937
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class sfmt19937 :         internal::engine_base<sfmt19937>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  sfmt19937 (cl::sycl::queue& queue,         std::uint32_t seed)
-
-         .. cpp:function::  sfmt19937 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-
-         .. cpp:function::  sfmt19937 (const sfmt19937& other)
-
-         .. cpp:function::  sfmt19937& operator=(const sfmt19937& other)
-
-         .. cpp:function::  ~sfmt19937()
-
-         .. cpp:function::  }
+         ::
+	    
+           class sfmt19937 :         internal::engine_base<sfmt19937>{
+           public:
+             sfmt19937 (cl::sycl::queue& queue,         std::uint32_t seed)
+             sfmt19937 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
+             sfmt19937 (const sfmt19937& other)
+             sfmt19937& operator=(const sfmt19937& other)
+             ~sfmt19937()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -49,7 +42,6 @@ onemkl::rng::sfmt19937
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -61,7 +53,6 @@ onemkl::rng::sfmt19937
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -96,5 +87,4 @@ onemkl::rng::sfmt19937
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

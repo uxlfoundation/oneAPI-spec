@@ -1,4 +1,3 @@
-.. _unmqr_get_lwork:
 
 unmqr_get_lwork
 ===============
@@ -16,7 +15,6 @@ unmqr_get_lwork
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -43,7 +41,6 @@ unmqr_get_lwork
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -59,7 +56,6 @@ unmqr_get_lwork
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -111,7 +107,6 @@ unmqr_get_lwork
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -125,7 +120,6 @@ unmqr_get_lwork
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
@@ -148,6 +142,4 @@ unmqr_get_lwork
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

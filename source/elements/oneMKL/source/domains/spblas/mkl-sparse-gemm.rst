@@ -1,7 +1,7 @@
 .. _mkl-sparse-gemm:
 
 onemkl::sparse::gemm
-=================
+====================
 
 
 .. container::
@@ -17,7 +17,6 @@ onemkl::sparse::gemm
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -25,7 +24,6 @@ onemkl::sparse::gemm
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -43,10 +41,9 @@ onemkl::sparse::gemm
          **Using USM pointers:**
 
 
-         .. cpp:function::  void onemkl::sparse::gemm (cl::sycl::queue &         queue, onemkl::transpose transpose_val, const fp alpha,         matrixHandle_t handle, const fp \*b, const std::int64_t         columns, const std::int64_t ldb, const fp beta, fp \*c, const         std::int64_t ldc)
+         .. cpp:function::  void onemkl::sparse::gemm (cl::sycl::queue &         queue, onemkl::transpose transpose_val, const fp alpha,         matrixHandle_t handle, const fp *b, const std::int64_t         columns, const std::int64_t ldb, const fp beta, fp *c, const         std::int64_t ldc)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -54,12 +51,10 @@ onemkl::sparse::gemm
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
          .. rubric:: Note
-            :name: note-1
             :class: NoteTipHead
 
 
@@ -92,7 +87,6 @@ onemkl::sparse::gemm
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -125,7 +119,6 @@ onemkl::sparse::gemm
 
 
                .. rubric:: Note
-                  :name: note-2
                   :class: NoteTipHead
 
 
@@ -147,7 +140,6 @@ onemkl::sparse::gemm
 
 
                .. rubric:: Note
-                  :name: note-3
                   :class: NoteTipHead
 
 
@@ -186,7 +178,6 @@ onemkl::sparse::gemm
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -204,5 +195,4 @@ onemkl::sparse::gemm
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

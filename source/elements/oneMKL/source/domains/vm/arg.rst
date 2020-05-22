@@ -1,4 +1,3 @@
-.. _arg:
 
 arg
 ===
@@ -15,7 +14,6 @@ arg
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ arg
       USM API:
 
 
-      .. cpp:function::  event arg(queue& exec_queue, int64_t n, A\* a,      R\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event arg(queue& exec_queue, int64_t n, A* a,      R* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``arg`` supports the following precisions.
 
@@ -47,7 +45,6 @@ arg
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -137,7 +134,6 @@ arg
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 
@@ -152,7 +148,6 @@ arg
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -209,7 +204,6 @@ arg
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -236,11 +230,10 @@ arg
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use argcan be found in the oneMKL installation
+   An example of how to use arg can be found in the oneMKL installation
    directory, under:
 
 
@@ -259,6 +252,4 @@ arg
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

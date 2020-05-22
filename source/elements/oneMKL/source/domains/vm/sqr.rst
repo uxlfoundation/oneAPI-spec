@@ -1,4 +1,3 @@
-.. _sqr:
 
 sqr
 ===
@@ -15,7 +14,6 @@ sqr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ sqr
       USM API:
 
 
-      .. cpp:function::  event sqr( queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event sqr( queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``sqr`` supports the following precisions.
 
@@ -47,11 +45,10 @@ sqr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The sqr() function performs element by element sqaring of the vector.
+   The sqr() function performs element by element squaring of the vector.
 
 
    .. container:: tablenoborder
@@ -93,7 +90,6 @@ sqr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -150,7 +146,6 @@ sqr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -177,11 +172,10 @@ sqr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use sqrcan be found in the oneMKL installation
+   An example of how to use sqr can be found in the oneMKL installation
    directory, under:
 
 
@@ -200,6 +194,4 @@ sqr
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

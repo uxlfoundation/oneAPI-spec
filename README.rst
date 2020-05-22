@@ -7,6 +7,16 @@ oneAPI Specifications
 
 This repo contains the sources for the `oneAPI Specification`_.
 
+For the latest build from master branch, see `this
+<http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/refs/heads/master/versions/latest/index.html>`__.
+
+For more information about oneAPI, see `oneapi.com
+<https://oneapi.com>`__. For information about future releases of the
+oneAPI specification, see the `roadmap <roadmap.rst>`__. To be
+notified about new releases, become a release-only watcher of this
+repo. See `contribute <CONTRIBUTING.rst>`__ for information about
+contributing.
+
 The document is built with `Sphinx`_ using a theme provided by `Read
 the Docs`_.
 

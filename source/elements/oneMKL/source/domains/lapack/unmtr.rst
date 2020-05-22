@@ -1,4 +1,3 @@
-.. _unmtr:
 
 unmtr
 =====
@@ -18,7 +17,6 @@ unmtr
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -42,7 +40,6 @@ unmtr
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -64,7 +61,6 @@ unmtr
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -167,7 +163,6 @@ unmtr
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -196,7 +191,6 @@ unmtr
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -219,6 +213,4 @@ unmtr
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

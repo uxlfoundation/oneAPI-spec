@@ -1,4 +1,3 @@
-.. _trunc:
 
 trunc
 =====
@@ -7,7 +6,7 @@ trunc
 .. container::
 
 
-   Computes an integer valuerounded towards zero for each vector
+   Computes an integer value rounded towards zero for each vector
    element.
 
 
@@ -16,7 +15,6 @@ trunc
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ trunc
       USM API:
 
 
-      .. cpp:function::  event trunc(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event trunc(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``trunc`` supports the following precisions.
 
@@ -48,11 +46,10 @@ trunc
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The trunc(a)functioncomputes an integer valuerounded towards zero for
+   The trunc(a) function computes an integer value rounded towards zero for
    each vector element.
 
 
@@ -99,7 +96,6 @@ trunc
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -156,7 +152,6 @@ trunc
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -183,11 +178,10 @@ trunc
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use trunccan be found in the oneMKL installation
+   An example of how to use trunc can be found in the oneMKL installation
    directory, under:
 
 
@@ -206,8 +200,6 @@ trunc
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-CA113DF0-DE46-42A1-99AF-93F6F76E72EA-low.gif

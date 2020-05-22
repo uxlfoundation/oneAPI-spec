@@ -1,4 +1,3 @@
-.. _atan:
 
 atan
 ====
@@ -15,7 +14,6 @@ atan
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ atan
       USM API:
 
 
-      .. cpp:function::  event atan(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event atan(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``atan`` supports the following precisions.
 
@@ -49,7 +47,6 @@ atan
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -90,7 +87,7 @@ atan
    The atan function does not generate any errors.
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -102,7 +99,6 @@ atan
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -159,7 +155,6 @@ atan
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -186,11 +181,10 @@ atan
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use atancan be found in the oneMKL installation
+   An example of how to use atan can be found in the oneMKL installation
    directory, under:
 
 
@@ -209,6 +203,4 @@ atan
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

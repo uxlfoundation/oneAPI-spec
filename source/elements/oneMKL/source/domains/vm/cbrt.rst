@@ -1,4 +1,3 @@
-.. _cbrt:
 
 cbrt
 ====
@@ -15,7 +14,6 @@ cbrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ cbrt
       USM API:
 
 
-      .. cpp:function::  event cbrt(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event cbrt(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``cbrt`` supports the following precisions.
 
@@ -47,7 +45,6 @@ cbrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -93,7 +90,6 @@ cbrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -150,7 +146,6 @@ cbrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -177,11 +172,10 @@ cbrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use cbrtcan be found in the oneMKL installation
+   An example of how to use cbrt can be found in the oneMKL installation
    directory, under:
 
 
@@ -200,6 +194,4 @@ cbrt
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

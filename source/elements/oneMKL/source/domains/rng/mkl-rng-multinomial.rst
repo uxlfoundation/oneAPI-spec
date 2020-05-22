@@ -1,7 +1,7 @@
 .. _mkl-rng-multinomial:
 
 onemkl::rng::multinomial
-=====================
+========================
 
 
 .. container::
@@ -15,30 +15,22 @@ onemkl::rng::multinomial
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = poisson_inverse>
-
-      .. cpp:function::  class multinomial {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  multinomial(double ntrial, std::vector<double>      p)
-
-      .. cpp:function::  multinomial(const multinomial<T, Method>& other)
-
-      .. cpp:function::  std::int32_t ntrial() const
-
-      .. cpp:function::  std::vector<double> p() const
-
-      .. cpp:function::  multinomial<T, Method>& operator=(const      multinomial<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = poisson_inverse>
+          class multinomial {
+          public:
+            multinomial(double ntrial, std::vector<double>      p)
+            multinomial(const multinomial<T, Method>& other)
+            std::int32_t ntrial() const
+            std::vector<double> p() const
+            multinomial<T, Method>& operator=(const      multinomial<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +38,6 @@ onemkl::rng::multinomial
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -65,7 +56,6 @@ onemkl::rng::multinomial
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -97,8 +87,6 @@ onemkl::rng::multinomial
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-749B9421-ABAF-41EA-B8B9-3C9941EF5B72-low.png

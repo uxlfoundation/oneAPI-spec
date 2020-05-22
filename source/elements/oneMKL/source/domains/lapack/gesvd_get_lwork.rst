@@ -1,4 +1,3 @@
-.. _gesvd_get_lwork:
 
 gesvd_get_lwork
 ===============
@@ -17,7 +16,6 @@ gesvd_get_lwork
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,7 +44,6 @@ gesvd_get_lwork
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -62,7 +59,6 @@ gesvd_get_lwork
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -142,7 +138,6 @@ gesvd_get_lwork
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -157,7 +152,6 @@ gesvd_get_lwork
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
@@ -180,6 +174,4 @@ gesvd_get_lwork
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

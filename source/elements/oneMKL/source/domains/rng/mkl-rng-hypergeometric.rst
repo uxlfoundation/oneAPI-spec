@@ -1,7 +1,7 @@
 .. _mkl-rng-hypergeometric:
 
 onemkl::rng::hypergeometric
-========================
+===========================
 
 
 .. container::
@@ -15,34 +15,24 @@ onemkl::rng::hypergeometric
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = h2pe>
-
-      .. cpp:function::  class hypergeometric {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  hypergeometric(): hypergeometric(1, 1, 1){}
-
-      .. cpp:function::  hypergeometric(std::int32_t l, std::int32_T s,      std::int32_T m)
-
-      .. cpp:function::  hypergeometric(const hypergeometric<T, Method>&      other)
-
-      .. cpp:function::  std::int32_t s() const
-
-      .. cpp:function::  std::int32_t m() const
-
-      .. cpp:function::  std::int32_t l() const
-
-      .. cpp:function::  hypergeometric<T, Method>& operator=(const      laplace<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = h2pe>
+          class hypergeometric {
+          public:
+            hypergeometric(): hypergeometric(1, 1, 1){}
+            hypergeometric(std::int32_t l, std::int32_T s,      std::int32_T m)
+            hypergeometric(const hypergeometric<T, Method>&      other)
+            std::int32_t s() const
+            std::int32_t m() const
+            std::int32_t l() const
+            hypergeometric<T, Method>& operator=(const      laplace<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -50,7 +40,6 @@ onemkl::rng::hypergeometric
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -86,7 +75,6 @@ onemkl::rng::hypergeometric
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -121,8 +109,6 @@ onemkl::rng::hypergeometric
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-5159E8DD-25FF-473A-86AA-1E71FFCD018C-low.jpg

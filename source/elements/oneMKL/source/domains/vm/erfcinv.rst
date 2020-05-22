@@ -1,4 +1,3 @@
-.. _erfcinv:
 
 erfcinv
 =======
@@ -16,7 +15,6 @@ erfcinv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ erfcinv
       USM API:
 
 
-      .. cpp:function::  event erfcinv(queue& exec_queue, int64_t n, T\*      a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event erfcinv(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``erfcinv`` supports the following precisions.
 
@@ -48,7 +46,6 @@ erfcinv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -172,7 +169,6 @@ erfcinv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -243,7 +239,6 @@ erfcinv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -270,11 +265,10 @@ erfcinv
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use erfcinvcan be found in the oneMKL
+   An example of how to use erfcinv can be found in the oneMKL
    installation directory, under:
 
 
@@ -293,8 +287,6 @@ erfcinv
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-9BCB2B87-3DED-4764-A182-30A4FAA4A2E2-low.gif

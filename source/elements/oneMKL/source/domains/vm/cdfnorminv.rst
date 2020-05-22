@@ -1,4 +1,3 @@
-.. _cdfnorminv:
 
 cdfnorminv
 ==========
@@ -16,7 +15,6 @@ cdfnorminv
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ cdfnorminv
       USM API:
 
 
-      .. cpp:function::  event cdfnorminv(queue& exec_queue, int64_t n,      T\* a, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cdfnorminv(queue& exec_queue, int64_t n,      T* a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cdfnorminv`` supports the following precisions.
 
@@ -48,7 +46,6 @@ cdfnorminv
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -170,7 +167,6 @@ cdfnorminv
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -241,7 +237,6 @@ cdfnorminv
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -268,11 +263,10 @@ cdfnorminv
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use cdfnorminvcan be found in the oneMKL
+   An example of how to use cdfnorminv can be found in the oneMKL
    installation directory, under:
 
 
@@ -291,8 +285,6 @@ cdfnorminv
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-A3054E0D-CFC1-44E8-89F7-B5A232903EE9-low.jpg

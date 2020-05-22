@@ -47,6 +47,7 @@ from zipfile import ZipFile
 sys.path.insert(0, os.path.abspath(join('source','conf')))
 import common_conf
 
+oneapi_spec_version = common_conf.env['oneapi_version']
 args = None
 
         
@@ -205,9 +206,7 @@ def build(root, target):
     prep(root)
     sphinx(root, target)
 
-@action
-def ci_publish(root, target=None):
-    root_only(root)
+def site_zip():
     with ZipFile('site.zip', 'w') as site_zip:
         for r, dirs, files in os.walk('site', topdown=True):
             # Exclude DAL API because it is 1.7G
@@ -215,6 +214,10 @@ def ci_publish(root, target=None):
                 dirs = remove_elements(dirs, ['api', '_sources'])
             for file in files:
                 site_zip.write(join(r, file))
+    
+@action
+def ci_publish(root, target=None):
+    root_only(root)
     if not args.branch:
         exit('Error: --branch <branchname> is required')
     if 'AWS_SECRET_ACCESS_KEY' in os.environ and os.environ['AWS_SECRET_ACCESS_KEY'] != '':
@@ -235,11 +238,11 @@ def stage_publish(root, target=None):
     root_only(root)
     local_top = 'site'
     local_versions = join(local_top, 'versions')
-    local_versions_x = join(local_versions, common_conf.oneapi_spec_version)
+    local_versions_x = join(local_versions, oneapi_spec_version)
     local_versions_latest = join(local_versions, 'latest')
     s3_top = 's3://%s' % (staging_host)
     s3_versions = '%s/versions' % s3_top
-    s3_versions_x = '%s/%s' % (s3_versions,common_conf.oneapi_spec_version)
+    s3_versions_x = '%s/%s' % (s3_versions, oneapi_spec_version)
     s3_versions_latest = '%s/latest' % s3_versions
 
     # Sync everything but versions
@@ -297,7 +300,7 @@ def site(root, target=None):
     # Build the site. It will have everything but the older versions
     site = 'site'
     versions = join(site,'versions')
-    versions_x = join(versions, common_conf.oneapi_spec_version)
+    versions_x = join(versions, oneapi_spec_version)
     pdf = join('build','latex','oneAPI-spec.pdf')
     html = join('build','html')
     rm(site)
@@ -341,6 +344,7 @@ def ci(root, target=None):
     get_tarballs(root)
     site(root)
     build('.', 'spelling')
+    site_zip()
     if args.branch == 'publish' or args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:

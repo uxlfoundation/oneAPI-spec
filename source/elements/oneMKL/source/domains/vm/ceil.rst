@@ -1,4 +1,3 @@
-.. _ceil:
 
 ceil
 ====
@@ -7,7 +6,7 @@ ceil
 .. container::
 
 
-   Computes an integer valuerounded towards plus infinity for each
+   Computes an integer value rounded towards plus infinity for each
    vector element.
 
 
@@ -16,7 +15,6 @@ ceil
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ ceil
       USM API:
 
 
-      .. cpp:function::  event ceil(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event ceil(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``ceil`` supports the following precisions.
 
@@ -48,11 +46,10 @@ ceil
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
-   The ceil(a) functioncomputes an integer valuerounded towards plus
+   The ceil(a) function computes an integer value rounded towards plus
    infinity for each vector element.
 
 
@@ -99,7 +96,6 @@ ceil
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -156,7 +152,6 @@ ceil
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -183,11 +178,10 @@ ceil
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use ceilcan be found in the oneMKL installation
+   An example of how to use ceil can be found in the oneMKL installation
    directory, under:
 
 
@@ -206,8 +200,6 @@ ceil
       **Parent topic:** `Rounding
       Functions <rounding-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-A3089763-5ACF-46DB-AFFF-197043DD5932-low.gif

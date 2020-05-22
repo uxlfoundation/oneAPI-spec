@@ -1,7 +1,7 @@
 .. _mkl-rng-sobol:
 
 onemkl::rng::sobol
-===============
+==================
 
 
 .. container::
@@ -16,31 +16,24 @@ onemkl::rng::sobol
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class sobol : internal::engine_base<sobol>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  sobol (cl::sycl::queue& queue, std::uint32_t         dimensions)
-
-         .. cpp:function::  sobol (cl::sycl::queue& queue,         std::vector<std::uint32_t> direction_numbers)
-
-         .. cpp:function::  sobol (const sobol& other)
-
-         .. cpp:function::  sobol& operator=(const sobol& other)
-
-         .. cpp:function::  ~sobol()
-
-         .. cpp:function::  }
+         ::
+	    
+           class sobol : internal::engine_base<sobol>{
+           public:
+             sobol (cl::sycl::queue& queue, std::uint32_t         dimensions)
+             sobol (cl::sycl::queue& queue,         std::vector<std::uint32_t> direction_numbers)
+             sobol (const sobol& other)
+             sobol& operator=(const sobol& other)
+             ~sobol()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -48,7 +41,6 @@ onemkl::rng::sobol
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -59,7 +51,6 @@ onemkl::rng::sobol
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -97,5 +88,4 @@ onemkl::rng::sobol
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

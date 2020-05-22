@@ -1,4 +1,3 @@
-.. _log10:
 
 log10
 =====
@@ -15,7 +14,6 @@ log10
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ log10
       USM API:
 
 
-      .. cpp:function::  event log10(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event log10(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``log10`` supports the following precisions.
 
@@ -49,7 +47,6 @@ log10
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -173,7 +170,6 @@ log10
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -244,7 +240,6 @@ log10
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -271,7 +266,6 @@ log10
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -294,8 +288,6 @@ log10
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-2293B947-42D6-4E5F-BBB3-9DC135AA724A-low.gif

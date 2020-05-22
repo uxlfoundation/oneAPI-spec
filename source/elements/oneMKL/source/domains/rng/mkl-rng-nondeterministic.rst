@@ -1,7 +1,7 @@
 .. _mkl-rng-nondeterministic:
 
 onemkl::rng::nondeterministic
-==========================
+=============================
 
 
 .. container::
@@ -16,29 +16,23 @@ onemkl::rng::nondeterministic
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class nondeterministic :         internal::engine_base<nondeterministic>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  nondeterministic (cl::sycl::queue& queue)
-
-         .. cpp:function::  nondeterministic (const nondeterministic&         other)
-
-         .. cpp:function::  nondeterministic& operator=(const         nondeterministic& other)
-
-         .. cpp:function::  ~nondeterministic()
-
-         .. cpp:function::  }
+         ::
+	    
+           class nondeterministic :         internal::engine_base<nondeterministic>{
+           public:
+             nondeterministic (cl::sycl::queue& queue)
+             nondeterministic (const nondeterministic&         other)
+             nondeterministic& operator=(const         nondeterministic& other)
+             ~nondeterministic()
+           }
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -46,7 +40,6 @@ onemkl::rng::nondeterministic
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
@@ -55,7 +48,6 @@ onemkl::rng::nondeterministic
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -87,5 +79,4 @@ onemkl::rng::nondeterministic
          Generators) <engines-basic-random-number-generators.html>`__
 
 
-   .. container::
-
+   

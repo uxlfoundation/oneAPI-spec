@@ -1,7 +1,7 @@
 .. _mkl-rng-rayleigh:
 
 onemkl::rng::rayleigh
-==================
+=====================
 
 
 .. container::
@@ -15,32 +15,23 @@ onemkl::rng::rayleigh
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      inverse_function>
-
-      .. cpp:function::  class rayleigh {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  rayleigh(): rayleigh((T)0.0, (T)1.0){}
-
-      .. cpp:function::  rayleigh(T a, T b)
-
-      .. cpp:function::  rayleigh(const rayleigh<T, Method>& other)
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  rayleigh<T, Method>& operator=(const rayleigh<T,      Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = float, method Method =      inverse_function>
+          class rayleigh {
+          public:
+            rayleigh(): rayleigh((T)0.0, (T)1.0){}
+            rayleigh(T a, T b)
+            rayleigh(const rayleigh<T, Method>& other)
+            T a() const
+            T b() const
+            rayleigh<T, Method>& operator=(const rayleigh<T,      Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -48,7 +39,6 @@ onemkl::rng::rayleigh
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -78,7 +68,6 @@ onemkl::rng::rayleigh
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -110,8 +99,6 @@ onemkl::rng::rayleigh
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-96DF4ACE-8587-423F-B50A-E9A58BE272F9-low.gif

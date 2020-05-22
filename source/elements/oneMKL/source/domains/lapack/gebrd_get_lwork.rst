@@ -1,4 +1,3 @@
-.. _gebrd_get_lwork:
 
 gebrd_get_lwork
 ===============
@@ -17,7 +16,6 @@ gebrd_get_lwork
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -46,12 +44,11 @@ gebrd_get_lwork
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
       Computes the worksize needed for the reduction of a general matrix
-      to bidagonal form
+      to bidiagonal form
       (`gebrd <gebrd.html>`__).
       Calls to this routine must specify the template parameter
       explicitly.
@@ -62,7 +59,6 @@ gebrd_get_lwork
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -87,7 +83,6 @@ gebrd_get_lwork
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -102,7 +97,6 @@ gebrd_get_lwork
 
 
       .. rubric:: Example
-         :name: example
          :class: sectiontitle
 
 
@@ -125,6 +119,4 @@ gebrd_get_lwork
       **Parent topic:** `LAPACK
       Routines <lapack.html>`__
 
-
-.. container::
 

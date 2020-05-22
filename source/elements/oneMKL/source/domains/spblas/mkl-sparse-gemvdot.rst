@@ -1,7 +1,7 @@
 .. _mkl-sparse-gemvdot:
 
 onemkl::sparse::gemvdot
-====================
+=======================
 
 
 .. container::
@@ -15,7 +15,6 @@ onemkl::sparse::gemvdot
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -23,7 +22,6 @@ onemkl::sparse::gemvdot
 
 
          .. rubric:: Note
-            :name: note
             :class: NoteTipHead
 
 
@@ -41,10 +39,9 @@ onemkl::sparse::gemvdot
          **Using USM pointers:**
 
 
-         .. cpp:function::  void onemkl::sparse::gemvdot (cl::sycl::queue &         queue, onemkl::transpose transpose_val, fp alpha, matrixHandle_t         handle, fp \*x, fp beta, fp \*y, fp \*d)
+         .. cpp:function::  void onemkl::sparse::gemvdot (cl::sycl::queue &         queue, onemkl::transpose transpose_val, fp alpha, matrixHandle_t         handle, fp *x, fp beta, fp *y, fp *d)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -52,12 +49,10 @@ onemkl::sparse::gemvdot
 
 
          .. rubric:: Description
-            :name: description
             :class: sectiontitle
 
 
          .. rubric:: Note
-            :name: note-1
             :class: NoteTipHead
 
 
@@ -96,7 +91,6 @@ onemkl::sparse::gemvdot
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -129,7 +123,6 @@ onemkl::sparse::gemvdot
 
 
                .. rubric:: Note
-                  :name: note-2
                   :class: NoteTipHead
 
 
@@ -151,7 +144,6 @@ onemkl::sparse::gemvdot
 
 
                .. rubric:: Note
-                  :name: note-3
                   :class: NoteTipHead
 
 
@@ -182,7 +174,6 @@ onemkl::sparse::gemvdot
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -204,5 +195,4 @@ onemkl::sparse::gemvdot
          Routines <spblas.html>`__
 
 
-   .. container::
-
+   

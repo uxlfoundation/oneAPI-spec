@@ -1,4 +1,3 @@
-.. _log1p:
 
 log1p
 =====
@@ -16,7 +15,6 @@ log1p
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ log1p
       USM API:
 
 
-      .. cpp:function::  event log1p(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event log1p(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``log1p`` supports the following precisions.
 
@@ -48,7 +46,6 @@ log1p
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -98,7 +95,6 @@ log1p
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -169,7 +165,6 @@ log1p
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -196,11 +191,10 @@ log1p
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use log1pcan be found in the oneMKL installation
+   An example of how to use log1p can be found in the oneMKL installation
    directory, under:
 
 
@@ -219,6 +213,4 @@ log1p
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 

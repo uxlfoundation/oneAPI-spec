@@ -1,7 +1,7 @@
 .. _mkl-rng-uniform_bits:
 
 onemkl::rng::uniform_bits
-======================
+=========================
 
 
 .. container::
@@ -15,16 +15,15 @@ onemkl::rng::uniform_bits
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::uint32_t, method      Method = standard>
-
-      .. cpp:function::  class uniform_bits {}
+      ::
+	 
+        template<typename T = std::uint32_t, method      Method = standard>
+          class uniform_bits {}
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -32,7 +31,6 @@ onemkl::rng::uniform_bits
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -45,7 +43,6 @@ onemkl::rng::uniform_bits
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -71,6 +68,4 @@ onemkl::rng::uniform_bits
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 

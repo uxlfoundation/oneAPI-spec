@@ -1,4 +1,3 @@
-.. _get_mode:
 
 get_mode
 ========
@@ -15,14 +14,12 @@ get_mode
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
       .. cpp:function::  uint64_t get_mode( queue& exec_queue )
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -39,6 +36,7 @@ get_mode
          * -  Value of mode 
            -  Description 
          * -  Accuracy Control 
+           -   
          * -  ``mode::ha`` 
            -  High accuracy versions of VM functions. 
          * -  ``mode::la`` 
@@ -46,11 +44,13 @@ get_mode
          * -  ``mode::ep`` 
            -  Enhanced performance accuracy versions of VM functions. 
          * -  Denormalized Numbers Handling Control 
+           -   
          * -  ``mode::ftzdazon`` 
            -  Faster processing of denormalized inputs is enabled. 
          * -  ``mode::ftzdazoff`` 
            -  Faster processing of denormalized inputs is disabled. 
          * -  Other 
+           -   
          * -  ``mode::not_defined`` 
            -  VM status not defined. 
 
@@ -65,7 +65,6 @@ get_mode
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -78,7 +77,6 @@ get_mode
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -91,7 +89,6 @@ get_mode
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
@@ -111,6 +108,4 @@ get_mode
       **Parent topic:** `VM Service
       Functions <vm-service-functions.html>`__
 
-
-.. container::
 

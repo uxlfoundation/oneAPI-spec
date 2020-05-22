@@ -1,7 +1,7 @@
 .. _mkl-sparse-setcsrstructure:
 
 onemkl::sparse::setCSRstructure
-============================
+===============================
 
 
 .. container::
@@ -15,7 +15,6 @@ onemkl::sparse::setCSRstructure
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,10 +26,9 @@ onemkl::sparse::setCSRstructure
       **Using USM pointers:**
 
 
-      .. cpp:function::  void onemkl::sparse::setCSRstructure (matrixHandle_t      handle, intType nRows, intType nCols, onemkl::index_base index,      intType \*rowIndex, intType \*colIndex, fp \*values)
+      .. cpp:function::  void onemkl::sparse::setCSRstructure (matrixHandle_t      handle, intType nRows, intType nCols, onemkl::index_base index,      intType *rowIndex, intType *colIndex, fp *values)
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -38,7 +36,6 @@ onemkl::sparse::setCSRstructure
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -48,7 +45,6 @@ onemkl::sparse::setCSRstructure
 
 
       .. rubric:: Note
-         :name: note
          :class: NoteTipHead
 
 
@@ -60,7 +56,6 @@ onemkl::sparse::setCSRstructure
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -108,7 +103,6 @@ onemkl::sparse::setCSRstructure
 
 
             .. rubric:: Note
-               :name: note-1
                :class: NoteTipHead
 
 
@@ -139,7 +133,6 @@ onemkl::sparse::setCSRstructure
 
 
       .. rubric:: Output Parameters
-         :name: output-parameters
          :class: sectiontitle
 
 
@@ -157,6 +150,4 @@ onemkl::sparse::setCSRstructure
       **Parent topic:** `Sparse BLAS
       Routines <spblas.html>`__
 
-
-.. container::
 

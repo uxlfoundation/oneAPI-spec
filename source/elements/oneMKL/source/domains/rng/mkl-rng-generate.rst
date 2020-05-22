@@ -1,7 +1,7 @@
 .. _mkl-rng-generate:
 
 onemkl::rng::generate
-==================
+=====================
 
 
 .. container::
@@ -16,7 +16,6 @@ onemkl::rng::generate
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -26,19 +25,14 @@ onemkl::rng::generate
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType>
-
-         .. cpp:function::  void generate (const Distr<T, Method>& distr,         EngineType& engine, const std::int64_t n, cl::sycl::buffer<T,         1>& r)
+         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType> void generate (const Distr<T, Method>& distr,         EngineType& engine, const std::int64_t n, cl::sycl::buffer<T,         1>& r)
 
          USM API
 
 
-         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType>
-
-         .. cpp:function::  cl::sycl::event generate (const Distr<T,         Method>& distr, EngineType& engine, const std::int64_t n, T \*         r , const cl::sycl::vector_class<cl::sycl::event> &         dependencies)
+         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType> cl::sycl::event generate (const Distr<T,         Method>& distr, EngineType& engine, const std::int64_t n, T *         r , const cl::sycl::vector_class<cl::sycl::event> &         dependencies)
 
          .. rubric:: Include Files
-            :name: include-files
             :class: sectiontitle
 
 
@@ -46,7 +40,6 @@ onemkl::rng::generate
 
 
          .. rubric:: Input Parameters
-            :name: input-parameters
             :class: sectiontitle
 
 
@@ -74,7 +67,6 @@ onemkl::rng::generate
 
 
          .. rubric:: Output Parameters
-            :name: output-parameters
             :class: sectiontitle
 
 
@@ -128,5 +120,4 @@ onemkl::rng::generate
          Routine <generate-routine.html>`__
 
 
-   .. container::
-
+   

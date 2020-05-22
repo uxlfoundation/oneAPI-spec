@@ -1,4 +1,3 @@
-.. _erf:
 
 erf
 ===
@@ -15,7 +14,6 @@ erf
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ erf
       USM API:
 
 
-      .. cpp:function::  event erf(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event erf(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``erf`` supports the following precisions.
 
@@ -47,7 +45,6 @@ erf
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -155,7 +152,6 @@ erf
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -212,7 +208,6 @@ erf
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -239,11 +234,10 @@ erf
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use erfcan be found in the oneMKL installation
+   An example of how to use erf can be found in the oneMKL installation
    directory, under:
 
 
@@ -262,8 +256,6 @@ erf
       **Parent topic:** `Special
       Functions <special-functions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-8742E2B1-94AF-4622-B964-181611E3D1F2-low.jpg

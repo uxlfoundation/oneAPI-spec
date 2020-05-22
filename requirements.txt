@@ -13,3 +13,4 @@ sphinx_substitution_extensions
 sphinx_tabs
 sphinxcontrib-spelling
 graphviz
+lxml

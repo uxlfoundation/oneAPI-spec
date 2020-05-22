@@ -1,4 +1,3 @@
-.. _mulbyconj:
 
 mulbyconj
 =========
@@ -16,7 +15,6 @@ mulbyconj
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -28,7 +26,7 @@ mulbyconj
       USM API:
 
 
-      .. cpp:function::  event mulbyconj(queue& exec_queue, int64_t n, T\*      a, T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event mulbyconj(queue& exec_queue, int64_t n, T*      a, T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``mulbyconj`` supports the following precisions.
 
@@ -48,7 +46,6 @@ mulbyconj
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -127,7 +124,6 @@ mulbyconj
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -154,11 +150,10 @@ mulbyconj
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use mulbyconjcan be found in the oneMKL
+   An example of how to use mulbyconj can be found in the oneMKL
    installation directory, under:
 
 
@@ -177,6 +172,4 @@ mulbyconj
       **Parent topic:** `Arithmetic
       Functions <arithmetic-functions.html>`__
 
-
-.. container::
 

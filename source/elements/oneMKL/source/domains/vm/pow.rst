@@ -1,4 +1,3 @@
-.. _pow:
 
 pow
 ===
@@ -15,7 +14,6 @@ pow
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ pow
       USM API:
 
 
-      .. cpp:function::  event pow(queue& exec_queue, int64_t n, T\* a,      T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event pow(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``pow`` supports the following precisions.
 
@@ -49,7 +47,6 @@ pow
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -312,7 +309,7 @@ pow
 
 
 
-   \* Overflow in a real function is supported onlyin the HA/LA accuracy
+   \* Overflow in a real function is supported only in the HA/LA accuracy
    modes. The overflow occurs when x and y are finite numbers, but the
    result is too large to fit the target precision. In this case, the
    function:
@@ -321,7 +318,7 @@ pow
    #. Returns ∞ in the result.
 
 
-   #. Sets the VM Error Statusto status::overflow.
+   #. Sets the VM Error Status to status::overflow.
 
 
    Overflow in a complex function occurs (supported in the HA/LA
@@ -344,7 +341,6 @@ pow
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -423,7 +419,6 @@ pow
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -450,11 +445,10 @@ pow
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use powcan be found in the oneMKL installation
+   An example of how to use pow can be found in the oneMKL installation
    directory, under:
 
 
@@ -473,6 +467,4 @@ pow
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

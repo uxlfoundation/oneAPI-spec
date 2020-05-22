@@ -1,4 +1,3 @@
-.. _exp:
 
 exp
 ===
@@ -15,7 +14,6 @@ exp
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ exp
       USM API:
 
 
-      .. cpp:function::  event exp(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event exp(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``exp`` supports the following precisions.
 
@@ -49,7 +47,6 @@ exp
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -198,7 +195,6 @@ exp
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -269,7 +265,6 @@ exp
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -296,11 +291,10 @@ exp
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use expcan be found in the oneMKL installation
+   An example of how to use exp can be found in the oneMKL installation
    directory, under:
 
 
@@ -319,6 +313,4 @@ exp
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 

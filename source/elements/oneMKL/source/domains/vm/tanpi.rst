@@ -1,4 +1,3 @@
-.. _tanpi:
 
 tanpi
 =====
@@ -15,7 +14,6 @@ tanpi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ tanpi
       USM API:
 
 
-      .. cpp:function::  event tanpi(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event tanpi(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``tanpi`` supports the following precisions.
 
@@ -47,7 +45,6 @@ tanpi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -120,7 +117,6 @@ tanpi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -191,7 +187,6 @@ tanpi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -218,11 +213,10 @@ tanpi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use tanpican be found in the oneMKL installation
+   An example of how to use tanpi can be found in the oneMKL installation
    directory, under:
 
 
@@ -241,6 +235,4 @@ tanpi
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

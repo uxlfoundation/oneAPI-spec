@@ -1,4 +1,3 @@
-.. _logb:
 
 logb
 ====
@@ -15,7 +14,6 @@ logb
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ logb
       USM API:
 
 
-      .. cpp:function::  event logb(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event logb(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``logb`` supports the following precisions.
 
@@ -47,7 +45,6 @@ logb
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -94,7 +91,6 @@ logb
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -165,7 +161,6 @@ logb
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -192,11 +187,10 @@ logb
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use logbcan be found in the oneMKL installation
+   An example of how to use logb can be found in the oneMKL installation
    directory, under:
 
 
@@ -215,6 +209,4 @@ logb
       **Parent topic:** `Exponential and Logarithmic
       Functions <exponential-and-logarithmic-functions.html>`__
 
-
-.. container::
 

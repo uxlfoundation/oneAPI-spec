@@ -1,4 +1,3 @@
-.. _cospi:
 
 cospi
 =====
@@ -15,7 +14,6 @@ cospi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ cospi
       USM API:
 
 
-      .. cpp:function::  event cospi(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event cospi(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``cospi`` supports the following precisions.:
 
@@ -47,7 +45,6 @@ cospi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -106,7 +103,6 @@ cospi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -177,7 +173,6 @@ cospi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -204,11 +199,10 @@ cospi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use cospican be found in the oneMKL installation
+   An example of how to use cospi can be found in the oneMKL installation
    directory, under:
 
 
@@ -227,6 +221,4 @@ cospi
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

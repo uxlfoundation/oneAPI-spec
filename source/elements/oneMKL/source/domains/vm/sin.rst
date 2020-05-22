@@ -1,4 +1,3 @@
-.. _sin:
 
 sin
 ===
@@ -15,7 +14,6 @@ sin
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ sin
       USM API:
 
 
-      .. cpp:function::  event sin(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event sin(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``sin`` supports the following precisions.
 
@@ -49,7 +47,6 @@ sin
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -97,7 +94,7 @@ sin
 
 
 
-   Specificationsfor special values of the complex functions are defined
+   Specifications for special values of the complex functions are defined
    according to the following formula
 
 
@@ -109,7 +106,6 @@ sin
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -180,7 +176,6 @@ sin
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -207,11 +202,10 @@ sin
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use sincan be found in the oneMKL installation
+   An example of how to use sin can be found in the oneMKL installation
    directory, under:
 
 
@@ -230,6 +224,4 @@ sin
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

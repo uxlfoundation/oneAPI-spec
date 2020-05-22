@@ -1,8 +1,8 @@
 .. _oneTBB-section:
 
-========================
-|tbb_full_name| (oneTBB)
-========================
+====================
+oneTBB |tbb_version|
+====================
 
 .. toctree::
    :maxdepth: 2

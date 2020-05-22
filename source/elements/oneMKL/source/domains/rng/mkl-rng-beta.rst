@@ -1,7 +1,7 @@
 .. _mkl-rng-beta:
 
 onemkl::rng::beta
-==============
+=================
 
 
 .. container::
@@ -15,36 +15,25 @@ onemkl::rng::beta
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = float, method Method =      cheng_johnk_atkinson>
+      ::
 
-      .. cpp:function::  class beta {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  beta(): beta((T)1.0, (T)1.0, (T)(0.0),      (T)(1.0)){}
-
-      .. cpp:function::  beta(T p, T q, T a, T b)
-
-      .. cpp:function::  beta(const beta<T, Method>& other)
-
-      .. cpp:function::  T p() const
-
-      .. cpp:function::  T q() const
-
-      .. cpp:function::  T a() const
-
-      .. cpp:function::  T b() const
-
-      .. cpp:function::  beta<T, Method>& operator=(const beta<T, Method>&      other)
-
-      .. cpp:function::  }
+        template<typename T = float, method Method = cheng_johnk_atkinson>
+          class beta {
+          public:
+            beta(): beta((T)1.0, (T)1.0, (T)(0.0),      (T)(1.0)){}
+            beta(T p, T q, T a, T b)
+            beta(const beta<T, Method>& other)
+            T p() const
+            T q() const
+            T a() const
+            T b() const
+            beta<T, Method>& operator=(const beta<T, Method>&      other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -52,7 +41,6 @@ onemkl::rng::beta
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -79,7 +67,6 @@ onemkl::rng::beta
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -117,8 +104,6 @@ onemkl::rng::beta
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-CD24FF51-197B-40A1-83A8-514788192ee1.png

@@ -1,4 +1,3 @@
-.. _sqrt:
 
 sqrt
 ====
@@ -15,7 +14,6 @@ sqrt
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ sqrt
       USM API:
 
 
-      .. cpp:function::  event sqrt(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event sqrt(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``sqrt`` supports the following precisions.
 
@@ -49,7 +47,6 @@ sqrt
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -175,7 +172,6 @@ sqrt
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -246,7 +242,6 @@ sqrt
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -273,11 +268,10 @@ sqrt
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use sqrtcan be found in the oneMKL installation
+   An example of how to use sqrt can be found in the oneMKL installation
    directory, under:
 
 
@@ -296,6 +290,4 @@ sqrt
       **Parent topic:** `Power and Root
       Functions <power-and-root-functions.html>`__
 
-
-.. container::
 

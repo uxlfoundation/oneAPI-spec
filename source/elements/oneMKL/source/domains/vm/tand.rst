@@ -1,4 +1,3 @@
-.. _tand:
 
 tand
 ====
@@ -15,7 +14,6 @@ tand
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ tand
       USM API:
 
 
-      .. cpp:function::  event tand(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event tand(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``tand`` supports the following precisions.
 
@@ -47,7 +45,6 @@ tand
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -104,7 +101,6 @@ tand
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -175,7 +171,6 @@ tand
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -202,11 +197,10 @@ tand
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use tandcan be found in the oneMKL installation
+   An example of how to use tand can be found in the oneMKL installation
    directory, under:
 
 
@@ -225,6 +219,4 @@ tand
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

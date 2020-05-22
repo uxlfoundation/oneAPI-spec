@@ -1,7 +1,7 @@
 .. _mkl-rng-poisson_v:
 
 onemkl::rng::poisson_v
-===================
+======================
 
 
 .. container::
@@ -15,28 +15,21 @@ onemkl::rng::poisson_v
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = gaussian_inverse>
-
-      .. cpp:function::  class poisson_v {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  poisson_v(std::vector<double> lambda
-
-      .. cpp:function::  poisson_v(const poisson_v<T, Method>& other)
-
-      .. cpp:function::  std::vector<double> lambda() const
-
-      .. cpp:function::  poisson_v<T, Method>& operator=(const      poisson_v<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = gaussian_inverse>
+          class poisson_v {
+          public:
+            poisson_v(std::vector<double> lambda
+            poisson_v(const poisson_v<T, Method>& other)
+            std::vector<double> lambda() const
+            poisson_v<T, Method>& operator=(const      poisson_v<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -44,7 +37,6 @@ onemkl::rng::poisson_v
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -69,7 +61,6 @@ onemkl::rng::poisson_v
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -98,8 +89,6 @@ onemkl::rng::poisson_v
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-19F7C7EA-5657-4016-87A6-4E2721994C56-low.gif

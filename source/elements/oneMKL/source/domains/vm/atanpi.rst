@@ -1,4 +1,3 @@
-.. _atanpi:
 
 atanpi
 ======
@@ -15,7 +14,6 @@ atanpi
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
@@ -27,7 +25,7 @@ atanpi
       USM API:
 
 
-      .. cpp:function::  event atanpi(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event atanpi(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``atanpi`` supports the following precisions.
 
@@ -47,7 +45,6 @@ atanpi
 
 
    .. rubric:: Description
-      :name: description
       :class: sectiontitle
 
 
@@ -95,7 +92,6 @@ atanpi
 
 
    .. rubric:: Input Parameters
-      :name: input-parameters
       :class: sectiontitle
 
 
@@ -152,7 +148,6 @@ atanpi
 
 
    .. rubric:: Output Parameters
-      :name: output-parameters
       :class: sectiontitle
 
 
@@ -179,11 +174,10 @@ atanpi
 
 
    .. rubric:: Example
-      :name: example
       :class: sectiontitle
 
 
-   An example of how to use atanpican be found in the oneMKL
+   An example of how to use atanpi can be found in the oneMKL
    installation directory, under:
 
 
@@ -202,6 +196,4 @@ atanpi
       **Parent topic:** `Trigonometric
       Functions <trigonometric-functions.html>`__
 
-
-.. container::
 

@@ -1,7 +1,7 @@
 .. _mkl-rng-bernoulli:
 
 onemkl::rng::bernoulli
-===================
+======================
 
 
 .. container::
@@ -15,30 +15,22 @@ onemkl::rng::bernoulli
 
 
       .. rubric:: Syntax
-         :name: syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = inverse_function>
-
-      .. cpp:function::  class bernoulli {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  bernoulli(): bernoulli(0.5){}
-
-      .. cpp:function::  bernoulli(double p)
-
-      .. cpp:function::  bernoulli(const bernoulli<T, Method>& other)
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  bernoulli<T, Method>& operator=(const      bernoulli<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method = inverse_function>
+          class bernoulli {
+          public:
+            bernoulli(): bernoulli(0.5){}
+            bernoulli(double p)
+            bernoulli(const bernoulli<T, Method>& other)
+            double p() const
+            bernoulli<T, Method>& operator=(const  bernoulli<T, Method>& other)
+          }
 
       .. rubric:: Include Files
-         :name: include-files
          :class: sectiontitle
 
 
@@ -46,7 +38,6 @@ onemkl::rng::bernoulli
 
 
       .. rubric:: Description
-         :name: description
          :class: sectiontitle
 
 
@@ -90,7 +81,6 @@ onemkl::rng::bernoulli
 
 
       .. rubric:: Input Parameters
-         :name: input-parameters
          :class: sectiontitle
 
 
@@ -119,8 +109,6 @@ onemkl::rng::bernoulli
       **Parent
       topic:** `Distributions <distributions.html>`__
 
-
-.. container::
 
 
 .. |image0| image:: ../equations/GUID-7F65198B-719A-44FB-8983-BBD3C196A663-low.jpg
