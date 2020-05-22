@@ -1,44 +1,44 @@
-=============================
-remove_edge Template Function
-=============================
+===========
+remove_edge
+===========
+**[flow_graph.remove_edge]**
 
-
-Summary
--------
-
-A template function that removes an edge between a ``sender<T>`` and a ``receiver<T>.``
-
-Syntax
-------
+A function template for building edges between nodes.
 
 .. code:: cpp
 
-   template< typename T >
-   void remove_edge( sender<T> &p, receiver<T> &s );
-   
-   //Overloads
-   
-   //Removes an edge between port 0 of a multi-output predecessor and port 0 of a multi-input successor.
-   template< typename T, typename V >
-   inline void remove_edge( T& output, V& input)
-   
-   //Removes an edge between port 0 of a multi-output predecessor and a receiver.
-   template< typename T, typename R >
-   inline void remove_edge( T& output, receiver<R> input)
-   
-   //Removes an edge between a sender and port 0 of a multi-input successor.
-   template<typename S,  typename V>
-   inline void remove_edge( sender<S> output, V& input)
-   
+    // Defined in header <tbb/flow_graph.h>
 
-.. note::
+    namespace tbb {
+    namespace flow {
 
-   The overloads require C++11 support.
+        template<typename Message>
+        inline void remove_edge( sender<Message> &p, receiver<Message> &s );
 
+        template< typename MultiOutputNode, typename MultiInputNode >
+        inline void remove_edge( MultiOutputNode& output, MultiInputNode& input );
 
-Header
-------
+        template<typename MultiOutputNode, typename Message>
+        inline void remove_edge( MultiOutputNode& output, receiver<Message> input );
 
-.. code:: cpp
+        template<typename Message, typename MultiInputNode>
+        inline void remove_edge( sender<Message> output, MultiInputNode& input );
 
-   #include "tbb/flow_graph.h"
+    } // namespace flow
+    } // namespace tbb
+
+Requirements:
+
+* The `MultiOutputNode` type shall have a valid ``MultiOutputNode::output_ports_type`` qualified-id
+  that denotes a type.
+* The `MultiInputNode` type shall have a valid ``MultiInputNode::input_ports_type`` qualified-id
+  that denotes a type.
+
+The common form of ``remove_edge(sender, receiver)`` creates an edge between provided ``sender``
+and ``receiver`` instances.
+
+Overloads that accepts a `MultiOutputNode` type instance removes an edge from port ``0`` of a
+multi-output predecessor.
+
+Overloads that accepts a `MultiInputNode` type instance removes an edge to port ``0`` of a multi-input
+successor.

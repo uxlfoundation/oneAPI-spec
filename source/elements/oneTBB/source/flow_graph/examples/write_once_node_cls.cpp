@@ -22,7 +22,7 @@ int main() {
     function_node<tuple<data_type, data_type>> consumer_n(
         g, unlimited,
         [&](const tuple<data_type, data_type>& arg) {
-            // use the precomputed static result along with dynamic data
+            // use the precomputes static result along with dynamic data
             data_type precomputed_result = get<0>(arg);
             data_type dynamic_data = get<1>(arg);
         });

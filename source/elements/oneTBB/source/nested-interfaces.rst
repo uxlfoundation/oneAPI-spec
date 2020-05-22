@@ -11,6 +11,5 @@
    task_scheduler.rst
    containers.rst
    thread_local_storage.rst
-   exceptions.rst
 
 

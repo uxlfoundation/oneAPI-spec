@@ -1,138 +1,116 @@
-==========================
-flattened2d Template Class
-==========================
+===========
+flattened2d
+===========
+**[tls.flattened2d]**
 
-
-Summary
--------
-
-Adaptor that provides a flattened view of a container of containers.
-
-Syntax
-------
+The class template ``flattened2d`` is an adaptor that provides a flattened view of a container of containers.
 
 .. code:: cpp
 
-       template<typename Container>
-       class flattened2;
-        
-       template <typename Container>
-       flattened2d<Container> flatten2d(const Container &c); 
-        
-       template <typename Container>
-       flattened2d<Container> flatten2d(
-           const Container &c, 
-           const typename Container::const_iterator b, 
-           const typename Container::const_iterator e); 
+    // Defined in header <tbb/enumerable_thread_specific.h>
 
+    namespace tbb {
 
-Header
-------
+        template<typename Container>
+        class flattened2d {
+        public:
+            // Basic types
+            using size_type = /* implementation-defined */;
+            using difference_type = /* implementation-defined */;
+            using allocator_type = /* implementation-defined */;
+            using value_type = /* implementation-defined */;
+            using reference = /* implementation-defined */;
+            using const_reference = /* implementation-defined */;
+            using pointer = /* implementation-defined */;
+            using const_pointer = /* implementation-defined */;
 
-.. code:: cpp
+            using iterator = /* implementation-defined */;
+            using const_iterator = /* implementation-defined */;
 
-   #include "tbb/enumerable_thread_specific.h"
+            explicit flattened2d( const Container& c );
 
+            flattened2d( const Container& c,
+                         typename Container::const_iterator first,
+                         typename Container::const_iterator last );
 
-Description
------------
+            iterator begin();
+            iterator end();
+            const_iterator begin() const;
+            const_iterator end() const;
 
-A ``flattened2d`` provides a flattened view of a container of containers. Iterating from ``begin()`` to ``end()``visits all of the elements in the inner containers. This can be useful when traversing an ``enumerable_thread_specific`` whose elements are containers.
+            size_type size() const;
+        };
 
-The utility function ``flatten2d`` creates a ``flattened2d`` object from a container.
+        template <typename Container>
+        flattened2d<Container> flatten2d(const Container &c);
 
-Example
--------
+        template <typename Container>
+        flattened2d<Container> flatten2d(
+            const Container &c,
+            const typename Container::const_iterator first,
+            const typename Container::const_iterator last);
 
-The following code shows a simple example usage of ``flatten2d`` and ``flattened2d``. Each thread collects the values of ``i`` that are evenly divisible by ``K`` in a thread-local vector. In main, the results are printed by using a ``flattened2d`` to simplify the traversal of all of the elements in all of the local vectors.
+    } // namespace tbb
 
-.. code:: cpp
+Requirements:
 
-       
-   #include <iostream>
-   #include <utility>
-   #include <vector>
-    
-   #include "tbb/task_scheduler_init.h"
-   #include "tbb/enumerable_thread_specific.h"
-   #include "tbb/parallel_for.h"
-   #include "tbb/blocked_range.h"
-    
-   // A VecType has a separate std::vector<int> per thread
-   typedef tbb::enumerable_thread_specific< std::vector<int> > VecType;
-   VecType MyVectors; 
-   int K = 1000000;
-    
-   struct Func {
-       void operator()(const tbb::blocked_range<int>& r) const {
-           VecType::reference v = MyVectors.local();
-           for (int i=r.begin(); i!=r.end(); ++i) 
-               if( i%k==0 ) 
-                   v.push_back(i);
-       } 
-   };
-    
-   int main() {
-       tbb::parallel_for(tbb::blocked_range<int>(0, 100000000), Func());
-    
-       tbb::flattened2d<VecType> flat_view = tbb::flatten2d( MyVectors );
-       for( tbb::flattened2d<VecType>::const_iterator 
-            i = flat_view.begin(); i != flat_view.end(); ++i) 
-           cout << *i << endl;
-       return 0;
-   }
+* A ``Container`` type shall meet the container requirements from [container.requirements.general] ISO C++ section.
 
+Iterating from ``begin()`` to ``end()`` visits all of the elements in the inner containers.
+The class template supports forward iterators only.
 
-Members
--------
+The utility function ``flatten2d`` creates a ``flattened2d`` object from a specified container.
 
-.. code:: cpp
+Member functions
+----------------
 
-   namespace tbb {
-       template<typename Container>
-       class flattened2d {
-    
-       public:
-           // Basic types
-           typedef implementation-dependent size_type;
-           typedef implementation-dependent difference_type;
-           typedef implementation-dependent allocator_type;
-           typedef implementation-dependent value_type;
-           typedef implementation-dependent reference;
-           typedef implementation-dependent const_reference;
-           typedef implementation-dependent pointer;
-           typedef implementation-dependent const_pointer;
-    
-           typedef implementation-dependent iterator;
-           typedef implementation-dependent const_iterator;
-    
-           explicit flattened2d( const Container& c );
-    
-           flattened2d( const Container& c, 
-                        typename Container::const_iterator first,
-                       typename Container::const_iterator last );
-    
-           iterator begin();
-           iterator end();
-           const_iterator begin() const;
-           const_iterator end() const;
-    
-           size_type size() const;
-       };
-    
-       template <typename Container>
-       flattened2d<Container> flatten2d(const Container &c);
-    
-       template <typename Container>
-       flattened2d<Container> flatten2d(
-           const Container &c, 
-           const typename Container::const_iterator first, 
-           const typename Container::const_iterator last);
-   }
+.. cpp:function:: explicit flattened2d( const Container& c )
 
-.. toctree::
+    Constructs a ``flattened2d`` representing the sequence of
+    elements in the inner containers contained by outer container c.
 
-   flattened2d_cls/whole_container_operations_2d_cls.rst
-   flattened2d_cls/concurrent_operations.rst
-   flattened2d_cls/iterators_2d_cls.rst
-   flattened2d_cls/utility_funcs.rst
+    **Safety**: these operations must not be invoked concurrently on the same ``flattened2d``.
+
+.. cpp:function:: flattened2d( const Container& c, typename Container::const_iterator first, typename Container::const_iterator last )
+
+    Constructs a ``flattened2d`` representing the sequence of elements
+    in the inner containers in the half-open interval ``[first, last)`` of a container ``c``.
+
+    **Safety**: these operations must not be invoked concurrently on the same ``flattened2d``.
+
+.. cpp:function:: size_type size() const
+
+    Returns the sum of the sizes of the inner containers that are viewable in the ``flattened2d``.
+
+    **Safety**: These operations may be invoked concurrently on the same ``flattened2d``.
+
+.. cpp:function:: iterator begin()
+
+    Returns ``iterator`` pointing to the beginning of the set of local copies.
+
+.. cpp:function:: iterator end()
+
+    Returns ``iterator`` pointing to the end of the set of local copies.
+
+.. cpp:function:: const_iterator begin() const
+
+    Returns ``const_iterator`` pointing to the beginning of the set of local copies.
+
+.. cpp:function:: const_iterator end() const
+
+    Returns ``const_iterator`` pointing to the end of the set of local copies.
+
+Non-member functions
+--------------------
+
+.. cpp:function:: template <typename Container>  flattened2d<Container> \
+        flatten2d(const Container &c, const typename Container::const_iterator b, const typename Container::const_iterator e)
+
+    Constructs and returns a ``flattened2d`` object that provides iterators that traverse the elements
+    in the containers within the half-open range ``[b, e)`` of a container ``c``.
+
+.. cpp:function:: template <typename Container> flattened2d( const Container &c )
+
+    Constructs and returns a ``flattened2d`` that provides iterators that
+    traverse the elements in all of the containers within a container ``c``.
+
