@@ -5,13 +5,32 @@
 Algorithm Anatomy
 =================
 
-Algorithm is fundamental oneDAL entity characterized by `descriptors`_ and
-`operations`_.
+oneDAL primarily targets algorithms that extensively used in data analytics.
+These algorithms typically have many parameters, i.e. knobs to control its
+internal behavior and produced result. In machine learning, those parameters are
+often referred as *meta-parameters* to distinguish them from the model
+parameters learnt during the training. `Some algorithms <xgboost_params_>`_ may
+define dozen of meta-parameters or depend on the other algorithm as, for
+example, the logistic regression training procedure depends on optimization
+algorithm.
 
+.. _xgboost_params: https://xgboost.readthedocs.io/en/latest/parameter.html
 
+Besides meta-parameters, machine learning algorithms may have different *stages*
+such as :term:`training <Training>` and :term:`inference <Inference>`. Moreover,
+the algorithm's stages may be implemented in a variety of *computational
+methods*. For instance, training of the linear regression model can be performed
+by solving system of linear equations [Friedman17]_, while the applying
+iterative optimization solver directly to the empirical risk function is also
+possible [Zhang04]_.
 
+From computational perspective, algorithm implementation may relay on different
+*floating-point types* such as ``float``, ``double`` or ``bfloat16``. Providing
+capability to specify what type is needed is important for the end user as their
+precision requirements vary depending on a workload.
 
-
+To best tackle the mentioned challenges, algorithm is decomposed into
+`descriptors`_ and `operations`_.
 
 
 .. _descriptors:
@@ -21,25 +40,25 @@ Descriptors
 -----------
 
 **Descriptor** is an object that represents an algorithm including all its
-properties and dependencies on other algorithms. Descriptor serves as:
+meta-parameters, dependencies on other algorithms, floating-point types, and
+computational methods. Descriptor serves as:
 
 - Dispatching mechanism for the `operations`_. Depending on descriptor
   type, operation decides what algorithm implementation should be executed.
 
-- Aggregator of parameters. Descriptor provides an interface for setting up both
-  compile-time and run-time parameters.
+- Aggregator of meta-parameters. Descriptor provides an interface for setting up
+  meta-parameters in compile-time or run-time.
 
 - Object that carries state of the algorithm. In the general case, descriptor is
   stateful object whose state changes after applying an operation.
 
-
 Each oneDAL algorithm has its own dedicated namespace, where corresponding
 descriptor is defined. Descriptor, in its turn, defines a set of template
-parameters and **properties** --- run-time parameters can be accessed by means
-of the corresponding getter and setter methods. `The following code sample
+parameters and **properties** --- run-time parameters that can be accessed by
+means of the corresponding getter and setter methods. `The following code sample
 <descriptor-template_>`_ shows the common structure of descriptor's definition
-for an abstract algorithm. To define a particular algorithm the following string
-shall be substituted:
+for an abstract algorithm. To define a particular algorithm the following
+strings shall be substituted:
 
 - ``%ALGORITHM%`` is the name of algorithm and its namespace. All classes and
   structures related to that algorithm shall be defined within the namespace.
@@ -49,7 +68,6 @@ shall be substituted:
 
 .. code-block:: cpp
    :name: descriptor-template
-   :caption: Common structure of descriptor's definition
 
    namespace onedal::%ALGORITHM% {
 
@@ -68,77 +86,85 @@ shall be substituted:
    } // namespace onedal::%ALGORITHM%
 
 
-Descriptor may define any number of properties. Most of the properties are
-preset with default values. Some of the properties are initialized by passing
-required parameters to the constructor.
+Each algorithm's meta-parameter is mapped to the property that shall satisfy the
+following requirements:
 
-Properties are defined by means of getter and setter method. The getter methods
-returns value of that type, while the setter accepts it as a parameter. The
-underlying class field that stores the property's value is never exposed in the
-descriptor interface. In addition, the setter returns a reference to the
-descriptor object to allow chaining calls as shown in the example below.
+- Properties are defined by means of getter and setter method. The underlying
+  class field that stores the property's value is never exposed in the
+  descriptor interface.
 
-.. code-block:: cpp
-   :caption: Example of chaining calls to set some property values to the descriptor
+- The getter returns value of the underlying class field.
 
-   auto desc = descriptor{}
-      .set_property_name_1(value_1)
-      .set_property_name_2(value_2)
-      .set_property_name_3(value_3);
+- The setter accepts the only parameter of property's type and assigns it
+  to the underlying class field.
 
-Descriptor is allowed to have any number of template parameters, but must
+- Most of the properties are preset with default values, but some of them
+  are initialized by passing required parameters to the constructor.
+
+- The setter returns a reference to the descriptor object to allow chaining
+  calls as shown in the example below.
+
+  .. code-block:: cpp
+
+     auto desc = descriptor{}
+        .set_property_name_1(value_1)
+        .set_property_name_2(value_2)
+        .set_property_name_3(value_3);
+
+
+Descriptor is allowed to have any number of template parameters, but shall
 support at least two:
+
+- ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
+  uses for computations. This parameter is defined first and has the
+  ``onedal::default_float_t`` default value.
+
+- ``Method`` is a tag-type that specifies an `computational method <methods_>`_.
+  This parameter is defined second and has the ``method::by_default`` default
+  value.
 
 
 .. _floating-point:
 
---------------------
 Floating-point Types
 --------------------
 
+Algorithms are required to support at least one implementation-defined
+floating-point type. The other floating-point types, e.g., ``float``,
+``double``, ``float16`` and ``bfloat16``, are optional and up to specific oneDAL
+implementation.
+
+The floating-point type used as a default in descriptors is
+implementation-defined and shall be declared within the top-level namespace.
+
+.. code-block:: cpp
+
+   namespace onedal {
+      using default_float_t = /* implementation defined */;
+   } // namespace onedal
 
 
 .. _methods:
 
---------------------
-Computations Methods
---------------------
+Computational Methods
+---------------------
+
+The supported computational methods are declared within the
+``%ALGORITHM%::method`` namespace using tag-types. Algorithm shall support at
+least one computation method and declare the ``by_default`` type alias that
+refers to the one of the computational methods as shown in the example below.
 
 
 .. code-block:: cpp
 
    namespace onedal::%ALGORITHM% {
-
-   namespace method {
-      struct x {};
-      struct y {};
-      using by_default = x;
-   } // namespace method
-
+      namespace method {
+         struct x {};
+         struct y {};
+         using by_default = x;
+      } // namespace method
    } // namespace onedal::%ALGORITHM%
 
-
-
-
-- ``Float`` is a floating-point type that the algorithm uses for computations.
-  Algorithms are required to support only ``float`` and ``double`` types. The
-  other floating-point types, e.g., ``float16`` or ``bfloat16``, are optional
-  and up to specific oneDAL implementation. This parameter is defined first and
-  has the :expr:`onedal::default_float_t` default value.
-
-- ``Method`` is a tag-type that specifies an implementation of algorithm.
-  Computational scheme of the algorithm may be implemented in different ways, so
-  this parameter specifies the method to use while some operation is performed.
-
-  The supported computational methods are declared within the ``method``
-  namespace nested to the algorithm's namespace. Algorithm must support at least
-  one computation method and define the ``by_default`` type alias that refers to
-  the one of computational methods as shown in the example below.
-
-
-
-  This parameter is defined second and has the :expr:`method::by_default`
-  default value.
 
 
 .. _operations:

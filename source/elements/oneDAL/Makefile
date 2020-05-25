@@ -1,5 +1,6 @@
+GH_PAGES = build/gh-pages
 
-.PHONY: build doxygen
+.PHONY: build doxygen parse-doxygen clean gh-pages
 
 build:
 	sphinx-build -M html source build -q
@@ -12,4 +13,12 @@ parse-doxygen: doxygen
 	python -m dalapi.doxypy.cli doxygen/xml --compact > build/tree.yaml
 
 clean:
-	rm -rf build
+	rm -rf build/html
+
+gh-pages: build
+	cp -r build/html/* $(GH_PAGES)
+	cd $(GH_PAGES) && \
+		git checkout gh-pages && \
+		git add . && \
+		git commit -m Update && \
+		git push origin gh-pages
