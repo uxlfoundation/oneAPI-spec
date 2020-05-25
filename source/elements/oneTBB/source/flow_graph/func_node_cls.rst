@@ -37,7 +37,7 @@ Requirements:
 * The ``Input`` and ``Output`` types shall meet the `CopyConstructible` requirements from
   [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 * The type ``Policy`` may be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
-* The type ``Body`` shall meet the :doc:`FunctionNodeBody requirements <../../named_requirements/flow_graph/function_node_body>`.
+* The type ``Body`` shall meet the :doc:`FunctionNodeBody requirements <../named_requirements/flow_graph/function_node_body>`.
 
 ``function_node`` has a user-settable concurrency limit. It can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
 The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and

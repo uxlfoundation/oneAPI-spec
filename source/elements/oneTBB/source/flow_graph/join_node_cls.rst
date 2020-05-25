@@ -70,8 +70,8 @@ Requirements:
   shall meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
   requirements from [copyassignable] ISO C++ Standard sections.
 * The ``JoinPolicy`` type should be specified as one of :doc:`buffering policies <join_node_policies>` for ``join_node``.
-* The ``KHash`` type shall meet the :doc:`HashCompare requirements <../../named_requirements/containers/hash_compare>`.
-* The ``Bi`` types shall meet the :doc:`JoinNodeFunctionObject requirements <../../named_requirements/flow_graph/join_node_func_obj>`.
+* The ``KHash`` type shall meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
+* The ``Bi`` types shall meet the :doc:`JoinNodeFunctionObject requirements <../named_requirements/flow_graph/join_node_func_obj>`.
 
 A ``join_node`` is a ``graph_node`` and a ``sender<OutputTuple>``.
 It contains a tuple of input ports, each of which is a ``receiver<Type>`` for each `Type` in
