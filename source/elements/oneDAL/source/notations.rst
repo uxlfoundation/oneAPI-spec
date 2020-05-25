@@ -5,31 +5,21 @@ Mathematical Notations
 ======================
 
 .. list-table::
-   :widths: 27 73
+   :widths: 15 85
    :header-rows: 1
 
    * - Notation
      - Definition
 
-   * - :math:`N`
-     - Number of feature vectors in a :term:`dataset <Dataset>`.
+   * - :math:`n`
+     - Number of :term:`feature vectors <Feature vector>` in a :term:`training
+       set <Training set>`.
+
+   * - :math:`m`
+     - Number of feature vectors in a :term:`inference set <Inference set>`.
 
    * - :math:`p`
      - Number of features in a :term:`dataset <Dataset>`.
-
-   * - :math:`x_i` or :math:`x'_i`
-     - The :math:`i`-th :term:`feature vector <Feature
-       vector>` of a :term:`training set <Training set>` or a :term:`inference
-       set <Inference set>` respectively.
-
-   * - :math:`y_i`
-     - The :math:`i`-th :term:`response <Response>` of
-       a :term:`training set <Training set>` given a priori.
-
-   * - :math:`y'_i`
-     - The :math:`i`-th :term:`response <Response>` that needs
-       to predicted by an inference algorithm given the feature vector
-       :math:`x'_i` from :term:`inference set <Inference set>`.
 
    * - :math:`a \times b`
      - Denotes that the corresponding matrix (dataset) has :math:`a` rows
@@ -40,15 +30,14 @@ Mathematical Notations
        number of elements in the set :math:`A`. If :math:`A` is a real number,
        this denotes an absolute value of :math:`A`.
 
-   * - :math:`\|x\|_l`
-     - The :math:`L`-norm for a vector :math:`x \in \mathbb{R}^n` and a real
-       number :math:`l`.
+   * - :math:`\|x\|`
+     - The :math:`L_2`-norm for a vector :math:`x \in \mathbb{R}^d`,
 
        .. math::
-          \|x\|_l = \big( |x_1|^l + |x_2|^l + \dots + |x_n|^l \big)^\frac{1}{l}.
+          \|x\| =  \sqrt{ x_1^2 + x_2^2 + \dots + x_d^2 }.
 
    * - :math:`\mathrm{sgn}(x)`
-     - Sign function of a real number.
+     - Sign function of a number :math:`x \in \mathbb{R}`.
 
        .. math::
           \mathrm{sgn}(x) =
@@ -58,3 +47,20 @@ Mathematical Notations
                 1, & x > 0.
              \end{cases}
 
+   * - :math:`x_i`
+     - In the context of algorithm description, typically denotes the
+       :math:`i`-th feature vector of *a training set*.
+
+   * - :math:`x'_i`
+     - In the context of algorithm description, typically denotes the
+       :math:`i`-th feature vector of *a inference set*.
+
+   * - :math:`y_i`
+     - In the context of algorithm description, typically denotes the
+       :math:`i`-th :term:`response <Response>` of a training set given a
+       priori.
+
+   * - :math:`y'_i`
+     - In the context of algorithm description, typically denotes the
+       :math:`i`-th response that needs to predicted by an inference algorithm
+       given the feature vector :math:`x'_i` from inference set .
