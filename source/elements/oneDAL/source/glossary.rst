@@ -107,7 +107,8 @@ Machine learning terms
         **Example:** student's grade
 
     Outlier
-        The value that has an abnormal deviation from typical values
+        :term:`Observation` which is significantly different from the other
+        observations.
 
     Ratio feature
         A :term:`continuous feature` with defined operations of equality,
