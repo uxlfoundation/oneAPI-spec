@@ -14,3 +14,6 @@ _build
 /site.zip
 
 __pycache__
+
+# -------- Visual Studio --------
+.vs/*

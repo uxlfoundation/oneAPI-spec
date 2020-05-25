@@ -30,7 +30,7 @@ For general information, visit |github|_.
    :titlesonly:
 
    introduction.rst
-   terminology.rst
+   glossary.rst
    notations.rst
    programming_model/index.rst
    common_interface/index.rst

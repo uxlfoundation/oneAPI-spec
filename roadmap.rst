@@ -225,8 +225,8 @@ Date       Milestone
   
 - oneDAL
 
-  - Extend API description to 18 algorithms
-  - Add first version for sections on programming model, algorithmics
+  - Extend API description to kNN classification
+  - Add first version for sections on error handling, namespaces, terminology, math notations
   - Extend numeric tables and data structure sections
 
 - oneTBB
@@ -294,6 +294,7 @@ Elements
   
 - oneDAL
 
+  - Extend algorithms section to cover Random Forest, K-Means, SVM, PCA algorithms
   - Finalize on sections content and details
 
 - oneTBB

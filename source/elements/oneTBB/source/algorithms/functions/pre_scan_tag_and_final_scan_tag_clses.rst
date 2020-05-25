@@ -1,0 +1,39 @@
+===============================
+pre_scan_tag and final_scan_tag
+===============================
+**[algorithms.parallel_scan.scan_tags]**
+
+Types that distinguish the phases of ``parallel_scan``.
+
+Types ``pre_scan_tag`` and ``final_scan_tag`` are dummy types used in conjunction with ``parallel_scan``.
+See the example in the :doc:`parallel_scan <parallel_scan_func>` section for how they are used in the signature of ``operator()``.
+
+.. code:: cpp
+
+    // Defined in header <tbb/parallel_scan.h>
+
+    namespace tbb {
+
+       struct pre_scan_tag {
+           static bool is_final_scan();
+           operator bool();
+       };
+
+       struct final_scan_tag {
+           static bool is_final_scan();
+           operator bool();
+       };
+
+    }
+
+Member functions
+----------------
+
+.. cpp:function:: bool is_final_scan()
+
+    ``true`` for a ``final_scan_tag``, otherwise ``false``.
+
+.. cpp:function:: operator bool()
+
+    ``true`` for a ``final_scan_tag``, otherwise ``false``.
+
