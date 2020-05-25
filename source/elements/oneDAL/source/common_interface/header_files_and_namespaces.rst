@@ -1,51 +1,19 @@
-===========================
-Header files and namespaces
-===========================
+============
+Header files
+============
 
-onedal Namespace
--------------
+==========
+Namespaces
+==========
 
-Namespace
-``onedal`` contains public service funcitons and classes 
-similar to shared pointers and malloc/free functions.
+The functionality of oneDAL library is represented with a system of the C++ namespaces described below:
 
-Algorithm Namespaces
---------------------
+=======================  =======================================================================================================
+namespace                oneDAL content
+=======================  =======================================================================================================
+``onedal``               The namespace of the library that contains externally exposable data types, processing and service functionality of oneDAL. 
+``onedal::%ALGORITHM%``  The namespace of the algorithm. All classes and structures related to that algorithm shall be defined within the namespace. The string %ALGORITHM% shall be substituted to define specific algorithm, for example, ``onedal::kmeans``, ``onedal::knn``. 
+``onedal::misc``         The namespace that contains miscellaneous data types and functionality which are intended for the use by the oneDAL algorithms or by the applications for customization of the algorithms or optimization of the stages of analytical pipeline.
+``%PARENT%::detail``     The namespace that contains implementation details of the data types and functionality for parent namespace. The namespace can be on any level of namespace hierarchy. The string %PARENT% shall be substituted to define specific namespace, for example, ``onedal::detail``, ``onedal::kmeans::detail``. The application shall not use any data types nor call any functionality located in ``detail`` namespaces.
+=======================  =======================================================================================================
 
-Every algorithm owns a separate namespacec inside
-``onedal`` namespace. Examples are ``onedal::kmeans`` 
-and ``onedal::knn``.
-All applications of the algorithm to particular problem types 
-are inside the algorithm namespace.
-
-onedal::misc Namespace
-----------------------
-
-``onedal::misc`` namespace contains auxiliary algorithms and auxiliary functionality
-which are used in other algorithms or expected to be used
-by a user for customization of algorithms. All compatibility garantees are 
-provided for ``onedal::misc`` namespace.
-
-onedal::vx Namespace
-----------------------
-
-Namespaces of the form
-``onedal::vx`` define public identifiers that
-the library injects into namespace
-``onedal`` or nested namespaces. The numeral
-``x`` corresponds to an internal version number
-that serves to prevent accidental linkage of incompatible definitions. User
-code should never directly reference namespaces prefixed with
-``onedal::kmeans::vx``, for example. Instead, reference names via
-parent namespace which is ``onedal::kmeans`` in the example.
-
-detail Namespaces
------------------------
-
-Namespace ``detail`` can appear on every level. 
-``onedal::detail`` and ``onedal::kmeans::detail`` are the examples.
-Such namespaces include source code to be used internally in oneDAL and be shipped as is
-without any compatibility guarantee.
-Your code should never directly reference any ``detail`` namespace.
-Indirect reference via a public 
-``typedef`` provided by the header files is permitted.
