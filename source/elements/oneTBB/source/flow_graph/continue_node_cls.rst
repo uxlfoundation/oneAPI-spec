@@ -1,266 +1,195 @@
-============================
-continue_node Template Class
-============================
+=============
+continue_node
+=============
+**[flow_graph.continue_node]**
 
-
-Summary
--------
-
-A template class that is a ``graph_node``,
-``continue_receiver`` and a ``sender<T>``. It executes
-a specified body object when triggered and broadcasts the generated value to all of its
-successors.
-
-Syntax
-------
+A node that executes a specified body object when triggered.
 
 .. code:: cpp
 
-   template< typename Output, typename Policy = void >
-   class continue_node;
+    // Defined in header <tbb/flow_graph.h>
 
+    namespace tbb {
+    namespace flow {
 
-Header
-------
+        template< typename Output, typename Policy = /*implementation-defined*/ >
+        class continue_node : public graph_node, public receiver<continue_msg>, public sender<Output> {
+        public:
+            template<typename Body>
+            continue_node( graph &g, Body body, node_priority_t priority = no_priority );
+            template<typename Body>
+            continue_node( graph &g, Body body, Policy /*unspecified*/ = Policy(),
+                          node_priority_t priority = no_priority );
+
+            template<typename Body>
+            continue_node( graph &g, int number_of_predecessors, Body body,
+                           node_priority_t priority = no_priority );
+            template<typename Body>
+            continue_node( graph &g, int number_of_predecessors, Body body,
+                           Policy /*unspecified*/ = Policy(), node_priority_t priority = no_priority );
+
+            continue_node( const continue_node &src );
+            ~continue_node();
+
+            bool try_put( const input_type &v );
+            bool try_get( output_type &v );
+        };
+
+    } // namespace flow
+    } // namespace tbb
+
+Requirements:
+
+* The type ``Output`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
+  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
+* The type ``Policy`` may be specified as :doc:`lightweight policy<functional_node_policies>` or defaulted.
+* The type ``Body`` shall meet the :doc:`ContinueNodeBody requirements <../named_requirements/flow_graph/continue_node_body>`.
+
+A ``continue_node`` is a ``graph_node``, ``receiver<continue_msg>`` and ``sender<Output>``.
+
+This node is used for nodes that wait for their predecessors to complete before executing, but no
+explicit data is passed across the incoming edges.
+
+A ``continue_node`` maintains an internal threshold that defines the number of predecessors.
+This value may be provided at construction. Call of the :doc:`make_edge function <make_edge_func>`
+with ``continue_node`` as a receiver increases its threshold. Call of the
+:doc:`remove_edge function <remove_edge_func>` with ``continue_node`` as a receiver
+decreases it.
+
+Each time the number of ``try_put()`` calls reaches the defined threshold, node's ``body`` is called
+and the node starts counting the number of ``try_put()`` calls from the beginning.
+
+``continue_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
+
+The body object passed to a ``continue_node`` is copied. Therefore updates to member variables will
+not affect the original object used to construct the node. If the state held within a body object
+must be inspected from outside of the node, the :doc:`copy_body function <copy_body_func>` can be
+used to obtain an updated copy.
+
+Member functions
+-----------------
 
 .. code:: cpp
 
-   #include "tbb/flow_graph.h"
+    template<typename Body>
+    continue_node( graph &g, Body body, node_priority_t priority = no_priority );
 
 
-Description
------------
+Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to 0.
 
-This type is used for nodes that wait for their predecessors to complete before executing,
-but no explicit data is passed across the incoming edges. The output of the node can be a
-``continue_msg`` or a value.
+Allows to specify :doc:`node priority<node_priorities>`.
 
-A ``continue_node`` maintains an internal threshold, T, and an internal
-counter, C. If a value for the number of predecessors is provided at construction, then T is
-set to the provided value and C=0.  Otherwise, C=T=0.
+----------------------------------------------------------------
 
-At each call to method ``register_predecessor``, the threshold T is
-incremented. At each call to method ``remove_predecessor``, the threshold T
-is decremented.  The functions ``make_edge`` and
-``remove_edge`` appropriately call ``register_predecessor``
-and ``remove_predecessor`` when edges are added to or removed from a
-``continue_node.``
+.. code:: cpp
 
-At each call to method ``try_put``, C is incremented. If after the increment,
-C>=T, then C is reset to 0 and a task is spawned to broadcast the result of
-``body()`` to all successors. The increment of C, spawning of the task, and
-the resetting of C are all done atomically with respect to the node. If after the increment,
-C<T, no additional action is taken.
+    template<typename Body>
+    continue_node( graph &g, Body body, Policy /*unspecified*/ = Policy(),
+                   node_priority_t priority = no_priority );
 
-The value generated by an execution of the body object is broadcast to all
-successors. Rejection of messages by successors is handled using the protocol described in
-the Message Passing Protocol.
+Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to 0.
 
-A ``continue_node`` can serve as a terminal node in the graph. The convention
-is to use an ``Output`` of ``continue_msg`` and attach no
-successor.
+Allows to specify :doc:`lightweight policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
 
-``Output`` must be copy-constructible and assignable.
+----------------------------------------------------------------
 
-The Body concept for ``continue_node`` is shown in below.
+.. code:: cpp
 
-= ========================================================================================
-\ continue_node<Output> Body Concept: Pseudo-Signature, Semantics
-==========================================================================================
-\ ``B::B( const B& )``
-  \
-  Copy constructor.
-------------------------------------------------------------------------------------------
-\ ``B::~B()``
-  \
-  Destructor.
-------------------------------------------------------------------------------------------
-\ ``void operator=( const B& )``
-  \
-  Assignment. The return type ``void`` in the pseudo-signature
-  denotes that ``operator=`` is not required to return a value.  The
-  actual ``operator=`` can return a value, which will be ignored.
-------------------------------------------------------------------------------------------
-\ ``Output B::operator()(const continue_msg &v) const``
-  \
-  Perform operation and return value of type Output.
-------------------------------------------------------------------------------------------
-= ========================================================================================
+    template<typename Body>
+    continue_node( graph &g, int number_of_predecessors, Body body,
+                   node_priority_t priority = no_priority );
 
-.. caution::
+Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
+``number_of_predecessors``.
 
-   The body object passed to a ``continue_node`` is copied. Therefore updates
-   to member variables will not affect the original object used to construct the node. If the
-   state held within a body object must be inspected from outside of the node, the
-   ``copy_body`` function can be used to obtain an updated copy.
+Allows to specify :doc:`node priority<node_priorities>`.
 
-.. note::
+----------------------------------------------------------------
 
-   The body object may throw or cancel its enclosing graph. See task_group_context and
-   Exceptions sections for a description.
+.. code:: cpp
 
+    template<typename Body>
+    continue_node( graph &g, int number_of_predecessors, Body body,
+                   Policy /*unspecified*/ = Policy(), node_priority_t priority = no_priority );
+
+Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
+``number_of_predecessors``.
+
+Allows to specify :doc:`lightweight policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
+
+----------------------------------------------------------------
+
+.. code:: cpp
+
+    template<typename Body>
+    continue_node( graph &g, int number_of_predecessors, Body body );
+
+Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
+``number_of_predecessors``.
+
+----------------------------------------------------------------
+
+.. code:: cpp
+
+    continue_node( const continue_node &src )
+
+Constructs a ``continue_node`` that has the same initial state that ``src`` had after its
+construction. It does not copy the current count of ``try_puts`` received, or the current
+known number of predecessors. The ``continue_node`` that is constructed will have a
+reference to the same ``graph`` object as ``src``, have a copy of the initial ``body``
+used by ``src``, and only have a non-zero threshold if ``src`` was constructed with a
+non-zero threshold.
+
+The new body object is copy-constructed from a copy of the original body provided to ``src``
+at its construction.
+
+----------------------------------------------------------------
+
+.. code:: cpp
+
+    bool try_put( const Input &v )
+
+Increments the count of ``try_put()`` calls received. If the incremented count is equal to the
+number of known predecessors, performs the ``body`` function object execution. It does not wait
+for the execution of the body to complete.
+
+**Returns**: ``true``
+
+----------------------------------------------------------------
+
+.. code:: cpp
+
+    bool try_get( Output &v )
+
+**Returns**: ``false``
+
+Deduction Guides
+----------------
+
+.. code:: cpp
+
+    template <typename Body, typename Policy>
+    continue_node(graph&, Body, Policy, node_priority_t = no_priority)
+        -> continue_node<continue_output_t<std::invoke_result_t<Body, continue_msg>>, Policy>;
+
+    template <typename Body, typename Policy>
+    continue_node(graph&, int, Body, Policy, node_priority_t = no_priority)
+        -> continue_node<continue_output_t<std::invoke_result_t<Body, continue_msg>>, Policy>;
+
+    template <typename Body>
+    continue_node(graph&, Body, node_priority_t = no_priority)
+        -> continue_node<continue_output_t<std::invoke_result_t<Body, continue_msg>>, /*default-policy*/>;
+
+    template <typename Body>
+    continue_node(graph&, int, Body, node_priority_t = no_priority)
+        -> continue_node<continue_output_t<std::invoke_result_t<Body, continue_msg>>, /*default-policy*/>;
+
+Where:
+
+* ``continue_output_t<Output>`` is an alias to `Output` template argument type. If `Output` specified
+  as ``void`` then ``continue_output_t<Output>`` is an alias to ``continue_msg`` type.
 
 Example
 -------
 
-A set of ``continue_nodes`` forms a
-:doc:`Dependency Flow Graph <dependency_flow_graph_example>`.
-
-Members
--------
-
-.. code:: cpp
-
-   namespace tbb {
-   namespace flow {
-   
-   template< typename Output >
-   class continue_node :
-     public graph_node, public continue_receiver, public sender<Output> {
-   public:
-       template<typename Body>
-       continue_node( graph &g, Body body );
-       template<typename Body>
-       continue_node( graph &g, int number_of_predecessors,
-       Body body );
-       continue_node( const continue_node &src );
-   
-       // continue_receiver
-       typedef continue_msg input_type;
-       typedef sender<input_type> predecessor_type;
-       bool try_put( const input_type &v );
-       bool register_predecessor( predecessor_type &p );
-       bool remove_predecessor( predecessor_type &p );
-   
-       // sender<Output>
-       typedef Output output_type;
-       typedef receiver<output_type> successor_type;
-       bool register_successor( successor_type &r );
-       bool remove_successor( successor_type &r );
-       bool try_get( output_type &v );
-       bool try_reserve( output_type &v );
-       bool try_release( );
-       bool try_consume( );
-   };
-   
-   }
-   }
-
-The following table provides additional information on the members of this template class.
-
-= ========================================================================================
-\ Member, Description
-==========================================================================================
-\ ``template< typename Body> continue_node( graph &g, Body body )``
-  \
-  Constructs a ``continue_node`` that will invoke
-  ``body``.
-------------------------------------------------------------------------------------------
-\ ``template< typename Body> continue_node( graph &g, int number_of_predecessors, Body body )``
-  \
-  Constructs a ``continue_node`` that will invoke
-  ``body``. The threshold T is initialized to
-  ``number_of_predecessors``.
-------------------------------------------------------------------------------------------
-\ ``continue_node( const continue_node &src )``
-  \
-  Constructs a ``continue_node`` that has the same initial state that
-  ``src`` had after its construction. It does not copy the current
-  count of ``try_puts`` received, or the current known number of
-  predecessors. The ``continue_node`` that is constructed will have a
-  reference to the same ``graph`` object as ``src``,
-  have a copy of the initial ``body`` used by ``src``,
-  and only have a non-zero threshold if ``src`` was constructed with a
-  non-zero threshold.
-  
-  .. caution::
-
-     The new body object is copy-constructed from a copy of the original body provided
-     to ``src`` at its construction. Therefore changes made to member
-     variables in ``src``'s body after the construction of
-     ``src`` will not affect the body of the new
-     ``continue_node``.
-  
-------------------------------------------------------------------------------------------
-\ ``bool try_put( const input_type &v )``
-  \
-  Increments the count of ``try_put`` calls received. If the
-  incremented count is equal to the number of known predecessors, a task is spawned to
-  execute the ``body`` and the internal count of
-  ``try_put`` calls is reset to zero. This method performs as if the
-  spawning of the body task and the updates to the internal count occur atomically. It
-  does not wait for the execution of the body to complete.
-  
-  **Returns**: ``true``
-------------------------------------------------------------------------------------------
-\ ``bool register_predecessor( predecessor_type &p )``
-  \
-  Increments the number of known predecessors.
-  
-  **Returns**: ``true``
-------------------------------------------------------------------------------------------
-\ ``bool remove_predecessor( predecessor_type &p )``
-  \
-  Decrements the number of known predecessors.
-  
-  .. caution::
-
-     The body is not called if the count of ``try_put`` calls received
-     becomes equal to the number of known predecessors as a result of this call. That
-     is, a call to ``remove_predecessor`` will never invoke the body.
-  
-------------------------------------------------------------------------------------------
-\ ``bool register_successor( successor_type &r )``
-  \
-  Adds ``r`` to the set of successors.
-  
-  **Returns**: ``true``
-------------------------------------------------------------------------------------------
-\ ``bool remove_successor( successor_type &r )``
-  \
-  Removes ``r`` from the set of successors.
-  
-  **Returns**: ``true``
-------------------------------------------------------------------------------------------
-\ ``bool try_get( output_type &v )``
-  \
-  The ``continue_node`` does not contain buffering. Therefore it always
-  rejects ``try_get`` calls.
-  
-  **Returns**: ``false``
-------------------------------------------------------------------------------------------
-\ ``bool try_reserve( output_type &v )``
-  \
-  The ``continue_node`` does not contain buffering.  Therefore it
-  cannot be reserved.
-  
-  **Returns**: ``false``
-------------------------------------------------------------------------------------------
-\ ``bool try_release( )``
-  \
-  The ``continue_node`` does not contain buffering.  Therefore it
-  cannot be reserved.
-  
-  **Returns**: ``false``
-------------------------------------------------------------------------------------------
-\ ``bool try_consume( )``
-  \
-  The ``continue_node`` does not contain buffering.  Therefore it
-  cannot be reserved.
-  
-  **Returns**: ``false``
-------------------------------------------------------------------------------------------
-= ========================================================================================
-
-
-See also:
-
-* :doc:`make_edge Template Function <make_edge_func>`
-* :doc:`remove_edge Template Function <remove_edge_func>`
-* :doc:`copy_body Template Function <copy_body_func>`
-* :doc:`task_group_context <../task_scheduler/task_group_context>`
-* :doc:`Exceptions <../exceptions>`
-* :doc:`Message Passing Protocol <message_passing_protocol>`
-* :doc:`Sender and Buffer Policy <sender_and_buffer_policy>`
-* :doc:`Dependency Flow Graph <dependency_flow_graph_example>`
-* :doc:`Lightweight policy <lightweight_policy>`
+A set of ``continue_nodes`` forms a :doc:`Dependency Flow Graph <dependency_flow_graph_example>`.
