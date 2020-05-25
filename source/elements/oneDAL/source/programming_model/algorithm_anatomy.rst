@@ -2,8 +2,17 @@
 .. default-domain:: cpp
 
 =================
-Algorithm anatomy
+Algorithm Anatomy
 =================
+
+Algorithm is fundamental oneDAL entity characterized by `descriptors`_ and
+`operations`_.
+
+
+
+
+
+
 
 .. _descriptors:
 
@@ -77,9 +86,39 @@ descriptor object to allow chaining calls as shown in the example below.
       .set_property_name_2(value_2)
       .set_property_name_3(value_3);
 
-
 Descriptor is allowed to have any number of template parameters, but must
 support at least two:
+
+
+.. _floating-point:
+
+--------------------
+Floating-point Types
+--------------------
+
+
+
+.. _methods:
+
+--------------------
+Computations Methods
+--------------------
+
+
+.. code-block:: cpp
+
+   namespace onedal::%ALGORITHM% {
+
+   namespace method {
+      struct x {};
+      struct y {};
+      using by_default = x;
+   } // namespace method
+
+   } // namespace onedal::%ALGORITHM%
+
+
+
 
 - ``Float`` is a floating-point type that the algorithm uses for computations.
   Algorithms are required to support only ``float`` and ``double`` types. The
@@ -96,17 +135,7 @@ support at least two:
   one computation method and define the ``by_default`` type alias that refers to
   the one of computational methods as shown in the example below.
 
-  .. code-block:: cpp
 
-     namespace onedal::%ALGORITHM% {
-
-     namespace method {
-        struct x {};
-        struct y {};
-        using by_default = x;
-     } // namespace method
-
-     } // namespace onedal::%ALGORITHM%
 
   This parameter is defined second and has the :expr:`method::by_default`
   default value.
