@@ -1,0 +1,24 @@
+=============================
+Predefined Concurrency Limits
+=============================
+**[flow_graph.concurrency_limits]**
+
+Predefined constants that may be used as ``function_node``, ``multifunction_node`` and ``async_node``
+constuctors arguments to define concurrency limit.
+
+.. code:: cpp
+
+    // Defined in header <tbb/flow_graph.h>
+
+    namespace tbb {
+    namespace flow {
+
+        std::size_t unlimited = /*implementation-defined*/;
+        std::size_t serial = /*implementation-defined*/;
+
+    } // namespace flow
+    } // namespace tbb
+
+``unlimited`` concurrency allows an unlimited number of invocations of the body to execute concurrently.
+
+``serial`` concurrency allows only a single call of body to execute concurrently.

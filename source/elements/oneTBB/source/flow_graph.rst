@@ -1,20 +1,150 @@
 ==========
 Flow Graph
 ==========
+**[flow_graph]**
 
-There are some applications that best express dependencies as messages
-passed between nodes in a flow graph. These messages may contain data or simply
-act as signals that a predecessor has completed. The ``graph`` class and its
-associated node classes can be used to express such applications. All
-graph-related classes and functions are in the ``tbb::flow`` namespace.
+In addition to loop parallelism, the oneAPI Threading Building Blocks library also supports graph
+parallelism. It's possible to create graphs that are highly scalable, but it is also possible to
+create graphs that are completely sequential.
+
+There are 3 types of components used to implement a graph:
+
+* A ``graph`` class instance
+* Nodes
+* Ports and edges
+
+Graph Class
+-----------
+
+The ``graph`` class instance is the owner of the tasks created on behalf of the flow graph. Users can wait
+on the ``graph`` if they need to wait for the completion of all of the tasks related to the flow
+graph execution. One can also register external interactions with the ``graph`` and run tasks under
+the ownership of the flow graph.
 
 .. toctree::
+    :titlesonly:
 
-   flow_graph/overview.rst
-   flow_graph/graph_cls.rst
-   flow_graph/abstract_interfaces.rst
-   flow_graph/special_message_types.rst
-   flow_graph/functional_nodes.rst
-   flow_graph/buffering_nodes.rst
-   flow_graph/service_nodes.rst
-   flow_graph/ports_and_edges.rst
+    flow_graph/graph_cls.rst
+
+Nodes
+-----
+
+Abstract Interfaces
+~~~~~~~~~~~~~~~~~~~
+
+In order to be used as a graph node type, a class needs to inherit certain abstract types and implement the
+corresponding interfaces. ``graph_node`` is the base class for any other node type; its interfaces
+always have to be implemented. If a node sends messages to other nodes, it has to implement the ``sender``
+interface, while with ``receiver`` interface the node may accept messages. For nodes that have multiple
+inputs and/or outputs, each input port is a ``receiver`` and each output port is a ``sender``.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/graph_node_cls.rst
+    flow_graph/sender.rst
+    flow_graph/receiver.rst
+
+Properties
+~~~~~~~~~~
+
+Every node in flow graph has its own properties.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/forwarding_and_buffering.rst
+
+
+Functional Nodes
+~~~~~~~~~~~~~~~~
+
+Functional nodes do computations in response to input messages (if any), and send the result or a
+signal to their successors.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/continue_node_cls.rst
+    flow_graph/func_node_cls.rst
+    flow_graph/input_node_cls.rst
+    flow_graph/multifunc_node_cls.rst
+    flow_graph/async_node_cls.rst
+
+**Auxiliary**
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/functional_node_policies.rst
+    flow_graph/node_priorities.rst
+    flow_graph/predefined_concurrency_limits.rst
+    flow_graph/copy_body_func.rst
+
+Buffering Nodes
+~~~~~~~~~~~~~~~
+
+Buffering nodes are designed to accumulate input messages and pass them to successors in a predefined order, depending on the node type.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/overwrite_node_cls.rst
+    flow_graph/write_once_node_cls.rst
+    flow_graph/buffer_node_cls.rst
+    flow_graph/queue_node_cls.rst
+    flow_graph/priority_queue_node_cls.rst
+    flow_graph/sequencer_node_cls.rst
+
+Service Nodes
+~~~~~~~~~~~~~
+
+These nodes are designed for advanced control of the message flow, such as combining
+messages from different paths in a graph or limiting the number of simultaneously processed
+messages, as well as for creating reusable custom nodes.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/limiter_node_cls.rst
+    flow_graph/broadcast_node_cls.rst
+    flow_graph/join_node_cls.rst
+    flow_graph/split_node_cls.rst
+    flow_graph/indexer_node_cls.rst
+    flow_graph/composite_node_cls.rst
+
+Ports and Edges
+---------------
+
+Flow Graph provides an API to manage connections between the nodes.
+For nodes that have more than one input or output port (ex. ``join_node``),
+making a connection requires to specify a certain port by using special helper functions.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/input_port_func.rst
+    flow_graph/output_port_func.rst
+    flow_graph/make_edge_func.rst
+    flow_graph/remove_edge_func.rst
+
+Special Messages Types
+----------------------
+
+Flow Graph supports a set of specific message types.
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/continue_msg_cls.rst
+    flow_graph/tagged_msg_cls.rst
+
+
+Examples
+--------
+
+.. toctree::
+    :titlesonly:
+
+    flow_graph/dependency_flow_graph_example.rst
+    flow_graph/message_flow_graph_example.rst

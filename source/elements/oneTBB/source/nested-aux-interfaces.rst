@@ -6,5 +6,5 @@
    :maxdepth: 2
 
    memory_allocation.rst
-   synchronization.rst
+   mutual_exclusion.rst
    timing.rst
