@@ -6,7 +6,7 @@ Header files
 Namespaces
 ==========
 
-The functionality of oneDAL library is represented with a system of the C++ namespaces described below:
+oneDAL functionality is represented with a system of C++ namespaces described below:
 
 =======================  =======================================================================================================
 namespace                oneDAL content
