@@ -40,7 +40,7 @@ Descriptors
 
 **Descriptor** is an object that represents an algorithm including all its
 meta-parameters, dependencies on other algorithms, floating-point types, and
-computational methods. Descriptor serves as:
+computational methods. A descriptor serves as:
 
 - Dispatching mechanism for the `operations`_. Depending on descriptor
   type, operation decides what algorithm implementation should be executed.
