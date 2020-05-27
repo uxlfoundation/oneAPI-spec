@@ -16,7 +16,8 @@ The following steps depict how to:
 #. Include the following header file to enable the DPC++ interface for
    |dal_short_name|:
 
-   .. substitution-code-block::
+   .. code-block::
+      :substitutions:
 
       #include "|daal_in_code|_sycl.h"
 
