@@ -6,88 +6,82 @@
 Tables
 ======
 
-Table is a generic |dal_short_name| concept over numerical data. It provides uniformed way
-to pass the data to the library as :ref:`inputs <Input>` or :ref:`parameters <Descriptor>` or get them as :ref:`results <Result>`.
+This section describes the types related to the :ref:`table` concept.
+|dal_short_name| defines common types of the :ref:`table` concept and the
+:ref:`metadata` concept associated with it:
 
-Table object is a container of two entities: data and metadata.
+- Class :code:`table` is a common implementation of the :ref:`table`
+  concept and its compile-time part of :ref:`metadata`. Every particular
+  implementation of the :ref:`table` concept shall be the sub-type of the
+  :code:`table` class. See more details in :ref:`Table API` section.
 
-- Data is organized in a shape of :math:`(N \times p)`,
-  where :math:`N` is a number of :term:`observations <Observation>` in a table and :math:`p`
-  is a number of :term:`features <Feature>`.
+- Class :code:`table_metadata` defines a runtime part of :ref:`metadata` concept
+  for the :ref:`table`. This type can be extended in :code:`table` sub-types.
+  See more details in :ref:`Metadata API` section.
 
-- Metadata defines the detailed structure of the data and,
-  therefore, helps |dal_short_name| to access the data efficiently
-  (see :ref:`Metadata API` section for details).
+---------------------------
+Requirements on table types
+---------------------------
 
--------------------------------
-Table types in |dal_short_name|
--------------------------------
-|dal_short_name| defines a set of classes, each class implements a table contract
-with a specific set of metadata values (see :ref:`Metadata API` for details):
+Each type that implements :ref:`table` concept in |dal_short_name| shall
+follow next requirements:
 
-.. list-table::
-  :header-rows: 1
+1. Every implementation shall follow concept definision, e.g. represent
+   in-memory numerical :term:`dataset`, shall be :term:`immutable
+   <Immutability>`, etc.
 
-  * - Table type
-    - :ref:`Data layout <Data layout API>`
-    - :ref:`Data format <Data format API>`
-    - Is contiguous
-    - Is homogeneous
-  * - homogen_table_
-    - row_major/column_major
-    - dense
-    - yes
-    - yes
-  * - soa_table_
-    - column_major
-    - dense
-    - yes
-    - yes/no
-  * - aos_table_
-    - row_major
-    - dense
-    - yes
-    - yes/no
-  * - csr_table_
-    - row_major
-    - csr
-    - yes
-    - yes
+2. Be the sub-type of a :code:`table` class. The behavior of this class can be
+   extended in sub-types but cannot be relaxed.
 
------------------------------
-Requirements on table objects
------------------------------
-Each table object in |dal_short_name| follows these requirements:
-
-1. Table objects in |dal_short_name| are :term:`immutable <Immutability>` (it is not possible
-   to change data or metadata values inside the table).
-
-2. To create complex table types or modify table data, :ref:`builders <table_builders>` should be used.
-
-3. Table objects in |dal_short_name| are reference-counted. One can use an assignment operator or copy constructor
-   on table objects to create another reference to it.
+3. Every object of a :code:`table` sub-type shall be :term:`reference-counted
+   <Reference-counted object>`. An assignment operator or copy constructor shall
+   be used to create another reference to it.
    ::
 
-      onedal::table table2 = table1;
+      onedal::some_table table2 = table1;
       // table1 and table2 share the data (no data copy is performed)
 
       table3 = table2;
       // table1, table2 and table3 share the same data
 
-4. Every table type must be inherited from the base ``table`` class,
-   which represents a generalized :ref:`table API <Table API>`.
+4. Every implementation shall provide a runtime :ref:`metadata` concept
+   implementation as an object of :code:`table_metadata` or its sub-types.
+   Sub-types shall be used when the implementation concretizes the :ref:`Table`
+   concept.
 
-5. Every table type is implemented over particular set of metadata values and must hide other
-   implementation details from public API.
+5. Every implementation shall not include implementation details that are not a
+   part of :ref:`Table` concept definision to the metadata object.
 
 -------------------------------
-Entities and their dependencies
+Table types in |dal_short_name|
 -------------------------------
 
-This section describes dependencies between all the classes and structures
-related to tables.
+|dal_short_name| defines a set of classes, each implements a :ref:`table`
+concept and concretizes it.
 
-TBD
+.. list-table::
+   :header-rows: 1
+   :widths: 10 70
+
+   * - Table type
+     - Description
+   * - :ref:`table <Table API>`
+     - A common implementation of :ref:`table` concept. Base class for other
+       table types.
+   * - homogen_table_
+     - Dense table that contains :term:`contiguous <Contiguous data>` and
+       :term:`homogeneous <Homogeneous data>` data.
+   * - soa_table_
+     - Dense :term:`heretogeneous <Heterogeneous data>` table which data are
+       stored column-by-column in list of :term:`contiguous <Contiguous data>`
+       arrays (structure-of-arrays format).
+   * - aos_table_
+     - Dense :term:`heretogeneous <Heterogeneous data>` table which data are
+       stored as one :term:`contiguous <Contiguous data>` block of memory
+       (array-of-structures format).
+   * - csr_table_
+     - Sparse :term:`homogeneous <Homogeneous data>` table which data stored in
+       compressed-sparse-row format.
 
 .. _Table API:
 
