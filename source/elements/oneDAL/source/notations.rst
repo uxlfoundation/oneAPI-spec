@@ -40,9 +40,6 @@ Mathematical Notations
    * - :math:`\|x\|`
      - The :math:`L_2`-norm of a vector :math:`x \in \mathbb{R}^d`,
 
-       .. math::
-          \|x\| = \sqrt{ x_1^2 + x_2^2 + \dots + x_d^2 }.
-
    * - :math:`\mathrm{sgn}(x)`
      - Sign function for :math:`x \in \mathbb{R}`,
 
