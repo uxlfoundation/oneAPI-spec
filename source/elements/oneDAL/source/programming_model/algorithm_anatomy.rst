@@ -48,8 +48,8 @@ computational methods. A descriptor serves as:
 - An aggregator of meta-parameters. It provides an interface for setting up
   meta-parameters at either compile-time or run-time.
 
-- Object that carries state of the algorithm. In the general case, descriptor is
-  stateful object whose state changes after applying an operation.
+- An object that stores the state of the algorithm. In the general case, a descriptor is
+  a stateful object whose state changes after an operation is applied.
 
 Each oneDAL algorithm has its own dedicated namespace, where corresponding
 descriptor is defined. Descriptor, in its turn, defines a set of template
