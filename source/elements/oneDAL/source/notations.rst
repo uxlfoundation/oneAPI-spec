@@ -4,9 +4,6 @@
 Mathematical Notations
 ======================
 
-
-
-
 .. list-table::
    :widths: 15 85
    :header-rows: 1
@@ -40,8 +37,18 @@ Mathematical Notations
    * - :math:`\|x\|`
      - The :math:`L_2`-norm of a vector :math:`x \in \mathbb{R}^d`,
 
+       .. math::
+          \|x\| =  \sqrt{ x_1^2 + x_2^2 + \dots + x_d^2 }.
+
    * - :math:`\mathrm{sgn}(x)`
      - Sign function for :math:`x \in \mathbb{R}`,
+
+       .. math::
+          \mathrm{sgn}(x)=\begin{cases}
+             -1, x < 0,\\
+              0, x = 0,\\
+              1, x > 0.
+          \end{cases}
 
    * - :math:`x_i`
      - In the description of an algorithm, this typically denotes the
