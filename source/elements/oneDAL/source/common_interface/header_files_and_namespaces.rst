@@ -13,7 +13,7 @@ oneDAL public identifiers are represented in the following header files:
    * - ``onedal/onedal.hpp``
      - The main header file of oneDAL library.
    * - ``onedal/algo/%ALGORITHM%/%ALGORITM%.hpp``
-     - An algorithm header file for a particular algorithm.
+     - A header file for a particular algorithm.
 
        The string %ALGORITHM% should be substituted with the name of the algorithm, for example, ``kmeans`` or ``knn``.
 
