@@ -42,8 +42,8 @@ Descriptors
 meta-parameters, dependencies on other algorithms, floating-point types, and
 computational methods. A descriptor serves as:
 
-- Dispatching mechanism for the `operations`_. Depending on descriptor
-  type, operation decides what algorithm implementation should be executed.
+- A dispatching mechanism for `operations`_. Based on a descriptor
+  type, an operation executes a particular algorithm implementation.
 
 - Aggregator of meta-parameters. Descriptor provides an interface for setting up
   meta-parameters in compile-time or run-time.
