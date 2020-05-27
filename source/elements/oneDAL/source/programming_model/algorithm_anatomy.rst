@@ -18,11 +18,10 @@ algorithm.
 
 Besides meta-parameters, machine learning algorithms may have different *stages*,
 such as :term:`training <Training>` and :term:`inference <Inference>`. Moreover,
-the algorithm's stages may be implemented in a variety of *computational
-methods*. For instance, training of the linear regression model can be performed
-by solving system of linear equations [Friedman17]_, while the applying
-iterative optimization solver directly to the empirical risk function is also
-possible [Zhang04]_.
+the stages of an algorithm may be implemented in a variety of *computational
+methods*. For instance, a linear regression model could be trained
+by solving a system of linear equations [Friedman17]_ or by applying
+an iterative optimization solver directly to the empirical risk function [Zhang04]_.
 
 From computational perspective, algorithm implementation may relay on different
 *floating-point types* such as ``float``, ``double`` or ``bfloat16``. Providing
