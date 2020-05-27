@@ -5,7 +5,7 @@
 Algorithm Anatomy
 =================
 
-oneDAL primarily targets algorithms that extensively used in data analytics.
+oneDAL primarily targets algorithms that are extensively used in data analytics.
 These algorithms typically have many parameters, i.e. knobs to control its
 internal behavior and produced result. In machine learning, those parameters are
 often referred as *meta-parameters* to distinguish them from the model
@@ -182,4 +182,3 @@ Input
 
 Result
 ------
-
