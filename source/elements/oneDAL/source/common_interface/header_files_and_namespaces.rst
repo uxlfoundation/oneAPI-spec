@@ -12,21 +12,21 @@ oneDAL public identifiers are represented in the following header files:
      - Description
    * - ``onedal/onedal.hpp``
      - The main header file of oneDAL library.
-   * - ``onedal/algo/%ALGORITHM%/%ALGORITM%.hpp``
+   * - ``onedal/algo/%ALGO%/%ALGO%.hpp``
      - A header file for a particular algorithm.
 
-       The string %ALGORITHM% should be substituted with the name of the algorithm, for example, ``kmeans`` or ``knn``.
+       The string %ALGO% should be substituted with the name of the algorithm, for example, ``kmeans`` or ``knn``.
 
-   * - ``onedal/algo/misc/%FUNCTIONALITY%/%FUNCTIONALITY%.hpp``
+   * - ``onedal/algo/misc/%FUNC%/%FUNC%.hpp``
      -  A header file for miscellaneous data types and functionality that is intended to be used by oneDAL algorithms and applications.
         of the analytical pipeline.
 
-        The string %FUNCTIONALITY% should be substituted with the functionality name, for example, ``mt19937`` or ``cross_enthropy_loss``.
+        The string %FUNC% should be substituted with the functionality name, for example, ``mt19937`` or ``cross_enthropy_loss``.
 
-   * - ``onedal/util/%UTILITY%.hpp```
+   * - ``onedal/util/%UTIL%.hpp```
      - A header file for auxiliary functionality intended to be used for design of classes and implementation of methods such as memory allocators or type traits. 
 
-       The string %UTILITY% should be substituted with the auxiliary functionality name, for example, ``usm_allocator`` or ``type_traits``. 
+       The string %UTIL% should be substituted with the auxiliary functionality name, for example, ``usm_allocator`` or ``type_traits``.
 
 
 
