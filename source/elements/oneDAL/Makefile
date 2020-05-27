@@ -1,8 +1,11 @@
 
 .PHONY: build doxygen
 
-build:
+html:
 	sphinx-build -M html source build -q
+
+pdf:
+	sphinx-build -M latexpdf source build -q
 
 doxygen:
 	doxygen

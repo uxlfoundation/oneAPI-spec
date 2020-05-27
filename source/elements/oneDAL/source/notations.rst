@@ -44,12 +44,11 @@ Mathematical Notations
      - Sign function for :math:`x \in \mathbb{R}`,
 
        .. math::
-          \mathrm{sgn}(x) =
-             \begin{cases}
-                -1, & x < 0, \\
-                0, & x = 0, \\
-                1, & x > 0.
-             \end{cases}
+          \mathrm{sgn}(x)=\begin{cases}
+             -1, x < 0,\\
+              0, x = 0,\\
+              1, x > 0.
+          \end{cases}
 
    * - :math:`x_i`
      - In the description of an algorithm, this typically denotes the
