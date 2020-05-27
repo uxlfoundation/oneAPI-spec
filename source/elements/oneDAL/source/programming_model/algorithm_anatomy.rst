@@ -128,10 +128,10 @@ support at least two:
 Floating-point Types
 --------------------
 
-Algorithms are required to support at least one implementation-defined
-floating-point type. The other floating-point types, e.g., ``float``,
-``double``, ``float16`` and ``bfloat16``, are optional and up to specific oneDAL
-implementation.
+It is required for each algorithm to support at least one implementation-defined
+floating-point type. Other floating-point types are optional, for example ``float``,
+``double``, ``float16``, and ``bfloat16``. It is up to a specific oneDAL
+implementation whether or not to support these types.
 
 The floating-point type used as a default in descriptors is
 implementation-defined and shall be declared within the top-level namespace.
