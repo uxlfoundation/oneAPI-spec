@@ -45,8 +45,8 @@ computational methods. A descriptor serves as:
 - A dispatching mechanism for `operations`_. Based on a descriptor
   type, an operation executes a particular algorithm implementation.
 
-- Aggregator of meta-parameters. Descriptor provides an interface for setting up
-  meta-parameters in compile-time or run-time.
+- An aggregator of meta-parameters. It provides an interface for setting up
+  meta-parameters at either compile-time or run-time.
 
 - Object that carries state of the algorithm. In the general case, descriptor is
   stateful object whose state changes after applying an operation.
