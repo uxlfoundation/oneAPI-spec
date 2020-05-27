@@ -24,7 +24,7 @@ by solving a system of linear equations [Friedman17]_ or by applying
 an iterative optimization solver directly to the empirical risk function [Zhang04]_.
 
 From computational perspective, algorithm implementation may relay on different
-*floating-point types* such as ``float``, ``double`` or ``bfloat16``. Providing
+*floating-point types*, such as ``float``, ``double`` or ``bfloat16``. Having a
 capability to specify what type is needed is important for the end user as their
 precision requirements vary depending on a workload.
 
