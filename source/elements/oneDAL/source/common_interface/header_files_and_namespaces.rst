@@ -11,7 +11,7 @@ oneDAL public identifiers are represented in the following header files:
    * - Header file
      - Description
    * - ``onedal/onedal.hpp``
-     - Main header file of oneDAL library.
+     - The main header file of oneDAL library.
    * - ``onedal/algo/%ALGORITHM%/%ALGORITM%.hpp``
      - An algorithm header file for a particular algorithm.
 
