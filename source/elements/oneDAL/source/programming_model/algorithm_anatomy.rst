@@ -23,7 +23,7 @@ methods*. For instance, a linear regression model could be trained
 by solving a system of linear equations [Friedman17]_ or by applying
 an iterative optimization solver directly to the empirical risk function [Zhang04]_.
 
-From computational perspective, algorithm implementation may relay on different
+From computational perspective, algorithm implementation may rely on different
 *floating-point types*, such as ``float``, ``double`` or ``bfloat16``. Having a
 capability to specify what type is needed is important for the end user as their
 precision requirements vary depending on a workload.
@@ -38,7 +38,7 @@ To best tackle the mentioned challenges, each algorithm is decomposed into
 Descriptors
 -----------
 
-**Descriptor** is an object that represents an algorithm including all its
+**A descriptor** is an object that represents an algorithm including all its
 meta-parameters, dependencies on other algorithms, floating-point types, and
 computational methods. A descriptor serves as:
 
@@ -59,7 +59,7 @@ means of the corresponding getter and setter methods. `The following code sample
 for an abstract algorithm. To define a particular algorithm the following
 strings shall be substituted:
 
-- ``%ALGORITHM%`` is the name of algorithm and its namespace. All classes and
+- ``%ALGORITHM%`` is the name of an algorithm and its namespace. All classes and
   structures related to that algorithm shall be defined within the namespace.
 
 - ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and the type of one
