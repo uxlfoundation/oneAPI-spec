@@ -51,7 +51,7 @@ computational methods. A descriptor serves as:
 - An object that stores the state of the algorithm. In the general case, a descriptor is
   a stateful object whose state changes after an operation is applied.
 
-Each oneDAL algorithm has its own dedicated namespace, where corresponding
+Each oneDAL algorithm has its own dedicated namespace, where the corresponding
 descriptor is defined. Descriptor, in its turn, defines a set of template
 parameters and **properties** --- run-time parameters that can be accessed by
 means of the corresponding getter and setter methods. `The following code sample
@@ -62,8 +62,8 @@ strings shall be substituted:
 - ``%ALGORITHM%`` is the name of algorithm and its namespace. All classes and
   structures related to that algorithm shall be defined within the namespace.
 
-- ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and type of the one
-  of algorithm's properties.
+- ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and the type of one
+  of the algorithm's properties.
 
 .. code-block:: cpp
    :name: descriptor-template
@@ -85,20 +85,20 @@ strings shall be substituted:
    } // namespace onedal::%ALGORITHM%
 
 
-Each algorithm's meta-parameter is mapped to the property that shall satisfy the
+Each meta-parameter of an algorithm is mapped to a property that satisfies the
 following requirements:
 
-- Properties are defined by means of getter and setter method. The underlying
+- Properties are defined with getter and setter methods. The underlying
   class field that stores the property's value is never exposed in the
   descriptor interface.
 
-- The getter returns value of the underlying class field.
+- The getter returns the value of the underlying class field.
 
-- The setter accepts the only parameter of property's type and assigns it
+- The setter accepts only one parameter of the property's type and assigns it
   to the underlying class field.
 
-- Most of the properties are preset with default values, but some of them
-  are initialized by passing required parameters to the constructor.
+- Most of the properties are preset with default values, others
+  are initialized by passing the required parameters to the constructor.
 
 - The setter returns a reference to the descriptor object to allow chaining
   calls as shown in the example below.
@@ -111,7 +111,7 @@ following requirements:
         .set_property_name_3(value_3);
 
 
-Descriptor is allowed to have any number of template parameters, but shall
+A descriptor is allowed to have any number of template parameters, but should
 support at least two:
 
 - ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
