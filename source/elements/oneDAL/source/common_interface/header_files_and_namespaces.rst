@@ -2,6 +2,17 @@
 Header files
 ============
 
+oneDAL public identifiers are represented in the following header files:
+
+======================================================== ===============================================
+header file       
+======================================================== ===============================================
+``onedal/onedal.hpp``                                    Main header file of oneDAL library.
+``onedal/algo/%ALGORITHM%/%ALGORITM%.hpp``               An algorithm header file for a particular algorithm. The string %ALGORITHM% should be substituted with the name of the algorithm, for example, ``kmeans`` or ``knn``.
+``onedal/algo/misc/%FUNCTIONALITY%/%FUNCTIONALITY%.hpp`` A header file for miscellaneous data types and functionality intended to be used by oneDAL algorithms and applications for algorithm customization and optimization on various stages of the analytical pipeline. The string %FUNCTIONALITY% should be substituted with the functionality name, for example, ``mt19937`` or ``cross_enthropy_loss``. 
+``onedal/util/%UTILITY%.hpp``                            A header file for auxiliary functionality intended to be used for design of classes and implementation of methods such as memory allocators or type traits. The string %UTILITY% should be substituted with the auxiliary functionality name, for example, ``usm_allocator`` or ``type_traits``.
+======================================================== ===============================================
+
 ==========
 Namespaces
 ==========
