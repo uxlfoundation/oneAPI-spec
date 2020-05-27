@@ -28,7 +28,7 @@ From computational perspective, algorithm implementation may relay on different
 capability to specify what type is needed is important for the end user as their
 precision requirements vary depending on a workload.
 
-To best tackle the mentioned challenges, algorithm is decomposed into
+To best tackle the mentioned challenges, each algorithm is decomposed into
 `descriptors`_ and `operations`_.
 
 
