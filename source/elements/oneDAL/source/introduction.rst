@@ -45,10 +45,10 @@ communication technology and, therefore, can be used within different end-to-end
    
    - Prediction algorithms typically work with the trained data model and with a working data set.
 
- - The **Utilities**(util) component includes auxiliary functionality intended to be used for design of
+ - The **Utilities** component includes auxiliary functionality intended to be used for design of
  classes and implementation of methods such as memory allocators or type traits.
 
- - The **Miscellaneous**(misc) component includes functionality intended to be used by |dal_short_name|
+ - The **Miscellaneous** component includes functionality intended to be used by |dal_short_name|
  algorithms and applications for algorithm customization and optimization on various stages of the
  analytical pipeline. Examples of such algorithms include solvers and random number generators.
 
