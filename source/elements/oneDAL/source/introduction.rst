@@ -50,7 +50,7 @@ communication technology and, therefore, can be used within different end-to-end
 
  - The **Miscellaneous**(misc) component includes functionality intended to be used by |dal_short_name|
  algorithms and applications for algorithm customization and optimization on various stages of the
- analytical pipeline. Examples of such algorithms includes solvers, random number generators and others.
+ analytical pipeline. Examples of such algorithms include solvers and random number generators.
 
 Classes in Data Management, Algorithms, Utilities, and Miscellaneous components cover the most
 important usage scenarios and allow seamless implementation of complex data analytics workflows
