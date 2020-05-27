@@ -118,7 +118,7 @@ support at least two:
   uses for computations. This parameter is defined first and has the
   ``onedal::default_float_t`` default value.
 
-- ``Method`` is a tag-type that specifies an `computational method <methods_>`_.
+- ``Method`` is a tag-type that specifies the `computational method <methods_>`_.
   This parameter is defined second and has the ``method::by_default`` default
   value.
 
