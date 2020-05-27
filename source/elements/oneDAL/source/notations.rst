@@ -64,5 +64,5 @@ Mathematical Notations
 
    * - :math:`y'_i`
      - In the description of an algorithm, this typically denotes the
-       :math:`i`-th response that needs to predicted by the inference algorithm
-       given the feature vector :math:`x'_i` from inference set .
+       :math:`i`-th response that needs to be predicted by the inference
+       algorithm given the feature vector :math:`x'_i` from the inference set.
