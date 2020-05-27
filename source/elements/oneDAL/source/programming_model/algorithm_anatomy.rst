@@ -150,8 +150,8 @@ Computational Methods
 
 The supported computational methods are declared within the
 ``%ALGORITHM%::method`` namespace using tag-types. Algorithm shall support at
-least one computation method and declare the ``by_default`` type alias that
-refers to the one of the computational methods as shown in the example below.
+least one computational method and declare the ``by_default`` type alias that
+refers to one of the computational methods as shown in the example below.
 
 
 .. code-block:: cpp
