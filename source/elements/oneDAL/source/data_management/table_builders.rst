@@ -1,4 +1,4 @@
-.. _table_builders:
+.. _table-builders:
 
 ========
 Table builders

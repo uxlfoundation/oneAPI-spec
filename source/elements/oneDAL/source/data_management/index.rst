@@ -5,130 +5,283 @@
 Data management
 ===============
 
-Effective data management is among key constituents of the performance of a data
-analytics application. For |dal_short_name|, effective data management requires
-effectively performing the following operations:
+This section includes descriptions of concepts and objects that operate with
+data. For |dal_short_name|, such set of operations, or **data management**, is
+distributed among different stages of a :ref:`data analytics pipeline
+<data_analytics_pipeline>`. From data management angle of view, this pipeline
+contains three main steps of data acquisition, preparation, and computation:
 
-- raw data acquisition
-- filtering and normalization
-- data conversion to a numeric representation
-- data streaming to an algorithm
+1. Raw data acquisition.
+
+  - Transferring out-of-memory data into in-memory representation from sources
+    like databases, files, remote storages, etc.
+
+2. Data preparation.
+
+  - Performing data normalization, filtering.
+  - Recovery of missing values
+  - Compression and decompression of the data.
+  - Conversion of data to numeric representation.
+  - Supporting different in-memory :term:`data formats <Data format>`.
+  - Computation of statistics on numerical data like mean, variance,
+    covariance, etc.
+
+3. Algorithm computation.
+
+  - Streaming in-memory numerical data to the algorithm.
+
+In complex usage scenarios, data flow can go through these three stages back and
+forth. For example, when the full data are not available at the start of the
+computation, it can be done step-by-step with blocks of data. After computation
+on the current block the next one should be obtained and prepared.
+
+.. image:: _static/data_management_flow.png
+  :width: 800
+  :alt: Typical data management flow
 
 Key concepts
 ============
 
-|dal_short_name| provides a set of customizable interfaces to operate on
-out-of-memory and in-memory data in different usage scenarios, which include
-:term:`batch processing <Batch mode>`, :term:`online processing <Online mode>`,
-and complex scenarios.
+|dal_short_name| provides a set of concepts to operate on out-of-memory and
+in-memory data during different stages of the :ref:`data analytics pipeline
+<data_analytics_pipeline>`.
 
-Table
------
+.. _dataset:
 
-To represent a :term:`dataset` in a numeric :term:`data format`,
-|dal_short_name| introduces a :term:`table` concept - an :term:`immutable
-<Immutability>` tabular view of a :term:`dataset` where table rows represent
-:term:`observations <Observation>` and columns represent :term:`features
-<Feature>`.
+Dataset
+--------
 
-.. image:: _static/table.png
+The most common concept over the data in |dal_short_name| is a :term:`dataset`.
+This is an in-memory or out-of-memory tabular view of data, where table rows
+represent :term:`observations <Observation>` and columns represent
+:term:`features <Feature>`.
+
+.. image:: _static/dataset.png
   :width: 400
-  :alt: Table
+  :alt: Dataset
 
-|dal_short_name| defines a set of table types, each represent data in
-various :term:`data formats <Data format>`. See :ref:`tables` section for more
-details about requirements of table types and table concept.
+The dataset comes across all stages of the data analytics pipeline. For example:
+
+1. On the acquisition stage, it is downloaded into the
+   local memory
+
+2. On the preparation stage, it is converted to numerical
+   representation
+
+3. On the computation stage, it is used as one of the :ref:`inputs <Input>` or
+   :ref:`results <Result>` of an algorithm or even can be found in its
+   parameters
+
+.. _data-source:
 
 Data source
 -----------
 
-Data source defines an interface to extract data from raw sources like files,
-databases, etc. and to represent them as a :term:`table` object. It can
-automatically transform non-numeric :term:`categorical <Categorical feature>`
-and :term:`continuous <Continuous feature>` values of data into a numeric
-representation.
+Data source is a concept of an out-of-memory storage of a :term:`dataset`. It is
+used on data acquisition and data preparation stages for:
 
-It can also provide an abilities to filter or normalize :term:`feature` values
-being extracted or recover missing values:
+- Dataset extraction from databases, files, remote storages, etc.
 
-- It is not a rare situation when only a subset of features can be measured at a
-  given moment. In this case, the non-measured features in the feature vector
-  become blank, or missing. Special statistical techniques enable recovery
-  (emulation) of missing values.
+- Dataset loading into the local memory of the device. Data are not always fit
+  the local memory, especially when processing with accelerators. Data source
+  provides an ability to load data by batches and orchestrates its efficient
+  extraction directly into local memory of the device. Therefore data source
+  enables complex scenarios of data analytics, like :term:`online computations
+  <Online mode>`.
 
-- When a given measurement introduces an :term:`outlier` or when an observed
-  object can produce an :term:`outlier` by nature, special statistical techniques
-  enable detection of outliers and recovery of the abnormal data.
+- Filtering or normalization of :term:`feature` values being extracted.
 
-Data are not always fit the local memory, especially when processing with
-accelerators. Data source provides an interface to load data by batches and
-orchestrates its efficient extraction directly into local memory of the device.
-Therefore data source enables complex scenarios of data analytics, like
-:term:`online computations <Online mode>`.
+- Recovery (emulation) of missing :term:`feature` values.
+
+- :term:`outlier` detection and recovery of the abnormal data.
+
+- Dataset transformation to numerical representation. Data sources can
+  automatically transform non-numeric :term:`categorical <Categorical feature>`
+  and :term:`continuous <Continuous feature>` values of data into one of numeric
+  :term:`data formats <Data format>`.
+
+.. _table:
+
+Table
+-----
+
+Table is a concept of a :term:`dataset` with in-memory numerical data. It is
+used on data-preparation and data-processing stages to:
+
+- Store heterogeneous (in the general case) in-memory data with variety of
+  :term:`data formats <Data format>` (dense, sparse, chunked, contiguous, etc.)
+
+- Avoid unnecessary data copies on conversion from external data
+  representations.
+
+- Transfer memory ownership of the data from user responsibility to the table,
+  or share it between them
+
+- Connect with :ref:`data-source` to convert out-of-memory dataset
+  representation to in-memory view
+
+- Stream the data to the algorithm
+
+- Access the underlying data on a device in a required :term:`data format`, e.g.
+  by blocks of defined :term:`data layout`.
+
+Table provide read-only access to the data inside it for thread-safety reasons
+and better integration with external entities, thus, table concept is
+:term:`immutable <Immutability>`.
+
+This concept may also have different logical organization and physical
+:term:`format of the data <data format>` inside it.
+
+- Logically, table is a :ref:`dataset` with :math:`n` rows and
+  :math:`p` columns. Each row represent an :term:`observation` and each column
+  is a :term:`feature` of a dataset. Thus, table contains :math:`(n \times p)`
+  data elements, while the original (physical) amount of bytes needed to store
+  the data can be different.
+
+- Physically, table can be organized in different ways: as a :term:`homogeneous
+  <Homogeneous data>`, :term:`contiguous <Contiguous data>` array of bytes, as
+  :term:`heterogeneous <Heterogeneous data>` list of arrays of different
+  :term:`data types <Data type>`, in a compressed-sparse-row format, etc.
+
+For details, see :ref:`tables` section.
+
+.. _metadata:
+
+Metadata
+--------
+
+Metadata concept is assotiated with a :ref:`dataset` and holds an information
+about its structure and type. This information shall be enough to determine the
+particular type of a dataset, and helps to understand how to interact with
+dataset in |dal_short_name| (for example, how to use it on a particular stage of
+:ref:`data analytics pipeline <data_analytics_pipeline>` or how to access its
+data).
+
+Metadata for all datasets shall contain:
+
+- The number of rows :math:`n` and columns :math:`p` in a dataset
+
+- Type of each :term:`feature` (e.g. :term:`nominal <Nominal feature>`,
+  :term:`interval <Interval feature>`)
+
+- :term:`data type` of each feature
+
+- The kind of a dataset (e.g. :ref:`table` or :ref:`data-source`)
+
+.. note::
+  Metadata can contain both compile-time and run-time information. For example,
+  basic compile-time metadata is the type of a dataset - whether it is a
+  particular :ref:`data-source` or a :ref:`table`. Run-time information can
+  contain the :term:`feature` types and :term:`data types <Data type>` of a
+  dataset.
+
+.. note::
+  Each concept that concretizes a dataset definition (like different tables or
+  data sources) shall contain additional metadata which describes this concept
+  as the whole. For example, :ref:`data-source` and :ref:`table` concepts have
+  different sets of metadata since they represent different kinds of a
+  :term:`dataset`.
+
+.. _table-builder:
 
 Table builder
 -------------
 
-Some :term:`table` objects require complex procedures to create them. To make
-easy-of-use table creation from data of various :term:`data formats <Data
-format>` or other objects of different types, |dal_short_name| introduces a
-special :term:`builder` concept for table types. See :ref:`table builders
-<table_builders>` section for details.
+A table :term:`builder` is a concept that associated with particular
+:ref:`table` type and is used on data-preparation and data-processing stages
+for:
+
+- Iterative (in general case) construction of a :ref:`table` from
+  another :ref:`tables <table>` or different in-memory :ref:`dataset`
+  representations
+
+- Construction of a :ref:`table` from different entities that hold pieces of the
+  dataset, like arrays, pointers to the memory, external entities, etc.
+
+- Changing dataset values. Since :ref:`table` is an
+  :term:`immutable <Immutability>` dataset, builder provides an ability to
+  change the values of data in the dataset under construction.
+
+- Incapsulating construction process of a :ref:`table`. This is used to hide an
+  implementation details, which (1) are unnecessary for user, (2) allow to
+  select most appropriate table implementation for every particular case.
+
+- Providing an additional information how to create a :ref:`table` inside an
+  algorithm for :ref:`results  <Result>`. This information may include metadata,
+  memory allocators need to be used, or even particular implementation of a
+  table.
+
+Table builder shall be a stateful object which state is updated every call of
+operation which updates data or :ref:`metadata` of :ref:`dataset` under
+construction. It shall have `build()` member function which takes current
+snapshot of builder state and creates a :ref:`table` object upon it.
+
+For details, see :ref:`table-builders` section.
+
+.. _accessor:
 
 Accessor
 --------
 
-There are a lot of :term:`data formats <Data format>` used in :term:`datasets
-<Dataset>` to store the data. |dal_short_name| defines different types of
-:term:`tables <Table>`, table builders and other objects to support different
-logical types of data and various :term:`data formats <Data format>`. However,
-all these objects have different logic to access their underlying data.
+Accessor is a concept which defines sinle way how to get the data from a
+in-memory numerical :ref:`dataset`. It allows:
 
-Accessor allows:
+- To make uniform access to the data from various sets of different objects,
+  like :ref:`tables <Table>` or :ref:`table builders <table-builder>` without
+  exposing their implementation details.
 
-- to make uniform access to the data from various sets of objects of different
-  types.
+- To convert a variety of numeric :term:`data formats <Data format>` into a
+  smaller set (e.g. for better vectorization).
 
-- to perform efficient access to the data without exposing implementation
-  details of a data container.
-
-- to give an ability to focus on the data acquisition in the desired :term:`data
+- To give an ability to focus on the data acquisition in the desired :term:`data
   format` with a wanted set of operations over the data.
 
-See :ref:`accessors` section for details.
+- To make read-only, read-write and write-only access to the data.
 
-Relations between concepts
-==========================
+For details, see :ref:`accessors` section.
 
-Typical workflow with data in |dal_short_name| consists of next steps:
+Use-case example for table, accessor and table builder
+------------------------------------------------------
 
-1. Select an appropriate data source for extracting out-of-memory data, or
-   select a table builder to manually create a table object.
+This section gives an basic usage scenario of :ref:`table`, :ref:`table-builder`
+and :ref:`accessor` concepts and relations between them. The following diagram
+shows objects of these concepts, which are highlighted by colors:
 
-2. Create :term:`table` object - a numerical representation of data, with use
-   of selected data source, table builder or table objetc constructor directly.
+- :ref:`table-builder` objects are blue
 
-3. Run a selected :ref:`algorithm <Algorithms>` with created table object.
+- :ref:`table` objects are cyan
 
-4. Get algorithm :ref:`results <Result>` and access their data directly or using
-   selected accessor.
+- :ref:`accessors <Accessor>` are yellow
 
-.. image:: _static/typical_data_flow.png
-  :width: 800
-  :alt: Typical data flow
+- objects with gray background color are not a part of |dal_short_name|
+  specification and they are provided just for illustration purposes
 
-Next sequence diagram briefly shows dependencies between table, builder, and
-accessor concepts.
+To perform some computations based on the dataset, one shall create a
+:ref:`table` object first. It can be done using :ref:`data-source` or
+:ref:`table-builder` objects depending on the situation. The diagram briefly
+shows a situation when :ref:`table` is created from :ref:`table-builder`
+interatively with calls of various member functions that update internal state
+of the builder. Then, the `build()` method is called which takes a snapshot of
+current builder state and creates a table from it.
 
-Builder is responcible to create a table object, which data can be accessed
-either directly using table interface or with help of accessor object. Since the
-table object is immutable, this is not possible to change the data inside it.
+Once table object created, the data inside it can be accessed using member
+functions of table object or with help of read-only accessor as shown on the
+diagram. Table can be used in the computations as input or parameter of some
+algorithm.
 
-To change the data of table object, its data should be moved inside builder
-object. Once it done, data inside builder can be changed by the accessor.
+Algorithms results also contain table objects. If one needs to change the data
+inside some table, builder object can be constructed for this. If table object
+is unique (just only one reference exists), it can be moved inside builder -
+thus no copy operations of data will be performed. Data inside table builder can
+be retrieved by read-only, write-only or read-write accessors.
 
-See sections about :ref:`tables`, :ref:`table builders <table_builders>`, and
-:ref:`accessors` for details.
+Accessors present on the diagram allows to get data uniformly from tables and
+table builders as blocks of rows.
+
+Internal "access_interface" object present on the diagram depicts how table and
+table builder may share one implementation with different set of operations
+defined upon it on different stages of the lifetime. It shows how accessor
+object might know how to get data from different kind of objects.
 
 .. image:: _static/table_builder_accessor_sequence.png
   :width: 800
