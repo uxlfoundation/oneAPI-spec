@@ -18,7 +18,7 @@ oneDAL public identifiers are represented in the following header files:
        The string %ALGO% should be substituted with the name of the algorithm, for example, ``kmeans`` or ``knn``.
 
    * - ``onedal/algo/misc/%FUNC%/%FUNC%.hpp``
-     - A header file for miscellaneous data types and functionality that is intended to be used by oneDAL algorithms and applications.
+     - A header file for miscellaneous data types and functionality that is intended to be used by oneDAL algorithms and applications
        of the analytical pipeline.
 
        The string %FUNC% should be substituted with the functionality name, for example, ``mt19937`` or ``cross_enthropy_loss``.
