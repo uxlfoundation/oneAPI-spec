@@ -16,7 +16,7 @@ algorithm.
 
 .. _xgboost_params: https://xgboost.readthedocs.io/en/latest/parameter.html
 
-Besides meta-parameters, machine learning algorithms may have different *stages*
+Besides meta-parameters, machine learning algorithms may have different *stages*,
 such as :term:`training <Training>` and :term:`inference <Inference>`. Moreover,
 the algorithm's stages may be implemented in a variety of *computational
 methods*. For instance, training of the linear regression model can be performed
