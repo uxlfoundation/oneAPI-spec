@@ -48,21 +48,20 @@ gemmt
       where:
 
 
-      -  op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) =
-         X\ :sup:`H`
+      op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`
 
 
-      -  ``alpha`` and ``beta`` are scalars
+      ``alpha`` and ``beta`` are scalars
 
 
-      -  ``A``, ``B``, and ``C`` are matrices
+      ``A``, ``B``, and ``C`` are matrices
 
 
-      Here, op(``A``) is ``n`` x ``k``, op(``B``) is ``k`` x ``n``, and
+      op(``A``) is ``n`` x ``k``, op(``B``) is ``k`` x ``n``, and
       ``C`` is ``n`` x ``n``.
 
 
-gemmt (BUFFER Version)
+gemmt (Buffer Version)
 ----------------------
 
 .. container::
@@ -77,7 +76,7 @@ gemmt (BUFFER Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  void onemkl::blas::gemmt(sycl::queue &queue, uplo         upper_lower, transpose transa, transpose transb, std::int64_t         n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda,         sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c,         std::int64_t ldc)
+         .. cpp:function::  void onemkl::blas::gemmt(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::transpose transb, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
    .. container:: section
 
 
@@ -91,26 +90,17 @@ gemmt (BUFFER Version)
 
       upper_lower
          Specifies whether ``C``\ ’s data is stored in its upper or
-         lower triangle. See
-         :ref:`onemkl_datatypes` for
-         more details.
+         lower triangle. See :ref:`onemkl_datatypes` for more details.
 
-
-
+      
       transa
          Specifies op(``A``), the transposition operation applied to
-         ``A``. See
-         :ref:`onemkl_datatypes` for
-         more details.
-
+         ``A``. See :ref:`onemkl_datatypes` for more details.
 
 
       transb
          Specifies op(``B``), the transposition operation applied to
-         ``B``. See
-         :ref:`onemkl_datatypes` for
-         more details.
-
+         ``B``. See :ref:`onemkl_datatypes` for more details.
 
 
       n
@@ -139,9 +129,7 @@ gemmt (BUFFER Version)
          array ``a`` must have size at least ``lda``\ \*\ ``n``.
 
 
-         See `Matrix
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         See `Matrix Storage <../matrix-storage.html>`__ for more details.
 
 
       lda
@@ -162,9 +150,7 @@ gemmt (BUFFER Version)
          the array ``b`` must have size at least ``ldb``\ \*\ ``k``.
 
 
-         See `Matrix
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         See `Matrix Storage <../matrix-storage.html>`__ for more details.
 
 
       ldb
@@ -227,7 +213,7 @@ gemmt (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::gemmt(sycl::queue &queue, uplo upper_lower, transpose transa, transpose transb, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::gemmt(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::transpose transb, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

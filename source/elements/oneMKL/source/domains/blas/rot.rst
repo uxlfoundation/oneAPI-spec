@@ -49,7 +49,7 @@ rot
   
 
 
-rot (BUFFER Version)
+rot (Buffer Version)
 --------------------
 
 .. container::
@@ -61,7 +61,7 @@ rot (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::rot(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t      incy, T_scalar c, T_scalar s)
+      .. cpp:function::  void onemkl::blas::rot(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, T_scalar c, T_scalar s)
 .. container:: section
 
 

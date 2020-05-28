@@ -45,7 +45,7 @@ copy
    where ``x`` and ``y`` are vectors of n elements.
 
 
-copy (BUFFER Version)
+copy (Buffer Version)
 ---------------------
 
 .. container::
@@ -57,7 +57,7 @@ copy (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::copy(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t      incy)
+      .. cpp:function::  void onemkl::blas::copy(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy)
 .. container:: section
 
 

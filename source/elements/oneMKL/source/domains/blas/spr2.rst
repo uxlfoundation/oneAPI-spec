@@ -35,8 +35,6 @@ spr2
    them to a symmetric packed matrix. The operation is defined as
 
 
-  
-
 
       A <- alpha*x*y :sup:`T` + alpha*y*x :sup:`T` + A
 
@@ -53,7 +51,7 @@ spr2
    ``x`` and ``y`` are vectors of length ``n``.
 
 
-spr2 (BUFFER Version)
+spr2 (Buffer Version)
 ---------------------
 
 .. container::
@@ -65,7 +63,7 @@ spr2 (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::spr2(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a)
+      .. cpp:function::  void onemkl::blas::spr2(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a)
 .. container:: section
 
 
@@ -125,11 +123,6 @@ spr2 (BUFFER Version)
       :class: sectiontitle
 
 
-   **sycl:**
-       
-
-
-
    a
       Buffer holding the updated upper triangular part of the symmetric
       matrix ``A`` if ``upper_lower =upper`` or the updated lower
@@ -152,7 +145,7 @@ spr2 (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::spr2(sycl::queue &queue, uplo         upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t         incx, const T *y, std::int64_t incy, T *a)
+         .. cpp:function::  sycl::event onemkl::blas::spr2(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *a)
    .. container:: section
 
 

@@ -35,8 +35,6 @@ geru
    add the result to a general matrix. The operation is defined as
 
 
-  
-
 
       A <- alpha*x*y :sup:`T` + A
 
@@ -56,7 +54,7 @@ geru
    ``y`` is a vector of length ``n``.
 
 
-geru (BUFFER Version)
+geru (Buffer Version)
 ---------------------
 
 .. container::
@@ -68,7 +66,7 @@ geru (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::geru(sycl::queue &queue, std::int64_t m,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a, std::int64_t      lda)
+      .. cpp:function::  void onemkl::blas::geru(sycl::queue &queue, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a, std::int64_t lda)
 .. container:: section
 
 

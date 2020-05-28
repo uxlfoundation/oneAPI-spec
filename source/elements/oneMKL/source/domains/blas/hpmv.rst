@@ -36,9 +36,6 @@ hpmv
    The operation is defined as
 
 
-  
-
-
       y <- alpha*A*x + beta*y
 
 
@@ -54,7 +51,7 @@ hpmv
    ``x`` and ``y`` are vectors of length ``n``.
 
 
-hpmv (BUFFER Version)
+hpmv (Buffer Version)
 ---------------------
 
 .. container::
@@ -66,7 +63,7 @@ hpmv (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::hpmv(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &a, sycl::buffer<T,1> &x,      std::int64_t incx, T beta, sycl::buffer<T,1> &y, std::int64_t incy)
+      .. cpp:function::  void onemkl::blas::hpmv(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &a, sycl::buffer<T,1> &x, std::int64_t incx, T beta, sycl::buffer<T,1> &y, std::int64_t incy)
 .. container:: section
 
 
@@ -154,7 +151,7 @@ hpmv (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::hpmv(sycl::queue &queue, uplo upper_lower, std::int64_t n, T alpha, const T *a, const T *x, std::int64_t incx, T beta, T *y, std::int64_t incy, const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::hpmv(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *a, const T *x, std::int64_t incx, T beta, T *y, std::int64_t incy, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

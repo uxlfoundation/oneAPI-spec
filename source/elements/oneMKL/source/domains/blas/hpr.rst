@@ -35,8 +35,6 @@ hpr
    result to a Hermitian packed matrix. The operation is defined as
 
 
-  
-
 
       A <- alpha*x*x :sup:`H` + A
 
@@ -53,7 +51,7 @@ hpr
    ``x`` is a vector of length ``n``.
 
 
-hpr (BUFFER Version)
+hpr (Buffer Version)
 --------------------
 
 .. container::
@@ -65,7 +63,7 @@ hpr (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::hpr(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &a)
+      .. cpp:function::  void onemkl::blas::hpr(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &a)
 .. container:: section
 
 
@@ -143,7 +141,7 @@ hpr (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::hpr(sycl::queue &queue, uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::hpr(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

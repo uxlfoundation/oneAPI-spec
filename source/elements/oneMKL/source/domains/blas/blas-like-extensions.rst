@@ -9,10 +9,9 @@ BLAS-like Extensions
 
    oneAPI Math Kernel Library DPC++ provides additional routines to
    extend the functionality of the BLAS routines. These include routines
-   to compute many independent matrix-matrix products.
+   to compute many independent vector-vector and matrix-matrix operations.
 
-   The following table lists the BLAS-like Extensions groups and the data types
-   associated with them.
+   The following table lists the BLAS-like extensions with their descriptions.
 
 
    .. container:: tablenoborder
@@ -24,11 +23,11 @@ BLAS-like Extensions
          * -     Routines
            -     Description     
          * -     \ `axpy_batch <axpy_batch.html>`__\   
-           -     Computes groups of vector-scalar product added to a vector.
+           -     Computes groups of vector-scalar products added to a vector.
          * -     \ `gemm_batch <gemm_batch.html>`__\   
-           -     Computes groups of matrix-matrix product with general       matrices.   
+           -     Computes groups of matrix-matrix products with general matrices.   
          * -     \ `trsm_batch <trsm_batch.html>`__\   
-           -     Solves a triangular matrix equation for a group of       matrices.   
+           -     Solves a triangular matrix equation for a group of matrices.   
          * -     \ `gemmt <gemmt.html>`__\   
            -     Computes a matrix-matrix product with general matrices, but updates
                  only the upper or lower triangular part of the result matrix.
