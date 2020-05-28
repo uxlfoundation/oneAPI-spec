@@ -31,10 +31,10 @@ on the picture below):
 
   - Stream in-memory numerical data to the algorithm.
 
-In complex usage scenarios, data flow can go through these three stages back and
+In complex usage scenarios, data flow goes through these three stages back and
 forth. For example, when the full data are not available at the start of the
 computation, it can be done step-by-step with blocks of data. After computation
-on the current block is completer, the next block should be obtained and
+on the current block is completed, the next block should be obtained and
 prepared.
 
 .. image:: _static/data_management_flow.png
@@ -53,26 +53,26 @@ in-memory data during different stages of the :ref:`data analytics pipeline
 Dataset
 --------
 
-The most common concept over the data in |dal_short_name| is a :term:`dataset`.
-This is an in-memory or out-of-memory tabular view of data, where table rows
-represent :term:`observations <Observation>` and columns represent
-:term:`features <Feature>`.
+The main data-related concept that |dal_short_name| works with is a
+:term:`dataset`. It is an in-memory or out-of-memory tabular view of data, where
+table rows represent the :term:`observations <Observation>` and columns
+represent the :term:`features <Feature>`.
 
 .. image:: _static/dataset.png
   :width: 400
   :alt: Dataset
 
-The dataset comes across all stages of the data analytics pipeline. For example:
+The dataset is used across all stages of the data analytics pipeline. For
+example:
 
-1. On the acquisition stage, it is downloaded into the
-   local memory
+1. At the acquisition stage, it is downloaded into the
+   local memory.
 
-2. On the preparation stage, it is converted to numerical
-   representation
+2. At the preparation stage, it is converted into a numerical
+   representation.
 
-3. On the computation stage, it is used as one of the :ref:`inputs <Input>` or
-   :ref:`results <Result>` of an algorithm or even can be found in its
-   parameters
+3. At the computation stage, it is used as one of the :ref:`inputs <Input>` or
+   :ref:`results <Result>` of an algorithm or :ref:`descriptor` properties.
 
 .. _data-source:
 
