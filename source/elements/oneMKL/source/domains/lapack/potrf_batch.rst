@@ -1,28 +1,15 @@
+.. _onemkl_lapack_potrf_batch:
 
-potrf_batch
-===========
+onemkl::lapack::potrf_batch
+===========================
 
 
 .. container::
 
 
    Computes the Cholesky factorizations of a batch of symmetric
-   (Hermitian) positive-definite matrices. This routine belongs to the
-   ``onemkl::lapack``\ namespace.
+   (Hermitian) positive-definite matrices.
 
-
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. container:: dlsyntaxpara
-
-
-         .. cpp:function::  void potrf_batch(queue &exec_queue,         std::vector< onemkl::uplo > const& uplo, std::vector<std::int64_t>         const& n, std::vector<buffer<T,1>> &a,         std::vector<std::int64_t> const& lda,         std::vector<buffer<std::int64_t,1>> &info)
 
          ``potrf_batch`` supports the following precisions.
 
@@ -40,7 +27,6 @@ potrf_batch
 
 
    .. container:: section
-      :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
 
 
       .. rubric:: Description
@@ -73,15 +59,31 @@ potrf_batch
       ``U``\ :sub:`i` is an upper triangular matrix.
 
 
+onemkl::lapack::potrf_batch (BUFFER Version)
+--------------------------------------------
+
+.. container::
+
    .. container:: section
-      :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  void onemkl::lapack::potrf_batch(cl::sycl::queue &queue,         std::vector< onemkl::uplo > const& uplo, std::vector<std::int64_t>         const& n, std::vector<cl::sycl::buffer<T,1>> &a,         std::vector<std::int64_t> const& lda,         std::vector<cl::sycl::buffer<std::int64_t,1>> &info)
+
+   .. container:: section
 
 
       .. rubric:: Input Parameters
          :class: sectiontitle
 
 
-      exec_queue
+      queue
          The queue where the routine should be executed.
 
 
@@ -118,7 +120,6 @@ potrf_batch
 
 
    .. container:: section
-      :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
       .. rubric:: Output Parameters
@@ -147,31 +148,12 @@ potrf_batch
          If ``info[i]=-k``, the ``k``-th parameter had an illegal value.
 
 
-   .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-      .. rubric:: Example
-         :class: sectiontitle
-
-
-      An example of how to use potrf_batch can be found in the oneMKL
-      installation directory, under:
-
-
-      ::
-
-
-         examples/sycl/lapack/CHOLESKY_batch.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines` 
 
 
