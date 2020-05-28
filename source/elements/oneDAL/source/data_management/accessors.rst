@@ -3,3 +3,83 @@
 =========
 Accessors
 =========
+
+This section contain definisions of classes that implement :ref:`accessor`
+concept.
+
+------------------------------
+Requirements on accessor types
+------------------------------
+
+Each implementation of :ref:`accessor` concept in |dal_short_name| shall follow
+next requirements:
+
+1. Define single :term:`format of the data <Data format>` of the
+   accessor. Every single accessor type shall provide only one :term:`format of
+   the data <Data format>` returned from it or put inside it.
+
+2. Allow to make access to at least of one in-memory :ref:`dataset`
+   implementation (like :code:`table` or its sub-types or :ref:`table builders
+   <table-builder>`).
+
+3. Allow to make read-only, write-only and read-write access to the data. If
+   accessor supports several :ref:`dataset` implementations to be passed in, it
+   is not necessary to support all access modes for every input object. For
+   example, tables shall support single read-only mode according to their
+   :ref:`concept <table>` definision.
+
+4. Shall name reading and writing operations consistently. Reading operation
+   name shall follow next pattern: :code:`pull_*()`, while writing operation
+   shall be named with accordance to folllowing: :code:`push_*()`.
+
+5. Shall be lightweight. Its constructors from :ref:`dataset` implementations
+   shall not have heavy operations like copy of data, reading, writing, any sort
+   of convertions. These operations shall be performed by heavy operations
+   :code:`pull_*()` and :code:`push_*()`. It is not necessary to have copy- or
+   move- constructors for accessor implementations since it shall be designed
+   for use in the local scope.
+
+----------------------------------
+Accessor types in |dal_short_name|
+----------------------------------
+
+|dal_short_name| defines a set of accessor classes each associated with single
+way how to interact with data inside a :ref:`dataset`. Next table briefly
+explains these classes and shows which :ref:`dataset` implementations are
+supported by each accessor.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 10 45 45
+
+   * - Accessor type
+     - Description
+     - List of supported types
+   * - row_accessor_
+     - Provides an access to the range of dataset rows as one :term:`contiguous
+       <Contiguous data>` and :term:`homogeneous <Homogeneous data>` block of memory.
+     - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
+       :code:`csr_table`, and their builders.
+   * - column_accessor_
+     - Provides an access to the values range of a single column as one
+       :term:`contiguous <Contiguous data>` and :term:`homogeneous <Homogeneous
+       data>` block of memory.
+     - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
+       :code:`csr_table`, and their builders.
+
+
+.. _row_accessor:
+
+------------
+Row accessor
+------------
+
+TBD
+
+.. _column_accessor:
+
+---------------
+Column accessor
+---------------
+
+TBD
