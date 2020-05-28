@@ -11,26 +11,26 @@ concept.
 Requirements on accessor types
 ------------------------------
 
-Each implementation of :ref:`accessor` concept in |dal_short_name| shall follow
-next requirements:
+Each implementation of the :ref:`accessor` concept in |dal_short_name| shall follow
+these requirements:
 
-1. Define single :term:`format of the data <Data format>` of the
-   accessor. Every single accessor type shall provide only one :term:`format of
-   the data <Data format>` returned from it or put inside it.
+1. Define a single :term:`format of the data <Data format>` for the
+   accessor. Every single accessor type shall return and use
+   only one :term:`format of the data <Data format>` .
 
-2. Allow to make access to at least of one in-memory :ref:`dataset`
-   implementation (like :code:`table` or its sub-types or :ref:`table builders
+2. Allow it to have access to at least of one in-memory :ref:`dataset`
+   implementation (such as :code:`table`, its sub-types, or :ref:`table builders
    <table-builder>`).
 
-3. Allow to make read-only, write-only and read-write access to the data. If
+3. Allow it to have read-only, write-only, or read-write access to the data. If an
    accessor supports several :ref:`dataset` implementations to be passed in, it
-   is not necessary to support all access modes for every input object. For
-   example, tables shall support single read-only mode according to their
+   is not necessary for an accessor to support all access modes for every input object. For
+   example, tables shall support a single read-only mode according to their
    :ref:`concept <table>` definition.
 
-4. Shall name reading and writing operations consistently. Reading operation
-   name shall follow next pattern: :code:`pull_*()`, while writing operation
-   shall be named with accordance to following: :code:`push_*()`.
+4. Shall name reading and writing operations consistently. Their names 
+   shall follow these patterns: :code:`pull_*()` for a reading operation
+   and :code:`push_*()` for a writing operation.
 
 5. Shall be lightweight. Its constructors from :ref:`dataset` implementations
    shall not have heavy operations like copy of data, reading, writing, any sort
