@@ -236,9 +236,7 @@ Date       Milestone
 
 - oneVPL
 
-  - **Thank you for using oneAPI Video Processing Library.  Based on developer
-    feedback, we are revising oneVPL to make it even better.  Stay tuned for a new
-    oneVPL.  Thanks again!**
+  - Updates deferred to 0.8.5_
   
 - oneMKL
 
@@ -253,7 +251,9 @@ Date       Milestone
 Summary
 +++++++
 
-Some components missed the window for the 0.8 release. Introducing a new release so we don't hold everything up.
+- oneVPL
+
+  - Breaking changes introduced.
 
 0.9.0
 -----
