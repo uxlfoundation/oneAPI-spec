@@ -24,8 +24,7 @@ concepts associated with it:
 Requirements
 ------------
 
-Each type that implements :ref:`table <table>` concept in |dal_short_name|
-shall:
+Each implementation of :ref:`table <table>` concept shall:
 
 1. Follow definition of the table concept.
 
@@ -71,16 +70,16 @@ Table Types
        :term:`homogeneous <Homogeneous data>` data.
 
    * - soa_table_
-     - Dense heterogeneous table which data are stored column-by-column in list
-       of contiguous arrays (structure-of-arrays format).
+     - Dense heterogeneous table which data are stored column-by-column in a
+       list of contiguous arrays (structure-of-arrays format).
 
    * - aos_table_
      - Dense heterogeneous table which data are stored as one contiguous block
        of memory (array-of-structures format).
 
    * - csr_table_
-     - Sparse homogeneous table which data stored in compressed sparse row (CSR)
-       format.
+     - Sparse homogeneous table which data are stored in compressed sparse row
+       (CSR) format.
 
 .. _table_api:
 
