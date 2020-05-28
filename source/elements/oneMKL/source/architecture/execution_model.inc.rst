@@ -3,14 +3,14 @@
 Execution Model
 ---------------
 
-This section describes the execution environment common to all oneMKL functionality.
+This section describes the execution environment common to all oneMKL functionality. The execution environment includes how data is provided to computational routines in :ref:`onemkl_queues`, support for several devices in :ref:`onemkl_device_usage`, synchronous and asynchronous exection models in :ref:`onemkl_asynchronous_synchronous_execution` and :ref:`onemkl_host_thread_safety`.  
 
 .. _onemkl_queues:
 
-Queues
-++++++
+Use of Queues
++++++++++++++
 
-Will be added in a future version.
+The ``sycl::queue`` defined in the oneAPI DPC++ specification is used to specify the device and features enabled on that device on which a task will be enqueued.  There are two forms of computational routines in oneMKL: class based :ref:`onemkl_member_functions` and standalone :ref:`onemkl_nonmember_functions`.  As these may interact with the ``sycl::queue`` in different ways, we provide a section for each one to describe assumptions.
 
 
 .. _onemkl_nonmember_functions:
@@ -25,7 +25,8 @@ Each oneMKL non-member computational routine takes a ``sycl::queue`` reference a
 All computation performed by the routine shall be done on the hardware device(s) associated with this queue, with possible aid from the host, unless otherwise specified.
 In the case of an ordered queue, all computation shall also be ordered with respect to other kernels as if enqueued on that queue.
 
-A particular oneMKL implementation may not support the execution of a given oneMKL routine on the specified device(s). In this case, the implementation may either perform the computation on the host or throw an exception.
+A particular oneMKL implementation may not support the execution of a given oneMKL routine on the specified device(s). In this case, the implementation may either perform the computation on the host or throw an exception.  See :ref:`onemkl_exceptions` for the possible exceptions.
+
 
 .. _onemkl_member_functions:
 
