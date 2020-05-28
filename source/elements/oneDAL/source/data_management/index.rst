@@ -10,7 +10,7 @@ For |dal_short_name|, such set of operations, or **data management**, is
 distributed between different stages of the :ref:`data analytics pipeline
 <data_analytics_pipeline>`. From a perspective of data management, this pipeline
 contains three main steps of data acquisition, preparation, and computation (see
-on the picture below):
+:ref:`on the picture below <typical_data_management_flow>`):
 
 1. Raw data acquisition
 
@@ -36,6 +36,8 @@ forth. For example, when the full data are not available at the start of the
 computation, it can be done step-by-step with blocks of data. After computation
 on the current block is completed, the next block should be obtained and
 prepared.
+
+.. _typical_data_management_flow:
 
 .. image:: _static/data_management_flow.png
   :width: 800
@@ -156,23 +158,21 @@ For details, see :ref:`tables` section.
 Metadata
 --------
 
-Metadata concept is assotiated with a :ref:`dataset` and holds an information
-about its structure and type. This information shall be enough to determine the
-particular type of a dataset, and helps to understand how to interact with
-dataset in |dal_short_name| (for example, how to use it on a particular stage of
+Metadata concept is assotiated with a :ref:`dataset` and holds information about
+its structure and type. This information shall be enough to determine the
+particular type of a dataset, and it helps to understand how to interact with a
+dataset in |dal_short_name| (for example, how to use it at a particular stage of
 :ref:`data analytics pipeline <data_analytics_pipeline>` or how to access its
 data).
 
-Metadata for all datasets shall contain:
+For each dataset, its metadata shall contain:
 
-- The number of rows :math:`n` and columns :math:`p` in a dataset
+- The number of rows :math:`n` and columns :math:`p` in a dataset.
 
-- Type of each :term:`feature` (e.g. :term:`nominal <Nominal feature>`,
-  :term:`interval <Interval feature>`)
+- The type of each :term:`feature` (e.g. :term:`nominal <Nominal feature>`,
+  :term:`interval <Interval feature>`).
 
-- :term:`data type` of each feature
-
-- The kind of a dataset (e.g. :ref:`table` or :ref:`data-source`)
+- The :term:`data type` of each feature (e.g. :code:`float` or :code:`double`).
 
 .. note::
   Metadata can contain both compile-time and run-time information. For example,
@@ -180,13 +180,6 @@ Metadata for all datasets shall contain:
   particular :ref:`data-source` or a :ref:`table`. Run-time information can
   contain the :term:`feature` types and :term:`data types <Data type>` of a
   dataset.
-
-.. note::
-  Each concept that concretizes a dataset definition (like different tables or
-  data sources) shall contain additional metadata which describes this concept
-  as the whole. For example, :ref:`data-source` and :ref:`table` concepts have
-  different sets of metadata since they represent different kinds of a
-  :term:`dataset`.
 
 .. _table-builder:
 
