@@ -11,16 +11,15 @@ concept.
 Requirements
 ------------
 
-Each implementation of :ref:`table-builder` concept in |dal_short_name| shall
-follow next requirements:
+Each implementation of :ref:`table-builder` concept shall:
 
-1. Provide an ability to create single :ref:`table` concept implementation.
-   Every builder shall be associated with a single table type.
+1. Provide the ability to create a single :ref:`table` concept implementation.
+   Each builder shall be associated with a single table type.
 
-2. Shall be stateful object, which state can be used to access data inside
+2. Be stateful object, which state is used to access data inside
    builder via :ref:`accessors <Accessors>` or to create a table object.
 
-3. Shall implement :code:`build()` member function, that creates a new table
+3. Provide :code:`build()` member function that creates a new table
    object based on the current snapshot of a builder state.
 
 
@@ -28,7 +27,7 @@ follow next requirements:
 Table Builder Types
 -------------------
 
-|dal_short_name| defines a set of accessor classes each associated with single
+|dal_short_name| defines a set of accessor classes each associated with a single
 :ref:`table` implementation.
 
 .. list-table::
@@ -37,9 +36,11 @@ Table Builder Types
    * - Table builder type
      - Description
    * - simple_homogen_table_builder_
-     - Allows to create :ref:`homogen_table` from standart containers.
+     - Allows to create :ref:`homogen_table` from raw pointers and standard C++
+       smart pointers.
    * - simple_soa_table_builder_
-     - Allows to create :ref:`soa_table` from standart containers.
+     - Allows to create :ref:`soa_table` from raw pointers and standard C++
+       smart pointers.
 
 .. _simple_homogen_table_builder:
 
