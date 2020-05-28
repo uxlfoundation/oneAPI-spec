@@ -6,18 +6,19 @@
 Tables
 ======
 
-This section describes the types related to the :ref:`table <table>` concept.
-|dal_short_name| defines types of the table and the :ref:`metadata <metadata>`
-concepts associated with it:
+This section describes the types related to the :ref:`table <table>` and
+:ref:`metadata <metadata>` concepts. |dal_short_name| defines the following
+types that implement these concepts:
 
 - The :code:`table` is a base class that implements the table concept and
-  provides its metadata. Each implementation of the :ref:`table <table>` concept
-  shall be derived from the :code:`table` class (for more details, see
-  :ref:`table_api`).
+  provides capability to get a metadata. Each implementation of the :ref:`table
+  <table>` concept shall be derived from the :code:`table` class (for more
+  details, see :ref:`table_api`).
 
 - The :code:`table_meta` class implements the metadata concept for the
-  table. This type can be extended in the types derived from the table (for more
-  details, see :ref:`Metadata API`).
+  table. Each derived table type may provide its own implementation of the
+  :code:`table_meta` that extends the metadata concept (for more details, see
+  :ref:`Metadata API`).
 
 
 ------------
@@ -29,7 +30,7 @@ Each implementation of :ref:`table <table>` concept shall:
 1. Follow definition of the table concept.
 
 2. Be derived from the :code:`table` class. The behavior of this class can be
-   extended, but cannot be relaxed.
+   extended, but cannot be weaken.
 
 3. Provide an implementation of the :ref:`metadata <metadata>` concept derived
    from the :code:`table_meta` class.
