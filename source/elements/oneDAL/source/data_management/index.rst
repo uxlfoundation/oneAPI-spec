@@ -10,7 +10,7 @@ For |dal_short_name|, such set of operations, or **data management**, is
 distributed between different stages of the :ref:`data analytics pipeline
 <data_analytics_pipeline>`. From a perspective of data management, this pipeline
 contains three main steps of data acquisition, preparation, and computation (see
-:ref:`on the picture below <typical_data_management_flow>`):
+:ref:`the picture below <typical_data_management_flow>`):
 
 1. Raw data acquisition
 
@@ -25,7 +25,7 @@ contains three main steps of data acquisition, preparation, and computation (see
   - Recover missing values.
   - Filter the data and perform data normalization.
   - Compute various statistical metrics for numerical data, such as mean, variance,
-    covariance.
+    and covariance.
 
 3. Algorithm computation
 
@@ -186,8 +186,8 @@ For each dataset, its metadata shall contain:
 Table builder
 -------------
 
-A table :term:`builder` is a concept that associated with particular
-:ref:`table` type and is used on data preparation and data processing stages
+A table :term:`builder` is a concept that is associated with a particular
+:ref:`table` type and is used at the data preparation and data processing stages
 for:
 
 - Iterative construction of a :ref:`table` from another :ref:`tables <table>` or
