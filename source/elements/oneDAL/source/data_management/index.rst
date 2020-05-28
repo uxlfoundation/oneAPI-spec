@@ -245,49 +245,44 @@ For details, see :ref:`accessors` section.
 Use-case example for table, accessor and table builder
 ------------------------------------------------------
 
-This section gives an basic usage scenario of :ref:`table`, :ref:`table-builder`
-and :ref:`accessor` concepts and relations between them. The following diagram
-shows objects of these concepts, which are highlighted by colors:
+This section provides a basic usage scenario of the :ref:`table`,
+:ref:`table-builder`, and :ref:`accessor` concepts and demonstrates the
+relations between them. :ref:`The following diagram
+<data_management_sequence_diagram>` shows objects of these concepts, which are
+highlighted by colors:
 
-- :ref:`table-builder` objects are blue
+- :ref:`Table builder <table-builder>` objects are blue.
 
-- :ref:`table` objects are cyan
+- :ref:`Table <table>` objects are cyan.
 
-- :ref:`accessors <Accessor>` are yellow
+- :ref:`Accessors <Accessor>` are yellow.
 
-- objects with gray background color are not a part of |dal_short_name|
-  specification and they are provided just for illustration purposes
+- Grey objects are not a part of |dal_short_name| specification and they are
+  provided just for illustration purposes.
 
-To perform some computations based on the dataset, one shall create a
-:ref:`table` object first. It can be done using :ref:`data-source` or
-:ref:`table-builder` objects depending on the situation. The diagram briefly
-shows a situation when :ref:`table` is created from :ref:`table-builder`
-interatively with calls of various member functions that update internal state
-of the builder. Then, the `build()` method is called which takes a snapshot of
-current builder state and creates a table from it.
-
-Once table object created, the data inside it can be accessed using member
-functions of table object or with help of read-only accessor as shown on the
-diagram. Table can be used in the computations as input or parameter of some
-algorithm.
-
-Algorithms results also contain table objects. If one needs to change the data
-inside some table, builder object can be constructed for this. If table object
-is unique (just only one reference exists), it can be moved inside builder -
-thus no copy operations of data will be performed. Data inside table builder can
-be retrieved by read-only, write-only or read-write accessors.
-
-Accessors present on the diagram allows to get data uniformly from tables and
-table builders as blocks of rows.
-
-Internal "access_interface" object present on the diagram depicts how table and
-table builder may share one implementation with different set of operations
-defined upon it on different stages of the lifetime. It shows how accessor
-object might know how to get data from different kind of objects.
+.. _data_management_sequence_diagram:
 
 .. image:: _static/table_builder_accessor_sequence.png
   :width: 800
   :alt: Sequence diagram of accessor-builder-table relations
+
+To perform computations on a dataset, one shall create a :ref:`table` object
+first. It can be done using a :ref:`data-source` or a :ref:`table-builder`
+object depending on the situation. The diagram briefly shows the situation when
+:ref:`table` is interatively created from a various external entities (not shown
+on a diagram) using a :ref:`table-builder`.
+
+Once a table object is created, the data inside it can be accessed by its own
+interface or with a help of a read-only accessor as shown on the diagram. The
+table can be used as an input in computations or as a parameter of some
+algorithm.
+
+Algorithms' results also contain table objects. If one needs to change the data
+within some table, a builder object can be constructed for this. Data inside a
+table builder can be retrieved by read-only, write-only or read-write accessors.
+
+Accessors present on the diagram allows to get data uniformly from tables and
+table builders as :term:`flat <flat data>` blocks of rows.
 
 Details
 =======
