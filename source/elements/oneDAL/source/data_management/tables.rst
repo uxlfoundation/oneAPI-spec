@@ -24,7 +24,7 @@ Requirements
 ------------
 
 Each type that implements :ref:`table` concept in |dal_short_name| shall
-follow next requirements:
+follow these requirements:
 
 1. Every implementation shall follow concept definition, e.g. represent
    in-memory numerical :term:`dataset`, shall be :term:`immutable
@@ -33,8 +33,8 @@ follow next requirements:
 2. Be the sub-type of a :code:`table` class. The behavior of this class can be
    extended in sub-types but cannot be relaxed.
 
-3. Every object of a :code:`table` sub-type shall be :term:`reference-counted
-   <Reference-counted object>`. An assignment operator or copy constructor shall
+3. Every object of a :code:`table` sub-type shall be a :term:`reference-counted
+   <Reference-counted object>`. An assignment operator or a copy constructor shall
    be used to create another reference to it.
    ::
 
