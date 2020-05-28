@@ -199,7 +199,7 @@ Machine learning terms
         **Examples:** ``int32_t``, ``float``, ``double``
 
     Flat data
-        A block of :term:`contiguous <contiguous data>` and :term:`homogeneous
+        A block of :term:`contiguous <contiguous data>` :term:`homogeneous
         <homogeneous data>` data.
 
     Getter

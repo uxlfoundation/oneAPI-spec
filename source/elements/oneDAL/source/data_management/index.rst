@@ -88,7 +88,7 @@ used at the data acquisition and data preparation stages for the following:
 - To extract datasets from external sources such as databases, files, remote
   storages.
 
-- To load datasets into the device's local memory. Data are not always fit
+- To load datasets into the device's local memory. Data do not always fit
   the local memory, especially when processing with accelerators. A data source
   provides the ability to load data by batches and extracts it directly into the
   device's local memory. Therefore, a data source enables complex data analytics
@@ -115,7 +115,7 @@ Table
 Table is a concept of a :term:`dataset` with in-memory numerical data. It is
 used at the data preparation and data processing stages for the following:
 
-- To store heterogeneous in-memory data with variety of
+- To store heterogeneous in-memory data in various
   :term:`data formats <Data format>`, such as dense, sparse, chunked,
   contiguous.
 
@@ -125,13 +125,13 @@ used at the data preparation and data processing stages for the following:
 - To transfer memory ownership of the data from user application to the table,
   or share it between them.
 
-- To connect with the :ref:`data-source` to convert out-of-memory dataset
-  representation to in-memory view.
+- To connect with the :ref:`data-source` to convert from an out-of-memory into
+  an in-memory dataset representation.
 
 - To support streaming of the data to the algorithm.
 
 - To access the underlying data on a device in a required :term:`data format`,
-  e.g. by blocks of the defined :term:`data layout`.
+  e.g. by blocks with the defined :term:`data layout`.
 
 For thread-safety reasons and better integration with external entities, a table
 provides a read-only access to the data within it, thus, table concept
@@ -143,7 +143,7 @@ This concept has different logical organization and physical
 - Logically, a table is a :ref:`dataset` with :math:`n` rows and
   :math:`p` columns. Each row represents an :term:`observation` and each column
   is a :term:`feature` of a dataset. Physical amount of bytes needed to store
-  the data differ from the logical number of elements :math:`n \times p` within
+  the data differ from the number of elements :math:`n \times p` within
   a table.
 
 - Physically, a table can be organized in different ways: as a :term:`homogeneous
@@ -227,7 +227,7 @@ in-memory numerical :ref:`dataset`. It allows:
   smaller set of formats.
 
 - To provide a :term:`flat <flat data>` view on the data blocks of a
-  :ref:`dataset` for better data locality. For example, some accessor
+  :ref:`dataset` for better a data locality. For example, some accessor
   implementation returns :term:`feature` values as a contiguous array, while the
   original dataset stored row-by-row (there are strides between values of a
   single feature).
