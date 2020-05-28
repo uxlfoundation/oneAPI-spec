@@ -72,7 +72,8 @@ example:
    representation.
 
 3. At the computation stage, it is used as one of the :ref:`inputs <Input>` or
-   :ref:`results <Result>` of an algorithm or :ref:`descriptor` properties.
+   :ref:`results <Result>` of an algorithm or a :ref:`descriptor <descriptors>`
+   properties.
 
 .. _data-source:
 
