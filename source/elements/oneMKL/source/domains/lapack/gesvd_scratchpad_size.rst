@@ -1,30 +1,16 @@
+.. _onemkl_lapack_gesvd_scratchpad_size:
 
-gesvd_get_lwork
-===============
+onemkl::lapack::gesvd_scratchpad_size
+=====================================
 
 
 .. container::
 
 
-   Computes the worksize needed for the function
-   `gesvd <gesvd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   Computes size of scratchpad memory required for :ref:`onemkl_lapack_gesvd` function.
 
 
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. container:: dlsyntaxpara
-
-
-         .. cpp:function::  template <typename fp>void         gesvd_get_lwork(queue &exec_queue, job jobu, job jobvt,         std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t         ldu, std::int64_t ldvt, std::int64_t &lwork)
-
-         ``gesvd_get_lwork`` supports the following precisions.
+         ``gesvd_scratchpad_size`` supports the following precisions.
 
 
          .. list-table:: 
@@ -40,30 +26,43 @@ gesvd_get_lwork
 
 
    .. container:: section
-      :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
 
 
       .. rubric:: Description
          :class: sectiontitle
 
 
-      Computes the worksize needed for the singular value decomposition
-      of a general rectangular matrix
-      (`gesvd <gesvd.html>`__).
+      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_gesvd` function should be able to hold.
       Calls to this routine must specify the template parameter
       explicitly.
 
 
+onemkl::lapack::gesvd_scratchpad_size
+-------------------------------------
+
+.. container::
+
    .. container:: section
-      :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::gesvd_scratchpad_size(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job jobvt,         std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t         ldu, std::int64_t ldvt)
+
+   .. container:: section
 
 
       .. rubric:: Input Parameters
          :class: sectiontitle
 
 
-      exec_queue
-         The queue where the routine should be executed.
+      queue
+         Device queue where calculations by :ref:`onemkl_lapack_gesvd` function will be performed.
 
 
       jobu
@@ -134,35 +133,25 @@ gesvd_get_lwork
 
 
    .. container:: section
-      :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
-      .. rubric:: Output Parameters
+      .. rubric:: Throws
          :class: sectiontitle
 
 
-      lwork
-         The integer lwork contains the size of the buffer needed for
-         computations in
-         `gesvd <gesvd.html>`__.
+      onemkl::lapack::exception
+         Exception is thrown in case of incorrect argument value is supplied.
+         Position of wrong argument can be determined by `get_info()` method of exception object.
 
 
    .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-      .. rubric:: Example
+      .. rubric:: Return Value
          :class: sectiontitle
 
 
-      An example of how to use ``gesvd_get_lwork``\ can be found in the
-      oneMKL installation directory, under:
-
-
-      ::
-
-
-         examples/sycl/lapack/gesvd.cpp
+      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_gesvd` function should be able to hold.
 
 
 .. container:: familylinks
@@ -171,7 +160,6 @@ gesvd_get_lwork
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
 
 

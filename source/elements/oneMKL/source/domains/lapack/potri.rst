@@ -1,25 +1,15 @@
+.. _onemkl_lapack_potri:
 
-potri
-=====
+onemkl::lapack::potri
+=====================
 
 
 .. container::
 
 
    Computes the inverse of a symmetric (Hermitian) positive-definite
-   matrix using the Cholesky factorization. This routine belongs to the
-   ``onemkl::lapack``\ namespace.
+   matrix using the Cholesky factorization.
 
-
-   .. container:: section
-      :name: GUID-04971DD3-D455-4898-9876-68AA07155B4E
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void potri(queue &exec_queue, uplo upper_lower,      std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<std::int64_t,1> &info)
 
       potri supports the following precisions.
 
@@ -37,7 +27,6 @@ potri
 
 
 .. container:: section
-   :name: GUID-810993B2-2E94-47BF-8510-01671D72DD28
 
 
    .. rubric:: Description
@@ -47,70 +36,175 @@ potri
    The routine computes the inverse ``inv(A)`` of a symmetric positive
    definite or, for complex flavors, Hermitian positive-definite matrix
    ``A``. Before calling this routine, call
-   `potrf <potrf.html>`__
+   :ref:`onemkl_lapack_potrf`
    to factorize ``A``.
 
 
+onemkl::lapack::potri (BUFFER Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::potri(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &scratchpad, std::int64_t      scratchpad_size)
+
 .. container:: section
-   :name: GUID-EBB8D6F9-1305-4469-8328-E46B8B6402B8
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   .. list-table:: 
-      :header-rows: 1
+   queue
+      The queue where the routine should be executed.
 
-      * -     exec_queue    
-        -      The queue where the routine should be executed.    
-      * -     uplo    
-        -     Indicates how the input matrix ``A`` has been    factored:      If ``uplo = onemkl::uplo::upper``, the upper   triangle of ``A`` is stored.       If   ``uplo = onemkl::uplo::lower``, the lower triangle of ``A`` is   stored.   
-      * -     n    
-        -      Specifies the order of the matrix    ``A``\ (``0≤n``).   
-      * -     a    
-        -      Contains the factorization of the matrix ``A``, as    returned by   `potrf <potrf.html>`__.   The second dimension of ``a`` must be at least ``max(1, n)``.   
-      * -     lda    
-        -      The leading dimension of ``a``.     
+   upper_lower
+      Indicates how the input matrix ``A`` has been    factored:
 
+      If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of ``A`` is stored.
 
+      If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of ``A`` is   stored.
+
+   n
+      Specifies the order of the matrix    ``A``\ (``0≤n``).
+
+   a
+      Contains the factorization of the matrix ``A``, as    returned by   :ref:`onemkl_lapack_potrf`.   The second dimension of ``a`` must be at least ``max(1, n)``.
+
+   lda
+      The leading dimension of ``a``.
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_potri_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-5F045D15-A28B-4028-A2A9-6F1C4A1C26DE
 
 
    .. rubric:: Output Parameters
       :class: sectiontitle
 
 
-   .. list-table:: 
-      :header-rows: 1
+   a
+      Overwritten by the upper or lower triangle of the inverse    of ``A``. Specified by ``upper_lower``.
 
-      * -     a    
-        -     Overwritten by the upper or lower triangle of the inverse    of ``A``. Specified by ``uplo``.   
-      * -     info    
-        -     Buffer containing error information    
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
+   .. container:: section
 
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info=i``, the ``i``-th diagonal element of the Cholesky factor
+         (and therefore the factor itself) is zero, and the inversion could not be completed.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+onemkl::lapack::potri (USM Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::potri(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, T *a, std::int64_t lda, T *scratchpad, std::int64_t      scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: EXAMPLE_5EF48B8A07D849EA84A74FE22F0D5B24
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``potri``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
+
+   upper_lower
+      Indicates how the input matrix ``A`` has been    factored:
+
+      If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of ``A`` is stored.
+
+      If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of ``A`` is   stored.
+
+   n
+      Specifies the order of the matrix    ``A``\ (``0≤n``).
+
+   a
+      Contains the factorization of the matrix ``A``, as    returned by   :ref:`onemkl_lapack_potrf`.   The second dimension of ``a`` must be at least ``max(1, n)``.
+
+   lda
+      The leading dimension of ``a``.
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_potri_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
 
 
-   ::
+.. container:: section
 
 
-      examples/sycl/lapack/potri.cpp
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      Overwritten by the upper or lower triangle of the inverse    of ``A``. Specified by ``upper_lower``.
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info=i``, the ``i``-th diagonal element of the Cholesky factor
+         (and therefore the factor itself) is zero, and the inversion could not be completed.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -119,7 +213,6 @@ potri
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
 
 

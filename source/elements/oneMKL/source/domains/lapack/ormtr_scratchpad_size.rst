@@ -1,30 +1,16 @@
+.. _onemkl_lapack_ormtr_scratchpad_size:
 
-ormtr_get_lwork
-===============
+onemkl::lapack::ormtr_scratchpad_size
+=====================================
 
 
 .. container::
 
 
-   Computes the worksize needed for the function,
-   `ormtr <ormtr.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   Computes size of scratchpad memory required for :ref:`onemkl_lapack_ormtr` function.
 
 
-   .. container:: section
-      :name: GUID-9FBC1610-9EB2-4F98-97CF-B74E301DF4AD
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. container:: dlsyntaxpara
-
-
-         .. cpp:function::  template <typename fp_real>void         ormtr_get_lwork(queue &exec_queue, side left_right, uplo         upper_lower, transpose trans, std::int64_t m, std::int64_t n,         std::int64_t lda, std::int64_t ldc, std::int64_t &lwork)
-
-         ``ormtr_get_lwork`` supports the following precisions.
+         ``ormtr_scratchpad_size`` supports the following precisions.
 
 
          .. list-table:: 
@@ -38,22 +24,35 @@ ormtr_get_lwork
 
 
    .. container:: section
-      :name: GUID-6E26AE63-E2AA-4D9F-B690-7FA8A0882B6F
 
 
       .. rubric:: Description
          :class: sectiontitle
 
 
-      Computes the size of the worksize needed for multiplying a real
-      matrix by the real orthogonal matrix ``Q`` determined by
-      (`sytrd <sytrd.html>`__).
+      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ormtr` function should be able to hold.
       Calls to this routine must specify the template parameter
       explicitly.
 
 
+onemkl::lapack::ormtr_scratchpad_size
+-------------------------------------
+
+.. container::
+
    .. container:: section
-      :name: GUID-26A5866D-0DF8-4835-8776-E5E73F0C657A
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::ormtr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo         upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,         std::int64_t lda, std::int64_t ldc)
+
+   .. container:: section
 
 
       .. rubric:: Input Parameters
@@ -77,8 +76,8 @@ ormtr_get_lwork
 
 
 
-      exec_queue
-         The queue where the routine should be executed.
+      queue
+         Device queue where calculations by :ref:`onemkl_lapack_ormtr` function will be performed.
 
 
       left_right
@@ -96,7 +95,7 @@ ormtr_get_lwork
       upper_lower
          Must be either ``uplo::upper`` or ``uplo::lower``. Uses the
          same ``upper_lower`` as supplied to
-         `sytrd <sytrd.html>`__.
+         :ref:`onemkl_lapack_sytrd`.
 
 
       trans
@@ -128,35 +127,25 @@ ormtr_get_lwork
 
 
    .. container:: section
-      :name: GUID-399F00E4-1E32-4114-AC10-5A1B420E474E
 
 
-      .. rubric:: Output Parameters
+      .. rubric:: Throws
          :class: sectiontitle
 
 
-      lwork
-         The integer lwork contains the size of the buffer needed for
-         computations in
-         `ormtr <ormtr.html>`__.
+      onemkl::lapack::exception
+         Exception is thrown in case of incorrect argument value is supplied.
+         Position of wrong argument can be determined by `get_info()` method of exception object.
 
 
    .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-      .. rubric:: Example
+      .. rubric:: Return Value
          :class: sectiontitle
 
 
-      An example of how to use ``ormtr_get_lwork``\ can be found in the
-      oneMKL installation directory, under:
-
-
-      ::
-
-
-         examples/sycl/lapack/ormtr.cpp
+      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ormtr` function should be able to hold.
 
 
 .. container:: familylinks
@@ -165,7 +154,6 @@ ormtr_get_lwork
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
 
 
