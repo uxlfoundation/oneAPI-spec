@@ -111,42 +111,43 @@ Table
 -----
 
 Table is a concept of a :term:`dataset` with in-memory numerical data. It is
-used on data-preparation and data-processing stages to:
+used at the data preparation and data processing stages for the following:
 
-- Store heterogeneous (in the general case) in-memory data with variety of
-  :term:`data formats <Data format>` (dense, sparse, chunked, contiguous, etc.)
+- To store heterogeneous in-memory data with variety of
+  :term:`data formats <Data format>`, such as dense, sparse, chunked,
+  contiguous.
 
-- Avoid unnecessary data copies on conversion from external data
+- To avoid unnecessary data copies during conversion from external data
   representations.
 
-- Transfer memory ownership of the data from user responsibility to the table,
-  or share it between them
+- To transfer memory ownership of the data from user application to the table,
+  or share it between them.
 
-- Connect with :ref:`data-source` to convert out-of-memory dataset
-  representation to in-memory view
+- To connect with the :ref:`data-source` to convert out-of-memory dataset
+  representation to in-memory view.
 
-- Stream the data to the algorithm
+- To support streaming of the data to the algorithm.
 
-- Access the underlying data on a device in a required :term:`data format`, e.g.
-  by blocks of defined :term:`data layout`.
+- To access the underlying data on a device in a required :term:`data format`,
+  e.g. by blocks of the defined :term:`data layout`.
 
-Table provide read-only access to the data inside it for thread-safety reasons
-and better integration with external entities, thus, table concept is
-:term:`immutable <Immutability>`.
+For thread-safety reasons and better integration with external entities, a table
+provides a read-only access to the data within it, thus, table concept
+implementations shall be :term:`immutable <Immutability>`.
 
-This concept may also have different logical organization and physical
-:term:`format of the data <data format>` inside it.
+This concept has different logical organization and physical
+:term:`format of the data <data format>`:
 
-- Logically, table is a :ref:`dataset` with :math:`n` rows and
-  :math:`p` columns. Each row represent an :term:`observation` and each column
-  is a :term:`feature` of a dataset. Thus, table contains :math:`(n \times p)`
-  data elements, while the original (physical) amount of bytes needed to store
-  the data can be different.
+- Logically, a table is a :ref:`dataset` with :math:`n` rows and
+  :math:`p` columns. Each row represents an :term:`observation` and each column
+  is a :term:`feature` of a dataset. Physical amount of bytes needed to store
+  the data differ from the logical number of elements :math:`n \times p` within
+  a table.
 
-- Physically, table can be organized in different ways: as a :term:`homogeneous
-  <Homogeneous data>`, :term:`contiguous <Contiguous data>` array of bytes, as
+- Physically, a table can be organized in different ways: as a :term:`homogeneous
+  <Homogeneous data>`, :term:`contiguous <Contiguous data>` array of bytes, as a
   :term:`heterogeneous <Heterogeneous data>` list of arrays of different
-  :term:`data types <Data type>`, in a compressed-sparse-row format, etc.
+  :term:`data types <Data type>`, in a compressed-sparse-row format.
 
 For details, see :ref:`tables` section.
 
@@ -193,7 +194,7 @@ Table builder
 -------------
 
 A table :term:`builder` is a concept that associated with particular
-:ref:`table` type and is used on data-preparation and data-processing stages
+:ref:`table` type and is used on data preparation and data processing stages
 for:
 
 - Iterative (in general case) construction of a :ref:`table` from
