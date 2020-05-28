@@ -19,9 +19,9 @@ This section describes the types related to the :ref:`table` concept.
   for the :ref:`table`. This type can be extended in :code:`table` sub-types.
   See more details in :ref:`Metadata API` section.
 
----------------------------
-Requirements on table types
----------------------------
+------------
+Requirements
+------------
 
 Each type that implements :ref:`table` concept in |dal_short_name| shall
 follow next requirements:
@@ -52,9 +52,9 @@ follow next requirements:
 5. Every implementation shall not include implementation details that are not a
    part of :ref:`Table` concept definition to the metadata object.
 
--------------------------------
-Table types in |dal_short_name|
--------------------------------
+-----------
+Table Types
+-----------
 
 |dal_short_name| defines a set of classes, each implements a :ref:`table`
 concept and concretizes it.

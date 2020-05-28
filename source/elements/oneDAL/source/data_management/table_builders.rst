@@ -1,21 +1,21 @@
 .. _table-builders:
 
 ==============
-Table builders
+Table Builders
 ==============
 
-This section contains definision of classes that implement :ref:`table-builder`
+This section contains definitions of classes that implement :ref:`table-builder`
 concept.
 
------------------------------------
-Requirements on table builder types
------------------------------------
+------------
+Requirements
+------------
 
 Each implementation of :ref:`table-builder` concept in |dal_short_name| shall
 follow next requirements:
 
 1. Provide an ability to create single :ref:`table` concept implementation.
-   Every builder shall be asocciated with a single table type.
+   Every builder shall be associated with a single table type.
 
 2. Shall be stateful object, which state can be used to access data inside
    builder via :ref:`accessors <Accessors>` or to create a table object.
@@ -24,9 +24,9 @@ follow next requirements:
    object based on the current snapshot of a builder state.
 
 
----------------------------------------
-Table builder types in |dal_short_name|
----------------------------------------
+-------------------
+Table Builder Types
+-------------------
 
 |dal_short_name| defines a set of accessor classes each associated with single
 :ref:`table` implementation.
@@ -43,16 +43,16 @@ Table builder types in |dal_short_name|
 
 .. _simple_homogen_table_builder:
 
----------------------------------
-Simple homogenenous table builder
----------------------------------
+--------------------------------
+Simple Homogeneous Table Builder
+--------------------------------
 
 TBD
 
 .. _simple_soa_table_builder:
 
 ------------------------
-Simple soa table builder
+Simple SOA Table Builder
 ------------------------
 
 TBD

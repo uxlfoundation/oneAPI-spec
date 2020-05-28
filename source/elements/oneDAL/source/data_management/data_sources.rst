@@ -1,7 +1,7 @@
 .. _data-sources:
 
 ============
-Data sources
+Data Sources
 ============
 
 TBD
