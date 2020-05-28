@@ -55,8 +55,8 @@ Each oneDAL algorithm has its own dedicated namespace, where the corresponding
 descriptor is defined. Descriptor, in its turn, defines a set of template
 parameters and **properties** --- run-time parameters that can be accessed by
 means of the corresponding getter and setter methods. `The following code sample
-<descriptor-template_>`_ shows the common structure of descriptor's definition
-for an abstract algorithm. To define a particular algorithm the following
+<descriptor-template_>`_ shows the common structure of a descriptor's definition
+for an abstract algorithm. To define a particular algorithm, the following
 strings shall be substituted:
 
 - ``%ALGORITHM%`` is the name of an algorithm and its namespace. All classes and
