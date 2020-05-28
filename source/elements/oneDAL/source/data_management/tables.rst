@@ -6,58 +6,54 @@
 Tables
 ======
 
-This section describes the types related to the :ref:`table` concept.
-|dal_short_name| defines common types of the :ref:`table` concept and the
-:ref:`metadata` concept associated with it:
+This section describes the types related to the :ref:`table <table>` concept.
+|dal_short_name| defines types of the table and the :ref:`metadata <metadata>`
+concepts associated with it:
 
-- Class :code:`table` is a common implementation of the :ref:`table`
-  concept and its compile-time part of :ref:`metadata`. Every particular
-  implementation of the :ref:`table` concept shall be the sub-type of the
-  :code:`table` class. See more details in :ref:`Table API` section.
+- The :code:`table` is a base class that implements the table concept and
+  provides its metadata. Each implementation of the :ref:`table <table>` concept
+  shall be derived from the :code:`table` class (for more details, see
+  :ref:`table_api`).
 
-- Class :code:`table_metadata` defines a runtime part of :ref:`metadata` concept
-  for the :ref:`table`. This type can be extended in :code:`table` sub-types.
-  See more details in :ref:`Metadata API` section.
+- The :code:`table_meta` class implements the metadata concept for the
+  table. This type can be extended in the types derived from the table (for more
+  details, see :ref:`Metadata API`).
+
 
 ------------
 Requirements
 ------------
 
-Each type that implements :ref:`table` concept in |dal_short_name| shall
-follow these requirements:
+Each type that implements :ref:`table <table>` concept in |dal_short_name|
+shall:
 
-1. Every implementation shall follow concept definition, e.g. represent
-   in-memory numerical :term:`dataset`, shall be :term:`immutable
-   <Immutability>`, etc.
+1. Follow definition of the table concept.
 
-2. Be the sub-type of a :code:`table` class. The behavior of this class can be
-   extended in sub-types but cannot be relaxed.
+2. Be derived from the :code:`table` class. The behavior of this class can be
+   extended, but cannot be relaxed.
 
-3. Every object of a :code:`table` sub-type shall be a :term:`reference-counted
-   <Reference-counted object>`. An assignment operator or a copy constructor shall
-   be used to create another reference to it.
-   ::
+3. Provide an implementation of the :ref:`metadata <metadata>` concept derived
+   from the :code:`table_meta` class.
 
-      onedal::some_table table2 = table1;
-      // table1 and table2 share the data (no data copy is performed)
+4. Be :term:`reference-counted <Reference-counted object>`. An assignment
+   operator or copy constructor shall be used to create another reference to the
+   same data.
 
-      table3 = table2;
+   .. code-block:: cpp
+
+      onedal::table table2 = table1;
+      // table1 and table2 share the same data (no data copy is performed)
+
+      onedal::table table3 = table2;
       // table1, table2 and table3 share the same data
 
-4. Every implementation shall provide a runtime :ref:`metadata` concept
-   implementation as an object of :code:`table_metadata` or its sub-types.
-   Sub-types shall be used when the implementation concretizes the :ref:`Table`
-   concept.
-
-5. Every implementation shall not include implementation details that are not a
-   part of :ref:`Table` concept definition to the metadata object.
 
 -----------
 Table Types
 -----------
 
-|dal_short_name| defines a set of classes, each implements a :ref:`table`
-concept and concretizes it.
+|dal_short_name| defines a set of classes. Each class implements the :ref:`table
+<table>` concept and represents a specific data format.
 
 .. list-table::
    :header-rows: 1
@@ -65,25 +61,28 @@ concept and concretizes it.
 
    * - Table type
      - Description
-   * - :ref:`table <Table API>`
-     - A common implementation of :ref:`table` concept. Base class for other
-       table types.
-   * - homogen_table_
-     - Dense table that contains :term:`contiguous <Contiguous data>` and
-       :term:`homogeneous <Homogeneous data>` data.
-   * - soa_table_
-     - Dense :term:`heterogeneous <Heterogeneous data>` table which data are
-       stored column-by-column in list of :term:`contiguous <Contiguous data>`
-       arrays (structure-of-arrays format).
-   * - aos_table_
-     - Dense :term:`heterogeneous <Heterogeneous data>` table which data are
-       stored as one :term:`contiguous <Contiguous data>` block of memory
-       (array-of-structures format).
-   * - csr_table_
-     - Sparse :term:`homogeneous <Homogeneous data>` table which data stored in
-       compressed-sparse-row format.
 
-.. _Table API:
+   * - :ref:`table <table_api>`
+     - A common implementation of the table concept. Base class for
+       other table types.
+
+   * - homogen_table_
+     - Dense table that contains :term:`contiguous <Contiguous data>`
+       :term:`homogeneous <Homogeneous data>` data.
+
+   * - soa_table_
+     - Dense heterogeneous table which data are stored column-by-column in list
+       of contiguous arrays (structure-of-arrays format).
+
+   * - aos_table_
+     - Dense heterogeneous table which data are stored as one contiguous block
+       of memory (array-of-structures format).
+
+   * - csr_table_
+     - Sparse homogeneous table which data stored in compressed sparse row (CSR)
+       format.
+
+.. _table_api:
 
 ---------
 Table API
@@ -327,7 +326,7 @@ are stored inside the table and how efficiently access them.
 
    .. member:: feature_info feature
 
-      Information about a particular :term:`feature` in the table
+      Information about a particular :term:`feature <Feature>` in the table
 
       Getter & Setter
          | ``const feature_info& get_feature(std::int64_t index) const``
@@ -411,7 +410,7 @@ Feature info
 .. namespace:: onedal
 .. class:: feature_info
 
-   Structure that represents information about particular :term:`feature`
+   Structure that represents information about particular :term:`feature <Feature>`
 
    Invariants:
       | ``feature_type::nominal`` or ``feature_type::ordinal``
