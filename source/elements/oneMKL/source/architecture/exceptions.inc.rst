@@ -1,7 +1,7 @@
 .. _onemkl_exceptions:
 
-oneMKL Exceptions
-------------------
+Exceptions and Error Handling
+------------------------------
 
 Will be added in a future version.
 
