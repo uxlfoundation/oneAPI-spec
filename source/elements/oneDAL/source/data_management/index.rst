@@ -190,25 +190,24 @@ A table :term:`builder` is a concept that associated with particular
 :ref:`table` type and is used on data preparation and data processing stages
 for:
 
-- Iterative (in general case) construction of a :ref:`table` from
-  another :ref:`tables <table>` or different in-memory :ref:`dataset`
-  representations
+- Iterative construction of a :ref:`table` from another :ref:`tables <table>` or
+  a different in-memory :ref:`dataset` representations.
 
-- Construction of a :ref:`table` from different entities that hold pieces of the
-  dataset, like arrays, pointers to the memory, external entities, etc.
+- Construction of a :ref:`table` from different entities that hold blocks of
+  data, such as arrays, pointers to the memory, external entities.
 
 - Changing dataset values. Since :ref:`table` is an
-  :term:`immutable <Immutability>` dataset, builder provides an ability to
-  change the values of data in the dataset under construction.
+  :term:`immutable <Immutability>` dataset, a builder provides the ability to
+  change the values in a dataset under construction.
 
-- Incapsulating construction process of a :ref:`table`. This is used to hide an
-  implementation details, which (1) are unnecessary for user, (2) allow to
-  select most appropriate table implementation for every particular case.
+- Encapsulating construction process of a :ref:`table`. This is used to hide the
+  implementation details as they are irrelevant for users. This also allow to
+  select the most appropriate table implementation for each particular case.
 
-- Providing an additional information how to create a :ref:`table` inside an
-  algorithm for :ref:`results  <Result>`. This information may include metadata,
-  memory allocators need to be used, or even particular implementation of a
-  table.
+- Providing additional information on how to create a :ref:`table` inside an
+  algorithm for :ref:`results  <Result>`. This information includes metadata,
+  memory allocators that shall be used, or even a particular table
+  implementation.
 
 For details, see :ref:`table-builders` section.
 
