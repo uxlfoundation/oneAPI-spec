@@ -26,7 +26,7 @@ Requirements on table types
 Each type that implements :ref:`table` concept in |dal_short_name| shall
 follow next requirements:
 
-1. Every implementation shall follow concept definision, e.g. represent
+1. Every implementation shall follow concept definition, e.g. represent
    in-memory numerical :term:`dataset`, shall be :term:`immutable
    <Immutability>`, etc.
 
@@ -50,7 +50,7 @@ follow next requirements:
    concept.
 
 5. Every implementation shall not include implementation details that are not a
-   part of :ref:`Table` concept definision to the metadata object.
+   part of :ref:`Table` concept definition to the metadata object.
 
 -------------------------------
 Table types in |dal_short_name|
@@ -72,11 +72,11 @@ concept and concretizes it.
      - Dense table that contains :term:`contiguous <Contiguous data>` and
        :term:`homogeneous <Homogeneous data>` data.
    * - soa_table_
-     - Dense :term:`heretogeneous <Heterogeneous data>` table which data are
+     - Dense :term:`heterogeneous <Heterogeneous data>` table which data are
        stored column-by-column in list of :term:`contiguous <Contiguous data>`
        arrays (structure-of-arrays format).
    * - aos_table_
-     - Dense :term:`heretogeneous <Heterogeneous data>` table which data are
+     - Dense :term:`heterogeneous <Heterogeneous data>` table which data are
        stored as one :term:`contiguous <Contiguous data>` block of memory
        (array-of-structures format).
    * - csr_table_
@@ -415,8 +415,8 @@ Feature info
 
    Invariants:
       | ``feature_type::nominal`` or ``feature_type::ordinal``
-        are avaliable only with integer ``data_type``
-      | ``feature_type::contiguous`` avaliable only with floating-point ``data_type``
+        are available only with integer ``data_type``
+      | ``feature_type::contiguous`` available only with floating-point ``data_type``
 
 .. _Data type:
 

@@ -4,7 +4,7 @@
 Accessors
 =========
 
-This section contain definisions of classes that implement :ref:`accessor`
+This section contain definitions of classes that implement :ref:`accessor`
 concept.
 
 ------------------------------
@@ -26,15 +26,15 @@ next requirements:
    accessor supports several :ref:`dataset` implementations to be passed in, it
    is not necessary to support all access modes for every input object. For
    example, tables shall support single read-only mode according to their
-   :ref:`concept <table>` definision.
+   :ref:`concept <table>` definition.
 
 4. Shall name reading and writing operations consistently. Reading operation
    name shall follow next pattern: :code:`pull_*()`, while writing operation
-   shall be named with accordance to folllowing: :code:`push_*()`.
+   shall be named with accordance to following: :code:`push_*()`.
 
 5. Shall be lightweight. Its constructors from :ref:`dataset` implementations
    shall not have heavy operations like copy of data, reading, writing, any sort
-   of convertions. These operations shall be performed by heavy operations
+   of conversions. These operations shall be performed by heavy operations
    :code:`pull_*()` and :code:`push_*()`. It is not necessary to have copy- or
    move- constructors for accessor implementations since it shall be designed
    for use in the local scope.
