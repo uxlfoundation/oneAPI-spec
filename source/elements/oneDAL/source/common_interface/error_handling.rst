@@ -13,7 +13,7 @@ Exception classification
 
 Exception classification in onDAL is aligned with C++ STL classification. oneDAL
 shall introduce abstract classes defining the base for for hierarchy of
-exception classes. Сoncrete exception classes are derived from respective STL
+exception classes. Concrete exception classes are derived from respective STL
 exception classes. oneDAL library shall throw exceptions represented with
 concrete classes.
 
