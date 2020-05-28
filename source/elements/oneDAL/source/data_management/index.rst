@@ -100,6 +100,8 @@ used on data acquisition and data preparation stages for:
   and :term:`continuous <Continuous feature>` values of data into one of numeric
   :term:`data formats <Data format>`.
 
+For details, see :ref:`data-sources` section.
+
 .. _table:
 
 Table
@@ -211,11 +213,6 @@ for:
   memory allocators need to be used, or even particular implementation of a
   table.
 
-Table builder shall be a stateful object which state is updated every call of
-operation which updates data or :ref:`metadata` of :ref:`dataset` under
-construction. It shall have `build()` member function which takes current
-snapshot of builder state and creates a :ref:`table` object upon it.
-
 For details, see :ref:`table-builders` section.
 
 .. _accessor:
@@ -292,6 +289,7 @@ Details
 
 .. toctree::
 
+   data_sources.rst
    tables.rst
    table_builders.rst
    accessors.rst
