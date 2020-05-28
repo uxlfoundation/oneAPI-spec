@@ -196,7 +196,17 @@ Machine learning terms
         Includes size in bytes, encoding principles, and available operations
         (in terms of a programming language).
 
-        **Examples:** int32_t, float, double
+        **Examples:** ``int32_t``, ``float``, ``double``
+
+    Getter
+        A method that returns the value of the private member variable.
+
+        **Example**:
+
+        .. code-block:: cpp
+
+            std::int64_t get_row_count() const;
+
 
     Heterogeneous data
         Data which contain values either of different :term:`data types <Data
@@ -243,6 +253,17 @@ Machine learning terms
         each time a new object is created, only the number of references is
         increased. An implementation is automatically freed when the number of
         references becomes equal to zero.
+
+    Setter
+        A method that accepts the only parameter and assigns its value to the
+        private member variable.
+
+        **Example**:
+
+        .. code-block:: cpp
+
+            void set_row_count(std::int64_t row_count);
+
 
     Table
         A |dal_short_name| concept for a :term:`dataset` that contains only

@@ -52,15 +52,29 @@ computational methods. A descriptor serves as:
   a stateful object whose state changes after an operation is applied.
 
 Each oneDAL algorithm has its own dedicated namespace, where the corresponding
-descriptor is defined. Descriptor, in its turn, defines a set of template
-parameters and **properties** --- run-time parameters that can be accessed by
-means of the corresponding getter and setter methods. `The following code sample
-<descriptor-template_>`_ shows the common structure of a descriptor's definition
-for an abstract algorithm. To define a particular algorithm, the following
-strings shall be substituted:
+descriptor is defined. Descriptor, in its turn, defines defines the following:
+
+- **Template parameter.** A descriptor is allowed to have any number of template
+  parameters, but shall support at least two:
+
+   + ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
+     uses for computations. This parameter is defined first and has the
+     ``onedal::default_float_t`` default value.
+
+   + ``Method`` is a tag-type that specifies the `computational method
+     <methods_>`_. This parameter is defined second and has the
+     ``method::by_default`` default value.
+
+- **Properties.** A property is run-time parameter that can be accessed by means
+  of the corresponding :term:`getter <Getter>` and :term:`setter <Setter>`
+  methods.
+
+`The following code sample <descriptor-template_>`_ shows the common structure
+of a descriptor's definition for an abstract algorithm. To define a particular
+algorithm, the following strings shall be substituted:
 
 - ``%ALGORITHM%`` is the name of an algorithm and its namespace. All classes and
-  structures related to that algorithm shall be defined within the namespace.
+  structures related to that algorithm are defined within the namespace.
 
 - ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and the type of one
   of the algorithm's properties.
@@ -85,8 +99,8 @@ strings shall be substituted:
    } // namespace onedal::%ALGORITHM%
 
 
-Each meta-parameter of an algorithm is mapped to a property that satisfies the
-following requirements:
+Each meta-parameter of an algorithm is mapped to a property that shall satisfy
+the following requirements:
 
 - Properties are defined with getter and setter methods. The underlying
   class member variable that stores the property's value is never exposed in the
@@ -109,18 +123,6 @@ following requirements:
         .set_property_name_1(value_1)
         .set_property_name_2(value_2)
         .set_property_name_3(value_3);
-
-
-A descriptor is allowed to have any number of template parameters, but should
-support at least two:
-
-- ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
-  uses for computations. This parameter is defined first and has the
-  ``onedal::default_float_t`` default value.
-
-- ``Method`` is a tag-type that specifies the `computational method <methods_>`_.
-  This parameter is defined second and has the ``method::by_default`` default
-  value.
 
 
 .. _floating-point:
