@@ -89,13 +89,13 @@ Each meta-parameter of an algorithm is mapped to a property that satisfies the
 following requirements:
 
 - Properties are defined with getter and setter methods. The underlying
-  class field that stores the property's value is never exposed in the
+  class member variable that stores the property's value is never exposed in the
   descriptor interface.
 
-- The getter returns the value of the underlying class field.
+- The getter returns the value of the underlying class member variable.
 
 - The setter accepts only one parameter of the property's type and assigns it
-  to the underlying class field.
+  to the underlying class member variable.
 
 - Most of the properties are preset with default values, others
   are initialized by passing the required parameters to the constructor.
