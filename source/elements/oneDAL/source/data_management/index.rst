@@ -216,20 +216,29 @@ For details, see :ref:`table-builders` section.
 Accessor
 --------
 
-Accessor is a concept which defines sinle way how to get the data from a
+Accessor is a concept that defines a single way to get the data from an
 in-memory numerical :ref:`dataset`. It allows:
 
-- To make uniform access to the data from various sets of different objects,
-  like :ref:`tables <Table>` or :ref:`table builders <table-builder>` without
-  exposing their implementation details.
+- To have unified access to the data from various sets of different objects,
+  such as :ref:`tables <Table>` or :ref:`table builders <table-builder>`,
+  without exposing their implementation details.
 
 - To convert a variety of numeric :term:`data formats <Data format>` into a
-  smaller set (e.g. for better vectorization).
+  smaller set of formats.
 
-- To give an ability to focus on the data acquisition in the desired :term:`data
-  format` with a wanted set of operations over the data.
+- To provide a :term:`flat <flat data>` view on the data blocks of a
+  :ref:`dataset` for better data locality. For example, some accessor
+  implementation returns :term:`feature` values as a contiguous array, while the
+  original dataset stored row-by-row (there are strides between values of a
+  single feature).
 
-- To make read-only, read-write and write-only access to the data.
+- To acquire data in a desired :term:`data format` for which
+  a specific set of operations is defined.
+
+- To have read-only, read-write and write-only access to the data. Accessor
+  implementations are not required to have read-write and write-only access
+  modes for :term:`immutable <Immutability>` entities like :ref:`tables
+  <Table>`.
 
 For details, see :ref:`accessors` section.
 
