@@ -47,9 +47,14 @@ communication technology and, therefore, can be used within different end-to-end
 
    - Prediction algorithms typically work with the trained data model and with a working data set.
 
- - The **Services** component includes classes and utilities used across Data Management and Algorithms components.
-   These classes enable memory allocation, error handling.
+ - The **Utilities** component includes auxiliary functionality intended to be used for design of
+ classes and implementation of methods such as memory allocators or type traits.
 
-Classes in Data Management, Algorithms, and Services components cover the most important usage scenarios and allow
-seamless implementation of complex data analytics workflows through direct API calls. At the same time, the library
-is an object-oriented framework that helps customize the API by redefining particular classes and methods of the library.
+ - The **Miscellaneous** component includes functionality intended to be used by |dal_short_name|
+ algorithms and applications for algorithm customization and optimization on various stages of the
+ analytical pipeline. Examples of such algorithms include solvers and random number generators.
+
+Classes in Data Management, Algorithms, Utilities, and Miscellaneous components cover the most
+important usage scenarios and allow seamless implementation of complex data analytics workflows
+through direct API calls. At the same time, the library is an object-oriented framework that helps
+customize the API by redefining particular classes and methods of the library.

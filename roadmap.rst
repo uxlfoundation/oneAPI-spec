@@ -12,6 +12,7 @@ Version    Date        Notes
 0.6.0_     01/30/2020  Open source Release
 0.7.0_     03/26/2020  50% content
 0.8.0_     05/28/2020  80% content
+0.8.5_     06/26/2020  85% content
 0.9.0_     07/30/2020  Final Gold Preview
 1.0.0_     08/30/2020  Gold Release
 ========   ==========  ===========
@@ -243,6 +244,14 @@ Date       Milestone
   - Finalized BLAS, LAPACK domains
   - Draft suitable for review so we can distribute to reviewers before
     ISC (6/28/2020).
+
+0.8.5
+-----
+
+Summary
++++++++
+
+Some components missed the window for the 0.8 release. Introducing a new release so we don't hold everything up.
 
 0.9.0
 -----

@@ -22,10 +22,19 @@ For more information about algorithms implemented in |dal_full_name|
    Information Theory 1982, 28 (2): 1982pp: 129--137.
 
 .. [Bro07]
-   Bro, R.; Acar, E.; Kolda, T.. *Resolving the sign ambiguity in the singular
+   Bro, R.; Acar, E.; Kolda, T. *Resolving the sign ambiguity in the singular
    value decomposition*. SANDIA Report, SAND2007-6422, Unlimited Release,
    October, 2007.
 
 .. [Bentley80]
    J. L. Bentley. Multidimensional Divide and Conquer. Communications of the
    ACM, 23(4):214--229, 1980.
+
+.. [Friedman17]
+   J. Friedman, T. Hastie, R. Tibshirani. *The Elements of Statistical Learning
+   Data Mining, Inference, and Prediction.* Springer, 2017.
+
+.. [Zhang04]
+   T. Zhang. Solving Large Scale Linear Prediction Problems Using Stochastic
+   Gradient Descent Algorithms. ICML 2004: Proceedings Of The Twenty-First
+   International Conference On Machine Learning, 919--926, 2004.

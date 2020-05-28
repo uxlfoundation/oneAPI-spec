@@ -2,14 +2,15 @@
   Copyright 2019-2020 Intel Corporation
 
 .. default-domain:: cpp
+.. _`open source implementation`: https://github.com/oneapi-src/oneDNN/tree/dev-v2
+.. _`README`: https://github.com/oneapi-src/oneDNN/blob/dev-v2/README.md
 
 .. _oneDNN-section:
 
-====================
 oneDNN |dnn_version|
 ====================
 
-|dnn_full_name| (oneDNN) is a performance library containind building blocks
+|dnn_full_name| (oneDNN) is a performance library containing building blocks
 for for deep learning applications and frameworks. oneDNN supports:
 
 * CNN primitives (Convolutions, Inner product, Pooling, etc.)
@@ -18,51 +19,41 @@ for for deep learning applications and frameworks. oneDNN supports:
 * Elementwise operations (ReLU, Tanh, ELU, Abs, etc.)
 * Softmax, Sum, Concat, Shuffle
 * Reorders from/to optimized data layouts
-* 16- and 32-bit and bfloat16 floating point, and 8-bit integer data types
-
-The oneDNN API is based on four main abstractions:
-
-+---------------+-------------------------------------------------------------+
-| Abstraction   | Description                                                 |
-+===============+=============================================================+
-| **Engine**    | A hardware processing unit. An Engine encapsulates a        |
-|               | user-provided DPC++ device and context.                     |
-+---------------+-------------------------------------------------------------+
-| **Stream**    | A queue of operations on an Engine.                         |
-+---------------+-------------------------------------------------------------+
-| **Primitive** | A compute or a data transformation operation.               |
-+---------------+-------------------------------------------------------------+
-| **Memory**    | A multi-dimensional array (not necessarily contiguous) with |
-|               | elements of certain type allocated on a particular Engine,  |
-|               | constructed from a buffer or from a unified shared memory   |
-|               | (USM) pointer.                                              |
-+---------------+-------------------------------------------------------------+
+* 8-bit integer, 16-, 32-bit, and bfloat16 floating point data types
 
 .. literalinclude:: example.cpp
    :language: cpp
-   :lines: 60-
+   :lines: 61-
 
---------------------------
+.. toctree::
+   :maxdepth: 1
+
+   introduction.rst
+   execution_model/index.rst
+   data_model/index.rst
+   primitives/index.rst
+
 Open Source Implementation
 --------------------------
 
 Intel has published an `open source implementation`_ with the Apache
 license.
 
----
-API
----
+Implementation Notes
+--------------------
 
-.. toctree::
-   :maxdepth: 2
+This specification provides high-level descriptions for oneDNN operations and
+does not cover all the implementation-specific details of the `open source
+implementation`_.  Specifically, it does not cover highly-optimized memory
+formats and integration with profiling tools, etc. This is done intentionally
+to improve specification portability. Code that uses API defined in this
+specification is expected to be portable across open source implementation and
+any potential other implementations of this specification to a reasonable
+extent.
 
-   api/engine.rst
-   api/stream.rst
-   api/memory.rst
-   api/primitives.rst
-   api/utilities.rst
+In the future this section will be extended with more details on how different
+implementations of this specification should cooperate and co-exist.
 
--------
 Testing
 -------
 
@@ -72,7 +63,4 @@ can be used to test library functionality.
 The `open source implementation`_ includes a comprehensive test suite.
 Consult the `README`_ for directions.
 
-.. _`open source implementation`: https://github.com/oneapi-src/oneDNN/tree/dev-v2
-.. _`README`: https://github.com/oneapi-src/oneDNN/blob/dev-v2/README.md
-
-.. vim: ts=3 sw=3 et
+.. vim: ts=3 sw=3 et spell spelllang=en
