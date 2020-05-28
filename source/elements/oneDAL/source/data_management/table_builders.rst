@@ -16,7 +16,7 @@ Each implementation of :ref:`table-builder` concept shall:
 1. Provide the ability to create a single :ref:`table` concept implementation.
    Each builder shall be associated with a single table type.
 
-2. Be stateful object, which state is used to access data inside
+2. Be a stateful object which state is used to access data inside
    builder via :ref:`accessors <Accessors>` or to create a table object.
 
 3. Provide :code:`build()` member function that creates a new table
