@@ -39,7 +39,7 @@ dotc
    |image0|
 
 
-dotc (BUFFER Version)
+dotc (Buffer Version)
 ---------------------
 
 .. container::
@@ -51,7 +51,7 @@ dotc (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::dotc(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t      incy, sycl::buffer<T,1> &result)
+      .. cpp:function::  void onemkl::blas::dotc(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &result)
 .. container:: section
 
 

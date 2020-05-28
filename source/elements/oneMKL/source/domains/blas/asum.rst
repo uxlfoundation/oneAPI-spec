@@ -49,7 +49,7 @@ asum
    where ``x`` is a vector with ``n`` elements.
 
 
-asum (BUFFER Version)
+asum (Buffer Version)
 ---------------------
 
 .. container::
@@ -61,7 +61,7 @@ asum (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::asum(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T_res,1> &result)
+      .. cpp:function::  void onemkl::blas::asum(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T_res,1> &result)
 .. container:: section
 
 

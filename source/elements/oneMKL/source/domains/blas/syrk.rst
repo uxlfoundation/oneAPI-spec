@@ -37,8 +37,6 @@ syrk
    by a general matrix ``A``. The operation is defined as:
 
 
-  
-
 
       C <- alpha*op(A)*op(A)T + beta*C
 
@@ -59,7 +57,7 @@ syrk
    Here op(``A``) is ``n``-by-``k``, and ``C`` is ``n``-by-``n``.
 
 
-syrk (BUFFER Version)
+syrk (Buffer Version)
 ---------------------
 
 .. container::
@@ -71,7 +69,7 @@ syrk (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::syrk(sycl::queue &queue, uplo upper_lower,      transpose trans, std::int64_t n, std::int64_t k, T alpha,      sycl::buffer<T,1> &a, std::int64_t lda, T beta, sycl::buffer<T,1> &c,      std::int64_t ldc)
+      .. cpp:function::  void onemkl::blas::syrk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
 .. container:: section
 
 
@@ -165,7 +163,7 @@ syrk (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::syrk(sycl::queue &queue, uplo         upper_lower, transpose trans, std::int64_t n, std::int64_t k, T         alpha, const T* a, std::int64_t lda, T beta, T* c,         std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies =         {})
+         .. cpp:function::  sycl::event onemkl::blas::syrk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

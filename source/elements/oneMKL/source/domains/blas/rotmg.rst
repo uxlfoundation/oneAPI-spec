@@ -41,7 +41,7 @@ rotmg
    | |image0|
 
 
-rotmg (BUFFER Version)
+rotmg (Buffer Version)
 ----------------------
 
 .. container::
@@ -53,7 +53,7 @@ rotmg (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::rotmg(sycl::queue &queue, sycl::buffer<T,1> &d1,      sycl::buffer<T,1> &d2, sycl::buffer<T,1> &x1, sycl::buffer<T,1> &y1, sycl::buffer<T,1>      &param)
+      .. cpp:function::  void onemkl::blas::rotmg(sycl::queue &queue, sycl::buffer<T,1> &d1, sycl::buffer<T,1> &d2, sycl::buffer<T,1> &x1, sycl::buffer<T,1> &y1, sycl::buffer<T,1> &param)
 .. container:: section
 
 

@@ -36,16 +36,11 @@ trsm
    The ``trsm`` routines solve one of the following matrix equations:
 
 
-  
-
 
       op(A)*X = alpha*B,
 
 
    or
-
-
-  
 
 
       X*op(A) = alpha*B,
@@ -72,7 +67,7 @@ trsm
    is overwritten by the solution matrix ``X``.
 
 
-trsm (BUFFER Version)
+trsm (Buffer Version)
 ---------------------
 
 .. container::
@@ -84,7 +79,7 @@ trsm (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::trsm(sycl::queue &queue, side left_right,      uplo upper_lower, transpose transa, diag unit_diag, std::int64_t      m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda,      sycl::buffer<T,1> &b, std::int64_t ldb)
+      .. cpp:function::  void onemkl::blas::trsm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb)
 .. container:: section
 
 
@@ -191,7 +186,7 @@ trsm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::trsm(sycl::queue &queue, side left_right,         uplo upper_lower, transpose transa, diag unit_diag,         std::int64_t m, std::int64_t n, T alpha, const T* a,         std::int64_t lda, T* b, std::int64_t ldb, const         sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::trsm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, T* b, std::int64_t ldb, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

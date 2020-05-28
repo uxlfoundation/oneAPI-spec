@@ -35,8 +35,6 @@ her
    result to a Hermitian matrix. The operation is defined as
 
 
-  
-
 
       A <- alpha*x*x :sup:`H` + A
 
@@ -53,7 +51,7 @@ her
    ``x`` is a vector of length ``n``.
 
 
-her (BUFFER Version)
+her (Buffer Version)
 --------------------
 
 .. container::
@@ -65,7 +63,7 @@ her (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::her(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &a, std::int64_t lda)
+      .. cpp:function::  void onemkl::blas::her(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &a, std::int64_t lda)
 .. container:: section
 
 
@@ -145,7 +143,7 @@ her (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::her(sycl::queue &queue, uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::her(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

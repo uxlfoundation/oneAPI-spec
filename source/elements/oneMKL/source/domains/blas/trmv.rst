@@ -37,9 +37,6 @@ trmv
    matrix. The operation is defined
 
 
-  
-
-
       x <- op(A)*x
 
 
@@ -57,7 +54,7 @@ trmv
    ``x`` is a vector of length ``n``.
 
 
-trmv (BUFFER Version)
+trmv (Buffer Version)
 ---------------------
 
 .. container::
@@ -69,7 +66,7 @@ trmv (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::trmv(sycl::queue &queue, uplo upper_lower,      transpose trans, diag unit_nonunit, std::int64_t n, sycl::buffer<T,1>      &a, std::int64_t lda, sycl::buffer<T,1> &x, std::int64_t incx)
+      .. cpp:function::  void onemkl::blas::trmv(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag unit_nonunit, std::int64_t n, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &x, std::int64_t incx)
 .. container:: section
 
 
@@ -146,7 +143,7 @@ trmv (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::trmv(sycl::queue &queue, uplo         upper_lower, transpose trans, diag unit_nonunit, std::int64_t         n, const T *a, std::int64_t lda, T *x, std::int64_t incx,         const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::trmv(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag unit_nonunit, std::int64_t n, const T *a, std::int64_t lda, T *x, std::int64_t incx, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 
