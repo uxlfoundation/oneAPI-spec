@@ -80,28 +80,28 @@ example:
 Data source
 -----------
 
-Data source is a concept of an out-of-memory storage of a :term:`dataset`. It is
-used on data acquisition and data preparation stages for:
+Data source is a concept of an out-of-memory storage for a :term:`dataset`. It is
+used at the data acquisition and data preparation stages for the following:
 
-- Dataset extraction from databases, files, remote storages, etc.
+- To extract datasets from external sources such as databases, files, remote
+  storages.
 
-- Dataset loading into the local memory of the device. Data are not always fit
-  the local memory, especially when processing with accelerators. Data source
-  provides an ability to load data by batches and orchestrates its efficient
-  extraction directly into local memory of the device. Therefore data source
-  enables complex scenarios of data analytics, like :term:`online computations
-  <Online mode>`.
+- To load datasets into the device's local memory. Data are not always fit
+  the local memory, especially when processing with accelerators. A data source
+  provides the ability to load data by batches and extracts it directly into the
+  device's local memory. Therefore, a data source enables complex data analytics
+  scenarios, such as :term:`online computations <Online mode>`.
 
-- Filtering or normalization of :term:`feature` values being extracted.
+- To filter and normalize :term:`feature` values that are being extracted.
 
-- Recovery (emulation) of missing :term:`feature` values.
+- To recover missing :term:`feature` values.
 
-- :term:`outlier` detection and recovery of the abnormal data.
+- To detect :term:`outliers <Outlier>` and recover the abnormal data.
 
-- Dataset transformation to numerical representation. Data sources can
+- To transform datasets into numerical representation. Data source shall
   automatically transform non-numeric :term:`categorical <Categorical feature>`
-  and :term:`continuous <Continuous feature>` values of data into one of numeric
-  :term:`data formats <Data format>`.
+  and :term:`continuous <Continuous feature>` data values into one of the
+  numeric :term:`data formats <Data format>`.
 
 For details, see :ref:`data-sources` section.
 
