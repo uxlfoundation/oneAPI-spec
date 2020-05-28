@@ -5,35 +5,37 @@
 Data management
 ===============
 
-This section includes descriptions of concepts and objects that operate with
-data. For |dal_short_name|, such set of operations, or **data management**, is
-distributed among different stages of a :ref:`data analytics pipeline
-<data_analytics_pipeline>`. From data management angle of view, this pipeline
-contains three main steps of data acquisition, preparation, and computation:
+This section includes descriptions of concepts and objects that operate on data.
+For |dal_short_name|, such set of operations, or **data management**, is
+distributed between different stages of the :ref:`data analytics pipeline
+<data_analytics_pipeline>`. From a perspective of data management, this pipeline
+contains three main steps of data acquisition, preparation, and computation (see
+on the picture below):
 
-1. Raw data acquisition.
+1. Raw data acquisition
 
-  - Transferring out-of-memory data into in-memory representation from sources
-    like databases, files, remote storages, etc.
+  - Transfer out-of-memory data from various sources (databases, files, remote
+    storages) into an in-memory representation.
 
-2. Data preparation.
+2. Data preparation
 
-  - Performing data normalization, filtering.
-  - Recovery of missing values
-  - Compression and decompression of the data.
-  - Conversion of data to numeric representation.
-  - Supporting different in-memory :term:`data formats <Data format>`.
-  - Computation of statistics on numerical data like mean, variance,
-    covariance, etc.
+  - Support different in-memory :term:`data formats <Data format>`.
+  - Compress and decompress the data.
+  - Convert the data into numeric representation.
+  - Recover missing values.
+  - Filter the data and perform data normalization.
+  - Compute various statistical metrics for numerical data, such as mean, variance,
+    covariance.
 
-3. Algorithm computation.
+3. Algorithm computation
 
-  - Streaming in-memory numerical data to the algorithm.
+  - Stream in-memory numerical data to the algorithm.
 
 In complex usage scenarios, data flow can go through these three stages back and
 forth. For example, when the full data are not available at the start of the
 computation, it can be done step-by-step with blocks of data. After computation
-on the current block the next one should be obtained and prepared.
+on the current block is completer, the next block should be obtained and
+prepared.
 
 .. image:: _static/data_management_flow.png
   :width: 800
