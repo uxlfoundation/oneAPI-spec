@@ -32,10 +32,10 @@ contains three main steps of data acquisition, preparation, and computation (see
   - Stream in-memory numerical data to the algorithm.
 
 In complex usage scenarios, data flow goes through these three stages back and
-forth. For example, when the full data are not available at the start of the
-computation, it can be done step-by-step with blocks of data. After computation
-on the current block is completed, the next block should be obtained and
-prepared.
+forth. For example, when the data are not fully available at the start of the
+computation, it can be done step-by-step using blocks of data. After the
+computation on the current block is completed, the next block should be obtained
+and prepared.
 
 .. _typical_data_management_flow:
 
