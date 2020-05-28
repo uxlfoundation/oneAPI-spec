@@ -53,9 +53,9 @@ computational methods. A descriptor serves as:
 
 Each oneDAL algorithm has its own dedicated namespace, where the corresponding
 descriptor is defined (for more details, see :ref:`common_namespaces`).
-Descriptor, in its turn, defines defines the following:
+Descriptor, in its turn, defines the following:
 
-- **Template parameter.** A descriptor is allowed to have any number of template
+- **Template parameters.** A descriptor is allowed to have any number of template
   parameters, but shall support at least two:
 
    + ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
@@ -66,8 +66,8 @@ Descriptor, in its turn, defines defines the following:
      <methods_>`_. This parameter is defined second and has the
      ``method::by_default`` default value.
 
-- **Properties.** A property is run-time parameter that can be accessed by means
-  of the corresponding :term:`getter <Getter>` and :term:`setter <Setter>`
+- **Properties.** A property is a run-time parameter that can be accessed by
+  means of the corresponding :term:`getter <Getter>` and :term:`setter <Setter>`
   methods.
 
 `The following code sample <descriptor-template_>`_ shows the common structure
