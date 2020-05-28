@@ -4,21 +4,21 @@
 Error handling
 ==============
 
-oneDAL error handling relies on the  mechanism of C++ exceptions. If an error
-occurs, it shall be propagated at the point of a function call where it can be
+oneDAL error handling relies on the mechanism of C++ exceptions. If an error
+occurs, it shall be propagated at the point of a function call where it is
 caught using standard C++ error handling mechanism.
 
 Exception classification
 ========================
 
-Exception classification in onDAL is aligned with C++ STL classification. oneDAL
-shall introduce abstract classes defining the base for for hierarchy of
-exception classes. Concrete exception classes are derived from respective STL
-exception classes. oneDAL library shall throw exceptions represented with
-concrete classes.
+Exception classification in onDAL is aligned with C++ Standard Library
+classification. oneDAL shall introduce abstract classes that define the base
+class in the hierarchy of exception classes. Concrete exception classes are
+derived from respective C++ Standard Library exception classes. oneDAL library
+shall throw exceptions represented with concrete classes.
 
-The root of exception hierarchy is ``onedal::exception``. The rest exception
-classes are derived from this class.
+In the hierarchy of onDAL exceptions, ``onedal::exception`` is the base abstract
+class that all other exception classes are derived from.
 
 ::
 
@@ -35,7 +35,11 @@ classes are derived from this class.
      - Base class of oneDAL exception hierarchy.
      - Yes
 
-All errors divide into 3 groups: logic errors, runtime errors and bad allocation.
+All oneDAL exceptions shall be divided into three groups:
+
+- logic errors
+- runtime errors
+- errors with allocation
 
 ::
 
@@ -61,10 +65,14 @@ All errors divide into 3 groups: logic errors, runtime errors and bad allocation
      - Reports failure to allocate storage.
      - No
 
-Precondition and invariant errors that are represented by
-``onedal::logic_error`` are divided into subgroups: invalid argument, domain
-error, out of range error, unimplemented method or algorithm, unavailable
-device or data.
+All precondition and invariant errors represented by ``onedal::logic_error``
+shall be divided into the following groups:
+
+- invalid argument errors
+- domain errors
+- out of range errors
+- errors with an unimplemented method or algorithm
+- unavailable device or data
 
 ::
 
