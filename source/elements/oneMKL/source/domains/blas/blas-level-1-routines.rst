@@ -7,9 +7,8 @@ BLAS Level 1 Routines
 .. container::
 
 
-   BLAS Level 1 includes routines and functions, which perform
-   vector-vector operations. The following table lists the BLAS Level 1
-   routine and function groups and the data types associated with them.
+   BLAS Level 1 includes routines which perform
+   vector-vector operations as described in the following table. 
 
 
    .. container:: tablenoborder
@@ -49,9 +48,9 @@ BLAS Level 1 Routines
          * -     \ `swap <swap.html>`__\   
            -     Vector-vector swap      
          * -     \ `iamax <iamax.html>`__\   
-           -     Index of the maximum absolute value element of a       vector     
+           -     Index of the maximum absolute value element of a vector     
          * -     \ `iamin <iamin.html>`__\   
-           -     Index of the minimum absolute value element of a       vector     
+           -     Index of the minimum absolute value element of a vector     
 
 .. toctree::
     :hidden:

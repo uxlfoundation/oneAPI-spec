@@ -52,7 +52,7 @@ axpy
    ``alpha`` is a scalar.
 
 
-axpy (BUFFER Version)
+axpy (Buffer Version)
 ---------------------
 
 .. container::
@@ -64,7 +64,7 @@ axpy (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::axpy(sycl::queue &queue, std::int64_t n, T      alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y,      std::int64_t incy)
+      .. cpp:function::  void onemkl::blas::axpy(sycl::queue &queue, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy)
 .. container:: section
 
 

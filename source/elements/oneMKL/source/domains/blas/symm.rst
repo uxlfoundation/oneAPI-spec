@@ -43,7 +43,6 @@ symm
    defined as
 
 
-  
 
 
       C <- alpha*A*B + beta*C,
@@ -51,8 +50,6 @@ symm
 
    or
 
-
-  
 
 
       C <- alpha*B*A + beta*C,
@@ -70,7 +67,7 @@ symm
    ``B`` and ``C`` are ``m``-by-``n`` matrices.
 
 
-symm (BUFFER Version)
+symm (Buffer Version)
 ---------------------
 
 .. container::
@@ -82,7 +79,7 @@ symm (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::symm(sycl::queue &queue, side left_right,      uplo upper_lower, std::int64_t m, std::int64_t n, T alpha,      sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t      ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+      .. cpp:function::  void onemkl::blas::symm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
 .. container:: section
 
 
@@ -198,7 +195,7 @@ symm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::symm(sycl::queue &queue, side left_right,         uplo upper_lower, std::int64_t m, std::int64_t n, T alpha,         const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T         beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event>         &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::symm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

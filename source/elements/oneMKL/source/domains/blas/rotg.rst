@@ -49,7 +49,7 @@ rotg
    1/``c``; otherwise ``z`` is 1.
 
 
-rotg (BUFFER Version)
+rotg (Buffer Version)
 ---------------------
 
 .. container::
@@ -61,7 +61,7 @@ rotg (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::rotg(sycl::queue &queue, sycl::buffer<T,1> &a,      sycl::buffer<T,1> &b, sycl::buffer<T_real,1> &c, sycl::buffer<T,1> &s)
+      .. cpp:function::  void onemkl::blas::rotg(sycl::queue &queue, sycl::buffer<T,1> &a, sycl::buffer<T,1> &b, sycl::buffer<T_real,1> &c, sycl::buffer<T,1> &s)
 .. container:: section
 
 

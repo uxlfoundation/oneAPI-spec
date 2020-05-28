@@ -43,7 +43,7 @@ rotm
    transformation matrix.
 
 
-rotm (BUFFER Version)
+rotm (Buffer Version)
 ---------------------
 
 .. container::
@@ -55,7 +55,7 @@ rotm (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::rotm(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t      incy, sycl::buffer<T,1> &param)
+      .. cpp:function::  void onemkl::blas::rotm(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &param)
 .. container:: section
 
 

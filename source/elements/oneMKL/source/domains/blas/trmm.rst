@@ -42,16 +42,11 @@ trmm
    ``left_right``. The operation is defined as
 
 
-  
-
 
       B <- alpha*op(A)*B
 
 
    or
-
-
-  
 
 
       B <- alpha*B*op(A)
@@ -74,7 +69,7 @@ trmm
    ``n`` x ``n``, depending on ``left_right``.
 
 
-trmm (BUFFER Version)
+trmm (Buffer Version)
 ---------------------
 
 .. container::
@@ -86,7 +81,7 @@ trmm (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::trmm(sycl::queue &queue, uplo upper_lower,      transpose transa, diag unit_diag, std::int64_t m, std::int64_t n,      T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b,      std::int64_t ldb)
+      .. cpp:function::  void onemkl::blas::trmm(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb)
 .. container:: section
 
 
@@ -194,7 +189,7 @@ trmm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::trmm(sycl::queue &queue, uplo         upper_lower, transpose transa, diag unit_diag, std::int64_t m,         std::int64_t n, T alpha, const T* a, std::int64_t lda, T* b,         std::int64_t ldb, const sycl::vector_class<sycl::event> &dependencies =         {})
+         .. cpp:function::  sycl::event onemkl::blas::trmm(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, T* b, std::int64_t ldb, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

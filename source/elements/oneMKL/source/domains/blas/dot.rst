@@ -53,7 +53,7 @@ dot
       double), the dot product is computed with double precision.
 
 
-dot (BUFFER Version)
+dot (Buffer Version)
 --------------------
 
 .. container::
@@ -65,7 +65,7 @@ dot (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::dot(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t      incy, sycl::buffer<T_res,1> &result)
+      .. cpp:function::  void onemkl::blas::dot(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T_res,1> &result)
 .. container:: section
 
 

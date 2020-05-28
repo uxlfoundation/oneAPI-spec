@@ -36,9 +36,6 @@ syr
    defined as
 
 
-  
-
-
       A  <- alpha*x*x :sup:`T` + A
 
 
@@ -54,7 +51,7 @@ syr
    ``x`` is a vector of length ``n``.
 
 
-syr (BUFFER Version)
+syr (Buffer Version)
 --------------------
 
 .. container::
@@ -66,7 +63,7 @@ syr (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::syr(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &a, std::int64_t lda)
+      .. cpp:function::  void onemkl::blas::syr(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &a, std::int64_t lda)
 .. container:: section
 
 
@@ -142,7 +139,7 @@ syr (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::syr(sycl::queue &queue, uplo upper_lower,         std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a,         std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies =         {})
+         .. cpp:function::  sycl::event onemkl::blas::syr(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 
