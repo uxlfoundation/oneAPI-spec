@@ -37,10 +37,10 @@ accessor implementation shall satisfy the following requirements:
 Accessor Types
 --------------
 
-|dal_short_name| defines a set of accessor classes each associated with single
-way how to interact with data inside a :ref:`dataset`. Next table briefly
+|dal_short_name| defines a set of accessor classes. Each class is associated
+with a single specific way of interacting with data within a :ref:`dataset`. The following table briefly
 explains these classes and shows which :ref:`dataset` implementations are
-supported by each accessor.
+supported by each accessor type.
 
 .. list-table::
    :header-rows: 1
@@ -50,12 +50,12 @@ supported by each accessor.
      - Description
      - List of supported types
    * - row_accessor_
-     - Provides an access to the range of dataset rows as one :term:`contiguous
+     - Provides access to the range of dataset rows as one :term:`contiguous
        <Contiguous data>` and :term:`homogeneous <Homogeneous data>` block of memory.
      - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
        :code:`csr_table`, and their builders.
    * - column_accessor_
-     - Provides an access to the values range of a single column as one
+     - Provides access to the range of values within a single column as one
        :term:`contiguous <Contiguous data>` and :term:`homogeneous <Homogeneous
        data>` block of memory.
      - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
