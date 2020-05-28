@@ -1,6 +1,7 @@
+.. _onemkl_lapack_ormtr:
 
-ormtr
-=====
+onemkl::lapack::ormtr
+=====================
 
 
 .. container::
@@ -8,19 +9,8 @@ ormtr
 
    Multiplies a real matrix by the real orthogonal matrix ``Q``
    determined by
-   `?sytrd <sytrd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   :ref:`onemkl_lapack_sytrd`.
 
-
-   .. container:: section
-      :name: GUID-CEFFA869-EDA6-4724-83FB-A70F7EC743AC
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void ormtr(queue &exec_queue, side left_right,      uplo upper_lower, transpose trans, std::int64_t m, std::int64_t n,      buffer<T,1> &a, std::int64_t lda, buffer<T,1> &tau, buffer<T,1>      &c, std::int64_t ldc, buffer<T,1> &work, std::int64_t lwork,      buffer<std::int64_t,1> &info)
 
       ``ormtr`` supports the following precisions.
 
@@ -36,7 +26,6 @@ ormtr
 
 
 .. container:: section
-   :name: GUID-5DEE53EE-9F11-4E2A-BEC6-8B670D1B1280
 
 
    .. rubric:: Description
@@ -45,10 +34,10 @@ ormtr
 
    The routine multiplies a real matrix ``C`` by ``Q`` or
    ``Q``\ :sup:`T`, where ``Q`` is the orthogonal matrix ``Q`` formed by
-   `sytrd <sytrd.html>`__ when
+   :ref:`onemkl_lapack_sytrd` when
    reducing a real symmetric matrix ``A`` to tridiagonal form:
    ``A = Q*T*QT``. Use this routine after a call to
-   `sytrd <sytrd.html>`__.
+   :ref:`onemkl_lapack_sytrd`.
 
 
    Depending on the parameters left_right and trans, the routine can
@@ -56,8 +45,21 @@ ormtr
    ``C*QT`` (overwriting the result on ``C``).
 
 
+onemkl::lapack::ormtr (BUFFER Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::ormtr(cl::sycl::queue &queue, onemkl::side left_right,      onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,      cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1>      &c, std::int64_t ldc, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+
 .. container:: section
-   :name: GUID-26A5866D-0DF8-4835-8776-E5E73F0C657A
 
 
    .. rubric:: Input Parameters
@@ -81,7 +83,7 @@ ormtr
 
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -100,7 +102,7 @@ ormtr
    upper_lower
       Must be either ``uplo::upper`` or ``uplo::lower``. Uses the same
       ``upper_lower`` as supplied to
-      `sytrd <sytrd.html>`__.
+      :ref:`onemkl_lapack_sytrd`.
 
 
    trans
@@ -124,8 +126,8 @@ ormtr
 
 
    a
-      The buffer a returned by
-      `sytrd <sytrd.html>`__.
+      The buffer ``a`` as returned by
+      :ref:`onemkl_lapack_sytrd`.
 
 
    lda
@@ -133,8 +135,8 @@ ormtr
 
 
    tau
-      The buffer tau returned by
-      `sytrd <sytrd.html>`__. The
+      The buffer ``tau`` as returned by
+      :ref:`onemkl_lapack_sytrd`. The
       dimension of tau must be at least ``max(1, r-1)``.
 
 
@@ -147,13 +149,12 @@ ormtr
       The leading dimension of c\ ``(max(1, n) ≤ ldc)``.
 
 
-   lwork
-      The size of the work array ``(lwork≥n)``. Should be computed by
-      `ormtr_get_lwork <ormtr_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_ormtr_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-399F00E4-1E32-4114-AC10-5A1B420E474E
 
 
    .. rubric:: Output Parameters
@@ -165,36 +166,176 @@ ormtr
       (as specified by ``left_right`` and ``trans``).
 
 
-   work
-      Workspace for internal computations.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If ``info=0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
 
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+onemkl::lapack::ormtr (USM Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::ormtr(cl::sycl::queue &queue, onemkl::side left_right,      onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``ormtr``\ can be found in the oneMKL
-   installation directory, under:
+   In the descriptions below, ``r`` denotes the order of ``Q``:
 
 
-   ::
+   .. container:: tablenoborder
 
 
-      examples/sycl/lapack/ormtr.cpp
+      .. list-table:: 
+         :header-rows: 1
+
+         * -  ``r = m`` 
+           -  if ``left_right = side::left`` 
+         * -  ``r = n`` 
+           -  if ``left_right = side::right`` 
+
+
+
+
+   queue
+      The queue where the routine should be executed.
+
+
+   left_right
+      Must be either ``side::left`` or ``side::right``.
+
+
+      If ``left_right = side::left``, ``Q`` or ``Q``\ :sup:`T` is
+      applied to ``C`` from the left.
+
+
+      If ``left_right = side::right``, ``Q`` or ``Q``\ :sup:`T` is
+      applied to ``C`` from the right.
+
+
+   upper_lower
+      Must be either ``uplo::upper`` or ``uplo::lower``. Uses the same
+      ``upper_lower`` as supplied to
+      :ref:`onemkl_lapack_sytrd`.
+
+
+   trans
+      Must be either ``transpose::nontrans`` or ``transpose::trans``.
+
+
+      If ``trans = transpose::nontrans``, the routine multiplies ``C``
+      by ``Q``.
+
+
+      If ``trans = transpose::trans``, the routine multiplies ``C`` by
+      ``Q``\ :sup:`T`.
+
+
+   m
+      The number of rows in the matrix ``C``\ ``(m ≥ 0)``.
+
+
+   n
+      The number of columns in the matrix ``C``\ ``(n ≥ 0)``.
+
+
+   a
+      The pointer to ``a`` as returned by
+      :ref:`onemkl_lapack_sytrd`.
+
+
+   lda
+      The leading dimension of a\ ``(max(1, r) ≤ lda)``.
+
+
+   tau
+      The buffer ``tau`` as returned by
+      :ref:`onemkl_lapack_sytrd`. The
+      dimension of tau must be at least ``max(1, r-1)``.
+
+
+   c
+      The pointer to memory containing the matrix ``C``. The second dimension of ``c``
+      must be at least ``max(1, n)``.
+
+
+   ldc
+      The leading dimension of c\ ``(max(1, n) ≤ ldc)``.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_ormtr_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   c
+      Overwritten by the product ``Q*C``, ``QT*C``, ``C*Q``, or ``C*QT``
+      (as specified by ``left_right`` and ``trans``).
+
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -203,7 +344,6 @@ ormtr
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
 
 

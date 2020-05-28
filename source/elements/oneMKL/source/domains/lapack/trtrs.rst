@@ -1,25 +1,15 @@
+.. _onemkl_lapack_trtrs:
 
-trtrs
-=====
+onemkl::lapack::trtrs
+=====================
 
 
 .. container::
 
 
    Solves a system of linear equations with a triangular coefficient
-   matrix, with multiple right-hand sides. This routine belongs to the
-   ``onemkl::lapack``\ namespace.
+   matrix, with multiple right-hand sides.
 
-
-   .. container:: section
-      :name: GUID-DD05B917-D07A-4AB2-A4D0-C5F157BFA28E
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void trtrs(queue &exec_queue, uplo upper_lower,      trans transa, diag unit_diag, std::int64_t n, std::int64_t nrhs,      buffer<T,1> &a, std::int64_t lda, buffer<T,1> &b, std::int64_t      ldb, buffer<std::int64_t,1> &info)
 
       ``trtrs`` supports the following precisions.
 
@@ -37,7 +27,6 @@ trtrs
 
 
 .. container:: section
-   :name: GUID-E7948713-7484-46A3-84E0-F842AD2659CA
 
 
    .. rubric:: Description
@@ -65,105 +54,207 @@ trtrs
 
 
 
+onemkl::lapack::trtrs (BUFFER Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::trtrs(cl::sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t n, std::int64_t nrhs,      cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t      ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t      scratchpad_size)
+
 .. container:: section
-   :name: GUID-F99EDA15-1260-44DB-9525-A559CED5E2A5
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   .. list-table:: 
-      :header-rows: 1
+   queue
+      The queue where the routine should be executed.
 
-      * -     exec_queue    
-        -      The queue where the routine should be executed.    
-      * -     upper_lower    
-        -     Indicates whether ``A`` is upper or lower    triangular:      If upper_lower = ``uplo::upper``, then   ``A`` is upper triangular.      If upper_lower =   ``uplo::lower``, then ``A`` is lower triangular.   
-      * -     transa    
-        -     If transa = ``transpose::nontrans``, then    ``A``\ \*\ ``X`` = ``B`` is solved for ``X``.      If   transa = ``transpose::trans``, then ``A``\ :sup:`T`\ \*\ ``X`` =   ``B`` is solved for ``X``.      If transa =   ``transpose::conjtrans``, then ``A``\ :sup:`H`\ \*\ ``X`` = ``B`` is   solved for ``X``.   
-      * -     unit_diag    
-        -     If unit_diag = ``diag::nonunit``, then ``A`` is not a    unit triangular matrix.      If unit_diag = ``diag::unit``,   then ``A`` is unit triangular: diagonal elements of ``A`` are assumed   to be 1 and not referenced in the array a.   
-      * -     n    
-        -     The order of ``A``; the number of rows in ``B``;    n\ ``≥ 0``.    
-      * -     nrhs    
-        -     The number of right-hand sides; nrhs\ ``≥ 0``.    
-      * -     a    
-        -     Buffer containing the matrix ``A``.      The    second dimension of a must be at least ``max(1,n)``.   
-      * -     lda    
-        -     The leading dimension of ``a``;    lda\ ``≥ max(1, n)``.   
-      * -     b    
-        -     Buffer containing the matrix ``B`` whose columns are the    right-hand sides for the systems of equations.      The   second dimension of b at least ``max(1,nrhs)``.   
-      * -     ldb    
-        -     The leading dimension of b; ldb\ ``≥ max(1, n)``.    
+   upper_lower
+      Indicates whether ``A`` is upper or lower    triangular:
 
+         If upper_lower = ``uplo::upper``, then   ``A`` is upper triangular.
 
+         If upper_lower =   ``uplo::lower``, then ``A`` is lower triangular.
+
+   transa
+      If transa = ``transpose::nontrans``, then    ``A``\ \*\ ``X`` = ``B`` is solved for ``X``.
+
+      If   transa = ``transpose::trans``, then ``A``\ :sup:`T`\ \*\ ``X`` =   ``B`` is solved for ``X``.
+
+      If transa =   ``transpose::conjtrans``, then ``A``\ :sup:`H`\ \*\ ``X`` = ``B`` is   solved for ``X``.
+
+   unit_diag
+      If unit_diag = ``diag::nonunit``, then ``A`` is not a    unit triangular matrix.
+
+      If unit_diag = ``diag::unit``,   then ``A`` is unit triangular: diagonal elements of ``A`` are assumed   to be 1 and not referenced in the array a.
+
+   n
+      The order of ``A``; the number of rows in ``B``;    n\ ``≥ 0``.
+
+   nrhs
+      The number of right-hand sides; nrhs\ ``≥ 0``.
+
+   a
+      Buffer containing the matrix ``A``.      The    second dimension of a must be at least ``max(1,n)``.
+
+   lda
+      The leading dimension of ``a``;    lda\ ``≥ max(1, n)``.
+
+   b
+      Buffer containing the matrix ``B`` whose columns are the    right-hand sides for the systems of equations.      The   second dimension of b at least ``max(1,nrhs)``.
+
+   ldb
+      The leading dimension of b; ldb\ ``≥ max(1, n)``.
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_trtrs_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-CF353725-13B9-4B45-825A-3C027C1A376D
 
 
    .. rubric:: Output Parameters
       :class: sectiontitle
 
 
-   .. list-table:: 
-      :header-rows: 1
+   b
+      Overwritten by the solution matrix ``X``.
 
-      * -     b    
-        -     Overwritten by the solution matrix ``X``.    
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
+   .. container:: section
 
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+onemkl::lapack::trtrs (USM Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::trtrs(cl::sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t      scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-E8FCA070-A357-454F-BD90-DF91270C2E49
 
 
-   .. rubric:: Info
-      :name: info
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   info
-      Buffer containing error information.
+   queue
+      The queue where the routine should be executed.
 
+   upper_lower
+      Indicates whether ``A`` is upper or lower    triangular:
 
-      If ``info`` = 0, the execution is successful.
+         If upper_lower = ``uplo::upper``, then   ``A`` is upper triangular.
 
+         If upper_lower =   ``uplo::lower``, then ``A`` is lower triangular.
 
-      If ``info`` = -``i``, the ``i``-th parameter had an illegal value.
+   transa
+      If transa = ``transpose::nontrans``, then    ``A``\ \*\ ``X`` = ``B`` is solved for ``X``.
+
+      If   transa = ``transpose::trans``, then ``A``\ :sup:`T`\ \*\ ``X`` =   ``B`` is solved for ``X``.
+
+      If transa =   ``transpose::conjtrans``, then ``A``\ :sup:`H`\ \*\ ``X`` = ``B`` is   solved for ``X``.
+
+   unit_diag
+      If unit_diag = ``diag::nonunit``, then ``A`` is not a    unit triangular matrix.
+
+      If unit_diag = ``diag::unit``,   then ``A`` is unit triangular: diagonal elements of ``A`` are assumed   to be 1 and not referenced in the array a.
+
+   n
+      The order of ``A``; the number of rows in ``B``;    n\ ``≥ 0``.
+
+   nrhs
+      The number of right-hand sides; nrhs\ ``≥ 0``.
+
+   a
+      Array containing the matrix ``A``.      The    second dimension of a must be at least ``max(1,n)``.
+
+   lda
+      The leading dimension of ``a``;    lda\ ``≥ max(1, n)``.
+
+   b
+      Array containing the matrix ``B`` whose columns are the    right-hand sides for the systems of equations.      The   second dimension of b at least ``max(1,nrhs)``.
+
+   ldb
+      The leading dimension of b; ldb\ ``≥ max(1, n)``.
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_trtrs_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
 
 
 .. container:: section
-   :name: GUID-ACC30BA5-5BDE-4169-95F6-1390ECD55715
 
 
-   .. rubric:: Example
+   .. rubric:: Output Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``trtrs``\ can be found in the oneMKL
-   installation directory, under:
+   b
+      Overwritten by the solution matrix ``X``.
+
+   scratchpad
+      Pointer toscratchpad memory to be used by routine for storing intermediate results.
 
 
-   ::
+   .. container:: section
 
 
-      examples/sycl/lapack/trtrs.cpp
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-.. container:: section
-   :name: GUID-81F25E52-7E8D-4508-8696-46F51F0A972C
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-   .. rubric:: Known Limitations
-      :class: sectiontitle
+   .. container:: section
 
 
-   GPU support for this function does not include error reporting
-   through the ``info`` parameter.
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -172,7 +263,6 @@ trtrs
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
 
 
