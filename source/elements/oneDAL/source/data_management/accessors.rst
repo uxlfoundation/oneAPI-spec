@@ -14,14 +14,14 @@ This section defines `requirements <accessor_reqs_>`_ to an :ref:`accessor
 Requirements
 ------------
 
-An implementation of each accessor shall satisfy the following requirements:
+Each accessor implementation shall:
 
 1. Define a single :term:`format of the data <Data format>` for the
    accessor. Every single accessor type shall return and use only one data
    format.
 
-2. Allow it to have access to at least of one in-memory :ref:`dataset`
-   implementation (such as :code:`table`, its sub-types, or :ref:`table builders
+2. Provide an access to at least one in-memory :ref:`dataset` implementation
+   (such as :code:`table`, its sub-types, or :ref:`table builders
    <table-builder>`).
 
 3. Provide read-only, write-only, or read-write access to the data. If an
@@ -30,11 +30,13 @@ An implementation of each accessor shall satisfy the following requirements:
    object. For example, tables shall support a single read-only mode according
    to their :ref:`concept <table>` definition.
 
-4. Shall name reading and writing operations consistently. Their names
-   shall follow these patterns: :code:`pull_*()` for a reading operation
-   and :code:`push_*()` for a writing operation.
+4. Provide the names for read and write operations following the pattern:
 
-5. Shall be lightweight. Its constructors from :ref:`dataset` implementations
+   - :code:`pull_*()` for reading
+
+   - :code:`push_*()` for writing
+
+5. Be lightweight. Its constructors from :ref:`dataset` implementations
    shall not have heavy operations such as copy of data, reading, writing, any
    sort of conversions. These operations shall be performed by heavy operations
    :code:`pull_*()` and :code:`push_*()`. It is not necessary to have copy- or
@@ -62,12 +64,12 @@ implementations are supported by each accessor type.
      - List of supported types
    * - row_accessor_
      - Provides access to the range of dataset rows as one :term:`contiguous
-       <Contiguous data>` and :term:`homogeneous <Homogeneous data>` block of memory.
+       <Contiguous data>` :term:`homogeneous <Homogeneous data>` block of memory.
      - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
        :code:`csr_table`, and their builders.
    * - column_accessor_
      - Provides access to the range of values within a single column as one
-       :term:`contiguous <Contiguous data>` and :term:`homogeneous <Homogeneous
+       :term:`contiguous <Contiguous data>` :term:`homogeneous <Homogeneous
        data>` block of memory.
      - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
        :code:`csr_table`, and their builders.
