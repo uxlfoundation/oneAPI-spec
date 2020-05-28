@@ -29,6 +29,7 @@ oneDAL public identifiers are represented in the following header files:
        The string %UTIL% should be substituted with the auxiliary functionality name, for example, ``usm_allocator`` or ``type_traits``.
 
 
+.. _common_namespaces:
 
 ==========
 Namespaces
