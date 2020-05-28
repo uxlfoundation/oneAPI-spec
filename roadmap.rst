@@ -236,8 +236,10 @@ Date       Milestone
 
 - oneVPL
 
-  - 95% content
-    
+  - **Thank you for using oneAPI Video Processing Library.  Based on developer
+      feedback, we are revising oneVPL to make it even better.  Stay tuned for a new
+      oneVPL.  Thanks again!**
+  
 - oneMKL
 
   - All domains complete

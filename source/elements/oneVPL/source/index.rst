@@ -3,6 +3,10 @@
 
 .. _oneVPL-section:
 
+**Thank you for using oneAPI Video Processing Library.  Based on developer
+  feedback, we are revising oneVPL to make it even better.  Stay tuned for a new
+  oneVPL.  Thanks again!**
+
 ********************
 oneVPL |vpl_version|
 ********************
