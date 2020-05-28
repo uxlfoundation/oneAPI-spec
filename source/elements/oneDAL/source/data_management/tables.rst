@@ -1,93 +1,88 @@
 .. highlight:: cpp
 
+.. _tables:
+
 ======
 Tables
 ======
 
-Table is a generic |dal_short_name| concept over numerical data. It provides uniformed way
-to pass the data to the library as :ref:`inputs <Input>` or :ref:`parameters <Descriptor>` or get them as :ref:`results <Result>`.
+This section describes the types related to the :ref:`table <table>` and
+:ref:`metadata <metadata>` concepts. |dal_short_name| defines the following
+types that implement these concepts:
 
-Table object is a container of two entities: data and metadata.
+- The :code:`table` is a base class that implements the table concept and
+  provides capability to get a metadata. Each implementation of the :ref:`table
+  <table>` concept shall be derived from the :code:`table` class (for more
+  details, see :ref:`table_api`).
 
-- Data is organized in a shape of :math:`(N \times p)`,
-  where :math:`N` is a number of :term:`observations <Observation>` in a table and :math:`p`
-  is a number of :term:`features <Feature>`.
+- The :code:`table_meta` class implements the metadata concept for the
+  table. Each derived table type may provide its own implementation of the
+  :code:`table_meta` that extends the metadata concept (for more details, see
+  :ref:`Metadata API`).
 
-- Metadata defines the detailed structure of the data and,
-  therefore, helps |dal_short_name| to access the data efficiently
-  (see :ref:`Metadata API` section for details).
 
--------------------------------
-Table types in |dal_short_name|
--------------------------------
-|dal_short_name| defines a set of classes, each class implements a table contract
-with a specific set of metadata values (see :ref:`Metadata API` for details):
+------------
+Requirements
+------------
 
-.. list-table::
-  :header-rows: 1
+Each implementation of :ref:`table <table>` concept shall:
 
-  * - Table type
-    - :ref:`Data layout <Data layout API>`
-    - :ref:`Data format <Data format API>`
-    - Is contiguous
-    - Is homogeneous
-  * - homogen_table_
-    - row_major/column_major
-    - dense
-    - yes
-    - yes
-  * - soa_table_
-    - column_major
-    - dense
-    - yes
-    - yes/no
-  * - aos_table_
-    - row_major
-    - dense
-    - yes
-    - yes/no
-  * - csr_table_
-    - row_major
-    - csr
-    - yes
-    - yes
+1. Follow definition of the table concept.
 
------------------------------
-Requirements on table objects
------------------------------
-Each table object in |dal_short_name| follows these requirements:
+2. Be derived from the :code:`table` class. The behavior of this class can be
+   extended, but cannot be weaken.
 
-1. Table objects in |dal_short_name| are :term:`immutable <Immutability>` (it is not possible
-   to change data or metadata values inside the table).
+3. Provide an implementation of the :ref:`metadata <metadata>` concept derived
+   from the :code:`table_meta` class.
 
-2. To create complex table types or modify table data, :ref:`builders <Builders>` should be used.
+4. Be :term:`reference-counted <Reference-counted object>`. An assignment
+   operator or copy constructor shall be used to create another reference to the
+   same data.
 
-3. Table objects in |dal_short_name| are reference-counted. One can use an assignment operator or copy constructor
-   on table objects to create another reference to it.
-   ::
+   .. code-block:: cpp
 
       onedal::table table2 = table1;
-      // table1 and table2 share the data (no data copy is performed)
+      // table1 and table2 share the same data (no data copy is performed)
 
-      table3 = table2;
+      onedal::table table3 = table2;
       // table1, table2 and table3 share the same data
 
-4. Every table type must be inherited from the base ``table`` class,
-   which represents a generalized :ref:`table API <Table API>`.
 
-5. Every table type is implemented over particular set of metadata values and must hide other
-   implementation details from public API.
+-----------
+Table Types
+-----------
 
--------------------------------
-Entities and their dependencies
--------------------------------
+|dal_short_name| defines a set of classes. Each class implements the :ref:`table
+<table>` concept and represents a specific data format.
 
-This section describes dependencies between all the classes and structures
-related to tables.
+.. list-table::
+   :header-rows: 1
+   :widths: 10 70
 
-TBD
+   * - Table type
+     - Description
 
-.. _Table API:
+   * - :ref:`table <table_api>`
+     - A common implementation of the table concept. Base class for
+       other table types.
+
+   * - homogen_table_
+     - Dense table that contains :term:`contiguous <Contiguous data>`
+       :term:`homogeneous <Homogeneous data>` data.
+
+   * - soa_table_
+     - Dense heterogeneous table which data are stored column-by-column in a
+       list of contiguous arrays (structure-of-arrays format).
+
+   * - aos_table_
+     - Dense heterogeneous table which data are stored as one contiguous block
+       of memory (array-of-structures format).
+
+   * - csr_table_
+     - Sparse homogeneous table which data are stored in compressed sparse row
+       (CSR) format.
+
+.. _table_api:
 
 ---------
 Table API
@@ -331,7 +326,7 @@ are stored inside the table and how efficiently access them.
 
    .. member:: feature_info feature
 
-      Information about a particular :term:`feature` in the table
+      Information about a particular :term:`feature <Feature>` in the table
 
       Getter & Setter
          | ``const feature_info& get_feature(std::int64_t index) const``
@@ -415,12 +410,12 @@ Feature info
 .. namespace:: onedal
 .. class:: feature_info
 
-   Structure that represents information about particular :term:`feature`
+   Structure that represents information about particular :term:`feature <Feature>`
 
    Invariants:
       | ``feature_type::nominal`` or ``feature_type::ordinal``
-        are avaliable only with integer ``data_type``
-      | ``feature_type::contiguous`` avaliable only with floating-point ``data_type``
+        are available only with integer ``data_type``
+      | ``feature_type::contiguous`` available only with floating-point ``data_type``
 
 .. _Data type:
 

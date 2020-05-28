@@ -2,6 +2,8 @@
 Introduction
 ============
 
+.. _data_analytics_pipeline:
+
 |dal_full_name| (|dal_short_name|) is a library that provides building blocks covering all stages of data analytics: data acquisition
 from a data source, preprocessing, transformation, data mining, modeling, validation, and decision making.
 
@@ -18,13 +20,13 @@ communication technology and, therefore, can be used within different end-to-end
   :width: 800
   :alt: End to End Analytics Frameworks
 
-|dal_short_name| consists of the following major components: 
+|dal_short_name| consists of the following major components:
 
  - The :ref:`Data Management <data_management>` component includes classes and utilities for data acquisition, initial preprocessing and normalization,
    for data conversion into numeric formats (performed by one of supported Data Sources), and for model representation.
 
  - The :ref:`Algorithms <algorithms>` component consists of classes that implement algorithms for data analysis (data mining) and data modeling
-   (training and prediction). These algorithms include clustering, classification, regression, and recommendation algorithms. 
+   (training and prediction). These algorithms include clustering, classification, regression, and recommendation algorithms.
    Algorithms support the following computation modes:
 
    - :ref:`Batch processing <Batch>`: algorithms work with the entire data set to produce the final result
@@ -36,13 +38,13 @@ communication technology and, therefore, can be used within different end-to-end
 
      Distributed algorithms in |dal_short_name| are abstracted from underlying cross-device communication technology,
      which enables use of the library in a variety of multi-device computing and data transfer scenarios.
-   
+
    Depending on the usage, algorithms operate both on actual data (data set) and data models:
 
    - Analysis algorithms typically operate on data sets.
-   
+
    - Training algorithms typically operate on a data set to train an appropriate data model.
-   
+
    - Prediction algorithms typically work with the trained data model and with a working data set.
 
  - The **Utilities** component includes auxiliary functionality intended to be used for design of

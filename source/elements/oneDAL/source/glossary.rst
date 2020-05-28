@@ -198,6 +198,10 @@ Machine learning terms
 
         **Examples:** ``int32_t``, ``float``, ``double``
 
+    Flat data
+        A block of :term:`contiguous <contiguous data>` :term:`homogeneous
+        <homogeneous data>` data.
+
     Getter
         A method that returns the value of the private member variable.
 
