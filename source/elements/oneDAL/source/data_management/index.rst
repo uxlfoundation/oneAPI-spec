@@ -281,8 +281,8 @@ Algorithms' results also contain table objects. If one needs to change the data
 within some table, a builder object can be constructed for this. Data inside a
 table builder can be retrieved by read-only, write-only or read-write accessors.
 
-Accessors present on the diagram allows to get data uniformly from tables and
-table builders as :term:`flat <flat data>` blocks of rows.
+Accessors shown on the diagram allow to get data from tables and table builders
+as :term:`flat <flat data>` blocks of rows.
 
 Details
 =======
