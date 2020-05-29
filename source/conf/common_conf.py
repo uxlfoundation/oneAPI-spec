@@ -56,7 +56,7 @@ prolog_template = string.Template("""
 .. |vpl_version| replace:: $oneapi_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
-.. _`Level Zero Specification`: https://spec.oneapi.com/versions/$oneapi_version/oneL0/index.html
+.. _`Level Zero Specification`: https://spec.oneapi.com/level-zero/latest/index.html
 """)
 
 rst_prolog = prolog_template.substitute(env)
