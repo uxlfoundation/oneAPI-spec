@@ -12,6 +12,7 @@ Version    Date        Notes
 0.6.0_     01/30/2020  Open source Release
 0.7.0_     03/26/2020  50% content
 0.8.0_     05/28/2020  80% content
+0.8.5_     06/26/2020  85% content
 0.9.0_     07/30/2020  Final Gold Preview
 1.0.0_     08/30/2020  Gold Release
 ========   ==========  ===========
@@ -145,6 +146,7 @@ Date       Milestone
 
 - oneDNN
 
+  - API's 95% complete
   - Rework API presentation into multiple sections
   - Add introduction, execution, primitive lifecycle, and programming model
     sections
@@ -171,6 +173,7 @@ Date       Milestone
     
 - oneMKL
 
+  - USM support
   - Skeleton of spec, breadown by domain
   - Sections that apply to all domains
   - subset of domains with high-level description and APIs, as determined by open source schedule
@@ -218,11 +221,13 @@ Date       Milestone
   - Extend page with collective operations
 
 - Level Zero
+
+  - Command queue groups, module linking, extensions, and improved profiling support
   
 - oneDAL
 
-  - Extend API description to 18 algorithms
-  - Add first version for sections on programming model, algorithmics
+  - Extend API description to kNN classification
+  - Add first version for sections on error handling, namespaces, terminology, math notations
   - Extend numeric tables and data structure sections
 
 - oneTBB
@@ -231,13 +236,24 @@ Date       Milestone
 
 - oneVPL
 
-  - 95% content
-    
+  - Updates deferred to 0.8.5_
+  
 - oneMKL
 
   - All domains complete
+  - Finalized BLAS, LAPACK domains
   - Draft suitable for review so we can distribute to reviewers before
     ISC (6/28/2020).
+
+0.8.5
+-----
+
+Summary
++++++++
+
+- oneVPL
+
+  - Breaking changes introduced.
 
 0.9.0
 -----
@@ -277,15 +293,19 @@ Elements
 
   - Finish extending individual primitives' pages with detailed information
     about underlying math and with usage examples
+  - explanation of principles complete
 
 - oneCCL
 
   - Finalize on sections content and details
 
 - Level Zero
+
+  - 1.0 release, support for OpenCL interoperability
   
 - oneDAL
 
+  - Extend algorithms section to cover Random Forest, K-Means, SVM, PCA algorithms
   - Finalize on sections content and details
 
 - oneTBB
@@ -296,6 +316,8 @@ Elements
 - oneVPL
 
 - oneMKL
+
+  - finalize FFT, sparse BLAS, RNG, and VM domains
   
 1.0.0
 -----

@@ -36,7 +36,7 @@ onemkl::sparse::gemv
       **Using USM pointers:**
 
 
-      .. cpp:function::  void onemkl::sparse::gemv (cl::sycl::queue & queue,      onemkl::transpose transpose_val, fp alpha, matrixHandle_t handle, fp      \*x, fp beta, fp \*y)
+      .. cpp:function::  void onemkl::sparse::gemv (cl::sycl::queue & queue,      onemkl::transpose transpose_val, fp alpha, matrixHandle_t handle, fp      *x, fp beta, fp *y)
 
       .. rubric:: Include Files
          :class: sectiontitle

@@ -1,3 +1,4 @@
+.. _onemkl_blas_hemm:
 
 hemm
 ====
@@ -10,17 +11,8 @@ hemm
    and one is general.
 
 
-   .. container:: section
-      :name: GUID-F06C86BA-4F57-4608-B0D7-F7B920F867D7
 
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void hemm(queue &exec_queue, side left_right,      uplo upper_lower, std::int64_t m, std::int64_t n, T alpha,      buffer<T,1> &a, std::int64_t lda, buffer<T,1> &b, std::int64_t      ldb, T beta, buffer<T,1> &c, std::int64_t ldc)
-
-      hemm supports the following precisions:
+      ``hemm`` supports the following precisions:
 
 
       .. list-table:: 
@@ -34,14 +26,13 @@ hemm
 
 
 .. container:: section
-   :name: GUID-835E7F58-406E-444F-9DFD-121B84C22284
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The hemm routines compute a scalar-matrix-matrix product and add the
+   The ``hemm`` routines compute a scalar-matrix-matrix product and add the
    result to a scalar-matrix product, where one of the matrices in the
    multiplication is Hermitian. The argument ``left_right`` determines
    if the Hermitian matrix, ``A``, is on the left of the multiplication
@@ -50,16 +41,11 @@ hemm
    defined as
 
 
-  
-
 
       C <- alpha*A*B + beta*C
 
 
    or
-
-
-  
 
 
       C <- alpha*B*A + beta*C
@@ -78,30 +64,40 @@ hemm
    ``B`` and ``C`` are ``m``-by-``n`` matrices.
 
 
+hemm (Buffer Version)
+---------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::blas::hemm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
 .. container:: section
-   :name: GUID-922C5F92-38B2-457B-B6C7-3CDD0531F97D
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
    left_right
       Specifies whether ``A`` is on the left side of the multiplication
-      (``side::left``) or on the right side (``side::right``). See
-      :ref:`onemkl_datatypes` for more
-      details.
+      (``side::left``) or on the right side (``side::right``). See :ref:`onemkl_datatypes` for more details.
+
 
 
    uplo
       Specifies whether ``A``'s data is stored in its upper or lower
-      triangle. See
-      :ref:`onemkl_datatypes` for more
-      details.
+      triangle. See :ref:`onemkl_datatypes` for more details.
+
 
 
    m
@@ -163,16 +159,10 @@ hemm
 
 
 .. container:: section
-   :name: GUID-94385C78-968D-4C03-AA5C-7379D5607800
 
 
    .. rubric:: Output Parameters
       :class: sectiontitle
-
-
-   
-       
-
 
 
    c
@@ -183,7 +173,6 @@ hemm
 
 
 .. container:: section
-   :name: EXAMPLE_5EF48B8A07D849EA84A74FE22F0D5B24
 
 
    .. rubric:: Notes
@@ -194,6 +183,148 @@ hemm
    calling ``hemm``.
 
 
+hemm (USM Version)
+------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  sycl::event onemkl::blas::hemm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+   .. container:: section
+
+
+      .. rubric:: Input Parameters
+         :class: sectiontitle
+
+
+      queue
+         The queue where the routine should be executed.
+
+
+      left_right
+         Specifies whether ``A`` is on the left side of the
+         multiplication (``side::left``) or on the right side
+         (``side::right``). See :ref:`onemkl_datatypes` for more details.
+
+
+
+      uplo
+         Specifies whether ``A``'s data is stored in its upper or lower
+         triangle. See :ref:`onemkl_datatypes` for more details.
+
+
+
+      m
+         Specifies the number of rows of the matrix ``B`` and ``C``.
+
+
+         The value of ``m`` must be at least zero.
+
+
+      n
+         Specifies the number of columns of the matrix ``B`` and ``C``.
+
+
+         The value of ``n`` must be at least zero.
+
+
+      alpha
+         Scaling factor for the matrix-matrix product.
+
+
+      a
+         Pointer to input matrix ``A``. Must have size at least
+         ``lda``\ \*\ ``m`` if ``A`` is on the left of the
+         multiplication, or ``lda``\ \*\ ``n`` if ``A`` is on the right.
+         See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+      lda
+         Leading dimension of ``A``. Must be at least ``m`` if ``A`` is
+         on the left of the multiplication, or at least ``n`` if ``A``
+         is on the right. Must be positive.
+
+
+      b
+         Pointer to input matrix ``B``. Must have size at least
+         ``ldb``\ \*\ ``n``. See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+      ldb
+         Leading dimension of ``B``. Must be positive and at least
+         ``m``.
+
+
+      beta
+         Scaling factor for matrix ``C``.
+
+
+      c
+         Pointer to input/output matrix ``C``. Must have size at least
+         ``ldc``\ \*\ ``n``. See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for
+         more details.
+
+
+      ldc
+         Leading dimension of ``C``. Must be positive and at least
+         ``m``.
+
+
+      dependencies
+         List of events to wait for before starting computation, if any.
+         If omitted, defaults to no dependencies.
+
+
+   .. container:: section
+
+
+      .. rubric:: Output Parameters
+         :class: sectiontitle
+
+
+      c
+         Pointer to the output matrix, overwritten by
+         ``alpha``\ \*\ ``A``\ \*\ ``B`` + ``beta``\ \*\ ``C``
+         (``left_right`` = ``side::left``) or
+         ``alpha``\ \*\ ``B``\ \*\ ``A`` + ``beta``\ \*\ ``C``
+         (``left_right`` = ``side::right``).
+
+
+   .. container:: section
+
+
+      .. rubric:: Notes
+         :class: sectiontitle
+
+
+      If ``beta`` = 0, matrix ``C`` does not need to be initialized
+      before calling ``hemm``.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
+
+
 .. container:: familylinks
 
 
@@ -201,6 +332,3 @@ hemm
 
 
       **Parent topic:** :ref:`blas-level-3-routines`
-      
-
-

@@ -22,21 +22,16 @@ onemkl::rng::r250
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class r250 : internal::engine_base<r250>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  r250 (cl::sycl::queue& queue, std::uint32_t         seed)
-
-         .. cpp:function::  r250 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-
-         .. cpp:function::  r250 (const r250& other)
-
-         .. cpp:function::  r250& operator=(const r250& other)
-
-         .. cpp:function::  ~r250()
-
-         .. cpp:function::  }
+         ::
+	    
+           class r250 : internal::engine_base<r250>{
+           public:
+             r250 (cl::sycl::queue& queue, std::uint32_t         seed)
+             r250 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
+             r250 (const r250& other)
+             r250& operator=(const r250& other)
+             ~r250()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle

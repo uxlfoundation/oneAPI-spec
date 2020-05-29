@@ -18,23 +18,17 @@ onemkl::rng::multinomial
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = poisson_inverse>
-
-      .. cpp:function::  class multinomial {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  multinomial(double ntrial, std::vector<double>      p)
-
-      .. cpp:function::  multinomial(const multinomial<T, Method>& other)
-
-      .. cpp:function::  std::int32_t ntrial() const
-
-      .. cpp:function::  std::vector<double> p() const
-
-      .. cpp:function::  multinomial<T, Method>& operator=(const      multinomial<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = poisson_inverse>
+          class multinomial {
+          public:
+            multinomial(double ntrial, std::vector<double>      p)
+            multinomial(const multinomial<T, Method>& other)
+            std::int32_t ntrial() const
+            std::vector<double> p() const
+            multinomial<T, Method>& operator=(const      multinomial<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

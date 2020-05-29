@@ -22,21 +22,16 @@ onemkl::rng::niederreiter
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class niederreiter :         internal::engine_base<niederreiter>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  niederreiter (cl::sycl::queue& queue,         std::uint32_t dimensions)
-
-         .. cpp:function::  niederreiter (cl::sycl::queue& queue,         std::vector<std::uint32_t> irred_polynomials)
-
-         .. cpp:function::  niederreiter (const niederreiter& other)
-
-         .. cpp:function::  niederreiter& operator=(const niederreiter&         other)
-
-         .. cpp:function::  ~niederreiter()
-
-         .. cpp:function::  }
+         ::
+	    
+           class niederreiter :         internal::engine_base<niederreiter>{
+           public:
+             niederreiter (cl::sycl::queue& queue,         std::uint32_t dimensions)
+             niederreiter (cl::sycl::queue& queue,         std::vector<std::uint32_t> irred_polynomials)
+             niederreiter (const niederreiter& other)
+             niederreiter& operator=(const niederreiter&         other)
+             ~niederreiter()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle

@@ -21,9 +21,10 @@ onemkl::rng::bits
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  template<typename T = std::uint32_t, method         Method = standard>
+         ::
 
-         .. cpp:function::  class bits {}
+           template<typename T = std::uint32_t, method Method = standard>
+             class bits {}
 
          .. rubric:: Include Files
             :class: sectiontitle

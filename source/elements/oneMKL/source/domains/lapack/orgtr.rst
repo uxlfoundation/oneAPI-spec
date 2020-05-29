@@ -1,25 +1,15 @@
+.. _onemkl_lapack_orgtr:
 
-orgtr
-=====
+onemkl::lapack::orgtr
+=====================
 
 
 .. container::
 
 
    Generates the real orthogonal matrix Q determined by
-   `?sytrd <sytrd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   :ref:`onemkl_lapack_sytrd`.
 
-
-   .. container:: section
-      :name: GUID-76E7621F-DE84-46C0-A273-B1526247494F
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void orgtr(queue &exec_queue, uplo upper_lower,      std::int64_t n, buffer<T,1> &a, std::int64_t lda, buffer<T,1>      &tau, buffer<T,1> &work, std::int64_t lwork,      buffer<std::int64_t,1> &info)
 
       ``orgtr`` supports the following precisions.
 
@@ -35,7 +25,6 @@ orgtr
 
 
 .. container:: section
-   :name: GUID-EB340156-9410-4811-B15A-75F220C2D2D7
 
 
    .. rubric:: Description
@@ -44,28 +33,41 @@ orgtr
 
    The routine explicitly generates the ``n``-by-``n`` orthogonal matrix
    ``Q`` formed by
-   `sytrd <sytrd.html>`__ when
+   :ref:`onemkl_lapack_sytrd` when
    reducing a real symmetric matrix ``A`` to tridiagonal form:
    ``A = Q*T*QT``. Use this routine after a call to
-   `sytrd <sytrd.html>`__.
+   :ref:`onemkl_lapack_sytrd`.
 
+
+onemkl::lapack::orgtr (BUFFER Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::orgtr(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1>      &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-26A5866D-0DF8-4835-8776-E5E73F0C657A
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
    upper_lower
       Must be ``uplo::upper`` or ``uplo::lower``. Uses the same
       ``upper_lower`` as supplied
-      to\ `sytrd <sytrd.html>`__
+      to :ref:`onemkl_lapack_sytrd`.
 
 
    n
@@ -73,8 +75,8 @@ orgtr
 
 
    a
-      The buffer a returned by
-      `sytrd <sytrd.html>`__. The
+      The buffer ``a`` as returned by
+      :ref:`onemkl_lapack_sytrd`. The
       second dimension of a must be at least ``max(1,n)``.
 
 
@@ -83,18 +85,17 @@ orgtr
 
 
    tau
-      The buffer tau returned by
-      `sytrd <sytrd.html>`__. The
+      The buffer ``tau`` as returned by
+      :ref:`onemkl_lapack_sytrd`. The
       dimension of tau must be at least ``max(1, n-1)``.
 
 
-   lwork
-      The size of the work array ``(lwork≥n)``. Should be computed by
-      `orgtr_get_lwork <orgtr_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_orgtr_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
    .. rubric:: Output Parameters
@@ -105,36 +106,122 @@ orgtr
       Overwritten by the orthogonal matrix ``Q``.
 
 
-   work
-      Workspace for internal computations.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If ``info=0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
 
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+onemkl::lapack::orgtr (USM Version)
+--------------------------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::orgtr(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``orgtr``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
 
 
-   ::
+   upper_lower
+      Must be ``uplo::upper`` or ``uplo::lower``. Uses the same
+      ``upper_lower`` as supplied
+      to :ref:`onemkl_lapack_sytrd`.
 
 
-      examples/sycl/lapack/orgtr.cpp
+   n
+      The order of the matrix ``Q``\ ``(0≤n)``.
+
+
+   a
+      The pointer to ``a`` as returned by
+      :ref:`onemkl_lapack_sytrd`. The
+      second dimension of a must be at least ``max(1,n)``.
+
+
+   lda
+      The leading dimension of a\ ``(n≤lda)``.
+
+
+   tau
+      The pointer to ``tau`` as returned by
+      :ref:`onemkl_lapack_sytrd`. The
+      dimension of tau must be at least ``max(1, n-1)``.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_orgtr_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      Overwritten by the orthogonal matrix ``Q``.
+
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -143,7 +230,6 @@ orgtr
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
 
 

@@ -21,7 +21,7 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::commit
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.Commit         (cl::sycl::queue &in ) 
+         .. cpp:function::  onemkl::dft::ErrCode Commit(cl::sycl::queue &in ) 
 
          .. rubric:: Include Files
             :class: sectiontitle

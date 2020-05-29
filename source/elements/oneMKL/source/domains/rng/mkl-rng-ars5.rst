@@ -23,21 +23,17 @@ onemkl::rng::ars5
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class ars5 : internal::engine_base<ars5>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  ars5 (cl::sycl::queue& queue, std::uint64_t         seed)
-
-         .. cpp:function::  ars5 (cl::sycl::queue& queue,         std::initializer_list<std::uint64_t> seed)
-
-         .. cpp:function::  ars5 (const ars5& other)
-
-         .. cpp:function::  ars5& operator=(const ars5& other)
-
-         .. cpp:function::  ~ars5()
-
-         .. cpp:function::  }
+		  
+         ::
+	    
+             class ars5 : internal::engine_base<ars5>{
+             public:
+               ars5 (cl::sycl::queue& queue, std::uint64_t seed)
+               ars5 (cl::sycl::queue& queue, std::initializer_list<std::uint64_t> seed)
+               ars5 (const ars5& other)
+               ars5& operator=(const ars5& other)
+               ~ars5()
+             }
 
          .. rubric:: Include Files
             :class: sectiontitle

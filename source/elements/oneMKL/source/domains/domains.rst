@@ -1,7 +1,7 @@
 .. _onemkl_domains:
 
-oneMKL Domain Interfaces
-========================
+oneMKL Domains
+================
 
 This section describes the Data Parallel C++ (DPC++) interface.
 

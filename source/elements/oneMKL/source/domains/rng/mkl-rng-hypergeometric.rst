@@ -18,27 +18,19 @@ onemkl::rng::hypergeometric
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = h2pe>
-
-      .. cpp:function::  class hypergeometric {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  hypergeometric(): hypergeometric(1, 1, 1){}
-
-      .. cpp:function::  hypergeometric(std::int32_t l, std::int32_T s,      std::int32_T m)
-
-      .. cpp:function::  hypergeometric(const hypergeometric<T, Method>&      other)
-
-      .. cpp:function::  std::int32_t s() const
-
-      .. cpp:function::  std::int32_t m() const
-
-      .. cpp:function::  std::int32_t l() const
-
-      .. cpp:function::  hypergeometric<T, Method>& operator=(const      laplace<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = h2pe>
+          class hypergeometric {
+          public:
+            hypergeometric(): hypergeometric(1, 1, 1){}
+            hypergeometric(std::int32_t l, std::int32_T s,      std::int32_T m)
+            hypergeometric(const hypergeometric<T, Method>&      other)
+            std::int32_t s() const
+            std::int32_t m() const
+            std::int32_t l() const
+            hypergeometric<T, Method>& operator=(const      laplace<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

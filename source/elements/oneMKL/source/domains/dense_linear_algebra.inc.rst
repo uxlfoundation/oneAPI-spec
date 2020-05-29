@@ -9,7 +9,7 @@ This section contains information about dense linear algebra routines:
 
 :ref:`onemkl_blas` provides vector, matrix-vector, and matrix-matrix routines for dense matrices and vector operations.
 
-:ref:`onemkl_lapack` provides more complex dense linear algebra routines, e.g., solving dense systems of linear equations, least square problems, eigenvalue, singular value problems, and Sylvester's equations.
+:ref:`onemkl_lapack` provides more complex dense linear algebra routines, e.g., matrix factorization, solving dense systems of linear equations, least square problems, eigenvalue and singular value problems, and performing a number of related computational tasks.
 
 .. toctree::
     :hidden:

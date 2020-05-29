@@ -22,19 +22,15 @@ onemkl::rng::mrg32k3a
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  class mrg32k3a:         internal::engine_base<mrg32k3a>{
-
-         .. cpp:function::  public:
-
-         .. cpp:function::  mrg32k3a (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-
-         .. cpp:function::  mrg32k3a (const mrg32k3a& other)
-
-         .. cpp:function::  mrg32k3a& operator=(const mrg32k3a& other)
-
-         .. cpp:function::  mrg32k3a()
-
-         .. cpp:function::  }
+         ::
+	    
+           class mrg32k3a:         internal::engine_base<mrg32k3a>{
+           public:
+             mrg32k3a (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
+             mrg32k3a (const mrg32k3a& other)
+             mrg32k3a& operator=(const mrg32k3a& other)
+             mrg32k3a()
+           }
 
          .. rubric:: Include Files
             :class: sectiontitle

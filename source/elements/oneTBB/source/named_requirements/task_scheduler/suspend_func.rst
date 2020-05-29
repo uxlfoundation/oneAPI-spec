@@ -1,0 +1,23 @@
+===========
+SuspendFunc
+===========
+**[req.suspend_func]**
+
+A type `Func` satisfies the `SuspendFunc` if it meets the following requirements:
+
+----------------------------------------------------------------------
+
+**SuspendFunc Requirements: Pseudo-Signature, Semantics**
+
+.. cpp:function:: Func::Func( const Func& )
+
+    Copy constructor.
+
+.. cpp:function:: void Func::operator()( tbb::task::suspend_point )
+
+    Body that accepts the current task execution point to resume later.
+
+See also:
+
+* :doc:`resumable tasks <../../task_scheduler/scheduling_controls/resumable_tasks>`
+

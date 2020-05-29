@@ -6,4 +6,7 @@
    :maxdepth: 2
 
    intro.rst
-   general.rst
+   notation.rst
+   identifiers.rst
+   named_requirements.rst
+   thread_safety.rst

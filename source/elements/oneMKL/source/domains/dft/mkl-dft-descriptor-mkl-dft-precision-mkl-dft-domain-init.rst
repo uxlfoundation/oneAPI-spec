@@ -22,7 +22,7 @@ onemkl::dft::Descriptor<onemkl::dft::Precision, onemkl::dft::Domain>::Init
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  onemkl::dft::ErrCode descriptor.init (dimension )         
+         .. cpp:function::  onemkl::dft::ErrCode init (dimension )         
 
          .. rubric:: Include Files
             :class: sectiontitle

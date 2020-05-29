@@ -110,8 +110,7 @@ A brief summary of the extensions is as follows:
    the ability to create allocations that are visible and have consistent pointer values across both
    host and device(s).  Different USM capability levels are defined, corresponding to different levels
    of device and implementation support.
--  In-order queues - defines simple in-order semantics for queues, to simplify common coding patterns.  Adds
-   the *ordered_queue* class.
+-  In-order queues - defines simple in-order semantics for queues, to simplify common coding patterns.
 -  Optional lambda name - removes requirement to manually name lambdas that define kernels.
    Simplifies coding and enables composability with libraries.  Lambdas can still be manually named, if
    desired, such as when debugging or interfacing with a sycl::program object.

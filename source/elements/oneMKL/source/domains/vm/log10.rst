@@ -25,7 +25,7 @@ log10
       USM API:
 
 
-      .. cpp:function::  event log10(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event log10(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``log10`` supports the following precisions.
 

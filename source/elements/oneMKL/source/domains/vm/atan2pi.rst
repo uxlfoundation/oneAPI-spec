@@ -26,7 +26,7 @@ atan2pi
       USM API:
 
 
-      .. cpp:function::  event atan2pi(queue& exec_queue, int64_t n, T\*      a, T\* b, T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function::  event atan2pi(queue& exec_queue, int64_t n, T*      a, T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
 
       ``atan2pi`` supports the following precisions.
 

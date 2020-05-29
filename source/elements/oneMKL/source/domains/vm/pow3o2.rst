@@ -25,7 +25,7 @@ pow3o2
       USM API:
 
 
-      .. cpp:function::  event pow3o2(queue& exec_queue, int64_t n, T\* a,      T\* y, vector_class<event>\* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function::  event pow3o2(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
 
       ``pow3o2`` supports the following precisions.
 

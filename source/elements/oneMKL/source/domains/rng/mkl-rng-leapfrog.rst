@@ -18,9 +18,7 @@ onemkl::rng::leapfrog
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename EngineType>
-
-      .. cpp:function::  void leapfrog (EngineType& engine, std::uint64_t      idx, std::uint64_t stride)
+      .. cpp:function:: template<typename EngineType> void leapfrog (EngineType& engine, std::uint64_t      idx, std::uint64_t stride)
 
       .. rubric:: Include Files
          :class: sectiontitle

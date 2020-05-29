@@ -1,4 +1,15 @@
+import os
+import sys
 import string
+
+def path_relative_to_repo_root(relative_path):
+    this_dir = os.path.dirname(os.path.realpath(__file__))
+    root_dir = os.path.abspath(os.path.join(this_dir, '../..'))
+    return os.path.abspath(os.path.join(root_dir, relative_path))
+
+# oneDAL uses custom API generator based on `breathe`.
+# Extend path to let Sphinx find `dalapi` module:
+sys.path.insert(0, path_relative_to_repo_root('source/elements/oneDAL'))
 
 extensions = [
     'notfound.extension',
@@ -13,8 +24,10 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.graphviz',
     'sphinxcontrib.spelling',
+    'sphinx-prompt',
     'sphinx_substitution_extensions',
     'breathe',
+    'dalapi', # oneDAL API generator
 ]
 
 env = {
@@ -43,7 +56,7 @@ prolog_template = string.Template("""
 .. |vpl_version| replace:: $oneapi_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
-.. _`Level Zero Specification`: https://spec.oneapi.com/versions/$oneapi_version/oneL0/index.html
+.. _`Level Zero Specification`: https://spec.oneapi.com/level-zero/latest/index.html
 """)
 
 rst_prolog = prolog_template.substitute(env)

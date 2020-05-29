@@ -31,16 +31,12 @@ onemkl::rng::skip_ahead
       **Common Interface**
 
 
-      .. cpp:function::  template<typename EngineType>
-
-      .. cpp:function::  void skip_ahead (EngineType& engine,      std::uint64_t num_to_skip)
+      .. cpp:function::  template<typename EngineType> void skip_ahead (EngineType& engine,      std::uint64_t num_to_skip)
 
       **Interface with Partitioned Number of Skipped Elements**
 
 
-      .. cpp:function::  template<typename EngineType>
-
-      .. cpp:function::  void skip_ahead (EngineType& engine,      std::initializer_list<std::uint64_t> num_to_skip)
+      .. cpp:function::  template<typename EngineType> void skip_ahead (EngineType& engine,      std::initializer_list<std::uint64_t> num_to_skip)
 
       .. rubric:: Include Files
          :class: sectiontitle

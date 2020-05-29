@@ -26,7 +26,7 @@ linearfrac
       USM API:
 
 
-      .. cpp:function::  event linearfrac(queue& exec_queue, int64_t n,      T\* a, T\* b, T scalea, T shifta, T scaleb, T shiftb, T\* y,      vector_class<event>\* depends, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function::  event linearfrac(queue& exec_queue, int64_t n,      T* a, T* b, T scalea, T shifta, T scaleb, T shiftb, T* y,      vector_class<event>* depends, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
 
       ``linearfrac`` supports the following precisions.
 

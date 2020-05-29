@@ -18,23 +18,17 @@ onemkl::rng::geometric
          :class: sectiontitle
 
 
-      .. cpp:function::  template<typename T = std::int32_t, method Method      = inverse_function>
-
-      .. cpp:function::  class geometric {
-
-      .. cpp:function::  public:
-
-      .. cpp:function::  geometric(): geometric(0.5){}
-
-      .. cpp:function::  geometric(double p)
-
-      .. cpp:function::  geometric(const geometric<T, Method>& other)
-
-      .. cpp:function::  double p() const
-
-      .. cpp:function::  geometric<T, Method>& operator=(const      geometric<T, Method>& other)
-
-      .. cpp:function::  }
+      ::
+	 
+        template<typename T = std::int32_t, method Method      = inverse_function>
+          class geometric {
+          public:
+            geometric(): geometric(0.5){}
+            geometric(double p)
+            geometric(const geometric<T, Method>& other)
+            double p() const
+            geometric<T, Method>& operator=(const      geometric<T, Method>& other)
+          }
 
       .. rubric:: Include Files
          :class: sectiontitle

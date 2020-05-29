@@ -39,14 +39,17 @@ clear_status
          * -  Status 
            -  Description 
          * -  Successful Execution 
+           -   
          * -  ``status::success`` 
            -  VM function execution completed successfully 
          * -  ``status::not_defined`` 
            -  VM status not defined 
          * -  Warnings 
+           -   
          * -  ``status::accuracy_warning`` 
            -  VM function execution completed successfully in a different       accuracy mode
          * -  Computational Errors 
+           -   
          * -  ``status::errdom`` 
            -  Values are out of a range of definition producing invalid       (QNaN) result
          * -  ``status::sing`` 
