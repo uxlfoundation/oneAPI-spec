@@ -7,8 +7,8 @@
 
 .. _oneDNN-section:
 
-oneDNN |dnn_version|
-====================
+oneDNN
+======
 
 |dnn_full_name| (oneDNN) is a performance library containing building blocks
 for for deep learning applications and frameworks. oneDNN supports:
