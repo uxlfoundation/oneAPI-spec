@@ -120,11 +120,16 @@ def sphinx(root, target):
     if not args.verbose:
         os.environ['LATEXMKOPTS'] = '--silent'
         os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
+    sphinx_args = ''
+    if not args.verbose:
+        sphinx_args += ' -q'
+    if args.a:
+        sphinx_args += ' -a'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
                                  join(root,build_dir),
-                                 '' if args.verbose else '-q'))
+                                 sphinx_args))
 
 def get_env(var):
     return os.environ[var] if var in os.environ else ''
@@ -389,6 +394,7 @@ def main():
     parser.add_argument('--branch')
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
+    parser.add_argument('-a', action='store_true')
     args = parser.parse_args()
 
     commands[args.action](args.root, args.action)

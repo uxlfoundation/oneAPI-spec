@@ -3,13 +3,13 @@
 
 .. _oneVPL-section:
 
-**Thank you for using oneAPI Video Processing Library.  Based on developer
-  feedback, we are revising oneVPL to make it even better.  Stay tuned for a new
-  oneVPL.  Thanks again!**
-
 ********************
 oneVPL |vpl_version|
 ********************
+
+**Thank you for using oneAPI Video Processing Library.  Based on developer
+  feedback, we are revising oneVPL to make it even better.  Stay tuned for a new
+  oneVPL.  Thanks again!**
 
 The |vpl_full_name| is a programming interface for video processing and video analytics,
 focusing on building portable media pipeline on CPU, GPU, Deep Learning (DL) 
