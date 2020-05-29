@@ -1,8 +1,8 @@
 .. _oneCCL-section:
 
-====================
-oneCCL |ccl_version|
-====================
+======
+oneCCL
+======
 
 .. toctree::
 

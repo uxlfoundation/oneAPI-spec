@@ -16,28 +16,35 @@ updates.
   ========  ==========  =========
   Version   Date        View                                                                                                            
   ========  ==========  =========
+  `0.8`_    05/29/2020  `HTML <https://spec.oneapi.com/versions/0.8/>`__ `PDF <https://spec.oneapi.com/versions/0.8/oneAPI-spec.pdf>`__
   `0.7`_    03/26/2020  `HTML <https://spec.oneapi.com/versions/0.7/>`__ `PDF <https://spec.oneapi.com/versions/0.7/oneAPI-spec.pdf>`__
   `0.5`_    11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0/>`__                                                                
   ========  ==========  =========
 
-Every component has its own version. This table shows the relationship
-between oneAPI version and component versions.
-
-.. table:: Component Versions Table
-	   
-  +---------+------------+--------+--------+--------+--------+--------+--------+--------+--------+
-  | oneAPI  | Level Zero | DPC++  | oneDPL | oneDNN | oneCCL | oneDAL | oneTBB | oneVPL | oneMKL |
-  +=========+============+========+========+========+========+========+========+========+========+
-  | `0.7`_  | .91        | 0.7                                                                   |
-  +---------+------------+--------+--------+--------+--------+--------+--------+--------+--------+
-  | `0.5`_  | 0.5                                                                                |
-  +---------+------------+--------+--------+--------+--------+--------+--------+--------+--------+
-
 Release Notes
 =============
 
+0.8
+---
+
 0.7
 ---
+
+* DPC++: 10 new language extensions including performance features
+  like sub-groups and atomics, as well as features to allow more
+  concise programs.
+* oneDNN: Major restructuring of the document, with high-level
+  introduction to the concepts
+* Level Zero: Updated to 0.91. Open source release of driver
+  implementing the specification
+* oneDAL: Major restructuring of the document, with high-level
+  introduction to the concepts
+* oneVPL: Added support for device selection, context sharing,
+  workstream presets and configurations, video processing and encoding
+  APIs to easily construct a video processing pipeline.
+* oneMKL: Added USM APIs. Major restructuring of document. Added
+  architecture section with overview of execution model, memory model
+  and API design.
 
 0.5
 ---

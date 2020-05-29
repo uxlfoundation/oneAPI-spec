@@ -120,11 +120,13 @@ def sphinx(root, target):
     if not args.verbose:
         os.environ['LATEXMKOPTS'] = '--silent'
         os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
-    sphinx_args = ''
+    sphinx_args = '-N -j auto'
     if not args.verbose:
         sphinx_args += ' -q'
     if args.a:
         sphinx_args += ' -a'
+    if args.n:
+        sphinx_args += ' -n'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
@@ -394,7 +396,8 @@ def main():
     parser.add_argument('--branch')
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
-    parser.add_argument('-a', action='store_true')
+    parser.add_argument('-a', action='store_true', help='sphinx -a (build all files)')
+    parser.add_argument('-n', action='store_true', help='sphinx -n (nitpicky mode)')
     args = parser.parse_args()
 
     commands[args.action](args.root, args.action)

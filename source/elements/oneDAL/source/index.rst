@@ -3,9 +3,9 @@
 
 .. _oneDAL-section:
 
-==============================
-|dal_short_name| |dal_version|
-==============================
+================
+|dal_short_name|
+================
 
 
 .. |default_ctor_doc| replace:: Creates a new instance of class \
