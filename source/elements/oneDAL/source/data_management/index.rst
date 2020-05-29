@@ -56,7 +56,7 @@ Dataset
 --------
 
 The main data-related concept that |dal_short_name| works with is a
-:term:`dataset`. It is an in-memory or out-of-memory tabular view of data, where
+:term:`Dataset`. It is an in-memory or out-of-memory tabular view of data, where
 table rows represent the :term:`observations <Observation>` and columns
 represent the :term:`features <Feature>`.
 
@@ -82,7 +82,7 @@ example:
 Data source
 -----------
 
-Data source is a concept of an out-of-memory storage for a :term:`dataset`. It is
+Data source is a concept of an out-of-memory storage for a :term:`Dataset`. It is
 used at the data acquisition and data preparation stages for the following:
 
 - To extract datasets from external sources such as databases, files, remote
@@ -92,11 +92,11 @@ used at the data acquisition and data preparation stages for the following:
   the local memory, especially when processing with accelerators. A data source
   provides the ability to load data by batches and extracts it directly into the
   device's local memory. Therefore, a data source enables complex data analytics
-  scenarios, such as :term:`online computations <Online mode>`.
+  scenarios, such as :term:`online computations <Online Mode>`.
 
-- To filter and normalize :term:`feature` values that are being extracted.
+- To filter and normalize :term:`Feature` values that are being extracted.
 
-- To recover missing :term:`feature` values.
+- To recover missing :term:`Feature` values.
 
 - To detect :term:`outliers <Outlier>` and recover the abnormal data.
 
@@ -112,7 +112,7 @@ For details, see :ref:`data-sources` section.
 Table
 -----
 
-Table is a concept of a :term:`dataset` with in-memory numerical data. It is
+Table is a concept of a :term:`Dataset` with in-memory numerical data. It is
 used at the data preparation and data processing stages for the following:
 
 - To store heterogeneous in-memory data in various
@@ -130,19 +130,19 @@ used at the data preparation and data processing stages for the following:
 
 - To support streaming of the data to the algorithm.
 
-- To access the underlying data on a device in a required :term:`data format`,
-  e.g. by blocks with the defined :term:`data layout`.
+- To access the underlying data on a device in a required :term:`Data format`,
+  e.g. by blocks with the defined :term:`Data layout`.
 
 For thread-safety reasons and better integration with external entities, a table
 provides a read-only access to the data within it, thus, table concept
 implementations shall be :term:`immutable <Immutability>`.
 
 This concept has different logical organization and physical
-:term:`format of the data <data format>`:
+:term:`format of the data <Data format>`:
 
 - Logically, a table is a :ref:`dataset` with :math:`n` rows and
-  :math:`p` columns. Each row represents an :term:`observation` and each column
-  is a :term:`feature` of a dataset. Physical amount of bytes needed to store
+  :math:`p` columns. Each row represents an :term:`Observation` and each column
+  is a :term:`Feature` of a dataset. Physical amount of bytes needed to store
   the data differ from the number of elements :math:`n \times p` within
   a table.
 
@@ -169,16 +169,16 @@ For each dataset, its metadata shall contain:
 
 - The number of rows :math:`n` and columns :math:`p` in a dataset.
 
-- The type of each :term:`feature` (e.g. :term:`nominal <Nominal feature>`,
+- The type of each :term:`Feature` (e.g. :term:`nominal <Nominal feature>`,
   :term:`interval <Interval feature>`).
 
-- The :term:`data type` of each feature (e.g. :code:`float` or :code:`double`).
+- The :term:`Data type` of each feature (e.g. :code:`float` or :code:`double`).
 
 .. note::
   Metadata can contain both compile-time and run-time information. For example,
   basic compile-time metadata is the type of a dataset - whether it is a
   particular :ref:`data-source` or a :ref:`table`. Run-time information can
-  contain the :term:`feature` types and :term:`data types <Data type>` of a
+  contain the :term:`Feature` types and :term:`data types <Data type>` of a
   dataset.
 
 .. _table-builder:
@@ -186,7 +186,7 @@ For each dataset, its metadata shall contain:
 Table builder
 -------------
 
-A table :term:`builder` is a concept that is associated with a particular
+A table :term:`Builder` is a concept that is associated with a particular
 :ref:`table` type and is used at the data preparation and data processing stages
 for:
 
@@ -226,13 +226,13 @@ in-memory numerical :ref:`dataset`. It allows:
 - To convert a variety of numeric :term:`data formats <Data format>` into a
   smaller set of formats.
 
-- To provide a :term:`flat <flat data>` view on the data blocks of a
+- To provide a :term:`flat <Flat data>` view on the data blocks of a
   :ref:`dataset` for better a data locality. For example, some accessor
-  implementation returns :term:`feature` values as a contiguous array, while the
+  implementation returns :term:`Feature` values as a contiguous array, while the
   original dataset stored row-by-row (there are strides between values of a
   single feature).
 
-- To acquire data in a desired :term:`data format` for which
+- To acquire data in a desired :term:`Data format` for which
   a specific set of operations is defined.
 
 - To have read-only, read-write and write-only access to the data. Accessor
@@ -282,7 +282,7 @@ within some table, a builder object can be constructed for this. Data inside a
 table builder can be retrieved by read-only, write-only or read-write accessors.
 
 Accessors shown on the diagram allow to get data from tables and table builders
-as :term:`flat <flat data>` blocks of rows.
+as :term:`flat <Flat data>` blocks of rows.
 
 Details
 =======

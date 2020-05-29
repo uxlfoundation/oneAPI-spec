@@ -11,13 +11,13 @@ Machine learning terms
     :sorted:
 
     Categorical feature
-        A :term:`feature` with a discrete domain. Can be :term:`nominal <Nominal
+        A :term:`Feature` with a discrete domain. Can be :term:`nominal <Nominal
         feature>` or :term:`ordinal <Ordinal feature>`.
 
         **Synonyms:** discrete feature, qualitative feature
 
     Nominal feature
-        A :term:`categorical feature` without ordering between values. Only
+        A :term:`Categorical feature` without ordering between values. Only
         equality operation is defined for nominal features.
 
         **Examples:** a person's gender, color of a car
@@ -38,7 +38,7 @@ Machine learning terms
         **Example:** find big star clusters in the space images
 
     Continuous feature
-        A :term:`feature` with values in a domain of real numbers. Can be
+        A :term:`Feature` with values in a domain of real numbers. Can be
         :term:`interval <Interval feature>` or :term:`ratio <Ratio feature>`
 
         **Synonyms:** quantitative feature, numerical feature
@@ -57,51 +57,51 @@ Machine learning terms
 
     Feature vector
         A vector that encodes information about real object, an event or a group
-        of objects or events. Contains at least one :term:`feature`.
+        of objects or events. Contains at least one :term:`Feature`.
 
         **Example:** A rectangle can be described by two features: its width and
         height
 
     Inference
-        A process of applying a :term:`trained <Training>` :term:`model` to the
-        :term:`dataset` in order to predict :term:`response`
+        A process of applying a :term:`trained <Training>` :term:`Model` to the
+        :term:`Dataset` in order to predict :term:`Response`
         values based on input :term:`feature vectors <Feature vector>`.
 
         **Synonym:** prediction
 
     Inference set
-        A :term:`dataset` used at the :term:`inference` stage.
+        A :term:`Dataset` used at the :term:`Inference` stage.
         Usually without :term:`responses <Response>`.
 
     Interval feature
-        A :term:`continuous feature` with values that can be compared, added or
+        A :term:`Continuous feature` with values that can be compared, added or
         subtracted, but cannot be multiplied or divided.
 
         **Examples:** a timeframe scale, a temperature in Celcius or Fahrenheit
 
     Label
-        A :term:`response` with :term:`categorical <Categorical feature>` or
+        A :term:`Response` with :term:`categorical <Categorical feature>` or
         :term:`ordinal <Ordinal feature>` values. This is an output in
-        :term:`classification` and :term:`clustering` problems.
+        :term:`Classification` and :term:`Clustering` problems.
 
         **Example:** the spam-detection problem has a binary label indicating
         whether the email is spam or not
 
     Model
-        An entity that stores information necessary to run :term:`inference`
-        on a new :term:`dataset`. Typically a result of a :term:`training`
+        An entity that stores information necessary to run :term:`Inference`
+        on a new :term:`Dataset`. Typically a result of a :term:`Training`
         process.
 
         **Example:** in linear regression algorithm, the model contains weight
         values for each input feature and a single bias value
 
     Observation
-        A :term:`feature vector` and zero or more :term:`responses<Response>`.
+        A :term:`Feature vector` and zero or more :term:`responses<Response>`.
 
         **Synonyms:** instance, sample
 
     Ordinal feature
-        A :term:`categorical feature` with defined operations of equality and
+        A :term:`Categorical feature` with defined operations of equality and
         ordering between values.
 
         **Example:** student's grade
@@ -111,7 +111,7 @@ Machine learning terms
         observations.
 
     Ratio feature
-        A :term:`continuous feature` with defined operations of equality,
+        A :term:`Continuous feature` with defined operations of equality,
         comparison, addition, subtraction, multiplication, and division.
         Zero value element means the absence of any value.
 
@@ -119,38 +119,38 @@ Machine learning terms
 
     Regression
         A :term:`supervised machine learning problem <Supervised learning>` of
-        assigning :term:`continuous <Continuous feature>`
-        :term:`responses<Response>` for :term:`feature vectors <Feature vector>`.
+        assigning :term:`continuous <Continuous feature>` :term:`responses
+        <Response>` for :term:`feature vectors <Feature vector>`.
 
         **Example:** predict temperature based on weather conditions
 
     Response
         A property of some real object or event which dependency from
-        :term:`feature vector` need to be defined in :term:`supervised learning`
-        problem. While a :term:`feature` is an input in the machine learning
+        :term:`Feature vector` need to be defined in :term:`Supervised learning`
+        problem. While a :term:`Feature` is an input in the machine learning
         problem, the response is one of the outputs can be made by the
-        :term:`model` on the :term:`inference` stage.
+        :term:`Model` on the :term:`Inference` stage.
 
         **Synonym:** dependent variable
 
     Supervised learning
-        :term:`Training` process that uses a :term:`dataset` with information
+        :term:`Training` process that uses a :term:`Dataset` with information
         about dependencies between :term:`features <Feature>` and
-        :term:`responses <Response>`. The goal is to get a :term:`model` of
-        dependencies between input :term:`feature vector` and
+        :term:`responses <Response>`. The goal is to get a :term:`Model` of
+        dependencies between input :term:`Feature vector` and
         :term:`responses <Response>`.
 
     Training
-        A process of creating a :term:`model` based on information extracted
-        from a :term:`training set`. Resulting :term:`model` is selected in
+        A process of creating a :term:`Model` based on information extracted
+        from a :term:`Training set`. Resulting :term:`Model` is selected in
         accordance with some quality criteria.
 
     Training set
-        A :term:`dataset` used at the :term:`training` stage to create a
-        :term:`model`.
+        A :term:`Dataset` used at the :term:`Training` stage to create a
+        :term:`Model`.
 
     Unsupervised learning
-        :term:`Training` process that uses a :term:`training set` with no
+        :term:`Training` process that uses a :term:`Training set` with no
         :term:`responses <Response>`. The goal is to find hidden patters inside
         :term:`feature vectors <Feature vector>` and dependencies between them.
 
@@ -162,7 +162,7 @@ Machine learning terms
 
     Accessor
         A |dal_short_name| concept for an object that provides access to the
-        data of another object in the special :term:`data format`. It abstracts
+        data of another object in the special :term:`Data format`. It abstracts
         data access from interface of an object and provides uniform access to
         the data stored in objects of different types.
 
@@ -177,7 +177,7 @@ Machine learning terms
 
     Contiguous data
         Data that are stored as one contiguous memory block. One of the
-        characteristics of a :term:`data format`.
+        characteristics of a :term:`Data format`.
 
     Data format
         Representation of the internal structure of the data.
@@ -186,8 +186,8 @@ Machine learning terms
         compressed-sparse-row format
 
     Data layout
-        A characteristic of :term:`data format` which describes the
-        order of elements in a :term:`contiguous data` block.
+        A characteristic of :term:`Data format` which describes the
+        order of elements in a :term:`Contiguous data` block.
 
         **Example:** row-major format, where elements are stored row by row
 
@@ -199,8 +199,8 @@ Machine learning terms
         **Examples:** ``int32_t``, ``float``, ``double``
 
     Flat data
-        A block of :term:`contiguous <contiguous data>` :term:`homogeneous
-        <homogeneous data>` data.
+        A block of :term:`contiguous <Contiguous data>` :term:`homogeneous
+        <Homogeneous data>` data.
 
     Getter
         A method that returns the value of the private member variable.
@@ -215,21 +215,21 @@ Machine learning terms
     Heterogeneous data
         Data which contain values either of different :term:`data types <Data
         type>` or different sets of operations defined on them. One of the
-        characteristics of a :term:`data format`.
+        characteristics of a :term:`Data format`.
 
-        **Example:** A :term:`dataset` with 100
-        :term:`observations <Observation>` of three :term:`interval features <Interval
-        feature>`. The first two features are of float32 :term:`data type`, while the
-        third one is of float64 data type.
+        **Example:** A :term:`Dataset` with 100 :term:`observations
+        <Observation>` of three :term:`interval features <Interval feature>`.
+        The first two features are of float32 :term:`Data type`, while the third
+        one is of float64 data type.
 
     Homogeneous data
-        Data with values of single :term:`data type` and the same set of
+        Data with values of single :term:`Data type` and the same set of
         available operations defined on them. One of the characteristics of a
-        :term:`data format`.
+        :term:`Data format`.
 
-        **Example:** A :term:`dataset` with 100
-        :term:`observations <Observation>` of three  :term:`interval features <Interval
-        feature>`, each of type float32
+        **Example:** A :term:`Dataset` with 100 :term:`observations
+        <Observation>` of three  :term:`interval features <Interval feature>`,
+        each of type float32
 
     Immutability
         The object is immutable if it is not possible to change its state after
@@ -241,7 +241,7 @@ Machine learning terms
         possible objects of a given type. Metadata do not expose information
         that is not a part of a type definition, e.g. implementation details.
 
-        **Example:** :term:`table` object can contain three :term:`nominal features
+        **Example:** :term:`Table` object can contain three :term:`nominal features
         <Nominal feature>` with 100 :term:`observations <Observation>` (logical
         part of metadata). This object can store data as sparse csr array and
         provides direct access to them (physical part)
@@ -270,14 +270,14 @@ Machine learning terms
 
 
     Table
-        A |dal_short_name| concept for a :term:`dataset` that contains only
+        A |dal_short_name| concept for a :term:`Dataset` that contains only
         numerical data, :term:`categorical <Categorical feature>` or
         :term:`continuous <Continuous feature>`. Serves as a transfer of data
         between user's application and computations inside |dal_short_name|.
-        Hides details of :term:`data format` and generalizes access to the data.
+        Hides details of :term:`Data format` and generalizes access to the data.
 
     Workload
-        A problem of applying a |dal_short_name| algorithm to a :term:`dataset`.
+        A problem of applying a |dal_short_name| algorithm to a :term:`Dataset`.
 
 Common oneAPI terms
 ===================
@@ -291,7 +291,7 @@ Common oneAPI terms
     DPC++
         Data Parallel C++ (DPC++) is a high-level language designed for data
         parallel programming productivity. DPC++ is based on :term:`SYCL*
-        <sycl>` from the Khronos* Group to support data parallelism and
+        <SYCL>` from the Khronos* Group to support data parallelism and
         heterogeneous programming.
 
     Host/Device
