@@ -50,9 +50,9 @@ during computation of the lower-precision results.
 Quantization Factor
 ~~~~~~~~~~~~~~~~~~~
 
-The next step is to calculate the **quantization factor** for converting
+The next step is to calculate the *quantization factor* for converting
 the values into the corresponding int8 range. This is also known as the
-**scale** or **scaling factor** applied to the original high-precision
+*scale* or *scaling factor* applied to the original high-precision
 values and is calculated as:
 
 -  :math:`Q_{\alpha} = \frac{255}{R_{\alpha}}` is the quantization factor
@@ -60,7 +60,7 @@ values and is calculated as:
 
 -  :math:`Q_{w} = \frac{127}{R_{w}}` is the quantization factor for weights.
 
-The low-precision values, known as the **quantized** activation, weights, and
+The low-precision values, known as the *quantized* activation, weights, and
 bias values, are calculated as:
 
 -  :math:`\alpha_{u8} = \lceil Q_{\alpha} \alpha_{f32} \rceil \in [0,255]`,
@@ -132,18 +132,18 @@ Attributes
 
 oneDNN primitive behavior may be extended for additional functionalities
 involving output data transformation. These additional features are configured
-via **primitive attributes**. The primitive attributes are used for passing
+via *primitive attributes*. The primitive attributes are used for passing
 extra parameters to a primitive descriptor. The parameters include scaling
 factors and fused post-ops. All operation primitives support the attributes
 structure; however, some configurations are not implemented and result in
 *failed primitive creation*.
 
-The **scaling factor**, as previously described, is known prior to the
+The *scaling factor*, as previously described, is known prior to the
 inference operation where the values are calculated from a set of
 formulas. In oneDNN, the scaling factor is applied to the output of a
 primitive. Moreover, to perform input transformations (for example,
 source, bias, and weights), oneDNN performs quantizing and dequantizing
-of data for int8 through the **Reorder Primitive**.
+of data for int8 through the *Reorder Primitive*.
 
 oneDNN has two formats for defining the output scaling factor. Depending
 on the configuration set by the scaling mask, either the output is
@@ -161,7 +161,7 @@ scaling values is applied to specific dimensions, as explained below:
 .. image:: ../../_static/img_multiscalar.png
    :alt: Multi-value scaling format
 
-The **mask** parameter determines the dimension to which the scales array is
+The *mask* parameter determines the dimension to which the scales array is
 applied. The :math:`i`-th bit of the mask selects the dimension :math:`D_i` of
 an :math:`n`-dimensional tensor :math:`T[D_0, \ldots, D_{n-1}]`. For example:
 

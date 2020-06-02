@@ -13,7 +13,7 @@ engine specifies where the primitive will be executed. An operation descriptor
 specifies the basics: the operation kind; the propagation kind; the source,
 destination, and other tensors; the strides (if applicable); and so on.
 
-**Attributes** specify some extra properties of the primitive. Users must
+*Attributes* specify some extra properties of the primitive. Users must
 create them before use and must set required specifics using the corresponding
 setters. The attributes are copied during primitive descriptor creation, so
 users can change or destroy attributes right after that.
