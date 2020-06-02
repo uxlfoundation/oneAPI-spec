@@ -19,7 +19,7 @@ buffer that is then used as an input for the GEMM.
 
 In both of these examples, the temporary buffer is no longer required once the
 primitive computation is completed. oneDNN refers to such kind of a memory
-buffer as a **scratchpad**.
+buffer as a *scratchpad*.
 
 Both types of implementation might need extra space for the reduction in case
 there are too few independent tasks. The amount of memory required by the
