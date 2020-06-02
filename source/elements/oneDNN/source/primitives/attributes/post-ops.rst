@@ -8,10 +8,9 @@
 Post-ops
 --------
 
-*Post-ops* are operations that are appended after a primitive and are
-executed one after another. They are implemented using the
-:ref:`attributes-link` mechanism. If there are multiple post-ops, the are
-executed in the order they have been appended.
+*Post-ops* are operations that are appended after a primitive.  They are
+implemented using the :ref:`attributes-link` mechanism. If there are multiple
+post-ops, the are executed in the order they have been appended.
 
 The post-ops are represented by :any:`dnnl::post_ops` which is copied once it
 is attached to the attributes using :any:`dnnl::primitive_attr::set_post_ops`
@@ -48,7 +47,7 @@ creation function to take effect. Below is a simple sketch:
 
 The post-op objects can be inspected using the :any:`dnnl::post_ops::kind`
 function that takes an index of the post-op to inspect (that must be less than
-the value returned by :any:`dnnl::post_ops::len`), and returns it's kind.
+the value returned by :any:`dnnl::post_ops::len`), and returns its kind.
 
 Supported Post-ops
 ++++++++++++++++++
