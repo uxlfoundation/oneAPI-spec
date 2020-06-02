@@ -70,22 +70,22 @@ Hence, the sequence of actions to create a primitive is:
 
    general.rst
    attributes/index.rst
-   convolution.rst
-   inner-product.rst
-   rnn.rst
-   normalization.rst
-   concat.rst
    binary.rst
+   concat.rst
+   convolution.rst
    eltwise.rst
+   inner-product.rst
    layer_normalization.rst
-   lrn.rst
    logsoftmax.rst
-   pooling.rst
-   resampling.rst
-   softmax.rst
-   shuffle.rst
-   sum.rst
-   reorder.rst
+   lrn.rst
    matmul.rst
+   normalization.rst
+   pooling.rst
+   reorder.rst
+   resampling.rst
+   rnn.rst
+   shuffle.rst
+   softmax.rst
+   sum.rst
 
 .. vim: ts=3 sw=3 et spell spelllang=en
