@@ -16,6 +16,7 @@ parse-doxygen: doxygen
 	python -m dalapi.doxypy.cli doxygen/xml --compact > build/tree.yaml
 
 clean:
+	rm -rf build/doctrees
 	rm -rf build/html
 
 gh-pages: build

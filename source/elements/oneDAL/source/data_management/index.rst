@@ -19,7 +19,7 @@ contains three main steps of data acquisition, preparation, and computation (see
 
 2. Data preparation
 
-  - Support different in-memory :term:`data formats <Data format>`.
+  - Support different in-memory :capterm:`data formats <Data format>`.
   - Compress and decompress the data.
   - Convert the data into numeric representation.
   - Recover missing values.
@@ -56,9 +56,9 @@ Dataset
 --------
 
 The main data-related concept that |dal_short_name| works with is a
-:term:`dataset`. It is an in-memory or out-of-memory tabular view of data, where
-table rows represent the :term:`observations <Observation>` and columns
-represent the :term:`features <Feature>`.
+:capterm:`dataset`. It is an in-memory or out-of-memory tabular view of data,
+where table rows represent the :capterm:`observations <observation>` and columns
+represent the :capterm:`features <feature>`.
 
 .. image:: _static/dataset.png
   :width: 400
@@ -82,8 +82,9 @@ example:
 Data source
 -----------
 
-Data source is a concept of an out-of-memory storage for a :term:`dataset`. It is
-used at the data acquisition and data preparation stages for the following:
+Data source is a concept of an out-of-memory storage for a :capterm:`dataset`.
+It is used at the data acquisition and data preparation stages for the
+following:
 
 - To extract datasets from external sources such as databases, files, remote
   storages.
@@ -92,18 +93,18 @@ used at the data acquisition and data preparation stages for the following:
   the local memory, especially when processing with accelerators. A data source
   provides the ability to load data by batches and extracts it directly into the
   device's local memory. Therefore, a data source enables complex data analytics
-  scenarios, such as :term:`online computations <Online mode>`.
+  scenarios, such as :capterm:`online computations <Online mode>`.
 
-- To filter and normalize :term:`feature` values that are being extracted.
+- To filter and normalize :capterm:`feature` values that are being extracted.
 
-- To recover missing :term:`feature` values.
+- To recover missing :capterm:`feature` values.
 
-- To detect :term:`outliers <Outlier>` and recover the abnormal data.
+- To detect :capterm:`outliers <outlier>` and recover the abnormal data.
 
 - To transform datasets into numerical representation. Data source shall
-  automatically transform non-numeric :term:`categorical <Categorical feature>`
-  and :term:`continuous <Continuous feature>` data values into one of the
-  numeric :term:`data formats <Data format>`.
+  automatically transform non-numeric :capterm:`categorical <categorical
+  feature>` and :capterm:`continuous <continuous feature>` data values into one
+  of the numeric :capterm:`data formats <data format>`.
 
 For details, see :ref:`data-sources` section.
 
@@ -112,11 +113,11 @@ For details, see :ref:`data-sources` section.
 Table
 -----
 
-Table is a concept of a :term:`dataset` with in-memory numerical data. It is
+Table is a concept of a :capterm:`dataset` with in-memory numerical data. It is
 used at the data preparation and data processing stages for the following:
 
 - To store heterogeneous in-memory data in various
-  :term:`data formats <Data format>`, such as dense, sparse, chunked,
+  :capterm:`data formats <data format>`, such as dense, sparse, chunked,
   contiguous.
 
 - To avoid unnecessary data copies during conversion from external data
@@ -130,26 +131,27 @@ used at the data preparation and data processing stages for the following:
 
 - To support streaming of the data to the algorithm.
 
-- To access the underlying data on a device in a required :term:`data format`,
-  e.g. by blocks with the defined :term:`data layout`.
+- To access the underlying data on a device in a required :capterm:`data
+  format`, e.g. by blocks with the defined :capterm:`data layout`.
 
 For thread-safety reasons and better integration with external entities, a table
 provides a read-only access to the data within it, thus, table concept
-implementations shall be :term:`immutable <Immutability>`.
+implementations shall be :capterm:`immutable <immutability>`.
 
-This concept has different logical organization and physical
-:term:`format of the data <data format>`:
+This concept has different logical organization and physical :capterm:`format of
+the data <data format>`:
 
 - Logically, a table is a :ref:`dataset` with :math:`n` rows and
-  :math:`p` columns. Each row represents an :term:`observation` and each column
-  is a :term:`feature` of a dataset. Physical amount of bytes needed to store
-  the data differ from the number of elements :math:`n \times p` within
+  :math:`p` columns. Each row represents an :capterm:`observation` and each
+  column is a :capterm:`feature` of a dataset. Physical amount of bytes needed
+  to store the data differ from the number of elements :math:`n \times p` within
   a table.
 
-- Physically, a table can be organized in different ways: as a :term:`homogeneous
-  <Homogeneous data>`, :term:`contiguous <Contiguous data>` array of bytes, as a
-  :term:`heterogeneous <Heterogeneous data>` list of arrays of different
-  :term:`data types <Data type>`, in a compressed-sparse-row format.
+- Physically, a table can be organized in different ways: as a
+  :capterm:`homogeneous <homogeneous data>`, :capterm:`contiguous <contiguous
+  data>` array of bytes, as a :capterm:`heterogeneous <heterogeneous data>` list
+  of arrays of different :capterm:`data types <data type>`, in a
+  compressed-sparse-row format.
 
 For details, see :ref:`tables` section.
 
@@ -169,24 +171,25 @@ For each dataset, its metadata shall contain:
 
 - The number of rows :math:`n` and columns :math:`p` in a dataset.
 
-- The type of each :term:`feature` (e.g. :term:`nominal <Nominal feature>`,
-  :term:`interval <Interval feature>`).
+- The type of each :capterm:`feature` (e.g. :capterm:`nominal <nominal
+  feature>`, :capterm:`interval <interval feature>`).
 
-- The :term:`data type` of each feature (e.g. :code:`float` or :code:`double`).
+- The :capterm:`data type` of each feature (e.g. :code:`float` or
+  :code:`double`).
 
 .. note::
   Metadata can contain both compile-time and run-time information. For example,
   basic compile-time metadata is the type of a dataset - whether it is a
   particular :ref:`data-source` or a :ref:`table`. Run-time information can
-  contain the :term:`feature` types and :term:`data types <Data type>` of a
-  dataset.
+  contain the :capterm:`feature` types and :capterm:`data types <data type>` of
+  a dataset.
 
 .. _table-builder:
 
 Table builder
 -------------
 
-A table :term:`builder` is a concept that is associated with a particular
+A table :capterm:`builder` is a concept that is associated with a particular
 :ref:`table` type and is used at the data preparation and data processing stages
 for:
 
@@ -197,7 +200,7 @@ for:
   data, such as arrays, pointers to the memory, external entities.
 
 - Changing dataset values. Since :ref:`table` is an
-  :term:`immutable <Immutability>` dataset, a builder provides the ability to
+  :capterm:`immutable <immutability>` dataset, a builder provides the ability to
   change the values in a dataset under construction.
 
 - Encapsulating construction process of a :ref:`table`. This is used to hide the
@@ -223,21 +226,21 @@ in-memory numerical :ref:`dataset`. It allows:
   such as :ref:`tables <Table>` or :ref:`table builders <table-builder>`,
   without exposing their implementation details.
 
-- To convert a variety of numeric :term:`data formats <Data format>` into a
+- To convert a variety of numeric :capterm:`data formats <data format>` into a
   smaller set of formats.
 
-- To provide a :term:`flat <flat data>` view on the data blocks of a
+- To provide a :capterm:`flat <flat data>` view on the data blocks of a
   :ref:`dataset` for better a data locality. For example, some accessor
-  implementation returns :term:`feature` values as a contiguous array, while the
-  original dataset stored row-by-row (there are strides between values of a
+  implementation returns :capterm:`feature` values as a contiguous array, while
+  the original dataset stored row-by-row (there are strides between values of a
   single feature).
 
-- To acquire data in a desired :term:`data format` for which
+- To acquire data in a desired :capterm:`data format` for which
   a specific set of operations is defined.
 
 - To have read-only, read-write and write-only access to the data. Accessor
   implementations are not required to have read-write and write-only access
-  modes for :term:`immutable <Immutability>` entities like :ref:`tables
+  modes for :capterm:`immutable <immutability>` entities like :ref:`tables
   <Table>`.
 
 For details, see :ref:`accessors` section.
@@ -282,7 +285,7 @@ within some table, a builder object can be constructed for this. Data inside a
 table builder can be retrieved by read-only, write-only or read-write accessors.
 
 Accessors shown on the diagram allow to get data from tables and table builders
-as :term:`flat <flat data>` blocks of rows.
+as :capterm:`flat <flat data>` blocks of rows.
 
 Details
 =======
