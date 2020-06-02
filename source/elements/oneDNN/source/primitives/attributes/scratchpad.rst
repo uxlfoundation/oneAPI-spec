@@ -12,7 +12,7 @@ work to utilize all cores on a system might use parallelization over the
 reduction dimension (the K dimension in the GEMM notation). In this case
 different threads compute partial results in private temporary buffers, and
 then the private results are added to produce the final result. Another
-example is using matrix multiply (GEMM) to implement convolution.  Before
+example is using matrix multiplication (GEMM) to implement convolution. Before
 calling GEMM, the source activations need to be transformed using the
 ``im2col`` operation. The transformation result is written to a temporary
 buffer that is then used as an input for the GEMM.
