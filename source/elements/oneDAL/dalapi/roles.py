@@ -4,7 +4,6 @@ from sphinx import roles
 
 _term_ref_re = re.compile(r'(.+)<(.+)>', flags=re.DOTALL)
 def capterm_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    global _term_ref_re
     xref_role = roles.XRefRole(innernodeclass=nodes.inline,
                                warn_dangling=True)
     term_match = _term_ref_re.match(text)
