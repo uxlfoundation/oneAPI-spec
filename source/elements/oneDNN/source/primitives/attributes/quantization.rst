@@ -122,8 +122,8 @@ where
    output\_scale(oc) :=
     \frac{\alpha_{\src} \cdot \alpha_{\weights}(oc)}{\alpha_{\dst}}.
 
-User is responsible for preparing quantized weights accordingly. For oneDNN
-provides reorders that can perform per-channel scaling:
+The user is responsible for preparing quantized weights accordingly. To do
+that, oneDNN provides reorders that can perform per-channel scaling:
 
 .. math::
 
