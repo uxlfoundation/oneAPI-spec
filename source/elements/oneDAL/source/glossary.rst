@@ -11,42 +11,42 @@ Machine learning terms
     :sorted:
 
     Categorical feature
-        A :term:`feature` with a discrete domain. Can be :term:`nominal <Nominal
-        feature>` or :term:`ordinal <Ordinal feature>`.
+        A :capterm:`feature` with a discrete domain. Can be :capterm:`nominal
+        <nominal feature>` or :capterm:`ordinal <ordinal feature>`.
 
         **Synonyms:** discrete feature, qualitative feature
 
     Nominal feature
-        A :term:`categorical feature` without ordering between values. Only
+        A :capterm:`categorical feature` without ordering between values. Only
         equality operation is defined for nominal features.
 
         **Examples:** a person's gender, color of a car
 
     Classification
-        A :term:`supervised machine learning problem <Supervised learning>` of
-        assigning :term:`labels <Label>` to :term:`feature vectors <Feature
-        vector>`.
+        A :capterm:`supervised machine learning problem <supervised learning>`
+        of assigning :capterm:`labels <label>` to :capterm:`feature vectors
+        <feature vector>`.
 
         **Examples:** predict what type of object is on the picture (a dog or a cat?),
         predict whether or not an email is spam
 
     Clustering
-        An :term:`unsupervised machine learning problem <Unsupervised learning>`
-        of grouping :term:`feature vectors <Feature vector>` into bunches, which
-        are usually encoded as :term:`nominal <Nominal feature>` values.
+        An :capterm:`unsupervised machine learning problem <unsupervised learning>`
+        of grouping :capterm:`feature vectors <feature vector>` into bunches, which
+        are usually encoded as :capterm:`nominal <nominal feature>` values.
 
         **Example:** find big star clusters in the space images
 
     Continuous feature
-        A :term:`feature` with values in a domain of real numbers. Can be
-        :term:`interval <Interval feature>` or :term:`ratio <Ratio feature>`
+        A :capterm:`feature` with values in a domain of real numbers. Can be
+        :capterm:`interval <interval feature>` or :capterm:`ratio <ratio feature>`
 
         **Synonyms:** quantitative feature, numerical feature
 
         **Examples:** a person's height, the price of the house
 
     Dataset
-        A collection of :term:`observations <Observation>`.
+        A collection of :capterm:`observations <observation>`.
 
     Feature
         A particular property or quality of a real object or an event. Has a
@@ -57,102 +57,102 @@ Machine learning terms
 
     Feature vector
         A vector that encodes information about real object, an event or a group
-        of objects or events. Contains at least one :term:`feature`.
+        of objects or events. Contains at least one :capterm:`feature`.
 
         **Example:** A rectangle can be described by two features: its width and
         height
 
     Inference
-        A process of applying a :term:`trained <Training>` :term:`model` to the
-        :term:`dataset` in order to predict :term:`response`
-        values based on input :term:`feature vectors <Feature vector>`.
+        A process of applying a :capterm:`trained <Training>` :capterm:`model`
+        to the :capterm:`dataset` in order to predict :capterm:`response` values
+        based on input :capterm:`feature vectors <Feature vector>`.
 
         **Synonym:** prediction
 
     Inference set
-        A :term:`dataset` used at the :term:`inference` stage.
-        Usually without :term:`responses <Response>`.
+        A :capterm:`dataset` used at the :capterm:`inference` stage.
+        Usually without :capterm:`responses <Response>`.
 
     Interval feature
-        A :term:`continuous feature` with values that can be compared, added or
+        A :capterm:`continuous feature` with values that can be compared, added or
         subtracted, but cannot be multiplied or divided.
 
         **Examples:** a timeframe scale, a temperature in Celcius or Fahrenheit
 
     Label
-        A :term:`response` with :term:`categorical <Categorical feature>` or
-        :term:`ordinal <Ordinal feature>` values. This is an output in
-        :term:`classification` and :term:`clustering` problems.
+        A :capterm:`response` with :capterm:`categorical <Categorical feature>` or
+        :capterm:`ordinal <Ordinal feature>` values. This is an output in
+        :capterm:`classification` and :capterm:`clustering` problems.
 
         **Example:** the spam-detection problem has a binary label indicating
         whether the email is spam or not
 
     Model
-        An entity that stores information necessary to run :term:`inference`
-        on a new :term:`dataset`. Typically a result of a :term:`training`
+        An entity that stores information necessary to run :capterm:`inference`
+        on a new :capterm:`dataset`. Typically a result of a :capterm:`training`
         process.
 
         **Example:** in linear regression algorithm, the model contains weight
         values for each input feature and a single bias value
 
     Observation
-        A :term:`feature vector` and zero or more :term:`responses<Response>`.
+        A :capterm:`feature vector` and zero or more :capterm:`responses<Response>`.
 
         **Synonyms:** instance, sample
 
     Ordinal feature
-        A :term:`categorical feature` with defined operations of equality and
+        A :capterm:`categorical feature` with defined operations of equality and
         ordering between values.
 
         **Example:** student's grade
 
     Outlier
-        :term:`Observation` which is significantly different from the other
+        :capterm:`Observation` which is significantly different from the other
         observations.
 
     Ratio feature
-        A :term:`continuous feature` with defined operations of equality,
+        A :capterm:`continuous feature` with defined operations of equality,
         comparison, addition, subtraction, multiplication, and division.
         Zero value element means the absence of any value.
 
         **Example:** the height of a tower
 
     Regression
-        A :term:`supervised machine learning problem <Supervised learning>` of
-        assigning :term:`continuous <Continuous feature>`
-        :term:`responses<Response>` for :term:`feature vectors <Feature vector>`.
+        A :capterm:`supervised machine learning problem <Supervised learning>` of
+        assigning :capterm:`continuous <Continuous feature>`
+        :capterm:`responses<Response>` for :capterm:`feature vectors <Feature vector>`.
 
         **Example:** predict temperature based on weather conditions
 
     Response
         A property of some real object or event which dependency from
-        :term:`feature vector` need to be defined in :term:`supervised learning`
-        problem. While a :term:`feature` is an input in the machine learning
+        :capterm:`feature vector` need to be defined in :capterm:`supervised learning`
+        problem. While a :capterm:`feature` is an input in the machine learning
         problem, the response is one of the outputs can be made by the
-        :term:`model` on the :term:`inference` stage.
+        :capterm:`model` on the :capterm:`inference` stage.
 
         **Synonym:** dependent variable
 
     Supervised learning
-        :term:`Training` process that uses a :term:`dataset` with information
-        about dependencies between :term:`features <Feature>` and
-        :term:`responses <Response>`. The goal is to get a :term:`model` of
-        dependencies between input :term:`feature vector` and
-        :term:`responses <Response>`.
+        :capterm:`Training` process that uses a :capterm:`dataset` with information
+        about dependencies between :capterm:`features <Feature>` and
+        :capterm:`responses <Response>`. The goal is to get a :capterm:`model` of
+        dependencies between input :capterm:`feature vector` and
+        :capterm:`responses <Response>`.
 
     Training
-        A process of creating a :term:`model` based on information extracted
-        from a :term:`training set`. Resulting :term:`model` is selected in
+        A process of creating a :capterm:`model` based on information extracted
+        from a :capterm:`training set`. Resulting :capterm:`model` is selected in
         accordance with some quality criteria.
 
     Training set
-        A :term:`dataset` used at the :term:`training` stage to create a
-        :term:`model`.
+        A :capterm:`dataset` used at the :capterm:`training` stage to create a
+        :capterm:`model`.
 
     Unsupervised learning
-        :term:`Training` process that uses a :term:`training set` with no
-        :term:`responses <Response>`. The goal is to find hidden patters inside
-        :term:`feature vectors <Feature vector>` and dependencies between them.
+        :capterm:`Training` process that uses a :capterm:`training set` with no
+        :capterm:`responses <Response>`. The goal is to find hidden patters inside
+        :capterm:`feature vectors <Feature vector>` and dependencies between them.
 
 |dal_short_name| terms
 ======================
@@ -162,11 +162,11 @@ Machine learning terms
 
     Accessor
         A |dal_short_name| concept for an object that provides access to the
-        data of another object in the special :term:`data format`. It abstracts
+        data of another object in the special :capterm:`data format`. It abstracts
         data access from interface of an object and provides uniform access to
         the data stored in objects of different types.
 
-    Batch Mode
+    Batch mode
         The computation mode for an algorithm in |dal_short_name|, where all the
         data needed for computation is available at the start and fits the
         memory of the device on which the computations are performed.
@@ -177,7 +177,7 @@ Machine learning terms
 
     Contiguous data
         Data that are stored as one contiguous memory block. One of the
-        characteristics of a :term:`data format`.
+        characteristics of a :capterm:`data format`.
 
     Data format
         Representation of the internal structure of the data.
@@ -186,8 +186,8 @@ Machine learning terms
         compressed-sparse-row format
 
     Data layout
-        A characteristic of :term:`data format` which describes the
-        order of elements in a :term:`contiguous data` block.
+        A characteristic of :capterm:`data format` which describes the
+        order of elements in a :capterm:`contiguous data` block.
 
         **Example:** row-major format, where elements are stored row by row
 
@@ -199,7 +199,7 @@ Machine learning terms
         **Examples:** ``int32_t``, ``float``, ``double``
 
     Flat data
-        A block of :term:`contiguous <contiguous data>` :term:`homogeneous
+        A block of :capterm:`contiguous <contiguous data>` :capterm:`homogeneous
         <homogeneous data>` data.
 
     Getter
@@ -213,22 +213,22 @@ Machine learning terms
 
 
     Heterogeneous data
-        Data which contain values either of different :term:`data types <Data
+        Data which contain values either of different :capterm:`data types <Data
         type>` or different sets of operations defined on them. One of the
-        characteristics of a :term:`data format`.
+        characteristics of a :capterm:`data format`.
 
-        **Example:** A :term:`dataset` with 100
-        :term:`observations <Observation>` of three :term:`interval features <Interval
-        feature>`. The first two features are of float32 :term:`data type`, while the
+        **Example:** A :capterm:`dataset` with 100
+        :capterm:`observations <Observation>` of three :capterm:`interval features <Interval
+        feature>`. The first two features are of float32 :capterm:`data type`, while the
         third one is of float64 data type.
 
     Homogeneous data
-        Data with values of single :term:`data type` and the same set of
+        Data with values of single :capterm:`data type` and the same set of
         available operations defined on them. One of the characteristics of a
-        :term:`data format`.
+        :capterm:`data format`.
 
-        **Example:** A :term:`dataset` with 100
-        :term:`observations <Observation>` of three  :term:`interval features <Interval
+        **Example:** A :capterm:`dataset` with 100
+        :capterm:`observations <Observation>` of three  :capterm:`interval features <Interval
         feature>`, each of type float32
 
     Immutability
@@ -241,12 +241,12 @@ Machine learning terms
         possible objects of a given type. Metadata do not expose information
         that is not a part of a type definition, e.g. implementation details.
 
-        **Example:** :term:`table` object can contain three :term:`nominal features
-        <Nominal feature>` with 100 :term:`observations <Observation>` (logical
+        **Example:** :capterm:`table` object can contain three :capterm:`nominal features
+        <Nominal feature>` with 100 :capterm:`observations <Observation>` (logical
         part of metadata). This object can store data as sparse csr array and
         provides direct access to them (physical part)
 
-    Online Mode
+    Online mode
         The computation mode for an algorithm in |dal_short_name|, where the
         data needed for computation becomes available in parts over time.
 
@@ -270,14 +270,14 @@ Machine learning terms
 
 
     Table
-        A |dal_short_name| concept for a :term:`dataset` that contains only
-        numerical data, :term:`categorical <Categorical feature>` or
-        :term:`continuous <Continuous feature>`. Serves as a transfer of data
+        A |dal_short_name| concept for a :capterm:`dataset` that contains only
+        numerical data, :capterm:`categorical <Categorical feature>` or
+        :capterm:`continuous <Continuous feature>`. Serves as a transfer of data
         between user's application and computations inside |dal_short_name|.
-        Hides details of :term:`data format` and generalizes access to the data.
+        Hides details of :capterm:`data format` and generalizes access to the data.
 
     Workload
-        A problem of applying a |dal_short_name| algorithm to a :term:`dataset`.
+        A problem of applying a |dal_short_name| algorithm to a :capterm:`dataset`.
 
 Common oneAPI terms
 ===================
@@ -291,7 +291,7 @@ Common oneAPI terms
     DPC++
         Data Parallel C++ (DPC++) is a high-level language designed for data
         parallel programming productivity. DPC++ is based on :term:`SYCL*
-        <sycl>` from the Khronos* Group to support data parallelism and
+        <SYCL>` from the Khronos* Group to support data parallelism and
         heterogeneous programming.
 
     Host/Device
