@@ -68,10 +68,6 @@ in order to expose maximum flexibility to its users.
 
 On the logical level, the library provides the following abstractions:
 
-..
-   XXX
-   This is duplicated in primitives/index.rst and data_model/memory/index.rst
-
 * Memory descriptors (:struct:`dnnl::memory::desc`) define a tensor's logical
   dimensions, data type, and the format in which the data is laid out in
   memory. The special format any (:any:`dnnl::memory::format_tag::any`)
