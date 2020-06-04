@@ -40,7 +40,7 @@ oneDNN supports two modes for handling scratchpads:
 .. doxygenenum:: dnnl::scratchpad_mode
    :project: oneDNN
 
-The scratchpad mode is controlled though the @ref
+The scratchpad mode is controlled though the
 :any:`dnnl::primitive_attr::set_scratchpad_mode` primitive attributes.
 
 If the user provides scratchpad memory to a primitive, this memory must be
