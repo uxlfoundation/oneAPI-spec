@@ -170,7 +170,7 @@ tensor and we want to have output scales per :math:`d_i` dimension (where
 :math:`0 \le d_i < n`).
 
 Then :math:`mask = \sum \limits_{d_i} 2^{d_i}` and the number of scales should be
-math:`\mathtt{scales.size()} = \prod\limits_{d_i}D_{d_i}`.
+:math:`\mathtt{scales.size()} = \prod \limits_{d_i} D_{d_i}`.
 
 The scaling happens in the single precision floating point data type
 (:any:`data_type::f32`). Before storing, the result is converted to the
