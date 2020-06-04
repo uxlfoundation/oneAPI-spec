@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. _normalization-label:
+
 Normalization
 -------------
 

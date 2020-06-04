@@ -29,6 +29,7 @@ for for deep learning applications and frameworks. oneDNN supports:
    :maxdepth: 1
 
    introduction.rst
+   conventions.rst
    execution_model/index.rst
    data_model/index.rst
    primitives/index.rst
