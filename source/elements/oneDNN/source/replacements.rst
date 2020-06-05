@@ -1,0 +1,48 @@
+..
+  Copyright 2019-2020 Intel Corporation
+
+.. |any| replace:: :any:`any <dnnl::memory::format_tag::any>`
+.. |abcdef| replace:: :any:`abcdef <dnnl::memory::format_tag::abcdef>`
+.. |abcde| replace:: :any:`abcde <dnnl::memory::format_tag::abcde>`
+.. |abcd| replace:: :any:`abcd <dnnl::memory::format_tag::abcd>`
+.. |abc| replace:: :any:`abc <dnnl::memory::format_tag::abc>`
+.. |ab| replace:: :any:`ab <dnnl::memory::format_tag::ab>`
+.. |acb| replace:: :any:`acb <dnnl::memory::format_tag::acb>`
+.. |acdb| replace:: :any:`acdb <dnnl::memory::format_tag::acdb>`
+.. |acdeb| replace:: :any:`acdeb <dnnl::memory::format_tag::acdeb>`
+.. |a| replace:: :any:`a <dnnl::memory::format_tag::a>`
+.. |cba| replace:: :any:`cba <dnnl::memory::format_tag::cba>`
+.. |cdba| replace:: :any:`cdba <dnnl::memory::format_tag::cdba>`
+.. |cdeba| replace:: :any:`cdeba <dnnl::memory::format_tag::cdeba>`
+.. |decab| replace:: :any:`decab <dnnl::memory::format_tag::decab>`
+.. |dhwio| replace:: :any:`dhwio <dnnl::memory::format_tag::dhwio>`
+.. |goidhw| replace:: :any:`goidhw <dnnl::memory::format_tag::goidhw>`
+.. |goihw| replace:: :any:`goihw <dnnl::memory::format_tag::goihw>`
+.. |goiw| replace:: :any:`goiw <dnnl::memory::format_tag::goiw>`
+.. |hwigo| replace:: :any:`hwigo <dnnl::memory::format_tag::hwigo>`
+.. |hwio| replace:: :any:`hwio <dnnl::memory::format_tag::hwio>`
+.. |ncdhw| replace:: :any:`ncdhw <dnnl::memory::format_tag::ncdhw>`
+.. |nchw| replace:: :any:`nchw <dnnl::memory::format_tag::nchw>`
+.. |ncw| replace:: :any:`ncw <dnnl::memory::format_tag::ncw>`
+.. |nc| replace:: :any:`nc <dnnl::memory::format_tag::nc>`
+.. |ndhwc| replace:: :any:`ndhwc <dnnl::memory::format_tag::ndhwc>`
+.. |nhwc| replace:: :any:`nhwc <dnnl::memory::format_tag::nhwc>`
+.. |nwc| replace:: :any:`nwc <dnnl::memory::format_tag::nwc>`
+.. |oidhw| replace:: :any:`oidhw <dnnl::memory::format_tag::oidhw>`
+.. |oihw| replace:: :any:`oihw <dnnl::memory::format_tag::oihw>`
+.. |oiw| replace:: :any:`oiw <dnnl::memory::format_tag::oiw>`
+.. |wio| replace:: :any:`wio <dnnl::memory::format_tag::wio>`
+.. |x| replace:: :any:`x <dnnl::memory::format_tag::x>`
+
+.. |normalization_flags_none| replace:: :any:`none <dnnl::normalization_flags::none>`
+.. |use_global_stats| replace:: :any:`use_global_stats <dnnl::normalization_flags::use_global_stats>`
+.. |use_scaleshift| replace:: :any:`use_scaleshift <dnnl::normalization_flags::use_scaleshift>`
+.. |fuse_norm_relu| replace:: :any:`fuse_norm_relu <dnnl::normalization_flags::fuse_norm_relu>`
+
+.. |backward| replace:: :any:`backward <dnnl::prop_kind::backward>`
+.. |backward_data| replace:: :any:`backward_data <dnnl::prop_kind::backward_data>`
+.. |forward_inference| replace:: :any:`forward_inference <dnnl::prop_kind::forward_inference>`
+.. |forward_training| replace:: :any:`forward_training <dnnl::prop_kind::forward_training>`
+
+.. |eltwise_relu| replace:: :any:`eltwise_relu <dnnl::algorithm::eltwise_relu>`
+
