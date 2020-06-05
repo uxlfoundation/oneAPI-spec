@@ -44,5 +44,26 @@
 .. |forward_inference| replace:: :any:`forward_inference <dnnl::prop_kind::forward_inference>`
 .. |forward_training| replace:: :any:`forward_training <dnnl::prop_kind::forward_training>`
 
+.. |eltwise_abs| replace:: :any:`eltwise_abs <dnnl::algorithm::eltwise_abs>`
+.. |eltwise_bounded_relu| replace:: :any:`eltwise_bounded_relu <dnnl::algorithm::eltwise_bounded_relu>`
+.. |eltwise_clip| replace:: :any:`eltwise_clip <dnnl::algorithm::eltwise_clip>`
+.. |eltwise_elu| replace:: :any:`eltwise_elu <dnnl::algorithm::eltwise_elu>`
+.. |eltwise_elu_use_dst_for_bwd| replace:: :any:`eltwise_elu_use_dst_for_bwd <dnnl::algorithm::eltwise_elu_use_dst_for_bwd>`
+.. |eltwise_exp| replace:: :any:`eltwise_exp <dnnl::algorithm::eltwise_exp>`
+.. |eltwise_exp_use_dst_for_bwd| replace:: :any:`eltwise_exp_use_dst_for_bwd <dnnl::algorithm::eltwise_exp_use_dst_for_bwd>`
+.. |eltwise_gelu_erf| replace:: :any:`eltwise_gelu_erf <dnnl::algorithm::eltwise_gelu_erf>`
+.. |eltwise_gelu_tanh| replace:: :any:`eltwise_gelu_tanh <dnnl::algorithm::eltwise_gelu_tanh>`
+.. |eltwise_linear| replace:: :any:`eltwise_linear <dnnl::algorithm::eltwise_linear>`
+.. |eltwise_log| replace:: :any:`eltwise_log <dnnl::algorithm::eltwise_log>`
+.. |eltwise_logistic| replace:: :any:`eltwise_logistic <dnnl::algorithm::eltwise_logistic>`
+.. |eltwise_logistic_use_dst_for_bwd| replace:: :any:`eltwise_logistic_use_dst_for_bwd <dnnl::algorithm::eltwise_logistic_use_dst_for_bwd>`
+.. |eltwise_pow| replace:: :any:`eltwise_pow <dnnl::algorithm::eltwise_pow>`
 .. |eltwise_relu| replace:: :any:`eltwise_relu <dnnl::algorithm::eltwise_relu>`
-
+.. |eltwise_relu_use_dst_for_bwd| replace:: :any:`eltwise_relu_use_dst_for_bwd <dnnl::algorithm::eltwise_relu_use_dst_for_bwd>`
+.. |eltwise_soft_relu| replace:: :any:`eltwise_soft_relu <dnnl::algorithm::eltwise_soft_relu>`
+.. |eltwise_sqrt| replace:: :any:`eltwise_sqrt <dnnl::algorithm::eltwise_sqrt>`
+.. |eltwise_sqrt_use_dst_for_bwd| replace:: :any:`eltwise_sqrt_use_dst_for_bwd <dnnl::algorithm::eltwise_sqrt_use_dst_for_bwd>`
+.. |eltwise_square| replace:: :any:`eltwise_square <dnnl::algorithm::eltwise_square>`
+.. |eltwise_swish| replace:: :any:`eltwise_swish <dnnl::algorithm::eltwise_swish>`
+.. |eltwise_tanh| replace:: :any:`eltwise_tanh <dnnl::algorithm::eltwise_tanh>`
+.. |eltwise_tanh_use_dst_for_bwd| replace:: :any:`eltwise_tanh_use_dst_for_bwd <dnnl::algorithm::eltwise_tanh_use_dst_for_bwd>`
