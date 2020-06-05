@@ -52,8 +52,8 @@ computational methods. A descriptor serves as:
   a stateful object whose state changes after an operation is applied.
 
 Each oneDAL algorithm has its own dedicated namespace, where the corresponding
-descriptor is defined (for more details, see :ref:`common_namespaces`).
-Descriptor, in its turn, defines the following:
+descriptor is defined (for more details, see :txtref:`Namespaces
+<common_namespaces>`). Descriptor, in its turn, defines the following:
 
 - **Template parameters.** A descriptor is allowed to have any number of template
   parameters, but shall support at least two:
