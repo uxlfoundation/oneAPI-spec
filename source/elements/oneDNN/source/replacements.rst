@@ -11,6 +11,7 @@
 .. |acdb| replace:: :any:`acdb <dnnl::memory::format_tag::acdb>`
 .. |acdeb| replace:: :any:`acdeb <dnnl::memory::format_tag::acdeb>`
 .. |a| replace:: :any:`a <dnnl::memory::format_tag::a>`
+.. |bac| replace:: :any:`bac <dnnl::memory::format_tag::bac>`
 .. |ba| replace:: :any:`ba <dnnl::memory::format_tag::ba>`
 .. |cba| replace:: :any:`cba <dnnl::memory::format_tag::cba>`
 .. |cdba| replace:: :any:`cdba <dnnl::memory::format_tag::cdba>`
@@ -23,17 +24,22 @@
 .. |hwigo| replace:: :any:`hwigo <dnnl::memory::format_tag::hwigo>`
 .. |hwio| replace:: :any:`hwio <dnnl::memory::format_tag::hwio>`
 .. |io| replace:: :any:`io <dnnl::memory::format_tag::io>`
+.. |ldnc| replace:: :any:`ldnc <dnnl::memory::format_tag::ldnc>`
 .. |ncdhw| replace:: :any:`ncdhw <dnnl::memory::format_tag::ncdhw>`
 .. |nchw| replace:: :any:`nchw <dnnl::memory::format_tag::nchw>`
 .. |ncw| replace:: :any:`ncw <dnnl::memory::format_tag::ncw>`
 .. |nc| replace:: :any:`nc <dnnl::memory::format_tag::nc>`
 .. |ndhwc| replace:: :any:`ndhwc <dnnl::memory::format_tag::ndhwc>`
 .. |nhwc| replace:: :any:`nhwc <dnnl::memory::format_tag::nhwc>`
+.. |ntc| replace:: :any:`ntc <dnnl::memory::format_tag::ntc>`
+.. |nt| replace:: :any:`nt <dnnl::memory::format_tag::nt>`
 .. |nwc| replace:: :any:`nwc <dnnl::memory::format_tag::nwc>`
 .. |oidhw| replace:: :any:`oidhw <dnnl::memory::format_tag::oidhw>`
 .. |oihw| replace:: :any:`oihw <dnnl::memory::format_tag::oihw>`
 .. |oiw| replace:: :any:`oiw <dnnl::memory::format_tag::oiw>`
 .. |oi| replace:: :any:`oi <dnnl::memory::format_tag::oi>`
+.. |tnc| replace:: :any:`tnc <dnnl::memory::format_tag::tnc>`
+.. |tn| replace:: :any:`tn <dnnl::memory::format_tag::tn>`
 .. |wio| replace:: :any:`wio <dnnl::memory::format_tag::wio>`
 .. |x| replace:: :any:`x <dnnl::memory::format_tag::x>`
 
