@@ -72,7 +72,7 @@ activation with zero negative slope applied to the result (see
           \hat\sigma^2_{i+1} = \alpha \cdot \hat\sigma^2_i + (1 - \alpha) \cdot \sigma^2.
 
 Difference Between Forward Training and Forward Inference
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=========================================================
 
 - If mean and variance are computed at runtime (i.e., |use_global_stats| is
   not set), they become outputs for the propagation kind |forward_training|
