@@ -11,6 +11,7 @@
 .. |acdb| replace:: :any:`acdb <dnnl::memory::format_tag::acdb>`
 .. |acdeb| replace:: :any:`acdeb <dnnl::memory::format_tag::acdeb>`
 .. |a| replace:: :any:`a <dnnl::memory::format_tag::a>`
+.. |ba| replace:: :any:`ba <dnnl::memory::format_tag::ba>`
 .. |cba| replace:: :any:`cba <dnnl::memory::format_tag::cba>`
 .. |cdba| replace:: :any:`cdba <dnnl::memory::format_tag::cdba>`
 .. |cdeba| replace:: :any:`cdeba <dnnl::memory::format_tag::cdeba>`
@@ -21,6 +22,7 @@
 .. |goiw| replace:: :any:`goiw <dnnl::memory::format_tag::goiw>`
 .. |hwigo| replace:: :any:`hwigo <dnnl::memory::format_tag::hwigo>`
 .. |hwio| replace:: :any:`hwio <dnnl::memory::format_tag::hwio>`
+.. |io| replace:: :any:`io <dnnl::memory::format_tag::io>`
 .. |ncdhw| replace:: :any:`ncdhw <dnnl::memory::format_tag::ncdhw>`
 .. |nchw| replace:: :any:`nchw <dnnl::memory::format_tag::nchw>`
 .. |ncw| replace:: :any:`ncw <dnnl::memory::format_tag::ncw>`
@@ -31,6 +33,7 @@
 .. |oidhw| replace:: :any:`oidhw <dnnl::memory::format_tag::oidhw>`
 .. |oihw| replace:: :any:`oihw <dnnl::memory::format_tag::oihw>`
 .. |oiw| replace:: :any:`oiw <dnnl::memory::format_tag::oiw>`
+.. |oi| replace:: :any:`oi <dnnl::memory::format_tag::oi>`
 .. |wio| replace:: :any:`wio <dnnl::memory::format_tag::wio>`
 .. |x| replace:: :any:`x <dnnl::memory::format_tag::x>`
 
