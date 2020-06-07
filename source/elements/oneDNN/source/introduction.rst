@@ -4,6 +4,8 @@
 .. default-domain:: cpp
 .. _`open source implementation`: https://github.com/oneapi-src/oneDNN/tree/dev-v2
 
+.. _introduction-label:
+
 Introduction
 ------------
 
