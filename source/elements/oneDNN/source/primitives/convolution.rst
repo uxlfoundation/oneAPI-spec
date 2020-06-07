@@ -266,10 +266,10 @@ post-ops are supported:
 
 The primitive supports dynamic quantization via run-time output scales. That
 means a user could configure attributes with output scales set to the
-:c:macro:`DNNL_RUNTIME_F32_VAL` wildcard value instead of the actual scales,
+|DNNL_RUNTIME_F32_VAL| wildcard value instead of the actual scales,
 if the scales are not known at the primitive descriptor creation stage. In
 this case, the user must provide the scales as an additional input memory
-object with argument :c:macro:`DNNL_ARG_ATTR_OUTPUT_SCALES` during the
+object with argument |DNNL_ARG_ATTR_OUTPUT_SCALES| during the
 execution stage.
 
 .. note::
