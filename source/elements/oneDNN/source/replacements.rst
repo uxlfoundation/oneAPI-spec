@@ -24,6 +24,10 @@
 .. |hwigo| replace:: :any:`hwigo <dnnl::memory::format_tag::hwigo>`
 .. |hwio| replace:: :any:`hwio <dnnl::memory::format_tag::hwio>`
 .. |io| replace:: :any:`io <dnnl::memory::format_tag::io>`
+.. |ldgoi| replace:: :any:`ldgoi <dnnl::memory::format_tag::ldgoi>`
+.. |ldgo| replace:: :any:`ldgo <dnnl::memory::format_tag::ldgo>`
+.. |ldigo| replace:: :any:`ldigo <dnnl::memory::format_tag::ldigo>`
+.. |ldio| replace:: :any:`ldio <dnnl::memory::format_tag::ldio>`
 .. |ldnc| replace:: :any:`ldnc <dnnl::memory::format_tag::ldnc>`
 .. |ncdhw| replace:: :any:`ncdhw <dnnl::memory::format_tag::ncdhw>`
 .. |nchw| replace:: :any:`nchw <dnnl::memory::format_tag::nchw>`
