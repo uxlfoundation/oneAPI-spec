@@ -30,16 +30,18 @@
 
 .. _memory_formats-label:
 
+##############
 Memory Formats
---------------
+##############
 
 In oneDNN memory format is how a multidimensional tensor is stored in
 1-dimensional linear memory address space. oneDNN specifies two kinds of
 memory formats: *plain* which correspond to traditional multidimensional
 arrays, and *optimized* which are completely opaque.
 
+********************
 Plain Memory Formats
-~~~~~~~~~~~~~~~~~~~~
+********************
 
 Plain memory formats describe how multidimensional tensors are laid out in
 memory using an array of |dimensions| and an array of |strides| both of which
@@ -106,8 +108,9 @@ Code example:
    dnnl::memory::desc A_transposed {dims, dnnl::memory::data_type::f32,
            strides_transposed};
 
+***********
 Format Tags
-~~~~~~~~~~~
+***********
 
 In addition to strides, oneDNN provides named *format tags* via the
 :any:`dnnl::memory::format_tag` enum type. The enumerators of this type can be
@@ -152,8 +155,9 @@ aliases. Some examples for CNNs and RNNs:
 - :any:`format_tag::ldio` is an alias for :any:`format_tag::abcd`.
 - :any:`format_tag::ldoi` is an alias for :any:`format_tag::abdc`.
 
+**********************
 Optimized Format 'any'
-~~~~~~~~~~~~~~~~~~~~~~
+**********************
 
 Another kind of format that oneDNN supports is an opaque _optimized_ memory
 format that cannot be created directly from |strides| and |dimensions| arrays.
@@ -167,8 +171,9 @@ through computations graph.
 
 .. _memory_format_propagation-label:
 
+*************************
 Memory Format Propagation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+*************************
 
 Memory format propagation is one of the central notions that needs to be
 well-understood to use oneDNN correctly.
@@ -208,7 +213,9 @@ propagation when running training workloads. This is achieved via the
 ``hint_pd`` arguments of primitive descriptor constructors for primitives that
 implement backward propagation.
 
-.. rubric:: API
+***
+API
+***
 
 .. namespace:: 0
 

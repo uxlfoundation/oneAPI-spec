@@ -3,8 +3,9 @@
 
 .. default-domain:: cpp
 
+##########
 Data model
-----------
+##########
 
 Data in oneDNN is stored in *memory objects* that both store and describe data
 that can be of various types and be stored in different formats (layouts).

@@ -3,8 +3,9 @@
 
 .. default-domain:: cpp
 
+##########
 Primitives
-----------
+##########
 
 *Primitives* are functor objects that encapsulates a particular computation
 such as forward convolution, backward LSTM computations, or a data
