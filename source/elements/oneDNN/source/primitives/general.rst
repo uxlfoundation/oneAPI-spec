@@ -58,6 +58,13 @@ Common enumerations
 .. doxygenenum:: dnnl::algorithm
    :project: oneDNN
 
+******************************
+Normalization Primitives Flags
+******************************
+
+.. doxygenenum:: dnnl::normalization_flags
+   :project: oneDNN
+
 **************************
 Execution argument indices
 **************************

@@ -51,7 +51,7 @@ oneDNN uses the following commonly used notations for tensors:
 +----------------------+-------------------------------------------------------------------------------------------------------------------------------+
 | ``bias``             | Bias tensor (used in :ref:`convolution <convolution-label>`, :ref:`inner product <inner_product-label>` and other primitives) |
 +----------------------+-------------------------------------------------------------------------------------------------------------------------------+
-| ``scale_shift``      | Scale and shift tensors (used in :ref:`normalization <normalization-label>` primitives)                                       |
+| ``scale_shift``      | Scale and shift tensors (used in :ref:`batch_normalization-label` and :ref:`layer_normalization-label` primitives)            |
 +----------------------+-------------------------------------------------------------------------------------------------------------------------------+
 | ``workspace``        | Workspace tensor that carries additional information from the forward propagation to the backward propagation                 |
 +----------------------+-------------------------------------------------------------------------------------------------------------------------------+
