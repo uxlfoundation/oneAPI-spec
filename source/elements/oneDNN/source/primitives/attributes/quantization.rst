@@ -5,14 +5,16 @@
 
 .. _attributes-quantization-label:
 
+############
 Quantization
-------------
+############
 
 Primitives may support reduced precision computations which require
 quantization.
 
+******************
 Quantization Model
-++++++++++++++++++
+******************
 
 The primary quantization model that the library assumes is the following:
 
@@ -43,7 +45,7 @@ The :ref:`rnn-label` primitives have limited support of shifted zero.
 For the rest of this section we that :math:`0_{x_{int8}} = 0`.
 
 Example: Convolution Quantization Workflow
-++++++++++++++++++++++++++++++++++++++++++
+==========================================
 
 Consider a convolution without bias. The tensors are represented as:
 
@@ -86,8 +88,9 @@ exact scaling factors for all the tensors; it is enough to know only the
 this one extra parameter to the convolution primitive (see the
 :ref:`output_scaling-label` section below).
 
+
 Per-Channel Scaling
-+++++++++++++++++++
+===================
 
 Primitives may have limited support of multiple scales for a quantized tensor.
 The most popular use case is the :ref:`convolution-label` primitives that
@@ -141,8 +144,9 @@ where
 
 .. _output_scaling-label:
 
+************************
 Output Scaling Attribute
-++++++++++++++++++++++++
+************************
 
 oneDNN provides :any:`dnnl::primitive_attr::set_output_scales` for setting
 scaling factors for most of the primitives.
@@ -178,7 +182,7 @@ destination data type with saturation if required. The rounding happens
 according to the current hardware setting.
 
 Example 1: weights quantization with per-output-channel-and-group scaling
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=========================================================================
 
 .. code:: cpp
 
@@ -226,7 +230,7 @@ Example 1: weights quantization with per-output-channel-and-group scaling
 
 
 Example 2: convolution with groups, with per-output-channel quantization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+========================================================================
 
 This example is complementary to the previous example (which should ideally be
 the first one). Let's say we want to create an int8 convolution with
@@ -290,7 +294,7 @@ per-output channel scaling.
 
 
 Interplay of Output Scales with Post-ops
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+========================================
 
 In general, the :ref:`post_ops-label` are independent from the output scales.
 The output scales are applied to the result first; then post-ops will take
@@ -318,4 +322,3 @@ Consider the following example of a convolution with :math:`\tanh` post-op:
   :math:`scale\_tanh\_post\_op = \frac{1}{scale_{\dst}}`.
 
 .. vim: ts=3 sw=3 et spell spelllang=en
-

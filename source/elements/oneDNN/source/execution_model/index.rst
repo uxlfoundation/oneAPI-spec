@@ -3,8 +3,9 @@
 
 .. default-domain:: cpp
 
+###############
 Execution Model
----------------
+###############
 
 To execute a primitive, a user needs to pass memory arguments and a stream to
 the :any:`dnnl::primitive::execute` member function.
@@ -17,8 +18,9 @@ The primitive's computations are executed on the computational device
 corresponding to the engine on which the primitive (and memory arguments) were
 created and happens within the context on the stream.
 
+******
 Engine
-++++++
+******
 
 *Engine* is abstraction of a computational device: a CPU, a specific GPU card
 in the system, etc. Most primitives are created to execute computations on one
@@ -32,8 +34,9 @@ Engines correspond to and can be constructed from pairs of the DPC++
    :project: oneDNN
    :members:
 
+******
 Stream
-++++++
+******
 
 A *stream* is an encapsulation of execution context tied to a particular
 engine. They are passed to :any:`dnnl::primitive::execute` when executing a

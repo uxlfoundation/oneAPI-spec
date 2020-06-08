@@ -4,8 +4,9 @@
 .. default-domain:: cpp
 .. cpp:namespace:: dnnl::memory::data_type
 
+########
 Bfloat16
-++++++++
+########
 
 Bfloat16 (:any:`bf16`) is a 16-bit floating point data type based on the IEEE
 32-bit single-precision floating point data type (:any:`f32`).
@@ -29,8 +30,9 @@ More details of the bfloat16 data type can be found `here
 One of the advantages of using :any:`bf16` versus :any:`f32` is reduced memory
 footprint and, hence, increased memory access throughput.
 
+********
 Workflow
---------
+********
 
 The main difference between implementing training with the :any:`f32` data
 type and with the :any:`bf16` data type is the way the weights updates are
@@ -40,8 +42,9 @@ data type as the weights themselves. This is not necessarily the case with the
 could maintain a master copy of all the weights, computing weights gradients
 in :any:`f32` and converting the result to :any:`bf16` afterwards.
 
+*******
 Support
--------
+*******
 
 Most of the primitives can support the :any:`bf16` data type for source and
 weights tensors. Destination tensors can be specified to have either the

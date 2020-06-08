@@ -3,8 +3,9 @@
 
 .. default-domain:: cpp
 
+###############
 Scratchpad Mode
----------------
+###############
 
 Some primitives might require a temporary buffer while performing their
 computations. For instance, the operations that do not have enough independent
@@ -55,9 +56,12 @@ All primitives support both scratchpad modes.
    :any:`dnnl::scratchpad_mode::user` mode and not pass the same scratchpad
    memory to two primitives that are executed concurrently.
 
-.. rubric:: Examples
+********
+Examples
+********
 
-.. rubric:: Library Manages Scratchpad
+Library Manages Scratchpad
+==========================
 
 As mentioned above, this is a default behavior. We only want to highlight how
 a user can query the amount of memory consumed by a primitive due to a
@@ -77,7 +81,8 @@ scratchpad.
     // descriptor should be empty:
     auto zero_md = dnnl::memory::desc();
 
-.. rubric:: Library Manages Scratchpad
+Library Manages Scratchpad
+==========================
 
 .. code:: cpp
 

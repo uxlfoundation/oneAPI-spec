@@ -3,8 +3,9 @@
 
 .. default-domain:: cpp
 
+####
 Int8
-++++
+####
 
 To push higher performance during inference computations, recent work has
 focused on computations that use activations and weights stored a lower
@@ -13,14 +14,16 @@ performance over higher-precision types because they enable packing more
 computations into a single instruction, at the cost of reduced (but
 acceptable) accuracy.
 
+********
 Workflow
---------
+********
 
 The :ref:`attributes-quantization-label` describes what kind of quantization
 model oneDNN supports.
 
+*******
 Support
--------
+*******
 
 oneDNN supports int8 computations for inference by allowing to specify that
 primitives input and output memory objects use int8 data types.

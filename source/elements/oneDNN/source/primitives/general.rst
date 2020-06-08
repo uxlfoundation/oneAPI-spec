@@ -3,13 +3,16 @@
 
 .. default-domain:: cpp
 
+##################
 Common definitions
-------------------
+##################
 
 This section lists common types and definitions used by all or multiple
 primitives.
 
-.. rubric:: Base class for primitives descriptors
+*************************************
+Base class for primitives descriptors
+*************************************
 
 There is no common base class for operation descriptors because they are very
 different between different primitives. However, there is a common base class
@@ -37,13 +40,17 @@ provide utility functions for frequently queried memory descriptors.
    :project: oneDNN
    :members:
 
-.. rubric:: Base class for primitives
+*************************
+Base class for primitives
+*************************
 
 .. doxygenstruct:: dnnl::primitive
    :project: oneDNN
    :members:
 
-.. rubric:: Common enumerations
+*******************
+Common enumerations
+*******************
 
 .. doxygenenum:: dnnl::prop_kind
    :project: oneDNN
@@ -51,7 +58,9 @@ provide utility functions for frequently queried memory descriptors.
 .. doxygenenum:: dnnl::algorithm
    :project: oneDNN
 
-.. rubric:: Execution argument indices
+**************************
+Execution argument indices
+**************************
 
 .. doxygendefine:: DNNL_ARG_SRC_0
    :project: oneDNN
