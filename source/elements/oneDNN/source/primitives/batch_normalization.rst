@@ -5,8 +5,10 @@
 
 .. include:: ../replacements.rst
 
+.. _batch_normalization-label:
+
 ###################
-Batch normalization
+Batch Normalization
 ###################
 
 The batch normalization primitive performs a forward or backward batch
@@ -150,9 +152,9 @@ Operation Details
 
 2. The memory format and data type for ``src`` and ``dst`` are assumed to be
    the same, and in the API they are typically referred to as ``data`` (e.g.,
-   see ``data_desc`` in dnnl::batch_normalization_forward::desc::desc()). The
-   same is true for ``diff_src`` and ``diff_dst``. The corresponding memory
-   descriptors are referred to as ``diff_data_desc``.
+   see ``data_desc`` in :any:`dnnl::batch_normalization_forward::desc::desc`).
+   The same is true for ``diff_src`` and ``diff_dst``. The corresponding
+   memory descriptors are referred to as ``diff_data_desc``.
 
 3. Both forward and backward propagation support in-place operations, meaning
    that :math:`\src` can be used as input and output for forward propagation,

@@ -5,6 +5,8 @@
 
 .. include:: ../replacements.rst
 
+.. _layer_normalization-label:
+
 ###################
 Layer normalization
 ###################
