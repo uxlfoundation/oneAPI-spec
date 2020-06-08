@@ -71,6 +71,7 @@ Hence, the sequence of actions to create a primitive is:
 
    general.rst
    attributes/index.rst
+   batch_normalization.rst
    binary.rst
    concat.rst
    convolution.rst
@@ -80,7 +81,6 @@ Hence, the sequence of actions to create a primitive is:
    logsoftmax.rst
    lrn.rst
    matmul.rst
-   normalization.rst
    pooling.rst
    reorder.rst
    resampling.rst
