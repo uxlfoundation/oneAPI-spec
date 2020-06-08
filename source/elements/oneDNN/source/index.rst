@@ -7,8 +7,9 @@
 
 .. _oneDNN-section:
 
+######
 oneDNN
-======
+######
 
 |dnn_full_name| (oneDNN) is a performance library containing building blocks
 for for deep learning applications and frameworks. oneDNN supports:
@@ -34,14 +35,16 @@ for for deep learning applications and frameworks. oneDNN supports:
    data_model/index.rst
    primitives/index.rst
 
+**************************
 Open Source Implementation
---------------------------
+**************************
 
 Intel has published an `open source implementation`_ with the Apache
 license.
 
+********************
 Implementation Notes
---------------------
+********************
 
 This specification provides high-level descriptions for oneDNN operations and
 does not cover all the implementation-specific details of the `open source
@@ -55,8 +58,9 @@ extent.
 In the future this section will be extended with more details on how different
 implementations of this specification should cooperate and co-exist.
 
+*******
 Testing
--------
+*******
 
 Intel's binary distribution of oneDNN contains example code that you
 can be used to test library functionality.

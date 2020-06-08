@@ -6,8 +6,9 @@
 
 .. _introduction-label:
 
+############
 Introduction
-------------
+############
 
 Although the origins of this specification are in the existing `open source
 implementation`_, its goal is to define a *portable* set of APIs.  To this
@@ -99,8 +100,9 @@ On the logical level, the library provides the following abstractions:
 | Implementation           | Memory object     | Primitive            |
 +--------------------------+-------------------+----------------------+
 
+*****************
 General API notes
-+++++++++++++++++
+*****************
 
 There are certain assumptions on how oneDNN objects behave:
 
@@ -115,8 +117,9 @@ a memory descriptor. Empty objects are usually created using default
 constructors, but also may be a result of an error during object construction
 (see the next section).
 
+**************
 Error Handling
-++++++++++++++
+**************
 
 All oneDNN functions throw the following exception in case of error.
 

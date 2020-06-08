@@ -5,8 +5,9 @@
 
 .. _attributes-link:
 
+##########
 Attributes
-----------
+##########
 
 The parameters passed to create a primitive descriptor specify the problem. An
 engine specifies where the primitive will be executed. An operation descriptor
@@ -34,8 +35,9 @@ the primitive.
 
 .. _attributes_error_handling-link:
 
+********************************
 Attribute Related Error Handling
-++++++++++++++++++++++++++++++++
+********************************
 
 Since the attributes are created separately from the corresponding primitive
 descriptor, consistency checks are delayed.  Users can successfully set
@@ -44,7 +46,9 @@ create a primitive descriptor with the attributes they set, it might happen
 that there is no primitive implementation that supports such a configuration.
 In this case the library will throw the :any:`dnnl::error` exception.
 
-.. rubric:: API
+***
+API
+***
 
 .. doxygenstruct:: dnnl::primitive_attr
    :project: oneDNN

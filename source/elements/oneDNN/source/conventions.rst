@@ -5,13 +5,15 @@
 
 .. _conventions-label:
 
+###########
 Conventions
------------
+###########
 
 oneDNN documentation relies on a set of standard naming conventions for variables. This section describes these conventions.
 
+***********************
 Variable (Tensor) Names
-~~~~~~~~~~~~~~~~~~~~~~~
+***********************
 
 Neural network models consist of operations of the following form:
 
@@ -70,8 +72,9 @@ oneDNN uses the following commonly used notations for tensors:
 | ``*_iter``           | RNN recurrent data or weights tensors                                                                                         |
 +----------------------+-------------------------------------------------------------------------------------------------------------------------------+
 
+*********************
 RNN-Specific Notation
-~~~~~~~~~~~~~~~~~~~~~
+*********************
 
 The following notations are used when describing RNN primitives.
 

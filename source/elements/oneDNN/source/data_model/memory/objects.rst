@@ -5,11 +5,13 @@
 
 .. namespace:: 0
 
+##############################
 Memory Descriptors and Objects
-------------------------------
+##############################
 
+***********
 Descriptors
-^^^^^^^^^^^
+***********
 
 Memory descriptor is an engine-agnostic logical description of data (number of
 dimensions, dimension sizes, and data type), and, optionally, the information
@@ -58,8 +60,9 @@ Data handle of a zero-volume memory is never accessed.
    :project: oneDNN
    :members:
 
+*******
 Objects
-^^^^^^^
+*******
 
 Memory objects combine memory descriptors with storage for data (a data
 handle).  With USM, the data handle is simply a pointer to ``void``. The data
@@ -70,7 +73,9 @@ can be queried using :any:`dnnl::memory::get_sycl_buffer` and set using
 the underlying memory descriptor and for its engine using
 :any:`dnnl::memory::get_desc` and :any:`dnnl::memory::get_engine`.
 
-.. rubric:: API
+***
+API
+***
 
 .. doxygenstruct:: dnnl::memory
    :project: oneDNN
