@@ -87,7 +87,7 @@ Deduction Guides
 .. code:: cpp
 
     template <typename Body>
-    sequencer_node(graph&, Body) -> input_node<std::decay_t<input_t<Body>>>;
+    sequencer_node(graph&, Body) -> sequencer_node<std::decay_t<input_t<Body>>>;
 
 Where:
 
