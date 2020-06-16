@@ -254,6 +254,13 @@ Summary
 - oneVPL
 
   - Breaking changes introduced.
+  
+=========  ==========
+Date       Milestone
+=========  ==========
+6/25/2020  All components have merged to master
+6/26/2020  Release
+=========  ==========
 
 0.9.0
 -----
