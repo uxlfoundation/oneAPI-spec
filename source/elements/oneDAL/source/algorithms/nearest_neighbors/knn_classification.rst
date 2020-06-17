@@ -62,7 +62,7 @@ from the initial training set :math:`X`.
 Training method: *k-d tree*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The training operation builds a :math:`k`-:math:`d` tree that partitions the
-training set :math:`X` (for more details, see :ref:`kd_tree`).
+training set :math:`X` (for more details, see :txtref:`k-d Tree <kd_tree>`).
 
 
 .. _i_math:

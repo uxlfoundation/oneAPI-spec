@@ -280,6 +280,7 @@ def setup(app):
     ctx = Context(app)
 
     app.add_role('capterm', roles.capterm_role)
+    app.add_role('txtref', roles.txtref_role)
 
     app.add_directive('onedal_class', directives.ClassDirective(ctx))
     app.add_directive('onedal_func', directives.FunctionDirective(ctx))
