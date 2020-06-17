@@ -27,25 +27,25 @@ end-to-end analytics frameworks.
 
 |dal_short_name| consists of the following major components:
 
- - The :ref:`Data Management <data_management>` component includes
+ - The :txtref:`Data Management <data_management>` component includes
    classes and utilities for data acquisition, initial preprocessing
    and normalization, for data conversion into numeric formats
    (performed by one of supported Data Sources), and for model
    representation.
 
- - The :ref:`Algorithms <algorithms>` component consists of classes
+ - The :txtref:`Algorithms <algorithms>` component consists of classes
    that implement algorithms for data analysis (data mining) and data
    modeling (training and prediction). These algorithms include
    clustering, classification, regression, and recommendation
    algorithms.  Algorithms support the following computation modes:
 
-   - :ref:`Batch processing <Batch>`: algorithms work with the entire
+   - :txtref:`Batch processing <Batch>`: algorithms work with the entire
      data set to produce the final result
 
-   - :ref:`Online processing <Online>`: algorithms process a data set
+   - :txtref:`Online processing <Online>`: algorithms process a data set
      in blocks streamed into the device’s memory
 
-   - :ref:`Distributed processing <Distributed>`: algorithms operate
+   - :txtref:`Distributed processing <Distributed>`: algorithms operate
      on a data set distributed across several devices (compute nodes)
 
      Distributed algorithms in |dal_short_name| are abstracted from

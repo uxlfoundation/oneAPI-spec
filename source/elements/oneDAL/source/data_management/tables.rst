@@ -6,33 +6,33 @@
 Tables
 ======
 
-This section describes the types related to the :ref:`table <table>` and
-:ref:`metadata <metadata>` concepts. |dal_short_name| defines the following
-types that implement these concepts:
+This section describes the types related to the :txtref:`table` and
+:txtref:`metadata` concepts. |dal_short_name| defines the following types that
+implement these concepts:
 
 - The :code:`table` is a base class that implements the table concept and
-  provides capability to get a metadata. Each implementation of the :ref:`table
-  <table>` concept shall be derived from the :code:`table` class (for more
-  details, see :ref:`table_api`).
+  provides capability to get a metadata. Each implementation of the
+  :txtref:`table` concept shall be derived from the :code:`table` class (for
+  more details, see :txtref:`table_API` section).
 
 - The :code:`table_meta` class implements the metadata concept for the
   table. Each derived table type may provide its own implementation of the
   :code:`table_meta` that extends the metadata concept (for more details, see
-  :ref:`Metadata API`).
+  :txtref:`metadata_API` section).
 
 
 ------------
 Requirements
 ------------
 
-Each implementation of :ref:`table <table>` concept shall:
+Each implementation of :txtref:`table` concept shall:
 
 1. Follow definition of the table concept.
 
 2. Be derived from the :code:`table` class. The behavior of this class can be
    extended, but cannot be weaken.
 
-3. Provide an implementation of the :ref:`metadata <metadata>` concept derived
+3. Provide an implementation of the :txtref:`metadata` concept derived
    from the :code:`table_meta` class.
 
 4. Be :term:`reference-counted <Reference-counted object>`. An assignment
@@ -52,8 +52,8 @@ Each implementation of :ref:`table <table>` concept shall:
 Table Types
 -----------
 
-|dal_short_name| defines a set of classes. Each class implements the :ref:`table
-<table>` concept and represents a specific data format.
+|dal_short_name| defines a set of classes. Each class implements the
+:txtref:`table` concept and represents a specific data format.
 
 .. list-table::
    :header-rows: 1
@@ -62,7 +62,7 @@ Table Types
    * - Table type
      - Description
 
-   * - :ref:`table <table_api>`
+   * - :txtref:`table <table_API>`
      - A common implementation of the table concept. Base class for
        other table types.
 
@@ -82,7 +82,7 @@ Table Types
      - Sparse homogeneous table which data are stored in compressed sparse row
        (CSR) format.
 
-.. _table_api:
+.. _table_API:
 
 ---------
 Table API
@@ -182,8 +182,8 @@ Class ``homogen_table`` is an implementation of a table type
 for which the following is true:
 
 - Its data is dense and it is stored as one contiguous memory block
-- All features have the same :ref:`data type <Data type>`
-  (but :ref:`feature types <Feature type>` may differ)
+- All features have the same :txtref:`data type <Data type>`
+  (but :txtref:`feature types <Feature type>` may differ)
 
 ::
 
@@ -278,7 +278,7 @@ Compressed-sparse-row table
 ---------------------------
 TBD
 
-.. _Metadata API:
+.. _metadata_API:
 
 ------------
 Metadata API

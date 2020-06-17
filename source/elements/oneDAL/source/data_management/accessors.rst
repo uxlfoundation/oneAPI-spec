@@ -4,9 +4,9 @@
 Accessors
 =========
 
-This section defines `requirements <accessor_reqs_>`_ to an :ref:`accessor
-<accessor>` implementation and introduces several `accessor types
-<accessor_types_>`_.
+This section defines :txtref:`requirements <accessor_reqs>` to an
+:txtref:`accessor` implementation and introduces several
+:txtref:`accessor_types`.
 
 .. _accessor_reqs:
 
@@ -20,15 +20,14 @@ Each accessor implementation shall:
    accessor. Every single accessor type shall return and use only one data
    format.
 
-2. Provide an access to at least one in-memory :ref:`dataset` implementation
-   (such as :code:`table`, its sub-types, or :ref:`table builders
-   <table-builder>`).
+2. Provide an access to at least one in-memory :txtref:`dataset` implementation
+   (such as :code:`table`, its sub-types, or :txtref:`<table-builder>s`).
 
 3. Provide read-only, write-only, or read-write access to the data. If an
-   accessor supports several :ref:`dataset` implementations to be passed in, it
-   is not necessary for an accessor to support all access modes for every input
-   object. For example, tables shall support a single read-only mode according
-   to their :ref:`concept <table>` definition.
+   accessor supports several :txtref:`dataset` implementations to be passed in,
+   it is not necessary for an accessor to support all access modes for every
+   input object. For example, tables shall support a single read-only mode
+   according to their :txtref:`<table> concept` definition.
 
 4. Provide the names for read and write operations following the pattern:
 
@@ -36,7 +35,7 @@ Each accessor implementation shall:
 
    - :code:`push_*()` for writing
 
-5. Be lightweight. Its constructors from :ref:`dataset` implementations
+5. Be lightweight. Its constructors from :txtref:`dataset` implementations
    shall not have heavy operations such as copy of data, reading, writing, any
    sort of conversions. These operations shall be performed by heavy operations
    :code:`pull_*()` and :code:`push_*()`. It is not necessary to have copy- or
@@ -51,9 +50,9 @@ Accessor Types
 --------------
 
 |dal_short_name| defines a set of accessor classes. Each class is associated
-with a single specific way of interacting with data within a :ref:`dataset`. The
-following table briefly explains these classes and shows which :ref:`dataset`
-implementations are supported by each accessor type.
+with a single specific way of interacting with data within a :txtref:`dataset`.
+The following table briefly explains these classes and shows which
+:txtref:`dataset` implementations are supported by each accessor type.
 
 .. list-table::
    :header-rows: 1
