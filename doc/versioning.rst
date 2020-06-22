@@ -59,6 +59,34 @@ version is effectively an increase in minor version.
 Increases in major version of an element are coordinated with the
 overall specification and are expected to be rare.
 
+Example
+-------
+
+Initial release:
+
+| oneAPI 1.0
+| oneMKL 1.0
+| oneDAL 1.0
+
+oneMKL adds some API's, oneDAL does not change:
+
+| oneAPI 1.1
+| oneMKL 1.1
+| oneDAL 1.0
+
+oneDAL adds API's, oneMKL does not change:
+
+| oneAPI 1.2
+| oneMKL 1.1
+| oneDAL 1.1
+
+oneMKL removes API's:
+
+| oneAPI 2.0
+| oneMKL 2.0
+| oneDAL 1.1
+
+
 Relationship of Implementation and Specification Versions
 =========================================================
 
