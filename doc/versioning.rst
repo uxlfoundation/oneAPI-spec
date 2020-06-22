@@ -16,25 +16,26 @@ Purpose
 =======
 
 oneAPI specification is primarily a description of APIs. We use
-`Semantic Versioning`_ so oneAPI users and implementors can understand
-the compatibility of specification releases and implementations of
-specifications. It covers cases such as adding interfaces, removing
-interfaces, and making non-compatible changes to existing
-interfaces. The versioning does not in general provide information on
-changes in the document that are not related to interfaces, such as
-document editing changes.
+`Semantic Versioning`_ to communicate functionality additions and
+compatibility to users and implementors.  It covers cases such as
+adding interfaces, removing interfaces, and making non-compatible
+changes to existing interfaces. The versioning does not in general
+provide information on changes in the document that are not related to
+interfaces, such as document editing changes.
 
 
 Semantic Versioning
 ===================
 
 A summary is included below and based on `Semantic Versioning`_. Rule
-3 is augmented with the definition from `Semantic Versioning for
+1 is augmented to include major functionality additions. Rule 3 is
+augmented with the definition from `Semantic Versioning for
 Documents`_.
 
   Given a version number MAJOR.MINOR.PATCH, increment the:
 
-  1. MAJOR version when you make incompatible API changes,
+  1. MAJOR version when you make incompatible API changes or add major
+     new functionality,
      
   2. MINOR version when you add functionality in a backwards
      compatible manner, and
