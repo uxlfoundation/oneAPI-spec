@@ -99,7 +99,7 @@ The sequence of actions to create a primitive is:
    thus does not require step 1 above.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    general.rst
    attributes/index.rst
