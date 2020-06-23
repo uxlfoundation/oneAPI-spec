@@ -1,18 +1,14 @@
-.. _onemkl_blas_gemm_ext:
+.. _onemkl_blas_gemm_bias:
 
-gemm_ext
-========
+gemm_bias
+=========
 
 .. container::
 
 
-   Computes a matrix-matrix product with general matrices.
+   Computes a matrix-matrix product using general integer matrices with bias.
 
-
-     **Standard API**
-
-      
-     ``gemm_ext`` supports the following precisions and devices.
+     ``gemm_bias`` supports the following precisions.
 
 
      .. list-table:: 
@@ -23,48 +19,21 @@ gemm_ext
           -  Tb 
           -  Tc 
         * -  ``float`` 
-          -  ``half`` 
-          -  ``half`` 
-          -  ``float`` 
-        * -  ``half`` 
-          -  ``half`` 
-          -  ``half`` 
-          -  ``half`` 
+          -  ``std::uint8_t`` 
+          -  ``std::uint8_t`` 
+          -  ``std::int32_t`` 
         * -  ``float`` 
-          -  ``float`` 
-          -  ``float`` 
-          -  ``float`` 
-        * -  ``double`` 
-          -  ``double`` 
-          -  ``double`` 
-          -  ``double`` 
-        * -  ``std::complex<float>`` 
-          -  ``std::complex<float>`` 
-          -  ``std::complex<float>`` 
-          -  ``std::complex<float>`` 
-        * -  ``std::complex<double>`` 
-          -  ``std::complex<double>`` 
-          -  ``std::complex<double>`` 
-          -  ``std::complex<double>`` 
-
-
-     **Offset API**
-
-
-     ``gemm_ext`` supports the following precisions.
-
-
-     .. list-table:: 
-        :header-rows: 1
-
-        * -  Ts 
-          -  Ta 
-          -  Tb 
-          -  Tc 
+          -  ``std::int8_t`` 
+          -  ``std::uint8_t`` 
+          -  ``std::int32_t`` 
         * -  ``float`` 
-          -  ``int8_t`` 
-          -  ``uint8_t`` 
-          -  ``int32_t`` 
+          -  ``std::uint8_t`` 
+          -  ``std::int8_t`` 
+          -  ``std::int32_t`` 
+        * -  ``float`` 
+          -  ``std::int8_t`` 
+          -  ``std::int8_t`` 
+          -  ``std::int32_t`` 
 
 
 .. container:: section
@@ -74,20 +43,9 @@ gemm_ext
       :class: sectiontitle
 
 
-   The gemm_ext routines compute a scalar-matrix-matrix product and
-   add the result to a scalar-matrix product, with general matrices.
-   
-   For Standard API, the operation is defined as:
-
-   ::
-
-
-      C ← alpha*op(A)*op(B) + beta*C 
-
-
-   For Offset API, the operation is defined as: 
-
-   ::
+   The gemm_bias routines compute a scalar-matrix-matrix product and
+   add the result to a scalar-matrix product, using general integer matrices with biases/offsets. 
+   The operation is defined as:
 
 
       C ← alpha*(op(A) - A_offset)*(op(B) - B_offset) + beta*C + C_offset
@@ -118,8 +76,8 @@ gemm_ext
    ``C`` is ``m`` x ``n``.
 
 
-gemm_ext (Buffer Version)
--------------------------
+gemm_bias (Buffer Version)
+--------------------------
 
 .. container::
 
@@ -129,22 +87,10 @@ gemm_ext (Buffer Version)
         :class: sectiontitle
       
       
-      **Standard API**
-      
-      
       .. container:: dlsyntaxpara
       
       
-        .. cpp:function::  void onemkl::blas::gemm_ext(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda, sycl::buffer<Tb,1> &b, std::int64_t ldb, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc)
-      
-      
-      **Offset API**
-      
-      
-      .. container:: dlsyntaxpara
-      
-      
-        .. cpp:function::  void onemkl::blas::gemm_ext(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda, Ta ao, sycl::buffer<Tb,1> &b, std::int64_t ldb, Tb bo, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc, sycl::buffer<Tc,1> &co)
+        .. cpp:function::  void onemkl::blas::gemm_bias(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda, Ta ao, sycl::buffer<Tb,1> &b, std::int64_t ldb, Tb bo, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc, sycl::buffer<Tc,1> &co)
       
       
    .. container:: section
@@ -174,7 +120,7 @@ gemm_ext (Buffer Version)
     
     
     
-      offset_type (offset API only)
+      offset_type
          Specifies the form of ``C_offset`` used in the matrix
          multiplication. See
          :ref:`onemkl_datatypes` for
@@ -222,7 +168,7 @@ gemm_ext (Buffer Version)
          be positive.
     
     
-      ao (offset API only)
+      ao 
          Specifies the scalar offset value for matrix ``A``.
     
     
@@ -249,7 +195,7 @@ gemm_ext (Buffer Version)
          be positive.
     
     
-      bo (offset API only)
+      bo 
          Specifies the scalar offset value for matrix ``B``.
     
     
@@ -269,7 +215,7 @@ gemm_ext (Buffer Version)
          ``m``.
     
     
-      co (offset API only)
+      co
          Buffer holding the offset values for matrix ``C``.
     
     
@@ -293,10 +239,8 @@ gemm_ext (Buffer Version)
     
     
       c
-         Output buffer, overwritten by alpha\*op(``A``)*op(``B``) +
-         beta\*\ ``C`` for the standard API and alpha\*(op(``A``) -
-         ``A_offset``)*(op(``B``) - ``B_offset``) + beta\*\ ``C`` +
-         ``C_offset`` for the offset API.
+         Output buffer, overwritten by ``alpha*(op(A) -
+         A_offset)*(op(B) - B_offset) + beta*C + C_offset``.
     
     
    .. container:: section
@@ -307,11 +251,11 @@ gemm_ext (Buffer Version)
     
     
       If ``beta`` = 0, matrix ``C`` does not need to be initialized
-      before calling gemm_ext.
+      before calling ``gemm_bias``.
 
 
-gemm_ext (USM Version)
--------------------------
+gemm_bias (USM Version)
+-----------------------
 
 .. container::
 
@@ -321,22 +265,10 @@ gemm_ext (USM Version)
         :class: sectiontitle
       
       
-      **Standard API**
-      
-      
       .. container:: dlsyntaxpara
       
       
-        .. cpp:function::  sycl::event onemkl::blas::gemm_ext(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, const Ta *a, std::int64_t lda, const Tb *b, std::int64_t ldb, Ts beta, Tc *c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
-      
-      
-      **Offset API**
-      
-      
-      .. container:: dlsyntaxpara
-      
-      
-        .. cpp:function::  sycl::event onemkl::blas::gemm_ext(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, const Ta *a, std::int64_t lda, Ta ao, const Tb *b, std::int64_t ldb, Tb bo, Ts beta, Tc *c, std::int64_t ldc, const Tc *co, const sycl::vector_class<sycl::event> &dependencies = {})
+        .. cpp:function::  sycl::event onemkl::blas::gemm_bias(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, const Ta *a, std::int64_t lda, Ta ao, const Tb *b, std::int64_t ldb, Tb bo, Ts beta, Tc *c, std::int64_t ldc, const Tc *co, const sycl::vector_class<sycl::event> &dependencies = {})
       
       
    .. container:: section
@@ -366,7 +298,7 @@ gemm_ext (USM Version)
     
     
     
-      offset_type (offset API only)
+      offset_type
          Specifies the form of ``C_offset`` used in the matrix
          multiplication. See
          :ref:`onemkl_datatypes` for
@@ -414,7 +346,7 @@ gemm_ext (USM Version)
          be positive.
     
     
-      ao (offset API only)
+      ao
          Specifies the scalar offset value for matrix ``A``.
     
     
@@ -441,7 +373,7 @@ gemm_ext (USM Version)
          be positive.
     
     
-      bo (offset API only)
+      bo 
          Specifies the scalar offset value for matrix ``B``.
     
     
@@ -461,7 +393,7 @@ gemm_ext (USM Version)
          ``m``.
     
     
-      co (offset API only)
+      co
          Pointer to offset values for matrix ``C``.
     
     
@@ -490,10 +422,8 @@ gemm_ext (USM Version)
     
     
       c
-         Pointer to the output matrix, overwritten by alpha\*op(``A``)*op(``B``) +
-         beta\*\ ``C`` for the standard API and alpha\*(op(``A``) -
-         ``A_offset``)*(op(``B``) - ``B_offset``) + beta\*\ ``C`` +
-         ``C_offset`` for the offset API.
+         Pointer to the output matrix, overwritten by ``alpha*(op(A) -
+         A_offset)*(op(B) - B_offset) + beta*C + C_offset``.
     
     
    .. container:: section
@@ -504,7 +434,7 @@ gemm_ext (USM Version)
     
     
       If ``beta`` = 0, matrix ``C`` does not need to be initialized
-      before calling gemm_ext.
+      before calling ``gemm_bias``.
 
 
    .. container:: section
