@@ -28,7 +28,8 @@ is a memory buffer that a primitive may use for temporary storage only during
 computations. The scratchpad can either be owned by a primitive object (which
 makes that object non-thread safe) or be an execution-time parameter.
 
-Each primitive is defined using several abstraction levels.
+Conceptually. oneDNN establishes several layers of how to describe a
+computation from more abstract to more concrete:
 
 .. image:: ../_static/img_primitive.png
    :width: 600
@@ -42,14 +43,45 @@ Each primitive is defined using several abstraction levels.
   implementation-independent parameters. The shapes are usually described as
   memory descriptors (:struct:`dnnl::memory::desc`).
 
-* Primitive descriptors (:struct:`dnnl::primitive_desc_base` is the base class
-  and each of the supported primitives have their own version) are at an
+* Primitive descriptors are at an
   abstraction level in between operation descriptors and primitives and can be
   used to inspect details of a specific primitive implementation like expected
   memory formats via queries to implement memory format propagation (see
   Memory format propagation) without having to fully instantiate a primitive.
 
-Hence, the sequence of actions to create a primitive is:
+* Primitives, which are most concrete, are actual computations that can be
+  executed.
+
+On the API level:
+
+* Primitives are represented as a class on the top level of the ``dnnl``
+  namespace that have :struct:`dnnl::primimitive` as their base class, for
+  example :struct:`dnnl::convolution_forward`
+
+* Operation descriptors are represented as classes named ``desc`` and nested
+  within the corresponding primitives classes, for example
+  :struct:`dnnl::convolution_forward::desc`.
+
+* Primitive descriptors are represented as classes named ``primitive_desc``
+  and nested within the corresponding primitive classes that have
+  :struct:`dnnl::primitive_desc_base` as their base class (except for RNN
+  primitives that derive from :struct:`dnnl::rnn_primitive_desc_base`), for
+  example :struct:`dnnl::convolution_forward::primitive_desc`
+
+.. code-block:: c++
+
+   namespace dnnl {
+      struct something_forward : public primitive {
+         struct desc {
+            // Primitive-specific constructors.
+         }
+         struct primitive_desc : public primitive_desc_base {
+            // Constructors and primitive-specific memory descriptor queries.
+         }
+      };
+   }
+
+The sequence of actions to create a primitive is:
 
 1. Create an operation descriptor via, for example,
    :any:`dnnl::convolution_forward::desc`. The operation descriptor can
