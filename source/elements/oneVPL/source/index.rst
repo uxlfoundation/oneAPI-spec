@@ -159,35 +159,35 @@ MFX_VERSION_USE_LATEST define and recommended only for developemnt purposes.
 
 Acronyms and Abbreviations
 ==========================
-.. include:: MSDK_acronism.rst
+.. include:: MSDK_acronyms.inc.rst
 
 Architecture
 ============
-.. include:: MSDK_architecture.rst
+.. include:: MSDK_architecture.inc.rst
 
 Video Decoding
 --------------
-.. include:: MSDK_decoding.rst
+.. include:: MSDK_decoding.inc.rst
 
 Video Encoding
 --------------
-.. include:: MSDK_encoding.rst
+.. include:: MSDK_encoding.inc.rst
 
 Video Processing
 ----------------
-.. include:: MSDK_processing.rst
+.. include:: MSDK_processing.inc.rst
 
 Programming Guide
 =================
-.. include:: MSDK_prg.rst
+.. include:: MSDK_prg.inc.rst
 
 Summary Tables
 ==============
-.. include:: VPL_summary.rst
+.. include:: VPL_summary.inc.rst
 
 Appendicies
 ===========
-.. include:: VPL_apnds.rst
+.. include:: VPL_apnds.inc.rst
 
 
 oneVPL API Reference
@@ -261,17 +261,17 @@ Typedefs
 oneVPL Dispatcher API
 ---------------------
 
-.. include:: VPL_disp_api.rst
+.. include:: VPL_disp_api.inc.rst
 
 Enums
 -----
-.. include:: VPL_enums.rst
+.. include:: VPL_enums.inc.rst
 
 Structs
 -------
-.. include:: VPL_structs.rst
+.. include:: VPL_structs.inc.rst
 
 Functions
 ---------------
-.. include:: VPL_functions.rst
+.. include:: VPL_functions.inc.rst
 
