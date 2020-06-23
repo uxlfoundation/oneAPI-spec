@@ -22,3 +22,6 @@ project = 'oneVPL'
 
 from element_conf import *
 
+cpp_id_attributes = ['MFX_CDECL']
+
+c_id_attributes = ['MFX_CDECL']
