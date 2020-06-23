@@ -1,7 +1,7 @@
 .. _onemkl_lapack_getrs:
 
-onemkl::lapack::getrs
-=====================
+getrs
+=====
 
 
 .. container::
@@ -55,8 +55,8 @@ onemkl::lapack::getrs
    to compute the ``LU`` factorization of ``A``.
 
 
-onemkl::lapack::getrs (BUFFER Version)
---------------------------------------
+getrs (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -168,8 +168,8 @@ onemkl::lapack::getrs (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::getrs (USM Version)
---------------------------------------
+getrs (USM Version)
+----------------------
 
 .. container::
 

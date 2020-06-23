@@ -1,7 +1,7 @@
 .. _onemkl_lapack_heevd_scratchpad_size:
 
-onemkl::lapack::heevd_scratchpad_size
-=====================================
+heevd_scratchpad_size
+=====================
 
 
 .. container::
@@ -35,8 +35,8 @@ onemkl::lapack::heevd_scratchpad_size
       explicitly.
 
 
-onemkl::lapack::heevd_scratchpad_size
--------------------------------------
+heevd_scratchpad_size
+---------------------
 
 .. container::
 

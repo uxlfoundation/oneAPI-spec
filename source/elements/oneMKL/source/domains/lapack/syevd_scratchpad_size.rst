@@ -1,7 +1,7 @@
 .. _onemkl_lapack_syevd_scratchpad_size:
 
-onemkl::lapack::syevd_scratchpad_size
-=====================================
+syevd_scratchpad_size
+=====================
 
 
 .. container::
@@ -35,8 +35,8 @@ onemkl::lapack::syevd_scratchpad_size
       explicitly.
 
 
-onemkl::lapack::syevd_scratchpad_size
--------------------------------------
+syevd_scratchpad_size
+---------------------
 
 .. container::
 

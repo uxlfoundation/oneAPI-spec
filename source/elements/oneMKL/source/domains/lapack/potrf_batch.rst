@@ -1,7 +1,7 @@
 .. _onemkl_lapack_potrf_batch:
 
-onemkl::lapack::potrf_batch
-===========================
+potrf_batch
+===========
 
 
 .. container::
@@ -59,8 +59,8 @@ onemkl::lapack::potrf_batch
       ``U``\ :sub:`i` is an upper triangular matrix.
 
 
-onemkl::lapack::potrf_batch (BUFFER Version)
---------------------------------------------
+potrf_batch (BUFFER Version)
+----------------------------
 
 .. container::
 

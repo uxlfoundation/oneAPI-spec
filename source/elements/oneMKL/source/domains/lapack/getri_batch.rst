@@ -1,7 +1,7 @@
 .. _onemkl_lapack_getri_batch:
 
-onemkl::lapack::getri_batch
-===========================
+getri_batch
+===========
 
 
 .. container::
@@ -40,8 +40,8 @@ onemkl::lapack::getri_batch
       to compute the LU factorization of ``A``\ :sub:`i`,
       ``A``\ :sub:`2`, …, ``A``\ :sub:`batch_size`.
 
-onemkl::lapack::getri_batch (BUFFER Version)
---------------------------------------------
+getri_batch (BUFFER Version)
+----------------------------
 
 .. container::
 

@@ -1,7 +1,7 @@
 .. _onemkl_lapack_getrf_batch:
 
-onemkl::lapack::getrf_batch
-===========================
+getrf_batch
+===========
 
 
 .. container::
@@ -47,8 +47,8 @@ onemkl::lapack::getrf_batch
       interchanges.
 
 
-onemkl::lapack::getrf_batch (BUFFER Version)
---------------------------------------------
+getrf_batch (BUFFER Version)
+----------------------------
 
 .. container::
 
