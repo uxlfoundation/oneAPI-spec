@@ -1,7 +1,7 @@
 .. _onemkl_lapack_getri:
 
-onemkl::lapack::getri
-=====================
+getri
+=====
 
 
 .. container::
@@ -39,8 +39,8 @@ onemkl::lapack::getri
    to factorize ``A``.
 
 
-onemkl::lapack::getri (BUFFER Version)
---------------------------------------
+getri (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -119,8 +119,8 @@ onemkl::lapack::getri (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::getri (USM Version)
---------------------------------------
+getri (USM Version)
+----------------------
 
 .. container::
 

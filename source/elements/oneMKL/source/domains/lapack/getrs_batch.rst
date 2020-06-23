@@ -1,7 +1,7 @@
 .. _onemkl_lapack_getrs_batch:
 
-onemkl::lapack::getrs_batch
-===========================
+getrs_batch
+===========
 
 
 .. container::
@@ -57,8 +57,8 @@ onemkl::lapack::getrs_batch
       ``A``\ :sub:`2`, …, ``A``\ :sub:`````\ batch_size`.
 
 
-onemkl::lapack::getrs_batch (BUFFER Version)
---------------------------------------------
+getrs_batch (BUFFER Version)
+----------------------------
 
 .. container::
 

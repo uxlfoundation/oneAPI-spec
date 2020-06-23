@@ -1,7 +1,7 @@
 .. _onemkl_lapack_sytrd:
 
-onemkl::lapack::sytrd
-=====================
+sytrd
+=====
 
 
 .. container::
@@ -37,8 +37,8 @@ onemkl::lapack::sytrd
    Routines are provided for working with ``Q`` in this representation .
 
 
-onemkl::lapack::sytrd (BUFFER Version)
---------------------------------------
+sytrd (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -157,8 +157,8 @@ onemkl::lapack::sytrd (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::sytrd (USM Version)
---------------------------------------
+sytrd (USM Version)
+----------------------
 
 .. container::
 

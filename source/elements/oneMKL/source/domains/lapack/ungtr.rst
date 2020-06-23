@@ -1,7 +1,7 @@
 .. _onemkl_lapack_ungtr:
 
-onemkl::lapack::ungtr
-=====================
+ungtr
+=====
 
 
 .. container::
@@ -39,8 +39,8 @@ onemkl::lapack::ungtr
    :ref:`onemkl_lapack_hetrd`.
 
 
-onemkl::lapack::ungtr (BUFFER Version)
---------------------------------------
+ungtr (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -125,8 +125,8 @@ onemkl::lapack::ungtr (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::ungtr (USM Version)
---------------------------------------
+ungtr (USM Version)
+----------------------
 
 .. container::
 

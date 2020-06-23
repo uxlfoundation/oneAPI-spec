@@ -1,7 +1,7 @@
 .. _onemkl_lapack_ormtr_scratchpad_size:
 
-onemkl::lapack::ormtr_scratchpad_size
-=====================================
+ormtr_scratchpad_size
+=====================
 
 
 .. container::
@@ -35,8 +35,8 @@ onemkl::lapack::ormtr_scratchpad_size
       explicitly.
 
 
-onemkl::lapack::ormtr_scratchpad_size
--------------------------------------
+ormtr_scratchpad_size
+---------------------
 
 .. container::
 

@@ -1,7 +1,7 @@
 .. _onemkl_lapack_unmqr:
 
-onemkl::lapack::unmqr
-=====================
+unmqr
+=====
 
 
 .. container::
@@ -42,8 +42,8 @@ onemkl::lapack::unmqr
    ``C*Q``, or ``C*Q``\ :sup:`H` (overwriting the result on ``C``).
 
 
-onemkl::lapack::unmqr (BUFFER Version)
---------------------------------------
+unmqr (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -161,8 +161,8 @@ onemkl::lapack::unmqr (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::unmqr (USM Version)
---------------------------------------
+unmqr (USM Version)
+----------------------
 
 .. container::
 

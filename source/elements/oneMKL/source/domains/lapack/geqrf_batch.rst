@@ -1,7 +1,7 @@
 .. _onemkl_lapack_geqrf_batch:
 
-onemkl::lapack::geqrf_batch
-===========================
+geqrf_batch
+===========
 
 
 .. container::
@@ -43,8 +43,8 @@ onemkl::lapack::geqrf_batch
       work with ``Q``\ :sub:`i` in this representation.
 
 
-onemkl::lapack::geqrf_batch (BUFFER Version)
---------------------------------------------
+geqrf_batch (BUFFER Version)
+----------------------------
 
 .. container::
 

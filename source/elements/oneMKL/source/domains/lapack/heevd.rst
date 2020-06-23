@@ -1,7 +1,7 @@
 .. _onemkl_lapack_heevd:
 
-onemkl::lapack::heevd
-=====================
+heevd
+=====
 
 
 .. container::
@@ -50,8 +50,8 @@ onemkl::lapack::heevd
    Pal-Walker-Kahan variant of the ``QL`` or ``QR`` algorithm.
 
 
-onemkl::lapack::heevd (BUFFER Version)
---------------------------------------
+heevd (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -161,8 +161,8 @@ onemkl::lapack::heevd (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::heevd (USM Version)
---------------------------------------
+heevd (USM Version)
+----------------------
 
 .. container::
 

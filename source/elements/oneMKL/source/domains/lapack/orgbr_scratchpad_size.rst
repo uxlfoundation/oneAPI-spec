@@ -1,7 +1,7 @@
 .. _onemkl_lapack_orgbr_scratchpad_size:
 
-onemkl::lapack::orgbr_scratchpad_size
-=====================================
+orgbr_scratchpad_size
+=====================
 
 
 .. container::
@@ -34,8 +34,8 @@ onemkl::lapack::orgbr_scratchpad_size
       Calls to this routine must specify the template parameter explicitly.
 
 
-onemkl::lapack::orgbr_scratchpad_size
--------------------------------------
+orgbr_scratchpad_size
+---------------------
 
 .. container::
 
