@@ -68,9 +68,9 @@ NV16            X                                    X       X
 Deinterlacing/Inverse Telecine Support in **VPP**:
 
 +------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| Input Field Rate | Output Frame Rate | Output Frame Rate | Output Frame Rate | Output Frame Rate | Output Frame Rate | Output Frame Rate | Output Frame Rate |
-| (fps)            | (fps)             | (fps)             | (fps)             | (fps)             | (fps)             | (fps)             | (fps)             |
-| Interlaced	   | Progressive       | Progressive       | Progressive       | Progressive       | Progressive       | Progressive       | Progressive       |
+| Input Field Rate | Output Frame Rate                                                                                                                         |
+| (fps)            | (fps)                                                                                                                                     |
+| Interlaced	   | Progressive                                                                                                                               |
 +------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
 | -                | 23.976            |  25               |  29.97            |  30               |  50               |   59.94           |  60               |
 +------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+

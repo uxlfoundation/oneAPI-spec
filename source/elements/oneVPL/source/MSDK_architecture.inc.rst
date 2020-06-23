@@ -5,7 +5,7 @@ Category                                   Description
 ======================================     ======================================
 DECODE	                                   Decode compressed video streams into raw video frames
 ENCODE	                                   Encode raw video frames into compressed bitstreams
-VPP	                                       Perform video processing on raw video frames
+VPP	                                   Perform video processing on raw video frames
 CORE	                                   Auxiliary functions for synchronization
 Misc	                                   Global auxiliary functions
 ======================================     ======================================
