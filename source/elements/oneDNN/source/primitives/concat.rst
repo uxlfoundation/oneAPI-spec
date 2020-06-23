@@ -25,10 +25,10 @@ where
 
 - :math:`c = C_1 + \ldots + C_{i-1} + c'`,
 
-- :math:`\overline{ou}` is the outermost indices (to the left from shuffle
+- :math:`\overline{ou}` is the outermost indices (to the left from concat
   axis),
 
-- :math:`\overline{in}` is the innermost indices (to the right from shuffle
+- :math:`\overline{in}` is the innermost indices (to the right from concat
   axis), and
 
 Variable names follow the standard :ref:`conventions-label`.

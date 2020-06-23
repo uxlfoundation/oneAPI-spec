@@ -4,14 +4,22 @@
 .. default-domain:: cpp
 
 ##################
-Common definitions
+Common Definitions
 ##################
 
 This section lists common types and definitions used by all or multiple
 primitives.
 
+*************************
+Base Class for Primitives
+*************************
+
+.. doxygenstruct:: dnnl::primitive
+   :project: oneDNN
+   :members:
+
 *************************************
-Base class for primitives descriptors
+Base Class for Primitives Descriptors
 *************************************
 
 There is no common base class for operation descriptors because they are very
@@ -40,16 +48,8 @@ provide utility functions for frequently queried memory descriptors.
    :project: oneDNN
    :members:
 
-*************************
-Base class for primitives
-*************************
-
-.. doxygenstruct:: dnnl::primitive
-   :project: oneDNN
-   :members:
-
 *******************
-Common enumerations
+Common Enumerations
 *******************
 
 .. doxygenenum:: dnnl::prop_kind
