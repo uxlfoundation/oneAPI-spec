@@ -267,6 +267,8 @@ The ChromaFormatIdc enumerator itemizes color-sampling formats.
 .. doxygenenumvalue:: MFX_CHROMAFORMAT_JPEG_SAMPLING
    :project: oneVPL
 
+.. _PicStruct:
+
 PicStruct
 ~~~~~~~~~
 The PicStruct enumerator itemizes picture structure. Use bit-OR’ed values to specify the desired picture type.
