@@ -1,7 +1,7 @@
 .. _onemkl_lapack_gebrd_scratchpad_size:
 
-onemkl::lapack::gebrd_scratchpad_size
-=====================================
+gebrd_scratchpad_size
+=====================
 
 
 .. container::
@@ -37,8 +37,8 @@ onemkl::lapack::gebrd_scratchpad_size
       explicitly.
 
 
-onemkl::lapack::gebrd_scratchpad_size
--------------------------------------
+gebrd_scratchpad_size
+---------------------
 
 .. container::
 

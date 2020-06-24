@@ -1,7 +1,7 @@
 .. _onemkl_lapack_sygvd_scratchpad_size:
 
-onemkl::lapack::sygvd_scratchpad_size
-=====================================
+sygvd_scratchpad_size
+=====================
 
 
 .. container::
@@ -34,8 +34,8 @@ onemkl::lapack::sygvd_scratchpad_size
       Calls to this routine must specify the template parameter explicitly.
 
 
-onemkl::lapack::sygvd_scratchpad_size
--------------------------------------
+sygvd_scratchpad_size
+---------------------
 
 .. container::
 

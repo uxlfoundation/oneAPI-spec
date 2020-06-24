@@ -1,7 +1,7 @@
 .. _onemkl_lapack_sytrf_scratchpad_size:
 
-onemkl::lapack::sytrf_scratchpad_size
-=====================================
+sytrf_scratchpad_size
+=====================
 
 
 .. container::
@@ -37,8 +37,8 @@ onemkl::lapack::sytrf_scratchpad_size
       explicitly.
 
 
-onemkl::lapack::sytrf_scratchpad_size
--------------------------------------
+sytrf_scratchpad_size
+---------------------
 
 .. container::
 

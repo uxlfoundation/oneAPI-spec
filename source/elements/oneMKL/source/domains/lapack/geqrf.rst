@@ -1,7 +1,7 @@
 .. _onemkl_lapack_geqrf:
 
-onemkl::lapack::geqrf
-=====================
+geqrf
+=====
 
 
 .. container::
@@ -42,8 +42,8 @@ onemkl::lapack::geqrf
    representation.
 
 
-onemkl::lapack::geqrf (BUFFER Version)
---------------------------------------
+geqrf (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -133,8 +133,8 @@ onemkl::lapack::geqrf (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::geqrf (USM Version)
---------------------------------------
+geqrf (USM Version)
+----------------------
 
 .. container::
 

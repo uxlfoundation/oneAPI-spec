@@ -1,7 +1,7 @@
 .. _onemkl_lapack_syevd:
 
-onemkl::lapack::syevd
-=====================
+syevd
+=====
 
 
 .. container::
@@ -50,8 +50,8 @@ onemkl::lapack::syevd
    Pal-Walker-Kahan variant of the ``QL`` or ``QR`` algorithm.
 
 
-onemkl::lapack::syevd (BUFFER Version)
---------------------------------------
+syevd (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -162,8 +162,8 @@ onemkl::lapack::syevd (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::syevd (USM Version)
---------------------------------------
+syevd (USM Version)
+----------------------
 
 .. container::
 

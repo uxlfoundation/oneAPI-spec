@@ -1,7 +1,7 @@
 .. _onemkl_lapack_sygvd:
 
-onemkl::lapack::sygvd
-=====================
+sygvd
+=====
 
 
 .. container::
@@ -47,8 +47,8 @@ onemkl::lapack::sygvd
    It uses a divide and conquer algorithm.
 
 
-onemkl::lapack::sygvd (BUFFER Version)
---------------------------------------
+sygvd (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -212,8 +212,8 @@ onemkl::lapack::sygvd (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::sygvd (USM Version)
---------------------------------------
+sygvd (USM Version)
+----------------------
 
 .. container::
 

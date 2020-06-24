@@ -16,7 +16,6 @@ The individual domains and their APIs are described in :ref:`onemkl_domains`.
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    architecture/architecture.rst
    domains/domains.rst

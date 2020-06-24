@@ -1,7 +1,7 @@
 .. _onemkl_lapack_potrs:
 
-onemkl::lapack::potrs
-=====================
+potrs
+=====
 
 
 .. container::
@@ -60,8 +60,8 @@ onemkl::lapack::potrs
    the Cholesky factorization of ``A``.
 
 
-onemkl::lapack::potrs (BUFFER Version)
---------------------------------------
+potrs (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -145,8 +145,8 @@ onemkl::lapack::potrs (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::potrs (USM Version)
---------------------------------------
+potrs (USM Version)
+----------------------
 
 .. container::
 

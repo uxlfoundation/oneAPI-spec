@@ -1,7 +1,7 @@
 .. _onemkl_lapack_ungqr:
 
-onemkl::lapack::ungqr
-=====================
+ungqr
+=====
 
 
 .. container::
@@ -78,8 +78,8 @@ onemkl::lapack::ungqr
        onemkl::ungqr(queue, m, k, k, a, lda, tau, scratchpad, scratchpad_size)
 
 
-onemkl::lapack::ungqr (BUFFER Version)
---------------------------------------
+ungqr (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -166,8 +166,8 @@ onemkl::lapack::ungqr (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::ungqr (USM Version)
---------------------------------------
+ungqr (USM Version)
+----------------------
 
 .. container::
 

@@ -1,7 +1,7 @@
 .. _onemkl_lapack_ormqr:
 
-onemkl::lapack::ormqr
-=====================
+ormqr
+=====
 
 
 .. container::
@@ -43,8 +43,8 @@ onemkl::lapack::ormqr
    can form one of the matrix products ``Q*C``, ``QT*C``, ``C*Q``, or
    ``C*QT`` (overwriting the result on ``C``).
 
-onemkl::lapack::ormqr (BUFFER Version)
---------------------------------------
+ormqr (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -162,8 +162,8 @@ onemkl::lapack::ormqr (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::ormqr (USM Version)
---------------------------------------
+ormqr (USM Version)
+----------------------
 
 .. container::
 

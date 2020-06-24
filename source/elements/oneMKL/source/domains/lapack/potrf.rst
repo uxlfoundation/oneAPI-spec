@@ -1,7 +1,7 @@
 .. _onemkl_lapack_potrf:
 
-onemkl::lapack::potrf
-=====================
+potrf
+=====
 
 
 .. container::
@@ -53,8 +53,8 @@ onemkl::lapack::potrf
    triangular.
 
 
-onemkl::lapack::potrf (BUFFER Version)
---------------------------------------
+potrf (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -149,8 +149,8 @@ onemkl::lapack::potrf (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::potrf (USM Version)
---------------------------------------
+potrf (USM Version)
+----------------------
 
 .. container::
 
