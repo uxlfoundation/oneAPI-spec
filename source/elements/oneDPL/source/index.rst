@@ -3,9 +3,9 @@
 
 .. _oneDPL-section:
 
-====================
-oneDPL |dpl_version|
-====================
+======
+oneDPL
+======
 
 The |dpl_full_name| (oneDPL) provides the functionality
 specified in the C++ standard, with extensions to support data parallelism

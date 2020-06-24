@@ -7,9 +7,8 @@ BLAS Level 2 Routines
 .. container::
 
 
-   This section describes BLAS Level 2 routines, which perform
-   matrix-vector operations. The following table lists the BLAS Level 2
-   routine groups and the data types associated with them.
+   BLAS Level 2 includes routines which perform
+   matrix-vector operations as described in the following table. 
 
 
    .. container:: tablenoborder
@@ -61,15 +60,15 @@ BLAS Level 2 Routines
          * -     \ `tbmv <tbmv.html>`__\   
            -     Matrix-vector product using a triangular band matrix          
          * -     \ `tbsv <tbsv.html>`__\   
-           -     Solution of a linear system of equations with a       triangular band matrix    
+           -     Solution of a linear system of equations with a triangular band matrix    
          * -     \ `tpmv <tpmv.html>`__\   
            -     Matrix-vector product using a triangular packed matrix          
          * -     \ `tpsv <tpsv.html>`__\   
-           -     Solution of a linear system of equations with a       triangular packed matrix    
+           -     Solution of a linear system of equations with a triangular packed matrix    
          * -     \ `trmv <trmv.html>`__\   
            -     Matrix-vector product using a triangular matrix          
          * -     \ `trsv <trsv.html>`__\   
-           -     Solution of a linear system of equations with a       triangular matrix    
+           -     Solution of a linear system of equations with a triangular matrix    
 
 
 

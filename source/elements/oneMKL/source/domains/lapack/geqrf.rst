@@ -1,3 +1,4 @@
+.. _onemkl_lapack_geqrf:
 
 geqrf
 =====
@@ -6,19 +7,8 @@ geqrf
 .. container::
 
 
-   Computes the QR factorization of a general m-by-n matrix. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   Computes the ``QR`` factorization of a general ``m``-by-``n`` matrix.
 
-
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void geqrf(queue &exec_queue, std::int64_t m,      std::int64_t n, buffer<T,1> &a, std::int64_t lda, buffer<T,1>      &tau, buffer<T,1> &work, std::int64_t lwork, buffer<T,1> &info)
 
       ``geqrf`` supports the following precisions:
 
@@ -36,7 +26,6 @@ geqrf
 
 
 .. container:: section
-   :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
 
 
    .. rubric:: Description
@@ -48,20 +37,34 @@ geqrf
 
 
    The routine does not form the matrix ``Q`` explicitly. Instead, ``Q``
-   is represented as a product of min(``m``, ``n``) elementary
+   is represented as a product of ``min(m, n)`` elementary
    reflectors. Routines are provided to work with ``Q`` in this
    representation.
 
 
+geqrf (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::geqrf(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+
+
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -74,22 +77,113 @@ geqrf
 
 
    a
-      Buffer holding input matrix ``A``. The buffer a contains the
-      matrix ``A``. The second dimension of a must be at least
-      ``max(1, n)``.
+      Buffer holding input matrix ``A``. Must have size at least
+      ``lda``\ \*\ ``n``.
 
 
    lda
-      The leading dimension of a; at least max(1, m).
+      The leading dimension of ``A``; at least ``max(1, m)``.
 
 
-   lwork
-      The size of the ``work`` array (``lwork≥n``). Must be computed by
-      `geqrf_get_lwork <geqrf_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_geqrf_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      Output buffer, overwritten by the factorization data as follows:
+
+
+      The elements on and above the diagonal of the array contain the
+      ``min(m,n)``-by-``n`` upper trapezoidal matrix ``R`` (``R`` is upper
+      triangular if ``m≥n``); the elements below the diagonal, with the
+      array tau, represent the orthogonal matrix ``Q`` as a product of
+      ``min(m,n)`` elementary reflectors.
+
+
+   tau
+      Output buffer, size at least ``max(1, min(m, n))``. Contains scalars
+      that define elementary reflectors for the matrix ``Q`` in its
+      decomposition in a product of elementary reflectors.
+
+
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+geqrf (USM Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function:: cl::sycl::event  onemkl::lapack::geqrf(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+
+
+.. container:: section
+
+
+   .. rubric:: Input Parameters
+      :class: sectiontitle
+
+
+   queue
+      The queue where the routine should be executed.
+
+
+   m
+      The number of rows in the matrix ``A`` (``0≤m``).
+
+
+   n
+      The number of columns in ``A`` (``0≤n``).
+
+
+   a
+      Pointer to memory holding input matrix ``A``. Must have size at least
+      ``lda``\ \*\ ``n``.
+
+
+   lda
+      The leading dimension of ``A``; at least ``max(1, m)``.
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_geqrf_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
 
 
    .. rubric:: Output Parameters
@@ -99,50 +193,46 @@ geqrf
    a
       Overwritten by the factorization data as follows:
 
-
       The elements on and above the diagonal of the array contain the
-      min(m,n)-by-``n`` upper trapezoidal matrix ``R`` (``R`` is upper
-      triangular if m≥n); the elements below the diagonal, with the
-      array tau, present the orthogonal matrix ``Q`` as a product of
-      min(m,n) elementary reflectors.
+      ``min(m,n)``-by-``n`` upper trapezoidal matrix ``R`` (``R`` is upper
+      triangular if ``m≥n``); the elements below the diagonal, with the
+      array tau, represent the orthogonal matrix ``Q`` as a product of
+      ``min(m,n)`` elementary reflectors.
 
 
    tau
-      Array, size at least max (1, min(``m``, ``n``)). Contains scalars
+      Array, size at least ``max(1, min(m, n))``. Contains scalars
       that define elementary reflectors for the matrix ``Q`` in its
       decomposition in a product of elementary reflectors.
 
 
-   work
-      Workspace for internal computations.
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If ``info = 0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info = -i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
+   .. container:: section
 
 
-   .. rubric:: Example
-      :class: sectiontitle
+      .. rubric:: Return Values
+         :class: sectiontitle
 
 
-   An example of how to use ``geqrf``\ can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/lapack/geqrf.cpp
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -151,7 +241,6 @@ geqrf
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 
 

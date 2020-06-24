@@ -43,7 +43,7 @@ Requirements:
 * The type ``Output`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 * The type ``Policy`` may be specified as :doc:`lightweight policy<functional_node_policies>` or defaulted.
-* The type ``Body`` shall meet the :doc:`ContinueNodeBody requirements <../../named_requirements/flow_graph/continue_node_body>`.
+* The type ``Body`` shall meet the :doc:`ContinueNodeBody requirements <../named_requirements/flow_graph/continue_node_body>`.
 
 A ``continue_node`` is a ``graph_node``, ``receiver<continue_msg>`` and ``sender<Output>``.
 

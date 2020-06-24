@@ -1,3 +1,4 @@
+.. _onemkl_lapack_ungqr:
 
 ungqr
 =====
@@ -7,18 +8,8 @@ ungqr
 
 
    Generates the complex unitary matrix Q of the QR factorization formed
-   by geqrf. This routine belongs to the ``onemkl::lapack``\ namespace.
+   by geqrf.
 
-
-   .. container:: section
-      :name: GUID-9FBC1610-9EB2-4F98-97CF-B74E301DF4AD
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void ungqr(queue &exec_queue, std::int64_t m,      std::int64_t n, std::int64_t k, buffer<T,1> &a, std::int64_t lda,      buffer<T,1> &tau, buffer<T,1> &work, std::int64_t lwork,      buffer<std::int64_t,1> &info)
 
       ``ungqr`` supports the following precisions.
 
@@ -34,7 +25,6 @@ ungqr
 
 
 .. container:: section
-   :name: GUID-6E26AE63-E2AA-4D9F-B690-7FA8A0882B6F
 
 
    .. rubric:: Description
@@ -43,7 +33,7 @@ ungqr
 
    The routine generates the whole or part of ``m``-by-``m`` unitary
    matrix ``Q`` of the ``QR`` factorization formed by the routines
-   `?geqrf <geqrf.html>`__.
+   :ref:`onemkl_lapack_geqrf`.
 
 
    Usually ``Q`` is determined from the ``QR`` factorization of an ``m``
@@ -54,7 +44,7 @@ ungqr
    ::
 
 
-       onemkl::ungqr(queue, m, m, p, a, lda, tau, work, lwork, info)
+       onemkl::ungqr(queue, m, m, p, a, lda, tau, scratchpad, scratchpad_size)
 
 
    To compute the leading ``p`` columns of ``Q`` (which form an
@@ -64,7 +54,7 @@ ungqr
    ::
 
 
-       onemkl::ungqr(queue, m, p, p, a, lda, tau, work, lwork, info)
+       onemkl::ungqr(queue, m, p, p, a, lda, tau, scratchpad, scratchpad_size)
 
 
    To compute the matrix ``Q``\ :sup:`k` of the ``QR`` factorization of
@@ -74,7 +64,7 @@ ungqr
    ::
 
 
-       onemkl::ungqr(queue, m, m, k, a, lda, tau, work, lwork, info)
+       onemkl::ungqr(queue, m, m, k, a, lda, tau, scratchpad, scratchpad_size)
 
 
    To compute the leading ``k`` columns of ``Q``\ :sup:`k` (which form
@@ -85,18 +75,31 @@ ungqr
    ::
 
 
-       onemkl::ungqr(queue, m, k, k, a, lda, tau, work, lwork, info)
+       onemkl::ungqr(queue, m, k, k, a, lda, tau, scratchpad, scratchpad_size)
 
+
+ungqr (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::ungqr(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a, std::int64_t lda,      cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -114,8 +117,8 @@ ungqr
 
 
    a
-      The buffer a returned by
-      `geqrf <geqrf.html>`__.
+      The buffer ``a`` as returned by
+      :ref:`onemkl_lapack_geqrf`.
 
 
    lda
@@ -123,17 +126,16 @@ ungqr
 
 
    tau
-      The buffer tau returned by
-      `geqrf <geqrf.html>`__.
+      The buffer ``tau`` as returned by
+      :ref:`onemkl_lapack_geqrf`.
 
 
-   lwork
-      The size of the work array (``lwork  ≥n``). Must be computed by
-      `ungqr_get_lwork <ungqr_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_ungqr_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
    .. rubric:: Output Parameters
@@ -145,36 +147,124 @@ ungqr
       orthogonal matrix ``Q``.
 
 
-   work
-      Workspace for internal computations.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If ``info=0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
 
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+ungqr (USM Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::ungqr(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``ungqr``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
 
 
-   ::
+   m
+      The number of rows in the matrix ``A`` (``m ≤0``).
 
 
-      examples/sycl/lapack/ungqr.cpp
+   n
+      The number of columns in the matrix ``A`` (``0≤n``).
+
+
+   k
+      The number of elementary reflectors whose product defines the
+      matrix ``Q`` (``0≤k≤n``).
+
+
+   a
+      The pointer to ``a`` as returned by
+      :ref:`onemkl_lapack_geqrf`.
+
+
+   lda
+      The leading dimension of a (``lda ≤m``).
+
+
+   tau
+      The pointer to ``tau`` as returned by
+      :ref:`onemkl_lapack_geqrf`.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_ungqr_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      Overwritten by ``n`` leading columns of the ``m``-by-``m``
+      orthogonal matrix ``Q``.
+
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -183,7 +273,6 @@ ungqr
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
 
 

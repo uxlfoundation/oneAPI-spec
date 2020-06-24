@@ -53,7 +53,7 @@ nrm2
    ``x`` is a vector of ``n`` elements.
 
 
-nrm2 (BUFFER Version)
+nrm2 (Buffer Version)
 ---------------------
 
 .. container::
@@ -65,7 +65,7 @@ nrm2 (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::nrm2(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T_res,1> &result)
+      .. cpp:function::  void onemkl::blas::nrm2(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T_res,1> &result)
 .. container:: section
 
 

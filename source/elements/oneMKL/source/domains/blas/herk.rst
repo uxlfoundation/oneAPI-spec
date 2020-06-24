@@ -38,9 +38,6 @@ herk
    ``C`` by a general matrix ``A``. The operation is defined as:
 
 
-  
-
-
       C <- alpha*op(A)*op(A) :sup:`H` + beta*C
 
 
@@ -59,7 +56,7 @@ herk
    Here op(``A``) is ``n`` x ``k``, and ``C`` is ``n`` x ``n``.
 
 
-herk (BUFFER Version)
+herk (Buffer Version)
 ---------------------
 
 .. container::
@@ -71,7 +68,7 @@ herk (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::herk(sycl::queue &queue, uplo upper_lower,      transpose trans, std::int64_t n, std::int64_t k, T_real alpha,      sycl::buffer<T,1> &a, std::int64_t lda, T_real beta, sycl::buffer<T,1> &c,      std::int64_t ldc)
+      .. cpp:function::  void onemkl::blas::herk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T_real alpha, sycl::buffer<T,1> &a, std::int64_t lda, T_real beta, sycl::buffer<T,1> &c, std::int64_t ldc)
 .. container:: section
 
 
@@ -171,7 +168,7 @@ herk (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::herk(sycl::queue &queue, uplo upper_lower, transpose trans, std::int64_t n, std::int64_t k, T_real alpha, const T* a, std::int64_t lda, T_real beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::herk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T_real alpha, const T* a, std::int64_t lda, T_real beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

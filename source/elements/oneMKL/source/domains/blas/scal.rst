@@ -45,9 +45,6 @@ scal
    The ``scal`` routines computes a scalar-vector product:
 
 
-  
-
-
       x <- alpha*x
 
 
@@ -60,7 +57,7 @@ scal
    ``alpha`` is a scalar.
 
 
-scal (BUFFER Version)
+scal (Buffer Version)
 ---------------------
 
 .. container::
@@ -72,7 +69,7 @@ scal (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::scal(sycl::queue &queue, std::int64_t n,      T_scalar alpha, sycl::buffer<T,1> &x, std::int64_t incx)
+      .. cpp:function::  void onemkl::blas::scal(sycl::queue &queue, std::int64_t n, T_scalar alpha, sycl::buffer<T,1> &x, std::int64_t incx)
 .. container:: section
 
 
@@ -129,7 +126,7 @@ scal (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::scal(sycl::queue &queue, std::int64_t n, T_scalar alpha, T *x, std::int64_t incx, const         sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::scal(sycl::queue &queue, std::int64_t n, T_scalar alpha, T *x, std::int64_t incx, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

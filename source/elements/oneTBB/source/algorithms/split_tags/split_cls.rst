@@ -3,7 +3,7 @@ split
 =====
 **[algorithms.split]**
 
-Type of an argument for a splitting constructor of :doc:`Range <../../../named_requirements/algorithms/range>`.
+Type of an argument for a splitting constructor of :doc:`Range <../../named_requirements/algorithms/range>`.
 An argument of type ``split`` is used to distinguish a splitting constructor from a copy constructor.
 
 .. code:: cpp

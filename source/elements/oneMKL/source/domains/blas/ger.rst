@@ -35,9 +35,6 @@ ger
    result to a general matrix. The operation is defined as
 
 
-  
-
-
       A <- alpha*x*y :sup:`T` + A
 
 
@@ -56,7 +53,7 @@ ger
    ``y`` is a vector length ``n``.
 
 
-ger (BUFFER Version)
+ger (Buffer Version)
 --------------------
 
 .. container::
@@ -68,7 +65,7 @@ ger (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::ger(sycl::queue &queue, std::int64_t m,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a, std::int64_t      lda)
+      .. cpp:function::  void onemkl::blas::ger(sycl::queue &queue, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a, std::int64_t lda)
 .. container:: section
 
 

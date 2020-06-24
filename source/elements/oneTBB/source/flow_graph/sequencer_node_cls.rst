@@ -30,7 +30,7 @@ Requirements:
 
 * The type ``T`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
-* The type ``Sequencer`` shall meet the :doc:`Sequencer requirements <../../named_requirements/flow_graph/sequencer>`
+* The type ``Sequencer`` shall meet the :doc:`Sequencer requirements <../named_requirements/flow_graph/sequencer>`
   If ``Sequencer`` instance throws an exception, then behavior is undefined.
 
 ``sequencer_node`` forwards messages in sequence order to a single successor in its successor set.
@@ -87,7 +87,7 @@ Deduction Guides
 .. code:: cpp
 
     template <typename Body>
-    sequencer_node(graph&, Body) -> sequencer_node<std::decay_t<input_t<Body>>>;
+    sequencer_node(graph&, Body) -> input_node<std::decay_t<input_t<Body>>>;
 
 Where:
 

@@ -24,13 +24,14 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.graphviz',
     'sphinxcontrib.spelling',
+    'sphinx-prompt',
     'sphinx_substitution_extensions',
     'breathe',
     'dalapi', # oneDAL API generator
 ]
 
 env = {
-    'oneapi_version': '0.7',
+    'oneapi_version': '0.8',
     'l0_version': '0.91',
 }
 
@@ -55,7 +56,7 @@ prolog_template = string.Template("""
 .. |vpl_version| replace:: $oneapi_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
-.. _`Level Zero Specification`: https://spec.oneapi.com/versions/$oneapi_version/oneL0/index.html
+.. _`Level Zero Specification`: https://spec.oneapi.com/level-zero/latest/index.html
 """)
 
 rst_prolog = prolog_template.substitute(env)

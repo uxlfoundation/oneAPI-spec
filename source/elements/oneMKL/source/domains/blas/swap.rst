@@ -38,13 +38,11 @@ swap
    other.
 
 
-  
-
 
       y <- x, x <- y
 
 
-swap (BUFFER Version)
+swap (Buffer Version)
 ---------------------
 
 .. container::
@@ -56,7 +54,7 @@ swap (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::swap(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t      incy)
+      .. cpp:function::  void onemkl::blas::swap(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy)
 .. container:: section
 
 
@@ -126,7 +124,7 @@ swap (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::swap(sycl::queue &queue, std::int64_t n,         T *x, std::int64_t incx, T *y, std::int64_t incy, const         sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::swap(sycl::queue &queue, std::int64_t n, T *x, std::int64_t incx, T *y, std::int64_t incy, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

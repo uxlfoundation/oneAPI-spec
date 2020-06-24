@@ -1,3 +1,4 @@
+.. _onemkl_lapack_gebrd:
 
 gebrd
 =====
@@ -6,27 +7,8 @@ gebrd
 .. container::
 
 
-   Reduces a general matrix to bidiagonal form. This routine belongs to
-   the ``onemkl::lapack``\ namespace.
+   Reduces a general matrix to bidiagonal form.
 
-
-   .. container:: section
-      :name: GUID-8DFD8E6D-C63C-4D34-9784-4DEDFF7C1965
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      For real precisions:
-
-
-      .. cpp:function::  void gebrd(queue &exec_queue, std::int64_t m,      std::int64_t n, buffer<T,1> &a, std::int64_t lda, buffer<T,1> &d,      buffer<T,1> &e, buffer<T,1> &tauq, buffer<T,1> &taup, buffer<T,1>      &work, std::int64_t lwork, buffer<std::int64_t,1> &info)
-
-      For complex precisions:
-
-
-      .. cpp:function::  void gebrd(queue &exec_queue, std::int64_t m,      std::int64_t n, buffer<T,1> &a, std::int64_t lda, buffer<realT,1>      &d, buffer<realT,1> &e, buffer<T,1> &tauq, buffer<T,1> &taup,      buffer<T,1> &work, std::int64_t lwork, buffer<std::int64_t,1>      &info)
 
       ``gebrd`` supports the following precisions.
 
@@ -44,7 +26,6 @@ gebrd
 
 
 .. container:: section
-   :name: GUID-B6C26CE6-BBEA-493E-922B-C81BEB0C48CC
 
 
    .. rubric:: Description
@@ -86,25 +67,39 @@ gebrd
 
 
    -  to compute ``Q`` and ``P`` explicitly, call
-      `orgbr <orgbr.html>`__.
+      :ref:`onemkl_lapack_orgbr`.
 
 
    If the matrix ``A`` is complex,
 
 
    -  to compute ``Q`` and ``P`` explicitly, call
-      `ungbr <ungbr.html>`__.
+      :ref:`onemkl_lapack_ungbr`
+
+
+gebrd (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::gebrd(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1>      &d, cl::sycl::buffer<realT,1> &e, cl::sycl::buffer<T,1> &tauq, cl::sycl::buffer<T,1> &taup,      cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -126,13 +121,12 @@ gebrd
       The leading dimension of ``a``.
 
 
-   lwork
-      The size of the work buffer. Must be computed by
-      `gebrd_get_lwork <gebrd_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_gebrd_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
    .. rubric:: Output Parameters
@@ -179,36 +173,150 @@ gebrd
       unitary matrix ``P``.
 
 
-   work
-      Buffer of workspace.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If ``info=0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+gebrd (USM Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::gebrd(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, RealT *d, RealT *e, T *tauq, T *taup, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``gebrd``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
 
 
-   ::
+   m
+      The number of rows in the matrix ``A`` (``0≤m``).
 
 
-      examples/sycl/lapack/gebrd.cpp
+   n
+      The number of columns in the matrix ``A`` (``0≤n``).
+
+
+   a
+      Pointer to matrix ``A``. The second dimension of ``a`` must be at least
+      ``max(1, m)``.
+
+
+   lda
+      The leading dimension of ``a``.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_gebrd_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      If ``m≥n``, the diagonal and first super-diagonal of a are
+      overwritten by the upper bidiagonal matrix ``B``. The elements
+      below the diagonal, with the array tauq, represent the orthogonal
+      matrix ``Q`` as a product of elementary reflectors, and the
+      elements above the first superdiagonal, with the array taup,
+      represent the orthogonal matrix ``P`` as a product of elementary
+      reflectors.
+
+
+      If ``m<n``, the diagonal and first sub-diagonal of a are
+      overwritten by the lower bidiagonal matrix ``B``. The elements
+      below the first subdiagonal, with the array tauq, represent the
+      orthogonal matrix ``Q`` as a product of elementary reflectors, and
+      the elements above the diagonal, with the array taup, represent
+      the orthogonal matrix ``P`` as a product of elementary reflectors.
+
+
+   d
+      Pointer to memory of size at least ``max(1, min(m,n))``. Contains the diagonal
+      elements of ``B``.
+
+
+   e
+      Pointer to memory of size at least ``max(1, min(m,n) - 1)``. Contains the
+      off-diagonal elements of ``B``.
+
+
+   tauq
+      Pointer to memory of size at least ``max(1, min(m, n))``. The scalar factors of
+      the elementary reflectors which represent the orthogonal or
+      unitary matrix ``Q``.
+
+
+   taup
+      Pointer to memory of size at least ``max(1, min(m, n))``. The scalar factors of
+      the elementary reflectors which represent the orthogonal or
+      unitary matrix ``P``.
+
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -217,8 +325,7 @@ gebrd
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
 
 

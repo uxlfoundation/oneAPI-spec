@@ -1,3 +1,4 @@
+.. _onemkl_lapack_getri:
 
 getri
 =====
@@ -7,19 +8,8 @@ getri
 
 
    Computes the inverse of an LU-factored general matrix determined by
-   `getrf <getrf.html>`__.This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   :ref:`onemkl_lapack_getrf`.
 
-
-   .. container:: section
-      :name: GUID-4E4EBE80-34FC-4800-A5DC-CE70693B32F9
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void getri_get_lwork(queue &exec_queue,      std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<std::int64_t,1> &ipiv, buffer<T,1> &work, std::int64_t      lwork, buffer<std::int64_t,1> &info)
 
       ``getri`` supports the following precisions.
 
@@ -37,7 +27,6 @@ getri
 
 
 .. container:: section
-   :name: GUID-7DD2B57C-5331-47B0-9C18-7BF816B60676
 
 
    .. rubric:: Description
@@ -46,19 +35,32 @@ getri
 
    The routine computes the inverse ``inv(A)`` of a general matrix
    ``A``. Before calling this routine, call
-   `?getrf <getrf.html>`__
+   :ref:`onemkl_lapack_getrf`
    to factorize ``A``.
 
 
+getri (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::getri(cl::sycl::queue &queue,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda,      cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t      scratchpad_size)
+
 .. container:: section
-   :name: GUID-26A5866D-0DF8-4835-8776-E5E73F0C657A
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -67,8 +69,8 @@ getri
 
 
    a
-      The buffer a returned by
-      `getrf <getrf.html>`__. Must
+      The buffer ``a`` as returned by
+      :ref:`onemkl_lapack_getrf`. Must
       be of size at least ``lda*max(1,n)``.
 
 
@@ -78,17 +80,16 @@ getri
 
    ipiv
       The buffer as returned by
-      `getrf <getrf.html>`__ . The
+      :ref:`onemkl_lapack_getrf`. The
       dimension of ipiv must be at least ``max(1, n)``.
 
 
-   lwork
-      The size of the work array ``(lwork≥n)``. Should be computed by
-      `getri_get_lwork <getri_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_getri_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-399F00E4-1E32-4114-AC10-5A1B420E474E
 
 
    .. rubric:: Output Parameters
@@ -99,51 +100,116 @@ getri
       Overwritten by the n-by-n matrix ``A``.
 
 
-   work
-      Buffer workspace for internal computations.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If ``info=0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
 
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+getri (USM Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::getri(cl::sycl::queue &queue,      std::int64_t n, T *a, std::int64_t lda, std::int64_t *ipiv, T *scratchpad, std::int64_t      scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``getri``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
 
 
-   ::
+   n
+      The order of the matrix ``A``\ ``(0≤n)``.
 
 
-      examples/sycl/lapack/getri.cpp
+   a
+      The array as returned by
+      :ref:`onemkl_lapack_getrf`. Must
+      be of size at least ``lda*max(1,n)``.
+
+
+   lda
+      The leading dimension of a\ ``(n≤lda)``.
+
+
+   ipiv
+      The array as returned by
+      :ref:`onemkl_lapack_getrf`. The
+      dimension of ipiv must be at least ``max(1, n)``.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_getri_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
 
 
 .. container:: section
-   :name: GUID-3B00B441-C7C0-4D8A-A819-41037F1E5862
 
 
-   .. rubric:: Known Limitations
+   .. rubric:: Output Parameters
       :class: sectiontitle
 
 
-   GPU support is for only real precisions.
+   a
+      Overwritten by the n-by-n matrix ``A``.
 
 
-   For GPU support, errors are reported through the info parameter, but
-   computation does not halt for an algorithmic error.
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -152,7 +218,6 @@ getri
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
 
 

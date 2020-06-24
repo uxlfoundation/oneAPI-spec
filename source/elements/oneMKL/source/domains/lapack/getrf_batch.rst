@@ -1,3 +1,4 @@
+.. _onemkl_lapack_getrf_batch:
 
 getrf_batch
 ===========
@@ -6,22 +7,8 @@ getrf_batch
 .. container::
 
 
-   Computes the LU factorizations of a batch of general matrices. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   Computes the LU factorizations of a batch of general matrices.
 
-
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. container:: dlsyntaxpara
-
-
-         .. cpp:function::  void getrf_batch(queue &exec_queue,         std::vector<std::int64_t> const& m, std::vector<std::int64_t>         const& n, std::vector<buffer<T,1>> &a,         std::vector<std::int64_t> const& lda,         std::vector<buffer<std::int64_t,1>> &ipiv,         std::vector<buffer<std::int64_t,1>> &info)
 
          ``getrf_batch`` supports the following precisions.
 
@@ -39,7 +26,6 @@ getrf_batch
 
 
    .. container:: section
-      :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
 
 
       .. rubric:: Description
@@ -61,15 +47,31 @@ getrf_batch
       interchanges.
 
 
+getrf_batch (BUFFER Version)
+----------------------------
+
+.. container::
+
    .. container:: section
-      :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. container:: dlsyntaxpara
+
+
+         .. cpp:function::  void onemkl::lapack::getrf_batch(cl::sycl::queue &queue,         std::vector<std::int64_t> const& m, std::vector<std::int64_t>         const& n, std::vector<cl::sycl::buffer<T,1>> &a,         std::vector<std::int64_t> const& lda,         std::vector<cl::sycl::buffer<std::int64_t,1>> &ipiv,         std::vector<cl::sycl::buffer<std::int64_t,1>> &info)
+
+   .. container:: section
 
 
       .. rubric:: Input Parameters
          :class: sectiontitle
 
 
-      exec_queue
+      queue
          The queue where the routine should be executed.
 
 
@@ -95,7 +97,6 @@ getrf_batch
 
 
    .. container:: section
-      :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
       .. rubric:: Output Parameters
@@ -125,32 +126,13 @@ getrf_batch
          ``U``\ :sub:`i` for solving a system of linear equations.
 
 
-   .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-      .. rubric:: Example
-         :class: sectiontitle
-
-
-      An example of how to use getrf_batch can be found in the oneMKL
-      installation directory, under:
-
-
-      ::
-
-
-         examples/sycl/lapack/LU_batch.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines` 
 
 
 

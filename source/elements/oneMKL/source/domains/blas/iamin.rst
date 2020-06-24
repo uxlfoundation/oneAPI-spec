@@ -61,7 +61,7 @@ iamin
    index of the first ``NaN``.
 
 
-iamin (BUFFER Version)
+iamin (Buffer Version)
 ----------------------
 
 .. container::
@@ -73,7 +73,7 @@ iamin (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::iamin(sycl::queue &queue, std::int64_t n,      sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<std::int64_t,1>      &result)
+      .. cpp:function::  void onemkl::blas::iamin(sycl::queue &queue, std::int64_t n, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<std::int64_t,1> &result)
 .. container:: section
 
 

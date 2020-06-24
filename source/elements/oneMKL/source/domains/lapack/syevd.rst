@@ -1,3 +1,4 @@
+.. _onemkl_lapack_syevd:
 
 syevd
 =====
@@ -7,19 +8,8 @@ syevd
 
 
    Computes all eigenvalues and, optionally, all eigenvectors of a real
-   symmetric matrix using divide and conquer algorithm. This routine
-   belongs to the ``onemkl::lapack``\ namespace.
+   symmetric matrix using divide and conquer algorithm.
 
-
-   .. container:: section
-      :name: GUID-A02DF677-A0D6-41B5-8362-0FF15785B9F4
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void syevd(queue &exec_queue, jobz jobz, uplo      upper_lower, std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<T,1> &w, buffer<T,1> &work, std::int64_t lwork,      buffer<std::int64_t,1> &iwork, std::int64_t liwork,      buffer<std::int64_t,1> &info)
 
       ``syevd`` supports the following precisions.
 
@@ -35,7 +25,6 @@ syevd
 
 
 .. container:: section
-   :name: GUID-0A641B08-5EA0-4035-A543-C9EACA9986F0
 
 
    .. rubric:: Description
@@ -61,15 +50,28 @@ syevd
    Pal-Walker-Kahan variant of the ``QL`` or ``QR`` algorithm.
 
 
+syevd (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::syevd(cl::sycl::queue &queue, jobz jobz, onemkl::uplo      upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda,      cl::sycl::buffer<T,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -109,18 +111,12 @@ syevd
       The leading dimension of ``a``. Must be at least ``max(1,n)``.
 
 
-   lwork
-      The size of the work buffer. Should be computed by
-      `syevd_get_lwork <syevd_get_lwork.html>`__.
-
-
-   liwork
-      The size of the iwork buffer. Should be computed by
-      `syevd_get_lwork <syevd_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_syevd_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
 
    .. rubric:: Output Parameters
@@ -134,55 +130,161 @@ syevd
 
 
    w
-      Buffer, size at least n. If ``info = 0``, contains the eigenvalues
-      of the matrix ``A`` in ascending order. See also info.
+      Buffer, size at least n. Contains the eigenvalues
+      of the matrix ``A`` in ascending order.
 
 
-   work
-      Buffer of workspace.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   iwork
-      Buffer of integer workspace.
+   .. container:: section
 
 
-   info
-      Buffer containing error information.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If ``info = 0``, the execution is successful.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
+         failed to converge; ``i`` indicates the number of off-diagonal
+         elements of an intermediate tridiagonal form which did not
+         converge to zero.
+
+         If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm failed
+         to compute an eigenvalue while working on the submatrix lying in
+         rows and columns ``info/(n+1)`` through ``mod(info,n+1)``.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-      If ``info = i``, and ``jobz = job::novec``, then the algorithm
-      failed to converge; ``i`` indicates the number of off-diagonal
-      elements of an intermediate tridiagonal form which did not
-      converge to zero.
+syevd (USM Version)
+----------------------
+
+.. container::
+
+   .. container:: section
 
 
-      If ``info = i``, and ``jobz = job:vec``, then the algorithm failed
-      to compute an eigenvalue while working on the submatrix lying in
-      rows and columns ``info/(n+1)`` through ``mod(info,n+1)``.
+      .. rubric:: Syntax
+         :class: sectiontitle
 
 
-      If ``info = -i``, the ``i``-th parameter had an illegal value.
-
+      .. cpp:function::  cl::sycl::event onemkl::lapack::syevd(cl::sycl::queue &queue, jobz jobz, onemkl::uplo      upper_lower, std::int64_t n, T *a, std::int64_t lda, T *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``syevd``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
 
 
-   ::
+   jobz
+      Must be ``job::novec`` or ``job::vec``.
 
 
-      examples/sycl/lapack/syevd.cpp
+      If ``jobz = job::novec``, then only eigenvalues are computed.
+
+
+      If ``jobz = job::vec``, then eigenvalues and eigenvectors are
+      computed.
+
+
+   upper_lower
+      Must be ``uplo::upper`` or ``uplo::lower``.
+
+
+      If ``upper_lower = job::upper``, a stores the upper triangular
+      part of ``A``.
+
+
+      If ``upper_lower = job::lower``, a stores the lower triangular
+      part of ``A``.
+
+
+   n
+      The order of the matrix ``A`` (``0≤n``).
+
+
+   a
+      Pointer to array containing ``A``, size (``lda,*``).
+      The second dimension of ``a`` must be at least ``max(1, n)``.
+
+
+   lda
+      The leading dimension of ``a``. Must be at least ``max(1,n)``.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_syevd_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      If ``jobz = job::vec``, then on exit this array is overwritten by
+      the orthogonal matrix ``Z`` which contains the eigenvectors of
+      ``A``.
+
+
+   w
+      Pointer to array of size at least n. Contains the eigenvalues
+      of the matrix ``A`` in ascending order.
+
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
+         failed to converge; ``i`` indicates the number of off-diagonal
+         elements of an intermediate tridiagonal form which did not
+         converge to zero.
+
+         If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm failed
+         to compute an eigenvalue while working on the submatrix lying in
+         rows and columns ``info/(n+1)`` through ``mod(info,n+1)``.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -191,7 +293,6 @@ syevd
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
 
 

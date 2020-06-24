@@ -38,8 +38,6 @@ syr2k
    ``trans`` = ``transpose::nontrans``, the operation is defined as:
 
 
-  
-
 
       C <- alpha*(A*B :sup:`T` + B*A :sup:`T`) + beta*C
 
@@ -49,8 +47,6 @@ syr2k
 
    If ``trans`` = ``transpose::trans``, the operation is defined as:
 
-
-  
 
 
       C <- alpha*(A :sup:`T` * B + B :sup:`T` * A) + beta * C
@@ -71,7 +67,7 @@ syr2k
    The inner dimension of both matrix multiplications is ``k``.
 
 
-syr2k (BUFFER Version)
+syr2k (Buffer Version)
 ----------------------
 
 .. container::
@@ -83,7 +79,7 @@ syr2k (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::syr2k(sycl::queue &queue, uplo upper_lower,      transpose trans, std::int64_t n, std::int64_t k, T alpha,      sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t      ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+      .. cpp:function::  void onemkl::blas::syr2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
 .. container:: section
 
 
@@ -192,7 +188,7 @@ syr2k (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::syr2k(sycl::queue &queue, uplo         upper_lower, transpose trans, std::int64_t n, std::int64_t k, T         alpha, const T* a, std::int64_t lda, const T* b, std::int64_t         ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event>         &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::syr2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

@@ -13,19 +13,37 @@ gemm
 
       ``gemm`` supports the following precisions.
 
+     .. list-table:: 
+        :header-rows: 1
 
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``half`` 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+        * -  Ts 
+          -  Ta 
+          -  Tb 
+          -  Tc 
+        * -  ``float`` 
+          -  ``half`` 
+          -  ``half`` 
+          -  ``float`` 
+        * -  ``half`` 
+          -  ``half`` 
+          -  ``half`` 
+          -  ``half`` 
+        * -  ``float`` 
+          -  ``float`` 
+          -  ``float`` 
+          -  ``float`` 
+        * -  ``double`` 
+          -  ``double`` 
+          -  ``double`` 
+          -  ``double`` 
+        * -  ``std::complex<float>`` 
+          -  ``std::complex<float>`` 
+          -  ``std::complex<float>`` 
+          -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
+          -  ``std::complex<double>`` 
+          -  ``std::complex<double>`` 
+          -  ``std::complex<double>`` 
 
 .. container:: section
 
@@ -37,9 +55,6 @@ gemm
    The ``gemm`` routines compute a scalar-matrix-matrix product and add the
    result to a scalar-matrix product, with general matrices. The
    operation is defined as
-
-
-  
 
 
       C <- alpha*op(A)*op(B) + beta*C
@@ -67,7 +82,7 @@ gemm
    ``C`` is an ``m``-by-``n`` matrix.
 
 
-gemm (BUFFER Version)
+gemm (Buffer Version)
 ---------------------
 
 .. container::
@@ -79,7 +94,7 @@ gemm (BUFFER Version)
          :class: sectiontitle
 
 
-      .. cpp:function::  void onemkl::blas::gemm(sycl::queue &queue, transpose transa,      transpose transb, std::int64_t m, std::int64_t n, std::int64_t k,      T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b,      std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+      .. cpp:function::  void onemkl::blas::gemm(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda, sycl::buffer<Tb,1> &b, std::int64_t ldb, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc)
 .. container:: section
 
 
@@ -207,7 +222,7 @@ gemm (USM Version)
       .. container:: dlsyntaxpara
 
 
-         .. cpp:function::  sycl::event onemkl::blas::gemm(sycl::queue &queue, transpose transa, transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, const T *a, std::int64_t lda, const T *b, std::int64_t ldb, T beta, T *c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+         .. cpp:function::  sycl::event onemkl::blas::gemm(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, const Ta *a, std::int64_t lda, const Tb *b, std::int64_t ldb, Ts beta, Tc *c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
    .. container:: section
 
 

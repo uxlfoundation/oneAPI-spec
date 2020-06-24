@@ -1,3 +1,4 @@
+.. _onemkl_lapack_orgbr:
 
 orgbr
 =====
@@ -8,19 +9,8 @@ orgbr
 
    Generates the real orthogonal matrix ``Q`` or ``P``\ :sup:`T`
    determined by
-   `gebrd <gebrd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+   :ref:`onemkl_lapack_gebrd`.
 
-
-   .. container:: section
-      :name: GUID-8A4CB9DA-644B-400E-91C7-78BBD3E3FDAA
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void orgbr(queue &exec_queue, generate gen,      std::int64_t m, std::int64_t n, std::int64_t k, buffer<T,1> &a,      std::int64_t lda, buffer<T,1> &tau, buffer<T,1> &work,      std::int64_t lwork, buffer<std::int64_t,1> &info)
 
       ``orgbr`` supports the following precisions.
 
@@ -36,7 +26,6 @@ orgbr
 
 
 .. container:: section
-   :name: GUID-D3C6AFAC-CF9D-4ACC-8AE7-4A80C12DC86B
 
 
    .. rubric:: Description
@@ -45,9 +34,8 @@ orgbr
 
    The routine generates the whole or part of the orthogonal matrices
    ``Q`` and ``P``\ :sup:`T` formed by the routines
-   `gebrd <gebrd.html>`__/.
-   Use this routine after a call to sgebrd/dgebrd. All valid
-   combinations of arguments are described in *Input parameters*. In
+   :ref:`onemkl_lapack_gebrd`.
+   All valid combinations of arguments are described in *Input parameters*. In
    most cases you need the following:
 
 
@@ -93,15 +81,28 @@ orgbr
       orgbr(queue, generate::p, m, n, m, a, …)
 
 
+orgbr (BUFFER Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  void onemkl::lapack::orgbr(cl::sycl::queue &queue, onemkl::generate gen,      std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a,      std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad,      std::int64_t scratchpad_size)
+
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
 
    .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   exec_queue
+   queue
       The queue where the routine should be executed.
 
 
@@ -135,17 +136,17 @@ orgbr
    k
       If gen\ ``= generate::q``, the number of columns in the original
       ``m``-by-k matrix reduced by
-      `gebrd <gebrd.html>`__.
+      :ref:`onemkl_lapack_gebrd`.
 
 
       If gen\ ``= generate::p``, the number of rows in the original
       ``k``-by-n matrix reduced by
-      `gebrd <gebrd.html>`__.
+      :ref:`onemkl_lapack_gebrd`.
 
 
    a
-      The buffer a returned by
-      `gebrd <gebrd.html>`__.
+      The buffer ``a`` as returned by
+      :ref:`onemkl_lapack_gebrd`.
 
 
    lda
@@ -155,17 +156,16 @@ orgbr
    tau
       Buffer, size ``min (m,k)`` if gen\ ``= generate::q``, size
       ``min(n,k)`` if gen\ ``= generate::p``. Scalar factor of the
-      elementary reflectors, as returned by ``gebrd`` in the array tauq
+      elementary reflectors, as returned by :ref:`onemkl_lapack_gebrd` in the array tauq
       or taup.
 
 
-   lwork
-      The size of the work array. Must be computed by
-      `orgbr_get_lwork <orgqr_get_lwork.html>`__.
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_orgbr_scratchpad_size` function.
 
 
 .. container:: section
-   :name: GUID-BDC93D26-A415-4030-8222-D0EA7B5FC76B
 
 
    .. rubric:: Output Parameters
@@ -178,36 +178,152 @@ orgbr
       as specified by gen, m, and n.
 
 
-   work
-      Workspace for internal computations.
+   scratchpad
+      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 
-   info
-      Buffer containing error information.
+   .. container:: section
 
 
-      If info\ ``= 0``, the execution is successful.
+      .. rubric:: Throws
+         :class: sectiontitle
 
 
-      If info\ ``= -i``, the ``i``-th parameter had an illegal value.
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
 
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+orgbr (USM Version)
+----------------------
+
+.. container::
+
+   .. container:: section
+
+
+      .. rubric:: Syntax
+         :class: sectiontitle
+
+
+      .. cpp:function::  cl::sycl::event onemkl::lapack::orgbr(cl::sycl::queue &queue, onemkl::generate gen,      std::int64_t m, std::int64_t n, std::int64_t k, T *a,      std::int64_t lda, T *tau, T *scratchpad,      std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
 
-   .. rubric:: Example
+   .. rubric:: Input Parameters
       :class: sectiontitle
 
 
-   An example of how to use ``orgbr``\ can be found in the oneMKL
-   installation directory, under:
+   queue
+      The queue where the routine should be executed.
 
 
-   ::
+   gen
+      Must be ``generate::q`` or ``generate::p``.
 
 
-      examples/sycl/lapack/orgbr.cpp
+      If gen\ ``= generate::q``, the routine generates the matrix ``Q``.
+
+
+      If gen\ ``= generate::p``, the routine generates the matrix
+      ``P``\ :sup:`T`.
+
+
+   m
+      The number of rows in the matrix ``Q`` or ``P``\ :sup:`T` to be
+      returned ``(0≤m)``.
+
+
+      If gen\ ``= generate::q``, ``m ≥ n ≥ min(m, k)``.
+
+
+      If gen\ ``= generate::p``, ``n ≥ m ≥ min(n, k)``.
+
+
+   n
+      The number of rows in the matrix ``Q`` or ``P``\ :sup:`T` to be
+      returned ``(0≤n)``. See m for constraints.
+
+
+   k
+      If gen\ ``= generate::q``, the number of columns in the original
+      ``m``-by-k matrix reduced by
+      :ref:`onemkl_lapack_gebrd`.
+
+
+      If gen\ ``= generate::p``, the number of rows in the original
+      ``k``-by-n matrix reduced by
+      :ref:`onemkl_lapack_gebrd`.
+
+
+   a
+      Pointer to array ``a`` as returned by
+      :ref:`onemkl_lapack_gebrd`.
+
+
+   lda
+      The leading dimension of a.
+
+
+   tau
+      Pointer to array of size ``min (m,k)`` if gen\ ``= generate::q``, size
+      ``min(n,k)`` if gen\ ``= generate::p``. Scalar factor of the
+      elementary reflectors, as returned by :ref:`onemkl_lapack_gebrd` in the array tauq
+      or taup.
+
+
+   scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type T.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_orgbr_scratchpad_size` function.
+
+   events
+      List of events to wait for before starting computation. Defaults to empty list.
+
+
+.. container:: section
+
+
+   .. rubric:: Output Parameters
+      :class: sectiontitle
+
+
+   a
+      Overwritten by n leading columns of the m-by-m orthogonal matrix
+      ``Q`` or ``P``\ :sup:`T` (or the leading rows or columns thereof)
+      as specified by gen, m, and n.
+
+
+   scratchpad
+      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+
+   .. container:: section
+
+
+      .. rubric:: Throws
+         :class: sectiontitle
+
+
+      onemkl::lapack::exception
+         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
+
+         If ``info=-i``, the ``i``-th parameter had an illegal value.
+
+         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
+
+
+   .. container:: section
+
+
+      .. rubric:: Return Values
+         :class: sectiontitle
+
+
+      Output event to wait on to ensure computation is complete.
 
 
 .. container:: familylinks
@@ -216,7 +332,6 @@ orgbr
    .. container:: parentlink
 
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
 
 
