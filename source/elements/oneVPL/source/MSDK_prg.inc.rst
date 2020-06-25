@@ -16,41 +16,41 @@ Link this library:
 
 Status Codes
 ------------
-.. include:: MSDK_prg_stc.rst
+.. include:: MSDK_prg_stc.inc.rst
 
 SDK Session
 -----------
-.. include:: MSDK_prg_session.rst
+.. include:: MSDK_prg_session.inc.rst
 
 Frame and Fields
 ----------------
-.. include:: MSDK_prg_frame.rst
+.. include:: MSDK_prg_frame.inc.rst
 
 Decoding Procedures
 -------------------
-.. include:: MSDK_prg_decoding.rst
+.. include:: MSDK_prg_decoding.inc.rst
 
 Encoding Procedures
 -------------------
-.. include:: MSDK_prg_encoding.rst
+.. include:: MSDK_prg_encoding.inc.rst
 
 Video Processing Procedures
 ---------------------------
-.. include:: MSDK_prg_vpp.rst
+.. include:: MSDK_prg_vpp.inc.rst
 
 Transcoding Procedures
 ---------------------------
-.. include:: MSDK_prg_transcoding.rst
+.. include:: MSDK_prg_transcoding.inc.rst
 
 Working with hardware acceleration
 ----------------------------------
-.. include:: MSDK_prg_hw.rst
+.. include:: MSDK_prg_hw.inc.rst
 
 Memory Allocation and External Allocators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. include:: MSDK_prg_mem.rst
+.. include:: MSDK_prg_mem.inc.rst
 
 Hardware Device Error Handling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. include:: MSDK_prg_err.rst
+.. include:: MSDK_prg_err.inc.rst
 
