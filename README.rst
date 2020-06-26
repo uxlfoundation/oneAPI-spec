@@ -28,7 +28,7 @@ The simplest and quickest way to edit is directly in the GitHub web
 interface. It has an editor, previewer, and lets you commit
 changes. You won't need to install any local tools. The previewer
 knows how to render RST, but not the sphinx directives so it will not
-display exactly as the real manual.
+display exactly as the real document.
 
 -------------------------
 Working with a Local Copy
@@ -42,7 +42,7 @@ to do the same task manually.
 Setup
 -----
 
-Install Python 3 and doxygen (>= 1.8.17).  To install on **Ubuntu**::
+Install Python 3, doxygen (>= 1.8.17), latex, etc.  To install on **Ubuntu**::
 
    sudo scripts/install.sh
 
@@ -60,9 +60,6 @@ On Windows::
   python scripts\oneapi.py spec-venv
   spec-venv\Scripts\activate
   
-MKL and Level Zero are temporarily in separate private repos. If you have access to the repos, you can clone them::
-
-  python scripts/oneapi.py clones
 
 Building the docs
 -----------------
@@ -70,10 +67,6 @@ Building the docs
 To build the html document::
 
   python scripts/oneapi.py html
-
-This will not work on Windows because we are using symbolic links for
-the elements that are in separate repos. However, Windows can build
-individual specs for individual elements.
 
 The document is organized as a book with chapters. Each element of
 oneAPI is its own chapter and can be built separately. For example, to
@@ -116,6 +109,18 @@ size of the text. Probably a lot more.
 linting. I could not find any support for rejustifying paragraphs to
 80 characters, which makes it difficult to use.
 
+------------------
+Submitting changes
+------------------
+
+Changes are submitted as PR's to this repo. It's up to you how you get 
+to the point of making the PR. If you have write access to this repo, you
+can push a feature branch to this repo, and then do the PR from the feature
+branch. If you work this way, the CI will publish HTML, PDF to the staging
+server. You can also fork this repo and do the PR from your fork. CI will
+build the document and save the results as an artifact, but will not
+publish to staging server.
+
 ------
 Docker
 ------
@@ -137,11 +142,11 @@ CI
 
 We use GitHub actions. See `<.github/workflows/main.yml>`_
 
-On every commit, the CI system builds and publishes the document to
+On every commit to every branch, the CI system builds and publishes the document to
 the staging server. To see the URL, look at the end of the log for the
 build step in the CI system. The staging server is an s3 bucket, and
 the access keys are managed as GitHub action secrets. PR's based on
-forks do not have access to the keys and will not publish on the
+forks do not have access to the keys and will build, but not publish on the
 staging server.
 
 For commits to the publish branch, the document is staged inside a
@@ -164,9 +169,7 @@ production with::
 
   python scripts/oneapi.py prod-publish
 
-Then purge the CDN. Generate a list of URLs with::
-
-  python scripts/oneapi.py purge
+Then purge the CDN. 
 
 ------------
 More Reading
