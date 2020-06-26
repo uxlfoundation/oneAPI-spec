@@ -1,10 +1,12 @@
 Extensions to Parallel STL
 --------------------------
 
-oneDPL extends Parallel STL with the following APIs:
+oneDPL extends Parallel STL with the following APIs.
 
 DPC++ Execution Policy
 ++++++++++++++++++++++
+
+A DPC++ execution policy specifies where and how an algorithm runs.
 
 .. code:: cpp
 
@@ -13,55 +15,123 @@ DPC++ Execution Policy
   namespace dpstd {
     namespace execution {
 
-      template <typename BasePolicy, typename KernelName = /*unspecified*/>
+      template <typename KernelName = /*unspecified*/>
       class device_policy;
 
-      template <typename KernelName, typename Arg>
-      device_policy<std::execution::parallel_unsequenced_policy, KernelName>
-      make_device_policy( const Arg& );
+      device_policy<> dpcpp_default;
 
-      device_policy<parallel_unsequenced_policy, /*unspecified*/> default_policy;
+      template <typename KernelName = /*unspecified*/>
+      device_policy<KernelName>
+      make_device_policy( sycl::queue );
 
+      template <typename KernelName = /*unspecified*/>
+      device_policy<KernelName>
+      make_device_policy( sycl::device );
+
+      template <typename NewKernelName, typename OldKernelName>
+      device_policy<NewKernelName>
+      make_device_policy( const device_policy<OldKernelName>& = dpcpp_default );
     }
   }
 
+``dpcpp_default`` is a predefined execution policy object to run algorithms on the default DPC++ device.
 
-A DPC++ execution policy specifies where and how an algorithm runs.
-It inherits a standard C++ execution policy and allows specification of an optional
-kernel name as a template parameter. 
+device_policy class
+^^^^^^^^^^^^^^^^^^^
 
-An object of a :code:`device_policy` type encapsulates a SYCL queue
-which runs algorithms on a DPC++ compliant device. You can create a
-policy object from a SYCL queue, device, or device selector, as well
-as from an existing policy object.
+.. code:: cpp
 
-The :code:`make_device_policy` function simplifies :code:`device_policy` creation.
+  template <typename KernelName = /*unspecified*/>
+  class device_policy
+  {
+  public:
+      using kernel_name = KernelName;
 
-:code:`dpstd::execution::default_policy` is a predefined DPC++ execution policy
-object that can run algorithms on a default SYCL device.
+      device_policy();
+      template <typename OtherName>
+      device_policy( const device_policy<OtherName>& );
+      explicit device_policy( sycl::queue );
+      explicit device_policy( sycl::device );
 
-Examples::
+      sycl::queue queue() const;
+      operator sycl::queue() const;
+  };
 
-  using namespace dpstd::execution;
+An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
+to run algorithms on a DPC++ compliant device.
 
-  auto policy_a =
-    device_policy<parallel_unsequenced_policy, class PolicyA>{cl::sycl::queue{}};
-  std::for_each(policy_a, …);
+The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
+is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to. 
 
-  auto policy_b = make_device_policy<class PolicyB>(cl::sycl::queue{});
-  std::for_each(policy_b, …);
+.. code:: cpp
 
-  auto policy_c =
-    make_device_policy<class PolicyC>(cl::sycl::device{cl::sycl::gpu_selector{}});
-  std::for_each(policy_c, …);
+  device_policy()
 
-  auto policy_d = make_device_policy<class PolicyD>(cl::sycl::default_selector{});
-  std::for_each(policy_d, …);
+Construct a policy object associated with a queue created with the default device selector.
+  
+.. code:: cpp
 
-  // use the predefined dpstd::execution::default_policy policy object
-  std::for_each(default_policy, …);
+  template <typename OtherName>
+  device_policy( const device_policy<OtherName>& policy )
 
-.. USM pointers, and host-side iterators.
+Construct a policy object associated with the same queue as ``policy``, by changing
+the kernel name of the given policy to ``kernel_name`` defined for the new policy.
+
+.. code:: cpp
+
+  explicit device_policy( sycl::queue queue )
+
+Construct a policy object associated with the given queue.
+
+.. code:: cpp
+
+  explicit device_policy( sycl::device device )
+
+Construct a policy object associated with a queue created for the given device.
+
+.. code:: cpp
+
+  sycl::queue queue() const
+
+Return the queue the policy is associated with.
+
+.. code:: cpp
+
+  operator sycl::queue() const
+
+Allow implicit conversion of the policy to a ``sycl::queue`` object.
+
+make_device_policy function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``make_device_policy`` function templates simplify ``device_policy`` creation.
+
+.. code:: cpp
+
+  template <typename KernelName = /*unspecified*/>
+  device_policy<KernelName>
+  make_device_policy( sycl::queue queue )
+
+Return a policy object associated with ``queue``, with a kernel name possibly provided
+as the template argument, otherwise unspecified.
+
+.. code:: cpp
+
+  template <typename KernelName = /*unspecified*/>
+  device_policy<KernelName>
+  make_device_policy( sycl::device device )
+
+Return a policy object to run algorithms on ``device``, with a kernel name possibly provided
+as the template argument, otherwise unspecified.
+  
+.. code:: cpp
+
+  template <typename NewKernelName, typename OldKernelName>
+  device_policy<NewKernelName>
+  make_device_policy( const device_policy<OldKernelName>& policy = dpcpp_default )
+
+Return a policy object constructed from ``policy``, with a new kernel name provided as the template
+argument. If no policy object is provided, the new policy is constructed from ``dpcpp_default``.
 
 Wrappers for SYCL Buffers
 ++++++++++++++++++++++++++
@@ -106,11 +176,10 @@ Example:
   #include <dpstd/iterators.h>
 
   int main(){
-      cl::sycl::queue q;
       cl::sycl::buffer<int> buf { 1000 };
       auto buf_begin = dpstd::begin(buf);
       auto buf_end   = dpstd::end(buf);
-      auto policy = dpstd::execution::make_device_policy<class Fill>( q );
+      auto policy = dpstd::execution::make_device_policy<class Fill>( );
       std::fill(policy, buf_begin, buf_end, 42);
       return 0;
   }
