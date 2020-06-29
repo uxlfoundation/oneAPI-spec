@@ -88,7 +88,8 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 html_theme_options = {
-  'includehidden': False
+  'includehidden': False,
+  'collapse_navigation': False
 }
 
 html_context = {
