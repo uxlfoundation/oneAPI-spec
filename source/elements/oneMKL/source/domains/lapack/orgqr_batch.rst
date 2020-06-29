@@ -1,7 +1,7 @@
 .. _onemkl_lapack_orgqr_batch:
 
-onemkl::lapack::orgqr_batch
-===========================
+orgqr_batch
+===========
 
 
 .. container::
@@ -126,8 +126,8 @@ onemkl::lapack::orgqr_batch
 
 
 
-onemkl::lapack::orgqr_batch (BUFFER Version)
---------------------------------------------
+orgqr_batch (BUFFER Version)
+----------------------------
 
 .. container::
 

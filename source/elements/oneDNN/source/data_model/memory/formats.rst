@@ -25,21 +25,24 @@
 .. |w| replace:: :math:`w`
 
 .. |dimensions| replace:: :math:`\operatorname{dimensions}`
+.. |offset0| replace:: :math:`\operatorname{offset_0}`
 .. |strides| replace:: :math:`\operatorname{strides}`
 .. |offset| replace:: :math:`\operatorname{offset}`
 
 .. _memory_formats-label:
 
+##############
 Memory Formats
---------------
+##############
 
 In oneDNN memory format is how a multidimensional tensor is stored in
 1-dimensional linear memory address space. oneDNN specifies two kinds of
 memory formats: *plain* which correspond to traditional multidimensional
 arrays, and *optimized* which are completely opaque.
 
+********************
 Plain Memory Formats
-~~~~~~~~~~~~~~~~~~~~
+********************
 
 Plain memory formats describe how multidimensional tensors are laid out in
 memory using an array of |dimensions| and an array of |strides| both of which
@@ -74,7 +77,14 @@ offset in memory is computed as:
 .. math::
 
    \operatorname{offset}(i_0, \ldots, i_{n-1})
-   = \sum_{j=0}^{n-1} i_j * \operatorname{strides}[j].
+   = \operatorname{offset_0}
+   + \sum_{j=0}^{n-1} i_j * \operatorname{strides}[j].
+
+Here |offset0| is the offset from the *parent* memory and is non-zero only for
+*submemory* memory descriptors created using
+:any:`dnnl::memory::desc::submemory_desc`. Submemory memory descriptors
+inherit strides from the parent memory descriptor. Their main purpose is to
+express in-place concat operations.
 
 As an example, consider an :math:`M \times N` matrix |A| (|M| rows times |N|
 columns). Regardless of whether |A| is stored transposed or not,
@@ -106,8 +116,9 @@ Code example:
    dnnl::memory::desc A_transposed {dims, dnnl::memory::data_type::f32,
            strides_transposed};
 
+***********
 Format Tags
-~~~~~~~~~~~
+***********
 
 In addition to strides, oneDNN provides named *format tags* via the
 :any:`dnnl::memory::format_tag` enum type. The enumerators of this type can be
@@ -152,8 +163,9 @@ aliases. Some examples for CNNs and RNNs:
 - :any:`format_tag::ldio` is an alias for :any:`format_tag::abcd`.
 - :any:`format_tag::ldoi` is an alias for :any:`format_tag::abdc`.
 
+**********************
 Optimized Format 'any'
-~~~~~~~~~~~~~~~~~~~~~~
+**********************
 
 Another kind of format that oneDNN supports is an opaque _optimized_ memory
 format that cannot be created directly from |strides| and |dimensions| arrays.
@@ -165,10 +177,18 @@ reordered into the data in optimized data format before computations. Since
 reorders are expensive, the optimized memory format needs to be _propagated_
 through computations graph.
 
+Optimized formats can employ padding, blocking and other data transformations
+to keep data in layout optimal for a certain architecture. This means that it
+in general operations like :any:`dnnl::memory::desc::permute_axes` or
+:any:`dnnl::memory::desc::submemory_desc` may fail. It is in general incorrect
+to use product of dimension sizes to calculate amount of memory required to
+store data: :any:`dnnl::memory::desc::get_size` must be used instead.
+
 .. _memory_format_propagation-label:
 
+*************************
 Memory Format Propagation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+*************************
 
 Memory format propagation is one of the central notions that needs to be
 well-understood to use oneDNN correctly.
@@ -208,7 +228,9 @@ propagation when running training workloads. This is achieved via the
 ``hint_pd`` arguments of primitive descriptor constructors for primitives that
 implement backward propagation.
 
-.. rubric:: API
+***
+API
+***
 
 .. namespace:: 0
 

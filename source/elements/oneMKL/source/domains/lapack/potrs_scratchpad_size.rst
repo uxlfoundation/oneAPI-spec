@@ -1,7 +1,7 @@
 .. _onemkl_lapack_potrs_scratchpad_size:
 
-onemkl::lapack::potrs_scratchpad_size
-=====================================
+potrs_scratchpad_size
+=====================
 
 
 .. container::
@@ -37,8 +37,8 @@ onemkl::lapack::potrs_scratchpad_size
       explicitly.
 
 
-onemkl::lapack::potrs_scratchpad_size
--------------------------------------
+potrs_scratchpad_size
+---------------------
 
 .. container::
 

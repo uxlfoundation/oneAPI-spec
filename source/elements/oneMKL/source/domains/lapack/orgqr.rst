@@ -1,7 +1,7 @@
 .. _onemkl_lapack_orgqr:
 
-onemkl::lapack::orgqr
-=====================
+orgqr
+=====
 
 
 .. container::
@@ -78,8 +78,8 @@ onemkl::lapack::orgqr
       onemkl::orgqr(queue, m, k, k, a, lda, tau, scratchpad, scratchpad_size)
 
 
-onemkl::lapack::orgqr (BUFFER Version)
---------------------------------------
+orgqr (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -166,8 +166,8 @@ onemkl::lapack::orgqr (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::orgqr (USM Version)
---------------------------------------
+orgqr (USM Version)
+----------------------
 
 .. container::
 

@@ -5,8 +5,9 @@
 
 .. _data_types-label:
 
+##########
 Data types
-----------
+##########
 
 .. namespace:: dnnl::memory::data_type
 
@@ -62,7 +63,7 @@ supported by each primitive is included in the corresponding sections of the
 specification guide.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    bfloat16.rst
    int8.rst

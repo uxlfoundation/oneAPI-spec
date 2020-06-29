@@ -31,8 +31,8 @@ BLAS-like Extensions
          * -     \ `gemmt <gemmt.html>`__\   
            -     Computes a matrix-matrix product with general matrices, but updates
                  only the upper or lower triangular part of the result matrix.
-         * -     \ `gemm_ext <gemm_ext.html>`__\   
-           -     Computes a matrix-matrix product with general matrices
+         * -     \ `gemm_bias <gemm_bias.html>`__\   
+           -     Computes a matrix-matrix product using general integer matrices with bias
  
 
 
@@ -45,6 +45,6 @@ BLAS-like Extensions
     gemm_batch
     trsm_batch
     gemmt
-    gemm_ext
+    gemm_bias
 
 **Parent topic:** :ref:`onemkl_blas`

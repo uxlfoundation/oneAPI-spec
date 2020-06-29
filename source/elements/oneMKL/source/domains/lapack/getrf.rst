@@ -1,7 +1,7 @@
 .. _onemkl_lapack_getrf:
 
-onemkl::lapack::getrf
-=====================
+getrf
+=====
 
 
 .. container::
@@ -48,8 +48,8 @@ onemkl::lapack::getrf
    partial pivoting, with row interchanges.
 
 
-onemkl::lapack::getrf (BUFFER Version)
---------------------------------------
+getrf (BUFFER Version)
+----------------------
 
 .. container::
 
@@ -127,8 +127,8 @@ onemkl::lapack::getrf (BUFFER Version)
          If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
 
 
-onemkl::lapack::getrf (USM Version)
---------------------------------------
+getrf (USM Version)
+----------------------
 
 .. container::
 

@@ -3,8 +3,11 @@
 
 .. default-domain:: cpp
 
+.. namespace:: 0
+
+######
 Memory
-------
+######
 
 There are two levels of abstraction for memory in oneDNN.
 
@@ -16,8 +19,6 @@ There are two levels of abstraction for memory in oneDNN.
    with storage.
 
 oneDNN defines the following convenience aliases to denote tensor dimensions
-
-.. namespace:: 0
 
 .. doxygentypedef:: dnnl::memory::dim
    :project: oneDNN
