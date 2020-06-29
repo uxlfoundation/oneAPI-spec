@@ -33,8 +33,8 @@ extensions = [
 ]
 
 env = {
-    'oneapi_version': '0.8',
-    'l0_version': '0.91',
+    'oneapi_version': '0.85',
+    'l0_version': '0.95',
 }
 
 prolog_template = string.Template("""
