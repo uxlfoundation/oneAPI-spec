@@ -108,8 +108,8 @@ scratchpad.
     // descriptor should be empty:
     auto zero_md = dnnl::memory::desc();
 
-Library Manages Scratchpad
---------------------------
+User Manages Scratchpad
+-----------------------
 
 .. code:: cpp
 
