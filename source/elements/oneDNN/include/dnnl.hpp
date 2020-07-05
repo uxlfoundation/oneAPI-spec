@@ -1826,6 +1826,12 @@ struct sum : public primitive {
 struct primitive_desc : public dnnl::primitive_desc_base {
     /// Default constructor. Produces an empty object.
     primitive_desc();
+
+    /// Advances the primitive descriptor iterator to the next implementation.
+    ///
+    /// @returns @c true on success, and @c false if the last implementation
+    ///     reached, in which case primitive descriptor is not modified.
+    bool next_impl();
 };
 
 /// @} dnnl_api_primitives_common
