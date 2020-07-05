@@ -43,14 +43,21 @@ computation from more abstract to more concrete:
   implementation-independent parameters. The shapes are usually described as
   memory descriptors (:struct:`dnnl::memory::desc`).
 
-* Primitive descriptors are at an
-  abstraction level in between operation descriptors and primitives and can be
-  used to inspect details of a specific primitive implementation like expected
-  memory formats via queries to implement memory format propagation (see
-  Memory format propagation) without having to fully instantiate a primitive.
+* Primitive descriptors are at the abstraction level in between operation
+  descriptors and primitives. They combine both an operation descriptor and
+  primitive attributes. Primitive descriptors can be used to query various
+  primitive implementation details and, for example, to implement :ref:`memory
+  format propagation <memory_format_propagation-label>` by inspecting expected
+  memory formats via queries without having to fully instantiate a primitive.
+  oneDNN may contain multiple implementations for the same primitive that can
+  be used to perform the same particular computation. Primitive descriptors
+  allow one-way iteration which allows inspecting multiple implementations.
+  The library is expected to order the implementations from most to least
+  preferred, so it should always be safe to use the one that is chosen by
+  default.
 
-* Primitives, which are most concrete, are actual computations that can be
-  executed.
+* Primitives, which are the most concrete, embody actual computations that can
+  be executed.
 
 On the API level:
 
@@ -60,7 +67,9 @@ On the API level:
 
 * Operation descriptors are represented as classes named ``desc`` and nested
   within the corresponding primitives classes, for example
-  :struct:`dnnl::convolution_forward::desc`.
+  :struct:`dnnl::convolution_forward::desc`. The
+  :any:`dnnl::primitive_desc::next_impl` member function provides a way to iterate
+  over implementations.
 
 * Primitive descriptors are represented as classes named ``primitive_desc``
   and nested within the corresponding primitive classes that have
