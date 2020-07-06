@@ -79,6 +79,12 @@ API
 
 .. doxygenstruct:: dnnl::memory
    :project: oneDNN
-   :members: memory, get_desc, get_engine, get_data_handle, set_data_handle, get_sycl_buffer, set_sycl_buffer
+   :members: memory, get_desc, get_engine, get_data_handle, set_data_handle, map_data, unmap_data, get_sycl_buffer, set_sycl_buffer
+
+.. doxygendefine:: DNNL_MEMORY_NONE
+   :project: oneDNN
+
+.. doxygendefine:: DNNL_MEMORY_ALLOCATE
+   :project: oneDNN
 
 .. vim: ts=3 sw=3 et spell spelllang=en
