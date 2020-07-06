@@ -1068,7 +1068,7 @@ struct memory {
 
     /// Constructs a memory object.
     ///
-    /// Unless @p handle is equal to DNNL_MEMORY_NONE, the constructed memory
+    /// Unless @p handle is equal to #DNNL_MEMORY_NONE, the constructed memory
     /// object will have the underlying buffer set. In this case, the buffer
     /// will be initialized as if #dnnl::memory::set_data_handle() had been
     /// called.
@@ -1077,14 +1077,13 @@ struct memory {
     ///
     /// @param md Memory descriptor.
     /// @param aengine Engine to store the data on.
-    /// @param handle Handle of the memory buffer to use as an underlying
-    ///     storage.
+    /// @param handle Handle of the memory buffer to use.
     ///     - A pointer to the user-allocated buffer. In this case the library
     ///       doesn't own the buffer.
-    ///     - The DNNL_MEMORY_ALLOCATE special value. Instructs the library to
+    ///     - The #DNNL_MEMORY_ALLOCATE special value. Instructs the library to
     ///       allocate the buffer for the memory object. In this case the
     ///       library owns the buffer.
-    ///     - DNNL_MEMORY_NONE to create dnnl_memory without an underlying
+    ///     - #DNNL_MEMORY_NONE to create dnnl_memory without an underlying
     ///       buffer.
     memory(const desc &md, const engine &aengine, void *handle);
 
@@ -1099,7 +1098,7 @@ struct memory {
 
     /// Constructs a memory object.
     ///
-    /// The underlying storage for the memory will be allocated by the library.
+    /// The underlying buffer for the memory will be allocated by the library.
     ///
     /// @param md Memory descriptor.
     /// @param aengine Engine to store the data on.
@@ -1131,10 +1130,10 @@ struct memory {
     ///     zeroes to the padding area if it exists. Hence, the @p handle
     ///     parameter cannot and does not have a const qualifier.
     ///
-    /// @param handle Memory buffer to use as the underlying storage. On the
-    ///     CPU engine or when USM is used, the data handle is a pointer to
-    ///     the actual data. For OpenCL it is a cl_mem. It must have at least
-    ///     get_desc().get_size() bytes allocated.
+    /// @param handle Memory buffer to use. On the CPU engine or when USM is
+    ///     used, the data handle is a pointer to the actual data.
+    ///     It must have at least #dnnl::memory::desc::get_size() bytes
+    ///     allocated.
     /// @param astream Stream to use to execute padding in.
     void set_data_handle(void *handle, const stream &astream) const;
 
@@ -1144,11 +1143,46 @@ struct memory {
     /// #dnnl::memory::set_data_handle(void *, const stream &) const
     /// for more information.
     ///
-    /// @param handle Memory buffer to use as the underlying storage. For the
-    ///     CPU engine, the data handle is a pointer to the actual data. For
-    ///     OpenCL it is a cl_mem. It must have at least get_desc().get_size()
-    ///     bytes allocated.
+    /// @param handle Memory buffer to use. For the CPU engine, the data
+    ///     handle is a pointer to the actual data. It must have at least
+    ///     get_desc().get_size() bytes allocated.
     void set_data_handle(void *handle) const;
+
+    /// Maps a memory object and returns a host-side pointer to a memory
+    /// buffer with a copy of its contents.
+    ///
+    /// Mapping enables read/write directly from/to the memory contents for
+    /// engines that do not support direct memory access.
+    ///
+    /// Mapping is an exclusive operation - a memory object cannot be used in
+    /// other operations until it is unmapped via #dnnl::memory::unmap_data()
+    /// call.
+    ///
+    /// @note
+    ///     Any primitives working with the memory should be completed before
+    ///     the memory is mapped. Use #dnnl::stream::wait() to synchronize the
+    ///     corresponding execution stream.
+    ///
+    /// @note
+    ///     The map_data and unmap_data functions are provided mainly for
+    ///     debug and testing purposes and their performance may be suboptimal.
+    ///
+    /// @tparam T Data type to return a pointer to.
+    /// @returns Pointer to the mapped memory.
+    template <typename T = void>
+    T *map_data() const;
+
+    /// Unmaps a memory object and writes back any changes made to the
+    /// previously mapped memory buffer.
+    ///
+    /// @note
+    ///     The map_data and unmap_data functions are provided mainly for
+    ///     debug and testing purposes and their performance may be
+    ///     suboptimal.
+    ///
+    /// @param mapped_ptr A pointer previously returned by
+    ///     #dnnl::memory::map_data().
+    void unmap_data(void *mapped_ptr) const;
 
     /// Returns the underlying SYCL buffer object.
     ///
