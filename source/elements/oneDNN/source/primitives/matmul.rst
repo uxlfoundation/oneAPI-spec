@@ -48,10 +48,10 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\weights`       DNNL_ARG_WEIGHTS
-:math:`\bias`          DNNL_ARG_BIAS
-:math:`\dst`           DNNL_ARG_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\weights`       |DNNL_ARG_WEIGHTS|
+:math:`\bias`          |DNNL_ARG_BIAS|
+:math:`\dst`           |DNNL_ARG_DST|
 ====================== ========================
 
 *****************

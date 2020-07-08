@@ -30,8 +30,8 @@ When executed, the inputs and outputs should be mapped to an execution argument 
 ====================== ========================
 primitive input/output execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_MULTIPLE_SRC
-:math:`\dst`           DNNL_ARG_DST
+:math:`\src`           |DNNL_ARG_MULTIPLE_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
 ====================== ========================
 
 *****************
