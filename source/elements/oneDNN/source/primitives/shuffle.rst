@@ -75,10 +75,10 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************

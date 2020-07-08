@@ -101,14 +101,14 @@ argument index as specified by the following table.
 =============================================== =========================
 Primitive input/output                          Execution argument index
 =============================================== =========================
-:math:`\src`                                    DNNL_ARG_SRC
-:math:`\gamma, \beta`                           DNNL_ARG_SCALE_SHIFT
-mean (:math:`\mu`)                              DNNL_ARG_MEAN
-variance (:math:`\sigma`)                       DNNL_ARG_VARIANCE
-:math:`\dst`                                    DNNL_ARG_DST
-:math:`\diffdst`                                DNNL_ARG_DIFF_DST
-:math:`\diffsrc`                                DNNL_ARG_DIFF_SRC
-:math:`\diffgamma`, :math:`\diffbeta`           DNNL_ARG_DIFF_SCALE_SHIFT
+:math:`\src`                                    |DNNL_ARG_SRC|
+:math:`\gamma, \beta`                           |DNNL_ARG_SCALE_SHIFT|
+mean (:math:`\mu`)                              |DNNL_ARG_MEAN|
+variance (:math:`\sigma`)                       |DNNL_ARG_VARIANCE|
+:math:`\dst`                                    |DNNL_ARG_DST|
+:math:`\diffdst`                                |DNNL_ARG_DIFF_DST|
+:math:`\diffsrc`                                |DNNL_ARG_DIFF_SRC|
+:math:`\diffgamma`, :math:`\diffbeta`           |DNNL_ARG_DIFF_SCALE_SHIFT|
 =============================================== =========================
 
 *****************

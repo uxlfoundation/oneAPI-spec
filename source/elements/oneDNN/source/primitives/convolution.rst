@@ -160,15 +160,15 @@ argument index as specified by the following table.
 ========================= ========================
 Primitive input/output    Execution argument index
 ========================= ========================
-:math:`\src`              DNNL_ARG_SRC
-:math:`\weights`          DNNL_ARG_WEIGHTS
-:math:`\bias`             DNNL_ARG_BIAS
-:math:`\dst`              DNNL_ARG_DST
-:math:`\diffsrc`          DNNL_ARG_DIFF_SRC
-:math:`\diffweights`      DNNL_ARG_DIFF_WEIGHTS
-:math:`\diffbias`         DNNL_ARG_DIFF_BIAS
-:math:`\diffdst`          DNNL_ARG_DIFF_DST
-:math:`depthwise`         DNNL_ARG_ATTR_POST_OP_DW
+:math:`\src`              |DNNL_ARG_SRC|
+:math:`\weights`          |DNNL_ARG_WEIGHTS|
+:math:`\bias`             |DNNL_ARG_BIAS|
+:math:`\dst`              |DNNL_ARG_DST|
+:math:`\diffsrc`          |DNNL_ARG_DIFF_SRC|
+:math:`\diffweights`      |DNNL_ARG_DIFF_WEIGHTS|
+:math:`\diffbias`         |DNNL_ARG_DIFF_BIAS|
+:math:`\diffdst`          |DNNL_ARG_DIFF_DST|
+:math:`depthwise`         |DNNL_ARG_ATTR_POST_OP_DW|
 ========================= ========================
 
 *****************

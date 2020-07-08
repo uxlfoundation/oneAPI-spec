@@ -51,8 +51,8 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_MULTIPLE_SRC
-:math:`\dst`           DNNL_ARG_DST
+:math:`\src`           |DNNL_ARG_MULTIPLE_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
 ====================== ========================
 
 *****************
