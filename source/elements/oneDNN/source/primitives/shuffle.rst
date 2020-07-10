@@ -91,17 +91,22 @@ Operation Details
    for ``diff_src`` and ``diff_dst``. The corresponding memory descriptors are
    referred to as ``diff_data_desc``.
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 The shuffle primitive supports the following combinations of data types:
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward f32, bf16
-forward            s32, s8, u8
+forward / backward |f32|, |bf16|
+forward            |s32|, |s8|, |u8|
 ================== ====================
 
 ************

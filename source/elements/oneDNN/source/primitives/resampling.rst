@@ -131,18 +131,23 @@ Operation Details
    \frac{output\_spatial\_size} {input\_spatial\_size}` that do not
    necessarily equal to the ones passed by the user.
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 Resampling primitive supports the following combination of data types for
-source and destination memory objects:
+source and destination memory objects.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward f32, bf16
-forward            f16, s8, u8
+forward / backward |f32|, |bf16|
+forward            |f16|, |s8|, |u8|
 ================== ====================
 
 ***********************

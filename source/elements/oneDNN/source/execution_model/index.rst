@@ -56,7 +56,7 @@ as long these operation do not violate DPC++ synchronization requirements.
 
 Similar to DPC++ queues, streams can be in-order and out-of-order (see the
 relevant portion of the DPC++ specification for the explanation). The desired
-behavior can be specified using :enum:`dnnl::stream::flags` value. A stream
+behavior can be specified using :any:`dnnl::stream::flags` value. A stream
 created from a DPC++ queue inherits its behavior.
 
 .. doxygenstruct:: dnnl::stream

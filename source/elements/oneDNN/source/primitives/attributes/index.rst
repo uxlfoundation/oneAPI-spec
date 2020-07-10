@@ -176,7 +176,7 @@ quantization model. The main rationale to support only *static* quantization
 out-of-the-box is higher performance. To use *dynamic* quantization:
 
 1. Compute the result in higher precision, like
-   :enumerator:`dnnl::memory::data_type::s32`.
+   :any:`dnnl::memory::data_type::s32`.
 2. Find the required characteristics, like min and max values, and derive the
    scale factor.
 3. Re-quantize to the lower precision data type.

@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: ../replacements.rst
+
 ######
 Binary
 ######
@@ -83,7 +85,7 @@ The following attributes should be supported:
 Data Types Support
 ******************
 
-The source and destination tensors may have ``f32``, ``bf16``, or ``int8``
+The source and destination tensors may have |_f32|, |_bf16|, or |_int8|
 data types.
 
 *******************

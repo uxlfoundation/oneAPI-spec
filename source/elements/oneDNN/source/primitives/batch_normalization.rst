@@ -169,18 +169,23 @@ Operation Details
    propagation the primitive has one additional output, ``workspace``, that
    should be passed during the backward propagation.
 
-*****************
-Data Type Support
-*****************
+******************
+Data Types Support
+******************
 
-The operation supports the following combinations of data types:
+The operation supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ==================== ============================
 Propagation        Source / Destination Mean / Variance / ScaleShift
 ================== ==================== ============================
-forward / backward f32, bf16            f32
-forward            f16                  f32
-forward            s8                   f32
+forward / backward |f32|, |bf16|        |f32|
+forward            |f16|                |f32|
+forward            |s8|                 |f32|
 ================== ==================== ============================
 
 *******************

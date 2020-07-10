@@ -23,7 +23,7 @@ oneDNN main concepts are *primitives*, *engines* and *streams*.
    :width: 600
    :alt: oneDNN programming model
 
-A *primitive* (:struct:`dnnl::primitive`) is a functor object that
+A *primitive* (:any:`dnnl::primitive`) is a functor object that
 encapsulates a particular computation such as forward convolution, backward
 LSTM computations, or a data transformation operation. A single primitive can
 sometimes represent more complex *fused* computations such as a forward
@@ -51,15 +51,15 @@ implementations may reduce the primitive creation cost by caching primitives
 that have the same parameters. This optimization falls outside of the scope of
 this specification.
 
-*Engines* (:struct:`dnnl::engine`) are an abstraction of a computational
+*Engines* (:any:`dnnl::engine`) are an abstraction of a computational
 device: a CPU, a specific GPU card in the system, etc. Most primitives are
 created to execute computations on one specific engine. The only exceptions
 are reorder primitives that transfer data between two different engines.
 
-*Streams* (:struct:`dnnl::stream`) encapsulate execution context tied to a
+*Streams* (:any:`dnnl::stream`) encapsulate execution context tied to a
 particular engine. For example, they can correspond to DPC++ command queues.
 
-Memory objects (:struct:`dnnl::memory`) encapsulate handles to memory
+Memory objects (:any:`dnnl::memory`) encapsulate handles to memory
 allocated on a specific engine, tensor dimensions, data type, and memory
 format – the way tensor indices map to offsets in linear memory space. Memory
 objects are passed to primitives during execution.
@@ -71,7 +71,7 @@ in order to expose maximum flexibility to its users.
 
 On the logical level, the library provides the following abstractions:
 
-* Memory descriptors (:struct:`dnnl::memory::desc`) define a tensor's logical
+* Memory descriptors (:any:`dnnl::memory::desc`) define a tensor's logical
   dimensions, data type, and the format in which the data is laid out in
   memory. The special format any (:any:`dnnl::memory::format_tag::any`)
   indicates that the actual format will be defined later.
@@ -83,7 +83,7 @@ On the logical level, the library provides the following abstractions:
   kind (forward, backward with respect to data or weights), and other
   implementation-independent parameters.
 
-* Primitive descriptors (:struct:`dnnl::primitive_desc_base` is the base class
+* Primitive descriptors (:any:`dnnl::primitive_desc_base` is the base class
   and each of the supported primitives have their own version) are at an
   abstraction level in between operation descriptors and primitives and can be
   used to inspect details of a specific primitive implementation like expected

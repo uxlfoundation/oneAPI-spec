@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: ../replacements.rst
+
 ######
 Concat
 ######

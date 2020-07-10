@@ -3,53 +3,39 @@
 
 .. default-domain:: cpp
 
+.. include:: ../../replacements.rst
+
 .. _data_types-label:
 
 ##########
 Data types
 ##########
 
-.. namespace:: dnnl::memory::data_type
+oneDNN supports multiple data types. However, the 32-bit IEEE single-precision
+floating-point data type is the fundamental type in oneDNN. It is the only
+data type that must be supported by an implementation. All the other types
+discussed below are optional.
 
-oneDNN supports multiple data types. However, the 32-bit IEEE floating-point
-data type (:any:`f32`) is the fundamental type in oneDNN. It
-is the only data type that must be supported by an implementation. All the
-other types discussed below are optional.
+Primitives operating on the single-precision floating-point data type consume
+data, produce, and store intermediate results using the same data type.
 
-Primitives operating on the :any:`f32` data type consume data, produce, and
-store intermediate results in the :any:`f32` data type.
+Moreover, single-precision floating-point data type is often used for
+intermediate results in the mixed precision computations because it provides
+better accuracy. For example, the elementwise primitive and elementwise
+post-ops always use it internally.
 
-Moreover, the :any:`f32` data type is often used for intermediate results in
-the mixed precision computations because it provides better accuracy. For
-example, the elementwise primitive and elementwise post-ops always use
-:any:`f32` internally.
-
-..
-   =================== ================================================================================================================================================================================
-   Data type           Description
-   =================== ================================================================================================================================================================================
-   :any:`f32`          `IEEE single precision floating point <https://en.wikipedia.org/wiki/Single-precision_floating-point_format#IEEE_754_single-precision_binary_floating-point_format:_binary32>`__
-   :any:`bf16`         `non-IEEE 16-bit floating point <https://software.intel.com/en-us/download/bfloat16-hardware-numerics-definition>`__
-   :any:`f16`          `IEEE half precision floating point <https://en.wikipedia.org/wiki/Half-precision_floating-point_format#IEEE_754_half-precision_binary_floating-point_format:_binary16>`__
-   :any:`s8`/:any:`u8` signed/unsigned 8-bit integer
-   =================== ================================================================================================================================================================================
-
-oneDNN defines the following data types:
-
-.. namespace:: 0
+oneDNN uses the following enumeration to refer to data types it supports:
 
 .. doxygenenum:: dnnl::memory::data_type
    :project: oneDNN
-
-.. namespace:: dnnl::memory::data_type
 
 oneDNN supports training and inference with the following data types:
 
 ========== ========================================================
 Usage mode Data types
 ========== ========================================================
-Inference  :any:`f32`, :any:`bf16`, :any:`f16`, :any:`s8`/:any:`u8`
-Training   :any:`f32`, :any:`bf16`
+inference  |_f32|, |_bf16|, |_f16|, |_s8|/|_u8|
+training   |_f32|, |_bf16|
 ========== ========================================================
 
 .. note::
