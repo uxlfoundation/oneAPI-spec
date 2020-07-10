@@ -3,8 +3,6 @@
 
 .. default-domain:: cpp
 
-.. namespace:: 0
-
 ######
 Memory
 ######
@@ -27,6 +25,7 @@ oneDNN defines the following convenience aliases to denote tensor dimensions
    :project: oneDNN
 
 .. toctree::
+   :maxdepth: 2
 
    formats.rst
    objects.rst

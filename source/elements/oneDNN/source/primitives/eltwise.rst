@@ -189,14 +189,19 @@ Operation Details
 Data Type Support
 *****************
 
-The eltwise primitive should support the following combinations of data types:
+The eltwise primitive should support the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ==================== ======================
 Propagation        Source / Destination Intermediate data type
 ================== ==================== ======================
-forward / backward f32, bf16            f32
-forward            f16                  f16
-forward            s32 / s8 / u8        f32
+forward / backward |f32|, |bf16|        |f32|
+forward            |f16|                |f16|
+forward            |s32| / |s8| / |u8|  |f32|
 ================== ==================== ======================
 
 Here the intermediate data type means that the values coming in are first

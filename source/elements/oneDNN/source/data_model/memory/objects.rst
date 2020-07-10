@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. namespace:: 0
+.. include:: ../../replacements.rst
 
 ##############################
 Memory Descriptors and Objects
@@ -16,11 +16,11 @@ Descriptors
 Memory descriptor is an engine-agnostic logical description of data (number of
 dimensions, dimension sizes, and data type), and, optionally, the information
 about the physical format of data in memory. If this information is not known
-yet, a memory descriptor can be created with
-:any:`dnnl::memory::format_tag::any`. This allows compute-intensive primitives
-to chose the most appropriate format for the computations.  The user is then
-responsible for reordering their data into the new format if the formats do
-not match. See :ref:`memory_format_propagation-label`.
+yet, a memory descriptor can be created with format tag set to |_any|. This
+allows compute-intensive primitives to chose the most appropriate format for
+the computations.  The user is then responsible for reordering their data into
+the new format if the formats do not match. See
+:ref:`memory_format_propagation-label`.
 
 A memory descriptor can be initialized either by specifying dimensions, and
 memory format tag or strides for each of them.

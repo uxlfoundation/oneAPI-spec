@@ -1,10 +1,27 @@
 ..
   Copyright 2019-2020 Intel Corporation
 
+.. namespace:: 0
+
+.. |f16| replace:: :any:`f16 <dnnl::memory::data_type::f16>`
+.. |bf16| replace:: :any:`bf16 <dnnl::memory::data_type::bf16>`
+.. |f32| replace:: :any:`f32 <dnnl::memory::data_type::f32>`
+.. |s32| replace:: :any:`s32 <dnnl::memory::data_type::s32>`
+.. |s8| replace:: :any:`s8 <dnnl::memory::data_type::s8>`
+.. |u8| replace:: :any:`u8 <dnnl::memory::data_type::u8>`
+
+.. |_f16| replace:: :any:`dnnl::memory::data_type::f16`
+.. |_bf16| replace:: :any:`dnnl::memory::data_type::bf16`
+.. |_f32| replace:: :any:`dnnl::memory::data_type::f32`
+.. |_s32| replace:: :any:`dnnl::memory::data_type::s32`
+.. |_s8| replace:: :any:`dnnl::memory::data_type::s8`
+.. |_u8| replace:: :any:`dnnl::memory::data_type::u8`
+
 .. |any| replace:: :any:`any <dnnl::memory::format_tag::any>`
 .. |abcdef| replace:: :any:`abcdef <dnnl::memory::format_tag::abcdef>`
 .. |abcde| replace:: :any:`abcde <dnnl::memory::format_tag::abcde>`
 .. |abcd| replace:: :any:`abcd <dnnl::memory::format_tag::abcd>`
+.. |abdc| replace:: :any:`abdc <dnnl::memory::format_tag::abdc>`
 .. |abc| replace:: :any:`abc <dnnl::memory::format_tag::abc>`
 .. |ab| replace:: :any:`ab <dnnl::memory::format_tag::ab>`
 .. |acb| replace:: :any:`acb <dnnl::memory::format_tag::acb>`
@@ -28,6 +45,7 @@
 .. |ldgo| replace:: :any:`ldgo <dnnl::memory::format_tag::ldgo>`
 .. |ldigo| replace:: :any:`ldigo <dnnl::memory::format_tag::ldigo>`
 .. |ldio| replace:: :any:`ldio <dnnl::memory::format_tag::ldio>`
+.. |ldoi| replace:: :any:`ldoi <dnnl::memory::format_tag::ldoi>`
 .. |ldnc| replace:: :any:`ldnc <dnnl::memory::format_tag::ldnc>`
 .. |ncdhw| replace:: :any:`ncdhw <dnnl::memory::format_tag::ncdhw>`
 .. |nchw| replace:: :any:`nchw <dnnl::memory::format_tag::nchw>`
@@ -47,15 +65,71 @@
 .. |wio| replace:: :any:`wio <dnnl::memory::format_tag::wio>`
 .. |x| replace:: :any:`x <dnnl::memory::format_tag::x>`
 
+.. |_any| replace:: :any:`dnnl::memory::format_tag::any`
+.. |_abcdef| replace:: :any:`dnnl::memory::format_tag::abcdef`
+.. |_abcde| replace:: :any:`dnnl::memory::format_tag::abcde`
+.. |_abcd| replace:: :any:`dnnl::memory::format_tag::abcd`
+.. |_abc| replace:: :any:`dnnl::memory::format_tag::abc`
+.. |_ab| replace:: :any:`dnnl::memory::format_tag::ab`
+.. |_acb| replace:: :any:`dnnl::memory::format_tag::acb`
+.. |_acdb| replace:: :any:`dnnl::memory::format_tag::acdb`
+.. |_acdeb| replace:: :any:`dnnl::memory::format_tag::acdeb`
+.. |_a| replace:: :any:`dnnl::memory::format_tag::a`
+.. |_bac| replace:: :any:`dnnl::memory::format_tag::bac`
+.. |_ba| replace:: :any:`dnnl::memory::format_tag::ba`
+.. |_cba| replace:: :any:`dnnl::memory::format_tag::cba`
+.. |_cdba| replace:: :any:`dnnl::memory::format_tag::cdba`
+.. |_cdeba| replace:: :any:`dnnl::memory::format_tag::cdeba`
+.. |_decab| replace:: :any:`dnnl::memory::format_tag::decab`
+.. |_dhwio| replace:: :any:`dnnl::memory::format_tag::dhwio`
+.. |_goidhw| replace:: :any:`dnnl::memory::format_tag::goidhw`
+.. |_goihw| replace:: :any:`dnnl::memory::format_tag::goihw`
+.. |_goiw| replace:: :any:`dnnl::memory::format_tag::goiw`
+.. |_hwigo| replace:: :any:`dnnl::memory::format_tag::hwigo`
+.. |_hwio| replace:: :any:`dnnl::memory::format_tag::hwio`
+.. |_io| replace:: :any:`dnnl::memory::format_tag::io`
+.. |_ldgoi| replace:: :any:`dnnl::memory::format_tag::ldgoi`
+.. |_ldgo| replace:: :any:`dnnl::memory::format_tag::ldgo`
+.. |_ldigo| replace:: :any:`dnnl::memory::format_tag::ldigo`
+.. |_ldio| replace:: :any:`dnnl::memory::format_tag::ldio`
+.. |_ldnc| replace:: :any:`dnnl::memory::format_tag::ldnc`
+.. |_ncdhw| replace:: :any:`dnnl::memory::format_tag::ncdhw`
+.. |_nchw| replace:: :any:`dnnl::memory::format_tag::nchw`
+.. |_ncw| replace:: :any:`dnnl::memory::format_tag::ncw`
+.. |_nc| replace:: :any:`dnnl::memory::format_tag::nc`
+.. |_ndhwc| replace:: :any:`dnnl::memory::format_tag::ndhwc`
+.. |_nhwc| replace:: :any:`dnnl::memory::format_tag::nhwc`
+.. |_ntc| replace:: :any:`dnnl::memory::format_tag::ntc`
+.. |_nt| replace:: :any:`dnnl::memory::format_tag::nt`
+.. |_nwc| replace:: :any:`dnnl::memory::format_tag::nwc`
+.. |_oidhw| replace:: :any:`dnnl::memory::format_tag::oidhw`
+.. |_oihw| replace:: :any:`dnnl::memory::format_tag::oihw`
+.. |_oiw| replace:: :any:`dnnl::memory::format_tag::oiw`
+.. |_oi| replace:: :any:`dnnl::memory::format_tag::oi`
+.. |_tnc| replace:: :any:`dnnl::memory::format_tag::tnc`
+.. |_tn| replace:: :any:`dnnl::memory::format_tag::tn`
+.. |_wio| replace:: :any:`dnnl::memory::format_tag::wio`
+.. |_x| replace:: :any:`dnnl::memory::format_tag::x`
+
 .. |normalization_flags_none| replace:: :any:`none <dnnl::normalization_flags::none>`
 .. |use_global_stats| replace:: :any:`use_global_stats <dnnl::normalization_flags::use_global_stats>`
 .. |use_scaleshift| replace:: :any:`use_scaleshift <dnnl::normalization_flags::use_scaleshift>`
 .. |fuse_norm_relu| replace:: :any:`fuse_norm_relu <dnnl::normalization_flags::fuse_norm_relu>`
 
+.. |_normalization_flags_none| replace:: :any:`dnnl::normalization_flags::none`
+.. |_use_global_stats| replace:: :any:`dnnl::normalization_flags::use_global_stats`
+.. |_use_scaleshift| replace:: :any:`dnnl::normalization_flags::use_scaleshift`
+.. |_fuse_norm_relu| replace:: :any:`dnnl::normalization_flags::fuse_norm_relu`
+
 .. |backward| replace:: :any:`backward <dnnl::prop_kind::backward>`
 .. |backward_data| replace:: :any:`backward_data <dnnl::prop_kind::backward_data>`
 .. |forward_inference| replace:: :any:`forward_inference <dnnl::prop_kind::forward_inference>`
 .. |forward_training| replace:: :any:`forward_training <dnnl::prop_kind::forward_training>`
+
+.. |_backward| replace:: :any:`dnnl::prop_kind::backward`
+.. |_backward_data| replace:: :any:`dnnl::prop_kind::backward_data`
+.. |_forward_inference| replace:: :any:`dnnl::prop_kind::forward_inference`
+.. |_forward_training| replace:: :any:`dnnl::prop_kind::forward_training`
 
 .. |binary_add| replace:: :any:`binary_add <dnnl::algorithm::binary_add>`
 .. |binary_max| replace:: :any:`binary_max <dnnl::algorithm::binary_max>`
@@ -104,6 +178,53 @@
 .. |vanilla_lstm| replace:: :any:`vanilla_lstm <dnnl::algorithm::vanilla_lstm>`
 .. |vanilla_rnn| replace:: :any:`vanilla_rnn <dnnl::algorithm::vanilla_rnn>`
 
+.. |_binary_add| replace:: :any:`dnnl::algorithm::binary_add`
+.. |_binary_max| replace:: :any:`dnnl::algorithm::binary_max`
+.. |_binary_min| replace:: :any:`dnnl::algorithm::binary_min`
+.. |_binary_mul| replace:: :any:`dnnl::algorithm::binary_mul`
+.. |_convolution_auto| replace:: :any:`dnnl::algorithm::convolution_auto`
+.. |_convolution_direct| replace:: :any:`dnnl::algorithm::convolution_direct`
+.. |_convolution_winograd| replace:: :any:`dnnl::algorithm::convolution_winograd`
+.. |_deconvolution_direct| replace:: :any:`dnnl::algorithm::deconvolution_direct`
+.. |_deconvolution_winograd| replace:: :any:`dnnl::algorithm::deconvolution_winograd`
+.. |_eltwise_abs| replace:: :any:`dnnl::algorithm::eltwise_abs`
+.. |_eltwise_bounded_relu| replace:: :any:`dnnl::algorithm::eltwise_bounded_relu`
+.. |_eltwise_clip| replace:: :any:`dnnl::algorithm::eltwise_clip`
+.. |_eltwise_elu_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_elu_use_dst_for_bwd`
+.. |_eltwise_elu| replace:: :any:`dnnl::algorithm::eltwise_elu`
+.. |_eltwise_exp_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_exp_use_dst_for_bwd`
+.. |_eltwise_exp| replace:: :any:`dnnl::algorithm::eltwise_exp`
+.. |_eltwise_gelu_erf| replace:: :any:`dnnl::algorithm::eltwise_gelu_erf`
+.. |_eltwise_gelu_tanh| replace:: :any:`dnnl::algorithm::eltwise_gelu_tanh`
+.. |_eltwise_gelu| replace:: :any:`dnnl::algorithm::eltwise_gelu`
+.. |_eltwise_linear| replace:: :any:`dnnl::algorithm::eltwise_linear`
+.. |_eltwise_logistic_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_logistic_use_dst_for_bwd`
+.. |_eltwise_logistic| replace:: :any:`dnnl::algorithm::eltwise_logistic`
+.. |_eltwise_log| replace:: :any:`dnnl::algorithm::eltwise_log`
+.. |_eltwise_pow| replace:: :any:`dnnl::algorithm::eltwise_pow`
+.. |_eltwise_relu_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_relu_use_dst_for_bwd`
+.. |_eltwise_relu| replace:: :any:`dnnl::algorithm::eltwise_relu`
+.. |_eltwise_soft_relu| replace:: :any:`dnnl::algorithm::eltwise_soft_relu`
+.. |_eltwise_sqrt_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_sqrt_use_dst_for_bwd`
+.. |_eltwise_sqrt| replace:: :any:`dnnl::algorithm::eltwise_sqrt`
+.. |_eltwise_square| replace:: :any:`dnnl::algorithm::eltwise_square`
+.. |_eltwise_swish| replace:: :any:`dnnl::algorithm::eltwise_swish`
+.. |_eltwise_tanh_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_tanh_use_dst_for_bwd`
+.. |_eltwise_tanh| replace:: :any:`dnnl::algorithm::eltwise_tanh`
+.. |_lbr_gru| replace:: :any:`dnnl::algorithm::lbr_gru`
+.. |_lrn_across_channels| replace:: :any:`dnnl::algorithm::lrn_across_channels`
+.. |_lrn_within_channel| replace:: :any:`dnnl::algorithm::lrn_within_channel`
+.. |_pooling_avg_exclude_padding| replace:: :any:`dnnl::algorithm::pooling_avg_exclude_padding`
+.. |_pooling_avg_include_padding| replace:: :any:`dnnl::algorithm::pooling_avg_include_padding`
+.. |_pooling_avg| replace:: :any:`dnnl::algorithm::pooling_avg`
+.. |_pooling_max| replace:: :any:`dnnl::algorithm::pooling_max`
+.. |_resampling_linear| replace:: :any:`dnnl::algorithm::resampling_linear`
+.. |_resampling_nearest| replace:: :any:`dnnl::algorithm::resampling_nearest`
+.. |_undef| replace:: :any:`dnnl::algorithm::undef`
+.. |_vanilla_gru| replace:: :any:`dnnl::algorithm::vanilla_gru`
+.. |_vanilla_lstm| replace:: :any:`dnnl::algorithm::vanilla_lstm`
+.. |_vanilla_rnn| replace:: :any:`dnnl::algorithm::vanilla_rnn`
+
 .. |DNNL_ARG_SRC_0| replace:: :c:macro:`DNNL_ARG_SRC_0`
 .. |DNNL_ARG_SRC| replace:: :c:macro:`DNNL_ARG_SRC`
 .. |DNNL_ARG_SRC_LAYER| replace:: :c:macro:`DNNL_ARG_SRC_LAYER`
@@ -126,6 +247,8 @@
 .. |DNNL_ARG_WEIGHTS_LAYER| replace:: :c:macro:`DNNL_ARG_WEIGHTS_LAYER`
 .. |DNNL_ARG_WEIGHTS_1| replace:: :c:macro:`DNNL_ARG_WEIGHTS_1`
 .. |DNNL_ARG_WEIGHTS_ITER| replace:: :c:macro:`DNNL_ARG_WEIGHTS_ITER`
+.. |DNNL_ARG_WEIGHTS_PEEPHOLE| replace:: :c:macro:`DNNL_ARG_WEIGHTS_PEEPHOLE`
+.. |DNNL_ARG_WEIGHTS_PROJECTION| replace:: :c:macro:`DNNL_ARG_WEIGHTS_PROJECTION`
 .. |DNNL_ARG_BIAS| replace:: :c:macro:`DNNL_ARG_BIAS`
 .. |DNNL_ARG_MEAN| replace:: :c:macro:`DNNL_ARG_MEAN`
 .. |DNNL_ARG_VARIANCE| replace:: :c:macro:`DNNL_ARG_VARIANCE`
@@ -151,6 +274,8 @@
 .. |DNNL_ARG_DIFF_WEIGHTS_LAYER| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_LAYER`
 .. |DNNL_ARG_DIFF_WEIGHTS_1| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_1`
 .. |DNNL_ARG_DIFF_WEIGHTS_ITER| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_ITER`
+.. |DNNL_ARG_DIFF_WEIGHTS_PEEPHOLE| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_PEEPHOLE`
+.. |DNNL_ARG_DIFF_WEIGHTS_PROJECTION| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_PROJECTION`
 .. |DNNL_ARG_DIFF_BIAS| replace:: :c:macro:`DNNL_ARG_DIFF_BIAS`
 .. |DNNL_ARG_ATTR_OUTPUT_SCALES| replace:: :c:macro:`DNNL_ARG_ATTR_OUTPUT_SCALES`
 .. |DNNL_ARG_MULTIPLE_SRC| replace:: :c:macro:`DNNL_ARG_MULTIPLE_SRC`

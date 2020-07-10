@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. cpp:namespace:: dnnl::memory
+.. include:: ../../replacements.rst
 
 .. |N| replace:: :math:`N`
 .. |C| replace:: :math:`C`
@@ -136,8 +136,8 @@ the nomenclature from the previous section, the following equality holds:
    \operatorname{strides}[j] * \operatorname{dimensions}[j]
    \text{ if } \sigma(i) + 1 = \sigma(j) \text{ for all } 0 \leq i, j < n - 1.
 
-In the matrix example, we could have used :any:`format_tag::ab` for the
-non-transposed matrix above, and :any:`format_tag::ba` for the transposed:
+In the matrix example, we could have used |_ab| for the
+non-transposed matrix above, and |_ba| for the transposed:
 
 .. code:: cpp
 
@@ -152,16 +152,21 @@ non-transposed matrix above, and :any:`format_tag::ba` for the transposed:
    dnnl::memory::desc A_transposed {dims, dnnl::memory::data_type::f32,
            dnnl::memory::format_tag::ba};
 
+.. note::
+
+   In what follows in this section we abbreviate memory format tag names for
+   readability. For example, |_abcd| is abbreviated to |abcd|.
+
 In addition to abstract format tag names, oneDNN also provides convenience
 aliases. Some examples for CNNs and RNNs:
 
-- :any:`format_tag::nchw` is an alias for :any:`format_tag::abcd` (see the
-  canonical order order of dimensions for CNNs discussed above).
-- :any:`format_tag::oihw` is an alias for :any:`format_tag::abcd`.
-- :any:`format_tag::nhwc` is an alias for :any:`format_tag::acdb`.
-- :any:`format_tag::tnc` is an alias for :any:`format_tag::abc`.
-- :any:`format_tag::ldio` is an alias for :any:`format_tag::abcd`.
-- :any:`format_tag::ldoi` is an alias for :any:`format_tag::abdc`.
+- |nchw| is an alias for |abcd| (see the canonical order order of dimensions
+  for CNNs discussed above).
+- |oihw| is an alias for |abcd|.
+- |nhwc| is an alias for |acdb|.
+- |tnc| is an alias for |abc|.
+- |ldio| is an alias for |abcd|.
+- |ldoi| is an alias for |abdc|.
 
 **********************
 Optimized Format 'any'
@@ -170,7 +175,7 @@ Optimized Format 'any'
 Another kind of format that oneDNN supports is an opaque _optimized_ memory
 format that cannot be created directly from |strides| and |dimensions| arrays.
 A memory descriptor for an optimized memory format can only be created by
-passing :any:`format_tag::any` when creating certain operation descriptors,
+passing |any| when creating certain operation descriptors,
 using them to create corresponding primitive descriptors and then querying
 them for memory descriptors. Data in plain memory format should then be
 reordered into the data in optimized data format before computations. Since
@@ -194,7 +199,7 @@ Memory format propagation is one of the central notions that needs to be
 well-understood to use oneDNN correctly.
 
 Convolution and inner product primitives choose the memory format when you
-create them with the placeholder memory format :any:`format_tag::any` for
+create them with the placeholder memory format |any| for
 input or output. The memory format chosen is based on different circumstances
 such as hardware and convolution parameters. Using the placeholder memory
 format is the recommended practice for convolutions, since they are the most
@@ -211,17 +216,17 @@ when initializing there primitives for backward computations you should use
 dnnl::memory::format_tag::any memory format tag as well.
 
 Below is the short summary when to use and not to use memory format
-:any:`format_tag::any` during operation description initialization:
+|any| during operation description initialization:
 
-+-----------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+
-| Primitive Kinds                                                                                                                   | Forward Propagation                                                                                           | Backward Propagation                                                                        | No Propagation                                                                                                |
-+===================================================================================================================================+===============================================================================================================+=============================================================================================+===============================================================================================================+
-| **Compute intensive**: (De-)convolution, Inner product, RNN                                                                       | Use :any:`format_tag::any`                                                                                    | Use :any:`format_tag::any`                                                                  | N/A                                                                                                           |
-+-----------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+
-| **Memory-bandwidth limited**: Pooling, Layer and Batch Normalization, Local Response Normalization, Elementwise, Shuffle, Softmax | Use memory format from preceding layer for source tensors, and :any:`format_tag::any` for destination tensors | Use :any:`format_tag::any` for gradient tensors, and actual memory formats for data tensors | N/A                                                                                                           |
-+-----------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+
-| **Memory-bandwidth limited**: Reorder, Concat, Sum, Binary                                                                        | N/A                                                                                                           | N/A                                                                                         | Use memory format from preceding layer for source tensors, and :any:`format_tag::any` for destination tensors |
-+-----------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| Primitive Kinds                                                                                                                   | Forward Propagation                                                                          | Backward Propagation                                                       | No Propagation                                                                               |
++===================================================================================================================================+==============================================================================================+============================================================================+==============================================================================================+
+| **Compute intensive**: (De-)convolution, Inner product, RNN                                                                       | Use |any|                                                                                    | Use |any|                                                                  | N/A                                                                                          |
++-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| **Memory-bandwidth limited**: Pooling, Layer and Batch Normalization, Local Response Normalization, Elementwise, Shuffle, Softmax | Use memory format from preceding layer for source tensors, and |any| for destination tensors | Use |any| for gradient tensors, and actual memory formats for data tensors | N/A                                                                                          |
++-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| **Memory-bandwidth limited**: Reorder, Concat, Sum, Binary                                                                        | N/A                                                                                          | N/A                                                                        | Use memory format from preceding layer for source tensors, and |any| for destination tensors |
++-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 
 Additional format synchronization is required between forward and backward
 propagation when running training workloads. This is achieved via the
@@ -231,8 +236,6 @@ implement backward propagation.
 ***
 API
 ***
-
-.. namespace:: 0
 
 .. doxygenenum:: dnnl::memory::format_tag
    :project: oneDNN

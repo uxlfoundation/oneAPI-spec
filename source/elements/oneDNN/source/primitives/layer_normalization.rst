@@ -141,17 +141,22 @@ Operation Details
    :math:`\src`, hence the corresponding forward propagation should not be
    performed in-place.
 
-*****************
-Data Type Support
-*****************
+******************
+Data Types Support
+******************
 
-The operation supports the following combinations of data types:
+The layer normalization supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ==================== ============================
 Propagation        Source / Destination Mean / Variance / ScaleShift
 ================== ==================== ============================
-forward / backward f32                  f32
-forward            f16                  f32
+forward / backward |f32|                |f32|
+forward            |f16|                |f32|
 ================== ==================== ============================
 
 *******************

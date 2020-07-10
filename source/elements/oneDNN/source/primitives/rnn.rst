@@ -331,7 +331,7 @@ Primitive input/output              Execution argument index
 :math:`\dstlayer`                   |DNNL_ARG_DST_LAYER|
 :math:`\dstiter`                    |DNNL_ARG_DST_ITER|
 :math:`\dstiterc`                   |DNNL_ARG_DST_ITER_C|
-:math:`\workspace`                  DNNL_WORKSPACE
+:math:`\workspace`                  |DNNL_ARG_WORKSPACE|
 :math:`\diffsrclayer`               |DNNL_ARG_DIFF_SRC_LAYER|
 :math:`\diffsrciter`                |DNNL_ARG_DIFF_SRC_ITER|
 :math:`\diffsrciterc`               |DNNL_ARG_DIFF_SRC_ITER_C|
@@ -351,25 +351,30 @@ Operation Details
 
 N/A
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 The following table lists the combination of data types that should be
 supported by the RNN primitive for each input and output memory object.
 
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| **Propagation**        | **Cell**     | **Input** | **Recurrent** | **Weights** | **Bias** | **Output** |
-|                        | **Function** | **Data**  | **Data** (1)  |             |          | **Data**   |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward / Backward     | All          | f32       | f32           | f32         | f32      | f32        |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward / Backward (2) | All (3)      | bf16      | bf16          | bf16        | f32      | bf16       |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward                | All (3)      | f16       | f16           | f16         | f16      | f16        |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward inference      | Vanilla LSTM | u8        | u8            | s8          | f32      | u8, f32    |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
+
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| **Propagation**        | **Cell**     | **Input** | **Recurrent** | **Weights** | **Bias** | **Output**  |
+|                        | **Function** | **Data**  | **Data** (1)  |             |          | **Data**    |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward / Backward     | All          | |f32|     | |f32|         | |f32|       | |f32|    | |f32|       |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward / Backward (2) | All (3)      | |bf16|    | |bf16|        | |bf16|      | |f32|    | |bf16|      |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward                | All (3)      | |f16|     | |f16|         | |f16|       | |f16|    | |f16|       |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward inference      | Vanilla LSTM | |u8|      | |u8|          | |s8|        | |f32|    | |u8|, |f32| |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
 
 (1) With LSTM and Peephole LSTM cells, the cell state data type is always f32.
 

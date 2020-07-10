@@ -107,12 +107,17 @@ The logsoftmax primitive does not support any post-ops or attributes.
 Data Type Support
 *****************
 
-The logsoftmax primitive supports the following combinations of data types:
+The logsoftmax primitive supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward bf16, f32
+forward / backward |bf16|, |f32|
 ================== ====================
 
 *******************

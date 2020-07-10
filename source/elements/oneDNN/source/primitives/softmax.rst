@@ -90,17 +90,22 @@ Post-ops and Attributes
 
 The softmax primitive does not have to support any post-ops or attributes.
 
-*****************
-Data Type Support
-*****************
+******************
+Data Types Support
+******************
 
-The softmax primitive supports the following combinations of data types:
+The softmax primitive supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward bf16, f32
-forward            f16
+forward / backward |bf16|, |f32|
+forward            |f16|
 ================== ====================
 
 *******************

@@ -102,16 +102,21 @@ Operation Details
 Data Type Support
 *****************
 
-The pooling primitive supports the following combinations of data types:
+The pooling primitive supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 +--------------------+----------------------+--------------------------------------------------------+
 | Propagation        | Source / Destination | Accumulation data type (used for average pooling only) |
 +====================+======================+========================================================+
-| forward / backward | f32, bf16            | f32                                                    |
+| forward / backward | |f32|, |bf16|        | |f32|                                                  |
 +--------------------+----------------------+--------------------------------------------------------+
-| forward            | f16                  | f16                                                    |
+| forward            | |f16|                | |f16|                                                  |
 +--------------------+----------------------+--------------------------------------------------------+
-| forward            | s8, u8, s32          | s32                                                    |
+| forward            | |s8|, |u8|, |s32|    | |s32|                                                  |
 +--------------------+----------------------+--------------------------------------------------------+
 
 *******************
