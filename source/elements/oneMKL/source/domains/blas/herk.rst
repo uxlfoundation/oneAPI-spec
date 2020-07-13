@@ -110,19 +110,44 @@ herk (Buffer Version)
 
 
    a
-      Buffer holding input matrix ``A``. If ``trans`` =
-      ``transpose::nontrans``, ``A`` is an ``n``-by-``k`` matrix so the
-      array ``a`` must have size at least ``lda``\ \*\ ``k``. Otherwise,
-      ``A`` is an ``k``-by-``n`` matrix so the array ``a`` must have
-      size at least ``lda``\ \*\ ``n``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
+      Buffer holding input matrix ``A``.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``trans`` = ``transpose::nontrans``
+           - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+         * - Column major
+           - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``k``.
+           - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``n``
+         * - Row major
+           - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``n``.
+           - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``k``.
+
+      See `Matrix and Vector Storage <../matrix-storage.html>`__ for
       more details.
 
 
    lda
-      Leading dimension of ``A``. Must be at least ``n`` if ``A`` is not
-      transposed, and at least ``k`` if ``A`` is transposed. Must be
-      positive.
+      The leading dimension of ``A``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``trans`` = ``transpose::nontrans``
+           - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+         * - Column major
+           - ``lda`` must be at least ``n``.
+           - ``lda`` must be at least ``k``.
+         * - Row major
+           - ``lda`` must be at least ``k``.
+           - ``lda`` must be at least ``n``.
 
 
    beta
@@ -209,20 +234,43 @@ herk (USM Version)
 
 
       a
-         Pointer to input matrix ``A``. If ``trans`` =
-         ``transpose::nontrans``, ``A`` is an ``n``-by-``k`` matrix so
-         the array ``a`` must have size at least ``lda``\ \*\ ``k``.
-         Otherwise, ``A`` is an ``k``-by-``n`` matrix so the array ``a``
-         must have size at least ``lda``\ \*\ ``n``. See `Matrix and
-         Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         Pointer to input matrix ``A``.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``trans`` = ``transpose::nontrans``
+              - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+            * - Column major
+              - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``.
+              - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``n``
+            * - Row major
+              - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``n``.
+              - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``.
+         
+         See `Matrix Storage <../matrix-storage.html>`__ for more details.
 
 
       lda
-         Leading dimension of ``A``. Must be at least ``n`` if ``A`` is
-         not transposed, and at least ``k`` if ``A`` is transposed. Must
-         be positive.
+         The leading dimension of ``A``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``trans`` = ``transpose::nontrans``
+              - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+            * - Column major
+              - ``lda`` must be at least ``n``.
+              - ``lda`` must be at least ``k``.
+            * - Row major
+              - ``lda`` must be at least ``k``.
+              - ``lda`` must be at least ``n``.
 
 
       beta

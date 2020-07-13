@@ -114,14 +114,17 @@ geru (Buffer Version)
 
    a
       Buffer holding input matrix ``A``. Must have size at least
-      ``lda``\ \*\ ``n``. See `Matrix and Vector
+      ``lda``\ \*\ ``n`` if column major layout is used or at least ``lda``\ \*\ ``m``
+      if row major layout is used. See `Matrix and Vector
       Storage <../matrix-storage.html>`__ for
       more details.
 
 
    lda
-      Leading dimension of matrix ``A``. Must be at least ``m``, and
-      positive.
+      Leading dimension of matrix ``A``. Must be positive and at least
+      ``m`` if column major layout is used or at least ``n`` if row
+      major layout is used.
+
 
 
 .. container:: section
@@ -200,15 +203,16 @@ geru (USM Version)
 
       a
          Pointer to input matrix ``A``. The array holding input matrix
-         ``A`` must have size at least ``lda``\ \*\ ``n``. See `Matrix
-         and Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         ``A`` must have size at least ``lda``\ \*\ ``n`` if column
+         major layout is used or at least ``lda``\ \*\ ``m`` if row
+         major layout is used. See `Matrix and Vector Storage
+         <../matrix-storage.html>`__ for more details.
 
 
       lda
-         Leading dimension of matrix ``A``. Must be at least ``m``, and
-         positive.
+         Leading dimension of matrix ``A``. Must be positive and at
+         least ``m`` if column major layout is used or at least ``n``
+         if row major layout is used.
 
 
       dependencies

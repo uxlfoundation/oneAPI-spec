@@ -23,26 +23,34 @@ Matrix Storage
 
       A general matrix ``A`` of ``m`` rows and ``n`` columns with
       leading dimension ``lda`` is represented as a one dimensional
-      array ``a`` of size of at least ``lda`` \* ``n``. Before entry in
-      any BLAS function using a general matrix, the leading ``m`` by
-      ``n`` part of the array ``a`` must contain the matrix ``A``. The
-      elements of each column are contiguous in memory while the
-      elements of each row are at distance ``lda`` from the element in
-      the same row and the previous column.
+      array ``a`` of size of at least ``lda`` \* ``n`` if column major
+      layout is used and at least ``lda`` \* ``m`` if row major layout
+      is used.  Before entry in any BLAS function using a general
+      matrix, the leading ``m`` by ``n`` part of the array ``a`` must
+      contain the matrix ``A``. For column (respectively row) major
+      layout, the elements of each column (respectively row) are
+      contiguous in memory while the elements of each row
+      (respectively column) are at distance ``lda`` from the element
+      in the same row (respectively column) and the previous column
+      (respectively row).
 
 
       Visually, the matrix
 
-
-      |image0|
+      
+      |image_generic_matrix|
 
 
       is stored in memory as an array
 
+      - For column major layout,
 
-      |image1|
+      |image_generic_matrix_column_major|
 
+      - For row major layout,
 
+      |image_generic_matrix_row_major|
+        
    .. container:: section
       :name: GUID-150ACC6B-BB73-4E6E-A7F7-9CE07707FA0E
 
@@ -54,10 +62,12 @@ Matrix Storage
 
       A triangular matrix ``A`` of ``n`` rows and ``n`` columns with
       leading dimension ``lda`` is represented as a one dimensional
-      array ``a``, of a size of at least ``lda`` \* ``n``. The elements
-      of each column are contiguous in memory while the elements of each
-      row are at distance ``lda`` from the element in the same row and
-      the previous column.
+      array ``a``, of a size of at least ``lda`` \* ``n``. When column
+      (respectively row) major layout is used, the elements of each
+      column (respectively row) are contiguous in memory while the
+      elements of each row (respectively column) are at distance
+      ``lda`` from the element in the same row (respectively column)
+      and the previous column (respectively row).
 
 
       Before entry in any BLAS function using a triangular matrix,
@@ -70,14 +80,18 @@ Matrix Storage
          words, the matrix
 
 
-         |image2|
+         |image_upper_triangular_matrix|
 
 
          is stored in memory as the array
 
+         - For column major layout,
 
-         |image3|
+         |image_upper_triangular_matrix_column_major|
 
+         - For row major layout,
+
+         |image_upper_triangular_matrix_row_major|
 
       -  If ``upper_lower = uplo::lower``, the leading ``n`` by ``n``
          lower triangular part of the array ``a`` must contain the lower
@@ -86,14 +100,18 @@ Matrix Storage
          the matrix
 
 
-         |image4|
+         |image_lower_triangular_matrix|
 
 
          is stored in memory as the array
 
+         - For column major layout,
+         
+         |image_lower_triangular_matrix_column_major|
 
-         |image5|
+         - For row major layout,
 
+         |image_lower_triangular_matrix_row_major|
 
    .. container:: section
       :name: GUID-4A6389BD-0396-4C6D-8AA4-C59EDAC7A991
@@ -106,38 +124,51 @@ Matrix Storage
 
       A general band matrix ``A`` of ``m`` rows and ``n`` columns with
       ``kl`` sub-diagonals, ``ku`` super-diagonals, and leading
-      dimension ``lda`` is represented as a one dimensional array ``a``
-      of a size of at least ``lda`` \* ``n``.
+      dimension ``lda`` is represented as a one dimensional array
+      ``a`` of a size of at least ``lda`` \* ``n`` (respectively
+      ``lda`` \* ``m``) if column (respectively row) major layout is
+      used.
 
 
-      Before entry in any BLAS function using a general band matrix, the
-      leading (``kl`` + ``ku`` + 1\ ``)`` by ``n`` part of the array
-      ``a`` must contain the matrix ``A``. This matrix must be supplied
-      column-by-column, with the main diagonal of the matrix in row
-      ``ku`` of the array (0-based indexing), the first super-diagonal
-      starting at position 1 in row (``ku`` - 1), the first sub-diagonal
-      starting at position 0 in row (``ku`` + 1), and so on. Elements in
-      the array ``a`` that do not correspond to elements in the band
-      matrix (such as the top left ``ku`` by ``ku`` triangle) are not
-      referenced.
+      Before entry in any BLAS function using a general band matrix,
+      the leading (``kl`` + ``ku`` + 1\ ``)`` by ``n`` (respectively
+      ``m``) part of the array ``a`` must contain the matrix
+      ``A``. This matrix must be supplied column-by-column
+      (respectively row-by-row), with the main diagonal of the matrix
+      in row ``ku`` (respectively ``kl``) of the array (0-based
+      indexing), the first super-diagonal starting at position 1
+      (respectively 0) in row (``ku`` - 1) (respectively column
+      (``kl`` + 1)), the first sub-diagonal starting at position 0
+      (respectively 1) in row (``ku`` + 1) (respectively column
+      (``kl`` - 1)), and so on. Elements in the array ``a`` that do
+      not correspond to elements in the band matrix (such as the top
+      left ``ku`` by ``ku`` triangle) are not referenced.
 
 
       Visually, the matrix ``A`` =
 
 
-      |image6|
+      |image_band_matrix|
 
 
       is stored in memory as an array
 
+      - For column major layout,
+        
+      |image_band_matrix_column_major|
 
-      |image7|
+      - For row major layout,
+
+      |image_band_matrix_row_major|
+      
       The following program segment transfers a band matrix from
       conventional full matrix storage (variable ``matrix``, with
       leading dimension ``ldm``) to band storage (variable ``a``, with
       leading dimension ``lda``):
 
 
+      - Using matrices stored with column major layout,
+        
       ::
 
 
@@ -148,6 +179,18 @@ Matrix Storage
              }
          }
 
+      - Using matrices stored with row major layout,
+
+      ::
+
+
+         for (i = 0; i < n; i++) {
+             k = kl – i;
+             for (j = max(0, i – kl); j < min(n, i + ku + 1); j++) {
+                 a[(k + j) + i * lda] = matrix[j + i * ldm];
+             }
+         }
+        
 
    .. container:: section
       :name: GUID-D85FAA87-6868-4DCA-BD38-9C4F4214BD52
@@ -167,38 +210,45 @@ Matrix Storage
       Before entry in any BLAS function using a triangular band matrix,
 
 
-      -  If ``upper_lower = uplo::upper``, the leading (``k`` + 1) by
-         ``n`` part of the array ``a`` must contain the upper triangular
-         band part of the matrix ``A``. This matrix must be supplied
-         column-by-column with the main diagonal of the matrix in row
-         (``k``) of the array, the first super-diagonal starting at
-         position 1 in row (``k`` - 1), and so on. Elements in the array
-         ``a`` that do not correspond to elements in the triangular band
-         matrix (such as the top left ``k`` by ``k`` triangle) are not
-         referenced.
+      - If ``upper_lower = uplo::upper``, the leading (``k`` + 1) by ``n``
+        part of the array ``a`` must contain the upper
+        triangular band part of the matrix ``A``. When using column
+        major layout, this matrix must be supplied column-by-column
+        (respectively row-by-row) with the main diagonal of the
+        matrix in row (``k``) (respectively column 0) of the array,
+        the first super-diagonal starting at position 1
+        (respectively 0) in row (``k`` - 1) (respectively column 1),
+        and so on. Elements in the array ``a`` that do not correspond
+        to elements in the triangular band matrix (such as the top
+        left ``k`` by ``k`` triangle) are not referenced.
+
+        Visually, the matrix
+
+        
+        |image_upper_triangular_band_matrix|
 
 
-         Visually, the matrix
+        is stored as an array
 
 
-         |image8|
+      .. container:: fignone
+         :name: GUID-CBD17940-8F30-4779-AEB3-C17E9ADB60EC
+                            
+                            
+         - For column major layout,
+                 
+           |image_upper_triangular_band_matrix_column_major|
 
+         - For row major layout,
 
-         is stored as an array
-
-
-         .. container:: fignone
-            :name: GUID-CBD17940-8F30-4779-AEB3-C17E9ADB60EC
-
-
-            |image9|
-
+           |image_upper_triangular_band_matrix_row_major|
 
          The following program segment transfers a band matrix from
          conventional full matrix storage (variable ``matrix``, with
          leading dimension ``ldm``) to band storage (variable ``a``,
          with leading dimension ``lda``):
 
+         - Using matrices stored with column major layout,
 
          ::
 
@@ -210,32 +260,47 @@ Matrix Storage
                 }
             }
 
+         - Using matrices stored with column major layout,
 
-      -  If ``upper_lower = uplo::lower``, the leading (``k`` + 1) by
-         ``n`` part of the array ``a`` must contain the upper triangular
-         band part of the matrix ``A``. This matrix must be supplied
-         column-by-column with the main diagonal of the matrix in row 0
-         of the array, the first sub-diagonal starting at position 0 in
-         row 1, and so on. Elements in the array ``a`` that do not
-         correspond to elements in the triangular band matrix (such as
-         the bottom right ``k`` by ``k`` triangle) are not referenced.
+         ::
+
+            for (i = 0; i < n; i++) {
+                m = –i;
+                for (j = i; j < min(n, i + k + 1); j++) {
+                    a[(m + j) + i * lda] = matrix[j + i * ldm];
+                }
+            }
+            
+
+      - If ``upper_lower = uplo::lower``, the leading (``k`` + 1) by ``n``
+        part of the array ``a`` must contain the upper triangular
+        band part of the matrix ``A``. This matrix must be supplied
+        column-by-column with the main diagonal of the matrix in row 0
+        of the array, the first sub-diagonal starting at position 0 in
+        row 1, and so on. Elements in the array ``a`` that do not
+        correspond to elements in the triangular band matrix (such as
+        the bottom right ``k`` by ``k`` triangle) are not referenced.
+
+        That is, the matrix
 
 
-         That is, the matrix
+        |image_lower_triangular_band_matrix|
 
 
-         |image10|
+        is stored as the array
 
 
-         is stored as the array
+      .. container:: fignone
+         :name: GUID-D89A1D4C-831C-4D8E-AD9F-0DFB968841E1
 
 
-         .. container:: fignone
-            :name: GUID-D89A1D4C-831C-4D8E-AD9F-0DFB968841E1
+         - For column major layout,
+           
+           |image_lower_triangular_band_matrix_column_major|
 
-
-            |image11|
-
+         - For row major layout,
+           
+           |image_lower_triangular_band_matrix_row_major|
 
          The following program segment transfers a band matrix from
          conventional full matrix storage (variable ``matrix``, with
@@ -243,6 +308,8 @@ Matrix Storage
          with leading dimension ``lda``):
 
 
+         - Using matrices stored with column major layout,
+           
          ::
 
 
@@ -250,6 +317,18 @@ Matrix Storage
                 m = –j;
                 for (i = j; i < min(n, j + k + 1); i++) {
                     a[(m + i) + j * lda] = matrix[i + j * ldm];
+                }
+            }
+
+         - Using matrices stored with row major layout,
+
+         ::
+
+
+            for (i = 0; i < n; i++) {
+                m = k – i;
+                for (j = max(0, i – k); j <= i; j++) {
+                    a[(m + j) + i * lda] = matrix[j + i * ldm];
                 }
             }
 
@@ -274,29 +353,38 @@ Matrix Storage
       matrix,
 
 
-      -  If ``upper_lower = uplo::upper``, the first (``n``\ \*(``n`` +
-         1))/2 elements in the array ``a`` must contain the upper
-         triangular part of the matrix ``A`` packed sequentially, column
-         by column so that ``a``\ [0] contains ``A``\ :sub:`11`,
-         ``a``\ [1] and ``a``\ [2] contain ``A``\ :sub:`12` and
-         ``A``\ :sub:`22` respectively, and so on. Hence, the matrix
+      - If ``upper_lower = uplo::upper``, if column (respectively row)
+        major layout is used, the first (``n``\ \*(``n`` + 1))/2
+        elements in the array ``a`` must contain the upper triangular
+        part of the matrix ``A`` packed sequentially, column by column
+        (respectively row by row) so that ``a``\ [0] contains ``A``\
+        :sub:`11`, ``a``\ [1] and ``a``\ [2] contain ``A``\ :sub:`12`
+        and ``A``\ :sub:`22` (respectively ``A``\ :sub:`13`)
+        respectively, and so on. Hence, the matrix
 
 
-         |image12|
+        |image_upper_triangular_pack_matrix|
 
 
-         is stored as the array
+        is stored as the array
 
+        - For column major layout,
 
-         |image13|
+          |image_upper_triangular_pack_matrix_column_major|
 
+        - For row major layout,
 
-      -  If ``upper_lower = uplo::lower``, the first (``n``\ \*(``n`` +
-         1))/2 elements in the array ``a`` must contain the lower
-         triangular part of the matrix ``A`` packed sequentially, column
-         by column so that ``a``\ [0] contains ``A``\ :sub:`11`,
-         ``a``\ [1] and ``a``\ [2] contain ``A``\ :sub:`21` and
-         ``A``\ :sub:`31` respectively, and so on. The matrix
+          |image_upper_triangular_pack_matrix_row_major|
+       
+
+      - If ``upper_lower = uplo::lower``, if column (respectively row)
+        major layout is used, the first (``n``\ \*(``n`` + 1))/2
+        elements in the array ``a`` must contain the lower triangular
+        part of the matrix ``A`` packed sequentially, column by column
+        (row by row) so that ``a``\ [0] contains ``A``\ :sub:`11`,
+        ``a``\ [1] and ``a``\ [2] contain ``A``\ :sub:`21` and ``A``\
+        :sub:`31` (respectively ``A``\ :sub:`22`) respectively, and so
+        on. The matrix
 
 
          |image14|
@@ -304,8 +392,13 @@ Matrix Storage
 
          is stored as the array
 
+         - For column major layout,
+           
+         |image_lower_triangular_pack_matrix_column_major|
 
-         |image15|
+         - For row major layout,
+           
+         |image_lower_triangular_pack_matrix_row_major|
 
 
    .. container:: section
@@ -325,7 +418,7 @@ Matrix Storage
       Visually, the vector
 
 
-      |image16|
+      |image_vector|
 
 
       is stored in memory as an array
@@ -335,39 +428,47 @@ Matrix Storage
          :name: GUID-6929FFA1-5209-4D51-A2B8-CCA373841258
 
 
-         |image17|
+         |image_vector_array|
 
 
       **Parent topic:** :ref:`onemkl_dense_linear_algebra`
 
 
-.. |image0| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee1.png
+.. |image_generic_matrix| image:: equations/generic_matrix.png
    :class: img-middle
-.. |image1| image:: equations/GUID-9932E129-264C-42F7-A75D-00E3705ABB80-low.png
-.. |image2| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee2.png
+.. |image_generic_matrix_column_major| image:: equations/generic_matrix_column_major.png
+.. |image_generic_matrix_row_major| image:: equations/generic_matrix_row_major.png
+.. |image_upper_triangular_matrix| image:: equations/upper_triangular_matrix.png
    :class: img-middle
-.. |image3| image:: equations/GUID-904ADCA4-1F33-4C30-90AD-128AA11689FF-low.png
-.. |image4| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee3.png
+.. |image_upper_triangular_matrix_column_major| image:: equations/upper_triangular_matrix_column_major.png
+.. |image_upper_triangular_matrix_row_major| image:: equations/upper_triangular_matrix_row_major.png
+.. |image_lower_triangular_matrix| image:: equations/lower_triangular_matrix.png
    :class: img-middle
-.. |image5| image:: equations/GUID-2F91B385-0AC2-41D3-AE61-48F63A7DBB02-low.png
-.. |image6| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee4.png
+.. |image_lower_triangular_matrix_column_major| image:: equations/lower_triangular_matrix_column_major.png
+.. |image_lower_triangular_matrix_row_major| image:: equations/lower_triangular_matrix_row_major.png
+.. |image_band_matrix| image:: equations/band_matrix.png
    :class: img-middle
-.. |image7| image:: equations/GUID-ACF0A9F7-1A40-490B-BF70-EE6C63C21738-low.png
-.. |image8| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee5.png
+.. |image_band_matrix_column_major| image:: equations/band_matrix_column_major.png
+.. |image_band_matrix_row_major| image:: equations/band_matrix_row_major.png
+.. |image_upper_triangular_band_matrix| image:: equations/upper_triangular_band_matrix.png
    :class: img-middle
-.. |image9| image:: equations/GUID-5193801D-8E3B-43A2-989E-09A8431FD34E-low.png
-.. |image10| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee6.png
+.. |image_upper_triangular_band_matrix_column_major| image:: equations/upper_triangular_band_matrix_column_major.png
+.. |image_upper_triangular_band_matrix_row_major| image:: equations/upper_triangular_band_matrix_row_major.png
+.. |image_lower_triangular_band_matrix| image:: equations/lower_triangular_band_matrix.png
    :class: img-middle
-.. |image11| image:: equations/GUID-11B96BA7-C321-446D-A7B6-8D84C8CBC076-low.png
-.. |image12| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee7.png
+.. |image_lower_triangular_band_matrix_column_major| image:: equations/lower_triangular_band_matrix_column_major.png
+.. |image_lower_triangular_band_matrix_row_major| image:: equations/lower_triangular_band_matrix_row_major.png
+.. |image_upper_triangular_pack_matrix| image:: equations/upper_triangular_pack_matrix.png
    :class: img-middle
-.. |image13| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee8.png
+.. |image_upper_triangular_pack_matrix_column_major| image:: equations/upper_triangular_pack_matrix_column_major.png
+.. |image_upper_triangular_pack_matrix_row_major| image:: equations/upper_triangular_pack_matrix_row_major.png
    :class: img-middle
 .. |image14| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15ee9.png
    :class: img-middle
-.. |image15| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15e10.png
+.. |image_lower_triangular_pack_matrix_column_major| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15e10.png
+.. |image_lower_triangular_pack_matrix_row_major| image:: equations/lower_triangular_pack_matrix_row_major.png
    :class: img-middle
-.. |image16| image:: equations/GUID-B9AEF80A-AD5F-4B59-9F21-60672FB15e11.png
+.. |image_vector| image:: equations/vector.png
    :class: img-middle
-.. |image17| image:: equations/GUID-EA1939AE-5968-4E6A-8396-6F44E73939AF-low.png
+.. |image_vector_array| image:: equations/vector_array.png
 

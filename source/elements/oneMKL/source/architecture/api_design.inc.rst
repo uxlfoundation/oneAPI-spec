@@ -16,7 +16,7 @@ The oneMKL library uses C++ namespaces to organize routines by mathematical doma
 namespace            oneMKL domain or content
 ===================  =======================================================================================================
 ``onemkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
-``onemkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. See :ref:`onemkl_blas`
+``onemkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. The onemkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
 ``onemkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
 ``onemkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
 ``onemkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`

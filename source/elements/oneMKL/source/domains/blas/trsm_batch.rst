@@ -150,8 +150,9 @@ trsm_batch (Buffer Version)
 
 
    ldb
-      Leading dimension of the matrices ``B``. Must be at least ``m``. 
-      Must be positive.
+      Leading dimension of the matrices ``B``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if row major layout is used to store matrices.
 
 
    strideb
@@ -338,8 +339,11 @@ trsm_batch (USM Version)
 
 
    ldb
-      Array of ``group_count`` integers. ``ldb[i]`` specifies the leading dimension of ``B`` for every matrix in group ``i``. 
-      All entries must be at least ``m`` and positive.
+      Array of ``group_count`` integers. ``ldb[i]`` specifies the
+      leading dimension of ``B`` for every matrix in group ``i``.  All
+      entries must be positive and at least ``m`` and positive if
+      column major layout is used to store matrices or at least ``n``
+      if row major layout is used to store matrices.
 
 
    group_count
@@ -468,8 +472,9 @@ trsm_batch (USM Version)
 
 
    ldb
-      Leading dimension of the matrices ``B``. Must be at least ``m``. 
-      Must be positive.
+      Leading dimension of the matrices ``B``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if row major layout is used to store matrices.
 
 
    strideb

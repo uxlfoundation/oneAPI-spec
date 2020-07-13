@@ -98,14 +98,16 @@ gemv (Buffer Version)
 
    a
       The buffer holding the input matrix ``A``. Must have a size of at
-      least ``lda``\ \*``n``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
-      more details.
+      least ``lda``\ \*``n`` if column major layout is used or at
+      least ``lda``\ \*\ ``m`` if row major layout is used. See
+      `Matrix and Vector Storage <../matrix-storage.html>`__ for more
+      details.
 
 
    lda
-      The leading dimension of matrix ``A``. It must be at least m, and
-      positive.
+      Leading dimension of matrix ``A``. Must be positive and at least
+      ``m`` if column major layout is used or at least ``n`` if row
+      major layout is used.
 
 
    x
@@ -201,14 +203,16 @@ gemv (USM Version)
 
       a
          The pointer to the input matrix ``A``. Must have a size of at
-         least ``lda``\ \*``n``. See `Matrix and Vector
-         Storage <../matrix-storage.html>`__ for
+         least ``lda``\ \*\ ``n`` if column major layout is used or at
+         least ``lda``\ \*\ ``m`` if row major layout is used. See
+         `Matrix and Vector Storage <../matrix-storage.html>`__ for
          more details.
 
 
       lda
-         The leading dimension of matrix ``A``. It must be at least m,
-         and positive.
+         Leading dimension of matrix ``A``. Must be positive and at least
+         ``m`` if column major layout is used or at least ``n`` if row
+         major layout is used.
 
 
       x

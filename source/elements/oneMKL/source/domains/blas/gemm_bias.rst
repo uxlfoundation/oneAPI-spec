@@ -146,27 +146,44 @@ gemm_bias (Buffer Version)
     
     
       a
-         Buffer holding the input matrix ``A``.
-    
-    
-         If ``A`` is not transposed, ``A`` is an ``m``-by-``k`` matrix
-         so the array ``a`` must have size at least ``lda``\ \*\ ``k``.
-    
-    
-         If ``A`` is transposed, ``A`` is a ``k``-by-``m`` matrix so the
-         array ``a`` must have size at least ``lda``\ \*\ ``m``.
-    
-    
-         See `Matrix
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         The buffer holding the input matrix ``A``.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``A`` not transposed
+              - ``A`` transposed
+            * - Column major
+              - ``A`` is an ``m``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``.
+              - ``A`` is an ``k``-by-``m`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``m``
+            * - Row major
+              - ``A`` is an ``m``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``m``.
+              - ``A`` is an ``k``-by-``m`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``
+
+         See `Matrix and Vector Storage <../matrix-storage.html>`__
+         for more details.
     
     
       lda
-         Leading dimension of ``A``. Must be at least ``m`` if ``A`` is
-         not transposed, and at least ``k`` if ``A`` is transposed. Must
-         be positive.
-    
+         The leading dimension of ``A``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``A`` not transposed
+              - ``A`` transposed
+            * - Column major
+              - ``lda`` must be at least ``m``.
+              - ``lda`` must be at least ``k``.
+            * - Row major
+              - ``lda`` must be at least ``k``.
+              - ``lda`` must be at least ``m``.
     
       ao 
          Specifies the scalar offset value for matrix ``A``.
@@ -174,25 +191,43 @@ gemm_bias (Buffer Version)
     
       b
          Buffer holding the input matrix ``B``.
-    
-    
-         If ``B`` is not transposed, ``B`` is a ``k``-by-``n`` matrix so
-         the array ``b`` must have size at least ``ldb``\ \*\ ``n``.
-    
-    
-         If ``B`` is transposed, ``B`` is an ``n``-by-``k`` matrix so
-         the array ``b`` must have size at least ``ldb``\ \*\ ``k``.
-    
-    
-         See `Matrix
-         Storage <../matrix-storage.html>`__ for
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``B`` not transposed
+              - ``B`` transposed
+            * - Column major
+              - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``n``.
+              - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``k``
+            * - Row major
+              - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``k``.
+              - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``n``
+      
+         See `Matrix and Vector Storage <../matrix-storage.html>`__ for
          more details.
     
     
       ldb
-         Leading dimension of ``B``. Must be at least ``k`` if ``B`` is
-         not transposed, and at least ``n`` if ``B`` is transposed. Must
-         be positive.
+         The leading dimension of ``B``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``B`` not transposed
+              - ``B`` transposed
+            * - Column major
+              - ``ldb`` must be at least ``k``.
+              - ``ldb`` must be at least ``n``.
+            * - Row major
+              - ``ldb`` must be at least ``n``.
+              - ``ldb`` must be at least ``k``.
     
     
       bo 
@@ -204,17 +239,19 @@ gemm_bias (Buffer Version)
     
     
       c
-         Buffer holding the input/output matrix ``C``. Must have size at least
-         ``ldc`` \* ``n``. See `Matrix
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         Buffer holding the input/output matrix ``C``.  It must have a
+         size of at least ``ldc``\ \*\ ``n`` if column major layout is
+         used to store matrices or at least ``ldc``\ \*\ ``m`` if row
+         major layout is used to store matrices . See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for more details.
     
     
       ldc
-         Leading dimension of ``C``. Must be positive and at least
-         ``m``.
-    
-    
+         The leading dimension of ``C``. It must be positive and at least
+         ``m`` if column major layout is used to store matrices or at
+         least ``n`` if column major layout is used to store matrices.
+
+         
       co
          Buffer holding the offset values for matrix ``C``.
     
@@ -326,14 +363,22 @@ gemm_bias (USM Version)
       a
          Pointer to input matrix ``A``.
     
-    
-         If ``A`` is not transposed, ``A`` is an ``m``-by-``k`` matrix
-         so the array ``a`` must have size at least ``lda``\ \*\ ``k``.
-    
-    
-         If ``A`` is transposed, ``A`` is a ``k``-by-``m`` matrix so the
-         array ``a`` must have size at least ``lda``\ \*\ ``m``.
-    
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``A`` not transposed
+              - ``A`` transposed
+            * - Column major
+              - ``A`` is an ``m``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``.
+              - ``A`` is an ``k``-by-``m`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``m``
+            * - Row major
+              - ``A`` is an ``m``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``m``.
+              - ``A`` is an ``k``-by-``m`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``
     
          See `Matrix
          Storage <../matrix-storage.html>`__ for
@@ -341,9 +386,20 @@ gemm_bias (USM Version)
     
     
       lda
-         Leading dimension of ``A``. Must be at least ``m`` if ``A`` is
-         not transposed, and at least ``k`` if ``A`` is transposed. Must
-         be positive.
+         The leading dimension of ``A``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``A`` not transposed
+              - ``A`` transposed
+            * - Column major
+              - ``lda`` must be at least ``m``.
+              - ``lda`` must be at least ``k``.
+            * - Row major
+              - ``lda`` must be at least ``k``.
+              - ``lda`` must be at least ``m``.
     
     
       ao
@@ -353,14 +409,22 @@ gemm_bias (USM Version)
       b
          Pointer to input matrix ``B``.
     
-    
-         If ``B`` is not transposed, ``B`` is a ``k``-by-``n`` matrix so
-         the array ``b`` must have size at least ``ldb``\ \*\ ``n``.
-    
-    
-         If ``B`` is transposed, ``B`` is an ``n``-by-``k`` matrix so
-         the array ``b`` must have size at least ``ldb``\ \*\ ``k``.
-    
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``B`` not transposed
+              - ``B`` transposed
+            * - Column major
+              - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``n``.
+              - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``k``
+            * - Row major
+              - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``k``.
+              - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``n``
     
          See `Matrix
          Storage <../matrix-storage.html>`__ for
@@ -368,9 +432,20 @@ gemm_bias (USM Version)
     
     
       ldb
-         Leading dimension of ``B``. Must be at least ``k`` if ``B`` is
-         not transposed, and at least ``n`` if ``B`` is transposed. Must
-         be positive.
+         The leading dimension of ``B``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``B`` not transposed
+              - ``B`` transposed
+            * - Column major
+              - ``ldb`` must be at least ``k``.
+              - ``ldb`` must be at least ``n``.
+            * - Row major
+              - ``ldb`` must be at least ``n``.
+              - ``ldb`` must be at least ``k``.
     
     
       bo 
@@ -382,17 +457,19 @@ gemm_bias (USM Version)
     
     
       c
-         Pointer to input/output matrix ``C``. Must have size at least
-         ``ldc`` \* ``n``. See `Matrix
-         Storage <../matrix-storage.html>`__ for
-         more details.
-    
+         Pointer to input/output matrix ``C``. It must have a
+         size of at least ``ldc``\ \*\ ``n`` if column major layout is
+         used to store matrices or at least ``ldc``\ \*\ ``m`` if row
+         major layout is used to store matrices . See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for more details.
+   
     
       ldc
-         Leading dimension of ``C``. Must be positive and at least
-         ``m``.
-    
-    
+         The leading dimension of ``C``. It must be positive and at least
+         ``m`` if column major layout is used to store matrices or at
+         least ``n`` if column major layout is used to store matrices.
+
+
       co
          Pointer to offset values for matrix ``C``.
     

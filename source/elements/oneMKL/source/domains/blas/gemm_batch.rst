@@ -117,11 +117,21 @@ gemm_batch (Buffer Version)
    a
       Buffer holding the input matrices ``A`` with size ``stridea*batch_size``.
 
-
    lda
-      Leading dimension of the matrices ``A``. Must be at least ``m`` if
-      the matrices ``A`` are not transposed, and at least ``k`` if the
-      matrices ``A`` are transposed. Must be positive.
+      The leading dimension of the matrices ``A``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``A`` not transposed
+           - ``A`` transposed
+         * - Column major
+           - ``lda`` must be at least ``m``.
+           - ``lda`` must be at least ``k``.
+         * - Row major
+           - ``lda`` must be at least ``k``.
+           - ``lda`` must be at least ``m``.
 
 
    stridea
@@ -133,9 +143,20 @@ gemm_batch (Buffer Version)
 
 
    ldb
-      Leading dimension of the matrices ``B``. Must be at least ``k`` if
-      the matrices ``B`` are not transposed, and at least ``n`` if the
-      matrices ``B`` are transposed. Must be positive.
+      The leading dimension of the matrices``B``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``B`` not transposed
+           - ``B`` transposed
+         * - Column major
+           - ``ldb`` must be at least ``k``.
+           - ``ldb`` must be at least ``n``.
+         * - Row major
+           - ``ldb`` must be at least ``n``.
+           - ``ldb`` must be at least ``k``.
 
 
    strideb
@@ -151,7 +172,9 @@ gemm_batch (Buffer Version)
 
 
    ldc
-      Leading dimension of ``C``. Must be positive and at least ``m``.
+      The leading dimension of the mattrices ``C``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if column major layout is used to store matrices.
 
 
    stridec
@@ -311,12 +334,24 @@ gemm_batch (USM Version)
 
 
    lda
-      Array of ``group_count`` integers. ``lda[i]`` specifies the leading dimension of ``A`` for every matrix in group ``i``. 
-      All entries must be at least ``m``
-      if ``A`` is not transposed, and at least ``k`` if ``A`` is
-      transposed. All entries must be positive.
+      Array of ``group_count`` integers. ``lda[i]`` specifies the
+      leading dimension of ``A`` for every matrix in group ``i``. All
+      entries must be positive.
 
+      .. list-table::
+         :header-rows: 1
 
+         * -
+           - ``A`` not transposed
+           - ``A`` transposed
+         * - Column major
+           - ``lda[i]`` must be at least ``m[i]``.
+           - ``lda[i]`` must be at least ``k[i]``.
+         * - Row major
+           - ``lda[i]`` must be at least ``k[i]``.
+           - ``lda[i]`` must be at least ``m[i]``.
+
+             
    b
       Array of pointers to input matrices ``B`` with size ``total_batch_count``. 
       
@@ -324,12 +359,25 @@ gemm_batch (USM Version)
 
 
    ldb
-      Array of ``group_count`` integers. ``ldb[i]`` specifies the leading dimension of ``B`` for every matrix in group ``i``. 
-      All entries must be at least ``k``
-      if ``B`` is not transposed, and at least ``n`` if ``B`` is
-      transposed. All entries must be positive.
+   
+      Array of ``group_count`` integers. ``ldb[i]`` specifies the
+      leading dimension of ``B`` for every matrix in group ``i``. All
+      entries must be positive.
 
+      .. list-table::
+         :header-rows: 1
 
+         * -
+           - ``B`` not transposed
+           - ``B`` transposed
+         * - Column major
+           - ``ldb[i]`` must be at least ``k[i]``.
+           - ``ldb[i]`` must be at least ``n[i]``.
+         * - Row major
+           - ``ldb[i]`` must be at least ``n[i]``.
+           - ``ldb[i]`` must be at least ``k[i]``.
+
+             
    beta
       Array of ``group_count`` scalar elements. ``beta[i]`` specifies the scaling factor for matrix ``C`` 
       for every matrix in group ``i``.
@@ -342,8 +390,11 @@ gemm_batch (USM Version)
 
 
    ldc
-      Array of ``group_count`` integers. ``ldc[i]`` specifies the leading dimension of ``C`` for every matrix in group ``i``. 
-      All entries must be positive and at least ``m``.
+      Array of ``group_count`` integers. ``ldc[i]`` specifies the
+      leading dimension of ``C`` for every matrix in group ``i``.  All
+      entries must be positive and ``ldc[i]`` must be at least
+      ``m[i]`` if column major layout is used to store matrices or at
+      least ``n[i]`` if row major layout is used to store matrices.
 
 
    group_count
@@ -453,9 +504,20 @@ gemm_batch (USM Version)
 
 
    lda
-      Leading dimension of the matrices ``A``. Must be at least ``m`` if
-      the matrices ``A`` are not transposed, and at least ``k`` if the
-      matrices ``A`` are transposed. Must be positive.
+      The leading dimension of the matrices ``A``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``A`` not transposed
+           - ``A`` transposed
+         * - Column major
+           - ``lda`` must be at least ``m``.
+           - ``lda`` must be at least ``k``.
+         * - Row major
+           - ``lda`` must be at least ``k``.
+           - ``lda`` must be at least ``m``.
 
 
    stridea
@@ -467,14 +529,24 @@ gemm_batch (USM Version)
 
 
    ldb
-      Leading dimension of the matrices ``B``. Must be at least ``k`` if
-      the matrices ``B`` are not transposed, and at least ``n`` if the
-      matrices ``B`` are transposed. Must be positive.
+      The leading dimension of the matrices``B``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``B`` not transposed
+           - ``B`` transposed
+         * - Column major
+           - ``ldb`` must be at least ``k``.
+           - ``ldb`` must be at least ``n``.
+         * - Row major
+           - ``ldb`` must be at least ``n``.
+           - ``ldb`` must be at least ``k``.
 
 
    strideb
       Stride between different ``B`` matrices.
-
 
 
    beta
@@ -486,7 +558,9 @@ gemm_batch (USM Version)
 
 
    ldc
-      Leading dimension of ``C``. Must be positive and at least ``m``.
+      The leading dimension of the mattrices ``C``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if column major layout is used to store matrices.
 
 
    stridec
