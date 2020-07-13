@@ -364,11 +364,11 @@ Algorithms
 oneDNN implementations may implement convolution primitives using several
 different algorithms which can be chosen by the user.
 
-- *Direct* (:any:`dnnl::algorithm::convolution_direct`). The convolution
+- *Direct* (|algorithm::convolution_direct|). The convolution
   operation is computed directly using SIMD instructions. This also includes
   implicit GEMM formulations which notably may require workspace.
 
-- *Winograd* (:any:`dnnl::algorithm::convolution_winograd`). This algorithm
+- *Winograd* (|algorithm::convolution_winograd|). This algorithm
   reduces computational complexity of convolution at the expense of accuracy
   loss and additional memory operations. The implementation is based on the
   `Fast Algorithms for Convolutional Neural Networks by A. Lavin and S. Gray
@@ -376,7 +376,7 @@ different algorithms which can be chosen by the user.
   in the best performance, but it is applicable only to particular shapes.
   Moreover, Winograd only supports int8 and f32 data types.
 
-- *Auto* (:any:`dnnl::algorithm::convolution_auto`). In tis case the library
+- *Auto* (|algorithm::convolution_auto|). In tis case the library
   should automatically select the *best* algorithm based on the heuristics
   that take into account tensor shapes and the number of logical processors
   available.

@@ -21,7 +21,7 @@ to cases of higher and lower dimensions.
 
 The different flavors of the primitive are controlled by the ``flags``
 parameter that is passed to the operation descriptor initialization function
-like :any:`dnnl::batch_normalization_forward::desc::desc`. Multiple flags can
+like |batch_normalization_forward::desc::desc|. Multiple flags can
 be combined using the bitwise OR operator (``|``).
 
 *******
@@ -152,7 +152,7 @@ Operation Details
 
 2. The memory format and data type for ``src`` and ``dst`` are assumed to be
    the same, and in the API they are typically referred to as ``data`` (e.g.,
-   see ``data_desc`` in :any:`dnnl::batch_normalization_forward::desc::desc`).
+   see ``data_desc`` in |batch_normalization_forward::desc::desc|).
    The same is true for ``diff_src`` and ``diff_dst``. The corresponding
    memory descriptors are referred to as ``diff_data_desc``.
 

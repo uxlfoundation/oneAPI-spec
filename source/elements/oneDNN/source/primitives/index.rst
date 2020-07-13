@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: ../replacements.rst
+
 ##########
 Primitives
 ##########
@@ -41,7 +43,7 @@ computation from more abstract to more concrete:
   describes shapes of source, destination, and weights tensors, propagation
   kind (forward, backward with respect to data or weights), and other
   implementation-independent parameters. The shapes are usually described as
-  memory descriptors (:any:`dnnl::memory::desc`).
+  memory descriptors (|memory::desc|).
 
 * Primitive descriptors are at the abstraction level in between operation
   descriptors and primitives. They combine both an operation descriptor and
@@ -62,20 +64,20 @@ computation from more abstract to more concrete:
 On the API level:
 
 * Primitives are represented as a class on the top level of the ``dnnl``
-  namespace that have :any:`dnnl::primimitive` as their base class, for
-  example :any:`dnnl::convolution_forward`
+  namespace that have |primitive| as their base class, for
+  example |convolution_forward|
 
 * Operation descriptors are represented as classes named ``desc`` and nested
   within the corresponding primitives classes, for example
-  :any:`dnnl::convolution_forward::desc`. The
-  :any:`dnnl::primitive_desc::next_impl` member function provides a way to
+  |convolution_forward::desc|. The
+  |primitive_desc::next_impl| member function provides a way to
   iterate over implementations.
 
 * Primitive descriptors are represented as classes named ``primitive_desc``
   and nested within the corresponding primitive classes that have
-  :any:`dnnl::primitive_desc_base` as their base class (except for RNN
-  primitives that derive from :any:`dnnl::rnn_primitive_desc_base`), for
-  example :any:`dnnl::convolution_forward::primitive_desc`
+  |primitive_desc_base| as their base class (except for RNN
+  primitives that derive from |rnn_primitive_desc_base|), for
+  example |convolution_forward::primitive_desc|
 
 .. code-block:: c++
 
@@ -93,9 +95,9 @@ On the API level:
 The sequence of actions to create a primitive is:
 
 1. Create an operation descriptor via, for example,
-   :any:`dnnl::convolution_forward::desc`. The operation descriptor can
+   |convolution_forward::desc|. The operation descriptor can
    contain memory descriptors with placeholder
-   :any:`dnnl::memory::format_tag::any` memory formats if the primitive
+   |memory::format_tag::any| memory formats if the primitive
    supports it.
 2. Create a primitive descriptor based on the operation descriptor, engine and
    attributes.

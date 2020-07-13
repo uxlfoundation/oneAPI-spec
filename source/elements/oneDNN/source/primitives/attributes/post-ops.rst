@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: ../../replacements.rst
+
 .. _post_ops-label:
 
 ########
@@ -13,8 +15,8 @@ Post-ops
 implemented using the :ref:`attributes-link` mechanism. If there are multiple
 post-ops, the are executed in the order they have been appended.
 
-The post-ops are represented by :any:`dnnl::post_ops` which is copied once it
-is attached to the attributes using :any:`dnnl::primitive_attr::set_post_ops`
+The post-ops are represented by |post_ops| which is copied once it
+is attached to the attributes using |primitive_attr::set_post_ops|
 function. The attributes then need to be passed to a primitive descriptor
 creation function to take effect. Below is a simple sketch:
 
@@ -46,9 +48,9 @@ creation function to take effect. Below is a simple sketch:
     Post-ops do not change memory format of the operation destination memory
     object.
 
-The post-op objects can be inspected using the :any:`dnnl::post_ops::kind`
+The post-op objects can be inspected using the |post_ops::kind|
 function that takes an index of the post-op to inspect (that must be less than
-the value returned by :any:`dnnl::post_ops::len`), and returns its kind.
+the value returned by |post_ops::len|), and returns its kind.
 
 ******************
 Supported Post-ops
@@ -59,9 +61,9 @@ Supported Post-ops
 Eltwise Post-op
 ===============
 
-The eltwise post-op is appended using :any:`dnnl::post_ops::append_eltwise`
-function. The :any:`dnnl::post_ops::kind` returns
-:any:`dnnl::primitive::kind::eltwise` for such a post-op.
+The eltwise post-op is appended using |post_ops::append_eltwise|
+function. The |post_ops::kind| returns
+|primitive::kind::eltwise| for such a post-op.
 
 The eltwise post-op replaces:
 
@@ -86,8 +88,8 @@ Sum Post-op
 ===========
 
 The sum post-op accumulates the result of a primitive with the existing data
-and is appended using :any:`dnnl::post_ops::append_sum()` function. The
-:any:`dnnl::post_ops::kind` returns :any:`dnnl::primitive::kind::sum` for such
+and is appended using |post_ops::append_sum| function. The
+|post_ops::kind| returns |primitive::kind::sum| for such
 a post-op.
 
 Prior to accumulating the result, the existing value us multiplied by scale.

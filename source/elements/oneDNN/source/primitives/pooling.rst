@@ -89,7 +89,7 @@ Operation Details
    was found. The workspace format is opaque, and the indices cannot be
    restored from it. However, one can use backward pooling to perform
    up-sampling (used in some detection topologies). The workspace can be
-   created via :any:`dnnl::pooling_forward::primitive_desc::workspace_desc`.
+   created via |pooling_forward::primitive_desc::workspace_desc|.
 
 2. A user can use memory format tag |any| for ``dst`` memory descriptor when
    creating pooling forward propagation. The library would derive the

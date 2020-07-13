@@ -3,12 +3,14 @@
 
 .. default-domain:: cpp
 
+.. include:: ../replacements.rst
+
 ###############
 Execution Model
 ###############
 
 To execute a primitive, a user needs to pass memory arguments and a stream to
-the :any:`dnnl::primitive::execute` member function.
+the |primitive::execute| member function.
 
 .. image:: ../_static/img_execution_model.png
    :width: 600
@@ -39,7 +41,7 @@ Stream
 ******
 
 A *stream* is an encapsulation of execution context tied to a particular
-engine. They are passed to :any:`dnnl::primitive::execute` when executing a
+engine. They are passed to |primitive::execute| when executing a
 primitive.
 
 Stream attributes are used to extend stream behavior in an
@@ -56,7 +58,7 @@ as long these operation do not violate DPC++ synchronization requirements.
 
 Similar to DPC++ queues, streams can be in-order and out-of-order (see the
 relevant portion of the DPC++ specification for the explanation). The desired
-behavior can be specified using :any:`dnnl::stream::flags` value. A stream
+behavior can be specified using |stream::flags| value. A stream
 created from a DPC++ queue inherits its behavior.
 
 .. doxygenstruct:: dnnl::stream
