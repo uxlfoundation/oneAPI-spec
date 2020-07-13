@@ -139,14 +139,17 @@ trsm (Buffer Version)
 
 
    b
-      Buffer holding input/output matrix ``B``. Must have size at least
-      ``ldb``\ \*\ ``n``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
-      more details.
+      Buffer holding input/output matrix ``B``. Must have size at
+      least ``ldb``\ \*\ ``n`` if column major layout is used to store
+      matrices or at least ``ldb``\ \*\ ``m`` if row major layout is
+      used to store matrices. See `Matrix and Vector Storage
+      <../matrix-storage.html>`__ for more details.
 
 
    ldb
-      Leading dimension of ``B``. Must be at least ``m`` and positive.
+      Leading dimension of ``B``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if row major layout is used to store matrices.
 
 
 .. container:: section
@@ -248,15 +251,17 @@ trsm (USM Version)
 
 
       b
-         Pointer to input/output matrix ``B``. Must have size at least
-         ``ldb``\ \*\ ``n``. See `Matrix and Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         Pointer to input/output matrix ``B``. Must have size at
+         least ``ldb``\ \*\ ``n`` if column major layout is used to store
+         matrices or at least ``ldb``\ \*\ ``m`` if row major layout is
+         used to store matrices. See `Matrix and Vector Storage
+         <../matrix-storage.html>`__ for more details.
 
 
       ldb
-         Leading dimension of ``B``. Must be at least ``m`` and
-         positive.
+         Leading dimension of ``B``. It must be positive and at least
+         ``m`` if column major layout is used to store matrices or at
+         least ``n`` if row major layout is used to store matrices.
 
 
       dependencies

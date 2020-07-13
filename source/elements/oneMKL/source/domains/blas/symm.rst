@@ -131,13 +131,17 @@ symm (Buffer Version)
 
    b
       Buffer holding input matrix ``B``. Must have size at least
-      ``ldb``\ \*\ ``n``. See `Matrix and Vector
+      ``ldb``\ \*\ ``n`` if column major layout is
+      used to store matrices or at least ``ldb``\ \*\ ``m`` if row
+      major layout is used to store matrices. See `Matrix and Vector
       Storage <../matrix-storage.html>`__ for
       more details.
 
 
    ldb
-      Leading dimension of ``B``. Must be positive and at least ``m``.
+      Leading dimension of ``B``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if column major layout is used to store matrices.
 
 
    beta
@@ -145,14 +149,17 @@ symm (Buffer Version)
 
 
    c
-      Buffer holding input/output matrix ``C``. Must have size at least
-      ``ldc``\ \*\ ``n``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
-      more details.
+      The buffer holding the input/output matrix ``C``. It must have a
+      size of at least ``ldc``\ \*\ ``n`` if column major layout is
+      used to store matrices or at least ``ldc``\ \*\ ``m`` if row
+      major layout is used to store matrices. See `Matrix and Vector
+      Storage <../matrix-storage.html>`__ for more details.
 
 
    ldc
-      Leading dimension of ``C``. Must be positive and at least ``m``.
+      The leading dimension of ``C``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if column major layout is used to store matrices.
 
 
 .. container:: section
@@ -249,30 +256,35 @@ symm (USM Version)
 
       b
          Pointer to input matrix ``B``. Must have size at least
-         ``ldb``\ \*\ ``n``. See `Matrix and Vector
+         ``ldb``\ \*\ ``n`` if column major layout is
+         used to store matrices or at least ``ldb``\ \*\ ``m`` if row
+         major layout is used to store matrices. See `Matrix and Vector
          Storage <../matrix-storage.html>`__ for
          more details.
 
 
       ldb
-         Leading dimension of ``B``. Must be positive and at least
-         ``m``.
+         Leading dimension of ``B``. It must be positive and at least
+         ``m`` if column major layout is used to store matrices or at
+         least ``n`` if column major layout is used to store matrices.
 
-
+         
       beta
          Scaling factor for matrix ``C``.
 
 
       c
-         Pointer to input/output matrix ``C``. Must have size at least
-         ``ldc``\ \*\ ``n``. See `Matrix and Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         The pointer to input/output matrix ``C``. It must have a
+         size of at least ``ldc``\ \*\ ``n`` if column major layout is
+         used to store matrices or at least ``ldc``\ \*\ ``m`` if row
+         major layout is used to store matrices . See `Matrix and Vector
+         Storage <../matrix-storage.html>`__ for more details.
 
 
       ldc
-         Leading dimension of ``C``. Must be positive and at least
-         ``m``.
+         The leading dimension of ``C``. It must be positive and at least
+         ``m`` if column major layout is used to store matrices or at
+         least ``n`` if column major layout is used to store matrices.
 
 
       dependencies

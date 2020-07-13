@@ -116,35 +116,85 @@ syr2k (Buffer Version)
 
 
    a
-      Buffer holding input matrix ``A``. If ``A`` is not transposed,
-      ``A`` is an ``m``-by-``k`` matrix so the array ``a`` must have
-      size at least ``lda``\ \*\ ``k``. If ``A`` is transposed, ``A`` is
-      an ``k``-by-``m`` matrix so the array ``a`` must have size at
-      least ``lda``\ \*\ ``m``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
+      Buffer holding input matrix ``A``.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``trans`` = ``transpose::nontrans``
+           - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+         * - Column major
+           - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``k``.
+           - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``n``
+         * - Row major
+           - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``n``.
+           - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+             must have size at least ``lda``\ \*\ ``k``.
+
+      See `Matrix and Vector Storage <../matrix-storage.html>`__ for
       more details.
 
 
    lda
-      Leading dimension of ``A``. Must be at least ``n`` if ``trans`` =
-      ``transpose::nontrans``, and at least ``k`` otherwise. Must be
-      positive.
+      The leading dimension of ``A``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``trans`` = ``transpose::nontrans``
+           - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+         * - Column major
+           - ``lda`` must be at least ``n``.
+           - ``lda`` must be at least ``k``.
+         * - Row major
+           - ``lda`` must be at least ``k``.
+           - ``lda`` must be at least ``n``.
 
 
    b
-      Buffer holding input matrix ``B``. If ``trans`` =
-      ``transpose::nontrans``, ``B`` is an ``k``-by-``n`` matrix so the
-      array ``b`` must have size at least ``ldb``\ \*\ ``n``. Otherwise,
-      ``B`` is an ``n``-by-``k`` matrix so the array ``b`` must have
-      size at least ``ldb``\ \*\ ``k``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
-      more details.
+      Buffer holding input matrix ``B``.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``trans`` = ``transpose::nontrans``
+           - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+         * - Column major
+           - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+             must have size at least ``ldb``\ \*\ ``n``.
+           - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+             must have size at least ``ldb``\ \*\ ``k``
+         * - Row major
+           - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+             must have size at least ``ldb``\ \*\ ``k``.
+           - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+             must have size at least ``ldb``\ \*\ ``n``.
+
+      See `Matrix and Vector Storage <../matrix-storage.html>`__
+      for more details.
 
 
    ldb
-      Leading dimension of ``B``. Must be at least ``k`` if ``trans`` =
-      ``transpose::nontrans``, and at least ``n`` otherwise. Must be
-      positive.
+      The leading dimension of ``B``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``trans`` = ``transpose::nontrans``
+           - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+         * - Column major
+           - ``ldb`` must be at least ``k``.
+           - ``ldb`` must be at least ``n``.
+         * - Row major
+           - ``ldb`` must be at least ``n``.
+           - ``ldb`` must be at least ``k``.
 
 
    beta
@@ -226,36 +276,84 @@ syr2k (USM Version)
 
 
       a
-         Pointer to input matrix ``A``. If ``A`` is not transposed,
-         ``A`` is an ``m``-by-``k`` matrix so the array ``a`` must have
-         size at least ``lda``\ \*\ ``k``. If ``A`` is transposed, ``A``
-         is an ``k``-by-``m`` matrix so the array ``a`` must have size
-         at least ``lda``\ \*\ ``m``. See `Matrix and Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
+         Pointer to input matrix ``A``.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``trans`` = ``transpose::nontrans``
+              - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+            * - Column major
+              - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``.
+              - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``n``
+            * - Row major
+              - ``A`` is an ``n``-by-``k`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``n``.
+              - ``A`` is an ``k``-by-``n`` matrix so the array ``a``
+                must have size at least ``lda``\ \*\ ``k``.
+         
+         See `Matrix Storage <../matrix-storage.html>`__ for more details.
 
 
       lda
-         Leading dimension of ``A``. Must be at least ``n`` if ``trans``
-         = ``transpose::nontrans``, and at least ``k`` otherwise. Must
-         be positive.
+         The leading dimension of ``A``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``trans`` = ``transpose::nontrans``
+              - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+            * - Column major
+              - ``lda`` must be at least ``n``.
+              - ``lda`` must be at least ``k``.
+            * - Row major
+              - ``lda`` must be at least ``k``.
+              - ``lda`` must be at least ``n``.
 
 
       b
-         Pointer to input matrix ``B``. If ``trans`` =
-         ``transpose::nontrans``, ``B`` is an ``k``-by-``n`` matrix so
-         the array ``b`` must have size at least ``ldb``\ \*\ ``n``.
-         Otherwise, ``B`` is an ``n``-by-``k`` matrix so the array ``b``
-         must have size at least ``ldb``\ \*\ ``k``. See `Matrix and
-         Vector
-         Storage <../matrix-storage.html>`__ for
+         Pointer to input matrix ``B``.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``trans`` = ``transpose::nontrans``
+              - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+            * - Column major
+              - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``n``.
+              - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``k``
+            * - Row major
+              - ``B`` is an ``k``-by-``n`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``k``.
+              - ``B`` is an ``n``-by-``k`` matrix so the array ``b``
+                must have size at least ``ldb``\ \*\ ``n``.
+      
+         See `Matrix and Vector Storage <../matrix-storage.html>`__ for
          more details.
 
 
       ldb
-         Leading dimension of ``B``. Must be at least ``k`` if ``trans``
-         = ``transpose::nontrans``, and at least ``n`` otherwise. Must
-         be positive.
+         The leading dimension of ``B``. It must be positive.
+
+         .. list-table::
+            :header-rows: 1
+
+            * -
+              - ``trans`` = ``transpose::nontrans``
+              - ``trans`` = ``transpose::trans`` or ``transpose::conjtrans``
+            * - Column major
+              - ``ldb`` must be at least ``k``.
+              - ``ldb`` must be at least ``n``.
+            * - Row major
+              - ``ldb`` must be at least ``n``.
+              - ``ldb`` must be at least ``k``.
 
 
       beta
