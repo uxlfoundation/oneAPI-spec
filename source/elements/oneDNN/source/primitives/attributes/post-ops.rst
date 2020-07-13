@@ -96,6 +96,11 @@ The scale parameter can be used in The :math:`scale` factor is supported in
 only when the result and the existing data have different magnitudes.  For all
 other cases the scale must be `1.0`.
 
+Additionally, the sum post-op can reinterpret the destination values as a
+different data type of the same size. This may be used to, for example,
+reinterpret 8-bit signed data as unsigned or vice versa (which requires that
+values fall within a common range to work).
+
 The sum post-op replaces
 
 .. math::
@@ -104,7 +109,7 @@ The sum post-op replaces
 with
 
 .. math::
-    \dst[:] = scale \cdot \dst[:] + \operatorname{Op}(...)
+    \dst[:] = scale \cdot as_data_type(\dst[:]) + \operatorname{Op}(...)
 
 Examples of Chained Post-ops
 ============================
