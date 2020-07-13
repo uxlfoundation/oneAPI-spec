@@ -54,7 +54,7 @@ Operation Details
   compute an operation with each point of source 0 for this dimension.
 
 - The :math:`\dst` memory format can be either specified explicitly or by
-  :any:`dnnl::memory::format_tag::any` (recommended), in which case the
+  |memory::format_tag::any| (recommended), in which case the
   primitive will derive the most appropriate memory format based on the format
   of the source 0 tensor.
 
@@ -85,7 +85,7 @@ The following attributes should be supported:
 Data Types Support
 ******************
 
-The source and destination tensors may have |_f32|, |_bf16|, or |_int8|
+The source and destination tensors may have |_f32|, |_bf16|, |_s8| or |_u8|
 data types.
 
 *******************

@@ -82,7 +82,7 @@ offset in memory is computed as:
 
 Here |offset0| is the offset from the *parent* memory and is non-zero only for
 *submemory* memory descriptors created using
-:any:`dnnl::memory::desc::submemory_desc`. Submemory memory descriptors
+|memory::desc::submemory_desc|. Submemory memory descriptors
 inherit strides from the parent memory descriptor. Their main purpose is to
 express in-place concat operations.
 
@@ -121,7 +121,7 @@ Format Tags
 ***********
 
 In addition to strides, oneDNN provides named *format tags* via the
-:any:`dnnl::memory::format_tag` enum type. The enumerators of this type can be
+|memory::format_tag| enum type. The enumerators of this type can be
 used instead of strides for dense plain layouts.
 
 The format tag names for :math:`N`-dimensional memory formats use first
@@ -184,10 +184,10 @@ through computations graph.
 
 Optimized formats can employ padding, blocking and other data transformations
 to keep data in layout optimal for a certain architecture. This means that it
-in general operations like :any:`dnnl::memory::desc::permute_axes` or
-:any:`dnnl::memory::desc::submemory_desc` may fail. It is in general incorrect
+in general operations like |memory::desc::permute_axes| or
+|memory::desc::submemory_desc| may fail. It is in general incorrect
 to use product of dimension sizes to calculate amount of memory required to
-store data: :any:`dnnl::memory::desc::get_size` must be used instead.
+store data: |memory::desc::get_size| must be used instead.
 
 .. _memory_format_propagation-label:
 

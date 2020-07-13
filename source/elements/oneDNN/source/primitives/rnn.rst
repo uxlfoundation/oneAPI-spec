@@ -88,8 +88,8 @@ Vanilla RNN
 ===========
 
 A single-gate recurrent cell initialized with
-:any:`dnnl::vanilla_rnn_forward::desc` or
-:any:`dnnl::vanilla_rnn_forward::desc` as in the following example.
+|vanilla_rnn_forward::desc| or
+|vanilla_rnn_forward::desc| as in the following example.
 
 .. code:: cpp
 
@@ -116,7 +116,7 @@ LSTM (or Vanilla LSTM)
 ----------------------
 
 A four-gate long short-term memory recurrent cell initialized with
-:any:`dnnl::lstm_forward::desc` or :any:`dnnl::lstm_backward::desc` as in the
+|lstm_forward::desc| or |lstm_backward::desc| as in the
 following example.
 
 .. code:: cpp
@@ -154,7 +154,7 @@ LSTM with Peephole
 ------------------
 
 A four-gate long short-term memory recurrent cell with peephole initialized
-with :any:`dnnl::lstm_forward::desc` or :any:`dnnl::lstm_backward::desc` as in
+with |lstm_forward::desc| or |lstm_backward::desc| as in
 the following example.
 
 .. code:: cpp
@@ -194,7 +194,7 @@ LSTM with Projection
 --------------------
 
 A four-gate long short-term memory recurrent cell with projection initialized
-with :any:`dnnl::lstm_forward::desc` or :any:`dnnl::lstm_backward::desc` as in
+with |lstm_forward::desc| or |lstm_backward::desc| as in
 the following example.
 
 .. code:: cpp
@@ -237,7 +237,7 @@ GRU
 ===
 
 A three-gate gated recurrent unit cell, initialized with
-:any:`dnnl::gru_forward::desc` or :any:`dnnl::gru_backward::desc` as in the
+|gru_forward::desc| or |gru_backward::desc| as in the
 following example.
 
 .. code:: cpp
@@ -276,8 +276,8 @@ Linear-Before-Reset GRU
 =======================
 
 A three-gate gated recurrent unit cell with linear layer applied before the
-reset gate, initialized with :any:`dnnl::lbr_gru_forward::desc` or
-:any:`dnnl::lbr_gru_backward::desc` as in the following example.
+reset gate, initialized with |lbr_gru_forward::desc| or
+|lbr_gru_backward::desc| as in the following example.
 
 .. code:: cpp
 

@@ -60,7 +60,7 @@ they would be required during the backward propagation). Data layout for mean
 and variance must be specified during initialization of the layer
 normalization descriptor by passing the memory descriptor for statistics
 (e.g., by passing ``stat_desc`` in
-:any:`dnnl::layer_normalization_forward::desc::desc`). Mean and variance are
+|layer_normalization_forward::desc::desc|). Mean and variance are
 not exposed for the propagation kind |forward_inference|.
 
 ********
@@ -118,7 +118,7 @@ Operation Details
 1. The different flavors of the primitive are partially controlled by the
    ``flags`` parameter that is passed to the operation descriptor
    initialization function (e.g.,
-   :any:`dnnl::layer_normalization_forward::desc::desc`). Multiple flags can
+   |layer_normalization_forward::desc::desc|). Multiple flags can
    be combined using the bitwise OR operator (``|``).
 
 2. For forward propagation, the mean and variance might be either computed at

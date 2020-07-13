@@ -26,7 +26,7 @@ A memory descriptor can be initialized either by specifying dimensions, and
 memory format tag or strides for each of them.
 
 User can query amount of memory required by a memory descriptor using the
-:any:`dnnl::memory::desc::get_size` function. The size of data in general
+|memory::desc::get_size| function. The size of data in general
 cannot be computed as the product of dimensions multiplied by the size of the
 data type. So users are required to use this function for better code
 portability.
@@ -66,12 +66,12 @@ Objects
 
 Memory objects combine memory descriptors with storage for data (a data
 handle).  With USM, the data handle is simply a pointer to ``void``. The data
-handle can be queried using :any:`dnnl::memory::get_data_handle` and set using
-:any:`dnnl::memory::set_data_handle`. The underlying SYCL buffer, when used,
-can be queried using :any:`dnnl::memory::get_sycl_buffer` and set using
-:any:`dnnl::memory::set_sycl_buffer`. A memory object can also be queried for
+handle can be queried using |memory::get_data_handle| and set using
+|memory::set_data_handle|. The underlying SYCL buffer, when used,
+can be queried using |memory::get_sycl_buffer| and set using
+|memory::set_sycl_buffer|. A memory object can also be queried for
 the underlying memory descriptor and for its engine using
-:any:`dnnl::memory::get_desc` and :any:`dnnl::memory::get_engine`.
+|memory::get_desc| and |memory::get_engine|.
 
 ***
 API
