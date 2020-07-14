@@ -387,69 +387,11 @@ enum class query {
     /// no query
     undef,
 
-    /// execution engine
-    engine,
-    /// primitive kind
-    primitive_kind,
-
-    /// number of inputs expected
-    num_of_inputs_s32,
-    /// number of outputs expected
-    num_of_outputs_s32,
-
-    /// runtime estimation (seconds), unimplemented
-    time_estimate_f64,
     /// memory required for scratchpad (bytes)
     memory_consumption_s64,
 
-    /// scratchpad engine
-    ///
-    /// engine to be used for creating scratchpad memory
-    scratchpad_engine,
-
-    /// reorder source engine
-    reorder_src_engine,
-    /// reorder destination engine
-    reorder_dst_engine,
-
     /// implementation name
     impl_info_str,
-
-    /// propagation kind
-    prop_kind,
-
-    /// operation descriptor
-    op_d,
-    /// convolution descriptor
-    convolution_d,
-    /// deconvolution descriptor
-    deconvolution_d,
-    /// shuffle descriptor
-    shuffle_d,
-    /// eltwise descriptor
-    eltwise_d,
-    /// softmax descriptor
-    softmax_d,
-    /// pooling descriptor
-    pooling_d,
-    /// lrn descriptor
-    lrn_d,
-    /// batch normalization descriptor
-    batch_normalization_d,
-    /// layer normalization descriptor
-    layer_normalization_d,
-    /// inner product descriptor
-    inner_product_d,
-    /// rnn descriptor
-    rnn_d,
-    /// binary descriptor
-    binary_d,
-    /// logsoftmax descriptor
-    logsoftmax_d,
-    /// matmul descriptor
-    matmul_d,
-    /// resampling descriptor
-    resampling_d,
 
     /// source memory desc
     src_md,
