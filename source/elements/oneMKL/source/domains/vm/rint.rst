@@ -1,3 +1,4 @@
+.. _onemkl_vm_rint:
 
 rint
 ====
@@ -10,7 +11,6 @@ rint
 
 
    .. container:: section
-      :name: GUID-9E85B4D4-8A91-41C9-B7C9-58C1BF7B0267
 
 
       .. rubric:: Syntax
@@ -20,28 +20,27 @@ rint
       Buffer API:
 
 
-      .. cpp:function::  void rint(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined      )
+      .. cpp:function:: event oneapi::mkl::vm::rint(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event rint(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::rint(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``rint`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-E1254097-BD26-429A-B5AC-ACF7FC358C61
 
 
    .. rubric:: Description
@@ -56,48 +55,48 @@ rint
    between consecutive integers. For example:
 
 
-   -  ``f(0.5) = 0``, for rounding modes set to round to nearest round
+   - ``f(0.5) = 0``, for rounding modes set to round to nearest round
       toward zero or to minus infinity.
 
 
-   -  ``f(0.5) = 1``, for rounding modes set to plus infinity.
+   - ``f(0.5) = 1``, for rounding modes set to plus infinity.
 
 
-   -  ``f(-1.5) = -2``, for rounding modes set to round to nearest or to
+   - ``f(-1.5) = -2``, for rounding modes set to round to nearest or to
       minus infinity.
 
 
-   -  ``f(-1.5) = -1``, for rounding modes set to round toward zero or to
+   - ``f(-1.5) = -1``, for rounding modes set to round toward zero or to
       plus infinity.
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - +∞
+           - +∞
+           -  
+         * - -∞
+           - -∞
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -106,7 +105,6 @@ rint
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -130,9 +128,9 @@ rint
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -156,13 +154,12 @@ rint
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -187,31 +184,11 @@ rint
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use rint can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vrint.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Rounding
-      Functions <rounding-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

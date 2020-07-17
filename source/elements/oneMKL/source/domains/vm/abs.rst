@@ -1,3 +1,4 @@
+.. _onemkl_vm_abs:
 
 abs
 ===
@@ -10,7 +11,6 @@ abs
 
 
    .. container:: section
-      :name: GUID-FDBCAEE6-C095-465E-B365-6293520BAAEA
 
 
       .. rubric:: Syntax
@@ -20,30 +20,34 @@ abs
       Buffer API:
 
 
-      .. cpp:function::  void abs(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined      )
+      .. cpp:function:: event oneapi::mkl::vm::abs(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<R,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event abs(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::abs(queue& exec_queue, int64_t n, T* a, R* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``abs`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+           - R
+         * - ``float``
+           - ``float``
+         * - ``double``
+           - ``double``
+         * - ``std::complex<float>``
+           - ``float``
+         * - ``std::complex<double>``
+           - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-4820A1A0-C933-4215-9ED4-FDEF4AD0CCE6
 
 
    .. rubric:: Description
@@ -56,30 +60,30 @@ abs
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  +0 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  +∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - +0
+           -  
+         * - +∞
+           - +∞
+           -  
+         * - -∞
+           - +∞
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -88,14 +92,13 @@ abs
    according to the following formula
 
 
-   ``abs(a) = hypot(RE(a),IM(a))``.
+   ``abs(a) = hypot(RE(a), IM(a))``.
 
 
    The abs function does not generate any errors.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -119,9 +122,9 @@ abs
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -145,13 +148,12 @@ abs
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -176,31 +178,11 @@ abs
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use abs can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vabs.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Arithmetic
-      Functions <arithmetic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

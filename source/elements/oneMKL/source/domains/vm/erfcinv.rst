@@ -1,3 +1,4 @@
+.. _onemkl_vm_erfcinv:
 
 erfcinv
 =======
@@ -11,7 +12,6 @@ erfcinv
 
 
    .. container:: section
-      :name: GUID-6FECC102-741F-405A-885A-61B224835365
 
 
       .. rubric:: Syntax
@@ -21,28 +21,27 @@ erfcinv
       Buffer API:
 
 
-      .. cpp:function::  void erfcinv(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::erfcinv(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event erfcinv(queue& exec_queue, int64_t n, T*      a, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::erfcinv(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``erfcinv`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-C96C0262-CEAA-4D3A-B1F3-687165647F9F
 
 
    .. rubric:: Description
@@ -57,7 +56,7 @@ erfcinv
    The inverse complementary error function is defined as given by:
 
 
-   | 
+   |
 
 
    .. container:: imagecenter
@@ -66,7 +65,7 @@ erfcinv
       |image0|
 
 
-   | 
+   |
 
 
    .. container:: imagecenter
@@ -75,7 +74,7 @@ erfcinv
       |image1|
 
 
-   | 
+   |
 
 
    .. container:: imagecenter
@@ -93,11 +92,10 @@ erfcinv
 
 
    .. container:: figtop
-      :name: GUID-74857793-0E1E-4839-A913-8EC1C23DB719
 
 
       erfcinv Family Functions Relationship
-      | 
+      |
 
 
       .. container:: imagecenter
@@ -112,7 +110,7 @@ erfcinv
    |image4|
 
 
-   | 
+   |
 
 
    .. container:: imagecenter
@@ -124,48 +122,47 @@ erfcinv
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +1 
-           -  +0 
-           -    
-         * -  +2 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  -0 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  +0 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  a < -0 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  a > +2 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  -∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +1
+           - +0
+           -  
+         * - +2
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -0
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - +0
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - a < -0
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - a > +2
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -189,14 +186,14 @@ erfcinv
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -222,20 +219,19 @@ erfcinv
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -260,32 +256,12 @@ erfcinv
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use erfcinv can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/verfcinv.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Special
-      Functions <special-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 
 

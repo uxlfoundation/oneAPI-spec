@@ -1,3 +1,4 @@
+.. _onemkl_vm_arg:
 
 arg
 ===
@@ -10,7 +11,6 @@ arg
 
 
    .. container:: section
-      :name: GUID-B43F4847-BE63-4396-A993-2F6FC5201525
 
 
       .. rubric:: Syntax
@@ -20,28 +20,28 @@ arg
       Buffer API:
 
 
-      .. cpp:function::  void arg(queue& exec_queue, int64_t n,      buffer<A,1>& a, buffer<R,1>& y, uint64_t mode = mode::not_defined      )
+      .. cpp:function:: event oneapi::mkl::vm::arg(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<R,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event arg(queue& exec_queue, int64_t n, A* a,      R* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::arg(queue& exec_queue, int64_t n, T* a, R* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``arg`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
+         * - T
+           - R
+         * - ``std::complex<float>``
+           - ``float``
+         * - ``std::complex<double>``
+           - ``double``
 
 
 .. container:: section
-   :name: GUID-75EB29ED-7EBD-463F-A86A-F95625E7703B
 
 
    .. rubric:: Description
@@ -51,81 +51,80 @@ arg
    The arg(a) function computes argument of vector elements.
 
 
-   See `Special Value
-   Notations <special-value-notations.html>`__
-   for the conventions used in the table below.
+   See :ref:`onemkl_vm_special_value_notations` for the conventions used in the
+   table below.
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -     RE(a)      i·IM(a)    
-           -     -∞           
-           -     -X           
-           -     -0           
-           -     +0           
-           -     +X           
-           -     +∞           
-           -     NAN           
-         * -  +i·∞ 
-           -  +3·π/4 
-           -  +π/2 
-           -  +π/2 
-           -  +π/2 
-           -  +π/2 
-           -  +π/4 
-           -  NAN 
-         * -  +i·Y 
-           -  +π 
-           -    
-           -  +π/2 
-           -  +π/2 
-           -    
-           -  +0 
-           -  NAN 
-         * -  +i·0 
-           -  +π 
-           -  +π 
-           -  +π 
-           -  +0 
-           -  +0 
-           -  +0 
-           -  NAN 
-         * -  -i·0 
-           -  -π 
-           -  -π 
-           -  -π 
-           -  -0 
-           -  -0 
-           -  -0 
-           -  NAN 
-         * -  -i·Y 
-           -  -π 
-           -    
-           -  -π/2 
-           -  -π/2 
-           -    
-           -  -0 
-           -  NAN 
-         * -  -i·∞ 
-           -  -3·π/4 
-           -  -π/2 
-           -  -π/2 
-           -  -π/2 
-           -  -π/2 
-           -  -π/4 
-           -  NAN 
-         * -  +i·NAN 
-           -  NAN 
-           -  NAN 
-           -  NAN 
-           -  NAN 
-           -  NAN 
-           -  NAN 
-           -  NAN 
+         * - RE(a) i·IM(a)
+           - -∞  
+           - -X  
+           - -0  
+           - +0  
+           - +X  
+           - +∞  
+           - NAN  
+         * - +i·∞
+           - +3·π/4
+           - +π/2
+           - +π/2
+           - +π/2
+           - +π/2
+           - +π/4
+           - NAN
+         * - +i·Y
+           - +π
+           -  
+           - +π/2
+           - +π/2
+           -  
+           - +0
+           - NAN
+         * - +i·0
+           - +π
+           - +π
+           - +π
+           - +0
+           - +0
+           - +0
+           - NAN
+         * - -i·0
+           - -π
+           - -π
+           - -π
+           - -0
+           - -0
+           - -0
+           - NAN
+         * - -i·Y
+           - -π
+           -  
+           - -π/2
+           - -π/2
+           -  
+           - -0
+           - NAN
+         * - -i·∞
+           - -3·π/4
+           - -π/2
+           - -π/2
+           - -π/2
+           - -π/2
+           - -π/4
+           - NAN
+         * - +i·NAN
+           - NAN
+           - NAN
+           - NAN
+           - NAN
+           - NAN
+           - NAN
+           - NAN
 
 
 
@@ -137,14 +136,13 @@ arg
          :class: NoteTipHead
 
 
-      ``arg(a)=atan2(IM(a),RE(a))``
+      ``arg(a)=atan2(IM(a), RE(a))``
 
 
    The arg function does not generate any errors.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -168,9 +166,9 @@ arg
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -194,13 +192,12 @@ arg
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -225,31 +222,11 @@ arg
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use arg can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/varg.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Arithmetic
-      Functions <arithmetic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

@@ -1,4 +1,4 @@
-.. _vm_bibliography:
+.. _onemkl_vm_bibliography:
 
 Bibliography
 ============
@@ -11,11 +11,10 @@ Bibliography
    following publications:
 
 
-   -  
+   -
 
 
       .. container::
-         :name: LI_9D2887B8C0CA4560BB845598887F6068
 
 
          **VM**
