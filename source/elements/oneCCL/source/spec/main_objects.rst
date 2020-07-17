@@ -1,122 +1,329 @@
 oneCCL Concepts
 ===============
 
-|ccl_full_name| introduces the following list of concepts:
+oneCCL specification defines the following list of concepts:
 
-- `oneCCL Environment`_
-- `oneCCL Stream`_
-- `oneCCL Communicator`_
+- `Environment`_
+- `Key-Value Store`_
+- `Communicator`_
+- `Device Communicator`_
+- `Request`_
+- `Event`_
+- `Stream`_
+- `Operation Attributes`_
 
-oneCCL Environment
-******************
+Environment
+***********
 
-oneCCL Environment is a singleton object which is used as an entry
-point into the oneCCL library and which is defined only for C++
-version of API.  oneCCL Environment exposes a number of helper methods
-to manage other oneCCL objects, such as streams, communicators, etc.
+oneCCL specification defines ``environment`` class that shall provide a singleton object and helper methods to manage other oneCCL objects, such as communicators, attributes, and so on.
 
-oneCCL Stream
-*************
+Retrieves the environment singleton object and initializes the library.
 
-**C version of oneCCL API:**
+.. code:: cpp
 
-::
+    static environment& environment::instance();
 
-    typedef void* ccl_stream_t;
+return ``environment``
+    an environment object
 
-**C++ version of oneCCL API:**
 
-::
+Key-Value Store
+***************
 
-    class stream;
-    using stream_t = std::unique_ptr<ccl::stream>;
+``kvs_interface`` defines the key-value store (KVS) interface to be used to connect the ranks during the creation of oneCCL communicator. The interface shall include blocking ``get`` and ``set`` methods.
 
-CCL Stream encapsulates execution context for communication primitives declared by oneCCL specification. It is an opaque handle that is managed by oneCCL API:
+Getting a record from the key-value store:
 
-**C version of oneCCL API:**
+.. code:: cpp
 
-::
+    virtual vector_class<char> kvs_interface::get(
+        const string_class& prefix,
+        const string_class& key) const = 0;
 
-    ccl_status_t ccl_stream_create(ccl_stream_type_t type,
-                                        void* native_stream,
-                                        ccl_stream_t* ccl_stream);
-    ccl_status_t ccl_stream_free(ccl_stream_t stream);
+prefix
+    the prefix that allows operations with KVS in a separate namespace
+    to avoid key names conflicts with the existing KVS records
+key
+    the key at which the value should be stored
+return ``vector_class<char>``
+    the value associated with the given key
 
-**C++ version of oneCCL API:**
+Saving a record in the key-value store:
 
-::
+.. code:: cpp
 
-    class environment
-    {
+    void kvs_interface::set(
+        const string_class& prefix,
+        const string_class& key,
+        const vector_class<char>& data) const = 0;
+
+prefix
+    the prefix that allows operations with KVS in a separate namespace
+    to avoid key names conflicts with the existing KVS records
+key
+    the key at which the value should be stored
+data
+    the value that should be associated with the given key
+
+
+oneCCL specification defines ``kvs`` class as a built-in KVS provided by oneCCL.
+
+.. code:: cpp
+
+    class kvs : public kvs_interface {
+    
     public:
-    ...
-        /**
-        * Creates a new ccl stream of @c type with @c native stream
-        * @param type the @c ccl::stream_type and may be @c cpu or @c sycl (if configured)
-        * @param native_stream the existing handle of stream
-        */
-        stream_t create_stream(ccl::stream_type type = ccl::stream_type::cpu, void* native_stream = nullptr) const;
+
+    static constexpr size_t addr_max_size = 256;
+    using addr_t = array_class<char, addr_max_size>;
+
+    const addr_t& get_addr() const;
+
+    ~kvs() override;
+
+    vector_class<char> get(
+        const string_class& prefix,
+        const string_class& key) const override;
+
+    void set(
+        const string_class& prefix,
+        const string_class& key,
+        const vector_class<char>& data) const override;
+
     }
 
-When you create oneCCL stream object using the API described above, you need to specify the stream type and pass the pointer to the underlying command queue object. 
-For example, for oneAPI device you should pass ``ccl::stream_type::sycl`` and ``cl::sycl::queue`` objects.
+Retrieving an address of built-in key-value store:
 
-oneCCL Communicator
+.. code:: cpp
+
+    const addr_t& kvs::get_addr() const;
+
+return ``kvs::addr_t``
+    | the address of the key-value store
+    | should be retrieved from the main built-in KVS and distributed to other processes for the built-in KVS creation
+
+
+The ``environment`` class shall provide the ability to create an instance of ``kvs`` class.
+
+Creating a main built-in key-value store. Its address should be distributed using an out-of-band communication mechanism
+and be used to create key-value stores on other ranks:
+
+.. code:: cpp
+
+    kvs_t environment::create_main_kvs() const;
+
+return ``kvs_t``
+    the main key-value store object
+
+Creating a new key-value store from main kvs address:
+
+.. code:: cpp
+
+    kvs_t environment::create_kvs(const kvs::addr_t& addr) const;
+
+addr
+    the address of the main kvs
+return ``kvs_t``
+    key-value store object
+
+
+.. _Communicator:
+
+Communicator
+************
+
+oneCCL specification defines ``communicator`` class that describes a group of communicating ranks, where rank is a single process. ``communicator`` defines collective operations on host memory buffers.
+
+The ``environment`` class shall provide the ability to create an instance of ``communicator`` class.
+
+Creating a new host communicator with user-supplied size, rank, and kvs:
+
+.. code:: cpp
+
+    using communicator_t = unique_ptr_class<communicator>;
+
+    communicator_t environment::create_communicator(
+        const size_t size,
+        const size_t rank,
+        shared_ptr_class<kvs_interface> kvs) const;
+
+size
+    user-supplied total number of ranks
+rank
+    user-supplied rank
+kvs
+    key-value store for ranks wire-up
+return ``communicator_t``
+    communicator object
+
+``communicator`` shall provide methods to retrieve the rank that corresponds to the communicator object and the number of ranks in the communicator. It shall also provide collective communication operations on host memory buffers.
+
+Retrieving the rank in a communicator:
+
+.. code:: cpp
+
+    size_t communicator::rank() const;
+
+return ``size_t``
+    rank of the current process
+
+Retrieving the number of ranks in a communicator:
+
+.. code:: cpp
+
+    size_t communicator::size() const;
+
+return ``size_t``
+    number of the ranks
+
+.. note::
+    See also: :doc:`collective_operations`
+
+
+.. _Device Communicator:
+
+Device Communicator
 *******************
 
-**C version of oneCCL API:**
+oneCCL specification defines ``device_communicator`` class that describes a group of communicating ranks, where rank is a single device. ``device_communicator`` defines collective operations on device memory buffers.
 
-::
+.. note::
+    Here and below, a device, a device memory, a device context, a queue, and an event are defined in the scope of SYCL device runtime.
 
-    typedef void* ccl_comm_t;
+The ``environment`` class shall provide the ability to create an instance of ``device_communicator`` class.
 
-**C++ version of oneCCL API:**
+Creating a new device communicator with user-supplied size, rank, and kvs:
 
-::
+.. code:: cpp
 
-    class communicator;
-    using communicator_t = std::unique_ptr<ccl::communicator>;
+    using device_communicator_t = unique_ptr_class<device_communicator>;
 
-oneCCL Communicator defines participants of collective communication operations. It is an opaque handle that is managed by oneCCL API:
+    using native_device_type = sycl::device;
+    using native_context_type = sycl::context;
 
-**C version of oneCCL API:**
+    vector_class<device_communicator_t> environment::create_device_communicators(
+        const size_t size,
+        vector_class<pair_class<size_t, native_device_type>>& rank_device_map,
+        native_context_type& context,
+        shared_ptr_class<kvs_interface> kvs) const;
 
-::
+size
+    user-supplied total number of ranks
+rank_device_map
+    user-supplied mapping of local ranks on devices
+context
+    device context
+kvs
+    key-value store for ranks wire-up
+return ``vector_class<device_communicator_t>``
+    a vector of device communicators
 
-    ccl_status_t ccl_comm_create(ccl_comm_t* comm,
-                                        const ccl_comm_attr_t* attr);
-    ccl_status_t ccl_comm_free(ccl_comm_t comm);
+``device_communicator`` shall provide methods to retrieve the rank, the device, and the device context that correspond to the communicator object as well as the number of ranks in the communicator. It shall also provide collective communication operations on device memory buffers.
 
-**C++ version of oneCCL API:**
+Retrieving the rank in a communicator:
 
-::
+.. code:: cpp
 
-    class environment
-    {
-    public:
-    ...
-        /**
-        * Creates a new communicator according to @c attr parameters
-        * or creates a copy of global communicator, if @c attr is @c nullptr(default)
-        * @param attr
-        */
-        communicator_t create_communicator(const ccl::comm_attr* attr = nullptr) const;
-    }
+    size_t device_communicator::rank() const;
 
-When you create oneCCL Communicator, you can optionally specify attributes that control the runtime behavior of oneCCL implementation.
+return ``size_t``
+    the rank that corresponds to the communicator object
 
-oneCCL Communicator Attributes
-------------------------------
+Retrieving the number of ranks in a communicator:
 
-::
+.. code:: cpp
 
-    typedef struct
-    {
-        /**
-        * Used to split global communicator into parts. Ranks with identical color
-        * will form a new communicator.
-        */
-        int color;
-    } ccl_comm_attr_t;
+    size_t device_communicator::size() const;
 
-``ccl_comm_attr_t`` (``ccl::comm_attr`` in C++ version of API) is extendable structure that serves as a modifier of communicator behavior. 
+return ``size_t``
+    the number of the ranks
+
+Retrieving an underlying device, which was used as communicator construction argument:
+
+.. code:: cpp
+
+    native_device_type get_device() const;
+
+return ``native_device_type``
+    the device that corresponds to the communicator object
+
+Retrieving an underlying device context, which was used as communicator construction argument:
+
+.. code:: cpp
+
+    native_context_type get_context() const;
+
+return ``native_context_type``
+    the device context that corresponds to the communicator object
+
+.. note::
+    See also: :doc:`collective_operations`
+
+
+.. _Request:
+
+Request
+*******
+
+Each communication operation of oneCCL shall return a request object for tracking the operation's progress.
+
+.. note::
+    See also: :doc:`operation_progress`
+
+
+.. _Event:
+
+Event
+*****
+
+oneCCL specification defines the ``event`` class that wraps the ``sycl::event`` object and encapsulates synchronization context for ``device_communicator`` communication operations.
+
+A vector of events may be passed to the ``device_communicator`` communication operation to designate input dependencies for the operation. An event may be retrieved from ``request`` object to be passed further as an input dependency in other device communication operations or in computation operations.
+
+The ``environment`` class shall provide the ability to create an instance of the ``event`` class from the ``sycl::event`` object.
+
+Creating a new event from ``sycl::event`` object:
+
+.. code:: cpp
+
+    using native_event_type = sycl::event;
+    using event_t = unique_ptr_class<event>;
+    event_t environment::create_event(native_event_type& native_event) const;
+
+native_event
+    the existing native handle for an event
+return ``event_t``
+    an event object
+
+
+.. _Stream:
+
+Stream
+******
+
+oneCCL specification defines ``stream`` class that wraps ``sycl::queue`` object and encapsulates execution context for ``device_communicator`` communication operations.
+
+Stream shall be passed to ``device_communicator`` communication operation.
+
+The ``environment`` class shall provide the ability to create an instance of the ``stream`` class from the ``sycl::queue`` object.
+
+Creating a new stream from ``sycl::queue`` object:
+
+.. code:: cpp
+
+    using native_stream_type = sycl::queue;
+    using stream_t = unique_ptr_class<stream>;
+    stream_t environment::create_stream(native_stream_type& native_stream) const;
+
+native_stream
+    the existing native handle for a stream
+return ``stream_t``
+    a stream object
+
+
+Operation Attributes
+********************
+
+Communication operation behavior may be controlled through operation attributes.
+
+:doc:`operation_attributes`
