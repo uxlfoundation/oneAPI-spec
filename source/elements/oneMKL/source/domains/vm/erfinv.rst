@@ -1,3 +1,4 @@
+.. _onemkl_vm_erfinv:
 
 erfinv
 ======
@@ -10,7 +11,6 @@ erfinv
 
 
    .. container:: section
-      :name: GUID-2527E9AC-23A0-4A39-9485-EE9CD4C48CC4
 
 
       .. rubric:: Syntax
@@ -20,28 +20,27 @@ erfinv
       Buffer API:
 
 
-      .. cpp:function::  void erfinv(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::erfinv(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event erfinv(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::erfinv(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``erfinv`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-16B0A421-303F-4559-8B48-87662E21759B
 
 
    .. rubric:: Description
@@ -98,11 +97,10 @@ erfinv
 
 
    .. container:: figtop
-      :name: GUID-74857793-0E1E-4839-A913-8EC1C23DB719
 
 
       erfinv Family Functions Relationship
-      | 
+      |
 
 
       .. container:: imagecenter
@@ -117,7 +115,7 @@ erfinv
    |image6|
 
 
-   | 
+   |
 
 
    .. container:: imagecenter
@@ -129,45 +127,44 @@ erfinv
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  +1 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  -1 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  \|a\| > 1 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  -∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - +1
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -1
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - \|a\| > 1
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -191,14 +188,14 @@ erfinv
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -224,20 +221,19 @@ erfinv
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -262,32 +258,12 @@ erfinv
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use erfinv can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/verfinv.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Special
-      Functions <special-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 
 

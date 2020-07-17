@@ -1,3 +1,4 @@
+.. _onemkl_vm_add:
 
 add
 ===
@@ -11,7 +12,6 @@ add
 
 
    .. container:: section
-      :name: GUID-0021791A-722B-49D5-AC56-37F61FA2FBA8
 
 
       .. rubric:: Syntax
@@ -21,30 +21,29 @@ add
       Buffer API:
 
 
-      .. cpp:function::  void add( queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::add( queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event add( queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::add( queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``add`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-CCDDF7AC-0DF5-48D3-B7BF-290C6A40D84F
 
 
    .. rubric:: Description
@@ -58,53 +57,53 @@ add
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 1 
-           -  Argument 2 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -  +0 
-           -    
-         * -  +0 
-           -  -0 
-           -  +0 
-           -    
-         * -  -0 
-           -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -  -0 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -  +∞ 
-           -    
-         * -  +∞ 
-           -  -∞ 
-           -  QNAN 
-           -    
-         * -  -∞ 
-           -  +∞ 
-           -  QNAN 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -  -∞ 
-           -    
-         * -  SNAN 
-           -  any value 
-           -  QNAN 
-           -    
-         * -  any value 
-           -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument 1
+           - Argument 2
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           - +0
+           -  
+         * - +0
+           - -0
+           - +0
+           -  
+         * - -0
+           - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           - -0
+           -  
+         * - +∞
+           - +∞
+           - +∞
+           -  
+         * - +∞
+           - -∞
+           - QNAN
+           -  
+         * - -∞
+           - +∞
+           - QNAN
+           -  
+         * - -∞
+           - -∞
+           - -∞
+           -  
+         * - SNAN
+           - any value
+           - QNAN
+           -  
+         * - any value
+           - SNAN
+           - QNAN
+           -  
 
 
 
@@ -113,7 +112,7 @@ add
    defined according to the following formula
 
 
-   ``add(x1+i*y1,x2+i*y2) = (x1+x2) + i*(y1+y2)``
+   ``add(x1+i*y1, x2+i*y2) = (x1+x2) + i*(y1+y2)``
 
 
    Overflow in a complex function occurs (supported in the HA/LA
@@ -121,12 +120,11 @@ add
    are finite numbers, but the real or imaginary part of the computed
    result is so large that it does not fit the target precision. In this
    case, the function returns ∞ in that part of the result, and sets the
-   VM Error Status to ``status::overflow`` (overriding any possible
-   ``status::accuracy_warning`` status).
+   VM Error Status to ``oneapi::mkl::vm::status::overflow`` (overriding any possible
+   ``oneapi::mkl::vm::status::accuracy_warning`` status).
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -154,14 +152,14 @@ add
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -191,20 +189,19 @@ add
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -229,31 +226,11 @@ add
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use add can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vadd.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Arithmetic
-      Functions <arithmetic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

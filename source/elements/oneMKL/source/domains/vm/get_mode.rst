@@ -1,3 +1,4 @@
+.. _onemkl_vm_get_mode:
 
 get_mode
 ========
@@ -10,14 +11,13 @@ get_mode
 
 
    .. container:: section
-      :name: GUID-E3B47247-72E8-49A0-9017-0230E36B87A4
 
 
       .. rubric:: Syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  uint64_t get_mode( queue& exec_queue )
+      .. cpp:function:: uint64_t oneapi::mkl::vm::get_mode( queue& exec_queue )
 
       .. rubric:: Description
          :class: sectiontitle
@@ -30,38 +30,32 @@ get_mode
       following table.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Value of mode 
-           -  Description 
-         * -  Accuracy Control 
-           -   
-         * -  ``mode::ha`` 
-           -  High accuracy versions of VM functions. 
-         * -  ``mode::la`` 
-           -  Low accuracy versions of VM functions. 
-         * -  ``mode::ep`` 
-           -  Enhanced performance accuracy versions of VM functions. 
-         * -  Denormalized Numbers Handling Control 
-           -   
-         * -  ``mode::ftzdazon`` 
-           -  Faster processing of denormalized inputs is enabled. 
-         * -  ``mode::ftzdazoff`` 
-           -  Faster processing of denormalized inputs is disabled. 
-         * -  Other 
-           -   
-         * -  ``mode::not_defined`` 
-           -  VM status not defined. 
-
-
-
-
-   See example below:
+         * - Value of mode
+           - Description
+         * - Accuracy Control
+           -
+         * - ``oneapi::mkl::vm::mode::ha``
+           - High accuracy versions of VM functions.
+         * - ``oneapi::mkl::vm::mode::la``
+           - Low accuracy versions of VM functions.
+         * - ``oneapi::mkl::vm::mode::ep``
+           - Enhanced performance accuracy versions of VM functions.
+         * - Denormalized Numbers Handling Control
+           -
+         * - ``oneapi::mkl::vm::mode::ftzdazon``
+           - Faster processing of denormalized inputs is enabled.
+         * - ``oneapi::mkl::vm::mode::ftzdazoff``
+           - Faster processing of denormalized inputs is disabled.
+         * - Other
+           -
+         * - ``oneapi::mkl::vm::mode::not_defined``
+           - VM status not defined.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -73,7 +67,6 @@ get_mode
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -84,28 +77,11 @@ get_mode
       Specifies the global VM mode.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   ::
-
-
-      accm = get_mode (exec_queue) & mode::accuracy_mask;
-      denm = get_mode (exec_queue) & mode::ftzdaz_mask;
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `VM Service
-      Functions <vm-service-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_service_functions`
 
 

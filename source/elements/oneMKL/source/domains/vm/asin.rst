@@ -1,3 +1,4 @@
+.. _onemkl_vm_asin:
 
 asin
 ====
@@ -10,7 +11,6 @@ asin
 
 
    .. container:: section
-      :name: GUID-4003D959-7538-4202-889C-0B5FD39F6CE3
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ asin
       Buffer API:
 
 
-      .. cpp:function::  void asin(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::asin(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event asin(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::asin(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``asin`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-1F39693E-4FBB-4DA4-9593-77B49A6751DB
 
 
    .. rubric:: Description
@@ -56,39 +55,39 @@ asin
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  +1 
-           -  +\ ``π``/2 
-           -    
-         * -  -1 
-           -  -``π``/2 
-           -    
-         * -  \|a\| > 1 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  -∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - +1
+           - +\ ``π``/2
+           -  
+         * - -1
+           - -``π``/2
+           -  
+         * - \|a\| > 1
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -101,7 +100,6 @@ asin
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -125,14 +123,14 @@ asin
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -158,20 +156,19 @@ asin
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -196,31 +193,11 @@ asin
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use asin can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vasin.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Trigonometric
-      Functions <trigonometric-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

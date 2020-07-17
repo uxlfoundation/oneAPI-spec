@@ -1,3 +1,4 @@
+.. _onemkl_vm_sincos:
 
 sincos
 ======
@@ -10,7 +11,6 @@ sincos
 
 
    .. container:: section
-      :name: GUID-BFCA3F3F-F4E7-4E18-9C92-C219C41F5E3A
 
 
       .. rubric:: Syntax
@@ -20,28 +20,27 @@ sincos
       Buffer API:
 
 
-      .. cpp:function::  void sincos(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, buffer<T,1>& z, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::sincos(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, buffer<T,1>& z, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event sincos(queue& exec_queue, int64_t n, T* a,      T* y, T* z, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::sincos(queue& exec_queue, int64_t n, T* a, T* y, T* z, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``sincos`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-B1D1E5EA-C097-4A5B-8671-EE84DB636AD6
 
 
    .. rubric:: Description
@@ -64,43 +63,42 @@ sincos
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 1 
-           -  Result 2 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -  +1 
-           -    
-         * -  -0 
-           -  -0 
-           -  +1 
-           -    
-         * -  +∞ 
-           -  QNAN 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  -∞ 
-           -  QNAN 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  QNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result 1
+           - Result 2
+           - Error Code
+         * - +0
+           - +0
+           - +1
+           -  
+         * - -0
+           - -0
+           - +1
+           -  
+         * - +∞
+           - QNAN
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -∞
+           - QNAN
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - QNAN
+           - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           - QNAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -124,14 +122,14 @@ sincos
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -157,20 +155,19 @@ sincos
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -205,31 +202,11 @@ sincos
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use sincos can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vsincos.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Trigonometric
-      Functions <trigonometric-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

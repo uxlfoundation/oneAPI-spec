@@ -1,3 +1,4 @@
+.. _onemkl_vm_modf:
 
 modf
 ====
@@ -11,7 +12,6 @@ modf
 
 
    .. container:: section
-      :name: GUID-F66BB36F-D7BF-4EEC-A9E7-A4666E85A1FA
 
 
       .. rubric:: Syntax
@@ -21,28 +21,27 @@ modf
       Buffer API:
 
 
-      .. cpp:function::  void modf(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, buffer<T,1>& z, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::modf(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, buffer<T,1>& z, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event modf(queue& exec_queue, int64_t n, T* a,      T* y, T* z, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::modf(queue& exec_queue, int64_t n, T* a, T* y, T* z, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``modf`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-F4792591-FD2F-45ED-AF28-7C03E3030B81
 
 
    .. rubric:: Description
@@ -53,44 +52,44 @@ modf
    remaining fraction part for each vector element.
 
 
-   | 
+   |
    | |image0|
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 1 
-           -  Result 2 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -  -0 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -  +0 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -  -0 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result 1
+           - Result 2
+           - Error Code
+         * - +0
+           - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           - -0
+           -  
+         * - +∞
+           - +∞
+           - +0
+           -  
+         * - -∞
+           - -∞
+           - -0
+           -  
+         * - SNAN
+           - QNAN
+           - QNAN
+           -  
+         * - QNAN
+           - QNAN
+           - QNAN
+           -  
 
 
 
@@ -99,7 +98,6 @@ modf
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -123,9 +121,9 @@ modf
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -149,13 +147,12 @@ modf
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -192,32 +189,12 @@ modf
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use modf can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vmodf.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Rounding
-      Functions <rounding-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 
 
