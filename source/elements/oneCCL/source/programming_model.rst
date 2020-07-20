@@ -5,5 +5,5 @@
 .. toctree::
 
    spec/generic_workflow.rst
-   spec/gpu_support.rst
-   spec/cpu_support.rst   
+   spec/host_communication.rst
+   spec/device_communication.rst
