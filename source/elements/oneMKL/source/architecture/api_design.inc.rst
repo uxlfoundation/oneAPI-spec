@@ -59,6 +59,8 @@ oneMKL dense and sparse linear algebra routines use scoped enum types as type-sa
 
 Each enumeration value comes with two names: A single-character name (the traditional BLAS/LAPACK character) and a longer, more descriptive name. The two names are exactly equivalent and may be used interchangeably.
 
+      .. _onemkl_enum_transpose:
+
       .. rubric:: transpose
          :name: transpose
          :class: sectiontitle
@@ -83,6 +85,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``transpose::C``
               -  ``transpose::conjtrans``
               -  Perform Hermitian transpose (transpose and conjugate). Only applicable to complex matrices.
+
+      .. _onemkl_enum_uplo:
 
       .. rubric:: uplo
          :name: uplo
@@ -110,6 +114,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
       In both cases, elements that are not in the selected triangle are
       not accessed or updated.
 
+      .. _onemkl_enum_diag:
+
       .. rubric:: diag
          :name: diag
          :class: sectiontitle
@@ -131,6 +137,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``diag::U``
               -  ``diag::unit``
               -  The matrix is unit triangular (the diagonal entries are all 1's). The diagonal entries in the matrix data are not accessed.
+
+      .. _onemkl_enum_side:
 
       .. rubric:: side
          :name: side
@@ -154,6 +162,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``side::R``
               -  ``side::right``
               -  The special form matrix is on the right in the multiplication.
+
+      .. _onemkl_enum_offset:
 
       .. rubric:: offset
          :name: offset
@@ -180,6 +190,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``offset::R``
               -  ``offset::row``
               -  The offset to apply to the output matrix is a row offset, that is to say all the rows in the ``C_offset`` matrix are the same and given by the elements in the ``co`` array.
+
+      .. _onemkl_enum_index_base:
 
       .. rubric:: index_base
          :name: index_base
