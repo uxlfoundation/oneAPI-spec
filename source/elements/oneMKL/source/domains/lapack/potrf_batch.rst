@@ -3,157 +3,209 @@
 potrf_batch
 ===========
 
+Computes the LU factorizations of a batch of general matrices.
 
-.. container::
+.. _onemkl_lapack_potrf_batch_description:
 
+.. rubric:: Description
 
-   Computes the Cholesky factorizations of a batch of symmetric
-   (Hermitian) positive-definite matrices.
+:ref:`onemkl_lapack_potrf_batch` supports the following precisions.
 
+   .. list-table:: 
+      :header-rows: 1
 
-         ``potrf_batch`` supports the following precisions.
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+.. _onemkl_lapack_potrf_batch_buffer:
 
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The routine forms the Cholesky factorizations of a batch of
-      symmetric positive-definite or, for complex data, Hermitian
-      positive-definite matrices ``A``\ :sub:`1`, ``A``\ :sub:`2`, …,
-      ``A``\ :sub:`1batch_size`
-
-
-      ``A``\ :sub:`i` = ``U``\ :sub:`i`\ :sup:`T` \* ``U``\ :sub:`i` for
-      real data, If ``uplo[i] = onemkl::uplo::upper``
-
-
-      ``A``\ :sub:`i` = ``U``\ :sub:`i`\ :sup:`H` \* ``U``\ :sub:`i` for
-      complex data.
-
-
-      ``A``\ :sub:`i` = ``L``\ :sub:`i`\ :sup:`T` \* ``L``\ :sub:`i` for
-      real data, If ``uplo[i] = onemkl::uplo::lower``
-
-
-      ``A``\ :sub:`i` = ``L``\ :sub:`i`\ :sup:`H` \* ``L``\ :sub:`i` for
-      complex data.
-
-
-      Where ``L``\ :sub:`i` is a lower triangular matrix and
-      ``U``\ :sub:`i` is an upper triangular matrix.
-
-
-potrf_batch (BUFFER Version)
+potrf_batch (Buffer Version)
 ----------------------------
 
-.. container::
+.. rubric:: Description
 
-   .. container:: section
+The buffer version of :ref:`onemkl_lapack_potrf_batch` supports only the strided API. 
+   
+**Strided API**
 
+ | The routine forms the Cholesky factorizations of a symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
+ | :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data if ``uplo = mkl::uplo::upper``,
+ | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = mkl::uplo::lower``,
+ | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular.
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. rubric:: Syntax
 
+.. cpp:function::  void potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
-      .. container:: dlsyntaxpara
+.. container:: section
 
+   .. rubric:: Input Parameters
 
-         .. cpp:function::  void onemkl::lapack::potrf_batch(cl::sycl::queue &queue,         std::vector< onemkl::uplo > const& uplo, std::vector<std::int64_t>         const& n, std::vector<cl::sycl::buffer<T,1>> &a,         std::vector<std::int64_t> const& lda,         std::vector<cl::sycl::buffer<std::int64_t,1>> &info)
+queue
+  Device queue where calculations will be performed.
 
-   .. container:: section
+uplo
+   | Indicates whether the upper or lower triangular part of :math:`A_i` is stored and how :math:`A_i` is factored:
+   | If ``uplo = mkl::uplo::upper``, the array ``a`` stores the upper triangular parts of the matrices :math:`A_i`,
+   | If ``uplo = mkl::uplo::lower``, the array ``a`` stores the lower triangular parts of the matrices :math:`A_i`.
 
+n
+  Order of the matrices :math:`A_i`, (:math:`0 \le n`).
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+a
+  Array containing batch of input matrices :math:`A_i`, each of :math:`A_i` being of size :math:`lda \cdot n` and holding either upper or lower triangular parts of the matrices :math:`A_i` (see ``uplo``).
 
+lda
+  Leading dimension of :math:`A_i`.
 
-      queue
-         The queue where the routine should be executed.
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch.
 
+batch_size
+  Number of problems in a batch.
 
-      uplo
-         A vector, ``uplo[i]`` indicates whether the upper or lower
-         triangular part of the matrix ``A``\ :sub:`i` is stored and how
-         ``A``\ :sub:`i` is factored:
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_potrf_batch_scratchpad_size` function.
 
-         If ``uplo = onemkl::upper``, then buffer ``a[i]`` stores the upper
-         triangular part of ``A``\ :sub:`i` and the strictly lower
-         triangular part of the matrix is not referenced.
+.. container:: section
 
+   .. rubric:: Output Parameters
 
-         If ``uplo = onemkl::lower``, then buffer ``a[i]`` stores the lower
-         triangular part of ``A``\ :sub:`i` and the strictly upper
-         triangular part of the matrix is not referenced.
+a
+	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by ``uplo``.
 
+.. _onemkl_lapack_potrf_batch_usm:
 
-      n
-         A vector, ``n[i]`` is the number of columns of the batch matrix
-         ``A``\ :sub:`i`\ ``(0≤n[i])``.
+potrf_batch (USM Version)
+-------------------------
 
+.. rubric:: Description
 
-      a
-         A vector of buffers, ``a[i]`` stores the matrix
-         ``A``\ :sub:`i`. ``a[i]`` must be of size at least
-         ``lda[i]*max(1, n[i])``.
+The USM version of :ref:`onemkl_lapack_potrf_batch` supports the group API and strided API. 
 
+**Group API**
 
-      lda
-         A vector, ``lda[i]`` is the leading dimension of
-         ``a[i] (n[i]≤lda[i])``.
+ | The routine forms the Cholesky factorizations of symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
+ | :math:`A_i = U_i^TU_i` for real data (:math:`A_i = U_i^HU_i` for complex), if :math:`uplo_g` is ``mkl::uplo::upper``,
+ | :math:`A_i = L_iL_i^T` for real data (:math:`A_i = L_iL_i^H` for complex), if :math:`uplo_g` is ``mkl::uplo::lower``,
+ | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular, :math:`g` is an index of group of parameters corresponding to :math:`A_i`, and total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array
 
+.. rubric:: Syntax
 
-   .. container:: section
+.. cpp:function::  cl::sycl::event potrf_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-      .. rubric:: Output Parameters
-         :class: sectiontitle
+   .. rubric:: Input Parameters
 
+queue
+  Device queue where calculations will be performed.
 
-      a
-         ``a[i]`` is overwritten by the Cholesky factor ``U``\ :sub:`i`
-         or ``L``\ :sub:`i`, as specified by ``uplo[i]`` .
+uplo
+  | Array of ``group_count`` :math:`uplo_g` parameters. Each :math:`uplo_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
+  | If :math:`uplo_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+  | If :math:`uplo_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
+n
+  Array of ``group_count`` :math:`n_g` parameters. Each :math:`n_g` specifies the order of the input matrices from array a belonging to group :math:`g`.
 
-      info
-         Vector of buffers containing error information.
+a
+  Array of ``batch_size`` pointers to input matrices :math:`A_i`, each being of size :math:`lda_g \cdot n_g` (:math:`g` is an index of group to which :math:`A_i` belongs to) and holding either upper or lower triangular part as specified by :math:`uplo_g`.
 
+lda
+  Array of ``group_count`` :math:`lda_g` parameters. Each :math:`lda_g` specifies the leading dimensions of the matrices from a belonging to group :math:`g`.
 
-         If ``info[i]=0``, the execution is successful.
+group_count
+  Number of groups of parameters. Must be at least 0.
 
+group_sizes
+  Array of group_count integers. Array element with index :math:`g` specifies the number of problems to solve for each of the groups of parameters :math:`g`. So the total number of problems to solve, ``batch_size``, is a sum of all parameter group sizes.
 
-         If ``info[i]=k``, the leading minor of order ``k`` (and
-         therefore the matrix ``A``\ :sub:`i` itself) is not
-         positive-definite, and the factorization could not be
-         completed. This may indicate an error in forming the matrix
-         ``A``\ :sub:`i`.
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Group API of the :ref:`onemkl_lapack_potrf_batch_scratchpad_size` function.
 
-         If ``info[i]=-k``, the ``k``-th parameter had an illegal value.
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
+.. container:: section
 
-.. container:: familylinks
+   .. rubric:: Output Parameters
 
+a
+	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by :math:`uplo_g` from corresponding group of parameters.
 
-   .. container:: parentlink
+.. container:: section
+   
+   .. rubric:: Return Values
 
+Output event to wait on to ensure computation is complete.
 
-      **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines` 
+**Strided API**
 
+ | The routine forms the Cholesky factorizations of a symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
+ | :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data if ``uplo = mkl::uplo::upper``,
+ | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = mkl::uplo::lower``,
+ | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular.
+
+.. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+queue
+  Device queue where calculations will be performed.
+
+uplo
+   | Indicates whether the upper or lower triangular part of :math:`A_i` is stored and how :math:`A_i` is factored:
+   | If ``uplo = mkl::uplo::upper``, the array ``a`` stores the upper triangular parts of the matrices :math:`A_i`,
+   | If ``uplo = mkl::uplo::lower``, the array ``a`` stores the lower triangular parts of the matrices :math:`A_i`.
+
+n
+  Order of the matrices :math:`A_i`, (:math:`0 \le n`).
+
+a
+  Array containing batch of input matrices :math:`A_i`, each of :math:`A_i` being of size :math:`lda \cdot n` and holding either upper or lower triangular parts of the matrices :math:`A_i` (see ``uplo``).
+
+lda
+  Leading dimension of :math:`A_i`.
+
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch.
+
+batch_size
+  Number of problems in a batch.
+
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
+
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_potrf_batch_scratchpad_size` function.
+
+events
+  List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+a
+	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by ``uplo``.
+
+.. container:: section
+   
+   .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
 

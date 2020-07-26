@@ -3,139 +3,209 @@
 getrf_batch
 ===========
 
+Computes the LU factorizations of a batch of general matrices.
 
-.. container::
+.. _onemkl_lapack_getrf_batch_description:
 
+.. rubric:: Description
 
-   Computes the LU factorizations of a batch of general matrices.
+:ref:`onemkl_lapack_getrf_batch` supports the following precisions.
 
+   .. list-table:: 
+      :header-rows: 1
 
-         ``getrf_batch`` supports the following precisions.
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+.. _onemkl_lapack_getrf_batch_buffer:
 
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The routine computes the LU factorizations of a batch of general
-      ``m``-by-``n`` matrices ``A``\ :sub:`1`, ``A``\ :sub:`2`, …,
-      ``A``\ :sub:`1batch_size` as
-
-
-      |image0|
-
-
-      Where ``P``\ :sub:`i` is a permutation matrix, ``L``\ :sub:`i` is
-      lower triangular with unit diagonal elements (lower trapezoidal if
-      ``m > n``) and ``U`` is upper triangular (upper trapezoidal if
-      ``m < n``). The routine uses partial pivoting with row
-      interchanges.
-
-
-getrf_batch (BUFFER Version)
+getrf_batch (Buffer Version)
 ----------------------------
 
-.. container::
+.. rubric:: Description
 
-   .. container:: section
+The buffer version of :ref:`onemkl_lapack_getrf_batch` supports only the strided API. 
 
+**Strided API**
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The routine computes the LU factorizations of general :math:`m \times n` matrices :math:`A_i` as :math:`A_i = P_iL_iU_i`, where :math:`P_i` is a permutation matrix, :math:`L_i` is lower triangular with unit diagonal elements (lower trapezoidal if :math:`m > n`) and :math:`U_i` is upper triangular (upper trapezoidal if :math:`m < n`). The routine uses partial pivoting, with row interchanges.
 
+.. rubric:: Syntax
 
-      .. container:: dlsyntaxpara
+.. cpp:function::  void getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
+.. container:: section
 
-         .. cpp:function::  void onemkl::lapack::getrf_batch(cl::sycl::queue &queue,         std::vector<std::int64_t> const& m, std::vector<std::int64_t>         const& n, std::vector<cl::sycl::buffer<T,1>> &a,         std::vector<std::int64_t> const& lda,         std::vector<cl::sycl::buffer<std::int64_t,1>> &ipiv,         std::vector<cl::sycl::buffer<std::int64_t,1>> &info)
+   .. rubric:: Input Parameters
 
-   .. container:: section
+queue
+  Device queue where calculations will be performed.
 
+m
+  Number of rows in matrices :math:`A_i` (:math:`0 \le m`).
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+n
+  Number of columns in matrices :math:`A_i` (:math:`0 \le n`).
 
+a
+  Array holding input matrices :math:`A_i`.
 
-      queue
-         The queue where the routine should be executed.
+lda
+  Leading dimension of matrices :math:`A_i`.
 
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
-      m
-         A vector, ``m[i]`` is the number of rows of the batch matrix
-         ``A``\ :sub:`i`\ ``(0≤m[i])``.
+stride_ipiv
+  Stride between the beginnings of arrays :math:`ipiv_i` inside the array ``ipiv``.
 
+batch_size
+  Number of problems in a batch.
 
-      n
-         A vector, ``n[i]`` is the number of columns of the batch matrix
-         ``A``\ :sub:`i`\ ``(0≤n[i])``.
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less than the value returned by the Strided API of the :ref:`onemkl_lapack_getrf_batch_scratchpad_size` function.
 
-      a
-         A vector of buffers, ``a[i]`` contains the matrix
-         ``A``\ :sub:`i`. ``a[i]`` must be of size at least
-         ``lda[i]*max(1, n[i])``.
+.. container:: section
 
+   .. rubric:: Output Parameters
 
-      lda
-         A vector, ``lda[i]`` is the leading dimension of
-         ``a[i] (m[i]≤lda[i])``.
+a
+  :math:`L_i` and :math:`U_i`. The unit diagonal elements of :math:`L_i` are not stored.
 
+ipiv
+  Array containing batch of the pivot indices :math:`ipiv_i` each of size at least :math:`\max(1,\min(m,n))`; for :math:`1 \le k \le \min(m,n)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`ipiv_i(k)`.
 
-   .. container:: section
+.. _onemkl_lapack_getrf_batch_usm:
 
+getrf_batch (USM Version)
+-------------------------
 
-      .. rubric:: Output Parameters
-         :class: sectiontitle
+.. rubric:: Description
 
+The USM version of :ref:`onemkl_lapack_getrf_batch` supports the group API and strided API. 
 
-      a
-         ``a[i]`` is overwritten by ``L``\ :sub:`i` and ``U``\ :sub:`i`.
-         The unit diagonal elements of ``L``\ :sub:`i` are not stored.
+**Group API**
 
+The routine computes the batch of LU factorizations of general :math:`m \times n` matrices :math:`A_i` (:math:`i \in \{1...batch\_size\}`) as :math:`A_i = P_iL_iU_i`, where :math:`P_i` is a permutation matrix, :math:`L_i` is lower triangular with unit diagonal elements (lower trapezoidal if :math:`m > n`) and :math:`U_i` is upper triangular (upper trapezoidal if :math:`m < n`). The routine uses partial pivoting, with row interchanges. Total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array.
 
-      ipiv
-         A vector of buffers, ``ipiv[i]`` stores the pivot indices. The
-         dimension of ``ipiv[i]`` must be at least ``min(m[i], n[i])``.
+.. rubric:: Syntax
 
+.. cpp:function::  cl::sycl::event getrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t **ipiv, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
-      info
-         Vector of buffers containing error information.
+.. container:: section
 
+   .. rubric:: Input Parameters
 
-         If ``info[i]=0``, the execution is successful.
+queue
+  Device queue where calculations will be performed.
 
+m
+  Array of ``group_count`` parameters :math:`m_g` specifying the number of rows in matrices :math:`A_i` (:math:`0 \le m_g`) belonging to group :math:`g`.
 
-         If ``info[i]=k``, ``Ui(k,k)`` is ``0``. The factorization has
-         been completed, but ``U``\ :sub:`i` is exactly singular.
-         Division by ``0`` will occur if you use the factor
-         ``U``\ :sub:`i` for solving a system of linear equations.
+n
+  Array of ``group_count`` parameters :math:`n_g` specifying the number of columns in matrices :math:`A_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
 
+a
+  Array holding ``batch_size`` pointers to input matrices :math:`A_i`.
 
-.. container:: familylinks
+lda
+  Array of ``group_count`` parameters :math:`lda_g` specifying the leading dimensions of :math:`A_i` belonging to group :math:`g`.
 
+group_count
+  Number of groups of parameters. Must be at least 0.
 
-   .. container:: parentlink
+group_sizes
+  Array of group_count integers. Array element with index :math:`g` specifies the number of problems to solve for each of the groups of parameters :math:`g`. So the total number of problems to solve, ``batch_size``, is a sum of all parameter group sizes.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
-      **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines` 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Group API of the :ref:`onemkl_lapack_getrf_batch_scratchpad_size` function.
 
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
+.. container:: section
 
-.. |image0| image:: ../equations/GUID-0F47CAD3-006C-4A78-B229-413313667ee1.png
-   :class: img-middle
+   .. rubric:: Output Parameters
+
+a
+  :math:`L_i` and :math:`U_i`. The unit diagonal elements of :math:`L_i` are not stored.
+
+ipiv
+  Arrays of batch_size pointers to arrays containing pivot indices :math:`ipiv_i` each of size at least :math:`\max(1,\min(m_g,n_g))`; for :math:`1 \le k \le \min(m_g,n_g)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`ipiv_i(k)`.
+
+.. container:: section
+   
+   .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Strided API**
+
+The routine computes the LU factorizations of general :math:`m \times n` matrices :math:`A_i` as :math:`A_i = P_iL_iU_i`, where :math:`P_i` is a permutation matrix, :math:`L_i` is lower triangular with unit diagonal elements (lower trapezoidal if :math:`m > n`) and :math:`U_i` is upper triangular (upper trapezoidal if :math:`m < n`). The routine uses partial pivoting, with row interchanges.
+
+.. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+queue
+  Device queue where calculations will be performed.
+
+m
+  Number of rows in matrices :math:`A_i` (:math:`0 \le m`).
+
+n
+  Number of columns in matrices :math:`A_i` (:math:`0 \le n`).
+
+a
+  Array holding input matrices :math:`A_i`.
+
+lda
+  Leading dimension of matrices :math:`A_i`.
+
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
+
+stride_ipiv
+  Stride between the beginnings of arrays ipivi inside the array ipiv.
+
+batch_size
+  Number of problems in a batch.
+
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
+
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_getrf_batch_scratchpad_size` function.
+
+events
+  List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+a
+  :math:`L_i` and :math:`U_i`. The unit diagonal elements of :math:`L_i` are not stored.
+
+ipiv
+  Array containing batch of the pivot indices :math:`ipiv_i` each of size at least :math:`\max(1,\min(m,n))`; for :math:`1 \le k \le \min(m,n)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`ipiv_i(k)`.
+
+.. container:: section
+   
+   .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
 
