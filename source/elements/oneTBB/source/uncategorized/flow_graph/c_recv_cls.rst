@@ -39,7 +39,7 @@ This type of node is triggered when its method
 ``try_put`` has been called a number of times that is
 equal to the number of known predecessors. When triggered, the node calls the
 method 
-``execute,`` then resets and will fire again when it
+``execute,`` then resets and fires again when it
 receives the correct number of 
 ``try_put`` calls. This node type is useful for
 dependency graphs, where each node must wait for its predecessors to complete
@@ -134,7 +134,7 @@ members of this class.
      ``execute`` is not called if the count of 
      ``try_put`` calls received becomes equal to
      the number of known predecessors as a result of this call. That is, a call to 
-     ``remove_predecessor`` will never call 
+     ``remove_predecessor`` never calls 
      ``execute``.
   
 ------------------------------------------------------------------------------------------

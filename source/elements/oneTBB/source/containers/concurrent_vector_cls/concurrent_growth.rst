@@ -17,7 +17,7 @@ grow_by
 
     **Returns**: iterator to the beginning of the appended sequence.
 
-    **Requirements**: the type ``value_type`` shall meet the ``DefaultConstructible`` and ``EmplaceConstructible`` requirements
+    **Requirements**: the type ``value_type`` must meet the ``DefaultConstructible`` and ``EmplaceConstructible`` requirements
     from [defaultconstructible] and [container.requirements] ISO C++ sections.
 
 ---------------------------------------------
@@ -30,8 +30,8 @@ grow_by
 
     **Returns**: iterator to the beginning of the appended sequence.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from
+    the [container.requirements] ISO C++ Standard section.
 
 ---------------------------------------------
 
@@ -45,8 +45,8 @@ grow_by
 
     **Returns**: iterator to the beginning of the appended sequence.
 
-    This overload only participates in overload resolution if the type ``InputIterator``
-    meets the requirements of `InputIterator` from [input.iterators] ISO C++ Standard section.
+    This overload participates in overload resolution only if the type ``InputIterator``
+    meets the requirements of `InputIterator` from the [input.iterators] ISO C++ Standard section.
 
 ---------------------------------------------
 
@@ -67,7 +67,7 @@ grow_to_at_least
 
     **Returns**: iterator to the beginning of the appended sequence.
 
-    **Requirements**: the type ``value_type`` shall meet the ``DefaultConstructible`` and ``EmplaceConstructible`` requirements
+    **Requirements**: the type ``value_type`` must meet the ``DefaultConstructible`` and ``EmplaceConstructible`` requirements
     from [defaultconstructible] and [container.requirements] ISO C++ sections.
 
 ---------------------------------------------
@@ -80,7 +80,7 @@ grow_to_at_least
 
     **Returns**: iterator to the beginning of the appended sequence.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 push_back
@@ -94,7 +94,7 @@ push_back
 
     **Returns**: iterator to the appended element.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 ---------------------------------------------
@@ -109,7 +109,7 @@ push_back
 
     **Returns**: iterator to the appended element.
 
-    **Requirements**: the type ``value_type`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 emplace_back
@@ -124,5 +124,5 @@ emplace_back
 
     **Returns**: iterator to the appended element.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ section.
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements
+    from the [container.requirements] ISO C++ section.

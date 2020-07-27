@@ -3,7 +3,7 @@ C Interface to Scalable Allocator
 =================================
 **[memory_allocation.scalable_alloc_c_interface]**
 
-Low level interface for scalable memory allocation.
+Low-level interface for scalable memory allocation.
 
 .. code:: cpp
 
@@ -61,12 +61,12 @@ Low level interface for scalable memory allocation.
         int scalable_allocation_command(int cmd, void *param);
     }
 
-These functions provide a C level interface to the scalable allocator.
+These functions provide a C-level interface to the scalable allocator.
 With the exception of ``scalable_allocation_mode`` and ``scalable_allocation_command``, each routine ``scalable_x``
-behaves analogously to library function ``x``. The routines form the two families shown in
+behaves analogously to the library function ``x``. The routines form the two families shown in
 the table below, "C Interface to Scalable Allocator".
 Storage allocated by a ``scalable_x`` function in one family must be freed or
-resized by a ``scalable_x`` function in the same family, not by a C standard library function. Likewise storage allocated by a C
+resized by the ``scalable_x`` function in the same family, not by a C standard library function. Likewise, storage allocated by a C
 standard library function should not be freed or resized by a ``scalable_x`` function.
 
 .. table:: C Interface to Scalable Allocator
@@ -88,7 +88,7 @@ standard library function should not be freed or resized by a ``scalable_x`` fun
    +--------------------------+-----------------------+-------------------------------+
 
 The following functions do not allocate or free memory but allow
-to obtain useful information or to influence behavior of the memory allocator.
+obtaining useful information or influencing behavior of the memory allocator.
 
 .. cpp:function:: size_t scalable_msize( void* ptr )
 
@@ -98,7 +98,7 @@ to obtain useful information or to influence behavior of the memory allocator.
 
 .. cpp:function:: int scalable_allocation_mode(int mode, intptr_t value)
 
-    This function may be used to adjust behavior of the scalable memory allocator.
+    Use this function to adjust behavior of the scalable memory allocator.
 
     **Returns**: TBBMALLOC_OK if the operation succeeded, TBBMALLOC_INVALID_PARAM if
     ``mode`` is not one of the described below, or if ``value``
@@ -125,15 +125,15 @@ to obtain useful information or to influence behavior of the memory allocator.
 .. c:macro:: TBBMALLOC_SET_SOFT_HEAP_LIMIT
 
     ``scalable_allocation_mode(TBBMALLOC_SET_SOFT_HEAP_LIMIT, size)`` sets a threshold of ``size`` bytes on the amount
-    of memory the allocator takes from OS. Exceeding the threshold will urge the allocator to release memory from its internal buffers;
+    of memory the allocator takes from OS. Exceeding the threshold urges the allocator to release memory from its internal buffers;
     however it does not prevent from requesting more memory if needed.
 
 .. c:macro:: TBBMALLOC_SET_HUGE_SIZE_THRESHOLD
 
     ``scalable_allocation_mode(TBBMALLOC_SET_HUGE_SIZE_THRESHOLD, size)``
     sets a lower bound threshold (with no upper limit) of ``size`` bytes.
-    Any object that is bigger than this threshold becomes huge and doesn't participate in internal periodic cleanup logic.
-    However, it doesn't affect the logic of ``TBBMALLOC_SET_SOFT_HEAP_LIMIT`` mode as well as ``TBBMALLOC_CLEAN_ALL_BUFFERS`` operation.
+    Any object bigger than this threshold becomes huge and does not participate in internal periodic cleanup logic.
+    However, it does not affect the logic of the ``TBBMALLOC_SET_SOFT_HEAP_LIMIT`` mode as well as the ``TBBMALLOC_CLEAN_ALL_BUFFERS`` operation.
 
     Setting ``TBB_MALLOC_SET_HUGE_SIZE_THRESHOLD`` environment variable to the size value has the same effect, but is limited to the ``LONG_MAX`` value.
     The mode set with ``scalable_allocation_mode`` takes priority over the environment variable.
@@ -168,7 +168,7 @@ to obtain useful information or to influence behavior of the memory allocator.
 .. c:macro:: TBBMALLOC_CLEAN_THREAD_BUFFERS
 
     ``scalable_allocation_command(TBBMALLOC_CLEAN_THREAD_BUFFERS, 0)``
-    cleans internal memory buffers but only for the calling thread.
+    cleans internal memory buffers, but only for the calling thread.
 
     **May return**: ``TBBMALLOC_NO_EFFECT`` if no buffers were released.
 

@@ -34,14 +34,14 @@ value that can be one of several defined types.
 
 Requirements:
 
-* All types in ``TN`` template parameter pack shall meet the
+* All types in ``TN`` template parameter pack must meet the
   `CopyConstructible` requirements from [copyconstructible] ISO C++ Standard
   section.
-* The type `TagType` shall be an integral unsigned type.
+* The type `TagType` must be an integral unsigned type.
 
-The ``tagged_msg`` class template is intended for messages whose type is determined at run time.
-A message of one of the types ``TN`` is tagged with a tag of type ``TagType``. The tag then may
-serve to identify the message. In the flow graph ``tagged_msg`` is used as the output of
+The ``tagged_msg`` class template is intended for messages whose type is determined at runtime.
+A message of one of the types ``TN`` is tagged with a tag of type ``TagType``. The tag then can
+serve to identify the message. In the flow graph, ``tagged_msg`` is used as the output of
 :doc:`indexer_node <indexer_node_cls>`.
 
 Member functions
@@ -52,8 +52,8 @@ Member functions
 
     Requirements:
 
-    * The type `R` shall be the same as one of the ``TN`` types.
-    * The type `T` shall be acceptable as a ``TagType`` constructor parameter.
+    * The type `R` must be the same as one of the ``TN`` types.
+    * The type `T` must be acceptable as a ``TagType`` constructor parameter.
 
     Constructs a ``tagged_msg`` with tag ``index`` and value ``val``.
 
@@ -66,9 +66,9 @@ Member functions
 
     Requirements:
 
-    * The type ``V`` shall be the same as one of the ``TN`` types.
+    * The type ``V`` must be the same as one of the ``TN`` types.
 
-    Returns the value stored in the ``tagged_msg``. If the value is not of type ``V`` an
+    Returns the value stored in ``tagged_msg``. If the value is not of type ``V``, the
     ``std::runtime_error`` exception is thrown.
 
 .. cpp:function:: template<typename V> \
@@ -76,9 +76,9 @@ Member functions
 
     Requirements:
 
-    * The type ``V`` shall be the same as one of the ``TN`` types.
+    * The type ``V`` must be the same as one of the ``TN`` types.
 
-    Returns true if ``V`` is the type of the value held by the ``tagged_msg``.  Returns false otherwise.
+    Returns true if ``V`` is the type of the value held by the ``tagged_msg``.  Returns false, otherwise.
 
 Non-member functions
 --------------------
@@ -95,8 +95,8 @@ Non-member functions
 
 Requirements:
 
-* The type ``T`` shall be an instantiated ``tagged_msg`` class template.
-* The type ``V`` shall be the same as one of the corresponding template arguments for ``tagged_msg``.
+* The type ``T`` must be an instantiated ``tagged_msg`` class template.
+* The type ``V`` must be the same as one of the corresponding template arguments for ``tagged_msg``.
 
 The free-standing template functions ``cast_to`` and  ``is_a`` applied to a ``tagged_msg`` object
 are equivalent to the calls of the corresponding methods of that object.

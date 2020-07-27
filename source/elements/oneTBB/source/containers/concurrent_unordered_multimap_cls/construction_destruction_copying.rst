@@ -33,7 +33,7 @@ Empty container constructors
     Constructs an empty ``concurrent_unordered_multimap`` with ``bucket_count`` buckets.
 
     If provided uses the hash function ``hasher``, predicate ``equal`` to compare ``key_type``
-    objects for equality and the allocator ``alloc`` to allocate the memory.
+    objects for equality, and the allocator ``alloc`` to allocate the memory.
 
 Constructors from the sequence of elements
 ------------------------------------------
@@ -56,14 +56,14 @@ Constructors from the sequence of elements
                                        size_type bucket_count, const hasher& hash,
                                        const allocator_type& alloc );
 
-    Constructs the ``concurrent_unordered_multimap`` which contains all elements from the half-open
+    Constructs the ``concurrent_unordered_multimap`` that contains all elements from the half-open
     interval ``[first, last)```.
 
-    If provided uses the hash function ``hasher``, predicate ``equal`` to compare ``key_type``
+    If provided, uses the hash function ``hasher``, predicate ``equal`` to compare ``key_type``
     objects for equality and the allocator ``alloc`` to allocate the memory.
 
-    **Requirements**: the type ``InputIterator`` shall meet the requirements of ``InputIterator``
-    from [input.iterators] ISO C++ Standard section.
+    **Requirements**: the type ``InputIterator`` must meet the requirements of ``InputIterator``
+    from the [input.iterators] ISO C++ Standard section.
 
 ---------------------------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ Assignment operators
 
     Replaces all elements in ``*this`` by the copies of the elements in ``other``.
 
-    Copy assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
+    Copy-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
@@ -167,7 +167,7 @@ Assignment operators
 
     ``other`` is left in a valid, but unspecified state.
 
-    Move assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
+    Move-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.

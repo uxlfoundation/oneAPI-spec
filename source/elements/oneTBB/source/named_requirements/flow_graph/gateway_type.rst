@@ -3,7 +3,7 @@ GatewayType
 ===========
 **[req.gateway_type]**
 
-A type `T` satisfies the `GatewayType` if it meets the following requirements:
+A type `T` satisfies `GatewayType` if it meets the following requirements:
 
 ------------------------------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ A type `T` satisfies the `GatewayType` if it meets the following requirements:
 
 .. cpp:function:: bool T::try_put( const Output &v )
 
-    **Requirements:** The type ``Output`` must be the same as template type argument ``Output`` of the
+    **Requirements:** The type ``Output`` must be the same as the template type argument ``Output`` of the
     corresponding ``async_node`` instance.
 
     Broadcasts ``v`` to all successors of the corresponding ``async_node`` instance.

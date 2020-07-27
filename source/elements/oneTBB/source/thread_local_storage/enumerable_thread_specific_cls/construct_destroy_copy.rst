@@ -33,7 +33,7 @@ Constructs an ``enumerable_thread_specific`` where each thread-local element wil
     explicit enumerable_thread_specific( T&& exemplar );
 
 Constructs an ``enumerable_thread_specific`` object, move constructor of ``T`` can be used to store ``exemplar``
-internally, however thread-local elements are always copy-constructed.
+internally; however, thread-local elements are always copy-constructed.
 
 .. code:: cpp
 

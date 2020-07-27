@@ -6,7 +6,7 @@ All member functions in this section can be performed concurrently with each oth
 concurrent growth methods and while traversing the container.
 
 In case of concurrent growth, the element returned by the access method
-can refer to the element, which is under construction of the other thread.
+can refer to the element that is under construction of the other thread.
 
 Access by index
 ---------------

@@ -4,7 +4,7 @@ join_node Policies
 **[flow_graph.join_node_policies]**
 
 ``join_node`` supports three buffering policies at its input ports: ``reserving``,
-``queueing`` and ``key_matching``.
+``queueing``, and ``key_matching``.
 
 .. code:: cpp
 
@@ -30,7 +30,7 @@ join_node Policies
   remain in their respective input port queues.
 * ``reserving`` - As each input port is put to, the ``join_node`` marks that an input may be
   available at that port and returns ``false``. When all ports have been marked as
-  possibly available, the ``join_node`` will try to reserve a message at
+  possibly available, the ``join_node`` tries to reserve a message at
   each port from their known predecessors. If it is unable to reserve a message
   at a port, it unmarks that port, and releases all previously acquired
   reservations. If it is able to reserve a message at all ports, it broadcasts a

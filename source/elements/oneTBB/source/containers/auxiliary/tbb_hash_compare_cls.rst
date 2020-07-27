@@ -3,7 +3,7 @@ tbb_hash_compare
 ================
 **[containers.tbb_hash_compare]**
 
-``tbb::tbb_hash_compare`` is a class template for hash support. It is used with the ``tbb::concurrent_hash_map``
+``tbb::tbb_hash_compare`` is a class template for hash support. Use it with the ``tbb::concurrent_hash_map``
 associative container to calculate hash codes and compare keys for equality.
 
 ``tbb_hash_compare`` meets the :doc:`HashCompare requirements <../../named_requirements/containers/hash_compare>`.
@@ -42,4 +42,4 @@ Member functions
 
 Equivalent to ``k1 == k2``.
 
-**Returns**: ``true`` if the keys are equal, ``false`` otherwise.
+**Returns**: ``true`` if the keys are equal; ``false``, otherwise.

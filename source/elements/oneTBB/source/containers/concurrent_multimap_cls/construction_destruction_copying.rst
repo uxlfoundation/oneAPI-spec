@@ -14,9 +14,9 @@ Empty container constructors
 
         explicit concurrent_multimap( const allocator_type& alloc );
 
-    Constructs empty ``concurrent_multimap``.
+    Constructs an empty ``concurrent_multimap``.
 
-    If provided uses the comparison function object ``comp`` for all ``key_type``
+    If provided, uses the comparison function object ``comp`` for all ``key_type``
     comparisons and the allocator ``alloc`` to allocate the memory.
 
 Constructors from the sequence of elements
@@ -33,11 +33,11 @@ Constructors from the sequence of elements
         concurrent_multimap( InputIterator first, InputIterator last,
                         const allocator_type& alloc = allocator_type() );
 
-    Constructs the ``concurrent_multimap`` which contains all elements from the half-open interval ``[first, last)``.
+    Constructs the ``concurrent_multimap``, which contains all elements from the half-open interval ``[first, last)``.
 
-    If provided uses the comparison function object ``comp`` for all ``key_type`` comparisons and the allocator ``alloc`` to allocate the memory.
+    If provided, uses the comparison function object ``comp`` for all ``key_type`` comparisons and the allocator ``alloc`` to allocate the memory.
 
-    **Requirements**: the type ``InputIterator`` shall meet the requirements of `InputIterator` from ``[input.iterators]`` ISO C++ Standard section.
+    **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator` from ``[input.iterators]`` ISO C++ Standard section.
 
 ------------------------------------------------------
 
@@ -111,7 +111,7 @@ Assignment operators
 
     Replaces all elements in ``*this`` by the copies of the elements in ``other``.
 
-    Copy assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
+    Copy-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.

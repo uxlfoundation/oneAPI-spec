@@ -3,7 +3,7 @@ blocked_range2d
 ===============
 **[algorithms.blocked_range2d]**
 
-Class template that represents recursively divisible two-dimensional half-open interval.
+Class template that represents a recursively divisible two-dimensional half-open interval.
 
 A ``blocked_range2d`` represents a half-open two-dimensional range ``[i0,j0)×[i1,j1)``.
 Each axis of the range has its own splitting threshold.
@@ -49,7 +49,7 @@ A ``blocked_range2d`` meets the :doc:`Range requirements <../../named_requiremen
 
 Requirements:
 
-* The *RowValue* and *ColValue* shall meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
+* The *RowValue* and *ColValue* must meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
 
 Member types
 ------------
@@ -102,7 +102,7 @@ Basic splitting constructor.
 
 **Effects**: Partitions range into two subranges. The newly constructed ``blocked_range2d`` is
 approximately the second half of the original ``range``, and ``range`` is updated to
-be the remainder. Each subrange has the same grain size as the original ``range``. The split is
+be the remainder. Each subrange has the same grain size as the original ``range``. Splitting is done
 either by rows or columns. The choice of which axis to split is intended to cause, after repeated splitting, the
 subranges to approach the aspect ratio of the respective row and column grain sizes.
 

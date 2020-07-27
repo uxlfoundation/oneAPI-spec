@@ -3,7 +3,7 @@ SuspendFunc
 ===========
 **[req.suspend_func]**
 
-A type `Func` satisfies the `SuspendFunc` if it meets the following requirements:
+A type `Func` satisfies `SuspendFunc` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 

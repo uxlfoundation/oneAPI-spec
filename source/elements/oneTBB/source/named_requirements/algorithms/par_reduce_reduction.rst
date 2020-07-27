@@ -3,7 +3,7 @@ ParallelReduceReduction
 =======================
 **[req.parallel_reduce_reduction]**
 
-A type `Reduction` satisfies the `ParallelReduceReduction` if it meets the following requirements:
+A type `Reduction` satisfies `ParallelReduceReduction` if it meets the following requirements:
 
 -----------------------------------------------------------------------------------------------------
 
@@ -11,8 +11,8 @@ A type `Reduction` satisfies the `ParallelReduceReduction` if it meets the follo
 
 .. cpp:function:: Value Reduction::operator()(const Value& x, const Value& y) const
 
-    Combine results ``x`` and ``y``.
-    ``Value`` type must be the same as a corresponding template parameter for
+    Combines results ``x`` and ``y``.
+    ``Value`` type must be the same as a corresponding template parameter for the 
     :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>` algorithm.
 
 See also:

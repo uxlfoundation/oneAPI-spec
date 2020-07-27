@@ -45,8 +45,8 @@ Constructors from the sequence of elements
     Constructs a ``concurrent_vector`` contains all elements from the half-open interval ``[first, last)``
     using the allocator ``alloc``.
 
-    **Requirements**: the type ``InputIterator`` shall meet the requirements of ``InputIterator``
-    from [input.iterators] ISO C++ Standard section.
+    **Requirements**: the type ``InputIterator`` must meet the requirements of ``InputIterator``
+    from the [input.iterators] ISO C++ Standard section.
 
 ---------------------------------------------
 
@@ -113,7 +113,7 @@ Assignment operators
 
     Replaces all elements in ``*this`` by the copies of the elements in ``other``.
 
-    Copy assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
+    Copy-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
@@ -175,7 +175,7 @@ assign
     Replaces all elements in ``*this`` by the elements from the half-open interval ``[first, last)``.
 
     This overload only participates in overload resolution if the type ``InputIterator``
-    meets the requirements of `InputIterator` from [input.iterators] ISO C++ Standard section.
+    meets the requirements of `InputIterator` from the [input.iterators] ISO C++ Standard section.
 
 ---------------------------------------------
 

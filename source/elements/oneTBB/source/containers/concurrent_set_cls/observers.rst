@@ -27,5 +27,5 @@ value_comp
 
         value_compare value_comp() const;
 
-    **Returns**: an object of the ``value_compare`` class which is used to compare
+    **Returns**: an object of the ``value_compare`` class that is used to compare
     ``value_type`` objects.

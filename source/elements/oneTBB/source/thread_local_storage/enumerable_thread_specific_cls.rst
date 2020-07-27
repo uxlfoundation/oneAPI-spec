@@ -3,7 +3,7 @@ enumerable_thread_specific
 ==========================
 **[tls.enumerable_thread_specific]**
 
-A class template for thread local storage.
+A class template for thread local storage (TLS).
 
 .. code:: cpp
 
@@ -95,7 +95,7 @@ A class template for thread local storage.
 
     } // namespace tbb
 
-A class template ``enumerable_thread_specific`` provides thread local storage (TLS) for elements of type ``T``.
+A class template ``enumerable_thread_specific`` provides TLS for elements of type ``T``.
 A class template ``enumerable_thread_specific`` acts as a container by providing iterators and ranges across all of the thread-local elements.
 
 The thread-local elements are created lazily. A freshly constructed ``enumerable_thread_specific`` has no elements.
@@ -103,7 +103,7 @@ When a thread requests access to an ``enumerable_thread_specific``, it creates a
 The number of elements is equal to the number of distinct threads that have accessed the ``enumerable_thread_specific``
 and not necessarily the number of threads in use by the application. Clearing an ``enumerable_thread_specific`` removes all its elements.
 
-The ``ETS_key_usage_type`` parameter type can be used to select an underlying implementation.
+Use the ``ETS_key_usage_type`` parameter type to select an underlying implementation.
 
 .. caution::
 
@@ -142,7 +142,7 @@ If no ``ETS_key_usage_type`` parameter type is provided, ``ets_no_key`` is used 
 
 .. cpp:enum:: ets_key_usage_type::ets_suspend_aware
 
-``tbb::task::suspend`` function can change the value of ``enumerable_thread_specific`` object. In order to avoid this problem,
-``ets_suspend_aware`` enumeration parameter type should be used.
+The ``tbb::task::suspend`` function can change the value of the ``enumerable_thread_specific`` object. To avoid this problem,
+use the ``ets_suspend_aware`` enumeration parameter type.
 The ``local()`` value can be the same for different threads, but no two distinct threads can access the same value simultaneously.
 

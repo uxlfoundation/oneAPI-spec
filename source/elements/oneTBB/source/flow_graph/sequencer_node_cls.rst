@@ -3,7 +3,7 @@ sequencer_node
 ==============
 **[flow_graph.sequencer_node]**
 
-A node that forwards messages in sequence order by maintaining an internal buffer.
+A node that forwards messages in a sequence order by maintaining an internal buffer.
 
 .. code:: cpp
 
@@ -28,18 +28,18 @@ A node that forwards messages in sequence order by maintaining an internal buffe
 
 Requirements:
 
-* The type ``T`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
+* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
-* The type ``Sequencer`` shall meet the :doc:`Sequencer requirements <../named_requirements/flow_graph/sequencer>`
-  If ``Sequencer`` instance throws an exception, then behavior is undefined.
+* The type ``Sequencer`` must meet the :doc:`Sequencer requirements <../named_requirements/flow_graph/sequencer>`
+  If ``Sequencer`` instance throws an exception, behavior is undefined.
 
-``sequencer_node`` forwards messages in sequence order to a single successor in its successor set.
+``sequencer_node`` forwards messages in a sequence order to a single successor in its successor set.
 
 ``sequencer_node`` is a ``graph_node``, ``receiver<T>`` and ``sender<T>``.
 
 Each item that passes through a ``sequencer_node`` is ordered by its sequencer order
 number. These sequence order numbers range from 0 to the largest integer representable by the
-``std::size_t`` type. An item's sequencer order number is determined by passing the item to a
+``std::size_t`` type. Sequencer order number of an item is determined by passing the item to a
 user-provided ``Sequencer`` function object.
 
 .. note::
@@ -58,18 +58,18 @@ Member functions
 .. cpp:function:: sequencer_node( const sequencer_node &src )
 
     Constructs an empty ``sequencer_node`` that belongs to the same graph ``g`` as ``src`` and
-    will use a copy of the ``Sequencer s`` used to construct ``src``. The list of predecessors,
-    the list of successors and the messages in the buffer are not copied.
+    uses a copy of the ``Sequencer s`` used to construct ``src``. The list of predecessors,
+    the list of successors, and the messages in the buffer are not copied.
 
     .. caution::
 
         The new sequencer object is copy-constructed from a copy of the original sequencer object
-        provided to ``src`` at its construction. Therefore changes made to member variables in
-        ``src``'s object will not affect the sequencer of the new ``sequencer_node.``
+        provided to ``src`` at its construction. Changes made to member variables in
+        the ``src`` object do not affect the sequencer of the new ``sequencer_node.``
 
 .. cpp:function:: bool try_put( const T &v )
 
-    Adds ``v`` to the ``sequencer_node``. If ``v``'s sequence number is the next item in
+    Adds ``v`` to the ``sequencer_node``. If sequence number of ``v`` sequence number is the next item in
     the sequence, a task is spawned to forward the item to a successor.
 
     **Returns**: ``true``
@@ -97,8 +97,8 @@ Example
 -------
 
 The example demonstrates ordering capabilities of the ``sequencer_node``.
-While being processed in parallel, the data are passed to the successor node in the exact same order
-they were read.
+While being processed in parallel, the data is passed to the successor node in the exact same order
+it was read.
 
 .. include:: ./examples/sequencer_node_cls.cpp
     :code: cpp

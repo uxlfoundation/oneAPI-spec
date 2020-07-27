@@ -3,7 +3,7 @@ Task Scheduler
 ==============
 **[scheduler]**
 
-oneAPI Threading Building Blocks provides a task scheduler, which is the engine that drives the algorithm
+oneAPI Threading Building Blocks (oneTBB) provides a task scheduler, which is the engine that drives the algorithm
 templates and task groups. The exact tasking API depends on the implementation.
 
 The tasks are quanta of computation. The scheduler implements worker thread pool and maps tasks onto these threads.

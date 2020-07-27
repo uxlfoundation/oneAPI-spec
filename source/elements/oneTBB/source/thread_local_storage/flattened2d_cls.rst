@@ -54,7 +54,7 @@ The class template ``flattened2d`` is an adaptor that provides a flattened view 
 
 Requirements:
 
-* A ``Container`` type shall meet the container requirements from [container.requirements.general] ISO C++ section.
+* A ``Container`` type must meet the container requirements from the [container.requirements.general] ISO C++ section.
 
 Iterating from ``begin()`` to ``end()`` visits all of the elements in the inner containers.
 The class template supports forward iterators only.

@@ -157,22 +157,22 @@ Class Template Synopsis
 Requirements
 ------------
 
-* The type ``T`` shall meet the following requirements:
+* The type ``T`` must meet the following requirements:
 
-    - Requirements of ``Erasable`` from [container.requirements] ISO C++ Standard section.
+    - Requirements of ``Erasable`` from the [container.requirements] ISO C++ Standard section.
     - Its destructor must not throw an exception.
     - If its default constructor can throw an exception,
-      its destructor must be non-virtual and work correctly on zero-filled memory.
+      the destructor must be non-virtual and work correctly on zero-filled memory.
     - Member functions can impose stricter requirements depending on the type of the operation.
 
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ section.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ section.
 
 Description
 -----------
 
-``tbb::concurrent_vector`` is a class template which represents a sequence container with the following features:
+``tbb::concurrent_vector`` is a class template that represents a sequence container with the following features:
 
-* Multiple threads can concurrenly grow the container and append new elements.
+* Multiple threads can concurrently grow the container and append new elements.
 * Random access by index. The index of the first element is zero.
 * Growing the container does not invalidate any existing iterators or indices.
 
@@ -183,18 +183,18 @@ Concurrent growing is fundamentally incompatible with ideal exception safety. No
 ``tbb::concurrent_vector`` offers a practical level of exception safety.
 
 Growth and vector assignment append a sequence of elements to a vector. If an exception
-occurs, the impact on the vector depends upon the cause of the exception:
+occurs, the impact on the vector depends on the cause of the exception:
 
-* If the exception is thrown by the constructor of an element, then all subsequent
+* If the exception is thrown by the constructor of an element, all subsequent
   elements in the appended sequence will be zero-filled.
-* Otherwise, the exception was thrown by the vector's allocator. The vector becomes
+* Otherwise, the exception is thrown by the vector allocator. The vector becomes
   broken. Each element in the appended sequence will be in one of three states:
 
   * constructed
   * zero-filled
   * unallocated in memory
 
-Once a vector becomes broken, care must be taken when accessing it:
+Once a vector becomes broken, note the following when accessing it:
 
 * Accessing an unallocated element with the method ``at`` causes an exception
   ``std::range_error``. Accessing an unallocated element using any other
@@ -230,13 +230,13 @@ Member functions
 Non-member functions
 --------------------
 
-These functions provides binary and lexicographical comparison and swap operations
+These functions provide binary and lexicographical comparison and swap operations
 on ``tbb::concurrent_vector`` objects.
 
-The exact namespace where these functions are defined is unspecified, as long as they may be used in
-respective comparison operations. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_vector`` as a type alias for which
-the non-member functions are reachable only via argument dependent lookup.
+The exact namespace where these functions are defined is unspecified, as long as they can be used in
+respective comparison operations. For example, an implementation can define the classes and functions
+in the same internal namespace and define ``tbb::concurrent_vector`` as a type alias, for which
+the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp
 

@@ -4,7 +4,7 @@ task_group
 **[scheduler.task_group]**
 
 A ``task_group`` represents concurrent execution of a group of tasks.
-Tasks may be dynamically added to the group as it is executing.
+Tasks can be dynamically added to the group while it is executing.
 
 .. code:: cpp
 
@@ -44,17 +44,17 @@ Member functions
     Destroys the ``task_group``.
 
     **Requires**: Method ``wait`` must be called before destroying a ``task_group``,
-    otherwise the destructor throws an exception.
+    otherwise, the destructor throws an exception.
 
 .. cpp:function:: template<typename Func> void run( Func&& f )
 
     Adds a task to compute ``f()`` and returns immediately.
-    The ``Func`` type shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
 
 .. cpp:function:: template<typename Func> task_group_status run_and_wait( const Func& f )
 
     Equivalent to ``{run(f); return wait();}``, but guarantees that ``f()`` runs on the current thread.
-    The ``Func`` type shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``Func`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
 
     **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
 

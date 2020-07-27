@@ -11,7 +11,7 @@ and each element in one container is equal to the element in other container on 
     bool operator==( const concurrent_set<T, Compare, Allocator>& lhs,
                      const concurrent_set<T, Compare, Allocator>& rhs )
 
-**Returns**: ``true`` if ``lhs`` is equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is equal to ``rhs``; ``false``, otherwise.
 
 -----------------------------------------------------
 
@@ -21,4 +21,4 @@ and each element in one container is equal to the element in other container on 
     bool operator!=( const concurrent_set<T, Compare, Allocator>& lhs,
                      const concurrent_set<T, Compare, Allocator>& rhs )
 
-**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``; ``false``, otherwise.

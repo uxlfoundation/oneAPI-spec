@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``tbb::concurrent_priority_queue`` supports class template argument
+Where possible, constructors of ``tbb::concurrent_priority_queue`` support class template argument
 deduction (since C++17):
 
 .. code:: cpp
@@ -44,7 +44,7 @@ deduction (since C++17):
     concurrent_priority_queue( std::initializer_list<T>, const Compare&, const Allocator& )
     -> concurrent_priority_queue<T, Compare, Allocator>;
 
-Where the type alias ``iterator_value_t`` defines as follows:
+Where the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 

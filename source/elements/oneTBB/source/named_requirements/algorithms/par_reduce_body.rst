@@ -3,7 +3,7 @@ ParallelReduceBody
 ==================
 **[req.parallel_reduce_body]**
 
-A type `Body` satisfies the `ParallelReduceBody` if it meets the following requirements:
+A type `Body` satisfies `ParallelReduceBody` if it meets the following requirements:
 
 -----------------------------------------------------------------------------------------------------
 
@@ -19,11 +19,11 @@ A type `Body` satisfies the `ParallelReduceBody` if it meets the following requi
 
 .. cpp:function:: void Body::operator()(const Range& range)
 
-    Accumulate result for subrange. ``Range`` type shall meet the :doc:`Range requirements <range>`.
+    Accumulates result for a subrange. ``Range`` type must meet the :doc:`Range requirements <range>`.
 
 .. cpp:function:: void Body::join( Body& rhs )
 
-    Join results. The result in rhs should be merged into the result of ``this``.
+    Joins results. The result in rhs should be merged into the result of ``this``.
 
 See also:
 

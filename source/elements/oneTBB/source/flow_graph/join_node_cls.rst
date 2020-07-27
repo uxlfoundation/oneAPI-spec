@@ -67,11 +67,11 @@ tuple to all of its successors.
 Requirements:
 
 * The type ``OutputTuple`` must be an instantiation of ``std::tuple``. Each type that the tuple stores
-  shall meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
+  must meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
   requirements from [copyassignable] ISO C++ Standard sections.
-* The ``JoinPolicy`` type should be specified as one of :doc:`buffering policies <join_node_policies>` for ``join_node``.
-* The ``KHash`` type shall meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
-* The ``Bi`` types shall meet the :doc:`JoinNodeFunctionObject requirements <../named_requirements/flow_graph/join_node_func_obj>`.
+* The ``JoinPolicy`` type must be specified as one of :doc:`buffering policies <join_node_policies>` for ``join_node``.
+* The ``KHash`` type must meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
+* The ``Bi`` types must meet the :doc:`JoinNodeFunctionObject requirements <../named_requirements/flow_graph/join_node_func_obj>`.
 
 A ``join_node`` is a ``graph_node`` and a ``sender<OutputTuple>``.
 It contains a tuple of input ports, each of which is a ``receiver<Type>`` for each `Type` in
@@ -140,7 +140,7 @@ that tags for the input ports ``0`` through ``N``.
 
     Function objects passed to the join_node constructor must not
     throw. They are called in parallel, and should be pure, take minimal
-    time and be non-blocking.
+    time, and be non-blocking.
 
 ----------------------------------------------------------------
 
@@ -158,9 +158,9 @@ messages in the input ports, and successors are not copied.
 
     input_ports_type &input_ports( )
 
-**Returns**: a ``std::tuple`` of receivers. Each element inherits from ``receiver<T>`` where
+**Returns**: a ``std::tuple`` of receivers. Each element inherits values from ``receiver<T>``, where
 ``T`` is the type of message expected at that input. Each tuple element can be used like any
-other ``receiver<T>``. The behavior of the ports based on the selected ``join_node`` policy.
+other ``receiver<T>``. The behavior of the ports is based on the selected ``join_node`` policy.
 
 ----------------------------------------------------------------
 
@@ -171,7 +171,7 @@ other ``receiver<T>``. The behavior of the ports based on the selected ``join_no
 Attempts to generate a tuple based on the buffering policy of the ``join_node``.
 
 If it can successfully generate a tuple, it copies it to ``v`` and returns ``true``.
-Otherwise it returns ``false``.
+Otherwise, it returns ``false``.
 
 Non-Member Types
 ----------------
@@ -180,7 +180,7 @@ Non-Member Types
 
     using tag_value = /*implementation-specific*/;
 
-``tag_value`` is an unsigned integral type for defining ``tag_matching`` policy.
+``tag_value`` is an unsigned integral type for defining the ``tag_matching`` policy.
 
 Deduction Guides
 ----------------

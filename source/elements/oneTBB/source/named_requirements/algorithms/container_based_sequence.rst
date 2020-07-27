@@ -3,7 +3,7 @@ ContainerBasedSequence
 ======================
 **[req.container_based_sequence]**
 
-A type `T` satisfies the `ContainerBasedSequence` if it is an array type or
+A type `T` satisfies `ContainerBasedSequence` if it is an array type or
 a type that meets the following requirements:
 
 ----------------------------------------------------------------

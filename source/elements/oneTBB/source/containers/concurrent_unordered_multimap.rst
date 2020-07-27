@@ -3,9 +3,9 @@ concurrent_unordered_multimap
 =============================
 **[containers.concurrent_unordered_multimap]**
 
-``tbb::concurrent_unordered_multimap`` is a class template represents an unordered associative container
-which stores key-value pairs and supports concurrent insertion, lookup and traversal, but
-not concurrent erasure. The container allows to store multiple elements with equal keys.
+``tbb::concurrent_unordered_multimap`` is a class template that represents an unordered associative container.
+It stores key-value pairs and supports concurrent insertion, lookup, and traversal, but
+does not support concurrent erasure. In this container, multiple elements with equal keys can be stored.
 
 Class Template Synopsis
 -----------------------
@@ -254,28 +254,28 @@ Class Template Synopsis
 
 Requirements:
 
-* The expression ``std::allocator_type<Allocator>::destroy(m, val)`` where ``m`` is an object
-  of the type ``Allocator`` and ``val`` is an object of type ``value_type`` should be well-formed.
+* The expression ``std::allocator_type<Allocator>::destroy(m, val)``, where ``m`` is an object
+  of the type ``Allocator`` and ``val`` is an object of type ``value_type``, must be well-formed.
   Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``Hash`` shall meet the ``Hash`` requirements from [hash] ISO C++ Standard section.
-* The type ``KeyEqual`` shall meet the ``BinaryPredicate`` requirements from [algorithms.general] ISO C++ Standard section.
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ Standard section.
+* The type ``Hash`` must meet the ``Hash`` requirements from the [hash] ISO C++ Standard section.
+* The type ``KeyEqual`` must meet the ``BinaryPredicate`` requirements from the [algorithms.general] ISO C++ Standard section.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
 Description
 -----------
 
 ``tbb::concurrent_unordered_multimap`` is an unordered associative container, which elements are organized into
-buckets. The value of the hash function ``Hash`` for ``Key`` object determines the number of the bucket
-in which the corresponding element would be placed.
+buckets. The value of the hash function ``Hash`` for a ``Key`` object determines the number of the bucket
+in which the corresponding element will be placed.
 
-If the qualified-id ``Hash::transparent_key_equal`` is valid and denotes a type, member type
-``concurrent_unordered_multimap::key_equal`` defines as the value of this qualified-id.
-In this case the program is ill-formed if any of the following conditions are met:
+If the qualified-id ``Hash::transparent_key_equal`` is valid and denotes a type, the member type
+``concurrent_unordered_multimap::key_equal`` is defined as the value of this qualified-id.
+In this case, the program is ill-formed if any of the following conditions are met:
 
 * The template parameter ``KeyEqual`` is different from ``std::equal_to<Key>``.
-* Qualified-id ``Hash::transparent_key_equal::is_transparent`` is not valid or not denotes a type.
+* Qualified-id ``Hash::transparent_key_equal::is_transparent`` is not valid or does not denote a type.
 
-Otherwise, member type ``concurrent_unordered_multimap::key_equal`` defines as the value of the
+Otherwise, the type ``concurrent_unordered_multimap::key_equal`` is defined as the value of the
 template parameter ``KeyEqual``.
 
 Member functions
@@ -304,7 +304,7 @@ on ``tbb::concurrent_unordered_multimap`` objects.
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
 in the same internal namespace and define ``tbb::concurrent_unordered_multimap`` as a type alias for which
-the non-member functions are reachable only via argument dependent lookup.
+the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp
 

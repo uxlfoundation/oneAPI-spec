@@ -3,10 +3,10 @@ Bucket interface
 ================
 
 The types ``concurrent_unordered_map::local_iterator``
-and ``concurrent_unordered_map::const_local_iterator`` meets the requirements
-of ``ForwardIterator`` from [forward.iterators] ISO C++ Standard section.
+and ``concurrent_unordered_map::const_local_iterator`` meet the requirements
+of ``ForwardIterator`` from the [forward.iterators] ISO C++ Standard section.
 
-These iterators are used to traverse the certain bucket.
+Use these iterators to traverse a certain bucket.
 
 All methods in this section can only be executed serially. The behavior is undefined in case of
 concurrent execution of these member functions with other (either concurrently safe) methods.
@@ -34,7 +34,7 @@ Bucket begin and bucket end
 
         const_local_iterator unsafe_cend( size_type n ) const;
 
-    **Returns**: an iterator to the element which follows the last element in
+    **Returns**: an iterator to the element that follows the last element in
     the bucket number ``n``.
 
 The number of buckets

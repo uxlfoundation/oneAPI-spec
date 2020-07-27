@@ -18,7 +18,7 @@ empty
 
         bool empty() const noexcept;
 
-    **Returns**: ``true`` if the vector is empty, ``false`` otherwise.
+    **Returns**: ``true`` if the vector is empty; ``false``, otherwise.
 
 max_size
 --------

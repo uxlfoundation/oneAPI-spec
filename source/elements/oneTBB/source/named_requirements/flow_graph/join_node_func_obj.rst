@@ -3,7 +3,7 @@ JoinNodeFunctionObject
 ======================
 **[req.join_node_function_object]**
 
-A type `Func` satisfies the `JoinNodeFunctionObject` if it meets the following requirements:
+A type `Func` satisfies `JoinNodeFunctionObject` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ A type `Func` satisfies the `JoinNodeFunctionObject` if it meets the following r
 .. cpp:function:: Key Func::operator()( const Input& v )
 
     **Requirements:** The ``Key`` and ``Input`` types must be the same as the ``K`` and the corresponding
-    element of the ``OutputTuple`` template arguments of the ``join_node`` instance to which ``Func`` object is passed
+    element of the ``OutputTuple`` template arguments of the ``join_node`` instance to which the ``Func`` object is passed
     during construction.
 
     Returns key to be used for hashing input messages.

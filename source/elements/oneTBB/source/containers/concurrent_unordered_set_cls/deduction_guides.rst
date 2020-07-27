@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_unordered_set`` supports
+Where possible, constructors of ``concurrent_unordered_set`` support
 class template argument deduction (since C++17):
 
 .. code:: cpp
@@ -80,7 +80,7 @@ class template argument deduction (since C++17):
                                 Allocator>;
 
 Where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_set``
-and the type alias ``iterator_value_t`` defines as follows:
+and the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 

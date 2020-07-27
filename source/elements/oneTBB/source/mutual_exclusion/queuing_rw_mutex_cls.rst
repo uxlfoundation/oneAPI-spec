@@ -39,7 +39,7 @@ Member functions
 
 .. cpp:function:: queuing_rw_mutex()
 
-    Construct unlocked ``queuing_rw_mutex``.
+    Constructs unlocked ``queuing_rw_mutex``.
 
 .. cpp:function:: ~queuing_rw_mutex()
 

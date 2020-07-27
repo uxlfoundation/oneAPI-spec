@@ -7,7 +7,7 @@ Summary
 -------
 
 ``async_msg`` is a special message class used to implement intercommunication
-between an oneAPI Threading Building Blocks flow graph and an external parallel
+between a TBB flow graph and an external parallel
 activity, such as a thread or a device.
 
 Syntax
@@ -42,12 +42,12 @@ create advanced async messages with additional data. Ports and nodes  that accep
 messages of type ``T`` and async messages can both receive async messages
 and can be connected with the ``make_edge`` interface, but handle them
 differently.
-If the node accepts an async message, it will react to an incoming async message immediately,
-for example by passing the message directly to its body. However, if the node accepts the
+If the node accepts an async message, it reacts to an incoming async message immediately,
+for example, by passing the message directly to its body. However, if the node accepts the
 result type ``T``, the virtual method
-``async_msg<T>::finalize()`` will be called and the node will wait
+``async_msg<T>::finalize()`` is called and the node waits
 for the result availability. The ``async_msg<T>::finalize()`` method
-can be overridden in a derived async message type, e.g. to notify the asynchronous
+can be overridden in a derived async message type, for example, to notify the asynchronous
 activity that a result is required and/or to set a callback.
 
 .. caution::
@@ -56,19 +56,19 @@ activity that a result is required and/or to set a callback.
    at most once. If the async message is never passed to a node that accepts the
    results of asynchronous activity than the result can be never set.
    However, if the async message is passed to a node that accepts the result of
-   async message (the ``finalize()`` method will be called in this case),
+   async message (the ``finalize()`` method is called in this case),
    the result must be set.
 
 .. note::
 
    If a node accepts an async message, but a message of result type
-   ``T`` is provided to the node, an async message will be automatically
-   created and the incoming message of type ``T`` will be immediately
+   ``T`` is provided to the node, an async message is automatically
+   created and the incoming message of type ``T`` is immediately
    set as its result.
 
 .. note::
 
-   Nodes or ports that accepts async messages can accept only an async message of the
+   Nodes or ports that accept async messages can accept only an async message of the
    same type or a message of the result type. Therefore, it is impossible to pass
    ``async_msg<T>`` to a node that accepts async messages of
    derived type from ``async_msg<T>``.
@@ -80,16 +80,16 @@ activity that a result is required and/or to set a callback.
    However, this behavior can be changed in future releases.
 
 The ``graph::wait_for_all()`` method waits until the results are ready for all
-async messages created and consumed by nodes of the graph. However if async messages
-are created and send to the graph by an external activity, it must use
+async messages created and consumed by nodes of the graph. However, if async messages
+are created and sent to the graph by an external activity, it must use
 ``increment_ref_count()`` and ``decrement_ref_count()`` methods
 to prevent completion of the graph before it sends all the async messages. Once an async message
-is sent to the graph, ``wait_for_all()`` will wait for its result to be ready.
+is sent to the graph, ``wait_for_all()`` waits for its result to be ready.
 
 The simplest usage scenario of the ``async_msg`` is shown in the figure
 below: the left flow graph node (n1) starts an asynchronous activity in its body and
 returns an ``async_msg`` object without waiting for the result to be set.
-The next node (n2) automatically receives the ready result when it’s set by the
+The next node (n2) automatically receives the ready result when it is set by the
 asynchronous activity through its copy of the ``async_msg``.
 
 The simplest scenario steps are described below:
@@ -98,7 +98,7 @@ The simplest scenario steps are described below:
 * n1 sends work to an external asynchronous activity along with a copy of the ``async_msg``.
 * n1 puts ``async_msg<T>`` to its successor.
 * The external asynchronous activity returns the result back to the flow graph by calling the
-  method ``set(result)`` in the ``async_msg`` instance obtained in the step 2.
+  method ``set(result)`` in the ``async_msg`` instance obtained in step 2.
 * The successor node gets the data of type ``T`` as usual.
 
 
@@ -131,7 +131,7 @@ as in the following usage scenario:
   .. note::
 
      ``async_msg<T>::finalize()`` may be called a few times by the library,
-     but the method will never be called after the ``set()`` method has been
+     but the method is never called after the ``set()`` method has been
      invoked on the ``async_msg``.
   
 * The next node n3 gets the ``UserDataType`` data as usual.
@@ -150,10 +150,10 @@ as in the following usage scenario:
    Usually the first node in the processing chain uploads data to the external asynchronous
    activity (thread or device). The next nodes in the chain can continue the data processing
    without any additional data uploading and downloading. And only the last node in the chain
-   will get the activity result.
+   gets the activity result.
 
 Any user class derived from ``async_msg`` can be used in the use-cases above.
-For example, a derived asynchronous message class may be implemented that stores or updates
+For example, a derived asynchronous message class can be implemented that stores or updates
 additional states or flags while the data processing chain is working.
 
 Example
@@ -295,7 +295,7 @@ The following table provides additional information on the members of this templ
 ------------------------------------------------------------------------------------------
 \ ``void set(const T& t)``
   \
-  Call the method to return a result from the asynchronous activity back to the flow graph.
+  Calls the method to return a result from the asynchronous activity back to the flow graph.
   
   .. note::
 
@@ -319,7 +319,7 @@ The following table provides additional information on the members of this templ
 ==========================================================================================
 \ ``virtual void finalize() const``
   \
-  Override the method in the derived class to inform the asynchronous activity
+  Overrides the method in the derived class to inform the asynchronous activity
   that the data handling chain is over and the activity should return the result
   (via the ``set()`` call).
   

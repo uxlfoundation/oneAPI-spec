@@ -37,24 +37,23 @@ one or more messages that are broadcast to successors.
 
 Requirements:
 
-* The ``Input`` and ``Output`` types shall meet the `CopyConstructible` requirements from
+* The ``Input`` and ``Output`` types must meet the `CopyConstructible` requirements from
   [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
-* The type ``Policy`` may be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
-* The type ``Body`` shall meet the :doc:`MultifunctionNodeBody requirements <../named_requirements/flow_graph/multifunction_node_body>`.
+* The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
+* The type ``Body`` must meet the :doc:`MultifunctionNodeBody requirements <../named_requirements/flow_graph/multifunction_node_body>`.
 
 ``multifunction_node`` has a user-settable concurrency limit. It can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
-The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and
-:doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
+The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
 
 When the concurrency limit allows, it executes the user-provided body on incoming messages.
-The body may create one or more output messages and broadcast them to successors.
+The body can create one or more output messages and broadcast them to successors.
 
 ``multifunction_node`` is a ``graph_node``, ``receiver<InputType>`` and has a tuple of
 ``sender<Output>`` outputs.
 
 ``multifunction_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
 
-The body object passed to a ``multifunction_node`` is copied. Therefore updates to member variables will
+The body object passed to a ``multifunction_node`` is copied. Updates to member variables do
 not affect the original object used to construct the node. If the state held within a body object
 must be inspected from outside of the node, the :doc:`copy_body function <copy_body_func>` can be
 used to obtain an updated copy.
@@ -73,10 +72,10 @@ Member functions
     multifunction_node( graph &g, size_t concurrency, Body body,
                         node_priority_t priority = no_priority );
 
-Constructs a ``multifunction_node`` that will invoke a copy of ``body``. At most ``concurrency`` calls
-to ``body`` may be made concurrently.
+Constructs a ``multifunction_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
+to ``body`` can be made concurrently.
 
-Allows to specify :doc:`node priority<node_priorities>`.
+Use this function to specify :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -86,10 +85,10 @@ Allows to specify :doc:`node priority<node_priorities>`.
     multifunction_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(),
                         node_priority_t priority = no_priority );
 
-Constructs a ``multifunction_node`` that will invoke a copy of ``body``. At most ``concurrency`` calls
-to ``body`` may be made concurrently.
+Constructs a ``multifunction_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
+to ``body`` can be made concurrently.
 
-Allows to specify a :doc:`policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
+Use this function to specify a :doc:`policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -99,16 +98,15 @@ Allows to specify a :doc:`policy<functional_node_policies>` and :doc:`node prior
 
 Constructs a ``multifunction_node`` that has the same initial
 state that ``other`` had when it was constructed. The
-``multifunction_node`` that is constructed will have a reference
-to the same ``graph`` object as ``other``, will have a copy of the
-initial ``body`` used by ``other``, and have the same concurrency
+``multifunction_node`` that is constructed has a reference
+to the same ``graph`` object as ``other``, has a copy of the
+initial ``body`` used by ``other``, and has the same concurrency
 threshold as ``other``. The predecessors and successors of
-``other`` will not be copied.
+``other`` are not copied.
 
 The new body object is copy-constructed from a copy of the
-original body provided to ``other`` at its construction. Therefore
-changes made to member variables in ``other``'s body after the
-construction of ``other`` will not affect the body of the new
+original body provided to ``other`` at its construction. Changes made to member variables in ``other`` body after the
+construction of ``other`` do not affect the body of the new
 ``multifunction_node.``
 
 ----------------------------------------------------------------
@@ -118,7 +116,7 @@ construction of ``other`` will not affect the body of the new
     bool try_put( const input_type &v )
 
 If concurrency limit allows, executes the user-provided body on incoming messages
-and returns ``true``. Otherwise executes nothing and return ``false``.
+and returns ``true``. Otherwise, executes nothing and returns ``false``.
 
 ----------------------------------------------------------------
 

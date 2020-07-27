@@ -3,7 +3,7 @@ overwrite_node
 ==============
 **[flow_graph.overwrite_node]**
 
-A node that is a buffer of a single item that can be over-written.
+A node that is a buffer of a single item that can be overwritten.
 
 .. code:: cpp
 
@@ -31,7 +31,7 @@ A node that is a buffer of a single item that can be over-written.
 
 Requirements:
 
-* The type ``T`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
+* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 
 This type of node buffers a single item of type ``T``. The value is initially invalid. Gets from the node are
@@ -70,11 +70,11 @@ Member functions
 
     If the internal buffer is valid, assigns the value to ``v``.
 
-    **Returns**:``true`` if ``v`` is assigned to. ``false`` if ``v`` is not assigned to.
+    **Returns**:``true`` if ``v`` is assigned to; ``false``, otherwise.
 
 .. cpp:function:: bool is_valid( )
 
-    **Returns**: ``true`` if the buffer holds a valid value, otherwise returns ``false``.
+    **Returns**: ``true`` if the buffer holds a valid value; ``false``, otherwise.
 
 .. cpp:function:: void clear( )
 
@@ -89,5 +89,5 @@ might be updated. Data can be accessed with direct ``try_get()`` call.
 .. include:: ./examples/overwrite_node_cls.cpp
    :code: cpp
 
-``overwrite_node`` supports reserving ``join_node`` as its successor. See example in :doc:`the
+``overwrite_node`` supports reserving ``join_node`` as its successor. See the example in :doc:`the
 example section of write_once_node <write_once_node_cls>`.

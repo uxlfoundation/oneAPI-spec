@@ -6,7 +6,7 @@ ContainerRange
 ``ContainerRange`` is a range that represents a concurrent container
 or a part of the container.
 
-``ContainerRange`` object can be used to traverse the container in parallel algorithms
+The ``ContainerRange`` object can be used to traverse the container in parallel algorithms
 like ``parallel_for``.
 
 The type ``CR`` satisfies the ``ContainerRange`` requirements if:
@@ -36,15 +36,15 @@ The type ``CR`` satisfies the ``ContainerRange`` requirements if:
 
     .. cpp:type:: CR::difference_type
 
-        The type of the difference between two iterators
+        The type of the difference between two iterators.
 
     .. cpp:function:: iterator CR::begin()
 
-        Returns iterator to the beginning of the range.
+        Returns an iterator to the beginning of the range.
 
     .. cpp:function:: iterator CR::end()
 
-        Returns iterator follows the last element in the range.
+        Returns an iterator to the position that follows the last element in the range.
 
     .. cpp:function:: size_type CR::grainsize() const
 

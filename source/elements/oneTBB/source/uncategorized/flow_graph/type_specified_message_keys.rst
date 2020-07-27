@@ -27,7 +27,7 @@ The extension adds a special constructor to the join_node interface when the
 ``key_matching<typename K, class KHash=tbb_hash_compare>`` policy is
 used. The constructor has the following signature:
 ``join_node( graph &g )``.
-When constructed this way, a ``join_node`` will then call
+When constructed this way, a ``join_node`` calls the
 ``key_from_message`` function for each incoming message to obtain an associated
 key. The default implementation of ``key_from_message`` is
 
@@ -45,9 +45,9 @@ key. The default implementation of ``key_from_message`` is
 Where ``T`` is one of the user-provided types in ``OutputTuple``
 used for the ``join_node`` construction and ``K`` is the key type
 for the node.
-By default, the ``key()`` method defined in the message class will be called.
-Alternatively, the user can define its own ``key_from_message`` function in the
-same namespace with the message type. This function will be found via C++ argument-dependent
+By default, the ``key()`` method defined in the message class is called.
+Alternatively, users can define their own ``key_from_message`` function in the
+same namespace with the message type. This function is found via C++ argument-dependent
 lookup and used instead of the default implementation.
 
 .. code:: cpp

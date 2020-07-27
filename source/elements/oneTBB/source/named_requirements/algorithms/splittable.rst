@@ -13,10 +13,10 @@ distinguishes the splitting constructor from a copy constructor. After the const
 * *Partitioning* a range into two subranges that can be processed concurrently.
 * *Forking* a body (function object) into two bodies that can run concurrently.
 
-Types that meets :doc:`Range requirements <range>` may additionally defines an optional *proportional splitting constructor*,
+Types that meet the :doc:`Range requirements <range>` may additionally define an optional *proportional splitting constructor*,
 distinguished by an argument of type :doc:`proportional_split Class <../../algorithms/split_tags/proportional_split_cls>`.
 
-A type `X` satisfies the `Splittable` if it meets the following requirements:
+A type `X` satisfies `Splittable` if it meets the following requirements:
 
 ------------------------------------------------------
 

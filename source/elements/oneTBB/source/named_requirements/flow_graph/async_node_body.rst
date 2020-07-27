@@ -3,7 +3,7 @@ AsyncNodeBody
 =============
 **[req.async_node_body]**
 
-A type `Body` satisfies the `AsyncNodeBody` if it meets the following requirements:
+A type `Body` satisfies `AsyncNodeBody` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
@@ -26,9 +26,9 @@ A type `Body` satisfies the `AsyncNodeBody` if it meets the following requiremen
     **Requirements:** 
 
     * The ``Input`` type must be the same as the ``Input`` template type argument
-      of the ``async_node`` instance in which ``Body`` object is passed during construction.
+      of the ``async_node`` instance in which the ``Body`` object is passed during construction.
     * The ``GatewayType`` type must be the same as the ``gateway_type`` member type
-      of the ``async_node`` instance in which ``Body`` object is passed during construction.
+      of the ``async_node`` instance in which the ``Body`` object is passed during construction.
 
     The input value ``v`` is submitted by the flow graph to an external activity.
     The :doc:`gateway interface <gateway_type>` allows the external activity to communicate

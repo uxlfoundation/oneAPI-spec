@@ -3,12 +3,12 @@ global_control
 ==============
 **[scheduler.global_control]**
 
-Use this class to control certain settings or behavior of the oneAPI Threading Building Blocks dynamic library.
+Use this class to control certain settings or behavior of the oneTBB dynamic library.
 
 An object of class ``global_control``, or a "control variable", affects one of several behavioral aspects, or parameters, of TBB.
-Class ``global_control`` is primarily intended for use at the application level, to control the whole application behavior.
+The ``global_control`` class is primarily intended for use at the application level, to control the whole application behavior.
 
-The current set of parameters that you can modify is defined by ``global_control::parameter`` enumeration.
+The current set of parameters that you can modify is defined by the ``global_control::parameter`` enumeration.
 The parameter and the value it should take are specified as arguments to the constructor of a control variable.
 The impact of the control variable ends when its lifetime is complete.
 
@@ -42,12 +42,12 @@ Member types and constants
 
     **Selection rule**: minimum
 
-    Limit total number of worker threads that can be active in the task scheduler to ``parameter_value - 1``.
+    Limits total number of worker threads that can be active in the task scheduler to ``parameter_value - 1``.
 
     .. note::
 
         With ``max_allowed_parallelism`` set to ``1``, ``global_control`` enforces serial execution
-        of all tasks by the application thread(s), i.e. the task scheduler does not allow worker threads to run.
+        of all tasks by the application thread(s), that is, the task scheduler does not allow worker threads to run.
         There is one exception: if some work is submitted for execution via ``task_arena::enqueue``,
         a single worker thread will still run ignoring the ``max_allowed_parallelism`` restriction.
 

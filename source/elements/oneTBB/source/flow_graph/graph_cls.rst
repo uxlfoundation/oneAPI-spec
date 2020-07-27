@@ -41,8 +41,8 @@ Member functions
 
 .. cpp:function:: graph(task_group_context& group )
 
-    Constructs a graph with no nodes. If ``group`` is specified the
-    graph tasks are executed in this group. By default the graph is
+    Constructs a graph with no nodes. If ``group`` is specified, the
+    graph tasks are executed in this group. By default, the graph is
     executed in a bound context of its own.
 
 .. cpp:function:: ~graph()
@@ -51,19 +51,19 @@ Member functions
 
 .. cpp:function:: void wait_for_all()
 
-    Blocks until all tasks associated with the graph have completed.
+    Blocks execution until all tasks associated with the graph have completed.
 
 .. cpp:function:: void reset(reset_flags f = rf_reset_protocol)
 
-    Reset the graph regards to specified flags.
+    Resets the graph according to the specified flags.
     Flags to ``reset()`` can be combined with bitwise-``or``.
 
 .. cpp:function:: bool is_cancelled()
 
     Returns: ``true`` if the graph was cancelled during the last call to
-    ``wait_for_all()``, ``false`` otherwise.
+    ``wait_for_all()``; ``false``, otherwise.
 
 .. cpp:function:: bool exception_thrown()
 
     Returns: ``true`` if during the last call to ``wait_for_all()`` an
-    exception was thrown, ``false`` otherwise.
+    exception was thrown; ``false``, otherwise.

@@ -75,9 +75,9 @@ Member functions
 
 .. cpp:function:: bool try_lock_shared()
 
-    Attempts to acquire the lock (non-blocking) on read. Returns true if the lock is acquired on read; false otherwise.
+    Attempts to acquire the lock (non-blocking) on read. Returns true if the lock is acquired on read; false, otherwise.
 
 .. cpp:function:: void unlock_shared()
 
-    Releases a read lock, held by the current thread.
+    Releases a read lock held by the current thread.
 

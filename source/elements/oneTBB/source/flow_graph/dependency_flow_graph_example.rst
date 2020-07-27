@@ -23,9 +23,9 @@ therefore able to use ``struct body`` to construct their body objects.
 
 In function ``main``, the flow graph is set up once and then run three times. All of the nodes in
 this example pass around ``continue_msg`` objects. This type is used to communicate that a node has
-completed its execution.
+completed execution.
 
-The first line in function ``main`` instantiates a ``graph`` object, ``g``. On the next line, a
+The first line in function ``main`` instantiates a ``graph`` object ``g``. On the next line, a
 ``broadcast_node`` named ``start`` is created. Anything passed to this node will be
 broadcast to all of its successors. The node ``start`` is used in the ``for`` loop at the bottom of
 ``main`` to launch the execution of the rest of the flow graph.
@@ -40,7 +40,7 @@ in a broadcast of a ``continue_msg`` to both ``a`` and ``b``. Both ``a`` and ``b
 single ``continue_msg``, since they both have only a single predecessor, ``start``.
 
 When they receive the message from ``start``, they execute their body objects. When complete,
-they each forward a ``continue_msg`` to their successors, and so on. The graph
+each of them forwards a message to a successor, and so on. The graph
 uses tasks to execute the node bodies as well as to forward messages between
 the nodes, allowing computation to execute concurrently when possible.
 

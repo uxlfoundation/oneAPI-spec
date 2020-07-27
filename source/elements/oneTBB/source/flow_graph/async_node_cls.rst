@@ -3,7 +3,7 @@ async_node
 ==========
 **[flow_graph.async_node]**
 
-A node that allows a flow graph to communicate with an external activity managed by
+A node that enables communication between a flow graph and an external activity managed by
 the user or another runtime.
 
 .. code:: cpp
@@ -37,28 +37,27 @@ the user or another runtime.
 
 Requirements:
 
-* The ``Input`` and ``Output`` types shall meet the `CopyConstructible` requirements from
+* The ``Input`` and ``Output`` types must meet the `CopyConstructible` requirements from
   [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
-* The type ``Policy`` may be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
-* The type ``Body`` shall meet the :doc:`AsyncNodeBody requirements <../named_requirements/flow_graph/async_node_body>`.
+* The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
+* The type ``Body`` must meet the :doc:`AsyncNodeBody requirements <../named_requirements/flow_graph/async_node_body>`.
 
 ``async_node`` executes a user-provided body on incoming messages. The body submits input
 messages to an external activity for processing outside of the task scheduler.
-This node also provides ``gateway_type`` interface that allows the external activity to
+This node also provides the ``gateway_type`` interface that allows the external activity to
 communicate with the flow graph.
 
-``async_node`` is a ``graph_node``, ``receiver<Input>`` and a ``sender<Output>``.
+``async_node`` is a ``graph_node``, ``receiver<Input>``, and a ``sender<Output>``.
 
 ``async_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
 
-``async_node`` has a user-settable concurrency limit. It can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
+``async_node`` has a user-settable concurrency limit, which can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
 The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and
 :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
 
-The body object passed to a ``async_node`` is copied. Therefore updates to member variables will
-not affect the original object used to construct the node. If the state held within a body object must be
-inspected from outside of the node, the :doc:`copy_body <copy_body_func>` function can be used to
-obtain an updated copy.
+The body object passed to a ``async_node`` is copied. Updates to member variables do not affect the original object used to construct the node. 
+If the state held within a body object must be inspected from outside of the node, 
+the :doc:`copy_body <copy_body_func>` function can be used to obtain an updated copy.
 
 Member functions
 ----------------
@@ -74,10 +73,10 @@ Member functions
     async_node( graph &g, size_t concurrency, Body body,
                    node_priority_t priority = no_priority );
 
-Constructs a ``async_node`` that will invoke a copy of ``body``. At most ``concurrency`` calls
-to ``body`` may be made concurrently.
+Constructs an ``async_node`` that invokes a copy of ``body``. The ``concurrency`` value limits the number of simultaneous 
+``body`` invocations for the node.
 
-Allows to specify :doc:`node priority<node_priorities>`.
+This function specifies :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -87,10 +86,10 @@ Allows to specify :doc:`node priority<node_priorities>`.
     async_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(),
                    node_priority_t priority = no_priority );
 
-Constructs a ``async_node`` that will invoke a copy of ``body``. At most ``concurrency`` calls
-to ``body`` may be made concurrently.
+Constructs a ``async_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
+to ``body`` can be made concurrently.
 
-Allows to specify a :doc:`policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
+This function specifies a :doc:`policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -99,13 +98,13 @@ Allows to specify a :doc:`policy<functional_node_policies>` and :doc:`node prior
     async_node( const async_node &src )
 
 Constructs an ``async_node`` that has the same initial state that ``src`` had when it was
-constructed. The ``async_node`` that is constructed will have a reference to the same ``graph``
-object as ``src``, will have a copy of the initial body used by ``src``, and have the same
-concurrency threshold as ``src``. The predecessors and successors of ``src`` will not be copied.
+constructed. The ``async_node`` that is constructed has a reference to the same ``graph``
+object as ``src``, has a copy of the initial body used by ``src``, and has the same
+concurrency threshold as ``src``. The predecessors and successors of ``src`` are not copied.
 
 The new body object is copy-constructed from a copy of the original body provided to ``src`` at
-its construction. Therefore changes made to member variables in ``src``'s body after the
-construction of ``src`` will not affect the body of the new ``async_node.``
+its construction. Changes made to member variables in ``src``'s body after the
+construction of ``src`` do not affect the body of the new ``async_node.``
 
 ----------------------------------------------------------------
 
@@ -113,7 +112,7 @@ construction of ``src`` will not affect the body of the new ``async_node.``
 
     gateway_type& gateway()
 
-Returns reference to ``gateway_type`` interface.
+Returns reference to the ``gateway_type`` interface.
 
 ----------------------------------------------------------------
 
@@ -121,7 +120,7 @@ Returns reference to ``gateway_type`` interface.
 
     bool try_put( const input_type& v )
 
-A task is spawned that executes the ``body(v)``.
+Spawns a task that executes the ``body(v)``.
 
 **Returns**: always returns ``true``, it is responsibility of ``body`` to be able to pass
 ``v`` to an external activity. If a message is not properly processed by the ``body`` it will be

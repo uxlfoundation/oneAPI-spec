@@ -42,8 +42,7 @@ implementations for several functions are provided.
    graphs has been deprecated for ``flow::graph``.  
    Graphs should be constructed with ``make_edge`` and 
    ``remove_edge``.
-   Where ``n1.register_successor(n2)`` was used,
-   replace with ``make_edge(n1,n2)``.
+   Replace ``n1.register_successor(n2)`` with ``make_edge(n1,n2)``.
 
 
 Members
@@ -98,8 +97,8 @@ members of this template class.
   removing a successor node from the set of successors for a sender.
   
   **Returns**: 
-  ``true`` if the successor is removed; 
-  ``false`` otherwise.
+  ``true`` if the successor is removed. 
+  ``false``, otherwise.
 ------------------------------------------------------------------------------------------
 \ ``bool try_get( output_type &v )``
   \

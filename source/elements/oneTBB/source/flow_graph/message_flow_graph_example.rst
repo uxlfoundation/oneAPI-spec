@@ -13,7 +13,7 @@ the figure below.
    A simple message flow graph.
 
 Each value enters through the ``broadcast_node<int>`` ``input``. This node broadcasts the value to both
-``squarer`` and ``cuber``, which calculate ``x*x`` and ``x*x*x`` respectively. The output of each
+``squarer`` and ``cuber``, which calculate ``x*x`` and ``x*x*x``, respectively. The output of each
 of these nodes is put to one of ``join``'s ports. A tuple containing both values is
 created by ``join_node< tuple<int,int> > join`` and forwarded to ``summer``, which adds both
 values to the running total. Both ``squarer`` and ``cuber`` allow unlimited concurrency, that is they each
@@ -70,7 +70,7 @@ to process a single incoming tuple at a time, eliminating the need for a lock ar
       return 0;
     }
 
-In the example code above, the classes ``square``, ``cube`` and ``sum`` define the three
+In the example code above, the classes ``square``, ``cube``, and ``sum`` define the three
 user-defined operations. Each class is used to create a ``function_node``.
 
 In function ``main``, the flow graph is set up and then the values 1-10 are put into the node

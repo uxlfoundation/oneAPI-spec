@@ -20,7 +20,7 @@ The number of elements
 
         bool empty() const;
 
-    **Returns**: ``true`` if the container is empty, ``false`` otherwise.
+    **Returns**: ``true`` if the container is empty; ``false``, otherwise.
 
 clear
 -----

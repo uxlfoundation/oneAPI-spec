@@ -41,15 +41,15 @@ A ``task_arena`` class represents a place where threads may share and execute ta
 The number of threads that may simultaneously execute tasks in a ``task_arena`` is limited by its concurrency level.
 
 Each user thread that invokes any parallel construction outside an explicit ``task_arena`` uses an implicit
-task arena representation object assosiated with the calling thread.
+task arena representation object associated with the calling thread.
 
 The tasks spawned or enqueued into one arena cannot be executed in another arena.
 
 .. note::
 
     The ``task_arena`` constructors do not create an internal task arena representation object.
-    It may already exist in case of the "attaching" constructor, otherwise it is created
-    by explicit call to ``task_arena::initialize`` or lazily on first use.
+    It may already exist in case of the "attaching" constructor; otherwise, it is created
+    by an explicit call to ``task_arena::initialize`` or lazily on first use.
 
 Member types and constants
 --------------------------
@@ -57,7 +57,7 @@ Member types and constants
 .. cpp:member:: static const int automatic
 
     When passed as ``max_concurrency`` to the specific constructor, arena
-    concurrency will be automatically set based on the hardware configuration.
+    concurrency is automatically set based on the hardware configuration.
 
 .. cpp:member:: static const int not_initialized
 
@@ -101,8 +101,8 @@ Member functions
 .. cpp:function:: ~task_arena()
 
     Destroys the ``task_arena`` instance, but the destruction may not be synchronized with any task execution inside this ``task_arena``.
-    Which means that an internal task arena representation associated with this ``task_arena`` instance can be destroyed later.
-    Not thread safe w.r.t. concurrent invocations of other methods.
+    It means that an internal task arena representation associated with this ``task_arena`` instance can be destroyed later.
+    Not thread-safe for concurrent invocations of other methods.
 
 .. cpp:function:: void initialize()
 
@@ -118,7 +118,7 @@ Member functions
 
 .. cpp:function:: void initialize(task_arena::attach)
 
-    If an instance of class ``task_arena::attach`` is specified as the argument, and there exists
+    If an instance of class ``task_arena::attach`` is specified as the argument, and there is
     an internal task arena representation currently used by the calling thread, the method ignores arena
     parameters and connects ``task_arena`` to that internal task arena representation.
     The method has no effect when called for an already initialized ``task_arena``.
@@ -126,11 +126,11 @@ Member functions
 .. cpp:function:: void terminate()
 
     Removes the reference to the internal task arena representation without destroying the
-    task_arena object, which can then be re-used. Not thread safe w.r.t. concurrent invocations of other methods.
+    task_arena object, which can then be re-used. Not thread safe for concurrent invocations of other methods.
 
 .. cpp:function:: bool is_active() const
 
-    Returns ``true`` if the ``task_arena`` has been initialized, ``false`` otherwise.
+    Returns ``true`` if the ``task_arena`` has been initialized; ``false``, otherwise.
 
 .. cpp:function:: int max_concurrency() const
 
@@ -140,13 +140,13 @@ Member functions
 .. cpp:function:: template<F> void enqueue(F&& f)
 
     Enqueues a task into the ``task_arena`` to process the specified functor and immediately returns.
-    The ``F`` type shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
     The task is scheduled for eventual execution by a worker thread even if no thread ever explicitly waits for the task to complete.
     If the total number of worker threads is zero, a special additional worker thread is created to execute enqueued tasks.
 
     .. note::
 
-        The method does not require the calling thread to join the arena; i.e. any number
+        The method does not require the calling thread to join the arena; that is, any number
         of threads outside of the arena can submit work to it without blocking.
 
     .. caution::
@@ -161,7 +161,7 @@ Member functions
 .. cpp:function:: template<F> auto execute(F&& f) -> decltype(f())
 
     Executes the specified functor in the ``task_arena`` and returns the value returned by the functor.
-    The ``F`` type shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
 
     The calling thread joins the ``task_arena`` if possible, and executes the functor.
     Upon return it restores the previous task scheduler state and floating-point settings.

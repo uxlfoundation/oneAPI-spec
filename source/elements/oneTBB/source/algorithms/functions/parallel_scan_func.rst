@@ -3,7 +3,7 @@ parallel_scan
 =============
 **[algorithms.parallel_scan]**
 
-Function template that computes parallel prefix.
+Function template that computes a parallel prefix.
 
 .. code:: cpp
 
@@ -26,12 +26,12 @@ A ``partitioner`` type may be one of the following entities:
 
 Requirements:
 
-* The ``Range`` type shall meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
-* The ``Body`` type shall meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
-* The ``Scan`` type shall meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
-* The ``Combine`` type shall meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
+* The ``Range`` type must meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
+* The ``Body`` type must meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
+* The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
+* The ``Combine`` type must meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
 
-The function template ``parallel_scan`` computes a parallel prefix, also known as parallel scan.
+The function template ``parallel_scan`` computes a parallel prefix, also known as a parallel scan.
 This computation is an advanced concept in parallel computing that is sometimes useful in scenarios
 that appear to have inherently serial dependences.
 
@@ -42,8 +42,8 @@ is a sequence *y*\ :sub:`0`, *y*\ :sub:`1`, *y*\ :sub:`2`, ...*y*\ :sub:`n-1` wh
 * y\ :sub:`0` = id\ :sub:`×` × z\ :sub:`0`
 * y\ :sub:`i` = y\ :sub:`i-1` × z\ :sub:`i`
 
-For example, if × is addition, the parallel prefix corresponds a running sum.
-A serial implementation of parallel prefix is:
+For example, if × is addition, the parallel prefix corresponds to a running sum.
+A serial implementation of a parallel prefix is:
 
 .. code:: cpp
 
@@ -61,7 +61,7 @@ because it distributes the work across multiple hardware threads.
 The function template ``parallel_scan`` has two forms.
 The imperative form ``parallel_scan(range, body)`` implements parallel prefix generically.
 
-A summary (look at :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`)
+A summary (refer to :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`)
 contains enough information such that for two consecutive subranges *r* and *s*:
 
 * If *r* has no preceding subrange, the scan result for *s* can be computed from knowing *s* and the summary for *r*.
@@ -69,7 +69,7 @@ contains enough information such that for two consecutive subranges *r* and *s*:
 
 The functional form ``parallel_scan(range, identity, scan, combine)`` is designed
 to use with functors and lambda expressions, hiding some complexities of the imperative form.
-It uses the same *scan* functor in both passes, differentiating them via a Boolean parameter,
+It uses the same *scan* functor in both passes, differentiating them via a boolean parameter,
 combines summaries with *combine* functor, and returns the summary computed over the whole *range*.
 The *identity* argument is the left identity element for ``Scan::operator()``.
 
@@ -82,16 +82,16 @@ pre_scan and final_scan Classes
     pre_scan_tag_and_final_scan_tag_clses.rst
 
 The ``parallel_scan`` template makes an effort to avoid prescanning where possible.
-When executed serially ``parallel_scan`` processes the subranges without any pre-scans,
+When executed serially, ``parallel_scan`` processes the subranges without any pre-scans
 by processing the subranges from left to right using final scans.
-That's why final scans must compute a summary as well as the final scan result.
+That is why final scans must compute a summary as well as the final scan result.
 The summary might be needed to process the next subrange if no other thread has pre-scanned it yet.
 
 Example (Imperative Form)
 -------------------------
 
 The following code demonstrates how ``Body`` could be implemented for ``parallel_scan``
-to compute the same result as the earlier sequential example.
+to compute the same result as in the earlier sequential example.
 
 .. code:: cpp
 
@@ -127,22 +127,22 @@ to compute the same result as the earlier sequential example.
 The definition of ``operator()`` demonstrates typical patterns when using ``parallel_scan``.
 
 * A single template defines both versions. Doing so is not required, but usually saves coding
-  effort, because the two versions are usually similar. The library defines static method
-  ``is_final_scan(``) to enable differentiation between the versions.
+  effort, because two versions are usually similar. The library defines the static method
+  ``is_final_scan`` to enable differentiation between the versions.
 * The prescan variant computes the × reduction, but does not update ``y``.
   The prescan is used by ``parallel_scan`` to generate look-ahead partial reductions.
 * The final scan variant computes the × reduction and updates ``y``.
 
-The operation ``reverse_join`` is similar to the operation ``join`` used by ``parallel_reduce``, except that the arguments are reversed.
-That is, ``this`` is the *right* argument of ×. Template function ``parallel_scan`` decides if and when to generate parallel work.
-It is thus crucial that × is associative and that the methods of ``Body`` faithfully represent it.
-Operations such as floating-point addition that are somewhat associative can be used, with the
-understanding that the results may be rounded differently depending upon the association used by ``parallel_scan``.
+The ``reverse_join`` operation is similar to the ``join`` operation used by ``parallel_reduce``, except that the arguments are reversed.
+That is, ``this`` is the *right* argument of ×. The template function ``parallel_scan`` decides if and when to generate parallel work.
+Thus, it is crucial that × is associative and that the methods of ``Body`` faithfully represent it.
+Operations such as floating-point addition, which are somewhat associative, can be used with the
+understanding that the results may be rounded differently depending on the association used by ``parallel_scan``.
 The reassociation may differ between runs even on the same machine.
 However, when executed serially, ``parallel_scan`` associates identically to the serial form shown at the beginning of this section.
 
 If you change the example to use a ``simple_partitioner``, be sure to provide a grain size.
-The code below shows the how to do this for the grain size of 1000:
+The code below shows how to do this for the grain size of 1000:
 
 .. code:: cpp
 

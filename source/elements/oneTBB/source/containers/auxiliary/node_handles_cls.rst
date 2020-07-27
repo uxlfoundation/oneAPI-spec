@@ -3,11 +3,10 @@ Node handles
 ============
 **[containers.node_handles]**
 
-Concurrent associative containers in oneAPI Threading Building Blocks
-(``concurrent_map``, ``concurrent_multimap``, ``concurrent_set``, ``concurrent_multiset``,
+Concurrent associative containers (``concurrent_map``, ``concurrent_multimap``, ``concurrent_set``, ``concurrent_multiset``,
 ``concurrent_unordered_map``, ``concurrent_unordered_multimap``, ``concurrent_unordered_set``,
-and ``concurrent_unordered_multiset``) stores elements in individually allocated, connected nodes.
-It makes possible to transfer data between containers with compatible node types by changing the connections,
+and ``concurrent_unordered_multiset``) store elements in individually allocated, connected nodes.
+These containers support data transfer between containers with compatible node types by changing the connections
 without copying or moving the actual data.
 
 Class synopsis
@@ -53,9 +52,9 @@ may exchange nodes:
   ``allocator_type``.
 * ``concurrent_unordered_set`` and ``concurrent_unordered_multiset`` with the same ``value_type`` and ``allocator_type``.
 
-Default or moved-from node handles are `empty`, i.e. do not represent a valid node.
-A non-empty node handle is typically created when a node is extracted out of a container, e.g. with the ``unsafe_extract``
-method. It stores the node along with a copy of the container`s allocator.
+Default or moved-from node handles are `empty` and do not represent a valid node.
+A non-empty node handle is typically created when a node is extracted out of a container, for example, with the ``unsafe_extract``
+method. It stores the node along with a copy of the container's allocator.
 Upon assignment or destruction a non-empty node handle destroys the stored data and deallocates the node.
 
 Member functions

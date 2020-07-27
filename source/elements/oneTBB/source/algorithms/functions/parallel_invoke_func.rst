@@ -18,14 +18,14 @@ Function template that evaluates several functions in parallel.
 
 Requirements:
 
-* All members of ``Functions`` parameter pack shall meet ``Function Objects``
-  requirements from [function.objects] ISO C++ Standard section or be a pointer to a function.
+* All members of ``Functions`` parameter pack must meet ``Function Objects``
+  requirements from the [function.objects] ISO C++ Standard section or be a pointer to a function.
 * Last member of ``Functions`` parameter pack may be a ``task_group_context&`` type.
 
-Evaluates each member passed to ``parrallel_invoke`` possibly in parallel. Return values are ignored.
+Evaluates each member passed to ``parallel_invoke`` possibly in parallel. Return values are ignored.
 
-The algoritm can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
+The algorithm can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
+so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
 
 Example
 -------

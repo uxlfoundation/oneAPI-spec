@@ -2,7 +2,7 @@
 Concurrently safe modifiers
 ===========================
 
-All methods in this section can be executed concurrently with each other,
+All methods in this section can be executed concurrently with each other
 and lookup methods.
 
 Inserting values
@@ -14,18 +14,18 @@ Inserting values
 
         bool insert( accessor& result, const key_type& key );
 
-    If the accessor ``result`` is not empty - releases the ``result`` and
-    attempts to insert the value, constructed from ``key, mapped_type()`` into the container.
+    If the accessor ``result`` is not empty, releases the ``result`` and
+    attempts to insert the value constructed from ``key, mapped_type()`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    which was already presented in the container.
+    that was already presented in the container.
 
     **Requirements**:
 
-    * the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements from [container.requirements] ISO C++ Standard section..
-    * the type ``mapped_type`` shall meet the ``DefaultConstructible`` requirements from [defaultconstructible] ISO C++ Standard section..
+    * the type ``value_type`` must meet the ``EmplaceConstructible`` requirements the from [container.requirements] ISO C++ Standard section.
+    * the type ``mapped_type`` must meet the ``DefaultConstructible`` requirements from the [defaultconstructible] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise.
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
 
 --------------------------
 
@@ -35,16 +35,16 @@ Inserting values
 
         bool insert( accessor& result, const value_type& value );
 
-    If the accessor ``result`` is not empty - releases the ``result`` and
+    If the accessor ``result`` is not empty, releases the ``result`` and
     attepts to insert the value ``value`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    which was already presented in the container.
+    that was already presented in the container.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise.
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
 
 --------------------------
 
@@ -54,10 +54,10 @@ Inserting values
 
     Attepts to insert the value ``value`` into the container.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise.
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
 
 --------------------------
 
@@ -67,18 +67,18 @@ Inserting values
 
         bool insert( accessor& result, value_type&& value );
 
-    If the accessor ``result`` is not empty - releases the ``result`` and
+    If the accessor ``result`` is not empty, releases the ``result`` and
     attepts to insert the value ``value`` into the container using move semantics.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    which was already presented in the container.
+    that was already presented in the container.
 
     ``value`` is left in a valid, but unspecified state.
 
-    **Requirements**: the type ``value_type`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise.
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
 
 --------------------------
 
@@ -88,10 +88,10 @@ Inserting values
 
     Attempts to insert the value ``value`` into the container using move semantics.
 
-    **Requirements**: the type ``value_type`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise.
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
 
 Inserting sequences of elements
 -------------------------------
@@ -108,7 +108,7 @@ Inserting sequences of elements
     it is unspecified which element should be inserted.
 
     **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator`
-    from ``[input.iterators]`` ISO C++ Standard section.
+    from the ``[input.iterators]`` ISO C++ Standard section.
 
 --------------------------
 
@@ -129,16 +129,16 @@ Emplacing elements
         template <typename... Args>
         bool emplace( accessor& result, Args&&... args );
 
-    If the accessor ``result`` is not empty - releases the ``result`` and
-    attepts to insert an element constructed in-place from ``args`` into the container.
+    If the accessor ``result`` is not empty, releases the ``result`` and
+    attempts to insert an element constructed in-place from ``args`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    which was already presented in the container.
+    that was already presented in the container.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise
 
 --------------------------
 
@@ -147,12 +147,12 @@ Emplacing elements
         template <typename... Args>
         bool emplace( Args&&... args );
 
-    Attepts to insert an element constructed in-place from ``args`` into the container.
+    Attempts to insert an element constructed in-place from ``args`` into the container.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted, ``false`` otherwise
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise
 
 Erasing elements
 ----------------
@@ -161,9 +161,9 @@ Erasing elements
 
         bool erase( const key_type& key );
 
-    If an elemnent with the key equal to ``key`` exists - removes it from the container.
+    If an elemnent with the key equivalent to  ``key`` exists, removes it from the container.
 
-    **Returns**: ``true`` if an element was removed, ``false`` otherwise.
+    **Returns**: ``true`` if an element was removed; ``false``, otherwise.
 
 --------------------------
 
@@ -176,5 +176,5 @@ Erasing elements
 
     **Requirements**: ``item_accessor`` should not be empty.
 
-    **Returns**: ``true`` if an element was removed by the current thread, ``false``
-    if it was removed by an other thread.
+    **Returns**: ``true`` if an element was removed by the current thread; ``false``
+    if it was removed by another thread.

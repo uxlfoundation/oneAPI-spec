@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_multimap`` supports class template argument
+Where possible, constructors of ``concurrent_multimap`` support class template argument
 deduction (since C++17):
 
 .. code:: cpp
@@ -37,7 +37,7 @@ deduction (since C++17):
     concurrent_multimap( std::initializer_list<std::pair<Key, T>>, Allocator )
     -> concurrent_multimap<Key, T, std::less<Key>, Allocator>;
 
-where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_alloc_value_t`` defines as follows:
+where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_alloc_value_t`` are defined as follows:
 
 .. code:: cpp
 

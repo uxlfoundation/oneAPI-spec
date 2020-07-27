@@ -14,7 +14,7 @@ Pushing elements
     Waits until the number of items in the queue is less than the capacity and
     pushes a copy of ``value`` into the container.
 
-    **Requirements**: the type ``T`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``T`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 -----------------------------
@@ -26,10 +26,10 @@ Pushing elements
     If the number of items in the queue is less than the capacity, pushes a copy
     of ``value`` into the container.
 
-    **Requirements**: the type ``T`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``T`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if the item was pushed, ``false`` otherwise.
+    **Returns**: ``true`` if the item was pushed; ``false``, otherwise.
 
 -----------------------------
 
@@ -40,7 +40,7 @@ Pushing elements
     Waits until the number of items in the queue is less than ``capacity()`` and
     pushes ``value`` into the container using move semantics.
 
-    **Requirements**: the type ``T`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``T`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
     ``value`` is left in a valid, but unspecified state.
@@ -54,12 +54,12 @@ Pushing elements
     If the number of items in the queue is less than the capacity, pushes ``value`` into
     the container using move semantics.
 
-    **Requirements**: the type ``T`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``T`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
     ``value`` is left in a valid, but unspecified state.
 
-    **Returns**: ``true`` if the item was pushed, ``false`` otherwise.
+    **Returns**: ``true`` if the item was pushed; ``false``, otherwise.
 
 -----------------------------
 
@@ -71,7 +71,7 @@ Pushing elements
     Waits until the number of items in the queue is less than ``capacity()`` and
     pushes a new element constructed from ``args`` into the container.
 
-    **Requirements**: the type ``T`` shall meet the ``EmplaceConstructible`` requirements from
+    **Requirements**: the type ``T`` must meet the ``EmplaceConstructible`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 -----------------------------
@@ -84,10 +84,10 @@ Pushing elements
     If the number of items in the queue is less than the capacity, pushes a
     new element constructed from ``args`` into the container.
 
-    **Requirements**: the type ``T`` shall meet the ``EmplaceConstructible`` requirements from
+    **Requirements**: the type ``T`` must meet the ``EmplaceConstructible`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if the item was pushed, ``false`` otherwise.
+    **Returns**: ``true`` if the item was pushed; ``false``, otherwise.
 
 Popping elements
 ----------------
@@ -96,10 +96,10 @@ Popping elements
 
         void pop( value_type& value );
 
-    Waits until the item becomes available, copies it from the container and
+    Waits until the item becomes available, copies it from the container, and
     assignes it to the ``value``. The popped element is destroyed.
 
-    **Requirements**: the type ``T`` shall meet the ``MoveAssignable`` requirements from [moveassignable]
+    **Requirements**: the type ``T`` must meet the ``MoveAssignable`` requirements from the [moveassignable]
     ISO C++ Standard section.
 
 -----------------------------
@@ -113,10 +113,10 @@ Popping elements
     Otherwise, copies the last element from the container and assigns it to the ``value``.
     The popped element is destroyed.
 
-    **Requirements**: the type ``T`` shall meet the ``MoveAssignable`` requirements from [moveassignable]
+    **Requirements**: the type ``T`` must meet the ``MoveAssignable`` requirements from the [moveassignable]
     ISO C++ Standard section.
 
-    **Returns**: ``true`` if the element was popped, ``false`` otherwise.
+    **Returns**: ``true`` if the element was popped; ``false``, otherwise.
 
 abort
 -----
@@ -125,8 +125,8 @@ abort
 
         void abort();
 
-    Wakes up any threads that are waiting on the queue via ``push``, ``pop`` or ``emplace``
-    operations and raises `tbb::user_abort``` exception on those threads.
+    Wakes up any threads that are waiting on the queue via ``push``, ``pop``, or ``emplace``
+    operations and raises the ``tbb::user_abort`` exception on those threads.
 
 Capacity of the queue
 ---------------------
