@@ -1,26 +1,13 @@
-// Copyright (c) 2019-2020 Intel Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
+/*############################################################################
+  # Copyright (C) 2019-2020 Intel Corporation
+  #
+  # SPDX-License-Identifier: MIT
+  ############################################################################*/
+
 #ifndef __MFXBRC_H__
 #define __MFXBRC_H__
 
-#include "mfxvstructures.h"
+#include "mfxstructures.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -49,10 +36,10 @@ typedef struct {
     mfxU32 DisplayOrder;    /*!< The frame number in a sequence of frames in display order starting from last IDR. */
     mfxU32 CodedFrameSize;  /*!< Size of the frame in bytes after encoding. */
     mfxU16 FrameType;       /*!< See FrameType enumerator */
-    mfxU16 PyramidLayer;    /*!< B-pyramid or P-pyramid layer, frame belongs to. */
+    mfxU16 PyramidLayer;    /*!< B-pyramid or P-pyramid layer that the frame belongs to. */
     mfxU16 NumRecode;       /*!< Number of recodings performed for this frame. */
-    mfxU16 NumExtParam;     /*!< Reserved for the future use. */
-    mfxExtBuffer** ExtParam;/*!< Reserved for the future use. */
+    mfxU16 NumExtParam;     /*!< Reserved for future use. */
+    mfxExtBuffer** ExtParam;/*!< Reserved for future use. */
 } mfxBRCFrameParam;
 MFX_PACK_END()
 
@@ -70,18 +57,18 @@ typedef struct {
                                          mfxExtCodingOption::VuiNalHrdParameters = MFX_CODINGOPTION_OFF. Calculated by encoder if
                                          initial_cpb_removal_delay==0 && initial_cpb_removal_offset == 0 && HRD control is switched on. */
     mfxU32 reserved1[7];
-    mfxU32 MaxFrameSize;            /*!< Max frame size in bytes. This is option for repack feature. Driver calls PAK until current frame size is
-                                         less or equal maxFrameSize or number of repacking for this frame is equal to maxNumRePak.Repack is available
-                                         if driver support, MaxFrameSize !=0, MaxNumRePak != 0. Ignored if maxNumRePak == 0. */
-    mfxU8  DeltaQP[8];              /*!< This is option for repack feature. Ignored if maxNumRePak == 0 or maxNumRePak==0. If current
+    mfxU32 MaxFrameSize;            /*!< Max frame size in bytes. Option for repack feature. Driver calls PAK until current frame size is
+                                         less than or equal to maxFrameSize, or number of repacking for this frame is equal to maxNumRePak. Repack is available
+                                         if there is driver support, MaxFrameSize !=0, MaxNumRePak != 0. Ignored if maxNumRePak == 0. */
+    mfxU8  DeltaQP[8];              /*!< Option for repack feature. Ignored if maxNumRePak == 0 or maxNumRePak==0. If current
                                          frame size > maxFrameSize and or number of repacking (nRepack) for this frame <= maxNumRePak,
                                          PAK is called with QP = mfxBRCFrameCtrl::QpY + Sum(DeltaQP[i]), where i = [0,nRepack].
                                          Non zero DeltaQP[nRepack] are ignored if nRepack > maxNumRePak.
                                          If repacking feature is on ( maxFrameSize & maxNumRePak are not zero), it is calculated by encoder. */
     mfxU16 MaxNumRepak;             /*!< Number of possible repacks in driver if current frame size > maxFrameSize. Ignored if maxFrameSize==0.
                                          See maxFrameSize description. Possible values are [0,8]. */
-    mfxU16 NumExtParam;             /*!< Reserved for the future use. */
-    mfxExtBuffer** ExtParam;        /*!< Reserved for the future use. */
+    mfxU16 NumExtParam;             /*!< Reserved for future use. */
+    mfxExtBuffer** ExtParam;        /*!< Reserved for future use. */
 #else
     mfxU32 reserved1[13];
     mfxHDL reserved2;
@@ -112,8 +99,8 @@ MFX_PACK_END()
 
 MFX_PACK_BEGIN_STRUCT_W_PTR()
 /*!
-   The mfxExtBRC structure contains set of callbacks to perform external bit rate control. Can be attached to mfxVideoParam structure during
-   encoder initialization. Turn mfxExtCodingOption2::ExtBRC option ON to make encoder use external BRC instead of native one.
+   The mfxExtBRC structure contains a set of callbacks to perform external bitrate control. Can be attached to mfxVideoParam structure during
+   encoder initialization. Turn mfxExtCodingOption2::ExtBRC option ON to make the encoder use the external BRC instead of the native one.
 */
 typedef struct {
     mfxExtBuffer Header; /*!< Extension buffer header. Header.BufferId must be equal to MFX_EXTBUFF_BRC. */
@@ -122,68 +109,66 @@ typedef struct {
     mfxHDL pthis;        /*!< Pointer to the BRC object. */
 
     /*!
-       @brief This function initializes BRC session according to parameters from input mfxVideoParam and attached structures. It does not modify in
-               any way the input mfxVideoParam and attached structures. Invoked during MFXVideoENCODE_Init.
-       
+       @brief This function initializes the BRC session according to parameters from input mfxVideoParam and attached structures. It does not modify the input mfxVideoParam and attached structures. Invoked during MFXVideoENCODE_Init.
+
        @param[in]      pthis Pointer to the BRC object.
        @param[in]      par   Pointer to the mfxVideoParam structure that was used for the encoder initialization.
-   
+
        @return
-          MFX_ERR_NONE               if no error. \n
-          MFX_ERR_UNSUPPORTED        The function detected unsupported video parameters. 
+          MFX_ERR_NONE               The function completed successfully. \n
+          MFX_ERR_UNSUPPORTED        The function detected unsupported video parameters.
     */
     mfxStatus (MFX_CDECL *Init)         (mfxHDL pthis, mfxVideoParam* par);
 
     /*!
-       @brief This function resets BRC session according to new parameters. It does not modify in any way the input mfxVideoParam and
-               attached structures. Invoked during MFXVideoENCODE_Reset.
-       
-       @param[in]      pthis Pointer to the BRC object
-       @param[in]      par   Pointer to the mfxVideoParam structure that was used for the encoder initialization
-   
+       @brief This function resets BRC session according to new parameters. It does not modify the input mfxVideoParam and attached structures. Invoked during MFXVideoENCODE_Reset.
+
+       @param[in]      pthis Pointer to the BRC object.
+       @param[in]      par   Pointer to the mfxVideoParam structure that was used for the encoder initialization.
+
        @return
-          MFX_ERR_NONE                       if no error. \n
+          MFX_ERR_NONE                       The function completed successfully. \n
           MFX_ERR_UNSUPPORTED                The function detected unsupported video parameters. \n
-          MFX_ERR_INCOMPATIBLE_VIDEO_PARAM   The function detected that provided by the application video parameters are incompatible with
+          MFX_ERR_INCOMPATIBLE_VIDEO_PARAM   The function detected that the video parameters provided by the application are incompatible with
                                              initialization parameters. Reset requires additional memory allocation and cannot be executed.
     */
     mfxStatus (MFX_CDECL *Reset)        (mfxHDL pthis, mfxVideoParam* par);
 
     /*!
        @brief This function de-allocates any internal resources acquired in Init for this BRC session. Invoked during MFXVideoENCODE_Close.
-       
+
        @param[in]      pthis Pointer to the BRC object.
-   
+
        @return
-          MFX_ERR_NONE               if no error.
+          MFX_ERR_NONE               The function completed successfully.
     */
     mfxStatus (MFX_CDECL *Close)        (mfxHDL pthis);
 
     /*! @brief This function returns controls (ctrl) to encode next frame based on info from input mfxBRCFrameParam structure (par) and
                internal BRC state. Invoked asynchronously before each frame encoding or recoding.
-       
+
        @param[in]      pthis Pointer to the BRC object.
        @param[in]      par   Pointer to the mfxVideoParam structure that was used for the encoder initialization.
        @param[out]     ctrl  Pointer to the output mfxBRCFrameCtrl structure.
-   
+
        @return
-          MFX_ERR_NONE               if no error. 
+          MFX_ERR_NONE               The function completed successfully.
     */
     mfxStatus (MFX_CDECL* GetFrameCtrl) (mfxHDL pthis, mfxBRCFrameParam* par, mfxBRCFrameCtrl* ctrl);
 
     /*!
-       @brief This function updates internal BRC state and returns status to instruct encoder whether it should recode previous frame,
-               skip it, do padding or proceed to next frame based on info from input mfxBRCFrameParam and mfxBRCFrameCtrl structures.
+       @brief This function updates internal BRC state and returns status to instruct encoder whether it should recode the previous frame,
+               skip it, do padding, or proceed to next frame based on info from input mfxBRCFrameParam and mfxBRCFrameCtrl structures.
                Invoked asynchronously after each frame encoding or recoding.
-       
+
        @param[in]      pthis Pointer to the BRC object.
        @param[in]      par   Pointer to the mfxVideoParam structure that was used for the encoder initialization.
        @param[in]      ctrl  Pointer to the output mfxBRCFrameCtrl structure.
        @param[in]    status  Pointer to the output mfxBRCFrameStatus structure.
 
-   
+
        @return
-          MFX_ERR_NONE               if no error. 
+          MFX_ERR_NONE               The function completed successfully.
     */
     mfxStatus (MFX_CDECL* Update)       (mfxHDL pthis, mfxBRCFrameParam* par, mfxBRCFrameCtrl* ctrl, mfxBRCFrameStatus* status);
 

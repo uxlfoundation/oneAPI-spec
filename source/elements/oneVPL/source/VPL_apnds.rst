@@ -1,0 +1,15 @@
+==========
+Appendices
+==========
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   VPL_intel_media_sdk
+   VPL_apnds_a
+   VPL_apnds_b
+   VPL_apnds_c
+   VPL_apnds_d
+   VPL_apnds_e
+   VPL_apnds_f
