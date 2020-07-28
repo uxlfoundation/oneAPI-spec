@@ -5,11 +5,9 @@ orgqr_batch
 
 Generates the orthogonal/unitary matrix :math:`Q_i` of the QR factorizations for a group of general matrices.
 
-.. _onemkl_lapack_orgqr_batch_description:
-
 .. rubric:: Description
 
-:ref:`onemkl_lapack_orgqr_batch` supports the following precisions.
+``orgqr_batch`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -25,7 +23,7 @@ orgqr_batch (Buffer Version)
 
 .. rubric:: Description
 
-The buffer version of :ref:`onemkl_lapack_orgqr_batch` supports only the strided API. 
+The buffer version of ``orgqr_batch`` supports only the strided API. 
    
 **Strided API**
 
@@ -42,7 +40,7 @@ The buffer version of :ref:`onemkl_lapack_orgqr_batch` supports only the strided
 
 .. rubric:: Syntax
 
-.. cpp:function::  void orgqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+.. cpp:function::  void oneapi::mkl::lapack::orgqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
@@ -64,7 +62,7 @@ a
   Array resulting after call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_buffer` function.
 
 lda
-  Leading dimension of :math:`A_i` (:math:`lda \le m`).
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
 stride_a
   The stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
@@ -98,7 +96,7 @@ orgqr_batch (USM Version)
 
 .. rubric:: Description
 
-The USM version of :ref:`onemkl_lapack_orgqr_batch` supports the group API and strided API. 
+The USM version of ``orgqr_batch`` supports the group API and strided API. 
 
 **Group API**
 
@@ -115,7 +113,7 @@ The USM version of :ref:`onemkl_lapack_orgqr_batch` supports the group API and s
 
 .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event orgqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
@@ -186,7 +184,7 @@ Output event to wait on to ensure computation is complete.
 
 .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event orgqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
 .. container:: section
 
@@ -208,7 +206,7 @@ a
   Array resulting after call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
 lda
-  Leading dimension of :math:`A_i` (:math:`lda \le m`).
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
 stride_a
   The stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
@@ -243,4 +241,6 @@ a
    .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

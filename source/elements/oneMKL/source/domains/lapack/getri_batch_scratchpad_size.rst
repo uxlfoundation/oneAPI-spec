@@ -5,11 +5,11 @@ getri_batch_scratchpad_size
 
 Computee size of scratchpad memory required for the :ref:`onemkl_lapack_getri_batch` function.
 
-.. _onemkl_lapack_getri_batch_scratchpad_size_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_getri_batch_scratchpad_size` supports the following precisions.
+``getri_batch_scratchpad_size`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -24,9 +24,11 @@ Computee size of scratchpad memory required for the :ref:`onemkl_lapack_getri_ba
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_getri_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
 
 .. container:: section
 
@@ -39,7 +41,7 @@ n
   Array of ``group_count`` :math:`n_g` parameters specifying the order of the matrices belonging to group :math:`g`.
 
 lda
-	Array of ``group_count`` :math:`lda_g` parameters specifying the leading dimensions of the matrices belonging to group :math:`g`.
+	Array of ``group_count`` :math:`\text{lda}_g` parameters specifying the leading dimensions of the matrices belonging to group :math:`g`.
 
 group_count
   Number of groups of parameters. Must be at least 0.
@@ -57,22 +59,24 @@ Number of elements of type ``T`` the scratchpad memory should able to hold to be
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_getri_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t batch_size);
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t batch_size);
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
 	Device queue where calculations will be performed.
 
 n
-  The order of the matrices :math:`A_i` (0 ≤ n).
+  The order of the matrices :math:`A_i` (0 \le n).
 
 lda
-	Leading dimension of :math:`A_i` (n ≤ lda).
+	Leading dimension of :math:`A_i` (:math:`n \le \text{lda}`).
 
 stride_a
 	Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
@@ -85,7 +89,9 @@ batch_size
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_getri_batch` function.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

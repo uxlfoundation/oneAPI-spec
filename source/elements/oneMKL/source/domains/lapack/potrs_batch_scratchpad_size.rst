@@ -5,11 +5,11 @@ potrs_batch_scratchpad_size
 
 Computes size of scratchpad memory required for the :ref:`onemkl_lapack_potrs_batch` function.
 
-.. _onemkl_lapack_potrs_batch_scratchpad_size_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_potrs_batch_scratchpad_size` supports the following precisions.
+``potrs_batch_scratchpad_size`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -24,38 +24,40 @@ Computes size of scratchpad memory required for the :ref:`onemkl_lapack_potrs_ba
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_potrs_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t potrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::potrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
 
 uplo
- | Array of ``group_count`` :math:`uplo_g` parameters.
- | Each of :math:`uplo_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
- | If :math:`uplo_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
- | If :math:`uplo_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+ | Array of ``group_count`` :math:`\text{uplo}_g` parameters.
+ | Each of :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
+ | If :math:`\text{uplo}_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+ | If :math:`\text{uplo}_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
  | Array of ``group_count`` :math:`n_g` parameters.
  | Each :math:`n_g` specifies the order of the input matrices belonging to group :math:`g`.
 
 nrhs
- | Array of ``group_count`` :math:`nrhs_g` parameters.
+ | Array of ``group_count`` :math:`\text{nrhs}_g` parameters.
  | Each :math:`rhs_g` specifies the number of right-hand sides supplied for group :math:`g`.
 
 lda
- | Array of ``group_count`` :math:`lda_g` parameters.
- | Each :math:`lda_g` specifies the leading dimensions of the matrices belonging to group :math:`g`.
+ | Array of ``group_count`` :math:`\text{lda}_g` parameters.
+ | Each :math:`\text{lda}_g` specifies the leading dimensions of the matrices belonging to group :math:`g`.
 
 ldb
- | Array of ``group_count`` :math:`ldb_g` parameters.
- | Each :math:`ldb_g` specifies the leading dimensions of the matrices belonging to group :math:`g`.
+ | Array of ``group_count`` :math:`\text{ldb}_g` parameters.
+ | Each :math:`\text{ldb}_g` specifies the leading dimensions of the matrices belonging to group :math:`g`.
 
 group_count
   Number of groups of parameters. Must be at least 0.
@@ -64,7 +66,7 @@ group_sizes Array of group_count integers. Array element with index :math:`g` sp
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_potrs_batch` function.
 
@@ -72,13 +74,15 @@ Number of elements of type ``T`` the scratchpad memory should able to hold to be
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_potrs_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t potrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size);
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::potrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size);
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -91,7 +95,7 @@ n
   Order of matrices :math:`A_i` (:math:`0 \le n`).
 
 nrhs  
-  Number of right-hand sides (:math:`0 \le nrhs`).
+  Number of right-hand sides (:math:`0 \le \text{nrhs}`).
 
 lda
   Leading dimension of :math:`A_i`.
@@ -110,7 +114,9 @@ batch_size
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_potrs_batch` function.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 
