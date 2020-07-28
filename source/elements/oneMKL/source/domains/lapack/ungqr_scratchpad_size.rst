@@ -3,110 +3,59 @@
 ungqr_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_ungqr` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``ungqr_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_ungqr` function.
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-         ``ungqr_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ungqr` function should be able to hold.
-      Calls to this routine must specify the template parameter explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_ungqr` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 ungqr_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::ungqr_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t         n, std::int64_t k, std::int64_t lda)
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Input Parameters
+         
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_ungqr` function will be performed.
 
-      .. container:: dlsyntaxpara
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
+n
+   The number of columns the matrix :math:`A` (:math:`0 \le n \le m`).
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::ungqr_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t         n, std::int64_t k, std::int64_t lda)
+k
+   The number of elementary reflectors whose product defines the
+   matrix :math:`Q` (:math:`0 \le k \le n`).
 
-   .. container:: section
+lda
+   The leading dimension of ``a``.
 
+.. container:: section
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+  .. rubric:: Return Value
+         
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_ungqr` function should be able to hold.
 
-
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_ungqr` function will be performed.
-
-
-      m
-         The number of rows in the matrix ``A`` (``0≤m``).
-
-
-      n
-         The number of columns the matrix ``A`` (``0≤n≤m``).
-
-
-      k
-         The number of elementary reflectors whose product defines the
-         matrix ``Q`` (``0≤k≤n``).
-
-
-      lda
-         The leading dimension of a.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ungqr` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
 
 

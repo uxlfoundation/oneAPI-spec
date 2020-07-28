@@ -5,11 +5,11 @@ potrs_batch
 
 Computes the LU factorizations of a batch of general matrices.
 
-.. _onemkl_lapack_potrs_batch_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_potrs_batch` supports the following precisions.
+``potrs_batch`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -25,9 +25,11 @@ Computes the LU factorizations of a batch of general matrices.
 potrs_batch (Buffer Version)
 ----------------------------
 
-.. rubric:: Description
+.. container:: section
 
-The buffer version of :ref:`onemkl_lapack_potrs_batch` supports only the strided API. 
+  .. rubric:: Description
+
+The buffer version of ``potrs_batch`` supports only the strided API. 
    
 **Strided API**
 
@@ -38,13 +40,15 @@ The buffer version of :ref:`onemkl_lapack_potrs_batch` supports only the strided
  | The systems are solved with multiple right-hand sides stored in the columns of the matrices :math:`B_i`.
  | Before calling this routine, matrices :math:`A_i` should be factorized by call to the Strided API of the :ref:`onemkl_lapack_potrf_batch_buffer` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  void potrs_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+  .. rubric:: Syntax
+
+.. cpp:function::  void oneapi::mkl::lapack::potrs_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -58,7 +62,7 @@ n
   The order of matrices :math:`A_i` (:math:`0 \le n`).
 
 nrhs
-  The number of right-hand sides (:math:`0 \le nrhs`).
+  The number of right-hand sides (:math:`0 \le \text{nrhs}`).
 
 a
   Array containing batch of factorizations of the matrices :math:`A_i`, as returned by the Strided API of the :ref:`onemkl_lapack_potrf_batch_buffer` function.
@@ -89,7 +93,7 @@ scratchpad_size
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 b
   Solution matrices :math:`X_i`.
@@ -99,50 +103,54 @@ b
 potrs_batch (USM Version)
 -------------------------
 
-.. rubric:: Description
+.. container:: section
 
-The USM version of :ref:`onemkl_lapack_potrs_batch` supports the group API and strided API. 
+  .. rubric:: Description
+
+The USM version of ``potrs_batch`` supports the group API and strided API. 
 
 **Group API**
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  cl::sycl::event potrs_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrs_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
 
 uplo  
- | Array of ``group_count`` :math:`uplo_g` parameters.
- | Each of :math:`uplo_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
- | If :math:`uplo_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
- | If :math:`uplo_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+ | Array of ``group_count`` :math:`\text{uplo}_g` parameters.
+ | Each of :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
+ | If :math:`\text{uplo}_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+ | If :math:`\text{uplo}_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
  | Array of ``group_count`` :math:`n_g` parameters.
  | Each :math:`n_g` specifies the order of the input matrices from array ``a`` belonging to group :math:`g`.
 
 nrhs
- | Array of ``group_count`` :math:`nrhs_g` parameters.
- | Each :math:`nrhs_g` specifies the number of right-hand sides supplied for group :math:`g` in corresponding part of array ``b``.
+ | Array of ``group_count`` :math:`\text{nrhs}_g` parameters.
+ | Each :math:`\text{nrhs}_g` specifies the number of right-hand sides supplied for group :math:`g` in corresponding part of array ``b``.
 
 a
   Array of ``batch_size`` pointers to Cholesky factored matrices :math:`A_i` as returned by the Group API of the :ref:`onemkl_lapack_potrf_batch_usm` function.
 
 lda
- | Array of ``group_count`` :math:`lda_g` parameters.
- | Each :math:`lda_g` specifies the leading dimensions of the matrices from ``a`` belonging to group :math:`g`.
+ | Array of ``group_count`` :math:`\text{lda}_g` parameters.
+ | Each :math:`\text{lda}_g` specifies the leading dimensions of the matrices from ``a`` belonging to group :math:`g`.
 
 b
-  Array of ``batch_size`` pointers to right-hand side matrices :math:`B_i`, each of size :math:`ldb_g \cdot nrhs_g`, where :math:`g` is an index of group corresponding to :math:`B_i`.
+  Array of ``batch_size`` pointers to right-hand side matrices :math:`B_i`, each of size :math:`\text{ldb}_g \cdot \text{nrhs}_g`, where :math:`g` is an index of group corresponding to :math:`B_i`.
 
 ldb
- | Array of ``group_count`` :math:`ldb_g` parameters.
- | Each :math:`ldb_g` specifies the leading dimensions of the matrices from ``b`` belonging to group :math:`g`.
+ | Array of ``group_count`` :math:`\text{ldb}_g` parameters.
+ | Each :math:`\text{ldb}_g` specifies the leading dimensions of the matrices from ``b`` belonging to group :math:`g`.
 
 group_count
   Number of groups of parameters. Must be at least 0.
@@ -161,14 +169,14 @@ events
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 b
   Solution matrices :math:`X_i`.
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
 
@@ -181,13 +189,15 @@ Output event to wait on to ensure computation is complete.
  | The systems are solved with multiple right-hand sides stored in the columns of the matrices :math:`B_i`.
  | Before calling this routine, matrices :math:`A_i` should be factorized by call to the Strided API of the :ref:`onemkl_lapack_potrf_batch_usm` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  cl::sycl::event potrs_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrs_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -235,14 +245,16 @@ events
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 b
   Solution matrices :math:`X_i`.
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

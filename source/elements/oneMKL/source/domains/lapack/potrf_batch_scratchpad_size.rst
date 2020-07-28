@@ -5,11 +5,11 @@ potrf_batch_scratchpad_size
 
 Computes size of scratchpad memory required for the :ref:`onemkl_lapack_potrf_batch` function.
 
-.. _onemkl_lapack_potrf_batch_scratchpad_size_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_potrf_batch_scratchpad_size` supports the following precisions.
+``potrf_batch_scratchpad_size`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -24,29 +24,31 @@ Computes size of scratchpad memory required for the :ref:`onemkl_lapack_potrf_ba
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_potrf_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t potrf_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::potrf_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
 
 uplo
- | Array of ``group_count`` :math:`uplo_g` parameters.
- | Each of :math:`uplo_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
- | If :math:`uplo_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
- | If :math:`uplo_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+ | Array of ``group_count`` :math:`\text{uplo}_g` parameters.
+ | Each of :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
+ | If :math:`\text{uplo}_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+ | If :math:`\text{uplo}_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
  | Array of ``group_count`` :math:`n_g` parameters.
  | Each ng specifies the order of the input matrices belonging to group :math:`g`.
 
 lda
- | Array of ``group_count`` :math:`lda_g` parameters.
+ | Array of ``group_count`` :math:`\text{lda}_g` parameters.
  | Each ldag specifies the leading dimensions of the matrices belonging to group :math:`g`.
 
 group_count
@@ -57,7 +59,7 @@ group_sizes
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_potrf_batch` function.
 
@@ -65,13 +67,15 @@ Number of elements of type ``T`` the scratchpad memory should able to hold to be
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_potrf_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t potrf_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size);
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::potrf_batch_scratchpad_size(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size);
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -94,7 +98,9 @@ batch_size
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_potrf_batch` function.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

@@ -5,11 +5,9 @@ geqrf_batch_scratchpad_size
 
 Computes size of scratchpad memory required for the :ref:`onemkl_lapack_geqrf_batch` function.
 
-.. _onemkl_lapack_geqrf_batch_scratchpad_size_description:
-
 .. rubric:: Description
 
-:ref:`onemkl_lapack_geqrf_batch_scratchpad_size` supports the following precisions.
+``geqrf_batch_scratchpad_size`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -26,7 +24,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
 .. rubric:: Syntax
 
-.. cpp:function::  std::int64_t geqrf_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::geqrf_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
 
 .. container:: section
 
@@ -63,7 +61,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
 .. rubric:: Syntax
 
-.. cpp:function::  std::int64_t geqrf_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_tau, std::int64_t batch_size);
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::geqrf_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_tau, std::int64_t batch_size);
 
 .. container:: section
 
@@ -85,7 +83,7 @@ stride_a
   Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
 stride_tau
-  Stride between the beginnings of arrays :math:`tau_i` inside the array ``tau``.
+  Stride between the beginnings of arrays :math:`\tau_i` inside the array ``tau``.
 
 batch_size
   Number of problems in a batch.
@@ -96,3 +94,4 @@ batch_size
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_geqrf_batch` function.
 
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`

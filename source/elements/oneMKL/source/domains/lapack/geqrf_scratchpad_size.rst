@@ -3,108 +3,53 @@
 geqrf_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_geqrf` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_geqrf` function.
+``geqrf_scratchpad_size`` supports the following precisions.
 
+    .. list-table:: 
+       :header-rows: 1
 
-         ``geqrf_scratchpad_size`` supports the following precisions.
+       * -  T 
+       * -  ``float`` 
+       * -  ``double`` 
+       * -  ``std::complex<float>`` 
+       * -  ``std::complex<double>``
 
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_geqrf` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
-         .. list-table:: 
-            :header-rows: 1
+.. container:: section
 
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
+  .. rubric:: Syntax
 
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::geqrf_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t         n, std::int64_t lda)
 
+.. container:: section
 
+  .. rubric:: Input Parameters
 
-   .. container:: section
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_geqrf` function will be performed.
 
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
-      .. rubric:: Description
-         :class: sectiontitle
+n
+   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
 
+lda
+   The leading dimension of ``a``.
 
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_geqrf` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
+.. container:: section
 
+  .. rubric:: Return Value
 
-geqrf_scratchpad_size
----------------------
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_geqrf` function should be able to hold.
 
-.. container::
-
-   .. container:: section
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. container:: dlsyntaxpara
-
-
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::geqrf_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t         n, std::int64_t lda)
-
-   .. container:: section
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_geqrf` function will be performed.
-
-
-      m
-         The number of rows in the matrix ``A`` (``0≤m``).
-
-
-      n
-         The number of columns in the matrix ``A`` (``0≤n``).
-
-
-      lda
-         The leading dimension of a.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_geqrf` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
-
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 

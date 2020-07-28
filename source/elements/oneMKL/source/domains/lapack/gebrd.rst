@@ -3,332 +3,216 @@
 gebrd
 =====
 
-
-.. container::
-
-
-   Reduces a general matrix to bidiagonal form.
-
-
-      ``gebrd`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Reduces a general matrix to bidiagonal form.
 
 .. container:: section
 
+    .. rubric:: Description
 
-   .. rubric:: Description
-      :class: sectiontitle
+``gebrd`` supports the following precisions.
 
+     .. list-table:: 
+        :header-rows: 1
 
-   The routine reduces a general ``m``-by-``n`` matrix ``A`` to a
-   bidiagonal matrix ``B`` by an orthogonal (unitary) transformation.
+        * -  T 
+        * -  ``float`` 
+        * -  ``double`` 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-
-   If ``m≥n``, the reduction is given by |image0|
-
-
-   where ``B``\ :sub:`1` is an ``n``-by-``n`` upper diagonal matrix,
-   ``Q`` and ``P`` are orthogonal or, for a complex ``A``, unitary
-   matrices; ``Q``\ :sub:`1` consists of the first ``n`` columns of
-   ``Q``.
-
-
-   If ``m < n``, the reduction is given by
+The routine reduces a general :math:`m \times n` matrix :math:`A` to a 
+bidiagonal matrix :math:`B` by an orthogonal (unitary) transformation.
 
 
-   ``A = Q*B*PH = Q*(B10)*PH = Q1*B1*P1H``,
+If :math:`m \ge n`, the reduction is given by :math:`A=QBP^H=\begin{pmatrix}B_1\\0\end{pmatrix}P^H=Q_1B_1P_H`
 
+where :math:`B_{1}` is an :math:`n \times n` upper diagonal matrix,
+:math:`Q` and :math:`P` are orthogonal or, for a complex :math:`A`, unitary
+matrices; :math:`Q_{1}` consists of the first :math:`n` columns of
+:math:`Q`.
 
-   where ``B``\ :sub:`1` is an ``m``-by-``m`` lower diagonal matrix,
-   ``Q`` and ``P`` are orthogonal or, for a complex ``A``, unitary
-   matrices; ``P``\ :sub:`1` consists of the first ``m`` columns of
-   ``P``.
+If :math:`m < n`, the reduction is given by
 
+:math:`A = QBP^H = Q\begin{pmatrix}B_1\\0\end{pmatrix}P^H = Q_1B_1P_1^H`,
 
-   The routine does not form the matrices ``Q`` and ``P`` explicitly,
-   but represents them as products of elementary reflectors. Routines
-   are provided to work with the matrices ``Q`` and ``P`` in this
-   representation:
+where :math:`B_{1}` is an :math:`m \times m` lower diagonal matrix,
+:math:`Q` and :math:`P` are orthogonal or, for a complex :math:`A`, unitary
+matrices; :math:`P_{1}` consists of the first :math:`m` columns of
+:math:`P`.
 
+The routine does not form the matrices :math:`Q` and :math:`P` explicitly,
+but represents them as products of elementary reflectors. Routines
+are provided to work with the matrices :math:`Q` and :math:`P` in this
+representation:
 
-   If the matrix ``A`` is real,
+If the matrix :math:`A` is real,
 
+-  to compute :math:`Q` and :math:`P` explicitly, call
+   :ref:`onemkl_lapack_orgbr`.
 
-   -  to compute ``Q`` and ``P`` explicitly, call
-      :ref:`onemkl_lapack_orgbr`.
+If the matrix :math:`A` is complex,
 
+-  to compute :math:`Q` and :math:`P` explicitly, call
+   :ref:`onemkl_lapack_ungbr`
 
-   If the matrix ``A`` is complex,
-
-
-   -  to compute ``Q`` and ``P`` explicitly, call
-      :ref:`onemkl_lapack_ungbr`
-
-
-gebrd (BUFFER Version)
+gebrd (Buffer Version)
 ----------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void onemkl::lapack::gebrd(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1>      &d, cl::sycl::buffer<realT,1> &e, cl::sycl::buffer<T,1> &tauq, cl::sycl::buffer<T,1> &taup,      cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
-
+.. cpp:function::  void oneapi::mkl::lapack::gebrd(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1>      &d, cl::sycl::buffer<realT,1> &e, cl::sycl::buffer<T,1> &tauq, cl::sycl::buffer<T,1> &taup,      cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Input Parameters
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
-   queue
-      The queue where the routine should be executed.
+n
+   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
 
+a
+   The buffer :math:`a`, size (``lda,*``). The buffer ``a`` contains the
+   matrix :math:`A`. The second dimension of ``a`` must be at least
+   :math:`\max(1, m)`.
 
-   m
-      The number of rows in the matrix ``A`` (``0≤m``).
+lda
+   The leading dimension of :math:`a`.
 
-
-   n
-      The number of columns in the matrix ``A`` (``0≤n``).
-
-
-   a
-      The buffer ``a``, size (``lda,*``). The buffer ``a`` contains the
-      matrix ``A``. The second dimension of ``a`` must be at least
-      ``max(1, m)``.
-
-
-   lda
-      The leading dimension of ``a``.
-
-
-   scratchpad_size
-      Size of scratchpad memory as a number of floating point elements of type T.
-      Size should not be less than the value returned by :ref:`onemkl_lapack_gebrd_scratchpad_size` function.
-
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_gebrd_scratchpad_size` function.
 
 .. container:: section
 
+    .. rubric:: Output Parameters
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
+a
+   If :math:`m \ge n`, the diagonal and first super-diagonal of a are
+   overwritten by the upper bidiagonal matrix :math:`B`. The elements
+   below the diagonal, with the buffer tauq, represent the orthogonal
+   matrix :math:`Q` as a product of elementary reflectors, and the
+   elements above the first superdiagonal, with the buffer ``taup``,
+   represent the orthogonal matrix :math:`P` as a product of elementary
+   reflectors.
 
+   If :math:`m<n`, the diagonal and first sub-diagonal of a are
+   overwritten by the lower bidiagonal matrix :math:`B`. The elements
+   below the first subdiagonal, with the buffer tauq, represent the
+   orthogonal matrix :math:`Q` as a product of elementary reflectors, and
+   the elements above the diagonal, with the buffer ``taup``, represent
+   the orthogonal matrix :math:`P` as a product of elementary reflectors.
 
-   a
-      If ``m≥n``, the diagonal and first super-diagonal of a are
-      overwritten by the upper bidiagonal matrix ``B``. The elements
-      below the diagonal, with the buffer tauq, represent the orthogonal
-      matrix ``Q`` as a product of elementary reflectors, and the
-      elements above the first superdiagonal, with the buffer taup,
-      represent the orthogonal matrix ``P`` as a product of elementary
-      reflectors.
+d
+   Buffer, size at least :math:`\max(1, \min(m,n))`. Contains the diagonal
+   elements of :math:`B`.
 
+e
+   Buffer, size at least :math:`\max(1, \min(m,n) - 1)`. Contains the
+   off-diagonal elements of :math:`B`.
 
-      If ``m<n``, the diagonal and first sub-diagonal of a are
-      overwritten by the lower bidiagonal matrix ``B``. The elements
-      below the first subdiagonal, with the buffer tauq, represent the
-      orthogonal matrix ``Q`` as a product of elementary reflectors, and
-      the elements above the diagonal, with the buffer taup, represent
-      the orthogonal matrix ``P`` as a product of elementary reflectors.
+tauq
+   Buffer, size at least :math:`\max(1, \min(m, n))`. The scalar factors of
+   the elementary reflectors which represent the orthogonal or
+   unitary matrix :math:`Q`.
 
+taup
+   Buffer, size at least :math:`\max(1, \min(m, n))`. The scalar factors of
+   the elementary reflectors which represent the orthogonal or
+   unitary matrix :math:`P`.
 
-   d
-      Buffer, size at least ``max(1, min(m,n))``. Contains the diagonal
-      elements of ``B``.
-
-
-   e
-      Buffer, size at least ``max(1, min(m,n) - 1)``. Contains the
-      off-diagonal elements of ``B``.
-
-
-   tauq
-      Buffer, size at least ``max(1, min(m, n))``. The scalar factors of
-      the elementary reflectors which represent the orthogonal or
-      unitary matrix ``Q``.
-
-
-   taup
-      Buffer, size at least ``max(1, min(m, n))``. The scalar factors of
-      the elementary reflectors which represent the orthogonal or
-      unitary matrix ``P``.
-
-
-   scratchpad
-      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
-
-         If ``info=-i``, the ``i``-th parameter had an illegal value.
-
-         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
-
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 gebrd (USM Version)
-----------------------
-
-.. container::
-
-   .. container:: section
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  cl::sycl::event onemkl::lapack::gebrd(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, RealT *d, RealT *e, T *tauq, T *taup, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
-
+-------------------
 
 .. container:: section
 
+  .. rubric:: Syntax
 
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   queue
-      The queue where the routine should be executed.
-
-
-   m
-      The number of rows in the matrix ``A`` (``0≤m``).
-
-
-   n
-      The number of columns in the matrix ``A`` (``0≤n``).
-
-
-   a
-      Pointer to matrix ``A``. The second dimension of ``a`` must be at least
-      ``max(1, m)``.
-
-
-   lda
-      The leading dimension of ``a``.
-
-
-   scratchpad_size
-      Size of scratchpad memory as a number of floating point elements of type T.
-      Size should not be less than the value returned by :ref:`onemkl_lapack_gebrd_scratchpad_size` function.
-
-   events
-      List of events to wait for before starting computation. Defaults to empty list.
-
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::gebrd(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, RealT *d, RealT *e, T *tauq, T *taup, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
+    .. rubric:: Input Parameters
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
-   a
-      If ``m≥n``, the diagonal and first super-diagonal of a are
-      overwritten by the upper bidiagonal matrix ``B``. The elements
-      below the diagonal, with the array tauq, represent the orthogonal
-      matrix ``Q`` as a product of elementary reflectors, and the
-      elements above the first superdiagonal, with the array taup,
-      represent the orthogonal matrix ``P`` as a product of elementary
-      reflectors.
+n
+   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
 
+a
+   Pointer to matrix :math:`A`. The second dimension of ``a`` must be at least
+   :math:`\max(1, m)`.
 
-      If ``m<n``, the diagonal and first sub-diagonal of a are
-      overwritten by the lower bidiagonal matrix ``B``. The elements
-      below the first subdiagonal, with the array tauq, represent the
-      orthogonal matrix ``Q`` as a product of elementary reflectors, and
-      the elements above the diagonal, with the array taup, represent
-      the orthogonal matrix ``P`` as a product of elementary reflectors.
+lda
+   The leading dimension of ``a``.
 
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type T.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_gebrd_scratchpad_size` function.
 
-   d
-      Pointer to memory of size at least ``max(1, min(m,n))``. Contains the diagonal
-      elements of ``B``.
+events
+   List of events to wait for before starting computation. Defaults to empty list.
 
+.. container:: section
 
-   e
-      Pointer to memory of size at least ``max(1, min(m,n) - 1)``. Contains the
-      off-diagonal elements of ``B``.
+    .. rubric:: Output Parameters
 
+a
+   If :math:`m \ge n`, the diagonal and first super-diagonal of a are
+   overwritten by the upper bidiagonal matrix :math:`B`. The elements
+   below the diagonal, with the array tauq, represent the orthogonal
+   matrix :math:`Q` as a product of elementary reflectors, and the
+   elements above the first superdiagonal, with the array ``taup``,
+   represent the orthogonal matrix :math:`P` as a product of elementary
+   reflectors.
 
-   tauq
-      Pointer to memory of size at least ``max(1, min(m, n))``. The scalar factors of
-      the elementary reflectors which represent the orthogonal or
-      unitary matrix ``Q``.
+   If :math:`m<n`, the diagonal and first sub-diagonal of a are
+   overwritten by the lower bidiagonal matrix :math:`B`. The elements
+   below the first subdiagonal, with the array tauq, represent the
+   orthogonal matrix :math:`Q` as a product of elementary reflectors, and
+   the elements above the diagonal, with the array ``taup``, represent
+   the orthogonal matrix :math:`P` as a product of elementary reflectors.
 
+d
+   Pointer to memory of size at least :math:`\max(1, \min(m,n))`. Contains the diagonal
+   elements of :math:`B`.
 
-   taup
-      Pointer to memory of size at least ``max(1, min(m, n))``. The scalar factors of
-      the elementary reflectors which represent the orthogonal or
-      unitary matrix ``P``.
+e
+   Pointer to memory of size at least :math:`\max(1, \min(m,n) - 1)`. Contains the
+   off-diagonal elements of :math:`B`.
 
+tauq
+   Pointer to memory of size at least :math:`\max(1, \min(m, n))`. The scalar factors of
+   the elementary reflectors which represent the orthogonal or
+   unitary matrix :math:`Q`.
 
-   scratchpad
-      Pointer to scratchpad memory to be used by routine for storing intermediate results.
+taup
+   Pointer to memory of size at least :math:`\max(1, \min(m, n))`. The scalar factors of
+   the elementary reflectors which represent the orthogonal or
+   unitary matrix :math:`P`.
 
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
 
-   .. container:: section
+.. container:: section
 
+    .. rubric:: Return Values
 
-      .. rubric:: Throws
-         :class: sectiontitle
+Output event to wait on to ensure computation is complete.
 
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
-      onemkl::lapack::exception
-         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
-
-         If ``info=-i``, the ``i``-th parameter had an illegal value.
-
-         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Values
-         :class: sectiontitle
-
-
-      Output event to wait on to ensure computation is complete.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
-
-
-
-.. |image0| image:: ../equations/GUID-03C78F41-D16C-4BFE-B087-BE4F5A6A0ee1.png
-   :class: img-middle
 

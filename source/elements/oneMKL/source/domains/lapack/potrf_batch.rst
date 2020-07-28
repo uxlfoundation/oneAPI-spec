@@ -5,11 +5,11 @@ potrf_batch
 
 Computes the LU factorizations of a batch of general matrices.
 
-.. _onemkl_lapack_potrf_batch_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_potrf_batch` supports the following precisions.
+``potrf_batch`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -25,9 +25,11 @@ Computes the LU factorizations of a batch of general matrices.
 potrf_batch (Buffer Version)
 ----------------------------
 
-.. rubric:: Description
+.. container:: section
 
-The buffer version of :ref:`onemkl_lapack_potrf_batch` supports only the strided API. 
+  .. rubric:: Description
+
+The buffer version of ``potrf_batch`` supports only the strided API. 
    
 **Strided API**
 
@@ -36,13 +38,15 @@ The buffer version of :ref:`onemkl_lapack_potrf_batch` supports only the strided
  | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = mkl::uplo::lower``,
  | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  void potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+  .. rubric:: Syntax
+
+.. cpp:function::  void oneapi::mkl::lapack::potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -56,7 +60,7 @@ n
   Order of the matrices :math:`A_i`, (:math:`0 \le n`).
 
 a
-  Array containing batch of input matrices :math:`A_i`, each of :math:`A_i` being of size :math:`lda \cdot n` and holding either upper or lower triangular parts of the matrices :math:`A_i` (see ``uplo``).
+  Array containing batch of input matrices :math:`A_i`, each of :math:`A_i` being of size :math:`\text{lda} \cdot n` and holding either upper or lower triangular parts of the matrices :math:`A_i` (see ``uplo``).
 
 lda
   Leading dimension of :math:`A_i`.
@@ -75,7 +79,7 @@ scratchpad_size
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 a
 	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by ``uplo``.
@@ -85,41 +89,45 @@ a
 potrf_batch (USM Version)
 -------------------------
 
-.. rubric:: Description
+.. container:: section
 
-The USM version of :ref:`onemkl_lapack_potrf_batch` supports the group API and strided API. 
+  .. rubric:: Description
+
+The USM version of ``potrf_batch`` supports the group API and strided API. 
 
 **Group API**
 
  | The routine forms the Cholesky factorizations of symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
- | :math:`A_i = U_i^TU_i` for real data (:math:`A_i = U_i^HU_i` for complex), if :math:`uplo_g` is ``mkl::uplo::upper``,
- | :math:`A_i = L_iL_i^T` for real data (:math:`A_i = L_iL_i^H` for complex), if :math:`uplo_g` is ``mkl::uplo::lower``,
+ | :math:`A_i = U_i^TU_i` for real data (:math:`A_i = U_i^HU_i` for complex), if :math:`\text{uplo}_g` is ``mkl::uplo::upper``,
+ | :math:`A_i = L_iL_i^T` for real data (:math:`A_i = L_iL_i^H` for complex), if :math:`\text{uplo}_g` is ``mkl::uplo::lower``,
  | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular, :math:`g` is an index of group of parameters corresponding to :math:`A_i`, and total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array
-
-.. rubric:: Syntax
-
-.. cpp:function::  cl::sycl::event potrf_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrf_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+
+.. container:: section
+
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
 
 uplo
-  | Array of ``group_count`` :math:`uplo_g` parameters. Each :math:`uplo_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
-  | If :math:`uplo_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
-  | If :math:`uplo_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+  | Array of ``group_count`` :math:`\text{uplo}_g` parameters. Each :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
+  | If :math:`\text{uplo}_g` is ``mkl::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+  | If :math:`\text{uplo}_g` is ``mkl::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
   Array of ``group_count`` :math:`n_g` parameters. Each :math:`n_g` specifies the order of the input matrices from array a belonging to group :math:`g`.
 
 a
-  Array of ``batch_size`` pointers to input matrices :math:`A_i`, each being of size :math:`lda_g \cdot n_g` (:math:`g` is an index of group to which :math:`A_i` belongs to) and holding either upper or lower triangular part as specified by :math:`uplo_g`.
+  Array of ``batch_size`` pointers to input matrices :math:`A_i`, each being of size :math:`\text{lda}_g \cdot n_g` (:math:`g` is an index of group to which :math:`A_i` belongs to) and holding either upper or lower triangular part as specified by :math:`\text{uplo}_g`.
 
 lda
-  Array of ``group_count`` :math:`lda_g` parameters. Each :math:`lda_g` specifies the leading dimensions of the matrices from a belonging to group :math:`g`.
+  Array of ``group_count`` :math:`\text{lda}_g` parameters. Each :math:`\text{lda}_g` specifies the leading dimensions of the matrices from a belonging to group :math:`g`.
 
 group_count
   Number of groups of parameters. Must be at least 0.
@@ -138,14 +146,14 @@ events
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 a
-	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by :math:`uplo_g` from corresponding group of parameters.
+	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by :math:`\text{uplo}_g` from corresponding group of parameters.
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
 
@@ -156,13 +164,15 @@ Output event to wait on to ensure computation is complete.
  | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = mkl::uplo::lower``,
  | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  cl::sycl::event potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -176,7 +186,7 @@ n
   Order of the matrices :math:`A_i`, (:math:`0 \le n`).
 
 a
-  Array containing batch of input matrices :math:`A_i`, each of :math:`A_i` being of size :math:`lda \cdot n` and holding either upper or lower triangular parts of the matrices :math:`A_i` (see ``uplo``).
+  Array containing batch of input matrices :math:`A_i`, each of :math:`A_i` being of size :math:`\text{lda} \cdot n` and holding either upper or lower triangular parts of the matrices :math:`A_i` (see ``uplo``).
 
 lda
   Leading dimension of :math:`A_i`.
@@ -198,14 +208,16 @@ events
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 a
 	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by ``uplo``.
 
 .. container:: section
-   
-   .. rubric:: Return Values
+
+  .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

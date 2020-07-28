@@ -3,132 +3,83 @@
 trtrs_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_trtrs` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``trtrs_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_trtrs` function.
+    .. list-table:: 
+       :header-rows: 1
 
+       * -  T 
+       * -  ``float`` 
+       * -  ``double`` 
+       * -  ``std::complex<float>`` 
+       * -  ``std::complex<double>`` 
 
-         ``trtrs_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_trtrs` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_trtrs` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 trtrs_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
+         
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::trtrs_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag diag, std::int64_t n, std::int64_t nrhs, std::int64_t         lda, std::int64_t ldb)
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+  .. rubric:: Input Parameters
+         
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_trtrs` function will be performed.
 
+upper_lower
+   Indicates whether :math:`A` is upper or lower    triangular:
 
-      .. container:: dlsyntaxpara
+   If upper_lower = ``uplo::upper``, then   :math:`A` is upper triangular.
 
+   If upper_lower =   ``uplo::lower``, then :math:`A` is lower triangular.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::trtrs_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag diag, std::int64_t n, std::int64_t nrhs, std::int64_t         lda, std::int64_t ldb)
+trans
+   Indicates the form of the equations:
 
-   .. container:: section
+   If ``trans=onemkl::transpose::nontrans``, then :math:`AX = B` is solved
+   for :math:`X`.
 
+   If ``trans=onemkl::transpose::trans``, then :math:`A^TX = B` is solved
+   for :math:`X`.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+   If ``trans=onemkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   solved for :math:`X`.
 
+diag
+   If diag = ``onemkl::diag::nonunit``, then :math:`A` is not a    unit triangular matrix.
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_trtrs` function will be performed.
+   If unit_diag = ``diag::unit``,   then :math:`A` is unit triangular: diagonal elements of :math:`A` are assumed   to be 1 and not referenced in the array ``a``.
 
-      upper_lower
-         Indicates whether ``A`` is upper or lower    triangular:
+n
+   The order of :math:`A`; the number of rows in :math:`B`;    :math:`n \ge 0`.
 
-         If upper_lower = ``uplo::upper``, then   ``A`` is upper triangular.
+nrhs
+   The number of right-hand sides (:math:`0 \le \text{nrhs}`).
 
-         If upper_lower =   ``uplo::lower``, then ``A`` is lower triangular.
+lda
+   The leading dimension of ``a``; :math:`\text{lda} \ge \max(1, n)`.
 
-      trans
-         Indicates the form of the equations:
+ldb
+   The leading dimension of ``b``; :math:`\text{ldb} \ge \max(1, n)`.
 
-         If ``trans=onemkl::transpose::nontrans``, then ``A*X = B`` is solved
-         for ``X``.
+.. container:: section
 
-         If ``trans=onemkl::transpose::trans``, then ``AT*X = B`` is solved
-         for ``X``.
+  .. rubric:: Return Value
 
-         If ``trans=onemkl::transpose::conjtrans``, then ``AH*X = B`` is
-         solved for ``X``.
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_trtrs` function should be able to hold.
 
-      diag
-         If diag = ``onemkl::diag::nonunit``, then ``A`` is not a    unit triangular matrix.
-
-         If unit_diag = ``diag::unit``,   then ``A`` is unit triangular: diagonal elements of ``A`` are assumed   to be 1 and not referenced in the array a.
-
-      n
-         The order of ``A``; the number of rows in ``B``;    n\ ``≥ 0``.
-
-      nrhs
-         The number of right-hand sides (``0≤nrhs``).
-
-      lda
-         The leading dimension of ``a``;    lda\ ``≥ max(1, n)``.
-
-      ldb
-         The leading dimension of b; ldb\ ``≥ max(1, n)``.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_trtrs` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
-
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 

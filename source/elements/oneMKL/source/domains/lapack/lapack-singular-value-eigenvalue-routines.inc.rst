@@ -39,13 +39,13 @@ LAPACK Singular Value and Eigenvalue Problem Routines
            -     Reduces a complex Hermitian matrix to tridiagonal form.
          * -     :ref:`onemkl_lapack_orgbr`
            -     :ref:`onemkl_lapack_orgbr_scratchpad_size`
-           -     Generates the real orthogonal matrix ``Q`` or ``P``\ :sup:`T` determined by gebrd.
+           -     Generates the real orthogonal matrix :math:`Q` or :math:`P^T` determined by gebrd.
          * -     :ref:`onemkl_lapack_orgtr`
            -     :ref:`onemkl_lapack_orgtr_scratchpad_size`
-           -     Generates the real orthogonal matrix ``Q`` determined by sytrd.
+           -     Generates the real orthogonal matrix :math:`Q` determined by sytrd.
          * -     :ref:`onemkl_lapack_ormtr`
            -     :ref:`onemkl_lapack_ormtr_scratchpad_size`
-           -     Multiplies a real matrix by the orthogonal matrix ``Q`` determined by sytrd.
+           -     Multiplies a real matrix by the orthogonal matrix :math:`Q` determined by sytrd.
          * -     :ref:`onemkl_lapack_syevd`
            -     :ref:`onemkl_lapack_syevd_scratchpad_size`
            -     Computes all eigenvalues and, optionally, all eigenvectors of a real symmetric matrix using divide and conquer algorithm.
@@ -57,13 +57,13 @@ LAPACK Singular Value and Eigenvalue Problem Routines
            -     Reduces a real symmetric matrix to tridiagonal form.
          * -     :ref:`onemkl_lapack_ungbr`
            -     :ref:`onemkl_lapack_ungbr_scratchpad_size`
-           -     Generates the complex unitary matrix ``Q`` or ``P``\ :sup:`T` determined by gebrd.
+           -     Generates the complex unitary matrix :math:`Q` or :math:`P^T` determined by gebrd.
          * -     :ref:`onemkl_lapack_ungtr`
            -     :ref:`onemkl_lapack_ungtr_scratchpad_size`
-           -     Generates the complex unitary matrix ``Q`` determined by hetrd.
+           -     Generates the complex unitary matrix :math:`Q` determined by hetrd.
          * -     :ref:`onemkl_lapack_unmtr`
            -     :ref:`onemkl_lapack_unmtr_scratchpad_size`
-           -     Multiplies a complex matrix by the unitary matrix ``Q`` determined by hetrd.
+           -     Multiplies a complex matrix by the unitary matrix :math:`Q` determined by hetrd.
 
 
 

@@ -36,10 +36,10 @@ LAPACK Linear Equation Routines
            -     Solves a system of linear equations with an LU-factored square coefficient matrix, with multiple right-hand sides.    
          * -     :ref:`onemkl_lapack_orgqr`
            -     :ref:`onemkl_lapack_orgqr_scratchpad_size`
-           -     Generates the real orthogonal matrix ``Q`` of the QR factorization formed by geqrf.
+           -     Generates the real orthogonal matrix :math:`Q` of the QR factorization formed by geqrf.
          * -     :ref:`onemkl_lapack_ormqr`
            -     :ref:`onemkl_lapack_ormqr_scratchpad_size`
-           -     Multiplies a real matrix by the orthogonal matrix ``Q`` of the QR factorization formed by geqrf.
+           -     Multiplies a real matrix by the orthogonal matrix :math:`Q` of the QR factorization formed by geqrf.
          * -     :ref:`onemkl_lapack_potrf`
            -     :ref:`onemkl_lapack_potrf_scratchpad_size`
            -     Computes the Cholesky factorization of a symmetric (Hermitian) positive-definite matrix.   
@@ -57,10 +57,10 @@ LAPACK Linear Equation Routines
            -     Solves a system of linear equations with a triangular coefficient matrix, with multiple right-hand sides.    
          * -     :ref:`onemkl_lapack_ungqr`
            -     :ref:`onemkl_lapack_ungqr_scratchpad_size`
-           -     Generates the complex unitary matrix ``Q`` of the QR factorization formed by geqrf.
+           -     Generates the complex unitary matrix :math:`Q` of the QR factorization formed by geqrf.
          * -     :ref:`onemkl_lapack_unmqr`
            -     :ref:`onemkl_lapack_unmqr_scratchpad_size`
-           -     Multiplies a complex matrix by the unitary matrix ``Q`` of the QR factorization formed by geqrf.
+           -     Multiplies a complex matrix by the unitary matrix :math:`Q` of the QR factorization formed by geqrf.
 
 
 

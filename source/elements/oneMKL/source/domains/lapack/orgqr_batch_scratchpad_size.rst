@@ -5,11 +5,11 @@ orgqr_batch_scratchpad_size
 
 Computes size of scratchpad memory required for the :ref:`onemkl_lapack_orgqr_batch` function.
 
-.. _onemkl_lapack_orgqr_batch_scratchpad_size_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_orgqr_batch_scratchpad_size` supports the following precisions.
+``orgqr_batch_scratchpad_size`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -22,13 +22,15 @@ Computes size of scratchpad memory required for the :ref:`onemkl_lapack_orgqr_ba
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_orgqr_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t orgqr_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::orgqr_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -40,7 +42,7 @@ n
   Array of ``group_count`` :math:`n_g` parameters.
 
 k
-  Array of ``group_count`` kg parameters. The number of elementary reflectors whose product defines the matrices Qi (0 \le k_g \le n_g).
+  Array of ``group_count`` kg parameters. The number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k_g \le n_g`).
 
 lda
   Array of leading dimensions of :math:`A_i`.
@@ -53,7 +55,7 @@ group_sizes
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_orgqr_batch` function.
 
@@ -61,13 +63,15 @@ Number of elements of type ``T`` the scratchpad memory should able to hold to be
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_orgqr_batch` function.
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  std::int64_t orgqr_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_tau, std::int64_t batch_size);
+  .. rubric:: Syntax
+
+.. cpp:function::  std::int64_t oneapi::mkl::lapack::orgqr_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_tau, std::int64_t batch_size);
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -82,7 +86,7 @@ k
   Number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k \le n`).
 
 lda
-  Leading dimension of :math:`A_i` (:math:`lda \le m`).
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
 stride_a
   Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
@@ -95,7 +99,9 @@ batch_size
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_orgqr_batch` function.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

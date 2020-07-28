@@ -3,114 +3,61 @@
 sytrd_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_sytrd` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``sytrd_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_sytrd` function.
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``float`` 
+        * -  ``double``
 
-         ``sytrd_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_sytrd` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_sytrd` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 sytrd_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
+         
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::sytrd_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower,         std::int64_t n, std::int64_t lda)
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+  .. rubric:: Input Parameters
 
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_sytrd` function will be performed.
 
-      .. container:: dlsyntaxpara
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``.
 
+   If ``upper_lower = uplo::upper``, a stores the upper triangular
+   part of :math:`A`.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::sytrd_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower,         std::int64_t n, std::int64_t lda)
+   If ``upper_lower = uplo::lower``, a stores the lower triangular
+   part of :math:`A`.
 
-   .. container:: section
+n
+   The order of the matrices :math:`A` :math:`(0 \le n)`.
 
+lda
+   The leading dimension of ``a``.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Return Value
+         
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_sytrd` function should be able to hold.
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_sytrd` function will be performed.
-
-
-      upper_lower
-         Must be ``uplo::upper`` or ``uplo::lower``.
-
-
-         If ``upper_lower = uplo::upper``, a stores the upper triangular
-         part of ``A``.
-
-
-         If ``upper_lower = uplo::lower``, a stores the lower triangular
-         part of ``A``.
-
-
-      n
-         The order of the matrices ``A``\ ``(0≤n)``.
-
-
-      lda
-         The leading dimension of a.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_sytrd` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
 

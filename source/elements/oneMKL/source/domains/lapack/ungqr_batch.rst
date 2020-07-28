@@ -5,11 +5,11 @@ ungqr_batch
 
 Generates the complex unitary matrices :math:`Q_i` of the batch of QR factorizations formed by the :ref:`onemkl_lapack_geqrf_batch` function.
 
-.. _onemkl_lapack_ungqr_batch_description:
+.. container:: section
 
-.. rubric:: Description
+  .. rubric:: Description
 
-:ref:`onemkl_lapack_ungqr_batch` supports the following precisions.
+``ungqr_batch`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -23,9 +23,11 @@ Generates the complex unitary matrices :math:`Q_i` of the batch of QR factorizat
 ungqr_batch (Buffer Version)
 ----------------------------
 
-.. rubric:: Description
+.. container:: section
 
-The buffer version of :ref:`onemkl_lapack_ungqr_batch` supports only the strided API. 
+  .. rubric:: Description
+
+The buffer version of ``ungqr_batch`` supports only the strided API. 
    
 **Strided API**
 
@@ -40,13 +42,15 @@ The buffer version of :ref:`onemkl_lapack_ungqr_batch` supports only the strided
  | To compute the leading :math:`k` columns of :math:`Q_i^k` (which form an orthonormal basis in the space spanned by leading :math:`k` columns of the matrices :math:`A_i`):
  | ``ungqr_batch(queue, m, k, k, a, ...)``
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  void ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+  .. rubric:: Syntax
+
+.. cpp:function::  void oneapi::mkl::lapack::ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -64,7 +68,7 @@ a
   Array resulting after call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
 lda
-  Leading dimension of :math:`A_i` (:math:`lda \le m`).
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
 stride_a
   Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
@@ -86,7 +90,7 @@ scratchpad_size
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 a
   Array data is overwritten by ``a`` batch of n leading columns of the :math:`m \times m` unitary matrices :math:`Q_i`.
@@ -96,9 +100,11 @@ a
 ungqr_batch (USM Version)
 -------------------------
 
-.. rubric:: Description
+.. container:: section
 
-The USM version of :ref:`onemkl_lapack_ungqr_batch` supports the group API and strided API. 
+  .. rubric:: Description
+
+The USM version of ``ungqr_batch`` supports the group API and strided API. 
 
 **Group API**
 
@@ -113,13 +119,15 @@ The USM version of :ref:`onemkl_lapack_ungqr_batch` supports the group API and s
  | To compute the leading :math:`k` columns of :math:`Q_i^k` (which form an orthonormal basis in the space spanned by leading :math:`k` columns of the matrices :math:`A_i`):
  | ``ungqr_batch(queue, m, k, k, a, ...)``
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  cl::sycl::event ungqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::ungqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -160,14 +168,14 @@ events
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
    
 a
   Matrices pointed to by array ``a`` are overwritten by :math:`n_g` leading columns of the :math:`m_g \times m_g` orthogonal matrices :math:`Q_i`, where :math:`g` is an index of group of parameters corresponding to :math:`Q_i`.
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
 
@@ -184,13 +192,15 @@ Output event to wait on to ensure computation is complete.
  | To compute the leading :math:`k` columns of :math:`Q_i^k` (which form an orthonormal basis in the space spanned by leading :math:`k` columns of the matrices :math:`A_i`):
  | ``ungqr_batch(queue, m, k, k, a, ...)``
 
-.. rubric:: Syntax
+.. container:: section
 
-.. cpp:function::  cl::sycl::event ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
 .. container:: section
 
-   .. rubric:: Input Parameters
+  .. rubric:: Input Parameters
 
 queue
   Device queue where calculations will be performed.
@@ -208,7 +218,7 @@ a
   Array resulting after call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
 lda
-  Leading dimension of :math:`A_i` (:math:`lda \le m`).
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
 stride_a
   Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
@@ -233,14 +243,16 @@ events
 
 .. container:: section
 
-   .. rubric:: Output Parameters
+  .. rubric:: Output Parameters
 
 a
   Array data is overwritten by ``a`` batch of n leading columns of the :math:`m \times m` unitary matrices :math:`Q_i`.
 
 .. container:: section
    
-   .. rubric:: Return Values
+  .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

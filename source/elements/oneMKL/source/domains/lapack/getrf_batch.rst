@@ -5,11 +5,9 @@ getrf_batch
 
 Computes the LU factorizations of a batch of general matrices.
 
-.. _onemkl_lapack_getrf_batch_description:
-
 .. rubric:: Description
 
-:ref:`onemkl_lapack_getrf_batch` supports the following precisions.
+``getrf_batch`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -27,7 +25,7 @@ getrf_batch (Buffer Version)
 
 .. rubric:: Description
 
-The buffer version of :ref:`onemkl_lapack_getrf_batch` supports only the strided API. 
+The buffer version of ``getrf_batch`` supports only the strided API. 
 
 **Strided API**
 
@@ -35,7 +33,7 @@ The routine computes the LU factorizations of general :math:`m \times n` matrice
 
 .. rubric:: Syntax
 
-.. cpp:function::  void getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+.. cpp:function::  void oneapi::mkl::lapack::getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
@@ -79,7 +77,7 @@ a
   :math:`L_i` and :math:`U_i`. The unit diagonal elements of :math:`L_i` are not stored.
 
 ipiv
-  Array containing batch of the pivot indices :math:`ipiv_i` each of size at least :math:`\max(1,\min(m,n))`; for :math:`1 \le k \le \min(m,n)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`ipiv_i(k)`.
+  Array containing batch of the pivot indices :math:`\text{ipiv}_i` each of size at least :math:`\max(1,\min(m,n))`; for :math:`1 \le k \le \min(m,n)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`\text{ipiv}_i(k)`.
 
 .. _onemkl_lapack_getrf_batch_usm:
 
@@ -88,7 +86,7 @@ getrf_batch (USM Version)
 
 .. rubric:: Description
 
-The USM version of :ref:`onemkl_lapack_getrf_batch` supports the group API and strided API. 
+The USM version of ``getrf_batch`` supports the group API and strided API. 
 
 **Group API**
 
@@ -96,7 +94,7 @@ The routine computes the batch of LU factorizations of general :math:`m \times n
 
 .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event getrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t **ipiv, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t **ipiv, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
@@ -140,7 +138,7 @@ a
   :math:`L_i` and :math:`U_i`. The unit diagonal elements of :math:`L_i` are not stored.
 
 ipiv
-  Arrays of batch_size pointers to arrays containing pivot indices :math:`ipiv_i` each of size at least :math:`\max(1,\min(m_g,n_g))`; for :math:`1 \le k \le \min(m_g,n_g)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`ipiv_i(k)`.
+  Arrays of batch_size pointers to arrays containing pivot indices :math:`\text{ipiv}_i` each of size at least :math:`\max(1,\min(m_g,n_g))`; for :math:`1 \le k \le \min(m_g,n_g)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`\text{ipiv}_i(k)`.
 
 .. container:: section
    
@@ -154,7 +152,7 @@ The routine computes the LU factorizations of general :math:`m \times n` matrice
 
 .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
 .. container:: section
 
@@ -179,7 +177,7 @@ stride_a
   Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
 stride_ipiv
-  Stride between the beginnings of arrays ipivi inside the array ipiv.
+  Stride between the beginnings of arrays :math:`\text{ipiv}_i` inside the array ``ipiv``.
 
 batch_size
   Number of problems in a batch.
@@ -201,7 +199,7 @@ a
   :math:`L_i` and :math:`U_i`. The unit diagonal elements of :math:`L_i` are not stored.
 
 ipiv
-  Array containing batch of the pivot indices :math:`ipiv_i` each of size at least :math:`\max(1,\min(m,n))`; for :math:`1 \le k \le \min(m,n)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`ipiv_i(k)`.
+  Array containing batch of the pivot indices :math:`\text{ipiv}_i` each of size at least :math:`\max(1,\min(m,n))`; for :math:`1 \le k \le \min(m,n)`, where row :math:`k` of :math:`A_i` was interchanged with row :math:`\text{ipiv}_i(k)`.
 
 .. container:: section
    
@@ -209,3 +207,4 @@ ipiv
 
 Output event to wait on to ensure computation is complete.
 
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
