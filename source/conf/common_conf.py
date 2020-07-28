@@ -2,6 +2,8 @@ import os
 import sys
 import string
 
+import docutils
+
 def path_relative_to_repo_root(relative_path):
     this_dir = os.path.dirname(os.path.realpath(__file__))
     root_dir = os.path.abspath(os.path.join(this_dir, '../..'))
@@ -31,8 +33,7 @@ extensions = [
 ]
 
 env = {
-    'oneapi_version': '0.8',
-    'l0_version': '0.91',
+    'oneapi_version': '0.9',
 }
 
 prolog_template = string.Template("""
@@ -49,7 +50,6 @@ prolog_template = string.Template("""
 .. |dnn_full_name| replace:: oneAPI Deep Neural Network Library
 .. |dnn_version| replace:: $oneapi_version
 .. |l0_full_name| replace:: oneAPI Level Zero
-.. |l0_version| replace:: $l0_version
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
 .. |tbb_version| replace:: $oneapi_version
 .. |vpl_full_name| replace:: oneAPI Video Processing Library
@@ -57,6 +57,10 @@ prolog_template = string.Template("""
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
 .. _`Level Zero Specification`: https://spec.oneapi.com/level-zero/latest/index.html
+.. include:: <isonum.txt>
+.. |regsup| replace:: :supsub:`reg`
+.. |intel_r| replace:: Intel\ :supsub:`reg`
+.. |msdk_full_name| replace:: Intel\ :supsub:`reg` Media Software Development Kit
 """)
 
 rst_prolog = prolog_template.substitute(env)
@@ -90,6 +94,13 @@ latex_elements = {
     'extraclassoptions': 'openany,oneside'
 }
 
+def supsub_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    node = docutils.nodes.superscript()
+    node2 = docutils.nodes.substitution_reference(refname=text)
+    node += [node2]
+    return [node],[]
+
 def setup(app):
+    app.add_role('supsub', supsub_role)
     add_custom_css = getattr(app,'add_css_file',getattr(app,'add_stylesheet'))
     add_custom_css('custom.css')
