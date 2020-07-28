@@ -1,3 +1,4 @@
+.. _onemkl_vm_exp:
 
 exp
 ===
@@ -10,7 +11,6 @@ exp
 
 
    .. container:: section
-      :name: GUID-00F57D01-9DEC-4760-9E15-3F34947E08FC
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ exp
       Buffer API:
 
 
-      .. cpp:function::  void exp(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::exp(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event exp(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::exp(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``exp`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-B0C816A4-40E7-4221-B809-E4C3030A2073
 
 
    .. rubric:: Description
@@ -56,15 +55,15 @@ exp
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Data Type 
-           -  Threshold Limitations on Input Parameters 
-         * -  single precision 
-           -  ``a[i] < Log( FLT_MAX )`` 
-         * -  double precision 
-           -  ``a[i] < Log( DBL_MAX )`` 
+         * - Data Type
+           - Threshold Limitations on Input Parameters
+         * - single precision
+           - ``a[i] < Log( FLT_MAX )``
+         * - double precision
+           - ``a[i] < Log( DBL_MAX )``
 
 
 
@@ -72,36 +71,36 @@ exp
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +1 
-           -    
-         * -  -0 
-           -  +1 
-           -    
-         * -  a > overflow 
-           -  +∞ 
-           -  ``status::overflow`` 
-         * -  a < underflow 
-           -  +0 
-           -  ``status::overflow`` 
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  +0 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +1
+           -  
+         * - -0
+           - +1
+           -  
+         * - a > overflow
+           - +∞
+           - ``oneapi::mkl::vm::status::overflow``
+         * - a < underflow
+           - +0
+           - ``oneapi::mkl::vm::status::overflow``
+         * - +∞
+           - +∞
+           -  
+         * - -∞
+           - +0
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -109,73 +108,73 @@ exp
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-         * -  +i·∞ 
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-         * -  +i·Y 
-           -  
-           -    
-           -    
-           -    
-           -    
-           -  
-           -  
-         * -  +i·0 
-           -  
-           -    
-           -  
-           -  
-           -    
-           -  
-           -  
-         * -  -i·0 
-           -  
-           -    
-           -  
-           -  
-           -    
-           -  
-           -  
-         * -  -i·Y 
-           -  
-           -    
-           -    
-           -    
-           -    
-           -  
-           -  
-         * -  -i·∞ 
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-         * -  +i·NAN 
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
+         * -
+           -
+           -
+           -
+           -
+           -
+           -
+           -
+         * - +i·∞
+           -
+           -
+           -
+           -
+           -
+           -
+           -
+         * - +i·Y
+           -
+           -  
+           -  
+           -  
+           -  
+           -
+           -
+         * - +i·0
+           -
+           -  
+           -
+           -
+           -  
+           -
+           -
+         * - -i·0
+           -
+           -  
+           -
+           -
+           -  
+           -
+           -
+         * - -i·Y
+           -
+           -  
+           -  
+           -  
+           -  
+           -
+           -
+         * - -i·∞
+           -
+           -
+           -
+           -
+           -
+           -
+           -
+         * - +i·NAN
+           -
+           -
+           -
+           -
+           -
+           -
+           -
 
 
 
@@ -183,15 +182,14 @@ exp
    Notes:
 
 
-   -  The complex exp(z) function sets the VM Error Status to
-      status::overflow in the case of overflow, that is, when both RE(z)
+   - The complex exp(z) function sets the VM Error Status to
+      oneapi::mkl::vm::status::overflow in the case of overflow, that is, when both RE(z)
       and IM(z) are finite non-zero numbers, but the real or imaginary
       part of the exact result is so large that it does not meet the
       target precision.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -215,14 +213,14 @@ exp
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -248,20 +246,19 @@ exp
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -286,31 +283,11 @@ exp
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use exp can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vexp.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Exponential and Logarithmic
-      Functions <exponential-and-logarithmic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

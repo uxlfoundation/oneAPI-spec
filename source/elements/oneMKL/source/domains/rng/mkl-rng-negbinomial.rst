@@ -1,110 +1,170 @@
-.. _mkl-rng-negbinomial:
+.. _onemkl_rng_negative_binomial:
 
-onemkl::rng::negbinomial
-========================
+negative_binomial
+=================
 
+Class is used for generation of negative binomially distributed integer types random numbers.
 
-.. container::
+.. _onemkl_rng_negative_binomial_description:
 
+.. rubric:: Description
 
-   Generates random numbers with negative binomial distribution.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers negative binomially distributed with distribution parameters :math:`a` and :math:`p`, where :math:`p, a \in R; 0 \leq p \leq 1, a > 0`
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-EE6FB7D3-1C1A-4094-82F6-C2643A39B2CE
+.. math::
 
+    P(X = k) = C^k_{a + k - 1}p^a(1 - p)^{k}, k \in \{0, 1, 2, ...\}
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-	 
-        template<typename T = std::int32_t, method Method      = nbar>
-          class negbinomial {
-          public:
-            negbinomial(): negbinomial(0.1, 0.5){}
-            negbinomial(double a, double p)
-            negbinomial(const negbinomial<T, Method>& other)
-            double a() const
-            double p() const
-            negbinomial<T, Method>& operator=(const      negbinomial<T, Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{a, p}(x) = \left\{ \begin{array}{rcl} \sum^{\lfloor x \rfloor}_{k = 0} C^k_{a + k - 1}p^a(1 - p)^{k}, x \ge 0, x \in R \\ 0, x < 0 \end{array}\right.
 
 
-      -  mkl_sycl.hpp
+.. _onemkl_rng_negative_binomial_syntax:
+
+class negative_binomial
+-----------------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename IntType = std::int32_t, typename Method = negative_binomial_method::by_default>
+    class negative_binomial {
+    public:
+        using method_type = Method;
+        using result_type = IntType;
+        negative_binomial();
+        explicit negative_binomial(double a, double p);
+        double a() const;
+        double p() const;
+    };
+
+.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::negative_binomial_method::by_default> \
+                oneapi::mkl::rng::negative_binomial
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename IntType
+            Type of the produced values. Supported types:
+                * ``std::int32_t``
+                * ``std::uint32_t``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::negative_binomial_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::negative_binomial_method::by_default``
+                * ``oneapi::mkl::rng::negative_binomial_method::nbar``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `negative_binomial()`_
+          - Default constructor
+        * - `explicit negative_binomial(double a, double p)`_
+          - Constructor with parameters
+        * - `double a() const`_
+          - Method to obtain the first ditribution parameter `a`
+        * - `double p() const`_
+          - Method to obtain the second ditribution parameter `p`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: negative_binomial::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: negative_binomial::result_type = IntType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`negative_binomial()`:
+
+        .. cpp:function:: negative_binomial::negative_binomial()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.1, `p` = 0.5.
+
+    .. container:: section
+
+        .. _`explicit negative_binomial(double a, double p)`:
+
+        .. cpp:function:: explicit negative_binomial::negative_binomial(double a, double p)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is the first distribution parameter, `p` is the second distribution parameter.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The onemkl::rng::negbinomial class object is used in the
-      onemkl::rng::generate function to provide random numbers with
-      negative binomial distribution and distribution parameters ``a``
-      and ``p``, where ``p``, ``a``\ ∈\ ``R``; 0 < ``p`` < 1; ``a`` > 0.
+    .. container:: section
 
+        .. _`double a() const`:
 
-      If the first distribution parameter ``a``\ ∈\ ``N``, this
-      distribution is the same as Pascal distribution. If
-      ``a``\ ∈\ ``N``, the distribution can be interpreted as the
-      expected time of ``a``-th success in a sequence of Bernoulli
-      trials, when the probability of success is ``p``.
+        .. cpp:function:: double negative_binomial::a() const
 
+        .. container:: section
 
-      The probability distribution is given by:
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - the first distribution parameter.
 
-      | 
-      | |image0|
+    .. container:: section
 
+        .. _`double p() const`:
 
-      The cumulative distribution function is as follows:
+        .. cpp:function:: double negative_binomial::p() const
 
+        .. container:: section
 
-      | 
-      | |image1|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `p` - the second distribution parameter.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::nbar``\       See brief      descriptions of the methods in `Distributions Template Parameter      onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     a    
-           -     \ ``double``\     
-           -     The first distribution parameter ``a``.    
-         * -     p    
-           -     \ ``double``\     
-           -     The second distribution parameter ``p``.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-A7CA23B7-756F-45C6-85B3-3A8924939D7D-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-2BEFE049-EB3B-4FC9-AD75-ABA053617238-low.jpg
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

@@ -10,19 +10,19 @@ This section discusses the general features of oneMKL API design. In particular,
 oneMKL namespaces
 ++++++++++++++++++
 
-The oneMKL library uses C++ namespaces to organize routines by mathematical domain.  All oneMKL objects and routines shall be contained within the ``onemkl`` base namespace.  The individual oneMKL domains use a secondary namespace layer as follows:
+The oneMKL library uses C++ namespaces to organize routines by mathematical domain.  All oneMKL objects and routines shall be contained within the ``oneapi::mkl`` base namespace.  The individual oneMKL domains use a secondary namespace layer as follows:
 
-===================  =======================================================================================================
-namespace            oneMKL domain or content
-===================  =======================================================================================================
-``onemkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
-``onemkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. See :ref:`onemkl_blas`
-``onemkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
-``onemkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
-``onemkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
-``onemkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
-``onemkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
-===================  =======================================================================================================
+========================  =======================================================================================================
+namespace                 oneMKL domain or content
+========================  =======================================================================================================
+``oneapi::mkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
+``oneapi::mkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. The oneapi::mkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
+``oneapi::mkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
+``oneapi::mkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
+``oneapi::mkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
+``oneapi::mkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
+``oneapi::mkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
+========================  =======================================================================================================
 
 
 .. _onemkl_cpp_datatypes:
@@ -55,9 +55,11 @@ oneMKL uses the following DPC++ data types:
 oneMKL defined datatypes
 ++++++++++++++++++++++++
 
-oneMKL dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``onemkl`` namespace.  
+oneMKL dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``oneapi::mkl`` namespace.  
 
 Each enumeration value comes with two names: A single-character name (the traditional BLAS/LAPACK character) and a longer, more descriptive name. The two names are exactly equivalent and may be used interchangeably.
+
+      .. _onemkl_enum_transpose:
 
       .. rubric:: transpose
          :name: transpose
@@ -83,6 +85,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``transpose::C``
               -  ``transpose::conjtrans``
               -  Perform Hermitian transpose (transpose and conjugate). Only applicable to complex matrices.
+
+      .. _onemkl_enum_uplo:
 
       .. rubric:: uplo
          :name: uplo
@@ -110,6 +114,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
       In both cases, elements that are not in the selected triangle are
       not accessed or updated.
 
+      .. _onemkl_enum_diag:
+
       .. rubric:: diag
          :name: diag
          :class: sectiontitle
@@ -131,6 +137,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``diag::U``
               -  ``diag::unit``
               -  The matrix is unit triangular (the diagonal entries are all 1's). The diagonal entries in the matrix data are not accessed.
+
+      .. _onemkl_enum_side:
 
       .. rubric:: side
          :name: side
@@ -154,6 +162,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``side::R``
               -  ``side::right``
               -  The special form matrix is on the right in the multiplication.
+
+      .. _onemkl_enum_offset:
 
       .. rubric:: offset
          :name: offset
@@ -180,6 +190,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``offset::R``
               -  ``offset::row``
               -  The offset to apply to the output matrix is a row offset, that is to say all the rows in the ``C_offset`` matrix are the same and given by the elements in the ``co`` array.
+
+      .. _onemkl_enum_index_base:
 
       .. rubric:: index_base
          :name: index_base

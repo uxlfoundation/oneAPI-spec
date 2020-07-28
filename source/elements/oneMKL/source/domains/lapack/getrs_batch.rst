@@ -3,161 +3,268 @@
 getrs_batch
 ===========
 
+Solves a system of linear equations with a batch of LU-factored square coefficient matrices, with multiple right-hand sides.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
 
-   Solves a system of linear equations with a batch of LU-factored
-   square coefficient matrices, with multiple right-hand sides.
+``getrs_batch`` supports the following precisions.
 
+   .. list-table:: 
+      :header-rows: 1
 
-         ``getrs_batch`` supports the following precisions.
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+.. _onemkl_lapack_getrs_batch_buffer:
 
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The routine solves for ``X``\ :sub:`i` the following systems of
-      linear equations for a batch of general square matrices
-      ``A``\ :sub:`1`, ``A``\ :sub:`2`, …,
-      ``A``\ :sub:`````\ batch_size`:
-
-
-      ``A``\ :sub:`i` \* ``X``\ :sub:`i` = ``B``\ :sub:`i` If
-      ``trans[i] = onemkl::transpose::notrans``
-
-
-      ``A``\ :sub:`i`\ :sup:`T` \* ``X``\ :sub:`i` = ``B``\ :sub:`i` If
-      ``trans[i] = onemkl::transpose::trans``
-
-
-      ``A``\ :sub:`i`\ :sup:`H` \* ``X``\ :sub:`i` = ``B``\ :sub:`i` If
-      ``trans[i] = onemkl::transpose::conjtrans``
-
-
-      Before calling this routine you must call
-      :ref:`onemkl_lapack_getrf_batch`
-      to compute the LU factorization of ``A``\ :sub:`1`,
-      ``A``\ :sub:`2`, …, ``A``\ :sub:`````\ batch_size`.
-
-
-getrs_batch (BUFFER Version)
+getrs_batch (Buffer Version)
 ----------------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Description
 
+The buffer version of ``getrs_batch`` supports only the strided API. 
+   
+**Strided API**
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+ | The routine solves for the following systems of linear equations :math:`X_i`: 
+ | :math:`A_iX_i = B_i`, if ``trans=mkl::transpose::nontrans``
+ | :math:`A_i^TX_i = B_i`, if ``trans=mkl::transpose::trans``
+ | :math:`A_i^HX_i = B_i`, if ``trans=mkl::transpose::conjtrans``
+ | Before calling this routine, the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function should be called to compute the LU factorizations of :math:`A_i`.
 
+.. container:: section
 
-      .. container:: dlsyntaxpara
+  .. rubric:: Syntax
 
+.. cpp:function::  void oneapi::mkl::lapack::getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
-         .. cpp:function::  void onemkl::lapack::getrs_batch(cl::sycl::queue &queue,         std::vector< onemkl::transpose > const& trans,         std::vector<std::int64_t> const& n, std::vector<std::int64_t>         const& nrhs, std::vector< cl::sycl::buffer<T,1> > & a, std::vector<         std::int64_t > const& lda, std::vector< cl::sycl::buffer<std::int64_t,1>         > & ipiv, std::vector< cl::sycl::buffer<T,1> > &b, std::vector<         std::int64_t > const& ldb, std::vector< cl::sycl::buffer<std::int64_t,1>         > &info)
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Input Parameters
 
+queue
+  Device queue where calculations will be performed.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+trans
+ | Form of the equations:
+ | If ``trans = mkl::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`Xi`.
+ | If ``trans = mkl::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = mkl::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
 
+n
+  Order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n`).
 
-      queue
-         The queue where the routine should be executed.
+nrhs
+  Number of right-hand sides (:math:`0 \le \text{nrhs}`).
 
+a
+  Array containing the factorizations of the matrices :math:`A_i`, as returned the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function.
 
-      trans
-         A vector, ``trans[i]`` indicates the form of the linear
-         equations.
+lda
+  Leading dimension of :math:`A_i`.
 
+stride_a
+  Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
 
-      n
-         A vector, ``n[i]`` is the number of columns of the batch matrix
-         ``A``\ :sub:`i`\ ``(0≤n[i])``.
+ipiv
+  ``ipiv`` array, as returned by the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function.
 
+stride_ipiv
+  Stride between the beginnings of arrays :math:`\text{ipiv}_i` inside the array ``ipiv``.
 
-      nrhs
-         A vector, the number of right hand sides ``(0≤nrhs[i])``.
+b 
+  Array containing the matrices :math:`B_i` whose columns are the right-hand sides for the systems of equations.
 
+ldb
+  Leading dimension of :math:`B_i`.
 
-      a
-         A vector of buffers returned by
-         :ref:`onemkl_lapack_getrf_batch`.
-         ``a[i]`` must be of size at least ``lda[i]*max(1, n[i])``.
+batch_size
+  Specifies the number of problems in a batch.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
-      lda
-         A vector, ``lda[i]`` is the leading dimension of
-         ``a[i] (n[i]≤lda[i])``.
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_getrs_batch_scratchpad_size` function.
 
+.. container:: section
 
-      ipiv
-         A vector of buffers, ipiv is the batch of pivots returned by
-         :ref:`onemkl_lapack_getrf_batch`.
+  .. rubric:: Output Parameters
 
+b  
+  Solution matrices :math:`X_i`.
 
-      b
-         A vector of buffers, ``b[i]`` contains the matrix
-         ``B``\ :sub:`i` whose columns are the right-hand sides for the
-         systems of equations. The second dimension of ``b``\ :sub:`i`
-         must be at least ``max(1,nrhs[i])``.
+.. _onemkl_lapack_getrs_batch_usm:
 
+getrs_batch (USM Version)
+-------------------------
 
-      ldb
-         A vector, ``ldb[i]`` is the leading dimension of ``b[i]``.
+.. container:: section
 
+  .. rubric:: Description
 
-   .. container:: section
+The USM version of ``getrs_batch`` supports the group API and strided API. 
 
+**Group API**
 
-      .. rubric:: Output Parameters
-         :class: sectiontitle
+ | The routine solves the following systems of linear equations for :math:`X_i` (:math:`i \in \{1...batch\_size\}`):
+ | :math:`A_iX_i = B_i`, if ``trans=mkl::transpose::nontrans``
+ | :math:`A_i^TX_i = B_i`, if ``trans=mkl::transpose::trans``
+ | :math:`A_i^HX_i = B_i`, if ``trans=mkl::transpose::conjtrans``
+ | Before calling this routine, call the Group API of the :ref:`onemkl_lapack_getrf_batch_usm` function to compute the LU factorizations of :math:`A_i`.
+ | Total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array.
 
+.. rubric:: Syntax
 
-      b
-         A vector of buffers, ``b[i]`` is overwritten by the solution
-         matrix ``X``\ :sub:`i`.
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrs_batch(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, std::int64_t **ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-      info
-         Vector of buffers containing error information.
+  .. rubric:: Input Parameters
 
+queue
+  Device queue where calculations will be performed.
 
-         If ``info[i]=0``, the execution is successful.
+trans
+ | Array of ``group_count`` parameters :math:`trans_g` indicating the form of the equations for the group :math:`g`:
+ | If ``trans = mkl::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = mkl::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = mkl::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
 
+n
+  Array of ``group_count`` parameters :math:`n_g` specifying the order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
 
-         If ``info[i]=k``, the ``k``-th diagonal element of ``U`` is
-         zero, and the solve could not be completed.
+nrhs
+  Array of ``group_count`` parameters :math:`\text{nrhs}_g` specifying the number of right-hand sides (:math:`0 \le \text{nrhs}_g`) for group :math:`g`.
 
+a
+  Array of ``batch_size`` pointers to factorizations of the matrices :math:`A_i`, as returned by the Group API of the:ref:`onemkl_lapack_getrf_batch_usm` function.
 
-         If ``info[i]=-k``, the ``k``-th parameter had an illegal value.
+lda
+  Array of ``group_count`` parameters :math:`\text{lda}_g` specifying the leading dimensions of :math:`A_i` from group :math:`g`.
 
+ipiv
+  ``ipiv`` array, as returned by the Group API of the :ref:`onemkl_lapack_getrf_batch_usm` function.
 
-.. container:: familylinks
+b 
+  The array containing ``batch_size`` pointers to the matrices :math:`B_i` whose columns are the right-hand sides for the systems of equations.
 
+ldb
+  Array of ``group_count`` parameters :math:`\text{ldb}_g` specifying the leading dimensions of :math:`B_i` in the group :math:`g`.
 
-   .. container:: parentlink
+group_count
+  Specifies the number of groups of parameters. Must be at least 0.
+    
+group_sizes
+  Array of ``group_count`` integers. Array element with index :math:`g` specifies the number of problems to solve for each of the groups of parameters :math:`g`. So the total number of problems to solve, ``batch_size``, is a sum of all parameter group sizes.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
+    
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Group API of the :ref:`onemkl_lapack_getrs_batch_scratchpad_size` function.
+  
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
-      **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines` 
+.. container:: section
 
+  .. rubric:: Output Parameters
+
+b  
+  Solution matrices :math:`X_i`.
+
+.. container:: section
+   
+   .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Strided API**
+
+ | The routine solves the following systems of linear equations for :math:`X_i`:
+ | :math:`A_iX_i = B_i`, if ``trans=mkl::transpose::nontrans``
+ | :math:`A_i^TX_i = B_i`, if ``trans=mkl::transpose::trans``
+ | :math:`A_i^HX_i = B_i`, if ``trans=mkl::transpose::conjtrans``
+ | Before calling this routine, the Strided API of the :ref:`onemkl_lapack_getrf_batch` function should be called to compute the LU factorizations of :math:`A_i`.
+
+.. container:: section
+
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+
+.. container:: section
+
+  .. rubric:: Input Parameters
+
+queue
+  Device queue where calculations will be performed.
+
+trans
+ | Form of the equations:
+ | If ``trans = mkl::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = mkl::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = mkl::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
+
+n
+  Order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n`).
+
+nrhs
+  Number of right-hand sides (:math:`0 \le \text{nrhs}`).
+
+a
+  Array containing the factorizations of the matrices :math:`A_i`, as returned by the Strided API of the:ref:`onemkl_lapack_getrf_batch_usm` function.
+
+lda
+  Leading dimension of :math:`A_i`.
+
+stride_a  
+  Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
+
+ipiv
+  ``ipiv`` array, as returned by getrf_batch (USM) function.
+
+stride_ipiv
+  Stride between the beginnings of arrays :math:`\text{ipiv}_i` inside the array ``ipiv``.
+
+b
+  Array containing the matrices :math:`B_i` whose columns are the right-hand sides for the systems of equations.
+
+ldb
+  Leading dimensions of :math:`B_i`.
+
+batch_size
+  Number of problems in a batch.
+
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
+    
+scratchpad_size 
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_getrs_batch_scratchpad_size` function.
+
+events
+  List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+b  
+  Solution matrices :math:`X_i`.
+
+.. container:: section
+   
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

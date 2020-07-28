@@ -3,136 +3,79 @@
 ungbr_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_ungbr` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``ungbr_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_ungbr` function.
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-         ``ungbr_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ungbr` function should be able to hold.
-      Calls to this routine must specify the template parameter explicitly.
-
+Computes the number of elements of type :math:`T` the scratchpad memory to be passed to :ref:`onemkl_lapack_ungbr` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 ungbr_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
+         
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::ungbr_scratchpad_size(cl::sycl::queue &queue, onemkl::generate gen, std::int64_t         m, std::int64_t n, std::int64_t k, std::int64_t lda,         std::int64_t &scratchpad_size)
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+  .. rubric:: Input Parameters
+         
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_ungbr` function will be performed.
 
+gen
+   Must be ``generate::q`` or ``generate::p``.
 
-      .. container:: dlsyntaxpara
+   If ``gen = generate::q``, the routine generates the matrix
+   :math:`Q`.
 
+   If ``gen = generate::p``, the routine generates the matrix
+   :math:`P^{T}`.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::ungbr_scratchpad_size(cl::sycl::queue &queue, onemkl::generate gen, std::int64_t         m, std::int64_t n, std::int64_t k, std::int64_t lda,         std::int64_t &scratchpad_size)
+m
+   The number of rows in the matrix :math:`Q` or :math:`P^{T}` to be
+   returned :math:`(0 \le m)`.
 
-   .. container:: section
+   If ``gen = generate::q``, :math:`m \ge n \ge \min(m, k)`.
 
+   If ``gen = generate::p``, :math:`n \ge m ge \min(n, k)`.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+n
+   The number of columns in the matrix :math:`Q` or :math:`P^{T}` to
+   be returned :math:`(0 \le n)`. See m for constraints.
 
+k
+   If ``gen = generate::q``, the number of columns in the original
+   :math:`m \times k` matrix reduced by
+   :ref:`onemkl_lapack_gebrd`.
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_ungbr` function will be performed.
+   If ``gen = generate::p``, the number of rows in the original
+   :math:`k \times n` matrix reduced by
+   :ref:`onemkl_lapack_gebrd`.
 
+lda
+   The leading dimension of ``a``.
 
-      gen
-         Must be ``generate::q`` or ``generate::p``.
+.. container:: section
 
+  .. rubric:: Return Value
+         
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_ungbr` function should be able to hold.
 
-         If ``gen = generate::q``, the routine generates the matrix
-         ``Q``.
-
-
-         If ``gen = generate::p``, the routine generates the matrix
-         ``P``\ :sup:`T`.
-
-
-      m
-         The number of rows in the matrix ``Q`` or ``P``\ :sup:`T` to be
-         returned ``(0 ≤ m)``.
-
-
-         If ``gen = generate::q``, ``m ≥ n ≥ min(m, k)``.
-
-
-         If ``gen = generate::p``, ``n ≥ m ≥ min(n, k)``.
-
-
-      n
-         The number of columns in the matrix ``Q`` or ``P``\ :sup:`T` to
-         be returned ``(0 ≤ n)``. See m for constraints.
-
-
-      k
-         If ``gen = generate::q``, the number of columns in the original
-         m-by-k matrix reduced by
-         :ref:`onemkl_lapack_gebrd`.
-
-
-         If ``gen = generate::p``, the number of rows in the original
-         k-by-n matrix reduced by
-         :ref:`onemkl_lapack_gebrd`.
-
-
-      lda
-         The leading dimension of a.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ungbr` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
 

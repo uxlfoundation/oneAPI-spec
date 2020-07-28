@@ -1,3 +1,4 @@
+.. _onemkl_vm_fmod:
 
 fmod
 ====
@@ -11,7 +12,6 @@ fmod
 
 
    .. container:: section
-      :name: SYNTAX_64545149F3C747DD84C9C42A7CA69BFC
 
 
       .. rubric:: Syntax
@@ -21,35 +21,34 @@ fmod
       Buffer API:
 
 
-      .. cpp:function::  void fmod(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::fmod(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event fmod( queue& exec_queue, int64_t n, T* a,      T* b, T* y, uint64_t mode = mode::not_defined, error_handler<T>      errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::fmod( queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``fmod`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-A9A5BC7E-6DDF-47C7-8839-9623C6DA8469
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The fmod (a,b) function computes the modulus function of each element
+   The fmod (a, b) function computes the modulus function of each element
    of vector ``a``, with respect to the corresponding elements of vector
    ``b``:
 
@@ -66,43 +65,42 @@ fmod
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 1 
-           -  Argument 2 
-           -  Result 
-           -  Error Code 
-         * -  ``a`` not NAN 
-           -  ±0 
-           -  NAN 
-           -  ``status::sing`` 
-         * -  ±∞ 
-           -  ``b`` not NAN 
-           -  NAN 
-           -  ``status::sing`` 
-         * -  ±0 
-           -  ``b``\ ≠ 0, not NAN 
-           -  ±0 
-           -    
-         * -  ``a`` finite 
-           -  ±∞ 
-           -  ``a`` 
-           -    
-         * -  NAN 
-           -  ``b`` 
-           -    
-           -    
-         * -  ``a`` 
-           -  NAN 
-           -  NAN 
-           -    
+         * - Argument 1
+           - Argument 2
+           - Result
+           - Error Code
+         * - ``a`` not NAN
+           - ±0
+           - NAN
+           - ``oneapi::mkl::vm::status::sing``
+         * - ±∞
+           - ``b`` not NAN
+           - NAN
+           - ``oneapi::mkl::vm::status::sing``
+         * - ±0
+           - ``b``\ ≠ 0, not NAN
+           - ±0
+           -  
+         * - ``a`` finite
+           - ±∞
+           - ``a``
+           -  
+         * - NAN
+           - ``b``
+           -  
+           -  
+         * - ``a``
+           - NAN
+           - NAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -130,14 +128,14 @@ fmod
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -167,20 +165,19 @@ fmod
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -205,31 +202,11 @@ fmod
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use fmod can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vfmod.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Arithmetic
-      Functions <arithmetic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

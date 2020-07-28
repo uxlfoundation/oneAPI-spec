@@ -1,4 +1,4 @@
-.. _generate-routine:
+.. _onemkl_rng_generate_routine:
 
 Generate Routine
 ================
@@ -6,7 +6,7 @@ Generate Routine
 .. container::
 
 
-   -  `onemkl::rng::generate <mkl-rng-generate.html>`__
+   -  :ref:`onemkl_rng_generate`
       Entry point to obtain random numbers from a given engine with
       proper statistics of a given distribution.
 

@@ -3,157 +3,94 @@
 ormtr_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_ormtr` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_ormtr` function.
+``ormtr_scratchpad_size`` supports the following precisions.
 
+     .. list-table:: 
+        :header-rows: 1
 
-         ``ormtr_scratchpad_size`` supports the following precisions.
+        * -  T 
+        * -  ``float`` 
+        * -  ``double`` 
 
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ormtr` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_ormtr` function should be able to hold.
+Calls to this routine must specify the template parameter
+explicitly.
 
 ormtr_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
+         
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::ormtr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo         upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,         std::int64_t lda, std::int64_t ldc)
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+  .. rubric:: Input Parameters
 
+In the descriptions below, ``r`` denotes the order of :math:`Q`:
 
-      .. container:: dlsyntaxpara
+.. container:: tablenoborder
 
+     .. list-table:: 
+        :header-rows: 1
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::ormtr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo         upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,         std::int64_t lda, std::int64_t ldc)
+        * -  :math:`r = m` 
+          -  if ``left_right = side::left`` 
+        * -  :math:`r = n` 
+          -  if ``left_right = side::right`` 
 
-   .. container:: section
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_ormtr` function will be performed.
 
+left_right
+   Must be either ``side::left`` or ``side::right``.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+   If ``left_right = side::left``, :math:`Q` or :math:`Q^{T}` is
+   applied to :math:`C` from the left.
 
+   If ``left_right = side::right``, :math:`Q` or :math:`Q^{T}` is
+   applied to :math:`C` from the right.
 
-      In the descriptions below, ``r`` denotes the order of ``Q``:
+upper_lower
+   Must be either ``uplo::upper`` or ``uplo::lower``. Uses the
+   same ``upper_lower`` as supplied to
+   :ref:`onemkl_lapack_sytrd`.
 
+trans
+   Must be either ``transpose::nontrans`` or ``transpose::trans``.
 
-      .. container:: tablenoborder
+   If ``trans = transpose::nontrans``, the routine multiplies
+   :math:`C` by :math:`Q`.
 
+   If ``trans = transpose::trans``, the routine multiplies :math:`C`
+   by :math:`Q^{T}`.
 
-         .. list-table:: 
-            :header-rows: 1
+m
+   The number of rows in the matrix :math:`C` :math:`(m \ge 0)`.
 
-            * -  ``r = m`` 
-              -  if ``left_right = side::left`` 
-            * -  ``r = n`` 
-              -  if ``left_right = side::right`` 
+n
+   The number of rows in the matrix :math:`C` :math:`(n \ge 0)`.
 
+lda
+   The leading dimension of ``a`` :math:`(\max(1, r) \le \text{lda})`.
 
+ldc
+   The leading dimension of ``c`` :math:`(\max(1, n) \le \text{ldc})`.
 
+.. container:: section
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_ormtr` function will be performed.
+  .. rubric:: Return Value
 
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_ormtr` function should be able to hold.
 
-      left_right
-         Must be either ``side::left`` or ``side::right``.
-
-
-         If ``left_right = side::left``, ``Q`` or ``Q``\ :sup:`T` is
-         applied to ``C`` from the left.
-
-
-         If ``left_right = side::right``, ``Q`` or ``Q``\ :sup:`T` is
-         applied to ``C`` from the right.
-
-
-      upper_lower
-         Must be either ``uplo::upper`` or ``uplo::lower``. Uses the
-         same ``upper_lower`` as supplied to
-         :ref:`onemkl_lapack_sytrd`.
-
-
-      trans
-         Must be either ``transpose::nontrans`` or ``transpose::trans``.
-
-
-         If ``trans = transpose::nontrans``, the routine multiplies
-         ``C`` by ``Q``.
-
-
-         If ``trans = transpose::trans``, the routine multiplies ``C``
-         by ``Q``\ :sup:`T`.
-
-
-      m
-         The number of rows in the matrix ``C``\ ``(m ≥ 0)``.
-
-
-      n
-         The number of rows in the matrix ``C``\ ``(n ≥ 0)``.
-
-
-      lda
-         The leading dimension of a\ ``(max(1, r) ≤ lda)``.
-
-
-      ldc
-         The leading dimension of c\ ``(max(1, n) ≤ ldc)``.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_ormtr` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
 

@@ -22,17 +22,13 @@ Vector Math
    operations they perform:
 
 
-   -  `VM Mathematical
-      Functions <vm/vm-mathematical-functions.html>`__
-      compute values of mathematical functions, such as sine, cosine,
-      exponential, or logarithm, on vectors stored contiguously in
-      memory.
+   - :ref:`onemkl_vm_mathematical_functions` compute values of mathematical
+     functions, such as sine, cosine, exponential, or logarithm, on vectors
+     stored contiguously in memory.
 
 
-   -  `VM Service
-      Functions <vm/vm-service-functions.html>`__
-      set/get the accuracy modes and the error codes,and create error
-      handlers for mathematical functions.
+   - :ref:`onemkl_vm_service_functions` set/get the accuracy modes and the
+     error codes, and create error handlers for mathematical functions.
 
 
    The VM mathematical functions take an input vector as an argument,
@@ -41,8 +37,7 @@ Vector Math
    can perform in-place operations, where the input and output arrays
    are at the same memory locations.
 
-   - :ref:`special-value-notations`
-   - :ref:`miscellaneous-vm-functions`
+   - :ref:`onemkl_vm_special_value_notations`
 
 .. toctree::
     :hidden:
@@ -50,5 +45,4 @@ Vector Math
     vm/special-value-notations
     vm/vm-mathematical-functions
     vm/vm-service-functions
-    vm/miscellaneous-vm-functions
     vm/bibliography

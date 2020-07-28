@@ -1,3 +1,4 @@
+.. _onemkl_vm_atan:
 
 atan
 ====
@@ -10,7 +11,6 @@ atan
 
 
    .. container:: section
-      :name: GUID-2C04260C-4B96-48EC-8552-19036F530B45
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ atan
       Buffer API:
 
 
-      .. cpp:function::  void atan(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined      )
+      .. cpp:function:: event oneapi::mkl::vm::atan(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event atan(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::atan(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``atan`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-15E2BF1F-0828-48B1-903F-5E3AA304A407
 
 
    .. rubric:: Description
@@ -56,30 +55,30 @@ atan
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  +∞ 
-           -  +\ ``π``/2 
-           -    
-         * -  -∞ 
-           -  -``π``/2 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - +∞
+           - +\ ``π``/2
+           -  
+         * - -∞
+           - -``π``/2
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -95,7 +94,6 @@ atan
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -119,9 +117,9 @@ atan
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -145,13 +143,12 @@ atan
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -176,31 +173,11 @@ atan
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use atan can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vatan.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Trigonometric
-      Functions <trigonometric-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

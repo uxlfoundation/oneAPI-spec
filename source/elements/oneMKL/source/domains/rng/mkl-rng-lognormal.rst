@@ -1,113 +1,202 @@
-.. _mkl-rng-lognormal:
+.. _onemkl_rng_lognormal:
 
-onemkl::rng::lognormal
-======================
+lognormal
+=========
+
+Class is used for generation of lognormally distributed real types random numbers.
+
+.. _onemkl_rng_lognormal_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers lognormally distributed with mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
+
+The probability distribution is given by:
+
+.. math::
+
+    f_{a, \sigma, b, \beta}(x) = \left\{ \begin{array}{rcl} \frac{1}{\sigma(x - b)\sqrt{2\pi}}exp(-\frac{[ln((x - b) / \beta) - a]^2}{2*\sigma^2}), x > b \\ 0, x \leq b \end{array}\right.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{a, \sigma, b, \beta}(x) = \left\{ \begin{array}{rcl} \Phi( \frac{(ln((x - b) / \beta) - a)}{\sigma}), x > b \\ 0, x \leq b \end{array}\right.
+
+.. _onemkl_rng_lognormal_syntax:
+
+class lognormal
+---------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = lognormal_method::by_default>
+    class lognormal {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        lognormal();
+        explicit lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0));
+        RealType m() const;
+        RealType s() const;
+        RealType displ() const;
+        RealType scale() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::lognormal_method::by_default> \
+                oneapi::mkl::rng::lognormal
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::lognormal_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::lognormal_method::by_default``
+                * ``oneapi::mkl::rng::lognormal_method::box_muller2``
+                * ``oneapi::mkl::rng::lognormal_method::icdf``
+                * ``oneapi::mkl::rng::lognormal_method::box_muller2_accurate``
+                * ``oneapi::mkl::rng::lognormal_method::icdf_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `lognormal()`_
+          - Default constructor
+        * - `explicit lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0))`_
+          - Constructor with parameters
+        * - `RealType m() const`_
+          - Method to obtain mean value
+        * - `RealType s() const`_
+          - Method to obtain standard deviation value
+        * - `RealType displ() const`_
+          - Method to obtain displacement value
+        * - `RealType scale() const`_
+          - Method to obtain scalefactor value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: lognormal::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: lognormal::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`lognormal()`:
+
+        .. cpp:function:: lognormal::lognormal()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `m` = 0.0, `s` = 1.0, `displ` = 0.0, `scale` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0))`:
+
+        .. cpp:function:: explicit lognormal::lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0))
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `m` is a mean value, `s` is a standard deviation value, `displ` is a displacement value, `scale` is a scalefactor value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates log-normally distributed random numbers.
+    .. container:: section
 
+        .. _`RealType m() const`:
 
-   .. container:: section
-      :name: GUID-331ADDE0-71FC-423E-AFC5-A53BDE66AEAB
+        .. cpp:function:: RealType lognormal::m() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `m` - mean value.
 
-      ::
-	 
-        template<typename T = float, method Method =      box_muller2>
-          class lognormal {
-          public:
-            lognormal(): lognormal((T)0.0, (T)1.0, (T) 0.0,      (T)1.0){}
-            lognormal(Tm, T s, T displ, T scale)
-            lognormal(const lognormal<T, Method>& other)
-            T m() const
-            T s() const
-            T displ() const
-            T scale() const
-            lognormal<T, Method>& operator=(const      lognormal<T, Method>& other)
-          }
+    .. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. _`RealType s() const`:
 
+        .. cpp:function:: RealType lognormal::s() const
 
-      -  mkl_sycl.hpp
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Description
-         :class: sectiontitle
+            Returns the distribution parameter `s` - standard deviation value.
 
+    .. container:: section
 
-      The onemkl::rng::lognormal class object is used in the
-      onemkl::rng::generate function to provide random numbers with average
-      of distribution (``m``, ``a``) and standard deviation (``s``, σ)
-      of subject normal distribution, displacement (``displ``, ``b``),
-      and scalefactor (``scale``, β), where
-      ``a, σ, b, β ∈ R ; σ > 0 , β > 0``.
+        .. _`RealType displ() const`:
 
+        .. cpp:function:: RealType lognormal::displ() const
 
-      The probability density function is given by:
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      | 
-      | |image0|
+            Returns the distribution parameter `displ` - displacement value.
 
+    .. container:: section
 
-      The cumulative distribution function is as follows:
+        .. _`RealType scale() const`:
 
+        .. cpp:function:: RealType lognormal::scale() const
 
-      | 
-      | |image1|
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+            Returns the distribution parameter `scale` - scalefactor value.
 
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::box_muller2``\       \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     m    
-           -     \ ``T (float, double)``\     
-           -     Average ``a`` of the subject normal       distribution.   
-         * -     s    
-           -     \ ``T (float, double)``\     
-           -     Standard deviation σ of the subject normal       distribution.   
-         * -     displ    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``displ``.    
-         * -     scale    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor scale.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-4D962DF4-16F2-438B-8866-4F105DC41242-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-428BFB7A-6E88-4D12-9707-885C02A93A8E-low.jpg
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

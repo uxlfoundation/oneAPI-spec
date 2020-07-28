@@ -1,3 +1,4 @@
+.. _onemkl_vm_set_status:
 
 set_status
 ==========
@@ -11,14 +12,13 @@ set_status
 
 
    .. container:: section
-      :name: GUID-AE00FF02-7CB7-4B5B-B23F-04D49B61B34F
 
 
       .. rubric:: Syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  uint8_t set_status (queue& exec_queue,uint_8      new_status )
+      .. cpp:function:: uint8_t oneapi::mkl::vm::set_status (queue& exec_queue, uint_8 new_status )
 
       .. rubric:: Description
          :class: sectiontitle
@@ -33,37 +33,36 @@ set_status
       following table lists the possible error values.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Status 
-           -  Description 
-         * -  Successful Execution 
-           -   
-         * -  ``status::success`` 
-           -  VM function execution completed successfully 
-         * -  ``status::not_defined`` 
-           -  VM status not defined 
-         * -  Warnings 
-           -   
-         * -  ``status::accuracy_warning`` 
-           -  VM function execution completed successfully in a different       accuracy mode
-         * -  Computational Errors 
-           -   
-         * -  ``status::errdom`` 
-           -  Values are out of a range of definition producing invalid       (QNaN) result
-         * -  ``status::sing`` 
-           -  Values cause divide-by-zero (singularity) errors and produce       and invalid (QNaN or Inf) result
-         * -  ``status::overflow`` 
-           -  An overflow happened during the calculation process 
-         * -  ``status::underflow`` 
-           -  An underflow happened during the calculation process 
+         * - Status
+           - Description
+         * - Successful Execution
+           -
+         * - ``oneapi::mkl::vm::status::success``
+           - VM function execution completed successfully
+         * - ``oneapi::mkl::vm::status::not_defined``
+           - VM status not defined
+         * - Warnings
+           -
+         * - ``oneapi::mkl::vm::status::accuracy_warning``
+           - VM function execution completed successfully in a different accuracy mode
+         * - Computational Errors
+           -
+         * - ``oneapi::mkl::vm::status::errdom``
+           - Values are out of a range of definition producing invalid (QNaN) result
+         * - ``oneapi::mkl::vm::status::sing``
+           - Values cause divide-by-zero (singularity) errors and produce and invalid (QNaN or Inf) result
+         * - ``oneapi::mkl::vm::status::overflow``
+           - An overflow happened during the calculation process
+         * - ``oneapi::mkl::vm::status::underflow``
+           - An underflow happened during the calculation process
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -79,7 +78,6 @@ set_status
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -90,39 +88,11 @@ set_status
       Specifies the former VM status.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   ::
-
-
-      uint8_t olderr = set_status (exec_queue, status::success);
-
-
-      if (olderr & status::errdom)
-      {
-          std::cout << ”Errdom status returned” << std::endl;
-      }
-
-
-      if (olderr & status::sing)
-      {
-          std::cout << ”Singularity status returned” << std::endl;
-      }
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `VM Service
-      Functions <vm-service-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_service_functions`
 
 

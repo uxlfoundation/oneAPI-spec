@@ -3,115 +3,66 @@
 potrs_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_potrs` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``potrs_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_potrs` function.
+    .. list-table:: 
+       :header-rows: 1
+    
+       * -  T 
+       * -  ``float`` 
+       * -  ``double`` 
+       * -  ``std::complex<float>`` 
+       * -  ``std::complex<double>`` 
 
-
-         ``potrs_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_potrs` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_potrs` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 potrs_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::potrs_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, std::int64_t         lda, std::int64_t ldb)
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Input Parameters
 
-      .. container:: dlsyntaxpara
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_potrs` function will be performed.
 
+upper_lower
+   Indicates how the input matrix has been factored:
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::potrs_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, std::int64_t         lda, std::int64_t ldb)
+   If ``upper_lower = onemkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A = U^{T}U`   for real data, :math:`A = U^{H}U` for complex data.
 
-   .. container:: section
+   If ``upper_lower = onemkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A = LL^{T}`   for real data, :math:`A = LL^{H}` for complex   data.
 
+n
+   The order of matrix :math:`A` (:math:`0 \le n`).
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+nrhs
+   The number of right-hand sides (:math:`0 \le nrhs`).
 
+lda
+   The leading dimension of ``a``.
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_potrs` function will be performed.
+ldb
+   The leading dimension of ``b``.
 
-      upper_lower
-         Indicates how the input matrix has been factored:
+.. container:: section
 
-         If ``upper_lower = onemkl::uplo::upper``, the upper triangle   ``U`` of ``A`` is stored, where ``A`` = ``U``\ :sup:`T`\ \*\ ``U``   for real data, ``A`` = ``U``\ :sup:`H`\ \*\ ``U`` for complex data.
+  .. rubric:: Return Value
+         
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_potrs` function should be able to hold.
 
-         If ``upper_lower = onemkl::uplo::lower``, the lower triangle   ``L`` of ``A`` is stored, where ``A`` = ``L``\ \*\ ``L``\ :sup:`T`   for real data, ``A`` = ``L``\ \*\ ``L``\ :sup:`H` for complex   data.
-
-      n
-         The order of matrix ``A`` (``0≤n``).
-
-      nrhs
-         The number of right-hand sides (``0≤nrhs``).
-
-      lda
-         The leading dimension of a.
-
-      ldb
-         The leading dimension of b.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_potrs` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
-
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 

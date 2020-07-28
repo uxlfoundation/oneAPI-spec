@@ -1,3 +1,4 @@
+.. _onemkl_vm_exp10:
 
 exp10
 =====
@@ -10,7 +11,6 @@ exp10
 
 
    .. container:: section
-      :name: SYNTAX_8AF46B7241F94765A2CAFFAEB423AF8B
 
 
       .. rubric:: Syntax
@@ -20,28 +20,27 @@ exp10
       Buffer API:
 
 
-      .. cpp:function::  void exp10(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::exp10(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event exp10(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::exp10(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``exp10`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-FEBDD1DA-E7FD-4777-9455-9C0D5E73CD1B
 
 
    .. rubric:: Description
@@ -55,15 +54,15 @@ exp10
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Data Type 
-           -  Threshold Limitations on Input Parameters 
-         * -  single precision 
-           -  ``a``\ :sub:`i` < log\ :sub:`10`\ (FLT_MAX) 
-         * -  double precision 
-           -  ``a``\ :sub:`i` < log\ :sub:`10`\ (DBL_MAX) 
+         * - Data Type
+           - Threshold Limitations on Input Parameters
+         * - single precision
+           - ``a``\ :sub:`i` < log\ :sub:`10`\ (FLT_MAX)
+         * - double precision
+           - ``a``\ :sub:`i` < log\ :sub:`10`\ (DBL_MAX)
 
 
 
@@ -71,42 +70,41 @@ exp10
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  VM Error Status 
-         * -  +0 
-           -  +1 
-           -    
-         * -  -0 
-           -  +1 
-           -    
-         * -  ``a`` > overflow 
-           -  +∞ 
-           -  ``status::overflow`` 
-         * -  ``a`` < underflow 
-           -  +0 
-           -  ``status::underflow`` 
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  +0 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - VM Error Status
+         * - +0
+           - +1
+           -  
+         * - -0
+           - +1
+           -  
+         * - ``a`` > overflow
+           - +∞
+           - ``oneapi::mkl::vm::status::overflow``
+         * - ``a`` < underflow
+           - +0
+           - ``oneapi::mkl::vm::status::underflow``
+         * - +∞
+           - +∞
+           -  
+         * - -∞
+           - +0
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -130,14 +128,14 @@ exp10
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -163,20 +161,19 @@ exp10
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -201,31 +198,11 @@ exp10
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use exp10can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vexp10.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Exponential and Logarithmic
-      Functions <exponential-and-logarithmic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

@@ -5,6 +5,6 @@
 .. toctree::
 
    spec/main_objects.rst
-   spec/collective_communication.rst
+   spec/operations.rst
    spec/error_handling.rst
 

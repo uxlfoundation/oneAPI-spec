@@ -3,109 +3,60 @@
 potri_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_potri` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``potri_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_potri` function.
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``float`` 
+        * -  ``double`` 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-         ``potri_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_potri` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_potri` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 potri_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
+         
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::potri_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t         lda)
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+  .. rubric:: Input Parameters
 
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_potri` function will be performed.
 
-      .. container:: dlsyntaxpara
+upper_lower
+   Indicates how the input matrix :math:`A` has been    factored:
 
+   If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::potri_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t         lda)
+   If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
 
-   .. container:: section
+n
+   Specifies the order of the matrix    :math:`A` (:math:`0 \le n`).
 
+lda
+   The leading dimension of ``a``.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Return Value
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_potri` function will be performed.
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_potri` function should be able to hold.
 
-      upper_lower
-         Indicates how the input matrix ``A`` has been    factored:
-
-         If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of ``A`` is stored.
-
-         If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of ``A`` is   stored.
-
-      n
-         Specifies the order of the matrix    ``A``\ (``0≤n``).
-
-      lda
-         The leading dimension of a.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_potri` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-linear-equation-routines` 
-
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 

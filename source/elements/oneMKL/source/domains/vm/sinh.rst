@@ -1,3 +1,4 @@
+.. _onemkl_vm_sinh:
 
 sinh
 ====
@@ -10,7 +11,6 @@ sinh
 
 
    .. container:: section
-      :name: GUID-BDC2B01B-DF48-43AB-BD52-25BEDE8290D3
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ sinh
       Buffer API:
 
 
-      .. cpp:function::  void sinh(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::sinh(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event sinh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::sinh(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``sinh`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-9CA1335D-E846-4750-8710-177B8B025DD6
 
 
    .. rubric:: Description
@@ -56,15 +55,15 @@ sinh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Data Type 
-           -  Threshold Limitations on Input Parameters 
-         * -  single precision 
-           -  ``-Log(FLT_MAX)-Log(2) <a[i] < Log(FLT_MAX)+Log(2)`` 
-         * -  double precision 
-           -  ``-Log(DBL_MAX)-Log(2) <a[i] < Log(DBL_MAX)+Log(2)`` 
+         * - Data Type
+           - Threshold Limitations on Input Parameters
+         * - single precision
+           - ``-Log(FLT_MAX)-Log(2) <a[i] < Log(FLT_MAX)+Log(2)``
+         * - double precision
+           - ``-Log(DBL_MAX)-Log(2) <a[i] < Log(DBL_MAX)+Log(2)``
 
 
 
@@ -72,36 +71,36 @@ sinh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  a > overflow 
-           -  +∞ 
-           -  ``status::overflow`` 
-         * -  a < -overflow 
-           -  -∞ 
-           -  ``status::overflow`` 
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - a > overflow
+           - +∞
+           - ``oneapi::mkl::vm::status::overflow``
+         * - a < -overflow
+           - -∞
+           - ``oneapi::mkl::vm::status::overflow``
+         * - +∞
+           - +∞
+           -  
+         * - -∞
+           - -∞
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -109,73 +108,73 @@ sinh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-           -  
-         * -  +i·∞ 
-           -     -∞+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     -0+i·QNAN    
-           -     +0+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     +∞+i·QNAN    
-           -     QNAN+i·QNAN    
-         * -  +i·Y 
-           -     -∞·Cos(Y)+ i·∞·Sin(Y)    
-           -    
-           -    
-           -    
-           -    
-           -     +∞·CIS(Y)    
-           -     QNAN+i·QNAN    
-         * -  +i·0 
-           -     -∞+i·0    
-           -    
-           -  -0+i·0 
-           -  +0+i·0 
-           -    
-           -     +∞+i·0    
-           -     QNAN+i·0    
-         * -  -i·0 
-           -     -∞-i·0    
-           -    
-           -  -0-i·0 
-           -  +0-i·0 
-           -    
-           -     +∞-i·0    
-           -     QNAN-i·0    
-         * -  -i·Y 
-           -     -∞·Cos(Y)+ i·∞·Sin(Y)    
-           -    
-           -    
-           -    
-           -    
-           -     +∞·CIS(Y)    
-           -     QNAN+i·QNAN    
-         * -  -i·∞ 
-           -     -∞+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     -0+i·QNAN    
-           -     +0+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     +∞+i·QNAN    
-           -     QNAN+i·QNAN    
-         * -  +i·NAN 
-           -     -∞+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     -0+i·QNAN    
-           -     +0+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     +∞+i·QNAN    
-           -     QNAN+i·QNAN    
+         * -
+           -
+           -
+           -
+           -
+           -
+           -
+           -
+         * - +i·∞
+           - -∞+i·QNAN
+           - QNAN+i·QNAN
+           - -0+i·QNAN
+           - +0+i·QNAN
+           - QNAN+i·QNAN
+           - +∞+i·QNAN
+           - QNAN+i·QNAN
+         * - +i·Y
+           - -∞·Cos(Y)+ i·∞·Sin(Y)
+           -  
+           -  
+           -  
+           -  
+           - +∞·CIS(Y)
+           - QNAN+i·QNAN
+         * - +i·0
+           - -∞+i·0
+           -  
+           - -0+i·0
+           - +0+i·0
+           -  
+           - +∞+i·0
+           - QNAN+i·0
+         * - -i·0
+           - -∞-i·0
+           -  
+           - -0-i·0
+           - +0-i·0
+           -  
+           - +∞-i·0
+           - QNAN-i·0
+         * - -i·Y
+           - -∞·Cos(Y)+ i·∞·Sin(Y)
+           -  
+           -  
+           -  
+           -  
+           - +∞·CIS(Y)
+           - QNAN+i·QNAN
+         * - -i·∞
+           - -∞+i·QNAN
+           - QNAN+i·QNAN
+           - -0+i·QNAN
+           - +0+i·QNAN
+           - QNAN+i·QNAN
+           - +∞+i·QNAN
+           - QNAN+i·QNAN
+         * - +i·NAN
+           - -∞+i·QNAN
+           - QNAN+i·QNAN
+           - -0+i·QNAN
+           - +0+i·QNAN
+           - QNAN+i·QNAN
+           - +∞+i·QNAN
+           - QNAN+i·QNAN
 
 
 
@@ -183,21 +182,20 @@ sinh
    Notes:
 
 
-   -  The complex sinh(a) function sets the VM Error Status to
-      status::overflow in the case of overflow, that is, when RE(a),
+   - The complex sinh(a) function sets the VM Error Status to
+      oneapi::mkl::vm::status::overflow in the case of overflow, that is, when RE(a),
       IM(a) are finite non-zero numbers, but the real or imaginary part
       of the exact result is so large that it does not meet the target
       precision.
 
 
-   -  ``sinh(CONJ(a))=CONJ(sinh(a))``
+   - ``sinh(CONJ(a))=CONJ(sinh(a))``
 
 
-   -  ``sinh(-a)=-sinh(a)``.
+   - ``sinh(-a)=-sinh(a)``.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -221,14 +219,14 @@ sinh
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -254,20 +252,19 @@ sinh
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -292,31 +289,11 @@ sinh
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use sinh can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vsinh.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Hyperbolic
-      Functions <hyperbolic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 
