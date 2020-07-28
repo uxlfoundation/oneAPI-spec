@@ -20,14 +20,11 @@ on devices.  The language is comprised of the following components:
   (as specified in Sections 1-19 of ISO/IEC 14882:2017) or
   newer.  See the `C++ Standard`_.
 
-- SYCL.  DPC++ includes the SYCL language. SYCL enables
+- SYCL.  DPC++ builds on the SYCL specification from The Khronos Group.
+  The SYCL language enables
   the definition of data parallel functions that can be offloaded to
   devices and defines runtime APIs and classes that are used to
-  orchestrate the offloaded functions.  A compliant DPC++
-  implementation must also be a conformant SYCL 1.2.1 (or later)
-  implementation, a process which includes Khronos* conformance testing
-  and an adopter process.  (See the `SYCL Specification`_ and `SYCL
-  Adopters`_.)
+  orchestrate the offloaded functions.
 
 - DPC++ Language extensions. A compliant DPC++ implementation must
   support the specified language features.  These include
@@ -44,9 +41,9 @@ on devices.  The language is comprised of the following components:
   Table`_) for the classes of devices that the implementation can
   support.  (See `SYCL Extensions`_.)
 
-This specification requires a minimum of C++17 Core Language support, SYCL 1.2.1, and 
+This specification requires a minimum of C++17 Core Language support and
 DPC++ extensions. These version and feature coverage requirements
-will evolve over time, with newer versions of C++ and SYCL being required, 
+will evolve over time, with specific versions of C++ and SYCL being required,
 some additional extensions being required, and some DPC++ extensions no longer
 required if covered by newer C++ or SYCL versions directly.
 
@@ -163,8 +160,7 @@ Testing
 
 A DPC++ implementation must pass:
 
-  1. The Khronos SYCL 1.2.1 `conformance test suite`_ (SYCL-1.2.1/master branch).
-  2. The `extension tests`_ for any extension implemented from the `Extensions Table`_.
+  1. The `extension tests`_ for any extension implemented from the `Extensions Table`_.
      Each extension in the `Extensions Table`_ lists the name of the directory that contains
      corresponding tests, within the `extension tests`_ tree.
 
