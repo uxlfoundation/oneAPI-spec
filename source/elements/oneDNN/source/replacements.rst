@@ -33,7 +33,10 @@
 .. |cba| replace:: :any:`cba <dnnl::memory::format_tag::cba>`
 .. |cdba| replace:: :any:`cdba <dnnl::memory::format_tag::cdba>`
 .. |cdeba| replace:: :any:`cdeba <dnnl::memory::format_tag::cdeba>`
+.. |dcab| replace:: :any:`dcab <dnnl::memory::format_tag::dcab>`
 .. |decab| replace:: :any:`decab <dnnl::memory::format_tag::decab>`
+.. |defcab| replace:: :any:`defcab <dnnl::memory::format_tag::defcab>`
+.. |dhwigo| replace:: :any:`dhwigo <dnnl::memory::format_tag::dhwigo>`
 .. |dhwio| replace:: :any:`dhwio <dnnl::memory::format_tag::dhwio>`
 .. |goidhw| replace:: :any:`goidhw <dnnl::memory::format_tag::goidhw>`
 .. |goihw| replace:: :any:`goihw <dnnl::memory::format_tag::goihw>`
@@ -62,6 +65,7 @@
 .. |oi| replace:: :any:`oi <dnnl::memory::format_tag::oi>`
 .. |tnc| replace:: :any:`tnc <dnnl::memory::format_tag::tnc>`
 .. |tn| replace:: :any:`tn <dnnl::memory::format_tag::tn>`
+.. |wigo| replace:: :any:`wigo <dnnl::memory::format_tag::wigo>`
 .. |wio| replace:: :any:`wio <dnnl::memory::format_tag::wio>`
 .. |x| replace:: :any:`x <dnnl::memory::format_tag::x>`
 
@@ -80,7 +84,10 @@
 .. |_cba| replace:: :any:`dnnl::memory::format_tag::cba`
 .. |_cdba| replace:: :any:`dnnl::memory::format_tag::cdba`
 .. |_cdeba| replace:: :any:`dnnl::memory::format_tag::cdeba`
+.. |_dcab| replace:: :any:`dnnl::memory::format_tag::dcab`
 .. |_decab| replace:: :any:`dnnl::memory::format_tag::decab`
+.. |_defcab| replace:: :any:`dnnl::memory::format_tag::defcab`
+.. |_dhwigo| replace:: :any:`dnnl::memory::format_tag::dhwigo`
 .. |_dhwio| replace:: :any:`dnnl::memory::format_tag::dhwio`
 .. |_goidhw| replace:: :any:`dnnl::memory::format_tag::goidhw`
 .. |_goihw| replace:: :any:`dnnl::memory::format_tag::goihw`
@@ -108,6 +115,7 @@
 .. |_oi| replace:: :any:`dnnl::memory::format_tag::oi`
 .. |_tnc| replace:: :any:`dnnl::memory::format_tag::tnc`
 .. |_tn| replace:: :any:`dnnl::memory::format_tag::tn`
+.. |_wigo| replace:: :any:`dnnl::memory::format_tag::wigo`
 .. |_wio| replace:: :any:`dnnl::memory::format_tag::wio`
 .. |_x| replace:: :any:`dnnl::memory::format_tag::x`
 
@@ -157,6 +165,7 @@
 .. |eltwise_pow| replace:: :any:`eltwise_pow <dnnl::algorithm::eltwise_pow>`
 .. |eltwise_relu_use_dst_for_bwd| replace:: :any:`eltwise_relu_use_dst_for_bwd <dnnl::algorithm::eltwise_relu_use_dst_for_bwd>`
 .. |eltwise_relu| replace:: :any:`eltwise_relu <dnnl::algorithm::eltwise_relu>`
+.. |eltwise_round| replace:: :any:`eltwise_round <dnnl::algorithm::eltwise_round>`
 .. |eltwise_soft_relu| replace:: :any:`eltwise_soft_relu <dnnl::algorithm::eltwise_soft_relu>`
 .. |eltwise_sqrt_use_dst_for_bwd| replace:: :any:`eltwise_sqrt_use_dst_for_bwd <dnnl::algorithm::eltwise_sqrt_use_dst_for_bwd>`
 .. |eltwise_sqrt| replace:: :any:`eltwise_sqrt <dnnl::algorithm::eltwise_sqrt>`
@@ -204,6 +213,7 @@
 .. |_eltwise_pow| replace:: :any:`dnnl::algorithm::eltwise_pow`
 .. |_eltwise_relu_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_relu_use_dst_for_bwd`
 .. |_eltwise_relu| replace:: :any:`dnnl::algorithm::eltwise_relu`
+.. |_eltwise_round| replace:: :any:`dnnl::algorithm::eltwise_round`
 .. |_eltwise_soft_relu| replace:: :any:`dnnl::algorithm::eltwise_soft_relu`
 .. |_eltwise_sqrt_use_dst_for_bwd| replace:: :any:`dnnl::algorithm::eltwise_sqrt_use_dst_for_bwd`
 .. |_eltwise_sqrt| replace:: :any:`dnnl::algorithm::eltwise_sqrt`
