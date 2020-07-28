@@ -14,6 +14,7 @@ oneDAL public identifiers are represented in the following header files:
      - The main header file of oneDAL library.
    * - ``oneapi/dal/algo/%ALGO%.hpp``
      - A header file for a particular algorithm.
+       The folder for the algorithm itself is ``oneapi/dal/algo/%ALGO%/``.
 
        The string %ALGO% should be substituted with the name of the algorithm, for example, ``kmeans`` or ``knn``.
 
