@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. _rnn-label:
 

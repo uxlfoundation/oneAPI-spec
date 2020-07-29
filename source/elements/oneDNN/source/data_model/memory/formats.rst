@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. |N| replace:: :math:`N`
 .. |C| replace:: :math:`C`
