@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: replacements.rst
+.. include:: replacements.inc.rst
 
 .. _`open source implementation`: https://github.com/oneapi-src/oneDNN/tree/dev-v2
 
