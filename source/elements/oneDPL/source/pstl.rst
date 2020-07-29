@@ -10,27 +10,29 @@ A DPC++ execution policy specifies where and how an algorithm runs.
 
 .. code:: cpp
 
-  // Defined in <dpstd/execution>
+  // Defined in <oneapi/dpl/execution>
 
-  namespace dpstd {
-    namespace execution {
+  namespace oneapi {
+    namespace dpl {
+      namespace execution {
 
-      template <typename KernelName = /*unspecified*/>
-      class device_policy;
+        template <typename KernelName = /*unspecified*/>
+        class device_policy;
 
-      device_policy<> dpcpp_default;
+        device_policy<> dpcpp_default;
 
-      template <typename KernelName = /*unspecified*/>
-      device_policy<KernelName>
-      make_device_policy( sycl::queue );
+        template <typename KernelName = /*unspecified*/>
+        device_policy<KernelName>
+        make_device_policy( sycl::queue );
 
-      template <typename KernelName = /*unspecified*/>
-      device_policy<KernelName>
-      make_device_policy( sycl::device );
+        template <typename KernelName = /*unspecified*/>
+        device_policy<KernelName>
+        make_device_policy( sycl::device );
 
-      template <typename NewKernelName, typename OldKernelName>
-      device_policy<NewKernelName>
-      make_device_policy( const device_policy<OldKernelName>& = dpcpp_default );
+        template <typename NewKernelName, typename OldKernelName>
+        device_policy<NewKernelName>
+        make_device_policy( const device_policy<OldKernelName>& = dpcpp_default );
+      }
     }
   }
 
@@ -133,53 +135,72 @@ as the template argument, otherwise unspecified.
 Return a policy object constructed from ``policy``, with a new kernel name provided as the template
 argument. If no policy object is provided, the new policy is constructed from ``dpcpp_default``.
 
-Wrappers for SYCL Buffers
-++++++++++++++++++++++++++
+Buffer wrappers
+++++++++++++++++
 
 .. code:: cpp
 
-  // Defined in <dpstd/iterators.h>
+  // Defined in <oneapi/dpl/iterator>
 
-  namespace dpstd {
+  namespace oneapi {
+    namespace dpl {
 
-    template <cl::sycl::access::mode = cl::sycl::access::mode::read_write, ... >
-    /*unspecified*/ begin(cl::sycl::buffer<...>);
+      template < typename T, typename AllocatorT, sycl::access::mode Mode >
+      /*unspecified*/ begin( sycl::buffer<T, /*dim=*/1, AllocatorT> buf,
+                             sycl::mode_tag_t<Mode> tag = sycl::read_write );
 
-    template <cl::sycl::access::mode = cl::sycl::access::mode::read_write, ... >
-    /*unspecified*/ end(cl::sycl::buffer<...>);
+      template < typename T, typename AllocatorT, sycl::access::mode Mode >
+      /*unspecified*/ begin( sycl::buffer<T, /*dim=*/1, AllocatorT> buf,
+                             sycl::mode_tag_t<Mode> tag, sycl::property::noinit );
 
+      template < typename T, typename AllocatorT >
+      /*unspecified*/ begin( sycl::buffer<T, /*dim=*/1, AllocatorT> buf,
+                             sycl::property::noinit );
+
+
+      template < typename T, typename AllocatorT, sycl::access::mode Mode >
+      /*unspecified*/ end( sycl::buffer<T, /*dim=*/1, AllocatorT> buf,
+                           sycl::mode_tag_t<Mode> tag = sycl::read_write );
+
+      template < typename T, typename AllocatorT, sycl::access::mode Mode >
+      /*unspecified*/ end( sycl::buffer<T, /*dim=*/1, AllocatorT> buf,
+                           sycl::mode_tag_t<Mode> tag, sycl::property::noinit );
+
+      template < typename T, typename AllocatorT >
+      /*unspecified*/ end( sycl::buffer<T, /*dim=*/1, AllocatorT> buf,
+                           sycl::property::noinit );
+
+    }
   }
 
-
-:code:`dpstd::begin` and :code:`dpstd::end` are helper functions
-for passing SYCL buffers to oneDPL algorithms.
-These functions accept a SYCL buffer and return an object
+``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are helper functions
+for passing DPC++ buffers to oneDPL algorithms.
+These functions accept a buffer and return an object
 of an unspecified type that satisfies the following requirements:
 
-- Is :code:`CopyConstructible`, :code:`CopyAssignable`, and comparable
-  with operators :code:`==` and :code:`!=`
+- it is ``CopyConstructible``, ``CopyAssignable``, and comparable
+  with operators ``==`` and ``!=``;
+- the following expressions are valid: ``a + n``, ``a - n``,
+  ``a - b``, where ``a`` and ``b`` are objects of the type,
+  and ``n`` is an integer value;
+- it provides the ``get_buffer()`` method that returns the buffer
+  passed to the ``begin`` or ``end`` function.
 
-- The following expressions are valid: :code:`a + n`, :code:`a - n`,
-  :code:`a - b`, where :code:`a` and :code:`b` are objects of the type,
-  and :code:`n` is an integer value
+When invoking an algorithm, the buffer passed to ``begin`` should be the same
+as the buffer passed to ``end``. Otherwise, the behavior is undefined.
 
-- Provides :code:`get_buffer()` method that returns the SYCL buffer
-  passed to :code:`dpstd::begin` or :code:`dpstd::end` function.
-
-Example:
+``sycl::mode_tag_t`` and ``sycl::property::noinit`` parameters allow to specify
+an access mode to be used for accessing the buffer by algorithms.
+The mode serves as a hint, and can be overridden depending on semantics of the algorithm.
+When invoking an algorithm, the same access mode arguments should be used
+for ``begin`` and ``end``. Otherwise, the behavior is undefined.
 
 .. code:: cpp
+      
+      using namespace oneapi;
+      auto buf_begin = dpl::begin(buf, sycl::write_only);
+      auto buf_end_1 = dpl::end(buf, sycl::write_only);
+      auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::noinit);
+      dpl::fill(dpl::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
+      dpl::fill(dpl::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
 
-  #include <CL/sycl.hpp>
-  #include <dpstd/execution>
-  #include <dpstd/algorithm>
-  #include <dpstd/iterators.h>
-
-  int main(){
-      cl::sycl::buffer<int> buf { 1000 };
-      auto buf_begin = dpstd::begin(buf);
-      auto buf_end   = dpstd::end(buf);
-      auto policy = dpstd::execution::make_device_policy<class Fill>( );
-      std::fill(policy, buf_begin, buf_end, 42);
-      return 0;
-  }
