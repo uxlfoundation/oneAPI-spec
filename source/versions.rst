@@ -38,8 +38,12 @@ Release Notes
   * Add future considerations and acknowledgement to appendix
   * Change top-level namespace to oneapi::mkl
 
-* oneDAL
+* oneDNN
 
+  * Added the specification for ``map_data()`` / ``unmap_data()`` methods of
+    oneDNN memory objects
+  * Extended element-wise algorithms and post operations
+  * Added queries for peephole and projection weights for LSTM
 
 * oneDPL
 
