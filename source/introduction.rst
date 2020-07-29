@@ -121,7 +121,5 @@ include the following line using your real name and email address:
 Signed-off-by: Joe Smith joe.smith@email.com
 
 
-.. todolist::
-
 .. [*]: Other names and brands may be claimed as the property of others.
 .. _`RFC 2119`: https://tools.ietf.org/html/rfc2119
