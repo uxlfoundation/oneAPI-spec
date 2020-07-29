@@ -1,71 +1,55 @@
-.. _mkl-rng-uniform_bits:
+.. _onemkl_rng_uniform_bits:
 
-onemkl::rng::uniform_bits
-=========================
+uniform_bits
+============
 
+Class is used for generation of uniformly distibuted bits in 32/64-bit chunks.
 
-.. container::
+.. _onemkl_rng_uniform_bits_description:
 
+.. rubric:: Description
 
-   Generates uniformly distributed bits in 32/64-bit chunks.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide uniformly distibuted bits in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is uniformly distributed. Can be not supported by the specific engine.
 
+class uniform_bits
+------------------
 
-   .. container:: section
-      :name: GUID-C153356E-A495-466B-93DF-6104814C143E
+.. rubric:: Syntax
 
+.. code-block:: cpp
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+    template<typename UIntType = std::uint32_t>
+    class uniform_bits {
+    public:
+        using result_type = UIntType;
+    };
 
+.. cpp:class:: template<typename UIntType = std::uint32_t> \
+                oneapi::mkl::rng::uniform_bits
 
-      ::
-	 
-        template<typename T = std::uint32_t, method      Method = standard>
-          class uniform_bits {}
+.. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+    .. rubric:: Template parameters
 
+    .. container:: section
 
-      -  ``mkl_sycl.hpp``
+        typename UIntType
+            Type of the produced values. Supported types:
+                * ``std::uint32_t``
+                * ``std::uint64_t``
 
+.. container:: section
 
-      .. rubric:: Description
-         :class: sectiontitle
+    .. rubric:: Member types
 
+    .. container:: section
 
-      The onemkl::rng::uniform_bits class object is used to generate
-      uniformly distributed bits in 32/64-bit chunks. It is designed to
-      ensure each bit in the 32/64-bit chunk is uniformly distributed.
-      It is not supported not for all engines. See `VS
-      Notes <bibliography.html>`__
-      for details.
+        .. cpp:type:: uniform_bits::result_type = UIntType
 
+        .. container:: section
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+            .. rubric:: Description
 
+            Type which defines type of generated random numbers.
 
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     T    
-           -     \ ``std::uint32_t / std::uint64_t``\     
-           -     Chunk size     
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

@@ -1,121 +1,172 @@
-.. _mkl-rng-gaussian:
+.. _onemkl_rng_gaussian:
 
-onemkl::rng::gaussian
-=====================
+gaussian
+========
 
+Class is used for generation of normally distributed real types random numbers.
 
-.. container::
+.. _onemkl_rng_gaussian_description:
 
+.. rubric:: Description
 
-   Generates normally distributed random numbers.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers normally distributed with mean :math:`(mean, a)` and standard deviation :math:`(stddev, \sigma)`, where :math:`a, \sigma \in R; \sigma > 0`.
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-D1F58E4A-D95B-49A1-A6F4-5DC5B3F9942D
+.. math::
 
+    f_{a, \sigma}(x) = \frac{1}{\sigma\sqrt{2\pi}}exp(-\frac{(x - a)^2}{2*\sigma^2}), x \in R.
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-	 
-        template<typename T = float, method Method =      box_muller2>
-          class gaussian {
-          public:
-            gaussian(): gaussian((T)0.0, (T)1.0){}
-            gaussian(T mean, T stddev)
-            gaussian(const gaussian<T, Method>& other)
-            T mean() const
-            T stddev() const
-            gaussian<T, Method>& operator=(const gaussian<T,      Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{a, \sigma}(x) = \int^x_{-\infty}\frac{1}{\sigma\sqrt{2\pi}}exp(-\frac{(y - a)^2}{2*\sigma^2})dy, x \in R.
 
 
-      -  mkl_sycl.hpp
+.. _onemkl_rng_gaussian_syntax:
+
+class gaussian
+--------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = gaussian_method::by_default>
+    class gaussian {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        gaussian();
+        explicit gaussian(RealType mean, RealType stddev);
+        RealType mean() const;
+        RealType stddev() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::gaussian_method::by_default> \
+                oneapi::mkl::rng::gaussian
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::gaussian_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::gaussian_method::by_default``
+                * ``oneapi::mkl::rng::gaussian_method::box_muller``
+                * ``oneapi::mkl::rng::gaussian_method::box_muller2``
+                * ``oneapi::mkl::rng::gaussian_method::icdf``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `gaussian()`_
+          - Default constructor
+        * - `explicit gaussian(RealType mean, RealType stddev)`_
+          - Constructor with parameters
+        * - `RealType mean() const`_
+          - Method to obtain mean value
+        * - `RealType stddev() const`_
+          - Method to obtain standard deviation value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: gaussian::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: gaussian::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`gaussian()`:
+
+        .. cpp:function:: gaussian::gaussian()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `mean` = 0.0, `stddev` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit gaussian(RealType mean, RealType stddev)`:
+
+        .. cpp:function:: explicit gaussian::gaussian(RealType mean, RealType stddev)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `mean` is a mean value, `stddev` is a standard deviation value.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The class object is used in onemkl::rng::generate function to provide
-      random numbers with normal (Gaussian) distribution with mean
-      (``a``) and standard deviation (``stddev, σ``), where ``a``,
-      ``σ ∈ R`` ; ``σ`` > 0.
+    .. container:: section
 
+        .. _`RealType mean() const`:
 
-      The probability density function is given by:
+        .. cpp:function:: RealType gaussian::mean() const
 
+        .. container:: section
 
-      | 
-      | |image0|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `mean` - mean value.
 
-      The cumulative distribution function is as follows:
+    .. container:: section
 
+        .. _`RealType stddev() const`:
 
-      | 
-      | |image1|
+        .. cpp:function:: RealType gaussian::stddev() const
 
+        .. container:: section
 
-      The cumulative distribution function ``Fa,σ(x)`` can be expressed
-      in terms of standard normal distribution ``Φ(x)`` as
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `stddev` - standard deviation value.
 
-      ::
-
-
-                        F
-                         
-
-                             a,σ
-                         (x) = Φ((x - a)/σ)
-
-
-   .. container:: section
-      :name: GUID-801CDE34-0E9F-455F-8C48-F05082D19D44
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::box_muller``\       \ ``onemkl::rng::box_muller2``\       \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     mean    
-           -     \ ``T (float, double)``\     
-           -     Mean value ``a``.    
-         * -     stddev    
-           -     \ ``T (float, double)``\     
-           -     Standard deviation σ.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-281DBA27-691A-4B62-A255-FC33EA28D8D5-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-3A9C1154-2E42-416F-8865-06E7382A3AA7-low.jpg
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

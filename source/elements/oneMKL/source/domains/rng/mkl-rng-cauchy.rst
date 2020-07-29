@@ -1,103 +1,169 @@
-.. _mkl-rng-cauchy:
+.. _onemkl_rng_cauchy:
 
-onemkl::rng::cauchy
-===================
+cauchy
+======
+
+Class is used for generation of Cauchy distributed real types random numbers.
+
+.. _onemkl_rng_cauchy_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Cauchy distributed with displacement :math:`a`, and scale parameter :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+
+The probability distribution is given by:
+
+.. math::
+
+    f_{a, \beta}(x) = \frac{1}{\pi\beta(1 + (\frac{x - a}{\beta})^2)}, x \in R.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{a, \beta}(x) = \frac{1}{2} + \frac{1}{\pi} \arctan{(\frac{x - a}{\beta})}, x \in R.
+
+.. _onemkl_rng_cauchy_syntax:
+
+class cauchy
+------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = cauchy_method::by_default>
+    class cauchy {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        cauchy();
+        explicit cauchy(RealType a, RealType b);
+        RealType a() const;
+        RealType b() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::cauchy_method::by_default> \
+                oneapi::mkl::rng::cauchy
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::cauchy_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::cauchy_method::by_default``
+                * ``oneapi::mkl::rng::cauchy_method::icdf``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `cauchy()`_
+          - Default constructor
+        * - `explicit cauchy(RealType a, RealType b)`_
+          - Constructor with parameters
+        * - `RealType a() const`_
+          - Method to obtain displacement value
+        * - `RealType b() const`_
+          - Method to obtain scalefactor value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: cauchy::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: cauchy::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`cauchy()`:
+
+        .. cpp:function:: cauchy::cauchy()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.0, and `b` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit cauchy(RealType a, RealType b)`:
+
+        .. cpp:function:: explicit cauchy::cauchy(RealType a, RealType b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a displacement value, `b` is a scalefactor value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates Cauchy distributed random values.
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-   .. container:: section
-      :name: GUID-00E31852-3752-4F63-81D0-EF47CF676F30
+        .. cpp:function:: RealType cauchy::a() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - displacement value.
 
-      ::
+    .. container:: section
 
-        template<typename T = float, method Method =      inverse_function>
-          class cauchy {
-          public:
-            cauchy(): cauchy((T)0.0, (T)1.0){}
-            cauchy(T a, T b)
-            cauchy(const cauchy<T, Method>& other)
-            T a() const
-            T b() const
-            cauchy<T, Method>& operator=(const cauchy<T, Method>& other)
-          }
+        .. _`RealType b() const`:
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. cpp:function:: RealType cauchy::b() const
 
+        .. container:: section
 
-      -  mkl_sycl.hpp
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `b` - scalefactor value.
 
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The onemkl::rng::cauchy class object is used in the
-      onemkl::rng::generate function to provide Cauchy distributed random
-      numbers with displacement (``a``) and scalefactor (``b``, β),
-      where ``a, β∈R ; β > 0``.
-
-
-      The probability density function is given by:
-
-
-      | 
-      | |image0|
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image1|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     b    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor ``b``.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-04615D14-A026-4BF0-ACD6-0FC822FEC64E-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-5FAAD02F-09F5-4B78-B404-384F1270FA1C-low.jpg
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

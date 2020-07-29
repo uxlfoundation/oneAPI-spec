@@ -1,101 +1,164 @@
-.. _mkl-rng-uniform-discrete:
+.. _onemkl_rng_uniform_discrete:
 
-onemkl::rng::uniform (Discrete)
-===============================
+uniform (discrete)
+==================
 
+Class is used for generation of uniformly distributed integer types random numbers.
 
-.. container::
+.. _onemkl_rng_uniform_discrete_description:
 
+.. rubric:: Description
 
-   Generates random numbers uniformly distributed over the interval
-   ``[a, b)``.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
+interval, respectively, and :math:`a, b \in R; a < b`
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-351E5FB2-A4B6-4198-A538-7FF637E06D51
+.. math::
 
+    P(X = k) = \frac{1}{b - a}, k \in \{a, a + 1, ... , b - 1\}
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-	 
-        template<typename T = float, method Method =      standard>
-          class uniform {
-          public:
-            uniform(): uniform((T)0.0, (T)1.0){}
-            uniform(T a, T b)
-            uniform(const uniform<T, Method>& other)
-            T a() const
-            T b() const
-            uniform<T, Method>& operator=(const uniform<T,      Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{a, b}(x) = \left\{ \begin{array}{rcl} 0, x < a \\ \frac{\lfloor x - a + 1 \rfloor}{b-a}, a \leq x < b, x \in R \\ 1, x \ge b \end{array}\right.
 
 
-      -  ``mkl_sycl.hpp``
+.. _onemkl_rng_uniform_discrete_syntax:
+
+class uniform
+-------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename Method = uniform_method::by_default>
+    class uniform<std::int32_t, Method> {
+    public:
+        using method_type = Method;
+        using result_type = std::int32_t;
+        uniform();
+        explicit uniform(std::int32_t a, std::int32_t b);
+        std::int32_t a() const;
+        std::int32_t b() const;
+    };
+
+.. cpp:class:: template<typename Method = oneapi::mkl::rng::uniform_method::by_default> \
+                oneapi::mkl::rng::uniform
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::uniform_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::uniform_method::by_default``
+                * ``oneapi::mkl::rng::uniform_method::standard``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `uniform()`_
+          - Default constructor
+        * - `explicit uniform(std::int32_t a, std::int32_t b)`_
+          - Constructor with parameters
+        * - `std::int32_t a() const`_
+          - Method to obtain left bound `a`
+        * - `std::int32_t b() const`_
+          - Method to obtain right bound `b`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation
+
+    .. container:: section
+
+        .. cpp:type:: result_type = std::int32_t
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`uniform()`:
+
+        .. cpp:function:: uniform()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0, `b` = std::numeric_limits<std::int32_t>::max()
+
+    .. container:: section
+
+        .. _`explicit uniform(std::int32_t a, std::int32_t b)`:
+
+        .. cpp:function:: uniform(std::int32_t a, std::int32_t b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a left bound, `b` is a right bound, assume :math:`a < b`.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The onemkl::rng::uniform class object is used in onemkl::rng::generate
-      functions to provide random numbers uniformly distributed over the
-      interval ``[a, b)``, where ``a, b`` are the left and right bounds
-      of the interval respectively, and ``a, b∈Z; a < b``.
+    .. container:: section
 
+        .. _`std::int32_t a() const`:
 
-      The probability distribution is given by:
+        .. cpp:function:: a() const
 
+        .. container:: section
 
-      | 
-      | |image0|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - left bound
 
-      The cumulative distribution function is as follows:
+    .. container:: section
 
+        .. _`std::int32_t b() const`:
 
-      | 
-      | |image1|
+        .. cpp:function:: b() const
 
+        .. container:: section
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `b` - right bound
 
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     a    
-           -     \ ``T (std::int32_t)``\     
-           -     Left bound ``a``\     
-         * -     b    
-           -     \ ``T (std::int32_t)``\     
-           -     Right bound ``b``\     
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-A5408434-7126-4EEC-8AD1-856204EBF263-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-AAA6EA17-BA1C-4185-A5F4-8997B64E3BDD-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

@@ -1,90 +1,120 @@
-.. _mkl-rng-niederreiter:
+.. _onemkl_rng_niederreiter:
 
-onemkl::rng::niederreiter
-=========================
+niederreiter
+============
 
+The niederreiter is a 32-bit Gray code-based quasi-random number generator.
 
-.. container::
+.. _onemkl_rng_niederreiter_description:
 
+.. rubric:: Description
 
-   Niederreiter quasi-random number generator [Bratley92], which works
-   in arbitrary dimension.
+According to results of Bratley, Fox and Niederreiter :ref:`[Bratley92] <onemkl_rng_bibliography>` Niederreiter sequences have the best known theoretical asymptotic properties. The default dimension of quasi-random vectors can vary from 1 to 318 inclusive. It is also allowed to register user-defined parameters (irreducible polynomials).
 
+.. container:: section
 
-   .. container:: section
-      :name: GUID-753F13BA-A3C7-4F24-90F1-14B6279BD95C
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
+    .. rubric:: Generation algorithm
 
 
-      .. container:: dlsyntaxpara
+    :math:`x_n=x_{n_1} \oplus v_c`
 
+    :math:`u_n=x_n / 2 ^ {32}`
 
-         ::
-	    
-           class niederreiter :         internal::engine_base<niederreiter>{
-           public:
-             niederreiter (cl::sycl::queue& queue,         std::uint32_t dimensions)
-             niederreiter (cl::sycl::queue& queue,         std::vector<std::uint32_t> irred_polynomials)
-             niederreiter (const niederreiter& other)
-             niederreiter& operator=(const niederreiter&         other)
-             ~niederreiter()
-           }
+    The value :math:`c` is the right-most zero bit in :math:`n-1`; :math:`x_n` is s-dimensional vector of 32-bit values. The s-dimensional vectors (calculated during engine initialization) :math:`v_i, i = 1, 32` are called direction numbers. The vector :math:`u_n` is the generator output normalized to the unit hypercube :math:`(0, 1) ^ s`.
 
-         .. rubric:: Include Files
-            :class: sectiontitle
+.. _onemkl_rng_niederreiter_description_syntax:
 
+class niederreiter
+------------------
 
-         -  mkl_sycl.hpp
+.. rubric:: Syntax
 
+.. code-block:: cpp
 
-         .. rubric:: Description
-            :class: sectiontitle
+    class niederreiter {
+    public:
+        niederreiter(sycl::queue& queue, std::uint32_t dimensions);
+        niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials);
+        niederreiter(const niederreiter& other);
+        niederreiter& operator=(const niederreiter& other);
+        ~niederreiter();
+    };
 
+.. cpp:class:: oneapi::mkl::rng::niederreiter
 
-         Niederreiter quasi-random number generator
-         [`Bratley92 <bibliography.html>`__],
-         which works in arbitrary dimension.
+.. container:: section
 
+    .. rubric:: Class Members
 
-         .. rubric:: Input Parameters
-            :class: sectiontitle
+    .. list-table::
+        :header-rows: 1
 
+        * - Routine
+          - Description
+        * - `niederreiter(sycl::queue& queue, std::uint32_t dimensions)`_
+          - Constructor with specified number of dimensions. The value should be :math:`1..318`.
+        * - `niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials)`_
+          - Constructor for extended use-case, when it's needed to use the number of dimensions greater than 318 or obtain another sequence.
+        * - `niederreiter(const niederreiter& other)`_
+          - Copy constructor
 
-         .. list-table:: 
-            :header-rows: 1
+.. container:: section
 
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     queue    
-              -     cl::sycl::queue    
-              -     Valid cl::sycl::queue, calls of          onemkl::rng::generate() routine submit kernels in this         queue.   
-            * -     dimensions    
-              -     std::uint32_t     
-              -     Number of dimensions.    
-            * -     irred_polynomials    
-              -     std::vector<std::uint32_t>     
-              -     User-defined direction numbers.    
+    .. rubric:: Constructors
 
+    .. _`niederreiter(sycl::queue& queue, std::uint32_t dimensions)`:
 
+    .. cpp:function:: niederreiter::niederreiter(sycl::queue& queue, std::uint32_t dimensions)
 
+    .. container:: section
 
-         See `VS
-         Notes <bibliography.html>`__ for
-         detailed descriptions.
+        .. rubric:: Input Parameters
 
+        queue
+            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
-   .. container:: familylinks
+        dimensions
+            Number of dimensions. If :math:`dimen < 1` or :math:`dimen > 318`, assume :math:`dimen = 1`.
 
+    .. _`niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials)`:
 
-      .. container:: parentlink
+    .. cpp:function:: niederreiter::niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials)
 
+    .. container:: section
 
-         **Parent topic:** `Engines (Basic Random Number
-         Generators) <engines-basic-random-number-generators.html>`__
+        .. rubric:: Input Parameters
 
+        queue
+            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
-   
+        irred_polynomials
+            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own irreducible polynomials. The number of dimmensions corresponds to the length of the vector.
+
+    .. _`niederreiter(const niederreiter& other)`:
+
+    .. cpp:function:: niederreiter::niederreiter(const niederreiter& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``niederreiter`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+
+.. container:: section
+
+    .. rubric:: Subsequence selection functions support
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Support
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Supported
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Not supported
+        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
+          - Not supported
+
+**Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

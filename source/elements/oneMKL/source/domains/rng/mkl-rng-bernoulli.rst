@@ -1,116 +1,158 @@
-.. _mkl-rng-bernoulli:
+.. _onemkl_rng_bernoulli:
 
-onemkl::rng::bernoulli
-======================
+bernoulli
+=========
+
+Class is used for generation of Bernoulli distributed integer types random numbers.
+
+.. _onemkl_rng_bernoulli_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Bernoulli distributed with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p; p \leq 1`.
+
+The probability distribution is given by:
+
+.. math::
+
+    P(X = 1) = p
+
+.. math::
+
+    P(X = 0) = 1 - p
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{p}(x) = \left\{ \begin{array}{rcl} 0, x < 0 \\ 1 - p, 0 \leq x < 1, x \in R \\ 1, x \ge 1 \end{array}\right.
+
+.. _onemkl_rng_bernoulli_syntax:
+
+class bernoulli
+---------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename IntType = std::int32_t, typename Method = bernoulli_method::by_default>
+    class bernoulli {
+    public:
+        using method_type = Method;
+        using result_type = IntType;
+        bernoulli();
+        explicit bernoulli(float p);
+        float p() const;
+    };
+
+.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::bernoulli_method::by_default> \
+                oneapi::mkl::rng::bernoulli
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename IntType
+            Type of the produced values. Supported types:
+                * ``std::int32_t``
+                * ``std::uint32_t``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::bernoulli_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::bernoulli_method::by_default``
+                * ``oneapi::mkl::rng::bernoulli_method::icdf``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `bernoulli()`_
+          - Default constructor
+        * - `explicit bernoulli(float p)`_
+          - Constructor with parameters
+        * - `float p() const`_
+          - Method to obtain probability `p`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: bernoulli::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: bernoulli::result_type = IntType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`bernoulli()`:
+
+        .. cpp:function:: bernoulli::bernoulli()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `p` = 0.5f.
+
+    .. container:: section
+
+        .. _`explicit bernoulli(float p)`:
+
+        .. cpp:function:: explicit bernoulli::bernoulli(float p)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `p` is a probability.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates Bernoulli distributed random values.
+    .. container:: section
 
+        .. _`float p() const`:
 
-   .. container:: section
-      :name: GUID-DBB02CF3-C214-4063-87CC-ECF75333D92D
+        .. cpp:function:: float p() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `p` - probability.
 
-      ::
-	 
-        template<typename T = std::int32_t, method Method = inverse_function>
-          class bernoulli {
-          public:
-            bernoulli(): bernoulli(0.5){}
-            bernoulli(double p)
-            bernoulli(const bernoulli<T, Method>& other)
-            double p() const
-            bernoulli<T, Method>& operator=(const  bernoulli<T, Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
-
-
-      -  mkl_sycl.hpp
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The onemkl::rng::bernoulli class object is used in the
-      onemkl::rng::generate function to provide Bernoulli distributed
-      random numbers with probability ``p`` of a single trial success,
-      where
-
-
-      ::
-
-
-         p∈R; 0 ≤ p ≤ 1.
-
-
-      A variate is called Bernoulli distributed, if after a trial it is
-      equal to 1 with probability of success ``p``, and to 0 with
-      probability 1 - ``p``.
-
-
-      The probability distribution is given by:
-
-
-      ::
-
-
-         P(X = 1) = p
-
-
-      ::
-
-
-         P(X = 0) = 1 - p
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image0|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     p    
-           -     \ ``double``\     
-           -     Success probability ``p`` of a trial.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-7F65198B-719A-44FB-8983-BBD3C196A663-low.jpg
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

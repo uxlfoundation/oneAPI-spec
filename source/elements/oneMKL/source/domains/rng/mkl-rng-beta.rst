@@ -1,113 +1,203 @@
-.. _mkl-rng-beta:
+.. _onemkl_rng_beta:
 
-onemkl::rng::beta
-=================
+beta
+====
 
+Class is used for generation of beta distributed real types random numbers.
 
-.. container::
+.. _onemkl_rng_beta_description:
 
+.. rubric:: Description
 
-   Generates beta distributed random values.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`, displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`. :math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-7EE1A888-9D53-4736-B07A-356034DBF3E0
+.. math::
 
+    f_{p, q, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} \frac{1}{B(p, q) * \beta^{p + q - 1}}(x - a)^{p - 1}*(\beta + \alpha - x)^{q - 1}, \alpha \leq x < \alpha + \beta \\ 0, x < \alpha, x \ge \alpha + \beta \end{array}\right.
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-
-        template<typename T = float, method Method = cheng_johnk_atkinson>
-          class beta {
-          public:
-            beta(): beta((T)1.0, (T)1.0, (T)(0.0),      (T)(1.0)){}
-            beta(T p, T q, T a, T b)
-            beta(const beta<T, Method>& other)
-            T p() const
-            T q() const
-            T a() const
-            T b() const
-            beta<T, Method>& operator=(const beta<T, Method>&      other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{a, b}(x) = \left\{ \begin{array}{rcl} 0, x < \alpha \\ \int^x_{\alpha}\frac{1}{B(p, q) * \beta^{p + q - 1}}(y - \alpha)^{p - 1}*(\beta + \alpha - y)^{q - 1}dy, \alpha \leq x < \alpha + \beta, x \in R \\ 1, x \ge \alpha + \beta \end{array}\right.
 
 
-      -  mkl_sycl.hpp
+Where :math:`B(p, 1)` is the complete beta function.
+
+.. _onemkl_rng_beta_syntax:
+
+class beta
+----------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = beta_method::by_default>
+    class beta {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        beta();
+        explicit beta(RealType p, RealType q, RealType a, RealType b);
+        RealType p() const;
+        RealType q() const;
+        RealType a() const;
+        RealType b() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::beta_method::by_default> \
+                oneapi::mkl::rng::beta
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::beta_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::beta_method::by_default``
+                * ``oneapi::mkl::rng::beta_method::cja``
+                * ``oneapi::mkl::rng::beta_method::cja_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `beta()`_
+          - Default constructor
+        * - `explicit beta(RealType p, RealType q, RealType a, RealType b)`_
+          - Constructor with parameters
+        * - `RealType p() const`_
+          - Method to obtain shape `p`
+        * - `RealType q() const`_
+          - Method to obtain shape `q`
+        * - `RealType a() const`_
+          - Method to obtain displacement :math:`\alpha`
+        * - `RealType b() const`_
+          - Method to obtain scalefactor :math:`\beta`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: beta::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: beta::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`beta()`:
+
+        .. cpp:function:: beta::beta()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `p` = 1.0, `q` = 0.0, :math:`\alpha` = 1.0, :math:`\beta` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit beta(RealType p, RealType q, RealType a, RealType b)`:
+
+        .. cpp:function:: explicit beta::beta(RealType p, RealType q, RealType a, RealType b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `p` and `q` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scalefactor.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The onemkl::rng::beta class object is used in the onemkl::rng::generate
-      function to provide random numbers with beta distribution that has
-      shape parameters p and ``q``, displacement ``a``, and scale
-      parameter (``b``, β), where ``p``, ``q``, ``a``, and
-      ``β∈R ; p > 0, q > 0, β > 0``.
+    .. container:: section
 
+        .. _`RealType p() const`:
 
-      The probability density function is given by:
+        .. cpp:function:: RealType beta::p() const
 
+        .. container:: section
 
-      |image0|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `p` - shape.
 
-      where ``B``\ (``p``, ``q``) is the complete beta function.
+    .. container:: section
 
+        .. _`RealType q() const`:
 
-      The cumulative distribution function is as follows:
+        .. cpp:function:: RealType beta::q() const
 
+        .. container:: section
 
-      |image1|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `q` - shape.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-      .. list-table:: 
-         :header-rows: 1
+        .. cpp:function:: RealType beta::a() const
 
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::cheng_johnk_atkinson``\       \ ``onemkl::rng::cheng_johnk_atkinson | onemkl::rng::accurate``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     p    
-           -     \ ``T (float, double)``\     
-           -      Shape ``p``\     
-         * -     q    
-           -     \ ``T (float, double)``\     
-           -      Shape ``q``\     
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     b    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor ``b``.    
+        .. container:: section
 
+            .. rubric:: Return Value
 
+            Returns the distribution parameter :math:`\alpha` - displacement.
 
+    .. container:: section
 
-.. container:: familylinks
+        .. _`RealType b() const`:
 
+        .. cpp:function:: RealType beta::b() const
 
-   .. container:: parentlink
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      **Parent
-      topic:** `Distributions <distributions.html>`__
+            Returns the distribution parameter :math:`\beta` - scalefactor.
 
-
-
-.. |image0| image:: ../equations/GUID-CD24FF51-197B-40A1-83A8-514788192ee1.png
-   :class: img-middle
-.. |image1| image:: ../equations/GUID-CD24FF51-197B-40A1-83A8-514788192ee2.png
-   :class: img-middle
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

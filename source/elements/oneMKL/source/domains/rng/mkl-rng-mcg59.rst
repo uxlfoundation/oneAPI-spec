@@ -1,86 +1,102 @@
-.. _mkl-rng-mcg59:
+.. _onemkl_rng_mcg59:
 
-onemkl::rng::mcg59
-==================
+mcg59
+=====
 
+The 59-bit multiplicative congruential pseudorandom number generator.
 
-.. container::
+.. _onemkl_rng_mcg59_description:
 
+.. rubric:: Description
 
-   The 59-bit multiplicative congruential pseudorandom number generator
-   MCG(1313, 259) from NAG Numerical Libraries [NAG].
+mcg59 engine is a 59-bit multiplicative congruential generator from NAG Numerical Libraries :ref:`NAG <onemkl_rng_bibliography>`. mcg59 belongs to linear congruential generators with the period length of approximately :math:`2^{57}`.
 
+.. container:: section
 
-   .. container:: section
-      :name: GUID-753F13BA-A3C7-4F24-90F1-14B6279BD95C
+    .. rubric:: Generation algorithm
 
+    :math:`x_n=ax_{n-1}(mod \ m)`
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+    :math:`u_n = x_n / m`
 
+    :math:`a = 13^{13}, m=2^{59}`
 
-      .. container:: dlsyntaxpara
+.. _onemkl_rng_mcg59_description_syntax:
 
+class mcg59
+-----------
 
-         ::
-	    
-           class mcg59 : internal::engine_base<mcg59>{
-           public:
-             mcg59 (cl::sycl::queue& queue, std::uint64_t         seed)
-             mcg59 (const mcg59&other)
-             mcg59& operator=(const mcg59& other)
-             ~mcg59()
-           }
+.. rubric:: Syntax
 
-         .. rubric:: Include Files
-            :class: sectiontitle
+.. code-block:: cpp
 
+    class mcg59 {
+    public:
+        mcg59(sycl::queue& queue, std::uint64_t seed);
+        mcg59 (const mcg59& other);
+        mcg59& operator=(const mcg59& other);
+        ~mcg59();
+    };
 
-         -  mkl_sycl.hpp
+.. cpp:class:: oneapi::mkl::rng::mcg59
 
+.. container:: section
 
-         .. rubric:: Description
-            :class: sectiontitle
+    .. rubric:: Class Members
 
+    .. list-table::
+        :header-rows: 1
 
-         The 59-bit multiplicative congruential pseudorandom number
-         generator MCG(1313, 259) from NAG Numerical Libraries
-         [`NAG <bibliography.html>`__].
+        * - Routine
+          - Description
+        * - `mcg59(sycl::queue& queue, std::uint64_t seed)`_
+          - Constructor for common seed initialization of the engine
+        * - `mcg59(const mcg59& other)`_
+          - Copy constructor
 
+.. container:: section
 
-         .. rubric:: Input Parameters
-            :class: sectiontitle
+    .. rubric:: Constructors
 
+    .. _`mcg59(sycl::queue& queue, std::uint64_t seed)`:
 
-         .. list-table:: 
-            :header-rows: 1
+    .. cpp:function:: mcg59::mcg59(sycl::queue& queue, std::uint64_t seed)
 
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     queue    
-              -     cl::sycl::queue    
-              -     Valid cl::sycl::queue, calls of          onemkl::rng::generate() routine submit kernels in this         queue.   
-            * -     seed    
-              -     std::uint64_t     
-              -     Initial conditions of the engine.    
+    .. container:: section
 
+        .. rubric:: Input Parameters
 
+        queue
+            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
+        seed
+            The initial conditions of the generator state, assume :math:`x_0 = seed \ mod \ 2^{59}`, if :math:`x_0 = 0`, assume :math:`x_0 = 1`.
 
-         See `VS
-         Notes <bibliography.html>`__ for
-         detailed descriptions.
+    .. _`mcg59(const mcg59& other)`:
 
+    .. cpp:function:: mcg59::mcg59(const mcg59& other)
 
-   .. container:: familylinks
+    .. container:: section
 
+        .. rubric:: Input Parameters
 
-      .. container:: parentlink
+        other
+            Valid ``mcg59`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
 
+.. container:: section
 
-         **Parent topic:** `Engines (Basic Random Number
-         Generators) <engines-basic-random-number-generators.html>`__
+    .. rubric:: Subsequence selection functions support
 
+    .. list-table::
+        :header-rows: 1
 
-   
+        * - Routine
+          - Support
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Supported
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Not supported
+        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
+          - Supported
+
+**Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

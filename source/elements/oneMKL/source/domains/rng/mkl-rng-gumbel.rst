@@ -1,103 +1,169 @@
-.. _mkl-rng-gumbel:
+.. _onemkl_rng_gumbel:
 
-onemkl::rng::gumbel
-===================
+gumbel
+======
+
+Class is used for generation of Gumbel distributed real types random numbers.
+
+.. _onemkl_rng_gumbel_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Gumbel distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+
+The probability distribution is given by:
+
+.. math::
+
+     f_{a, \beta}(x) = \frac{1}{\beta}exp(-\frac{x - a}{\beta})exp(-exp(\frac{x - a}{\beta})), x \in R.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+     F_{a, \beta}(x) = 1 - exp(-exp(\frac{x - a}{\beta})), x \in R.
+
+.. _onemkl_rng_gumbel_syntax:
+
+class gumbel
+------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = gumbel_method::by_default>
+    class gumbel {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        gumbel();
+        explicit gumbel(RealType a, RealType b);
+        RealType a() const;
+        RealType b() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::gumbel_method::by_default> \
+                oneapi::mkl::rng::gumbel
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::gumbel_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::gumbel_method::by_default``
+                * ``oneapi::mkl::rng::gumbel_method::icdf``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `gumbel()`_
+          - Default constructor
+        * - `explicit gumbel(RealType a, RealType b)`_
+          - Constructor with parameters
+        * - `RealType a() const`_
+          - Method to obtain displacement value
+        * - `RealType b() const`_
+          - Method to obtain scalefactor value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: gumbel::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: gumbel::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`gumbel()`:
+
+        .. cpp:function:: gumbel::gumbel()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.0, and `beta` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit gumbel(RealType a, RealType b)`:
+
+        .. cpp:function:: explicit gumbel::gumbel(RealType a, RealType b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a displacement value, `beta` is a scalefactor value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates Gumbel distributed random values.
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-   .. container:: section
-      :name: GUID-41C16785-78E0-4B3B-A698-11755BE7AC69
+        .. cpp:function:: RealType gumbel::a() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - displacement value.
 
-      ::
-	 
-        template<typename T = float, method Method =      inverse_function>
-          class gumbel {
-          public:
-            gumbel(): gumbel((T)0.0, (T)1.0){}
-            gumbel(T a, T b)
-            gumbel(const gumbel<T, Method>& other)
-            T a() const
-            T b() const
-            gumbel<T, Method>& operator=(const gumbel<T,      Method>& other)
-          }
+    .. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. _`RealType b() const`:
 
+        .. cpp:function:: RealType gumbel::b() const
 
-      -  mkl_sycl.hpp
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Description
-         :class: sectiontitle
+            Returns the distribution parameter `b` - scalefactor value.
 
-
-      The onemkl::rng::gumbel class object is used in the
-      onemkl::rng::generate function to provide Gumbel distributed random
-      numbers with displacement (a) and scalefactor (``b``, β), where a,
-      β∈\ ``R`` ; β > 0.
-
-
-      The probability density function is given by:
-
-
-      | 
-      | |image0|
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image1|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     b    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor ``b``.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-09FC1496-B5B3-4DF6-A3EE-E6410BE1EFD2-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-E3193631-248D-4D18-A094-30BB6FF50687-low.jpg
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

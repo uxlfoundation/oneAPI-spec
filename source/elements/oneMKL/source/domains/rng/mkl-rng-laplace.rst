@@ -1,109 +1,169 @@
-.. _mkl-rng-laplace:
+.. _onemkl_rng_laplace:
 
-onemkl::rng::laplace
-====================
+laplace
+=======
+
+Class is used for generation of Laplace distributed real types random numbers.
+
+.. _onemkl_rng_laplace_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Laplace distributed with mean value (or average) :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`. The scalefactor value determines the standard deviation as :math:`\sigma = \beta\sqrt{2}`
+
+The probability distribution is given by:
+
+.. math::
+
+     f_{a, \beta}(x) = \frac{1}{\sqrt{2\beta}}exp(-\frac{|x - a|}{\beta}), x \in R.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+     F_{a, \beta}(x) = \left\{ \begin{array}{rcl} \frac{1}{2}exp(-\frac{|x - a|}{\beta}), x \ge a \\ 1 - \frac{1}{2}exp(-\frac{|x - a|}{\beta}), x < a \end{array}\right.
+
+.. _onemkl_rng_laplace_syntax:
+
+class laplace
+-------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = laplace_method::by_default>
+    class laplace {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        laplace();
+        explicit laplace(RealType a, RealType b);
+        RealType a() const;
+        RealType b() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::laplace_method::by_default> \
+                oneapi::mkl::rng::laplace
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::laplace_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::laplace_method::by_default``
+                * ``oneapi::mkl::rng::laplace_method::icdf``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `laplace()`_
+          - Default constructor
+        * - `explicit laplace(RealType a, RealType b)`_
+          - Constructor with parameters
+        * - `RealType a() const`_
+          - Method to obtain mean value
+        * - `RealType b() const`_
+          - Method to obtain scalefactor value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: laplace::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: laplace::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`laplace()`:
+
+        .. cpp:function:: laplace::laplace()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.0, and `beta` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit laplace(RealType a, RealType b)`:
+
+        .. cpp:function:: explicit laplace::laplace(RealType a, RealType b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a mean value, `beta` is a scalefactor value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates random numbers with Laplace distribution.
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-   .. container:: section
-      :name: GUID-776BC496-647B-44F4-92A8-2CA9DB391F1C
+        .. cpp:function:: RealType laplace::a() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - mean value.
 
-      ::
-	 
-        template<typename T = float, method Method =      inverse_function>
-          class laplace {
-          public:
-            laplace(): laplace((T)0.0, (T)1.0){}
-            laplace(T a, T b)
-            laplace(const laplace<T, Method>& other)
-            T a() const
-            T b() const
-            laplace<T, Method>& operator=(const laplace<T,      Method>& other)
-          }
+    .. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. _`RealType b() const`:
 
+        .. cpp:function:: RealType laplace::b() const
 
-      -  mkl_sycl.hpp
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Description
-         :class: sectiontitle
+            Returns the distribution parameter `b` - scalefactor value.
 
-
-      The onemkl::rng::laplace class object is used in the
-      onemkl::rng::generate function to provide random numbers with Laplace
-      distribution with mean value (or average) ``a`` and scalefactor (
-      ``b``, β), where ``a, β∈R ; β > 0``. The scalefactor value
-      determines the standard deviation as
-
-
-      |image0|
-
-
-      The probability density function is given by:
-
-
-      | 
-      | |image1|
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image2|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Mean value ``a``.    
-         * -     b    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor b.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-1D36B5CE-3BF3-4762-926B-05C5527FAE45-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-9B0556B7-20F4-4EC9-875B-F6654CAC0C73-low.gif
-   :class: .eq
-.. |image2| image:: ../equations/GUID-E5BC391B-F8BC-45E0-9A58-84319AC0B246-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`
