@@ -30,6 +30,14 @@ Release Notes
 ---
 
 * oneMKL
+
+  * Continuing modifications to oneMKL Architecture, BLAS and LAPACK domains
+  * Significant refactoring and updating of Sparse BLAS, VM, RNG, and DFT domains API
+    descriptions and structure.
+  * Add Summary Statistics domain
+  * Add future considerations and acknowledgement to appendix
+  * Change top-level namespace to oneapi::mkl
+
 * oneDAL
  
 0.85
