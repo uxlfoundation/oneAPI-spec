@@ -33,8 +33,7 @@ extensions = [
 ]
 
 env = {
-    'oneapi_version': '0.85',
-    'l0_version': '0.95',
+    'oneapi_version': '0.9',
 }
 
 prolog_template = string.Template("""
@@ -51,7 +50,6 @@ prolog_template = string.Template("""
 .. |dnn_full_name| replace:: oneAPI Deep Neural Network Library
 .. |dnn_version| replace:: $oneapi_version
 .. |l0_full_name| replace:: oneAPI Level Zero
-.. |l0_version| replace:: $l0_version
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
 .. |tbb_version| replace:: $oneapi_version
 .. |vpl_full_name| replace:: oneAPI Video Processing Library

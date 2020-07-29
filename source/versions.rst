@@ -16,6 +16,7 @@ updates.
   ========  ==========  =========
   Version   Date        View                                                                                                            
   ========  ==========  =========
+  `0.9`_    07/30/2020  `HTML <https://spec.oneapi.com/versions/0.9/>`__ `PDF <https://spec.oneapi.com/versions/0.9/oneAPI-spec.pdf>`__
   `0.85`_   06/29/2020  `HTML <https://spec.oneapi.com/versions/0.85/>`__ `PDF <https://spec.oneapi.com/versions/0.85/oneAPI-spec.pdf>`__
   `0.8`_    05/29/2020  `HTML <https://spec.oneapi.com/versions/0.8/>`__ `PDF <https://spec.oneapi.com/versions/0.8/oneAPI-spec.pdf>`__
   `0.7`_    03/26/2020  `HTML <https://spec.oneapi.com/versions/0.7/>`__ `PDF <https://spec.oneapi.com/versions/0.7/oneAPI-spec.pdf>`__
@@ -25,6 +26,12 @@ updates.
 Release Notes
 =============
 
+0.9
+---
+
+* oneMKL
+* oneDAL
+ 
 0.85
 ----
 
