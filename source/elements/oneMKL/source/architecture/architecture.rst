@@ -9,6 +9,7 @@ A discussion of how data is stored and passed in and out of the APIs is addresse
 The general structure and design of oneMKL APIs including namespaces and common data types are expressed in :ref:`onemkl_api_design`.
 The exceptions and error handling are described in :ref:`onemkl_exceptions`.  
 Finally all the other necessary aspects related to oneMKL architecture can be found in :ref:`onemkl_arch_other` including versioning and discussion of pre and post conditions. 
+Other nonessential, but useful aspects of the oneMKL architecture and design may also be found in the :ref:`onemkl_appendix`.
 
 
 .. include:: execution_model.inc.rst
