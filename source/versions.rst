@@ -87,6 +87,7 @@ Release Notes
   * Detailed descriptions for data model (tensor formats and data
     types), and execution models
 
+
 0.7
 ---
 
