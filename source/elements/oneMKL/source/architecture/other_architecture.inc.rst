@@ -22,7 +22,7 @@ The ``PATCH`` count is updated when wording, language or structure is updated wi
 Current Version of this oneMKL Specification
 +++++++++++++++++++++++++++++++++++++++++++++
 
-This is the oneMKL specification version 0.8.0.
+This is the oneMKL specification version 0.9.0.
 
 
 .. _onemkl_pre_post_conditions:
