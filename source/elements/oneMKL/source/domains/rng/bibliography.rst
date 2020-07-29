@@ -1,4 +1,4 @@
-.. _rng_bibliography:
+.. _onemkl_rng_bibliography:
 
 Bibliography
 ============
@@ -11,26 +11,18 @@ Bibliography
    following publications:
 
 
-   -  
+   -
 
 
       .. container::
-         :name: LI_837EEC245E0748298C1DF57C504B7E49
 
 
          **VS RNG**
-
-
-         [AVX]
-            Intel. *Intel® Advanced Vector Extensions Programming
-            Reference*. (http://software.intel.com/file/36945)
-
 
          [Bratley88]
             Bratley P. and Fox B.L. *Implementing Sobol's Quasirandom
             Sequence Generator*, ACM Transactions on Mathematical
             Software, Vol. 14, No. 1, Pages 88-100, March 1988.
-
 
          [Bratley92]
             Bratley P., Fox B.L., and Niederreiter H. *Implementation
@@ -38,41 +30,31 @@ Bibliography
             Modeling and Computer Simulation, Vol. 2, No. 3, Pages
             195-213, July 1992.
 
-
          [Coddington94]
             Coddington, P. D. *Analysis of Random Number Generators
             Using Monte Carlo Simulation*. Int. J. Mod. Phys. C-5, 547,
             1994.
 
-
-         [IntelSWMan]
-            Intel. *Intel® 64 and IA-32 Architectures Software
-            Developer’s Manual*. 3 vols.
-            (http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html)
          [L'Ecuyer99]
             L'Ecuyer, Pierre. *Tables of Linear Congruential Generators
             of Different Sizes and Good Lattice Structure*. Mathematics
             of Computation, 68, 225, 249-260, 1999.
-
 
          [L'Ecuyer99a]
             L'Ecuyer, Pierre. *Good Parameter Sets for Combined Multiple
             Recursive Random Number Generators*. Operations Research,
             47, 1, 159-164, 1999.
 
-
          [Kirkpatrick81]
             Kirkpatrick, S., and Stoll, E. *A Very Fast Shift-Register
             Sequence Random Number Generator*. Journal of Computational
             Physics, V. 40. 517-526, 1981.
-
 
          [Matsumoto98]
             Matsumoto, M., and Nishimura, T. *Mersenne Twister: A
             623-Dimensionally Equidistributed Uniform Pseudo-Random
             Number Generator*, ACM Transactions on Modeling and Computer
             Simulation, Vol. 8, No. 1, Pages 3-30, January 1998.
-
 
          [Matsumoto00]
             Matsumoto, M., and Nishimura, T. *Dynamic Creation of
@@ -81,11 +63,9 @@ Bibliography
             Spanier, J., Springer 2000,
             http://www.math.sci.hiroshima-u.ac.jp/%7Em-mat/MT/DC/dc.html.
 
-
          [NAG]
             NAG Numerical Libraries.
             http://www.nag.co.uk/numeric/numerical_libraries.asp
-
 
          [Saito08]
             Saito, M., and Matsumoto, M. *SIMD-oriented Fast Mersenne
@@ -96,7 +76,6 @@ Bibliography
 
             http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/ARTICLES/earticles.html
 
-
          [Salmon11]
             Salmon, John K., Morales, Mark A., Dror, Ron O., and Shaw,
             David E., *Parallel Random Numbers: As Easy as 1, 2, 3*. SC
@@ -104,17 +83,14 @@ Bibliography
             Performance Computing, Networking, Storage and Analysis,
             2011.
 
-
          [Sobol76]
             Sobol, I.M., and Levitan, Yu.L. *The production of points
             uniformly distributed in a multidimensional cube*. Preprint
             40, Institute of Applied Mathematics, USSR Academy of
             Sciences, 1976 (In Russian).
 
+         [MT2203]
+            http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/MT2002/emt19937ar.html.
 
-         [VS Notes]
-            *oneMKL Vector Statistics Notes*, a document present on the
-            oneMKL product at
-            http://software.intel.com/en-us/articles/intel-math-kernel-library-documentation/
-
-
+         [FIPS-197]
+            Federal Information Processing Standards Publication 197, ADVANCED ENCRYPTION STANDARD (AES)

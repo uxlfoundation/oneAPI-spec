@@ -1,148 +1,116 @@
-.. _onemkl-rng-usage-model:
+.. _onemkl_rng_usage_model:
 
 oneMKL RNG Usage Model
 ======================
 
 
-.. container::
+.. rubric:: Description
 
+A typical algorithm for random number generators is as follows:
 
-   A typical algorithm for random number generators is as follows:
 
+1. Create and initialize the object for basic random number
+    generator.
 
-   #. Create and initialize the object for basic random number
-      generator.
 
+-  Use the skip_ahead or leapfrog function if it is required (used
+    in parallel with random number generation for Host and CPU
+    devices).
 
-      -  Use the skip_ahead or leapfrog function if it is required (used
-         in parallel with random number generation for Host and CPU
-         devices).
 
+2. Create and initialize the object for distribution generator.
 
-   #. Create and initialize the object for distribution generator.
 
+3. Call the generate routine to get random numbers with appropriate
+    statistical distribution.
 
-   #. Call the generate routine to get random numbers with appropriate
-      statistical distribution.
 
+The following example demonstrates generation of random numbers that
+is output of basic generator (engine) PHILOX4X32X10. The seed is
+equal to 777. The generator is used to generate 10,000 normally
+distributed random numbers with parameters ``a`` = 5 and ``sigma``\ =
+2. The purpose of the example is to calculate the sample mean for
+normal distribution with the given parameters.
 
-   The following example demonstrates generation of random numbers that
-   is output of basic generator (engine) PHILOX4X32X10. The seed is
-   equal to 777. The generator is used to generate 10,000 normally
-   distributed random numbers with parameters ``a`` = 5 and ``sigma``\ =
-   2. The purpose of the example is to calculate the sample mean for
-   normal distribution with the given parameters.
+Buffer-based example
+--------------------
 
+.. code-block:: cpp
 
-   .. container:: tbstyle(tblExampleStandard)
+    #include <iostream>
+    #include <vector>
 
+    #include "CL/sycl.hpp"
+    #include "mkl_rng_sycl.hpp"
 
-      .. rubric:: Example of RNG Usage
-         :class: sectiontitle
+    int main() {
+        sycl::queue queue;
+        const size_t n = 10000;
+        const std::uint64_t seed = 777;
+        std::vector<double> r(n);
 
+        oneapi::mkl::rng::philox4x32x10 engine(queue, seed); // basic random number generator object
+        oneapi::mkl::rng::gaussian<double, oneapi::mkl::rng::gaussian_method::box_muller2> distr(5.0, 2.0); //  distribution object
 
-      **Buffer API**
+        {
+            //create buffer for random numbers
+            sycl::buffer<double, 1> r_buf(r.data(), r.size());
+            oneapi::mkl::rng::generate(distr, engine, n, r_buf); // perform generation
+        }
 
+        double s = 0.0;
+        for(int i = 0; i < n; i++) {
+            s += r[i];
+        }
+        s /= n;
 
-      ::
+        std::cout << "Average = " << s << std::endl;
+        return 0;
+    }
 
 
-         #include <iostream>
-         #include <vector>
+USM-based example
+-----------------
 
+.. code-block:: cpp
 
-         #include “CL/sycl.hpp”
-         #include “mkl_rng_sycl.hpp”
+    #include <iostream>
+    #include <vector>
 
+    #include "CL/sycl.hpp"
+    #include "mkl_rng_sycl.hpp"
 
-         int main() {
-             cl::sycl::queue queue;
-             
+    int main() {
+        sycl::queue queue;
+        const size_t n = 10000;
+        const std::uint64_t seed = 777;
 
-             const size_t n = 10000; 
-             std::vector<double> r(n);
+        // create USM allocator
+        sycl::usm_allocator<double, sycl::usm::alloc::shared> allocator(queue.get_context(), queue.get_device());
 
+        // create vector with USM allocator
+        std::vector<double, sycl::usm_allocator<double, sycl::usm::alloc::shared>> r(n, allocator);
 
-             onemkl::rng::philox4x32x10 engine(queue, SEED); // basic random number generator object
-             onemkl::rng::gaussian<double, onemkl::rng::box_muller2> distr(5.0, 2.0); //  distribution object
+        oneapi::mkl::rng::philox4x32x10 engine(queue, seed); // basic random number generator object
+        oneapi::mkl::rng::gaussian<double, oneapi::mkl::rng::gaussian_method::box_muller2> distr(5.0, 2.0); // distribution object
 
+        auto event = oneapi::mkl::rng::generate(distr, engine, n, r.data()); // perform generation
+        // sycl::event object is returned by generate function for synchronization
+        event.wait(); // synchronization can be also done by queue.wait()
 
-             {
-                  //create buffer for random numbers
-                  cl::sycl::buffer<double, 1> r_buf(r.data(), cl::sycl::range<1>{n}); 
-                  
+        double s = 0.0;
+        for(int i = 0; i < n; i++) {
+            s += r[i];
+        }
+        s /= n;
 
-                  onemkl::rng::generate(distr, engine, n, r_buf); // perform generation
+        std::cout << "Average = " << s << std::endl;
+        return 0;
+    }
 
 
-             }
-             
+.. rubric:: USM usage
 
-             double s = 0.0;
-             for(int i = 0; i < n; i++) {
-                 s += r[i];
-             }
-             s /= n;
+You can also use USM with raw pointers by using the sycl::malloc_shared/malloc_device functions.
 
-
-             std::cout << “Average = ” << s << std::endl;
-             
-
-             return 0;
-         }
-
-
-      **USM API**
-
-
-      ::
-
-
-         #include <iostream> 
-         #include <vector>
-         #include “CL/sycl.hpp”
-         #include “mkl_rng_sycl.hpp”
-
-
-         int main() {
-           cl::sycl::queue queue;
-
-
-           const size_t n = 10000;
-
-
-           // create USM allocator
-           cl::sycl::usm_allocator<double, cl::sycl::usm::alloc::shared> allocator(queue.get_context(), queue.get_device());
-
-
-           // create vector woth USM allocator
-           std::vector<double, cl::sycl::usm_allocator<double, cl::sycl::usm::alloc::shared>> r(n, allocator);
-
-
-           onemkl::rng::philox4x32x10 engine(queue, SEED); // basic random number generator object
-           onemkl::rng::gaussian<double, onemkl::rng::box_muller2> distr(5.0, 2.0); // distribution object
-
-
-           auto event = onemkl::rng::generate(distr, engine, n, r.data()); // perform generation
-           // cl::sycl::event object is returned by generate function for synchronisation
-           event.wait(); // synchronization can be also done by queue.wait()
-
-
-           double s = 0.0;
-           for(int i = 0; i < n; i++) {
-           s += r[i];
-
-
-           std::cout << “Average = ” << s << std::endl;
-             
-
-           return 0;
-         }
-
-
-      You can also use USM with raw pointers by using the
-      cl::sycl::malloc_shared function.
-
-
-      **Parent topic:** :ref:`onemkl_rng`
-
+**Parent topic:** :ref:`onemkl_rng`

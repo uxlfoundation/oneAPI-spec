@@ -1,86 +1,152 @@
-.. _mkl-rng-mrg32k3a:
+.. _onemkl_rng_mrg32k3a:
 
-onemkl::rng::mrg32k3a
-=====================
+mrg32k3a
+========
 
+The combined multiple recursive pseudorandom number generator MRG32k3a.
 
-.. container::
+.. _onemkl_rng_mrg32k3a_description:
 
+.. rubric:: Description
 
-   The combined multiple recursive pseudorandom number generator
-   MRG32k3a [ L'Ecuyer99a]
+MRG32k3a engine is a 32-bit combined multiple recursive generator with two components of order 3 :ref:`[L'Ecuyer99a] <onemkl_rng_bibliography>`. MRG32k3a combined generator meets the requirements for modern RNGs, such as good multidimensional uniformity, or a long period (:math:`p \approx 2^{191}`).
 
+.. container:: section
 
-   .. container:: section
-      :name: GUID-753F13BA-A3C7-4F24-90F1-14B6279BD95C
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
+    .. rubric:: Generation algorithm
 
 
-      .. container:: dlsyntaxpara
+    :math:`x_n=a_{11} x_{n-1} + a_{12} x_{n-2} + a_{13} x_{n-3}(mod \ m_{1})`
+
+    :math:`y_n = a_{21} y_{n-1} + a_{22} y_{n-2} + a_{23} (mod \ m_2)`
+
+    :math:`z_n = x_n - y_n (mod \ m_{1})`
+
+    :math:`u_n = z_n / m_1`
+
+    :math:`a_{11} = 0, a_{12} = 1403580, a_{13} = -810728, m_1 = 2^{32} - 209`
+
+    :math:`a_{21} = 527612, a_{22} = 0, a_{23} = -1370589, m_2 = 2^{32} - 22853`
 
 
-         ::
-	    
-           class mrg32k3a:         internal::engine_base<mrg32k3a>{
-           public:
-             mrg32k3a (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-             mrg32k3a (const mrg32k3a& other)
-             mrg32k3a& operator=(const mrg32k3a& other)
-             mrg32k3a()
-           }
+.. _onemkl_rng_mrg32k3a_description_syntax:
 
-         .. rubric:: Include Files
-            :class: sectiontitle
+class mrg32k3a
+--------------
 
+.. rubric:: Syntax
 
-         -  ``mkl_sycl.hpp``
+.. code-block:: cpp
 
+    class mrg32k3a {
+    public:
+        mrg32k3a(sycl::queue& queue, std::uint32_t seed);
+        mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed);
+        mrg32k3a(const mrg32k3a& other);
+        mrg32k3a& operator=(const mrg32k3a& other);
+        ~mrg32k3a();
+    };
 
-         .. rubric:: Description
-            :class: sectiontitle
+.. cpp:class:: oneapi::mkl::rng::mrg32k3a
 
+.. container:: section
 
-         The combined multiple recursive pseudorandom number generator
-         MRG32k3a
-         `[L'Ecuyer99a] <bibliography.html>`__.
+    .. rubric:: Class Members
 
+    .. list-table::
+        :header-rows: 1
 
-         .. rubric:: Input Parameters
-            :class: sectiontitle
+        * - Routine
+          - Description
+        * - `mrg32k3a(sycl::queue& queue, std::uint32_t seed)`_
+          - Constructor for common seed initialization of the engine
+        * - `mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`_
+          - Constructor for extended seed initialization of the engine
+        * - `mrg32k3a(const mrg32k3a& other)`_
+          - Copy constructor
 
+.. container:: section
 
-         .. list-table:: 
-            :header-rows: 1
+    .. rubric:: Constructors
 
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     queue    
-              -     cl::sycl::queue    
-              -     Valid cl::sycl::queue, calls of the          onemkl::rng::generate() routine submits kernels in this         queue.   
-            * -     seed    
-              -     std::uint32_t /          std::initializer_list<std::uint32_t>   
-              -     Initial conditions of the generator state or engine          state.   
+    .. _`mrg32k3a(sycl::queue& queue, std::uint32_t seed)`:
 
+    .. cpp:function:: mrg32k3a::mrg32k3a(sycl::queue& queue, std::uint32_t seed)
 
+    .. container:: section
 
+        .. rubric:: Input Parameters
 
-         See `VS
-         Notes <bibliography.html>`__ for
-         detailed descriptions.
+        queue
+            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
+        seed
+            The initial conditions of the generator state, assume :math:`x_{-3} = seed \ mod \ m_1, x_{-2} = x_{-1} = y_{-3} = y_{-2} = y_{-1} = 1`.
 
-   .. container:: familylinks
+    .. _`mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`:
 
+    .. cpp:function:: mrg32k3a::mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)
 
-      .. container:: parentlink
+    .. container:: section
 
+        .. rubric:: Input Parameters
 
-         **Parent topic:** `Engines (Basic Random Number
-         Generators) <engines-basic-random-number-generators.html>`__
+        queue
+            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
+        seed
+            The initial conditions of the generator state, assume
+            if :math:`n = 0: x_{-3} = x_{-2} = x_{-1} = y_{-3} = y_{-2} = y_{-1} = 1`
 
-   
+            if :math:`n = 1: x_{-3} = seed[0] \ mod \ m_1, x_{-2} = x_{-1} = y_{-3} = y_{-2} = y_{-1} = 1`
+
+            if :math:`n = 2: x_{-3} = seed[0] \ mod \ m_1, x_{-2} = seed[1] \ mod \ m_1, x_{-1} = y_{-3} = y_{-2} = y_{-1} = 1`
+
+            if :math:`n = 3: x_{-3} = seed[0] \ mod \ m_1, x_{-2} = seed[1] \ mod \ m_1, x_{-1} = seed[2] \ mod \ m_1`
+
+                :math:`y_{-3} = y_{-2} = y_{-1} = 1`
+
+            if :math:`n = 4: x_{-3} = seed[0] \ mod \ m_1, x_{-2} = seed[1] \ mod \ m_1, x_{-1} = seed[2] \ mod \ m_1`
+            
+                :math:`y_{-3} = seed[3] \ mod \ m_2, y_{-2} = y_{-1} = 1`
+
+            if :math:`n = 5: x_{-3} = seed[0] \ mod \ m_1, x_{-2} = seed[1] \ mod \ m_1, x_{-1} = seed[2] \ mod \ m_1`
+
+                :math:`y_{-3} = seed[3] \ mod \ m_2, y_{-2} = seed[4] \ mod \ m_2, y_{-1} = 1`
+
+            if :math:`n \geqslant 6: x_{-3} = seed[0] \ mod \ m_1, x_{-2} = seed[1] \ mod \ m_1, x_{-1} = seed[2] \ mod \ m_1`
+
+                :math:`y_{-3} = seed[3] \ mod \ m_2, y_{-2} = seed[4] \ mod \ m_2, y_{-1} = seed[5] \ mod \ m_2`
+
+            if the values prove to be :math:`x_{-3} = x_{-2} = x_{-1} = 0`, assume :math:`x_{-3} = 1`
+
+            if the values prove to be :math:`y_{-3} = y_{-2} = y_{-1} = 0`, assume :math:`y_{-3} = 1`
+
+    .. _`mrg32k3a(const mrg32k3a& other)`:
+
+    .. cpp:function:: mrg32k3a::mrg32k3a(const mrg32k3a& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mrg32k3a`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+
+.. container:: section
+
+    .. rubric:: Subsequence selection functions support
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Support
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Supported
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Supported
+        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
+          - Not supported
+
+**Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

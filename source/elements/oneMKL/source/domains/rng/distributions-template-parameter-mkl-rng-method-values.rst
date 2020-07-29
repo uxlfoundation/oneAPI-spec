@@ -1,106 +1,95 @@
-.. _distributions-template-parameter-mkl-rng-method-values:
+.. _onemkl_rng_distributions_template_parameter_mkl_rng_method_values:
 
-Distributions Template Parameter onemkl::rng::method Values
-===========================================================
-
-
-.. container::
+Distributions Template Parameter Method
+=======================================
 
 
-   .. container:: tablenoborder
+.. container:: section
 
+    .. list-table::
+        :header-rows: 1
 
-      .. list-table:: 
-         :header-rows: 1
+        * -  Method
+          -  Distributions
+          -  Math Description
+        * -  ``uniform_method::standard``\         \ ``uniform_method::standard_accurate``\
+          -  \ ``uniform(s,d)``\       \ ``uniform(i)``\
+          -     Standard method. ``uniform_method::standard_accurate`` supported for ``uniform(s, d)`` only.
+        * -  ``gaussian_method::box_muller``
+          -  \ ``gaussian``\
+          -     Generates normally distributed random number x thru the pair of uniformly distributed numbers :math:`u_1` and :math:`u_2` according to the formula: :math:`x = \sqrt{-2lnu_1}\sin(2 \pi u_2)`
+        * -  ``gaussian_method::box_muller2``
+          -  \ ``gaussian``\       \ ``lognormal``\
+          -     Generates normally distributed random numbers :math:`x_1` and :math:`x_2` thru the pair of uniformly distributed numbers :math:`u_1` and :math:`u_2` according to the formulas: \ :math:`x_1 = \sqrt{-2lnu_1}\sin{2\pi u_2}`\       \ :math:`x_2 = \sqrt{-2lnu_1}\cos{2\pi u_2}`\
+        * -  ``gaussian_method::icdf``
+          -  \ ``gaussian``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``exponential_method::icdf``\         \ ``exponential_method::icdf_accurate``\
+          -  \ ``exponential``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``weibull_method::icdf``\         \ ``weibull_method::icdf_accurate``\
+          -  \ ``weibull``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``cauchy_method::icdf``\
+          -  \ ``cauchy``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``rayleigh_method::icdf``\         \ ``rayleigh_method::icdf_accurate``\
+          -  \ ``rayleigh``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``bernoulli_method::icdf``\
+          -  \ ``bernoulli``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``geometric_method::icdf``\
+          -  \ ``geometric``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``gumbel_method::icdf``\
+          -  \ ``gumbel``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``lognormal_method::icdf``\         \ ``lognormal_method::icdf_accurate``\
+          -  \ ``lognormal``\
+          -     Inverse cumulative distribution function (ICDF) method.
+        * -  \ ``lognormal_method::box_muller2``\         \ ``lognormal_method::box_muller2_accurate``\
+          -  \ ``lognormal``\
+          -     Generated normally distributed random numbers :math:`x_1` and :math:`x_2` by box_muller2 method are converted to lognormal distribution.
+        * -  \ ``gamma_method::marsaglia``\         \ ``gamma_method::marsaglia_accurate``\
+          -     \ ``gamma``\
+          -     For :math:`\alpha > 1`, a gamma distributed random number is generated as a cube of properly scaled normal random number; for :math:`0.6 \leq \alpha < 1`, a gamma distributed random number is generated using rejection from Weibull distribution; for :math:`\alpha < 0.6`, a gamma distributed random number is obtained using transformation of exponential power distribution; for :math:`\alpha = 1`, gamma distribution is reduced to exponential distribution.
+        * -  \ ``beta_method::cja``\         \ ``beta_method::cja_accurate``\
+          -     \ ``beta``\
+          -     Cheng-Jonhnk-Atkinson method. For :math:`min(p, q) > 1`, Cheng method is used; for :math:`min(p, q) < 1`, Johnk method is used, if :math:`q + K*p2 + C \leq 0 (K = 0.852..., C=-0.956...)` otherwise, Atkinson switching algorithm is used; for :math:`max(p, q) < 1`, method of Johnk is used; for :math:`min(p, q) < 1, max(p, q)> 1`, Atkinson switching algorithm is used (CJA stands for Cheng, Johnk, Atkinson); for :math:`p = 1` or :math:`q = 1`, inverse cumulative distribution function method is used; for :math:`p = 1` and :math:`q = 1`, beta distribution is reduced to uniform distribution.
+        * -  ``chi_square_method::gamma_based``
+          -     \ ``chi_square``\
+          -     (most common):       If :math:`\nu \ge 17` or :math:`\nu` is odd and :math:`5 \leq \nu \leq 15`, a chi-square distribution is reduced to a Gamma distribution with these parameters: Shape :math:`\alpha = \nu / 2`\ Offset :math:`a = 0`\       \Scale factor :math:`\beta = 2`\       The random numbers of the Gamma distribution are generated.
+        * -  ``binomial_method::btpe``
+          -     \ ``binomial``\
+          -     Acceptance/rejection method for :math:`ntrial * min(p, 1 - p) \ge 30` with decomposition into four regions: two parallelograms, triangle, left exponential tail, right exponential tail.
+        * -  ``poisson_method::ptpe``
+          -     \ ``poisson``\
+          -     Acceptance/rejection method for :math:`\lambda \ge 27` with decomposition into four regions: two parallelograms, triangle, left exponential tail, right exponential tail.
+        * -  ``poisson_method::gaussian_icdf_based``
+          -           \ ``poisson``\
+          -     for :math:`\lambda \ge 1`, method based on Poisson inverse CDF approximation by Gaussian inverse CDF; for :math:`\lambda < 1`, table lookup method is used.
+        * -  ``poisson_v_method::gaussian_icdf_based``
+          -           \ ``poisson_v``\
+          -     for :math:`\lambda \ge 1`, method based on Poisson inverse CDF approximation by Gaussian inverse CDF; for :math:`\lambda < 1`, table lookup method is used.
+        * -  ``hypergeometric_method::h2pe``
+          -     \ ``hypergeometric``\
+          -     Acceptance/rejection method for large mode of distribution with decomposition into three regions: rectangular, left exponential tail, right exponential tail.
+        * -  ``negative_binomial_method::nbar``
+          -     \ ``negative_binomial``\
+          -     Acceptance/rejection method for: :math:`\frac{(a - 1)(1 - p)}{p} \ge 100` with decomposition      into five regions: rectangular, 2 trapezoid, left exponential tail, right exponential tail.
+        * -  ``multinomial_method::poisson_icdf_based``
+          -     \ ``multinomial``\
+          -     Multinomial distribution with parameters :math:`m, k`, and a probability vector :math:`p`. Random numbers of the multinomial distribution are generated by Poisson Approximation method.
+        * -  ``gaussian_mv_method::box_muller``
+          -     \ ``gaussian_mv``\
+          -     BoxMuller method for gaussian_mv method.
+        * -  ``gaussian_mv_method::box_muller2``
+          -     \ ``gaussian_mv``\
+          -     BoxMuller2 method for gaussian_mv method.
+        * -  ``gaussian_mv_method::icdf``
+          -     \ ``gaussian_mv``\
+          -     Inverse cumulative distribution function (ICDF) method.
 
-         * -  onemkl::rng::method 
-           -  Accuracy Flag 
-           -  Distributions 
-           -  Math Description 
-         * -  ``standard`` 
-           -     Yes       No       No             No    
-           -           \ ``uniform(s,d)``\       \ ``uniform(i)``\       \ ``uniform_bits``\       \ ``bits``\    
-           -     Standard method. Currently there is only one method       for these functions.    
-         * -  ``box_muller`` 
-           -     No     
-           -     \ ``gaussian``\     
-           -     Generates normally distributed random number x thru       the pair of uniformly distributed numbers u1 and u2 according to      the formula:       \ |image0|\    
-         * -  ``box_muller2`` 
-           -     No       Yes     
-           -           \ ``gaussian``\       \ ``lognormal``\    
-           -     Generates normally distributed random numbers x1 and       x2 thru the pair of uniformly distributed numbers u1 and u2      according to the formulas:            \ |image1|\       \ |image2|\    
-         * -  ``inverse_function`` 
-           -     No       Yes       Yes             No       Yes       Yes            No       No       No    
-           -           \ ``gaussian``\       \ ``exponential``\       \ ``weibull``\       \ ``cauchy``\       \ ``rayleigh``\       \ ``lognormal``\       \ ``gumbel``\       \ ``bernoulli``\       \ ``geometric``\    
-           -     Inverse cumulative distribution function method.          
-         * -  ``marsaglia`` 
-           -     Yes     
-           -     \ ``gamma``\     
-           -     For α > 1, a gamma distributed random number is       generated as a cube of properly scaled normal random number; for      0.6 ≤α < 1, a gamma distributed random number is generated using      rejection from Weibull distribution; for α < 0.6, a gamma      distributed random number is obtained using transformation of      exponential power distribution; for α = 1, gamma distribution is      reduced to exponential distribution.    
-         * -  ``cheng_johnk_atkinson`` 
-           -     Yes     
-           -     \ ``beta``\     
-           -     For min(p, q) > 1, Cheng method is used; for min(p, q)       < 1, Johnk method is used, if q + K·p2+ C≤ 0 (K = 0.852...,      C=-0.956...) otherwise, Atkinson switching algorithm is used; for      max(p, q) < 1, method of Johnk is used; for min(p, q) < 1, max(p,      q)> 1, Atkinson switching algorithm is used (CJA stands for Cheng,      Johnk, Atkinson); for p = 1or q = 1, inverse cumulative      distribution function method is used;for p = 1 and q = 1, beta      distribution is reduced to uniform distribution.    
-         * -  ``gamma_marsaglia`` 
-           -     No     
-           -     \ ``chi_square``\     
-           -     (most common):       If ν ≥ 17 or ν is odd       and 5 ≤ ν ≤ 15, a chi-square distribution is reduced to a Gamma      distribution with these parameters:       Shape α = ν /      2       Offset a = 0       Scale factor β = 2            The random numbers of the Gamma distribution are      generated.    
-         * -  ``btpe`` 
-           -     No     
-           -     \ ``binomial``\     
-           -     Acceptance/rejection method for ntrial·min(p,1 - p)≥       30 with decomposition into four regions:    
-         * -  ``ptpe`` 
-           -     No     
-           -     \ ``poisson``\     
-           -     Acceptance/rejection method for λ≥ 27 with       decomposition into four regions:    
-         * -  ``gaussian_inverse`` 
-           -     No       No     
-           -           \ ``poisson``\       \ ``poisson_v``\    
-           -     for λ≥ 1, method based on Poisson inverse CDF       approximation by Gaussian inverse CDF;       for λ < 1,      table lookup method is used.    
-         * -  ``h2pe`` 
-           -     No     
-           -     \ ``hypergeometric``\     
-           -     Acceptance/rejection method for large mode of       distribution with decomposition into three regions:    
-         * -  ``nbar`` 
-           -     No     
-           -     \ ``negbinomial``\     
-           -     Acceptance/rejection method for:             \ |image3|\       with decomposition      into five regions:    
-         * -  ``poisson_inverse`` 
-           -     No     
-           -     \ ``multinomial``\     
-           -     Multinomial distribution with parameters m, k, and a       probability vector p. Random numbers of the multinomial      distribution are generated by Poisson Approximation method.         
-
-
-
-
-   .. container:: Note
-
-
-      .. rubric:: Note
-         :class: NoteTipHead
-
-
-      Accuracy flag represented as a method:
-      ``onemkl::rng::<method> | onemkl::rng::accurate``
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-50960934-BF9F-4070-BC8E-AE05FD9AFee1.png
-   :class: img-middle
-.. |image1| image:: ../equations/GUID-50960934-BF9F-4070-BC8E-AE05FD9AFee2.png
-   :class: img-middle
-.. |image2| image:: ../equations/GUID-50960934-BF9F-4070-BC8E-AE05FD9AFee3.png
-   :class: img-middle
-.. |image3| image:: ../equations/GUID-50960934-BF9F-4070-BC8E-AE05FD9AFee4.png
-   :class: img-middle
-
+**Parent
+topic:** :ref:`onemkl_rng_distributions`

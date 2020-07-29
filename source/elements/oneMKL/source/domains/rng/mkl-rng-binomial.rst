@@ -1,114 +1,171 @@
-.. _mkl-rng-binomial:
+.. _onemkl_rng_binomial:
 
-onemkl::rng::binomial
-=====================
+binomial
+========
 
+Class is used for generation of binomially distributed integer types random numbers.
 
-.. container::
+.. _onemkl_rng_binomial_description:
 
+.. rubric:: Description
 
-   Generates binomially distributed random numbers.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers binomially distributed with number of independent Bernoulli trials :math:`m`, and with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p \leq 1, m \in N`.
 
+A binomially distributed variate represents the number of successes in :math:`m` independent Bernoulli trials with probability of a single trial success :math:`p`.
 
-   .. container:: section
-      :name: GUID-6E025ECB-EC40-43D4-91E6-D30F7FA11F54
+The probability distribution is given by:
 
+.. math::
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+    P(X = k) = C^k_{m}p^k(1 - p)^{m - k}, k \in \{0, 1, ... , m\}
 
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-	 
-        template<typename T = std::int32_t, method Method      = btpe>
-          class binomial {
-          public:
-            binomial(): binomial(5, 0.5){}
-            binomial(std::int32_t ntrial, double p)
-            binomial(const binomial<T, Method>& other)
-            std::int32_t ntrial() const
-            double p() const
-            binomial<T, Method>& operator=(const binomial<T, Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{m, p}(x) = \left\{ \begin{array}{rcl} 0, x < 0 \\ \sum^{\lfloor x \rfloor}_{k = 0} C^k_{m}p^k(1 - p)^{m - k}, 0 \leq x < m, x \in R \\ 1, x \ge m \end{array}\right.
 
 
-      -  mkl_sycl.hpp
+.. _onemkl_rng_binomial_syntax:
+
+class binomial
+--------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename IntType = std::int32_t, typename Method = binomial_method::by_default>
+    class binomial {
+    public:
+        using method_type = Method;
+        using result_type = IntType;
+        binomial();
+        explicit binomial(std::int32_t ntrial, double p);
+        std::int32_t ntrial() const;
+        double p() const;
+    };
+
+.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::binomial_method::by_default> \
+                oneapi::mkl::rng::binomial
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename IntType
+            Type of the produced values. Supported types:
+                * ``std::int32_t``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::binomial_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::binomial_method::by_default``
+                * ``oneapi::mkl::rng::binomial_method::btpe``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `binomial()`_
+          - Default constructor
+        * - `explicit binomial(std::int32_t ntrial, double p)`_
+          - Constructor with parameters
+        * - `std::int32_t ntrial() const`_
+          - Method to obtain number of independent trials `m`
+        * - `double p() const`_
+          - Method to obtain success probability of a single trial `p`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: binomial::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: binomial::result_type = IntType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`binomial()`:
+
+        .. cpp:function:: binomial::binomial()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `m` = 5, `p` = 0.5.
+
+    .. container:: section
+
+        .. _`explicit binomial(std::int32_t ntrial, double p)`:
+
+        .. cpp:function:: explicit binomial::binomial(std::int32_t ntrial, double p)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `ntrial` is the number of independent trials, `p` is the success probability of a single trial.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The onemkl::rng::binomial class object is used in the
-      onemkl::rng::generate function to provide binomially distributed
-      random numbers with number of independent Bernoulli trials ``m``,
-      and with probability ``p`` of a single trial success, where
-      ``p∈R; 0 ≤p≤ 1, m∈N``.
+    .. container:: section
 
+        .. _`std::int32_t ntrial() const`:
 
-      A binomially distributed variate represents the number of
-      successes in ``m`` independent Bernoulli trials with probability
-      of a single trial success ``p``.
+        .. cpp:function:: std::int32_t binomial::ntrial() const
 
+        .. container:: section
 
-      The probability distribution is given by:
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `m` - number of independent trials.
 
-      | 
-      | |image0|
+    .. container:: section
 
+        .. _`double p() const`:
 
-      The cumulative distribution function is as follows:
+        .. cpp:function:: double binomial::p() const
 
+        .. container:: section
 
-      | 
-      | |image1|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `p` - success probability of a single trial.
 
-       
-
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::btpe``\       See brief      descriptions of the methods in `Distributions Template Parameter      onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     ntrials    
-           -     \ ``std::int32_t``\     
-           -     Number of independent trials.    
-         * -     p    
-           -     \ ``double``\     
-           -     Success probability ``p`` of a single trial.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-D703292D-2A37-42C6-B713-E38B801F0114-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-081A19C4-609F-4736-BCCF-D680013A2775-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

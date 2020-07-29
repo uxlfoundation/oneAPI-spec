@@ -1,94 +1,162 @@
-.. _mkl-rng-multinomial:
+.. _onemkl_rng_multinomial:
 
-onemkl::rng::multinomial
-========================
+multinomial
+===========
 
+Class is used for generation of multinomially distributed integer types random numbers.
 
-.. container::
+.. _onemkl_rng_multinomial_description:
 
+.. rubric:: Description
 
-   Generates multinomially distributed random numbers.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers multinomially distributed, with independent trials :math:`(ntrial, m)` and possible mutually exclusive outcomes :math:`k`, with corresponding probabilities :math:`p_i`, where :math:`p_i \in R; 0 \leq p_i \leq 1; m, k \in N`.
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-6E025ECB-EC40-43D4-91E6-D30F7FA11F54
+.. math::
 
+    P(X_1 = x_1, ..., X_k = x_k) = \frac{m!}{\Pi^k_{i = 1}x_i!}\Pi^k_{i = 1}p_i^{x_i}, 0 \leq x_i \leq m, \sum^{k}_{i = 1}x_i = m
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. _onemkl_rng_multinomial_syntax:
 
+class multinomial
+-----------------
 
-      ::
-	 
-        template<typename T = std::int32_t, method Method      = poisson_inverse>
-          class multinomial {
-          public:
-            multinomial(double ntrial, std::vector<double>      p)
-            multinomial(const multinomial<T, Method>& other)
-            std::int32_t ntrial() const
-            std::vector<double> p() const
-            multinomial<T, Method>& operator=(const      multinomial<T, Method>& other)
-          }
+.. rubric:: Syntax
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+.. code-block:: cpp
 
+    template<typename IntType = std::int32_t, typename Method = multinomial_method::by_default>
+    class multinomial {
+    public:
+        using method_type = Method;
+        using result_type = IntType;
+        explicit multinomial(double ntrial, std::vector<double> p);
+        multinomial(const multinomial<IntType, Method> & other);
+        std::int32_t ntrial() const;
+        std::vector<double> p() const;
+    };
 
-      -  mkl_sycl.hpp
+.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::multinomial_method::by_default> \
+                oneapi::mkl::rng::multinomial
 
+.. container:: section
 
-      .. rubric:: Description
-         :class: sectiontitle
+    .. rubric:: Template parameters
 
+    .. container:: section
 
-      The onemkl::rng::multinomial class object is used in the
-      onemkl::rng::generate function to provide multinomially distributed
-      random numbers with ``ntrial`` independent trials and ``k``
-      possible mutually exclusive outcomes, with corresponding
-      probabilities ``pi``, where ``pi∈R; 0 ≤pi≤ 1, m∈N, k∈N``.
+        typename IntType
+            Type of the produced values. Supported types:
+                * ``std::int32_t``
+                * ``std::uint32_t``
 
+    .. container:: section
 
-      The probability distribution is given by:
+        typename Method = oneapi::mkl::rng::multinomial_method::by_default
+            Transformation method, which will be used for generation. Supported types:
 
+                * ``oneapi::mkl::rng::multinomial_method::by_default``
+                * ``oneapi::mkl::rng::multinomial_method::poisson_icdf_based``
 
-      | 
-      | |image0|
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
 
+.. container:: section
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+    .. rubric:: Class Members
 
+    .. list-table::
+        :header-rows: 1
 
-      .. list-table:: 
-         :header-rows: 1
+        * - Routine
+          - Description
+        * - `explicit multinomial(double ntrial, std::vector<double> p)`_
+          - Constructor with parameters
+        * - `multinomial(const multinomial<IntType, Method> & other)`_
+          - Copy constructor
+        * - `std::int32_t ntrial() const`_
+          - Method to obtain number of independent trials
+        * - `std::vector<double> p() const`_
+          - Method to obtain probability vector of possible outcomes
 
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::poisson_inverse``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     ntrial    
-           -     \ ``std::int32_t``\     
-           -     Number of independent trials ``m``.    
-         * -     p    
-           -     \ ``std::vector<double>``\     
-           -     Probability vector of possible outcomes (``k``       length).   
+.. container:: section
 
+    .. rubric:: Member types
 
+    .. container:: section
 
+        .. cpp:type:: multinomial::method_type = Method
 
-.. container:: familylinks
+        .. container:: section
 
+            .. rubric:: Description
 
-   .. container:: parentlink
+            Type which defines transformation method for generation.
 
+    .. container:: section
 
-      **Parent
-      topic:** `Distributions <distributions.html>`__
+        .. cpp:type:: multinomial::result_type = IntType
 
+        .. container:: section
 
+            .. rubric:: Description
 
-.. |image0| image:: ../equations/GUID-749B9421-ABAF-41EA-B8B9-3C9941EF5B72-low.png
-   :class: .eq
+            Type which defines type of generated random numbers.
 
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`explicit multinomial(double ntrial, std::vector<double> p)`:
+
+        .. cpp:function:: explicit multinomial::multinomial(double ntrial, std::vector<double> p)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `ntrial` is a number of independent trials, `p` is a probability vector.
+
+    .. container:: section
+
+        .. _`multinomial(const multinomial<IntType, Method> & other)`:
+
+        .. cpp:function:: multinomial::multinomial(const multinomial<IntType, Method> & other)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Copy constructor.
+
+.. container:: section
+
+    .. rubric:: Characteristics
+
+    .. container:: section
+
+        .. _`std::int32_t ntrial() const`:
+
+        .. cpp:function:: std::int32_t multinomial::ntrial() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the distribution parameter `ntrial`.
+
+    .. container:: section
+
+        .. _`std::vector<double> p() const`:
+
+        .. cpp:function:: std::vector<double> multinomial::p() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the distribution parameter `p`.
+
+**Parent topic:** :ref:`onemkl_rng_distributions`

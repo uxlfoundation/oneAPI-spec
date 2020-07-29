@@ -1,4 +1,4 @@
-.. _service-routines:
+.. _onemkl_rng_service_routines:
 
 Service Routines
 ================
@@ -10,14 +10,14 @@ Service Routines
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Routine 
-           -  Description 
-         * -           \ `onemkl::rng::leapfrog <mkl-rng-leapfrog.html>`__\    
+         * -  Routine
+           -  Description
+         * -                      \ :ref:`onemkl_rng_leapfrog`\
            -  Proceed state of engine by the leapfrog method to generate a       subsequence of the original sequence
-         * -           \ `onemkl::rng::skip_ahead <mkl-rng-skip_ahead.html>`__\    
+         * -                      \ :ref:`onemkl_rng_skip_ahead`\
            -  Proceed state of engine by the skip-ahead method to skip a       given number of elements from the original sequence
 
 

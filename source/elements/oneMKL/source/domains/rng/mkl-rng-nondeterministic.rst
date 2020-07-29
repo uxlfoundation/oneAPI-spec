@@ -1,82 +1,90 @@
-.. _mkl-rng-nondeterministic:
+.. _onemkl_rng_nondeterministic:
 
-onemkl::rng::nondeterministic
-=============================
+nondeterministic
+================
 
+Non-deterministic random number generator.
 
-.. container::
+.. _onemkl_rng_nondeterministic_description:
 
+.. rubric:: Description
 
-   Non-deterministic random number generator (RDRAND-based)
-   [AVX][IntelSWMan].
+Implementation defined generator with non-deterministic source of randoness(e.g. a hardware device).
 
+.. _onemkl_rng_nondeterministic_description_syntax:
 
-   .. container:: section
-      :name: GUID-753F13BA-A3C7-4F24-90F1-14B6279BD95C
+class nondeterministic
+----------------------
 
+.. rubric:: Syntax
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. code-block:: cpp
 
+    class nondeterministic {
+    public:
+        nondeterministic(sycl::queue& queue);
+        nondeterministic (const nondeterministic& other);
+        nondeterministic& operator=(const nondeterministic& other);
+        ~nondeterministic();
+    };
 
-      .. container:: dlsyntaxpara
+.. cpp:class:: oneapi::mkl::rng::nondeterministic
 
+.. container:: section
 
-         ::
-	    
-           class nondeterministic :         internal::engine_base<nondeterministic>{
-           public:
-             nondeterministic (cl::sycl::queue& queue)
-             nondeterministic (const nondeterministic&         other)
-             nondeterministic& operator=(const         nondeterministic& other)
-             ~nondeterministic()
-           }
+    .. rubric:: Class Members
 
-         .. rubric:: Include Files
-            :class: sectiontitle
+    .. list-table::
+        :header-rows: 1
 
+        * - Routine
+          - Description
+        * - `nondeterministic(sycl::queue& queue)`_
+          - Constructor for the particular device
+        * - `nondeterministic(const nondeterministic& other)`_
+          - Copy constructor
 
-         -  mkl_sycl.hpp
+.. container:: section
 
+    .. rubric:: Constructors
 
-         .. rubric:: Description
-            :class: sectiontitle
+    .. _`nondeterministic(sycl::queue& queue)`:
 
+    .. cpp:function:: nondeterministic::nondeterministic(sycl::queue& queue)
 
-         Non-deterministic random number generator (RDRAND-based)
-         [`AVX <bibliography.html>`__][`IntelSWMan <bibliography.html>`__].
+    .. container:: section
 
+        .. rubric:: Input Parameters
 
-         .. rubric:: Input Parameters
-            :class: sectiontitle
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     queue    
-              -     cl::sycl::queue    
-              -     Valid cl::sycl::queue, calls of          onemkl::rng::generate() routine submits kernels in this         queue.   
+        queue
+            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
 
+    .. _`nondeterministic(const nondeterministic& other)`:
 
+    .. cpp:function:: nondeterministic::nondeterministic(const nondeterministic& other)
 
-         See `VS
-         Notes <bibliography.html>`__ for
-         detailed descriptions.
+    .. container:: section
 
+        .. rubric:: Input Parameters
 
-   .. container:: familylinks
+        other
+            Valid ``nondeterministic`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one. Note: needed only to change the queue.
 
+.. container:: section
 
-      .. container:: parentlink
+    .. rubric:: Subsequence selection functions support
 
+    .. list-table::
+        :header-rows: 1
 
-         **Parent topic:** `Engines (Basic Random Number
-         Generators) <engines-basic-random-number-generators.html>`__
-
-
+        * - Routine
+          - Support
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Note supported
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Not supported
+        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
+          - Not supported
    
+**Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

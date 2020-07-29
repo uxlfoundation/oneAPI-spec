@@ -1,123 +1,103 @@
-.. _mkl-rng-generate:
+.. _onemkl_rng_generate:
 
-onemkl::rng::generate
-=====================
+generate
+========
 
+Entry point to obtain random numbers from a given engine with proper statistics of a given distribution.
 
-.. container::
+.. _onemkl_rng_generate_description:
 
+.. rubric:: Description and Assumptions
 
-   Entry point to obtain random numbers from a given engine with proper
-   statistics of a given distribution.
+oneapi::mkl::rng::generate function produces random numbers sequence from the given engine object and applied transformation from a given distribution object.
 
+.. _onemkl_rng_generate_buffer:
 
-   .. container:: section
-      :name: GUID-753F13BA-A3C7-4F24-90F1-14B6279BD95C
+generate (Buffer version)
+-------------------------
 
+.. rubric:: Syntax
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. cpp:function:: template<typename DistrType, typename EngineType> void generate (const DistrType& distr, EngineType& engine, std::int64_t n, cl::sycl::buffer<typename DistrType::result_type, 1>& r);
 
+.. container:: section
 
-      Buffer API
+    .. rubric:: Template Parameters
 
+    DistrType
+        Type of distribution which is used for random number generation.
 
-      .. container:: dlsyntaxpara
+    EngineType
+        Type of engine which is used for random number generation.
 
+.. container:: section
 
-         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType> void generate (const Distr<T, Method>& distr,         EngineType& engine, const std::int64_t n, cl::sycl::buffer<T,         1>& r)
+    .. rubric:: Input Parameters
 
-         USM API
+    distr
+        Distribution object. See :ref:`onemkl_rng_distributions` for details.
 
+    engine
+        Engine object. See :ref:`onemkl_rng_engines_basic_random_number_generators` for details.
 
-         .. cpp:function::  template<typename T, method Method,         template<typename, method>class Distr, typename EngineType> cl::sycl::event generate (const Distr<T,         Method>& distr, EngineType& engine, const std::int64_t n, T *         r , const cl::sycl::vector_class<cl::sycl::event> &         dependencies)
+    n
+        Number of random values to be generated.
 
-         .. rubric:: Include Files
-            :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Output Parameters
 
-         -  mkl_sycl.hpp
+    r
+        sycl::buffer of generated values.
 
+.. _onemkl_rng_generate_usm:
 
-         .. rubric:: Input Parameters
-            :class: sectiontitle
+generate (USM version)
+----------------------
 
+.. rubric:: Syntax
 
-         .. list-table:: 
-            :header-rows: 1
+.. cpp:function:: template<typename DistrType, typename EngineType> cl::sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const cl::sycl::vector_class<cl::sycl::event> & dependencies);
 
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     distr    
-              -     const Distr<T, Method>    
-              -     Distribution object. See          `Distributions <distributions.html>`__         for details.   
-            * -     engine    
-              -     EngineType    
-              -     Engine object. See          `Engines <engines-basic-random-number-generators.html>`__         for details.   
-            * -     n    
-              -     const std::int64_t    
-              -     Number of random values to be generated.    
+.. container:: section
 
+    .. rubric:: Template Parameters
 
+    DistrType
+        Type of distribution which is used for random number generation.
 
+    EngineType
+        Type of engine which is used for random number generation.
 
-      .. container:: section
-         :name: GUID-AD3394E9-6864-4509-A178-6BA8CFB88A2C
+.. container:: section
 
+    .. rubric:: Input Parameters
 
-         .. rubric:: Output Parameters
-            :class: sectiontitle
+    distr
+        Distribution object. See :ref:`onemkl_rng_distributions` for details.
 
+    engine
+        Engine object. See :ref:`onemkl_rng_engines_basic_random_number_generators` for details.
 
-         Buffer API
+    n
+        Number of random values to be generated.
 
+    dependencies
+        Optional parameter. List of events to wait for before starting computation, if any.
 
-         .. list-table:: 
-            :header-rows: 1
+.. container:: section
 
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     r    
-              -     cl::sycl::buffer<T, 1>    
-              -     cl::sycl::buffer\ ``r`` to the output          vector.   
+    .. rubric:: Output Parameters
 
+    r
+        pointer to generated values.
 
+.. container:: section
 
+    .. rubric:: Return Value
 
-         USM API
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     r    
-              -     T\*    
-              -     Pointer ``r`` to the output vector.    
-            * -     event    
-              -     cl::sycl::event    
-              -     Function return event after submitting task in          cl::sycl::queue from the engine.   
+    Output event to wait on to ensure computation is complete.
 
 
+**Parent topic:** :ref:`onemkl_rng_generate_routine`
 
-
-         onemkl::rng::generate submits a kernel into a queue that is held
-         by the engine and fills cl::sycl::buffer/T\* vector with n
-         random numbers.
-
-
-   .. container:: familylinks
-
-
-      .. container:: parentlink
-
-
-         **Parent topic:** `Generate
-         Routine <generate-routine.html>`__
-
-
-   

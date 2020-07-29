@@ -1,108 +1,172 @@
-.. _mkl-rng-rayleigh:
+.. _onemkl_rng_rayleigh:
 
-onemkl::rng::rayleigh
-=====================
+rayleigh
+========
+
+Class is used for generation of Rayleigh distributed real types random numbers.
+
+.. _onemkl_rng_rayleigh_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Rayleigh distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+
+The Rayleigh distribution is a special case of the :ref:`onemkl_rng_weibull` distribution, where the shape parameter `\alpha` = 2 .
+
+The probability distribution is given by:
+
+.. math::
+
+     f_{a, \beta}(x) = \left\{ \begin{array}{rcl} \frac{2(x - a)}{\beta^2}exp(-\frac{(x - a)^2)}{\beta^2}), x \ge a \\ 0, x < a \end{array}\right.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{a, \beta}(x) = \left\{ \begin{array}{rcl} 1 - exp(-\frac{(x - a)^2)}{\beta^2}), x \ge a \\ 0, x < a \end{array}\right.
+
+.. _onemkl_rng_rayleigh_syntax:
+
+class rayleigh
+--------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = rayleigh_method::by_default>
+    class rayleigh {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        rayleigh();
+        explicit rayleigh(RealType a, RealType b);
+        RealType a() const;
+        RealType b() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::rayleigh_method::by_default> \
+                oneapi::mkl::rng::rayleigh
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::rayleigh_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::rayleigh_method::by_default``
+                * ``oneapi::mkl::rng::rayleigh_method::icdf``
+                * ``oneapi::mkl::rng::rayleigh_method::icdf_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `rayleigh()`_
+          - Default constructor
+        * - `explicit rayleigh(RealType a, RealType b)`_
+          - Constructor with parameters
+        * - `RealType a() const`_
+          - Method to obtain displacement value
+        * - `RealType b() const`_
+          - Method to obtain scalefactor value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: rayleigh::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: rayleigh::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`rayleigh()`:
+
+        .. cpp:function:: rayleigh::rayleigh()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.0, and `b` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit rayleigh(RealType a, RealType b)`:
+
+        .. cpp:function:: explicit rayleigh::rayleigh(RealType a, RealType b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a displacement value, `b` is a scalefactor value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates Rayleigh distributed random values.
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-   .. container:: section
-      :name: GUID-7AE7A028-213A-48BA-B291-15B651349F6C
+        .. cpp:function:: RealType rayleigh::a() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - displacement value.
 
-      ::
-	 
-        template<typename T = float, method Method =      inverse_function>
-          class rayleigh {
-          public:
-            rayleigh(): rayleigh((T)0.0, (T)1.0){}
-            rayleigh(T a, T b)
-            rayleigh(const rayleigh<T, Method>& other)
-            T a() const
-            T b() const
-            rayleigh<T, Method>& operator=(const rayleigh<T,      Method>& other)
-          }
+    .. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. _`RealType b() const`:
 
+        .. cpp:function:: RealType rayleigh::b() const
 
-      -  mkl_sycl.hpp
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Description
-         :class: sectiontitle
+            Returns the distribution parameter `b` - scalefactor value.
 
-
-      The onemkl::rng::rayleigh class object is used by the
-      onemkl::rng::generate function to provide Rayleigh distributed random
-      numbers with displacement (``a``) and scalefactor (``b``, β),
-      where ``a, β∈R ; β > 0.``
-
-
-      The Rayleigh distribution is a special case of the
-      `Weibull <mkl-rng-weibull.html>`__
-      distribution, where the shape parameter ``α = 2``.
-
-
-      The probability density function is given by:
-
-
-      | 
-      | |image0|
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image1|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       \ ``onemkl::rng::inverse_function | onemkl::rng::accurate``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     b    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor ``b``.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-96DF4ACE-8587-423F-B50A-E9A58BE272F9-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-F85E385E-ACAD-4DC6-95EC-7C8A85836AAD-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`
