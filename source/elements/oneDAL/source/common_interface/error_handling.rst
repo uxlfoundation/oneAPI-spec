@@ -11,13 +11,13 @@ caught using standard C++ error handling mechanism.
 Exception classification
 ========================
 
-Exception classification in onDAL is aligned with C++ Standard Library
+Exception classification in oneDAL is aligned with C++ Standard Library
 classification. oneDAL shall introduce abstract classes that define the base
 class in the hierarchy of exception classes. Concrete exception classes are
 derived from respective C++ Standard Library exception classes. oneDAL library
 shall throw exceptions represented with concrete classes.
 
-In the hierarchy of onDAL exceptions, ``onedal::exception`` is the base abstract
+In the hierarchy of oneDAL exceptions, ``onedal::exception`` is the base abstract
 class that all other exception classes are derived from.
 
 ::

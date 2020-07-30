@@ -9,7 +9,7 @@ Non-deterministic random number generator.
 
 .. rubric:: Description
 
-Implementation defined generator with non-deterministic source of randoness(e.g. a hardware device).
+Implementation defined generator with non-deterministic source of randomness(e.g. a hardware device).
 
 .. _onemkl_rng_nondeterministic_description_syntax:
 

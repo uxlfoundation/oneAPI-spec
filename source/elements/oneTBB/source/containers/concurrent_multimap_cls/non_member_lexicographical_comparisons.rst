@@ -8,7 +8,7 @@ Non-member lexicographical comparisons
     bool operator<( const concurrent_multimap<Key, T, Compare, Allocator>& lhs,
                     const concurrent_multimap<Key, T, Compare, Allocator>& rhs )
 
-**Returns**: ``true`` if ``lhs`` is lexicographicaly `less` than ``rhs``.
+**Returns**: ``true`` if ``lhs`` is lexicographically `less` than ``rhs``.
 
 -----------------------------------------------------
 
@@ -18,7 +18,7 @@ Non-member lexicographical comparisons
     bool operator<=( const concurrent_multimap<Key, T, Compare, Allocator>& lhs,
                      const concurrent_multimap<Key, T, Compare, Allocator>& rhs )
 
-**Returns**: ``true`` if ``lhs`` is lexicographicaly `less or equal` than ``rhs``.
+**Returns**: ``true`` if ``lhs`` is lexicographically `less or equal` than ``rhs``.
 
 -----------------------------------------------------
 
@@ -28,7 +28,7 @@ Non-member lexicographical comparisons
     bool operator>( const concurrent_multimap<Key, T, Compare, Allocator>& lhs,
                     const concurrent_multimap<Key, T, Compare, Allocator>& rhs )
 
-**Returns**: ``true`` if ``lhs`` is lexicographicaly `greater` than ``rhs``.
+**Returns**: ``true`` if ``lhs`` is lexicographically `greater` than ``rhs``.
 
 -----------------------------------------------------
 
@@ -38,4 +38,4 @@ Non-member lexicographical comparisons
     bool operator>=( const concurrent_multimap<Key, T, Compare, Allocator>& lhs,
                      const concurrent_multimap<Key, T, Compare, Allocator>& rhs )
 
-**Returns**: ``true`` if ``lhs`` is lexicographicaly `greater or equal` than ``rhs``.
+**Returns**: ``true`` if ``lhs`` is lexicographically `greater or equal` than ``rhs``.

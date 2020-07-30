@@ -23,7 +23,7 @@ The ``auto_partitioner`` class satisfies the *CopyConstructibe* requirement from
 
 .. tip::
 
-   When using ``auto_partitioner`` and a ``blocked_range`` for a parallel loop, the body may recieve a subrange larger than the grain size of the ``blocked_range``.
+   When using ``auto_partitioner`` and a ``blocked_range`` for a parallel loop, the body may receive a subrange larger than the grain size of the ``blocked_range``.
    Therefore, do not assume that the grain size is an upper bound of the subrange size.
    Use ``simple_partitioner`` if an upper bound is required.
 

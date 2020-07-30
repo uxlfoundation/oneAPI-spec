@@ -3,7 +3,7 @@
 Configuration Parameters and Enums
 ------------------------------------
 
-The following enum classes are defined in the ``oneapi::mkl::dft`` namespace which are used for configuring the discrete Fourier transform problem in the :ref:`onemkl_dft_descriptor` classprior to a call to :ref:`onemkl_dft_descriptor_commit`.  
+The following enum classes are defined in the ``oneapi::mkl::dft`` namespace which are used for configuring the discrete Fourier transform problem in the :ref:`onemkl_dft_descriptor` class prior to a call to :ref:`onemkl_dft_descriptor_commit`.  
 
 .. list-table::
       :header-rows: 1

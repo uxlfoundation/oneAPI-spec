@@ -92,7 +92,7 @@ lda
    The leading dimension of ``a`` :math:`(\max(1, r) \le \text{lda})`.
 
 tau
-   The buffer ``tau`` as returned bya   :ref:`onemkl_lapack_sytrd`. The
+   The buffer ``tau`` as returned by a :ref:`onemkl_lapack_sytrd`. The
    dimension of ``tau`` must be at least :math:`\max(1, r-1)`.
 
 c

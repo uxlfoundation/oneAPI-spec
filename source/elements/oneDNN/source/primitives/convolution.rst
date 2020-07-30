@@ -382,7 +382,7 @@ different algorithms which can be chosen by the user.
   in the best performance, but it is applicable only to particular shapes.
   Moreover, Winograd only supports int8 and f32 data types.
 
-- *Auto* (|algorithm::convolution_auto|). In tis case the library
+- *Auto* (|algorithm::convolution_auto|). In this case the library
   should automatically select the *best* algorithm based on the heuristics
   that take into account tensor shapes and the number of logical processors
   available.

@@ -12,7 +12,7 @@ oneMKL Summary Statistics domains consists of
 
       *  Raw and central sums / moments up to the fourth order
       *  Variation coefficient
-      *  Skewness and excess kurtosis (further refered as kurtosis)
+      *  Skewness and excess kurtosis (further referred to as kurtosis)
       *  Minimum and maximum
 
 Refer to :ref:`onemkl_stats_usage_model`.

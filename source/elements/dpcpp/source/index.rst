@@ -64,7 +64,7 @@ required if covered by newer C++ or SYCL versions directly.
    Math array                   `SYCL 2020 provisional`_  Required           Required           Required              NA [#na]_    
    Optional lambda name         `SYCL 2020 provisional`_  Required           Required           Required              NA [#na]_    
    Queue shortcuts              `SYCL 2020 provisional`_  Required           Required           Required              NA [#na]_          
-   Reqd work-group size         `SYCL 2020 provisional`_  Required           Required           Required              NA [#na]_          
+   Required work-group size     `SYCL 2020 provisional`_  Required           Required           Required              NA [#na]_          
    Standard layout relaxed      `SYCL 2020 provisional`_  Required           Required           Required              NA [#na]_          
    Unified Shared Memory        `SYCL 2020 provisional`_  Required [#USM]_   Required [#USM]_   Required [#USM]_      `usm <https://github.com/intel/llvm/tree/sycl/sycl/test/usm>`__
    `Accessor properties`_       DPC++ extension           Required           Required           Required              NA [#na]_
@@ -210,7 +210,7 @@ A DPC++ implementation must pass:
      Each extension in the `Extensions Table`_ lists the name of the directory that contains
      corresponding tests, within the `extension tests`_ tree.
 
-Acknowledgement
+Acknowledgment
 ---------------
 
 We thank the DPC++ and oneDPL `Technical Advisory Board <https://github.com/oneapi-src/oneAPI-tab>`__ for their valuable feedback,

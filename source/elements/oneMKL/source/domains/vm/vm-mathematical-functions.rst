@@ -242,7 +242,7 @@ VM Mathematical Functions
          :header-rows: 1
          :class: longtable
 
-         * - Rouding Routines
+         * - Rounding Routines
            - Description
          * - :ref:`onemkl_vm_floor`
            - Rounds towards minus infinity

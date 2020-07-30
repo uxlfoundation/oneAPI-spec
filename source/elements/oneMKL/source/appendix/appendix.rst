@@ -1,7 +1,7 @@
 .. _onemkl_appendix:
 
-oneMKL Appendix
-================
+oneMKL Appendices
+=================
 
 .. include:: future_considerations.inc.rst
 .. include:: acknowledgement.inc.rst

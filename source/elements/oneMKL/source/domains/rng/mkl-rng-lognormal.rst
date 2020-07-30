@@ -3,13 +3,13 @@
 lognormal
 =========
 
-Class is used for generation of lognormally distributed real types random numbers.
+Class is used for generation of lognormal distributed real types random numbers.
 
 .. _onemkl_rng_lognormal_description:
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers lognormally distributed with mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers with lognormal distributed and mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
 
 The probability distribution is given by:
 

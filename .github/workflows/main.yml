@@ -17,8 +17,11 @@ jobs:
           python3 scripts/oneapi.py spec-venv
           . spec-venv/bin/activate
           python scripts/oneapi.py --branch $GITHUB_REF ci
-    - name: Archive site
+    - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
           name: oneapi-spec-artifacts
-          path: site.zip
+          path: |
+	    build/html
+	    build/spelling/output.txt
+	    build/latex/oneAPI-spec.pdf

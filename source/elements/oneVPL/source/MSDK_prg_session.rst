@@ -78,7 +78,7 @@ Shared library with the implementation search strategy:
      **System32**/**SysWOW64** directories `(more about default dll search order) <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order?redirectedfrom=MSDN#search-order-for-desktop-applications>`__.
   3. **System32** and **SysWOW64** are directories which library is installed in by DCH graphics driver.
 - **Linux** Dispatcher goes through the following list in specified order
-  until it finds implementstion library:
+  until it finds implementation library:
 
   1. Directories provided by the environment variable **LD_LIBRARY_PATH**.
   2. Content of the cache file /etc/ld.so.cache.
