@@ -1,10 +1,9 @@
 name: CI
 
-on: [push, pull_request]
+on: push
 
 jobs:
   build:
-    if: github.repository == 'oneapi-src/oneAPI-spec'
     runs-on: ubuntu-latest
     container: rscohn2/oneapi-spec:latest
     steps:
@@ -14,14 +13,4 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
-          python3 scripts/oneapi.py spec-venv
-          . spec-venv/bin/activate
-          python scripts/oneapi.py --branch $GITHUB_REF ci
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1
-      with:
-          name: oneapi-spec-artifacts
-          path: |
-	    build/html
-	    build/spelling/output.txt
-	    build/latex/oneAPI-spec.pdf
+          python3 scripts/oneapi.py --branch $GITHUB_REF ci
