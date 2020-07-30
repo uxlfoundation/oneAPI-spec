@@ -8,9 +8,6 @@ jobs:
     container: rscohn2/oneapi-spec:latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install
-      run: |
-          pip3 install --quiet --upgrade requirements.txt
     - name: Build
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
