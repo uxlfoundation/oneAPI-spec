@@ -57,6 +57,7 @@ ALLgatherv
 AVX
 Acar
 Adaptor
+adaptor
 Advisor
 Akl
 Allgather

@@ -3,7 +3,7 @@ flattened2d
 ===========
 **[tls.flattened2d]**
 
-The class template ``flattened2d`` is an adapter that provides a flattened view of a container of containers.
+The class template ``flattened2d`` is an adaptor that provides a flattened view of a container of containers.
 
 .. code:: cpp
 
