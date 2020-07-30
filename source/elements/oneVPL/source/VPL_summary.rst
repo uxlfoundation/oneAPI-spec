@@ -13,7 +13,7 @@ to discover implementation capabilities:
 
 1. Before session creation user can get implementation capabilities by using
    :cpp:func:`MFXEnumImplementations` function to discover supported encoders/decoders or
-   VPP filters with their suppoorted color format and memory types.
+   VPP filters with their supported color format and memory types.
 2. Once session is created, use can use **Query** functions to obtain low level
    implementation capabilities.
 
@@ -82,8 +82,8 @@ Implementation of all those functions is mandatory, while majority of them can r
    MFXReleaseImplDescription         2.0
    ================================= ===========
 
-Mandatory API for each impementation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mandatory API for each implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each implementation must implement following functions:
 
@@ -100,7 +100,7 @@ Each implementation must implement following functions:
 5. If implementation implements any VPP filter, than those functions are mandatory
    for the implementation: :cpp:func:`MFXVideoVPP_Init`, :cpp:func:`MFXVideoVPP_Close`,
    :cpp:func:`MFXVideoVPP_Query`, :cpp:func:`MFXVideoVPP_RunFrameVPPAsync`.
-6. Function rewuired for the asyncroniouse operations syncronization
+6. Function required for the asynchronous operations synchronization
    :cpp:func:`MFXVideoCORE_SyncOperation` is mandatory for the implementation.
 7. Any other functions or extension buffers are optional for the implementation.
 

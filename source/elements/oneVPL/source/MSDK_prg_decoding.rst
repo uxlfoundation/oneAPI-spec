@@ -116,8 +116,8 @@ broken:
 * Many streams have IDR frames with frame_num != 0 while the specification says
   that “If the current picture is an IDR picture, frame_num shall be equal to 0”
   (ITU-T H.265 7.4.3).
-* VUI is also validated, but errors don't invalidate the whole SPS. The decoder
-  either doesn’t use the corrupted VUI (AVC) or resets incorrect values to
+* VUI is also validated, but errors do not invalidate the whole SPS. The decoder
+  either does not use the corrupted VUI (AVC) or resets incorrect values to
   default (HEVC).
 
 Corruption at the reference frame is spread over all inter-coded pictures that
@@ -132,7 +132,7 @@ intra-refresh interval. The recovery point SEI message is well described at
 ITU-T H.264 D.2.7 and ITU-T H.265 D.2.8. If decoding starts from AU associated
 with this SEI message, then the message can be used by the decoder to determine
 from which picture all subsequent pictures have no errors. In comparison to IDR,
-the recovery point message doesn’t mark reference pictures as 'unused for
+the recovery point message does not mark reference pictures as 'unused for
 reference'.
 
 Besides validation of syntax elements and their constraints, the decoder also uses

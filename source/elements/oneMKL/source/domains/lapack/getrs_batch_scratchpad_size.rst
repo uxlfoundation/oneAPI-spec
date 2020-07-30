@@ -47,7 +47,7 @@ n
   Array of ``group_count`` parameters :math:`n_g` specifying the order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
 
 nrhs
-  Array of ``group_count`` parameters nrhsg specifying the number of right-hand sides (:math:`0 \le \text{nrhs}_g`) for group :math:`g`.
+  Array of ``group_count`` parameters :math:`nrhsg` specifying the number of right-hand sides (:math:`0 \le \text{nrhs}_g`) for group :math:`g`.
 
 lda
   Array of ``group_count`` parameters :math:`\text{lda}_g` specifying the leading dimensions of :math:`A_i` from group :math:`g`.
@@ -103,7 +103,7 @@ stride_a
   Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
 
 stride_ipiv
-  Stride between the beginnings of arrays ipivi inside the array ``ipiv``.
+  Stride between the beginnings of arrays `ipivi` inside the array ``ipiv``.
 
 ldb
   Leading dimension of :math:`B_i`.

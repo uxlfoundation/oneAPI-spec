@@ -82,9 +82,9 @@ class negative_binomial
         * - `explicit negative_binomial(double a, double p)`_
           - Constructor with parameters
         * - `double a() const`_
-          - Method to obtain the first ditribution parameter `a`
+          - Method to obtain the first distribution parameter `a`
         * - `double p() const`_
-          - Method to obtain the second ditribution parameter `p`
+          - Method to obtain the second distribution parameter `p`
 
 .. container:: section
 

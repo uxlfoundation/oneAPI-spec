@@ -350,7 +350,7 @@ typedef struct {
         mfxU16  *V16;   /*!< V16 channel. */
         mfxU8   *B;     /*!< B channel. */
 #if (MFX_VERSION >= 1025)
-        mfxA2RGB10 *A2RGB10; /*!< A2RGB10 channelfor A2RGB10 format (merged ARGB). */
+        mfxA2RGB10 *A2RGB10; /*!< A2RGB10 channel for A2RGB10 format (merged ARGB). */
 #endif
     };
     mfxU8       *A;     /*!< A channel. */
@@ -453,7 +453,7 @@ typedef struct mfxFrameSurfaceInterface {
     mfxStatus           (MFX_CDECL *AddRef)(mfxFrameSurface1* surface);
     /*! @brief
     This function decrements the internal reference counter of the surface, users have to care about calling of (*Release) after (*AddRef) or
-    when it's required according to the allocation logic. For instance,  users have to call (*Release) to relase a surface obtained with GetSurfaceForXXX function.
+    when it's required according to the allocation logic. For instance,  users have to call (*Release) to release a surface obtained with GetSurfaceForXXX function.
 
     @param[in]  surface  valid surface.
 

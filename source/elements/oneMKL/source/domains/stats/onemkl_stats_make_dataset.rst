@@ -9,7 +9,7 @@ Entry point to create a dataset from the provided parameters.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::make_dataset function is used to create dataset from the provided storage of observations matrix, number of dimensions and obesrvations, and other parameters.
+oneapi::mkl::stats::make_dataset function is used to create dataset from the provided storage of observations matrix, number of dimensions and observations, and other parameters.
 
 :ref:`onemkl_stats_make_dataset` supports the following precisions for data:
 
@@ -64,7 +64,7 @@ make_dataset (Buffer version)
     weights
         Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative members.  If the parameter is not specified, each observation has weight equal 1.
 
-    indicies
+    indices
         Optional parameter. Array of vector components that are processed. Size of array is n_dims. If the parameter is not specified, all components are processed.
 
 .. container:: section
@@ -111,9 +111,9 @@ make_dataset (USM version)
         Matrix of observations.
 
     weights
-        Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative     mbers.  If   the parameter is not specified, each observation has weight equal 1.
+        Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative members. If the parameter is not specified, each observation has weight equal 1.
 
-    indicies
+    indices
         Optional parameter. Array of vector components that are processed. Size of array is n_dims. If the    parameter  is   not specified, all components are processed.
 
 .. container:: section

@@ -35,7 +35,7 @@ Release Notes
   * Significant refactoring and updating of Sparse BLAS, VM, RNG, and DFT domains API
     descriptions and structure
   * Add Summary Statistics domain
-  * Add future considerations and acknowledgement to appendix
+  * Add future considerations and acknowledgment to appendices
   * Change top-level namespace to oneapi::mkl
 
 * oneDNN

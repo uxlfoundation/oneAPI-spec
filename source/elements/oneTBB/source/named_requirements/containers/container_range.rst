@@ -32,7 +32,7 @@ The type ``CR`` satisfies the ``ContainerRange`` requirements if:
 
     .. cpp:type:: CR::size_type
 
-        Unsigned integer type for obtaining grainsize.
+        Unsigned integer type for obtaining grain size.
 
     .. cpp:type:: CR::difference_type
 
@@ -48,4 +48,4 @@ The type ``CR`` satisfies the ``ContainerRange`` requirements if:
 
     .. cpp:function:: size_type CR::grainsize() const
 
-        Retuns the range grainsize.
+        Returns the range grain size.

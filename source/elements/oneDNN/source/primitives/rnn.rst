@@ -187,7 +187,7 @@ are the same as in vanilla LSTM.
 .. note::
 
    If the ``weights_peephole_desc`` passed to the operation descriptor
-   constructor is a zero memory desciptor, the primitive will behave the same
+   constructor is a zero memory descriptor, the primitive will behave the same
    as in LSTM primitive without peephole.
 
 LSTM with Projection
@@ -228,7 +228,7 @@ are the same as in vanilla LSTM.
 .. note::
 
    If the ``weights_projection_desc`` passed to the operation descriptor
-   constructor is a zero memory desciptor, the primitive will behave the same
+   constructor is a zero memory descriptor, the primitive will behave the same
    as in LSTM primitive without projection.
 
 .. _gru-label:

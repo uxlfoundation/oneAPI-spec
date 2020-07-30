@@ -259,7 +259,7 @@ enum class algorithm {
     eltwise_pow,
     /// Elementwise: round
     eltwise_round,
-    /// Elementwise: rectified linar unit (ReLU) (dst for backward)
+    /// Elementwise: rectified linear unit (ReLU) (dst for backward)
     eltwise_relu_use_dst_for_bwd,
     /// Elementwise: hyperbolic tangent non-linearity (tanh) (dst for backward)
     eltwise_tanh_use_dst_for_bwd,

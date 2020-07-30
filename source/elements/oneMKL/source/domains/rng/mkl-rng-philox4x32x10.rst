@@ -33,7 +33,7 @@ Philox4x32x10 engine is a keyed family of generator of counter-based BRNG. The s
 
         :math:`k_0^{i+1} =k_0^i + 0xBB67AE85`
 
-        :math:`k_1^{i+1} =k_1^i + 0x9E3779B9`, where :math:`mulhi(a, b)` and :math:`mullo(a, b)` are hight and low parts of the :math:`a \cdot b` product respectively.
+        :math:`k_1^{i+1} =k_1^i + 0x9E3779B9`, where :math:`mulhi(a, b)` and :math:`mullo(a, b)` are height and low parts of the :math:`a \cdot b` product respectively.
 
         2.3. Put :math:`f(c) = \overline{L_1^N R_1^N L_0^N R_0^N}`, where :math:`N = 10`
 

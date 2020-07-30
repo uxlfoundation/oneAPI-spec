@@ -77,7 +77,7 @@ Machine learning terms
         A :capterm:`continuous feature` with values that can be compared, added or
         subtracted, but cannot be multiplied or divided.
 
-        **Examples:** a timeframe scale, a temperature in Celcius or Fahrenheit
+        **Examples:** a time frame scale, a temperature in Celsius or Fahrenheit
 
     Label
         A :capterm:`response` with :capterm:`categorical <Categorical feature>` or

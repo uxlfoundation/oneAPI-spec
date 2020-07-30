@@ -9,7 +9,7 @@ oneDAL primarily targets algorithms that are extensively used in data analytics.
 These algorithms typically have many parameters, i.e. knobs to control its
 internal behavior and produced result. In machine learning, those parameters are
 often referred as *meta-parameters* to distinguish them from the model
-parameters learnt during the training. `Some algorithms <xgboost_params_>`_
+parameters learned during the training. `Some algorithms <xgboost_params_>`_
 define a dozen meta-parameters, while others depend on another algorithm as, for
 example, the logistic regression training procedure depends on optimization
 algorithm.

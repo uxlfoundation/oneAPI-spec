@@ -9,7 +9,7 @@ Mersenne Twister pseudorandom number generator.
 
 .. rubric:: Description
 
-Mersenne Twister pseudorandom number generator mt19937 is a modification of twisted generalized feedback shift register generator [:ref:`Matsumoto98 <onemkl_rng_bibliography>`]. MT19937 has the period length of :math:`2^{19937} - 1` and is 623-dimensionally equidistributed with up to 32-bit accuracy. These properties make the generator applicable for simulations in various fields of science and engineering. The state of the generator is represented by 624 32-bit unsigned integer numbers.
+Mersenne Twister pseudorandom number generator mt19937 is a modification of twisted generalized feedback shift register generator [:ref:`Matsumoto98 <onemkl_rng_bibliography>`]. MT19937 has the period length of :math:`2^{19937} - 1` and is 623-dimensional equidistributed with up to 32-bit accuracy. These properties make the generator applicable for simulations in various fields of science and engineering. The state of the generator is represented by 624 32-bit unsigned integer numbers.
 
 .. container:: section
 

@@ -196,7 +196,7 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
          The enum value of :ref:`onemkl_dft_enum_config_param` to be retrieved.
 
       ...
-         The corresponding value or container corresponding to the specific paramer. Defined in :ref:`onemkl_dft_enum_config_param`.
+         The corresponding value or container corresponding to the specific parameter. Defined in :ref:`onemkl_dft_enum_config_param`.
 
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
