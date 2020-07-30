@@ -3,9 +3,9 @@ concurrent_multiset
 ===================
 **[containers.concurrent_multiset]**
 
-``tbb::concurrent_multiset`` is a class template represents an unordered sequence of unique elements
-which supports concurrent insertion, lookup and traversal, but not concurrent erasure.
-The container allows to store multiple equivalent elements.
+``tbb::concurrent_multiset`` is a class template that represents an unordered sequence of unique elements.
+It supports concurrent insertion, lookup, and traversal, but does not support concurrent erasure.
+In this container, multiple equivalent elements can be stored.
 
 
 Class Template Synopsis
@@ -216,11 +216,11 @@ Class Template Synopsis
 
 Requirements:
 
-* The expression ``std::allocator_traits<Allocator>::destroy(m, val)`` where ``m`` is an object
-  of the type ``Allocator`` and ``val`` is an object of the type ``value_type`` should be well-formed.
+* The expression ``std::allocator_traits<Allocator>::destroy(m, val)``, where ``m`` is an object
+  of the type ``Allocator`` and ``val`` is an object of the type ``value_type``, should be well-formed.
   Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``Compare`` shall meet the ``Compare`` requirements from [alg.sorting] ISO C++ Standard section.
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ Standard section.
+* The type ``Compare`` must meet the ``Compare`` requirements from the [alg.sorting] ISO C++ Standard section.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
 
 Member functions

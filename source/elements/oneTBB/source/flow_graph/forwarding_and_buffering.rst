@@ -6,14 +6,14 @@ Forwarding and Buffering
 Forwarding
 ----------
 
-In an oneAPI Threading Building Blocks ``flow::graph``, nodes which forward messages to successors have
+In a ``flow::graph``, nodes that forward messages to successors have
 one of two possible forwarding policies, which are a property of the node:
 
 * **broadcast-push** - the message will be pushed to as many successors as will accept
   the message. If no successor accepts the message, the fate of the message depends on the
   output buffering policy of the node.
 * **single-push** - if the message is accepted by a successor, no further push of that
-  message will occur. If a successor rejects the message the next successor in the set is tried.
+  message will occur. If a successor rejects the message, the next successor in the set is tried.
   This continues until a successor accepts the message, or all successors have been attempted.
   If no successor accepts the message, it will be retained for a possible future resend.
   Message that is successfully transferred to a successor is removed from the node.
@@ -21,14 +21,14 @@ one of two possible forwarding policies, which are a property of the node:
 Buffering
 ----------
 
-There are two policies for handling a message which cannot be pushed to any successor:
+There are two policies for handling a message that cannot be pushed to any successor:
 
 * **buffering** - if no successor accepts a message, it is stored so subsequent node
-  processing can use it. Nodes that buffer outputs have "yes" in the column "try_get()?"
+  processing can use it. Nodes that buffer outputs have "yes" in the "try_get()?" column
   below.
 * **discarding** - if no successor accepts a message, it is discarded and has no
-  further effect on graph execution. Nodes that discard outputs have "no" in the column
-  "try_get()?" below.
+  further effect on graph execution. Nodes that discard outputs have "no" in the
+  "try_get()?" column below.
 
 The following table lists the policies of each node:
 

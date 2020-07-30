@@ -4,8 +4,8 @@ Non-member binary comparisons
 
 Two objects of ``concurrent_unordered_set`` are equal if the following conditions are ``true``:
 
-* They contains an equal number of elements.
-* Each element from the one container also contains in the other.
+* They contain an equal number of elements.
+* Each element from one container is also available in the other.
 
 .. code:: cpp
 
@@ -27,4 +27,4 @@ Two objects of ``concurrent_unordered_set`` are equal if the following condition
 
 Equivalent to ``!(lhs == rhs)``.
 
-**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``; ``false``, otherwise.

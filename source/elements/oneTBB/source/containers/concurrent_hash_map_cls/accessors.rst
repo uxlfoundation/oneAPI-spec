@@ -3,8 +3,8 @@ accessor and const_accessor
 ===========================
 
 Member classes ``concurrent_hash_map::accessor`` and ``concurrent_hash_map::const_accessor`` are called `accessors`.
-Accessors allows multiple threads to concurrently access the key-value pairs in ``concurrent_hash_map``.
-Accessor is called `empty` if it does not point to any item.
+Accessors allow multiple threads to concurrently access the key-value pairs in ``concurrent_hash_map``.
+An accessor is called `empty` if it does not point to any item.
 
 ``accessor`` member class
 -------------------------
@@ -78,7 +78,7 @@ Construction and destruction
 
         ~const_accessor();
 
-    Destroys the accessor. If ``*this`` is not empty - releases the ownership of the element.
+    Destroys the accessor. If ``*this`` is not empty, releases the ownership of the element.
 
 Emptiness
 ~~~~~~~~~
@@ -87,7 +87,7 @@ Emptiness
 
         bool empty() const;
 
-    **Returns**: ``true`` if the accessor is empty, ``false`` otherwise.
+    **Returns**: ``true`` if the accessor is empty; ``false``, otherwise.
 
 Key-value pair access
 ~~~~~~~~~~~~~~~~~~~~~
@@ -96,7 +96,7 @@ Key-value pair access
 
         value_type& operator*() const;
 
-    **Returns**: a reference to the key-value pair on which the accessor points.
+    **Returns**: a reference to the key-value pair to which the accessor points.
 
     The behavior is undefined if the accessor is empty.
 
@@ -106,7 +106,7 @@ Key-value pair access
 
         value_type* operator->() const;
 
-    **Returns**: a pointer to the key-value pair on which the accessor points.
+    **Returns**: a pointer to the key-value pair to which the accessor points.
 
     The behavior is undefined if the accessor is empty.
 

@@ -3,9 +3,9 @@ concurrent_multimap
 ===================
 **[containers.concurrent_multimap]**
 
-``tbb::concurrent_multimap`` is a class template represents a sorted associative container
-which supports concurrent insertion, lookup and traversal, but not concurrent erasure.
-The container allows to store multiple elements with equal keys.
+``tbb::concurrent_multimap`` is a class template that represents a sorted associative container.
+It supports concurrent insertion, lookup, and traversal, but does not support concurrent erasure.
+In this container, multiple elements with equal keys can be stored.
 
 Class Template Synopsis
 -----------------------
@@ -220,11 +220,11 @@ Class Template Synopsis
 
 Requirements:
 
-* The expression ``std::allocator_traits<Allocator>::destroy(m, val)`` where ``m`` is an object
-  of the type ``Allocator`` and ``val`` is an object of the type ``value_type`` should be well-formed.
+* The expression ``std::allocator_traits<Allocator>::destroy(m, val)``, where ``m`` is an object
+  of the type ``Allocator`` and ``val`` is an object of the type ``value_type``, must be well-formed.
   Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``Compare`` shall meet the ``Compare`` requirements from [alg.sorting] ISO C++ Standard section.
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ Standard section.
+* The type ``Compare`` must meet the ``Compare`` requirements from the [alg.sorting] ISO C++ Standard section.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
 Member classes
 --------------
@@ -252,13 +252,13 @@ Member functions
 Non-member functions
 --------------------
 
-These functions provides binary and lexicographical comparison and swap operations
+These functions provide binary and lexicographical comparison and swap operations
 on ``tbb::concurrent_multimap`` objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
 in the same internal namespace and define ``tbb::concurrent_multimap`` as a type alias for which
-the non-member functions are reachable only via argument dependent lookup.
+the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp
 

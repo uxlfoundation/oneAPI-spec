@@ -53,19 +53,19 @@ because other partitioners react to random work stealing behavior.
 ``parallel_deterministic_reduce`` always invokes the ``Body`` splitting constructor for each range split.
 
 As a result, ``parallel_deterministic_reduce`` recursively splits a range until it is no longer divisible,
-and creates a new body (by calling ``Body`` splitting constructor) for each new subrange.
+and creates a new body (by calling the ``Body`` splitting constructor) for each new subrange.
 Like ``parallel_reduce``, for each body split the method ``join`` is invoked in order to merge the results from the bodies.
 
-Therefore for given arguments, ``parallel_deterministic_reduce`` executes the same set of split and join operations
+Therefore, for given arguments, ``parallel_deterministic_reduce`` executes the same set of split and join operations
 no matter how many threads participate in execution and how tasks are mapped to the threads.
-If the user-provided functions are also deterministic (i.e. different runs with the same input result in the same output),
-then multiple calls to ``parallel_deterministic_reduce`` will produce the same result.
+If the user-provided functions are also deterministic (that is, different runs with the same input result in the same output),
+multiple calls to ``parallel_deterministic_reduce`` produce the same result.
 Note however that the result might differ from that obtained with an equivalent sequential (linear) algorithm.
 
 **Complexity**
 
 If the range and body take *O(1)* space, and the range splits into nearly equal pieces,
-then the space complexity is *O(P log(N))*, where *N* is the size of the range and *P* is the number of threads.
+the space complexity is *O(P log(N))*, where *N* is the size of the range and *P* is the number of threads.
 
 See also:
 

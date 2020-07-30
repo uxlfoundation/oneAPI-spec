@@ -3,7 +3,7 @@ Sequencer
 =========
 **[req.sequencer]**
 
-A type `S` satisfies the `Sequencer` if it meets the following requirements:
+A type `S` satisfies `Sequencer` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
@@ -25,8 +25,8 @@ A type `S` satisfies the `Sequencer` if it meets the following requirements:
 
 .. cpp:function:: size_t S::operator()( const T &v )
 
-    **Requirements:** The type ``T`` must be the same as template type argument ``T`` of the
-    ``sequencer_node`` instance in which ``S`` object is passed during construction.
+    **Requirements:** The type ``T`` must be the same as the template type argument ``T`` of the
+    ``sequencer_node`` instance in which the ``S`` object is passed during construction.
 
     Returns the sequence number for the provided message ``v``.
 

@@ -9,7 +9,7 @@ empty
 
         bool empty() const;
 
-    **Returns**: ``true`` if the container is empty, ``false`` otherwise.
+    **Returns**: ``true`` if the container is empty; ``false``, otherwise.
 
     The result may differ with the actual container state in case of pending concurrent insertions or erasures.
 

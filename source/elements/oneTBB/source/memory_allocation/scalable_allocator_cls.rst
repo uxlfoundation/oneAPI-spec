@@ -32,7 +32,7 @@ Memory allocated by a ``scalable_allocator`` should be freed by a ``scalable_all
 .. caution::
 
    The ``scalable_allocator`` requires the memory allocator library. If the library is missing, calls to the scalable allocator fail. In
-   contrast, if the memory allocator library is not available, ``tbb_allocator`` falls back on ``std::malloc`` and ``std::free``.
+   contrast to ``scalable_allocator``, if the memory allocator library is not available, ``tbb_allocator`` falls back on ``std::malloc`` and ``std::free``.
 
 Member Functions
 ----------------
@@ -66,7 +66,7 @@ These functions provide comparison operations between two ``scalable_allocator``
 
 The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``scalable_allocator`` objects.
 For example, an implementation may define the classes and functions in the same unspecified internal namespace,
-and define ``tbb::scalable_allocator`` as a type alias for which the non-member functions are reachable only via argument dependent lookup.
+and define ``tbb::scalable_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
 
 .. cpp:function:: template<typename T, typename U> \
     bool operator==(const scalable_allocator<T>&, const scalable_allocator<U>&) noexcept

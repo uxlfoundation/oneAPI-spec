@@ -3,7 +3,7 @@ InputNodeBody
 =============
 **[req.input_node_body]**
 
-A type `Body` satisfies the `InputNodeBody` if it meets the following requirements:
+A type `Body` satisfies `InputNodeBody` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
@@ -19,10 +19,10 @@ A type `Body` satisfies the `InputNodeBody` if it meets the following requiremen
 
 .. cpp:function:: Output Body::operator()( tbb::flow_control& fc )
 
-    **Requirements:** The type ``Output`` must be the same as template type argument ``Output`` of the
-    ``input_node`` instance in which ``Body`` object is passed during construction.
+    **Requirements:** The type ``Output`` must be the same as the template type argument ``Output`` of the
+    ``input_node`` instance in which the ``Body`` object is passed during construction.
 
-    Apply body to generate next item. Call ``fc.stop()`` when new element can not be generated.
-    Since ``Output`` needs to be returned, ``Body`` may return any valid value of ``Output``, to be
+    Applies body to generate the next item. Call ``fc.stop()`` when new element cannot be generated.
+    Because ``Output`` needs to be returned, ``Body`` may return any valid value of ``Output``, to be
     immediately discarded.
 

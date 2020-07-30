@@ -24,7 +24,7 @@ which enable iteration over the set of all elements in the container.
 Class template ``enumerable_thread_specific`` supports ``const_range_type`` and ``range_type`` types,
 which model the :doc:`ContainerRange requirement <../../named_requirements/containers/container_range>`.
 The types differ only in that the bounds for a ``const_range_type`` are of type ``const_iterator``,
-whereas the bounds for a ``range_type`` are of type iterator.
+whereas the bounds for a ``range_type`` are of type ``iterator``.
 
 .. cpp:function:: const_range_type range( size_t grainsize=1 ) const
 

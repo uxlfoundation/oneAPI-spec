@@ -4,7 +4,7 @@ null_rw_mutex
 **[mutex.null_rw_mutex]**
 
 A ``null_rw_mutex`` is a class that models the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>` syntactically, but does nothing.
-The ``null_rw_mutex`` class also satisfies all syntatic requirements of shared mutex type from the [thread.sharedmutex.requirements] ISO C++ section, but does nothing.
+The ``null_rw_mutex`` class also satisfies all syntactic requirements of shared mutex type from the [thread.sharedmutex.requirements] ISO C++ section, but does nothing.
 It is useful for instantiating a template that expects a ReaderWriterMutex, but no mutual exclusion is actually needed for that instance.
 
 .. code:: cpp
@@ -48,11 +48,11 @@ Member functions
 
 .. cpp:function:: null_rw_mutex()
 
-    Construct unlocked mutex.
+    Constructs unlocked mutex.
 
 .. cpp:function:: ~null_rw_mutex()
 
-    Destroy unlocked mutex.
+    Destroys unlocked mutex.
 
 .. cpp:function:: void lock()
 
@@ -64,7 +64,7 @@ Member functions
 
 .. cpp:function:: void unlock()
 
-    Releases a write lock, held by the current thread.
+    Releases a write lock held by the current thread.
 
 .. cpp:function:: void lock_shared()
 
@@ -76,5 +76,5 @@ Member functions
 
 .. cpp:function:: void unlock_shared()
 
-    Releases a read lock, held by the current thread.
+    Releases a read lock held by the current thread.
 

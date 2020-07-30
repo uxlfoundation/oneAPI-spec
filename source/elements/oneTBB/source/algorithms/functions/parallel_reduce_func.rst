@@ -42,19 +42,19 @@ A ``partitioner`` type may be one of the following entities:
 
 Requirements:
 
-* The ``Range`` type shall meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
-* The ``Body`` type shall meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
-* The ``Func`` type shall meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
-* The ``Reduction`` types shall meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_func>`.
+* The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
+* The ``Body`` type must meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
+* The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
+* The ``Reduction`` types must meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_func>`.
 
-The function template ``parallel_reduce`` has two forms.
+The function template ``parallel_reduce`` has two forms:
 The functional form is designed to be easy to use in conjunction with lambda expressions.
 The imperative form is designed to minimize copying of data.
 
 The functional form ``parallel_reduce(range, identity, func, reduction)`` performs a parallel reduction by applying *func* to
-subranges in range and reducing the results using binary operator *reduction*.
-It returns the result of the reduction. Parameter *identity* specifies the left identity element for *func*'s ``operator()``.
-Parameter *func* and *reduction* can be lambda expressions.
+subranges in *range* and reducing the results with the binary operator *reduction*.
+It returns the result of the reduction. The *identity* parameter specifies the left identity element for *func*'s ``operator()``.
+Parameters *func* and *reduction* can be lambda expressions.
 
 The imperative form ``parallel_reduce(range,body)`` performs parallel reduction of *body* over each value in *range*.
 
@@ -64,25 +64,25 @@ It may copy a body while the body’s ``operator()`` or method ``join`` runs con
 You are responsible for ensuring the safety of such concurrency. In typical usage, the safety requires no extra effort.
 
 ``parallel_reduce`` may invoke the splitting constructor for the body.
-For each such split of the body, it invokes method ``join`` in order to merge the results from the bodies.
+For each such split of the body, it invokes the ``join`` method to merge the results from the bodies.
 Define ``join`` to update this to represent the accumulated result for this and rhs.
 The reduction operation should be associative, but does not have to be commutative.
 For a noncommutative operation *op*, ``left.join(right)`` should update *left* to be the result of *left op right*.
 
-A body is split only if the range is split, but the converse is not necessarily so.
-You must neither rely on a particular choice of body splitting nor on the subranges processed by a
+A body is split only if the range is split, but the converse is not necessarily to be so.
+The user must neither rely on a particular choice of body splitting nor on the subranges processed by a
 given body object being consecutive. ``parallel_reduce`` makes the choice of body splitting nondeterministically.
 
 When executed serially ``parallel_reduce`` run sequentially from left to right in the same sense as for ``parallel_for``.
 Sequential execution never invokes the splitting constructor or method join.
 
 All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
 
 **Complexity**
 
 If the range and body take *O(1)* space, and the range splits into nearly equal pieces,
-then the space complexity is *O(P×log(N))*, where *N* is the size of the range and *P* is the number of threads.
+the space complexity is *O(P×log(N))*, where *N* is the size of the range and *P* is the number of threads.
 
 Example (Imperative Form)
 -------------------------
@@ -127,7 +127,7 @@ The operation may be noncommutative. For example, *op* could be matrix multiplic
 Example with Lambda Expressions
 -------------------------------
 
-The following is analogous to the previous example, but written using lambda
+The following is similar to the previous example, but written using lambda
 expressions and the functional form of ``parallel_reduce``.
 
 .. code:: cpp

@@ -3,7 +3,7 @@ ContinueNodeBody
 ================
 **[req.continue_node_body]**
 
-A type `Body` satisfies the `ContinueNodeBody` if it meets the following requirements:
+A type `Body` satisfies `ContinueNodeBody` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
@@ -19,10 +19,10 @@ A type `Body` satisfies the `ContinueNodeBody` if it meets the following require
 
 .. cpp:function:: Output Body::operator()( const continue_msg &v ) const
 
-    **Requirements:** The type ``Output`` must be the same as template type argument ``Output`` of the
-    ``continue_node`` instance in which ``Body`` object is passed during construction.
+    **Requirements:** The type ``Output`` must be the same as the template type argument ``Output`` of the
+    ``continue_node`` instance in which the ``Body`` object is passed during construction.
 
-    Perform operation and return value of type Output.
+    Performs operation and returns a value of type Output.
 
 See also:
 

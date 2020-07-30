@@ -11,7 +11,7 @@ Non-member binary comparisons
 Checks if ``lhs`` is equal to ``rhs``, that is they have the same number of elements and ``lhs``
 contains all elements from ``rhs`` with the same priority.
 
-**Returns**: ``true`` if ``lhs`` is equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is equal to ``rhs``; ``false``, otherwise.
 
 .. code:: cpp
 
@@ -21,4 +21,4 @@ contains all elements from ``rhs`` with the same priority.
 
 Equivalent to ``!(lhs == rhs)``.
 
-**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``; ``false``, otherwise.

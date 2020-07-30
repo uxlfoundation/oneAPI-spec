@@ -42,8 +42,7 @@ implementations for several functions are provided.
    graphs has been deprecated for ``flow::graph``.  
    Graphs should be constructed with ``make_edge`` and 
    ``remove_edge``.
-   Where ``n1.register_predecessor(n2)`` was used,
-   replace with ``make_edge(n2,n1)``.
+   Replace ``n1.register_predecessor(n2)`` with ``make_edge(n2,n1)``.
 
 
 Members
@@ -92,19 +91,17 @@ members of this template class.
   Adds a predecessor to the node's set of predecessors.
   
   **Returns**: 
-  ``true`` if the predecessor is added; 
-  ``false`` otherwise. The default
-  implementation returns 
-  ``false``.
+  ``true`` if the predecessor is added. 
+  ``false``, otherwise. The default
+  implementation returns ``false``.
 ------------------------------------------------------------------------------------------
 \ ``bool remove_predecessor( predecessor_type &p )``
   \
   Removes a predecessor from the node's set of predecessors.
   
   **Returns**: 
-  ``true`` if the predecessor is removed; 
-  ``false`` otherwise. The default
-  implementation returns 
-  ``false``.
+  ``true`` if the predecessor is removed. 
+  ``false``, otherwise. The default
+  implementation returns ``false``.
 ------------------------------------------------------------------------------------------
 = ========================================================================================

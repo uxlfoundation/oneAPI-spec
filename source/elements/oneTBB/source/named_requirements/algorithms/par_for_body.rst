@@ -3,7 +3,7 @@ ParallelForBody
 ===============
 **[req.parallel_for_body]**
 
-A type `Body` satisfies the `ParallelForBody` if it meets the following requirements:
+A type `Body` satisfies `ParallelForBody` if it meets the following requirements:
 
 ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ A type `Body` satisfies the `ParallelForBody` if it meets the following requirem
 
 .. cpp:function:: void Body::operator()( Range& range ) const
 
-    Apply body to range. ``Range`` type shall meet the :doc:`Range requirements <range>`.
+    Applies body to a range. ``Range`` type must meet the :doc:`Range requirements <range>`.
 
 See also:
 

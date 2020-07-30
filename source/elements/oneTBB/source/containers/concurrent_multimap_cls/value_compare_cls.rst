@@ -2,7 +2,7 @@
 value_compare
 =============
 
-``concurrent_multimap::value_compare`` is a function object which is used to compare
+``concurrent_multimap::value_compare`` is a function object that is used to compare
 ``concurrent_multimap::value_type`` objects by comparing their first components.
 
 Class Synopsis
@@ -52,4 +52,4 @@ Member functions
 
     Compares ``lhs.first`` and ``rhs.first`` by calling the stored key comparison function ``comp``.
 
-    **Returns**: ``true`` if first components of ``lhs`` and ``rhs`` are equal, ``false`` otherwise.
+    **Returns**: ``true`` if first components of ``lhs`` and ``rhs`` are equal; ``false``, otherwise.

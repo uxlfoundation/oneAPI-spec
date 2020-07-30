@@ -33,7 +33,7 @@ A writer lock on a `ReaderWriterMutex` excludes all other threads from holding a
         };
     };
 
-A type `RWM` satisfies the `ReaerWriterMutex` if it meets the following requirements.
+A type `RWM` satisfies `ReaderWriterMutex` if it meets the following requirements.
 They form a superset of the :doc:`Mutex requirements <mutex>`.
 
 .. cpp:type:: RWM::scoped_lock
@@ -46,7 +46,7 @@ They form a superset of the :doc:`Mutex requirements <mutex>`.
 
 .. cpp:function:: RWM::scoped_lock(RWM&, bool write = true)
 
-    Constructs ``scoped_lock`` and acquire a lock on a given mutex. The lock is a writer lock if ``write`` is true; a reader lock otherwise.
+    Constructs ``scoped_lock`` and acquires a lock on a given mutex. The lock is a writer lock if ``write`` is true; a reader lock otherwise.
 
 .. cpp:function:: RWM::~scoped_lock()
 
@@ -54,11 +54,11 @@ They form a superset of the :doc:`Mutex requirements <mutex>`.
 
 .. cpp:function:: void RWM::scoped_lock::acquire(RWM&, bool write = true)
 
-    Acquires lock on a given mutex. The lock is a writer lock if ``write`` is true; a reader lock otherwise.
+    Acquires a lock on a given mutex. The lock is a writer lock if ``write`` is true; it is a reader lock, otherwise.
 
 .. cpp:function:: bool RWM::scoped_lock::try_acquire(RWM&, bool write = true)
 
-    Attempts to acquire a lock on a given mutex. The lock is a writer lock if ``write`` is true; a reader lock otherwise.
+    Attempts to acquire a lock on a given mutex. The lock is a writer lock if ``write`` is true; it is a reader lock, otherwise.
     Returns ``true`` if the lock is acquired, ``false`` otherwise.
 
 .. cpp:function:: RWM::scoped_lock::release()
@@ -67,29 +67,29 @@ They form a superset of the :doc:`Mutex requirements <mutex>`.
 
 .. cpp:function:: bool RWM::scoped_lock::upgrade_to_writer()
 
-    Changes a reader lock to a writer lock. Return ``false`` if lock was released and reacquired. ``true`` otherwise, including if the lock was already a writer lock.
+    Changes a reader lock to a writer lock. Returns ``false`` if lock was released and reacquired. Otherwise, returns ``true``, including the case when the lock was already a writer lock.
 
 .. cpp:function:: bool RWM::scoped_lock::downgrade_to_reader()
 
-    Changes a writer lock to a reader lock. Return ``false`` if lock was released and reacquired. ``true`` otherwise, including if the lock was already a reader lock.
+    Changes a writer lock to a reader lock. Returns ``false`` if lock was released and reacquired. OTherwise, returns ``true``, including the case when the lock was already a reader lock.
 
 Like the `Mutex` requirement, `ReaderWriterMutex` also requires a set of traits to be defined.
 
 .. cpp:member:: static constexpr bool M::is_rw_mutex
 
-    True if mutex is reader-writer mutex; false otherwise.
+    True if mutex is a reader-writer mutex; false, otherwise.
 
 .. cpp:member:: static constexpr bool M::is_recursive_mutex
 
-    True if mutex is recursive mutex; false otherwise.
+    True if mutex is a recursive mutex; false, otherwise.
 
 .. cpp:member:: static constexpr bool M::is_fair_mutex
 
-    True if mutex is fair; false otherwise.
+    True if mutex is fair; false, otherwise.
 
-The following table summarizes the library classes that model the `ReaderWriterMutex` requirement and provided gurantees.
+The following table summarizes the library classes that model the `ReaderWriterMutex` requirement and provided guarantees.
 
-.. table:: Provided gurantees for Mutexes that model the ReaderWriterMutex requirement
+.. table:: Provided guarantees for Mutexes that model the ReaderWriterMutex requirement
 
     ============================= ============ =============
     .                             **Fair**     **Reentrant**
@@ -105,14 +105,14 @@ The following table summarizes the library classes that model the `ReaderWriterM
 
 .. note::
 
-    Implementation is alowed to have an opposite gurantees (positive) in case of negative statements from the table above.
+    Implementation is allowed to have an opposite guarantees (positive) in case of negative statements from the table above.
 
 .. note::
 
     For all currently provided reader-writer mutexes,
 
-    * ``is_recursive_mutex`` is ``false``;
-    * ``scoped_lock::downgrade_to_reader`` always returns ``true``.
+    * ``is_recursive_mutex`` is ``false``
+    * ``scoped_lock::downgrade_to_reader`` always returns ``true``
 
     However, other implementations of the ReaderWriterMutex requirement are not required to do the same.
 

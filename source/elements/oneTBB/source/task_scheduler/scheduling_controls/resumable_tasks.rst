@@ -15,18 +15,18 @@ Functions to suspend task execution at a specific point and signal to resume it 
 
 Requirements:
 
-* The ``Func`` type shall meet the :doc:`SuspendFunc requirements <../../named_requirements/task_scheduler/suspend_func>`.
+* The ``Func`` type must meet the :doc:`SuspendFunc requirements <../../named_requirements/task_scheduler/suspend_func>`.
 
 The ``tbb::task::suspend`` function called within a running task suspends execution of the task and switches the thread to participate in other oneTBB parallel work.
 This function accepts a user callable object with the current execution context ``tbb::task::suspend_point`` as an argument.
 
-The ``tbb::task::suspend_point`` context tag shall be passed to the ``tbb::task::resume`` function to trigger a program execution at the suspended point.
+The ``tbb::task::suspend_point`` context tag must be passed to the ``tbb::task::resume`` function to trigger a program execution at the suspended point.
 The ``tbb::task::resume`` function can be called at any point of an application, even on a separate thread.
 In this regard, this function acts as a signal for the task scheduler.
 
 .. note::
 
-    Note, that there are no guarantees, that the same thread that called ``tbb::task::suspend`` will continue execution after the suspended point.
+    There are no guarantees that the same thread that called ``tbb::task::suspend`` continues execution after the suspended point.
     However, these guarantees are provided for the outermost blocking oneTBB calls
     (such as ``tbb::parallel_for`` and ``tbb::flow::graph::wait_for_all``) and ``tbb::task_arena::execute`` calls.
 

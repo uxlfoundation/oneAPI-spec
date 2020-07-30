@@ -49,8 +49,8 @@ A ``partitioner`` type may be one of the following entities:
 
 Requirements:
 
-* The ``Range`` type shall meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
-* The ``Body`` type shall meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
+* The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
+* The ``Body`` type must meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
 
 A ``tbb::parallel_for(first,last,step,f)`` overload represents parallel execution of the loop:
 
@@ -76,18 +76,18 @@ This late destruction is not an issue in typical usage, but is something to be a
 when looking at execution traces or writing range or body objects with complex side effects.
 
 ``parallel_for`` may execute iterations in non-deterministic order.
-Do not rely upon any particular execution order for correctness. However, for efficiency, do expect
+Do not rely on any particular execution order for correctness. However, for efficiency, do expect
 ``parallel_for`` to tend towards operating on consecutive runs of values.
 
-In case of serial execution ``parallel_for`` performs iterations from left to right in the following sense.
+In case of serial execution, ``parallel_for`` performs iterations from left to right in the following sense.
 
 All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
 
 **Complexity**
 
 If the range and body take *O(1)* space, and the range splits into nearly equal pieces,
-then the space complexity is *O(P log(N))*, where *N* is the size of the range and *P* is the number of threads.
+the space complexity is *O(P log(N))*, where *N* is the size of the range and *P* is the number of threads.
 
 See also:
 

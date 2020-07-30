@@ -3,8 +3,8 @@ Predefined Concurrency Limits
 =============================
 **[flow_graph.concurrency_limits]**
 
-Predefined constants that may be used as ``function_node``, ``multifunction_node`` and ``async_node``
-constuctors arguments to define concurrency limit.
+Predefined constants that can be used as ``function_node``, ``multifunction_node``, and ``async_node``
+constructors arguments to define concurrency limit.
 
 .. code:: cpp
 

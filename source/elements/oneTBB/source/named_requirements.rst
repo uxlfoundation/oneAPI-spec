@@ -3,7 +3,7 @@ Named Requirements
 ==================
 **[named_requirements]**
 
-This section describes named requirements used in the oneAPI Threading Building Blocks Specification.
+This section describes named requirements used in the oneTBB Specification.
 
 A *named requirement* is a set of requirements on a type. The requirements may be syntactic or semantic.
 The *named_requirement* term is similar to “Requirements on types and expressions” term which is defined
@@ -21,7 +21,7 @@ You can write a sorting template function in C++ that sorts an array of any type
 Two approaches for defining named requirements are *valid expressions* and *pseudo-signatures*.
 The ISO C++ standard follows the valid *expressions* approach, which shows what the usage pattern looks like for a requirement.
 It has the drawback of relegating important details to notational conventions. This document uses
-pseudo-signatures, because they are concise, and can be cut-and-pasted for an initial implementation.
+pseudo-signatures because they are concise and can be cut-and-pasted for an initial implementation.
 
 For example, the table below shows pseudo-signatures for a *sortable* type ``T``:
 

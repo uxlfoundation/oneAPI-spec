@@ -92,15 +92,15 @@ Member functions
 .. cpp:function:: T& local( bool& exists )
 
     Similar to ``local()``, except that *exists* is set to true
-    if an element was already present for the current thread; false otherwise.
+    if an element was already present for the current thread; false, otherwise.
 
     **Returns**: Reference to thread-local element.
 
 .. cpp:function:: template<typename BinaryFunc> T combine(BinaryFunc f)
 
-    **Requires**: A ``BinaryFunc`` shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    **Requires**: A ``BinaryFunc`` must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
     Specifically, the type should be an associative binary functor with the signature ``T BinaryFunc(T,T)`` or ``T BinaryFunc(const T&,const T&)``.
-    A ``T`` type must be the same as a corresponding template parameter for ``combinable`` object.
+    A ``T`` type must be the same as a corresponding template parameter for the ``combinable`` object.
 
     **Effects**: Computes a reduction over all elements using binary functor *f*.
     All evaluations of *f* are done sequentially in the calling thread.
@@ -110,9 +110,9 @@ Member functions
 
 .. cpp:function:: template<typename UnaryFunc> void combine_each(UnaryFunc f)
 
-    **Requires**: An ``UnaryFunc`` shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
-    Specifically, the type should be an unary functor with the signature ``void UnaryFunc(T)`` or ``void UnaryFunc(T&)`` or ``void UnaryFunc(const T&)``
-    A ``T`` type must be the same as a corresponding template parameter for ``enumerable_thread_specific`` object.
+    **Requires**: An ``UnaryFunc`` must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    Specifically, the type should be an unary functor with the one of the signatures: ``void UnaryFunc(T)``, ``void UnaryFunc(T&)``, or ``void UnaryFunc(const T&)``
+    A ``T`` type must be the same as a corresponding template parameter for the ``enumerable_thread_specific`` object.
 
     **Effects**: Evaluates *f(x)* for each thread-local element *x* in ``*this``.
     All evaluations are done sequentially in the calling thread.

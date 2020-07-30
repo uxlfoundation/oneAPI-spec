@@ -4,10 +4,9 @@ Range
 **[req.range]**
 
 A `Range` can be recursively subdivided into two parts. Subdivision is done by calling
-*splitting constructor* of `Range`. There are two types of splitting constructors:
+*splitting constructor* of a `Range`. There are two types of splitting constructors:
 
-* Basic splitting constructor. It is recommended that the division be into nearly equal parts
-  in this constructor, but it is not required. Splitting as evenly as possible typically yields
+* Basic splitting constructor. In this constructor, it is recommended that the division is done into nearly equal parts, but it is not required. Splitting as evenly as possible typically yields
   the best parallelism.
 * Proportional splitting constructor. This constructor is optional and can be omitted.
   When using this type of constructor, for the best results, follow the given proportion
@@ -15,23 +14,23 @@ A `Range` can be recursively subdivided into two parts. Subdivision is done by c
 
 Ideally, a range is recursively splittable until the parts represent portions of work that
 are more efficient to execute serially rather than split further. The amount of work represented
-by a Range typically depends upon higher level context, hence a typical type that models a
-Range should provide a way to control the degree of splitting. For example, the template class
+by `Range` typically depends on higher level context, therefore a typical type that models a
+`Range` should provide a way to control the degree of splitting. For example, the template class
 :doc:`blocked_range <../../algorithms/blocked_ranges/blocked_range_cls>`
-has a *grainsize* parameter that specifies the biggest range considered indivisible.
+has the *grainsize* parameter that specifies the biggest range considered indivisible.
 
-If the set of values has a sense of direction, then by convention the splitting constructor
-should construct the second part of the range, and update its argument to be the first part
-of the range. This enables :doc:`parallel_for <../../algorithms/functions/parallel_for_func>`,
-:doc:`parallel_reduce <../../algorithms/functions/parallel_reduce_func>` and
+If the set of values has a sense of direction, by convention the splitting constructor
+should construct the second part of the range and update its argument to be the first part
+of the range. This causes the :doc:`parallel_for <../../algorithms/functions/parallel_for_func>`,
+:doc:`parallel_reduce <../../algorithms/functions/parallel_reduce_func>`, and
 :doc:`parallel_scan <../../algorithms/functions/parallel_scan_func>` algorithms,
-when running sequentially, to work across a range in the increasing order, typical of an ordinary sequential loop.
+when running sequentially, to work across a range in the increasing order, which is typical of an ordinary sequential loop.
 
-Since a Range declares a splitting and copy constructors, the default constructor for it will not
-be automatically generated. You will need to explicitly define the default constructor or add any
-other constructor to create an instance of Range type in the program.
+Because a `Range` declares splitting and copy constructors, the default constructor for it is not generated automatically. 
+You need to explicitly define the default constructor or add any
+other constructor to create an instance of a `Range` type in the program.
 
-A type `R` meets the `Range` if it satisfies the following requirements:
+A type `R` meets `Range` if it satisfies the following requirements:
 
 -----------------------------------------------------
 

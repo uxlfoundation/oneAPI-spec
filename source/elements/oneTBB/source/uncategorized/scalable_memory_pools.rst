@@ -4,7 +4,7 @@ Scalable Memory Pools
 
 Memory pools allocate and free memory from a
 specified region or underlying allocator providing thread-safe, scalable
-operations. The following table summarizes the memory pool concept. Here, P
+operations. The following table summarizes the memory pool concept. Here P
 represents an instance of the memory pool class.
 
 = ========================================================================================

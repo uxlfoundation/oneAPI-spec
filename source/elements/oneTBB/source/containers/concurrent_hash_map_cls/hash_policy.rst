@@ -9,7 +9,7 @@ Rehashing
 
         void rehash( size_type n = 0 );
 
-    If ``n > 0`` sets the number of buckets to the value which is not less than ``n``.
+    If ``n > 0``, sets the number of buckets to the value that is not less than ``n``.
 
 bucket_count
 ------------

@@ -3,13 +3,12 @@ filter
 ======
 **[algorithms.parallel_pipeline.filter]**
 
-A ``filter`` class template represents a filter in a ``parallel_pipeline`` algorithm.
+A ``filter`` class template represents a strongly-typed filter in a ``parallel_pipeline`` algorithm, 
+with its template parameters specifying the filter input and output types.
+A ``filter`` can be constructed from a functor or by composing two ``filter`` objects with
+``operator&()``. The same ``filter`` object can be reused in multiple ``&`` expressions.
 
-A ``filter`` is a strongly-typed filter that specifies its input and output types.
-A ``filter`` can be constructed from a functor or by composing of two ``filter`` objects with
-``operator&()``. The same ``filter`` object can be shared by multiple ``&`` expressions.
-
-Class ``filter`` should only be used in conjunction with ``parallel_pipeline`` functions.
+The ``filter`` class should only be used in conjunction with ``parallel_pipeline`` functions.
 
 .. code:: cpp
 
@@ -43,10 +42,10 @@ Class ``filter`` should only be used in conjunction with ``parallel_pipeline`` f
 
 Requirements:
 
-* If `InputType` is ``void`` then ``Body`` type shall meet the :doc:`StartFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-* If `OutputType` is ``void`` then ``Body`` type shall meet the :doc:`OutputFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-* If `InputType` and `OutputType` are not ``void`` then ``Body`` type shall meet the :doc:`MiddleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-* If `InputType` and `OutputType` are ``void`` then ``Body`` type shall meet the :doc:`SingleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+* If `InputType` is ``void``, a ``Body`` type must meet the :doc:`StartFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+* If `OutputType` is ``void``, a ``Body`` type must meet the :doc:`OutputFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+* If `InputType` and `OutputType` are not ``void``, a ``Body`` type must meet the :doc:`MiddleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+* If `InputType` and `OutputType` are ``void``, a ``Body`` type must meet the :doc:`SingleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
 
 filter_mode Enumeration
 -----------------------
@@ -60,7 +59,7 @@ Member functions
 
 .. cpp:function:: filter()
 
-    Construct an undefined filter.
+    Constructs an undefined filter.
 
     .. caution::
 
@@ -69,13 +68,12 @@ Member functions
 .. cpp:function:: template<typename Body> \
                   filter( filter_mode mode, const Body& body )
 
-    Construct a ``filter`` that uses a copy of a provided ``body`` to map an input value
-    of type *InputType* to an output value of type *OutputType*. Each filter must be specified
-    by ``filter_mode`` value.
+    Constructs a ``filter`` that uses a copy of a provided ``body`` to map an input value
+    of type *InputType* to an output value of type *OutputType*, and that operates in the specified ``mode``.
 
 .. cpp:function:: void clear()
 
-    Set ``*this`` to an undefined filter.
+    Sets ``*this`` to an undefined filter.
 
 Non-member functions
 --------------------
@@ -101,6 +99,6 @@ Deduction Guides
 
 Where:
 
-* ``filter_input<Body>`` is an alias to ``Body::operator()`` input parameter type.
+* ``filter_input<Body>`` is an alias to the ``Body::operator()`` input parameter type.
   If ``Body::operator()`` input parameter type is ``flow_control`` then ``filter_input<Body>`` is ``void``.
-* ``filter_output<Body>`` is an alias to ``Body::operator()`` return type.
+* ``filter_output<Body>`` is an alias to the ``Body::operator()`` return type.

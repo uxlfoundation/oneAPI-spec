@@ -5,8 +5,8 @@ tbb_allocator
 
 A ``tbb_allocator`` is a class template that models the allocator requirements from the [allocator.requirements] ISO C++ section.
 
-The ``tbb_allocator`` allocates and frees memory via the oneAPI Threading Building Blocks malloc library if it is available,
-otherwise it reverts to using ``std::malloc`` and ``std::free``.
+The ``tbb_allocator`` allocates and frees memory via the oneTBB malloc library if it is available,
+otherwise, it reverts to using ``std::malloc`` and ``std::free``.
 
 .. code:: cpp
 
@@ -51,7 +51,7 @@ Member Functions
 
 .. cpp:function:: static malloc_type allocator_type()
 
-    Returns the enumeration type ``malloc_type::scalable`` if the oneAPI TBB malloc library is available and ``malloc_type::standard`` otherwise.
+    Returns the enumeration type ``malloc_type::scalable`` if the oneTBB malloc library is available, and ``malloc_type::standard``, otherwise.
 
 Non-member Functions
 --------------------
@@ -67,8 +67,8 @@ These functions provide comparison operations between two ``tbb_allocator`` inst
     bool operator!=(const tbb_allocator<T>&, const tbb_allocator<U>&) noexcept;
 
 The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``tbb_allocator`` objects.
-For example, an implementation may define the classes and functions in the same unspecified internal namespace,
-and define ``tbb::tbb_allocator`` as a type alias for which the non-member functions are reachable only via argument dependent lookup.
+For example, an implementation may define the classes and functions in the same unspecified internal namespace
+and define ``tbb::tbb_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
 
 .. cpp:function:: template<typename T, typename U> \
     bool operator==(const tbb_allocator<T>&, const tbb_allocator<U>&) noexcept

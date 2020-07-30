@@ -5,7 +5,7 @@ proportional split
 
 Type of an argument for a proportional splitting constructor of :doc:`Range <../../named_requirements/algorithms/range>`.
 
-An argument of type ``proportional_split`` may be used by classes that satisfies
+An argument of type ``proportional_split`` may be used by classes that satisfy
 :doc:`Range requirements <../../named_requirements/algorithms/range>` to distinguish a proportional
 splitting constructor from a basic splitting constructor and from a copy constructor, and to suggest a ratio in which a particular instance of
 the class should be split.
@@ -41,15 +41,15 @@ Member functions
 
 .. cpp:function:: std::size_t left() const
 
-    Returns size of the left part of the proportion.
+    Returns the size of the left part of the proportion.
 
 .. cpp:function:: std::size_t right() const
 
-    Returns size of the right part of the proportion.
+    Returns the size of the right part of the proportion.
 
 .. cpp:function:: operator split() const
 
-    Makes ``proportional_split`` implicitly convertible to ``split`` type to use with
+    Makes ``proportional_split`` implicitly convertible to the ``split`` type to use with
     ranges that do not support proportional splitting.
 
 See also:

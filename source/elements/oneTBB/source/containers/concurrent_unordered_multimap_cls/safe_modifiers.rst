@@ -13,9 +13,9 @@ Emplacing elements
         template <typename... Args>
         std::pair<iterator, bool> emplace( Args&&... args )
 
-    Inserts an element ,constructed in-place from ``args`` into the container.
+    Inserts an element constructed in-place from ``args`` into the container.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
 ---------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Emplacing elements
         template <typename... Args>
         iterator emplace_hint( const_iterator hint, Args&&... args )
 
-    Inserts an element ,constructed in-place from ``args`` into the container.
+    Inserts an element constructed in-place from ``args`` into the container.
 
     Optionally uses the parameter ``hint`` as a suggestion to where the node should be placed.
 
@@ -40,7 +40,7 @@ Inserting values
 
     Inserts the value ``value`` into the container.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
 ---------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ Inserting sequences of elements
     Inserts all items from the half-open interval ``[first, last)`` into the container.
 
     **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator`
-    from ``[input.iterators]`` ISO C++ Standard section.
+    from the ``[input.iterators]`` ISO C++ Standard section.
 
 ---------------------------------------------------------------------------------------------
 
@@ -136,7 +136,7 @@ Inserting nodes
 
     If the node handle ``nh`` is empty, does nothing.
 
-    Otherwise - inserts the node, owned by ``nh`` into the container.
+    Otherwise, inserts the node owned by ``nh`` into the container.
 
     ``nh`` is left in an empty state.
 
@@ -144,7 +144,7 @@ Inserting nodes
 
     The behavior is undefined if ``nh`` is not empty and ``get_allocator() != nh.get_allocator()``.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
 ---------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ Inserting nodes
 
     If the node handle ``nh`` is empty, does nothing.
 
-    Otherwise - inserts the node, owned by ``nh`` into the container.
+    Otherwise, inserts the node owned by ``nh`` into the container.
 
     Optionally uses the parameter ``hint`` as a suggestion to where the node should be placed.
 

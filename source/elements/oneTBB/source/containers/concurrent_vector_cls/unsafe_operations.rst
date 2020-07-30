@@ -71,7 +71,7 @@ swap
 
     Swaps allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_swap::value`` is ``true``.
 
-    Otherwise if ``get_allocator() != other.get_allocator()`` the behavior is undefined.
+    Otherwise, if ``get_allocator() != other.get_allocator()``, the behavior is undefined.
 
     **Exceptions**: ``noexcept`` specification:
 

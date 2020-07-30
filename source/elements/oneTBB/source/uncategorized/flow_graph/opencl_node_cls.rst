@@ -121,7 +121,7 @@ simplifies work with OpenCL entities (devices, memory buffers, kernels, ND-range
 
 By default, ``opencl_node`` binds the first input port to the first kernel argument,
 the second input port to the second kernel argument and so on.
-The ``set_args`` method of ``opencl_node`` allows to bind a specific value to each kernel argument,
+The ``set_args`` method of ``opencl_node`` allows binding a specific value to each kernel argument,
 if they do not change from run to run. To specify that the value should be taken from the input port instead,
 use the ``port_ref`` helper function. See its description and usage examples in the ``streaming_node``
 section of the documentation.

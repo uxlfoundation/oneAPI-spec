@@ -13,7 +13,7 @@ Empty container constructors
 
         explicit concurrent_priority_queue( const Compare& compare, const allocator_type& alloc );
 
-    Constructs empty ``concurrent_priority_queue``. The initial capacity is unspecified. If provided
+    Constructs an empty ``concurrent_priority_queue``. The initial capacity is unspecified. If provided,
     uses the predicate ``compare`` for priority comparisons and the allocator ``alloc`` to allocate
     the memory.
 
@@ -26,8 +26,8 @@ Empty container constructors
                                    const Compare& compare,
                                    const allocator_type& alloc = allocator_type() );
 
-    Constructs empty ``concurrent_priority_queue`` with the initial capacity ``init_capacity``.
-    If provided uses the predicate ``compare`` for priority comparisons and the allocator ``alloc``
+    Constructs an empty ``concurrent_priority_queue`` with the initial capacity ``init_capacity``.
+    If provided, uses the predicate ``compare`` for priority comparisons and the allocator ``alloc``
     to allocate the memory.
 
 Constructors from the sequence of elements
@@ -47,10 +47,10 @@ Constructors from the sequence of elements
     Constructs a ``concurrent_priority_queue`` containing all elements from the half-open interval
     ``[first, last)``.
 
-    If provided uses the predicate ``compare`` for priority comparisons and the allocator ``alloc``
+    If provided, uses the predicate ``compare`` for priority comparisons and the allocator ``alloc``
     to allocate the memory.
 
-    **Requirements**: the type ``InputIterator`` shall meet the `InputIterator` requirements from
+    **Requirements**: the type ``InputIterator`` must meet the `InputIterator` requirements from the
     ``[input.iterators]`` ISO C++ Standard section.
 
     .. code:: cpp
@@ -124,7 +124,7 @@ Assignment operators
 
     Replaces all elements in ``*this`` by the copies of the elements in ``other``.
 
-    Copy assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
+    Copy-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
@@ -139,7 +139,7 @@ Assignment operators
 
     ``other`` is left in a valid, but unspecified state.
 
-    Move assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
+    Move-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
@@ -168,7 +168,7 @@ assign
 
     The behavior is undefined in case of concurrent operations with ``*this``.
 
-    **Requirements**: the type ``InputIterator`` shall meet the `InputIterator` requirements from
+    **Requirements**: the type ``InputIterator`` must meet the `InputIterator` requirements from the
     ``[input.iterators]`` ISO C++ Standard section.
 
     .. code:: cpp

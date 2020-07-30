@@ -19,7 +19,7 @@ A base class for all graph nodes.
     } // namespace flow
     } // namespace tbb
 
-The class ``graph_node`` is a base class for all flow graph nodes.
+The ``graph_node`` class is a base class for all flow graph nodes.
 The virtual destructor allows flow graph nodes to be destroyed through pointers to ``graph_node``.
-For example, a ``vector< graph_node * >`` could be used to hold the addresses of flow graph nodes
-that will later need to be destroyed.
+For example, a ``vector< graph_node * >`` can be used to hold the addresses of flow graph nodes
+that will need to be destroyed later.

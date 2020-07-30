@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_set`` supports class template argument
+Where possible, constructors of ``concurrent_set`` support class template argument
 deduction (since C++17):
 
 .. code:: cpp
@@ -33,7 +33,7 @@ deduction (since C++17):
     concurrent_set( std::initializer_list<T>, Allocator )
     -> concurrent_set<T, std::less<Key>, Allocator>;
 
-Where the type alias ``iterator_value_t`` defines as follows:
+Where the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 

@@ -14,7 +14,7 @@ Inserting values
 
     Inserts the value ``value`` into the container.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
 ---------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ Inserting values
 
     ``value`` is left in a valid, but unspecified state.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
 ---------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ Inserting sequences of elements
 
     Inserts all items from the half-open interval ``[first, last)`` into the container.
 
-    **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator` from
+    **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator` from the
     ``[input.iterators]`` ISO C++ Standard section.
 
 ---------------------------------------------------------------------------------------------

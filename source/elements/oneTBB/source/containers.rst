@@ -3,7 +3,7 @@ Containers
 ==========
 **[containers]**
 
-The container classes provided by oneAPI Threading Building Blocks permit multiple threads to
+The container classes provided by oneAPI Threading Building Blocks (oneTBB) permit multiple threads to
 simultaneously invoke certain methods on the same container.
 
 Sequences

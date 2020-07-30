@@ -39,7 +39,7 @@ Erasing elements
 
         size_type unsafe_erase( const key_type& key );
 
-    Removes all element with the key equal to ``key`` if it exists in the container.
+    Removes all element with the key equivalent to ``key`` if it exists in the container.
 
     Invalidates all iterators and references to the removed elements.
 
@@ -52,7 +52,7 @@ Erasing elements
         template <typename K>
         size_type unsafe_erase( const K& key );
 
-    Removes all elements with the key which compares equivalent to ``key``
+    Removes all elements with the key that is equivalent to ``key``
     if it exists in the container.
 
     Invalidates all iterators and references to the removed elements.
@@ -74,7 +74,7 @@ Erasing sequences
 
     Removes all elements from the half-open interval ``[first, last)`` from the container.
 
-    **Returns**: ``iterator`` which follows the last removed element.
+    **Returns**: ``iterator`` that follows the last removed element.
 
     **Requirements**: the range ``[first, last)`` must be a valid subrange in ``*this``.
 
@@ -104,19 +104,19 @@ Extracting nodes
 
         node_type unsafe_extract( const key_type& key );
 
-    If at least one element with the key equal to ``key`` exists, transfers ownership of this element
+    If at least one element with the key equivalent to ``key`` exists, transfers ownership of this element
     from the container to the node handle.
 
     No copy or move constructors of ``value_type`` are performed.
 
-    If there are multiple elements with the key equal to ``key`` exists,
+    If there are multiple elements with the key equivalent to ``key``,
     it is unspecified which element should be transfered.
 
     Invalidates all iterators to the extracted element.
     Pointers and references to the extracted element remain valid.
 
     **Returns**: the node handle that owns the extracted element or an empty node handle
-    if an element with the key equal to ``key`` was not found.
+    if an element with the key equivalent to ``key`` was not found.
 
 -----------------------------------------------------
 
@@ -125,12 +125,12 @@ Extracting nodes
         template <typename K>
         node_type unsafe_extract( const K& key );
 
-    If at least one element with the key which compares equivalent to ``key`` exists,
+    If at least one element with the key that is equivalent to ``key`` exists,
     transfers ownership of this element from the container to the node handle.
 
     No copy or move constructors of ``value_type`` are performed.
 
-    If there are multiple elements with the key which compares equivalent with ``key`` exists,
+    If there are multiple elements with the key that is equivalent to ``key``,
     it is unspecified which element should be transfered.
 
     Invalidates all iterators to the extracted element. Pointers and references to the
@@ -143,7 +143,7 @@ Extracting nodes
     - ``std::is_convertible<K, const_iterator>::value`` is ``false``.
 
     **Returns**: the node handle that owns the extracted element or an empty node handle if
-    an element with the key which compares equivalent to ``key`` was not found.
+    an element with the key that is equivalent to ``key`` was not found.
 
 swap
 ----
@@ -156,4 +156,4 @@ swap
 
     Swaps allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_swap::value`` is ``true``.
 
-    Otherwise if ``get_allocator() != other.get_allocator()`` the behavior is undefined.
+    Otherwise, if ``get_allocator() != other.get_allocator()``, the behavior is undefined.

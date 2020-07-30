@@ -3,7 +3,7 @@ indexer_node
 ============
 **[flow_graph.indexer_node]**
 
-``indexer_node`` broadcasts messages received at its input ports to
+``indexer_node`` broadcasts messages received at input ports to
 all of its successors. The messages are broadcast individually as they
 are received at each port. The output is a :doc:`tagged message <tagged_msg_cls>`
 that contains a tag and a value; the tag identifies the input port on
@@ -34,7 +34,7 @@ which the message was received.
 
 Requirements:
 
-* The ``T`` type and all types in ``TN`` template parameter pack shall meet the
+* The ``T`` type and all types in ``TN`` template parameter pack must meet the
   `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable` requirements from [copyassignable] ISO C++ Standard
   sections.

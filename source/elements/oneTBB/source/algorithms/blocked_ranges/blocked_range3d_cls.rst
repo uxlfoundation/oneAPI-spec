@@ -3,7 +3,7 @@ blocked_range3d
 ===============
 **[algorithms.blocked_range3d]**
 
-Class template that represents recursively divisible three-dimensional half-open interval.
+Class template that represents a recursively divisible three-dimensional half-open interval.
 
 A ``blocked_range3d`` is the three-dimensional extension of ``blocked_range2d``.
 
@@ -45,7 +45,7 @@ A ``blocked_range3d`` is the three-dimensional extension of ``blocked_range2d``.
 
 Requirements:
 
-* The *PageValue*, *RowValue* and *ColValue* shall meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
+* The *PageValue*, *RowValue* and *ColValue* must meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
 
 Member types
 ------------
@@ -103,11 +103,11 @@ Basic splitting constructor.
 
 **Requirements**: ``is_divisible()`` is true.
 
-**Effects**: Partitions range into two subranges. The newly constructed ``blocked_range3d`` is approximately
+**Effects**: Partitions ``range`` into two subranges. The newly constructed ``blocked_range3d`` is approximately
 the second half of the original ``range``, and ``range`` is updated to be the remainder.
-Each subrange has the same grain size as the original ``range``. The split is either by pages, rows or columns.
+Each subrange has the same grain size as the original ``range``. Splitting is done either by pages, rows, or columns.
 The choice of which axis to split is intended to cause, after repeated splitting, the
-subranges to approach the aspect ratio of the respective page, row and column grain sizes.
+subranges to approach the aspect ratio of the respective page, row, and column grain sizes.
 
 .. code:: cpp
 
@@ -134,7 +134,7 @@ each subrange remain the same as in the original range.
 
     bool is_divisible() const;
 
-**Effects**: Determines if range can be split into subranges.
+**Effects**: Determines if the range can be split into subranges.
 
 **Returns:** ``pages().is_divisible()||rows().is_divisible()||cols().is_divisible()``
 

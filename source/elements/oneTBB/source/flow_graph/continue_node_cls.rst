@@ -40,18 +40,18 @@ A node that executes a specified body object when triggered.
 
 Requirements:
 
-* The type ``Output`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
+* The type ``Output`` must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
-* The type ``Policy`` may be specified as :doc:`lightweight policy<functional_node_policies>` or defaulted.
-* The type ``Body`` shall meet the :doc:`ContinueNodeBody requirements <../named_requirements/flow_graph/continue_node_body>`.
+* The type ``Policy`` can be specified as :doc:`lightweight policy<functional_node_policies>` or defaulted.
+* The type ``Body`` must meet the :doc:`ContinueNodeBody requirements <../named_requirements/flow_graph/continue_node_body>`.
 
-A ``continue_node`` is a ``graph_node``, ``receiver<continue_msg>`` and ``sender<Output>``.
+A ``continue_node`` is a ``graph_node``, ``receiver<continue_msg>``, and ``sender<Output>``.
 
 This node is used for nodes that wait for their predecessors to complete before executing, but no
 explicit data is passed across the incoming edges.
 
 A ``continue_node`` maintains an internal threshold that defines the number of predecessors.
-This value may be provided at construction. Call of the :doc:`make_edge function <make_edge_func>`
+This value can be provided at construction. Call of the :doc:`make_edge function <make_edge_func>`
 with ``continue_node`` as a receiver increases its threshold. Call of the
 :doc:`remove_edge function <remove_edge_func>` with ``continue_node`` as a receiver
 decreases it.
@@ -61,10 +61,11 @@ and the node starts counting the number of ``try_put()`` calls from the beginnin
 
 ``continue_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
 
-The body object passed to a ``continue_node`` is copied. Therefore updates to member variables will
+The body object passed to a ``continue_node`` is copied. Updates to member variables do
 not affect the original object used to construct the node. If the state held within a body object
 must be inspected from outside of the node, the :doc:`copy_body function <copy_body_func>` can be
 used to obtain an updated copy.
+
 
 Member functions
 -----------------
@@ -77,7 +78,7 @@ Member functions
 
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to 0.
 
-Allows to specify :doc:`node priority<node_priorities>`.
+This function specifies :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -89,7 +90,7 @@ Allows to specify :doc:`node priority<node_priorities>`.
 
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to 0.
 
-Allows to specify :doc:`lightweight policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
+This function specifies :doc:`lightweight policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -102,7 +103,7 @@ Allows to specify :doc:`lightweight policy<functional_node_policies>` and :doc:`
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
 ``number_of_predecessors``.
 
-Allows to specify :doc:`node priority<node_priorities>`.
+This function specifies :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -115,7 +116,7 @@ Allows to specify :doc:`node priority<node_priorities>`.
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
 ``number_of_predecessors``.
 
-Allows to specify :doc:`lightweight policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
+This function specifies :doc:`lightweight policy<functional_node_policies>` and :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
@@ -135,9 +136,9 @@ Constructs a ``continue_node`` that invokes ``body``. The internal threshold is 
 
 Constructs a ``continue_node`` that has the same initial state that ``src`` had after its
 construction. It does not copy the current count of ``try_puts`` received, or the current
-known number of predecessors. The ``continue_node`` that is constructed will have a
-reference to the same ``graph`` object as ``src``, have a copy of the initial ``body``
-used by ``src``, and only have a non-zero threshold if ``src`` was constructed with a
+known number of predecessors. The ``continue_node`` that is constructed has a
+reference to the same ``graph`` object as ``src``, has a copy of the initial ``body``
+used by ``src``, and only has a non-zero threshold if ``src`` is constructed with a
 non-zero threshold.
 
 The new body object is copy-constructed from a copy of the original body provided to ``src``
@@ -187,7 +188,7 @@ Deduction Guides
 Where:
 
 * ``continue_output_t<Output>`` is an alias to `Output` template argument type. If `Output` specified
-  as ``void`` then ``continue_output_t<Output>`` is an alias to ``continue_msg`` type.
+  as ``void``, ``continue_output_t<Output>`` is an alias to ``continue_msg`` type.
 
 Example
 -------

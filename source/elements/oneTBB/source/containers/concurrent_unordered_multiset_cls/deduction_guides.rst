@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_unordered_multiset`` supports
+Where possible, constructors of ``concurrent_unordered_multiset`` support
 class template argument deduction (since C++17):
 
 .. code:: cpp
@@ -79,8 +79,8 @@ class template argument deduction (since C++17):
                                      std::equal_to<Key>,
                                      Allocator>;
 
-where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_multiset``.
-and the type alias ``iterator_value_t`` defines as follows:
+where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_multiset``
+and the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 

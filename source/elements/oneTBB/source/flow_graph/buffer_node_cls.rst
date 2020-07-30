@@ -3,7 +3,7 @@ buffer_node
 ===========
 **[flow_graph.buffer_node]**
 
-A node that is an unbounded buffer of messages. Messages are forwarded in arbitrary order.
+A node that is an unbounded buffer of messages. Messages are forwarded in an arbitrary order.
 
 .. code:: cpp
 
@@ -28,14 +28,14 @@ A node that is an unbounded buffer of messages. Messages are forwarded in arbitr
 
 Requirements:
 
-* The type ``T`` shall meet the `CopyConstructible` requirements from [copyconstructible]
+* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible]
   ISO C++ Standard sections.
 
-``buffer_node`` is a ``graph_node``, ``receiver<T>`` and ``sender<T>``.
+``buffer_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
 ``buffer_node`` has a `buffering` and `single-push` :doc:`properties <forwarding_and_buffering>`.
 
-``buffer_node`` forwards messages in arbitrary order to a single successor in its successor set.
+``buffer_node`` forwards messages in an arbitrary order to a single successor in its successor set.
 
 Member functions
 ----------------

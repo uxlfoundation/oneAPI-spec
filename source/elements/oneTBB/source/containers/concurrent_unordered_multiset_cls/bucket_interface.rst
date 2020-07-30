@@ -3,8 +3,8 @@ Bucket interface
 ================
 
 The types ``concurrent_unordered_multiset::local_iterator``
-and ``concurrent_unordered_multiset::const_local_iterator`` meets the requirements
-of ``ForwardIterator`` from [forward.iterators] ISO C++ Standard section.
+and ``concurrent_unordered_multiset::const_local_iterator`` meet the requirements
+of ``ForwardIterator`` from the [forward.iterators] ISO C++ Standard section.
 
 These iterators are used to traverse the certain bucket.
 
@@ -34,7 +34,7 @@ Bucket begin and bucket end
 
         const_local_iterator unsafe_cend( size_type n ) const;
 
-    **Returns**: an iterator to the element which follows the last element in
+    **Returns**: an iterator to the element that follows the last element in
     the bucket number ``n``.
 
 The number of buckets

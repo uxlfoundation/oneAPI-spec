@@ -3,7 +3,7 @@ Iterators
 =========
 
 The types ``concurrent_vector::iterator`` and ``concurrent_vector::const_iterator``
-meets the requirements of ``RandomAccessIterator`` from [random.access.iterators]
+meet the requirements of ``RandomAccessIterator`` from the [random.access.iterators]
 ISO C++ Standard section.
 
 begin and cbegin
@@ -30,7 +30,7 @@ end and cend
 
         const_iterator cend() const;
 
-    **Returns**: an iterator to the element which follows the last element in the vector.
+    **Returns**: an iterator to the element that follows the last element in the vector.
 
 rbegin and crbegin
 ------------------
@@ -56,4 +56,4 @@ rend and crend
 
         const_reverse_iterator crend() const;
 
-    **Returns**: a reverse iterator which follows the last element of the reversed vector.
+    **Returns**: a reverse iterator that follows the last element of the reversed vector.

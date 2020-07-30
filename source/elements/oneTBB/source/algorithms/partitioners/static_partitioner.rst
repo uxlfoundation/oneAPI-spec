@@ -3,7 +3,7 @@ static_partitioner
 ==================
 **[algorithms.static_partitioner]**
 
-Specify that a parallel algorithm should distribute the work uniformly across threads and
+Specifies that a parallel algorithm should distribute the work uniformly across threads and
 should not do additional load balancing.
 
 An algorithm with a ``static_partitioner`` distributes the range across threads in subranges
@@ -22,15 +22,15 @@ These subranges are not further split.
 In addition, ``static_partitioner`` uses a deterministic task affinity pattern to hint the task scheduler
 how the subranges should be assigned to threads.
 
-The ``static_partitioner`` class satisfies the *CopyConstructibe* requirement from ISO C++ [utility.arg.requirements] section.
+The ``static_partitioner`` class satisfies the *CopyConstructibe* requirement from the ISO C++ [utility.arg.requirements] section.
 
 .. tip::
 
-   Use of ``static_partitioner`` is recommended for:
+   Use ``static_partitioner`` to:
 
-   * Parallelizing small well-balanced workloads where enabling additional load balancing
-     opportunities would bring more overhead than performance benefits.
-   * Porting OpenMP* parallel loops with ``schedule(static)`` if deterministic
+   * Parallelize small well-balanced workloads where enabling additional load balancing
+     opportunities brings more overhead than performance benefits.
+   * Port OpenMP* parallel loops with ``schedule(static)`` if deterministic
      work partitioning across threads is important.
 
 .. code:: cpp
