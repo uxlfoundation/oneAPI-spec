@@ -60,7 +60,10 @@ Release Notes
   
 * DPC++
 
-  * Revised extensions to refer to SYCL 2020 provisional
+  * Revised requirements to refer to the SYCL 2020 provisional specification where previous
+    extensions have migrated to the SYCL specification directly
+  * Added additional extensions
+  * Added additional requirements against the SYCL 2020 provisional specification
   
 * oneVPL
 
