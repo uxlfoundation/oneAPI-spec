@@ -3,7 +3,7 @@ FilterBody
 ==========
 **[req.filter_body]**
 
-A type `Body` should meet one of the following requiements depending on the filter type:
+A type `Body` should meet one of the following requirements depending on the filter type:
 
 ----------------------------------------------------------------
 
@@ -11,7 +11,7 @@ A type `Body` should meet one of the following requiements depending on the filt
 
 .. cpp:function:: OutputType Body::operator()( InputType item ) const
 
-    Process the received item and then returns it.
+    Processes the received item and then returns it.
 
 ----------------------------------------------------------------
 
@@ -27,7 +27,7 @@ A type `Body` should meet one of the following requiements depending on the filt
 
 .. cpp:function:: void Body::operator()( InputType item ) const
 
-    Process the received item.
+    Processes the received item. 
 
 ----------------------------------------------------------------
 
@@ -35,4 +35,4 @@ A type `Body` should meet one of the following requiements depending on the filt
 
 .. cpp:function:: void Body::operator()( tbb::flow_control fc ) const
 
-    Process element from an input stream. Calls ``fc.stop()`` at the end of an input stream.
+    Processes an element from an input stream. Calls ``fc.stop()`` at the end of an input stream.

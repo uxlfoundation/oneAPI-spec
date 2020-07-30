@@ -13,12 +13,12 @@ Emplacing elements
         template <typename... Args>
         std::pair<iterator, bool> emplace( Args&&... args );
 
-    Inserts an element ,constructed in-place from ``args`` into the container.
+    Inserts an element constructed in-place from ``args`` into the container.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements
     from [container.requirements] ISO C++ section.
 
 -----------------------------------------------------
@@ -28,14 +28,14 @@ Emplacing elements
         template <typename... Args>
         iterator emplace_hint( const_iterator hint, Args&&... args );
 
-    Inserts an element ,constructed in-place from ``args`` into the container.
+    Inserts an element constructed in-place from ``args`` into the container.
 
     Optionally uses the parameter ``hint`` as a suggestion to where the node should be placed.
 
     **Returns**: an ``iterator`` to the inserted element.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ section.
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements
+    from the [container.requirements] ISO C++ section.
 
 Inserting values
 ----------------
@@ -46,10 +46,10 @@ Inserting values
 
     Inserts the value ``value`` into the container.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 -----------------------------------------------------
@@ -64,7 +64,7 @@ Inserting values
 
     **Returns**: an ``iterator`` to the inserted element.
 
-    **Requirements**: the type ``value_type`` shall meet the ``CopyInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 -----------------------------------------------------
@@ -101,10 +101,10 @@ Inserting values
 
     ``value`` is left in a valid, but unspecified state.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
-    **Requirements**: the type ``value_type`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 -----------------------------------------------------
@@ -121,7 +121,7 @@ Inserting values
 
     **Returns**: an ``iterator`` to the inserted element.
 
-    **Requirements**: the type ``value_type`` shall meet the ``MoveInsertable`` requirements from
+    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
 Inserting sequences of elements
@@ -136,7 +136,7 @@ Inserting sequences of elements
     into the container.
 
     **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator`
-    from ``[input.iterators]`` ISO C++ Standard section.
+    from ``[input.iterators]`` the ISO C++ Standard section.
 
 -----------------------------------------------------
 
@@ -155,7 +155,7 @@ Inserting nodes
 
     If the node handle ``nh`` is empty, does nothing.
 
-    Otherwise - nserts the node, owned by ``nh`` into the container.
+    Otherwise, inserts the node owned by ``nh`` into the container.
 
     ``nh`` is left in an empty state.
 
@@ -163,7 +163,7 @@ Inserting nodes
 
     The behavior is undefined if ``nh`` is not empty and ``get_allocator() != nh.get_allocator()``.
 
-    **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element.
+    **Returns**: ``std::pair<iterator, bool>``, where ``iterator`` points to the inserted element.
     Boolean value is always ``true``.
 
 -----------------------------------------------------
@@ -174,7 +174,7 @@ Inserting nodes
 
     If the node handle ``nh`` is empty, does nothing.
 
-    Otherwise - inserts the node, owned by ``nh`` into the container.
+    Otherwise, inserts the node owned by ``nh`` into the container.
 
     Optionally uses the parameter ``hint`` as a suggestion to where the node should be placed.
 

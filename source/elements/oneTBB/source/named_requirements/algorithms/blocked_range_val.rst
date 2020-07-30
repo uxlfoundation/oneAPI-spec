@@ -3,7 +3,7 @@ BlockedRangeValue
 =================
 **[req.blocked_range_value]**
 
-A type `Value` satisfies the `BlockedRangeValue` if it meets the following requirements:
+A type `Value` satisfies `BlockedRangeValue` if it meets the following requirements:
 
 ------------------------------------------------------------------------------------------
 

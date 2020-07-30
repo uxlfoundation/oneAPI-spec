@@ -43,21 +43,21 @@ Member functions
 
 .. cpp:function:: null_mutex()
 
-    Construct unlocked mutex.
+    Constructs unlocked mutex.
 
 .. cpp:function:: ~null_mutex()
 
-    Destroy unlocked mutex.
+    Destroys unlocked mutex.
 
 .. cpp:function:: void lock()
 
-    Acquire lock.
+    Acquires lock.
 
 .. cpp:function:: bool try_lock()
 
-    Try acquiring lock (non-blocking)
+    Tries acquiring lock (non-blocking).
 
 .. cpp:function:: void unlock()
 
-    Release the lock.
+    Releases the lock.
 

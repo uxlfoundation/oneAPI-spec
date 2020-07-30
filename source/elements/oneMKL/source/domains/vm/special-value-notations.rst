@@ -1,4 +1,4 @@
-.. _special-value-notations:
+.. _onemkl_vm_special_value_notations:
 
 Special Value Notations
 =======================
@@ -11,31 +11,31 @@ Special Value Notations
    definitions are provided in text, tables, or formulas.
 
 
-   -  z, z1, z2, etc. denote complex numbers.
+   - z, z1, z2, etc. denote complex numbers.
 
 
-   -  i, ``i2=-1`` is the imaginary unit.
+   - i, ``i2=-1`` is the imaginary unit.
 
 
-   -  x, X, x1, x2, etc. denote real imaginary parts.
+   - x, X, x1, x2, etc. denote real imaginary parts.
 
 
-   -  y, Y, y1, y2, etc. denote imaginary parts.
+   - y, Y, y1, y2, etc. denote imaginary parts.
 
 
-   -  X and Y represent any finite positive IEEE-754 floating point
+   - X and Y represent any finite positive IEEE-754 floating point
       values, if not stated otherwise.
 
 
-   -  Quiet NaN and signaling NaN are denoted with QNAN and SNAN,
+   - Quiet NaN and signaling NaN are denoted with QNAN and SNAN,
       respectively.
 
 
-   -  The IEEE-754 positive infinities or floating-point numbers are
+   - The IEEE-754 positive infinities or floating-point numbers are
       denoted with a ``+`` sign before X, Y, etc.
 
 
-   -  The IEEE-754 negative infinities or floating-point numbers are
+   - The IEEE-754 negative infinities or floating-point numbers are
       denoted with a ``-`` sign before X, Y, etc.
 
 

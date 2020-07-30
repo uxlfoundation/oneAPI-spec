@@ -12,7 +12,7 @@ count
 
         size_type count( const key_type& key );
 
-    **Returns**: the number of elements equal to ``key``.
+    **Returns**: the number of elements equivalent to ``key``.
 
 -----------------------------------------------------
 
@@ -21,7 +21,7 @@ count
         template <typename K>
         size_type count( const K& key );
 
-    **Returns**: the number of elements which compares equivalent with ``key``.
+    **Returns**: the number of elements that are equivalent to ``key``.
 
     This overload only participates in overload resolution if qualified-id
     ``key_compare::is_transparent`` is valid and denotes a type.
@@ -35,7 +35,7 @@ find
 
         const_iterator find( const key_type& key ) const;
 
-    **Returns**: an iterator to the element equal to ``key`` or ``end()``
+    **Returns**: an iterator to the element equivalent to ``key``, or ``end()``
     if no such element exists.
 
 -----------------------------------------------------
@@ -48,8 +48,7 @@ find
         template <typename K>
         const_iterator find( const K& key ) const;
 
-    **Returns**: an iterator to the element which compares equivalent
-    with ``key`` or ``end()`` if no such element exists.
+    **Returns**: an iterator to the element that is equivalent to ``key``, or ``end()`` if no such element exists.
 
     These overloads only participates in overload resolution if qualified-id
     ``key_compare::is_transparent`` is valid and denotes a type.
@@ -61,8 +60,8 @@ contains
 
         bool contains( const key_type& key ) const;
 
-    **Returns**: ``true`` if an element equal to ``key`` exists
-    in the container, ``false`` otherwise.
+    **Returns**: ``true`` if an element equivalent to ``key`` exists
+    in the container; ``false``, otherwise.
 
 -----------------------------------------------------
 
@@ -71,8 +70,7 @@ contains
         template <typename K>
         bool contains( const K& key ) const;
 
-    **Returns**: ``true`` if an element which compares equivalent
-    with ``key`` exists in the container, ``false`` otherwise.
+    **Returns**: ``true`` if an element equivalent to ``key`` exists in the container; ``false``, otherwise.
 
     This overload only participates in overload resolution if qualified-id
     ``key_compare::is_transparent`` is valid and denotes a type.
@@ -87,7 +85,7 @@ lower_bound
         const_iterator lower_bound( const key_type& key ) const;
 
     **Returns**: an iterator to the first element in the container
-    which is `not less` than ``key``.
+    that is `not less` than ``key``.
 
 -----------------------------------------------------
 
@@ -99,10 +97,9 @@ lower_bound
         template <typename K>
         const_iterator lower_bound( const K& key ) const
 
-    **Returns**: an iterator to the first element in the container which
-    compares `not less` with ``key``.
+    **Returns**: an iterator to the first element in the container that is `not less` than ``key``.
 
-    These overloads only participates in overload resolution if qualified-id
+    These overloads only participate in overload resolution if qualified-id
     ``key_compare::is_transparent`` is valid and denotes a type.
 
 upper_bound
@@ -115,7 +112,7 @@ upper_bound
       const_iterator upper_bound( const key_type& key ) const;
 
     **Returns**: an iterator to the first element in the container
-    which is `greater` than ``key``.
+    that compares `greater` than ``key``.
 
 -----------------------------------------------------
 
@@ -128,9 +125,9 @@ upper_bound
       const_iterator upper_bound( const K& key ) const;
 
     **Returns**: an iterator to the first element in the container
-    which compares ``greater`` with ``key``.
+    that compares ``greater`` than ``key``.
 
-    These overloads only participates in overload resolution if qualified-id
+    These overloads only participate in overload resolution if qualified-id
     ``key_compare::is_transparent`` is valid and denotes a type.
 
 equal_range
@@ -142,9 +139,9 @@ equal_range
 
         std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
 
-    **Returns**: if an element equal to ``key`` exists - a pair of iterators
+    **Returns**: if an element equivalent to ``key`` exists, a pair of iterators
     ``{f, l}``, where ``f`` is an iterator to this element, ``l`` is ``std::next(f)``.
-    Otherwise - ``{end(), end()}``.
+    Otherwise, ``{end(), end()}``.
 
 -----------------------------------------------------
 
@@ -156,9 +153,8 @@ equal_range
         template <typename K>
         std::pair<const_iterator, const_iterator> equal_range( const K& key )
 
-    **Returns**: if an element which compares equivalent with ``key`` exists -
-    a pair of iterators ``{f, l}``, where ``f`` is an iterator to this element,
-    ``l`` is ``std::next(f)``. Otherwise - ``{end(), end()}``.
+    **Returns**: if an element equivalent to ``key`` exists, a pair of iterators ``{f, l}``, where ``f`` is an iterator to this element,
+    ``l`` is ``std::next(f)``. Otherwise, ``{end(), end()}``.
 
-    These overloads only participates in overload resolution if qualified-id
+    These overloads only participate in overload resolution if qualified-id
     ``key_compare::is_transparent`` is valid and denotes a type.

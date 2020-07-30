@@ -3,7 +3,7 @@ Iterators
 =========
 
 The types ``concurrent_unordered_set::iterator`` and ``concurrent_unordered_set::const_iterator``
-meets the requirements of ``ForwardIterator`` from [forward.iterators] ISO C++ Standard section.
+meet the requirements of ``ForwardIterator`` from the [forward.iterators] ISO C++ Standard section.
 
 begin and cbegin
 ----------------
@@ -29,4 +29,4 @@ end and cend
 
         const_iterator cend() const;
 
-    **Returns**: an iterator to the element which follows the last element in the container.
+    **Returns**: an iterator to the element that follows the last element in the container.

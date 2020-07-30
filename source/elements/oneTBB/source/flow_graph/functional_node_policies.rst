@@ -3,9 +3,9 @@ Function Nodes Policies
 =======================
 **[flow_graph.function_node_policies]**
 
-``function_node``, ``multifunction_node``, ``async_node`` and ``continue_node`` may be specified
-by ``Policy`` paramater which represented as a set of tag classes. This parameter affects
-node's execution behavior.
+``function_node``, ``multifunction_node``, ``async_node`` and ``continue_node`` can be specified
+by the ``Policy`` parameter, which is represented as a set of tag classes. This parameter affects behavior
+of node execution.
 
 .. code:: cpp
 
@@ -23,20 +23,20 @@ node's execution behavior.
     } // namespace flow
     } // namespace tbb
 
-Each policy class satisfies the the `CopyConstructible` requirements from [copyconstructible]
+Each policy class satisfies the `CopyConstructible` requirements from [copyconstructible]
 ISO C++ Standard sections.
 
 Queueing
 --------
 
-This policy defines behavior for input messages acceptance. ``queueing`` policy means that input
+This policy defines behavior for input messages acceptance. The ``queueing`` policy means that input
 messages that cannot be processed right away are stored in the internal buffer of the node to be
 processed when possible.
 
 Rejecting
 ---------
 
-This policy defines behavior for input messages acceptance. ``rejecting`` policy means that input
+This policy defines behavior for input messages acceptance. The ``rejecting`` policy means that input
 messages that cannot be processed right away are not accepted by the node and it is responsibility
 of a predecessor to handle this.
 

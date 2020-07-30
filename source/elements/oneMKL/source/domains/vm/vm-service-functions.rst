@@ -1,4 +1,4 @@
-.. _vm-service-functions:
+.. _onemkl_vm_service_functions:
 
 VM Service Functions
 ====================
@@ -16,23 +16,23 @@ VM Service Functions
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Function Short Name 
-           -  Description 
-         * -        `set_mode <setmode.html>`__
-           -  Sets the VM mode 
-         * -        `get_mode <get_mode.html>`__
-           -  Gets the VM mode 
-         * -        `set_status <set_status.html>`__
-           -  Sets the VM Error Status 
-         * -        `get_status <get_status.html>`__
-           -  Gets the VM Error Status 
-         * -        `clear_status <clear_status.html>`__
-           -  Clears the VM Error Status 
-         * -        `create_error_handler <create_error_handler.html>`__
-           -  Creates the local VM error handler for a function 
+         * - Function Short Name
+           - Description
+         * - :ref:`onemkl_vm_setmode`
+           - Sets the VM mode
+         * - :ref:`onemkl_vm_get_mode`
+           - Gets the VM mode
+         * - :ref:`onemkl_vm_set_status`
+           - Sets the VM Error Status
+         * - :ref:`onemkl_vm_get_status`
+           - Gets the VM Error Status
+         * - :ref:`onemkl_vm_clear_status`
+           - Clears the VM Error Status
+         * - :ref:`onemkl_vm_create_error_handler`
+           - Creates the local VM error handler for a function
 
 
 **Parent topic:** :ref:`onemkl_vm`

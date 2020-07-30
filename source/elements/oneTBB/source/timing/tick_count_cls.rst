@@ -4,7 +4,7 @@ tick_count class
 **[timing.tick_count]**
 
 A ``tick_count`` is an absolute wall clock timestamp. Two ``tick_count``
-objects may be subtracted to compute wall clock
+objects can be subtracted to compute wall clock
 duration ``tick_count::interval_t``, which can be converted to seconds.
 
 .. code:: cpp
@@ -103,7 +103,9 @@ These functions provide arithmetic binary operations with wall clock timestamps 
    tbb::tick_count::interval_t operator+( const tbb::tick_count::interval_t&, const tbb::tick_count::interval_t& );
    tbb::tick_count::interval_t operator-( const tbb::tick_count::interval_t&, const tbb::tick_count::interval_t& );
 
-The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``tick_count`` and ``tick_count::interval_t`` objects. For example, an implementation may define the classes and functions in the same unspecified internal namespace, and define  ``tbb::tick_count`` as a type alias for which the non-member functions are reachable only via argument dependent lookup. 
+The namespace where these functions are defined is unspecified as long as they may be used in respective binary operation expressions on ``tick_count`` and ``tick_count::interval_t`` objects. 
+For example, an implementation may define the classes and functions in the same unspecified internal namespace, 
+and define  ``tbb::tick_count`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup. 
 
 
 ``tbb::tick_count::interval_t operator-( const tbb::tick_count&, const tbb::tick_count& )``

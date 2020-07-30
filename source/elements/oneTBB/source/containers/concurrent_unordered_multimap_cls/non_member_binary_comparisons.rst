@@ -4,7 +4,7 @@ Non-member binary comparisons
 
 Two objects of ``concurrent_unordered_multimap`` are equal if the following conditions are ``true``:
 
-* They contains an equal number of elements.
+* They contain an equal number of elements.
 * Each group of elements with the same key in one container has the corresponding group of equivalent
   elements in the other container (not necessary in the same order).
 
@@ -15,7 +15,7 @@ Two objects of ``concurrent_unordered_multimap`` are equal if the following cond
     bool operator==( const concurrent_unordered_multimap<Key, T, Hash, KeyEqual, Allocator>& lhs,
                      const concurrent_unordered_multimap<Key, T, Hash, KeyEqual, Allocator>& rhs );
 
-**Returns**: ``true`` if ``lhs`` is equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is equal to ``rhs``; ``false``, otherwise.
 
 ---------------------------------------------------------------------------------------------
 
@@ -28,4 +28,4 @@ Two objects of ``concurrent_unordered_multimap`` are equal if the following cond
 
 Equivalent to ``!(lhs == rhs)``.
 
-**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``, ``false`` otherwise.
+**Returns**: ``true`` if ``lhs`` is not equal to ``rhs``; ``false``, otherwise.

@@ -1,3 +1,4 @@
+.. _onemkl_vm_linearfrac:
 
 linearfrac
 ==========
@@ -11,7 +12,6 @@ linearfrac
 
 
    .. container:: section
-      :name: GUID-EDA7015A-0E9A-42AB-A7E3-AD81C19BE84B
 
 
       .. rubric:: Syntax
@@ -21,35 +21,34 @@ linearfrac
       Buffer API:
 
 
-      .. cpp:function::  void linearfrac(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, T scalea, T shifta, T scaleb, T      shiftb, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::linearfrac(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, T scalea, T shifta, T scaleb, T shiftb, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event linearfrac(queue& exec_queue, int64_t n,      T* a, T* b, T scalea, T shifta, T scaleb, T shiftb, T* y,      vector_class<event>* depends, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::linearfrac(queue& exec_queue, int64_t n, T* a, T* b, T scalea, T shifta, T scaleb, T shiftb, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``linearfrac`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-25BE7C74-FF96-4A0C-B8F7-93ECC1DA05E9
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The linearfrac(a,b,scalea,shifta,scaleb,shiftb) function performs a
+   The linearfrac(a, b, scalea, shifta, scaleb, shiftb) function performs a
    linear fraction transformation of vector ``a`` by vector ``b`` with
    scalar parameters: scaling multipliers scalea, scaleb and shifting
    addends shifta, shiftb:
@@ -61,7 +60,7 @@ linearfrac
    The linearfrac function is implemented in the EP accuracy mode only,
    therefore no special values are defined for this function. If used in
    HA or LA mode, linearfrac sets the VM Error Status to
-   status::accuracy_warning. Correctness is guaranteed within the
+   oneapi::mkl::vm::status::accuracy_warning. Correctness is guaranteed within the
    threshold limitations defined for each input parameter (see the table
    below); otherwise, the behavior is unspecified.
 
@@ -73,18 +72,18 @@ linearfrac
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Threshold Limitations on Input Parameters 
-         * -  ``2EMIN/2≤ |scalea| ≤ 2(EMAX-2)/2`` 
-         * -  ``2EMIN/2≤ |scaleb| ≤ 2(EMAX-2)/2`` 
-         * -  ``|shifta| ≤ 2EMAX-2`` 
-         * -  ``|shiftb| ≤ 2EMAX-2`` 
-         * -  ``2EMIN/2≤a[i] ≤ 2(EMAX-2)/2`` 
-         * -  ``2EMIN/2≤b[i] ≤ 2(EMAX-2)/2`` 
-         * -  ``a[i] ≠ - (shifta/scalea)*(1-δ1), |δ1| ≤ 21-(p-1)/2`` 
-         * -  ``b[i] ≠ - (shiftb/scaleb)*(1-δ2), |δ2| ≤ 21-(p-1)/2`` 
+         * - Threshold Limitations on Input Parameters
+         * - ``2EMIN/2≤ |scalea| ≤ 2(EMAX-2)/2``
+         * - ``2EMIN/2≤ |scaleb| ≤ 2(EMAX-2)/2``
+         * - ``|shifta| ≤ 2EMAX-2``
+         * - ``|shiftb| ≤ 2EMAX-2``
+         * - ``2EMIN/2≤a[i] ≤ 2(EMAX-2)/2``
+         * - ``2EMIN/2≤b[i] ≤ 2(EMAX-2)/2``
+         * - ``a[i] ≠ - (shifta/scalea)*(1-δ1), |δ1| ≤ 21-(p-1)/2``
+         * - ``b[i] ≠ - (shiftb/scaleb)*(1-δ2), |δ2| ≤ 21-(p-1)/2``
 
 
 
@@ -92,13 +91,13 @@ linearfrac
    ``EMIN``\ and ``EMAX`` are the minimum and maximum exponents and
    ``p`` is the number of significant bits (precision) for the
    corresponding data type according to the ANSI/IEEE Standard 754-2008
-   ([`IEEE754 <bibliography.html>`__]):
+   ([:ref:`onemkl_vm_bibliography`]):
 
 
-   -  for single precision\ ``EMIN`` = -126, ``EMAX`` = 127, ``p`` = 24
+   - for single precision\ ``EMIN`` = -126, ``EMAX`` = 127, ``p`` = 24
 
 
-   -  for double precision\ ``EMIN`` = -1022, ``EMAX`` = 1023, ``p`` =
+   - for double precision\ ``EMIN`` = -1022, ``EMAX`` = 1023, ``p`` =
       53
 
 
@@ -106,16 +105,15 @@ linearfrac
    and/or scaleb=0:
 
 
-   -  ifscalea=0, there are no limitations for the values of ``a[i]``
+   - ifscalea=0, there are no limitations for the values of ``a[i]``
       and shifta.
 
 
-   -  ifscaleb=0, there are no limitations for the values of ``b[i]``
+   - ifscaleb=0, there are no limitations for the values of ``b[i]``
       and shiftb.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -159,14 +157,14 @@ linearfrac
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -212,20 +210,19 @@ linearfrac
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -250,31 +247,11 @@ linearfrac
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use linearfrac can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vllinearfrac.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Arithmetic
-      Functions <arithmetic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

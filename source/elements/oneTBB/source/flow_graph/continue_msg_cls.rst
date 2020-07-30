@@ -3,7 +3,7 @@ continue_msg
 ============
 **[flow_graph.continue_msg]**
 
-An empty class that represent a continue message. An object of this class is used to indicate that
+An empty class that represents a continue message. An object of this class is used to indicate that
 the sender has completed.
 
 .. code:: cpp

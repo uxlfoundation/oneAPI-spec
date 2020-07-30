@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_unordered_multimap`` supports
+Where possible, constructors of ``concurrent_unordered_multimap`` support
 class template argument deduction (since C++17):
 
 .. code:: cpp
@@ -88,7 +88,7 @@ class template argument deduction (since C++17):
 
 Where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_multimap``
 and the type aliases ``iterator_key_t``, ``iterator_mapped_t`` and ``iterator_alloc_value_t``
-defines as follows:
+are defined as follows:
 
 .. code:: cpp
 

@@ -1,3 +1,4 @@
+.. _onemkl_vm_ln:
 
 ln
 ==
@@ -10,7 +11,6 @@ ln
 
 
    .. container:: section
-      :name: GUID-8AB5FE38-A52D-44DE-BB89-865CC91BCEAF
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ ln
       Buffer API:
 
 
-      .. cpp:function::  void ln(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::ln(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event ln(queue& exec_queue, int64_t n, T* a, T*      y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::ln(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``ln`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-CD893B76-7F70-46D2-BB55-631EA43FADDD
 
 
    .. rubric:: Description
@@ -56,36 +55,36 @@ ln
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +1 
-           -  +0 
-           -    
-         * -  a <+0 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +0 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  -0 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  -∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +1
+           - +0
+           -  
+         * - a <+0
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +0
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -0
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +∞
+           - +∞
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -93,79 +92,78 @@ ln
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -     RE(a)      i·IM(a)    
-           -     -∞           
-           -     -X           
-           -     -0           
-           -     +0           
-           -     +X           
-           -     +∞           
-           -     NAN           
-         * -  +i·∞ 
-           -  |image0| 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/4 
-           -     +∞+i·QNAN    
-         * -  +i·Y 
-           -  +∞-i·\ ``π`` 
-           -    
-           -    
-           -    
-           -    
-           -  +∞+i·0 
-           -     QNAN+i·QNAN    
-         * -  +i·0 
-           -  +∞-i·\ ``π`` 
-           -    
-           -  -∞+i·\ ``π`` 
-           -  -∞-i·0 
-           -    
-           -  +∞+i·0 
-           -     QNAN+i·QNAN    
-         * -  -i·0 
-           -  +∞-i·\ ``π`` 
-           -    
-           -  -∞+i·\ ``π`` 
-           -  -∞-i·0 
-           -    
-           -  +∞-i·0 
-           -     QNAN+i·QNAN    
-         * -  -i·Y 
-           -  +∞-i·\ ``π`` 
-           -    
-           -    
-           -    
-           -    
-           -  +∞-i·0 
-           -     QNAN+i·QNAN    
-         * -  -i·∞ 
-           -  |image1| 
-           -  +∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/4 
-           -  +∞+i·QNAN 
-         * -  +i·NAN 
-           -     +∞+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     +∞+i·QNAN    
-           -     QNAN+i·QNAN    
+         * - RE(a) i·IM(a)
+           - -∞  
+           - -X  
+           - -0  
+           - +0  
+           - +X  
+           - +∞  
+           - NAN  
+         * - +i·∞
+           - |image0|
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/4
+           - +∞+i·QNAN
+         * - +i·Y
+           - +∞-i·\ ``π``
+           -  
+           -  
+           -  
+           -  
+           - +∞+i·0
+           - QNAN+i·QNAN
+         * - +i·0
+           - +∞-i·\ ``π``
+           -  
+           - -∞+i·\ ``π``
+           - -∞-i·0
+           -  
+           - +∞+i·0
+           - QNAN+i·QNAN
+         * - -i·0
+           - +∞-i·\ ``π``
+           -  
+           - -∞+i·\ ``π``
+           - -∞-i·0
+           -  
+           - +∞-i·0
+           - QNAN+i·QNAN
+         * - -i·Y
+           - +∞-i·\ ``π``
+           -  
+           -  
+           -  
+           -  
+           - +∞-i·0
+           - QNAN+i·QNAN
+         * - -i·∞
+           - |image1|
+           - +∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/4
+           - +∞+i·QNAN
+         * - +i·NAN
+           - +∞+i·QNAN
+           - QNAN+i·QNAN
+           - QNAN+i·QNAN
+           - QNAN+i·QNAN
+           - QNAN+i·QNAN
+           - +∞+i·QNAN
+           - QNAN+i·QNAN
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -189,14 +187,14 @@ ln
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -222,20 +220,19 @@ ln
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -260,32 +257,12 @@ ln
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use ln can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vln.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Exponential and Logarithmic
-      Functions <exponential-and-logarithmic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 
 

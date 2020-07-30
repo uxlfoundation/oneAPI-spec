@@ -2,7 +2,7 @@
 Lookup
 ======
 
-All methods in this section can be executed concurrently with each other,
+All methods in this section can be executed concurrently with each other
 and concurrently-safe modifiers.
 
 find
@@ -14,12 +14,12 @@ find
 
         bool find( accessor& result, const key_type& key );
 
-    If the accessor ``result`` is not empty - releases the ``result``.
+    If the accessor ``result`` is not empty, releases the ``result``.
 
-    If an element with the key equal to ``key`` exists - sets the ``result`` to provide access
+    If an element with the key that is equivalent to ``key`` exists, sets the ``result`` to provide access
     to this element.
 
-    **Returns**: ``true`` if an element with the key equal to ``key`` was found, ``false`` otherwise.
+    **Returns**: ``true`` if an element with the key equivalent to  ``key`` is found; ``false``, otherwise.
 
 count
 -----
@@ -28,4 +28,4 @@ count
 
         size_type count( const key_type& key ) const;
 
-    **Returns**: ``1`` if an element with the key equal to ``key`` exists, ``0`` otherwise.
+    **Returns**: ``1`` if an element with the equivalent to ``key`` exists; ``0``, otherwise.

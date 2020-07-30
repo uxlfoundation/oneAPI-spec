@@ -14,22 +14,22 @@ The type ``H`` satisfies ``HashCompare`` if it meets the following requirements:
 
 .. cpp:function:: H::H( const H& )
 
-    Copy constructor
+    Copy constructor.
 
 .. cpp:function:: H::~H()
 
-    Destructor
+    Destructor.
 
 .. cpp:function:: std::size_t H::hash(const KeyType& k)
 
-    Calculates the hash for provided key.
+    Calculates the hash for a provided key.
 
 .. cpp:function:: ReturnType H::equal(const KeyType& k1, const KeyType& k2)
 
     Requirements:
 
-    * The type ``ReturnType`` should be implicitly convertible to ``bool``
+    * The type ``ReturnType`` should be implicitly convertible to ``bool``.
 
     Compares ``k1`` and ``k2`` for equality.
 
-    If this function returns ``true`` then ``H::hash(k1)`` should be equal to ``H::hash(k2)``.
+    If this function returns ``true``, ``H::hash(k1)`` should be equal to ``H::hash(k2)``.

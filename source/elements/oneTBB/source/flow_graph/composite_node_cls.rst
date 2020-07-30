@@ -59,13 +59,13 @@ A node that encapsulates a collection of other nodes as a first class graph node
     } // namespace tbb
 
 * The ``InputTuple`` and ``OutputTuple`` must be instantiations of ``std::tuple``. Each type that these tuples
-  stores shall meet the `CopyConstructible` requirements from [copyconstructible]
+  store must meet the `CopyConstructible` requirements from [copyconstructible]
   and `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 
-``composite_node`` is a ``graph_node``, ``receiver<T>`` and ``sender<T>``.
+``composite_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
 The ``composite_node`` can package any number of other nodes. It maintains input and output port
-references to nodes in the package that border the ``composite_node``. This allows for the references to
+references to nodes in the package that border the ``composite_node``. This allows the references to
 be used to make edges to other nodes outside of the ``composite_node``. The ``InputTuple`` is a
 tuple of input types. The ``composite_node`` has an input port for each type in ``InputTuple``.
 Likewise, the ``OutputTuple`` is a tuple of output types. The ``composite_node`` has an output port
@@ -93,8 +93,8 @@ Construction of a ``composite_node`` is done in two stages:
 
 * Defining the ``composite_node`` with specification of ``InputTuple`` and ``OutputTuple``.
 * Making aliases from the encapsulated nodes that border the ``composite_node`` to the input and
-  output ports of the ``composite_node``. This step is mandatory as without it the ``composite_node``'s
-  input and output ports would not have been bound to any actual nodes. Making the aliases is achieved
+  output ports of the ``composite_node``. This step is mandatory as without it the ``composite_node``
+  input and output ports are not bound to any actual nodes. Making the aliases is achieved
   by calling the method ``set_external_ports``.
 
 The composite_node does not meet the `CopyConstructible` requirements from [copyconstructible]
@@ -111,7 +111,7 @@ Member functions
 
     Creates input and output ports of the ``composite_node`` as
     aliases to the ports referenced by ``input_ports_tuple`` and
-    ``output_ports_tuple`` respectively. That is, a port referenced at
+    ``output_ports_tuple``, respectively. That is, a port referenced at
     position ``N`` in ``input_ports_tuple`` is mapped as the ``Nth``
     input port of the ``composite_node``, similarly for output ports.
 

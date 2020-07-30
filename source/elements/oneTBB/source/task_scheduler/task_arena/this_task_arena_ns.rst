@@ -27,7 +27,7 @@ with the ``task_arena`` currently used by the calling thread.
 
     A thread index is an integer number between 0 and the ``task_arena`` concurrency level.
     Thread indexes are assigned to both application threads and worker threads on joining an arena and are kept until exiting the arena.
-    Indexes of threads that share an arena are unique - i.e. no two threads within the arena may have the same
+    Indexes of threads that share an arena are unique, that is, no two threads within the arena can have the same
     index at the same time - but not necessarily consecutive.
 
     .. note::
@@ -55,7 +55,7 @@ with the ``task_arena`` currently used by the calling thread.
 
     Runs the specified functor in isolation by restricting the calling thread to process only tasks
     scheduled in the scope of the functor (also called the isolation region). The function returns the value returned by the functor.
-    The ``F`` type shall meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
 
     .. caution::
 

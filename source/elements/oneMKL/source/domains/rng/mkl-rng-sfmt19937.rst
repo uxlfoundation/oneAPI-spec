@@ -1,90 +1,130 @@
-.. _mkl-rng-sfmt19937:
+.. _onemkl_rng_sfmt19937:
 
-onemkl::rng::sfmt19937
-======================
+sfmt19937
+=========
 
+The SIMD-oriented Mersenne Twister pseudorandom number generator.
 
-.. container::
+.. _onemkl_rng_sfmt19937_description:
 
+.. rubric:: Description
 
-   SIMD-oriented Fast Mersenne Twister pseudorandom number generator
-   SFMT19937 [Saito08] with a period length equal to 2\ :sup:`19937`-1
-   of the produced sequence.
+SIMD-oriented Fast Mersenne Twister pseudorandom number generator SFMT19937 [:ref:`Saito08 <onemkl_rng_bibliography>`] with a period length equal to :math:`2 ^ {19937}-1` of the produced sequence. The state of engine contains the array of 156 128-bit integers.
 
+.. container:: section
 
-   .. container:: section
-      :name: GUID-753F13BA-A3C7-4F24-90F1-14B6279BD95C
+    .. rubric:: Generation algorithm
 
+    :math:`w_n = w_0 A \oplus w_M B \oplus w_{n-2} C \oplus w_{n-1} D`
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+    Where :math:`w_0, w_M, w_{n-2}, ...` are the 128-bit integers, and :math:`wA, wB, wC, wD` operations are defined as follows:
 
+    :math:`wA = (w << 8) \oplus w`, left shift of 128-bit integer :math:`w` by :math:`a` followed by exclusive-or operation
 
-      .. container:: dlsyntaxpara
+    :math:`wB = (w >> 8) \& mask`, right shift of each 32-bit integer in quadruple :math:`w` by and-operator with quadruple of 32-bit masks :math:`mask = (0xBFFFFFF6, 0xDFFAFFFF, 0xDDFECB7F, 0xDFFFFFEF)`
 
+    :math:`wC = (w >> 8) \oplus w`, right shift of 128-bit integer :math:`w`
 
-         ::
-	    
-           class sfmt19937 :         internal::engine_base<sfmt19937>{
-           public:
-             sfmt19937 (cl::sycl::queue& queue,         std::uint32_t seed)
-             sfmt19937 (cl::sycl::queue& queue,         std::initializer_list<std::uint32_t> seed)
-             sfmt19937 (const sfmt19937& other)
-             sfmt19937& operator=(const sfmt19937& other)
-             ~sfmt19937()
-           }
+    :math:`wD = (w << 8)`, left shift of each 32-bit integer in quadruple :math:`w`
 
-         .. rubric:: Include Files
-            :class: sectiontitle
+    Integer output: :math:`r_{4n+k} = w_{n}(k)`, where :math:`w_{n}(k)` is the k-th 32-bit integer in quadruple :math:`w_{n}, k = 0, 1, 2, 3`
+
+    :math:`u_n = (int) r_n / 2^{32} + 1/2`
 
 
-         -  mkl_sycl.hpp
+.. _onemkl_rng_sfmt19937_description_syntax:
 
+class sfmt19937
+---------------
 
-         .. rubric:: Description
-            :class: sectiontitle
+.. rubric:: Syntax
 
+.. code-block:: cpp
 
-         SIMD-oriented Fast Mersenne Twister pseudorandom number
-         generator SFMT19937
-         [`Saito08 <bibliography.html>`__]
-         with a period length equal to 2\ :sup:`19937`-1 of the produced
-         sequence.
+    class sfmt19937 {
+    public:
+        sfmt19937(sycl::queue& queue, std::uint32_t seed);
+        sfmt19937(sycl::queue& queue, std::initializer_list<std::uint32_t> seed);
+        sfmt19937(const sfmt19937& other);
+        sfmt19937& operator=(const sfmt19937& other);
+        ~sfmt19937();
+    };
 
+.. cpp:class:: oneapi::mkl::rng::sfmt19937
 
-         .. rubric:: Input Parameters
-            :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Class Members
 
-         .. list-table:: 
-            :header-rows: 1
+    .. list-table::
+        :header-rows: 1
 
-            * -     Name    
-              -     Type    
-              -     Description    
-            * -     queue    
-              -     cl::sycl::queue    
-              -     Valid sycl queue, calls of onemkl::rng::generate()          routine submit kernels in this queue.   
-            * -     seed    
-              -     std::uint32_t /          std::initializer_list<std::uint32_t>   
-              -     Initial conditions of the engine.    
+        * - Routine
+          - Description
+        * - `sfmt19937(sycl::queue& queue, std::uint32_t seed)`_
+          - Constructor for common seed initialization of the engine
+        * - `sfmt19937(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`_
+          - Constructor for extended seed initialization of the engine
+        * - `sfmt19937(const sfmt19937& other)`_
+          - Copy constructor
 
+.. container:: section
 
+    .. rubric:: Constructors
 
+    .. _`sfmt19937(sycl::queue& queue, std::uint32_t seed)`:
 
-         See `VS
-         Notes <bibliography.html>`__ for
-         detailed descriptions.
+    .. cpp:function:: sfmt19937::sfmt19937(sycl::queue& queue, std::uint32_t seed)
 
+    .. container:: section
 
-   .. container:: familylinks
+        .. rubric:: Input Parameters
 
+        queue
+            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
-      .. container:: parentlink
+        seed
+            The initial conditions of the generator state. The initialization algorithm described in [:ref:`Saito08 <onemkl_rng_bibliography>`].
 
+    .. _`sfmt19937(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`:
 
-         **Parent topic:** `Engines (Basic Random Number
-         Generators) <engines-basic-random-number-generators.html>`__
+    .. cpp:function:: sfmt19937::sfmt19937(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)
 
+    .. container:: section
 
-   
+        .. rubric:: Input Parameters
+
+        queue
+            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+
+        seed
+            The initial conditions of the generator state. The initialization algorithm described in [:ref:`Saito08 <onemkl_rng_bibliography>`].
+
+    .. _`sfmt19937(const sfmt19937& other)`:
+
+    .. cpp:function:: sfmt19937::sfmt19937(const sfmt19937& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``sfmt19937`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+
+.. container:: section
+
+    .. rubric:: Subsequence selection functions support
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Support
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Supported
+        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
+          - Not supported
+        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
+          - Not supported
+
+**Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

@@ -12,6 +12,7 @@ The |mkl_full_name| (oneMKL) defines a set of fundamental mathematical routines 
 
 The general assumptions, design features and requirements for the oneMKL library and host-to-device computational routines will be described in :ref:`onemkl_architecture`. 
 The individual domains and their APIs are described in :ref:`onemkl_domains`.  
+Other design considerations that are not necessarily part of the oneMKL specification but that are worth mentioning will be discussed in :ref:`onemkl_appendix`.
 
 
 .. toctree::
@@ -19,3 +20,4 @@ The individual domains and their APIs are described in :ref:`onemkl_domains`.
 
    architecture/architecture.rst
    domains/domains.rst
+   appendix/appendix.rst

@@ -27,11 +27,11 @@ A node that broadcasts incoming messages to all of its successors.
 
 Requirements:
 
-* ``T`` type should meet the `CopyConstructible` requirements from
+* ``T`` type must meet the `CopyConstructible` requirements from
   [copyconstructible] and `CopyAssignable` requirements from
   [copyassignable] ISO C++ Standard section.
 
-``broadcast_node`` is a ``graph_node``, ``receiver<T>`` and ``sender<T>``.
+``broadcast_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
 ``broadcast_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
 
@@ -49,7 +49,7 @@ Member functions
 
   Constructs an object of type ``broadcast_node`` that belongs to the
   same graph ``g`` as ``src``. The list of predecessors, the list of
-  successors and the messages in the buffer are not copied.
+  successors, and the messages in the buffer are not copied.
 
 .. cpp:function:: bool try_put( const input_type &v )
 
@@ -62,5 +62,4 @@ Member functions
 
   If the internal buffer is valid, assigns the value to ``v``.
 
-  **Returns**: ``true`` if ``v`` is assigned to.  ``false`` if ``v``
-  is not assigned to.
+  **Returns**: ``true`` if ``v`` is assigned to; ``false``, otherwise.

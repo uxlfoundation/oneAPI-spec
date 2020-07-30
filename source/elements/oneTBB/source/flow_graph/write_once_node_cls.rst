@@ -3,7 +3,7 @@ write_once_node
 ===============
 **[flow_graph.write_once_node]**
 
-A node that is a buffer of a single item that cannot be over-written.
+A node that is a buffer of a single item that cannot be overwritten.
 
 .. code:: cpp
 
@@ -31,7 +31,7 @@ A node that is a buffer of a single item that cannot be over-written.
 
 Requirements:
 
-* The ``T`` type shall meet the `CopyConstructible` requirements from [copyconstructible] and
+* The ``T`` type must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 
 This type of node buffers a single item of type ``T``. The value is initially invalid. Gets from the node
@@ -65,18 +65,18 @@ Member functions
     Stores ``v`` in the internal single item buffer if it does not contain a valid value already.
     If a new value is set, the node broadcast it to all successors.
 
-    **Returns**: ``true`` for the first time after construction or a call to ``clear()``, ``false``
+    **Returns**: ``true`` for the first time after construction or a call to ``clear()``; ``false``,
     otherwise.
 
 .. cpp:function:: bool try_get( T &v )
 
     If the internal buffer is valid, assigns the value to ``v``.
 
-    **Returns**: ``true`` if ``v`` is assigned to. ``false`` if ``v`` is not assigned to.
+    **Returns**: ``true`` if ``v`` is assigned to; ``false``, otherwise.
 
 .. cpp:function:: bool is_valid( )
 
-  **Returns**: ``true`` if the buffer holds a valid value, otherwise returns ``false``.
+  **Returns**: ``true`` if the buffer holds a valid value; ``false``, otherwise.
 
 .. cpp:function:: void clear( )
 

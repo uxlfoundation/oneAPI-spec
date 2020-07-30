@@ -1,98 +1,152 @@
-.. _mkl-rng-poisson_v:
+.. _onemkl_rng_poisson_v:
 
-onemkl::rng::poisson_v
-======================
+poisson_v
+=========
 
+Class is used for generation of Poisson distributed integer types random numbers with varying mean.
 
-.. container::
+.. _onemkl_rng_poisson_v_description:
 
+.. rubric:: Description
 
-   Generates Poisson distributed random values with varying mean.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-BD0D9835-6217-4576-97E5-6448E9426235
+.. math::
 
+    P(X_i = k) = \frac{\lambda_i^ke^{-\lambda_i}}{k!}, k \in \{0, 1, 2, ... \}.
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-	 
-        template<typename T = std::int32_t, method Method      = gaussian_inverse>
-          class poisson_v {
-          public:
-            poisson_v(std::vector<double> lambda
-            poisson_v(const poisson_v<T, Method>& other)
-            std::vector<double> lambda() const
-            poisson_v<T, Method>& operator=(const      poisson_v<T, Method>& other)
-          }
+    F_{\lambda_i}(x) = \left\{ \begin{array}{rcl} \sum_{k = 0}^{\lfloor x \rfloor} \frac{\lambda_i^ke^{-\lambda_i}}{k!}, x \ge 0 \\ 0, x < 0 \end{array}\right.
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+.. _onemkl_rng_poisson_v_syntax:
 
+class poisson_v
+---------------
 
-      -  mkl_sycl.hpp
+.. rubric:: Syntax
 
+.. code-block:: cpp
 
-      .. rubric:: Description
-         :class: sectiontitle
+    template<typename IntType = std::int32_t, typename Method = poisson_v_method::by_default>
+    class poisson_v {
+    public:
+        using method_type = Method;
+        using result_type = IntType;
+        explicit poisson_v(std::vector<double> lambda);
+        poisson_v(const poisson_v<IntType, Method> & other);
+        std::vector<double> lambda() const;
+    };
 
+.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::poisson_v_method::by_default> \
+                oneapi::mkl::rng::poisson_v
 
-      The onemkl::rng::poisson_v class object is used in the
-      onemkl::rng::generate function to provide ``n`` Poisson distributed
-      random numbers ``x``\ :sub:`i`\ (``i`` = 1, ..., ``n``) with
-      distribution parameter ``λi``, where ``λi∈R``; ``λi > 0``.
+.. container:: section
 
+    .. rubric:: Template parameters
 
-      The probability distribution is given by:
+    .. container:: section
 
+        typename IntType
+            Type of the produced values. Supported types:
+                * ``std::int32_t``
 
-      | 
-      | |image0|
+    .. container:: section
 
+        typename Method = oneapi::mkl::rng::poisson_v_method::by_default
+            Transformation method, which will be used for generation. Supported types:
 
-      The cumulative distribution function is as follows:
+                * ``oneapi::mkl::rng::poisson_v_method::by_default``
+                * ``oneapi::mkl::rng::poisson_v_method::gaussian_icdf_based``
 
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
 
-      | 
-      | |image1|
+.. container:: section
 
+    .. rubric:: Class Members
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+    .. list-table::
+        :header-rows: 1
 
+        * - Routine
+          - Description
+        * - `explicit poisson_v(std::vector<double> lambda)`_
+          - Constructor with parameters
+        * - `poisson_v(const poisson_v<IntType, Method> & other)`_
+          - Copy constructor
+        * - `std::vector<double> lambda() const`_
+          - Method to obtain distribution parameter
 
-      .. list-table:: 
-         :header-rows: 1
+.. container:: section
 
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::gaussian_inverse``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     lambda    
-           -     \ ``std::vector<double>``\     
-           -     Array of ``n`` distribution parameters λ.    
+    .. rubric:: Member types
 
+    .. container:: section
 
+        .. cpp:type:: poisson_v::method_type = Method
 
+        .. container:: section
 
-.. container:: familylinks
+            .. rubric:: Description
 
+            Type which defines transformation method for generation.
 
-   .. container:: parentlink
+    .. container:: section
 
+        .. cpp:type:: poisson_v::result_type = IntType
 
-      **Parent
-      topic:** `Distributions <distributions.html>`__
+        .. container:: section
 
+            .. rubric:: Description
 
+            Type which defines type of generated random numbers.
 
-.. |image0| image:: ../equations/GUID-19F7C7EA-5657-4016-87A6-4E2721994C56-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-BF3DF32F-5256-4DFD-9653-FAD2C740BCA5-low.gif
-   :class: .eq
+.. container:: section
 
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`explicit poisson_v(std::vector<double> lambda)`:
+
+        .. cpp:function:: explicit poisson_v::poisson_v(std::vector<double> lambda)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `lambda` is a distribution parameter.
+
+    .. container:: section
+
+        .. _`poisson_v(const poisson_v<IntType, Method> & other)`:
+
+        .. cpp:function:: poisson_v::poisson_v(const poisson_v<IntType, Method> & other)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Copy constructor.
+
+.. container:: section
+
+    .. rubric:: Characteristics
+
+    .. container:: section
+
+        .. _`std::vector<double> lambda() const`:
+
+        .. cpp:function:: double poisson_v::lambda() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the distribution parameter `lambda`.
+
+**Parent topic:** :ref:`onemkl_rng_distributions`

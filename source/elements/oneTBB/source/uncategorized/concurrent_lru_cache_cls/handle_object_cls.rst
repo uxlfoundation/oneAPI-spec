@@ -40,7 +40,7 @@ from erasing the value which it holds reference to. The reference is released wh
 to a value is released the container is allowed to erase the value.
 
 A ``handle`` object cannot be copied.
-Instead it allows transferring the reference to another ``handle`` instance,
+Instead it allows transferring the reference to another ``handle`` instance
 via implicit conversion to and from ``handle_move_t`` prior to C++11,
 and via move semantics starting from C++11.
 
@@ -99,7 +99,7 @@ members of this class.
   **Supported since C++11.**
   Move constructor transfers the reference to a value stored in
   ``concurrent_lru_cache`` from ``src``
-  to the newly constructed object. Upon completion ``src``
+  to the newly constructed object. Upon completion, ``src``
   no longer refers to any value.
 ------------------------------------------------------------------------------------------
 \ ``handle& operator=(handle&& src)``
@@ -107,8 +107,8 @@ members of this class.
   **Supported since C++11.**
   Move assignment operator transfers the reference to a value stored in
   ``concurrent_lru_cache`` from ``src`` to
-  ``*this``. If existed, the previous reference held by
-  ``*this`` is released. Upon completion ``src``
+  ``*this``. If exists, the previous reference held by
+  ``*this`` is released. Upon completion, ``src``
   no longer refers to any value.
   
   **Returns**: ``*this``.
@@ -120,7 +120,7 @@ members of this class.
   ``handle& operator=(handle_move_t m)``
 
   **Supported until C++11.**
-  Enable a ``handle`` object to be constructed and assigned from 
+  Enables a ``handle`` object to be constructed and assigned from 
   a ``handle_move_t`` object. Together with convertors to
   ``handle_move_t`` described below, these methods allow
   transferring references to ``concurrent_lru_cache`` items
@@ -135,8 +135,8 @@ members of this class.
   **Supported until C++11.** A conversion operator and
   a free-standing friend function to transfer the reference held by
   a ``handle`` object to a temporary ``handle_move_t`` object.
-  The conversion operator should not be called directly, instead use
-  the ``move`` function. Upon completion the ``handle``
+  The conversion operator should not be called directly, use
+  the ``move`` function instead. Upon completion, the ``handle``
   object no longer refers to any value.
   
   **Return**: ``handle_move_t`` object
@@ -148,7 +148,7 @@ members of this class.
   
   **Returns**: ``true`` if ``*this``
   holds reference to a value stored in ``concurrent_lru_cache``;
-  ``false`` otherwise.
+  ``false``, otherwise.
 ------------------------------------------------------------------------------------------
 \ ``value_type& value()``
   \

@@ -3,13 +3,13 @@ Notational Conventions
 ======================
 **[notational_conventions]**
 
-The following conventions may be used in this
+The following conventions are used in this
 document.
 
 ==================== ======================================================================================================================================================== ==============================
 Convention           Explanation                                                                                                                                              Example
 ==================== ======================================================================================================================================================== ==============================
-*Italic*             Used for introducing new terms, denotation of terms, placeholders, or titles of manuals.                                                                 The filename consists of the 
+*Italic*             Used for introducing new terms, denotation of terms, placeholders, or titles of documents.                                                                 The filename consists of the 
                                                                                                                                                                               *basename* and the 
                                                                                                                                                                               *extension*.
                                                                                                                                                                               
@@ -29,7 +29,7 @@ Convention           Explanation                                                
 -------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------
 ``Monospace bold``   Emphasizes parts of source code.                                                                                                                         ``x = ( h > 0 ? sizeof(m) : 0xF ) + min;``
 -------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------
-[ ]                  Items enclosed in brackets are optional.                                                                                                                 Fa[c]
+[ ]                  Square brackets indicate that the items enclosed in brackets are optional.                                                                                                                 Fa[c]
                                                                                                                                                                               
                                                                                                                                                                               Indicates 
                                                                                                                                                                               ``Fa`` or 

@@ -1,3 +1,4 @@
+.. _onemkl_vm_atanh:
 
 atanh
 =====
@@ -10,7 +11,6 @@ atanh
 
 
    .. container:: section
-      :name: GUID-2CCDC84B-41CC-4B77-A2A9-504118A2C011
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ atanh
       Buffer API:
 
 
-      .. cpp:function::  void atanh(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::atanh(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event atanh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::atanh(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``atanh`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-3A64A0E2-3410-4737-BFF6-1B95BA6927E6
 
 
    .. rubric:: Description
@@ -57,33 +56,33 @@ atanh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +1 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  -1 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  \|a\| > 1 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  -∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +∞ 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +1
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -1
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - \|a\| > 1
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +∞
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -91,73 +90,73 @@ atanh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -     RE(a)      i·IM(a)    
-           -     -∞           
-           -     -X           
-           -     -0           
-           -     +0           
-           -     +X           
-           -     +∞           
-           -     NAN           
-         * -  +i·∞ 
-           -  -0+i·\ ``π``/2 
-           -  -0+i·\ ``π``/2 
-           -  -0+i·\ ``π``/2 
-           -  +0+i·\ ``π``/2 
-           -  +0+i·\ ``π``/2 
-           -  +0+i·\ ``π``/2 
-           -  +0+i·\ ``π``/2 
-         * -  +i·Y 
-           -  -0+i·\ ``π``/2 
-           -    
-           -    
-           -    
-           -    
-           -  +0+i·\ ``π``/2 
-           -     QNAN+i·QNAN    
-         * -  +i·0 
-           -  -0+i·\ ``π``/2 
-           -    
-           -  -0+i·0 
-           -  +0+i·0 
-           -    
-           -  +0+i·\ ``π``/2 
-           -     QNAN+i·QNAN    
-         * -  -i·0 
-           -  -0-i·\ ``π``/2 
-           -    
-           -  -0-i·0 
-           -  +0-i·0 
-           -    
-           -  +0-i·\ ``π``/2 
-           -     QNAN-i·QNAN    
-         * -  -i·Y 
-           -  -0-i·\ ``π``/2 
-           -    
-           -    
-           -    
-           -    
-           -  +0-i·\ ``π``/2 
-           -     QNAN+i·QNAN    
-         * -  -i·∞ 
-           -  -0-i·\ ``π``/2 
-           -  -0-i·\ ``π``/2 
-           -  -0-i·\ ``π``/2 
-           -  +0-i·\ ``π``/2 
-           -  +0-i·\ ``π``/2 
-           -  +0-i·\ ``π``/2 
-           -  +0-i·\ ``π``/2 
-         * -  +i·NAN 
-           -     -0+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     -0+i·QNAN    
-           -     +0+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     +0+i·QNAN    
-           -     QNAN+i·QNAN    
+         * - RE(a) i·IM(a)
+           - -∞  
+           - -X  
+           - -0  
+           - +0  
+           - +X  
+           - +∞  
+           - NAN  
+         * - +i·∞
+           - -0+i·\ ``π``/2
+           - -0+i·\ ``π``/2
+           - -0+i·\ ``π``/2
+           - +0+i·\ ``π``/2
+           - +0+i·\ ``π``/2
+           - +0+i·\ ``π``/2
+           - +0+i·\ ``π``/2
+         * - +i·Y
+           - -0+i·\ ``π``/2
+           -  
+           -  
+           -  
+           -  
+           - +0+i·\ ``π``/2
+           - QNAN+i·QNAN
+         * - +i·0
+           - -0+i·\ ``π``/2
+           -  
+           - -0+i·0
+           - +0+i·0
+           -  
+           - +0+i·\ ``π``/2
+           - QNAN+i·QNAN
+         * - -i·0
+           - -0-i·\ ``π``/2
+           -  
+           - -0-i·0
+           - +0-i·0
+           -  
+           - +0-i·\ ``π``/2
+           - QNAN-i·QNAN
+         * - -i·Y
+           - -0-i·\ ``π``/2
+           -  
+           -  
+           -  
+           -  
+           - +0-i·\ ``π``/2
+           - QNAN+i·QNAN
+         * - -i·∞
+           - -0-i·\ ``π``/2
+           - -0-i·\ ``π``/2
+           - -0-i·\ ``π``/2
+           - +0-i·\ ``π``/2
+           - +0-i·\ ``π``/2
+           - +0-i·\ ``π``/2
+           - +0-i·\ ``π``/2
+         * - +i·NAN
+           - -0+i·QNAN
+           - QNAN+i·QNAN
+           - -0+i·QNAN
+           - +0+i·QNAN
+           - QNAN+i·QNAN
+           - +0+i·QNAN
+           - QNAN+i·QNAN
 
 
 
@@ -165,17 +164,16 @@ atanh
    Notes:
 
 
-   -  ``atanh(±1±i*0)=±∞±i*0``, and status::sing error is generated
+   - ``atanh(±1±i*0)=±∞±i*0``, and oneapi::mkl::vm::status::sing error is generated
 
 
-   -  ``atanh(CONJ(a))=CONJ(atanh(a))``
+   - ``atanh(CONJ(a))=CONJ(atanh(a))``
 
 
-   -  ``atanh(-a)=-atanh(a)``.
+   - ``atanh(-a)=-atanh(a)``.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -199,14 +197,14 @@ atanh
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -232,20 +230,19 @@ atanh
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -270,31 +267,11 @@ atanh
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use atanh can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vatanh.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Hyperbolic
-      Functions <hyperbolic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

@@ -4,17 +4,17 @@ speculative_spin_mutex
 **[mutex.speculative_spin_mutex]**
 
 A ``speculative_spin_mutex`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>` using a spin lock,
-and for processors which support hardware transactional memory (such as Intel® Transactional Synchronization Extensions (Intel® TSX))
+and for processors that support hardware transactional memory (such as Intel® Transactional Synchronization Extensions (Intel® TSX))
 may be implemented in a way that allows non-contending changes to the protected data to proceed in parallel.
 
 The ``speculative_spin_mutex`` is not fair and not recursive.
 The ``speculative_spin_mutex`` is like a ``spin_mutex``, but it may provide better throughput than
 non-speculative mutexes when the following conditions are met:
 
-* Running on a processor that supports hardware transactional memory;
-* multiple threads can concurrently execute the critical section(s) protected by the mutex, mostly without conflicting.
+* Running on a processor that supports hardware transactional memory.
+* Multiple threads can concurrently execute the critical section(s) protected by the mutex, mostly without conflicting.
 
-Otherwise it performs like a ``spin_mutex``, possibly with worse throughput.
+Otherwise, it performs like a ``spin_mutex``, possibly with worse throughput.
 
 .. code:: cpp
 

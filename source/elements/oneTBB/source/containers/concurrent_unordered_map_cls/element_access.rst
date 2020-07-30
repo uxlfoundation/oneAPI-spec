@@ -11,9 +11,9 @@ at
 
         const value_type& at( const key_type& key ) const;
 
-    **Returns**: a reference to ``item.second`` where ``item`` is the element with the key equal to ``key``.
+    **Returns**: a reference to ``item.second``, where ``item`` is the element with the key equivalent to ``key``.
 
-    **Throws**: ``std::out_of_range`` exception if the element with the key equal to ``key`` is not presented in the container.
+    **Throws**: ``std::out_of_range`` exception if the element with the key equivalent to ``key`` is not presented in the container.
 
 operator[]
 ----------
@@ -22,14 +22,14 @@ operator[]
 
         value_type& operator[]( const key_type& key );
 
-    If the element with the key equal to ``key`` is not presented in the container,
-    inserts a new element, constructed in-place from
+    If the element with the key equivalent to ``key`` is not presented in the container,
+    inserts a new element constructed in-place from
     ``std::piecewise_construct, std::forward_as_tuple(key), std::tuple<>()``.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ Standard section.
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements
+    from the [container.requirements] ISO C++ Standard section.
 
-    **Returns**: a reference to ``item.second`` where ``item`` is the element with the key equal to ``key``.
+    **Returns**: a reference to ``item.second``, where ``item`` is the element with the key equivalent to ``key``.
 
 ---------------------------------------------------------------------------------------------
 
@@ -37,11 +37,11 @@ operator[]
 
         value_type& operator[]( key_type&& key );
 
-    If the element with the key equal to ``key`` is not presented in the container,
-    inserts a new element, constructed in-place from
+    If the element with the key equivalent to ``key`` is not presented in the container,
+    inserts a new element constructed in-place from
     ``std::piecewise_construct, std::forward_as_tuple(std::move(key)), std::tuple<>()``.
 
-    **Requirements**: the type ``value_type`` shall meet the ``EmplaceConstructible`` requirements
-    from [container.requirements] ISO C++ Standard section.
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements
+    from the [container.requirements] ISO C++ Standard section.
 
-    **Returns**: a reference to ``item.second`` where ``item`` is the element with the key equal to ``key``.
+    **Returns**: a reference to ``item.second`` where ``item`` is the element with the key equivalent to ``key``.

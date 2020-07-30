@@ -22,16 +22,16 @@ BLAS-like Extensions
 
          * -     Routines
            -     Description     
-         * -     \ `axpy_batch <axpy_batch.html>`__\   
+         * -     :ref:`onemkl_blas_axpy_batch`   
            -     Computes groups of vector-scalar products added to a vector.
-         * -     \ `gemm_batch <gemm_batch.html>`__\   
+         * -     :ref:`onemkl_blas_gemm_batch`   
            -     Computes groups of matrix-matrix products with general matrices.   
-         * -     \ `trsm_batch <trsm_batch.html>`__\   
+         * -     :ref:`onemkl_blas_trsm_batch`   
            -     Solves a triangular matrix equation for a group of matrices.   
-         * -     \ `gemmt <gemmt.html>`__\   
+         * -     :ref:`onemkl_blas_gemmt`   
            -     Computes a matrix-matrix product with general matrices, but updates
                  only the upper or lower triangular part of the result matrix.
-         * -     \ `gemm_bias <gemm_bias.html>`__\   
+         * -     :ref:`onemkl_blas_gemm_bias`   
            -     Computes a matrix-matrix product using general integer matrices with bias
  
 

@@ -3,401 +3,235 @@
 hegvd
 =====
 
-
-.. container::
-
-
-   Computes all eigenvalues and, optionally, eigenvectors of a real
-   generalized symmetric definite eigenproblem using a divide and
-   conquer method.
-
-
-      ``hegvd`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Computes all eigenvalues and, optionally, eigenvectors of a real
+generalized symmetric definite eigenproblem using a divide and
+conquer method.
 
 .. container:: section
 
+  .. rubric:: Description
 
-   .. rubric:: Description
-      :class: sectiontitle
+``hegvd`` supports the following precisions.
 
+    .. list-table:: 
+       :header-rows: 1
 
-   The routine computes all the eigenvalues, and optionally, the
-   eigenvectors of a complex generalized Hermitian positive-definite
-   eigenproblem, of the form
+       * -  T 
+       * -  ``std::complex<float>`` 
+       * -  ``std::complex<double>`` 
 
+The routine computes all the eigenvalues, and optionally, the
+eigenvectors of a complex generalized Hermitian positive-definite
+eigenproblem, of the form
 
-   ``A*x = λ*B*x, A*B*x = λ*x``, or ``B*A*x = λ*x``.
+:math:`Ax = \lambda Bx, ABx = \lambda x`, or :math:`BAx =\lambda x`.
 
+Here :math:`A` and :math:`B` are assumed to be Hermitian and :math:`B` is also
+positive definite.
 
-   Here ``A`` and ``B`` are assumed to be Hermitian and ``B`` is also
-   positive definite.
+It uses a divide and conquer algorithm.
 
-
-   It uses a divide and conquer algorithm.
-
-
-hegvd (BUFFER Version)
+hegvd (Buffer Version)
 ----------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void onemkl::lapack::hegvd(cl::sycl::queue &queue, std::int64_t itype,      onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a,      std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb,      cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+.. cpp:function::  void oneapi::mkl::lapack::hegvd(cl::sycl::queue &queue, std::int64_t itype,      onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a,      std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb,      cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Input Parameters
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+itype
+   Must be 1 or 2 or 3. Specifies the problem type to be solved:
 
-   queue
-      The queue where the routine should be executed.
+   if :math:`\text{itype} = 1`, the problem type is :math:`Ax = \lambda Bx;`
 
+   if :math:`\text{itype} = 2`, the problem type is :math:`ABx = \lambda x;`
 
-   itype
-      Must be 1 or 2 or 3. Specifies the problem type to be solved:
+   if :math:`\text{itype} = 3`, the problem type is :math:`BAx = \lambda x`.
 
+jobz
+   Must be ``job::novec`` or ``job::vec``.
 
-      if itype\ ``= 1``, the problem type is ``A*x = lambda*B*x;``
+   If ``jobz = job::novec``, then only eigenvalues are computed.
 
+   If ``jobz = job::vec``, then eigenvalues and eigenvectors are
+   computed.
 
-      if itype\ ``= 2``, the problem type is ``A*B*x = lambda*x;``
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``.
 
+   If ``upper_lower = uplo::upper``, ``a`` and ``b`` store the upper
+   triangular part of :math:`A` and :math:`B`.
 
-      if itype\ ``= 3``, the problem type is ``B*A*x = lambda*x``.
+   If ``upper_lower = uplo::lower``, ``a`` and ``b`` stores the lower
+   triangular part of :math:`A` and :math:`B`.
 
+n
+   The order of the matrices :math:`A` and :math:`B` (:math:`0 \le n`).
 
-   jobz
-      Must be ``job::novec`` or ``job::vec``.
+a
+   Buffer, size ``a(lda,*)`` contains the upper or lower triangle of
+   the Hermitian matrix :math:`A`, as specified by upper_lower.
 
+   The second dimension of ``a`` must be at least :math:`\max(1, n)`.
 
-      If ``jobz = job::novec``, then only eigenvalues are computed.
+lda
+   The leading dimension of ``a``; at least :math:`\max(1,n)`.
 
+b
+   Buffer, size ``b(ldb,*)`` contains the upper or lower triangle of
+   the Hermitian matrix :math:`B`, as specified by upper_lower.
 
-      If ``jobz = job::vec``, then eigenvalues and eigenvectors are
-      computed.
+   The second dimension of ``b`` must be at least :math:`\max(1, n)`.
 
+ldb
+   The leading dimension of ``b``; at least :math:`\max(1,n)`.
 
-   upper_lower
-      Must be ``uplo::upper`` or ``uplo::lower``.
-
-
-      If ``upper_lower = uplo::upper``, a and b store the upper
-      triangular part of ``A`` and ``B``.
-
-
-      If ``upper_lower = uplo::lower``, a and b stores the lower
-      triangular part of ``A`` and ``B``.
-
-
-   n
-      The order of the matrices ``A`` and ``B`` (``0≤n``).
-
-
-   a
-      Buffer, size ``a(lda,*)`` contains the upper or lower triangle of
-      the Hermitian matrix ``A``, as specified by upper_lower.
-
-
-      The second dimension of a must be at least ``max(1, n)``.
-
-
-   lda
-      The leading dimension of a; at least ``max(1,n)``.
-
-
-   b
-      Buffer, size ``b(ldb,*)`` contains the upper or lower triangle of
-      the Hermitian matrix ``B``, as specified by upper_lower.
-
-
-      The second dimension of b must be at least ``max(1, n)``.
-
-
-   ldb
-      The leading dimension of b; at least ``max(1,n)``.
-
-
-   scratchpad_size
-      Size of scratchpad memory as a number of floating point elements of type T.
-      Size should not be less than the value returned by :ref:`onemkl_lapack_hegvd_scratchpad_size` function.
-
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_hegvd_scratchpad_size` function.
 
 .. container:: section
 
+  .. rubric:: Output Parameters
+      
+a
+   On exit, if ``jobz = job::vec``, then if :math:`\text{info} = 0`, ``a`` contains
+   the matrix :math:`Z` of eigenvectors. The eigenvectors are normalized
+   as follows:
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
+   if :math:`\text{itype} = 1` or :math:`\text{itype} = 2`, :math:`Z^{H}BZ = I`;
 
+   if :math:`\text{itype} = 3`, :math:`Z^{H}B^{-1}Z = I`;
 
-   a
-      On exit, if ``jobz = job::vec``, then if ``info = 0``, a contains
-      the matrix ``Z`` of eigenvectors. The eigenvectors are normalized
-      as follows:
+   If ``jobz = job::novec``, then on exit the upper triangle (if
+   ``upper_lower = uplo::upper``) or the lower triangle (if
+   ``upper_lower = uplo::lower``) of :math:`A`, including the diagonal,
+   is destroyed.
 
+b
+   On exit, if :math:`\text{info} \le n`, the part of ``b`` containing the matrix is
+   overwritten by the triangular factor :math:`U` or :math:`L` from the
+   Cholesky factorization :math:`B = U^{H}U`\ or :math:`B = LL^{H}`.
 
-      if itype\ ``= 1`` or ``2``, ``Z``\ :sup:`H`\ ``*B*Z = I``;
+w
+   Buffer, size at least :math:`n`. If :math:`\text{info} = 0`, contains the eigenvalues
+   of the matrix :math:`A` in ascending order.
 
-
-      if itype\ ``= 3``, ``Z``\ :sup:`H`\ \*\ ``inv(B)*Z = I``;
-
-
-      If ``jobz = job::novec``, then on exit the upper triangle (if
-      ``upper_lower = uplo::upper``) or the lower triangle (if
-      ``upper_lower = uplo::lower``) of ``A``, including the diagonal,
-      is destroyed.
-
-
-   b
-      On exit, if ``info≤n``, the part of b containing the matrix is
-      overwritten by the triangular factor ``U`` or ``L`` from the
-      Cholesky factorization ``B = U``\ :sup:`H`\ ``*U``\ or ``B`` =
-      ``L``\ \*\ ``L``\ :sup:`H`.
-
-
-   w
-      Buffer, size at least n. If ``info = 0``, contains the eigenvalues
-      of the matrix ``A`` in ascending order.
-
-
-   scratchpad
-      Buffer holding scratchpad memory to be used by routine for storing intermediate results.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
-
-         If ``info=-i``, the ``i``-th parameter had an illegal value.
-
-         For ``info≤n``:
-
-            If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
-            failed to converge; ``i`` indicates the number of off-diagonal elements
-            of an intermediate tridiagonal form which did not converge to zero;
-
-            If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm
-            failed to compute an eigenvalue while working on the submatrix
-            lying in rows and columns ``info/(n+1)`` through
-            ``mod(info, n+1)``.
-
-         For ``info>n``:
-
-            If ``info=n+i``, for ``1≤i≤n``, then the leading minor of
-            order ``i`` of ``B`` is not positive-definite. The factorization
-            of ``B`` could not be completed and no eigenvalues or eigenvectors
-            were computed.
-
-         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
-
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
 hegvd (USM Version)
 ----------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  cl::sycl::event onemkl::lapack::hegvd(cl::sycl::queue &queue, std::int64_t itype,      onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, T *a,      std::int64_t lda, T *b, std::int64_t ldb,      RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+  .. rubric:: Syntax
+      
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::hegvd(cl::sycl::queue &queue, std::int64_t itype,      onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, T *a,      std::int64_t lda, T *b, std::int64_t ldb,      RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
 .. container:: section
 
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
-   .. rubric:: Input Parameters
-      :class: sectiontitle
+itype
+   Must be 1 or 2 or 3. Specifies the problem type to be solved:
 
+   if :math:`\text{itype} = 1`, the problem type is :math:`Ax = \lambda Bx;`
 
-   queue
-      The queue where the routine should be executed.
+   if :math:`\text{itype} = 2`, the problem type is :math:`ABx = \lambda x;`
 
+   if :math:`\text{itype} = 3`, the problem type is :math:`BAx = \lambda x`.
 
-   itype
-      Must be 1 or 2 or 3. Specifies the problem type to be solved:
+jobz
+   Must be ``job::novec`` or ``job::vec``.
 
+   If ``jobz = job::novec``, then only eigenvalues are computed.
 
-      if itype\ ``= 1``, the problem type is ``A*x = lambda*B*x;``
+   If ``jobz = job::vec``, then eigenvalues and eigenvectors are
+   computed.
 
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``.
 
-      if itype\ ``= 2``, the problem type is ``A*B*x = lambda*x;``
+   If ``upper_lower = uplo::upper``, ``a`` and ``b`` store the upper
+   triangular part of :math:`A` and :math:`B`.
 
+   If ``upper_lower = uplo::lower``, ``a`` and ``b`` stores the lower
+   triangular part of :math:`A` and :math:`B`.
 
-      if itype\ ``= 3``, the problem type is ``B*A*x = lambda*x``.
+n
+   The order of the matrices :math:`A` and :math:`B` (:math:`0 \le n`).
 
+a
+   Pointer to array of size ``a(lda,*)`` containing the upper or lower triangle of
+   the Hermitian matrix :math:`A`, as specified by upper_lower.
+   The second dimension of ``a`` must be at least :math:`\max(1, n)`.
 
-   jobz
-      Must be ``job::novec`` or ``job::vec``.
+lda
+   The leading dimension of ``a``; at least :math:`\max(1,n)`.
 
+b
+   Pointer to array of size ``b(ldb,*)`` containing the upper or lower triangle of
+   the Hermitian matrix :math:`B`, as specified by upper_lower.
+   The second dimension of ``b`` must be at least :math:`\max(1, n)`.
 
-      If ``jobz = job::novec``, then only eigenvalues are computed.
+ldb
+   The leading dimension of ``b``; at least :math:`\max(1,n)`.
 
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_hegvd_scratchpad_size` function.
 
-      If ``jobz = job::vec``, then eigenvalues and eigenvectors are
-      computed.
-
-
-   upper_lower
-      Must be ``uplo::upper`` or ``uplo::lower``.
-
-
-      If ``upper_lower = uplo::upper``, a and b store the upper
-      triangular part of ``A`` and ``B``.
-
-
-      If ``upper_lower = uplo::lower``, a and b stores the lower
-      triangular part of ``A`` and ``B``.
-
-
-   n
-      The order of the matrices ``A`` and ``B`` (``0≤n``).
-
-
-   a
-      Pointer to array of size ``a(lda,*)`` containing the upper or lower triangle of
-      the Hermitian matrix ``A``, as specified by upper_lower.
-      The second dimension of ``a`` must be at least ``max(1, n)``.
-
-
-   lda
-      The leading dimension of a; at least ``max(1,n)``.
-
-
-   b
-      Pointer to array of size ``b(ldb,*)`` containing the upper or lower triangle of
-      the Hermitian matrix ``B``, as specified by upper_lower.
-      The second dimension of b must be at least ``max(1, n)``.
-
-
-   ldb
-      The leading dimension of b; at least ``max(1,n)``.
-
-
-   scratchpad_size
-      Size of scratchpad memory as a number of floating point elements of type T.
-      Size should not be less than the value returned by :ref:`onemkl_lapack_hegvd_scratchpad_size` function.
-
-   events
-      List of events to wait for before starting computation. Defaults to empty list.
-
+events
+   List of events to wait for before starting computation. Defaults to empty list.
 
 .. container:: section
 
+  .. rubric:: Output Parameters
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
+a
+   On exit, if ``jobz = job::vec``, then if :math:`\text{info} = 0`, ``a`` contains
+   the matrix :math:`Z` of eigenvectors. The eigenvectors are normalized
+   as follows:
 
+   if :math:`\text{itype} = 1`` or :math:`\text{itype} = 2`, :math:`Z^{H}BZ = I`;
 
-   a
-      On exit, if ``jobz = job::vec``, then if ``info = 0``, a contains
-      the matrix ``Z`` of eigenvectors. The eigenvectors are normalized
-      as follows:
+   if :math:`\text{itype} = 3`, :math:`Z^{H} B^{-1} Z = I`;
 
+   If ``jobz = job::novec``, then on exit the upper triangle (if
+   ``upper_lower = uplo::upper``) or the lower triangle (if
+   ``upper_lower = uplo::lower``) of :math:`A`, including the diagonal,
+   is destroyed.
 
-      if itype\ ``= 1`` or ``2``, ``Z``\ :sup:`H`\ ``*B*Z = I``;
+b
+   On exit, if :math:`\text{info} \le n`, the part of ``b`` containing the matrix is
+   overwritten by the triangular factor :math:`U` or :math:`L` from the
+   Cholesky factorization :math:`B = U^{H}U`\ or :math:`B` =
+   :math:`LL^{H}`.
 
+w
+   Pointer to array of size at least n. If :math:`\text{info} = 0`, contains the eigenvalues
+   of the matrix :math:`A` in ascending order.
 
-      if itype\ ``= 3``, ``Z``\ :sup:`H`\ \*\ ``inv(B)*Z = I``;
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
 
+.. container:: section
 
-      If ``jobz = job::novec``, then on exit the upper triangle (if
-      ``upper_lower = uplo::upper``) or the lower triangle (if
-      ``upper_lower = uplo::lower``) of ``A``, including the diagonal,
-      is destroyed.
+  .. rubric:: Return Values
+         
+Output event to wait on to ensure computation is complete.
 
-
-   b
-      On exit, if ``info≤n``, the part of b containing the matrix is
-      overwritten by the triangular factor ``U`` or ``L`` from the
-      Cholesky factorization ``B = U``\ :sup:`H`\ ``*U``\ or ``B`` =
-      ``L``\ \*\ ``L``\ :sup:`H`.
-
-
-   w
-      Pointer to array of size at least n. If ``info = 0``, contains the eigenvalues
-      of the matrix ``A`` in ascending order.
-
-
-   scratchpad
-      Pointer to scratchpad memory to be used by routine for storing intermediate results.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of problems happened during calculations. The ``info`` code of the problem can be obtained by `get_info()` method of exception object:
-
-         If ``info=-i``, the ``i``-th parameter had an illegal value.
-
-         For ``info≤n``:
-
-            If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
-            failed to converge; ``i`` indicates the number of off-diagonal elements
-            of an intermediate tridiagonal form which did not converge to zero;
-
-            If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm
-            failed to compute an eigenvalue while working on the submatrix
-            lying in rows and columns ``info/(n+1)`` through
-            ``mod(info, n+1)``.
-
-         For ``info>n``:
-
-            If ``info=n+i``, for ``1≤i≤n``, then the leading minor of
-            order ``i`` of ``B`` is not positive-definite. The factorization
-            of ``B`` could not be completed and no eigenvalues or eigenvectors
-            were computed.
-
-         If ``info`` equals to value passed as scratchpad size, and ``get_detail()`` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by ``get_detail()`` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Values
-         :class: sectiontitle
-
-
-      Output event to wait on to ensure computation is complete.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
-
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 

@@ -119,15 +119,15 @@ members of this template class.
 ==========================================================================================
 \ ``explicit memory_pool_allocator(memory_pool &pool)``
   \
-  Constructs memory pool allocator serviced
-  by 
+  Constructs a memory pool allocator serviced
+  by the 
   ``memory_pool``
   instance pool.
 ------------------------------------------------------------------------------------------
 \ ``explicit memory_pool_allocator(fixed_pool &pool)``
   \
-  Constructs memory pool allocator serviced
-  by 
+  Constructs a memory pool allocator serviced
+  by the 
   ``fixed_pool``
   instance pool.
 ------------------------------------------------------------------------------------------

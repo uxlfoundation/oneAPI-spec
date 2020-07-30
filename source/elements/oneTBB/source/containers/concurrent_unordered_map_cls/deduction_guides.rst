@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_unordered_map`` supports
+Where possible, constructors of ``concurrent_unordered_map`` support
 class template argument deduction (since C++17):
 
 .. code:: cpp
@@ -86,9 +86,9 @@ class template argument deduction (since C++17):
                                 std::equal_to<Key>,
                                 Allocator>;
 
-Where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_map``
-and the type aliases ``iterator_key_t``, ``iterator_mapped_t`` and ``iterator_alloc_value_t``
-defines as follows:
+where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_map``
+and the type aliases ``iterator_key_t``, ``iterator_mapped_t``, and ``iterator_alloc_value_t``
+are defined as follows:
 
 .. code:: cpp
 

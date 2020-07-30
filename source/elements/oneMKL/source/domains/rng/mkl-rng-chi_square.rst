@@ -1,97 +1,155 @@
-.. _mkl-rng-chi_square:
+.. _onemkl_rng_chi_square:
 
-onemkl::rng::chi_square
-=======================
+chi_square
+==========
 
+Class is used for generation of chi-square distributed real types random numbers.
 
-.. container::
+.. _onemkl_rng_chi_square_description:
 
+.. rubric:: Description
 
-   Generates chi-square distributed random values.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers chi-square distributed with :math:`n` degrees of freedom, :math:`n \in N; n > 0`.
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-EDB0E0C5-B8D7-4494-8C52-BEEC84A0C324
+.. math::
 
+    f_{n}(x) = \left\{ \begin{array}{rcl} \frac{x^{\frac{n - 2}{2}}e^{-\frac{x}{2}}}{2^{n/2}\Gamma(n/2)}, x \ge 0 \\ 0, x < 0 \end{array}\right.
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-
-        template<typename T = float, method Method =      gamma_marsaglia>
-          class chi_square {
-          public:
-            chi_square(): chi_square(5){}
-            chi_square(std::int32_t n)
-            chi_square(const chi_square<T, Method>& other)
-            std::int32_t n() const
-            chi_square<T, Method>& operator=(const chi_square<T, Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{n}(x) = \left\{ \begin{array}{rcl} \int^{x}_{0}\frac{y^{\frac{n - 2}{2}}e^{-\frac{x}{2}}}{2^{n/2}\Gamma(n/2)}dy, x \ge 0 \\ 0, x < 0 \end{array}\right.
 
 
-      -  mkl_sycl.hpp
+.. _onemkl_rng_chi_square_syntax:
+
+class chi_square
+----------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = chi_square_method::by_default>
+    class chi_square {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        chi_square();
+        explicit chi_square(std::int32_t n);
+        std::int32_t n() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::chi_square_method::by_default> \
+                oneapi::mkl::rng::chi_square
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::chi_square_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::chi_square_method::by_default``
+                * ``oneapi::mkl::rng::chi_square_method::gamma_based``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `chi_square()`_
+          - Default constructor
+        * - `explicit chi_square(std::int32_t n)`_
+          - Constructor with parameters
+        * - `std::int32_t n() const`_
+          - Method to obtain number of degrees of freedom `n`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: chi_square::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: chi_square::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`chi_square()`:
+
+        .. cpp:function:: chi_square::chi_square()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `n` = 5.
+
+    .. container:: section
+
+        .. _`explicit chi_square(std::int32_t n)`:
+
+        .. cpp:function:: explicit chi_square::chi_square(std::int32_t n)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `n` is the number of degrees of freedom.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The onemkl::rng::chi_square class object is used in the
-      onemkl::rng::generate function to provide random numbers with
-      chi-square distribution and ``ν`` degrees of freedom,
-      ``n``\ ∈\ *N*, ``n`` > 0.
+    .. container:: section
 
+        .. _`std::int32_t n() const`:
 
-      The probability density function is:
+        .. cpp:function:: std::int32_t chi_square::n() const
 
+        .. container:: section
 
-      |image0|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `n` - number of degrees of freedom.
 
-      The cumulative distribution function is:
-
-
-      |image1|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::gamma_marsagla``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     n    
-           -     \ ``std::int32_t``\     
-           -     Degrees of freedom.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-482EEED2-95DF-4AA3-A484-E2CC41F29ee1.png
-   :class: img-middle
-.. |image1| image:: ../equations/GUID-482EEED2-95DF-4AA3-A484-E2CC41F29ee2.png
-   :class: img-middle
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

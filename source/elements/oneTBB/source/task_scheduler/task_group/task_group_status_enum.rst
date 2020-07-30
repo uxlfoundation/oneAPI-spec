@@ -20,11 +20,11 @@ Member constants
 
 .. c:macro:: not_complete
 
-    Not cancelled and not all tasks in group have completed.
+    Not cancelled and not all tasks in a group have completed.
 
-.. c:macro:: compete
+.. c:macro:: complete
 
-    Not cancelled and all tasks in group have completed.
+    Not cancelled and all tasks in a group have completed.
 
 .. c:macro:: canceled
 

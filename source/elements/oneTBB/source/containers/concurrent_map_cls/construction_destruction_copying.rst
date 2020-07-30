@@ -14,9 +14,9 @@ Empty container constructors
 
         explicit concurrent_map( const allocator_type& alloc );
 
-    Constructs empty ``concurrent_map``.
+    Constructs an empty ``concurrent_map``.
 
-    If provided uses the comparison function object ``comp`` for all ``key_type``
+    If provided, uses the comparison function object ``comp`` for all ``key_type``
     comparisons and the allocator ``alloc`` to allocate the memory.
 
 Constructors from the sequence of elements
@@ -33,13 +33,13 @@ Constructors from the sequence of elements
         concurrent_map( InputIterator first, InputIterator last,
                         const allocator_type& alloc = allocator_type() );
 
-    Constructs the ``concurrent_map`` which contains the elements from the half-open interval ``[first, last)``.
+    Constructs the ``concurrent_map``, which contains the elements from the half-open interval ``[first, last)``.
 
     If the range ``[first, last)`` contains multiple elements with equal keys, it is unspecified which element would be inserted.
 
-    If provided uses the comparison function object ``comp`` for all ``key_type`` comparisons and the allocator ``alloc`` to allocate the memory.
+    If provided, uses the comparison function object ``comp`` for all ``key_type`` comparisons and the allocator ``alloc`` to allocate the memory.
 
-    **Requirements**: the type ``InputIterator`` shall meet the requirements of `InputIterator` from ``[input.iterators]`` ISO C++ Standard section.
+    **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator` from the ``[input.iterators]`` ISO C++ Standard section.
 
 ------------------------------------------------------
 
@@ -113,7 +113,7 @@ Assignment operators
 
     Replaces all elements in ``*this`` by the copies of the elements in ``other``.
 
-    Copy assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
+    Copy-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
@@ -130,7 +130,7 @@ Assignment operators
 
     ``other`` is left in a valid, but unspecified state.
 
-    Move assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
+    Move-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
     is ``true``.
 
     The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.

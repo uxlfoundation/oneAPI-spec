@@ -23,11 +23,11 @@ Header
 Description
 -----------
 
-An ``aggregator`` is similar to a ``mutex`` in that it allows for mutually 
+An ``aggregator`` is similar to a ``mutex`` in that it allows mutually 
 exclusive execution of operations, however the interface is quite different.  In particular, operations 
 (in the form of function bodies or lambda functions) are passed to an ``aggregator`` for 
 execution via an ``execute`` method on the ``aggregator`` object.  Operations 
-passed to the same ``aggregator`` object will be executed mutually exclusively.  
+passed to the same ``aggregator`` object are executed mutually exclusively.  
 The ``execute`` method returns after the function passed to it has completed execution.
 
 Members
@@ -56,7 +56,7 @@ members of this class.
 ------------------------------------------------------------------------------------------
 \ ``template<typename Body> void execute(const Body& b)``
   \
-  Submits ``b`` to ``aggregator`` to be executed in a mutually 
+  Submits ``b`` to the ``aggregator`` to be executed in a mutually 
   exclusive fashion.  Returns after ``b`` has been executed.
 ------------------------------------------------------------------------------------------
 = ========================================================================================

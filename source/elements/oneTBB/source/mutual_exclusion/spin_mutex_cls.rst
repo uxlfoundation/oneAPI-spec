@@ -56,9 +56,9 @@ Member functions
 
 .. cpp:function:: bool try_lock()
 
-    Attempts to acquire a lock (non-blocking). Returns **true** if lock is acquired; **false** otherwise.
+    Attempts to acquire a lock (non-blocking). Returns **true** if lock is acquired; **false**, otherwise.
 
 .. cpp:function:: void unlock()
 
-    Releases a lock, held by a current thread.
+    Releases a lock held by a current thread.
 

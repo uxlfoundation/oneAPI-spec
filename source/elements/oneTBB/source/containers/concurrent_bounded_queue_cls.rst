@@ -3,7 +3,7 @@ concurrent_bounded_queue
 ========================
 **[containers.concurrent_bounded_queue]**
 
-``tbb::concurrent_bounded_queue`` is a class template for a bounded first-in-first out data structure
+``tbb::concurrent_bounded_queue`` is a class template for a bounded first-in-first-out data structure
 that permits multiple threads to concurrently push and pop items.
 
 Class Template Synopsis
@@ -92,9 +92,9 @@ Class Template Synopsis
 
 Requirements:
 
-* The type ``T`` shall meet the ``Erasable`` requirements from [container.requirements] ISO C++
+* The type ``T`` must meet the ``Erasable`` requirements from the [container.requirements] ISO C++
   Standard section. Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ Standard section.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
 Member functions
 ----------------

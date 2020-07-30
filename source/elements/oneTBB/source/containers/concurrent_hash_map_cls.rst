@@ -4,7 +4,7 @@ concurrent_hash_map
 **[containers.concurrent_hash_map]**
 
 ``concurrent_hash_map`` is a class template for an unordered associative container
-which holds key-value pairs with unique keys and supports concurrent insertion, lookup and erasure.
+that holds key-value pairs with unique keys and supports concurrent insertion, lookup, and erasure.
 
 Class Template Synopsis
 -----------------------
@@ -161,11 +161,11 @@ Class Template Synopsis
 
 Requirements:
 
-* The expression ``std::allocator_type<Allocator>::destroy(m, val)`` where ``m`` is an object
-  of the type ``Allocator`` and ``val`` is an object of type ``value_type`` should be well-formed.
+* The expression ``std::allocator_type<Allocator>::destroy(m, val)``, where ``m`` is an object
+  of the type ``Allocator`` and ``val`` is an object of type ``value_type``, must be well-formed.
   Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``HashCompare`` shall meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
-* The type ``Allocator`` shall meet the ``Allocator`` requirements from [allocator.requirements] ISO C++ Standard section.
+* The type ``HashCompare`` must meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
 
 Member classes
@@ -191,16 +191,16 @@ Member functions
     concurrent_hash_map_cls/iterators.rst
     concurrent_hash_map_cls/parallel_iteration.rst
 
-Non member functions
+Non-member functions
 --------------------
 
-These functions provides binary comparison and swap operations on ``tbb::concurrent_hash_map``
+These functions provide binary comparison and swap operations on ``tbb::concurrent_hash_map``
 objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
 in the same internal namespace and define ``tbb::concurrent_hash_map`` as a type alias for which
-the non-member functions are reachable only via argument dependent lookup.
+the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp
 

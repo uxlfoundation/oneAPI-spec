@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 ##########
 Resampling
@@ -103,10 +103,10 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************
@@ -131,18 +131,23 @@ Operation Details
    \frac{output\_spatial\_size} {input\_spatial\_size}` that do not
    necessarily equal to the ones passed by the user.
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 Resampling primitive supports the following combination of data types for
-source and destination memory objects:
+source and destination memory objects.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward f32, bf16
-forward            f16, s8, u8
+forward / backward |f32|, |bf16|
+forward            |f16|, |s8|, |u8|
 ================== ====================
 
 ***********************

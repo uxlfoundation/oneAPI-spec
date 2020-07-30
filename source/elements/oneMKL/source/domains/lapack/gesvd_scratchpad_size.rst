@@ -3,163 +3,100 @@
 gesvd_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_gesvd` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_gesvd` function.
+``gesvd_scratchpad_size`` supports the following precisions.
 
+      .. list-table:: 
+         :header-rows: 1
 
-         ``gesvd_scratchpad_size`` supports the following precisions.
+         * -  T 
+         * -  ``float`` 
+         * -  ``double`` 
+         * -  ``std::complex<float>`` 
+         * -  ``std::complex<double>`` 
 
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_gesvd` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_gesvd` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 gesvd_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::gesvd_scratchpad_size(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job jobvt,         std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t         ldu, std::int64_t ldvt)
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. container:: section
 
+   .. rubric:: Input Parameters
 
-      .. container:: dlsyntaxpara
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_gesvd` function will be performed.
 
+jobu
+   Must be ``job::allvec``, ``job::somevec``,
+   ``job::overwritevec``, or ``job::novec``. Specifies options for
+   computing all or part of the matrix :math:`U`.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::gesvd_scratchpad_size(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job jobvt,         std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t         ldu, std::int64_t ldvt)
+   If ``jobu = job::allvec``, all :math:`m` columns of :math:`U` are
+   returned in the buffer ``u``;
 
-   .. container:: section
+   if ``jobu = job::somevec``, the first :math:`\min(m, n)` columns of
+   :math:`U` (the left singular vectors) are returned in the buffer ``v``;
 
+   if ``jobu = job::overwritevec``, the first :math:`\min(m, n)`
+   columns of :math:`U` (the left singular vectors) are overwritten on
+   the buffer ``a``;
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+   if ``jobu = job::novec``, no columns of :math:`U` (no left singular
+   vectors) are computed.
 
+jobvt
+   Must be ``job::allvec``, ``job::somevec``,
+   ``job::overwritevec``, or ``job::novec``. Specifies options for
+   computing all or part of the matrix :math:`V^T/V^H`.
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_gesvd` function will be performed.
+   If ``jobvt = job::allvec``, all :math:`n` columns of :math:`V^T/V^H` are
+   returned in the buffer ``vt``;
 
+   if ``jobvt = job::somevec``, the first :math:`\min(m, n)` columns of
+   :math:`V^T/V^H` (the left singular vectors) are returned in the
+   buffer ``vt``;
 
-      jobu
-         Must be ``job::allvec``, ``job::somevec``,
-         ``job::overwritevec``, or ``job::novec``. Specifies options for
-         computing all or part of the matrix ``U``.
+   if ``jobvt = job::overwritevec``, the first :math:`\min(m, n)`
+   columns of :math:`V^T/V^H` (the left singular vectors) are
+   overwritten on the buffer ``a``;
 
+   if ``jobvt = job::novec``, no columns of :math:`V^T/V^H` (no left
+   singular vectors) are computed.
 
-         If ``jobu = job::allvec``, all ``m`` columns of ``U`` are
-         returned in the buffer u;
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
+n
+   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
 
-         if ``jobu = job::somevec``, the first ``min(m, n)`` columns of
-         ``U`` (the left singular vectors) are returned in the buffer v;
+lda
+   The leading dimension of ``a``.
 
+ldu
+   The leading dimension of ``u``.
 
-         if ``jobu = job::overwritevec``, the first ``min(m, n)``
-         columns of ``U`` (the left singular vectors) are overwritten on
-         the buffer a;
+ldvt
+   The leading dimension of ``vt``.
 
+.. container:: section
 
-         if ``jobu = job::novec``, no columns of ``U`` (no left singular
-         vectors) are computed.
+   .. rubric:: Return Value
 
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_gesvd` function should be able to hold.
 
-      jobvt
-         Must be ``job::allvec``, ``job::somevec``,
-         ``job::overwritevec``, or ``job::novec``. Specifies options for
-         computing all or part of the matrix *V\ T/V\ H*.
-
-
-         If ``jobvt = job::allvec``, all n columns of *V\ T/V\ H* are
-         returned in the buffer vt;
-
-
-         if ``jobvt = job::somevec``, the first ``min(m, n)`` columns of
-         *V\ T/V\ H* (the left singular vectors) are returned in the
-         buffer vt;
-
-
-         if ``jobvt = job::overwritevec``, the first ``min(m, n)``
-         columns of *V\ T/V\ H* (the left singular vectors) are
-         overwritten on the buffer a;
-
-
-         if ``jobvt = job::novec``, no columns of *V\ T/V\ H* (no left
-         singular vectors) are computed.
-
-
-      m
-         The number of rows in the matrix ``A`` (``0≤m``).
-
-
-      n
-         The number of columns in the matrix ``A`` (``0≤n``).
-
-
-      lda
-         The leading dimension of a.
-
-
-      ldu
-         The leading dimension of u.
-
-
-      ldvt
-         The leading dimension of vt.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_gesvd` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
 

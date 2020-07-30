@@ -1,103 +1,170 @@
-.. _mkl-rng-exponential:
+.. _onemkl_rng_exponential:
 
-onemkl::rng::exponential
-========================
+exponential
+===========
+
+Class is used for generation of exponentially distributed real types random numbers.
+
+.. _onemkl_rng_exponential_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers exponentially distributed with displacement :math:`a` and scalefactor :math:`\beta`, where :math:`a, \beta \in R; \beta > 0`.
+
+The probability distribution is given by:
+
+.. math::
+
+    f_{a, \beta}(x) = \left\{ \begin{array}{rcl} \frac{1}{\beta}exp(-\frac{x - a}{\beta}), x \ge a \\ 0, x < a \end{array}\right.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{a, \beta}(x) = \left\{ \begin{array}{rcl} 1 - exp(-\frac{x - a}{\beta}), x \ge a \\ 0, x < a \end{array}\right.
+
+.. _onemkl_rng_exponential_syntax:
+
+class exponential
+-----------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = exponential_method::by_default>
+    class exponential {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        exponential();
+        explicit exponential(RealType a, RealType beta);
+        RealType a() const;
+        RealType beta() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::exponential_method::by_default> \
+                oneapi::mkl::rng::exponential
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::exponential_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::exponential_method::by_default``
+                * ``oneapi::mkl::rng::exponential_method::icdf``
+                * ``oneapi::mkl::rng::exponential_method::icdf_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `exponential()`_
+          - Default constructor
+        * - `explicit exponential(RealType a, RealType beta)`_
+          - Constructor with parameters
+        * - `RealType a() const`_
+          - Method to obtain displacement value
+        * - `RealType beta() const`_
+          - Method to obtain scalefactor
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: exponential::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: exponential::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`exponential()`:
+
+        .. cpp:function:: exponential::exponential()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.0, `beta` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit exponential(RealType a, RealType beta)`:
+
+        .. cpp:function:: explicit exponential::exponential(RealType a, RealType beta)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a displacement, `beta` is a scalefactor.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates exponentially distributed random numbers.
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-   .. container:: section
-      :name: GUID-5F8D109F-B058-4CFD-B468-8FD7F1549FF0
+        .. cpp:function:: RealType exponential::a() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - displacement.
 
-      ::
+    .. container:: section
 
-        template<typename T = float, method Method =      inverse_function>
-          class exponential {
-          public:
-            exponential(): exponential((T)0.0, (T)1.0){}
-            exponential(T a, T beta)
-            exponential(const exponential<T, Method>& other)
-            T a() const
-            T beta() const
-            exponential<T, Method>& operator=(const      exponential<T, Method>& other)
-          }
+        .. _`RealType beta() const`:
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. cpp:function:: RealType exponential::beta() const
 
+        .. container:: section
 
-      -  mkl_sycl.hpp
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `beta` - scalefactor value.
 
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The onemkl::rng::exponential class object is used in
-      onemkl::rng::generate function to provide random numbers with
-      exponential distribution that has displacement a and scalefactor
-      β, where ``a, β∈R ; β > 0``.
-
-
-      The probability density function is given by:
-
-
-      | 
-      | |image0|
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image1|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       \ ``onemkl::rng::inverse_function | onemkl::rng::accurate``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     beta    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor β.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-12315BD9-4F4D-42B0-A9B5-68A22D40756D-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-0EDD2BB7-A284-495A-84F6-8A210AC499CD-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

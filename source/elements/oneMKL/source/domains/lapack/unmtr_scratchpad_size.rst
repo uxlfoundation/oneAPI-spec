@@ -3,145 +3,85 @@
 unmtr_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_unmtr` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``unmtr_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_unmtr` function.
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-         ``unmtr_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_unmtr` function should be able to hold.
-      Calls to this routine must specify the template parameter explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_unmtr` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 unmtr_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::unmtr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo         upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,         std::int64_t lda, std::int64_t ldc)
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Input Parameters
 
-      .. container:: dlsyntaxpara
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_unmtr` function will be performed.
 
+left_right
+   Must be either ``side::left`` or ``side::right``.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::unmtr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo         upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,         std::int64_t lda, std::int64_t ldc)
+   If ``left_right=side::left``, :math:`Q` or :math:`Q^{H}` is
+   applied to :math:`C` from the left.
 
-   .. container:: section
+   If ``left_right=side::right``, :math:`Q` or :math:`Q^{H}` is
+   applied to :math:`C` from the right.
 
+upper_lower
+   Must be either ``uplo::upper`` or ``uplo::lower``. Uses the
+   same ``upper_lower`` as supplied to
+   :ref:`onemkl_lapack_hetrd`.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+trans
+   Must be either ``transpose::nontrans`` or
+   ``transpose::conjtrans``.
 
+   If ``trans=transpose::nontrans``, the routine multiplies :math:`C`
+   by :math:`Q`.
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_unmtr` function will be performed.
+   If ``trans=transpose::conjtrans``, the routine multiplies :math:`C`
+   by :math:`Q^{H}`.
 
+m
+   The number of rows in the matrix :math:`C` (:math:`m \ge 0`).
 
-      left_right
-         Must be either ``side::left`` or ``side::right``.
+n
+   The number of columns the matrix :math:`C` (:math:`n \ge 0`).
 
+k
+   The number of elementary reflectors whose product defines the
+   matrix :math:`Q` (:math:`0 \le k \le n`).
 
-         If ``left_right=side::left``, ``Q`` or ``Q``\ :sup:`H` is
-         applied to ``C`` from the left.
+lda
+   The leading dimension of :math:`a` :math:`(\max(1,r) \le \text{lda})`.
 
+ldc
+   The leading dimension of :math:`c` :math:`(\max(1,n) \le \text{ldc})`.
 
-         If ``left_right=side::right``, ``Q`` or ``Q``\ :sup:`H` is
-         applied to ``C`` from the right.
+.. container:: section
 
+  .. rubric:: Return Value
+         
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_unmtr` function should be able to hold.
 
-      upper_lower
-         Must be either ``uplo::upper`` or ``uplo::lower``. Uses the
-         same upper_lower as supplied to
-         :ref:`onemkl_lapack_hetrd`.
-
-
-      trans
-         Must be either ``transpose::nontrans`` or
-         ``transpose::conjtrans``.
-
-
-         If ``trans=transpose::nontrans``, the routine multiplies ``C``
-         by ``Q``.
-
-
-         If ``trans=transpose::conjtrans``, the routine multiplies ``C``
-         by ``Q``\ :sup:`H`.
-
-
-      m
-         The number of rows in the matrix ``C`` (``m≥0``).
-
-
-      n
-         The number of columns the matrix ``C`` (``n≥0``).
-
-
-      k
-         The number of elementary reflectors whose product defines the
-         matrix ``Q`` (``0≤k≤n``).
-
-
-      lda
-         The leading dimension of a\ ``(max(1,r)≤lda)``.
-
-
-      ldc
-         The leading dimension of c\ ``(max(1,n)≤ldc)``.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_unmtr` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
-
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 

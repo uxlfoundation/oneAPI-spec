@@ -3,7 +3,7 @@ task_scheduler_observer
 =======================
 **[scheduler.task_scheduler_observer]**
 
-Class that represents thread's interest in task scheduling services.
+Class that represents thread interest in task scheduling services.
 
 .. code:: cpp
 
@@ -48,7 +48,7 @@ Member functions
 
 .. cpp:function:: explicit task_scheduler_observer( task_arena& )
 
-    Construct ``task_scheduler_observer`` object for a given arena in inactive state (observation is disabled).
+    Constructs a ``task_scheduler_observer`` object for a given arena in inactive state (observation is disabled).
     For created observer, entry/exit notifications are invoked whenever a thread joins/leaves arena.
     If a thread is already in the arena when the observer is activated, the entry notification
     is called before it executes the first stolen task.
@@ -67,7 +67,7 @@ Member functions
 
 .. cpp:function:: bool is_observing() const
 
-    **Returns**: True if observing is enabled; false otherwise.
+    **Returns**: True if observing is enabled; false, otherwise.
 
 .. cpp:function:: virtual void on_scheduler_entry( bool is_worker )
 
@@ -79,7 +79,7 @@ Member functions
     If a thread enables the observation and then spawns a task, it is guaranteed that the task,
     as well as all the tasks it creates, will be executed by threads which have invoked ``on_scheduler_entry``.
 
-    The flag ``is_worker`` is true if the thread was created by oneTBB; false otherwise.
+    The flag ``is_worker`` is true if the thread was created by oneTBB; false, otherwise.
 
     **Effects**: The default behavior does nothing.
 

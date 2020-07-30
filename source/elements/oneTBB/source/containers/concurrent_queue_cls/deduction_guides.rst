@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``tbb::concurrent_queue`` supports class template argument
+Where possible, constructors of ``tbb::concurrent_queue`` support class template argument
 deduction (since C++17):
 
 .. code:: cpp
@@ -12,7 +12,7 @@ deduction (since C++17):
     concurrent_queue( InputIterator, InputIterator, const Allocator& = Allocator() )
     -> concurrent_queue<iterator_value_t<InputIterator>, Allocator>;
 
-Where the type alias ``iterator_value_t`` defines as follows:
+Where the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 

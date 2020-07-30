@@ -29,16 +29,16 @@ A function template for building edges between nodes.
 
 Requirements:
 
-* The `MultiOutputNode` type shall have a valid ``MultiOutputNode::output_ports_type`` qualified-id
+* The `MultiOutputNode` type must have a valid ``MultiOutputNode::output_ports_type`` qualified-id
   that denotes a type.
-* The `MultiInputNode` type shall have a valid ``MultiInputNode::input_ports_type`` qualified-id
+* The `MultiInputNode` type must have a valid ``MultiInputNode::input_ports_type`` qualified-id
   that denotes a type.
 
 The common form of ``make_edge(sender, receiver)`` creates an edge between provided ``sender``
 and ``receiver`` instances.
 
-Overloads that accepts a `MultiOutputNode` type instance makes an edge from port ``0`` of a
+Overloads that accept a `MultiOutputNode` type instance make an edge from port ``0`` of a
 multi-output predecessor.
 
-Overloads that accepts a `MultiInputNode` type instance makes an edge to port ``0`` of a multi-input
+Overloads that accept a `MultiInputNode` type instance make an edge to port ``0`` of a multi-input
 successor.

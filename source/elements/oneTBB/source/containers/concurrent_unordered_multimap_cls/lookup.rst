@@ -12,7 +12,7 @@ count
 
         size_type count( const key_type& key );
 
-    **Returns**: the number of elements with the key equal to ``key``.
+    **Returns**: the number of elements with the key equivalent to ``key``.
 
 ---------------------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ count
         template <typename K>
         size_type count( const K& key );
 
-    **Returns**: the number of elements with the key which compares equivalent with ``key``.
+    **Returns**: the number of elements with the key equivalent to ``key``.
 
     This overload only participates in overload resolution if qualified-id
     ``hasher::transparent_key_equal`` is valid and denotes a type.
@@ -35,10 +35,10 @@ find
 
         const_iterator find( const key_type& key ) const;
 
-    **Returns**: an iterator to the element with the key equal to ``key`` or ``end()``
+    **Returns**: an iterator to the element with the key equivalent to ``key``, or ``end()``
     if no such element exists.
 
-    If there are multiple elements with the key equal to ``key`` exists, it is unspecified which element should be found.
+    If there are multiple elements with the key equivalent to ``key``, it is unspecified which element should be found.
 
 ---------------------------------------------------------------------------------------------
 
@@ -50,10 +50,9 @@ find
         template <typename K>
         const_iterator find( const K& key ) const;
 
-    **Returns**: an iterator to the element with the key which compares equivalent
-    with ``key`` or ``end()`` if no such element exists.
+    **Returns**: an iterator to the element with the key equivalent to ``key``, or ``end()`` if no such element exists.
 
-    If there are multiple elements with the key which compares equivalent with ``key`` exists,
+    If there are multiple elements with the key equivalent to ``key``,
     it is unspecified which element should be found.
 
     These overloads only participates in overload resolution if qualified-id
@@ -66,8 +65,8 @@ contains
 
         bool contains( const key_type& key ) const;
 
-    **Returns**: ``true`` if at least one element with the key equal to ``key`` exists
-    in the container, ``false`` otherwise.
+    **Returns**: ``true`` if at least one element with the key equivalent to ``key`` exists
+    in the container; ``false``, otherwise.
 
 ---------------------------------------------------------------------------------------------
 
@@ -76,8 +75,7 @@ contains
         template <typename K>
         bool contains( const K& key ) const;
 
-    **Returns**: ``true`` if at least one element with the key which compares equivalent
-    with ``key`` exists in the container, ``false`` otherwise.
+    **Returns**: ``true`` if at least one element with the key equivalent to ``key`` exists in the container; ``false``, otherwise.
 
     This overload only participates in overload resolution if qualified-id
     ``hasher::transparent_key_equal`` is valid and denotes a type.
@@ -91,10 +89,10 @@ equal_range
 
         std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
 
-    **Returns**: if at least one element with the key equal to ``key`` exists - a pair of iterators ``{f, l}``,
-    where ``f`` is an iterator to the first element with the key equal to ``key``,
-    ``l`` is an iterator to the element which follows the last element with the key equal to ``key``.
-    Otherwise - ``{end(), end()}``.
+    **Returns**: if at least one element with the key equivalent to ``key`` exists, a pair of iterators ``{f, l}``,
+    where ``f`` is an iterator to the first element with the key equivalent to ``key``,
+    ``l`` is an iterator to the element which follows the last element with the key equivalent to ``key``.
+    Otherwise, ``{end(), end()}``.
 
 ---------------------------------------------------------------------------------------------
 
@@ -106,10 +104,9 @@ equal_range
         template <typename K>
         std::pair<const_iterator, const_iterator> equal_range( const K& key )
 
-    **Returns**: if at least one element with the key equal to ``key`` exists - a pair of iterators ``{f, l}``,
-    where ``f`` is an iterator to the first element with the key which compares equivalent with ``key``,
-    ``l`` is an iterator to the element which follows the last element with the key which compares
-    equivalent with ``key``. Otherwise - ``{end(), end()}``.
+    **Returns**: if at least one element with the key equivalent to ``key`` exists - a pair of iterators ``{f, l}``,
+    where ``f`` is an iterator to the first element with the key equivalent to ``key``,
+    ``l`` is an iterator to the element that follows the last element with the key equivalent to ``key``. Otherwise,``{end(), end()}``.
 
     These overloads only participates in overload resolution if qualified-id
     ``hasher::transparent_key_equal`` is valid and denotes a type.

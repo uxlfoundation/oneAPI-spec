@@ -12,7 +12,7 @@ A ``blocked_range`` meets the :doc:`Range requirements <../../named_requirements
 A ``blocked_range`` specifies a *grain size* of type ``size_t``.
 
 A ``blocked_range`` is splittable into two subranges if the size of the range exceeds its grain size.
-The ideal grain size depends upon the context of the ``blocked_range``, which is typically as the range argument
+The ideal grain size depends on the context of the ``blocked_range``, which is typically passed as the range argument
 to the loop templates ``parallel_for``, ``parallel_reduce``, or ``parallel_scan``.
 
 .. code:: cpp
@@ -49,7 +49,7 @@ to the loop templates ``parallel_for``, ``parallel_reduce``, or ``parallel_scan`
 
 Requirements:
 
-* The ``Value`` type shall meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`.
+* The ``Value`` type must meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`.
 
 Member functions
 ----------------
@@ -60,10 +60,10 @@ Member functions
 
 .. cpp:type:: const_iterator
 
-    The type of a value in the range. Despite its name, the type ``const_iterator`` is not necessarily an STL
+    The type of a value in the range. Despite its name, the ``const_iterator`` type is not necessarily an STL
     iterator; it merely needs to meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`.
     However, it is convenient to call it ``const_iterator`` so that if it is a
-    const_iterator, then the ``blocked_range`` behaves like a read-only STL container.
+    const_iterator, the ``blocked_range`` behaves like a read-only STL container.
 
 .. cpp:function:: blocked_range( Value begin, Value end, size_type grainsize=1 )
 
@@ -132,17 +132,17 @@ Member functions
 
     **Requirements**: ``end()<begin()`` is false.
 
-    **Effects**: Determines if range can be split into subranges.
+    **Effects**: Determines if the range can be split into subranges.
 
-    **Returns**: True if ``size()>grainsize();`` false otherwise.
+    **Returns**: True if ``size()>grainsize()``; false, otherwise.
 
 .. cpp:function:: const_iterator begin() const
 
-    **Returns**: Inclusive lower bound on range.
+    **Returns**: Inclusive lower bound of the range.
 
 .. cpp:function:: const_iterator end() const
 
-    **Returns**: Exclusive upper bound on range.
+    **Returns**: Exclusive upper bound of the range.
 
 See also:
 

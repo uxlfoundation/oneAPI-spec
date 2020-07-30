@@ -3,14 +3,14 @@ Mutex
 =====
 **[req.mutex]**
 
-The mutexes and locks here have relatively spartan interfaces that are designed for high performance.
+The mutexes and locks have relatively spartan interfaces that are designed for high performance.
 The interfaces enforce the *scoped locking pattern*, which is widely used in C++ libraries because:
 
-* Does not require the programmer to remember to release the lock
+* Does not require to remember to release the lock
 * Releases the lock if an exception is thrown out of the mutual exclusion region protected by the lock
 
-There are two parts to the pattern: a *mutex* object, for which construction of a *lock* object acquires a lock on the mutex
-and destruction of the *lock* object releases the lock. Here's an example:
+There are two parts of the pattern: a *mutex* object, for which construction of a *lock* object acquires a lock on the mutex
+and destruction of the *lock* object releases the lock. Here is an example:
 
 .. code:: cpp
 
@@ -45,7 +45,7 @@ If the actions throw an exception, the lock is automatically released as the blo
         };
     };
 
-A type `M` satisfies the `Mutex` if it meets the following requirements:
+A type `M` satisfies the `Mutex` requirements if it meets the following conditions:
 
 .. cpp:type:: M::scoped_lock
 
@@ -53,11 +53,11 @@ A type `M` satisfies the `Mutex` if it meets the following requirements:
 
 .. cpp:function:: M::scoped_lock()
 
-    Construct ``scoped_lock`` without acquiring mutex.
+    Constructs ``scoped_lock`` without acquiring mutex.
 
 .. cpp:function:: M::scoped_lock(M&)
 
-    Construct ``scoped_lock`` and acquire the lock on a provided mutex.
+    Constructs ``scoped_lock`` and acquire the lock on a provided mutex.
 
 .. cpp:function:: M::~scoped_lock()
 
@@ -65,7 +65,7 @@ A type `M` satisfies the `Mutex` if it meets the following requirements:
 
 .. cpp:function:: void M::scoped_lock::acquire(M&)
 
-    Acquire a lock on a provided mutex.
+    Acquires a lock on a provided mutex.
 
 .. cpp:function:: bool M::scoped_lock::try_acquire(M&)
 
@@ -79,21 +79,21 @@ Also, the ``Mutex`` type requires a set of traits to be defined:
 
 .. cpp:member:: static constexpr bool M::is_rw_mutex
 
-    True if mutex is reader-writer mutex; false otherwise.
+    True if mutex is a reader-writer mutex; false, otherwise.
 
 .. cpp:member:: static constexpr bool M::is_recursive_mutex
 
-    True if mutex is recursive mutex; false otherwise.
+    True if mutex is a recursive mutex; false, otherwise.
 
 .. cpp:member:: static constexpr bool M::is_fair_mutex
 
-    True if mutex is fair; false otherwise.
+    True if mutex is fair; false, otherwise.
 
 A mutex type and an ``M::scoped_lock`` type are neither copyable nor movable.
 
-The following table summarizes the library classes that model the ``Mutex`` requirement and provided qurantees.
+The following table summarizes the library classes that model the ``Mutex`` requirement and provided guarantees.
 
-.. table:: Provided gurantees for Mutexes that model the Mutex requirement
+.. table:: Provided guarantees for Mutexes that model the Mutex requirement
 
    ============================= ============ =============
    .                             **Fair**     **Reentrant**
@@ -109,9 +109,9 @@ The following table summarizes the library classes that model the ``Mutex`` requ
 
 .. note::
 
-    Implementation is alowed to have an opposite gurantees (positive) in case of negative statements from the table above.
+    Implementation is allowed to have an opposite guarantees (positive) in case of negative statements from the table above.
 
-See the oneAPI Threading Building Blocks Developer Guide for a discussion of the mutex properties and the rationale for null mutexes.
+See the *oneAPI Threading Building Blocks Developer Guide* for description of the mutex properties and the rationale for null mutexes.
 
 See also:
 

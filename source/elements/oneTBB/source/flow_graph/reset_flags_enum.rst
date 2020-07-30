@@ -3,7 +3,7 @@ reset_flags Enumeration
 =======================
 **[flow_graph.reset_flags]**
 
-A ``reset_flags`` enumeration represents flags that can be passed to ``graph::reset()`` function.
+A ``reset_flags`` enumeration represents flags that can be passed to the ``graph::reset()`` function.
 
 .. code:: cpp
 
@@ -32,8 +32,8 @@ Its enumerated values and their meanings are as follows:
 
   .. caution::
 
-    If the body contains state which has an external component (such as a file descriptor) then
+    If the body contains state which has an external component (such as a file descriptor),
     the node may not behave the same on re-execution of the graph after body replacement. In this
-    case the node should be re-created.
+    case, the node should be re-created.
 
 * ``rf_clear_edges`` - All edges are removed from the graph.

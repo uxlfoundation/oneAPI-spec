@@ -12,7 +12,7 @@ Even though the items are logically separate, the processor hardware may have to
 as if they were sharing a location. The net result can be much more memory traffic than if the logically distinct items were on different cache lines.
 
 However, this class is sometimes an inappropriate replacement for default allocator, because the benefit of allocating on a cache line comes at the price
-that ``cache_aligned_allocator`` implicitly adds pad memory. Hence allocating many small objects with ``cache_aligned_allocator`` may increase memory usage.
+that ``cache_aligned_allocator`` implicitly adds pad memory. Therefore allocating many small objects with ``cache_aligned_allocator`` may increase memory usage.
 
 .. code:: cpp
 
@@ -46,7 +46,7 @@ Member Functions
 
 .. cpp:function:: void deallocate(T* p, size_type n)
 
-    Deallocates memory pointed to by ``p``. The deallocation also deallocates any extra hidden padding.
+    Deallocates memory pointed to by ``p``. Deallocation also deallocates any extra hidden padding.
     The behavior is undefined if the pointer ``p`` is not the result of the ``allocate(n)`` method.
     The behavior is undefined if the memory has been already deallocated.
 
@@ -71,7 +71,7 @@ These functions provide comparison operations between two ``cache_aligned_alloca
 
 The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``cache_aligned_allocator`` objects.
 For example, an implementation may define the classes and functions in the same unspecified internal namespace,
-and define ``tbb::cache_aligned_allocator`` as a type alias for which the non-member functions are reachable only via argument dependent lookup.
+and define ``tbb::cache_aligned_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
 
 .. cpp:function:: template<typename T, typename U> \
     bool operator==(const cache_aligned_allocator<T>&, const cache_aligned_allocator<U>&) noexcept

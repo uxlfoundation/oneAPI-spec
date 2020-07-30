@@ -1,102 +1,154 @@
-.. _mkl-rng-geometric:
+.. _onemkl_rng_geometric:
 
-onemkl::rng::geometric
-======================
+geometric
+=========
+
+Class is used for generation of geometrically distributed integer types random numbers.
+
+.. _onemkl_rng_geometric_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers geometrically distributed with probability :math:`p` of a single success trial, where :math:`p \in R; 0 < p < 1`.
+
+The probability distribution is given by:
+
+.. math::
+
+     P(X = k) = p * (1 - p)^k, k = \{0, 1, 2, ... \}.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+     F_{p}(x) = \left\{ \begin{array}{rcl} 0, x < 0 \\ 1 - (1 - p)^{\lfloor x + 1 \rfloor}, x \ge 0 \end{array}\right.
+
+.. _onemkl_rng_geometric_syntax:
+
+class geometric
+---------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename IntType = std::int32_t, typename Method = geometric_method::by_default>
+    class geometric {
+    public:
+        using method_type = Method;
+        using result_type = IntType;
+        geometric();
+        explicit geometric(float p);
+        float p() const;
+    };
+
+.. cpp:class:: template<typename IntType = float, typename Method = oneapi::mkl::rng::geometric_method::by_default> \
+                oneapi::mkl::rng::geometric
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename IntType
+            Type of the produced values. Supported types:
+                * ``std::int32_t``
+                * ``std::uint32_t``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::geometric_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::geometric_method::by_default``
+                * ``oneapi::mkl::rng::geometric_method::icdf``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `geometric()`_
+          - Default constructor
+        * - `explicit geometric(float p)`_
+          - Constructor with parameters
+        * - `float p() const`_
+          - Method to obtain probability value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: geometric::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: geometric::result_type = IntType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`geometric()`:
+
+        .. cpp:function:: geometric::geometric()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `p` = 0.5.
+
+    .. container:: section
+
+        .. _`explicit geometric(float p)`:
+
+        .. cpp:function:: explicit geometric::geometric(float p)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `p` is a probability value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates geometrically distributed random values.
+    .. container:: section
 
+        .. _`float p() const`:
 
-   .. container:: section
-      :name: GUID-C5319AC4-9A75-4DC6-90C4-DCFA4008CE5D
+        .. cpp:function:: float geometric::p() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `p` - probability value.
 
-      ::
-	 
-        template<typename T = std::int32_t, method Method      = inverse_function>
-          class geometric {
-          public:
-            geometric(): geometric(0.5){}
-            geometric(double p)
-            geometric(const geometric<T, Method>& other)
-            double p() const
-            geometric<T, Method>& operator=(const      geometric<T, Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
-
-
-      -  mkl_sycl.hpp
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The onemkl::rng::geometric class object is used in the
-      onemkl::rng::generate function to provide geometrically distributed
-      random numbers with probability ``p`` of a single trial success,
-      where ``p∈R; 0 <  p <  1.``
-
-
-      A geometrically distributed variate represents the number of
-      independent Bernoulli trials preceding the first success. The
-      probability of a single Bernoulli trial success is ``p``.
-
-
-      The probability distribution is given by:
-
-
-      ``P``\ (``X`` = ``k``) = ``p``\ ·(1 - ``p``)\ :sup:`k`, ``k``\ ∈
-      {0,1,2, ... }.
-
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image0|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     p    
-           -     \ ``double``\     
-           -     Success probability ``p`` of a trial.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-2D60A1A4-9522-40FC-AEEA-B64EB795144C-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

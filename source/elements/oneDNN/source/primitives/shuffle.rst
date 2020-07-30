@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 #######
 Shuffle
@@ -75,10 +75,10 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************
@@ -87,21 +87,26 @@ Operation Details
 
 1. The memory format and data type for ``src`` and ``dst`` are assumed to be
    the same, and in the API are typically referred as ``data`` (e.g., see
-   ``data_desc`` in :any:`dnnl::shuffle_forward::desc::desc`). The same holds
+   ``data_desc`` in |shuffle_forward::desc::desc|). The same holds
    for ``diff_src`` and ``diff_dst``. The corresponding memory descriptors are
    referred to as ``diff_data_desc``.
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 The shuffle primitive supports the following combinations of data types:
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward f32, bf16
-forward            s32, s8, u8
+forward / backward |f32|, |bf16|
+forward            |s32|, |s8|, |u8|
 ================== ====================
 
 ************

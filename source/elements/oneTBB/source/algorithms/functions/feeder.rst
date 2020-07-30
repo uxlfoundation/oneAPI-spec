@@ -25,14 +25,14 @@ Member functions
 
 .. cpp:function:: void add( const Item& item )
 
-    Adds item to collection of work items to be processed.
+    Adds item to a collection of work items to be processed.
 
 .. cpp:function:: void add( Item&& item )
 
-    Same as the above but uses the move constructor of ``Item`` if available.
+    Same as the above but uses the move constructor of ``Item``, if available.
 
 
 .. caution::
 
-    Must be called from a ``Body::operator()`` created by ``parallel_for_each`` function.
+    Must be called from a ``Body::operator()`` created by the ``parallel_for_each`` function.
     Otherwise, the termination semantics of method ``operator()`` are undefined.

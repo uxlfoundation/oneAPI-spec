@@ -28,9 +28,9 @@ Erasing elements
 
     Invalidates all iterators and references to the removed element.
 
-    **Returns**: ``iterator`` which follows the removed element.
+    **Returns**: ``iterator`` that follows the removed element.
 
-    **Requirements**: the iterator ``pos`` should be valid, dereferenceable
+    **Requirements**: the iterator ``pos`` should be valid, dereferenceable,
     and point to the element in ``*this``.
 
 -----------------------------------------------------------------------------
@@ -39,11 +39,11 @@ Erasing elements
 
         size_type unsafe_erase( const key_type& key );
 
-    Removes the element equal to ``key`` if it exists in the container.
+    Removes the element equivalent to ``key`` if it exists in the container.
 
     Invalidates all iterators and references to the removed element.
 
-    **Returns**: ``1`` if an element equal to ``key`` exists, ``0`` otherwise.
+    **Returns**: ``1`` if an element equivalent to ``key`` exists; ``0``, otherwise.
 
 -----------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ Erasing elements
         template <typename K>
         size_type unsafe_erase( const K& key );
 
-    Removes the element which compares equivalent to ``key``
+    Removes the element equivalent to ``key``
     if it exists in the container.
 
     Invalidates all iterators and references to the removed element.
@@ -63,8 +63,8 @@ Erasing elements
     - ``std::is_convertible<K, iterator>::value`` is ``false``.
     - ``std::is_convertible<K, const_iterator>::value`` is ``false``.
 
-    **Returns**: ``1`` if an element which compares equivalent to ``key`` exists,
-    ``0`` otherwise.
+    **Returns**: ``1`` if an element equivalent to ``key`` exists;
+    ``0``, otherwise.
 
 Erasing sequences
 -----------------
@@ -75,7 +75,7 @@ Erasing sequences
 
     Removes all elements from the half-open interval ``[first, last)`` from the container.
 
-    **Returns**: ``iterator`` which follows the last removed element.
+    **Returns**: ``iterator`` that follows the last removed element.
 
     **Requirements**: the range ``[first, last)`` must be a valid subrange in ``*this``.
 
@@ -96,7 +96,7 @@ Extracting nodes
 
     **Returns**: the node handle that owns the extracted element.
 
-    **Requirements**: the iterator ``pos`` should be valid, dereferenceable
+    **Requirements**: the iterator ``pos`` should be valid, dereferenceable,
     and point to the element in ``*this``.
 
 -----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ Extracting nodes
 
         node_type unsafe_extract( const key_type& key );
 
-    If an element equal to ``key`` exists, transfers ownership of this element
+    If an element equivalent to ``key`` exists, transfers ownership of this element
     from the container to the node handle.
 
     No copy or move constructors of ``value_type`` are performed.
@@ -114,7 +114,7 @@ Extracting nodes
     Pointers and references to the extracted element remain valid.
 
     **Returns**: the node handle that owns the extracted element or an empty node handle
-    if an element equal to ``key`` was not found.
+    if an element equivalent to ``key`` was not found.
 
 -----------------------------------------------------------------------------
 
@@ -123,7 +123,7 @@ Extracting nodes
         template <typename K>
         node_type unsafe_extract( const K& key );
 
-    If an element which compares equivalent to ``key`` exists,
+    If an element equivalent to ``key`` exists,
     transfers ownership of this element from the container to the node handle.
 
     No copy or move constructors of ``value_type`` are performed.
@@ -131,14 +131,14 @@ Extracting nodes
     Invalidates all iterators to the extracted element. Pointers and references to the
     extracted element remain valid.
 
-    This overload only participates in overload resolution if all of the following statements are ``true``:
+    This overload participates in overload resolution only if all of the following statements are ``true``:
 
     - The qualified-id ``hasher::transparent_key_equal`` is valid and denotes a type.
     - ``std::is_convertible<K, iterator>::value`` is ``false``.
     - ``std::is_convertible<K, const_iterator>::value`` is ``false``.
 
     **Returns**: the node handle that owns the extracted element or an empty node handle if
-    an element which compares equivalent to ``key`` was not found.
+    an element equivalent to ``key`` was not found.
 
 swap
 ----
@@ -151,7 +151,7 @@ swap
 
     Swaps allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_swap::value`` is ``true``.
 
-    Otherwise if ``get_allocator() != other.get_allocator()`` the behavior is undefined.
+    Otherwise, if ``get_allocator() != other.get_allocator()``, the behavior is undefined.
 
     **Exceptions**: ``noexcept`` specification:
 

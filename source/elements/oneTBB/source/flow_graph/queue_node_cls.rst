@@ -3,7 +3,7 @@ queue_node
 ==========
 **[flow_graph.queue_node]**
 
-A node that forwards messages in first-in first-out (FIFO) order by maintaining a buffer of messages.
+A node that forwards messages in a first-in first-out (FIFO) order by maintaining a buffer of messages.
 
 .. code:: cpp
 
@@ -28,10 +28,10 @@ A node that forwards messages in first-in first-out (FIFO) order by maintaining 
 
 Requirements:
 
-* The type ``T`` shall meet the `CopyConstructible` requirements from [copyconstructible] and
+* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 
-``queue_node`` forwards messages in first-in first-out (FIFO) order to a single successor in
+``queue_node`` forwards messages in a FIFO order to a single successor in
 its successor set.
 
 ``queue_node`` is a ``graph_node``, ``receiver`` and ``sender``.
@@ -48,11 +48,11 @@ Member functions
 .. cpp:function:: queue_node( const queue_node &src )
 
     Constructs an empty  ``queue_node`` that belongs to the same graph ``g`` as ``src``.
-    The list of predecessors, the list of successors and the messages in the buffer are not copied.
+    The list of predecessors, the list of successors, and the messages in the buffer are not copied.
 
 .. cpp:function:: bool try_put( const T &v )
 
-    Add item to internal FIFO buffer. If ``v`` is the only item in the ``queue_node`` , a task is
+    Adds item to internal FIFO buffer. If ``v`` is the only item in the ``queue_node``, a task is
     spawned to forward the item to a successor.
 
     **Returns**: ``true``.

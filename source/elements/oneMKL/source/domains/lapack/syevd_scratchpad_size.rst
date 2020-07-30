@@ -3,126 +3,70 @@
 syevd_scratchpad_size
 =====================
 
+Computes size of scratchpad memory required for :ref:`onemkl_lapack_syevd` function.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
+         
+``syevd_scratchpad_size`` supports the following precisions.
 
-   Computes size of scratchpad memory required for :ref:`onemkl_lapack_syevd` function.
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``float`` 
+        * -  ``double`` 
 
-         ``syevd_scratchpad_size`` supports the following precisions.
-
-
-         .. list-table:: 
-            :header-rows: 1
-
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-
-
-
-
-   .. container:: section
-
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      Computes the number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_syevd` function should be able to hold.
-      Calls to this routine must specify the template parameter
-      explicitly.
-
+Computes the number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_syevd` function should be able to hold.
+Calls to this routine must specify the template parameter explicitly.
 
 syevd_scratchpad_size
 ---------------------
 
-.. container::
+.. container:: section
 
-   .. container:: section
+  .. rubric:: Syntax
 
+.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::syevd_scratchpad_size(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo upper_lower,         std::int64_t n, std::int64_t lda)
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Input Parameters
+         
+queue
+   Device queue where calculations by :ref:`onemkl_lapack_syevd` function will be performed.
 
-      .. container:: dlsyntaxpara
+jobz
+   Must be ``job::novec`` or ``job::vec``.
 
+   If ``jobz = job::novec``, then only eigenvalues are computed.
 
-         .. cpp:function::  template <typename T>std::int64_t         onemkl::lapack::syevd_scratchpad_size(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo upper_lower,         std::int64_t n, std::int64_t lda)
+   If ``jobz = job::vec``, then eigenvalues and eigenvectors are
+   computed.
 
-   .. container:: section
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``.
 
+   If ``upper_lower = job::upper``, a stores the upper triangular
+   part of :math:`A`.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+   If ``upper_lower = job::lower``, a stores the lower triangular
+   part of :math:`A`.
 
+n
+   The order of the matrix :math:`A` (:math:`0 \le n`).
 
-      queue
-         Device queue where calculations by :ref:`onemkl_lapack_syevd` function will be performed.
+lda
+   The leading dimension of ``a``. Currently ``lda`` is not referenced in
+   this function.
 
+.. container:: section
 
-      jobz
-         Must be ``job::novec`` or ``job::vec``.
+  .. rubric:: Return Value
+         
+The number of elements of type ``T`` the scratchpad memory to be passed to :ref:`onemkl_lapack_syevd` function should be able to hold.
 
-
-         If ``jobz = job::novec``, then only eigenvalues are computed.
-
-
-         If ``jobz = job::vec``, then eigenvalues and eigenvectors are
-         computed.
-
-
-      upper_lower
-         Must be ``uplo::upper`` or ``uplo::lower``.
-
-
-         If ``upper_lower = job::upper``, a stores the upper triangular
-         part of ``A``.
-
-
-         If ``upper_lower = job::lower``, a stores the lower triangular
-         part of ``A``.
-
-
-      n
-         The order of the matrix ``A`` (``0≤n``).
-
-
-      lda
-         The leading dimension of a. Currently lda is not referenced in
-         this function.
-
-
-   .. container:: section
-
-
-      .. rubric:: Throws
-         :class: sectiontitle
-
-
-      onemkl::lapack::exception
-         Exception is thrown in case of incorrect argument value is supplied.
-         Position of wrong argument can be determined by `get_info()` method of exception object.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Value
-         :class: sectiontitle
-
-
-      The number of elements of type T the scratchpad memory to be passed to :ref:`onemkl_lapack_syevd` function should be able to hold.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines` 
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
 

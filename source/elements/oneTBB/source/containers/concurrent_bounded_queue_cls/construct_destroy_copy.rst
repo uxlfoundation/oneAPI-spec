@@ -11,8 +11,8 @@ Empty container constructors
 
         explicit concurrent_bounded_queue( const allocator_type& alloc );
 
-    Constructs empty ``concurrent_bounded_queue`` with an unbounded capacity.
-    If provided uses the allocator ``alloc`` to allocate the memory.
+    Constructs an empty ``concurrent_bounded_queue`` with an unbounded capacity.
+    If provided, uses the allocator ``alloc`` to allocate the memory.
 
 Constructor from the sequence of elements
 ------------------------------------------
@@ -26,7 +26,7 @@ Constructor from the sequence of elements
     Constructs a ``concurrent_bounded_queue`` with an unbounded capacity and containing all elements from
     the half-open interval ``[first, last)`` using the allocator ``alloc`` to allocate the memory.
 
-    **Requirements**: the type ``InputIterator`` shall meet the `InputIterator` requirements from
+    **Requirements**: the type ``InputIterator`` must meet the `InputIterator` requirements from the
     ``[input.iterators]`` ISO C++ Standard section.
 
 Copying constructors

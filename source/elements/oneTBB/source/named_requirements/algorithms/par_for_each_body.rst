@@ -3,9 +3,9 @@ ParallelForEachBody
 ===================
 **[req.parallel_for_each_body]**
 
-A type `Body` satisfies the `ParallelForBody` if it meet the `Function Objects`
-requirements from [function.objects] ISO C++ Standard section.
-Also it should meet one of the following requirements:
+A type `Body` satisfies `ParallelForBody` if it meets the `Function Objects`
+requirements from the [function.objects] ISO C++ Standard section.
+It should also meet one of the following requirements:
 
 ----------------------------------------------------------------
 
@@ -17,7 +17,7 @@ Also it should meet one of the following requirements:
 
 .. cpp:function:: Body::operator()( ItemType item, tbb::feeder<ItemType>& feeder ) const
 
-    Process the received item. May invoke ``feeder.add(T)`` function to spawn the additional items.
+    Process the received item. May invoke the ``feeder.add(T)`` function to spawn additional items.
 
 -----------------------------------------------------------------
 
@@ -30,14 +30,14 @@ ItemType
 --------
 
 The argument type ``ItemType`` should either satisfy the *CopyConstructibe*, *MoveConstructibe* or
-both requirements from ISO C++ [utility.arg.requirements] section.
+both requirements from the ISO C++ [utility.arg.requirements] section.
 If the type is not *CopyConstructibe*, there are additional usage restrictions:
 
-* If ``Body::operator()`` accepts its argument by value, or if the ``InputIterator`` type
+* If ``Body::operator()`` accepts an argument by value, or if the ``InputIterator`` type
   from :doc:`parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>` does
-  not also satisfy the `Forward Iterator` requirements from [forward.iterators] ISO C++ Standard section,
-  then dereferencing an ``InputIterator`` must produce an rvalue reference.
-* Additional work items should be passed to the feeder as rvalues, for example via the ``std::move`` function.
+  not satisfy the `Forward Iterator` requirements from the [forward.iterators] ISO C++ Standard section,
+  dereferencing an ``InputIterator`` must produce an rvalue reference.
+* Additional work items should be passed to the feeder as rvalues, for example, via the ``std::move`` function.
 
 See also:
 

@@ -15,7 +15,7 @@ model being used by providing a Factory to the ``streaming_node``.
 
 :doc:`opencl_node <opencl_node_cls>`
 is an example of a model-specific ``streaming_node`` that enables OpenCL* powered
-devices to be utilized and coordinated by a Flow Graph. Developers may also define custom factories
+devices to be utilized and coordinated by a Flow Graph. Developers can also define custom factories
 to support different modules.
 
 The use of ``streaming_node`` requires C++11 support.
@@ -58,8 +58,8 @@ Device           A compute resource capable of executing a kernel.
 ---------------  ------------------------------
 Kernel           The compute function to be executed on the device.
 ---------------  ------------------------------
-Kernel Argument  The data that must be provided to the device in order to execute the kernel.
-  \              Arguments may be input, output or both.
+Kernel Argument  The data that must be provided to the device to execute the kernel.
+  \              Arguments may be input, output, or both.
 ---------------  ------------------------------
 Kernel Range     The calculation range for a single kernel execution.
 ===============  ==============================
@@ -113,14 +113,14 @@ once before using the node.
 
 The output data may not be ready immediately at the end of the node execution, so output ports
 always send messages that are derived from ``async_msg``.
-However the capabilities of the ``async_msg`` class ensure that other flow graph
-nodes properly respond to these messages and do not try to use the data before it is available
+However, the capabilities of the ``async_msg`` class ensure that other flow graph
+nodes properly respond to these messages and do not try to use the data before it is made available
 (see ``async_msg``).
 
 The simplified ``streaming_node`` algorithm can be described as the following series
 of actions:
 
-* Receive input data at the input ports. If not already wrapped in the Factory-specific
+* Receive input data at the input ports. If not already, wrapped in the Factory-specific
   ``async_msg`` type, wrap the inputs.
 * Select a device for the kernel execution.
 * Send the kernel arguments and, optionally, the kernel range to the device.
@@ -218,11 +218,10 @@ are provided as references to the ``async_msg_type`` type. The list includes onl
 that were set via **set_args** by value (not as a ``port_ref``).
 
 The method **finalize** is called by the streaming node to let the factory set a
-callback for the graph to notify the graph that the kernel execution is finished. In this case the
+callback for the graph to notify the graph that the kernel execution is finished. In this case, the
 factory must call the provided finalization functor. Note that the method **finalize**
-will be called by the node only if the following graph nodes rejected this node output messages
-or if the node output ports are **not** connected with a node (so, nothing in the graph
-will wait for the kernel results). The incoming arguments ``Args&... args`` are
+is called by the node only if the following graph nodes rejected this node output messages
+or if the node output ports are **not** connected with a node (so nothing in the graph waits for the kernel results). The incoming arguments ``Args&... args`` are
 provided as either constant or non-constant references to the ``async_msg_type`` type as
 in the method **send_kernel**.
 
@@ -243,7 +242,7 @@ The following table lists the requirements for a Device Selector type ``DS``.
 ==========================================================================================
 \ ``device_type DS::operator()( factory& f )``
   \
-  Get a device from the Factory. The node starts a kernel execution on the device.
+  Gets a device from the Factory. The node starts a kernel execution on the device.
 ------------------------------------------------------------------------------------------
 = ========================================================================================
 
@@ -265,7 +264,7 @@ The following table lists the requirements for a Device Selector type ``DS``.
 Port-reference usage
 --------------------
 
-The ``streaming_node`` user can provide kernel arguments and, optionally,
+With ``streaming_node``, the user can provide kernel arguments and, optionally,
 a kernel range argument as constant values or map input ports to these arguments.
 
 If the Factory supports a kernel range, you can use the following methods of
@@ -341,8 +340,8 @@ The approaches can be easily mixed.
    node.set_args( port_ref<0, 1>(), /* stride_x */ 1, /* stride_y */ 0, /* stride_z */ 0, /* dim */ 1 );
 
 In the example above, the range is coming from port 2, while the data from
-ports 0 and 1 will be sent to the device as the kernel arguments together
-with the predefined constant arguments (stride_x, stride_y, etc.).
+ports 0 and 1 is sent to the device as the kernel arguments together
+with the predefined constant arguments (stride_x, stride_y, and so on.).
 
 Example
 -------

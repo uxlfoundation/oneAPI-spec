@@ -4,7 +4,7 @@ Hash policy
 
 Hash policy of ``concurrent_unordered_set`` manages the number of buckets in the container and
 the allowed maximum number of elements per bucket (load factor). If the maximum load factor is exceeded,
-the container can automaticaly increase the number of buckets.
+the container can automatically increase the number of buckets.
 
 Load factor
 -----------
@@ -46,4 +46,4 @@ Manual rehashing
 
         void reserve( size_type n );
 
-    Sets the number of buckets to the value which is needed to store ``n`` elements.
+    Sets the number of buckets to the value that is needed to store ``n`` elements.

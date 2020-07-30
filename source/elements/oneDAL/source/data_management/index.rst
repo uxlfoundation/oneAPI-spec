@@ -15,7 +15,7 @@ contains three main steps of data acquisition, preparation, and computation (see
 1. Raw data acquisition
 
   - Transfer out-of-memory data from various sources (databases, files, remote
-    storages) into an in-memory representation.
+    storage) into an in-memory representation.
 
 2. Data preparation
 
@@ -87,7 +87,7 @@ It is used at the data acquisition and data preparation stages for the
 following:
 
 - To extract datasets from external sources such as databases, files, remote
-  storages.
+  storage.
 
 - To load datasets into the device's local memory. Data do not always fit
   the local memory, especially when processing with accelerators. A data source
@@ -160,7 +160,7 @@ For details, see :txtref:`tables` section.
 Metadata
 --------
 
-Metadata concept is assotiated with a :txtref:`dataset` and holds information
+Metadata concept is associated with a :txtref:`dataset` and holds information
 about its structure and type. This information shall be enough to determine the
 particular type of a dataset, and it helps to understand how to interact with a
 dataset in |dal_short_name| (for example, how to use it at a particular stage of
@@ -271,7 +271,7 @@ highlighted by colors:
 To perform computations on a dataset, one shall create a :txtref:`table` object
 first. It can be done using a :txtref:`data-source` or a :txtref:`table-builder`
 object depending on the situation. The diagram briefly shows the situation when
-:txtref:`table` is interatively created from a various external entities (not
+:txtref:`table` is interactively created from a various external entities (not
 shown on a diagram) using a :txtref:`table-builder`.
 
 Once a table object is created, the data inside it can be accessed by its own

@@ -3,11 +3,10 @@ Flow Graph
 ==========
 **[flow_graph]**
 
-In addition to loop parallelism, the oneAPI Threading Building Blocks library also supports graph
-parallelism. It's possible to create graphs that are highly scalable, but it is also possible to
-create graphs that are completely sequential.
+In addition to loop parallelism, the oneAPI Threading Building Blocks (oneTBB) library also supports graph
+parallelism. With this feature, highly scalable and completely sequential graphs can be created.
 
-There are 3 types of components used to implement a graph:
+There are three types of components used to implement a graph:
 
 * A ``graph`` class instance
 * Nodes
@@ -16,9 +15,9 @@ There are 3 types of components used to implement a graph:
 Graph Class
 -----------
 
-The ``graph`` class instance is the owner of the tasks created on behalf of the flow graph. Users can wait
+The ``graph`` class instance owns all the tasks created on behalf of the flow graph. Users can wait
 on the ``graph`` if they need to wait for the completion of all of the tasks related to the flow
-graph execution. One can also register external interactions with the ``graph`` and run tasks under
+graph execution. Users can also register external interactions with the ``graph`` and run tasks under
 the ownership of the flow graph.
 
 .. toctree::
@@ -32,10 +31,10 @@ Nodes
 Abstract Interfaces
 ~~~~~~~~~~~~~~~~~~~
 
-In order to be used as a graph node type, a class needs to inherit certain abstract types and implement the
+To be used as a graph node type, a class needs to inherit certain abstract types and implement the
 corresponding interfaces. ``graph_node`` is the base class for any other node type; its interfaces
 always have to be implemented. If a node sends messages to other nodes, it has to implement the ``sender``
-interface, while with ``receiver`` interface the node may accept messages. For nodes that have multiple
+interface, while with the ``receiver`` interface the node may accept messages. For nodes that have multiple
 inputs and/or outputs, each input port is a ``receiver`` and each output port is a ``sender``.
 
 .. toctree::
@@ -48,7 +47,7 @@ inputs and/or outputs, each input port is a ``receiver`` and each output port is
 Properties
 ~~~~~~~~~~
 
-Every node in flow graph has its own properties.
+Every node in a flow graph has its own properties.
 
 .. toctree::
     :titlesonly:
@@ -117,7 +116,7 @@ Ports and Edges
 ---------------
 
 Flow Graph provides an API to manage connections between the nodes.
-For nodes that have more than one input or output port (ex. ``join_node``),
+For nodes that have more than one input or output ports (for example, ``join_node``),
 making a connection requires to specify a certain port by using special helper functions.
 
 .. toctree::

@@ -2,7 +2,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_vector`` supports
+Where possible, constructors of ``concurrent_vector`` support
 class template argument deduction (since C++17):
 
 .. code:: cpp

@@ -13,7 +13,7 @@ Pushing elements
 
     Pushes a copy of ``value`` into the container.
 
-    **Requirements**: the type ``T`` shall meet the ``CopyInsertable`` requirements from 
+    **Requirements**: the type ``T`` must meet the ``CopyInsertable`` requirements from 
     [container.requirements] and the ``CopyAssignable`` requirements from [copyassignable]
     ISO C++ Standard sections.
 
@@ -23,7 +23,7 @@ Pushing elements
 
     Pushes ``value`` into the container using move semantics.
 
-    **Requirements**: the type ``T`` shall meet the ``MoveInsertable`` requirements from 
+    **Requirements**: the type ``T`` must meet the ``MoveInsertable`` requirements from 
     [container.requirements] and the ``MoveAssignable`` requirements from [moveassignable]
     ISO C++ Standard sections.
 
@@ -36,7 +36,7 @@ Pushing elements
 
     Pushes a new element constructed from ``args`` into the container.
 
-    **Requirements**: the type ``T`` shall meet the ``EmplaceConstructible`` requirements from 
+    **Requirements**: the type ``T`` must meet the ``EmplaceConstructible`` requirements from 
     [container.requirements] and the ``MoveAssignable`` requirements from [moveassignable]
     ISO C++ Standard sections.
 
@@ -49,10 +49,10 @@ Popping elements
 
     If the container is empty, does nothing.
 
-    Otherwise, copies the highest priority element from the container and assigns it to the ``value``.
+    Otherwise, copies the highest priority element from the container and assigns it to ``value``.
     The popped element is destroyed.
 
-    **Requirements**: the type ``T`` shall meet the ``MoveAssignable`` requirements from [moveassignable]
+    **Requirements**: the type ``T`` must meet the ``MoveAssignable`` requirements from the [moveassignable]
     ISO C++ Standard section.
 
-    **Returns**: ``true`` if the element was popped, ``false`` otherwise.
+    **Returns**: ``true`` if the element was popped; ``false``, otherwise.

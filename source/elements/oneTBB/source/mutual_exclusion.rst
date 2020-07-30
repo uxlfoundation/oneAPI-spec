@@ -4,7 +4,7 @@ Mutual Exclusion
 **[mutex]**
 
 The library provides a set of mutual exclusion primitives to simplify writing race-free code.
-A mutex object facilitates protection against data races and allows safe synchronization of data between threads.
+A mutex object facilitates protection against data races and provides safe synchronization of data between threads.
 
 Mutex Classes
 -------------

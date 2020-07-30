@@ -3,7 +3,7 @@ split_node
 ==========
 **[flow_graph.split_node]**
 
-A ``split_node`` sends each element of the incoming tuple to the output port that matches the element's index
+A ``split_node`` sends each element of the incoming tuple to the output port that matches the element index
 in the incoming tuple.
 
 .. code:: cpp
@@ -32,12 +32,12 @@ in the incoming tuple.
 Requirements:
 
 * The type ``TupleType`` must be an instantiation of ``std::tuple``. Each type that the tuple stores
-  shall meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
+  must meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
   requirements from [copyassignable] ISO C++ Standard sections.
 
-``split_node`` is a ``receiver<TupleType>`` and has a tuple of ``sender`` output ports; Each of output
+``split_node`` is a ``receiver<TupleType>`` and has a tuple of ``sender`` output ports. Each of output
 ports is specified by corresponding tuple element type. This node receives a tuple at its single input
-portand generates a message from each element of the tuple, passing each to them corresponding output port.
+port and generates a message from each element of the tuple, passing each to the corresponding output port.
 
 ``split_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
 
@@ -54,8 +54,8 @@ Member functions
 
   Constructs a ``split_node`` that has the same initial state that
   ``other`` had when it was constructed. The ``split_node`` that is
-  constructed will have a reference to the same ``graph`` object as
-  ``other``. The predecessors and successors of ``other`` will not be
+  constructed has a reference to the same ``graph`` object as
+  ``other``. The predecessors and successors of ``other`` are not
   copied.
 
 .. cpp:function:: ~split_node()
@@ -65,7 +65,7 @@ Member functions
 .. cpp:function:: bool try_put( const TupleType &v )
 
   Broadcasts each element of the incoming tuple to the nodes connected
-  to the ``split_node``'s output ports. The element at index ``i`` of
+  to the ``split_node`` output ports. The element at index ``i`` of
   ``v`` will be broadcast through the ``i``\ :sup:`th` output port.
 
   **Returns**: ``true``
