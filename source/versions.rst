@@ -39,7 +39,17 @@ Release Notes
   * Change top-level namespace to oneapi::mkl
 
 * oneDAL
- 
+
+
+* oneDPL
+
+  * API updates, including namespaces
+  * Add detailed descriptions for execution policies, non-standard algorithms, iterator types, etc.
+
+* oneTBB
+
+  * Editorial review changes
+
 0.85
 ----
 
