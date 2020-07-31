@@ -1,107 +1,185 @@
-.. _mkl-rng-weibull:
+.. _onemkl_rng_weibull:
 
-onemkl::rng::weibull
-====================
+weibull
+=======
+
+Class is used for generation of Weibull distributed real types random numbers.
+
+.. _onemkl_rng_weibull_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Weibull distributed with displacement :math:`a`, scalefactor :math:`\beta`, and shape :math:`\alpha`, where :math:`a, \beta, \alpha \in R; \alpha > 0; \beta > 0`.
+
+The probability distribution is given by:
+
+.. math::
+
+    f_{a, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} \frac{\alpha}{\beta^\alpha}(x - a)^{\alpha - 1}exp((-\frac{x - a}{\beta})^{\alpha}), x \ge a \\ 0, x < a \end{array}\right.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{a, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} 1 - exp((-\frac{x - a}{\beta})^{\alpha}), x \ge a \\ 0, x < a \end{array}\right.
+
+.. _onemkl_rng_weibull_syntax:
+
+class weibull
+-------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = weibull_method::by_default>
+    class weibull {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        weibull();
+        explicit weibull(RealType alpha, RealType a, RealType b);
+        RealType alpha() const;
+        RealType a() const;
+        RealType beta() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::weibull_method::by_default> \
+                oneapi::mkl::rng::weibull
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::weibull_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::weibull_method::by_default``
+                * ``oneapi::mkl::rng::weibull_method::icdf``
+                * ``oneapi::mkl::rng::weibull_method::icdf_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `weibull()`_
+          - Default constructor
+        * - `explicit weibull(RealType alpha, RealType a, RealType beta)`_
+          - Constructor with parameters
+        * - `RealType alpha() const`_
+          - Method to obtain shape value
+        * - `RealType a() const`_
+          - Method to obtain displacement value
+        * - `RealType beta() const`_
+          - Method to obtain scalefactor value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: weibull::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: weibull::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`weibull()`:
+
+        .. cpp:function:: weibull::weibull()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `alpha` = 1.0, `a` = 0.0, and `b` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit weibull(RealType alpha, RealType a, RealType beta)`:
+
+        .. cpp:function:: explicit weibull::weibull(RealType alpha, RealType a, RealType beta)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `alpha` is a shape value, `a` is a displacement value, `beta` is a scalefactor value.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates Weibull distributed random numbers.
+    .. container:: section
 
+        .. _`RealType alpha() const`:
 
-   .. container:: section
-      :name: GUID-C14EA706-7349-4B76-A1D9-7B05B0A12622
+        .. cpp:function:: RealType weibull::alpha() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `alpha` - shape value.
 
-      ::
-	 
-        template<typename T = float, method Method =      inverse_function>
-          class weibull {
-          public:
-            weibull(): weibull((T)0.0, (T)1.0){}
-            weibull(T alpha, T a, T beta)
-            weibull(const weibull<T, Method>& other)
-            T alpha() const
-            T a() const
-            T beta() const
-           weibull<T, Method>& operator=(const weibull<T,      Method>& other)
-          }
+    .. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. _`RealType a() const`:
 
+        .. cpp:function:: RealType weibull::a() const
 
-      -  mkl_sycl.hpp
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Description
-         :class: sectiontitle
+            Returns the distribution parameter `a` - displacement value.
 
+    .. container:: section
 
-      The onemkl::rng::weibull class object is used in the
-      onemkl::rng::generate function to provide Weibull distributed random
-      numbers with displacement ``a``, scalefactor β, and shape α, where
-      ``α, β, a∈R ; α > 0, β > 0``.
+        .. _`RealType beta() const`:
 
+        .. cpp:function:: RealType weibull::beta() const
 
-      The probability density function is given by:
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      | 
-      | |image0|
+            Returns the distribution parameter `beta` - scalefactor value.
 
-
-      The cumulative distribution function is as follows:
-
-
-      | 
-      | |image1|
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::inverse_function``\       \ ``onemkl::rng::inverse_function | onemkl::rng::accurate``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     alpha    
-           -     \ ``T (float, double)``\     
-           -     Shape α    
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     beta    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor β.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-8F2DCE6A-CB54-4CEA-A5EB-937893A3DB34-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-6F53C93C-0634-4E53-8874-5ACBD4C9AA3E-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

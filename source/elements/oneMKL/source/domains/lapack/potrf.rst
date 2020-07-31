@@ -1,180 +1,160 @@
+.. _onemkl_lapack_potrf:
 
 potrf
 =====
 
-
-.. container::
-
-
-   Computes the Cholesky factorization of a symmetric (Hermitian)
-   positive-definite matrix.This routine belongs to the
-   ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-8EAC9176-B4CB-4B1E-B85F-233555DABA1E
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void potrf(queue &exec_queue, onemkl::uplo      upper_lower, std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<std::int64_t,1> &info)
-
-      ``potrf`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Computes the Cholesky factorization of a symmetric (Hermitian)
+positive-definite matrix.
 
 .. container:: section
-   :name: GUID-FD48832B-27F6-4FEC-A6AC-548E362E02AB
 
+  .. rubric:: Description
+      
+``potrf`` supports the following precisions.
 
-   .. rubric:: Description
-      :class: sectiontitle
+     .. list-table:: 
+        :header-rows: 1
 
+        * -  T 
+        * -  ``float`` 
+        * -  ``double`` 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-   The routine forms the Cholesky factorization of a symmetric
-   positive-definite or, for complex data, Hermitian positive-definite
-   matrix ``A``:
+The routine forms the Cholesky factorization of a symmetric
+positive-definite or, for complex data, Hermitian positive-definite
+matrix :math:`A`:
 
+    .. list-table:: 
+       :header-rows: 1
+ 
+       * -  :math:`A` = :math:`U^{T}U` for real data, :math:`A = U^{H}U` for complex data
+         -  if upper_lower=\ ``onemkl::uplo::upper`` 
+       * -  :math:`A` = :math:`LL^{T}` for real data, :math:`A = LL^{H}` for complex data
+         -  if upper_lower=\ ``onemkl::uplo::lower`` 
 
-   .. list-table:: 
-      :header-rows: 1
+where :math:`L` is a lower triangular matrix and :math:`U` is upper
+triangular.
 
-      * -  ``A`` = ``U``\ :sup:`T`\ \*\ ``U`` for real data, ``A`` =    ``U``\ :sup:`H`\ \*\ ``U`` for complex data
-        -  if upper_lower=\ ``onemkl::uplo::upper`` 
-      * -  ``A`` = ``L``\ \*\ ``L``\ :sup:`T` for real data, ``A`` =    ``L``\ \*\ ``L``\ :sup:`H` for complex data
-        -  if upper_lower=\ ``onemkl::uplo::lower`` 
-
-
-
-
-   where ``L`` is a lower triangular matrix and ``U`` is upper
-   triangular.
-
-
-.. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   upper_lower
-      Indicates whether the upper or lower triangular part of ``A`` is
-      stored and how ``A`` is factored:
-
-
-      If upper_lower=\ ``onemkl::uplo::upper``, the array ``a`` stores the
-      upper triangular part of the matrix ``A``, and the strictly lower
-      triangular part of the matrix is not referenced.
-
-
-      If upper_lower=\ ``onemkl::uplo::lower``, the array ``a`` stores the
-      lower triangular part of the matrix ``A``, and the strictly upper
-      triangular part of the matrix is not referenced.
-
-
-   n
-      Specifies the order of the matrix ``A`` (``0≤n``).
-
-
-   a
-      Buffer holding input matrix ``A``. The buffer a contains either
-      the upper or the lower triangular part of the matrix ``A`` (see
-      upper_lower). The second dimension of a must be at least
-      ``max(1, n)``.
-
-
-   lda
-      The leading dimension of a.
-
+potrf (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
+  .. rubric:: Syntax
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   a
-      The buffer a is overwritten by the Cholesky factor ``U`` or ``L``,
-      as specified by upper_lower.
-
-
-   info
-      Buffer containing error information.
-
-
-      If ``info=0``, execution was successful.
-
-
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
-
-
-      If ``info=i``, the leading minor of order ``i`` (and therefore the
-      matrix ``A`` itself) is not positive-definite, and the
-      factorization could not be completed. This may indicate an error
-      in forming the matrix ``A``.
-
+.. cpp:function::  void oneapi::mkl::lapack::potrf(cl::sycl::queue &queue, onemkl::uplo      upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &scratchpad, std::int64_t      scratchpad_size)
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Example
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+upper_lower
+   Indicates whether the upper or lower triangular part of :math:`A` is
+   stored and how :math:`A` is factored:
 
-   An example of how to use ``potrf``\ can be found in the oneMKL
-   installation directory, under:
+   If upper_lower=\ ``onemkl::uplo::upper``, the array ``a`` stores the
+   upper triangular part of the matrix :math:`A`, and the strictly lower
+   triangular part of the matrix is not referenced.
 
+   If upper_lower=\ ``onemkl::uplo::lower``, the array ``a`` stores the
+   lower triangular part of the matrix :math:`A`, and the strictly upper
+   triangular part of the matrix is not referenced.
 
-   ::
+n
+   Specifies the order of the matrix :math:`A` (:math:`0 \le n`).
 
+a
+   Buffer holding input matrix :math:`A`. The buffer ``a`` contains either
+   the upper or the lower triangular part of the matrix :math:`A` (see
+   upper_lower). The second dimension of ``a`` must be at least
+   :math:`\max(1, n)`.
 
-      examples/sycl/lapack/potrf.cpp
+lda
+   The leading dimension of ``a``.
 
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_potrf_scratchpad_size` function.
 
 .. container:: section
-   :name: GUID-3B00B441-C7C0-4D8A-A819-41037F1E5862
 
+  .. rubric:: Output Parameters
 
-   .. rubric:: Known Limitations
-      :class: sectiontitle
+a
+   The buffer ``a`` is overwritten by the Cholesky factor :math:`U` or :math:`L`,
+   as specified by ``upper_lower``.
 
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
-   GPU support is for only real precisions.
+potrf (USM Version)
+----------------------
 
+.. container:: section
 
-   GPU support for this function does not include error reporting through
-   the info parameter.
+  .. rubric:: Syntax
+         
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrf(cl::sycl::queue &queue, onemkl::uplo      upper_lower, std::int64_t n, T *a, std::int64_t lda, T *scratchpad, std::int64_t      scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-.. container:: familylinks
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
+upper_lower
+   Indicates whether the upper or lower triangular part of :math:`A` is
+   stored and how :math:`A` is factored:
 
-   .. container:: parentlink
+   If upper_lower=\ ``onemkl::uplo::upper``, the array ``a`` stores the
+   upper triangular part of the matrix :math:`A`, and the strictly lower
+   triangular part of the matrix is not referenced.
 
+   If upper_lower=\ ``onemkl::uplo::lower``, the array ``a`` stores the
+   lower triangular part of the matrix :math:`A`, and the strictly upper
+   triangular part of the matrix is not referenced.
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+n
+   Specifies the order of the matrix :math:`A` (:math:`0 \le n`).
+
+a
+   Pointer to input matrix :math:`A`. The array ``a`` contains either
+   the upper or the lower triangular part of the matrix :math:`A` (see
+   upper_lower). The second dimension of ``a`` must be at least
+   :math:`\max(1, n)`.
+
+lda
+   The leading dimension of ``a``.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_potrf_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+a
+   The memory pointer to by pointer ``a`` is overwritten by the Cholesky factor :math:`U` or :math:`L`,
+   as specified by ``upper_lower``.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 
 

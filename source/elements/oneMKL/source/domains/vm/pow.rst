@@ -1,3 +1,4 @@
+.. _onemkl_vm_pow:
 
 pow
 ===
@@ -10,7 +11,6 @@ pow
 
 
    .. container:: section
-      :name: GUID-7DE07F1A-1D16-4E23-B1AB-9B798F71FD3B
 
 
       .. rubric:: Syntax
@@ -20,37 +20,36 @@ pow
       Buffer API:
 
 
-      .. cpp:function::  void pow(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::pow(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event pow(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::pow(queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``pow`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-C055D80E-FB98-4BCC-800D-FA894D3210A1
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The pow(a,b) function computes ``a`` to the power ``b`` for elements
+   The pow(a, b) function computes ``a`` to the power ``b`` for elements
    of two vectors.
 
 
@@ -66,245 +65,245 @@ pow
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -     Argument 1    
-           -     Argument 2    
-           -     Result    
-           -     Error Code    
-         * -  +0 
-           -  neg. odd integer 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  -0 
-           -  neg. odd integer 
-           -  -∞ 
-           -  ``status::errdom`` 
-         * -  +0 
-           -  neg. even integer 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  -0 
-           -  neg. even integer 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  +0 
-           -  neg. non-integer 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  -0 
-           -  neg. non-integer 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  -0 
-           -  pos. odd integer 
-           -  +0 
-           -    
-         * -  -0 
-           -  pos. odd integer 
-           -  -0 
-           -    
-         * -  +0 
-           -  pos. even integer 
-           -  +0 
-           -    
-         * -  -0 
-           -  pos. even integer 
-           -  +0 
-           -    
-         * -  +0 
-           -  pos. non-integer 
-           -  +0 
-           -    
-         * -  -0 
-           -  pos. non-integer 
-           -  +0 
-           -    
-         * -  -1 
-           -  +∞ 
-           -  +1 
-           -    
-         * -  -1 
-           -  -∞ 
-           -  +1 
-           -    
-         * -  +1 
-           -  any value 
-           -  +1 
-           -    
-         * -  +1 
-           -  +0 
-           -  +1 
-           -    
-         * -  +1 
-           -  -0 
-           -  +1 
-           -    
-         * -  +1 
-           -  +∞ 
-           -  +1 
-           -    
-         * -  +1 
-           -  -∞ 
-           -  +1 
-           -    
-         * -  +1 
-           -  QNAN 
-           -  +1 
-           -    
-         * -  any value 
-           -  +0 
-           -  +1 
-           -    
-         * -  +0 
-           -  +0 
-           -  +1 
-           -    
-         * -  -0 
-           -  +0 
-           -  +1 
-           -    
-         * -  +∞ 
-           -  +0 
-           -  +1 
-           -    
-         * -  -∞ 
-           -  +0 
-           -  +1 
-           -    
-         * -  QNAN 
-           -  +0 
-           -  +1 
-           -    
-         * -  any value 
-           -  -0 
-           -  +1 
-           -    
-         * -  +0 
-           -  -0 
-           -  +1 
-           -    
-         * -  -0 
-           -  -0 
-           -  +1 
-           -    
-         * -  +∞ 
-           -  -0 
-           -  +1 
-           -    
-         * -  -∞ 
-           -  -0 
-           -  +1 
-           -    
-         * -  QNAN 
-           -  -0 
-           -  +1 
-           -    
-         * -  a < +0 
-           -  non-integer 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  \|a\| < 1 
-           -  -∞ 
-           -  +∞ 
-           -    
-         * -  +0 
-           -  -∞ 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  -0 
-           -  -∞ 
-           -  +∞ 
-           -  ``status::errdom`` 
-         * -  \|a\| > 1 
-           -  -∞ 
-           -  +0 
-           -    
-         * -  +∞ 
-           -  -∞ 
-           -  +0 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -  +0 
-           -    
-         * -  \|a\| < 1 
-           -  +∞ 
-           -  +0 
-           -    
-         * -  +0 
-           -  +∞ 
-           -  +0 
-           -    
-         * -  -0 
-           -  +∞ 
-           -  +0 
-           -    
-         * -  \|a\| > 1 
-           -  +∞ 
-           -  +∞ 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  neg. odd integer 
-           -  -0 
-           -    
-         * -  -∞ 
-           -  neg. even integer 
-           -  +0 
-           -    
-         * -  -∞ 
-           -  neg. non-integer 
-           -  +0 
-           -    
-         * -  -∞ 
-           -  pos. odd integer 
-           -  -∞ 
-           -    
-         * -  -∞ 
-           -  pos. even integer 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  pos. non-integer 
-           -  +∞ 
-           -    
-         * -  +∞ 
-           -  b < +0 
-           -  +0 
-           -    
-         * -  +∞ 
-           -  b > +0 
-           -  +∞ 
-           -    
-         * -  Big finite value\* 
-           -  Big finite value\* 
-           -  +/-∞ 
-           -  ``status::overflow`` 
-         * -  QNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
-         * -  QNAN 
-           -  SNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument 1
+           - Argument 2
+           - Result
+           - Error Code
+         * - +0
+           - neg. odd integer
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -0
+           - neg. odd integer
+           - -∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +0
+           - neg. even integer
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -0
+           - neg. even integer
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +0
+           - neg. non-integer
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -0
+           - neg. non-integer
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -0
+           - pos. odd integer
+           - +0
+           -  
+         * - -0
+           - pos. odd integer
+           - -0
+           -  
+         * - +0
+           - pos. even integer
+           - +0
+           -  
+         * - -0
+           - pos. even integer
+           - +0
+           -  
+         * - +0
+           - pos. non-integer
+           - +0
+           -  
+         * - -0
+           - pos. non-integer
+           - +0
+           -  
+         * - -1
+           - +∞
+           - +1
+           -  
+         * - -1
+           - -∞
+           - +1
+           -  
+         * - +1
+           - any value
+           - +1
+           -  
+         * - +1
+           - +0
+           - +1
+           -  
+         * - +1
+           - -0
+           - +1
+           -  
+         * - +1
+           - +∞
+           - +1
+           -  
+         * - +1
+           - -∞
+           - +1
+           -  
+         * - +1
+           - QNAN
+           - +1
+           -  
+         * - any value
+           - +0
+           - +1
+           -  
+         * - +0
+           - +0
+           - +1
+           -  
+         * - -0
+           - +0
+           - +1
+           -  
+         * - +∞
+           - +0
+           - +1
+           -  
+         * - -∞
+           - +0
+           - +1
+           -  
+         * - QNAN
+           - +0
+           - +1
+           -  
+         * - any value
+           - -0
+           - +1
+           -  
+         * - +0
+           - -0
+           - +1
+           -  
+         * - -0
+           - -0
+           - +1
+           -  
+         * - +∞
+           - -0
+           - +1
+           -  
+         * - -∞
+           - -0
+           - +1
+           -  
+         * - QNAN
+           - -0
+           - +1
+           -  
+         * - a < +0
+           - non-integer
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - \|a\| < 1
+           - -∞
+           - +∞
+           -  
+         * - +0
+           - -∞
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - -0
+           - -∞
+           - +∞
+           - ``oneapi::mkl::vm::status::errdom``
+         * - \|a\| > 1
+           - -∞
+           - +0
+           -  
+         * - +∞
+           - -∞
+           - +0
+           -  
+         * - -∞
+           - -∞
+           - +0
+           -  
+         * - \|a\| < 1
+           - +∞
+           - +0
+           -  
+         * - +0
+           - +∞
+           - +0
+           -  
+         * - -0
+           - +∞
+           - +0
+           -  
+         * - \|a\| > 1
+           - +∞
+           - +∞
+           -  
+         * - +∞
+           - +∞
+           - +∞
+           -  
+         * - -∞
+           - +∞
+           - +∞
+           -  
+         * - -∞
+           - neg. odd integer
+           - -0
+           -  
+         * - -∞
+           - neg. even integer
+           - +0
+           -  
+         * - -∞
+           - neg. non-integer
+           - +0
+           -  
+         * - -∞
+           - pos. odd integer
+           - -∞
+           -  
+         * - -∞
+           - pos. even integer
+           - +∞
+           -  
+         * - -∞
+           - pos. non-integer
+           - +∞
+           -  
+         * - +∞
+           - b < +0
+           - +0
+           -  
+         * - +∞
+           - b > +0
+           - +∞
+           -  
+         * - Big finite value\*
+           - Big finite value\*
+           - +/-∞
+           - ``oneapi::mkl::vm::status::overflow``
+         * - QNAN
+           - QNAN
+           - QNAN
+           -  
+         * - QNAN
+           - SNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - SNAN
+           - QNAN
+           -  
 
 
 
@@ -318,7 +317,7 @@ pow
    #. Returns ∞ in the result.
 
 
-   #. Sets the VM Error Status to status::overflow.
+   #. Sets the VM Error Status to oneapi::mkl::vm::status::overflow.
 
 
    Overflow in a complex function occurs (supported in the HA/LA
@@ -326,18 +325,17 @@ pow
    are finite numbers, but the real or imaginary part of the computed
    result is so large that it does not fit the target precision. In this
    case, the function returns ∞ in that part of the result, and sets the
-   VM Error Status to ``status::overflow`` (overriding any possible
-   ``status::accuracy_warning`` status).
+   VM Error Status to ``oneapi::mkl::vm::status::overflow`` (overriding any possible
+   ``oneapi::mkl::vm::status::accuracy_warning`` status).
 
 
    The complex double precision versions of this function are
    implemented in the EP accuracy mode only. If used in HA or LA mode,
    the functions set the VM Error Status to
-   ``status::accuracy_warning``.
+   ``oneapi::mkl::vm::status::accuracy_warning``.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -365,14 +363,14 @@ pow
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -402,20 +400,19 @@ pow
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -440,31 +437,11 @@ pow
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use pow can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vpow.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Power and Root
-      Functions <power-and-root-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

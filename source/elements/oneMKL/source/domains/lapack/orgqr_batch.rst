@@ -1,237 +1,246 @@
+.. _onemkl_lapack_orgqr_batch:
 
 orgqr_batch
 ===========
 
+Generates the orthogonal/unitary matrix :math:`Q_i` of the QR factorizations for a group of general matrices.
 
-.. container::
+.. rubric:: Description
 
+``orgqr_batch`` supports the following precisions.
 
-   Generates the orthogonal/unitary matrix ``Q``\ :sub:`i` of the QR
-   factorizations for a group of general matrices. This routine belongs
-   to the ``onemkl::lapack``\ namespace.
+   .. list-table:: 
+      :header-rows: 1
 
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
 
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
+.. _onemkl_lapack_orgqr_batch_buffer:
 
+orgqr_batch (Buffer Version)
+----------------------------
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+.. rubric:: Description
 
+The buffer version of ``orgqr_batch`` supports only the strided API. 
+   
+**Strided API**
 
-      .. container:: dlsyntaxpara
+ | The routine generates the wholes or parts of :math:`m \times n` orthogonal matrices :math:`Q_i` of the batch of QR factorizations formed by the Strided API of the :ref:`onemkl_lapack_geqrf_batch_buffer` function.
+ | Usually :math:`Q_i` is determined from the QR factorization of an :math:`m \times p` matrix :math:`A_i` with :math:`m \ge p`.
+ | To compute the whole matrices :math:`Q_i`, use:
+ | ``orgqr_batch(queue, m, m, p, a, ...)``
+ | To compute the leading :math:`p` columns of :math:`Q_i` (which form an orthonormal basis in the space spanned by the columns of :math:`A_i`):
+ | ``orgqr_batch(queue, m, p, p, a, ...)``
+ | To compute the matrices :math:`Q_i^k` of the QR factorizations of leading :math:`k` columns of the matrices :math:`A_i`:
+ | ``orgqr_batch(queue, m, m, k, a, ...)``
+ | To compute the leading :math:`k` columns of :math:`Q_i^k` (which form an orthonormal basis in the space spanned by leading :math:`k` columns of the matrices :math:`A_i`):
+ | ``orgqr_batch(queue, m, k, k, a, ...)``
 
+.. rubric:: Syntax
 
-         .. cpp:function::  void orgqr_batch(queue &exec_queue,         std::vector<std::int64_t> const& m, std::vector<std::int64_t>         const& n, std::vector<std::int64_t> const& k, std::vector<         buffer<T,1> > &a, std::vector< std::int64_t > const& lda,         std::vector< buffer<T,1> > & tau, std::vector<         buffer<std::int64_t,1> > &info)
+.. cpp:function::  void oneapi::mkl::lapack::orgqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
-         ``orgqr_batch`` supports the following precisions.
+.. container:: section
 
+   .. rubric:: Input Parameters
 
-         .. list-table:: 
-            :header-rows: 1
+queue
+  Device queue where calculations will be performed.
 
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
+m
+  Number of rows in the matrices :math:`A_i` (:math:`0 \le m`).
 
+n
+  Number of columns in the matrices :math:`A_i` (:math:`0 \le n`).
 
+k
+  Number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k \le n`).
 
+a
+  Array resulting after call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_buffer` function.
 
-   .. container:: section
-      :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
+lda
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
+stride_a
+  The stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
-      .. rubric:: Description
-         :class: sectiontitle
+tau
+  Array resulting from call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_buffer` function.
 
+stride_tau
+  Stride between the beginnings of arrays :math:`\tau_i` inside the array ``tau``.
 
-      The routine generates the whole or part of the orthogonal/unitary
-      matrices ``Q``\ :sub:`1`, ``Q``\ :sub:`2`, …,
-      ``Q``\ :sub:`batch_size` of the QR factorizations formed by the
-      routine
-      `geqrf_batch <geqrf_batch.html>`__.
-      Use this routine after a call to
-      `geqrf_batch <geqrf_batch.html>`__.
+batch_size
+  Specifies the number of problems in a batch.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
-      Usually ``Q``\ :sub:`i` is determined from the QR factorization of
-      an ``m``\ :sub:`i`-by-``p``\ :sub:`i` matrix ``A``\ :sub:`i` with
-      ``m``\ :sub:`i`\ ≥\ ``p``\ :sub:`i`. To compute the whole matrix
-      ``Q``\ :sub:`i`, use:
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_orgqr_batch_scratchpad_size` function.
 
+.. container:: section
 
-      .. container:: tablenoborder
+   .. rubric:: Output Parameters
 
+a
+  Batch of :math:`n` leading columns of the :math:`m \times m` orthogonal matrices :math:`Q_i`.
 
-         .. list-table:: 
-            :header-rows: 1
+.. _onemkl_lapack_orgqr_batch_usm:
 
-            * -  ``m[i]`` 
-              -  ``m``\ :sub:`i` 
-            * -  ``n[i]`` 
-              -  ``m``\ :sub:`i` 
-            * -  ``k[i]`` 
-              -  ``p``\ :sub:`i` 
+orgqr_batch (USM Version)
+-------------------------
 
+.. rubric:: Description
 
+The USM version of ``orgqr_batch`` supports the group API and strided API. 
 
+**Group API**
 
-      To compute the leading pi columns of ``Q``\ :sub:`i` (which form
-      an orthonormal basis in the space spanned by the columns of
-      ``A``\ :sub:`i`):
+ | The routine generates the wholes or parts of :math:`m \times n` orthogonal matrices :math:`Q_i` of the batch of QR factorizations formed by the Group API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
+ | Usually :math:`Q_i` is determined from the QR factorization of an :math:`m \times p` matrix :math:`A_i` with :math:`m \ge p`.
+ | To compute the whole matrices :math:`Q_i`, use:
+ | ``orgqr_batch(queue, m, m, p, a, ...)``
+ | To compute the leading :math:`p` columns of :math:`Q_i` (which form an orthonormal basis in the space spanned by the columns of :math:`A_i`):
+ | ``orgqr_batch(queue, m, p, p, a, ...)``
+ | To compute the matrices :math:`Q_i^k` of the QR factorizations of leading :math:`k` columns of the matrices :math:`A_i`:
+ | ``orgqr_batch(queue, m, m, k, a, ...)``
+ | To compute the leading :math:`k` columns of :math:`Q_i^k` (which form an orthonormal basis in the space spanned by leading :math:`k` columns of the matrices :math:`A_i`):
+ | ``orgqr_batch(queue, m, k, k, a, ...)``
 
+.. rubric:: Syntax
 
-      .. container:: tablenoborder
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-         .. list-table:: 
-            :header-rows: 1
+   .. rubric:: Input Parameters
 
-            * -  ``m[i]`` 
-              -  ``m``\ :sub:`i` 
-            * -  ``n[i]`` 
-              -  ``p``\ :sub:`i` 
-            * -  ``k[i]`` 
-              -  ``p``\ :sub:`i` 
 
+queue
+  Device queue where calculations will be performed.
 
+m
+  Array of ``group_count`` :math:`m_g` parameters as previously supplied to group version of geqrf_batch function.
 
+n
+  Array of ``group_count`` :math:`n_g` parameters as previously supplied to group version of geqrf_batch function.
 
-      To compute the matrix ``Qk``\ :sub:`i` of the QR factorization of
-      the leading ``k``\ :sub:`i` columns of the matrix ``A``\ :sub:`i`:
+k
+  Array of ``group_count`` :math:`k_g` parameters as previously supplied to the Group API of the :ref:`onemkl_lapack_geqrf_batch_usm` function. The number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k_g \le n_g`).
 
+a
+  Array resulting after call to the Group API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
-      .. container:: tablenoborder
+lda
+  Array of leading dimensions of :math:`A_i` as previously supplied to the Group API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
+tau
+  Array resulting after call to the Group API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
-         .. list-table:: 
-            :header-rows: 1
+group_count
+  Number of groups of parameters. Must be at least 0.
 
-            * -  ``m[i]`` 
-              -  ``m``\ :sub:`i` 
-            * -  ``n[i]`` 
-              -  ``m``\ :sub:`i` 
-            * -  ``k[i]`` 
-              -  ``k``\ :sub:`i` 
+group_sizes
+  Array of ``group_count`` integers. Array element with index :math:`g` specifies the number of problems to solve for each of the groups of parameters :math:`g`. So the total number of problems to solve, ``batch_size``, is a sum of all parameter group sizes.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by Group API of the :ref:`onemkl_lapack_orgqr_batch_scratchpad_size` function.
 
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
-      To compute the leading ``k``\ :sub:`i` columns of ``Qk``\ :sub:`i`
-      (which form an orthonormal basis in the space spanned by the
-      leading ``k``\ :sub:`i` columns of the matrix ``A``\ :sub:`i`):
+.. container:: section
 
+   .. rubric:: Output Parameters
 
-      .. container:: tablenoborder
+a
+  :math:`n_g` leading columns of the :math:`m_g \times m_g` orthogonal matrices :math:`Q_i`, where :math:`g` is an index of group of parameters corresponding to :math:`Q_i`.
 
+.. container:: section
+   
+   .. rubric:: Return Values
 
-         .. list-table:: 
-            :header-rows: 1
+Output event to wait on to ensure computation is complete.
 
-            * -  ``m[i]`` 
-              -  ``m``\ :sub:`i` 
-            * -  ``n[i]`` 
-              -  ``k``\ :sub:`i` 
-            * -  ``k[i]`` 
-              -  ``k``\ :sub:`i` 
+**Strided API**
 
+ | The routine generates the wholes or parts of :math:`m \times n` orthogonal matrices :math:`Q_i` of the batch of QR factorizations formed by the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
+ | Usually :math:`Q_i` is determined from the QR factorization of an :math:`m \times p` matrix :math:`A_i` with :math:`m \ge p`.
+ | To compute the whole matrices :math:`Q_i`, use:
+ | ``orgqr_batch(queue, m, m, p, a, ...)``
+ | To compute the leading :math:`p` columns of :math:`Q_i` (which form an orthonormal basis in the space spanned by the columns of :math:`A_i`):
+ | ``orgqr_batch(queue, m, p, p, a, ...)``
+ | To compute the matrices :math:`Q_i^k` of the QR factorizations of leading :math:`k` columns of the matrices :math:`A_i`:
+ | ``orgqr_batch(queue, m, m, k, a, ...)``
+ | To compute the leading :math:`k` columns of :math:`Q_i^k` (which form an orthonormal basis in the space spanned by leading :math:`k` columns of the matrices :math:`A_i`):
+ | ``orgqr_batch(queue, m, k, k, a, ...)``
 
+.. rubric:: Syntax
 
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
-   .. container:: section
-      :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
+.. container:: section
 
+   .. rubric:: Input Parameters
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+queue
+  Device queue where calculations will be performed.
 
+m
+  Number of rows in the matrices :math:`A_i` (:math:`0 \le m`).
 
-      exec_queue
-         The queue where the routine should be executed.
+n
+  Number of columns in the matrices :math:`A_i` (:math:`0 \le n`).
 
+k
+  Number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k \le n`).
 
-      m
-         A vector, ``m[i]`` is the order of the unitary matrix
-         ``Q``\ :sub:`i`\ ``(0≤m[i])``.
+a
+  Array resulting after call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
+lda
+  Leading dimension of :math:`A_i` (:math:`\text{lda} \le m`).
 
-      n
-         A vector, ``n[i]`` is the number of columns of ``Q``\ :sub:`i`
-         to be computed ``(0≤n[i]≤m[i])``.
+stride_a
+  The stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
+tau
+  Array resulting from call to the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm` function.
 
-      k
-         A vector, ``k[i]`` is the number of elementary reflectors whose
-         product defines the matrix ``Q``\ :sub:`i`\ ``(0≤k[i]≤n[i])``.
+stride_tau
+  Stride between the beginnings of arrays :math:`\tau_i` inside the array ``tau``.
 
+batch_size
+  Specifies the number of problems in a batch.
 
-      a
-         A vector of buffers as returned by
-         `geqrf_batch <geqrf_batch.html>`__.
-         ``a[i]`` must be of size at least ``lda[i]*max(1, n[i])``.
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less then the value returned by the Strided API of the :ref:`onemkl_lapack_orgqr_batch_scratchpad_size` function.
 
-      lda
-         A vector, ``lda[i]`` is the leading dimension of
-         ``a[i] (m[i]≤lda[i])``.
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
+.. container:: section
 
-      tau
-         A vector of buffers tau for storing scalars defining elementary
-         reflectors, as returned by
-         `geqrf_batch <geqrf_batch.html>`__.
+   .. rubric:: Output Parameters
 
+a
+  Batch of :math:`n` leading columns of the :math:`m \times m` orthogonal matrices :math:`Q_i`.
 
-   .. container:: section
-      :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
+.. container:: section
+   
+   .. rubric:: Return Values
 
+Output event to wait on to ensure computation is complete.
 
-      .. rubric:: Output Parameters
-         :class: sectiontitle
-
-
-      a
-         ``a[i]`` is overwritten by ``n[i]`` leading columns of the
-         ``m[i]``-by-``m[i]`` orthogonal matrix ``Q``\ :sub:`i`.
-
-
-      info
-         Vector of buffers containing error information.
-
-
-         If ``info[i]=0``, the execution is successful.
-
-
-         If ``info[i]=-k``, the ``k``-th parameter had an illegal value.
-
-
-   .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-      .. rubric:: Example
-         :class: sectiontitle
-
-
-      An example of how to use orgqr_batch can be found in the oneMKL
-      installation directory, under:
-
-
-      ::
-
-
-         examples/sycl/lapack/QR_batch.cpp
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
-
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

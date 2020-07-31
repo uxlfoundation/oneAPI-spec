@@ -92,7 +92,7 @@ struct primitive {
         layer_normalization,
         /// An inner product primitive.
         inner_product,
-        /// A rnn primitive.
+        /// An RNN primitive.
         rnn,
         /// A binary primitive.
         binary,
@@ -119,34 +119,34 @@ struct primitive {
 
     /// Executes computations specified by the primitive in a specified stream.
     ///
-    /// Arguments are passed via an arguments map containing <index,
-    /// memory object> pairs. The index must be one of the `DNNL_ARG_*` values
-    /// such as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
+    /// Arguments are passed via an arguments map containing <index, memory
+    /// object> pairs. The index must be one of the `DNNL_ARG_*` values such
+    /// as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
     /// matching the one returned by
-    /// primitive_desc::query_md(#query::exec_arg_md, index) unless using
-    /// dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
+    /// #dnnl::primitive_desc_base::query_md(#query::exec_arg_md, index)
+    /// unless using dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
     ///
-    /// @param stream Stream object. The stream must belong to the same engine
+    /// @param astream Stream object. The stream must belong to the same engine
     ///     as the primitive.
     /// @param args Arguments map.
-    void execute(const stream &stream,
+    void execute(const stream &astream,
             const std::unordered_map<int, memory> &args) const;
 
     /// Executes computations specified by the primitive in a specified stream.
     ///
-    /// Arguments are passed via an arguments map containing <index,
-    /// memory object> pairs. The index must be one of the `DNNL_ARG_*` values
-    /// such as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
+    /// Arguments are passed via an arguments map containing <index, memory
+    /// object> pairs. The index must be one of the `DNNL_ARG_*` values such
+    /// as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
     /// matching the one returned by
-    /// primitive_desc::query_md(#query::exec_arg_md, index) unless using
-    /// dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
+    /// #dnnl::primitive_desc::query_md(#query::exec_arg_md, index) unless
+    /// using dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
     ///
-    /// @param stream Stream object. The stream must belong to the same engine
+    /// @param astream Stream object. The stream must belong to the same engine
     ///     as the primitive.
     /// @param args Arguments map.
     /// @param deps Optional vector with `cl::sycl::event` dependencies.
     ///
-    cl::sycl::event execute_sycl(const stream &stream,
+    cl::sycl::event execute_sycl(const stream &astream,
             const std::unordered_map<int, memory> &args,
             const std::vector<cl::sycl::event> &deps = {}) const;
 
@@ -257,7 +257,9 @@ enum class algorithm {
     eltwise_clip,
     /// Elementwise: pow
     eltwise_pow,
-    /// Elementwise: rectified linar unit (ReLU) (dst for backward)
+    /// Elementwise: round
+    eltwise_round,
+    /// Elementwise: rectified linear unit (ReLU) (dst for backward)
     eltwise_relu_use_dst_for_bwd,
     /// Elementwise: hyperbolic tangent non-linearity (tanh) (dst for backward)
     eltwise_tanh_use_dst_for_bwd,
@@ -328,20 +330,20 @@ enum class normalization_flags : unsigned {
     /// training and inference, outputs them on forward propagation for
     /// training, and computes the respective derivatives on backward
     /// propagation.
-    use_global_stats = 0x1u,
+    use_global_stats,
 
     /// Use scale and shift parameters. If specified, the user is expected to
     /// pass scale and shift as inputs on forward propagation. On backward
     /// propagation of type #dnnl::prop_kind::backward, the library computes
     /// their derivatives. If not specified, the scale and shift parameters
     /// are not used by the library in any way.
-    use_scale_shift = 0x2u,
+    use_scale_shift,
 
     /// Fuse normalization with ReLU. On training, normalization will require
     /// the workspace to implement backward propagation. On inference, the
     /// workspace is not required and behavior is the same as when normalization
     /// is fused with ReLU using the post-ops API.
-    fuse_norm_relu = 0x4u,
+    fuse_norm_relu,
 };
 
 /// Bitwise OR operation for batch normalization flags.
@@ -387,69 +389,11 @@ enum class query {
     /// no query
     undef,
 
-    /// execution engine
-    engine,
-    /// primitive kind
-    primitive_kind,
-
-    /// number of inputs expected
-    num_of_inputs_s32,
-    /// number of outputs expected
-    num_of_outputs_s32,
-
-    /// runtime estimation (seconds), unimplemented
-    time_estimate_f64,
     /// memory required for scratchpad (bytes)
     memory_consumption_s64,
 
-    /// scratchpad engine
-    ///
-    /// engine to be used for creating scratchpad memory
-    scratchpad_engine,
-
-    /// reorder source engine
-    reorder_src_engine,
-    /// reorder destination engine
-    reorder_dst_engine,
-
     /// implementation name
     impl_info_str,
-
-    /// propagation kind
-    prop_kind,
-
-    /// operation descriptor
-    op_d,
-    /// convolution descriptor
-    convolution_d,
-    /// deconvolution descriptor
-    deconvolution_d,
-    /// shuffle descriptor
-    shuffle_d,
-    /// eltwise descriptor
-    eltwise_d,
-    /// softmax descriptor
-    softmax_d,
-    /// pooling descriptor
-    pooling_d,
-    /// lrn descriptor
-    lrn_d,
-    /// batch normalization descriptor
-    batch_normalization_d,
-    /// layer normalization descriptor
-    layer_normalization_d,
-    /// inner product descriptor
-    inner_product_d,
-    /// rnn descriptor
-    rnn_d,
-    /// binary descriptor
-    binary_d,
-    /// logsoftmax descriptor
-    logsoftmax_d,
-    /// matmul descriptor
-    matmul_d,
-    /// resampling descriptor
-    resampling_d,
 
     /// source memory desc
     src_md,
@@ -502,23 +446,23 @@ struct engine {
 
     /// Returns the number of engines of a certain kind.
     ///
-    /// @param kind The kind of engines to count.
+    /// @param akind The kind of engines to count.
     /// @returns The number of engines of the specified kind.
-    static size_t get_count(kind kind);
+    static size_t get_count(kind akind);
 
     /// Constructs an engine.
     ///
-    /// @param kind The kind of engine to construct.
+    /// @param akind The kind of engine to construct.
     /// @param index The index of the engine. Must be less than the value
     ///     returned by #get_count() for this particular kind of engine.
-    engine(kind kind, size_t index);
+    engine(kind akind, size_t index);
 
     /// Constructs an engine from SYCL device and context objects.
     ///
-    /// @param kind The kind of engine to construct.
+    /// @param akind The kind of engine to construct.
     /// @param dev SYCL device.
     /// @param ctx SYCL context.
-    engine(kind kind, const cl::sycl::device &dev,
+    engine(kind akind, const cl::sycl::device &dev,
             const cl::sycl::context &ctx);
 
     /// Returns the kind of the engine.
@@ -541,17 +485,15 @@ struct engine {
 /// @{
 
 /// A container for stream attributes.
-struct stream_attr : public handle<dnnl_stream_attr_t> {
-    using handle::handle;
-
+struct stream_attr {
     /// Constructs default (empty) stream attributes.
     stream_attr();
 
     /// Constructs stream attributes for a stream that runs on an engine of a
     /// particular kind.
     ///
-    /// @param kind Target engine kind.
-    stream_attr(engine::kind kind);
+    /// @param akind Target engine kind.
+    stream_attr(engine::kind akind);
 };
 
 /// An execution stream.
@@ -576,17 +518,17 @@ struct stream {
     /// Constructs a stream for the specified engine and with behavior
     /// controlled by the specified flags.
     ///
-    /// @param engine Engine to create the stream on.
-    /// @param flags Flags controlling stream behavior.
+    /// @param aengine Engine to create the stream on.
+    /// @param aflags Flags controlling stream behavior.
     /// @param attr Stream attributes.
-    stream(const engine &engine, flags flags = flags::default_flags,
+    stream(const engine &aengine, flags aflags = flags::default_flags,
             const stream_attr &attr = stream_attr());
 
     /// Constructs a stream for the specified engine and the SYCL queue.
     ///
-    /// @param engine Engine object to use for the stream.
+    /// @param aengine Engine object to use for the stream.
     /// @param queue SYCL queue to use for the stream.
-    stream(const engine &engine, cl::sycl::queue &queue);
+    stream(const engine &aengine, cl::sycl::queue &queue);
 
     /// Returns the underlying SYCL queue object.
     /// @returns SYCL queue object.
@@ -629,12 +571,12 @@ struct stream {
 ///     checking whether it is necessary to reorder data from the user's data
 ///     format to a primitive's format.
 ///
-/// 2. **Memory object** -- an engine-specific object that handles the data
-///     and its description (a memory descriptor). With CPU engine or with
-///     USM, the data handle is simply a pointer to @c void. The data handle
-///     can be queried using #dnnl::memory::get_data_handle() and set using
-///     #dnnl::memory::set_data_handle(). The underlying SYCL buffer, when
-///     used, can be queried using #dnnl::memory::get_sycl_buffer and and set
+/// 2. **Memory object** -- an engine-specific object that handles the memory
+///     buffer and its description (a memory descriptor). For the CPU engine or
+///     with USM, the memory buffer handle is simply a pointer to @c void. The
+///     memory buffer can be queried using #dnnl::memory::get_data_handle() and
+///     set using #dnnl::memory::set_data_handle(). The underlying SYCL buffer,
+///     when used, can be queried using #dnnl::memory::get_sycl_buffer and set
 ///     using #dnnl::memory::set_sycl_buffer. A memory object can also be
 ///     queried for the underlying memory descriptor and for its engine using
 ///     #dnnl::memory::get_desc() and dnnl::memory::get_engine().
@@ -657,7 +599,7 @@ struct stream {
 ///   library because there is no clear definition of what the output values
 ///   should be.
 ///
-/// Data handle of a zero-volume memory is never accessed.
+/// Memory buffer of a zero-volume memory is never accessed.
 ///
 /// @{
 
@@ -678,11 +620,12 @@ struct memory {
     enum class data_type {
         /// Undefined data type (used for empty memory descriptors).
         undef,
-        /// 16-bit/half-precision floating point.
+        /// [16-bit/half-precision floating point](https://en.wikipedia.org/wiki/Half-precision_floating-point_format).
         f16,
-        /// non-standard 16-bit floating point with 7-bit mantissa.
+        /// non-standard
+        /// [16-bit floating point with 7-bit mantissa](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format).
         bf16,
-        /// 32-bit/single-precision floating point.
+        /// [32-bit/single-precision floating point](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
         f32,
         /// 32-bit signed integer.
         s32,
@@ -698,7 +641,7 @@ struct memory {
     ///
     ///  - Domain-agnostic names, i.e. names that do not depend on the tensor
     ///    usage in the specific primitive. These names use letters from `a`
-    ///    to `l` to denote logical dimensions and form the order in which the
+    ///    to `f` to denote logical dimensions and form the order in which the
     ///    dimensions are laid in memory. For example,
     ///    #dnnl::memory::format_tag::ab is used to denote a 2D tensor where the
     ///    second logical dimension (denoted as `b`) is the innermost, i.e.
@@ -781,6 +724,8 @@ struct memory {
         /// permuted 5D tensor
         acdeb,
         /// permuted 5D tensor
+        bacde,
+        /// permuted 5D tensor
         bcdea,
         /// permuted 5D tensor
         cdeba,
@@ -846,6 +791,8 @@ struct memory {
         dhwio = cdeba,
         /// 5D CNN weights tensor; an alias for #dnnl::memory::format_tag::acdeb
         odhwi = acdeb,
+        /// 5D CNN weights tensor; an alias for #dnnl::memory::format_tag::bacde
+        iodhw = bacde,
         /// 5D CNN weights tensor; an alias for #dnnl::memory::format_tag::bcdea
         idhwo = bcdea,
 
@@ -916,15 +863,15 @@ struct memory {
         ///     both on the primitive that would operate on this memory and
         ///     the operation context.
         ///
-        /// @param dims Tensor dimensions.
-        /// @param data_type Data precision/type.
-        /// @param format_tag Memory format tag.
+        /// @param adims Tensor dimensions.
+        /// @param adata_type Data precision/type.
+        /// @param aformat_tag Memory format tag.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case a
         ///     zero memory descriptor will be constructed. This flag is
         ///     optional and defaults to false.
-        desc(const memory::dims &dims, data_type data_type,
-                format_tag format_tag, bool allow_empty = false);
+        desc(const dims &adims, data_type adata_type, format_tag aformat_tag,
+                bool allow_empty = false);
 
         /// Constructs a memory descriptor by strides.
         ///
@@ -934,20 +881,20 @@ struct memory {
         ///     both on the primitive that would operate on this memory and
         ///     the operation context.
         ///
-        /// @param dims Tensor dimensions.
-        /// @param data_type Data precision/type.
+        /// @param adims Tensor dimensions.
+        /// @param adata_type Data precision/type.
         /// @param strides Strides for each dimension.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case a
         ///     zero memory descriptor will be constructed. This flag is
         ///     optional and defaults to false.
-        desc(const memory::dims &dims, data_type data_type,
-                const memory::dims &strides, bool allow_empty = false);
+        desc(const dims &adims, data_type adata_type, const dims &strides,
+                bool allow_empty = false);
 
         /// Constructs a memory descriptor for a region inside an area
         /// described by this memory descriptor.
         //
-        /// @param dims Sizes of the region.
+        /// @param adims Sizes of the region.
         /// @param offsets Offsets to the region from the encompassing
         ///     memory object in each dimension.
         /// @param allow_empty A flag signifying whether construction is
@@ -955,8 +902,8 @@ struct memory {
         ///     zero memory descriptor will be returned. This flag is optional
         ///     and defaults to false.
         /// @returns A memory descriptor for the region.
-        desc submemory_desc(const memory::dims &dims,
-                const memory::dims &offsets, bool allow_empty = false) const;
+        desc submemory_desc(const dims &adims, const dims &offsets,
+                bool allow_empty = false) const;
 
         /// Constructs a memory descriptor by reshaping an existing one. The
         /// new memory descriptor inherits the data type.
@@ -970,36 +917,28 @@ struct memory {
         /// The reshape operation can be described as a combination of the
         /// following basic operations:
         /// 1. Add a dimension of size `1`. This is always possible.
-        /// 2. Remove a dimension of size `1`. This is possible only if the
-        ///    dimension has no padding (i.e.
-        ///    `padded_dims[dim] == dims[dim] && dims[dim] == 1`).
+        /// 2. Remove a dimension of size `1`.
         /// 3. Split a dimension into multiple ones. This is possible only if
-        ///    the size of the dimension is exactly equal to the product of the
-        ///    split ones and the dimension does not have padding (i.e.
-        ///    `padded_dims[dim] = dims[dim]`).
-        /// 4. Joining multiple consecutive dimensions into a single one. As in
-        ///    the cases above, this requires that the dimensions do not have
-        ///    padding and that the memory format is such that in physical
-        ///    memory these dimensions are dense and have the same order as
-        ///    their logical counterparts. This also assumes that these
-        ///    dimensions are not blocked.
-        ///    - Here, dense means:
+        ///    the product of all tensor dimensions stays constant.
+        /// 4. Join multiple consecutive dimensions into a single one.
+        ///    This requires that the dimensions are dense in memory and have
+        ///    the same order as their logical counterparts.
+        ///    - Here, 'dense' means:
         ///      `stride for dim[i] == (stride for dim[i + 1]) * dim[i + 1]`;
-        ///    - And same order means:
-        ///      `i < j` if and only if `stride for dim[i] < stride for dim[j]`.
+        ///    - And 'same order' means:
+        ///      `i < j` if and only if `stride for dim[j] <= stride for dim[i]`.
         ///
-        /// @warning
-        ///     Some combinations of physical memory layout and/or offsets or
-        ///     dimensions may result in a failure to make a reshape.
+        /// @note
+        ///     Reshape may fail for optimized memory formats.
         ///
-        /// @param dims New dimensions. The product of dimensions must
+        /// @param adims New dimensions. The product of dimensions must
         ///     remain constant.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case a
         ///     zero memory descriptor will be returned. This flag is optional
         ///     and defaults to false.
         /// @returns A new memory descriptor with new dimensions.
-        desc reshape(const memory::dims &dims, bool allow_empty = false) const;
+        desc reshape(const dims &adims, bool allow_empty = false) const;
 
         /// Constructs a memory descriptor by permuting axes in an existing
         /// one.
@@ -1048,8 +987,7 @@ struct memory {
 
         /// Returns size of the memory descriptor in bytes.
         /// @returns The number of bytes required to allocate a memory buffer
-        ///     for the memory object described by this memory descriptor
-        ///     including the padding area.
+        ///     for the memory object described by this memory descriptor.
         size_t get_size() const;
 
         /// Checks whether the memory descriptor is zero (empty).
@@ -1060,7 +998,7 @@ struct memory {
         /// An equality operator.
         /// @param other Another memory descriptor.
         /// @returns Whether this and the other memory descriptors have
-        ///     the same format tag, dimensions, strides, blocking, etc.
+        ///     the same format tag, dimensions, strides, etc.
         bool operator==(const desc &other) const;
 
         /// An inequality operator.
@@ -1078,7 +1016,7 @@ struct memory {
 
     /// Constructs a memory object.
     ///
-    /// Unless @p handle is equal to DNNL_MEMORY_NONE, the constructed memory
+    /// Unless @p handle is equal to #DNNL_MEMORY_NONE, the constructed memory
     /// object will have the underlying buffer set. In this case, the buffer
     /// will be initialized as if #dnnl::memory::set_data_handle() had been
     /// called.
@@ -1086,34 +1024,33 @@ struct memory {
     /// @sa memory::set_data_handle()
     ///
     /// @param md Memory descriptor.
-    /// @param engine Engine to store the data on.
-    /// @param handle Handle of the memory buffer to use as an underlying
-    ///     storage.
+    /// @param aengine Engine to store the data on.
+    /// @param handle Handle of the memory buffer to use.
     ///     - A pointer to the user-allocated buffer. In this case the library
     ///       doesn't own the buffer.
-    ///     - The DNNL_MEMORY_ALLOCATE special value. Instructs the library to
+    ///     - The #DNNL_MEMORY_ALLOCATE special value. Instructs the library to
     ///       allocate the buffer for the memory object. In this case the
     ///       library owns the buffer.
-    ///     - DNNL_MEMORY_NONE to create dnnl_memory without an underlying
+    ///     - #DNNL_MEMORY_NONE to create dnnl::memory without an underlying
     ///       buffer.
-    memory(const desc &md, const engine &engine, void *handle);
+    memory(const desc &md, const engine &aengine, void *handle);
 
     /// Constructs a memory object from a SYCL buffer.
     ///
     /// @param md Memory descriptor.
-    /// @param engine Engine to store the data on.
+    /// @param aengine Engine to store the data on.
     /// @param buf A SYCL buffer.
     template <typename T, int ndims = 1>
-    memory(const desc &md, const engine &engine,
+    memory(const desc &md, const engine &aengine,
             cl::sycl::buffer<T, ndims> &buf);
 
     /// Constructs a memory object.
     ///
-    /// The underlying storage for the memory will be allocated by the library.
+    /// The underlying buffer for the memory will be allocated by the library.
     ///
     /// @param md Memory descriptor.
-    /// @param engine Engine to store the data on.
-    memory(const desc &md, const engine &engine);
+    /// @param aengine Engine to store the data on.
+    memory(const desc &md, const engine &aengine);
 
     /// Returns the associated memory descriptor.
     desc get_desc() const;
@@ -1141,24 +1078,58 @@ struct memory {
     ///     zeroes to the padding area if it exists. Hence, the @p handle
     ///     parameter cannot and does not have a const qualifier.
     ///
-    /// @param handle Memory buffer to use as the underlying storage. On the
-    ///     CPU engine or when USM is used, the data handle is a pointer to
-    ///     the actual data. For OpenCL it is a cl_mem. It must have at least
-    ///     get_desc().get_size() bytes allocated.
-    /// @param stream Stream to use to execute padding in.
-    void set_data_handle(void *handle, const stream &stream) const;
+    /// @param handle Memory buffer to use. On the CPU engine or when USM is
+    ///     used, the memory buffer is a pointer to the actual data. It must
+    ///     have at least #dnnl::memory::desc::get_size() bytes allocated.
+    /// @param astream Stream to use to execute padding in.
+    void set_data_handle(void *handle, const stream &astream) const;
 
-    /// Sets data handle.
+    /// Sets the underlying memory buffer.
     ///
     /// See documentation for
     /// #dnnl::memory::set_data_handle(void *, const stream &) const
     /// for more information.
     ///
-    /// @param handle Memory buffer to use as the underlying storage. For the
-    ///     CPU engine, the data handle is a pointer to the actual data. For
-    ///     OpenCL it is a cl_mem. It must have at least get_desc().get_size()
-    ///     bytes allocated.
+    /// @param handle Memory buffer to use. For the CPU engine, the memory
+    ///     buffer is a pointer to the actual data. It must have at least
+    ///     #dnnl::memory::desc::get_size() bytes allocated.
     void set_data_handle(void *handle) const;
+
+    /// Maps a memory object and returns a host-side pointer to a memory
+    /// buffer with a copy of its contents.
+    ///
+    /// Mapping enables read/write directly from/to the memory contents for
+    /// engines that do not support direct memory access.
+    ///
+    /// Mapping is an exclusive operation - a memory object cannot be used in
+    /// other operations until it is unmapped via #dnnl::memory::unmap_data()
+    /// call.
+    ///
+    /// @note
+    ///     Any primitives working with the memory should be completed before
+    ///     the memory is mapped. Use #dnnl::stream::wait() to synchronize the
+    ///     corresponding execution stream.
+    ///
+    /// @note
+    ///     The map_data and unmap_data functions are provided mainly for
+    ///     debug and testing purposes and their performance may be suboptimal.
+    ///
+    /// @tparam T Data type to return a pointer to.
+    /// @returns Pointer to the mapped memory.
+    template <typename T = void>
+    T *map_data() const;
+
+    /// Unmaps a memory object and writes back any changes made to the
+    /// previously mapped memory buffer.
+    ///
+    /// @note
+    ///     The map_data and unmap_data functions are provided mainly for
+    ///     debug and testing purposes and their performance may be
+    ///     suboptimal.
+    ///
+    /// @param mapped_ptr A pointer previously returned by
+    ///     #dnnl::memory::map_data().
+    void unmap_data(void *mapped_ptr) const;
 
     /// Returns the underlying SYCL buffer object.
     ///
@@ -1221,12 +1192,20 @@ struct post_ops {
     /// the computations would be `dst[:] := scale * dst[:] + op(...)`
     /// instead of `dst[:] := op(...)`.
     ///
+    /// If @p data_type is specified, the original dst tensor will be
+    /// reinterpreted as a tensor with the provided data type. Because it is a
+    /// reinterpretation, data_type and dst data type should have the same size.
+    /// As a result, computations would be `dst[:] <- scale *
+    /// as_data_type(dst[:]) + op(...)` instead of `dst[:] <- op(...)`.
+    ///
     /// @note
     ///     This post-op executes in-place and does not change the
     ///     destination layout.
     ///
     /// @param scale Scaling factor.
-    void append_sum(float scale = 1.);
+    /// @param data_type Data type.
+    void append_sum(float scale = 1.f,
+            memory::data_type data_type = memory::data_type::undef);
 
     /// Returns the parameters of an accumulation (sum) post-op.
     ///
@@ -1234,31 +1213,38 @@ struct post_ops {
     /// @param scale Scaling factor of the sum post-op.
     void get_params_sum(int index, float &scale) const;
 
+    /// Returns the parameters of an accumulation (sum) post-op.
+    ///
+    /// @param index Index of the sum post-op.
+    /// @param scale Scaling factor of the sum post-op.
+    /// @param data_type Data type of the sum post-op.
+    void get_params_sum(
+            int index, float &scale, memory::data_type &data_type) const;
+
     /// Appends an elementwise post-op.
     ///
     /// The kind of this post-op is #dnnl::primitive::kind::eltwise.
     ///
     /// In the simplest case when the elementwise is the only post-op, the
-    /// computations would be `dst[:] := scale * eltwise_op (op(...))`
-    /// instead of `dst[:] <- op(...)`.
-    ///
-    /// where eltwise_op is configured with the given parameters.
+    /// computations would be `dst[:] := scale * eltwise_op (op(...))` instead
+    /// of `dst[:] <- op(...)`, where eltwise_op is configured with the given
+    /// parameters.
     ///
     /// @param scale Scaling factor.
-    /// @param algorithm Elementwise algorithm.
+    /// @param aalgorithm Elementwise algorithm.
     /// @param alpha Alpha parameter for the elementwise algorithm.
     /// @param beta Beta parameter for the elementwise algorithm.
     void append_eltwise(
-            float scale, algorithm algorithm, float alpha, float beta);
+            float scale, algorithm aalgorithm, float alpha, float beta);
 
     /// Returns parameters of an elementwise post-up.
     ///
     /// @param index Index of the post-op.
     /// @param scale Output scaling factor.
-    /// @param algorithm Output elementwise algorithm kind.
+    /// @param aalgorithm Output elementwise algorithm kind.
     /// @param alpha Output alpha parameter for the elementwise algorithm.
     /// @param beta Output beta parameter for the elementwise algorithm.
-    void get_params_eltwise(int index, float &scale, algorithm &algorithm,
+    void get_params_eltwise(int index, float &scale, algorithm &aalgorithm,
             float &alpha, float &beta) const;
 };
 
@@ -1635,11 +1621,9 @@ struct reorder : public primitive {
 
         /// Constructs a primitive descriptor for reorder primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
+        /// @note
+        ///     If @p allow_empty is true, the constructor does not throw if a
+        ///     primitive descriptor cannot be created.
         ///
         /// @param src_engine Engine on which the source memory object will be
         ///     located.
@@ -1648,9 +1632,14 @@ struct reorder : public primitive {
         ///     will be located.
         /// @param dst_md Destination memory descriptor.
         /// @param attr Primitive attributes to use (optional).
+        /// @param allow_empty A flag signifying whether construction is allowed
+        ///     to fail without throwing an exception. In this case an empty
+        ///     object will be produced. This flag is optional and defaults to
+        ///     false.
         primitive_desc(const engine &src_engine, const memory::desc &src_md,
                 const engine &dst_engine, const memory::desc &dst_md,
-                const primitive_attr &attr = primitive_attr());
+                const primitive_attr &attr = primitive_attr(),
+                bool allow_empty = false);
 
         /// Constructs a primitive descriptor for reorder primitive.
         ///
@@ -1659,8 +1648,13 @@ struct reorder : public primitive {
         /// @param dst Destination memory object. It is used to obtain the
         ///     destination memory descriptor and engine.
         /// @param attr Primitive attributes to use (optional).
+        /// @param allow_empty A flag signifying whether construction is allowed
+        ///     to fail without throwing an exception. In this case an empty
+        ///     object will be produced. This flag is optional and defaults to
+        ///     false.
         primitive_desc(const memory &src, const memory &dst,
-                const primitive_attr &attr = primitive_attr());
+                const primitive_attr &attr = primitive_attr(),
+                bool allow_empty = false);
 
         /// Returns the engine on which the source memory is allocated.
         /// @returns The engine on which the source memory is allocated.
@@ -1696,24 +1690,24 @@ struct reorder : public primitive {
 
     /// Executes the reorder primitive.
     ///
-    /// @param stream Stream object. The stream must belong to the same engine
+    /// @param astream Stream object. The stream must belong to the same engine
     ///     as the primitive.
     /// @param src Source memory object.
     /// @param dst Destination memory object.
-    void execute(const stream &stream, memory &src, memory &dst) const;
+    void execute(const stream &astream, memory &src, memory &dst) const;
 
     /// Executes the reorder primitive (SYCL-aware version)
     ///
-    /// @param stream Stream object. The stream must belong to the same engine
-    ///               as the primitive.
+    /// @param astream Stream object. The stream must belong to the same engine
+    ///     as the primitive.
     /// @param src Source memory object.
     /// @param dst Destination memory object.
     /// @param deps Vector of SYCL events that the execution should depend on.
     ///
     /// @returns SYCL event that corresponds to the SYCL queue underlying the
-    ///          @p stream.
-    cl::sycl::event execute_sycl(const stream &stream, memory &src, memory &dst,
-            const std::vector<cl::sycl::event> &deps = {}) const;
+    ///     @p astream.
+    cl::sycl::event execute_sycl(const stream &astream, memory &src,
+            memory &dst, const std::vector<cl::sycl::event> &deps = {}) const;
 };
 
 /// @} dnnl_api_reorder
@@ -1723,7 +1717,6 @@ struct reorder : public primitive {
 /// A primitive to concatenate data by arbitrary dimension.
 ///
 /// @{
-
 
 /// Tensor concatenation (concat) primitive.
 struct concat : public primitive {
@@ -1735,24 +1728,15 @@ struct concat : public primitive {
         /// Constructs a primitive descriptor for an out-of-place concatenation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src[0]` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src[1]` (#dnnl::primitive_desc_base::src_desc(`1`))
-        ///  - ...
-        ///  - `src[n - 1]` (#dnnl::primitive_desc_base::src_desc(`n - 1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @param dst Destination memory descriptor.
         /// @param concat_dimension Source tensors will be concatenated over
         ///     dimension with this index. Note that order of dimensions does
         ///     not depend on memory format.
         /// @param srcs Vector of source memory descriptors.
-        /// @param engine Engine to perform the operation on.
+        /// @param aengine Engine to perform the operation on.
         /// @param attr Primitive attributes to use (optional).
         primitive_desc(const memory::desc &dst, int concat_dimension,
-                const std::vector<memory::desc> &srcs, const engine &engine,
+                const std::vector<memory::desc> &srcs, const engine &aengine,
                 const primitive_attr &attr = primitive_attr());
 
         /// Constructs a primitive descriptor for an out-of-place concatenation
@@ -1765,10 +1749,10 @@ struct concat : public primitive {
         ///     dimension with this index. Note that order of dimensions does
         ///     not depend on memory format.
         /// @param srcs Vector of source memory descriptors.
-        /// @param engine Engine to perform the operation on.
+        /// @param aengine Engine to perform the operation on.
         /// @param attr Primitive attributes to use (optional).
         primitive_desc(int concat_dimension,
-                const std::vector<memory::desc> &srcs, const engine &engine,
+                const std::vector<memory::desc> &srcs, const engine &aengine,
                 const primitive_attr &attr = primitive_attr());
 
         /// @copydoc dnnl::primitive_desc_base::src_desc(int)const
@@ -1803,24 +1787,15 @@ struct sum : public primitive {
 
         /// Constructs a primitive descriptor for a sum primitive.
         ///
-        /// Inputs:
-        ///  - `src[0]` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src[1]` (#dnnl::primitive_desc_base::src_desc(`1`))
-        ///  - ...
-        ///  - `src[n - 1]` (#dnnl::primitive_desc_base::src_desc(`n - 1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @param dst Destination memory descriptor.
         /// @param scales Vector of scales to multiply data in each source
         ///     memory by.
         /// @param srcs Vector of source memory descriptors.
-        /// @param engine Engine to perform the operation on.
+        /// @param aengine Engine to perform the operation on.
         /// @param attr Primitive attributes to use (optional).
         primitive_desc(const memory::desc &dst,
                 const std::vector<float> &scales,
-                const std::vector<memory::desc> &srcs, const engine &engine,
+                const std::vector<memory::desc> &srcs, const engine &aengine,
                 const primitive_attr &attr = primitive_attr());
 
         /// Constructs a primitive descriptor for a sum primitive.
@@ -1831,10 +1806,10 @@ struct sum : public primitive {
         /// @param scales Vector of scales by which to multiply data in each
         ///     source memory object.
         /// @param srcs Vector of source memory descriptors.
-        /// @param engine Engine on which to perform the operation.
+        /// @param aengine Engine on which to perform the operation.
         /// @param attr Primitive attributes to use (optional).
         primitive_desc(const std::vector<float> &scales,
-                const std::vector<memory::desc> &srcs, const engine &engine,
+                const std::vector<memory::desc> &srcs, const engine &aengine,
                 const primitive_attr &attr = primitive_attr());
 
         /// @copydoc dnnl::primitive_desc_base::src_desc(int)const
@@ -1862,6 +1837,12 @@ struct sum : public primitive {
 struct primitive_desc : public dnnl::primitive_desc_base {
     /// Default constructor. Produces an empty object.
     primitive_desc();
+
+    /// Advances the primitive descriptor iterator to the next implementation.
+    ///
+    /// @returns @c true on success, and @c false if the last implementation
+    ///     reached, in which case primitive descriptor is not modified.
+    bool next_impl();
 };
 
 /// @} dnnl_api_primitives_common
@@ -1881,22 +1862,20 @@ struct convolution_forward : public primitive {
         /// Constructs a descriptor for a convolution forward propagation
         /// primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -1907,10 +1886,10 @@ struct convolution_forward : public primitive {
         /// @param dst_desc Destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &bias_desc, const memory::desc &dst_desc,
                 const memory::dims &strides, const memory::dims &padding_l,
@@ -1919,21 +1898,20 @@ struct convolution_forward : public primitive {
         /// Constructs a descriptor for a convolution forward propagation
         /// primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -1942,10 +1920,10 @@ struct convolution_forward : public primitive {
         /// @param dst_desc Destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -1953,22 +1931,20 @@ struct convolution_forward : public primitive {
         /// Constructs a descriptor for a dilated convolution forward
         /// propagation primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -1981,10 +1957,10 @@ struct convolution_forward : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &bias_desc, const memory::desc &dst_desc,
                 const memory::dims &strides, const memory::dims &dilates,
@@ -1993,21 +1969,20 @@ struct convolution_forward : public primitive {
         /// Constructs a descriptor for a dilated convolution forward
         /// propagation primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2018,10 +1993,10 @@ struct convolution_forward : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &dst_desc, const memory::dims &strides,
                 const memory::dims &dilates, const memory::dims &padding_l,
@@ -2036,29 +2011,29 @@ struct convolution_forward : public primitive {
         /// Constructs a primitive descriptor for a convolution forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a convolution forward propagation
+        /// @param adesc Descriptor for a convolution forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case
         ///     an empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a convolution forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a convolution forward propagation
+        /// @param adesc Descriptor for a convolution forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case
         ///     an empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -2093,18 +2068,17 @@ struct convolution_backward_data : public primitive {
         /// Constructs a descriptor for a convolution backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2113,10 +2087,10 @@ struct convolution_backward_data : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &diff_src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -2124,18 +2098,17 @@ struct convolution_backward_data : public primitive {
         /// Constructs a descriptor for dilated convolution backward
         /// propagation primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2146,10 +2119,10 @@ struct convolution_backward_data : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &diff_src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &dilates, const memory::dims &padding_l,
@@ -2164,9 +2137,9 @@ struct convolution_backward_data : public primitive {
         /// Constructs a primitive descriptor for a convolution backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a convolution backward propagation
+        /// @param adesc Descriptor for a convolution backward propagation
         ///     primitive.
-        /// @param engine Engine to perform the operation on.
+        /// @param aengine Engine to perform the operation on.
         /// @param hint_fwd_pd Primitive descriptor for a convolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2174,16 +2147,16 @@ struct convolution_backward_data : public primitive {
         ///     allowed to fail without throwing an exception. In this case
         ///     an empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const convolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a convolution backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a convolution backward propagation
+        /// @param adesc Descriptor for a convolution backward propagation
         ///     primitive.
-        /// @param engine Engine to perform the operation on.
+        /// @param aengine Engine to perform the operation on.
         /// @param attr Primitive attributes to use.
         /// @param hint_fwd_pd Primitive descriptor for a convolution forward
         ///     propagation primitive. It is used as a hint for deciding which
@@ -2192,8 +2165,8 @@ struct convolution_backward_data : public primitive {
         ///     allowed to fail without throwing an exception. In this case
         ///     an empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const convolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -2223,19 +2196,17 @@ struct convolution_backward_weights : public primitive {
         /// Constructs a descriptor for a convolution weights gradient primitive
         /// with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2246,10 +2217,10 @@ struct convolution_backward_weights : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_bias_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
@@ -2258,18 +2229,17 @@ struct convolution_backward_weights : public primitive {
         /// Constructs a descriptor for a convolution weights gradient primitive
         /// without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2278,10 +2248,10 @@ struct convolution_backward_weights : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -2289,19 +2259,17 @@ struct convolution_backward_weights : public primitive {
         /// Constructs a descriptor for a dilated convolution weights gradient
         /// primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2314,10 +2282,10 @@ struct convolution_backward_weights : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_bias_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
@@ -2327,18 +2295,17 @@ struct convolution_backward_weights : public primitive {
         /// Constructs a descriptor for a dilated convolution weights gradient
         /// primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Convolution algorithm. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Convolution algorithm. Possible values are
         ///     #dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd, and
         ///     #dnnl::algorithm::convolution_auto.
@@ -2349,10 +2316,10 @@ struct convolution_backward_weights : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &dilates, const memory::dims &padding_l,
@@ -2367,8 +2334,8 @@ struct convolution_backward_weights : public primitive {
         /// Constructs a primitive descriptor for a convolution weights gradient
         /// primitive.
         ///
-        /// @param desc Descriptor for a convolution weights gradient primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a convolution weights gradient primitive.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a convolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2376,16 +2343,16 @@ struct convolution_backward_weights : public primitive {
         ///     allowed to fail without throwing an exception. In this case
         ///     an empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const convolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a convolution weights gradient
         /// primitive.
         ///
-        /// @param desc Descriptor for a convolution weights gradient primitive.
+        /// @param adesc Descriptor for a convolution weights gradient primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a convolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2393,8 +2360,8 @@ struct convolution_backward_weights : public primitive {
         ///     allowed to fail without throwing an exception. In this case
         ///     an empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const convolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -2440,22 +2407,20 @@ struct deconvolution_forward : public primitive {
         /// Constructs a descriptor for a deconvolution forward propagation
         /// primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Deconvolution algorithm:
+        /// @param aalgorithm Deconvolution algorithm:
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2465,10 +2430,10 @@ struct deconvolution_forward : public primitive {
         /// @param dst_desc Destination memory descriptor.
         /// @param strides Vector of strides for spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &bias_desc, const memory::desc &dst_desc,
                 const memory::dims &strides, const memory::dims &padding_l,
@@ -2477,21 +2442,20 @@ struct deconvolution_forward : public primitive {
         /// Constructs a descriptor for a deconvolution forward propagation
         /// primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Deconvolution algorithm:
+        /// @param aalgorithm Deconvolution algorithm:
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2499,10 +2463,10 @@ struct deconvolution_forward : public primitive {
         /// @param dst_desc Destination memory descriptor.
         /// @param strides Vector of strides for spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -2510,22 +2474,20 @@ struct deconvolution_forward : public primitive {
         /// Constructs a descriptor for a dilated deconvolution forward
         /// propagation primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Deconvolution algorithm:
+        /// @param aalgorithm Deconvolution algorithm:
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2537,10 +2499,10 @@ struct deconvolution_forward : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &bias_desc, const memory::desc &dst_desc,
                 const memory::dims &strides, const memory::dims &dilates,
@@ -2549,21 +2511,20 @@ struct deconvolution_forward : public primitive {
         /// Constructs a descriptor for a dilated deconvolution forward
         /// propagation primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Deconvolution algorithm:
+        /// @param aalgorithm Deconvolution algorithm:
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2573,10 +2534,10 @@ struct deconvolution_forward : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &dst_desc, const memory::dims &strides,
                 const memory::dims &dilates, const memory::dims &padding_l,
@@ -2591,29 +2552,29 @@ struct deconvolution_forward : public primitive {
         /// Constructs a primitive descriptor for a deconvolution forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a deconvolution forward propagation
+        /// @param adesc Descriptor for a deconvolution forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a deconvolution forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a deconvolution forward propagation
+        /// @param adesc Descriptor for a deconvolution forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -2644,18 +2605,17 @@ struct deconvolution_backward_data : public primitive {
         /// Constructs a descriptor for a deconvolution backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Deconvolution algorithm
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Deconvolution algorithm
         ///     (#dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd).
         /// @param diff_src_desc Diff source memory descriptor.
@@ -2663,10 +2623,10 @@ struct deconvolution_backward_data : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &diff_src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -2674,18 +2634,17 @@ struct deconvolution_backward_data : public primitive {
         /// Constructs a descriptor for a dilated deconvolution backward
         /// propagation primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Deconvolution algorithm
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Deconvolution algorithm
         ///     (#dnnl::algorithm::convolution_direct,
         ///     #dnnl::algorithm::convolution_winograd).
         /// @param diff_src_desc Diff source memory descriptor.
@@ -2695,10 +2654,10 @@ struct deconvolution_backward_data : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &diff_src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &dilates, const memory::dims &padding_l,
@@ -2713,9 +2672,9 @@ struct deconvolution_backward_data : public primitive {
         /// Constructs a primitive descriptor for a deconvolution backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a deconvolution backward propagation
+        /// @param adesc Descriptor for a deconvolution backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a deconvolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2723,17 +2682,17 @@ struct deconvolution_backward_data : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const deconvolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a deconvolution backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a deconvolution backward propagation
+        /// @param adesc Descriptor for a deconvolution backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a deconvolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2741,8 +2700,8 @@ struct deconvolution_backward_data : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const deconvolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -2772,19 +2731,17 @@ struct deconvolution_backward_weights : public primitive {
         /// Constructs a descriptor for a deconvolution weights gradient
         /// primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Deconvolution algorithm. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Deconvolution algorithm. Possible values are
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2794,30 +2751,29 @@ struct deconvolution_backward_weights : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_bias_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
 
-        /// Constructs a descriptor for a deconvolution weights gradient primitive
-        /// without bias.
-        ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
+        /// Constructs a descriptor for a deconvolution weights gradient
+        /// primitive without bias.
         ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Deconvolution algorithm. Possible values are
+        /// Arrays @p strides, @p padding_l, and @p padding_r contain values
+        /// for spatial dimensions only and hence must have the same number of
+        /// elements as there are spatial dimensions. The order of values is
+        /// the same as in the tensor: depth (for 3D tensors), height (for 3D
+        /// and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Deconvolution algorithm. Possible values are
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2825,10 +2781,10 @@ struct deconvolution_backward_weights : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param strides Strides for each spatial dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -2836,19 +2792,17 @@ struct deconvolution_backward_weights : public primitive {
         /// Constructs a descriptor for a dilated deconvolution weights gradient
         /// primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Deconvolution algorithm. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Deconvolution algorithm. Possible values are
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2860,10 +2814,10 @@ struct deconvolution_backward_weights : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_bias_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
@@ -2873,18 +2827,17 @@ struct deconvolution_backward_weights : public primitive {
         /// Constructs a descriptor for a dilated deconvolution weights gradient
         /// primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param algorithm Deconvolution algorithm. Possible values are
+        /// Arrays @p strides, @p dilates, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
+        ///
+        /// @param aalgorithm Deconvolution algorithm. Possible values are
         ///     #dnnl::algorithm::deconvolution_direct, and
         ///     #dnnl::algorithm::deconvolution_winograd.
         /// @param src_desc Source memory descriptor.
@@ -2894,10 +2847,10 @@ struct deconvolution_backward_weights : public primitive {
         /// @param dilates Dilations for each spatial dimension. A zero value
         ///     means no dilation in the corresponding dimension.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
                 const memory::desc &diff_weights_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &dilates, const memory::dims &padding_l,
@@ -2912,9 +2865,9 @@ struct deconvolution_backward_weights : public primitive {
         /// Constructs a primitive descriptor for a deconvolution weights
         /// update primitive.
         ///
-        /// @param desc Descriptor for a deconvolution weights gradient
+        /// @param adesc Descriptor for a deconvolution weights gradient
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a deconvolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2922,17 +2875,17 @@ struct deconvolution_backward_weights : public primitive {
         ///     allowed to fail without throwing an exception.  In this case
         ///     an empty object will be produced.  This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const deconvolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a deconvolution weights
         /// update primitive.
         ///
-        /// @param desc Descriptor for a deconvolution weights gradient
+        /// @param adesc Descriptor for a deconvolution weights gradient
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a deconvolution forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -2940,8 +2893,8 @@ struct deconvolution_backward_weights : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const deconvolution_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -2982,21 +2935,10 @@ struct lrn_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for a LRN forward propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p alg_kind = #dnnl::algorithm::pooling_max and @p
-        ///     prop_kind = #dnnl::prop_kind::forward_training; must be
-        ///     queried for using @ref dnnl::primitive_desc_base::query_md()
-        ///     after a corresponding primitive descriptor is created
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm LRN algorithm kind: either
+        /// @param aalgorithm LRN algorithm kind: either
         ///     #dnnl::algorithm::lrn_across_channels, or
         ///     #dnnl::algorithm::lrn_within_channel.
         /// @param data_desc Source and destination memory descriptors.
@@ -3004,7 +2946,7 @@ struct lrn_forward : public primitive {
         /// @param alpha The alpha regularization parameter.
         /// @param beta The beta regularization parameter.
         /// @param k The k regularization parameter.
-        desc(prop_kind prop_kind, algorithm algorithm,
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &data_desc, memory::dim local_size,
                 float alpha, float beta, float k = 1.f);
     };
@@ -3017,27 +2959,27 @@ struct lrn_forward : public primitive {
         /// Constructs a primitive descriptor for an LRN forward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LRN forward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for an LRN forward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an LRN forward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LRN forward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for an LRN forward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -3064,18 +3006,7 @@ struct lrn_backward : public primitive {
     struct desc {
         /// Constructs a descriptor for an LRN backward propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if the underlying implementation requires it; must be queried
-        ///     for using @ref dnnl::primitive_desc_base::query_md() after a
-        ///     corresponding primitive descriptor is created
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
-        /// @param algorithm LRN algorithm kind: either
+        /// @param aalgorithm LRN algorithm kind: either
         ///     #dnnl::algorithm::lrn_across_channels, or
         ///     #dnnl::algorithm::lrn_within_channel.
         /// @param diff_data_desc Diff source and diff destination memory
@@ -3085,7 +3016,7 @@ struct lrn_backward : public primitive {
         /// @param alpha The alpha regularization parameter.
         /// @param beta The beta regularization parameter.
         /// @param k The k regularization parameter.
-        desc(algorithm algorithm, const memory::desc &data_desc,
+        desc(algorithm aalgorithm, const memory::desc &data_desc,
                 const memory::desc &diff_data_desc, memory::dim local_size,
                 float alpha, float beta, float k = 1.f);
     };
@@ -3098,8 +3029,8 @@ struct lrn_backward : public primitive {
         /// Constructs a primitive descriptor for an LRN backward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LRN backward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for an LRN backward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an LRN forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3107,16 +3038,16 @@ struct lrn_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const lrn_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an LRN backward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LRN backward propagation primitive.
+        /// @param adesc Descriptor for an LRN backward propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an LRN forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3124,8 +3055,8 @@ struct lrn_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const lrn_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -3162,21 +3093,16 @@ struct pooling_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for pooling forward propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
+        /// Arrays @p strides, @p kernel, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
         ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p alg_kind = #dnnl::algorithm::pooling_max and @p
-        ///     prop_kind = #dnnl::prop_kind::forward_training; must be
-        ///     queried for using @ref dnnl::primitive_desc_base::query_md()
-        ///     after a corresponding primitive descriptor is created
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Pooling algorithm kind: either
+        /// @param aalgorithm Pooling algorithm kind: either
         ///     #dnnl::algorithm::pooling_max,
         ///     #dnnl::algorithm::pooling_avg_include_padding,
         ///     or #dnnl::algorithm::pooling_avg (same as
@@ -3186,10 +3112,10 @@ struct pooling_forward : public primitive {
         /// @param strides Vector of strides for spatial dimension.
         /// @param kernel Vector of kernel spatial dimensions.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(prop_kind prop_kind, algorithm algorithm,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &dst_desc,
                 const memory::dims &strides, const memory::dims &kernel,
                 const memory::dims &padding_l, const memory::dims &padding_r);
@@ -3203,27 +3129,27 @@ struct pooling_forward : public primitive {
         /// Constructs a primitive descriptor for a pooling forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a pooling forward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a pooling forward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a pooling forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a pooling forward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a pooling forward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -3250,17 +3176,13 @@ struct pooling_backward : public primitive {
     struct desc {
         /// Constructs a descriptor for pooling backward propagation primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p alg_kind = #dnnl::algorithm::pooling_max; must be
-        ///     queried for using @ref dnnl::primitive_desc_base::query_md()
-        ///     after a corresponding primitive descriptor is created
+        /// Arrays @p strides, @p kernel, @p padding_l, and @p padding_r
+        /// contain values for spatial dimensions only and hence must have the
+        /// same number of elements as there are spatial dimensions. The order
+        /// of values is the same as in the tensor: depth (for 3D tensors),
+        /// height (for 3D and 2D tensors), and width.
         ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
-        /// @param algorithm Pooling algorithm kind: either
+        /// @param aalgorithm Pooling algorithm kind: either
         ///     #dnnl::algorithm::pooling_max,
         ///     #dnnl::algorithm::pooling_avg_include_padding,
         ///     or #dnnl::algorithm::pooling_avg (same as
@@ -3270,10 +3192,10 @@ struct pooling_backward : public primitive {
         /// @param strides Vector of strides for spatial dimension.
         /// @param kernel Vector of kernel spatial dimensions.
         /// @param padding_l Vector of padding values for low indices for each
-        ///     spatial dimension (front, top, left).
+        ///     spatial dimension `([[front,] top,] left)`.
         /// @param padding_r Vector of padding values for high indices for
-        ///     each spatial dimension (back, bottom, right).
-        desc(algorithm algorithm, const memory::desc &diff_src_desc,
+        ///     each spatial dimension `([[back,] bottom,] right)`.
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &diff_dst_desc, const memory::dims &strides,
                 const memory::dims &kernel, const memory::dims &padding_l,
                 const memory::dims &padding_r);
@@ -3287,8 +3209,8 @@ struct pooling_backward : public primitive {
         /// Constructs a primitive descriptor for a pooling backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a pooling backward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a pooling backward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a pooling forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3296,16 +3218,16 @@ struct pooling_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const pooling_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a pooling backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a pooling backward propagation primitive.
+        /// @param adesc Descriptor for a pooling backward propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a pooling forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3313,8 +3235,8 @@ struct pooling_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const pooling_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -3365,22 +3287,16 @@ struct eltwise_forward : public primitive {
         /// Constructs a descriptor for an elementwise forward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm Elementwise algorithm kind.
+        /// @param aalgorithm Elementwise algorithm kind.
         /// @param data_desc Source and destination memory descriptors.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
-        desc(prop_kind prop_kind, algorithm algorithm,
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &data_desc, float alpha = 0,
                 float beta = 0);
     };
@@ -3393,29 +3309,29 @@ struct eltwise_forward : public primitive {
         /// Constructs a primitive descriptor for an elementwise forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an elementwise forward propagation
+        /// @param adesc Descriptor for an elementwise forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an elementwise forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an elementwise forward propagation
+        /// @param adesc Descriptor for an elementwise forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -3442,14 +3358,7 @@ struct eltwise_backward : public primitive {
         /// Constructs a descriptor for an elementwise backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
-        /// @param algorithm Elementwise algorithm kind.
+        /// @param aalgorithm Elementwise algorithm kind.
         /// @param diff_data_desc Diff source and destination memory
         ///     descriptors.
         /// @param data_desc Source memory descriptor.
@@ -3457,7 +3366,7 @@ struct eltwise_backward : public primitive {
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
-        desc(algorithm algorithm, const memory::desc &diff_data_desc,
+        desc(algorithm aalgorithm, const memory::desc &diff_data_desc,
                 const memory::desc &data_desc, float alpha = 0,
                 float beta = 0);
     };
@@ -3470,9 +3379,9 @@ struct eltwise_backward : public primitive {
         /// Constructs a primitive descriptor for an elementwise backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an elementwise backward propagation
+        /// @param adesc Descriptor for an elementwise backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an elementwise forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3480,17 +3389,17 @@ struct eltwise_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const eltwise_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an elementwise backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an elementwise backward propagation
+        /// @param adesc Descriptor for an elementwise backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an elementwise forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3498,8 +3407,8 @@ struct eltwise_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const eltwise_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -3540,18 +3449,12 @@ struct softmax_forward : public primitive {
         /// Constructs a descriptor for a softmax forward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param data_desc Source and destination memory descriptor.
         /// @param softmax_axis Axis over which softmax is computed.
-        desc(prop_kind prop_kind, const memory::desc &data_desc,
+        desc(prop_kind aprop_kind, const memory::desc &data_desc,
                 int softmax_axis);
     };
 
@@ -3563,29 +3466,29 @@ struct softmax_forward : public primitive {
         /// Constructs a primitive descriptor for a softmax forward
         /// propagation primitive.
         ///
-        /// @param desc descriptor for a softmax forward propagation
+        /// @param adesc descriptor for a softmax forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a softmax forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a softmax forward propagation
+        /// @param adesc Descriptor for a softmax forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -3613,13 +3516,6 @@ struct softmax_backward : public primitive {
         /// Constructs a descriptor for a softmax backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @param diff_data_desc Diff source and diff destination memory
         ///     descriptor.
         /// @param data_desc Destination memory descriptor.
@@ -3636,9 +3532,9 @@ struct softmax_backward : public primitive {
         /// Constructs a primitive descriptor for a softmax backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a softmax backward propagation
+        /// @param adesc Descriptor for a softmax backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a softmax forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3646,17 +3542,17 @@ struct softmax_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const softmax_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a softmax backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a softmax backward propagation
+        /// @param adesc Descriptor for a softmax backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a softmax forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3664,8 +3560,8 @@ struct softmax_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const softmax_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -3706,18 +3602,12 @@ struct logsoftmax_forward : public primitive {
         /// Constructs a descriptor for a logsoftmax forward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param data_desc Source and destination memory descriptor.
         /// @param logsoftmax_axis Axis over which softmax is computed.
-        desc(prop_kind prop_kind, const memory::desc &data_desc,
+        desc(prop_kind aprop_kind, const memory::desc &data_desc,
                 int logsoftmax_axis);
     };
 
@@ -3729,29 +3619,29 @@ struct logsoftmax_forward : public primitive {
         /// Constructs a primitive descriptor for a logsoftmax forward
         /// propagation primitive.
         ///
-        /// @param desc descriptor for a logsoftmax forward propagation
+        /// @param adesc descriptor for a logsoftmax forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a logsoftmax forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a logsoftmax forward propagation
+        /// @param adesc Descriptor for a logsoftmax forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -3779,13 +3669,6 @@ struct logsoftmax_backward : public primitive {
         /// Constructs a descriptor for a logsoftmax backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @param diff_data_desc Diff source and diff destination memory
         ///     descriptors.
         /// @param data_desc Destination memory descriptor.
@@ -3802,9 +3685,9 @@ struct logsoftmax_backward : public primitive {
         /// Constructs a primitive descriptor for a logsoftmax backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a logsoftmax backward propagation
+        /// @param adesc Descriptor for a logsoftmax backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a logsoftmax forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3812,17 +3695,17 @@ struct logsoftmax_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const logsoftmax_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a logsoftmax backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a logsoftmax backward propagation
+        /// @param adesc Descriptor for a logsoftmax backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a logsoftmax forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -3830,8 +3713,8 @@ struct logsoftmax_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const logsoftmax_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -3881,47 +3764,18 @@ struct batch_normalization_forward : public primitive {
         /// Constructs a batch normalization descriptor for forward
         /// propagation.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::src_desc(`1`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     set in @p flags
-        ///  - `variance` (#dnnl::primitive_desc_base::src_desc(`2`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     set in @p flags
-        ///  - `scale_and_shift` (#dnnl::primitive_desc_base::weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is set
-        ///     in @p flags
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::dst_desc(`1`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     not set in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training
-        ///  - `variance` (#dnnl::primitive_desc_base::dst_desc(`2`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     not set in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if #dnnl::normalization_flags::fuse_norm_relu bit-flag is set
-        ///     in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training; must be queried
-        ///     for using @ref primitive_desc_base::query_md() after a
-        ///     corresponding primitive descriptor is created
-        ///
         /// @note
         ///     In-place operation is supported: the dst can refer to the same
         ///     memory as the src.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param data_desc Source and destination memory descriptors.
         /// @param epsilon Batch normalization epsilon parameter.
         /// @param flags Batch normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind prop_kind, const memory::desc &data_desc, float epsilon,
+        desc(prop_kind aprop_kind, const memory::desc &data_desc, float epsilon,
                 normalization_flags flags);
     };
 
@@ -3934,29 +3788,29 @@ struct batch_normalization_forward : public primitive {
         /// Constructs a primitive descriptor for a batch normalization forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a batch normalization forward propagation
+        /// @param adesc Descriptor for a batch normalization forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a batch normalization forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a batch normalization forward propagation
+        /// @param adesc Descriptor for a batch normalization forward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -3995,26 +3849,7 @@ struct batch_normalization_backward : public primitive {
         /// Constructs a batch normalization descriptor for backward
         /// propagation.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::src_desc(`1`))
-        ///  - `variance` (#dnnl::primitive_desc_base::src_desc(`2`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `scale_and_shift` (#dnnl::primitive_desc_base::weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is
-        ///     set in @p flags
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if #dnnl::normalization_flags::fuse_norm_relu bit-flag is set
-        ///     in @p flags
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_scale_and_shift`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is
-        ///     set in @p flags and @p prop_kind = #dnnl::prop_kind::backward
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
         ///     (diffs for all parameters are computed in this case).
         /// @param diff_data_desc Diff source and diff destination memory
@@ -4023,7 +3858,7 @@ struct batch_normalization_backward : public primitive {
         /// @param epsilon Batch normalization epsilon parameter.
         /// @param flags Batch normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind prop_kind, const memory::desc &diff_data_desc,
+        desc(prop_kind aprop_kind, const memory::desc &diff_data_desc,
                 const memory::desc &data_desc, float epsilon,
                 normalization_flags flags);
     };
@@ -4037,9 +3872,9 @@ struct batch_normalization_backward : public primitive {
         /// Constructs a primitive descriptor for a batch normalization backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a batch normalization backward
+        /// @param adesc Descriptor for a batch normalization backward
         ///     propagation primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a batch normalization
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4047,17 +3882,17 @@ struct batch_normalization_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const batch_normalization_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a batch normalization backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a batch normalization backward
+        /// @param adesc Descriptor for a batch normalization backward
         ///     propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a batch normalization
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4065,8 +3900,8 @@ struct batch_normalization_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const batch_normalization_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -4136,30 +3971,7 @@ struct layer_normalization_forward : public primitive {
         /// Constructs a descriptor for layer normalization forward
         /// propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::src_desc(`1`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     set in @p flags
-        ///  - `variance` (#dnnl::primitive_desc_base::src_desc(`2`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     set in @p flags
-        ///  - `scale_and_shift` (#dnnl::primitive_desc_base::weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is set
-        ///     in @p flags
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::dst_desc(`1`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     not set in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training
-        ///  - `variance` (#dnnl::primitive_desc_base::dst_desc(`2`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     not set in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param data_desc Source and destination memory descriptor.
@@ -4167,44 +3979,21 @@ struct layer_normalization_forward : public primitive {
         /// @param epsilon Layer normalization epsilon parameter.
         /// @param flags Layer normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind prop_kind, const memory::desc &data_desc,
+        desc(prop_kind aprop_kind, const memory::desc &data_desc,
                 const memory::desc &stat_desc, float epsilon,
                 normalization_flags flags);
 
         /// Constructs a descriptor for layer normalization forward
         /// propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::src_desc(`1`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     set in @p flags
-        ///  - `variance` (#dnnl::primitive_desc_base::src_desc(`2`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     set in @p flags
-        ///  - `scale_and_shift` (#dnnl::primitive_desc_base::weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is set
-        ///     in @p flags
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::dst_desc(`1`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     not set in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training
-        ///  - `variance` (#dnnl::primitive_desc_base::dst_desc(`2`)),
-        ///     if #dnnl::normalization_flags::use_global_stats bit-flag is
-        ///     not set in @p flags and @p prop_kind =
-        ///     #dnnl::prop_kind::forward_training
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param data_desc Source and destination memory descriptor.
         /// @param epsilon Layer normalization epsilon parameter.
         /// @param flags Layer normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind prop_kind, const memory::desc &data_desc, float epsilon,
+        desc(prop_kind aprop_kind, const memory::desc &data_desc, float epsilon,
                 normalization_flags flags);
     };
 
@@ -4217,29 +4006,29 @@ struct layer_normalization_forward : public primitive {
         /// Constructs a primitive descriptor for a layer normalization forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a layer normalization forward propagation
+        /// @param adesc Descriptor for a layer normalization forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a layer normalization forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a layer normalization forward propagation
+        /// @param adesc Descriptor for a layer normalization forward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -4276,23 +4065,7 @@ struct layer_normalization_backward : public primitive {
         /// Constructs a descriptor for layer normalization backward
         /// propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::src_desc(`1`))
-        ///  - `variance` (#dnnl::primitive_desc_base::src_desc(`2`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `scale_and_shift` (#dnnl::primitive_desc_base::weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is
-        ///     set in @p flags
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_scale_and_shift`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`)), if
-        ///     #dnnl::normalization_flags::use_scale_shift bit-flag is set
-        ///     in @p flags and @p prop_kind = #dnnl::prop_kind::backward
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
         ///     (diffs for all parameters are computed in this case).
         /// @param diff_data_desc Diff source and diff destination memory
@@ -4302,30 +4075,14 @@ struct layer_normalization_backward : public primitive {
         /// @param epsilon Layer normalization epsilon parameter.
         /// @param flags Layer normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind prop_kind, const memory::desc &diff_data_desc,
+        desc(prop_kind aprop_kind, const memory::desc &diff_data_desc,
                 const memory::desc &data_desc, const memory::desc &stat_desc,
                 float epsilon, normalization_flags flags);
 
         /// Constructs a descriptor for layer normalization backward
         /// propagation primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `mean` (#dnnl::primitive_desc_base::src_desc(`1`))
-        ///  - `variance` (#dnnl::primitive_desc_base::src_desc(`2`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `scale_and_shift` (#dnnl::primitive_desc_base::weights_desc(`0`)),
-        ///     if #dnnl::normalization_flags::use_scale_shift bit-flag is
-        ///     set in @p flags
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_scale_and_shift`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`)), if
-        ///     #dnnl::normalization_flags::use_scale_shift bit-flag is set
-        ///     in @p flags and @p prop_kind = #dnnl::prop_kind::backward
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
         ///     (diffs for all parameters are computed in this case).
         /// @param diff_data_desc Diff source and diff destination memory
@@ -4334,7 +4091,7 @@ struct layer_normalization_backward : public primitive {
         /// @param epsilon Layer normalization epsilon parameter.
         /// @param flags Layer normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind prop_kind, const memory::desc &diff_data_desc,
+        desc(prop_kind aprop_kind, const memory::desc &diff_data_desc,
                 const memory::desc &data_desc, float epsilon,
                 normalization_flags flags);
     };
@@ -4348,9 +4105,9 @@ struct layer_normalization_backward : public primitive {
         /// Constructs a primitive descriptor for a layer normalization backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a layer normalization backward
+        /// @param adesc Descriptor for a layer normalization backward
         ///     propagation primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a layer normalization
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4358,17 +4115,17 @@ struct layer_normalization_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const layer_normalization_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a layer normalization backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a layer normalization backward
+        /// @param adesc Descriptor for a layer normalization backward
         ///     propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a layer normalization
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4376,8 +4133,8 @@ struct layer_normalization_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const layer_normalization_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -4433,52 +4190,36 @@ struct inner_product_forward : public primitive {
         /// Constructs a descriptor for an inner product forward propagation
         /// primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param src_desc Memory descriptor for src.
         /// @param weights_desc Memory descriptor for diff weights.
         /// @param bias_desc Memory descriptor for diff bias.
         /// @param dst_desc Memory descriptor for diff dst.
-        desc(prop_kind prop_kind, const memory::desc &src_desc,
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
                 const memory::desc &weights_desc, const memory::desc &bias_desc,
                 const memory::desc &dst_desc);
 
         /// Constructs a descriptor for an inner product forward propagation
         /// primitive without bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param src_desc Memory descriptor for src.
         /// @param weights_desc Memory descriptor for diff weights.
         /// @param dst_desc Memory descriptor for dst.
-        desc(prop_kind prop_kind, const memory::desc &src_desc,
-                const memory::desc &weights_desc,
-                const memory::desc &dst_desc);
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &weights_desc, const memory::desc &dst_desc);
     };
 
     /// Primitive descriptor for an inner product forward propagation primitive.
@@ -4489,29 +4230,29 @@ struct inner_product_forward : public primitive {
         /// Constructs a primitive descriptor for an inner product forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an inner product forward propagation
+        /// @param adesc Descriptor for an inner product forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an inner product forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an inner product forward propagation
+        /// @param adesc Descriptor for an inner product forward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -4542,13 +4283,6 @@ struct inner_product_backward_data : public primitive {
         /// Constructs a descriptor for an inner product backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
@@ -4570,9 +4304,9 @@ struct inner_product_backward_data : public primitive {
         /// Constructs a primitive descriptor for an inner product backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an inner product backward propagation
+        /// @param adesc Descriptor for an inner product backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an inner product
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4580,17 +4314,17 @@ struct inner_product_backward_data : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const inner_product_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an inner product backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an inner product backward propagation
+        /// @param adesc Descriptor for an inner product backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an inner product
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4598,8 +4332,8 @@ struct inner_product_backward_data : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const inner_product_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -4629,14 +4363,6 @@ struct inner_product_backward_weights : public primitive {
         /// Constructs a descriptor for an inner product descriptor weights
         /// update primitive with bias.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
@@ -4652,13 +4378,6 @@ struct inner_product_backward_weights : public primitive {
 
         /// Constructs a descriptor for an inner product descriptor weights
         /// update primitive without bias.
-        ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_weights` (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
         ///
         /// @note
         ///     All the memory descriptors may be initialized with the
@@ -4680,9 +4399,9 @@ struct inner_product_backward_weights : public primitive {
         /// Constructs a primitive descriptor for an inner product weights
         /// update primitive.
         ///
-        /// @param desc Descriptor for an inner product weights gradient
+        /// @param adesc Descriptor for an inner product weights gradient
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an inner product
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4690,17 +4409,17 @@ struct inner_product_backward_weights : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const inner_product_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an inner product weights
         /// update primitive.
         ///
-        /// @param desc Descriptor for an inner product weights gradient
+        /// @param adesc Descriptor for an inner product weights gradient
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an inner product
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -4708,8 +4427,8 @@ struct inner_product_backward_weights : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const inner_product_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -4770,6 +4489,14 @@ struct rnn_primitive_desc_base : public primitive_desc {
     /// @returns Weights iteration memory descriptor.
     memory::desc weights_iter_desc() const;
 
+    /// Returns weights peephole memory descriptor.
+    /// @returns Weights peephole memory descriptor.
+    memory::desc weights_peephole_desc() const;
+
+    /// Returns weights projection memory descriptor.
+    /// @returns Weights projection memory descriptor.
+    memory::desc weights_projection_desc() const;
+
     /// Returns bias memory descriptor.
     /// @returns Bias memory descriptor.
     /// @returns A zero memory descriptor if the primitive does not have a
@@ -4812,6 +4539,14 @@ struct rnn_primitive_desc_base : public primitive_desc {
     /// @returns Diff weights iteration memory descriptor.
     memory::desc diff_weights_iter_desc() const;
 
+    /// Returns diff weights peephole memory descriptor.
+    /// @returns Diff weights peephole memory descriptor.
+    memory::desc diff_weights_peephole_desc() const;
+
+    /// Returns diff weights projection memory descriptor.
+    /// @returns Diff weights projection memory descriptor.
+    memory::desc diff_weights_projection_desc() const;
+
     /// Returns diff bias memory descriptor.
     /// @returns Diff bias memory descriptor.
     /// @returns A zero memory descriptor if the primitive does not have a
@@ -4840,33 +4575,20 @@ struct vanilla_rnn_forward : public primitive {
         /// Constructs a descriptor for a vanilla RNN forward propagation
         /// primitive.
         ///
-        /// The @p src_iter_desc, @p bias_desc, and @p dst_iter_desc may point
-        /// to a zero memory descriptor. This would then indicate that the RNN
-        /// forward propagation primitive should not use them and should
-        /// default to zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc,
+        /// - @p bias_desc,
+        /// - @p dst_iter_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///
-        /// Outputs:
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p prop_kind equals #dnnl::prop_kind::forward_training;
-        ///     must be queried for using @ref
-        ///     dnnl::primitive_desc_base::query_md() after a corresponding
-        ///     primitive descriptor is created
+        /// This would then indicate that the RNN forward propagation primitive
+        /// should not use them and should default to zero values instead.
         ///
         /// @note
         ///     All memory descriptors except @p src_iter_desc can be
         ///     initialized with an #dnnl::memory::format_tag::any value of @p
         ///     format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param activation Activation kind. Possible values are
@@ -4890,8 +4612,8 @@ struct vanilla_rnn_forward : public primitive {
         /// @param alpha Negative slope if activation is
         ///     #dnnl::algorithm::eltwise_relu.
         /// @param beta Unused.
-        desc(prop_kind prop_kind, algorithm activation, rnn_direction direction,
-                const memory::desc &src_layer_desc,
+        desc(prop_kind aprop_kind, algorithm activation,
+                rnn_direction direction, const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &weights_layer_desc,
                 const memory::desc &weights_iter_desc,
@@ -4910,29 +4632,29 @@ struct vanilla_rnn_forward : public primitive {
         /// Constructs a primitive descriptor for a vanilla RNN forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a vanilla RNN forward propagation
+        /// @param adesc Descriptor for a vanilla RNN forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a vanilla RNN forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a vanilla RNN forward propagation
+        /// @param adesc Descriptor for a vanilla RNN forward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::rnn_primitive_desc_base::src_layer_desc()const
         memory::desc src_layer_desc() const;
@@ -4970,48 +4692,25 @@ struct vanilla_rnn_forward : public primitive {
 
 /// Vanilla RNN backward propagation primitive.
 struct vanilla_rnn_backward : public primitive {
-    /// Vanilla RNN descriptor backward propagation primitive.
+    /// Descriptor for a vanilla RNN backward propagation primitive.
     struct desc {
         /// Constructs a descriptor for a vanilla RNN backward propagation
         /// primitive.
         ///
-        /// The @p src_iter_desc together with @p diff_src_iter_desc, @p
-        /// bias_desc together with @p diff_bias_desc, and @p dst_iter_desc
-        /// together with @p diff_src_iter_desc, may point to a zero memory
-        /// descriptor. This would then indicate that the RNN backward
-        /// propagation primitive should not use the respective data and
-        /// should use zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p diff_src_iter_desc,
+        /// - @p bias_desc together with @p diff_bias_desc,
+        /// - @p dst_iter_desc together with @p diff_dst_iter_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `diff_dst_layer` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `diff_dst_iter`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`1`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src_layer`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_src_iter`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`1`)), if used
-        ///  - `diff_weights_layer`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_weights_iter`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///  - `diff_bias`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`2`)), if used
+        /// This would then indicate that the RNN backward propagation
+        /// primitive should not use the respective data and should use zero
+        /// values instead.
         ///
         /// @note
         ///     All the memory descriptors may be initialized with the
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Must be
+        /// @param aprop_kind Propagation kind. Must be
         ///     #dnnl::prop_kind::backward.
         /// @param activation Activation kind. Possible values are
         ///     #dnnl::algorithm::eltwise_relu,
@@ -5047,8 +4746,8 @@ struct vanilla_rnn_backward : public primitive {
         /// @param alpha Negative slope if activation is
         ///     #dnnl::algorithm::eltwise_relu.
         /// @param beta Unused.
-        desc(prop_kind prop_kind, algorithm activation, rnn_direction direction,
-                const memory::desc &src_layer_desc,
+        desc(prop_kind aprop_kind, algorithm activation,
+                rnn_direction direction, const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &weights_layer_desc,
                 const memory::desc &weights_iter_desc,
@@ -5066,7 +4765,7 @@ struct vanilla_rnn_backward : public primitive {
                 float beta = 0.0f);
     };
 
-    /// Primitive descriptor for a RNN backward propagation primitive.
+    /// Primitive descriptor for an RNN backward propagation primitive.
     struct primitive_desc : public rnn_primitive_desc_base {
         /// Default constructor. Produces an empty object.
         primitive_desc();
@@ -5074,9 +4773,9 @@ struct vanilla_rnn_backward : public primitive {
         /// Constructs a primitive descriptor for a vanilla RNN backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a vanilla RNN backward propagation
+        /// @param adesc Descriptor for a vanilla RNN backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a vanilla RNN
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -5084,17 +4783,17 @@ struct vanilla_rnn_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const vanilla_rnn_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a vanilla RNN backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a vanilla RNN backward propagation
+        /// @param adesc Descriptor for a vanilla RNN backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a vanilla RNN
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -5102,8 +4801,8 @@ struct vanilla_rnn_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const vanilla_rnn_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -5169,11 +4868,15 @@ struct lstm_forward : public primitive {
         /// Constructs a descriptor for an LSTM (with or without peephole and
         /// with or without projection) forward propagation primitive.
         ///
-        /// The @p src_iter_desc, @p src_iter_c_desc, @p weights_peephole_desc,
-        /// @p bias_desc, @p dst_iter_desc, and @p dst_iter_c_desc may point to
-        /// a zero memory descriptor. This would then indicate that the LSTM
-        /// forward propagation primitive should not use them and should
-        /// default to zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p src_iter_c_desc,
+        /// - @p weights_peephole_desc,
+        /// - @p bias_desc,
+        /// - @p dst_iter_desc together with @p dst_iter_c_desc.
+        ///
+        /// This would then indicate that the LSTM forward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// The @p weights_projection_desc may point to a zero memory
         /// descriptor. This would then indicate that the LSTM doesn't have
@@ -5183,36 +4886,7 @@ struct lstm_forward : public primitive {
         ///     All memory descriptors can be initialized with an
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// Inputs:
-        ///  - src_layer (#dnnl::primitive_desc_base::src_desc (0))
-        ///  - src_iter (#dnnl::primitive_desc_base::src_desc (1)), if used
-        ///  - src_iter_c (#dnnl::primitive_desc_base::src_desc (2)), if used
-        ///  - weights_layer (#dnnl::primitive_desc_base::weights_desc (0))
-        ///  - weights_iter (#dnnl::primitive_desc_base::weights_desc (1))
-        ///  - weights_peephole (#dnnl::primitive_desc_base::weights_desc (2)),
-        ///    if used
-        ///  - weights_projection
-        ///    (#dnnl::primitive_desc_base::weights_desc (index)), if used and
-        ///    index is:
-        ///    - 2, if there is no weights_peephole
-        ///    - 3, otherwise
-        ///  - bias (#dnnl::primitive_desc_base::weights_desc (index)), if used
-        ///    and index is:
-        ///    - 2, if neither weights_peephole nor weights_projection is used
-        ///    - 3, if one of weights_peephole or weights_projection is used
-        ///    - 4, if both weights_peephole and weights_projection are used
-        ///
-        /// Outputs:
-        ///  - dst_layer (#dnnl::primitive_desc_base::dst_desc (0))
-        ///  - dst_iter (#dnnl::primitive_desc_base::dst_desc (1)), if used
-        ///  - dst_iter_c (#dnnl::primitive_desc_base::dst_desc (2)), if used
-        ///  - workspace (#dnnl::primitive_desc_base::workspace_desc (0)),
-        ///     if @p prop_kind equals #dnnl::prop_kind::forward_training;
-        ///     must be queried for using @ref
-        ///     dnnl::primitive_desc_base::query_md() after a corresponding
-        ///     primitive descriptor is created
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
@@ -5239,7 +4913,7 @@ struct lstm_forward : public primitive {
         /// @param dst_iter_c_desc Memory descriptor for the output recurrent
         ///     cell state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &src_iter_c_desc,
@@ -5256,40 +4930,21 @@ struct lstm_forward : public primitive {
         /// Constructs a descriptor for an LSTM (with or without peephole)
         /// forward propagation primitive.
         ///
-        /// The @p src_iter_desc, @p src_iter_c_desc, @p weights_peephole_desc,
-        /// @p bias_desc, @p dst_iter_desc, and @p dst_iter_c_desc may point to
-        /// a zero memory descriptor. This would then indicate that the LSTM
-        /// forward propagation primitive should not use them and should
-        /// default to zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p src_iter_c_desc,
+        /// - @p weights_peephole_desc,
+        /// - @p bias_desc,
+        /// - @p dst_iter_desc together with @p dst_iter_c_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `src_iter_c` (#dnnl::primitive_desc_base::src_desc(`2`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `weights_peephole` (#dnnl::primitive_desc_base::weights_desc(`2`)),
-        ///    if used
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used and
-        ///    LSTM is without peephole
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`3`)), if used and
-        ///    LSTM is with peephole
-        ///
-        /// Outputs:
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `dst_iter_c` (#dnnl::primitive_desc_base::dst_desc(`2`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p prop_kind equals #dnnl::prop_kind::forward_training;
-        ///     must be queried for using @ref
-        ///     dnnl::primitive_desc_base::query_md() after a corresponding
-        ///     primitive descriptor is created
+        /// This would then indicate that the LSTM forward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors can be initialized with an
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
@@ -5313,7 +4968,7 @@ struct lstm_forward : public primitive {
         /// @param dst_iter_c_desc Memory descriptor for the output recurrent
         ///     cell state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &src_iter_c_desc,
@@ -5328,35 +4983,20 @@ struct lstm_forward : public primitive {
 
         /// Constructs a descriptor for an LSTM forward propagation primitive.
         ///
-        /// The @p src_iter_desc, @p src_iter_c_desc, @p bias_desc, @p
-        /// dst_iter_desc, and @p dst_iter_c_desc may point to a zero memory
-        /// descriptor. This would then indicate that the LSTM forward
-        /// propagation primitive should not use them and should default to
-        /// zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p src_iter_c_desc,
+        /// - @p bias_desc,
+        /// - @p dst_iter_desc together with @p dst_iter_c_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `src_iter_c` (#dnnl::primitive_desc_base::src_desc(`2`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///
-        /// Outputs:
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `dst_iter_c` (#dnnl::primitive_desc_base::dst_desc(`2`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p prop_kind equals #dnnl::prop_kind::forward_training;
-        ///     must be queried for using @ref
-        ///     dnnl::primitive_desc_base::query_md() after a
-        ///     corresponding primitive descriptor is created
+        /// This would then indicate that the LSTM forward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors can be initialized with an
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
@@ -5377,7 +5017,7 @@ struct lstm_forward : public primitive {
         /// @param dst_iter_c_desc Memory descriptor for the output recurrent
         ///     cell state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &src_iter_c_desc,
@@ -5398,27 +5038,27 @@ struct lstm_forward : public primitive {
         /// Constructs a primitive descriptor for an LSTM forward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LSTM forward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for an LSTM forward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an LSTM forward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LSTM forward propagation primitive.
+        /// @param adesc Descriptor for an LSTM forward propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::rnn_primitive_desc_base::src_layer_desc()const
         memory::desc src_layer_desc() const;
@@ -5434,6 +5074,12 @@ struct lstm_forward : public primitive {
 
         /// @copydoc dnnl::rnn_primitive_desc_base::weights_iter_desc()const
         memory::desc weights_iter_desc() const;
+
+        /// @copydoc dnnl::rnn_primitive_desc_base::weights_peephole_desc()const
+        memory::desc weights_peephole_desc() const;
+
+        /// @copydoc dnnl::rnn_primitive_desc_base::weights_projection_desc()const
+        memory::desc weights_projection_desc() const;
 
         /// @copydoc dnnl::rnn_primitive_desc_base::bias_desc()const
         memory::desc bias_desc() const;
@@ -5467,15 +5113,18 @@ struct lstm_backward : public primitive {
         /// projection) descriptor for backward propagation using @p prop_kind,
         /// @p direction, and memory descriptors.
         ///
-        /// The @p src_iter_desc together with @p diff_iter_desc, @p
-        /// src_iter_c_desc together with @p src_iter_c_desc, @p
-        /// weights_peephole_desc together with @p diff_weights_peephole_desc,
-        /// @p bias_desc together with @p diff_bias_desc, @p dst_iter_desc
-        /// together with @p diff_dst_iter_desc, and @p dst_iter_c_desc
-        /// together with @p diff_dst_iter_c_desc, may point to a zero memory
-        /// descriptor. This would then indicate that the LSTM backward
-        /// propagation primitive should not use them and should default to
-        /// zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p src_iter_c_desc,
+        ///   @p diff_src_iter_desc, and @p diff_src_iter_c_desc,
+        /// - @p weights_peephole_desc together with
+        ///   @p diff_weights_peephole_desc
+        /// - @p bias_desc together with @p diff_bias_desc,
+        /// - @p dst_iter_desc together with @p dst_iter_c_desc,
+        ///   @p diff_dst_iter_desc, and @p diff_dst_iter_c_desc.
+        ///
+        /// This would then indicate that the LSTM backward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// The @p weights_projection_desc together with @p
         /// diff_weights_projection_desc may point to a zero memory descriptor.
@@ -5486,62 +5135,7 @@ struct lstm_backward : public primitive {
         ///     All memory descriptors can be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// Inputs:
-        ///  - src_layer (#dnnl::primitive_desc_base::src_desc (0))
-        ///  - src_iter (#dnnl::primitive_desc_base::src_desc (1)), if used
-        ///  - src_iter_c (#dnnl::primitive_desc_base::src_desc (2)), if used
-        ///  - weights_layer (#dnnl::primitive_desc_base::weights_desc (0))
-        ///  - weights_iter (#dnnl::primitive_desc_base::weights_desc (1))
-        ///  - weights_peephole (#dnnl::primitive_desc_base::weights_desc (2)),
-        ///    if used
-        ///  - weights_projection
-        ///    (#dnnl::primitive_desc_base::weights_desc (index)), if used and
-        ///    index is:
-        ///    - 2, if there is no weights_peephole
-        ///    - 3, otherwise
-        ///  - bias (#dnnl::primitive_desc_base::weights_desc (index)), if used
-        ///    and index is:
-        ///    - 2, if neither weights_peephole nor weights_projection is used
-        ///    - 3, if one of weights_peephole or weights_projection is used
-        ///    - 4, if both weights_peephole and weights_projection are used
-        ///  - dst_layer (#dnnl::primitive_desc_base::dst_desc (0))
-        ///  - dst_iter (#dnnl::primitive_desc_base::dst_desc (1)), if used
-        ///  - dst_iter_c (#dnnl::primitive_desc_base::dst_desc (2)), if used
-        ///  - diff_dst_layer (#dnnl::primitive_desc_base::diff_dst_desc (0))
-        ///  - diff_dst_iter
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc (1)), if used
-        ///  - diff_dst_iter_c
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc (2)), if used
-        ///  - workspace (#dnnl::primitive_desc_base::workspace_desc (0))
-        ///
-        /// Outputs:
-        ///  - diff_src_layer (#dnnl::primitive_desc_base::diff_src_desc (0))
-        ///  - diff_src_iter
-        ///     (#dnnl::primitive_desc_base::diff_src_desc (1)), if used
-        ///  - diff_src_iter_c
-        ///     (#dnnl::primitive_desc_base::diff_src_desc (2)), if used
-        ///  - diff_weights_layer
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc (0))
-        ///  - diff_weights_iter
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc (1))
-        ///  - diff_weights_peephole
-        ///    (#dnnl::primitive_desc_base::diff_weights_desc (2)), if used
-        ///  - diff_weights_projection
-        ///    (#dnnl::primitive_desc_base::diff_weights_desc (index)), if used
-        ///    and index is:
-        ///    - 2, if there is no diff_weights_peephole
-        ///    - 3, otherwise
-        ///  - diff_bias
-        ///    (#dnnl::primitive_desc_base::diff_weights_desc (index)), if used
-        ///    and index is:
-        ///    - 2, if neither diff_weights_peephole nor
-        ///         diff_weights_projection is used
-        ///    - 3, if one of diff_weights_peephole or diff_weights_projection
-        ///         is used
-        ///    - 4, if both diff_weights_peephole and diff_weights_projection
-        ///         are used
-        ///
-        /// @param prop_kind Propagation kind. Must be
+        /// @param aprop_kind Propagation kind. Must be
         ///     #dnnl::prop_kind::backward.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
         ///     more info.
@@ -5590,7 +5184,7 @@ struct lstm_backward : public primitive {
         /// @param diff_dst_iter_c_desc Memory descriptor for the diff of
         ///     output recurrent cell state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &src_iter_c_desc,
@@ -5619,60 +5213,24 @@ struct lstm_backward : public primitive {
         /// backward propagation using @p prop_kind, @p direction, and memory
         /// descriptors.
         ///
-        /// The @p src_iter_desc together with @p diff_iter_desc, @p
-        /// src_iter_c_desc together with @p src_iter_c_desc, @p
-        /// weights_peephole_desc together with @p diff_weights_peephole_desc,
-        /// @p bias_desc together with @p diff_bias_desc, @p dst_iter_desc
-        /// together with @p diff_dst_iter_desc, and @p dst_iter_c_desc
-        /// together with @p diff_dst_iter_c_desc, may point to a zero memory
-        /// descriptor. This would then indicate that the LSTM backward
-        /// propagation primitive should not use them and should default to
-        /// zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p src_iter_c_desc,
+        ///   @p diff_src_iter_desc, and @p diff_src_iter_c_desc,
+        /// - @p weights_peephole_desc together with
+        ///   @p diff_weights_peephole_desc
+        /// - @p bias_desc together with @p diff_bias_desc,
+        /// - @p dst_iter_desc together with @p dst_iter_c_desc,
+        ///   @p diff_dst_iter_desc, and @p diff_dst_iter_c_desc.
+        ///
+        /// This would then indicate that the LSTM backward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors may be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `src_iter_c` (#dnnl::primitive_desc_base::src_desc(`2`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `weights_peephole` (#dnnl::primitive_desc_base::weights_desc(`2`)),
-        ///    if used
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used and
-        ///    LSTM is without peephole
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`3`)), if used and
-        ///    LSTM is with peephole
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `dst_iter_c` (#dnnl::primitive_desc_base::dst_desc(`2`)), if used
-        ///  - `diff_dst_layer` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `diff_dst_iter`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`1`)), if used
-        ///  - `diff_dst_iter_c`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`2`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src_layer` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_src_iter`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`1`)), if used
-        ///  - `diff_src_iter_c`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`2`)), if used
-        ///  - `diff_weights_layer`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_weights_iter`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///  - `diff_weights_peephole`
-        ///    (#dnnl::primitive_desc_base::diff_weights_desc(`2`)), if used
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`2`)),
-        ///    if used and LSTM is without peephole
-        ///  - `diff_bias` (#dnnl::primitive_desc_base::diff_weights_desc(`3`)),
-        ///    if used and LSTM is with peephole
-        ///
-        /// @param prop_kind Propagation kind. Must be
+        /// @param aprop_kind Propagation kind. Must be
         ///     #dnnl::prop_kind::backward.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
         ///     more info.
@@ -5715,7 +5273,7 @@ struct lstm_backward : public primitive {
         /// @param diff_dst_iter_c_desc Memory descriptor for the diff of
         ///     output recurrent cell state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &src_iter_c_desc,
@@ -5741,49 +5299,22 @@ struct lstm_backward : public primitive {
         /// Constructs an LSTM descriptor for backward propagation using @p
         /// prop_kind, @p direction, and memory descriptors.
         ///
-        /// The @p src_iter_desc together with @p diff_iter_desc, @p
-        /// src_iter_c_desc together with @p src_iter_c_desc, @p bias_desc
-        /// together with @p diff_bias_desc, @p dst_iter_desc together with @p
-        /// diff_dst_iter_desc, and @p dst_iter_c_desc together with @p
-        /// diff_dst_iter_c_desc, may point to a zero memory descriptor. This
-        /// would then indicate that the LSTM backward propagation primitive
-        /// should not use them and should default to zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p src_iter_c_desc,
+        ///   @p diff_src_iter_desc, and @p diff_src_iter_c_desc,
+        /// - @p bias_desc together with @p diff_bias_desc,
+        /// - @p dst_iter_desc together with @p dst_iter_c_desc,
+        ///   @p diff_dst_iter_desc, and @p diff_dst_iter_c_desc.
+        ///
+        /// This would then indicate that the LSTM backward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors may be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `src_iter_c` (#dnnl::primitive_desc_base::src_desc(`2`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `dst_iter_c` (#dnnl::primitive_desc_base::dst_desc(`2`)), if used
-        ///  - `diff_dst_layer` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `diff_dst_iter`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`1`)), if used
-        ///  - `diff_dst_iter_c`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`2`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src_layer` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_src_iter`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`1`)), if used
-        ///  - `diff_src_iter_c`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`2`)), if used
-        ///  - `diff_weights_layer`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_weights_iter`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///  - `diff_bias`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`2`)), if used
-        ///
-        /// @param prop_kind Propagation kind. Must be
+        /// @param aprop_kind Propagation kind. Must be
         ///     #dnnl::prop_kind::backward.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
         ///     more info.
@@ -5820,7 +5351,7 @@ struct lstm_backward : public primitive {
         /// @param diff_dst_iter_c_desc Memory descriptor for the diff of
         ///     output recurrent cell state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &src_iter_c_desc,
@@ -5850,8 +5381,8 @@ struct lstm_backward : public primitive {
         /// Constructs a primitive descriptor for an LSTM backward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for LSTM backward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for LSTM backward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an LSTM
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -5859,16 +5390,16 @@ struct lstm_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const lstm_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an LSTM backward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for an LSTM backward propagation primitive.
+        /// @param adesc Descriptor for an LSTM backward propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an LSTM
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -5876,8 +5407,8 @@ struct lstm_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const lstm_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -5895,6 +5426,12 @@ struct lstm_backward : public primitive {
 
         /// @copydoc dnnl::rnn_primitive_desc_base::weights_iter_desc()const
         memory::desc weights_iter_desc() const;
+
+        /// @copydoc dnnl::rnn_primitive_desc_base::weights_peephole_desc()const
+        memory::desc weights_peephole_desc() const;
+
+        /// @copydoc dnnl::rnn_primitive_desc_base::weights_projection_desc()const
+        memory::desc weights_projection_desc() const;
 
         /// @copydoc dnnl::rnn_primitive_desc_base::bias_desc()const
         memory::desc bias_desc() const;
@@ -5926,6 +5463,12 @@ struct lstm_backward : public primitive {
         /// @copydoc dnnl::rnn_primitive_desc_base::diff_weights_iter_desc()const
         memory::desc diff_weights_iter_desc() const;
 
+        /// @copydoc dnnl::rnn_primitive_desc_base::diff_weights_peephole_desc()const
+        memory::desc diff_weights_peephole_desc() const;
+
+        /// @copydoc dnnl::rnn_primitive_desc_base::diff_weights_projection_desc()const
+        memory::desc diff_weights_projection_desc() const;
+
         /// @copydoc dnnl::rnn_primitive_desc_base::diff_bias_desc()const
         memory::desc diff_bias_desc() const;
 
@@ -5954,33 +5497,20 @@ struct gru_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for a GRU forward propagation primitive.
         ///
-        /// The @p src_iter_desc, @p bias_desc, and @p dst_iter, may point to
-        /// a zero memory descriptor. This would then indicate that the GRU
-        /// forward propagation primitive should not use them and should
-        /// default to zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc,
+        /// - @p bias_desc,
+        /// - @p dst_iter_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///
-        /// Outputs:
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p prop_kind equals #dnnl::prop_kind::forward_training;
-        ///     must be queried for using @ref
-        ///     dnnl::primitive_desc_base::query_md() after a corresponding
-        ///     primitive descriptor is created
+        /// This would then indicate that the GRU forward propagation primitive
+        /// should not use them and should default to zero values instead.
         ///
         /// @note
         ///     All memory descriptors except @p src_iter_desc may be
         ///     initialized with an #dnnl::memory::format_tag::any value of @p
         ///     format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
@@ -5997,7 +5527,7 @@ struct gru_forward : public primitive {
         /// @param dst_iter_desc Memory descriptor for the output recurrent
         ///     hidden state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &weights_layer_desc,
@@ -6016,27 +5546,27 @@ struct gru_forward : public primitive {
         /// Constructs a primitive descriptor for a GRU forward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for a GRU forward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a GRU forward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a GRU forward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for a GRU forward propagation primitive.
+        /// @param adesc Descriptor for a GRU forward propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::rnn_primitive_desc_base::src_layer_desc()const
         memory::desc src_layer_desc() const;
@@ -6078,42 +5608,20 @@ struct gru_backward : public primitive {
     struct desc {
         /// Constructs a descriptor for a GRU backward propagation primitive.
         ///
-        /// The @p src_iter_desc together with @p diff_src_iter_desc, @p
-        /// bias_desc together with @p diff_bias_desc, and @p dst_iter
-        /// together with @p diff_dst_iter, may point to a zero memory
-        /// descriptor.  This would then indicate that the GRU backward
-        /// propagation primitive should not use them and should default to
-        /// zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p diff_src_iter_desc,
+        /// - @p bias_desc together with @p diff_bias_desc,
+        /// - @p dst_iter_desc together with @p diff_dst_iter_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `diff_dst_layer` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `diff_dst_iter`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`1`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src_layer` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_src_iter`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`1`)), if used
-        ///  - `diff_weights_layer`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_weights_iter`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///  - `diff_bias`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`2`)), if used
+        /// This would then indicate that the GRU backward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors may be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Must be
+        /// @param aprop_kind Propagation kind. Must be
         ///     #dnnl::prop_kind::backward.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
         ///     more info.
@@ -6142,7 +5650,7 @@ struct gru_backward : public primitive {
         /// @param diff_dst_iter_desc Memory descriptor for the diff of output
         ///     recurrent hidden state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &weights_layer_desc,
@@ -6168,8 +5676,8 @@ struct gru_backward : public primitive {
         /// Constructs a primitive descriptor for a GRU backward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for a GRU backward propagation primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a GRU backward propagation primitive.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a GRU
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -6177,16 +5685,16 @@ struct gru_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const gru_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a GRU backward propagation
         /// primitive.
         ///
-        /// @param desc Descriptor for a GRU backward propagation primitive.
+        /// @param adesc Descriptor for a GRU backward propagation primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a GRU
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -6194,8 +5702,8 @@ struct gru_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const gru_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -6260,33 +5768,21 @@ struct lbr_gru_forward : public primitive {
     struct desc {
         /// Constructs a descriptor for LBR GRU forward propagation primitive.
         ///
-        /// The @p src_iter_desc, @p bias_desc, and @p dst_iter, may point to
-        /// a zero memory descriptor. This would then indicate that the LBR
-        /// GRU forward propagation primitive should not use them and should
-        /// default to zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc,
+        /// - @p bias_desc,
+        /// - @p dst_iter_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///
-        /// Outputs:
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`)),
-        ///     if @p prop_kind equals #dnnl::prop_kind::forward_training;
-        ///     must be queried for using @ref
-        ///     dnnl::primitive_desc_base::query_md() after a corresponding
-        ///     primitive descriptor is created
+        /// This would then indicate that the LBR GRU forward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors except @p src_iter_desc may be
         ///     initialized with an #dnnl::memory::format_tag::any value of @p
         ///     format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
@@ -6303,7 +5799,7 @@ struct lbr_gru_forward : public primitive {
         /// @param dst_iter_desc Memory descriptor for the output recurrent
         ///     hidden state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &weights_layer_desc,
@@ -6322,30 +5818,29 @@ struct lbr_gru_forward : public primitive {
         /// Constructs a primitive descriptor for a LBR GRU forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a LBR GRU forward propagation
+        /// @param adesc Descriptor for a LBR GRU forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a LBR GRU forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a LBR GRU forward propagation
+        /// @param adesc Descriptor for a LBR GRU forward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
-
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::rnn_primitive_desc_base::src_layer_desc()const
         memory::desc src_layer_desc() const;
@@ -6388,42 +5883,20 @@ struct lbr_gru_backward : public primitive {
         /// Constructs a descriptor for LBR GRU backward propagation
         /// primitive.
         ///
-        /// The @p src_iter_desc together with @p diff_src_iter_desc, @p
-        /// bias_desc together with @p diff_bias_desc, and @p dst_iter
-        /// together with @p diff_dst_iter, may point to a zero memory
-        /// descriptor.  This would then indicate that the LBR GRU backward
-        /// propagation primitive should not use them and should default to
-        /// zero values instead.
+        /// The following arguments may point to a zero memory descriptor:
+        /// - @p src_iter_desc together with @p diff_src_iter_desc,
+        /// - @p bias_desc together with @p diff_bias_desc,
+        /// - @p dst_iter_desc together with @p diff_dst_iter_desc.
         ///
-        /// Inputs:
-        ///  - `src_layer` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src_iter` (#dnnl::primitive_desc_base::src_desc(`1`)), if used
-        ///  - `weights_layer` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `weights_iter` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`2`)), if used
-        ///  - `dst_layer` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///  - `dst_iter` (#dnnl::primitive_desc_base::dst_desc(`1`)), if used
-        ///  - `diff_dst_layer` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///  - `diff_dst_iter`
-        ///     (#dnnl::primitive_desc_base::diff_dst_desc(`1`)), if used
-        ///  - `workspace` (#dnnl::primitive_desc_base::workspace_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src_layer` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///  - `diff_src_iter`
-        ///     (#dnnl::primitive_desc_base::diff_src_desc(`1`)), if used
-        ///  - `diff_weights_layer`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`0`))
-        ///  - `diff_weights_iter`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`1`))
-        ///  - `diff_bias`
-        ///     (#dnnl::primitive_desc_base::diff_weights_desc(`2`)), if used
+        /// This would then indicate that the LBR GRU backward propagation
+        /// primitive should not use them and should default to zero values
+        /// instead.
         ///
         /// @note
         ///     All memory descriptors may be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Must be
+        /// @param aprop_kind Propagation kind. Must be
         ///     #dnnl::prop_kind::backward.
         /// @param direction RNN direction. See @ref dnnl::rnn_direction for
         ///     more info.
@@ -6452,7 +5925,7 @@ struct lbr_gru_backward : public primitive {
         /// @param diff_dst_iter_desc Memory descriptor for the diff of output
         ///     recurrent hidden state vector.
         /// @param flags Unused.
-        desc(prop_kind prop_kind, rnn_direction direction,
+        desc(prop_kind aprop_kind, rnn_direction direction,
                 const memory::desc &src_layer_desc,
                 const memory::desc &src_iter_desc,
                 const memory::desc &weights_layer_desc,
@@ -6478,9 +5951,9 @@ struct lbr_gru_backward : public primitive {
         /// Constructs a primitive descriptor for an LBR GRU backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an LBR GRU backward propagation
+        /// @param adesc Descriptor for an LBR GRU backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an LBR GRU
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -6488,17 +5961,17 @@ struct lbr_gru_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const lbr_gru_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an LBR GRU backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for an LBR GRU backward propagation
+        /// @param adesc Descriptor for an LBR GRU backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for an LBR GRU
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -6506,8 +5979,8 @@ struct lbr_gru_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const lbr_gru_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
@@ -6581,19 +6054,13 @@ struct shuffle_forward : public primitive {
         /// Constructs a descriptor for a shuffle forward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param data_desc Source and destination memory descriptor.
         /// @param axis The axis along which the data is shuffled.
         /// @param group_size Shuffle group size.
-        desc(prop_kind prop_kind, const memory::desc &data_desc, int axis,
+        desc(prop_kind aprop_kind, const memory::desc &data_desc, int axis,
                 int group_size);
     };
 
@@ -6605,15 +6072,15 @@ struct shuffle_forward : public primitive {
         /// Constructs a primitive descriptor for a shuffle forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a shuffle forward propagation
+        /// @param adesc Descriptor for a shuffle forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const primitive_attr &attr = primitive_attr(),
                 bool allow_empty = false);
 
@@ -6641,12 +6108,6 @@ struct shuffle_backward : public primitive {
         /// Constructs a descriptor for a shuffle backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
         /// @param diff_data_desc Diff source and diff destination memory
         ///     descriptor.
         /// @param axis The axis along which the data is shuffled.
@@ -6662,9 +6123,9 @@ struct shuffle_backward : public primitive {
         /// Constructs a primitive descriptor for a shuffle backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a shuffle backward propagation
+        /// @param adesc Descriptor for a shuffle backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param hint_fwd_pd Primitive descriptor for a shuffle
         ///     forward propagation primitive. It is used as a hint for
@@ -6673,7 +6134,7 @@ struct shuffle_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const shuffle_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = primitive_attr(),
                 bool allow_empty = false);
@@ -6709,18 +6170,11 @@ struct binary : public primitive {
         /// Constructs a descriptor for an elementwise binary operator
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `src0` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `src1` (#dnnl::primitive_desc_base::src_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
-        /// @param algorithm Elementwise algorithm.
+        /// @param aalgorithm Elementwise algorithm.
         /// @param src0 Memory descriptor for source tensor #0.
         /// @param src1 Memory descriptor for source tensor #1.
         /// @param dst Memory descriptor for destination tensor.
-        desc(algorithm algorithm, const memory::desc &src0,
+        desc(algorithm aalgorithm, const memory::desc &src0,
                 const memory::desc &src1, const memory::desc &dst);
     };
 
@@ -6732,27 +6186,27 @@ struct binary : public primitive {
         /// Constructs a primitive descriptor for an elementwise binary operator
         /// primitive.
         ///
-        /// @param desc Descriptor for an elementwise binary operator primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for an elementwise binary operator primitive.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an elementwise binary operator
         /// primitive.
         ///
-        /// @param desc Descriptor for an elementwise binary operator primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for an elementwise binary operator primitive.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc(int)const
         memory::desc src_desc(int idx = 0) const;
@@ -6791,13 +6245,6 @@ struct matmul : public primitive {
     struct desc {
         /// Constructs a descriptor for a matmul primitive.
         ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @param src_desc Memory descriptor for source (matrix A).
         /// @param weights_desc Memory descriptor for weights (matrix B).
         /// @param dst_desc Memory descriptor for destination (matrix C).
@@ -6805,14 +6252,6 @@ struct matmul : public primitive {
                 const memory::desc &dst_desc);
 
         /// Constructs a descriptor for a matmul primitive.
-        ///
-        /// Inputs:
-        ///  - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///  - `weights` (#dnnl::primitive_desc_base::weights_desc(`0`))
-        ///  - `bias` (#dnnl::primitive_desc_base::weights_desc(`1`))
-        ///
-        /// Outputs:
-        ///  - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
         ///
         /// @param src_desc Memory descriptor for source (matrix A).
         /// @param weights_desc Memory descriptor for weights (matrix B).
@@ -6829,26 +6268,26 @@ struct matmul : public primitive {
 
         /// Constructs a primitive descriptor for a matmul primitive.
         ///
-        /// @param desc Descriptor for a matmul primitive.
-        /// @param engine Engine to use.
+        /// @param adesc Descriptor for a matmul primitive.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a matmul primitive.
         ///
-        /// @param desc Descriptor for a matmul primitive.
+        /// @param adesc Descriptor for a matmul primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -6888,68 +6327,53 @@ struct resampling_forward : public primitive {
         /// Constructs a descriptor for a resampling forward propagation
         /// primitive using source and destination memory descriptors.
         ///
-        /// Inputs:
-        /// - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        /// - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     The destination memory descriptor may be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm resampling algorithm kind: either
+        /// @param aalgorithm resampling algorithm kind: either
         ///     #dnnl::algorithm::resampling_nearest, or
         ///     #dnnl::algorithm::resampling_linear
         /// @param src_desc Source memory descriptor.
         /// @param dst_desc Destination memory descriptor.
-        desc(prop_kind prop_kind, algorithm algorithm,
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const memory::desc &src_desc, const memory::desc &dst_desc);
 
         /// Constructs a descriptor for a resampling forward propagation
         /// primitive using source memory descriptor and factors.
         ///
-        /// Inputs:
-        /// - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm resampling algorithm kind: either
+        /// @param aalgorithm resampling algorithm kind: either
         ///     #dnnl::algorithm::resampling_nearest, or
         ///     #dnnl::algorithm::resampling_linear
         /// @param factors Vector of scaling factors for spatial dimension.
         /// @param src_desc Source memory descriptor.
-        desc(prop_kind prop_kind, algorithm algorithm,
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const std::vector<float> &factors,
                 const memory::desc &src_desc);
 
         /// Constructs a descriptor for a resampling forward propagation
         /// primitive.
         ///
-        /// Inputs:
-        /// - `src` (#dnnl::primitive_desc_base::src_desc(`0`))
-        ///
-        /// Outputs:
-        /// - `dst` (#dnnl::primitive_desc_base::dst_desc(`0`))
-        ///
         /// @note
         ///     The destination memory descriptor may be initialized with
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
-        /// @param prop_kind Propagation kind. Possible values are
+        /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param algorithm resampling algorithm kind: either
+        /// @param aalgorithm resampling algorithm kind: either
         ///     #dnnl::algorithm::resampling_nearest, or
         ///     #dnnl::algorithm::resampling_linear
         /// @param factors Vector of scaling factors for spatial dimension.
         /// @param src_desc Source memory descriptor.
         /// @param dst_desc Destination memory descriptor.
-        desc(prop_kind prop_kind, algorithm algorithm,
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
                 const std::vector<float> &factors, const memory::desc &src_desc,
                 const memory::desc &dst_desc);
     };
@@ -6962,29 +6386,29 @@ struct resampling_forward : public primitive {
         /// Constructs a primitive descriptor for a resampling forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a resampling forward propagation
+        /// @param adesc Descriptor for a resampling forward propagation
         /// primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a resampling forward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a resampling forward propagation
+        /// @param adesc Descriptor for a resampling forward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param attr Primitive attributes to use.
         /// @param allow_empty A flag signifying whether construction is
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine, bool allow_empty = false);
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
         memory::desc src_desc() const;
@@ -7009,36 +6433,24 @@ struct resampling_backward : public primitive {
         /// Constructs a descriptor for a resampling backward propagation
         /// primitive using source and destination memory descriptors.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
-        /// @param algorithm resampling algorithm kind: either
+        /// @param aalgorithm resampling algorithm kind: either
         ///     #dnnl::algorithm::resampling_nearest, or
         ///     #dnnl::algorithm::resampling_linear
         /// @param diff_src_desc Diff source memory descriptor.
         /// @param diff_dst_desc Diff destination memory descriptor.
-        desc(algorithm algorithm, const memory::desc &diff_src_desc,
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &diff_dst_desc);
 
         /// Constructs a descriptor for resampling backward propagation
         /// primitive.
         ///
-        /// Inputs:
-        ///  - `diff_dst` (#dnnl::primitive_desc_base::diff_dst_desc(`0`))
-        ///
-        /// Outputs:
-        ///  - `diff_src` (#dnnl::primitive_desc_base::diff_src_desc(`0`))
-        ///
-        /// @param algorithm resampling algorithm kind: either
+        /// @param aalgorithm resampling algorithm kind: either
         ///     #dnnl::algorithm::resampling_nearest, or
         ///     #dnnl::algorithm::resampling_linear
         /// @param factors Vector of scaling factors for spatial dimension.
         /// @param diff_src_desc Diff source memory descriptor.
         /// @param diff_dst_desc Diff destination memory descriptor.
-        desc(algorithm algorithm, const std::vector<float> &factors,
+        desc(algorithm aalgorithm, const std::vector<float> &factors,
                 const memory::desc &diff_src_desc,
                 const memory::desc &diff_dst_desc);
     };
@@ -7051,9 +6463,9 @@ struct resampling_backward : public primitive {
         /// Constructs a primitive descriptor for a resampling backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a resampling backward propagation
+        /// @param adesc Descriptor for a resampling backward propagation
         ///     primitive.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a resampling forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -7061,17 +6473,17 @@ struct resampling_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const engine &engine,
+        primitive_desc(const desc &adesc, const engine &aengine,
                 const resampling_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for a resampling backward
         /// propagation primitive.
         ///
-        /// @param desc Descriptor for a resampling backward propagation
+        /// @param adesc Descriptor for a resampling backward propagation
         ///     primitive.
         /// @param attr Primitive attributes to use.
-        /// @param engine Engine to use.
+        /// @param aengine Engine to use.
         /// @param hint_fwd_pd Primitive descriptor for a resampling forward
         ///     propagation primitive. It is used as a hint for deciding which
         ///     memory format to use.
@@ -7079,8 +6491,8 @@ struct resampling_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const desc &desc, const primitive_attr &attr,
-                const engine &engine,
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
                 const resampling_forward::primitive_desc &hint_fwd_pd,
                 bool allow_empty = false);
 

@@ -1,216 +1,238 @@
+.. _onemkl_lapack_unmtr:
 
 unmtr
 =====
 
-
-.. container::
-
-
-   Multiplies a complex matrix by the complex unitary matrix Q
-   determined by
-   `hetrd <hetrd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-D89B0E48-3A4E-47F4-B51F-834297BD7620
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void unmtr(queue &exec_queue, side left_right,      uplo upper_lower, transpose trans, std::int64_t m, std::int64_t n,      buffer<T,1> &a, std::int64_t lda, buffer<T,1> &tau, buffer<T,1>      &c, std::int64_t ldc, buffer<T,1> &work, std::int64_t lwork,      buffer<std::int64_t,1> &info)
-
-      ``unmtr`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Multiplies a complex matrix by the complex unitary matrix Q
+determined by
+:ref:`onemkl_lapack_hetrd`.
 
 .. container:: section
-   :name: GUID-34264668-20E3-4AB0-B24F-776357284A13
 
+  .. rubric:: Description
 
-   .. rubric:: Description
-      :class: sectiontitle
+``unmtr`` supports the following precisions.
 
+     .. list-table:: 
+        :header-rows: 1
 
-   The routine multiplies a complex matrix ``C`` by ``Q`` or
-   ``Q``\ :sup:`H`, where ``Q`` is the unitary matrix ``Q`` formed by
-   `?hetrd <hetrd.html>`__
-   when reducing a complex Hermitian matrix ``A`` to tridiagonal form:
-   ``A = Q*T*QH``. Use this routine after a call to
-   `?hetrd <hetrd.html>`__.
+        * -  T 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
+The routine multiplies a complex matrix :math:`C` by :math:`Q` or
+:math:`Q^{H}`, where :math:`Q` is the unitary matrix :math:`Q` formed by
+:ref:`onemkl_lapack_hetrd`
+when reducing a complex Hermitian matrix :math:`A` to tridiagonal form:
+:math:`A = QTQ^H`. Use this routine after a call to
+:ref:`onemkl_lapack_hetrd`.
 
-   Depending on the parameters left_right and trans, the routine can
-   form one of the matrix products ``Q*C``, ``Q``\ :sup:`H`\ ``*C``,
-   ``C*Q``, or ``C*Q``\ :sup:`H` (overwriting the result on ``C``).
+Depending on the parameters ``left_right`` and ``trans``, the routine can
+form one of the matrix products :math:`QC`, :math:`Q^{H}C`,
+:math:`CQ`, or :math:`CQ^{H}` (overwriting the result on :math:`C`).
 
-
-.. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   In the descriptions below, ``r`` denotes the order of ``Q``:
-
-
-   .. container:: tablenoborder
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  ``r``\ =\ ``m`` 
-           -  if ``left_right = side::left`` 
-         * -  ``r``\ =\ ``n`` 
-           -  if ``left_right = side::right`` 
-
-
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   left_right
-      Must be either ``side::left`` or ``side::right``.
-
-
-      If ``left_right=side::left``, ``Q`` or ``Q``\ :sup:`H` is applied
-      to ``C`` from the left.
-
-
-      If ``left_right=side::right``, ``Q`` or ``Q``\ :sup:`H` is applied
-      to ``C`` from the right.
-
-
-   upper_lower
-      Must be either ``uplo::upper`` or ``uplo::lower``. Uses the same
-      ``upper_lower`` as supplied to
-      `hetrd <hetrd.html>`__.
-
-
-   trans
-      Must be either ``transpose::nontrans`` or
-      ``transpose::conjtrans``.
-
-
-      If ``trans=transpose::nontrans``, the routine multiplies ``C`` by
-      ``Q``.
-
-
-      If ``trans=transpose::conjtrans``, the routine multiplies ``C`` by
-      ``Q``\ :sup:`H`.
-
-
-   m
-      The number of rows in the matrix ``C`` (``m≥0``).
-
-
-   n
-      The number of columns the matrix ``C`` (``n≥0``).
-
-
-   k
-      The number of elementary reflectors whose product defines the
-      matrix ``Q`` (``0≤k≤n``).
-
-
-   a
-      The buffer a returned by
-      `?hetrd <hetrd.html>`__.
-
-
-   lda
-      The leading dimension of a\ ``(max(1,r)≤lda)``.
-
-
-   tau
-      The buffer tau returned by
-      `?hetrd <hetrd.html>`__. The
-      dimension of tau must be at least ``max(1,r-1)``.
-
-
-   c
-      The buffer c contains the matrix ``C``. The second dimension of c
-      must be at least ``max(1,n)``.
-
-
-   ldc
-      The leading dimension of c\ ``(max(1,n)≤ldc)``.
-
-
-   lwork
-      The size of the work array (``lwork≥n``). Should be computed by
-      `unmtr_get_lwork <unmtr_get_lwork.html>`__.
-
+unmtr (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
+  .. rubric:: Syntax
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   c
-      Overwritten by the product ``Q*C``, ``Q``\ :sup:`H`\ ``*C``,
-      ``C*Q``, or ``C*Q``\ :sup:`H` (as specified by left_right and
-      trans).
-
-
-   work
-      Workspace for internal computations.
-
-
-   info
-      Buffer containing error information.
-
-
-      If ``info=0``, the execution is successful.
-
-
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
-
+.. cpp:function::  void oneapi::mkl::lapack::unmtr(cl::sycl::queue &queue, onemkl::side left_right,      onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n,      cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1>      &c, std::int64_t ldc, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Input Parameters
+      
+In the descriptions below, ``r`` denotes the order of :math:`Q`:
 
-   .. rubric:: Example
-      :class: sectiontitle
+.. container:: tablenoborder
 
+     .. list-table:: 
+        :header-rows: 1
 
-   An example of how to use ``unmtr``\ can be found in the oneMKL
-   installation directory, under:
+        * -  :math:`r`\ =\ :math:`m` 
+          -  if ``left_right = side::left`` 
+        * -  :math:`r`\ =\ :math:`n` 
+          -  if ``left_right = side::right`` 
 
+queue
+   The queue where the routine should be executed.
 
-   ::
+left_right
+   Must be either ``side::left`` or ``side::right``.
 
+   If ``left_right=side::left``, :math:`Q` or :math:`Q^{H}` is applied
+   to :math:`C` from the left.
 
-      examples/sycl/lapack/ormtr.cpp
+   If ``left_right=side::right``, :math:`Q` or :math:`Q^{H}` is applied
+   to :math:`C` from the right.
 
+upper_lower
+   Must be either ``uplo::upper`` or ``uplo::lower``. Uses the same
+   ``upper_lower`` as supplied to
+   :ref:`onemkl_lapack_hetrd`.
 
-.. container:: familylinks
+trans
+   Must be either ``transpose::nontrans`` or
+   ``transpose::conjtrans``.
 
+   If ``trans=transpose::nontrans``, the routine multiplies :math:`C` by
+   :math:`Q`.
 
-   .. container:: parentlink
+   If ``trans=transpose::conjtrans``, the routine multiplies :math:`C` by
+   :math:`Q^{H}`.
 
+m
+   The number of rows in the matrix :math:`C` (:math:`m \ge 0`).
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+n
+   The number of columns the matrix :math:`C` (:math:`n \ge 0`).
 
+k
+   The number of elementary reflectors whose product defines the
+   matrix :math:`Q` (:math:`0 \le k \le n`).
+
+a
+   The buffer ``a`` as returned by
+   :ref:`onemkl_lapack_hetrd`.
+
+lda
+   The leading dimension of ``a`` :math:`(\max(1,r) \le \text{lda})`.
+
+tau
+   The buffer ``tau`` as returned by
+   :ref:`onemkl_lapack_hetrd`. The
+   dimension of ``tau`` must be at least :math:`\max(1,r-1)`.
+
+c
+   The buffer ``c`` contains the matrix :math:`C`. The second dimension of ``c``
+   must be at least :math:`\max(1,n)`.
+
+ldc
+   The leading dimension of ``c`` :math:`(\max(1,n) \le \text{ldc})`.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_unmtr_scratchpad_size` function.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+      
+c
+   Overwritten by the product :math:`QC`, :math:`Q^{H}C`,
+   :math:`CQ`, or :math:`CQ^{H}` (as specified by ``left_right`` and
+   ``trans``).
+
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
+
+unmtr (USM Version)
+----------------------
+
+.. container:: section
+
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::unmtr(cl::sycl::queue &queue, onemkl::side left_right,      onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+
+.. container:: section
+
+  .. rubric:: Input Parameters
+      
+In the descriptions below, ``r`` denotes the order of :math:`Q`:
+
+.. container:: tablenoborder
+
+     .. list-table:: 
+        :header-rows: 1
+
+        * -  :math:`r`\ =\ :math:`m` 
+          -  if ``left_right = side::left`` 
+        * -  :math:`r`\ =\ :math:`n` 
+          -  if ``left_right = side::right`` 
+
+queue
+   The queue where the routine should be executed.
+
+left_right
+   Must be either ``side::left`` or ``side::right``.
+
+   If ``left_right=side::left``, :math:`Q` or :math:`Q^{H}` is applied
+   to :math:`C` from the left.
+
+   If ``left_right=side::right``, :math:`Q` or :math:`Q^{H}` is applied
+   to :math:`C` from the right.
+
+upper_lower
+   Must be either ``uplo::upper`` or ``uplo::lower``. Uses the same
+   ``upper_lower`` as supplied to
+   :ref:`onemkl_lapack_hetrd`.
+
+trans
+   Must be either ``transpose::nontrans`` or
+   ``transpose::conjtrans``.
+
+   If ``trans=transpose::nontrans``, the routine multiplies :math:`C` by
+   :math:`Q`.
+
+   If ``trans=transpose::conjtrans``, the routine multiplies :math:`C` by
+   :math:`Q^{H}`.
+
+m
+   The number of rows in the matrix :math:`C` (:math:`m \ge 0`).
+
+n
+   The number of columns the matrix :math:`C` (:math:`n \ge 0`).
+
+k
+   The number of elementary reflectors whose product defines the
+   matrix :math:`Q` (:math:`0 \le k \le n`).
+
+a
+   The pointer to ``a`` as returned by
+   :ref:`onemkl_lapack_hetrd`.
+
+lda
+   The leading dimension of ``a`` :math:`(\max(1,r) \le \text{lda})`.
+
+tau
+   The pointer to ``tau`` as returned by
+   :ref:`onemkl_lapack_hetrd`. The
+   dimension of ``tau`` must be at least :math:`\max(1,r-1)`.
+
+c
+   The array ``c`` contains the matrix :math:`C`. The second dimension of ``c``
+   must be at least :math:`\max(1,n)`.
+
+ldc
+   The leading dimension of ``c`` :math:`(\max(1,n) \le \text{ldc})`.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_unmtr_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+      
+c
+   Overwritten by the product :math:`QC`, :math:`Q^{H}C`,
+   :math:`CQ`, or :math:`CQ^{H}` (as specified by ``left_right`` and
+   trans).
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 

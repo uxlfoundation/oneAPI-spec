@@ -3,430 +3,478 @@
 gemm_batch
 ==========
 
-gemm_batch (BUFFER Version)
+Computes a group of ``gemm`` operations.
+
+.. _onemkl_blas_gemm_batch_description:
+
+.. rubric:: Description
+
+The ``gemm_batch`` routines are batched versions of :ref:`onemkl_blas_gemm`, performing
+multiple ``gemm`` operations in a single call. Each ``gemm`` 
+operation perform a matrix-matrix product with general matrices.
+   
+``gemm_batch`` supports the following precisions.
+
+   .. list-table:: 
+      :header-rows: 1
+
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
+
+.. _onemkl_blas_gemm_batch_buffer:
+
+gemm_batch (Buffer Version)
 ---------------------------
 
+.. rubric:: Description
 
+The buffer version of ``gemm_batch`` supports only the strided API. 
 
-.. container::
+The strided API operation is defined as:
+::
 
+   for i = 0 … batch_size – 1
+       A, B and C are matrices at offset i * stridea, i * strideb, i * stridec in a, b and c.
+       C := alpha * op(A) * op(B) + beta * C
+   end for
 
-   Computes groups of matrix-matrix product with general matrices.
+where:
 
+op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
-   .. container:: section
+``alpha`` and ``beta`` are scalars,
 
+``A``, ``B``, and ``C`` are matrices,
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+op(``A``) is ``m`` x ``k``, op(``B``) is 
+``k`` x ``n``, and ``C`` is ``m`` x ``n``.
 
+The a, b and c buffers contain all the input matrices. The stride 
+between matrices is given by the stride parameter. The total number
+of matrices in a, b and c buffers is given by the ``batch_size`` parameter.
 
-      **Group API**
+**Strided API**
 
+.. rubric:: Syntax
 
-      .. cpp:function::  void onemkl::blas::gemm_batch(sycl::queue &queue,      sycl::buffer<transpose, 1> &transa_array, sycl::buffer<transpose,1>      &transb_array, sycl::buffer<std::int64_t,1> &m_array,      sycl::buffer<std::int64_t,1> &n_array, sycl::buffer<std::int64_t,1> &k_array,      sycl::buffer<T,1> alpha_array, sycl::buffer<T,1> &a_array,      sycl::buffer<std::int64_t,1> &lda_array, sycl::buffer<T,1> &b_array,      sycl::buffer<std::int64_t,1> ldb_array, sycl::buffer<T,1> &beta_array,      sycl::buffer<T,1> &c, sycl::buffer<std::int64_t,1> &ldc_array, std::int64_t      group_count, sycl::buffer<std::int64_t,1> &group_size_array)
-
-      **Strided API**
-
-
-      .. cpp:function::  void onemkl::blas::gemm_batch(sycl::queue &queue, transpose      transa, transpose transb, std::int64_t m, std::int64_t n,      std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t &lda,      std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb,      std::int64_t strideb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc,      std::int64_t stridec, std::int64_t batch_size)
-
-      ``gemm_batch`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+.. cpp:function::  void oneapi::mkl::blas::column_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb, std::int64_t strideb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size)
+.. cpp:function::  void oneapi::mkl::blas::row_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb, std::int64_t strideb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size)
 
 .. container:: section
 
+   .. rubric:: Input Parameters
 
-   .. rubric:: Description
-      :class: sectiontitle
-
-
-   The ``gemm_batch`` routines perform a series of matrix-matrix operations
-   with general matrices. They are similar to the gemm routine
-   counterparts, but the ``gemm_batch`` routines perform matrix-matrix
-   operations with groups of matrices. The groups contain matrices with
-   the same parameters.
-
-
-   For the group API, the operation is defined as
-
-
-   ::
-
-
-      offa = 0, offb = 0, offc = 0
-      for i = 0 … group_count – 1
-          transa, transb, m, n, k, lda, ldb, ldc, alpha, beta and group_size at position i in transa_array, transb_array, m_array, n_array, k_array, lda_array, ldb_array, ldc_array, alpha_array, beta_array and group_size_array
-          sizea = transa == onemkl::transpose::N ? lda * k : lda * m;
-          sizeb = transb == onemkl::transpose::N ? ldb * n : ldb * k;
-          sizec = ldc * n;
-          for j = 0 … group_size – 1
-              A, B, and C are matrices of size sizea, sizeb and sizec at offset offa, offb and offc in a, b and c.
-              C := alpha * op(A) * op(B) + beta * C
-              offa += sizea, offb += sizeb, offc += sizec
-          end for
-      end for
-
-
-   For the strided API, the operation is defined as
-
-
-   ::
-
-
-      for i = 0 … batch_size – 1
-          A, B and C are matrices at offset i * stridea, i * strideb, i * stridec in a, b and c.
-          C = alpha * op(A) * op(B) + beta * C
-      end for
-
-
-   where:
-
-
-   -  op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) =
-      X\ :sup:`H`
-
-
-   -  ``alpha`` and ``beta`` are scalars
-
-
-   -  ``A``, ``B``, and ``C`` are matrices
-
-
-   -  The a, b and c buffers contains all the input matrices. The stride
-      between matrices is either given by the exact size of the matrix
-      (for the group API) or by the stride parameter. The total number
-      of matrices in a, b and c buffers is given by the 
-      
-      |image0| 
-      
-      for the
-      group API or by the ``batch_size`` parameter for the strided API.
-
-
-   Here, op(``A``) is ``m``\ ``x``\ ``k``, op(``B``) is
-   ``k``\ ``x``\ ``n``, and ``C`` is ``m``\ ``x``\ ``n``.
-
-
-.. container:: section
-
-
-   .. rubric:: Input Parameters - Group API
-      :class: sectiontitle
-
-
-   transa_array
-      Buffer holding ``group_count onemkl::transpose`` value.
-
-
-      For the group ``i``, ``transa`` is the ``i``\ th element in the
-      transa_array buffer and specifies the form of ``op(A)`` used in
-      the matrix multiplication. See
-      :ref:`onemkl_datatypes` for more
-      details.
-
-
-
-   transb_array
-      Buffer holding ``group_count onemkl::transpose`` value.
-
-
-      For the group ``i``, ``transb`` is the ``i``\ th element in the
-      transb_array buffer and specifies the form of ``op(B)`` used in
-      the matrix multiplication. See
-      :ref:`onemkl_datatypes` for more
-      details.
-
-
-
-   m_array
-      Buffer holding ``group_count`` integer. For the group ``i``, ``m``
-      is the ``i``\ th element in the m_array buffer and specifies the
-      number of rows of ``op(A)`` and ``C``. Must be at least zero.
-
-
-   n_array
-      Buffer holding ``group_count`` integer. For the group ``i``, ``n``
-      is the ``i``\ th element in the n_array buffer and specifies the
-      number of columns of ``op(B)`` and ``C``. Must be at least zero.
-
-
-   k_array
-      Buffer holding ``group_count`` integer. For the group ``i``, ``k``
-      is the ``i``\ th element in the k_array buffer and specifies the
-      number of columns of ``op(A)`` and rows of ``op(B)``. Must be at
-      least zero.
-
-
-   alpha_array
-      Buffer holding ``group_count`` scalar element. For the group
-      ``i``, ``alpha`` is the ``i``\ th element in the alpha_array
-      buffer and specifies the scaling factor for the matrix-matrix
-      product.
-
-
-   a
-      Buffer holding the input matrices ``A``. The total size of the
-      buffer ``a`` must be at least the sum of the sizes of all the
-      matricies ``A``. That is,
-
-
-      |image1|
-
-
-      where
-      ``sizeai = lda_array[i] * (transa == onemkl::transpose::N ? k : m)``
-
-
-      See `Matrix
-      Storage <../matrix-storage.html>`__ for
-      more details.
-
-
-   lda_array
-      Buffer holding ``group_count`` integer. For the group ``i``,
-      ``lda`` is the ``i``\ th element in the lda_array buffer and
-      specifies the leading dimension of ``A``. Must be at least ``m``
-      if ``A`` is not transposed, and at least ``k`` if ``A`` is
-      transposed. Must be positive.
-
-
-   b
-      Buffer holding the input matrices ``B``. The total size of the
-      buffer ``b`` must be at least the sum of the sizes of all the
-      matricies ``B``. That is,
-
-
-      |image2|
-
-
-      where
-      ``sizebi = ldb_array[i] * (transb == onemkl::transpose::N ? n : k)``
-
-
-      See `Matrix
-      Storage <../matrix-storage.html>`__ for
-      more details.
-
-
-   ldb_array
-      Buffer holding ``group_count`` integer. For the group ``i``,
-      ``ldb`` is the ``i``\ th element in the ldb_array buffer and
-      specifies the leading dimension of ``B``. Must be at least ``k``
-      if ``B`` is not transposed, and at least ``n`` if ``B`` is
-      transposed. Must be positive.
-
-
-   beta_array
-      Buffer holding ``group_count`` scalar element. For the group
-      ``i``, ``beta`` is the ``i``\ th element in the beta_array buffer
-      and specifies the scaling factor for matrix C.
-
-
-   c
-      Buffer holding the input/output matrices ``C``. The total size of
-      the buffer ``c`` must be at least the sum of the sizes of all the
-      matricies ``C``. That is,
-
-
-      |image3|
-
-
-      See `Matrix
-      Storage <../matrix-storage.html>`__ for
-      more details.
-
-
-   ldc_array
-      Buffer holding ``group_count`` integer. For the group ``i``,
-      ``ldc`` is the ``i``\ th element in the ldc_array buffer and
-      specifies the leading dimension of ``C``. Must be positive and at
-      least ``m``.
-
-
-   group_count
-      Specifies the number of groups. Must be at least 0.
-
-
-   group_size_array
-      Buffer holding ``group_count`` integer. For the group ``i``, the
-      ``i``\ th element in the group_size_array buffer specifies the
-      number of matrix multiply operations in group ``i``. Each element
-      in ``group_size_array`` must be at least 0.
-
-
-.. container:: section
-
-
-   .. rubric:: Output Parameters - Group API
-      :class: sectiontitle
-
-
-   c
-      Overwritten by the ``m``\ :sub:`i`-by-``n``\ :sub:`i` matrix
-      ``(alphai*op(A)*op(B) + betai*C)`` for group ``i``.
-
-
-.. container:: section
-
-
-   .. rubric:: Input Parameters - Strided API
-      :class: sectiontitle
-
+   queue
+      The queue where the routine should be executed.
 
    transa
-      Specifies ``op(A)`` the transposition operation applied to the
-      matrices A. See
-      :ref:`onemkl_datatypes` for more
-      details.
-
-
+      Specifies op(``A``) the transposition operation applied to the
+      matrices ``A``. See :ref:`onemkl_datatypes` for more details.
 
    transb
-      Specifies ``op(B)`` the transposition operation applied to the
-      matrices B. See
-      :ref:`onemkl_datatypes` for more
-      details.
-
-
+      Specifies op(``B``) the transposition operation applied to the
+      matrices ``B``. See :ref:`onemkl_datatypes` for more details.
 
    m
-      Number of rows of ``op(A)`` and ``C``. Must be at least zero.
+      Number of rows of op(``A``) and ``C``. Must be at least zero.
 
 
    n
-      Number of columns of ``op(B)`` and ``C``. Must be at least zero.
+      Number of columns of op(``B``) and ``C``. Must be at least zero.
 
 
    k
-      Number of columns of ``op(A)`` and rows of ``op(B)``. Must be at
+      Number of columns of op(``A``) and rows of op(``B``). Must be at
       least zero.
-
 
    alpha
       Scaling factor for the matrix-matrix products.
 
-
    a
-      Buffer holding the input matrices ``A``. Must have size at least
-      ``stridea*batch_size``.
-
+      Buffer holding the input matrices ``A`` with size ``stridea`` * ``batch_size``.
 
    lda
-      Leading dimension of the matrices ``A``. Must be at least ``m`` if
-      the matrices ``A`` are not transposed, and at least ``k`` if the
-      matrices ``A`` are transposed. Must be positive.
+      The leading dimension of the matrices ``A``. It must be positive.
 
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``A`` not transposed
+           - ``A`` transposed
+         * - Column major
+           - ``lda`` must be at least ``m``.
+           - ``lda`` must be at least ``k``.
+         * - Row major
+           - ``lda`` must be at least ``k``.
+           - ``lda`` must be at least ``m``.
 
    stridea
-      Stride between the different ``A`` matrices.
-
-
-      If ``A`` are not transposed, the matrices ``A`` are ``m``-by-``k``
-      matrices so stridea must be at least ``lda*k``.
-
-
-      If ``A`` are transposed, the matrices ``A`` are ``k``-by-``m``
-      matrices so stridea must be at least ``lda*m``.
-
+      Stride between different ``A`` matrices.
 
    b
-      Buffer holding the input matrices ``B``. Must have size at least
-      ``strideb*batch_size``.
-
+      Buffer holding the input matrices ``B`` with size ``strideb`` * ``batch_size``.
 
    ldb
-      Leading dimension of the matrices ``B``. Must be at least ``k`` if
-      the matrices ``B`` are not transposed, and at least ``n`` if the
-      matrices ``B`` are transposed. Must be positive.
+      The leading dimension of the matrices``B``. It must be positive.
 
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``B`` not transposed
+           - ``B`` transposed
+         * - Column major
+           - ``ldb`` must be at least ``k``.
+           - ``ldb`` must be at least ``n``.
+         * - Row major
+           - ``ldb`` must be at least ``n``.
+           - ``ldb`` must be at least ``k``.
 
    strideb
-      Stride between the different ``B`` matrices.
-
-
-      If ``B`` are not transposed, the matrices ``B`` are ``k``-by-``n``
-      matrices so strideb must be at least ``ldb*n``.
-
-
-      If ``B`` are transposed, the matrices ``B`` are ``n``-by-``k``
-      matrices so strideb must be at least ``ldb*k``.
-
+      Stride between different ``B`` matrices.
 
    beta
       Scaling factor for the matrices ``C``.
 
-
    c
-      Buffer holding input/output matrices ``C``. Must have size at
-      least ``stridec*batch_size``.
-
+      Buffer holding input/output matrices ``C`` with size ``stridec`` * ``batch_size``.
 
    ldc
-      Leading dimension of ``C``. Must be positive and at least ``m``.
-
+      The leading dimension of the matrices ``C``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if column major layout is used to store matrices.
 
    stridec
-      Stride between the different ``C`` matrices. Must be at least
-      ``ldc*n``.
-
+      Stride between different ``C`` matrices. Must be at least
+      ``ldc`` * ``n``.
 
    batch_size
       Specifies the number of matrix multiply operations to perform.
 
-
 .. container:: section
 
-
-   .. rubric:: Output Parameters - Strided API
-      :class: sectiontitle
-
+   .. rubric:: Output Parameters
 
    c
       Output buffer, overwritten by ``batch_size`` matrix multiply
-      operations of the form\ ``alpha*op(A)*op(B) + beta*C``.
-
+      operations of the form ``alpha`` * op(``A``)*op(``B``) + ``beta`` * ``C``.
 
 .. container:: section
 
-
    .. rubric:: Notes
-      :class: sectiontitle
-
 
    If ``beta`` = 0, matrix ``C`` does not need to be initialized before
    calling ``gemm_batch``.
 
+.. _onemkl_blas_gemm_batch_usm:
 
-.. container:: familylinks
+gemm_batch (USM Version)
+---------------------------
 
+.. rubric:: Description
 
-   .. container:: parentlink
+The USM version of ``gemm_batch`` supports the group API and strided API. 
 
+The group API operation is defined as:
+::
 
-      **Parent topic:** :ref:`blas-like-extensions`
+   idx = 0
+   for i = 0 … group_count – 1
+       for j = 0 … group_size – 1
+           A, B, and C are matrices in a[idx], b[idx] and c[idx]
+           C := alpha[i] * op(A) * op(B) + beta[i] * C
+           idx = idx + 1
+       end for
+   end for
+
+The strided API operation is defined as
+::
+
+   for i = 0 … batch_size – 1
+       A, B and C are matrices at offset i * stridea, i * strideb, i * stridec in a, b and c.
+       C := alpha * op(A) * op(B) + beta * C
+   end for
+
+where:
+
+op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
+
+``alpha`` and ``beta`` are scalars,
+
+``A``, ``B``, and ``C`` are matrices,
+
+op(``A``) is ``m`` x ``k``, op(``B``) is ``k`` x ``n``, and ``C`` is ``m`` x ``n``.
+
+ 
+For group API, a, b and c arrays contain the pointers for all the input matrices. 
+The total number of matrices in a, b and c are given by: 
+
+.. math::
+
+      total\_batch\_count = \sum_{i=0}^{group\_count}group\_size[i]    
+ 
+For strided API, a, b, c arrays contain all the input matrices. The total number of matrices 
+in a, b and c are given by the ``batch_size`` parameter.  
+   
+**Group API**
+
+.. rubric:: Syntax
+   
+.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::gemm_batch(sycl::queue &queue, onemkl::transpose *transa, onemkl::transpose *transb, std::int64_t *m, std::int64_t *n, std::int64_t *k, T *alpha, const T **a, std::int64_t *lda, const T **b, std::int64_t *ldb, T *beta, T **c, std::int64_t *ldc, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::gemm_batch(sycl::queue &queue, onemkl::transpose *transa, onemkl::transpose *transb, std::int64_t *m, std::int64_t *n, std::int64_t *k, T *alpha, const T **a, std::int64_t *lda, const T **b, std::int64_t *ldb, T *beta, T **c, std::int64_t *ldc, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+   queue
+      The queue where the routine should be executed.
+
+   transa
+      Array of ``group_count`` ``onemkl::transpose`` values. ``transa[i]`` specifies the form of op(``A``) used in
+      the matrix multiplication in group ``i``. See :ref:`onemkl_datatypes` for more details.
+
+   transb
+      Array of ``group_count`` ``onemkl::transpose`` values. ``transb[i]`` specifies the form of op(``B``) used in
+      the matrix multiplication in group ``i``. See :ref:`onemkl_datatypes` for more details.
+
+   m
+      Array of ``group_count`` integers. ``m[i]`` specifies the
+      number of rows of op(``A``) and ``C`` for every matrix in group ``i``. All entries must be at least zero.
+
+   n
+      Array of ``group_count`` integers. ``n[i]`` specifies the
+      number of columns of op(``B``) and ``C`` for every matrix in group ``i``. All entries must be at least zero.
+
+   k
+      Array of ``group_count`` integers. ``k[i]`` specifies the
+      number of columns of op(``A``) and rows of op(``B``) for every matrix in group ``i``. All entries must be at
+      least zero.
+
+   alpha
+      Array of ``group_count`` scalar elements. ``alpha[i]`` specifies the scaling factor for every matrix-matrix
+      product in group ``i``.
+
+   a
+      Array of pointers to input matrices ``A`` with size ``total_batch_count``. 
       
+      See :ref:`matrix-storage` for more details.
 
+   lda
+      Array of ``group_count`` integers. ``lda[i]`` specifies the
+      leading dimension of ``A`` for every matrix in group ``i``. All
+      entries must be positive.
 
+      .. list-table::
+         :header-rows: 1
 
-.. |image0| image:: ../equations/GUID-D797E8FA-B0CE-417C-98F1-896CDFB4Fee1.png
-   :class: img-middle
-.. |image1| image:: ../equations/GUID-D797E8FA-B0CE-417C-98F1-896CDFB4Fee2.png
-   :class: img-middle
-.. |image2| image:: ../equations/GUID-D797E8FA-B0CE-417C-98F1-896CDFB4Fee3.png
-   :class: img-middle
-.. |image3| image:: ../equations/GUID-D797E8FA-B0CE-417C-98F1-896CDFB4Fee4.png
-   :class: img-middle
+         * -
+           - ``A`` not transposed
+           - ``A`` transposed
+         * - Column major
+           - ``lda[i]`` must be at least ``m[i]``.
+           - ``lda[i]`` must be at least ``k[i]``.
+         * - Row major
+           - ``lda[i]`` must be at least ``k[i]``.
+           - ``lda[i]`` must be at least ``m[i]``.
+             
+   b
+      Array of pointers to input matrices ``B`` with size ``total_batch_count``. 
+      
+      See :ref:`matrix-storage` for more details.
+
+   ldb
+   
+      Array of ``group_count`` integers. ``ldb[i]`` specifies the
+      leading dimension of ``B`` for every matrix in group ``i``. All
+      entries must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``B`` not transposed
+           - ``B`` transposed
+         * - Column major
+           - ``ldb[i]`` must be at least ``k[i]``.
+           - ``ldb[i]`` must be at least ``n[i]``.
+         * - Row major
+           - ``ldb[i]`` must be at least ``n[i]``.
+           - ``ldb[i]`` must be at least ``k[i]``.
+             
+   beta
+      Array of ``group_count`` scalar elements. ``beta[i]`` specifies the scaling factor for matrix ``C`` 
+      for every matrix in group ``i``.
+
+   c
+      Array of pointers to input/output matrices ``C`` with size ``total_batch_count``. 
+      
+      See :ref:`matrix-storage` for more details.
+
+   ldc
+      Array of ``group_count`` integers. ``ldc[i]`` specifies the
+      leading dimension of ``C`` for every matrix in group ``i``.  All
+      entries must be positive and ``ldc[i]`` must be at least
+      ``m[i]`` if column major layout is used to store matrices or at
+      least ``n[i]`` if row major layout is used to store matrices.
+
+   group_count
+      Specifies the number of groups. Must be at least 0.
+
+   group_size
+      Array of ``group_count`` integers. ``group_size[i]`` specifies the
+      number of matrix multiply products in group ``i``. All entries must be at least 0.
+
+   dependencies
+         List of events to wait for before starting computation, if any.
+         If omitted, defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+   c
+      Overwritten by the ``m[i]``-by-``n[i]`` matrix calculated by 
+      (``alpha[i]`` * op(``A``)*op(``B``) + ``beta[i]`` * ``C``) for group ``i``.
+
+.. container:: section
+
+   .. rubric:: Notes
+
+   If ``beta`` = 0, matrix ``C`` does not need to be initialized
+   before calling ``gemm_batch``.
+
+.. container:: section
+
+   .. rubric:: Return Values
+
+   Output event to wait on to ensure computation is complete.
+
+**Strided API**
+
+.. rubric:: Syntax
+
+.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, const T *a, std::int64_t lda, std::int64_t stridea, const T *b, std::int64_t ldb, std::int64_t strideb, T beta, T *c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, const T *a, std::int64_t lda, std::int64_t stridea, const T *b, std::int64_t ldb, std::int64_t strideb, T beta, T *c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+   queue
+      The queue where the routine should be executed.
+
+   transa
+      Specifies op(``A``) the transposition operation applied to the
+      matrices ``A``. See :ref:`onemkl_datatypes` for more details.
+
+   transb
+      Specifies op(``B``) the transposition operation applied to the
+      matrices ``B``. See :ref:`onemkl_datatypes` for more details.
+
+   m
+      Number of rows of op(``A``) and ``C``. Must be at least zero.
+
+   n
+      Number of columns of op(``B``) and ``C``. Must be at least zero.
+
+   k
+      Number of columns of op(``A``) and rows of op(``B``). Must be at
+      least zero.
+
+   alpha
+      Scaling factor for the matrix-matrix products.
+
+   a
+      Pointer to input matrices ``A`` with size ``stridea`` * ``batch_size``.
+
+   lda
+      The leading dimension of the matrices ``A``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``A`` not transposed
+           - ``A`` transposed
+         * - Column major
+           - ``lda`` must be at least ``m``.
+           - ``lda`` must be at least ``k``.
+         * - Row major
+           - ``lda`` must be at least ``k``.
+           - ``lda`` must be at least ``m``.
+
+   stridea
+      Stride between different ``A`` matrices.
+
+   b
+      Pointer to input matrices ``B`` with size ``strideb`` * ``batch_size``.
+
+   ldb
+      The leading dimension of the matrices``B``. It must be positive.
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``B`` not transposed
+           - ``B`` transposed
+         * - Column major
+           - ``ldb`` must be at least ``k``.
+           - ``ldb`` must be at least ``n``.
+         * - Row major
+           - ``ldb`` must be at least ``n``.
+           - ``ldb`` must be at least ``k``.
+
+   strideb
+      Stride between different ``B`` matrices.
+
+   beta
+      Scaling factor for the matrices ``C``.
+
+   c
+      Pointer to input/output matrices ``C`` with size ``stridec`` * ``batch_size``.
+
+   ldc
+      The leading dimension of the matrices ``C``. It must be positive and at least
+      ``m`` if column major layout is used to store matrices or at
+      least ``n`` if column major layout is used to store matrices.
+
+   stridec
+      Stride between different ``C`` matrices.
+
+   batch_size
+      Specifies the number of matrix multiply operations to perform.
+
+   dependencies
+         List of events to wait for before starting computation, if any.
+         If omitted, defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+   c
+      Output matrices, overwritten by ``batch_size`` matrix multiply
+      operations of the form ``alpha`` * op(``A``)*op(``B``) + ``beta`` * ``C``.
+
+.. container:: section
+
+   .. rubric:: Notes
+
+   If ``beta`` = 0, matrix ``C`` does not need to be initialized before
+   calling ``gemm_batch``.
+
+.. container:: section
+      
+   .. rubric:: Return Values
+
+   Output event to wait on to ensure computation is complete.
+
+   **Parent topic:** :ref:`blas-like-extensions`
+      
 

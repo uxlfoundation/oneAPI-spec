@@ -1,173 +1,65 @@
-=============================
-broadcast_node Template Class
-=============================
-
-
-Summary
--------
+==============
+broadcast_node
+==============
+**[flow_graph.broadcast_node]**
 
 A node that broadcasts incoming messages to all of its successors.
 
-Syntax
-------
-
 .. code:: cpp
 
-   template < typename T > class broadcast_node;
+    // Defined in header <tbb/flow_graph.h>
+    namespace tbb {
+    namespace flow {
 
+        template< typename T >
+        class broadcast_node :
+        public graph_node, public receiver<T>, public sender<T> {
+        public:
+            explicit broadcast_node( graph &g );
+            broadcast_node( const broadcast_node &src );
 
-Header
-------
+            bool try_put( const T &v );
+            bool try_get( T &v );
+        };
 
-.. code:: cpp
+    } // namespace flow
+    } // namespace tbb
 
-   #include "tbb/flow_graph.h"
+Requirements:
 
+* ``T`` type must meet the `CopyConstructible` requirements from
+  [copyconstructible] and `CopyAssignable` requirements from
+  [copyassignable] ISO C++ Standard section.
 
-Description
------------
+``broadcast_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
-A 
-``broadcast_node`` is a 
-``graph_node``, 
-``receiver<T>`` and 
-``sender<T>`` that broadcasts incoming messages of
-type 
-``T`` to all of its successors. There is no buffering in
-the node, so all messages are forwarded immediately to all successors.
+``broadcast_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.
 
-Rejection of messages by successors is handled using the protocol described in
-the Message Passing Protocol.
+All messages are forwarded immediately to all successors.
 
-``T`` must be copy-constructible and assignable.
+Member functions
+----------------
 
-Members
--------
+.. cpp:function:: explicit broadcast_node( graph &g )
 
-.. code:: cpp
+  Constructs an object of type ``broadcast_node`` that belongs to the
+  graph ``g``.
 
-   namespace tbb {
-   namespace flow {
-    
-   template< typename T >
-   class broadcast_node :
-     public graph_node, public receiver<T>, public sender<T> {
-   public:
-       explicit broadcast_node( graph &g );
-       broadcast_node( const broadcast_node &src );
-    
-       // receiver<T>
-       typedef T input_type;
-       typedef sender<input_type> predecessor_type;
-       bool try_put( const input_type &v );
-       bool register_predecessor( predecessor_type &p );
-       bool remove_predecessor( predecessor_type &p );
-    
-       // sender<T>
-       typedef T output_type;
-       typedef receiver<output_type> successor_type;
-       bool register_successor( successor_type &r );
-       bool remove_successor( successor_type &r );
-       bool try_get( output_type &v );
-       bool try_reserve( output_type &v );
-       bool try_release( );
-       bool try_consume( );
-   };
-    
-   }
-   }
+.. cpp:function:: broadcast_node( const broadcast_node &src )
 
-The following table provides additional information on the
-members of this template class.
+  Constructs an object of type ``broadcast_node`` that belongs to the
+  same graph ``g`` as ``src``. The list of predecessors, the list of
+  successors, and the messages in the buffer are not copied.
 
-= ========================================================================================
-\ Member, Description
-==========================================================================================
-\ ``explicit broadcast_node( graph &g )``
-  \
-  Constructs an object of type 
-  ``broadcast_node`` that belongs to the 
-  ``graph g``.
-------------------------------------------------------------------------------------------
-\ ``broadcast_node( const broadcast_node &src )``
-  \
-  Constructs an object of type 
-  ``broadcast_node`` that belongs to the same 
-  ``graph g`` as 
-  ``src``. The list of predecessors, the list of
-  successors and the messages in the buffer are NOT copied.
-------------------------------------------------------------------------------------------
-\ ``bool try_put( const input_type &v )``
-  \
-  Adds 
-  ``v`` to all successors.
-  
-  **Returns**: always returns 
-  ``true``, even if it was unable to
+.. cpp:function:: bool try_put( const input_type &v )
+
+  Adds ``v`` to all successors.
+
+  **Returns**: always returns ``true``, even if it was unable to
   successfully forward the message to any of its successors.
-------------------------------------------------------------------------------------------
-\ ``bool register_predecessor( predecessor_type &p )``
-  \
-  Never rejects puts and therefore does not need to maintain a
-  list of predecessors.
-  
-  **Returns**: 
-  ``false``
-------------------------------------------------------------------------------------------
-\ ``bool remove_predecessor( predecessor_type &p )``
-  \
-  Never rejects puts and therefore does not need to maintain a
-  list of predecessors.
-  
-  **Returns**: 
-  ``false``
-------------------------------------------------------------------------------------------
-\ ``bool register_successor( successor_type &r )``
-  \
-  Adds 
-  ``r`` to the set of successors.
-  
-  **Returns**: 
-  ``true``
-------------------------------------------------------------------------------------------
-\ ``bool remove_successor( successor_type &r )``
-  \
-  Removes 
-  ``r`` from the set of successors.
-  
-  **Returns**: 
-  ``true``
-------------------------------------------------------------------------------------------
-\ ``bool try_get( output_type &v )``
-  \
-  If the internal buffer is valid, assigns the value to 
-  ``v``.
-  
-  **Returns**: 
-  ``true`` if 
-  ``v`` is assigned to. 
-  ``false`` if 
-  ``v`` is not assigned to.
-------------------------------------------------------------------------------------------
-\ ``bool try_reserve( output_type &v )``
-  \
-  **Returns**: 
-  ``false``
-------------------------------------------------------------------------------------------
-\ ``bool try_release( )``
-  \
-  **Returns**: 
-  ``false``
-------------------------------------------------------------------------------------------
-\ ``bool try_consume( )``
-  \
-  **Returns**: 
-  ``false``
-------------------------------------------------------------------------------------------
-= ========================================================================================
 
+.. cpp:function:: bool try_get( output_type &v )
 
-See also:
+  If the internal buffer is valid, assigns the value to ``v``.
 
-* :doc:`Message Passing Protocol <message_passing_protocol>`
-* :doc:`Sender and Buffer Policy <sender_and_buffer_policy>`
+  **Returns**: ``true`` if ``v`` is assigned to; ``false``, otherwise.

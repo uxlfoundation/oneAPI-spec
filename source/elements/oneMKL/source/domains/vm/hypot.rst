@@ -1,3 +1,4 @@
+.. _onemkl_vm_hypot:
 
 hypot
 =====
@@ -10,7 +11,6 @@ hypot
 
 
    .. container:: section
-      :name: GUID-CF3FB628-7187-4B37-A07E-279D76B54767
 
 
       .. rubric:: Syntax
@@ -20,80 +20,79 @@ hypot
       Buffer API:
 
 
-      .. cpp:function::  void hypot(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::hypot(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event hypot(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::hypot(queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``hypot`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-5333E1C7-2C36-43FF-8761-DE21863EA23F
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The function hypot(a,b) computes a square root of sum of two squared
+   The function hypot(a, b) computes a square root of sum of two squared
    elements.
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 1 
-           -  Argument 2 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -  +0 
-           -    
-         * -  +∞ 
-           -  any value 
-           -  +∞ 
-           -    
-         * -  any value 
-           -  +∞ 
-           -  +∞ 
-           -    
-         * -  SNAN 
-           -  any value 
-           -  QNAN 
-           -  INVALID 
-         * -  any value 
-           -  SNAN 
-           -  QNAN 
-           -  INVALID 
-         * -  QNAN 
-           -  any value 
-           -  QNAN 
-           -    
-         * -  any value 
-           -  QNAN 
-           -  QNAN 
-           -    
+         * - Argument 1
+           - Argument 2
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           - +0
+           -  
+         * - +∞
+           - any value
+           - +∞
+           -  
+         * - any value
+           - +∞
+           - +∞
+           -  
+         * - SNAN
+           - any value
+           - QNAN
+           - INVALID
+         * - any value
+           - SNAN
+           - QNAN
+           - INVALID
+         * - QNAN
+           - any value
+           - QNAN
+           -  
+         * - any value
+           - QNAN
+           - QNAN
+           -  
 
 
 
@@ -101,24 +100,23 @@ hypot
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Data Type 
-           -  Threshold Limitations on Input Parameters 
-         * -  single precision 
-           -           \ ``abs(a[i]) < sqrt(FLT_MAX)``\       \ ``abs(b[i]) < sqrt(FLT_MAX)``\    
-         * -  double precision 
-           -           \ ``abs(a[i]) < sqrt(DBL_MAX)``\       \ ``abs(b[i]) < sqrt(DBL_MAX)``\    
+         * - Data Type
+           - Threshold Limitations on Input Parameters
+         * - single precision
+           - \ ``abs(a[i]) < sqrt(FLT_MAX)``\ \ ``abs(b[i]) < sqrt(FLT_MAX)``\
+         * - double precision
+           - \ ``abs(a[i]) < sqrt(DBL_MAX)``\ \ ``abs(b[i]) < sqrt(DBL_MAX)``\
 
 
 
 
-   The hypot(a,b) function does not generate any errors.
+   The hypot(a, b) function does not generate any errors.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -146,9 +144,9 @@ hypot
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -176,13 +174,12 @@ hypot
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -207,31 +204,11 @@ hypot
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use hypot can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vhypot.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Power and Root
-      Functions <power-and-root-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

@@ -12,6 +12,7 @@ Version    Date        Notes
 0.6.0_     01/30/2020  Open source Release
 0.7.0_     03/26/2020  50% content
 0.8.0_     05/28/2020  80% content
+0.8.5_     06/26/2020  85% content
 0.9.0_     07/30/2020  Final Gold Preview
 1.0.0_     08/30/2020  Gold Release
 ========   ==========  ===========
@@ -225,8 +226,8 @@ Date       Milestone
   
 - oneDAL
 
-  - Extend API description to 18 algorithms
-  - Add first version for sections on programming model, algorithmics
+  - Extend API description to kNN classification
+  - Add first version for sections on error handling, namespaces, terminology, math notations
   - Extend numeric tables and data structure sections
 
 - oneTBB
@@ -235,14 +236,31 @@ Date       Milestone
 
 - oneVPL
 
-  - 95% content
-    
+  - Updates deferred to 0.8.5_
+  
 - oneMKL
 
   - All domains complete
   - Finalized BLAS, LAPACK domains
   - Draft suitable for review so we can distribute to reviewers before
     ISC (6/28/2020).
+
+0.8.5
+-----
+
+Summary
++++++++
+
+- oneVPL
+
+  - Breaking changes introduced.
+  
+=========  ==========
+Date       Milestone
+=========  ==========
+6/25/2020  All components have merged to master
+6/26/2020  Release
+=========  ==========
 
 0.9.0
 -----
@@ -294,6 +312,7 @@ Elements
   
 - oneDAL
 
+  - Extend algorithms section to cover Random Forest, K-Means, SVM, PCA algorithms
   - Finalize on sections content and details
 
 - oneTBB

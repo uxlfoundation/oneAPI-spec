@@ -3,182 +3,121 @@
 sdsdot
 ======
 
+Computes a vector-vector dot product with double precision.
 
-.. container::
+.. _onemkl_blas_sdsdot_description:
 
+.. rubric:: Description
 
-   Computes a vector-vector dot product with double precision.
+The ``sdsdot`` routines perform a dot product between two vectors with
+double precision:
 
+.. math::
 
+   result = sb + \sum_{i=1}^{n}X_iY_i
 
-   .. container:: section
+.. _onemkl_blas_sdsdot_buffer:
 
-
-      .. rubric:: Description
-         :class: sectiontitle
-
-
-      The ``sdsdot`` routines perform a dot product between two vectors with
-      double precision:
-
-
-      |image0|
-
-sdsdot (BUFFER Version)
+sdsdot (Buffer Version)
 -----------------------
 
-.. container::
+.. rubric:: Syntax
 
-   .. container:: section
+.. cpp:function::  void oneapi::mkl::blas::column_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, sycl::buffer<float,1> &x, std::int64_t incx, sycl::buffer<float,1> &y, std::int64_t incy, sycl::buffer<float,1> &result)
+.. cpp:function::  void oneapi::mkl::blas::row_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, sycl::buffer<float,1> &x, std::int64_t incx, sycl::buffer<float,1> &y, std::int64_t incy, sycl::buffer<float,1> &result)
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+   .. rubric:: Input Parameters
 
+   queue
+      The queue where the routine should be executed.
 
-      .. cpp:function::  void onemkl::blas::sdsdot(sycl::queue &queue, std::int64_t n,      float sb, sycl::buffer<float,1> &x, std::int64_t incx, sycl::buffer<float,1>      &y, std::int64_t incy, sycl::buffer<float,1> &result)
-   .. container:: section
-   
-   
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+   n
+      Number of elements in vectors ``x`` and ``y``.
 
+   sb
+      Single precision scalar to be added to the dot product.
 
-      queue
-         The queue where the routine should be executed.
+   x
+      Buffer holding input vector ``x``. The buffer must be of size
+      at least (1 + (``n`` - 1)*abs(``incx``)). See :ref:`matrix-storage` for
+      more details.
 
+   incx
+      Stride of vector ``x``.
 
-      n
-         Number of elements in vectors ``x`` and ``y``.
+   y
+      Buffer holding input vector ``y``. The buffer must be of size
+      at least (1 + (``n`` - 1)*abs(``incxy``)). See :ref:`matrix-storage` for
+      more details.
 
+   incy
+      Stride of vector ``y``.
 
-      sb
-         Single precision scalar to be added to the dot product.
+.. container:: section
 
+   .. rubric:: Output Parameters
 
-      x
-         Buffer holding input vector ``x``. The buffer must be of size
-         at least (1 + (``n`` - 1)*abs(``incx``)). See `Matrix and
-         Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
+   result
+      Buffer where the result (a scalar) will be stored. If ``n`` < 0
+      the result is ``sb``.
 
-
-      incx
-         Stride of vector ``x``.
-
-
-      y
-         Buffer holding input vector ``y``. The buffer must be of size
-         at least (1 + (``n`` - 1)*abs(``incxy``)). See `Matrix and
-         Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
-
-
-      incy
-         Stride of vector ``y``.
-
-   .. container:: section
-   
-   
-      .. rubric:: Output Parameters
-         :class: sectiontitle
-
-
-      result
-         Buffer where the result (a scalar) will be stored. If ``n`` < 0
-         the result is ``sb``.
+.. _onemkl_blas_sdsdot_usm:
 
 sdsdot (USM Version)
 --------------------
 
-.. container::
+.. rubric:: Syntax
 
-   .. container:: section
+.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, const float *x, std::int64_t incx, const float *y, std::int64_t incy, float *result, const sycl::vector_class<sycl::event> &dependencies = {})
+.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, const float *x, std::int64_t incx, const float *y, std::int64_t incy, float *result, const sycl::vector_class<sycl::event> &dependencies = {})
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+   .. rubric:: Input Parameters
 
+   queue
+      The queue where the routine should be executed.
 
-      .. container:: dlsyntaxpara
+   n
+      Number of elements in vectors ``x`` and ``y``.
 
+   sb
+      Single precision scalar to be added to the dot product.
 
-         .. cpp:function::  sycl::event onemkl::blas::sdsdot(sycl::queue &queue, std::int64_t         n, float sb, const float *x, std::int64_t incx, const float         *y, std::int64_t incy, float *result, const         sycl::vector_class<sycl::event> &dependencies = {})
-      .. container:: section
-      
-      
-         .. rubric:: Input Parameters
-            :class: sectiontitle
+   x
+      Pointer to the input vector ``x``. The array must be of size
+      at least (1 + (``n`` - 1)*abs(``incx``)). See :ref:`matrix-storage`
+      for more details.
 
+   incx
+      Stride of vector ``x``.
 
-         queue
-            The queue where the routine should be executed.
+   y
+      Pointer to the input vector ``y``. The array must be of size
+      at least (1 + (``n`` - 1)*abs(``incxy``)). See :ref:`matrix-storage`
+      for more details.
 
+   incy
+      Stride of vector ``y``.
 
-         n
-            Number of elements in vectors ``x`` and ``y``.
+   dependencies
+      List of events to wait for before starting computation, if
+      any. If omitted, defaults to no dependencies.
 
+.. container:: section
 
-         sb
-            Single precision scalar to be added to the dot product.
+   .. rubric:: Output Parameters
 
+   result
+      Pointer to where the result (a scalar) will be stored. If
+      ``n`` < 0 the result is ``sb``.
 
-         x
-            Pointer to the input vector ``x``. The array must be of size
-            at least (1 + (``n`` - 1)*abs(``incx``)). See `Matrix and
-            Vector
-            Storage <../matrix-storage.html>`__
-            for more details.
+.. container:: section
 
+   .. rubric:: Return Values
 
-         incx
-            Stride of vector ``x``.
+   Output event to wait on to ensure computation is complete.
 
-
-         y
-            Pointer to the input vector ``y``. The array must be of size
-            at least (1 + (``n`` - 1)*abs(``incxy``)). See `Matrix and
-            Vector
-            Storage <../matrix-storage.html>`__
-            for more details.
-
-
-         incy
-            Stride of vector ``y``.
-
-
-         dependencies
-            List of events to wait for before starting computation, if
-            any. If omitted, defaults to no dependencies.
-
-      .. container:: section
-      
-      
-         .. rubric:: Output Parameters
-            :class: sectiontitle
-
-
-         result
-            Pointer to where the result (a scalar) will be stored. If
-            ``n`` < 0 the result is ``sb``.
-
-      .. container:: section
-   
-   
-         .. rubric:: Return Values
-            :class: sectiontitle
-
-
-         Output event to wait on to ensure computation is complete.
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-         **Parent topic:** :ref:`blas-level-1-routines`
-.. |image0| image:: ../equations/GUID-9B91DAAE-72DD-4799-9983-12B021993ee1.png
-   :class: img-middle
-
+   **Parent topic:** :ref:`blas-level-1-routines`

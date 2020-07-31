@@ -1,27 +1,57 @@
 ==========
 Containers
 ==========
+**[containers]**
 
-The container classes permit multiple threads to
+The container classes provided by oneAPI Threading Building Blocks (oneTBB) permit multiple threads to
 simultaneously invoke certain methods on the same container.
 
-Like STL, oneAPI Threading Building Blocks(
-TBB) containers are templated with respect to an
-``allocator`` argument. Each container uses its
-``allocator`` to allocate memory for user-visible items. A
-container may use a different allocator for strictly internal structures.
+Sequences
+---------
 
 .. toctree::
+    :maxdepth: 1
 
-   containers/container_range_concept.rst
-   containers/tbb_hash_compare_cls.rst
-   containers/node_handles_cls.rst
-   containers/concurrent_map_cls.rst
-   containers/concurrent_set_cls.rst
-   containers/concurrent_unordered_map_cls.rst
-   containers/concurrent_unordered_set_cls.rst
-   containers/concurrent_hash_map_cls.rst
-   containers/concurrent_queue_cls.rst
-   containers/concurrent_bounded_queue_cls.rst
-   containers/concurrent_priority_queue_cls.rst
-   containers/concurrent_vector.rst
+    containers/concurrent_vector_cls.rst
+
+Queues
+------
+
+.. toctree::
+    :maxdepth: 1
+
+    containers/concurrent_queue_cls.rst
+    containers/concurrent_bounded_queue_cls.rst
+    containers/concurrent_priority_queue_cls.rst
+
+Unordered associative containers
+--------------------------------
+
+.. toctree::
+    :maxdepth: 1
+
+    containers/concurrent_hash_map_cls.rst
+    containers/concurrent_unordered_map_cls.rst
+    containers/concurrent_unordered_multimap.rst
+    containers/concurrent_unordered_set_cls.rst
+    containers/concurrent_unordered_multiset.rst
+
+Ordered associative containers
+------------------------------
+
+.. toctree::
+    :maxdepth: 1
+    
+    containers/concurrent_map_cls.rst
+    containers/concurrent_multimap_cls.rst
+    containers/concurrent_set_cls.rst
+    containers/concurrent_multiset_cls.rst
+
+Auxiliary classes
+-----------------
+
+.. toctree::
+    :maxdepth: 1
+
+    containers/auxiliary/tbb_hash_compare_cls.rst
+    containers/auxiliary/node_handles_cls.rst

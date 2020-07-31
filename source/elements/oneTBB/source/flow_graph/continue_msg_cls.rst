@@ -1,33 +1,19 @@
-==================
-continue_msg Class
-==================
+============
+continue_msg
+============
+**[flow_graph.continue_msg]**
 
-
-Summary
--------
-
-An empty class that represent a continue message. An object of this
-class is used to indicate that the sender has completed.
-
-Syntax
-------
+An empty class that represents a continue message. An object of this class is used to indicate that
+the sender has completed.
 
 .. code:: cpp
 
-   class continue_msg;
+    // Defined in header <tbb/flow_graph.h>
 
+    namespace tbb {
+    namespace flow {
 
-Header
-------
+        class continue_msg {};
 
-.. code:: cpp
-
-   #include "tbb/flow_graph.h"
-
-
-Members
--------
-
-.. code:: cpp
-
-   namespace tbb { namespace flow { class continue_msg {}; } }
+    } // namespace flow
+    } // namespace tbb

@@ -1,3 +1,4 @@
+.. _onemkl_vm_pow3o2:
 
 pow3o2
 ======
@@ -10,7 +11,6 @@ pow3o2
 
 
    .. container:: section
-      :name: GUID-AA677C03-EE6E-4062-A2C0-D0B65DEAB664
 
 
       .. rubric:: Syntax
@@ -20,28 +20,27 @@ pow3o2
       Buffer API:
 
 
-      .. cpp:function::  void pow3o2(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::pow3o2(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event pow3o2(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::pow3o2(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``pow3o2`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-A99862AB-E105-4B47-B077-F619BA14E210
 
 
    .. rubric:: Description
@@ -55,15 +54,15 @@ pow3o2
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Data Type 
-           -  Threshold Limitations on Input Parameters 
-         * -  single precision 
-           -  \|\ ``a``\ :sub:`i`\ \| < ``(FLT_MAX)``\ ``2/3`` 
-         * -  double precision 
-           -  \|\ ``a``\ :sub:`i`\ \| < ``(FLT_MAX)``\ ``2/3`` 
+         * - Data Type
+           - Threshold Limitations on Input Parameters
+         * - single precision
+           - \|\ ``a``\ :sub:`i`\ \| < ``(FLT_MAX)``\ ``2/3``
+         * - double precision
+           - \|\ ``a``\ :sub:`i`\ \| < ``(FLT_MAX)``\ ``2/3``
 
 
 
@@ -71,39 +70,38 @@ pow3o2
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  VM Error Status 
-         * -  a < +0 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  -∞ 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - VM Error Status
+         * - a < +0
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - -∞
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - +∞
+           - +∞
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -127,14 +125,14 @@ pow3o2
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -160,20 +158,19 @@ pow3o2
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -198,31 +195,11 @@ pow3o2
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use pow3o2can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vpow3o2.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Power and Root
-      Functions <power-and-root-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

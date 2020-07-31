@@ -90,11 +90,11 @@ of this template class.
 ==========================================================================================
 \ ``explicit memory_pool(const Alloc &src = Alloc())``
   \
-  Constructs memory pool with an instance
+  Constructs a memory pool with an instance
   of underlying memory allocator of type 
   ``Alloc`` copied
   from 
-  ``src``. Throws 
+  ``src``. Throws the
   ``bad_alloc``
   exception if runtime fails to construct an instance of the class.
 ------------------------------------------------------------------------------------------

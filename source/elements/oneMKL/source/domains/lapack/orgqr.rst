@@ -1,189 +1,171 @@
+.. _onemkl_lapack_orgqr:
 
 orgqr
 =====
 
-
-.. container::
-
-
-   Generates the real orthogonal matrix Q of the QR factorization formed
-   by geqrf. This routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-3F04D25E-F895-49D5-85AA-C299292217FD
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void orgqr(queue &exec_queue, std::int64_t m,      std::int64_t n, std::int64_t k, buffer<T,1> &a, std::int64_t lda,      buffer<T,1> &tau, buffer<T,1> &work, std::int64_t &lwork,      buffer<std::int64_t,1> &info)
-
-      ``orgqr`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-
-
-
+Generates the real orthogonal matrix :math:`Q` of the QR factorization formed
+by :ref:`onemkl_lapack_geqrf`.
 
 .. container:: section
-   :name: GUID-90DD94AE-0D40-4207-B84D-D6B6A24D209A
 
+  .. rubric:: Description
 
-   .. rubric:: Description
-      :class: sectiontitle
+``orgqr`` supports the following precisions.
 
+    .. list-table:: 
+       :header-rows: 1
 
-   The routine generates the whole or part of ``m``-by-``m`` orthogonal
-   matrix ``Q`` of the ``QR`` factorization formed by the routine
-   `?geqrf <geqrf.html>`__.
+       * -  T 
+       * -  ``float`` 
+       * -  ``double`` 
 
+The routine generates the whole or part of :math:`m \times m` orthogonal
+matrix :math:`Q` of the QR factorization formed by the routine
+:ref:`onemkl_lapack_geqrf`.
 
-   Usually ``Q`` is determined from the ``QR`` factorization of an ``m``
-   by ``p`` matrix ``A`` with ``m≥p``. To compute the whole matrix
-   ``Q``, use:
+Usually :math:`Q` is determined from the QR factorization of an ``m``
+by ``p`` matrix :math:`A` with :math:`m \ge p`. To compute the whole matrix
+:math:`Q`, use:
 
+::
 
-   ::
+   oneapi::mkl::lapack::orgqr(queue, m, m, p, a, lda, tau, scratchpad, scratchpad_size)
 
+To compute the leading :math:`p` columns of :math:`Q` (which form an
+orthonormal basis in the space spanned by the columns of :math:`A`):
 
-      onemkl::orgqr(queue, m, m, p, a, lda, tau, work, lwork, info)
+::
 
+   oneapi::mkl::lapack::orgqr(queue, m, p, p, a, lda, tau, scratchpad, scratchpad_size)
 
-   To compute the leading ``p`` columns of ``Q`` (which form an
-   orthonormal basis in the space spanned by the columns of ``A``):
+To compute the matrix :math:`Q^{k}` of the QR factorization of
+leading :math:`k` columns of the matrix :math:`A`:
 
+::
 
-   ::
+   oneapi::mkl::lapack::orgqr(queue, m, m, k, a, lda, tau, scratchpad, scratchpad_size)
 
+To compute the leading :math:`k` columns of :math:`Q^{k}` (which form
+an orthonormal basis in the space spanned by leading :math:`k` columns of
+the matrix :math:`A`):
 
-      onemkl::orgqr(queue, m, p, p, a, lda, tau, work, lwork, info)
+::
 
+   oneapi::mkl::lapack::orgqr(queue, m, k, k, a, lda, tau, scratchpad, scratchpad_size)
 
-   To compute the matrix ``Q``\ :sup:`k` of the ``QR`` factorization of
-   leading ``k`` columns of the matrix ``A``:
-
-
-   ::
-
-
-      onemkl::orgqr(queue, m, m, k, a, lda, tau, work, lwork, info)
-
-
-   To compute the leading ``k`` columns of ``Q``\ :sup:`k` (which form
-   an orthonormal basis in the space spanned by leading ``k`` columns of
-   the matrix ``A``):
-
-
-   ::
-
-
-      onemkl::orgqr(queue, m, k, k, a, lda, tau, work, lwork, info)
-
+orgqr (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
+  .. rubric:: Syntax
 
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   m
-      The number of rows in the matrix ``A`` (``0≤m``).
-
-
-   n
-      The number of columns in the matrix ``A`` (``0≤n``).
-
-
-   k
-      The number of elementary reflectors whose product defines the
-      matrix ``Q`` (``0≤k≤n``).
-
-
-   a
-      The buffer a returned by
-      `geqrf <geqrf.html>`__.
-
-
-   lda
-      The leading dimension of a (``lda≤m``).
-
-
-   tau
-      The buffer returned by
-      `geqrf <geqrf.html>`__.
-
-
-   lwork
-      The size of the work array (``lwork≥n``). Must be computed by
-      orgqr_get_lwork.
-
+.. cpp:function::  void oneapi::mkl::lapack::orgqr(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a, std::int64_t lda,      cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
+n
+   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
 
-   a
-      Overwritten by n leading columns of the m-by-m orthogonal matrix
-      ``Q``.
+k
+   The number of elementary reflectors whose product defines the
+   matrix :math:`Q` (:math:`0 \le k \le n`).
 
+a
+   The buffer ``a`` as returned by
+   :ref:`onemkl_lapack_geqrf`.
 
-   work
-      Workspace for internal computations.
+lda
+   The leading dimension of ``a`` (:math:`\text{lda} \le m`).
 
+tau
+   The buffer ``tau`` as returned by
+   :ref:`onemkl_lapack_geqrf`.
 
-   info
-      Buffer containing error information.
-
-
-      If ``info=0``, the execution is successful.
-
-
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
-
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_orgqr_scratchpad_size` function.
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Output Parameters
 
-   .. rubric:: Example
-      :class: sectiontitle
+a
+   Overwritten by :math:`n` leading columns of the :math:`m \times m` orthogonal matrix
+   :math:`Q`.
 
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
-   An example of how to use ``orgqr``\ should be found in the oneMKL
-   installation directory, under:
+orgqr (USM Version)
+----------------------
 
+.. container:: section
 
-   ::
+  .. rubric:: Syntax
+         
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgqr(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, std::int64_t k, T *a, std::int64_t lda,      T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-      examples/sycl/lapack/orgqr.cpp
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
+m
+   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
-.. container:: familylinks
+n
+   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
 
+k
+   The number of elementary reflectors whose product defines the
+   matrix :math:`Q` (:math:`0 \le k \le n`).
 
-   .. container:: parentlink
+a
+   The pointer to ``a`` as returned by
+   :ref:`onemkl_lapack_geqrf`.
 
+lda
+   The leading dimension of ``a`` (:math:`\text{lda} \le m`).
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+tau
+   The pointer to ``tau`` as returned by
+   :ref:`onemkl_lapack_geqrf`.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_orgqr_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+a
+   Overwritten by :math:`n` leading columns of the :math:`m \times m` orthogonal matrix
+   :math:`Q`.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+         
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 
 

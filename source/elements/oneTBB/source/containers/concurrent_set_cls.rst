@@ -1,288 +1,294 @@
-=======================================================
-concurrent_set and concurrent_multiset Template Classes
-=======================================================
+==============
+concurrent_set
+==============
+**[containers.concurrent_set]**
+
+``tbb::concurrent_set`` is a class template that represents an unordered sequence of unique elements.
+It supports concurrent insertion, lookup and traversal, but does not support concurrent erasure.
 
 
-Summary
--------
-
-Template classes for ordered set containers which support concurrent insertion and
-traversal (supported since C++11).
-
-Syntax
-------
+Class Template Synopsis
+-----------------------
 
 .. code:: cpp
 
-   template <typename Key,
-             typename Compare = std::less<Key>,
-             typename Allocator = tbb::tbb_allocator<Key>
-   class concurrent_set;
+    // Defined in header <tbb/concurrent_set.h>
 
-.. code:: cpp
+    namespace tbb {
 
-   template <typename Key,
-             typename Compare = std::less<Key>,
-             typename Allocator = tbb::tbb_allocator<Key>
-   class concurrent_multiset;
+        template <typename T,
+                  typename Compare = std::less<T>,
+                  typename Allocator = tbb_allocator<T>>
+        class concurrent_set {
+        public:
+            using key_type = T;
+            using value_type = T;
 
+            using size_type = <implementation-defined unsigned integer type>;
+            using difference_type = <implementation-defined signed integer type>;
 
-Header
-------
+            using key_compare = Compare;
+            using value_compare = Compare;
 
-.. code:: cpp
+            using allocator_type = Allocator;
 
-   #define TBB_PREVIEW_CONCURRENT_ORDERED_CONTAINERS 1
-   #include "tbb/concurrent_set.h"
+            using reference = value_type&;
+            using const_reference = const value_type&;
+            using pointer = std::allocator_traits<Allocator>::pointer;
+            using const_pointer = std::allocator_traits<Allocator>::const_pointer;
 
+            using iterator = <implementation-defined ForwardIterator>;
+            using const_iterator = <implementation-defined constant ForwardIterator>;
 
-Description
------------
+            using node_type = <implementation-defined node handle>;
 
-``concurrent_set`` and ``concurrent_multiset``
-support concurrent insertion and traversal, but not concurrent erasure.
-They have semantics similar to the ``std::set`` and
-``std::multiset`` respectively, except as follows:
+            using range_type = <implementation-defined range>;
+            using const_range_type = <implementation-defined constant node handle>;
 
-* The ``erase`` and ``extract`` methods are prefixed with
-  ``unsafe_``, to indicate that they are not concurrency safe.
-* Return values of the ``insert`` and ``emplace`` methods might differ
-  from the C++ standard. In particular the methods of ``concurrent_multiset``
-  may return ``std::pair<iterator,bool>``, with the Boolean value in the pair
-  being always ``true``.
-* For ``concurrent_set``, ``insert`` and
-  ``emplace`` methods may create a temporary item that is destroyed
-  if another thread inserts an item with the same key concurrently.
-* Like ``std::list``, insertion of new items does *not* invalidate any
-  iterators, nor does it change the order of items already in the set. Insertion and traversal may
-  be concurrent.
-* Reverse iterators are not supported: ``reverse_iterator``
-  and ``const_reverse_iterator`` member types, ``rbegin()`` and ``rend()``
-  methods are not available.
+            // Construction, destruction, copying
+            concurrent_set();
+            explicit concurrent_set( const key_compare& comp,
+                                    const allocator_type& alloc = allocator_type() );
 
+            explicit concurrent_set( const allocator_type& alloc );
 
-Members of both concurrent_set and concurrent_multiset
-------------------------------------------------------
+            template <typename InputIterator>
+            concurrent_set( InputIterator first, InputIterator last,
+                            const key_compare& comp = key_compare(),
+                            const allocator_type& alloc = allocator_type() );
 
-In the following synopsis, methods shown in
-``bold fond``
-may be concurrently invoked.
+            template <typename InputIterator>
+            concurrent_set( InputIterator first, InputIterator last,
+                            const allocator_type& alloc );
 
-.. code:: cpp
+            concurrent_set( std::initializer_list<value_type> init,
+                            const key_compare& comp = key_compare(),
+                            const allocator_type& alloc = allocator_type() );
 
-   public:
-       // types
-       using key_type = Key;
-       using value_type = Key;
-       using key_compare = Compare;
-       using value_compare = Compare;
-       using allocator_type = Allocator;
-       using reference = value_type&
-       using const_reference = const value_type&
-       using pointer = std::allocator_traits<Allocator>::pointer;
-       using const_pointer = std::allocator_traits<Allocator>::const_pointer;
-       using size_type = implementation-defined;
-       using difference_type = implementation-defined;
-       using iterator = implementation-defined;
-       using const_iterator = implementation-defined;
-       using node_type = implementation-defined;
-   
-       allocator_type get_allocator() const;
-   
-       // size and capacity
-       bool empty const;
-       size_type size() const;
-       size_type max_size() const;
-   
-       // iterators
-       iterator begin();
-       const_iterator begin() const;
-       iterator end();
-       const_iterator end() const;
-       const_iterator cbegin() const;
-       const_iterator cend() const;
-   
-       // modifiers
-       std::pair<iterator, bool> insert(const value_type& x);
-       std::pair<iterator, bool> insert(value_type&& x);
-   
-       iterator insert(const_iterator hint, const value_type& x);
-       iterator insert(const_iterator hint, value_type&& x);
-   
-       template<typename InputIterator>
-       void insert(InputIterator first, InputIterator last);
-       void insert(std::initializer_list<value_type> il);
-   
-       std::pair<iterator, bool> insert(node_type&& nh);
-       iterator insert(const_iterator hint, node_type&& nh);
-   
-       template<typename... Args>
-       std::pair<iterator, bool> emplace(Args&&... args);
-       template<typename... Args>
-       iterator emplace_hint(const_iterator hint, Args&&... args);
-   
-       template<typename SrcCompare>
-       void merge(concurrent_set<Key, SrcCompare, Allocator>& source);
-       template<typename SrcCompare>
-       void merge(concurrent_set<Key, SrcCompare, Allocator>&& source);
-       template<typename SrcCompare>
-       void merge(concurrent_multiset<Key, SrcCompare, Allocator>& source);
-       template<typename SrcCompare>
-       void merge(concurrent_multiset<Key, SrcCompare, Allocator>&& source);
-   
-       iterator unsafe_erase(const_iterator position);
-       iterator unsafe_erase(iterator position);
-       iterator unsafe_erase(const_iterator first, const_iterator last);
-   
-       size_type unsafe_erase(const key_type& k);
-   
-       template<typename K>
-       size_type unsafe_erase(const K& k);
-   
-       node_type unsafe_extract(const_iterator position);
-       node_type unsafe_extract(const key_type& k);
-   
-       void clear();
-   
-       // observers
-       key_compare key_comp() const;
-       value_compare value_comp() const;
-   
-       // lookup
-       iterator find(const key_type& k);
-       const_iterator find(const key_type& k) const;
-       template<typename K>
-       iterator find(const K& k);
-       template<typename K>
-       const_iterator find(const K& k);
-   
-       bool contains(const key_type& k);
-       template<typename K>
-       bool contains(const K& k);
-   
-       size_type count(const key_type& k) const;
-       template<typename K>
-       size_type count(const K& k);
-   
-       std::pair<iterator, iterator> equal_range(const key_type& k);
-       std::pair<const_iterator, const_iterator> equal_range(const key_type& k) const;
-   
-       template<typename K>
-       std::pair<iterator, iterator> equal_range(const K& k);
-       template<typename K>
-       std::pair<const_iterator, const_iterator> equal_range(const K& k);
-   
-       iterator lower_bound(const key_type& k);
-       const_iterator lower_bound(const key_type& k) const;
-   
-       template<typename K>
-       iterator lower_bound(const K& k);
-       template<typename K>
-       const_iterator lower_bound(const K& k);
-   
-       iterator upper_bound(const key_type& k);
-       const_iterator upper_bound(const key_type& k) const;
-   
-       template<typename K>
-       iterator upper_bound(const K& k);
-       template<typename K>
-       const_iterator upper_bound(const K& k) const;
-   
-       // parallel iteration
-       using range_type = implementation-defined;
-       using const_range_type = implementation-defined;
-       range_type range();
-       const_range_type range() const;
+            concurrent_set( std::initializer_list<value_type> init, const allocator_type& alloc );
 
+            concurrent_set( const concurrent_set& other );
+            concurrent_set( const concurrent_set& other,
+                            const allocator_type& alloc );
 
-Members of concurrent_set
--------------------------
+            concurrent_set( concurrent_set&& other );
+            concurrent_set( concurrent_set&& other,
+                            const allocator_type& alloc );
 
-.. code:: cpp
+            ~concurrent_set();
 
-   public:
-       // construct/destroy/copy
-       concurrent_set();
-       explicit concurrent_set(const key_compare& comp, const allocator_type& a = allocator_type());
-       explicit concurrent_set(const allocator_type& a);
-   
-       template<typename InputIterator>
-       concurrent_set(InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-                      const allocator_type& a = allocator_type());
-       template<typename InputIterator>
-       concurrent_set(InputIterator first, InputIterator last, const allocator_type& a);
-   
-       concurrent_set(const concurrent_set& other);
-       concurrent_set(const concurrent_set& other, const allocator_type& a);
-       concurrent_set(concurrent_set&& other);
-       concurrent_set(concurrent_set&& other, const allocator_type& a);
-   
-       concurrent_set(std::initializer_list<value_type> il, const key_compare& comp = key_compare(),
-                      const allocator_type& a = allocator_type());
-       concurrent_set(std::initializer_list<value_type> il, const allocator_type& a);
-   
-       ~concurrent_set();
-   
-       concurrent_set& operator=(const concurrent_set& other);
-       concurrent_set& operator=(concurrent_set&& other);
-       concurrent_set& operator=(std::initializer_list<value_type> il);
-   
-       void swap(concurrent_set& other);
+            concurrent_set& operator=( const concurrent_set& other );
+            concurrent_set& operator=( concurrent_set&& other );
+            concurrent_set& operator=( std::initializer_list<value_type> init );
+
+            allocator_type get_allocator() const;
+
+            // Iterators
+            iterator begin();
+            const_iterator begin() const;
+            const_iterator cbegin() const;
+
+            iterator end();
+            const_iterator end() const;
+            const_iterator cend() const;
+
+            // Size and capacity
+            bool empty() const;
+            size_type size() const;
+            size_type max_size() const;
+
+            // Concurrently safe modifiers
+            std::pair<iterator, bool> insert( const value_type& value );
+
+            iterator insert( const_iterator hint, const value_type& value );
+
+            std::pair<iterator, bool> insert( value_type&& value );
+
+            iterator insert( const_iterator hint, value_type&& value );
+
+            template <typename InputIterator>
+            void insert( InputIterator first, InputIterator last );
+
+            void insert( std::initializer_list<value_type> init );
+
+            std::pair<iterator, bool> insert( node_type&& nh );
+            iterator insert( const_iterator hint, node_type&& nh );
+
+            template <typename... Args>
+            std::pair<iterator, bool> emplace( Args&&... args );
+
+            template <typename... Args>
+            iterator emplace_hint( const_iterator hint, Args&&... args );
+
+            template <typename SrcCompare>
+            void merge( concurrent_set<T, SrcCompare, Allocator>& source );
+
+            template <typename SrcCompare>
+            void merge( concurrent_set<T, SrcCompare, Allocator>&& source );
+
+            template <typename SrcCompare>
+            void merge( concurrent_multiset<T, SrcCompare, Allocator>& source );
+
+            template <typename SrcCompare>
+            void merge( concurrent_multiset<T, SrcCompare, Allocator>&& source );
+
+            // Concurrently unsafe modifiers
+            void clear();
+
+            iterator unsafe_erase( const_iterator pos );
+            iterator unsafe_erase( iterator pos );
+
+            iterator unsafe_erase( const_iterator first, const_iterator last );
+
+            size_type unsafe_erase( const key_type& key );
+
+            template <typename K>
+            size_type unsafe_erase( const K& key );
+
+            node_type unsafe_extract( const_iterator pos );
+            node_type unsafe_extract( iterator pos );
+
+            node_type unsafe_extract( const key_type& key );
+
+            template <typename K>
+            node_type unsafe_extract( const K& key );
+
+            void swap( concurrent_set& other );
+
+            // Lookup
+            size_type count( const key_type& key );
+
+            template <typename K>
+            size_type count( const K& key );
+
+            iterator find( const key_type& key );
+            const_iterator find( const key_type& key ) const;
+
+            template <typename K>
+            iterator find( const K& key );
+
+            template <typename K>
+            const_iterator find( const K& key ) const;
+
+            bool contains( const key_type& key ) const;
+
+            template <typename K>
+            bool contains( const K& key ) const;
+
+            std::pair<iterator, iterator> equal_range( const key_type& key );
+            std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
+
+            template <typename K>
+            std::pair<iterator, iterator>  equal_range( const K& key );
+            std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
+
+            iterator lower_bound( const key_type& key );
+            const_iterator lower_bound( const key_type& key ) const;
+
+            template <typename K>
+            iterator lower_bound( const K& key );
+
+            template <typename K>
+            const_iterator lower_bound( const K& key ) const;
+
+            iterator upper_bound( const key_type& key );
+            const_iterator upper_bound( const key_type& key ) const;
+
+            template <typename K>
+            iterator upper_bound( const K& key );
+
+            template <typename K>
+            const_iterator upper_bound( const K& key ) const;
+
+            // Observers
+            key_compare key_comp() const;
+
+            value_compare value_comp() const;
+
+            // Parallel iteration
+            range_type range();
+            const_range_type range() const;
+        }; // class concurrent_set
+
+    } // namespace tbb
 
 
-Members of concurrent_multiset
-------------------------------
+Requirements:
 
-.. code:: cpp
+* The expression ``std::allocator_traits<Allocator>::destroy(m, val)``, where ``m`` is an object
+  of the type ``Allocator`` and ``val`` is an object of the type ``value_type``, must be well-formed.
+  Member functions can impose stricter requirements depending on the type of the operation.
+* The type ``Compare`` must meet the ``Compare`` requirements from the [alg.sorting] ISO C++ Standard section.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
-   public:
-       // construct/destroy/copy
-       concurrent_multiset();
-       explicit concurrent_multiset(const key_compare& comp, const allocator_type& a = allocator_type());
-       explicit concurrent_multiset(const allocator_type& a);
-   
-       template<typename InputIterator>
-       concurrent_multiset(InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-                           const allocator_type& a = allocator_type());
-       template<typename InputIterator>
-       concurrent_multiset(InputIterator first, InputIterator last, const allocator_type& a);
-   
-       concurrent_multiset(const concurrent_multiset& other);
-       concurrent_multiset(const concurrent_multiset& other, const allocator_type& a);
-       concurrent_multiset(concurrent_multiset&& other);
-       concurrent_multiset(concurrent_multiset&& other, const allocator_type& a);
-   
-       concurrent_multiset(std::initializer_list<value_type> il, const key_compare& comp = key_compare(),
-                           const allocator_type& a = allocator_type());
-       concurrent_multiset(std::initializer_list<value_type> il, const allocator_type& a);
-   
-       ~concurrent_multiset();
-   
-       void swap(concurrent_multiset& other);
 
-Where possible, constructors of ``concurrent_set`` and ``concurrent_multiset``
-support class template argument deduction for C++17. For example:
-
-.. code:: cpp
-
-   std::vector<int> v {1, 2, 3};
-   tbb::concurrent_set s{v.begin(), v.end()};
-
-declares ``s`` as ``tbb::concurrent_set<int, std::less<int>, tbb::tbb_allocator<int> >``.
-
-See also:
-
-* :doc:`Node handles <node_handles_cls>`
-* :doc:`concurrent_map <concurrent_map_cls>`
-* :doc:`concurrent_unordered_set <concurrent_unordered_set_cls>`
-* :doc:`concurrent_hash_map <concurrent_hash_map_cls>`
+Member functions
+----------------
 
 .. toctree::
+    :maxdepth: 1
 
-   concurrent_set_cls/construct_destroy_copy_set_cls.rst
-   concurrent_set_cls/size_and_capacity_set_cls.rst
-   concurrent_set_cls/iterators_set_cls.rst
-   concurrent_set_cls/modifiers_set_cls.rst
-   concurrent_set_cls/observers_set_cls.rst
-   concurrent_set_cls/lookup_set_cls.rst
-   concurrent_set_cls/parallel_iteration_set_cls.rst
+    concurrent_set_cls/construction_destruction_copying.rst
+    concurrent_set_cls/iterators.rst
+    concurrent_set_cls/size_and_capacity.rst
+    concurrent_set_cls/safe_modifiers.rst
+    concurrent_set_cls/unsafe_modifiers.rst
+    concurrent_set_cls/lookup.rst
+    concurrent_set_cls/observers.rst
+    concurrent_set_cls/parallel_iteration.rst
+
+Non-member functions
+--------------------
+
+These functions provide binary and lexicographical comparison and swap operations
+on ``tbb::concurrent_set`` objects.
+
+The exact namespace where these functions are defined is unspecified, as long as they may be used in
+respective comparison operations. For example, an implementation may define the classes and functions
+in the same internal namespace and define ``tbb::concurrent_set`` as a type alias for which
+the non-member functions are reachable only via argument-dependent lookup.
+
+.. code:: cpp
+
+    template <typename T, typename Compare, typename Allocator>
+    void swap( concurrent_set<T, Compare, Allocator>& lhs,
+               concurrent_set<T, Compare, Allocator>& rhs );
+
+    template <typename T, typename Compare, typename Allocator>
+    bool operator==( const concurrent_set<T, Compare, Allocator>& lhs,
+                    const concurrent_set<T, Compare, Allocator>& rhs );
+
+    template <typename T, typename Compare, typename Allocator>
+    bool operator!=( const concurrent_set<T, Compare, Allocator>& lhs,
+                    const concurrent_set<T, Compare, Allocator>& rhs );
+
+    template <typename T, typename Compare, typename Allocator>
+    bool operator<( const concurrent_set<T, Compare, Allocator>& lhs,
+                    const concurrent_set<T, Compare, Allocator>& rhs );
+
+    template <typename T, typename Compare, typename Allocator>
+    bool operator>( const concurrent_set<T, Compare, Allocator>& lhs,
+                    const concurrent_set<T, Compare, Allocator>& rhs );
+
+    template <typename T, typename Compare, typename Allocator>
+    bool operator<=( const concurrent_set<T, Compare, Allocator>& lhs,
+                     const concurrent_set<T, Compare, Allocator>& rhs );
+
+    template <typename Key, typename T, typename Compare, typename Allocator>
+    bool operator>=( const concurrent_set<T, Compare, Allocator>& lhs,
+                     const concurrent_set<T, Compare, Allocator>& rhs );
+
+.. toctree::
+    :maxdepth: 1
+
+    concurrent_set_cls/non_member_swap.rst
+    concurrent_set_cls/non_member_binary_comparisons.rst
+    concurrent_set_cls/non_member_lexicographical_comparisons.rst
+
+Other
+-----
+
+.. toctree::
+    :maxdepth: 1
+
+    concurrent_set_cls/deduction_guides.rst

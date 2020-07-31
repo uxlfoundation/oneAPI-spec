@@ -1,147 +1,132 @@
+.. _onemkl_lapack_getrf:
 
 getrf
 =====
 
-
-.. container::
-
-
-   Computes the LU factorization of a general m-by-n matrix. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-0ACC96DA-0ADD-4950-9AC4-CB3294AFFC48
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void getrf(queue &exec_queue, std::int64_t m,      std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<std::int64_t,1> &ipiv, buffer<std::int64_t,1> &info)
-
-      ``getrf`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Computes the LU factorization of a general :math:`m \times n` matrix.
 
 .. container:: section
-   :name: GUID-FA3350DD-9097-43B5-995B-6C2DA4AA1749
-
 
    .. rubric:: Description
-      :class: sectiontitle
 
-
-   The routine computes the ``LU`` factorization of a general
-   ``m``-by-``n`` matrix ``A`` as
-
-
-   ::
-
-
-                          A = P*L*U,
-
-
-   where ``P`` is a permutation matrix, ``L`` is lower triangular with
-   unit diagonal elements (lower trapezoidal if ``m > n``) and ``U`` is
-   upper triangular (upper trapezoidal if ``m < n``). The routine uses
-   partial pivoting, with row interchanges.
-
-
-.. container:: section
-   :name: GUID-F1A7CCFF-5AD0-4C26-A396-F86A1713DBA8
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
+``getrf`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
 
-      * -     exec_queue    
-        -     The queue where the routine should be executed.    
-      * -     m    
-        -      The number of rows in the matrix ``A`` (``0≤m``).       
-      * -     n    
-        -      The number of columns in ``A``\ (``0≤n``).    
-      * -     a    
-        -     Buffer holding input matrix ``A``. The buffer a contains    the matrix ``A``. The second dimension of a must be at least   ``max(1, n)``.   
-      * -     lda    
-        -     The leading dimension of a.    
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+The routine computes the LU factorization of a general
+:math:`m \times n` matrix :math:`A` as :math:`A = PLU`,
 
+where :math:`P` is a permutation matrix, :math:`L` is lower triangular with
+unit diagonal elements (lower trapezoidal if :math:`m > n`) and :math:`U` is
+upper triangular (upper trapezoidal if :math:`m < n`). The routine uses
+partial pivoting, with row interchanges.
 
-
-.. container:: section
-   :name: GUID-3A62166E-6E38-4FE0-9598-E62232A81937
-
-
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   .. list-table:: 
-      :header-rows: 1
-
-      * -     a    
-        -     Overwritten by ``L`` and ``U``. The unit diagonal    elements of ``L`` are not stored.    
-      * -     ipiv    
-        -     Array, size at least ``max(1,min(m, n))``. Contains the    pivot indices; for ``1 ≤i≤min(m, n)``,row ``i`` was interchanged with   row ``ipiv(i)``.   
-      * -     info    
-        -     Buffer containing error information.      If    ``info=0``, execution is successful.      If ``info=-i``,   the ``i``-th parameter had an illegal value.      If   ``info=i``, ``uii`` is 0. The factorization has been completed, but   ``U`` is exactly singular. Division by 0 will occur if you use the   factor ``U`` for solving a system of linear equations.   
-
-
-
+getrf (BUFFER Version)
+----------------------
 
 .. container:: section
-   :name: GUID-ACC30BA5-5BDE-4169-95F6-1390ECD55715
 
+   .. rubric:: Syntax
 
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use ``getrf``\ can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/lapack/getrf.cpp
-
+.. cpp:function::  void oneapi::mkl::lapack::getrf(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda,      cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-81F25E52-7E8D-4508-8696-46F51F0A972C
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Known Limitations
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+m
+    The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
-   For GPU support, errors are reported through the info parameter, but
-   computation does not halt for an algorithmic error.
+n
+    The number of columns in :math:`A` (:math:`0 \le n`).
 
+a
+   Buffer holding input matrix :math:`A`. The buffer a contains    the matrix :math:`A`. The second dimension of a must be at least   :math:`\max(1, n)`.
 
-.. container:: familylinks
+lda
+   The leading dimension of ``a``.
 
+scratchpad_size
+      Size of scratchpad memory as a number of floating point elements of type ``T``.
+      Size should not be less than the value returned by :ref:`onemkl_lapack_getrf_scratchpad_size` function.
 
-   .. container:: parentlink
+.. container:: section
 
+  .. rubric:: Output Parameters
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+a
+   Overwritten by :math:`L` and :math:`U`. The unit diagonal    elements of :math:`L` are not stored.
+
+ipiv
+   Array, size at least :math:`\max(1,\min(m, n))`. Contains the    pivot indices; for :math:`1 \le i \le \min(m, n)`, row :math:`i` was interchanged with   row :math:`\text{ipiv}(i)`.
+
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
+
+getrf (USM Version)
+----------------------
+
+.. container:: section
+
+   .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrf(cl::sycl::queue &queue, std::int64_t m,      std::int64_t n, T *a, std::int64_t lda, std::int64_t *ipiv, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+
+.. container:: section
+
+  .. rubric:: Input Parameters
+
+queue
+   The queue where the routine should be executed.
+
+m
+    The number of rows in the matrix :math:`A` (:math:`0 \le m`).
+
+n
+    The number of columns in :math:`A` (:math:`0 \le n`).
+
+a
+   Pointer to array holding input matrix :math:`A`. The second dimension of ``a`` must be at least   :math:`\max(1, n)`.
+
+lda
+   The leading dimension of ``a``.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_getrf_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+a
+   Overwritten by :math:`L` and :math:`U`. The unit diagonal    elements of :math:`L` are not stored.
+
+ipiv
+   Array, size at least :math:`\max(1,\min(m, n))`. Contains the    pivot indices; for :math:`1 \le i \le \min(m, n)`, row :math:`i` was interchanged with   row :math:`\text{ipiv}(i)`.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 
 

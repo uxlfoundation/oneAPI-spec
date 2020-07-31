@@ -3,122 +3,82 @@
 her
 ===
 
+Computes a rank-1 update of a Hermitian matrix.
 
-.. container::
+.. _onemkl_blas_her_description:
 
+.. rubric:: Description
 
-   Computes a rank-1 update of a Hermitian matrix.
+The ``her`` routines compute a scalar-vector-vector product and add the
+result to a Hermitian matrix. The operation is defined as:
 
+.. math::
+      
+      A \leftarrow alpha*x*x^H + A
 
+where:
 
-      ``her`` supports the following precisions.
+``alpha`` is scalar,
 
+``A`` is an ``n``-by-``n`` Hermitian matrix,
 
-      .. list-table:: 
-         :header-rows: 1
+``x`` is a vector of length ``n``.
 
-         * -  T 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+``her`` supports the following precisions.
 
+   .. list-table:: 
+      :header-rows: 1
 
+      * -  T 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+.. _onemkl_blas_her_buffer:
 
-.. container:: section
-
-
-   .. rubric:: Description
-      :class: sectiontitle
-
-
-   The ``her`` routines compute a scalar-vector-vector product and add the
-   result to a Hermitian matrix. The operation is defined as
-
-
-  
-
-
-      A <- alpha*x*x :sup:`H` + A
-
-
-   where:
-
-
-   ``alpha`` is scalar,
-
-
-   ``A`` is an ``n``-by-``n`` Hermitian matrix,
-
-
-   ``x`` is a vector of length ``n``.
-
-
-her (BUFFER Version)
+her (Buffer Version)
 --------------------
 
-.. container::
+.. rubric:: Syntax
 
-   .. container:: section
+.. cpp:function::  void oneapi::mkl::blas::column_major::her(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &a, std::int64_t lda)
+.. cpp:function::  void oneapi::mkl::blas::row_major::her(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &a, std::int64_t lda)
 
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void onemkl::blas::her(sycl::queue &queue, uplo upper_lower,      std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx,      sycl::buffer<T,1> &a, std::int64_t lda)
 .. container:: section
 
-
    .. rubric:: Input Parameters
-      :class: sectiontitle
-
 
    queue
       The queue where the routine should be executed.
 
-
    upper_lower
-      Specifies whether *A* is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
-
-
+      Specifies whether ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
    n
       Number of rows and columns of ``A``. Must be at least zero.
 
-
    alpha
       Scaling factor for the matrix-vector product.
 
-
    x
       Buffer holding input vector ``x``. The buffer must be of size at
-      least (1 + (``n`` - 1)*abs(``incx``)). See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
+      least (1 + (``n`` - 1)*abs(``incx``)). See :ref:`matrix-storage` for
       more details.
-
 
    incx
       Stride of vector ``x``.
 
-
    a
       Buffer holding input matrix ``A``. Must have size at least
-      ``lda``\ \*\ ``n``. See `Matrix and Vector
-      Storage <../matrix-storage.html>`__ for
+      ``lda``\ \*\ ``n``. See :ref:`matrix-storage` for
       more details.
-
 
    lda
       Leading dimension of matrix ``A``. Must be at least ``n``, and
       positive.
 
-
 .. container:: section
 
-
    .. rubric:: Output Parameters
-      :class: sectiontitle
-
 
    a
       Buffer holding the updated upper triangular part of the Hermitian
@@ -126,111 +86,72 @@ her (BUFFER Version)
       lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower = lower``.
 
-
       The imaginary parts of the diagonal elements are set to zero.
 
+.. _onemkl_blas_her_usm:
 
 her (USM Version)
 -----------------
 
-.. container::
+.. rubric:: Syntax
 
-   .. container:: section
+.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::her(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
+.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::her(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
 
+.. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+   .. rubric:: Input Parameters
 
+   queue
+      The queue where the routine should be executed.
 
-      .. container:: dlsyntaxpara
+   upper_lower
+      Specifies whether *A* is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
+   n
+      Number of rows and columns of ``A``. Must be at least zero.
 
-         .. cpp:function::  sycl::event onemkl::blas::her(sycl::queue &queue, uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
-   .. container:: section
+   alpha
+      Scaling factor for the matrix-vector product.
 
+   x
+      Pointer to input vector ``x``. The array holding input vector
+      ``x`` must be of size at least (1 + (``n`` - 1)*abs(``incx``)).
+      See :ref:`matrix-storage` for
+      more details.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+   incx
+      Stride of vector ``x``.
 
+   a
+      Pointer to input matrix ``A``. The array holding input matrix
+      ``A`` must have size at least ``lda``\ \*\ ``n``. See :ref:`matrix-storage` for
+      more details.
 
-      queue
-         The queue where the routine should be executed.
+   lda
+      Leading dimension of matrix ``A``. Must be at least ``n``, and
+      positive.
 
+   dependencies
+      List of events to wait for before starting computation, if any.
+      If omitted, defaults to no dependencies.
 
-      upper_lower
-         Specifies whether *A* is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
+.. container:: section
 
+   .. rubric:: Output Parameters
 
+   a
+      Pointer to the updated upper triangular part of the Hermitian
+      matrix ``A`` if ``upper_lower = upper`` or the updated
+      lower triangular part of the Hermitian matrix ``A`` if
+      ``upper_lower = lower``.
 
-      n
-         Number of rows and columns of ``A``. Must be at least zero.
+      The imaginary parts of the diagonal elements are set to zero.
 
+.. container:: section
 
-      alpha
-         Scaling factor for the matrix-vector product.
+   .. rubric:: Return Values
 
+   Output event to wait on to ensure computation is complete.
 
-      x
-         Pointer to input vector ``x``. The array holding input vector
-         ``x`` must be of size at least (1 + (``n`` - 1)*abs(``incx``)).
-         See `Matrix and Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
-
-
-      incx
-         Stride of vector ``x``.
-
-
-      a
-         Pointer to input matrix ``A``. The array holding input matrix
-         ``A`` must have size at least ``lda``\ \*\ ``n``. See `Matrix
-         and Vector
-         Storage <../matrix-storage.html>`__ for
-         more details.
-
-
-      lda
-         Leading dimension of matrix ``A``. Must be at least ``n``, and
-         positive.
-
-
-      dependencies
-         List of events to wait for before starting computation, if any.
-         If omitted, defaults to no dependencies.
-
-
-   .. container:: section
-
-
-      .. rubric:: Output Parameters
-         :class: sectiontitle
-
-
-      a
-         Pointer to the updated upper triangular part of the Hermitian
-         matrix ``A`` if ``upper_lower = upper`` or the updated
-         lower triangular part of the Hermitian matrix ``A`` if
-         ``upper_lower = lower``.
-
-
-         The imaginary parts of the diagonal elements are set to zero.
-
-
-   .. container:: section
-
-
-      .. rubric:: Return Values
-         :class: sectiontitle
-
-
-      Output event to wait on to ensure computation is complete.
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent topic:** :ref:`blas-level-2-routines`
+   **Parent topic:** :ref:`blas-level-2-routines`

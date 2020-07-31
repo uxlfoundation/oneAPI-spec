@@ -1,6 +1,7 @@
+.. _onemkl_vm_setmode:
 
-setmode
-=======
+set_mode
+========
 
 
 .. container::
@@ -11,14 +12,13 @@ setmode
 
 
    .. container:: section
-      :name: GUID-6F502D48-7B38-47E3-9A84-5A27A98BE930
 
 
       .. rubric:: Syntax
          :class: sectiontitle
 
 
-      .. cpp:function::  uint64_t set_mode(queue& exec_queue, uint64_t      new_mode )
+      .. cpp:function:: uint64_t oneapi::mkl::vm::set_mode(queue& exec_queue, uint64_t new_mode )
 
       .. rubric:: Description
          :class: sectiontitle
@@ -37,7 +37,7 @@ setmode
       numbers.
 
 
-      The mode::ftzdazon is specifically designed to improve the
+      The oneapi::mkl::vm::mode::ftzdazon is specifically designed to improve the
       performance of computations that involve denormalized numbers at
       the cost of reasonable accuracy loss. This mode changes the
       numeric behavior of the functions: denormalized input values are
@@ -47,29 +47,29 @@ setmode
       range.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Value of mode 
-           -  Description 
-         * -  Accuracy Control 
-           -   
-         * -  ``mode::ha`` 
-           -  High accuracy versions of VM functions. 
-         * -  ``mode::la`` 
-           -  Low accuracy versions of VM functions. 
-         * -  ``mode::ep`` 
-           -  Enhanced performance accuracy versions of VM functions. 
-         * -  Denormalized Numbers Handling Control 
-           -   
-         * -  ``mode::ftzdazon`` 
-           -  Faster processing of denormalized inputs is enabled. 
-         * -  ``mode::ftzdazoff`` 
-           -  Faster processing of denormalized inputs is disabled. 
-         * -  Other 
-           -   
-         * -  ``mode::not_defined`` 
-           -  VM status not defined. 
+         * - Value of mode
+           - Description
+         * - Accuracy Control
+           -
+         * - ``oneapi::mkl::vm::mode::ha``
+           - High accuracy versions of VM functions.
+         * - ``oneapi::mkl::vm::mode::la``
+           - Low accuracy versions of VM functions.
+         * - ``oneapi::mkl::vm::mode::ep``
+           - Enhanced performance accuracy versions of VM functions.
+         * - Denormalized Numbers Handling Control
+           -
+         * - ``oneapi::mkl::vm::mode::ftzdazon``
+           - Faster processing of denormalized inputs is enabled.
+         * - ``oneapi::mkl::vm::mode::ftzdazoff``
+           - Faster processing of denormalized inputs is disabled.
+         * - Other
+           -
+         * - ``oneapi::mkl::vm::mode::not_defined``
+           - VM status not defined.
 
 
 
@@ -80,11 +80,10 @@ setmode
    ::
 
 
-      mode::ha | mode::ftdazoff
+      oneapi::mkl::vm::mode::ha | oneapi::mkl::vm::mode::ftdazoff
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -100,7 +99,6 @@ setmode
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -111,28 +109,11 @@ setmode
       Specifies the former VM mode.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   ::
-
-
-      oldmode = set_mode (exec_queue , mode::la);
-      oldmode = set_mode (exec_queue , mode::ep | mode::ftzdazon);
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `VM Service
-      Functions <vm-service-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_service_functions`
 
 

@@ -30,6 +30,7 @@ oneDAL public identifiers are represented in the following header files:
        The string %UTIL% should be substituted with the auxiliary functionality name, for example, ``usm_allocator`` or ``type_traits``.
 
 
+.. _common_namespaces:
 
 ==========
 Namespaces
@@ -46,6 +47,7 @@ oneDAL functionality is represented with a system of C++ namespaces described be
    * - ``oneapi::dal``
      - The namespace of the library that contains externally exposable data types, processing and service functionality of oneDAL.
    * - ``oneapi::dal::%ALGORITHM%``
+
      - The namespace of the algorithm.
        All classes and structures related to that algorithm shall be defined within a particular namespace.
 

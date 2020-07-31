@@ -1,4 +1,4 @@
-.. _distributions:
+.. _onemkl_rng_distributions:
 
 Distributions
 =============
@@ -7,149 +7,93 @@ Distributions
 .. container::
 
 
-   oneAPI Math Kernel LibraryRNG routines are used to generate random
+   oneMKL RNG routines are used to generate random
    numbers with different types of distribution. Each function group is
    introduced below by the type of underlying distribution and contains
    a short description of its functionality, as well as specifications
    of the call sequence and the explanation of input and output
-   parameters. `Table "Continuous Distribution Generators" <#TBL10-8>`__
-   and `Table "Discrete Distribution Generators" <#TBL10-9>`__ list the
+   parameters. `Table Continuous Distribution Generators`_
+   and `Table Discrete Distribution Generators`_ list the
    random number generator routines with data types and output
    distributions, and sets correspondence between data types of the
    generator routines and the basic random number generators.
 
 
-   .. container:: tablenoborder
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Type of Distribution     
-           -     Data Types     
-           -     BRNG Data Type     
-           -     Description     
-         * -           \ `onemkl::rng::uniform <mkl-rng-uniform-continuous.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Uniform continuous distribution on the interval       [``a,b``)    
-         * -           \ `onemkl::rng::gaussian <mkl-rng-gaussian.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Normal (Gaussian) distribution     
-         * -           \ `onemkl::rng::exponential <mkl-rng-exponential.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Exponential distribution     
-         * -           \ `onemkl::rng::laplace <mkl-rng-laplace.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Laplace distribution (double exponential distribution)          
-         * -           \ `onemkl::rng::weibull <mkl-rng-weibull.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Weibull distribution     
-         * -           \ `onemkl::rng::cauchy <mkl-rng-cauchy.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Cauchy distribution     
-         * -           \ `onemkl::rng::rayleigh <mkl-rng-rayleigh.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Rayleigh distribution     
-         * -           \ `onemkl::rng::lognormal <mkl-rng-lognormal.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Lognormal distribution     
-         * -           \ `onemkl::rng::gumbel <mkl-rng-gumbel.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Gumbel (extreme value) distribution     
-         * -           \ `onemkl::rng::gamma <mkl-rng-gamma.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Gamma distribution     
-         * -           \ `onemkl::rng::beta <mkl-rng-gamma.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Beta distribution     
-         * -           \ `onemkl::rng::chi_square <mkl-rng-chi_square.html>`__\    
-           -     s, d    
-           -     s, d    
-           -     Chi-Square distribution     
-
-
-
-
-    
-
+    _`Table Continuous Distribution Generators`
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -     Type of Distribution     
-           -     Data Types     
-           -     BRNG Data Type     
-           -     Description     
-         * -           \ `onemkl::rng::uniform <mkl-rng-uniform-discrete.html>`__\    
-           -     i    
-           -     d    
-           -     Uniform discrete distribution on the interval       [``a,b``)    
-         * -           \ `onemkl::rng::uniform_bits <mkl-rng-uniform_bits.html>`__\    
-           -     i    
-           -     i    
-           -     Uniformly distributed bits in 32-bit chunks     
-         * -  
-           -     i    
-           -     i    
-           -     Uniformly distributed bits in 64-bit chunks     
-         * -           \ `onemkl::rng::bits <mkl-rng-bits.html>`__\    
-           -     i    
-           -     i    
-           -     Bits of underlying BRNG integer recurrence     
-         * -           \ `onemkl::rng::bernoulli <mkl-rng-bernoulli.html>`__\    
-           -     i    
-           -     s    
-           -     Bernoulli distribution     
-         * -           \ `onemkl::rng::geometric <mkl-rng-geometric.html>`__\    
-           -     i    
-           -     s    
-           -     Geometric distribution     
-         * -           \ `onemkl::rng::binomial <mkl-rng-binomial.html>`__\    
-           -     i    
-           -     d    
-           -     Binomial distribution     
-         * -           \ `onemkl::rng::hypergeometric <mkl-rng-hypergeometric.html>`__\    
-           -     i    
-           -     d    
-           -     Hypergeometric distribution     
-         * -           \ `onemkl::rng::poisson <mkl-rng-poisson.html>`__\    
-           -     i    
-           -     s (for ) onemkl::rng::gaussian_inverse      s       (for distribution parameter λ≥ 27) and d (for λ < 27) (for      onemkl::rng::ptpe)    
-           -     Poisson distribution     
-         * -           \ `onemkl::rng::poisson_v <mkl-rng-poisson_v.html>`__\    
-           -     i    
-           -     s    
-           -     Poisson distribution with varying mean     
-         * -           \ `onemkl::rng::negbinomial <mkl-rng-negbinomial.html>`__\    
-           -     i    
-           -     d    
-           -     Negative binomial distribution, or Pascal distribution          
-         * -           \ `onemkl::rng::multinomial <mkl-rng-multinomial.html>`__\    
-           -     i    
-           -     d    
-           -     Multinomial distribution     
+         * -     Routine
+           -     Description
+         * -           \ :ref:`onemkl_rng_uniform_continuous`\
+           -     Uniform continuous distribution on the interval       [``a,b``)
+         * -           \ :ref:`onemkl_rng_gaussian`\
+           -     Normal (Gaussian) distribution
+         * -           \ :ref:`onemkl_rng_exponential`\
+           -     Exponential distribution
+         * -           \ :ref:`onemkl_rng_laplace`\
+           -     Laplace distribution (double exponential distribution)
+         * -           \ :ref:`onemkl_rng_weibull`\
+           -     Weibull distribution
+         * -           \ :ref:`onemkl_rng_cauchy`\
+           -     Cauchy distribution
+         * -           \ :ref:`onemkl_rng_rayleigh`\
+           -     Rayleigh distribution
+         * -           \ :ref:`onemkl_rng_lognormal`\
+           -     Lognormal distribution
+         * -           \ :ref:`onemkl_rng_gumbel`\
+           -     Gumbel (extreme value) distribution
+         * -           \ :ref:`onemkl_rng_gamma`\
+           -     Gamma distribution
+         * -           \ :ref:`onemkl_rng_beta`\
+           -     Beta distribution
+         * -           \ :ref:`onemkl_rng_chi_square`\
+           -     Chi-Square distribution
+         * -           \ :ref:`onemkl_rng_gaussian_mv`\
+           -     Normal Multivariate (Gaussian Multivariate) distribution
+
+
+    _`Table Discrete Distribution Generators`
+   .. container:: tablenoborder
+
+
+      .. list-table::
+         :header-rows: 1
+
+         * -     Type of Distribution
+           -     Description
+         * -           \ :ref:`onemkl_rng_uniform_discrete`\
+           -     Uniform discrete distribution on the interval       [``a,b``)
+         * -           \ :ref:`onemkl_rng_uniform_bits`\
+           -     Uniformly distributed bits in 32/64-bit chunks
+         * -           \ :ref:`onemkl_rng_bits`\
+           -     Bits of underlying BRNG integer recurrence
+         * -           \ :ref:`onemkl_rng_bernoulli`\
+           -     Bernoulli distribution
+         * -           \ :ref:`onemkl_rng_geometric`\
+           -     Geometric distribution
+         * -           \ :ref:`onemkl_rng_binomial`\
+           -     Binomial distribution
+         * -           \ :ref:`onemkl_rng_hypergeometric`\
+           -     Hypergeometric distribution
+         * -           \ :ref:`onemkl_rng_poisson`\
+           -     Poisson distribution
+         * -           \ :ref:`onemkl_rng_poisson_v`\
+           -     Poisson distribution with varying mean
+         * -           \ :ref:`onemkl_rng_negative_binomial`\
+           -     Negative binomial distribution, or Pascal distribution
+         * -           \ :ref:`onemkl_rng_multinomial`\
+           -     Multinomial distribution
 
 
 
 
    .. container:: section
-      :name: GUID-290E2BFD-AAD2-4AD4-9691-27F18A6CA131
-
 
       .. rubric:: Modes of random number generation
          :name: modes-of-random-number-generation
@@ -172,7 +116,6 @@ Distributions
       parameter in generator routines. List of distributions that
       support accurate mode of generation is given in the table below.
 
-
     
    **Parent topic:** :ref:`onemkl_rng`
 
@@ -194,6 +137,7 @@ Distributions
     mkl-rng-gamma
     mkl-rng-beta
     mkl-rng-chi_square
+    mkl-rng-gaussian_mv
     mkl-rng-uniform-discrete
     mkl-rng-uniform_bits
     mkl-rng-bits

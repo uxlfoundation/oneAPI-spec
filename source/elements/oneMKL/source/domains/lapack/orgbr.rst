@@ -1,222 +1,214 @@
+.. _onemkl_lapack_orgbr:
 
 orgbr
 =====
 
+Generates the real orthogonal matrix :math:`Q` or :math:`P^{T}`
+determined by
+:ref:`onemkl_lapack_gebrd`.
 
-.. container::
+``orgbr`` supports the following precisions.
 
+    .. list-table:: 
+       :header-rows: 1
 
-   Generates the real orthogonal matrix ``Q`` or ``P``\ :sup:`T`
-   determined by
-   `gebrd <gebrd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-8A4CB9DA-644B-400E-91C7-78BBD3E3FDAA
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void orgbr(queue &exec_queue, generate gen,      std::int64_t m, std::int64_t n, std::int64_t k, buffer<T,1> &a,      std::int64_t lda, buffer<T,1> &tau, buffer<T,1> &work,      std::int64_t lwork, buffer<std::int64_t,1> &info)
-
-      ``orgbr`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-
-
-
+       * -  T 
+       * -  ``float`` 
+       * -  ``double`` 
 
 .. container:: section
-   :name: GUID-D3C6AFAC-CF9D-4ACC-8AE7-4A80C12DC86B
 
+  .. rubric:: Description
+      
+The routine generates the whole or part of the orthogonal matrices
+:math:`Q` and :math:`P^{T}` formed by the routines :ref:`onemkl_lapack_gebrd`.
+All valid combinations of arguments are described in *Input parameters*. In
+most cases you need the following:
 
-   .. rubric:: Description
-      :class: sectiontitle
+To compute the whole :math:`m \times m` matrix :math:`Q`:
 
+::
 
-   The routine generates the whole or part of the orthogonal matrices
-   ``Q`` and ``P``\ :sup:`T` formed by the routines
-   `gebrd <gebrd.html>`__/.
-   Use this routine after a call to sgebrd/dgebrd. All valid
-   combinations of arguments are described in *Input parameters*. In
-   most cases you need the following:
+   orgbr(queue, generate::q, m, m, n, a, ...)
 
+(note that the array ``a`` must have at least :math:`m` columns).
 
-   To compute the whole ``m``-by-``m`` matrix ``Q``:
+To form the :math:`n` leading columns of :math:`Q` if :math:`m > n`:
 
+::
 
-   ::
+   orgbr(queue, generate::q, m, n, n, a, ...)
 
+To compute the whole :math:`n \times n` matrix :math:`P^{T}`:
 
-      orgbr(queue, generate::q, m, m, n, a, …)
+::
 
+   orgbr(queue, generate::p, n, n, m, a, ...)
 
-   (note that the array ``a`` must have at least ``m`` columns).
+(note that the array ``a`` must have at least :math:`n` rows).
 
+To form the :math:`m` leading rows of :math:`P^{T}` if :math:`m < n`:
 
-   To form the ``n`` leading columns of ``Q`` if ``m > n``:
+::
 
+   orgbr(queue, generate::p, m, n, m, a, ...)
 
-   ::
-
-
-      orgbr(queue, generate::q, m, n, n, a, …)
-
-
-   To compute the whole ``n``-by-``n`` matrix ``P``\ :sup:`T`:
-
-
-   ::
-
-
-      orgbr(queue, generate::p, n, n, m, a, …)
-
-
-   (note that the array ``a`` must have at least ``n`` rows).
-
-
-   To form the ``m`` leading rows of ``P``\ :sup:`T` if ``m < n``:
-
-
-   ::
-
-
-      orgbr(queue, generate::p, m, n, m, a, …)
-
+orgbr (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
 
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   gen
-      Must be ``generate::q`` or ``generate::p``.
-
-
-      If gen\ ``= generate::q``, the routine generates the matrix ``Q``.
-
-
-      If gen\ ``= generate::p``, the routine generates the matrix
-      ``P``\ :sup:`T`.
-
-
-   m
-      The number of rows in the matrix ``Q`` or ``P``\ :sup:`T` to be
-      returned ``(0≤m)``.
-
-
-      If gen\ ``= generate::q``, ``m ≥ n ≥ min(m, k)``.
-
-
-      If gen\ ``= generate::p``, ``n ≥ m ≥ min(n, k)``.
-
-
-   n
-      The number of rows in the matrix ``Q`` or ``P``\ :sup:`T` to be
-      returned ``(0≤n)``. See m for constraints.
-
-
-   k
-      If gen\ ``= generate::q``, the number of columns in the original
-      ``m``-by-k matrix reduced by
-      `gebrd <gebrd.html>`__.
-
-
-      If gen\ ``= generate::p``, the number of rows in the original
-      ``k``-by-n matrix reduced by
-      `gebrd <gebrd.html>`__.
-
-
-   a
-      The buffer a returned by
-      `gebrd <gebrd.html>`__.
-
-
-   lda
-      The leading dimension of a.
-
-
-   tau
-      Buffer, size ``min (m,k)`` if gen\ ``= generate::q``, size
-      ``min(n,k)`` if gen\ ``= generate::p``. Scalar factor of the
-      elementary reflectors, as returned by ``gebrd`` in the array tauq
-      or taup.
-
-
-   lwork
-      The size of the work array. Must be computed by
-      `orgbr_get_lwork <orgqr_get_lwork.html>`__.
-
+  .. rubric:: Syntax
+         
+.. cpp:function::  void oneapi::mkl::lapack::orgbr(cl::sycl::queue &queue, onemkl::generate gen,      std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a,      std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad,      std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-BDC93D26-A415-4030-8222-D0EA7B5FC76B
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+gen
+   Must be ``generate::q`` or ``generate::p``.
 
-   a
-      Overwritten by n leading columns of the m-by-m orthogonal matrix
-      ``Q`` or ``P``\ :sup:`T` (or the leading rows or columns thereof)
-      as specified by gen, m, and n.
+   If ``gen = generate::q``, the routine generates the matrix :math:`Q`.
 
+   If ``gen = generate::p``, the routine generates the matrix
+   :math:`P^{T}`.
 
-   work
-      Workspace for internal computations.
+m
+   The number of rows in the matrix :math:`Q` or :math:`P^{T}` to be
+   returned :math:`(0 \le m)`.
 
+   If ``gen = generate::q``, :math:`m \le n \le \min(m, k)`.
 
-   info
-      Buffer containing error information.
+   If ``gen = generate::p``, :math:`n \le m \le \min(n, k)`.
 
+n
+   The number of rows in the matrix :math:`Q` or :math:`P^{T}` to be
+   returned :math:`(0 \le n)`. See m for constraints.
 
-      If info\ ``= 0``, the execution is successful.
+k
+   If ``gen = generate::q``, the number of columns in the original
+   :math:`m \times k` matrix reduced by
+   :ref:`onemkl_lapack_gebrd`.
 
+   If ``gen = generate::p``, the number of rows in the original
+   :math:`k \times n` matrix reduced by
+   :ref:`onemkl_lapack_gebrd`.
 
-      If info\ ``= -i``, the ``i``-th parameter had an illegal value.
+a
+   The buffer ``a`` as returned by
+   :ref:`onemkl_lapack_gebrd`.
 
+lda
+   The leading dimension of ``a``.
+
+tau
+   Buffer, size :math:`\min(m,k)` if ``gen = generate::q``, size
+   :math:`\min(n,k)` if ``gen = generate::p``. Scalar factor of the
+   elementary reflectors, as returned by :ref:`onemkl_lapack_gebrd` in the array tauq
+   or taup.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_orgbr_scratchpad_size` function.
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Output Parameters
 
-   .. rubric:: Example
-      :class: sectiontitle
+a
+   Overwritten by n leading columns of the :math:`m \times m` orthogonal matrix
+   :math:`Q` or :math:`P^{T}` (or the leading rows or columns thereof)
+   as specified by ``gen``, ``m``, and ``n``.
 
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
-   An example of how to use ``orgbr``\ can be found in the oneMKL
-   installation directory, under:
+orgbr (USM Version)
+----------------------
 
+.. container:: section
 
-   ::
+  .. rubric:: Syntax
+         
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgbr(cl::sycl::queue &queue, onemkl::generate gen,      std::int64_t m, std::int64_t n, std::int64_t k, T *a,      std::int64_t lda, T *tau, T *scratchpad,      std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-      examples/sycl/lapack/orgbr.cpp
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
+gen
+   Must be ``generate::q`` or ``generate::p``.
 
-.. container:: familylinks
+   If ``gen = generate::q``, the routine generates the matrix :math:`Q`.
 
+   If ``gen = generate::p``, the routine generates the matrix
+   :math:`P^{T}`.
 
-   .. container:: parentlink
+m
+   The number of rows in the matrix :math:`Q` or :math:`P^{T}` to be
+   returned :math:`(0 \le m)`.
 
+   If ``gen = generate::q``, :math:`m \le n \le \min(m, k)`.
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+   If ``gen = generate::p``, :math:`n \le m \le \min(n, k)`.
 
+n
+   The number of rows in the matrix :math:`Q` or :math:`P^{T}` to be
+   returned :math:`(0 \le n)`. See m for constraints.
+
+k
+   If ``gen = generate::q``, the number of columns in the original
+   :math:`m \times k` matrix reduced by
+   :ref:`onemkl_lapack_gebrd`.
+
+   If ``gen = generate::p``, the number of rows in the original
+   :math:`k \times n` matrix reduced by
+   :ref:`onemkl_lapack_gebrd`.
+
+a
+   Pointer to array ``a`` as returned by
+   :ref:`onemkl_lapack_gebrd`.
+
+lda
+   The leading dimension of ``a``.
+
+tau
+   Pointer to array of size :math:`\min(m,k)` if ``gen = generate::q``, size
+   :math:`\min(n,k)` if ``gen = generate::p``. Scalar factor of the
+   elementary reflectors, as returned by :ref:`onemkl_lapack_gebrd` in the array tauq
+   or taup.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_orgbr_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+a
+   Overwritten by n leading columns of the :math:`m \times m` orthogonal matrix
+   :math:`Q` or :math:`P^{T}` (or the leading rows or columns thereof)
+   as specified by ``gen``, ``m``, and ``n``.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+         
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 

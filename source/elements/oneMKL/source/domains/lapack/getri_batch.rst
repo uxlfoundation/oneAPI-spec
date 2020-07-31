@@ -1,143 +1,213 @@
+.. _onemkl_lapack_getri_batch:
 
 getri_batch
 ===========
 
+Computes the inverses of a batch of LU-factored matrices determined by :ref:`onemkl_lapack_getrf_batch`.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
 
-   Computes the inverses of a batch of LU-factored matrices determined
-   by `getrf_batch <getrf_batch.html>`__.
-   This routine belongs to the ``onemkl::lapack``\ namespace.
+``getri_batch`` supports the following precisions.
 
+   .. list-table:: 
+      :header-rows: 1
 
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+.. _onemkl_lapack_getri_batch_buffer:
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+getri_batch (Buffer Version)
+----------------------------
 
+.. container:: section
 
-      .. container:: dlsyntaxpara
+  .. rubric:: Description
 
+The buffer version of ``getri_batch`` supports only the strided API. 
 
-         .. cpp:function::  void getri_batch(queue &exec_queue,         std::vector<std::int64_t> const& n, std::vector<buffer<T,1>>         &a, std::vector<std::int64_t> const& lda,         std::vector<buffer<std::int64_t,1>> & ipiv,         std::vector<buffer<std::int64_t,1>> &info)
+**Strided API**
 
-         ``getri_batch`` supports the following precisions.
+The routine computes the inverses :math:`A_i^{-1}` of general matrices :math:`A_i`. Before calling this routine, call the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function to factorize :math:`A_i`.
 
+.. container:: section
 
-         .. list-table:: 
-            :header-rows: 1
+  .. rubric:: Syntax
 
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
+.. cpp:function::  void oneapi::mkl::lapack::getri_batch(cl::sycl::queue &queue, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
+.. container:: section
 
+  .. rubric:: Input Parameters
 
+queue
+  Device queue where calculations will be performed.
 
-   .. container:: section
-      :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
+n
+  Order of the matrices :math:`A_i` (:math:`0 \le n`).
 
+a
+  Result of the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function.
 
-      .. rubric:: Description
-         :class: sectiontitle
+lda
+  Leading dimension of :math:`A_i` (:math:`n\le \text{lda}`).
 
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
-      The routine computes the inverses ``A``\ :sub:`i`\ :sup:`-1` of a
-      batch of general matrices ``A``\ :sub:`i`, ``A``\ :sub:`2`, …,
-      ``A``\ :sub:`batch_size` . Before calling this routine, call
-      `getrf_batch <getrf_batch.html>`__
-      to compute the LU factorization of ``A``\ :sub:`i`,
-      ``A``\ :sub:`2`, …, ``A``\ :sub:`batch_size`.
+ipiv
+  Arrays returned by the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function.
 
+stride_ipiv
+  Stride between the beginnings of arrays :math:`\text{ipiv}_i` inside the array ``ipiv``.
 
-   .. container:: section
-      :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
+batch_size
+  Number of problems in a batch.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less than the value returned by the Strided API of the :ref:`onemkl_lapack_getri_batch_scratchpad_size` function.
 
+.. container:: section
 
-      exec_queue
-         The queue where the routine should be executed.
+  .. rubric:: Output Parameters
 
+a
+  Inverse :math:`n \times n` matrices :math:`A_i^{-1}`.
 
-      n
-         A vector, ``n[i]`` is order of the matrix
-         ``A``\ :sub:`i`\ ``(0≤n[i])``.
+getri_batch (USM Version)
+-------------------------
 
+.. container:: section
 
-      a
-         A vector of buffers returned by
-         `getrf_batch <getrf_batch.html>`__.
-         ``a[i]`` must be of size at least ``lda[i]*max(1, n[i])``.
+  .. rubric:: Description
 
+The USM version of ``getri_batch`` supports the group API and strided API. 
 
-      lda
-         A vector, ``lda[i]`` is the leading dimension of
-         ``a[i] (n[i]≤lda[i])``.
+**Group API**
 
+The routine computes the inverses :math:`A_i^{-1}` of general matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`. Before calling this routine, call the Group API of the :ref:`onemkl_lapack_getrf_batch_usm` function to factorize :math:`A_i`.
+Total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array.
 
-      ipiv
-         A vector of buffers returned by
-         `getrf_batch <getrf_batch.html>`__
-         . The dimension of ``ipiv[i]`` must be at least
-         ``max(1, n[i])``.
+.. container:: section
 
+  .. rubric:: Syntax
 
-   .. container:: section
-      :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getri_batch(cl::sycl::queue &queue, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t **ipiv, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-      .. rubric:: Output Parameters
-         :class: sectiontitle
+  .. rubric:: Input Parameters
 
+queue
+  Device queue where calculations will be performed.
 
-      a
-         ``a[i]`` is overwritten by the ``n[i]``-by-``n[i]`` inverse
-         matrix ``A``\ :sub:`i`\ :sup:`-1`.
+n
+  Array of ``group_count`` :math:`n_g` parameters specifying the order of the matrices :math:`A_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
 
+a
+  Result of the Group API of the :ref:`onemkl_lapack_getrf_batch_usm` function.
 
-      info
-         Vector of buffers containing error information.
+lda
+  Array of ``group_count`` :math:`\text{lda}_g` parameters specifying the leading dimensions of the matrices :math:`A_i` (:math:`n_g \le \text{lda}_g`) belonging to group :math:`g`.
 
+ipiv
+  Arrays returned by the Group API of the :ref:`onemkl_lapack_getrf_batch_usm` function.
 
-         If ``info[i]=0``, the execution is successful.
+group_count
+  Number of groups of parameters. Must be at least 0.
 
+group_sizes
+  Array of ``group_count`` integers. Array element with index :math:`g` specifies the number of problems to solve for each of the groups of parameters :math:`g`. So the total number of problems to solve, ``batch_size``, is a sum of all parameter group sizes.
 
-         If ``info[i]=-k``, the ``k``-th parameter had an illegal value.
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
+scratchpad_size
+  Size of scratchpad memory as a number of floating point elements of  type ``T``. Size should not be less than the value returned by the Group API of the :ref:`onemkl_lapack_getri_batch_scratchpad_size` function.
 
-   .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
+.. container:: section
 
-      .. rubric:: Example
-         :class: sectiontitle
+  .. rubric:: Output Parameters
 
+a
+  Inverse :math:`n_g \times n_g` matrices :math:`A_i^{-1}`.
 
-      An example of how to use getri_batch can be found in the oneMKL
-      installation directory, under:
+.. container:: section
+   
+  .. rubric:: Return Values
 
+Output event to wait on to ensure computation is complete.
 
-      ::
+**Strided API**
 
+The routine computes the inverses :math:`A_i^{-1}` of general matrices :math:`A_i`. Before calling this routine, call the Strided API of the :ref:`onemkl_lapack_getrf_batch_usm` function to factorize :math:`A_i`.
 
-         examples/sycl/lapack/LU_batch.cpp
+.. container:: section
+   
+  .. rubric:: Syntax
 
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getri_batch(cl::sycl::queue &queue, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
 
-.. container:: familylinks
+.. container:: section
 
+  .. rubric:: Input Parameters
 
-   .. container:: parentlink
+queue
+  Device queue where calculations will be performed.
 
+n
+  Order of the matrices :math:`A_i` (:math:`0 \le n`).
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+a
+  Result of the Strided API of the :ref:`onemkl_lapack_getrf_batch_usm` function.
 
+lda
+  Leading dimension of :math:`A_i` (:math:`n \le \text{lda}`).
+
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
+
+ipiv
+  Arrays returned by the Strided API of the :ref:`onemkl_lapack_getrf_batch_usm` function.
+
+stride_ipiv
+  Stride between the beginnings of arrays :math:`\text{ipiv}_i` inside the array ``ipiv``.
+
+batch_size
+  Number of problems in a batch.
+
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
+
+scratchpad_size 
+  Size of scratchpad memory as a number of floating point elements of type ``T``. Size should not be less than the value returned by the Strided API of the :ref:`onemkl_lapack_getri_batch_scratchpad_size` function.
+
+events
+  List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+a
+  Inverse :math:`n \times n` matrices :math:`A_i^{-1}`.
+
+.. container:: section
+   
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

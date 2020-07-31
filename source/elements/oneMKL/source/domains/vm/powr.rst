@@ -1,3 +1,4 @@
+.. _onemkl_vm_powr:
 
 powr
 ====
@@ -11,7 +12,6 @@ powr
 
 
    .. container:: section
-      :name: SYNTAX_0ACC976C27864E859D5C4385DE3EBC25
 
 
       .. rubric:: Syntax
@@ -21,35 +21,34 @@ powr
       Buffer API:
 
 
-      .. cpp:function::  void powr(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::powr(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event powr(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::powr(queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``powr`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-4F551F28-28FE-4426-B33E-DFF1778B1FDC
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The powr(a,b) function raises each element of vector ``a`` by the
+   The powr(a, b) function raises each element of vector ``a`` by the
    corresponding element of vector ``b``. The elements of ``a`` are all
    nonnegative (``a``\ :sub:`i`\ ≥ 0).
 
@@ -57,15 +56,15 @@ powr
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Data Type 
-           -  Threshold Limitations on Input Parameters 
-         * -  single precision 
-           -  ``a``\ :sub:`i` < (FLT_MAX)\ :sup:`1/``b``\ i` 
-         * -  double precision 
-           -  ``a``\ :sub:`i` < (DBL_MAX)\ :sup:`1/``b``\ i` 
+         * - Data Type
+           - Threshold Limitations on Input Parameters
+         * - single precision
+           - ``a``\ :sub:`i` < (FLT_MAX)\ :sup:`1/``b``\ i`
+         * - double precision
+           - ``a``\ :sub:`i` < (DBL_MAX)\ :sup:`1/``b``\ i`
 
 
 
@@ -77,103 +76,102 @@ powr
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 1 
-           -  Argument 2 
-           -  Result 
-           -  Error Code 
-         * -  ``a`` < 0 
-           -  any value ``b`` 
-           -  NAN 
-           -  ``status::errdom`` 
-         * -  0 < ``a`` < ∞ 
-           -  ±0 
-           -  1 
-           -    
-         * -  ±0 
-           -  -∞ < ``b`` < 0 
-           -  +∞ 
-           -    
-         * -  ±0 
-           -  -∞ 
-           -  +∞ 
-           -    
-         * -  ±0 
-           -  ``b`` > 0 
-           -  +0 
-           -    
-         * -  1 
-           -  -∞ < ``b`` < ∞ 
-           -  1 
-           -    
-         * -  ±0 
-           -  ±0 
-           -  NAN 
-           -    
-         * -  +∞ 
-           -  ±0 
-           -  NAN 
-           -    
-         * -  1 
-           -  +∞ 
-           -  NAN 
-           -    
-         * -  ``a``\ ≥ 0 
-           -  NAN 
-           -  NAN 
-           -    
-         * -  NAN 
-           -  any value ``b`` 
-           -  NAN 
-           -    
-         * -  0 < ``a`` <1 
-           -  -∞ 
-           -  +∞ 
-           -    
-         * -  ``a`` > 1 
-           -  -∞ 
-           -  +0 
-           -    
-         * -  0 ≤\ ``a`` < 1 
-           -  +∞ 
-           -  +0 
-           -    
-         * -  ``a`` > 1 
-           -  +∞ 
-           -  +∞ 
-           -    
-         * -  +∞ 
-           -  ``b`` < +0 
-           -  +0 
-           -    
-         * -  +∞ 
-           -  ``b`` > +0 
-           -  +∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  QNAN 
-           -  SNAN 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  SNAN 
-           -  QNAN 
-           -  QNAN 
-           -  ``status::errdom`` 
-         * -  SNAN 
-           -  SNAN 
-           -  QNAN 
-           -  ``status::errdom`` 
+         * - Argument 1
+           - Argument 2
+           - Result
+           - Error Code
+         * - ``a`` < 0
+           - any value ``b``
+           - NAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - 0 < ``a`` < ∞
+           - ±0
+           - 1
+           -  
+         * - ±0
+           - -∞ < ``b`` < 0
+           - +∞
+           -  
+         * - ±0
+           - -∞
+           - +∞
+           -  
+         * - ±0
+           - ``b`` > 0
+           - +0
+           -  
+         * - 1
+           - -∞ < ``b`` < ∞
+           - 1
+           -  
+         * - ±0
+           - ±0
+           - NAN
+           -  
+         * - +∞
+           - ±0
+           - NAN
+           -  
+         * - 1
+           - +∞
+           - NAN
+           -  
+         * - ``a``\ ≥ 0
+           - NAN
+           - NAN
+           -  
+         * - NAN
+           - any value ``b``
+           - NAN
+           -  
+         * - 0 < ``a`` <1
+           - -∞
+           - +∞
+           -  
+         * - ``a`` > 1
+           - -∞
+           - +0
+           -  
+         * - 0 ≤\ ``a`` < 1
+           - +∞
+           - +0
+           -  
+         * - ``a`` > 1
+           - +∞
+           - +∞
+           -  
+         * - +∞
+           - ``b`` < +0
+           - +0
+           -  
+         * - +∞
+           - ``b`` > +0
+           - +∞
+           -  
+         * - QNAN
+           - QNAN
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - QNAN
+           - SNAN
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - SNAN
+           - QNAN
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
+         * - SNAN
+           - SNAN
+           - QNAN
+           - ``oneapi::mkl::vm::status::errdom``
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -201,14 +199,14 @@ powr
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -238,20 +236,19 @@ powr
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -276,31 +273,12 @@ powr
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use powr can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vpowr.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
 
-      **Parent topic:** `Power and Root
-      Functions <power-and-root-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

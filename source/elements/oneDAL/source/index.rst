@@ -3,9 +3,9 @@
 
 .. _oneDAL-section:
 
-==============================
-|dal_short_name| |dal_version|
-==============================
+================
+|dal_short_name|
+================
 
 
 .. |default_ctor_doc| replace:: Creates a new instance of class \
@@ -30,7 +30,7 @@ For general information, visit |github|_.
    :titlesonly:
 
    introduction.rst
-   terminology.rst
+   glossary.rst
    notations.rst
    programming_model/index.rst
    common_interface/index.rst

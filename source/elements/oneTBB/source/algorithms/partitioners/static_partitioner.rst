@@ -1,45 +1,17 @@
-========================
-static_partitioner Class
-========================
+==================
+static_partitioner
+==================
+**[algorithms.static_partitioner]**
 
-
-Summary
--------
-
-Specify that a parallel algorithm should distribute the work uniformly across threads and
+Specifies that a parallel algorithm should distribute the work uniformly across threads and
 should not do additional load balancing.
 
-Header
-------
-
-.. code:: cpp
-
-   #include "tbb/partitioner.h"
-         
-
-
-Syntax
-------
-
-.. code:: cpp
-
-   class static_partitioner;
-
-
-Description
------------
-
-An algorithm with a ``static_partitioner`` distributes the range across threads
-in subranges of approximately equal size. The number of subranges is equal to the number of
+An algorithm with a ``static_partitioner`` distributes the range across threads in subranges
+of approximately equal size.  The number of subranges is equal to the number of
 threads that can possibly participate in task execution, as specified by
-``task_scheduler_init`` and ``task_arena`` classes. These
-subranges are not further split.
-
-.. caution::
-
-   ``static_partitioner`` reduces overheads for parallel algorithms
-   where the work is originally well-balanced. However, it also limits available
-   parallelism, and in case of work imbalance may result in performance loss.
+:doc:`global_contol <../../task_scheduler/scheduling_controls/global_control_cls>`
+or :doc:`task_arena <../../task_scheduler/task_arena/task_arena_cls>` classes.
+These subranges are not further split.
 
 .. caution::
 
@@ -47,54 +19,35 @@ subranges are not further split.
    proportional splitting, or if the grain size is set larger than the
    size of the range divided by the number of threads participating in task execution.
 
-In addition, ``static_partitioner`` uses a deterministic task affinity pattern
-to hint the task scheduler how the subranges should be assigned to threads. It might
-therefore improve cache locality similarly to ``affinity_partitioner``.
+In addition, ``static_partitioner`` uses a deterministic task affinity pattern to hint the task scheduler
+how the subranges should be assigned to threads.
+
+The ``static_partitioner`` class satisfies the *CopyConstructibe* requirement from the ISO C++ [utility.arg.requirements] section.
 
 .. tip::
 
-   Use of ``static_partitioner`` is recommended for:
-   
-   * Parallelizing small well-balanced workloads where enabling additional load balancing
-     opportunities would bring more overhead than performance benefits.
-   * Porting OpenMP* parallel loops with ``schedule(static)`` if deterministic
+   Use ``static_partitioner`` to:
+
+   * Parallelize small well-balanced workloads where enabling additional load balancing
+     opportunities brings more overhead than performance benefits.
+   * Port OpenMP* parallel loops with ``schedule(static)`` if deterministic
      work partitioning across threads is important.
-   
-
-
-Members
--------
 
 .. code:: cpp
 
-   namespace tbb {
-       class static_partitioner {
-       public:
-           static_partitioner();
-           ~static_partitioner();
-       };
-   }
-         
+    // Defined in header <tbb/partitioner.h>
 
-The following table provides additional information on the members of this class.
+    namespace tbb {
 
-= ========================================================================================
-\ Member, Description
-==========================================================================================
-\ ``static_partitioner()``
-  \
-  Construct a ``static_partitioner``.
-------------------------------------------------------------------------------------------
-\ ``~static_partitioner()``
-  \
-  Destroy this ``static_partitioner``.
-------------------------------------------------------------------------------------------
-= ========================================================================================
+        class static_partitioner {
+        public:
+           static_partitioner() = default;
+           ~static_partitioner() = default;
+        };
 
+    }
 
 See also:
 
-* :doc:`Partitioners <../partitioners>`
-* :doc:`proportional_split Class <../splittable_concept/proportional_split_cls>`
-* :doc:`Range Concept <../range_concept>`
-* :doc:`task_arena Class <../../task_scheduler/task_arena_cls>`
+* :doc:`Range named requirement <../../named_requirements/algorithms/range>`
+

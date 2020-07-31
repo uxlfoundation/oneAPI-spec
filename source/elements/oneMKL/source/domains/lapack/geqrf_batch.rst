@@ -1,157 +1,225 @@
+.. _onemkl_lapack_geqrf_batch:
 
 geqrf_batch
 ===========
 
+Computes the QR factorizations of a batch of general matrices.
 
-.. container::
+.. container:: section
 
+  .. rubric:: Description
 
-   Computes the QR factorizations of a batch of general matrices. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
+``geqrf_batch`` supports the following precisions.
 
+   .. list-table:: 
+      :header-rows: 1
 
-   .. container:: section
-      :name: GUID-814D7756-F1E2-4417-A0EA-B4294B8303D4
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
+.. _onemkl_lapack_geqrf_batch_buffer:
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+geqrf_batch (Buffer Version)
+----------------------------
 
+.. container:: section
 
-      .. container:: dlsyntaxpara
+  .. rubric:: Description
 
+The buffer version of ``geqrf_batch`` supports only the strided API. 
+ 
+**Strided API**
 
-         .. cpp:function::  void geqrf_batch(queue &exec_queue,         std::vector<std::int64_t> const& m, std::vector<std::int64_t>         const& n, std::vector<buffer<T,1>> &a,         std::vector<std::int64_t> const& lda, std::vector<buffer<T,1>>         & tau, std::vector<buffer<std::int64_t,1>> &info)
+.. container:: section
 
-         ``geqrf_batch`` supports the following precisions.
+   .. rubric:: Syntax
 
+.. cpp:function::  void oneapi::mkl::lapack::geqrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
 
-         .. list-table:: 
-            :header-rows: 1
+.. container:: section
 
-            * -  T 
-            * -  ``float`` 
-            * -  ``double`` 
-            * -  ``std::complex<float>`` 
-            * -  ``std::complex<double>`` 
+   .. rubric:: Input Parameters
 
+queue  
+   Device queue where calculations will be performed.
+ 
+m
+   Number of rows in matrices :math:`A_i` (:math:`0 \le m`).
 
+n  
+   Number of columns in matrices :math:`A_i` (:math:`0 \le n`).
 
+a
+   Array holding input matrices :math:`A_i`. 
 
-   .. container:: section
-      :name: GUID-A3A0248F-23B3-4E74-BDA2-BB8D23F19A50
+lda
+   Leading dimension of matrices :math:`A_i`.
 
+stride_a
+   Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
-      .. rubric:: Description
-         :class: sectiontitle
+stride_tau
+   Stride between the beginnings of arrays :math:`\tau_i` inside the array ``tau``.
 
+batch_size
+   Number of problems in a batch.
 
-      The routine forms the QR factorizations of a batch of general
-      matrices ``A``\ :sub:`1`, ``A``\ :sub:`2`, …,
-      ``A``\ :sub:`batch_size`. No pivoting is performed.
+scratchpad
+   Scratchpad memory to be used by routine for storing intermediate results.
+         
+scratchpad_size
+   Size of scratchpad memory as the number of floating point elements of type ``T``. Size should not be less than the value returned by the Strided API of the :ref:`onemkl_lapack_geqrf_batch_scratchpad_size` function.
 
+.. container:: section
 
-      The routine does not form the matrices ``Q``\ :sub:`i` explicitly.
-      Instead, ``Q``\ :sub:`i` is represented as a product of
-      ``min(mi, ni)`` elementary reflectors. Routines are provided to
-      work with ``Q``\ :sub:`i` in this representation.
+   .. rubric:: Output Parameters
+ 
+a
+  Factorization data as follows: The elements on and above the diagonal of :math:`A_i` contain the :math:`\min(m,n) \times n` upper trapezoidal matrices :math:`R_i` (:math:`R_i` is upper triangular if :math:`m \ge n`); the elements below the diagonal, with the array :math:`\tau_i`, contain the orthogonal matrix :math:`Q_i` as a product of :math:`\min(m,n)` elementary reflectors.
 
+tau 
+    Array to store batch of :math:`\tau_i`, each of size :math:`\min(m,n)`, containing scalars that define elementary reflectors for the matrices :math:`Q_i` in its decomposition in a product of elementary reflectors.
 
-   .. container:: section
-      :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
+.. _onemkl_lapack_geqrf_batch_usm:
 
+geqrf_batch (USM Version)
+-------------------------
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+.. container:: section
 
+  .. rubric:: Description
 
-      exec_queue
-         The queue where the routine should be executed.
+The USM version of ``geqrf_batch`` supports the group API and strided API. 
 
+**Group API**
 
-      m
-         A vector, ``m[i]`` is the number of rows of the batch matrix
-         ``A``\ :sub:`i`\ ``(0≤m[i])``.
+The routine forms the :math:`Q_iR_i` factorizations of a general :math:`m \times n` matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`, where ``batch_size`` is the sum of all parameter group sizes as provided with ``group_sizes`` array.
+No pivoting is performed during factorization.
+The routine does not form the matrices :math:`Q_i` explicitly. Instead, :math:`Q_i` is represented as a product of :math:`\min(m,n)` elementary reflectors. Routines are provided to work with :math:`Q_i` in this representation.
+The total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array.
 
+.. container:: section
 
-      n
-         A vector, ``n[i]`` is the number of columns of the batch matrix
-         ``A``\ :sub:`i`\ ``(0≤n[i])``.
+  .. rubric:: Syntax
 
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::geqrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
-      a
-         A vector of buffers, ``a[i]`` stores the matrix
-         ``A``\ :sub:`i`. ``a[i]`` must be of size at least
-         ``lda[i]*max(1, n[i])``.
+.. container:: section
 
+   .. rubric:: Input Parameters
 
-      lda
-         A vector, ``lda[i]`` is the leading dimension of
-         ``a[i] (m[i]≤lda[i])``.
+queue 
+  Device queue where calculations will be performed.
 
+m
+  Array of ``group_count`` :math:`m_g` parameters. Each :math:`m_g` specifies the number of rows in matrices :math:`A_i` from array ``a``, belonging to group :math:`g`.
 
-   .. container:: section
-      :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
+n 
+  Array of ``group_count`` :math:`n_g` parameters.
+  Each :math:`n_g` specifies the number of columns in matrices :math:`A_i` from array ``a``, belonging to group :math:`g`.
 
+a  
+  Array of ``batch_size`` pointers to input matrices :math:`A_i`, each of size :math:`\text{lda}_g\cdot n_g` (:math:`g` is an index of group to which :math:`A_i` belongs)
 
-      .. rubric:: Output Parameters
-         :class: sectiontitle
+lda
+  Array of ``group_count`` :math:`\text{lda}_g`` parameters, each representing the leading dimensions of input matrices :math:`A_i` from array ``a``, belonging to group :math:`g`.
 
+group_count
+  Specifies the number of groups of parameters. Must be at least 0.
 
-      a
-         Overwritten by the factorization data as follows:
+group_sizes 
+  Array of ``group_count`` integers. Array element with index :math:`g` specifies the number of problems to solve for each of the groups of parameters :math:`g`. So the total number of problems to solve, ``batch_size``, is a sum of all parameter group sizes.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
-         The elements on and above the diagonal of the buffer ``a[i]``
-         contain the ``min(m[i],n[i])``-by-``n[i]`` upper trapezoidal
-         matrix ``R``\ :sub:`i` (``R``\ :sub:`i` is upper triangular if
-         ``m[i]≥n[i]``); the elements below the diagonal, with the array
-         ``tau[i]``, present the orthogonal matrix ``Q``\ :sub:`i` as a
-         product of ``min(m[i],n[i])`` elementary reflectors.
+scratchpad_size
+  Size of scratchpad memory as the number of floating point elements of type ``T``. Size should not be less than the value returned by the Group API of the :ref:`onemkl_lapack_geqrf_batch_scratchpad_size` function.
 
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
-      tau
-         Vector of buffers, where ``tau[i]`` must have size at least
-         ``max(1,min(m[i], n[i]))``. Contains scalars that define
-         elementary reflectors for the matrix ``Q``\ :sub:`i` in its
-         decomposition in a product of elementary reflectors.
+.. container:: section
 
+   .. rubric:: Output Parameters
 
-      info
-         Vector of buffers containing error information.
+a
+  Factorization data as follows: The elements on and above the diagonal of :math:`A_i` contain the :math:`\min(m_g,n_g) \times n_g` upper trapezoidal matrices :math:`R_i` (:math:`R_i` is upper triangular if :math:`m_g \ge n_g`); the elements below the diagonal, with the array :math:`\tau_i`, contain the orthogonal matrix :math:`Q_i` as a product of :math:`\min(m_g,n_g)` elementary reflectors. Here :math:`g` is the index of the parameters group corresponding to the :math:`i`-th decomposition.
 
+tau
+  Array of pointers to store arrays :math:`\tau_i`, each of size :math:`\min(m_g,n_g)`, containing scalars that define elementary reflectors for the matrices :math:`Q_i` in its decomposition in a product of elementary reflectors. Here :math:`g` is the index of the parameters group corresponding to the :math:`i`-th decomposition.
 
-         If ``info[i]=0``, the execution is successful.
+.. container:: section
+   
+   .. rubric:: Return Values
 
+Output event to wait on to ensure computation is complete.
 
-         If ``info[i]=-k``, the ``k``-th parameter had an illegal value.
+**Strided API**
 
+The routine forms the :math:`Q_iR_i` factorizations of general :math:`m \times n` matrices :math:`A_i`. No pivoting is performed.
+The routine does not form the matrices :math:`Q_i` explicitly. Instead, :math:`Q_i` is represented as a product of :math:`\min(m,n)` elementary reflectors. Routines are provided to work with :math:`Q_i` in this representation.
 
-   .. container:: section
-      :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
+.. container:: section
 
+  .. rubric:: Syntax
 
-      .. rubric:: Example
-         :class: sectiontitle
+.. cpp:function::  sycl::event oneapi::mkl::lapack::geqrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-      An example of how to use geqrf_batch can be found in the oneMKL
-      installation directory, under:
+   .. rubric:: Input Parameters
 
+queue
+  Device queue where calculations will be performed.
 
-      ::
+m 
+  Number of rows in matrices :math:`A_i` (:math:`0 \le m`).
 
+n
+  Number of columns in matrices :math:`A_i` (:math:`0 \le n`).
 
-         examples/sycl/lapack/QR_batch.cpp
+a
+  Array holding input matrices :math:`A_i`.
 
+lda
+  Leading dimensions of :math:`A_i`.
 
-.. container:: familylinks
+stride_a
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
+stride_tau
+  Stride between the beginnings of arrays :math:`\tau_i` inside the array ``tau``.
 
-   .. container:: parentlink
+batch_size
+  Number of problems in a batch.
 
+scratchpad
+  Scratchpad memory to be used by routine for storing intermediate results.
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+scratchpad_size
+  Size of scratchpad memory as the number of floating point elements of type ``T``. Size should not be less than the value returned by the Strided API of the :ref:`onemkl_lapack_geqrf_batch_scratchpad_size` function.
 
+events
+  List of events to wait for before starting computation. Defaults to empty list.
 
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+a
+  Factorization data as follows: The elements on and above the diagonal of :math:`A_i` contain the :math:`\min(m,n) \times n` upper trapezoidal matrices :math:`R_i` (:math:`R_i` is upper triangular if :math:`m \ge n`); the elements below the diagonal, with the array :math:`\tau_i`, contain the orthogonal matrix :math:`Q_i` as a product of :math:`\min(m,n)` elementary reflectors.
+
+tau
+  Array to store batch of :math:`\tau_i`, each of size :math:`\min(m,n)`, containing scalars that define elementary reflectors for the matrices :math:`Q_i` in its decomposition in a product of elementary reflectors.
+
+.. container:: section
+   
+   .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`

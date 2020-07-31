@@ -88,7 +88,8 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 html_theme_options = {
-  'includehidden': False
+  'includehidden': False,
+  'collapse_navigation': False
 }
 
 html_context = {
@@ -159,8 +160,38 @@ latex_elements = {
                  '\\DeclareUnicodeCharacter{3C3}{$\\sigma$}'
                  '\\DeclareUnicodeCharacter{FB01}{$fi$}'
                  '\\DeclareUnicodeCharacter{FB02}{$fl$}'
+                 '\\newcommand{\\src}{\\operatorname{src}}'
+                 '\\newcommand{\\srclayer}{\\operatorname{src\\_layer}}'
+                 '\\newcommand{\\srciter}{\\operatorname{src\\_iter}}'
+                 '\\newcommand{\\srciterc}{\\operatorname{src\\_iter\\_c}}'
+                 '\\newcommand{\\weights}{\\operatorname{weights}}'
+                 '\\newcommand{\\weightslayer}{\\operatorname{weights\\_layer}}'
+                 '\\newcommand{\\weightsiter}{\\operatorname{weights\\_iter}}'
+                 '\\newcommand{\\weightspeephole}{\\operatorname{weights\\_peephole}}'
+                 '\\newcommand{\\weightsprojection}{\\operatorname{weights\\_projection}}'
+                 '\\newcommand{\\bias}{\\operatorname{bias}}'
+                 '\\newcommand{\\dst}{\\operatorname{dst}}'
+                 '\\newcommand{\\dstlayer}{\\operatorname{dst\\_layer}}'
+                 '\\newcommand{\\dstiter}{\\operatorname{dst\\_iter}}'
+                 '\\newcommand{\\dstiterc}{\\operatorname{dst\\_iter\\_c}}'
+                 '\\newcommand{\\diffsrc}{\\operatorname{diff\\_src}}'
+                 '\\newcommand{\\diffsrclayer}{\\operatorname{diff\\_src\\_layer}}'
+                 '\\newcommand{\\diffsrciter}{\\operatorname{diff\\_src\\_iter}}'
+                 '\\newcommand{\\diffsrciterc}{\\operatorname{diff\\_src\\_iter\\_c}}'
+                 '\\newcommand{\\diffweights}{\\operatorname{diff\\_weights}}'
+                 '\\newcommand{\\diffweightslayer}{\\operatorname{diff\\_weights\\_layer}}'
+                 '\\newcommand{\\diffweightsiter}{\\operatorname{diff\\_weights\\_iter}}'
+                 '\\newcommand{\\diffweightspeephole}{\\operatorname{diff\\_weights\\_peephole}}'
+                 '\\newcommand{\\diffweightsprojection}{\\operatorname{diff\\_weights\\_projection}}'
+                 '\\newcommand{\\diffbias}{\\operatorname{diff\\_bias}}'
+                 '\\newcommand{\\diffdst}{\\operatorname{diff\\_dst}}'
+                 '\\newcommand{\\diffdstlayer}{\\operatorname{diff\\_dst\\_layer}}'
+                 '\\newcommand{\\diffdstiter}{\\operatorname{diff\\_dst\\_iter}}'
+                 '\\newcommand{\\diffdstiterc}{\\operatorname{diff\\_dst\\_iter\\_c}}'
+                 '\\newcommand{\\diffgamma}{\\operatorname{diff\\_\\gamma}}'
+                 '\\newcommand{\\diffbeta}{\\operatorname{diff\\_\\beta}}'
+                 '\\newcommand{\\workspace}{\\operatorname{workspace}}'
     ),
-
 
     # Latex figure (float) alignment
     #

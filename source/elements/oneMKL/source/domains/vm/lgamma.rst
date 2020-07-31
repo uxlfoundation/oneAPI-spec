@@ -1,3 +1,4 @@
+.. _onemkl_vm_lgamma:
 
 lgamma
 ======
@@ -11,7 +12,6 @@ lgamma
 
 
    .. container:: section
-      :name: GUID-8730455C-72D0-4C56-AC39-80759E7F8868
 
 
       .. rubric:: Syntax
@@ -21,28 +21,27 @@ lgamma
       Buffer API:
 
 
-      .. cpp:function::  void lgamma(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined,      error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::lgamma(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event lgamma(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::lgamma(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``lgamma`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
+         * - T
+         * - ``float``
+         * - ``double``
 
 
 
 
 .. container:: section
-   :name: GUID-A776ADA1-C8A8-47C4-A4B3-2BDE01274F6A
 
 
    .. rubric:: Description
@@ -54,54 +53,53 @@ lgamma
    writes them to the output vector ``y``. Precision overflow thresholds
    for the lgamma function are beyond the scope of this document. If the
    result does not meet the target precision, the function sets the VM
-   Error Status to status::overflow.
+   Error Status to oneapi::mkl::vm::status::overflow.
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +1 
-           -  +0 
-           -    
-         * -  +2 
-           -  +0 
-           -    
-         * -  +0 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  -0 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  negative integer 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  -∞ 
-           -  +∞ 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  a > overflow 
-           -  +∞ 
-           -  ``status::overflow`` 
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +1
+           - +0
+           -  
+         * - +2
+           - +0
+           -  
+         * - +0
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -0
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - negative integer
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - -∞
+           - +∞
+           -  
+         * - +∞
+           - +∞
+           -  
+         * - a > overflow
+           - +∞
+           - ``oneapi::mkl::vm::status::overflow``
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -125,14 +123,14 @@ lgamma
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -158,20 +156,19 @@ lgamma
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -196,31 +193,11 @@ lgamma
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use lgamma can be found in the oneMKL
-   installation directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vlgamma.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Special
-      Functions <special-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

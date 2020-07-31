@@ -1,100 +1,172 @@
-.. _mkl-rng-uniform-continuous:
+.. _onemkl_rng_uniform_continuous:
 
-onemkl::rng::uniform (Continuous)
-=================================
+uniform (continuous)
+====================
 
+Class is used for generation of uniformly distributed real types random numbers.
 
-.. container::
+.. _onemkl_rng_uniform_continuous_description:
 
+.. rubric:: Description
 
-   Generates random numbers with uniform distribution.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
+interval, respectively, and :math:`a, b \in R; a < b`
 
+The probability distribution is given by:
 
-   .. container:: section
-      :name: GUID-6D277E22-1F56-4721-838C-CDCF9F1CEBE1
+.. math::
 
+    f_{a, b}(x) = \left\{ \begin{array}{rcl} \frac{1}{b-a}, x \in [a, b) \\ 0, x \notin [a, b) \end{array}\right.
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+The cumulative distribution function is as follows:
 
+.. math::
 
-      ::
-	 
-        template<typename T = float, method Method =      standard>
-          class uniform {
-          public:
-            uniform(): uniform((T)0.0, (T)1.0){}
-            uniform(Ta, T b)
-            uniform(const uniform<T, Method>& other)
-            T a() const
-            T b() const
-            uniform<T, Method>& operator=(const uniform<T,      Method>& other)
-          }
-
-      .. rubric:: Include Files
-         :class: sectiontitle
+    F_{a, b}(x) = \left\{ \begin{array}{rcl} 0, x < a \\ \frac{x - a}{b - a}, a \leq x < b, x \in R \\ 1, x \ge b \end{array}\right.
 
 
-      -  ``mkl_sycl.hpp``
+.. _onemkl_rng_uniform_continuous_syntax:
+
+class uniform
+-------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = uniform_method::by_default>
+    class uniform {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        uniform();
+        explicit uniform(RealType a, RealType b);
+        RealType a() const;
+        RealType b() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::uniform_method::by_default> \
+                oneapi::mkl::rng::uniform
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::uniform_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::uniform_method::by_default``
+                * ``oneapi::mkl::rng::uniform_method::standard``
+                * ``oneapi::mkl::rng::uniform_method::standard_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `uniform()`_
+          - Default constructor
+        * - `explicit uniform(RealType a, RealType b)`_
+          - Constructor with parameters
+        * - `RealType a() const`_
+          - Method to obtain left bound `a`
+        * - `RealType b() const`_
+          - Method to obtain right bound `b`
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: uniform::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation
+
+    .. container:: section
+
+        .. cpp:type:: uniform::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`uniform()`:
+
+        .. cpp:function:: uniform::uniform()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `a` = 0.0, `b` = 1.0
+
+    .. container:: section
+
+        .. _`explicit uniform(RealType a, RealType b)`:
+
+        .. cpp:function:: explicit uniform::uniform(RealType a, RealType b)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `a` is a left bound, `b` is a right bound, assume :math:`a < b`.
 
 
-      .. rubric:: Description
-         :class: sectiontitle
+.. container:: section
 
+    .. rubric:: Characteristics
 
-      The class object is used in onemkl::rng::generate function to provide
-      random numbers uniformly distributed over the interval [``a``,
-      ``b``), where ``a``, ``b`` are the left and right bounds of the
-      interval, respectively, and ``a``, ``b∈R`` ; ``a`` < ``b``.
+    .. container:: section
 
+        .. _`RealType a() const`:
 
-      The probability density function is given by:
+        .. cpp:function:: RealType uniform::a() const
 
+        .. container:: section
 
-      | 
-      | |image0|
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `a` - left bound.
 
-      The cumulative distribution function is as follows:
+    .. container:: section
 
+        .. _`RealType b() const`:
 
-      | 
-      | |image1|
+        .. cpp:function:: RealType uniform::b() const
 
+        .. container:: section
 
-      .. rubric:: Input Parameters
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `b` - right bound.
 
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Left bound ``a``\     
-         * -     b    
-           -     \ ``T (float, double)``\     
-           -     Right bound ``b``\     
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
-
-.. |image0| image:: ../equations/GUID-8AD223ED-624A-4390-9514-D8EF20BD04EE-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-0A8E6C61-9171-4584-927A-83AC482ADC4D-low.gif
-   :class: .eq
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

@@ -1,27 +1,28 @@
 .. _onemkl_api_design:
 
-API design in oneMKL
-----------------------
-This section discusses the general features of oneMKL API design.
+API Design
+-----------
+
+This section discusses the general features of oneMKL API design. In particular, it covers the use of namespaces and data types from C++, from DPC++ and new ones introduced for oneMKL APIs.
 
 .. _onemkl_namespaces:
 
 oneMKL namespaces
 ++++++++++++++++++
 
-The oneMKL library uses C++ namespaces to organize routines by mathematical domain.  All oneMKL objects and routines shall be contained within the ``onemkl`` base namespace.  The individual oneMKL domains use a secondary namespace layer as follows:
+The oneMKL library uses C++ namespaces to organize routines by mathematical domain.  All oneMKL objects and routines shall be contained within the ``oneapi::mkl`` base namespace.  The individual oneMKL domains use a secondary namespace layer as follows:
 
-===================  =======================================================================================================
-namespace            oneMKL domain or content
-===================  =======================================================================================================
-``onemkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
-``onemkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. See :ref:`onemkl_blas`
-``onemkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
-``onemkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
-``onemkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
-``onemkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
-``onemkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
-===================  =======================================================================================================
+========================  =======================================================================================================
+namespace                 oneMKL domain or content
+========================  =======================================================================================================
+``oneapi::mkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
+``oneapi::mkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. The oneapi::mkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
+``oneapi::mkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
+``oneapi::mkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
+``oneapi::mkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
+``oneapi::mkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
+``oneapi::mkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
+========================  =======================================================================================================
 
 
 .. _onemkl_cpp_datatypes:
@@ -34,18 +35,18 @@ oneMKL uses C++ STL data types for scalars where applicable:
 * Integer scalars are C++ fixed-size integer types (``std::intN_t``, ``std::uintN_t``).
 * Complex numbers are represented by C++ ``std::complex`` types.
 
-In general, scalar integer arguments to oneMKL routines are 64 bit integers (``std::int64_t`` or ``std::uint64_t``). Integer vectors and matrices may have varying bit widths, defined on a per-routine basis.
+In general, scalar integer arguments to oneMKL routines are 64-bit integers (``std::int64_t`` or ``std::uint64_t``). Integer vectors and matrices may have varying bit widths, defined on a per-routine basis.
 
 .. _onemkl_dpcpp_datatypes:
 
 DPC++ datatype usage
 ++++++++++++++++++++
 
-oneMKL uses following SYCL Language data types and DPC++ Language Extensions data types:
+oneMKL uses the following DPC++ data types:
 
 * SYCL queue ``sycl::queue`` for scheduling kernels on a SYCL device. See :ref:`onemkl_queues` for more details.
-* SYCL buffer ``sycl::buffer`` for buffer based memory access. See :ref:`onemkl_buffers` for more details.
-* DPC++ Extension Unified Shared Memory (USM) for pointer based memory access. See :ref:`onemkl_usm` for more details.
+* SYCL buffer ``sycl::buffer`` for buffer-based memory access. See :ref:`onemkl_buffers` for more details.
+* Unified Shared Memory (USM) for pointer-based memory access. See :ref:`onemkl_usm` for more details.
 * SYCL event ``sycl::event`` for output event synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
 * Vector of SYCL events ``sycl::vector_class<sycl::event>`` for input events synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
 
@@ -54,9 +55,11 @@ oneMKL uses following SYCL Language data types and DPC++ Language Extensions dat
 oneMKL defined datatypes
 ++++++++++++++++++++++++
 
-oneMKL linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in BLAS and LAPACK.  These types all belong to the ``onemkl`` namespace.  
+oneMKL dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``oneapi::mkl`` namespace.  
 
 Each enumeration value comes with two names: A single-character name (the traditional BLAS/LAPACK character) and a longer, more descriptive name. The two names are exactly equivalent and may be used interchangeably.
+
+      .. _onemkl_enum_transpose:
 
       .. rubric:: transpose
          :name: transpose
@@ -82,6 +85,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``transpose::C``
               -  ``transpose::conjtrans``
               -  Perform Hermitian transpose (transpose and conjugate). Only applicable to complex matrices.
+
+      .. _onemkl_enum_uplo:
 
       .. rubric:: uplo
          :name: uplo
@@ -109,6 +114,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
       In both cases, elements that are not in the selected triangle are
       not accessed or updated.
 
+      .. _onemkl_enum_diag:
+
       .. rubric:: diag
          :name: diag
          :class: sectiontitle
@@ -130,6 +137,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``diag::U``
               -  ``diag::unit``
               -  The matrix is unit triangular (the diagonal entries are all 1's). The diagonal entries in the matrix data are not accessed.
+
+      .. _onemkl_enum_side:
 
       .. rubric:: side
          :name: side
@@ -153,6 +162,8 @@ Each enumeration value comes with two names: A single-character name (the tradit
             * -  ``side::R``
               -  ``side::right``
               -  The special form matrix is on the right in the multiplication.
+
+      .. _onemkl_enum_offset:
 
       .. rubric:: offset
          :name: offset
@@ -180,3 +191,24 @@ Each enumeration value comes with two names: A single-character name (the tradit
               -  ``offset::row``
               -  The offset to apply to the output matrix is a row offset, that is to say all the rows in the ``C_offset`` matrix are the same and given by the elements in the ``co`` array.
 
+      .. _onemkl_enum_index_base:
+
+      .. rubric:: index_base
+         :name: index_base
+         :class: sectiontitle
+
+      The ``index_base`` type specifies how values in index arrays are interpreted. For instance, a sparse matrix stores nonzero values and the
+      indices that they correspond to.  The indices are traditionally provided in one of two forms: C/C++-style using zero-based
+      indices, or Fortran-style using one-based indices. The ``index_base`` type can take the following values:
+
+      .. container:: tablenoborder
+
+         .. list-table::
+            :header-rows: 1
+
+            * -  Name
+              -  Description
+            * -  ``index_base::zero``
+              -  Index arrays for an input matrix are provided using zero-based (C/C++ style) index values.  That is, indices start at 0.
+            * -  ``index_base::one``
+              -  Index arrays for an input matrix are provided using one-based (Fortran style) index values.  That is, indices start at 1.

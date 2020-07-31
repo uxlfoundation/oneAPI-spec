@@ -1,158 +1,126 @@
+.. _onemkl_lapack_getri:
 
 getri
 =====
 
-
-.. container::
-
-
-   Computes the inverse of an LU-factored general matrix determined by
-   `getrf <getrf.html>`__.This
-   routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-4E4EBE80-34FC-4800-A5DC-CE70693B32F9
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void getri_get_lwork(queue &exec_queue,      std::int64_t n, buffer<T,1> &a, std::int64_t lda,      buffer<std::int64_t,1> &ipiv, buffer<T,1> &work, std::int64_t      lwork, buffer<std::int64_t,1> &info)
-
-      ``getri`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Computes the inverse of an LU-factored general matrix determined by
+:ref:`onemkl_lapack_getrf`.
 
 .. container:: section
-   :name: GUID-7DD2B57C-5331-47B0-9C18-7BF816B60676
 
+  .. rubric:: Description
 
-   .. rubric:: Description
-      :class: sectiontitle
+``getri`` supports the following precisions.
 
+     .. list-table:: 
+        :header-rows: 1
+  
+        * -  T 
+        * -  ``float`` 
+        * -  ``double`` 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
-   The routine computes the inverse ``inv(A)`` of a general matrix
-   ``A``. Before calling this routine, call
-   `?getrf <getrf.html>`__
-   to factorize ``A``.
+The routine computes the inverse :math:`A^{-1}` of a general matrix
+:math:`A`. Before calling this routine, call :ref:`onemkl_lapack_getrf`
+to factorize :math:`A`.
 
-
-.. container:: section
-   :name: GUID-26A5866D-0DF8-4835-8776-E5E73F0C657A
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   n
-      The order of the matrix ``A``\ ``(0≤n)``.
-
-
-   a
-      The buffer a returned by
-      `getrf <getrf.html>`__. Must
-      be of size at least ``lda*max(1,n)``.
-
-
-   lda
-      The leading dimension of a\ ``(n≤lda)``.
-
-
-   ipiv
-      The buffer as returned by
-      `getrf <getrf.html>`__ . The
-      dimension of ipiv must be at least ``max(1, n)``.
-
-
-   lwork
-      The size of the work array ``(lwork≥n)``. Should be computed by
-      `getri_get_lwork <getri_get_lwork.html>`__.
-
+getri (BUFFER Version)
+----------------------
 
 .. container:: section
-   :name: GUID-399F00E4-1E32-4114-AC10-5A1B420E474E
 
+  .. rubric:: Syntax
 
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   a
-      Overwritten by the n-by-n matrix ``A``.
-
-
-   work
-      Buffer workspace for internal computations.
-
-
-   info
-      Buffer containing error information.
-
-
-      If ``info=0``, the execution is successful.
-
-
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
-
+.. cpp:function::  void oneapi::mkl::lapack::getri(cl::sycl::queue &queue,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda,      cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t      scratchpad_size)
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Example
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+n
+   The order of the matrix :math:`A` :math:`(0 \le n)`.
 
-   An example of how to use ``getri``\ can be found in the oneMKL
-   installation directory, under:
+a
+   The buffer ``a`` as returned by :ref:`onemkl_lapack_getrf`. Must
+   be of size at least :math:`\text{lda} \cdot \max(1,n)`.
 
+lda
+   The leading dimension of ``a`` :math:`(n \le \text{lda})`.
 
-   ::
+ipiv
+   The buffer as returned by :ref:`onemkl_lapack_getrf`. The
+   dimension of ``ipiv`` must be at least :math:`\max(1, n)`.
 
-
-      examples/sycl/lapack/getri.cpp
-
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_getri_scratchpad_size` function.
 
 .. container:: section
-   :name: GUID-3B00B441-C7C0-4D8A-A819-41037F1E5862
 
+  .. rubric:: Output Parameters
 
-   .. rubric:: Known Limitations
-      :class: sectiontitle
+a
+   Overwritten by the :math:`n \times n` matrix :math:`A`.
 
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
-   GPU support is for only real precisions.
+getri (USM Version)
+----------------------
 
+.. container:: section
 
-   For GPU support, errors are reported through the info parameter, but
-   computation does not halt for an algorithmic error.
+  .. rubric:: Syntax
 
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getri(cl::sycl::queue &queue,      std::int64_t n, T *a, std::int64_t lda, std::int64_t *ipiv, T *scratchpad, std::int64_t      scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
-.. container:: familylinks
+.. container:: section
 
+  .. rubric:: Input Parameters
 
-   .. container:: parentlink
+queue
+   The queue where the routine should be executed.
 
+n
+   The order of the matrix :math:`A` :math:`(0 \le n)`.
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+a
+   The array as returned by :ref:`onemkl_lapack_getrf`. Must
+   be of size at least :math:`\text{lda} \cdot \max(1,n)`.
 
+lda
+   The leading dimension of ``a`` :math:`(n \le \text{lda})`.
+
+ipiv
+   The array as returned by :ref:`onemkl_lapack_getrf`. The
+   dimension of ``ipiv`` must be at least :math:`\max(1, n)`.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_getri_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+
+a
+   Overwritten by the :math:`n \times n` matrix :math:`A`.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`
 

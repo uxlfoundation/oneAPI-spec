@@ -1,3 +1,4 @@
+.. _onemkl_vm_asinh:
 
 asinh
 =====
@@ -10,7 +11,6 @@ asinh
 
 
    .. container:: section
-      :name: GUID-67342CEA-AD7E-48E2-B261-6D04E8B92313
 
 
       .. rubric:: Syntax
@@ -20,30 +20,29 @@ asinh
       Buffer API:
 
 
-      .. cpp:function::  void asinh(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = mode::not_defined      )
+      .. cpp:function:: event oneapi::mkl::vm::asinh(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       USM API:
 
 
-      .. cpp:function::  event asinh(queue& exec_queue, int64_t n, T* a,      T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined )
+      .. cpp:function:: event oneapi::mkl::vm::asinh(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
 
       ``asinh`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-34F09044-BED2-4706-9B6A-3CE175D4C363
 
 
    .. rubric:: Description
@@ -57,30 +56,30 @@ asinh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 
-           -  Result 
-           -  Error Code 
-         * -  +0 
-           -  +0 
-           -    
-         * -  -0 
-           -  -0 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument
+           - Result
+           - Error Code
+         * - +0
+           - +0
+           -  
+         * - -0
+           - -0
+           -  
+         * - +∞
+           - +∞
+           -  
+         * - -∞
+           - -∞
+           -  
+         * - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - QNAN
+           -  
 
 
 
@@ -88,73 +87,73 @@ asinh
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -     RE(a)      i·IM(a)    
-           -     -∞           
-           -     -X           
-           -     -0           
-           -     +0           
-           -     +X           
-           -     +∞           
-           -     NAN           
-         * -  +i·∞ 
-           -  -∞+i·\ ``π``/4 
-           -  -∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/2 
-           -  +∞+i·\ ``π``/4 
-           -  +∞+i·QNAN 
-         * -  +i·Y 
-           -  -∞+i·0 
-           -    
-           -    
-           -    
-           -    
-           -  +∞+i·0 
-           -     QNAN+i·QNAN    
-         * -  +i·0 
-           -  +∞+i·0 
-           -    
-           -  +0+i·0 
-           -  +0+i·0 
-           -    
-           -  +∞+i·0 
-           -     QNAN+i·QNAN    
-         * -  -i·0 
-           -  -∞-i·0 
-           -    
-           -  -0-i·0 
-           -  +0-i·0 
-           -    
-           -  +∞-i·0 
-           -     QNAN-i·QNAN    
-         * -  -i·Y 
-           -  -∞-i·0 
-           -    
-           -    
-           -    
-           -    
-           -  +∞-i·0 
-           -     QNAN+i·QNAN    
-         * -  -i·∞ 
-           -  -∞-i·\ ``π``/4 
-           -  -∞-i·\ ``π``/2 
-           -  -∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/2 
-           -  +∞-i·\ ``π``/4 
-           -  +∞+i·QNAN 
-         * -  +i·NAN 
-           -  -∞+i·QNAN 
-           -     QNAN+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     QNAN+i·QNAN    
-           -     QNAN+i·QNAN    
-           -  +∞+i·QNAN 
-           -     QNAN+i·QNAN    
+         * - RE(a) i·IM(a)
+           - -∞  
+           - -X  
+           - -0  
+           - +0  
+           - +X  
+           - +∞  
+           - NAN  
+         * - +i·∞
+           - -∞+i·\ ``π``/4
+           - -∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/2
+           - +∞+i·\ ``π``/4
+           - +∞+i·QNAN
+         * - +i·Y
+           - -∞+i·0
+           -  
+           -  
+           -  
+           -  
+           - +∞+i·0
+           - QNAN+i·QNAN
+         * - +i·0
+           - +∞+i·0
+           -  
+           - +0+i·0
+           - +0+i·0
+           -  
+           - +∞+i·0
+           - QNAN+i·QNAN
+         * - -i·0
+           - -∞-i·0
+           -  
+           - -0-i·0
+           - +0-i·0
+           -  
+           - +∞-i·0
+           - QNAN-i·QNAN
+         * - -i·Y
+           - -∞-i·0
+           -  
+           -  
+           -  
+           -  
+           - +∞-i·0
+           - QNAN+i·QNAN
+         * - -i·∞
+           - -∞-i·\ ``π``/4
+           - -∞-i·\ ``π``/2
+           - -∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/2
+           - +∞-i·\ ``π``/4
+           - +∞+i·QNAN
+         * - +i·NAN
+           - -∞+i·QNAN
+           - QNAN+i·QNAN
+           - QNAN+i·QNAN
+           - QNAN+i·QNAN
+           - QNAN+i·QNAN
+           - +∞+i·QNAN
+           - QNAN+i·QNAN
 
 
 
@@ -165,14 +164,13 @@ asinh
    Notes:
 
 
-   -  ``asinh(CONJ(a))=CONJ(asinh(a))``
+   - ``asinh(CONJ(a))=CONJ(asinh(a))``
 
 
-   -  ``asinh(-a)=-asinh(a)``.
+   - ``asinh(-a)=-asinh(a)``.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -196,9 +194,9 @@ asinh
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    USM API:
@@ -222,13 +220,12 @@ asinh
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -253,31 +250,11 @@ asinh
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use asinh can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vasinh.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Hyperbolic
-      Functions <hyperbolic-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

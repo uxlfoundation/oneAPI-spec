@@ -1,36 +1,26 @@
-============================
-input_port Template Function
-============================
+==========
+input_port
+==========
+**[flow_graph.input_port]**
 
-
-Summary
--------
-
-A template function that given a 
-``join_node``, ``indexer_node`` or a  
-``composite_node`` returns a reference to a specific input
-port.
-
-Syntax
-------
+A template function that returns a reference to a specific input port of a given
+``join_node``, ``indexer_node`` or ``composite_node``.
 
 .. code:: cpp
 
-   template<size_t N, typename NT>
-   typename flow::tuple_element<N, typename NT::input_ports_type>::type&
-   input_port(NT &n);
+    // Defined in header <tbb/flow_graph.h>
 
+    namespace tbb {
+    namespace flow {
 
-Header
-------
+        template<size_t N, typename NodeType>
+        /*implementation-defined*/& input_port(NodeType &n);
 
-.. code:: cpp
-
-   #include "tbb/flow_graph.h"
-
+    } // namespace flow
+    } // namespace tbb
 
 See also:
 
-* :doc:`join_node Template Class <join_node_cls>`
-* :doc:`indexer_node Template Class <indexer_node_cls>`
-* :doc:`composite_node Template Class <composite_node_cls>`
+* :doc:`join_node template class <join_node_cls>`
+* :doc:`indexer_node template class <indexer_node_cls>`
+* :doc:`composite_node template class <composite_node_cls>`

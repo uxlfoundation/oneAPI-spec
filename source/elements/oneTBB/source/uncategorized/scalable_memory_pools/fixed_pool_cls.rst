@@ -78,7 +78,7 @@ of this class.
 ==========================================================================================
 \ ``fixed_pool(void *buffer, size_t size)``
   \
-  Constructs memory pool to manage the
+  Constructs a memory pool to manage the
   memory pointed by buffer and of size.
   
   Throws 

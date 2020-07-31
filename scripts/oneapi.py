@@ -48,9 +48,7 @@ sys.path.insert(0, os.path.abspath(join('source','conf')))
 import common_conf
 
 oneapi_spec_version = common_conf.env['oneapi_version']
-args = None
 
-        
 sphinx_build   = 'sphinx-build'
 source_dir     = 'source'
 build_dir      = 'build'
@@ -88,43 +86,57 @@ def log(*args, **kwargs):
     
 def shell(c):
     log(c)
-    if args.dry_run:
+    if cl_args.dry_run:
         return
     subprocess.check_call(c, shell=True)
 
 def rm(dir):
     log('rm -rf', dir)
-    if args.dry_run:
+    if cl_args.dry_run:
         return
     shutil.rmtree(dir, ignore_errors=True)
     
-def copytree(src, dst):
+from distutils.dir_util import copy_tree as copy_tree_update
+
+def copytree(src, dst, dirs_exist_ok=False):
     log('cp -r', src, dst)
-    if args.dry_run:
+    if cl_args.dry_run:
         return
-    shutil.copytree(src, dst)
+    # dirs_exist_ok needs python 3.8 or later, use copy_tree_update
+    # for now
+    if dirs_exist_ok:
+        copy_tree_update(src, dst)
+    else:
+        shutil.copytree(src, dst)
     
 def copy(src, dst):
     log('cp', src, dst)
-    if args.dry_run:
+    if cl_args.dry_run:
         return
     shutil.copy(src, dst)
     
 def makedirs(path):
     log('mkdir -p', path)
-    if args.dry_run:
+    if cl_args.dry_run:
         return
     os.makedirs(path)
 
 def sphinx(root, target):
-    if not args.verbose:
+    if not cl_args.verbose:
         os.environ['LATEXMKOPTS'] = '--silent'
         os.environ['LATEXOPTS'] = '-interaction=nonstopmode -halt-on-error'
+    sphinx_args = '-N -j auto'
+    if not cl_args.verbose:
+        sphinx_args += ' -q'
+    if cl_args.a:
+        sphinx_args += ' -a'
+    if cl_args.n:
+        sphinx_args += ' -n'
     shell('%s -M %s %s %s %s' % (sphinx_build,
                                  target,
                                  join(root,source_dir),
                                  join(root,build_dir),
-                                 '' if args.verbose else '-q'))
+                                 sphinx_args))
 
 def get_env(var):
     return os.environ[var] if var in os.environ else ''
@@ -218,19 +230,19 @@ def site_zip():
 @action
 def ci_publish(root, target=None):
     root_only(root)
-    if not args.branch:
+    if not cl_args.branch:
         exit('Error: --branch <branchname> is required')
     if 'AWS_SECRET_ACCESS_KEY' in os.environ and os.environ['AWS_SECRET_ACCESS_KEY'] != '':
-        shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, args.branch))
+        shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, cl_args.branch))
         log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
-            % (args.branch))
+            % (cl_args.branch))
     else:
         log('Skipping publishing the site because AWS access key is not available. This is expected when building a fork')
     
 @action
 def prod_publish(root, target=None):
     # sync staging to prod
-    shell("aws s3 sync --only-show-errors --delete s3://%s/ s3://spec.oneapi.com/ --exclude 'exclude/*'" % (staging_host))
+    shell("aws s3 sync --only-show-errors s3://%s/ s3://spec.oneapi.com/ --exclude 'exclude/*'" % (staging_host))
     log('published at http://spec.oneapi.com/')
     
 @action
@@ -270,25 +282,7 @@ def spec_venv(root, target=None):
     pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
     shell('%s install --quiet -r requirements.txt' % pip)
     
-@action
-def get_tarballs(root='.', target=None):
-    root_only(root)
-    print('exists',os.path.exists('tarballs'))
-    if args.dry_run or os.path.exists('tarballs'):
-        return
-    makedirs('tarballs')
-    for t in tarballs:
-        tf = join('tarballs','%s.tgz' % t)
-        url = 'https://spec.oneapi.com/tarballs/%s.tgz' % t
-        r = requests.get(url, stream = True)
-        log('wget', url, end = ' ')
-        with open(tf, 'wb') as tb:
-            for chunk in r.iter_content(chunk_size = 4 * 1024 * 1024):
-                if chunk:
-                    tb.write(chunk)
-                    log('.', end = '')
-            log('.')
-    
+
 @action
 def site(root, target=None):
     root_only(root)
@@ -304,17 +298,11 @@ def site(root, target=None):
     pdf = join('build','latex','oneAPI-spec.pdf')
     html = join('build','html')
     rm(site)
-    copytree('site-root','site')
     makedirs(versions)
     copytree(html, versions_x)
     copy(pdf, versions_x)
-    for t in tarballs:
-        tf = join('tarballs','%s.tgz' % t)
-        log('cd',versions_x,'&& tar zxf',tf)
-        if not args.dry_run:
-            with tarfile.open(tf) as tar:
-                tar.extractall(versions_x)
     copytree(versions_x, join(versions, 'latest'))
+    copytree('site-root','site', dirs_exist_ok = True)
 
 def remove_elements(l, elements):
     for e in elements:
@@ -322,14 +310,6 @@ def remove_elements(l, elements):
             l.remove(e)
     return l
 
-def purge(root, target=None):
-    root_only(root)
-    for (r,dirs,files) in os.walk('site', topdown=True):
-        r = r.replace('site/','')
-        dirs = remove_elements(dirs,['oneL0'])
-        for file in files:
-            print('http://spec.oneapi.com/%s/%s' % (r, file))
-    
 @action
 def sort_words(root, target=None):
     with open(join('source', 'spelling_wordlist.txt')) as fin:
@@ -341,11 +321,10 @@ def sort_words(root, target=None):
 @action
 def ci(root, target=None):
     root_only(root)
-    get_tarballs(root)
     site(root)
     build('.', 'spelling')
     site_zip()
-    if args.branch == 'publish' or args.branch == 'refs/heads/publish':
+    if cl_args.branch == 'publish' or cl_args.branch == 'refs/heads/publish':
         stage_publish(root)
     else:
         ci_publish(root)
@@ -355,7 +334,6 @@ staging_host = 'staging.spec.oneapi.com'
 commands = {'ci': ci,
             'ci-publish': ci_publish,
             'clean': clean,
-            'get-tarballs': get_tarballs,
             'dockerbuild': dockerbuild,
             'dockerpush': dockerpush,
             'dockerrun': dockerrun,
@@ -364,7 +342,6 @@ commands = {'ci': ci,
             'spelling': build,
             'prep': prep,
             'prod-publish': prod_publish,
-            'purge': purge,
             'site': site,
             'sort-words': sort_words,
             'spec-venv': spec_venv,
@@ -376,21 +353,22 @@ dirs = ['oneCCL',
         'oneTBB',
         'oneVPL',
         'dpcpp',
+        'l0',
         'oneDPL',
         'oneDNN']
 
-tarballs = ['oneL0']
-
 def main():
-    global args
+    global cl_args
     parser = argparse.ArgumentParser(description='Build oneapi spec.')
     parser.add_argument('action',choices=commands.keys(), default='html', nargs='?')
     parser.add_argument('root', nargs='?', default='.')
     parser.add_argument('--branch')
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
-    args = parser.parse_args()
+    parser.add_argument('-a', action='store_true', help='sphinx -a (build all files)')
+    parser.add_argument('-n', action='store_true', help='sphinx -n (nitpicky mode)')
+    cl_args = parser.parse_args()
 
-    commands[args.action](args.root, args.action)
+    commands[cl_args.action](cl_args.root, cl_args.action)
 
 main()

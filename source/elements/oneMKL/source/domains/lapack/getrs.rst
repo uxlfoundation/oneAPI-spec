@@ -1,196 +1,188 @@
+.. _onemkl_lapack_getrs:
 
 getrs
 =====
 
-
-.. container::
-
-
-   Solves a system of linear equations with an LU-factored square
-   coefficient matrix, with multiple right-hand sides. This routine
-   belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-CEF6C997-610F-4BC3-AC33-51ABDE4A9155
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void getrs(queue &exec_queue, transpose trans,      std::int64_t n, std::int64_t nrhs, buffer<T,1> &a, std::int64_t      lda, buffer<std::int64_t,1> &ipiv, buffer<T,1> &b, std::int64_t      ldb, buffer<std::int64_t,1> &info)
-
-      ``getrs`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Solves a system of linear equations with an LU-factored square
+coefficient matrix, with multiple right-hand sides.
 
 .. container:: section
-   :name: GUID-67E5209C-15F5-42EC-8B23-94B5B1680A14
 
-
-   .. rubric:: Description
-      :class: sectiontitle
-
-
-   The routine solves for ``X`` the following systems of linear
-   equations:
-
+  .. rubric:: Description
+      
+``getrs`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
+  
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
-      * -     \ ``A*X = B``\     
-        -     if ``trans``\ =\ ``onemkl::transpose::nontrans``\     
-      * -     \ ``AT*X = B``\     
-        -     if ``trans``\ =\ ``onemkl::transpose::trans``\     
-      * -     \ ``AH*X = B``\     
-        -     if ``trans``\ =\ ``onemkl::transpose::conjtrans``\     
+The routine solves for :math:`X` the following systems of linear
+equations:
 
+    .. list-table:: 
+       :header-rows: 1
+    
+       * -     \ :math:`AX = B`\     
+         -     if ``trans``\ =\ ``onemkl::transpose::nontrans``\     
+       * -     \ :math:`A^TX = B`\     
+         -     if ``trans``\ =\ ``onemkl::transpose::trans``\     
+       * -     \ :math:`A^HX = B`\     
+         -     if ``trans``\ =\ ``onemkl::transpose::conjtrans``\     
 
+Before calling this routine, you must call
+:ref:`onemkl_lapack_getrf`
+to compute the LU factorization of :math:`A`.
 
-
-   Before calling this routine, you must call
-   `?getrf <getrf.html>`__
-   to compute the ``LU`` factorization of ``A``.
-
-
-.. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   trans
-      Indicates the form of the equations:
-
-
-      If ``trans=onemkl::transpose::nontrans``, then ``A*X = B`` is solved
-      for ``X``.
-
-
-      If ``trans=onemkl::transpose::trans``, then ``AT*X = B`` is solved
-      for ``X``.
-
-
-      If ``trans=onemkl::transpose::conjtrans``, then ``AH*X = B`` is
-      solved for ``X``.
-
-
-   n
-      The order of the matrix ``A`` and the number of rows in matrix
-      ``B(0≤n)``.
-
-
-   nrhs
-      The number of right-hand sides (``0≤nrhs``).
-
-
-   a
-      Buffer containing the factorization of the matrix ``A``, as
-      returned by ?getrf. The second dimension of a must be at least
-      ``max(1, n)``.
-
-
-   lda
-      The leading dimension of a.
-
-
-   ipiv
-      Array, size at least ``max(1, n)``. The ipiv array, as returned by
-      ?getrf.
-
-
-   b
-      The array b contains the matrix ``B`` whose columns are the
-      right-hand sides for the systems of equations. The second
-      dimension of b must be at least ``max(1,nrhs)``.
-
-
-   ldb
-      The leading dimension of b.
-
+getrs (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
-
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   b
-      The buffer b is overwritten by the solution matrix ``X``.
-
-
-   info
-      Buffer containing error information.
-
-
-      If ``info = 0``, the execution is successful.
-
-
-      If ``info = -i``, the ``i``-th parameter had an illegal value.
-
-
-      If ``info = i``, the ``i``-th diagonal element of ``U`` is zero,
-      and the solve could not be completed.
-
+  .. rubric:: Syntax
+      
+.. cpp:function::  void oneapi::mkl::lapack::getrs(cl::sycl::queue &queue, onemkl::transpose trans,      std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t      lda, cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &b, std::int64_t      ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t      scratchpad_size)
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
-   .. rubric:: Example
-      :class: sectiontitle
+trans
+   Indicates the form of the equations:
 
+   If ``trans=onemkl::transpose::nontrans``, then :math:`AX = B` is solved
+   for :math:`X`.
 
-   An example of how to use ``getrs``\ can be found in the oneMKL
-   installation directory, under:
+   If ``trans=onemkl::transpose::trans``, then :math:`A^TX = B` is solved
+   for :math:`X`.
 
+   If ``trans=onemkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   solved for :math:`X`.
 
-   ::
+n
+   The order of the matrix :math:`A` and the number of rows in matrix
+   :math:`B(0 \le n)`.
 
+nrhs
+   The number of right-hand sides (:math:`0 \le \text{nrhs}`).
 
-      examples/sycl/lapack/getrs.cpp
+a
+   Buffer containing the factorization of the matrix :math:`A`, as
+   returned by :ref:`onemkl_lapack_getrf`. The second dimension of ``a`` must be at least
+   :math:`\max(1, n)`.
 
+lda
+   The leading dimension of ``a``.
+
+ipiv
+   Array, size at least :math:`\max(1, n)`. The ``ipiv`` array, as returned by
+   :ref:`onemkl_lapack_getrf`.
+
+b
+   The array ``b`` contains the matrix :math:`B` whose columns are the
+   right-hand sides for the systems of equations. The second
+   dimension of ``b`` must be at least :math:`\max(1,\text{nrhs})`.
+
+ldb
+   The leading dimension of ``b``.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_getrs_scratchpad_size` function.
 
 .. container:: section
-   :name: GUID-3B00B441-C7C0-4D8A-A819-41037F1E5862
 
+  .. rubric:: Output Parameters
+      
+b
+   The buffer ``b`` is overwritten by the solution matrix :math:`X`.
 
-   .. rubric:: Known Limitations
-      :class: sectiontitle
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
+getrs (USM Version)
+----------------------
 
-   For GPU support, errors are reported through the info parameter, but
-   computation does not halt for an algorithmic error.
+.. container:: section
 
+  .. rubric:: Syntax
 
-.. container:: familylinks
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrs(cl::sycl::queue &queue, onemkl::transpose trans,      std::int64_t n, std::int64_t nrhs, T *a, std::int64_t      lda, std::int64_t *ipiv, T *b, std::int64_t      ldb, T *scratchpad, std::int64_t      scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
 
+.. container:: section
 
-   .. container:: parentlink
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
+trans
+   Indicates the form of the equations:
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+   If ``trans=onemkl::transpose::nontrans``, then :math:`AX = B` is solved
+   for :math:`X`.
 
+   If ``trans=onemkl::transpose::trans``, then :math:`A^TX = B` is solved
+   for :math:`X`.
 
+   If ``trans=onemkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   solved for :math:`X`.
+
+n
+   The order of the matrix :math:`A` and the number of rows in matrix
+   :math:`B(0 \le n)`.
+
+nrhs
+   The number of right-hand sides (:math:`0 \le \text{nrhs}`).
+
+a
+   Pointer to array containing the factorization of the matrix :math:`A`, as
+   returned by :ref:`onemkl_lapack_getrf`. The second dimension of ``a`` must be at least
+   :math:`\max(1, n)`.
+
+lda
+   The leading dimension of ``a``.
+
+ipiv
+   Array, size at least :math:`\max(1, n)`. The ``ipiv`` array, as returned by
+   :ref:`onemkl_lapack_getrf`.
+
+b
+   The array ``b`` contains the matrix :math:`B` whose columns are the
+   right-hand sides for the systems of equations. The second
+   dimension of ``b`` must be at least :math:`\max(1,\text{nrhs})`.
+
+ldb
+   The leading dimension of ``b``.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_getrs_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+      
+b
+   The array ``b`` is overwritten by the solution matrix :math:`X`.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+     
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-linear-equation-routines`

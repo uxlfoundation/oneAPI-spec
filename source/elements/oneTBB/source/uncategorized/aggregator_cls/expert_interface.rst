@@ -97,7 +97,7 @@ members of this class.
 Example
 -------
 
-The following example again uses an ``aggregator_ext`` to safely operate on a non-concurrent ``std::priority_queue`` container.
+The following example uses an ``aggregator_ext`` to safely operate on a non-concurrent ``std::priority_queue`` container.
 
 .. code:: cpp
 
@@ -161,12 +161,12 @@ for all manipulations of nodes in the list.
 
 Further, to process an ``aggregator_node``, the user must first call the method ``start`` on the node.  
 Then, the user can handle the operation associated with the node in whatever way necessary.  When 
-this is complete, the user must call the method ``finish`` on the node.  The ``finish`` method releases the 
+this is complete, call the method ``finish`` on the node.  The ``finish`` method releases the 
 node to its originating thread, causing that thread's invocation of the ``process`` method to return.
 
 The ``handler`` function in the example above illustrates this process in the simplest fashion: 
-loop over the list handling each operation in turn, call ``start`` before working with the information 
-contained in the node, call ``finish`` when done with the node.
+loops over the list handling each operation in turn, calls ``start`` before working with the information 
+contained in the node, calls ``finish`` when done with the node.
 
 See also:
 

@@ -1,3 +1,4 @@
+.. _onemkl_vm_div:
 
 div
 ===
@@ -10,7 +11,6 @@ div
 
 
    .. container:: section
-      :name: GUID-C1A3E7BF-3B61-46CE-9B46-F0F370C0020B
 
 
       .. rubric:: Syntax
@@ -20,98 +20,97 @@ div
       Buffer API:
 
 
-      .. cpp:function::  void div(queue& exec_queue, int64_t n,      buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::div(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       USM API:
 
 
-      .. cpp:function::  event div(queue& exec_queue, int64_t n, T* a,      T* b, T* y, vector_class<event>* depends, uint64_t mode =      mode::not_defined, error_handler<T> errhandler = {} )
+      .. cpp:function:: event oneapi::mkl::vm::div(queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
 
       ``div`` supports the following precisions.
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
+         * - T
+         * - ``float``
+         * - ``double``
+         * - ``std::complex<float>``
+         * - ``std::complex<double>``
 
 
 
 
 .. container:: section
-   :name: GUID-F80A505B-EB8E-4F49-A7BA-FA962EB04EA3
 
 
    .. rubric:: Description
       :class: sectiontitle
 
 
-   The div(a,b) function performs element by element division of vector
+   The div(a, b) function performs element by element division of vector
    ``a`` by vector ``b``.
 
 
    .. container:: tablenoborder
 
 
-      .. list-table:: 
+      .. list-table::
          :header-rows: 1
 
-         * -  Argument 1 
-           -  Argument 2 
-           -  Result 
-           -  VM Error Status 
-         * -  X > +0 
-           -  +0 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  X > +0 
-           -  -0 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  X < +0 
-           -  +0 
-           -  -∞ 
-           -  ``status::sing`` 
-         * -  X < +0 
-           -  -0 
-           -  +∞ 
-           -  ``status::sing`` 
-         * -  +0 
-           -  +0 
-           -  QNAN 
-           -  ``status::sing`` 
-         * -  -0 
-           -  -0 
-           -  QNAN 
-           -  ``status::sing`` 
-         * -  X > +0 
-           -  +∞ 
-           -  +0 
-           -    
-         * -  X > +0 
-           -  -∞ 
-           -  -0 
-           -    
-         * -  +∞ 
-           -  +∞ 
-           -  QNAN 
-           -    
-         * -  -∞ 
-           -  -∞ 
-           -  QNAN 
-           -    
-         * -  QNAN 
-           -  QNAN 
-           -  QNAN 
-           -    
-         * -  SNAN 
-           -  SNAN 
-           -  QNAN 
-           -    
+         * - Argument 1
+           - Argument 2
+           - Result
+           - VM Error Status
+         * - X > +0
+           - +0
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - X > +0
+           - -0
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - X < +0
+           - +0
+           - -∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - X < +0
+           - -0
+           - +∞
+           - ``oneapi::mkl::vm::status::sing``
+         * - +0
+           - +0
+           - QNAN
+           - ``oneapi::mkl::vm::status::sing``
+         * - -0
+           - -0
+           - QNAN
+           - ``oneapi::mkl::vm::status::sing``
+         * - X > +0
+           - +∞
+           - +0
+           -  
+         * - X > +0
+           - -∞
+           - -0
+           -  
+         * - +∞
+           - +∞
+           - QNAN
+           -  
+         * - -∞
+           - -∞
+           - QNAN
+           -  
+         * - QNAN
+           - QNAN
+           - QNAN
+           -  
+         * - SNAN
+           - SNAN
+           - QNAN
+           -  
 
 
 
@@ -120,18 +119,17 @@ div
    defined according to the following formula
 
 
-   ``Div(x1+i*y1,x2+i*y2) = (x1+i*y1)*(x2-i*y2)/(x2*x2+y2*y2)``.
+   ``Div(x1+i*y1, x2+i*y2) = (x1+i*y1)*(x2-i*y2)/(x2*x2+y2*y2)``.
 
 
    Overflow in a complex function occurs when ``x2+i*y2`` is not zero,
    x1, x2, y1, y2 are finite numbers, but the real or imaginary part of
    the exact result is so large that it does not fit the target
    precision. In that case, the function returns ∞ in that part of the
-   result, and sets the VM Error Status to status::overflow.
+   result, and sets the VM Error Status to oneapi::mkl::vm::status::overflow.
 
 
 .. container:: section
-   :name: GUID-8D31EE70-939F-4573-948A-01F1C3018531
 
 
    .. rubric:: Input Parameters
@@ -159,14 +157,14 @@ div
 
    mode
       Overrides the global VM mode setting for this function call. See
-      `set_mode <setmode.html>`__
+      :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
@@ -196,20 +194,19 @@ div
 
    mode
       Overrides the global VM mode setting for this function call. See
-      the `set_mode <setmode.html>`__
+      the :ref:`onemkl_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``mode::not_defined``.
+      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
 
 
    errhandler
       Sets local error handling mode for this function call. See the
-      `create_error_handler <create_error_handler.html>`__
+      :ref:`onemkl_vm_create_error_handler`
       function for arguments and their descriptions. This is an optional
       parameter. The local error handler is disabled by default.
 
 
 .. container:: section
-   :name: GUID-08546E2A-7637-44E3-91A3-814E524F5FB7
 
 
    .. rubric:: Output Parameters
@@ -234,31 +231,11 @@ div
       Function end event.
 
 
-.. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
-
-
-   .. rubric:: Example
-      :class: sectiontitle
-
-
-   An example of how to use div can be found in the oneMKL installation
-   directory, under:
-
-
-   ::
-
-
-      examples/sycl/vml/vdiv.cpp
-
-
 .. container:: familylinks
 
 
    .. container:: parentlink
 
-
-      **Parent topic:** `Power and Root
-      Functions <power-and-root-functions.html>`__
+      **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
 

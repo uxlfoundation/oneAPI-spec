@@ -1,149 +1,136 @@
+.. _onemkl_lapack_orgtr:
 
 orgtr
 =====
 
-
-.. container::
-
-
-   Generates the real orthogonal matrix Q determined by
-   `?sytrd <sytrd.html>`__. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-76E7621F-DE84-46C0-A273-B1526247494F
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void orgtr(queue &exec_queue, uplo upper_lower,      std::int64_t n, buffer<T,1> &a, std::int64_t lda, buffer<T,1>      &tau, buffer<T,1> &work, std::int64_t lwork,      buffer<std::int64_t,1> &info)
-
-      ``orgtr`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``float`` 
-         * -  ``double`` 
-
-
-
+Generates the real orthogonal matrix :math:`Q` determined by
+:ref:`onemkl_lapack_sytrd`.
 
 .. container:: section
-   :name: GUID-EB340156-9410-4811-B15A-75F220C2D2D7
 
+  .. rubric:: Description
+      
+``orgtr`` supports the following precisions.
 
-   .. rubric:: Description
-      :class: sectiontitle
+    .. list-table:: 
+       :header-rows: 1
 
+       * -  T 
+       * -  ``float`` 
+       * -  ``double`` 
 
-   The routine explicitly generates the ``n``-by-``n`` orthogonal matrix
-   ``Q`` formed by
-   `sytrd <sytrd.html>`__ when
-   reducing a real symmetric matrix ``A`` to tridiagonal form:
-   ``A = Q*T*QT``. Use this routine after a call to
-   `sytrd <sytrd.html>`__.
+The routine explicitly generates the :math:`n \times n` orthogonal matrix
+:math:`Q` formed by :ref:`onemkl_lapack_sytrd` when
+reducing a real symmetric matrix :math:`A` to tridiagonal form:
+:math:`A = QTQ^T`. Use this routine after a call to
+:ref:`onemkl_lapack_sytrd`.
 
-
-.. container:: section
-   :name: GUID-26A5866D-0DF8-4835-8776-E5E73F0C657A
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   upper_lower
-      Must be ``uplo::upper`` or ``uplo::lower``. Uses the same
-      ``upper_lower`` as supplied
-      to\ `sytrd <sytrd.html>`__
-
-
-   n
-      The order of the matrix ``Q``\ ``(0≤n)``.
-
-
-   a
-      The buffer a returned by
-      `sytrd <sytrd.html>`__. The
-      second dimension of a must be at least ``max(1,n)``.
-
-
-   lda
-      The leading dimension of a\ ``(n≤lda)``.
-
-
-   tau
-      The buffer tau returned by
-      `sytrd <sytrd.html>`__. The
-      dimension of tau must be at least ``max(1, n-1)``.
-
-
-   lwork
-      The size of the work array ``(lwork≥n)``. Should be computed by
-      `orgtr_get_lwork <orgtr_get_lwork.html>`__.
-
+orgtr (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
-
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   a
-      Overwritten by the orthogonal matrix ``Q``.
-
-
-   work
-      Workspace for internal computations.
-
-
-   info
-      Buffer containing error information.
-
-
-      If ``info=0``, the execution is successful.
-
-
-      If ``info=-i``, the ``i``-th parameter had an illegal value.
-
+  .. rubric:: Syntax
+         
+.. cpp:function::  void oneapi::mkl::lapack::orgtr(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1>      &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
 
-   .. rubric:: Example
-      :class: sectiontitle
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``. Uses the same
+   ``upper_lower`` as supplied to :ref:`onemkl_lapack_sytrd`.
 
+n
+   The order of the matrix :math:`Q` :math:`(0 \le n)`.
 
-   An example of how to use ``orgtr``\ can be found in the oneMKL
-   installation directory, under:
+a
+   The buffer ``a`` as returned by :ref:`onemkl_lapack_sytrd`. The
+   second dimension of ``a`` must be at least :math:`\max(1,n)`.
 
+lda
+   The leading dimension of ``a`` :math:`(n \le \text{lda})`.
 
-   ::
+tau
+   The buffer ``tau`` as returned by :ref:`onemkl_lapack_sytrd`. The
+   dimension of ``tau`` must be at least :math:`\max(1, n-1)`.
 
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_orgtr_scratchpad_size` function.
 
-      examples/sycl/lapack/orgtr.cpp
+.. container:: section
 
+  .. rubric:: Output Parameters
 
-.. container:: familylinks
+a
+   Overwritten by the orthogonal matrix :math:`Q`.
 
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
-   .. container:: parentlink
+orgtr (USM Version)
+----------------------
 
+.. container:: section
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+  .. rubric:: Syntax
 
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::orgtr(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+
+.. container:: section
+
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
+
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``. Uses the same
+   ``upper_lower`` as supplied
+   to :ref:`onemkl_lapack_sytrd`.
+
+n
+   The order of the matrix :math:`Q` :math:`(0 \le n)`.
+
+a
+   The pointer to ``a`` as returned by
+   :ref:`onemkl_lapack_sytrd`. The
+   second dimension of ``a`` must be at least :math:`\max(1,n)`.
+
+lda
+   The leading dimension of ``a`` :math:`(n \le \text{lda})`.
+
+tau
+   The pointer to ``tau`` as returned by :ref:`onemkl_lapack_sytrd`. The
+   dimension of ``tau`` must be at least :math:`\max(1, n-1)`.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_orgtr_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+      
+a
+   Overwritten by the orthogonal matrix :math:`Q`.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+         
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 

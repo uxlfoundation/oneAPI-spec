@@ -1,96 +1,185 @@
-.. _mkl-rng-gamma:
+.. _onemkl_rng_gamma:
 
-onemkl::rng::gamma
-==================
+gamma
+=====
+
+Class is used for generation of gamma distributed real types random numbers.
+
+.. _onemkl_rng_gamma_description:
+
+.. rubric:: Description
+
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers gamma distributed with shape :math:`\alpha`, displacement :math:`a`, and scale parameter :math:`\beta`, where :math:`a, \alpha, \beta \in R; \alpha > 0; \beta > 0`.
+
+The probability distribution is given by:
+
+.. math::
+
+    f_{a, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} \frac{1}{\Gamma(\alpha)\beta^{\alpha}}(x - a)^{\alpha - 1}e^{-(x - a) / \beta}, x \ge a \\ 0, x < a \end{array}\right.
+
+The cumulative distribution function is as follows:
+
+.. math::
+
+    F_{a, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} \int^x_a\frac{1}{\Gamma(\alpha)\beta^{\alpha}}(y - a)^{\alpha - 1}e^{-(y - a) / \beta}dy, x \ge a \\ 0, x < a \end{array}\right.
+
+.. _onemkl_rng_gamma_syntax:
+
+class gamma
+-----------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+    template<typename RealType = float, typename Method = gamma_method::by_default>
+    class gamma {
+    public:
+        using method_type = Method;
+        using result_type = RealType;
+        gamma();
+        explicit gamma(RealType alpha, RealType a, RealType beta);
+        RealType alpha() const;
+        RealType a() const;
+        RealType beta() const;
+    };
+
+.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::gamma_method::by_default> \
+                oneapi::mkl::rng::gamma
+
+.. container:: section
+
+    .. rubric:: Template parameters
+
+    .. container:: section
+
+        typename RealType
+            Type of the produced values. Supported types:
+                * ``float``
+                * ``double``
+
+    .. container:: section
+
+        typename Method = oneapi::mkl::rng::gamma_method::by_default
+            Transformation method, which will be used for generation. Supported types:
+
+                * ``oneapi::mkl::rng::gamma_method::by_default``
+                * ``oneapi::mkl::rng::gamma_method::marsaglia``
+                * ``oneapi::mkl::rng::gamma_method::marsaglia_accurate``
+
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+
+.. container:: section
+
+    .. rubric:: Class Members
+
+    .. list-table::
+        :header-rows: 1
+
+        * - Routine
+          - Description
+        * - `gamma()`_
+          - Default constructor
+        * - `explicit gamma(RealType alpha, RealType a, RealType beta)`_
+          - Constructor with parameters
+        * - `RealType alpha() const`_
+          - Method to obtain shape value
+        * - `RealType a() const`_
+          - Method to obtain displacement value
+        * - `RealType beta() const`_
+          - Method to obtain scale value
+
+.. container:: section
+
+    .. rubric:: Member types
+
+    .. container:: section
+
+        .. cpp:type:: gamma::method_type = Method
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines transformation method for generation.
+
+    .. container:: section
+
+        .. cpp:type:: gamma::result_type = RealType
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Type which defines type of generated random numbers.
+
+.. container:: section
+
+    .. rubric:: Constructors
+
+    .. container:: section
+
+        .. _`gamma()`:
+
+        .. cpp:function:: gamma::gamma()
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Default constructor for distribution, parameters set as `alpha` = 1.0, `a` = 0.0, and `beta` = 1.0.
+
+    .. container:: section
+
+        .. _`explicit gamma(RealType alpha, RealType a, RealType beta)`:
+
+        .. cpp:function:: explicit gamma::gamma(RealType alpha, RealType a, RealType beta)
+
+        .. container:: section
+
+            .. rubric:: Description
+
+            Constructor with parameters. `alpha` is a shape value, `a` is a displacement value, `beta` is a scale parameter.
 
 
-.. container::
+.. container:: section
 
+    .. rubric:: Characteristics
 
-   Generates gamma distributed random values.
+    .. container:: section
 
+        .. _`RealType alpha() const`:
 
-   .. container:: section
-      :name: GUID-EDB0E0C5-B8D7-4494-8C52-BEEC84A0C324
+        .. cpp:function:: RealType gamma::alpha() const
 
+        .. container:: section
 
-      .. rubric:: Syntax
-         :class: sectiontitle
+            .. rubric:: Return Value
 
+            Returns the distribution parameter `alpha` - shape value.
 
-      ::
-	 
-        template<typename T = float, method Method =      marsaglia>
-          class gamma {
-          public:
-            gamma(): gamma((T)1.0, (T)0.0, (T)1.0){}
-            gamma(T alpha, T a, T beta)
-            gamma(const gamma<T, Method>& other)
-            T alpha() const
-            T a() const
-            T beta() const
-            gamma<T, Method>& operator=(const gamma<T,      Method>& other)
-          }
+    .. container:: section
 
-      .. rubric:: Include Files
-         :class: sectiontitle
+        .. _`RealType a() const`:
 
+        .. cpp:function:: RealType gamma::a() const
 
-      -  mkl_sycl.hpp
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      .. rubric:: Description
-         :class: sectiontitle
+            Returns the distribution parameter `a` - displacement value.
 
+    .. container:: section
 
-      The onemkl::rng::gamma class object is used in the onemkl::rng::generate
-      function to provide random numbers with gamma distribution that
-      has shape parameter α, displacement ``a``, and scale parameter β,
-      where α, β, and ``a∈R ; α > 0, β > 0``.
+        .. _`RealType beta() const`:
 
+        .. cpp:function:: RealType gamma::beta() const
 
-      The probability density function is given by:
+        .. container:: section
 
+            .. rubric:: Return Value
 
-      where Γ(α) is the complete gamma function.
+            Returns the distribution parameter `beta` - scale parameter.
 
-
-      The cumulative distribution function is as follows:
-
-
-      .. rubric:: Input Parameters
-         :class: sectiontitle
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -     Name    
-           -     Type    
-           -     Description    
-         * -     method    
-           -     \ ``onemkl::rng::method``\     
-           -     Generation method. The specific values are as follows:             \ ``onemkl::rng::marsaglia``\       \ ``onemkl::rng::marsaglia | onemkl::rng::accurate``\       See      brief descriptions of the methods in `Distributions Template      Parameter onemkl::rng::method      Values <distributions-template-parameter-mkl-rng-method-values.html>`__.   
-         * -     alpha    
-           -     \ ``T (float, double)``\     
-           -      Shape α    
-         * -     a    
-           -     \ ``T (float, double)``\     
-           -     Displacement ``a``.    
-         * -     beta    
-           -     \ ``T (float, double)``\     
-           -     Scalefactor β.    
-
-
-
-
-.. container:: familylinks
-
-
-   .. container:: parentlink
-
-
-      **Parent
-      topic:** `Distributions <distributions.html>`__
-
-
+**Parent topic:** :ref:`onemkl_rng_distributions`

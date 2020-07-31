@@ -1,205 +1,170 @@
+.. _onemkl_lapack_heevd:
 
 heevd
 =====
 
-
-.. container::
-
-
-   Computes all eigenvalues and, optionally, all eigenvectors of a
-   complex Hermitian matrix using divide and conquer algorithm. This
-   routine belongs to the ``onemkl::lapack``\ namespace.
-
-
-   .. container:: section
-      :name: GUID-27408EB8-B8F0-4D65-93CB-8AD0E3E34EC9
-
-
-      .. rubric:: Syntax
-         :class: sectiontitle
-
-
-      .. cpp:function::  void heevd(queue &exec_queue, job jobz, uplo      upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda,      buffer<realT,1> &w, buffer<T,1> &work, std::int64_t lwork,      buffer<realT, 1> &rwork, std::int64_t lrwork, buffer<T,1> &iwork,      std::int64_t liwork, buffer<std::int64_t,1> &info)
-
-      ``heevd`` supports the following precisions.
-
-
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  T 
-         * -  ``std::complex<float>`` 
-         * -  ``std::complex<double>`` 
-
-
-
+Computes all eigenvalues and, optionally, all eigenvectors of a
+complex Hermitian matrix using divide and conquer algorithm.
 
 .. container:: section
-   :name: GUID-D9C0329E-BFA0-4C7A-B67E-2765FE54F2EC
 
+  .. rubric:: Description
 
-   .. rubric:: Description
-      :class: sectiontitle
+``heevd`` supports the following precisions.
 
+     .. list-table:: 
+        :header-rows: 1
 
-   The routine computes all the eigenvalues, and optionally all the
-   eigenvectors, of a complex Hermitian matrix ``A``. In other words, it
-   can compute the spectral factorization of ``A`` as: ``A = Z*Λ*ZH``.
+        * -  T 
+        * -  ``std::complex<float>`` 
+        * -  ``std::complex<double>`` 
 
+The routine computes all the eigenvalues, and optionally all the
+eigenvectors, of a complex Hermitian matrix :math:`A`. In other words, it
+can compute the spectral factorization of :math:`A` as: :math:`A = Z\Lambda Z^H`.
 
-   Here Λ is a real diagonal matrix whose diagonal elements are the
-   eigenvalues λ\ :sub:`i`, and ``Z`` is the (complex) unitary matrix
-   whose columns are the eigenvectors ``z``\ :sub:`i`. Thus,
+Here :math:`\Lambda` is a real diagonal matrix whose diagonal elements are the
+eigenvalues :math:`\lambda_i`, and :math:`Z` is the (complex) unitary matrix
+whose columns are the eigenvectors :math:`z_{i}`. Thus,
 
+:math:`Az_i = \lambda_i z_i` for :math:`i = 1, 2, ..., n`.
 
-   ``A*zi = λi*zi`` for ``i = 1, 2, ..., n``.
+If the eigenvectors are requested, then this routine uses a divide
+and conquer algorithm to compute eigenvalues and eigenvectors.
+However, if only eigenvalues are required, then it uses the
+Pal-Walker-Kahan variant of the QL or QR algorithm.
 
-
-   If the eigenvectors are requested, then this routine uses a divide
-   and conquer algorithm to compute eigenvalues and eigenvectors.
-   However, if only eigenvalues are required, then it uses the
-   Pal-Walker-Kahan variant of the ``QL`` or ``QR`` algorithm.
-
-
-.. container:: section
-   :name: GUID-F841BA63-D4EE-4C75-9831-BB804CEA8622
-
-
-   .. rubric:: Input Parameters
-      :class: sectiontitle
-
-
-   exec_queue
-      The queue where the routine should be executed.
-
-
-   jobz
-      Must be ``job::novec`` or ``job::vec``.
-
-
-      If ``jobz = job::novec``, then only eigenvalues are computed.
-
-
-      If ``jobz = job::vec``, then eigenvalues and eigenvectors are
-      computed.
-
-
-   upper_lower
-      Must be ``uplo::upper`` or ``uplo::lower``.
-
-
-      If ``upper_lower = job::upper``, a stores the upper triangular
-      part of ``A``.
-
-
-      If ``upper_lower = job::lower``, a stores the lower triangular
-      part of ``A``.
-
-
-   n
-      The order of the matrix ``A`` (``0≤n``).
-
-
-   a
-      The buffer a, size (``lda,*``). The buffer a contains the matrix
-      ``A``. The second dimension of a must be at least ``max(1, n)``.
-
-
-   lda
-      The leading dimension of a. Must be at least ``max(1,n)``.
-
-
-   lwork
-      The size of the work buffer. Must be computed by
-      `heevd_get_lwork <heevd_get_lwork.html>`__.
-
-
-   lrwork
-      The size of the rwork buffer. Must be computed by
-      `heevd_get_lwork <heevd_get_lwork.html>`__.
-
-
-   liwork
-      The size of the iwork buffer. Must be computed by
-      `heevd_get_lwork <heevd_get_lwork.html>`__.
-
+heevd (Buffer Version)
+----------------------
 
 .. container:: section
-   :name: GUID-F0C3D97D-E883-4070-A1C2-4FE43CC37D12
 
-
-   .. rubric:: Output Parameters
-      :class: sectiontitle
-
-
-   a
-      If ``jobz = job::vec``, then on exit this buffer is overwritten by
-      the unitary matrix ``Z`` which contains the eigenvectors of ``A``.
-
-
-   w
-      Buffer, size at least n. If ``info = 0``, contains the eigenvalues
-      of the matrix ``A`` in ascending order. See also info.
-
-
-   work
-      Buffer of workspace.
-
-
-   rwork
-      Buffer of real precision workspace
-
-
-   iwork
-      Buffer of integer workspace.
-
-
-   info
-      Buffer containing error information.
-
-
-      If ``info = 0``, the execution is successful.
-
-
-      If ``info = i``, and ``jobz = job::novec``, then the algorithm
-      failed to converge; ``i`` indicates the number of off-diagonal
-      elements of an intermediate tridiagonal form which did not
-      converge to zero.
-
-
-      If ``info = i``, and ``jobz = job:vec``, then the algorithm failed
-      to compute an eigenvalue while working on the submatrix lying in
-      rows and columns ``info/(n+1)`` through ``mod(info,n+1)``.
-
-
-      If ``info = -i``, the ``i``-th parameter had an illegal value.
-
+  .. rubric:: Syntax
+         
+.. cpp:function::  void oneapi::mkl::lapack::heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo      upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda,      cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
 
 .. container:: section
-   :name: GUID-C97BF68F-B566-4164-95E0-A7ADC290DDE2
 
+  .. rubric:: Input Parameters
 
-   .. rubric:: Example
-      :class: sectiontitle
+queue
+   The queue where the routine should be executed.
 
+jobz
+   Must be ``job::novec`` or ``job::vec``.
 
-   An example of how to use ``heevd``\ can be found in the oneMKL
-   installation directory, under:
+   If ``jobz = job::novec``, then only eigenvalues are computed.
 
+   If ``jobz = job::vec``, then eigenvalues and eigenvectors are
+   computed.
 
-   ::
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``.
 
+   If ``upper_lower = job::upper``, a stores the upper triangular
+   part of :math:`A`.
 
-      examples/sycl/lapack/heevd.cpp
+   If ``upper_lower = job::lower``, a stores the lower triangular
+   part of :math:`A`.
 
+n
+   The order of the matrix :math:`A` (:math:`0 \le n`).
 
-.. container:: familylinks
+a
+   The buffer ``a``, size (``lda,*``). The buffer ``a`` contains the matrix
+   :math:`A`. The second dimension of ``a`` must be at least :math:`\max(1, n)`.
 
+lda
+   The leading dimension of ``a``. Must be at least :math:`\max(1,n)`.
 
-   .. container:: parentlink
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_heevd_scratchpad_size` function.
 
+.. container:: section
 
-      **Parent topic:** `LAPACK
-      Routines <lapack.html>`__
+  .. rubric:: Output Parameters
+      
+a
+   If ``jobz = job::vec``, then on exit this buffer is overwritten by
+   the unitary matrix :math:`Z` which contains the eigenvectors of :math:`A`.
 
+w
+   Buffer, size at least n. Contains the eigenvalues
+   of the matrix :math:`A` in ascending order.
+
+scratchpad
+   Buffer holding scratchpad memory to be used by routine for storing intermediate results.
+
+heevd (USM Version)
+----------------------
+
+.. container:: section
+
+  .. rubric:: Syntax
+
+.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo      upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+
+.. container:: section
+
+  .. rubric:: Input Parameters
+      
+queue
+   The queue where the routine should be executed.
+
+jobz
+   Must be ``job::novec`` or ``job::vec``.
+
+   If ``jobz = job::novec``, then only eigenvalues are computed.
+
+   If ``jobz = job::vec``, then eigenvalues and eigenvectors are
+   computed.
+
+upper_lower
+   Must be ``uplo::upper`` or ``uplo::lower``.
+
+   If ``upper_lower = job::upper``, a stores the upper triangular
+   part of :math:`A`.
+
+   If ``upper_lower = job::lower``, a stores the lower triangular
+   part of :math:`A`.
+
+n
+   The order of the matrix :math:`A` (:math:`0 \le n`).
+
+a
+   Pointer to array containing :math:`A`, size (``lda,*``).The second dimension of ``a`` must be at least :math:`\max(1, n)`.
+
+lda
+   The leading dimension of ``a``. Must be at least :math:`\max(1,n)`.
+
+scratchpad_size
+   Size of scratchpad memory as a number of floating point elements of type ``T``.
+   Size should not be less than the value returned by :ref:`onemkl_lapack_heevd_scratchpad_size` function.
+
+events
+   List of events to wait for before starting computation. Defaults to empty list.
+
+.. container:: section
+
+  .. rubric:: Output Parameters
+      
+a
+   If ``jobz = job::vec``, then on exit this array is overwritten by
+   the unitary matrix :math:`Z` which contains the eigenvectors of :math:`A`.
+
+w
+   Pointer to array of size at least :math:`n`. Contains the eigenvalues
+   of the matrix :math:`A` in ascending order.
+
+scratchpad
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Return Values
+
+Output event to wait on to ensure computation is complete.
+
+**Parent topic:** :ref:`onemkl_lapack-singular-value-eigenvalue-routines`
 
