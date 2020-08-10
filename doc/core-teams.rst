@@ -16,7 +16,7 @@ oneAPI
 * Kukanov, Alexey 
 * Nikolaev, Andrey 
 * Patty, Spencer 
-* Shirayev, Mikhail 
+* Shiryaev, Mikhail 
 * Smith, Timmie 
 * Waters, Zack 
 
@@ -44,7 +44,7 @@ oneDNN
 oneCCL
 ======
 
-* **Shirayev, Mikhail**
+* **Shiryaev, Mikhail**
 
 
 Level Zero
