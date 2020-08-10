@@ -15,13 +15,13 @@ Versioning is MAJOR.MINOR rev REVISION
 Increment the:
 
 1. MAJOR version when adding major new functionality and making
-   incompatible API changes.
+   incompatible API changes, including removing APIs.
      
 2. MINOR version when adding minor functionality and API changes
    that are backwards compatible.
      
-3. REVISION when making backwards compatible bug fixes or any
-   editing change in the document, including minor changes such as
+3. REVISION when making backwards compatible bug fixes or any editing
+   change in the document, including minor changes such as correcting
    typos. Initial REVISION is 1.
 
 The distinction between major and minor functionality is determined by
@@ -86,10 +86,11 @@ Major change impacts multiple elements. oneAPI goes to 2.0
 Specification version approval
 ==============================
 
-Element specifications must be approved by its core team and the
-oneAPI spec core team. The oneAPI specification must be approved by
-its core team. Updates which only change the revision may be approved
-by the lead.
+The oneAPI specification must be approved by its `core team
+<core-teams.rst>`__. Element specifications must be approved by its
+core team and the oneAPI spec core team.  Updates which only change
+the revision may be approved by the lead.
+
 
 Provisional versions
 ====================

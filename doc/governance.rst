@@ -14,8 +14,7 @@ The overall specification also has a core team and lead. The **oneAPI
 core team** is responsible for issues that involve multiple oneAPI
 elements and provides general oversight.
 
-Core Team members and leads are `published
-<https://github.com/oneapi-src/oneapi-spec/core-team.rst>`__.
+Core Team members and leads are `published <core-teams.rst>`__.
 
 `Technical advisory boards
 <https://github.com/oneapi-src/oneapi-tab>`__ review topics related to
@@ -41,15 +40,17 @@ Membership
 
 A core team may decide to add new members or designate a new
 lead. Members will typically have a history of contribution to the
-specification, contribution to an implementation, or as a end-user of
+specification, contribution to an implementation, or as an end-user of
 an implementation. Membership is open to all companies, institutions,
 and implementations.
+
 
 Commit Rights
 =============
 
 Committers follow the direction of the core team. Core teams decide
 who has commit rights to the repository.
+
 
 Governance Changes
 ==================
@@ -62,6 +63,7 @@ may change governance as the community evolves.
 Code of Conduct
 ===============
 
-We follow [Contributor Covenant](https://www.contributor-covenant.org/). Contact
-[oneapi@intel.com](mailto:oneapi@intel.com) or a team lead with
-questions or to report an issue.
+We follow `Contributor Covenant
+<https://www.contributor-covenant.org>`__. Contact a core team member
+or `oneAPI leadership <mailto:oneapi@intel.com>`__ with questions or
+to report an issue.
