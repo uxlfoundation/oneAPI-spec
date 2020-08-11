@@ -69,7 +69,13 @@ Release Notes
 
   * Added section to specify mandatory and optional API features
   * Reformatting of entire specification
-  * Bug fixes in API definitions.
+  * Bug fixes in API definitions
+
+* oneCCL
+
+  * Added multi-device communication API
+  * Added key-value store API
+  * Extended list of collective operations
 
 0.85
 ----
