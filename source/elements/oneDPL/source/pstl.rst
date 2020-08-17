@@ -207,7 +207,7 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
 Range-based API
 ++++++++++++++++++++++
 
-Added the Range-based versions of following algorithms: 
+The following algorithms are available to use with viewable ranges:
 
   ``for_each``, ``copy``, ``transform``, ``find``, ``find_if``, ``find_if_not``, ``find_end``, ``find_first_of``, ``search``, ``is_sorted``,
   ``is_sorted_until``, ``reduce``, ``transform_reduce``, ``min_element``, ``max_element``, ``minmax_element``,
@@ -217,7 +217,7 @@ Added the Range-based versions of following algorithms:
   In order to make these algorithm available the ``<oneapi/dpl/ranges>`` header should be included.
   Use of the range-based API requires C++17 and the C++ standard libraries coming with GCC 8.1 (or higher) or Clang 7 (or higher).
   
-  The following viewable ranges are declared in ``oneapi::dpl::experimental::ranges`` namespace and available to use instead of iterators:
+The following viewable ranges are declared in ``oneapi::dpl::experimental::ranges`` namespace and available to use instead of iterators:
 
 .. code:: cpp
 
@@ -262,6 +262,7 @@ Produces a view excluding the first N elements form another view.
 Generates a sequence of elements [0, N).
   
 Example of Range-based API using
+^^^^^^^^^^^^^^^^^^^
 
 .. code:: cpp
 
