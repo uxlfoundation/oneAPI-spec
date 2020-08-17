@@ -219,13 +219,47 @@ Added the Range-based versions of following algorithms:
   
   The following viewable ranges are declared in ``oneapi::dpl::experimental::ranges`` namespace and available to use instead of iterators:
 
-  ``all_view`` - presents a view of all or a part of sycl::buffer underlying elements.
-  ``zip_view`` - produces one zip_view  from other several views.
-  ``transform_view`` - presents a view of a underlying sequence after applying a transformation each element.
-  ``reverse_view`` - produce a reversed sequence of elements [0, N) provided by another view.
-  ``take_view`` - produces a view of the first N elements form another view.
-  ``drop_view`` - produces a view excluding the first N elements form another view.  
-  ``iota_view`` - generates a sequence of elements [0, N).
+.. code:: cpp
+
+  all_view
+  
+  Presents a view of all or a part of sycl::buffer underlying elements.
+  
+.. code:: cpp
+
+  zip_view
+  
+  Produces one zip_view  from other several views.
+  
+.. code:: cpp  
+
+  transform_view
+  
+  Presents a view of a underlying sequence after applying a transformation each element.
+  
+.. code:: cpp  
+
+  reverse_view
+  
+  Produce a reversed sequence of elements [0, N) provided by another view.
+  
+.. code:: cpp    
+
+  take_view
+  
+  Produces a view of the first N elements form another view.
+  
+.. code:: cpp    
+
+  drop_view
+  
+  Produces a view excluding the first N elements form another view.  
+  
+.. code:: cpp
+
+  iota_view
+  
+  Generates a sequence of elements [0, N).
   
 Example of Range-based API using
 
