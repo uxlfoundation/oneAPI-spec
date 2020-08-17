@@ -1,6 +1,0 @@
-==========
-Clustering
-==========
-
-.. toctree::
-   kmeans.rst
