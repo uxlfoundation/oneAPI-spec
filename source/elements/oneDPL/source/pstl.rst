@@ -223,43 +223,43 @@ Added the Range-based versions of following algorithms:
 
   all_view
   
-  Presents a view of all or a part of sycl::buffer underlying elements.
+Presents a view of all or a part of sycl::buffer underlying elements.
   
 .. code:: cpp
 
   zip_view
   
-  Produces one zip_view  from other several views.
+Produces one zip_view  from other several views.
   
 .. code:: cpp  
 
   transform_view
   
-  Presents a view of a underlying sequence after applying a transformation each element.
+Presents a view of a underlying sequence after applying a transformation each element.
   
 .. code:: cpp  
 
   reverse_view
   
-  Produce a reversed sequence of elements [0, N) provided by another view.
+Produce a reversed sequence of elements [0, N) provided by another view.
   
 .. code:: cpp    
 
   take_view
   
-  Produces a view of the first N elements form another view.
+Produces a view of the first N elements form another view.
   
 .. code:: cpp    
 
   drop_view
   
-  Produces a view excluding the first N elements form another view.  
+Produces a view excluding the first N elements form another view.  
   
 .. code:: cpp
 
   iota_view
   
-  Generates a sequence of elements [0, N).
+Generates a sequence of elements [0, N).
   
 Example of Range-based API using
 
