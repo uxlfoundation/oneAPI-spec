@@ -7,8 +7,23 @@ elements (e.g. oneMKL, oneVPL) and for oneAPI, which includes all the
 elements. Specification versioning is independent of oneAPI product
 versioning.
 
-Element versioning
-==================
+Product specification vs standard specification
+===============================================
+
+A *product specification* documents a single implementation. It is
+typically completed before implementation to get feedback, and as a
+reference for implementation, testing, and the creation of end-user
+documentation. A *standard specification* documents the standard,
+which may have multiple implementations. It is used to get feedback
+and agreement between potential implementations.  oneAPI specification
+is primarily a standard specification. An implementation may contain
+features that are not part of the standard. It may be a feature being
+considered for standardization, or features that are not suitable for
+inclusion in oneAPI standard.
+
+
+oneAPI specification versioning
+===============================
 
 Versioning is MAJOR.MINOR rev REVISION
 
@@ -25,63 +40,21 @@ Increment the:
    typos. Initial REVISION is 1.
 
 The distinction between major and minor functionality is determined by
-the core group. When a component identifies the version it implements
-for purposes of compatibility, it lists MAJOR.MINOR. Latest REVISION
-is implicit because REVISIONs do not change the meaning.
+the core group. Latest REVISION is implicit because REVISIONs do not
+change the meaning.
 
-oneAPI specification versioning
-===============================
+Element versioning
+==================
 
-Versioning is MAJOR.MINOR rev REVISION following `element versioning`_.
-
-If MAJOR.MINOR changes for any element, the new element specification
-must be incorporated into a future version of the oneAPI specification
-that also changes either MAJOR or MINOR. The core group determines the
-distinction between major and minor functionality. Major is reserved
-for signficant changes in multiple components, especially when a
-oneAPI feature requires coordinated changes to multiple
-components. Breaking changes in an element are coordinated with the
-oneAPI specification.
-
-
-Examples
-========
-
-Example sequence of releases.
-
-Initial
-  | oneAPI 1.0 rev 1
-  | oneMKL 1.0 rev 1
-  | oneDAL 1.0 rev 1
-  | oneVPL 1.0 rev 1
-
-
-Some components make editing changes. Only the rev changes.
-  | oneAPI 1.0 rev 2
-  | oneMKL 1.0 rev 2
-  | oneDAL 1.0 rev 1
-  | oneVPL 1.0 rev 1
-
-  
-DAL goes to 1.1. oneAPI goes to 1.1.
-  | oneAPI 1.1 rev 1
-  | oneMKL 1.0 rev 2
-  | oneDAL 1.1 rev 1
-  | oneVPL 1.0 rev 1
-
-
-VPL goes to 2.0, oneAPI goes to 1.2.
-  | oneAPI 1.2 rev 1
-  | oneMKL 1.0 rev 2
-  | oneDAL 1.1 rev 1
-  | oneVPL 2.0 rev 1
-
-
-Major change impacts multiple elements. oneAPI goes to 2.0
-  | oneAPI 2.0 rev 1
-  | oneMKL 1.0 rev 2
-  | oneDAL 2.0 rev 1
-  | oneVPL 3.0 rev 1
+By default, elements do not have independent versioning. An element
+may incorporate another specification by reference, and may include
+extensions or other features that are not part of the included
+specification. DPC++ is an example, as it includes SYCL, which is used
+independent of oneAPI and DPC++ and has its own standards body. Other
+elements can be split out and have independent versioning if the need
+arises with agreement of the oneAPI core team. An example would be
+when an element has multiple implementations, and the implementation
+does not include the rest of the elements.
 
 Specification version approval
 ==============================
@@ -89,7 +62,7 @@ Specification version approval
 The oneAPI specification must be approved by its `core team
 <core-teams.rst>`__. Element specifications must be approved by its
 core team and the oneAPI spec core team.  Updates which only change
-the revision may be approved by the lead.
+the revision may be approved by the leads.
 
 
 Provisional versions
@@ -101,8 +74,8 @@ revisions until approval. After approval, the provisional label is
 removed and the rev is set to 1.
 
 Example
-  | oneMKL provisional 1.1 rev 1
-  | oneMKL provisional 1.1 rev 2
-  | oneMKL provisional 1.1 rev 3
-  | oneMKL 1.1 rev 1
+  | oneAPI provisional 1.1 rev 1
+  | oneAPI provisional 1.1 rev 2
+  | oneAPI provisional 1.1 rev 3
+  | oneAPI 1.1 rev 1
 
