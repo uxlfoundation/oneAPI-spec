@@ -217,7 +217,7 @@ Added the Range-based versions of following algorithms:
   In order to make these algorithm available the ``<oneapi/dpl/ranges>`` header should be included.
   Use of the range-based API requires C++17 and the C++ standard libraries coming with GCC 8.1 (or higher) or Clang 7 (or higher).
   
-  The following viewable ranges are declared in ``oneapi::dpl::experimental::ranges`` namespace and available in to use instead of iterators:
+  The following viewable ranges are declared in ``oneapi::dpl::experimental::ranges`` namespace and available to use instead of iterators:
 
   ``all_view`` - presents a view of all or a part of sycl::buffer underlying elements.
   ``zip_view`` - produces one zip_view  from other several views.
@@ -227,3 +227,18 @@ Added the Range-based versions of following algorithms:
   ``drop_view`` - produces a view excluding the first N elements form another view.  
   ``iota_view`` - generates a sequence of elements [0, N).
   
+Example of Range-based API using
+
+.. code:: cpp
+
+    using namespace oneapi::dpl::experimental::ranges;
+
+    {
+        cl::sycl::buffer<int> A(data, cl::sycl::range<1>(max_n));
+        cl::sycl::buffer<int> B(data2, cl::sycl::range<1>(max_n));
+
+        auto view = all_view(A) | views::reverse();
+        auto range_res = all_view<int, cl::sycl::access::mode::write>(B);
+        
+        copy(oneapi::dpl::execution::dpcpp_default, view, range_res);
+    }
