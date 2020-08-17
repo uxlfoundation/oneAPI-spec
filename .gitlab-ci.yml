@@ -1,7 +1,0 @@
-build:
-  image: rscohn2/oneapi-spec
-  stage: build
-  script:
-    - python3 scripts/oneapi.py spec-venv
-    - source spec-venv/bin/activate
-    - python scripts/oneapi.py --branch $CI_COMMIT_REF_NAME ci
