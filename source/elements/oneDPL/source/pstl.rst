@@ -204,3 +204,24 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
       dpl::fill(dpl::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
       dpl::fill(dpl::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
 
+Range-based API
+++++++++++++++++++++++
+
+Added the Range-based versions of following algorithms: ``for_each``, ``copy``, ``transform``,
+  ``find``, ``find_if``, ``find_if_not``, ``find_end``, ``find_first_of``, ``search``, ``is_sorted``,
+  ``is_sorted_until``, ``reduce``, ``transform_reduce``, ``min_element``, ``max_element``, ``minmax_element``,
+  ``exclusive_scan``, ``inclusive_scan``, ``transform_exclusive_scan``, ``transform_inclusive_scan``.
+  These algorithms are declared in ``oneapi::dpl::experimental::ranges`` namespace and implemented only for DPC++ policies.
+  In order to make these algorithm available the ``<oneapi/dpl/ranges>`` header should be included.
+  Use of the range-based API requires C++17 and the C++ standard libraries coming with GCC 8.1 (or higher) or Clang 7 (or higher).
+  
+The following viewable ranges are declared in ``oneapi::dpl::experimental::ranges`` namespace and available in to use instead of iterators:
+
+  oneapi::dpl::experimental::ranges::all_view - presents a view of all or a part of sycl::buffer underlying elements.
+  oneapi::dpl::experimental::ranges::zip_view - produces one zip_view  from other several views
+  oneapi::dpl::experimental::ranges::iota_view - generates a sequence of elements [0, N);
+  oneapi::dpl::experimental::ranges::drop_view - produces a view excluding the first N elements form another view.
+  oneapi::dpl::experimental::ranges::reverse_view - produce a reversed sequence of elements [0, N) provided by another view.
+  oneapi::dpl::experimental::ranges::take_view - produces a view of the first N elements form another view.;
+  oneapi::dpl::experimental::ranges::transform_view - presents a view of a underlying sequence after applying a transformation each element;
+  
