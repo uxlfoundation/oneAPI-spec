@@ -14,7 +14,7 @@ Version    Date        Notes
 0.8.0_     05/28/2020  80% content
 0.8.5_     06/26/2020  85% content
 0.9.0_     07/30/2020  Final Gold Preview
-1.0.0_     08/30/2020  Gold Release
+1.0.0_     10/29/2020  Gold Release
 ========   ==========  ===========
 
 Details:
@@ -341,9 +341,8 @@ Schedule
 =========  ==========
 Date       Milestone
 =========  ==========
-8/17/2020  Cutoff date for accepting feedback for inclusion in this version
-8/28/2020  Code freeze
-8/30/2020  Release
+10/27/2020  Code freeze
+10/29/2020  Release
 =========  ==========
 
 - Overall
