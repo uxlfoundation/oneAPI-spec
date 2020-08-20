@@ -2291,7 +2291,7 @@ enum {
 
     MFX_MEMTYPE_INTERNAL_FRAME  = 0x0001, /*!< Allocation request for internal frames */
     MFX_MEMTYPE_EXTERNAL_FRAME  = 0x0002, /*!< Allocation request for I/O frames */
-    MFX_MEMTYPE_EXPORT_FRAME    = 0x0008, /*!< Application requests frame handle export to some associated object. For Linux frame handle can be
+    MFX_MEMTYPE_EXPORT_FRAME    = 0x0008, /*!< Application requests frame handle export to some associated object. For Linux* frame handle can be
                                                considered to be exported to DRM Prime FD, DRM FLink or DRM FrameBuffer Handle. Specifics of export
                                                types and export procedure depends on external frame allocator implementation */
     MFX_MEMTYPE_SHARED_RESOURCE = MFX_MEMTYPE_EXPORT_FRAME, /*!< For DX11 allocation use shared resource bind flag. */
