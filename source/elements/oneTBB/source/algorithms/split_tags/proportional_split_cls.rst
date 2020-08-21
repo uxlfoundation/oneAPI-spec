@@ -47,9 +47,9 @@ Member functions
 
     Returns the size of the right part of the proportion.
 
-.. cpp:function:: explicit operator split() const
+.. cpp:function:: operator split() const
 
-    Makes ``proportional_split`` convertible to the ``split`` type to use with
+    Makes ``proportional_split`` implicitly convertible to the ``split`` type to use with
     ranges that do not support proportional splitting.
 
 See also:
