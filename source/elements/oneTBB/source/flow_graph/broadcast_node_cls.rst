@@ -25,12 +25,6 @@ A node that broadcasts incoming messages to all of its successors.
     } // namespace flow
     } // namespace tbb
 
-Requirements:
-
-* ``T`` type must meet the `CopyConstructible` requirements from
-  [copyconstructible] and `CopyAssignable` requirements from
-  [copyassignable] ISO C++ Standard section.
-
 ``broadcast_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
 ``broadcast_node`` has a `discarding` and `broadcast-push` :doc:`properties <forwarding_and_buffering>`.

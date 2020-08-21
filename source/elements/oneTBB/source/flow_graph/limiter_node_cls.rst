@@ -29,9 +29,8 @@ A node that counts and limits the number of messages that pass through it.
 
 Requirements:
 
-* ``T`` type must meet the `CopyConstructible` requirements from
-  [copyconstructible] and `CopyAssignable` requirements from
-  [copyassignable] ISO C++ Standard section.
+* ``T`` type must meet the `DefaultConstructible` requirements from
+  [defaultconstructible] ISO C++ Standard section.
 * The ``DecrementType`` type must be an integral type or ``continue_msg``.
 
 ``limiter_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``

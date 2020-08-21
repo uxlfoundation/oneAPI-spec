@@ -66,9 +66,10 @@ tuple to all of its successors.
 
 Requirements:
 
-* The type ``OutputTuple`` must be an instantiation of ``std::tuple``. Each type that the tuple stores
-  must meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
-  requirements from [copyassignable] ISO C++ Standard sections.
+* The type ``OutputTuple`` must be an instantiation of ``std::tuple``. Each type that the tuple
+  stores must meet the `DefaultConstructible` requirements from [defaultconstructible],
+  `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` requirements from
+  [copyassignable] ISO C++ Standard sections.
 * The ``JoinPolicy`` type must be specified as one of :doc:`buffering policies <join_node_policies>` for ``join_node``.
 * The ``KHash`` type must meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
 * The ``Bi`` types must meet the :doc:`JoinNodeFunctionObject requirements <../named_requirements/flow_graph/join_node_func_obj>`.

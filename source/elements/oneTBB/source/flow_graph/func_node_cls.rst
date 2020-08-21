@@ -34,8 +34,11 @@ A node that executes a user-provided body on incoming messages.
 
 Requirements:
 
-* The ``Input`` and ``Output`` types must meet the `CopyConstructible` requirements from
-  [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
+* The ``Input`` type must meet the `DefaultConstructible` requirements from
+  [defaultconstructible] and the `CopyConstructible` requirements from
+  [copyconstructible] ISO C++ Standard sections.
+* The ``Output`` type must meet the `CopyConstructible` requirements from
+  [copyconstructible] ISO C++ Standard section.
 * The type ``Policy`` may be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`FunctionNodeBody requirements <../named_requirements/flow_graph/function_node_body>`.
 

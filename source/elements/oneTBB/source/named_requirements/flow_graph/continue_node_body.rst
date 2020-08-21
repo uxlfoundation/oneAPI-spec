@@ -17,7 +17,7 @@ A type `Body` satisfies `ContinueNodeBody` if it meets the following requirement
 
     Destructor.
 
-.. cpp:function:: Output Body::operator()( const continue_msg &v ) const
+.. cpp:function:: Output Body::operator()( const continue_msg &v )
 
     **Requirements:** The type ``Output`` must be the same as the template type argument ``Output`` of the
     ``continue_node`` instance in which the ``Body`` object is passed during construction.

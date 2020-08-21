@@ -17,10 +17,6 @@ A type `Body` satisfies `FunctionNodeBody` if it meets the following requirement
 
     Destructor.
 
-.. cpp:function:: void operator=( const B& )
-
-    Assignment.
-
 .. cpp:function:: Output Body::operator()( const Input& v )
 
     **Requirements:** The ``Input`` and ``Output`` types must be the same as the ``Input`` and ``Output``

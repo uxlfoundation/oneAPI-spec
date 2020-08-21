@@ -28,8 +28,8 @@ A node that is an unbounded buffer of messages. Messages are forwarded in an arb
 
 Requirements:
 
-* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible]
-  ISO C++ Standard sections.
+* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
+  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 
 ``buffer_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 

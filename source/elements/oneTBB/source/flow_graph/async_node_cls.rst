@@ -37,8 +37,8 @@ the user or another runtime.
 
 Requirements:
 
-* The ``Input`` and ``Output`` types must meet the `CopyConstructible` requirements from
-  [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
+* The ``Input`` type must meet the `DefaultConstructible` requirements from [defaultconstructible]
+  and the `CopyConstructible` requirements from [copyconstructible] ISO C++ Standard sections.
 * The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`AsyncNodeBody requirements <../named_requirements/flow_graph/async_node_body>`.
 

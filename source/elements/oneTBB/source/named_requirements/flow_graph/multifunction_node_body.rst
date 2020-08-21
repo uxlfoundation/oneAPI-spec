@@ -17,10 +17,6 @@ A type `Body` satisfies `MultifunctionNodeBody` if it meets the following requir
 
     Destructor.
 
-.. cpp:function:: void operator=( const Body& )
-
-    Assignment.
-
 .. cpp:function:: void Body::operator()(const Input &v, OutputPortsType &p)
 
     **Requirements:** 

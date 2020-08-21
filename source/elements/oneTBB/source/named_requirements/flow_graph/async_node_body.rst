@@ -17,10 +17,6 @@ A type `Body` satisfies `AsyncNodeBody` if it meets the following requirements:
 
     Destructor.
 
-.. cpp:function:: void operator=( const B& )
-
-    Assignment.
-
 .. cpp:function:: void Body::operator()( const Input &v, GatewayType &gateway )
 
     **Requirements:** 

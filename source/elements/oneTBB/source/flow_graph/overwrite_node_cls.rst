@@ -31,8 +31,8 @@ A node that is a buffer of a single item that can be overwritten.
 
 Requirements:
 
-* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
-  `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
+* The type ``T`` must meet the `DefaultConstructible` requirements from [defaultconstructible] and
+  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 
 This type of node buffers a single item of type ``T``. The value is initially invalid. Gets from the node are
 non-destructive.

@@ -34,10 +34,9 @@ which the message was received.
 
 Requirements:
 
-* The ``T`` type and all types in ``TN`` template parameter pack must meet the
-  `CopyConstructible` requirements from [copyconstructible] and
-  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard
-  sections.
+* The ``T0`` type and all types in ``TN`` template parameter pack must meet the
+  `CopyConstructible` requirements from [copyconstructible] ISO C++ Standard
+  section.
 
 An ``indexer_node`` is a ``graph_node`` and ``sender<tagged_msg<size_t, T0, TN...>>``.
 It contains a tuple of input ports, each of which is a
