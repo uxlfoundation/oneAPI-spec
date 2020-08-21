@@ -288,7 +288,7 @@ class ClassBuilder(_BuilderMixins):
     def _build_methods(self, kind='func'):
         public_func_memberdef = (memberdef
             for sectiondef in self.src.sectiondef
-                if sectiondef.kind == 'public-{}'.format(kind)
+                if sectiondef.kind == f'public-{kind}'
             for memberdef in sectiondef.memberdef
                 if memberdef.kind == 'function'
         )

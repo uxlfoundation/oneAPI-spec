@@ -159,9 +159,10 @@ class ClassDirective(DoxyDirective):
         x.add_member(property_def.declaration, level=1)
         if property_def.doc and property_def.doc.description:
             desc = self.format_description(property_def.doc.description)
-            if not desc:
-                print('Error: property', property_def.fully_qualified_name, 'does not have a description')
-            x.add_doc(desc, level=2)
+            if desc:
+                x.add_doc(desc, level=2)
+            else:
+                print(f'WARNING: oneDAL property `{property_def.fully_qualified_name}` is not documented')
         if property_def.getter or property_def.setter:
             x('Getter & Setter', level=2)
             if property_def.getter:
