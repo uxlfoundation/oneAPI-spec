@@ -64,10 +64,10 @@ class DoxyDirective(MacroDirective):
             self.add_description(func.doc.description, x, level=level + 1)
         self.add_params('tparam', func.template_parameters, x, level=level + 1)
         self.add_params('param', func.parameters, x, level=level + 1)
-        x.add_blank_like()
+        x.add_blank_line()
         if func.doc:
             self.add_preconditions(func.doc.preconditions, x, level=level + 1)
-            self.add_preconditions(func.doc.postconditions, x, level=level + 1)
+            self.add_postconditions(func.doc.postconditions, x, level=level + 1)
 
     def add_params(self, tag, params, x: RstBuilder, level=0):
         for param in params:
@@ -84,21 +84,21 @@ class DoxyDirective(MacroDirective):
             x('Invariants', level=level)
             for invariant in invariants:
                 x.add(f'| ' + self.format_description(invariant), level=level + 1)
-            x.add_blank_like()
+            x.add_blank_line()
 
     def add_preconditions(self, preconditions, x: RstBuilder, level=0):
         if preconditions:
             x('Preconditions', level=level)
             for precondition in preconditions:
                 x.add(f'| ' + self.format_description(precondition), level=level + 1)
-            x.add_blank_like()
+            x.add_blank_line()
 
     def add_postconditions(self, postconditions, x: RstBuilder, level=0):
         if postconditions:
             x('Postconditions', level=level)
             for postcondition in postconditions:
                 x.add(f'| ' + self.format_description(postcondition), level=level + 1)
-            x.add_blank_like
+            x.add_blank_line()
 
 
 @directive
@@ -115,17 +115,27 @@ class ClassDirective(DoxyDirective):
         x.add_class(class_.kind, sphinx_class_decl,
                     class_.parent_fully_qualified_name)
         self.add_params('tparam', class_.template_parameters, x, level=1)
-        x.add_blank_like()
+        x.add_blank_line()
+        self.add_static_methods(class_, x)
         self.add_constructors(class_, x)
         self.add_methods(class_, x)
         self.add_properties(class_, x)
+
+    def add_static_methods(self, class_, x: RstBuilder):
+        static_methods = [func for func in class_.static_functions
+                          if func.return_type.strip()]
+        if static_methods:
+            x.add('**Public Static Methods**', level=1)
+            x.add_blank_line()
+        for method in static_methods:
+            self.add_function_base(method, x, level=1)
 
     def add_constructors(self, class_, x: RstBuilder):
         ctors = [func for func in class_.functions
                  if not func.return_type.strip()]
         if ctors:
             x.add('**Constructors**', level=1)
-            x.add_blank_like()
+            x.add_blank_line()
         for ctor in ctors:
             self.add_function_base(ctor, x, level=1)
 
@@ -134,14 +144,14 @@ class ClassDirective(DoxyDirective):
                    if func.return_type.strip()]
         if methods:
             x.add('**Public Methods**', level=1)
-            x.add_blank_like()
+            x.add_blank_line()
         for method in methods:
             self.add_function_base(method, x, level=1)
 
     def add_properties(self, class_def, x: RstBuilder):
         if class_def.properties:
             x.add('**Properties**', level=1)
-            x.add_blank_like()
+            x.add_blank_line()
         for property_def in class_def.properties:
             self.add_property(property_def, x)
 
@@ -149,6 +159,8 @@ class ClassDirective(DoxyDirective):
         x.add_member(property_def.declaration, level=1)
         if property_def.doc and property_def.doc.description:
             desc = self.format_description(property_def.doc.description)
+            if not desc:
+                print('Error: property', property_def.fully_qualified_name, 'does not have a description')
             x.add_doc(desc, level=2)
         if property_def.getter or property_def.setter:
             x('Getter & Setter', level=2)
