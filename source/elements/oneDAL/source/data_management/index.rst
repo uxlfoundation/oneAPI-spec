@@ -289,9 +289,13 @@ as :capterm:`flat <flat data>` blocks of rows.
 Details
 =======
 
+This section includes detailed descriptions of all data management objects in
+|dal_short_name|.
+
 .. toctree::
 
+   array.rst
+   accessors.rst
    data_sources.rst
    tables.rst
    table_builders.rst
-   accessors.rst
