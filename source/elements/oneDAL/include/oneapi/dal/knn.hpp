@@ -1,8 +1,8 @@
 #include <cstdint>
-#include "onedal/table.hpp"
-#include "onedal/train.hpp"
+#include "oneapi/dal/table.hpp"
+#include "oneapi/dal/train.hpp"
 
-namespace onedal::knn {
+namespace oneapi::dal::knn {
 
 namespace method {
    /// Tag-type that denotes `brute-force <t_math_brute_force_>`_ computational
@@ -74,7 +74,7 @@ public:
 };
 
 /// Runs the training operation for $k$-NN classifier. For more details see
-/// :expr:`onedal::train`.
+/// :expr:`oneapi::dal::train`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
 ///                intermediate computations. Can be :expr:`float` or
@@ -123,7 +123,7 @@ public:
 };
 
 /// Runs the inference operation for $k$-NN classifier. For more details see
-/// :expr:`onedal::infer`.
+/// :expr:`oneapi::dal::infer`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
 ///                intermediate computations. Can be :expr:`float` or
@@ -145,11 +145,11 @@ template <typename Float, typename Method>
 infer_result infer(const descriptor<Float, Method>& desc,
                    const infer_input& input);
 
-} // namespace onedal::knn
+} // namespace oneapi::dal::knn
 
-namespace onedal::knn::example {
+namespace oneapi::dal::knn::example {
 
 knn::model run_training(const table& data, const table& labels) {
 }
 
-} // onedal::knn::example
+} // oneapi::dal::knn::example

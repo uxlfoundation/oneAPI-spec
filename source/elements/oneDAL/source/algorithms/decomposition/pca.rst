@@ -73,13 +73,13 @@ Usage example
 -------------
 ::
 
-   onedal::pca::model run_training(const onedal::table& data) {
+   oneapi::dal::pca::model run_training(const oneapi::dal::table& data) {
 
-      const auto pca_desc = onedal::pca::desc<float>{}
+      const auto pca_desc = oneapi::dal::pca::desc<float>{}
          .set_component_count(5)
          .set_deterministic(true);
 
-      const auto result = onedal::train(pca_desc, data);
+      const auto result = oneapi::dal::train(pca_desc, data);
 
       print_table("means", result.get_means());
       print_table("variances", result.get_variances());
@@ -92,13 +92,13 @@ Usage example
 
 ::
 
-   onedal::table run_inference(const onedal::pca::model& model,
-                               const onedal::table& new_data) {
+   oneapi::dal::table run_inference(const oneapi::dal::pca::model& model,
+                               const oneapi::dal::table& new_data) {
 
-      const auto pca_desc = onedal::pca::desc<float>{}
+      const auto pca_desc = oneapi::dal::pca::desc<float>{}
          .set_component_count(model.get_component_count());
 
-      const auto result = onedal::infer(pca_desc, model, new_data);
+      const auto result = oneapi::dal::infer(pca_desc, model, new_data);
 
       print_table("labels", result.get_transformed_data());
    }
@@ -118,7 +118,7 @@ Methods
    } // namespace method
 
 
-.. namespace:: onedal::pca::method
+.. namespace:: oneapi::dal::pca::method
 
 .. struct:: cov
 
@@ -152,7 +152,7 @@ Descriptor
       desc& set_deterministic(bool);
    };
 
-.. namespace:: onedal::pca
+.. namespace:: oneapi::dal::pca
 
 .. class:: template<typename Float = float, \
                     typename Method = method::by_default> \
@@ -235,8 +235,8 @@ Model
 
 
 
-Training :expr:`onedal::train(...)`
------------------------------------
+Training :expr:`oneapi::dal::train(...)`
+----------------------------------------
 Input
 ~~~~~
 ::
@@ -333,7 +333,7 @@ Result
 
 Operation semantics
 ~~~~~~~~~~~~~~~~~~~
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. function:: template <typename Descriptor> \
               pca::train_result train(const Descriptor& desc, \
                                       const pca::train_input& input)
@@ -356,8 +356,8 @@ Operation semantics
       | :expr:`result.model.eigenvectors.column_count == desc.component_count`
 
 
-Inference :expr:`onedal::infer(...)`
-------------------------------------
+Inference :expr:`oneapi::dal::infer(...)`
+-----------------------------------------
 Input
 ~~~~~
 ::
@@ -375,7 +375,7 @@ Input
       infer_input& set_data(const table&);
    };
 
-.. namespace:: onedal::pca
+.. namespace:: oneapi::dal::pca
 
 .. class:: infer_input
 
@@ -447,7 +447,7 @@ Result
 
 Operation semantics
 ~~~~~~~~~~~~~~~~~~~
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. function:: template <typename Descriptor> \
               pca::infer_result infer(const Descriptor& desc, \
                                       const pca::infer_input& input)
