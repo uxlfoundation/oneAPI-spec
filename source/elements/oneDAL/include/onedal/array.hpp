@@ -1,7 +1,7 @@
 
 namespace oneapi::dal {
 
-/// @tparam T The type of memory block elements inside the array.
+/// @tparam T The type of the memory block elements inside the array.
 ///
 /// @pre $T$ cannot be const-qualified.
 template <typename T>
@@ -13,9 +13,11 @@ public:
     /// Creates a new array with allocated but non-initialized data.
     /// Array owns these data as mutable memory block.
     ///
-    /// @param queue The object used to allocate the data.
+    /// @param queue The object used to allocate and free the data
+    ///              (when reference count on memory block becomes zero).
     /// @param count The number of elements to allocate.
     /// @param alloc The kind of memory to be allocated.
+    /// @pre :expr:`count > 0`
     static array<T> empty(const sycl::queue& queue,
                           std::int64_t count,
                           const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
@@ -23,10 +25,15 @@ public:
     /// Creates a new array with the data filled by single value.
     /// Array owns these data as mutable memory block.
     ///
-    /// @param queue   The object used to allocate and fill the data.
+    /// @tparam K      The type that array elements of type $T$ can be constructed from.
+    ///
+    /// @param queue   The object used to allocate, fill, and free the data
+    ///                (when reference count on memory block becomes zero).
     /// @param count   The number of elements to allocate.
     /// @param element The value that is used to fill memory block.
     /// @param alloc   The kind of memory to be allocated.
+    /// @pre :expr:`count > 0`
+    /// @pre Elements of the ``array`` are constructible from ``K`` type.
     template <typename K>
     static array<T> full(sycl::queue& queue,
                          std::int64_t count,
@@ -36,19 +43,23 @@ public:
     /// Creates a new array with the data filled by zero value.
     /// Array owns these data as mutable memory block.
     ///
-    /// @param queue   The object used to allocate and fill the data.
+    /// @param queue   The object used to allocate, fill, and free the data.
+    ///                (when reference count on memory block becomes zero)
     /// @param count   The number of elements to allocate.
     /// @param alloc   The kind of memory to be allocated.
+    /// @pre :expr:`count > 0`
     static array<T> zeros(sycl::queue& queue,
                           std::int64_t count,
                           const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Creates a new array that hold unmanaged mutable memory block.
+    /// Creates a new array that holds unmanaged mutable memory block.
     /// Responsibility to free this block remains on the user side.
     ///
     /// @param data         The pointer to user-allocated data.
     /// @param count        The number of elements in memory block.
     /// @param dependencies Events that say when $data$ becomes ready to be read or written
+    /// @pre :expr:`data != nullptr`
+    /// @pre :expr:`count > 0`
     static array<T> wrap(T* data,
                          std::int64_t count,
                          const sycl::vector_class<sycl::event>& dependencies = {});
@@ -59,6 +70,8 @@ public:
     /// @param data         The pointer to user-allocated data.
     /// @param count        The number of elements in memory block.
     /// @param dependencies Events that say when $data$ becomes ready to be read or written
+    /// @pre :expr:`data != nullptr`
+    /// @pre :expr:`count > 0`
     static array<T> wrap(const T* data,
                          std::int64_t count,
                          const sycl::vector_class<sycl::event>& dependencies = {});
@@ -78,8 +91,8 @@ public:
     /// Creates a new array instance which holds a pointer to user-allocated data.
     /// Array considers these data as mutable memory block.
     ///
-    /// @tparam Deleter The type of deleter used to free the $data$ when count
-    ///                 of references on it becomes zero.
+    /// @tparam Deleter     The type of deleter used to free the $data$ when count
+    ///                     of references on it becomes zero.
     ///
     /// @param queue        The queue used to perform computations.
     /// @param data         The pointer to user-allocated data.
@@ -94,18 +107,18 @@ public:
                    Deleter&& deleter,
                    const sycl::vector_class<sycl::event>& dependencies = {});
 
-    /// Creates a new array instance which holds an pointer to user-allocated data.
+    /// Creates a new array instance which holds a pointer to user-allocated data.
     /// Array considers these data as immutable memory block.
     ///
     /// @tparam ConstDeleter The type of deleter used to free the $data$ when count
     ///                      of references on it becomes zero.
     ///
-    /// @param queue        The queue object used to perform computations.
-    /// @param data         The pointer to user-allocated data.
-    /// @param count        Count of the $data$.
-    /// @param deleter      The object used to free $data$ when reference
-    ///                     count on the memory block becomes zero.
-    /// @param dependencies Events that say when $data$ becomes ready to be read or written
+    /// @param queue         The queue object used to perform computations.
+    /// @param data          The pointer to user-allocated data.
+    /// @param count         Count of the $data$.
+    /// @param deleter       The object used to free $data$ when reference
+    ///                      count on the memory block becomes zero.
+    /// @param dependencies  Events that say when $data$ becomes ready to be read or written
     template <typename ConstDeleter>
     explicit array(const sycl::queue& queue,
                    const T* data,
@@ -114,11 +127,18 @@ public:
                    const sycl::vector_class<sycl::event>& dependencies = {});
 
     /// An aliasing constructor: creates a new array that hold $data$ pointer
-    /// and shares ownership information with $ref$. If this array is the last reference
-    /// to go out of the scope, than deleter of the $ref$ is called.
+    /// and shares ownership information with $ref$. If this array is the last
+    /// reference to go out of the scope, than deleter of the $ref$ is called.
+    /// Array returns $data$ pointer as its mutable or immutable block depending
+    /// on the $K$ type.
     ///
-    /// @param ref   The array which shares ownership information with created one.
-    /// @param data  Mutable or immutable unmanaged data pointer hold by created array.
+    /// @tparam Y    The type of elements in the reference array
+    /// @tparam K    The type that array elements of type $T$ can be constructed from.
+    ///
+    /// @param ref   The array which shares ownership information with created
+    ///              one.
+    /// @param data  Mutable or immutable unmanaged data pointer hold by
+    ///              created array.
     /// @param count The number of elements in $data$
     ///
     /// @pre  :expr:`std::is_same_v<K, const T> || std::is_same_v<K, T>`
@@ -149,6 +169,7 @@ public:
 
     /// The immutable pointer to memory block.
     /// @invariant :expr:`data != nullptr` if :expr:`count > 0`
+    /// @invariant if :expr:`has_mutable_data() == true` then `data == mutable_data`
     const T* get_data() const noexcept;
 
     /// Returns whether array contains :expr:`mutable_data` or not
@@ -156,12 +177,14 @@ public:
     /// @invariant :expr:`mutable_data != nullptr` if this returns `true` and :expr:`count > 0`
     bool has_mutable_data() const noexcept;
 
-    /// Assures that array holds :expr:`mutable_data`.
-    /// If :expr:`has_mutable_data() == false && count > 0` than allocates :expr:`mutable_data` block
-    /// and copies :expr:`data` in it. Forgets about previous immutable memory block.
-    /// If array has :expr:`mutable_data` already, no allocation and copy are performed.
+    /// Assures that array holds :expr:`mutable_data`. If
+    /// :expr:`has_mutable_data() == false && count > 0` then allocates
+    /// :expr:`mutable_data` block and copies :expr:`data` in it. Forgets about
+    /// previous immutable memory block. If array has :expr:`mutable_data`
+    /// already, no allocation and copy are performed.
     ///
-    /// @param queue The object that specifies where and how perform an operation
+    /// @param queue The object that specifies where and how to perform an
+    ///              operation
     /// @param alloc The kind of memory to be allocated
     ///
     /// @post :expr:`has_mutable_data() == true`
@@ -179,9 +202,11 @@ public:
     /// Makes the array empty.
     ///
     /// @post :expr:`count == 0`
+    /// @post :expr:`has_mutable_data() == false`
+    /// @post :expr:`data == nullptr`
     void reset();
 
-    /// Leaves the memory block currently held in the array, when
+    /// Leaves the memory block currently held in the array, then
     /// allocates and assigns a new block to the array.
     ///
     /// @param queue The object that specifies where and how perform an operation
@@ -191,13 +216,16 @@ public:
                std::int64_t count,
                const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Leaves the memory block currently held in the array, when
+    /// Leaves the memory block currently held in the array, then
     /// assigns a new user-provided block to the array.
     ///
-    /// @param data The mutable memory block pointer to be assigned to the array
-    /// @param count The number of elements into the block
-    /// @param deleter The object used to free $data$ when reference
-    ///                count on the array becomes zero.
+    /// @tparam Deleter     The type of deleter used to free the $data$ when count
+    ///                     of references on it becomes zero.
+    ///
+    /// @param data         The mutable memory block pointer to be assigned into the array
+    /// @param count        The number of elements into the block
+    /// @param deleter      The object used to free $data$ when reference
+    ///                     count on the array becomes zero.
     /// @param dependencies Events that say when $data$ becomes ready to be read or written
     template <typename Deleter>
     void reset(T* data,
@@ -205,22 +233,27 @@ public:
                Deleter&& deleter,
                const sycl::vector_class<sycl::event>& dependencies = {});
 
-    /// Leaves the memory block currently held in the array, when
+    /// Leaves the memory block currently held in the array, then
     /// assigns a new user-provided block to the array.
     ///
-    /// @param data The immutable memory block pointer to be assigned to the array
-    /// @param count The number of elements into the block
-    /// @param deleter The object used to free $data$ when reference
-    ///                count on the array becomes zero.
-    /// @param dependencies Events that say when $data$ becomes ready to be read or written
+    /// @tparam ConstDeleter The type of deleter used to free the $data$ when count
+    ///                      of references on it becomes zero.
+    ///
+    /// @param data          The immutable memory block pointer to be assigned into the array
+    /// @param count         The number of elements into the block
+    /// @param deleter       The object used to free $data$ when reference
+    ///                      count on the array becomes zero.
+    /// @param dependencies  Events that say when $data$ becomes ready to be read or written
     template <typename ConstDeleter>
     void reset(const T* data,
                std::int64_t count,
                ConstDeleter&& deleter,
                const sycl::vector_class<sycl::event>& dependencies = {});
 
-    /// Leaves the memory block currently held in the array, when
+    /// Leaves the memory block currently held in the array, then
     /// assigns a new user-provided block to the array.
+    ///
+    /// @tparam Y    The type of elements in the reference array
     ///
     /// @param ref   The array which is used to share ownership information with current one.
     /// @param data  Mutable unmanaged data pointer to be assigned to the array.
@@ -228,8 +261,10 @@ public:
     template <typename Y>
     void reset(const array<Y>& ref, T* data, std::int64_t count);
 
-    /// Leaves the memory block currently held in the array, when
+    /// Leaves the memory block currently held in the array, then
     /// assigns a new user-provided block to the array.
+    ///
+    /// @tparam Y    The type of elements in the reference array
     ///
     /// @param ref   The array which is used to share ownership information with current one.
     /// @param data  Immutable unmanaged data pointer to be assigned to the array.
@@ -237,8 +272,8 @@ public:
     template <typename Y>
     void reset(const array<Y>& ref, const T* data, std::int64_t count);
 
-    /// Provides a read-only access to the elements of the array.
-    /// Do not perform boundary checks.
+    /// Provides a read-only access to the elements of array.
+    /// Does not perform boundary checks.
     const T& operator[](std::int64_t index) const noexcept;
 };
 

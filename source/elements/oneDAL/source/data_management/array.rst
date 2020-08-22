@@ -5,19 +5,20 @@
 Array
 =====
 
-Array is a simple concept over the data in |dal_short_name|. It represents
+The array is a simple concept over the data in |dal_short_name|. It represents
 storage with the following characteristics:
 
 1. Data inside the array are organized as one :term:`homogeneous <Homogeneous
    data>` and :term:`contiguous <Contiguous data>` memory block.
 2. The array knows about memory block size.
 3. The array can hold either :term:`immutable <Immutability>` or mutable data.
-4. The array can transfer data from immutable to mutable state.
-5. Array holds ownership information on the data: references count and deleter used
-   to free the data.
-6. Ownership information on the data can be shared between several arrays: it is
-   possible to create new array object that shares information with an object it
-   is created from without any data copies.
+4. The array can change the data state from immutable to mutable one.
+5. Array holds ownership information on the data: the references count
+   (how many arrays refer to the same data block) and a deleter used to free the
+   data when references count becomes zero.
+6. Ownership information on the data can be shared between several arrays. It is
+   possible to create new array from another one without any data copies: they
+   will share reference count and a deleter object.
 
 -------------
 Usage example
@@ -64,7 +65,7 @@ usage scenario:
       std::cout << "Is arr_data mutable: "
                 << arr_data.has_mutable_data() << std::endl; // false
 
-      // Both the arrays refer to original data pointer:
+      // Both arrays refer to the original data pointer:
       // arr_mdata.get_data() == arr_data.get_data() == data
       // If we want to modify data of arr_mdata, we need to make it mutable:
       arr_mdata.need_mutable_data(queue);
