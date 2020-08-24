@@ -34,6 +34,8 @@ Tasks can be dynamically added to the group while it is executing.
 Member functions
 ----------------
 
+.. namespace:: tbb::task_group
+
 .. cpp:function:: task_group()
 
     Constructs an empty ``task_group``.

@@ -46,6 +46,8 @@ are non-destructive.
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::write_once_mode
+
 .. cpp:function:: explicit write_once_node( graph &g )
 
     Constructs an object of type ``write_once_node`` that belongs to the graph ``g``, with an

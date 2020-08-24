@@ -43,6 +43,8 @@ The next message to be forwarded has the largest priority as determined by the `
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::priority_node_queue
+	       
 .. cpp:function:: explicit priority_queue_node( graph &g )
 
     Constructs an empty ``priority_queue_node`` that belongs to the  graph ``g``.

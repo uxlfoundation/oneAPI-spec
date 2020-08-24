@@ -46,6 +46,8 @@ non-destructive.
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::overwrite_node
+	       
 .. cpp:function:: explicit overwrite_node( graph &g )
 
     Constructs an object of type ``overwrite_node`` that belongs to the graph ``g`` with an invalid

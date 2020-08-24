@@ -62,6 +62,8 @@ Member types
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::indexer_node
+	       
 .. cpp:function:: indexer_node(graph &g)
 
     Constructs an ``indexer_node`` that belongs to the graph ``g``.

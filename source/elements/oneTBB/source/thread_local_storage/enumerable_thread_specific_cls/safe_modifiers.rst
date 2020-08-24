@@ -4,6 +4,8 @@ Concurrently safe modifiers
 
 All member functions in this section can be performed concurrently with each other.
 
+.. namespace:: tbb::enumerable_thread_specific
+	       
 .. cpp:function:: reference local()
 
     If there is no current element corresponding to the current thread, this method constructs a new element.

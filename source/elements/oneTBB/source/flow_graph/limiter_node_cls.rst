@@ -62,6 +62,8 @@ successors. If it cannot obtain a message from a predecessor, it decrements a co
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::limiter_node
+	       
 .. cpp:function:: limiter_node( graph &g, size_t threshold )
 
     Constructs a ``limiter_node`` that allows up to ``threshold`` items

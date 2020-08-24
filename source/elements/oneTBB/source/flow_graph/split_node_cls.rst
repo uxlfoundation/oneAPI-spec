@@ -44,6 +44,8 @@ port and generates a message from each element of the tuple, passing each to the
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::split_node
+
 .. cpp:function:: explicit split_node( graph &g )
 
   Constructs a ``split_node`` registered with graph ``g``.

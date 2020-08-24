@@ -49,6 +49,8 @@ user-provided ``Sequencer`` function object.
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::sequencer_node
+
 .. cpp:function:: template<typename Sequencer> \
                   sequencer_node( graph& g, const Sequencer &s )
 

@@ -43,8 +43,7 @@ Requirements:
 * The type ``Body`` must meet the :doc:`FunctionNodeBody requirements <../named_requirements/flow_graph/function_node_body>`.
 
 ``function_node`` has a user-settable concurrency limit. It can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
-The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and
- :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
+The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
 
 Messages that cannot be immediately processed due to concurrency limits are handled according to
 the `Policy` template argument.

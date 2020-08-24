@@ -9,6 +9,8 @@ A type `Body` satisfies `MultifunctionNodeBody` if it meets the following requir
 
 **MultifunctionNodeBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: MultifunctionNodeBody
+   
 .. cpp:function:: Body::Body( const Body& )
 
     Copy constructor.

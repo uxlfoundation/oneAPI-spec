@@ -9,6 +9,8 @@ A type `Body` should meet one of the following requirements depending on the fil
 
 **MiddleFilterBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: MiddleFilterBody
+
 .. cpp:function:: OutputType Body::operator()( InputType item ) const
 
     Processes the received item and then returns it.
@@ -16,6 +18,8 @@ A type `Body` should meet one of the following requirements depending on the fil
 ----------------------------------------------------------------
 
 **FirstFilterBody Requirements: Pseudo-Signature, Semantics**
+
+.. namespace:: FirstFilterBody
 
 .. cpp:function:: OutputType Body::operator()( tbb::flow_control fc ) const
 
@@ -25,6 +29,8 @@ A type `Body` should meet one of the following requirements depending on the fil
 
 **LastFilterBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: LastFilterBody
+
 .. cpp:function:: void Body::operator()( InputType item ) const
 
     Processes the received item. 
@@ -32,6 +38,8 @@ A type `Body` should meet one of the following requirements depending on the fil
 ----------------------------------------------------------------
 
 **SingleFilterBody Requirements: Pseudo-Signature, Semantics**
+
+.. namespace:: SingleFilterBody
 
 .. cpp:function:: void Body::operator()( tbb::flow_control fc ) const
 

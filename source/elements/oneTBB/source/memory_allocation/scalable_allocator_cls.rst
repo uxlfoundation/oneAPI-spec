@@ -37,6 +37,8 @@ Memory allocated by a ``scalable_allocator`` should be freed by a ``scalable_all
 Member Functions
 ----------------
 
+.. namespace:: tbb::scalable_allocator
+
 .. cpp:function:: value_type* allocate(size_type n)
 
     Allocates ``n * sizeof(T)`` bytes of memory. Returns a pointer to the allocated memory.

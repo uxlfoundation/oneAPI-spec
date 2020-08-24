@@ -9,6 +9,8 @@ A type `Body` satisfies `AsyncNodeBody` if it meets the following requirements:
 
 **AsyncNodeBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: AsyncNodeBody
+	       
 .. cpp:function:: Body::Body( const Body& )
 
     Copy constructor.

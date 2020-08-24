@@ -41,6 +41,8 @@ its successor set.
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::queue_node
+
 .. cpp:function:: explicit queue_node( graph &g )
 
     Constructs an empty ``queue_node`` that belongs to the  graph ``g``.
