@@ -12,7 +12,7 @@ External Memory
 The following example shows the pseudo code of the encoding procedure with
 external memory (legacy mode):
 
-.. literalinclude:: /snippets/prg_encoding.c
+.. literalinclude:: ../snippets/prg_encoding.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/
@@ -50,7 +50,7 @@ Internal Memory
 
 The following example shows the encoding procedure with internal memory:
 
-.. literalinclude:: /snippets/prg_encoding.c
+.. literalinclude:: ../snippets/prg_encoding.c
    :language: c++
    :start-after: /*beg2*/
    :end-before: /*end2*/
@@ -124,7 +124,7 @@ corresponding functions: :cpp:func:`MFXVideoENCODE_Init`,
 following figure shows asynchronous encoding flow with external BRC (using
 ``GetFrameCtrl`` and ``Update``):
 
-.. figure:: /images/extbrc_async.png
+.. figure:: ../images/extbrc_async.png
    :alt: Asynchronous encoding flow with external BRC
 
    Asynchronous encoding flow with external BRC
@@ -134,7 +134,7 @@ following figure shows asynchronous encoding flow with external BRC (using
 
 The following pseudo code shows use of the external BRC:
 
-.. literalinclude:: /snippets/prg_encoding.c
+.. literalinclude:: ../snippets/prg_encoding.c
    :language: c++
    :start-after: /*beg3*/
    :end-before: /*end3*/
@@ -250,7 +250,7 @@ already been submitted.
 
 The following pseudo code shows the encoding procedure:
 
-.. literalinclude:: /snippets/prg_encoding.c
+.. literalinclude:: ../snippets/prg_encoding.c
    :language: c++
    :start-after: /*beg4*/
    :end-before: /*end4*/

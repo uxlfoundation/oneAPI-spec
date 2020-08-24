@@ -6,7 +6,7 @@ Decoding Procedures
 
 The following pseudo code shows the decoding procedure:
 
-.. literalinclude:: /snippets/prg_decoding.c
+.. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/
@@ -56,7 +56,7 @@ Note the following key points about the example:
 
 The following example shows the simplified decoding procedure:
 
-.. literalinclude:: /snippets/prg_decoding.c
+.. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
    :start-after: /*beg2*/
    :end-before: /*end2*/
@@ -287,7 +287,7 @@ target views of the current frame picture, one target view at a time. The target
 view is identified by the ``FrameID`` field of the :cpp:struct:`mfxFrameInfo`
 structure.
 
-.. literalinclude:: /snippets/prg_decoding.c
+.. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
    :start-after: /*beg3*/
    :end-before: /*end3*/

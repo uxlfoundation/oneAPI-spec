@@ -31,7 +31,7 @@ mfxBRCFrameParam
 
 Frame spatial complexity is calculated according to the following formula:
 
-.. image:: /images/frame_cmplx.png
+.. image:: ../images/frame_cmplx.png
    :alt: Frame spatial complexity
 
 mfxBRCFrameStatus
