@@ -39,7 +39,7 @@ hardware device is busy and unable to take commands at this time. Resume the
 operation by waiting for a few milliseconds and resubmitting the request.
 The following example shows the decoding pseudo-code:
 
-.. literalinclude:: /snippets/prg_err.c
+.. literalinclude:: ../snippets/prg_err.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/

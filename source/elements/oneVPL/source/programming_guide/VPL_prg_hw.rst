@@ -34,7 +34,7 @@ workload based on the provided workload description. The following example shows
 workload initialization on a discrete adapter:
 
 
-.. literalinclude:: /snippets/prg_hw.cpp
+.. literalinclude:: ../snippets/prg_hw.cpp
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/
@@ -50,7 +50,7 @@ values of :cpp:type:`mfxIMPL`.
 The following example shows the use of :cpp:func:`MFXQueryAdapters` for querying
 the most suitable adapter for a particular encode workload:
 
-.. literalinclude:: /snippets/prg_hw.cpp
+.. literalinclude:: ../snippets/prg_hw.cpp
    :language: c++
    :start-after: /*beg2*/
    :end-before: /*end2*/

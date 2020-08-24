@@ -25,7 +25,7 @@ With the exception of the global auxiliary functions, oneVPL functions are named
 after their functioning domain and category. oneVPL exposes video domain
 functions.
 
-.. figure:: /images/sdk_function_naming_convention.png
+.. figure:: ../images/sdk_function_naming_convention.png
    :alt: oneVPL function name notation
 
    oneVPL function name notation

@@ -68,7 +68,7 @@ Concatenated segments may not be HRD compliant.
 The following example shows the encoder initialization procedure that imports
 H.264 sequence and picture parameter sets:
 
-.. literalinclude:: /snippets/appnd_b.c
+.. literalinclude:: ../snippets/appnd_b.c
    :language: c++
    :start-after: /*beg*/
    :end-before: /*end*/

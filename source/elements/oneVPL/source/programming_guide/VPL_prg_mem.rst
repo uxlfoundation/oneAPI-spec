@@ -38,7 +38,7 @@ frame allocator can respond accordingly.
 
 The following example shows a simple external frame allocator:
 
-.. literalinclude:: /snippets/prg_mem.c
+.. literalinclude:: ../snippets/prg_mem.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/
@@ -90,7 +90,7 @@ allocator callback functions, if set.
 The following example shows the usage of :cpp:struct:`mfxFrameSurfaceInterface`
 for memory sharing:
 
-.. literalinclude:: /snippets/prg_mem.c
+.. literalinclude:: ../snippets/prg_mem.c
    :language: c++
    :start-after: /*beg2*/
    :end-before: /*end2*/

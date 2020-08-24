@@ -15,7 +15,7 @@ the downstream oneVPL function to construct an asynchronous pipeline. Pipeline
 construction is done at runtime and can be dynamically changed, as shown in the
 following example:
 
-.. literalinclude:: /snippets/prg_transcoding.c
+.. literalinclude:: ../snippets/prg_transcoding.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/
@@ -113,7 +113,7 @@ this number in the :cpp:member:`mfxFrameAllocRequest::NumFrameSuggested`
 value. The following example shows a way of calculating the surface needs based
 on :cpp:member:`mfxFrameAllocRequest::NumFrameSuggested` values:
 
-.. literalinclude:: /snippets/prg_transcoding.c
+.. literalinclude:: ../snippets/prg_transcoding.c
    :language: c++
    :start-after: /*beg3*/
    :end-before: /*end3*/

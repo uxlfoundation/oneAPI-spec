@@ -21,7 +21,7 @@ parameter. If ``MaxKbps`` is set to zero, oneVPL will use CBR HRD model
 .. note:: For CQP, if implementation does not support individual QPI, QPP and QPB
    parameters, then QPI parameter should be used as a QP parameter across all frames.
 
-.. literalinclude:: /snippets/appnd_f.c
+.. literalinclude:: ../snippets/appnd_f.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/

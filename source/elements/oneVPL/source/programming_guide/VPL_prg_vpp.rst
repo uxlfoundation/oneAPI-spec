@@ -6,7 +6,7 @@ Video Processing Procedures
 
 The following example shows the pseudo code of the video processing procedure:
 
-.. literalinclude:: /snippets/prg_vpp.c
+.. literalinclude:: ../snippets/prg_vpp.c
    :language: c++
    :start-after: /*beg1*/
    :end-before: /*end1*/
@@ -106,7 +106,7 @@ list of configurable filters.
 
 The following example shows video processing configuration:
 
-.. literalinclude:: /snippets/prg_vpp.c
+.. literalinclude:: ../snippets/prg_vpp.c
    :language: c++
    :start-after: /*beg2*/
    :end-before: /*end2*/
@@ -119,7 +119,7 @@ Region of Interest
 During video processing operations, the application can specify a region of
 interest for each frame as shown in the following figure:
 
-.. figure:: /images/vpp_region_of_interest_operation.png
+.. figure:: ../images/vpp_region_of_interest_operation.png
    :alt: VPP region of interest operation
 
    VPP region of interest operation
@@ -196,7 +196,7 @@ frame is not the output from the oneVPL MVC decoder, then the application needs 
 fill the the FrameID field before calling the :cpp:func:`MFXVideoVPP_RunFrameVPPAsync`
 function. This is shown in the following pseudo code:
 
-.. literalinclude:: /snippets/prg_vpp.c
+.. literalinclude:: ../snippets/prg_vpp.c
    :language: c++
    :start-after: /*beg3*/
    :end-before: /*end3*/
