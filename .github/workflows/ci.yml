@@ -1,0 +1,36 @@
+on: [push, pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container: rscohn2/oneapi-spec:latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install prerequisites
+      run: |
+          apt-get update -qq
+          DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install --upgrade --quiet -r requirements.txt
+    - name: Build doc
+      run: |
+          . venv/bin/activate
+          python scripts/oneapi.py html
+          python scripts/oneapi.py latexpdf
+          python scripts/oneapi.py spelling
+    - name: Archive build directory
+      uses: actions/upload-artifact@v1
+      with:
+          name: build
+          path: build
+    - name: Publish to staging
+      if: ${{ github.ref == 'refs/heads/publish'}}
+      env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+      run: |
+          . venv/bin/activate
+          python scripts/oneapi.apy site
+          python scripts/oneapi.apy stage-publish

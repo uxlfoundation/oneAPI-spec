@@ -28,15 +28,13 @@
 set -e
 set -x
 
-export DEBIAN_FRONTEND=noninteractive
-apt-get update
-apt-get install -y \
-                    python3-pip \
-                    python3-venv \
-                    python3 \
-                    wget
-apt-get install -y  \
-	            git
+apt-get update -qq
+DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
+
+python3 -m venv venv
+. venv/bin/activate
+pip install --upgrade --quiet -r requirements.txt
+
 wget http://doxygen.nl/files/doxygen-1.8.17.linux.bin.tar.gz
 tar zxf doxygen-1.8.17.linux.bin.tar.gz
 pushd doxygen-1.8.17
@@ -45,15 +43,5 @@ set +e
 make install
 set -e
 popd
-apt-get install -y \
-                    enchant \
-                    graphviz \
-                    imagemagick \
-                    latexmk \
-                    texlive-latex-base \
-                    texlive-fonts-recommended \
-                    texlive-fonts-extra \
-                    texlive-latex-extra
-apt-get install -y \
-	            openssh-client
-pip3 install -r requirements.txt
+
+
