@@ -43,17 +43,15 @@ Member functions
 
   Constructs an object of type ``broadcast_node`` that belongs to the
   same graph ``g`` as ``src``. The list of predecessors, the list of
-  successors, and the messages in the buffer are not copied.
+  successors are not copied.
 
 .. cpp:function:: bool try_put( const input_type &v )
 
-  Adds ``v`` to all successors.
+  Broadcasts ``v`` to all successors.
 
   **Returns**: always returns ``true``, even if it was unable to
   successfully forward the message to any of its successors.
 
 .. cpp:function:: bool try_get( output_type &v )
 
-  If the internal buffer is valid, assigns the value to ``v``.
-
-  **Returns**: ``true`` if ``v`` is assigned to; ``false``, otherwise.
+  **Returns**: ``false``.

@@ -115,8 +115,11 @@ construction of ``other`` do not affect the body of the new
 
     bool try_put( const input_type &v )
 
-If concurrency limit allows, executes the user-provided body on incoming messages
-and returns ``true``. Otherwise, executes nothing and returns ``false``.
+If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
+Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
+it.
+
+**Returns:** ``true`` if the input was accepted; and ``false``, otherwise.
 
 ----------------------------------------------------------------
 

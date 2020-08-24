@@ -105,6 +105,10 @@ construction of ``src`` do not affect the body of the new ``function_node.``
 
     bool try_put( const Input &v )
 
+If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
+Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
+it.
+
 **Returns:** ``true`` if the input was accepted; and ``false``, otherwise.
 
 ----------------------------------------------------------------

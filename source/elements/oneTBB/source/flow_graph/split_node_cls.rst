@@ -17,7 +17,7 @@ in the incoming tuple.
         class split_node : public graph_node, public receiver<TupleType> {
         public:
             explicit split_node( graph &g );
-            split_node( const split_node &other);
+            split_node( const split_node &other );
             ~split_node();
 
             bool try_put( const TupleType &v );
@@ -48,7 +48,7 @@ Member functions
 
   Constructs a ``split_node`` registered with graph ``g``.
 
-.. cpp:function:: split_node( const split_node &other)
+.. cpp:function:: split_node( const split_node &other )
 
   Constructs a ``split_node`` that has the same initial state that
   ``other`` had when it was constructed. The ``split_node`` that is

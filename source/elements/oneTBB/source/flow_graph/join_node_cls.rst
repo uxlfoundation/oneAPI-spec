@@ -135,7 +135,7 @@ Constructs an empty ``join_node`` that belongs to the graph ``g``.
 A constructor only available in the ``key_matching`` specialization of ``join_node``.
 
 Creates a ``join_node`` that uses the function objects ``b0``, ``b1``, ... , ``bN`` to determine
-that tags for the input ports ``0`` through ``N``.
+the tags for the input ports ``0`` through ``N``.
 
 .. caution::
 

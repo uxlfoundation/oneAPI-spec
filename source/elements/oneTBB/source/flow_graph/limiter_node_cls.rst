@@ -18,7 +18,7 @@ A node that counts and limits the number of messages that pass through it.
             limiter_node( graph &g, size_t threshold );
             limiter_node( const limiter_node &src );
 
-            InternalReceiverType<DecrementType> decrement;
+            receiver<DecrementType>& decrementer();
 
             bool try_put( const T &v );
             bool try_get( T &v );
@@ -39,20 +39,21 @@ Requirements:
 
 This node does not accept new messages once the user-specified ``threshold`` is
 reached. The internal count of broadcasts is adjusted through use of
-its embedded ``decrement`` object, and its values are truncated to be
-inside the [0, ``threshold``] interval.
+its embedded ``receiver`` object, and its values are truncated to be
+inside the [0, ``threshold``] interval. The embedded ``receiver`` object can be
+obtained by calling ``decrementer`` method.
 
 The template parameter ``DecrementType`` specifies the type of the message that
-can be sent to the member object ``decrement``. This template parameter defined to
-``continue_msg`` is default. If an integral type is specified, positive values sent
-to ``decrement`` port determine the value by which the internal counter of broadcasts
+can be sent to the embedded ``receiver`` object. This template parameter is defined to
+``continue_msg`` by default. If an integral type is specified, positive values sent
+to the embedded ``receiver`` port determine the value by which the internal counter of broadcasts
 will be decreased, while negative values determine the value by which the internal
 counter of broadcasts will be increased.
 
-The ``continue_msg`` sent to the member object ``decrement``
+The ``continue_msg`` sent to the embedded ``receiver`` object
 decreases the internal counter of broadcasts by one.
 
-When ``try_put`` call on the member object ``decrement`` results in
+When ``try_put`` call on the embedded ``receiver`` object results in
 the new value of internal counter of broadcasts to be less than the
 ``threshold``, the ``limiter_node`` tries to get a message from one
 of its known predecessors and forward that message to all its
@@ -73,6 +74,11 @@ Member functions
     belongs to the same graph ``g`` as ``src``, has the same
     ``threshold``. The list of predecessors, the list of successors,
     and the current count of broadcasts are not copied from ``src``.
+
+.. cpp:function:: receiver<DecrementType>& decrementer()
+
+    Obtains a reference to the embedded ``receiver`` object that is used for the
+    internal counter adjustments.
 
 .. cpp:function:: bool try_put( const T &v )
 

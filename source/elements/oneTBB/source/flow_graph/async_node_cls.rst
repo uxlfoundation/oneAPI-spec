@@ -42,10 +42,10 @@ Requirements:
 * The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`AsyncNodeBody requirements <../named_requirements/flow_graph/async_node_body>`.
 
-``async_node`` executes a user-provided body on incoming messages. The body submits input
-messages to an external activity for processing outside of the task scheduler.
-This node also provides the ``gateway_type`` interface that allows the external activity to
-communicate with the flow graph.
+``async_node`` executes a user-provided body on incoming messages. The body typically submits the
+messages to an external activity for processing outside of the graph. It is responsibility of
+``body`` to be able to pass the message to an external activity. This node also provides the
+``gateway_type`` interface that allows an external activity to communicate with the flow graph.
 
 ``async_node`` is a ``graph_node``, ``receiver<Input>``, and a ``sender<Output>``.
 
@@ -59,7 +59,7 @@ The body object passed to a ``async_node`` is copied. Updates to member variable
 If the state held within a body object must be inspected from outside of the node, 
 the :doc:`copy_body <copy_body_func>` function can be used to obtain an updated copy.
 
-Member functions
+Member types
 ----------------
 
 ``gateway_type`` meets the :doc:`GatewayType requirements <../named_requirements/flow_graph/gateway_type>`.
@@ -120,11 +120,11 @@ Returns reference to the ``gateway_type`` interface.
 
     bool try_put( const input_type& v )
 
-Spawns a task that executes the ``body(v)``.
+If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
+Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
+it.
 
-**Returns**: always returns ``true``, it is responsibility of ``body`` to be able to pass
-``v`` to an external activity. If a message is not properly processed by the ``body`` it will be
-lost.
+**Returns:** ``true`` if the input was accepted; and ``false``, otherwise.
 
 ----------------------------------------------------------------
 
@@ -132,81 +132,4 @@ lost.
 
     bool try_get( output_type& v )
 
-**Returns**: false
-
-Example
--------
-
-The example below shows an ``async_node`` that submits some work to
-``AsyncActivity`` for processing by a user thread.
-
-.. code:: cpp
-
-    #include "tbb/flow_graph.h"
-    #include "tbb/concurrent_queue.h"
-    #include <thread>
-
-    using namespace tbb::flow;
-    typedef int input_type;
-    typedef int output_type;
-    typedef tbb::flow::async_node<input_type, output_type> async_node_type;
-
-    class AsyncActivity {
-    public:
-        typedef async_node_type::gateway_type gateway_type;
-
-        struct work_type {
-            input_type input;
-            gateway_type* gateway;
-        };
-
-        AsyncActivity() : service_thread( [this]() {
-            while( !end_of_work() ) {
-                work_type w;
-                while( my_work_queue.try_pop(w) ) {
-                    output_type result = do_work( w.input );
-                    //send the result back to the graph
-                    w.gateway->try_put( result );
-                    // signal that work is done
-                    w.gateway->release_wait();
-                }
-            }
-        } ) {}
-
-        void submit( input_type i, gateway_type* gateway ) {
-            work_type w = {i, gateway};
-            gateway->reserve_wait();
-            my_work_queue.push(w);
-        }
-    private:
-        bool end_of_work() {
-            // indicates that the thread should exit
-        }
-
-        output_type do_work( input_type& v ) {
-            // performs the work on input converting it to output
-        }
-
-        tbb::concurrent_queue<work_type> my_work_queue;
-        std::thread service_thread;
-    };
-
-    int main() {
-        AsyncActivity async_activity;
-        tbb::flow::graph g;
-
-        async_node_type async_consumer( g, unlimited,
-        // user functor to initiate async processing
-        [&] ( input_type input, async_node_type::gateway_type& gateway ) {
-        async_activity.submit( input, &gateway );
-        } );
-
-        tbb::flow::input_node<input_type> s( g, [](input_type& v)->bool { /* produce data for async work */ } );
-        tbb::flow::async_node<output_type> f( g, unlimited, [](const output_type& v) { /* consume data from async work */ } );
-
-        tbb::flow::make_edge( s, async_consumer );
-        tbb::flow::make_edge( async_consumer, f );
-
-        s.activiate();
-        g.wait_for_all();
-    }
+**Returns**: ``false``
