@@ -88,7 +88,7 @@ Next listing provides a brief introduction of ``row_accessor`` and
    #include "oneapi/dal/table/row_accessor.hpp"
    #include "oneapi/dal/table/column_accessor.hpp"
 
-   using namespace onedal;
+   using namespace oneapi;
 
    int main() {
       sycl::queue queue { sycl::default_selector() };
