@@ -1,7 +1,7 @@
 Contributors
 ============
 
-.. Alphbetical list of authors, | forces linebreak
+.. Alphabetical list of authors, | forces linebreak
 
 | Anastasiya Ageeva, Intel
 | Maksim Banin, Intel
@@ -10,6 +10,7 @@ Contributors
 | Max Domeika, Intel
 | Roman Dubtsov, Intel
 | Andrey Fedorov, Intel
+| Aleksei Fedotov, Intel
 | Evarist Fomenko, Intel
 | Ruslan Israfilov, Intel
 | Alexei Katranov, Intel
