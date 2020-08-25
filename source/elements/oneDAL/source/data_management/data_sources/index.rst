@@ -5,29 +5,7 @@
 Data Sources
 =======
 
-Data source is a concept of an out-of-memory storage for a :capterm:`dataset`.
-It is used at the data acquisition and data preparation stages for the
-following:
-
-- To extract datasets from external sources such as databases, files, remote
-  storage.
-
-- To load datasets into the device's local memory. Data do not always fit
-  the local memory, especially when processing with accelerators. A data source
-  provides the ability to load data by batches and extracts it directly into the
-  device's local memory. Therefore, a data source enables complex data analytics
-  scenarios, such as :capterm:`online computations <Online mode>`.
-
-- To filter and normalize :capterm:`feature` values that are being extracted.
-
-- To recover missing :capterm:`feature` values.
-
-- To detect :capterm:`outliers <outlier>` and recover the abnormal data.
-
-- To transform datasets into numerical representation. Data source shall
-  automatically transform non-numeric :capterm:`categorical <categorical
-  feature>` and :capterm:`continuous <continuous feature>` data values into one
-  of the numeric :capterm:`data formats <data format>`.
+This section describes the types related to the :txtref:`data source` concept.
 
 CSV data source
 -----------------
@@ -36,6 +14,9 @@ A comma-separated values file (csv) is a text file. Each line of the csv file is
 Fields can have numerical or text format, where text usually refers to some categorized values.
 Delimiter is a comma by default, but generally can be any given symbol.
 For more details, see <https://en.wikipedia.org/wiki/Comma-separated_values>.
+
+CSV data source requires input file name to be set in the constructor, while other attributes can be initialized with default values.
+All attributes can be changed using setter functions, including file name, to support reading from multiple files with similar configurations.
 
 ::
 
