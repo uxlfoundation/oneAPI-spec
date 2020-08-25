@@ -34,7 +34,7 @@ CSV data source
 Class ``csv::data_source`` is an api for accessing the data source represented as csv file.
 A comma-separated values file (csv) is a text file. Each line of the csv file is a record, containing fields separated by the delimiter.
 Fields can have numerical or text format, where text usually refers to some categorized values.
-Delimter is a comma by default, but generally can be any given symbol.
+Delimiter is a comma by default, but generally can be any given symbol.
 For more details, see <https://en.wikipedia.org/wiki/Comma-separated_values>.
 
 ::
