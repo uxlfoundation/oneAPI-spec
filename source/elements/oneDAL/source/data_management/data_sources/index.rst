@@ -31,8 +31,11 @@ following:
 
 CSV data source
 -----------------
-Class ``csv::data_source`` is an implementation of a data source type
-for which the following is true:
+Class ``csv::data_source`` is an api for accessing the data source represented as csv file.
+A comma-separated values file (csv) is a text file. Each line of the csv file is a record, containing fields separated by the delimiter.
+Fields can have numerical or text format, where text usually refers to some categorized values.
+Delimter is a comma by default, but generally can be any given symbol.
+For more details, see <https://en.wikipedia.org/wiki/Comma-separated_values>.
 
 ::
 
@@ -77,7 +80,7 @@ for which the following is true:
    .. member:: bool parse_header = false
 
       Flag that indicates whether or not first line in the input file should be processed
-      as a header line and should not be included in the dataset.
+      as a header record which contains information about features and should not be included in the dataset.
 
       Getter & Setter
          | ``bool get_parse_header() const``
@@ -98,7 +101,7 @@ Usage example
 ::
 
    const auto data_source = onedal::csv::data_source("data.csv")
-      .set_delimiter(',')
+      .set_delimiter(',');
 
    const auto table = ondedal::read<onedal::table>(data_source);
 
@@ -130,11 +133,14 @@ Result of a read operation with a specified :code:`onedal::table` template param
 
 Operation semantics
 ~~~~~~~~~~~~~~~~~~~
+
+Supported type of data objects (referred as Object template parameter) for :expr:`read` operation is :expr:`Object = onedal::table`.
+
 .. namespace:: onedal
 .. function:: template <typename Object, typename DataSource> \
               Object read(const DataSource& ds)
 
-   :tparam Object: oneDAL object that should be read.
+   :tparam Object: oneDAL data object that should be produced as a result of reading data from the data source.
    :tparam DataSource: CSV data source :expr:`csv::data_source`.
 
    Preconditions
@@ -146,12 +152,9 @@ Operation semantics
               Object read(const DataSource& ds, \
                           const csv::read_args& args)
 
-   :tparam Object: oneDAL object that should be read.
+   :tparam Object: oneDAL data object that should be produced as a result of reading data from the data source.
    :tparam DataSource: CSV data source :expr:`csv::data_source`.
 
    Preconditions
 
    Postconditions
-
-.. note::
-   Current version of the oneDAL spec defines :expr:`read` operation only for :expr:`Object = onedal::table` case.
