@@ -134,15 +134,15 @@ Programming Interface
 
 Descriptor
 ----------
-.. onedal_class:: onedal::knn::descriptor
+.. onedal_class:: oneapi::dal::knn::descriptor
 
 Computational methods
 ---------------------
-.. onedal_compute_methods:: onedal::knn
+.. onedal_compute_methods:: oneapi::dal::knn
 
 Model
 -----
-.. onedal_class:: onedal::knn::model
+.. onedal_class:: oneapi::dal::knn::model
 
 
 .. _t_api:
@@ -153,18 +153,18 @@ Training :expr:`train(...)`
 
 Input
 ~~~~~
-.. onedal_class:: onedal::knn::train_input
+.. onedal_class:: oneapi::dal::knn::train_input
 
 
 .. _t_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: onedal::knn::train_result
+.. onedal_class:: oneapi::dal::knn::train_result
 
 Operation
 ~~~~~~~~~
-.. onedal_func:: onedal::knn::train
+.. onedal_func:: oneapi::dal::knn::train
 
 
 .. _i_api:
@@ -175,15 +175,15 @@ Inference :expr:`infer(...)`
 
 Input
 ~~~~~
-.. onedal_class:: onedal::knn::infer_input
+.. onedal_class:: oneapi::dal::knn::infer_input
 
 
 .. _i_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: onedal::knn::infer_result
+.. onedal_class:: oneapi::dal::knn::infer_result
 
 Operation
 ~~~~~~~~~
-.. onedal_func:: onedal::knn::infer
+.. onedal_func:: oneapi::dal::knn::infer

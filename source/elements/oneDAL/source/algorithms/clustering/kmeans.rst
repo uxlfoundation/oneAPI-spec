@@ -74,15 +74,15 @@ Usage example
 -------------
 ::
 
-   onedal::kmeans::model run_training(const onedal::table& data,
-                                      const onedal::table& initial_centroids) {
+   oneapi::dal::kmeans::model run_training(const oneapi::dal::table& data,
+                                           const oneapi::dal::table& initial_centroids) {
 
-      const auto kmeans_desc = onedal::kmeans::desc<float>{}
+      const auto kmeans_desc = oneapi::dal::kmeans::desc<float>{}
          .set_cluster_count(10)
          .set_max_iteration_count(50)
          .set_accuracy_threshold(1e-4);
 
-      const auto result = onedal::train(kmeans_desc, data, initial_centroids);
+      const auto result = oneapi::dal::train(kmeans_desc, data, initial_centroids);
 
       print_table("labels", result.get_labels());
       print_table("centroids", result.get_model().get_centroids());
@@ -94,13 +94,13 @@ Usage example
 
 ::
 
-   onedal::table run_inference(const onedal::kmeans::model& model,
-                               const onedal::table& new_data) {
+   oneapi::dal::table run_inference(const oneapi::dal::kmeans::model& model,
+                               const oneapi::dal::table& new_data) {
 
-      const auto kmeans_desc = onedal::kmeans::desc<float>{}
+      const auto kmeans_desc = oneapi::dal::kmeans::desc<float>{}
          .set_cluster_count(model.get_cluster_count());
 
-      const auto result = onedal::infer(kmeans_desc, model, new_data);
+      const auto result = oneapi::dal::infer(kmeans_desc, model, new_data);
 
       print_table("labels", result.get_labels());
    }
@@ -119,7 +119,7 @@ Methods
       using by_default = lloyd;
    } // namespace method
 
-.. namespace:: onedal::kmeans::method
+.. namespace:: oneapi::dal::kmeans::method
 .. struct:: lloyd
 
    Tag-type that denotes `Lloyd's method`_.
@@ -149,7 +149,7 @@ Descriptor
       desc& set_accuracy_threshold(double);
    };
 
-.. namespace:: onedal::kmeans
+.. namespace:: oneapi::dal::kmeans
 .. class:: template<typename Float = float, \
                     typename Method = method::by_default> \
            desc
@@ -240,8 +240,8 @@ Model
          | :expr:`cluster_count == centroids.row_count`
 
 
-Training :expr:`onedal::train(...)`
------------------------------------
+Training :expr:`oneapi::dal::train(...)`
+----------------------------------------
 Input
 ~~~~~
 ::
@@ -357,7 +357,7 @@ Result
 
 Operation semantics
 ~~~~~~~~~~~~~~~~~~~
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. function:: template <typename Descriptor> \
               kmeans::train_result train(const Descriptor& desc, \
                                          const kmeans::train_input& input)
@@ -379,8 +379,8 @@ Operation semantics
       | :expr:`result.iteration_count <= desc.max_iteration_count`
 
 
-Inference :expr:`onedal::infer(...)`
-------------------------------------
+Inference :expr:`oneapi::dal::infer(...)`
+-----------------------------------------
 
 Input
 ~~~~~
@@ -399,7 +399,7 @@ Input
       infer_input& set_data(const table&);
    };
 
-.. namespace:: onedal::kmeans
+.. namespace:: oneapi::dal::kmeans
 .. class:: infer_input
 
    .. function:: infer_input()
@@ -480,7 +480,7 @@ Result
 
 Operation semantics
 ~~~~~~~~~~~~~~~~~~~
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. function:: template <typename Descriptor> \
               kmeans::infer_result infer(const Descriptor& desc, \
                                          const kmeans::infer_input& input)
