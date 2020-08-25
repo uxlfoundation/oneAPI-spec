@@ -27,4 +27,3 @@ A type `Body` satisfies `FunctionNodeBody` if it meets the following requirement
 
     Performs operation on ``v`` and returns a value of type ``Output``.
   
-

@@ -44,3 +44,7 @@ A type `Body` should meet one of the following requirements depending on the fil
 .. cpp:function:: void Body::operator()( tbb::flow_control fc ) const
 
     Processes an element from an input stream. Calls ``fc.stop()`` at the end of an input stream.
+
+See also:
+
+* :doc:`filter class <../../algorithms/functions/parallel_pipeline_func/filter_cls>`
