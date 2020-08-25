@@ -229,21 +229,9 @@ def site_zip():
                 site_zip.write(join(r, file))
     
 @action
-def ci_publish(root, target=None):
-    root_only(root)
-    if not cl_args.branch:
-        exit('Error: --branch <branchname> is required')
-    if 'AWS_SECRET_ACCESS_KEY' in os.environ and os.environ['AWS_SECRET_ACCESS_KEY'] != '':
-        shell('aws s3 sync --only-show-errors --delete site s3://%s/exclude/ci/branches/%s' % (staging_host, cl_args.branch))
-        log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/%s/'
-            % (cl_args.branch))
-    else:
-        log('Skipping publishing the site because AWS access key is not available. This is expected when building a fork')
-    
-@action
 def prod_publish(root, target=None):
     # sync staging to prod
-    shell("aws s3 sync --only-show-errors s3://%s/ s3://spec.oneapi.com/ --exclude 'exclude/*'" % (staging_host))
+    shell("aws s3 sync --only-show-errors s3://pre.oneapi.com/spec s3://oneapi.com/spec --exclude 'spec/exclude/*'")
     log('published at http://spec.oneapi.com/')
     
 @action
@@ -253,27 +241,20 @@ def stage_publish(root, target=None):
     local_versions = join(local_top, 'versions')
     local_versions_x = join(local_versions, oneapi_spec_version)
     local_versions_latest = join(local_versions, 'latest')
-    s3_top = 's3://%s' % (staging_host)
+    s3_top = 's3://pre.oneapi.com/spec'
     s3_versions = '%s/versions' % s3_top
     s3_versions_x = '%s/%s' % (s3_versions, oneapi_spec_version)
     s3_versions_latest = '%s/latest' % s3_versions
 
-    # Sync everything but versions
-    # Do not use --delete, it will delete old versions
-    #  even with the --exclude
-    shell(('aws s3 sync --only-show-errors'
-           ' --exclude \'versions/*\''
-           ' %s %s')
-          % (local_top, s3_top))
     # Sync the newly created version directory
     shell(('aws s3 sync --only-show-errors --delete'
            ' %s %s')
           % (local_versions_x, s3_versions_x))
     shell(('aws s3 sync --only-show-errors --delete'
            ' %s %s')
-          % (local_versions_latest, s3_versions_latest))
+          % (s3_versions_x, s3_versions_latest))
 
-    log('published at http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/')
+    log('published at http://spec.pre.oneapi.com')
 
     
 @action
@@ -315,22 +296,7 @@ def sort_words(root, target=None):
         for l in sorted(list(set(lines))):
             fout.write(l)
         
-@action
-def ci(root, target=None):
-    root_only(root)
-    site(root)
-    build('.', 'spelling')
-    site_zip()
-    if cl_args.branch == 'publish' or cl_args.branch == 'refs/heads/publish':
-        stage_publish(root)
-    else:
-        ci_publish(root)
-    
-staging_host = 'staging.spec.oneapi.com'
-
-commands = {'ci': ci,
-            'ci-publish': ci_publish,
-            'clean': clean,
+commands = {'clean': clean,
             'dockerbuild': dockerbuild,
             'dockerpush': dockerpush,
             'dockerrun': dockerrun,
@@ -339,6 +305,7 @@ commands = {'ci': ci,
             'spelling': build,
             'prep': prep,
             'prod-publish': prod_publish,
+            'show-spelling': show_spelling,
             'site': site,
             'sort-words': sort_words,
             'spec-venv': spec_venv,
