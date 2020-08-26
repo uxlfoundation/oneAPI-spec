@@ -7,7 +7,7 @@ K-Means initialization
 
 The K-Means initialization algorithm gets :math:`n` feature vectors as input and
 chooses :math:`k` initial centroids. After initialization, K-Means algorithm
-could be run to partition input data into :math:`k` clusters.
+uses the initialization result to partition input data into :math:`k` clusters.
 
 Given the training set :math:`X = \{ x_1, \ldots, x_n \}` of
 :math:`p`-dimensional feature vectors and a positive integer :math:`k`, the
@@ -18,7 +18,7 @@ problem is to find a set :math:`C = \{ c_1, \ldots, c_k \}` of
 Default dense
 -------------
 
-Choice of first :math:`k` feature vectors from the training set :math:`X`
+Method choses first :math:`k` feature vectors from the training set :math:`X`
 
 -------------
 Usage example
