@@ -28,7 +28,6 @@
 #include <vector>
 #include <unordered_map>
 
-#include <CL/sycl.hpp>
 /// @endcond
 
 #include "dnnl.h"
@@ -131,24 +130,6 @@ struct primitive {
     /// @param args Arguments map.
     void execute(const stream &astream,
             const std::unordered_map<int, memory> &args) const;
-
-    /// Executes computations specified by the primitive in a specified stream.
-    ///
-    /// Arguments are passed via an arguments map containing <index, memory
-    /// object> pairs. The index must be one of the `DNNL_ARG_*` values such
-    /// as `DNNL_ARG_SRC`, and the memory must have a memory descriptor
-    /// matching the one returned by
-    /// #dnnl::primitive_desc::query_md(#query::exec_arg_md, index) unless
-    /// using dynamic shapes (see #DNNL_RUNTIME_DIM_VAL).
-    ///
-    /// @param astream Stream object. The stream must belong to the same engine
-    ///     as the primitive.
-    /// @param args Arguments map.
-    /// @param deps Optional vector with `cl::sycl::event` dependencies.
-    ///
-    cl::sycl::event execute_sycl(const stream &astream,
-            const std::unordered_map<int, memory> &args,
-            const std::vector<cl::sycl::event> &deps = {}) const;
 
     /// Assignment operator.
     primitive &operator=(const primitive &rhs);
@@ -457,23 +438,9 @@ struct engine {
     ///     returned by #get_count() for this particular kind of engine.
     engine(kind akind, size_t index);
 
-    /// Constructs an engine from SYCL device and context objects.
-    ///
-    /// @param akind The kind of engine to construct.
-    /// @param dev SYCL device.
-    /// @param ctx SYCL context.
-    engine(kind akind, const cl::sycl::device &dev,
-            const cl::sycl::context &ctx);
-
     /// Returns the kind of the engine.
     /// @returns The kind of the engine.
     kind get_kind() const;
-
-    /// Returns the underlying SYCL context object.
-    cl::sycl::context get_sycl_context() const;
-
-    /// Returns the underlying SYCL device object.
-    cl::sycl::device get_sycl_device() const;
 };
 
 /// @} dnnl_api_engine
@@ -524,16 +491,6 @@ struct stream {
     stream(const engine &aengine, flags aflags = flags::default_flags,
             const stream_attr &attr = stream_attr());
 
-    /// Constructs a stream for the specified engine and the SYCL queue.
-    ///
-    /// @param aengine Engine object to use for the stream.
-    /// @param queue SYCL queue to use for the stream.
-    stream(const engine &aengine, cl::sycl::queue &queue);
-
-    /// Returns the underlying SYCL queue object.
-    /// @returns SYCL queue object.
-    cl::sycl::queue get_sycl_queue() const;
-
     /// Waits for all primitives executing in the stream to finish.
     /// @returns The stream itself.
     stream &wait();
@@ -576,8 +533,8 @@ struct stream {
 ///     with USM, the memory buffer handle is simply a pointer to @c void. The
 ///     memory buffer can be queried using #dnnl::memory::get_data_handle() and
 ///     set using #dnnl::memory::set_data_handle(). The underlying SYCL buffer,
-///     when used, can be queried using #dnnl::memory::get_sycl_buffer and set
-///     using #dnnl::memory::set_sycl_buffer. A memory object can also be
+///     when used, can be queried using #dnnl::sycl_interop::get_buffer and set
+///     using #dnnl::sycl_interop::set_buffer. A memory object can also be
 ///     queried for the underlying memory descriptor and for its engine using
 ///     #dnnl::memory::get_desc() and dnnl::memory::get_engine().
 ///
@@ -1018,7 +975,7 @@ struct memory {
     ///
     /// Unless @p handle is equal to #DNNL_MEMORY_NONE, the constructed memory
     /// object will have the underlying buffer set. In this case, the buffer
-    /// will be initialized as if #dnnl::memory::set_data_handle() had been
+    /// will be initialized as if #dnnl::memory::set_data_handle() has been
     /// called.
     ///
     /// @sa memory::set_data_handle()
@@ -1030,23 +987,18 @@ struct memory {
     ///       doesn't own the buffer.
     ///     - The #DNNL_MEMORY_ALLOCATE special value. Instructs the library to
     ///       allocate the buffer for the memory object. In this case the
-    ///       library owns the buffer.
+    ///       library owns the buffer. In this case, the memory allocation kind
+    ///       of the underlying buffer is
+    ///       #dnnl::sycl_interop::memory_kind::usm_device.
     ///     - #DNNL_MEMORY_NONE to create dnnl::memory without an underlying
     ///       buffer.
     memory(const desc &md, const engine &aengine, void *handle);
 
-    /// Constructs a memory object from a SYCL buffer.
-    ///
-    /// @param md Memory descriptor.
-    /// @param aengine Engine to store the data on.
-    /// @param buf A SYCL buffer.
-    template <typename T, int ndims = 1>
-    memory(const desc &md, const engine &aengine,
-            cl::sycl::buffer<T, ndims> &buf);
-
     /// Constructs a memory object.
     ///
     /// The underlying buffer for the memory will be allocated by the library.
+    /// The memory allocation kind of the underlying buffer is
+    /// #dnnl::sycl_interop::memory_kind::usm_device.
     ///
     /// @param md Memory descriptor.
     /// @param aengine Engine to store the data on.
@@ -1130,23 +1082,6 @@ struct memory {
     /// @param mapped_ptr A pointer previously returned by
     ///     #dnnl::memory::map_data().
     void unmap_data(void *mapped_ptr) const;
-
-    /// Returns the underlying SYCL buffer object.
-    ///
-    /// @tparam T Type of the requested buffer.
-    /// @tparam ndims Number of dimensions of the requested buffer.
-    /// @param offset Offset within the returned buffer at which the memory
-    ///               object's data starts. Only meaningful for 1D buffers.
-    template <typename T, int ndims = 1>
-    cl::sycl::buffer<T, ndims> get_sycl_buffer(size_t *offset = nullptr) const;
-
-    /// Sets the underlying buffer to the given SYCL buffer.
-    ///
-    /// @tparam T Type of the buffer.
-    /// @tparam ndims Number of dimensions of the buffer.
-    /// @param buf SYCL buffer.
-    template <typename T, int ndims>
-    void set_sycl_buffer(cl::sycl::buffer<T, ndims> &buf);
 };
 
 /// @} dnnl_api_memory
@@ -1695,19 +1630,6 @@ struct reorder : public primitive {
     /// @param src Source memory object.
     /// @param dst Destination memory object.
     void execute(const stream &astream, memory &src, memory &dst) const;
-
-    /// Executes the reorder primitive (SYCL-aware version)
-    ///
-    /// @param astream Stream object. The stream must belong to the same engine
-    ///     as the primitive.
-    /// @param src Source memory object.
-    /// @param dst Destination memory object.
-    /// @param deps Vector of SYCL events that the execution should depend on.
-    ///
-    /// @returns SYCL event that corresponds to the SYCL queue underlying the
-    ///     @p astream.
-    cl::sycl::event execute_sycl(const stream &astream, memory &src,
-            memory &dst, const std::vector<cl::sycl::event> &deps = {}) const;
 };
 
 /// @} dnnl_api_reorder
@@ -3297,8 +3219,7 @@ struct eltwise_forward : public primitive {
         /// @param beta The beta parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         desc(prop_kind aprop_kind, algorithm aalgorithm,
-                const memory::desc &data_desc, float alpha = 0,
-                float beta = 0);
+                const memory::desc &data_desc, float alpha = 0, float beta = 0);
     };
 
     /// Primitive descriptor for an elementwise forward propagation primitive.
@@ -3367,8 +3288,7 @@ struct eltwise_backward : public primitive {
         /// @param beta The beta parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         desc(algorithm aalgorithm, const memory::desc &diff_data_desc,
-                const memory::desc &data_desc, float alpha = 0,
-                float beta = 0);
+                const memory::desc &data_desc, float alpha = 0, float beta = 0);
     };
 
     /// Primitive descriptor for eltwise backward propagation.
