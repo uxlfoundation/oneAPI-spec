@@ -3,13 +3,13 @@
 uniform_bits
 ============
 
-Class is used for generation of uniformly distibuted bits in 32/64-bit chunks.
+Class is used for generation of uniformly distributed bits in 32/64-bit chunks.
 
 .. _onemkl_rng_uniform_bits_description:
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide uniformly distibuted bits in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is uniformly distributed. Can be not supported by the specific engine.
+The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide uniformly distributed bits in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is uniformly distributed. Can be not supported by the specific engine.
 
 class uniform_bits
 ------------------

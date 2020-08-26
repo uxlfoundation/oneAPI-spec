@@ -13,7 +13,7 @@ oneMKL Specification Versioning Strategy
 
 This oneMKL specification uses a ``MAJOR.MINOR.PATCH`` approach for its versioning strategy.  
 The ``MAJOR`` count is updated when a significant new feature or domain is added or backward compatibility is broken.  
-The ``MINOR`` count is updated when new APIs are changed or added or deleted, or language updated with relatively significant change to the meaning but without breaking backwards compatibility.  
+The ``MINOR`` count is updated when new APIs are changed or added, or language updated with relatively significant change to the meaning but without breaking backwards compatibility.  
 The ``PATCH`` count is updated when wording, language or structure is updated without significant change to the meaning or interpretation.
 
 

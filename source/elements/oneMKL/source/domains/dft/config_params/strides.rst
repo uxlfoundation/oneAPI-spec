@@ -5,7 +5,7 @@ INPUT_STRIDES and OUTPUT_STRIDES
 
 The FFT interface provides configuration parameters that define the layout of multidimensional data in the computer memory. For d-dimensional data set, :math:`X`, defined by dimensions :math:`n_1\times n_2 \times\dots\times n_d` , the layout describes where a particular element :math:`X(k_1, k_2, \dots, k_d )` of the data set is located. The memory address of the element :math:`X(k_1, k_2, \dots, k_d )` is expressed by the formula:
 :math:`X(k_1, k_2, \dots, k_d ) =` the :math:`+ s_0 + k_1*s_1 + k_2*s_2 + \dots + k_d*s_d`-th element of the container (``sycl::buffer`` or USM pointer) provided to the compute function,
-where :math:`s_0` is the displacement and :math:`s_1 , \dots, s_d` are generalized strides. The configuration parameters ``config_param::INPUT_STRIDES`` and ``config_param::OUTPUT_STRIDES`` enable you to get and set these values. The configuration value is a :math:`d+1`` lengthed ``std::vector<std::int64_t>`` of values :math:`(s_0, s_1, \dots, s_d )`.
+where :math:`s_0` is the displacement and :math:`s_1 , \dots, s_d` are generalized strides. The configuration parameters ``config_param::INPUT_STRIDES`` and ``config_param::OUTPUT_STRIDES`` enable you to get and set these values. The configuration value is a :math:`d+1`` length ``std::vector<std::int64_t>`` of values :math:`(s_0, s_1, \dots, s_d )`.
 
 The offset is counted in elements of the data type (complex or real) defined by the descriptor configuration as tabulated below. 
 

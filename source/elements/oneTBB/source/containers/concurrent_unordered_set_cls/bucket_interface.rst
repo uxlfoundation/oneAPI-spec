@@ -44,7 +44,7 @@ The number of buckets
 
         size_type unsafe_bucket_count() const;
 
-    **Returns**: the number of buckets in the contianer.
+    **Returns**: the number of buckets in the container.
 
 -----------------------------------------------------------------------------
 

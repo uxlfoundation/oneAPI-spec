@@ -33,13 +33,50 @@ Release Notes
 
   * Continuing modifications to oneMKL Architecture, BLAS and LAPACK domains
   * Significant refactoring and updating of Sparse BLAS, VM, RNG, and DFT domains API
-    descriptions and structure.
+    descriptions and structure
   * Add Summary Statistics domain
-  * Add future considerations and acknowledgement to appendix
+  * Add future considerations and acknowledgment to appendices
   * Change top-level namespace to oneapi::mkl
 
+* oneDNN
+
+  * Added the specification for ``map_data()`` / ``unmap_data()`` methods of
+    oneDNN memory objects
+  * Extended element-wise algorithms and post operations
+  * Added queries for peephole and projection weights for LSTM
+
+* oneDPL
+
+  * API updates, including namespaces
+  * Added detailed descriptions for execution policies, non-standard algorithms, iterator types, etc
+
+* oneTBB
+
+  * Editorial review changes
+  
 * oneDAL
- 
+
+  * Updated description of the public header files and namespaces
+  
+* DPC++
+
+  * Revised requirements to refer to the SYCL 2020 provisional specification where previous
+    extensions have migrated to the SYCL specification directly
+  * Added additional extensions
+  * Added additional requirements against the SYCL 2020 provisional specification
+  
+* oneVPL
+
+  * Added section to specify mandatory and optional API features
+  * Reformatting of entire specification
+  * Bug fixes in API definitions
+
+* oneCCL
+
+  * Added multi-device communication API
+  * Added key-value store API
+  * Extended list of collective operations
+
 0.85
 ----
 

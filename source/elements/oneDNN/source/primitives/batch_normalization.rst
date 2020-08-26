@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. _batch_normalization-label:
 
@@ -21,7 +21,7 @@ to cases of higher and lower dimensions.
 
 The different flavors of the primitive are controlled by the ``flags``
 parameter that is passed to the operation descriptor initialization function
-like :any:`dnnl::batch_normalization_forward::desc::desc`. Multiple flags can
+like |batch_normalization_forward::desc::desc|. Multiple flags can
 be combined using the bitwise OR operator (``|``).
 
 *******
@@ -129,15 +129,15 @@ argument index as specified by the following table.
 ============================= =========================
 Primitive input/output        Execution argument index
 ============================= =========================
-:math:`\src`                  DNNL_ARG_SRC
-:math:`\gamma, \beta`         DNNL_ARG_SCALE_SHIFT
-mean (:math:`\mu`)            DNNL_ARG_MEAN
-variance (:math:`\sigma`)     DNNL_ARG_VARIANCE
-:math:`\dst`                  DNNL_ARG_DST
-workspace                     DNNL_ARG_WORKSPACE
-:math:`\diffdst`              DNNL_ARG_DIFF_DST
-:math:`\diffsrc`              DNNL_ARG_DIFF_SRC
-:math:`\diffgamma, \diffbeta` DNNL_ARG_DIFF_SCALE_SHIFT
+:math:`\src`                  |DNNL_ARG_SRC|
+:math:`\gamma, \beta`         |DNNL_ARG_SCALE_SHIFT|
+mean (:math:`\mu`)            |DNNL_ARG_MEAN|
+variance (:math:`\sigma`)     |DNNL_ARG_VARIANCE|
+:math:`\dst`                  |DNNL_ARG_DST|
+workspace                     |DNNL_ARG_WORKSPACE|
+:math:`\diffdst`              |DNNL_ARG_DIFF_DST|
+:math:`\diffsrc`              |DNNL_ARG_DIFF_SRC|
+:math:`\diffgamma, \diffbeta` |DNNL_ARG_DIFF_SCALE_SHIFT|
 ============================= =========================
 
 *****************
@@ -152,7 +152,7 @@ Operation Details
 
 2. The memory format and data type for ``src`` and ``dst`` are assumed to be
    the same, and in the API they are typically referred to as ``data`` (e.g.,
-   see ``data_desc`` in :any:`dnnl::batch_normalization_forward::desc::desc`).
+   see ``data_desc`` in |batch_normalization_forward::desc::desc|).
    The same is true for ``diff_src`` and ``diff_dst``. The corresponding
    memory descriptors are referred to as ``diff_data_desc``.
 
@@ -169,18 +169,23 @@ Operation Details
    propagation the primitive has one additional output, ``workspace``, that
    should be passed during the backward propagation.
 
-*****************
-Data Type Support
-*****************
+******************
+Data Types Support
+******************
 
-The operation supports the following combinations of data types:
+The operation supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ==================== ============================
 Propagation        Source / Destination Mean / Variance / ScaleShift
 ================== ==================== ============================
-forward / backward f32, bf16            f32
-forward            f16                  f32
-forward            s8                   f32
+forward / backward |f32|, |bf16|        |f32|
+forward            |f16|                |f32|
+forward            |s8|                 |f32|
 ================== ==================== ============================
 
 *******************

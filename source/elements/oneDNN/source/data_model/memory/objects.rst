@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. namespace:: 0
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 ##############################
 Memory Descriptors and Objects
@@ -16,17 +16,17 @@ Descriptors
 Memory descriptor is an engine-agnostic logical description of data (number of
 dimensions, dimension sizes, and data type), and, optionally, the information
 about the physical format of data in memory. If this information is not known
-yet, a memory descriptor can be created with
-:any:`dnnl::memory::format_tag::any`. This allows compute-intensive primitives
-to chose the most appropriate format for the computations.  The user is then
-responsible for reordering their data into the new format if the formats do
-not match. See :ref:`memory_format_propagation-label`.
+yet, a memory descriptor can be created with format tag set to |_any|. This
+allows compute-intensive primitives to chose the most appropriate format for
+the computations.  The user is then responsible for reordering their data into
+the new format if the formats do not match. See
+:ref:`memory_format_propagation-label`.
 
 A memory descriptor can be initialized either by specifying dimensions, and
 memory format tag or strides for each of them.
 
 User can query amount of memory required by a memory descriptor using the
-:any:`dnnl::memory::desc::get_size` function. The size of data in general
+|memory::desc::get_size| function. The size of data in general
 cannot be computed as the product of dimensions multiplied by the size of the
 data type. So users are required to use this function for better code
 portability.
@@ -66,12 +66,12 @@ Objects
 
 Memory objects combine memory descriptors with storage for data (a data
 handle).  With USM, the data handle is simply a pointer to ``void``. The data
-handle can be queried using :any:`dnnl::memory::get_data_handle` and set using
-:any:`dnnl::memory::set_data_handle`. The underlying SYCL buffer, when used,
-can be queried using :any:`dnnl::memory::get_sycl_buffer` and set using
-:any:`dnnl::memory::set_sycl_buffer`. A memory object can also be queried for
+handle can be queried using |memory::get_data_handle| and set using
+|memory::set_data_handle|. The underlying SYCL buffer, when used,
+can be queried using |memory::get_sycl_buffer| and set using
+|memory::set_sycl_buffer|. A memory object can also be queried for
 the underlying memory descriptor and for its engine using
-:any:`dnnl::memory::get_desc` and :any:`dnnl::memory::get_engine`.
+|memory::get_desc| and |memory::get_engine|.
 
 ***
 API
@@ -79,6 +79,12 @@ API
 
 .. doxygenstruct:: dnnl::memory
    :project: oneDNN
-   :members: memory, get_desc, get_engine, get_data_handle, set_data_handle, get_sycl_buffer, set_sycl_buffer
+   :members: memory, get_desc, get_engine, get_data_handle, set_data_handle, map_data, unmap_data, get_sycl_buffer, set_sycl_buffer
+
+.. doxygendefine:: DNNL_MEMORY_NONE
+   :project: oneDNN
+
+.. doxygendefine:: DNNL_MEMORY_ALLOCATE
+   :project: oneDNN
 
 .. vim: ts=3 sw=3 et spell spelllang=en

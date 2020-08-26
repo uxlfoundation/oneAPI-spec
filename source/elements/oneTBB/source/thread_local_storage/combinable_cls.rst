@@ -73,7 +73,7 @@ Member functions
 .. cpp:function:: combinable& operator=( const combinable& other )
 
     Sets ``*this`` to be a copy of *other*.
-    Returns a refernce to ``*this``.
+    Returns a reference to ``*this``.
 
 .. cpp:function:: combinable& operator=( combinable&& other )
 

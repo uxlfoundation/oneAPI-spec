@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. _rnn-label:
 
@@ -88,8 +88,8 @@ Vanilla RNN
 ===========
 
 A single-gate recurrent cell initialized with
-:any:`dnnl::vanilla_rnn_forward::desc` or
-:any:`dnnl::vanilla_rnn_forward::desc` as in the following example.
+|vanilla_rnn_forward::desc| or
+|vanilla_rnn_forward::desc| as in the following example.
 
 .. code:: cpp
 
@@ -116,7 +116,7 @@ LSTM (or Vanilla LSTM)
 ----------------------
 
 A four-gate long short-term memory recurrent cell initialized with
-:any:`dnnl::lstm_forward::desc` or :any:`dnnl::lstm_backward::desc` as in the
+|lstm_forward::desc| or |lstm_backward::desc| as in the
 following example.
 
 .. code:: cpp
@@ -154,7 +154,7 @@ LSTM with Peephole
 ------------------
 
 A four-gate long short-term memory recurrent cell with peephole initialized
-with :any:`dnnl::lstm_forward::desc` or :any:`dnnl::lstm_backward::desc` as in
+with |lstm_forward::desc| or |lstm_backward::desc| as in
 the following example.
 
 .. code:: cpp
@@ -187,14 +187,14 @@ are the same as in vanilla LSTM.
 .. note::
 
    If the ``weights_peephole_desc`` passed to the operation descriptor
-   constructor is a zero memory desciptor, the primitive will behave the same
+   constructor is a zero memory descriptor, the primitive will behave the same
    as in LSTM primitive without peephole.
 
 LSTM with Projection
 --------------------
 
 A four-gate long short-term memory recurrent cell with projection initialized
-with :any:`dnnl::lstm_forward::desc` or :any:`dnnl::lstm_backward::desc` as in
+with |lstm_forward::desc| or |lstm_backward::desc| as in
 the following example.
 
 .. code:: cpp
@@ -228,7 +228,7 @@ are the same as in vanilla LSTM.
 .. note::
 
    If the ``weights_projection_desc`` passed to the operation descriptor
-   constructor is a zero memory desciptor, the primitive will behave the same
+   constructor is a zero memory descriptor, the primitive will behave the same
    as in LSTM primitive without projection.
 
 .. _gru-label:
@@ -237,7 +237,7 @@ GRU
 ===
 
 A three-gate gated recurrent unit cell, initialized with
-:any:`dnnl::gru_forward::desc` or :any:`dnnl::gru_backward::desc` as in the
+|gru_forward::desc| or |gru_backward::desc| as in the
 following example.
 
 .. code:: cpp
@@ -276,8 +276,8 @@ Linear-Before-Reset GRU
 =======================
 
 A three-gate gated recurrent unit cell with linear layer applied before the
-reset gate, initialized with :any:`dnnl::lbr_gru_forward::desc` or
-:any:`dnnl::lbr_gru_backward::desc` as in the following example.
+reset gate, initialized with |lbr_gru_forward::desc| or
+|lbr_gru_backward::desc| as in the following example.
 
 .. code:: cpp
 
@@ -320,29 +320,29 @@ argument index as specified by the following table.
 =================================== ================================
 Primitive input/output              Execution argument index
 =================================== ================================
-:math:`\srclayer`                   DNNL_ARG_SRC_LAYER
-:math:`\srciter`                    DNNL_ARG_SRC_ITER
-:math:`\srciterc`                   DNNL_ARG_SRC_ITER_C
-:math:`\weightslayer`               DNNL_ARG_WEIGHTS_LAYER
-:math:`\weightsiter`                DNNL_ARG_WEIGHTS_ITER
-:math:`\weightspeephole`            DNNL_ARG_WEIGHTS_PEEPHOLE
-:math:`\weightsprojection`          DNNL_ARG_WEIGHTS_PROJECTION
-:math:`\bias`                       DNNL_ARG_BIAS
-:math:`\dstlayer`                   DNNL_ARG_DST_LAYER
-:math:`\dstiter`                    DNNL_ARG_DST_ITER
-:math:`\dstiterc`                   DNNL_ARG_DST_ITER_C
-:math:`\workspace`                  DNNL_WORKSPACE
-:math:`\diffsrclayer`               DNNL_ARG_DIFF_SRC_LAYER
-:math:`\diffsrciter`                DNNL_ARG_DIFF_SRC_ITER
-:math:`\diffsrciterc`               DNNL_ARG_DIFF_SRC_ITER_C
-:math:`\diffweightslayer`           DNNL_ARG_DIFF_WEIGHTS_LAYER
-:math:`\diffweightsiter`            DNNL_ARG_DIFF_WEIGHTS_ITER
-:math:`\diffweightspeephole`        DNNL_ARG_DIFF_WEIGHTS_PEEPHOLE
-:math:`\diffweightsprojection`      DNNL_ARG_DIFF_WEIGHTS_PROJECTION
-:math:`\diffbias`                   DNNL_ARG_DIFF_BIAS
-:math:`\diffdstlayer`               DNNL_ARG_DIFF_DST_LAYER
-:math:`\diffdstiter`                DNNL_ARG_DIFF_DST_ITER
-:math:`\diffdstiterc`               DNNL_ARG_DIFF_DST_ITER_C
+:math:`\srclayer`                   |DNNL_ARG_SRC_LAYER|
+:math:`\srciter`                    |DNNL_ARG_SRC_ITER|
+:math:`\srciterc`                   |DNNL_ARG_SRC_ITER_C|
+:math:`\weightslayer`               |DNNL_ARG_WEIGHTS_LAYER|
+:math:`\weightsiter`                |DNNL_ARG_WEIGHTS_ITER|
+:math:`\weightspeephole`            |DNNL_ARG_WEIGHTS_PEEPHOLE|
+:math:`\weightsprojection`          |DNNL_ARG_WEIGHTS_PROJECTION|
+:math:`\bias`                       |DNNL_ARG_BIAS|
+:math:`\dstlayer`                   |DNNL_ARG_DST_LAYER|
+:math:`\dstiter`                    |DNNL_ARG_DST_ITER|
+:math:`\dstiterc`                   |DNNL_ARG_DST_ITER_C|
+:math:`\workspace`                  |DNNL_ARG_WORKSPACE|
+:math:`\diffsrclayer`               |DNNL_ARG_DIFF_SRC_LAYER|
+:math:`\diffsrciter`                |DNNL_ARG_DIFF_SRC_ITER|
+:math:`\diffsrciterc`               |DNNL_ARG_DIFF_SRC_ITER_C|
+:math:`\diffweightslayer`           |DNNL_ARG_DIFF_WEIGHTS_LAYER|
+:math:`\diffweightsiter`            |DNNL_ARG_DIFF_WEIGHTS_ITER|
+:math:`\diffweightspeephole`        |DNNL_ARG_DIFF_WEIGHTS_PEEPHOLE|
+:math:`\diffweightsprojection`      |DNNL_ARG_DIFF_WEIGHTS_PROJECTION|
+:math:`\diffbias`                   |DNNL_ARG_DIFF_BIAS|
+:math:`\diffdstlayer`               |DNNL_ARG_DIFF_DST_LAYER|
+:math:`\diffdstiter`                |DNNL_ARG_DIFF_DST_ITER|
+:math:`\diffdstiterc`               |DNNL_ARG_DIFF_DST_ITER_C|
 =================================== ================================
 
 *****************
@@ -351,25 +351,30 @@ Operation Details
 
 N/A
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 The following table lists the combination of data types that should be
 supported by the RNN primitive for each input and output memory object.
 
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| **Propagation**        | **Cell**     | **Input** | **Recurrent** | **Weights** | **Bias** | **Output** |
-|                        | **Function** | **Data**  | **Data** (1)  |             |          | **Data**   |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward / Backward     | All          | f32       | f32           | f32         | f32      | f32        |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward / Backward (2) | All (3)      | bf16      | bf16          | bf16        | f32      | bf16       |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward                | All (3)      | f16       | f16           | f16         | f16      | f16        |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
-| Forward inference      | Vanilla LSTM | u8        | u8            | s8          | f32      | u8, f32    |
-+------------------------+--------------+-----------+---------------+-------------+----------+------------+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
+
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| **Propagation**        | **Cell**     | **Input** | **Recurrent** | **Weights** | **Bias** | **Output**  |
+|                        | **Function** | **Data**  | **Data** (1)  |             |          | **Data**    |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward / Backward     | All          | |f32|     | |f32|         | |f32|       | |f32|    | |f32|       |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward / Backward (2) | All (3)      | |bf16|    | |bf16|        | |bf16|      | |f32|    | |bf16|      |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward                | All (3)      | |f16|     | |f16|         | |f16|       | |f16|    | |f16|       |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
+| Forward inference      | Vanilla LSTM | |u8|      | |u8|          | |s8|        | |f32|    | |u8|, |f32| |
++------------------------+--------------+-----------+---------------+-------------+----------+-------------+
 
 (1) With LSTM and Peephole LSTM cells, the cell state data type is always f32.
 

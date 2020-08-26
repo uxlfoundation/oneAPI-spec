@@ -21,6 +21,14 @@
 
 #include <stdint.h>
 
+/// Special pointer value that indicates that a memory object should not have
+/// an underlying buffer.
+#define DNNL_MEMORY_NONE (NULL)
+
+/// Special pointer value that indicates that the library needs to allocate an
+/// underlying buffer for a memory object.
+#define DNNL_MEMORY_ALLOCATE ((void *)(size_t)-1)
+
 /// Source argument #0.
 #define DNNL_ARG_SRC_0 1
 /// A special mnemonic for source argument for primitives that have a

@@ -41,7 +41,7 @@ m
   Array of ``group_count`` parameters :math:`m_g` specifying the number of rows in the matrices belonging to group :math:`g`.
 
 n
-  Array of ``group_count`` parameters :math:`n_g` specifying the number of columns in matricex belonging to group :math:`g`.
+  Array of ``group_count`` parameters :math:`n_g` specifying the number of columns in matrices belonging to group :math:`g`.
 
 lda
   Array of ``group_count`` parameters :math:`\text{lda}_g` specifying the leading dimensions of matrices belonging to group :math:`g`.

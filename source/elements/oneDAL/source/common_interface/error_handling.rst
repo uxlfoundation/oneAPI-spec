@@ -11,18 +11,18 @@ caught using standard C++ error handling mechanism.
 Exception classification
 ========================
 
-Exception classification in onDAL is aligned with C++ Standard Library
+Exception classification in oneDAL is aligned with C++ Standard Library
 classification. oneDAL shall introduce abstract classes that define the base
 class in the hierarchy of exception classes. Concrete exception classes are
 derived from respective C++ Standard Library exception classes. oneDAL library
 shall throw exceptions represented with concrete classes.
 
-In the hierarchy of onDAL exceptions, ``onedal::exception`` is the base abstract
+In the hierarchy of oneDAL exceptions, ``oneapi::dal::exception`` is the base abstract
 class that all other exception classes are derived from.
 
 ::
 
-    class onedal::exception;
+    class oneapi::dal::exception;
 
 .. list-table::
    :widths: 30 65 5
@@ -31,7 +31,7 @@ class that all other exception classes are derived from.
    * - Exception
      - Description
      - Abstract
-   * - ``onedal::exception``
+   * - ``oneapi::dal::exception``
      - Base class of oneDAL exception hierarchy.
      - Yes
 
@@ -43,9 +43,9 @@ All oneDAL exceptions shall be divided into three groups:
 
 ::
 
-    class onedal::logic_error : public onedal::exception;
-    class onedal::runtime_error : public onedal::exception;
-    class onedal::bad_alloc :  public onedal::exception, public std::bad_alloc;
+    class oneapi::dal::logic_error : public oneapi::dal::exception;
+    class oneapi::dal::runtime_error : public oneapi::dal::exception;
+    class oneapi::dal::bad_alloc :  public oneapi::dal::exception, public std::bad_alloc;
 
 .. list-table::
    :widths: 30 65 5
@@ -54,18 +54,18 @@ All oneDAL exceptions shall be divided into three groups:
    * - Exception
      - Description
      - Abstract
-   * - ``onedal::logic_error``
+   * - ``oneapi::dal::logic_error``
      - Reports violations of preconditions and invariants.
      - Yes
-   * - ``onedal::runtime_error``
+   * - ``oneapi::dal::runtime_error``
      - Reports violations of postconditions and other errors happened during the
        execution of oneDAL functionality.
      - Yes
-   * - ``onedal::bad_alloc``
+   * - ``oneapi::dal::bad_alloc``
      - Reports failure to allocate storage.
      - No
 
-All precondition and invariant errors represented by ``onedal::logic_error``
+All precondition and invariant errors represented by ``oneapi::dal::logic_error``
 shall be divided into the following groups:
 
 - invalid argument errors
@@ -76,11 +76,11 @@ shall be divided into the following groups:
 
 ::
 
-    class onedal::invalid_argument :  public onedal::logic_error, public std::invalid_argument;
-    class onedal::domain_error :  public onedal::logic_error, public std::domain_error;
-    class onedal::out_of_range :  public onedal::logic_error, public std::out_of_range;
-    class onedal::unimplemented_error :  public onedal::logic_error, public std::logic_error;
-    class onedal::unavailable_error :  public onedal::logic_error, public std::logic_error;
+    class oneapi::dal::invalid_argument :  public oneapi::dal::logic_error, public std::invalid_argument;
+    class oneapi::dal::domain_error :  public oneapi::dal::logic_error, public std::domain_error;
+    class oneapi::dal::out_of_range :  public oneapi::dal::logic_error, public std::out_of_range;
+    class oneapi::dal::unimplemented_error :  public oneapi::dal::logic_error, public std::logic_error;
+    class oneapi::dal::unavailable_error :  public oneapi::dal::logic_error, public std::logic_error;
 
 .. list-table::
    :widths: 30 65 5
@@ -89,23 +89,23 @@ shall be divided into the following groups:
    * - Exception
      - Description
      - Abstract
-   * - ``onedal::invalid_argument``
+   * - ``oneapi::dal::invalid_argument``
      - Reports situations when the argument was not been accepted.
      - No
-   * - ``onedal::domain_error``
+   * - ``oneapi::dal::domain_error``
      - Reports situations when the argument is outside of the domain on which
        the operation is defined. Higher priority than
-       ``onedal::invalid_argument``.
+       ``oneapi::dal::invalid_argument``.
      - No
-   * - ``onedal::out_of_range``
+   * - ``oneapi::dal::out_of_range``
      - Reports situations when the index is out of range. Higher priority
-       than ``onedal::invalid_argument``.
+       than ``oneapi::dal::invalid_argument``.
      - No
-   * - ``onedal::unimplemented_error``
+   * - ``oneapi::dal::unimplemented_error``
      - Reports errors that arise because an algorithm or a method is not
        implemented.
      - No
-   * - ``onedal::unavailable_error``
+   * - ``oneapi::dal::unavailable_error``
      - Reports situations when a device or data is not available.
      - No
 
@@ -113,13 +113,13 @@ If an error occurs during function execution after preconditions and invariants
 were checked, it is reported via ``ondeal::runtime_error`` inheritors. oneDAL
 distinguishes errors happened during interaction with OS facilities and errors
 of destination type's range in internal computations, while other errors are
-reported via ``onedal::internal_error``.
+reported via ``oneapi::dal::internal_error``.
 
 ::
 
-    class onedal::range_error :  public onedal::runtime_error, public std::range_error;
-    class onedal::system_error :  public onedal::runtime_error, public std::system_error;
-    class onedal::internal_error :  public onedal::runtime_error, public std::runtime_error;
+    class oneapi::dal::range_error :  public oneapi::dal::runtime_error, public std::range_error;
+    class oneapi::dal::system_error :  public oneapi::dal::runtime_error, public std::system_error;
+    class oneapi::dal::internal_error :  public oneapi::dal::runtime_error, public std::runtime_error;
 
 .. list-table::
    :widths: 30 65 5
@@ -128,12 +128,12 @@ reported via ``onedal::internal_error``.
    * - Exception
      - Description
      - Abstract
-   * - ``onedal::range_error``
+   * - ``oneapi::dal::range_error``
      - Reports situations where a result of a computation cannot be represented by the destination type.
      - No
-   * - ``onedal::system_error``
+   * - ``oneapi::dal::system_error``
      - Reports errors occurred during interaction with OS facilities.
      - No
-   * - ``onedal::internal_error``
+   * - ``oneapi::dal::internal_error``
      - Reports all runtime errors that couldn't be assigned to other inheritors.
      - No

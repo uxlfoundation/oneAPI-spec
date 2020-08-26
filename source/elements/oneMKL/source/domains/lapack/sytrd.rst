@@ -170,7 +170,7 @@ d
    dimension of ``d`` must be at least :math:`\max(1, n)`.
 
 e
-   Ponter to off diagonal elements of the matrix :math:`T`.
+   Pointer to off diagonal elements of the matrix :math:`T`.
    The dimension of ``e`` must be at least :math:`\max(1, n-1)`.
 
 tau

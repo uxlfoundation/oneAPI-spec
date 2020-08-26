@@ -149,6 +149,7 @@ def root_only(root):
 def dockerbuild(root, target=None):
     root_only(root)
     copy('requirements.txt', 'docker')
+    copy('ubuntu-packages.txt', 'docker')
     copy('scripts/install.sh', 'docker')
     shell('docker build'
           ' --build-arg http_proxy=%s'
@@ -286,10 +287,6 @@ def spec_venv(root, target=None):
 @action
 def site(root, target=None):
     root_only(root)
-    # Build the docs
-    prep(root)
-    sphinx(root, 'html')
-    sphinx(root, 'latexpdf')
 
     # Build the site. It will have everything but the older versions
     site = 'site'

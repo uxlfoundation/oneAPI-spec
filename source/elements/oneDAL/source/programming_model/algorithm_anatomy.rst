@@ -9,7 +9,7 @@ oneDAL primarily targets algorithms that are extensively used in data analytics.
 These algorithms typically have many parameters, i.e. knobs to control its
 internal behavior and produced result. In machine learning, those parameters are
 often referred as *meta-parameters* to distinguish them from the model
-parameters learnt during the training. `Some algorithms <xgboost_params_>`_
+parameters learned during the training. `Some algorithms <xgboost_params_>`_
 define a dozen meta-parameters, while others depend on another algorithm as, for
 example, the logistic regression training procedure depends on optimization
 algorithm.
@@ -60,7 +60,7 @@ descriptor is defined (for more details, see :txtref:`Namespaces
 
    + ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
      uses for computations. This parameter is defined first and has the
-     ``onedal::default_float_t`` default value.
+     ``oneapi::dal::default_float_t`` default value.
 
    + ``Method`` is a tag-type that specifies the `computational method
      <methods_>`_. This parameter is defined second and has the
@@ -83,7 +83,7 @@ algorithm, the following strings shall be substituted:
 .. code-block:: cpp
    :name: descriptor-template
 
-   namespace onedal::%ALGORITHM% {
+   namespace oneapi::dal::%ALGORITHM% {
 
    template <typename Float  = default_float_t,
              typename Method = method::by_default,
@@ -97,7 +97,7 @@ algorithm, the following strings shall be substituted:
       /* more properties */
    };
 
-   } // namespace onedal::%ALGORITHM%
+   } // namespace oneapi::dal::%ALGORITHM%
 
 
 Each meta-parameter of an algorithm is mapped to a property that shall satisfy
@@ -141,9 +141,9 @@ implementation-defined and shall be declared within the top-level namespace.
 
 .. code-block:: cpp
 
-   namespace onedal {
+   namespace oneapi::dal {
       using default_float_t = /* implementation defined */;
-   } // namespace onedal
+   } // namespace oneapi::dal
 
 
 .. _methods:
@@ -159,13 +159,13 @@ refers to one of the computational methods as shown in the example below.
 
 .. code-block:: cpp
 
-   namespace onedal::%ALGORITHM% {
+   namespace oneapi::dal::%ALGORITHM% {
       namespace method {
          struct x {};
          struct y {};
          using by_default = x;
       } // namespace method
-   } // namespace onedal::%ALGORITHM%
+   } // namespace oneapi::dal::%ALGORITHM%
 
 
 

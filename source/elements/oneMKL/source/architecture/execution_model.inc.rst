@@ -3,7 +3,7 @@
 Execution Model
 ---------------
 
-This section describes the execution environment common to all oneMKL functionality. The execution environment includes how data is provided to computational routines in :ref:`onemkl_queues`, support for several devices in :ref:`onemkl_device_usage`, synchronous and asynchronous exection models in :ref:`onemkl_asynchronous_synchronous_execution` and :ref:`onemkl_host_thread_safety`.  
+This section describes the execution environment common to all oneMKL functionality. The execution environment includes how data is provided to computational routines in :ref:`onemkl_queues`, support for several devices in :ref:`onemkl_device_usage`, synchronous and asynchronous execution models in :ref:`onemkl_asynchronous_synchronous_execution` and :ref:`onemkl_host_thread_safety`.  
 
 .. _onemkl_queues:
 

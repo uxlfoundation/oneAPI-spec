@@ -9,7 +9,7 @@ This function computes the forward transform defined by an instantiation of the 
 
 .. rubric:: Description
 
-The compute_forward function accepts the :ref:`onemkl_dft_descriptor` and one or more data parameters and in the case of USM data, any ``syc::event`` dependencies.  Given a succesfully configured and committed descriptor, this function computes the forward transform, that is, the :ref:`transform<onemkl_dft_formula>` with the minus sign, :math:`\delta=-1`, in the exponent.
+The compute_forward function accepts the :ref:`onemkl_dft_descriptor` and one or more data parameters and in the case of USM data, any ``syc::event`` dependencies.  Given a successfully configured and committed descriptor, this function computes the forward transform, that is, the :ref:`transform<onemkl_dft_formula>` with the minus sign, :math:`\delta=-1`, in the exponent.
 
 The configuration parameters ``config_param::COMPLEX_STORAGE``, ``config_param::REAL_STORAGE`` and ``config_param::CONJUGATE_EVEN_STORAGE`` define the layout of the input and output data and must be properly set in a call to :ref:`onemkl_dft_descriptor_set_value`.
 

@@ -142,6 +142,7 @@ class Class(object):
     name: Text = None
     location: Location = None
     functions: List[Function] = []
+    static_functions: List[Function] = []
     declaration: Text = None
     template_parameters: List[Parameter] = []
     template_declaration: Text = None
