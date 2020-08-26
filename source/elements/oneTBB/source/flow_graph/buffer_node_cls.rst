@@ -28,8 +28,8 @@ A node that is an unbounded buffer of messages. Messages are forwarded in an arb
 
 Requirements:
 
-* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible]
-  ISO C++ Standard sections.
+* The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
+  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 
 ``buffer_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
@@ -46,17 +46,17 @@ Member functions
 
 .. cpp:function:: explicit buffer_node( const buffer_node &src )
 
-    Constructs an empty ``buffer_node``. The buffered value and list of successors is not copied
-    from ``src``.
+    Constructs an empty ``buffer_node`` that belongs to the same graph ``g`` as ``src``. Any
+    intermediate state of ``src``, including its links to predecessors and successors, is not
+    copied.
 
 .. cpp:function:: bool try_put( const T &v )
 
-    Adds ``v`` to the buffer. If ``v`` is the only item in the buffer, a task is also spawned to
-    forward the item to a successor.
+    Adds ``v`` to the set of items managed by the node, and tries forwarding it to a successor.
 
     **Returns**: ``true``
 
 .. cpp:function:: bool try_get( T &v )
 
-    **Returns**: ``true`` if an item can be removed from the buffer and assigned to ``v``.
-    Returns ``false`` if there is no non-reserved item currently in the buffer.
+    **Returns**: ``true`` if an item can be removed from the node and assigned to ``v``.
+    Returns ``false`` if there is no non-reserved item currently in the node.

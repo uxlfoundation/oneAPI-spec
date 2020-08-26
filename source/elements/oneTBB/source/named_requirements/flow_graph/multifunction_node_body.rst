@@ -9,6 +9,8 @@ A type `Body` satisfies `MultifunctionNodeBody` if it meets the following requir
 
 **MultifunctionNodeBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: MultifunctionNodeBody
+   
 .. cpp:function:: Body::Body( const Body& )
 
     Copy constructor.
@@ -16,10 +18,6 @@ A type `Body` satisfies `MultifunctionNodeBody` if it meets the following requir
 .. cpp:function:: Body::~Body()
 
     Destructor.
-
-.. cpp:function:: void operator=( const Body& )
-
-    Assignment.
 
 .. cpp:function:: void Body::operator()(const Input &v, OutputPortsType &p)
 

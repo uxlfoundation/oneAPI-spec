@@ -2,6 +2,8 @@
 Size and capacity
 =================
 
+.. namespace:: tbb::enumerable_thread_specific
+	       
 .. cpp:function:: size_type size() const
 
     Returns the number of elements in ``*this``.

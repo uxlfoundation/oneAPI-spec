@@ -24,7 +24,6 @@ Tasks can be dynamically added to the group while it is executing.
             task_group_status run_and_wait( const Func& f );
 
             task_group_status wait();
-            bool is_canceling();
             void cancel();
         };
 
@@ -34,6 +33,8 @@ Tasks can be dynamically added to the group while it is executing.
 
 Member functions
 ----------------
+
+.. namespace:: tbb::task_group
 
 .. cpp:function:: task_group()
 
@@ -63,10 +64,6 @@ Member functions
     Waits for all tasks in the group to complete or be cancelled.
 
     **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
-
-.. cpp:function:: bool is_canceling()
-
-    **Returns**: True if this task group is cancelling its tasks.
 
 .. cpp:function:: void cancel()
 

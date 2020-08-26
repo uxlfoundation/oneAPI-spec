@@ -3,17 +3,27 @@ ContainerBasedSequence
 ======================
 **[req.container_based_sequence]**
 
-A type `T` satisfies `ContainerBasedSequence` if it is an array type or
-a type that meets the following requirements:
+A type `C` satisfies `ContainerBasedSequence` if it meets the following requirements:
 
 ----------------------------------------------------------------
 
 **ContainerBasedSequence Requirements: Pseudo-Signature, Semantics**
 
-.. cpp:function:: T::begin()
+    .. note::
 
-    Returns an iterator to the first element of the contained sequence.
+         In this page ``c`` is an object of type (possibly ``const``) ``C``.
 
-.. cpp:function:: T::end()
+         Templates that use the named requirement can impose stricter requirements on the iterator concept.
 
-    Returns an iterator to the element behind the last element of the contained sequence.
+.. cpp:function:: std::begin(c)
+
+    Returns an input iterator to the beginning of the sequence represented by ``c``.
+
+.. cpp:function:: std::end(c)
+
+    Returns an input iterator one past the end of the sequence represented by ``c``.
+
+See also:
+
+* :doc:`parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
+* :doc:`parallel_sort algorithm <../../algorithms/functions/parallel_sort_func>`

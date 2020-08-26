@@ -41,7 +41,7 @@ For example, the table below shows pseudo-signatures for a *sortable* type ``T``
 
 A real signature may differ from the pseudo-signature that it implements in ways where implicit
 conversions would deal with the difference. For an example type ``U``, the real signature that
-implements operator``<`` in the table above can be expressed as ``int operator<( U x, U y )``,
+implements ``operator<`` in the table above can be expressed as ``int operator<( U x, U y )``,
 because C++ permits implicit conversion from ``int`` to ``bool``, and implicit conversion from ``U``
 to (``const U&``). Similarly, the real signature ``bool operator<( U& x, U& y )`` is acceptable
 because C++ permits implicit addition of a const qualifier to a reference type.
@@ -54,6 +54,8 @@ Algorithms
    named_requirements/algorithms/range.rst
    named_requirements/algorithms/splittable.rst
    named_requirements/algorithms/par_for_body.rst
+   named_requirements/algorithms/par_for_func.rst
+   named_requirements/algorithms/par_for_index.rst
    named_requirements/algorithms/par_reduce_body.rst
    named_requirements/algorithms/par_reduce_func.rst
    named_requirements/algorithms/par_reduce_reduction.rst
