@@ -2,33 +2,11 @@
 
 .. _tables:
 
-======
-Tables
-======
+=====
+Table
+=====
 
 This section describes the types related to the :txtref:`table` concept.
-
-|dal_short_name| defines a set of classes that implement the
-:txtref:`table` concept and represents a specific data format:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 10 70
-
-   * - Table type
-     - Description
-
-   * - :txtref:`table <table_programming_interface>`
-     - A common implementation of the table concept. Base class for
-       other table types.
-
-   * - homogen_table_
-     - Dense table that contains :term:`contiguous <Contiguous data>`
-       :term:`homogeneous <Homogeneous data>` data.
-
-The :txtref:`table` concept bound with other concepts and terms like
-:txtref:`table_metadata` or :capterm:`data layout`. |dal_short_name| defines
-next types for these table-related terms:
 
 .. list-table::
    :header-rows: 1
@@ -36,6 +14,10 @@ next types for these table-related terms:
 
    * - Type
      - Description
+
+   * - :txtref:`table <table_programming_interface>`
+     - A common implementation of the table concept. Base class for
+       other table types.
 
    * - :txtref:`table_metadata <metadata_programming_interface>`
      - An implementation of :txtref:`table_metadata` concept.
@@ -47,6 +29,20 @@ next types for these table-related terms:
    * - feature_type_
      - An enumeration of :capterm:`feature` types used in |dal_short_name| to
        define set of available operations onto the data.
+
+|dal_short_name| defines a set of classes that implement the
+:txtref:`table` concept for a specific data format:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 10 70
+
+   * - Table type
+     - Description
+
+   * - :txtref:`homogen_table`
+     - Dense table that contains :term:`contiguous <Contiguous data>`
+       :term:`homogeneous <Homogeneous data>` data.
 
 ---------------------------
 Requirements on table types
@@ -91,58 +87,33 @@ Next listing provides an example of table API regarding kinds and copy-assignmen
 
 .. _table_programming_interface:
 
------
+---------------------
+Programming interface
+---------------------
+
 Table
------
+---------------------
 
 A base implementation of :txtref:`table` concept.
 
-Programming interface
----------------------
-
 .. onedal_class:: oneapi::dal::table
-
-.. _homogen_table:
-
------------------
-Homogeneous table
------------------
-
-Class ``homogen_table`` is an implementation of a table type
-for which the following is true:
-
-- Its data is dense and it is stored as one contiguous memory block.
-- All columns have the same :capterm:`data type <Data type>`.
-
-Programming interface
----------------------
-
-.. onedal_class:: oneapi::dal::homogen_table
 
 .. _metadata_programming_interface:
 
---------------
 Table metadata
 --------------
 
 An implementation of :txtref:`table_metadata` concept. Holds additional
 information about data inside the table, that is not a part of table concept.
 
-Programming interface
----------------------
-
 .. onedal_class:: oneapi::dal::table_metadata
 
 .. _data_layout:
 
------------
 Data layout
 -----------
 
 An implementation of :capterm:`data layout` term.
-
-Programming interface
----------------------
 
 ::
 
@@ -162,14 +133,12 @@ Programming interface
 
 .. _feature_type:
 
-------------
 Feature type
 ------------
 
-An implementation of data logical types.
+.. onedal_enumclass:: oneapi::dal::feature_type
 
-Programming interface
----------------------
+An implementation of data logical types.
 
 ::
 
@@ -189,3 +158,8 @@ Programming interface
 
    feature_type::ratio
       Represents the type of :capterm:`Ratio feature`.
+
+
+.. toctree::
+
+   table/homogen.rst

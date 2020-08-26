@@ -292,6 +292,6 @@ Details
 .. toctree::
 
    data_sources.rst
-   tables.rst
+   table.rst
    table_builders.rst
    accessors.rst
