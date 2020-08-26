@@ -113,12 +113,12 @@ For details, see :txtref:`data-sources` section.
 Table
 -----
 
-Table is a concept of in-memory numerical data that are shaped in several
-rows and columns. It is used at the data preparation and data processing stages
-for the following:
+Table is a concept of in-memory numerical data that are organized in a tabular
+view with several rows and columns. It is used at the data preparation and data
+processing stages for the following:
 
 - To be an in-memory representation of a :txtref:`dataset` or another tabular
-  data (for example, matrices).
+  data (for example, matrices, vectors, even singe values).
 
 - To store heterogeneous data in various
   :capterm:`data formats <data format>`, such as dense, sparse, chunked,
@@ -144,25 +144,26 @@ for the following:
   implementations shall be :capterm:`immutable <immutability>`.
 
 .. warning::
-  Table can represent not a datasets only - it can be a matrix, a vector (if
-  number of columns :math:`p = 1`), even a single value.
+  A table can represent not only a dataset, but also a matrix, a vector (if
+  number of columns :math:`p = 1`), and even a single value (:math:`n = 1, p = 1`).
 
-  When table represent a dataset, the table rows represent dataset observations,
-  and columns represent features according to the :txtref:`dataset` definition.
+  When a table represents a dataset, its rows represent observations in the
+  dataset, and its columns represent features, according to the
+  :txtref:`dataset` definition.
 
 This concept has different logical organization and physical :capterm:`format of
 the data <data format>`:
 
 - Logically, a table contains :math:`n` rows and :math:`p` columns.
-  Every column may have its own type of data values and set of allowed
-  operations on them.
+  Every column may have its own type of data values and a set of allowed
+  operations.
 
 - Physically, a table can be organized in different ways: as a
   :capterm:`homogeneous <homogeneous data>`, :capterm:`contiguous <contiguous
   data>` array of bytes, as a :capterm:`heterogeneous <heterogeneous data>` list
   of arrays of different :capterm:`data types <data type>`, in a
-  compressed-sparse-row format. Physical amount of bytes needed to store the
-  data differ from the number of elements :math:`n \times p` within a table.
+  compressed-sparse-row format. The number of bytes needed to store the data
+  differ from the number of elements :math:`n \times p` within a table.
 
 For details, see :txtref:`tables` section.
 
@@ -171,57 +172,51 @@ For details, see :txtref:`tables` section.
 Table metadata
 --------------
 
-Table metadata concept contains an additional information about data into the
-table, that is not included into the table itself but can be useful in the
-particular use case.
+Table metadata concept provides an additional information about data in the
+table:
 
-1. Table metadata includes information about :capterm:`data types <Data type>`
-of table columns.
+1. The `data types <Data type>` of the columns.
 
-2. Table metadata includes information about logical types of columns:
+2. The logical types of data in the columns:
    :capterm:`nominal <Nominal feature>`, :capterm:`ordinal <Ordinal feature>`,
    :capterm:`interval <Interval feature>`, or :capterm:`ratio <Ratio feature>`.
-   Usually we speak about logical types, when the table represents a dataset.
-   But this logical type information can be also applied on the other cases,
-   e.g. when the table represents a matrix.
+   Information about logical types is mostly relevant in cases when table
+   columns represent dataset features, but is also applicable in other cases as
+   well, for example, when a table represents a matrix.
+
+Only the properties of data that do not affect table concept definition shall be
+the part of metadata concept.
 
 .. warning::
-  While extending the table concept, specification implementer should
-  distinguish whether a new property he or she is adding is the property of
-  particular ``table`` sub-type or it is a property of table metadata.
+  While extending the table concept, specification implementer shall distinguish
+  whether a new property they are adding is a property of a particular ``table``
+  sub-type or a property of table metadata.
 
   For example, :capterm:`data layout` and :capterm:`data format` are properties
-  of table objects since they affect the structure of a table, its contract and
+  of table objects since they affect the structure of a table, its contract, and
   behavior.
-
-  Logical and physical types of table columns are related strongly to the data
-  in the table and do not affect table concept definition - that's why they are
-  considered as metadata.
 
 .. _accessor:
 
 Accessor
 --------
 
-Accessor is a concept that defines a single way to get the data from a
-:txtref:`table`. It allows:
+Accessor is a concept that defines a single way to extract the data from a
+:txtref:`table`. It allows to:
 
-- To have unified access to the data from :txtref:`table` objects of different
+- Have unified access to the data from :txtref:`table` objects of different
   types, without exposing their implementation details.
 
-- To convert a variety of numeric :capterm:`data formats <data format>` into a
-  smaller set of formats.
-
-- To provide a :capterm:`flat <flat data>` view on the data blocks of a
+- Provide a :capterm:`flat <flat data>` view on the data blocks of a
   :txtref:`table` for better data locality. For example, some accessor
   implementation returns column values as a contiguous array, while the original
   table stored row-by-row (there are strides between values of a single
   column).
 
-- To acquire data in a desired :capterm:`data format` for which
+- Acquire data in a desired :capterm:`data format` for which
   a specific set of operations is defined.
 
-- To have read-only, read-write and write-only access to the data. Accessor
+- Have read-only, read-write and write-only access to the data. Accessor
   implementations are not required to have read-write and write-only access
   modes for :capterm:`immutable <immutability>` entities like
   :txtref:`<table>s`.
@@ -236,11 +231,11 @@ This section provides a basic usage scenario of the :txtref:`table` and
 :txtref:`The following diagram <table_accessor_usage_example>` shows objects
 of these concepts, which are highlighted by colors:
 
-- :txtref:`table` object is dark blue.
+- :txtref:`table` object is dark blue
 
-- :txtref:`accessor` is orange.
+- :txtref:`accessor` is orange
 
-- :txtref:`table_metadata` is light blue.
+- :txtref:`table_metadata` is light blue
 
 .. _table_accessor_usage_example:
 
@@ -249,11 +244,11 @@ of these concepts, which are highlighted by colors:
   :alt: Sequence diagram of accessor-builder-table relations
 
 To perform computations on a dataset, one shall create a :txtref:`table` object
-first. It can be done using a :txtref:`data-source` or directly from
-user-defined memory. The diagram briefly shows the situation when some
-:txtref:`table` object `t` is created from the data provided by user (not shown
-on a diagram). While table creation, object of table metadata `tm` is created
-and its content deduced from incoming data.
+first. It can be done either using a :txtref:`data-source` or directly from
+user-defined memory. The diagram shows the creation of a :txtref:`table` object
+`t` is created from the data provided by user (not shown on a diagram). During a
+table creation, an object `tm` of table metadata is created and its content is
+deduced from the incoming data.
 
 Once a table object is created, the data inside it can be accessed by its own
 interface or with a help of a read-only accessor as shown on the diagram. The
