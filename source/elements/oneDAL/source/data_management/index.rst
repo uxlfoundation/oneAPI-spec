@@ -155,7 +155,7 @@ the data <data format>`:
 
 For details, see :txtref:`tables` section.
 
-.. _metadata:
+.. _table_metadata:
 
 Metadata
 --------
