@@ -36,7 +36,7 @@ Inserting values
         bool insert( accessor& result, const value_type& value );
 
     If the accessor ``result`` is not empty, releases the ``result`` and
-    attepts to insert the value ``value`` into the container.
+    attempts to insert the value ``value`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
     that was already presented in the container.
@@ -52,7 +52,7 @@ Inserting values
 
         bool insert( const value_type& value );
 
-    Attepts to insert the value ``value`` into the container.
+    Attempts to insert the value ``value`` into the container.
 
     **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
@@ -68,7 +68,7 @@ Inserting values
         bool insert( accessor& result, value_type&& value );
 
     If the accessor ``result`` is not empty, releases the ``result`` and
-    attepts to insert the value ``value`` into the container using move semantics.
+    attempts to insert the value ``value`` into the container using move semantics.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
     that was already presented in the container.
@@ -161,7 +161,7 @@ Erasing elements
 
         bool erase( const key_type& key );
 
-    If an elemnent with the key equivalent to  ``key`` exists, removes it from the container.
+    If an element with the key equivalent to  ``key`` exists, removes it from the container.
 
     **Returns**: ``true`` if an element was removed; ``false``, otherwise.
 

@@ -119,7 +119,7 @@ If the concurrency limit allows, executes the user-provided body on the incoming
 Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
 it.
 
-**Returns:** ``true`` if the input was accepted; and ``false``, otherwise.
+**Returns:** ``true`` if the input was accepted; ``false``, otherwise.
 
 ----------------------------------------------------------------
 
