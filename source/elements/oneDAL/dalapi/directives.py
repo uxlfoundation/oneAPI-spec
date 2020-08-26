@@ -201,13 +201,13 @@ class ListingDirective(DoxyDirective):
 
 
 @directive
-class ComputeMethodsDirective(DoxyDirective):
+class TagsNamespaceDirective(DoxyDirective):
     required_arguments = 1
     optional_arguments = 0
     has_content = False
 
     def rst(self, x: RstBuilder):
-        methods_namespace = self.arguments[0] + '::method'
+        methods_namespace = self.arguments[0]
         method_ns = self.ctx.index.find(methods_namespace)
         self.add_listing(method_ns, x, remove_empty_lines=True)
         self._add_classes(method_ns, x)

@@ -38,3 +38,6 @@ For more information about algorithms implemented in |dal_full_name|
    T. Zhang. Solving Large Scale Linear Prediction Problems Using Stochastic
    Gradient Descent Algorithms. ICML 2004: Proceedings Of The Twenty-First
    International Conference On Machine Learning, 919--926, 2004.
+
+.. [Lang87]
+   S. Lang. *Linear Algebra*. Springer-Verlag New York, 1987.
