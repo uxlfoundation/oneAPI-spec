@@ -50,7 +50,31 @@ contains one eigenvector in each row.
 
 Training method: *Covariance*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[TBD]
+
+This method uses eigendecomposition of the covariance matrix to define the
+principal components of the dataset. Following steps are distinguished:
+
+#. Covariance computation.
+#. Eigenvectors and eigenvalues computation.
+#. Resulting matrix formation.
+
+Covariance matrix computation should be in the following way:
+
+#. Compute sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1 \leq i \leq p`
+
+#. Compute cross-product :math:`P = XX^T - s^Ts`
+
+#. Compute covariance matrix :math:`\Sigma = \frac{1}{n - 1} P`
+
+To compute eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i,
+\quad 1 \leq i \leq p` the following equation shall be resolved:
+
+.. math::
+   \Sigma\lambda =  v\lambda
+
+The final step is sort set of pairs :math:`(\lambda_i, \upsilon_i)` in
+descending order by :math:`\lambda_i` and form matrix :math:`T =
+(\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`
 
 .. _pca_t_math_svd:
 
