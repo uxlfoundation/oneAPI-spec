@@ -54,6 +54,8 @@ Algorithms
    named_requirements/algorithms/range.rst
    named_requirements/algorithms/splittable.rst
    named_requirements/algorithms/par_for_body.rst
+   named_requirements/algorithms/par_for_func.rst
+   named_requirements/algorithms/par_for_index.rst
    named_requirements/algorithms/par_reduce_body.rst
    named_requirements/algorithms/par_reduce_func.rst
    named_requirements/algorithms/par_reduce_reduction.rst

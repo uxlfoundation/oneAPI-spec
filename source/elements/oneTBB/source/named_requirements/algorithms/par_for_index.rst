@@ -44,8 +44,7 @@ A type `Index` satisfies `ParallelForIndex` if it meets the following requiremen
     *k*-th value after *i*.
 
 ``D`` is the type of the expression ``j-i``. It can be any integral type that is convertible to ``size_t``.
-Examples that model the Index requirements are integral types, pointers, and STL random-access iterators
-whose difference can be implicitly converted to a ``size_t``.
+Examples that model the Index requirements are integral types and pointers.
 
 See also:
 
