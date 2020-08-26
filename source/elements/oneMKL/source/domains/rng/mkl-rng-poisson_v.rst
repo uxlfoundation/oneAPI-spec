@@ -9,7 +9,7 @@ Class is used for generation of Poisson distributed integer types random numbers
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`\lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
 
 The probability distribution is given by:
 
@@ -32,18 +32,16 @@ class poisson_v
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = poisson_v_method::by_default>
     class poisson_v {
     public:
         using method_type = Method;
         using result_type = IntType;
         explicit poisson_v(std::vector<double> lambda);
-        poisson_v(const poisson_v<IntType, Method> & other);
         std::vector<double> lambda() const;
     };
-
-.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::poisson_v_method::by_default> \
-                oneapi::mkl::rng::poisson_v
+    }
 
 .. container:: section
 
@@ -63,7 +61,7 @@ class poisson_v
                 * ``oneapi::mkl::rng::poisson_v_method::by_default``
                 * ``oneapi::mkl::rng::poisson_v_method::gaussian_icdf_based``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -76,8 +74,6 @@ class poisson_v
           - Description
         * - `explicit poisson_v(std::vector<double> lambda)`_
           - Constructor with parameters
-        * - `poisson_v(const poisson_v<IntType, Method> & other)`_
-          - Copy constructor
         * - `std::vector<double> lambda() const`_
           - Method to obtain distribution parameter
 
@@ -87,23 +83,27 @@ class poisson_v
 
     .. container:: section
 
-        .. cpp:type:: poisson_v::method_type = Method
+        .. code-block:: cpp
+
+            poisson_v::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: poisson_v::result_type = IntType
+        .. code-block:: cpp
+
+            poisson_v::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -113,7 +113,9 @@ class poisson_v
 
         .. _`explicit poisson_v(std::vector<double> lambda)`:
 
-        .. cpp:function:: explicit poisson_v::poisson_v(std::vector<double> lambda)
+        .. code-block:: cpp
+
+            explicit poisson_v::poisson_v(std::vector<double> lambda)
 
         .. container:: section
 
@@ -121,17 +123,12 @@ class poisson_v
 
             Constructor with parameters. `lambda` is a distribution parameter.
 
-    .. container:: section
-
-        .. _`poisson_v(const poisson_v<IntType, Method> & other)`:
-
-        .. cpp:function:: poisson_v::poisson_v(const poisson_v<IntType, Method> & other)
-
         .. container:: section
 
-            .. rubric:: Description
+            .. rubric:: Throws
 
-            Copy constructor.
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`lambda.size() \leq 1`
 
 .. container:: section
 
@@ -141,7 +138,9 @@ class poisson_v
 
         .. _`std::vector<double> lambda() const`:
 
-        .. cpp:function:: double poisson_v::lambda() const
+        .. code-block:: cpp
+
+            double poisson_v::lambda() const
 
         .. container:: section
 

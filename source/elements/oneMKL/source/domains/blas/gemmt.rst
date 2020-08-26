@@ -20,7 +20,8 @@ with general matrices. The operation is defined as:
 
 where:
 
-op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
+op(``X``) is one of op(``X``) = ``X``, or op(``X``) = ``X``\ :sup:`T`, or
+op(``X``) = ``X``\ :sup:`H`,
 
 ``alpha`` and ``beta`` are scalars
 
@@ -47,8 +48,42 @@ gemmt (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::gemmt(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::transpose transb, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
-.. cpp:function::  void oneapi::mkl::blas::row_major::gemmt(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::transpose transb, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void gemmt(sycl::queue &queue,
+                  onemkl::uplo upper_lower,
+                  onemkl::transpose transa,
+                  onemkl::transpose transb,
+                  std::int64_t n,
+                  std::int64_t k,
+                  T alpha,
+                  sycl::buffer<T,1> &a,
+                  std::int64_t lda,
+                  sycl::buffer<T,1> &b,
+                  std::int64_t ldb,
+                  T beta,
+                  sycl::buffer<T,1> &c,
+                  std::int64_t ldc)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void gemmt(sycl::queue &queue,
+                  onemkl::uplo upper_lower,
+                  onemkl::transpose transa,
+                  onemkl::transpose transb,
+                  std::int64_t n,
+                  std::int64_t k,
+                  T alpha,
+                  sycl::buffer<T,1> &a,
+                  std::int64_t lda,
+                  sycl::buffer<T,1> &b,
+                  std::int64_t ldb,
+                  T beta,
+                  sycl::buffer<T,1> &c,
+                  std::int64_t ldc)
+   }
 
 .. container:: section
 
@@ -183,6 +218,27 @@ gemmt (Buffer Version)
    If ``beta`` = 0, matrix ``C`` does not need to be initialized
    before calling gemmt.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_gemmt_usm:
 
 gemmt (USM Version)
@@ -190,8 +246,44 @@ gemmt (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::gemmt(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::transpose transb, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::gemmt(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::transpose transb, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event gemmt(sycl::queue &queue,
+                         onemkl::uplo upper_lower,
+                         onemkl::transpose transa,
+                         onemkl::transpose transb,
+                         std::int64_t n,
+                         std::int64_t k,
+                         T alpha,
+                         const T* a,
+                         std::int64_t lda,
+                         const T* b,
+                         std::int64_t ldb,
+                         T beta,
+                         T* c,
+                         std::int64_t ldc,
+                         const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event gemmt(sycl::queue &queue,
+                         onemkl::uplo upper_lower,
+                         onemkl::transpose transa,
+                         onemkl::transpose transb,
+                         std::int64_t n,
+                         std::int64_t k,
+                         T alpha,
+                         const T* a,
+                         std::int64_t lda,
+                         const T* b,
+                         std::int64_t ldb,
+                         T beta,
+                         T* c,
+                         std::int64_t ldc,
+                         const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -341,5 +433,27 @@ gemmt (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-like-extensions`

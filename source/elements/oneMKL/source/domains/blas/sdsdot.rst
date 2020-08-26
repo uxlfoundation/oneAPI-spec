@@ -23,8 +23,30 @@ sdsdot (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, sycl::buffer<float,1> &x, std::int64_t incx, sycl::buffer<float,1> &y, std::int64_t incy, sycl::buffer<float,1> &result)
-.. cpp:function::  void oneapi::mkl::blas::row_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, sycl::buffer<float,1> &x, std::int64_t incx, sycl::buffer<float,1> &y, std::int64_t incy, sycl::buffer<float,1> &result)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void sdsdot(sycl::queue &queue,
+                   std::int64_t n,
+                   float sb,
+                   sycl::buffer<float,1> &x,
+                   std::int64_t incx,
+                   sycl::buffer<float,1> &y,
+                   std::int64_t incy,
+                   sycl::buffer<float,1> &result)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void sdsdot(sycl::queue &queue,
+                   std::int64_t n,
+                   float sb,
+                   sycl::buffer<float,1> &x,
+                   std::int64_t incx,
+                   sycl::buffer<float,1> &y,
+                   std::int64_t incy,
+                   sycl::buffer<float,1> &result)
+   }
 
 .. container:: section
 
@@ -63,6 +85,27 @@ sdsdot (Buffer Version)
       Buffer where the result (a scalar) will be stored. If ``n`` < 0
       the result is ``sb``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_sdsdot_usm:
 
 sdsdot (USM Version)
@@ -70,8 +113,32 @@ sdsdot (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, const float *x, std::int64_t incx, const float *y, std::int64_t incy, float *result, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::sdsdot(sycl::queue &queue, std::int64_t n, float sb, const float *x, std::int64_t incx, const float *y, std::int64_t incy, float *result, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event sdsdot(sycl::queue &queue,
+                          std::int64_t n,
+                          float sb,
+                          const float *x,
+                          std::int64_t incx,
+                          const float *y,
+                          std::int64_t incy,
+                          float *result,
+                          const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event sdsdot(sycl::queue &queue,
+                          std::int64_t n,
+                          float sb,
+                          const float *x,
+                          std::int64_t incx,
+                          const float *y,
+                          std::int64_t incy,
+                          float *result,
+                          const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -119,5 +186,27 @@ sdsdot (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-1-routines`

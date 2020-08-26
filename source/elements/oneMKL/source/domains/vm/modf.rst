@@ -21,12 +21,43 @@ modf
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::modf(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, buffer<T,1>& z, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event modf(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    sycl::buffer<T,1>& z,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::modf(queue& exec_queue, int64_t n, T* a, T* y, T* z, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event modf(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    T* z,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``modf`` supports the following precisions.
 
@@ -52,8 +83,18 @@ modf
    remaining fraction part for each vector element.
 
 
-   |
-   | |image0|
+   .. math::
+      a_i \geq 0,
+      \begin{cases}
+         y_i = \lfloor a_i \rfloor \\
+         z_i = a_i - \lfloor a_i \rfloor
+      \end{cases}
+
+      a_i < 0,
+      \begin{cases}
+         y_i = \lceil a_i \rceil \\
+         z_i = a_i - \lceil  a_i \rceil
+      \end{cases}
 
 
    .. container:: tablenoborder
@@ -65,7 +106,7 @@ modf
          * - Argument
            - Result 1
            - Result 2
-           - Error Code
+           - Status code
          * - +0
            - +0
            - +0
@@ -186,7 +227,15 @@ modf
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -195,8 +244,3 @@ modf
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
-
-
-
-.. |image0| image:: ../equations/GUID-38C12345-5E6E-4D94-8072-460502CB52EC-low.gif
-

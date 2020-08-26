@@ -102,13 +102,26 @@ With the ``REAL_REAL`` storage, real-valued data sequences in a real domain are 
 CONJUGATE_EVEN_STORAGE
 ++++++++++++++++++++++
 
-For the :ref:`onemkl_dft_enum_domain` template parameter with value ``REAL`` and considered as a conjugate-even domain, the value of ``config_value::COMPLEX_COMPLEX`` and ``config_value::COMPLEX_REAL`` are supported. The conjugate-even symmetry of the data enables storing only about a half of the whole mathematical result, so that one part of it can be directly referenced in the memory while the other part can be reconstructed depending on the selected storage configuration.  The specific data format to be used for the conjugate-even domain is specified by the :ref:`onemkl_dft_config_packed_format`.
+For the :ref:`onemkl_dft_enum_domain` template parameter with value ``REAL`` and considered as a conjugate-even domain, the value of ``config_value::COMPLEX_COMPLEX`` is supported. The conjugate-even symmetry of the data enables storing only about a half of the whole mathematical result, so that one part of it can be directly referenced in the memory while the other part can be reconstructed depending on the selected storage configuration. The ``config_param::PACKED_FORMAT`` configuration parameter defines how the data is packed.  Possible values for ``config_param::PACKED_FORMAT`` depend on the values of the ``config_param::CONJUGATE_EVEN_STORAGE`` configuration parameter.
+
+.. tabularcolumns:: l|c|
+
+.. list-table::
+     :header-rows: 1
+     :class: longtable
+
+     * -   CONJUGATE_EVEN_STORAGE
+       -   Supported PACKED_FORMATS
+     * -   :ref:`onemkl_dft_conjugate_even_storage_complex_complex`
+       -   ``config_value::CCE_FORMAT`` can be used with transforms of any dimension.
+
+
 
 .. _onemkl_dft_conjugate_even_storage_complex_complex:
 
 .. rubric:: COMPLEX_COMPLEX
 
-With the ``config_value::COMPLEX_COMPLEX`` storage format, the complex-valued data sequences in the conjugate-even domain is stored by one complex container (array/``sycl::buffer``), AZ, so that a complex-valued element :math:`z_{k_1, k_2, \dots, k_d}` of the m-th d-dimensional sequence can be accessed or reconstructed as follows.
+There is only one ``config_param::PACKED_FORMAT`` supported by the ``config_value::COMPLEX_COMPLEX`` value for ``config_param::CONJUGATE_EVEN_STORAGE``, mainly the ``config_value::CCE_FORMAT``.  The complex-valued data sequence consists of one complex container (array/``sycl::buffer``), AZ, so that a complex-valued element :math:`z_{k_1, k_2, \dots, k_d}` of the m-th d-dimensional sequence can be accessed or reconstructed as follows:
 
 Consider a d-dimensional real-to-complex transform.
 
@@ -120,11 +133,106 @@ where index arithmetic is performed modulo the length of the respective dimensio
 For dimensions with even lengths, some of the other elements are real-valued as well. For example, if :math:`n_s` is even, then
 :math:`z_{0, 0, \dots, \frac{n_s}{2}, 0, \dots, 0} = \text{conjugate}( z_{0, 0, \dots, \frac{n_s}{2}, 0, \dots, 0} )`.
 With the conjugate-even symmetry, approximately a half of the result suffices to fully reconstruct it. For an arbitrary dimension, :math:`h` , it suffices to store elements :math:`z_{k_1, \dots, k_h , \dots, k_d}` for the following indices:
-:math:`k_h = 0, \dots, \left[ \frac{n_h}{2}\right]`
-:math:`k_i = 0, \dots, n_i-1`, where :math:`i = 1,\dots, d` and :math:`i \neq h`.
-The symmetry property enables reconstructing the remaining elements: for :math:`k_h = \left[ \frac{n_h}{2}\right] + 1, \dots , n_h - 1`. The halved dimension is always assumed to be the last dimension.
 
-The following code illustrates usage of the ``config_value::COMPLEX_COMPLEX`` storage for a two-dimensional conjugate-even domain:
+* :math:`k_h = 0, \dots, \left[ \frac{n_h}{2}\right]`
+* :math:`k_i = 0, \dots, n_i-1`, where :math:`i = 1,\dots, d` and :math:`i \neq h` 
+
+and assuming that integer division rounds down.
+
+The symmetry property enables reconstructing the remaining elements: for :math:`k_h = \left[ \frac{n_h}{2}\right] + 1, \dots , n_h - 1`. The halved dimension is always assumed to be the dimension for which storage is contiguous in memory (see strides), for example in a 2D row-major format, it is the last dimension and for 2D column-major format it is the first dimension.
+
+.. _onemkl_dft_complex_complex_cce_1d_even_or_odd:
+
+.. rubric:: Packed complex domain formats for a 1D real-to-complex transformation considered as a conjugate-even-domain with :ref:`onemkl_dft_conjugate_even_storage_complex_complex` storage and :math:`n=2L` (even size) or :math:`n=2L+1` (odd size).
+
+.. tabularcolumns:: l|c|c|c|c|c|c|c|
+
+.. list-table::
+     :header-rows: 1
+     :class: longtable
+
+     * -   :math:`k=`
+       -   0
+       -   1
+       -   2
+       -   :math:`\dots`
+       -   L-2
+       -   L-1
+       -   L
+     * -   CCE
+       -   :math:`Z_0`
+       -   :math:`Z_1`
+       -   :math:`Z_2`
+       -   :math:`\dots`
+       -   :math:`Z_{L-2}`
+       -   :math:`Z_{L-1}`
+       -   :math:`Z_{L}`
+
+
+.. _onemkl_dft_complex_complex_cce_2d_even_even:
+
+.. rubric:: Packed complex domain formats for a 2D :math:`n_1\times n_2` real-to-complex transformations considered as a conjugate-even-domain with :ref:`onemkl_dft_conjugate_even_storage_complex_complex` storage and :math:`n_1=2K` (even size) and :math:`n_2=2L` (even size) using row-major input data.
+
+.. tabularcolumns:: |c|c|c|c|c|c|c|
+
+.. list-table::
+     :header-rows: 1
+     :stub-columns: 1
+     :class: longtable
+
+     * -   :math:`k_1\backslash k_2`
+       -   :math:`0`
+       -   1
+       -   2
+       -   :math:`\dots`
+       -   L-1
+       -   L
+     * -   :math:`0`
+       -   :math:`Z_{0,0}`
+       -   :math:`Z_{0,1}`
+       -   :math:`Z_{0,2}`
+       -   :math:`\dots`
+       -   :math:`Z_{0,L-1}`
+       -   :math:`Z_{0,L}`
+     * -   1
+       -   :math:`Z_{1,0}`
+       -   :math:`Z_{1,1}`
+       -   :math:`Z_{1,2}`
+       -   :math:`\dots`
+       -   :math:`Z_{1,L-1}`
+       -   :math:`Z_{1,L}`
+     * -   2
+       -   :math:`Z_{2,0}`
+       -   :math:`Z_{2,1}`
+       -   :math:`Z_{2,2}`
+       -   :math:`\dots`
+       -   :math:`Z_{2,L-1}`
+       -   :math:`Z_{2,L}`
+     * -   :math:`\dots`
+       -   :math:`\dots`
+       -   :math:`\dots`
+       -   :math:`\dots`
+       -   :math:`\dots`
+       -   :math:`\dots`
+       -   :math:`\dots`
+     * -   :math:`n_1-2`
+       -   :math:`Z_{n_1-2,0}`
+       -   :math:`Z_{n_1-2,1}`
+       -   :math:`Z_{n_1-2,2}`
+       -   :math:`\dots`
+       -   :math:`Z_{n_1-2,L-1}`
+       -   :math:`Z_{n_1-2,L}`
+     * -   :math:`n_1-1`
+       -   :math:`Z_{n_1-1,0}`
+       -   :math:`Z_{n_1-1,1}`
+       -   :math:`Z_{n_1-1,2}`
+       -   :math:`\dots`
+       -   :math:`Z_{n_1-1,L-1}`
+       -   :math:`Z_{n_1-1,L}`
+ 
+
+
+The following code illustrates usage of the ``config_value::COMPLEX_COMPLEX`` storage for a two-dimensional conjugate-even domain with row-major input data:
 
 .. code-block:: cpp
 
@@ -160,14 +268,6 @@ For the backward transform, the input and output parameters and layouts exchange
    compute_backward(descr, ...);
 
 
-
-
-.. _onemkl_dft_conjugate_even_storage_complex_real:
-
-
-.. rubric:: COMPLEX_REAL
-
-With the ``config_value::COMPLEX_REAL`` storage format, the complex-valued data sequences in the conjugate-even domain can be reconstructed as described in the section :ref:`onemkl_dft_config_packed_format`
 
 
 **Parent topic** :ref:`onemkl_dft_enums`

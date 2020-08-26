@@ -30,16 +30,26 @@ class r250
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class r250 {
     public:
-        r250(sycl::queue& queue, std::uint32_t seed);
-        r250(sycl::queue& queue, std::vector<std::uint32_t> seed);
+        static constexpr std::uint32_t default_seed = 1;
+
+        r250(sycl::queue queue, std::uint32_t seed = default_seed);
+
+        r250(sycl::queue queue, std::vector<std::uint32_t> seed);
+
         r250(const r250& other);
+
+        r250(r250&& other);
+
         r250& operator=(const r250& other);
+
+        r250& operator=(r250&& other);
+
         ~r250();
     };
-
-.. cpp:class:: oneapi::mkl::rng::r250
+    }
 
 .. container:: section
 
@@ -50,20 +60,28 @@ class r250
 
         * - Routine
           - Description
-        * - `r250(sycl::queue& queue, std::uint32_t seed)`_
+        * - `r250(sycl::queue queue, std::uint32_t seed = default_seed)`_
           - Constructor for common seed initialization of the engine
-        * - `r250(sycl::queue& queue, std::vector<std::uint32_t> seed)`_
+        * - `r250(sycl::queue queue, std::vector<std::uint32_t> seed)`_
           - Constructor for extended seed initialization of the engine
         * - `r250(const r250& other)`_
           - Copy constructor
+        * - `r250(r250&& other)`_
+          - Move constructor
+        * - `r250& operator=(const r250& other)`_
+          - Copy assignement operator
+        * - `r250& operator=(r250&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`r250(sycl::queue& queue, std::uint32_t seed)`:
+    .. _`r250(sycl::queue queue, std::uint32_t seed = default_seed)`:
 
-    .. cpp:function:: r250::r250(sycl::queue& queue, std::uint32_t seed)
+    .. code-block:: cpp
+    
+        r250::r250(sycl::queue queue, std::uint32_t seed = default_seed)
 
     .. container:: section
 
@@ -75,16 +93,18 @@ class r250
         seed
             The initial conditions of the generator state, assume :math:`x_{-250} = seed`. If :math:`seed = 0`, assume :math:`seed = 1`. Other values in state are initialized according to reccurent correlation :math:`x_{n+1} = 69069x_{n}(mod \ 2 ^ {32})`. Then the values :math:`x_{7k-247}, k = 0, 1, ..., 31` are interpreted as a binary matrix of size 32 x 32 and diagonalbits are set to 0, the under-diagonal bits to 0.
 
-    .. _`r250(sycl::queue& queue, std::vector<std::uint32_t> seed)`:
+    .. _`r250(sycl::queue queue, std::vector<std::uint32_t> seed)`:
 
-    .. cpp:function:: r250::r250(sycl::queue& queue, std::vector<std::uint32_t> seed)
+    .. code-block:: cpp
+    
+        r250::r250(sycl::queue queue, std::vector<std::uint32_t> seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state
@@ -92,29 +112,54 @@ class r250
 
     .. _`r250(const r250& other)`:
 
-    .. cpp:function:: r250::r250(const r250& other)
+    .. code-block:: cpp
+    
+        r250::r250(const r250& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``r250`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``r250`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`r250(r250&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        r250::r250(r250&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``r250`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`r250& operator=(const r250& other)`:
+
+    .. code-block:: cpp
+
+        r250::r250& operator=(const r250& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``r250`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`r250& operator=(r250&& other)`:
+
+    .. code-block:: cpp
+
+        r250::r250& operator=(r250&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``r250`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

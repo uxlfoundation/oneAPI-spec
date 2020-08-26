@@ -51,8 +51,38 @@ where:
 
 .. rubric:: Syntax
  
-.. cpp:function::  void oneapi::mkl::blas::column_major::axpy_batch(sycl::queue &queue, std::int64_t n, T alpha, sycl::buffer<T, 1> &x, std::int64_t incx, std::int64_t stridex, sycl::buffer<T, 1> &y, std::int64_t incy, std::int64_t stridey, std::int64_t batch_size)
-.. cpp:function::  void oneapi::mkl::blas::row_major::axpy_batch(sycl::queue &queue, std::int64_t n, T alpha, sycl::buffer<T, 1> &x, std::int64_t incx, std::int64_t stridex, sycl::buffer<T, 1> &y, std::int64_t incy, std::int64_t stridey, std::int64_t batch_size)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void axpy_batch(sycl::queue &queue,
+                       std::int64_t n,
+                       T alpha,
+                       sycl::buffer<T,
+                       1> &x,
+                       std::int64_t incx,
+                       std::int64_t stridex,
+                       sycl::buffer<T,
+                       1> &y,
+                       std::int64_t incy,
+                       std::int64_t stridey,
+                       std::int64_t batch_size)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void axpy_batch(sycl::queue &queue,
+                       std::int64_t n,
+                       T alpha,
+                       sycl::buffer<T,
+                       1> &x,
+                       std::int64_t incx,
+                       std::int64_t stridex,
+                       sycl::buffer<T,
+                       1> &y,
+                       std::int64_t incy,
+                       std::int64_t stridey,
+                       std::int64_t batch_size)
+   }
 
 .. container:: section
 
@@ -96,6 +126,27 @@ where:
       Output buffer, overwritten by ``batch_size`` ``axpy`` operations of the form 
       ``alpha`` * ``X`` + ``Y``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_axpy_batch_usm:
 
 axpy_batch (USM Version)
@@ -134,7 +185,9 @@ where:
 For group API, ``x`` and ``y`` arrays contain the pointers for all the input vectors. 
 The total number of vectors in ``x`` and ``y`` are given by:
 
-   total_batch_count = sum of all of the group_size entries
+.. math::
+
+      total\_batch\_count = \sum_{i=0}^{group\_count-1}group\_size[i]    
 
 For strided API, ``x`` and ``y`` arrays contain all the input vectors. 
 The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` parameter.
@@ -143,8 +196,34 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::axpy_batch(sycl::queue &queue, std::int64_t *n, T *alpha, const T **x, std::int64_t *incx, T **y, std::int64_t *incy, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::axpy_batch(sycl::queue &queue, std::int64_t *n, T *alpha, const T **x, std::int64_t *incx, T **y, std::int64_t *incy, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event axpy_batch(sycl::queue &queue,
+                              std::int64_t *n,
+                              T *alpha,
+                              const T **x,
+                              std::int64_t *incx,
+                              T **y,
+                              std::int64_t *incy,
+                              std::int64_t group_count,
+                              std::int64_t *group_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event axpy_batch(sycl::queue &queue,
+                              std::int64_t *n,
+                              T *alpha,
+                              const T **x,
+                              std::int64_t *incx,
+                              T **y,
+                              std::int64_t *incy,
+                              std::int64_t group_count,
+                              std::int64_t *group_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -161,7 +240,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
 
    x
       Array of pointers to input vectors ``X`` with size ``total_batch_count``.
-      The size of array allocated for the ``X`` vector of the group ``i`` must be at least ``(1 + (n[i] – 1)*abs(incx[i]))``. 
+      The size of array allocated for the ``X`` vector of the group ``i`` must be at least (1 + (``n[i]`` – 1)*abs(``incx[i]``))``. 
       See :ref:`matrix-storage` for more details.
 
    incx
@@ -169,7 +248,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
  
    y
       Array of pointers to input/output vectors ``Y`` with size ``total_batch_count``.
-      The size of array allocated for the ``Y`` vector of the group ``i`` must be at least ``(1 + (n[i] – 1)*abs(incy[i]))``. 
+      The size of array allocated for the ``Y`` vector of the group ``i`` must be at least (1 + (``n[i]`` – 1)*abs(``incy[i]``))``. 
       See :ref:`matrix-storage` for more details.
 
    incy
@@ -204,8 +283,36 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::axpy_batch(sycl::queue &queue, std::int64_t n, T alpha, const T *x, std::int64_t incx, std::int64_t stridex, T *y, std::int64_t incy, std::int64_t stridey, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::axpy_batch(sycl::queue &queue, std::int64_t n, T alpha, const T *x, std::int64_t incx, std::int64_t stridex, T *y, std::int64_t incy, std::int64_t stridey, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event axpy_batch(sycl::queue &queue,
+                              std::int64_t n,
+                              T alpha,
+                              const T *x,
+                              std::int64_t incx,
+                              std::int64_t stridex,
+                              T *y,
+                              std::int64_t incy,
+                              std::int64_t stridey,
+                              std::int64_t batch_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event axpy_batch(sycl::queue &queue,
+                              std::int64_t n,
+                              T alpha,
+                              const T *x,
+                              std::int64_t incx,
+                              std::int64_t stridex,
+                              T *y,
+                              std::int64_t incy,
+                              std::int64_t stridey,
+                              std::int64_t batch_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -258,5 +365,27 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:**:ref:`blas-like-extensions`

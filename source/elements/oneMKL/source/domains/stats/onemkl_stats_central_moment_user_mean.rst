@@ -9,7 +9,7 @@ Entry point to compute central moments up to the 4th order with the provided mea
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::central_moment function is used to compute array of central moments up to the 4th order (central moments for each dataset's dimension) with the provided mean values.
+The oneapi::mkl::stats::central_moment function is used to compute an array of central moments up to the 4th order (central moments for each dataset's dimension) with the provided mean values.
 
 :ref:`onemkl_stats_central_moment_user_mean` supports the following precisions for data:
 
@@ -23,19 +23,22 @@ oneapi::mkl::stats::central_moment function is used to compute array of central 
 
 .. _onemkl_stats_central_moment_user_mean_buffer:
 
-central_moment with provided mean (Buffer version)
+central_moment with provided mean (buffer version)
 --------------------------------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::central_moment(sycl::queue& queue, \
-                   sycl::buffer<Type, 1> mean, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> central_moment_2, \
-                   sycl::buffer<Type, 1> central_moment_3 = {0}, \
-                   sycl::buffer<Type, 1> central_moment_4 = {0});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void central_moment(sycl::queue& queue,
+        sycl::buffer<Type, 1> mean,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> central_moment_2,
+        sycl::buffer<Type, 1> central_moment_3 = {0},
+        sycl::buffer<Type, 1> central_moment_4 = {0});
+    }
 
 .. container:: section
 
@@ -78,6 +81,13 @@ central_moment with provided mean (Buffer version)
     central_moment_4
         Optional parameter. sycl::buffer array of 4th order central moment values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when central_moment_2.get_count() == 0 & central_moment_3.get_count() == 0 & central_moment_4.get_count() == 0, or mean.get_count() == 0, or dataset object is invalid
+
 
 .. _onemkl_stats_central_moment_user_mean_usm:
 
@@ -86,15 +96,18 @@ central_moment with provided mean (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                  oneapi::mkl::stats::layout ObservationsLayout> \
-                  sycl::event oneapi::mkl::stats::central_moment(sycl::queue& queue, \
-                  Type* mean, \
-                  const dataset<Type*, ObservationsLayout>& data, \
-                  Type* central_moment_2, \
-                  Type* central_moment_3 = nullptr, \
-                  Type* central_moment_4 = nullptr, \
-                  const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event central_moment(sycl::queue& queue,
+        Type* mean,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* central_moment_2,
+        Type* central_moment_3 = nullptr,
+        Type* central_moment_4 = nullptr,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -139,6 +152,13 @@ central_moment with provided mean (USM version)
 
     central_moment_4
         Optional parameter. Pointer to the array of the 2nd order central moment values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when central_moment_2 == nullptr & central_moment_3 == nullptr & central_moment_4 == nullptr or mean == nullptr, or dataset object is invalid
 
 .. container:: section
 

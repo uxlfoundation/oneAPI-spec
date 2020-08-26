@@ -10,7 +10,7 @@ Example
 
 Consider a simple oneCCL ``allreduce`` example for CPU.
 
-1. Create a communicator object with user-supplied size, rank, and kvs:
+1. Create a communicator object with user-supplied size, rank, and key-value store:
 
 .. code:: cpp
 

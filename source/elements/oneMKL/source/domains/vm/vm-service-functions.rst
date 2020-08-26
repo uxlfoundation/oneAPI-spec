@@ -22,15 +22,15 @@ VM Service Functions
          * - Function Short Name
            - Description
          * - :ref:`onemkl_vm_setmode`
-           - Sets the VM mode
+           - Sets the VM mode for given queue
          * - :ref:`onemkl_vm_get_mode`
-           - Gets the VM mode
+           - Gets the VM mode for given queue
          * - :ref:`onemkl_vm_set_status`
-           - Sets the VM Error Status
+           - Sets the VM status code for given queue
          * - :ref:`onemkl_vm_get_status`
-           - Gets the VM Error Status
+           - Gets the VM status code for given queue
          * - :ref:`onemkl_vm_clear_status`
-           - Clears the VM Error Status
+           - Clears the VM status code for given queue
          * - :ref:`onemkl_vm_create_error_handler`
            - Creates the local VM error handler for a function
 

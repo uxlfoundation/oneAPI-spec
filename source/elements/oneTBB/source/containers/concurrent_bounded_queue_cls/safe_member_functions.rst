@@ -97,7 +97,7 @@ Popping elements
         void pop( value_type& value );
 
     Waits until the item becomes available, copies it from the container, and
-    assignes it to the ``value``. The popped element is destroyed.
+    assigns it to the ``value``. The popped element is destroyed.
 
     **Requirements**: the type ``T`` must meet the ``MoveAssignable`` requirements from the [moveassignable]
     ISO C++ Standard section.

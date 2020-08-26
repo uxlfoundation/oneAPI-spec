@@ -9,7 +9,7 @@ Entry point to compute skewness.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::skewness function is used to compute skewness array (skewness for each dataset's dimension).
+The oneapi::mkl::stats::skewness function is used to compute a skewness array (skewness for each dataset's dimension).
 
 :ref:`onemkl_stats_skewness` supports the following precisions for data:
 
@@ -23,16 +23,19 @@ oneapi::mkl::stats::skewness function is used to compute skewness array (skewnes
 
 .. _onemkl_stats_skewness_buffer:
 
-skewness (Buffer version)
+skewness (buffer version)
 -------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::skewness(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> skewness);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void skewness(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> skewness);
+    }
 
 .. container:: section
 
@@ -67,6 +70,13 @@ skewness (Buffer version)
     skewness
         sycl::buffer array of skewness values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when skewness.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_skewness_usm:
 
 skewness (USM version)
@@ -74,12 +84,15 @@ skewness (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::skewness(sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* skewness, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event skewness(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* skewness,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -116,6 +129,13 @@ skewness (USM version)
 
     skewness
         Pointer to the array of skewness values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when skewness == nullptr, or dataset object is invalid
 
 .. container:: section
 

@@ -13,15 +13,12 @@ The oneapi::mkl::sparse::trsv routine solves a system of linear equations
 for a square matrix:
 
 
-::
+.. math::
 
+      \text{op}(A) y \leftarrow x
 
-         op(A)*y =  x
-
-
-where ``A`` is a triangular sparse matrix of size ``m`` rows by
-``m`` columns, op is a matrix modifier for matrix ``A``, ``alpha``
-is a scalar, and ``x`` and ``y`` are dense vectors of length at least
+where: ``A`` is a triangular sparse matrix of size ``m`` rows by
+``m`` columns, op is a matrix modifier for matrix ``A``, ``x`` and ``y`` are dense vectors of length at least
 ``m``.
 
 .. _onemkl_sparse_trsv_buffer:
@@ -31,7 +28,19 @@ trsv (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::sparse::trsv (sycl::queue & queue,      oneapi::mkl::uplo uplo_val, oneapi::mkl::transpose transpose_val, oneapi::mkl::diag      diag_val, matrix_handle_t handle, sycl::buffer<fp, 1> & x,      sycl::buffer<fp, 1> & y)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+      void trsv (sycl::queue                          &queue,
+                 oneapi::mkl::uplo                    uplo_val
+                 oneapi::mkl::transpose               transpose_val,
+                 oneapi::mkl::diag                    diag_val
+                 oneapi::mkl::sparse::matrix_handle_t A_handle,
+                 sycl::buffer<fp, 1>                  &x,
+                 sycl::buffer<fp, 1>                  &y);
+
+   }
 
 .. container:: section
 
@@ -59,25 +68,19 @@ trsv (Buffer version)
             are described in :ref:`onemkl_enum_diag` enum class.
 
 
-   handle
-      Handle to object containing sparse matrix and other internal
-      data. Created using the
+   A_handle
+      Handle to object containing sparse matrix :math:`A`. Created using the
       oneapi::mkl::sparse::set_csr_data routine.
 
 
    x
         SYCL memory object containing an array of size at least
-        equal to the number of columns of input matrix if ``op`` =
-        oneapi::mkl::transpose::nontrans and at least the number of rows of
-        input matrix otherwise.
-
+        equal to the number of columns of  matrix :math:`\text{op}(A)`.
 
 
    y
         SYCL memory object containing an array of size at least
-        equal to the number of rows of input matrix if ``op`` =
-        oneapi::mkl::transpose::nontrans and at least the number of columns of
-        input matrix otherwise.
+        equal to the number of rows of matrix :math:`\text{op}(A)`.
 
 
 .. container:: section
@@ -86,16 +89,25 @@ trsv (Buffer version)
     .. rubric:: Output Parameters
          :class: sectiontitle
 
-
     y
        SYCL memory object containing an array of size at least ``nRows`` filled with the solution to the system of linear equations.
 
 .. container:: section
 
-    .. rubric:: Return Values
+    .. rubric:: Throws
          :class: sectiontitle
 
-    None
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. _onemkl_sparse_trsv_usm:
 
@@ -104,8 +116,20 @@ trsv (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::sparse::trsv (sycl::queue & queue,      oneapi::mkl::uplo uplo_val, oneapi::mkl::transpose transpose_val, oneapi::mkl::diag      diag_val, matrix_handle_t handle, fp *x, fp *y, const sycl::vector_class<sycl::event> & dependencies = {})
+.. code-block:: cpp
 
+   namespace oneapi::mkl::sparse {
+
+      sycl::event trsv (sycl::queue                           &queue,
+                        oneapi::mkl::uplo                     uplo_val
+                        oneapi::mkl::transpose                transpose_val,
+                        oneapi::mkl::diag                     diag_val
+                        oneapi::mkl::sparse::matrix_handle_t  A_handle,
+                        fp                                    *x,
+                        fp                                    *y
+                        const sycl::vector_class<sycl::event> &dependencies = {});
+
+   }
 
 .. container:: section
 
@@ -133,32 +157,24 @@ trsv (USM version)
             are described in :ref:`onemkl_enum_diag` enum class.
 
 
-   handle
-        Handle to object containing sparse matrix and other internal
-        data. Created using the
+   A_handle
+        Handle to object containing sparse matrix :math:`A`. Created using the
         oneapi::mkl::sparse::set_csr_data routine.
 
 
    x
-        USM object containing an array of size at least
-        equal to the number of columns of input matrix if ``op`` =
-        oneapi::mkl::transpose::nontrans and at least the number of rows of
-        input matrix otherwise.
-
+        Device-accessible USM object containing an array of size at least
+        equal to the number of columns of matrix :math:`\text{op}(A)`.
 
 
    y
-        USM object containing an array of size at least
-        equal to the number of rows of input matrix if ``op`` =
-        oneapi::mkl::transpose::nontrans and at least the number of columns of
-        input matrix otherwise.
+        Device-accessible USM object containing an array of size at least
+        equal to the number of rows of matrix :math:`\text{op}(A)`.
 
 
    dependencies
          List of events that oneapi::mkl::sparse::trmv routine depends on.
          If omitted, defaults to no dependencies.
-
-
 
 
 
@@ -168,9 +184,25 @@ trsv (USM version)
     .. rubric:: Output Parameters
          :class: sectiontitle
 
-
     y
-       USM object containing an array of size at least ``nRows`` filled with the solution to the system of linear equations.
+       Device-accessible USM object containing an array of size at least ``nRows`` filled with the solution to the system of linear equations.
+
+.. container:: section
+
+    .. rubric:: Throws
+         :class: sectiontitle
+
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. container:: section
 
@@ -187,5 +219,3 @@ trsv (USM version)
 
 
       **Parent topic:** :ref:`onemkl_spblas`
-
-

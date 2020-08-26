@@ -73,7 +73,7 @@ They form a superset of the :doc:`Mutex requirements <mutex>`.
 
 .. cpp:function:: bool RWM::scoped_lock::downgrade_to_reader()
 
-    Changes a writer lock to a reader lock. Returns ``false`` if lock was released and reacquired. OTherwise, returns ``true``, including the case when the lock was already a reader lock.
+    Changes a writer lock to a reader lock. Returns ``false`` if lock was released and reacquired. Otherwise, returns ``true``, including the case when the lock was already a reader lock.
 
 Like the `Mutex` requirement, `ReaderWriterMutex` also requires a set of traits to be defined.
 

@@ -7,8 +7,8 @@ clear_status
 .. container::
 
 
-   Sets the VM Status according to ``oneapi::mkl::vm::status::success`` and returns the
-   previous VM Status.
+   Resets the global VM status to ``oneapi::mkl::vm::status::success`` and returns the
+   previous VM status code.
 
 
    .. container:: section
@@ -18,25 +18,36 @@ clear_status
          :class: sectiontitle
 
 
-      .. cpp:function:: uint8_t oneapi::mkl::vm::clear_status (queue& exec_queue )
+      .. code-block:: cpp
+
+
+                namespace oneapi::mkl::vm {
+
+                    oneapi::mkl::vm::status clear_status(
+                        sycl::queue& exec_queue);
+
+                } // namespace oneapi::mkl::vm
+
 
       .. rubric:: Description
          :class: sectiontitle
 
 
-      The clear_status function sets the VM status to
-      ``oneapi::mkl::vm::status::success`` and returns the previous VM status.
+      The clear_status function sets the VM status code to
+      ``oneapi::mkl::vm::status::success`` and returns the previous VM status code
+      for a given queue.
 
 
-      The global VM Status is a single value and it accumulates all
-      errors that happen inside VM functions. The following table lists
-      the possible error values.
+      The global VM status is a single value and it registers the bitwise-OR of status codes
+      that happened inside VM functions run on the specific queue.
+      For preformance reasons, it might be done in non-atomic manner.
+      The possible status codes are listed in the table below.
 
 
       .. list-table::
          :header-rows: 1
 
-         * - Status
+         * - Status code
            - Description
          * - Successful Execution
            -
@@ -48,12 +59,12 @@ clear_status
            -
          * - ``oneapi::mkl::vm::status::accuracy_warning``
            - VM function execution completed successfully in a different accuracy mode
-         * - Computational Errors
+         * - Computational status codes
            -
          * - ``oneapi::mkl::vm::status::errdom``
            - Values are out of a range of definition producing invalid (QNaN) result
          * - ``oneapi::mkl::vm::status::sing``
-           - Values cause divide-by-zero (singularity) errors and produce and invalid (QNaN or Inf) result
+           - Values cause divide-by-zero (singularity) computational errors and produce and invalid (QNaN or Inf) result
          * - ``oneapi::mkl::vm::status::overflow``
            - An overflow happened during the calculation process
          * - ``oneapi::mkl::vm::status::underflow``
@@ -81,7 +92,7 @@ clear_status
 
 
    return value (old_status)
-      Specifies the former VM status.
+      Specifies the VM status code before the call.
 
 
 .. container:: familylinks

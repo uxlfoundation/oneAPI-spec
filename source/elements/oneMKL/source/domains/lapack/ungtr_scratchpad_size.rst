@@ -28,7 +28,12 @@ ungtr_scratchpad_size
 
   .. rubric:: Syntax
          
-.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::ungtr_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower,         std::int64_t n, std::int64_t lda)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t ungtr_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t lda) 
+    }
 
 .. container:: section
 
@@ -47,6 +52,14 @@ n
 
 lda
    The leading dimension of ``a`` :math:`(n \le lda)`.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
 
 .. container:: section
 

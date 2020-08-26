@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. _eltwise-link:
 
@@ -51,6 +51,8 @@ denote :math:`\src` and :math:`\dst`, tensor values respectively.
 | |eltwise_pow|                                          | :math:`d = \alpha s^{\beta}`                                                                                                                                |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | |eltwise_relu|, |eltwise_relu_use_dst_for_bwd|         | :math:`d = \begin{cases} s & \text{if}\ s > 0 \\ \alpha s & \text{if}\ s \leq 0 \end{cases}`                                                                |
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| |eltwise_round|                                        | :math:`d = round(s)`                                                                                                                                        |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | |eltwise_soft_relu|                                    | :math:`d = \log_{e}(1+e^s)`                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -145,24 +147,24 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************
 Operation Details
 *****************
 
-1. The :any:`dnnl::eltwise_forward::desc::desc` and
-   :any:`dnnl::eltwise_backward::desc::desc` constructors take both parameters
+1. The |eltwise_forward::desc::desc| and
+   |eltwise_backward::desc::desc| constructors take both parameters
    :math:`\alpha`, and :math:`\beta`. These parameters are ignored if they are
    unused by the algorithm.
 
 2. The memory format and data type for :math:`\src` and :math:`\dst` are
    assumed to be the same, and in the API are typically denoted as ``data``
-   (for example :any:`dnnl::eltwise_forward::desc::desc` has a ``data_desc``
+   (for example |eltwise_forward::desc::desc| has a ``data_desc``
    argument). The same holds for :math:`\diffsrc` and :math:`\diffdst`. The
    corresponding memory descriptors are denoted as ``diff_data_desc``.
 
@@ -189,14 +191,19 @@ Operation Details
 Data Type Support
 *****************
 
-The eltwise primitive should support the following combinations of data types:
+The eltwise primitive should support the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ==================== ======================
 Propagation        Source / Destination Intermediate data type
 ================== ==================== ======================
-forward / backward f32, bf16            f32
-forward            f16                  f16
-forward            s32 / s8 / u8        f32
+forward / backward |f32|, |bf16|        |f32|
+forward            |f16|                |f16|
+forward            |s32| / |s8| / |u8|  |f32|
 ================== ==================== ======================
 
 Here the intermediate data type means that the values coming in are first

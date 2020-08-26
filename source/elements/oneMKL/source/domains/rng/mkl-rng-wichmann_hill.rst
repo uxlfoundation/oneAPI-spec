@@ -37,18 +37,30 @@ class wichmann_hill
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class wichmann_hill {
     public:
-        wichmann_hill(sycl::queue& queue, std::uint32_t seed);
-        wichmann_hill(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx);
-        wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed);
-        wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx);
-        wichmann_hill (const wichmann_hill& other);
+        static constexpr std::uint32_t default_seed = 1;
+
+        wichmann_hill(sycl::queue queue, std::uint32_t seed = default_seed);
+
+        wichmann_hill(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx);
+
+        wichmann_hill(sycl::queue queue, std::initializer_list<std::uint32_t> seed);
+
+        wichmann_hill(sycl::queue queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx);
+
+        wichmann_hill(const wichmann_hill& other);
+
+        wichmann_hill(wichmann_hill&& other);
+
         wichmann_hill& operator=(const wichmann_hill& other);
+
+        wichmann_hill& operator=(wichmann_hill&& other);
+
         ~wichmann_hill();
     };
-
-.. cpp:class:: oneapi::mkl::rng::wichmann_hill
+    }
 
 .. container:: section
 
@@ -59,9 +71,9 @@ class wichmann_hill
 
         * - Routine
           - Description
-        * - `wichmann_hill(sycl::queue& queue, std::uint32_t seed)`_
+        * - `wichmann_hill(sycl::queue queue, std::uint32_t seed = default_seed)`_
           - Constructor for common seed initialization of the engine (for this case multiple generators of the set would be used)
-        * - `wichmann_hill(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx)`_
+        * - `wichmann_hill(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx)`_
           - Constructor for common seed initialization of the engine (for this case single generator of the set would be used)
         * - `wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`_
           - Constructor for extended seed initialization of the engine (for this case multiple generators of the set would be used)
@@ -69,35 +81,45 @@ class wichmann_hill
           - Constructor for extended seed initialization of the engine (for this case single generator of the set would be used)
         * - `wichmann_hill(const wichmann_hill& other)`_
           - Copy constructor
+        * - `wichmann_hill(wichmann_hill&& other)`_
+          - Move constructor
+        * - `wichmann_hill& operator=(const wichmann_hill& other)`_
+          - Copy assignement operator
+        * - `wichmann_hill& operator=(wichmann_hill&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`wichmann_hill(sycl::queue& queue, std::uint32_t seed)`:
+    .. _`wichmann_hill(sycl::queue queue, std::uint32_t seed = default_seed)`:
 
-    .. cpp:function:: wichmann_hill::wichmann_hill(sycl::queue& queue, std::uint32_t seed)
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill(sycl::queue queue, std::uint32_t seed = default_seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. Assume :math:`x_0=seed \ mod \ m_1, y_0 = z_0 = w_0 = 1`. If :math:`x_0 = 0`, assume :math:`x_0 = 1`.
 
-    .. _`wichmann_hill(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx)`:
+    .. _`wichmann_hill(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx)`:
 
-    .. cpp:function:: wichmann_hill::wichmann_hill(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx)
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. Assume :math:`x_0=seed \ mod \ m_1, y_0 = z_0 = w_0 = 1`. If :math:`x_0 = 0`, assume :math:`x_0 = 1`.
@@ -105,16 +127,25 @@ class wichmann_hill
         engine_idx
             The index of the set 1, ..., 273.
 
+    .. container:: section
+
+        .. rubric:: Throws
+
+        oneapi::mkl::invalid_argument
+            Exception is thrown when :math:`idx > 273`
+
     .. _`wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`:
 
-    .. cpp:function:: wichmann_hill::wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume:
@@ -133,14 +164,16 @@ class wichmann_hill
 
     .. _`wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)`:
 
-    .. cpp:function:: wichmann_hill::wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume:
@@ -161,29 +194,54 @@ class wichmann_hill
 
     .. _`wichmann_hill(const wichmann_hill& other)`:
 
-    .. cpp:function:: wichmann_hill::wichmann_hill(const wichmann_hill& other)
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill(const wichmann_hill& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``wichmann_hill`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``wichmann_hill`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`wichmann_hill(wichmann_hill&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        wichmann_hill::wichmann_hill(wichmann_hill&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``wichmann_hill`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`wichmann_hill& operator=(const wichmann_hill& other)`:
+
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill& operator=(const wichmann_hill& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``wichmann_hill`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`wichmann_hill& operator=(wichmann_hill&& other)`:
+
+    .. code-block:: cpp
+
+        wichmann_hill::wichmann_hill& operator=(wichmann_hill&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``wichmann_hill`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

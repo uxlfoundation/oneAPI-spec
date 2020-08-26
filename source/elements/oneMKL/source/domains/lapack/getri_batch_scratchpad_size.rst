@@ -28,7 +28,12 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
   .. rubric:: Syntax
 
-.. cpp:function::  std::int64_t oneapi::mkl::lapack::getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+    }
 
 .. container:: section
 
@@ -55,6 +60,14 @@ group_sizes
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_getri_batch` function.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
+
 **Strided API**
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_getri_batch` function.
@@ -63,7 +76,12 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
   .. rubric:: Syntax
 
-.. cpp:function::  std::int64_t oneapi::mkl::lapack::getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t batch_size);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t getri_batch_scratchpad_size(cl::sycl::queue &queue, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t batch_size)
+    };
 
 .. container:: section
 
@@ -92,6 +110,14 @@ batch_size
   .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_getri_batch` function.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
 
 **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

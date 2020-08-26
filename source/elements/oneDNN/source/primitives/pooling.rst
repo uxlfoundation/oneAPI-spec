@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 #######
 Pooling
@@ -73,11 +73,11 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-workspace              DNNL_ARG_WORKSPACE
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+workspace              |DNNL_ARG_WORKSPACE|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************
@@ -89,7 +89,7 @@ Operation Details
    was found. The workspace format is opaque, and the indices cannot be
    restored from it. However, one can use backward pooling to perform
    up-sampling (used in some detection topologies). The workspace can be
-   created via :any:`dnnl::pooling_forward::primitive_desc::workspace_desc`.
+   created via |pooling_forward::primitive_desc::workspace_desc|.
 
 2. A user can use memory format tag |any| for ``dst`` memory descriptor when
    creating pooling forward propagation. The library would derive the
@@ -102,16 +102,21 @@ Operation Details
 Data Type Support
 *****************
 
-The pooling primitive supports the following combinations of data types:
+The pooling primitive supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 +--------------------+----------------------+--------------------------------------------------------+
 | Propagation        | Source / Destination | Accumulation data type (used for average pooling only) |
 +====================+======================+========================================================+
-| forward / backward | f32, bf16            | f32                                                    |
+| forward / backward | |f32|, |bf16|        | |f32|                                                  |
 +--------------------+----------------------+--------------------------------------------------------+
-| forward            | f16                  | f16                                                    |
+| forward            | |f16|                | |f16|                                                  |
 +--------------------+----------------------+--------------------------------------------------------+
-| forward            | s8, u8, s32          | s32                                                    |
+| forward            | |s8|, |u8|, |s32|    | |s32|                                                  |
 +--------------------+----------------------+--------------------------------------------------------+
 
 *******************

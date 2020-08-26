@@ -9,7 +9,7 @@ Class is used for generation of Poisson distributed integer types random numbers
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Poisson distributed with distribution parameter :math:`\lambda`, where :math:`\lambda \in R; \lambda > 0;`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Poisson distributed with distribution parameter :math:`\lambda`, where :math:`\lambda \in R; \lambda > 0;`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class poisson
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = poisson_method::by_default>
     class poisson {
     public:
@@ -41,9 +42,7 @@ class poisson
         explicit poisson(double lambda);
         double lambda() const;
     };
-
-.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::poisson_method::by_default> \
-                oneapi::mkl::rng::poisson
+    }
 
 .. container:: section
 
@@ -64,7 +63,7 @@ class poisson
                 * ``oneapi::mkl::rng::poisson_method::ptpe``
                 * ``oneapi::mkl::rng::poisson_method::gaussian_icdf_based``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -88,23 +87,27 @@ class poisson
 
     .. container:: section
 
-        .. cpp:type:: poisson::method_type = Method
+        .. code-block:: cpp
+
+            poisson::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: poisson::result_type = IntType
+        .. code-block:: cpp
+
+            poisson::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -114,7 +117,9 @@ class poisson
 
         .. _`poisson()`:
 
-        .. cpp:function:: poisson::poisson()
+        .. code-block:: cpp
+
+            poisson::poisson()
 
         .. container:: section
 
@@ -126,7 +131,9 @@ class poisson
 
         .. _`explicit poisson(double lambda)`:
 
-        .. cpp:function:: explicit poisson::poisson(double lambda)
+        .. code-block:: cpp
+
+            explicit poisson::poisson(double lambda)
 
         .. container:: section
 
@@ -134,6 +141,12 @@ class poisson
 
             Constructor with parameters. `lambda` is a distribution parameter.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`lambda \leq 0.0`
 
 .. container:: section
 
@@ -143,7 +156,9 @@ class poisson
 
         .. _`double lambda() const`:
 
-        .. cpp:function:: double poisson::lambda() const
+        .. code-block:: cpp
+
+            double poisson::lambda() const
 
         .. container:: section
 

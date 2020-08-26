@@ -42,7 +42,7 @@ Member functions
 .. cpp:function:: broadcast_node( const broadcast_node &src )
 
   Constructs an object of type ``broadcast_node`` that belongs to the
-  same graph ``g`` as ``src``. The list of predecessors, the list of
+  same graph ``g`` as ``src``. The list of predecessors and the list of
   successors are not copied.
 
 .. cpp:function:: bool try_put( const input_type &v )

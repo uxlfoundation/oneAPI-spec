@@ -1,3 +1,6 @@
+.. highlight:: cpp
+.. default-domain:: cpp
+
 .. _accessors:
 
 =========
@@ -17,30 +20,23 @@ Requirements
 Each accessor implementation shall:
 
 1. Define a single :term:`format of the data <Data format>` for the
-   accessor. Every single accessor type shall return and use only one data
-   format.
+   access. Every accessor type shall return and use only one data format.
 
-2. Provide an access to at least one in-memory :txtref:`dataset` implementation
-   (such as :code:`table`, its sub-types, or :txtref:`<table-builder>s`).
+2. Provide read-only access to the data in the :txtref:`table` types.
 
-3. Provide read-only, write-only, or read-write access to the data. If an
-   accessor supports several :txtref:`dataset` implementations to be passed in,
-   it is not necessary for an accessor to support all access modes for every
-   input object. For example, tables shall support a single read-only mode
-   according to their :txtref:`<table> concept` definition.
+3. Provide the :code:`pull()` method for obtaining the values from the table.
 
-4. Provide the names for read and write operations following the pattern:
+4. Be lightweight. Its constructors shall not have computationally intensive
+   operations such data copy, reading, or conversion. These operations shall be
+   performed by method :code:`pull()`. Support of copy- and move- constructors
+   by the accessor is not required since it shall be designed for use in a local
+   scope - directly in a place when it is created.
 
-   - :code:`pull_*()` for reading
-
-   - :code:`push_*()` for writing
-
-5. Be lightweight. Its constructors from :txtref:`dataset` implementations
-   shall not have heavy operations such as copy of data, reading, writing, any
-   sort of conversions. These operations shall be performed by heavy operations
-   :code:`pull_*()` and :code:`push_*()`. It is not necessary to have copy- or
-   move- constructors for accessor implementations since it shall be designed
-   for use in a local scope.
+5. The :code:`pull()` method shall avoid data copy and conversion when it is
+   possible to return the pointer to the memory block in the table. This is
+   applicable for cases such as when the :capterm:`data format` and
+   :capterm:`data types <data type>` of the data within the table are the same as the
+   :capterm:`data format` and :capterm:`data type` for the access.
 
 
 .. _accessor_types:
@@ -49,41 +45,33 @@ Each accessor implementation shall:
 Accessor Types
 --------------
 
-|dal_short_name| defines a set of accessor classes. Each class is associated
-with a single specific way of interacting with data within a :txtref:`dataset`.
-The following table briefly explains these classes and shows which
-:txtref:`dataset` implementations are supported by each accessor type.
+|dal_short_name| defines a set of accessor classes. Each class supports one
+specific way of obtaining data from the :txtref:`table`.
+
+All accessor classes in |dal_short_name| are listed below:
 
 .. list-table::
    :header-rows: 1
-   :widths: 10 45 45
+   :widths: 25 50 25
 
    * - Accessor type
      - Description
      - List of supported types
-   * - row_accessor_
-     - Provides access to the range of dataset rows as one :term:`contiguous
+   * - :txtref:`row_accessor`
+     - Provides access to the range of rows as one :term:`contiguous
        <Contiguous data>` :term:`homogeneous <Homogeneous data>` block of memory.
-     - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
-       :code:`csr_table`, and their builders.
-   * - column_accessor_
+     - :txtref:`homogen_table`
+   * - :txtref:`column_accessor`
      - Provides access to the range of values within a single column as one
        :term:`contiguous <Contiguous data>` :term:`homogeneous <Homogeneous
        data>` block of memory.
-     - :code:`homogen_table`, :code:`soa_table`, :code:`aos_table`,
-       :code:`csr_table`, and their builders.
+     - :txtref:`homogen_table`
 
+-------
+Details
+-------
 
-.. _row_accessor:
+.. toctree::
 
-Row accessor
-------------
-
-TBD
-
-.. _column_accessor:
-
-Column accessor
----------------
-
-TBD
+   accessor/column.rst
+   accessor/row.rst

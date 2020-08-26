@@ -9,18 +9,18 @@ The ars5 counter-based pseudorandom number generator.
 
 .. rubric:: Description
 
-Ars5 engine is a keyed family of counter-based BRNG. The state consists of 128-bit integer counter :math:`c` and 128-bits key :math:`k`. The BRNG is based on the AES encryption algorithm [:ref:`FIPS-197 <onemkl_rng_bibliography>`].
+The ars5 engine is a keyed family of counter-based BRNG. The state consists of a 128-bit integer counter :math:`c` and a 128-bit key :math:`k`. The BRNG is based on the AES encryption algorithm [:ref:`FIPS-197 <onemkl_rng_bibliography>`].
 
 .. container:: section
 
     .. rubric:: Generation algorithm
 
-    The generator has 32-bit integer output obtained in the following way [:ref:`Salmon11 <onemkl_rng_bibliography>`]:
+    The generator has a 32-bit integer output obtained in the following way [:ref:`Salmon11 <onemkl_rng_bibliography>`]:
 
     1. The i-th number is defined by the following formula :math:`r_i=(f(i/ 4) >> ((i \ mod \ 4) * 32)) \ mod \ 2 ^ {32}`
-    2. Function :math:`f(c)` takes 128-bit argument and returns a 128-bit number. The returned number is obtained as follows:
+    2. Function :math:`f(c)` takes a 128-bit argument and returns a 128-bit number. The returned number is obtained as follows:
         2.1. :math:`c_0 = c \oplus k` and :math:`k_0 = k`.
-        
+
         2.2. The following recurrence is calculated N = 5 times:
 
         :math:`c_{i+1} = SubBytes(c)`
@@ -50,16 +50,26 @@ class ars5
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class ars5 {
     public:
-        ars5(sycl::queue& queue, std::uint64_t seed);
-        ars5(sycl::queue& queue, std::initializer_list<std::uint64_t> seed);
-        ars5 (const ars5& other);
-        ars5& operator=(const ars5& other);
-        ~ars5();
-    };
+            static constexpr std::uint64_t default_seed = 0;
 
-.. cpp:class:: oneapi::mkl::rng::ars5
+            ars5(sycl::queue queue, std::uint64_t seed = default_seed);
+
+            ars5(sycl::queue queue, std::initializer_list<std::uint64_t> seed);
+
+            ars5(const ars5& other);
+
+            ars5(ars5&& other);
+
+            ars5& operator=(const ars5& other);
+
+            ars5& operator=(ars5&& other);
+
+            ~ars5();
+    };
+    }
 
 .. container:: section
 
@@ -70,20 +80,28 @@ class ars5
 
         * - Routine
           - Description
-        * - `ars5(sycl::queue& queue, std::uint64_t seed)`_
+        * - `ars5(sycl::queue queue, std::uint64_t seed)`_
           - Constructor for common seed initialization of the engine
-        * - `ars5(sycl::queue& queue, std::initializer_list<std::uint64_t> seed)`_
+        * - `ars5(sycl::queue queue, std::initializer_list<std::uint64_t> seed)`_
           - Constructor for extended seed initialization of the engine
         * - `ars5(const ars5& other)`_
           - Copy constructor
+        * - `ars5(ars5&& other)`_
+          - Move constructor
+        * - `ars5& operator=(const ars5& other)`_
+          - Copy assignment operator
+        * - `ars5& operator=(ars5&& other)`_
+          - Move assignment operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`ars5(sycl::queue& queue, std::uint64_t seed)`:
+    .. _`ars5(sycl::queue queue, std::uint64_t seed)`:
 
-    .. cpp:function:: ars5::ars5(sycl::queue& queue, std::uint64_t seed)
+    .. code-block:: cpp
+
+      ars5::ars5(sycl::queue queue, std::uint64_t seed)
 
     .. container:: section
 
@@ -95,16 +113,18 @@ class ars5
         seed
             The initial conditions of the generator state, assume :math:`k = seed, c = 0`, where :math:`k` is 128-bit key, :math:`c` is 128-bit counter.
 
-    .. _`ars5(sycl::queue& queue, std::initializer_list<std::uint64_t> seed)`:
+    .. _`ars5(sycl::queue queue, std::initializer_list<std::uint64_t> seed)`:
 
-    .. cpp:function:: ars5::ars5(sycl::queue& queue, std::initializer_list<std::uint64_t> seed)
+    .. code-block:: cpp
+
+      ars5::ars5(sycl::queue queue, std::initializer_list<std::uint64_t> seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume
@@ -122,31 +142,55 @@ class ars5
 
     .. _`ars5(const ars5& other)`:
 
-    .. cpp:function:: ars5::ars5(const ars5& other)
+    .. code-block:: cpp
+
+      ars5::ars5(const ars5& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``ars5`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``ars5`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`ars5(ars5&& other)`:
+
+    .. code-block:: cpp
+
+      ars5::ars5(ars5&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``ars5`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 
-.. container:: section
+    .. _`ars5& operator=(const ars5& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        ars5::ars5& operator=(const ars5& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+    .. container:: section
 
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``ars5`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`ars5& operator=(ars5&& other)`:
+
+    .. code-block:: cpp
+
+        ars5::ars5& operator=(ars5&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``ars5`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

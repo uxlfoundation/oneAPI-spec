@@ -217,7 +217,7 @@ Emplacing elements
     Transfers those elements from ``source`` which keys do not exist in the container.
 
     In case of merging with the container with multiple elements with equal keys,
-    it is unspecified which element would be transfered.
+    it is unspecified which element would be transferred.
 
     No copy or move constructors of ``value_type`` are performed.
 

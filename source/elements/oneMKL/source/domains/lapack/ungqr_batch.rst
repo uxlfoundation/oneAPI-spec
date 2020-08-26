@@ -46,7 +46,11 @@ The buffer version of ``ungqr_batch`` supports only the strided API.
 
   .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::lapack::ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &tau, std::int64_t stride_tau, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -95,6 +99,17 @@ scratchpad_size
 a
   Array data is overwritten by ``a`` batch of n leading columns of the :math:`m \times m` unitary matrices :math:`Q_i`.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`  
+   Exception is thrown in case of problems during calculations. The info code of the problem can be obtained by info() method of exception object:
+
+    If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+
+    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
 .. _onemkl_lapack_ungqr_batch_usm:
 
 ungqr_batch (USM Version)
@@ -123,7 +138,11 @@ The USM version of ``ungqr_batch`` supports the group API and strided API.
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::ungqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event ungqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -179,6 +198,16 @@ a
 
 Output event to wait on to ensure computation is complete.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>` 
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+    If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
 **Strided API**
 
  | The routine generates the wholes or parts of :math`m \times m` unitary matrices :math:`Q_i` of the batch of QR factorization formed by the Strided API of the :ref:`onemkl_lapack_geqrf_batch_usm`.
@@ -196,7 +225,11 @@ Output event to wait on to ensure computation is complete.
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    };
 
 .. container:: section
 
@@ -253,6 +286,17 @@ a
   .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+  
+   If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+   
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
 
 **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

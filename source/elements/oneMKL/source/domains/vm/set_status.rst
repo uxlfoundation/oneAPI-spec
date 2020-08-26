@@ -7,8 +7,8 @@ set_status
 .. container::
 
 
-   Sets the global VM Status according to new values and returns the
-   previous VM Status.
+   Sets the global VM status according to new value and returns the
+   previous VM status.
 
 
    .. container:: section
@@ -18,19 +18,29 @@ set_status
          :class: sectiontitle
 
 
-      .. cpp:function:: uint8_t oneapi::mkl::vm::set_status (queue& exec_queue, uint_8 new_status )
+      .. code-block:: cpp
+
+            namespace oneapi::mkl::vm {
+
+                oneapi::mkl::vm::status set_status(
+                    sycl::queue& exec_queue,
+                    oneapi::mkl::vm::status new_status);
+
+            } // namespace oneapi::mkl::vm
+
 
       .. rubric:: Description
          :class: sectiontitle
 
 
-      The set_status function sets the global VM Status to new value and
-      returns the previous VM Status.
+      The set_status function sets the global VM status to new value and
+      returns the previous VM status code for a given queue.
 
 
-      The global VM Status is a single value and it accumulates via
-      bitwise OR ( \| ) all errors that happen inside VM functions. The
-      following table lists the possible error values.
+      The global VM status is a single value and it registers the bitwise-OR of status codes 
+      that happened inside VM functions run on the specific queue.
+      For preformance reasons, it might be done in non-atomic manner.
+      The possible status codes are listed in the table below.
 
 
       .. list-table::
@@ -48,12 +58,12 @@ set_status
            -
          * - ``oneapi::mkl::vm::status::accuracy_warning``
            - VM function execution completed successfully in a different accuracy mode
-         * - Computational Errors
+         * - Computational status codes
            -
          * - ``oneapi::mkl::vm::status::errdom``
            - Values are out of a range of definition producing invalid (QNaN) result
          * - ``oneapi::mkl::vm::status::sing``
-           - Values cause divide-by-zero (singularity) errors and produce and invalid (QNaN or Inf) result
+           - Values cause divide-by-zero (singularity) computational errors and produce and invalid (QNaN or Inf) result
          * - ``oneapi::mkl::vm::status::overflow``
            - An overflow happened during the calculation process
          * - ``oneapi::mkl::vm::status::underflow``

@@ -20,12 +20,41 @@ erf
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erf(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erf(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erf(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erf(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``erf`` supports the following precisions.
 
@@ -57,36 +86,39 @@ erf
    .. container:: imagecenter
 
 
-      |image0|
+      .. math::
+         \operatorname{erf}(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \operatorname{d \!} t
 
 
    Useful relations:
 
-
-   |image1|
-
-
-   where erfc is the complementary error function.
+   .. math::
+      \operatorname{erfc}(x) = 1 - \operatorname{erf}(x)
 
 
-   |image2|
+   where :math:`\operatorname{erfc}` is the complementary error function.
+
+
+   .. math::
+      \Phi(x) = \frac{1}{2} \left( 1 + \operatorname{erf}\left(x / \sqrt{2}\right) \right)
 
 
    where
 
 
-   |image3|
+   .. math::
+      \Phi(x) = \frac{1}{\sqrt{2\pi}} \int_0^x \exp(-t^2/2) \operatorname{d \!} t
 
 
    is the cumulative normal distribution function.
 
 
-   |image4|
+   .. math::
+      \Phi^{-1}(x) = \sqrt{2} \operatorname{erf}^{-1}(2x - 1)
 
 
-   where ``Φ-1(x)`` and ``erf-1(x)`` are the inverses to ``Φ(x)`` and
-   ``erf(x)``, respectively.
-
+   where :math:`\Phi^{-1}(x)` and :math:`\operatorname{erf}^{-1}(x)` are the inverses to
+   :math:`\Phi(x)` and :math:`\operatorname{erf}(x)`, respectively.
 
    The following figure illustrates the relationships among erf family
    functions (erf, erfc, cdfnorm).
@@ -102,14 +134,13 @@ erf
       .. container:: imagecenter
 
 
-         |image5|
+         |image0|
 
 
    Useful relations for these functions:
 
-
-   |image6|
-
+   .. math::
+      \operatorname{erf}(x) + \operatorname{erfc}(x) = 1
 
    |
 
@@ -117,7 +148,9 @@ erf
    .. container:: imagecenter
 
 
-      |image7|
+      .. math::
+         \operatorname{cdfnorm}(x) &= \frac{1}{2} \left(1 + \operatorname{erf}\left(\frac{x}{\sqrt{2}}\right) \right) \\
+                     &= 1 - \frac{1}{2} \operatorname{erfc}\left(\frac{x}{\sqrt{2}}\right)
 
 
    .. container:: tablenoborder
@@ -128,7 +161,7 @@ erf
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +∞
            - +1
            -  
@@ -222,7 +255,15 @@ erf
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -234,18 +275,4 @@ erf
 
 
 
-.. |image0| image:: ../equations/GUID-8742E2B1-94AF-4622-B964-181611E3D1F2-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-6ABD7CD8-8E05-409D-B84F-9B88E4CDE9DB-low.gif
-   :class: .eq
-.. |image2| image:: ../equations/GUID-41FCF9BC-28B7-4030-B904-1DBA03DD328C-low.gif
-   :class: .eq
-.. |image3| image:: ../equations/GUID-EA77C856-3F93-40ED-AB2A-0F1BD8C4CE7A-low.jpg
-   :class: .eq
-.. |image4| image:: ../equations/GUID-895E6B37-AC54-40D4-B134-E2816B7F30D3-low.gif
-   :class: .eq
-.. |image5| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg
-.. |image6| image:: ../equations/GUID-02486559-84D2-4880-8EAB-2085A5BE2D10-low.jpg
-   :class: .eq
-.. |image7| image:: ../equations/GUID-7CA9B2F2-8D7C-4955-8EA8-D67616FB5B08-low.gif
-
+.. |image0| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg

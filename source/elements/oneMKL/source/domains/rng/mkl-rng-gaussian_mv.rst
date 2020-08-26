@@ -9,7 +9,7 @@ Class is used for generation of multivariate normally distributed real types ran
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers :math:`d`-variate normally distributed, with mean :math:`a` and variance-covariance matrix :math:`C`, where :math:`a \in R^d;` :math:`C` is dxd symmetric positive matrix.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers :math:`d`-variate normally distributed, with mean :math:`a` and variance-covariance matrix :math:`C`, where :math:`a \in R^d;` :math:`C` is dxd symmetric positive matrix.
 
 The probability density function is given by:
 
@@ -26,20 +26,18 @@ class gaussian_mv
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = std::int32_t, layout Layout = layout::packed, typename Method = gaussian_mv_method::by_default>
     class gaussian_mv {
     public:
         using method_type = Method;
         using result_type = RealType;
         explicit gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix);
-        gaussian_mv(const gaussian_mv<RealType, Method> & other);
         std::int32_t dimen() const;
         std::vector<RealType> mean() const;
         std::vector<RealType> matrix() const;
     };
-
-.. cpp:class:: template<typename RealType = std::int32_t, oneapi::mkl::rng::layout Layout = oneapi::mkl::rng::layout::packed, typename Method = oneapi::mkl::rng::gaussian_mv_method::by_default> \
-                oneapi::mkl::rng::gaussian_mv
+    }
 
 .. container:: section
 
@@ -72,7 +70,7 @@ class gaussian_mv
                 * ``oneapi::mkl::rng::gaussian_mv_method::box_muller2``
                 * ``oneapi::mkl::rng::gaussian_mv_method::icdf``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -85,8 +83,6 @@ class gaussian_mv
           - Description
         * - `explicit gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)`_
           - Constructor with parameters
-        * - `gaussian_mv(const gaussian_mv<RealType, Method> & other)`_
-          - Copy constructor
         * - `std::int32_t dimen() const`_
           - Method to obtain number of dimensions in output random vectors
         * - `std::vector<double> mean() const`_
@@ -100,23 +96,27 @@ class gaussian_mv
 
     .. container:: section
 
-        .. cpp:type:: gaussian_mv::method_type = Method
+        .. code-block:: cpp
+
+            gaussian_mv::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: gaussian_mv::result_type = RealType
+        .. code-block:: cpp
+
+            gaussian_mv::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -126,7 +126,9 @@ class gaussian_mv
 
         .. _`explicit gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)`:
 
-        .. cpp:function:: explicit gaussian_mv::gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)
+        .. code-block:: cpp
+
+            explicit gaussian_mv::gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)
 
         .. container:: section
 
@@ -134,17 +136,12 @@ class gaussian_mv
 
             Constructor with parameters. `dimen` is the number of dimensions, `mean` is a mean vector, `matrix` is a variance-covariance matrix.
 
-    .. container:: section
-
-        .. _`gaussian_mv(const gaussian_mv<RealType, Method> & other)`:
-
-        .. cpp:function:: gaussian_mv::gaussian_mv(const gaussian_mv<RealType, Method> & other)
-
         .. container:: section
 
-            .. rubric:: Description
+            .. rubric:: Throws
 
-            Copy constructor.
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`mean.size() \leq 0`, or :math:`matrix.size() \leq 0`
 
 .. container:: section
 
@@ -154,7 +151,9 @@ class gaussian_mv
 
         .. _`std::int32_t dimen() const`:
 
-        .. cpp:function:: std::int32_t gaussian_mv::dimen() const
+        .. code-block:: cpp
+
+            std::int32_t gaussian_mv::dimen() const
 
         .. container:: section
 
@@ -166,7 +165,9 @@ class gaussian_mv
 
         .. _`std::vector<double> mean() const`:
 
-        .. cpp:function:: std::vector<double> gaussian_mv::mean() const
+        .. code-block:: cpp
+
+            std::vector<double> gaussian_mv::mean() const
 
         .. container:: section
 
@@ -178,7 +179,9 @@ class gaussian_mv
 
         .. _`std::vector<double> matrix() const`:
 
-        .. cpp:function:: std::vector<double> gaussian_mv::matrix() const
+        .. code-block:: cpp
+
+            std::vector<double> gaussian_mv::matrix() const
 
         .. container:: section
 

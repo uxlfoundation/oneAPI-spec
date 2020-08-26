@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 #######
 Reorder
@@ -42,8 +42,8 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_FROM
-:math:`\dst`           DNNL_ARG_TO
+:math:`\src`           |DNNL_ARG_FROM|
+:math:`\dst`           |DNNL_ARG_TO|
 ====================== ========================
 
 *****************

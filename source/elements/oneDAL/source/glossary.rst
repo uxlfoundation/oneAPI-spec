@@ -48,6 +48,11 @@ Machine learning terms
     Dataset
         A collection of :capterm:`observations <observation>`.
 
+    Dimensionality reduction
+        A problem of transforming a set of :capterm:`feature vectors <feature
+        vector>` from a high-dimensional space into a low-dimensional space
+        while retaining meaningful properties of the original feature vectors.
+
     Feature
         A particular property or quality of a real object or an event. Has a
         defined type and domain. In machine learning problems, features are
@@ -77,7 +82,7 @@ Machine learning terms
         A :capterm:`continuous feature` with values that can be compared, added or
         subtracted, but cannot be multiplied or divided.
 
-        **Examples:** a timeframe scale, a temperature in Celcius or Fahrenheit
+        **Examples:** a time frame scale, a temperature in Celsius or Fahrenheit
 
     Label
         A :capterm:`response` with :capterm:`categorical <Categorical feature>` or
@@ -153,6 +158,12 @@ Machine learning terms
         :capterm:`Training` process that uses a :capterm:`training set` with no
         :capterm:`responses <Response>`. The goal is to find hidden patters inside
         :capterm:`feature vectors <Feature vector>` and dependencies between them.
+
+    CSV file
+        A comma-separated values file (csv) is a type of a text file. Each line in a CSV file is a record containing fields that are separated by the delimiter.
+        Fields can be of a numerical or a text format. Text usually refers to categorical values.
+        By defaul, the delimiter is a comma, but, generally, it can be any character.
+        For more details, `see <https://en.wikipedia.org/wiki/Comma-separated_values>`_.
 
 |dal_short_name| terms
 ======================

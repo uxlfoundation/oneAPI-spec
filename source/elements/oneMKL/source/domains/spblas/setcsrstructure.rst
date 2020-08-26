@@ -23,8 +23,19 @@ set_csr_data (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::sparse::set_csr_data (matrix_handle_t handle, intType num_rows, intType num_cols, oneapi::mkl::index_base index, sycl::buffer<intType, 1> & row_ptr, sycl::buffer<intType, 1> & col_ind, sycl::buffer<fp, 1> & val)
+.. code-block:: cpp
 
+   namespace oneapi::mkl::sparse {
+
+      void set_csr_data (oneapi::mkl::sparse::matrix_handle_t  handle,
+                         intType                               num_rows,
+                         intType                               num_cols,
+                         oneapi::mkl::index_base               index,
+                         sycl::buffer<intType, 1>              &row_ptr,
+                         sycl::buffer<intType, 1>              &col_ind,
+                         sycl::buffer<fp, 1>                   &val);
+
+   }
 
 .. container:: section
 
@@ -79,6 +90,22 @@ handle
      Handle to object containing sparse matrix and other internal
      data for subsequent SYCL Sparse BLAS operations.
 
+.. container:: section
+
+    .. rubric:: Throws
+       :class: sectiontitle
+
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. _onemkl_sparse_set_csr_data_usm:
 
@@ -87,8 +114,19 @@ set_csr_data (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::sparse::set_csr_data (matrixHandle_t handle, intType num_rows, intType num_cols, oneapi::mkl::index_base index, intType *row_ptr, intType *col_ind, fp *val)
+.. code-block:: cpp
 
+   namespace oneapi::mkl::sparse {
+
+      void set_csr_data (oneapi::mkl::sparse::matrix_handle_t  handle,
+                         intType                               num_rows,
+                         intType                               num_cols,
+                         oneapi::mkl::index_base               index,
+                         intType                               *row_ptr,
+                         intType                               *col_ind,
+                         fp                                    *val);
+
+   }
 
 .. container:: section
 
@@ -143,6 +181,23 @@ handle
      data for subsequent SYCL Sparse BLAS operations.
 
 
+.. container:: section
+
+    .. rubric:: Throws
+       :class: sectiontitle
+
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
 .. container:: familylinks
 
 
@@ -150,6 +205,3 @@ handle
 
 
       **Parent topic:** :ref:`onemkl_spblas`
-
-
-

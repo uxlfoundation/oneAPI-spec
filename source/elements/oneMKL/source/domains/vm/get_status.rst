@@ -7,7 +7,7 @@ get_status
 .. container::
 
 
-   Gets the VM Status.
+   Gets the VM status.
 
 
    .. container:: section
@@ -17,18 +17,29 @@ get_status
          :class: sectiontitle
 
 
-      .. cpp:function:: uint8_t oneapi::mkl::vm::get_status (queue& exec_queue )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+                oneapi::mkl::vm::status get_status(
+                    sycl::queue& exec_queue);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       .. rubric:: Description
          :class: sectiontitle
 
 
-      The get_status function gets the VM status.
+      The get_status function gets the VM status for a given queue.
 
 
-      The global VM Status is a single value and it accumulates via
-      bitwise OR ( \| ) all computational errors that happen inside VM
-      functions. The following table lists the possible error values.
+      The global VM status is a single value and it registers the bitwise-OR of status codes 
+      that happened inside VM functions run on the specific queue.
+      For preformance reasons, it might be done in non-atomic manner.
+      The possible status codes are listed in the table below.
 
 
       .. list-table::
@@ -46,12 +57,12 @@ get_status
            -
          * - ``oneapi::mkl::vm::status::accuracy_warning``
            - VM function execution completed successfully in a different accuracy mode
-         * - Computational Errors
+         * - Computational status codes
            -
          * - ``oneapi::mkl::vm::status::errdom``
            - Values are out of a range of definition producing invalid (QNaN) result
          * - ``oneapi::mkl::vm::status::sing``
-           - Values cause divide-by-zero (singularity) errors and produce and invalid (QNaN or Inf) result
+           - Values cause divide-by-zero (singularity) computational errors and produce and invalid (QNaN or Inf) result
          * - ``oneapi::mkl::vm::status::overflow``
            - An overflow happened during the calculation process
          * - ``oneapi::mkl::vm::status::underflow``

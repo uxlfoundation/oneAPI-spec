@@ -9,7 +9,7 @@ Class is used for generation of normally distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers normally distributed with mean :math:`(mean, a)` and standard deviation :math:`(stddev, \sigma)`, where :math:`a, \sigma \in R; \sigma > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers normally distributed with mean :math:`(mean, a)` and standard deviation :math:`(stddev, \sigma)`, where :math:`a, \sigma \in R; \sigma > 0`.
 
 The probability distribution is given by:
 
@@ -33,6 +33,7 @@ class gaussian
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = gaussian_method::by_default>
     class gaussian {
     public:
@@ -43,9 +44,7 @@ class gaussian
         RealType mean() const;
         RealType stddev() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::gaussian_method::by_default> \
-                oneapi::mkl::rng::gaussian
+    }
 
 .. container:: section
 
@@ -94,23 +93,27 @@ class gaussian
 
     .. container:: section
 
-        .. cpp:type:: gaussian::method_type = Method
+        .. code-block:: cpp
+
+            gaussian::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: gaussian::result_type = RealType
+        .. code-block:: cpp
+
+            gaussian::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -120,7 +123,9 @@ class gaussian
 
         .. _`gaussian()`:
 
-        .. cpp:function:: gaussian::gaussian()
+        .. code-block:: cpp
+
+            gaussian::gaussian()
 
         .. container:: section
 
@@ -132,7 +137,9 @@ class gaussian
 
         .. _`explicit gaussian(RealType mean, RealType stddev)`:
 
-        .. cpp:function:: explicit gaussian::gaussian(RealType mean, RealType stddev)
+        .. code-block:: cpp
+
+            explicit gaussian::gaussian(RealType mean, RealType stddev)
 
         .. container:: section
 
@@ -140,6 +147,12 @@ class gaussian
 
             Constructor with parameters. `mean` is a mean value, `stddev` is a standard deviation value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`stddev \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -149,7 +162,9 @@ class gaussian
 
         .. _`RealType mean() const`:
 
-        .. cpp:function:: RealType gaussian::mean() const
+        .. code-block:: cpp
+
+            RealType gaussian::mean() const
 
         .. container:: section
 
@@ -161,7 +176,9 @@ class gaussian
 
         .. _`RealType stddev() const`:
 
-        .. cpp:function:: RealType gaussian::stddev() const
+        .. code-block:: cpp
+
+            RealType gaussian::stddev() const
 
         .. container:: section
 

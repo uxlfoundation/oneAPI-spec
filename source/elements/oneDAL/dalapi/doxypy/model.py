@@ -122,6 +122,20 @@ class Typedef(object):
     parent_fully_qualified_name: Text = None
 
 @model_object
+class EnumClassValue(object):
+    doc: Doc = None
+    name: Text = None
+
+@model_object
+class EnumClass(object):
+    doc: Doc = None
+    name: Text = None
+    values: List[EnumClassValue] = []
+    location: Location = None
+    fully_qualified_name: Text = None
+    parent_fully_qualified_name: Text = None
+
+@model_object
 class Function(object):
     doc: Doc = None
     name: Text = None
@@ -142,6 +156,7 @@ class Class(object):
     name: Text = None
     location: Location = None
     functions: List[Function] = []
+    static_functions: List[Function] = []
     declaration: Text = None
     template_parameters: List[Parameter] = []
     template_declaration: Text = None
@@ -162,6 +177,7 @@ class Namespace(object):
     location: Location = None
     functions: List[Function] = []
     class_refs: List[ClassRef] = []
+    enum_classes: List[EnumClass] = []
     fully_qualified_name: Text = None
     parent_fully_qualified_name: Text = None
 

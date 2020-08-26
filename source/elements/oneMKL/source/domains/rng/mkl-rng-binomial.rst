@@ -9,7 +9,7 @@ Class is used for generation of binomially distributed integer types random numb
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers binomially distributed with number of independent Bernoulli trials :math:`m`, and with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p \leq 1, m \in N`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers binomially distributed with a number of independent Bernoulli trials :math:`m`, and with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p \leq 1, m \in N`.
 
 A binomially distributed variate represents the number of successes in :math:`m` independent Bernoulli trials with probability of a single trial success :math:`p`.
 
@@ -35,6 +35,7 @@ class binomial
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = binomial_method::by_default>
     class binomial {
     public:
@@ -45,9 +46,7 @@ class binomial
         std::int32_t ntrial() const;
         double p() const;
     };
-
-.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::binomial_method::by_default> \
-                oneapi::mkl::rng::binomial
+    }
 
 .. container:: section
 
@@ -67,7 +66,7 @@ class binomial
                 * ``oneapi::mkl::rng::binomial_method::by_default``
                 * ``oneapi::mkl::rng::binomial_method::btpe``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -93,23 +92,27 @@ class binomial
 
     .. container:: section
 
-        .. cpp:type:: binomial::method_type = Method
+        .. code-block:: cpp
+
+            binomial::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: binomial::result_type = IntType
+        .. code-block:: cpp
+
+            binomial::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -119,7 +122,9 @@ class binomial
 
         .. _`binomial()`:
 
-        .. cpp:function:: binomial::binomial()
+        .. code-block:: cpp
+
+            binomial::binomial()
 
         .. container:: section
 
@@ -131,7 +136,9 @@ class binomial
 
         .. _`explicit binomial(std::int32_t ntrial, double p)`:
 
-        .. cpp:function:: explicit binomial::binomial(std::int32_t ntrial, double p)
+        .. code-block:: cpp
+
+            explicit binomial::binomial(std::int32_t ntrial, double p)
 
         .. container:: section
 
@@ -139,6 +146,12 @@ class binomial
 
             Constructor with parameters. `ntrial` is the number of independent trials, `p` is the success probability of a single trial.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`p > 1.0`, or :math:`p < 0.0`, or :math:`ntrial < 1`
 
 .. container:: section
 
@@ -148,7 +161,9 @@ class binomial
 
         .. _`std::int32_t ntrial() const`:
 
-        .. cpp:function:: std::int32_t binomial::ntrial() const
+        .. code-block:: cpp
+
+            std::int32_t binomial::ntrial() const
 
         .. container:: section
 
@@ -160,7 +175,9 @@ class binomial
 
         .. _`double p() const`:
 
-        .. cpp:function:: double binomial::p() const
+        .. code-block:: cpp
+
+            double binomial::p() const
 
         .. container:: section
 

@@ -3,9 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
-
-.. cpp:namespace:: 0
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. _convolution-label:
 
@@ -160,15 +158,14 @@ argument index as specified by the following table.
 ========================= ========================
 Primitive input/output    Execution argument index
 ========================= ========================
-:math:`\src`              DNNL_ARG_SRC
-:math:`\weights`          DNNL_ARG_WEIGHTS
-:math:`\bias`             DNNL_ARG_BIAS
-:math:`\dst`              DNNL_ARG_DST
-:math:`\diffsrc`          DNNL_ARG_DIFF_SRC
-:math:`\diffweights`      DNNL_ARG_DIFF_WEIGHTS
-:math:`\diffbias`         DNNL_ARG_DIFF_BIAS
-:math:`\diffdst`          DNNL_ARG_DIFF_DST
-:math:`depthwise`         DNNL_ARG_ATTR_POST_OP_DW
+:math:`\src`              |DNNL_ARG_SRC|
+:math:`\weights`          |DNNL_ARG_WEIGHTS|
+:math:`\bias`             |DNNL_ARG_BIAS|
+:math:`\dst`              |DNNL_ARG_DST|
+:math:`\diffsrc`          |DNNL_ARG_DIFF_SRC|
+:math:`\diffweights`      |DNNL_ARG_DIFF_WEIGHTS|
+:math:`\diffbias`         |DNNL_ARG_DIFF_BIAS|
+:math:`\diffdst`          |DNNL_ARG_DIFF_DST|
 ========================= ========================
 
 *****************
@@ -177,23 +174,28 @@ Operation Details
 
 N/A
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 Convolution primitive supports the following combination of data types for
-source, destination, and weights memory objects:
+source, destination, and weights memory objects.
 
-================== ========= ========= ================ ================
-Propagation        Source    Weights   Destination      Bias
-================== ========= ========= ================ ================
-forward / backward f32       f32       f32              f32
-forward            f16       f16       f16              f16
-forward            u8, s8    s8        u8, s8, s32, f32 u8, s8, s32, f32
-forward            bf16      bf16      f32, bf16        f32, bf16
-backward           f32, bf16 bf16      bf16
-weights update     bf16      f32, bf16 bf16             f32, bf16
-================== ========= ========= ================ ================
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
+
+================== ============= ============= ======================== ========================
+Propagation        Source        Weights       Destination              Bias
+================== ============= ============= ======================== ========================
+forward / backward |f32|         |f32|         |f32|                    |f32|
+forward            |f16|         |f16|         |f16|                    |f16|
+forward            |u8|, |s8|    |s8|          |u8|, |s8|, |s32|, |f32| |u8|, |s8|, |s32|, |f32|
+forward            |bf16|        |bf16|        |f32|, |bf16|            |f32|, |bf16|
+backward           |f32|, |bf16| |bf16|        |bf16|
+weights update     |bf16|        |f32|, |bf16| |bf16|                   |f32|, |bf16|
+================== ============= ============= ======================== ========================
 
 *******************
 Data Representation
@@ -234,13 +236,19 @@ convolution primitive is optimized for.
 +------------+--------------------+--------------------------+------------------------------------------------------------+
 | 1D         | f32, bf16          | NCW / OIW, GOIW          | |ncw| (|abc|) / |oiw| (|abc|), |goiw| (|abcd|)             |
 +------------+--------------------+--------------------------+------------------------------------------------------------+
+| 1D         | f32, bf16          | NCW / OIW, GOIW          | |nwc| (|acb|) / |wio| (|cba|), |wigo| (|dcab|)             |
++------------+--------------------+--------------------------+------------------------------------------------------------+
 | 1D         | int8               | NCW / OIW                | |nwc| (|acb|) / |wio| (|cba|)                              |
 +------------+--------------------+--------------------------+------------------------------------------------------------+
 | 2D         | f32, bf16          | NCHW / OIHW, GOIHW       | |nchw| (|abcd|) / |oihw| (|abcd|), |goihw| (|abcde|)       |
 +------------+--------------------+--------------------------+------------------------------------------------------------+
+| 2D         | f32, bf16          | NCHW / OIHW, GOIHW       | |nhwc| (|acdb|) / |hwio| (|cdba|), |hwigo| (|decab|)       |
++------------+--------------------+--------------------------+------------------------------------------------------------+
 | 2D         | int8               | NCHW / OIHW, GOIHW       | |nhwc| (|acdb|) / |hwio| (|cdba|), |hwigo| (|decab|)       |
 +------------+--------------------+--------------------------+------------------------------------------------------------+
 | 3D         | f32, bf16          | NCDHW / OIDHW, GOIDHW    | |ncdhw| (|abcde|) / |oidhw| (|abcde|), |goidhw| (|abcdef|) |
++------------+--------------------+--------------------------+------------------------------------------------------------+
+| 3D         | f32, bf16          | NCDHW / OIDHW, GOIDHW    | |ndhwc| (|acdeb|) / |dhwio| (|cdeba|), |dhwigo| (|defcab|) |
 +------------+--------------------+--------------------------+------------------------------------------------------------+
 | 3D         | int8               | NCDHW / OIDHW            | |ndhwc| (|acdeb|) / |dhwio| (|cdeba|)                      |
 +------------+--------------------+--------------------------+------------------------------------------------------------+
@@ -362,11 +370,11 @@ Algorithms
 oneDNN implementations may implement convolution primitives using several
 different algorithms which can be chosen by the user.
 
-- *Direct* (:any:`dnnl::algorithm::convolution_direct`). The convolution
+- *Direct* (|algorithm::convolution_direct|). The convolution
   operation is computed directly using SIMD instructions. This also includes
   implicit GEMM formulations which notably may require workspace.
 
-- *Winograd* (:any:`dnnl::algorithm::convolution_winograd`). This algorithm
+- *Winograd* (|algorithm::convolution_winograd|). This algorithm
   reduces computational complexity of convolution at the expense of accuracy
   loss and additional memory operations. The implementation is based on the
   `Fast Algorithms for Convolutional Neural Networks by A. Lavin and S. Gray
@@ -374,7 +382,7 @@ different algorithms which can be chosen by the user.
   in the best performance, but it is applicable only to particular shapes.
   Moreover, Winograd only supports int8 and f32 data types.
 
-- *Auto* (:any:`dnnl::algorithm::convolution_auto`). In tis case the library
+- *Auto* (|algorithm::convolution_auto|). In this case the library
   should automatically select the *best* algorithm based on the heuristics
   that take into account tensor shapes and the number of logical processors
   available.

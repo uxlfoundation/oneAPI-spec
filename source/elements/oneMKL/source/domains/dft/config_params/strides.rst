@@ -57,9 +57,6 @@ The computation functions take containers(``sycl::buffer`` or USM pointer) which
         * -   CONJUGATE_EVEN_STORAGE
           -   Element type of forward data
           -   Element type of backward data
-        * -   :ref:`onemkl_dft_conjugate_even_storage_complex_real`
-          -   Real
-          -   Real
         * -   :ref:`onemkl_dft_conjugate_even_storage_complex_complex`
           -   Real
           -   Complex
