@@ -13,6 +13,7 @@ jobs:
           DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
           python3 -m venv venv
           . venv/bin/activate
+          pip install --upgrade --quiet pip wheel
           pip install --upgrade --quiet -r requirements.txt
     - name: Build doc
       run: |
