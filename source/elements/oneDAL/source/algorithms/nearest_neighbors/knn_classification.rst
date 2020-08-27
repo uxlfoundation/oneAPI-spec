@@ -4,10 +4,9 @@
 =========================================
 k-Nearest Neighbors Classification (k-NN)
 =========================================
-
-:math:`k`-NN classification algorithm infers the class for the new feature
-vector by computing majority vote of the :math:`k` nearest observations from the
-training set.
+:math:`k`-NN :capterm:`classification` algorithm infers the class for the new
+feature vector by computing majority vote of the :math:`k` nearest observations
+from the training set.
 
 
 .. |t_math| replace:: `Training <knn_t_math_>`_

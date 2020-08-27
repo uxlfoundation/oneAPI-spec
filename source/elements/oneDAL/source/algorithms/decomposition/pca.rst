@@ -4,16 +4,9 @@
 ===================================
 Principal Components Analysis (PCA)
 ===================================
-
-.. TODO: we either need to refer to the literature that describe the algorithm
-.. (in present daal docs we do not always do that) or specify somewhere a single
-.. source that contain all such descriptions and add more refs in individual algos
-.. when necessary. It would help avoid different interpretation of the possible
-.. minor differences and precisely say-we rely on that specific scheme
-
 Principal Component Analysis (PCA) is an algorithm for exploratory data analysis
-and dimensionality reduction. PCA transforms a set of feature vectors of
-possibly correlated features to a new set of uncorrelated features, called
+and :capterm:`dimensionality reduction`. PCA transforms a set of feature vectors
+of possibly correlated features to a new set of uncorrelated features, called
 principal components. Principal components are the directions of the largest
 variance, that is, the directions where the data is mostly spread out.
 

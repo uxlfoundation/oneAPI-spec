@@ -18,8 +18,8 @@ namespace method {
 } // namespace method
 
 namespace task {
-   /// Tag-type that parametrizes entities used for solving classification
-   /// problem.
+   /// Tag-type that parametrizes entities used for solving
+   /// :capterm:`classification problem <classification>`.
    struct classification {};
 
    /// Alias tag-type for classification task.

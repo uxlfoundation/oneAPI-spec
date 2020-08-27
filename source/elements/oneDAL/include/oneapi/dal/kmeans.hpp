@@ -15,7 +15,8 @@ namespace method {
 } // namespace method
 
 namespace task {
-   /// Tag-type that parametrizes entities used for solving clustering problem.
+   /// Tag-type that parametrizes entities used for solving
+   /// :capterm:`clustering problem <clustering>` .
    struct clustering {};
 
    /// Alias tag-type for custering task.

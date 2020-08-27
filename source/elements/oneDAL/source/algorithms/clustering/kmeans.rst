@@ -4,10 +4,9 @@
 =======
 K-Means
 =======
-
-The K-Means algorithm partitions :math:`n` feature vectors into :math:`k`
-*clusters* minimizing some criterion. Each cluster is characterized by a
-representative point, called *a centroid*.
+The K-Means algorithm solves :capterm:`clustering` problem by partitioning
+:math:`n` feature vectors into :math:`k` clusters minimizing some criterion.
+Each cluster is characterized by a representative point, called *a centroid*.
 
 .. |t_math| replace:: `Training <kmeans_t_math_>`_
 .. |t_lloyd| replace:: `Lloyd's <kmeans_t_math_lloyd_>`_
