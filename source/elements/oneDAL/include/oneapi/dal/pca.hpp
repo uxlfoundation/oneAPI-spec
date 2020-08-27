@@ -20,10 +20,10 @@ namespace method {
 namespace task {
    /// Tag-type that parametrizes entities used for solving dimensionality
    /// reduction problem.
-   struct dimensionality_reduction {};
+   struct dim_reduction {};
 
    /// Alias tag-type for dimensionality reduction task.
-   using by_default = dimensionality_reduction;
+   using by_default = dim_reduction;
 } // namespace task
 
 /// @tparam Float  The floating-point type that the algorithm uses for
@@ -32,7 +32,7 @@ namespace task {
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
 ///                be :expr:`method::cov` or :expr:`method::svd`.
 /// @tparam Task   Tag-type that specifies type of the problem to solve. Can
-///                be :expr:`task::dimensionality_reduction`.
+///                be :expr:`task::dim_reduction`.
 template <typename Float = float,
           typename Method = method::by_default,
           typename Task = task::by_default>
@@ -57,7 +57,7 @@ public:
 };
 
 /// @tparam Task Tag-type that specifies type of the problem to solve. Can
-///              be :expr:`task::dimensionality_reduction`.
+///              be :expr:`task::dim_reduction`.
 template <typename Task = task::by_default>
 class model {
 public:
@@ -76,7 +76,7 @@ public:
 };
 
 /// @tparam Task Tag-type that specifies type of the problem to solve. Can
-///              be :expr:`task::dimensionality_reduction`.
+///              be :expr:`task::dim_reduction`.
 template <typename Task = task::by_default>
 class train_input {
 public:
@@ -92,7 +92,7 @@ public:
 };
 
 /// @tparam Task Tag-type that specifies type of the problem to solve. Can
-///              be :expr:`task::dimensionality_reduction`.
+///              be :expr:`task::dim_reduction`.
 template <typename Task = task::by_default>
 class train_result {
 public:
@@ -134,7 +134,7 @@ public:
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
 ///                be :expr:`method::cov` or :expr:`method::svd`.
 /// @tparam Task   Tag-type that specifies type of the problem to solve. Can
-///                be :expr:`task::dimensionality_reduction`.
+///                be :expr:`task::dim_reduction`.
 ///
 /// @param[in] desc  Descriptor of the algorithm
 /// @param[in] input Input data for the training operation
@@ -156,7 +156,7 @@ train_result<Task> train(const descriptor<Float, Method, Task>& desc,
                          const train_input<Task>& input);
 
 /// @tparam Task Tag-type that specifies type of the problem to solve. Can
-///              be :expr:`task::dimensionality_reduction`.
+///              be :expr:`task::dim_reduction`.
 template <typename Task = task::by_default>
 class infer_input {
 public:
@@ -177,7 +177,7 @@ public:
 };
 
 /// @tparam Task Tag-type that specifies type of the problem to solve. Can
-///              be :expr:`task::dimensionality_reduction`.
+///              be :expr:`task::dim_reduction`.
 template <typename Task = task::by_default>
 class infer_result {
 public:
@@ -199,7 +199,7 @@ public:
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
 ///                be :expr:`method::cov` or :expr:`method::svd`.
 /// @tparam Task   Tag-type that specifies type of the problem to solve. Can
-///                be :expr:`task::dimensionality_reduction`.
+///                be :expr:`task::dim_reduction`.
 ///
 /// @param[in] desc  Descriptor of the algorithm
 /// @param[in] input Input data for the inference operation
