@@ -24,7 +24,7 @@ for for deep learning applications and frameworks. oneDNN supports:
 
 .. literalinclude:: example.cpp
    :language: cpp
-   :lines: 61-
+   :lines: 69-
 
 .. toctree::
    :maxdepth: 1
