@@ -32,7 +32,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
           . venv/bin/activate
-          python scripts/oneapi.apy pre-publish
+          python scripts/oneapi.py pre-publish
     - name: Publish main
       if: ${{ github.ref == 'refs/heads/master' && github.repository == 'oneapi-src/oneAPI-spec'}}
       env:
@@ -40,5 +40,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
           . venv/bin/activate
-          python scripts/oneapi.apy ci-publish
+          python scripts/oneapi.py ci-publish
 
