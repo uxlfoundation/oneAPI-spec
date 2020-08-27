@@ -38,10 +38,10 @@ Applications use oneVPL functions by linking with the oneVPL dispatcher library.
    digraph {
      rankdir=TB;
      Application [shape=record label="Application" ];
-     Sdk [shape=record  label="oneVPL Dispatcher Library"];
-     Lib1 [shape=record  label="oneVPL Library 1 (CPU)"];
-     Lib2 [shape=record  label="oneVPL Library 2 (Platform 1)"];
-     Lib3 [shape=record  label="oneVPL Library 3 (Platform 2)"];
+     Sdk [shape=record  label="oneVPL dispatcher library"];
+     Lib1 [shape=record  label="oneVPL library 1 (CPU)"];
+     Lib2 [shape=record  label="oneVPL library 2 (platform 1)"];
+     Lib3 [shape=record  label="oneVPL library 3 (platform 2)"];
      Application->Sdk;
      Sdk->Lib1;
      Sdk->Lib2;

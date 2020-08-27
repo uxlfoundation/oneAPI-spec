@@ -20,11 +20,11 @@ The type ``H`` satisfies ``HashCompare`` if it meets the following requirements:
 
     Destructor.
 
-.. cpp:function:: std::size_t H::hash(const KeyType& k)
+.. cpp:function:: std::size_t H::hash(const KeyType& k) const
 
     Calculates the hash for a provided key.
 
-.. cpp:function:: ReturnType H::equal(const KeyType& k1, const KeyType& k2)
+.. cpp:function:: ReturnType H::equal(const KeyType& k1, const KeyType& k2) const
 
     Requirements:
 

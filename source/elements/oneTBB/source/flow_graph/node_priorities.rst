@@ -39,7 +39,7 @@ other, which may help to improve overall performance of the graph.
    :height: 336
    :align: center
 
-   Data flow graph with critical path.
+   Dependency flow graph with a critical path.
 
 Consider executing the graph from the picture above using two threads. Assume that the nodes ``f1`` and
 ``f3`` take equal time to execute, while the node ``f2`` takes longer. That makes the nodes

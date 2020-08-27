@@ -35,6 +35,8 @@ The ``spin_mutex`` class is not fair or recursive.
 Member classes
 --------------
 
+.. namespace:: tbb::spin_mutex
+	       
 .. cpp:class:: scoped_lock
 
     Corresponding ``scoped_lock`` class. See the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`.

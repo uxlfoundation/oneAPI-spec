@@ -14,3 +14,6 @@ A type `Combine` satisfies `ParallelScanCombine` if it meets the following requi
     Combines summaries ``left`` and ``right`` and returns the result
     ``Value`` type must be the same as a corresponding template parameter for the ``parallel_scan`` algorithm.
 
+See also:
+
+* :doc:`parallel_scan algorithm <../../algorithms/functions/parallel_scan_func>`

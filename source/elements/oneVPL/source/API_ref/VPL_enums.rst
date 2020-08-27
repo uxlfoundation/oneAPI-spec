@@ -842,6 +842,9 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_CENC_PARAM
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_DEVICE_AFFINITY_MASK
+   :project: oneVPL
+
 ----------------
 ExtMemBufferType
 ----------------

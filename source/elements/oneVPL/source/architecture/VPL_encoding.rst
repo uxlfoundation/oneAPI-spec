@@ -6,8 +6,8 @@ The :term:`ENCODE` class of functions take raw frames as input and compresses
 them into a bitstream.
 
 Input frames usually come encoded in a repeated pattern called the Group of
-Picture (GOP) sequence. For example, a GOP sequence can start from an
-I-frame, followed by a few B-frames, a P-frame, and so on. ENCODE uses an MPEG-2
+Picture (GOP) sequence. For example, a GOP sequence can start with an
+I-frame followed by a few B-frames, a P-frame, and so on. ENCODE uses an MPEG-2
 style GOP sequence structure that can specify the length of the sequence and the
 distance between two keyframes: I- or P-frames. A GOP sequence ensures that the
 segments of a bitstream do not completely depend upon each other. It also enables
@@ -32,5 +32,5 @@ ENCODE supports the following bitrate control algorithms: constant bitrate,
 variable bitrate (VBR), and constant quantization parameter (QP). In the
 constant bitrate mode, ENCODE performs stuffing when the size of the
 least-compressed frame is smaller than what is required to meet the hypothetical
-reference decoder (HRD) buffer (or VBR) requirements. (Stuffing is a process that
+reference decoder (HRD) buffer requirements (or VBR requirements). (Stuffing is a process that
 appends zeros to the end of encoded frames.)

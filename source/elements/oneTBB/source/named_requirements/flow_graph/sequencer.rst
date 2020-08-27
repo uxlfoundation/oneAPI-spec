@@ -17,12 +17,6 @@ A type `S` satisfies `Sequencer` if it meets the following requirements:
 
     Destructor.
 
-.. cpp:function:: void operator=( const S& )
-
-    Assignment. The return type ``void`` in the pseudo-signature denotes that ``operator=`` is not
-    required to return a value. The actual ``operator=`` can return a value, which will be
-    ignored.
-
 .. cpp:function:: size_t S::operator()( const T &v )
 
     **Requirements:** The type ``T`` must be the same as the template type argument ``T`` of the

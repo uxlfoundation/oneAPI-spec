@@ -32,10 +32,10 @@ does not begin its operation until :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` o
 :cpp:func:`MFXVideoVPP_RunFrameVPPAsync` has finished.
 
 During the execution of an asynchronous pipeline, the application must consider
-the input data as 'in use' and must not change it until the execution has completed.
+the input data as "in use" and must not change it until the execution has completed.
 The application must also consider output data unavailable until the execution
 has finished. In addition, for encoders, the application must consider extended
-and payload buffers as 'in use' while the input surface is locked.
+and payload buffers as "in use" while the input surface is locked.
 
 oneVPL checks dependencies by comparing the input and output parameters of each
 oneVPL function in the pipeline. Do not modify the contents of input and output
@@ -62,7 +62,7 @@ There are two exceptions with respect to intermediate synchronization:
 Surface Pool Allocation
 -----------------------
 
-When connecting oneVPL function **A** to oneVPL function **B**, the application must
+When connecting API function **A** to API function **B**, the application must
 take into account the requirements of both functions to calculate the number of
 frame surfaces in the surface pool. Typically, the application can use the formula
 **Na+Nb**, where **Na** is the frame surface requirements for oneVPL function **A**
@@ -123,7 +123,7 @@ on :cpp:member:`mfxFrameAllocRequest::NumFrameSuggested` values:
 Pipeline Error Reporting
 ------------------------
 
-During asynchronous pipeline construction, each pipeline stage oneVPL function will
+During asynchronous pipeline construction, each pipeline stage function will
 return a synchronization point (sync point). These synchronization points are
 useful in tracking errors during the asynchronous pipeline operation.
 
@@ -136,11 +136,11 @@ For example, assume the following pipeline:
       A->B->C;
    }
 
-The application synchronizes on sync point **C**. If the error occurs in oneVPL
+The application synchronizes on sync point **C**. If the error occurs in
 function **C**, then the synchronization returns the exact error code. If the
-error occurs before oneVPL function **C**, then the synchronization returns
+error occurs before function **C**, then the synchronization returns
 :cpp:enumerator:`mfxStatus::MFX_ERR_ABORTED`. The application can then try to
-synchronize on sync point **B**. Similarly, if the error occurs in oneVPL
-function **B**, the synchronization returns the exact error code, or else
+synchronize on sync point **B**. Similarly, if the error occurs in function **B**,
+the synchronization returns the exact error code, or else
 :cpp:enumerator:`mfxStatus:: MFX_ERR_ABORTED`. The same logic applies if the
-error occurs in oneVPL function **A**.
+error occurs in function **A**.

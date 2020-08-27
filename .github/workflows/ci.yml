@@ -13,6 +13,7 @@ jobs:
           DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
           python3 -m venv venv
           . venv/bin/activate
+          pip install --upgrade --quiet pip wheel
           pip install --upgrade --quiet -r requirements.txt
     - name: Build doc
       run: |
@@ -25,12 +26,20 @@ jobs:
       with:
           name: build
           path: build
-    - name: Publish to staging
+    - name: Publish to pre-production
       if: ${{ github.ref == 'refs/heads/publish'}}
       env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
           . venv/bin/activate
-          python scripts/oneapi.apy site
-          python scripts/oneapi.apy stage-publish
+          python scripts/oneapi.py pre-publish
+    - name: Publish main
+      if: ${{ github.ref == 'refs/heads/master' && github.repository == 'oneapi-src/oneAPI-spec'}}
+      env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+      run: |
+          . venv/bin/activate
+          python scripts/oneapi.py ci-publish
+

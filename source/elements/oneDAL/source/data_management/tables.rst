@@ -7,7 +7,7 @@ Tables
 ======
 
 This section describes the types related to the :txtref:`table` and
-:txtref:`metadata` concepts. |dal_short_name| defines the following types that
+:txtref:`table_metadata` concepts. |dal_short_name| defines the following types that
 implement these concepts:
 
 - The :code:`table` is a base class that implements the table concept and
@@ -32,7 +32,7 @@ Each implementation of :txtref:`table` concept shall:
 2. Be derived from the :code:`table` class. The behavior of this class can be
    extended, but cannot be weaken.
 
-3. Provide an implementation of the :txtref:`metadata` concept derived
+3. Provide an implementation of the :txtref:`table_metadata` concept derived
    from the :code:`table_meta` class.
 
 4. Be :term:`reference-counted <Reference-counted object>`. An assignment

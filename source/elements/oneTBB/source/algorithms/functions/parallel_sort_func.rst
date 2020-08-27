@@ -7,7 +7,7 @@ Function template that sorts a sequence.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_invoke.h>
+    // Defined in header <tbb/parallel_sort.h>
 
     namespace tbb {
 
@@ -17,9 +17,9 @@ Function template that sorts a sequence.
         void parallel_sort( RandomAccessIterator begin, RandomAccessIterator end, const Compare& comp );
 
         template<typename Container>
-        void parallel_sort( Container c );
+        void parallel_sort( Container& c );
         template<typename Container>
-        void parallel_sort( Container c, const Compare& comp );
+        void parallel_sort( Container& c, const Compare& comp );
 
     } //  namespace tbb
 
@@ -28,7 +28,9 @@ Requirements:
 * The ``RandomAccessIterator`` type must meet the `Random Access Iterators` requirements from
   [random.access.iterators]  and `Swappable` requirements from the [swappable.requirements] ISO C++ Standard section.
 * The ``Compare`` type must meet the `Compare` type requirements from the [alg.sorting] ISO C++ Standard section.
-* The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`.
+* The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>` 
+  which iterators must meet the `Random Access Iterators` requirements from [random.access.iterators]  
+  and `Swappable` requirements from the [swappable.requirements] ISO C++ Standard section.
 
 Sorts a sequence or a container. The sort is neither stable nor deterministic: relative
 ordering of elements with equal keys is not preserved and not guaranteed to repeat if the same

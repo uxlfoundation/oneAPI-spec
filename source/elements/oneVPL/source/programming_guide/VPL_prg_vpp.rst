@@ -4,7 +4,7 @@
 Video Processing Procedures
 ===========================
 
-The following example shows the pseudo code of the video processing procedure:
+The following pseudo code shows the video processing procedure:
 
 .. literalinclude:: ../snippets/prg_vpp.c
    :language: c++
@@ -19,7 +19,7 @@ Note the following key points about the example:
   must allocate two frame surface pools: one for the input and one for the output.
 - The video processing function :cpp:func:`MFXVideoVPP_RunFrameVPPAsync` is
   asynchronous. The application must use the :cpp:func:`MFXVideoCORE_SyncOperation`
-  function to synchronize to make the output result ready.
+  function to synchronize in order to make the output result ready.
 - The body of the video processing procedure covers the following three scenarios:
 
   - If the number of frames consumed at input is equal to the number of frames
@@ -70,7 +70,7 @@ for more details.
 
 oneVPL ensures that all filters necessary to convert the input format to the
 output format are included in the pipeline. oneVPL may skip some optional
-filters even if they are explicitly requested by the application, for example,
+filters even if they are explicitly requested by the application, for example
 due to limitations of the underlying hardware. To notify the application about
 skipped optional filters, oneVPL returns the :cpp:enumerator:`mfxStatus::MFX_WRN_FILTER_SKIPPED`
 warning. The application can retrieve the list of active filters by attaching
@@ -190,10 +190,10 @@ initialization, the application needs to attach the :cpp:struct:`mfxExtMVCSeqDes
 structure to the :cpp:struct:`mfxVideoParam` structure and call the
 :cpp:func:`MFXVideoVPP_Init` function. The function saves the view identifiers.
 During video processing, oneVPL processes each view individually. oneVPL refers
-to the FrameID field of the :cpp:struct:`mfxFrameInfo` structure to configure
+to the ``FrameID`` field of the :cpp:struct:`mfxFrameInfo` structure to configure
 each view according to its processing pipeline. If the video processing source
 frame is not the output from the oneVPL MVC decoder, then the application needs to
-fill the the FrameID field before calling the :cpp:func:`MFXVideoVPP_RunFrameVPPAsync`
+fill the the ``FrameID`` field before calling the :cpp:func:`MFXVideoVPP_RunFrameVPPAsync`
 function. This is shown in the following pseudo code:
 
 .. literalinclude:: ../snippets/prg_vpp.c

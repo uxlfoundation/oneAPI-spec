@@ -16,7 +16,7 @@ Emplacing elements
     Attempts to insert an element constructed in-place from ``args`` into the container.
 
     **Returns**: ``std::pair<iterator, bool>`` where ``iterator`` points to the inserted element
-    or to an existing element with equal key. Boolean value is ``true`` if insertion took place;,
+    or to an existing element with equal key. Boolean value is ``true`` if insertion took place;
     ``false``, otherwise.
 
     **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements

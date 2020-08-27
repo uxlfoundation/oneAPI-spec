@@ -11,7 +11,7 @@ External Memory Management
 --------------------------
 
 In the external memory model, the application must allocate sufficient memory for
-input and output parameters and buffers, and deallocate it when oneVPL functions
+input and output parameters and buffers and deallocate it when oneVPL functions
 complete their operations. During execution, the oneVPL functions use callback
 functions to the application to manage memory for video frames through the
 external allocator interface :cpp:struct:`mfxFrameAllocator`.
@@ -33,7 +33,7 @@ The external frame allocator can allocate different frame types:
 The external frame allocator responds only to frame allocation requests for the
 requested memory type and returns :cpp:enumerator:`mfxStatus::MFX_ERR_UNSUPPORTED`
 for all other types. The allocation request uses flags (part of the memory type
-field) to indicate which oneVPL class initiated the request, so the external
+field) to indicate which oneVPL class initiated the request so that the external
 frame allocator can respond accordingly.
 
 The following example shows a simple external frame allocator:
@@ -83,11 +83,11 @@ oneVPL API version 2.0 introduces :cpp:struct:`mfxFrameSurfaceInterface`. This
 interface is a set of callback functions to manage the lifetime of allocated
 surfaces, get access to pixel data, and obtain native handles and device
 abstractions (if suitable). Instead of directly accessing
-:cpp:struct:`mfxFrameSurface1` structure members, it's recommended to either use
-the :cpp:struct:`mfxFrameSurfaceInterface`, if present, or call external
-allocator callback functions, if set.
+:cpp:struct:`mfxFrameSurface1` structure members, it's recommended to use
+the :cpp:struct:`mfxFrameSurfaceInterface` if present or call external
+allocator callback functions if set.
 
-The following example shows the usage of :cpp:struct:`mfxFrameSurfaceInterface`
+The following pseudo code shows the usage of :cpp:struct:`mfxFrameSurfaceInterface`
 for memory sharing:
 
 .. literalinclude:: ../snippets/prg_mem.c
