@@ -14,8 +14,8 @@ Exception classification
 Exception classification in oneDAL is aligned with C++ Standard Library
 classification. oneDAL shall introduce abstract classes that define the base
 class in the hierarchy of exception classes. Concrete exception classes are
-derived from respective C++ Standard Library exception classes. oneDAL library
-shall throw exceptions represented with concrete classes.
+derived from the respective C++ Standard Library exception classes. oneDAL
+library shall throw exceptions represented with concrete classes.
 
 In the hierarchy of oneDAL exceptions, ``oneapi::dal::exception`` is the base abstract
 class that all other exception classes are derived from.
@@ -32,7 +32,7 @@ class that all other exception classes are derived from.
      - Description
      - Abstract
    * - ``oneapi::dal::exception``
-     - Base class of oneDAL exception hierarchy.
+     - The base class of oneDAL exception hierarchy.
      - Yes
 
 All oneDAL exceptions shall be divided into three groups:
@@ -109,11 +109,13 @@ shall be divided into the following groups:
      - Reports situations when a device or data is not available.
      - No
 
-If an error occurs during function execution after preconditions and invariants
-were checked, it is reported via ``ondeal::runtime_error`` inheritors. oneDAL
-distinguishes errors happened during interaction with OS facilities and errors
-of destination type's range in internal computations, while other errors are
-reported via ``oneapi::dal::internal_error``.
+Errors occured during the execution of oneDAL functionality are represented with
+``oneapi::dal::runtime_error``. Two main groups of errors are distinguished:
+
+- destination type range errors
+- OS facilities interaction errors
+
+All other errors are reported via ``oneapi::dal::internal_error``.
 
 ::
 
