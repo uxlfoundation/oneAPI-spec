@@ -13,14 +13,30 @@ This section describes the types related to the :txtref:`data-source` concept.
 CSV data source
 ---------------
 Class ``csv::data_source`` is an api for accessing the data source represented as a :capterm:`csv file <CSV file>`.
+CSV data source can be used in :expr:`read` operation to extract data in text format from the given input file,
+process it using provided parameters (such as delimiter and parsing options), transform it into numerical representation,
+and store it as an in-memory :txtref:`dataset` of a chosen type.
 
-CSV data source requires input file name to be set in the constructor, while other attributes can be initialized with default values.
+Supported type of in-memory dataset for :expr:`read` operation with CSV data source is :txtref:`table`.
+
+CSV data source requires input file name to be set in the constructor, while other parameters can be initialized with default values.
+
+-------------
+Usage example
+-------------
+::
+
+   const auto data_source = onedal::csv::data_source("data.csv", ',');
+
+   const auto table = ondedal::read<onedal::table>(data_source);
+
 
 ---------------------
-Programming interface
+Programming Interface
 ---------------------
-
-The following declarations defined in ``common.hpp`` within ``oneapi::dal::csv`` namespace.
+All type and function in this section shall be declared in the
+``oneapi::dal::csv`` namespace and be available via inclusion of the
+``oneapi/dal/io/csv.hpp`` header file.
 
 ::
 
@@ -34,8 +50,13 @@ The following declarations defined in ``common.hpp`` within ``oneapi::dal::csv``
       static constexpr char default_delimiter = ',';
       static constexpr read_options default_read_options = read_options::default;
 
-      data_source(const char *file_name, char delimiter = default_delimiter, read_options opts = default_read_options);
-      data_source(const std::string &file_name, char delimiter = default_delimiter, read_options opts = default_read_options);
+      data_source(const char *file_name,
+                  char delimiter = default_delimiter,
+                  read_options opts = default_read_options);
+
+      data_source(const std::string &file_name,
+                  char delimiter = default_delimiter,
+                  read_options opts = default_read_options);
 
       std::string get_file_name() const;
       char get_delimiter() const;
@@ -47,11 +68,11 @@ The following declarations defined in ``common.hpp`` within ``oneapi::dal::csv``
 
    .. function:: data_source(const char *file_name, char delimiter = default_delimiter, read_options opts = default_read_options)
 
-      Creates new instance of a csv data source with the given :expr:`file_name`, :expr:`delimiter` and read options :expr`opts` flag.
+      Creates new instance of a csv data source with the given :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
 
    .. function:: data_source(const std::string &file_name, char delimiter = default_delimiter, read_options opts = default_read_options);
 
-      Creates new instance of a csv data source with the given :expr:`file_name`, :expr:`delimiter` and read options :expr`opts` flag.
+      Creates new instance of a csv data source with the given :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
 
    .. member:: std::string file_name = ""
 
@@ -69,20 +90,12 @@ The following declarations defined in ``common.hpp`` within ``oneapi::dal::csv``
 
    .. member:: read_options options = read_options::default
 
-      Value that stores options that should be applied for input file processing.
+      Value that stores options that should be applied for input file processing. \
       ``parse_header`` option indicates whether or not first line in the input file should be processed
       as a header record which contains information about features and should not be included in the dataset.
 
       Getter
          | ``read_options get_read_options() const``
-
-Usage example
--------------
-::
-
-   const auto data_source = onedal::csv::data_source("data.csv", ',');
-
-   const auto table = ondedal::read<onedal::table>(data_source);
 
 
 Reading :expr:`onedal::read<onedal::table>(...)`
@@ -91,12 +104,10 @@ Reading :expr:`onedal::read<onedal::table>(...)`
 Result
 ~~~~~~
 
-Result of a read operation with a specified :code:`onedal::table` template parameter is a :txtref:`table`.
+Result of a :expr:`read` operation with a specified :code:`onedal::table` template parameter is a :txtref:`table`.
 
-Operation semantics
-~~~~~~~~~~~~~~~~~~~
-
-Supported type of data objects (referred as Object template parameter) for :expr:`read` operation is :expr:`Object = onedal::table`.
+Operation
+~~~~~~~~~
 
 .. namespace:: onedal
 .. function:: template <typename Object, typename DataSource> \
