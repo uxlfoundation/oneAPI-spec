@@ -25,12 +25,19 @@ jobs:
       with:
           name: build
           path: build
-    - name: Publish to staging
+    - name: Publish to pre-production
       if: ${{ github.ref == 'refs/heads/publish'}}
       env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
           . venv/bin/activate
-          python scripts/oneapi.apy site
-          python scripts/oneapi.apy stage-publish
+          python scripts/oneapi.apy pre-publish
+    - name: Publish main
+      if: ${{ github.ref == 'refs/heads/master' && secrets.AWS_ACCESS_KEY_ID}}
+      env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+      run: |
+          . venv/bin/activate
+          python scripts/oneapi.apy ci-publish

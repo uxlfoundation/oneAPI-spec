@@ -228,33 +228,56 @@ def site_zip():
             for file in files:
                 site_zip.write(join(r, file))
     
+# content served on buckets
+s3_prod_root = 's3://oneapi.com/spec'
+s3_pre_root = 's3://pre.oneapi.com/spec'
+
+# served uncached
+cloudfront_prod_root = 'https://d9mamou20v67v.cloudfront.net'
+cloudfront_pre_root = 'https://d1c71xsfq9wxv8.cloudfront.net'
+
+# cached by akamai
+akamai_prod_root = 'https://spec.oneapi.com'
+akamai_pre_root = 'https://spec.pre.oneapi.com'
+
+pdf_name = 'oneAPI-spec.pdf'
+
 @action
 def prod_publish(root, target=None):
-    # sync staging to prod
-    shell("aws s3 sync --only-show-errors s3://pre.oneapi.com/spec s3://oneapi.com/spec --exclude 'spec/exclude/*'")
-    log('published at http://spec.oneapi.com/')
+    # sync versions directory from pre to prod
+    shell('aws s3 sync --only-show-errors --delete %s/versions/latest %s/versions/latest'
+          % (s3_pre_root, s3_prod_root))
+    shell('aws s3 sync --only-show-errors --delete %s/versions/latest %s/versions/%s'
+          % (s3_prod_root, s3_prod_root, oneapi_spec_version))
+    log('published at %s and %s'
+        % (akamai_prod_root, cloudfront_prod_root))
     
+def pre_publish_version(version):
+    # publish html and pdf of build to pre
+    html = join('build','html')
+    pdf = join('build','latex',pdf_name)
+    shell('aws s3 sync --only-show-errors --delete %s %s/%s'
+          % (html, s3_pre_root, version))
+    shell('aws s3 cp %s %s/%s/%s'
+          % (pdf, s3_pre_root, version, pdf_name))
+
 @action
-def stage_publish(root, target=None):
+def ci_publish(root, target=None):
     root_only(root)
-    local_top = 'site'
-    local_versions = join(local_top, 'versions')
-    local_versions_x = join(local_versions, oneapi_spec_version)
-    local_versions_latest = join(local_versions, 'latest')
-    s3_top = 's3://pre.oneapi.com/spec'
-    s3_versions = '%s/versions' % s3_top
-    s3_versions_x = '%s/%s' % (s3_versions, oneapi_spec_version)
-    s3_versions_latest = '%s/latest' % s3_versions
+    path = 'ci/main'
+    pre_publish_version(path)
+    log('published %s/%s/index.html and %s/%s/%s'
+        % (cloudfront_pre_root, path, cloudfront_pre_root, path, pdf_name))
+        
 
-    # Sync the newly created version directory
-    shell(('aws s3 sync --only-show-errors --delete'
-           ' %s %s')
-          % (local_versions_x, s3_versions_x))
-    shell(('aws s3 sync --only-show-errors --delete'
-           ' %s %s')
-          % (s3_versions_x, s3_versions_latest))
-
-    log('published at http://spec.pre.oneapi.com')
+@action
+def pre_publish(root, target=None):
+    root_only(root)
+    pre_publish_version('versions/%s' % oneapi_spec_version)
+    shell('aws s3 sync --only-show-errors --delete %s/versions/%s %s/versions/latest'
+          % (s3_pre_root, oneapi_spec_version, s3_pre_root))
+    log('published %s/versions/latest/index.html and %s/versions/latest/%s'
+        % (cloudfront_pre_root, cloudfront_pre_root, pdf_name))
 
     
 @action
@@ -264,23 +287,6 @@ def spec_venv(root, target=None):
     pip = 'spec-venv\Scripts\pip' if platform.system() == 'Windows' else 'spec-venv/bin/pip'
     shell('%s install --quiet -r requirements.txt' % pip)
     
-
-@action
-def site(root, target=None):
-    root_only(root)
-
-    # Build the site. It will have everything but the older versions
-    site = 'site'
-    versions = join(site,'versions')
-    versions_x = join(versions, oneapi_spec_version)
-    pdf = join('build','latex','oneAPI-spec.pdf')
-    html = join('build','html')
-    rm(site)
-    makedirs(versions)
-    copytree(html, versions_x)
-    copy(pdf, versions_x)
-    copytree(versions_x, join(versions, 'latest'))
-    copytree('site-root','site', dirs_exist_ok = True)
 
 def remove_elements(l, elements):
     for e in elements:
@@ -304,11 +310,11 @@ commands = {'clean': clean,
             'latexpdf': build,
             'spelling': build,
             'prep': prep,
+            'pre-publish': pre_publish,
             'prod-publish': prod_publish,
-            'site': site,
+            'ci-publish': ci_publish,
             'sort-words': sort_words,
-            'spec-venv': spec_venv,
-            'stage-publish': stage_publish}
+            'spec-venv': spec_venv}
     
 dirs = ['oneCCL',
         'oneDAL',
