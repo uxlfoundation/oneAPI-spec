@@ -40,5 +40,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
       run: |
           . venv/bin/activate
-          python scripts/oneapi.apy ci-publish
+          python scripts/oneapi.py ci-publish
 
