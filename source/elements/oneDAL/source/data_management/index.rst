@@ -144,8 +144,9 @@ processing stages for the following:
   implementations shall be :capterm:`immutable <immutability>`.
 
 .. warning::
-  A table can represent not only a dataset, but also a matrix, a vector (if
-  number of columns :math:`p = 1`), and even a single value (:math:`n = 1, p = 1`).
+  A table can represent not only a dataset, but also a matrix, a vector (if the
+  number of columns :math:`p = 1`), and even a single value (:math:`n = 1, p =
+  1`).
 
   When a table represents a dataset, its rows represent observations in the
   dataset, and its columns represent features, according to the
@@ -163,7 +164,7 @@ the data <data format>`:
   data>` array of bytes, as a :capterm:`heterogeneous <heterogeneous data>` list
   of arrays of different :capterm:`data types <data type>`, in a
   compressed-sparse-row format. The number of bytes needed to store the data
-  differ from the number of elements :math:`n \times p` within a table.
+  differs from the number of elements :math:`n \times p` within a table.
 
 For details, see :txtref:`tables` section.
 
@@ -181,8 +182,8 @@ table:
    :capterm:`nominal <Nominal feature>`, :capterm:`ordinal <Ordinal feature>`,
    :capterm:`interval <Interval feature>`, or :capterm:`ratio <Ratio feature>`.
    Information about logical types is mostly relevant in cases when table
-   columns represent dataset features, but is also applicable in other cases as
-   well, for example, when a table represents a matrix.
+   columns represent dataset features, but it is also applicable in other cases
+   as well, for example, when a table represents a matrix.
 
 Only the properties of data that do not affect table concept definition shall be
 the part of metadata concept.
@@ -246,9 +247,9 @@ of these concepts, which are highlighted by colors:
 To perform computations on a dataset, one shall create a :txtref:`table` object
 first. It can be done either using a :txtref:`data-source` or directly from
 user-defined memory. The diagram shows the creation of a :txtref:`table` object
-`t` is created from the data provided by user (not shown on a diagram). During a
-table creation, an object `tm` of table metadata is created and its content is
-deduced from the incoming data.
+`t` from the data provided by user (not shown on a diagram). During a table
+creation, an object `tm` of table metadata is created and its content is deduced
+from the incoming data.
 
 Once a table object is created, the data inside it can be accessed by its own
 interface or with a help of a read-only accessor as shown on the diagram. The
