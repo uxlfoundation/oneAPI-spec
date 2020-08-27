@@ -17,15 +17,20 @@ algorithm.
 .. _xgboost_params: https://xgboost.readthedocs.io/en/latest/parameter.html
 
 Besides meta-parameters, machine learning algorithms may have different
-*stages*, such as :term:`training <Training>` and :term:`inference <Inference>`.
-Moreover, the stages of an algorithm may be implemented in a variety of
-*computational methods*. For instance, a linear regression model could be
-trained by solving a system of linear equations [Friedman17]_ or by applying an
-iterative optimization solver directly to the empirical risk function
-[Zhang04]_. From the other hand, linear machine learning methods are not limited
-by regression problems.
+*stages*, such as :capterm:`training` and :capterm:`inference`. Moreover, the
+stages of an algorithm may be implemented in a variety of *computational
+methods*. For instance, a linear regression model could be trained by solving a
+system of linear equations [Friedman17]_ or by applying an iterative
+optimization solver directly to the empirical risk function [Zhang04]_.
 
-
+The same machine learning techniques are often applied for solving problems of
+different types. In the example with linear regression, the same mathematical
+model used for solving :capterm:`regression` problem is generalized for solving
+a :capterm:`classification` problem, e.g., logistic regression. Such techniques
+differ only in few problem-specific aspects, but share the same subset of
+meta-parameters and have a common computational flow. oneDAL does not
+distinguish these techniques into different algorithms, instead, from oneDAL
+perspective, the same algorithm may perform different *computational tasks*.
 
 From computational perspective, algorithm implementation may rely on different
 *floating-point types*, such as ``float``, ``double`` or ``bfloat16``. Having a
@@ -43,8 +48,8 @@ Descriptors
 -----------
 
 **A descriptor** is an object that represents an algorithm including all its
-meta-parameters, dependencies on other algorithms, floating-point types, and
-computational methods. A descriptor serves as:
+meta-parameters, dependencies on other algorithms, floating-point types,
+computational methods and tasks. A descriptor serves as:
 
 - A dispatching mechanism for `operations`_. Based on a descriptor
   type, an operation executes a particular algorithm implementation.
@@ -60,7 +65,7 @@ descriptor is defined (for more details, see :txtref:`Namespaces
 <common_namespaces>`). Descriptor, in its turn, defines the following:
 
 - **Template parameters.** A descriptor is allowed to have any number of template
-  parameters, but shall support at least two:
+  parameters, but shall support at least three:
 
    + ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
      uses for computations. This parameter is defined first and has the
@@ -139,7 +144,6 @@ the following requirements:
 
 Floating-point Types
 --------------------
-
 It is required for each algorithm to support at least one implementation-defined
 floating-point type. Other floating-point types are optional, for example ``float``,
 ``double``, ``float16``, and ``bfloat16``. It is up to a specific oneDAL
@@ -161,8 +165,8 @@ Computational Methods
 ---------------------
 The supported computational methods are declared within the
 ``%ALGORITHM%::method`` namespace using tag-types. Algorithm shall support at
-least one computational method and declare the ``by_default`` type alias that
-refers to one of the computational methods as shown in the example below.
+least one method and declare the ``by_default`` type alias that refers to one of
+the methods as shown in the example below.
 
 .. code-block:: cpp
 
@@ -179,8 +183,13 @@ refers to one of the computational methods as shown in the example below.
 
 Computational Tasks
 -------------------
+The supported computational tasks are declared within the ``%ALGORITHM%::task``
+namespace using tag-types. Algorithm shall support at least one task and declare
+the ``by_default`` type alias that refers to one of the tasks as shown in the
+example below.
 
-
+If algorithm assumes separation on ``classification`` and ``regression`` tasks,
+the default task shall be ``classification``.
 
 .. code-block:: cpp
 
