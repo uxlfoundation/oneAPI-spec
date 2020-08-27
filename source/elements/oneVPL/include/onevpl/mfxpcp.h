@@ -13,7 +13,6 @@ extern "C"
 {
 #endif /* __cplusplus */
 
-#if MFX_VERSION >= 1030
 /*! The Protected enumerator describes the protection schemes. */
 enum {
     MFX_PROTECTION_CENC_WV_CLASSIC      = 0x0004, /*!< The protection scheme is based on the Widevine* DRM from Google*. */
@@ -28,7 +27,7 @@ enum {
 
 MFX_PACK_BEGIN_USUAL_STRUCT()
 /*!
-   This structure is used to pass decryption status report index for Common Encryption usage model. The application can
+   Used to pass the decryption status report index for the Common Encryption usage model. The application can
    attach this extended buffer to the mfxBitstream structure at runtime.
 */
 typedef struct _mfxExtCencParam{
@@ -38,7 +37,6 @@ typedef struct _mfxExtCencParam{
     mfxU32 reserved[15];
 } mfxExtCencParam;
 MFX_PACK_END()
-#endif
 
 #ifdef __cplusplus
 } // extern "C"

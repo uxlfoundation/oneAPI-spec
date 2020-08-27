@@ -3,8 +3,8 @@ oneVPL API Versioning
 ---------------------
 
 oneVPL is the successor to |msdk_full_name|. oneVPL API versioning starts from
-2.0. There is a correspondent version of |msdk_full_name| API which is used as a basis
-for oneVPL and defined as ``MFX_LEGACY_VERSION`` macro.
+2.0. There is a correspondent version of |msdk_full_name| API which is used as a
+basis for oneVPL and defined as the ``MFX_LEGACY_VERSION`` macro.
 
 Experimental APIs in oneVPL are protected with the following macro::
 

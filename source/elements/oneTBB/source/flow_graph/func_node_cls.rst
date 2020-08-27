@@ -34,14 +34,16 @@ A node that executes a user-provided body on incoming messages.
 
 Requirements:
 
-* The ``Input`` and ``Output`` types must meet the `CopyConstructible` requirements from
-  [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
+* The ``Input`` type must meet the `DefaultConstructible` requirements from
+  [defaultconstructible] and the `CopyConstructible` requirements from
+  [copyconstructible] ISO C++ Standard sections.
+* The ``Output`` type must meet the `CopyConstructible` requirements from
+  [copyconstructible] ISO C++ Standard section.
 * The type ``Policy`` may be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`FunctionNodeBody requirements <../named_requirements/flow_graph/function_node_body>`.
 
 ``function_node`` has a user-settable concurrency limit. It can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
-The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and
- :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
+The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
 
 Messages that cannot be immediately processed due to concurrency limits are handled according to
 the `Policy` template argument.
@@ -101,6 +103,10 @@ construction of ``src`` do not affect the body of the new ``function_node.``
 .. code:: cpp
 
     bool try_put( const Input &v )
+
+If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
+Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
+it.
 
 **Returns:** ``true`` if the input was accepted; and ``false``, otherwise.
 

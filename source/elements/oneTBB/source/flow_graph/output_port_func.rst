@@ -4,7 +4,7 @@ output_port
 **[flow_graph.output_port]**
 
 A template function that returns a reference to a specific output port of a given
-``join_node``, ``indexer_node``, or ``composite_node``.
+``split_node``, ``indexer_node``, or ``composite_node``.
 
 .. code:: cpp
 

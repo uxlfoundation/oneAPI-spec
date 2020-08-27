@@ -17,7 +17,7 @@ in the incoming tuple.
         class split_node : public graph_node, public receiver<TupleType> {
         public:
             explicit split_node( graph &g );
-            split_node( const split_node &other);
+            split_node( const split_node &other );
             ~split_node();
 
             bool try_put( const TupleType &v );
@@ -31,9 +31,7 @@ in the incoming tuple.
 
 Requirements:
 
-* The type ``TupleType`` must be an instantiation of ``std::tuple``. Each type that the tuple stores
-  must meet the `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` 
-  requirements from [copyassignable] ISO C++ Standard sections.
+* The type ``TupleType`` must be an instantiation of ``std::tuple``.
 
 ``split_node`` is a ``receiver<TupleType>`` and has a tuple of ``sender`` output ports. Each of output
 ports is specified by corresponding tuple element type. This node receives a tuple at its single input
@@ -46,11 +44,13 @@ port and generates a message from each element of the tuple, passing each to the
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::split_node
+
 .. cpp:function:: explicit split_node( graph &g )
 
   Constructs a ``split_node`` registered with graph ``g``.
 
-.. cpp:function:: split_node( const split_node &other)
+.. cpp:function:: split_node( const split_node &other )
 
   Constructs a ``split_node`` that has the same initial state that
   ``other`` had when it was constructed. The ``split_node`` that is

@@ -10,6 +10,7 @@ nodes:
 * :doc:`function_node <func_node_cls>`
 * :doc:`multifunction_node <multifunc_node_cls>`
 * :doc:`input_node <input_node_cls>`
+* :doc:`async_node <async_node_cls>`
 
 .. code:: cpp
 

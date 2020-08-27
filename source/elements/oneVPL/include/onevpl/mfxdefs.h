@@ -31,8 +31,8 @@
   #define MFX_VERSION_MINOR ((MFX_VERSION) % 1000)
 #endif
 
-/*! This is correspondent version of the Intel(r) Media SDK legacy API that is used as a basis 
-   for the current oneAPI Video Processing Library (oneVPL) API. */
+/*! The corresponding version of the Intel(r) Media SDK legacy API that is used as a basis
+   for the current API. */
 
 #define MFX_LEGACY_VERSION 1034
 
@@ -58,7 +58,7 @@ extern "C"
 /* The general rule for alignment is following:
    - structures with pointers have 4/8 bytes alignment on 32/64 bit systems
    - structures with fields of type mfxU64/mfxF64 (unsigned long long / double)
-     have alignment 8 bytes on 64 bit and 32 bit Windows*, on Linux* alignment is 4 bytes
+     have alignment 8 bytes on 64 bit and 32 bit Windows, on Linux alignment is 4 bytes
    - all the rest structures are 4 bytes aligned
    - there are several exceptions: some structs which had 4-byte alignment were extended
      with pointer / long type fields; such structs have 4-byte alignment to keep binary
@@ -117,22 +117,23 @@ typedef mfxHDL              mfxMemId;      /*!< Memory ID type. */
 typedef void*               mfxThreadTask; /*!< Thread task type. */
 typedef char                mfxChar;       /*!< UTF-8 byte. */
 
-#if (MFX_VERSION >= 1034)
 /* MFX structures version info */
 MFX_PACK_BEGIN_USUAL_STRUCT()
-/*! Introduce field Version for any structures.
-Minor number is incremented when reserved fields are used,
-major number is incremented when size of structure is increased.
+/*! Introduce the field Version for any structure.
 Assumed that any structure changes are backward binary compatible.
- mfxStructVersion starts from {1,0} for any new API structures, if mfxStructVersion is
+ mfxStructVersion starts from {1,0} for any new API structures. If mfxStructVersion is
  added to the existent legacy structure (replacing reserved fields) it starts from {1, 1}.
 */
 typedef union {
     /*! Structure with Major and Minor fields.  */
     /*! @struct Anonymous */
     struct {
+      /*! @{
+      @name Major and Minor fields
+      Anonymous structure with Major and Minor fields. Minor number is incremented when reserved fields are used. Major number is incremented when the size of structure is increased. */
         mfxU8  Minor; /*!< Minor number of the correspondent structure. */
         mfxU8  Major; /*!< Major number of the correspondent structure. */
+      /*! @} */
     };
     mfxU16  Version;   /*!< Structure version number */
 } mfxStructVersion;
@@ -140,10 +141,6 @@ MFX_PACK_END()
 
 #define MFX_STRUCT_VERSION(MAJOR, MINOR) (256*(MAJOR) + (MINOR))
 
-
-#endif
-
-#if (MFX_VERSION >= 2000)
 
 #define MFX_VARIANT_VERSION MFX_STRUCT_VERSION(1, 0)
 
@@ -186,7 +183,7 @@ typedef struct {
 MFX_PACK_END()
 
 MFX_PACK_BEGIN_USUAL_STRUCT()
-/*! This structure represents a range of unsigned values */
+/*! Represents a range of unsigned values. */
 typedef struct {
     mfxU32 Min;  /*!< Minimal value of the range. */
     mfxU32 Max;  /*!< Maximal value of the range. */
@@ -194,15 +191,14 @@ typedef struct {
 } mfxRange32U;
 MFX_PACK_END()
 
-#endif
 
-/*! Thus structure represents a pair of numbers of type mfxI16. */
+/*! Represents a pair of numbers of type mfxI16. */
 typedef struct {
     mfxI16  x; /*!< First number. */
     mfxI16  y; /*!< Second number. */
 } mfxI16Pair;
 
-/*! Thus structure represents pair of handles of type mfxHDL. */
+/*! Represents pair of handles of type mfxHDL. */
 typedef struct {
     mfxHDL first;  /*!< First handle. */
     mfxHDL second; /*!< Second handle. */
@@ -212,7 +208,7 @@ typedef struct {
 /*********************************************************************************\
 Error message
 \*********************************************************************************/
-/*! @enum mfxStatus Itemizes status codes returned by SDK functions. */
+/*! @enum mfxStatus Itemizes status codes returned by API functions. */
 typedef enum
 {
     /* no error */
@@ -240,11 +236,9 @@ typedef enum
     MFX_ERR_MORE_BITSTREAM              = -18,  /*!< Expect more bitstream buffers at output. */
     MFX_ERR_GPU_HANG                    = -21,  /*!< Device operation failure caused by GPU hang. */
     MFX_ERR_REALLOC_SURFACE             = -22,  /*!< Bigger output surface required. */
-#if MFX_VERSION >= 2000
     MFX_ERR_RESOURCE_MAPPED             = -23,  /*!< Write access is already acquired and user requested
                                                    another write access, or read access with MFX_MEMORY_NO_WAIT flag. */
     MFX_ERR_NOT_IMPLEMENTED             = -24,   /*!< Feature or function not implemented. */
-#endif
     /* warnings >0 */
     MFX_WRN_IN_EXECUTION                = 1,    /*!< The previous asynchronous operation is in execution. */
     MFX_WRN_DEVICE_BUSY                 = 2,    /*!< The hardware acceleration device is busy. */
@@ -254,10 +248,8 @@ typedef enum
     MFX_WRN_VALUE_NOT_CHANGED           = 6,    /*!< The value is saturated based on its valid range. */
     MFX_WRN_OUT_OF_RANGE                = 7,    /*!< The value is out of valid range. */
     MFX_WRN_FILTER_SKIPPED              = 10,   /*!< One of requested filters has been skipped. */
-#if MFX_VERSION >= 1031
     /* low-delay partial output */
     MFX_ERR_NONE_PARTIAL_OUTPUT         = 12,   /*!< Frame is not ready, but bitstream contains partial output. */
-#endif
 
     /* threading statuses */
     MFX_TASK_DONE = MFX_ERR_NONE,               /*!< Task has been completed. */
@@ -270,7 +262,7 @@ typedef enum
 } mfxStatus;
 
 
-// Application 
+// Application
 #if defined(MFX_DISPATCHER_EXPOSED_PREFIX)
 
 #include "mfxdispatcherprefixedfunctions.h"

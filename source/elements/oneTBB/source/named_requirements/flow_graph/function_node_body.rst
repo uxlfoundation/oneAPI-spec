@@ -9,6 +9,8 @@ A type `Body` satisfies `FunctionNodeBody` if it meets the following requirement
 
 **FunctionNodeBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: FunctionNodeBody
+   
 .. cpp:function:: Body::Body( const Body& )
 
     Copy constructor.
@@ -16,10 +18,6 @@ A type `Body` satisfies `FunctionNodeBody` if it meets the following requirement
 .. cpp:function:: Body::~Body()
 
     Destructor.
-
-.. cpp:function:: void operator=( const B& )
-
-    Assignment.
 
 .. cpp:function:: Output Body::operator()( const Input& v )
 
@@ -29,4 +27,3 @@ A type `Body` satisfies `FunctionNodeBody` if it meets the following requirement
 
     Performs operation on ``v`` and returns a value of type ``Output``.
   
-

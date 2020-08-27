@@ -37,8 +37,8 @@ one or more messages that are broadcast to successors.
 
 Requirements:
 
-* The ``Input`` and ``Output`` types must meet the `CopyConstructible` requirements from
-  [copyconstructible] and `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
+* The ``Input`` type must meet the `DefaultConstructible` requirements from [defaultconstructible]
+  and the `CopyConstructible` requirements from [copyconstructible] ISO C++ Standard sections.
 * The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`MultifunctionNodeBody requirements <../named_requirements/flow_graph/multifunction_node_body>`.
 
@@ -115,8 +115,11 @@ construction of ``other`` do not affect the body of the new
 
     bool try_put( const input_type &v )
 
-If concurrency limit allows, executes the user-provided body on incoming messages
-and returns ``true``. Otherwise, executes nothing and returns ``false``.
+If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
+Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
+it.
+
+**Returns:** ``true`` if the input was accepted; ``false``, otherwise.
 
 ----------------------------------------------------------------
 

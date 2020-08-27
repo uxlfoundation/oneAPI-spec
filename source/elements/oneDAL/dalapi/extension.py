@@ -219,7 +219,7 @@ class Context(object):
             self.app,
             project_dir,
             'doxygen/xml',
-            'include/onedal'
+            'include/oneapi/dal'
         )
 
     @property
