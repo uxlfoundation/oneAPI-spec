@@ -6,38 +6,43 @@ Mandatory APIs and Functions
 Disclaimer
 ----------
 
-The specification implementer may implement any subset of the oneVPL specification.
-The specification makes no claim that that any codec, encoder, decoder, or VPP
-filter, or their underlying features, are mandatory for the implementation.
-The oneVPL API is designed such that the implementation user has several options
-to discover implementation capabilities:
+Developers can implement any subset of the oneVPL API.
+The specification makes no claim about what encoder, decoder, VPP
+filter, or any other underlying features are mandatory for the implementation.
+The oneVPL API is designed in the way that users have several options
+to discover capabilities exposed by the implementation:
 
-#. Before session creation, the user can get implementation capabilities by using
-   the :cpp:func:`MFXEnumImplementations` function to discover supported
-   encoders, decoders, or VPP filters with their supported color format and
-   memory types.
-#. Once the session is created, the user can use **Query** functions to obtain
+#. Before session creation, users can get list of supported encoders, decoders, VPP filters, 
+   corespondent color formats, and memory types with help of the :cpp:func:`MFXEnumImplementations` 
+   function.
+#. Once the session is created, users can call **Query** functions to obtain
    low level implementation capabilities.
 
--------------------
-Mandatory Functions
--------------------
+.. attention:: The legacy |msdk_full_name| implementation does not support the first approach to obtain capabilities.
 
-The :ref:`Exported Functions/API Version table <export-func-version-table>` shows
-the list of functions that must be exposed by any implementation, with the
-corresponding API version. Implementation of all listed functions is mandatory.
-The majority of the functions can return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT_IMPLEMENTED`.
+------------------
+Exported Functions
+------------------
 
-.. _export-func-version-table:
+The :ref:`Exported Functions table <export-func-version-table-2x>` lists all
+functions that must be exposed by any |vpl_full_name| implementation.
+The realization of all listed functions is mandatory; most functions may return
+:cpp:enumerator:`mfxStatus::MFX_ERR_NOT_IMPLEMENTED`.
 
-.. list-table:: Exported Functions/API Version
+.. note:: Functions :cpp:func:`MFXInit` and :cpp:func:`MFXInitEx` are not required to be
+          exported.
+
+See `Mandatory APIs`_ for details about which functions and in which conditions
+must not return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT_IMPLEMENTED`.
+
+.. _export-func-version-table-2x:
+
+.. list-table:: Exported Functions
    :header-rows: 1
    :widths: 70 30
 
    * - **Function**
      - **API Version**
-   * - :cpp:func:`MFXInit`
-     - 1.0
    * - :cpp:func:`MFXClose`
      - 1.0
    * - :cpp:func:`MFXQueryIMPL`
@@ -116,8 +121,6 @@ The majority of the functions can return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT
      - 1.0
    * - :cpp:func:`MFXVideoVPP_RunFrameVPPAsync`
      - 1.0
-   * - :cpp:func:`MFXInitEx`
-     - 1.14
    * - :cpp:func:`MFXVideoCORE_QueryPlatform`
      - 1.19
    * - :cpp:func:`MFXMemory_GetSurfaceForVPP`
@@ -130,13 +133,15 @@ The majority of the functions can return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT
      - 2.0
    * - :cpp:func:`MFXReleaseImplDescription`
      - 2.0
-
+   * - :cpp:func:`MFXInitialize`
+     - 2.0
 
 --------------
 Mandatory APIs
 --------------
 
-Each implementation must implement the APIs listed below.
+All implementations must implement the APIs listed in the
+:ref:`Mandatory APIs table <mandatory-apis-table>`:
 
 .. _mandatory-apis-table:
 
@@ -146,33 +151,71 @@ Each implementation must implement the APIs listed below.
 
    * - **Functions**
      - **Description**
-   * - | :cpp:func:`MFXInitEx`
+   * - | :cpp:func:`MFXInitialize`
        | :cpp:func:`MFXClose`
-     - Functions required for the dispatcher to create session.
+     - Required functions for the dispatcher to create a session.
    * - | :cpp:func:`MFXQueryImplsDescription`
        | :cpp:func:`MFXReleaseImplDescription`
-     - Functions required for the dispatcher to return implementation capabilities.
+     - Required functions for the dispatcher to return implementation capabilities.
+   * - :cpp:func:`MFXVideoCORE_SyncOperation`
+     - Required function for synchronization of asynchronous operations.
+
+
+If the implementation implements any encoder, decoder, or VPP filter, it must
+implement the corresponding mandatory APIs, as described in the
+:ref:`Mandatory Encode <mandatory-enc-apis-table>`, :ref:`Decode <mandatory-dec-apis-table>` and
+:ref:`VPP <mandatory-vpp-apis-table>` APIs tables:
+
+.. _mandatory-enc-apis-table:
+
+.. list-table:: Mandatory Encode APIs
+   :header-rows: 1
+   :widths: 50 50
+
+   * - **Functions**
+     - **Description**
    * - | :cpp:func:`MFXVideoENCODE_Init`
        | :cpp:func:`MFXVideoENCODE_Close`
        | :cpp:func:`MFXVideoENCODE_Query`
        | :cpp:func:`MFXVideoENCODE_EncodeFrameAsync`
-     - Encoder functions, required if the implementation implements any encoder.
+     - Required functions if the implementation implements any encoder.
+
+.. _mandatory-dec-apis-table:
+
+.. list-table:: Mandatory Decode APIs
+   :header-rows: 1
+   :widths: 50 50
+
+   * - **Functions**
+     - **Description**
    * - | :cpp:func:`MFXVideoDECODE_Init`
        | :cpp:func:`MFXVideoDECODE_Close`
        | :cpp:func:`MFXVideoDECODE_Query`
        | :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`
-     - Decoder functions, required if the implementation implements any decoder.
+     - Required functions if the implementation implements any decoder.
+
+.. _mandatory-vpp-apis-table:
+
+.. list-table:: Mandatory VPP APIs
+   :header-rows: 1
+   :widths: 50 50
+
+   * - **Functions**
+     - **Description**
    * - | :cpp:func:`MFXVideoVPP_Init`
        | :cpp:func:`MFXVideoVPP_Close`
        | :cpp:func:`MFXVideoVPP_Query`
        | :cpp:func:`MFXVideoVPP_RunFrameVPPAsync`
-     - VPP functions, required if the implementation implements any VPP filter.
-   * - :cpp:func:`MFXVideoCORE_SyncOperation`
-     - Function required for synchronization of asynchronous operations.
-   * - :cpp:struct:`mfxImplDescription`
-     - Decoder, encoder, or VPP capabilities information, required if the implementation implements a decoder, encoder, or VPP filter. Structure lists mandatory capabilities of the implementation.
+     - Required functions if the implementation implements any VPP filter.
+
+.. note:: Mandatory functions must not return the
+          :cpp:enumerator:`MFX_ERR_NOT_IMPLEMENTED` status.
+
+If at least one of encoder or decoder or VPP filter is implemented,
+:cpp:func:`MFXQueryImplsDescription` function must return valid
+:cpp:struct:`mfxImplDescription` structure instanse with mandatory capabilities
+of the implementation including decoder, encoder, or VPP capabilities information.
 
 Any other functions or extension buffers are optional for the implementation.
 
-.. note:: Mandatory functions must have an implementation and must not return the
-          :cpp:enumerator:`MFX_ERR_NOT_IMPLEMENTED` status.
+

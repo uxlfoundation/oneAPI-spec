@@ -1,6 +1,14 @@
+.. _struct_type:
+
 =================
 Type Definitions
 =================
+
+.. _struct_type_begin:
+
+Structures used for type definitions.
+
+.. _struct_type_end:
 
 ---
 API

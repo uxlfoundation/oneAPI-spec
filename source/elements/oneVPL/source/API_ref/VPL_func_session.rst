@@ -30,7 +30,13 @@ MFXInitEx
 .. doxygenfunction:: MFXInitEx
    :project: oneVPL
 
-.. important:: The :cpp:func:`MFXInitEx` function is mandatory for any implementation.
+MFXInitialize
+-------------
+
+.. doxygenfunction:: MFXInitialize
+   :project: oneVPL
+
+.. important:: The :cpp:func:`MFXInitialize` function is mandatory for any implementation.
 
 MFXClose
 --------

@@ -4,8 +4,8 @@ Programming Guide
 
 This chapter describes the concepts used in programming with oneVPL.
 
-The application must use the include file, :file:`mfxvideo.h` for C/C++ programming
-and link the oneVPL dispatcher library, :file:`libmfx.so`.
+The application must use the include file :file:`mfxvideo.h` for C/C++ programming
+and link the oneVPL dispatcher library :file:`libmfx.so`.
 
 Include these files:
 

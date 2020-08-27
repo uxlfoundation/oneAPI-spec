@@ -1,8 +1,14 @@
+.. _struct_decode:
+
 =================
 Decode Structures
 =================
 
+.. _struct_decode_begin:
+
 Structures used by Decode only.
+
+.. _struct_decode_end:
 
 ---
 API

@@ -1,8 +1,14 @@
+.. _struct_impl_manage:
+
 =========================
 Implementation Management
 =========================
 
+.. _struct_impl_man_begin:
+
 Structures used for implementation management.
+
+.. _struct_impl_man_end:
 
 ---
 API
@@ -59,3 +65,19 @@ mfxVersion
 .. doxygenunion:: mfxVersion
    :project: oneVPL
 
+mfxExtDeviceAffinityMask
+------------------------
+
+.. doxygenstruct:: mfxExtDeviceAffinityMask
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxInitializationParam
+----------------------
+
+.. doxygenstruct:: mfxInitializationParam
+   :project: oneVPL
+   :members:
+   :protected-members:
+   

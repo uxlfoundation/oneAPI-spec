@@ -1,6 +1,14 @@
+.. _struct_protected:
+
 ====================
 Protected Structures
 ====================
+
+.. _struct_protected_begin:
+
+Protected structures.
+
+.. _struct_protected_end:
 
 ---
 API

@@ -400,6 +400,18 @@ typedef enum {
     MFX_IMPLCAPS_IMPLDESCSTRUCTURE       = 1  /*!< Deliver capabilities as mfxImplDescription structure. */
 } mfxImplCapsDeliveryFormat;
 
+MFX_PACK_BEGIN_STRUCT_W_PTR()
+/*! Specifies initialization parameters for API version starting from 2.0.
+*/
+typedef struct {
+    mfxAccelerationMode    AccelerationMode; /*!< Hardware acceleration stack to use. OS dependent parameter. Use VA for Linux*, DX* for Windows* or HDDL. */
+    mfxU16  reserved[3];                     /*!< Reserved for future use. */
+    mfxU16  NumExtParam;                     /*!< The number of extra configuration structures attached to this structure. */
+    mfxExtBuffer **ExtParam;                 /*!< Points to an array of pointers to the extra configuration structures; see the ExtendedBufferID enumerator for a list of extended configurations. */
+    mfxU32      reserved2[4];                /*!< Reserved for future use. */
+} mfxInitializationParam;
+MFX_PACK_END()
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
