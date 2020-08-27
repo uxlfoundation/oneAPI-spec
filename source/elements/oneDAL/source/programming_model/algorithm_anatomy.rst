@@ -16,12 +16,16 @@ algorithm.
 
 .. _xgboost_params: https://xgboost.readthedocs.io/en/latest/parameter.html
 
-Besides meta-parameters, machine learning algorithms may have different *stages*,
-such as :term:`training <Training>` and :term:`inference <Inference>`. Moreover,
-the stages of an algorithm may be implemented in a variety of *computational
-methods*. For instance, a linear regression model could be trained
-by solving a system of linear equations [Friedman17]_ or by applying
-an iterative optimization solver directly to the empirical risk function [Zhang04]_.
+Besides meta-parameters, machine learning algorithms may have different
+*stages*, such as :term:`training <Training>` and :term:`inference <Inference>`.
+Moreover, the stages of an algorithm may be implemented in a variety of
+*computational methods*. For instance, a linear regression model could be
+trained by solving a system of linear equations [Friedman17]_ or by applying an
+iterative optimization solver directly to the empirical risk function
+[Zhang04]_. From the other hand, linear machine learning methods are not limited
+by regression problems.
+
+
 
 From computational perspective, algorithm implementation may rely on different
 *floating-point types*, such as ``float``, ``double`` or ``bfloat16``. Having a
@@ -66,6 +70,10 @@ descriptor is defined (for more details, see :txtref:`Namespaces
      <methods_>`_. This parameter is defined second and has the
      ``method::by_default`` default value.
 
+   + ``Task`` is a tag-type that specifies the `computational task <tasks_>`_.
+     This parameter is defined third and has the ``task::by_default`` default
+     value.
+
 - **Properties.** A property is a run-time parameter that can be accessed by
   means of the corresponding :term:`getter <Getter>` and :term:`setter <Setter>`
   methods.
@@ -87,6 +95,7 @@ algorithm, the following strings shall be substituted:
 
    template <typename Float  = default_float_t,
              typename Method = method::by_default,
+             typename Task   = task::by_default,
              /* more template parameters */>
    class descriptor {
    public:
@@ -150,12 +159,10 @@ implementation-defined and shall be declared within the top-level namespace.
 
 Computational Methods
 ---------------------
-
 The supported computational methods are declared within the
 ``%ALGORITHM%::method`` namespace using tag-types. Algorithm shall support at
 least one computational method and declare the ``by_default`` type alias that
 refers to one of the computational methods as shown in the example below.
-
 
 .. code-block:: cpp
 
@@ -167,6 +174,23 @@ refers to one of the computational methods as shown in the example below.
       } // namespace method
    } // namespace oneapi::dal::%ALGORITHM%
 
+
+.. _tasks:
+
+Computational Tasks
+-------------------
+
+
+
+.. code-block:: cpp
+
+   namespace oneapi::dal::%ALGORITHM% {
+      namespace task {
+         struct classification {};
+         struct regression {};
+         using by_default = classification;
+      } // namespace task
+   } // namespace oneapi::dal::%ALGORITHM%
 
 
 .. _operations:
