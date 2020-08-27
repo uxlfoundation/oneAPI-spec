@@ -81,7 +81,28 @@ Additionally, the means and variances of the initial dataset shall be returned.
 
 Training method: *SVD*
 ~~~~~~~~~~~~~~~~~~~~~~
-[TBD]
+
+This method uses singular decomposition of the dataset to find its principal
+components. The following steps are distinguished:
+
+#. Singular values and singular vector computation
+#. Resulting matrix formation
+
+To compute singular values and singular vectors the following equation system
+shall be resolved:
+
+.. math::
+   \begin{cases}
+      X v = \lambda u, \\
+      X^Tu = \lambda v
+   \end{cases}
+
+where :math:`\lambda_i` is the singular value, :math:`u_i` and :math:`v_i` are
+the corresponding left and right singular vectors.
+
+The final step is to sort the set of pairs :math:`(\lambda_i, v_i)` in
+the descending order by :math:`\lambda_i` and form the resulting matrix :math:`T
+= (v_{i,1}, \cdots, v_{i,r}), \quad 1 \leq i \leq p`
 
 Sign-flip technique
 ~~~~~~~~~~~~~~~~~~~
