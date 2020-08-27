@@ -114,8 +114,7 @@ All the ``array`` class methods can be divided into several groups:
 6. Static methods that provide simplified ways to create an array from external
    memory or by allocating it inside new object.
 
-Defined in ``oneapi/dal/array.hpp``
-
-Namespace ``oneapi::dal``
+The following declarations defined in ``oneapi/dal/array.hpp`` within
+``oneapi::dal`` namespace.
 
 .. onedal_class:: oneapi::dal::array

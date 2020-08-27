@@ -9,10 +9,12 @@ public:
     using data_t = Data;
 
 public:
-    /// Creates a new array with allocated but non-initialized data.
-    /// Array owns these data as mutable memory block.
+    /// Allocates a new memory block, but do not initialize it with any value.
+    /// Creates a new array that manages the lifetime of the block.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the start of the block.
+    /// Shall set :expr:`count` to the number of allocated elements.
     ///
-    /// @param queue The DPC++ queue object.
+    /// @param queue The SYCL* queue object.
     /// @param count The number of elements of type $Data$ to allocate.
     /// @param alloc The kind of memory to be allocated.
     /// @pre :expr:`count > 0`
@@ -20,12 +22,14 @@ public:
                              std::int64_t count,
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Creates a new array with the data filled by single value.
-    /// Array owns these data as mutable memory block.
+    /// Allocates a new memory block, then fills it with scalar value.
+    /// Creates a new array that manages the lifetime of the block.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the start of the block.
+    /// Shall set :expr:`count` to the number of allocated elements.
     ///
     /// @tparam Element The type that array elements of type $Data$ can be constructed from.
     ///
-    /// @param queue   The DPC++ queue object.
+    /// @param queue   The SYCL* queue object.
     /// @param count   The number of elements of type $Data$ to allocate.
     /// @param element The value that is used to fill memory block.
     /// @param alloc   The kind of memory to be allocated.
@@ -37,10 +41,12 @@ public:
                             Element&& element,
                             const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Creates a new array with the data filled by zero value.
-    /// Array owns these data as mutable memory block.
+    /// Allocates a new memory block, then fills it with zeros.
+    /// Creates a new array that manages the lifetime of the block.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the start of the block.
+    /// Shall set :expr:`count` to the number of allocated elements.
     ///
-    /// @param queue   The DPC++ queue object.
+    /// @param queue   The SYCL* queue object.
     /// @param count   The number of elements of type $Data$ to allocate.
     /// @param alloc   The kind of memory to be allocated.
     /// @pre :expr:`count > 0`
@@ -48,8 +54,10 @@ public:
                              std::int64_t count,
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Creates a new array that holds unmanaged mutable memory block.
+    /// Creates a new array that holds unmanaged memory block on mutable data.
     /// Responsibility to free this block remains on the user side.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the start of the block.
+    /// Shall set :expr:`count` to the number of allocated elements.
     ///
     /// @param data         The pointer to user-allocated memory block.
     /// @param count        The number of elements of type $Data$ in memory block.
@@ -60,8 +68,10 @@ public:
                             std::int64_t count,
                             const sycl::vector_class<sycl::event>& dependencies = {});
 
-    /// Creates a new array that hold unmanaged immutable memory block.
+    /// Creates a new array that hold unmanaged memory block on immutable data.
     /// Responsibility to free this block remains on the user side.
+    /// Shall set :expr:`data` pointer to the start of the block.
+    /// Shall set :expr:`count` to the number of allocated elements.
     ///
     /// @param data         The pointer to user-allocated memory block.
     /// @param count        The number of elements of type $Data$ in memory block.
@@ -74,13 +84,15 @@ public:
 
 public:
     /// Creates a new instance of the class without any data.
-    /// Array shall not contain any references to data blocks,
-    /// The :expr:`count` of elements in the array shall be zero.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to ``nullptr``.
+    /// Shall set :expr:`count` to zero.
     array();
 
     /// Creates new array object that shares an ownership with $other$ on its memory
     /// block: no data are copied, but just a reference count on the original
     /// memory block is incremented.
+    /// Shall set :expr:`mutable_data` to :expr:`other.mutable_data` and :expr:`data` to :expr:`other.data`.
+    /// Shall set :expr:`count` to :expr:`other.count`.
     array(const array<Data>& other);
 
     /// Moves $other$ into the new array instance with its memory block and ownership information.
@@ -88,13 +100,16 @@ public:
     array(array<Data>&& other);
 
     /// Creates a new array instance which holds a pointer to user-allocated data.
-    /// Array considers these data as mutable memory block.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the input $data$ pointer.
+    /// Shall set :expr:`count` to input $count$ value.
+    /// Shall hold ownership information on the data - the $deleter$ object, $dependencies$,
+    /// and the number of references that shall be set to one by this constructor.
     ///
     /// @tparam Deleter     The type of deleter used to free the $data$ when count
     ///                     of references on it becomes zero.
     ///                     The deleter shall implement ``void operator()(Data*)`` member function.
     ///
-    /// @param queue        The DPC++ queue object.
+    /// @param queue        The SYCL* queue object.
     /// @param data         The pointer to user-allocated memory block.
     /// @param count        The number of elements of type $Data$ in the memory block.
     /// @param deleter      The object used to free $data$ when reference
@@ -108,13 +123,17 @@ public:
                    const sycl::vector_class<sycl::event>& dependencies = {});
 
     /// Creates a new array instance which holds a pointer to user-allocated data.
-    /// Array considers these data as immutable memory block.
+    /// Shall set :expr:`data` pointer to the input $data$ pointer.
+    /// Shall set :expr:`mutable_data` pointer to ``nullptr``.
+    /// Shall set :expr:`count` to input $count$ value.
+    /// Shall hold ownership information on the data - the $deleter$ object, $dependencies$,
+    /// and the number of references that shall be set to one by this constructor.
     ///
     /// @tparam ConstDeleter The type of deleter used to free the $data$ when count
     ///                      of references on it becomes zero.
     ///                      The deleter shall implement ``void operator()(const Data*)`` member function.
     ///
-    /// @param queue         The DPC++ queue object.
+    /// @param queue         The SYCL* queue object.
     /// @param data          The pointer to user-allocated memory block.
     /// @param count         The number of elements of type $Data$ in the $data$.
     /// @param deleter       The object used to free $data$ when reference
@@ -131,7 +150,7 @@ public:
     /// and shares ownership information with $ref$. If this array is the last
     /// reference to go out of the scope, than deleter of the $ref$ is called.
     /// Array returns $data$ pointer as its mutable or immutable block depending
-    /// on the $K$ type.
+    /// on the $K$ type. Shall set :expr:`count` to input $count$ value.
     ///
     /// @tparam Y    The type of elements in the reference array
     /// @tparam K    Either $Data$ or $const Data$ type.
@@ -159,6 +178,8 @@ public:
 
     /// Moves the memory block of $other$ into this one.
     /// Ownership information is moved from $other$ to this object.
+    /// Shall replace :expr:`data`, :expr:`mutable_data`, and :expr:`count` property values
+    /// by the corresponding property values of :expr:`other`.
     ///
     /// @param other The object which is moved into this one.
     array<Data> operator=(array<Data>&& other);
@@ -178,12 +199,14 @@ public:
     /// @invariant :expr:`mutable_data != nullptr` if this returns `true` and :expr:`count > 0`
     bool has_mutable_data() const noexcept;
 
-    /// Copies the immutable memory block held previously by the array to the
-    /// newly allocated mutable memory block. Leaves previous immutable memory block and
-    /// replaces it by new mutable one.
-    /// If the array has :expr:`mutable_data` already, no allocations and copies are performed.
+    /// If array do not contain :expr:`mutable_data`,
+    /// allocates new mutable memory block and copies the data held in the :expr:`data` into it.
+    /// Resets ownership information to target newly allocated block by
+    /// decrementing reference count on previous immutable block and incrementing it for the new one.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the start of the new block.
+    /// Shall not perform all these operations if array already contains :expr:`mutable_data`.
     ///
-    /// @param queue The DPC++ queue object.
+    /// @param queue The SYCL* queue object.
     /// @param alloc The kind of memory to be allocated
     ///
     /// @post :expr:`has_mutable_data() == true`
@@ -197,22 +220,27 @@ public:
     /// @invariant :expr:`size == count * sizeof(Data)`
     std::int64_t get_size() const noexcept;
 
-    /// Leaves the memory block currently held in the array.
+    /// Decrements the number of references to the memory block held in the array.
     /// Shall set :expr:`count` to zero, :expr:`data` and :expr:`mutable_data` to :expr:`nullptr`.
     void reset();
 
-    /// Leaves the memory block currently held in the array, then
-    /// allocates and assigns a new block to the array.
+    /// Decrements the number of references to the memory block held in the array.
+    /// Allocates a new block, increments the number of references to it in the array.
+    /// Shall set :expr:`mutable_data` and :expr:`data` pointers to the start of the block.
+    /// Shall set :expr:`count` to the number of allocated elements.
     ///
-    /// @param queue The DPC++ queue object.
+    /// @param queue The SYCL* queue object.
     /// @param count The number of elements of type $Data$ to allocate in a new memory block
     /// @param alloc The kind of memory to be allocated
     void reset(const sycl::queue& queue,
                std::int64_t count,
                const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Leaves the memory block currently held in the array, then
-    /// assigns a new user-provided block to the array.
+    /// Decrements the number of references to the memory block held in the array.
+    /// Shall set :expr:`data` and :expr:`mutable_data` pointers to the input $data$ pointer.
+    /// Shall set :expr:`count` to input $count$ value.
+    /// Shall hold ownership information on the data - the $deleter$ object, $dependencies$,
+    /// and the number of references that shall be set to one by this method.
     ///
     /// @tparam Deleter     The type of deleter used to free the $data$ when count
     ///                     of references on it becomes zero.
@@ -229,8 +257,11 @@ public:
                Deleter&& deleter,
                const sycl::vector_class<sycl::event>& dependencies = {});
 
-    /// Leaves the memory block currently held in the array, then
-    /// assigns a new user-provided block to the array.
+    /// Shall set :expr:`data` pointer to the input $data$ pointer.
+    /// Shall set :expr:`mutable_data` pointer to ``nullptr``.
+    /// Shall set :expr:`count` to input $count$ value.
+    /// Shall hold ownership information on the data - the $deleter$ object, $dependencies$,
+    /// and the number of references that shall be set to one by this constructor.
     ///
     /// @tparam ConstDeleter The type of deleter used to free the $data$ when count
     ///                      of references on it becomes zero.
@@ -247,8 +278,12 @@ public:
                ConstDeleter&& deleter,
                const sycl::vector_class<sycl::event>& dependencies = {});
 
-    /// Leaves the memory block currently held in the array, then
-    /// assigns a new user-provided block to the array.
+    /// Resets array with new memory block, shares ownership information with $ref$.
+    /// Increments the number of references to the memory block held in $ref$.
+    /// If this array goes out of scope with the reference count equal to 1,
+    /// the destructor on shared data block is called.
+    /// Shall set expr:`data` and :expr:`mutable_data` pointers to the input $data$ pointer.
+    /// Shall set :expr:`count` to input $count$ value.
     ///
     /// @tparam Y    The type of elements in the reference array
     ///
@@ -258,8 +293,13 @@ public:
     template <typename Y>
     void reset(const array<Y>& ref, Data* data, std::int64_t count);
 
-    /// Leaves the memory block currently held in the array, then
-    /// assigns a new user-provided block to the array.
+    /// Resets array with new memory block, shares ownership information with $ref$.
+    /// Increments the number of references to the memory block held in $ref$.
+    /// If this array goes out of scope with the reference count equal to 1,
+    /// the destructor on shared data block is called.
+    /// Shall set expr:`data` pointer to the input $data$ pointer.
+    /// Shall set :expr:`mutable_data` pointer to ``nullptr``.
+    /// Shall set :expr:`count` to input $count$ value.
     ///
     /// @tparam Y    The type of elements in the reference array
     ///
