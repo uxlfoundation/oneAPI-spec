@@ -4,7 +4,8 @@
 namespace oneapi::dal::kmeans_init {
 
 namespace method {
-   /// Tag-type that denotes `Default dense`_.
+   /// Tag-type that denotes `dense <kmeans_init_c_math_dense_>`_
+   /// computational method.
    struct dense {};
 
    using by_default = dense;
@@ -21,10 +22,11 @@ class descriptor {
 public:
 
    /// Creates new instance of descriptor with the default attribute values.
-   descriptor();
+   explicit descriptor(std::int64_t cluster_count = 2);
 
    /// The number of clusters $k$
    /// @invariant :expr:`cluster_count > 0`
+   /// @remark default = 2
    std::int64_t get_cluster_count() const;
    descriptor& set_cluster_count(std::int64_t);
 
@@ -32,10 +34,6 @@ public:
 
 class compute_input {
 public:
-
-   /// Creates input for the computing operation with the default attribute values.
-   /// @remark default = table{}
-   compute_input();
 
    /// Creates input for the computing operation with the given data,
    /// the other attributes get default values.
@@ -50,11 +48,12 @@ public:
 class compute_result {
 public:
 
+   /// Creates a new instance of the class with the default property values.
    compute_result();
 
    /// The initial centroids
    /// @remark default = table{}
-   table get_centroids() const;
+   const table& get_centroids() const;
 };
 
 /// Runs the computing operation for KMeans initialization. For more details see
@@ -81,3 +80,19 @@ train_result compute(const descriptor<Float, Method>& desc,
 
 
 } // namespace oneapi::dal:kmeans_init
+
+namespace oneapi::dal::kmeans_init::example {
+
+table run_compute(const table& data) {
+   const auto kmeans_desc = kmeans_init::descriptor<float,
+                                                    kmeans_init::method::dense>{}
+      .set_cluster_count(10)
+
+   const auto result = compute(kmeans_desc, data);
+
+   print_table("centroids", result.get_centroids());
+
+   return result.get_centroids()
+}
+
+} // oneapi::dal::kmeans_init::example
