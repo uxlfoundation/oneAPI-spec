@@ -5,14 +5,14 @@
 namespace oneapi::dal::pca {
 
 namespace method {
-   /// Tag-type that denotes `brute-force <pca_t_math_cov>`_ computational
+   /// Tag-type that denotes `Covariance <pca_t_math_cov_>`_ computational
    /// method.
    struct cov {};
 
-   /// Tag-type that denotes `k-d tree <pca_t_math_svd>`_ computational method.
+   /// Tag-type that denotes `SVD <pca_t_math_svd_>`_ computational method.
    struct svd {};
 
-   /// Alias tag-type for `brute-force <pca_t_math_cov>`_ computational
+   /// Alias tag-type for `Covariance <pca_t_math_cov_>`_ computational
    /// method.
    using by_default = cov;
 } // namespace method
