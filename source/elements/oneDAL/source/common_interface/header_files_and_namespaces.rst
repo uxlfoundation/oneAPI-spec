@@ -34,7 +34,7 @@ oneDAL public identifiers are represented in the following header files:
        functionality, for example, ``common`` for key concepts related to table
        types (e.g., ``table``, ``table_metadata``, ``data_layout`` classes). For
        entities that have the ``_table`` suffix in their names, the related
-       header file shall not contain this suffix in its name - for example,
+       header file shall not contain this suffix in its name, for example,
        ``homogen`` for ``homogen_table`` class.
 
    * - ``oneapi/dal/io/%FILE%.hpp``

@@ -230,9 +230,9 @@ of these concepts, which are highlighted by colors:
 To perform computations on a dataset, one shall create a :txtref:`table` object
 first. It can be done either using a :txtref:`data-source` or directly from
 user-defined memory. The diagram shows the creation of a :txtref:`table` object
-`t` from the data provided by user (not shown on a diagram). During a table
-creation, an object `tm` of table metadata is created and its content is deduced
-from the incoming data.
+`t` from the data provided by user (not shown on the diagram). During a table
+creation, an object `tm` of table metadata is constructed and initialized using
+the data.
 
 Once a table object is created, it can be used as an input in computations or as
 a parameter of some algorithm. The data in the table can be accessed via its own
