@@ -114,8 +114,8 @@ public:
 ///
 /// @pre :expr:`input.data.has_data == true`
 /// @pre :expr:`input.labels.has_data == true`
-/// @pre :expr:`input.data.rows == input.labels.rows`
-/// @pre :expr:`input.data.columns == 1`
+/// @pre :expr:`input.data.row_count == input.labels.row_count`
+/// @pre :expr:`input.labels.column_count == 1`
 /// @pre :expr:`input.labels[i] >= 0`
 /// @pre :expr:`input.labels[i] < desc.class_count`
 template <typename Float, typename Method, typename Task>
@@ -127,6 +127,8 @@ train_result<Task> train(const descriptor<Float, Method, Task>& desc,
 template <typename Task = task::by_default>
 class infer_input {
 public:
+   /// Creates a new instance of the class with the given :literal:`model`
+   /// and :literal:`data` property values
    infer_input(const model<Task>& m = model<Task>{},
                const table& data = table{});
 
@@ -146,6 +148,7 @@ public:
 template <typename Task = task::by_default>
 class infer_result {
 public:
+   /// Creates a new instance of the class with the default property values.
    infer_result();
 
    /// The predicted labels
@@ -170,8 +173,8 @@ public:
 /// @return   result Result of the inference operation
 ///
 /// @pre  :expr:`input.data.has_data == true`
-/// @post :expr:`result.labels.rows == input.data.rows`
-/// @post :expr:`result.labels.columns == 1`
+/// @post :expr:`result.labels.row_count == input.data.row_count`
+/// @post :expr:`result.labels.column_count == 1`
 /// @post :expr:`result.labels[i] >= 0`
 /// @post :expr:`result.labels[i] < desc.class_count`
 template <typename Float, typename Method, typename Task>

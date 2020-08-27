@@ -143,9 +143,12 @@ public:
 /// @pre :expr:`input.initial_centroids.row_count == desc.cluster_count`
 /// @pre :expr:`input.initial_centroids.column_count == input.data.column_count`
 /// @post :expr:`result.labels.row_count == input.data.row_count`
+/// @post :expr:`result.labels.column_count == 1`
+/// @post :expr:`result.labels[i] >= 0`
+/// @post :expr:`result.labels[i] < desc.cluster_count`
+/// @post :expr:`result.iteration_count <= desc.max_iteration_count`
 /// @post :expr:`result.model.clusters.row_count == desc.cluster_count`
 /// @post :expr:`result.model.clusters.column_count == input.data.column_count`
-/// @post :expr:`result.iteration_count <= desc.max_iteration_count`
 template <typename Float, typename Method, typename Task>
 train_result<Task> train(const descriptor<Float, Method, Task>& desc,
                          const train_input<Task>& input);
@@ -177,6 +180,7 @@ public:
 template <typename Task = task::by_default>
 class infer_result {
 public:
+   /// Creates a new instance of the class with the default property values.
    infer_result();
 
    /// $n \\times 1$ table with assignments labels to feature
@@ -211,6 +215,9 @@ public:
 /// @pre :expr:`input.model.centroids.row_count == desc.cluster_count`
 /// @pre :expr:`input.model.centroids.column_count == input.data.column_count`
 /// @post :expr:`result.labels.row_count == input.data.row_count`
+/// @post :expr:`result.labels.column_count == 1`
+/// @post :expr:`result.labels[i] >= 0`
+/// @post :expr:`result.labels[i] < desc.cluster_count`
 template <typename Float, typename Method, typename Task>
 infer_result<Task> infer(const descriptor<Float, Method, Task>& desc,
                          const infer_input<Task>& input);
