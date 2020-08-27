@@ -138,6 +138,9 @@ Inference
 ---------------------
 Programming Interface
 ---------------------
+All type and function in this section shall be declared in the
+``oneapi::dal::knn`` namespace and be available via inclusion of the
+``oneapi/dal/algo/knn.hpp`` header file.
 
 Descriptor
 ----------

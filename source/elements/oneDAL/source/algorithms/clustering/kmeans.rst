@@ -131,6 +131,9 @@ Inference
 ---------------------
 Programming Interface
 ---------------------
+All type and function in this section shall be declared in the
+``oneapi::dal::kmeans`` namespace and be available via inclusion of the
+``oneapi/dal/algo/kmeans.hpp`` header file.
 
 Descriptor
 ----------
