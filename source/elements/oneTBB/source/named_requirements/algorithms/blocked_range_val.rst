@@ -19,13 +19,13 @@ A type `Value` satisfies `BlockedRangeValue` if it meets the following requireme
 
 .. cpp:function:: void operator=( const Value& )
 
+    Assignment.
+    
     .. note::
 
          The return type ``void`` in the pseudo-signature denotes that
          ``operator=`` is not required to return a value. The actual ``operator=``
          can return a value, which will be ignored by ``blocked_range`` .
-
-    Assignment.
 
 .. cpp:function:: bool operator<( const Value& i, const Value& j )
 
@@ -43,3 +43,10 @@ A type `Value` satisfies `BlockedRangeValue` if it meets the following requireme
 Examples that model the Value requirements are integral types, pointers, and STL random-access iterators
 whose difference can be implicitly converted to a ``size_t``.
 
+See also:
+
+* :doc:`blocked_range class <../../algorithms/blocked_ranges/blocked_range_cls>`
+* :doc:`blocked_range2d class <../../algorithms/blocked_ranges/blocked_range2d_cls>`
+* :doc:`blocked_range3d class <../../algorithms/blocked_ranges/blocked_range3d_cls>`
+* :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
+* :doc:`parallel_for algorithm <../../algorithms/functions/parallel_for_func>`

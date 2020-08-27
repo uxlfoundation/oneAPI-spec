@@ -45,7 +45,7 @@ oneDAL functionality is represented with a system of C++ namespaces described be
    * - Namespace
      - oneDAL content
    * - ``oneapi::dal``
-     - The namespace of the library that contains externally exposable data types, processing and service functionality of oneDAL.
+     - The namespace of the library that contains externally visible data types, processing and service functionality of oneDAL.
    * - ``oneapi::dal::%ALGORITHM%``
 
      - The namespace of the algorithm.

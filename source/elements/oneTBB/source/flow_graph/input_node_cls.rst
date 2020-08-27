@@ -48,8 +48,8 @@ An ``input_node`` continues to invoke ``body`` and broadcast messages until the 
 toggles ``fc.stop()`` or it has no valid successors. A message may be generated and then rejected
 by all successors. In this case, the message is buffered and will be the next message sent once a
 successor is added to the node or ``try_get`` is called. Calls to ``try_get`` return a
-buffer message if available, or invoke ``body`` to attempt to generate a new message.
-A call to ``body`` is made only when the internal buffer is empty.
+message from the buffer, or invoke ``body`` to attempt to generate a new message.
+A call to ``body`` is made only when the buffer is empty.
 
 The body object passed to an ``input_node`` is copied. Updates to member variables do
 not affect the original object used to construct the node. If the state held within a body object
@@ -70,8 +70,8 @@ Member functions
     ``src`` had when it was constructed. The ``input_node`` that is
     constructed has a reference to the same ``graph`` object as
     ``src``, has a copy of the initial body used by ``src,`` and
-    has the same initial active state as ``src``. The predecessors and
-    successors of ``src`` are not copied.
+    has the same initial active state as ``src``. The successors of
+    ``src`` are not copied.
 
     The new body object is copy-constructed from a copy of the original
     body provided to ``src`` at its construction. Changes
@@ -84,9 +84,9 @@ Member functions
 
 .. cpp:function:: bool try_get( Output &v )
 
-    Copies the buffered message to ``v`` if available, or 
-    invokes ``body`` to attempt to generate a new message that will be
-    copied into ``v``. 
+    Copies the message from the buffer to ``v`` if available, or, if the node is
+    in active state, invokes ``body`` to attempt to generate a new message that
+    will be copied into ``v``. 
 
     **Returns:** ``true`` if a message is copied to ``v``;  ``false``, otherwise.
 

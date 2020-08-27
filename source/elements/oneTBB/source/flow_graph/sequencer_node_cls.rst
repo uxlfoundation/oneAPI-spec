@@ -3,7 +3,7 @@ sequencer_node
 ==============
 **[flow_graph.sequencer_node]**
 
-A node that forwards messages in a sequence order by maintaining an internal buffer.
+A node that forwards messages in a sequence order.
 
 .. code:: cpp
 
@@ -49,6 +49,8 @@ user-provided ``Sequencer`` function object.
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::sequencer_node
+
 .. cpp:function:: template<typename Sequencer> \
                   sequencer_node( graph& g, const Sequencer &s )
 
@@ -59,7 +61,7 @@ Member functions
 
     Constructs an empty ``sequencer_node`` that belongs to the same graph ``g`` as ``src`` and
     uses a copy of the ``Sequencer s`` used to construct ``src``. The list of predecessors,
-    the list of successors, and the messages in the buffer are not copied.
+    the list of successors, and the messages inside are not copied.
 
     .. caution::
 
@@ -69,8 +71,8 @@ Member functions
 
 .. cpp:function:: bool try_put( const T &v )
 
-    Adds ``v`` to the ``sequencer_node``. If sequence number of ``v`` sequence number is the next item in
-    the sequence, a task is spawned to forward the item to a successor.
+    Adds ``v`` to the ``sequencer_node`` and tries forwarding the next item in the sequence to a
+    successor.
 
     **Returns**: ``true``
 

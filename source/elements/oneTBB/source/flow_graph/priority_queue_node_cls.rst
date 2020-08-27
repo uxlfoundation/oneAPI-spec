@@ -3,7 +3,7 @@ priority_queue_node
 ===================
 **[flow_graph.priority_queue_node]**
 
-A class template that forwards messages in a priority order by maintaining a buffer of messages.
+A class template that forwards messages in a priority order.
 
 .. code:: cpp
 
@@ -43,24 +43,27 @@ The next message to be forwarded has the largest priority as determined by the `
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::priority_node_queue
+	       
 .. cpp:function:: explicit priority_queue_node( graph &g )
 
     Constructs an empty ``priority_queue_node`` that belongs to the  graph ``g``.
 
 .. cpp:function:: priority_queue_node( const priority_queue_node &src )
 
-    Constructs an empty ``priority_queue_node`` that belongs to the same graph ``g`` as 
-    ``src``. The list of predecessors, the list of successors, and the messages in the buffer are not
+    Constructs an empty ``priority_queue_node`` that belongs to the same graph ``g`` as ``src``. Any
+    intermediate state of ``src``, including its links to predecessors and successors, is not
     copied.
 
 .. cpp:function:: bool try_put( const T &v )
 
-    Adds ``v`` to the ``priority_queue_node``. If priority of ``v`` is the largest of all of the
-    currently buffered messages, a task is spawned to forward the item to a successor.
+    Adds ``v`` to the ``priority_queue_node`` and tries forwarding to a successor the item with the
+    largest priority among all of the items that were added to the node and have not been yet
+    forwarded to successors.
 
     **Returns**: ``true``
 
-.. cpp:function:: bool try_put( T &v )
+.. cpp:function:: bool try_get( T &v )
 
     **Returns**: ``true`` if a message is available in the node and the node is not currently reserved.
     Otherwise, returns ``false``. If the node returns ``true``, the message with the largest

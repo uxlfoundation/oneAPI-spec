@@ -9,6 +9,8 @@ A type `Body` satisfies `ParallelReduceBody` if it meets the following requireme
 
 **ParallelReduceBody Requirements: Pseudo-Signature, Semantics**
 
+.. namespace:: ParallelReduceBody
+	       
 .. cpp:function:: Body::Body( Body&, split )
 
     Splitting constructor. Must be able to run concurrently with ``operator()`` and method ``join``.
