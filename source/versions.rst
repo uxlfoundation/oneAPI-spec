@@ -27,7 +27,7 @@ updates.
 Release Notes
 =============
 
-0.9
+1.0
 ---
 
 * oneMKL
