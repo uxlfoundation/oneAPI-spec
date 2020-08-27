@@ -13,7 +13,7 @@ This section describes the types related to the :txtref:`data-source` concept.
 CSV data source
 ---------------
 Class ``csv::data_source`` is an api for accessing the data source represented as a :capterm:`csv file <CSV file>`.
-CSV data source can be used in :expr:`read` operation to extract data in text format from the given input file,
+CSV data source shall be used with :expr:`read` operation to extract data in text format from the given input file,
 process it using provided parameters (such as delimiter and parsing options), transform it into numerical representation,
 and store it as an in-memory :txtref:`dataset` of a chosen type.
 
