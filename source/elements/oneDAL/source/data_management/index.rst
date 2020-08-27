@@ -83,25 +83,24 @@ Data source
 -----------
 
 Data source is a concept of an out-of-memory storage for a :capterm:`dataset`.
-It is used at the data acquisition and data preparation stages for the
-following:
+It is used at the data acquisition and data preparation stages to:
 
-- To extract datasets from external sources such as databases, files, remote
+- Extract datasets from external sources such as databases, files, remote
   storage.
 
-- To load datasets into the device's local memory. Data do not always fit
+- Load datasets into the device's local memory. Data do not always fit
   the local memory, especially when processing with accelerators. A data source
   provides the ability to load data by batches and extracts it directly into the
   device's local memory. Therefore, a data source enables complex data analytics
   scenarios, such as :capterm:`online computations <Online mode>`.
 
-- To filter and normalize :capterm:`feature` values that are being extracted.
+- Filter and normalize :capterm:`feature` values that are being extracted.
 
-- To recover missing :capterm:`feature` values.
+- Recover missing :capterm:`feature` values.
 
-- To detect :capterm:`outliers <outlier>` and recover the abnormal data.
+- Detect :capterm:`outliers <outlier>` and recover the abnormal data.
 
-- To transform datasets into numerical representation. Data source shall
+- Transform datasets into numerical representation. Data source shall
   automatically transform non-numeric :capterm:`categorical <categorical
   feature>` and :capterm:`continuous <continuous feature>` data values into one
   of the numeric :capterm:`data formats <data format>`.
@@ -115,42 +114,33 @@ Table
 
 Table is a concept of in-memory numerical data that are organized in a tabular
 view with several rows and columns. It is used at the data preparation and data
-processing stages for the following:
+processing stages to:
 
-- To be an in-memory representation of a :txtref:`dataset` or another tabular
-  data (for example, matrices, vectors, even singe values).
+- Be an in-memory representation of a :txtref:`dataset` or another tabular
+  data (for example, matrices, vectors, and scalars).
 
-- To store heterogeneous data in various
+- Store heterogeneous data in various
   :capterm:`data formats <data format>`, such as dense, sparse, chunked,
   contiguous.
 
-- To avoid unnecessary data copies during conversion from external data
+- Avoid unnecessary data copies during conversion from external data
   representations.
 
-- To transfer memory ownership of the data from user application to the table,
+- Transfer memory ownership of the data from user application to the table,
   or share it between them.
 
-- To connect with the :txtref:`data-source` to convert data from an
+- Connect with the :txtref:`data-source` to convert data from an
   out-of-memory into an in-memory representation.
 
-- To support streaming of the data to the algorithm.
+- Support streaming of the data to the algorithm.
 
-- To access the underlying data on a device in a required :capterm:`data
+- Access the underlying data on a device in a required :capterm:`data
   format`, e.g. by blocks with the defined :capterm:`data layout`.
 
 .. note::
-  For thread-safety reasons and better integration with external entities, a table
-  provides a read-only access to the data within it, thus, table concept
-  implementations shall be :capterm:`immutable <immutability>`.
-
-.. warning::
-  A table can represent not only a dataset, but also a matrix, a vector (if the
-  number of columns :math:`p = 1`), and even a single value (:math:`n = 1, p =
-  1`).
-
-  When a table represents a dataset, its rows represent observations in the
-  dataset, and its columns represent features, according to the
-  :txtref:`dataset` definition.
+  For thread-safety reasons and better integration with external entities, a
+  table provides a read-only access to the data within it, thus, table object
+  shall be :capterm:`immutable <immutability>`.
 
 This concept has different logical organization and physical :capterm:`format of
 the data <data format>`:
@@ -176,14 +166,11 @@ Table metadata
 Table metadata concept provides an additional information about data in the
 table:
 
-1. The `data types <Data type>` of the columns.
+1. The :capterm:`data types <Data type>` of the columns.
 
 2. The logical types of data in the columns:
    :capterm:`nominal <Nominal feature>`, :capterm:`ordinal <Ordinal feature>`,
    :capterm:`interval <Interval feature>`, or :capterm:`ratio <Ratio feature>`.
-   Information about logical types is mostly relevant in cases when table
-   columns represent dataset features, but it is also applicable in other cases
-   as well, for example, when a table represents a matrix.
 
 Only the properties of data that do not affect table concept definition shall be
 the part of metadata concept.
@@ -195,7 +182,8 @@ the part of metadata concept.
 
   For example, :capterm:`data layout` and :capterm:`data format` are properties
   of table objects since they affect the structure of a table, its contract, and
-  behavior.
+  behavior. The list of names of features or columns inside the table is the
+  example of metadata property.
 
 .. _accessor:
 
@@ -209,18 +197,13 @@ Accessor is a concept that defines a single way to extract the data from a
   types, without exposing their implementation details.
 
 - Provide a :capterm:`flat <flat data>` view on the data blocks of a
-  :txtref:`table` for better data locality. For example, some accessor
-  implementation returns column values as a contiguous array, while the original
-  table stored row-by-row (there are strides between values of a single
-  column).
+  :txtref:`table` for better data locality. For example, the accessor returns a
+  column of the table stored in row-major format as a contiguous array.
 
 - Acquire data in a desired :capterm:`data format` for which
   a specific set of operations is defined.
 
-- Have read-only, read-write and write-only access to the data. Accessor
-  implementations are not required to have read-write and write-only access
-  modes for :capterm:`immutable <immutability>` entities like
-  :txtref:`<table>s`.
+- Have read-only access to the data.
 
 For details, see :txtref:`accessors` section.
 
@@ -251,10 +234,9 @@ user-defined memory. The diagram shows the creation of a :txtref:`table` object
 creation, an object `tm` of table metadata is created and its content is deduced
 from the incoming data.
 
-Once a table object is created, the data inside it can be accessed by its own
-interface or with a help of a read-only accessor as shown on the diagram. The
-table can be used as an input in computations or as a parameter of some
-algorithm.
+Once a table object is created, it can be used as an input in computations or as
+a parameter of some algorithm. The data in the table can be accessed via its own
+interface or via read-only accessor as shown on the diagram.
 
 Details
 =======
