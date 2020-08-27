@@ -19,9 +19,7 @@ a storage that:
 4. Provides an ability to change the data state from immutable to
    mutable one.
 
-5. Holds ownership information on the data: the references count
-   (how many arrays refer to the same data block) and functionality how to free the
-   data when references count becomes zero.
+5. Holds ownership information on the data (see the :txtref:`data_ownership_requirements` section).
 
 6. Ownership information on the data can be shared between several arrays - it is
    possible to create new array from another one without any data copies.
@@ -90,6 +88,47 @@ usage scenario:
 
       return 0;
    }
+
+.. _data_ownership_requirements:
+
+---------------------------
+Data ownership requirements
+---------------------------
+
+Its important to specify the logic how ``array`` shall manage its data:
+
+1. Array shall hold two properties that represent raw pointers on the data:
+
+   - ``data`` for pointer on immutable data,
+   - ``mutable_data`` for pointer on mutable data (see the :txtref:`programming_interface`).
+
+2. If array holds mutable data, both properties shall point to the same memory
+   block.
+
+3. If array holds immutable data, ``mutable_data`` shall be ``nullptr``.
+
+4. Array shall hold **ownership information** on the data inside it:
+
+   - the count of references, indicating how many array objects refer to the
+     same memory block.
+
+   - A **deleter**, the functionality how to free the memory block, when
+     references count becomes zero.
+
+5. Array shall create a structure with ownership information for every new
+   memory block that do not associated with such information already.
+
+6. When a new memory block is assigned to the array, ``count`` property shall be
+   updated to the actual element count in the memory block.
+
+7. Array shall decrement the number of references to the memory block then it
+   goes out of the scope. If the number of references becomes zero, the
+   deleter on this memory block shall be called.
+
+8. Arrays share the data blocks. The number of references in the ownership
+   information shall be equal to the number of arrays that share the data block.
+
+.. _programming_interface:
 
 ---------------------
 Programming interface
