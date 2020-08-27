@@ -83,16 +83,6 @@ file:// URL. Build the pdf version with::
 
 And then view build/latexpdf/oneAPI-spec.pdf
 
-Checking for Errors
--------------------
-
-There are rst linting tools to check for errors::
-
-  find . -name '*.rst' | xargs rstcheck
-
-rstcheck finds errors in some of the template code and in the cpp
-examples. We may not want to try to correct them.
-
 Editing Tools
 -------------
 
@@ -153,11 +143,19 @@ Merge from master to publish::
   
 After CI completes, view the results on the `pre-production server
 <https://d1c71xsfq9wxv8.cloudfront.net/versions/latest/index.html>`__
-. Push to production with::
+. Sync pre-production to production with::
 
   python scripts/oneapi.py prod-publish
 
-Then purge the CDN. 
+Then purge the CDN to make it visible. Add a release in github web
+interface, and allow it to tag the publish branch.
+
+-----------------------------
+Creating a new version number
+-----------------------------
+
+Change oneapi_version in `<source/conf/common_conf.py>`__ and update
+the table in `<source/versions.rst>`__.
 
 ------------
 More Reading
