@@ -28,7 +28,7 @@ Note the following key points about the example:
   working frame surface (work) as input parameters.
 
   .. attention:: Starting with oneVPL API version 2.0, the application can provide NULL
-                 as the working frame surface what leads to internal memory
+                 as the working frame surface that leads to internal memory
                  allocation.
 
 - If decoding output is not available, the function returns a status code
@@ -40,7 +40,7 @@ Note the following key points about the example:
   - :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_SURFACE`: The function needs one
     more frame surface to produce any output.
   - :cpp:enumerator:`mfxStatus::MFX_ERR_REALLOC_SURFACE`: Dynamic resolution
-    change case - the function needs bigger working frame surface (work).
+    change case - the function needs a bigger working frame surface (work).
 
 - Upon successful decoding, the :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`
   function returns :cpp:enumerator:`mfxStatus::MFX_ERR_NONE`. However, the
@@ -51,10 +51,10 @@ Note the following key points about the example:
   operation before retrieving the decoded frame data.
 - At the end of the bitstream, the application continuously calls the
   :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` function with a NULL bitstream
-  pointer to drain any remaining frames cached within the oneVPL decoder, until the
+  pointer to drain any remaining frames cached within the oneVPL decoder until the
   function returns :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_DATA`.
 
-The following example shows the simplified decoding procedure:
+The following pseudo code shows the simplified decoding procedure:
 
 .. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
@@ -67,10 +67,10 @@ The following example shows the simplified decoding procedure:
 oneVPL API version 2.0 introduces a new decoding approach. For simple use cases, when
 the user wants to decode a stream and does not want to set additional
 parameters, a simplified procedure for the decoder's initialization has been
-proposed. In such situations it is possible to skip explicit stages of a
+proposed. In this scenario it is possible to skip explicit stages of a
 stream's header decoding and the decoder's initialization and instead to perform
 these steps implicitly during decoding of the first frame. This change also 
-requires to set additional field :cpp:member:`mfxBitstream::CodecId` to indicate 
+requires setting the additional field :cpp:member:`mfxBitstream::CodecId` to indicate 
 codec type. In this mode the decoder allocates :cpp:struct:`mfxFrameSurface1`
 internally, so users should set the input surface to zero.
 
@@ -109,12 +109,14 @@ broken:
 * PPS header is broken: re-sync, use last valid PPS for decoding.
 * Slice header is broken: skip this slice, re-sync.
 * Slice data is broken: corruption flags are set on output surface.
-* Many streams have IDR frames with ``frame_num != 0`` while the specification says
-  that “If the current picture is an IDR picture, frame_num shall be equal to 0”
-  (ITU-T H.265 7.4.3).
-* VUI is also validated, but errors do not invalidate the whole SPS. The decoder
-  either does not use the corrupted VUI (AVC) or resets incorrect values to
-  default (HEVC).
+
+Many streams have IDR frames with ``frame_num != 0`` while the specification says
+that “If the current picture is an IDR picture, frame_num shall be equal to 0”
+(ITU-T H.265 7.4.3).
+
+VUI is also validated, but errors do not invalidate the whole SPS. The decoder
+either does not use the corrupted VUI (AVC) or resets incorrect values to
+default (HEVC).
 
 .. note:: Some requirements are relaxed because there are many streams which
           violate the strict standard but can be decoded without errors.
@@ -131,8 +133,8 @@ intra-refresh interval. The recovery point SEI message is well described at
 ITU-T H.264 D.2.7 and ITU-T H.265 D.2.8. If decoding starts from AU associated
 with this SEI message, then the message can be used by the decoder to determine
 from which picture all subsequent pictures have no errors. In comparison to IDR,
-the recovery point message does not mark reference pictures as 'unused for
-reference'.
+the recovery point message does not mark reference pictures as "unused for
+reference".
 
 Besides validation of syntax elements and their constraints, the decoder also uses
 various hints to handle broken streams:
@@ -148,9 +150,9 @@ various hints to handle broken streams:
     marks the reference picture as LT, the operation is rolled back.
   * An IDR frame with ``frame_num != 0`` can’t be LTR.
 
-* If the decoder detects frame gapping, it inserts ‘fake’ (marked as non-existing)
+* If the decoder detects frame gapping, it inserts "fake"’" (marked as non-existing)
   frames, updates FrameNumWrap (ITU-T H.264 8.2.4.1) for reference frames, and
-  applies the Sliding Window (ITU-T H.264 8.2.5.3) marking process. ‘Fake’ frames
+  applies the Sliding Window (ITU-T H.264 8.2.5.3) marking process. Fake frames
   are marked as reference, but since they are marked as non-existing, they are
   not used for inter-prediction.
 

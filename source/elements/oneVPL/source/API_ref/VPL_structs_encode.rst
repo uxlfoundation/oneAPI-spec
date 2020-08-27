@@ -1,8 +1,14 @@
+.. _struct_encode:
+
 =====================
 Encode Structures
 =====================
 
+.. _struct_encode_begin:
+
 Structures used by Encode only.
+
+.. _struct_encode_end:
 
 ---
 API
