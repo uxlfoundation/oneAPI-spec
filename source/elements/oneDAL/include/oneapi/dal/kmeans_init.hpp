@@ -21,7 +21,8 @@ template <typename Float = float,
 class descriptor {
 public:
 
-   /// Creates new instance of descriptor with the default attribute values.
+   /// Creates a new instance of the descriptor with the default attribute
+   /// values.
    explicit descriptor(std::int64_t cluster_count = 2);
 
    /// The number of clusters $k$
@@ -39,10 +40,10 @@ public:
    /// the other attributes get default values.
    compute_input(const table& data = table{});
 
-   /// The computing set $X$
+   /// The training set $X$
    /// @remark default = table{}
    const table& get_data() const;
-   train_input& set_data(const table&);
+   compute_input& set_data(const table&);
 };
 
 class compute_result {
@@ -56,27 +57,25 @@ public:
    const table& get_centroids() const;
 };
 
-/// Runs the computing operation for KMeans initialization. For more details see
-/// :expr:`oneapi::dal::compute`.
+/// Runs the computing operation for KMeans initialization. For more details,
+/// see :expr:`oneapi::dal::compute`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
-///                intermediate computations. Can be :expr:`float` or
-///                :expr:`double`.
-/// @tparam Method Tag-type that specifies an implementation
-/// of K-Means Initialization algorithm.
+/// intermediate computations. Can be :expr:`float` or :expr:`double`. @tparam
+/// Method Tag-type that specifies an implementation of K-Means Initialization
+/// algorithm.
 ///
-/// @param[in] desc  Descriptor of the algorithm
-/// @param[in] input Input data for the training operation
-/// @return result Result of the training operation
+/// @param[in] desc  The descriptor of the algorithm @param[in] input Input data
+/// for the computing operation @return result The result of the computing
+/// operation
 ///
-/// @pre  :expr:`input.data.has_data == true`
-/// @pre  :expr:`input.data.row_count == desc.cluster_count`
-/// @post :expr:`result.centroids.has_data == true`
-/// @post :expr:`result.centroids.row_count == desc.cluster_count`
-/// @post :expr:`result.centroids.column_count == input.data.column_count`
+/// @pre  :expr:`input.data.has_data == true` @pre  :expr:`input.data.row_count
+/// == desc.cluster_count` @post :expr:`result.centroids.has_data == true` @post
+/// :expr:`result.centroids.row_count == desc.cluster_count` @post
+/// :expr:`result.centroids.column_count == input.data.column_count`
 template <typename Float, typename Method>
-train_result compute(const descriptor<Float, Method>& desc,
-                   const train_input& input);
+compute_result compute(const descriptor<Float, Method>& desc,
+                   const compute_input& input);
 
 
 } // namespace oneapi::dal:kmeans_init
@@ -92,7 +91,7 @@ table run_compute(const table& data) {
 
    print_table("centroids", result.get_centroids());
 
-   return result.get_centroids()
+   return result.get_centroids();
 }
 
 } // oneapi::dal::kmeans_init::example

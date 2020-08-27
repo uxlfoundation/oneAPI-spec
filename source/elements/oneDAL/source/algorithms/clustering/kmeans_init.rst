@@ -5,8 +5,8 @@
 K-Means initialization
 ======================
 
-The K-Means initialization algorithm gets :math:`n` feature vectors as input and
-chooses :math:`k` initial centroids. After initialization, K-Means algorithm
+The K-Means initialization algorithm receives :math:`n` feature vectors as input
+and chooses :math:`k` initial centroids. After initialization, K-Means algorithm
 uses the initialization result to partition input data into :math:`k` clusters.
 
 .. |c_math| replace:: `Computing <kmeans_init_c_math_>`_
@@ -40,7 +40,8 @@ problem is to find a set :math:`C = \{ c_1, \ldots, c_k \}` of
 Computing method: *dense*
 -------------------------
 
-Method choses first :math:`k` feature vectors from the training set :math:`X`
+The method choses first :math:`k` feature vectors from the training set
+:math:`X`.
 
 -------------
 Usage example
