@@ -63,7 +63,7 @@ All oneDAL exceptions shall be divided into three groups:
      - Yes
    * - ``oneapi::dal::bad_alloc``
      - Reports failure to allocate storage.
-     - No
+     - Yes
 
 All precondition and invariant errors represented by ``oneapi::dal::logic_error``
 shall be divided into the following groups:
@@ -79,8 +79,8 @@ shall be divided into the following groups:
     class oneapi::dal::invalid_argument :  public oneapi::dal::logic_error, public std::invalid_argument;
     class oneapi::dal::domain_error :  public oneapi::dal::logic_error, public std::domain_error;
     class oneapi::dal::out_of_range :  public oneapi::dal::logic_error, public std::out_of_range;
-    class oneapi::dal::unimplemented_error :  public oneapi::dal::logic_error, public std::logic_error;
-    class oneapi::dal::unavailable_error :  public oneapi::dal::logic_error, public std::logic_error;
+    class oneapi::dal::unimplemented :  public oneapi::dal::logic_error, public std::logic_error;
+    class oneapi::dal::unsupported_device :  public oneapi::dal::logic_error, public std::logic_error;
 
 .. list-table::
    :widths: 30 65 5
@@ -101,12 +101,12 @@ shall be divided into the following groups:
      - Reports situations when the index is out of range. Higher priority
        than ``oneapi::dal::invalid_argument``.
      - No
-   * - ``oneapi::dal::unimplemented_error``
+   * - ``oneapi::dal::unimplemented``
      - Reports errors that arise because an algorithm or a method is not
        implemented.
      - No
-   * - ``oneapi::dal::unavailable_error``
-     - Reports situations when a device or data is not available.
+   * - ``oneapi::dal::unsupported_device``
+     - Reports situations when a device is not supported.
      - No
 
 Errors occured during the execution of oneDAL functionality are represented with
@@ -138,4 +138,29 @@ All other errors are reported via ``oneapi::dal::internal_error``.
      - No
    * - ``oneapi::dal::internal_error``
      - Reports all runtime errors that couldn't be assigned to other inheritors.
+     - No
+
+All memory allocation errors are represented by ``oneapi::dal::bad_alloc``. They
+shall be divided into 2 groups depending on where the error occured:
+
+- Host memory allocation error.
+- Device memory allocation error.
+
+::
+
+    class oneapi::dal::host_bad_alloc :  public oneapi::dal::bad_alloc;
+    class oneapi::dal::device_bad_alloc :  public oneapi::dal::bad_alloc;
+
+.. list-table::
+   :widths: 30 65 5
+   :header-rows: 1
+
+   * - Exception
+     - Description
+     - Abstract
+   * - ``oneapi::dal::host_bad_alloc``
+     - Reports failures to allocate storage on the host.
+     - No
+   * - ``oneapi::dal::device_bad_alloc``
+     - Reports failures to allocate storage on the device.
      - No
