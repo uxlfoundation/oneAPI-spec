@@ -12,8 +12,7 @@ namespace method {
 } // namespace method
 
 namespace task {
-   /// Tag-type that parametrizes entities used for solving
-   /// :capterm:`initialization problem <init>`.
+   /// Tag-type that parametrizes entities used for obtaining the initial K-Means centroids.
    struct init {};
 
    /// Alias tag-type for the initialization task.
@@ -97,8 +96,8 @@ public:
 /// @post :expr:`result.centroids.row_count == desc.cluster_count`
 /// @post :expr:`result.centroids.column_count == input.data.column_count`
 template <typename Float, typename Method, typename Task>
-compute_result compute(const descriptor<Float, Method>& desc,
-                   const compute_input& input);
+compute_result<Task> compute(const descriptor<Float, Method, Task>& desc,
+                   const compute_input<Task>& input);
 
 
 } // namespace oneapi::dal:kmeans_init
