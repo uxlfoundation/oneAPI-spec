@@ -72,7 +72,7 @@ shall be divided into the following groups:
 - domain errors
 - out of range errors
 - errors with an unimplemented method or algorithm
-- unavailable device or data
+- unsupported device
 
 ::
 
