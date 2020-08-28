@@ -102,6 +102,20 @@ Table
 -----
 
 A base implementation of the :txtref:`table` concept.
+The ``table`` type and all of its subtypes shall be :term:`reference-counted <Reference-counted object>`:
+
+1. The instance shall store a pointer to table implementation that holds all
+   property values and data
+
+2. The reference count indicating how many table objects refer to the same implementation.
+
+3. The table shall increment the reference count
+   for it to be equal to the number of table objects sharing the same implementation.
+
+4. The table shall decrement the reference count when the
+   table goes out of the scope. If the reference count is zero, the table shall
+   free its implementation.
+
 
 .. onedal_class:: oneapi::dal::table
 
@@ -134,10 +148,10 @@ An implementation of the :capterm:`data layout` concept.
       Represents the :capterm:`data layout` that is undefined or unknown at this moment.
 
    data_layout::row_major
-      The data block elements are stored row-by-row.
+      The data block elements are stored in raw-major layout.
 
    data_layout::column_major
-      The data block elements are stored column-by-column.
+      The data block elements are stored in column_major layout.
 
 .. _feature_type:
 

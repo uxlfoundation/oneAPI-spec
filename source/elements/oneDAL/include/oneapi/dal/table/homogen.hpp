@@ -33,6 +33,7 @@ public:
 
 public:
     /// Creates a new ``homogen_table`` instance with zero row and column count.
+    /// The :expr:`kind` shall be set to``homogen_table::kind()``.
     /// All the properties shall be set to default value (see the Properties section).
     homogen_table();
 

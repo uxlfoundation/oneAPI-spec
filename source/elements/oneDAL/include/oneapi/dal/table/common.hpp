@@ -31,24 +31,24 @@ public:
 
 class table {
 public:
-    /// Creates the table instance with zero row and column count.
-    /// All the table properties shall be set to default value (see Properties section).
+    /// An empty table constructor: creates the table instance with zero row and column count.
+    /// Implementation shall be set to the special "empty" object that returns all the property values
+    /// set to default (see Properties section).
     table();
 
-    /// Creates a new table instance which shares all the data and property
-    /// values with $other$.
+    /// Creates a new table instance which shares implementation with $other$.
     table(const table& other);
 
-    /// Creates a new table instance and moves all property values from $other$ into it.
+    /// Creates a new table instance and moves implementation from $other$ into it.
     table(table&& other);
 
-    /// Replaces the values of all properties by references to property values of $other$
+    /// Replaces the implementation by another one from $other$.
     table& operator=(const table& other);
 
-    /// Swaps the property values of this object and $other$.
+    /// Swaps the implementation of this object and $other$.
     table& operator=(table&& other);
 
-    /// Indicates whether a table contains non-zero count of rows and columns or not
+    /// Indicates whether a table contains non-zero count of rows and columns.
     bool has_data() const noexcept;
 
     /// The number of columns in the table.
@@ -66,7 +66,7 @@ public:
 
     /// The runtime id of the table type.
     /// Each table sub-type shall have its unique ``kind``.
-    /// An empty table shall have a unique ``kind`` value as well.
+    /// An empty table (see the default constructor) shall have a unique ``kind`` value as well.
     /// @remark default = empty_table_kind
     std::int64_t get_kind() const;
 
