@@ -116,7 +116,7 @@ Args
 Operation
 ~~~~~~~~~
 
-Supported value of the :code:`DatasetType` template parameter for :expr:`read` operation with CSV data source is :code:`onedal::table`.
+:code:`onedal::table` is the only supported value of the :code:`DatasetType` template parameter for :expr:`read` operation with CSV data source.
 
 .. namespace:: onedal
 .. function:: template <typename DatasetType, typename DataSource> \
