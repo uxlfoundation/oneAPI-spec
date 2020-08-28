@@ -21,8 +21,8 @@ a storage that:
 
 5. Holds ownership information on the data (see the :txtref:`data_ownership_requirements` section).
 
-6. Ownership information on the data can be shared between several arrays - it is
-   possible to create new array from another one without any data copies.
+6. Ownership information on the data can be shared between several arrays. It is
+   possible to create a new array from another one without any data copies.
 
 -------------
 Usage example
