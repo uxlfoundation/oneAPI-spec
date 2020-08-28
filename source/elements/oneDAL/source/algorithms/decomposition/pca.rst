@@ -96,8 +96,9 @@ Given the inference set :math:`X' = \{ x_1', \ldots, x_m' \}` of
 to the set :math:`X'' = \{ x_1'', \ldots, x_m'' \}`, where :math:`x_{j}''` is an
 :math:`r`-dimensional feature vector, :math:`1 \leq j \leq m`.
 
-The feature vector :math:`x_{j}''` is computed through applying linear transformation
-[Lang87]_ with the matrix :math:`T` to the feature vector :math:`x_{j}'`,
+The feature vector :math:`x_{j}''` is computed through applying linear
+transformation [Lang87]_ defined by the matrix :math:`T` to the feature vector
+:math:`x_{j}'`,
 
 .. math::
    :label: x_transform
