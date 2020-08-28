@@ -95,39 +95,39 @@ usage scenario:
 Data ownership requirements
 ---------------------------
 
-The array shall support following requirements on the internal data management:
+The array shall support the following requirements on the internal data management:
 
 1. An array shall own two properties representing raw pointers to the data:
 
-   - ``data`` for a pointer to immutable data block,
-   - ``mutable_data`` for a pointer to mutable data block (see the :txtref:`programming_interface`).
+   - ``data`` for a pointer to immutable data block
+   - ``mutable_data`` for a pointer to mutable data block (see the :txtref:`programming_interface`)
 
-2. If array owns mutable data, both properties shall point to the same memory
+2. If an array owns mutable data, both properties shall point to the same memory
    block.
 
-3. If array owns immutable data, ``mutable_data`` shall be ``nullptr``.
+3. If an array owns immutable data, ``mutable_data`` shall be ``nullptr``.
 
-4. Array shall store the count of elements in the block it owns and shall update
+4. An array shall store the number of elements in the block it owns and shall update
    the ``count`` property when a new memory block is assigned to the array.
 
-5. Array shall store a pointer to the **ownership structure** on the data:
+5. An array shall store a pointer to the **ownership structure** of the data:
 
-   - The **reference counter**, indicating how many array objects refer to the
+   - The **reference count** indicating how many array objects refer to the
      same memory block.
 
-   - The **deleter** object used to free the memory block, when
-     reference counter becomes zero.
+   - The **deleter** object used to free the memory block when
+     reference count reaches zero.
 
-6. Array shall create the ownership structure for a new memory block that do not
+6. An array shall create the ownership structure for a new memory block not
    associated with such structure.
 
-7. Array shall decrement the number of references to the memory block then the
-   array goes out of the scope. If the number of references becomes zero, the
+7. An array shall decrement the number of references to the memory block when the
+   array goes out of the scope. If the number of references reaches zero, the
    array shall call the deleter on this memory block and free the ownership structure.
 
-8. Array shall store the pointer to the ownership structure created by another
-   array when they share the data. Array shall increment the reference counter
-   to be equal to the number of array objects sharing the same data.
+8. An array shall store the pointer to the ownership structure created by another
+   array when they share the data. An array shall increment the reference count
+   for it to be equal to the number of array objects sharing the same data.
 
 .. _programming_interface:
 
