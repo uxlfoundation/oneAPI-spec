@@ -61,22 +61,19 @@ steps:
 
 Covariance matrix computation shall be performed in the following way:
 
-#. Compute the vector-column of sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1
-\leq i \leq p`.
+#. Compute the vector-column of sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1 \leq i \leq p`.
 
-#. Compute the cross-product :math:`P = XX^T - s^Ts`.
+#. Compute the cross-product :math:`P = X^TX - s^Ts`.
 
 #. Compute the covariance matrix :math:`\Sigma = \frac{1}{n - 1} P`.
 
-Eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i`, where
-:math:`1 \leq i \leq p`, shall be computed. One of the techniques proposed in
-[Ping14]_ is used by oneMKL.
+To compute eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i`, the implementer can choose an arbitrary
+method such as [Ping14]_.
 
 The final step is to sort the set of pairs :math:`(\lambda_i, \upsilon_i)` in
 the descending order by :math:`\lambda_i` and form the resulting matrix :math:`T
 = (\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`.
-Additionally, characteristics of the initial dataset (e.g. means, variances)
-shall be computed.
+Additionally, the means and variances of the initial dataset are computed.
 
 .. _pca_t_math_svd:
 
