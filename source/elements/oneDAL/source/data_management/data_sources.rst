@@ -12,10 +12,12 @@ This section describes the types related to the :txtref:`data-source` concept.
 Read
 ====
 
-**Read operation** is a function that transforms a data source and other arguments represented via `an args <args_>`_ object
-to `a result <result_>`_ object. The operation is responsible for:
+**Read operation** is a function that transforms a data source and other
+arguments represented via `an args <args_>`_ object to `a result <result_>`_
+object. The operation is responsible for:
 
-- Executing all of the data retrieval and transformation routines of the data source.
+- Executing all of the data retrieval and transformation routines of the data
+  source.
 
 - Passing a SYCL* queue to the data retrieval and transformation routines.
 
@@ -32,17 +34,17 @@ read operation.
 
    namespace oneapi::dal {
 
-   template <typename DatasetType, typename DataSource>
+   template <typename Object, typename DataSource>
    using read_args_t = /* implementation defined */;
 
-   template <typename DatasetType, typename DataSource>
-   using read_result_t = DatasetType;
+   template <typename Object, typename DataSource>
+   using read_result_t = Object;
 
-   template <typename DatasetType, typename DataSource>
-   read_result_t<DatasetType, DataSource> read(
+   template <typename Object, typename DataSource>
+   read_result_t<Object, DataSource> read(
       sycl::queue& queue,
       const DataSource& data_source,
-      const read_args_t<DatasetType, DataSource>& args);
+      const read_args_t<Object, DataSource>& args);
 
    } // namespace oneapi::dal
 
@@ -74,17 +76,17 @@ to the general one described in section `Read operation definition
 
   .. code-block:: cpp
 
-     template <typename DatasetType, typename DataSource>
-     read_result_t<DatasetType, DataSource> read(
+     template <typename Object, typename DataSource>
+     read_result_t<Object, DataSource> read(
         const DataSource& data_source,
-        const read_args_t<DatasetType, DataSource>& args);
+        const read_args_t<Object, DataSource>& args);
 
 - A shortcut that allows omitting explicit args creation.
 
   .. code-block:: cpp
 
-     template <typename DatasetType, typename DataSource, typename... Args>
-     read_result_t<DatasetType, DataSource> read(
+     template <typename Object, typename DataSource, typename... Args>
+     read_result_t<Object, DataSource> read(
         sycl::queue& queue,
         const DataSource& data_source,
         Args&&... args);
@@ -94,8 +96,8 @@ to the general one described in section `Read operation definition
 
   .. code-block:: cpp
 
-     template <typename DatasetType, typename DataSource, typename... Args>
-     read_result_t<DatasetType, DataSource> read(
+     template <typename Object, typename DataSource, typename... Args>
+     read_result_t<Object, DataSource> read(
         const DataSource& data_source,
         Args&&... args);
 
@@ -106,7 +108,7 @@ to the general one described in section `Read operation definition
 Args
 ----
 
-- The string ``%DATA_SOURCE%`` should be substituted with the name of the data source, for example, ``csv``. 
+- The string ``%DATA_SOURCE%`` should be substituted with the name of the data source, for example, ``csv``.
 
 - ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` should be substituted with the name and the type of one
   of the data source args properties.
@@ -115,7 +117,7 @@ Args
 
    namespace oneapi::dal::%DATA_SOURCE% {
 
-   template <typename DatasetType, typename DataSource>
+   template <typename Object, typename DataSource>
    class read_args {
    public:
       read_args(
@@ -138,7 +140,8 @@ Args
 Result
 ------
 
-The result of a :expr:`read` operation is an instance of an in-memory dataset with :code:`DatasetType` type.
+The result of a :expr:`read` operation is an instance of an in-memory object
+with :code:`Object` type.
 
 Data Source Types
 =================
