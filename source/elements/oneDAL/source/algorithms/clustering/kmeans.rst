@@ -1,6 +1,8 @@
 .. highlight:: cpp
 .. default-domain:: cpp
 
+.. _alg_kmeans:
+
 =======
 K-Means
 =======

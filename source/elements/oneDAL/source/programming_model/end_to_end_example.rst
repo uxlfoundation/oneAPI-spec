@@ -1,111 +1,86 @@
 ==================
 End-to-end example
 ==================
-
-Below you can find a typical workflow of using |dal_short_name| algorithm on GPU.
-The example is provided for Principal Component Analysis algorithm (PCA).
+Below you can find a typical workflow of using oneDAL algorithm on GPU. The
+example is provided for :txtref:`Principal Component Analysis algorithm (PCA)
+<alg_pca>`.
 
 The following steps depict how to:
 
-- Pass the data
-- Initialize the algorithm
-- Request statistics to be calculated (means, variances, eigenvalues)
-- Compute results
-- Get calculated eigenvalues and eigenvectors
+- Read the data from CSV file
+- Run the training and inference operations for PCA
+- Access intermediate results obtained at the training stage
 
-#. Include the following header file to enable the DPC++ interface for
-   |dal_short_name|:
+#. Include the following header. This make all oneDAL declarations available.
 
    .. code-block::
-      :substitutions:
 
-      #include "|daal_in_code|_sycl.h"
+      #include "oneapi/dal.hpp"
+
+      #include <cassert>
+      #include <iostream>
 
 #. Create a DPC++ queue with the desired device selector. In this case,
    GPU selector is used:
 
-   .. parsed-literal::
+   .. code-block:: cpp
 
-      cl::sycl::queue queue { cl::sycl::gpu_selector() };
+      const auto queue = sycl::queue{ sycl::gpu_selector{} };
 
-#. Create an execution context from the DPC++ queue and set up as the
-   default for all algorithms. The execution context is the |dal_short_name|
-   concept that is intended for delivering queue and device information
-   to the algorithm kernel:
+#. All oneDAL declarations are in the ``oneapi::dal`` namespace,
+   so import all declarations from the ``oneapi`` namespace to use ``dal``
+   instead of ``oneapi::dal`` for brevity:
 
-   .. parsed-literal::
+   .. code-block:: cpp
 
-      |dal_namespace|::services::Environment::getInstance()->setDefaultExecutionContext(
-            |dal_namespace|::services::SyclExecutionContext(queue) );
-
-#. Create a DPC++ buffer from the data allocated on host:
-
-   .. parsed-literal::
-
-      constexpr size_t nRows = 10;
-      constexpr size_t nCols = 5;
-      const float dataHost[] = {
-             0.42, -0.88,  0.46,  0.04, -0.86,
-            -0.74, -0.59,  0.42, -1.44, -0.40,
-            -1.45,  1.07, -1.00, -0.29,  0.35,
-            -0.67,  0.20,  0.47, -1.07,  0.71,
-            -1.19,  0.20,  0.84, -0.26,  1.47,
-            -1.87, -0.94, -1.16, -0.64, -2.10,
-            -0.65, -0.40, -1.88, -0.48,  0.70,
-            -0.52, -0.34, -1.48, -0.63, -0.87,
-            -0.74, -0.46,  1.07,  0.65, -1.68,
-             0.94,  1.88, -0.73, -1.16,  0.10
-      };
-      auto dataBuffer = cl::sycl::buffer<float, 1>(dataHost, nCols * nRows);
-
-#. Create a DPC++ numeric table from a DPC++ buffer. DPC++ numeric table is a new concept
-   introduced as a part of DPC++ interfaces to work with data stored in DPC++ buffer.
-   It implements an interface of a classical numeric table acting as an adapter between DPC++
-   and |dal_short_name| APIs for data representation.
-
-   .. parsed-literal::
-
-      auto data = |dal_namespace|::data_management::SyclHomogenNumericTable<float>::create(
-            dataBuffer, nCols, nRows);
+      using namespace oneapi;
 
 
-#. Create an algorithm object, configure its parameters, set up input
-   data, and run the computations.
+#. Read the data from the CSV file into :txtref:`table` by means of
+   :txtref:`CSV data source <csv-data-source>`:
 
-   .. parsed-literal::
+   .. code-block:: cpp
 
-      |dal_namespace|::algorithms::pca::Batch<float> pca;
+      const auto data = dal::read<dal::table>(queue, dal::csv::data_source{"data.csv"});
 
-      pca.parameter.nComponents = 3;
-      pca.parameter.resultsToCompute = |dal_namespace|::algorithms::pca::mean |
-      |dal_namespace|::algorithms::pca::variance |
-      |dal_namespace|::algorithms::pca::eigenvalue;
-      pca.input.set(|dal_namespace|::algorithms::pca::data, data);
+#. Create an :txtref:`PCA <alg_pca>` descriptor, configure its parameters and
+   run the training on the data loaded from CSV.
 
-      pca.compute();
+   .. code-block:: cpp
 
-#. Get the algorithm result:
+      const auto pca_desc = dal::pca::descriptor<float>
+         .set_component_count(3)
+         .set_deterministic(true);
 
-   .. parsed-literal::
+      const dal::pca::train_result train_res = dal::train(queue, pca_desc, data);
 
-      auto result = pca.getResult();
-      NumericTablePtr eigenvalues = result->get(|dal_namespace|::algorithms::pca::eigenvalues);
-      NumericTablePtr eigenvectors = result->get(|dal_namespace|::algorithms::pca::eigenvectors);
+#. Print the learned eigenvectors:
 
-#. Get the raw data as DPC++ buffer from the resulting numeric tables:
+   .. code-block:: cpp
 
-   .. parsed-literal::
+      const dal::table eigenvectors = train_res.get_eigenvectors();
 
-      const size_t startRowIndex = 0;
-      const size_t numberOfRows = eigenvectors->getNumberOfRows();
+      const auto acc = dal::row_accessor<const float>{eigenvectors};
+      for (std::int64_t i = 0; i < eigenvectors.row_count(); i++) {
 
-      BlockDescriptor<float> block;
-      eigenvectors->getBlockOfRows(startRowIndex, numberOfRows, readOnly, block);
+         /* Get i-th row from the table, the eigenvector stores pointer to USM */
+         const dal::array<float> eigenvector = acc.pull(queue, {i, i + 1});
+         assert(eigenvector.get_count() == eigenvectors.get_column_count());
 
-      cl::sycl::buffer<float, 1> buffer = block.getBuffer().toSycl();
+         std::cout << i << "-th eigenvector: ";
+         for (std::int64_t j = 0; j < eigenvector.get_count(); j++) {
+            std::cout << eigenvector[j] << " ";
+         }
+         std::cout << std::endl;
+      }
 
-      eigenvectors->releaseBlockOfRows(block);
+#. Use the trained model for inference to reduce dimensionality of the data:
 
-At the end of the stage, the resulting numeric tables can be used as an input for another algorithm,
-or the buffer can be passed to the user-defined kernel.
+   .. code-block:: cpp
 
+      const dal::pca::model model = train_res.get_model();
+
+      const dal::table data_transformed =
+         dal::infer(queue, pca_desc, data).get_transformed_data();
+
+      assert(data_transformed.column_count() == 3);

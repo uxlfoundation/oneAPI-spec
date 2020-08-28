@@ -117,7 +117,7 @@ to the general one described in section `General operation definition
 -----
 Input
 -----
-An input objects aggregates all the data that algorithm requires for performing
+An input object aggregates all the data that algorithm requires for performing
 specific operation. The data represented via :txtref:`tables <table>`, so,
 typically, an input is a collection of tables, but not limited with them and can
 aggregate objects of arbitrary type.
@@ -174,7 +174,11 @@ the following strings shall be substituted:
 Result
 ------
 
+A result object aggregates all output values computed by the algorithm. All
+assumptions about `an input <input_>`_ is applied to a result.
+
 .. code-block:: cpp
+   :name: result_template
 
    namespace oneapi::dal::%ALGORITHM% {
 
@@ -194,7 +198,14 @@ Result
 
    } // namespace oneapi::dal::%ALGORITHM%
 
+
+-------------------
+Supported operation
+-------------------
+Please refer to the :txtref:`Supported operations <op_supported>` section for
+more information about particular operations.
+
 .. toctree::
-   train.rst
-   infer.rst
-   compute.rst
+   :hidden:
+
+   support.rst
