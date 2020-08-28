@@ -1,48 +1,16 @@
 .. highlight:: cpp
 .. default-domain:: cpp
 
-=================
-Algorithm Anatomy
-=================
-
-oneDAL primarily targets algorithms that are extensively used in data analytics.
-These algorithms typically have many parameters, i.e. knobs to control its
-internal behavior and produced result. In machine learning, those parameters are
-often referred as *meta-parameters* to distinguish them from the model
-parameters learned during the training. `Some algorithms <xgboost_params_>`_
-define a dozen meta-parameters, while others depend on another algorithm as, for
-example, the logistic regression training procedure depends on optimization
-algorithm.
-
-.. _xgboost_params: https://xgboost.readthedocs.io/en/latest/parameter.html
-
-Besides meta-parameters, machine learning algorithms may have different *stages*,
-such as :term:`training <Training>` and :term:`inference <Inference>`. Moreover,
-the stages of an algorithm may be implemented in a variety of *computational
-methods*. For instance, a linear regression model could be trained
-by solving a system of linear equations [Friedman17]_ or by applying
-an iterative optimization solver directly to the empirical risk function [Zhang04]_.
-
-From computational perspective, algorithm implementation may rely on different
-*floating-point types*, such as ``float``, ``double`` or ``bfloat16``. Having a
-capability to specify what type is needed is important for the end user as their
-precision requirements vary depending on a workload.
-
-To best tackle the mentioned challenges, each algorithm is decomposed into
-`descriptors`_ and `operations`_.
-
-
 .. _descriptors:
 
------------
+===========
 Descriptors
------------
-
+===========
 **A descriptor** is an object that represents an algorithm including all its
-meta-parameters, dependencies on other algorithms, floating-point types, and
-computational methods. A descriptor serves as:
+meta-parameters, dependencies on other algorithms, floating-point types,
+computational methods and tasks. A descriptor serves as:
 
-- A dispatching mechanism for `operations`_. Based on a descriptor
+- A dispatching mechanism for :txtref:`operations`. Based on a descriptor
   type, an operation executes a particular algorithm implementation.
 
 - An aggregator of meta-parameters. It provides an interface for setting up
@@ -56,7 +24,7 @@ descriptor is defined (for more details, see :txtref:`Namespaces
 <common_namespaces>`). Descriptor, in its turn, defines the following:
 
 - **Template parameters.** A descriptor is allowed to have any number of template
-  parameters, but shall support at least two:
+  parameters, but shall support at least three:
 
    + ``Float`` is a `floating-point type <floating-point_>`_ that the algorithm
      uses for computations. This parameter is defined first and has the
@@ -66,11 +34,15 @@ descriptor is defined (for more details, see :txtref:`Namespaces
      <methods_>`_. This parameter is defined second and has the
      ``method::by_default`` default value.
 
+   + ``Task`` is a tag-type that specifies the `computational task <tasks_>`_.
+     This parameter is defined third and has the ``task::by_default`` default
+     value.
+
 - **Properties.** A property is a run-time parameter that can be accessed by
   means of the corresponding :term:`getter <Getter>` and :term:`setter <Setter>`
   methods.
 
-`The following code sample <descriptor-template_>`_ shows the common structure
+`The following code sample <descriptor_template_>`_ shows the common structure
 of a descriptor's definition for an abstract algorithm. To define a particular
 algorithm, the following strings shall be substituted:
 
@@ -81,15 +53,20 @@ algorithm, the following strings shall be substituted:
   of the algorithm's properties.
 
 .. code-block:: cpp
-   :name: descriptor-template
+   :name: descriptor_template
 
    namespace oneapi::dal::%ALGORITHM% {
 
    template <typename Float  = default_float_t,
              typename Method = method::by_default,
+             typename Task   = task::by_default,
              /* more template parameters */>
    class descriptor {
    public:
+      /* Constructor */
+      descriptor(const %PROPERTY_TYPE%& %PROPERTY_NAME%,
+                 /* more properties */)
+
       /* Getter & Setter for the property called `%PROPERTY_NAME%` */
       descriptor& set_%PROPERTY_NAME%(%PROPERTY_TYPE% value);
       %PROPERTY_TYPE% get_%PROPERTY_NAME%() const;
@@ -102,6 +79,8 @@ algorithm, the following strings shall be substituted:
 
 Each meta-parameter of an algorithm is mapped to a property that shall satisfy
 the following requirements:
+
+.. _property_reqs:
 
 - Properties are defined with getter and setter methods. The underlying
   class member variable that stores the property's value is never exposed in the
@@ -128,9 +107,9 @@ the following requirements:
 
 .. _floating-point:
 
+--------------------
 Floating-point Types
 --------------------
-
 It is required for each algorithm to support at least one implementation-defined
 floating-point type. Other floating-point types are optional, for example ``float``,
 ``double``, ``float16``, and ``bfloat16``. It is up to a specific oneDAL
@@ -148,14 +127,13 @@ implementation-defined and shall be declared within the top-level namespace.
 
 .. _methods:
 
+---------------------
 Computational Methods
 ---------------------
-
 The supported computational methods are declared within the
 ``%ALGORITHM%::method`` namespace using tag-types. Algorithm shall support at
-least one computational method and declare the ``by_default`` type alias that
-refers to one of the computational methods as shown in the example below.
-
+least one method and declare the ``by_default`` type alias that refers to one of
+the methods as shown in the example below.
 
 .. code-block:: cpp
 
@@ -168,19 +146,27 @@ refers to one of the computational methods as shown in the example below.
    } // namespace oneapi::dal::%ALGORITHM%
 
 
+.. _tasks:
 
-.. _operations:
+-------------------
+Computational Tasks
+-------------------
+The supported computational tasks are declared within the ``%ALGORITHM%::task``
+namespace using tag-types. Algorithm shall support at least one task and declare
+the ``by_default`` type alias that refers to one of the tasks as shown in the
+example below.
 
-----------
-Operations
-----------
+If an algorithm assumes both ``classification`` and ``regression`` tasks, the
+default task shall be ``classification``.
 
-.. _input:
+.. code-block:: cpp
 
-Input
------
+   namespace oneapi::dal::%ALGORITHM% {
+      namespace task {
+         struct classification {};
+         struct regression {};
+         using by_default = classification;
+      } // namespace task
+   } // namespace oneapi::dal::%ALGORITHM%
 
-.. _result:
 
-Result
-------

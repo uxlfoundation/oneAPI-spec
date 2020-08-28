@@ -1,6 +1,8 @@
 .. highlight:: cpp
 .. default-domain:: cpp
 
+.. _alg_pca:
+
 ===================================
 Principal Components Analysis (PCA)
 ===================================
