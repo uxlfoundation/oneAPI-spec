@@ -28,7 +28,7 @@ a storage that:
 Usage example
 -------------
 
-Next listing provides a brief introduction to the array API and example of basic
+The following listing provides a brief introduction to the array API and an example of basic
 usage scenario:
 
 ::
