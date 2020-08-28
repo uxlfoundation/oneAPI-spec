@@ -244,5 +244,5 @@ Details
 .. toctree::
 
    data_sources.rst
-   tables.rst
+   table.rst
    accessors.rst

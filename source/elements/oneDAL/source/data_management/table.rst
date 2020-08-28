@@ -30,20 +30,6 @@ This section describes the types related to the :txtref:`table` concept.
      - An enumeration of :capterm:`feature` types used in |dal_short_name| to
        define set of available operations onto the data.
 
-|dal_short_name| defines a set of classes that implement the
-:txtref:`table` concept for a specific data format:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 10 70
-
-   * - Table type
-     - Description
-
-   * - :txtref:`homogen_table`
-     - Dense table that contains :term:`contiguous <Contiguous data>`
-       :term:`homogeneous <Homogeneous data>` data.
-
 ---------------------------
 Requirements on table types
 ---------------------------
@@ -84,6 +70,23 @@ Next listing provides an example of table API regarding kinds and copy-assignmen
   table3 = table2;
   std::cout << table2.get_kind() == table3.get_kind() << std::endl; // true
 
+-----------
+Table types
+-----------
+
+|dal_short_name| defines a set of classes that implement the
+:txtref:`table` concept for a specific data format:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 10 70
+
+   * - Table type
+     - Description
+
+   * - :txtref:`homogen_table`
+     - Dense table that contains :term:`contiguous <Contiguous data>`
+       :term:`homogeneous <Homogeneous data>` data.
 
 .. _table_programming_interface:
 
@@ -92,7 +95,7 @@ Programming interface
 ---------------------
 
 Table
----------------------
+-----
 
 A base implementation of :txtref:`table` concept.
 
