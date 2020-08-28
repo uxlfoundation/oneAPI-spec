@@ -13,19 +13,19 @@ public:
 
     /// Creates the metadata instance from external information about data types and
     /// feature types.
-    /// @param dtypes Data types of features. Shall be assigned into the :expr:`data_type` property.
+    /// @param dtypes Data types of the features. Shall be assigned into the :expr:`data_type` property.
     /// @param ftypes Feature types of features. Shall be assigned into the :expr:`feature_type` property.
     /// @pre :expr:`dtypes.get_count() == ftypes.get_count()`
     table_metadata(const array<data_type>& dtypes, const array<feature_type>& ftypes);
 
-    /// The count of features that metadata has information about
+    /// The number of features that metadata has information about
     /// @pre :expr:`feature_count >= 0`
     std::int64_t get_feature_count() const;
 
     /// Feature types in the metadata object. Shall be in range ``[0, feature_count)``
     const feature_type& get_feature_type(std::int64_t feature_index) const;
 
-    /// Data types of features in the metadata object. Shall be in range ``[0, feature_count)``
+    /// Data types of the features in the metadata object. Shall be in range ``[0, feature_count)``
     const data_type& get_data_type(std::int64_t feature_index) const;
 };
 
@@ -59,14 +59,14 @@ public:
     /// @remark default = 0
     std::int64_t get_row_count() const;
 
-    /// The metadata object that hold additional information
+    /// The metadata object that holds additional information
     /// about the data within the table.
     /// @remark default = oneapi::dal::table_metadata{}
     const table_metadata& get_metadata() const;
 
     /// The runtime id of the table type.
-    /// Every particular table sub-type shall have its unique ``kind``.
-    /// Empty table shall have a unique kind value as well.
+    /// Each table sub-type shall have its unique ``kind``.
+    /// An empty table shall have a unique ``kind`` value as well.
     /// @remark default = empty_table_kind
     std::int64_t get_kind() const;
 
