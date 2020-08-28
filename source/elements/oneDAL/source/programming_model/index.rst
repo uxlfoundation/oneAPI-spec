@@ -7,7 +7,7 @@ internal behavior and produced result. In machine learning, those parameters are
 often referred as *meta-parameters* to distinguish them from the model
 parameters learned during the training. `Some algorithms <xgboost_params_>`_
 define a dozen meta-parameters, while others depend on another algorithm as, for
-example, the logistic regression training procedure depends on optimization
+example, the logistic regression training procedure depends on an optimization
 algorithm.
 
 .. _xgboost_params: https://xgboost.readthedocs.io/en/latest/parameter.html

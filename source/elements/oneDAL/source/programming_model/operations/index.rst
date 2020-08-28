@@ -6,14 +6,14 @@ Operations
 
 **An operation** is a function that transforms :txtref:`a descriptor
 <descriptors>` and other arguments represented via `an input <input_>`_ object
-to `a result <result_>`_ object. An operation responsible for:
+to `a result <result_>`_ object. An operation is responsible for:
 
-- Execution of all computational routines of the algorithm represented by the
+- Executing all of an algorithm's computational routines represented by the
   descriptor.
 
 - Passing SYCL* queue to computational routines.
 
-- Verification of preconditions and postconditions, before and after execution
+- Verifying preconditions and postconditions before and after the execution
   of computational routines.
 
 .. _general_operation:
@@ -49,19 +49,19 @@ Each operation shall satisfy the following requirements:
 
 - An operation shall accept three parameters in the following order:
 
-  + The SYCL* queue object.
-  + The descriptor of the algorithm.
-  + The `input object <input_>`_.
+  + The SYCL* queue object
+  + The descriptor of the algorithm
+  + The `input object <input_>`_
 
 - An operation shall return the `result object <result_>`_.
 
 - The ``%OPERATION%_input_t`` and ``%OPERATION%_result_t`` alias
   templates shall be used for inference of the input and return types.
 
-- If precondition is violated, an operation shall throw an exception derived
+- If a precondition is violated, an operation shall throw an exception derived
   from ``oneapi::dal::logic_error``.
 
-- If postcondition is violated, an operation shall throw an exception derived
+- If a postcondition is violated, an operation shall throw an exception derived
   from ``oneapi::dal::runtime_error``.
 
 - If descriptor is incompatible with some operation, the error shall be reported
@@ -79,9 +79,9 @@ following overloaded functions called *shortcuts* for each operation in addition
 to the general one described in section `General operation definition
 <general_operation_>`_.
 
-- Shortcut for execution on :term:`host <Host/Device>`. Performs the same
-  operation as the general function on host, but does not require passing the
-  queue explicitly.
+- A shortcut for execution on :term:`host <Host/Device>` that performs the same
+  operation as the general function on host, but does not require the
+  queue to be passed explicitly.
 
   .. code-block:: cpp
 
@@ -90,7 +90,7 @@ to the general one described in section `General operation definition
         const Descriptor& desc,
         const %OPERATION%_input_t<Descriptor>& input);
 
-- Shortcut that allows omitting explicit input creation.
+- A shortcut that allows omitting explicit input creation.
 
   .. code-block:: cpp
 
@@ -100,7 +100,7 @@ to the general one described in section `General operation definition
         const Descriptor& desc,
         Args&&... args);
 
-- Shortcut that allows omitting explicit queue and input creation. This is
+- A shortcut that allows omitting explicit queue and input creation. This is a
   combination of two previous shortcuts.
 
   .. code-block:: cpp
