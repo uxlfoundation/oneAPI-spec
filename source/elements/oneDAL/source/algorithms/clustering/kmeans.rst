@@ -104,13 +104,13 @@ Given the inference set :math:`X' = \{ x_1', \ldots, x_m' \}` of
 :math:`p`-dimensional feature vectors and the set :math:`C = \{ c_1, \ldots, c_k
 \}` of centroids produced at the training stage, the problem is to predict the
 index :math:`y_j' \in \{ 0, \ldots, k-1 \}`, :math:`1 \leq j \leq m`, of the
-centroid according to some method-defined rule.
+centroid in accordance with a method-defined rule.
 
 .. _kmeans_i_math_lloyd:
 
 Inference method: *Lloyd's*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Lloyd's inference method computes the :math:`y_j'` as index of the centroid
+Lloyd's inference method computes the :math:`y_j'` as an index of the centroid
 closest to the feature vector :math:`x_j'`,
 
 .. math::
@@ -131,7 +131,7 @@ Inference
 ---------------------
 Programming Interface
 ---------------------
-All type and function in this section shall be declared in the
+All types and functions in this section shall be declared in the
 ``oneapi::dal::kmeans`` namespace and be available via inclusion of the
 ``oneapi/dal/algo/kmeans.hpp`` header file.
 

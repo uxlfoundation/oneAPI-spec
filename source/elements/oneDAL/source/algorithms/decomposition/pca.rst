@@ -93,10 +93,10 @@ Inference
 Given the inference set :math:`X' = \{ x_1', \ldots, x_m' \}` of
 :math:`p`-dimensional feature vectors and the :math:`r \times p` matrix
 :math:`T` produced at the training stage, the problem is to transform :math:`X'`
-to the set :math:`X'' = \{ x_1'', \ldots, x_m'' \}`, where :math:`x_{j}''` is
+to the set :math:`X'' = \{ x_1'', \ldots, x_m'' \}`, where :math:`x_{j}''` is an
 :math:`r`-dimensional feature vector, :math:`1 \leq j \leq m`.
 
-The feature vector :math:`x_{j}''` is computed by applying linear transformation
+The feature vector :math:`x_{j}''` is computed through applying linear transformation
 [Lang87]_ with the matrix :math:`T` to the feature vector :math:`x_{j}'`,
 
 .. math::
@@ -128,7 +128,7 @@ Inference
 ---------------------
 Programming Interface
 ---------------------
-All type and function in this section shall be declared in the
+All types and functions in this section shall be declared in the
 ``oneapi::dal::pca`` namespace and be available via inclusion of the
 ``oneapi/dal/algo/pca.hpp`` header file.
 
