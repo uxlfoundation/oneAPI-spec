@@ -12,7 +12,7 @@ a storage that:
    data are organized as one :term:`homogeneous <Homogeneous data>` and
    :term:`contiguous <Contiguous data>` memory block.
 
-2. Contains information about the memory block size.
+2. Contains information about the memory block's size.
 
 3. Supports both :term:`immutable <Immutability>` and mutable data.
 
