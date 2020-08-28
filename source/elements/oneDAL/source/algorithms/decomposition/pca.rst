@@ -51,30 +51,32 @@ contains one eigenvector in each row.
 Training method: *Covariance*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This method uses eigendecomposition of the covariance matrix to find the
-principal components of the dataset. The following steps are distinguished:
+This method uses eigenvalue decomposition of the covariance matrix to compute
+the principal components of the datasets. The method relies on the following
+steps:
 
-#. Covariance computation
-#. Eigenvectors and eigenvalues computation
-#. Resulting matrix formation
+#. Computation of the covariance matrix
+#. Computation of the eigenvectors and eigenvalues
+#. Formation of the matrices storing the results
 
 Covariance matrix computation shall be performed in the following way:
 
-#. Compute the sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1 \leq i \leq p`.
+#. Compute the vector-column of sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1
+\leq i \leq p`.
 
 #. Compute the cross-product :math:`P = XX^T - s^Ts`.
 
 #. Compute the covariance matrix :math:`\Sigma = \frac{1}{n - 1} P`.
 
-To compute eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i`,
-where :math:`1 \leq i \leq p`, the following equation shall be resolved:
-
-.. math::
-   \Sigma\lambda =  v\lambda
+Eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i`, where
+:math:`1 \leq i \leq p`, shall be computed. One of the techniques proposed in
+[Ping14]_ is used by oneMKL.
 
 The final step is to sort the set of pairs :math:`(\lambda_i, \upsilon_i)` in
 the descending order by :math:`\lambda_i` and form the resulting matrix :math:`T
-= (\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`
+= (\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`.
+Additionally, characteristics of the initial dataset (e.g. means, variances)
+shall be computed.
 
 .. _pca_t_math_svd:
 
