@@ -12,16 +12,17 @@ use of any of :term:`DECODE`, :term:`ENCODE`, or :term:`VPP` functions.
 |msdk_full_name| Dispatcher (Legacy)
 ------------------------------------
 
-The :cpp:func:`MFXInit` function starts (initializes) an SDK session.
-The :cpp:func:`MFXClose` function closes (de-initializes) the SDK session. To
-avoid memory leaks, always call :cpp:func:`MFXClose` after :cpp:func:`MFXInit`.
+The :cpp:func:`MFXInit` or :cpp:func:`MFXInitEx` function starts (initializes)
+a session. The :cpp:func:`MFXClose` function closes (de-initializes) the
+session. To avoid memory leaks, always call :cpp:func:`MFXClose` after
+:cpp:func:`MFXInit`.
 
 The application can initialize a session as a software-based session
 (:cpp:enumerator:`MFX_IMPL_SOFTWARE`) or a hardware-based session
 (:cpp:enumerator:`MFX_IMPL_HARDWARE`). In a software-based session, the SDK
 functions execute on a CPU. In a hardware-base session, the SDK functions
 use platform acceleration capabilities. For platforms that expose multiple
-graphic devices, the application can initialize the SDK session on any
+graphic devices, the application can initialize a session on any
 alternative graphic device using the :cpp:enumerator:`MFX_IMPL_HARDWARE`,
 :cpp:enumerator:`MFX_IMPL_HARDWARE2`, :cpp:enumerator:`MFX_IMPL_HARDWARE3`, or
 :cpp:enumerator:`MFX_IMPL_HARDWARE4` values of :cpp:type:`mfxIMPL`.
@@ -51,8 +52,8 @@ Internally, the dispatcher works as follows:
 
 #. Once the library is loaded, the dispatcher obtains addresses for each SDK
    function. See the
-   :ref:`Exported Functions/API Version table <export-func-version-table>` for
-   the list of functions to export.
+   :ref:`Exported Functions/API Version table <export-func-version-table-2x>` for
+   the list of functions to expose.
 
 .. _legacy_search_order:
 
@@ -63,8 +64,7 @@ will vary according to the OS.
   order, to find the correct implementation library:
 
   #. The :file:`Driver Store` directory for the current adapter.
-     `(Learn more about Driver Store) <https://docs.microsoft.com/en-us/windows-hardware/drivers/install/driver-store>`__.
-     All types of graphics drivers can install libraries in this directory.
+     All types of graphics drivers can install libraries in this directory. `Learn more about Driver Store <https://docs.microsoft.com/en-us/windows-hardware/drivers/install/driver-store>`__.
   #. The directory specified for the current hardware under the registry key
      ``HKEY_CURRENT_USER\Software\Intel\MediaSDK\Dispatch``.
   #. The directory specified for the current hardware under the registry key
@@ -81,7 +81,7 @@ will vary according to the OS.
      application requested.
   #. Default dll search. This provides loading from the directory of the
      application's exe file and from the :file:`System32` and :file:`SysWOW64`
-     directories. `(Learn more about default dll search order) <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order?redirectedfrom=MSDN#search-order-for-desktop-applications>`__.
+     directories. `Learn more about default dll search order <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order?redirectedfrom=MSDN#search-order-for-desktop-applications>`__.
   #. The :file:`System32` and :file:`SysWOW64` directories, which is where DCH
      graphics drivers install libraries.
 
@@ -107,19 +107,19 @@ filter, capabilities include information about supported memory types, color
 formats, and image (frame) size in pixels.
 
 The recommended approach to configure the dispatcher's capabilities
-search filters and to create a session based on suitable implementation is as
+search filters and to create a session based on a suitable implementation is as
 follows:
 
-#. Create loader (:cpp:func:`MFXLoad`).
-#. Create loader's configuration (:cpp:func:`MFXCreateConfig`).
-#. Add configuration properties (:cpp:func:`MFXSetConfigFilterProperty`).
-#. Explore available implementations (:cpp:func:`MFXEnumImplementations`).
-#. Create suitable session (:cpp:func:`MFXCreateSession`).
+#. Create loader with :cpp:func:`MFXLoad`.
+#. Create loader's configuration with :cpp:func:`MFXCreateConfig`.
+#. Add configuration properties with :cpp:func:`MFXSetConfigFilterProperty`.
+#. Explore available implementations with :cpp:func:`MFXEnumImplementations`.
+#. Create a suitable session with :cpp:func:`MFXCreateSession`.
 
 The procedure to terminate an application is as follows:
 
-#. Destroy session (:cpp:func:`MFXClose`).
-#. Destroy loader (:cpp:func:`MFXUnload`).
+#. Destroy session with :cpp:func:`MFXClose`.
+#. Destroy loader with :cpp:func:`MFXUnload`.
 
 .. note:: Multiple loader instances can be created.
 
@@ -143,13 +143,13 @@ priority rules:
           priority (greater than or equal to the implementation requested).
 
 The dispatcher searches for the implementation in the following folders at
-runtime (in priority order):
+runtime, in priority order:
 
 #. User-defined search folders.
 #. oneVPL package.
-#. Path from :envvar:`PATH` or :envvar:`LD_LIBRARY_PATH` environmental variables.
-   Depends on OS.
-#.  Default system folders.
+#. Path from :envvar:`PATH` or :envvar:`LD_LIBRARY_PATH` environmental variables,
+   depending on OS.
+#. Default system folders.
 #. Standalone |msdk_full_name| package (or driver).
 
 For more details, see the `legacy dispatcher search order <legacy_search_order>`_.
@@ -189,18 +189,20 @@ Internally, the dispatcher works as follows:
    capabilities.
 #. Once the user has requested to create the session based on this implementation,
    the dispatcher obtains addresses of each oneVPL function. See the
-   :ref:`Exported Functions/API Version table <export-func-version-table>` for
+   :ref:`Exported Functions/API Version table <export-func-version-table-2x>` for
    the list of functions to export.
 
-.. note:: Each implementation must support both dispatchers for backward
-          compatibility with existing applications.
+.. note:: For backward compartibility with |msdk_full_name|, dispatcher will try to
+          load |msdk_full_name| first, if 1.x was requesuested to be loaded. If loading
+          was failed, dispatcher will search for the implementation with highest
+          2.x API verstion.
 
 -----------------
 Multiple Sessions
 -----------------
 
 Each oneVPL session can run exactly one instance of the DECODE, ENCODE, and
-VPP functions. This is good for a simple transcoding operation. If the
+VPP functions. This is adequate for a simple transcoding operation. If the
 application needs more than one instance of DECODE, ENCODE, or VPP
 in a complex transcoding setting or needs more simultaneous transcoding
 operations to balance CPU/GPU workloads, the application can initialize multiple

@@ -32,4 +32,6 @@ A type `Body` satisfies `ParallelScanBody` if it meets the following requirement
 
     Assigns summary of ``b`` to ``this``.
 
+See also:
 
+* :doc:`parallel_scan algorithm <../../algorithms/functions/parallel_scan_func>`

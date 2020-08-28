@@ -9,8 +9,8 @@ external and internal.
 External Memory
 ---------------
 
-The following example shows the pseudo code of the encoding procedure with
-external memory (legacy mode):
+The following pseudo code shows the encoding procedure with external memory
+(legacy mode):
 
 .. literalinclude:: ../snippets/prg_encoding.c
    :language: c++
@@ -48,7 +48,7 @@ Note the following key points about the example:
 Internal Memory
 ---------------
 
-The following example shows the encoding procedure with internal memory:
+The following pseudo code shows the encoding procedure with internal memory:
 
 .. literalinclude:: ../snippets/prg_encoding.c
    :language: c++
@@ -65,7 +65,7 @@ There are several key differences in this example, compared to external memory
 - The application calls the :cpp:func:`MFXMemory_GetSurfaceForEncode` function
   to get a free surface for the subsequent encode operation.
 - The application must call the
-  :cpp:struct:`mfxFrameSurfaceInterface->(\*Release) <mfxFrameSurfaceInterface>`
+  :cpp:member:`mfxFrameSurfaceInterface::Release`
   function to decrement the reference counter of the obtained surface after
   the call to the :cpp:func:`MFXVideoENCODE_EncodeFrameAsync` function.
 
@@ -89,7 +89,7 @@ structure during reset. By using this structure, the application instructs the
 encoder to start or not start a new sequence after reset. In some cases, the
 request to continue the current sequence cannot be satisfied and the encoder will
 fail during reset. To avoid this scenario, the application may query the reset
-outcome before the actual reset by calling :cpp:func:`MFXVideoENCODE_Query` function
+outcome before the actual reset by calling the :cpp:func:`MFXVideoENCODE_Query` function
 with the :cpp:struct:`mfxExtEncoderResetOption` attached to the
 :cpp:struct:`mfxVideoParam` structure.
 
@@ -166,7 +166,7 @@ define a quantization table it must specify the :cpp:member:`mfxInfoMFX::Quality
 parameter. In this case, the oneVPL encoder scales the default quantization table
 according to the specified :cpp:member:`mfxInfoMFX::Quality` parameter value.
 
-The application should properly configured chroma sampling format and color
+The application should properly configure chroma sampling format and color
 format using the :cpp:member:`mfxFrameInfo::FourCC` and
 :cpp:member:`mfxFrameInfo::ChromaFormat` fields. For example, to encode a 4:2:2
 vertically sampled YCbCr picture, the application should set
@@ -192,7 +192,7 @@ uses the following component IDs:
 
 The application should allocate a buffer that is big enough to hold the encoded
 picture. A rough upper limit may be calculated using the following equation
-where **Width** and **Height** are weight and height of the picture in pixel and
+where **Width** and **Height** are width and height of the picture in pixel and
 **BytesPerPx** is the number of bytes for one pixel:
 
 .. code-block:: c++
@@ -242,7 +242,7 @@ In this case, the encoder returns :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_BITST
 if it needs more bitstream buffers at output and
 :cpp:enumerator:`mfxStatus::MFX_ERR_NONE` when processing of the
 picture (multiple views) has been finished. It is recommended that the application
-provide a new input frame each time the oneVPL encoder requests new bitstream buffer.
+provide a new input frame each time the oneVPL encoder requests a new bitstream buffer.
 The application must submit view data for encoding in the order they are
 described in the :cpp:struct:`mfxExtMVCSeqDesc` structure. Particular view data
 can be submitted for encoding only when all views that it depends upon have

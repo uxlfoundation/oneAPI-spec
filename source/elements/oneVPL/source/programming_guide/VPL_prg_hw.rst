@@ -1,8 +1,15 @@
 .. _hw-acceleration:
 
-============================================
-New model to work with Hardware Acceleration
-============================================
+=====================
+Hardware Acceleration
+=====================
+
+oneVPL provides a new model for working with hardware acceleration while
+continuing to support hardware acceleration in legacy mode.
+
+--------------------------------------------
+New Model to Work with Hardware Acceleration
+--------------------------------------------
 
 oneVPL API version 2.0 introduces a new memory model: internal allocation where
 oneVPL is responsible for video memory allocation. In this mode,
@@ -19,13 +26,12 @@ This approach simplifies the oneVPL initialization, making calls to the
 or :cpp:func:`MFXVideoVPP_QueryIOSurf` functions optional. See
 :ref:`Internal Memory Management <internal-mem-manage>`.
 
-=====================================================
-Working with Hardware Acceleration in the Legacy mode
-=====================================================
+----------------------------------------------
+Work with Hardware Acceleration in Legacy Mode
+----------------------------------------------
 
------------------------------------
-Working with Multiple Media Devices
------------------------------------
+Work with Multiple Media Devices
+--------------------------------
 
 If your system has multiple graphics adapters, you may need hints on which
 adapter is better suited to process a particular workload. The legacy mode of
@@ -58,9 +64,8 @@ the most suitable adapter for a particular encode workload:
 
 See the :cpp:func:`MFXQueryAdapters` description for adapter priority rules.
 
--------------------------
-Working with Video Memory
--------------------------
+Work with Video Memory
+----------------------
 
 To fully utilize the oneVPL acceleration capability, the application should support
 OS specific infrastructures. If using Microsoft\* Windows\*, the application
@@ -114,9 +119,9 @@ diagrams:
 |
 
 The application must use the :cpp:member:`mfxVideoParam::IOPattern` field to
-indicate the I/O access pattern during initialization. Subsequent
-oneVPL function calls must follow this access pattern. For example, if a oneVPL
-function operates on video memory surfaces at both input and output, the
+indicate the I/O access pattern during initialization. Subsequent function calls
+must follow this access pattern. For example, if a function operates on video
+memory surfaces at both input and output, the
 application must specify the access pattern `IOPattern` at initialization in
 :cpp:enumerator:`MFX_IOPATTERN_IN_VIDEO_MEMORY` for input and
 :cpp:enumerator:`MFX_IOPATTERN_OUT_VIDEO_MEMORY` for output. This particular I/O
@@ -130,26 +135,24 @@ function. It is recommended to share the handle before any actual usage of oneVP
 
 .. _work_ms_directx_app:
 
----------------------------------------------
-Working with Microsoft DirectX\* Applications
----------------------------------------------
+Work with Microsoft DirectX\* Applications
+------------------------------------------
 
 oneVPL supports two different infrastructures for hardware acceleration on the
-Microsoft Windows OS: Direct3D\* 9 DXVA2 and Direct3D 11 Video API. If Direct3D 9
+Microsoft Windows OS: the Direct3D\* 9 DXVA2 and Direct3D 11 Video API. If Direct3D 9
 DXVA2 is used for hardware acceleration, the application should use the
-IDirect3DDeviceManager9 interface as the acceleration device handle. If the
+`IDirect3DDeviceManager9` interface as the acceleration device handle. If the
 Direct3D 11 Video API is used for hardware acceleration, the application should
-use the ID3D11Device interface as the acceleration device handle.
+use the `ID3D11Device` interface as the acceleration device handle.
 
 The application should share one of these interfaces with oneVPL through the
 :cpp:func:`MFXVideoCORE_SetHandle` function. If the application does not provide
 the interface, then oneVPL creates its own internal acceleration device. As a result, 
-oneVPL input and output will be limited to system memory only for the external allocation mode.
-This will reduce oneVPL performance. If oneVPL fails to create a valid acceleration device, 
+oneVPL input and output will be limited to system memory only for the external allocation mode, which will reduce oneVPL performance. If oneVPL fails to create a valid acceleration device, 
 then oneVPL cannot proceed with hardware acceleration and returns an error status to the
 application.
 
-.. note:: It is recommended to work in the internal allocation mode if the application does not provide IDirect3DDeviceManager9 interface or ID3D11Device interface.
+.. note:: It is recommended to work in the internal allocation mode if the application does not provide the `IDirect3DDeviceManager9` or `ID3D11Device` interface.
 
 The application must create the Direct3D 9 device with the flag
 ``D3DCREATE_MULTITHREADED``. The flag ``D3DCREATE_FPU_PRESERVE`` is also
@@ -179,7 +182,7 @@ When the oneVPL decoder creates auxiliary devices for hardware acceleration, it
 must allocate the list of Direct3D surfaces for I/O access, also known as the
 surface chain, and pass the surface chain as part of the device creation command.
 In most cases, the surface chain is the frame surface pool mentioned in the
-:ref:`Frame Surface Locking <frame-surface-lock>` section.
+:ref:`Frame Surface Locking <frame-surface-manag>` section.
 
 The application passes the surface chain to the oneVPL component **Init** function
 through a oneVPL external allocator callback. See the
@@ -198,16 +201,15 @@ function, the :cpp:func:`MFXVideoDECODE_QueryIOSurf` function, or the
 :cpp:func:`MFXVideoVPP_QueryIOSurf` function to determine the appropriate type in 
 the external allocation mode.
 
---------------------------------
-Working with VA API Applications
---------------------------------
+Work with VA API Applications
+-----------------------------
 
 oneVPL supports the VA API infrastructure for hardware acceleration on Linux.
-The application should use the VADisplay interface as the acceleration device
+The application should use the `VADisplay` interface as the acceleration device
 handle for this infrastructure and share it with oneVPL through the
 :cpp:func:`MFXVideoCORE_SetHandle` function.
 
-The following example shows how to obtain the VA display from X Window System:
+The following example shows how to obtain the VA display from the X Window System:
 
 .. code-block::
    :lineno-start: 1
@@ -242,13 +244,13 @@ application passes the surface chain to the oneVPL component **Init** function
 through a oneVPL external allocator callback.  See the
 :ref:`Memory Allocation and External Allocators <mem-alloc-ext-alloc>` section
 for details.
-Starting from oneVPL API version 2.0 oneVPL creates its own surface chain if 
-external allocator is not set. See the :ref`New model to work with Hardware Acceleration <hw-acceleration>`
-section for details..
+Starting from oneVPL API version 2.0, oneVPL creates its own surface chain if an
+external allocator is not set. See the :ref`New Model to work with Hardware Acceleration <hw-acceleration>`
+section for details.
 
 
 .. note:: The VA API does not define any surface types and the application can
-          use either MFX_MEMTYPE_VIDEO_MEMORY_DECODER_TARGET
-          or MFX_MEMTYPE_VIDEO_MEMORY_PROCESSOR_TARGET to indicate data in video
+          use either :cpp:enumerator:`MFX_MEMTYPE_VIDEO_MEMORY_DECODER_TARGET`
+          or :cpp:enumerator:`MFX_MEMTYPE_VIDEO_MEMORY_PROCESSOR_TARGET` to indicate data in video
           memory.
 

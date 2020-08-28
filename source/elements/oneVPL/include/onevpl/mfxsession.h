@@ -20,7 +20,7 @@ typedef struct _mfxSession *mfxSession;
 
 /*!
    @brief
-      Creates and initializes a session in the Legacy mode.
+      Creates and initializes a session in legacy mode.
 
       Call this function before calling
       any other API function. If the desired implementation specified by ``impl`` is MFX_IMPL_AUTO,
@@ -50,7 +50,7 @@ mfxStatus MFX_CDECL MFXInit(mfxIMPL impl, mfxVersion *ver, mfxSession *session);
 
 /*!
    @brief
-      Creates and initializes a session.
+      Creates and initializes a session in legacy mode.
 
       Call this function before calling any other API functions.
       If the desired implementation specified by ``par`` is MFX_IMPL_AUTO, the function will search for
@@ -75,6 +75,22 @@ mfxStatus MFX_CDECL MFXInit(mfxIMPL impl, mfxVersion *ver, mfxSession *session);
       MFX_ERR_UNSUPPORTED The function cannot find the desired implementation or version.
 */
 mfxStatus MFX_CDECL MFXInitEx(mfxInitParam par, mfxSession *session);
+
+/*!
+   @brief
+   Creates and initializes a session starting from API version 2.0. This function is used by the dispatcher.
+   The dispatcher creates and fills the mfxInitializationParam structure according to mfxConfig values set by an application.
+   Calling this function directly is not recommended. Instead, applications must call the mfxCreateSession function.
+
+
+   @param[in]  par     mfxInitializationParam structure that indicates the minimum library version and acceleration type.
+   @param[out] session Pointer to the session handle.
+
+   @return
+      MFX_ERR_NONE        The function completed successfully. The output parameter contains the handle of the session.\n
+      MFX_ERR_UNSUPPORTED The function cannot find the desired implementation or version.
+*/
+mfxStatus MFX_CDECL MFXInitialize(mfxInitializationParam par, mfxSession *session);
 
 /*!
    @brief Completes and deinitializes a session. Any active tasks in execution or

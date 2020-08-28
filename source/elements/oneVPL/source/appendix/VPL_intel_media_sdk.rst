@@ -47,6 +47,10 @@ New oneVPL implementation capabilities retrieval functions:
 - :cpp:func:`MFXQueryImplsDescription`
 - :cpp:func:`MFXReleaseImplDescription`
 
+New oneVPL session initialization:
+
+- :cpp:func:`MFXInitialize`
+
 -----------------------------------------
 |msdk_full_name| Feature Removals
 -----------------------------------------
@@ -153,5 +157,5 @@ is not supported by oneVPL:
   link error when attempting to use a removed API.
 
 - Code previously compiled with |msdk_full_name| and executed using a oneVPL
-  runtime will generate an :cpp:enumerator:`MFX_ERR_UNSUPPORTED` error when
+  runtime will generate an :cpp:enumerator:`MFX_ERR_NOT_IMPLEMENTED` error when
   calling a removed function.

@@ -40,6 +40,8 @@ Otherwise, it performs like a ``spin_mutex``, possibly with worse throughput.
 Member classes
 --------------
 
+.. namespace:: tbb::speculative_spin_mutex
+	       
 .. cpp:class:: scoped_lock
 
     Corresponding ``scoped_lock`` class. See the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`.

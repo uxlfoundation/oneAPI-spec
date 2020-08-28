@@ -33,8 +33,8 @@ The ``filter`` class should only be used in conjunction with ``parallel_pipeline
             void clear();
         }
 
-        template<typename T, typename U, typename Func>
-        filter<T,U> make_filter( filter::mode mode, const Func& f );
+        template<typename T, typename U, typename Body>
+        filter<T,U> make_filter( filter::mode mode, const Body& f );
         template<typename T, typename V, typename U>
         filter<T,U> operator&( const filter<T,V>& left, const filter<V,U>& right );
 

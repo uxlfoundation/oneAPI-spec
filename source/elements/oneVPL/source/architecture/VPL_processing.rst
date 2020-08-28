@@ -15,14 +15,15 @@ filters.
      rankdir=LR;
      F1 [shape=record label="Function 1" ];
      F2 [shape=record  label="Function 2"];
-     F3 [shape=record  label="Additional Filters"];
+     F3 [shape=record  label="Additional filters"];
      F4 [shape=record label="Function N-1" ];
      F5 [shape=record  label="Function N"];
      F1->F2->F3->F4->F5;
    }
 
-The application specifies the input and output format, and oneVPL configures the
-pipeline accordingly. The application can also attach one or more hint structures
+The application specifies the input and output format; oneVPL configures the
+pipeline according to the specified input and output formats. The application
+can also attach one or more hint structures
 to configure individual filters or turn them on and off. Unless specifically
 instructed, oneVPL builds the pipeline in a way that best utilizes hardware
 acceleration or generates the best video processing quality.

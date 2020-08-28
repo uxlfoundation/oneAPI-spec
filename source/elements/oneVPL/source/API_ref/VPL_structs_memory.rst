@@ -1,6 +1,14 @@
+.. _struct_memory:
+
 =================
 Memory Structures
 =================
+
+.. _struct_memory_begin:
+
+Structures used for memory.
+
+.. _struct_memory_end:
 
 ---
 API
