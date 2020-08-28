@@ -32,7 +32,7 @@ public:
                               data_layout layout = data_layout::row_major);
 
 public:
-    /// Creates a new ``homogen_table`` instance with zero row and column count.
+    /// Creates a new ``homogen_table`` instance with zero number of rows and columns.
     /// The :expr:`kind` shall be set to``homogen_table::kind()``.
     /// All the properties shall be set to default value (see the Properties section).
     homogen_table();

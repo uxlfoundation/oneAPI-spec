@@ -31,7 +31,7 @@ public:
 
 class table {
 public:
-    /// An empty table constructor: creates the table instance with zero row and column count.
+    /// An empty table constructor: creates the table instance with zero number of rows and columns.
     /// Implementation shall be set to the special "empty" object that returns all the property values
     /// set to default (see Properties section).
     table();
@@ -48,7 +48,7 @@ public:
     /// Swaps the implementation of this object and $other$.
     table& operator=(table&& other);
 
-    /// Indicates whether a table contains non-zero count of rows and columns.
+    /// Indicates whether a table contains non-zero number of rows and columns.
     bool has_data() const noexcept;
 
     /// The number of columns in the table.
