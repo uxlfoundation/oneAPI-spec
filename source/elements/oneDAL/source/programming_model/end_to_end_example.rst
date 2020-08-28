@@ -11,7 +11,7 @@ The following steps depict how to:
 - Run the training and inference operations for PCA
 - Access intermediate results obtained at the training stage
 
-#. Include the following header. This make all oneDAL declarations available.
+#. Include the following header that makes all oneDAL declarations available.
 
    .. code-block::
 
@@ -28,8 +28,8 @@ The following steps depict how to:
 
       const auto queue = sycl::queue{ sycl::gpu_selector{} };
 
-#. All oneDAL declarations are in the ``oneapi::dal`` namespace,
-   so import all declarations from the ``oneapi`` namespace to use ``dal``
+#. Since all oneDAL declarations are in the ``oneapi::dal`` namespace,
+   import all declarations from the ``oneapi`` namespace to use ``dal``
    instead of ``oneapi::dal`` for brevity:
 
    .. code-block:: cpp
@@ -37,15 +37,15 @@ The following steps depict how to:
       using namespace oneapi;
 
 
-#. Read the data from the CSV file into :txtref:`table` by means of
-   :txtref:`CSV data source <csv-data-source>`:
+#. Use :txtref:`CSV data source <csv-data-source>` to read the data
+   from the CSV file into a :txtref:`table`:
 
    .. code-block:: cpp
 
       const auto data = dal::read<dal::table>(queue, dal::csv::data_source{"data.csv"});
 
-#. Create an :txtref:`PCA <alg_pca>` descriptor, configure its parameters and
-   run the training on the data loaded from CSV.
+#. Create a :txtref:`PCA <alg_pca>` descriptor, configure its parameters, and
+   run the training algorithm on the data loaded from CSV.
 
    .. code-block:: cpp
 

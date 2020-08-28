@@ -175,7 +175,7 @@ Result
 ------
 
 A result object aggregates all output values computed by the algorithm. All
-assumptions about `an input <input_>`_ is applied to a result.
+assumptions about `an input <input_>`_ are applied to a result as well.
 
 .. code-block:: cpp
    :name: result_template
@@ -202,7 +202,7 @@ assumptions about `an input <input_>`_ is applied to a result.
 -------------------
 Supported operation
 -------------------
-Please refer to the :txtref:`Supported operations <op_supported>` section for
+Refer to the :txtref:`Supported operations <op_supported>` section for
 more information about particular operations.
 
 .. toctree::
