@@ -109,11 +109,12 @@ shall be divided into the following groups:
      - Reports situations when a device is not supported.
      - No
 
-Errors occured during the execution of oneDAL functionality are represented with
-``oneapi::dal::runtime_error``. Two main groups of errors are distinguished:
+Errors that occur during the execution of oneDAL functionality are represented
+with ``oneapi::dal::runtime_error``. Two main groups of errors shall be
+distinguished:
 
-- destination type range errors
-- OS facilities interaction errors
+- errors in the destination type range
+- errors in the OS facilities interaction
 
 All other errors are reported via ``oneapi::dal::internal_error``.
 
@@ -141,7 +142,7 @@ All other errors are reported via ``oneapi::dal::internal_error``.
      - No
 
 All memory allocation errors are represented by ``oneapi::dal::bad_alloc``. They
-shall be divided into two groups depending on where the error occurred:
+shall be divided into two groups based on where they occur:
 
 - Host memory allocation error
 - Device memory allocation error
