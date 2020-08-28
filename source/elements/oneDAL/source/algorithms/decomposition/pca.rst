@@ -73,7 +73,7 @@ method such as [Ping14]_.
 The final step is to sort the set of pairs :math:`(\lambda_i, \upsilon_i)` in
 the descending order by :math:`\lambda_i` and form the resulting matrix :math:`T
 = (\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`.
-Additionally, the means and variances of the initial dataset are computed.
+Additionally, the means and variances of the initial dataset shall be returned.
 
 .. _pca_t_math_svd:
 
