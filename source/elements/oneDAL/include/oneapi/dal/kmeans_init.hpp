@@ -53,7 +53,7 @@ public:
    /// Creates a new instance of the class with the default property values.
    compute_result();
 
-   /// $k \\times p$ table with the initial centroids. Each row of the
+   /// A $k \\times p$ table with the initial centroids. Each row of the
    /// table stores one centroid.
    /// @remark default = table{}
    const table& get_centroids() const;
