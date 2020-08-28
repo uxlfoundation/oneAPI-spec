@@ -51,7 +51,7 @@ Machine learning terms
     Dimensionality reduction
         A problem of transforming a set of :capterm:`feature vectors <feature
         vector>` from a high-dimensional space into a low-dimensional space
-        retaining meaningful properties of the original feature vectors
+        while retaining meaningful properties of the original feature vectors.
 
     Feature
         A particular property or quality of a real object or an event. Has a

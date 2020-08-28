@@ -16,10 +16,10 @@ namespace method {
 
 namespace task {
    /// Tag-type that parametrizes entities used for solving
-   /// :capterm:`clustering problem <clustering>` .
+   /// :capterm:`clustering problem <clustering>`.
    struct clustering {};
 
-   /// Alias tag-type for custering task.
+   /// Alias tag-type for the clustering task.
    using by_default = clustering;
 } // namespace task
 
@@ -28,7 +28,7 @@ namespace task {
 ///                :expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation of algorithm. Can
 ///                be :expr:`method::lloyd`.
-/// @tparam Task   Tag-type that specifies type of the problem to solve. Can
+/// @tparam Task   Tag-type that specifies the type of the problem to solve. Can
 ///                be :expr:`task::clustering`.
 template <typename Float = float,
           typename Method = method::by_default,

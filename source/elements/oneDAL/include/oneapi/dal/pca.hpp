@@ -50,7 +50,7 @@ public:
    descriptor& set_component_count(int64_t);
 
    /// Specifies whether the algorithm applies the `Sign-flip technique`_.
-   /// If it is `true`, directions of the eigenvectors must be deterministic.
+   /// If it is `true`, the directions of the eigenvectors must be deterministic.
    /// @remark default = true
    bool get_deterministic() const;
    descriptor& set_deterministic(bool);
@@ -64,7 +64,7 @@ public:
    /// Creates a new instance of the class with the default property values.
    model();
 
-   /// $r \\times p$ table with the eigenvectors. Each row contains one
+   /// An $r \\times p$ table with the eigenvectors. Each row contains one
    /// eigenvector.
    /// @remark default = table{}
    const table& get_eigenvectors() const;
@@ -84,7 +84,7 @@ public:
    /// property value
    train_input(const table& data = table{});
 
-   /// $n \\times p$ table with the training data, where each row stores one
+   /// An $n \\times p$ table with the training data, where each row stores one
    /// feature vector.
    /// @remark default = table{}
    const table& get_data() const;
@@ -103,29 +103,29 @@ public:
    /// @remark default = model<Task>{}
    const model<Task>& get_model() const;
 
-   /// $1 \\times r$ table that contains mean value for the first $r$
+   /// A $1 \\times r$ table that contains the mean values for the first $r$
    /// features.
    /// @remark default = table{}
    const table& get_means() const;
 
-   /// $1 \\times r$ table that contains variance for the first $r$
+   /// A $1 \\times r$ table that contains the variances for the first $r$
    /// features.
    /// @remark default = table{}
    const table& get_variances() const;
 
-   /// $1 \\times r$ table that contains eigenvalue for for the first
+   /// A $1 \\times r$ table that contains the eigenvalues for for the first
    /// $r$ features.
    /// @remark default = table{}
    const table& get_eigenvalues() const;
 
-   /// $r \\times p$ table with the eigenvectors. Each row contains one
+   /// An $r \\times p$ table with the eigenvectors. Each row contains one
    /// eigenvector.
    /// @remark default = table{}
    /// @invariant :expr:`eigenvectors == model.eigenvectors`
    const table& get_eigenvectors() const;
 };
 
-/// Runs the training operation for PCA. For more details see
+/// Runs the training operation for PCA. For more details, see
 /// :expr:`oneapi::dal::train`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
@@ -207,7 +207,7 @@ public:
 ///
 /// @pre :expr:`input.data.has_data == true`
 /// @pre :expr:`input.model.eigenvectors.row_count == desc.component_count`
-/// @pre :expr:`input.model.eigenvectors.column_count = input.data.column_count`
+/// @pre :expr:`input.model.eigenvectors.column_count == input.data.column_count`
 /// @post :expr:`result.transformed_data.row_count == input.data.row_count`
 /// @post :expr:`result.transformed_data.column_count == desc.component_count`
 template <typename Float, typename Method, typename Task>
