@@ -14,7 +14,7 @@ a storage that:
 
 2. Contains information about the memory block size.
 
-3. Supports both :term:`immutable <Immutability>` or mutable data.
+3. Supports both :term:`immutable <Immutability>` and mutable data.
 
 4. Provides an ability to change the data state from immutable to
    mutable one.
