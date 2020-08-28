@@ -80,6 +80,14 @@ oneDAL functionality is represented with a system of C++ namespaces described be
        should be substituted with its name, for example, ``oneapi::dal::kmeans``
        or ``oneapi::dal::knn``.
 
+   * - ``oneapi::dal::%DATA_SOURCE%``
+
+     - The namespace of the data source.
+       All classes and structures related to that data source shall be defined within a particular namespace.
+
+       To define a specific data source, the string %DATA_SOURCE% should be substituted with its name,
+       for example, ``oneapi::dal::csv``.
+
    * - ``oneapi::dal::misc``
      - The namespace that contains miscellaneous data types and functionality
        intended to be used by oneDAL algorithms and applications for algorithm

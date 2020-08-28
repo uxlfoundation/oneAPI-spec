@@ -94,13 +94,7 @@ It is used at the data acquisition and data preparation stages to:
   device's local memory. Therefore, a data source enables complex data analytics
   scenarios, such as :capterm:`online computations <Online mode>`.
 
-- Filter and normalize :capterm:`feature` values that are being extracted.
-
-- Recover missing :capterm:`feature` values.
-
-- Detect :capterm:`outliers <outlier>` and recover the abnormal data.
-
-- Transform datasets into numerical representation. Data source shall
+- Transform datasets into their numerical representation. Data source shall
   automatically transform non-numeric :capterm:`categorical <categorical
   feature>` and :capterm:`continuous <continuous feature>` data values into one
   of the numeric :capterm:`data formats <data format>`.

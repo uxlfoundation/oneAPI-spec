@@ -159,6 +159,12 @@ Machine learning terms
         :capterm:`responses <Response>`. The goal is to find hidden patters inside
         :capterm:`feature vectors <Feature vector>` and dependencies between them.
 
+    CSV file
+        A comma-separated values file (csv) is a type of a text file. Each line in a CSV file is a record containing fields that are separated by the delimiter.
+        Fields can be of a numerical or a text format. Text usually refers to categorical values.
+        By defaul, the delimiter is a comma, but, generally, it can be any character.
+        For more details, `see <https://en.wikipedia.org/wiki/Comma-separated_values>`_.
+
 |dal_short_name| terms
 ======================
 
