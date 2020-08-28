@@ -13,9 +13,9 @@ Exception classification
 
 Exception classification in oneDAL is aligned with C++ Standard Library
 classification. oneDAL shall introduce abstract classes that define the base
-class in the hierarchy of exception classes. Concrete exception classes are
-derived from respective C++ Standard Library exception classes. oneDAL library
-shall throw exceptions represented with concrete classes.
+class in the hierarchy of exception classes. Non-abstract exception classes are
+derived from the respective C++ Standard Library exception classes. oneDAL shall
+throw exceptions represented with non-abstract classes.
 
 In the hierarchy of oneDAL exceptions, ``oneapi::dal::exception`` is the base abstract
 class that all other exception classes are derived from.
@@ -32,7 +32,7 @@ class that all other exception classes are derived from.
      - Description
      - Abstract
    * - ``oneapi::dal::exception``
-     - Base class of oneDAL exception hierarchy.
+     - The base class of oneDAL exception hierarchy.
      - Yes
 
 All oneDAL exceptions shall be divided into three groups:
@@ -63,7 +63,7 @@ All oneDAL exceptions shall be divided into three groups:
      - Yes
    * - ``oneapi::dal::bad_alloc``
      - Reports failure to allocate storage.
-     - No
+     - Yes
 
 All precondition and invariant errors represented by ``oneapi::dal::logic_error``
 shall be divided into the following groups:
@@ -72,15 +72,15 @@ shall be divided into the following groups:
 - domain errors
 - out of range errors
 - errors with an unimplemented method or algorithm
-- unavailable device or data
+- unsupported device
 
 ::
 
     class oneapi::dal::invalid_argument :  public oneapi::dal::logic_error, public std::invalid_argument;
     class oneapi::dal::domain_error :  public oneapi::dal::logic_error, public std::domain_error;
     class oneapi::dal::out_of_range :  public oneapi::dal::logic_error, public std::out_of_range;
-    class oneapi::dal::unimplemented_error :  public oneapi::dal::logic_error, public std::logic_error;
-    class oneapi::dal::unavailable_error :  public oneapi::dal::logic_error, public std::logic_error;
+    class oneapi::dal::unimplemented :  public oneapi::dal::logic_error, public std::logic_error;
+    class oneapi::dal::unsupported_device :  public oneapi::dal::logic_error, public std::logic_error;
 
 .. list-table::
    :widths: 30 65 5
@@ -90,7 +90,7 @@ shall be divided into the following groups:
      - Description
      - Abstract
    * - ``oneapi::dal::invalid_argument``
-     - Reports situations when the argument was not been accepted.
+     - Reports situations when the argument was not accepted.
      - No
    * - ``oneapi::dal::domain_error``
      - Reports situations when the argument is outside of the domain on which
@@ -101,19 +101,22 @@ shall be divided into the following groups:
      - Reports situations when the index is out of range. Higher priority
        than ``oneapi::dal::invalid_argument``.
      - No
-   * - ``oneapi::dal::unimplemented_error``
+   * - ``oneapi::dal::unimplemented``
      - Reports errors that arise because an algorithm or a method is not
        implemented.
      - No
-   * - ``oneapi::dal::unavailable_error``
-     - Reports situations when a device or data is not available.
+   * - ``oneapi::dal::unsupported_device``
+     - Reports situations when a device is not supported.
      - No
 
-If an error occurs during function execution after preconditions and invariants
-were checked, it is reported via ``ondeal::runtime_error`` inheritors. oneDAL
-distinguishes errors happened during interaction with OS facilities and errors
-of destination type's range in internal computations, while other errors are
-reported via ``oneapi::dal::internal_error``.
+Errors that occur during the execution of oneDAL functionality are represented
+with ``oneapi::dal::runtime_error``. Two main groups of errors shall be
+distinguished:
+
+- errors in the destination type range
+- errors in the OS facilities interaction
+
+All other errors are reported via ``oneapi::dal::internal_error``.
 
 ::
 
@@ -136,4 +139,29 @@ reported via ``oneapi::dal::internal_error``.
      - No
    * - ``oneapi::dal::internal_error``
      - Reports all runtime errors that couldn't be assigned to other inheritors.
+     - No
+
+All memory allocation errors are represented by ``oneapi::dal::bad_alloc``. They
+shall be divided into two groups based on where they occur:
+
+- Host memory allocation error
+- Device memory allocation error
+
+::
+
+    class oneapi::dal::host_bad_alloc :  public oneapi::dal::bad_alloc;
+    class oneapi::dal::device_bad_alloc :  public oneapi::dal::bad_alloc;
+
+.. list-table::
+   :widths: 30 65 5
+   :header-rows: 1
+
+   * - Exception
+     - Description
+     - Abstract
+   * - ``oneapi::dal::host_bad_alloc``
+     - Reports failure to allocate storage on the host.
+     - No
+   * - ``oneapi::dal::device_bad_alloc``
+     - Reports failure to allocate storage on the device.
      - No
