@@ -50,6 +50,11 @@ Release Notes
   
 * oneVPL
 
+  * A lot of cleaning to remove GEN/CPU bias and implementation details.
+  * New organization of structures' description.
+  * New entry point function to expose by any implementation: MFXInitialize which replaces obsolete MFXInit and MFXInitEx.
+  * Interface to choose and set subdevices (mfxExtDeviceAffinityMask) for execution.
+  * Header files cleaned up by removing MFX_VERSION checks (ala #if MFX_VERSION > 1.26) from headers.
 
 * oneCCL
 
