@@ -53,7 +53,7 @@ public:
 
     /// Creates a new array instance by passing the pointer to externally-allocated memory block
     /// for mutable data. It is the responsibility of the calling application to free the memory block
-    /// as the array shall not free it when the reference count reaches zero.
+    /// as the array shall not free it when the reference count is zero.
     ///
     /// @param data         The pointer to externally-allocated memory block.
     /// @param count        The number of elements of type $Data$ in the memory block.
@@ -66,7 +66,7 @@ public:
 
     /// Creates a new array instance by passing the pointer to externally-allocated memory block
     /// for immutable data. It is the responsibility of the calling application to free the memory block
-    /// as the array shall not free it when the reference count reaches zero.
+    /// as the array shall not free it when the reference count is zero.
     ///
     /// @param data         The pointer to externally-allocated memory block.
     /// @param count        The number of elements of type $Data$ in the memory block.

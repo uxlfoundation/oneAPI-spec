@@ -116,13 +116,13 @@ The array shall support the following requirements on the internal data manageme
      same memory block.
 
    - The **deleter** object used to free the memory block when
-     reference count reaches zero.
+     reference count is zero.
 
 6. An array shall create the ownership structure for a new memory block not
    associated with such structure.
 
 7. An array shall decrement the number of references to the memory block when the
-   array goes out of the scope. If the number of references reaches zero, the
+   array goes out of the scope. If the number of references is zero, the
    array shall call the deleter on this memory block and free the ownership structure.
 
 8. An array shall store the pointer to the ownership structure created by another
