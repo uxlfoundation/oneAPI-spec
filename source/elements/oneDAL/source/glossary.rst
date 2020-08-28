@@ -155,9 +155,9 @@ Machine learning terms
         :capterm:`feature vectors <Feature vector>` and dependencies between them.
 
     CSV file
-        A comma-separated values file (csv) is a text file. Each line of the csv file is a record, containing fields separated by the delimiters.
-        Fields can have numerical or text format, where text usually refers to some categorical values.
-        Delimiter is a comma by default, but generally can be any given symbol.
+        A comma-separated values file (csv) is a type of a text file. Each line in a CSV file is a record containing fields that are separated by the delimiter.
+        Fields can be of a numerical or a text format. Text usually refers to categorical values.
+        By defaul, the delimiter is a comma, but, generally, it can be any character.
         For more details, `see <https://en.wikipedia.org/wiki/Comma-separated_values>`_.
 
 |dal_short_name| terms

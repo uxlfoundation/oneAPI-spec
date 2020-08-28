@@ -69,14 +69,14 @@ All types and functions in this section shall be declared in the
 
    .. member:: std::string file_name = ""
 
-      String which contains name of the file with the dataset to read.
+      A string that contains the name of the file with the dataset to read.
 
       Getter
          | ``std::string get_filename() const``
 
    .. member:: char delimiter = ','
 
-      Symbol that represents delimiter between separate features in the input file.
+      A character that represents the delimiter between separate features in the input file.
 
       Getter
          | ``char get_delimter() const``

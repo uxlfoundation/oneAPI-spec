@@ -68,7 +68,7 @@ following overloaded functions called *shortcuts* for a read operation in additi
 to the general one described in section `Read operation definition
 <read_operation_definition_>`_.
 
-- Shortcut for execution on :term:`host <Host/Device>`. Performs the same
+- A shortcut for execution on :term:`host <Host/Device>`. Performs the same
   operation as the general function on host, but does not require passing the
   queue explicitly.
 
@@ -79,7 +79,7 @@ to the general one described in section `Read operation definition
         const DataSource& data_source,
         const read_args_t<DatasetType, DataSource>& args);
 
-- Shortcut that allows omitting explicit args creation.
+- A shortcut that allows omitting explicit args creation.
 
   .. code-block:: cpp
 
@@ -89,7 +89,7 @@ to the general one described in section `Read operation definition
         const DataSource& data_source,
         Args&&... args);
 
-- Shortcut that allows omitting explicit queue and args creation. This is
+- A shortcut that allows omitting explicit queue and args creation. This is a
   combination of two previous shortcuts.
 
   .. code-block:: cpp
@@ -106,10 +106,10 @@ to the general one described in section `Read operation definition
 Args
 ----
 
-- The string ``%DATA_SOURCE%`` should be substituted with the name of the data source, for example, csv. 
+- The string ``%DATA_SOURCE%`` should be substituted with the name of the data source, for example, ``csv``. 
 
 - ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and the type of one
-  of the data source args properties.
+  of the data source's args properties.
 
 .. code-block:: cpp
 
@@ -153,7 +153,7 @@ Data Source Types
      - Description
 
    * - :txtref:`CSV data source <csv-data-source>`
-     - Data source which allows reading data from text file into a :txtref:`table`.
+     - Data source that allows reading data from a text file into a :txtref:`table`.
 
 Details
 =======
