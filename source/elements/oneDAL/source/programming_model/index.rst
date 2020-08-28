@@ -37,7 +37,7 @@ To best tackle the mentioned challenges, each algorithm is decomposed into
 :txtref:`descriptors` and :txtref:`operations`.
 
 .. toctree::
+   end_to_end_example.rst
    descriptors.rst
    operations/index.rst
    computational_modes.rst
-   end_to_end_example.rst

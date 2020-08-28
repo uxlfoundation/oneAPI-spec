@@ -21,7 +21,7 @@ The following steps depict how to:
       #include <cassert>
       #include <iostream>
 
-#. Create a DPC++ queue with the desired device selector. In this case,
+#. Create a SYCL* queue with the desired device selector. In this case,
    GPU selector is used:
 
    .. code-block:: cpp

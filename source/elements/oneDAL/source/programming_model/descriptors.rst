@@ -157,7 +157,9 @@ the ``by_default`` type alias that refers to one of the tasks as shown in the
 example below.
 
 If an algorithm assumes both ``classification`` and ``regression`` tasks, the
-default task shall be ``classification``.
+default task shall be ``classification``. In some cases where an algorithm does
+not have the well-defined training and inference stages an algorithm may define
+only one task.
 
 .. code-block:: cpp
 
