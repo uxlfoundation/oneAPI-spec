@@ -6,15 +6,19 @@
 ---------------
 CSV data source
 ---------------
-Class ``csv::data_source`` is an API for accessing the data source represented as a :capterm:`csv file <CSV file>`.
-CSV data source shall be used with :expr:`read` operation to extract data in text format from the given input file,
-process it using provided parameters (such as delimiter and read options), transform it into numerical representation,
-and store it as an in-memory :txtref:`dataset` of a chosen type.
+Class ``csv::data_source`` is an API for accessing the data source represented
+as a :term:`csv file <CSV file>`. CSV data source shall be used with
+:expr:`read` operation to extract data in text format from the given input file,
+process it using provided parameters (such as delimiter and read options),
+transform it into numerical representation, and store it as an in-memory
+:txtref:`dataset` of a chosen type.
 
-Supported type of in-memory dataset for :expr:`read` operation with CSV data source is :txtref:`table`.
+Supported type of in-memory object for :expr:`read` operation with CSV data
+source is :txtref:`table`.
 
-CSV data source requires input file name to be set in the constructor,
-while the other parameters of the constructor such as delimiter and read options rely on default values.
+CSV data source requires input file name to be set in the constructor, while the
+other parameters of the constructor such as delimiter and read options rely on
+default values.
 
 Usage example
 -------------
@@ -33,16 +37,16 @@ All types and functions in this section shall be declared in the
 
 ::
 
-   enum class read_options : std::uint32_t {
-      default = 0,
+   enum class read_options : std::uint64_t {
+      none = 0,
       parse_header = 1 << 0
    };
 
+   constexpr char default_delimiter = ',';
+   constexpr read_options default_read_options = read_options::none;
+
    class data_source {
    public:
-      static constexpr char default_delimiter = ',';
-      static constexpr read_options default_read_options = read_options::default;
-
       data_source(const char *file_name,
                   char delimiter = default_delimiter,
                   read_options opts = default_read_options);
@@ -61,11 +65,13 @@ All types and functions in this section shall be declared in the
 
    .. function:: data_source(const char *file_name, char delimiter = default_delimiter, read_options opts = default_read_options)
 
-      Creates a new instance of a CSV data source with the given :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
+      Creates a new instance of a CSV data source with the given
+      :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
 
    .. function:: data_source(const std::string &file_name, char delimiter = default_delimiter, read_options opts = default_read_options);
 
-      Creates a new instance of a CSV data source with the given :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
+      Creates a new instance of a CSV data source with the given
+      :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
 
    .. member:: std::string file_name = ""
 
@@ -74,38 +80,39 @@ All types and functions in this section shall be declared in the
       Getter
          | ``std::string get_filename() const``
 
-   .. member:: char delimiter = ','
+   .. member:: char delimiter = default_delimiter
 
-      A character that represents the delimiter between separate features in the input file.
+      A character that represents the delimiter between separate features in the
+      input file.
 
       Getter
          | ``char get_delimter() const``
 
-   .. member:: read_options options = read_options::default
+   .. member:: read_options options = default_read_options
 
-      Value that stores read options to be applied during reading of the input file.
-      Enabled ``parse_header`` option indicates that the first line in the input file shall be processed
-      as a header record with features names.
+      Value that stores read options to be applied during reading of the input
+      file. Enabled ``parse_header`` option indicates that the first line in the
+      input file shall be processed as a header record with features names.
 
       Getter
          | ``read_options get_read_options() const``
 
 
-Reading :expr:`onedal::read<DatasetType>(...)`
+Reading :expr:`onedal::read<Object>(...)`
 ------------------------------------------------
 
 Args
 ~~~~
 ::
 
-   template <typename DatasetType>
+   template <typename Object>
    class read_args {
    public:
       read_args();
    };
 
 .. namespace:: oneapi::dal::csv
-.. class:: template <typename DatasetType> \
+.. class:: template <typename Object> \
            read_args
 
    .. function:: read_args()
@@ -116,11 +123,12 @@ Args
 Operation
 ~~~~~~~~~
 
-:code:`onedal::table` is the only supported value of the :code:`DatasetType` template parameter for :expr:`read` operation with CSV data source.
+:code:`onedal::table` is the only supported value of the :code:`Object` template parameter for :expr:`read` operation with CSV data source.
 
 .. namespace:: onedal
-.. function:: template <typename DatasetType, typename DataSource> \
-              DatasetType read(const DataSource& ds)
+.. function:: template <typename Object, typename DataSource> \
+              Object read(const DataSource& ds)
 
-   :tparam DatasetType: oneDAL dataset type that shall be produced as a result of reading from the data source.
+   :tparam Object: oneDAL object type that shall be produced as a result of
+                   reading from the data source.
    :tparam DataSource: CSV data source :expr:`csv::data_source`.
