@@ -143,16 +143,16 @@ All the ``array`` class methods can be divided into several groups:
 1. Constructors that are used to create an array from external, mutable or
    immutable memory.
 
-2. Constructors and assignment operators to create an array that shares data
+2. Constructors and assignment operators that are used to create an array that shares its data
    with another one.
 
-3. The group of ``reset()`` methods to re-assign an array to another external
+3. The group of ``reset()`` methods that are used to re-assign an array to another external
    memory block.
 
-4. The group of ``reset()`` methods to re-assign an array to an internally
+4. The group of ``reset()`` methods that are used to re-assign an array to an internally
    allocated memory block.
 
-5. The methods to access the data.
+5. The methods that are used to access the data.
 
 6. Static methods that provide simplified ways to create an array either from external
    memory or by allocating it within a new object.
