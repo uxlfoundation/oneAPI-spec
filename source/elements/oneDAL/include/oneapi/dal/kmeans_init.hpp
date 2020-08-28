@@ -14,7 +14,7 @@ namespace method {
 /// @tparam Float  The floating-point type that the algorithm uses for
 ///                intermediate computations. Can be :expr:`float` or
 ///                :expr:`double`.
-/// @tparam Method – Tag-type that specifies an implementation
+/// @tparam Method Tag-type that specifies an implementation
 /// of K-Means Initialization algorithm.
 template <typename Float = float,
           typename Method = method::by_default>
@@ -40,7 +40,8 @@ public:
    /// the other attributes get default values.
    compute_input(const table& data = table{});
 
-   /// The training set $X$
+   /// $n \\times p$ table with the data to be clustered, where each row
+   /// stores one feature vector.
    /// @remark default = table{}
    const table& get_data() const;
    compute_input& set_data(const table&);
@@ -52,27 +53,31 @@ public:
    /// Creates a new instance of the class with the default property values.
    compute_result();
 
-   /// The initial centroids
+   /// $k \\times p$ table with the initial centroids. Each row of the
+   /// table stores one centroid.
    /// @remark default = table{}
    const table& get_centroids() const;
 };
 
-/// Runs the computing operation for KMeans initialization. For more details,
+/// Runs the computing operation for K-Means initialization. For more details,
 /// see :expr:`oneapi::dal::compute`.
 ///
 /// @tparam Float  The floating-point type that the algorithm uses for
-/// intermediate computations. Can be :expr:`float` or :expr:`double`. @tparam
-/// Method Tag-type that specifies an implementation of K-Means Initialization
-/// algorithm.
+///                intermediate computations. Can be :expr:`float` or
+///                :expr:`double`.
 ///
-/// @param[in] desc  The descriptor of the algorithm @param[in] input Input data
-/// for the computing operation @return result The result of the computing
-/// operation
+/// @tparam Method Tag-type that specifies an implementation of K-Means
+///                Initialization algorithm.
 ///
-/// @pre  :expr:`input.data.has_data == true` @pre  :expr:`input.data.row_count
-/// == desc.cluster_count` @post :expr:`result.centroids.has_data == true` @post
-/// :expr:`result.centroids.row_count == desc.cluster_count` @post
-/// :expr:`result.centroids.column_count == input.data.column_count`
+/// @param[in] desc  The descriptor of the algorithm
+/// @param[in] input Input data for the computing operation
+/// @return result The result of the computing operation
+///
+/// @pre  :expr:`input.data.has_data == true`
+/// @pre  :expr:`input.data.row_count == desc.cluster_count`
+/// @post :expr:`result.centroids.has_data == true`
+/// @post :expr:`result.centroids.row_count == desc.cluster_count`
+/// @post :expr:`result.centroids.column_count == input.data.column_count`
 template <typename Float, typename Method>
 compute_result compute(const descriptor<Float, Method>& desc,
                    const compute_input& input);

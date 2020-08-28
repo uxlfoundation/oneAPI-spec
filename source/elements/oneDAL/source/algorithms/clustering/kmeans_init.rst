@@ -40,7 +40,7 @@ problem is to find a set :math:`C = \{ c_1, \ldots, c_k \}` of
 Computing method: *dense*
 -------------------------
 
-The method choses first :math:`k` feature vectors from the training set
+The method chooses first :math:`k` feature vectors from the training set
 :math:`X`.
 
 -------------
@@ -54,6 +54,10 @@ Computing
 ---------------------
 Programming Interface
 ---------------------
+
+All types and functions in this section shall be declared in the
+``oneapi::dal::kmeans_init`` namespace and be available via inclusion of the
+``oneapi/dal/algo/kmeans_init.hpp`` header file.
 
 Descriptor
 ----------
