@@ -3,12 +3,12 @@
 ====================
 Supported operations
 ====================
-This section describes all operations supported by oneDAL, for more information
+This section describes all operations supported by oneDAL. For more information
 about general operation definition, refer to :txtref:`Operations <operations>`
 section.
 
-The table bellow specifies wether an algorithm's descriptor can be used together
-with an operation.
+The table bellow specifies whether an algorithm's descriptor can be used together
+with each operation.
 
 .. |train| replace:: :txtref:`Train <op_train>`
 .. |infer| replace:: :txtref:`Infer <op_infer>`
@@ -90,7 +90,7 @@ learning algorithm based on the model obtained as a result of training.
 
 Compute
 -------
-The ``compute`` operation is used if an algorithm does not have well-defined
+The ``compute`` operation is used if an algorithm does not have the well-defined
 training and inference stages.
 
 .. code-block:: cpp
