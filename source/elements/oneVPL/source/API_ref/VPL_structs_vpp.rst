@@ -1,8 +1,14 @@
+.. _struct_vpp:
+
 ==============
 VPP Structures
 ==============
 
+.. _struct_vpp_begin:
+
 Structures used by VPP only.
+
+.. _struct_vpp_end:
 
 ---
 API

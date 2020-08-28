@@ -30,8 +30,7 @@ Queueing
 --------
 
 This policy defines behavior for input messages acceptance. The ``queueing`` policy means that input
-messages that cannot be processed right away are stored in the internal buffer of the node to be
-processed when possible.
+messages that cannot be processed right away are kept to be processed when possible.
 
 Rejecting
 ---------

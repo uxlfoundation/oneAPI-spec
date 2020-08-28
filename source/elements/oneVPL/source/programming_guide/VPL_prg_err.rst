@@ -2,8 +2,8 @@
 Hardware Device Error Handling
 ==============================
 
-For oneVPL implementations which accelerate decoding, encoding, and video processing 
-through a hardware device oneVPL API functions may return errors or warnings 
+For implementations that accelerate decoding, encoding, and video processing 
+through a hardware device, API functions may return errors or warnings 
 if the hardware device encounters errors. See the
 :ref:`Hardware Device Errors and Warnings table <hw-device-errors-table>` for
 detailed information about the errors and warnings.

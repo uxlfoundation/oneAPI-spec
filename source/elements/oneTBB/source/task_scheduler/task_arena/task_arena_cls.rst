@@ -13,17 +13,24 @@ A class that represents an explicit, user-managed task scheduler arena.
 
         class task_arena {
         public:
-            static const int automatic = /* implementation-defined */;
-            static const int not_initialized = /* implementation-defined */;
+            static const int automatic = /* unspecified */;
+            static const int not_initialized = /* unspecified */;
+            enum class priority : /* unspecified type */ {
+                low = /* unspecified */,
+                normal = /* unspecified */,
+                high = /* unspecified */
+            };
             struct attach {};
 
-            task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1);
+            task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
+                       priority a_priority = priority::normal);
             task_arena(const task_arena &s);
             explicit task_arena(task_arena::attach);
             ~task_arena();
 
             void initialize();
-            void initialize(int max_concurrency, unsigned reserved_for_masters = 1);
+            void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
+                            priority a_priority = priority::normal);
             void initialize(task_arena::attach);
             void terminate();
 
@@ -45,6 +52,9 @@ task arena representation object associated with the calling thread.
 
 The tasks spawned or enqueued into one arena cannot be executed in another arena.
 
+Each ``task_arena`` has a ``priority``. The tasks from ``task_arena`` with higher priority are given
+a precedence in execution over the tasks from ``task_arena`` with lower priority.
+
 .. note::
 
     The ``task_arena`` constructors do not create an internal task arena representation object.
@@ -64,6 +74,21 @@ Member types and constants
     When returned by a method or function, indicates that there is no active ``task_arena``
     or that the ``task_arena`` object has not yet been initialized.
 
+.. cpp:enum:: priority::low
+
+    When passed to a constructor or the ``initialize`` method, the initialized ``task_arena``
+    has a lowered priority.
+
+.. cpp:enum:: priority::normal
+
+    When passed to a constructor or the ``initialize`` method, the initialized ``task_arena``
+    has regular priority.
+
+.. cpp:enum:: priority::high
+
+    When passed to a constructor or the ``initialize`` method, the initialized ``task_arena``
+    has a raised priority.
+
 .. cpp:struct:: attach
 
     A tag for constructing a ``task_arena`` with attach.
@@ -71,11 +96,11 @@ Member types and constants
 Member functions
 ----------------
 
-.. cpp:function:: task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1)
+.. cpp:function:: task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
 
-    Creates a ``task_arena`` with a certain concurrency limit (``max_concurrency``).
-    Some portion of the limit can be reserved for application threads with ``reserved_for_masters``.
-    The amount for reservation cannot exceed the limit.
+    Creates a ``task_arena`` with a certain concurrency limit (``max_concurrency``) and priority
+    (``a_priority``).  Some portion of the limit can be reserved for application threads with
+    ``reserved_for_masters``.  The amount for reservation cannot exceed the limit.
 
     .. caution::
 
@@ -112,7 +137,7 @@ Member functions
 
         After the call to ``initialize``, the arena parameters are fixed and cannot be changed.
 
-.. cpp:function:: void initialize(int max_concurrency, unsigned reserved_for_masters = 1)
+.. cpp:function:: void initialize(int max_concurrency, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
 
     Same as above, but overrides previous arena parameters.
 

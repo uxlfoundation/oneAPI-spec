@@ -64,6 +64,8 @@ The utility function ``flatten2d`` creates a ``flattened2d`` object from a speci
 Member functions
 ----------------
 
+.. namespace:: tbb::flatten2d
+	       
 .. cpp:function:: explicit flattened2d( const Container& c )
 
     Constructs a ``flattened2d`` representing the sequence of

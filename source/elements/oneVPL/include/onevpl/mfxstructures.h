@@ -2000,6 +2000,13 @@ enum {
        See the mfxExtInsertHeaders structure for details.
     */
     MFX_EXTBUFF_INSERT_HEADERS  = MFX_MAKEFOURCC('S', 'P', 'R', 'E'),
+
+    /*!
+       See the mfxExtDeviceAffinityMask structure for details.
+    */
+    MFX_EXTBUFF_DEVICE_AFFINITY_MASK = MFX_MAKEFOURCC('D', 'A', 'F', 'M'),
+
+    
 };
 
 /* VPP Conf: Do not use certain algorithms  */
@@ -4202,6 +4209,35 @@ typedef struct {
     mfxU16          Granularity; /*!< Granularity of the partial bitstream: slice/block/any, all types of granularity state in PartialBitstreamOutput enum. */
     mfxU16          reserved[8];
 } mfxExtPartialBitstreamParam;
+MFX_PACK_END()
+
+MFX_PACK_BEGIN_STRUCT_W_PTR()
+/*!
+   The mfxExtDeviceAffinityMask structure is used by the application to specify
+   affinity mask for the device with given devide ID. See mfxDeviceDescription
+   for the device ID definition and sub device indexes. If the implementation
+   manages CPU threads for some purposes, user can set CPU threads affinity
+   mask as well by using this structure with deviceID equals to the "CPU". 
+*/
+typedef struct {
+    /*! Extension buffer header. Header.BufferId must be equal to
+        MFX_EXTBUFF_DEVICE_AFFINITY_MASK. */
+    mfxExtBuffer    Header;
+    /*! Null terminated string with device ID. In case of CPU affinity mask
+        it must be equal to "CPU". */
+    mfxChar         DeviceID[MFX_STRFIELD_LEN];
+    /*! Number of sub devices or threads in case of CPU in the mask. */
+    mfxU32          NumSubDevices;
+    /*! Mask array. Every bit represents sub-device (or thread for CPU).
+        "1" means execution is allowed. "0" means that execution is prohibited on
+        this sub-device (or thread). Length of the array is equal to the:
+        "max_subdevices / 8" and rounded to the closest (from the right) integer.
+        Bits order within each entry of the mask array is LSB: bit 0 holds data
+        for sub device with index 0 and bit 8 for sub device with index 8.
+        Index of sub device is defined by the mfxDeviceDescription structure. */
+    mfxU8           *Mask;
+    mfxU32           reserved[4]; /*! Reserved for future use. */
+} mfxExtDeviceAffinityMask;
 MFX_PACK_END()
 
 #ifdef __cplusplus

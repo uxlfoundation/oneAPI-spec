@@ -33,15 +33,8 @@ DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
 
 python3 -m venv venv
 . venv/bin/activate
+pip install --upgrade pip wheel
 pip install --upgrade --quiet -r requirements.txt
 
-wget http://doxygen.nl/files/doxygen-1.8.17.linux.bin.tar.gz
-tar zxf doxygen-1.8.17.linux.bin.tar.gz
-pushd doxygen-1.8.17
-./configure
-set +e
-make install
-set -e
-popd
 
 

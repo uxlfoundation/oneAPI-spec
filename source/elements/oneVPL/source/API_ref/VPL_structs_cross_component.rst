@@ -1,8 +1,14 @@
+.. _struct_cross_component:
+
 ==========================
 Cross-component Structures
 ==========================
 
+.. _struct_cross_comp_begin:
+
 Structures used across library components.
+
+.. _struct_cross_comp_end:
 
 ---
 API

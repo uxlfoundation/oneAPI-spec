@@ -1,3 +1,4 @@
+doxygen
 enchant
 git
 graphviz

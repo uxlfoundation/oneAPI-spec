@@ -40,8 +40,8 @@ A node that executes a specified body object when triggered.
 
 Requirements:
 
-* The type ``Output`` must meet the `CopyConstructible` requirements from [copyconstructible] and
-  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
+* The type ``Output`` must meet the `CopyConstructible` requirements from [copyconstructible] ISO
+  C++ Standard section.
 * The type ``Policy`` can be specified as :doc:`lightweight policy<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`ContinueNodeBody requirements <../named_requirements/flow_graph/continue_node_body>`.
 

@@ -51,23 +51,25 @@ Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
+* The ``Index`` type must meet the :doc:`ParallelForIndex requirements <../../named_requirements/algorithms/par_for_index>`.
+* The ``Func`` type must meet the :doc:`ParallelForFunc requirements <../../named_requirements/algorithms/par_for_func>`.
 
-A ``tbb::parallel_for(first,last,step,f)`` overload represents parallel execution of the loop:
+The ``tbb::parallel_for(first, last, step, f)`` overload represents parallel execution of the loop:
 
 .. code:: cpp
 
     for (auto i = first; i < last; i += step) f(i);
 
-The index type must be an integral type. The loop must not wrap around. The step value must be
-positive. If omitted, it is implicitly 1. There is no guarantee that the iterations
-run in parallel. Deadlock may occur if a lesser iteration waits for a greater iteration.
-The partitioning strategy is ``auto_partitioner`` when the parameter is not specified.
+The loop must not wrap around. The step value must be positive. If omitted, it is implicitly 1. 
+There is no guarantee that the iterations run in parallel. A deadlock may occur if a lesser 
+iteration waits for a greater iteration. The partitioning strategy is ``auto_partitioner`` when 
+the parameter is not specified.
 
-A ``parallel_for(range,body,partitioner)`` overload provides a more general form of parallel
+The ``parallel_for(range,body,partitioner)`` overload provides a more general form of parallel
 iteration. It represents parallel execution of ``body`` over each value
-in range. The optional ``partitioner`` parameter specifies a partitioning strategy.
+in ``range``. The optional ``partitioner`` parameter specifies a partitioning strategy.
 
-A ``parallel_for`` recursively splits the range into subranges to the point such that ``is_divisible()``
+``parallel_for`` recursively splits the range into subranges to the point such that ``is_divisible()``
 is false for each subrange, and makes copies of the body for each of these subranges.
 For each such body/subrange pair, it invokes ``Body::operator()``.
 
