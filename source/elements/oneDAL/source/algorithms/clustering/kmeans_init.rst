@@ -64,8 +64,12 @@ Descriptor
 .. onedal_class:: oneapi::dal::kmeans_init::descriptor
 
 Method tags
------------
-.. onedal_compute_methods:: oneapi::dal::kmeans_init
+~~~~~~~~~~~
+.. onedal_tags_namespace:: oneapi::dal::kmeans_init::method
+
+Task tags
+~~~~~~~~~
+.. onedal_tags_namespace:: oneapi::dal::kmeans_init::task
 
 Computing :expr:`compute(...)`
 --------------------------------

@@ -11,18 +11,28 @@ namespace method {
    using by_default = dense;
 } // namespace method
 
+namespace task {
+   /// Tag-type that parametrizes entities used for obtaining the initial K-Means centroids.
+   struct init {};
+
+   /// Alias tag-type for the initialization task.
+   using by_default = init;
+} // namespace task
+
 /// @tparam Float  The floating-point type that the algorithm uses for
 ///                intermediate computations. Can be :expr:`float` or
 ///                :expr:`double`.
 /// @tparam Method Tag-type that specifies an implementation
-/// of K-Means Initialization algorithm.
+///                of K-Means Initialization algorithm.
+/// @tparam Task   Tag-type that specifies the type of the problem to solve. Can
+///                be :expr:`task::init`.
 template <typename Float = float,
-          typename Method = method::by_default>
+          typename Method = method::by_default,
+          typename Task = task::by_default>
 class descriptor {
 public:
 
-   /// Creates a new instance of the descriptor with the default attribute
-   /// values.
+   /// Creates a new instance of the class with the given :literal:`cluster_count`
    explicit descriptor(std::int64_t cluster_count = 2);
 
    /// The number of clusters $k$
@@ -33,11 +43,13 @@ public:
 
 };
 
+/// @tparam Task Tag-type that specifies type of the problem to solve. Can
+///              be :expr:`task::init`.
+template <typename Task = task::by_default>
 class compute_input {
 public:
 
-   /// Creates input for the computing operation with the given data,
-   /// the other attributes get default values.
+   /// Creates a new instance of the class with the given :literal:`data`.
    compute_input(const table& data = table{});
 
    /// An $n \\times p$ table with the data to be clustered, where each row
@@ -47,6 +59,9 @@ public:
    compute_input& set_data(const table&);
 };
 
+/// @tparam Task Tag-type that specifies type of the problem to solve. Can
+///              be :expr:`task::clustering`.
+template <typename Task = task::by_default>
 class compute_result {
 public:
 
@@ -68,6 +83,8 @@ public:
 ///
 /// @tparam Method Tag-type that specifies an implementation of K-Means
 ///                Initialization algorithm.
+/// @tparam Task   Tag-type that specifies type of the problem to solve. Can
+///                be :expr:`task::init`.
 ///
 /// @param[in] desc  The descriptor of the algorithm
 /// @param[in] input Input data for the computing operation
@@ -78,9 +95,9 @@ public:
 /// @post :expr:`result.centroids.has_data == true`
 /// @post :expr:`result.centroids.row_count == desc.cluster_count`
 /// @post :expr:`result.centroids.column_count == input.data.column_count`
-template <typename Float, typename Method>
-compute_result compute(const descriptor<Float, Method>& desc,
-                   const compute_input& input);
+template <typename Float, typename Method, typename Task>
+compute_result<Task> compute(const descriptor<Float, Method, Task>& desc,
+                   const compute_input<Task>& input);
 
 
 } // namespace oneapi::dal:kmeans_init
