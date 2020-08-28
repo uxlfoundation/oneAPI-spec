@@ -64,8 +64,8 @@ Each operation shall satisfy the following requirements:
 - If a postcondition is violated, an operation shall throw an exception derived
   from ``oneapi::dal::runtime_error``.
 
-- If descriptor is incompatible with some operation, the error shall be reported
-  at compile-time.
+- If the descriptor is incompatible with some operation, an error shall be
+  reported at compile-time.
 
 - The exact list of compatible operations and pre-/post- conditions shall be
   defined by :txtref:`a particular algorithm specification <algorithms>`.
@@ -117,10 +117,10 @@ to the general one described in section `General operation definition
 -----
 Input
 -----
-An input object aggregates all the data that algorithm requires for performing
-specific operation. The data represented via :txtref:`tables <table>`, so,
-typically, an input is a collection of tables, but not limited with them and can
-aggregate objects of arbitrary type.
+An input object aggregates all the data that the algorithm requires for
+performing a specific operation. The data is represented via :txtref:`tables
+<table>`, so, typically, an input is a collection of tables, but not limited to
+them and can aggregate objects of an arbitrary type.
 
 In general, input class definition is similar to :txtref:`descriptor
 <descriptors>`. An input defines properties that can be accessed by means of the
