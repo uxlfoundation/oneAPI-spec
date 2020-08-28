@@ -133,7 +133,7 @@ public:
     /// Array shall return $data$ pointer as its mutable or immutable block depending
     /// on the $ExtData$ type.
     ///
-    /// @tparam RefData    The type of elements in the reference array
+    /// @tparam RefData    The type of elements in the referenced array.
     /// @tparam ExtData    Either $Data$ or $const Data$ type.
     ///
     /// @param ref   The array which shares ownership structure with created
