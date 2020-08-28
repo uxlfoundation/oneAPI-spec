@@ -40,7 +40,7 @@ public:
    /// the other attributes get default values.
    compute_input(const table& data = table{});
 
-   /// $n \\times p$ table with the data to be clustered, where each row
+   /// An $n \\times p$ table with the data to be clustered, where each row
    /// stores one feature vector.
    /// @remark default = table{}
    const table& get_data() const;
