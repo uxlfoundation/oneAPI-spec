@@ -65,7 +65,7 @@ public:
    /// Creates a new instance of the class with the default property values.
    model();
 
-   /// $k \\times p$ table with the cluster centroids. Each row of the
+   /// A $k \\times p$ table with the cluster centroids. Each row of the
    /// table stores one centroid.
    /// @remark default = table{}
    const table& get_centroids() const;
@@ -86,12 +86,12 @@ public:
    train_input(const table& data = table{},
                const table& initial_centroids = table{});
 
-   /// $n \\times p$ table with the data to be clustered, where each row
+   /// An $n \\times p$ table with the data to be clustered, where each row
    /// stores one feature vector.
    const table& get_data() const;
    train_input& set_data(const table&);
 
-   /// $k \\times p$ table with the initial centroids, where each row
+   /// A $k \\times p$ table with the initial centroids, where each row
    /// stores one centroid.
    const table& get_initial_centroids() const;
    train_input& set_initial_centroids(const table&);
@@ -109,7 +109,7 @@ public:
    /// @remark default = model<Task>{}
    const model<Task>& get_model() const;
 
-   /// $n \\times 1$ table with the labels $y_i$ assigned to the
+   /// An $n \\times 1$ table with the labels $y_i$ assigned to the
    /// samples $x_i$ in the input data, $1 \\leq 1 \\leq n$.
    /// @remark default = table{}
    const table& get_labels() const;
@@ -164,7 +164,7 @@ public:
    infer_input(const model<Task>& m = model<Task>{},
                const table& data = table{});
 
-   /// $n \\times p$ table with the data to be assigned to the clusters,
+   /// An $n \\times p$ table with the data to be assigned to the clusters,
    /// where each row stores one feature vector.
    /// @remark default = model<Task>{}
    const model<Task>& get_model() const;
@@ -184,7 +184,7 @@ public:
    /// Creates a new instance of the class with the default property values.
    infer_result();
 
-   /// $n \\times 1$ table with assignments labels to feature
+   /// An $n \\times 1$ table with assignments labels to feature
    /// vectors in the input data.
    /// @remark default = table{}
    const table& get_labels() const;

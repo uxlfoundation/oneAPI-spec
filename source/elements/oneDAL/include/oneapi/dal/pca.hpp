@@ -184,7 +184,7 @@ public:
    /// Creates a new instance of the class with the default property values.
    infer_result();
 
-   /// $n \\times r$ table that contains data projected to the $r$
+   /// An $n \\times r$ table that contains data projected to the $r$
    /// principal components.
    /// @remark default = table{}
    const table& get_transformed_data() const;
