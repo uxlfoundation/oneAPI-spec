@@ -246,11 +246,11 @@ public:
     /// the pointer to ownership structure with the one from ref. Array shall
     /// return $data$ pointer as its mutable block.
 
-    /// @tparam RefData    The type of elements in the reference array
+    /// @tparam RefData    The type of elements in the referenced array.
     ///
     /// @param ref   The array which is used to share ownership structure with current one.
     /// @param data  Mutable unmanaged pointer to be assigned to the array.
-    /// @param count The number of elements of type $Data$ in the $data$
+    /// @param count The number of elements of type $Data$ in the $data$.
     template <typename RefData>
     void reset(const array<RefData>& ref, Data* data, std::int64_t count);
 
@@ -259,11 +259,11 @@ public:
     /// the pointer to ownership structure with the one from ref. Array shall
     /// return $data$ pointer as its immutable block.
     ///
-    /// @tparam RefData    The type of elements in the reference array
+    /// @tparam RefData    The type of elements in the referenced array.
     ///
     /// @param ref   The array which is used to share ownership structure with current one.
     /// @param data  Immutable unmanaged pointer to be assigned to the array.
-    /// @param count The number of elements of type $Data$ in the $data$
+    /// @param count The number of elements of type $Data$ in the $data$.
     template <typename RefData>
     void reset(const array<RefData>& ref, const Data* data, std::int64_t count);
 
