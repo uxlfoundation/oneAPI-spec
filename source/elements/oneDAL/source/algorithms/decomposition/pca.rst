@@ -51,30 +51,30 @@ contains one eigenvector in each row.
 Training method: *Covariance*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This method uses eigendecomposition of the covariance matrix to define the
-principal components of the dataset. Following steps are distinguished:
+This method uses eigendecomposition of the covariance matrix to find the
+principal components of the dataset. The following steps are distinguished:
 
-#. Covariance computation.
-#. Eigenvectors and eigenvalues computation.
-#. Resulting matrix formation.
+#. Covariance computation
+#. Eigenvectors and eigenvalues computation
+#. Resulting matrix formation
 
-Covariance matrix computation should be in the following way:
+Covariance matrix computation shall be performed in the following way:
 
-#. Compute sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1 \leq i \leq p`
+#. Compute the sums :math:`s_i = \sum_{j=1}^n x_{i,j}, \quad 1 \leq i \leq p`.
 
-#. Compute cross-product :math:`P = XX^T - s^Ts`
+#. Compute the cross-product :math:`P = XX^T - s^Ts`.
 
-#. Compute covariance matrix :math:`\Sigma = \frac{1}{n - 1} P`
+#. Compute the covariance matrix :math:`\Sigma = \frac{1}{n - 1} P`.
 
-To compute eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i,
-\quad 1 \leq i \leq p` the following equation shall be resolved:
+To compute eigenvalues :math:`\lambda_i` and eigenvectors :math:`\upsilon_i`,
+where :math:`1 \leq i \leq p`, the following equation shall be resolved:
 
 .. math::
    \Sigma\lambda =  v\lambda
 
-The final step is sort set of pairs :math:`(\lambda_i, \upsilon_i)` in
-descending order by :math:`\lambda_i` and form matrix :math:`T =
-(\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`
+The final step is to sort the set of pairs :math:`(\lambda_i, \upsilon_i)` in
+the descending order by :math:`\lambda_i` and form the resulting matrix :math:`T
+= (\upsilon_{i,1}, \cdots, \upsilon_{i,r}), \quad 1 \leq i \leq p`
 
 .. _pca_t_math_svd:
 
