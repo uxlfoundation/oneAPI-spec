@@ -14,8 +14,8 @@ Exception classification
 Exception classification in oneDAL is aligned with C++ Standard Library
 classification. oneDAL shall introduce abstract classes that define the base
 class in the hierarchy of exception classes. Concrete exception classes are
-derived from the respective C++ Standard Library exception classes. oneDAL
-library shall throw exceptions represented with concrete classes.
+derived from the respective C++ Standard Library exception classes. oneDAL shall
+throw exceptions represented with concrete classes.
 
 In the hierarchy of oneDAL exceptions, ``oneapi::dal::exception`` is the base abstract
 class that all other exception classes are derived from.
@@ -141,10 +141,10 @@ All other errors are reported via ``oneapi::dal::internal_error``.
      - No
 
 All memory allocation errors are represented by ``oneapi::dal::bad_alloc``. They
-shall be divided into 2 groups depending on where the error occured:
+shall be divided into two groups depending on where the error occurred:
 
-- Host memory allocation error.
-- Device memory allocation error.
+- Host memory allocation error
+- Device memory allocation error
 
 ::
 
@@ -159,8 +159,8 @@ shall be divided into 2 groups depending on where the error occured:
      - Description
      - Abstract
    * - ``oneapi::dal::host_bad_alloc``
-     - Reports failures to allocate storage on the host.
+     - Reports failure to allocate storage on the host.
      - No
    * - ``oneapi::dal::device_bad_alloc``
-     - Reports failures to allocate storage on the device.
+     - Reports failure to allocate storage on the device.
      - No
