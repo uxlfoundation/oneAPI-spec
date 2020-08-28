@@ -41,3 +41,7 @@ For more information about algorithms implemented in |dal_full_name|
 
 .. [Lang87]
    S. Lang. *Linear Algebra*. Springer-Verlag New York, 1987.
+
+.. [Ping14]
+   Ping Tak Peter and Eric Polizzi. *FEAST as a Subspace Iteration Eigensolver
+   Accelerated by Approximate Spectral Projection.* 2014.
