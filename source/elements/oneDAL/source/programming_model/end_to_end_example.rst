@@ -17,6 +17,7 @@ The following steps depict how to:
 
       #include "oneapi/dal.hpp"
 
+      /* Standard library headers required by this example */
       #include <cassert>
       #include <iostream>
 
