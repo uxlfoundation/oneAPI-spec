@@ -21,9 +21,9 @@ to `a result <result_>`_ object. An operation is responsible for:
 ----------------------------
 General operation definition
 ----------------------------
-`The following code sample <operation_template_>`_ shows the declaration for an
+`The following code sample <operation_template_>`_ shows the declaration of an
 abstract operation. To declare a particular operation, the ``%OPERATION%`` shall
-be substituted.
+be substituted with the name of the operation.
 
 .. code-block:: cpp
    :name: operation_template
