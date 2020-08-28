@@ -18,10 +18,10 @@ changes.
 .. toctree::
    :titlesonly:
 
-   MSDK_architecture
-   MSDK_prg
+   architecture/index
+   programming_guide/index
    VPL_summary
-   VPL_apnds
-   MSDK_acronyms
+   API_ref/VPL_api_ref
    Versioning
-   VPL_api_ref
+   appendix/index
+   VPL_acronyms

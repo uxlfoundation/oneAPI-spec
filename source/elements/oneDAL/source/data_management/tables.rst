@@ -7,7 +7,7 @@ Tables
 ======
 
 This section describes the types related to the :txtref:`table` and
-:txtref:`metadata` concepts. |dal_short_name| defines the following types that
+:txtref:`table_metadata` concepts. |dal_short_name| defines the following types that
 implement these concepts:
 
 - The :code:`table` is a base class that implements the table concept and
@@ -32,7 +32,7 @@ Each implementation of :txtref:`table` concept shall:
 2. Be derived from the :code:`table` class. The behavior of this class can be
    extended, but cannot be weaken.
 
-3. Provide an implementation of the :txtref:`metadata` concept derived
+3. Provide an implementation of the :txtref:`table_metadata` concept derived
    from the :code:`table_meta` class.
 
 4. Be :term:`reference-counted <Reference-counted object>`. An assignment
@@ -41,10 +41,10 @@ Each implementation of :txtref:`table` concept shall:
 
    .. code-block:: cpp
 
-      onedal::table table2 = table1;
+      oneapi::dal::table table2 = table1;
       // table1 and table2 share the same data (no data copy is performed)
 
-      onedal::table table3 = table2;
+      oneapi::dal::table table3 = table2;
       // table1, table2 and table3 share the same data
 
 
@@ -108,7 +108,7 @@ Table API
       const dal::table_meta& get_metadata() const noexcept;
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: table
 
    .. function:: table()
@@ -209,7 +209,7 @@ for which the following is true:
       const T* get_data_pointer() const noexcept;
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: homogen_table
 
    .. function:: homogen_table(const homogen_table&)
@@ -236,7 +236,7 @@ for which the following is true:
 
       Sets the current object reference to point to another
 
-   .. member:: onedal::data_type data_type
+   .. member:: oneapi::dal::data_type data_type
 
       The type of underlying data
 
@@ -310,7 +310,7 @@ are stored inside the table and how efficiently access them.
       table_meta& set_format(data_format);
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: table_meta
 
    .. member:: std::int64_t feature_count = 0
@@ -374,7 +374,7 @@ Data layout
       column_major
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: data_layout
 
    Structure that represents underlying data layout
@@ -390,7 +390,7 @@ Data format
       csr
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: data_format
 
    Structure that represents underlying format of the data
@@ -407,7 +407,7 @@ Feature info
       feature_type get_type() const noexcept;
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: feature_info
 
    Structure that represents information about particular :term:`feature <Feature>`
@@ -429,7 +429,7 @@ Data type
       f32, f64
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: data_type
 
    Structure that represents runtime information about feature data type.
@@ -455,7 +455,7 @@ Feature type
       contiguous
    };
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. class:: feature_type
 
    Structure that represents runtime information about feature logical type.

@@ -5,6 +5,8 @@ Iteration
 Class template ``enumerable_thread_specific`` supports random access iterators,
 which enable iteration over the set of all elements in the container.
 
+.. namespace:: tbb::enumerable_thread_specific
+	       
 .. cpp:function:: iterator begin()
 
     Returns ``iterator`` pointing to the beginning of the set of elements.

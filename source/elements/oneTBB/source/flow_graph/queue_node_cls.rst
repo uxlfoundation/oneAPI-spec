@@ -3,7 +3,7 @@ queue_node
 ==========
 **[flow_graph.queue_node]**
 
-A node that forwards messages in a first-in first-out (FIFO) order by maintaining a buffer of messages.
+A node that forwards messages in a first-in first-out (FIFO) order.
 
 .. code:: cpp
 
@@ -41,27 +41,28 @@ its successor set.
 Member functions
 ----------------
 
+.. namespace:: tbb::flow::queue_node
+
 .. cpp:function:: explicit queue_node( graph &g )
 
     Constructs an empty ``queue_node`` that belongs to the  graph ``g``.
 
 .. cpp:function:: queue_node( const queue_node &src )
 
-    Constructs an empty  ``queue_node`` that belongs to the same graph ``g`` as ``src``.
-    The list of predecessors, the list of successors, and the messages in the buffer are not copied.
+    Constructs an empty ``queue_node`` that belongs to the same graph ``g`` as ``src``. Any
+    intermediate state of ``src``, including its links to predecessors and successors, is not copied.
 
 .. cpp:function:: bool try_put( const T &v )
 
-    Adds item to internal FIFO buffer. If ``v`` is the only item in the ``queue_node``, a task is
-    spawned to forward the item to a successor.
+    Adds ``v`` to the set of items managed by the node, and tries forwarding the least recently
+    added item to a successor.
 
     **Returns**: ``true``.
 
 .. cpp:function:: bool try_get( T &v )
 
-    **Returns**: ``true`` if an item can be removed from the front of the ``queue_node`` and
-    assigned to ``v``. Returns ``false`` if there is no item currently in the ``queue_node`` or
-    if the node is reserved.
+    **Returns**: ``true`` if an item can be taken from the node and assigned to ``v``. Returns
+    ``false`` if there is no item currently in the ``queue_node`` or if the node is reserved.
 
 Example
 -------

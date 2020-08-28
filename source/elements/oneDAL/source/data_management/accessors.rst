@@ -21,7 +21,7 @@ Each accessor implementation shall:
    format.
 
 2. Provide an access to at least one in-memory :txtref:`dataset` implementation
-   (such as :code:`table`, its sub-types, or :txtref:`<table-builder>s`).
+   (such as :code:`table` or its sub-types).
 
 3. Provide read-only, write-only, or read-write access to the data. If an
    accessor supports several :txtref:`dataset` implementations to be passed in,

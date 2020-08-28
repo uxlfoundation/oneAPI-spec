@@ -2,7 +2,10 @@ doxygen
 build
 _build
 *~
+*.diff
+*.log
 
+/docker/ubuntu-packages.txt
 /docker/requirements.txt
 /docker/install.sh
 

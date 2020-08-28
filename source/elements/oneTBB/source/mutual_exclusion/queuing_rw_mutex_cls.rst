@@ -30,6 +30,8 @@ The ``queuing_rw_mutex`` is not recursive. The ``queuing_rw_mutex`` is fair, thr
 Member classes
 --------------
 
+.. namespace:: tbb::queueing_rw_mutex
+	       
 .. cpp:class:: scoped_lock
 
     Corresponding ``scoped_lock`` class. See the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`.

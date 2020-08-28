@@ -58,9 +58,7 @@ A node that encapsulates a collection of other nodes as a first class graph node
     } // namespace flow
     } // namespace tbb
 
-* The ``InputTuple`` and ``OutputTuple`` must be instantiations of ``std::tuple``. Each type that these tuples
-  store must meet the `CopyConstructible` requirements from [copyconstructible]
-  and `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
+* The ``InputTuple`` and ``OutputTuple`` must be instantiations of ``std::tuple``.
 
 ``composite_node`` is a ``graph_node``, ``receiver<T>``, and ``sender<T>``.
 
