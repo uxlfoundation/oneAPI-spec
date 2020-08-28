@@ -6,26 +6,26 @@ enum class data_layout { unknown, row_major, column_major };
 
 class table_metadata {
 public:
-    /// Creates the metadata instance without information about features.
+    /// Creates the metadata instance without information about the features.
     /// The :expr:`feature_count` shall be set to zero.
-    /// The properties :expr:`data_type` and :expr:`feature_type` shall not be initialized.
+    /// The :expr:`data_type` and :expr:`feature_type` properties shall not be initialized.
     table_metadata();
 
-    /// Creates the metadata instance from external information about data types and
+    /// Creates the metadata instance from external information about the data types and the
     /// feature types.
-    /// @param dtypes Data types of the features. Shall be assigned into the :expr:`data_type` property.
-    /// @param ftypes Feature types of features. Shall be assigned into the :expr:`feature_type` property.
+    /// @param dtypes The data types of the features. Shall be assigned into the :expr:`data_type` property.
+    /// @param ftypes The feature types. Shall be assigned into the :expr:`feature_type` property.
     /// @pre :expr:`dtypes.get_count() == ftypes.get_count()`
     table_metadata(const array<data_type>& dtypes, const array<feature_type>& ftypes);
 
-    /// The number of features that metadata has information about
+    /// The number of features that metadata contains information about
     /// @pre :expr:`feature_count >= 0`
     std::int64_t get_feature_count() const;
 
-    /// Feature types in the metadata object. Shall be in range ``[0, feature_count)``
+    /// Feature types in the metadata object. Shall be within the range ``[0, feature_count)``
     const feature_type& get_feature_type(std::int64_t feature_index) const;
 
-    /// Data types of the features in the metadata object. Shall be in range ``[0, feature_count)``
+    /// Data types of the features in the metadata object. Shall be within the range ``[0, feature_count)``
     const data_type& get_data_type(std::int64_t feature_index) const;
 };
 
@@ -35,11 +35,11 @@ public:
     /// All the table properties shall be set to default value (see Properties section).
     table();
 
-    /// Creates new table instance which shares all the data and property
+    /// Creates a new table instance which shares all the data and property
     /// values with $other$.
     table(const table& other);
 
-    /// Creates new table instance and moves all property values from $other$ into it.
+    /// Creates a new table instance and moves all property values from $other$ into it.
     table(table&& other);
 
     /// Replaces the values of all properties by references to property values of $other$
@@ -48,14 +48,14 @@ public:
     /// Swaps the property values of this object and $other$.
     table& operator=(table&& other);
 
-    /// Indicates whether table contains non-zero count of rows and columns or not
+    /// Indicates whether a table contains non-zero count of rows and columns or not
     bool has_data() const noexcept;
 
-    /// The count of columns in the table.
+    /// The number of columns in the table.
     /// @remark default = 0
     std::int64_t get_column_count() const;
 
-    /// The count of rows in the table.
+    /// The number of rows in the table.
     /// @remark default = 0
     std::int64_t get_row_count() const;
 

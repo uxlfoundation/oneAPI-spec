@@ -47,7 +47,8 @@ Each implementation of :txtref:`table` concept shall:
 4. Every new :expr:`oneapi::dal::table` sub-type shall define a unique id number - the "kind"
    that represents objects of that type in runtime.
 
-The following listing provides an example of table API regarding kinds and copy-assignment operation:
+The following listing provides an example of table API to illustrate table kinds
+and copy-assignment operation:
 
 .. code-block:: cpp
 
@@ -85,7 +86,7 @@ Table types
      - Description
 
    * - :txtref:`homogen_table`
-     - Dense table that contains :term:`contiguous <Contiguous data>`
+     - A dense table that contains :term:`contiguous <Contiguous data>`
        :term:`homogeneous <Homogeneous data>` data.
 
 .. _table_programming_interface:
@@ -120,7 +121,7 @@ be :term:`reference-counted <Reference-counted object>`.
 Data layout
 -----------
 
-An implementation of the :capterm:`data layout` term.
+An implementation of the :capterm:`data layout` concept.
 
 ::
 
@@ -143,7 +144,7 @@ An implementation of the :capterm:`data layout` term.
 Feature type
 ------------
 
-An implementation of the data logical types.
+An implementation of the logical data types.
 
 ::
 
