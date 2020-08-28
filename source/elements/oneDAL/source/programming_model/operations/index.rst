@@ -22,8 +22,8 @@ to `a result <result_>`_ object. An operation responsible for:
 General operation definition
 ----------------------------
 `The following code sample <operation_template_>`_ shows the declaration for an
-abstract operation. To declare a particular operation, the ``%OPERATION_NAME%``
-shall be substituted.
+abstract operation. To declare a particular operation, the ``%OPERATION%`` shall
+be substituted.
 
 .. code-block:: cpp
    :name: operation_template
@@ -31,23 +31,23 @@ shall be substituted.
    namespace oneapi::dal {
 
    template <typename Descriptor>
-   using %OPERATION_NAME%_input_t = /* implementation defined */;
+   using %OPERATION%_input_t = /* implementation defined */;
 
    template <typename Descriptor>
-   using %OPERATION_NAME%_result_t = /* implementation defined */;
+   using %OPERATION%_result_t = /* implementation defined */;
 
    template <typename Descriptor>
-   %OPERATION_NAME%_result_t<Descriptor> %OPERATION_NAME%(
+   %OPERATION%_result_t<Descriptor> %OPERATION%(
       sycl::queue& queue,
       const Descriptor& desc,
-      const %OPERATION_NAME%_input_t<Descriptor>& input);
+      const %OPERATION%_input_t<Descriptor>& input);
 
    } // namespace oneapi::dal
 
 
 Each operation shall satisfy the following requirements:
 
-- An operation shall accept tree parameters in the following order:
+- An operation shall accept three parameters in the following order:
 
   + The SYCL* queue object.
   + The descriptor of the algorithm.
@@ -55,7 +55,7 @@ Each operation shall satisfy the following requirements:
 
 - An operation shall return the `result object <result_>`_.
 
-- The ``%OPERATION_NAME%_input_t`` and ``%OPERATION_NAME%_result_t`` alias
+- The ``%OPERATION%_input_t`` and ``%OPERATION%_result_t`` alias
   templates shall be used for inference of the input and return types.
 
 - If precondition is violated, an operation shall throw an exception derived
@@ -64,8 +64,12 @@ Each operation shall satisfy the following requirements:
 - If postcondition is violated, an operation shall throw an exception derived
   from ``oneapi::dal::runtime_error``.
 
-- The exact list of pre- and post- conditions shall be defined by :txtref:`a
-  particular algorithm specification <algorithms>`.
+- If descriptor is incompatible with some operation, the error shall be reported
+  at compile-time.
+
+- The exact list of compatible operations and pre-/post- conditions shall be
+  defined by :txtref:`a particular algorithm specification <algorithms>`.
+
 
 -------------------
 Operation shortcuts
@@ -82,16 +86,16 @@ to the general one described in section `General operation definition
   .. code-block:: cpp
 
      template <typename Descriptor>
-     %OPERATION_NAME%_result_t<Descriptor> %OPERATION_NAME%(
+     %OPERATION%_result_t<Descriptor> %OPERATION%(
         const Descriptor& desc,
-        const %OPERATION_NAME%_input_t<Descriptor>& input);
+        const %OPERATION%_input_t<Descriptor>& input);
 
 - Shortcut that allows omitting explicit input creation.
 
   .. code-block:: cpp
 
      template <typename Descriptor, typename... Args>
-     %OPERATION_NAME%_result_t<Descriptor> %OPERATION_NAME%(
+     %OPERATION%_result_t<Descriptor> %OPERATION%(
         sycl::queue& queue,
         const Descriptor& desc,
         Args&&... args);
@@ -102,7 +106,7 @@ to the general one described in section `General operation definition
   .. code-block:: cpp
 
      template <typename Descriptor, typename... Args>
-     %OPERATION_NAME%_result_t<Descriptor> %OPERATION_NAME%(
+     %OPERATION%_result_t<Descriptor> %OPERATION%(
         const Descriptor& desc,
         Args&&... args);
 
@@ -113,32 +117,55 @@ to the general one described in section `General operation definition
 -----
 Input
 -----
+An input objects aggregates all the data that algorithm requires for performing
+specific operation. The data represented via :txtref:`tables <table>`, so,
+typically, an input is a collection of tables, but not limited with them and can
+aggregate objects of arbitrary type.
+
+In general, input class definition is similar to :txtref:`descriptor
+<descriptors>`. An input defines properties that can be accessed by means of the
+corresponding :capterm:`getter` and :capterm:`setter` methods. Requirements to
+the input's properties are the same as :txtref:`requirements for descriptor's
+properties <property_reqs>`.
+
+`The following code sample <input_template_>`_ shows the common structure of a
+inputs's definition. To define an input for particular algorithm and operation,
+the following strings shall be substituted:
+
+- ``%ALGORITHM%`` is the name of an algorithm and its namespace.
+
+- ``%OPERATION%`` is the name of operation.
+
+- ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and the type of one
+  of the input's properties.
 
 .. code-block:: cpp
+   :name: input_template
 
    namespace oneapi::dal::%ALGORITHM% {
 
    template <typename Task = task::by_default>
-   class OPERATION_NAME_input {
+   class OPERATION_input {
    public:
-      %OPERATION_NAME%_input(
-         const %PROPERTY_TYPE_1%& property_name_1,
-         const %PROPERTY_TYPE_2%& property_name_2,
-         /* more properties */
-      )
+      /* Constructor */
+      %OPERATION%_input(const %PROPERTY_TYPE%& %PROPERTY_NAME%,
+                        /* more properties */)
 
-      /* Getter & Setter for the property called `%PROPERTY_NAME_1%` */
-      descriptor& set_%PROPERTY_NAME_1%(%PROPERTY_TYPE_1% value);
-      %PROPERTY_TYPE_1% get_%PROPERTY_NAME_1%() const;
-
-      /* Getter & Setter for the property called `%PROPERTY_NAME_2%` */
-      descriptor& set_%PROPERTY_NAME_2%(%PROPERTY_TYPE_2% value);
-      %PROPERTY_TYPE_2% get_%PROPERTY_NAME_2%() const;
+      /* Getter & Setter for the property called `%PROPERTY_NAME%` */
+      descriptor& set_%PROPERTY_NAME%(%PROPERTY_TYPE% value);
+      %PROPERTY_TYPE% get_%PROPERTY_NAME%() const;
 
       /* more properties */
    };
 
    } // namespace oneapi::dal::%ALGORITHM%
+
+
+.. note::
+
+   An input is specific to algorithm and operation, so each
+   ``%ALGORITHM%``-``%OPERATION%`` pair shall define its own set of the
+   properties.
 
 
 .. _result:
@@ -152,8 +179,12 @@ Result
    namespace oneapi::dal::%ALGORITHM% {
 
    template <typename Task = task::by_default>
-   class OPERATION_NAME_result {
+   class OPERATION_result {
    public:
+      /* Constructor */
+      %OPERATION%_result(const %PROPERTY_TYPE%& %PROPERTY_NAME%,
+                         /* more properties */)
+
       /* Getter & Setter for the property called `%PROPERTY_NAME%` */
       descriptor& set_%PROPERTY_NAME%(%PROPERTY_TYPE% value);
       %PROPERTY_TYPE% get_%PROPERTY_NAME%() const;

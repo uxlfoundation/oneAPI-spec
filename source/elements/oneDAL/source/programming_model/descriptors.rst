@@ -63,6 +63,10 @@ algorithm, the following strings shall be substituted:
              /* more template parameters */>
    class descriptor {
    public:
+      /* Constructor */
+      descriptor(const %PROPERTY_TYPE%& %PROPERTY_NAME%,
+                 /* more properties */)
+
       /* Getter & Setter for the property called `%PROPERTY_NAME%` */
       descriptor& set_%PROPERTY_NAME%(%PROPERTY_TYPE% value);
       %PROPERTY_TYPE% get_%PROPERTY_NAME%() const;
@@ -75,6 +79,8 @@ algorithm, the following strings shall be substituted:
 
 Each meta-parameter of an algorithm is mapped to a property that shall satisfy
 the following requirements:
+
+.. _property_reqs:
 
 - Properties are defined with getter and setter methods. The underlying
   class member variable that stores the property's value is never exposed in the
@@ -150,8 +156,8 @@ namespace using tag-types. Algorithm shall support at least one task and declare
 the ``by_default`` type alias that refers to one of the tasks as shown in the
 example below.
 
-If an algorithm assumes separation on ``classification`` and ``regression`` tasks,
-the default task shall be ``classification``.
+If an algorithm assumes both ``classification`` and ``regression`` tasks, the
+default task shall be ``classification``.
 
 .. code-block:: cpp
 

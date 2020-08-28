@@ -25,7 +25,7 @@ model used for solving :capterm:`regression` problem is generalized for solving
 a :capterm:`classification` problem, for example, logistic regression. Such
 techniques differ only in few problem-specific aspects, but share the same
 subset of meta-parameters and have a common computational flow. oneDAL does not
-distinguish these techniques into different algorithms, instead, from oneDAL
+distinguish these techniques into different algorithms. Instead, from oneDAL
 perspective, the same algorithm may perform different *computational tasks*.
 
 From computational perspective, algorithm implementation may rely on different
