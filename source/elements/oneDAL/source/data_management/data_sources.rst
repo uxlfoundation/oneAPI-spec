@@ -15,9 +15,9 @@ Read
 **Read operation** is a function that transforms a data source and other arguments represented via `an args <args_>`_ object
 to `a result <result_>`_ object. An operation responsible for:
 
-- Execution of all data retrieval and transformation routines of the data source.
+- Executing all of the data retrieval and transformation routines of the data source.
 
-- Passing SYCL* queue to data retrieval and transformation routines.
+- Passing a SYCL* queue to the data retrieval and transformation routines.
 
 .. _read_operation_definition:
 
