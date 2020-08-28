@@ -7,9 +7,9 @@
 Row accessor
 ============
 
-The ``row_accessor`` class provides a read-only access to the rows of
-:txtref:`table` types as :capterm:`homogeneous <homogeneous data>`,
-:capterm:`contiguous <contiguous data>` array.
+The ``row_accessor`` class provides a read-only access to the rows of the
+:txtref:`table` as :capterm:`contiguous <contiguous data>` :capterm:`homogeneous
+<homogeneous data>` array.
 
 -------------
 Usage example
@@ -59,7 +59,7 @@ Usage example
 Programming interface
 ---------------------
 
-The following declarations defined in ``oneapi/dal/table/row_accessor.hpp``
+The following declarations are defined in ``oneapi/dal/table/row_accessor.hpp``
 within ``oneapi::dal`` namespace.
 
 .. onedal_class:: oneapi::dal::row_accessor

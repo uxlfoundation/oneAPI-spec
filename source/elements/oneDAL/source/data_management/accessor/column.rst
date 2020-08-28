@@ -8,8 +8,8 @@ Column accessor
 ===============
 
 The ``column_accessor`` class provides a read-only access to the column values
-of :txtref:`table` types as :capterm:`homogeneous <homogeneous data>`,
-:capterm:`contiguous <contiguous data>` array.
+of the :txtref:`table` as :capterm:`contiguous <contiguous data>`
+:capterm:`homogeneous <homogeneous data>` array.
 
 -------------
 Usage example
@@ -59,7 +59,7 @@ Usage example
 Programming interface
 ---------------------
 
-The following declarations defined in ``oneapi/dal/table/column_accessor.hpp``
+The following declarations are defined in ``oneapi/dal/table/column_accessor.hpp``
 within ``oneapi::dal`` namespace.
 
 .. onedal_class:: oneapi::dal::column_accessor

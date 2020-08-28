@@ -20,19 +20,19 @@ Requirements
 Each accessor implementation shall:
 
 1. Define a single :term:`format of the data <Data format>` for the
-   access. Every single accessor type shall return and use only one data format.
+   access. Every accessor type shall return and use only one data format.
 
 2. Provide read-only access to the data in the :txtref:`table` types.
 
-3. Provide the :code:`pull()` operation for obtaining the values from the table.
+3. Provide the :code:`pull()` method for obtaining the values from the table.
 
-4. Be lightweight. Its constructors shall not have heavy operations such as copy
-   of data, reading, any sort of conversions. These operations shall be
-   performed by method :code:`pull()`. It is not necessary to have copy- or
-   move- constructors for accessor implementations since it shall be designed
-   for use in a local scope.
+4. Be lightweight. Its constructors shall not have computationally intensive
+   operations such data copy, reading, or conversion. These operations shall be
+   performed by method :code:`pull()`. Support of copy- and move- constructors
+   by the accessor is not required since it shall be designed for use in a local
+   scope - directly in a place when it is created.
 
-5. Method :code:`pull()` shall avoid data copies and conversions when it is
+5. The :code:`pull()` method shall avoid data copy and conversion when it is
    possible to use memory directly from the table.
 
 
@@ -42,8 +42,8 @@ Each accessor implementation shall:
 Accessor Types
 --------------
 
-|dal_short_name| defines a set of accessor classes. Each class is associated
-with a single specific way of interacting with data within a :txtref:`table`.
+|dal_short_name| defines a set of accessor classes. Each class supports one
+specific way of obtaining data from the :txtref:`table`.
 
 All accessor classes in |dal_short_name| are listed below:
 

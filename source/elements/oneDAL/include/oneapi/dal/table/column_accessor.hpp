@@ -11,19 +11,19 @@ public:
 
 public:
     /// Creates a new read-only accessor object from the table.
-    /// The check that accessor supports the table kind of $obj$ shall be performed.
-    /// The reference on the $obj$ table shall be stored within the accessor to
-    /// perform data reading from it.
+    /// The check that the accessor supports the table kind of $obj$ shall be performed.
+    /// The reference to the $obj$ table shall be stored within the accessor to
+    /// obtain data from the table.
     column_accessor(const table& obj);
 
     /// Provides access to the column values of the table.
-    /// The method shall return the array that directly points to the memory within the table
+    /// The method shall return an array that directly points to the memory within the table
     /// if it is possible. In that case, the array shall refer to the memory as to immutable data.
-    /// Otherwise, the new memory block shall be allocated, data from the table rows shall be converted
+    /// Otherwise, the new memory block shall be allocated, the data from the table rows shall be converted
     /// and copied into this block. The array shall refer to the block as to mutable data.
     ///
     /// @param[in] queue        The SYCL* queue object.
-    /// @param[in] column_index The index of column that data shall be returned from the accessor.
+    /// @param[in] column_index The index of the column from which the data shall be returned by the accessor.
     /// @param[in] rows         The range of rows that should be read in the $column_index$ block.
     /// @param[in] alloc        The requested kind of USM in the returned block.
     ///
@@ -38,16 +38,15 @@ public:
     /// The method shall return the :expr:`block.data` pointer.
     ///
     /// @param[in] queue        The SYCL* queue object.
-    /// @param[in,out] block    The block which memory is reused whether it is possible and
-    ///                         needed to get data from the table. It shall be reset when
-    ///                         its size is not big enough or direct memory from the table can be used.
-    ///                         If the block is reset to use direct memory pointer from the object,
+    /// @param[in,out] block    The block which memory is reused (if it is possible) to obtain the data from the table.
+    ///                         The block memory shall be reset when
+    ///                         its size is not big enough, or it contains immutable data, or direct
+    ///                         memory from the table can be used.
+    ///                         If the block is reset to use a direct memory pointer from the object,
     ///                         it shall refer to this pointer as to immutable memory block.
-    /// @param[in] column_index The index of column that data shall be returned from the accessor.
+    /// @param[in] column_index The index of the column from which the data shall be returned by the accessor.
     /// @param[in] rows         The range of rows that should be read in the $column_index$ block.
     /// @param[in] alloc        The requested kind of USM in the returned block.
-    /// @return pointer      The raw pointer that $block$ contains after this operation.
-    ///                      The same as :expr:`block.get_data()`
     ///
     /// @pre ``rows`` are within the range of ``[0, obj.row_count)``.
     /// @pre ``column_index`` is within the range of ``[0, obj.column_count)``.
