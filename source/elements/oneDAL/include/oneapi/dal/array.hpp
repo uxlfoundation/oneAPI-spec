@@ -171,7 +171,7 @@ public:
 
     /// The pointer to memory block holding immutable data.
     /// @invariant :expr:`data != nullptr` if :expr:`count > 0`
-    /// @invariant if :expr:`has_mutable_data() == true` then `data == mutable_data`
+    /// @invariant if :expr:`has_mutable_data() == true` then :expr:`data == mutable_data`
     const Data* get_data() const noexcept;
 
     /// Returns whether array contains :expr:`mutable_data` or not
