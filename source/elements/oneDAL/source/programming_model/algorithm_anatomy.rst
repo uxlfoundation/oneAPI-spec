@@ -188,7 +188,7 @@ namespace using tag-types. Algorithm shall support at least one task and declare
 the ``by_default`` type alias that refers to one of the tasks as shown in the
 example below.
 
-If algorithm assumes separation on ``classification`` and ``regression`` tasks,
+If an algorithm assumes separation on ``classification`` and ``regression`` tasks,
 the default task shall be ``classification``.
 
 .. code-block:: cpp
