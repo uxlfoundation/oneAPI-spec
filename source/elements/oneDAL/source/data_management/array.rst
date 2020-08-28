@@ -95,44 +95,48 @@ usage scenario:
 Data ownership requirements
 ---------------------------
 
-Its important to specify the logic how ``array`` shall manage its data:
+The array shall support following requirements on the internal data management:
 
-1. Array shall hold two properties that represent raw pointers on the data:
+1. An array shall own two properties representing raw pointers to the data:
 
-   - ``data`` for pointer on immutable data,
-   - ``mutable_data`` for pointer on mutable data (see the :txtref:`programming_interface`).
+   - ``data`` for a pointer to immutable data block,
+   - ``mutable_data`` for a pointer to mutable data block (see the :txtref:`programming_interface`).
 
-2. If array holds mutable data, both properties shall point to the same memory
+2. If array owns mutable data, both properties shall point to the same memory
    block.
 
-3. If array holds immutable data, ``mutable_data`` shall be ``nullptr``.
+3. If array owns immutable data, ``mutable_data`` shall be ``nullptr``.
 
-4. Array shall hold **ownership information** on the data inside it:
+4. Array shall store the count of elements in the block it owns and shall update
+   the ``count`` property when a new memory block is assigned to the array.
 
-   - the count of references, indicating how many array objects refer to the
+5. Array shall store a pointer to the **ownership structure** on the data:
+
+   - The **reference counter**, indicating how many array objects refer to the
      same memory block.
 
-   - A **deleter**, the functionality how to free the memory block, when
-     references count becomes zero.
+   - The **deleter** object used to free the memory block, when
+     reference counter becomes zero.
 
-5. Array shall create a structure with ownership information for every new
-   memory block that do not associated with such information already.
+6. Array shall create the ownership structure for a new memory block that do not
+   associated with such structure.
 
-6. When a new memory block is assigned to the array, ``count`` property shall be
-   updated to the actual element count in the memory block.
+7. Array shall decrement the number of references to the memory block then the
+   array goes out of the scope. If the number of references becomes zero, the
+   array shall call the deleter on this memory block and free the ownership structure.
 
-7. Array shall decrement the number of references to the memory block then it
-   goes out of the scope. If the number of references becomes zero, the
-   deleter on this memory block shall be called.
-
-8. Arrays share the data blocks. The number of references in the ownership
-   information shall be equal to the number of arrays that share the data block.
+8. Array shall store the pointer to the ownership structure created by another
+   array when they share the data. Array shall increment the reference counter
+   to be equal to the number of array objects sharing the same data.
 
 .. _programming_interface:
 
 ---------------------
 Programming interface
 ---------------------
+
+The following declarations are defined in ``oneapi/dal/array.hpp`` within
+``oneapi::dal`` namespace.
 
 All the ``array`` class methods can be divided into several groups:
 
@@ -150,10 +154,7 @@ All the ``array`` class methods can be divided into several groups:
 
 5. The methods to access the data.
 
-6. Static methods that provide simplified ways to create an array from external
-   memory or by allocating it inside new object.
-
-The following declarations defined in ``oneapi/dal/array.hpp`` within
-``oneapi::dal`` namespace.
+6. Static methods that provide simplified ways to create an array either from external
+   memory or by allocating it within a new object.
 
 .. onedal_class:: oneapi::dal::array

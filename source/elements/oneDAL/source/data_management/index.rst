@@ -241,7 +241,7 @@ interface or via read-only accessor as shown on the diagram.
 Details
 =======
 
-This section includes detailed descriptions of all data management objects in
+This section includes the detailed descriptions of all data management objects in
 |dal_short_name|.
 
 .. toctree::
