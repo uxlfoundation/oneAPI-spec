@@ -33,7 +33,11 @@ Each accessor implementation shall:
    scope - directly in a place when it is created.
 
 5. The :code:`pull()` method shall avoid data copy and conversion when it is
-   possible to use memory directly from the table.
+   possible to return the pointer to the memory block in the table - in cases
+   such as the :capterm:`data format` of the data within the table and
+   :capterm:`data format` for the access are the same. For example, to use the
+   memory of ``homogen_table`` from :txtref:`row_accessor` when the data type to
+   access is similar to the type of the data within the table.
 
 
 .. _accessor_types:

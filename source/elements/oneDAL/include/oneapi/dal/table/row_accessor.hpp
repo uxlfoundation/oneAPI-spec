@@ -36,8 +36,8 @@ public:
     ///
     /// @param[in] queue     The SYCL* queue object.
     /// @param[in,out] block The block which memory is reused (if it is possible) to obtain the data from the table.
-    ///                      The block memory shall be reset when
-    ///                      its size is not big enough, or it contains immutable data, or direct
+    ///                      The block memory shall be reset either when
+    ///                      its size is not big enough, or when it contains immutable data, or when direct
     ///                      memory from the table can be used.
     ///                      If the block is reset to use a direct memory pointer from the object,
     ///                      it shall refer to this pointer as to immutable memory block.
