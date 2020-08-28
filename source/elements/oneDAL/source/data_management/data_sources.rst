@@ -106,7 +106,7 @@ to the general one described in section `Read operation definition
 Args
 ----
 
-- ``%DATA_SOURCE%`` is the name of a data source and its namespace.
+- The string ``%DATA_SOURCE%`` should be substituted with the name of the data source, for example, csv. 
 
 - ``%PROPERTY_NAME%`` and ``%PROPERTY_TYPE%`` are the name and the type of one
   of the data source args properties.
