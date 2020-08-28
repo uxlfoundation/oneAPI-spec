@@ -82,11 +82,11 @@ Additionally, the means and variances of the initial dataset shall be returned.
 Training method: *SVD*
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This method uses singular value decomposition of the dataset to find its
-principal components. The following steps are distinguished:
+This method uses singular value decomposition of the dataset to compute its
+principal components. The method relies on the following steps:
 
-#. Singular values and singular vector computation
-#. Resulting matrix formation
+#. Computation of the singular values and singular vector
+#. Formation of the matrices storing the results
 
 To compute singular values and singular vectors, the following equation system
 shall be resolved:
