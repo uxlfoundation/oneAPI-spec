@@ -13,9 +13,9 @@ Exception classification
 
 Exception classification in oneDAL is aligned with C++ Standard Library
 classification. oneDAL shall introduce abstract classes that define the base
-class in the hierarchy of exception classes. Concrete exception classes are
+class in the hierarchy of exception classes. Non-abstract exception classes are
 derived from the respective C++ Standard Library exception classes. oneDAL shall
-throw exceptions represented with concrete classes.
+throw exceptions represented with non-abstract classes.
 
 In the hierarchy of oneDAL exceptions, ``oneapi::dal::exception`` is the base abstract
 class that all other exception classes are derived from.
@@ -90,7 +90,7 @@ shall be divided into the following groups:
      - Description
      - Abstract
    * - ``oneapi::dal::invalid_argument``
-     - Reports situations when the argument was not been accepted.
+     - Reports situations when the argument was not accepted.
      - No
    * - ``oneapi::dal::domain_error``
      - Reports situations when the argument is outside of the domain on which
