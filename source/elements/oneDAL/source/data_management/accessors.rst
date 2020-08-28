@@ -35,8 +35,8 @@ Each accessor implementation shall:
 5. The :code:`pull()` method shall avoid data copy and conversion when it is
    possible to return the pointer to the memory block in the table. This is
    applicable for cases such as when the :capterm:`data format` and
-   :capterm:`data types <data type>` of the data within the table and
-   :capterm:`data format`, :capterm:`data type` for the access are the same.
+   :capterm:`data types <data type>` of the data within the table are the same as the
+   :capterm:`data format` and :capterm:`data type` for the access.
 
 
 .. _accessor_types:
