@@ -10,6 +10,8 @@ These algorithms include matrix decompositions, clustering, classification,
 and regression algorithms, as well as association rules discovery.
 
 .. toctree::
+   :titlesonly:
+
    clustering/index.rst
    nearest_neighbors/index.rst
    decomposition/index.rst
