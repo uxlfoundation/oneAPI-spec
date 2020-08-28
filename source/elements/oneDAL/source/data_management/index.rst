@@ -243,4 +243,4 @@ This section includes the detailed descriptions of all data management objects i
    array.rst
    accessors.rst
    data_sources.rst
-   tables.rst
+   table.rst

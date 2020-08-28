@@ -60,12 +60,12 @@ All accessor classes in |dal_short_name| are listed below:
    * - :txtref:`row_accessor`
      - Provides access to the range of rows as one :term:`contiguous
        <Contiguous data>` :term:`homogeneous <Homogeneous data>` block of memory.
-     - :code:`homogen_table`
+     - :txtref:`homogen_table`
    * - :txtref:`column_accessor`
      - Provides access to the range of values within a single column as one
        :term:`contiguous <Contiguous data>` :term:`homogeneous <Homogeneous
        data>` block of memory.
-     - :code:`homogen_table`
+     - :txtref:`homogen_table`
 
 -------
 Details
