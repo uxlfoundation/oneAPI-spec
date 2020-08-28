@@ -110,7 +110,7 @@ The result of a :expr:`read` operation is an instance of an in-memory dataset wi
 Operation
 ~~~~~~~~~
 
-Supported value of :code:`DatasetType` template parameter for :expr:`read` operation with CSV data source is :code:`onedal::table`.
+Supported value of the :code:`DatasetType` template parameter for :expr:`read` operation with CSV data source is :code:`onedal::table`.
 
 .. namespace:: onedal
 .. function:: template <typename DatasetType, typename DataSource> \
