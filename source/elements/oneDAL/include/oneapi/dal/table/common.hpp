@@ -6,14 +6,15 @@ enum class data_layout { unknown, row_major, column_major };
 
 class table_metadata {
 public:
-    /// Creates empty metadata - without any feature information.
-    /// @post :expr:`feature_count == 0`
+    /// Creates the metadata instance without information about features.
+    /// The :expr:`feature_count` shall be set to zero.
+    /// The properties :expr:`data_type` and :expr:`feature_type` shall not be initialized.
     table_metadata();
 
-    /// Creates metadata object from external information about data types and
+    /// Creates the metadata instance from external information about data types and
     /// feature types.
-    /// @param dtypes Data types of features. Shall be assigned into :expr:`data_type` property.
-    /// @param ftypes Feature types of features. Shall be assigned into :expr:`feature_type` property.
+    /// @param dtypes Data types of features. Shall be assigned into the :expr:`data_type` property.
+    /// @param ftypes Feature types of features. Shall be assigned into the :expr:`feature_type` property.
     /// @pre :expr:`dtypes.get_count() == ftypes.get_count()`
     table_metadata(const array<data_type>& dtypes, const array<feature_type>& ftypes);
 
@@ -30,52 +31,24 @@ public:
 
 class table {
 public:
-    /// Creates an empty table - with zero row and column count. This table
-    /// shall not contains any data, other properties are set to default values.
+    /// Creates the table instance with zero row and column count.
+    /// All the table properties shall be set to default value (see Properties section).
     table();
 
-    /// Creates a new table object which shares all the data and property
-    /// values with $t$.
-    ///
-    /// @param t The table object that will share its data with this object.
-    table(const table& t);
+    /// Creates new table instance which shares all the data and property
+    /// values with $other$.
+    table(const table& other);
 
-    /// Moves $t$ into new table object.
-    ///
-    /// @param t The table object to be moved inside this one.
-    table(table&& t);
+    /// Creates new table instance and moves all property values from $other$ into it.
+    table(table&& other);
 
-    /// Creates table from an implementation object. $Impl$ shall be the
-    /// appropriate implementation type: it shall implement all the properties
-    /// of table class with the getter semantics as defined in the table class.
-    /// The checks can be done in compile-time using SFINAE technique or in
-    /// run-time using $impl$ object API. $Impl$ shall not be derived from table
-    /// type.
-    /// `template <typename T> static constexpr bool oneapi::dal::is_table_impl_v<T>`
-    /// implements the mentioned optional compile-time checks on $Impl$ type.
-    template <typename Impl,
-              typename ImplType = std::decay_t<Impl>,
-              typename          = std::enable_if_t<!std::is_base_of_v<table, ImplType> &&
-                                                   is_table_impl_v<ImplType>>>
-    table(Impl&& impl);
+    /// Replaces the values of all properties by references to property values of $other$
+    table& operator=(const table& other);
 
-    /// Assigns reference to $t$ inside this object. Leaves data and properties
-    /// held by the table before. The table shall share data and properties with
-    /// $t$.
-    ///
-    /// @param t The table object that will share its data with this object.
-    table& operator=(const table& t);
+    /// Swaps the property values of this object and $other$.
+    table& operator=(table&& other);
 
-    /// Moves $t$ inside this object. Leaves data and properties held by the
-    /// table before. All data and properties are reassigned from $t$ to this
-    /// object.
-    ///
-    /// @param t The table object to be moved inside this one.
-    table& operator=(table&& t);
-
-    /// Indicates whether table is empty or not
-    /// @return has_data True if table contains non-zero count of rows and columns.
-    ///                  Otherwise returns false.
+    /// Indicates whether table contains non-zero count of rows and columns or not
     bool has_data() const noexcept;
 
     /// The count of columns in the table.
@@ -87,17 +60,17 @@ public:
     std::int64_t get_row_count() const;
 
     /// The metadata object that hold additional information
-    /// about data inside the table.
+    /// about the data within the table.
     /// @remark default = oneapi::dal::table_metadata{}
     const table_metadata& get_metadata() const;
 
-    /// The runtime id of the actual table type.
+    /// The runtime id of the table type.
     /// Every particular table sub-type shall have its unique ``kind``.
     /// Empty table shall have a unique kind value as well.
     /// @remark default = empty_table_kind
     std::int64_t get_kind() const;
 
-    /// The layout of data inside the table
+    /// The layout of the data within the table
     /// @remark default = data_layout::unknown
     data_layout get_data_layout() const;
 };

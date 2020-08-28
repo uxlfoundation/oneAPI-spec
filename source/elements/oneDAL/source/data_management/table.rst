@@ -39,15 +39,15 @@ Each implementation of :txtref:`table` concept shall:
 1. Follow definition of the :txtref:`table concept <table>` and its restrictions
    (e.g., :capterm:`immutability`).
 
-2. Be derived from the :code:`table` class. The behavior of this class can be
+2. Be derived from the :expr:`oneapi::dal::table` class. The behavior of this class can be
    extended, but cannot be weaken.
 
 3. Be :term:`reference-counted <Reference-counted object>`.
 
-4. Every new :code:`table` sub-type shall define a unique id number - the "kind"
+4. Every new :expr:`oneapi::dal::table` sub-type shall define a unique id number - the "kind"
    that represents objects of that type in runtime.
 
-Next listing provides an example of table API regarding kinds and copy-assignment operation:
+The following listing provides an example of table API regarding kinds and copy-assignment operation:
 
 .. code-block:: cpp
 
@@ -79,7 +79,7 @@ Table types
 
 .. list-table::
    :header-rows: 1
-   :widths: 10 70
+   :widths: 30 70
 
    * - Table type
      - Description
@@ -94,10 +94,13 @@ Table types
 Programming interface
 ---------------------
 
+The following declarations are defined in ``oneapi/dal/table/common.hpp`` within
+``oneapi::dal`` namespace.
+
 Table
 -----
 
-A base implementation of :txtref:`table` concept.
+A base implementation of the :txtref:`table` concept.
 
 .. onedal_class:: oneapi::dal::table
 
@@ -106,8 +109,9 @@ A base implementation of :txtref:`table` concept.
 Table metadata
 --------------
 
-An implementation of :txtref:`table_metadata` concept. Holds additional
-information about data inside the table, that is not a part of table concept.
+An implementation of the :txtref:`table_metadata` concept. Holds additional
+information about data within the table. The objects of ``table_metadata`` shall
+be :term:`reference-counted <Reference-counted object>`.
 
 .. onedal_class:: oneapi::dal::table_metadata
 
@@ -116,7 +120,7 @@ information about data inside the table, that is not a part of table concept.
 Data layout
 -----------
 
-An implementation of :capterm:`data layout` term.
+An implementation of the :capterm:`data layout` term.
 
 ::
 
@@ -139,9 +143,7 @@ An implementation of :capterm:`data layout` term.
 Feature type
 ------------
 
-.. onedal_enumclass:: oneapi::dal::feature_type
-
-An implementation of data logical types.
+An implementation of the data logical types.
 
 ::
 
