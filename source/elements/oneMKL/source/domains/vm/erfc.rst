@@ -20,12 +20,43 @@ erfc
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erfc(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erfc(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erfc(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erfc(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``erfc`` supports the following precisions.
 
@@ -61,32 +92,37 @@ erfc
    .. container:: imagecenter
 
 
-      |image0|
+      .. math::
+         \operatorname{erfc}(x) = \frac{2}{\sqrt{\pi}} \int_x^\infty e^{-t^2} \operatorname{d \!} t
 
 
    Useful relations:
 
+   .. math::
+      \operatorname{erfc}(x) = 1 - \operatorname{erf}(x)
 
-   |image1|
 
 
-   |image2|
+   .. math::
+      \Phi(x) = \frac{1}{2} \left( 1 + \operatorname{erf}\left(x / \sqrt{2}\right) \right)
 
 
    where
 
 
-   |image3|
+   .. math::
+      \Phi(x) = \frac{1}{\sqrt{2\pi}} \int_0^x \exp(-t^2/2) \operatorname{d \!} t
 
 
    is the cumulative normal distribution function.
 
 
-   |image4|
+   .. math::
+      \Phi^{-1}(x) = \sqrt{2} \operatorname{erf}^{-1}(2x - 1)
 
 
-   where ``Φ-1(x)`` and ``erf-1(x)`` are the inverses to ``Φ(x)`` and
-   ``erf(x)``, respectively.
+   where :math:`\Phi^{-1}(x)` and :math:`\operatorname{erf}^{-1}(x)` are the inverses to
+   :math:`\Phi(x)` and :math:`\operatorname{erf}(x)`, respectively.
 
 
    The following figure illustrates the relationships among erf family
@@ -103,14 +139,13 @@ erfc
       .. container:: imagecenter
 
 
-         |image5|
+         |image0|
 
 
    Useful relations for these functions:
 
-
-   |image6|
-
+   .. math::
+      \operatorname{erf}(x) + \operatorname{erfc}(x) = 1
 
    |
 
@@ -118,7 +153,9 @@ erfc
    .. container:: imagecenter
 
 
-      |image7|
+      .. math::
+         \operatorname{cdfnorm}(x) &= \frac{1}{2} \left(1 + \operatorname{erf}\left(\frac{x}{\sqrt{2}}\right) \right) \\
+                     &= 1 - \frac{1}{2} \operatorname{erfc}\left(\frac{x}{\sqrt{2}}\right)
 
 
    .. container:: tablenoborder
@@ -129,7 +166,7 @@ erfc
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - a > underflow
            - +0
            - ``oneapi::mkl::vm::status::underflow``
@@ -240,7 +277,15 @@ erfc
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -252,18 +297,4 @@ erfc
 
 
 
-.. |image0| image:: ../equations/GUID-FB387120-1A86-45B9-BE20-97247EF0ABB5-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-51FA6703-70D8-4D01-B7AB-A163F4CDFC94-low.jpg
-   :class: .eq
-.. |image2| image:: ../equations/GUID-41FCF9BC-28B7-4030-B904-1DBA03DD328C-low.gif
-   :class: .eq
-.. |image3| image:: ../equations/GUID-9A33FF12-964D-4450-949B-6AB7246435C7-low.gif
-   :class: .eq
-.. |image4| image:: ../equations/GUID-ABAAF79E-E46B-4053-8A64-9CC8B9C84A3F-low.jpg
-   :class: .eq
-.. |image5| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg
-.. |image6| image:: ../equations/GUID-02486559-84D2-4880-8EAB-2085A5BE2D10-low.jpg
-   :class: .eq
-.. |image7| image:: ../equations/GUID-7CA9B2F2-8D7C-4955-8EA8-D67616FB5B08-low.gif
-
+.. |image0| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg

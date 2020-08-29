@@ -20,12 +20,43 @@ erfinv
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erfinv(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erfinv(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erfinv(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erfinv(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``erfinv`` supports the following precisions.
 
@@ -49,48 +80,54 @@ erfinv
 
    The erfinv(a) function computes the inverse error function values for
    elements of the input vector ``a`` and writes them to the output
-   vector ``y``
+   vector ``y``.
 
 
-   ``y = erf-1(a)``,
+   .. math::
+      y_i = \operatorname{erf}^{-1}(a)
 
 
-   | where ``erf(x)`` is the error function defined as given by:
+   | where :math:`\operatorname{erf}(x)` is the error function defined as given by:
 
 
-   .. container:: imagecenter
+   .. math::
+      \operatorname{erf}(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \operatorname{d \!} t
 
 
-      |image0|
+   Useful relations for these functions:
+
+   .. math::
+      \operatorname{erfcinv}(x) = \operatorname{erfinv}(1 - x)
 
 
-   Useful relations:
+   .. math::
+      \operatorname{cdfnorminv}(x) &= \sqrt{2} \operatorname{erfinv}(2x - 1) \\
+                                   &= \sqrt{2} \operatorname{erfcinv}(2 - 2x)
+
+   .. math::
+      \operatorname{erf}^{-1}(x) = \operatorname{erfc}^{-1}(1 - x)
+
+   where :math:`\operatorname{erfc}` is the complementary error function.
 
 
-   |image1|
-
-
-   where erfc is the complementary error function.
-
-
-   |image2|
+   .. math::
+      \Phi(x) = \frac{1}{2} \left( 1 + \operatorname{erf}\left(x / \sqrt{2}\right) \right)
 
 
    where
 
-
-   |image3|
-
+   .. math::
+      \Phi(x) = \frac{1}{\sqrt{2\pi}} \int_0^x \exp(-t^2/2) \operatorname{d \!} t
 
    is the cumulative normal distribution function.
 
 
-   |image4|
+   .. math::
+      \Phi^{-1}(x) = \sqrt{2} \operatorname{erf}^{-1}(2x - 1)
 
 
-   where ``Φ-1(x)`` and ``erf-1(x)`` are the inverses to ``Φ(x)`` and
-   ``erf(x)``, respectively.
-
+   where :math:`\Phi^{-1}(x)` and :math:`\operatorname{erf}^{-1}(x)` are the inverses to
+   :math:`\Phi(x)` and :math:`\operatorname{erf}(x)`, respectively.
 
    The following figure illustrates the relationships among erfinv
    family functions (erfinv, erfcinv, cdfnorminv).
@@ -106,22 +143,7 @@ erfinv
       .. container:: imagecenter
 
 
-         |image5|
-
-
-   Useful relations for these functions:
-
-
-   |image6|
-
-
-   |
-
-
-   .. container:: imagecenter
-
-
-      |image7|
+         |image0|
 
 
    .. container:: tablenoborder
@@ -132,7 +154,7 @@ erfinv
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +0
            - +0
            -  
@@ -255,7 +277,15 @@ erfinv
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -267,18 +297,4 @@ erfinv
 
 
 
-.. |image0| image:: ../equations/GUID-4835D5B4-6232-45CD-9A49-0264F8B0DBF4-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-0A406EAC-6A1D-4D81-977C-08C018161E3F-low.jpg
-   :class: .eq
-.. |image2| image:: ../equations/GUID-0026D841-74F3-43C0-8EB5-F9E4107EF95D-low.gif
-   :class: .eq
-.. |image3| image:: ../equations/GUID-F928F918-624A-444A-BB76-7D26D1E1BC62-low.gif
-   :class: .eq
-.. |image4| image:: ../equations/GUID-02EEA5FC-8F46-4034-86D9-99900F93373C-low.gif
-   :class: .eq
-.. |image5| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg
-.. |image6| image:: ../equations/GUID-D4002137-8BA4-4D20-871B-550F2C6F9CE8-low.gif
-   :class: .eq
-.. |image7| image:: ../equations/GUID-CF961E8B-3127-4493-839A-C045E325BC42-low.jpg
-
+.. |image0| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg

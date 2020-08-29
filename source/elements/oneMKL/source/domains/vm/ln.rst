@@ -20,12 +20,43 @@ ln
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::ln(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event ln(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::ln(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event ln(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``ln`` supports the following precisions.
 
@@ -60,7 +91,7 @@ ln
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +1
            - +0
            -  
@@ -104,7 +135,7 @@ ln
            - +∞  
            - NAN  
          * - +i·∞
-           - |image0|
+           - :math:`+\infty + i \cdot \frac{3\pi}{4}`
            - +∞+i·\ ``π``/2
            - +∞+i·\ ``π``/2
            - +∞+i·\ ``π``/2
@@ -144,7 +175,7 @@ ln
            - +∞-i·0
            - QNAN+i·QNAN
          * - -i·∞
-           - |image1|
+           - :math:`+\infty - i \cdot \frac{3\pi}{4}`
            - +∞-i·\ ``π``/2
            - +∞-i·\ ``π``/2
            - +∞-i·\ ``π``/2
@@ -254,7 +285,15 @@ ln
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -263,9 +302,3 @@ ln
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
-
-
-
-.. |image0| image:: ../equations/GUID-6FB20CE7-1E2A-4340-995F-0E621DEF0E2D-low.jpg
-.. |image1| image:: ../equations/GUID-0C4BC54F-4C29-4577-80AA-BCBCD291582A-low.jpg
-

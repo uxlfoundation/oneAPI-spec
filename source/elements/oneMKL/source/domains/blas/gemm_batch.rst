@@ -52,16 +52,58 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 op(``A``) is ``m`` x ``k``, op(``B``) is 
 ``k`` x ``n``, and ``C`` is ``m`` x ``n``.
 
-The a, b and c buffers contain all the input matrices. The stride 
+The ``a``, ``b`` and ``c`` buffers contain all the input matrices. The stride 
 between matrices is given by the stride parameter. The total number
-of matrices in a, b and c buffers is given by the ``batch_size`` parameter.
+of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` parameter.
 
 **Strided API**
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb, std::int64_t strideb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size)
-.. cpp:function::  void oneapi::mkl::blas::row_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb, std::int64_t strideb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void gemm_batch(sycl::queue &queue,
+                       onemkl::transpose transa,
+                       onemkl::transpose transb,
+                       std::int64_t m,
+                       std::int64_t n,
+                       std::int64_t k,
+                       T alpha,
+                       sycl::buffer<T,1> &a,
+                       std::int64_t lda,
+                       std::int64_t stridea,
+                       sycl::buffer<T,1> &b,
+                       std::int64_t ldb,
+                       std::int64_t strideb,
+                       T beta,
+                       sycl::buffer<T,1> &c,
+                       std::int64_t ldc,
+                       std::int64_t stridec,
+                       std::int64_t batch_size)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void gemm_batch(sycl::queue &queue,
+                       onemkl::transpose transa,
+                       onemkl::transpose transb,
+                       std::int64_t m,
+                       std::int64_t n,
+                       std::int64_t k,
+                       T alpha,
+                       sycl::buffer<T,1> &a,
+                       std::int64_t lda,
+                       std::int64_t stridea,
+                       sycl::buffer<T,1> &b,
+                       std::int64_t ldb,
+                       std::int64_t strideb,
+                       T beta,
+                       sycl::buffer<T,1> &c,
+                       std::int64_t ldc,
+                       std::int64_t stridec,
+                       std::int64_t batch_size)
+   }
 
 .. container:: section
 
@@ -144,7 +186,7 @@ of matrices in a, b and c buffers is given by the ``batch_size`` parameter.
       Buffer holding input/output matrices ``C`` with size ``stridec`` * ``batch_size``.
 
    ldc
-      The leading dimension of the matrices ``C``. It must be positive and at least
+      The leading dimension of the mattrices ``C``. It must be positive and at least
       ``m`` if column major layout is used to store matrices or at
       least ``n`` if column major layout is used to store matrices.
 
@@ -169,6 +211,27 @@ of matrices in a, b and c buffers is given by the ``batch_size`` parameter.
 
    If ``beta`` = 0, matrix ``C`` does not need to be initialized before
    calling ``gemm_batch``.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
 .. _onemkl_blas_gemm_batch_usm:
 
@@ -210,22 +273,62 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 op(``A``) is ``m`` x ``k``, op(``B``) is ``k`` x ``n``, and ``C`` is ``m`` x ``n``.
 
  
-For group API, a, b and c arrays contain the pointers for all the input matrices. 
-The total number of matrices in a, b and c are given by: 
+For group API, ``a``, ``b`` and ``c`` arrays contain the pointers for all the input matrices. 
+The total number of matrices in ``a``, ``b`` and ``c`` are given by: 
 
 .. math::
 
-      total\_batch\_count = \sum_{i=0}^{group\_count}group\_size[i]    
+      total\_batch\_count = \sum_{i=0}^{group\_count-1}group\_size[i]    
  
-For strided API, a, b, c arrays contain all the input matrices. The total number of matrices 
-in a, b and c are given by the ``batch_size`` parameter.  
+For strided API, ``a``, ``b``, ``c`` arrays contain all the input matrices. The total number of matrices 
+in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.  
    
 **Group API**
 
 .. rubric:: Syntax
    
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::gemm_batch(sycl::queue &queue, onemkl::transpose *transa, onemkl::transpose *transb, std::int64_t *m, std::int64_t *n, std::int64_t *k, T *alpha, const T **a, std::int64_t *lda, const T **b, std::int64_t *ldb, T *beta, T **c, std::int64_t *ldc, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::gemm_batch(sycl::queue &queue, onemkl::transpose *transa, onemkl::transpose *transb, std::int64_t *m, std::int64_t *n, std::int64_t *k, T *alpha, const T **a, std::int64_t *lda, const T **b, std::int64_t *ldb, T *beta, T **c, std::int64_t *ldc, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event gemm_batch(sycl::queue &queue,
+                              onemkl::transpose *transa,
+                              onemkl::transpose *transb,
+                              std::int64_t *m,
+                              std::int64_t *n,
+                              std::int64_t *k,
+                              T *alpha,
+                              const T **a,
+                              std::int64_t *lda,
+                              const T **b,
+                              std::int64_t *ldb,
+                              T *beta,
+                              T **c,
+                              std::int64_t *ldc,
+                              std::int64_t group_count,
+                              std::int64_t *group_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event gemm_batch(sycl::queue &queue,
+                              onemkl::transpose *transa,
+                              onemkl::transpose *transb,
+                              std::int64_t *m,
+                              std::int64_t *n,
+                              std::int64_t *k,
+                              T *alpha,
+                              const T **a,
+                              std::int64_t *lda,
+                              const T **b,
+                              std::int64_t *ldb,
+                              T *beta,
+                              T **c,
+                              std::int64_t *ldc,
+                              std::int64_t group_count,
+                              std::int64_t *group_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -358,8 +461,52 @@ in a, b and c are given by the ``batch_size`` parameter.
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, const T *a, std::int64_t lda, std::int64_t stridea, const T *b, std::int64_t ldb, std::int64_t strideb, T beta, T *c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::gemm_batch(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, std::int64_t m, std::int64_t n, std::int64_t k, T alpha, const T *a, std::int64_t lda, std::int64_t stridea, const T *b, std::int64_t ldb, std::int64_t strideb, T beta, T *c, std::int64_t ldc, std::int64_t stridec, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event gemm_batch(sycl::queue &queue,
+                              onemkl::transpose transa,
+                              onemkl::transpose transb,
+                              std::int64_t m,
+                              std::int64_t n,
+                              std::int64_t k,
+                              T alpha,
+                              const T *a,
+                              std::int64_t lda,
+                              std::int64_t stridea,
+                              const T *b,
+                              std::int64_t ldb,
+                              std::int64_t strideb,
+                              T beta,
+                              T *c,
+                              std::int64_t ldc,
+                              std::int64_t stridec,
+                              std::int64_t batch_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event gemm_batch(sycl::queue &queue,
+                              onemkl::transpose transa,
+                              onemkl::transpose transb,
+                              std::int64_t m,
+                              std::int64_t n,
+                              std::int64_t k,
+                              T alpha,
+                              const T *a,
+                              std::int64_t lda,
+                              std::int64_t stridea,
+                              const T *b,
+                              std::int64_t ldb,
+                              std::int64_t strideb,
+                              T beta,
+                              T *c,
+                              std::int64_t ldc,
+                              std::int64_t stridec,
+                              std::int64_t batch_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -440,7 +587,7 @@ in a, b and c are given by the ``batch_size`` parameter.
       Pointer to input/output matrices ``C`` with size ``stridec`` * ``batch_size``.
 
    ldc
-      The leading dimension of the matrices ``C``. It must be positive and at least
+      The leading dimension of the mattrices ``C``. It must be positive and at least
       ``m`` if column major layout is used to store matrices or at
       least ``n`` if column major layout is used to store matrices.
 
@@ -475,6 +622,26 @@ in a, b and c are given by the ``batch_size`` parameter.
 
    Output event to wait on to ensure computation is complete.
 
-   **Parent topic:** :ref:`blas-like-extensions`
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
       
 
+   **Parent topic:** :ref:`blas-like-extensions`

@@ -25,8 +25,12 @@ skip_ahead
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<typename EngineType> \
+.. code-block:: cpp
+
+    namespace oneapi::mkl::rng {
+    template<typename EngineType> \
                    void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip);
+    }
 
 .. container:: section
 
@@ -68,8 +72,12 @@ skip_ahead (Interface with a partitioned number of skipped elements)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<typename EngineType> \
+.. code-block:: cpp
+
+    namespace oneapi::mkl::rng {
+    template<typename EngineType> \
                    void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list<std::uint64_t> num_to_skip);
+    }
 
 .. container:: section
 

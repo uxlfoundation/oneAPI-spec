@@ -41,8 +41,34 @@ syr2 (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::syr2(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a, std::int64_t lda)
-.. cpp:function::  void oneapi::mkl::blas::row_major::syr2(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy, sycl::buffer<T,1> &a, std::int64_t lda)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void syr2(sycl::queue &queue,
+                 onemkl::uplo upper_lower,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &x,
+                 std::int64_t incx,
+                 sycl::buffer<T,1> &y,
+                 std::int64_t incy,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void syr2(sycl::queue &queue,
+                 onemkl::uplo upper_lower,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &x,
+                 std::int64_t incx,
+                 sycl::buffer<T,1> &y,
+                 std::int64_t incy,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda)
+   }
 
 .. container:: section
 
@@ -91,9 +117,30 @@ syr2 (Buffer Version)
 
    a
       Buffer holding the updated upper triangular part of the symmetric
-      matrix ``A`` if ``upper_lower =upper``, or the updated lower
+      matrix ``A`` if ``upper_lower``\ \=\ ``upper``, or the updated lower
       triangular part of the symmetric matrix ``A`` if
-      ``upper_lower =lower``.
+      ``upper_lower``\ \=\ ``lower``.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
 .. _onemkl_blas_syr2_usm:
 
@@ -102,8 +149,36 @@ syr2 (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::syr2(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::syr2(sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T alpha, const T *x, std::int64_t incx, const T *y, std::int64_t incy, T *a, std::int64_t lda, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event syr2(sycl::queue &queue,
+                        onemkl::uplo upper_lower,
+                        std::int64_t n,
+                        T alpha,
+                        const T *x,
+                        std::int64_t incx,
+                        const T *y,
+                        std::int64_t incy,
+                        T *a,
+                        std::int64_t lda,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event syr2(sycl::queue &queue,
+                        onemkl::uplo upper_lower,
+                        std::int64_t n,
+                        T alpha,
+                        const T *x,
+                        std::int64_t incx,
+                        const T *y,
+                        std::int64_t incy,
+                        T *a,
+                        std::int64_t lda,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -158,14 +233,36 @@ syr2 (USM Version)
 
    a
       Pointer to the updated upper triangular part of the symmetric
-      matrix ``A`` if ``upper_lower =upper``, or the updated lower
+      matrix ``A`` if ``upper_lower``\ \=\ ``upper``, or the updated lower
       triangular part of the symmetric matrix ``A`` if
-      ``upper_lower =lower``.
+      ``upper_lower``\ \=\ ``lower``.
 
 .. container:: section
 
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-2-routines`

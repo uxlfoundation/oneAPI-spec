@@ -21,12 +21,43 @@ erfcinv
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erfcinv(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erfcinv(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::erfcinv(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event erfcinv(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``erfcinv`` supports the following precisions.
 
@@ -37,8 +68,6 @@ erfcinv
          * - T
          * - ``float``
          * - ``double``
-
-
 
 
 .. container:: section
@@ -55,36 +84,31 @@ erfcinv
 
    The inverse complementary error function is defined as given by:
 
-
-   |
-
-
-   .. container:: imagecenter
+   .. math::
+      \operatorname{erfcinv}(x) = \operatorname{erfinv}(1 - x)
 
 
-      |image0|
+   Useful relations for these functions:
+
+   .. math::
+      \operatorname{erfcinv}(x) = \operatorname{erfinv}(1 - x)
 
 
-   |
+   .. math::
+      \operatorname{cdfnorminv}(x) &= \sqrt{2} \operatorname{erfinv}(2x - 1) \\
+                                   &= \sqrt{2} \operatorname{erfcinv}(2 - 2x)
 
 
-   .. container:: imagecenter
+   .. math::
+      \operatorname{erfinv}(x) = \operatorname{erf}^{-1}(x)
 
 
-      |image1|
+   .. math::
+      \operatorname{erf}(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2} \operatorname{d \!} t
 
 
-   |
-
-
-   .. container:: imagecenter
-
-
-      |image2|
-
-
-   where erf(x) denotes the error function and erfinv(x) denotes the
-   inverse error function.
+   where :math:`\operatorname{erf}(x)` denotes the error function and :math:`\operatorname{erfinv}(x)`
+   denotes the inverse error function.
 
 
    The following figure illustrates the relationships among erfinv
@@ -101,22 +125,7 @@ erfcinv
       .. container:: imagecenter
 
 
-         |image3|
-
-
-   Useful relations for these functions:
-
-
-   |image4|
-
-
-   |
-
-
-   .. container:: imagecenter
-
-
-      |image5|
+         |image0|
 
 
    .. container:: tablenoborder
@@ -127,7 +136,7 @@ erfcinv
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +1
            - +0
            -  
@@ -253,7 +262,15 @@ erfcinv
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -265,14 +282,4 @@ erfcinv
 
 
 
-.. |image0| image:: ../equations/GUID-9BCB2B87-3DED-4764-A182-30A4FAA4A2E2-low.gif
-   :class: .eq
-.. |image1| image:: ../equations/GUID-5F24679E-82BB-4ECB-AC87-02FC7CF3C77F-low.jpg
-   :class: .eq
-.. |image2| image:: ../equations/GUID-788A8218-34E5-4625-8E51-A5D36A113D23-low.gif
-   :class: .eq
-.. |image3| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg
-.. |image4| image:: ../equations/GUID-D4002137-8BA4-4D20-871B-550F2C6F9CE8-low.gif
-   :class: .eq
-.. |image5| image:: ../equations/GUID-CF961E8B-3127-4493-839A-C045E325BC42-low.jpg
-
+.. |image0| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg

@@ -61,16 +61,52 @@ or op(``A``) = ``A``\ :sup:`H`,
 it multiplies ``X`` on the left or right. On return, the matrix ``B``
 is overwritten by the solution matrix ``X``.
 
-The a and b buffers contain all the input matrices. The stride 
+The ``a`` and ``b`` buffers contain all the input matrices. The stride 
 between matrices is given by the stride parameter. The total number
-of matrices in a and b buffers are given by the ``batch_size`` parameter.
+of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter.
 
 **Strided API**
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::trsm_batch(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb, std::int64_t strideb, std::int64_t batch_size)
-.. cpp:function::  void oneapi::mkl::blas::row_major::trsm_batch(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, std::int64_t stridea, sycl::buffer<T,1> &b, std::int64_t ldb, std::int64_t strideb, std::int64_t batch_size)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void trsm_batch(sycl::queue &queue,
+                       onemkl::side left_right,
+                       onemkl::uplo upper_lower,
+                       onemkl::transpose trans,
+                       onemkl::diag unit_diag,
+                       std::int64_t m,
+                       std::int64_t n,
+                       T alpha,
+                       sycl::buffer<T,1> &a,
+                       std::int64_t lda,
+                       std::int64_t stridea,
+                       sycl::buffer<T,1> &b,
+                       std::int64_t ldb,
+                       std::int64_t strideb,
+                       std::int64_t batch_size)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void trsm_batch(sycl::queue &queue,
+                       onemkl::side left_right,
+                       onemkl::uplo upper_lower,
+                       onemkl::transpose trans,
+                       onemkl::diag unit_diag,
+                       std::int64_t m,
+                       std::int64_t n,
+                       T alpha,
+                       sycl::buffer<T,1> &a,
+                       std::int64_t lda,
+                       std::int64_t stridea,
+                       sycl::buffer<T,1> &b,
+                       std::int64_t ldb,
+                       std::int64_t strideb,
+                       std::int64_t batch_size)
+   }
 
 .. container:: section
 
@@ -198,22 +234,58 @@ or op(``A``) = ``A``\ :sup:`H`,
 it multiplies ``X`` on the left or right. On return, the matrix ``B``
 is overwritten by the solution matrix ``X``.
 
-For group API, a and b arrays contain the pointers for all the input matrices. 
-The total number of matrices in a and b are given by: 
+For group API, ``a`` and ``b`` arrays contain the pointers for all the input matrices. 
+The total number of matrices in ``a`` and ``b`` are given by: 
  
 .. math::
       
-      total\_batch\_count = \sum_{i=0}^{group\_count}group\_size[i]
+      total\_batch\_count = \sum_{i=0}^{group\_count-1}group\_size[i]
 
-For strided API, a and b arrays contain all the input matrices. The total number of matrices 
-in a and b are given by the ``batch_size`` parameter.  
+For strided API, ``a`` and ``b`` arrays contain all the input matrices. The total number of matrices 
+in ``a`` and ``b`` are given by the ``batch_size`` parameter.  
 
 **Group API**
 
 .. rubric:: Syntax
       
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::trsm_batch(sycl::queue &queue, onemkl::side *left_right, onemkl::uplo *upper_lower, onemkl::transpose *trans, onemkl::diag *unit_diag, std::int64_t *m, std::int64_t *n, T *alpha, const T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::trsm_batch(sycl::queue &queue, onemkl::side *left_right, onemkl::uplo *upper_lower, onemkl::transpose *trans, onemkl::diag *unit_diag, std::int64_t *m, std::int64_t *n, T *alpha, const T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event trsm_batch(sycl::queue &queue,
+                              onemkl::side *left_right,
+                              onemkl::uplo *upper_lower,
+                              onemkl::transpose *trans,
+                              onemkl::diag *unit_diag,
+                              std::int64_t *m,
+                              std::int64_t *n,
+                              T *alpha,
+                              const T **a,
+                              std::int64_t *lda,
+                              T **b,
+                              std::int64_t *ldb,
+                              std::int64_t group_count,
+                              std::int64_t *group_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event trsm_batch(sycl::queue &queue,
+                              onemkl::side *left_right,
+                              onemkl::uplo *upper_lower,
+                              onemkl::transpose *trans,
+                              onemkl::diag *unit_diag,
+                              std::int64_t *m,
+                              std::int64_t *n,
+                              T *alpha,
+                              const T **a,
+                              std::int64_t *lda,
+                              T **b,
+                              std::int64_t *ldb,
+                              std::int64_t group_count,
+                              std::int64_t *group_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -305,8 +377,46 @@ in a and b are given by the ``batch_size`` parameter.
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::trsm_batch(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, const T *a, std::int64_t lda, std::int64_t stridea, T *b, std::int64_t ldb, std::int64_t strideb, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::trsm_batch(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, const T *a, std::int64_t lda, std::int64_t stridea, T *b, std::int64_t ldb, std::int64_t strideb, std::int64_t batch_size, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event trsm_batch(sycl::queue &queue,
+                              onemkl::side left_right,
+                              onemkl::uplo upper_lower,
+                              onemkl::transpose trans,
+                              onemkl::diag unit_diag,
+                              std::int64_t m,
+                              std::int64_t n,
+                              T alpha,
+                              const T *a,
+                              std::int64_t lda,
+                              std::int64_t stridea,
+                              T *b,
+                              std::int64_t ldb,
+                              std::int64_t strideb,
+                              std::int64_t batch_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event trsm_batch(sycl::queue &queue,
+                              onemkl::side left_right,
+                              onemkl::uplo upper_lower,
+                              onemkl::transpose trans,
+                              onemkl::diag unit_diag,
+                              std::int64_t m,
+                              std::int64_t n,
+                              T alpha,
+                              const T *a,
+                              std::int64_t lda,
+                              std::int64_t stridea,
+                              T *b,
+                              std::int64_t ldb,
+                              std::int64_t strideb,
+                              std::int64_t batch_size,
+                              const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -385,5 +495,49 @@ in a and b are given by the ``batch_size`` parameter.
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+   **Parent topic:** :ref:`blas-like-extensions`
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-like-extensions`

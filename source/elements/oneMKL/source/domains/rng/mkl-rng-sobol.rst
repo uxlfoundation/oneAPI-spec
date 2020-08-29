@@ -9,7 +9,7 @@ The sobol is a 32-bit Gray code-based quasi-random number generator.
 
 .. rubric:: Description
 
-Bratley and Fox :ref:`[Bratley88] <onemkl_rng_bibliography>` provide an implementation of the SOBOL quasi-random number generator. The default dimensions of quasi-random vectors can vary from 1 to 40 inclusive. It is also allowed to register user-defined parameters (direction numbers).
+Bratley and Fox :ref:`[Bratley88] <onemkl_rng_bibliography>` provide an implementation of the SOBOL quasi-rando number generator. The defaulit dimensions of quasi-random vectors can vary from 1 to 40 inclusive. It is also allowed to register user-defined parameters (direction numbers).
 
 .. container:: section
 
@@ -31,16 +31,26 @@ class sobol
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class sobol {
     public:
-        sobol(sycl::queue& queue, std::uint32_t dimensions);
-        sobol(sycl::queue& queue, std::vector<std::uint32_t>& direction_numbers);
+        static constexpr std::uint32_t default_dimensions_number = 1;
+
+        sobol(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number);
+
+        sobol(sycl::queue queue, std::vector<std::uint32_t>& direction_numbers);
+
         sobol(const sobol& other);
+
+        sobol(sobol&& other);
+
         sobol& operator=(const sobol& other);
+
+        sobol& operator=(sobol&& other);
+
         ~sobol();
     };
-
-.. cpp:class:: oneapi::mkl::rng::sobol
+    }
 
 .. container:: section
 
@@ -51,70 +61,105 @@ class sobol
 
         * - Routine
           - Description
-        * - `sobol(sycl::queue& queue, std::uint32_t dimensions)`_
+        * - `sobol(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number)`_
           - Constructor with specified number of dimensions. The value should be :math:`1..40`.
-        * - `sobol(sycl::queue& queue, std::vector<std::uint32_t>& direction_numbers)`_
+        * - `sobol(sycl::queue queue, std::vector<std::uint32_t>& direction_numbers)`_
           - Constructor for extended use-case, when it's needed to use the number of dimensions greater than 40 or obtain another sequence.
         * - `sobol(const sobol& other)`_
           - Copy constructor
+        * - `sobol(sobol&& other)`_
+          - Move constructor
+        * - `sobol& operator=(const sobol& other)`_
+          - Copy assignement operator
+        * - `sobol& operator=(sobol&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`sobol(sycl::queue& queue, std::uint32_t dimensions)`:
+    .. _`sobol(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number)`:
 
-    .. cpp:function:: sobol::sobol(sycl::queue& queue, std::uint32_t dimensions)
+    .. code-block:: cpp
+    
+        sobol::sobol(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         dimensions
             Number of dimensions. If :math:`dimen < 1` or :math:`dimen > 40`, assume :math:`dimen = 1`.
 
-    .. _`sobol(sycl::queue& queue, std::vector<std::uint32_t>& direction_numbers)`:
+    .. _`sobol(sycl::queue queue, std::vector<std::uint32_t>& direction_numbers)`:
 
-    .. cpp:function:: sobol::sobol(sycl::queue& queue, std::vector<std::uint32_t>& direction_numbers)
+    .. code-block:: cpp
+    
+        sobol::sobol(sycl::queue queue, std::vector<std::uint32_t>& direction_numbers)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         direction_numbers
-            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own direction_numbers. The number of dimensions corresponds to direction_numbers.size() / 32.
+            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own direction_numbers. The number of dimmensions corresponds to direction_numbers.size() / 32.
 
     .. _`sobol(const sobol& other)`:
 
-    .. cpp:function:: sobol::sobol(const sobol& other)
+    .. code-block:: cpp
+    
+        sobol::sobol(const sobol& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``sobol`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``sobol`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`sobol(sobol&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        sobol::sobol(sobol&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``sobol`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`sobol& operator=(const sobol& other)`:
+
+    .. code-block:: cpp
+
+        sobol::sobol& operator=(const sobol& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``sobol`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`sobol& operator=(sobol&& other)`:
+
+    .. code-block:: cpp
+
+        sobol::sobol& operator=(sobol&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``sobol`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

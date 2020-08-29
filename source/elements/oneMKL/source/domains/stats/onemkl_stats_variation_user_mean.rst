@@ -9,7 +9,7 @@ Entry point to compute variation with the provided mean values.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::variation function is used to compute array of variation (variation for each dataset's dimension) with the provided mean values.
+The oneapi::mkl::stats::variation function is used to compute an array of variation (variation for each dataset's dimension) with the provided mean values.
 
 :ref:`onemkl_stats_variation_user_mean` supports the following precisions for data:
 
@@ -23,18 +23,19 @@ oneapi::mkl::stats::variation function is used to compute array of variation (va
 
 .. _onemkl_stats_variation_user_mean_buffer:
 
-oneapi::mkl::stats::variation (Buffer version)
+oneapi::mkl::stats::variation (buffer version)
 ----------------------------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::variation(sycl::queue& queue, \
-                   sycl::buffer<Type, 1> mean, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> variation);
+.. code-block:: cpp
 
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void variation(sycl::queue& queue, sycl::buffer<Type, 1> mean,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> variation);
+    }
 
 .. container:: section
 
@@ -72,6 +73,13 @@ oneapi::mkl::stats::variation (Buffer version)
     variation
         sycl::buffer array of variation values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when variation.get_count() == 0, or mean.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_variation_user_mean_usm:
 
 variation with provided mean (USM version)
@@ -79,13 +87,16 @@ variation with provided mean (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::variation(sycl::queue& queue, \
-                   Type* mean, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* variation, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event variation(sycl::queue& queue,
+        Type* mean,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* variation,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -124,6 +135,13 @@ variation with provided mean (USM version)
 
     variation
         Pointer to the array of the variation values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when variation == nullptr, or mean == nullptr, or dataset object is invalid
 
 .. container:: section
 

@@ -15,11 +15,12 @@ The operation is defined as:
 
 .. math::
       
-      C \leftarrow alpha*(op(A) - A\_offset)*(op(B) - B\_offset) + beta*C + C\_offset
+      \scriptstyle C \leftarrow alpha*(op(A) - A\_offset)*(op(B) - B\_offset) + beta*C + C\_offset
 
 where:
 
-op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
+op(``X``) is one of op(``X``) = ``X``, or op(``X``) = ``X``\ :sup:`T`, or
+op(``X``) = ``X``\ :sup:`H`,
 
 ``alpha`` and ``beta`` are scalars,
 
@@ -68,8 +69,50 @@ gemm_bias (Buffer Version)
 
 .. rubric:: Syntax
       
-.. cpp:function::  void oneapi::mkl::blas::column_major::gemm_bias(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda, Ta ao, sycl::buffer<Tb,1> &b, std::int64_t ldb, Tb bo, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc, sycl::buffer<Tc,1> &co)
-.. cpp:function::  void oneapi::mkl::blas::row_major::gemm_bias(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, sycl::buffer<Ta,1> &a, std::int64_t lda, Ta ao, sycl::buffer<Tb,1> &b, std::int64_t ldb, Tb bo, Ts beta, sycl::buffer<Tc,1> &c, std::int64_t ldc, sycl::buffer<Tc,1> &co)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void gemm_bias(sycl::queue &queue,
+                      onemkl::transpose transa,
+                      onemkl::transpose transb,
+                      onemkl::offset offset_type,
+                      std::int64_t m,
+                      std::int64_t n,
+                      std::int64_t k,
+                      Ts alpha,
+                      sycl::buffer<Ta,1> &a,
+                      std::int64_t lda,
+                      Ta ao,
+                      sycl::buffer<Tb,1> &b,
+                      std::int64_t ldb,
+                      Tb bo,
+                      Ts beta,
+                      sycl::buffer<Tc,1> &c,
+                      std::int64_t ldc,
+                      sycl::buffer<Tc,1> &co)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void gemm_bias(sycl::queue &queue,
+                      onemkl::transpose transa,
+                      onemkl::transpose transb,
+                      onemkl::offset offset_type,
+                      std::int64_t m,
+                      std::int64_t n,
+                      std::int64_t k,
+                      Ts alpha,
+                      sycl::buffer<Ta,1> &a,
+                      std::int64_t lda,
+                      Ta ao,
+                      sycl::buffer<Tb,1> &b,
+                      std::int64_t ldb,
+                      Tb bo,
+                      Ts beta,
+                      sycl::buffer<Tc,1> &c,
+                      std::int64_t ldc,
+                      sycl::buffer<Tc,1> &co)
+   }
       
 .. container:: section
    
@@ -236,6 +279,27 @@ gemm_bias (Buffer Version)
    If ``beta`` = 0, matrix ``C`` does not need to be initialized
    before calling ``gemm_bias``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_gemm_bias_usm:
 
 gemm_bias (USM Version)
@@ -243,8 +307,52 @@ gemm_bias (USM Version)
 
 .. rubric:: Syntax
       
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::gemm_bias(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, const Ta *a, std::int64_t lda, Ta ao, const Tb *b, std::int64_t ldb, Tb bo, Ts beta, Tc *c, std::int64_t ldc, const Tc *co, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::gemm_bias(sycl::queue &queue, onemkl::transpose transa, onemkl::transpose transb, onemkl::offset offset_type, std::int64_t m, std::int64_t n, std::int64_t k, Ts alpha, const Ta *a, std::int64_t lda, Ta ao, const Tb *b, std::int64_t ldb, Tb bo, Ts beta, Tc *c, std::int64_t ldc, const Tc *co, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event gemm_bias(sycl::queue &queue,
+                             onemkl::transpose transa,
+                             onemkl::transpose transb,
+                             onemkl::offset offset_type,
+                             std::int64_t m,
+                             std::int64_t n,
+                             std::int64_t k,
+                             Ts alpha,
+                             const Ta *a,
+                             std::int64_t lda,
+                             Ta ao,
+                             const Tb *b,
+                             std::int64_t ldb,
+                             Tb bo,
+                             Ts beta,
+                             Tc *c,
+                             std::int64_t ldc,
+                             const Tc *co,
+                             const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event gemm_bias(sycl::queue &queue,
+                             onemkl::transpose transa,
+                             onemkl::transpose transb,
+                             onemkl::offset offset_type,
+                             std::int64_t m,
+                             std::int64_t n,
+                             std::int64_t k,
+                             Ts alpha,
+                             const Ta *a,
+                             std::int64_t lda,
+                             Ta ao,
+                             const Tb *b,
+                             std::int64_t ldb,
+                             Tb bo,
+                             Ts beta,
+                             Tc *c,
+                             std::int64_t ldc,
+                             const Tc *co,
+                             const sycl::vector_class<sycl::event> &dependencies = {})
+   }
       
 .. container:: section
    
@@ -406,7 +514,7 @@ gemm_bias (USM Version)
  
    c
       Pointer to the output matrix, overwritten by ``alpha`` * (op(``A``) -
-      ``A_offset``)*(op(``B``) - ``B_offset``) + ``beta`` * ``C + ``C_offset``.
+      ``A_offset``)*(op(``B``) - ``B_offset``) + ``beta`` * ``C`` + ``C_offset``.
  
 .. container:: section
  
@@ -421,5 +529,26 @@ gemm_bias (USM Version)
 
    Output event to wait on to ensure computation is complete.
 
-   **Parent topic:** :ref:`blas-like-extensions`
+.. container:: section
 
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
+   **Parent topic:** :ref:`blas-like-extensions`

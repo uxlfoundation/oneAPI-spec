@@ -9,7 +9,7 @@ Entry point to compute mean values.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::mean function is used to compute mean array (mean value for each dataset's dimension).
+The oneapi::mkl::stats::mean function is used to compute a mean array (mean value for each dataset's dimension).
 
 :ref:`onemkl_stats_mean` supports the following precisions for data:
 
@@ -23,16 +23,19 @@ oneapi::mkl::stats::mean function is used to compute mean array (mean value for 
 
 .. _onemkl_stats_mean_buffer:
 
-mean (Buffer version)
+mean (buffer version)
 ---------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::mean(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> mean);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void mean(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> mean);
+    }
 
 .. container:: section
 
@@ -67,6 +70,13 @@ mean (Buffer version)
     mean
         sycl::buffer array of mean values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when mean.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_mean_usm:
 
 mean (USM version)
@@ -74,12 +84,15 @@ mean (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::mean(sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* mean, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event mean(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* mean,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -116,6 +129,13 @@ mean (USM version)
 
     mean
         Pointer to the array of mean values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when mean == nullptr, or dataset object is invalid
 
 .. container:: section
 

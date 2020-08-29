@@ -20,12 +20,41 @@ frac
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::frac(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event frac(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::frac(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event frac(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``frac`` supports the following precisions.
 
@@ -50,9 +79,12 @@ frac
    The frac(a) function computes a signed fractional part for each vector
    element.
 
-
-   |
-   | |image0|
+   .. math::
+      y_i =
+      \begin{cases}
+         a_i - \lfloor a_i \rfloor , a_i \geq 0 \\
+         a_i - \lceil  a_i \rceil  , a_i <    0
+      \end{cases}
 
 
    .. container:: tablenoborder
@@ -63,7 +95,7 @@ frac
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +0
            - +0
            -  
@@ -166,7 +198,15 @@ frac
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -175,8 +215,3 @@ frac
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
-
-
-
-.. |image0| image:: ../equations/GUID-A43FDBB0-21D0-4087-AAD9-4289019DD4C3-low.gif
-

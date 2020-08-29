@@ -9,7 +9,7 @@ Class is used for generation of hypergeometrically distributed integer types ran
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers hypergeometrically distributed with lot size :math:l, size of sampling :math:`s`, and number of marked elements in the lot :math:`m`, where :math:`l, m, s \in N \bigcup \{0\}; l \ge max (s, m)`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers hypergeometrically distributed with lot size :math:`l`, size of sampling :math:`s`, and number of marked elements in the lot :math:`m`, where :math:`l, m, s \in N \bigcup \{0\}; l \ge max (s, m)`.
 
 Consider a lot of :math:`l` elements comprising :math:`m` marked and :math:`l` - :math:`m` unmarked elements. A trial sampling without replacement of exactly :math:`s` elements from this lot helps to define the hypergeometric distribution, which is the probability that the group of :math:`s` elements contains exactly :math:`k` marked elements.
 
@@ -34,6 +34,7 @@ class hypergeometric
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = hypergeometric_method::by_default>
     class hypergeometric {
     public:
@@ -45,9 +46,7 @@ class hypergeometric
         std::int32_t m() const;
         std::int32_t l() const;
     };
-
-.. cpp:class:: template<typename IntType = float, typename Method = oneapi::mkl::rng::hypergeometric_method::by_default> \
-                oneapi::mkl::rng::hypergeometric
+    }
 
 .. container:: section
 
@@ -68,7 +67,7 @@ class hypergeometric
                 * ``oneapi::mkl::rng::hypergeometric_method::by_default``
                 * ``oneapi::mkl::rng::hypergeometric_method::h2pe``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -96,23 +95,27 @@ class hypergeometric
 
     .. container:: section
 
-        .. cpp:type:: hypergeometric::method_type = Method
+        .. code-block:: cpp
+
+            hypergeometric::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: hypergeometric::result_type = IntType
+        .. code-block:: cpp
+
+            hypergeometric::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -122,7 +125,9 @@ class hypergeometric
 
         .. _`hypergeometric()`:
 
-        .. cpp:function:: hypergeometric::hypergeometric()
+        .. code-block:: cpp
+
+            hypergeometric::hypergeometric()
 
         .. container:: section
 
@@ -134,7 +139,9 @@ class hypergeometric
 
         .. _`explicit hypergeometric(std::int32_t l, std::int32_T s, std::int32_T m)`:
 
-        .. cpp:function:: explicit hypergeometric::hypergeometric(std::int32_t l, std::int32_T s, std::int32_T m)
+        .. code-block:: cpp
+
+            explicit hypergeometric::hypergeometric(std::int32_t l, std::int32_T s, std::int32_T m)
 
         .. container:: section
 
@@ -142,6 +149,12 @@ class hypergeometric
 
             Constructor with parameters. `l` is a lot size, `s` is a size of sampling without replacement, `m` is a number of marked elements.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`s < 0`, or :math:`m < 0`, or :math:`l < (s > m ? s : m)`
 
 .. container:: section
 
@@ -151,7 +164,9 @@ class hypergeometric
 
         .. _`std::int32_t l() const`:
 
-        .. cpp:function:: std::int32_t hypergeometric::l() const
+        .. code-block:: cpp
+
+            std::int32_t hypergeometric::l() const
 
         .. container:: section
 
@@ -163,7 +178,9 @@ class hypergeometric
 
         .. _`std::int32_t s() const`:
 
-        .. cpp:function:: std::int32_t hypergeometric::s() const
+        .. code-block:: cpp
+
+            std::int32_t hypergeometric::s() const
 
         .. container:: section
 
@@ -175,7 +192,9 @@ class hypergeometric
 
         .. _`std::int32_t m() const`:
 
-        .. cpp:function:: std::int32_t hypergeometric::m() const
+        .. code-block:: cpp
+
+            std::int32_t hypergeometric::m() const
 
         .. container:: section
 

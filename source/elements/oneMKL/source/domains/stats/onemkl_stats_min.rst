@@ -9,7 +9,7 @@ Entry point to compute min values.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::min function is used to compute min arrays (min value for each dataset's dimension).
+The oneapi::mkl::stats::min function is used to compute min arrays (min value for each dataset's dimension).
 
 :ref:`onemkl_stats_min` supports the following precisions for data:
 
@@ -23,16 +23,19 @@ oneapi::mkl::stats::min function is used to compute min arrays (min value for ea
 
 .. _onemkl_stats_min_buffer:
 
-min (Buffer version)
+min (buffer version)
 --------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::min(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> min);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = fast, typename Type, layout ObservationsLayout>
+        void min(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> min);
+    }
 
 .. container:: section
 
@@ -66,6 +69,13 @@ min (Buffer version)
     min
         sycl::buffer array of min values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when min.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_min_usm:
 
 min (USM version)
@@ -73,12 +83,15 @@ min (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::min(sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* min, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = fast, typename Type, layout ObservationsLayout>
+        sycl::event min(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* min,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -114,6 +127,13 @@ min (USM version)
 
     min
         Pointer to the array of min values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when min == nullptr, or dataset object is invalid
 
 .. container:: section
 

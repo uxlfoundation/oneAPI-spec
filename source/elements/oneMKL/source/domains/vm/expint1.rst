@@ -20,12 +20,43 @@ expint1
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::expint1(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event expint1(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::expint1(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event expint1(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``expint1`` supports the following precisions.
 
@@ -55,7 +86,9 @@ expint1
    For positive real values ``x``, this can be written as:
 
 
-   |image0|.
+   .. math::
+      E_1(x) = \int_x^\infty \frac{e^{-t}}{t} \operatorname{d \!} t
+             = \int_1^\infty \frac{e^{-xt}}{t} \operatorname{d \!} t
 
 
    For negative real values ``x``, the result is defined as NAN.
@@ -69,7 +102,7 @@ expint1
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - ``x`` < +0
            - QNAN
            - ``oneapi::mkl::vm::status::errdom``
@@ -186,7 +219,15 @@ expint1
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -195,9 +236,3 @@ expint1
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
-
-
-
-.. |image0| image:: ../equations/GUID-B229F6A5-0619-4F06-994B-8A734C356ee1.png
-   :class: img-middle
-

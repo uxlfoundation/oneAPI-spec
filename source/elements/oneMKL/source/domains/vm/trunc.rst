@@ -21,12 +21,41 @@ trunc
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::trunc(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event trunc(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::trunc(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event trunc(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``trunc`` supports the following precisions.
 
@@ -51,9 +80,12 @@ trunc
    The trunc(a) function computes an integer value rounded towards zero for
    each vector element.
 
-
-   |
-   | |image0|
+   .. math::
+      y_i =
+      \begin{cases}
+         \lfloor a_i \rfloor , a_i \geq 0 \\
+         \lceil  a_i \rceil  , a_i <    0
+      \end{cases}
 
 
    .. container:: tablenoborder
@@ -64,7 +96,7 @@ trunc
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +0
            - +0
            -  
@@ -167,7 +199,15 @@ trunc
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -176,8 +216,3 @@ trunc
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
-
-
-
-.. |image0| image:: ../equations/GUID-CA113DF0-DE46-42A1-99AF-93F6F76E72EA-low.gif
-

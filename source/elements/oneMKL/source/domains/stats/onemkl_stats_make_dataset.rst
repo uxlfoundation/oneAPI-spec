@@ -9,7 +9,7 @@ Entry point to create a dataset from the provided parameters.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::make_dataset function is used to create dataset from the provided storage of observations matrix, number of dimensions and observations, and other parameters.
+The oneapi::mkl::stats::make_dataset function is used to create a dataset from the provided storage of the observations matrix, the number of dimensions and obesrvations, and other parameters.
 
 :ref:`onemkl_stats_make_dataset` supports the following precisions for data:
 
@@ -23,20 +23,22 @@ oneapi::mkl::stats::make_dataset function is used to create dataset from the pro
 
 .. _onemkl_stats_make_dataset_buffer:
 
-make_dataset (Buffer version)
+make_dataset (buffer version)
 -----------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::layout ObservationsLayout = oneapi::mkl::stats::layout::row_major, \
-                  typename Type> \
-                  oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout> \
-                  oneapi::mkl::stats::make_dataset(\
-                  std::int64_t n_dims, \
-                  std::int64_t n_observations, \
-                  sycl::buffer<Type, 1> observations, \
-                  sycl::buffer<Type, 1> weights = {0}, \
-                  sycl::buffer<std::int64_t, 1> indices = {0});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<layout ObservationsLayout = layout::row_major, typename Type>
+        dataset<sycl::buffer<Type, 1>, ObservationsLayout> make_dataset(
+        std::int64_t n_dims,
+        std::int64_t n_observations,
+        sycl::buffer<Type, 1> observations,
+        sycl::buffer<Type, 1> weights = {0},
+        sycl::buffer<std::int64_t, 1> indices = {0});
+    }
 
 .. container:: section
 
@@ -62,16 +64,23 @@ make_dataset (Buffer version)
         Matrix of observations.
 
     weights
-        Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative members.  If the parameter is not specified, each observation has weight equal 1.
+        Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative members.  If the parameter is not specified, each observation has weight equal to 1.
 
-    indices
-        Optional parameter. Array of vector components that are processed. Size of array is n_dims. If the parameter is not specified, all components are processed.
+    indicies
+        Optional parameter. Array of vector components that are processed. The size of the array is n_dims. If the parameter is not specified, all components are processed.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when :math: `n_dims \leq 0`, or :math: `n_observations \leq 0`, or observations.get_count() == 0
 
 .. container:: section
 
     .. rubric:: Return Value
 
-    Dataset holding specified parameters,
+    Dataset holding specified parameters.
 
 
 .. _onemkl_stats_make_dataset_usm:
@@ -81,11 +90,14 @@ make_dataset (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::layout ObservationsLayout = oneapi::mkl::stats::layout::row_major, \
-                    typename Type> \
-                    oneapi::mkl::stats::dataset<Type*, ObservationsLayout> oneapi::mkl::stats::make_dataset(std::int64_t \
-                    n_dims, std::int64_t n_observations, \
-                    Type* observations, Type* weights = nullptr, std::int64_t* indices = nullptr);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<layout ObservationsLayout = layout::row_major, typename Type>
+        dataset<Type*, ObservationsLayout> make_dataset(std::nt64_t
+        n_dims, std::int64_t n_observations,
+        Type* observations, Type* weights = nullptr, std::int64_t* indices = nullptr);
+    }
 
 .. container:: section
 
@@ -111,10 +123,17 @@ make_dataset (USM version)
         Matrix of observations.
 
     weights
-        Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative members. If the parameter is not specified, each observation has weight equal 1.
+        Optional parameter. Array of weights of size n_observations. Elements of the array are non-negative     mbers.  If   the parameter is not specified, each observation has weight equal to 1.
 
-    indices
+    indicies
         Optional parameter. Array of vector components that are processed. Size of array is n_dims. If the    parameter  is   not specified, all components are processed.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when :math:`n_dims \leq 0`, or :math:`n_observations \leq 0`, or observations == nullptr
 
 .. container:: section
 

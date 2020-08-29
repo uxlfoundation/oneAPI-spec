@@ -9,7 +9,7 @@ Non-deterministic random number generator.
 
 .. rubric:: Description
 
-Implementation defined generator with non-deterministic source of randomness(e.g. a hardware device).
+Implementation defined generator with non-deterministic source of randoness (for example, a hardware device).
 
 .. _onemkl_rng_nondeterministic_description_syntax:
 
@@ -20,15 +20,22 @@ class nondeterministic
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class nondeterministic {
     public:
-        nondeterministic(sycl::queue& queue);
-        nondeterministic (const nondeterministic& other);
+        nondeterministic(sycl::queue queue);
+
+        nondeterministic(const nondeterministic& other);
+
+        nondeterministic(nondeterministic&& other);
+
         nondeterministic& operator=(const nondeterministic& other);
+
+        nondeterministic& operator=(nondeterministic&& other);
+
         ~nondeterministic();
     };
-
-.. cpp:class:: oneapi::mkl::rng::nondeterministic
+    }
 
 .. container:: section
 
@@ -39,52 +46,85 @@ class nondeterministic
 
         * - Routine
           - Description
-        * - `nondeterministic(sycl::queue& queue)`_
+        * - `nondeterministic(sycl::queue queue)`_
           - Constructor for the particular device
         * - `nondeterministic(const nondeterministic& other)`_
           - Copy constructor
+        * - `nondeterministic(nondeterministic&& other)`_
+          - Move constructor
+        * - `nondeterministic& operator=(const nondeterministic& other)`_
+          - Copy assignement operator
+        * - `nondeterministic& operator=(nondeterministic&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`nondeterministic(sycl::queue& queue)`:
+    .. _`nondeterministic(sycl::queue queue)`:
 
-    .. cpp:function:: nondeterministic::nondeterministic(sycl::queue& queue)
+    .. code-block:: cpp
+    
+        nondeterministic::nondeterministic(sycl::queue queue)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
 
     .. _`nondeterministic(const nondeterministic& other)`:
 
-    .. cpp:function:: nondeterministic::nondeterministic(const nondeterministic& other)
+    .. code-block:: cpp
+    
+        nondeterministic::nondeterministic(const nondeterministic& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``nondeterministic`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one. Note: needed only to change the queue.
+            Valid ``nondeterministic`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`nondeterministic(nondeterministic&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        nondeterministic::nondeterministic(nondeterministic&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Note supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
-   
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``nondeterministic`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`nondeterministic& operator=(const nondeterministic& other)`:
+
+    .. code-block:: cpp
+
+        nondeterministic::nondeterministic& operator=(const nondeterministic& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``nondeterministic`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`nondeterministic& operator=(nondeterministic&& other)`:
+
+    .. code-block:: cpp
+
+        nondeterministic::nondeterministic& operator=(nondeterministic&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``nondeterministic`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
+
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

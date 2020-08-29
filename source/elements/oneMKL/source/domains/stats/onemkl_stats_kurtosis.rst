@@ -9,7 +9,7 @@ Entry point to compute kurtosis.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::kurtosis function is used to compute kurtosis array (kurtosis for each dataset's dimension).
+The oneapi::mkl::stats::kurtosis function is used to compute a kurtosis array (kurtosis for each dataset's dimension).
 
 :ref:`onemkl_stats_kurtosis` supports the following precisions for data:
 
@@ -23,16 +23,19 @@ oneapi::mkl::stats::kurtosis function is used to compute kurtosis array (kurtosi
 
 .. _onemkl_stats_kurtosis_buffer:
 
-kurtosis (Buffer version)
+kurtosis (buffer version)
 -------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::kurtosis(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> kurtosis);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+        template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void kurtosis(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> kurtosis);
+    }
 
 .. container:: section
 
@@ -67,6 +70,12 @@ kurtosis (Buffer version)
     kurtosis
         sycl::buffer array of kurtosis values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when kurtosis.get_count() == 0, or dataset object is invalid
 
 .. _onemkl_stats_kurtosis_usm:
 
@@ -75,12 +84,15 @@ kurtosis (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::kurtosis(sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* kurtosis, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event kurtosis(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* kurtosis,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -117,6 +129,13 @@ kurtosis (USM version)
 
     kurtosis
         Pointer to the array of kurtosis values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when kurtosis == nullptr, or dataset object is invalid
 
 .. container:: section
 

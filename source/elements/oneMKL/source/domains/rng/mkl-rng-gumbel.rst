@@ -9,7 +9,7 @@ Class is used for generation of Gumbel distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Gumbel distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Gumbel distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class gumbel
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = gumbel_method::by_default>
     class gumbel {
     public:
@@ -42,9 +43,7 @@ class gumbel
         RealType a() const;
         RealType b() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::gumbel_method::by_default> \
-                oneapi::mkl::rng::gumbel
+    }
 
 .. container:: section
 
@@ -65,7 +64,7 @@ class gumbel
                 * ``oneapi::mkl::rng::gumbel_method::by_default``
                 * ``oneapi::mkl::rng::gumbel_method::icdf``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -91,23 +90,27 @@ class gumbel
 
     .. container:: section
 
-        .. cpp:type:: gumbel::method_type = Method
+        .. code-block:: cpp
+
+            gumbel::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: gumbel::result_type = RealType
+        .. code-block:: cpp
+
+            gumbel::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -117,7 +120,9 @@ class gumbel
 
         .. _`gumbel()`:
 
-        .. cpp:function:: gumbel::gumbel()
+        .. code-block:: cpp
+
+            gumbel::gumbel()
 
         .. container:: section
 
@@ -129,7 +134,9 @@ class gumbel
 
         .. _`explicit gumbel(RealType a, RealType b)`:
 
-        .. cpp:function:: explicit gumbel::gumbel(RealType a, RealType b)
+        .. code-block:: cpp
+
+            explicit gumbel::gumbel(RealType a, RealType b)
 
         .. container:: section
 
@@ -137,6 +144,12 @@ class gumbel
 
             Constructor with parameters. `a` is a displacement value, `beta` is a scalefactor value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -146,7 +159,9 @@ class gumbel
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType gumbel::a() const
+        .. code-block:: cpp
+
+            RealType gumbel::a() const
 
         .. container:: section
 
@@ -158,7 +173,9 @@ class gumbel
 
         .. _`RealType b() const`:
 
-        .. cpp:function:: RealType gumbel::b() const
+        .. code-block:: cpp
+
+            RealType gumbel::b() const
 
         .. container:: section
 

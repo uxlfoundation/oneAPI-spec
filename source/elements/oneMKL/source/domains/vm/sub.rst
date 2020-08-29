@@ -21,14 +21,47 @@ sub
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::sub( queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event sub(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& b,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
       ::
 
-      .. cpp:function:: event oneapi::mkl::vm::sub( queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler - {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event sub(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* b,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler - {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``sub`` supports the following precisions.
 
@@ -65,7 +98,7 @@ sub
          * - Argument 1
            - Argument 2
            - Result
-           - Error Code
+           - Status code
          * - +0
            - +0
            - +0
@@ -122,7 +155,7 @@ sub
    are finite numbers, but the real or imaginary part of the computed
    result is so large that it does not fit the target precision. In this
    case, the function returns ∞ in that part of the result, and sets the
-   VM Error Status to ``oneapi::mkl::vm::status::overflow`` (overriding any possible
+   VM status code to ``oneapi::mkl::vm::status::overflow`` (overriding any possible
    ``oneapi::mkl::vm::status::accuracy_warning`` status).
 
 
@@ -225,7 +258,15 @@ sub
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks

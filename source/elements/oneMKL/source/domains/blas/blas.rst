@@ -3,7 +3,7 @@
 BLAS Routines
 +++++++++++++
 
-oneMKL provides a DPC++ interface to the Basic Linear Algebra Subprograms (BLAS) routines, as well as several BLAS-like extension routines.
+oneMKL provides DPC++ interfaces to the Basic Linear Algebra Subprograms (BLAS) routines (Level1, Level2, Level3), as well as several BLAS-like extension routines.
 
 .. toctree::
     :maxdepth: 1

@@ -9,7 +9,7 @@ Class is used for generation of Bernoulli distributed integer types random numbe
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Bernoulli distributed with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p; p \leq 1`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Bernoulli distributed with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p; p \leq 1`.
 
 The probability distribution is given by:
 
@@ -36,6 +36,7 @@ class bernoulli
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = bernoulli_method::by_default>
     class bernoulli {
     public:
@@ -45,9 +46,7 @@ class bernoulli
         explicit bernoulli(float p);
         float p() const;
     };
-
-.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::bernoulli_method::by_default> \
-                oneapi::mkl::rng::bernoulli
+    }
 
 .. container:: section
 
@@ -68,7 +67,7 @@ class bernoulli
                 * ``oneapi::mkl::rng::bernoulli_method::by_default``
                 * ``oneapi::mkl::rng::bernoulli_method::icdf``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -92,23 +91,27 @@ class bernoulli
 
     .. container:: section
 
-        .. cpp:type:: bernoulli::method_type = Method
+        .. code-block:: cpp
+
+            bernoulli::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: bernoulli::result_type = IntType
+        .. code-block:: cpp
+
+            bernoulli::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -118,7 +121,9 @@ class bernoulli
 
         .. _`bernoulli()`:
 
-        .. cpp:function:: bernoulli::bernoulli()
+        .. code-block:: cpp
+
+            bernoulli::bernoulli()
 
         .. container:: section
 
@@ -130,7 +135,9 @@ class bernoulli
 
         .. _`explicit bernoulli(float p)`:
 
-        .. cpp:function:: explicit bernoulli::bernoulli(float p)
+        .. code-block:: cpp
+
+            explicit bernoulli::bernoulli(float p)
 
         .. container:: section
 
@@ -138,6 +145,12 @@ class bernoulli
 
             Constructor with parameters. `p` is a probability.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when `p > 1.0f`, or `p < 0.0f`
 
 .. container:: section
 
@@ -147,7 +160,9 @@ class bernoulli
 
         .. _`float p() const`:
 
-        .. cpp:function:: float p() const
+        .. code-block:: cpp
+
+            float p() const
 
         .. container:: section
 

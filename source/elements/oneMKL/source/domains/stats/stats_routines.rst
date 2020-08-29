@@ -3,7 +3,7 @@
 Summary Statistics Routines
 ===========================
 
-oneMKL Summary Statistics routines calculate next estimates:
+The oneMKL Summary Statistics routines calculate next estimates:
 
 .. container::
 

@@ -9,7 +9,7 @@ Class is used for generation of exponentially distributed real types random numb
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers exponentially distributed with displacement :math:`a` and scalefactor :math:`\beta`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers exponentially distributed with displacement :math:`a` and scalefactor :math:`\beta`, where :math:`a, \beta \in R; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class exponential
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = exponential_method::by_default>
     class exponential {
     public:
@@ -42,9 +43,7 @@ class exponential
         RealType a() const;
         RealType beta() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::exponential_method::by_default> \
-                oneapi::mkl::rng::exponential
+    }
 
 .. container:: section
 
@@ -66,7 +65,7 @@ class exponential
                 * ``oneapi::mkl::rng::exponential_method::icdf``
                 * ``oneapi::mkl::rng::exponential_method::icdf_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -92,23 +91,27 @@ class exponential
 
     .. container:: section
 
-        .. cpp:type:: exponential::method_type = Method
+        .. code-block:: cpp
+
+            exponential::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: exponential::result_type = RealType
+        .. code-block:: cpp
+
+            exponential::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -118,7 +121,9 @@ class exponential
 
         .. _`exponential()`:
 
-        .. cpp:function:: exponential::exponential()
+        .. code-block:: cpp
+
+            exponential::exponential()
 
         .. container:: section
 
@@ -130,7 +135,9 @@ class exponential
 
         .. _`explicit exponential(RealType a, RealType beta)`:
 
-        .. cpp:function:: explicit exponential::exponential(RealType a, RealType beta)
+        .. code-block:: cpp
+
+            explicit exponential::exponential(RealType a, RealType beta)
 
         .. container:: section
 
@@ -138,6 +145,12 @@ class exponential
 
             Constructor with parameters. `a` is a displacement, `beta` is a scalefactor.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`beta \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -147,7 +160,9 @@ class exponential
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType exponential::a() const
+        .. code-block:: cpp
+
+            RealType exponential::a() const
 
         .. container:: section
 
@@ -159,7 +174,9 @@ class exponential
 
         .. _`RealType beta() const`:
 
-        .. cpp:function:: RealType exponential::beta() const
+        .. code-block:: cpp
+
+            RealType exponential::beta() const
 
         .. container:: section
 

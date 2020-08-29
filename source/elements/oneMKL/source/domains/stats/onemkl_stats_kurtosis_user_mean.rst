@@ -9,7 +9,7 @@ Entry point to compute kurtosis with the provided mean values.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::kurtosis function is used to compute array of kurtosis (kurtosis for each dataset's dimension) with the provided mean values.
+The oneapi::mkl::stats::kurtosis function is used to compute an array of kurtosis (kurtosis for each dataset's dimension) with the provided mean values.
 
 :ref:`onemkl_stats_kurtosis_user_mean` supports the following precisions for data:
 
@@ -23,17 +23,21 @@ oneapi::mkl::stats::kurtosis function is used to compute array of kurtosis (kurt
 
 .. _onemkl_stats_kurtosis_user_mean_buffer:
 
-kurtosis with provided mean (Buffer version)
+kurtosis with provided mean (buffer version)
 --------------------------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::kurtosis(sycl::queue& queue, \
-                   sycl::buffer<Type, 1> mean, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> kurtosis);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type,
+        layout ObservationsLayout>
+        void oneapi::mkl::stats::kurtosis(sycl::queue& queue,
+        sycl::buffer<Type, 1> mean,
+        const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data,
+        sycl::buffer<Type, 1> kurtosis);
+    }
 
 .. container:: section
 
@@ -70,6 +74,13 @@ kurtosis with provided mean (Buffer version)
     kurtosis
         sycl::buffer array of kurtosis values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when kurtosis.get_count() == 0, or mean.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_kurtosis_user_mean_usm:
 
 kurtosis with provided mean (USM version)
@@ -77,13 +88,16 @@ kurtosis with provided mean (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::kurtosis(sycl::queue& queue, \
-                   Type* mean, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* kurtosis, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = fast, typename Type, layout ObservationsLayout>
+        sycl::event kurtosis(sycl::queue& queue,
+        Type* mean,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* kurtosis,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -122,6 +136,13 @@ kurtosis with provided mean (USM version)
 
     kurtosis
         Pointer to the array of the kurtosis values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when kurtosis == nullptr, or mean == nullptr, or dataset object is invalid
 
 .. container:: section
 

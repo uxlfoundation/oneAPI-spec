@@ -9,7 +9,7 @@ Class is used for generation of uniformly distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
 interval, respectively, and :math:`a, b \in R; a < b`
 
 The probability distribution is given by:
@@ -34,6 +34,7 @@ class uniform
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = uniform_method::by_default>
     class uniform {
     public:
@@ -44,9 +45,7 @@ class uniform
         RealType a() const;
         RealType b() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::uniform_method::by_default> \
-                oneapi::mkl::rng::uniform
+    }
 
 .. container:: section
 
@@ -94,23 +93,27 @@ class uniform
 
     .. container:: section
 
-        .. cpp:type:: uniform::method_type = Method
+        .. code-block:: cpp
+
+            uniform::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: uniform::result_type = RealType
+        .. code-block:: cpp
+
+            uniform::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -120,19 +123,23 @@ class uniform
 
         .. _`uniform()`:
 
-        .. cpp:function:: uniform::uniform()
+        .. code-block:: cpp
+
+            uniform::uniform()
 
         .. container:: section
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as `a` = 0.0, `b` = 1.0
+            Default constructor for distribution, parameters set as `a` = 0.0, `b` = 1.0.
 
     .. container:: section
 
         .. _`explicit uniform(RealType a, RealType b)`:
 
-        .. cpp:function:: explicit uniform::uniform(RealType a, RealType b)
+        .. code-block:: cpp
+
+            explicit uniform::uniform(RealType a, RealType b)
 
         .. container:: section
 
@@ -140,6 +147,12 @@ class uniform
 
             Constructor with parameters. `a` is a left bound, `b` is a right bound, assume :math:`a < b`.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`a \ge b`
 
 .. container:: section
 
@@ -149,7 +162,9 @@ class uniform
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType uniform::a() const
+        .. code-block:: cpp
+
+            RealType uniform::a() const
 
         .. container:: section
 
@@ -161,7 +176,9 @@ class uniform
 
         .. _`RealType b() const`:
 
-        .. cpp:function:: RealType uniform::b() const
+        .. code-block:: cpp
+
+            RealType uniform::b() const
 
         .. container:: section
 

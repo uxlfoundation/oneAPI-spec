@@ -56,8 +56,40 @@ syr2k (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::syr2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
-.. cpp:function::  void oneapi::mkl::blas::row_major::syr2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void syr2k(sycl::queue &queue,
+                  onemkl::uplo upper_lower,
+                  onemkl::transpose trans,
+                  std::int64_t n,
+                  std::int64_t k,
+                  T alpha,
+                  sycl::buffer<T,1> &a,
+                  std::int64_t lda,
+                  sycl::buffer<T,1> &b,
+                  std::int64_t ldb,
+                  T beta,
+                  sycl::buffer<T,1> &c,
+                  std::int64_t ldc)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void syr2k(sycl::queue &queue,
+                  onemkl::uplo upper_lower,
+                  onemkl::transpose trans,
+                  std::int64_t n,
+                  std::int64_t k,
+                  T alpha,
+                  sycl::buffer<T,1> &a,
+                  std::int64_t lda,
+                  sycl::buffer<T,1> &b,
+                  std::int64_t ldb,
+                  T beta,
+                  sycl::buffer<T,1> &c,
+                  std::int64_t ldc)
+   }
 
 .. container:: section
 
@@ -83,7 +115,7 @@ syr2k (Buffer Version)
       be at least zero.
 
    alpha
-      Scaling factor for the rank-2\ ``k`` update.
+      Scaling factor for the rank-2k update.
 
    a
       Buffer holding input matrix ``A``.
@@ -181,6 +213,27 @@ syr2k (Buffer Version)
    c
       Output buffer, overwritten by the updated ``C`` matrix.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_syr2k_usm:
 
 syr2k (USM Version)
@@ -188,8 +241,42 @@ syr2k (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::syr2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::syr2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event syr2k(sycl::queue &queue,
+                         onemkl::uplo upper_lower,
+                         onemkl::transpose trans,
+                         std::int64_t n,
+                         std::int64_t k,
+                         T alpha,
+                         const T* a,
+                         std::int64_t lda,
+                         const T* b,
+                         std::int64_t ldb,
+                         T beta,
+                         T* c,
+                         std::int64_t ldc,
+                         const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event syr2k(sycl::queue &queue,
+                         onemkl::uplo upper_lower,
+                         onemkl::transpose trans,
+                         std::int64_t n,
+                         std::int64_t k,
+                         T alpha,
+                         const T* a,
+                         std::int64_t lda,
+                         const T* b,
+                         std::int64_t ldb,
+                         T beta,
+                         T* c,
+                         std::int64_t ldc,
+                         const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -216,7 +303,7 @@ syr2k (USM Version)
       must be at least zero.
 
    alpha
-      Scaling factor for the rank-2\ ``k`` update.
+      Scaling factor for the rank-2k update.
 
    a
       Pointer to input matrix ``A``.
@@ -324,5 +411,27 @@ syr2k (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-3-routines`
