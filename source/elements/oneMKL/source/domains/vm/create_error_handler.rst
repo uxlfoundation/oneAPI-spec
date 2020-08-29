@@ -7,7 +7,7 @@ create_error_handler
 .. container::
 
 
-   Creates the local VM Error Handler for a function..
+   Creates an error handler for VM functions that support computational error handling.
 
 
    .. container:: section
@@ -20,29 +20,50 @@ create_error_handler
       Buffer API:
 
 
-      .. container:: dlsyntaxpara
+      .. code-block:: cpp
 
 
-         .. cpp:function:: oneapi::mkl::vm::error_handler<T> oneapi::mkl::vm::create_error_handler( buffer<uint8_t, 1> & errarray, int64_t length = 1, uint8_t errstatus = oneapi::mkl::vm::status::not_defined, T fixup = {}, bool copysign = false )
+            namespace oneapi::mkl::vm {
 
-         USM API:
+            oneapi::mkl::vm::error_handler<T> create_error_handler(
+                sycl::buffer<oneapi::mkl::vm::status, 1> & status_array,
+                int64_t length = 1,
+                oneapi::mkl::vm::status status = oneapi::mkl::vm::status::not_defined,
+                T fixup = {},
+                bool copysign = false);
 
-
-         .. cpp:function:: oneapi::mkl::vm::error_handler<T> oneapi::mkl::vm::create_error_handler( uint8_t* errarray, int64_t length = 1, uint8_t errstatus = oneapi::mkl::vm::status::not_defined, T fixup = {}, bool copysign = false )
-
-         ``create_error_handler`` supports the following precisions.
-
-
-         .. list-table::
-            :header-rows: 1
-
-            * - T
-            * - ``float``
-            * - ``double``
-            * - ``std::complex<float>``
-            * - ``std::complex<double>``
+            } // namespace oneapi::mkl::vm
 
 
+      USM API:
+
+
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            oneapi::mkl::vm::error_handler<T> create_error_handler(
+                oneapi::mkl::vm::status* status_array,
+                int64_t length = 1,
+                oneapi::mkl::vm::status status = oneapi::mkl::vm::status::not_defined,
+                T fixup = {},
+                bool copysign = false);
+
+            } // namespace oneapi::mkl::vm
+
+
+    ``create_error_handler`` supports the following precisions.
+
+
+    .. list-table::
+        :header-rows: 1
+
+        * - T
+        * - ``float``
+        * - ``double``
+        * - ``std::complex<float>``
+        * - ``std::complex<double>``
 
 
    .. container:: section
@@ -52,58 +73,46 @@ create_error_handler
          :class: sectiontitle
 
 
-      The create_error_handler creates the local VM Error handler to be
-      passed to VM functions which support error handling.
+      `create_error_handler` creates an computational error handler to be passed to VM
+      functions that support computational error handling.
+
+      A VM computational error handler supports three modes:
+
+      - **Single status mode**: all computational errors that happened during the execution
+        of a function are being written into one single status variable.
+
+        After the execution, the single value is either un-changed if no
+        errors happened or contains bitwise-OR of intial value and non-success status codes
+        occured during computation.
+
+        To enable this mode, ``status_array`` must point to any ``status``-type array or buffer
+        of 1 or more elements and ``length`` must be 1.
+
+      - **Multiple status mode**: each non-successful status code  is saved in ``status_array``
+        at the same index as the argument causing the non-success status code.
+
+        Success status codes are not written to ``status_array``. This means the array
+        needs to be allocated and initialized before function execution.
+
+        To enable this mode, ``status_array`` must have at least the same length
+        as the argument and result vectors, and ``length`` must be set to this
+        length.
+
+      - **Fixup mode**: for all arguments that caused a specific error status,
+        results are overwritten by a user-defined value.
+
+        To enable this mode, the target ``status`` and ``fixup`` values
+        must be set. The fixup value is written to results for each argument
+        for which calculation resulted in the ``status`` status code.
+
+        To fix multiple error status codes, ``status`` can be provided with bitwise-OR of status codes.
+
+        If ``copysign`` is set to true then the sign of ``fixup`` is set to
+        the same sign as the argument that caused the status code – a suitable
+        option for symmetric math functions.
 
 
-      The local VM Error Handler supports three modes:
-
-
-      - **Single status mode**: all errors happened during function
-         execution are being written into one status value.
-
-
-         At the execution end the single value is either un-changed if
-         no errors happened or contained accumulated (merged by bitwise
-         OR) error statuses happened in function execution.
-
-
-         Set the array pointer to any ``status`` object and the length
-         equals 1 to enable this mode.
-
-
-      - **Multiple status mode**: error statuses are saved as an array
-         by indices where they happen.
-
-
-         Notice that only error statuses are being written into the
-         array, the success statuses are not to be written.
-
-
-         That means the array needs to be allocated and initialized by
-         user before function execution.
-
-
-         To enable this mode allocate ``status`` array with the same
-         size as argument and result vectors, set the errarray pointer
-         to it and the length to the vector size.
-
-
-      - **Fixup mode**: for all arguments which caused specific error
-         status results to be overwritten by a user-defined value.
-
-
-         To enable this mode set desirable errstatus and fixup values.
-         The fixup value is written to results for each argument which
-         caused the errstatus error.
-
-
-         If the copysign is set to true then fixup value’s sign set to
-         the same sign of the argument which caused the errstatus – a
-         suitable option for symmetric math functions.
-
-
-      The following table lists the possible computational error values.
+      The following table lists the possible computational status code values.
 
 
       .. container:: tablenoborder
@@ -112,7 +121,7 @@ create_error_handler
          .. list-table::
             :header-rows: 1
 
-            * - Status
+            * - Status code
               - Description
             * - Successful Execution
               -
@@ -131,7 +140,7 @@ create_error_handler
               - Values are out of a range of definition producing invalid
                 (QNaN) result
             * - ``oneapi::mkl::vm::status::sing``
-              - Values cause divide-by-zero (singularity) errors and produce
+              - Values cause divide-by-zero (singularity) computational errors and produce
                 and invalid (QNaN or Inf) result
             * - ``oneapi::mkl::vm::status::overflow``
               - An overflow happened during the calculation process
@@ -139,27 +148,18 @@ create_error_handler
               - An underflow happened during the calculation process
 
 
-
-
       Notes:
 
+      - ``status_array`` must be allocated and initialized before calling VM
+        functions in multiple status error handling mode.
 
-      - You must allocate and initialize array errarray before calling
-         VM functions in multiple status error handling mode.
+        The array should be large enough to contain ``n`` status codes, where
+        ``n`` is the same as the input/output vector size for the VM function.
 
+      - If no arguments are passed to ``create_error_handler``, then an empty
+        object is created with all three error handling modes disabled.
 
-         The array should be large enough to contain ``n`` error codes,
-         where ``n`` is the same as the input/output vector size for the VM
-         function.
-
-
-      - If no arguments are passed to the create_error_handler function, then
-        an empty object is created with all three error handling modes
-        disabled.
-
-
-         In this case, the VM math functions set the global error status
-         only.
+        In this case, the VM math functions set the global status code only.
 
 
    .. container:: section
@@ -169,8 +169,8 @@ create_error_handler
          :class: sectiontitle
 
 
-      errarray
-         Array to store error statuses (should be a buffer for buffer
+      status_array
+         Array to store status codes (should be a buffer for buffer
          API).
 
 
@@ -179,8 +179,8 @@ create_error_handler
          value is ``1``.
 
 
-      errcode
-         Error status to fixup results. This is an optional argument,
+      status_code
+         Status code to match and fix the results. This is an optional argument,
          default value is ``oneapi::mkl::vm::status::not_defined``.
 
 
@@ -212,5 +212,3 @@ create_error_handler
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_service_functions`
-
-

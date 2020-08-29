@@ -9,7 +9,7 @@ Class is used for generation of negative binomially distributed integer types ra
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers negative binomially distributed with distribution parameters :math:`a` and :math:`p`, where :math:`p, a \in R; 0 \leq p \leq 1, a > 0`
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers negative binomially distributed with distribution parameters :math:`a` and :math:`p`, where :math:`p, a \in R; 0 \leq p \leq 1, a > 0`.
 
 The probability distribution is given by:
 
@@ -33,6 +33,7 @@ class negative_binomial
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = negative_binomial_method::by_default>
     class negative_binomial {
     public:
@@ -43,9 +44,7 @@ class negative_binomial
         double a() const;
         double p() const;
     };
-
-.. cpp:class:: template<typename IntType = std::int32_t, typename Method = oneapi::mkl::rng::negative_binomial_method::by_default> \
-                oneapi::mkl::rng::negative_binomial
+    }
 
 .. container:: section
 
@@ -66,7 +65,7 @@ class negative_binomial
                 * ``oneapi::mkl::rng::negative_binomial_method::by_default``
                 * ``oneapi::mkl::rng::negative_binomial_method::nbar``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -82,9 +81,9 @@ class negative_binomial
         * - `explicit negative_binomial(double a, double p)`_
           - Constructor with parameters
         * - `double a() const`_
-          - Method to obtain the first distribution parameter `a`
+          - Method to obtain the first ditribution parameter `a`
         * - `double p() const`_
-          - Method to obtain the second distribution parameter `p`
+          - Method to obtain the second ditribution parameter `p`
 
 .. container:: section
 
@@ -92,23 +91,27 @@ class negative_binomial
 
     .. container:: section
 
-        .. cpp:type:: negative_binomial::method_type = Method
+        .. code-block:: cpp
+
+            negative_binomial::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: negative_binomial::result_type = IntType
+        .. code-block:: cpp
+
+            negative_binomial::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -118,7 +121,9 @@ class negative_binomial
 
         .. _`negative_binomial()`:
 
-        .. cpp:function:: negative_binomial::negative_binomial()
+        .. code-block:: cpp
+
+            negative_binomial::negative_binomial()
 
         .. container:: section
 
@@ -130,7 +135,9 @@ class negative_binomial
 
         .. _`explicit negative_binomial(double a, double p)`:
 
-        .. cpp:function:: explicit negative_binomial::negative_binomial(double a, double p)
+        .. code-block:: cpp
+
+            explicit negative_binomial::negative_binomial(double a, double p)
 
         .. container:: section
 
@@ -138,6 +145,12 @@ class negative_binomial
 
             Constructor with parameters. `a` is the first distribution parameter, `p` is the second distribution parameter.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`p \ge 1.0`, or :math:`p \leq 0.0`, or :math:`a \leq 0.0`
 
 .. container:: section
 
@@ -147,7 +160,9 @@ class negative_binomial
 
         .. _`double a() const`:
 
-        .. cpp:function:: double negative_binomial::a() const
+        .. code-block:: cpp
+
+            double negative_binomial::a() const
 
         .. container:: section
 
@@ -159,7 +174,9 @@ class negative_binomial
 
         .. _`double p() const`:
 
-        .. cpp:function:: double negative_binomial::p() const
+        .. code-block:: cpp
+
+            double negative_binomial::p() const
 
         .. container:: section
 

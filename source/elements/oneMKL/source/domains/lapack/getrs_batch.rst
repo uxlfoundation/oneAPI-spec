@@ -43,7 +43,11 @@ The buffer version of ``getrs_batch`` supports only the strided API.
 
   .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::lapack::getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -101,6 +105,19 @@ scratchpad_size
 b  
   Solution matrices :math:`X_i`.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>` 
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+    If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+
+    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
+    If ``info`` is zero, then diagonal element of some of :math:`U_i` is zero, and the solve could not be completed. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The indices of first zero diagonal elements in these :math:`U_i` matrices can be obtained by `exceptions()` method of exception object.
+
 .. _onemkl_lapack_getrs_batch_usm:
 
 getrs_batch (USM Version)
@@ -123,7 +140,11 @@ The USM version of ``getrs_batch`` supports the group API and strided API.
 
 .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrs_batch(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, std::int64_t **ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event getrs_batch(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, std::int64_t **ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -187,6 +208,19 @@ b
 
 Output event to wait on to ensure computation is complete.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
+   Exception is thrown in case of problems during calculations. The info code of the problem can be obtained by info() method of exception object:
+
+    If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+
+    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
+    If ``info`` is zero, then diagonal element of some of :math:`U_i` is zero, and the solve could not be completed. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The indices of first zero diagonal elements in these :math:`U_i` matrices can be obtained by `exceptions()` method of exception object.
+
 **Strided API**
 
  | The routine solves the following systems of linear equations for :math:`X_i`:
@@ -199,7 +233,11 @@ Output event to wait on to ensure computation is complete.
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    };
 
 .. container:: section
 
@@ -265,6 +303,20 @@ b
   .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+    
+   If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+   
+   If ``info`` is zero, then diagonal element of some of :math:`U_i` is zero, and the solve could not be completed. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The indices of first zero diagonal elements in these :math:`U_i` matrices can be obtained by `exceptions()` method of exception object.
+
 
 **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

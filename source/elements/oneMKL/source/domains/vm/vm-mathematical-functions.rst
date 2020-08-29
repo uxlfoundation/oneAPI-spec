@@ -255,8 +255,8 @@ VM Mathematical Functions
          * - :ref:`onemkl_vm_nearbyint`
            - Rounds according to current mode
          * - :ref:`onemkl_vm_rint`
-           - Rounds according to current mode and raising inexact result
-             exception
+           - Rounds according to current mode and reports inexact result
+             status
          * - :ref:`onemkl_vm_modf`
            - Computes the integer and fractional parts
          * - :ref:`onemkl_vm_frac`

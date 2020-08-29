@@ -3,13 +3,13 @@
 lognormal
 =========
 
-Class is used for generation of lognormal distributed real types random numbers.
+Class is used for generation of lognormally distributed real types random numbers.
 
 .. _onemkl_rng_lognormal_description:
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers with lognormal distributed and mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers lognormally distributed with mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class lognormal
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = lognormal_method::by_default>
     class lognormal {
     public:
@@ -44,9 +45,7 @@ class lognormal
         RealType displ() const;
         RealType scale() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::lognormal_method::by_default> \
-                oneapi::mkl::rng::lognormal
+    }
 
 .. container:: section
 
@@ -70,7 +69,7 @@ class lognormal
                 * ``oneapi::mkl::rng::lognormal_method::box_muller2_accurate``
                 * ``oneapi::mkl::rng::lognormal_method::icdf_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -100,23 +99,27 @@ class lognormal
 
     .. container:: section
 
-        .. cpp:type:: lognormal::method_type = Method
+        .. code-block:: cpp
+
+            lognormal::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: lognormal::result_type = RealType
+        .. code-block:: cpp
+
+            lognormal::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -126,7 +129,9 @@ class lognormal
 
         .. _`lognormal()`:
 
-        .. cpp:function:: lognormal::lognormal()
+        .. code-block:: cpp
+
+            lognormal::lognormal()
 
         .. container:: section
 
@@ -138,7 +143,9 @@ class lognormal
 
         .. _`explicit lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0))`:
 
-        .. cpp:function:: explicit lognormal::lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0))
+        .. code-block:: cpp
+
+            explicit lognormal::lognormal(RealType m, RealType s, RealType displ = static_cast<RealType>(0.0), RealType scale = static_cast<RealType>(1.0))
 
         .. container:: section
 
@@ -146,6 +153,12 @@ class lognormal
 
             Constructor with parameters. `m` is a mean value, `s` is a standard deviation value, `displ` is a displacement value, `scale` is a scalefactor value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`s \leq` static_cast<RealType>(0.0), or :math:`scale \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -155,7 +168,9 @@ class lognormal
 
         .. _`RealType m() const`:
 
-        .. cpp:function:: RealType lognormal::m() const
+        .. code-block:: cpp
+
+            RealType lognormal::m() const
 
         .. container:: section
 
@@ -167,7 +182,9 @@ class lognormal
 
         .. _`RealType s() const`:
 
-        .. cpp:function:: RealType lognormal::s() const
+        .. code-block:: cpp
+
+            RealType lognormal::s() const
 
         .. container:: section
 
@@ -179,7 +196,9 @@ class lognormal
 
         .. _`RealType displ() const`:
 
-        .. cpp:function:: RealType lognormal::displ() const
+        .. code-block:: cpp
+
+            RealType lognormal::displ() const
 
         .. container:: section
 
@@ -191,7 +210,9 @@ class lognormal
 
         .. _`RealType scale() const`:
 
-        .. cpp:function:: RealType lognormal::scale() const
+        .. code-block:: cpp
+
+            RealType lognormal::scale() const
 
         .. container:: section
 

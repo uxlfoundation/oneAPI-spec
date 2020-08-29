@@ -19,6 +19,8 @@ Engines (Basic Random Number Generators)
 
          * -  Routine
            -  Description
+         * -                      \ :ref:`onemkl_rng_default_engine`\
+           -     The default random engine
          * -                      \ :ref:`onemkl_rng_mrg32k3a`\
            -     The combined multiple recursive pseudorandom number       generator      ``MRG32k3a``\ :ref:`[L'Ecuyer99a] <onemkl_rng_bibliography>`\
          * -                      \ :ref:`onemkl_rng_philox4x32x10`\
@@ -56,7 +58,7 @@ Engines (Basic Random Number Generators)
    description of these functions can be found in the :ref:`onemkl_rng_service_routines` section.
 
 
-   In addition, MT2203 pseudorandom number generator is a set of 6024
+   In addition, the MT2203 pseudorandom number generator is a set of 6024
    generators designed to create up to 6024 independent random
    sequences, which might be used in parallel Monte Carlo simulations.
    Another generator that has the same feature is Wichmann-Hill. It
@@ -72,6 +74,8 @@ Engines (Basic Random Number Generators)
 .. container::
 
 
+   -  :ref:`onemkl_rng_default_engine`
+      The default random engine (implementation defined)
    -  :ref:`onemkl_rng_mrg32k3a`
       The combined multiple recursive pseudorandom number generator
       MRG32k3a [ L'Ecuyer99a]
@@ -120,6 +124,7 @@ Engines (Basic Random Number Generators)
 .. toctree::
     :hidden:
 
+    mkl-rng-default_engine
     mkl-rng-mrg32k3a
     mkl-rng-philox4x32x10
     mkl-rng-mcg31m1

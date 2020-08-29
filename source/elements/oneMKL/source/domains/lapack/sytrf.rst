@@ -42,7 +42,11 @@ sytrf (Buffer Version)
 
   .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::lapack::sytrf(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<int_64,1>      &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void sytrf(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<int_64,1> &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -88,6 +92,19 @@ ipiv
 scratchpad
    Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
+.. container:: section
+
+  .. rubric:: Throws
+         
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If :math:`\text{info}=-i`, the :math:`i`-th parameter had an illegal value.
+
+   If :math:`\text{info}=i`, :math:`d_{ii}` is 0. The factorization has been completed, but :math:`D` is exactly singular. Division by 0 will occur if you use :math:`D` for solving a system of linear equations.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
+
 sytrf (USM Version)
 ----------------------
 
@@ -95,7 +112,11 @@ sytrf (USM Version)
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::sytrf(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, T *a, std::int64_t lda, int_64 *ipiv, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event sytrf(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, int_64 *ipiv, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -143,6 +164,19 @@ ipiv
 
 scratchpad
    Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Throws
+         
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If :math:`\text{info}=-i`, the :math:`i`-th parameter had an illegal value.
+
+   If :math:`\text{info}=i`, :math:`d_{ii}` is 0. The factorization has been completed, but :math:`D` is exactly singular. Division by 0 will occur if you use :math:`D` for solving a system of linear equations.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
 
 .. container:: section
 

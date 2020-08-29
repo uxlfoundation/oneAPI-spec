@@ -9,7 +9,7 @@ Entry point to compute max values.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::max function is used to compute max values arrays (max value for each dataset's dimension).
+The oneapi::mkl::stats::max function is used to compute a max values arrays (max value for each dataset's dimension).
 
 :ref:`onemkl_stats_max` supports the following precisions for data:
 
@@ -23,16 +23,19 @@ oneapi::mkl::stats::max function is used to compute max values arrays (max value
 
 .. _onemkl_stats_max_buffer:
 
-max (Buffer version)
+max (buffer version)
 --------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::max(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> max);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void max(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> max);
+    }
 
 .. container:: section
 
@@ -66,6 +69,13 @@ max (Buffer version)
     max
         sycl::buffer array of max values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when max.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_max_usm:
 
 max (USM version)
@@ -73,12 +83,15 @@ max (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::max(sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* max, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event max(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* max,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -114,6 +127,13 @@ max (USM version)
 
     max
         Pointer to the array of max values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when max == nullptr, or dataset object is invalid
 
 .. container:: section
 

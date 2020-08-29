@@ -18,7 +18,11 @@ generate (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<typename DistrType, typename EngineType> void generate (const DistrType& distr, EngineType& engine, std::int64_t n, cl::sycl::buffer<typename DistrType::result_type, 1>& r);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::rng {
+    template<typename DistrType, typename EngineType> void generate (const DistrType& distr, EngineType& engine, std::int64_t n, cl::sycl::buffer<typename DistrType::result_type, 1>& r);
+    }
 
 .. container:: section
 
@@ -50,6 +54,13 @@ generate (Buffer version)
     r
         sycl::buffer of generated values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when n > r.get_count(), or n < 0
+
 .. _onemkl_rng_generate_usm:
 
 generate (USM version)
@@ -57,7 +68,11 @@ generate (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<typename DistrType, typename EngineType> cl::sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const cl::sycl::vector_class<cl::sycl::event> & dependencies);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::rng {
+    template<typename DistrType, typename EngineType> cl::sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const cl::sycl::vector_class<cl::sycl::event> & dependencies);
+    }
 
 .. container:: section
 
@@ -91,6 +106,13 @@ generate (USM version)
 
     r
         pointer to generated values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when r == nullptr, or n < 0
 
 .. container:: section
 

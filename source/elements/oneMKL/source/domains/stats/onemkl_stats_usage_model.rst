@@ -13,7 +13,7 @@ A typical algorithm for summary statistics is as follows:
 #. Call the summary statistics routine to calculate the appropriate estimate.
 
 
-The following example demonstrates how to calculate mean values for a 3-dimensional dataset filled with random numbers. For dataset creation, the :ref:`onemkl_stats_make_dataset` helper function is used.
+The following example demonstrates how to calculate mean values for a 3-dimentional dataset filled with random numbers. For dataset creation, the :ref:`onemkl_stats_make_dataset` helper function is used.
 
 
 Buffer-based example

@@ -38,16 +38,26 @@ class mrg32k3a
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class mrg32k3a {
     public:
-        mrg32k3a(sycl::queue& queue, std::uint32_t seed);
-        mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed);
+        static constexpr std::uint32_t default_seed = 1;
+
+        mrg32k3a(sycl::queue queue, std::uint32_t seed = default_seed);
+
+        mrg32k3a(sycl::queue queue, std::initializer_list<std::uint32_t> seed);
+
         mrg32k3a(const mrg32k3a& other);
+
+        mrg32k3a(mrg32k3a&& other);
+
         mrg32k3a& operator=(const mrg32k3a& other);
+
+        mrg32k3a& operator=(mrg32k3a&& other);
+
         ~mrg32k3a();
     };
-
-.. cpp:class:: oneapi::mkl::rng::mrg32k3a
+    }
 
 .. container:: section
 
@@ -58,34 +68,28 @@ class mrg32k3a
 
         * - Routine
           - Description
-        * - `mrg32k3a(sycl::queue& queue, std::uint32_t seed)`_
+        * - `sycl::queue queue, std::uint32_t seed = default_seed`_
           - Constructor for common seed initialization of the engine
-        * - `mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`_
+        * - `mrg32k3a(sycl::queue queue, std::initializer_list<std::uint32_t> seed)`_
           - Constructor for extended seed initialization of the engine
         * - `mrg32k3a(const mrg32k3a& other)`_
           - Copy constructor
+        * - `mrg32k3a(mrg32k3a&& other)`_
+          - Move constructor
+        * - `mrg32k3a& operator=(const mrg32k3a& other)`_
+          - Copy assignement operator
+        * - `mrg32k3a& operator=(mrg32k3a&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`mrg32k3a(sycl::queue& queue, std::uint32_t seed)`:
+    .. _`sycl::queue queue, std::uint32_t seed = default_seed`:
 
-    .. cpp:function:: mrg32k3a::mrg32k3a(sycl::queue& queue, std::uint32_t seed)
-
-    .. container:: section
-
-        .. rubric:: Input Parameters
-
-        queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
-
-        seed
-            The initial conditions of the generator state, assume :math:`x_{-3} = seed \ mod \ m_1, x_{-2} = x_{-1} = y_{-3} = y_{-2} = y_{-1} = 1`.
-
-    .. _`mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`:
-
-    .. cpp:function:: mrg32k3a::mrg32k3a(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)
+    .. code-block:: cpp
+    
+        mrg32k3a::sycl::queue queue, std::uint32_t seed = default_seed
 
     .. container:: section
 
@@ -93,6 +97,22 @@ class mrg32k3a
 
         queue
             Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+
+        seed
+            The initial conditions of the generator state, assume :math:`x_{-3} = seed \ mod \ m_1, x_{-2} = x_{-1} = y_{-3} = y_{-2} = y_{-1} = 1`.
+
+    .. _`mrg32k3a(sycl::queue queue, std::initializer_list<std::uint32_t> seed)`:
+
+    .. code-block:: cpp
+    
+        mrg32k3a::mrg32k3a(sycl::queue queue, std::initializer_list<std::uint32_t> seed)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        queue
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume
@@ -124,29 +144,54 @@ class mrg32k3a
 
     .. _`mrg32k3a(const mrg32k3a& other)`:
 
-    .. cpp:function:: mrg32k3a::mrg32k3a(const mrg32k3a& other)
+    .. code-block:: cpp
+    
+        mrg32k3a::mrg32k3a(const mrg32k3a& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``mrg32k3a`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``mrg32k3a`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`mrg32k3a(mrg32k3a&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        mrg32k3a::mrg32k3a(mrg32k3a&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mrg32k3a`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`mrg32k3a& operator=(const mrg32k3a& other)`:
+
+    .. code-block:: cpp
+
+        mrg32k3a::mrg32k3a& operator=(const mrg32k3a& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mrg32k3a`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`mrg32k3a& operator=(mrg32k3a&& other)`:
+
+    .. code-block:: cpp
+
+        mrg32k3a::mrg32k3a& operator=(mrg32k3a&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mrg32k3a`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

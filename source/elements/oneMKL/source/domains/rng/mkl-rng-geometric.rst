@@ -9,7 +9,7 @@ Class is used for generation of geometrically distributed integer types random n
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers geometrically distributed with probability :math:`p` of a single success trial, where :math:`p \in R; 0 < p < 1`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers geometrically distributed with probability :math:`p` of a single success trial, where :math:`p \in R; 0 < p < 1`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class geometric
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename IntType = std::int32_t, typename Method = geometric_method::by_default>
     class geometric {
     public:
@@ -41,9 +42,7 @@ class geometric
         explicit geometric(float p);
         float p() const;
     };
-
-.. cpp:class:: template<typename IntType = float, typename Method = oneapi::mkl::rng::geometric_method::by_default> \
-                oneapi::mkl::rng::geometric
+    }
 
 .. container:: section
 
@@ -64,7 +63,7 @@ class geometric
                 * ``oneapi::mkl::rng::geometric_method::by_default``
                 * ``oneapi::mkl::rng::geometric_method::icdf``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -88,23 +87,27 @@ class geometric
 
     .. container:: section
 
-        .. cpp:type:: geometric::method_type = Method
+        .. code-block:: cpp
+
+            geometric::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: geometric::result_type = IntType
+        .. code-block:: cpp
+
+            geometric::result_type = IntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -114,7 +117,9 @@ class geometric
 
         .. _`geometric()`:
 
-        .. cpp:function:: geometric::geometric()
+        .. code-block:: cpp
+
+            geometric::geometric()
 
         .. container:: section
 
@@ -126,7 +131,9 @@ class geometric
 
         .. _`explicit geometric(float p)`:
 
-        .. cpp:function:: explicit geometric::geometric(float p)
+        .. code-block:: cpp
+
+            explicit geometric::geometric(float p)
 
         .. container:: section
 
@@ -134,6 +141,12 @@ class geometric
 
             Constructor with parameters. `p` is a probability value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`p \ge 1.0f`, or :math:`p \leq 0.0f`
 
 .. container:: section
 
@@ -143,7 +156,9 @@ class geometric
 
         .. _`float p() const`:
 
-        .. cpp:function:: float geometric::p() const
+        .. code-block:: cpp
+
+            float geometric::p() const
 
         .. container:: section
 

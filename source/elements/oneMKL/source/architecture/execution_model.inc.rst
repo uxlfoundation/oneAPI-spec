@@ -55,7 +55,6 @@ Hence, it is the calling application's responsibility to ensure that any inputs 
 
 Unless otherwise specified, asynchronous execution is *allowed*, but not *guaranteed*, by any oneMKL computational routine, and may vary between implementations and/or versions. oneMKL implementations must clearly document whether execution is guaranteed to be asynchronous for each supported routine.
 
-
 .. _onemkl_synchronization_with_buffers:
 
 Synchronization When Using Buffers
@@ -79,7 +78,6 @@ To help the calling application, all oneMKL routines with at least one USM point
 The routine shall ensure that all input events (if the list is present and non-empty) have occurred before any USM pointers are accessed. Likewise, the routine's output event shall not be complete until the routine has finished accessing all USM pointer arguments.
 
 For class methods, "argument" includes any USM pointers previously provided to the object via the class constructor or other class methods.
-
 
 .. _onemkl_host_thread_safety:
 

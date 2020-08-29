@@ -9,7 +9,7 @@ This function computes the forward transform defined by an instantiation of the 
 
 .. rubric:: Description
 
-The compute_forward function accepts the :ref:`onemkl_dft_descriptor` and one or more data parameters and in the case of USM data, any ``syc::event`` dependencies.  Given a successfully configured and committed descriptor, this function computes the forward transform, that is, the :ref:`transform<onemkl_dft_formula>` with the minus sign, :math:`\delta=-1`, in the exponent.
+The compute_forward function accepts the :ref:`onemkl_dft_descriptor` and one or more data parameters and in the case of USM data, any ``syc::event`` dependencies.  Given a succesfully configured and committed descriptor, this function computes the forward transform, that is, the :ref:`transform<onemkl_dft_formula>` with the minus sign, :math:`\delta=-1`, in the exponent.
 
 The configuration parameters ``config_param::COMPLEX_STORAGE``, ``config_param::REAL_STORAGE`` and ``config_param::CONJUGATE_EVEN_STORAGE`` define the layout of the input and output data and must be properly set in a call to :ref:`onemkl_dft_descriptor_set_value`.
 
@@ -24,37 +24,67 @@ compute_forward (Buffer version)
 
 .. rubric:: Syntax (In-place transform)
 
-.. cpp:function:: template <typename IOType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    void oneapi::mkl::dft::compute_forward(\
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        sycl::buffer<IOType, 1> &inout);
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <typename data_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      void compute_forward( descriptor<prec,dom>       &descriptor, 
+	                    sycl::buffer<data_type, 1> &inout);
+
+   }
+
 
 .. rubric:: Syntax (In-place transform, using ``config_param::COMPLEX_STORAGE=config_value::REAL_REAL`` :ref:`data format<onemkl_dft_complex_storage>` )
 
-.. cpp:function:: template <typename IOType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    void oneapi::mkl::dft::compute_forward(\
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        sycl::buffer<IOType, 1> &inout_re, \
-                sycl::buffer<IOType, 1> &inout_im);
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <typename data_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      void compute_forward( descriptor<prec,dom>       &descriptor, 
+                            sycl::buffer<data_type, 1> &inout_re, 
+                            sycl::buffer<data_type, 1> &inout_im);
+   }
 
 
 .. rubric:: Syntax (Out-of-place transform)
 
-.. cpp:function:: template <typename IType, typename OType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    void oneapi::mkl::dft::compute_forward( \
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        sycl::buffer<IType, 1> &in, \
-	        sycl::buffer<OType, 1> &out);
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+   
+      template <typename input_type, 
+                typename output_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      void compute_forward( descriptor<prec,dom>         &descriptor, 
+                            sycl::buffer<input_type, 1>  &in, 
+                            sycl::buffer<output_type, 1> &out);
+   }
 
 .. rubric:: Syntax (Out-of-place transform, using ``config_param::COMPLEX_STORAGE=config_value::REAL_REAL`` :ref:`data format<onemkl_dft_complex_storage>` )
 
-.. cpp:function:: template <typename IType, typename OType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    void oneapi::mkl::dft::compute_forward( \
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        sycl::buffer<IType, 1> &in_re, \
-	        sycl::buffer<IType, 1> &in_im, \
-	        sycl::buffer<OType, 1> &out_re,\
-                sycl::buffer<OType, 1> &out_im);
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <typename input_type, 
+                typename output_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      void compute_forward( descriptor<prec,dom>         &descriptor, 
+                            sycl::buffer<input_type, 1>  &in_re, 
+                            sycl::buffer<input_type, 1>  &in_im, 
+                            sycl::buffer<output_type, 1> &out_re,
+                            sycl::buffer<output_type, 1> &out_im);
+
+   }
+
 
 
 
@@ -108,6 +138,15 @@ compute_forward (Buffer version)
       Sycl buffer containing an array of length no less than is specified at the :ref:`descriptor construction<onemkl_dft_descriptor_constructor>` time to house the imaginary part of output data sequence for the out-of-place transformation when using the ``config_value::REAL_REAL`` format for the ``config_param::COMPLEX_STORAGE`` configuration parameter. Corresponds to the choice of ``config_value::NOT_INPLACE`` for the configuration parameter ``config_param::PLACEMENT``.
 
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   The `oneapi::mkl::dft::compute_forward` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+
+   :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
+      If the provided :ref:`onemkl_dft_descriptor` class is invalid, for instance, if it is a nullptr or if the value of ``config_param::COMMIT_STATUS`` in descriptor is not ``config_param::COMMITTED``.
+
 
 
 
@@ -118,42 +157,76 @@ compute_forward (USM version)
 
 .. rubric:: Syntax (In-place transform)
 
-.. cpp:function:: template <typename IOType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    sycl::event oneapi::mkl::dft::compute_forward(\
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        IOType *in, \
-	        const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+   
+      template <typename data_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      sycl::event compute_forward( descriptor<prec,dom>                          &descriptor, 
+                                   data_type                                     *inout, 
+                                   const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+   }
+
 
 .. rubric:: Syntax (In-place transform, using ``config_param::COMPLEX_STORAGE=config_value::REAL_REAL`` :ref:`data format<onemkl_dft_complex_storage>` )
 
-.. cpp:function:: template <typename IOType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    sycl::event oneapi::mkl::dft::compute_forward(\
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        IOType *in_re, \
-	        IOType *in_im, \
-	        const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+      
+      template <typename data_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      sycl::event compute_forward(descriptor<prec,dom>                          &descriptor, 
+                                  data_type                                     *inout_re, 
+                                  data_type                                     *inout_im, 
+                                  const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+
+   }
+
+
 
 
 
 .. rubric:: Syntax (Out-of-place transform)
 
-.. cpp:function:: template <typename IType, typename OType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    sycl::event oneapi::mkl::dft::compute_forward( \
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        IType *in, \
-	        OType *out, \
-	        const cl::sycl::vector_class<cl::sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+      
+      template <typename input_type, 
+                typename output_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      sycl::event compute_forward( descriptor<prec,dom>                          &descriptor,
+                                   input_type                                    *in,
+                                   output_type                                   *out,
+                                   const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+
+   }
+
 
 .. rubric:: Syntax (Out-of-place transform, using ``config_param::COMPLEX_STORAGE=config_value::REAL_REAL`` :ref:`data format<onemkl_dft_complex_storage>` )
 
-.. cpp:function:: template <typename IType, typename OType, oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>\
-	    sycl::event oneapi::mkl::dft::compute_forward( \
-                oneapi::mkl::dft::descriptor<prec,dom> &descriptor, \
-	        IType *in_re, \
-	        IType *in_im, \
-	        OType *out_re, \
-	        OType *out_im, \
-	        const cl::sycl::vector_class<cl::sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+      
+      template <typename input_type, 
+                typename output_type, 
+                oneapi::mkl::dft::precision prec, 
+                oneapi::mkl::dft::domain dom>
+      sycl::event compute_forward( descriptor<prec,dom>                          &descriptor,
+                                   input_type                                    *in_re,
+                                   input_type                                    *in_im,
+                                   output_type                                   *out_re,
+                                   output_type                                   *out_im,
+                                   const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+
+   }
+
 
 
 .. container:: section
@@ -207,6 +280,17 @@ compute_forward (USM version)
    out_im
       USM pointer containing an array of length no less than is specified at the :ref:`descriptor construction<onemkl_dft_descriptor_constructor>` time to house the imaginary part of the output data sequence for the out-of-place transformation when using the ``config_value::REAL_REAL`` format for the ``config_param::COMPLEX_STORAGE`` configuration parameter. Corresponds to the choice of ``config_value::NOT_INPLACE`` for the configuration parameter ``config_param::PLACEMENT``.
  
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   The `oneapi::mkl::dft::compute_forward()` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+
+   :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
+      If the provided :ref:`onemkl_dft_descriptor` class is invalid, for instance, if it is a nullptr or if the value of ``config_param::COMMIT_STATUS`` in descriptor is not ``config_param::COMMITTED``. It will also be thrown if the input/output pointers are NULL.
+      
+
 
 
 .. container:: section

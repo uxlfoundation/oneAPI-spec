@@ -96,27 +96,48 @@ Distributions
    .. container:: section
 
       .. rubric:: Modes of random number generation
-         :name: modes-of-random-number-generation
-         :class: sectiontitle
-
 
       The library provides two modes of random number generation,
-      accurate and fast. Accurate generation mode is intended for the
+      accurate and fast. Accurate generation mode is intended for
       applications that are highly demanding to accuracy of
       calculations. When used in this mode, the generators produce
-      random numbers lying completely within definitional domain for all
+      random numbers lying completely within the definitional domain for all
       values of the distribution parameters. For example, random numbers
       obtained from the generator of continuous distribution that is
       uniform on interval [``a``,\ ``b``] belong to this interval
       irrespective of what ``a`` and ``b`` values may be. Fast mode
-      provides high performance of generation and also guarantees that
+      provides high performance generation and also guarantees that
       generated random numbers belong to the definitional domain except
       for some specific values of distribution parameters. The
-      generation mode is set by specifying relevant value of the method
-      parameter in generator routines. List of distributions that
+      generation mode is set by specifying the relevant value of the method
+      parameter in generator routines. The list of distributions that
       support accurate mode of generation is given in the table below.
 
-    
+
+    _`Table Distribution Generators with Accurate Method`
+   .. container:: tablenoborder
+
+
+      .. list-table::
+         :header-rows: 1
+
+         * -     Distribution
+           -     Method
+         * -           \ :ref:`onemkl_rng_uniform_continuous`\
+           -     `oneapi::mkl::rng::unform_method::standard_accurate`
+         * -           \ :ref:`onemkl_rng_exponential`\
+           -     `oneapi::mkl::rng::exponential_method::icdf_accurate`
+         * -           \ :ref:`onemkl_rng_weibull`\
+           -     `oneapi::mkl::rng::weibull_method::icdf_accurate`
+         * -           \ :ref:`onemkl_rng_rayleigh`\
+           -     `oneapi::mkl::rng::rayleigh_method::icdf_accurate`
+         * -           \ :ref:`onemkl_rng_lognormal`\
+           -     `oneapi::mkl::rng::lognormal_method::box_muller2_accurate`, `oneapi::mkl::rng::lognormal_method::icdf_accurate`
+         * -           \ :ref:`onemkl_rng_gamma`\
+           -     `oneapi::mkl::rng::gamma_method::marsaglia_accurate`
+         * -           \ :ref:`onemkl_rng_beta`\
+           -     `oneapi::mkl::rng::beta_method::cja_accurate`
+               
    **Parent topic:** :ref:`onemkl_rng`
 
 

@@ -9,7 +9,7 @@ The mt2203 engine is the set of 6024 Mersenne Twister pseudorandom number genera
 
 .. rubric:: Description
 
-The set of 6024 basic pseudorandom number generators MT2203 is a natural addition to MT19937 generator. MT2203 generators are intended for use in large scale Monte Carlo simulations performed on multi-processor computer systems.
+The set of 6024 basic pseudorandom number generators MT2203 is a natural addition to the MT19937 generator. MT2203 generators are intended for use in large scale Monte Carlo simulations performed on multi-processor computer systems.
 
 .. container:: section
 
@@ -48,18 +48,30 @@ class mt2203
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class mt2203 {
     public:
-        mt2203(sycl::queue& queue, std::uint32_t seed);
-        mt2203(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx);
-        mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed);
-        mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx);
-        mt2203 (const mt2203& other);
+        static constexpr std::uint32_t default_seed = 1;
+
+        mt2203(sycl::queue queue, std::uint32_t seed = default_seed);
+
+        mt2203(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx);
+
+        mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed);
+
+        mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx);
+
+        mt2203(const mt2203& other);
+
+        mt2203(mt2203&& other);
+
         mt2203& operator=(const mt2203& other);
+
+        mt2203& operator=(mt2203&& other);
+
         ~mt2203();
     };
-
-.. cpp:class:: oneapi::mkl::rng::mt2203
+    }
 
 .. container:: section
 
@@ -70,45 +82,55 @@ class mt2203
 
         * - Routine
           - Description
-        * - `mt2203(sycl::queue& queue, std::uint32_t seed)`_
+        * - `mt2203(sycl::queue queue, std::uint32_t seed = default_seed)`_
           - Constructor for common seed initialization of the engine (for this case multiple generators of the set would be used)
-        * - `mt2203(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx)`_
+        * - `mt2203(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx)`_
           - Constructor for common seed initialization of the engine (for this case single generator of the set would be used)
-        * - `mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`_
+        * - `mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed)`_
           - Constructor for extended seed initialization of the engine (for this case multiple generators of the set would be used)
-        * - `mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)`_
+        * - `mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)`_
           - Constructor for extended seed initialization of the engine (for this case single generator of the set would be used)
         * - `mt2203(const mt2203& other)`_
           - Copy constructor
+        * - `mt2203(mt2203&& other)`_
+          - Move constructor
+        * - `mt2203& operator=(const mt2203& other)`_
+          - Copy assignement operator
+        * - `mt2203& operator=(mt2203&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`mt2203(sycl::queue& queue, std::uint32_t seed)`:
+    .. _`mt2203(sycl::queue queue, std::uint32_t seed = default_seed)`:
 
-    .. cpp:function:: mt2203::mt2203(sycl::queue& queue, std::uint32_t seed)
+    .. code-block:: cpp
+
+        mt2203::mt2203(sycl::queue queue, std::uint32_t seed = default_seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. The initialization algorithm described in [:ref:`MT2203 <onemkl_rng_bibliography>`].
 
-    .. _`mt2203(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx)`:
+    .. _`mt2203(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx)`:
 
-    .. cpp:function:: mt2203::mt2203(sycl::queue& queue, std::uint32_t seed, std::uint32_t engine_idx)
+    .. code-block:: cpp
+
+        mt2203::mt2203(sycl::queue queue, std::uint32_t seed, std::uint32_t engine_idx)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. The initialization algorithm described in [:ref:`MT2203 <onemkl_rng_bibliography>`].
@@ -116,30 +138,41 @@ class mt2203
         engine_idx
             The index of the set 1, ..., 6024.
 
-    .. _`mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`:
+    .. container:: section
 
-    .. cpp:function:: mt2203::mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)
+        .. rubric:: Throws
+
+        oneapi::mkl::invalid_argument
+            Exception is thrown when :math:`idx > 6024`
+
+    .. _`mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed)`:
+
+    .. code-block:: cpp
+
+        mt2203::mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. The initialization algorithm described in [:ref:`MT2203 <onemkl_rng_bibliography>`].
 
-    .. _`mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)`:
+    .. _`mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)`:
 
-    .. cpp:function:: mt2203::mt2203(sycl::queue& queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)
+    .. code-block:: cpp
+
+        mt2203::mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed, std::uint32_t engine_idx)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. The initialization algorithm described in [:ref:`MT2203 <onemkl_rng_bibliography>`].
@@ -149,29 +182,54 @@ class mt2203
 
     .. _`mt2203(const mt2203& other)`:
 
-    .. cpp:function:: mt2203::mt2203(const mt2203& other)
+    .. code-block:: cpp
+
+        mt2203::mt2203(const mt2203& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``mt2203`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``mt2203`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`mt2203(mt2203&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        mt2203::mt2203(mt2203&& other)
 
-        * - Routine
-          - Not support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mt2203`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`mt2203& operator=(const mt2203& other)`:
+
+    .. code-block:: cpp
+
+        mt2203::mt2203& operator=(const mt2203& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mt2203`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`mt2203& operator=(mt2203&& other)`:
+
+    .. code-block:: cpp
+
+        mt2203::mt2203& operator=(mt2203&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mt2203`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

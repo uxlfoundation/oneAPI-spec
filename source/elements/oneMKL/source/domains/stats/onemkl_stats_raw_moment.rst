@@ -9,7 +9,7 @@ Entry point to compute raw moments up to the 4th order.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::raw_moment function is used to compute array of raw moments up to the 4th order (raw moments for each dataset's dimension).
+The oneapi::mkl::stats::raw_moment function is used to compute array of raw moments up to the 4th order (raw moments for each dataset's dimension).
 
 :ref:`onemkl_stats_raw_moment` supports the following precisions for data:
 
@@ -23,19 +23,22 @@ oneapi::mkl::stats::raw_moment function is used to compute array of raw moments 
 
 .. _onemkl_stats_raw_moment_buffer:
 
-oneapi::mkl::stats::raw_moment (Buffer version)
+oneapi::mkl::stats::raw_moment (buffer version)
 -----------------------------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::raw_moment(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> mean, \
-                   sycl::buffer<Type, 1> raw_moment_2 = {0}, \
-                   sycl::buffer<Type, 1> raw_moment_3 = {0}, \
-                   sycl::buffer<Type, 1> raw_moment_4 = {0});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = fast, typename Type, layout ObservationsLayout>
+        void raw_moment(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> mean,
+        sycl::buffer<Type, 1> raw_moment_2 = {0},
+        sycl::buffer<Type, 1> raw_moment_3 = {0},
+        sycl::buffer<Type, 1> raw_moment_4 = {0});
+    }
 
 .. container:: section
 
@@ -79,6 +82,12 @@ oneapi::mkl::stats::raw_moment (Buffer version)
     raw_moment_4
         Optional parameter. sycl::buffer array of 4th order raw moment values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when mean.get_count() == 0 & raw_moment_2.get_count() == 0 & raw_moment_3.get_count() == 0 & raw_moment_4.get_count() == 0, or dataset object is invalid
 
 .. _onemkl_stats_raw_moment_usm:
 
@@ -87,16 +96,19 @@ raw_moment (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::raw_moment(\
-                   sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* mean,\
-                   Type* raw_moment_2 = nullptr, \
-                   Type* raw_moment_3 = nullptr, \
-                   Type* raw_moment_4 = nullptr, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event raw_moment(
+        sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* mean,
+        Type* raw_moment_2 = nullptr,
+        Type* raw_moment_3 = nullptr,
+        Type* raw_moment_4 = nullptr,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -142,6 +154,13 @@ raw_moment (USM version)
 
     raw_moment_4
         Optional parameter. Pointer to the array of the 2nd order raw moment values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when mean == nullptr & raw_moment_2 == nullptr & raw_moment_3 == nullptr & raw_moment_4 == nullptr, or dataset object is invalid
 
 .. container:: section
 

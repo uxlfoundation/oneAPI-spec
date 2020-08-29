@@ -41,7 +41,11 @@ heevd (Buffer Version)
 
   .. rubric:: Syntax
          
-.. cpp:function::  void oneapi::mkl::lapack::heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo      upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda,      cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -96,6 +100,27 @@ w
 scratchpad
    Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
+.. container:: section
+
+  .. rubric:: Throws
+      
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info=-i``, the :math:`i`-th parameter had an illegal value.
+
+   If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
+   failed to converge; :math:`i` indicates the number of off-diagonal
+   elements of an intermediate tridiagonal form which did not
+   converge to zero.
+
+   If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm failed
+   to compute an eigenvalue while working on the submatrix lying in
+   rows and columns :math:`\text{info}/(n+1)` through :math:`\text{mod}(\text{info},n+1)`.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
+
 heevd (USM Version)
 ----------------------
 
@@ -103,7 +128,11 @@ heevd (USM Version)
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo      upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -159,6 +188,26 @@ w
 
 scratchpad
    Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info=-i``, the :math:`i`-th parameter had an illegal value.
+
+   If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
+   failed to converge; :math:`i` indicates the number of off-diagonal
+   elements of an intermediate tridiagonal form which did not
+   converge to zero.
+
+   If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm failed
+   to compute an eigenvalue while working on the submatrix lying in
+   rows and columns :math:`\text{info}/(n+1)` through :math:`\text{mod}(\text{info},n+1)`.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
 
 .. container:: section
 

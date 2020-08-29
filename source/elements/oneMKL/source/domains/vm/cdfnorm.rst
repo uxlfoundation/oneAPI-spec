@@ -21,12 +21,43 @@ cdfnorm
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::cdfnorm(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event cdfnorm(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::cdfnorm(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event cdfnorm(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``cdfnorm`` supports the following precisions.
 
@@ -55,32 +86,25 @@ cdfnorm
 
    The cumulative normal distribution function is defined as given by:
 
+   .. math::
+      \operatorname{cdfnorm}(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-\frac{t^2}{2}}
+      \operatorname{d \!} x
 
-   |
+   Useful relations for these functions:
 
-
-   .. container:: imagecenter
-
-
-      |image0|
-
-
-   Useful relations:
+   .. math::
+      \operatorname{erf}(x) + \operatorname{erfc}(x) = 1
 
 
-   |
+   .. math::
+      \operatorname{cdfnorm}(x) &= \frac{1}{2} \left( 1 + \operatorname{erf}\left(\frac{x}{\sqrt{2}}\right) \right) \\
+                  &= 1 - \frac{1}{2} \operatorname{erfc}\left(\frac{x}{\sqrt{2}}\right)
 
 
-   .. container:: imagecenter
+   where :math:`\operatorname{erf}` and :math:`\operatorname{erfc}` are the error and complementary error
+   functions, respectively.
 
-
-      |image1|
-
-
-   where erfand erfcare the error and complementary error functions.
-
-
-   The following figure illustrates the relationships among erf family
+   The following figure illustrates the relationships among the family of error
    functions (erf, erfc, cdfnorm).
 
 
@@ -94,22 +118,7 @@ cdfnorm
       .. container:: imagecenter
 
 
-         |image2|
-
-
-   Useful relations for these functions:
-
-
-   |image3|
-
-
-   |
-
-
-   .. container:: imagecenter
-
-
-      |image4|
+         |image0|
 
 
    .. container:: tablenoborder
@@ -120,7 +129,7 @@ cdfnorm
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - a < underflow
            - +0
            - ``oneapi::mkl::vm::status::underflow``
@@ -231,7 +240,15 @@ cdfnorm
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -241,13 +258,4 @@ cdfnorm
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
 
-
-
-.. |image0| image:: ../equations/GUID-817D9F12-6BD9-4B74-BFA0-39A03D0660C3-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-7CA9B2F2-8D7C-4955-8EA8-D67616FB5B08-low.gif
-.. |image2| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg
-.. |image3| image:: ../equations/GUID-02486559-84D2-4880-8EAB-2085A5BE2D10-low.jpg
-   :class: .eq
-.. |image4| image:: ../equations/GUID-7CA9B2F2-8D7C-4955-8EA8-D67616FB5B08-low.gif
-
+.. |image0| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg

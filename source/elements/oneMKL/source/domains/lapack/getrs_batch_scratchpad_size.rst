@@ -28,7 +28,12 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
   .. rubric:: Syntax
 
-.. cpp:function::  std::int64_t oneapi::mkl::lapack::getrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t getrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
+    }
 
 .. container:: section
 
@@ -47,7 +52,7 @@ n
   Array of ``group_count`` parameters :math:`n_g` specifying the order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
 
 nrhs
-  Array of ``group_count`` parameters :math:`nrhsg` specifying the number of right-hand sides (:math:`0 \le \text{nrhs}_g`) for group :math:`g`.
+  Array of ``group_count`` parameters nrhsg specifying the number of right-hand sides (:math:`0 \le \text{nrhs}_g`) for group :math:`g`.
 
 lda
   Array of ``group_count`` parameters :math:`\text{lda}_g` specifying the leading dimensions of :math:`A_i` from group :math:`g`.
@@ -67,6 +72,14 @@ group_sizes
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Group API of the :ref:`onemkl_lapack_getrs_batch` function.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
+
 **Strided API**
 
 Computes the number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_getrs_batch` function.
@@ -75,7 +88,12 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
   .. rubric:: Syntax
 
-.. cpp:function::  std::int64_t oneapi::mkl::lapack::getrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t getrs_batch_scratchpad_size(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size)
+    };
 
 .. container:: section
 
@@ -103,7 +121,7 @@ stride_a
   Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
 
 stride_ipiv
-  Stride between the beginnings of arrays `ipivi` inside the array ``ipiv``.
+  Stride between the beginnings of arrays ipivi inside the array ``ipiv``.
 
 ldb
   Leading dimension of :math:`B_i`.
@@ -116,6 +134,14 @@ batch_size
    .. rubric:: Return Values
 
 Number of elements of type ``T`` the scratchpad memory should able to hold to be passed to the Strided API of the :ref:`onemkl_lapack_getrs_batch` function.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
 
 **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

@@ -9,7 +9,7 @@ Entry point to compute raw sums up to the 4th order.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::raw_sum function is used to compute array of raw sums up to the 4th order (raw sums for each dataset's dimension).
+The oneapi::mkl::stats::raw_sum function is used to compute an array of raw sums up to the 4th order (raw sums for each dataset's dimension).
 
 :ref:`onemkl_stats_raw_sum` supports the following precisions for data:
 
@@ -28,14 +28,17 @@ raw_sum (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::raw_sum(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> sum, \
-                   sycl::buffer<Type, 1> raw_sum_2 = {0}, \
-                   sycl::buffer<Type, 1> raw_sum_3 = {0}, \
-                   sycl::buffer<Type, 1> raw_sum_4 = {0});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void raw_sum(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> sum,
+        sycl::buffer<Type, 1> raw_sum_2 = {0},
+        sycl::buffer<Type, 1> raw_sum_3 = {0},
+        sycl::buffer<Type, 1> raw_sum_4 = {0});
+    }
 
 .. container:: section
 
@@ -79,6 +82,12 @@ raw_sum (Buffer version)
     raw_sum_4
         Optional parameter. sycl::buffer array of 4th order raw sum values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when sum.get_count() == 0 & raw_sum_2.get_count() == 0 & raw_sum_3.get_count() == 0 & raw_sum_4.get_count() == 0, or dataset object is invalid
 
 .. _onemkl_stats_raw_sum_usm:
 
@@ -87,16 +96,18 @@ raw_sum (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::raw_sum(\
-                   sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* sum, \
-                   Type* raw_sum_2 = nullptr, \
-                   Type* raw_sum_3 = nullptr, \
-                   Type* raw_sum_4 = nullptr, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event raw_sum(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* sum,
+        Type* raw_sum_2 = nullptr,
+        Type* raw_sum_3 = nullptr,
+        Type* raw_sum_4 = nullptr,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -142,6 +153,13 @@ raw_sum (USM version)
 
     raw_sum_4
         Optional parameter. Pointer to the array of the 2nd order raw sum values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when sum == nullptr & raw_sum_2 == nullptr & raw_sum_3 == nullptr & raw_sum_4 == nullptr, or dataset object is invalid
 
 .. container:: section
 

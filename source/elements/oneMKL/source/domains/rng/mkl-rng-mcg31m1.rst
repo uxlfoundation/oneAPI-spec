@@ -9,7 +9,7 @@ The 31-bit multiplicative congruential pseudorandom number generator MCG(1132489
 
 .. rubric:: Description
 
-Mcg31m1 engine is a 31-bit multiplicative congruential generator :ref:`[L'Ecuyer99] <onemkl_rng_bibliography>`. Mcg31m1 belongs to linear congruential generators with the period length of approximately :math:`2^{31}`. Such generators are still used as default random number generators in various software systems, mainly due to the simplicity of the portable versions implementation, speed and compatibility with the earlier systems versions. However, their period length does not meet the requirements for modern basic generators. Still, the mcg31m1 generator possesses good statistic properties and you may successfully use it to generate random numbers of different distributions for small samplings.
+The mcg31m1 engine is a 31-bit multiplicative congruential generator :ref:`[L'Ecuyer99] <onemkl_rng_bibliography>`. The mcg31m1 generator belongs to linear congruential generators with the period length of approximately :math:`2^{31}`. Such generators are still used as default random number generators in various software systems, mainly due to the simplicity of the portable versions implementation, speed, and compatibility with the earlier systems versions. However, their period length does not meet the requirements for modern basic generators. Still, the mcg31m1 generator possesses good statistic properties and you may successfully use it to generate random numbers of different distributions for small samplings.
 
 .. container:: section
 
@@ -30,15 +30,24 @@ class mcg31m1
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class mcg31m1 {
     public:
-        mcg31m1(sycl::queue& queue, std::uint32_t seed);
-        mcg31m1 (const mcg31m1& other);
+        static constexpr std::uint32_t default_seed = 1;
+
+        mcg31m1(sycl::queue queue, std::uint32_t seed = default_seed);
+
+        mcg31m1(const mcg31m1& other);
+
+        mcg31m1(mcg31m1&& other);
+
         mcg31m1& operator=(const mcg31m1& other);
+
+        mcg31m1& operator=(mcg31m1&& other);
+
         ~mcg31m1();
     };
-
-.. cpp:class:: oneapi::mkl::rng::mcg31m1
+    }
 
 .. container:: section
 
@@ -49,18 +58,26 @@ class mcg31m1
 
         * - Routine
           - Description
-        * - `mcg31m1(sycl::queue& queue, std::uint32_t seed)`_
+        * - `mcg31m1(sycl::queue queue, std::uint32_t seed = default_seed)`_
           - Constructor for common seed initialization of the engine
         * - `mcg31m1(const mcg31m1& other)`_
           - Copy constructor
+        * - `mcg31m1(mcg31m1&& other)`_
+          - Move constructor
+        * - `mcg31m1& operator=(const mcg31m1& other)`_
+          - Copy assignement operator
+        * - `mcg31m1& operator=(mcg31m1&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`mcg31m1(sycl::queue& queue, std::uint32_t seed)`:
+    .. _`mcg31m1(sycl::queue queue, std::uint32_t seed = default_seed)`:
 
-    .. cpp:function:: mcg31m1::mcg31m1(sycl::queue& queue, std::uint32_t seed)
+    .. code-block:: cpp
+
+        mcg31m1::mcg31m1(sycl::queue queue, std::uint32_t seed = default_seed)
 
     .. container:: section
 
@@ -74,29 +91,54 @@ class mcg31m1
 
     .. _`mcg31m1(const mcg31m1& other)`:
 
-    .. cpp:function:: mcg31m1::mcg31m1(const mcg31m1& other)
+    .. code-block:: cpp
+    
+        mcg31m1::mcg31m1(const mcg31m1& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``mcg31m1`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``mcg31m1`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`mcg31m1(mcg31m1&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        mcg31m1::mcg31m1(mcg31m1&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mcg31m1`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`mcg31m1& operator=(const mcg31m1& other)`:
+
+    .. code-block:: cpp
+
+        mcg31m1::mcg31m1& operator=(const mcg31m1& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mcg31m1`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`mcg31m1& operator=(mcg31m1&& other)`:
+
+    .. code-block:: cpp
+
+        mcg31m1::mcg31m1& operator=(mcg31m1&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``mcg31m1`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

@@ -9,7 +9,7 @@ Entry point to compute central sums up to the 4th order with the provided mean v
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::central_sum function is used to compute array of central sums up to the 4th order (central sums for each dataset's dimension) with the provided mean values.
+The oneapi::mkl::stats::central_sum function is used to compute an array of central sums up to the 4th order (central sums for each dataset's dimension) with the provided mean values.
 
 :ref:`onemkl_stats_central_sum_user_mean` supports the following precisions for data:
 
@@ -23,19 +23,22 @@ oneapi::mkl::stats::central_sum function is used to compute array of central sum
 
 .. _onemkl_stats_central_sum_user_mean_buffer:
 
-central_sum with provided mean (Buffer version)
+central_sum with provided mean (buffer version)
 -----------------------------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::central_sum(sycl::queue& queue, \
-                   sycl::buffer<Type, 1> mean, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> central_sum_2, \
-                   sycl::buffer<Type, 1> central_sum_3 = {0}, \
-                   sycl::buffer<Type, 1> central_sum_4 = {0});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void central_sum(sycl::queue& queue,
+        sycl::buffer<Type, 1> mean,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> central_sum_2,
+        sycl::buffer<Type, 1> central_sum_3 = {0},
+        sycl::buffer<Type, 1> central_sum_4 = {0});
+    }
 
 .. container:: section
 
@@ -78,6 +81,12 @@ central_sum with provided mean (Buffer version)
     central_sum_4
         Optional parameter. sycl::buffer array of 4th order central sum values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when central_sum_2.get_count() == 0 & central_sum_3.get_count() == 0 & central_sum_4.get_count() == 0, or mean.get_count() == 0, or dataset object is invalid
 
 .. _onemkl_stats_central_sum_user_mean_usm:
 
@@ -86,15 +95,18 @@ central_sum with provided mean  (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::central_sum(sycl::queue& queue, \
-                   Type* mean, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* central_sum_2, \
-                   Type* central_sum_3 = nullptr, \
-                   Type* central_sum_4 = nullptr, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event central_sum(sycl::queue& queue,
+        Type* mean,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* central_sum_2,
+        Type* central_sum_3 = nullptr,
+        Type* central_sum_4 = nullptr,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -139,6 +151,13 @@ central_sum with provided mean  (USM version)
 
     central_sum_4
         Optional parameter. Pointer to the array of the 2nd order central sum values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when central_sum_2 == nullptr & central_sum_3 == nullptr & central_sum_4 == nullptr, or mean == nullptr, or dataset object is invalid
 
 .. container:: section
 

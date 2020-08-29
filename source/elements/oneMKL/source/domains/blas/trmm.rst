@@ -57,8 +57,36 @@ trmm (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::trmm(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb)
-.. cpp:function::  void oneapi::mkl::blas::row_major::trmm(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void trmm(sycl::queue &queue,
+                 onemkl::uplo upper_lower,
+                 onemkl::transpose transa,
+                 onemkl::diag unit_diag,
+                 std::int64_t m,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda,
+                 sycl::buffer<T,1> &b,
+                 std::int64_t ldb)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void trmm(sycl::queue &queue,
+                 onemkl::uplo upper_lower,
+                 onemkl::transpose transa,
+                 onemkl::diag unit_diag,
+                 std::int64_t m,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda,
+                 sycl::buffer<T,1> &b,
+                 std::int64_t ldb)
+   }
 
 .. container:: section
 
@@ -130,6 +158,27 @@ trmm (Buffer Version)
    If ``alpha`` = 0, matrix ``B`` is set to zero, and ``A`` and ``B`` do
    not need to be initialized at entry.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_trmm_usm:
 
 trmm (USM Version)
@@ -137,8 +186,38 @@ trmm (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::trmm(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, T* b, std::int64_t ldb, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::trmm(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose transa, onemkl::diag unit_diag, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, T* b, std::int64_t ldb, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event trmm(sycl::queue &queue,
+                        onemkl::uplo upper_lower,
+                        onemkl::transpose transa,
+                        onemkl::diag unit_diag,
+                        std::int64_t m,
+                        std::int64_t n,
+                        T alpha,
+                        const T* a,
+                        std::int64_t lda,
+                        T* b,
+                        std::int64_t ldb,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event trmm(sycl::queue &queue,
+                        onemkl::uplo upper_lower,
+                        onemkl::transpose transa,
+                        onemkl::diag unit_diag,
+                        std::int64_t m,
+                        std::int64_t n,
+                        T alpha,
+                        const T* a,
+                        std::int64_t lda,
+                        T* b,
+                        std::int64_t ldb,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
    
@@ -223,5 +302,27 @@ trmm (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-3-routines`

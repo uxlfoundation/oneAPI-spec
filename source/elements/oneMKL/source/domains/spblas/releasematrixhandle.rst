@@ -18,8 +18,14 @@ before releasing any data in case of USM.
 .. rubric:: Syntax
 
 
-.. cpp:function::  void oneapi::mkl::sparse::release_matrix_handle (matrix_handle_t         handle, const sycl::vector_class<sycl::event> & dependencies = {})
+.. code-block:: cpp
 
+   namespace oneapi::mkl::sparse {
+
+      void release_matrix_handle (oneapi::mkl::sparse::matrix_handle_t  handle,
+                                  const sycl::vector_class<sycl::event> &dependencies = {});
+
+   }
 
 .. container:: section
 
@@ -36,6 +42,22 @@ before releasing any data in case of USM.
        List of events that ``handle`` depends on.
        The call waits on the events(if any) before resetting the ``handle`` to default values.
 
+
+.. container:: section
+
+    .. rubric:: Throws
+         :class: sectiontitle
+
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. container:: familylinks
 

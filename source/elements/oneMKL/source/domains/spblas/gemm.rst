@@ -3,29 +3,18 @@
 gemm
 ====
 
-Computes a sparse matrix-dense matrix product. Currently, only
-ROW-MAJOR layout for dense matrix storage in Data Parallel C++
-oneapi::mkl::sparse::gemm functionality is assumed.
+Computes a sparse matrix times dense matrix product.
 
 .. rubric:: Description and Assumptions
 
-Refer to :ref:`onemkl_sparse_supported_types` for a
-list of supported ``<fp>`` and ``<intType>``.
-The oneapi::mkl::sparse::gemm routine computes a sparse matrix-dense
+Refer to :ref:`onemkl_sparse_supported_types` for a list of supported ``<fp>`` and ``<intType>`` types. The oneapi::mkl::sparse::gemm routine computes a sparse matrix-dense
 matrix product defined as
 
+.. math::
 
-::
+   C \leftarrow \alpha \text{op}(A) B + \beta C
 
-               c := alpha*op(A)*b + beta*c
-
-
-
-where:
-
-
-``alpha`` and ``beta`` are scalars, ``b`` and ``c`` are dense
-matrices. ``A`` is a sparse matrix.
+where :math:`\alpha` and :math:`\beta` are scalars, :math:`B` and :math:`C` are dense matrices and :math:`A` is a sparse matrix. Dense matrix storage is in row-major format. Sparse matrix formats are compressed sparse row (CSR) formats. 
 
 
 .. _onemkl_sparse_gemm_buffer:
@@ -35,7 +24,23 @@ gemm (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::sparse::gemm (sycl::queue & queue, oneapi::mkl::transpose transpose_val, const fp alpha, matrix_handle_t handle, sycl::buffer<fp, 1> & b, const std::int64_t columns, const std::int64_t ldb, const fp beta, sycl::buffer<fp, 1> & c, const std::int64_t ldc)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+      void gemm (sycl::queue                          &queue, 
+                 oneapi::mkl::transpose               transpose_val, 
+                 const fp                             alpha, 
+                 oneapi::mkl::sparse::matrix_handle_t A_handle, 
+                 sycl::buffer<fp, 1>                  &B, 
+                 const std::int64_t                   columns, 
+                 const std::int64_t                   ldb, 
+                 const fp                             beta, 
+                 sycl::buffer<fp, 1>                  &C, 
+                 const std::int64_t                   ldc);
+
+   }
+
 
 
 .. container:: section
@@ -53,43 +58,34 @@ gemm (Buffer version)
 
 
     alpha
-         Specifies the scalar ``alpha``.
+         Specifies the scalar :math:`\alpha`.
 
 
-    handle
-         Handle to object containing sparse matrix and other internal
-         data. Created using the
-         oneapi::mkl::sparse::set_csr_data routine.
+    A_handle
+         Handle to object containing sparse matrix, :math:`A`. Created using the oneapi::mkl::sparse::set_csr_data routine.
 
 
-    b
-         SYCL memory object containing an array of size at
-         least ``rows*ldb``, where ``rows`` = the number of columns
-         of matrix ``A`` if ``op`` = oneapi::mkl::transpose::nontrans, or
-         ``rows`` = the number of rows of matrix ``A`` otherwise.
-
+    B
+         The dense matrix in the sparse-dense matrix product. A one dimensional SYCL memory object containing an array of size at least ``cols*ldb``, where ``cols`` = the number of columns of matrix :math:`op(A)`.
 
     columns
-         Number of columns of matrix ``c``.
+         Number of columns of matrix, :math:`C`.
 
 
     ldb
-         Specifies the leading dimension of matrix ``b``.
+         Specifies the leading dimension of matrix, :math:`B`. Should be greater than or equal to the number of columns of :math:`B` which is ``columns``.
 
 
     beta
          Specifies the scalar ``beta``.
 
 
-    c
-         SYCL memory object containing an array of size at
-         least ``rows*ldc``, where ``rows`` = the number of rows
-         of matrix ``A`` if ``op`` = oneapi::mkl::transpose::nontrans, or
-         ``rows`` = the number of columns of matrix ``A`` otherwise.
+    C
+         The dense matrix input/output array.  A one-dimensional SYCL memory object containing an array of size at least ``rows*ldc``, where ``rows`` = the number of rows
+         of matrix :math:`op(A)`.
 
     ldc
-         Specifies the leading dimension of matrix ``c`` . Must be
-         equal to  ``columns`` , and it must be positive.
+         Specifies the leading dimension of matrix :math:`C` . Must be greater than or equal to the number of columns of :math:`C` which is ``columns``.
 
 
 .. container:: section
@@ -98,15 +94,25 @@ gemm (Buffer version)
          :class: sectiontitle
 
 
-    c
-       Overwritten by the updated matrix ``c``.
+    C
+       Dense matrix output is overwritten by the updated matrix, :math:`C`.
 
 .. container:: section
+   
+   .. rubric:: Throws
+      :class: sectiontitle
 
-    .. rubric:: Return Values
-       :class: sectiontitle
+   This routine shall throw the following exceptions if the associated condition is detected.
+   An implementation may throw additional implementation-specific exception(s)
+   in case of error conditions not covered here.
 
-    None
+   | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+   | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+   | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. _onemkl_sparse_gemm_usm:
 
@@ -115,7 +121,23 @@ gemm (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::sparse::gemm (sycl::queue & queue, oneapi::mkl::transpose transpose_val, const fp alpha, matrix_handle_t handle, const fp *b, const std::int64_t columns, const std::int64_t ldb, const fp beta, fp *c, const std::int64_t ldc, const sycl::vector_class<sycl::event> & dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+      sycl::event gemm (sycl::queue                           &queue, 
+                        oneapi::mkl::transpose                transpose_val, 
+                        const fp                              alpha, 
+                        oneapi::mkl::sparse::matrix_handle_t  A_handle, 
+                        const fp                              *B, 
+                        const std::int64_t                    columns, 
+                        const std::int64_t                    ldb, 
+                        const fp                              beta, 
+                        const fp                              *C, 
+                        const std::int64_t                    ldc,
+                        const sycl::vector_class<sycl::event> &dependencies = {});
+
+   }
 
 
 .. container:: section
@@ -131,45 +153,30 @@ gemm (USM version)
          Specifies operation ``op()`` on input matrix. The possible options
          are described in :ref:`onemkl_enum_transpose` enum class.
 
-
     alpha
-         Specifies the scalar ``alpha``.
+         Specifies the scalar :math:`\alpha`.
 
+    A_handle
+         Handle to object containing sparse matrix, :math:`A`. Created using the oneapi::mkl::sparse::set_csr_data routine.
 
-    handle
-         Handle to object containing sparse matrix and other internal
-         data. Created using the
-         oneapi::mkl::sparse::set_csr_data routine.
-
-
-    b
-         USM object containing an array of size at
-         least ``rows*ldb``, where ``rows`` = the number of columns
-         of matrix ``A`` if ``op`` = oneapi::mkl::transpose::nontrans, or
-         ``rows`` = the number of rows of matrix ``A`` otherwise.
-
+    B 
+         The dense matrix in the sparse-dense matrix product. A device accessible USM object containing an array of size at least ``cols*ldb``, where ``cols`` = the number of columns of matrix :math:`op(A)`.
 
     columns
-         Number of columns of matrix ``c``.
-
+         Number of columns of matrix :math:`C`.
 
     ldb
-         Specifies the leading dimension of matrix ``b``.
-
+         Specifies the leading dimension of matrix :math:`B`. Should be greater than or equal to the number of columns of :math:`B`.
 
     beta
          Specifies the scalar ``beta``.
 
-
-    c
-         USM object containing an array of size at
-         least ``rows*ldc``, where ``rows`` = the number of rows
-         of matrix ``A`` if ``op`` = oneapi::mkl::transpose::nontrans, or
-         ``rows`` = the number of columns of matrix ``A`` otherwise.
+    C
+         The dense matrix input/output array.  A device accessible USM object containing an array of size at least ``rows*ldc``, where ``rows`` = the number of rows
+         of matrix :math:`op(A)`.
 
     ldc
-         Specifies the leading dimension of matrix ``c`` . Must be
-         equal to ``columns`` , and it must be positive.
+         Specifies the leading dimension of matrix :math:`C` . Must be greater than or equal to ``columns``.
 
     dependencies
          List of events that oneapi::mkl::sparse::gemm routine depends on.
@@ -181,8 +188,26 @@ gemm (USM version)
          :class: sectiontitle
 
 
-    c
-       Overwritten by the updated matrix ``c``.
+    C
+       Dense matrix output is overwritten by the updated matrix :math:`C`.
+
+
+.. container:: section
+   
+   .. rubric:: Throws
+      :class: sectiontitle
+
+   This routine shall throw the following exceptions if the associated condition is detected.
+   An implementation may throw additional implementation-specific exception(s)
+   in case of error conditions not covered here.
+
+   | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+   | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+   | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. container:: section
 

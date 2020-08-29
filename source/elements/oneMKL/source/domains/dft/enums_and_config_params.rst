@@ -3,7 +3,7 @@
 Configuration Parameters and Enums
 ------------------------------------
 
-The following enum classes are defined in the ``oneapi::mkl::dft`` namespace which are used for configuring the discrete Fourier transform problem in the :ref:`onemkl_dft_descriptor` class prior to a call to :ref:`onemkl_dft_descriptor_commit`.  
+The following enum classes are defined in the ``oneapi::mkl::dft`` namespace which are used for configuring the discrete Fourier transform problem in the :ref:`onemkl_dft_descriptor` classprior to a call to :ref:`onemkl_dft_descriptor_commit`.  
 
 .. list-table::
       :header-rows: 1
@@ -169,8 +169,8 @@ config_param
         -   Some FFT algorithms apply an explicit permutation stage that can be time consuming.  The value of ``config_value::ORDERED`` (default) applies the data ordering for all transformations.  The value of ``config_value::BACKWARD_SCRAMBLED`` applies ordering for forward transform, but allows backward transform to have scrambled data if it gives a performance advantage. 
       * -   TRANSPOSE
         -   A boolean value to indicate providing the transposition of output results (for multi-dimensional transforms). Default value is ``false``.
-      * -   :ref:`onemkl_dft_config_packed_format`
-        -   Packing format for ``config_value::COMPLEX_REAL`` storage of finite conjugate-even sequences.
+      * -   :ref:`PACKED_FORMAT<onemkl_dft_conjugate_even_storage>`
+        -   Packing format for complex domain data storage of finite conjugate-even sequences from real-to-complex or complex-to-real transformations.
       * -   COMMIT_STATUS
         -   Read-only value indicates whether the descriptor is ready for computation after a successful :ref:`onemkl_dft_descriptor_commit`.  Value of ``config_value::COMMITTED`` indicates a successful call to :ref:`onemkl_dft_descriptor_commit`.  A value of ``config_value::UNCOMMITTED`` (default) is set after descriptor constructor call and before successful call to :ref:`onemkl_dft_descriptor_commit`.
 
@@ -191,11 +191,10 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
          COMMITTED,
          UNCOMMITTED,
 
-         // for config_param::COMPLEX_STORAGE and config_param::CONJUGATE_EVEN_STORAGE
+         // for config_param::COMPLEX_STORAGE,
+         //     config_param::REAL_STORAGE and 
+         //     config_param::CONJUGATE_EVEN_STORAGE
          COMPLEX_COMPLEX,
-         COMPLEX_REAL,
-
-         // config_param::REAL_STORAGE
          REAL_COMPLEX,
          REAL_REAL,
 
@@ -213,9 +212,6 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
          NONE,
 
          // for config_param::PACKED_FORMAT for storing conjugate-even finite sequence in real containers
-         CCS_FORMAT,
-         PACK_FORMAT,
-         PERM_FORMAT,
          CCE_FORMAT
 
       };
@@ -230,7 +226,6 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
    config_params/scaling_factor
    config_params/number_of_transforms
    config_params/storage_formats
-   config_params/packed_format
    config_params/strides
    config_params/distance
 

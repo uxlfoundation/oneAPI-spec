@@ -25,8 +25,12 @@ leapfrog
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<typename EngineType> \
+.. code-block:: cpp
+
+    namespace oneapi::mkl::rng {
+    template<typename EngineType> \
                    void oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride);
+    }
 
 .. container:: section
 

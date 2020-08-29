@@ -45,4 +45,5 @@ Vector Math
     vm/special-value-notations
     vm/vm-mathematical-functions
     vm/vm-service-functions
+    vm/vm-exceptions
     vm/bibliography

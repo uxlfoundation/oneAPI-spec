@@ -9,7 +9,7 @@ Class is used for generation of chi-square distributed real types random numbers
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers chi-square distributed with :math:`n` degrees of freedom, :math:`n \in N; n > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers chi-square distributed with :math:`n` degrees of freedom, :math:`n \in N; n > 0`.
 
 The probability distribution is given by:
 
@@ -33,6 +33,7 @@ class chi_square
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = chi_square_method::by_default>
     class chi_square {
     public:
@@ -42,9 +43,7 @@ class chi_square
         explicit chi_square(std::int32_t n);
         std::int32_t n() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::chi_square_method::by_default> \
-                oneapi::mkl::rng::chi_square
+    }
 
 .. container:: section
 
@@ -65,7 +64,7 @@ class chi_square
                 * ``oneapi::mkl::rng::chi_square_method::by_default``
                 * ``oneapi::mkl::rng::chi_square_method::gamma_based``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -89,23 +88,27 @@ class chi_square
 
     .. container:: section
 
-        .. cpp:type:: chi_square::method_type = Method
+        .. code-block:: cpp
+
+            chi_square::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: chi_square::result_type = RealType
+        .. code-block:: cpp
+
+            chi_square::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -115,7 +118,9 @@ class chi_square
 
         .. _`chi_square()`:
 
-        .. cpp:function:: chi_square::chi_square()
+        .. code-block:: cpp
+
+            chi_square::chi_square()
 
         .. container:: section
 
@@ -127,7 +132,9 @@ class chi_square
 
         .. _`explicit chi_square(std::int32_t n)`:
 
-        .. cpp:function:: explicit chi_square::chi_square(std::int32_t n)
+        .. code-block:: cpp
+
+            explicit chi_square::chi_square(std::int32_t n)
 
         .. container:: section
 
@@ -135,6 +142,12 @@ class chi_square
 
             Constructor with parameters. `n` is the number of degrees of freedom.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`n < 1`
 
 .. container:: section
 
@@ -144,7 +157,9 @@ class chi_square
 
         .. _`std::int32_t n() const`:
 
-        .. cpp:function:: std::int32_t chi_square::n() const
+        .. code-block:: cpp
+
+            std::int32_t chi_square::n() const
 
         .. container:: section
 

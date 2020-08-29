@@ -9,7 +9,7 @@ Entry point to compute min and max values.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::stats::min_max function is used to compute min and max arrays (min and max values for each dataset's dimension).
+The oneapi::mkl::stats::min_max function is used to compute min and max arrays (min and max values for each dataset's dimension).
 
 :ref:`onemkl_stats_min_max` supports the following precisions for data:
 
@@ -23,17 +23,20 @@ oneapi::mkl::stats::min_max function is used to compute min and max arrays (min 
 
 .. _onemkl_stats_min_max_buffer:
 
-min_max (Buffer version)
+min_max (buffer version)
 ------------------------
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   void oneapi::mkl::stats::min_max(sycl::queue& queue, \
-                   const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data, \
-                   sycl::buffer<Type, 1> min, \
-                   sycl::buffer<Type, 1> max);
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        void min_max(sycl::queue& queue,
+        const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
+        sycl::buffer<Type, 1> min,
+        sycl::buffer<Type, 1> max);
+    }
 
 .. container:: section
 
@@ -70,6 +73,13 @@ min_max (Buffer version)
     max
         sycl::buffer array of max values.
 
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when min.get_count() == 0, or max.get_count() == 0, or dataset object is invalid
+
 .. _onemkl_stats_min_max_usm:
 
 min_max (USM version)
@@ -77,13 +87,16 @@ min_max (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function:: template<oneapi::mkl::stats::method Method = oneapi::mkl::stats::method::fast, typename Type, \
-                   oneapi::mkl::stats::layout ObservationsLayout> \
-                   sycl::event oneapi::mkl::stats::min_max(sycl::queue& queue, \
-                   const dataset<Type*, ObservationsLayout>& data, \
-                   Type* min, \
-                   Type* max, \
-                   const sycl::vector_class<sycl::event> &dependencies = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::stats {
+    template<method Method = method::fast, typename Type, layout ObservationsLayout>
+        sycl::event min_max(sycl::queue& queue,
+        const dataset<ObservationsLayout, Type*>& data,
+        Type* min,
+        Type* max,
+        const sycl::vector_class<sycl::event> &dependencies = {});
+    }
 
 .. container:: section
 
@@ -122,6 +135,13 @@ min_max (USM version)
 
     max
         Pointer to the array of max values.
+
+.. container:: section
+
+    .. rubric:: Throws
+
+    oneapi::mkl::invalid_argument
+        Exception is thrown when min == nullptr, or max == nullptr, or dataset object is invalid
 
 .. container:: section
 

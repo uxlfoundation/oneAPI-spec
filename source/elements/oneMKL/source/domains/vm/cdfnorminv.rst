@@ -21,12 +21,43 @@ cdfnorminv
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::cdfnorminv(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event cdfnorminv(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::cdfnorminv(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event cdfnorminv(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``cdfnorminv`` supports the following precisions.
 
@@ -56,34 +87,27 @@ cdfnorminv
    The inverse cumulative normal distribution function is defined as
    given by:
 
-
-   |
-
-
-   .. container:: imagecenter
+   .. math::
+      \operatorname{cdfnorminv}(x) = \operatorname{cdfnorm}^{-1}(x)
 
 
-      |image0|
-
-
-   where cdfnorm(x) denotes the cumulative normal distribution function.
+   where :math:`\operatorname{cdfnorm}(x)` denotes the cumulative normal distribution
+   function.
 
 
    Useful relations:
 
-
-   |
-
-
-   .. container:: imagecenter
+   .. math::
+      \operatorname{erfcinv}(x) = \operatorname{erfinv}(1 - x)
 
 
-      |image1|
+   .. math::
+      \operatorname{cdfnorminv}(x) &= \sqrt{2} \operatorname{erfinv}(2x - 1) \\
+                                   &= \sqrt{2} \operatorname{erfcinv}(2 - 2x)
 
 
-   where erfinv(x)denotes the inverse error function and
-   erfcinv(x)denotes the inverse complementary error functions.
-
+   where :math:`\operatorname{erfinv}(x)` denotes the inverse error function and
+   :math:`\operatorname{erfcinv}(x)` denotes the inverse complementary error function.
 
    The following figure illustrates the relationships among erfinv
    family functions (erfinv, erfcinv, cdfnorminv).
@@ -99,22 +123,7 @@ cdfnorminv
       .. container:: imagecenter
 
 
-         |image2|
-
-
-   Useful relations for these functions:
-
-
-   |image3|
-
-
-   |
-
-
-   .. container:: imagecenter
-
-
-      |image4|
+         |image0|
 
 
    .. container:: tablenoborder
@@ -125,7 +134,7 @@ cdfnorminv
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +0.5
            - +0
            -  
@@ -251,7 +260,15 @@ cdfnorminv
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -263,11 +280,4 @@ cdfnorminv
 
 
 
-.. |image0| image:: ../equations/GUID-A3054E0D-CFC1-44E8-89F7-B5A232903EE9-low.jpg
-   :class: .eq
-.. |image1| image:: ../equations/GUID-CF961E8B-3127-4493-839A-C045E325BC42-low.jpg
-.. |image2| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg
-.. |image3| image:: ../equations/GUID-D4002137-8BA4-4D20-871B-550F2C6F9CE8-low.gif
-   :class: .eq
-.. |image4| image:: ../equations/GUID-CF961E8B-3127-4493-839A-C045E325BC42-low.jpg
-
+.. |image0| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg

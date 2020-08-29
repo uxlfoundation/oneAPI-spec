@@ -9,7 +9,7 @@ Class is used for generation of beta distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`, displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`. :math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`, displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`. :math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -35,6 +35,7 @@ class beta
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = beta_method::by_default>
     class beta {
     public:
@@ -47,9 +48,7 @@ class beta
         RealType a() const;
         RealType b() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::beta_method::by_default> \
-                oneapi::mkl::rng::beta
+    }
 
 .. container:: section
 
@@ -71,7 +70,7 @@ class beta
                 * ``oneapi::mkl::rng::beta_method::cja``
                 * ``oneapi::mkl::rng::beta_method::cja_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -101,23 +100,27 @@ class beta
 
     .. container:: section
 
-        .. cpp:type:: beta::method_type = Method
+        .. code-block:: cpp
+
+            beta::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: beta::result_type = RealType
+        .. code-block:: cpp
+
+            beta::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -127,7 +130,9 @@ class beta
 
         .. _`beta()`:
 
-        .. cpp:function:: beta::beta()
+        .. code-block:: cpp
+
+            beta::beta()
 
         .. container:: section
 
@@ -139,7 +144,9 @@ class beta
 
         .. _`explicit beta(RealType p, RealType q, RealType a, RealType b)`:
 
-        .. cpp:function:: explicit beta::beta(RealType p, RealType q, RealType a, RealType b)
+        .. code-block:: cpp
+
+            explicit beta::beta(RealType p, RealType q, RealType a, RealType b)
 
         .. container:: section
 
@@ -147,6 +154,12 @@ class beta
 
             Constructor with parameters. `p` and `q` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scalefactor.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`p \leq 0.0f`, or :math:`q \leq 0.0f`, or :math:`\beta \leq 0.0f`
 
 .. container:: section
 
@@ -156,7 +169,9 @@ class beta
 
         .. _`RealType p() const`:
 
-        .. cpp:function:: RealType beta::p() const
+        .. code-block:: cpp
+
+            RealType beta::p() const
 
         .. container:: section
 
@@ -168,7 +183,9 @@ class beta
 
         .. _`RealType q() const`:
 
-        .. cpp:function:: RealType beta::q() const
+        .. code-block:: cpp
+
+            RealType beta::q() const
 
         .. container:: section
 
@@ -180,7 +197,9 @@ class beta
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType beta::a() const
+        .. code-block:: cpp
+
+            RealType beta::a() const
 
         .. container:: section
 
@@ -192,7 +211,9 @@ class beta
 
         .. _`RealType b() const`:
 
-        .. cpp:function:: RealType beta::b() const
+        .. code-block:: cpp
+
+            RealType beta::b() const
 
         .. container:: section
 

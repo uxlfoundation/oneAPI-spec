@@ -40,8 +40,28 @@ axpy (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::axpy(sycl::queue &queue, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy)
-.. cpp:function::  void oneapi::mkl::blas::row_major::axpy(sycl::queue &queue, std::int64_t n, T alpha, sycl::buffer<T,1> &x, std::int64_t incx, sycl::buffer<T,1> &y, std::int64_t incy)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void axpy(sycl::queue &queue,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &x,
+                 std::int64_t incx,
+                 sycl::buffer<T,1> &y,
+                 std::int64_t incy)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void axpy(sycl::queue &queue,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &x,
+                 std::int64_t incx,
+                 sycl::buffer<T,1> &y,
+                 std::int64_t incy)
+   }
 
 .. container:: section
 
@@ -58,7 +78,7 @@ axpy (Buffer Version)
 
    x
       Buffer holding input vector ``x``. The buffer must be of size at least
-      ``(1 + (n – 1)*abs(incx))``. See :ref:`matrix-storage` for
+      (1 + (``n`` – 1)*abs(``incx``)). See :ref:`matrix-storage` for
       more details.
 
    incx
@@ -66,7 +86,7 @@ axpy (Buffer Version)
 
    y
       Buffer holding input vector ``y``. The buffer must be of size at least
-      ``(1 + (n – 1)*abs(incy))``. See :ref:`matrix-storage` for
+      (1 + (``n`` – 1)*abs(``incy``)). See :ref:`matrix-storage` for
       more details.
 
    incy
@@ -79,6 +99,27 @@ axpy (Buffer Version)
    y
       Buffer holding the updated vector ``y``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_axpy_usm:
 
 axpy (USM Version)
@@ -86,8 +127,30 @@ axpy (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::axpy(sycl::queue &queue, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *y, std::int64_t incy, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::axpy(sycl::queue &queue, std::int64_t n, T alpha, const T *x, std::int64_t incx, T *y, std::int64_t incy, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event axpy(sycl::queue &queue,
+                        std::int64_t n,
+                        T alpha,
+                        const T *x,
+                        std::int64_t incx,
+                        T *y,
+                        std::int64_t incy,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event axpy(sycl::queue &queue,
+                        std::int64_t n,
+                        T alpha,
+                        const T *x,
+                        std::int64_t incx,
+                        T *y,
+                        std::int64_t incy,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -104,7 +167,7 @@ axpy (USM Version)
 
    x
       Pointer to the input vector ``x``. The array holding the vector
-      ``x`` must be of size at least ``(1 + (n – 1)*abs(incx))``. See
+      ``x`` must be of size at least (1 + (``n`` – 1)*abs(``incx``)). See
       :ref:`matrix-storage` for
       more details.
 
@@ -113,7 +176,7 @@ axpy (USM Version)
 
    y
       Pointer to the input vector ``y``. The array holding the vector
-      ``y`` must be of size at least ``(1 + (n – 1)*abs(incy))``. See
+      ``y`` must be of size at least (1 + (``n`` – 1)*abs(``incy``)). See
       :ref:`matrix-storage` for
       more details.
 
@@ -137,5 +200,26 @@ axpy (USM Version)
 
    Output event to wait on to ensure computation is complete.
 
-   **Parent topic:** :ref:`blas-level-1-routines`
+.. container:: section
 
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
+   **Parent topic:** :ref:`blas-level-1-routines`
