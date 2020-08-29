@@ -28,6 +28,14 @@ class RstBuilder(object):
         self(f'.. cpp:member:: {declaration}', level)
         self.add_blank_line()
 
+    def add_property_member(self, declaration: str, parent_fully_qualified_name: str, level=0):
+        assert declaration
+        assert parent_fully_qualified_name
+        fake_parent_namespace = '_'.join(parent_fully_qualified_name.split('::'))
+        self(f'.. cpp:namespace:: {fake_parent_namespace}_properties', level)
+        self(f'.. cpp:member:: {declaration}', level)
+        self.add_blank_line()
+
     def add_doc(self, doc_text: str, level=0):
         assert doc_text
         self(self._format_text(doc_text), level)

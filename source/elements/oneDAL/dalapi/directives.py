@@ -156,7 +156,9 @@ class ClassDirective(DoxyDirective):
             self.add_property(property_def, x)
 
     def add_property(self, property_def, x: RstBuilder):
-        x.add_member(property_def.declaration, level=1)
+        x.add_property_member(property_def.declaration, 
+                              property_def.parent_fully_qualified_name, 
+                              level=1)
         if property_def.doc and property_def.doc.description:
             desc = self.format_description(property_def.doc.description)
             if desc:
