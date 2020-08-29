@@ -8,12 +8,6 @@ The ``request`` class shall provide the ability to wait for completion of an ope
 Request
 *******
 
-.. code:: cpp
-
-    using request_t = unique_ptr_class<request>;
-    using event_t = unique_ptr_class<event>;
-
-
 Waiting for the completion of an operation in a blocking manner:
 
 .. code:: cpp
@@ -36,7 +30,7 @@ Retrieving an event object that is signaled when the device communication operat
 
 .. code:: cpp
 
-    event_t request::get_event() const;
+    event request::get_event() const;
 
-return ``event_t``
+return ``event``
     an event object that is signaled when the communication operation completes on the device

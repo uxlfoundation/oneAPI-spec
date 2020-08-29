@@ -78,17 +78,16 @@ Creating a datatype attribute object, which may used to register custom datatype
 
 .. code:: cpp
 
-    using datatype_attr_t = unique_ptr_class<datatype_attr>;
-    datatype_attr_t environment::create_datatype_attr() const;
+    datatype_attr environment::create_datatype_attr() const;
 
-return ``datatype_attr_t``
+return ``datatype_attr``
     an object containing attributes for the custom datatype
 
 Registering a custom datatype to be used in communication operations:
 
 .. code:: cpp
 
-    datatype environment::register_datatype(const datatype_attr_t& attr);
+    datatype environment::register_datatype(const datatype_attr& attr);
 
 attr
     the datatype's attributes
