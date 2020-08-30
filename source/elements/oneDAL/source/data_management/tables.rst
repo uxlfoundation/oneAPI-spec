@@ -2,9 +2,9 @@
 
 .. _tables:
 
-=====
-Table
-=====
+======
+Tables
+======
 
 This section describes the types related to the :txtref:`table` concept.
 
@@ -36,7 +36,7 @@ Requirements on table types
 
 Each implementation of :txtref:`table` concept shall:
 
-1. Follow definition of the :txtref:`table concept <table>` and its restrictions
+1. Follow definition of the :txtref:`table` concept and its restrictions
    (e.g., :capterm:`immutability`).
 
 2. Be derived from the :expr:`oneapi::dal::table` class. The behavior of this class can be
@@ -95,8 +95,9 @@ Table types
 Programming interface
 ---------------------
 
-The following declarations are defined in ``oneapi/dal/table/common.hpp`` within
-``oneapi::dal`` namespace.
+All types and functions in this section shall be declared in the
+``oneapi::dal`` namespace and be available via inclusion of the
+``oneapi/dal/table/common.hpp`` header file.
 
 Table
 -----
