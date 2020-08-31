@@ -156,8 +156,8 @@ class ClassDirective(DoxyDirective):
             self.add_property(property_def, x)
 
     def add_property(self, property_def, x: RstBuilder):
-        x.add_property_member(property_def.declaration, 
-                              property_def.parent_fully_qualified_name, 
+        x.add_property_member(property_def.declaration,
+                              property_def.parent_fully_qualified_name,
                               level=1)
         if property_def.doc and property_def.doc.description:
             desc = self.format_description(property_def.doc.description)
@@ -188,6 +188,27 @@ class FunctionDirective(DoxyDirective):
         # TODO: Add option to include listing
         # self.add_listing(func, x)
         self.add_function_base(func, x, is_free=True)
+
+@directive
+class EnumClassDirective(DoxyDirective):
+    required_arguments = 1
+    optional_arguments = 0
+    has_content = False
+
+    def rst(self, x: RstBuilder):
+        enum = self.ctx.index.find(self.arguments[0])
+        namespace = enum.parent_fully_qualified_name
+
+        self.add_listing(enum, x)
+        x.add_blank_line()
+        x.add_enumclass(enum.name, namespace)
+
+        x.add('**Values**', level=1)
+        for value in enum.values:
+            x.add(f'{enum.name}::{value.name}', level=2)
+
+            if value.doc and value.doc.description:
+                self.add_description(value.doc.description, x, level=3)
 
 
 @directive

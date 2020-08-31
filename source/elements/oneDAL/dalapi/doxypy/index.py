@@ -51,7 +51,7 @@ class Index(object):
     def _find_inner(self, query):
         parent_name, name = utils.split_compound_name(query)
         model = self._index[parent_name].model
-        attrs_to_check = [ 'functions', 'typedefs' ]
+        attrs_to_check = [ 'functions', 'typedefs', 'enum_classes' ]
         try:
             for attr in attrs_to_check:
                 for inner in getattr(model, attr):

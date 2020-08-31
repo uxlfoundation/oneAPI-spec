@@ -286,6 +286,7 @@ def setup(app):
     app.add_directive('onedal_func', directives.FunctionDirective(ctx))
     app.add_directive('onedal_code', directives.ListingDirective(ctx))
     app.add_directive('onedal_tags_namespace', directives.TagsNamespaceDirective(ctx))
+    app.add_directive('onedal_enumclass', directives.EnumClassDirective(ctx))
 
     app.add_config_value('onedal_project_dir', '.', 'env')
 

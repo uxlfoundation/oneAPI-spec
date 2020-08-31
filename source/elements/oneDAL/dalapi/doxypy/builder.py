@@ -204,6 +204,47 @@ class ParameterBuilder(_BuilderMixins):
                 return parameterlist
 
 
+class EnumClassValueBuilder(_BuilderMixins):
+    def build(self):
+        return model.EnumClassValue(
+            doc = self.build_doc(),
+            name = self._find_name(),
+        )
+
+    def _find_name(self):
+        for entry in self.src.content_:
+            if entry.name == 'name':
+                return entry.value
+
+class EnumClassBuilder(_BuilderMixins):
+    def build(self):
+        name = self.textify(self.src.name)
+        parent_fqn, fqn = self._build_fqn(name)
+        return model.EnumClass(
+            doc = self.build_doc(),
+            name = name,
+            values = self._build_values(),
+            location = self.build_location(),
+            fully_qualified_name = fqn,
+            parent_fully_qualified_name = parent_fqn,
+        )
+
+    @utils.return_list
+    def _build_values(self):
+        for enumvalue in self.src.enumvalue:
+            yield build(EnumClassValueBuilder, enumvalue)
+
+    def _build_fqn(self, name):
+        compound = self._find_parent_compound()
+        parent_fqn = self.textify(compound.compoundname)
+        fqn = f'{parent_fqn}::{name}' if parent_fqn else name
+        return parent_fqn, fqn
+
+    def _find_parent_compound(self):
+        def compound_matcher(node):
+            return isinstance(node, _CompoundDefType)
+        return self.find_parent(compound_matcher)
+
 class FunctionBuilder(_BuilderMixins):
     def build(self):
         name = self.textify(self.src.name)
@@ -362,6 +403,7 @@ class NamespaceBuilder(_BuilderMixins):
             typedefs = self._build_typedefs(),
             functions = self._build_functions(),
             class_refs = self._build_class_refs(),
+            enum_classes = self._build_enums(),
             fully_qualified_name = fqn,
             parent_fully_qualified_name = parent_name,
         )
@@ -389,6 +431,17 @@ class NamespaceBuilder(_BuilderMixins):
             yield build(TypedefBuilder, typedef)
 
     @utils.return_list
+    def _build_enums(self):
+        enum_classes = (memberdef
+            for sectiondef in self.src.sectiondef
+                if sectiondef.kind == 'enum'
+            for memberdef in sectiondef.memberdef
+                if memberdef.kind == 'enum'
+        )
+        for enumclass in enum_classes:
+            yield build(EnumClassBuilder, enumclass)
+
+    @utils.return_list
     def _build_class_refs(self):
         for innerclass in self.src.innerclass:
             yield build(ClassRefBuilder, innerclass)
@@ -401,6 +454,7 @@ class ModelBuilder(_BuilderMixins):
         'func': FunctionBuilder,
         'namespace': NamespaceBuilder,
         'typedef': TypedefBuilder,
+        'enum' : EnumClassBuilder,
     }
 
     def build(self):
