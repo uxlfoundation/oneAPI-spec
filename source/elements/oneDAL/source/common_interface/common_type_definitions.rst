@@ -31,7 +31,7 @@ Enum classes
 
 Which base type to use when defining ``enum`` or ``enum class`` representing a
 |dal_short_name| concept is up to the implementer unless specification requires
-special base type.
+a specific base type.
 
 Data type
 ---------
