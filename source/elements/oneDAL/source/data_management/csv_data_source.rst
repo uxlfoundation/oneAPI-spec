@@ -70,7 +70,7 @@ All types and functions in this section shall be declared in the
       Creates a new instance of a CSV data source with the given
       :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.
 
-   .. function:: data_source(const std::string &file_name, char delimiter = default_delimiter, read_options opts = default_read_options);
+   .. function:: data_source(const std::string &file_name, char delimiter = default_delimiter, read_options opts = default_read_options)
 
       Creates a new instance of a CSV data source with the given
       :expr:`file_name`, :expr:`delimiter` and read options :expr:`opts` flag.

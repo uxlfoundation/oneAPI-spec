@@ -1,4 +1,4 @@
-#include "oneapi/dal/table.hpp"
+#include "oneapi/dal/table/common.hpp"
 #include "oneapi/dal/train.hpp"
 
 namespace oneapi::dal::kmeans_init {

@@ -12,6 +12,9 @@ oneDAL public identifiers are represented in the following header files:
      - Description
    * - ``oneapi/dal.hpp``
      - The main header file of oneDAL library.
+   * - ``oneapi/dal/%FILE%.hpp``
+     - The common type definitions used in other |dal_short_name| layers.
+       For example, ``data_type`` or ``range``.
    * - ``oneapi/dal/algo/%ALGO%.hpp``
      - A header file for a particular algorithm.
        The folder for the algorithm itself is ``oneapi/dal/algo/%ALGO%/``.

@@ -4,6 +4,7 @@ namespace oneapi::dal {
 
 /// @tparam Data The type of data values in blocks returned by the accessor.
 ///           Shall be const-qualified for read-only access.
+///           An accessor shall support at least :expr:`float`, :expr:`double`, and :expr:`std::int32_t` types of $Data$.
 template <typename Data>
 class row_accessor {
 public:
