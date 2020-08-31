@@ -36,7 +36,7 @@ Requirements on table types
 
 Each implementation of :txtref:`table` concept shall:
 
-1. Follow definition of the :txtref:`table` concept and its restrictions
+1. Follow the definition of the :txtref:`table` concept and its restrictions
    (e.g., :capterm:`immutability`).
 
 2. Be derived from the :expr:`oneapi::dal::table` class. The behavior of this class can be
