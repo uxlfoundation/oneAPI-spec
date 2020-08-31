@@ -43,7 +43,12 @@ Release Notes
 
   
 * oneDAL
-
+   * Extended Programming model section, added description of the generic methods and descriptors, introduced task notation
+   * Extended Data Management section, introduced CSV data source, array, extended description of the tables and accessors
+   * Extended description of Error handling
+   * Added description of the training methods for PCA algorithm, introduced K-means initialization algorithm
+   * Extended Common interface section, added description of service data types used in the interfaces of the library
+   * Modified the library's namespace
   
 * DPC++
 
