@@ -1,6 +1,7 @@
 namespace oneapi::dal {
 
 /// @tparam Data The type of the memory block elements within the array.
+///              $Data$ can represent any type.
 ///
 /// @pre $Data$ cannot be const-qualified.
 template <typename Data>

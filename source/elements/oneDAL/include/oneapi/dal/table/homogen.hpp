@@ -10,12 +10,13 @@ public:
     /// Creates a new ``homogen_table`` instance from externally-defined data block. Table
     /// object refers to the data but does not own it. The responsibility to
     /// free the data remains on the user side.
-    /// The :expr:`data` shall point to the $data_pointer$ memory block.
+    /// The :expr:`data` shall point to the ``data_pointer`` memory block.
     ///
     /// @tparam Data        The type of elements in the data block that will be stored into the table.
     ///                     The table shall initialize data types of metadata with this data type.
     ///                     The feature types shall be set to default values for $Data$ type: contiguous for floating-point,
     ///                     ordinal for integer types.
+    ///                     The $Data$ type shall be at least :expr:`float`, :expr:`double` or :expr:`std::int32_t`.
     /// @param queue        The SYCL* queue object
     /// @param data_pointer The pointer to a homogeneous data block.
     /// @param row_count    The number of rows in the table.
@@ -39,17 +40,18 @@ public:
 
     /// Creates a new ``homogen_table`` instance from externally-defined data block.
     /// Table object owns the data pointer.
-    /// The :expr:`data` shall point to the $data_pointer$ memory block.
+    /// The :expr:`data` shall point to the ``data_pointer`` memory block.
     ///
     /// @tparam Data         The type of elements in the data block that will be stored into the table.
-    /// @tparam ConstDeleter The type of deleter called on $data_pointer$ when
+    ///                      The $Data$ type shall be at least :expr:`float`, :expr:`double` or :expr:`std::int32_t`.
+    /// @tparam ConstDeleter The type of deleter called on ``data_pointer`` when
     ///                      the last table that refers to it goes out of the scope.
     ///
     /// @param queue         The SYCL* queue object
     /// @param data_pointer  The pointer to a homogeneous data block.
     /// @param row_count     The number of rows in the table.
     /// @param column_count  The number of columns in the table.
-    /// @param data_deleter  The deleter that is called on the $data_pointer$ when last table that refers to it
+    /// @param data_deleter  The deleter that is called on the ``data_pointer`` when last table that refers to it
     ///                      goes out of the scope.
     /// @param dependencies  Events indicating availability of the $data$ for reading or writing.
     /// @param layout        The layout of the data. Shall be ``data_layout::row_major`` or
