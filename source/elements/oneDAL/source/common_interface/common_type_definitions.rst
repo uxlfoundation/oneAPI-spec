@@ -19,10 +19,12 @@ Scalar types
 
 |dal_short_name| relies on standard C++ scalar types defined in ``<cstdint>``.
 This file shall be included in ``oneapi/dal/common.hpp`` and all
-|dal_short_name| types shall use this scalar types. For variables indicating
-size, amount, count of entities, ``std::int64_t`` type shall be used.
+|dal_short_name| types shall use this scalar types.
 
-It is recommended to use standard C++ type for applications as well.
+For variables indicating size, amount, count of entities, ``std::int64_t`` type
+shall be used.
+
+It is recommended to use standard C++ types for applications as well.
 
 Enum classes
 ------------
@@ -36,8 +38,9 @@ Data type
 
 The implementation of :capterm:`data type` concept. It shall enumerate all the
 data types supported by |dal_short_name| to perform computations. The
-``data_type`` class shall contain all the :txtref:`scalar_types` and can extend
-it.
+``data_type`` class shall contain all the base :txtref:`scalar_types` and can
+extend it. Base scalar types include all which names follow the pattern
+``std::int_XX_t`` or ``std::uint_XX_t``, where XX is one of 8, 16, 32, or 64.
 
 .. onedal_enumclass:: oneapi::dal::data_type
 
