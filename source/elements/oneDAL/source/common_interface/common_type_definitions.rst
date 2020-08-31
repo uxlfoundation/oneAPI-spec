@@ -22,7 +22,7 @@ This file shall be included in ``oneapi/dal/common.hpp`` and all
 |dal_short_name| types shall use these data types.
 
 The interfaces of the library shall use ``std::int64_t`` data type to represent
-problem's sizes such as the number of rows and columns in the table.
+dimensionality (for example, the number of rows and columns in the table).
 
 It is recommended to use standard C++ types for applications as well.
 
