@@ -21,8 +21,8 @@ using an out-of-band communication mechanism and be used to create key-value sto
     MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
 
-    kvs_interface_t kvs;
-    kvs::addr_t kvs_addr;
+    kvs_interface kvs;
+    kvs::addr kvs_addr;
 
     if (mpi_rank == 0) {
         kvs = env.create_main_kvs();
@@ -45,20 +45,22 @@ using an out-of-band communication mechanism and be used to create key-value sto
 
     /* for device communications, for example with multiple devices per process */
 
-    /* devices -> vector<sycl::device> */
-    /* queues -> vector<sycl::queue> */
-    /* ctx -> sycl::context */
-    auto comms = env.create_device_communicators(mpi_size * devices.size(), devices, ctx, kvs);
+    /* rank_to_sycl_dev_map -> map<size_t, sycl::device> */
+    /* sycl_queues -> vector<sycl::queue> */
+    /* sycl_ctx -> sycl::context */
 
-    /* rank assignment will happen automatically, the actual rank can be retrived using comm->rank() */
+    auto comms = env.create_device_communicators(mpi_size * rank_to_sycl_dev_map.size(),
+                                                 rank_to_sycl_dev_map,
+                                                 sycl_ctx,
+                                                 kvs);
 
     /* create ccl::stream objects from sycl::queue objects */
-    std::vector<request_t> streams;
+    std::vector<request> streams;
     for (auto& comm : comms) {
         streams.push_back(env.create_stream(sycl_queues[comm->rank()]));
     }
 
-4. Execute a collective operation of choice on the communicator(s):
+4. Execute a communication operation of choice on the communicator(s):
 
 .. code:: cpp
 
@@ -69,7 +71,7 @@ using an out-of-band communication mechanism and be used to create key-value sto
 .. code:: cpp
 
     /* for device communications */
-    std::vector<request_t> reqs;
+    std::vector<request> reqs;
     for (auto& comm : comms) {
         reqs.push_back(comm->allreduce(..., streams[comm->rank()]));
     }
