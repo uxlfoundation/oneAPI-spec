@@ -82,4 +82,15 @@ oneMKL
 ======
 
 * **Kraynyuk, Maria**
-* Patty, Spencer 
+* **Patty, Spencer**
+* Meterelliyoz, Mesut
+* Ertl, Rachel
+* Zhukova, Maria
+* Bollapragada, Datta
+* Dyakov, Pavel
+* Elizarova, Alina
+* Stepin, Andrey
+* Kolesov, Andrey
+* Caday, Peter
+* Knepper, Sarah
+* O'Connell, John

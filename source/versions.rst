@@ -32,6 +32,8 @@ Release Notes
 
 * oneMKL
 
+  * Continuing modifications to all oneMKL domains
+  * Add oneMKL Exceptions and Error Handling
 
 * oneDNN
 
