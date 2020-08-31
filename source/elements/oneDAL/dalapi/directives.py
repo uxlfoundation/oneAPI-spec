@@ -203,12 +203,11 @@ class EnumClassDirective(DoxyDirective):
         x.add_blank_line()
         x.add_enumclass(enum.name, namespace)
 
-        x.add('**Values**', level=1)
         for value in enum.values:
-            x.add(f'{enum.name}::{value.name}', level=2)
+            x.add(f'{enum.name}::{value.name}', level=1)
 
             if value.doc and value.doc.description:
-                self.add_description(value.doc.description, x, level=3)
+                self.add_description(value.doc.description, x, level=2)
 
 
 @directive
