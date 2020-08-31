@@ -14,9 +14,7 @@ public:
     /*implementation defined*/
 
     /// @param data The pointer to array of elements to be freed.
-    void operator()(Data* data) const {
-        detail::free(policy_, data);
-    }
+    void operator()(Data* data) const;
 };
 
 /// @tparam Data   The type of elements to be freed

@@ -27,7 +27,7 @@ The function objects used to free the array of elements of type ``Data``.
 
 .. onedal_class:: oneapi::dal::default_delete
 
-The helper function that creates ``default_delete`` object using SYCL* queue.
+The helper function that creates :expr:`default_delete` object using SYCL* queue.
 
 .. onedal_func:: oneapi::dal::make_default_delete
 
