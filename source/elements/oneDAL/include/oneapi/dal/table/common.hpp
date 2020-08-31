@@ -61,7 +61,7 @@ public:
 
     /// The metadata object that holds additional information
     /// about the data within the table.
-    /// @remark default = oneapi::dal::table_metadata{}
+    /// @remark default = table_metadata()
     const table_metadata& get_metadata() const;
 
     /// The runtime id of the table type.

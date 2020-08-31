@@ -14,7 +14,7 @@ transform it into numerical representation, and store it as an in-memory
 :txtref:`dataset` of a chosen type.
 
 Supported type of in-memory object for :expr:`read` operation with CSV data
-source is :txtref:`table`.
+source is :expr:`oneapi::dal::table`.
 
 CSV data source requires input file name to be set in the constructor, while the
 other parameters of the constructor such as delimiter and read options rely on
@@ -24,9 +24,11 @@ Usage example
 -------------
 ::
 
-   const auto data_source = onedal::csv::data_source("data.csv", ',');
+   using namespace oneapi;
 
-   const auto table = ondedal::read<onedal::table>(data_source);
+   const auto data_source = dal::csv::data_source("data.csv", ',');
+
+   const auto table = dal::read<dal::table>(data_source);
 
 
 Programming Interface
@@ -60,7 +62,7 @@ All types and functions in this section shall be declared in the
       read_options get_read_options() const;
    };
 
-.. namespace:: onedal::csv
+.. namespace:: oneapi::dal::csv
 .. class:: data_source
 
    .. function:: data_source(const char *file_name, char delimiter = default_delimiter, read_options opts = default_read_options)
@@ -98,7 +100,7 @@ All types and functions in this section shall be declared in the
          | ``read_options get_read_options() const``
 
 
-Reading :expr:`onedal::read<Object>(...)`
+Reading :expr:`oneapi::dal::read<Object>(...)`
 ------------------------------------------------
 
 Args
@@ -123,12 +125,13 @@ Args
 Operation
 ~~~~~~~~~
 
-:code:`onedal::table` is the only supported value of the :code:`Object` template parameter for :expr:`read` operation with CSV data source.
+:expr:`oneapi::dal::table` is the only supported value of the :code:`Object`
+template parameter for :expr:`read` operation with CSV data source.
 
-.. namespace:: onedal
+.. namespace:: oneapi::dal
 .. function:: template <typename Object, typename DataSource> \
               Object read(const DataSource& ds)
 
-   :tparam Object: oneDAL object type that shall be produced as a result of
+   :tparam Object: |dal_short_name| object type that shall be produced as a result of
                    reading from the data source.
    :tparam DataSource: CSV data source :expr:`csv::data_source`.

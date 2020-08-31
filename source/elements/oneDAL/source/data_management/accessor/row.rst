@@ -59,7 +59,8 @@ Usage example
 Programming interface
 ---------------------
 
-The following declarations are defined in ``oneapi/dal/table/row_accessor.hpp``
-within ``oneapi::dal`` namespace.
+All types and functions in this section shall be declared in the
+``oneapi::dal`` namespace and be available via inclusion of the
+``oneapi/dal/table/row_accessor.hpp`` header file.
 
 .. onedal_class:: oneapi::dal::row_accessor

@@ -14,7 +14,8 @@ for which the following is true:
 Programming interface
 ---------------------
 
-The following declarations are defined in ``oneapi/dal/table/homogen.hpp``
-within ``oneapi::dal`` namespace.
+All types and functions in this section shall be declared in the
+``oneapi::dal`` namespace and be available via inclusion of the
+``oneapi/dal/table/homogen.hpp`` header file.
 
 .. onedal_class:: oneapi::dal::homogen_table

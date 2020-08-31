@@ -65,7 +65,7 @@ Each operation shall satisfy the following requirements:
 ------------------------
 Read operation shortcuts
 ------------------------
-In order to make the code on user side less verbose, oneDAL defines the
+In order to make the code on user side less verbose, |dal_short_name| defines the
 following overloaded functions called *shortcuts* for a read operation in addition
 to the general one described in section `Read operation definition
 <read_operation_definition_>`_.

@@ -135,8 +135,9 @@ The array shall support the following requirements on the internal data manageme
 Programming interface
 ---------------------
 
-The following declarations are defined in ``oneapi/dal/array.hpp`` within
-``oneapi::dal`` namespace.
+All types and functions in this section shall be declared in the
+``oneapi::dal`` namespace and be available via inclusion of the
+``oneapi/dal/array.hpp`` header file.
 
 All the ``array`` class methods can be divided into several groups:
 
