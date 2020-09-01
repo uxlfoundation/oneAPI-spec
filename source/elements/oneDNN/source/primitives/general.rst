@@ -20,6 +20,9 @@ Base Class for Primitives
    :project: oneDNN
    :members:
 
+.. doxygenfunction:: dnnl::sycl_interop::execute
+   :project: oneDNN
+
 *************************************
 Base Class for Primitives Descriptors
 *************************************
