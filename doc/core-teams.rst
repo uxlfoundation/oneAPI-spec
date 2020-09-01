@@ -31,8 +31,9 @@ DPC++
 oneDPL
 ======
 
+* Fedorov, Andrey
 * **Kukanov, Alexey**
-* Smith, Timmie 
+* Smith, Timmie
 
 
 oneDNN
@@ -68,6 +69,7 @@ oneDAL
 oneTBB
 ======
 
+* Katranov, Alexei
 * **Kukanov, Alexey**
 
 

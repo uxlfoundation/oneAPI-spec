@@ -38,11 +38,12 @@ Release Notes
 * oneDNN
 
 
-* oneDPL
-
-
 * oneTBB
 
+  * Updated the named requirements
+  * Adjusted the API according to the latest product changes
+  * Improved the wording and descriptions for the flow graph API
+  * Cleared build warnings
   
 * oneDAL
    * Extended Programming model section, added description of the generic methods and descriptors, introduced task notation
