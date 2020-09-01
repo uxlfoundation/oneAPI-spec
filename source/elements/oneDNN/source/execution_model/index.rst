@@ -30,11 +30,21 @@ specific engine. The only exceptions are reorder primitives that transfer data
 between two different engines.
 
 Engines correspond to and can be constructed from pairs of the DPC++
-:class:`sycl::device` and :class:`sycl::context` objects.
+:class:`sycl::device` and :class:`sycl::context` objects. Alternatively, oneDNN
+itself can create and own the corresponding objects.
 
 .. doxygenstruct:: dnnl::engine
    :project: oneDNN
    :members:
+
+.. doxygenfunction:: dnnl::sycl_interop::make_engine
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::get_device
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::get_context
+   :project: oneDNN
 
 ******
 Stream
@@ -52,8 +62,8 @@ implementation-defined manner.
    :members:
 
 Streams correspond to and can be constructed from DPC++ :class:`sycl::queue`
-objects. Alternatively, oneDNN can create and own the corresponding objects
-itself. Streams are considered to be ephemeral and can be created / destroyed
+objects. Alternatively, oneDNN itself can create and own the corresponding
+objects. Streams are considered to be ephemeral and can be created / destroyed
 as long these operation do not violate DPC++ synchronization requirements.
 
 Similar to DPC++ queues, streams can be in-order and out-of-order (see the
@@ -64,5 +74,11 @@ created from a DPC++ queue inherits its behavior.
 .. doxygenstruct:: dnnl::stream
    :project: oneDNN
    :members:
+
+.. doxygenfunction:: dnnl::sycl_interop::make_stream
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::get_queue
+   :project: oneDNN
 
 .. vim: ts=3 sw=3 et spell spelllang=en

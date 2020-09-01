@@ -79,7 +79,31 @@ API
 
 .. doxygenstruct:: dnnl::memory
    :project: oneDNN
-   :members: memory, get_desc, get_engine, get_data_handle, set_data_handle, map_data, unmap_data, get_sycl_buffer, set_sycl_buffer
+   :members: memory, get_desc, get_engine, get_data_handle, set_data_handle, map_data, unmap_data
+
+.. doxygenenum:: dnnl::sycl_interop::memory_kind
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const engine &aengine, memory_kind akind, void *ahandle = DNNL_MEMORY_ALLOCATE)
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const stream &astream, memory_kind akind, void *ahandle = DNNL_MEMORY_ALLOCATE)
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const engine &aengine, cl::sycl::buffer<T, ndims> abuffer, stream &astream)
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::get_memory_kind
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::set_buffer(memory &amemory, cl::sycl::buffer<T, ndims> abuffer)
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::set_buffer(memory &amemory, cl::sycl::buffer<T, ndims> abuffer, stream &astream)
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::get_buffer
+   :project: oneDNN
 
 .. doxygendefine:: DNNL_MEMORY_NONE
    :project: oneDNN
