@@ -5,7 +5,7 @@
 
 .. include:: replacements.inc.rst
 
-.. _`open source implementation`: https://github.com/oneapi-src/oneDNN/tree/dev-v2
+.. _`open source implementation`: https://github.com/oneapi-src/oneDNN
 
 .. _introduction-label:
 
