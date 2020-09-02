@@ -2,8 +2,8 @@
   Copyright 2019-2020 Intel Corporation
 
 .. default-domain:: cpp
-.. _`open source implementation`: https://github.com/oneapi-src/oneDNN/tree/dev-v2
-.. _`README`: https://github.com/oneapi-src/oneDNN/blob/dev-v2/README.md
+.. _`open source implementation`: https://github.com/oneapi-src/oneDNN/
+.. _`README`: https://github.com/oneapi-src/oneDNN/blob/master/README.md
 
 .. _oneDNN-section:
 
