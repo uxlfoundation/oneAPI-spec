@@ -54,13 +54,6 @@ A *stream* is an encapsulation of execution context tied to a particular
 engine. They are passed to |primitive::execute| when executing a
 primitive.
 
-Stream attributes are used to extend stream behavior in an
-implementation-defined manner.
-
-.. doxygenstruct:: dnnl::stream_attr
-   :project: oneDNN
-   :members:
-
 Streams correspond to and can be constructed from DPC++ :class:`sycl::queue`
 objects. Alternatively, oneDNN itself can create and own the corresponding
 objects. Streams are considered to be ephemeral and can be created / destroyed

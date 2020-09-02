@@ -451,25 +451,10 @@ struct engine {
 ///
 /// @{
 
-/// A container for stream attributes.
-struct stream_attr {
-    /// Constructs default (empty) stream attributes.
-    stream_attr();
-
-    /// Constructs stream attributes for a stream that runs on an engine of a
-    /// particular kind.
-    ///
-    /// @param akind Target engine kind.
-    stream_attr(engine::kind akind);
-};
-
 /// An execution stream.
 struct stream {
     /// Stream flags. Can be combined using the bitwise OR operator.
     enum class flags : unsigned {
-        /// Default order execution. Either in-order or out-of-order depending
-        /// on the engine runtime.
-        default_order,
         /// In-order execution.
         in_order,
         /// Out-of-order execution.
@@ -487,9 +472,7 @@ struct stream {
     ///
     /// @param aengine Engine to create the stream on.
     /// @param aflags Flags controlling stream behavior.
-    /// @param attr Stream attributes.
-    stream(const engine &aengine, flags aflags = flags::default_flags,
-            const stream_attr &attr = stream_attr());
+    stream(const engine &aengine, flags aflags = flags::default_flags);
 
     /// Waits for all primitives executing in the stream to finish.
     /// @returns The stream itself.
