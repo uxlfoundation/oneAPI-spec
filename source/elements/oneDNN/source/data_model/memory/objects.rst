@@ -64,14 +64,13 @@ Data handle of a zero-volume memory is never accessed.
 Objects
 *******
 
-Memory objects combine memory descriptors with storage for data (a data
-handle).  With USM, the data handle is simply a pointer to ``void``. The data
-handle can be queried using |memory::get_data_handle| and set using
-|memory::set_data_handle|. The underlying SYCL buffer, when used,
-can be queried using |memory::get_sycl_buffer| and set using
-|memory::set_sycl_buffer|. A memory object can also be queried for
-the underlying memory descriptor and for its engine using
-|memory::get_desc| and |memory::get_engine|.
+Memory objects combine memory descriptors with storage for data (a data handle).
+With USM, the data handle is simply a pointer to ``void``. The data handle can
+be queried using |memory::get_data_handle| and set using
+|memory::set_data_handle|. The underlying SYCL buffer, when used, can be queried
+using |memory::get_buffer| and set using |memory::set_buffer|. In addition, the
+memory descriptor and the engine underlying a memory object can be queried using
+|memory::get_desc| and |memory::get_engine| respectively.
 
 ***
 API

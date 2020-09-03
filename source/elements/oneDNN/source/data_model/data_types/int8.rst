@@ -8,7 +8,7 @@ Int8
 ####
 
 To push higher performance during inference computations, recent work has
-focused on computations that use activations and weights stored a lower
+focused on computations that use activations and weights stored at lower
 precision to achieve higher throughput. Int8 computations offer improved
 performance over higher-precision types because they enable packing more
 computations into a single instruction, at the cost of reduced (but

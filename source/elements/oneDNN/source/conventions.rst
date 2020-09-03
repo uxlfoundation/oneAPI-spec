@@ -9,7 +9,8 @@
 Conventions
 ###########
 
-oneDNN documentation relies on a set of standard naming conventions for variables. This section describes these conventions.
+oneDNN specification relies on a set of standard naming conventions for
+variables. This section describes these conventions.
 
 ***********************
 Variable (Tensor) Names
@@ -22,8 +23,8 @@ Neural network models consist of operations of the following form:
 where :math:`\dst` and :math:`\src` are activation tensors, and
 :math:`\weights` are learnable tensors.
 
-The backward propagation consists then in computing the gradients with respect
-to the :math:`\src`and :math:`\weights` respectively:
+The backward propagation therefore consists in computing the gradients with
+respect to the :math:`\src`and :math:`\weights` respectively:
 
 .. math::  \diffsrc = \mathrm{d} f_{\src}(\diffdst, \src, \weights, \dst),
 
