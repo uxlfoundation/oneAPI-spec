@@ -16,14 +16,14 @@ engine specifies where the primitive will be executed. An operation descriptor
 specifies the basics: the operation kind; the propagation kind; the source,
 destination, and other tensors; the strides (if applicable); and so on.
 
-*Attributes* specify some extra properties of the primitive. Users must
-create them before use and must set required specifics using the corresponding
-setters. The attributes are copied during primitive descriptor creation, so
-users can change or destroy attributes right after that.
+*Attributes* specify some extra properties of the primitive. Users must create
+them before use and must set required specifics using the corresponding setters.
+The attributes are copied during primitive descriptor creation, so users can
+change or destroy attributes right after that.
 
 If not modified, attributes can stay empty, which is equivalent to the default
-attributes. Primitive descriptors' constructors have empty attributes as
-default parameters, so unless required users can simply omit them.
+attributes. Primitive descriptors' constructors have empty attributes as default
+parameters, so, unless required, users can simply omit them.
 
 Attributes can also contain *post-ops*, which are computations executed after
 the primitive.
@@ -41,12 +41,12 @@ Some primitives might require a temporary buffer while performing their
 computations. For instance, the operations that do not have enough independent
 work to utilize all cores on a system might use parallelization over the
 reduction dimension (the K dimension in the GEMM notation). In this case
-different threads compute partial results in private temporary buffers, and
-then the private results are added to produce the final result. Another
-example is using matrix multiplication (GEMM) to implement convolution. Before
-calling GEMM, the source activations need to be transformed using the
-``im2col`` operation. The transformation result is written to a temporary
-buffer that is then used as an input for the GEMM.
+different threads compute partial results in private temporary buffers, and then
+the private results are added to produce the final result. Another example is
+using matrix multiplication (GEMM) to implement convolution. Before calling
+GEMM, the source activations need to be transformed using the ``im2col``
+operation. The transformation result is written to a temporary buffer that is
+then used as an input for the GEMM.
 
 In both of these examples, the temporary buffer is no longer required once the
 primitive computation is completed. oneDNN refers to such kind of a memory
@@ -61,10 +61,10 @@ case of backward by weights) multiplied by the number of threads in the
 reduction groups (the upper bound is the total number of threads).
 
 By contrast, some other primitives might require very little extra space. For
-instance, one of the implementation of the |sum| primitive requires
-temporary space only to store the pointers to data for each and every input
-array (that is, the size of the scratchpad is ``n * sizeof(void *)``, where
-``n`` is the number of summands).
+instance, one of the implementation of the |sum| primitive requires temporary
+space only to store the pointers to data for each and every input array (that
+is, the size of the scratchpad is ``n * sizeof(void *)``, where ``n`` is the
+number of summands).
 
 oneDNN supports two modes for handling scratchpads:
 
@@ -81,10 +81,10 @@ All primitives support both scratchpad modes.
 
 .. note::
 
-   Primitives are not thread-safe by default. The only way to make the
-   primitive execution fully thread-safe is to use the
-   |scratchpad_mode::user| mode and not pass the same scratchpad
-   memory to two primitives that are executed concurrently.
+   Primitives are not thread-safe by default. The only way to make the primitive
+   execution fully thread-safe is to use the |scratchpad_mode::user| mode and
+   not pass the same scratchpad memory to two primitives that are executed
+   concurrently.
 
 Examples
 ========
@@ -92,9 +92,8 @@ Examples
 Library Manages Scratchpad
 --------------------------
 
-As mentioned above, this is a default behavior. We only want to highlight how
-a user can query the amount of memory consumed by a primitive due to a
-scratchpad.
+As mentioned above, this is a default behavior. We only want to highlight how a
+user can query the amount of memory consumed by a primitive due to a scratchpad.
 
 .. code:: cpp
 
@@ -169,24 +168,24 @@ The primary quantization model that the library assumes is the following:
 
     x_{f32}[:] = scale_{f32} \cdot (x_{int8}[:] - 0_{x_{int8}})
 
-where :math:`scale_{f32}` is a *scaling factor* that is somehow known in
-advance and :math:`[:]` is used to denote elementwise application of the
-formula to the arrays. Typically, the process of computing scale factors is
-called *calibration*. The library cannot compute any of the scale factors at
-run-time dynamically.  Hence, the model is sometimes called a *static*
-quantization model. The main rationale to support only *static* quantization
-out-of-the-box is higher performance. To use *dynamic* quantization:
+where :math:`scale_{f32}` is a *scaling factor* that is somehow known in advance
+and :math:`[:]` is used to denote elementwise application of the formula to the
+arrays. Typically, the process of computing scale factors is called
+*calibration*. The library cannot compute any of the scale factors at run-time
+dynamically.  Hence, the model is sometimes called a *static* quantization
+model. The main rationale to support only *static* quantization out-of-the-box
+is higher performance. To use *dynamic* quantization:
 
 1. Compute the result in higher precision, like |_s32|.
 2. Find the required characteristics, like min and max values, and derive the
    scale factor.
 3. Re-quantize to the lower precision data type.
 
-oneDNN assumes a fixed zero position. For most of the primitives, the real
-zero value is mapped to the zero for quantized values; that is,
-:math:`0_{x_{int8}} = 0`. For example, this is the only model that
-:ref:`convolution-label` and :ref:`inner_product-label` currently support.
-The :ref:`rnn-label` primitives have limited support of shifted zero.
+oneDNN assumes a fixed zero position. For most of the primitives, the real zero
+value is mapped to the zero for quantized values; that is, :math:`0_{x_{int8}} =
+0`. For example, this is the only model that :ref:`convolution-label` and
+:ref:`inner_product-label` currently support. The :ref:`rnn-label` primitives
+have limited support of shifted zero.
 
 For the rest of this section we that :math:`0_{x_{int8}} = 0`.
 
@@ -199,10 +198,9 @@ Consider a convolution without bias. The tensors are represented as:
 - :math:`\weights_{f32}[:] = scale_{\weights} \cdot \weights_{int8}[:]`
 - :math:`\dst_{f32}[:] = scale_{\dst} \cdot \dst_{int8}[:]`
 
-Here the :math:`\src_{f32}, \weights_{f32}, \dst_{f32}` are not computed at
-all, the whole work happens with int8 tensors.  As mentioned above, we also
-somehow know all the scaling factors: `scale_{\src}, scale_{\weights},
-scale_{\dst}`.
+Here the :math:`\src_{f32}, \weights_{f32}, \dst_{f32}` are not computed at all,
+the whole work happens with int8 tensors.  As mentioned above, we also somehow
+know all the scaling factors: `scale_{\src}, scale_{\weights}, scale_{\dst}`.
 
 So the task is to compute the :math:`\dst_{int8}` tensor.
 
@@ -228,8 +226,8 @@ where
   potential saturation if the values are out of the range of the int8 data
   type.
 
-Note that in order to perform the operation, one doesn't need to know the
-exact scaling factors for all the tensors; it is enough to know only the
+Note that in order to perform the operation, one doesn't need to know the exact
+scaling factors for all the tensors; it is enough to know only the
 `output\_scale`. The library utilizes this fact: a user needs to provide only
 this one extra parameter to the convolution primitive (see the
 :ref:`output_scaling-label` section below).
@@ -271,8 +269,8 @@ where
    output\_scale(oc) :=
     \frac{\alpha_{\src} \cdot \alpha_{\weights}(oc)}{\alpha_{\dst}}.
 
-The user is responsible for preparing quantized weights accordingly. To do
-that, oneDNN provides reorders that can perform per-channel scaling:
+The user is responsible for preparing quantized weights accordingly. To do that,
+oneDNN provides reorders that can perform per-channel scaling:
 
 .. math::
 
@@ -293,15 +291,15 @@ where
 Output Scaling Attribute
 ========================
 
-oneDNN provides |primitive_attr::set_output_scales| for setting
-scaling factors for most of the primitives.
+oneDNN provides |primitive_attr::set_output_scales| for setting scaling factors
+for most of the primitives.
 
-The primitives may not support output scales if source (and weights) tensors
-are not of the int8 data type. In other words, convolution operating on the
-single precision floating point data type may not scale the output result.
+The primitives may not support output scales if source (and weights) tensors are
+not of the int8 data type. In other words, convolution operating on the single
+precision floating point data type may not scale the output result.
 
-In the simplest case, when there is only one common scale the attribute
-changes the op behavior from
+In the simplest case, when there is only one common scale the attribute changes
+the op behavior from
 
 .. math::
     \dst[:] = Op(...)
@@ -314,12 +312,12 @@ to
 To support scales per one or several dimensions, users must set the appropriate
 mask.
 
-Say the primitive destination is a :math:`D_0 \times ... \times D_{n-1}`
-tensor and we want to have output scales per :math:`d_i` dimension (where
-:math:`0 \le d_i < n`).
+Say the primitive destination is a :math:`D_0 \times ... \times D_{n-1}` tensor
+and we want to have output scales per :math:`d_i` dimension (where :math:`0 \le
+d_i < n`).
 
-Then :math:`mask = \sum \limits_{d_i} 2^{d_i}` and the number of scales should be
-:math:`\mathtt{scales.size()} = \prod \limits_{d_i} D_{d_i}`.
+Then :math:`mask = \sum \limits_{d_i} 2^{d_i}` and the number of scales should
+be :math:`\mathtt{scales.size()} = \prod \limits_{d_i} D_{d_i}`.
 
 The scaling happens in the single precision floating point data type (|_f32|).
 Before it is stored, the result is converted to the destination data type with
@@ -378,8 +376,8 @@ Example 2: convolution with groups, with per-output-channel quantization
 ------------------------------------------------------------------------
 
 This example is complementary to the previous example (which should ideally be
-the first one). Let's say we want to create an int8 convolution with
-per-output channel scaling.
+the first one). Let's say we want to create an int8 convolution with per-output
+channel scaling.
 
 .. code:: cpp
 
@@ -475,9 +473,9 @@ Attribute Related Error Handling
 Since the attributes are created separately from the corresponding primitive
 descriptor, consistency checks are delayed.  Users can successfully set
 attributes in whatever configuration they want.  However, when they try to
-create a primitive descriptor with the attributes they set, it might happen
-that there is no primitive implementation that supports such a configuration.
-In this case the library will throw the |error| exception.
+create a primitive descriptor with the attributes they set, it might happen that
+there is no primitive implementation that supports such a configuration. In this
+case the library will throw the |error| exception.
 
 ***
 API

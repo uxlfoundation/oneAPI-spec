@@ -18,7 +18,7 @@ the |primitive::execute| member function.
 
 The primitive's computations are executed on the computational device
 corresponding to the engine on which the primitive (and memory arguments) were
-created and happens within the context on the stream.
+created and happens within the context of the stream.
 
 ******
 Engine
