@@ -54,7 +54,7 @@ using an out-of-band communication mechanism and be used to create key-value sto
                                                  sycl_ctx,
                                                  kvs);
 
-    /* create ccl::stream objects from sycl::queue objects */
+    /* create stream objects from sycl::queue objects */
     std::vector<request> streams;
     for (auto& comm : comms) {
         streams.push_back(env.create_stream(sycl_queues[comm->rank()]));
