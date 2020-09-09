@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: /elements/oneDNN/source/replacements.inc.rst
+
 .. _attributes-link:
 
 ##########
@@ -59,7 +61,7 @@ case of backward by weights) multiplied by the number of threads in the
 reduction groups (the upper bound is the total number of threads).
 
 By contrast, some other primitives might require very little extra space. For
-instance, one of the implementation of the :any:`dnnl::sum` primitive requires
+instance, one of the implementation of the |sum| primitive requires
 temporary space only to store the pointers to data for each and every input
 array (that is, the size of the scratchpad is ``n * sizeof(void *)``, where
 ``n`` is the number of summands).
@@ -70,7 +72,7 @@ oneDNN supports two modes for handling scratchpads:
    :project: oneDNN
 
 The scratchpad mode is controlled though the
-:any:`dnnl::primitive_attr::set_scratchpad_mode` primitive attributes.
+|primitive_attr::set_scratchpad_mode| primitive attributes.
 
 If the user provides scratchpad memory to a primitive, this memory must be
 created using the same engine that the primitive uses.
@@ -81,7 +83,7 @@ All primitives support both scratchpad modes.
 
    Primitives are not thread-safe by default. The only way to make the
    primitive execution fully thread-safe is to use the
-   :any:`dnnl::scratchpad_mode::user` mode and not pass the same scratchpad
+   |scratchpad_mode::user| mode and not pass the same scratchpad
    memory to two primitives that are executed concurrently.
 
 Examples
@@ -108,8 +110,8 @@ scratchpad.
     // descriptor should be empty:
     auto zero_md = dnnl::memory::desc();
 
-Library Manages Scratchpad
---------------------------
+User Manages Scratchpad
+-----------------------
 
 .. code:: cpp
 
@@ -175,8 +177,7 @@ run-time dynamically.  Hence, the model is sometimes called a *static*
 quantization model. The main rationale to support only *static* quantization
 out-of-the-box is higher performance. To use *dynamic* quantization:
 
-1. Compute the result in higher precision, like
-   :enumerator:`dnnl::memory::data_type::s32`.
+1. Compute the result in higher precision, like |_s32|.
 2. Find the required characteristics, like min and max values, and derive the
    scale factor.
 3. Re-quantize to the lower precision data type.
@@ -292,7 +293,7 @@ where
 Output Scaling Attribute
 ========================
 
-oneDNN provides :any:`dnnl::primitive_attr::set_output_scales` for setting
+oneDNN provides |primitive_attr::set_output_scales| for setting
 scaling factors for most of the primitives.
 
 The primitives may not support output scales if source (and weights) tensors
@@ -320,10 +321,10 @@ tensor and we want to have output scales per :math:`d_i` dimension (where
 Then :math:`mask = \sum \limits_{d_i} 2^{d_i}` and the number of scales should be
 :math:`\mathtt{scales.size()} = \prod \limits_{d_i} D_{d_i}`.
 
-The scaling happens in the single precision floating point data type
-(:any:`data_type::f32`). Before storing, the result is converted to the
-destination data type with saturation if required. The rounding happens
-according to the current hardware setting.
+The scaling happens in the single precision floating point data type (|_f32|).
+Before it is stored, the result is converted to the destination data type with
+saturation if required. The rounding happens according to the current hardware
+setting.
 
 Example 1: weights quantization with per-output-channel-and-group scaling
 -------------------------------------------------------------------------
@@ -476,7 +477,7 @@ descriptor, consistency checks are delayed.  Users can successfully set
 attributes in whatever configuration they want.  However, when they try to
 create a primitive descriptor with the attributes they set, it might happen
 that there is no primitive implementation that supports such a configuration.
-In this case the library will throw the :any:`dnnl::error` exception.
+In this case the library will throw the |error| exception.
 
 ***
 API

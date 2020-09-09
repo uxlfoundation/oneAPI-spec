@@ -25,7 +25,8 @@ This value is selected from all currently existing control variables by applying
         public:
             enum parameter {
                 max_allowed_parallelism,
-                thread_stack_size
+                thread_stack_size,
+                terminate_on_exception
             };
 
             global_control(parameter p, size_t value);
@@ -57,6 +58,13 @@ Member types and constants
 
     Set stack size for threads created by the library, including working threads in the task scheduler
     and threads controlled by thread wrapper classes.
+
+.. cpp:enum:: parameter::terminate_on_exception
+
+    **Selection rule**: logical disjunction
+
+    Setting the parameter to 1 causes termination in any condition that would throw or rethrow an exception.
+    If set to 0 (default), the parameter does not affect the implementation behavior.
 
 Member functions
 ----------------

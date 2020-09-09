@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 #####################
 Matrix Multiplication
@@ -48,10 +48,10 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\weights`       DNNL_ARG_WEIGHTS
-:math:`\bias`          DNNL_ARG_BIAS
-:math:`\dst`           DNNL_ARG_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\weights`       |DNNL_ARG_WEIGHTS|
+:math:`\bias`          |DNNL_ARG_BIAS|
+:math:`\dst`           |DNNL_ARG_DST|
 ====================== ========================
 
 *****************
@@ -71,21 +71,26 @@ appropriate memory format for the corresponding input or output shapes. On the
 other hand, run-time specified shapes enable users to create a primitive once
 and use it in different situations.
 
-**********
-Data Types
-**********
+******************
+Data Types Support
+******************
 
 The MatMul primitive supports the following combinations of data types for
-source, destination, weights, and bias tensors:
+source, destination, weights, and bias tensors.
 
-====== ======= ================ ================
-Source Weights Destination      Bias
-====== ======= ================ ================
-f32    f32     f32              f32
-f16    f16     f16              f16
-bf16   bf16    bf16             bf16, f32
-u8, s8 s8, u8  u8, s8, s32, f32 u8, s8, s32, f32
-====== ======= ================ ================
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
+
+========== ========== ========================= ========================
+Source     Weights    Destination               Bias
+========== ========== ========================= ========================
+|f32|      |f32|       |f32|                    |f32|
+|f16|      |f16|       |f16|                    |f16|
+|bf16|     |bf16|      |bf16|                   |bf16|, |f32|
+|u8|, |s8| |s8|, |u8|  |u8|, |s8|, |s32|, |f32| |u8|, |s8|, |s32|, |f32|
+========== ========== ========================= ========================
 
 *******************
 Data Representation

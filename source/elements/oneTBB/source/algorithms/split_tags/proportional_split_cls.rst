@@ -28,7 +28,7 @@ the class should be split.
            std::size_t left() const;
            std::size_t right() const;
 
-           operator split() const;
+           explicit operator split() const;
        };
     }
 
@@ -47,9 +47,9 @@ Member functions
 
     Returns the size of the right part of the proportion.
 
-.. cpp:function:: operator split() const
+.. cpp:function:: explicit operator split() const
 
-    Makes ``proportional_split`` implicitly convertible to the ``split`` type to use with
+    Makes ``proportional_split`` convertible to the ``split`` type to use with
     ranges that do not support proportional splitting.
 
 See also:

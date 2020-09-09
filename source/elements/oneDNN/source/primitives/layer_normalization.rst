@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 .. _layer_normalization-label:
 
@@ -60,7 +60,7 @@ they would be required during the backward propagation). Data layout for mean
 and variance must be specified during initialization of the layer
 normalization descriptor by passing the memory descriptor for statistics
 (e.g., by passing ``stat_desc`` in
-:any:`dnnl::layer_normalization_forward::desc::desc`). Mean and variance are
+|layer_normalization_forward::desc::desc|). Mean and variance are
 not exposed for the propagation kind |forward_inference|.
 
 ********
@@ -101,14 +101,14 @@ argument index as specified by the following table.
 =============================================== =========================
 Primitive input/output                          Execution argument index
 =============================================== =========================
-:math:`\src`                                    DNNL_ARG_SRC
-:math:`\gamma, \beta`                           DNNL_ARG_SCALE_SHIFT
-mean (:math:`\mu`)                              DNNL_ARG_MEAN
-variance (:math:`\sigma`)                       DNNL_ARG_VARIANCE
-:math:`\dst`                                    DNNL_ARG_DST
-:math:`\diffdst`                                DNNL_ARG_DIFF_DST
-:math:`\diffsrc`                                DNNL_ARG_DIFF_SRC
-:math:`\diffgamma`, :math:`\diffbeta`           DNNL_ARG_DIFF_SCALE_SHIFT
+:math:`\src`                                    |DNNL_ARG_SRC|
+:math:`\gamma, \beta`                           |DNNL_ARG_SCALE_SHIFT|
+mean (:math:`\mu`)                              |DNNL_ARG_MEAN|
+variance (:math:`\sigma`)                       |DNNL_ARG_VARIANCE|
+:math:`\dst`                                    |DNNL_ARG_DST|
+:math:`\diffdst`                                |DNNL_ARG_DIFF_DST|
+:math:`\diffsrc`                                |DNNL_ARG_DIFF_SRC|
+:math:`\diffgamma`, :math:`\diffbeta`           |DNNL_ARG_DIFF_SCALE_SHIFT|
 =============================================== =========================
 
 *****************
@@ -118,7 +118,7 @@ Operation Details
 1. The different flavors of the primitive are partially controlled by the
    ``flags`` parameter that is passed to the operation descriptor
    initialization function (e.g.,
-   :any:`dnnl::layer_normalization_forward::desc::desc`). Multiple flags can
+   |layer_normalization_forward::desc::desc|). Multiple flags can
    be combined using the bitwise OR operator (``|``).
 
 2. For forward propagation, the mean and variance might be either computed at
@@ -141,17 +141,22 @@ Operation Details
    :math:`\src`, hence the corresponding forward propagation should not be
    performed in-place.
 
-*****************
-Data Type Support
-*****************
+******************
+Data Types Support
+******************
 
-The operation supports the following combinations of data types:
+The layer normalization supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ==================== ============================
 Propagation        Source / Destination Mean / Variance / ScaleShift
 ================== ==================== ============================
-forward / backward f32                  f32
-forward            f16                  f32
+forward / backward |f32|                |f32|
+forward            |f16|                |f32|
 ================== ==================== ============================
 
 *******************

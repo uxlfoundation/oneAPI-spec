@@ -12,15 +12,15 @@ list of supported ``<fp>`` and ``<intType>``.
 The oneapi::mkl::sparse::symv routine computes a sparse matrix-dense vector
 product over a symmetric part defined as
 
-::
+.. math::
 
-                     y := alpha*A*x + beta*y
+      y \leftarrow \alpha A x + \beta y
 
 
 where:
 
 
-``alpha`` and ``beta`` are scalars, ``x`` and ``y`` are dense vectors, ``A`` is a sparse matrix.
+:math:`\alpha` and :math:`\beta` are scalars, :math:`x` and :math:`y` are dense vectors, ``A`` is a sparse matrix.
 
 .. _onemkl_sparse_symv_buffer:
 
@@ -29,7 +29,19 @@ symv (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::sparse::symv (sycl::queue &         queue, oneapi::mkl::uplo uplo_val, fp alpha, matrix_handle_t handle,         sycl::buffer<fp, 1> & x, fp beta, sycl::buffer<fp, 1> &         y)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+      void symv (sycl::queue                          &queue,
+                 oneapi::mkl::uplo                    uplo_val,
+                 fp                                   alpha,
+                 oneapi::mkl::sparse::matrix_handle_t A_handle,
+                 sycl::buffer<fp, 1>                  &x,
+                 fp                                   beta,
+                 sycl::buffer<fp, 1>                  &y);
+
+   }
 
 .. container:: section
 
@@ -48,27 +60,26 @@ symv (Buffer version)
 
 
    alpha
-        Specifies the scalar ``alpha``.
+        Specifies the scalar :math:`\alpha`.
 
 
-   handle
-      Handle to object containing sparse matrix and other internal
-      data. Created using the
+   A_handle
+      Handle to object containing sparse matrix :math:`A`. Created using the
       oneapi::mkl::sparse::set_csr_data routine.
 
 
    x
         SYCL memory object containing an array of size at
-        least equal to the number of columns of input matrix.
+        least equal to the number of columns of :math:`A` matrix.
 
 
    beta
-        Specifies the scalar ``beta``.
+        Specifies the scalar :math:`\beta`.
 
 
    y
         SYCL memory object containing an array of size at
-        least equal to the number of rows of input matrix.
+        least equal to the number of rows of :math:`A` matrix.
 
 
 .. container:: section
@@ -77,16 +88,25 @@ symv (Buffer version)
     .. rubric:: Output Parameters
          :class: sectiontitle
 
-
     y
        Overwritten by the updated vector ``y``.
 
 .. container:: section
 
-    .. rubric:: Return Values
+    .. rubric:: Throws
          :class: sectiontitle
 
-    None
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. _onemkl_sparse_symv_usm:
 
@@ -95,7 +115,20 @@ symv (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::sparse::symv (sycl::queue &         queue, oneapi::mkl::uplo uplo_val, fp alpha, matrix_handle_t handle, fp         *x, fp beta, fp *y, const sycl::vector_class<sycl::event> & dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+      sycl::event symv (sycl::queue                           &queue,
+                        oneapi::mkl::uplo                     uplo_val,
+                        fp                                    alpha,
+                        oneapi::mkl::sparse::matrix_handle_t  A_handle,
+                        fp                                    *x,
+                        fp                                    beta,
+                        fp                                    *y,
+                        const sycl::vector_class<sycl::event> &dependencies = {});
+
+   }
 
 .. container:: section
 
@@ -114,27 +147,26 @@ symv (USM version)
 
 
    alpha
-        Specifies the scalar ``alpha``.
+        Specifies the scalar :math:`\alpha`.
 
 
-   handle
-        Handle to object containing sparse matrix and other internal
-        data. Created using the
+   A_handle
+        Handle to object containing sparse matrix :math:`A`. Created using the
         oneapi::mkl::sparse::set_csr_data routine.
 
 
    x
-        USM object containing an array of size at
-        least equal to the number of columns of input matrix.
+        Device-accessible USM object containing an array of size at
+        least equal to the number of columns of :math:`A` matrix.
 
 
    beta
-        Specifies the scalar ``beta``.
+        Specifies the scalar :math:`\beta`.
 
 
    y
-        USM object containing an array of size at
-        least equal to the number of rows of input matrix.
+        Device-accessible USM object containing an array of size at
+        least equal to the number of rows of :math:`A` matrix.
 
    dependencies
          List of events that oneapi::mkl::sparse::symv routine depends on.
@@ -152,6 +184,23 @@ symv (USM version)
 
 .. container:: section
 
+    .. rubric:: Throws
+         :class: sectiontitle
+
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+.. container:: section
+
     .. rubric:: Return Values
          :class: sectiontitle
 
@@ -166,6 +215,3 @@ symv (USM version)
 
 
       **Parent topic:** :ref:`onemkl_spblas`
-
-
-   

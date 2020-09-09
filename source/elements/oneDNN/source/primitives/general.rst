@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: /elements/oneDNN/source/replacements.inc.rst
+
 ##################
 Common Definitions
 ##################
@@ -37,11 +39,11 @@ operation descriptors.
    :project: oneDNN
    :members:
 
-The :any:`dnnl::reorder`, :any:`dnnl::sum` and :any:`dnnl::concat` primitives
-also subclass :any:`dnnl::primitive_desc` to implement their primitive
+The |reorder|, |sum| and |concat| primitives
+also subclass |primitive_desc| to implement their primitive
 descriptors.
 
-RNN primitives further subclass the :any:`dnnl::primitive_desc_base` to
+RNN primitives further subclass the |primitive_desc_base| to
 provide utility functions for frequently queried memory descriptors.
 
 .. doxygenstruct:: dnnl::rnn_primitive_desc_base

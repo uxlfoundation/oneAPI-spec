@@ -28,7 +28,12 @@ ungbr_scratchpad_size
 
   .. rubric:: Syntax
          
-.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::ungbr_scratchpad_size(cl::sycl::queue &queue, onemkl::generate gen, std::int64_t         m, std::int64_t n, std::int64_t k, std::int64_t lda,         std::int64_t &scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t ungbr_scratchpad_size(cl::sycl::queue &queue, onemkl::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t &scratchpad_size) 
+    }
 
 .. container:: section
 
@@ -52,7 +57,7 @@ m
 
    If ``gen = generate::q``, :math:`m \ge n \ge \min(m, k)`.
 
-   If ``gen = generate::p``, :math:`n \ge m ge \min(n, k)`.
+   If ``gen = generate::p``, :math:`n \ge m \ge \min(n, k)`.
 
 n
    The number of columns in the matrix :math:`Q` or :math:`P^{T}` to
@@ -69,6 +74,14 @@ k
 
 lda
    The leading dimension of ``a``.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
 
 .. container:: section
 

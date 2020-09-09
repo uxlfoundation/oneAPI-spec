@@ -42,6 +42,8 @@ A ``combinable`` provides each thread with its own instance of type ``T``.
 Member functions
 ----------------
 
+.. namespace:: tbb::combinable
+	       
 .. cpp:function:: combinable()
 
     Constructs ``combinable`` such that thread-local instances of ``T`` will be default-constructed.
@@ -71,7 +73,7 @@ Member functions
 .. cpp:function:: combinable& operator=( const combinable& other )
 
     Sets ``*this`` to be a copy of *other*.
-    Returns a refernce to ``*this``.
+    Returns a reference to ``*this``.
 
 .. cpp:function:: combinable& operator=( combinable&& other )
 

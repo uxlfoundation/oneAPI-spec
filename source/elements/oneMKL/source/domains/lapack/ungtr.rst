@@ -32,7 +32,11 @@ ungtr (Buffer Version)
 
   .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::lapack::ungtr(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1>      &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void ungtr(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -76,6 +80,17 @@ a
 scratchpad
    Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
+.. container:: section
+
+  .. rubric:: Throws
+         
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If :math:`\text{info}=-i`, the :math:`i`-th parameter had an illegal value.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
+
 ungtr (USM Version)
 ----------------------
 
@@ -83,7 +98,11 @@ ungtr (USM Version)
 
   .. rubric:: Syntax
          
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::ungtr(cl::sycl::queue &queue, onemkl::uplo upper_lower,      std::int64_t n, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event ungtr(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -129,6 +148,17 @@ a
 
 scratchpad
    Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If :math:`\text{info}=-i`, the :math:`i`-th parameter had an illegal value.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
 
 .. container:: section
 

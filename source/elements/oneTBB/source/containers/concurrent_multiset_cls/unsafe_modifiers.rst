@@ -110,7 +110,7 @@ Extracting nodes
     No copy or move constructors of ``value_type`` are performed.
 
     If there are multiple elements equivalent to ``key``,
-    it is unspecified which element should be transfered.
+    it is unspecified which element should be transferred.
 
     Invalidates all iterators to the extracted element.
     Pointers and references to the extracted element remain valid.
@@ -131,7 +131,7 @@ Extracting nodes
     No copy or move constructors of ``value_type`` are performed.
 
     If there are multiple elements equivalent to ``key``,
-    it is unspecified which element should be transfered.
+    it is unspecified which element should be transferred.
 
     Invalidates all iterators to the extracted element. Pointers and references to the
     extracted element remain valid.

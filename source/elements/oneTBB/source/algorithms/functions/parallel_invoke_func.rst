@@ -43,7 +43,7 @@ The following example evaluates ``f()``, ``g()``, ``h()``, and ``bar(1)`` in par
         int arg;
     public:
         MyFunctor(int a) : arg(a) {}
-        void operator()() const {bar(arg);}
+        void operator()() const { bar(arg); }
     };
 
     void RunFunctionsInParallel() {

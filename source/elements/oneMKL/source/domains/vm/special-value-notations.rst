@@ -50,10 +50,10 @@ Special Value Notations
 
    The special value tables show the result of the function for the z
    argument at the intersection of the RE(z) column and the i*IM(z) row.
-   If the function raises an exception on the argument z, the lower part
-   of this cell shows the raised exception and the VM Error Status. An
+   If the function encounters a special point for the argument z, the lower part
+   of this cell shows the special point and the VM status value for this element. An
    empty cell indicates that this argument is normal and the result is
-   defined mathematically.
+   well-defined computationally.
 
 
 **Parent topic:** :ref:`onemkl_vm`

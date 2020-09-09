@@ -9,7 +9,7 @@ Class is used for generation of gamma distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers gamma distributed with shape :math:`\alpha`, displacement :math:`a`, and scale parameter :math:`\beta`, where :math:`a, \alpha, \beta \in R; \alpha > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers gamma distributed with shape :math:`\alpha`, displacement :math:`a`, and scale parameter :math:`\beta`, where :math:`a, \alpha, \beta \in R; \alpha > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class gamma
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = gamma_method::by_default>
     class gamma {
     public:
@@ -43,9 +44,7 @@ class gamma
         RealType a() const;
         RealType beta() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::gamma_method::by_default> \
-                oneapi::mkl::rng::gamma
+    }
 
 .. container:: section
 
@@ -67,7 +66,7 @@ class gamma
                 * ``oneapi::mkl::rng::gamma_method::marsaglia``
                 * ``oneapi::mkl::rng::gamma_method::marsaglia_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -95,23 +94,27 @@ class gamma
 
     .. container:: section
 
-        .. cpp:type:: gamma::method_type = Method
+        .. code-block:: cpp
+
+            gamma::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: gamma::result_type = RealType
+        .. code-block:: cpp
+
+            gamma::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -121,7 +124,9 @@ class gamma
 
         .. _`gamma()`:
 
-        .. cpp:function:: gamma::gamma()
+        .. code-block:: cpp
+
+            gamma::gamma()
 
         .. container:: section
 
@@ -133,7 +138,9 @@ class gamma
 
         .. _`explicit gamma(RealType alpha, RealType a, RealType beta)`:
 
-        .. cpp:function:: explicit gamma::gamma(RealType alpha, RealType a, RealType beta)
+        .. code-block:: cpp
+
+            explicit gamma::gamma(RealType alpha, RealType a, RealType beta)
 
         .. container:: section
 
@@ -141,6 +148,12 @@ class gamma
 
             Constructor with parameters. `alpha` is a shape value, `a` is a displacement value, `beta` is a scale parameter.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`alpha \leq` static_cast<RealType>(0.0), or :math:`beta \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -150,7 +163,9 @@ class gamma
 
         .. _`RealType alpha() const`:
 
-        .. cpp:function:: RealType gamma::alpha() const
+        .. code-block:: cpp
+
+            RealType gamma::alpha() const
 
         .. container:: section
 
@@ -162,7 +177,9 @@ class gamma
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType gamma::a() const
+        .. code-block:: cpp
+
+            RealType gamma::a() const
 
         .. container:: section
 
@@ -174,7 +191,9 @@ class gamma
 
         .. _`RealType beta() const`:
 
-        .. cpp:function:: RealType gamma::beta() const
+        .. code-block:: cpp
+
+            RealType gamma::beta() const
 
         .. container:: section
 

@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: /elements/oneDNN/source/replacements.inc.rst
+
 ######
 Binary
 ######
@@ -35,9 +37,9 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src_0`         DNNL_ARG_SRC_0
-:math:`\src_1`         DNNL_ARG_SRC_1
-:math:`\dst`           DNNL_ARG_DST
+:math:`\src_0`         |DNNL_ARG_SRC_0|
+:math:`\src_1`         |DNNL_ARG_SRC_1|
+:math:`\dst`           |DNNL_ARG_DST|
 ====================== ========================
 
 *****************
@@ -52,7 +54,7 @@ Operation Details
   compute an operation with each point of source 0 for this dimension.
 
 - The :math:`\dst` memory format can be either specified explicitly or by
-  :any:`dnnl::memory::format_tag::any` (recommended), in which case the
+  |memory::format_tag::any| (recommended), in which case the
   primitive will derive the most appropriate memory format based on the format
   of the source 0 tensor.
 
@@ -83,7 +85,7 @@ The following attributes should be supported:
 Data Types Support
 ******************
 
-The source and destination tensors may have ``f32``, ``bf16``, or ``int8``
+The source and destination tensors may have |_f32|, |_bf16|, |_s8| or |_u8|
 data types.
 
 *******************

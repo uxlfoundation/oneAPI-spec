@@ -9,7 +9,7 @@ Class is used for generation of Weibull distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Weibull distributed with displacement :math:`a`, scalefactor :math:`\beta`, and shape :math:`\alpha`, where :math:`a, \beta, \alpha \in R; \alpha > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Weibull distributed with displacement :math:`a`, scalefactor :math:`\beta`, and shape :math:`\alpha`, where :math:`a, \beta, \alpha \in R; \alpha > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class weibull
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = weibull_method::by_default>
     class weibull {
     public:
@@ -43,9 +44,7 @@ class weibull
         RealType a() const;
         RealType beta() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::weibull_method::by_default> \
-                oneapi::mkl::rng::weibull
+    }
 
 .. container:: section
 
@@ -67,7 +66,7 @@ class weibull
                 * ``oneapi::mkl::rng::weibull_method::icdf``
                 * ``oneapi::mkl::rng::weibull_method::icdf_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -95,23 +94,27 @@ class weibull
 
     .. container:: section
 
-        .. cpp:type:: weibull::method_type = Method
+        .. code-block:: cpp
+
+            weibull::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: weibull::result_type = RealType
+        .. code-block:: cpp
+
+            weibull::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -121,7 +124,9 @@ class weibull
 
         .. _`weibull()`:
 
-        .. cpp:function:: weibull::weibull()
+        .. code-block:: cpp
+
+            weibull::weibull()
 
         .. container:: section
 
@@ -133,7 +138,9 @@ class weibull
 
         .. _`explicit weibull(RealType alpha, RealType a, RealType beta)`:
 
-        .. cpp:function:: explicit weibull::weibull(RealType alpha, RealType a, RealType beta)
+        .. code-block:: cpp
+
+            explicit weibull::weibull(RealType alpha, RealType a, RealType beta)
 
         .. container:: section
 
@@ -141,6 +148,12 @@ class weibull
 
             Constructor with parameters. `alpha` is a shape value, `a` is a displacement value, `beta` is a scalefactor value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`alpha \leq` static_cast<RealType>(0.0), or :math:`beta \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -150,7 +163,9 @@ class weibull
 
         .. _`RealType alpha() const`:
 
-        .. cpp:function:: RealType weibull::alpha() const
+        .. code-block:: cpp
+
+            RealType weibull::alpha() const
 
         .. container:: section
 
@@ -162,7 +177,9 @@ class weibull
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType weibull::a() const
+        .. code-block:: cpp
+
+            RealType weibull::a() const
 
         .. container:: section
 
@@ -174,7 +191,9 @@ class weibull
 
         .. _`RealType beta() const`:
 
-        .. cpp:function:: RealType weibull::beta() const
+        .. code-block:: cpp
+
+            RealType weibull::beta() const
 
         .. container:: section
 

@@ -31,8 +31,8 @@ A node that is a buffer of a single item that cannot be overwritten.
 
 Requirements:
 
-* The ``T`` type must meet the `CopyConstructible` requirements from [copyconstructible] and
-  `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
+* The ``T`` type must meet the `DefaultConstructible` requirements from [defaultconstructible] and
+  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 
 This type of node buffers a single item of type ``T``. The value is initially invalid. Gets from the node
 are non-destructive.
@@ -45,6 +45,8 @@ are non-destructive.
 
 Member functions
 ----------------
+
+.. namespace:: tbb::flow::write_once_mode
 
 .. cpp:function:: explicit write_once_node( graph &g )
 

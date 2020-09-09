@@ -6,7 +6,7 @@ Random Number Generators (RNG) Overview
 .. rubric:: Definitions
 
 
-Pseudo-random number generator is defined by a structure(:math:`S`, :math:`\mu`, :math:`f`, :math:`U`, :math:`g`), where:
+The pseudo-random number generator is defined by a structure(:math:`S`, :math:`\mu`, :math:`f`, :math:`U`, :math:`g`), where:
 
    -  :math:`S` is a finite set of states (the state space)
    -  :math:`\mu` is a probability distribution on :math:`S` for the initial state
@@ -35,17 +35,17 @@ In computational statistics, random variate generation is usually made in two st
 
 RNG domain contains two classes types:
 
-   -  Engines (Basic random number generators) classes, which holds
-      state of generator and is a source of i.i.d. random. Refer to
+   -  Engines (basic random number generators) classes, which holds
+      the state of generator and is a source of i.i.d. random. Refer to
       :ref:`onemkl_rng_engines_basic_random_number_generators`
       for a detailed description.
-   -  Distribution classes templates (Transformation classes) for different types of statistical
+   -  Distribution classes templates (transformation classes) for different types of statistical
       distributions, for example, uniform, normal (Gaussian), binomial,
       etc. These classes contain all of the distribution’s parameters
       (including generation method). Refer to :ref:`onemkl_rng_distributions` for
       a detailed description of the distributions.
 
-RNG domain contains also two types of free functions:
+The RNG domain also contains two types of free functions:
 
    -  Generation routines. The current routines are used to obtain random
       numbers from a given engine with proper statistics defined by a
@@ -55,6 +55,6 @@ RNG domain contains also two types of free functions:
       description of these routines.
 
 
-Engine classes work with both generation and service routines, distribution classes are used in
-generation routines only. Refer to :ref:`onemkl_rng_usage_model`
+Engine classes work with both generation and service routines. Distribution classes are used in
+generation routines only. Refer to the :ref:`onemkl_rng_usage_model`
 section for the description of typical RNG scenario.

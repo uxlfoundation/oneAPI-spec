@@ -9,7 +9,7 @@ Class is used for generation of underlying engine integer reccurence.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide integer random numbers. Each integer can be treated as a vector of several bits. In a truly random generator, these bits are random, while in pseudorandom generators this randomness can be violated.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide integer random numbers. Each integer can be treated as a vector of several bits. In a truly random generator, these bits are random, while in pseudorandom generators this randomness can be violated.
 
 class bits
 ----------
@@ -18,14 +18,13 @@ class bits
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename UIntType = std::uint32_t>
     class bits {
     public:
         using result_type = UIntType;
     };
-
-.. cpp:class:: template<typename UIntType = std::uint32_t> \
-                oneapi::mkl::rng::bits
+    }
 
 .. container:: section
 
@@ -43,12 +42,14 @@ class bits
 
     .. container:: section
 
-        .. cpp:type:: bits::result_type = UIntType
+        .. code-block:: cpp
+
+            bits::result_type = UIntType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 **Parent topic:** :ref:`onemkl_rng_distributions`

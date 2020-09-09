@@ -1,30 +1,29 @@
 .. highlight:: cpp
 .. default-domain:: cpp
 
+.. _alg_knn:
+
 =========================================
 k-Nearest Neighbors Classification (k-NN)
 =========================================
+:math:`k`-NN :capterm:`classification` algorithm infers the class for the new
+feature vector by computing majority vote of the :math:`k` nearest observations
+from the training set.
 
-:math:`k`-NN classification algorithm infers the class for the new feature
-vector by computing majority vote of the :math:`k` nearest observations from the
-training set.
 
+.. |t_math| replace:: `Training <knn_t_math_>`_
+.. |t_brute_f| replace:: `Brute-force <knn_t_math_brute_force_>`_
+.. |t_kd_tree| replace:: `k-d tree <knn_t_math_kd_tree_>`_
+.. |t_input| replace:: `train_input <knn_t_api_input_>`_
+.. |t_result| replace:: `train_result <knn_t_api_result_>`_
+.. |t_op| replace:: `train(...) <knn_t_api_>`_
 
-.. |t_math| replace:: `Training <t_math_>`_
-.. |t_api| replace:: `API <t_api_>`_
-.. |t_brute_f| replace:: `Brute-force <t_math_brute_force_>`_
-.. |t_kd_tree| replace:: `k-d tree <t_math_kd_tree_>`_
-.. |t_input| replace:: `train_input <t_api_input_>`_
-.. |t_result| replace:: `train_result <t_api_result_>`_
-.. |t_op| replace:: `train(...) <t_api_>`_
-
-.. |i_math| replace:: `Inference <i_math_>`_
-.. |i_api| replace:: `API <i_api_>`_
-.. |i_brute_f| replace:: `Brute-force <i_math_brute_force_>`_
-.. |i_kd_tree| replace:: `k-d tree <i_math_kd_tree_>`_
-.. |i_input| replace:: `infer_input <i_api_input_>`_
-.. |i_result| replace:: `infer_result <i_api_result_>`_
-.. |i_op| replace:: `infer(...) <i_api_>`_
+.. |i_math| replace:: `Inference <knn_i_math_>`_
+.. |i_brute_f| replace:: `Brute-force <knn_i_math_brute_force_>`_
+.. |i_kd_tree| replace:: `k-d tree <knn_i_math_kd_tree_>`_
+.. |i_input| replace:: `infer_input <knn_i_api_input_>`_
+.. |i_result| replace:: `infer_result <knn_i_api_result_>`_
+.. |i_op| replace:: `infer(...) <knn_i_api_>`_
 
 =============== ============= ============= ======== =========== ============
  **Operation**  **Computational methods**     **Programming Interface**
@@ -37,7 +36,7 @@ training set.
 Mathematical formulation
 ------------------------
 
-.. _t_math:
+.. _knn_t_math:
 
 Training
 --------
@@ -49,7 +48,7 @@ the set of class labels, where :math:`y_i \in \{ 0, \ldots, c-1 \}`, :math:`1
 between the feature vectors in training and inference sets at the inference
 stage.
 
-.. _t_math_brute_force:
+.. _knn_t_math_brute_force:
 
 Training method: *brute-force*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,7 +56,7 @@ The training operation produces the model that stores all the feature vectors
 from the initial training set :math:`X`.
 
 
-.. _t_math_kd_tree:
+.. _knn_t_math_kd_tree:
 
 Training method: *k-d tree*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,7 +64,7 @@ The training operation builds a :math:`k`-:math:`d` tree that partitions the
 training set :math:`X` (for more details, see :txtref:`k-d Tree <kd_tree>`).
 
 
-.. _i_math:
+.. _knn_i_math:
 
 Inference
 ---------
@@ -100,23 +99,22 @@ m`, by performing the following steps:
       \quad 1 \leq j \leq m.
 
 
-.. _i_math_brute_force:
+.. _knn_i_math_brute_force:
 
 Inference method: *brute-force*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The inference operation determines the set :math:`N(x_j')` of the nearest
-feature vectors by iterating over all the pairs :math:`(x_j', x_i)` in the
-implementation defined order, :math:`1 \leq i \leq n`, :math:`1 \leq j \leq m`.
-The final prediction is computed according to the equations :eq:`p_predict` and
-:eq:`y_predict`.
+Brute-force inference method determines the set :math:`N(x_j')` of the
+nearest feature vectors by iterating over all the pairs :math:`(x_j', x_i)` in
+the implementation defined order, :math:`1 \leq i \leq n`, :math:`1 \leq j \leq
+m`. The final prediction is computed according to the equations :eq:`p_predict`
+and :eq:`y_predict`.
 
 
-.. _i_math_kd_tree:
+.. _knn_i_math_kd_tree:
 
 Inference method: *k-d tree*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The inference operation traverses the :math:`k`-:math:`d` tree to find feature
+K-d tree inference method traverses the :math:`k`-:math:`d` tree to find feature
 vectors associated with a leaf node that are closest to :math:`x_j'`, :math:`1
 \leq j \leq m`. The set :math:`\tilde{n}(x_j')` of the currently-known nearest
 :math:`k`-th neighbors is progressively updated during tree traversal. The
@@ -127,63 +125,81 @@ distance between :math:`x_j'` and the most distant feature vector from
 \equiv N(x_j')`. The final prediction is computed according to the equations
 :eq:`p_predict` and :eq:`y_predict`.
 
+-------------
+Usage example
+-------------
+Training
+--------
+.. onedal_code:: oneapi::dal::knn::example::run_training
+
+Inference
+---------
+.. onedal_code:: oneapi::dal::knn::example::run_inference
+
 
 ---------------------
 Programming Interface
 ---------------------
+All types and functions in this section shall be declared in the
+``oneapi::dal::knn`` namespace and be available via inclusion of the
+``oneapi/dal/algo/knn.hpp`` header file.
 
 Descriptor
 ----------
-.. onedal_class:: onedal::knn::descriptor
+.. onedal_class:: oneapi::dal::knn::descriptor
 
-Computational methods
----------------------
-.. onedal_compute_methods:: onedal::knn
+Method tags
+~~~~~~~~~~~
+.. onedal_tags_namespace:: oneapi::dal::knn::method
+
+Task tags
+~~~~~~~~~
+.. onedal_tags_namespace:: oneapi::dal::knn::task
 
 Model
 -----
-.. onedal_class:: onedal::knn::model
+.. onedal_class:: oneapi::dal::knn::model
 
 
-.. _t_api:
+.. _knn_t_api:
 
 Training :expr:`train(...)`
 --------------------------------
-.. _t_api_input:
+.. _knn_t_api_input:
 
 Input
 ~~~~~
-.. onedal_class:: onedal::knn::train_input
+.. onedal_class:: oneapi::dal::knn::train_input
 
 
-.. _t_api_result:
+.. _knn_t_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: onedal::knn::train_result
+.. onedal_class:: oneapi::dal::knn::train_result
 
 Operation
 ~~~~~~~~~
-.. onedal_func:: onedal::knn::train
+.. onedal_func:: oneapi::dal::knn::train
 
 
-.. _i_api:
+.. _knn_i_api:
 
 Inference :expr:`infer(...)`
 ----------------------------
-.. _i_api_input:
+.. _knn_i_api_input:
 
 Input
 ~~~~~
-.. onedal_class:: onedal::knn::infer_input
+.. onedal_class:: oneapi::dal::knn::infer_input
 
 
-.. _i_api_result:
+.. _knn_i_api_result:
 
 Result
 ~~~~~~
-.. onedal_class:: onedal::knn::infer_result
+.. onedal_class:: oneapi::dal::knn::infer_result
 
 Operation
 ~~~~~~~~~
-.. onedal_func:: onedal::knn::infer
+.. onedal_func:: oneapi::dal::knn::infer

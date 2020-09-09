@@ -74,10 +74,10 @@ oneCCL specification defines ``kvs`` class as a built-in KVS provided by oneCCL.
     
     public:
 
-    static constexpr size_t addr_max_size = 256;
-    using addr_t = array_class<char, addr_max_size>;
+    static constexpr size_t address_max_size = 256;
+    using address_type = array_class<char, address_max_size>;
 
-    const addr_t& get_addr() const;
+    const address_type& get_address() const;
 
     ~kvs() override;
 
@@ -96,9 +96,9 @@ Retrieving an address of built-in key-value store:
 
 .. code:: cpp
 
-    const addr_t& kvs::get_addr() const;
+    const address_type& kvs::get_address() const;
 
-return ``kvs::addr_t``
+return ``kvs::address_type``
     | the address of the key-value store
     | should be retrieved from the main built-in KVS and distributed to other processes for the built-in KVS creation
 
@@ -110,20 +110,20 @@ and be used to create key-value stores on other ranks:
 
 .. code:: cpp
 
-    kvs_t environment::create_main_kvs() const;
+    kvs environment::create_main_kvs() const;
 
-return ``kvs_t``
+return ``kvs``
     the main key-value store object
 
 Creating a new key-value store from main kvs address:
 
 .. code:: cpp
 
-    kvs_t environment::create_kvs(const kvs::addr_t& addr) const;
+    kvs environment::create_kvs(const kvs::addr_type& addr) const;
 
 addr
     the address of the main kvs
-return ``kvs_t``
+return ``kvs``
     key-value store object
 
 
@@ -132,7 +132,7 @@ return ``kvs_t``
 Communicator
 ************
 
-oneCCL specification defines ``communicator`` class that describes a group of communicating ranks, where rank is a single process. ``communicator`` defines collective operations on host memory buffers.
+oneCCL specification defines ``communicator`` class that describes a group of communicating ranks, where rank is a single process. ``communicator`` defines communication operations on host memory buffers.
 
 The ``environment`` class shall provide the ability to create an instance of ``communicator`` class.
 
@@ -140,9 +140,7 @@ Creating a new host communicator with user-supplied size, rank, and kvs:
 
 .. code:: cpp
 
-    using communicator_t = unique_ptr_class<communicator>;
-
-    communicator_t environment::create_communicator(
+    communicator environment::create_communicator(
         const size_t size,
         const size_t rank,
         shared_ptr_class<kvs_interface> kvs) const;
@@ -153,10 +151,10 @@ rank
     user-supplied rank
 kvs
     key-value store for ranks wire-up
-return ``communicator_t``
+return ``communicator``
     communicator object
 
-``communicator`` shall provide methods to retrieve the rank that corresponds to the communicator object and the number of ranks in the communicator. It shall also provide collective communication operations on host memory buffers.
+``communicator`` shall provide methods to retrieve the rank that corresponds to the communicator object and the number of ranks in the communicator. It shall also provide communication operations on host memory buffers.
 
 Retrieving the rank in a communicator:
 
@@ -185,7 +183,7 @@ return ``size_t``
 Device Communicator
 *******************
 
-oneCCL specification defines ``device_communicator`` class that describes a group of communicating ranks, where rank is a single device. ``device_communicator`` defines collective operations on device memory buffers.
+oneCCL specification defines ``device_communicator`` class that describes a group of communicating ranks, where rank is a single device. ``device_communicator`` defines communication operations on device memory buffers.
 
 .. note::
     Here and below, a device, a device memory, a device context, a queue, and an event are defined in the scope of SYCL device runtime.
@@ -196,12 +194,10 @@ Creating a new device communicator with user-supplied size, rank, and kvs:
 
 .. code:: cpp
 
-    using device_communicator_t = unique_ptr_class<device_communicator>;
-
     using native_device_type = sycl::device;
     using native_context_type = sycl::context;
 
-    vector_class<device_communicator_t> environment::create_device_communicators(
+    vector_class<device_communicator> environment::create_device_communicators(
         const size_t size,
         vector_class<pair_class<size_t, native_device_type>>& rank_device_map,
         native_context_type& context,
@@ -215,10 +211,10 @@ context
     device context
 kvs
     key-value store for ranks wire-up
-return ``vector_class<device_communicator_t>``
+return ``vector_class<device_communicator>``
     a vector of device communicators
 
-``device_communicator`` shall provide methods to retrieve the rank, the device, and the device context that correspond to the communicator object as well as the number of ranks in the communicator. It shall also provide collective communication operations on device memory buffers.
+``device_communicator`` shall provide methods to retrieve the rank, the device, and the device context that correspond to the communicator object as well as the number of ranks in the communicator. It shall also provide communication operations on device memory buffers.
 
 Retrieving the rank in a communicator:
 
@@ -287,12 +283,11 @@ Creating a new event from ``sycl::event`` object:
 .. code:: cpp
 
     using native_event_type = sycl::event;
-    using event_t = unique_ptr_class<event>;
-    event_t environment::create_event(native_event_type& native_event) const;
+    event environment::create_event(native_event_type& native_event) const;
 
 native_event
     the existing native handle for an event
-return ``event_t``
+return ``event``
     an event object
 
 
@@ -312,12 +307,11 @@ Creating a new stream from ``sycl::queue`` object:
 .. code:: cpp
 
     using native_stream_type = sycl::queue;
-    using stream_t = unique_ptr_class<stream>;
-    stream_t environment::create_stream(native_stream_type& native_stream) const;
+    stream environment::create_stream(native_stream_type& native_stream) const;
 
 native_stream
     the existing native handle for a stream
-return ``stream_t``
+return ``stream``
     a stream object
 
 

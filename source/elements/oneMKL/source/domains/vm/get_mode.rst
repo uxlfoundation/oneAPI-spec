@@ -16,19 +16,25 @@ get_mode
       .. rubric:: Syntax
          :class: sectiontitle
 
+      .. code-block:: cpp
 
-      .. cpp:function:: uint64_t oneapi::mkl::vm::get_mode( queue& exec_queue )
+
+            namespace oneapi::mkl::vm {
+
+                oneapi::mkl::vm::mode get_mode(
+                    sycl::queue& exec_queue);
+
+            } // namespace oneapi::mkl::vm
+
+
+
 
       .. rubric:: Description
          :class: sectiontitle
 
 
       The function get_mode function returns the global VM ``mode``
-      parameter that controls accuracy, handling of denormalized
-      numbers, and error handling options. The variable value is a
-      combination by bitwise OR ( \| ) of the values listed in the
-      following table.
-
+      parameter that controls accuracy for a given queue.
 
       .. list-table::
          :header-rows: 1
@@ -43,16 +49,10 @@ get_mode
            - Low accuracy versions of VM functions.
          * - ``oneapi::mkl::vm::mode::ep``
            - Enhanced performance accuracy versions of VM functions.
-         * - Denormalized Numbers Handling Control
-           -
-         * - ``oneapi::mkl::vm::mode::ftzdazon``
-           - Faster processing of denormalized inputs is enabled.
-         * - ``oneapi::mkl::vm::mode::ftzdazoff``
-           - Faster processing of denormalized inputs is disabled.
-         * - Other
-           -
          * - ``oneapi::mkl::vm::mode::not_defined``
-           - VM status not defined.
+           - VM mode not defined. It means that no special provisions
+             for accuracy have been made for this queue.
+             See :ref:`onemkl_vm_setmode` for details.
 
 
 .. container:: section
@@ -73,8 +73,8 @@ get_mode
       :class: sectiontitle
 
 
-   return value (old_mode)
-      Specifies the global VM mode.
+   return value
+      The current global VM mode for the queue ``exec_queue``.
 
 
 .. container:: familylinks
@@ -83,5 +83,3 @@ get_mode
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_service_functions`
-
-

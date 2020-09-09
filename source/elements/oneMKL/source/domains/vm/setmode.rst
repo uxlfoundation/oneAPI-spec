@@ -17,8 +17,17 @@ set_mode
       .. rubric:: Syntax
          :class: sectiontitle
 
+      .. code-block:: cpp
 
-      .. cpp:function:: uint64_t oneapi::mkl::vm::set_mode(queue& exec_queue, uint64_t new_mode )
+
+            namespace oneapi::mkl::vm {
+
+                oneapi::mkl::vm::mode set_mode(
+                    sycl::queue& exec_queue,
+                    oneapi::mkl::vm::mode new_mode);
+
+            } // namespace oneapi::mkl::vm
+
 
       .. rubric:: Description
          :class: sectiontitle
@@ -27,25 +36,9 @@ set_mode
       The set_mode function sets a new mode for VM functions according
       to the ``new_mode`` parameter and returns the previous VM mode.
       The mode change has a global effect on all the VM functions within
-      a thread.
+      a queue.
 
-
-      The ``mode`` parameter is designed to control accuracy and
-      handling of denormalized numbers. You can obtain all other
-      possible values of the ``mode`` parameter using bitwise OR ( \| )
-      operation to combine one value for handling of denormalized
-      numbers.
-
-
-      The oneapi::mkl::vm::mode::ftzdazon is specifically designed to improve the
-      performance of computations that involve denormalized numbers at
-      the cost of reasonable accuracy loss. This mode changes the
-      numeric behavior of the functions: denormalized input values are
-      treated as zeros (DAZ = denormals-are-zero) and denormalized
-      results are flushed to zero (FTZ = flush-to-zero). Accuracy loss
-      may occur if input and/or output values are close to denormal
-      range.
-
+      The ``mode`` parameter is designed to control accuracy for a given queue.
 
       .. list-table::
          :header-rows: 1
@@ -60,27 +53,12 @@ set_mode
            - Low accuracy versions of VM functions.
          * - ``oneapi::mkl::vm::mode::ep``
            - Enhanced performance accuracy versions of VM functions.
-         * - Denormalized Numbers Handling Control
-           -
-         * - ``oneapi::mkl::vm::mode::ftzdazon``
-           - Faster processing of denormalized inputs is enabled.
-         * - ``oneapi::mkl::vm::mode::ftzdazoff``
-           - Faster processing of denormalized inputs is disabled.
-         * - Other
-           -
          * - ``oneapi::mkl::vm::mode::not_defined``
-           - VM status not defined.
+           - VM mode not defined. This has no effect.
 
+      The assumed value of the ``mode`` parameter for a new queue, if ``set_mode``
+      is not called is ``oneapi::mkl::vm::mode::ha``.
 
-
-
-   The default value of the mode parameter is:
-
-
-   ::
-
-
-      oneapi::mkl::vm::mode::ha | oneapi::mkl::vm::mode::ftdazoff
 
 
 .. container:: section

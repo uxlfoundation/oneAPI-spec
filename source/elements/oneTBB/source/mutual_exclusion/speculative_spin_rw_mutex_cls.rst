@@ -46,6 +46,8 @@ For processors that support hardware transactional memory, ``speculative_spin_rw
 Member classes
 --------------
 
+.. namespace:: tbb::speculative_spin_rw_mutex
+	       
 .. cpp:class:: scoped_lock
 
     Corresponding ``scoped_lock`` class. See the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`.

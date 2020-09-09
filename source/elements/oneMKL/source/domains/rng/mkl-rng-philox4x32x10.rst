@@ -9,7 +9,7 @@ The Philox4x32x10 counter-based pseudorandom number generator.
 
 .. rubric:: Description
 
-Philox4x32x10 engine is a keyed family of generator of counter-based BRNG. The state consists of 128-bit integer counter :math:`c` and two 32-bits keys :math:`k_0` and :math:`k_1`.
+The Philox4x32x10 engine is a keyed family of generator of counter-based BRNG. The state consists of 128-bit integer counter :math:`c` and two 32-bits keys :math:`k_0` and :math:`k_1`.
 
 .. container:: section
 
@@ -49,16 +49,26 @@ class philox4x32x10
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class philox4x32x10 {
     public:
-        philox4x32x10(sycl::queue& queue, std::uint64_t seed);
-        philox4x32x10(sycl::queue& queue, std::initializer_list<std::uint64_t> seed);
-        philox4x32x10 (const philox4x32x10& other);
-        philox4x32x10& operator=(const philox4x32x10& other);
-        ~philox4x32x10();
-    };
+    static constexpr std::uint64_t default_seed = 0;
 
-.. cpp:class:: oneapi::mkl::rng::philox4x32x10
+    philox4x32x10(sycl::queue queue, std::uint64_t seed = default_seed);
+
+    philox4x32x10(sycl::queue queue, std::initializer_list<std::uint64_t> seed);
+
+    philox4x32x10(const philox4x32x10& other);
+
+    philox4x32x10(philox4x32x10&& other);
+
+    philox4x32x10& operator=(const philox4x32x10& other);
+
+    philox4x32x10& operator=(philox4x32x10&& other);
+
+    ~philox4x32x10();
+    };
+    }
 
 .. container:: section
 
@@ -69,41 +79,51 @@ class philox4x32x10
 
         * - Routine
           - Description
-        * - `philox4x32x10(sycl::queue& queue, std::uint64_t seed)`_
+        * - `philox4x32x10(sycl::queue queue, std::uint64_t seed = default_seed)`_
           - Constructor for common seed initialization of the engine
-        * - `philox4x32x10(sycl::queue& queue, std::initializer_list<std::uint64_t> seed)`_
+        * - `philox4x32x10(sycl::queue queue, std::initializer_list<std::uint64_t> seed)`_
           - Constructor for extended seed initialization of the engine
         * - `philox4x32x10(const philox4x32x10& other)`_
           - Copy constructor
+        * - `philox4x32x10(philox4x32x10&& other)`_
+          - Move constructor
+        * - `philox4x32x10& operator=(const philox4x32x10& other)`_
+          - Copy assignement operator
+        * - `philox4x32x10& operator=(philox4x32x10&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`philox4x32x10(sycl::queue& queue, std::uint64_t seed)`:
+    .. _`philox4x32x10(sycl::queue queue, std::uint64_t seed = default_seed)`:
 
-    .. cpp:function:: philox4x32x10::philox4x32x10(sycl::queue& queue, std::uint64_t seed)
+    .. code-block:: cpp
+
+      philox4x32x10::philox4x32x10(sycl::queue queue, std::uint64_t seed = default_seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
-            The initial conditions of the generator state, assume :math:`k = seed, c = 0`, where :math:`k` is 64-bit key, :math:`c` is 128-bit counter.
+            The initial conditions of the generator state, assume :math:`k = seed, c = 0`, where :math:`k` is a 64-bit key, :math:`c` is a 128-bit counter.
 
-    .. _`philox4x32x10(sycl::queue& queue, std::initializer_list<std::uint64_t> seed)`:
+    .. _`philox4x32x10(sycl::queue queue, std::initializer_list<std::uint64_t> seed)`:
 
-    .. cpp:function:: philox4x32x10::philox4x32x10(sycl::queue& queue, std::initializer_list<std::uint64_t> seed)
+    .. code-block:: cpp
+
+      philox4x32x10::philox4x32x10(sycl::queue queue, std::initializer_list<std::uint64_t> seed)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume
@@ -119,29 +139,54 @@ class philox4x32x10
 
     .. _`philox4x32x10(const philox4x32x10& other)`:
 
-    .. cpp:function:: philox4x32x10::philox4x32x10(const philox4x32x10& other)
+    .. code-block:: cpp
+
+      philox4x32x10::philox4x32x10(const philox4x32x10& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``philox4x32x10`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``philox4x32x10`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+  
+    .. _`philox4x32x10(philox4x32x10&& other)`:
 
-.. container:: section
+    .. code-block:: cpp
 
-    .. rubric:: Subsequence selection functions support
+      philox4x32x10::philox4x32x10(philox4x32x10&& other)
 
-    .. list-table::
-        :header-rows: 1
+    .. container:: section
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``philox4x32x10`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`philox4x32x10& operator=(const philox4x32x10& other)`:
+
+    .. code-block:: cpp
+
+      philox4x32x10::philox4x32x10& operator=(const philox4x32x10& other)
+  
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+          Valid ``philox4x32x10`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`philox4x32x10& operator=(philox4x32x10&& other)`:
+
+    .. code-block:: cpp
+
+      philox4x32x10::philox4x32x10& operator=(philox4x32x10&& other)
+  
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+          Valid ``philox4x32x10`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`

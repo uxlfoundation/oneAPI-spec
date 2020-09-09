@@ -48,7 +48,11 @@ are returned in descending order. The first :math:`\min(m, n)` columns of
 
   .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::lapack::gesvd(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job      jobvt, std::int64_t m, std::int64_t n, cl::sycl::buffer<T,1> &a,      std::int64_t lda, cl::sycl::buffer<realT,1> &s, cl::sycl::buffer<T,1> &u, std::int64_t      ldu, cl::sycl::buffer<T,1> &vt, std::int64_t ldvt, cl::sycl::buffer<T,1> &scratchpad,      std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void gesvd(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job jobvt, std::int64_t m, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1> &s, cl::sycl::buffer<T,1> &u, std::int64_t ldu, cl::sycl::buffer<T,1> &vt, std::int64_t ldvt, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -171,6 +175,25 @@ vt
 scratchpad
    Buffer holding scratchpad memory to be used by routine for storing intermediate results.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info=-i``, the :math:`i`-th parameter had an illegal value.
+
+   If ``info=i``, then if ``bdsqr`` did not converge, :math:`i` specifies
+   how many superdiagonals of the intermediate bidiagonal form :math:`B`
+   did not converge to zero, and ``scratchpad(2:min(m,n))`` contains the unconverged
+   superdiagonal elements of an upper bidiagonal matrix :math:`B` whose
+   diagonal is in ``s`` (not necessarily sorted). :math:`B` satisfies
+   :math:`A = UBV^{T}`, so it has the same singular values as
+   :math:`A`, and singular vectors related by :math:`U` and :math:`V^{T}`.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
+
 gesvd (USM Version)
 ----------------------
 
@@ -197,7 +220,11 @@ are returned in descending order. The first :math:`\min(m, n)` columns of
   
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::gesvd(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job      jobvt, std::int64_t m, std::int64_t n, T *a,      std::int64_t lda, RealT *s, T *u, std::int64_t      ldu, T *vt, std::int64_t ldvt, T *scratchpad,      std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event gesvd(cl::sycl::queue &queue, onemkl::job jobu, onemkl::job jobvt, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, RealT *s, T *u, std::int64_t ldu, T *vt, std::int64_t ldvt, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -322,6 +349,25 @@ vt
 
 scratchpad
    Pointer to scratchpad memory to be used by routine for storing intermediate results.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info=-i``, the :math:`i`-th parameter had an illegal value.
+
+   If ``info=i``, then if ``bdsqr`` did not converge, :math:`i` specifies
+   how many superdiagonals of the intermediate bidiagonal form :math:`B`
+   did not converge to zero, and ``scratchpad(2:min(m,n))`` contains the unconverged
+   superdiagonal elements of an upper bidiagonal matrix :math:`B` whose
+   diagonal is in ``s`` (not necessarily sorted). :math:`B` satisfies
+   :math:`A = UBV^{T}`, so it has the same singular values as
+   :math:`A`, and singular vectors related by :math:`U` and :math:`V^{T}`.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should not be less than value return by `detail()` method of exception object.
 
 .. container:: section
 

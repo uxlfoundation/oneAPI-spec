@@ -28,7 +28,12 @@ ormqr_scratchpad_size
 
   .. rubric:: Syntax
 
-.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::ormqr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right,         onemkl::transpose trans, std::int64_t m, std::int64_t n,         std::int64_t k, std::int64_t lda, std::int64_t ldc,         std::int64_t &scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t ormqr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
+    }
 
 .. container:: section
 
@@ -66,6 +71,14 @@ lda
 
 ldc
    The leading dimension of ``c``.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
 
 .. container:: section
 

@@ -25,6 +25,9 @@ LAPACK Linear Equation Routines
          * -     :ref:`onemkl_lapack_geqrf`
            -     :ref:`onemkl_lapack_geqrf_scratchpad_size`
            -     Computes the QR factorization of a general m-by-n matrix.
+         * -     :ref:`onemkl_lapack_gerqf`
+           -     :ref:`onemkl_lapack_gerqf_scratchpad_size`
+           -     Computes the RQ factorization of a general m-by-n matrix.
          * -     :ref:`onemkl_lapack_getrf`
            -     :ref:`onemkl_lapack_getrf_scratchpad_size`
            -     Computes the LU factorization of a general m-by-n matrix.   
@@ -34,12 +37,18 @@ LAPACK Linear Equation Routines
          * -     :ref:`onemkl_lapack_getrs`
            -     :ref:`onemkl_lapack_getrs_scratchpad_size`
            -     Solves a system of linear equations with an LU-factored square coefficient matrix, with multiple right-hand sides.    
+         * -     :ref:`onemkl_lapack_hetrf`
+           -     :ref:`onemkl_lapack_hetrf_scratchpad_size`
+           -     Computes the Bunch-Kaufman factorization of a complex Hermitian matrix.
          * -     :ref:`onemkl_lapack_orgqr`
            -     :ref:`onemkl_lapack_orgqr_scratchpad_size`
            -     Generates the real orthogonal matrix :math:`Q` of the QR factorization formed by geqrf.
          * -     :ref:`onemkl_lapack_ormqr`
            -     :ref:`onemkl_lapack_ormqr_scratchpad_size`
            -     Multiplies a real matrix by the orthogonal matrix :math:`Q` of the QR factorization formed by geqrf.
+         * -     :ref:`onemkl_lapack_ormrq`
+           -     :ref:`onemkl_lapack_ormrq_scratchpad_size`
+           -     Multiplies a real matrix by the orthogonal matrix :math:`Q` of the RQ factorization formed by gerqf.
          * -     :ref:`onemkl_lapack_potrf`
            -     :ref:`onemkl_lapack_potrf_scratchpad_size`
            -     Computes the Cholesky factorization of a symmetric (Hermitian) positive-definite matrix.   
@@ -61,6 +70,10 @@ LAPACK Linear Equation Routines
          * -     :ref:`onemkl_lapack_unmqr`
            -     :ref:`onemkl_lapack_unmqr_scratchpad_size`
            -     Multiplies a complex matrix by the unitary matrix :math:`Q` of the QR factorization formed by geqrf.
+         * -     :ref:`onemkl_lapack_unmrq`
+           -     :ref:`onemkl_lapack_unmrq_scratchpad_size`
+           -     Multiplies a complex matrix by the unitary matrix :math:`Q` of the RQ factorization formed by gerqf.
+
 
 
 
@@ -70,16 +83,22 @@ LAPACK Linear Equation Routines
 
     geqrf
     geqrf_scratchpad_size
+    gerqf
+    gerqf_scratchpad_size
     getrf
     getrf_scratchpad_size
     getri
     getri_scratchpad_size
     getrs
     getrs_scratchpad_size
+    hetrf
+    hetrf_scratchpad_size
     orgqr
     orgqr_scratchpad_size
     ormqr
     ormqr_scratchpad_size
+    ormrq
+    ormrq_scratchpad_size
     potrf
     potrf_scratchpad_size
     potri
@@ -94,3 +113,5 @@ LAPACK Linear Equation Routines
     ungqr_scratchpad_size
     unmqr
     unmqr_scratchpad_size
+    unmrq
+    unmrq_scratchpad_size

@@ -21,12 +21,53 @@ linearfrac
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::linearfrac(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, T scalea, T shifta, T scaleb, T shiftb, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event linearfrac(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& b,
+                    T scalea,
+                    T shifta,
+                    T scaleb,
+                    T shiftb,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::linearfrac(queue& exec_queue, int64_t n, T* a, T* b, T scalea, T shifta, T scaleb, T shiftb, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event linearfrac(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* b,
+                    T scalea,
+                    T shifta,
+                    T scaleb,
+                    T shiftb,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``linearfrac`` supports the following precisions.
 
@@ -59,8 +100,8 @@ linearfrac
 
    The linearfrac function is implemented in the EP accuracy mode only,
    therefore no special values are defined for this function. If used in
-   HA or LA mode, linearfrac sets the VM Error Status to
-   oneapi::mkl::vm::status::accuracy_warning. Correctness is guaranteed within the
+   HA or LA mode, linearfrac sets the VM status code to
+   ``oneapi::mkl::vm::status::accuracy_warning``. Correctness is guaranteed within the
    threshold limitations defined for each input parameter (see the table
    below); otherwise, the behavior is unspecified.
 
@@ -244,7 +285,15 @@ linearfrac
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks

@@ -39,6 +39,8 @@ otherwise, it reverts to using ``std::malloc`` and ``std::free``.
 Member Functions
 ----------------
 
+.. namespace:: tbb::tbb_allocator
+	       
 .. cpp:function:: T* allocate(size_type n)
 
     Allocates ``n * sizeof(T)`` bytes. Returns a pointer to the allocated memory.

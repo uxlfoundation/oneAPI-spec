@@ -9,7 +9,7 @@ Class is used for generation of Cauchy distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Cauchy distributed with displacement :math:`a`, and scale parameter :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Cauchy distributed with displacement :math:`a`, and scale parameter :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -32,6 +32,7 @@ class cauchy
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = cauchy_method::by_default>
     class cauchy {
     public:
@@ -42,9 +43,7 @@ class cauchy
         RealType a() const;
         RealType b() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::cauchy_method::by_default> \
-                oneapi::mkl::rng::cauchy
+    }
 
 .. container:: section
 
@@ -65,7 +64,7 @@ class cauchy
                 * ``oneapi::mkl::rng::cauchy_method::by_default``
                 * ``oneapi::mkl::rng::cauchy_method::icdf``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -91,23 +90,27 @@ class cauchy
 
     .. container:: section
 
-        .. cpp:type:: cauchy::method_type = Method
+        .. code-block:: cpp
+
+            cauchy::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: cauchy::result_type = RealType
+        .. code-block:: cpp
+
+            cauchy::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -117,7 +120,9 @@ class cauchy
 
         .. _`cauchy()`:
 
-        .. cpp:function:: cauchy::cauchy()
+        .. code-block:: cpp
+
+            cauchy::cauchy()
 
         .. container:: section
 
@@ -129,7 +134,9 @@ class cauchy
 
         .. _`explicit cauchy(RealType a, RealType b)`:
 
-        .. cpp:function:: explicit cauchy::cauchy(RealType a, RealType b)
+        .. code-block:: cpp
+
+            explicit cauchy::cauchy(RealType a, RealType b)
 
         .. container:: section
 
@@ -137,6 +144,12 @@ class cauchy
 
             Constructor with parameters. `a` is a displacement value, `b` is a scalefactor value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -146,7 +159,9 @@ class cauchy
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType cauchy::a() const
+        .. code-block:: cpp
+
+            RealType cauchy::a() const
 
         .. container:: section
 
@@ -158,7 +173,9 @@ class cauchy
 
         .. _`RealType b() const`:
 
-        .. cpp:function:: RealType cauchy::b() const
+        .. code-block:: cpp
+
+            RealType cauchy::b() const
 
         .. container:: section
 

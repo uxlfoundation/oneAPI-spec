@@ -3,6 +3,8 @@
 
 .. default-domain:: cpp
 
+.. include:: /elements/oneDNN/source/replacements.inc.rst
+
 ##########
 Primitives
 ##########
@@ -41,32 +43,41 @@ computation from more abstract to more concrete:
   describes shapes of source, destination, and weights tensors, propagation
   kind (forward, backward with respect to data or weights), and other
   implementation-independent parameters. The shapes are usually described as
-  memory descriptors (:struct:`dnnl::memory::desc`).
+  memory descriptors (|memory::desc|).
 
-* Primitive descriptors are at an
-  abstraction level in between operation descriptors and primitives and can be
-  used to inspect details of a specific primitive implementation like expected
-  memory formats via queries to implement memory format propagation (see
-  Memory format propagation) without having to fully instantiate a primitive.
+* Primitive descriptors are at the abstraction level in between operation
+  descriptors and primitives. They combine both an operation descriptor and
+  primitive attributes. Primitive descriptors can be used to query various
+  primitive implementation details and, for example, to implement :ref:`memory
+  format propagation <memory_format_propagation-label>` by inspecting expected
+  memory formats via queries without having to fully instantiate a primitive.
+  oneDNN may contain multiple implementations for the same primitive that can
+  be used to perform the same particular computation. Primitive descriptors
+  allow one-way iteration which allows inspecting multiple implementations.
+  The library is expected to order the implementations from most to least
+  preferred, so it should always be safe to use the one that is chosen by
+  default.
 
-* Primitives, which are most concrete, are actual computations that can be
-  executed.
+* Primitives, which are the most concrete, embody actual computations that can
+  be executed.
 
 On the API level:
 
 * Primitives are represented as a class on the top level of the ``dnnl``
-  namespace that have :struct:`dnnl::primimitive` as their base class, for
-  example :struct:`dnnl::convolution_forward`
+  namespace that have |primitive| as their base class, for
+  example |convolution_forward|
 
 * Operation descriptors are represented as classes named ``desc`` and nested
   within the corresponding primitives classes, for example
-  :struct:`dnnl::convolution_forward::desc`.
+  |convolution_forward::desc|. The
+  |primitive_desc::next_impl| member function provides a way to
+  iterate over implementations.
 
 * Primitive descriptors are represented as classes named ``primitive_desc``
   and nested within the corresponding primitive classes that have
-  :struct:`dnnl::primitive_desc_base` as their base class (except for RNN
-  primitives that derive from :struct:`dnnl::rnn_primitive_desc_base`), for
-  example :struct:`dnnl::convolution_forward::primitive_desc`
+  |primitive_desc_base| as their base class (except for RNN
+  primitives that derive from |rnn_primitive_desc_base|), for
+  example |convolution_forward::primitive_desc|
 
 .. code-block:: c++
 
@@ -84,9 +95,9 @@ On the API level:
 The sequence of actions to create a primitive is:
 
 1. Create an operation descriptor via, for example,
-   :any:`dnnl::convolution_forward::desc`. The operation descriptor can
+   |convolution_forward::desc|. The operation descriptor can
    contain memory descriptors with placeholder
-   :any:`dnnl::memory::format_tag::any` memory formats if the primitive
+   |memory::format_tag::any| memory formats if the primitive
    supports it.
 2. Create a primitive descriptor based on the operation descriptor, engine and
    attributes.

@@ -10,12 +10,12 @@ Example
 
 Consider a simple oneCCL ``allreduce`` example for GPU:
 
-1. Create oneCCL device communicator objects with user-supplied size, rank <-> SYCL device mapping, SYCL context and kvs:
+1. Create oneCCL device communicator objects with user-supplied size, rank <-> SYCL device mapping, SYCL context and key-value store:
 
 .. code:: cpp
 
     auto env = environment::instance();
-    auto comms = env.create_device_communicators(size, rank_sycl_dev_map, sycl_ctx, kvs);
+    auto comms = env.create_device_communicators(size, rank_to_sycl_dev_map, sycl_ctx, kvs);
 
 2. Create oneCCL stream object from user-supplied ``sycl::queue`` object:
 
@@ -68,7 +68,7 @@ Consider a simple oneCCL ``allreduce`` example for GPU:
 
 .. code:: cpp
 
-    std::vector<request_t> reqs;
+    std::vector<request> reqs;
     for (auto& comm : comms) {
         reqs.push_back(comm->allreduce(send_buf,
                                        recv_buf,

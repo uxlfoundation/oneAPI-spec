@@ -87,9 +87,9 @@ Assignment
         node-handle& operator=( node-handle&& other );
 
     Transfers ownership of the node from ``other`` to ``*this``.
-    If ``*this`` was not empty before transfering, destroys and deallocates the stored node.
+    If ``*this`` was not empty before transferring, destroys and deallocates the stored node.
 
-    Move assignes the stored allocator if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
+    Move assigns the stored allocator if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
     is ``true``.
 
     ``other`` is left in an empty state.

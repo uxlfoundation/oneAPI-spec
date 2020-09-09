@@ -9,7 +9,7 @@ Class is used for generation of Rayleigh distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Rayleigh distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Rayleigh distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
 
 The Rayleigh distribution is a special case of the :ref:`onemkl_rng_weibull` distribution, where the shape parameter `\alpha` = 2 .
 
@@ -34,6 +34,7 @@ class rayleigh
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename RealType = float, typename Method = rayleigh_method::by_default>
     class rayleigh {
     public:
@@ -44,9 +45,7 @@ class rayleigh
         RealType a() const;
         RealType b() const;
     };
-
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::rayleigh_method::by_default> \
-                oneapi::mkl::rng::rayleigh
+    }
 
 .. container:: section
 
@@ -68,7 +67,7 @@ class rayleigh
                 * ``oneapi::mkl::rng::rayleigh_method::icdf``
                 * ``oneapi::mkl::rng::rayleigh_method::icdf_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -94,23 +93,27 @@ class rayleigh
 
     .. container:: section
 
-        .. cpp:type:: rayleigh::method_type = Method
+        .. code-block:: cpp
+
+            rayleigh::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: rayleigh::result_type = RealType
+        .. code-block:: cpp
+
+            rayleigh::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -120,7 +123,9 @@ class rayleigh
 
         .. _`rayleigh()`:
 
-        .. cpp:function:: rayleigh::rayleigh()
+        .. code-block:: cpp
+
+            rayleigh::rayleigh()
 
         .. container:: section
 
@@ -132,7 +137,9 @@ class rayleigh
 
         .. _`explicit rayleigh(RealType a, RealType b)`:
 
-        .. cpp:function:: explicit rayleigh::rayleigh(RealType a, RealType b)
+        .. code-block:: cpp
+
+            explicit rayleigh::rayleigh(RealType a, RealType b)
 
         .. container:: section
 
@@ -140,6 +147,12 @@ class rayleigh
 
             Constructor with parameters. `a` is a displacement value, `b` is a scalefactor value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -149,7 +162,9 @@ class rayleigh
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType rayleigh::a() const
+        .. code-block:: cpp
+
+            RealType rayleigh::a() const
 
         .. container:: section
 
@@ -161,7 +176,9 @@ class rayleigh
 
         .. _`RealType b() const`:
 
-        .. cpp:function:: RealType rayleigh::b() const
+        .. code-block:: cpp
+
+            RealType rayleigh::b() const
 
         .. container:: section
 

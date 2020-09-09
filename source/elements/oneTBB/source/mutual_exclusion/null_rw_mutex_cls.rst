@@ -39,6 +39,8 @@ It is useful for instantiating a template that expects a ReaderWriterMutex, but 
 Member classes
 --------------
 
+.. namespace:: tbb::num_rw_mutex
+
 .. cpp:class:: scoped_lock
 
     Corresponding ``scoped_lock`` class. See the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`.

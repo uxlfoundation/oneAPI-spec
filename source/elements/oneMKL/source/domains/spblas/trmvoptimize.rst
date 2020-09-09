@@ -20,8 +20,16 @@ optimize_trmv (Buffer version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::sparse::optimize_trmv         (sycl::queue & queue, oneapi::mkl::uplo uplo_val, oneapi::mkl::transpose         transpose_val, oneapi::mkl::diag diag_val, matrix_handle_t handle)
+.. code-block:: cpp
 
+   namespace oneapi::mkl::sparse {
+
+      void optimize_trmv (sycl::queue                          &queue,
+                          oneapi::mkl::uplo                    uplo_val,
+                          oneapi::mkl::transpose               transpose_val,
+                          oneapi::mkl::diag                    diag_val,
+                          oneapi::mkl::sparse::matrix_handle_t handle);
+   }
 
 .. container:: section
 
@@ -57,10 +65,20 @@ optimize_trmv (Buffer version)
 
 .. container:: section
 
-    .. rubric:: Return Values
+    .. rubric:: Throws
        :class: sectiontitle
 
-    None
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 
 .. _onemkl_sparse_optimize_trmv_usm:
@@ -70,8 +88,17 @@ optimize_trmv (USM version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::sparse::optimize_trmv         (sycl::queue & queue, oneapi::mkl::uplo uplo_val, oneapi::mkl::transpose         transpose_val, oneapi::mkl::diag diag_val, matrix_handle_t handle, sycl::vector_class<sycl::event> & dependencies)
+.. code-block:: cpp
 
+   namespace oneapi::mkl::sparse {
+
+      sycl::event optimize_trmv (sycl::queue                          &queue,
+                                 oneapi::mkl::uplo                    uplo_val,
+                                 oneapi::mkl::transpose               transpose_val,
+                                 oneapi::mkl::diag                    diag_val,
+                                 oneapi::mkl::sparse::matrix_handle_t handle,
+                                 sycl::vector_class<sycl::event>      &dependencies);
+   }
 
 .. container:: section
 
@@ -108,6 +135,23 @@ optimize_trmv (USM version)
    dependencies
        List of events that oneapi::mkl::sparse::optimize_trmv routine depends on.
 
+
+.. container:: section
+
+    .. rubric:: Throws
+       :class: sectiontitle
+
+    This routine shall throw the following exceptions if the associated condition is detected.
+    An implementation may throw additional implementation-specific exception(s)
+    in case of error conditions not covered here.
+
+    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
 .. container:: section
 

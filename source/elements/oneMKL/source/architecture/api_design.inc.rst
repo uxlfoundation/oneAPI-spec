@@ -24,6 +24,17 @@ namespace                 oneMKL domain or content
 ``oneapi::mkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
 ========================  =======================================================================================================
 
+.. note::
+   :name: Implementation Requirement
+
+   Inside each oneMKL domain, there are many routines, classes, enums and objects defined which constitute the breadth and scope of that oneMKL domain.  
+   It is permitted for a library implementation of the oneMKL specification to implement either all, one or more than one of the domains in oneMKL. However, within an implementation of a specific domain, all relevant routines, classes, enums and objects (including those relevant enums and objects which live outside a particular domain in the general ``oneapi::mkl`` namespace must be both declared and defined in the library so that an application that uses that domain could build and link against that library implementation successfully.
+
+   It is however acceptable to throw the runtime excption :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>` inside of the routines or class member functions in that domain that have not been fully implemented.  
+   For instance, a library may choose to implement the oneMKL BLAS functionality and in particular may choose to implement only the :ref:`onemkl_blas_gemm` api for their library, in which case they must also include all the other blas namespaced routines and throw the :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>` exception inside all the others.  
+   
+   In such a case, the implemented routines in such a library should be communicated clearly and easily understood by users of that library.
+
 
 .. _onemkl_cpp_datatypes:
 
@@ -212,3 +223,9 @@ Each enumeration value comes with two names: A single-character name (the tradit
               -  Index arrays for an input matrix are provided using zero-based (C/C++ style) index values.  That is, indices start at 0.
             * -  ``index_base::one``
               -  Index arrays for an input matrix are provided using one-based (Fortran style) index values.  That is, indices start at 1.
+
+
+.. note::
+        :ref:`onemkl_appendix` may contain other API design decisions or recommendations that may be of use to the general developer of oneMKL, but which may not necessarily be part of the oneMKL specification.
+
+

@@ -32,7 +32,7 @@ In both cases:
 
 ``alpha`` is a complex scalar and ``beta`` is a real scalar.
 
-``C`` is a Hermitian matrix and ``A, B`` are general matrices.
+``C`` is a Hermitian matrix and ``A`` , ``B`` are general matrices.
 
 The inner dimension of both matrix multiplications is ``k``.
 
@@ -55,8 +55,40 @@ her2k (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::her2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T_real beta, sycl::buffer<T,1> &c, std::int64_t ldc)
-.. cpp:function::  void oneapi::mkl::blas::row_major::her2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T_real beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void her2k(sycl::queue &queue,
+                  onemkl::uplo upper_lower,
+                  onemkl::transpose trans,
+                  std::int64_t n,
+                  std::int64_t k,
+                  T alpha,
+                  sycl::buffer<T,1> &a,
+                  std::int64_t lda,
+                  sycl::buffer<T,1> &b,
+                  std::int64_t ldb,
+                  T_real beta,
+                  sycl::buffer<T,1> &c,
+                  std::int64_t ldc)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void her2k(sycl::queue &queue,
+                  onemkl::uplo upper_lower,
+                  onemkl::transpose trans,
+                  std::int64_t n,
+                  std::int64_t k,
+                  T alpha,
+                  sycl::buffer<T,1> &a,
+                  std::int64_t lda,
+                  sycl::buffer<T,1> &b,
+                  std::int64_t ldb,
+                  T_real beta,
+                  sycl::buffer<T,1> &c,
+                  std::int64_t ldc)
+   }
 
 .. container:: section
 
@@ -83,7 +115,7 @@ her2k (Buffer Version)
       must be at least equal to zero.
 
    alpha
-      Complex scaling factor for the rank-2\ ``k`` update.
+      Complex scaling factor for the rank-2k update.
 
    a
       Buffer holding input matrix ``A``.
@@ -181,6 +213,27 @@ her2k (Buffer Version)
    c
       Output buffer, overwritten by the updated ``C`` matrix.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_her2k_usm:
 
 her2k (USM Version)
@@ -188,8 +241,42 @@ her2k (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::her2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T_real beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::her2k(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T_real beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event her2k(sycl::queue &queue,
+                         onemkl::uplo upper_lower,
+                         onemkl::transpose trans,
+                         std::int64_t n,
+                         std::int64_t k,
+                         T alpha,
+                         const T* a,
+                         std::int64_t lda,
+                         const T* b,
+                         std::int64_t ldb,
+                         T_real beta,
+                         T* c,
+                         std::int64_t ldc,
+                         const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event her2k(sycl::queue &queue,
+                         onemkl::uplo upper_lower,
+                         onemkl::transpose trans,
+                         std::int64_t n,
+                         std::int64_t k,
+                         T alpha,
+                         const T* a,
+                         std::int64_t lda,
+                         const T* b,
+                         std::int64_t ldb,
+                         T_real beta,
+                         T* c,
+                         std::int64_t ldc,
+                         const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -216,7 +303,7 @@ her2k (USM Version)
       ``k`` must be at least equal to zero.
 
    alpha
-      Complex scaling factor for the rank-2\ ``k`` update.
+      Complex scaling factor for the rank-2k update.
 
    a
       Pointer to input matrix ``A``.
@@ -324,5 +411,27 @@ her2k (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-3-routines`

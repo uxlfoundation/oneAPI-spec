@@ -21,12 +21,41 @@ floor
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::floor(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event floor(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::floor(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event floor(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``floor`` supports the following precisions.
 
@@ -52,8 +81,8 @@ floor
    infinity for each vector element.
 
 
-   |
-   | |image0|
+   .. math::
+      y_i = \lfloor a_i \rfloor
 
 
    .. container:: tablenoborder
@@ -64,7 +93,7 @@ floor
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +0
            - +0
            -  
@@ -167,7 +196,15 @@ floor
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -176,8 +213,3 @@ floor
    .. container:: parentlink
 
       **Parent topic:** :ref:`onemkl_vm_mathematical_functions`
-
-
-
-.. |image0| image:: ../equations/GUID-41F8B94B-EEFA-4308-925A-D2DF486FBF8B-low.gif
-

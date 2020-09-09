@@ -20,12 +20,45 @@ div
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::div(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& b, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event div(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& b,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::div(queue& exec_queue, int64_t n, T* a, T* b, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event div(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* b,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``div`` supports the following precisions.
 
@@ -62,7 +95,7 @@ div
          * - Argument 1
            - Argument 2
            - Result
-           - VM Error Status
+           - VM status code
          * - X > +0
            - +0
            - +∞
@@ -126,7 +159,7 @@ div
    x1, x2, y1, y2 are finite numbers, but the real or imaginary part of
    the exact result is so large that it does not fit the target
    precision. In that case, the function returns ∞ in that part of the
-   result, and sets the VM Error Status to oneapi::mkl::vm::status::overflow.
+   result, and sets the VM status code to ``oneapi::mkl::vm::status::overflow``.
 
 
 .. container:: section
@@ -228,7 +261,15 @@ div
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks

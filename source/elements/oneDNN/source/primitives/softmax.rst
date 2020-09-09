@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 #######
 Softmax
@@ -69,10 +69,10 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************
@@ -90,17 +90,22 @@ Post-ops and Attributes
 
 The softmax primitive does not have to support any post-ops or attributes.
 
-*****************
-Data Type Support
-*****************
+******************
+Data Types Support
+******************
 
-The softmax primitive supports the following combinations of data types:
+The softmax primitive supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward bf16, f32
-forward            f16
+forward / backward |bf16|, |f32|
+forward            |f16|
 ================== ====================
 
 *******************

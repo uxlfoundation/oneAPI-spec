@@ -30,6 +30,8 @@ The ``queuing_mutex`` is fair, threads acquire a lock on a mutex in the order th
 Member classes
 --------------
 
+.. namespace:: tbb::queueing_mutex
+	       
 .. cpp:class:: scoped_lock
 
     Corresponding ``scoped_lock`` class. See the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`.

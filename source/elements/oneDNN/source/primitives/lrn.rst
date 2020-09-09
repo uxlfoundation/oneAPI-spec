@@ -3,7 +3,7 @@
 
 .. default-domain:: cpp
 
-.. include:: ../replacements.rst
+.. include:: /elements/oneDNN/source/replacements.inc.rst
 
 Local Response Normalization
 ----------------------------
@@ -58,11 +58,11 @@ argument index as specified by the following table.
 ====================== ========================
 Primitive input/output Execution argument index
 ====================== ========================
-:math:`\src`           DNNL_ARG_SRC
-:math:`\dst`           DNNL_ARG_DST
-workspace              DNNL_ARG_WORKSPACE
-:math:`\diffsrc`       DNNL_ARG_DIFF_SRC
-:math:`\diffdst`       DNNL_ARG_DIFF_DST
+:math:`\src`           |DNNL_ARG_SRC|
+:math:`\dst`           |DNNL_ARG_DST|
+workspace              |DNNL_ARG_WORKSPACE|
+:math:`\diffsrc`       |DNNL_ARG_DIFF_SRC|
+:math:`\diffdst`       |DNNL_ARG_DIFF_DST|
 ====================== ========================
 
 *****************
@@ -87,13 +87,18 @@ Operation Details
 Data Type Support
 *****************
 
-The LRN primitive supports the following combinations of data types:
+The LRN primitive supports the following combinations of data types.
+
+.. note::
+
+   Here we abbreviate data types names for readability. For example, |_f32| is
+   abbreviated to |f32|.
 
 ================== ====================
 Propagation        Source / Destination
 ================== ====================
-forward / backward f32, bf16
-forward            f16
+forward / backward |f32|, |bf16|
+forward            |f16|
 ================== ====================
 
 *******************

@@ -54,8 +54,40 @@ symm (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::symm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
-.. cpp:function::  void oneapi::mkl::blas::row_major::symm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, sycl::buffer<T,1> &b, std::int64_t ldb, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void symm(sycl::queue &queue,
+                 onemkl::side left_right,
+                 onemkl::uplo upper_lower,
+                 std::int64_t m,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda,
+                 sycl::buffer<T,1> &b,
+                 std::int64_t ldb,
+                 T beta,
+                 sycl::buffer<T,1> &c,
+                 std::int64_t ldc)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void symm(sycl::queue &queue,
+                 onemkl::side left_right,
+                 onemkl::uplo upper_lower,
+                 std::int64_t m,
+                 std::int64_t n,
+                 T alpha,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda,
+                 sycl::buffer<T,1> &b,
+                 std::int64_t ldb,
+                 T beta,
+                 sycl::buffer<T,1> &c,
+                 std::int64_t ldc)
+   }
 
 .. container:: section
 
@@ -137,6 +169,27 @@ symm (Buffer Version)
    If ``beta`` = 0, matrix ``C`` does not need to be initialized before
    calling ``symm``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_symm_usm:
 
 symm (USM Version)
@@ -144,8 +197,42 @@ symm (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::symm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::symm(sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, std::int64_t m, std::int64_t n, T alpha, const T* a, std::int64_t lda, const T* b, std::int64_t ldb, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event symm(sycl::queue &queue,
+                        onemkl::side left_right,
+                        onemkl::uplo upper_lower,
+                        std::int64_t m,
+                        std::int64_t n,
+                        T alpha,
+                        const T* a,
+                        std::int64_t lda,
+                        const T* b,
+                        std::int64_t ldb,
+                        T beta,
+                        T* c,
+                        std::int64_t ldc,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event symm(sycl::queue &queue,
+                        onemkl::side left_right,
+                        onemkl::uplo upper_lower,
+                        std::int64_t m,
+                        std::int64_t n,
+                        T alpha,
+                        const T* a,
+                        std::int64_t lda,
+                        const T* b,
+                        std::int64_t ldb,
+                        T beta,
+                        T* c,
+                        std::int64_t ldc,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -239,5 +326,27 @@ symm (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-3-routines`

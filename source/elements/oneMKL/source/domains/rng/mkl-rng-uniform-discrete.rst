@@ -9,8 +9,8 @@ Class is used for generation of uniformly distributed integer types random numbe
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
-interval, respectively, and :math:`a, b \in R; a < b`
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
+interval, respectively, and :math:`a, b \in R; a < b`.
 
 The probability distribution is given by:
 
@@ -34,6 +34,7 @@ class uniform
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     template<typename Method = uniform_method::by_default>
     class uniform<std::int32_t, Method> {
     public:
@@ -44,9 +45,7 @@ class uniform
         std::int32_t a() const;
         std::int32_t b() const;
     };
-
-.. cpp:class:: template<typename Method = oneapi::mkl::rng::uniform_method::by_default> \
-                oneapi::mkl::rng::uniform
+    }
 
 .. container:: section
 
@@ -60,7 +59,7 @@ class uniform
                 * ``oneapi::mkl::rng::uniform_method::by_default``
                 * ``oneapi::mkl::rng::uniform_method::standard``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -86,23 +85,27 @@ class uniform
 
     .. container:: section
 
-        .. cpp:type:: method_type = Method
+        .. code-block:: cpp
+
+            method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: result_type = std::int32_t
+        .. code-block:: cpp
+
+            result_type = std::int32_t
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -112,19 +115,23 @@ class uniform
 
         .. _`uniform()`:
 
-        .. cpp:function:: uniform()
+        .. code-block:: cpp
+
+            uniform()
 
         .. container:: section
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as `a` = 0, `b` = std::numeric_limits<std::int32_t>::max()
+            Default constructor for distribution, parameters set as `a` = 0, `b` = std::numeric_limits<std::int32_t>::max().
 
     .. container:: section
 
         .. _`explicit uniform(std::int32_t a, std::int32_t b)`:
 
-        .. cpp:function:: uniform(std::int32_t a, std::int32_t b)
+        .. code-block:: cpp
+
+            uniform(std::int32_t a, std::int32_t b)
 
         .. container:: section
 
@@ -132,6 +139,12 @@ class uniform
 
             Constructor with parameters. `a` is a left bound, `b` is a right bound, assume :math:`a < b`.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`a \ge b`
 
 .. container:: section
 
@@ -141,24 +154,28 @@ class uniform
 
         .. _`std::int32_t a() const`:
 
-        .. cpp:function:: a() const
+        .. code-block:: cpp
+
+            a() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `a` - left bound
+            Returns the distribution parameter `a` - left bound.
 
     .. container:: section
 
         .. _`std::int32_t b() const`:
 
-        .. cpp:function:: b() const
+        .. code-block:: cpp
+
+            b() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `b` - right bound
+            Returns the distribution parameter `b` - right bound.
 
 **Parent topic:** :ref:`onemkl_rng_distributions`

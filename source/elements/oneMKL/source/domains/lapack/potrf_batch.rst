@@ -42,7 +42,11 @@ The buffer version of ``potrf_batch`` supports only the strided API.
 
   .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::lapack::potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      void potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+    }
 
 .. container:: section
 
@@ -84,6 +88,19 @@ scratchpad_size
 a
 	Cholesky factors :math:`U_i` or :math:`L_i`, as specified by ``uplo``.
 
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>` 
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+   
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+   
+   If ``info`` is zero, then the leading minors of some of matrices (and therefore some matrices :math:`A_i` themselves) are not positive-definite, and the factorizations could not be completed for these matrices from the batch. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The orders of corresponding not positive-definite leading minors of these matrices can be obtained by `exceptions()` method of exception object.
+
 .. _onemkl_lapack_potrf_batch_usm:
 
 potrf_batch (USM Version)
@@ -106,7 +123,11 @@ The USM version of ``potrf_batch`` supports the group API and strided API.
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrf_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event potrf_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    }
 
 .. container:: section
 
@@ -157,6 +178,20 @@ a
 
 Output event to wait on to ensure computation is complete.
 
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>` 
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+   
+   If ``info`` is zero, then the leading minors of some of the input matrices (and therefore some matrices themselves) are not positive-definite, and the factorizations could not be completed for these matrices from the batch. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The orders of corresponding not positive-definite leading minors of these matrices can be obtained by `exceptions()` method of the exception object.
+
 **Strided API**
 
  | The routine forms the Cholesky factorizations of a symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
@@ -168,7 +203,11 @@ Output event to wait on to ensure computation is complete.
 
   .. rubric:: Syntax
 
-.. cpp:function::  cl::sycl::event oneapi::mkl::lapack::potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {});
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event potrf_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+    };
 
 .. container:: section
 
@@ -218,6 +257,19 @@ a
   .. rubric:: Return Values
 
 Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
+   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+
+   If ``info = -n``, the :math:`n`-th parameter had an illegal value.
+
+   If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+        
+   If ``info`` is zero, then the leading minors of some of matrices (and therefore some matrices :math:`A_i` themselves) are not positive-definite, and the factorizations could not be completed for these matrices from the batch. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The orders of corresponding not positive-definite leading minors of these matrices can be obtained by `exceptions()` method of exception object.
 
 **Parent topic:** :ref:`onemkl_lapack-like-extensions-routines`
 

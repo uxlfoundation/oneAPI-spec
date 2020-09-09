@@ -7,8 +7,10 @@ oneAPI Specifications
 
 This repo contains the sources for the `oneAPI Specification`_.
 
-For the latest build from master branch, see `this
-<http://staging.spec.oneapi.com.s3-website-us-west-2.amazonaws.com/exclude/ci/branches/refs/heads/master/versions/latest/index.html>`__.
+For the latest build from master branch, see `HTML
+<https://d1c71xsfq9wxv8.cloudfront.net/ci/main/index.html>`__ and `PDF
+<https://d1c71xsfq9wxv8.cloudfront.net/ci/main/oneAPI-spec.pdf>`__
+
 
 For more information about oneAPI, see `oneapi.com
 <https://oneapi.com>`__. For information about future releases of the
@@ -81,16 +83,6 @@ file:// URL. Build the pdf version with::
 
 And then view build/latexpdf/oneAPI-spec.pdf
 
-Checking for Errors
--------------------
-
-There are rst linting tools to check for errors::
-
-  find . -name '*.rst' | xargs rstcheck
-
-rstcheck finds errors in some of the template code and in the cpp
-examples. We may not want to try to correct them.
-
 Editing Tools
 -------------
 
@@ -113,13 +105,8 @@ linting. I could not find any support for rejustifying paragraphs to
 Submitting changes
 ------------------
 
-Changes are submitted as PR's to this repo. It's up to you how you get 
-to the point of making the PR. If you have write access to this repo, you
-can push a feature branch to this repo, and then do the PR from the feature
-branch. If you work this way, the CI will publish HTML, PDF to the staging
-server. You can also fork this repo and do the PR from your fork. CI will
-build the document and save the results as an artifact, but will not
-publish to staging server.
+Changes are submitted as PR's to this repo. PR's and push trigger the
+CI to build the doc and save it as an artifact.
 
 ------
 Docker
@@ -140,19 +127,8 @@ You can run a docker container with::
 CI
 --
 
-We use GitHub actions. See `<.github/workflows/main.yml>`_
+We use GitHub actions. See `<.github/workflows/ci.yml>`_
 
-On every commit to every branch, the CI system builds and publishes the document to
-the staging server. To see the URL, look at the end of the log for the
-build step in the CI system. The staging server is an s3 bucket, and
-the access keys are managed as GitHub action secrets. PR's based on
-forks do not have access to the keys and will build, but not publish on the
-staging server.
-
-For commits to the publish branch, the document is staged inside a
-full copy of the spec.oneapi.com site, which includes redirects and
-older versions of the doc. To see the URL, look at the end of the log
-for the build step in the CI system.
 
 ----------
 Publishing
@@ -163,13 +139,23 @@ Merge from master to publish::
   git checkout publish
   git merge master
   git commit -m 'merge from master'
+  git push
   
-After CI completes, view the results on staging server. Push to
-production with::
+After CI completes, view the results on the `pre-production server
+<https://d1c71xsfq9wxv8.cloudfront.net/versions/latest/index.html>`__
+. Sync pre-production to production with::
 
   python scripts/oneapi.py prod-publish
 
-Then purge the CDN. 
+Then purge the CDN to make it visible. Add a release in github web
+interface, and allow it to tag the publish branch.
+
+-----------------------------
+Creating a new version number
+-----------------------------
+
+Change oneapi_version in `<source/conf/common_conf.py>`__ and update
+the table in `<source/versions.rst>`__.
 
 ------------
 More Reading

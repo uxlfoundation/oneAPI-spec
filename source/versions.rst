@@ -16,6 +16,7 @@ updates.
   ========  ==========  =========
   Version   Date        View                                                                                                            
   ========  ==========  =========
+  `1.0`_    09/14/2020  `HTML <https://spec.oneapi.com/versions/1.0/>`__ `PDF <https://spec.oneapi.com/versions/1.0/oneAPI-spec.pdf>`__
   `0.9`_    07/30/2020  `HTML <https://spec.oneapi.com/versions/0.9/>`__ `PDF <https://spec.oneapi.com/versions/0.9/oneAPI-spec.pdf>`__
   `0.85`_   06/29/2020  `HTML <https://spec.oneapi.com/versions/0.85/>`__ `PDF <https://spec.oneapi.com/versions/0.85/oneAPI-spec.pdf>`__
   `0.8`_    05/29/2020  `HTML <https://spec.oneapi.com/versions/0.8/>`__ `PDF <https://spec.oneapi.com/versions/0.8/oneAPI-spec.pdf>`__
@@ -26,6 +27,48 @@ updates.
 Release Notes
 =============
 
+1.0
+---
+
+* oneMKL
+
+  * Continuing modifications to all oneMKL domains
+  * Add oneMKL Exceptions and Error Handling
+
+* oneDNN
+
+
+* oneTBB
+
+  * Updated the named requirements
+  * Adjusted the API according to the latest product changes
+  * Improved the wording and descriptions for the flow graph API
+  * Cleared build warnings
+  
+* oneDAL
+   * Extended Programming model section, added description of the generic methods and descriptors, introduced task notation
+   * Extended Data Management section, introduced CSV data source, array, extended description of the tables and accessors
+   * Extended description of Error handling
+   * Added description of the training methods for PCA algorithm, introduced K-means initialization algorithm
+   * Extended Common interface section, added description of service data types used in the interfaces of the library
+   * Modified the library's namespace
+  
+* DPC++
+
+  
+* oneVPL
+
+  * A lot of cleaning to remove GEN/CPU bias and implementation details.
+  * New organization of structures' description.
+  * New entry point function to expose by any implementation: MFXInitialize which replaces obsolete MFXInit and MFXInitEx.
+  * Interface to choose and set subdevices (mfxExtDeviceAffinityMask) for execution.
+  * Header files cleaned up by removing MFX_VERSION checks (ala #if MFX_VERSION > 1.26) from headers.
+
+* oneCCL
+
+  * Updated operation attributes description
+  * Updated namings in API
+
 0.9
 ---
 
@@ -33,22 +76,49 @@ Release Notes
 
   * Continuing modifications to oneMKL Architecture, BLAS and LAPACK domains
   * Significant refactoring and updating of Sparse BLAS, VM, RNG, and DFT domains API
-    descriptions and structure.
+    descriptions and structure
   * Add Summary Statistics domain
-  * Add future considerations and acknowledgement to appendix
+  * Add future considerations and acknowledgment to appendices
   * Change top-level namespace to oneapi::mkl
 
-* oneDAL
+* oneDNN
 
+  * Added the specification for ``map_data()`` / ``unmap_data()`` methods of
+    oneDNN memory objects
+  * Extended element-wise algorithms and post operations
+  * Added queries for peephole and projection weights for LSTM
 
 * oneDPL
 
   * API updates, including namespaces
-  * Add detailed descriptions for execution policies, non-standard algorithms, iterator types, etc.
+  * Added detailed descriptions for execution policies, non-standard algorithms, iterator types, etc
 
 * oneTBB
 
   * Editorial review changes
+  
+* oneDAL
+
+  * Updated description of the public header files and namespaces
+  
+* DPC++
+
+  * Revised requirements to refer to the SYCL 2020 provisional specification where previous
+    extensions have migrated to the SYCL specification directly
+  * Added additional extensions
+  * Added additional requirements against the SYCL 2020 provisional specification
+  
+* oneVPL
+
+  * Added section to specify mandatory and optional API features
+  * Reformatting of entire specification
+  * Bug fixes in API definitions
+
+* oneCCL
+
+  * Added multi-device communication API
+  * Added key-value store API
+  * Extended list of collective operations
 
 0.85
 ----

@@ -20,9 +20,10 @@ Class that serves as a handle to a flow graph of nodes and edges.
 
             void wait_for_all();
 
+            void reset(reset_flags f = rf_reset_protocol);
+            void cancel();
             bool is_cancelled();
             bool exception_thrown();
-            void reset(reset_flags f = rf_reset_protocol);
         };
 
     } // namespace flow
@@ -47,16 +48,20 @@ Member functions
 
 .. cpp:function:: ~graph()
 
-    Calls ``wait_for_all`` on the graph, then destroys the graph.
+    Calls ``wait_for_all()`` on the graph, then destroys the graph.
 
 .. cpp:function:: void wait_for_all()
 
-    Blocks execution until all tasks associated with the graph have completed.
+    Blocks execution until all tasks associated with the graph have completed or cancelled.
 
 .. cpp:function:: void reset(reset_flags f = rf_reset_protocol)
 
     Resets the graph according to the specified flags.
     Flags to ``reset()`` can be combined with bitwise-``or``.
+
+.. cpp:function:: void cancel()
+
+    Cancels all tasks in the graph.
 
 .. cpp:function:: bool is_cancelled()
 

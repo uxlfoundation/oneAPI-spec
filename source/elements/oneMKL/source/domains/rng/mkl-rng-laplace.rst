@@ -9,7 +9,7 @@ Class is used for generation of Laplace distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Laplace distributed with mean value (or average) :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`. The scalefactor value determines the standard deviation as :math:`\sigma = \beta\sqrt{2}`
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers Laplace distributed with mean value (or average) :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`. The scalefactor value determines the standard deviation as :math:`\sigma = \beta\sqrt{2}`.
 
 The probability distribution is given by:
 
@@ -43,9 +43,6 @@ class laplace
         RealType b() const;
     };
 
-.. cpp:class:: template<typename RealType = float, typename Method = oneapi::mkl::rng::laplace_method::by_default> \
-                oneapi::mkl::rng::laplace
-
 .. container:: section
 
     .. rubric:: Template parameters
@@ -65,7 +62,7 @@ class laplace
                 * ``oneapi::mkl::rng::laplace_method::by_default``
                 * ``oneapi::mkl::rng::laplace_method::icdf``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -91,23 +88,27 @@ class laplace
 
     .. container:: section
 
-        .. cpp:type:: laplace::method_type = Method
+        .. code-block:: cpp
+
+            laplace::method_type = Method
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines transformation method for generation.
+            The type which defines transformation method for generation.
 
     .. container:: section
 
-        .. cpp:type:: laplace::result_type = RealType
+        .. code-block:: cpp
+
+            laplace::result_type = RealType
 
         .. container:: section
 
             .. rubric:: Description
 
-            Type which defines type of generated random numbers.
+            The type which defines type of generated random numbers.
 
 .. container:: section
 
@@ -117,7 +118,9 @@ class laplace
 
         .. _`laplace()`:
 
-        .. cpp:function:: laplace::laplace()
+        .. code-block:: cpp
+
+            laplace::laplace()
 
         .. container:: section
 
@@ -129,7 +132,9 @@ class laplace
 
         .. _`explicit laplace(RealType a, RealType b)`:
 
-        .. cpp:function:: explicit laplace::laplace(RealType a, RealType b)
+        .. code-block:: cpp
+
+            explicit laplace::laplace(RealType a, RealType b)
 
         .. container:: section
 
@@ -137,6 +142,12 @@ class laplace
 
             Constructor with parameters. `a` is a mean value, `beta` is a scalefactor value.
 
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section
 
@@ -146,7 +157,9 @@ class laplace
 
         .. _`RealType a() const`:
 
-        .. cpp:function:: RealType laplace::a() const
+        .. code-block:: cpp
+
+            RealType laplace::a() const
 
         .. container:: section
 
@@ -158,7 +171,9 @@ class laplace
 
         .. _`RealType b() const`:
 
-        .. cpp:function:: RealType laplace::b() const
+        .. code-block:: cpp
+
+            RealType laplace::b() const
 
         .. container:: section
 

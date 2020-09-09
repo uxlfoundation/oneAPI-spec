@@ -30,7 +30,12 @@ potrf_scratchpad_size
 
   .. rubric:: Syntax
          
-.. cpp:function::  template <typename T>std::int64_t         oneapi::mkl::lapack::potrf_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t         lda)
+.. code-block:: cpp
+
+    namespace oneapi::mkl::lapack {
+      template <typename T>
+      std::int64_t potrf_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t lda) 
+    }
 
 .. container:: section
 
@@ -43,11 +48,11 @@ upper_lower
    Indicates whether the upper or lower triangular part of :math:`A` is
    stored and how :math:`A` is factored:
 
-   If ``upper_lower = ``onemkl::uplo::upper``, the array ``a`` stores the
+   If ``upper_lower = onemkl::uplo::upper``, the array ``a`` stores the
    upper triangular part of the matrix :math:`A`, and the strictly lower
    triangular part of the matrix is not referenced.
 
-   If ``upper_lower = ``onemkl::uplo::lower``, the array ``a`` stores the
+   If ``upper_lower = onemkl::uplo::lower``, the array ``a`` stores the
    lower triangular part of the matrix :math:`A`, and the strictly upper
    triangular part of the matrix is not referenced.
 
@@ -56,6 +61,14 @@ n
 
 lda
    The leading dimension of ``a``.
+
+.. container:: section
+
+  .. rubric:: Throws
+
+:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+   Exception is thrown in case of incorrect supplied argument value.
+   Position of wrong argument can be determined by `info()` method of exception object.
 
 .. container:: section
 

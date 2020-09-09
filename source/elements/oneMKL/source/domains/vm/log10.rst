@@ -20,12 +20,43 @@ log10
       Buffer API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::log10(queue& exec_queue, int64_t n, buffer<T,1>& a, buffer<T,1>& y, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event log10(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    sycl::buffer<T,1>& a,
+                    sycl::buffer<T,1>& y,
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       USM API:
 
 
-      .. cpp:function:: event oneapi::mkl::vm::log10(queue& exec_queue, int64_t n, T* a, T* y, vector_class<event> const & depends = {}, uint64_t mode = oneapi::mkl::vm::mode::not_defined, oneapi::mkl::vm::error_handler<T> errhandler = {} )
+      .. code-block:: cpp
+
+
+            namespace oneapi::mkl::vm {
+
+            sycl::event log10(
+                    sycl::queue& exec_queue,
+                    std::int64_t n,
+                    T* a,
+                    T* y,
+                    sycl::vector_class<sycl::event> const & depends = {},
+                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
+                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+
+            } // namespace oneapi::mkl::vm
+
+
 
       ``log10`` supports the following precisions.
 
@@ -61,7 +92,7 @@ log10
 
          * - Argument
            - Result
-           - Error Code
+           - Status code
          * - +1
            - +0
            -  
@@ -105,15 +136,15 @@ log10
            - +∞  
            - NAN  
          * - +i·∞
-           - |image0|
-           - |image1|
-           - |image2|
-           - |image3|
-           - |image4|
-           - |image5|
+           - |math0|
+           - |math1|
+           - |math1|
+           - |math1|
+           - |math1|
+           - :math:`+\infty + i \frac{\pi}{4} \frac{1}{\ln 10}`
            - +∞+i·QNAN
          * - +i·Y
-           - |image6|
+           - |math2|
            -  
            -  
            -  
@@ -121,23 +152,23 @@ log10
            - +∞+i·0
            - QNAN+i·QNAN
          * - +i·0
-           - |image7|
+           - |math2|
            -  
-           - |image8|
+           - :math:`-\infty + i \frac{\pi}{\ln 10}`
            - -∞+i·0
            -  
            - +∞+i·0
            - QNAN+i·QNAN
          * - -i·0
-           - |image9|
+           - |math3|
            -  
-           - |image10|
+           - :math:`-\infty - i \frac{\pi}{\ln 10}`
            - -∞-i·0
            -  
            - +∞-i·0
            - QNAN-i·QNAN
          * - -i·Y
-           - |image11|
+           - |math3|
            -  
            -  
            -  
@@ -145,12 +176,12 @@ log10
            - +∞-i·0
            - QNAN+i·QNAN
          * - -i·∞
-           - |image12|
-           - |image13|
-           - |image14|
-           - |image15|
-           - |image16|
-           - |image17|
+           - |math0|
+           - |math4|
+           - |math4|
+           - |math4|
+           - |math4|
+           - :math:`+\infty - i \frac{\pi}{4} \frac{1}{\ln 10}`
            - +∞+i·QNAN
          * - +i·NAN
            - +∞+i·QNAN
@@ -255,7 +286,15 @@ log10
 
 
    return value (event)
-      Function end event.
+      Event, signifying availability of computed output and status code(s).
+
+.. container:: section
+
+
+    .. rubric:: Exceptions
+        :class: sectiontitle
+
+    For list of generated exceptions please refer to  :ref:`onemkl_vm_exceptions`
 
 
 .. container:: familylinks
@@ -267,22 +306,8 @@ log10
 
 
 
-.. |image0| image:: ../equations/GUID-2293B947-42D6-4E5F-BBB3-9DC135AA724A-low.gif
-.. |image1| image:: ../equations/GUID-7AE86F5B-8BE2-42D5-B6C7-AF9FF41CCE11-low.jpg
-.. |image2| image:: ../equations/GUID-7AE86F5B-8BE2-42D5-B6C7-AF9FF41CCE11-low.jpg
-.. |image3| image:: ../equations/GUID-7AE86F5B-8BE2-42D5-B6C7-AF9FF41CCE11-low.jpg
-.. |image4| image:: ../equations/GUID-7AE86F5B-8BE2-42D5-B6C7-AF9FF41CCE11-low.jpg
-.. |image5| image:: ../equations/GUID-98EC239E-D5C9-4960-834B-827656CF3052-low.gif
-.. |image6| image:: ../equations/GUID-32A750B8-7BCC-409B-BD48-E88FBEF86D32-low.jpg
-.. |image7| image:: ../equations/GUID-32A750B8-7BCC-409B-BD48-E88FBEF86D32-low.jpg
-.. |image8| image:: ../equations/GUID-F01C1454-13EC-4D30-8E73-8E41755B8AF2-low.gif
-.. |image9| image:: ../equations/GUID-8F8B1A27-FCBD-4E61-ACC0-459C9EBAE376-low.gif
-.. |image10| image:: ../equations/GUID-DF275A8A-05D4-49D9-9031-E4A9382C284C-low.gif
-.. |image11| image:: ../equations/GUID-8F8B1A27-FCBD-4E61-ACC0-459C9EBAE376-low.gif
-.. |image12| image:: ../equations/GUID-2293B947-42D6-4E5F-BBB3-9DC135AA724A-low.gif
-.. |image13| image:: ../equations/GUID-9AB7A841-1EEC-49D6-BBF8-5B346FB32C1A-low.jpg
-.. |image14| image:: ../equations/GUID-9AB7A841-1EEC-49D6-BBF8-5B346FB32C1A-low.jpg
-.. |image15| image:: ../equations/GUID-9AB7A841-1EEC-49D6-BBF8-5B346FB32C1A-low.jpg
-.. |image16| image:: ../equations/GUID-9AB7A841-1EEC-49D6-BBF8-5B346FB32C1A-low.jpg
-.. |image17| image:: ../equations/GUID-9114D36E-F829-485D-BF04-8747E20120BD-low.gif
-
+.. |math0| replace:: :math:`+\infty + i \frac{3}{4} \frac{\pi}{\ln 10}`
+.. |math1| replace:: :math:`+\infty + i \frac{\pi}{2} \frac{1}{\ln 10}`
+.. |math2| replace:: :math:`+\infty + i \frac{\pi}{\ln 10}`
+.. |math3| replace:: :math:`+\infty - i \frac{\pi}{\ln 10}`
+.. |math4| replace:: :math:`+\infty - i \frac{\pi}{2} \frac{1}{\ln 10}`

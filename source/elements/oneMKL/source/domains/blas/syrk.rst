@@ -45,8 +45,36 @@ syrk (Buffer Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  void oneapi::mkl::blas::column_major::syrk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
-.. cpp:function::  void oneapi::mkl::blas::row_major::syrk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, sycl::buffer<T,1> &a, std::int64_t lda, T beta, sycl::buffer<T,1> &c, std::int64_t ldc)
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       void syrk(sycl::queue &queue,
+                 onemkl::uplo upper_lower,
+                 onemkl::transpose trans,
+                 std::int64_t n,
+                 std::int64_t k,
+                 T alpha,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda,
+                 T beta,
+                 sycl::buffer<T,1> &c,
+                 std::int64_t ldc)
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       void syrk(sycl::queue &queue,
+                 onemkl::uplo upper_lower,
+                 onemkl::transpose trans,
+                 std::int64_t n,
+                 std::int64_t k,
+                 T alpha,
+                 sycl::buffer<T,1> &a,
+                 std::int64_t lda,
+                 T beta,
+                 sycl::buffer<T,1> &c,
+                 std::int64_t ldc)
+   }
 
 .. container:: section
 
@@ -71,7 +99,7 @@ syrk (Buffer Version)
       zero.
 
    alpha
-      Scaling factor for the rank-``k`` update.
+      Scaling factor for the rank-k update.
 
    a
       Buffer holding input matrix ``A``.
@@ -131,6 +159,27 @@ syrk (Buffer Version)
       Output buffer, overwritten by
       ``alpha``\ \*op(``A``)*op(``A``)\ :sup:`T` + ``beta``\ \*\ ``C``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
 .. _onemkl_blas_syrk_usm:
 
 syrk (USM Version)
@@ -138,8 +187,38 @@ syrk (USM Version)
 
 .. rubric:: Syntax
 
-.. cpp:function::  sycl::event oneapi::mkl::blas::column_major::syrk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
-.. cpp:function::  sycl::event oneapi::mkl::blas::row_major::syrk(sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t n, std::int64_t k, T alpha, const T* a, std::int64_t lda, T beta, T* c, std::int64_t ldc, const sycl::vector_class<sycl::event> &dependencies = {})
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event syrk(sycl::queue &queue,
+                        onemkl::uplo upper_lower,
+                        onemkl::transpose trans,
+                        std::int64_t n,
+                        std::int64_t k,
+                        T alpha,
+                        const T* a,
+                        std::int64_t lda,
+                        T beta,
+                        T* c,
+                        std::int64_t ldc,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event syrk(sycl::queue &queue,
+                        onemkl::uplo upper_lower,
+                        onemkl::transpose trans,
+                        std::int64_t n,
+                        std::int64_t k,
+                        T alpha,
+                        const T* a,
+                        std::int64_t lda,
+                        T beta,
+                        T* c,
+                        std::int64_t ldc,
+                        const sycl::vector_class<sycl::event> &dependencies = {})
+   }
 
 .. container:: section
 
@@ -166,7 +245,7 @@ syrk (USM Version)
       least zero.
 
    alpha
-      Scaling factor for the rank-``k`` update.
+      Scaling factor for the rank-k update.
 
    a
       Pointer to input matrix ``A``.
@@ -232,5 +311,27 @@ syrk (USM Version)
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
 
    **Parent topic:** :ref:`blas-level-3-routines`

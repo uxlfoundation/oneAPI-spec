@@ -75,7 +75,7 @@ contains
         template <typename K>
         bool contains( const K& key ) const;
 
-    **Returns**: ``true`` if at least one element equl to ``key`` exists in the container; ``false``, otherwise.
+    **Returns**: ``true`` if at least one element equal to ``key`` exists in the container; ``false``, otherwise.
 
     This overload only participates in overload resolution if qualified-id
     ``hasher::transparent_key_equal`` is valid and denotes a type.

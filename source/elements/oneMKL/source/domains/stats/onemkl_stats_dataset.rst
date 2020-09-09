@@ -3,13 +3,13 @@
 dataset
 =======
 
-The structure consolidates information of a multi-dimensional dataset.
+The structure consolidates the information of a multi-dimensional dataset.
 
 .. _onemkl_stats_dataset_description:
 
 .. rubric:: Description
 
-The struct object is used in :ref:`onemkl_stats_routines` as a multi-dimensional data storage. ``dataset`` struct contains information about observations matrix and it's size (dimensions x observations), observations weights and indicies for dimensions (defines dimensions to be processed).
+The ``dataset`` struct object is used in :ref:`onemkl_stats_routines` as a multi-dimensional data storage. ``dataset`` struct contains information about observations matrix and its size (dimensions x observations), observations weights and indicies for dimensions (defines dimensions to be processed).
 
 .. _onemkl_stats_dataset_syntax_buffer:
 
@@ -20,26 +20,26 @@ structure dataset (Buffer version)
 
 .. code-block:: cpp
 
-    template<typename Type, oneapi::mkl::stats::layout ObservationsLayout>
-	struct dataset<sycl::buffer<Type, 1>, ObservationsLayout> {
+    namespace oneapi::mkl::stats {
+    template<layout ObservationsLayout, typename Type>
+	struct dataset<ObservationsLayout, sycl::buffer<Type, 1>> {
 
     	explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_,
                     sycl::buffer<Type, 1> observations_, sycl::buffer<Type, 1> weights_ = {0},
                     sycl::buffer<std::int64_t, 1> indices_ = {0}) :
                     n_dims(n_dims_), n_observations(n_observations_),
                     observations(observations_),
-                    weights(weights_), indices(indices_), layout(ObservationsLayout) {};
+                    weights(weights_), indices(indices_) {};
 
     	std::int64_t n_dims;
     	std::int64_t n_observations;
-    	oneapi::stats::mkl::layout layout = ObservationsLayout;
     	sycl::buffer<Type, 1> observations;
-    	sycl::buffer<Type, 1> weights;
-    	sycl::buffer<std::int64_t, 1> indices;
+    	sycl::buffer<Type, 1> weights = {0};
+    	sycl::buffer<std::int64_t, 1> indices = {0};
+        static constexpr layout layout = ObservationsLayout;
 	};
+    }
 
-.. cpp:struct:: template<typename Type, oneapi::stats::mkl::layout ObservationsLayout> \
-					oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>
 
 .. container:: section
 
@@ -82,10 +82,12 @@ structure dataset (Buffer version)
 
         .. _`explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_, sycl::buffer<Type, 1> observations_, sycl::buffer<Type, 1> weights_ = {0}, sycl::buffer<std::int64_t, 1> indices_ = {0})`:
 
-        .. cpp:function:: explicit dataset::dataset(std::int64_t n_dims_, std::int64_t n_observations_, \
-                    sycl::buffer<Type, 1> observations_, \
-                    sycl::buffer<Type, 1> weights_ = {0}, \
-                    sycl::buffer<std::int64_t, 1> indices_ = {0})
+        .. code-block:: cpp
+
+            explicit dataset::dataset(std::int64_t n_dims_, std::int64_t n_observations_,
+                sycl::buffer<Type, 1> observations_,
+                sycl::buffer<Type, 1> weights_ = {0},
+                sycl::buffer<std::int64_t, 1> indices_ = {0})
 
         .. container:: section
 
@@ -96,8 +98,15 @@ structure dataset (Buffer version)
             	* `n_dims_` is the number of dimensions
             	* `n_observations_` is the number of observations
             	* `observations_` is the matrix of observations
-            	* `weights_` is an optional parameter, represents array of weights for obervations (of size n_observations). If the parameter is not specified, each observation is assigned a weight equal 1.
-            	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size n_dims). If the parameter is not specified, all dimensions are processed.
+            	* `weights_` is an optional parameter, represents array of weights for obervations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
+            	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
+
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when `n_dims_` :math:`\leq 0`, or `n_observations_` :math:`\leq 0`, or `observations_.get_count() == 0`
 
 .. _onemkl_stats_dataset_syntax_usm:
 
@@ -108,25 +117,24 @@ structure dataset (USM version)
 
 .. code-block:: cpp
 
-    template<typename Type, oneapi::stats::mkl::layout ObservationsLayout>
-	 struct dataset<Type*, ObservationsLayout> {
+    namespace oneapi::mkl::stats {
+    template<layout ObservationsLayout, typename Type>
+	struct dataset<Type*, ObservationsLayout> {
     	explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_, Type* observations_,
                     Type* weights_ = nullptr, std::int64_t* indices_ = nullptr) :
                     n_dims(n_dims_), n_observations(n_observations_),
                     observations(observations_),
-                    weights(weights_), indices(indices_), layout(ObservationsLayout) {};
+                    weights(weights_), indices(indices_) {};
 
     	std::int64_t n_dims;
     	std::int64_t n_observations;
-    	oneapi::stats::mkl::layout layout = ObservationsLayout;
     	Type* observations;
-    	Type* weights;
-    	std::int64_t* indices;
+    	Type* weights = nullptr;
+    	std::int64_t* indices = nullptr;
+        static constexpr layout layout = ObservationsLayout;
 	};
+    }
 
-
-.. cpp:struct:: template<typename Type, oneapi::stats::mkl::layout ObservationsLayout> \
-					oneapi::mkl::stats::dataset<Type*, ObservationsLayout>
 
 .. container:: section
 
@@ -169,10 +177,12 @@ structure dataset (USM version)
 
         .. _`explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_, Type* observations_, Type* weights_ = nullptr, std::int64_t* indices_ = nullptr)`:
 
-        .. cpp:function:: explicit dataset::dataset(std::int64_t n_dims_, std::int64_t n_observations_, \
-                    Type* observations_, \
-                    Type* weights_ = nullptr, \
-                    std::int64_t* indices_ = nullptr)
+        .. code-block:: cpp
+
+            explicit dataset::dataset(std::int64_t n_dims_, std::int64_t n_observations_,
+                Type* observations_,
+                Type* weights_ = nullptr,
+                std::int64_t* indices_ = nullptr)
 
         .. container:: section
 
@@ -183,8 +193,15 @@ structure dataset (USM version)
             	* `n_dims_` is the number of dimensions
             	* `n_observations_` is the number of observations
             	* `observations_` is the matrix of observations
-            	* `weights_` is an optional parameter, represents array of weights for obervations (of size n_observations). If the parameter is not specified, each observation is assigned a weight equal 1.
-            	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size n_dims). If the parameter is not specified, all dimensions are processed.
+            	* `weights_` is an optional parameter, represents array of weights for obervations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
+            	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
+
+        .. container:: section
+
+            .. rubric:: Throws
+
+            oneapi::mkl::invalid_argument
+                Exception is thrown when `n_dims_` :math:`\leq 0`, or `n_observations_` :math:`\leq 0`, or `observations_ == nullptr`
 
 **Parent topic:** :ref:`onemkl_stats`
 

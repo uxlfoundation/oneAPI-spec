@@ -48,7 +48,7 @@ Matrix Storage
 
       .. math::
          
-         a = \scriptstyle
+         \scriptstyle a = 
             [\underbrace{\underbrace{A_{11},A_{21},A_{31},...,A_{m1},*,...,*}_\text{lda},
                          \underbrace{A_{12},A_{22},A_{32},...,A_{m2},*,...,*}_\text{lda},
                          ...,
@@ -59,7 +59,7 @@ Matrix Storage
 
       .. math::
          
-         a = \scriptstyle
+         \scriptstyle a = 
             [\underbrace{\underbrace{A_{11},A_{12},A_{13},...,A_{1n},*,...,*}_\text{lda},
                          \underbrace{A_{21},A_{22},A_{23},...,A_{2n},*,...,*}_\text{lda},
                          ...,
@@ -105,7 +105,7 @@ Matrix Storage
 
          .. math::
             
-            a = \scriptstyle
+            \scriptstyle a = 
                [\underbrace{\underbrace{A_{11},*,...,*}_\text{lda},
                             \underbrace{A_{12},A_{22},*,...,*}_\text{lda},
                             ...,
@@ -116,7 +116,7 @@ Matrix Storage
 
          .. math::
             
-            a = \scriptstyle
+            \scriptstyle a = 
                [\underbrace{\underbrace{A_{11},A_{12},A_{13},...,A_{1n},*,...,*}_\text{lda},
                             \underbrace{*,A_{22},A_{23},...,A_{2n},*,...,*}_\text{lda},
                             ...,
@@ -145,7 +145,7 @@ Matrix Storage
       
          .. math::
                   
-            a = \scriptstyle
+            \scriptstyle a = 
                [\underbrace{\underbrace{A_{11},A_{21},A_{31},..,A_{n1},*,...,*}_\text{lda},
                             \underbrace{*,A_{22},A_{32},...,A_{n2},*,...,*}_\text{lda},
                             ...,
@@ -156,7 +156,7 @@ Matrix Storage
 
          .. math::
                   
-            a = \scriptstyle
+            \scriptstyle a = 
                [\underbrace{\underbrace{A_{11},*,...,*}_\text{lda},
                             \underbrace{A_{21},A_{22},*,...,*}_\text{lda},
                             ...,
@@ -216,7 +216,7 @@ Matrix Storage
         
       .. math::
                
-         a = \scriptscriptstyle
+         \scriptscriptstyle a = 
             [\underbrace{
              \underbrace{\underbrace{*,...,*}_\text{ku},A_{11}, A_{12},...,A_{min(kl+1,m),1},*,...,*}_\text{lda},
              \underbrace{\underbrace{*,...,*}_\text{ku-1},A_{max(1,2-ku),2},...,A_{min(kl+2,m),2},*,...*}_\text{lda},
@@ -229,7 +229,7 @@ Matrix Storage
 
       .. math::
                
-         a = \scriptscriptstyle
+         \scriptscriptstyle a = 
             [\underbrace{
              \underbrace{\underbrace{*,...,*}_\text{kl},A_{11}, A_{12},...,A_{1,min(ku+1,n)},*,...,*}_\text{lda},
              \underbrace{\underbrace{*,...,*}_\text{kl-1},A_{2,max(1,2-kl)},...,A_{2,min(ku+2,n)},*,...*}_\text{lda},
@@ -319,7 +319,7 @@ Matrix Storage
                 
             .. math::
                      
-               a = \scriptstyle
+               \scriptstyle a = 
                   [\underbrace{
                    \underbrace{\underbrace{*,...,*}_\text{ku},A_{11},*,...,*}_\text{lda},
                    \underbrace{\underbrace{*,...,*}_\text{ku-1},A_{max(1,2-k),2},...,A_{2,2},*,...*}_\text{lda},
@@ -332,7 +332,7 @@ Matrix Storage
             
             .. math::
                      
-               a = \scriptstyle
+               \scriptstyle a = 
                   [\underbrace{
                    \underbrace{A_{11},A_{21},...,A_{min(k+1,n),1},*,...,*}_\text{lda},
                    \underbrace{A_{2,2},...,A_{min(k+2,n),2},*,...,*}_\text{lda},
@@ -405,7 +405,7 @@ Matrix Storage
 
            .. math::
                     
-              a = \scriptstyle
+              \scriptstyle a = 
                  [\underbrace{
                   \underbrace{A_{11},A_{21},...,A_{min(k+1,n),1},*,...,*}_\text{lda},
                   \underbrace{A_{2,2},...,A_{min(k+2,n),2},*,...,*}_\text{lda},
@@ -417,7 +417,7 @@ Matrix Storage
         
             .. math::
                      
-               a = \scriptstyle
+               \scriptstyle a = 
                   [\underbrace{
                    \underbrace{\underbrace{*,...,*}_\text{k},A_{11},*,...,*}_\text{lda},
                    \underbrace{\underbrace{*,...,*}_\text{k-1},A_{max(1,2-k),2},...,A_{2,2},*,...*}_\text{lda},
@@ -494,13 +494,13 @@ Matrix Storage
 
           .. math::
              
-             a = [A_{11},A_{12},A_{22},A_{13},A_{23},A_{33},...,A_{(n-1),n},A_{nn}]
+             \scriptstyle a = [A_{11},A_{12},A_{22},A_{13},A_{23},A_{33},...,A_{(n-1),n},A_{nn}]
 
         - For row major layout,
 
           .. math::
              
-             a = [A_{11},A_{12},A_{13},...,A_{1n},
+             \scriptstyle a = [A_{11},A_{12},A_{13},...,A_{1n},
                   A_{22},A_{23},...,A_{2n},...,
                   A_{(n-1),(n-1)},A_{(n-1),n},A_{nn}]
 
@@ -529,7 +529,7 @@ Matrix Storage
 
           .. math::
              
-             a = [A_{11},A_{21},A_{31},...,A_{n1},
+             \scriptstyle a = [A_{11},A_{21},A_{31},...,A_{n1},
                   A_{22},A_{32},...,A_{n2},...,
                   A_{(n-1),(n-1)},A_{n,(n-1)},A_{nn}]
 
@@ -537,7 +537,7 @@ Matrix Storage
 
           .. math::
              
-             a = [A_{11},A_{21},A_{22},A_{31},A_{32},A_{33},...,A_{n,(n-1)},A_{nn}]
+             \scriptstyle a = [A_{11},A_{21},A_{22},A_{31},A_{32},A_{33},...,A_{n,(n-1)},A_{nn}]
 
    .. container:: section
 
@@ -560,7 +560,7 @@ Matrix Storage
 
       .. math::
                
-         x = [\underbrace{
+         \scriptstyle x = [\underbrace{
              \underbrace{X_{1},*,...,*}_\text{incx},
              \underbrace{X_{2},*,...,*}_\text{incx},
              ...,
@@ -569,7 +569,7 @@ Matrix Storage
 
       .. math::
                
-         x = [\underbrace{
+         \scriptstyle x = [\underbrace{
              \underbrace{X_{n},*,...,*}_\text{|incx|},
              \underbrace{X_{n-1},*,...,*}_\text{|incx|},
              ...,

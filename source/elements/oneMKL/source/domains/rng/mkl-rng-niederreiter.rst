@@ -3,7 +3,7 @@
 niederreiter
 ============
 
-The niederreiter is a 32-bit Gray code-based quasi-random number generator.
+The niederreiter generator is a 32-bit Gray code-based quasi-random number generator.
 
 .. _onemkl_rng_niederreiter_description:
 
@@ -31,16 +31,26 @@ class niederreiter
 
 .. code-block:: cpp
 
+    namespace oneapi::mkl::rng {
     class niederreiter {
     public:
-        niederreiter(sycl::queue& queue, std::uint32_t dimensions);
-        niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials);
+        static constexpr std::uint32_t default_dimensions_number = 1;
+
+        niederreiter(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number);
+
+        niederreiter(sycl::queue queue, std::vector<std::uint32_t>& irred_polynomials);
+
         niederreiter(const niederreiter& other);
+
+        niederreiter(niederreiter&& other);
+
         niederreiter& operator=(const niederreiter& other);
+
+        niederreiter& operator=(niederreiter&& other);
+
         ~niederreiter();
     };
-
-.. cpp:class:: oneapi::mkl::rng::niederreiter
+    }
 
 .. container:: section
 
@@ -51,70 +61,105 @@ class niederreiter
 
         * - Routine
           - Description
-        * - `niederreiter(sycl::queue& queue, std::uint32_t dimensions)`_
+        * - `niederreiter(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number)`_
           - Constructor with specified number of dimensions. The value should be :math:`1..318`.
-        * - `niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials)`_
+        * - `niederreiter(sycl::queue queue, std::vector<std::uint32_t>& irred_polynomials)`_
           - Constructor for extended use-case, when it's needed to use the number of dimensions greater than 318 or obtain another sequence.
         * - `niederreiter(const niederreiter& other)`_
           - Copy constructor
+        * - `niederreiter(niederreiter&& other)`_
+          - Move constructor
+        * - `niederreiter& operator=(const niederreiter& other)`_
+          - Copy assignement operator
+        * - `niederreiter& operator=(niederreiter&& other)`_
+          - Move assignement operator
 
 .. container:: section
 
     .. rubric:: Constructors
 
-    .. _`niederreiter(sycl::queue& queue, std::uint32_t dimensions)`:
+    .. _`niederreiter(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number)`:
 
-    .. cpp:function:: niederreiter::niederreiter(sycl::queue& queue, std::uint32_t dimensions)
+    .. code-block:: cpp
+    
+        niederreiter::niederreiter(sycl::queue queue, std::uint32_t dimensions = default_dimensions_number)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         dimensions
             Number of dimensions. If :math:`dimen < 1` or :math:`dimen > 318`, assume :math:`dimen = 1`.
 
-    .. _`niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials)`:
+    .. _`niederreiter(sycl::queue queue, std::vector<std::uint32_t>& irred_polynomials)`:
 
-    .. cpp:function:: niederreiter::niederreiter(sycl::queue& queue, std::vector<std::uint32_t>& irred_polynomials)
+    .. code-block:: cpp
+    
+        niederreiter::niederreiter(sycl::queue queue, std::vector<std::uint32_t>& irred_polynomials)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue object``, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         irred_polynomials
             If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own irreducible polynomials. The number of dimmensions corresponds to the length of the vector.
 
     .. _`niederreiter(const niederreiter& other)`:
 
-    .. cpp:function:: niederreiter::niederreiter(const niederreiter& other)
+    .. code-block:: cpp
+    
+        niederreiter::niederreiter(const niederreiter& other)
 
     .. container:: section
 
         .. rubric:: Input Parameters
 
         other
-            Valid ``niederreiter`` object, state of current generator is changed to copy of other engine state, note: queue, which is hold by engine is also changing on other's one.
+            Valid ``niederreiter`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
 
-.. container:: section
+    .. _`niederreiter(niederreiter&& other)`:
 
-    .. rubric:: Subsequence selection functions support
+    .. code-block:: cpp
 
-    .. list-table::
-        :header-rows: 1
+        niederreiter::niederreiter(niederreiter&& other)
 
-        * - Routine
-          - Support
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Supported
-        * - :ref:`oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list\<std::uint64_t\> num_to_skip)<onemkl_rng_skip_ahead_common>`
-          - Not supported
-        * - :ref:`oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride)<onemkl_rng_leapfrog>`
-          - Not supported
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``niederreiter`` object. The ``queue`` and state of the other engine is moved to the current engine.
+
+    .. _`niederreiter& operator=(const niederreiter& other)`:
+
+    .. code-block:: cpp
+
+        niederreiter::niederreiter& operator=(const niederreiter& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``niederreiter`` object. The ``queue`` and state of the other engine is copied and applied to the current engine.
+
+    .. _`niederreiter& operator=(niederreiter&& other)`:
+
+    .. code-block:: cpp
+
+        niederreiter::niederreiter& operator=(niederreiter&& other)
+
+    .. container:: section
+
+        .. rubric:: Input Parameters
+
+        other
+            Valid ``niederreiter`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemkl_rng_engines_basic_random_number_generators`
