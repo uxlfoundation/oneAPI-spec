@@ -37,6 +37,8 @@ Release Notes
 
 * oneDNN
 
+  * Updated the DPC++ interoperability API
+  * Added section about namespaces
 
 * oneTBB
 
