@@ -39,8 +39,8 @@ oneDPL
 oneDNN
 ======
 
+* Bogusevschi, Silviu
 * **Fomenko, Evarist**
-
 
 oneCCL
 ======
