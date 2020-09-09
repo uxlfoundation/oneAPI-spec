@@ -118,12 +118,13 @@ cl::sycl::queue get_queue(const stream &astream);
 ///     does not own the buffer.
 ///
 /// @note
-///     If @p handle is provided, and @p akind is
-///     #dnnl::sycl_interop::memory_kind::buffer, an exception is thrown.
+///     If @p akind is #dnnl::sycl_interop::memory_kind::buffer, and @p ahandle
+///     is not #DNNL_MEMORY_ALLOCATE or #DNNL_MEMORY_NONE, an exception is
+///     thrown.
 ///
-/// @returns Memory object described by @p adesc memory descriptor, which is
-///     stored on the @p aengine engine object, and is of @p akind memory
-///     allocation kind.
+/// @returns Memory object described by @p adesc memory descriptor, which has
+///     @p akind memory allocation kind, and is attached to the @p aengine
+///     engine.
 memory make_memory(const memory::desc &adesc, const engine &aengine,
         memory_kind akind, void *ahandle = DNNL_MEMORY_ALLOCATE);
 
@@ -140,11 +141,13 @@ memory make_memory(const memory::desc &adesc, const engine &aengine,
 ///     does not own the buffer.
 ///
 /// @note
-///     If @p handle is provided, and @p akind is
-///     #dnnl::sycl_interop::memory_kind::buffer, an exception is thrown.
+///     If @p akind is #dnnl::sycl_interop::memory_kind::buffer, and @p ahandle
+///     is not #DNNL_MEMORY_ALLOCATE or #DNNL_MEMORY_NONE, an exception is
+///     thrown.
 ///
-/// @returns Memory object described by @p adesc memory descriptor, is in the @p
-///     astream stream, and is of @p akind memory allocation kind.
+/// @returns Memory object described by @p adesc memory descriptor, which has
+///     @p akind memory allocation kind, and used withing the @p astream
+///     stream.
 memory make_memory(const memory::desc &adesc, const stream &astream,
         memory_kind akind, void *ahandle = DNNL_MEMORY_ALLOCATE);
 
@@ -160,13 +163,29 @@ memory make_memory(const memory::desc &adesc, const stream &astream,
 ///     buffer.
 /// @param aengine Engine to store the data on.
 /// @param abuffer SYCL buffer.
-/// @param astream Stream object where the data is used.
 /// @returns Memory object which holds a @p abuffer SYCL buffer described by the
-/// @p adesc memory descriptor, stored on the @p aengine engine and used within
-///     the @p astream stream.
+///     @p adesc memory descriptor and attached to the @p aengine engine.
 template <typename T, int ndims>
 memory make_memory(const memory::desc &adesc, const engine &aengine,
-        cl::sycl::buffer<T, ndims> abuffer, stream &astream);
+        cl::sycl::buffer<T, ndims> abuffer);
+
+/// Creates a memory object using a specified SYCL buffer.
+///
+/// @note
+///     When such memory object is created, it is implied that its memory
+///     allocation kind is #dnnl::sycl_interop::memory_kind::buffer.
+///
+/// @tparam T Data type of the specified SYCL buffer.
+/// @tparam ndims Number of dimensions of the specified SYCL buffer.
+/// @param adesc Memory descriptor that describes the data within the specified
+///     buffer.
+/// @param astream Stream object where the data is used.
+/// @param abuffer SYCL buffer.
+/// @returns Memory object which holds a @p abuffer SYCL buffer described by the
+///     @p adesc memory descriptor and used within the @p astream stream.
+template <typename T, int ndims>
+memory make_memory(const memory::desc &adesc, const stream &astream,
+        cl::sycl::buffer<T, ndims> abuffer);
 
 /// Returns the memory allocation kind of a specified memory object.
 ///

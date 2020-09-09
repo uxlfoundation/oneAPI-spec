@@ -89,7 +89,10 @@ API
 .. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const stream &astream, memory_kind akind, void *ahandle = DNNL_MEMORY_ALLOCATE)
    :project: oneDNN
 
-.. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const engine &aengine, cl::sycl::buffer<T, ndims> abuffer, stream &astream)
+.. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const engine &aengine, cl::sycl::buffer<T, ndims> abuffer)
+   :project: oneDNN
+
+.. doxygenfunction:: dnnl::sycl_interop::make_memory(const memory::desc &adesc, const stream &astream, cl::sycl::buffer<T, ndims> abuffer)
    :project: oneDNN
 
 .. doxygenfunction:: dnnl::sycl_interop::get_memory_kind
