@@ -67,7 +67,14 @@ Number of elements of type ``T`` the scratchpad memory should able to hold to be
 
   .. rubric:: Throws
 
-:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+:ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+
+:ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+:ref:`oneapi::mkl::lapack::invalid_argument<onemkl_lapack_exception_invalid_argument>`
+
    Exception is thrown in case of incorrect supplied argument value.
    Position of wrong argument can be determined by `info()` method of exception object.
 
@@ -121,7 +128,14 @@ Number of elements of type ``T`` the scratchpad memory should able to hold to be
 
   .. rubric:: Throws
 
-:ref:`oneapi::mkl::lapack::exception<onemkl_lapack_exception>`
+This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+:ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+
+:ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+:ref:`oneapi::mkl::lapack::invalid_argument<onemkl_lapack_exception_invalid_argument>`
+
    Exception is thrown in case of incorrect supplied argument value.
    Position of wrong argument can be determined by `info()` method of exception object.
 
