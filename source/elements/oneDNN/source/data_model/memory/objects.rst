@@ -68,9 +68,9 @@ Memory objects combine memory descriptors with storage for data (a data handle).
 With USM, the data handle is simply a pointer to ``void``. The data handle can
 be queried using |memory::get_data_handle| and set using
 |memory::set_data_handle|. The underlying SYCL buffer, when used, can be queried
-using |memory::get_buffer| and set using |memory::set_buffer|. In addition, the
-memory descriptor and the engine underlying a memory object can be queried using
-|memory::get_desc| and |memory::get_engine| respectively.
+using |sycl_interop::get_buffer| and set using |sycl_interop::set_buffer|. In
+addition, the memory descriptor and the engine underlying a memory object can
+be queried using |memory::get_desc| and |memory::get_engine| respectively.
 
 ***
 API
