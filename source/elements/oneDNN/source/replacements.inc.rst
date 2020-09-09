@@ -325,8 +325,6 @@
 .. |memory::get_data_handle| replace:: :any:`dnnl::memory::get_data_handle`
 .. |memory::get_desc| replace:: :any:`dnnl::memory::get_desc`
 .. |memory::get_engine| replace:: :any:`dnnl::memory::get_engine`
-.. |memory::get_buffer| replace:: :any:`dnnl::memory::get_buffer`
-.. |memory::set_buffer| replace:: :any:`dnnl::memory::set_buffer`
 .. |memory::set_data_handle| replace:: :any:`dnnl::memory::set_data_handle`
 .. |memory| replace:: :any:`dnnl::memory`
 .. |pooling_forward::primitive_desc::workspace_desc| replace:: :any:`dnnl::pooling_forward::primitive_desc::workspace_desc`
@@ -355,4 +353,7 @@
 .. |sum| replace:: :any:`dnnl::sum`
 .. |vanilla_rnn_backward::desc| replace:: :any:`dnnl::vanilla_rnn_backward::desc`
 .. |vanilla_rnn_forward::desc| replace:: :any:`dnnl::vanilla_rnn_forward::desc`
+
+.. |sycl_interop::get_buffer| replace:: :any:`dnnl::sycl_interop::get_buffer`
+.. |sycl_interop::set_buffer| replace:: :any:`dnnl::sycl_interop::set_buffer`
 
