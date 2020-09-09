@@ -5,6 +5,7 @@ Contributors
 
 | Anastasiya Ageeva, Intel
 | Maksim Banin, Intel
+| Silviu Bogusevschi, Intel
 | Datta Bollapragada, Intel
 | Konstantin Boyarinov, Intel
 | Peter Caday, Intel
