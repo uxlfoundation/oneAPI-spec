@@ -137,4 +137,15 @@ a boolean ``allow_empty`` parameter that defaults to ``false`` and that makes
 the library to return an empty object (a zero object in case of memory
 descriptors) when an object cannot be constructed instead of throwing an error.
 
+**********
+Namespaces
+**********
+
+All oneDNN functions and classes reside in ``::dnnl`` namespace. The functions
+that accept or return DPC++ objects such as command queues or buffers reside in
+``::dnnl::sycl_interop`` namespace.
+
+Furthermore, oneDNN defines ``::oneapi::dnnl`` namespace, that is an alias for
+the ``::dnnl`` namespace.
+
 .. vim: ts=3 sw=3 et spell spelllang=en
