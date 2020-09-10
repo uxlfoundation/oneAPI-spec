@@ -57,7 +57,7 @@ required if covered by newer C++ or SYCL versions directly.
    Accessor simplifications     `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    bit_cast                     `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Deduction guides             `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
-   Device specific queries      `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
+   Device specific queries      `SYCL 2020 provisional`_  Not required [#tmp]_  Not required [#tmp]_  Not required [#tmp]_  NA [#na]_
    Extended atomics             `SYCL 2020 provisional`_  Required [#ea]_       Required [#ea]_       Required [#ea]_       NA [#na]_
    Kernel func type attributes  `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    In-order queues              `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
@@ -67,7 +67,7 @@ required if covered by newer C++ or SYCL versions directly.
    Required work-group size     `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Standard layout relaxed      `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Unified Shared Memory        `SYCL 2020 provisional`_  Required [#USM]_      Required [#USM]_      Required [#USM]_      `usm <https://github.com/intel/llvm/tree/sycl/sycl/test/usm>`__
-   `Accessor properties`_       DPC++ extension           Required              Required              Required              NA [#na]_
+   `Accessor properties`_       DPC++ extension           Required [#aprop]_    Required [#aprop]_    Required [#aprop]_    NA [#na]_
    `CXX standard library`_      DPC++ extension           Required              Required              Required              NA [#na]_
    `Data flow pipes`_           DPC++ extension           Not required          Not required          Required              `fpga_tests <https://github.com/intel/llvm/tree/sycl/sycl/test/fpga_tests>`__
    `Enqueued barriers`_         DPC++ extension           Required              Required              Required              NA [#na]_
@@ -77,7 +77,7 @@ required if covered by newer C++ or SYCL versions directly.
    `Pinned memory property`_    DPC++ extension           Required              Required              Required              NA [#na]_
    `Reductions`_                DPC++ extension           Required [#redc]_     Required [#redc]_     Required [#redc]_     NA [#na]_
    `Restrict all arguments`_    DPC++ extension           Required              Required              Required              NA [#na]_
-   `Static local mem query`_    DPC++ extension           Required              Required              Required              NA [#na]_
+   `Static local mem query`_    DPC++ extension           Not required [#tmp]_  Not required [#tmp]_  Not required [#tmp]_  NA [#na]_
    `Sub-groups`_                DPC++ extension           Required              Required              Not required [#tmp]_  `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
    `Sub-group algorithms`_      DPC++ extension           Required [#sga]_      Required [#sga]_      Not required [#tmp]_  `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
    ===========================  ========================  ====================  ====================  ====================  =============
@@ -107,6 +107,7 @@ required if covered by newer C++ or SYCL versions directly.
 .. [#redc] DPC++ requirement is for one dimensional reductions, single reduction variable support
 .. [#sga] DPC++ requirement is for sub-group algorithms that have equivalent group algorithms
 .. [#ea] DPC++ requirement does not include support for atomics in the generic address space
+.. [#aprop] DPC++ requirement is for the general property mechanism, and not specific properties within it
 
 Detailed API and Language Descriptions
 --------------------------------------
