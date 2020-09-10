@@ -106,12 +106,23 @@ b
 
   .. rubric:: Throws
 
-:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
-   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+:ref:`oneapi::mkl::lapack::batch_error<onemkl_lapack_exception_batch_error>`
+
+:ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+
+:ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+:ref:`oneapi::mkl::lapack::invalid_argument<onemkl_lapack_exception_invalid_argument>`
+
+   The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
    If ``info = -n``, the :math:`n`-th parameter had an illegal value.
 
    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
+   If ``info`` is not zero and `detail()` returns zero, then there were some errors for some of the problems in the supplied batch and ``info`` code contains the number of failed calculations in a batch.
    
    If ``info`` is zero, then for some of the matrices diagonal element of the Cholesky factor is zero, and the solve could not be completed. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The indices of first zero diagonal elements in these matrices can be obtained by `exceptions()` method of exception object.
 
@@ -205,12 +216,23 @@ Output event to wait on to ensure computation is complete.
 
   .. rubric:: Throws
 
-:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
-   Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
+This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+:ref:`oneapi::mkl::lapack::batch_error<onemkl_lapack_exception_batch_error>`
+
+:ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+
+:ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+:ref:`oneapi::mkl::lapack::invalid_argument<onemkl_lapack_exception_invalid_argument>`
+
+   The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
    If ``info = -n``, the n-th parameter had an illegal value.
 
    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
+   If ``info`` is not zero and `detail()` returns zero, then there were some errors for some of the problems in the supplied batch and ``info`` code contains the number of failed calculations in a batch.
    
    If ``info`` is zero, then for some of the matrices diagonal element of the Cholesky factor is zero, and the solve could not be completed. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The indices of first zero diagonal elements in these matrices can be obtained by `exceptions()` method of exception object.
 
@@ -298,12 +320,23 @@ Output event to wait on to ensure computation is complete.
 
   .. rubric:: Throws
 
-:ref:`oneapi::mkl::lapack::batch_exception<onemkl_lapack_batch_exception>`
+This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+:ref:`oneapi::mkl::lapack::batch_error<onemkl_lapack_exception_batch_error>`
+
+:ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+
+:ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+:ref:`oneapi::mkl::lapack::invalid_argument<onemkl_lapack_exception_invalid_argument>`
+
    Exception is thrown in case of problems during calculations. The info code of the problem can be obtained by `info()` method of exception object:
 
    If ``info = -n``, the :math:`n`-th parameter had an illegal value.
 
    If ``info`` equals to value passed as scratchpad size, and `detail()` returns non zero, then passed scratchpad is of insufficient size, and required size should be not less then value returned by `detail()` method of exception object.
+
+   If ``info`` is not zero and `detail()` returns zero, then there were some errors for some of the problems in the supplied batch and ``info`` code contains the number of failed calculations in a batch.
 
    If ``info`` is zero, then for some of the matrices diagonal element of the Cholesky factor is zero, and the solve could not be completed. The indices of such matrices in the batch can be obtained with `ids()` method of the exception object. The indices of first zero diagonal elements in these matrices can be obtained by `exceptions()` method of exception object.
 

@@ -64,8 +64,14 @@ LAPACK specific exceptions
 
     ".. _onemkl_lapack_exception:
 
-    ``oneapi::mkl::lapack::exception``", "Reports general errors that occur inside a LAPACK routine"
-    ".. _onemkl_lapack_batch_exception:
-
-    ``oneapi::mkl::lapack::batch_exception``", "Reports general errors that occur inside a LAPACK batch routine"
+    ``oneapi::mkl::lapack::exception``", "Base class for all LAPACK exceptions providing access to info code familiar to users of conventional LAPACK API. All LAPACK related exceptions can be handled with catch block for this class."
+    ".. _onemkl_lapack_exception_invalid_argument:
+    
+    ``oneapi::mkl::lapack::invalid_argument``", "Reports errors when arguments provided to the LAPACK subroutine are inconsistent or do not match expected values. Class extends base ``oneapi::mkl::invalid_argument`` with ability to access conventional status info code."
+    ".. _onemkl_lapack_exception_computation_error:
+    
+    ``oneapi::mkl::lapack::computation_error``", "Reports computation errors that have occurred during call to LAPACK subroutine. Class extends base ``oneapi::mkl::computation_error`` with ability to access conventional status info code familiar to LAPACK users."
+    ".. _onemkl_lapack_exception_batch_error:
+    
+    ``oneapi::mkl::lapack::batch_error``", "Reports errors that have occurred during batch LAPACK computations. Class extends base ``oneapi::mkl::batch_error`` with ability to access individual exception objects for each of the issues observed in a batch and an info code. The info code contains the number of errors that occurred in a batch. Positions of problems in a supplied batch that experienced issues during computations can be retrieved with `ids()` method, and list of particular exceptions can be obtained with `exceptions()` method of the exception object. Possible exceptions for a batch are documented for corresponding non-batch API."
 
