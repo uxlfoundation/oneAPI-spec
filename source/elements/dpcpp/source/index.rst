@@ -58,7 +58,7 @@ required if covered by newer C++ or SYCL versions directly.
    bit_cast                     `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Deduction guides             `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Device specific queries      `SYCL 2020 provisional`_  Not required [#tmp]_  Not required [#tmp]_  Not required [#tmp]_  NA [#na]_
-   Extended atomics             `SYCL 2020 provisional`_  Required [#ea]_       Required [#ea]_       Required [#ea]_       NA [#na]_
+   Extended atomics             `SYCL 2020 provisional`_  Required [#ea]_       Required [#ea]_       Not required [#tmp]_  NA [#na]_
    Kernel func type attributes  `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    In-order queues              `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Math array                   `SYCL 2020 provisional`_  Not required [#tmp]_  Not required [#tmp]_  Not required [#tmp]_  NA [#na]_
