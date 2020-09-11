@@ -68,18 +68,18 @@ required if covered by newer C++ or SYCL versions directly.
    Standard layout relaxed      `SYCL 2020 provisional`_  Required              Required              Required              NA [#na]_
    Unified Shared Memory        `SYCL 2020 provisional`_  Required [#USM]_      Required [#USM]_      Required [#USM]_      `usm <https://github.com/intel/llvm/tree/sycl/sycl/test/usm>`__
    `Accessor properties`_       DPC++ extension           Required [#aprop]_    Required [#aprop]_    Required [#aprop]_    NA [#na]_
-   `CXX standard library`_      DPC++ extension           Required              Required              Required              NA [#na]_
+   `CXX standard library`_      DPC++ extension           Required              Required              Not required [#tmp]_  NA [#na]_
    `Data flow pipes`_           DPC++ extension           Not required          Not required          Required              `fpga_tests <https://github.com/intel/llvm/tree/sycl/sycl/test/fpga_tests>`__
    `Enqueued barriers`_         DPC++ extension           Required              Required              Required              NA [#na]_
-   `Group algorithms`_          DPC++ extension           Required              Required              Required              NA [#na]_
-   `Group mask`_                DPC++ extension           Required              Required              Required              NA [#na]_
+   `Group algorithms`_          DPC++ extension           Required              Required              Not required [#tmp]_  NA [#na]_
+   `Group mask`_                DPC++ extension           Not required [#tmp]_  Not required [#tmp]_  Not required [#tmp]_  NA [#na]_
    `Parallel for shortcuts`_    DPC++ extension           Required              Required              Required              NA [#na]_
    `Pinned memory property`_    DPC++ extension           Required              Required              Required              NA [#na]_
-   `Reductions`_                DPC++ extension           Required [#redc]_     Required [#redc]_     Required [#redc]_     NA [#na]_
+   `Reductions`_                DPC++ extension           Required [#redc]_     Required [#redc]_     Not required [#tmp]_  NA [#na]_
    `Restrict all arguments`_    DPC++ extension           Required              Required              Required              NA [#na]_
    `Static local mem query`_    DPC++ extension           Not required [#tmp]_  Not required [#tmp]_  Not required [#tmp]_  NA [#na]_
-   `Sub-groups`_                DPC++ extension           Required              Required              Not required [#tmp]_  `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
-   `Sub-group algorithms`_      DPC++ extension           Required [#sga]_      Required [#sga]_      Not required [#tmp]_  `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
+   `Sub-groups`_                DPC++ extension           Required              Required              Not required          `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
+   `Sub-group algorithms`_      DPC++ extension           Required [#sga]_      Required [#sga]_      Not required          `sub_group <https://github.com/intel/llvm/tree/sycl/sycl/test/sub_group>`__
    ===========================  ========================  ====================  ====================  ====================  =============
 
 
