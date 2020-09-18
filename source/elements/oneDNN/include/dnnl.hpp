@@ -970,9 +970,9 @@ struct memory {
     ///       doesn't own the buffer.
     ///     - The #DNNL_MEMORY_ALLOCATE special value. Instructs the library to
     ///       allocate the buffer for the memory object. In this case the
-    ///       library owns the buffer. In this case, the memory allocation kind
-    ///       of the underlying buffer is
-    ///       #dnnl::sycl_interop::memory_kind::usm_device.
+    ///       library owns the buffer and the memory allocation kind of the
+    ///       underlying buffer is
+    ///       #dnnl::sycl_interop::memory_kind::usm.
     ///     - #DNNL_MEMORY_NONE to create dnnl::memory without an underlying
     ///       buffer.
     memory(const desc &md, const engine &aengine, void *handle);
@@ -981,7 +981,7 @@ struct memory {
     ///
     /// The underlying buffer for the memory will be allocated by the library.
     /// The memory allocation kind of the underlying buffer is
-    /// #dnnl::sycl_interop::memory_kind::usm_device.
+    /// #dnnl::sycl_interop::memory_kind::usm.
     ///
     /// @param md Memory descriptor.
     /// @param aengine Engine to store the data on.

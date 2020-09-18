@@ -33,7 +33,7 @@ struct memory {
     memory(memory::desc, engine, void *);
 };
 
-enum class memory_kind { usm_device };
+enum class memory_kind { usm };
 enum class prop_kind { forward_inference };
 enum class algorithm { eltwise_relu };
 
