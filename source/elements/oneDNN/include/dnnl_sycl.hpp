@@ -35,14 +35,9 @@ namespace sycl_interop {
 
 /// Memory allocation kinds.
 enum class memory_kind {
-    /// Device memory allocation kind. Such memory allocation is accessible by
-    /// the device, and is not accessible by the host.
-    usm_device,
-    /// Shared memory allocation kind. Such memory allocation is accessible by
-    /// both the host and the device.
-    usm_shared,
-    /// Buffer memory allocation kind. Such memory allocation is accessible in
-    /// global address space.
+    /// USM memory allocation kind.
+    usm,
+    /// Buffer memory allocation kind.
     buffer,
 };
 
@@ -113,7 +108,7 @@ cl::sycl::queue get_queue(const stream &astream);
 /// @param akind Memory allocation kind.
 /// @param ahandle Handle of the memory data to use. This parameter is optional.
 ///     By default, the underlying memory buffer is allocated internally, its
-///     memory allocation kind is #dnnl::sycl_interop::memory_kind::usm_device,
+///     memory allocation kind is #dnnl::sycl_interop::memory_kind::usm,
 ///     and the library owns the buffer. If @p handle is provided, the library
 ///     does not own the buffer.
 ///
@@ -136,7 +131,7 @@ memory make_memory(const memory::desc &adesc, const engine &aengine,
 /// @param akind Memory allocation kind.
 /// @param ahandle Handle of the memory data to use. This parameter is optional.
 ///     By default, the underlying memory buffer is allocated internally, its
-///     memory allocation kind is #dnnl::sycl_interop::memory_kind::usm_device,
+///     memory allocation kind is #dnnl::sycl_interop::memory_kind::usm,
 ///     and the library owns the buffer. If @p handle is provided, the library
 ///     does not own the buffer.
 ///
