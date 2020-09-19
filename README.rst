@@ -7,10 +7,9 @@ oneAPI Specifications
 
 This repo contains the sources for the `oneAPI Specification`_.
 
-For the latest build from master branch, see `HTML
-<https://d1c71xsfq9wxv8.cloudfront.net/ci/main/index.html>`__ and `PDF
-<https://d1c71xsfq9wxv8.cloudfront.net/ci/main/oneAPI-spec.pdf>`__
-
+For the latest build from main branch, see `HTML
+<https://oneapi-src.gihtub.io/oneAPI-spec>`__ and `PDF
+<https://rscohn2.github.io/oneAPI-spec/oneAPI-spec.pdf>`__.
 
 For more information about oneAPI, see `oneapi.com
 <https://oneapi.com>`__. For information about future releases of the
@@ -106,7 +105,9 @@ Submitting changes
 ------------------
 
 Changes are submitted as PR's to this repo. PR's and push trigger the
-CI to build the doc and save it as an artifact.
+CI to build the doc and save it as an artifact. If you are working in
+a fork on github, commits to the main branch will build and publish
+the doc in the github pages associated with the repo.
 
 ------
 Docker
@@ -130,32 +131,12 @@ CI
 We use GitHub actions. See `<.github/workflows/ci.yml>`_
 
 
-----------
-Publishing
-----------
-
-Merge from master to publish::
-  
-  git checkout publish
-  git merge master
-  git commit -m 'merge from master'
-  git push
-  
-After CI completes, view the results on the `pre-production server
-<https://d1c71xsfq9wxv8.cloudfront.net/versions/latest/index.html>`__
-. Sync pre-production to production with::
-
-  python scripts/oneapi.py prod-publish
-
-Then purge the CDN to make it visible. Add a release in github web
-interface, and allow it to tag the publish branch.
-
 -----------------------------
 Creating a new version number
 -----------------------------
 
-Change oneapi_version in `<source/conf/common_conf.py>`__ and update
-the table in `<source/versions.rst>`__.
+Change version in `<oneapi-doc.json>`__ and update the table in
+`<source/versions.rst>`__.
 
 ------------
 More Reading
