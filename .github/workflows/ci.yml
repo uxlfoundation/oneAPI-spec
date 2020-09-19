@@ -26,20 +26,23 @@ jobs:
       with:
           name: build
           path: build
-    - name: Publish to pre-production
-      if: ${{ github.ref == 'refs/heads/publish'}}
-      env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-      run: |
-          . venv/bin/activate
-          python scripts/oneapi.py pre-publish
-    - name: Publish main
-      if: ${{ github.ref == 'refs/heads/master' && github.repository == 'oneapi-src/oneAPI-spec'}}
-      env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-      run: |
-          . venv/bin/activate
-          python scripts/oneapi.py ci-publish
 
+    - name: Checkout gh-pages
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+        path: gh-pages
+    - name: Publish to github pages
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: |
+          cd gh-pages
+          rm -rf *
+          touch .nojekyll
+          cp -r ../build/html/* .
+          cp ../build/latex/*.pdf .
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Update from github actions"
+          git push

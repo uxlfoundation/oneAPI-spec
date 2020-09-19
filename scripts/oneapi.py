@@ -44,11 +44,6 @@ import tarfile
 import venv
 from zipfile import ZipFile
 
-sys.path.insert(0, os.path.abspath(join('source','conf')))
-import common_conf
-
-oneapi_spec_version = common_conf.env['oneapi_version']
-
 sphinx_build   = 'sphinx-build'
 source_dir     = 'source'
 build_dir      = 'build'
@@ -219,67 +214,6 @@ def build(root, target):
     prep(root)
     sphinx(root, target)
 
-def site_zip():
-    with ZipFile('site.zip', 'w') as site_zip:
-        for r, dirs, files in os.walk('site', topdown=True):
-            # Exclude DAL API because it is 1.7G
-            if os.path.basename(r) == 'oneDAL':
-                dirs = remove_elements(dirs, ['api', '_sources'])
-            for file in files:
-                site_zip.write(join(r, file))
-    
-# content served on buckets
-s3_prod_root = 's3://oneapi.com/spec'
-s3_pre_root = 's3://pre.oneapi.com/spec'
-
-# served uncached
-cloudfront_prod_root = 'https://d9mamou20v67v.cloudfront.net'
-cloudfront_pre_root = 'https://d1c71xsfq9wxv8.cloudfront.net'
-
-# cached by akamai
-akamai_prod_root = 'https://spec.oneapi.com'
-akamai_pre_root = 'https://spec.pre.oneapi.com'
-
-pdf_name = 'oneAPI-spec.pdf'
-
-@action
-def prod_publish(root, target=None):
-    # sync versions directory from pre to prod
-    shell('aws s3 sync --only-show-errors --delete %s/versions/latest %s/versions/latest'
-          % (s3_pre_root, s3_prod_root))
-    shell('aws s3 sync --only-show-errors --delete %s/versions/latest %s/versions/%s'
-          % (s3_prod_root, s3_prod_root, oneapi_spec_version))
-    log('published at %s and %s'
-        % (akamai_prod_root, cloudfront_prod_root))
-    
-def pre_publish_version(version):
-    # publish html and pdf of build to pre
-    html = join('build','html')
-    pdf = join('build','latex',pdf_name)
-    shell('aws s3 sync --only-show-errors --delete %s %s/%s'
-          % (html, s3_pre_root, version))
-    shell('aws s3 cp %s %s/%s/%s'
-          % (pdf, s3_pre_root, version, pdf_name))
-
-@action
-def ci_publish(root, target=None):
-    root_only(root)
-    path = 'ci/main'
-    pre_publish_version(path)
-    log('published %s/%s/index.html and %s/%s/%s'
-        % (cloudfront_pre_root, path, cloudfront_pre_root, path, pdf_name))
-        
-
-@action
-def pre_publish(root, target=None):
-    root_only(root)
-    pre_publish_version('versions/%s' % oneapi_spec_version)
-    shell('aws s3 sync --only-show-errors --delete %s/versions/%s %s/versions/latest'
-          % (s3_pre_root, oneapi_spec_version, s3_pre_root))
-    log('published %s/versions/latest/index.html and %s/versions/latest/%s'
-        % (cloudfront_pre_root, cloudfront_pre_root, pdf_name))
-
-    
 @action
 def spec_venv(root, target=None):
     root_only(root)
@@ -310,9 +244,6 @@ commands = {'clean': clean,
             'latexpdf': build,
             'spelling': build,
             'prep': prep,
-            'pre-publish': pre_publish,
-            'prod-publish': prod_publish,
-            'ci-publish': ci_publish,
             'sort-words': sort_words,
             'spec-venv': spec_venv}
     

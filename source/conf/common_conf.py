@@ -33,11 +33,11 @@ extensions = [
     'dalapi', # oneDAL API generator
 ]
 
-with open('doc.json') as fin:
+with open('../oneapi-doc.json') as fin:
     cfg = json.load(fin)
     
 env = {
-    'oneapi_version': cfg['oneapi_version'],
+    'oneapi_version': cfg['version'],
 }
 
 prolog_template = string.Template("""
