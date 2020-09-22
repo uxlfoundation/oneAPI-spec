@@ -17,8 +17,6 @@ Interfaces to query information about execution environment.
         }
     }
 
-A tbb::info namespace contains interfaces for getting library configuration information.
-
 Types
 -----
 

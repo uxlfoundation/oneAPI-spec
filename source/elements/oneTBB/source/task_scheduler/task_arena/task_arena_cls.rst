@@ -109,7 +109,7 @@ Member types and constants
     Represents limitations applied to threads within ``task_arena``.
 
     ``numa_node`` - An integral logical index uniquely identifying a NUMA node.
-    All threads joining the task_arena are bound to this NUMA node.
+    All threads joining the ``task_arena`` are bound to this NUMA node.
 
     .. note::
 
@@ -142,12 +142,12 @@ Member functions
 
     .. caution::
 
-        If ``max_concurrency`` and ``reserved_for_masters`` are
+        If ``constraints::max_concurrency`` and ``reserved_for_masters`` are
         explicitly set to be equal and greater than 1, oneTBB worker threads will never
         join the arena. As a result, the execution guarantee for enqueued tasks is not valid
         in such arena. Do not use ``task_arena::enqueue()`` with an arena set to have no worker threads.
 
-    If ``constraints.numa_node`` is specified, then all threads that enter the arena are automatically
+    If ``constraints::numa_node`` is specified, then all threads that enter the arena are automatically
     pinned to corresponding NUMA node.
 
 .. cpp:function:: task_arena(const task_arena&)
@@ -251,9 +251,7 @@ Example
 -------
 
 The example demonstrates task_arena NUMA support extensions. Each constructed task_arena is pinned
-to the corresponding node. If the platform does not have NUMA capabilities, the example will create
-only one ``task_arena`` and threads entering this ``task_arena`` will not be bound to any hardware
-resources.
+to the corresponding NUMA node.
 
 .. code:: cpp
 
