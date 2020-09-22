@@ -10,14 +10,14 @@ Interfaces to query information about execution environment.
    // Declared in info.h
 
     namespace tbb {
-        using numa_node_id = /*unspecified*/;
+        using numa_node_id = /*implementation-defined*/;
         namespace info {
             std::vector<numa_node_id> numa_nodes();
             int default_concurrency(numa_node_id id = tbb::task_arena::automatic);
         }
     }
 
-A tbb::info namespace contains interfaces for getting library configuration information. 
+A tbb::info namespace contains interfaces for getting library configuration information.
 
 Types
 -----
