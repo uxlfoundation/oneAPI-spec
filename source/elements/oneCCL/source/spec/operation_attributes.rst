@@ -2,6 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
+====================
 Operation Attributes
 ====================
 
@@ -11,7 +12,6 @@ oneCCL specification defines the following operation attribute classes:
 
 - ``allgatherv_attr``
 - ``allreduce_attr``
-- ``alltoall_attr``
 - ``alltoallv_attr``
 - ``barrier_attr``
 - ``broadcast_attr``
@@ -42,8 +42,7 @@ operation_attr_id::synchronous
     synchronous/asynchronous communication operation
 operation_attr_id::match_id
     | the unique identifier of the operation
-    | enables correct matching and execution of the operations started in different order on different ranks
-    | in conjunction with ``to_cache``, it also enables the caching of the communication operation
+    | in conjunction with ``to_cache``, it enables the caching of the communication operation
 
 The communication operation specific attribute identifiers may extend the list of common identifiers.
 
@@ -68,7 +67,7 @@ allreduce_attr_id::reduction_fn / reduce_attr_id::reduction_fn / reduce_scatter_
 
 .. code:: cpp
 
-        typedef void (*ccl_reduction_fn_t)
+        typedef void (*reduction_fn)
         (
             const void*,      // in_buf
             size_t,           // in_count
@@ -83,14 +82,12 @@ allreduce_attr_id::reduction_fn / reduce_attr_id::reduction_fn / reduce_scatter_
             const size_t offset;
         } fn_context;
 
-The ``environment`` class shall provide the ability to create an attribute object for a communication operation.
-
 Creating an operation attribute object, which may be used in a corresponding communication operation:
 
 .. code:: cpp
 
     template <class OpAttrType>
-    OpAttrType environment::create_operation_attr() const;
+    OpAttrType ccl::create_operation_attr() const;
 
 return ``OpAttrType``
     an object to hold attributes for a specific communication operation

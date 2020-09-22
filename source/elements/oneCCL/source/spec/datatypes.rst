@@ -5,6 +5,7 @@
 .. _`16-bit/half-precision floating point`: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 .. _`non-standard 16-bit floating point with 7-bit mantissa`: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
 
+=========
 Datatypes
 =========
 
@@ -65,6 +66,7 @@ Custom Datatypes
 oneCCL specification defines the way to register and deregister a custom datatype
 using the ``datatype_attr`` attribute object.
 
+
 The list of identifiers that may be used to fill an attribute object:
 
 .. code:: cpp
@@ -76,42 +78,44 @@ The list of identifiers that may be used to fill an attribute object:
 datatype_attr_id::size
     the size of the datatype in bytes
 
-The ``environment`` class shall provide the ability to create a datatype attribute object, to register the datatype based on an attribute object, and to deregister the datatype.
 
 Creating a datatype attribute object, which may used to register custom datatype:
 
 .. code:: cpp
 
-    datatype_attr environment::create_datatype_attr() const;
+    datatype_attr ccl::create_datatype_attr() const;
 
 return ``datatype_attr``
     an object containing attributes for the custom datatype
+
 
 Registering a custom datatype to be used in communication operations:
 
 .. code:: cpp
 
-    datatype environment::register_datatype(const datatype_attr& attr);
+    datatype ccl::register_datatype(const datatype_attr& attr);
 
 attr
     the datatype's attributes
 return ``datatype``
     the handle for the custom datatype
 
+
 Deregistering a custom datatype:
 
 .. code:: cpp
 
-    void environment::deregister_datatype(datatype dtype);
+    void ccl::deregister_datatype(datatype dtype);
 
 dtype
     the handle for the custom datatype
+
 
 Retrieving a datatype size in bytes:
 
 .. code:: cpp
 
-    size_t environment::get_datatype_size(datatype dtype) const;
+    size_t ccl::get_datatype_size(datatype dtype) const;
 
 dtype
     the datatype's handle

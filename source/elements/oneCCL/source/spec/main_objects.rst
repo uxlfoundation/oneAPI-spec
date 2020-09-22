@@ -2,72 +2,141 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
+===============
 oneCCL Concepts
 ===============
 
 oneCCL specification defines the following list of concepts:
 
-- `Environment`_
+- `Device`_
+- `Context`_
 - `Key-Value Store`_
 - `Communicator`_
-- `Device Communicator`_
-- `Request`_
-- `Event`_
 - `Stream`_
+- `Event`_
 - `Operation Attributes`_
 
-Environment
-***********
 
-oneCCL specification defines ``environment`` class that shall provide a singleton object and helper methods to manage other oneCCL objects, such as communicators, attributes, and so on.
+.. _Device:
 
-Retrieves the environment singleton object and initializes the library.
+Device
+******
+
+.. note::
+    Here and below, a native device/context/stream/event are defined in the scope of SYCL device runtime.
 
 .. code:: cpp
 
-    static environment& environment::instance();
+    using native_device_type = cl::sycl::device;
+    using native_context_type = cl::sycl::context;
+    using native_stream_type = cl::sycl::queue;
+    using native_event_type = cl::sycl::event;
 
-return ``environment``
-    an environment object
+oneCCL specification defines ``device`` as an abstraction of a computational device: a CPU, a specific GPU card in the system, or any other device participating in a communication operation. ``device`` corresponds to the communicator's rank (addressable entity in a communication operation).
+
+oneCCL specification defines the way to create an instance of the ``device`` class with a native object (``native_device_type``) and without a native object (corresponds to the host).
+
+
+Creating a new device object:
+
+.. code:: cpp
+
+    device ccl::create_device(native_device_type& native_device) const;
+
+    device ccl::create_device() const;
+
+native_device
+    the existing native device object
+return ``device``
+    a device object
+
+``device`` class shall provide ability to retrieve a native object.
+
+Retrieving a native device object:
+
+.. code:: cpp
+
+    native_device_type device::get_native() const;
+
+return ``native_device_type``
+    | a native device object
+    | shall throw exception if a ``device`` object does not wrap the native object
+
+
+.. _Context:
+
+Context
+*******
+
+oneCCL specification defines ``context`` as an abstraction of a computational devices context that is responsible for managing resources and for executing of communication operations on one or more devices specified in the context.
+
+oneCCL specification defines the way to create an instance of the ``context`` class with a native object (``native_context_type``) and without a native object.
+
+
+Creating a new context object:
+
+.. code:: cpp
+
+    context ccl::create_context(native_context_type& native_context) const;
+
+    context ccl::create_context() const;
+
+native_context
+    the existing native context object
+return ``context``
+    a context object
+
+
+``context`` class shall provide ability to retrieve a native object.
+
+Retrieving a native context object:
+
+.. code:: cpp
+
+    native_context_type context::get_native() const;
+
+return ``native_context_type``
+    | a native context object
+    | shall throw exception if a ``context`` object does not wrap the native object
 
 
 Key-Value Store
 ***************
 
-``kvs_interface`` defines the key-value store (KVS) interface to be used to connect the ranks during the creation of oneCCL communicator. The interface shall include blocking ``get`` and ``set`` methods.
+``kvs_interface`` defines the key-value store (KVS) interface to be used to establish connection between ranks during the creation of oneCCL communicator. The interface shall include blocking ``get`` and ``set`` methods.
+
 
 Getting a record from the key-value store:
 
 .. code:: cpp
 
     virtual vector_class<char> kvs_interface::get(
-        const string_class& prefix,
         const string_class& key) const = 0;
 
-prefix
-    the prefix that allows operations with KVS in a separate namespace
-    to avoid key names conflicts with the existing KVS records
 key
-    the key at which the value should be stored
+    the key of value to be retrieved
 return ``vector_class<char>``
     the value associated with the given key
+
+.. note::
+    ``get`` operation with a non-existing key shall return empty result
+
 
 Saving a record in the key-value store:
 
 .. code:: cpp
 
     void kvs_interface::set(
-        const string_class& prefix,
         const string_class& key,
         const vector_class<char>& data) const = 0;
 
-prefix
-    the prefix that allows operations with KVS in a separate namespace
-    to avoid key names conflicts with the existing KVS records
 key
     the key at which the value should be stored
 data
     the value that should be associated with the given key
+
+.. note::
+    ``set`` operation with empty ``data`` shall remove a record from the key-value store
 
 
 oneCCL specification defines ``kvs`` class as a built-in KVS provided by oneCCL.
@@ -81,49 +150,47 @@ oneCCL specification defines ``kvs`` class as a built-in KVS provided by oneCCL.
     static constexpr size_t address_max_size = 256;
     using address_type = array_class<char, address_max_size>;
 
-    const address_type& get_address() const;
-
     ~kvs() override;
 
+    address_type get_address() const;
+
     vector_class<char> get(
-        const string_class& prefix,
         const string_class& key) const override;
 
     void set(
-        const string_class& prefix,
         const string_class& key,
         const vector_class<char>& data) const override;
 
     }
 
+
 Retrieving an address of built-in key-value store:
 
 .. code:: cpp
 
-    const address_type& kvs::get_address() const;
+    kvs::address_type kvs::get_address() const;
 
 return ``kvs::address_type``
     | the address of the key-value store
     | should be retrieved from the main built-in KVS and distributed to other processes for the built-in KVS creation
 
 
-The ``environment`` class shall provide the ability to create an instance of ``kvs`` class.
-
 Creating a main built-in key-value store. Its address should be distributed using an out-of-band communication mechanism
 and be used to create key-value stores on other ranks:
 
 .. code:: cpp
 
-    kvs environment::create_main_kvs() const;
+    kvs ccl::create_main_kvs() const;
 
 return ``kvs``
     the main key-value store object
+
 
 Creating a new key-value store from main kvs address:
 
 .. code:: cpp
 
-    kvs environment::create_kvs(const kvs::addr_type& addr) const;
+    kvs ccl::create_kvs(const kvs::address_type& addr) const;
 
 addr
     the address of the main kvs
@@ -136,29 +203,47 @@ return ``kvs``
 Communicator
 ************
 
-oneCCL specification defines ``communicator`` class that describes a group of communicating ranks, where rank is a single process. ``communicator`` defines communication operations on host memory buffers.
+oneCCL specification defines ``communicator`` class that describes a group of communicating ranks, where a rank is an addressable entity in a communication operation and corresponds to single oneCCL device.
 
-The ``environment`` class shall provide the ability to create an instance of ``communicator`` class.
+``communicator`` defines communication operations on memory buffers between homogenous oneCCL devices, that is, all oneCCL devices either wrap native device objects of the same type (for example CPUs only or GPUs only) or do not wrap native objects.
 
-Creating a new host communicator with user-supplied size, rank, and kvs:
+Each process may correspond to multiple ranks.
+
+
+Creating a new communicator with user-supplied size, rank-to-device mapping/rank, context and kvs:
+
+.. note::
+  If ``device`` and ``context`` objects are omitted, then they are created with ``ccl::create_device()`` and ``ccl::create_context()`` functions without native objects.
 
 .. code:: cpp
 
-    communicator environment::create_communicator(
-        const size_t size,
-        const size_t rank,
+    vector_class<communicator> create_communicators(
+        size_t size,
+        const map_class<size_t, device>& rank_device_map,
+        const context& context,
+        shared_ptr_class<kvs_interface> kvs) const;
+
+    communicator create_communicator(
+        size_t size,
+        size_t rank,
         shared_ptr_class<kvs_interface> kvs) const;
 
 size
     user-supplied total number of ranks
+rank_device_map
+    user-supplied mapping of local ranks on devices
 rank
-    user-supplied rank
+    user-supplied local rank
+context
+    device context
 kvs
     key-value store for ranks wire-up
-return ``communicator``
-    communicator object
+return ``vector_class<communicator>``
+    a vector of communicators
 
-``communicator`` shall provide methods to retrieve the rank that corresponds to the communicator object and the number of ranks in the communicator. It shall also provide communication operations on host memory buffers.
+
+``communicator`` shall provide methods to retrieve the rank, the device, and the context that correspond to the communicator object as well as the total number of ranks in the communicator.
+
 
 Retrieving the rank in a communicator:
 
@@ -167,132 +252,40 @@ Retrieving the rank in a communicator:
     size_t communicator::rank() const;
 
 return ``size_t``
-    rank of the current process
+    the rank that corresponds to the communicator object
 
-Retrieving the number of ranks in a communicator:
+
+Retrieving the total number of ranks in a communicator:
 
 .. code:: cpp
 
     size_t communicator::size() const;
 
 return ``size_t``
-    number of the ranks
+    the total number of the ranks
 
-.. note::
-    See also: :doc:`collective_operations`
-
-
-.. _Device Communicator:
-
-Device Communicator
-*******************
-
-oneCCL specification defines ``device_communicator`` class that describes a group of communicating ranks, where rank is a single device. ``device_communicator`` defines communication operations on device memory buffers.
-
-.. note::
-    Here and below, a device, a device memory, a device context, a queue, and an event are defined in the scope of SYCL device runtime.
-
-The ``environment`` class shall provide the ability to create an instance of ``device_communicator`` class.
-
-Creating a new device communicator with user-supplied size, rank, and kvs:
-
-.. code:: cpp
-
-    using native_device_type = sycl::device;
-    using native_context_type = sycl::context;
-
-    vector_class<device_communicator> environment::create_device_communicators(
-        const size_t size,
-        vector_class<pair_class<size_t, native_device_type>>& rank_device_map,
-        native_context_type& context,
-        shared_ptr_class<kvs_interface> kvs) const;
-
-size
-    user-supplied total number of ranks
-rank_device_map
-    user-supplied mapping of local ranks on devices
-context
-    device context
-kvs
-    key-value store for ranks wire-up
-return ``vector_class<device_communicator>``
-    a vector of device communicators
-
-``device_communicator`` shall provide methods to retrieve the rank, the device, and the device context that correspond to the communicator object as well as the number of ranks in the communicator. It shall also provide communication operations on device memory buffers.
-
-Retrieving the rank in a communicator:
-
-.. code:: cpp
-
-    size_t device_communicator::rank() const;
-
-return ``size_t``
-    the rank that corresponds to the communicator object
-
-Retrieving the number of ranks in a communicator:
-
-.. code:: cpp
-
-    size_t device_communicator::size() const;
-
-return ``size_t``
-    the number of the ranks
 
 Retrieving an underlying device, which was used as communicator construction argument:
 
 .. code:: cpp
 
-    native_device_type get_device() const;
+    device get_device() const;
 
-return ``native_device_type``
+return ``device``
     the device that corresponds to the communicator object
 
-Retrieving an underlying device context, which was used as communicator construction argument:
+
+Retrieving an underlying context, which was used as communicator construction argument:
 
 .. code:: cpp
 
-    native_context_type get_context() const;
+    context get_context() const;
 
-return ``native_context_type``
-    the device context that corresponds to the communicator object
+return ``context``
+    the context that corresponds to the communicator object
 
 .. note::
     See also: :doc:`collective_operations`
-
-
-.. _Request:
-
-Request
-*******
-
-Each communication operation of oneCCL shall return a request object for tracking the operation's progress.
-
-.. note::
-    See also: :doc:`operation_progress`
-
-
-.. _Event:
-
-Event
-*****
-
-oneCCL specification defines the ``event`` class that wraps the ``sycl::event`` object and encapsulates synchronization context for ``device_communicator`` communication operations.
-
-A vector of events may be passed to the ``device_communicator`` communication operation to designate input dependencies for the operation. An event may be retrieved from ``request`` object to be passed further as an input dependency in other device communication operations or in computation operations.
-
-The ``environment`` class shall provide the ability to create an instance of the ``event`` class from the ``sycl::event`` object.
-
-Creating a new event from ``sycl::event`` object:
-
-.. code:: cpp
-
-    using native_event_type = sycl::event;
-    event environment::create_event(native_event_type& native_event) const;
-
-native_event
-    the existing native handle for an event
-return ``event``
-    an event object
 
 
 .. _Stream:
@@ -300,23 +293,79 @@ return ``event``
 Stream
 ******
 
-oneCCL specification defines ``stream`` class that wraps ``sycl::queue`` object and encapsulates execution context for ``device_communicator`` communication operations.
+oneCCL specification defines ``stream`` as an abstraction that encapsulates execution context for ``communicator`` communication operations.
 
-Stream shall be passed to ``device_communicator`` communication operation.
+Stream may be optionally passed to ``communicator`` communication operation.
 
-The ``environment`` class shall provide the ability to create an instance of the ``stream`` class from the ``sycl::queue`` object.
+oneCCL specification defines the way to create an instance of the ``stream`` class with a native object (``native_stream_type``) and without a native object.
 
-Creating a new stream from ``sycl::queue`` object:
+
+Creating a new stream object:
 
 .. code:: cpp
 
-    using native_stream_type = sycl::queue;
-    stream environment::create_stream(native_stream_type& native_stream) const;
+    stream ccl::create_stream(native_stream_type& native_stream) const;
+
+    stream ccl::create_stream() const;
 
 native_stream
-    the existing native handle for a stream
+    the existing native stream object
 return ``stream``
     a stream object
+
+
+``stream`` class shall provide ability to retrieve a native object.
+
+Retrieving a native stream object:
+
+.. code:: cpp
+
+    native_stream_type stream::get_native() const;
+
+return ``native_stream_type``
+    | a native stream object
+    | shall throw exception if a ``stream`` object does not wrap the native object
+
+
+.. _Event:
+
+Event
+*****
+
+oneCCL specification defines ``event`` as an abstraction that encapsulates synchronization context for ``communicator`` communication operations.
+
+Each communication operation of oneCCL shall return an event object for tracking the operation's progress. A vector of events may be passed to the ``communicator`` communication operation to designate input dependencies for the operation.
+
+oneCCL specification defines the way to create an instance of the ``event`` class with a native object (``native_event_type``).
+
+
+Creating a new event object:
+
+.. code:: cpp
+
+    event ccl::create_event(native_event_type& native_event) const;
+
+native_event
+    the existing native event object
+return ``event``
+    an event object
+
+
+``event`` class shall provide ability to retrieve a native object.
+
+Retrieving a native event object:
+
+.. code:: cpp
+
+    native_event_type event::get_native() const;
+
+return ``native_event_type``
+    | a native event object
+    | shall throw exception if an ``event`` object does not wrap the native object
+
+
+.. note::
+    See also: :doc:`operation_progress`
 
 
 Operation Attributes
