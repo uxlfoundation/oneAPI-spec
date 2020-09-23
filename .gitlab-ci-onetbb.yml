@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 build_oneTBB_html:
   stage: build
   tags: [docker_linux]

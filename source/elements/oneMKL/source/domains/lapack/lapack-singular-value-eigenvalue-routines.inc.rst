@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. _onemkl_lapack-singular-value-eigenvalue-routines:
 
 LAPACK Singular Value and Eigenvalue Problem Routines
