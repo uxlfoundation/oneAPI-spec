@@ -1,6 +1,3 @@
-..
-  Copyright 2019-2020 Intel Corporation
-
 .. namespace:: 0
 
 .. |f16| replace:: :any:`f16 <dnnl::memory::data_type::f16>`
