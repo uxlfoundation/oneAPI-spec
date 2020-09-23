@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_acknowledgement:
+.. _onemkl_acknowledgment:
 
 Acknowledgment
 ---------------
