@@ -87,11 +87,6 @@ html_theme = 'sphinx_rtd_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-  'includehidden': False,
-  'collapse_navigation': False
-}
-
 html_context = {
     'display_github': True,
     'github_user': 'oneapi-src',
