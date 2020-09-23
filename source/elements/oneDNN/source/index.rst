@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. default-domain:: cpp
 .. _`open source implementation`: https://github.com/oneapi-src/oneDNN/
 .. _`README`: https://github.com/oneapi-src/oneDNN/blob/master/README.md

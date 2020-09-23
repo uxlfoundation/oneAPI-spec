@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 Supported C++ Standard Library APIs and Algorithms
 ---------------------------------------------------
 

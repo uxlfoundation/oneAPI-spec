@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 - :ref:`oneDPCPP-section`: oneAPI's core language for programming
   accelerators and multiprocessors. DPCPP allows developers to reuse
   code across hardware targets (CPUs and accelerators such as GPUs and

@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. namespace:: 0
 
 .. |f16| replace:: :any:`f16 <dnnl::memory::data_type::f16>`

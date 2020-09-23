@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. _onemkl_rng_distributions_template_parameter_mkl_rng_method_values:
 
 Distributions Template Parameter Method

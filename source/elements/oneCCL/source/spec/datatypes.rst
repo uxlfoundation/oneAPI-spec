@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. _`16-bit/half-precision floating point`: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 .. _`non-standard 16-bit floating point with 7-bit mantissa`: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
 
