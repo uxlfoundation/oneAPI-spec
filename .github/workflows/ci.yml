@@ -24,7 +24,13 @@ jobs:
           . venv/bin/activate
           python scripts/oneapi.py html
           python scripts/oneapi.py latexpdf
+    - name: Checks
+      run: |
+          . venv/bin/activate
           python scripts/oneapi.py spelling
+          mkdir -p build/reuse
+          # ignore fail for reuse
+          reuse lint > build/reuse/lint.txt || true
     - name: Archive build directory
       uses: actions/upload-artifact@v1
       with:

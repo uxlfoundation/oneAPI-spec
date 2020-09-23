@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 #
 # Configuration file for the Sphinx documentation builder.

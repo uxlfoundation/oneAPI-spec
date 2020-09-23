@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.statemachine import ViewList

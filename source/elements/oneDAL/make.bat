@@ -1,3 +1,8 @@
+REM SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+REM
+REM SPDX-License-Identifier: CC-BY-4.0
+REM SPDX-License-Identifier: MIT
+
 @echo off
 if /I %1 == html goto :html
 if /I %1 == pdf goto :pdf
