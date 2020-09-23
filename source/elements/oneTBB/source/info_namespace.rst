@@ -20,7 +20,7 @@ Interfaces to query information about execution environment.
 Types
 -----
 
-``numa_node_id`` - Represents the certain NUMA node identifier.
+``numa_node_id`` - Represents NUMA node identifier.
 
 Functions
 ---------

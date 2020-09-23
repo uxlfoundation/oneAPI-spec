@@ -138,7 +138,7 @@ Member functions
 
     Creates a ``task_arena`` with a certain constraints(``a_constraints``) and priority
     (``a_priority``).  Some portion of the limit can be reserved for application threads with
-    ``reserved_for_masters``.  The amount for reservation cannot exceed the limit.
+    ``reserved_for_masters``.  The amount for reservation cannot exceed the concurrency limit specified in ``constraints``.
 
     .. caution::
 
@@ -250,7 +250,7 @@ Member functions
 Example
 -------
 
-The example demonstrates task_arena NUMA support extensions. Each constructed task_arena is pinned
+The example demonstrates ``task_arena`` NUMA support API. Each constructed task_arena is pinned
 to the corresponding NUMA node.
 
 .. code:: cpp
@@ -291,4 +291,3 @@ See also:
 
 * :doc:`task_group <../task_group/task_group_cls>`
 * :doc:`task_scheduler_observer <task_scheduler_observer_cls>`
-
