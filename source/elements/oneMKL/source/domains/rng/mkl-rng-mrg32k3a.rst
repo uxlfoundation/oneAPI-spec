@@ -81,9 +81,9 @@ class mrg32k3a
         * - `mrg32k3a(mrg32k3a&& other)`_
           - Move constructor
         * - `mrg32k3a& operator=(const mrg32k3a& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `mrg32k3a& operator=(mrg32k3a&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 

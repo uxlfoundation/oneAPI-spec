@@ -94,9 +94,9 @@ class mt19937
         * - `mt19937(mt19937&& other)`_
           - Move constructor
         * - `mt19937& operator=(const mt19937& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `mt19937& operator=(mt19937&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 

@@ -7,7 +7,7 @@
 bits
 ====
 
-Class is used for generation of underlying engine integer reccurence.
+Class is used for generation of underlying engine integer recurrence.
 
 .. _onemkl_rng_bits_description:
 

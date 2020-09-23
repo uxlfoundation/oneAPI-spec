@@ -246,7 +246,7 @@ corresponding configuration values, see :ref:`onemkl_dft_enum_config_param`.
       The enum value of :ref:`onemkl_dft_enum_config_param` to be retrieved.
 
    ...
-      The corresponding value or container corresponding to the specific paramer. Defined in :ref:`onemkl_dft_enum_config_param`.
+      The corresponding value or container corresponding to the specific parameter. Defined in :ref:`onemkl_dft_enum_config_param`.
 
 .. container:: section
 

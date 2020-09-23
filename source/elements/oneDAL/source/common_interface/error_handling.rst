@@ -142,7 +142,7 @@ All other errors are reported via ``oneapi::dal::internal_error``.
      - Reports errors occurred during interaction with OS facilities.
      - No
    * - ``oneapi::dal::internal_error``
-     - Reports all runtime errors that couldn't be assigned to other inheritors.
+     - Reports all runtime errors that could not be assigned to other inheritors.
      - No
 
 All memory allocation errors are represented by ``oneapi::dal::bad_alloc``. They

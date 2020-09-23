@@ -74,9 +74,9 @@ class niederreiter
         * - `niederreiter(niederreiter&& other)`_
           - Move constructor
         * - `niederreiter& operator=(const niederreiter& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `niederreiter& operator=(niederreiter&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 
@@ -112,7 +112,7 @@ class niederreiter
             Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         irred_polynomials
-            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own irreducible polynomials. The number of dimmensions corresponds to the length of the vector.
+            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own irreducible polynomials. The number of dimensions corresponds to the length of the vector.
 
     .. _`niederreiter(const niederreiter& other)`:
 

@@ -217,7 +217,7 @@ implement the corresponding mandatory APIs, as described in the
 
 If at least one of encoder or decoder or VPP filter is implemented,
 :cpp:func:`MFXQueryImplsDescription` function must return valid
-:cpp:struct:`mfxImplDescription` structure instanse with mandatory capabilities
+:cpp:struct:`mfxImplDescription` structure instance with mandatory capabilities
 of the implementation including decoder, encoder, or VPP capabilities information.
 
 Any other functions or extension buffers are optional for the implementation.

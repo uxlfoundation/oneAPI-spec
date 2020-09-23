@@ -69,7 +69,7 @@ Release Notes
 * oneCCL
 
   * Updated operation attributes description
-  * Updated namings in API
+  * Updated naming in API
 
 0.9
 ---

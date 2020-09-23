@@ -12,7 +12,7 @@ namespace method {
 } // namespace method
 
 namespace task {
-   /// Tag-type that parametrizes entities used for obtaining the initial K-Means centroids.
+   /// Tag-type that parameterizes entities used for obtaining the initial K-Means centroids.
    struct init {};
 
    /// Alias tag-type for the initialization task.

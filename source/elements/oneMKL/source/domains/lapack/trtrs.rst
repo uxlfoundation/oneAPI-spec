@@ -209,7 +209,7 @@ b
    Overwritten by the solution matrix :math:`X`.
 
 scratchpad
-   Pointer toscratchpad memory to be used by routine for storing intermediate results.
+   Pointer to scratchpad memory to be used by routine for storing intermediate results.
 
 .. container:: section
 
