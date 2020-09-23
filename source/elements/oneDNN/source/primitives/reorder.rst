@@ -1,6 +1,3 @@
-..
-  Copyright 2019-2020 Intel Corporation
-
 .. default-domain:: cpp
 
 .. include:: /elements/oneDNN/source/replacements.inc.rst

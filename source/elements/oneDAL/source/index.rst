@@ -1,6 +1,3 @@
-..
-  Copyright 2020 Intel Corporation
-
 .. _oneDAL-section:
 
 ================
