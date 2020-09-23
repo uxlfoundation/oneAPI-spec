@@ -25,8 +25,17 @@ A class that represents an explicit, user-managed task scheduler arena.
                 high = /* unspecified */
             };
             struct attach {};
+            struct constraints {
+                numa_node_id numa_node;
+                int max_concurrency;
+
+                constraints(numa_node_id numa_node_       = task_arena::automatic,
+                            int          max_concurrency_ = task_arena::automatic);
+            };
 
             task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
+                       priority a_priority = priority::normal);
+            task_arena(constraints a_constraints, unsigned reserved_for_masters = 1,
                        priority a_priority = priority::normal);
             task_arena(const task_arena &s);
             explicit task_arena(task_arena::attach);
@@ -34,6 +43,8 @@ A class that represents an explicit, user-managed task scheduler arena.
 
             void initialize();
             void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
+                            priority a_priority = priority::normal);
+            void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
                             priority a_priority = priority::normal);
             void initialize(task_arena::attach);
             void terminate();
@@ -97,6 +108,20 @@ Member types and constants
 
     A tag for constructing a ``task_arena`` with attach.
 
+.. cpp:struct:: constraints
+
+    Represents limitations applied to threads within ``task_arena``.
+
+    ``numa_node`` - An integral logical index uniquely identifying a NUMA node.
+    All threads joining the ``task_arena`` are bound to this NUMA node.
+
+    .. note::
+
+        NUMA node ID is considered valid if it was obtained through tbb::info::numa_nodes().
+
+    ``max_concurrency`` - The maximum number of threads that can participate in work processing
+    within the ``task_arena`` at the same time.
+
 Member functions
 ----------------
 
@@ -112,6 +137,22 @@ Member functions
         explicitly set to be equal and greater than 1, oneTBB worker threads will never
         join the arena. As a result, the execution guarantee for enqueued tasks is not valid
         in such arena. Do not use ``task_arena::enqueue()`` with an arena set to have no worker threads.
+
+.. cpp:function:: task_arena(constraints a_constraints, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
+
+    Creates a ``task_arena`` with a certain constraints(``a_constraints``) and priority
+    (``a_priority``).  Some portion of the limit can be reserved for application threads with
+    ``reserved_for_masters``.  The amount for reservation cannot exceed the concurrency limit specified in ``constraints``.
+
+    .. caution::
+
+        If ``constraints::max_concurrency`` and ``reserved_for_masters`` are
+        explicitly set to be equal and greater than 1, oneTBB worker threads will never
+        join the arena. As a result, the execution guarantee for enqueued tasks is not valid
+        in such arena. Do not use ``task_arena::enqueue()`` with an arena set to have no worker threads.
+
+    If ``constraints::numa_node`` is specified, then all threads that enter the arena are automatically
+    pinned to corresponding NUMA node.
 
 .. cpp:function:: task_arena(const task_arena&)
 
@@ -144,6 +185,10 @@ Member functions
 .. cpp:function:: void initialize(int max_concurrency, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
 
     Same as above, but overrides previous arena parameters.
+
+.. cpp:function:: void initialize(constraints a_constraints, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
+
+    Same as above.
 
 .. cpp:function:: void initialize(task_arena::attach)
 
@@ -206,8 +251,47 @@ Member functions
         Any number of threads outside of the arena can submit work to the arena and be blocked.
         However, only the maximal number of threads specified for the arena can participate in executing the work.
 
+Example
+-------
+
+The example demonstrates ``task_arena`` NUMA support API. Each constructed ``task_arena`` is pinned
+to the corresponding NUMA node.
+
+.. code:: cpp
+
+    #include "tbb/task_group.h"
+    #include "tbb/task_arena.h"
+
+    #include <vector>
+
+    int main() {
+        std::vector<tbb::numa_node_id> numa_nodes = tbb::info::numa_nodes();
+        std::vector<tbb::task_arena> arenas(numa_nodes.size());
+        std::vector<tbb::task_group> task_groups(numa_nodes.size());
+
+        for (int i = 0; i < numa_nodes.size(); i++) {
+            arenas[i].initialize(tbb::task_arena::constraints(numa_nodes[i]));
+        }
+
+        for (int i = 0; i < numa_nodes.size(); i++) {
+            arenas[i].execute([&task_groups, i] {
+                task_groups[i].run([] {
+                    /* executed by the thread pinned to specified NUMA node */
+                });
+            });
+        }
+
+        for (int i = 0; i < numa_nodes.size(); i++) {
+            arenas[i].execute([&task_groups, i] {
+                task_groups[i].wait();
+            });
+        }
+
+        return 0;
+    }
+
+
 See also:
 
 * :doc:`task_group <../task_group/task_group_cls>`
 * :doc:`task_scheduler_observer <task_scheduler_observer_cls>`
-
