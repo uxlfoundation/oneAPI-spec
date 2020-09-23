@@ -86,8 +86,8 @@ create_error_handler
         of a function are being written into one single status variable.
 
         After the execution, the single value is either un-changed if no
-        errors happened or contains bitwise-OR of intial value and non-success status codes
-        occured during computation.
+        errors happened or contains bitwise-OR of initial value and non-success status codes
+        occurred during computation.
 
         To enable this mode, ``status_array`` must point to any ``status``-type array or buffer
         of 1 or more elements and ``length`` must be 1.

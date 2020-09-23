@@ -31,7 +31,7 @@ The ars5 engine is a keyed family of counter-based BRNG. The state consists of a
 
         :math:`c_{i+1} = ShiftRows(c_{i+1})`
 
-        :math:`c_{i+1} = MixColumns(c_{i+1})`, this step is ommited if :math:`i+1 = N`
+        :math:`c_{i+1} = MixColumns(c_{i+1})`, this step is omitted if :math:`i+1 = N`
 
         :math:`c_{i+1} = AddRoundKey(c_{i+1}, k_j)`
 

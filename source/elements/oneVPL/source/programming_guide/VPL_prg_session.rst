@@ -196,10 +196,10 @@ Internally, the dispatcher works as follows:
    :ref:`Exported Functions/API Version table <export-func-version-table-2x>` for
    the list of functions to export.
 
-.. note:: For backward compartibility with |msdk_full_name|, dispatcher will try to
-          load |msdk_full_name| first, if 1.x was requesuested to be loaded. If loading
+.. note:: For backward compatibility with |msdk_full_name|, dispatcher will try to
+          load |msdk_full_name| first, if 1.x was requested to be loaded. If loading
           was failed, dispatcher will search for the implementation with highest
-          2.x API verstion.
+          2.x API version.
 
 -----------------
 Multiple Sessions

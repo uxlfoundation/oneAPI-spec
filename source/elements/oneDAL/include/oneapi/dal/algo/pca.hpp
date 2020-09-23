@@ -18,7 +18,7 @@ namespace method {
 } // namespace method
 
 namespace task {
-   /// Tag-type that parametrizes entities used for solving
+   /// Tag-type that parameterizes entities used for solving
    /// :capterm:`dimensionality reduction problem <dimensionality reduction>`.
    struct dim_reduction {};
 

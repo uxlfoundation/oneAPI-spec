@@ -13,7 +13,7 @@ The structure consolidates the information of a multi-dimensional dataset.
 
 .. rubric:: Description
 
-The ``dataset`` struct object is used in :ref:`onemkl_stats_routines` as a multi-dimensional data storage. ``dataset`` struct contains information about observations matrix and its size (dimensions x observations), observations weights and indicies for dimensions (defines dimensions to be processed).
+The ``dataset`` struct object is used in :ref:`onemkl_stats_routines` as a multi-dimensional data storage. ``dataset`` struct contains information about observations matrix and its size (dimensions x observations), observations weights and indices for dimensions (defines dimensions to be processed).
 
 .. _onemkl_stats_dataset_syntax_buffer:
 
@@ -102,7 +102,7 @@ structure dataset (Buffer version)
             	* `n_dims_` is the number of dimensions
             	* `n_observations_` is the number of observations
             	* `observations_` is the matrix of observations
-            	* `weights_` is an optional parameter, represents array of weights for obervations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
+            	* `weights_` is an optional parameter, represents array of weights for observations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
             	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
 
         .. container:: section
@@ -197,7 +197,7 @@ structure dataset (USM version)
             	* `n_dims_` is the number of dimensions
             	* `n_observations_` is the number of observations
             	* `observations_` is the matrix of observations
-            	* `weights_` is an optional parameter, represents array of weights for obervations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
+            	* `weights_` is an optional parameter, represents array of weights for observations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
             	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
 
         .. container:: section

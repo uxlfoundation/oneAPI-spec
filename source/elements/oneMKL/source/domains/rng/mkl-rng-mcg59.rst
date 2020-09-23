@@ -69,9 +69,9 @@ class mcg59
         * - `mcg59(mcg59&& other)`_
           - Move constructor
         * - `mcg59& operator=(const mcg59& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `mcg59& operator=(mcg59&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 

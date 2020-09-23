@@ -99,9 +99,9 @@ class mt2203
         * - `mt2203(mt2203&& other)`_
           - Move constructor
         * - `mt2203& operator=(const mt2203& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `mt2203& operator=(mt2203&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 

@@ -13,7 +13,7 @@ The sobol is a 32-bit Gray code-based quasi-random number generator.
 
 .. rubric:: Description
 
-Bratley and Fox :ref:`[Bratley88] <onemkl_rng_bibliography>` provide an implementation of the SOBOL quasi-rando number generator. The defaulit dimensions of quasi-random vectors can vary from 1 to 40 inclusive. It is also allowed to register user-defined parameters (direction numbers).
+Bratley and Fox :ref:`[Bratley88] <onemkl_rng_bibliography>` provide an implementation of the SOBOL quasi-random number generator. The default dimensions of quasi-random vectors can vary from 1 to 40 inclusive. It is also allowed to register user-defined parameters (direction numbers).
 
 .. container:: section
 
@@ -74,9 +74,9 @@ class sobol
         * - `sobol(sobol&& other)`_
           - Move constructor
         * - `sobol& operator=(const sobol& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `sobol& operator=(sobol&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 
@@ -112,7 +112,7 @@ class sobol
             Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         direction_numbers
-            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own direction_numbers. The number of dimmensions corresponds to direction_numbers.size() / 32.
+            If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own direction_numbers. The number of dimensions corresponds to direction_numbers.size() / 32.
 
     .. _`sobol(const sobol& other)`:
 

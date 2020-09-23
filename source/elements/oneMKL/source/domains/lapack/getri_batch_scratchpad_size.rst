@@ -7,7 +7,7 @@
 getri_batch_scratchpad_size
 ===========================
 
-Computee size of scratchpad memory required for the :ref:`onemkl_lapack_getri_batch` function.
+Computed size of scratchpad memory required for the :ref:`onemkl_lapack_getri_batch` function.
 
 .. container:: section
 

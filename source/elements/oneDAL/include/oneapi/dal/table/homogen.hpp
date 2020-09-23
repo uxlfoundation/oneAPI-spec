@@ -65,7 +65,7 @@ public:
                   const sycl::vector_class<sycl::event>& dependencies = {},
                   data_layout layout                                  = data_layout::row_major);
 
-    /// Returns the :expr:`data` pointer casted to the $Data$ type. No checks are
+    /// Returns the :expr:`data` pointer cast to the $Data$ type. No checks are
     /// performed that this type is the actual type of the data within the table.
     template <typename Data>
     const Data* get_data() const {

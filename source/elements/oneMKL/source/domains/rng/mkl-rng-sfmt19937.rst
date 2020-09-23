@@ -84,9 +84,9 @@ class sfmt19937
         * - `sfmt19937(sfmt19937&& other)`_
           - Move constructor
         * - `sfmt19937& operator=(const sfmt19937& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `sfmt19937& operator=(sfmt19937&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 

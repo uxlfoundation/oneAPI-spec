@@ -13,7 +13,7 @@ The wichmann_hill engine is the set of 273 Wichmann-Hill's combined multiplicati
 
 .. rubric:: Description
 
-The set of 372 different basic pseudorandom number generators wichmann_hill is the second basig generator in the NAG libraries.
+The set of 372 different basic pseudorandom number generators wichmann_hill is the second basic generator in the NAG libraries.
 
 .. container:: section
 
@@ -29,7 +29,7 @@ The set of 372 different basic pseudorandom number generators wichmann_hill is t
 
     :math:`u_n = (x_n / m_{1, j} + y_n / m_{2, j} + z_n / m_{3, j} + w_n / m_{4, j}) mod \ 1`
 
-    The constatns :math:`a_{i, j}` range from 112 to 127, the constatnts :math:`m_{i, j}` are prime numbers ranging from 16718909 to 16776917, close to :math:`2 ^ {24}`.
+    The constants :math:`a_{i, j}` range from 112 to 127, the constants :math:`m_{i, j}` are prime numbers ranging from 16718909 to 16776917, close to :math:`2 ^ {24}`.
 
 
 .. _onemkl_rng_wichmann_hill_description_syntax:
@@ -88,9 +88,9 @@ class wichmann_hill
         * - `wichmann_hill(wichmann_hill&& other)`_
           - Move constructor
         * - `wichmann_hill& operator=(const wichmann_hill& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `wichmann_hill& operator=(wichmann_hill&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 

@@ -51,7 +51,7 @@ Common exceptions
     ``oneapi::mkl::uninitialized``", "Reports problem when a handle (descriptor) has not been initialized"
     ".. _onemkl_exception_computation_error:
 
-    ``oneapi::mkl::computation_error``", "Reports any computation errors that have ccurred inside a oneMKL routine"
+    ``oneapi::mkl::computation_error``", "Reports any computation errors that have occurred inside a oneMKL routine"
     ".. _onemkl_exception_batch_error:
 
     ``oneapi::mkl::batch_error``", "Reports errors that have occurred inside a batch oneMKL routine"

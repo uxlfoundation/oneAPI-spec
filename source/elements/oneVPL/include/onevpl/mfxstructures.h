@@ -528,7 +528,7 @@ typedef struct mfxFrameSurfaceInterface {
 
     @return
      MFX_ERR_NONE               If no error. \n
-     MFX_ERR_NULL_PTR           If any of surface, devic_handle or device_type is NULL. \n
+     MFX_ERR_NULL_PTR           If any of surface, device_handle or device_type is NULL. \n
      MFX_ERR_INVALID_HANDLE     If any of surface, resource or resource_type is not valid object (no native resource was allocated). \n
      MFX_ERR_UNSUPPORTED        If surface is in system memory. \n
      MFX_ERR_UNKNOWN            Any internal error.
@@ -1329,7 +1329,7 @@ typedef struct {
     */
     mfxU16      DisableDeblockingIdc;
     /*!
-       Cmpletely disables VUI in output bitstream.
+       Completely disables VUI in output bitstream.
        @note Not all codecs and implementations support this value. Use the Query API function to check if this feature is supported.
     */
     mfxU16      DisableVUI;
@@ -3204,7 +3204,7 @@ MFX_PACK_END()
 
 MFX_PACK_BEGIN_STRUCT_W_L_TYPE()
 /*!
-   Secifies per-macroblock QP for current frame if mfxExtCodingOption3::EnableMBQP was turned ON during
+   Specifies per-macroblock QP for current frame if mfxExtCodingOption3::EnableMBQP was turned ON during
    encoder initialization. The application can attach this extended buffer to the mfxEncodeCtrl structure during runtime.
 */
 typedef struct {
@@ -4214,7 +4214,7 @@ MFX_PACK_END()
 MFX_PACK_BEGIN_STRUCT_W_PTR()
 /*!
    The mfxExtDeviceAffinityMask structure is used by the application to specify
-   affinity mask for the device with given devide ID. See mfxDeviceDescription
+   affinity mask for the device with given device ID. See mfxDeviceDescription
    for the device ID definition and sub device indexes. If the implementation
    manages CPU threads for some purposes, user can set CPU threads affinity
    mask as well by using this structure with deviceID equals to the "CPU". 

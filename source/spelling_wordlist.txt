@@ -34,6 +34,7 @@ Deallocates
 Deallocation
 Deconvolution
 Deinterlace
+Demmel
 Denoise
 Destructor
 DeviceContext
@@ -93,6 +94,7 @@ ORed
 OpenCL
 Partitioners
 Philox
+Polizzi
 Postconditions
 Powr
 Preallocating
@@ -112,6 +114,7 @@ Spring
 Springer
 Stoll
 Subclassed
+Tak
 Tanh
 Tibshirani
 Transactional
@@ -121,6 +124,7 @@ VPL
 VTune
 Variadic
 Verifier
+Verlag
 VideoProcess
 Vj
 VplParams
@@ -263,6 +267,7 @@ definitional
 deinitialize
 deinterlace
 deinterlacing
+deleter
 demultiplex
 demultiplexing
 denoise
@@ -290,6 +295,7 @@ dfti
 dgebrd
 diag
 dimensionality
+disjunction
 displ
 distr
 dll
@@ -560,6 +566,7 @@ pmr
 poisson
 pos
 posix
+postcondition
 postconditions
 potrf
 potri
@@ -605,6 +612,7 @@ req
 resampling
 reservable
 resumable
+rethrow
 rethrown
 rhs
 rint
@@ -615,6 +623,7 @@ rotm
 rotmg
 rowIndex
 rowwise
+rtype
 runtime
 rvalue
 rvalues
@@ -737,6 +746,7 @@ unconverged
 ungbr
 ungqr
 ungtr
+unmanaged
 unmap
 unmapped
 unmaps

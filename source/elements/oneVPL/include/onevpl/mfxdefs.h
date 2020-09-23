@@ -187,7 +187,7 @@ MFX_PACK_BEGIN_USUAL_STRUCT()
 typedef struct {
     mfxU32 Min;  /*!< Minimal value of the range. */
     mfxU32 Max;  /*!< Maximal value of the range. */
-    mfxU32 Step; /*!< Value incrementation step. */
+    mfxU32 Step; /*!< Value increment. */
 } mfxRange32U;
 MFX_PACK_END()
 

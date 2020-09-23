@@ -43,7 +43,7 @@ set_status
 
       The global VM status is a single value and it registers the bitwise-OR of status codes 
       that happened inside VM functions run on the specific queue.
-      For preformance reasons, it might be done in non-atomic manner.
+      For performance reasons, it might be done in non-atomic manner.
       The possible status codes are listed in the table below.
 
 

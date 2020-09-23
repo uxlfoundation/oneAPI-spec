@@ -13,7 +13,7 @@ Non-deterministic random number generator.
 
 .. rubric:: Description
 
-Implementation defined generator with non-deterministic source of randoness (for example, a hardware device).
+Implementation defined generator with non-deterministic source of randomness (for example, a hardware device).
 
 .. _onemkl_rng_nondeterministic_description_syntax:
 
@@ -57,9 +57,9 @@ class nondeterministic
         * - `nondeterministic(nondeterministic&& other)`_
           - Move constructor
         * - `nondeterministic& operator=(const nondeterministic& other)`_
-          - Copy assignement operator
+          - Copy assignment operator
         * - `nondeterministic& operator=(nondeterministic&& other)`_
-          - Move assignement operator
+          - Move assignment operator
 
 .. container:: section
 
