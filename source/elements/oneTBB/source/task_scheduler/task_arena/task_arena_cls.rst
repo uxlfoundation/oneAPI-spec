@@ -250,7 +250,7 @@ Member functions
 Example
 -------
 
-The example demonstrates ``task_arena`` NUMA support API. Each constructed task_arena is pinned
+The example demonstrates ``task_arena`` NUMA support API. Each constructed ``task_arena`` is pinned
 to the corresponding NUMA node.
 
 .. code:: cpp
