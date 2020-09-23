@@ -8,7 +8,7 @@ oneAPI Specifications
 This repo contains the sources for the `oneAPI Specification`_.
 
 For the latest build from main branch, see `HTML
-<https://oneapi-src.gihtub.io/oneAPI-spec>`__ and `PDF
+<https://oneapi-src.github.io/oneAPI-spec>`__ and `PDF
 <https://rscohn2.github.io/oneAPI-spec/oneAPI-spec.pdf>`__.
 
 For more information about oneAPI, see `oneapi.com
