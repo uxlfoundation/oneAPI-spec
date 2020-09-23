@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 __version__ = '0.0.1'
 
 def setup(app):

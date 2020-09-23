@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
 
 def split_compound_name(compoundname):
     try:

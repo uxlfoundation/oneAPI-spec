@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+//
+// SPDX-License-Identifier: MIT
+
 //configure tms    
 var wapLocalCode = 'us-en'; 
 //dynamically set per localized site, see mapping table for values    

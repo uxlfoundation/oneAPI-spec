@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 from typing import List
 from . import model
 from .parser import Parser

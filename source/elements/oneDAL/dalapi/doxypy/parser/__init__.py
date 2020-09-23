@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 import os
 from typing import (
     Any,

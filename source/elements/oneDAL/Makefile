@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 GH_PAGES = build/gh-pages
 
 .PHONY: html pdf doxygen parse-doxygen clean gh-pages
