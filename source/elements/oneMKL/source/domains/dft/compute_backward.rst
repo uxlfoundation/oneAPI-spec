@@ -32,8 +32,8 @@ compute_backward (Buffer version)
 
    namespace oneapi::mkl::dft {
 
-      template <typename data_type, typename descriptor>
-      void compute_backward( descriptor                 &desc,
+      template <typename descriptor_type, typename data_type>
+      void compute_backward( descriptor_type            &desc,
                              sycl::buffer<data_type, 1> &inout );
 
    }
@@ -44,8 +44,8 @@ compute_backward (Buffer version)
 
    namespace oneapi::mkl::dft {
 
-      template <typename data_type, typename descriptor>
-      void compute_backward( descriptor                 &desc, 
+      template <typename descriptor_type, typename data_type>
+      void compute_backward( descriptor_type            &desc, 
                              sycl::buffer<data_type, 1> &inout_re,
                              sycl::buffer<data_type, 1> &inout_im);
    }
@@ -57,8 +57,8 @@ compute_backward (Buffer version)
 
    namespace oneapi::mkl::dft {
    
-      template <typename input_type, typename output_type, typename descriptor>
-      void compute_backward( descriptor                   &desc,
+      template <typename descriptor_type, typename input_type, typename output_type>
+      void compute_backward( descriptor_type              &desc,
                              sycl::buffer<input_type, 1>  &in, 
                              sycl::buffer<output_type, 1> &out);
    }
@@ -69,8 +69,8 @@ compute_backward (Buffer version)
 
    namespace oneapi::mkl::dft {
 
-      template <typename input_type, typename output_type, typename descriptor>
-      void compute_backward( descriptor                   &desc,
+      template <typename descriptor_type, typename input_type, typename output_type>
+      void compute_backward( descriptor_type              &desc,
                              sycl::buffer<input_type, 1>  &in_re,
                              sycl::buffer<input_type, 1>  &in_im,
                              sycl::buffer<output_type, 1> &out_re,
@@ -151,8 +151,8 @@ compute_backward (USM version)
 
    namespace oneapi::mkl::dft {
    
-      template <typename data_type, typename descriptor>
-      sycl::event compute_backward( descriptor                                    &desc,
+      template <typename descriptor_type, typename data_type>
+      sycl::event compute_backward( descriptor_type                               &desc,
                                     data_type                                     *inout,
                                     const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
    }
@@ -163,8 +163,8 @@ compute_backward (USM version)
 
    namespace oneapi::mkl::dft {
       
-      template <typename data_type, typename descriptor>
-      sycl::event compute_backward(descriptor                                    &desc,
+      template <typename descriptor_type, typename data_type>
+      sycl::event compute_backward(descriptor_type                               &desc,
                                    data_type                                     *inout_re,
                                    data_type                                     *inout_im,
                                    const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
@@ -178,8 +178,8 @@ compute_backward (USM version)
 
    namespace oneapi::mkl::dft {
       
-      template <typename input_type, typename output_type, typename descriptor>
-      sycl::event compute_backward( descriptor                                    &desc,
+      template <typename descriptor_type, typename input_type, typename output_type>
+      sycl::event compute_backward( descriptor_type                               &desc,
                                     input_type                                    *in,
                                     output_type                                   *out,
                                     const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
@@ -193,8 +193,8 @@ compute_backward (USM version)
 
    namespace oneapi::mkl::dft {
       
-      template <typename input_type, typename output_type, typename descriptor>
-      sycl::event compute_backward( descriptor                                    &desc,
+      template <typename descriptor_type, typename input_type, typename output_type>
+      sycl::event compute_backward( descriptor_type                               &desc,
                                     input_type                                    *in_re,
                                     input_type                                    *in_im,
                                     output_type                                   *out_re,
