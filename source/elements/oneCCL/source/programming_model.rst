@@ -2,12 +2,10 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-===================
- Programming Model
-===================
+=================
+Programming Model
+=================
 
 .. toctree::
 
    spec/generic_workflow.rst
-   spec/host_communication.rst
-   spec/device_communication.rst

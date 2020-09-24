@@ -11,6 +11,8 @@ oneCCL
 .. toctree::
 
    introduction
+   namespaces
+   spec_version   
    definitions
    programming_model
 

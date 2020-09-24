@@ -2,9 +2,9 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-=============
- Introduction
-=============
+============
+Introduction
+============
 
 The |ccl_full_name| (oneCCL) provides primitives for the
 communication patterns that occur in deep learning applications.
@@ -15,7 +15,6 @@ oneCCL supports the following communication patterns used in deep learning (DL) 
 
 - allgatherv
 - allreduce
-- alltoall
 - alltoallv
 - broadcast
 - reduce
@@ -25,4 +24,3 @@ oneCCL exposes controls over additional optimizations and capabilities such as:
 
 * Prioritization for communication operations
 * Persistent communication operations (enables decoupling one-time initialization and repetitive execution)
-* Unordered communication operations

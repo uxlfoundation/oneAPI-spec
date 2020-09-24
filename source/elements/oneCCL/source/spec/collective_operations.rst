@@ -2,6 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
+=====================
 Collective Operations
 =====================
 
@@ -9,7 +10,6 @@ oneCCL specification defines the following collective communication operations:
 
 - `Allgatherv`_
 - `Allreduce`_
-- `Alltoall`_
 - `Alltoallv`_
 - `Barrier`_
 - `Broadcast`_
@@ -17,18 +17,18 @@ oneCCL specification defines the following collective communication operations:
 - `ReduceScatter`_
 
 These operations are collective, meaning that all participants (ranks) of oneCCL communicator should make a call.
-The order of collective operation calls should be the same across all ranks, unless the ``match_id`` attribute is used to match calls done without a strict order.
+The order of collective operation calls should be the same across all ranks.
 
-``communicator`` shall provide the ability to perform communication operations on host memory buffers.
-
-``device_communicator`` shall provide the ability to perform communication operations on device memory buffers. Additionally, device communication operations shall accept the device's execution context and a vector of events that the device communication operation should depend on. The output ``request`` object shall provide the ability to retrieve the ``event`` object that is signaled when the communication operation completes.
+``communicator`` shall provide the ability to perform communication operations either on host or device memory buffers depending on the ``device`` used to create the communicator. Additionally, communication operations may accept an execution context (stream) and a vector of events that the communication operation should depend on. The output ``event`` object shall provide the ability to track the progress of the operation.
 
 ``BufferType`` is used below to define the C++ type of elements in data buffers (``buf``, ``send_buf`` and  ``recv_buf``) of communication operations. At least the following types shall be supported: ``[u]int{8/16/32/64}_t``, ``float``, ``double``. The explicit ``datatype`` parameter shall be used to enable data types which cannot be inferred from the function arguments.
 
 .. note::
     See also: :ref:`Custom Datatypes`
 
-The communication operation may accept attribute object. If that parameter is missed then default attribute object will be used (default_<op_name>_attr) which shall be provided by the library.
+The communication operation may accept a ``stream`` object. If that parameter is missed, then the default stream object is used. The default stream object shall be provided by the library. If a communicator is created from ``native_device_type``, then the default stream shall translate to ``native_stream_type`` on the corresponding device.
+
+The communication operation may accept attribute object. If that parameter is missed, then the default attribute object is used (default_<operation_name>_attr). The default attribute object shall be provided by the library.
 
 .. note::
     See also: :doc:`operation_attributes`
@@ -45,38 +45,24 @@ Allgatherv is a collective communication operation that collects data from all t
 .. code:: cpp
 
     template<class BufferType>
-    request communicator::allgatherv(const BufferType* send_buf,
-                                     size_t send_count,
-                                     BufferType* recv_buf,
-                                     const vector_class<size_t>& recv_counts,
-                                     const allgatherv_attr& attr = default_allgatherv_attr);
+    event ccl::allgatherv(const BufferType* send_buf,
+                          size_t send_count,
+                          BufferType* recv_buf,
+                          const vector_class<size_t>& recv_counts,
+                          const communicator& comm,
+                          const stream& stream = default_stream,
+                          const allgatherv_attr& attr = default_allgatherv_attr,
+                          const vector_class<event>& deps = {});
 
-    request communicator::allgatherv(const void* send_buf,
-                                     size_t send_count,
-                                     void* recv_buf,
-                                     const vector_class<size_t>& recv_counts,
-                                     datatype dtype,
-                                     const allgatherv_attr& attr = default_allgatherv_attr);
-
-.. code:: cpp
-
-    template<class BufferType>
-    request device_communicator::allgatherv(const BufferType* send_buf,
-                                            size_t send_count,
-                                            BufferType* recv_buf,
-                                            const vector_class<size_t>& recv_counts,
-                                            stream op_stream,
-                                            const allgatherv_attr& attr = default_allgatherv_attr,
-                                            const vector_class<event>& deps = {});
-
-    request device_communicator::allgatherv(const void* send_buf,
-                                            size_t send_count,
-                                            void* recv_buf,
-                                            const vector_class<size_t>& recv_counts,
-                                            datatype dtype,
-                                            stream op_stream,
-                                            const allgatherv_attr& attr = default_allgatherv_attr,
-                                            const vector_class<event>& deps = {});
+    event ccl::allgatherv(const void* send_buf,
+                          size_t send_count,
+                          void* recv_buf,
+                          const vector_class<size_t>& recv_counts,
+                          datatype dtype,
+                          const communicator& comm,
+                          const stream& stream = default_stream,
+                          const allgatherv_attr& attr = default_allgatherv_attr,
+                          const vector_class<event>& deps = {});
 
 send_buf
     the buffer with ``send_count`` elements of ``BufferType`` that stores local data to be gathered
@@ -93,15 +79,15 @@ dtype
     | the datatype of elements in ``send_buf`` and ``recv_buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -115,38 +101,24 @@ Allreduce is a collective communication operation that performs the global reduc
 .. code:: cpp
 
     template <class BufferType>
-    request communicator::allreduce(const BufferType* send_buf,
-                                    BufferType* recv_buf,
-                                    size_t count,
-                                    reduction rtype,
-                                    const allreduce_attr& attr = default_allreduce_attr);
+    event ccl::allreduce(const BufferType* send_buf,
+                         BufferType* recv_buf,
+                         size_t count,
+                         reduction rtype,
+                         const communicator& comm,
+                         const stream& stream = default_stream,
+                         const allreduce_attr& attr = default_allreduce_attr,
+                         const vector_class<event>& deps = {});
 
-    request communicator::allreduce(const void* send_buf,
-                                    void* recv_buf,
-                                    size_t count,
-                                    reduction rtype,
-                                    datatype dtype,
-                                    const allreduce_attr& attr = default_allreduce_attr);
-
-.. code:: cpp
-
-    template <class BufferType>
-    request device_communicator::allreduce(const BufferType* send_buf,
-                                           BufferType* recv_buf,
-                                           size_t count,
-                                           reduction rtype,
-                                           stream op_stream,
-                                           const allreduce_attr& attr = default_allreduce_attr,
-                                           const vector_class<event>& deps = {});
-
-    request device_communicator::allreduce(const void* send_buf,
-                                           void* recv_buf,
-                                           size_t count,
-                                           reduction rtype,
-                                           datatype dtype,
-                                           stream op_stream,
-                                           const allreduce_attr& attr = default_allreduce_attr,
-                                           const vector_class<event>& deps = {});
+    event ccl::allreduce(const void* send_buf,
+                         void* recv_buf,
+                         size_t count,
+                         reduction rtype,
+                         datatype dtype,
+                         const communicator& comm,
+                         const stream& stream = default_stream,
+                         const allreduce_attr& attr = default_allreduce_attr,
+                         const vector_class<event>& deps = {});
 
 send_buf
     the buffer with ``count`` elements of ``BufferType`` that stores local data to be reduced
@@ -160,80 +132,15 @@ dtype
     | the datatype of elements in ``send_buf`` and ``recv_buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
-    an object to track the progress of the operation
-
-
-.. _Alltoall:
-
-Alltoall
-********
-
-Alltoall is a collective communication operation in which each rank
-sends separate equal-sized blocks of data to each rank.
-The j-th block of send buffer sent from the i-th rank is received by the j-th rank
-and is placed in the i-th block of receive buffer.
-
-.. code:: cpp
-
-    template <class BufferType>
-    request communicator::alltoall(const BufferType* send_buf,
-                                   BufferType* recv_buf,
-                                   size_t count,
-                                   const alltoall_attr& attr = default_alltoall_attr);
-
-    request communicator::alltoall(const void* send_buf,
-                                   void* recv_buf,
-                                   size_t count,
-                                   datatype dtype,
-                                   const alltoall_attr& attr = default_alltoall_attr);
-
-.. code:: cpp
-
-    template <class BufferType>
-    request device_communicator::alltoall(const BufferType* send_buf,
-                                          BufferType* recv_buf,
-                                          size_t count,
-                                          stream op_stream,
-                                          const alltoall_attr& attr = default_alltoall_attr,
-                                          const vector_class<event>& deps = {});
-
-    request device_communicator::alltoall(const void* send_buf,
-                                          void* recv_buf,
-                                          size_t count,
-                                          datatype dtype,
-                                          stream op_stream,
-                                          const alltoall_attr& attr = default_alltoall_attr,
-                                          const vector_class<event>& deps = {});
-
-send_buf
-    the buffer with ``count`` elements of ``BufferType`` that stores local data to be sent
-recv_buf [out]
-    | the buffer to store the received result, must be large enough
-    | to hold values from all ranks, i.e. at least ``comm_size`` * ``count``
-count
-    the number of elements to be send to or to received from each rank
-dtype
-    | the datatype of elements in ``send_buf`` and ``recv_buf``
-    | must be skipped if ``BufferType`` can be inferred
-    | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
-attr
-    optional attributes to customize the operation
-deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -250,38 +157,24 @@ and is placed in the i-th block of receive buffer.
 .. code:: cpp
 
     template <class BufferType>
-    request communicator::alltoallv(const BufferType* send_buf,
-                                    const vector_class<size_t>& send_counts,
-                                    BufferType* recv_buf,
-                                    const vector_class<size_t>& recv_counts,
-                                    const alltoallv_attr& attr = default_alltoallv_attr);
+    event ccl::alltoallv(const BufferType* send_buf,
+                         const vector_class<size_t>& send_counts,
+                         BufferType* recv_buf,
+                         const vector_class<size_t>& recv_counts,
+                         const communicator& comm,
+                         const stream& stream = default_stream,
+                         const alltoallv_attr& attr = default_alltoallv_attr,
+                         const vector_class<event>& deps = {});
 
-    request communicator::alltoallv(const void* send_buf,
-                                    const vector_class<size_t>& send_counts,
-                                    void* recv_buf,
-                                    const vector_class<size_t>& recv_counts,
-                                    datatype dtype,
-                                    const alltoallv_attr& attr = default_alltoallv_attr);
-
-.. code:: cpp
-
-    template <class BufferType>
-    request device_communicator::alltoallv(const BufferType* send_buf,
-                                           const vector_class<size_t>& send_counts,
-                                           BufferType* recv_buf,
-                                           const vector_class<size_t>& recv_counts,
-                                           stream op_stream,
-                                           const alltoallv_attr& attr = default_alltoallv_attr,
-                                           const vector_class<event>& deps = {});
-
-    request device_communicator::alltoallv(const void* send_buf,
-                                           const vector_class<size_t>& send_counts,
-                                           void* recv_buf,
-                                           const vector_class<size_t>& recv_counts,
-                                           datatype dtype,
-                                           stream op_stream,
-                                           const alltoallv_attr& attr = default_alltoallv_attr,
-                                           const vector_class<event>& deps = {});
+    event ccl::alltoallv(const void* send_buf,
+                         const vector_class<size_t>& send_counts,
+                         void* recv_buf,
+                         const vector_class<size_t>& recv_counts,
+                         datatype dtype,
+                         const communicator& comm,
+                         const stream& stream = default_stream,
+                         const alltoallv_attr& attr = default_alltoallv_attr,
+                         const vector_class<event>& deps = {});
 
 send_buf
     the buffer with elements of ``BufferType`` that stores local blocks to be sent to each rank
@@ -299,15 +192,15 @@ dtype
     | the datatype of elements in ``send_buf`` and ``recv_buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -321,23 +214,20 @@ and it is completed only after all the ranks in the communicator have called it.
 
 .. code:: cpp
 
-    request communicator::barrier(const barrier_attr& attr = default_barrier_attr);
+    event ccl::barrier(const communicator& comm,
+                       const stream& stream = default_stream,
+                       const barrier_attr& attr = default_barrier_attr,
+                       const vector_class<event>& deps = {});
 
-.. code:: cpp
-
-    request device_communicator::barrier(stream op_stream,
-                                         const barrier_attr& attr = default_barrier_attr,
-                                         const vector_class<event>& deps = {});
-
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -352,34 +242,22 @@ from one rank of communicator (denoted as root) to all other ranks.
 .. code:: cpp
 
     template <class BufferType>
-    request communicator::broadcast(BufferType* buf,
-                                    size_t count,
-                                    size_t root,
-                                    const broadcast_attr& attr = default_broadcast_attr);
+    event ccl::broadcast(BufferType* buf,
+                         size_t count,
+                         size_t root,
+                         const communicator& comm,
+                         const stream& stream = default_stream,
+                         const broadcast_attr& attr = default_broadcast_attr,
+                         const vector_class<event>& deps = {});
 
-    request communicator::broadcast(void* buf,
-                                    size_t count,
-                                    datatype dtype,
-                                    size_t root,
-                                    const broadcast_attr& attr = default_broadcast_attr);
-
-.. code:: cpp
-
-    template <class BufferType>
-    request device_communicator::broadcast(BufferType* buf,
-                                           size_t count,
-                                           size_t root,
-                                           stream op_stream,
-                                           const broadcast_attr& attr = default_broadcast_attr,
-                                           const vector_class<event>& deps = {});
-
-    request device_communicator::broadcast(void* buf,
-                                           size_t count,
-                                           datatype dtype,
-                                           size_t root,
-                                           stream op_stream,
-                                           const broadcast_attr& attr = default_broadcast_attr,
-                                           const vector_class<event>& deps = {});
+    event ccl::broadcast(void* buf,
+                         size_t count,
+                         datatype dtype,
+                         size_t root,
+                         const communicator& comm,
+                         const stream& stream = default_stream,
+                         const broadcast_attr& attr = default_broadcast_attr,
+                         const vector_class<event>& deps = {});
 
 buf [in,out]
     | the buffer with ``count`` elements of ``BufferType``
@@ -392,15 +270,15 @@ dtype
     | the datatype of elements in ``buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -410,47 +288,31 @@ Reduce
 ******
 
 Reduce is a collective communication operation that performs the global reduction operation
-on values from all ranks of the communicator and returns the result to the root rank
+on values from all ranks of the communicator and returns the result to the root rank.
 
 .. code:: cpp
 
     template <class BufferType>
-    request communicator::reduce(const BufferType* send_buf,
-                                 BufferType* recv_buf,
-                                 size_t count,
-                                 reduction rtype,
-                                 size_t root,
-                                 const reduce_attr& attr = default_reduce_attr);
+    event ccl::reduce(const BufferType* send_buf,
+                      BufferType* recv_buf,
+                      size_t count,
+                      reduction rtype,
+                      size_t root,
+                      const communicator& comm,
+                      const stream& stream = default_stream,
+                      const reduce_attr& attr = default_reduce_attr,
+                      const vector_class<event>& deps = {});
 
-    request communicator::reduce(const void* send_buf,
-                                 void* recv_buf,
-                                 size_t count,
-                                 datatype dtype,
-                                 reduction rtype,
-                                 size_t root,
-                                 const reduce_attr& attr = default_reduce_attr);
-
-.. code:: cpp
-
-    template <class BufferType>
-    request device_communicator::reduce(const BufferType* send_buf,
-                                        BufferType* recv_buf,
-                                        size_t count,
-                                        reduction rtype,
-                                        size_t root,
-                                        stream op_stream,
-                                        const reduce_attr& attr = default_reduce_attr,
-                                        const vector_class<event>& deps = {});
-
-    request device_communicator::reduce(const void* send_buf,
-                                        void* recv_buf,
-                                        size_t count,
-                                        datatype dtype,
-                                        reduction rtype,
-                                        size_t root,
-                                        stream op_stream,
-                                        const reduce_attr& attr = default_reduce_attr,
-                                        const vector_class<event>& deps = {});
+    event ccl::reduce(const void* send_buf,
+                      void* recv_buf,
+                      size_t count,
+                      datatype dtype,
+                      reduction rtype,
+                      size_t root,
+                      const communicator& comm,
+                      const stream& stream = default_stream,
+                      const reduce_attr& attr = default_reduce_attr,
+                      const vector_class<event>& deps = {});
 
 send_buf
     the buffer with ``count`` elements of ``BufferType`` that stores local data to be reduced
@@ -467,15 +329,15 @@ dtype
     | the datatype of elements in ``send_buf`` and ``recv_buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -490,38 +352,24 @@ on values from all ranks of the communicator and scatters the result in blocks b
 .. code:: cpp
 
     template <class BufferType>
-    request communicator::reduce_scatter(const BufferType* send_buf,
-                                         BufferType* recv_buf,
-                                         size_t recv_count,
-                                         reduction rtype,
-                                         const reduce_scatter_attr& attr = default_reduce_scatter_attr);
+    event ccl::reduce_scatter(const BufferType* send_buf,
+                              BufferType* recv_buf,
+                              size_t recv_count,
+                              reduction rtype,
+                              const communicator& comm,
+                              const stream& stream = default_stream,
+                              const reduce_scatter_attr& attr = default_reduce_scatter_attr,
+                              const vector_class<event>& deps = {});
 
-    request communicator::reduce_scatter(const void* send_buf,
-                                         void* recv_buf,
-                                         size_t recv_count,
-                                         datatype dtype,
-                                         reduction rtype,
-                                         const reduce_scatter_attr& attr = default_reduce_scatter_attr);
-
-.. code:: cpp
-
-    template <class BufferType>
-    request device_communicator::reduce_scatter(const BufferType* send_buf,
-                                                BufferType* recv_buf,
-                                                size_t recv_count,
-                                                reduction rtype,
-                                                stream op_stream,
-                                                const reduce_scatter_attr& attr = default_reduce_scatter_attr,
-                                                const vector_class<event>& deps = {});
-
-    request device_communicator::reduce_scatter(const void* send_buf,
-                                                void* recv_buf,
-                                                size_t recv_count,
-                                                datatype dtype,
-                                                reduction rtype,
-                                                stream op_stream,
-                                                const reduce_scatter_attr& attr = default_reduce_scatter_attr,
-                                                const vector_class<event>& deps = {});
+    event ccl::reduce_scatter(const void* send_buf,
+                              void* recv_buf,
+                              size_t recv_count,
+                              datatype dtype,
+                              reduction rtype,
+                              const communicator& comm,
+                              const stream& stream = default_stream,
+                              const reduce_scatter_attr& attr = default_reduce_scatter_attr,
+                              const vector_class<event>& deps = {});
 
 send_buf
     the buffer with ``comm_size`` * ``count`` elements of ``BufferType`` that stores local data to be reduced
@@ -535,15 +383,15 @@ dtype
     | the datatype of elements in ``send_buf`` and ``recv_buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
-op_stream
-    | the stream associated with the operation
-    | relevant for device communicator
+comm
+    the communicator that defines a group of ranks for the operation
+stream
+    an optional stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
-    | an optional vector of the events that the operation should depend on
-    | relevant for device communicator
-return ``request``
+    an optional vector of the events that the operation should depend on
+return ``event``
     an object to track the progress of the operation
 
 
@@ -551,8 +399,6 @@ return ``request``
     See also:
 
     - :ref:`Communicator`
-    - :ref:`Device Communicator`
-    - :ref:`Request`
     - :ref:`Stream`
     - :ref:`Event`
     - :doc:`operation_progress`

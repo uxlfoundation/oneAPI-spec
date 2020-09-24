@@ -2,11 +2,45 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-Error Handling
+==============
+Error handling
 ==============
 
-oneCCL error handling relies on the mechanism of C++ exceptions. If an error occurs,
-it shall be propagated at the point of a function call where it is caught
-using standard C++ error handling mechanism.
+oneCCL error handling relies on the mechanism of C++ exceptions. If an error
+occurs, it shall be propagated at the point of a function call where it is
+caught using standard C++ error handling mechanism.
 
-oneCCL specification defines ``exception`` as a type for exceptions that may be thrown by oneCCL API.
+Exception classification
+************************
+
+Exception classification in oneCCL is aligned with C++ Standard Library classification. oneCCL introduces class that defines the base class in the hierarchy of oneCCL exception classes. All oneCCL routines throw exceptions inherited from this base class.
+
+In the hierarchy of oneCCL exceptions, ``ccl::exception`` is the base class inherited from ``std::exception`` class. All other oneCCL exception classes are derived from this base class.
+
+This specification does not require implementations to perform error-checking. However, if an implementation does provide error-checking, it shall use the following exception classes. Additional implementation-specific exception classes can be used for exceptional conditions not fitting any of these classes.
+
+Common exceptions
+*****************
+
+.. csv-table::
+    :header: "Exception class", "Description"
+    :widths: 40, 60
+
+    ".. _oneccl_exception:
+
+    ``ccl::exception``", "Reports general unspecified error"
+    ".. _oneccl_exception_unsupported_device:
+
+    ``ccl::unsupported_device``", "Reports an error when the operation is not supported on a specific device"
+    ".. _oneccl_exception_host_bad_alloc:
+
+    ``ccl::host_bad_alloc``", "Reports an error that occurred during memory allocation on the host"
+    ".. _oneccl_exception_device_bad_alloc:
+
+    ``ccl::device_bad_alloc``", "Reports an error that occurred during memory allocation on a specific device"
+    ".. _oneccl_exception_unimplemented:
+
+    ``ccl::unimplemented``", "Reports an error when an algorithm or a method is not implemented"
+    ".. _oneccl_exception_invalid_argument:
+
+    ``ccl::invalid_argument``", "Reports an error when arguments to the operation were rejected"
