@@ -135,7 +135,7 @@ typedef union {
         mfxU8  Major; /*!< Major number of the correspondent structure. */
       /*! @} */
     };
-    mfxU16  Version;   /*!< Structure version number */
+    mfxU16  Version;   /*!< Structure version number. */
 } mfxStructVersion;
 MFX_PACK_END()
 

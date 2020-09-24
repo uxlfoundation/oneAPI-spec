@@ -1329,7 +1329,7 @@ typedef struct {
     */
     mfxU16      DisableDeblockingIdc;
     /*!
-       Completely disables VUI in output bitstream.
+       Completely disables VUI in the output bitstream.
        @note Not all codecs and implementations support this value. Use the Query API function to check if this feature is supported.
     */
     mfxU16      DisableVUI;
@@ -1650,17 +1650,17 @@ Values are in the 1 to 51 range,
        modify, or remove LTR frames based on encoding parameters and content properties. The application must set each input frame's
        mfxFrameData::FrameOrder for correct operation of LTR.
     */
-    mfxU16      ExtBrcAdaptiveLTR;         /* tri-state option for ExtBRC */
+    mfxU16      ExtBrcAdaptiveLTR;         /* Tri-state option for ExtBRC. */
     mfxU16      reserved[163];
 } mfxExtCodingOption3;
 MFX_PACK_END()
 
-/*! IntraPredBlockSize/InterPredBlockSize specifies minimum block size of inter-prediction. */
+/*! IntraPredBlockSize/InterPredBlockSize specifies the minimum block size of inter-prediction. */
 enum {
     MFX_BLOCKSIZE_UNKNOWN   = 0, /*!< Unspecified. */
-    MFX_BLOCKSIZE_MIN_16X16 = 1, /*!< 16x16              */
-    MFX_BLOCKSIZE_MIN_8X8   = 2, /*!< 16x16, 8x8         */
-    MFX_BLOCKSIZE_MIN_4X4   = 3  /*!< 16x16, 8x8, 4x4    */
+    MFX_BLOCKSIZE_MIN_16X16 = 1, /*!< 16x16 minimum block size.              */
+    MFX_BLOCKSIZE_MIN_8X8   = 2, /*!< 8x8 minimum block size. May be 16x16 or 8x8.         */
+    MFX_BLOCKSIZE_MIN_4X4   = 3  /*!< 4x4 minimum block size. May be 16x16, 8x8, or 4x4.    */
 };
 
 /*! The MVPrecision enumerator specifies the motion estimation precision. */
@@ -1676,7 +1676,7 @@ enum {
     MFX_CODINGOPTION_UNKNOWN    =0,    /*!< Unspecified. */
     MFX_CODINGOPTION_ON         =0x10, /*!< Coding option set. */
     MFX_CODINGOPTION_OFF        =0x20, /*!< Coding option not set. */
-    MFX_CODINGOPTION_ADAPTIVE   =0x30  /*!< Reserved */
+    MFX_CODINGOPTION_ADAPTIVE   =0x30  /*!< Reserved. */
 };
 
 /*! The BitstreamDataFlag enumerator uses bit-ORed values to itemize additional information about the bitstream buffer. */
@@ -4216,8 +4216,8 @@ MFX_PACK_BEGIN_STRUCT_W_PTR()
    The mfxExtDeviceAffinityMask structure is used by the application to specify
    affinity mask for the device with given device ID. See mfxDeviceDescription
    for the device ID definition and sub device indexes. If the implementation
-   manages CPU threads for some purposes, user can set CPU threads affinity
-   mask as well by using this structure with deviceID equals to the "CPU". 
+   manages CPU threads for some purpose, the user can set the CPU thread affinity
+   mask by using this structure with DeviceID set to "CPU".
 */
 typedef struct {
     /*! Extension buffer header. Header.BufferId must be equal to

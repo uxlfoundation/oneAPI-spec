@@ -88,6 +88,9 @@ included in oneVPL:
   into one encoding call. This feature was removed because it is device specific
   and not commonly used.
 
+- **Surface Type Neutral Transcoding.** Opaque memory support is removed and 
+  replaced with internal memory allocation concept.   
+
 -----------------------------------------
 |msdk_full_name| API Removals
 -----------------------------------------
@@ -151,6 +154,12 @@ The following |msdk_full_name| functions are not included in oneVPL:
 - **Video processing functions**
 
   - MFXVideoVPP_RunFrameVPPAsyncEx()
+
+- **Memory type and IOPattern enumerations**
+  
+  - MFX_IOPATTERN_IN_OPAQUE_MEMORY
+  - MFX_IOPATTERN_OUT_OPAQUE_MEMORY
+  - MFX_MEMTYPE_OPAQUE_FRAME
 
 .. important:: Corresponding extension buffers are also removed.
 
