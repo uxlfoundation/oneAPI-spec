@@ -12,3 +12,4 @@
    memory_allocation.rst
    mutual_exclusion.rst
    timing.rst
+   info_namespace.rst
