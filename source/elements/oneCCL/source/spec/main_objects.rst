@@ -180,9 +180,9 @@ and be used to create key-value stores on other ranks:
 
 .. code:: cpp
 
-    kvs ccl::create_main_kvs() const;
+    shared_ptr_class<kvs> ccl::create_main_kvs() const;
 
-return ``kvs``
+return ``shared_ptr_class<kvs>``
     the main key-value store object
 
 
@@ -190,11 +190,11 @@ Creating a new key-value store from main kvs address:
 
 .. code:: cpp
 
-    kvs ccl::create_kvs(const kvs::address_type& addr) const;
+    shared_ptr_class<kvs> ccl::create_kvs(const kvs::address_type& addr) const;
 
 addr
     the address of the main kvs
-return ``kvs``
+return ``shared_ptr_class<kvs>``
     key-value store object
 
 
