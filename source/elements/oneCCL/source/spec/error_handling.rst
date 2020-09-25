@@ -29,9 +29,9 @@ Common exceptions
     ".. _oneccl_exception:
 
     ``ccl::exception``", "Reports general unspecified error"
-    ".. _oneccl_exception_unsupported_device:
+    ".. _oneccl_exception_invalid_argument:
 
-    ``ccl::unsupported_device``", "Reports an error when the operation is not supported on a specific device"
+    ``ccl::invalid_argument``", "Reports an error when arguments to the operation were rejected"
     ".. _oneccl_exception_host_bad_alloc:
 
     ``ccl::host_bad_alloc``", "Reports an error that occurred during memory allocation on the host"
@@ -40,7 +40,7 @@ Common exceptions
     ``ccl::device_bad_alloc``", "Reports an error that occurred during memory allocation on a specific device"
     ".. _oneccl_exception_unimplemented:
 
-    ``ccl::unimplemented``", "Reports an error when an algorithm or a method is not implemented"
-    ".. _oneccl_exception_invalid_argument:
+    ``ccl::unimplemented``", "Reports an error when the requested operation is not implemented"
+    ".. _oneccl_exception_unsupported:
 
-    ``ccl::invalid_argument``", "Reports an error when arguments to the operation were rejected"
+    ``ccl::unsupported``", "Reports an error when the requested operation is not supported"
