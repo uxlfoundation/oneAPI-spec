@@ -6,7 +6,7 @@
 #  versions
 
 breathe
-git+git://github.com/rscohn2/reuse-tool.git
+git+https://github.com/rscohn2/reuse-tool.git
 Sphinx>=2.4.0
 sphinx-notfound-page
 sphinx-rtd-theme
