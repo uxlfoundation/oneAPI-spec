@@ -12,23 +12,25 @@ publication. See the `latest specification
 updates.
 
 .. table:: oneAPI Versions Table
+  :widths: 20 20 60
 	   
-  ========  ==========  =========
-  Version   Date        View                                                                                                            
-  ========  ==========  =========
-  `1.0`_    09/14/2020  `HTML <https://spec.oneapi.com/versions/1.0/>`__ `PDF <https://spec.oneapi.com/versions/1.0/oneAPI-spec.pdf>`__
-  `0.9`_    07/30/2020  `HTML <https://spec.oneapi.com/versions/0.9/>`__ `PDF <https://spec.oneapi.com/versions/0.9/oneAPI-spec.pdf>`__
-  `0.85`_   06/29/2020  `HTML <https://spec.oneapi.com/versions/0.85/>`__ `PDF <https://spec.oneapi.com/versions/0.85/oneAPI-spec.pdf>`__
-  `0.8`_    05/29/2020  `HTML <https://spec.oneapi.com/versions/0.8/>`__ `PDF <https://spec.oneapi.com/versions/0.8/oneAPI-spec.pdf>`__
-  `0.7`_    03/26/2020  `HTML <https://spec.oneapi.com/versions/0.7/>`__ `PDF <https://spec.oneapi.com/versions/0.7/oneAPI-spec.pdf>`__
-  `0.5`_    11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0/>`__                                                                
-  ========  ==========  =========
+  ==================  ==========  =========
+  Version             Date        View                                                                                                            
+  ==================  ==========  =========
+  `1.0 rev 1`_        09/14/2020  `HTML <https://spec.oneapi.com/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-1/oneAPI-spec.pdf>`__
+  `0.9`_              07/30/2020  `HTML <https://spec.oneapi.com/versions/0.9/>`__ `PDF <https://spec.oneapi.com/versions/0.9/oneAPI-spec.pdf>`__
+  `0.85`_             06/29/2020  `HTML <https://spec.oneapi.com/versions/0.85/>`__ `PDF <https://spec.oneapi.com/versions/0.85/oneAPI-spec.pdf>`__
+  `0.8`_              05/29/2020  `HTML <https://spec.oneapi.com/versions/0.8/>`__ `PDF <https://spec.oneapi.com/versions/0.8/oneAPI-spec.pdf>`__
+  `0.7`_              03/26/2020  `HTML <https://spec.oneapi.com/versions/0.7/>`__ `PDF <https://spec.oneapi.com/versions/0.7/oneAPI-spec.pdf>`__
+  `0.5`_              11/17/2019  `HTML <https://spec.oneapi.com/versions/0.5.0/>`__
+  ==================  ==========  =========
+
 
 Release Notes
 =============
 
-1.0
----
+1.0 rev 1
+---------
 
 * oneMKL
 
