@@ -25,6 +25,12 @@ Contribute to the oneAPI Specification by opening issues in the oneAPI
 Specification `GitHub repository
 <https://github.com/oneapi-src/oneapi-spec>`__.
 
+----------
+Governance
+----------
+
+See `governance <doc/governance.rst>`__.
+
 ----------------
 General Feedback
 ----------------
@@ -67,8 +73,4 @@ If you agree to the above, every contribution of your feedback
 must include the following line using your real name and email 
 address: Signed-off-by: Joe Smith joe.smith@email.com
 
------
-Style
------
 
-See the `Style Guide <style-guide.rst>`_.
