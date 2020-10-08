@@ -8,7 +8,8 @@
 breathe
 git+https://github.com/rscohn2/reuse-tool.git
 Sphinx>=2.4.0
-sphinx-notfound-page
+# waiting for pypi release for fix for parallel read
+git+https://github.com/readthedocs/sphinx-notfound-page.git
 sphinx-rtd-theme
 sphinx-prompt
 sphinx_substitution_extensions
