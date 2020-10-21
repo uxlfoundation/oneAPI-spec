@@ -224,6 +224,7 @@ commands = {'clean': clean,
             'html': build,
             'latexpdf': build,
             'spelling': build,
+            'singlehtml': build,
             'prep': prep,
             'sort-words': sort_words,
             'spec-venv': spec_venv}

@@ -84,6 +84,8 @@ substitutions = [
 primary_domain = 'cpp'
 
 latex_elements = {
+    'printindex': '\\footnotesize\\raggedright\\let\\oldtwocolumn\\twocolumn\\renewcommand{\\twocolumn}[1][]{#1}\\printindex\\renewcommand{\\twocolumn}[1][]{\\oldtwocolumn}',
+    
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
