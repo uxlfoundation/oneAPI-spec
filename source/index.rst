@@ -29,6 +29,5 @@ for creating parallel applications:
    elements/oneTBB/source/nested-index
    elements/oneVPL/source/index
    elements/oneMKL/source/index
-   contributors
    versions
    notices
