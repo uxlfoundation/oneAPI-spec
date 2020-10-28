@@ -18,8 +18,6 @@ The overall specification also has a core team and lead. The **oneAPI
 core team** is responsible for issues that involve multiple oneAPI
 elements and provides general oversight.
 
-Core Team members and leads are `published <core-teams.rst>`__.
-
 `Technical advisory boards
 <https://github.com/oneapi-src/oneapi-tab>`__ review topics related to
 specifications and provide feedback. There may be overlap between core
