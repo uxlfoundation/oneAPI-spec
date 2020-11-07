@@ -35,9 +35,6 @@ Common exceptions
     ".. _oneccl_exception_host_bad_alloc:
 
     ``ccl::host_bad_alloc``", "Reports an error that occurred during memory allocation on the host"
-    ".. _oneccl_exception_device_bad_alloc:
-
-    ``ccl::device_bad_alloc``", "Reports an error that occurred during memory allocation on a specific device"
     ".. _oneccl_exception_unimplemented:
 
     ``ccl::unimplemented``", "Reports an error when the requested operation is not implemented"

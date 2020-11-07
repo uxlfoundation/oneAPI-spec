@@ -19,14 +19,17 @@ oneCCL specification defines the following collective communication operations:
 These operations are collective, meaning that all participants (ranks) of oneCCL communicator should make a call.
 The order of collective operation calls should be the same across all ranks.
 
-``communicator`` shall provide the ability to perform communication operations either on host or device memory buffers depending on the ``device`` used to create the communicator. Additionally, communication operations may accept an execution context (stream) and a vector of events that the communication operation should depend on. The output ``event`` object shall provide the ability to track the progress of the operation.
+``communicator`` shall provide the ability to perform communication operations either on host or device memory buffers depending on the ``device`` used to create the communicator. Additionally, communication operations shall accept an execution context (stream) and may accept a vector of events that the communication operation should depend on, that is, input dependencies. The output ``event`` object shall provide the ability to track the progress of the operation.
+
+.. note::
+    Support for handling of input events is optional
 
 ``BufferType`` is used below to define the C++ type of elements in data buffers (``buf``, ``send_buf`` and  ``recv_buf``) of communication operations. At least the following types shall be supported: ``[u]int{8/16/32/64}_t``, ``float``, ``double``. The explicit ``datatype`` parameter shall be used to enable data types which cannot be inferred from the function arguments.
 
 .. note::
     See also: :ref:`Custom Datatypes`
 
-The communication operation may accept a ``stream`` object. If that parameter is missed, then the default stream object is used. The default stream object shall be provided by the library. If a communicator is created from ``native_device_type``, then the default stream shall translate to ``native_stream_type`` on the corresponding device.
+The communication operation accepts a ``stream`` object. If a communicator is created from ``native_device_type``, then the stream shall translate to ``native_stream_type`` created from the corresponding device.
 
 The communication operation may accept attribute object. If that parameter is missed, then the default attribute object is used (default_<operation_name>_attr). The default attribute object shall be provided by the library.
 
@@ -50,7 +53,7 @@ Allgatherv is a collective communication operation that collects data from all t
                           BufferType* recv_buf,
                           const vector_class<size_t>& recv_counts,
                           const communicator& comm,
-                          const stream& stream = default_stream,
+                          const stream& stream,
                           const allgatherv_attr& attr = default_allgatherv_attr,
                           const vector_class<event>& deps = {});
 
@@ -60,7 +63,7 @@ Allgatherv is a collective communication operation that collects data from all t
                           const vector_class<size_t>& recv_counts,
                           datatype dtype,
                           const communicator& comm,
-                          const stream& stream = default_stream,
+                          const stream& stream,
                           const allgatherv_attr& attr = default_allgatherv_attr,
                           const vector_class<event>& deps = {});
 
@@ -82,7 +85,7 @@ dtype
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
@@ -106,7 +109,7 @@ Allreduce is a collective communication operation that performs the global reduc
                          size_t count,
                          reduction rtype,
                          const communicator& comm,
-                         const stream& stream = default_stream,
+                         const stream& stream,
                          const allreduce_attr& attr = default_allreduce_attr,
                          const vector_class<event>& deps = {});
 
@@ -116,7 +119,7 @@ Allreduce is a collective communication operation that performs the global reduc
                          reduction rtype,
                          datatype dtype,
                          const communicator& comm,
-                         const stream& stream = default_stream,
+                         const stream& stream,
                          const allreduce_attr& attr = default_allreduce_attr,
                          const vector_class<event>& deps = {});
 
@@ -135,7 +138,7 @@ dtype
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
@@ -162,7 +165,7 @@ and is placed in the i-th block of receive buffer.
                          BufferType* recv_buf,
                          const vector_class<size_t>& recv_counts,
                          const communicator& comm,
-                         const stream& stream = default_stream,
+                         const stream& stream,
                          const alltoallv_attr& attr = default_alltoallv_attr,
                          const vector_class<event>& deps = {});
 
@@ -172,7 +175,7 @@ and is placed in the i-th block of receive buffer.
                          const vector_class<size_t>& recv_counts,
                          datatype dtype,
                          const communicator& comm,
-                         const stream& stream = default_stream,
+                         const stream& stream,
                          const alltoallv_attr& attr = default_alltoallv_attr,
                          const vector_class<event>& deps = {});
 
@@ -195,7 +198,7 @@ dtype
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
@@ -215,14 +218,14 @@ and it is completed only after all the ranks in the communicator have called it.
 .. code:: cpp
 
     event ccl::barrier(const communicator& comm,
-                       const stream& stream = default_stream,
+                       const stream& stream,
                        const barrier_attr& attr = default_barrier_attr,
                        const vector_class<event>& deps = {});
 
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
@@ -244,18 +247,18 @@ from one rank of communicator (denoted as root) to all other ranks.
     template <class BufferType>
     event ccl::broadcast(BufferType* buf,
                          size_t count,
-                         size_t root,
+                         int root,
                          const communicator& comm,
-                         const stream& stream = default_stream,
+                         const stream& stream,
                          const broadcast_attr& attr = default_broadcast_attr,
                          const vector_class<event>& deps = {});
 
     event ccl::broadcast(void* buf,
                          size_t count,
                          datatype dtype,
-                         size_t root,
+                         int root,
                          const communicator& comm,
-                         const stream& stream = default_stream,
+                         const stream& stream,
                          const broadcast_attr& attr = default_broadcast_attr,
                          const vector_class<event>& deps = {});
 
@@ -273,7 +276,7 @@ dtype
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
@@ -297,9 +300,9 @@ on values from all ranks of the communicator and returns the result to the root 
                       BufferType* recv_buf,
                       size_t count,
                       reduction rtype,
-                      size_t root,
+                      int root,
                       const communicator& comm,
-                      const stream& stream = default_stream,
+                      const stream& stream,
                       const reduce_attr& attr = default_reduce_attr,
                       const vector_class<event>& deps = {});
 
@@ -308,9 +311,9 @@ on values from all ranks of the communicator and returns the result to the root 
                       size_t count,
                       datatype dtype,
                       reduction rtype,
-                      size_t root,
+                      int root,
                       const communicator& comm,
-                      const stream& stream = default_stream,
+                      const stream& stream,
                       const reduce_attr& attr = default_reduce_attr,
                       const vector_class<event>& deps = {});
 
@@ -332,7 +335,7 @@ dtype
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps
@@ -357,7 +360,7 @@ on values from all ranks of the communicator and scatters the result in blocks b
                               size_t recv_count,
                               reduction rtype,
                               const communicator& comm,
-                              const stream& stream = default_stream,
+                              const stream& stream,
                               const reduce_scatter_attr& attr = default_reduce_scatter_attr,
                               const vector_class<event>& deps = {});
 
@@ -367,7 +370,7 @@ on values from all ranks of the communicator and scatters the result in blocks b
                               datatype dtype,
                               reduction rtype,
                               const communicator& comm,
-                              const stream& stream = default_stream,
+                              const stream& stream,
                               const reduce_scatter_attr& attr = default_reduce_scatter_attr,
                               const vector_class<event>& deps = {});
 
@@ -386,7 +389,7 @@ dtype
 comm
     the communicator that defines a group of ranks for the operation
 stream
-    an optional stream associated with the operation
+    the stream associated with the operation
 attr
     optional attributes to customize the operation
 deps

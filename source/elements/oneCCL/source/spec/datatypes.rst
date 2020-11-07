@@ -58,6 +58,10 @@ datatype::bfloat16
     `non-standard 16-bit floating point with 7-bit mantissa`_
 
 
+.. note::
+    Support for ``datatype::float16`` is optional
+
+
 .. _Custom Datatypes:
 
 Custom Datatypes
@@ -83,7 +87,7 @@ Creating a datatype attribute object, which may used to register custom datatype
 
 .. code:: cpp
 
-    datatype_attr ccl::create_datatype_attr() const;
+    datatype_attr ccl::create_datatype_attr();
 
 return ``datatype_attr``
     an object containing attributes for the custom datatype
@@ -115,7 +119,7 @@ Retrieving a datatype size in bytes:
 
 .. code:: cpp
 
-    size_t ccl::get_datatype_size(datatype dtype) const;
+    size_t ccl::get_datatype_size(datatype dtype);
 
 dtype
     the datatype's handle
