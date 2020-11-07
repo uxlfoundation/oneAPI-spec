@@ -35,7 +35,7 @@ Retrieving a native object that is signaled when the operation completes:
 
 .. code:: cpp
 
-    native_event_type event::get_native() const;
+    native_event_type event::get_native();
 
 return ``native_event_type``
     | a native object that is signaled when the operation completes

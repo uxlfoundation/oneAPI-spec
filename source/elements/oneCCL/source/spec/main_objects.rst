@@ -23,14 +23,14 @@ Device
 ******
 
 .. note::
-    Here and below, a native device/context/stream/event are defined in the scope of SYCL device runtime.
+    Here and below, a native device/context/stream/event are defined in the scope of SYCL device runtime
 
 .. code:: cpp
 
-    using native_device_type = cl::sycl::device;
-    using native_context_type = cl::sycl::context;
-    using native_stream_type = cl::sycl::queue;
-    using native_event_type = cl::sycl::event;
+    using native_device_type = sycl::device;
+    using native_context_type = sycl::context;
+    using native_stream_type = sycl::queue;
+    using native_event_type = sycl::event;
 
 oneCCL specification defines ``device`` as an abstraction of a computational device: a CPU, a specific GPU card in the system, or any other device participating in a communication operation. ``device`` corresponds to the communicator's rank (addressable entity in a communication operation).
 
@@ -41,9 +41,9 @@ Creating a new device object:
 
 .. code:: cpp
 
-    device ccl::create_device(native_device_type& native_device) const;
+    device ccl::create_device(native_device_type& native_device);
 
-    device ccl::create_device() const;
+    device ccl::create_device();
 
 native_device
     the existing native device object
@@ -56,7 +56,7 @@ Retrieving a native device object:
 
 .. code:: cpp
 
-    native_device_type device::get_native() const;
+    native_device_type device::get_native();
 
 return ``native_device_type``
     | a native device object
@@ -77,9 +77,9 @@ Creating a new context object:
 
 .. code:: cpp
 
-    context ccl::create_context(native_context_type& native_context) const;
+    context ccl::create_context(native_context_type& native_context);
 
-    context ccl::create_context() const;
+    context ccl::create_context();
 
 native_context
     the existing native context object
@@ -93,7 +93,7 @@ Retrieving a native context object:
 
 .. code:: cpp
 
-    native_context_type context::get_native() const;
+    native_context_type context::get_native();
 
 return ``native_context_type``
     | a native context object
@@ -111,7 +111,7 @@ Getting a record from the key-value store:
 .. code:: cpp
 
     virtual vector_class<char> kvs_interface::get(
-        const string_class& key) const = 0;
+        const string_class& key) = 0;
 
 key
     the key of value to be retrieved
@@ -128,7 +128,7 @@ Saving a record in the key-value store:
 
     void kvs_interface::set(
         const string_class& key,
-        const vector_class<char>& data) const = 0;
+        const vector_class<char>& data) = 0;
 
 key
     the key at which the value should be stored
@@ -155,11 +155,11 @@ oneCCL specification defines ``kvs`` class as a built-in KVS provided by oneCCL.
     address_type get_address() const;
 
     vector_class<char> get(
-        const string_class& key) const override;
+        const string_class& key) override;
 
     void set(
         const string_class& key,
-        const vector_class<char>& data) const override;
+        const vector_class<char>& data) override;
 
     }
 
@@ -180,7 +180,7 @@ and be used to create key-value stores on other ranks:
 
 .. code:: cpp
 
-    shared_ptr_class<kvs> ccl::create_main_kvs() const;
+    shared_ptr_class<kvs> ccl::create_main_kvs();
 
 return ``shared_ptr_class<kvs>``
     the main key-value store object
@@ -190,7 +190,7 @@ Creating a new key-value store from main kvs address:
 
 .. code:: cpp
 
-    shared_ptr_class<kvs> ccl::create_kvs(const kvs::address_type& addr) const;
+    shared_ptr_class<kvs> ccl::create_kvs(const kvs::address_type& addr);
 
 addr
     the address of the main kvs
@@ -209,24 +209,26 @@ oneCCL specification defines ``communicator`` class that describes a group of co
 
 Each process may correspond to multiple ranks.
 
+.. note::
+    Support for multiple ranks per process is optional
 
-Creating a new communicator with user-supplied size, rank-to-device mapping/rank, context and kvs:
+Creating a new communicator(s) with user-supplied communicator size, rank-to-device mapping/rank, context and kvs:
 
 .. note::
-  If ``device`` and ``context`` objects are omitted, then they are created with ``ccl::create_device()`` and ``ccl::create_context()`` functions without native objects.
+  If ``device`` and ``context`` objects are omitted, then they are created with ``ccl::create_device()`` and ``ccl::create_context()`` functions without native objects
 
 .. code:: cpp
 
-    vector_class<communicator> create_communicators(
-        size_t size,
-        const map_class<size_t, device>& rank_device_map,
+    vector_class<communicator> ccl::create_communicators(
+        int size,
+        const map_class<int, device>& rank_device_map,
         const context& context,
-        shared_ptr_class<kvs_interface> kvs) const;
+        shared_ptr_class<kvs_interface> kvs);
 
-    communicator create_communicator(
-        size_t size,
-        size_t rank,
-        shared_ptr_class<kvs_interface> kvs) const;
+    communicator ccl::create_communicator(
+        int size,
+        int rank,
+        shared_ptr_class<kvs_interface> kvs);
 
 size
     user-supplied total number of ranks
@@ -238,8 +240,8 @@ context
     device context
 kvs
     key-value store for ranks wire-up
-return ``vector_class<communicator>``
-    a vector of communicators
+return ``vector_class<communicator>`` / ``communicator``
+    a vector of communicator objects  / a communicator object
 
 
 ``communicator`` shall provide methods to retrieve the rank, the device, and the context that correspond to the communicator object as well as the total number of ranks in the communicator.
@@ -249,9 +251,9 @@ Retrieving the rank in a communicator:
 
 .. code:: cpp
 
-    size_t communicator::rank() const;
+    int communicator::rank() const;
 
-return ``size_t``
+return ``int``
     the rank that corresponds to the communicator object
 
 
@@ -259,9 +261,9 @@ Retrieving the total number of ranks in a communicator:
 
 .. code:: cpp
 
-    size_t communicator::size() const;
+    int communicator::size() const;
 
-return ``size_t``
+return ``int``
     the total number of the ranks
 
 
@@ -269,7 +271,7 @@ Retrieving an underlying device, which was used as communicator construction arg
 
 .. code:: cpp
 
-    device get_device() const;
+    device communicator::get_device() const;
 
 return ``device``
     the device that corresponds to the communicator object
@@ -279,7 +281,7 @@ Retrieving an underlying context, which was used as communicator construction ar
 
 .. code:: cpp
 
-    context get_context() const;
+    context communicator::get_context() const;
 
 return ``context``
     the context that corresponds to the communicator object
@@ -295,7 +297,7 @@ Stream
 
 oneCCL specification defines ``stream`` as an abstraction that encapsulates execution context for ``communicator`` communication operations.
 
-Stream may be optionally passed to ``communicator`` communication operation.
+Stream shall be passed to ``communicator`` communication operation.
 
 oneCCL specification defines the way to create an instance of the ``stream`` class with a native object (``native_stream_type``) and without a native object.
 
@@ -304,9 +306,9 @@ Creating a new stream object:
 
 .. code:: cpp
 
-    stream ccl::create_stream(native_stream_type& native_stream) const;
+    stream ccl::create_stream(native_stream_type& native_stream);
 
-    stream ccl::create_stream() const;
+    stream ccl::create_stream();
 
 native_stream
     the existing native stream object
@@ -320,7 +322,7 @@ Retrieving a native stream object:
 
 .. code:: cpp
 
-    native_stream_type stream::get_native() const;
+    native_stream_type stream::get_native();
 
 return ``native_stream_type``
     | a native stream object
@@ -336,6 +338,9 @@ oneCCL specification defines ``event`` as an abstraction that encapsulates synch
 
 Each communication operation of oneCCL shall return an event object for tracking the operation's progress. A vector of events may be passed to the ``communicator`` communication operation to designate input dependencies for the operation.
 
+.. note::
+    Support for handling of input events is optional
+
 oneCCL specification defines the way to create an instance of the ``event`` class with a native object (``native_event_type``).
 
 
@@ -343,7 +348,7 @@ Creating a new event object:
 
 .. code:: cpp
 
-    event ccl::create_event(native_event_type& native_event) const;
+    event ccl::create_event(native_event_type& native_event);
 
 native_event
     the existing native event object
@@ -357,7 +362,7 @@ Retrieving a native event object:
 
 .. code:: cpp
 
-    native_event_type event::get_native() const;
+    native_event_type event::get_native();
 
 return ``native_event_type``
     | a native event object

@@ -69,12 +69,12 @@ allreduce_attr_id::reduction_fn / reduce_attr_id::reduction_fn / reduce_scatter_
 
         typedef void (*reduction_fn)
         (
-            const void*,      // in_buf
-            size_t,           // in_count
-            void*,            // inout_buf
-            size_t*,          // out_count
-            datatype,         // datatype
-            const fn_context* // context
+            const void*,      /* in_buf    */
+            size_t,           /* in_count  */
+            void*,            /* inout_buf */
+            size_t*,          /* out_count */
+            datatype,         /* datatype  */
+            const fn_context* /* context   */
         );
 
         typedef struct {
@@ -87,7 +87,7 @@ Creating an operation attribute object, which may be used in a corresponding com
 .. code:: cpp
 
     template <class OpAttrType>
-    OpAttrType ccl::create_operation_attr() const;
+    OpAttrType ccl::create_operation_attr();
 
 return ``OpAttrType``
     an object to hold attributes for a specific communication operation

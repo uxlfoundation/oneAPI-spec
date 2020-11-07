@@ -47,26 +47,26 @@ using an out-of-band communication mechanism and be used to create key-value sto
 
     /* SYCL devices communications, for example with multiple devices per process */
 
-    /* sycl_context -> cl::sycl::context */
-    /* sycl_devices -> vector<cl::sycl::device> */
-    /* sycl_queues  -> vector<cl::sycl::queue> */
+    /* sycl_context -> sycl::context */
+    /* sycl_devices -> vector<sycl::device> */
+    /* sycl_queues  -> vector<sycl::queue> */
 
-    /* create ccl::context object from cl::sycl::context object */
+    /* create ccl::context object from sycl::context object */
     auto ccl_context = ccl::create_context(sycl_context);
 
-    /* create ccl::device objects from cl::sycl::device objects */
+    /* create ccl::device objects from sycl::device objects */
     vector<ccl::device> ccl_devices;
     for (size_t idx = 0; idx < sycl_devices.size(); idx++) {
         ccl_devices.push_back(ccl::create_device(sycl_devices[idx]));
     }
 
-    map<size_t, ccl::device> r2d_map;
+    map<int, ccl::device> r2d_map;
     for (auto& dev : ccl_devices) {
-        size_t rank = /* generate a globally unique rank for a specific device */
+        int rank = /* generate a globally unique rank for a specific device */
         r2d_map[rank] = dev;
     }
 
-    /* create ccl::stream objects from cl::sycl::queue objects */
+    /* create ccl::stream objects from sycl::queue objects */
     vector<ccl::stream> ccl_streams;
     for (size_t idx = 0; idx < sycl_queues.size(); idx++) {
         ccl_streams.push_back(ccl::create_stream(sycl_queues[idx]));
