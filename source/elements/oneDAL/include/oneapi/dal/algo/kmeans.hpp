@@ -148,8 +148,8 @@ public:
 /// @post :expr:`result.labels[i] >= 0`
 /// @post :expr:`result.labels[i] < desc.cluster_count`
 /// @post :expr:`result.iteration_count <= desc.max_iteration_count`
-/// @post :expr:`result.model.clusters.row_count == desc.cluster_count`
-/// @post :expr:`result.model.clusters.column_count == input.data.column_count`
+/// @post :expr:`result.model.centroids.row_count == desc.cluster_count`
+/// @post :expr:`result.model.centroids.column_count == input.data.column_count`
 template <typename Float, typename Method, typename Task>
 train_result<Task> train(const descriptor<Float, Method, Task>& desc,
                          const train_input<Task>& input);
@@ -213,6 +213,7 @@ public:
 ///
 
 /// @pre :expr:`input.data.has_data == true`
+/// @pre :expr:`input.model.centroids.has_data == true`
 /// @pre :expr:`input.model.centroids.row_count == desc.cluster_count`
 /// @pre :expr:`input.model.centroids.column_count == input.data.column_count`
 /// @post :expr:`result.labels.row_count == input.data.row_count`
