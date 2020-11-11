@@ -53,8 +53,8 @@ reference counted object which can be allocated by oneVPL or the application. Th
 application must follow the general rules of operation with reference counted
 objects. For example, when surfaces are allocated by oneVPL during
 :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` or with the help of
-:cpp:func:`MFXMemory_GetSurfaceForVPP` or :cpp:func:`MFXMemory_GetSurfaceForEncode`,
-the application must call the corresponding
+:cpp:func:`MFXMemory_GetSurfaceForVPP` or :cpp:func:`MFXMemory_GetSurfaceForVPPOut` or
+:cpp:func:`MFXMemory_GetSurfaceForEncode`, the application must call the corresponding
 :cpp:member:`mfxFrameSurfaceInterface::Release`
 function for the surfaces that are no longer in use.
 

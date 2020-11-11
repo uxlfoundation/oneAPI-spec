@@ -46,6 +46,11 @@ Structure Reference
       :start-after: struct_protected_begin:
       :end-before: struct_protected_end:
 
+:ref:`struct_decode_vpp`
+   .. include:: VPL_structs_decode_vpp.rst
+      :start-after: struct_decode_vpp_begin:
+      :end-before: struct_decode_vpp_end:
+
 .. toctree::
    :maxdepth: 1
    :hidden:
@@ -58,6 +63,7 @@ Structure Reference
    VPL_structs_encode
    VPL_structs_vpp
    VPL_structs_protected
+   VPL_structs_decode_vpp
 
 
 

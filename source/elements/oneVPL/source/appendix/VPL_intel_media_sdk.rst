@@ -43,6 +43,7 @@ New oneVPL dispatcher functions:
 New oneVPL memory management functions:
 
 - :cpp:func:`MFXMemory_GetSurfaceForVPP`
+- :cpp:func:`MFXMemory_GetSurfaceForVPPOut`
 - :cpp:func:`MFXMemory_GetSurfaceForEncode`
 - :cpp:func:`MFXMemory_GetSurfaceForDecode`
 

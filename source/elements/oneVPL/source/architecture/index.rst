@@ -18,6 +18,9 @@ oneVPL functions fall into the following categories:
 
    VPP
       Functions that perform video processing on raw video frames
+      
+   DECODE_VPP
+      Functions that perfom combined operations of decoding and video processing
 
    CORE
       Auxiliary functions for synchronization
@@ -64,3 +67,4 @@ identified hardware acceleration, and then redirects function calls accordingly.
    VPL_decoding
    VPL_encoding
    VPL_processing
+   VPL_decoding_vpp

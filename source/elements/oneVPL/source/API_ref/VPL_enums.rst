@@ -30,6 +30,9 @@ BitstreamDataFlag
 The BitstreamDataFlag enumerator uses bit-ORed values to itemize additional
 information about the bitstream buffer.
 
+.. doxygenenumvalue:: MFX_BITSTREAM_NO_FLAG
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_BITSTREAM_COMPLETE_FRAME
    :project: oneVPL
 
@@ -339,6 +342,82 @@ HEVC Levels
 
 .. _codec_profile:
 
+AV1 Levels
+-----------
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_2
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_21
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_22
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_23
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_3
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_31
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_32
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_33
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_4
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_41
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_42
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_43
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_5
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_51
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_52
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_53
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_6
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_61
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_62
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_63
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_7
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_71
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_72
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AV1_73
+   :project: oneVPL
+   
+   
 ------------
 CodecProfile
 ------------
@@ -375,6 +454,60 @@ H.264 Profiles
 .. doxygenenumvalue:: MFX_PROFILE_AVC_CONSTRAINED_HIGH
    :project: oneVPL
 
+AV1 Profiles
+------------
+
+.. doxygenenumvalue:: MFX_PROFILE_AV1_MAIN
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_AV1_HIGH
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_AV1_PRO
+   :project: oneVPL
+
+VC-1 Profiles
+-------------
+
+.. doxygenenumvalue:: MFX_PROFILE_VC1_SIMPLE
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VC1_MAIN
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VC1_ADVANCED
+   :project: oneVPL
+
+VP8 Profiles
+------------
+
+.. doxygenenumvalue:: MFX_PROFILE_VP8_0
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VP8_1
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VP8_2
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VP8_3
+   :project: oneVPL
+
+VP9 Profiles
+------------
+
+.. doxygenenumvalue:: MFX_PROFILE_VP9_0
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VP9_1
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VP9_2
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PROFILE_VP9_3
+   :project: oneVPL
+
 H.264 Constraints
 -----------------
 
@@ -397,6 +530,12 @@ H.264 specification for the list of constraints.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_PROFILE_AVC_CONSTRAINT_SET5
+   :project: oneVPL
+
+JPEG Profiles
+-------------
+
+.. doxygenenumvalue:: MFX_PROFILE_JPEG_BASELINE
    :project: oneVPL
 
 -----------------
@@ -532,6 +671,9 @@ Corruption
 The Corruption enumerator itemizes the decoding corruption types. It is a
 bit-OR’ed value of the following.
 
+.. doxygenenumvalue:: MFX_CORRUPTION_NO
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_CORRUPTION_MINOR
    :project: oneVPL
 
@@ -605,6 +747,9 @@ ErrorTypes
 ----------
 
 The ErrorTypes enumerator uses bit-ORed values to itemize bitstream error types.
+
+.. doxygenenumvalue:: MFX_ERROR_NO
+   :project: oneVPL
 
 .. doxygenenumvalue:: MFX_ERROR_PPS
    :project: oneVPL
@@ -849,6 +994,9 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_DEVICE_AFFINITY_MASK
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_CROPS
+   :project: oneVPL
+
 ----------------
 ExtMemBufferType
 ----------------
@@ -922,6 +1070,9 @@ Frame Data Flags
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_FRAMEORDER_UNKNOWN
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_FRAMEDATA_TIMESTAMP_UNKNOWN
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_FRAMEDATA_ORIGINAL_TIMESTAMP
@@ -1198,13 +1349,6 @@ Use bit-ORed values to specify input and output access patterns.
 .. doxygenenumvalue:: MFX_IOPATTERN_OUT_SYSTEM_MEMORY
    :project: oneVPL
 
--------------
-JPEG Profiles
--------------
-
-.. doxygenenumvalue:: MFX_PROFILE_JPEG_BASELINE
-   :project: oneVPL
-
 ---------------
 JPEGColorFormat
 ---------------
@@ -1336,6 +1480,9 @@ mfxIMPL
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_IMPL_VIA_VAAPI
+   :project: oneVPL
+   
+.. doxygenenumvalue:: MFX_IMPL_VIA_HDDLUNITE
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_IMPL_UNSUPPORTED
@@ -1988,51 +2135,6 @@ MFX_TRELLIS_I | MFX_TRELLIS_B turns it on for I and B frames.
 .. doxygenenumvalue:: MFX_TRELLIS_B
    :project: oneVPL
 
--------------
-VC-1 Profiles
--------------
-
-.. doxygenenumvalue:: MFX_PROFILE_VC1_SIMPLE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VC1_MAIN
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VC1_ADVANCED
-   :project: oneVPL
-
-------------
-VP8 Profiles
-------------
-
-.. doxygenenumvalue:: MFX_PROFILE_VP8_0
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VP8_1
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VP8_2
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VP8_3
-   :project: oneVPL
-
-------------
-VP9 Profiles
-------------
-
-.. doxygenenumvalue:: MFX_PROFILE_VP9_0
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VP9_1
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VP9_2
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PROFILE_VP9_3
-   :project: oneVPL
-
 -----------------
 VP9ReferenceFrame
 -----------------
@@ -2084,4 +2186,28 @@ The WeightedPred enumerator itemizes weighted prediction modes.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_WEIGHTED_PRED_IMPLICIT
+   :project: oneVPL
+
+--------------
+FilmGrainFlags 
+--------------
+
+The FilmGrainFlags enumerator itemizes flags in AV1 film grain parameters. 
+
+.. doxygenenumvalue:: MFX_FILM_GRAIN_NO
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_FILM_GRAIN_APPLY
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_FILM_GRAIN_UPDATE
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_FILM_GRAIN_CHROMA_SCALING_FROM_LUMA
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_FILM_GRAIN_OVERLAP
+   :project: oneVPL
+   
+.. doxygenenumvalue:: MFX_FILM_GRAIN_CLIP_TO_RESTRICTED_RANGE
    :project: oneVPL

@@ -76,4 +76,10 @@ MFXVideoVPP_RunFrameVPPAsync
 .. doxygenfunction:: MFXVideoVPP_RunFrameVPPAsync
    :project: oneVPL
 
-.. important:: The :cpp:func:`MFXVideoVPP_RunFrameVPPAsync` function is mandatory when implementing a VPP filter.
+MFXVideoVPP_ProcessFrameAsync
+-----------------------------
+
+.. doxygenfunction:: MFXVideoVPP_ProcessFrameAsync
+   :project: oneVPL
+
+.. important:: Either :cpp:func:`MFXVideoVPP_RunFrameVPPAsync` or  :cpp:func:`MFXVideoVPP_ProcessFrameAsync` function is                  mandatory when implementing a VPP filter.

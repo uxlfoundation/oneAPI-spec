@@ -66,3 +66,11 @@ mfxVPPDescription
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxAccelerationModeDescription
+------------------------------
+
+.. doxygenstruct:: mfxAccelerationModeDescription
+   :project: oneVPL
+   :members:
+   :protected-members:

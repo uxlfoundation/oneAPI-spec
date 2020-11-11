@@ -8,7 +8,8 @@
 Decoding Procedures
 ===================
 
-The following pseudo code shows the decoding procedure:
+There are several approaches to decode video frames. The first one is based on 
+the internal allocation mechanism presented here:
 
 .. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
@@ -18,52 +19,86 @@ The following pseudo code shows the decoding procedure:
 
 Note the following key points about the example:
 
-- The application can use the :cpp:func:`MFXVideoDECODE_DecodeHeader` function
-  to retrieve decoding initialization parameters from the bitstream. This step
-  is optional if the data is retrievable from other sources such as an
-  audio/video splitter.
-- The application can use the :cpp:func:`MFXVideoDECODE_QueryIOSurf` function to
-  obtain the number of working frame surfaces required to reorder output frames.
-  This step is required if the application is responsible for memory allocation.
-  Use of this function is not required if oneVPL is responsible for memory
-  allocation.
 - The application calls the :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` function
-  for a decoding operation with the bitstream buffer (bits) and an unlocked
-  working frame surface (work) as input parameters.
+  for a decoding operation with the bitstream buffer (bits), frame surface is allocated 
+  internally by the library.
 
-  .. attention:: Starting with oneVPL API version 2.0, the application can provide NULL
+  .. attention:: As shown in the example above starting with API version 2.0, 
+                 the application can provide NULL
                  as the working frame surface that leads to internal memory
-                 allocation.
+                 allocation. 
 
 - If decoding output is not available, the function returns a status code
-  requesting additional bitstream input or working frame surfaces as follows:
+  requesting additional bitstream input as follows:
 
   - :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_DATA`: The function needs additional
     bitstream input. The existing buffer contains less than a frame's worth of
     bitstream data.
-  - :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_SURFACE`: The function needs one
-    more frame surface to produce any output.
-  - :cpp:enumerator:`mfxStatus::MFX_ERR_REALLOC_SURFACE`: Dynamic resolution
-    change case - the function needs a bigger working frame surface (work).
 
 - Upon successful decoding, the :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`
   function returns :cpp:enumerator:`mfxStatus::MFX_ERR_NONE`. However, the
   decoded frame data (identified by the surface_out pointer) is not yet available
   because the :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` function is asynchronous.
   The application must use the :cpp:func:`MFXVideoCORE_SyncOperation` or
-  :cpp:struct:`mfxFrameSurfaceInterface` interface to synchronize the decoding
+  :cpp:member:`mfxFrameSurfaceInterface::Synchronize`  to synchronize the decoding
   operation before retrieving the decoded frame data.
+
 - At the end of the bitstream, the application continuously calls the
   :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` function with a NULL bitstream
-  pointer to drain any remaining frames cached within the oneVPL decoder until the
+  pointer to drain any remaining frames cached within the decoder until the
   function returns :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_DATA`.
 
-The following pseudo code shows the simplified decoding procedure:
+- When application completes the work with frame surface, it must call release to avoid memory leaks.
+
+The next example demonstrates how applications can use internally pre-allocated chunk 
+of video surfaces:
 
 .. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
    :start-after: /*beg2*/
    :end-before: /*end2*/
+   :lineno-start: 1
+
+Here the application should use the :cpp:func:`MFXVideoDECODE_QueryIOSurf` function to
+obtain the number of working frame surfaces required to reorder output frames.
+It is also required that :cpp:func:`MFXMemory_GetSurfaceForDecode` call is done after 
+decoder initialization. 
+In the :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`
+the oneVPL library increments reference counter of incoming surface frame so it is required
+that the application releases frame surface after the call.  
+
+
+The following pseudo code shows the decoding procedure according to the legacy mode 
+(API version < 2.0) with external video frames allocation:
+
+.. literalinclude:: ../snippets/prg_decoding.c
+   :language: c++
+   :start-after: /*beg3*/
+   :end-before: /*end3*/
+   :lineno-start: 1
+
+Note the following key points about the example:
+
+
+- The application can use the :cpp:func:`MFXVideoDECODE_DecodeHeader` function
+  to retrieve decoding initialization parameters from the bitstream. This step
+  is optional if the data is retrievable from other sources such as an
+  audio/video splitter.
+  
+- The :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` function can return following status
+  codes in addition to the described above:
+  
+  - :cpp:enumerator:`mfxStatus::MFX_ERR_MORE_SURFACE`: The function needs one
+    more frame surface to produce any output.
+  - :cpp:enumerator:`mfxStatus::MFX_ERR_REALLOC_SURFACE`: Dynamic resolution
+    change case - the function needs a bigger working frame surface (work).
+
+The following pseudo code shows the simplified decoding procedure:
+
+.. literalinclude:: ../snippets/prg_decoding.c
+   :language: c++
+   :start-after: /*beg4*/
+   :end-before: /*end4*/
    :lineno-start: 1
 
 .. _simplified-decoding-procedure:
@@ -295,7 +330,37 @@ structure.
 
 .. literalinclude:: ../snippets/prg_decoding.c
    :language: c++
-   :start-after: /*beg3*/
-   :end-before: /*end3*/
+   :start-after: /*beg5*/
+   :end-before: /*end5*/
    :lineno-start: 1
 
+---------------------------------------------------
+Combined Decode with Multi-channel Video Processing
+---------------------------------------------------
+
+The oneVPL exposes interface for making decode and video processing operations in one call.
+Users can specify a number of output processing channels and multiple video filters per each channel.
+This interface supports only internal memory allocation model and returns array of processed frames
+through :cpp:struct:`mfxSurfaceArray` reference object as shown by the example:
+
+.. literalinclude:: ../snippets/prg_decoding_vpp.c
+   :language: c++
+   :start-after: /*beg1*/
+   :end-before: /*end1*/
+   :lineno-start: 1
+
+It's possible that different video processing channels may have diffrent latency:
+
+.. literalinclude:: ../snippets/prg_decoding_vpp.c
+   :language: c++
+   :start-after: /*beg2*/
+   :end-before: /*end2*/
+   :lineno-start: 1
+
+Application can match decoded frame w/ specific VPP channels using :cpp:member:`mfxFrameData::TimeStamp`, :cpp:member:mfxFrameData::FrameOrder` and :cpp:member:`mfxFrameInfo::ChannelId`.
+
+Application can skip some or all channels including decoding output with help of `skip_channels` and `num_skip_channels` parameters as follows: application fills `skip_channels` array with `ChannelId`s to disable output of correspondent channels. In that case  :cpp:member:`surf_array_out` would contain only surfaces for the remaining channels. If the decoder's channel and/or impacted VPP channels don't have output frame(s) for the current call (for instance, input bitstream doesn't contain complete frame or deinterlacing/FRC filter have delay) `skip_channels` parameter is ignored for this channel. 
+If application disables all channels the SDK returns NULL as  :cpp:struct:`mfxSurfaceArray`. 
+If application doesn't need to disable any channels it sets `num_skip_channels` to zero, `skip_channels` is ignored when `num_skip_channels` is zero.
+
+.. note:: Even if more than one input compressed frame is consumed, the :cpp:func:`MFXVideoDECODE_VPP_DecodeFrameAsync` produces only           one decoded frame and correspondent frames from VPP channels.

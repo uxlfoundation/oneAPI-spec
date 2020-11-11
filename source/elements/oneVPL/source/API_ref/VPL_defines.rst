@@ -55,3 +55,10 @@ API
 
 .. doxygendefine:: MFX_VPPDESCRIPTION_VERSION
    :project: oneVPL
+
+.. doxygendefine:: MFX_SURFACEARRAY_VERSION
+   :project: oneVPL
+
+.. doxygendefine::MFX_ACCELERATIONMODESCRIPTION_VERSION
+    :project: oneVPL
+   

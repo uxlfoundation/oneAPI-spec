@@ -28,6 +28,17 @@ MFXMemory_GetSurfaceForVPP
 .. doxygenfunction:: MFXMemory_GetSurfaceForVPP
    :project: oneVPL
 
+Alias below, can be used as well:
+
+.. doxygendefine:: MFXMemory_GetSurfaceForVPPIn
+   :project: oneVPL
+
+MFXMemory_GetSurfaceForVPPOut
+-----------------------------
+
+.. doxygenfunction:: MFXMemory_GetSurfaceForVPPOut
+   :project: oneVPL
+
 MFXMemory_GetSurfaceForEncode
 -----------------------------
 

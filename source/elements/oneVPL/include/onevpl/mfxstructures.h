@@ -40,7 +40,13 @@ MFX_PACK_BEGIN_USUAL_STRUCT()
 /*! Specifies properties of video frames. See also "Configuration Parameter Constraints" chapter. */
 typedef struct {
     mfxU32  reserved[4]; /*!< Reserved for future use. */
-    mfxU16  reserved4;   /*!< Reserved for future use. */
+    /*! The unique ID of each VPP channel set by application. It's required that during Init/Reset application fills ChannelId for 
+        each mfxVideoChannelParam provided by the application and the SDK sets it back to the correspondent 
+        mfxSurfaceArray::mfxFrameSurface1 to distinguish different channels. It's expected that surfaces for some channels might be 
+        returned with some delay so application has to use mfxFrameInfo::ChannelId to distinguish what returned surface belongs to 
+        what VPP channel. Decoder's initialization parameters are always sent through channel with mfxFrameInfo::ChannelId equals to 
+        zero. It's allowed to skip setting of decoder's parameters for simplified decoding procedure */
+    mfxU16  ChannelId; 
     /*! Number of bits used to represent luma samples.
         @note Not all codecs and implementations support this value. Use the Query API function to check if this feature is supported. */
     mfxU16  BitDepthLuma;
@@ -50,38 +56,7 @@ typedef struct {
     /*! When the value is not zero, indicates that values of luma and chroma samples are shifted. Use BitDepthLuma and BitDepthChroma to calculate
         shift size. Use zero value to indicate absence of shift. See example data alignment below.
 
-    @note Not all codecs and implementations support this value. Use the Query API  function to check if this feature is supported.
-
-    @internal
-    Example data alignment for Shift = 0:
-    @endinternal
-    @dot
-        digraph {
-            abc [shape=none, margin=0, label=<
-            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
-             <TR><TD>Bit</TD><TD>15</TD><TD>14</TD><TD>13</TD><TD>12</TD><TD>11</TD><TD>10</TD><TD>9</TD><TD>8</TD>
-                 <TD>7</TD><TD>6</TD><TD>5</TD><TD>4</TD><TD>3</TD><TD>2</TD><TD>1</TD><TD>0</TD>
-             </TR>
-             <TR><TD>Value</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD COLSPAN="10">Valid data</TD>
-             </TR>
-               </TABLE>>];
-        }
-    @enddot
-    @internal
-    Example data alignment for Shift != 0:
-    @endinternal
-    @dot
-        digraph {
-            abc [shape=none, margin=0, label=<
-            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
-             <TR><TD>Bit</TD><TD>15</TD><TD>14</TD><TD>13</TD><TD>12</TD><TD>11</TD><TD>10</TD><TD>9</TD><TD>8</TD>
-                 <TD>7</TD><TD>6</TD><TD>5</TD><TD>4</TD><TD>3</TD><TD>2</TD><TD>1</TD><TD>0</TD>
-             </TR>
-             <TR><TD>Value</TD><TD COLSPAN="10">Valid data</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD>0</TD><TD>0</TD>
-             </TR>
-               </TABLE>>];
-        }
-    @enddot
+        @note Not all codecs and implementations support this value. Use the Query API  function to check if this feature is supported.
     */
     mfxU16  Shift;
     mfxFrameId FrameId; /*!< Describes the view and layer of a frame picture. */
@@ -133,8 +108,8 @@ typedef struct {
 
         If both parameters are zero, the encoder uses the default value of sample aspect ratio.
     */
-    mfxU16  AspectRatioW; /*!< Ratio for width. */
-    mfxU16  AspectRatioH; /*!< Ratio for height. */
+    mfxU16  AspectRatioW; /*!< Aspect Ratio for width. */
+    mfxU16  AspectRatioH; /*!< Aspect Ratio for height. */
     /*! @} */
 
     mfxU16  PicStruct;    /*!< Picture type as specified in the PicStruct enumerator. */
@@ -232,13 +207,15 @@ enum {
     MFX_FRAMEORDER_UNKNOWN = -1 /*!< Unused entry or API functions that generate the frame output do not use this frame. */
 };
 
-/* DataFlag in mfxFrameData */
+/* The FrameDataFlag enumerator itemizes DataFlag value in mfxFrameData. */
 enum {
+    MFX_FRAMEDATA_TIMESTAMP_UNKNOWN  = 0x0000,/*!< Indicates the time stamp of this frame is unknown and will be calculated by SDK. */
     MFX_FRAMEDATA_ORIGINAL_TIMESTAMP = 0x0001 /*!< Indicates the time stamp of this frame is not calculated and is a pass-through of the original time stamp. */
 };
 
 /* Corrupted in mfxFrameData */
 enum {
+    MFX_CORRUPTION_NO              = 0x0000, /*!< No corruption. */
     MFX_CORRUPTION_MINOR           = 0x0001, /*!< Minor corruption in decoding certain macro-blocks. */
     MFX_CORRUPTION_MAJOR           = 0x0002, /*!< Major corruption in decoding the frame - incomplete data, for example. */
     MFX_CORRUPTION_ABSENT_TOP_FIELD           = 0x0004, /*!< Top field of frame is absent in bitstream. Only bottom field has been decoded. */
@@ -358,7 +335,8 @@ typedef enum {
     MFX_HANDLE_RESERVED3                        = 5, /* Reserved.  */
     MFX_HANDLE_VA_CONFIG_ID                     = 6, /*!< Pointer to VAConfigID interface. It represents external VA config for Common Encryption usage model. */
     MFX_HANDLE_VA_CONTEXT_ID                    = 7, /*!< Pointer to VAContextID interface. It represents external VA context for Common Encryption usage model. */
-    MFX_HANDLE_CM_DEVICE                        = 8  /* Pointer to CmDevice interface ( Intel(r) C for Metal Runtime ). */
+    MFX_HANDLE_CM_DEVICE                        = 8,  /*!< Pointer to CmDevice interface ( Intel(r) C for Metal Runtime ). */
+    MFX_HANDLE_HDDLUNITE_WORKLOADCONTEXT        = 9,  /*!< Pointer to HddlUnite::WorkloadContext interface. */
 } mfxHandleType;
 
 /*! The mfxMemoryFlags enumerator specifies memory access mode. */
@@ -464,6 +442,8 @@ typedef struct mfxFrameSurfaceInterface {
 
     Read-write access with MFX_MAP_READ_WRITE provides exclusive simultaneous reading and writing access.
 
+    @note Bitwise copying of mfxFrameSurface1 object between map / unmap calls may result in having dangling data pointers in copies.
+
     @param[in]   surface  Valid surface.
     @param[out]  flags  Specify mapping mode.
     @param[out]  surface->Info.Data Pointers set to actual pixel data.
@@ -480,11 +460,11 @@ typedef struct mfxFrameSurfaceInterface {
 
     /*! @brief
     Invalidates pointers of surface->Info.Data and sets them to NULL.
-    In case of video memory, the surface with data in video memory becomes unmapped.
+    In case of video memory, the underlying texture becomes unmapped after last reader or writer unmap.
 
 
-    @param[in]   surface  Valid surface
-    @param[out]  surface->Info.Data  Pointers set to NULL
+    @param[in]   surface  Valid surface.
+    @param[out]  surface->Info.Data  Pointers set to NULL.
 
     @return
      MFX_ERR_NONE               If no error. \n
@@ -560,7 +540,23 @@ typedef struct mfxFrameSurfaceInterface {
      MFX_ERR_UNKNOWN            Any internal error.
     */
     mfxStatus           (MFX_CDECL *Synchronize)(mfxFrameSurface1* surface, mfxU32 wait);
-    mfxHDL              reserved2[4];
+    
+    /*! @brief
+    The library calls the function after complete of associated video operation 
+    notifying the application that frame surface is ready. 
+    
+    @attention This is callback function and intended to be called by 
+               the library only. 
+    
+    It is expected that the function is low-intrusive designed otherwise it may 
+    impact performance. 
+
+    @param[in] sts  The status of completed operation.
+
+    */
+    void               (MFX_CDECL *OnComplete)(mfxStatus sts);
+    
+    mfxHDL              reserved2[3];
 } mfxFrameSurfaceInterface;
 MFX_PACK_END()
 
@@ -711,7 +707,23 @@ typedef struct {
                 return MFX_ERR_REALLOC_SURFACE. See the CodingOptionValue enumerator for values of this option. Use the Query API
                 function to check if this feature is supported. */
             mfxU16  EnableReallocRequest;
-            mfxU16  reserved2[7];
+            /*! Special parameter for AV1 decoder. Indicates presence/absence of film grain parameters in bitstream. 
+                Also controls decoding behavior for streams with film grain parameters. MFXVideoDECODE_DecodeHeader returns nonzero FilmGrain 
+                for streams with film grain parameters and zero for streams w/o them. Decoding with film grain requires additional output surfaces.
+                If FilmGrain` is non-zero then MFXVideoDECODE_QueryIOSurf will request more surfaces in case of external allocated video memory at decoder output.
+                FilmGrain is passed to MFXVideoDECODE_Init function to control decoding operation for AV1 streams with film grain parameters.
+                If FilmGrain is nonzero decoding of each frame require two output surfaces (one for reconstructed frame and one for output frame with film grain applied). 
+                The decoder returns MFX_ERR_MORE_SURFACE from MFXVideoDECODE_DecodeFrameAsync if it has insufficient output surfaces to decode frame.
+                Application can forcibly disable the feature passing zero value of `FilmGrain` to `MFXVideoDECODE_Init`. 
+                In this case the decoder will output reconstructed frames w/o film grain applied. 
+                Application can retrieve film grain parameters for a frame by attaching extended buffer mfxExtAV1FilmGrainParam to mfxFrameSurface1.
+                If stream has no film grain parameters `FilmGrain` passed to `MFXVideoDECODE_Init` is ignored by the decoder. */
+            mfxU16  FilmGrain;
+            /*! If not zero, it forces SDK to attempt to decode bitstream even if a decoder may not support all features associated with given CodecLevel. Decoder may produce visual artifacts. Only AVC decoder supports this field. */
+            mfxU16  IgnoreLevelConstrain;
+            /*! This flag is used to disable output of main decoding channel. When it's ON SkipOutput = MFX_CODINGOPTION_ON decoder outputs only video processed channels. For pure decode this flag should be always disabled. */
+            mfxU16  SkipOutput; 
+            mfxU16  reserved2[4];
         };
         struct {   /* JPEG Decoding Options */
             /*! Specify the chroma sampling format that has been used to encode a JPEG picture. See the ChromaFormat enumerator for details. */
@@ -948,6 +960,40 @@ enum {
     MFX_PROFILE_VP9_3                       = 4,
     /*! @} */
 
+    /*! @{ */
+    /* AV1 Profiles */
+    MFX_PROFILE_AV1_MAIN                    = 1,
+    MFX_PROFILE_AV1_HIGH                    = 2,
+    MFX_PROFILE_AV1_PRO                     = 3,
+    /*! @} */
+
+    /*! @{ */
+    /* AV1 Levels */
+    MFX_LEVEL_AV1_2                         = 20,
+    MFX_LEVEL_AV1_21                        = 21,
+    MFX_LEVEL_AV1_22                        = 22,
+    MFX_LEVEL_AV1_23                        = 23,
+    MFX_LEVEL_AV1_3                         = 30,
+    MFX_LEVEL_AV1_31                        = 31,
+    MFX_LEVEL_AV1_32                        = 32,
+    MFX_LEVEL_AV1_33                        = 33,
+    MFX_LEVEL_AV1_4                         = 40,
+    MFX_LEVEL_AV1_41                        = 41,
+    MFX_LEVEL_AV1_42                        = 42,
+    MFX_LEVEL_AV1_43                        = 43,
+    MFX_LEVEL_AV1_5                         = 50,
+    MFX_LEVEL_AV1_51                        = 51,
+    MFX_LEVEL_AV1_52                        = 52,
+    MFX_LEVEL_AV1_53                        = 53,
+    MFX_LEVEL_AV1_6                         = 60,
+    MFX_LEVEL_AV1_61                        = 61,
+    MFX_LEVEL_AV1_62                        = 62,
+    MFX_LEVEL_AV1_63                        = 63,
+    MFX_LEVEL_AV1_7                         = 70,
+    MFX_LEVEL_AV1_71                        = 71,
+    MFX_LEVEL_AV1_72                        = 72,
+    MFX_LEVEL_AV1_73                        = 73,
+    /*! @} */
 };
 
 /*! The GopOptFlag enumerator itemizes special properties in the GOP (Group of Pictures) sequence. */
@@ -1681,6 +1727,7 @@ enum {
 
 /*! The BitstreamDataFlag enumerator uses bit-ORed values to itemize additional information about the bitstream buffer. */
 enum {
+    MFX_BITSTREAM_NO_FLAG           = 0x0000, /*!< The bitstream doesn't contain any flags. */
     /*!
        The bitstream buffer contains a complete frame or complementary field pair of data for the bitstream. For decoding, this means
        that the decoder can proceed with this buffer without waiting for the start of the next frame, which effectively reduces decoding latency.
@@ -2005,6 +2052,11 @@ enum {
        See the mfxExtDeviceAffinityMask structure for details.
     */
     MFX_EXTBUFF_DEVICE_AFFINITY_MASK = MFX_MAKEFOURCC('D', 'A', 'F', 'M'),
+
+    /*!
+       See the mfxExtInCrops structure for details.
+    */
+    MFX_EXTBUFF_CROPS = MFX_MAKEFOURCC('C', 'R', 'O', 'P'),
 
     
 };
@@ -3387,6 +3439,7 @@ MFX_PACK_END()
 
 /*! The ErrorTypes enumerator uses bit-ORed values to itemize bitstream error types. */
 enum {
+    MFX_ERROR_NO            =        0, /*!< No error in bitstream. */
     MFX_ERROR_PPS           = (1 << 0), /*!< Invalid/corrupted PPS. */
     MFX_ERROR_SPS           = (1 << 1), /*!< Invalid/corrupted SPS. */
     MFX_ERROR_SLICEHEADER   = (1 << 2), /*!< Invalid/corrupted slice header. */
@@ -4238,6 +4291,159 @@ typedef struct {
     mfxU8           *Mask;
     mfxU32           reserved[4]; /*! Reserved for future use. */
 } mfxExtDeviceAffinityMask;
+MFX_PACK_END()
+
+/*! The FilmGrainFlags enumerator itemizes flags in AV1 film grain parameters. 
+    The flags are equivalent to respective syntax elements from film_grain_params() section of uncompressed header. */
+enum {
+    MFX_FILM_GRAIN_NO                       =       0, /*!< Film grain isn't added to this frame. */
+    MFX_FILM_GRAIN_APPLY                    = (1 << 0), /*!< Film grain is added to this frame. */
+    MFX_FILM_GRAIN_UPDATE                   = (1 << 1), /*!< New set of film grain parameters is sent for this frame. */
+    MFX_FILM_GRAIN_CHROMA_SCALING_FROM_LUMA = (1 << 2), /*!< Chroma scaling is inferred from luma scaling. */
+    MFX_FILM_GRAIN_OVERLAP                  = (1 << 3), /*!< Overlap between film grain blocks is applied. */
+    MFX_FILM_GRAIN_CLIP_TO_RESTRICTED_RANGE = (1 << 4) /*!< Clipping to the restricted (studio) range is applied after adding the film grain. */
+};
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*! Defines film grain point. */
+typedef struct {
+    mfxU8 Value; /*!<  The x coordinate for the i-th point of the piece-wise linear scaling function for luma/Cb/Cr component. */
+    mfxU8 Scaling; /*!<  The scaling (output) value for the i-th point of the piecewise linear scaling function for luma/Cb/Cr component. */
+} mfxAV1FilmGrainPoint;
+MFX_PACK_END()
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*! The structure is used by AV-1 decoder to report film grain parameters for decoded frame. */
+typedef struct {
+    mfxExtBuffer Header;
+
+    mfxU16 FilmGrainFlags;  /*!< Bit map with bit-ORed flags from FilmGrainFlags enum. */
+    mfxU16 GrainSeed;       /*!< Starting value for pseudo-random numbers used during film grain synthesis. */
+
+    mfxU8  RefIdx;          /*!< Indicate which reference frame contains the film grain parameters to be used for this frame. */
+    mfxU8  NumYPoints;      /*!< The number of points for the piece-wise linear scaling function of the luma component. */
+    mfxU8  NumCbPoints;     /*!< The number of points for the piece-wise linear scaling function of the Cb component. */
+    mfxU8  NumCrPoints;     /*!< The number of points for the piece-wise linear scaling function of the Cr component.*/
+
+    mfxAV1FilmGrainPoint PointY[14]; /*!< The array of points for luma component. */
+    mfxAV1FilmGrainPoint PointCb[10]; /*!< The array of points for Cb component. */
+    mfxAV1FilmGrainPoint PointCr[10]; /*!< The array of points for Cr component. */
+
+    mfxU8 GrainScalingMinus8; /*!< The shift – 8 applied to the values of the chroma component. The grain_scaling_minus_8 can take values of 0..3 and 
+                                   determines the range and quantization step of the standard deviation of film grain.*/
+    mfxU8 ArCoeffLag;         /*!< The number of auto-regressive coefficients for luma and chroma.*/
+
+    mfxU8 ArCoeffsYPlus128[24];  /*!< Auto-regressive coefficients used for the Y plane. */
+    mfxU8 ArCoeffsCbPlus128[25]; /*!< Auto-regressive coefficients used for the Cb plane. */
+    mfxU8 ArCoeffsCrPlus128[25]; /*!< The number of points for the piece-wise linear scaling function of the Cr component.*/
+
+    mfxU8 ArCoeffShiftMinus6;  /*!< The range of the auto-regressive coefficients. 
+                                    Values of 0, 1, 2, and 3 correspond to the ranges for auto-regressive coefficients of 
+                                    [-2, 2), [-1, 1), [-0.5, 0.5) and [-0.25, 0.25) respectively.*/
+    mfxU8 GrainScaleShift;     /*!< Downscaling factor of the grain synthesis process for the Gaussian random numbers .*/
+
+    mfxU8  CbMult;     /*!< The multiplier for the Cb component used in derivation of the input index to the Cb component scaling function.*/
+    mfxU8  CbLumaMult; /*!< The multiplier for the average luma component used in derivation of the input index to the Cb component scaling function. */
+    mfxU16 CbOffset;   /*!< The offset used in derivation of the input index to the Cb component scaling function.*/
+
+    mfxU8  CrMult;     /*!< The multiplier for the Cr component used in derivation of the input index to the Cr component scaling function.*/
+    mfxU8  CrLumaMult; /*!< The multiplier for the average luma component used in derivation of the input index to the Cr component scaling function.*/
+    mfxU16 CrOffset;   /*!< The offset used in derivation of the input index to the Cr component scaling function.*/
+
+    mfxU16 reserved[43];
+} mfxExtAV1FilmGrainParam;
+MFX_PACK_END()
+
+#define MFX_SURFACEARRAY_VERSION MFX_STRUCT_VERSION(1, 0)
+
+
+MFX_PACK_BEGIN_STRUCT_W_PTR()
+/*! The structure is reference counted object to return array of surfaces allocated and processed by the library. */
+typedef struct mfxSurfaceArray
+{
+    mfxHDL              Context; /*!< The context of the memory interface. User should not touch (change, set, null) this pointer. */
+    mfxStructVersion    Version; /*!< The version of the structure. */                                        
+    mfxU16 reserved[3];  
+    /*! @brief
+    Increments the internal reference counter of the surface. The surface is not destroyed until the surface is released using the (*Release) function. (*AddRef) should be used each time a new link to the surface is created (for example, copy structure) for proper surface management.
+
+    @param[in]  surface  Valid mfxSurfaceArray.
+
+    @return
+     MFX_ERR_NONE              If no error. \n
+     MFX_ERR_NULL_PTR          If surface is NULL. \n
+     MFX_ERR_INVALID_HANDLE    If mfxSurfaceArray->Context is invalid (for example NULL). \n
+     MFX_ERR_UNKNOWN           Any internal error.
+
+    */                                                  
+    mfxStatus (*AddRef)(struct mfxSurfaceArray*  surface_array);   
+    /*! @brief
+    Decrements the internal reference counter of the surface. (*Release) should be called after using the (*AddRef) function to add a 
+    surface or when allocation logic requires it. 
+
+    @param[in]  surface_array  Valid mfxSurfaceArray.
+
+    @return
+     MFX_ERR_NONE               If no error. \n
+     MFX_ERR_NULL_PTR           If surface is NULL. \n
+     MFX_ERR_INVALID_HANDLE     If mfxSurfaceArray->Context is invalid (for example NULL). \n
+     MFX_ERR_UNDEFINED_BEHAVIOR If Reference Counter of surface is zero before call. \n
+     MFX_ERR_UNKNOWN            Any internal error.
+    */
+    mfxStatus (*Release)(struct mfxSurfaceArray*  surface_array);  
+
+    /*! @brief
+    Returns current reference counter of mfxSurfaceArray structure.
+
+    @param[in]   surface  Valid surface_array.
+    @param[out]  counter  Sets counter to the current reference counter value.
+
+    @return
+     MFX_ERR_NONE               If no error. \n
+     MFX_ERR_NULL_PTR           If surface or counter is NULL. \n
+     MFX_ERR_INVALID_HANDLE     If mfxSurfaceArray->Context is invalid (for example NULL). \n
+     MFX_ERR_UNKNOWN            Any internal error.
+    */             
+    mfxStatus (*GetRefCounter)(struct mfxSurfaceArray*  surface_array, mfxU32* counter);
+
+    mfxFrameSurface1** Surfaces; /*!< The array of pointers to mfxFrameSurface1. mfxFrameSurface1 surfaces are allocated by the same 
+    agent who allocates mfxSurfaceArray. */
+    mfxU32 NumSurfaces; /*!<The size of array of pointers to mfxFrameSurface1. */
+    mfxU32 reserved1;
+} mfxSurfaceArray;
+MFX_PACK_END()
+
+MFX_PACK_BEGIN_STRUCT_W_PTR()
+/*! The structure is used for VPP channels initializtion in Decode_VPP component.  */
+typedef struct {
+    mfxFrameInfo  VPP; /*!< The configuration parameters of VPP filters per each channel. */
+    mfxU16  Protected; /*!< Specifies the content protection mechanism. */
+    mfxU16  IOPattern; /*!< Output memory access types for SDK functions. */
+    mfxExtBuffer** ExtParam; /*!< Points to an array of pointers to the extra configuration structures; see the ExtendedBufferID enumerator for a list of extended configurations. */
+    mfxU16  NumExtParam; /*!< The number of extra configuration structures attached to the structure. */
+    mfxU16  reserved1[7];
+} mfxVideoChannelParam;
+MFX_PACK_END()
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*! The structure describes rectangle coordinates wat can bse used for ROI or for Cropping. */
+    typedef struct {
+        mfxU16  Left;   /*!< X coordinate of region of top-left corner of rectangle. */
+        mfxU16  Top;    /*!< Y coordinate of region of top-left corner of rectangle. */
+        mfxU16  Right;  /*!< X coordinate of region of bottom-right corner of rectangle. */
+        mfxU16  Bottom; /*!< Y coordinate of region of bottom-right corner of rectangle. */
+    } mfxRect; 
+MFX_PACK_END()
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*! The structure contains crop parameters which applied by Decode_VPP component to input surfaces before video processing operation.
+    It is used for letterboxing operations.
+*/
+typedef struct {
+    mfxExtBuffer     Header; /*! Extension buffer header. BufferId must be equal to MFX_EXTBUFF_CROPS. */
+    mfxRect          Crops;  /*!< Crops parameters for letterboxing operations. */
+    mfxU32           reserved[4];
+}mfxExtInCrops;
 MFX_PACK_END()
 
 #ifdef __cplusplus

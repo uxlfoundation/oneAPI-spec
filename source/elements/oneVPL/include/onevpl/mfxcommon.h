@@ -60,6 +60,7 @@ enum  {
     MFX_IMPL_VIA_D3D9     = 0x0200,  /*!< Hardware acceleration goes through the Microsoft* Direct3D* 9 infrastructure. */
     MFX_IMPL_VIA_D3D11    = 0x0300,  /*!< Hardware acceleration goes through the Microsoft* Direct3D* 11 infrastructure. */
     MFX_IMPL_VIA_VAAPI    = 0x0400,  /*!< Hardware acceleration goes through the Linux* VA-API infrastructure. */
+    MFX_IMPL_VIA_HDDLUNITE     = 0x0500,  /*!< Hardware acceleration goes through the HDDL* Unite*. */
 
 #if (MFX_VERSION >= MFX_VERSION_NEXT)
     MFX_IMPL_EXTERNAL_THREADING        = 0x10000,
@@ -228,7 +229,8 @@ typedef enum {
     MFX_RESOURCE_DX9_SURFACE                     = 4, /*!< IDirect3DSurface9. */
     MFX_RESOURCE_DX11_TEXTURE                    = 5, /*!< ID3D11Texture2D. */
     MFX_RESOURCE_DX12_RESOURCE                   = 6, /*!< ID3D12Resource. */
-    MFX_RESOURCE_DMA_RESOURCE                    = 7  /*!< DMA resource. */
+    MFX_RESOURCE_DMA_RESOURCE                    = 7, /*!< DMA resource. */
+    MFX_RESOURCE_HDDLUNITE_REMOTE_MEMORY         = 8, /*!< HDDL Unite Remote memory handle. */
 } mfxResourceType;
 
 /*! Maximum allowed length of the implementation name. */
@@ -366,16 +368,29 @@ typedef enum {
     MFX_ACCEL_MODE_VIA_D3D9     = 0x0200,  /*!< Hardware acceleration goes through the Microsoft* Direct3D9* infrastructure. */
     MFX_ACCEL_MODE_VIA_D3D11    = 0x0300,  /*!< Hardware acceleration goes through the Microsoft* Direct3D11* infrastructure. */
     MFX_ACCEL_MODE_VIA_VAAPI    = 0x0400,  /*!< Hardware acceleration goes through the Linux* VA-API infrastructure. */
+    MFX_ACCEL_MODE_VIA_HDDLUNITE    = 0x0500,  /*!< Hardware acceleration goes through the HDDL* Unite*. */
 } mfxAccelerationMode;
 
-#define MFX_IMPLDESCRIPTION_VERSION MFX_STRUCT_VERSION(1, 0)
+#define MFX_ACCELERATIONMODESCRIPTION_VERSION MFX_STRUCT_VERSION(1, 0)
+
+MFX_PACK_BEGIN_STRUCT_W_PTR()
+/*! This structure represents acceleration modes description. */
+typedef struct {
+    mfxStructVersion Version;                            /*!< Version of the structure. */
+    mfxU16 reserved[2];                                  /*!< reserved for future use. */
+    mfxU16 NumAccelerationModes;                         /*!< Number of supported acceleration modes. */
+    mfxAccelerationMode* Mode;                           /*!< Pointer to the array of supported acceleration modes. */
+} mfxAccelerationModeDescription;
+MFX_PACK_END()
+
+#define MFX_IMPLDESCRIPTION_VERSION MFX_STRUCT_VERSION(1, 1)
 
 MFX_PACK_BEGIN_STRUCT_W_PTR()
 /*! This structure represents the implementation description. */
 typedef struct {
     mfxStructVersion       Version;                      /*!< Version of the structure. */
     mfxImplType            Impl;                         /*!< Impl type: software/hardware. */
-    mfxAccelerationMode    AccelerationMode;             /*!< Hardware acceleration stack to use. OS dependent parameter. Use VA for Linux* and DX* for Windows*. */
+    mfxAccelerationMode    AccelerationMode;             /*!< Default Hardware acceleration stack to use. OS dependent parameter. Use VA for Linux* and DX* for Windows*. */
     mfxVersion             ApiVersion;                   /*!< Supported API version. */
     mfxChar                ImplName[MFX_IMPL_NAME_LEN];  /*!< Null-terminated string with implementation name given by vendor. */
     mfxChar                License[MFX_STRFIELD_LEN];    /*!< Null-terminated string with license name of the implementation. */
@@ -386,7 +401,12 @@ typedef struct {
     mfxDecoderDescription  Dec;                          /*!< Decoder configuration. */
     mfxEncoderDescription  Enc;                          /*!< Encoder configuration. */
     mfxVPPDescription      VPP;                          /*!< VPP configuration. */
-    mfxU32                 reserved[16];                 /*!< Reserved for future use. */
+    union
+    {
+        mfxAccelerationModeDescription   AccelerationModeDescription; /*!< Supported acceleration modes. */
+        mfxU32 reserved3[4];
+    };
+    mfxU32                 reserved[12];                 /*!< Reserved for future use. */
     mfxU32                 NumExtParam;                  /*!< Number of extension buffers. Reserved for future use. Must be 0. */
     union {
         mfxExtBuffer **ExtParam;                         /*!< Array of extension buffers. */
