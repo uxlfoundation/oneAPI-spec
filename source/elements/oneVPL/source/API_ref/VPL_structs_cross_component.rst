@@ -244,3 +244,28 @@ mfxVP9SegmentParam
    :members:
    :protected-members:
 
+mfxExtAV1FilmGrainParam
+-----------------------
+
+.. doxygenstruct:: mfxExtAV1FilmGrainParam
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxAV1FilmGrainPoint
+--------------------
+
+.. doxygenstruct:: mfxAV1FilmGrainPoint
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxRect
+-------
+
+.. doxygenstruct:: mfxRect
+   :project: oneVPL
+   :members:
+   :protected-members:
+   
+

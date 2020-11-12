@@ -8,7 +8,7 @@
 #define __MFXDEFS_H__
 
 #define MFX_VERSION_MAJOR 2
-#define MFX_VERSION_MINOR 0
+#define MFX_VERSION_MINOR 1
 
 // MFX_VERSION_NEXT is always +1 from last public release
 // may be enforced by MFX_VERSION_USE_LATEST define

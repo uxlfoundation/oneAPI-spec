@@ -10,7 +10,8 @@ oneVPL Session
 
 Before calling any oneVPL functions, the application must initialize the
 library and create a oneVPL session. A oneVPL session maintains context for the
-use of any of :term:`DECODE`, :term:`ENCODE`, or :term:`VPP` functions.
+use of any of :term:`DECODE`, :term:`ENCODE`, :term:`VPP`, :term:`DECODE_VPP` 
+functions.
 
 ------------------------------------
 |msdk_full_name| Dispatcher (Legacy)
@@ -187,7 +188,8 @@ implementation.
 
 Internally, the dispatcher works as follows:
 
-#. Dispatcher loads any shared library within the given search folders.
+#. Dispatcher loads any shared library with `libvpl*` prefix in the library name
+   in the given search folders.
 #. For each loaded library, the dispatcher tries to resolve address of the
    :cpp:func:`MFXQueryImplsCapabilities` function to collect the implementation's
    capabilities.
@@ -196,10 +198,9 @@ Internally, the dispatcher works as follows:
    :ref:`Exported Functions/API Version table <export-func-version-table-2x>` for
    the list of functions to export.
 
-.. note:: For backward compatibility with |msdk_full_name|, dispatcher will try to
-          load |msdk_full_name| first, if 1.x was requested to be loaded. If loading
-          was failed, dispatcher will search for the implementation with highest
-          2.x API version.
+.. note:: For backward compatibility with |msdk_full_name|, the dispatcher will
+          first try to load |msdk_full_name| if API version 1.x was requested.
+          If loading fails, the dispatcher will search for the implementation with highest 2.x API version and load that version.
 
 -----------------
 Multiple Sessions

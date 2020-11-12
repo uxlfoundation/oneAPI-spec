@@ -42,6 +42,7 @@ with open('../oneapi-doc.json') as fin:
     
 env = {
     'oneapi_version': cfg['version'],
+    'vpl_spec_version': cfg['vpl_version'],
 }
 
 prolog_template = string.Template("""
@@ -61,7 +62,7 @@ prolog_template = string.Template("""
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
 .. |tbb_version| replace:: $oneapi_version
 .. |vpl_full_name| replace:: oneAPI Video Processing Library
-.. |vpl_version| replace:: $oneapi_version
+.. |vpl_version| replace:: $vpl_spec_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
 .. _`Level Zero Specification`: https://spec.oneapi.com/level-zero/latest/index.html

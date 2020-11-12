@@ -186,7 +186,7 @@ mfxStatus MFX_CDECL MFXVideoCORE_SyncOperation(mfxSession session, mfxSyncPoint 
       Returns surface which can be used as input for VPP.
 
       VPP should be initialized before this call.
-      Surface should be released with mfxFrameSurface1::FrameInterface.Release(...) after usage. Th value of mfxFrameSurface1::Data.Locked for the returned surface is 0.
+      Surface should be released with mfxFrameSurface1::FrameInterface.Release(...) after usage. The value of mfxFrameSurface1::Data.Locked for the returned surface is 0.
 
 
    @param[in]  session Session handle.
@@ -194,13 +194,37 @@ mfxStatus MFX_CDECL MFXVideoCORE_SyncOperation(mfxSession session, mfxSyncPoint 
 
    @return
    MFX_ERR_NONE The function completed successfully. \n
-   MFX_ERR_NULL_PTR If surface is NULL. \n
-   MFX_ERR_INVALID_HANDLE If session was not initialized. \n
+   MFX_ERR_NULL_PTR If double-pointer to the @p surface is NULL. \n
+   MFX_ERR_INVALID_HANDLE If @p session was not initialized. \n
    MFX_ERR_NOT_INITIALIZED If VPP was not initialized (allocator needs to know surface size from somewhere). \n
    MFX_ERR_MEMORY_ALLOC In case of any other internal allocation error.
 
 */
 mfxStatus MFX_CDECL MFXMemory_GetSurfaceForVPP(mfxSession session, mfxFrameSurface1** surface);
+
+/*!
+   @brief
+      Returns surface which can be used as output of VPP.
+
+      VPP should be initialized before this call.
+      Surface should be released with mfxFrameSurface1::FrameInterface.Release(...) after usage. The value of mfxFrameSurface1::Data.Locked for the returned surface is 0.
+
+
+   @param[in]  session Session handle.
+   @param[out] surface   Pointer is set to valid mfxFrameSurface1 object.
+
+   @return
+   MFX_ERR_NONE The function completed successfully. \n
+   MFX_ERR_NULL_PTR If double-pointer to the @p surface is NULL. \n
+   MFX_ERR_INVALID_HANDLE If @p session was not initialized. \n
+   MFX_ERR_NOT_INITIALIZED If VPP was not initialized (allocator needs to know surface size from somewhere). \n
+   MFX_ERR_MEMORY_ALLOC In case of any other internal allocation error.
+
+*/
+mfxStatus MFX_CDECL MFXMemory_GetSurfaceForVPPOut(mfxSession session, mfxFrameSurface1** surface);
+
+/*! Alias for MFXMemory_GetSurfaceForVPP function. */
+#define MFXMemory_GetSurfaceForVPPIn MFXMemory_GetSurfaceForVPP
 
 /*!
    @brief
@@ -226,7 +250,7 @@ mfxStatus MFX_CDECL MFXMemory_GetSurfaceForEncode(mfxSession session, mfxFrameSu
 
 /*!
    @brief
-    Returns a surface which can be used as input for the decoder.
+    Returns a surface which can be used as output of the decoder.
 
     Decoder should be initialized before this call.
     Surface should be released with mfxFrameSurface1::FrameInterface.Release(...) after usage. The value of mfxFrameSurface1::Data.Locked for the returned surface is 0.'
@@ -852,6 +876,146 @@ mfxStatus MFX_CDECL MFXVideoVPP_GetVPPStat(mfxSession session, mfxVPPStat *stat)
    MFX_WRN_DEVICE_BUSY  Hardware device is currently busy. Call this function again in a few milliseconds.
 */
 mfxStatus MFX_CDECL MFXVideoVPP_RunFrameVPPAsync(mfxSession session, mfxFrameSurface1 *in, mfxFrameSurface1 *out, mfxExtVppAuxData *aux, mfxSyncPoint *syncp);
+
+/*!
+   @brief
+    The function processes a single input frame to a single output frame with internal allocation of output frame.
+
+       At the end of the stream, call this function with the input argument ``in=NULL`` to retrieve any remaining frames, until the function returns MFX_ERR_MORE_DATA.
+    This function is asynchronous.
+
+   @param[in] session Session handle.
+   @param[in] in  Pointer to the input video surface structure.
+   @param[out] out  Pointer to the output video surface structure which is reference counted object allocated by the library. 
+
+   @return
+   MFX_ERR_NONE The output frame is ready after synchronization. \n
+   MFX_ERR_MORE_DATA Need more input frames before VPP can produce an output. \n
+   MFX_ERR_MEMORY_ALLOC The function failed to allocate output videoframe. \n
+
+   MFX_ERR_DEVICE_LOST  Hardware device was lost.
+   \verbatim embed:rst
+    See the :ref:`Working with Microsoft* DirectX* Applications section<work_ms_directx_app>` for further information.
+    \endverbatim 
+    \n
+   MFX_WRN_DEVICE_BUSY  Hardware device is currently busy. Call this function again in a few milliseconds.
+*/
+mfxStatus MFX_CDECL MFXVideoVPP_ProcessFrameAsync(mfxSession session, mfxFrameSurface1 *in, mfxFrameSurface1 **out);
+
+/*!
+   @brief
+   Initialize the SDK in (decode + vpp) mode. The logic of this function is similar to  MFXVideoDECODE_Init, but application has to      provide array of pointers to mfxVideoChannelParam and num_channel_param - number of channels. Application is responsible for    
+   memory allocation for mfxVideoChannelParam parameters and for each channel it should specify channel IDs:    
+   mfxVideoChannelParam::mfxFrameInfo::ChannelId. ChannelId should be unique value within one session.
+   The application can attach mfxExtInCrops  to mfxVideoChannelParam::ExtParam to annotate input video frame if it wants to enable 
+   letterboxing operation.
+   @param[in] session SDK session handle.
+   @param[in] decode_par Pointer to the mfxVideoParam structure which contains initialization parameters for decoder.
+   @param[in] vpp_par_array Array of pointers to `mfxVideoChannelParam`structures. Each mfxVideoChannelParam contains initialization 
+              parameters for each VPP channel.
+   @param[in] num_vpp_par Size of array of pointers to mfxVideoChannelParam structures.
+
+   @return
+   MFX_ERR_NONE The function completed successfully. \n
+   MFX_ERR_INVALID_VIDEO_PARAM   The function detected invalid video parameters. These parameters may be out of the valid range, or 
+   the combination of them resulted in incompatibility. Incompatibility not resolved. \n
+   MFX_WRN_INCOMPATIBLE_VIDEO_PARAM The function detected some video parameters were incompatible with others; incompatibility 
+   resolved. \n
+   MFX_ERR_UNDEFINED_BEHAVIOR The component is already initialized. \n
+   MFX_WRN_FILTER_SKIPPED The VPP skipped one or more filters requested by the application.
+*/
+mfxStatus  MFX_CDECL MFXVideoDECODE_VPP_Init(mfxSession session, mfxVideoParam* decode_par, mfxVideoChannelParam** vpp_par_array, mfxU32 num_vpp_par);
+
+/*!
+   @brief
+   This function is similar to MFXVideoDECODE_DecodeFrameAsync and inherits all bitstream processing logic. As output it allocates    
+   and returns array of processed surfaces according to the chain of filters specified by applicaton in MFXVideoDECODE_VPP_Init. The 
+   original decoded frames are returned through surfaces with mfxFrameInfo::ChannelId == 0. In other words, zero 
+   ChannelId is reserved by the SDK for decoded output and cannot be used by application to set video processing channels during   
+   initialization.
+
+   @param[in] session SDK session handle.
+   @param[in] bs Pointer to the input bitstream.
+   @param[in] skip_channels Pointer to the array of `ChannelId`s which specifies channels with skip output frames. Memory for 
+   the array is allocated by application.
+   @param[in] num_skip_channels Number of channels addressed by skip_channels. 
+   @param[out] surf_array_out The address of a pointer to the structure with frame surfaces.
+
+   @return
+   MFX_ERR_NONE The function completed successfully and the output surface is ready for decoding. \n
+   MFX_ERR_MORE_DATA The function requires more bitstream at input before decoding can proceed. \n
+   MFX_ERR_MORE_SURFACE The function requires more frame surface at output before decoding can proceed. \n
+   MFX_ERR_DEVICE_LOST  Hardware device was lost.
+   \verbatim embed:rst
+   See the :ref:`Working with Microsoft* DirectX* Applications section<work_ms_directx_app>` for further information.
+   \endverbatim 
+   \n
+   MFX_WRN_DEVICE_BUSY  Hardware device is currently busy. Call this function again in a few milliseconds. \n
+   MFX_WRN_VIDEO_PARAM_CHANGED  The decoder detected a new sequence header in the bitstream. Video parameters may have changed. \n
+   MFX_ERR_INCOMPATIBLE_VIDEO_PARAM  The decoder detected incompatible video parameters in the bitstream and failed to follow them. \n
+   MFX_ERR_NULL_PTR num_skip_channels doesn't equal to 0 when skip_channels is NULL.
+*/
+mfxStatus  MFX_CDECL MFXVideoDECODE_VPP_DecodeFrameAsync(mfxSession session, mfxBitstream *bs, mfxU32* skip_channels, mfxU32 num_skip_channels, mfxSurfaceArray **surf_array_out);
+
+/*!
+   @brief
+   This function is similar to MFXVideoDECODE_Reset and  stops the current decoding and vpp operation, and restores internal 
+   structures or parameters for a new decoding plus vpp operation. It resets the state of the decoder and/or all initialized vpp 
+   channels. Applications have to care about draining of buffered frames for decode and all vpp channels before call this function.
+   The application can attach mfxExtInCrops to mfxVideoChannelParam::ExtParam to annotate input video frame if it wants to enable 
+   letterboxing operation.
+
+   @param[in] session Session handle.
+   @param[in] decode_par   Pointer to the `mfxVideoParam` structure which contains new initialization parameters for decoder. Might 
+   be NULL if application wants to Reset only VPP channels.
+   @param[in] vpp_par_array Array of pointers to mfxVideoChannelParam structures. Each mfxVideoChannelParam contains new 
+   initialization parameters for each VPP channel.
+   @param[in] num_vpp_par Size of array of pointers to mfxVideoChannelParam structures.
+
+   @return
+   MFX_ERR_NONE  The function completed successfully. \n
+   MFX_ERR_INVALID_VIDEO_PARAM  The function detected that video parameters are wrong or they conflict with initialization parameters. Reset is impossible. \n
+   MFX_ERR_INCOMPATIBLE_VIDEO_PARAM  The function detected that video parameters provided by the application are incompatible with initialization parameters.
+                                     Reset requires additional memory allocation and cannot be executed. The application should close the
+                                     component and then reinitialize it. \n
+   MFX_WRN_INCOMPATIBLE_VIDEO_PARAM  The function detected some video parameters were incompatible with others; incompatibility resolved.
+   MFX_ERR_NULL_PTR  Both pointers decode_par and vpp_par_array` equal to zero.
+*/
+mfxStatus  MFX_CDECL MFXVideoDECODE_VPP_Reset(mfxSession session, mfxVideoParam* decode_par, mfxVideoChannelParam** vpp_par_array, mfxU32 num_vpp_par);
+
+/*!
+   @brief
+   Returns actual VPP parameters for selected channel which should be specified by application through  
+   mfxVideoChannelParam::mfxFrameInfo::ChannelId.
+
+   @param[in] session Session handle.
+   @param[in] par   Pointer to the `mfxVideoChannelParam` structure which allocated by application 
+   @param[in] channel_id specifies the requested channel's info
+
+   @return
+   MFX_ERR_NONE  The function completed successfully. \n
+   MFX_ERR_NULL_PTR  par pointer is NULL. \n
+   MFX_ERR_NOT_FOUND the library is not able to find VPP channel with such channel_id.
+*/
+mfxStatus  MFX_CDECL MFXVideoDECODE_VPP_GetChannelParam(mfxSession session, mfxVideoChannelParam *par, mfxU32 channel_id);
+
+/*! Alias for MFXVideoDECODE_DecodeHeader function. */
+#define MFXVideoDECODE_VPP_DecodeHeader     MFXVideoDECODE_DecodeHeader
+
+/*! Alias for MFXVideoDECODE_Close function. */
+#define MFXVideoDECODE_VPP_Close            MFXVideoDECODE_Close
+
+/*! Alias for MFXVideoDECODE_GetVideoParam function. */
+#define MFXVideoDECODE_VPP_GetVideoParam    MFXVideoDECODE_GetVideoParam
+
+/*! Alias for MFXVideoDECODE_GetDecodeStat function. */
+#define MFXVideoDECODE_VPP_GetDecodeStat    MFXVideoDECODE_GetDecodeStat
+
+/*! Alias for MFXVideoDECODE_SetSkipMode function. */
+#define MFXVideoDECODE_VPP_SetSkipMode      MFXVideoDECODE_SetSkipMode
+
+/*! Alias for MFXVideoDECODE_GetPayload function. */
+#define MFXVideoDECODE_VPP_GetPayload       MFXVideoDECODE_GetPayload
 
 #ifdef __cplusplus
 } // extern "C"

@@ -46,6 +46,11 @@ Function Reference
       :start-after: func_adapters_begin:
       :end-before: func_adapters_end:
 
+:ref:`func_video_decode_vpp`
+   .. include:: VPL_func_vid_decode_vpp.rst
+      :start-after: func_vid_decode_vpp_begin:
+      :end-before: func_vid_decode_vpp_end:
+
 
 .. toctree::
    :maxdepth: 1
@@ -59,3 +64,4 @@ Function Reference
    VPL_func_mem
    VPL_func_capabilities
    VPL_func_adapters
+   VPL_func_vid_decode_vpp

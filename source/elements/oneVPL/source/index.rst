@@ -16,6 +16,12 @@ buffer sharing. oneVPL is backwards and cross-architecture compatible to ensure
 optimal execution on current and next generation hardware without source code
 changes.
 
+============================
+oneVPL Specification Version
+============================
+
+Latest oneVPL specification version is |vpl_version|. 
+
 .. toctree::
    :titlesonly:
 

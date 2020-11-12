@@ -38,7 +38,7 @@ static void append_more_bitstream(mfxBitstream *bs)
     return;
 }
 
-static void find_unlocked_surface_from_the_pool(mfxFrameSurface1 **pool)
+static void find_free_surface_from_the_pool(mfxFrameSurface1 **pool)
 {
     return;
 }
@@ -58,15 +58,64 @@ static void free_pool_of_frame_surfaces()
     return;
 }
 
-static void release_surface(mfxFrameSurface1* surf)
+static void add_surface_to_pool(mfxFrameSurface1* surf)
 {
     return;
 }
 /* end of internal stuff */
 
-
 static void prg_decoding1 () {
 /*beg1*/
+MFXVideoDECODE_Init(session, &init_param);
+sts=MFX_ERR_MORE_DATA;
+for (;;) {
+   if (sts==MFX_ERR_MORE_DATA && !end_of_stream())
+      append_more_bitstream(bitstream);
+   bits=(end_of_stream())?NULL:bitstream;
+   sts=MFXVideoDECODE_DecodeFrameAsync(session,bits,NULL,&disp,&syncp);
+   if (end_of_stream() && sts==MFX_ERR_MORE_DATA) break;
+   // skipped other error handling
+   if (sts==MFX_ERR_NONE) {
+      disp->FrameInterface->Synchronize(disp, INFINITE); // or MFXVideoCORE_SyncOperation(session,syncp,INFINITE)
+      do_something_with_decoded_frame(disp);
+      disp->FrameInterface->Release(disp);
+   }
+}
+MFXVideoDECODE_Close(session);
+/*end1*/
+}
+
+static void prg_decoding2 () {
+/*beg2*/
+MFXVideoDECODE_QueryIOSurf(session, &init_param, &request);
+MFXVideoDECODE_Init(session, &init_param);
+for (int i = 0; i < request.NumFrameSuggested; i++) {
+    MFXMemory_GetSurfaceForDecode(session, &work);
+    add_surface_to_pool(work);
+}
+sts=MFX_ERR_MORE_DATA;
+for (;;) {
+   if (sts==MFX_ERR_MORE_DATA && !end_of_stream())
+      append_more_bitstream(bitstream);
+   bits=(end_of_stream())?NULL:bitstream;
+   find_free_surface_from_the_pool(&work);
+   sts=MFXVideoDECODE_DecodeFrameAsync(session,bits,work,&disp,&syncp);
+   work->FrameInterface->Release(work);
+   if (end_of_stream() && sts==MFX_ERR_MORE_DATA) break;
+   // skipped other error handling
+   if (sts==MFX_ERR_NONE) {
+      disp->FrameInterface->Synchronize(disp, INFINITE); // or MFXVideoCORE_SyncOperation(session,syncp,INFINITE)
+      do_something_with_decoded_frame(disp);
+      disp->FrameInterface->Release(disp);
+   }
+}
+MFXVideoDECODE_Close(session);
+/*end2*/
+}
+
+
+static void prg_decoding3 () {
+/*beg3*/
 MFXVideoDECODE_DecodeHeader(session, bitstream, &init_param);
 MFXVideoDECODE_QueryIOSurf(session, &init_param, &request);
 allocate_pool_of_frame_surfaces(request.NumFrameSuggested);
@@ -75,7 +124,7 @@ sts=MFX_ERR_MORE_DATA;
 for (;;) {
    if (sts==MFX_ERR_MORE_DATA && !end_of_stream())
       append_more_bitstream(bitstream);
-   find_unlocked_surface_from_the_pool(&work);
+   find_free_surface_from_the_pool(&work);
    bits=(end_of_stream())?NULL:bitstream;
    sts=MFXVideoDECODE_DecodeFrameAsync(session,bits,work,&disp,&syncp);
    if (sts==MFX_ERR_MORE_SURFACE) continue;
@@ -87,17 +136,17 @@ for (;;) {
    }
    // skipped other error handling
    if (sts==MFX_ERR_NONE) {
-      MFXVideoCORE_SyncOperation(session, syncp, INFINITE);
+      disp->FrameInterface->Synchronize(disp, INFINITE); // or MFXVideoCORE_SyncOperation(session,syncp,INFINITE)
       do_something_with_decoded_frame(disp);
    }
 }
 MFXVideoDECODE_Close(session);
 free_pool_of_frame_surfaces();
-/*end1*/
+/*end3*/
 }
 
-static void prg_decoding2 () {
-/*beg2*/
+static void prg_decoding4 () {
+/*beg4*/
 sts=MFX_ERR_MORE_DATA;
 for (;;) {
    if (sts==MFX_ERR_MORE_DATA && !end_of_stream())
@@ -108,16 +157,16 @@ for (;;) {
    if (end_of_stream() && sts==MFX_ERR_MORE_DATA) break;
    // skipped other error handling
    if (sts==MFX_ERR_NONE) {
-      MFXVideoCORE_SyncOperation(session, syncp, INFINITE);
+      disp->FrameInterface->Synchronize(disp, INFINITE); // or MFXVideoCORE_SyncOperation(session,syncp,INFINITE)
       do_something_with_decoded_frame(disp);
-      release_surface(disp);
+      disp->FrameInterface->Release(disp);
    }
 }
-/*end2*/
+/*end4*/
 }
 
-static void prg_decoding3 () {
-/*beg3*/
+static void prg_decoding5 () {
+/*beg5*/
 mfxExtBuffer *eb[2];
 mfxExtMVCSeqDesc  seq_desc;
 mfxVideoParam init_param;
@@ -138,10 +187,10 @@ MFXVideoDECODE_Init(session, &init_param);
 /* perform decoding */
 for (;;) {
     MFXVideoDECODE_DecodeFrameAsync(session, bits, work, &disp, &syncp);
-    MFXVideoCORE_SyncOperation(session, syncp, INFINITE);
+    disp->FrameInterface->Synchronize(disp, INFINITE); // or MFXVideoCORE_SyncOperation(session,syncp,INFINITE)
 }
 
 /* close decoder */
 MFXVideoDECODE_Close(session);
-/*end3*/
+/*end5*/
 }

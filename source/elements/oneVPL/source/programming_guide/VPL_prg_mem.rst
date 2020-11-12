@@ -62,6 +62,8 @@ frames allocation:
 
 - :cpp:func:`MFXMemory_GetSurfaceForVPP`
 
+- :cpp:func:`MFXMemory_GetSurfaceForVPPOut`
+
 - :cpp:func:`MFXMemory_GetSurfaceForEncode`
 
 - :cpp:func:`MFXMemory_GetSurfaceForDecode`
