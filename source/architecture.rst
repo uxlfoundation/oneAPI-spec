@@ -16,18 +16,19 @@ provides system software a common abstraction for a oneAPI device.
 oneAPI Platform
 ---------------
 
-A oneAPI platform is comprised of a *host* and a collection of *devices*.  The host
-is typically a multi-core CPU, and the devices are one or more GPUs,
-FPGAs, and other accelerators.  The processor serving as the host can
-also be targeted as a device by the software.
+A oneAPI platform is comprised of a *host* and a collection of
+*devices*.  The host is typically a multi-core CPU, and the devices
+are one or more GPUs, FPGAs, and other accelerators.  The processor
+serving as the host can also be targeted as a device by the software.
 
-Each device has an associated command *queue*.  A application that employs oneAPI
-runs on the host, following standard C++ execution semantics.  To run
-a *function object* on a device, the application submits a *command
-group* containing the function object to the device’s queue.  A
-function object contains a function
-definition together with associated variables. A function object submitted
-to a queue is also referred to as a *data parallel kernel* or simply a *kernel*.
+Each device has an associated command *queue*.  A application that
+employs oneAPI runs on the host, following standard C++ execution
+semantics.  To run a *function object* on a device, the application
+submits a *command group* containing the function object to the
+device’s queue.  A function object contains a function definition
+together with associated variables. A function object submitted to a
+queue is also referred to as a *data parallel kernel* or simply a
+*kernel*.
 
 The application running on the host and the functions running on the
 devices communicate through *memory*.  oneAPI defines several
@@ -48,11 +49,11 @@ Buffer objects             | An application can create *buffer objects*
                            | function running on the device.  The
                            | buffer-accessor mechanism is available on
                            | all oneAPI platforms
-Unified addressing         | Unified addressing guarantees that the host and 
+Unified addressing         | Unified addressing guarantees that the host and
                            | all devices will share a unified address space.
                            | Pointer values in the unified address space will
                            | always refer to the same location in memory.
-Unified shared memory      | Unified shared memory enables data to be shared 
+Unified shared memory      | Unified shared memory enables data to be shared
                            | through pointers without using buffers and
                            | accessors. There are several levels of support
                            | for this feature, depending on the capabilities
@@ -110,24 +111,24 @@ Otherwise this is the standard GEMM C++ interface.
   {
       // Initializing the devices queue with a gpu_selector
       queue q{gpu_selector()};
-        
+
       // Creating 1D buffers for matrices which are bound to host arrays
       buffer<double, 1> a{A, range<1>{M*N}};
       buffer<double, 1> b{B, range<1>{N*P}};
       buffer<double, 1> c{C, range<1>{M*P}};
-   
+
       mkl::transpose nT = mkl::transpose::nontrans;
       // Syntax
-      //   void gemm(queue &exec_queue, transpose transa, transpose transb, 
-      //             int64_t m, int64_t n, int64_t k, T alpha, 
-      //             buffer<T,1> &a, int64_t lda, 
-      //             buffer<T,1> &b, int64_t ldb, T beta, 
+      //   void gemm(queue &exec_queue, transpose transa, transpose transb,
+      //             int64_t m, int64_t n, int64_t k, T alpha,
+      //             buffer<T,1> &a, int64_t lda,
+      //             buffer<T,1> &b, int64_t ldb, T beta,
       //             buffer<T,1> &c, int64_t ldc);
       // call gemm
       mkl::blas::gemm(q, nT, nT, M, P, N, 1.0, a, M, b, N, 0.0, c, M);
   }
   // when we exit the block, the buffer destructor will write result back to C.
-	  
+
 Direct Programming Example
 --------------------------
 
@@ -150,47 +151,4 @@ function across the arrays :code:`A` and :code:`B` in parallel.  When
 we leave the scope, the destructor for the buffer object holding
 :code:`C` writes the data back to the host array.
 
-.. code:: cpp
-
-  using namespace cl::sycl;
-
-  // declare host arrays
-  double *Ahost = new double[M*N];
-  double *Bhost = new double[N*P];
-  double *Chost = new double[M*P];
-
-  {
-      // Initializing the devices queue with a gpu_selector
-      queue q{gpu_selector()};
-        
-      // Creating 2D buffers for matrices which are bound to host arrays
-      buffer<double, 2> a{Ahost, range<2>{M,N}};
-      buffer<double, 2> b{Bhost, range<2>{N,P}};
-      buffer<double, 2> c{Chost, range<2>{M,P}};
-
-      // Submitting command group to queue to compute matrix c=a*b
-      q.submit([&](handler &h){
-          // Read from a and b, write to c
-          auto A = a.get_access<access::mode::read>(h);
-          auto B = b.get_access<access::mode::read>(h);
-          auto C = c.get_access<access::mode::write>(h);
-
-          int WidthA = a.get_range()[1];
-
-          // Executing kernel
-          h.parallel_for<class MatrixMult>(range<2>{M, P}, [=](id<2> index){
-	      int row = index[0];
-	      int col = index[1];
-	      
-	      // Compute the result of one element in c
-	      double sum = 0.0;
-	      for (int i = 0; i < WidthA; i++) {
-	          sum += A[row][i] * B[i][col];
-          }
-	      C[index] = sum;
-          });
-      });
-  }  
-  // when we exit the block, the buffer destructor will write result back to C.
- 
- 
+.. literalinclude:: example.cpp

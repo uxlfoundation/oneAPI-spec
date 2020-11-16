@@ -9,19 +9,19 @@ oneAPI Specifications
 .. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
    :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
 
-This repository contains the sources for the `oneAPI Specification`_. For the
-latest build from main branch, see
-`HTML <https://oneapi-src.github.io/oneAPI-spec>`__ and
-`PDF <https://rscohn2.github.io/oneAPI-spec/oneAPI-spec.pdf>`__.
+This repository contains the sources for the `oneAPI
+Specification`_. For the latest build from main branch, see `HTML
+<https://oneapi-src.github.io/oneAPI-spec>`__ and `PDF
+<https://rscohn2.github.io/oneAPI-spec/oneAPI-spec.pdf>`__.
 
-For more information about oneAPI, see
-`oneapi.com <https://oneapi.com>`__. For information about future releases of the
-oneAPI specification, see the `oneAPI Specification Roadmap <roadmap.rst>`__.
-To be notified about new releases, become a release-only watcher of this
-repo.
+For more information about oneAPI, see `oneapi.com
+<https://oneapi.com>`__. For information about future releases of the
+oneAPI specification, see the `oneAPI Specification Roadmap
+<roadmap.rst>`__.  To be notified about new releases, become a
+release-only watcher of this repo.
 
-The document is written using `reStructuredText`_ and built with `Sphinx`_ using
-a theme provided by `Read the Docs`_.
+The document is written using `reStructuredText`_ and built with
+`Sphinx`_ using a theme provided by `Read the Docs`_.
 
 .. contents::
    :local:
@@ -48,10 +48,11 @@ See `CONTRIBUTING <CONTRIBUTING.rst>`__ for more information.
 Build the Specification
 -----------------------
 
-To build the specification document locally, clone this repository to your local
-system and follow the setup and build instructions. The setup and build steps
-make use of scripts/oneapi.py, a helper script for maintenance tasks. You can
-also look at the source if you want to see how to do the same task manually.
+To build the specification document locally, clone this repository to
+your local system and follow the setup and build instructions. The
+setup and build steps make use of scripts/oneapi.py, a helper script
+for maintenance tasks. You can also look at the source if you want to
+see how to do the same task manually.
 
 Setup
 -----
@@ -116,9 +117,10 @@ CI
 
 We use GitHub actions. See `<.github/workflows/ci.yml>`_.
 
-PR's trigger the CI to build the document and save it as an artifact. If you are
-working in a fork on GitHub, commits to the main branch will build and publish
-the document in the GitHub pages associated with the repository.
+PR's trigger the CI to build the document and save it as an
+artifact. If you are working in a fork on GitHub, commits to the main
+branch will build and publish the document in the GitHub pages
+associated with the repository.
 
 
 .. _`reStructuredText`: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html

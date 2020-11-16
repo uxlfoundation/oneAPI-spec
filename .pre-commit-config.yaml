@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2020 The Khronos Group Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+exclude: LICENSES|source/elements
+
+repos:
+-   repo: local
+    hooks:
+    - id: sphinx-html
+      name: sphinx-html
+      entry: python scripts/oneapi.py html
+      language: system
+      pass_filenames: false
+      always_run: true
+-   repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+    -   id: black
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+-   repo: https://github.com/pycqa/doc8
+    rev: master
+    hooks:
+    -   id: doc8
+#-   repo: https://gitlab.com/pycqa/flake8
+#    rev: 3.7.9
+#    hooks:
+#    -   id: flake8
+#-   repo: https://github.com/pycqa/isort
+#    rev: develop
+#    hooks:
+#    -   id: isort
+#-   repo: https://github.com/fsfe/reuse-tool
+#    rev: master
+#    hooks:
+#    -   id: reuse

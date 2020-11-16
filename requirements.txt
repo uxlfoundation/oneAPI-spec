@@ -6,8 +6,9 @@
 #  versions
 
 breathe
-git+https://github.com/rscohn2/reuse-tool.git
-Sphinx>=2.4.0
+git+https://github.com/fsfe/reuse-tool.git
+pre-commit
+Sphinx
 # waiting for pypi release for fix for parallel read
 git+https://github.com/readthedocs/sphinx-notfound-page.git
 sphinx-rtd-theme

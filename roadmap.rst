@@ -39,7 +39,7 @@ feedback.
 - Overall
 
   - New
-  
+
     - Unified into single doc
     - PDF of unified doc available online
     - Sources in github.com/oneapi-src/oneapi-spec
@@ -48,36 +48,36 @@ feedback.
 - DPC++
 
   - New
-  
+
     - Editing updates
-    
+
   - Future
 
 - oneDPL
 
   - New
-  
+
     - Editing updates
   - Future
 - oneDNN
 
   - New
-  
+
     - API document inline
     - API document sources in oneapi-spec repo
   - Future
-  
+
     - more structured API description
 - oneCCL
 
   - New
-  
+
     - API document inline
     - API document sources in oneapi-spec repo
 - Level Zero
 
   - New
-  
+
     - API document inline
     - Sources in separate repo on github
   - Future
@@ -85,31 +85,31 @@ feedback.
 
   - New
   - Future
-  
+
     - API document included inline
     - API document sources in oneapi-spec repo
 - oneTBB
 
   - New
-  
+
     - API document inline
     - Sources in separate repo on github
   - Future
 - oneVPL
 
   - New
-  
+
     - API descriptions moved to single section
   - Future
-  
+
     - Content?
 - oneMKL
 
   - New
   - Future
-  
+
     - Transition from far html to rst
-    - API document inline    
+    - API document inline
     - rst sources included in oneapi-spec repo
 
 0.7.0
@@ -158,38 +158,42 @@ Date       Milestone
 - Level Zero
 
   - Switched to RST as format, using oneapi-spec as upstream repo
-  
+
 - oneDAL
 
-  - Add overall spec skeleton, introduction and algorithm classes sections
-  - Add initial version for sections on data structures (descriptors algorithms/tables, numeric tables),
-    compute modes(batch/online), distributed algorithms and generic building blocks(train/predict) 
+  - Add overall spec skeleton, introduction and algorithm classes
+    sections
+  - Add initial version for sections on data structures (descriptors
+    algorithms/tables, numeric tables), compute modes(batch/online),
+    distributed algorithms and generic building blocks(train/predict)
   - Add API for 3 oneDAL algorithms
 
 - oneTBB
 
   - Integrate sources to the oneapi-spec repository
-  - Rework sections for general information, memory allocation, synchronization, and timing
-  
+  - Rework sections for general information, memory allocation,
+    synchronization, and timing
+
 - oneVPL
-  
+
   - 80% content
-    
+
 - oneMKL
 
   - USM support
   - Skeleton of spec, breadown by domain
   - Sections that apply to all domains
-  - subset of domains with high-level description and APIs, as determined by open source schedule
-  
+  - subset of domains with high-level description and APIs, as
+    determined by open source schedule
+
 0.8.0
 -----
 
 Summary
 +++++++
 
-80% content. All document structuring issues resolved. Content mostly complete with
-placeholders for missing sections.
+80% content. All document structuring issues resolved. Content mostly
+complete with placeholders for missing sections.
 
 Schedule
 ++++++++
@@ -226,12 +230,14 @@ Date       Milestone
 
 - Level Zero
 
-  - Command queue groups, module linking, extensions, and improved profiling support
-  
+  - Command queue groups, module linking, extensions, and improved
+    profiling support
+
 - oneDAL
 
   - Extend API description to kNN classification
-  - Add first version for sections on error handling, namespaces, terminology, math notations
+  - Add first version for sections on error handling, namespaces,
+    terminology, math notations
   - Extend numeric tables and data structure sections
 
 - oneTBB
@@ -241,7 +247,7 @@ Date       Milestone
 - oneVPL
 
   - Updates deferred to 0.8.5_
-  
+
 - oneMKL
 
   - All domains complete
@@ -258,7 +264,7 @@ Summary
 - oneVPL
 
   - Breaking changes introduced.
-  
+
 =========  ==========
 Date       Milestone
 =========  ==========
@@ -272,7 +278,7 @@ Date       Milestone
 Summary
 +++++++
 
-Final Gold Preview. Expectation is that everything is done and only 
+Final Gold Preview. Expectation is that everything is done and only
 small edits will be made. Incorporates all external feedback.
 
 Schedule
@@ -313,10 +319,11 @@ Elements
 - Level Zero
 
   - 1.0 release, support for OpenCL interoperability
-  
+
 - oneDAL
 
-  - Extend algorithms section to cover Random Forest, K-Means, SVM, PCA algorithms
+  - Extend algorithms section to cover Random Forest, K-Means, SVM,
+    PCA algorithms
   - Finalize on sections content and details
 
 - oneTBB
@@ -329,27 +336,26 @@ Elements
 - oneMKL
 
   - finalize FFT, sparse BLAS, RNG, and VM domains
-  
+
 1.0.0
 -----
 
 Summary
 +++++++
 
-API's frozen: backwards compatible
-changes at discretion of project owner, non-backwards compatible change by exception only
+API's frozen: backwards compatible changes at discretion of project
+owner, non-backwards compatible change by exception only
 
 Schedule
 ++++++++
 
-=========  ==========
-Date       Milestone
-=========  ==========
+==========  ==========
+Date        Milestone
+==========  ==========
 10/27/2020  Code freeze
 10/29/2020  Release
-=========  ==========
+==========  ==========
 
 - Overall
 
   - Minor cleanup and integration of remaining feedback if any
-

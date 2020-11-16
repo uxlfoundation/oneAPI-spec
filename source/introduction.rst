@@ -62,7 +62,7 @@ oneAPI seeks to provide:
   - *Performance transparency*: API's and language construct allow the
     programmer enough control over the mapping to hardware to create
     an efficient solution
-  
+
   - *Software stack portability*: Platform providers can port a oneAPI
     software stack by implementing the oneAPI Level Zero interface.
 
@@ -114,4 +114,3 @@ Signed-off-by: Joe Smith joe.smith@email.com
 
 .. [*]: Other names and brands may be claimed as the property of others.
 .. _`RFC 2119`: https://tools.ietf.org/html/rfc2119
-

@@ -18,6 +18,7 @@
 #
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('conf'))
 import datetime
 
@@ -67,13 +68,13 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = [#'404.rst',
-                    'elements/oneTBB/source/index.rst',
-                    'elements/oneTBB/source/uncategorized.rst',
-                    'elements/oneTBB/source/uncategorized/**',
-                    'elements/oneTBB/source/low_level_task_api.rst',
-                    'elements/oneTBB/source/low_level_tasking/**',
-                    '**/*.inc.rst',
+exclude_patterns = [  #'404.rst',
+    'elements/oneTBB/source/index.rst',
+    'elements/oneTBB/source/uncategorized.rst',
+    'elements/oneTBB/source/uncategorized/**',
+    'elements/oneTBB/source/low_level_task_api.rst',
+    'elements/oneTBB/source/low_level_tasking/**',
+    '**/*.inc.rst',
 ]
 
 # The name of the Pygments (syntax highlighting) style to use.
@@ -95,7 +96,7 @@ html_context = {
     'display_github': True,
     'github_user': 'oneapi-src',
     'github_repo': 'oneapi-spec',
-    'github_version': 'master/source/'
+    'github_version': 'master/source/',
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -133,8 +134,13 @@ htmlhelp_basename = 'oneAPI-spec'
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'oneAPI-spec.tex', u'oneAPI Specification',
-     u'Intel', 'manual'),
+    (
+        master_doc,
+        'oneAPI-spec.tex',
+        u'oneAPI Specification',
+        u'Intel',
+        'manual',
+    ),
 ]
 
 
@@ -142,10 +148,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'oneAPI-spec', u'oneAPI Specification',
-     [author], 1)
-]
+man_pages = [(master_doc, 'oneAPI-spec', u'oneAPI Specification', [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -154,9 +157,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'oneAPI-spec', u'oneAPI Specification',
-     author, 'Intel', 'Specification for oneAPI software.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        'oneAPI-spec',
+        u'oneAPI Specification',
+        author,
+        'Intel',
+        'Specification for oneAPI software.',
+        'Miscellaneous',
+    ),
 ]
 
 
