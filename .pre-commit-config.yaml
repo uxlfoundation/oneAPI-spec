@@ -16,6 +16,12 @@ repos:
       language: system
       pass_filenames: false
       always_run: true
+    - id: sphinx-pdf
+      name: sphinx-pdf
+      entry: python scripts/oneapi.py latexpdf
+      language: system
+      pass_filenames: false
+      always_run: true
 -   repo: https://github.com/ambv/black
     rev: stable
     hooks:

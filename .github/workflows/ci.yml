@@ -9,26 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     container: rscohn2/oneapi-spec:latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
     - name: Install prerequisites
       run: |
           apt-get update -qq
           DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
-          python3 -m venv venv
-          . venv/bin/activate
           pip install --upgrade --quiet pip wheel
           pip install --upgrade --quiet -r requirements.txt
-    - name: Build doc
+    - name: Builds and checks
       run: |
-          . venv/bin/activate
-          python scripts/oneapi.py html
-          python scripts/oneapi.py latexpdf
-    - name: Checks
-      run: |
-          . venv/bin/activate
           pre-commit run --all
-          python scripts/oneapi.py spelling
           mkdir -p build/reuse
           # ignore fail for reuse
           reuse lint > build/reuse/lint.txt || true
@@ -37,7 +28,6 @@ jobs:
       with:
           name: build
           path: build
-
     - name: Checkout gh-pages
       if: ${{ github.ref == 'refs/heads/main' }}
       uses: actions/checkout@v2
