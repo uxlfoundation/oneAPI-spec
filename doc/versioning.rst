@@ -35,10 +35,10 @@ Increment the:
 
 1. MAJOR version when adding major new functionality and making
    incompatible API changes, including removing APIs.
-     
+
 2. MINOR version when adding minor functionality and API changes
    that are backwards compatible.
-     
+
 3. REVISION when making backwards compatible bug fixes or any editing
    change in the document, including minor changes such as correcting
    typos. Initial REVISION is 1.
@@ -82,4 +82,3 @@ Example
   | oneAPI provisional 1.1 rev 2
   | oneAPI provisional 1.1 rev 3
   | oneAPI 1.1 rev 1
-

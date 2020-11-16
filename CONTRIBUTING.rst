@@ -37,10 +37,11 @@ Submit a Change
 
 * For questions, feature requests, or to report a bug, submit an
   `issue <https://github.com/oneapi-src/oneAPI-spec/issues>`__.
-* For changes to the document build infrastructure or minor editing of the text,
-  please submit a `pull request <https://github.com/oneapi-src/oneAPI-spec/pulls>`__.
-* For significant changes to the specification, submit an
-  `issue <https://github.com/oneapi-src/oneAPI-spec/issues>`__. Make sure to
+* For changes to the document build infrastructure or minor editing of
+  the text, please submit a `pull request
+  <https://github.com/oneapi-src/oneAPI-spec/pulls>`__.
+* For significant changes to the specification, submit an `issue
+  <https://github.com/oneapi-src/oneAPI-spec/issues>`__. Make sure to
 
   * include "RFC" in the title,
   * explain your proposed change and the motivation for the change.
@@ -82,10 +83,10 @@ Edit with the GitHub Web Interface
 ----------------------------------
 
 The simplest and quickest way to submit an edit is via the GitHub web
-interface. It provides an editor, change preview, and lets you submit the change
-as a pull request. You won't need to install any local tools. The preview will
-render ReST, but not the Sphinx directives, so it will not display exactly as the
-final document.
+interface. It provides an editor, change preview, and lets you submit
+the change as a pull request. You won't need to install any local
+tools. The preview will render ReST, but not the Sphinx directives, so
+it will not display exactly as the final document.
 
 ----------------------
 Work with a Local Copy
@@ -131,4 +132,3 @@ More Reading
 
 .. _`reStructuredText docs`: http://docutils.sourceforge.net/rst.html
 .. _`online editor/viewer`: http://rst.aaroniles.net/
-

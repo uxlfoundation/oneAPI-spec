@@ -15,6 +15,3 @@ python3 -m venv venv
 . venv/bin/activate
 pip install --upgrade pip wheel
 pip install --upgrade --quiet -r requirements.txt
-
-
-

@@ -13,9 +13,9 @@ updates.
 
 .. table:: oneAPI Versions Table
   :widths: 20 20 60
-	   
+
   ==================  ==========  =========
-  Version             Date        View                                                                                                            
+  Version             Date        View
   ==================  ==========  =========
   `1.0 rev 2`_        10/21/2020  `HTML <https://spec.oneapi.com/versions/1.0-rev-2/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-2/oneAPI-spec.pdf>`__
   `1.0 rev 1`_        09/14/2020  `HTML <https://spec.oneapi.com/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-1/oneAPI-spec.pdf>`__
@@ -34,7 +34,7 @@ Release Notes
 ---------
 
 * Formatting fixes for PDF
-  
+
 1.0 rev 1
 ---------
 
@@ -54,23 +54,31 @@ Release Notes
   * Adjusted the API according to the latest product changes
   * Improved the wording and descriptions for the flow graph API
   * Cleared build warnings
-  
+
 * oneDAL
 
-  * Extended Programming model section, added description of the generic methods and descriptors, introduced task notation
-  * Extended Data Management section, introduced CSV data source, array, extended description of the tables and accessors
+  * Extended Programming model section, added description of the
+    generic methods and descriptors, introduced task notation
+  * Extended Data Management section, introduced CSV data source,
+    array, extended description of the tables and accessors
   * Extended description of Error handling
-  * Added description of the training methods for PCA algorithm, introduced K-means initialization algorithm
-  * Extended Common interface section, added description of service data types used in the interfaces of the library
+  * Added description of the training methods for PCA algorithm,
+    introduced K-means initialization algorithm
+  * Extended Common interface section, added description of service
+    data types used in the interfaces of the library
   * Modified the library's namespace
-  
+
 * oneVPL
 
-  * A lot of cleaning to remove GEN/CPU bias and implementation details.
+  * A lot of cleaning to remove GEN/CPU bias and implementation
+    details.
   * New organization of structures' description.
-  * New entry point function to expose by any implementation: MFXInitialize which replaces obsolete MFXInit and MFXInitEx.
-  * Interface to choose and set subdevices (mfxExtDeviceAffinityMask) for execution.
-  * Header files cleaned up by removing MFX_VERSION checks (ala #if MFX_VERSION > 1.26) from headers.
+  * New entry point function to expose by any implementation:
+    MFXInitialize which replaces obsolete MFXInit and MFXInitEx.
+  * Interface to choose and set subdevices (mfxExtDeviceAffinityMask)
+    for execution.
+  * Header files cleaned up by removing MFX_VERSION checks (ala #if
+    MFX_VERSION > 1.26) from headers.
 
 * oneCCL
 
@@ -82,9 +90,10 @@ Release Notes
 
 * oneMKL
 
-  * Continuing modifications to oneMKL Architecture, BLAS and LAPACK domains
-  * Significant refactoring and updating of Sparse BLAS, VM, RNG, and DFT domains API
-    descriptions and structure
+  * Continuing modifications to oneMKL Architecture, BLAS and LAPACK
+    domains
+  * Significant refactoring and updating of Sparse BLAS, VM, RNG, and
+    DFT domains API descriptions and structure
   * Add Summary Statistics domain
   * Add future considerations and acknowledgment to appendices
   * Change top-level namespace to oneapi::mkl
@@ -99,23 +108,26 @@ Release Notes
 * oneDPL
 
   * API updates, including namespaces
-  * Added detailed descriptions for execution policies, non-standard algorithms, iterator types, etc
+  * Added detailed descriptions for execution policies, non-standard
+    algorithms, iterator types, etc
 
 * oneTBB
 
   * Editorial review changes
-  
+
 * oneDAL
 
   * Updated description of the public header files and namespaces
-  
+
 * DPC++
 
-  * Revised requirements to refer to the SYCL 2020 provisional specification where previous
-    extensions have migrated to the SYCL specification directly
+  * Revised requirements to refer to the SYCL 2020 provisional
+    specification where previous extensions have migrated to the SYCL
+    specification directly
   * Added additional extensions
-  * Added additional requirements against the SYCL 2020 provisional specification
-  
+  * Added additional requirements against the SYCL 2020 provisional
+    specification
+
 * oneVPL
 
   * Added section to specify mandatory and optional API features
@@ -207,4 +219,3 @@ Release Notes
 ---
 
 Initial public release
-

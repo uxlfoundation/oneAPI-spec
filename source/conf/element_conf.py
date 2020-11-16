@@ -108,8 +108,13 @@ htmlhelp_basename = project + '-spec'
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, project + '-spec.tex', project + u' Specification',
-     u'Intel', 'manual'),
+    (
+        master_doc,
+        project + '-spec.tex',
+        project + u' Specification',
+        u'Intel',
+        'manual',
+    ),
 ]
 
 # -- Options for manual page output ------------------------------------------
@@ -117,8 +122,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, project + '-spec', project + u' Specification',
-     [author], 1)
+    (master_doc, project + '-spec', project + u' Specification', [author], 1)
 ]
 
 
@@ -128,9 +132,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, project + '-spec', project + u' Specification',
-     author, 'Intel', 'Specification for ' + project + ' software.',
-     'Miscellaneous'),
+    (
+        master_doc,
+        project + '-spec',
+        project + u' Specification',
+        author,
+        'Intel',
+        'Specification for ' + project + ' software.',
+        'Miscellaneous',
+    ),
 ]
 
 # -- Options for Epub output -------------------------------------------------
@@ -160,8 +170,5 @@ todo_include_todos = True
 
 # -- Options for breathe extension ----------------------------------------------
 
-breathe_projects = {
-    project: '../doxygen/xml'
-}
+breathe_projects = {project: '../doxygen/xml'}
 breathe_default_project = 'none'
-

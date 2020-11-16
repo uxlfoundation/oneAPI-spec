@@ -6,7 +6,9 @@ from os import walk
 from os.path import join
 import re
 
-r = re.compile(r'\W+:name: (known-limitations|return-values|include-files|note|note-1|note-2|note-3|syntax|description|input-parameters|output-parameters|example)')
+r = re.compile(
+    r'\W+:name: (known-limitations|return-values|include-files|note|note-1|note-2|note-3|syntax|description|input-parameters|output-parameters|example)'
+)
 
 for root, dirs, files in walk("."):
     for file in files:

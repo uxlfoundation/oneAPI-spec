@@ -9,10 +9,12 @@ import string
 
 import docutils
 
+
 def path_relative_to_repo_root(relative_path):
     this_dir = os.path.dirname(os.path.realpath(__file__))
     root_dir = os.path.abspath(os.path.join(this_dir, '../..'))
     return os.path.abspath(os.path.join(root_dir, relative_path))
+
 
 # oneDAL uses custom API generator based on `breathe`.
 # Extend path to let Sphinx find `dalapi` module:
@@ -34,18 +36,19 @@ extensions = [
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'breathe',
-    'dalapi', # oneDAL API generator
+    'dalapi',  # oneDAL API generator
 ]
 
 with open('../oneapi-doc.json') as fin:
     cfg = json.load(fin)
-    
+
 env = {
     'oneapi_version': cfg['version'],
     'vpl_spec_version': cfg['vpl_version'],
 }
 
-prolog_template = string.Template("""
+prolog_template = string.Template(
+    """
 .. |dpcpp_full_name| replace:: oneAPI Data Parallel C++
 .. |dpcpp_version| replace:: $oneapi_version
 .. |dpl_full_name| replace:: oneAPI DPC++ Library
@@ -70,36 +73,31 @@ prolog_template = string.Template("""
 .. |regsup| replace:: :supsub:`reg`
 .. |intel_r| replace:: Intel\ :supsub:`reg`
 .. |msdk_full_name| replace:: Intel\ :supsub:`reg` Media Software Development Kit
-""")
+"""
+)
 
 rst_prolog = prolog_template.substitute(env)
 
 
 # for substitutions in code blocks and sphinx-prompts:
-substitutions = [
-    ('|dal_short_name|', 'oneDAL'),
-    ('|daal_in_code|', 'daal')
-    ]
+substitutions = [('|dal_short_name|', 'oneDAL'), ('|daal_in_code|', 'daal')]
 
 
 primary_domain = 'cpp'
 
 latex_elements = {
     # 'printindex': '\\footnotesize\\raggedright\\let\\oldtwocolumn\\twocolumn\\renewcommand{\\twocolumn}[1][]{#1}\\printindex\\renewcommand{\\twocolumn}[1][]{\\oldtwocolumn}',
-    
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     'preamble': r'''
-\usepackage{makeidx} 
-\usepackage[columns=1]{idxlayout} 
+\usepackage{makeidx}
+\usepackage[columns=1]{idxlayout}
 \makeindex
 \DeclareUnicodeCharacter{2208}{$\in$}
 \DeclareUnicodeCharacter{222A}{$\cup$}
@@ -153,20 +151,23 @@ latex_elements = {
 \newcommand{\diffbeta}{\operatorname{diff\_\beta}}
 \newcommand{\workspace}{\operatorname{workspace}}
 ''',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
-    'extraclassoptions': 'openany,oneside'
+    'extraclassoptions': 'openany,oneside',
 }
+
 
 def supsub_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     node = docutils.nodes.superscript()
     node2 = docutils.nodes.substitution_reference(refname=text)
     node += [node2]
-    return [node],[]
+    return [node], []
+
 
 def setup(app):
     app.add_role('supsub', supsub_role)
-    add_custom_css = getattr(app,'add_css_file',getattr(app,'add_stylesheet'))
+    add_custom_css = getattr(
+        app, 'add_css_file', getattr(app, 'add_stylesheet')
+    )
     add_custom_css('custom.css')
