@@ -8,20 +8,6 @@
 exclude: LICENSES|source/elements
 
 repos:
--   repo: local
-    hooks:
-    - id: sphinx-html
-      name: sphinx-html
-      entry: python scripts/oneapi.py html
-      language: system
-      pass_filenames: false
-      always_run: true
-    - id: sphinx-pdf
-      name: sphinx-pdf
-      entry: python scripts/oneapi.py latexpdf
-      language: system
-      pass_filenames: false
-      always_run: true
 -   repo: https://github.com/ambv/black
     rev: stable
     hooks:
@@ -37,6 +23,20 @@ repos:
     rev: master
     hooks:
     -   id: doc8
+-   repo: local
+    hooks:
+    - id: sphinx-html
+      name: sphinx-html
+      entry: python scripts/oneapi.py html
+      language: system
+      pass_filenames: false
+      always_run: true
+    - id: sphinx-pdf
+      name: sphinx-pdf
+      entry: python scripts/oneapi.py latexpdf
+      language: system
+      pass_filenames: false
+      always_run: true
 #-   repo: https://gitlab.com/pycqa/flake8
 #    rev: 3.7.9
 #    hooks:

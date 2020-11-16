@@ -15,6 +15,7 @@ jobs:
       run: |
           apt-get update -qq
           DEBIAN_FRONTEND=noninteractive xargs -a ubuntu-packages.txt apt-get install -qq
+          python -m pip install --quiet --upgrade pip
           pip install --upgrade --quiet pip wheel
           pip install --upgrade --quiet -r requirements.txt
     - name: Builds and checks
