@@ -31,12 +31,12 @@ repos:
       language: system
       pass_filenames: false
       always_run: true
-    - id: sphinx-pdf
-      name: sphinx-pdf
-      entry: python scripts/oneapi.py latexpdf
-      language: system
-      pass_filenames: false
-      always_run: true
+#    - id: sphinx-pdf
+#      name: sphinx-pdf
+#      entry: python scripts/oneapi.py latexpdf
+#      language: system
+#      pass_filenames: false
+#      always_run: true
 #-   repo: https://gitlab.com/pycqa/flake8
 #    rev: 3.7.9
 #    hooks:
