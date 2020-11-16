@@ -27,7 +27,7 @@ jobs:
     - name: Checks
       run: |
           . venv/bin/activate
-	  pre-commit run --all
+          pre-commit run --all
           python scripts/oneapi.py spelling
           mkdir -p build/reuse
           # ignore fail for reuse
