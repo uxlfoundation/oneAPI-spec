@@ -27,6 +27,14 @@ repos:
     rev: master
     hooks:
     -   id: reuse
+#-   repo: https://gitlab.com/pycqa/flake8
+#    rev: 3.7.9
+#    hooks:
+#    -   id: flake8
+#-   repo: https://github.com/pycqa/isort
+#    rev: develop
+#    hooks:
+#    -   id: isort
 -   repo: local
     hooks:
     - id: sphinx-html
@@ -41,11 +49,3 @@ repos:
       language: system
       pass_filenames: false
       always_run: true
-#-   repo: https://gitlab.com/pycqa/flake8
-#    rev: 3.7.9
-#    hooks:
-#    -   id: flake8
-#-   repo: https://github.com/pycqa/isort
-#    rev: develop
-#    hooks:
-#    -   id: isort

@@ -3,27 +3,15 @@
 #
 # SPDX-License-Identifier: MIT
 
-import sys
-
-if sys.version_info[0] < 3:
-    exit('Python 3 is required')
-
 import argparse
-from functools import wraps
 import glob
 import os
 import os.path
-from os.path import join
-import platform
-import requests
 import shutil
-from string import Template
-import stat
-import string
 import subprocess
-import tarfile
-import venv
-from zipfile import ZipFile
+from distutils.dir_util import copy_tree as copy_tree_update
+from functools import wraps
+from os.path import join
 
 sphinx_build = 'sphinx-build'
 source_dir = 'source'
@@ -84,9 +72,6 @@ def rm(dir):
     if cl_args.dry_run:
         return
     shutil.rmtree(dir, ignore_errors=True)
-
-
-from distutils.dir_util import copy_tree as copy_tree_update
 
 
 def copytree(src, dst, dirs_exist_ok=False):
@@ -245,18 +230,6 @@ def build(root, target):
     sphinx(root, target)
 
 
-@action
-def spec_venv(root, target=None):
-    root_only(root)
-    venv.create('spec-venv', with_pip=True, clear=True)
-    pip = (
-        'spec-venv\Scripts\pip'
-        if platform.system() == 'Windows'
-        else 'spec-venv/bin/pip'
-    )
-    shell('%s install --quiet -r requirements.txt' % pip)
-
-
 def remove_elements(l, elements):
     for e in elements:
         if e in l:
@@ -284,7 +257,6 @@ commands = {
     'singlehtml': build,
     'prep': prep,
     'sort-words': sort_words,
-    'spec-venv': spec_venv,
 }
 
 dirs = [
