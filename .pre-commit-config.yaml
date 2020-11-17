@@ -39,13 +39,13 @@ repos:
     hooks:
     - id: sphinx-html
       name: sphinx-html
-      entry: python scripts/oneapi.py html
+      entry: python scripts/oneapi.py -W html
       language: system
       pass_filenames: false
       always_run: true
     - id: sphinx-pdf
       name: sphinx-pdf
-      entry: python scripts/oneapi.py latexpdf
+      entry: python scripts/oneapi.py -W latexpdf
       language: system
       pass_filenames: false
       always_run: true

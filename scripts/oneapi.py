@@ -111,6 +111,8 @@ def sphinx(root, target):
         sphinx_args += ' -a'
     if cl_args.n:
         sphinx_args += ' -n'
+    if cl_args.W:
+        sphinx_args += ' -W'
     shell(
         '%s -M %s %s %s %s'
         % (
@@ -282,6 +284,7 @@ def main():
     parser.add_argument('--branch')
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
+    parser.add_argument('-W', action='store_true')
     parser.add_argument(
         '-a', action='store_true', help='sphinx -a (build all files)'
     )
