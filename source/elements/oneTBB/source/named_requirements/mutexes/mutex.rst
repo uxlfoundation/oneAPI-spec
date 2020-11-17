@@ -51,10 +51,14 @@ If the actions throw an exception, the lock is automatically released as the blo
 
 A type `M` satisfies the `Mutex` requirements if it meets the following conditions:
 
+.. namespace:: mutex_type
+	       
 .. cpp:type:: M::scoped_lock
 
     Corresponding scoped lock type.
 
+.. namespace:: mutex_func
+	       
 .. cpp:function:: M::scoped_lock()
 
     Constructs ``scoped_lock`` without acquiring mutex.
