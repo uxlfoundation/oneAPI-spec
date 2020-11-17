@@ -3,16 +3,17 @@
 # SPDX-License-Identifier: MIT
 
 import json
-import os
 import string
 import sys
-from os.path import join, abspath
-import docutils
+from os.path import abspath, join
 
+import docutils
 
 # oneDAL uses custom API generator based on `breathe`.
 # Extend path to let Sphinx find `dalapi` module:
-sys.path.insert(0, abspath(join(repo_root, 'source', 'elements', 'oneDAL')))
+sys.path.insert(
+    0, abspath(join(repo_root, 'source', 'elements', 'oneDAL'))  # noqa: F821
+)
 
 extensions = [
     'notfound.extension',
@@ -33,7 +34,7 @@ extensions = [
     'dalapi',  # oneDAL API generator
 ]
 
-with open(join(repo_root, 'oneapi-doc.json')) as fin:
+with open(join(repo_root, 'oneapi-doc.json')) as fin:  # noqa: F821
     cfg = json.load(fin)
 
 env = {
