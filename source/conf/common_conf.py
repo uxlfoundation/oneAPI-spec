@@ -4,8 +4,8 @@
 
 import json
 import os
-import sys
 import string
+import sys
 
 import docutils
 
@@ -48,7 +48,7 @@ env = {
 }
 
 prolog_template = string.Template(
-    """
+    r"""
 .. |dpcpp_full_name| replace:: oneAPI Data Parallel C++
 .. |dpcpp_version| replace:: $oneapi_version
 .. |dpl_full_name| replace:: oneAPI DPC++ Library
@@ -68,12 +68,11 @@ prolog_template = string.Template(
 .. |vpl_version| replace:: $vpl_spec_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
-.. _`Level Zero Specification`: https://spec.oneapi.com/level-zero/latest/index.html
 .. include:: <isonum.txt>
 .. |regsup| replace:: :supsub:`reg`
 .. |intel_r| replace:: Intel\ :supsub:`reg`
-.. |msdk_full_name| replace:: Intel\ :supsub:`reg` Media Software Development Kit
-"""
+.. |msdk_full_name| replace:: Intel\ :supsub:`reg`"""
+    + 'Media Software Development Kit'
 )
 
 rst_prolog = prolog_template.substitute(env)
@@ -86,15 +85,6 @@ substitutions = [('|dal_short_name|', 'oneDAL'), ('|daal_in_code|', 'daal')]
 primary_domain = 'cpp'
 
 latex_elements = {
-    # 'printindex': '\\footnotesize\\raggedright\\let\\oldtwocolumn\\twocolumn\\renewcommand{\\twocolumn}[1][]{#1}\\printindex\\renewcommand{\\twocolumn}[1][]{\\oldtwocolumn}',
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-    # Additional stuff for the LaTeX preamble.
-    #
     'preamble': r'''
 \usepackage{makeidx}
 \usepackage[columns=1]{idxlayout}

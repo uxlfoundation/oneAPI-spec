@@ -17,8 +17,8 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 
-from conf import *
 from common_conf import *
+from conf import *
 
 # -- Project information -----------------------------------------------------
 
@@ -168,7 +168,7 @@ epub_exclude_files = ['search.html']
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-# -- Options for breathe extension ----------------------------------------------
+# -- Options for breathe extension -------------------------------------------
 
 breathe_projects = {project: '../doxygen/xml'}
 breathe_default_project = 'none'
