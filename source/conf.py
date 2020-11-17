@@ -16,12 +16,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
+from os.path import join
 
-sys.path.insert(0, os.path.abspath('conf'))
-
-from common_conf import *
+repo_root = '..'
+exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 
 # -- Project information -----------------------------------------------------
 
@@ -30,7 +28,7 @@ copyright = u'2020, Intel Corporation'
 author = u'Intel'
 
 # The short X.Y version
-version = env['oneapi_version']
+version = env['oneapi_version']  # noqa: F821
 # The full version, including alpha/beta/rc tags
 release = version
 

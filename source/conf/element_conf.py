@@ -17,9 +17,6 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 
-from common_conf import *
-from conf import *
-
 # -- Project information -----------------------------------------------------
 
 copyright = u'2020, Intel'
@@ -99,7 +96,7 @@ html_favicon = '../../../_static/favicons.png'
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = project + '-spec'
+htmlhelp_basename = project + '-spec'  # noqa: F821
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -110,8 +107,8 @@ htmlhelp_basename = project + '-spec'
 latex_documents = [
     (
         master_doc,
-        project + '-spec.tex',
-        project + u' Specification',
+        project + '-spec.tex',  # noqa: F821
+        project + u' Specification',  # noqa: F821
         u'Intel',
         'manual',
     ),
@@ -122,7 +119,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, project + '-spec', project + u' Specification', [author], 1)
+    (
+        master_doc,
+        project + '-spec',  # noqa: F821
+        project + u' Specification',  # noqa: F821
+        [author],
+        1,
+    )
 ]
 
 
@@ -134,11 +137,11 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        project + '-spec',
-        project + u' Specification',
+        project + '-spec',  # noqa: F821
+        project + u' Specification',  # noqa: F821
         author,
         'Intel',
-        'Specification for ' + project + ' software.',
+        'Specification for ' + project + ' software.',  # noqa: F821
         'Miscellaneous',
     ),
 ]
@@ -146,7 +149,7 @@ texinfo_documents = [
 # -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = project
+epub_title = project  # noqa: F821
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
@@ -170,5 +173,5 @@ todo_include_todos = True
 
 # -- Options for breathe extension -------------------------------------------
 
-breathe_projects = {project: '../doxygen/xml'}
+breathe_projects = {project: '../doxygen/xml'}  # noqa: F821
 breathe_default_project = 'none'
