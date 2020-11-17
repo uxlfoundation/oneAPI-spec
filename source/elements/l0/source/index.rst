@@ -42,5 +42,6 @@ architectures, such as FPGAs.
 Detailed API Descriptions
 -------------------------
 
-The detailed specification can be found online in the `Level Zero
-Specification`_.
+The detailed specification can be found online in the specification_.
+
+.. _specification: https://spec.oneapi.com/level-zero/latest/index.html

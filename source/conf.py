@@ -18,10 +18,10 @@
 #
 import os
 import sys
+from os.path import join
 
-sys.path.insert(0, os.path.abspath('conf'))
-
-from common_conf import *
+repo_root = '..'
+exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 
 # -- Project information -----------------------------------------------------
 

@@ -17,9 +17,6 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 
-from common_conf import *
-from conf import *
-
 # -- Project information -----------------------------------------------------
 
 copyright = u'2020, Intel'

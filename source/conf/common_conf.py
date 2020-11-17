@@ -6,19 +6,13 @@ import json
 import os
 import string
 import sys
-
+from os.path import join, abspath
 import docutils
-
-
-def path_relative_to_repo_root(relative_path):
-    this_dir = os.path.dirname(os.path.realpath(__file__))
-    root_dir = os.path.abspath(os.path.join(this_dir, '../..'))
-    return os.path.abspath(os.path.join(root_dir, relative_path))
 
 
 # oneDAL uses custom API generator based on `breathe`.
 # Extend path to let Sphinx find `dalapi` module:
-sys.path.insert(0, path_relative_to_repo_root('source/elements/oneDAL'))
+sys.path.insert(0, abspath(join(repo_root, 'source', 'elements', 'oneDAL')))
 
 extensions = [
     'notfound.extension',
@@ -39,7 +33,7 @@ extensions = [
     'dalapi',  # oneDAL API generator
 ]
 
-with open('../oneapi-doc.json') as fin:
+with open(join(repo_root, 'oneapi-doc.json')) as fin:
     cfg = json.load(fin)
 
 env = {
@@ -72,7 +66,7 @@ prolog_template = string.Template(
 .. |regsup| replace:: :supsub:`reg`
 .. |intel_r| replace:: Intel\ :supsub:`reg`
 .. |msdk_full_name| replace:: Intel\ :supsub:`reg`"""
-    + 'Media Software Development Kit'
+    + ' Media Software Development Kit'
 )
 
 rst_prolog = prolog_template.substitute(env)
