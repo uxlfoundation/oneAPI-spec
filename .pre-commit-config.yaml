@@ -23,6 +23,10 @@ repos:
     rev: master
     hooks:
     -   id: doc8
+-   repo: https://github.com/fsfe/reuse-tool
+    rev: master
+    hooks:
+    -   id: reuse
 -   repo: local
     hooks:
     - id: sphinx-html
@@ -45,7 +49,3 @@ repos:
 #    rev: develop
 #    hooks:
 #    -   id: isort
-#-   repo: https://github.com/fsfe/reuse-tool
-#    rev: master
-#    hooks:
-#    -   id: reuse

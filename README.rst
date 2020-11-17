@@ -9,6 +9,10 @@ oneAPI Specifications
 .. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
    :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
 
+.. image:: https://api.reuse.software/badge/github.com/oneapi-src/oneapi-spec
+   :target: https://api.reuse.software/info/github.com/oneapi-src/oneapi-spec
+   :alt: REUSE status
+
 This repository contains the sources for the `oneAPI
 Specification`_. For the latest build from main branch, see `HTML
 <https://oneapi-src.github.io/oneAPI-spec>`__ and `PDF
@@ -121,6 +125,19 @@ PR's trigger the CI to build the document and save it as an
 artifact. If you are working in a fork on GitHub, commits to the main
 branch will build and publish the document in the GitHub pages
 associated with the repository.
+
+Adding licenses to files
+========================
+
+Use the reuse_ tool
+
+Code examples::
+
+  reuse addheader --copyright "Intel Corporation" --year 2020 --license MIT source/examples/host-task.cpp
+
+Doc sources::
+
+  reuse addheader --copyright "Intel Corporation" --year 2020 --license CC-BY-4.0 source/index.rst
 
 
 .. _`reStructuredText`: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
