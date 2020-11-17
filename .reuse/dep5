@@ -7,7 +7,7 @@ Files: source/_static/*.png source/*.png
 Copyright: 2020 Intel Corporation
 License: CC-BY-4.0
 
-Files: ubuntu-packages.txt source/*.cpp
+Files: ubuntu-packages.txt source/*.cpp oneapi-doc.json
 Copyright: 2020 Intel Corporation
 License: MIT
 
@@ -54,4 +54,3 @@ License: CC-BY-4.0
 Files: source/elements/oneVPL/source/snippets/*.c
 Copyright: 2020 Intel Corporation
 License: MIT
-

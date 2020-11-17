@@ -126,8 +126,10 @@ artifact. If you are working in a fork on GitHub, commits to the main
 branch will build and publish the document in the GitHub pages
 associated with the repository.
 
+------------------------
 Adding licenses to files
-========================
+------------------------
+
 
 Use the reuse_ tool
 
@@ -144,3 +146,4 @@ Doc sources::
 .. _`Sphinx`: http://www.sphinx-doc.org/en/master/
 .. _`Read the Docs`: https://readthedocs.org/
 .. _`oneAPI Specification`: https://spec.oneapi.com
+.. _reuse: https://pypi.org/project/reuse/
