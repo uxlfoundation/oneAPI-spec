@@ -14,8 +14,6 @@ version and runtime information.
 
     // Defined in header <tbb/version.h>
 
-    #define TBB_SPEC_VERSION    1.0
-
     #define TBB_VERSION_MAJOR   /*implementation-defined*/
     #define TBB_VERSION_MINOR   /*implementation-defined*/
     #define TBB_VERSION_STRING  /*implementation-defined*/
@@ -31,8 +29,6 @@ version and runtime information.
 
 oneTBB defines macros related to versioning, as described below.
 
-* ``TBB_SPEC_VERSION`` macro defined to the full specification version in the format: [major_version].[minor_version].
-  The current version is 1.0.
 * ``TBB_VERSION_MAJOR`` macro defined to integral value that represents major library version.
 * ``TBB_VERSION_MINOR`` macro defined to integral value that represents minor library version.
 * ``TBB_VERSION_STRING`` macro defined to the string representation of the full library version.
