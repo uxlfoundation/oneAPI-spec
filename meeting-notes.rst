@@ -2,8 +2,8 @@
  Meeting Notes
 ===============
 
- 2020-11-23
-============
+2020-11-23
+==========
 
 * Updates
 
@@ -67,14 +67,19 @@
 
 * Bug/typo/etc fixes
 * Extensions
+  
   - Data Management:
+    
     - SoA table
     - CSR table
   -  Algorithms:
+     
      - Random Forest for classification, training and inference, batch computing mode
      - Random Forest for regression, training and inference, batch computing mode
-     - Support Vector Machine/SVM, binary classification, training and inference, batch computing mode
-     - At least one kernel function to be used with SVM (to be defined)
+     - Support Vector Machine/SVM, binary classification, training and
+       inference, batch computing mode
+     - At least one kernel function to be used with SVM (to be
+       defined)
        - Linear Regression, training and inference, batch computing mode
        - extension of K Nearest Neighbors model with support of KDTree
      - Covariance
