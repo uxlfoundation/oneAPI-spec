@@ -17,6 +17,7 @@ updates.
   ==================  ==========  =========
   Version             Date        View                                                                                                            
   ==================  ==========  =========
+  `1.0 rev 3`_        11/21/2020  `HTML <https://spec.oneapi.com/versions/1.0-rev-3/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-3/oneAPI-spec.pdf>`__
   `1.0 rev 2`_        10/21/2020  `HTML <https://spec.oneapi.com/versions/1.0-rev-2/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-2/oneAPI-spec.pdf>`__
   `1.0 rev 1`_        09/14/2020  `HTML <https://spec.oneapi.com/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-1/oneAPI-spec.pdf>`__
   `0.9`_              07/30/2020  `HTML <https://spec.oneapi.com/versions/0.9/>`__ `PDF <https://spec.oneapi.com/versions/0.9/oneAPI-spec.pdf>`__
@@ -30,6 +31,21 @@ updates.
 Release Notes
 =============
 
+1.0 rev 3
+---------
+
+* oneCCL
+
+  * Minor API corrections
+
+* oneDAL
+
+  * Correct version MACRO definition
+  
+* oneTBB
+
+  * Correct version MACRO definition
+  
 1.0 rev 2
 ---------
 
