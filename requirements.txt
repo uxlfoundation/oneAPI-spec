@@ -11,7 +11,8 @@ pre-commit
 Sphinx
 # waiting for pypi release for fix for parallel read
 git+https://github.com/readthedocs/sphinx-notfound-page.git
-sphinx-rtd-theme
+# Waiting for release of: https://github.com/executablebooks/sphinx-book-theme/commit/0bdacc0a5e0a01ca5b4476651d1a80821b9b5d67
+git+https://github.com/executablebooks/sphinx-book-theme.git
 sphinx-prompt
 sphinx_substitution_extensions
 sphinx_tabs
