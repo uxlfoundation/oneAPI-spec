@@ -95,7 +95,7 @@ will vary according to the OS.
 
   #. Directories provided by the environment variable ``LD_LIBRARY_PATH``.
   #. Content of the :file:`/etc/ld.so.cache` cache file.
-  #. Default path :file:`/lib`, then :file`/usr/lib` or :file:`/lib64`, and then
+  #. Default path :file:`/lib`, then :file:`/usr/lib` or :file:`/lib64`, and then
      :file:`/usr/lib64` on some 64 bit OSs. On Debian: :file:`/usr/lib/x86_64-linux-gnu`.
   #. SDK installation folder.
 
