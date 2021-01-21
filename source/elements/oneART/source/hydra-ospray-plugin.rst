@@ -2,17 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-=======
-openVKL
-=======
-
-openvkl ...
-
-.. toctree::
-   :maxdepth: 1
-
-   openvkl-spec
-   
-
-   
+============================
+OSPRay Plug-in for USD Hydra
+============================
 

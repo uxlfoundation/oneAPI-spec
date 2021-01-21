@@ -16,5 +16,5 @@ oneART is ...
 .. toctree::
    :maxdepth: 1
 
-   embree
-   openvkl
+   component-libraries
+   appendices

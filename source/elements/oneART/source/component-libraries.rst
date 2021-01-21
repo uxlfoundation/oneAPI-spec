@@ -2,17 +2,15 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-=======
-openVKL
-=======
+===================
+Component Libraries
+===================
 
-openvkl ...
+Some text here ...
 
 .. toctree::
    :maxdepth: 1
 
-   openvkl-spec
-   
-
-   
-
+   embree
+   openvkl
+   oidn-spec

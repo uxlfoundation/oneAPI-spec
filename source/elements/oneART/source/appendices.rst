@@ -2,17 +2,12 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-=======
-openVKL
-=======
-
-openvkl ...
+==========
+Appendices
+==========
 
 .. toctree::
    :maxdepth: 1
 
-   openvkl-spec
-   
-
-   
-
+   ospray-studio
+   hydra-ospray-plugin
