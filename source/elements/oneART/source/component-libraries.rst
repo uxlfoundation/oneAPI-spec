@@ -14,3 +14,4 @@ Some text here ...
    embree
    openvkl
    oidn-spec
+   ospray-spec

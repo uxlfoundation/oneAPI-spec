@@ -8292,10 +8292,6 @@ SEE ALSO
 `rtcSetGeometryTransformQuaternion <#rtcsetgeometrytransformquaternion>`__,
 `RTCQuaternionDecomposition <#rtcquaterniondecomposition>`__
 
-.. raw:: latex
-
-   \pagebreak
-   \pagebreak
 
 .. |image0| image:: images/triangle_uv.png
 .. |image1| image:: images/quad_uv.png
