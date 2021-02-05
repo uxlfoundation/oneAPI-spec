@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -6,12 +6,12 @@
 Component Libraries
 ===================
 
-Some text here ...
+oneART consists of 4 domains.
 
 .. toctree::
    :maxdepth: 1
 
    embree
    openvkl
-   oidn-spec
+   oidn
    ospray

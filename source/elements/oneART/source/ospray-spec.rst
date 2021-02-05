@@ -184,11 +184,17 @@ The following errors are currently used by OSPRay:
 
 .. table:: Possible error codes, i.e., valid named constants of type ``OSPError``.
 
-   +--------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Name                                                                                                                                 | Description                                                                                                                                                                                                                                                                                    |
-   +======================================================================================================================================+================================================================================================================================================================================================================================================================================================+
-   | OSP_NO_ERROR OSP_UNKNOWN_ERROR OSP_INVALID_ARGUMENT OSP_INVALID_OPERATION OSP_OUT_OF_MEMORY OSP_UNSUPPORTED_CPU OSP_VERSION_MISMATCH | no error occurred an unknown error occurred an invalid argument was specified the operation is not allowed for the specified object there is not enough memory to execute the command the CPU is not supported (minimum ISA is SSE4.1) a module could not be loaded due to mismatching version |
-   +--------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   ===================== =======================================================
+   Name                  Description
+   ===================== =======================================================
+   OSP_NO_ERROR          no error occurred
+   OSP_UNKNOWN_ERROR     an unknown error occurred
+   OSP_INVALID_ARGUMENT  an invalid argument was specified
+   OSP_INVALID_OPERATION the operation is not allowed for the specified object
+   OSP_OUT_OF_MEMORY     there is not enough memory to execute the command
+   OSP_UNSUPPORTED_CPU   the CPU is not supported (minimum ISA is SSE4.1)
+   OSP_VERSION_MISMATCH  a module could not be loaded due to mismatching version
+   ===================== =======================================================
 
 These error codes are either directly return by some API functions, or are recorded to be later queried by the application via
 
@@ -747,11 +753,15 @@ A mesh consisting of either triangles or quads is created by calling ``ospNewGeo
 
 .. table:: Parameters defining a mesh geometry.
 
-   +---------------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Type                                                          | Name                                                             | Description                                                                                                                                                                                                                                                                        |
-   +===============================================================+==================================================================+====================================================================================================================================================================================================================================================================================+
-   | vec3f[] vec3f[] vec4f[] / vec3f[] vec2f[] vec3ui[] / vec4ui[] | vertex.position vertex.normal vertex.color vertex.texcoord index | `data <#data>`__ array of vertex positions `data <#data>`__ array of vertex normals `data <#data>`__ array of vertex colors (RGBA/RGB) `data <#data>`__ array of vertex texture coordinates `data <#data>`__ array of (either triangle or quad) indices (into the vertex array(s)) |
-   +---------------------------------------------------------------+------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   =================== =============== ======================================================================================
+   Type                Name            Description
+   =================== =============== ======================================================================================
+   vec3f[]             vertex.position `data <#data>`__ array of vertex positions
+   vec3f[]             vertex.normal   `data <#data>`__ array of vertex normals
+   vec4f[] / vec3f[]   vertex.color    `data <#data>`__ array of vertex colors (RGBA/RGB)
+   vec2f[]             vertex.texcoord `data <#data>`__ array of vertex texture coordinates
+   vec3ui[] / vec4ui[] index           `data <#data>`__ array of (either triangle or quad) indices (into the vertex array(s))
+   =================== =============== ======================================================================================
 
 The data type of index arrays differentiates between the underlying geometry, triangles are used for a index with ``vec3ui`` type and quads for ``vec4ui`` type. Quads are internally handled as a pair of two triangles, thus mixing triangles and quads is supported by encoding some triangle as a quad with the last two vertex indices being identical (``w=z``).
 
@@ -914,11 +924,12 @@ OSPRay can directly render planes defined by plane equation coefficients in its 
 
 .. table:: Parameters defining a planes geometry.
 
-   +-----------------+---------------------------------+---------------------------------------------------------------------------------------------------------------------+
-   | Type            | Name                            | Description                                                                                                         |
-   +=================+=================================+=====================================================================================================================+
-   | vec4f[] box3f[] | plane.coefficients plane.bounds | `data <#data>`__ array of plane coefficients :math:`(a, b, c, d)` optional `data <#data>`__ array of bounding boxes |
-   +-----------------+---------------------------------+---------------------------------------------------------------------------------------------------------------------+
+   ======= ================== =================================================================
+   Type    Name               Description
+   ======= ================== =================================================================
+   vec4f[] plane.coefficients `data <#data>`__ array of plane coefficients :math:`(a, b, c, d)`
+   box3f[] plane.bounds       optional `data <#data>`__ array of bounding boxes
+   ======= ================== =================================================================
 
 Isosurfaces
 ~~~~~~~~~~~
