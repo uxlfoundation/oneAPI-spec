@@ -2,15 +2,15 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-========
-Open VKL
-========
+==================
+Open Image Denoise
+==================
 
 
 .. toctree::
    :maxdepth: 1
 
-   openvkl-spec
+   oidn-spec
    
 
    
