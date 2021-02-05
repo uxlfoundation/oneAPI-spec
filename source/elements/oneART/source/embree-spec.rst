@@ -8226,7 +8226,7 @@ where :math:`\mathbf{i}`, :math:`\mathbf{j}` :math:`\mathbf{k}` are the
 imaginary quaternion units. The passed quaternion will be normalized
 internally.
 
-:raw-latex:`\noindent `The affine transformation matrix corresponding to
+The affine transformation matrix corresponding to
 a ``RTCQuaternionDecomposition`` is :math:`TRS` and a point
 :math:`p = (p_x, p_y, p_z, 1)^T` will be transformed as
 
