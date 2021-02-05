@@ -2,9 +2,9 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-=======
-openVKL
-=======
+========
+Open VKL
+========
 
 .. toctree::
    :maxdepth: 1
