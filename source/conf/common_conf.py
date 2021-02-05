@@ -85,12 +85,13 @@ latex_elements = {
 \usepackage[columns=1]{idxlayout}
 \makeindex
 \DeclareUnicodeCharacter{2208}{$\in$}
+\DeclareUnicodeCharacter{2212}{$-$}
 \DeclareUnicodeCharacter{222A}{$\cup$}
 \DeclareUnicodeCharacter{2236}{$\colon$}
 \DeclareUnicodeCharacter{2260}{$\neq$}
 \DeclareUnicodeCharacter{2264}{$\leq$}
 \DeclareUnicodeCharacter{2265}{$\geq$}
-\DeclareUnicodeCharacter{393}{$\gamma$}
+\DeclareUnicodeCharacter{3B3}{$\gamma$}
 \DeclareUnicodeCharacter{39B}{$\Lambda$}
 \DeclareUnicodeCharacter{3A3}{$\Sigma$}
 \DeclareUnicodeCharacter{3A6}{$\phi$}

@@ -6159,7 +6159,7 @@ segment (``tnear`` and ``tfar`` members). The ray direction does not
 have to be normalized, and only the parameter range specified by the
 ``tnear``/``tfar`` interval is considered valid.
 
-The ray segment must be in the range :math:`[0, ∞]`, thus ranges that
+The ray segment must be in the range :math:`[0, /infty]`, thus ranges that
 start behind the ray origin are not allowed, but ranges can reach to
 infinity. For rays inside a ray stream, ``tfar`` < ``tnear`` identifies
 an inactive ray.
@@ -6625,7 +6625,7 @@ scene contains motion blur geometries, also the ray time (``time`` ray
 member) must be initialized to a value in the range :math:`[0, 1]`. If
 ray masks are enabled at compile time, the ray mask (``mask`` ray
 member) must be initialized as well. The ray segment has to be in the
-range :math:`[0, ∞]`, thus ranges that start behind the ray origin are
+range :math:`[0, \infty]`, thus ranges that start behind the ray origin are
 not valid, but ranges can reach to infinity. See Section
 `RTCRay <#rtcray>`__ for the ray layout description.
 
@@ -6728,7 +6728,7 @@ the scene contains motion blur geometries, also the ray time (``time``
 ray member) must be initialized to a value in the range :math:`[0, 1]`.
 If ray masks are enabled at compile time, the ray mask (``mask`` ray
 member) must be initialized as well. The ray segment must be in the
-range :math:`[0, ∞]`, thus ranges that start behind the ray origin are
+range :math:`[0, /infty]`, thus ranges that start behind the ray origin are
 not valid, but ranges can reach to infinity. See Section
 `RTCRay <#rtcray>`__ for the ray layout description.
 
@@ -7671,7 +7671,7 @@ callback function (e.g ``queryFunc`` argument) for each primitive of the
 scene (``scene`` argument) that intersects the query domain.
 
 The user has to initialize the query location (``x``, ``y`` and ``z``
-member) and query radius in the range :math:`[0, ∞]`. If the scene
+member) and query radius in the range :math:`[0, \infty]`. If the scene
 contains motion blur geometries, also the query time (``time`` member)
 must be initialized to a value in the range :math:`[0, 1]`.
 
