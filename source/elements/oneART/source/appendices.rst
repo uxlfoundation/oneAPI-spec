@@ -11,3 +11,7 @@ Appendices
 
    ospray-studio
    ospray-hydra-plugin
+   ispc
+   future-consider
+   acknowledgment
+

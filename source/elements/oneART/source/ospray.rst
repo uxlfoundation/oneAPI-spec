@@ -6,6 +6,10 @@
  OSPRay
 ========
 
+OSPRay is a scalable, and portable ray tracing engine for
+high-performance, high-fidelity visualization.
+
+
 .. toctree::
    :maxdepth: 1
 

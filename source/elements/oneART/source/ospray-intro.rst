@@ -6,7 +6,7 @@
 Introduction
 ============
 
-OSPRay is scalable, and portable ray tracing engine for
+OSPRay is a scalable, and portable ray tracing engine for
 high-performance, high-fidelity visualization.
 
 The purpose of OSPRay is to provide an open, powerful, and easy-to-use

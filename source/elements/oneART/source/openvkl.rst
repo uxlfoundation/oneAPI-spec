@@ -6,6 +6,9 @@
 Open VKL
 ========
 
+Open Volume Kernel Library (Open VKL) is a collection of
+high-performance volume computation kernels. 
+
 .. toctree::
    :maxdepth: 1
 
