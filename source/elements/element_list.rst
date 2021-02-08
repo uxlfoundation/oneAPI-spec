@@ -20,5 +20,4 @@
 - :ref:`oneVPL-section`: Algorithms for accelerated video processing
 - :ref:`oneMKL-section`: High performance math routines for science,
   engineering, and financial applications
-
-  
+- :ref:`oneART-section`: Rendering
