@@ -6,7 +6,7 @@
 Component Libraries
 ===================
 
-oneART consists of 4 domains.
+There are 4 domains.
 
 .. toctree::
    :maxdepth: 1
