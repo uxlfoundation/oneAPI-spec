@@ -222,8 +222,8 @@ For getting the most performance out of Embree, see the Section
 
    \pagebreak
 
-API Reference
-=============
+Embree API
+==========
 
 rtcNewDevice
 ------------
@@ -300,11 +300,11 @@ The following configuration is supported:
    upfront. This can be useful for benchmarking to exclude thread
    creation time. This option is disabled by default.
 
--  ``isa=[sse2,sse4.2,avx,avx2,avx512knl,avx512skx]``: Use specified
-   ISA. By default the ISA is selected automatically.
+-  ``isa=[sse2,sse4.2,avx,avx2,avx512]``: Use specified ISA. By default
+   the ISA is selected automatically.
 
--  ``max_isa=[sse2,sse4.2,avx,avx2,avx512knl,avx512skx]``: Configures
-   the automated ISA selection to use maximally the specified ISA.
+-  ``max_isa=[sse2,sse4.2,avx,avx2,avx512]``: Configures the automated
+   ISA selection to use maximally the specified ISA.
 
 -  ``hugepages=[0/1]``: Enables or disables usage of huge pages. Under
    Linux huge pages are used by default but under Windows and macOS they
@@ -514,9 +514,8 @@ Possible properties to query are:
 -  ``RTC_DEVICE_PROPERTY_NATIVE_RAY16_SUPPORTED``: Queries whether the
    ``rtcIntersect16`` and ``rtcOccluded16`` functions preserve packet
    size and ray order when invoking callback functions. This is only the
-   case if Embree is compiled with ``EMBREE_RAY_PACKETS`` and
-   ``AVX512SKX`` (or ``AVX512KNL``) enabled, and if the machine it is
-   running on supports ``AVX512SKX`` (or ``AVX512KNL``).
+   case if Embree is compiled with ``EMBREE_RAY_PACKETS`` and ``AVX512``
+   enabled, and if the machine it is running on supports ``AVX512``.
 
 -  ``RTC_DEVICE_PROPERTY_RAY_STREAM_SUPPORTED``: Queries whether
    ``rtcIntersect1M``, ``rtcIntersect1Mp``, ``rtcIntersectNM``,
@@ -6159,10 +6158,10 @@ segment (``tnear`` and ``tfar`` members). The ray direction does not
 have to be normalized, and only the parameter range specified by the
 ``tnear``/``tfar`` interval is considered valid.
 
-The ray segment must be in the range :math:`[0, /infty]`, thus ranges that
-start behind the ray origin are not allowed, but ranges can reach to
-infinity. For rays inside a ray stream, ``tfar`` < ``tnear`` identifies
-an inactive ray.
+The ray segment must be in the range :math:`[0, \infty]`, thus ranges
+that start behind the ray origin are not allowed, but ranges can reach
+to infinity. For rays inside a ray stream, ``tfar`` < ``tnear``
+identifies an inactive ray.
 
 The ray further contains a motion blur time in the range :math:`[0, 1]`
 (``time`` member), a ray mask (``mask`` member), a ray ID (``id``
@@ -6625,8 +6624,8 @@ scene contains motion blur geometries, also the ray time (``time`` ray
 member) must be initialized to a value in the range :math:`[0, 1]`. If
 ray masks are enabled at compile time, the ray mask (``mask`` ray
 member) must be initialized as well. The ray segment has to be in the
-range :math:`[0, \infty]`, thus ranges that start behind the ray origin are
-not valid, but ranges can reach to infinity. See Section
+range :math:`[0, \infty]`, thus ranges that start behind the ray origin
+are not valid, but ranges can reach to infinity. See Section
 `RTCRay <#rtcray>`__ for the ray layout description.
 
 The geometry ID (``geomID`` hit member) of the hit data must be
@@ -6728,8 +6727,8 @@ the scene contains motion blur geometries, also the ray time (``time``
 ray member) must be initialized to a value in the range :math:`[0, 1]`.
 If ray masks are enabled at compile time, the ray mask (``mask`` ray
 member) must be initialized as well. The ray segment must be in the
-range :math:`[0, /infty]`, thus ranges that start behind the ray origin are
-not valid, but ranges can reach to infinity. See Section
+range :math:`[0, \infty]`, thus ranges that start behind the ray origin
+are not valid, but ranges can reach to infinity. See Section
 `RTCRay <#rtcray>`__ for the ray layout description.
 
 When no intersection is found, the ray data is not updated. In case a
@@ -8226,8 +8225,8 @@ where :math:`\mathbf{i}`, :math:`\mathbf{j}` :math:`\mathbf{k}` are the
 imaginary quaternion units. The passed quaternion will be normalized
 internally.
 
-The affine transformation matrix corresponding to
-a ``RTCQuaternionDecomposition`` is :math:`TRS` and a point
+The affine transformation matrix corresponding to a
+``RTCQuaternionDecomposition`` is :math:`TRS` and a point
 :math:`p = (p_x, p_y, p_z, 1)^T` will be transformed as
 
 .. math:: p' = T \ R \ S \ p.
@@ -8292,6 +8291,10 @@ SEE ALSO
 `rtcSetGeometryTransformQuaternion <#rtcsetgeometrytransformquaternion>`__,
 `RTCQuaternionDecomposition <#rtcquaterniondecomposition>`__
 
+.. raw:: latex
+
+   \pagebreak
+   \pagebreak
 
 .. |image0| image:: images/triangle_uv.png
 .. |image1| image:: images/quad_uv.png
