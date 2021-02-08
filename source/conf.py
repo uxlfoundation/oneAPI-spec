@@ -24,7 +24,7 @@ exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 # -- Project information -----------------------------------------------------
 
 project = u'oneAPI Specification'
-copyright = u'2020, Intel Corporation'
+copyright = u'2021, Intel Corporation'
 author = u'Intel'
 
 # The short X.Y version
