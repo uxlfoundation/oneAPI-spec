@@ -1,5 +1,5 @@
-Intel® Open VKL API
-===================
+Open VKL API
+============
 
 To access the Open VKL API you first need to include the Open VKL header. For C99 or C++:
 
@@ -390,13 +390,13 @@ The following additional parameters can be set both on ``"structuredRegular"`` v
 
 .. table:: Configuration parameters for structured regular (``"structuredRegular"``) volumes and their sampler objects.
 
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Type | Name           | Default                  | Description                                                                                                       |
-   +======+================+==========================+===================================================================================================================+
-   | int  | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   +---------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Type    | Name           | Default                  | Description                                                                                                       |
+   +=========+================+==========================+===================================================================================================================+
+   | int     | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
+   +---------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int     | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
+   +---------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
 
 Structured Spherical Volumes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -441,13 +441,13 @@ The following additional parameters can be set both on ``"structuredSpherical"``
 
 .. table:: Configuration parameters for structured spherical (``"structuredSpherical"``) volumes and their sampler objects.
 
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Type | Name           | Default                  | Description                                                                                                       |
-   +======+================+==========================+===================================================================================================================+
-   | int  | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   +---------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Type    | Name           | Default                  | Description                                                                                                       |
+   +=========+================+==========================+===================================================================================================================+
+   | int     | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
+   +---------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int     | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
+   +---------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
 
 Adaptive Mesh Refinement (AMR) Volumes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -486,17 +486,17 @@ The following additional parameters can be set both on ``"amr"`` volumes and the
 
 .. table:: Configuration parameters for AMR (``"AMR"``) volumes and their sampler objects.
 
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   | Type             | Name   | Default             | Description                                              |
-   +==================+========+=====================+==========================================================+
-   | ``VKLAMRMethod`` | method | ``VKL_AMR_CURRENT`` | ``VKLAMRMethod`` sampling method. Supported methods are: |
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   |                  |        |                     | ``VKL_AMR_CURRENT``                                      |
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   |                  |        |                     | ``VKL_AMR_FINEST``                                       |
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   |                  |        |                     | ``VKL_AMR_OCTANT``                                       |
-   +------------------+--------+---------------------+----------------------------------------------------------+
+   +------------------+------------+---------------------+----------------------------------------------------------+
+   | Type             | Name       | Default             | Description                                              |
+   +==================+============+=====================+==========================================================+
+   | ``VKLAMRMethod`` | method     | ``VKL_AMR_CURRENT`` | ``VKLAMRMethod`` sampling method. Supported methods are: |
+   +------------------+------------+---------------------+----------------------------------------------------------+
+   |                  |            |                     | ``VKL_AMR_CURRENT``                                      |
+   +------------------+------------+---------------------+----------------------------------------------------------+
+   |                  |            |                     | ``VKL_AMR_FINEST``                                       |
+   +------------------+------------+---------------------+----------------------------------------------------------+
+   |                  |            |                     | ``VKL_AMR_OCTANT``                                       |
+   +------------------+------------+---------------------+----------------------------------------------------------+
 
 Open VKL’s AMR implementation was designed to cover Berger-Colella [1] and Chombo [2] AMR data. The ``method`` parameter above determines the interpolation method used when sampling the volume.
 
@@ -567,11 +567,11 @@ The following additional parameters can be set both on ``unstructured`` volumes 
 
 .. table:: Configuration parameters for unstructured (``"unstructured"``) volumes and their sampler objects.
 
-   +------+------------------+---------+--------------------------------------------------------------------------+
-   | Type | Name             | Default | Description                                                              |
-   +======+==================+=========+==========================================================================+
-   | int  | maxIteratorDepth | 6       | Do not descend further than to this BVH depth during interval iteration. |
-   +------+------------------+---------+--------------------------------------------------------------------------+
+   +---------------+------------------+---------+--------------------------------------------------------------------------+
+   | Type          | Name             | Default | Description                                                              |
+   +===============+==================+=========+==========================================================================+
+   | int           | maxIteratorDepth | 6       | Do not descend further than to this BVH depth during interval iteration. |
+   +---------------+------------------+---------+--------------------------------------------------------------------------+
 
 VDB Volumes
 ~~~~~~~~~~~
@@ -620,17 +620,17 @@ The following additional parameters can be set both on ``vdb`` volumes and their
 
 .. table:: Configuration parameters for VDB (``"vdb"``) volumes and their sampler objects.
 
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Type | Name             | Default                  | Description                                                                                                       |
-   +======+==================+==========================+===================================================================================================================+
-   | int  | filter           | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | gradientFilter   | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | maxSamplingDepth | ``VKL_VDB_NUM_LEVELS``-1 | Do not descend further than to this depth during sampling.                                                        |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | maxIteratorDepth | ``VKL_VDB_NUM_LEVELS``-2 | Do not descend further than to this depth during iteration.                                                       |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   +---------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Type    | Name             | Default                  | Description                                                                                                       |
+   +=========+==================+==========================+===================================================================================================================+
+   | int     | filter           | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
+   +---------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int     | gradientFilter   | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
+   +---------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int     | maxSamplingDepth | ``VKL_VDB_NUM_LEVELS``-1 | Do not descend further than to this depth during sampling.                                                        |
+   +---------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int     | maxIteratorDepth | ``VKL_VDB_NUM_LEVELS``-2 | Do not descend further than to this depth during iteration.                                                       |
+   +---------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
 
 VDB sampler objects support the following observers:
 
@@ -709,11 +709,11 @@ The following additional parameters can be set both on ``particle`` volumes and 
 
 .. table:: Configuration parameters for particle (``"particle"``) volumes and their sampler objects.
 
-   +------+------------------+---------+--------------------------------------------------------------------------+
-   | Type | Name             | Default | Description                                                              |
-   +======+==================+=========+==========================================================================+
-   | int  | maxIteratorDepth | 6       | Do not descend further than to this BVH depth during interval iteration. |
-   +------+------------------+---------+--------------------------------------------------------------------------+
+   +-------+---------------------+---------+--------------------------------------------------------------------------+
+   | Type  | Name                | Default | Description                                                              |
+   +=======+=====================+=========+==========================================================================+
+   | int   | maxIteratorDepth    | 6       | Do not descend further than to this BVH depth during interval iteration. |
+   +-------+---------------------+---------+--------------------------------------------------------------------------+
 
 1. Knoll, A., Wald, I., Navratil, P., Bowen, A., Reda, K., Papka, M.E. and Gaither, K. (2014), RBF Volume Ray Casting on Multicore and Manycore CPUs. Computer Graphics Forum, 33: 71-80. doi:10.1111/cgf.12363
 
