@@ -92,7 +92,7 @@ html_theme = 'sphinx_book_theme'
 html_theme_options = {
     'repository_url': 'https://github.com/oneapi-src/oneapi-spec',
     'path_to_docs': 'source',
-    'use_issues_button': True,n
+    'use_issues_button': True,
     'use_edit_page_button': True,
     'repository_branch': 'main',
 }
