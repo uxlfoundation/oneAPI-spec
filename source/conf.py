@@ -89,11 +89,12 @@ html_theme = 'sphinx_book_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_context = {
-    'display_github': True,
-    'github_user': 'oneapi-src',
-    'github_repo': 'oneapi-spec',
-    'github_version': 'master/source/',
+html_theme_options = {
+    'repository_url': 'https://github.com/oneapi-src/oneapi-spec',
+    'path_to_docs': 'source',
+    'use_issues_button': True,
+    'use_edit_page_button': True,
+    'repository_branch': 'main',
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
