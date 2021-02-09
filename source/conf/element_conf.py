@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-copyright = u'2020, Intel'
+copyright = u'2021, Intel'
 author = u'Intel'
 
 # The short X.Y version
