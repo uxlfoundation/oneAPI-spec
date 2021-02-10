@@ -21,8 +21,13 @@ import sys
 from os.path import join
 
 
-project = 'oneART'
+project = 'Advanced Ray Tracing'
 
 repo_root = join('..', '..', '..', '..')
 exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 exec(open(join(repo_root, 'source', 'conf', 'element_conf.py')).read())
+
+exclude_patterns = ['nested-*.rst',
+                    '**/*.inc.rst',
+                    '*.inc.rst',
+]

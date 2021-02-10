@@ -6,7 +6,17 @@
 Appendices
 ==========
 
+- :ref:`ospray-studio-section`: Rendering Focused Application fully
+  utilizing the OSPRay API.
+- :ref:`ospray-hydra-plugin-section`: Universal Scene Description
+  “Hydra API Delegate” using OSPRay for scalable interactive and
+  real-time ray traced preview
+- :ref:`ispc-section`: Single Program Multi-Data Vectorizing Compiler
+- Future Considerations
+- :ref:`acknowledgment-section`
+
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
    ospray-studio

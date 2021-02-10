@@ -2,6 +2,8 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. _ospray-hydra-plugin-section:
+
 ============================
 OSPRay Plug-in for USD Hydra
 ============================

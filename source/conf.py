@@ -66,6 +66,8 @@ language = None
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [
+    'elements/oneART/source/versions.rst',
+    'elements/oneART/source/index.rst',
     'elements/oneTBB/source/index.rst',
     'elements/oneTBB/source/uncategorized.rst',
     'elements/oneTBB/source/uncategorized/**',

@@ -18,5 +18,3 @@ Overview
 
    component-libraries
    appendices
-   versions
-   
