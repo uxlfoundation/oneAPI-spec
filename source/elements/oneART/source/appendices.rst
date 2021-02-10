@@ -12,7 +12,7 @@ Appendices
   “Hydra API Delegate” using OSPRay for scalable interactive and
   real-time ray traced preview
 - :ref:`ispc-section`: Single Program Multi-Data Vectorizing Compiler
-- Future Considerations
+- :ref:`future-section`
 - :ref:`acknowledgment-section`
 
 .. toctree::
