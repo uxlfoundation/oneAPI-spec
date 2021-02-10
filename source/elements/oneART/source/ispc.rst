@@ -2,6 +2,8 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. _ispc-section:
+
 ===================================
 ISPC Implicit SPMD Program Compiler
 ===================================
