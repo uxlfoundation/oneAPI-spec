@@ -6,7 +6,7 @@
 Introduction
 ============
 
-The purpose of Open Image Denoise is to provide an open, high-quality,
+Open Image Denoise is an open, high-quality,
 efficient, and easy-to-use denoising library that allows one to
 significantly reduce rendering times in ray tracing based rendering
 applications. It filters out the Monte Carlo noise inherent to
