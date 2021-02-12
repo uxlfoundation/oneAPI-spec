@@ -3,7 +3,7 @@ Intel Open Image Denoise API
 
 Intel Open Image Denoise provides a C99 API (also compatible with C++) and a C++11 wrapper API as well. For simplicity, this document mostly refers to the C99 version of the API.
 
-The API is designed in an object-oriented manner, e.g. it contains device objects (``OIDNDevice`` type), buffer objects (``OIDNBuffer`` type), and filter objects (``OIDNFilter`` type). All objects are reference-counted, and handles can be released by calling the appropriate release function (e.g. ``oidnReleaseDevice``) or retained by incrementing the reference count (e.g. ``oidnRetainDevice``).
+The API is designed in an object-oriented manner, e.g. it contains device objects (``OIDNDevice`` type), buffer objects (``OIDNBuffer`` type), and filter objects (``OIDNFilter`` type). All objects are reference-counted, and handles can be released by calling the appropriate release function (e.g. ``oidnReleaseDevice``) or retained by incrementing the reference count (e.g. ``oidnRetainDevice``).
 
 An important aspect of objects is that setting their parameters do not have an immediate effect (with a few exceptions). Instead, objects with updated parameters are in an unusable state until the parameters get explicitly committed to a given object. The commit semantic allows for batching up multiple small changes, and specifies exactly when changes to objects will occur.
 
@@ -13,7 +13,7 @@ To have a quick overview of the C99 and C++11 APIs, see the following simple exa
 
 *C99 API Example*
 
-::
+.. code:: cpp
 
    #include <OpenImageDenoise/oidn.h>
    ...
@@ -48,7 +48,7 @@ To have a quick overview of the C99 and C++11 APIs, see the following simple exa
 
 *C++11 API Example*
 
-::
+.. code:: cpp
 
    #include <OpenImageDenoise/oidn.hpp>
    ...
@@ -78,7 +78,7 @@ Device
 
 Intel Open Image Denoise supports a device concept, which allows different components of the application to use the Open Image Denoise API without interfering with each other. An application first needs to create a device with
 
-::
+.. code:: cpp
 
    OIDNDevice oidnNewDevice(OIDNDeviceType type);
 
@@ -86,16 +86,16 @@ where the ``type`` enumeration maps to a specific device implementation, which c
 
 .. table:: Supported device types, i.e., valid constants of type ``OIDNDeviceType``.
 
-   ======================== =======================================
+   ======================== =============================================
    Name                     Description
-   ======================== =======================================
+   ======================== =============================================
    OIDN_DEVICE_TYPE_DEFAULT select the approximately fastest device
-   OIDN_DEVICE_TYPE_CPU     CPU device (requires SSE4.1 support)
-   ======================== =======================================
+   OIDN_DEVICE_TYPE_CPU     CPU device (requires SSE4.1 or Apple Silicon)
+   ======================== =============================================
 
 Once a device is created, you can call
 
-::
+.. code:: cpp
 
    void oidnSetDevice1b(OIDNDevice device, const char* name, bool value);
    void oidnSetDevice1i(OIDNDevice device, const char* name, int  value);
@@ -134,19 +134,19 @@ Note that the CPU device heavily relies on setting the thread affinities to achi
 
 Once parameters are set on the created device, the device must be committed with
 
-::
+.. code:: cpp
 
    void oidnCommitDevice(OIDNDevice device);
 
 This device can then be used to construct further objects, such as buffers and filters. Note that a device can be committed only once during its lifetime. Before the application exits, it should release all devices by invoking
 
-::
+.. code:: cpp
 
    void oidnReleaseDevice(OIDNDevice device);
 
 Note that Intel Open Image Denoise uses reference counting for all object types, so this function decreases the reference count of the device, and if the count reaches 0 the device will automatically get deleted. It is also possible to increase the reference count by calling
 
-::
+.. code:: cpp
 
    void oidnRetainDevice(OIDNDevice device);
 
@@ -157,7 +157,7 @@ Error Handling
 
 Each user thread has its own error code per device. If an error occurs when calling an API function, this error code is set to the occurred error if it stores no previous error. The currently stored error can be queried by the application via
 
-::
+.. code:: cpp
 
    OIDNError oidnGetDeviceError(OIDNDevice device, const char** outMessage);
 
@@ -165,13 +165,13 @@ where ``outMessage`` can be a pointer to a C string which will be set to a more 
 
 Alternatively, the application can also register a callback function of type
 
-::
+.. code:: cpp
 
    typedef void (*OIDNErrorFunction)(void* userPtr, OIDNError code, const char* message);
 
 via
 
-::
+.. code:: cpp
 
    void oidnSetDeviceErrorFunction(OIDNDevice device, OIDNErrorFunction func, void* userPtr);
 
@@ -206,7 +206,7 @@ Buffer
 
 Large data like images can be passed to Intel Open Image Denoise either via pointers to memory allocated and managed by the user (this is the recommended, often easier and more efficient approach, if supported by the device) or by creating buffer objects (supported by all devices). To create a new data buffer with memory allocated and owned by the device, holding ``byteSize`` number of bytes, use
 
-::
+.. code:: cpp
 
    OIDNBuffer oidnNewBuffer(OIDNDevice device, size_t byteSize);
 
@@ -214,7 +214,7 @@ The created buffer is bound to the specified device (``device`` argument). The s
 
 It is also possible to create a “shared” data buffer with memory allocated and managed by the user with
 
-::
+.. code:: cpp
 
    OIDNBuffer oidnNewSharedBuffer(OIDNDevice device, void* ptr, size_t byteSize);
 
@@ -222,14 +222,14 @@ where ``ptr`` points to the user-managed memory and ``byteSize`` is its size in 
 
 Similar to device objects, buffer objects are also reference-counted and can be retained and released by calling the following functions:
 
-::
+.. code:: cpp
 
    void oidnRetainBuffer(OIDNBuffer buffer);
    void oidnReleaseBuffer(OIDNBuffer buffer);
 
 Accessing the data stored in a buffer object is possible by mapping it into the address space of the application using
 
-::
+.. code:: cpp
 
    void* oidnMapBuffer(OIDNBuffer buffer, OIDNAccess access, size_t byteOffset, size_t byteSize)
 
@@ -248,7 +248,7 @@ where ``access`` is the desired access mode of the mapped memory, ``byteOffset``
 
 After accessing the mapped data in the buffer, the memory region must be unmapped with
 
-::
+.. code:: cpp
 
    void oidnUnmapBuffer(OIDNBuffer buffer, void* mappedPtr);
 
@@ -274,13 +274,13 @@ Filter
 
 Filters are the main objects in Intel Open Image Denoise that are responsible for the actual denoising. The library ships with a collection of filters which are optimized for different types of images and use cases. To create a filter object, call
 
-::
+.. code:: cpp
 
    OIDNFilter oidnNewFilter(OIDNDevice device, const char* type);
 
 where ``type`` is the name of the filter type to create. The supported filter types are documented later in this section. Once created, filter objects can be retained and released with
 
-::
+.. code:: cpp
 
    void oidnRetainFilter(OIDNFilter filter);
    void oidnReleaseFilter(OIDNFilter filter);
@@ -289,7 +289,7 @@ After creating a filter, it needs to be set up by specifying the input and outpu
 
 To bind images to the filter, you can use one of the following functions:
 
-::
+.. code:: cpp
 
    void oidnSetFilterImage(OIDNFilter filter, const char* name,
                            OIDNBuffer buffer, OIDNFormat format,
@@ -311,14 +311,14 @@ If the pixels and/or rows are stored contiguously (tightly packed without any ga
 
 Some special data used by filters are opaque/untyped (e.g. trained model weights blobs), which can be specified with the ``oidnSetSharedFilterData`` function:
 
-::
+.. code:: cpp
 
    void oidnSetSharedFilterData(OIDNFilter filter, const char* name,
                                 void* ptr, size_t byteSize);
 
 Filters may have parameters other than buffers as well, which you can set and get using the following functions:
 
-::
+.. code:: cpp
 
    void  oidnSetFilter1b(OIDNFilter filter, const char* name, bool  value);
    void  oidnSetFilter1i(OIDNFilter filter, const char* name, int   value);
@@ -329,7 +329,7 @@ Filters may have parameters other than buffers as well, which you can set and ge
 
 Filters support a progress monitor callback mechanism that can be used to report progress of filter operations and to cancel them as well. Calling ``oidnSetFilterProgressMonitorFunction`` registers a progress monitor callback function (``func`` argument) with payload (``userPtr`` argument) for the specified filter (``filter`` argument):
 
-::
+.. code:: cpp
 
    typedef bool (*OIDNProgressMonitorFunction)(void* userPtr, double n);
 
@@ -341,7 +341,7 @@ Only a single callback function can be registered per filter, and further invoca
 
 After setting all necessary parameters for the filter, the changes must be commmitted by calling
 
-::
+.. code:: cpp
 
    void oidnCommitFilter(OIDNFilter filter);
 
@@ -349,7 +349,7 @@ The parameters can be updated after committing the filter, but it must be re-com
 
 Finally, an image can be filtered by executing the filter with
 
-::
+.. code:: cpp
 
    void oidnExecuteFilter(OIDNFilter filter);
 
@@ -362,7 +362,7 @@ RT
 
 The ``RT`` (**r**\ ay **t**\ racing) filter is a generic ray tracing denoising filter which is suitable for denoising images rendered with Monte Carlo ray tracing methods like unidirectional and bidirectional path tracing. It supports depth of field and motion blur as well, but it is *not* temporally stable. The filter is based on a convolutional neural network (CNN), and it aims to provide a good balance between denoising performance and quality. The filter comes with a set of pre-trained CNN models that work well with a wide range of ray tracing based renderers and noise levels.
 
-It accepts either a low dynamic range (LDR) or high dynamic range (HDR) color image as input. Optionally, it also accepts auxiliary *feature* images, e.g. albedo and normal, which improve the denoising quality, preserving more details in the image.
+It accepts either a low dynamic range (LDR) or high dynamic range (HDR) color image as input. Optionally, it also accepts auxiliary *feature* images, e.g. albedo and normal, which improve the denoising quality, preserving more details in the image.
 
 The ``RT`` filter has certain limitations regarding the supported input images. Most notably, it cannot denoise images that were not rendered with ray tracing. Another important limitation is related to anti-aliasing filters. Most renderers use a high-quality pixel reconstruction filter instead of a trivial box filter to minimize aliasing artifacts (e.g. Gaussian, Blackman-Harris). The ``RT`` filter does support such pixel filters but only if implemented with importance sampling. Weighted pixel sampling (sometimes called *splatting*) introduces correlation between neighboring pixels, which causes the denoising to fail (the noise will not be filtered), thus it is not supported.
 
@@ -370,35 +370,43 @@ The filter can be created by passing ``"RT"`` to the ``oidnNewFilter`` function 
 
 .. table:: Parameters supported by the ``RT`` filter.
 
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Type      | Format | Name        | Default | Description                                                                                                                                                                                                                                                                                |
-   +===========+========+=============+=========+============================================================================================================================================================================================================================================================================================+
-   | Image     | float3 | color       |         | input color image (LDR values in [0, 1] or HDR values in [0, +∞), 3 channels)                                                                                                                                                                                                              |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Image     | float3 | albedo      |         | input feature image containing the albedo (values in [0, 1], 3 channels) of the first hit per pixel; *optional*                                                                                                                                                                            |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Image     | float3 | normal      |         | input feature image containing the shading normal (world-space or view-space, arbitrary length, values in (−∞, +∞), 3 channels) of the first hit per pixel; *optional*, requires setting the albedo image too                                                                              |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Image     | float3 | output      |         | output color image (3 channels); it can be one of the input images                                                                                                                                                                                                                         |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Data      |        | weights     |         | trained model weights blob; *optional*                                                                                                                                                                                                                                                     |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | bool      |        | hdr         | false   | whether the color is HDR                                                                                                                                                                                                                                                                   |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | float     |        | hdrScale    | NaN     | HDR color values are interpreted such that, multiplied by this scale, a value of 1 corresponds to a luminance level of 100 cd/m² (this affects the quality of the output but the output color values will *not* be scaled); if set to NaN, the scale is computed automatically (*default*) |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | bool      |        | srgb        | false   | whether the color is encoded with the sRGB (or 2.2 gamma) curve (LDR only) or is linear; the output will be encoded with the same curve                                                                                                                                                    |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | int       |        | maxMemoryMB | 6000    | approximate maximum amount of scratch memory to use in megabytes (actual memory usage may be higher); limiting memory usage may cause slower denoising due to internally splitting the image into overlapping tiles, but cannot cause the denoising to fail                                |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | const int |        | alignment   |         | when manually denoising the image in tiles, the tile size and offsets should be multiples of this amount of pixels to avoid artifacts; note that manual tiled denoising of HDR images is supported *only* when hdrScale is set by the user                                                 |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | const int |        | overlap     |         | when manually denoising the image in tiles, the tiles should overlap by this amount of pixels                                                                                                                                                                                              |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Type      | Format | Name        | Default | Description                                                                                                                                                                                                                                                                                                                                                                    |
+   +===========+========+=============+=========+================================================================================================================================================================================================================================================================================================================================================================================+
+   | Image     | float3 | color       |         | input color image (RGB, LDR values in [0, 1] or HDR values in [0, +∞), values being interpreted such that, after scaling with the inputScale parameter, a value of 1 corresponds to a luminance level of 100 cd/m²)                                                                                                                                                            |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Image     | float3 | albedo      |         | input feature image containing the albedo (RGB, values in [0, 1]) of the first hit per pixel; *optional*                                                                                                                                                                                                                                                                       |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Image     | float3 | normal      |         | input feature image containing the shading normal (3D world-space or view-space vector with arbitrary length, values in (−∞, +∞)) of the first hit per pixel; *optional*, requires setting the albedo image too                                                                                                                                                                |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Image     | float3 | output      |         | output image; it can be one of the input images                                                                                                                                                                                                                                                                                                                                |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | bool      |        | hdr         | false   | whether the color is HDR                                                                                                                                                                                                                                                                                                                                                       |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | bool      |        | srgb        | false   | whether the color is encoded with the sRGB (or 2.2 gamma) curve (LDR only) or is linear; the output will be encoded with the same curve                                                                                                                                                                                                                                        |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float     |        | inputScale  | NaN     | scales input color values before filtering, without scaling the output too, which can be used to map color values to the expected range, e.g. for mapping HDR values to physical units (which affects the quality of the output but *not* the range of the output values); if set to NaN, the scale is computed automatically for HDR images or set to 1 otherwise (*default*) |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Data      |        | weights     |         | trained model weights blob; *optional*                                                                                                                                                                                                                                                                                                                                         |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | int       |        | maxMemoryMB | 6000    | approximate maximum amount of scratch memory to use in megabytes (actual memory usage may be higher); limiting memory usage may cause slower denoising due to internally splitting the image into overlapping tiles, but cannot cause the denoising to fail                                                                                                                    |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | const int |        | alignment   |         | when manually denoising the image in tiles, the tile size and offsets should be multiples of this amount of pixels to avoid artifacts; note that manual tiled denoising of HDR images is supported *only* when hdrScale is set by the user                                                                                                                                     |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | const int |        | overlap     |         | when manually denoising the image in tiles, the tiles should overlap by this amount of pixels                                                                                                                                                                                                                                                                                  |
+   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-[Example noisy color image rendered using unidirectional path tracing (64 spp). *Scene by Evermotion.*][imgMazdaColor]
+.. figure:: images/mazda_64spp_input.jpg
+   :alt: Example noisy color image rendered using unidirectional path tracing (64 spp). *Scene by Evermotion.*
+   :width: 90.0%
 
-[Example output image denoised using color and auxiliary feature images (albedo and normal).][imgMazdaDenoised]
+   Example noisy color image rendered using unidirectional path tracing (64 spp). *Scene by Evermotion.*
+
+.. figure:: images/mazda_64spp_oidn.jpg
+   :alt: Example output image denoised using color and auxiliary feature images (albedo and normal).
+   :width: 90.0%
+
+   Example output image denoised using color and auxiliary feature images (albedo and normal).
 
 Using auxiliary feature images like albedo and normal helps preserving fine details and textures in the image thus can significantly improve denoising quality. These images should typically contain feature values for the first hit (i.e. the surface which is directly visible) per pixel. This works well for most surfaces but does not provide any benefits for reflections and objects visible through transparent surfaces (compared to just using the color as input). However, in certain cases this issue can be fixed by storing feature values for a subsequent hit (i.e. the reflection and/or refraction) instead of the first hit. For example, it usually works well to follow perfect specular (*delta*) paths and store features for the first diffuse or glossy surface hit instead (e.g. for perfect specular dielectrics and mirrors). This can greatly improve the quality of reflections and transmission. We will describe this approach in more detail in the following subsections.
 
@@ -411,9 +419,17 @@ The albedo image is the feature image that usually provides the biggest quality 
 
 For simple matte surfaces this means using the diffuse color/texture as the albedo. For other, more complex surfaces it is not always obvious what is the best way to compute the albedo, but the denoising filter is flexibile to a certain extent and works well with differently computed albedos. Thus it is not necessary to compute the strict, exact albedo values but must be always between 0 and 1.
 
-[Example albedo image obtained using the first hit. Note that the albedos of all transparent surfaces are 1.][imgMazdaAlbedoFirstHit]
+.. figure:: images/mazda_firsthit_512spp_albedo.jpg
+   :alt: Example albedo image obtained using the first hit. Note that the albedos of all transparent surfaces are 1.
+   :width: 90.0%
 
-[Example albedo image obtained using the first diffuse or glossy (non-delta) hit. Note that the albedos of perfect specular (delta) transparent surfaces are computed as the Fresnel blend of the reflected and transmitted albedos.][imgMazdaAlbedoNonDeltaHit]
+   Example albedo image obtained using the first hit. Note that the albedos of all transparent surfaces are 1.
+
+.. figure:: images/mazda_nondeltahit_512spp_albedo.jpg
+   :alt: Example albedo image obtained using the first diffuse or glossy (non-delta) hit. Note that the albedos of perfect specular (delta) transparent surfaces are computed as the Fresnel blend of the reflected and transmitted albedos.
+   :width: 90.0%
+
+   Example albedo image obtained using the first diffuse or glossy (non-delta) hit. Note that the albedos of perfect specular (delta) transparent surfaces are computed as the Fresnel blend of the reflected and transmitted albedos.
 
 For metallic surfaces the albedo should be either the reflectivity at normal incidence (e.g. from the artist friendly metallic Fresnel model) or the average reflectivity; or if these are constant (not textured) or unknown, the albedo can be simply 1 as well.
 
@@ -426,18 +442,26 @@ Normal
 
 The normal image should contain the shading normals of the surfaces either in world-space or view-space. It is recommended to include normal maps to preserve as much detail as possible.
 
-Just like any other input image, the normal image should be anti-aliased (i.e. by accumulating the normalized normals per pixel). The final accumulated normals do not have to be normalized but must be in a range symmetric about 0 (i.e. normals mapped to [0, 1] are *not* acceptable and must be remapped to e.g. [−1, 1]).
+Just like any other input image, the normal image should be anti-aliased (i.e. by accumulating the normalized normals per pixel). The final accumulated normals do not have to be normalized but must be in a range symmetric about 0 (i.e. normals mapped to [0, 1] are *not* acceptable and must be remapped to e.g. [−1, 1]).
 
 Similar to the albedo, the normal can be stored for either the first or a subsequent hit (if the first hit has a perfect specular/delta BSDF).
 
-[Example normal image obtained using the first hit (the values are actually in [−1, 1] but were mapped to [0, 1] for illustration purposes).][imgMazdaNormalFirstHit]
+.. figure:: images/mazda_firsthit_512spp_normal.jpg
+   :alt: Example normal image obtained using the first hit (the values are actually in [−1, 1] but were mapped to [0, 1] for illustration purposes).
+   :width: 90.0%
 
-[Example normal image obtained using the first diffuse or glossy (non-delta) hit. Note that the normals of perfect specular (delta) transparent surfaces are computed as the Fresnel blend of the reflected and transmitted normals.][imgMazdaNormalNonDeltaHit]
+   Example normal image obtained using the first hit (the values are actually in [−1, 1] but were mapped to [0, 1] for illustration purposes).
+
+.. figure:: images/mazda_nondeltahit_512spp_normal.jpg
+   :alt: Example normal image obtained using the first diffuse or glossy (non-delta) hit. Note that the normals of perfect specular (delta) transparent surfaces are computed as the Fresnel blend of the reflected and transmitted normals.
+   :width: 90.0%
+
+   Example normal image obtained using the first diffuse or glossy (non-delta) hit. Note that the normals of perfect specular (delta) transparent surfaces are computed as the Fresnel blend of the reflected and transmitted normals.
 
 Weights
 ^^^^^^^
 
-Instead of using the built-in trained models for filtering, it is also possible to specify user-trained models at runtime. This can be achieved by passing the model *weights* blob corresponding to the specified set of features and other filter parameters, produced by the included training tool. See Section [Training] for details.
+Instead of using the built-in trained models for filtering, it is also possible to specify user-trained models at runtime. This can be achieved by passing the model *weights* blob corresponding to the specified set of features and other filter parameters, produced by the included training tool. See Section `Training <#training>`__ for details.
 
 RTLightmap
 ~~~~~~~~~~
@@ -448,20 +472,20 @@ The filter can be created by passing ``"RTLightmap"`` to the ``oidnNewFilter`` f
 
 .. table:: Parameters supported by the ``RTLightmap`` filter.
 
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Type      | Format | Name        | Default | Description                                                                                                                                                                                      |
-   +===========+========+=============+=========+==================================================================================================================================================================================================+
-   | Image     | float3 | color       |         | input color image (HDR values in [0, +∞), 3 channels)                                                                                                                                            |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Image     | float3 | output      |         | output color image (3 channels); it can be one of the input images                                                                                                                               |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Data      |        | weights     |         | trained model weights blob; *optional*                                                                                                                                                           |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | float     |        | hdrScale    | NaN     | HDR color values are interpreted such that, multiplied by this scale, a value of 1 corresponds to a luminance level of 100 cd/m²; if set to NaN, the scale is computed automatically (*default*) |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | int       |        | maxMemoryMB | 6000    | approximate maximum amount of scratch memory to use in megabytes (actual memory usage may be higher)                                                                                             |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | const int |        | alignment   |         | when manually denoising the image in tiles, the tile size and offsets should be multiples of this amount of pixels                                                                               |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | const int |        | overlap     |         | when manually denoising the image in tiles, the tiles should overlap by this amount of pixels                                                                                                    |
-   +-----------+--------+-------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Type      | Format | Name        | Default | Description                                                                                                                                                                                                                                                                                                                               |
+   +===========+========+=============+=========+===========================================================================================================================================================================================================================================================================================================================================+
+   | Image     | float3 | color       |         | input color image (RGB, HDR values in [0, +∞), values being interpreted such that, after scaling with the inputScale parameter, a value of 1 corresponds to a luminance level of 100 cd/m²)                                                                                                                                               |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Image     | float3 | output      |         | output image; it can be one of the input images                                                                                                                                                                                                                                                                                           |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float     |        | inputScale  | NaN     | scales input color values before filtering, without scaling the output too, which can be used to map color values to the expected range, e.g. for mapping HDR values to physical units (which affects the quality of the output but *not* the range of the output values); if set to NaN, the scale is computed automatically (*default*) |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Data      |        | weights     |         | trained model weights blob; *optional*                                                                                                                                                                                                                                                                                                    |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | int       |        | maxMemoryMB | 6000    | approximate maximum amount of scratch memory to use in megabytes (actual memory usage may be higher)                                                                                                                                                                                                                                      |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | const int |        | alignment   |         | when manually denoising the image in tiles, the tile size and offsets should be multiples of this amount of pixels                                                                                                                                                                                                                        |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | const int |        | overlap     |         | when manually denoising the image in tiles, the tiles should overlap by this amount of pixels                                                                                                                                                                                                                                             |
+   +-----------+--------+-------------+---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
