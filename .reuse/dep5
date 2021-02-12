@@ -55,7 +55,7 @@ Files: source/elements/oneVPL/source/snippets/*.c
 Copyright: 2020 Intel Corporation
 License: MIT
 
-Files: source/elements/oneART/source/images/*.png source/elements/oneART/source/images/*.jpg source/elements/oneART/source/images/*.pdf source/elements/oneART/source/images/*.ico source/elements/oneART/source/images/*.fig
+Files: source/elements/oneART/source/images/*.png source/elements/oneART/source/images/*.jpg source/elements/oneART/source/images/*.pdf source/elements/oneART/source/images/*.ico source/elements/oneART/source/images/*.fig source/elements/oneART/source/images/*.ico source/elements/oneART/source/images/*.svg
 Copyright: 2020 Intel Corporation
 License: CC-BY-4.0
 
