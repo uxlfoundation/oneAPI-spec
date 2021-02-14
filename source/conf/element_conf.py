@@ -104,10 +104,12 @@ htmlhelp_basename = project + '-spec'  # noqa: F821
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
+pro = project.translate(project.maketrans(' ', '-'))  # noqa: F821
+file_name = f'{pro}-spec.tex'
 latex_documents = [
     (
         master_doc,
-        project + '-spec.tex',  # noqa: F821
+        file_name,
         project + u' Specification',  # noqa: F821
         u'Intel',
         'manual',

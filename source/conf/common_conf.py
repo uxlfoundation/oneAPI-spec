@@ -8,6 +8,9 @@ import sys
 from os.path import abspath, join
 
 import docutils
+from pygments import token
+from pygments.lexer import RegexLexer
+from sphinx.highlighting import lexers
 
 # oneDAL uses custom API generator based on `breathe`.
 # Extend path to let Sphinx find `dalapi` module:
@@ -23,11 +26,12 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
-    'sphinx.ext.imgconverter',
+    #    'sphinx.ext.imgconverter',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.graphviz',
     'sphinxcontrib.spelling',
+    'sphinxcontrib.inkscapeconverter',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'breathe',
@@ -149,6 +153,23 @@ def supsub_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     node2 = docutils.nodes.substitution_reference(refname=text)
     node += [node2]
     return [node], []
+
+
+class BCLLexer(RegexLexer):
+    name = 'regexp'
+
+    tokens = {
+        'root': [
+            (r'MyKeyword', token.Keyword),
+            (r'[a-zA-Z]', token.Name),
+            (r'\s', token.Text),
+        ]
+    }
+
+
+# oneart/oidn uses regexp code tag so make a faker lexer to avoid
+# warnings
+lexers['regexp'] = BCLLexer(startinline=True)
 
 
 def setup(app):
