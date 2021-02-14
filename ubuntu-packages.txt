@@ -2,7 +2,7 @@ doxygen
 enchant
 git
 graphviz
-imagemagick
+inkscape
 latexmk
 texlive-fonts-extra
 texlive-fonts-recommended
