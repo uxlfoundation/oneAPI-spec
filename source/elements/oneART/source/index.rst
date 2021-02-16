@@ -8,9 +8,6 @@
 Advanced Ray Tracing
 ====================
 
-Overview
---------
-
 .. include:: overview.inc.rst
 
 .. toctree::

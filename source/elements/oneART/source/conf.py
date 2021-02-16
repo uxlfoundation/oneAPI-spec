@@ -31,3 +31,11 @@ exclude_patterns = ['nested-*.rst',
                     '**/*.inc.rst',
                     '*.inc.rst',
 ]
+
+html_theme_options = {
+    'repository_url': 'https://github.com/oneapi-src/oneapi-spec',
+    'path_to_docs': 'source/elements/oneART/source',
+    'use_issues_button': True,
+    'use_edit_page_button': True,
+    'repository_branch': 'main',
+}
