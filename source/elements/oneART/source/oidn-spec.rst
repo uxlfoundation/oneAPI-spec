@@ -1,7 +1,7 @@
-Intel Open Image Denoise API
-============================
+Open Image Denoise API
+======================
 
-Intel Open Image Denoise provides a C99 API (also compatible with C++) and a C++11 wrapper API as well. For simplicity, this document mostly refers to the C99 version of the API.
+Open Image Denoise provides a C99 API (also compatible with C++) and a C++11 wrapper API as well. For simplicity, this document mostly refers to the C99 version of the API.
 
 The API is designed in an object-oriented manner, e.g. it contains device objects (``OIDNDevice`` type), buffer objects (``OIDNBuffer`` type), and filter objects (``OIDNFilter`` type). All objects are reference-counted, and handles can be released by calling the appropriate release function (e.g. ``oidnReleaseDevice``) or retained by incrementing the reference count (e.g. ``oidnRetainDevice``).
 
@@ -20,7 +20,7 @@ To have a quick overview of the C99 and C++11 APIs, see the following simple exa
 
    #include <OpenImageDenoise/oidn.h>
    ...
-   // Create an Intel Open Image Denoise device
+   // Create an Open Image Denoise device
    OIDNDevice device = oidnNewDevice(OIDN_DEVICE_TYPE_DEFAULT);
    oidnCommitDevice(device);
 
@@ -55,7 +55,7 @@ To have a quick overview of the C99 and C++11 APIs, see the following simple exa
 
    #include <OpenImageDenoise/oidn.hpp>
    ...
-   // Create an Intel Open Image Denoise device
+   // Create an Open Image Denoise device
    oidn::DeviceRef device = oidn::newDevice();
    device.commit();
 
@@ -79,7 +79,7 @@ To have a quick overview of the C99 and C++11 APIs, see the following simple exa
 Device
 ------
 
-Intel Open Image Denoise supports a device concept, which allows different components of the application to use the Open Image Denoise API without interfering with each other. An application first needs to create a device with
+Open Image Denoise supports a device concept, which allows different components of the application to use the Open Image Denoise API without interfering with each other. An application first needs to create a device with
 
 ::
 
@@ -134,7 +134,7 @@ Parameters supported by all devices.
 
 Additional parameters supported only by CPU devices.
 
-Note that the CPU device heavily relies on setting the thread affinities to achieve optimal performance, so it is highly recommended to leave this option enabled. However, this may interfere with the application if that also sets the thread affinities, potentially causing performance degradation. In such cases, the recommended solution is to either disable setting the affinities in the application or in Intel Open Image Denoise, or to always set/reset the affinities before/after each parallel region in the application (e.g., if using TBB, with ``tbb::task_arena`` and ``tbb::task_scheduler_observer``).
+Note that the CPU device heavily relies on setting the thread affinities to achieve optimal performance, so it is highly recommended to leave this option enabled. However, this may interfere with the application if that also sets the thread affinities, potentially causing performance degradation. In such cases, the recommended solution is to either disable setting the affinities in the application or in Open Image Denoise, or to always set/reset the affinities before/after each parallel region in the application (e.g., if using TBB, with ``tbb::task_arena`` and ``tbb::task_scheduler_observer``).
 
 Once parameters are set on the created device, the device must be committed with
 
@@ -148,7 +148,7 @@ This device can then be used to construct further objects, such as buffers and f
 
    void oidnReleaseDevice(OIDNDevice device);
 
-Note that Intel Open Image Denoise uses reference counting for all object types, so this function decreases the reference count of the device, and if the count reaches 0 the device will automatically get deleted. It is also possible to increase the reference count by calling
+Note that Open Image Denoise uses reference counting for all object types, so this function decreases the reference count of the device, and if the count reaches 0 the device will automatically get deleted. It is also possible to increase the reference count by calling
 
 ::
 
@@ -183,7 +183,7 @@ to get notified when errors occur. Only a single callback function can be regist
 
 When the device construction fails, ``oidnNewDevice`` returns ``NULL`` as device. To detect the error code of a such failed device construction, pass ``NULL`` as device to the ``oidnGetDeviceError`` function. For all other invocations of ``oidnGetDeviceError``, a proper device handle must be specified.
 
-The following errors are currently used by Intel Open Image Denoise:
+The following errors are currently used by Open Image Denoise:
 
 =============================== ==========================================
 Name                            Description
@@ -202,7 +202,7 @@ Possible error codes, i.e., valid constants of type ``OIDNError``.
 Buffer
 ------
 
-Large data like images can be passed to Intel Open Image Denoise either via pointers to memory allocated and managed by the user (this is the recommended, often easier and more efficient approach, if supported by the device) or by creating buffer objects (supported by all devices). To create a new data buffer with memory allocated and owned by the device, holding ``byteSize`` number of bytes, use
+Large data like images can be passed to Open Image Denoise either via pointers to memory allocated and managed by the user (this is the recommended, often easier and more efficient approach, if supported by the device) or by creating buffer objects (supported by all devices). To create a new data buffer with memory allocated and owned by the device, holding ``byteSize`` number of bytes, use
 
 ::
 
@@ -273,7 +273,7 @@ Supported data formats, i.e., valid constants of type ``OIDNFormat``.
 Filter
 ------
 
-Filters are the main objects in Intel Open Image Denoise that are responsible for the actual denoising. The library ships with a collection of filters which are optimized for different types of images and use cases. To create a filter object, call
+Filters are the main objects in Open Image Denoise that are responsible for the actual denoising. The library ships with a collection of filters which are optimized for different types of images and use cases. To create a filter object, call
 
 ::
 
@@ -338,7 +338,7 @@ Filters support a progress monitor callback mechanism that can be used to report
                                              OIDNProgressMonitorFunction func,
                                              void* userPtr);
 
-Only a single callback function can be registered per filter, and further invocations overwrite the previously set callback function. Passing ``NULL`` as function pointer disables the registered callback function. Once registered, Intel Open Image Denoise will invoke the callback function multiple times during filter operations, by passing the payload as set at registration time (``userPtr`` argument), and a ``double`` in the range [0, 1] which estimates the progress of the operation (``n`` argument). When returning ``true`` from the callback function, Intel Open Image Denoise will continue the filter operation normally. When returning ``false``, the library will cancel the filter operation with the ``OIDN_ERROR_CANCELLED`` error code.
+Only a single callback function can be registered per filter, and further invocations overwrite the previously set callback function. Passing ``NULL`` as function pointer disables the registered callback function. Once registered, Open Image Denoise will invoke the callback function multiple times during filter operations, by passing the payload as set at registration time (``userPtr`` argument), and a ``double`` in the range [0, 1] which estimates the progress of the operation (``n`` argument). When returning ``true`` from the callback function, Open Image Denoise will continue the filter operation normally. When returning ``false``, the library will cancel the filter operation with the ``OIDN_ERROR_CANCELLED`` error code.
 
 After setting all necessary parameters for the filter, the changes must be commmitted by calling
 
@@ -356,7 +356,7 @@ Finally, an image can be filtered by executing the filter with
 
 which will read the input image data from the specified buffers and produce the denoised output image.
 
-In the following we describe the different filters that are currently implemented in Intel Open Image Denoise.
+In the following we describe the different filters that are currently implemented in Open Image Denoise.
 
 RT
 ~~
@@ -490,7 +490,7 @@ Parameters supported by the ``RTLightmap`` filter.
 Training
 ========
 
-The Intel Open Image Denoise source distribution includes a Python-based neural network training toolkit (located in the ``training`` directory), which can be used to train the denoising filter models with image datasets provided by the user. This is an advanced feature of the library which usage requires some background knowledge of machine learning and basic familiarity with deep learning frameworks and toolkits (e.g. PyTorch or TensorFlow, TensorBoard).
+The Open Image Denoise source distribution includes a Python-based neural network training toolkit (located in the ``training`` directory), which can be used to train the denoising filter models with image datasets provided by the user. This is an advanced feature of the library which usage requires some background knowledge of machine learning and basic familiarity with deep learning frameworks and toolkits (e.g. PyTorch or TensorFlow, TensorBoard).
 
 The training toolkit consists of the following command-line scripts:
 
