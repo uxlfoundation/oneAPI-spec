@@ -72,11 +72,6 @@ If you agree to the above, every contribution of your feedback
 must include the following line using your real name and email
 address: Signed-off-by: Joe Smith joe.smith@email.com
 
------------
-Style Guide
------------
-
-See the `oneAPI Specification Style Guide <style-guide.rst>`_ for information.
 
 ----------------------------------
 Edit with the GitHub Web Interface
