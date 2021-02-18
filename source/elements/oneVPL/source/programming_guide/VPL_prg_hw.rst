@@ -30,6 +30,16 @@ This approach simplifies the oneVPL initialization, making calls to the
 or :cpp:func:`MFXVideoVPP_QueryIOSurf` functions optional. See
 :ref:`Internal Memory Management <internal-mem-manage>`.
 
+.. note:: Applications can set device handle before session creation through :cpp:func:`MFXSetConfigFilterProperty` 
+          like shown in the code below:
+
+.. literalinclude:: ../snippets/prg_hw.cpp
+   :language: c++
+   :start-after: /*beg3*/
+   :end-before: /*end3*/
+   :lineno-start: 1
+
+
 ----------------------------------------------
 Work with Hardware Acceleration in Legacy Mode
 ----------------------------------------------

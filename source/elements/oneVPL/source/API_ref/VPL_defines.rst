@@ -50,9 +50,6 @@ API
 .. doxygendefine:: MFX_VERSION_MINOR
    :project: oneVPL
 
-.. doxygendefine:: MFX_VERSION_NEXT
-   :project: oneVPL
-
 .. doxygendefine:: MFX_VPPDESCRIPTION_VERSION
    :project: oneVPL
 

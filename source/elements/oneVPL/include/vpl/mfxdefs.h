@@ -8,25 +8,18 @@
 #define __MFXDEFS_H__
 
 #define MFX_VERSION_MAJOR 2
-#define MFX_VERSION_MINOR 1
-
-// MFX_VERSION_NEXT is always +1 from last public release
-// may be enforced by MFX_VERSION_USE_LATEST define
-// if MFX_VERSION_USE_LATEST is defined  MFX_VERSION is ignored
-
-#define MFX_VERSION_NEXT (MFX_VERSION_MAJOR * 1000 + MFX_VERSION_MINOR + 1)
+#define MFX_VERSION_MINOR 2
 
 // MFX_VERSION - version of API that 'assumed' by build may be provided externally
 // if it omitted then latest stable API derived from Major.Minor is assumed
 
 
 #if !defined(MFX_VERSION)
-  #if defined(MFX_VERSION_USE_LATEST)
-    #define MFX_VERSION MFX_VERSION_NEXT
-  #else
     #define MFX_VERSION (MFX_VERSION_MAJOR * 1000 + MFX_VERSION_MINOR)
-  #endif
 #else
+  #undef MFX_VERSION_MAJOR
+  #define MFX_VERSION_MAJOR ((MFX_VERSION) / 1000)
+  
   #undef MFX_VERSION_MINOR
   #define MFX_VERSION_MINOR ((MFX_VERSION) % 1000)
 #endif
@@ -82,9 +75,6 @@ extern "C"
     #error Unknown packing
 #endif
 
-  #define __INT64   long long
-  #define __UINT64  unsigned long long
-
 #ifdef _WIN32
   #define MFX_CDECL __cdecl
   #define MFX_STDCALL __stdcall
@@ -110,8 +100,8 @@ typedef int                 mfxL32;        /*!< Signed integer, 32 bit type. */
 #endif
 typedef float               mfxF32;        /*!< Single-precision floating point, 32 bit type. */
 typedef double              mfxF64;        /*!< Double-precision floating point, 64 bit type. */
-typedef __UINT64            mfxU64;        /*!< Unsigned integer, 64 bit type. */
-typedef __INT64             mfxI64;        /*!< Signed integer, 64 bit type. */
+typedef unsigned long long  mfxU64;        /*!< Unsigned integer, 64 bit type. */
+typedef long long           mfxI64;        /*!< Signed integer, 64 bit type. */
 typedef void*               mfxHDL;        /*!< Handle type. */
 typedef mfxHDL              mfxMemId;      /*!< Memory ID type. */
 typedef void*               mfxThreadTask; /*!< Thread task type. */

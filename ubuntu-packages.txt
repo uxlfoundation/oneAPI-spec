@@ -4,6 +4,7 @@ git
 graphviz
 inkscape
 latexmk
+plantuml
 texlive-fonts-extra
 texlive-fonts-recommended
 texlive-latex-base

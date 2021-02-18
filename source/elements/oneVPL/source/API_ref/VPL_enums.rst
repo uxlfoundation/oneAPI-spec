@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -151,6 +151,8 @@ specify the desired location.
 .. doxygenenumvalue:: MFX_CHROMA_SITING_HORIZONTAL_CENTER
    :project: oneVPL
 
+.. _codec-format-fourcc:
+
 -----------------
 CodecFormatFourCC
 -----------------
@@ -251,6 +253,18 @@ H.264 Level 5-5.2
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_LEVEL_AVC_52
+   :project: oneVPL
+
+H.264 Level 6-6.2
+-----------------
+
+.. doxygenenumvalue:: MFX_LEVEL_AVC_6
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AVC_61
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_LEVEL_AVC_62
    :project: oneVPL
 
 MPEG2 Levels
@@ -793,6 +807,9 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_DENOISE
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_VPP_DENOISE2
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_SCENE_ANALYSIS
    :project: oneVPL
 
@@ -937,12 +954,6 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME
    :project: oneVPL
 
-.. doxygenenumvalue:: MFX_EXTBUFF_MULTI_FRAME_PARAM
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_EXTBUFF_MULTI_FRAME_CONTROL
-   :project: oneVPL
-
 .. doxygenenumvalue:: MFX_EXTBUFF_ENCODED_UNITS_INFO
    :project: oneVPL
 
@@ -996,6 +1007,10 @@ extended buffers or video processing algorithm identifiers.
 
 .. doxygenenumvalue:: MFX_EXTBUFF_CROPS
    :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_AV1_FILM_GRAIN_PARAM
+   :project: oneVPL
+
 
 ----------------
 ExtMemBufferType
@@ -1591,6 +1606,15 @@ The MirroringType enumerator itemizes mirroring types.
 .. doxygenenumvalue:: MFX_MIRRORING_VERTICAL
    :project: oneVPL
 
+-----------
+DenoiseMode
+-----------
+
+The mfxDenoiseMode enumerator itemizes denoise modes.
+
+.. doxygenenum:: mfxDenoiseMode
+   :project: oneVPL
+
 ---------------
 MPEG-2 Profiles
 ---------------
@@ -1924,6 +1948,18 @@ The ScalingMode enumerator itemizes variants of scaling filter implementation.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_SCALING_MODE_QUALITY
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_SCALING_MODE_VENDOR
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_SCALING_MODE_INTEL_GEN_COMPUTE
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_SCALING_MODE_INTEL_GEN_VDBOX
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_SCALING_MODE_INTEL_GEN_VEBOX
    :project: oneVPL
 
 ------------

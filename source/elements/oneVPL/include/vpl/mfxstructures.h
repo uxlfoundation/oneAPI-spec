@@ -1,5 +1,5 @@
 /*############################################################################
-  # Copyright (C) 2018-2020 Intel Corporation
+  # Copyright (C) 2018-2021 Intel Corporation
   #
   # SPDX-License-Identifier: MIT
   ############################################################################*/
@@ -228,7 +228,7 @@ enum {
 };
 
 MFX_PACK_BEGIN_USUAL_STRUCT()
-/*! Specifies "pixel" in Y410 color format */
+/*! Specifies "pixel" in Y410 color format. */
 typedef struct
 {
     mfxU32 U : 10; /*!< U component. */
@@ -236,6 +236,17 @@ typedef struct
     mfxU32 V : 10; /*!< V component. */
     mfxU32 A :  2; /*!< A component. */
 } mfxY410;
+MFX_PACK_END()
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*! Specifies "pixel" in Y416 color format. */
+typedef struct
+{
+    mfxU32 U : 16; /*!< U component. */
+    mfxU32 Y : 16; /*!< Y component. */
+    mfxU32 V : 16; /*!< V component. */
+    mfxU32 A : 16; /*!< A component. */
+} mfxY416;
 MFX_PACK_END()
 
 MFX_PACK_BEGIN_USUAL_STRUCT()
@@ -303,6 +314,7 @@ typedef struct {
         mfxU16  *U16;   /*!< U16 channel. */
         mfxU8   *G;     /*!< G channel. */
         mfxY410 *Y410;  /*!< T410 channel for Y410 format (merged AVYU). */
+        mfxY416 *Y416;  /*!< This format is a packed 16-bit representation that includes 16 bits of alpha. */
     };
     union {
         mfxU8   *Cr;    /*!< Cr channel. */
@@ -881,6 +893,12 @@ enum {
     MFX_LEVEL_AVC_51                        =51,
     MFX_LEVEL_AVC_52                        =52,
     /*! @} */
+    /*! @{ */
+    /* H.264 level 6-6.2 */
+    MFX_LEVEL_AVC_6                         =60,
+    MFX_LEVEL_AVC_61                        =61,
+    MFX_LEVEL_AVC_62                        =62,
+        /*! @} */
 
     /*! @{ */
     /* MPEG2 Profiles. */
@@ -1438,31 +1456,6 @@ enum {
                                 DPB by a sliding window. */
 };
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-
-/* QuantScaleType */
-enum {
-    MFX_MPEG2_QUANT_SCALE_TYPE_DEFAULT    = 0,
-    MFX_MPEG2_QUANT_SCALE_TYPE_LINEAR     = 1, /* q_scale_type = 0 */
-    MFX_MPEG2_QUANT_SCALE_TYPE_NONLINEAR  = 2  /* q_scale_type = 1 */
-};
-
-/* IntraVLCFormat */
-enum {
-    MFX_MPEG2_INTRA_VLC_FORMAT_DEFAULT    = 0,
-    MFX_MPEG2_INTRA_VLC_FORMAT_B14        = 1, /* use table B.14 */
-    MFX_MPEG2_INTRA_VLC_FORMAT_B15        = 2  /* use table B.15 */
-};
-
-/* ScanType */
-enum {
-    MFX_MPEG2_SCAN_TYPE_DEFAULT   = 0,
-    MFX_MPEG2_SCAN_TYPE_ZIGZAG    = 1, /* alternate_scan = 0 */
-    MFX_MPEG2_SCAN_TYPE_ALTERNATE = 2  /* alternate_scan = 1 */
-};
-
-#endif
-
 MFX_PACK_BEGIN_USUAL_STRUCT()
 /*!
    Used with mfxExtCodingOption and mfxExtCodingOption2 structures to specify additional options for encoding.
@@ -1569,12 +1562,7 @@ Values are in the 1 to 51 range,
        See the CodingOptionValue enumerator for values of this option.
     */
     mfxU16      MotionVectorsOverPicBoundaries;
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxU16      Log2MaxMvLengthHorizontal;      /* 0..16 */
-    mfxU16      Log2MaxMvLengthVertical;        /* 0..16 */
-#else
     mfxU16      reserved1[2];
-#endif
 
     mfxU16      ScenarioInfo; /*!< Provides a hint to encoder about the scenario for the encoding session. See the ScenarioInfo enumerator for values of this option. */
     mfxU16      ContentInfo;  /*!< Provides a hint to encoder about the content for the encoding session. See the ContentInfo enumerator for values of this option. */
@@ -1585,12 +1573,7 @@ Values are in the 1 to 51 range,
        unless application provided mfxExtPredWeightTable for this frame. See the CodingOptionValue enumerator for values of this option.
     */
     mfxU16      FadeDetection;
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxI16      DeblockingAlphaTcOffset;  /* -12..12 (slice_alpha_c0_offset_div2 << 1) */
-    mfxI16      DeblockingBetaOffset;     /* -12..12 (slice_beta_offset_div2 << 1) */
-#else
     mfxU16      reserved2[2];
-#endif
     /*!
        Set this flag to OFF to make HEVC encoder use regular P-frames instead of GPB. See the CodingOptionValue enumerator for values of this option.
     */
@@ -1627,11 +1610,7 @@ Values are in the 1 to 51 range,
     mfxU16      NumRefActiveBL0[8]; /*!< Max number of active references for B-frames in reference picture list 0. Array index is pyramid layer. */
     mfxU16      NumRefActiveBL1[8]; /*!< Max number of active references for B-frames in reference picture list 1. Array index is pyramid layer. */
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxU16      ConstrainedIntraPredFlag;
-#else
     mfxU16      reserved6;
-#endif
     /*!
        For HEVC if this option is turned ON, the transform_skip_enabled_flag will be set to 1 in PPS. OFF specifies that transform_skip_enabled_flag will be set to 0.
     */
@@ -1677,13 +1656,7 @@ Values are in the 1 to 51 range,
        MFX_CODINGOPTION_ON forces encoder to favor quality and MFX_CODINGOPTION_OFF forces encoder to favor performance.
     */
     mfxU16      RepartitionCheckEnable;
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxU16      QuantScaleType;            /* For MPEG2, specifies mapping between quantiser_scale_code and quantiser_scale (see QuantScaleType enum). */
-    mfxU16      IntraVLCFormat;            /* For MPEG2, specifies which table shall be used for coding of DCT coefficients of intra macroblocks (see IntraVLCFormat enum) */
-    mfxU16      ScanType;                  /* For MPEG2, specifies transform coefficients scan pattern (see ScanType enum) */
-#else
     mfxU16      reserved5[3];
-#endif
     mfxU16      EncodedUnitsInfo;          /*!< Set this flag to ON to make encoded units info available in mfxExtEncodedUnitsInfo. */
     /*!
        If this flag is set to ON, the HEVC encoder uses the NAL unit type provided by the application in the mfxEncodeCtrl::MfxNalUnitType field.
@@ -1697,7 +1670,15 @@ Values are in the 1 to 51 range,
        mfxFrameData::FrameOrder for correct operation of LTR.
     */
     mfxU16      ExtBrcAdaptiveLTR;         /* Tri-state option for ExtBRC. */
-    mfxU16      reserved[163];
+    /*!
+       If this flag is set to ON, encoder adaptively selects one of implementation-defined quantization matrices for each frame.
+       Non-default quantization matrices aim to improve subjective visual quality under certain conditions.
+       Their number and definitions are API implementation specific.
+       If this flag is set to OFF, default quantization matrix is used for all frames.
+       This parameter is valid only during initialization.
+    */
+    mfxU16      AdaptiveCQM;
+    mfxU16      reserved[162];
 } mfxExtCodingOption3;
 MFX_PACK_END()
 
@@ -1764,10 +1745,11 @@ enum {
     */
     MFX_EXTBUFF_VPP_AUXDATA                     = MFX_MAKEFOURCC('A','U','X','D'),
     /*!
-       The extended buffer defines control parameters for the VPP denoise filter algorithm. See the mfxExtVPPDenoise structure for details.
+       The extended buffer defines control parameters for the VPP denoise filter algorithm. See the mfxExtVPPDenoise2 structure for details.
        The application can attach this buffer to the mfxVideoParam structure for video processing initialization.
     */
-    MFX_EXTBUFF_VPP_DENOISE                     = MFX_MAKEFOURCC('D','N','I','S'),
+    MFX_EXTBUFF_VPP_DENOISE2                    = MFX_MAKEFOURCC('D','N','I','2'),
+    MFX_EXTBUFF_VPP_DENOISE                     = MFX_MAKEFOURCC('D','N','I','S'), /*!< Deprecated in 2.2 API version.*/
     MFX_EXTBUFF_VPP_SCENE_ANALYSIS              = MFX_MAKEFOURCC('S','C','L','Y'),
     MFX_EXTBUFF_VPP_SCENE_CHANGE                = MFX_EXTBUFF_VPP_SCENE_ANALYSIS, /* Deprecated */
     /*!
@@ -1996,14 +1978,6 @@ enum {
     */
     MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME = MFX_MAKEFOURCC('D', 'C', 'V', 'S'),
     /*!
-       This extended buffer allow to specify multi-frame submission parameters.
-    */
-    MFX_EXTBUFF_MULTI_FRAME_PARAM               = MFX_MAKEFOURCC('M', 'F', 'R', 'P'),
-    /*!
-       This extended buffer allow to manage multi-frame submission in runtime.
-    */
-    MFX_EXTBUFF_MULTI_FRAME_CONTROL             = MFX_MAKEFOURCC('M', 'F', 'R', 'C'),
-    /*!
        See the mfxExtEncodedUnitsInfo structure for details.
     */
     MFX_EXTBUFF_ENCODED_UNITS_INFO              = MFX_MAKEFOURCC('E', 'N', 'U', 'I'),
@@ -2027,13 +2001,6 @@ enum {
        See the mfxExtAVCRoundingOffset structure for details.
     */
     MFX_EXTBUFF_AVC_ROUNDING_OFFSET             = MFX_MAKEFOURCC('R','N','D','O'),
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    MFX_EXTBUFF_DPB                             = MFX_MAKEFOURCC('E','D','P','B'),
-    MFX_EXTBUFF_TEMPORAL_LAYERS                 = MFX_MAKEFOURCC('T','M','P','L'),
-    MFX_EXTBUFF_AVC_SCALING_MATRIX              = MFX_MAKEFOURCC('A','V','S','M'),
-    MFX_EXTBUFF_MPEG2_QUANT_MATRIX              = MFX_MAKEFOURCC('M','2','Q','M'),
-    MFX_EXTBUFF_TASK_DEPENDENCY                 = MFX_MAKEFOURCC('S','Y','N','C'),
-#endif
     /*!
        See the mfxExtPartialBitstreamParam structure for details.
     */
@@ -2057,6 +2024,11 @@ enum {
        See the mfxExtInCrops structure for details.
     */
     MFX_EXTBUFF_CROPS = MFX_MAKEFOURCC('C', 'R', 'O', 'P'),
+    
+    /*!
+       See the mfxExtAV1FilmGrainParam structure for more details.
+    */
+    MFX_EXTBUFF_AV1_FILM_GRAIN_PARAM = MFX_MAKEFOURCC('A','1','F','G')
 
     
 };
@@ -2077,11 +2049,43 @@ MFX_PACK_END()
 MFX_PACK_BEGIN_USUAL_STRUCT()
 /*!
    A hint structure that configures the VPP denoise filter algorithm.
+   This extension buffer is deprecated. Use mfxExtVPPDenoise2 instead.
 */
 typedef struct {
     mfxExtBuffer    Header; /*!< Extension buffer header. Header.BufferId must be equal to MFX_EXTBUFF_VPP_DENOISE. */
     mfxU16  DenoiseFactor;  /*!< Indicates the level of noise to remove. Value range of 0 to 100 (inclusive).  */
 } mfxExtVPPDenoise;
+MFX_PACK_END()
+
+/*! The mfxDenoiseMode enumerator specifies the mode of denoise. */
+typedef enum {
+    MFX_DENOISE_MODE_DEFAULT    = 0,     /*!< Default denoise mode. The library selects the most appropriate denoise mode. */
+    MFX_DENOISE_MODE_VENDOR     = 1000,  /*!< The enumeration to separate common denoise mode above and vendor specific. */
+
+    MFX_DENOISE_MODE_INTEL_HVS_AUTO_BDRATE     = MFX_DENOISE_MODE_VENDOR + 1,  /*!< Indicates auto BD rate improvement in pre-processing before video encoding,
+                                                                                    ignore Strength.*/
+    MFX_DENOISE_MODE_INTEL_HVS_AUTO_SUBJECTIVE = MFX_DENOISE_MODE_VENDOR + 2,  /*!< Indicates auto subjective quality improvement in pre-processing before video encoding,
+                                                                                    ignore Strength.*/
+    MFX_DENOISE_MODE_INTEL_HVS_AUTO_ADJUST     = MFX_DENOISE_MODE_VENDOR + 3,  /*!< Indicates auto adjust subjective quality in post-processing (after decoding) for video playback,
+                                                                                    ignore Strength.*/
+    MFX_DENOISE_MODE_INTEL_HVS_PRE_MANUAL      = MFX_DENOISE_MODE_VENDOR + 4,  /*!< Indicates manual mode for pre-processing before video encoding,
+                                                                                    allow to adjust the denoise strength manually.*/
+    MFX_DENOISE_MODE_INTEL_HVS_POST_MANUAL     = MFX_DENOISE_MODE_VENDOR + 5,  /*!< Indicates manual mode for post-processing for video playback,
+                                                                                    allow to adjust the denoise strength manually.*/
+} mfxDenoiseMode;
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*!
+   A hint structure that configures the VPP denoise filter algorithm.
+*/
+typedef struct {
+    mfxExtBuffer    Header; /*!< Extension buffer header. Header.BufferId must be equal to MFX_EXTBUFF_VPP_DENOISE2. */
+    mfxDenoiseMode  Mode;   /*!< Indicates the mode of denoise. mfxDenoiseMode enumerator.  */
+    mfxU16  Strength;       /*!< Denoise strength in manaul mode. Value of 0-100 (inclusive) indicates the strength of denoise.
+                                 The strength of denoise controls degree of possible changes of pixel values; the bigger the strength
+                                 the larger the change is.  */
+    mfxU16  reserved[15];
+} mfxExtVPPDenoise2;
 MFX_PACK_END()
 
 MFX_PACK_BEGIN_USUAL_STRUCT()
@@ -2102,7 +2106,7 @@ MFX_PACK_BEGIN_STRUCT_W_L_TYPE()
          buffer is submitted for processing.
 */
 typedef struct {
-    mfxExtBuffer    Header; /*!< Extension buffer header. Header.BufferId must be equal to FX_EXTBUFF_VPP_PROCAMP. */
+    mfxExtBuffer    Header; /*!< Extension buffer header. Header.BufferId must be equal to MFX_EXTBUFF_VPP_PROCAMP. */
     mfxF64   Brightness;    /*!< The brightness parameter is in the range of -100.0F to 100.0F, in increments of 0.1F.
                                  Setting this field to 0.0F will disable brightness adjustment. */
     mfxF64   Contrast;      /*!< The contrast parameter in the range of 0.0F to 10.0F, in increments of 0.01F, is used for manual
@@ -2351,11 +2355,7 @@ typedef struct {
     mfxU32      reserved[3];
     mfxMemId    *mids;          /*!< Pointer to the array of the returned memory IDs. The application allocates or frees this array. */
     mfxU16      NumFrameActual; /*!< Number of frames actually allocated. */
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxU16      MemType;
-#else
     mfxU16      reserved2;
-#endif
 } mfxFrameAllocResponse;
 MFX_PACK_END()
 
@@ -3376,25 +3376,6 @@ typedef struct {
 } mfxExtMBDisableSkipMap;
 MFX_PACK_END()
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-MFX_PACK_BEGIN_USUAL_STRUCT()
-typedef struct {
-    mfxExtBuffer    Header;
-
-    mfxU16          DPBSize;
-    mfxU16          reserved[11];
-
-    struct {
-        mfxU32      FrameOrder;
-        mfxU16      PicType;
-        mfxU16      LongTermIdx;
-        mfxU16      reserved[4];
-    } DPB[32];
-} mfxExtDPB;
-MFX_PACK_END()
-
-#endif
-
 /*! The GeneralConstraintFlags enumerator uses bit-ORed values to itemize HEVC bitstream indications for specific profiles. Each value
     indicates for format range extensions profiles. */
 enum {
@@ -3559,29 +3540,6 @@ typedef struct {
 } mfxExtAVCRoundingOffset;
 MFX_PACK_END()
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-MFX_PACK_BEGIN_USUAL_STRUCT()
-typedef struct {
-    mfxExtBuffer Header;
-
-    mfxU16       reserved[12];
-
-    struct {
-        mfxU16   Scale;
-        mfxU16   QPI;
-        mfxU16   QPP;
-        mfxU16   QPB;
-        mfxU32   TargetKbps;
-        mfxU32   MaxKbps;
-        mfxU32   BufferSizeInKB;
-        mfxU32   InitialDelayInKB;
-        mfxU16   reserved1[20];
-    } Layer[8];
-} mfxExtTemporalLayers;
-MFX_PACK_END()
-
-#endif
-
 MFX_PACK_BEGIN_USUAL_STRUCT()
 /*!
    Used by the application to specify dirty regions within a frame during encoding. It may be used at initialization or at runtime.
@@ -3651,50 +3609,6 @@ typedef struct {
 } mfxExtMoveRect;
 MFX_PACK_END()
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-
-/* ScalingMatrixType */
-enum {
-    MFX_SCALING_MATRIX_SPS = 1,
-    MFX_SCALING_MATRIX_PPS = 2
-};
-
-MFX_PACK_BEGIN_USUAL_STRUCT()
-typedef struct {
-    mfxExtBuffer Header;
-
-    mfxU16 Type;
-    mfxU16 reserved[5];
-
-    /* [4x4_Intra_Y,  4x4_Intra_Cb, 4x4_Intra_Cr,
-        4x4_Inter_Y,  4x4_Inter_Cb, 4x4_Inter_Cr,
-        8x8_Intra_Y,  8x8_Inter_Y,  8x8_Intra_Cb,
-        8x8_Inter_Cb, 8x8_Intra_Cr, 8x8_Inter_Cr] */
-    mfxU8  ScalingListPresent[12];
-
-    /* [Intra_Y,  Intra_Cb, Intra_Cr,
-        Inter_Y,  Inter_Cb, Inter_Cr] */
-    mfxU8  ScalingList4x4[6][16];
-
-    /* [Intra_Y,  Inter_Y,  Intra_Cb,
-        Inter_Cb, Intra_Cr, Inter_Cr] */
-    mfxU8  ScalingList8x8[6][64];
-} mfxExtAVCScalingMatrix;
-MFX_PACK_END()
-
-MFX_PACK_BEGIN_USUAL_STRUCT()
-typedef struct {
-    mfxExtBuffer Header;
-
-    mfxU16 reserved[28];
-
-    mfxU8  LoadMatrix[4]; // [LumaIntra, LumaInter, ChromaIntra, ChromaInter]
-    mfxU8  Matrix[4][64]; // [LumaIntra, LumaInter, ChromaIntra, ChromaInter]
-} mfxExtMPEG2QuantMatrix;
-MFX_PACK_END()
-
-#endif
-
 /*! The Angle enumerator itemizes valid rotation angles. */
 enum {
     MFX_ANGLE_0     =   0, /*!< 0 degrees. */
@@ -3745,7 +3659,15 @@ enum {
     MFX_SCALING_MODE_DEFAULT    = 0, /*!< Default scaling mode. The library selects the most appropriate scaling method. */
     MFX_SCALING_MODE_LOWPOWER   = 1, /*!< Low power scaling mode which is applicable for library implementations.
                                          The exact scaling algorithm is defined by the library. */
-    MFX_SCALING_MODE_QUALITY    = 2  /*!< The best quality scaling mode */
+    MFX_SCALING_MODE_QUALITY    = 2,  /*!< The best quality scaling mode. */
+        
+    
+    MFX_SCALING_MODE_VENDOR = 1000, /*!< The enumeration to separate common scaling controls above and vendor specific. */ 
+    
+
+    MFX_SCALING_MODE_INTEL_GEN_COMPUTE  = MFX_SCALING_MODE_VENDOR + 1, /*! The mode to run scaling operation on Execution Units (EUs). */
+    MFX_SCALING_MODE_INTEL_GEN_VDBOX = MFX_SCALING_MODE_VENDOR + 2, /*! The special optimization mode where scaling operation running on SFC (Scaler & Format Converter) is coupled with VDBOX (also known as Multi-Format Codec fixed-function engine). This mode is applicable for DECODE_VPP domain functions. */ 
+    MFX_SCALING_MODE_INTEL_GEN_VEBOX = MFX_SCALING_MODE_VENDOR + 3 /*! The special optimization mode where scaling operation running on SFC is coupled with VEBOX (HW video processing pipe). */ 
 };
 
 /*! The InterpolationMode enumerator specifies type of interpolation method used by VPP scaling filter. */
@@ -3770,26 +3692,6 @@ typedef struct {
     mfxU16 reserved[10];
 } mfxExtVPPScaling;
 MFX_PACK_END()
-
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-
-/* SceneChangeType */
-enum {
-    MFX_SCENE_NO_CHANGE = 0,
-    MFX_SCENE_START     = 1,
-    MFX_SCENE_END       = 2
-};
-
-MFX_PACK_BEGIN_USUAL_STRUCT()
-typedef struct {
-    mfxExtBuffer Header;
-
-    mfxU16 Type;
-    mfxU16 reserved[11];
-} mfxExtSceneChange;
-MFX_PACK_END()
-
-#endif
 
 typedef mfxExtAVCRefListCtrl mfxExtHEVCRefListCtrl;
 typedef mfxExtAVCRefLists mfxExtHEVCRefLists;
@@ -4042,13 +3944,7 @@ typedef struct {
                                   sequence header will be zero. It is the responsibility of the application to update the NumFrame field  with the correct value. See the
                                   CodingOptionValue enumerator for values of this option. */
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxI16  LoopFilterRefDelta[4];  /* Contains the adjustment needed for the filter level based on the chosen reference frame. See
-                                       the P9ReferenceFrame enumerator for array IDs. */
-    mfxI16  LoopFilterModeDelta[2]; /* Contains the adjustment needed for the filter level based on the chosen mode. */
-#else // API 1.26
     mfxI16  reserved1[6];
-#endif
     mfxI16  QIndexDeltaLumaDC;   /*!< Specifies an offset for a particular quantization parameter. */
     mfxI16  QIndexDeltaChromaAC; /*!< Specifies an offset for a particular quantization parameter. */
     mfxI16  QIndexDeltaChromaDC; /*!< Specifies an offset for a particular quantization parameter. */
@@ -4136,17 +4032,6 @@ typedef struct {
 MFX_PACK_END()
 
 
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-/*! The MCTFTemporalMode enumerator itemizes temporal filtering modes. */
-enum {
-    MFX_MCTF_TEMPORAL_MODE_UNKNOWN  = 0,
-    MFX_MCTF_TEMPORAL_MODE_SPATIAL  = 1,
-    MFX_MCTF_TEMPORAL_MODE_1REF     = 2,
-    MFX_MCTF_TEMPORAL_MODE_2REF     = 3,
-    MFX_MCTF_TEMPORAL_MODE_4REF     = 4
-};
-#endif
-
 MFX_PACK_BEGIN_USUAL_STRUCT()
 /*!
    Provides setup for the Motion-Compensated Temporal Filter (MCTF) during the VPP initialization and for control
@@ -4164,25 +4049,7 @@ typedef struct {
                                       If the field value is in the range of 1 to 20 inclusive, MCTF operates in fixed-strength mode with the given strength of MCTF process.
                                       
                                       At runtime, values of 0 and greater than 20 are ignored. */
-#if (MFX_VERSION >= MFX_VERSION_NEXT)
-    mfxU16       Overlap;             /* Turn off or turn on overlap during motion estimation/compensation. See the CodingOptionValue enumerator for
-                                         values of this option. */
-    mfxU32       BitsPerPixelx100k;   /* Carries information of a compressed bitstream that is the result of an encoding process following
-                                         MCTF (if any). Actual average number of bits spent per pixel in the compressed bitstream is derived as
-                                         BitsPerPixelx100k divided by 100000.0. The MCTF process may use this information as an additional hint to
-                                         optimize the filtering process for a particular encoding applied afterwards. */
-    mfxU16       Deblocking;          /* Turn the deblocking filter off or on within MCTF process. See the CodingOptionValue enumerator for
-                                         values of this option. */
-    mfxU16       TemporalMode;        /* See the MCTFTemporalMode enumerator for values of this option. These modes are all different in
-                                         terms of quality improvements and performance. In general, 4-reference filtering provides the highest quality
-                                         and 1-reference filtering provides highest speed. The spatial filtering process is different
-                                         as it does not use any processing between frames. Thus spatial filtering provides the smallest memory footprint. */
-    mfxU16       MVPrecision;         /* Determines how precise the motion compensation process is. See the MVPrecision enumerator for values of this option.
-                                         Integer and quarter-pixel are supported. */
-    mfxU16       reserved[21];
-#else
     mfxU16       reserved[27];
-#endif
 } mfxExtVppMctf;
 MFX_PACK_END()
 

@@ -95,6 +95,8 @@ list of configurable filters.
      - **Configuration Structure**
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DENOISE`
      - :cpp:struct:`mfxExtVPPDenoise`
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DENOISE2`
+     - :cpp:struct:`mfxExtVPPDenoise2`
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_MCTF`
      - :cpp:struct:`mfxExtVppMctf`
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DETAIL`

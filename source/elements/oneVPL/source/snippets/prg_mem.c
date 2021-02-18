@@ -99,22 +99,28 @@ static int prg_mem2 () {
 sts = MFXVideoDECODE_DecodeFrameAsync(session, NULL, NULL, &outsurface, &syncp);
 if (MFX_ERR_NONE == sts)
 {
-    outsurface->FrameInterface->GetDeviceHandle(outsurface, &device_handle, &device_type);
-    // if application or component is familar with mfxHandleType and it's possible to share memory created by device_handle.
-    if (isDeviceTypeCompatible(device_type) && isPossibleForMemorySharing(device_handle)) {
+    mfxStatus s = outsurface->FrameInterface->GetDeviceHandle(outsurface,
+                                                  &device_handle, &device_type);
+    // if application or component is familar with mfxHandleType and it's
+    // possible to share memory created by device_handle.
+    if (MFX_ERR_NONE == s && isDeviceTypeCompatible(device_type)
+                          && isPossibleForMemorySharing(device_handle)) {
         // get native handle and type
-        outsurface->FrameInterface->GetNativeHandle(outsurface, &resource, &resource_type);
+        outsurface->FrameInterface->GetNativeHandle(outsurface,
+                                                      &resource, &resource_type);
         if (isResourceTypeCompatible(resource_type)) {
             //use memory directly
             ProcessNativeMemory(resource);
             outsurface->FrameInterface->Release(outsurface);
         }
+    } else {
+      // Application or component is not aware about such DeviceHandle or
+      // Resource type need to map to system memory.
+      outsurface->FrameInterface->Map(outsurface, MFX_MAP_READ);
+      ProcessSystemMemory(outsurface);
+      outsurface->FrameInterface->Unmap(outsurface);
+      outsurface->FrameInterface->Release(outsurface);
     }
-    // Application or component is not aware about such DeviceHandle or Resource type need to map to system memory.
-    outsurface->FrameInterface->Map(outsurface, MFX_MAP_READ);
-    ProcessSystemMemory(outsurface);
-    outsurface->FrameInterface->Unmap(outsurface);
-    outsurface->FrameInterface->Release(outsurface);
-}
 }
 /*end2*/
+}

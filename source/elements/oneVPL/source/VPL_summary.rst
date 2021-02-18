@@ -55,15 +55,15 @@ must not return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT_IMPLEMENTED`.
    * - :cpp:func:`MFXQueryVersion`
      - 1.0
    * - :cpp:func:`MFXJoinSession`
-     - 1.0
+     - 1.1
    * - :cpp:func:`MFXDisjoinSession`
-     - 1.0
+     - 1.1
    * - :cpp:func:`MFXCloneSession`
-     - 1.0
+     - 1.1
    * - :cpp:func:`MFXSetPriority`
-     - 1.0
+     - 1.1
    * - :cpp:func:`MFXGetPriority`
-     - 1.0
+     - 1.1
    * - :cpp:func:`MFXVideoCORE_SetFrameAllocator`
      - 1.0
    * - :cpp:func:`MFXVideoCORE_SetHandle`
@@ -128,6 +128,12 @@ must not return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT_IMPLEMENTED`.
      - 1.0
    * - :cpp:func:`MFXVideoCORE_QueryPlatform`
      - 1.19
+   * - :cpp:func:`MFXQueryAdapters`
+     - 1.31
+   * - :cpp:func:`MFXQueryAdaptersDecode`
+     - 1.31
+   * - :cpp:func:`MFXQueryAdaptersNumber`
+     - 1.31
    * - :cpp:func:`MFXMemory_GetSurfaceForVPP`
      - 2.0
    * - :cpp:func:`MFXMemory_GetSurfaceForEncode`
@@ -143,6 +149,16 @@ must not return :cpp:enumerator:`mfxStatus::MFX_ERR_NOT_IMPLEMENTED`.
    * - :cpp:func:`MFXMemory_GetSurfaceForVPPOut`
      - 2.1
    * - :cpp:func:`MFXVideoVPP_ProcessFrameAsync`
+     - 2.1
+   * - :cpp:func:`MFXVideoDECODE_VPP_Init`
+     - 2.1
+   * - :cpp:func:`MFXVideoDECODE_VPP_DecodeFrameAsync`
+     - 2.1
+   * - :cpp:func:`MFXVideoDECODE_VPP_Reset`
+     - 2.1
+   * - :cpp:func:`MFXVideoDECODE_VPP_GetChannelParam`
+     - 2.1
+   * - :cpp:func:`MFXVideoDECODE_VPP_Close`
      - 2.1
 
 --------------
@@ -170,10 +186,11 @@ All implementations must implement the APIs listed in the
      - Required function for synchronization of asynchronous operations.
 
 
-If the implementation implements any encoder, decoder, or VPP filter, it must
+If the implementation exposes any encoder, decoder, or VPP filter, it must
 implement the corresponding mandatory APIs, as described in the
-:ref:`Mandatory Encode <mandatory-enc-apis-table>`, :ref:`Decode <mandatory-dec-apis-table>` and
-:ref:`VPP <mandatory-vpp-apis-table>` APIs tables:
+:ref:`Mandatory Encode <mandatory-enc-apis-table>`, :ref:`Decode <mandatory-dec-apis-table>`,
+:ref:`VPP <mandatory-vpp-apis-table>` abd :ref:`Decode+VPP <mandatory-dec-vpp-apis-table>` APIs
+tables:
 
 .. _mandatory-enc-apis-table:
 
@@ -217,6 +234,19 @@ implement the corresponding mandatory APIs, as described in the
        | :cpp:func:`MFXVideoVPP_RunFrameVPPAsync` or :cpp:func:`MFXVideoVPP_ProcessFrameAsync`
      - Required functions if the implementation implements any VPP filter.
 
+.. _mandatory-dec-vpp-apis-table:
+
+.. list-table:: Mandatory Decode+VPP APIs
+   :header-rows: 1
+   :widths: 50 50
+
+   * - **Functions**
+     - **Description**
+   * - | :cpp:func:`MFXVideoDECODE_VPP_Init`
+       | :cpp:func:`MFXVideoDECODE_VPP_DecodeFrameAsync`
+       | :cpp:func:`MFXVideoDECODE_VPP_Close`
+     - Required functions if the implementation implements any Decode+VPP component.
+
 .. note:: Mandatory functions must not return the
           :cpp:enumerator:`MFX_ERR_NOT_IMPLEMENTED` status.
 
@@ -224,6 +254,11 @@ If at least one of the encoder, decoder, or VPP filter functions is implemented,
 the :cpp:func:`MFXQueryImplsDescription` function must return a valid
 :cpp:struct:`mfxImplDescription` structure instance with mandatory capabilities
 of the implementation, including decoder, encoder, or VPP capabilities information.
+
+If the implementation supports internal memory allocation by exposing at least one of the
+function from that family: :ref:`internal memory allocation and management API <func_memory>` then
+implementation of whole scope of the :cpp:struct:`mfxFrameSurfaceInterface` structure as a part of
+the :cpp:struct:`mfxFrameSurface1` is mandatory.
 
 Any other functions or extension buffers are optional for the implementation.
 

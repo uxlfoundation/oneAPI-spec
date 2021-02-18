@@ -9,6 +9,8 @@ oneVPL for |msdk_full_name| Users
 oneVPL is source compatible with |msdk_full_name|. Applications can use
 |msdk_full_name| to target older hardware and oneVPL to target everything else.
 Some obsolete features of |msdk_full_name| have been omitted from oneVPL.
+Hereinafter the term "Legacy" will be used to describe a behavior when oneVPL 
+is called by |msdk_full_name| applications.
 
 -------------------------------
 oneVPL Ease of Use Enhancements
@@ -24,11 +26,15 @@ enhancements include the following:
 - New memory management and components (session) interoperability. See
   :ref:`internal-mem-manage` and :ref:`decoding-proc` for more details.
 
+.. _new-api:
+
 ------------------
 New APIs in oneVPL
 ------------------
 
 oneVPL introduces new functions that are not available in |msdk_full_name|.
+
+.. _dispatcher-api:
 
 New oneVPL dispatcher functions:
 
@@ -56,9 +62,9 @@ New oneVPL session initialization:
 
 - :cpp:func:`MFXInitialize`
 
------------------------------------------
+---------------------------------
 |msdk_full_name| Feature Removals
------------------------------------------
+---------------------------------
 
 The following |msdk_full_name| features are considered obsolete and are not
 included in oneVPL:
@@ -92,9 +98,11 @@ included in oneVPL:
 - **Surface Type Neutral Transcoding.** Opaque memory support is removed and 
   replaced with internal memory allocation concept.   
 
------------------------------------------
+.. _deprecated-api:
+
+-----------------------------
 |msdk_full_name| API Removals
------------------------------------------
+-----------------------------
 
 The following |msdk_full_name| functions are not included in oneVPL:
 
@@ -173,3 +181,16 @@ is not supported by oneVPL:
 - Code previously compiled with |msdk_full_name| and executed using a oneVPL
   runtime will generate an :cpp:enumerator:`MFX_ERR_NOT_IMPLEMENTED` error when
   calling a removed function.
+
+---------------------------
+|msdk_full_name| Legacy API
+---------------------------
+
+oneVPL contains following header files from |msdk_full_name| included for the
+simplification of existing applications migration to oneVPL:
+
+- mfxvideo++.h
+
+.. important:: |msdk_full_name| obsolette API removed from those header files.
+   Code compiled with the oneVPL API headers will generate a compile and/or
+   link error when attempting to use a removed API.

@@ -107,6 +107,15 @@ mfxExtVPPDenoise
    :protected-members:
    :undoc-members:
 
+mfxExtVPPDenoise2
+-----------------
+
+.. doxygenstruct:: mfxExtVPPDenoise2
+   :project: oneVPL
+   :members:
+   :protected-members:
+   :undoc-members:
+
 mfxExtVPPDetail
 ---------------
 

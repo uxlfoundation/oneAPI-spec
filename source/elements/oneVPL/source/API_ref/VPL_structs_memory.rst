@@ -62,6 +62,11 @@ mfxFrameData
    :members:
    :protected-members:
 
+.. doxygenstruct:: mfxY416
+   :project: oneVPL
+   :members:
+   :protected-members:
+
 .. doxygenstruct:: mfxA2RGB10
    :project: oneVPL
    :members:
