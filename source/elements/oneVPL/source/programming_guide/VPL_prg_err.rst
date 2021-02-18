@@ -39,9 +39,13 @@ errors or other warnings overwriting
 :cpp:enumerator:`mfxStatus::MFX_WRN_PARTIAL_ACCELERATION`, as it is a lower priority warning.)
 
 oneVPL functions return :cpp:enumerator:`mfxStatus::MFX_WRN_DEVICE_BUSY` to indicate that the
-hardware device is busy and unable to take commands at this time. Resume the
-operation by waiting for a few milliseconds and resubmitting the request.
-The following example shows the decoding pseudo-code:
+hardware device is busy and unable to receive commands at this time. The recommended approach is:
+
+   * If the asynchronous operation returns synchronization point along with :cpp:enumerator:`mfxStatus::MFX_WRN_DEVICE_BUSY` - call the :cpp:func:`MFXVideoCORE_SyncOperation` with it.
+   * If application has buffered synchronization point(s) obtained from previous asynchronous operations - call :cpp:func:`MFXVideoCORE_SyncOperation` with the oldest one.
+   * If no synchronization point(s) available - wait for a few milliseconds.
+   * Resume the operation by resubmitting the request.
+
 
 .. literalinclude:: ../snippets/prg_err.c
    :language: c++

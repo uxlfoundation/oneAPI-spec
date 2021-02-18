@@ -17,6 +17,9 @@ from sphinx.highlighting import lexers
 sys.path.insert(
     0, abspath(join(repo_root, 'source', 'elements', 'oneDAL'))  # noqa: F821
 )
+sys.path.insert(
+    0, abspath(join(repo_root, 'source', 'elements', 'oneVPL'))  # noqa: F821
+)
 
 extensions = [
     'notfound.extension',
@@ -34,7 +37,9 @@ extensions = [
     'sphinxcontrib.inkscapeconverter',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
+    'sphinxcontrib.plantuml',
     'breathe',
+    'vplapi',
     'dalapi',  # oneDAL API generator
 ]
 

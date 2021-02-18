@@ -13,12 +13,16 @@
 #include "mfxdefs.h"
 #include "mfxvideo.h"
 #include "mfxadapter.h"
+#include "mfxdispatcher.h"
 
 /* these macro requires code complilation*/
 
 #define MSDK_CHECK_STATUS(X, MSG)                {if ((X) < MFX_ERR_NONE) {printf("%s\n",MSG);}}
 
 /* end of internal stuff */
+
+
+static void* vaDisplay;
 
 
 static int prg_hw1 () {
@@ -135,3 +139,27 @@ default:
 /*end2*/
 return 0;
 }
+
+static int prg_hw3 () {
+/*beg3*/
+mfxLoader loader = MFXLoad();
+mfxConfig config1 = MFXCreateConfig(loader);
+mfxConfig config2 = MFXCreateConfig(loader);
+mfxSession session;
+
+mfxVariant HandleType;
+HandleType.Type = MFX_VARIANT_TYPE_U32;
+HandleType.Data.U32 = MFX_HANDLE_VA_DISPLAY;
+MFXSetConfigFilterProperty(config1, (mfxU8*)"mfxHandleType", HandleType);
+
+mfxVariant DisplayHandle;
+DisplayHandle.Type = MFX_VARIANT_TYPE_PTR;
+HandleType.Data.Ptr = vaDisplay;
+MFXSetConfigFilterProperty(config2, (mfxU8*)"mfxHDL", DisplayHandle);
+
+MFXCreateSession(loader, 0, &session);
+
+/*end3*/
+return 0;
+}
+

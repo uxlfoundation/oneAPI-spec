@@ -74,3 +74,11 @@ mfxAccelerationModeDescription
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxImplementedFunctions
+-----------------------
+
+.. doxygenstruct:: mfxImplementedFunctions
+   :project: oneVPL
+   :members:
+   :protected-members:

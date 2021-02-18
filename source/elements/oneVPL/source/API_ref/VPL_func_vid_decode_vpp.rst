@@ -43,3 +43,20 @@ MFXVideoDECODE_VPP_GetChannelParam
 
 .. doxygenfunction:: MFXVideoDECODE_VPP_GetChannelParam
    :project: oneVPL
+
+MFXVideoDECODE_VPP_DecodeFrameAsync
+-----------------------------------
+
+.. doxygenfunction:: MFXVideoDECODE_VPP_DecodeFrameAsync
+   :project: oneVPL
+
+.. important:: The :cpp:func:`MFXVideoDECODE_VPP_DecodeFrameAsync` is mandatory when implementing a combined decode plus vpp.
+
+MFXVideoDECODE_VPP_Close
+------------------------
+
+.. doxygenfunction:: MFXVideoDECODE_VPP_Close
+   :project: oneVPL
+
+.. important:: The :cpp:func:`MFXVideoDECODE_VPP_Close` is mandatory when implementing a combined decode plus vpp.
+

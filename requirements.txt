@@ -20,3 +20,4 @@ sphinxcontrib-spelling
 sphinxcontrib-svg2pdfconverter
 graphviz
 lxml
+sphinxcontrib.plantuml

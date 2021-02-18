@@ -22,6 +22,15 @@ a session. The :cpp:func:`MFXClose` function closes (de-initializes) the
 session. To avoid memory leaks, always call :cpp:func:`MFXClose` after
 :cpp:func:`MFXInit`.
 
+.. important:: :cpp:func:`MFXInit` and :cpp:func:`MFXInitEx` are deprecated 
+               starting from API 2.0. Applications must use :cpp:func:`MFXLoad`
+               and :cpp:func:`MFXCreateSession` to initialize implementations.
+
+.. important:: For backward compatibility with existent |msdk_full_name|
+               applications oneVPL session can be created and initialized by
+               the legacy dispacther through :cpp:func:`MFXInit` or
+               :cpp:func:`MFXInitEx` calls.
+
 The application can initialize a session as a software-based session
 (:cpp:enumerator:`MFX_IMPL_SOFTWARE`) or a hardware-based session
 (:cpp:enumerator:`MFX_IMPL_HARDWARE`). In a software-based session, the SDK
@@ -200,7 +209,585 @@ Internally, the dispatcher works as follows:
 
 .. note:: For backward compatibility with |msdk_full_name|, the dispatcher will
           first try to load |msdk_full_name| if API version 1.x was requested.
-          If loading fails, the dispatcher will search for the implementation with highest 2.x API version and load that version.
+          If loading fails, the dispatcher will search for the implementation with
+          highest 2.x API version and load that version.
+
+------------------------------------------
+oneVPL Dispatcher Configuration Properties
+------------------------------------------
+
+The :ref:`Dispatcher Configuration Properties Table <dsp-conf-prop-table>` shows property strings
+supported by the dispatcher. Table organized in the hierarchy way, to create the string, go from the
+left to right from column to column and concatenate strings by using `.` (dot) as the separator.
+
+.. _dsp-conf-prop-table:
+
+.. table:: Dispatcher Configuration Properties
+   :widths: 25 25 30 20
+
+   +---------------------------------------+----------------------------+----------------------+---------------------------+
+   | Structure name                        | Property                   | Value Data Type      | Comment                   |
+   +=======================================+============================+======================+===========================+
+   | :cpp:struct:`mfxImplDescription`      | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .Impl                    |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .AccelerationMode        |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .ApiVersion              |                      |                           |
+   |                                       | | .Version                 |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .ApiVersion              |                      |                           |
+   |                                       | | .Major                   |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .ApiVersion              |                      |                           |
+   |                                       | | .Minor                   |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .ImplName                |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .License                 |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .Keywords                |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .VendorImplID            |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .AccelerationMode        |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .mfxDeviceDescription    |                      |                           |
+   |                                       | | .device                  |                      |                           |
+   |                                       | | .DeviceID                |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .decoder                 |                      |                           |
+   |                                       | | .CodecID                 |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .decoder                 |                      |                           |
+   |                                       | | .MaxcodecLevel           |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .decoder                 |                      |                           |
+   |                                       | | .decprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .decoder                 |                      |                           |
+   |                                       | | .decprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .decmemdesc              |                      |                           |
+   |                                       | | .MemHandleType           |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | .decoder                 |                      | object                    |
+   |                                       | | .decprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .decmemdesc              |                      |                           |
+   |                                       | | .Width                   |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | .decoder                 |                      | object                    |
+   |                                       | | .decprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .decmemdesc              |                      |                           |
+   |                                       | | .Height                  |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .decoder                 |                      |                           |
+   |                                       | | .decprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .decmemdesc              |                      |                           |
+   |                                       | | .ColorFormats            |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxEncoderDescription   |                      |                           |
+   |                                       | | .encoder                 |                      |                           |
+   |                                       | | .CodecID                 |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .mfxEncoderDescription   |                      |                           |
+   |                                       | | .encoder                 |                      |                           |
+   |                                       | | .MaxcodecLevel           |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .mfxEncoderDescription   |                      |                           |
+   |                                       | | .encoder                 |                      |                           |
+   |                                       | | .BiDirectionalPrediction |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxEncoderDescription   |                      |                           |
+   |                                       | | .encoder                 |                      |                           |
+   |                                       | | .encprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxEncoderDescription   |                      |                           |
+   |                                       | | .encoder                 |                      |                           |
+   |                                       | | .encprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .encmemdesc              |                      |                           |
+   |                                       | | .MemHandleType           |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxEncoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | .encoder                 |                      | object                    |
+   |                                       | | .encprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .encmemdesc              |                      |                           |
+   |                                       | | .Width                   |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxEncoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | .encoder                 |                      | object                    |
+   |                                       | | .encprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .encmemdesc              |                      |                           |
+   |                                       | | .Height                  |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxEncoderDescription   |                      |                           |
+   |                                       | | .encoder                 |                      |                           |
+   |                                       | | .encprofile              |                      |                           |
+   |                                       | | .Profile                 |                      |                           |
+   |                                       | | .encmemdesc              |                      |                           |
+   |                                       | | .ColorFormats            |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .filter                  |                      |                           |
+   |                                       | | .FilterFourCC            |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .filter                  |                      |                           |
+   |                                       | | .MaxDelayInFrames        |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .filter                  |                      |                           |
+   |                                       | | .memdesc                 |                      |                           |
+   |                                       | | .MemHandleType           |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | .filter                  |                      | object                    |
+   |                                       | | .memdesc                 |                      |                           |
+   |                                       | | .Width                   |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | .filter                  |                      | object                    |
+   |                                       | | .memdesc                 |                      |                           |
+   |                                       | | .Height                  |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .filter                  |                      |                           |
+   |                                       | | .memdesc                 |                      |                           |
+   |                                       | | .format                  |                      |                           |
+   |                                       | | .InFormat                |                      |                           |
+   |                                       +----------------------------+----------------------+---------------------------+
+   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | .filter                  |                      |                           |
+   |                                       | | .memdesc                 |                      |                           |
+   |                                       | | .format                  |                      |                           |
+   |                                       | | .OutFormats              |                      |                           |
+   +---------------------------------------+----------------------------+----------------------+---------------------------+
+   | :cpp:struct:`mfxImplementedFunctions` | | mfxImplementedFunctions  | MFX_VARIANT_TYPE_PTR | Pointer to the buffer     |
+   |                                       | | .FunctionsName           |                      | with string               |
+   +---------------------------------------+----------------------------+----------------------+---------------------------+
+
+Examples of the property name strings:
+
+- mfxImplDescription.mfxDecoderDescription.decoder.decprofile.Profile
+- mfxImplDescription.mfxDecoderDescription.decoder.decprofile.decmemdesc.MemHandleType
+- mfxImplementedFunctions.FunctionsName
+
+Following properties are supported in a special manner: they are used to send
+additional data to the implementation through the dispatcher. Application needs
+to use :cpp:func:`MFXSetConfigFilterProperty` to set them up but they don't
+influence on the implementation selection. They are used during the
+:cpp:func:`MFXCreateSession` function call to fine tune the implementation.
+
+.. list-table:: Dispatcher's Special Properties
+   :header-rows: 1
+   :widths: 50 50
+
+   * - **Property**
+     - **Value data type**
+   * - :cpp:enum:`mfxHandleType`
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
+   * - :cpp:type:`mfxHDL`
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_PTR`
+
+------------------------------
+oneVPL Dispatcher Interactions
+------------------------------
+
+This sequence diagram visualize how application communcates with implementations
+via the dispacher.
+
+Dispatcher API
+    This API is implemented in the dispatcher.
+
+Implementation API
+    This API is provided by the any implementation.
+
+.. uml::
+
+   @startuml
+   actor Application as A
+   participant "oneVPL Dispatcher" as D
+   participant "oneVPL Implementation 1" as I1
+   participant "oneVPL Implementation 2" as I2
+   participant "oneVPL Implementation 3" as I3
+
+   ref over A, D : Dispatcher API
+   ref over D, I1, I2, I3 : Implementation API
+
+   activate A
+   == Initialization ==
+   group Dispatcher API [Enumerate and load implementations]
+      A -> D: mfxLoad()
+      activate D
+
+      D -> D: Search for the available runtimes
+
+      A -> D: MFXCreateConfig()
+      A -> D: MFXSetConfigProperty()
+      A -> D: MFXCreateConfig()
+      A -> D: MFXSetConfigProperty()
+      A -> D: MFXEnumImplementations()
+
+      Activate I1
+
+      D -> I1: MFXQueryImplsDescription()
+      I1 --> D: mfxImplDescription
+
+      Activate I2
+      D -> I2: MFXQueryImplsDescription()
+      I2 --> D: mfxImplDescription
+
+      Activate I3
+      D -> I3: MFXQueryImplsDescription()
+      I3 --> D: mfxImplDescription
+
+      D --> A: list of mfxImplDescription structures es for all implementations
+
+      A -> D: MFXCreateSession(i=0)
+      D -> I1: MFXInitilize()
+      Activate I1 #DarkSalmon
+      I1 --> D: mfxSession1
+      D --> A: mfxSession1
+
+      A -> D: MFXCreateSession(i=1)
+      D -> I2: MFXInitilize()
+      Activate I2 #DarkSalmon
+      I2 --> D: mfxSession2
+      D --> A: mfxSession2
+
+      A -> D: MFXCreateSession(i=2)
+      D -> I3: MFXInitilize()
+      I3 --> D: mfxSession3
+      Activate I3 #DarkSalmon
+      D --> A: mfxSession3
+
+      A -> D: MFXDispReleaseImplDescription(hdl=0)
+      D -> I1: MFXReleaseImplDescription()
+
+      A -> D: MFXDispReleaseImplDescription(hdl=1)
+      D -> I2: MFXReleaseImplDescription()
+
+      A -> D: MFXDispReleaseImplDescription(hdl=2)
+      D -> I3: MFXReleaseImplDescription()
+   end
+   == Processing ==
+   group Implementation API [Process the data]
+      A -> I1: MFXVideoDECODE_Init()
+      A -> I1: MFXVideoDECODE_Query()
+      A -> I1: MFXVideoDECODE_DecodeFrameAsync()
+      ...
+      A -> I1: MFXVideoDECODE_Close()
+      |||
+      deactivate I1
+
+      A -> I2: MFXVideoENCODE_Init()
+      A -> I2: MFXVideoENCODE_Query()
+      A -> I2: MFXVideoENCODE_EncodeFrameAsync()
+      ...
+      A -> I2: MFXVideoENCODE_Close()
+      |||
+      deactivate I2
+
+      A -> I3: MFXVideoENCODE_Init()
+      A -> I3: MFXVideoENCODE_Query()
+      A -> I3: MFXVideoENCODE_EncodeFrameAsync()
+      ...
+      A -> I3: MFXVideoENCODE_Close()
+      |||
+      deactivate I3
+   end
+   == Finalization ==
+   group Implementation API [Release the implementations]
+      A -> I1: MFXClose()
+      deactivate I1
+      A -> I2: MFXClose()
+      deactivate I2
+      A -> I3: MFXClose()
+      deactivate I3
+   group Dispatcher API [Release the dispatcher's instance]
+      A -> D: MFXUnload()
+   end
+
+   deactivate D
+   @enduml
+
+The oneVPL dispacther is capable to load and initialize |msdk_full_name| legacy
+library. The sequence diagram below demonstrates the approach.
+
+.. uml::
+
+   @startuml
+   actor Application as A
+   participant "oneVPL Dispatcher" as D
+   participant "MediaSDK (legacy)" as M
+   A -> D: MFXLoad
+   activate D
+   D -> D: Search for the avialable runtimes
+   A -> D: MFXCreateConfig
+   
+   note left of D
+   Setting properties to filter implementation.
+   MediaSDK supports only general parameters,
+   no filtering for Decode/VPP/Encoder details.
+   end note
+
+   group MediaSDK LegacyAPI
+      D -> M: MFXInitEx
+      activate M
+
+      M --> D: mfxSession
+      D -> M: MFXQueryIMPL
+      M --> D: Implementation speciefic
+
+      D -> M: MFXQueryVersion
+      M --> D: mfxVersion
+   end
+
+   D -> D: Fill mfxImplDescription for MediaSDK impl
+
+   A -> D: mfxEnumImplementations
+   D --> A: MediaSDK caps description
+
+   A -> D: MFXCreateSession
+   D --> A: mfxSession
+
+   A -> M: MFXVideoDECODE_Init()
+   A -> M: MFXVideoDECODE_Query()
+   A -> M: MFXVideoDECODE_DecodeFrameAsync()
+   ...
+   A -> M: MFXVideoDECODE_Close()
+   A -> M: MFXClose()
+
+   deactivate M
+
+   A -> D: MFXUnload()
+   deactivate D
+   @enduml
+
+.. important:: The dispacther doesn't filter and report
+               :cpp:struct:`mfxDeviceDescription`,
+               :cpp:struct:`mfxDecoderDescription`,
+               :cpp:struct:`mfxEncoderDescription`,
+               :cpp:struct:`mfxVPPDescription` when enumerates or creates
+               |msdk_full_name| implementation. Once |msdk_full_name| is loaded
+               applications have to use legacy approach to query capabilities.
+   
+---------------------------------------
+How To Check If Function is Implemented
+---------------------------------------
+
+There are two ways to check if particular function is implemented or not by the
+implementation.
+
+This code illustrates how application can iterate through the whole list of
+implemented functions:
+
+.. literalinclude:: ../snippets/prg_session.cpp
+   :language: c++
+   :start-after: /*beg1*/
+   :end-before: /*end1*/
+   :lineno-start: 1
+
+This code illustrates how application can check that specific functions are
+implemented:
+
+.. literalinclude:: ../snippets/prg_session.cpp
+   :language: c++
+   :start-after: /*beg2*/
+   :end-before: /*end2*/
+   :lineno-start: 1
+
+--------------------------------------------------------------
+How To Search For The Avialable encoder/decoder implementation
+--------------------------------------------------------------
+
+The :ref:`CodecFormatFourCC <codec-format-fourcc>` enum specifies codec's FourCC
+values. Application needs to assign this value to the field of
+:cpp:member:`mfxDecoderDescription::decoder::CodecID` to search for the decoder
+or :cpp:member:`mfxEncoderDescription::encoder::CodecID` to search for the
+encoder.
+
+This code illustrates decoder's implementation search procedure:
+
+.. literalinclude:: ../snippets/prg_session.cpp
+   :language: c++
+   :start-after: /*beg3*/
+   :end-before: /*end3*/
+   :lineno-start: 1
+
+---------------------------------------------------------
+How To Search For The Avialable VPP Filter implementation
+---------------------------------------------------------
+
+Each VPP filter identified by the filter ID. Filter ID is defined by
+corresponding to the filter extension buffer ID value which is defined in a form
+of fourCC value.
+Filter ID values are subset of the general :ref:`ExtendedBufferID <extendedbufferid>`
+enum. The :ref:`table <vpp-filters-ids>` references avialable IDs of VPP filters
+to search. Application needs to assign this value to the field of
+:cpp:member:`mfxVPPDescription::filter::FilterFourCC` to search for the needed
+VPP filter.
+
+.. _vpp-filters-ids:
+
+.. list-table:: VPP Filters ID
+   :header-rows: 1
+   :widths: 58 42
+
+   * - **Filter ID**
+     - **Description**
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DENOISE`
+     - Denoise filter (deprecated in 2.2)
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DENOISE2`
+     - Denoise filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_MCTF`
+     - Motion-Compensated Temporal Filter (MCTF).
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DETAIL`
+     - Detail/edge enhancement filter.
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_FRAME_RATE_CONVERSION`
+     - Frame rate conversion filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_IMAGE_STABILIZATION`
+     - Image stabilization filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_PROCAMP`
+     - ProcAmp filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_FIELD_PROCESSING`
+     - Field processing filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_COLOR_CONVERSION`
+     - Color Conversion filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_SCALING`
+     - Resize filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_COMPOSITE`
+     - Surfaces composition filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DEINTERLACING`
+     - Deinterlace filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_ROTATION`
+     - Rotation filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_MIRRORING`
+     - Mirror filter
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_COLORFILL`
+     - ColorFill filter
+
+This code illustrate VPP mirror filter implementation search procedure:
+
+.. literalinclude:: ../snippets/prg_session.cpp
+   :language: c++
+   :start-after: /*beg4*/
+   :end-before: /*end4*/
+   :lineno-start: 1
+
+-----------------------------------------------------------------------------------------------------------
+oneVPL implementation on |intel_r| platforms with X\ :sup:`e` architecture and |msdk_full_name| Coexistence 
+-----------------------------------------------------------------------------------------------------------
+
+oneVPL supersedes |msdk_full_name| and partially binary compartible with
+|msdk_full_name|. Both oneVPL and |msdk_full_name| includes own dispatcher and
+implementation. Coexistance of oneVPL and |msdk_full_name| dispatchers and
+implementations on single system is allowed until |msdk_full_name| is not EOL.
+
+Usage of the following combinations of dispatchers and implementations within
+the single application is permitted for the legacy purposes only. In that
+scenario legacy applications developed with |msdk_full_name| will continue to
+work on any HW supported either by |msdk_full_name| or by the oneVPL.
+
+.. attention:: Any application to work with the oneVPL API starting from version
+               2.0 must use only oneVPL dispatcher.
+
+|msdk_full_name| API
+    |msdk_full_name| API of 1.x version.
+
+Removed API
+    |msdk_full_name| :ref:`API <deprecated-api>` which is removed from oneVPL.
+
+Core API
+    |msdk_full_name| API without removed API.
+
+oneVPL API
+    New :ref:`API <new-api>` introduced in oneVPL only started from API 2.0
+    version.
+
+oneVPL Dispatcher API
+    Dispatcher :ref:`API <dispatcher-api>` introduced in oneVPL in 2.0
+    API version. This is subset of oneVPL API.
+
+.. list-table:: oneVPL for |intel_r| platforms with X\ :sup:`e` architecture and |msdk_full_name|
+   :header-rows: 1
+   :widths: 25 25 25 25
+
+   * - **Dispatcher**
+     - **Installed on the system**
+     - **Loaded**
+     - **Allowed API**
+   * - oneVPL
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture
+     - Usage of any API except removed API is allowed.
+   * - oneVPL
+     - |msdk_full_name|
+     - |msdk_full_name|
+     - Usage of core API plus dispatcher API is allowed only.
+   * - oneVPL
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture and |msdk_full_name|
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture
+     - Usage of any API except removed API is allowed.
+   * - |msdk_full_name|
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture
+     - Usage of core API is allowed only.
+   * - |msdk_full_name|
+     - oneVPL for |intel_r| platforms with X\ :sup:`e` architecture and |msdk_full_name|
+     - |msdk_full_name|
+     - Usage of |msdk_full_name| API is allowed.
+   * - |msdk_full_name|
+     - |msdk_full_name|
+     - |msdk_full_name|
+     - Usage of |msdk_full_name| API is allowed.
 
 -----------------
 Multiple Sessions
@@ -210,25 +797,22 @@ Each oneVPL session can run exactly one instance of the DECODE, ENCODE, and
 VPP functions. This is adequate for a simple transcoding operation. If the
 application needs more than one instance of DECODE, ENCODE, or VPP
 in a complex transcoding setting or needs more simultaneous transcoding
-operations to balance CPU/GPU workloads, the application can initialize multiple
-oneVPL sessions. Each independent oneVPL session can be a software-based session or
-hardware-based session.
+operations, the application can initialize multiple
+oneVPL sessions created from one or several oneVPL implementations. 
 
 The application can use multiple oneVPL sessions independently or run a “joined”
-session. Independently operated oneVPL sessions cannot share data unless the
-application explicitly synchronizes session operations. This is to ensure that
-data is valid and complete before passing from the source to the destination
-session.
-
-To join two sessions together, the application can use the function
+session. To join two sessions together, the application can use the function
 :cpp:func:`MFXJoinSession`. Alternatively, the application can use the
 :cpp:func:`MFXCloneSession` function to duplicate an existing session. Joined
-oneVPL sessions work together as a single session, sharing all session resources,
-threading control, and prioritization operations except hardware acceleration
-devices and external allocators. When joined, the first session (first join)
-serves as the parent session and will schedule execution resources with all
-other child sessions. Child sessions rely on the parent session for resource
-management.
+oneVPL sessions work together as a single session, sharing all session
+resources, threading control, and prioritization operations except hardware
+acceleration devices and external allocators. When joined, the first session
+(first join) serves as the parent session and will schedule execution resources
+with all other child sessions. Child sessions rely on the parent session for
+resource management.
+
+.. important:: Applications can join sessions created from the same oneVPL 
+               implementation only.
 
 With joined sessions, the application can set the priority of session operations
 through the :cpp:func:`MFXSetPriority` function. A lower priority session
@@ -237,5 +821,5 @@ processing.
 
 After the completion of all session operations, the application can use the
 :cpp:func:`MFXDisjoinSession` function to remove the joined state of a session.
-Do not close the parent session until all child sessions are disjoined or closed.
-
+Do not close the parent session until all child sessions are disjoined or
+closed.
