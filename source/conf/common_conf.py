@@ -39,7 +39,7 @@ extensions = [
     'sphinx_substitution_extensions',
     'sphinxcontrib.plantuml',
     'breathe',
-    'vplapi',
+    #      'vplapi',
     'dalapi',  # oneDAL API generator
 ]
 
