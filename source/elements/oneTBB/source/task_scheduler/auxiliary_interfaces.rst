@@ -26,4 +26,4 @@ Member functions
 .. cpp:function:: task_group_context* current_context()
 
     **Returns**: a pointer to the ``task_group_context`` associated with the task currently
-     running. If no task is running by the calling thread, ``nullptr` is returned.
+     running. If no task is running by the calling thread, ``nullptr`` is returned.
