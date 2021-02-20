@@ -18,7 +18,12 @@ Tasks can be dynamically added to the group while it is executing.
 
         class task_group {
         public:
+            struct traits {
+                bool ignore_outer_cancellation{false};
+            };
+
             task_group();
+            task_group(traits t);
             ~task_group();
 
             template<typename Func>
@@ -40,6 +45,19 @@ Tasks can be dynamically added to the group while it is executing.
         bool is_current_task_group_canceling();
 
     } // namespace tbb
+
+
+Member types and constants
+--------------------------
+
+.. cpp:struct:: traits
+
+    Represents properties of the ``task_group``.
+
+    .. cpp:bool:: ignore_outer_cancellation
+
+       If equals to ``true``, the created ``task_group`` object ignores cancellation requests from
+       outer context.
 
 Member functions
 ----------------
