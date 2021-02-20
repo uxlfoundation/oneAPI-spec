@@ -27,6 +27,12 @@ Tasks can be dynamically added to the group while it is executing.
             template<typename Func>
             task_group_status run_and_wait( const Func& f );
 
+            template<typename Func>
+            task_handle make_task( Func&& f );
+
+            void run( task_handle&& th );
+            task_group_status run_and_wait( task_handle&& th );
+
             task_group_status wait();
             void cancel();
         };
@@ -53,13 +59,33 @@ Member functions
 
 .. cpp:function:: template<typename Func> void run( Func&& f )
 
-    Adds a task to compute ``f()`` and returns immediately.
-    The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    Adds a task to compute ``f()`` and returns immediately. The ``Func`` type must meet the
+    :doc:`TaskGroupFunc requirements <../../named_requirements/task_scheduler/task_group_func>`.
 
 .. cpp:function:: template<typename Func> task_group_status run_and_wait( const Func& f )
 
-    Equivalent to ``{run(f); return wait();}``, but guarantees that ``f()`` runs on the current thread.
-    The ``Func`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    Equivalent to ``{run(f); return wait();}``, but guarantees that ``f()`` runs on the current
+    thread. The ``Func`` type must meet the :doc:`TaskGroupFunc requirements
+    <../../named_requirements/task_scheduler/task_group_func>`.
+
+    **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
+
+.. cpp:function:: template<typename Func> task_handle make_task( Func&& f )
+
+    Creates a task that is associated with ``task_handle`` to compute ``f()``, but does not make it
+    available for execution. See the :doc:`task_handle <task_handle>`. The ``Func`` type must meet
+    the :doc:`TaskGroupFunc requirements <../../named_requirements/task_scheduler/task_group_func>`.
+
+    **Returns**: ``task_handle`` that must be passed to either method ``run`` or ``run_and_wait``.
+
+.. cpp:function:: void run( task_handle&& th )
+
+    Makes the task associated with ``th`` available for execution and returns immediately.
+
+.. cpp:function:: task_group_status run_and_wait( task_handle&& th )
+
+    Equivalent to ``{run(th); return wait();}``, but guarantees that the task associated with ``th``
+    runs on the current thread.
 
     **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
 
@@ -78,5 +104,9 @@ Non-member functions
 
 .. cpp:function:: bool is_current_task_group_canceling()
 
-    Returns true if an innermost ``task_group`` executing on this thread is cancelling its tasks.
+    **Returns**: true if an innermost ``task_group`` executing on this thread is cancelling its tasks.
 
+See also:
+
+* :doc:`task_group_context <../scheduling_controls/task_group_context_cls>`
+* :doc:`task_handle <task_handle>`
