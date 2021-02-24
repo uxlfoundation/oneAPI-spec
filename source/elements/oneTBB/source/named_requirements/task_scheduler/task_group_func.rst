@@ -2,9 +2,9 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-===========
+=============
 TaskGroupFunc
-===========
+=============
 **[req.task_group_func]**
 
 A type `Func` satisfies `TaskGroupFunc` if it meets `Function Objects` requirements from
