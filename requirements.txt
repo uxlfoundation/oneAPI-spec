@@ -18,6 +18,7 @@ sphinx_substitution_extensions
 sphinx_tabs
 sphinxcontrib-spelling
 sphinxcontrib-svg2pdfconverter
+sphinxmark
 graphviz
 lxml
 sphinxcontrib.plantuml

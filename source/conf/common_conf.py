@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinxcontrib.spelling',
     'sphinxcontrib.inkscapeconverter',
+    'sphinxmark',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinxcontrib.plantuml',
@@ -176,7 +177,10 @@ class BCLLexer(RegexLexer):
 # warnings
 lexers['regexp'] = BCLLexer(startinline=True)
 
+# -- Watermark
 
+sphinxmark_enable = True
+sphinxmark_div = 'section'
 def setup(app):
     app.add_role('supsub', supsub_role)
     add_custom_css = getattr(
