@@ -181,6 +181,8 @@ lexers['regexp'] = BCLLexer(startinline=True)
 
 sphinxmark_enable = True
 sphinxmark_div = 'section'
+
+
 def setup(app):
     app.add_role('supsub', supsub_role)
     add_custom_css = getattr(
