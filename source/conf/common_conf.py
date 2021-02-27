@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinxcontrib.spelling',
     'sphinxcontrib.inkscapeconverter',
+    'sphinxmark',
     'sphinx-prompt',
     'sphinx_substitution_extensions',
     'sphinxcontrib.plantuml',
@@ -175,6 +176,11 @@ class BCLLexer(RegexLexer):
 # oneart/oidn uses regexp code tag so make a faker lexer to avoid
 # warnings
 lexers['regexp'] = BCLLexer(startinline=True)
+
+# -- Watermark
+
+sphinxmark_enable = True
+sphinxmark_div = 'section'
 
 
 def setup(app):
