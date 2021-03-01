@@ -67,7 +67,7 @@ More precisely, let :math:`T` be a tensor of rank :math:`n` and let
 :math:`0 \leq i, j < n`. Then the following must hold:
 
 .. math::
-   \operatorname{stides}[i] \geq
+   \operatorname{strides}[i] \geq
    \operatorname{strides}[j] * \operatorname{dimensions}[j]
    \text{ if } \sigma(i) < \sigma(j) \text{ for all } 0 \leq i, j < n.
 
@@ -132,7 +132,7 @@ nomenclature from the previous section, the following equality holds:
 
 .. math::
 
-   \operatorname{stides}[i] =
+   \operatorname{strides}[i] =
    \operatorname{strides}[j] * \operatorname{dimensions}[j]
    \text{ if } \sigma(i) + 1 = \sigma(j) \text{ for all } 0 \leq i, j < n - 1.
 
