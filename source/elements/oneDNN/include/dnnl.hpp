@@ -1940,7 +1940,7 @@ struct convolution_forward : public primitive {
 
         /// Returns the bias memory descriptor.
         /// @returns The bias memory descriptor.
-        /// @returns A zero memory descriptor of the primitive does not have a
+        /// @returns A zero memory descriptor if the primitive does not have a
         ///     bias parameter.
         memory::desc bias_desc() const;
     };
