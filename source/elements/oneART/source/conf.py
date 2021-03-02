@@ -38,4 +38,5 @@ html_theme_options = {
     'use_issues_button': True,
     'use_edit_page_button': True,
     'repository_branch': 'main',
+    'search_bar_text': 'Search the spec...'
 }
