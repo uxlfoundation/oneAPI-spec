@@ -29,7 +29,7 @@ Buffer-based example
     #include <vector>
 
     #include "CL/sycl.hpp"
-    #include "mkl_stats_sycl.hpp"
+    #include "oneapi/mkl/stats.hpp"
 
     int main() {
         sycl::queue queue;
@@ -40,7 +40,7 @@ Buffer-based example
         // fill x storage with random numbers
         for(int i = 0; i < n_dims, i++) {
           for(int j = 0; j < n_observations; j++) {
-                x[j + i * n_observations] = float(std::rand()) / float(RAND_MAX)
+                x[j + i * n_observations] = float(std::rand()) / float(RAND_MAX);
             }
         }
         //create buffer for dataset
@@ -74,7 +74,7 @@ USM-based example
     #include <vector>
 
     #include "CL/sycl.hpp"
-    #include "mkl_stats_sycl.hpp"
+    #include "oneapi/mkl/stats.hpp"
 
     int main() {
         sycl::queue queue;
@@ -88,7 +88,7 @@ USM-based example
         // fill x storage with random numbers
         for(int i = 0; i < n_dims, i++) {
           for(int j = 0; j < n_observations; j++) {
-                x[j + i * n_observations] = float(std::rand()) / float(RAND_MAX)
+                x[j + i * n_observations] = float(std::rand()) / float(RAND_MAX);
             }
         }
         std::vector<float, decltype(allocator)> mean_buf(n_dims, allocator);
@@ -109,4 +109,3 @@ USM-based example
 You can also use USM with raw pointers by using the sycl::malloc_shared/malloc_device functions.
 
 **Parent topic:** :ref:`onemkl_stats`
-

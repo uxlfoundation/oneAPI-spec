@@ -137,7 +137,7 @@ make_dataset (USM version)
     .. rubric:: Throws
 
     oneapi::mkl::invalid_argument
-        Exception is thrown when :math:`n_dims \leq 0`, or :math:`n_observations \leq 0`, or observations == nullptr
+        Exception is thrown when :math:`n\_dims \leq 0`, or :math:`n\_observations \leq 0`, or observations == nullptr
 
 .. container:: section
 
@@ -147,4 +147,3 @@ make_dataset (USM version)
 
 
 **Parent topic:** :ref:`onemkl_stats_service_routines`
-

@@ -16,7 +16,7 @@ Distributions Template Parameter Method
         * -  Method
           -  Distributions
           -  Math Description
-        * -  ``uniform_method::standard``\         \ ``uniform_method::standard_accurate``\
+        * -  ``uniform_method::standard``\         \ ``uniform_method::accurate``\
           -  \ ``uniform(s,d)``\       \ ``uniform(i)``\
           -     Standard method. ``uniform_method::standard_accurate`` supported for ``uniform(s, d)`` only.
         * -  ``gaussian_method::box_muller``

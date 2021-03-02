@@ -32,8 +32,8 @@ skip_ahead
 .. code-block:: cpp
 
     namespace oneapi::mkl::rng {
-    template<typename EngineType> \
-                   void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip);
+    template<typename EngineType>
+    void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip);
     }
 
 .. container:: section
@@ -59,8 +59,8 @@ skip_ahead
 
     // Creating 3 identical engines
     oneapi::mkl::rng::mcg31m1 engine_1(queue, seed);
-    oneapi::mkl::rng::mcg31m1 engine_2(queue, engine_1);
-    oneapi::mkl::rng::mcg31m1 engine_3(queue, engine_2);
+    oneapi::mkl::rng::mcg31m1 engine_2(engine_1);
+    oneapi::mkl::rng::mcg31m1 engine_3(engine_2);
 
     // Skipping ahead by 7 elements the 2nd engine
     oneapi::mkl::rng::skip_ahead(engine_2, 7);
@@ -79,8 +79,8 @@ skip_ahead (Interface with a partitioned number of skipped elements)
 .. code-block:: cpp
 
     namespace oneapi::mkl::rng {
-    template<typename EngineType> \
-                   void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list<std::uint64_t> num_to_skip);
+    template<typename EngineType>
+    void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list<std::uint64_t> num_to_skip);
     }
 
 .. container:: section
@@ -112,10 +112,10 @@ skip_ahead (Interface with a partitioned number of skipped elements)
     std::initializer_list<std::uint64_t> num_to_skip = {0, 1};
 
     // Creating the 2nd engine based on 1st. Skipping by 2^64
-    oneapi::mkl::rng::mrg32k3a engine_2(queue, engine_1);
+    oneapi::mkl::rng::mrg32k3a engine_2(engine_1);
     oneapi::mkl::rng::skip_ahead(engine_2, num_to_skip);
 
 
 **Parent topic:** :ref:`onemkl_rng_service_routines`
 
-.. |image0| image:: ../equations/GUID-061AF9F8-B166-4154-9BF1-4E2C99F1CE1F-low.png
+.. |image0| image:: ../equations/rng-skip-ahead.png
