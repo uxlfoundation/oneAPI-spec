@@ -2,6 +2,40 @@
  Meeting Notes
 ===============
 
+2021-03-03
+==========
+
+* Next spec schedule: See roadmap_
+* Versions/naming/branches
+
+  * Move to rls/oneapi-v1.0, rls/oneart-v1.0
+  * Robert to write up branching,tagging, where changes go and submit
+    as PR.
+
+* Deprecation
+
+  * Use product process as a starting point. In general, issue is
+    breaking existing user code. Make most decision in component-level
+    core team. Can discuss with other oneapi core team members when
+    the answer is not clear (e.g. adding const). Removal on major
+    boundary. Component-level versions are more meaningful than
+    overall oneapi spec version number.
+
+* Working group minutes. Discussion about changes. Documenting so outside have visibility
+
+  * Open discussion. Not just patch to rst. Ends with PR.
+  * Publish minutes/notes of meetings, even if they are only Intel
+    attendees. Can use meeting-notes branch in oneapi-spec repo or
+    somewhere else if you prefer.
+
+* Formatting changes
+
+  * New 3 column layout for HTML
+  * Better support for PDF coming. Robert has a contact in infodev
+    with expertise in rst-latex-pdf.
+
+.. _roadmap: https://github.com/oneapi-src/oneAPI-spec/blob/main/roadmap.rst
+
 2020-11-23
 ==========
 
@@ -67,19 +101,17 @@
 
 * Bug/typo/etc fixes
 * Extensions
-  
   - Data Management:
-    
+
     - SoA table
     - CSR table
+
   -  Algorithms:
-     
+
      - Random Forest for classification, training and inference, batch computing mode
      - Random Forest for regression, training and inference, batch computing mode
-     - Support Vector Machine/SVM, binary classification, training and
-       inference, batch computing mode
-     - At least one kernel function to be used with SVM (to be
-       defined)
+     - Support Vector Machine/SVM, binary classification, training and inference, batch computing mode
+     - At least one kernel function to be used with SVM (to be defined)
        - Linear Regression, training and inference, batch computing mode
        - extension of K Nearest Neighbors model with support of KDTree
      - Covariance
