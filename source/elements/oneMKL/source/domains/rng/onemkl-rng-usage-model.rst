@@ -45,7 +45,7 @@ Buffer-based example
     #include <vector>
 
     #include "CL/sycl.hpp"
-    #include "mkl_rng_sycl.hpp"
+    #include "oneapi/mkl/rng.hpp"
 
     int main() {
         sycl::queue queue;
@@ -82,7 +82,7 @@ USM-based example
     #include <vector>
 
     #include "CL/sycl.hpp"
-    #include "mkl_rng_sycl.hpp"
+    #include "oneapi/mkl/rng.hpp"
 
     int main() {
         sycl::queue queue;
@@ -93,7 +93,7 @@ USM-based example
         sycl::usm_allocator<double, sycl::usm::alloc::shared> allocator(queue.get_context(), queue.get_device());
 
         // create vector with USM allocator
-        std::vector<double, sycl::usm_allocator<double, sycl::usm::alloc::shared>> r(n, allocator);
+        std::vector<double, decltype(allocator)> r(n, allocator);
 
         oneapi::mkl::rng::philox4x32x10 engine(queue, seed); // basic random number generator object
         oneapi::mkl::rng::gaussian<double, oneapi::mkl::rng::gaussian_method::box_muller2> distr(5.0, 2.0); // distribution object

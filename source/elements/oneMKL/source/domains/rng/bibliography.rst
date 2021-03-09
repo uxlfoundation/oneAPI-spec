@@ -11,7 +11,7 @@ Bibliography
 .. container::
 
 
-   For more information about the VS RNG functionality, refer to the
+   For more information about the RNG functionality, refer to the
    following publications:
 
 
@@ -21,7 +21,7 @@ Bibliography
       .. container::
 
 
-         **VS RNG**
+         **RNG**
 
          [Bratley88]
             Bratley P. and Fox B.L. *Implementing Sobol's Quasirandom

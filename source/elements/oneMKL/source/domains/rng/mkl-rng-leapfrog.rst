@@ -32,8 +32,8 @@ leapfrog
 .. code-block:: cpp
 
     namespace oneapi::mkl::rng {
-    template<typename EngineType> \
-                   void oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride);
+    template<typename EngineType>
+    void oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride);
     }
 
 .. container:: section
@@ -63,8 +63,8 @@ leapfrog
     // Creating 3 identical engines
     mkl::rng::mcg31m1 engine_1(queue, seed);
 
-    mkl::rng::mcg31m1 engine_2(queue, engine_1);
-    mkl::rng::mcg31m1 engine_3(queue, engine_1);
+    mkl::rng::mcg31m1 engine_2(engine_1);
+    mkl::rng::mcg31m1 engine_3(engine_1);
 
 
     // Leapfrogging the states of engines
@@ -76,4 +76,4 @@ leapfrog
 
 **Parent topic:** :ref:`onemkl_rng_service_routines`
 
-.. |image0| image:: ../equations/GUID-D90F2CB0-58B4-42F5-A1F9-FD1EA859DD44-low.png
+.. |image0| image:: ../equations/rng-leapfrog.png

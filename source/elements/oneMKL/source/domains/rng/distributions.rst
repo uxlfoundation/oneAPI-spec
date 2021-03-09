@@ -128,7 +128,7 @@ Distributions
          * -     Distribution
            -     Method
          * -           \ :ref:`onemkl_rng_uniform_continuous`\
-           -     `oneapi::mkl::rng::unform_method::standard_accurate`
+           -     `oneapi::mkl::rng::unform_method::accurate`
          * -           \ :ref:`onemkl_rng_exponential`\
            -     `oneapi::mkl::rng::exponential_method::icdf_accurate`
          * -           \ :ref:`onemkl_rng_weibull`\

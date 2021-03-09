@@ -69,7 +69,7 @@ class uniform
 
                 * ``oneapi::mkl::rng::uniform_method::by_default``
                 * ``oneapi::mkl::rng::uniform_method::standard``
-                * ``oneapi::mkl::rng::uniform_method::standard_accurate``
+                * ``oneapi::mkl::rng::uniform_method::accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`
 

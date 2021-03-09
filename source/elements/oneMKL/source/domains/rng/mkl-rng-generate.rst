@@ -25,7 +25,8 @@ generate (Buffer version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::rng {
-    template<typename DistrType, typename EngineType> void generate (const DistrType& distr, EngineType& engine, std::int64_t n, cl::sycl::buffer<typename DistrType::result_type, 1>& r);
+    template<typename DistrType, typename EngineType>
+    void generate (const DistrType& distr, EngineType& engine, std::int64_t n, sycl::buffer<typename DistrType::result_type, 1>& r);
     }
 
 .. container:: section
@@ -75,7 +76,8 @@ generate (USM version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::rng {
-    template<typename DistrType, typename EngineType> cl::sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const cl::sycl::vector_class<cl::sycl::event> & dependencies);
+    template<typename DistrType, typename EngineType>
+    sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const sycl::vector_class<sycl::event> & dependencies);
     }
 
 .. container:: section
@@ -126,4 +128,3 @@ generate (USM version)
 
 
 **Parent topic:** :ref:`onemkl_rng_generate_routine`
-

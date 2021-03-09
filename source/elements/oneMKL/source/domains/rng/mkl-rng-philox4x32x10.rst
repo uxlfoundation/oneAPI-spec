@@ -29,11 +29,11 @@ The Philox4x32x10 engine is a keyed family of generator of counter-based BRNG. T
 
         :math:`L_1^{i+1} =mullo(R_1^i, 0xD2511F53)`
 
-        :math:`R_1^{i+1} =mulhi(R_0^i, 0xCD9E8D57) \oplus k_0 \oplus L_0`
+        :math:`R_1^{i+1} =mulhi(R_0^i, 0xCD9E8D57) \oplus k_0^i \oplus L_0^i`
 
         :math:`L_0^{i+1} =mullo(R_0^i, 0xCD9E8D57)`
 
-        :math:`R_0^{i+1} =mulhi(R_1^i, 0xD2511F53) \oplus k_1 \oplus L_1`
+        :math:`R_0^{i+1} =mulhi(R_1^i, 0xD2511F53) \oplus k_1^i \oplus L_1^i`
 
         :math:`k_0^{i+1} =k_0^i + 0xBB67AE85`
 
