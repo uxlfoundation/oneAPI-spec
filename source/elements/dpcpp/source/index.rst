@@ -229,6 +229,6 @@ and the Khronos SYCL working group for their efforts defining and evolving the S
 .. _`conformance test suite`: https://github.com/KhronosGroup/SYCL-CTS
 .. _`extension tests`: https://github.com/intel/llvm/tree/sycl/sycl/test
 .. _`Release Notes`: https://github.com/intel/llvm/tree/sycl/sycl/ReleaseNotes.md
-.. _`Getting Started Guide`: https://github.com/intel/llvm/blob/sycl/sycl/doc/GetStartedGuide.md
+.. _`Getting Started Guide`: https://github.com/intel/llvm/blob/sycl/sycl/doc/GetStartedGuide.md#known-issues-and-limitations
 .. _`joining the Khronos Group`: https://www.khronos.org/members/
 .. _`Khronos SYCL GitHub project`: https://github.com/KhronosGroup/SYCL-Docs
