@@ -405,8 +405,10 @@ for each value in :code:`[value_first, value_last)`.  If the value exists in the
 the corresponding element in :code:`[result, result + distance(value_first, value_last))` is set to
 true, otherwise it is set to false.
 
-If no comparator is provided, :code:`operator<` is used to determine
-when the search value is less than an element in the range being searched.
+If no comparator is provided, :code:`operator<` is used to determine when the search value is less
+than an element in the range being searched. The elements e of [start, end) are partitioned with
+respect to the comparator used. For all elements e in [start, end) and a given search value v in
+[value_first, value_last) comp(e, v) implies !comp(v, e).
 
 .. code:: cpp
 
@@ -425,8 +427,10 @@ could be inserted in :code:`[start, end)` without violating the ordering defined
 provided. That lowest index is then assigned to the corresponding element in
 :code:`[result, result + distance(value_first, value_last))`.
 
-If no comparator is provided, :code:`operator<` is used to determine
-when the search value is less than an element in the range being searched.
+If no comparator is provided, :code:`operator<` is used to determine when the search value is less
+than an element in the range being searched. The elements e of [start, end) are partitioned with
+respect to the comparator used. For all elements e in [start, end) and a given search value v in
+[value_first, value_last) comp(e, v) implies !comp(v, e).
 
 .. code:: cpp
 
@@ -445,5 +449,7 @@ value could be inserted in :code:`[start, end)` without violating the ordering d
 comparator provided. That highest index is then assigned to the corresponding element in
 :code:`[result, result + distance(value_first, value_last))`.
 
-If no comparator is provided, :code:`operator<` is used to determine
-when the search value is less than an element in the range being searched.
+If no comparator is provided, :code:`operator<` is used to determine when the search value is less
+than an element in the range being searched. The elements e of [start, end) are partitioned with
+respect to the comparator used. For all elements e in [start, end) and a given search value v in
+[value_first, value_last) comp(e, v) implies !comp(v, e).
