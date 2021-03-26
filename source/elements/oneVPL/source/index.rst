@@ -31,3 +31,4 @@ Latest oneVPL specification version is |vpl_version|.
    Versioning
    appendix/index
    VPL_acronyms
+   VPL_change_log

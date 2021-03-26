@@ -156,38 +156,36 @@ priority rules:
           dispatcher must return the implementation with the highest API
           priority (greater than or equal to the implementation requested).
 
-The dispatcher searches for the implementation in the following folders at
-runtime, in priority order:
+How the shared library is identified using the implementation search strategy
+will vary according to the OS.
 
-#. User-defined search folders.
-#. oneVPL package.
-#. Path from :envvar:`PATH` or :envvar:`LD_LIBRARY_PATH` environmental variables,
-   depending on OS.
-#. Default system folders.
-#. Standalone |msdk_full_name| package (or driver).
+* On Windows, the dispatcher searches the following locations, in the specified
+  order, to find the correct implementation library:
 
-For more details, see the `legacy dispatcher search order <legacy_search_order>`_.
+  #. The :file:`Driver Store` directory for all avialable adapters.
+     All types of graphics drivers can install libraries in this directory. `Learn more about Driver Store <https://docs.microsoft.com/en-us/windows-hardware/drivers/install/driver-store>`__.
+     Applicable only for Intel implementations.
+  #. The directory of the exe file of the current process.
+  #. Current working directory.
+  #. `PATH` enviromental variable.
+  #. For backward compatibility with older spec versions, dispatcher also checks
+     user-defined search folders which are provided by `ONEVPL_SEARCH_PATH`
+     enviromental variable.
 
-A user can develop their own implementation and direct the oneVPL dispatcher to
-load their implementation by providing a list of search folders. The specific
-steps depend on which OS is used.
+* On Linux, the dispatcher searches the following locations, in the specified
+  order, to find the correct implementation library:
 
-* Linux: User can provide a colon separated list of folders in the
-  :envvar:`ONEVPL_SEARCH_PATH` environmental variable.
-* Windows: User can provide a semicolon separated list of folders in the
-  :envvar:`ONEVPL_SEARCH_PATH` environmental variable. Alternatively, the user
-  can use the Windows registry.
+  #. Directories provided by the environment variable ``LD_LIBRARY_PATH``.
+  #. Content of the :file:`/etc/ld.so.cache` cache file.
+  #. Default path :file:`/lib`, then :file:`/usr/lib` or :file:`/lib64`, and then
+     :file:`/usr/lib64` on some 64 bit OSs. On Debian: :file:`/usr/lib/x86_64-linux-gnu`.
+  #. Current working directory.
+  #. For backward compatibility with older spec versions, dispatcher also checks
+     user-defined search folders which are provided by `ONEVPL_SEARCH_PATH`
+     enviromental variable.
 
-
-.. list-table:: Dispatcher Environmental Variables
-   :header-rows: 1
-   :widths: 40 60
-
-   * - **Variable**
-     - **Purpose**
-   * - :envvar:`ONEVPL_SEARCH_PATH`
-     - List of user-defined search folders used by the dispatcher during implementation search.
-
+When oneVPL dispatcher searchers for the legacy |msdk_full_name|
+implementation it uses :ref:`legacy dispatcher search order <legacy_search_order>`.
 
 The dispatcher supports different software implementations. The user can use
 the :cpp:member:`mfxImplDescription::VendorID` field, the
@@ -200,7 +198,7 @@ Internally, the dispatcher works as follows:
 #. Dispatcher loads any shared library with `libvpl*` prefix in the library name
    in the given search folders.
 #. For each loaded library, the dispatcher tries to resolve address of the
-   :cpp:func:`MFXQueryImplsCapabilities` function to collect the implementation's
+   :cpp:func:`MFXQueryImplsDescription` function to collect the implementation's
    capabilities.
 #. Once the user has requested to create the session based on this implementation,
    the dispatcher obtains addresses of each oneVPL function. See the
@@ -246,14 +244,14 @@ left to right from column to column and concatenate strings by using `.` (dot) a
    |                                       | | .ApiVersion              |                      |                           |
    |                                       | | .Minor                   |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .ImplName                |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .ImplName                |                      | null-terminated string.   |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .License                 |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .License                 |                      | null-terminated string.   |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .Keywords                |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .Keywords                |                      | null-terminated string.   |
    |                                       +----------------------------+----------------------+---------------------------+
    |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
    |                                       | | .VendorImplID            |                      |                           |
@@ -761,7 +759,7 @@ oneVPL Dispatcher API
    :widths: 25 25 25 25
 
    * - **Dispatcher**
-     - **Installed on the system**
+     - **Installed on the device**
      - **Loaded**
      - **Allowed API**
    * - oneVPL
@@ -788,6 +786,9 @@ oneVPL Dispatcher API
      - |msdk_full_name|
      - |msdk_full_name|
      - Usage of |msdk_full_name| API is allowed.
+
+.. note:: if system has multiple devices the logic of selection and loading implementations
+          will be applied to each device accordingly to the system enumeration.
 
 -----------------
 Multiple Sessions

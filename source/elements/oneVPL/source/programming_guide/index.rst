@@ -8,20 +8,20 @@ Programming Guide
 
 This chapter describes the concepts used in programming with oneVPL.
 
-The application must use the include file :file:`mfxvideo.h` for C/C++ programming
-and link the oneVPL dispatcher library :file:`libmfx.so`.
+The application must use the include file :file:`mfx.h` for C/C++ programming
+and link the oneVPL dispatcher library :file:`libvpl.so`.
 
 Include these files:
 
 .. code-block:: c++
 
-   #include "mfxvideo.h"    /* oneVPL include file */
+   #include "mfx.h"    /* oneVPL include file */
 
 Link this library:
 
 .. code-block:: c++
 
-   libmfx.so                /* oneVPL dynamic dispatcher library (Linux\*) */
+   libvpl.so                /* oneVPL dynamic dispatcher library (Linux\*) */
 
 .. toctree::
    :hidden:
