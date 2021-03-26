@@ -67,9 +67,27 @@ In the :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`
 the oneVPL library increments reference counter of incoming surface frame so it is required
 that the application releases frame surface after the call.  
 
+Another approach to decode frames is to allocate video frames on-fly with help of 
+:cpp:func:`MFXMemory_GetSurfaceForDecode` function, feed the library and release
+working surface after :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` call.
+
+  .. attention:: Please pay attention on two release calls for surfaces:
+                 after :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` to decrease
+                 reference counter of working surface returned by 
+                 :cpp:func:`MFXMemory_GetSurfaceForDecode`.
+                 After :cpp:func:`MFXVideoCORE_SyncOperation` to decrease
+                 reference counter of ouput surface returned by 
+                 :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`.
+
+.. literalinclude:: ../snippets/prg_decoding.c
+   :language: c++
+   :start-after: /*beg6*/
+   :end-before: /*end6*/
+   :lineno-start: 1
+
 
 The following pseudo code shows the decoding procedure according to the legacy mode 
-(API version < 2.0) with external video frames allocation:
+with external video frames allocation:
 
 .. literalinclude:: ../snippets/prg_decoding.c
    :language: c++

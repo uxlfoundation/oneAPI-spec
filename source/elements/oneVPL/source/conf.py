@@ -27,6 +27,6 @@ repo_root = join('..', '..', '..', '..')
 exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 exec(open(join(repo_root, 'source', 'conf', 'element_conf.py')).read())
 
-cpp_id_attributes = ['MFX_CDECL']
+cpp_id_attributes = ['MFX_CDECL', 'MFX_DEPRECATED']
 
-c_id_attributes = ['MFX_CDECL']
+c_id_attributes = ['MFX_CDECL', 'MFX_DEPRECATED']

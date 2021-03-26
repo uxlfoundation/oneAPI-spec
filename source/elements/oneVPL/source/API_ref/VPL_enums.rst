@@ -1817,6 +1817,22 @@ PlatformCodeName
 .. doxygenenumvalue:: MFX_PLATFORM_TIGERLAKE
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_PLATFORM_ROCKETLAKE
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_S 
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_P 
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PLATFORM_ARCTICSOUND_P
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_PLATFORM_KEEMBAY
+   :project: oneVPL
+
+
 --------
 PRefType
 --------

@@ -193,7 +193,7 @@ mfxStatus MFX_CDECL MFXCreateSession(mfxLoader loader, mfxU32 i, mfxSession* ses
 
 /*!
    @brief
-      Destroys handle allocated by the MFXQueryImplsCapabilities function.
+      Destroys handle allocated by the MFXEnumImplementations function.
 
    @param[in] loader   Loader handle.
    @param[in] hdl      Handle to destroy. Can be equal to NULL.

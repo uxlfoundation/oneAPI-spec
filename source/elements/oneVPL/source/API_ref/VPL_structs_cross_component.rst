@@ -268,4 +268,10 @@ mfxRect
    :members:
    :protected-members:
    
+mfxExtHyperModeParam
+--------------------
 
+.. doxygenstruct:: mfxExtHyperModeParam
+   :project: oneVPL
+   :members:
+   :protected-members:
