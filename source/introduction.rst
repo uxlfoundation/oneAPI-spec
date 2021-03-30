@@ -37,7 +37,7 @@ data parallel algorithms make it possible to productively create
 highly efficient algorithms for parallel architectures.
 
 Data parallel algorithms are used for many of the most computationally
-vdemanding problems including scientific computing, artificial
+demanding problems including scientific computing, artificial
 intelligence, and visualization.  Data parallel algorithms can be
 efficiently mapped to a diverse set of architectures: multi-core CPUs,
 GPUs, systolic arrays, and FPGAs.
