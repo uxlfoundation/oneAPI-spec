@@ -8,10 +8,20 @@ Meeting notes
 Agenda
 ------
 
-- Deprecation of some methods of ``dal::array`` class.
+- Org changes in the team
+- Deprecation of some methods of
+  [``dal::array``](https://spec.oneapi.com/versions/latest/elements/oneDAL/source/data_management/array.html)
+  class.
 
-Problem statement
------------------
+Org changes in the team
+-----------------------
+
+Decision: extend the team with additional members for a better support and
+development of the specs.
+
+
+Deprecation: Problem statement
+------------------------------
 
 Objects of ``dal::array`` class can hold mutable or immutable data. The
 ``dal::array::need_mutable_data`` method allows users to replace immutable data
@@ -54,6 +64,12 @@ applications:
         const T b = x[0]; // <- SEGFAULT
     }
 
+In addition, the ``dal::array`` class has a static method ``wrap()`` that allows
+the user to create an array from a raw pointer. In case of USM data, this method
+does not accept information about the context that was used to allocate the
+pointer used to create an array object. That prevents us to have additional
+input parameter checks to avoid undefined behavior on the user side.
+
 Proposal
 --------
 
@@ -66,6 +82,10 @@ To simplify the behavior of ``dal::array`` objects, it is proposed to:
   mutable data block with the same memory kind as the immutable data block
   previously held in the array.
 
+- recommend user to make an explicit copy via DPC++ capabilities followed by
+  ``array::reset()`` call rather than using deprecated method
+  ``array::need_mutable_data()``.
+
 - deprecate ``static wrap(T*, std::int64_t count,
   const std::vector<sycl::event>& dependencies)`` method since it does not include
   the information about the context where the data block of type ``T`` is
@@ -74,22 +94,32 @@ To simplify the behavior of ``dal::array`` objects, it is proposed to:
 - create ``static wrap(const sycl::queue&, T*, std::int64_t count,
   const std::vector<sycl::event>& dependencies)`` method instead of deprecated one
 
+
+Another options that allow not to deprecate ``need_mutable_data()`` can be considered:
+
+a. Change the logic of ``need_mutable_data()`` the way it works only with the
+   same queue and allocation kind that are already used in the array for
+   immutable data, otherwise throw an exception. This option makes the API of
+   the method useless because this case can be covered by
+   ``need_mutable_data()`` without input parameters.
+b. Leave the method as is, but do not use it internally. This option has bad
+   impact on the customers that can face unexpected errors and undefined
+   behavior explained in the problem statement section.
+
 Decision
 --------
 
 1. Approve proposed changes
 
-2. Look one more time on the ``dal::array`` API:
-   some methods may require similar changes too (``reset`` method for example).
+2. Review interfaces of array class to clarify whether similar modifications are
+   required in other methods, e.g., ``reset()``
 
-3. Example on array use cases in the spec requires modification because of
-   proposed API changes.
+3. Modify the example or provide additional examples reflecting the
+   proposed changes
 
-4. Descriptions of methods behavior in the spec may require modifications
-   because of proposed changes.
+4. Review and clean-up description of the methods of the ``dal::array``
+   reflecting the proposed changes
 
-5. Need to perform synchronization between oneDAL spec and documentation of
-   Intel(R) oneDAL product, and eliminate a possible difference in the current
-   implementation of Intel(R) oneDAL and the behavior required by the spec. This
-   work can be done iteratively on regular basis by including particular tasks
+5. Synchronize implementation including documentation and the specs. This work
+   can be done iteratively on regular basis by including particular tasks
    in the sprints of the developer team.
