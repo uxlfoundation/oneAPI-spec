@@ -1826,12 +1826,13 @@ PlatformCodeName
 .. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_P 
    :project: oneVPL
 
-.. doxygenenumvalue:: MFX_PLATFORM_ARCTICSOUND_P
-   :project: oneVPL
+.. doxygenenumvalue:: MFX_PLATFORM_XEHP 
+    :project: oneVPL   
 
 .. doxygenenumvalue:: MFX_PLATFORM_KEEMBAY
    :project: oneVPL
 
+    
 
 --------
 PRefType
