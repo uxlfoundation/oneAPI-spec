@@ -21,5 +21,4 @@ sphinxcontrib-svg2pdfconverter
 sphinxmark
 graphviz
 lxml
-plantuml
 sphinxcontrib.plantuml

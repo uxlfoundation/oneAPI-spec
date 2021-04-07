@@ -12,6 +12,7 @@ jobs:
     - uses: actions/setup-python@v2
     - name: Install prerequisites
       run: |
+          sudo apt-get update -qq
           xargs -a ubuntu-packages.txt sudo apt install -qq
           python -m pip install --quiet --upgrade pip
           pip install --quiet -r requirements.txt
