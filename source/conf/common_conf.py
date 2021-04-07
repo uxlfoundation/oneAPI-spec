@@ -5,6 +5,7 @@
 import json
 import string
 import sys
+from os import environ
 from os.path import abspath, join
 
 import docutils
@@ -179,7 +180,7 @@ lexers['regexp'] = BCLLexer(startinline=True)
 
 # -- Watermark
 
-sphinxmark_enable = True
+sphinxmark_enable = 'ONEAPI_DRAFT' in environ
 sphinxmark_div = 'row#main-content'
 
 
