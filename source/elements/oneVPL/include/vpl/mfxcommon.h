@@ -195,7 +195,8 @@ enum {
     MFX_PLATFORM_ROCKETLAKE     = 42, /*!< Code name Rocket Lake. */
     MFX_PLATFORM_ALDERLAKE_S    = 43, /*!< Code name Alder Lake S. */
     MFX_PLATFORM_ALDERLAKE_P    = 44, /*!< Code name Alder Lake P. */
-    MFX_PLATFORM_ARCTICSOUND_P  = 45, /*!< Code name Arctic Sound P. */
+    MFX_PLATFORM_ARCTICSOUND_P  = 45,
+    MFX_PLATFORM_XEHP           = 45, /*!< Code name Xe HP. */
     MFX_PLATFORM_KEEMBAY        = 50, /*!< Code name Keem Bay. */
 };
 
