@@ -1,3 +1,7 @@
+REM SPDX-FileCopyrightText: 2021 Intel Corporation
+REM
+REM SPDX-License-Identifier: MIT
+
 @ECHO OFF
 
 pushd %~dp0
