@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2021 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
 # Minimal makefile for Sphinx documentation
 #
 
