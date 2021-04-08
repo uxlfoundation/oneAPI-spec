@@ -1826,7 +1826,7 @@ PlatformCodeName
 .. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_P 
    :project: oneVPL
 
-.. doxygenenumvalue:: MFX_PLATFORM_XEHP 
+.. doxygenenumvalue:: MFX_PLATFORM_XEHP_SDV
     :project: oneVPL   
 
 .. doxygenenumvalue:: MFX_PLATFORM_KEEMBAY
