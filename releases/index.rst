@@ -38,7 +38,7 @@ under development and is labeled *provisional* until it is approved.
     - Date
     - View
   * - `1.1 provisional rev 1`_
-    - 2020-4-7
+    - 2021-4-7
     - `HTML <https://spec.oneapi.com/versions/1.1-provisional-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.1-provisional-rev-1/oneAPI-spec.pdf>`__
 
 
