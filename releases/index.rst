@@ -14,8 +14,8 @@
 
 This document lists releases of oneAPI specifications.
 
-In addition to be published as part of the oneAPI spefication, some of
-the components publish specifications independent from the oneAPI
+In addition to be published as part of the oneAPI specification, some
+of the components publish specifications independent from the oneAPI
 specification. Typically, a oneAPI specification includes a snapshot
 of the latest approved release of the component. This page lists
 releases of the oneAPI specification and releases of component
@@ -144,6 +144,17 @@ Release Notes
 
 oneDNN Graph v0.5
 ~~~~~~~~~~~~~~~~~
+
+Provides more optimization and improves the programming
+experience. The main changes are as follows:
+
+- Support in-place optimization to reduce memory footprint and
+  provide better data locality
+- Support using the partition vector directly for compilation and
+  execution without maintaining a computation graph
+- Provide a special End op to express the multiple uses of a logical
+  tensor, typically for indicating the output tensors of the graph
+
 
 oneVPL
 ======
