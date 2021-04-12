@@ -19,7 +19,9 @@ API deprecation
 
 **Array class specification**: https://spec.oneapi.com/versions/latest/elements/oneDAL/source/data_management/array.html
 
-**Deprecation proposal**: `oneDAL/proposals/2021-03-21/array-methods-deprecation.rst`
+**Deprecation proposal**: proposal_
+
+.. _proposal: oneDAL/proposals/2021-03-21/array-methods-deprecation.rst
 
 
 1. Approve proposed changes
