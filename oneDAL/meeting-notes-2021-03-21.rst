@@ -21,7 +21,7 @@ API deprecation
 
 **Deprecation proposal**: proposal_
 
-.. _proposal: oneDAL/proposals/2021-03-21/array-methods-deprecation.rst
+.. _proposal: proposals/2021-03-21/array-methods-deprecation.rst
 
 
 1. Approve proposed changes
