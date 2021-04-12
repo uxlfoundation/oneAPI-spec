@@ -2,6 +2,8 @@
 Deprecation of methods in ``dal::array``
 ****************************************
 
+The presentation for this topic can be found in `oneDAL/proposals/array-methods-deprecation.pptx`
+
 Deprecation: Problem statement
 ------------------------------
 
