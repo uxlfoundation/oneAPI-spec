@@ -2,11 +2,6 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. oneAPI Specification Versions documentation master file, created by
-   sphinx-quickstart on Thu Apr  8 09:51:39 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 ===============================
  oneAPI Specification Releases
 ===============================
@@ -68,6 +63,11 @@ Release Notes
 
 1.1 provisional rev 1
 ~~~~~~~~~~~~~~~~~~~~~
+
+* Advanced Ray Tracing: ART was added to oneAPI specification
+* VPL: Updated to 2.3.1
+* Level Zero: Updated to 1.1.2
+* oneDNN: Added graph API
 
 1.0 rev 2
 ~~~~~~~~~
