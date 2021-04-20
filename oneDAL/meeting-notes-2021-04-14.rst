@@ -6,7 +6,7 @@ Opens
 -----
 
 Specification versioning is being discussed at the libraries workgroup
-(performance libraries, oneTBB, PSTL, oneCCL). The current proposal is to have a
+(performance libraries, oneTBB, DPL, oneCCL). The current proposal is to have a
 common version for the whole oneAPI spec and align its number with the
 year. Along with it, every oneAPI component shall have its own independent spec
 version. All the component specifications will be aggregated in the oneAPI spec
@@ -37,9 +37,11 @@ terminology for all ML tasks.
 Q: Does the literature use response as terminology for classification tasks?
 
 A: Yes, for example, "The Elements of Statistical Learning" (Trevor Hastie,
-Robert Tibshirani, Jerome Friedman) use this as a common definition too (see
+Robert Tibshirani, Jerome Friedman) uses this as a common definition too (see
 chapter 2.1, Introduction). This book also does not use "label" terminology
-so often, it uses "class labels" instead for the classification tasks.
+so often, it uses "class labels" instead for the classification tasks. 
+In addition, this resource among the ones was used to introduce Glossary 
+in the specs.
 
 Q: How good is to use "response" for clustering task?
 
