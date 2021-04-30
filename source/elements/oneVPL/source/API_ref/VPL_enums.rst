@@ -663,6 +663,9 @@ The ColorFourCC enumerator itemizes color formats.
 .. doxygenenumvalue:: MFX_FOURCC_Y416
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_FOURCC_BGRP
+   :project: oneVPL
+
 -----------
 ContentInfo
 -----------
