@@ -1,7 +1,6 @@
-.. oneAPI Specification Versions documentation master file, created by
-   sphinx-quickstart on Thu Apr  8 09:51:39 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. SPDX-FileCopyrightText: 2021 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
 
 ===============================
  oneAPI Specification Releases
@@ -38,7 +37,7 @@ under development and is labeled *provisional* until it is approved.
     - Date
     - View
   * - `1.1 provisional rev 1`_
-    - 2020-4-7
+    - 2021-4-7
     - `HTML <https://spec.oneapi.com/versions/1.1-provisional-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.1-provisional-rev-1/oneAPI-spec.pdf>`__
 
 
@@ -57,13 +56,18 @@ under development and is labeled *provisional* until it is approved.
     - `HTML <https://spec.oneapi.com/versions/1.0-rev-2/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-2/oneAPI-spec.pdf>`__
   * - `1.0 rev 1`_
     - 2020-9-14
-    - `HTML <https://spec.oneapi.com/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-1/oneAPI-spec.pdf>`__ 
+    - `HTML <https://spec.oneapi.com/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-1/oneAPI-spec.pdf>`__
 
 Release Notes
 -------------
 
 1.1 provisional rev 1
 ~~~~~~~~~~~~~~~~~~~~~
+
+* Advanced Ray Tracing: ART was added to oneAPI specification
+* VPL: Updated to 2.3.1
+* Level Zero: Updated to 1.1.2
+* oneDNN: Added graph API
 
 1.0 rev 2
 ~~~~~~~~~
@@ -114,7 +118,7 @@ oneART v0.5
 
 * The set of Advanced Ray Tracing APIs include the following, which
   are in active use via the Intel® oneAPI Rendering Toolkit:
-  
+
   * Embree
   * Open Volume Kernel Library
   * Open Image Denoise
@@ -162,13 +166,14 @@ oneVPL v2.3.1
 ~~~~~~~~~~~~~
 
 * Encoding in Hyper mode.
-  
+
 * New product names for platforms:
-  
+
   * Code name Rocket Lake,
   * Code name Alder Lake S,
   * Code name Alder Lake P,
   * Code name Arctic Sound P.
-    
+
 * mfx.h header file is added which includes all header files.
-* Added deprecation messages (deprecation macro) to the MFXInit and MFXInitEx functions definition.
+* Added deprecation messages (deprecation macro) to the MFXInit and
+  MFXInitEx functions definition.

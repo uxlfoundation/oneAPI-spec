@@ -30,5 +30,5 @@ for creating parallel applications:
    elements/oneVPL/source/index
    elements/oneMKL/source/index
    elements/oneART/source/nested-index
-   Releases <https://spec.oneapi/releases/index.html>
+   Releases <https://spec.oneapi.com/releases/index.html>
    notices
