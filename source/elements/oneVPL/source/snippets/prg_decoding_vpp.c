@@ -10,6 +10,7 @@
 #include "mfxdefs.h"
 #include "mfxvideo.h"
 
+#define UNUSED_PARAM(x) (void)(x)
 
 mfxSession session;
 mfxBitstream *bitstream;
@@ -18,6 +19,10 @@ mfxVideoParam* decode_par;
 mfxVideoChannelParam** vpp_par_array;
 mfxU32 num_channel_par;
 mfxStatus sts;
+
+static void do_smth(mfxFrameSurface1* surf) {
+  UNUSED_PARAM(surf);
+}
 
 static void prg_decoding_vpp1 () {
 /*beg1*/
@@ -34,9 +39,9 @@ sts = MFXVideoDECODE_VPP_Init(session, decode_par, vpp_par_array, num_channel_pa
 sts = MFXVideoDECODE_VPP_DecodeFrameAsync(session, bitstream, NULL, 0, &surf_array_out);
 
 //surf_array_out layout is
-surf_array_out->Surfaces[0]; //The first channel which contains original decoded frames
-surf_array_out->Surfaces[1]; //The second channel contains resized processed frames after decode. 
-surf_array_out->Surfaces[2]; //The third  channel contains color converted frames after decode. 
+do_smth(surf_array_out->Surfaces[0]); //The first channel contains decoded frames.
+do_smth(surf_array_out->Surfaces[1]); //The second channel contains resized frames after decode. 
+do_smth(surf_array_out->Surfaces[2]); //The third channel contains color converted frames after decode. 
 /*end1*/
 }
 
@@ -47,15 +52,15 @@ static void prg_decoding_vpp2 () {
 //1st call
 sts = MFXVideoDECODE_VPP_DecodeFrameAsync(session, bitstream, NULL, 0, &surf_array_out);
 //surf_array_out layout is
-surf_array_out->Surfaces[0]; //decoded frame
-surf_array_out->Surfaces[1]; //resized frame (ChannelId = 1). The first frame from channel wit resize availble 
+do_smth(surf_array_out->Surfaces[0]); //decoded frame
+do_smth(surf_array_out->Surfaces[1]); //resized frame (ChannelId = 1). The first frame from channel with resize avialable 
 // no output from channel with ADI output since it has one frame delay
 
 //2nd call
 sts = MFXVideoDECODE_VPP_DecodeFrameAsync(session, bitstream, NULL, 0, &surf_array_out);
 //surf_array_out layout is
-surf_array_out->Surfaces[0]; //decoded frame
-surf_array_out->Surfaces[1]; //resized frame (ChannelId = 1)
-surf_array_out->Surfaces[2]; //ADI output (ChannelId = 2). The first frame from ADI channel 
+do_smth(surf_array_out->Surfaces[0]); //decoded frame
+do_smth(surf_array_out->Surfaces[1]); //resized frame (ChannelId = 1)
+do_smth(surf_array_out->Surfaces[2]); //ADI output (ChannelId = 2). The first frame from ADI channel 
 /*end2*/
 }

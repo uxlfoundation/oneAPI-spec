@@ -18,7 +18,9 @@ changes.
 
 .. rubric:: oneVPL Specification Version
 
-Latest oneVPL specification version is |vpl_version|. 
+This document contains oneVPL specification version of |vpl_version|.
+
+Latest published version of oneVPL specification: `<https://spec.oneapi.com/onevpl/latest/index.html>`__.
 
 .. toctree::
    :titlesonly:

@@ -119,8 +119,8 @@ on :cpp:member:`mfxFrameAllocRequest::NumFrameSuggested` values:
 
 .. literalinclude:: ../snippets/prg_transcoding.c
    :language: c++
-   :start-after: /*beg3*/
-   :end-before: /*end3*/
+   :start-after: /*beg2*/
+   :end-before: /*end2*/
    :lineno-start: 1
 
 ------------------------

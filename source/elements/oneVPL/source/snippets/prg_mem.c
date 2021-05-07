@@ -5,7 +5,8 @@
 #include "mfxsession.h"
 #include "mfxvideo.h"
 
-/* these macro requires code complilation*/
+/* These macro required for code compilation. */
+#define UNUSED_PARAM(x) (void)(x)
 
 mfxSession session;
 mfxStatus sts;
@@ -17,26 +18,31 @@ mfxResourceType resource_type;
 
 static int isDeviceTypeCompatible(mfxHandleType device_type)
 {
+    UNUSED_PARAM(device_type);
     return 1;
 }
 
 static int isPossibleForMemorySharing(mfxHDL device_handle)
 {
+    UNUSED_PARAM(device_handle);
     return 1;
 }
 
 static int isResourceTypeCompatible(mfxResourceType resource_type)
 {
+    UNUSED_PARAM(resource_type);
     return 1;
 }
 
 static void ProcessNativeMemory(mfxHDL hdl)
 {
+    UNUSED_PARAM(hdl);
     return;
 }
 
 static void ProcessSystemMemory(mfxFrameSurface1 *surf)
 {
+    UNUSED_PARAM(surf);
     return;
 }
 /* end of internal stuff */
@@ -51,6 +57,7 @@ typedef struct {
 } mid_struct;
 
 mfxStatus fa_alloc(mfxHDL pthis, mfxFrameAllocRequest *request, mfxFrameAllocResponse *response) {
+   UNUSED_PARAM(pthis);
    if (!(request->Type&MFX_MEMTYPE_SYSTEM_MEMORY))
       return MFX_ERR_UNSUPPORTED;
    if (request->Info.FourCC!=MFX_FOURCC_NV12)
@@ -67,6 +74,7 @@ mfxStatus fa_alloc(mfxHDL pthis, mfxFrameAllocRequest *request, mfxFrameAllocRes
 }
 
 mfxStatus fa_lock(mfxHDL pthis, mfxMemId mid, mfxFrameData *ptr) {
+   UNUSED_PARAM(pthis);
    mid_struct *mmid=(mid_struct *)mid;
    ptr->Pitch=mmid->width;
    ptr->Y=mmid->base;
@@ -76,15 +84,21 @@ mfxStatus fa_lock(mfxHDL pthis, mfxMemId mid, mfxFrameData *ptr) {
 }
 
 mfxStatus fa_unlock(mfxHDL pthis, mfxMemId mid, mfxFrameData *ptr) {
+   UNUSED_PARAM(pthis);
+   UNUSED_PARAM(mid);
    if (ptr) ptr->Y=ptr->U=ptr->V=ptr->A=0;
    return MFX_ERR_NONE;
 }
 
 mfxStatus fa_gethdl(mfxHDL pthis, mfxMemId mid, mfxHDL *handle) {
+   UNUSED_PARAM(pthis);
+   UNUSED_PARAM(mid);
+   UNUSED_PARAM(handle);
    return MFX_ERR_UNSUPPORTED;
 }
 
 mfxStatus fa_free(mfxHDL pthis, mfxFrameAllocResponse *response) {
+   UNUSED_PARAM(pthis);
    for (int i=0;i<response->NumFrameActual;i++) {
       mid_struct *mmid=(mid_struct *)response->mids[i];
       free(mmid->base); free(mmid);
@@ -93,9 +107,9 @@ mfxStatus fa_free(mfxHDL pthis, mfxFrameAllocResponse *response) {
 }
 /*end1*/
 
-static int prg_mem2 () {
+static void prg_mem2 () {
 /*beg2*/
-// lets decode frame and try to access output in a an optimal way.
+// lets decode frame and try to access output in an optimal way.
 sts = MFXVideoDECODE_DecodeFrameAsync(session, NULL, NULL, &outsurface, &syncp);
 if (MFX_ERR_NONE == sts)
 {

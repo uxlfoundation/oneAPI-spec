@@ -431,7 +431,10 @@ MFX_PACK_END()
 /* The mfxImplCapsDeliveryFormat enumerator specifies delivery format of the implementation capability. */
 typedef enum {
     MFX_IMPLCAPS_IMPLDESCSTRUCTURE       = 1,  /*!< Deliver capabilities as mfxImplDescription structure. */
-    MFX_IMPLCAPS_IMPLEMENTEDFUNCTIONS    = 2   /*!< Deliver capabilities as mfxImplementedFunctions structure. */
+    MFX_IMPLCAPS_IMPLEMENTEDFUNCTIONS    = 2,  /*!< Deliver capabilities as mfxImplementedFunctions structure. */
+    MFX_IMPLCAPS_IMPLPATH                = 3   /*!< Deliver pointer to the null-terminated string with the path to the
+                                                    implementation. String is delivered in a form of buffer of
+                                                    mfxChar type. */
 } mfxImplCapsDeliveryFormat;
 
 MFX_PACK_BEGIN_STRUCT_W_PTR()

@@ -11,8 +11,9 @@
 #include "mfxvideo.h"
 #include "mfxmvc.h"
 
-/* these macro requires code complilation*/
-#define INFINITE 0
+/* These macro required for code compilation. */
+#define INFINITE 0x7FFFFFFF
+#define UNUSED_PARAM(x) (void)(x)
 
 mfxSession session;
 mfxBitstream *bitstream, *bits;
@@ -25,6 +26,7 @@ mfxSyncPoint syncp;
 
 static void allocate_pool_of_frame_surfaces(int nFrames)
 {
+    UNUSED_PARAM(nFrames);
     return;
 }
 
@@ -35,21 +37,26 @@ static int end_of_stream()
 
 static void append_more_bitstream(mfxBitstream *bs)
 {
+    UNUSED_PARAM(bs);
     return;
 }
 
 static void find_free_surface_from_the_pool(mfxFrameSurface1 **pool)
 {
+    UNUSED_PARAM(pool);
     return;
 }
 
 static void realloc_surface(mfxFrameSurface1* work, mfxFrameInfo FrameInfo)
 {
+    UNUSED_PARAM(work);
+    UNUSED_PARAM(FrameInfo);
     return;
 }
 
 static void do_something_with_decoded_frame(mfxFrameSurface1* disp)
 {
+    UNUSED_PARAM(disp);
     return;
 }
 
@@ -60,11 +67,13 @@ static void free_pool_of_frame_surfaces()
 
 static void add_surface_to_pool(mfxFrameSurface1* surf)
 {
+    UNUSED_PARAM(surf);
     return;
 }
 
 static void get_next_surface_from_pool(mfxFrameSurface1 **surface)
 {
+    UNUSED_PARAM(surface);
     return;
 }
 /* end of internal stuff */

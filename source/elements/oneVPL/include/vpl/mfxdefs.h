@@ -1,5 +1,5 @@
 /*############################################################################
-  # Copyright (C) 2019-2020 Intel Corporation
+  # Copyright (C) 2019-2021 Intel Corporation
   #
   # SPDX-License-Identifier: MIT
   ############################################################################*/
@@ -8,7 +8,7 @@
 #define __MFXDEFS_H__
 
 #define MFX_VERSION_MAJOR 2
-#define MFX_VERSION_MINOR 3
+#define MFX_VERSION_MINOR 4
 
 // MFX_VERSION - version of API that 'assumed' by build may be provided externally
 // if it omitted then latest stable API derived from Major.Minor is assumed
@@ -176,20 +176,35 @@ MFX_PACK_END()
 
 #define MFX_VARIANT_VERSION MFX_STRUCT_VERSION(1, 0)
 
-/*! The mfxVariantType enumerator data types for mfxVarianf type. */
+/*! The mfxDataType enumerates data type for mfxDataType. */
 typedef enum {
-    MFX_VARIANT_TYPE_UNSET = 0, /*!< Undefined type. */
-    MFX_VARIANT_TYPE_U8 = 1,   /*!< 8-bit unsigned integer. */
-    MFX_VARIANT_TYPE_I8,       /*!< 8-bit signed integer. */
-    MFX_VARIANT_TYPE_U16,      /*!< 16-bit unsigned integer. */
-    MFX_VARIANT_TYPE_I16,      /*!< 16-bit signed integer. */
-    MFX_VARIANT_TYPE_U32,      /*!< 32-bit unsigned integer. */
-    MFX_VARIANT_TYPE_I32,      /*!< 32-bit signed integer. */
-    MFX_VARIANT_TYPE_U64,      /*!< 64-bit unsigned integer. */
-    MFX_VARIANT_TYPE_I64,      /*!< 64-bit signed integer. */
-    MFX_VARIANT_TYPE_F32,      /*!< 32-bit single precision floating point. */
-    MFX_VARIANT_TYPE_F64,      /*!< 64-bit double precision floating point. */
-    MFX_VARIANT_TYPE_PTR,      /*!< Generic type pointer. */
+    MFX_DATA_TYPE_UNSET   = 0,            /*!< Undefined type. */
+    MFX_DATA_TYPE_U8,                     /*!< 8-bit unsigned integer. */
+    MFX_DATA_TYPE_I8,                     /*!< 8-bit signed integer. */
+    MFX_DATA_TYPE_U16,                    /*!< 16-bit unsigned integer. */
+    MFX_DATA_TYPE_I16,                    /*!< 16-bit signed integer. */
+    MFX_DATA_TYPE_U32,                    /*!< 32-bit unsigned integer. */
+    MFX_DATA_TYPE_I32,                    /*!< 32-bit signed integer. */
+    MFX_DATA_TYPE_U64,                    /*!< 64-bit unsigned integer. */
+    MFX_DATA_TYPE_I64,                    /*!< 64-bit signed integer. */
+    MFX_DATA_TYPE_F32,                    /*!< 32-bit single precision floating point. */
+    MFX_DATA_TYPE_F64,                    /*!< 64-bit double precision floating point. */
+}mfxDataType;
+
+/*! The mfxVariantType enumerator data types for mfxVariantType. */
+typedef enum {
+    MFX_VARIANT_TYPE_UNSET = MFX_DATA_TYPE_UNSET,                        /*!< Undefined type. */
+    MFX_VARIANT_TYPE_U8    = MFX_DATA_TYPE_U8,                           /*!< 8-bit unsigned integer. */
+    MFX_VARIANT_TYPE_I8    = MFX_DATA_TYPE_I8,                           /*!< 8-bit signed integer. */
+    MFX_VARIANT_TYPE_U16   = MFX_DATA_TYPE_U16,                          /*!< 16-bit unsigned integer. */
+    MFX_VARIANT_TYPE_I16   = MFX_DATA_TYPE_I16,                          /*!< 16-bit signed integer. */
+    MFX_VARIANT_TYPE_U32   = MFX_DATA_TYPE_U32,                          /*!< 32-bit unsigned integer. */
+    MFX_VARIANT_TYPE_I32   = MFX_DATA_TYPE_I32,                          /*!< 32-bit signed integer. */
+    MFX_VARIANT_TYPE_U64   = MFX_DATA_TYPE_U64,                          /*!< 64-bit unsigned integer. */
+    MFX_VARIANT_TYPE_I64   = MFX_DATA_TYPE_I64,                          /*!< 64-bit signed integer. */
+    MFX_VARIANT_TYPE_F32   = MFX_DATA_TYPE_F32,                          /*!< 32-bit single precision floating point. */
+    MFX_VARIANT_TYPE_F64   = MFX_DATA_TYPE_F64,                          /*!< 64-bit double precision floating point. */
+    MFX_VARIANT_TYPE_PTR,                                                /*!< Generic type pointer. */
 } mfxVariantType;
 
 MFX_PACK_BEGIN_STRUCT_W_PTR()
@@ -292,6 +307,17 @@ typedef enum
     MFX_ERR_MORE_DATA_SUBMIT_TASK       = -10000, /*!< Return MFX_ERR_MORE_DATA but submit internal asynchronous task. */
 
 } mfxStatus;
+
+
+MFX_PACK_BEGIN_USUAL_STRUCT()
+/*! Represents Globally Unique Identifier (GUID) with memory layout 
+    compliant to RFC 4122. See https://www.rfc-editor.org/info/rfc4122 for details. */
+typedef struct
+{
+    mfxU8 Data[16]; /*!< Array to keep GUID. */
+} mfxGUID;
+MFX_PACK_END()
+
 
 
 // Application

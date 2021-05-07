@@ -208,6 +208,38 @@ mfxExtVPPScaling
    :members:
    :protected-members:
 
+mfxChannel
+----------
+
+.. doxygenstruct:: mfxChannel
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfx3DLutSystemBuffer
+--------------------
+
+.. doxygenstruct:: mfx3DLutSystemBuffer
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfx3DLutVideoBuffer
+-------------------
+
+.. doxygenstruct:: mfx3DLutVideoBuffer
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtVPP3DLut
+--------------
+
+.. doxygenstruct:: mfxExtVPP3DLut
+   :project: oneVPL
+   :members:
+   :protected-members:
+
 mfxExtVPPVideoSignalInfo
 ------------------------
 

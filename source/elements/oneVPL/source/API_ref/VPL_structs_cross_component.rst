@@ -275,3 +275,12 @@ mfxExtHyperModeParam
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxGUID
+-------
+
+.. doxygenstruct:: mfxGUID
+   :project: oneVPL
+   :members:
+   :protected-members:
+
