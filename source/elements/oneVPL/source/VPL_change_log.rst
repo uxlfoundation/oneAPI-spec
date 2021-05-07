@@ -13,6 +13,18 @@ This section describes the API evolution from version to version.
    :depth: 1
 
 -----------
+Version 2.4
+-----------
+
+* Added ability to retrieve path to the shared library with the implementation.
+* Added 3DLUT (Three-Dimensional Look Up Table) filter in VPP.
+* Added mfxGUID structure to specify Globally Unique Identifiers (GUIDs).
+* Added QueryInterface function to mfxFrameSurfaceInterface.
+* Added AdaptiveRef and alias for ExtBrcAdaptiveLTR.
+* Added MFX_FOURCC_BGRP FourCC for Planar BGR format.
+* Enviromental variables to control dispatcher's logger.
+
+-----------
 Version 2.3
 -----------
 

@@ -13,8 +13,9 @@
 #include "mfxvideo.h"
 #include "mfxmvc.h"
 
-/* these macro requires code complilation*/
-#define INFINITE 0
+/* These macro required for code compilation. */
+#define INFINITE 0x7FFFFFFF
+#define UNUSED_PARAM(x) (void)(x)
 
 mfxVideoParam init_param;
 mfxFrameAllocRequest request;
@@ -26,6 +27,7 @@ mfxSyncPoint syncp;
 
 static void allocate_pool_of_frame_surfaces(int nFrames)
 {
+    UNUSED_PARAM(nFrames);
     return;
 }
 
@@ -36,16 +38,19 @@ static int end_of_stream()
 
 static void find_unlocked_surface_from_the_pool(mfxFrameSurface1 **pool)
 {
+    UNUSED_PARAM(pool);
     return;
 }
 
 static void fill_content_for_encoding(mfxFrameSurface1 *surface)
 {
+    UNUSED_PARAM(surface);
     return;
 }
 
 static void do_something_with_encoded_bits(mfxBitstream *bits)
 {
+    UNUSED_PARAM(bits);
     return;
 }
 
@@ -138,18 +143,22 @@ MFXVideoENCODE_Close(session);
 
    static int IsParametersSupported(mfxVideoParam *par)
    {
+       UNUSED_PARAM(par);
        // do some checks
        return 1;
    }
 
    static int IsResetPossible(MyBrcContext* ctx, mfxVideoParam *par)
    {
+       UNUSED_PARAM(ctx);
+       UNUSED_PARAM(par);
        // do some checks
        return 1;
    }
 
    static MyBrcFrame* GetFrame(MyBrcFrame *frame_queue, mfxU32 frame_queue_size, mfxU32 EncodedOrder)
    {
+       UNUSED_PARAM(EncodedOrder);
        //do some logic
        if(frame_queue_size) return &frame_queue[0];
        return NULL;
@@ -157,46 +166,62 @@ MFXVideoENCODE_Close(session);
 
    static mfxU32 GetFrameCost(mfxU16 FrameType, mfxU16 PyramidLayer)
    {
+       UNUSED_PARAM(FrameType);
+       UNUSED_PARAM(PyramidLayer);
        // calculate cost
        return 1;
    }
 
    static mfxU32 GetMinSize(MyBrcContext *ctx, mfxU32 cost)
    {
+       UNUSED_PARAM(ctx);
+       UNUSED_PARAM(cost);
        // do some logic
        return 1;
    }
 
    static mfxU32 GetMaxSize(MyBrcContext *ctx, mfxU32 cost)
    {
+       UNUSED_PARAM(ctx);
+       UNUSED_PARAM(cost);
        // do some logic
        return 1;
    }
 
    static mfxI32 GetInitQP(MyBrcContext *ctx, mfxU32 MinSize, mfxU32 MaxSize, mfxU32 cost)
    {
+       UNUSED_PARAM(ctx);
+       UNUSED_PARAM(MinSize);
+       UNUSED_PARAM(MaxSize);
+       UNUSED_PARAM(cost);
        // do some logic
        return 1;
    }
 
    static mfxU64 GetTime()
    {
-       mfxU64 wallClock;
+       mfxU64 wallClock = 0xFFFF;
        return wallClock;
    }
 
    static void UpdateBRCState(mfxU32 CodedFrameSize, MyBrcContext *ctx)
    {
+       UNUSED_PARAM(CodedFrameSize);
+       UNUSED_PARAM(ctx);
        return;
    }
 
    static void RemoveFromQueue(MyBrcFrame* frame_queue, mfxU32 frame_queue_size, MyBrcFrame* frame)
    {
+       UNUSED_PARAM(frame_queue);
+       UNUSED_PARAM(frame_queue_size);
+       UNUSED_PARAM(frame);
        return;
    }
 
    static mfxU64 GetMaxFrameEncodingTime(MyBrcContext *ctx)
    {
+       UNUSED_PARAM(ctx);
        return 2;
    }
 
@@ -204,7 +229,7 @@ MFXVideoENCODE_Close(session);
       MyBrcContext* ctx = (MyBrcContext*)pthis;
       mfxI32 QpBdOffset;
       mfxExtCodingOption2* co2;
-      mfxI32 defaultQP;
+      mfxI32 defaultQP = 4;
 
       if (!pthis || !par)
          return MFX_ERR_NULL_PTR;

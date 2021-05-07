@@ -109,6 +109,8 @@ list of configurable filters.
      - :cpp:struct:`mfxExtVPPProcAmp`
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_FIELD_PROCESSING`
      - :cpp:struct:`mfxExtVPPFieldProcessing`
+   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_3DLUT`
+     - :cpp:struct:`mfxExtVPP3DLut`
 
 The following example shows video processing configuration:
 
@@ -206,4 +208,25 @@ function. This is shown in the following pseudo code:
    :language: c++
    :start-after: /*beg3*/
    :end-before: /*end3*/
+   :lineno-start: 1
+
+----------------------
+Video Processing 3DLUT
+----------------------
+
+oneVPL video processing supports 3DLUT with Intel HW specific memory layout. The following pseudo code
+shows how to create a :cpp:enumerator:`MFX_3DLUT_MEMORY_LAYOUT_INTEL_65LUT` 3DLUT surface.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg4*/
+   :end-before: /*end4*/
+   :lineno-start: 1
+   
+The following pseudo code shows how to create a system memory :cpp:struct:`mfx3DLutSystemBuffer` 3DLUT surface.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg5*/
+   :end-before: /*end5*/
    :lineno-start: 1

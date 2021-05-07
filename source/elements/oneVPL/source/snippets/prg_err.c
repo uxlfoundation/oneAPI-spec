@@ -11,7 +11,7 @@
 #include "mfxdefs.h"
 #include "mfxvideo.h"
 
-/* these macro requires code complilation*/
+/* These macro required for code compilation. */
 #define INFINITE 0
 
 mfxSession session;
@@ -21,7 +21,11 @@ mfxSyncPoint buffered_syncp, syncp;
 /* end of internal stuff */
 
 static void prg_handle_device_busy (mfxSession session, mfxSyncPoint sp) {
-    sp ? MFXVideoCORE_SyncOperation(session, sp, INFINITE) : sleep(5);
+    if (sp) {
+        MFXVideoCORE_SyncOperation(session, sp, INFINITE);
+    } else {
+        sleep(5);
+    }
 }
 
 

@@ -663,6 +663,9 @@ The ColorFourCC enumerator itemizes color formats.
 .. doxygenenumvalue:: MFX_FOURCC_Y416
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_FOURCC_BGRP
+   :project: oneVPL
+
 -----------
 ContentInfo
 -----------
@@ -808,6 +811,9 @@ extended buffers or video processing algorithm identifiers.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_DENOISE2
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_VPP_3DLUT
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_SCENE_ANALYSIS
@@ -1307,6 +1313,27 @@ VPP scaling filter.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_INTERPOLATION_ADVANCED
+   :project: oneVPL
+
+--------
+DataType
+--------
+
+.. doxygenenum:: mfxDataType
+   :project: oneVPL
+
+-------------------
+3DLutChannelMapping
+-------------------
+
+.. doxygenenum:: mfx3DLutChannelMapping
+   :project: oneVPL
+
+-----------------
+3DLutMemoryLayout
+-----------------
+
+.. doxygenenum:: mfx3DLutMemoryLayout
    :project: oneVPL
 
 -------------------------------------
@@ -2263,4 +2290,11 @@ The FilmGrainFlags enumerator itemizes flags in AV1 film grain parameters.
    :project: oneVPL
    
 .. doxygenenumvalue:: MFX_FILM_GRAIN_CLIP_TO_RESTRICTED_RANGE
+   :project: oneVPL
+
+------------
+mfxHyperMode
+------------
+
+.. doxygenenum:: mfxHyperMode
    :project: oneVPL

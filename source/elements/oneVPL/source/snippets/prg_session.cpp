@@ -108,3 +108,31 @@ MFXSetConfigFilterProperty(mirror_flt_config
 MFXCreateSession(loader, 0, &mirror_session_handle);
 /*end4*/
 }
+
+static void prg_session5 () {
+/*beg5*/
+mfxHDL h;
+mfxSession def_session;
+
+loader = mfxLoader();
+
+// Create session from the first avialable implementation.
+// That's why we no any filters need to be set.
+// First avialable implementation has index equal to the 0.
+MFXCreateSession(loader, 0, &def_session);
+
+// Get and print out OS path to the loaded shared library
+// with the implementation. It is absolutely OK to call
+// MFXEnumImplementations after session creation just need to make
+// sure that the same index of implementation is provided to the
+// function call.
+MFXEnumImplementations(loader, 0, MFX_IMPLCAPS_IMPLPATH, &h);
+mfxChar* path = reinterpret_cast<mfxChar*>(h);
+
+// Print out the path
+std::cout << "Loaded shared library: " << path << std::endl;
+
+// Release the memory for the string with path.
+MFXDispReleaseImplDescription(loader, h);
+/*end5*/
+}

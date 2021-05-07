@@ -15,7 +15,7 @@
 #include "mfxadapter.h"
 #include "mfxdispatcher.h"
 
-/* these macro requires code complilation*/
+/* These macro required for code compilation. */
 
 #define MSDK_CHECK_STATUS(X, MSG)                {if ((X) < MFX_ERR_NONE) {printf("%s\n",MSG);}}
 
@@ -36,7 +36,7 @@ MSDK_CHECK_STATUS(sts, "MFXQueryAdaptersNumber failed");
 
 // Allocate memory for response
 std::vector<mfxAdapterInfo> displays_data(num_adapters_available);
-mfxAdaptersInfo adapters = { displays_data.data(), mfxU32(displays_data.size()), 0u };
+mfxAdaptersInfo adapters = { displays_data.data(), mfxU32(displays_data.size()), 0u, {0} };
 
 // Query information about all adapters (mind that first parameter is NULL)
 sts = MFXQueryAdapters(nullptr, &adapters);
@@ -79,8 +79,8 @@ default:
    impl = MFX_IMPL_HARDWARE_ANY;
    break;
 }
-
-// Initialize mfxSession in regular way with obtained implementation
+printf("Choosen implementation: %d\n", impl);
+// Initialize mfxSession in regular way with obtained implementation.
 /*end1*/
 return 0;
 }
@@ -97,10 +97,10 @@ MSDK_CHECK_STATUS(sts, "MFXQueryAdaptersNumber failed");
 
 // Allocate memory for response
 std::vector<mfxAdapterInfo> displays_data(num_adapters_available);
-mfxAdaptersInfo adapters = { displays_data.data(), mfxU32(displays_data.size()), 0u };
+mfxAdaptersInfo adapters = { displays_data.data(), mfxU32(displays_data.size()), 0u, {0} };
 
 // Fill description of Encode workload
-mfxComponentInfo interface_request = { MFX_COMPONENT_ENCODE, Encode_mfxVideoParam };
+mfxComponentInfo interface_request = { MFX_COMPONENT_ENCODE, Encode_mfxVideoParam, {0} };
 
 // Query information about suitable adapters for Encode workload described by Encode_mfxVideoParam
 sts = MFXQueryAdapters(&interface_request, &adapters);
@@ -134,6 +134,8 @@ default:
    impl = MFX_IMPL_HARDWARE_ANY;
    break;
 }
+
+printf("Choosen implementation: %d\n", impl);
 
 // Initialize mfxSession in regular way with obtained implementation
 /*end2*/

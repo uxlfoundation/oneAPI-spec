@@ -159,7 +159,6 @@ mfxExtCodingOption3
    :project: oneVPL
    :members:
    :protected-members:
-   :undoc-members:
 
 mfxExtCodingOptionSPSPPS
 ------------------------

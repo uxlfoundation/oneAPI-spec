@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
-/* these macro requires code complilation*/
+/* These macro required for code compilation. */
 #define sps_buffer NULL
 #define sps_buffer_length 0
 #define pps_buffer NULL

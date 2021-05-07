@@ -229,8 +229,8 @@ left to right from column to column and concatenate strings by using `.` (dot) a
    | :cpp:struct:`mfxImplDescription`      | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
    |                                       | | .Impl                    |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .AccelerationMode        |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 | The mode will be used for |
+   |                                       | | .AccelerationMode        |                      | session initilization     |
    |                                       +----------------------------+----------------------+---------------------------+
    |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
    |                                       | | .ApiVersion              |                      |                           |
@@ -254,13 +254,13 @@ left to right from column to column and concatenate strings by using `.` (dot) a
    |                                       | | .Keywords                |                      | null-terminated string.   |
    |                                       +----------------------------+----------------------+---------------------------+
    |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .VendorImplID            |                      |                           |
+   |                                       | | .VendorID                |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
    |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .AccelerationMode        |                      |                           |
+   |                                       | | .VendorImplID            |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .mfxDeviceDescription    |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxDeviceDescription    |                      | null-terminated string.   |
    |                                       | | .device                  |                      |                           |
    |                                       | | .DeviceID                |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
@@ -365,43 +365,43 @@ left to right from column to column and concatenate strings by using `.` (dot) a
    |                                       | | .encmemdesc              |                      |                           |
    |                                       | | .ColorFormats            |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxVPPDescription       |                      |                           |
    |                                       | | .filter                  |                      |                           |
    |                                       | | .FilterFourCC            |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+   |                                       | | .mfxVPPDescription       |                      |                           |
    |                                       | | .filter                  |                      |                           |
    |                                       | | .MaxDelayInFrames        |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxVPPDescription       |                      |                           |
    |                                       | | .filter                  |                      |                           |
    |                                       | | .memdesc                 |                      |                           |
    |                                       | | .MemHandleType           |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxVPPDescription       |                      | :cpp:struct:`mfxRange32U` |
    |                                       | | .filter                  |                      | object                    |
    |                                       | | .memdesc                 |                      |                           |
    |                                       | | .Width                   |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+   |                                       | | .mfxVPPDescription       |                      | :cpp:struct:`mfxRange32U` |
    |                                       | | .filter                  |                      | object                    |
    |                                       | | .memdesc                 |                      |                           |
    |                                       | | .Height                  |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxVPPDescription       |                      |                           |
    |                                       | | .filter                  |                      |                           |
    |                                       | | .memdesc                 |                      |                           |
    |                                       | | .format                  |                      |                           |
    |                                       | | .InFormat                |                      |                           |
    |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxVPPDescription        | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
+   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+   |                                       | | .mfxVPPDescription       |                      |                           |
    |                                       | | .filter                  |                      |                           |
    |                                       | | .memdesc                 |                      |                           |
    |                                       | | .format                  |                      |                           |
@@ -410,6 +410,12 @@ left to right from column to column and concatenate strings by using `.` (dot) a
    | :cpp:struct:`mfxImplementedFunctions` | | mfxImplementedFunctions  | MFX_VARIANT_TYPE_PTR | Pointer to the buffer     |
    |                                       | | .FunctionsName           |                      | with string               |
    +---------------------------------------+----------------------------+----------------------+---------------------------+
+   | N/A                                   | | DXGIAdapterIndex         | MFX_VARIANT_TYPE_U32 | Adapter index according   |
+   |                                       | |                          |                      | to                        |
+   |                                       | |                          |                      | IDXGIFactory::EnumAdapters|
+   +---------------------------------------+----------------------------+----------------------+---------------------------+
+
+.. important:: DXGIAdapterNum property is available for Windows only and filters only hardware implementations.
 
 Examples of the property name strings:
 
@@ -616,7 +622,59 @@ library. The sequence diagram below demonstrates the approach.
                :cpp:struct:`mfxVPPDescription` when enumerates or creates
                |msdk_full_name| implementation. Once |msdk_full_name| is loaded
                applications have to use legacy approach to query capabilities.
-   
+
+---------------------------
+oneVPL Dispatcher Debug Log
+---------------------------
+
+The debug output of the dispatcher is controlled with the `ONEVPL_DISPATCHER_LOG`
+environment variable. To enable log output, set the `ONEVPL_DISPATCHER_LOG`
+environment variable value equals to "ON".
+
+By default, oneVPL dispatcher prints all log messages to the console.
+To redirect log output to the desired file, set the `ONEVPL_DISPATCHER_LOG_FILE`
+environmental variable with the file name of the log file.
+
+------------------------------
+Examples of Dispathcer's Usage
+------------------------------
+
+This code illustrates simple usage of dispathcer to load first avialable
+library:
+
+.. literalinclude:: ../snippets/prg_disp.c
+   :language: c++
+   :start-after: /*beg1*/
+   :end-before: /*end1*/
+   :lineno-start: 1
+
+This code illustrates simple usage of dispathcer to load first avialable HW
+accelerated library:
+
+.. literalinclude:: ../snippets/prg_disp.c
+   :language: c++
+   :start-after: /*beg2*/
+   :end-before: /*end2*/
+   :lineno-start: 1
+
+This code illustrates how multiple sessions from multiple loaders can be
+created:
+
+.. literalinclude:: ../snippets/prg_disp.c
+   :language: c++
+   :start-after: /*beg3*/
+   :end-before: /*end3*/
+   :lineno-start: 1
+
+This code illustrates how multiple decoders from single loader can be
+created:
+
+.. literalinclude:: ../snippets/prg_disp.c
+   :language: c++
+   :start-after: /*beg4*/
+   :end-before: /*end4*/
+   :lineno-start: 1
+
 ---------------------------------------
 How To Check If Function is Implemented
 ---------------------------------------
@@ -712,12 +770,31 @@ VPP filter.
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_COLORFILL`
      - ColorFill filter
 
-This code illustrate VPP mirror filter implementation search procedure:
+This code illustrates VPP mirror filter implementation search procedure:
 
 .. literalinclude:: ../snippets/prg_session.cpp
    :language: c++
    :start-after: /*beg4*/
    :end-before: /*end4*/
+   :lineno-start: 1
+
+-------------------------------------------------------------
+How To Get Path to the Shared Library With the Implementation
+-------------------------------------------------------------
+
+Sessions can be created from different implementations, each implementations can
+be located in different shared libraries. To get path of the shared library with
+the implementation from which session can be or was created, application can use
+:cpp:func:`MFXEnumImplementations` and pass :cpp:enumerator:`MFX_IMPLCAPS_IMPLPATH`
+value as the outpt data request.
+
+This code illustrates collection and print out path of implementations's
+shared library:
+
+.. literalinclude:: ../snippets/prg_session.cpp
+   :language: c++
+   :start-after: /*beg5*/
+   :end-before: /*end5*/
    :lineno-start: 1
 
 -----------------------------------------------------------------------------------------------------------

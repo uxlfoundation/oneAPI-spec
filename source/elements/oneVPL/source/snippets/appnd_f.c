@@ -9,7 +9,7 @@
 #include "mfxdefs.h"
 #include "mfxvideo.h"
 
-/* these macro requires code complilation*/
+/* These macro required for code compilation. */
 mfxSession session;
 #define valid_non_zero_value 1
 #define frame_qp 4
