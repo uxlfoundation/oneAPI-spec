@@ -172,4 +172,3 @@ oneVPL v2.4.0
 * Added AdaptiveRef and alias for ExtBrcAdaptiveLTR.
 * Added MFX_FOURCC_BGRP FourCC for Planar BGR format.
 * Environmental variables to control dispatcher's logger.
-
