@@ -161,18 +161,6 @@ oneVPL
   * - `oneVPL v2.4.0`_
     - 2021-5-12
     - `HTML <https://spec.oneapi.com/onevpl/2.4.0/index.html>`__
-
-
-2.3
----
-
-.. list-table::
-  :widths: 30 20 50
-  :header-rows: 1
-
-  * - Version
-    - Date
-    - View
   * - `oneVPL v2.3.1`_
     - 2021-4-8
     - `HTML <https://spec.oneapi.com/onevpl/2.3.1/index.html>`__
