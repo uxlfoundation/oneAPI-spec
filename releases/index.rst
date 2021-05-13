@@ -148,9 +148,6 @@ oneDNN Graph v0.5
 oneVPL
 ======
 
-2.4
----
-
 .. list-table::
   :widths: 30 20 50
   :header-rows: 1
