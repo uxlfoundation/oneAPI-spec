@@ -158,6 +158,9 @@ oneVPL
   * - `oneVPL v2.4.0`_
     - 2021-5-12
     - `HTML <https://spec.oneapi.com/onevpl/2.4.0/index.html>`__
+  * - `oneVPL v2.3.1`_
+    - 2021-4-8
+    - `HTML <https://spec.oneapi.com/onevpl/2.3.1/index.html>`__
 
 Release Notes
 -------------
@@ -172,3 +175,19 @@ oneVPL v2.4.0
 * Added AdaptiveRef and alias for ExtBrcAdaptiveLTR.
 * Added MFX_FOURCC_BGRP FourCC for Planar BGR format.
 * Environmental variables to control dispatcher's logger.
+
+oneVPL v2.3.1
+~~~~~~~~~~~~~
+
+* Encoding in Hyper mode.
+
+* New product names for platforms:
+
+  * Code name Rocket Lake,
+  * Code name Alder Lake S,
+  * Code name Alder Lake P,
+  * Code name Arctic Sound P.
+
+* mfx.h header file is added which includes all header files.
+* Added deprecation messages (deprecation macro) to the MFXInit and
+  MFXInitEx functions definition.
