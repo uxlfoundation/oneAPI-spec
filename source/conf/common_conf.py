@@ -186,7 +186,4 @@ sphinxmark_div = 'row#main-content'
 
 def setup(app):
     app.add_role('supsub', supsub_role)
-    add_custom_css = getattr(
-        app, 'add_css_file', getattr(app, 'add_stylesheet')
-    )
-    add_custom_css('custom.css')
+    app.add_css_file('custom.css')
