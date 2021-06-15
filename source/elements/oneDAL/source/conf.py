@@ -27,4 +27,6 @@ project = 'oneDAL'
 from element_conf import *
 
 # oneDAL project directory is needed for `dalapi` extension
-onedal_project_dir = '../'
+onedal_relative_doxyfile_dir = '..'
+onedal_relative_sources_dir = '..'
+onedal_enable_listing = True
