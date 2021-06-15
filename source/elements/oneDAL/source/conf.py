@@ -18,13 +18,13 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join('../../../conf')))
-# element_conf needs to import this conf
-sys.path.insert(0, os.path.abspath('.'))
+from os.path import join
 
 project = 'oneDAL'
 
-from element_conf import *
+repo_root = join('..', '..', '..', '..')
+exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
+exec(open(join(repo_root, 'source', 'conf', 'element_conf.py')).read())
 
 # oneDAL project directory is needed for `dalapi` extension
 onedal_relative_doxyfile_dir = '..'
