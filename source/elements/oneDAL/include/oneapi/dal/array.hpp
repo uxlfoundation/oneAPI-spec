@@ -19,7 +19,6 @@ public:
     /// @pre :literal:`count > 0`
     /// @post :literal:`get_count() == count`
     /// @post :literal:`has_mutable_data() == true`
-    /// @post :literal:`get_mutable_data() == get_data()`
     static array<Data> empty(const sycl::queue& queue,
                              std::int64_t count,
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
@@ -114,7 +113,7 @@ public:
 
     /// Creates a new array instance from a pointer to externally-allocated mutable memory block.
     /// The created array manages lifetime of the user-provided memory block. The memory block is
-    /// deallocated using a custom deleter object supplied by the user.
+    /// deallocated using a custom deleter object provided by the user.
     ///
     /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
     ///                 The expression :literal:`deleter(data)` must be well-formed
@@ -141,7 +140,7 @@ public:
 
     /// Creates a new array instance from a pointer to externally-allocated immutable memory block.
     /// The created array manages lifetime of the user-provided memory block. The memory block is
-    /// deallocated using a custom deleter object supplied by the user.
+    /// deallocated using a custom deleter object provided by the user.
     ///
     /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
     ///                      The expression :literal:`deleter(data)` must be well-formed
@@ -166,10 +165,11 @@ public:
                    const std::vector<sycl::event>& dependencies = {});
 
     /// Creates a new array instance that shares ownership with the reference array while storing
-    /// pointer to another memory block. Lifetime of the memory block is not managed by the created
-    /// array. One of use cases of this constructor is creation of an array with offset, for example,
-    /// :literal:`array{ other, other.get_data() + offset }`. The array created this way, shared
-    /// ownership with the ``other`` array, but points to its data with offset.
+    /// pointer to another memory block provided by the user. Lifetime of the user-provided memory
+    /// block is not managed by the created array. One of use cases of this constructor is creation
+    /// of an array with offset, for example, :literal:`array{ other, other.get_data() + offset }`.
+    /// The array created this way, shared ownership with the ``other`` array, but points to its
+    /// data with offset.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
@@ -218,10 +218,10 @@ public:
 
     /// Does nothing if array contains mutable data. Otherwise, allocates a mutable memory block and
     /// copies content of the immutable memory block into it. The array manages lifetime of the
-    /// allocated mutable memory block block. Returns reference to the same array instance.
+    /// allocated mutable memory block. Returns reference to the same array instance.
     ///
     /// @param queue The SYCL* queue object.
-    /// @param alloc The kind of USM to be allocated
+    /// @param alloc The kind of USM to be allocated.
     ///
     /// @post :literal:`has_mutable_data() == true`
     array& need_mutable_data(sycl::queue& queue,
@@ -237,80 +237,95 @@ public:
     /// Provides a read-only access to the elements of array.
     const Data& operator[](std::int64_t index) const noexcept;
 
-    /// Resets ownership structure pointer to ``nullptr``,
-    /// sets :expr:`count` to zero, :expr:`data` and :expr:`mutable_data` to :expr:`nullptr`.
+    /// Releases ownership of the managed memory block.
+    ///
+    /// @pre :literal:`count > 0`
+    /// @post :literal:`get_count() == count`
+    /// @post :literal:`has_mutable_data() == true`
     void reset();
 
-    /// Allocates a new memory block for mutable data, does not initialize it,
-    /// creates ownership structure for this block, assigns the structure inside the array.
-    /// The array shall own allocated memory block.
+    /// Releases ownership of the managed memory block and replace it by a newly allocated mutable
+    /// memory block. The lifetime of the allocated memory block is managed by the array.
     ///
     /// @param queue The SYCL* queue object.
-    /// @param count The number of elements of type $Data$ to allocate memory for.
-    /// @param alloc The kind of USM to be allocated
+    /// @param count The number of elements of type ``Data`` to allocate memory for.
+    /// @param alloc The kind of USM to be allocated.
+    ///
+    /// @pre :literal:`count > 0`
+    /// @post :literal:`get_count() > count`
+    /// @post :literal:`get_count() > count`
     void reset(const sycl::queue& queue,
                std::int64_t count,
                const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Creates the ownership structure for memory block of externally-allocated mutable data,
-    /// assigns input $deleter$ object to it,
-    /// sets :expr:`data` and :expr:`mutable_data` pointers to this block.
+    /// Releases ownership of the managed memory block and replace it by a pointer to
+    /// externally-allocated mutable memory block. The lifetime of the memory block is managed by
+    /// the array. The memory block is deallocated using a custom deleter object provided by the
+    /// user.
     ///
-    /// @tparam Deleter     The type of a deleter used to free the $data$.
-    ///                     The deleter shall implement ``void operator()(Data*)`` member function.
+    /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
+    ///                 The expression :literal:`deleter(data)` must be well-formed
+    ///                 and not throw any exceptions.
     ///
-    /// @param data         The mutable memory block pointer to be assigned inside the array
-    /// @param count        The number of elements of type $Data$ into the block
-    /// @param deleter      The object used to free $data$.
-    /// @param dependencies Events indicating availability of the $data$ for reading or writing.
+    /// @param data         The pointer to externally-allocated memory block.
+    /// @param count        The number of elements of type ``Data`` in the ``data``.
+    /// @param deleter      The object used to free ``data``.
+    /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
+    ///
+    /// @pre :literal:`data != nullptr`
+    /// @pre :literal:`count > 0`
+    /// @post :literal:`get_count() == count`
+    /// @post :literal:`get_data() == data`
+    /// @post :literal:`has_mutable_data() == true`
+    /// @post :literal:`get_mutable_data() == data`
     template <typename Deleter>
     void reset(Data* data,
                std::int64_t count,
                Deleter&& deleter,
-               const sycl::vector_class<sycl::event>& dependencies = {});
+               const std::vector<sycl::event>& dependencies = {});
 
-    /// Creates the ownership structure for memory block of externally-allocated immutable data,
-    /// assigns input $deleter$ object to it,
-    /// sets :expr:`data` pointer to this block.
+    /// Releases ownership of the managed memory block and replace it by a pointer to
+    /// externally-allocated mutable memory block. The lifetime of the memory block is managed by
+    /// the array. The memory block is deallocated using a custom deleter object provided by the
+    /// user.
     ///
-    /// @tparam ConstDeleter The type of a deleter used to free.
-    ///                      The deleter shall implement `void operator()(const Data*)`` member function.
+    /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
+    ///                      The expression :literal:`deleter(data)` must be well-formed
+    ///                      and not throw any exceptions.
     ///
-    /// @param data          The immutable memory block pointer to be assigned inside the array
-    /// @param count         The number of elements of type $Data$ into the block
-    /// @param deleter       The object used to free $data$.
-    /// @param dependencies  Events indicating availability of the $data$ for reading or writing.
+    /// @param data         The pointer to externally-allocated memory block.
+    /// @param count        The number of elements of type ``Data`` in the ``data``.
+    /// @param deleter      The object used to free ``data``.
+    /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
+    ///
+    /// @pre :literal:`data != nullptr`
+    /// @pre :literal:`count > 0`
+    /// @post :literal:`get_count() == count`
+    /// @post :literal:`get_data() == data`
+    /// @post :literal:`has_mutable_data() == false`
     template <typename ConstDeleter>
     void reset(const Data* data,
                std::int64_t count,
                ConstDeleter&& deleter,
-               const sycl::vector_class<sycl::event>& dependencies = {});
+               const std::vector<sycl::event>& dependencies = {});
 
-    /// Initializes :expr:`data` and :expr:`mutable_data` with data pointer,
-    /// :expr:`count` with input $count$ value, initializes
-    /// the pointer to ownership structure with the one from ref. Array shall
-    /// return $data$ pointer as its mutable block.
-
-    /// @tparam RefData    The type of elements in the referenced array.
+    /// Releases ownership of the managed memory block and start managing lifetime of the reference
+    /// array while storing pointer to another memory block provided by the user. Lifetime of the
+    /// user-provided memory block is not managed.
     ///
-    /// @param ref   The array which is used to share ownership structure with current one.
-    /// @param data  Mutable unmanaged pointer to be assigned to the array.
-    /// @param count The number of elements of type $Data$ in the $data$.
-    template <typename RefData>
-    void reset(const array<RefData>& ref, Data* data, std::int64_t count);
-
-    /// Initializes :expr:`data` with data pointer,
-    /// :expr:`count` with input $count$ value, initializes
-    /// the pointer to ownership structure with the one from ref. Array shall
-    /// return $data$ pointer as its immutable block.
+    /// @tparam RefData The type of elements in the reference array.
+    /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
-    /// @tparam RefData    The type of elements in the referenced array.
+    /// @param ref   The reference array which shares ownership with the created one.
+    /// @param data  The mutable or immutable unmanaged pointer hold by the created array.
+    /// @param count The number of elements of type ``Data`` in the ``data``.
     ///
-    /// @param ref   The array which is used to share ownership structure with current one.
-    /// @param data  Immutable unmanaged pointer to be assigned to the array.
-    /// @param count The number of elements of type $Data$ in the $data$.
-    template <typename RefData>
-    void reset(const array<RefData>& ref, const Data* data, std::int64_t count);
+    /// @pre :literal:`data != nullptr`
+    /// @pre :literal:`count > 0`
+    /// @post :literal:`get_count() == count`
+    /// @post :literal:`get_data() == data`
+    template <typename RefData, typename ExtData>
+    void reset(const array<RefData>& ref, ExtData* data, std::int64_t count);
 };
 
 } // namespace oneapi::dal
