@@ -210,4 +210,6 @@ breathe_default_project = 'oneAPI'
 notfound_default_language = 'versions'
 
 # oneDAL project directory is needed for `dalapi` extension
-onedal_project_dir = 'elements/oneDAL'
+onedal_relative_doxyfile_dir = 'elements/oneDAL'
+onedal_relative_sources_dir = 'elements/oneDAL'
+onedal_enable_listing = True
