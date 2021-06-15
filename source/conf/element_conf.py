@@ -16,9 +16,14 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+from os import path
+conf_root = path.dirname(path.realpath(__file__))
+repo_root = path.realpath(path.join(conf_root, '../..'))
+exec(open(path.join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 
 # -- Project information -----------------------------------------------------
 
+project = u'oneAPI Specification'
 copyright = u'2021, Intel'
 author = u'Intel'
 
