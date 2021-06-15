@@ -44,5 +44,5 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "Update from github actions"
-          git push
+          git commit --amend -m "Update from github actions"
+          git push --force origin gh-pages
