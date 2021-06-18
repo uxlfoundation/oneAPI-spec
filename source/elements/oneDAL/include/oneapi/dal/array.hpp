@@ -103,8 +103,9 @@ public:
     /// Creates a new array instance that shares an ownership with the ``other`` array.
     array(const array<Data>& other);
 
-    /// Creates a new array instance that transfers an ownership from the ``other`` array. After
-    /// construction of the new instance, the ``other`` behaviour is implementation defined.
+    /// Creates a new array instance that transfers the ownership from the ``other`` array. After
+    /// the construction of a new instance, the behaviour of the ``other`` is defined by the
+    /// implementation.
     ///
     /// @post :literal:`other.get_count() == 0`
     /// @post :literal:`other.get_data() == nullptr`
