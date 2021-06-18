@@ -270,7 +270,7 @@ public:
     ///
     /// @param data         The pointer to the mutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
-    /// @param deleter      The object used to free ``data``.
+    /// @param deleter      The object used to deallocate ``data``.
     /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
@@ -296,7 +296,7 @@ public:
     ///
     /// @param data         The pointer to the immutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
-    /// @param deleter      The object used to free ``data``.
+    /// @param deleter      The object used to deallocate ``data``.
     /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
