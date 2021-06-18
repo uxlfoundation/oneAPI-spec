@@ -10,7 +10,8 @@ public:
     using data_t = Data;
 
     /// Creates a new array instance by allocating a mutable memory block. The created array manages
-    /// the lifetime of the allocated memory block.
+    /// the lifetime of the allocated memory block. The function is not required to initialize the
+    /// values of the allocated memory block.
     ///
     /// @param queue The SYCL* queue object.
     /// @param count The number of elements of type ``Data`` to allocate memory for.
@@ -53,7 +54,7 @@ public:
     /// @pre :literal:`count > 0`
     /// @post :literal:`get_count() == count`
     /// @post :literal:`has_mutable_data() == true`
-    /// @post :literal:`get_data()[i] == element, 0 <= i < count`
+    /// @post :literal:`get_data()[i] == 0, 0 <= i < count`
     static array<Data> zeros(sycl::queue& queue,
                              std::int64_t count,
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
@@ -62,7 +63,7 @@ public:
     /// The created array does not manage lifetime of the user-provided memory block. It is the
     /// responsibility of the calling application to deallocate the memory block.
     ///
-    /// @param data         The pointer to externally-allocated memory block.
+    /// @param data         The pointer to the mutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the memory block.
     /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
     ///
@@ -80,7 +81,7 @@ public:
     /// The created array does not manage lifetime of the user-provided memory block. It is the
     /// responsibility of the calling application to deallocate the memory block.
     ///
-    /// @param data         The pointer to externally-allocated memory block.
+    /// @param data         The pointer to the immutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the memory block.
     /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
     ///
@@ -121,7 +122,7 @@ public:
     ///                 and not throw any exceptions.
     ///
     /// @param queue        The SYCL* queue object.
-    /// @param data         The pointer to externally-allocated mutable data.
+    /// @param data         The pointer to the mutable externally-allocated mutable data.
     /// @param count        The number of elements of type ``Data`` in the memory block.
     /// @param deleter      The object used to deallocate ``data``.
     /// @param dependencies Events that indicate when ``data`` becomes ready to be read or written.
@@ -148,7 +149,7 @@ public:
     ///                      and not throw any exceptions.
     ///
     /// @param queue         The SYCL* queue object.
-    /// @param data          The pointer to externally-allocated memory block.
+    /// @param data          The pointer to the immutable externally-allocated memory block.
     /// @param count         The number of elements of type ``Data`` in the ``data``.
     /// @param deleter       The object used to dellocate ``data``.
     /// @param dependencies  Events indicating availability of the ``data`` for reading or writing.
@@ -165,18 +166,18 @@ public:
                    ConstDeleter&& deleter,
                    const std::vector<sycl::event>& dependencies = {});
 
-    /// Creates a new array instance that shares the ownership with the reference array while storing
-    /// the pointer to another memory block provided by the user. The lifetime of the user-provided memory
-    /// block is not managed by the created array. One of the use cases of this constructor is the creation
-    /// of an array with an offset, for example, :literal:`array{ other, other.get_data() + offset }`.
-    /// The array created this way shares the ownership with the ``other`` array but points to its
-    /// data with an offset.
+    /// Creates a new array instance that shares the ownership with the reference array while
+    /// storing the pointer to another memory block provided by the user. The lifetime of the
+    /// user-provided memory block is not managed by the created array. One of the use cases of this
+    /// constructor is the creation of an array with an offset, for example,
+    /// :literal:`array{ other, other.get_data() + offset }`. The array created this way shares the
+    /// ownership with the ``other``, but points to its data with an offset.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
     /// @param ref   The reference array which shares ownership with the created one.
-    /// @param data  The mutable or immutable unmanaged pointer held by the created array.
+    /// @param data  The unmanaged pointer to the mutable or immutable externally-allocated memory block.
     /// @param count The number of elements of type ``Data`` in the ``data``.
     ///
     /// @pre :literal:`data != nullptr`
@@ -245,16 +246,15 @@ public:
     /// @post :literal:`has_mutable_data() == true`
     void reset();
 
-    /// Releases the ownership of the managed memory block and replace it by a newly allocated mutable
-    /// memory block. The lifetime of the allocated memory block is managed by the array.
+    /// Releases the ownership of the managed memory block and replace it by a newly allocated
+    /// mutable memory block. The lifetime of the allocated memory block is managed by the array.
     ///
     /// @param queue The SYCL* queue object.
     /// @param count The number of elements of type ``Data`` to allocate memory for.
     /// @param alloc The kind of USM to be allocated.
     ///
     /// @pre :literal:`count > 0`
-    /// @post :literal:`get_count() > count`
-    /// @post :literal:`get_count() > count`
+    /// @post :literal:`get_count() == count`
     void reset(const sycl::queue& queue,
                std::int64_t count,
                const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
@@ -268,7 +268,7 @@ public:
     ///                 The expression :literal:`deleter(data)` must be well-formed
     ///                 and not throw any exceptions.
     ///
-    /// @param data         The pointer to externally-allocated memory block.
+    /// @param data         The pointer to the mutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
     /// @param deleter      The object used to free ``data``.
     /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
@@ -294,7 +294,7 @@ public:
     ///                      The expression :literal:`deleter(data)` must be well-formed
     ///                      and not throw any exceptions.
     ///
-    /// @param data         The pointer to externally-allocated memory block.
+    /// @param data         The pointer to the immutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
     /// @param deleter      The object used to free ``data``.
     /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
@@ -310,15 +310,16 @@ public:
                ConstDeleter&& deleter,
                const std::vector<sycl::event>& dependencies = {});
 
-    /// Releases the ownership of the managed memory block and starts managing the lifetime of the reference
-    /// array while storing the pointer to another memory block provided by the user. The lifetime of the
-    /// user-provided memory block is not managed.
+    /// Releases the ownership of the managed memory block and starts managing the lifetime of the
+    /// reference array while storing the pointer to another memory block provided by the user. The
+    /// lifetime of the user-provided memory block is not managed.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
     /// @param ref   The reference array which shares the ownership with the created one.
-    /// @param data  The mutable or immutable unmanaged pointer held by the created array.
+    /// @param data  The unmanaged pointer to the mutable or immutable externally-allocated memory
+    ///              block.
     /// @param count The number of elements of type ``Data`` in the ``data``.
     ///
     /// @pre :literal:`data != nullptr`
