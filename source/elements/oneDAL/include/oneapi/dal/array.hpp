@@ -10,7 +10,7 @@ public:
     using data_t = Data;
 
     /// Creates a new array instance by allocating a mutable memory block. The created array manages
-    /// lifetime of the allocated memory block.
+    /// the lifetime of the allocated memory block.
     ///
     /// @param queue The SYCL* queue object.
     /// @param count The number of elements of type ``Data`` to allocate memory for.
@@ -164,18 +164,18 @@ public:
                    ConstDeleter&& deleter,
                    const std::vector<sycl::event>& dependencies = {});
 
-    /// Creates a new array instance that shares ownership with the reference array while storing
-    /// pointer to another memory block provided by the user. Lifetime of the user-provided memory
-    /// block is not managed by the created array. One of use cases of this constructor is creation
-    /// of an array with offset, for example, :literal:`array{ other, other.get_data() + offset }`.
-    /// The array created this way, shared ownership with the ``other`` array, but points to its
-    /// data with offset.
+    /// Creates a new array instance that shares the ownership with the reference array while storing
+    /// the pointer to another memory block provided by the user. The lifetime of the user-provided memory
+    /// block is not managed by the created array. One of the use cases of this constructor is the creation
+    /// of an array with an offset, for example, :literal:`array{ other, other.get_data() + offset }`.
+    /// The array created this way shares the ownership with the ``other`` array but points to its
+    /// data with an offset.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
     /// @param ref   The reference array which shares ownership with the created one.
-    /// @param data  The mutable or immutable unmanaged pointer hold by the created array.
+    /// @param data  The mutable or immutable unmanaged pointer held by the created array.
     /// @param count The number of elements of type ``Data`` in the ``data``.
     ///
     /// @pre :literal:`data != nullptr`
@@ -185,7 +185,7 @@ public:
     template <typename RefData, typename ExtData>
     explicit array(const array<RefData>& ref, ExtData* data, std::int64_t count);
 
-    /// Replaces the immutable, mutable data pointers and the number of elements by the values
+    /// Replaces the immutable and mutable data pointers and the number of elements by the values
     /// stored in the ``other`` array.
     ///
     /// @post :literal:`get_data() == other.get_data()`
@@ -193,7 +193,7 @@ public:
     /// @post :literal:`get_mutable_data() == other.get_mutable_data()`
     array<Data> operator=(const array<Data>& other);
 
-    /// Replaces the immutable, mutable data pointers and the number of elements by the values
+    /// Replaces the immutable and mutable data pointers and the number of elements by the values
     /// stored in the ``other`` array.
     ///
     /// @post :literal:`get_data() == other.get_data()`
@@ -207,7 +207,7 @@ public:
     /// @invariant :literal:`get_data() == get_mutable_data()` if :literal:`has_mutable_data() == true`
     const Data* get_data() const noexcept;
 
-    /// Returns whether array contains mutable data or not.
+    /// Returns whether an array contains mutable data or not.
     bool has_mutable_data() const noexcept;
 
     /// The pointer to the mutable memory block.
@@ -216,9 +216,9 @@ public:
     /// @invariant :literal:`get_mutable_data() != get_data()` if :literal:`has_mutable_data() == true`
     Data* get_mutable_data() const;
 
-    /// Does nothing if array contains mutable data. Otherwise, allocates a mutable memory block and
-    /// copies content of the immutable memory block into it. The array manages lifetime of the
-    /// allocated mutable memory block. Returns reference to the same array instance.
+    /// Does nothing if an array contains mutable data. Otherwise, allocates a mutable memory block and
+    /// copies the content of the immutable memory block into it. The array manages the lifetime of the
+    /// allocated mutable memory block. Returns the reference to the same array instance.
     ///
     /// @param queue The SYCL* queue object.
     /// @param alloc The kind of USM to be allocated.
@@ -234,17 +234,17 @@ public:
     /// @invariant :literal:`get_size() == get_count() * sizeof(Data)`
     std::int64_t get_size() const noexcept;
 
-    /// Provides a read-only access to the elements of array.
+    /// Provides a read-only access to the elements of an array.
     const Data& operator[](std::int64_t index) const noexcept;
 
-    /// Releases ownership of the managed memory block.
+    /// Releases the ownership of the managed memory block.
     ///
     /// @pre :literal:`count > 0`
     /// @post :literal:`get_count() == count`
     /// @post :literal:`has_mutable_data() == true`
     void reset();
 
-    /// Releases ownership of the managed memory block and replace it by a newly allocated mutable
+    /// Releases the ownership of the managed memory block and replace it by a newly allocated mutable
     /// memory block. The lifetime of the allocated memory block is managed by the array.
     ///
     /// @param queue The SYCL* queue object.
@@ -258,7 +258,7 @@ public:
                std::int64_t count,
                const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Releases ownership of the managed memory block and replace it by a pointer to
+    /// Releases the ownership of the managed memory block and replace it by a pointer to
     /// externally-allocated mutable memory block. The lifetime of the memory block is managed by
     /// the array. The memory block is deallocated using a custom deleter object provided by the
     /// user.
@@ -284,7 +284,7 @@ public:
                Deleter&& deleter,
                const std::vector<sycl::event>& dependencies = {});
 
-    /// Releases ownership of the managed memory block and replace it by a pointer to
+    /// Releases the ownership of the managed memory block and replace it by a pointer to
     /// externally-allocated mutable memory block. The lifetime of the memory block is managed by
     /// the array. The memory block is deallocated using a custom deleter object provided by the
     /// user.
@@ -296,7 +296,7 @@ public:
     /// @param data         The pointer to externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
     /// @param deleter      The object used to free ``data``.
-    /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
+    /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
     /// @pre :literal:`count > 0`
@@ -309,15 +309,15 @@ public:
                ConstDeleter&& deleter,
                const std::vector<sycl::event>& dependencies = {});
 
-    /// Releases ownership of the managed memory block and start managing lifetime of the reference
-    /// array while storing pointer to another memory block provided by the user. Lifetime of the
+    /// Releases the ownership of the managed memory block and starts managing the lifetime of the reference
+    /// array while storing the pointer to another memory block provided by the user. The lifetime of the
     /// user-provided memory block is not managed.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
-    /// @param ref   The reference array which shares ownership with the created one.
-    /// @param data  The mutable or immutable unmanaged pointer hold by the created array.
+    /// @param ref   The reference array which shares the ownership with the created one.
+    /// @param data  The mutable or immutable unmanaged pointer held by the created array.
     /// @param count The number of elements of type ``Data`` in the ``data``.
     ///
     /// @pre :literal:`data != nullptr`
