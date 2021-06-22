@@ -99,39 +99,78 @@ usage scenario:
 Data ownership requirements
 ---------------------------
 
-The array shall support the following requirements on the internal data management:
+The array shall satisfy the following requirements on managing the memory blocks:
 
-1. An array shall own two properties representing raw pointers to the data:
+1. An array represents either immutable or mutable data.
 
-   - ``data`` for a pointer to immutable data block
-   - ``mutable_data`` for a pointer to mutable data block (see the :txtref:`programming_interface`)
+2. An array shall retain:
 
-2. If an array owns mutable data, both properties shall point to the same memory
-   block.
+   -  Pointer to the immutable data block;
 
-3. If an array owns immutable data, ``mutable_data`` shall be ``nullptr``.
+   -  Pointer to the mutable data block.
 
-4. An array shall store the number of elements in the block it owns and shall update
-   the ``count`` property when a new memory block is assigned to the array.
+3. If an array represents mutable data, both pointers shall point to the mutable data block.
 
-5. An array shall store a pointer to the **ownership structure** of the data:
+4. If an array represents immutable data, pointer to the mutable data shall be ``nullptr``.
 
-   - The **reference count** indicating how many array objects refer to the
-     same memory block.
+5. An array shall use shared ownership semantics to manage lifetime of the stored data blocks:
 
-   - The **deleter** object used to free the memory block when
-     reference count is zero.
+   - Several arrays objects may own the same data block;
 
-6. An array shall create the ownership structure for a new memory block not
-   associated with such structure.
+   - The memory block is deallocated when either of the following happens:
 
-7. An array shall decrement the number of references to the memory block when the
-   array goes out of the scope. If the number of references is zero, the
-   array shall call the deleter on this memory block and free the ownership structure.
+     - The last remaining array owning data block is destroyed;
 
-8. An array shall store the pointer to the ownership structure created by another
-   array when they share the data. An array shall increment the reference count
-   for it to be equal to the number of array objects sharing the same data.
+     - The last remaining array owning data block is assigned another memory block via
+       ``operator=`` or ``reset()``;
+
+   - The data block is deallocated using the deleter object that is provided to array during
+     construction.
+
+6. An array object may own no data. In this case, it is called **empty**:
+
+   - Pointers to the immutable and mutable data of the empty array shall be ``nullptr``;
+   - The data block size shall be ``0``.
+
+
+.. _implementation_notes:
+
+--------------------
+Implementation notes
+--------------------
+
+1. An array implementation holds the following member variables:
+
+   - Pointer to the immutable data;
+
+   - Pointer to the mutable data;
+
+   - Pointer to the ownership structure;
+
+   - The data block size;
+
+2. The ownership structure is an object that stores:
+
+   - Either a pointer immutable or mutable data block:
+
+     - If an array represents the immutable data, pointer to immutable data;
+
+     - If an array represents the mutable data, pointer to mutable data;
+
+   - The deleter object;
+
+   - The reference counter (the number of array instances that owns the associated data block);
+
+3. The destructor of an array decrements the reference counter. If that counter reaches zero, the
+   ownership structure deallocates the associated memory block and the ownership structure instance is
+   destoryed itself.
+
+4. If the array object changes its state from immutable to mutable via ``need_mutable_data()``,
+   the reference counter of the ownership structure is decremented. If that counter reaches zero,
+   the ownership structure deallocates the immutable memory block and the ownership structure
+   instance is destoryed itself. The new instance of ownership structure owning the mutable data
+   block is created and replaces the old one.
+
 
 .. _programming_interface:
 
