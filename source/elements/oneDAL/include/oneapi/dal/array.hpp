@@ -25,7 +25,7 @@ public:
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
     /// Creates a new array instance by allocating a mutable memory block and filling its content
-    /// with a scalar value. The created array manages lifetime of the allocated memory block.
+    /// with a scalar value. The created array manages the lifetime of the allocated memory block.
     ///
     /// @tparam Element The type from which array elements of type ``Data`` can be constructed.
     ///
@@ -45,7 +45,7 @@ public:
                             const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
     /// Creates a new array instance by allocating a mutable memory block and filling its content
-    /// with zeros. The created array manages lifetime of the allocated memory block.
+    /// with zeros. The created array manages the lifetime of the allocated memory block.
     ///
     /// @param queue   The SYCL* queue object.
     /// @param count   The number of elements of type ``Data`` to allocate memory for.
@@ -60,12 +60,12 @@ public:
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
     /// Creates a new array instance from a pointer to externally-allocated mutable memory block.
-    /// The created array does not manage lifetime of the user-provided memory block. It is the
+    /// The created array does not manage the lifetime of the user-provided memory block. It is the
     /// responsibility of the calling application to deallocate the memory block.
     ///
     /// @param data         The pointer to the mutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the memory block.
-    /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
+    /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
     /// @pre :literal:`count > 0`
@@ -78,12 +78,12 @@ public:
                             const std::vector<sycl::event>& dependencies = {});
 
     /// Creates a new array instance from a pointer to externally-allocated immutable memory block.
-    /// The created array does not manage lifetime of the user-provided memory block. It is the
+    /// The created array does not manage the lifetime of the user-provided memory block. It is the
     /// responsibility of the calling application to deallocate the memory block.
     ///
     /// @param data         The pointer to the immutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the memory block.
-    /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
+    /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
     /// @pre :literal:`count > 0`
@@ -114,7 +114,7 @@ public:
     array(array<Data>&& other);
 
     /// Creates a new array instance from a pointer to externally-allocated mutable memory block.
-    /// The created array manages lifetime of the user-provided memory block. The memory block is
+    /// The created array manages the lifetime of the user-provided memory block. The memory block is
     /// deallocated using a custom deleter object provided by the user.
     ///
     /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
@@ -141,7 +141,7 @@ public:
                    const std::vector<sycl::event>& dependencies = {});
 
     /// Creates a new array instance from a pointer to externally-allocated immutable memory block.
-    /// The created array manages lifetime of the user-provided memory block. The memory block is
+    /// The created array manages the lifetime of the user-provided memory block. The memory block is
     /// deallocated using a custom deleter object provided by the user.
     ///
     /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
@@ -152,7 +152,7 @@ public:
     /// @param data          The pointer to the immutable externally-allocated memory block.
     /// @param count         The number of elements of type ``Data`` in the ``data``.
     /// @param deleter       The object used to dellocate ``data``.
-    /// @param dependencies  Events indicating availability of the ``data`` for reading or writing.
+    /// @param dependencies  Events indicating the availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
     /// @pre :literal:`count > 0`
@@ -176,7 +176,7 @@ public:
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
-    /// @param ref   The reference array which shares ownership with the created one.
+    /// @param ref   The reference array which shares the ownership with the created one.
     /// @param data  The unmanaged pointer to the mutable or immutable externally-allocated memory block.
     /// @param count The number of elements of type ``Data`` in the ``data``.
     ///
@@ -246,7 +246,7 @@ public:
     /// @post :literal:`has_mutable_data() == true`
     void reset();
 
-    /// Releases the ownership of the managed memory block and replace it by a newly allocated
+    /// Releases the ownership of the managed memory block and replaces it by a newly allocated
     /// mutable memory block. The lifetime of the allocated memory block is managed by the array.
     ///
     /// @param queue The SYCL* queue object.
@@ -271,7 +271,7 @@ public:
     /// @param data         The pointer to the mutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
     /// @param deleter      The object used to deallocate ``data``.
-    /// @param dependencies Events indicating availability of the ``data`` for reading or writing.
+    /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
     ///
     /// @pre :literal:`data != nullptr`
     /// @pre :literal:`count > 0`
