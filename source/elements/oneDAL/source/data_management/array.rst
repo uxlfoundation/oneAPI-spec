@@ -18,7 +18,7 @@ a storage that:
 
 2. Contains information about the memory block's size.
 
-3. Supports both :term:`immutable <Immutability>` and mutable data.
+3. Represents either :term:`immutable <Immutability>` or mutable data.
 
 4. Provides an ability to change the data state from immutable to
    mutable one.
@@ -99,39 +99,95 @@ usage scenario:
 Data ownership requirements
 ---------------------------
 
-The array shall support the following requirements on the internal data management:
+The array shall satisfy the following requirements on managing the memory blocks:
 
-1. An array shall own two properties representing raw pointers to the data:
+1. An array shall retain:
 
-   - ``data`` for a pointer to immutable data block
-   - ``mutable_data`` for a pointer to mutable data block (see the :txtref:`programming_interface`)
+   -  A pointer to the immutable data block of size ``count``;
 
-2. If an array owns mutable data, both properties shall point to the same memory
-   block.
+   -  A pointer to the mutable data block of size ``count``.
 
-3. If an array owns immutable data, ``mutable_data`` shall be ``nullptr``.
+2. If an array represents mutable data, both pointers shall point to the mutable data block.
 
-4. An array shall store the number of elements in the block it owns and shall update
-   the ``count`` property when a new memory block is assigned to the array.
+3. If an array represents immutable data, pointer to the mutable data block shall be ``nullptr``.
 
-5. An array shall store a pointer to the **ownership structure** of the data:
+4. An array shall use shared ownership semantics to manage the lifetime of the stored data block:
 
-   - The **reference count** indicating how many array objects refer to the
-     same memory block.
+   - Several array objects may own the same data block;
 
-   - The **deleter** object used to free the memory block when
-     reference count is zero.
+   - An array releases the ownership when one of the following happens:
 
-6. An array shall create the ownership structure for a new memory block not
-   associated with such structure.
+     - The array owning the data block is destroyed;
 
-7. An array shall decrement the number of references to the memory block when the
-   array goes out of the scope. If the number of references is zero, the
-   array shall call the deleter on this memory block and free the ownership structure.
+     - The array owning the data block is assigned another memory block via
+       ``operator=`` or ``reset()``;
 
-8. An array shall store the pointer to the ownership structure created by another
-   array when they share the data. An array shall increment the reference count
-   for it to be equal to the number of array objects sharing the same data.
+   - If the array that releases the ownership is the last remaining object owning the data block,
+     the release of ownership is followed by the data block deallocation.
+
+   - The data block is deallocated using the deleter object that is provided to array during
+     construction. If no deleter object provided, an array calls the default deallocating
+     function that corresponds to the internal memory allocation mechanism.
+
+5. If a managed pointer to the data block is replaced by another pointer via ``reset()``, the
+   array that managed the pointer releases the ownership of it and starts managing the lifetime of the data block
+   represented by the other pointer.
+
+6. If an array changes its state from immutable to mutable via ``need_mutable_data()``, it releases
+   the ownership of immutable data block and start managing lifetime of the mutable data block.
+
+7. An array object may own no data. An array like this is called **zero-sized**:
+
+   - Pointers to the immutable and mutable data of the zero-sized array shall be ``nullptr``;
+   - The data block size ``count`` shall be ``0``.
+
+
+.. _implementation_notes:
+
+--------------------
+Implementation notes
+--------------------
+A typical array implementation may be organized in the following way:
+
+1. An array class has the following member variables:
+
+   - A pointer to the immutable data block;
+
+   - A pointer to the mutable data block;
+
+   - A pointer to the ownership structure that implements the shared ownership semantics;
+
+   - The data block size ``count``;
+
+2. An ownership structure is an object that stores:
+
+   - A pointer to either immutable or mutable data block;
+
+   - The deleter object;
+
+   - The reference count (the number of array objects that own the associated data block);
+
+3. If an array starts managing the lifetime of the data block represented by the pointer ``p`` and
+   deleter ``d``, it creates the ownership structure object and initialize it with ``p`` and ``d``.
+   The reference count of the ownership structure is assigned one.
+
+4. If an array object releases the ownership, the reference count of the ownership structure is
+   decremented.
+
+   - If that count reaches zero, the ownership structure deallocates the memory block and
+     the array destroys the ownership structure.
+
+   - If that count is greater than zero, the ownership structure is not destroyed.
+
+5. If a copy of the array object is created, the reference count of the ownership structure is
+   incremented and a pointer to the same ownership structure is assigned to the created copy.
+   The other member variables of an array class are copied as is.
+
+.. TODO: Add note regarding thread safety
+
+.. note::
+   You may choose an arbitrary implementation strategy that satisfies array requirements.
+
 
 .. _programming_interface:
 
