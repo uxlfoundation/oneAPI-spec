@@ -129,7 +129,14 @@ The array shall satisfy the following requirements on managing the memory blocks
      construction. If no deleter object provided, an array calls the default deallocating
      function that corresponds to the internal memory allocation mechanism.
 
-5. An array object may own no data. An array like this is called **zero-sized**:
+5. If the managed pointer to the data block is replaced by the other pointer via ``reset()``, an
+   array releases the ownership of the managed pointer and start managing lifetime of the data block
+   represented by the other pointer.
+
+6. If an array changes its state from immutable to mutable via ``need_mutable_data()``, it releases
+   the ownership of immutable data block and start managing lifetime of the mutable data block.
+
+7. An array object may own no data. An array like this is called **zero-sized**:
 
    - Pointers to the immutable and mutable data of the zero-sized array shall be ``nullptr``;
    - The data block size ``count`` shall be ``0``.
@@ -158,22 +165,23 @@ A typical array implementation may be organized in the following way:
 
    - The deleter object;
 
-   - The reference count (the number of array instances that own the associated data block);
+   - The reference count (the number of array objects that own the associated data block);
 
-3. The destructor of an array decrements the reference count. If that count reaches zero, the
-   ownership structure deallocates the associated memory block and the array destroys the ownership
-   structure.
+3. If an array starts managing the lifetime of the data block represented by the pointer ``p`` and
+   deleter ``d``, it creates the ownership structure object and initialize it with ``p`` and ``d``.
+   The reference count of the ownership structure is assigned one.
 
-4. If an array object changes its state from immutable to mutable, the reference count of the
-   ownership structure is decremented.
+4. If an array object releases the ownership, the reference count of the ownership structure is
+   decremented.
 
-   - If that count reaches zero, the ownership structure
-     deallocates the immutable memory block and the array destroys the ownership structure. The new
-     instance of the ownership structure owning the mutable data block is created, and it replaces the old one.
+   - If that count reaches zero, the ownership structure deallocates the memory block and
+     the array destroys the ownership structure.
 
-   - If that count is greater than zero, the ownership structure is not destroyed. The new
-     instance of the ownership structure owning the mutable data block is created, and it replaces the old
-     one.
+   - If that count is greater than zero, the ownership structure is not destroyed.
+
+5. If a copy of the array object is created, the reference count of the ownership structure is
+   incremented and a pointer to the same ownership structure assigned to the created copy.
+   The other member variables of an array class are copied as is.
 
 .. TODO: Add note regarding thread safety
 

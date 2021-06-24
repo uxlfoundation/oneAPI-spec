@@ -132,7 +132,9 @@ public:
     /// user-provided memory block is not managed by the created array. One of the use cases of this
     /// constructor is the creation of an array with an offset, for example,
     /// :literal:`array{ other, other.get_data() + offset }`. The array created this way shares the
-    /// ownership with the ``other``, but points to its data with an offset.
+    /// ownership with the ``other``, but points to its data with an offset. It is the
+    /// responsibility of the programmer to make sure that ``data`` pointer remains valid as long as
+    /// this array object exists.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.
