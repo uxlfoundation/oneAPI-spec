@@ -103,9 +103,9 @@ The array shall satisfy the following requirements on managing the memory blocks
 
 1. An array shall retain:
 
-   -  Pointer to the immutable data block;
+   -  Pointer to the immutable data block of size ``count``;
 
-   -  Pointer to the mutable data block.
+   -  Pointer to the mutable data block of size ``count``.
 
 2. If an array represents mutable data, both pointers shall point to the mutable data block.
 
@@ -115,20 +115,24 @@ The array shall satisfy the following requirements on managing the memory blocks
 
    - Several arrays objects may own the same data block;
 
-   - The memory block is deallocated when either of the following happens:
+   - An array releases the ownership when either of the following happens:
 
-     - The last remaining array owning data block is destroyed;
+     - The array owning data block is destroyed;
 
-     - The last remaining array owning data block is assigned another memory block via
+     - The array owning data block is assigned another memory block via
        ``operator=`` or ``reset()``;
 
+   - If the array that releases the ownership is the last remaining object owning data block,
+     the release of ownership is followed by data block deallocation.
+
    - The data block is deallocated using the deleter object that is provided to array during
-     construction.
+     construction. If no deleter object provided, an array calls the default deallocating
+     function that corresponds to the internal memory allocation mechanism.
 
 5. An array object may own no data. In this case, it is called **zero-sized**:
 
    - Pointers to the immutable and mutable data of the zero-sized array shall be ``nullptr``;
-   - The data block size shall be ``0``.
+   - The data block size ``count`` shall be ``0``.
 
 
 .. _implementation_notes:
@@ -146,7 +150,7 @@ A typical array implementation may be organized in the following way:
 
    - Pointer to the ownership structure that implements the shared ownership semantics;
 
-   - The data block size;
+   - The data block size ``count``;
 
 2. The ownership structure is an object that stores:
 
