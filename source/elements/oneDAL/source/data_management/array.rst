@@ -103,9 +103,9 @@ The array shall satisfy the following requirements on managing the memory blocks
 
 1. An array shall retain:
 
-   -  Pointer to the immutable data block of size ``count``;
+   -  A pointer to the immutable data block of size ``count``;
 
-   -  Pointer to the mutable data block of size ``count``.
+   -  A pointer to the mutable data block of size ``count``.
 
 2. If an array represents mutable data, both pointers shall point to the mutable data block.
 
@@ -113,23 +113,23 @@ The array shall satisfy the following requirements on managing the memory blocks
 
 4. An array shall use shared ownership semantics to manage lifetime of the stored data blocks:
 
-   - Several arrays objects may own the same data block;
+   - Several array objects may own the same data block;
 
-   - An array releases the ownership when either of the following happens:
+   - An array releases the ownership when one of the following happens:
 
-     - The array owning data block is destroyed;
+     - The array owning the data block is destroyed;
 
-     - The array owning data block is assigned another memory block via
+     - The array owning the data block is assigned another memory block via
        ``operator=`` or ``reset()``;
 
-   - If the array that releases the ownership is the last remaining object owning data block,
-     the release of ownership is followed by data block deallocation.
+   - If the array that releases the ownership is the last remaining object owning the data block,
+     the release of ownership is followed by the data block deallocation.
 
    - The data block is deallocated using the deleter object that is provided to array during
      construction. If no deleter object provided, an array calls the default deallocating
      function that corresponds to the internal memory allocation mechanism.
 
-5. An array object may own no data. In this case, it is called **zero-sized**:
+5. An array object may own no data. An array like this is called **zero-sized**:
 
    - Pointers to the immutable and mutable data of the zero-sized array shall be ``nullptr``;
    - The data block size ``count`` shall be ``0``.
@@ -144,41 +144,41 @@ A typical array implementation may be organized in the following way:
 
 1. An array class has the following member variables:
 
-   - Pointer to the immutable data block;
+   - A pointer to the immutable data block;
 
-   - Pointer to the mutable data block;
+   - A pointer to the mutable data block;
 
-   - Pointer to the ownership structure that implements the shared ownership semantics;
+   - A pointer to the ownership structure that implements the shared ownership semantics;
 
    - The data block size ``count``;
 
-2. The ownership structure is an object that stores:
+2. An ownership structure is an object that stores:
 
-   - Either a pointer immutable or mutable data block;
+   - A pointer to either immutable or mutable data block;
 
    - The deleter object;
 
-   - The reference count (the number of array instances that owns the associated data block);
+   - The reference count (the number of array instances that own the associated data block);
 
 3. The destructor of an array decrements the reference count. If that count reaches zero, the
    ownership structure deallocates the associated memory block and the array destroys the ownership
    structure.
 
-4. If the array object changes its state from immutable to mutable, the reference count of the
+4. If an array object changes its state from immutable to mutable, the reference count of the
    ownership structure is decremented.
 
    - If that count reaches zero, the ownership structure
      deallocates the immutable memory block and the array destroys the ownership structure. The new
-     instance of ownership structure owning the mutable data block is created and replaces the old one.
+     instance of the ownership structure owning the mutable data block is created, and it replaces the old one.
 
-   - If that count greater than zero, the ownership structure is not destroyed. The new
-     instance of ownership structure owning the mutable data block is created and replaces the old
+   - If that count is greater than zero, the ownership structure is not destroyed. The new
+     instance of the ownership structure owning the mutable data block is created, and it replaces the old
      one.
 
 .. TODO: Add note regarding thread safety
 
 .. note::
-   Implementer can choose an arbitrary implementation strategy that satisfy an array requirements.
+   You may choose an arbitrary implementation strategy that satisfies array requirements.
 
 
 .. _programming_interface:
