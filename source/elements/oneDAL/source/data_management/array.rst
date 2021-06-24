@@ -125,9 +125,9 @@ The array shall satisfy the following requirements on managing the memory blocks
    - The data block is deallocated using the deleter object that is provided to array during
      construction.
 
-5. An array object may own no data. In this case, it is called **empty**:
+5. An array object may own no data. In this case, it is called **zero-sized**:
 
-   - Pointers to the immutable and mutable data of the empty array shall be ``nullptr``;
+   - Pointers to the immutable and mutable data of the zero-sized array shall be ``nullptr``;
    - The data block size shall be ``0``.
 
 

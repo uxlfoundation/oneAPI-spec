@@ -94,7 +94,7 @@ public:
                             std::int64_t count,
                             const std::vector<sycl::event>& dependencies = {});
 
-    /// Creates an empty array without memory allocation.
+    /// Creates a zero-sized array without memory allocation.
     ///
     /// @post :literal:`get_count() == 0`
     /// @post :literal:`get_data() == nullptr`
