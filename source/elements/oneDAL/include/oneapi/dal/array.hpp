@@ -59,29 +59,14 @@ public:
                              std::int64_t count,
                              const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
-    /// Creates a new array instance from a pointer to externally-allocated mutable memory block.
-    /// The created array does not manage the lifetime of the user-provided memory block. It is the
-    /// responsibility of the calling application to deallocate the memory block.
+    /// Creates a new array instance from a pointer to externally-allocated memory block. The
+    /// created array does not manage the lifetime of the user-provided memory block. It is the
+    /// responsibility of the programmer to make sure that ``data`` pointer remains valid as long as
+    /// this array object exists.
     ///
-    /// @param data         The pointer to the mutable externally-allocated memory block.
-    /// @param count        The number of elements of type ``Data`` in the memory block.
-    /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
+    /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     ///
-    /// @pre :literal:`data != nullptr`
-    /// @pre :literal:`count > 0`
-    /// @post :literal:`get_count() == count`
-    /// @post :literal:`get_data() == data`
-    /// @post :literal:`has_mutable_data() == true`
-    /// @post :literal:`get_mutable_data() == data`
-    static array<Data> wrap(Data* data,
-                            std::int64_t count,
-                            const std::vector<sycl::event>& dependencies = {});
-
-    /// Creates a new array instance from a pointer to externally-allocated immutable memory block.
-    /// The created array does not manage the lifetime of the user-provided memory block. It is the
-    /// responsibility of the calling application to deallocate the memory block.
-    ///
-    /// @param data         The pointer to the immutable externally-allocated memory block.
+    /// @param data         The pointer to the mutable or immutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the memory block.
     /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
     ///
@@ -90,7 +75,8 @@ public:
     /// @post :literal:`get_count() == count`
     /// @post :literal:`get_data() == data`
     /// @post :literal:`has_mutable_data() == false`
-    static array<Data> wrap(const Data* data,
+    template <typename ExtData>
+    static array<Data> wrap(ExtData* data,
                             std::int64_t count,
                             const std::vector<sycl::event>& dependencies = {});
 
@@ -113,16 +99,17 @@ public:
     /// @post :literal:`has_mutable_data() == false`
     array(array<Data>&& other);
 
-    /// Creates a new array instance from a pointer to externally-allocated mutable memory block.
+    /// Creates a new array instance from a pointer to externally-allocated memory block.
     /// The created array manages the lifetime of the user-provided memory block. The memory block is
     /// deallocated using a custom deleter object provided by the user.
     ///
+    /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
     ///                 The expression :literal:`deleter(data)` must be well-formed (can be compiled)
     ///                 and not throw any exceptions.
     ///
     /// @param queue        The SYCL* queue object.
-    /// @param data         The pointer to the mutable externally-allocated mutable data.
+    /// @param data         The pointer to the mutable or immutable externally-allocated mutable data.
     /// @param count        The number of elements of type ``Data`` in the memory block.
     /// @param deleter      The object used to deallocate ``data``.
     /// @param dependencies Events that indicate when ``data`` becomes ready to be read or written.
@@ -133,37 +120,11 @@ public:
     /// @post :literal:`get_data() == data`
     /// @post :literal:`has_mutable_data() == true`
     /// @post :literal:`get_mutable_data() == data`
-    template <typename Deleter>
+    template <typename ExtData, typename Deleter>
     explicit array(const sycl::queue& queue,
-                   Data* data,
+                   ExtData* data,
                    std::int64_t count,
                    Deleter&& deleter,
-                   const std::vector<sycl::event>& dependencies = {});
-
-    /// Creates a new array instance from a pointer to externally-allocated immutable memory block.
-    /// The created array manages the lifetime of the user-provided memory block. The memory block is
-    /// deallocated using a custom deleter object provided by the user.
-    ///
-    /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
-    ///                      The expression :literal:`deleter(data)` must be well-formed (can be compiled)
-    ///                      and not throw any exceptions.
-    ///
-    /// @param queue         The SYCL* queue object.
-    /// @param data          The pointer to the immutable externally-allocated memory block.
-    /// @param count         The number of elements of type ``Data`` in the ``data``.
-    /// @param deleter       The object used to dellocate ``data``.
-    /// @param dependencies  Events indicating the availability of the ``data`` for reading or writing.
-    ///
-    /// @pre :literal:`data != nullptr`
-    /// @pre :literal:`count > 0`
-    /// @post :literal:`get_count() == count`
-    /// @post :literal:`get_data() == data`
-    /// @post :literal:`has_mutable_data() == false`
-    template <typename ConstDeleter>
-    explicit array(const sycl::queue& queue,
-                   const Data* data,
-                   std::int64_t count,
-                   ConstDeleter&& deleter,
                    const std::vector<sycl::event>& dependencies = {});
 
     /// Creates a new array instance that shares the ownership with the reference array while
@@ -261,15 +222,16 @@ public:
                const sycl::usm::alloc& alloc = sycl::usm::alloc::shared);
 
     /// Releases the ownership of the managed memory block and replace it by a pointer to
-    /// externally-allocated mutable memory block. The lifetime of the memory block is managed by
+    /// externally-allocated memory block. The lifetime of the memory block is managed by
     /// the array. The memory block is deallocated using a custom deleter object provided by the
     /// user.
     ///
+    /// @tparam ExtData Either ``Data`` or ``const Data`` type.
     /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
     ///                 The expression :literal:`deleter(data)` must be well-formed (can be compiled)
     ///                 and not throw any exceptions.
     ///
-    /// @param data         The pointer to the mutable externally-allocated memory block.
+    /// @param data         The pointer to the to the mutable or immutable externally-allocated memory block.
     /// @param count        The number of elements of type ``Data`` in the ``data``.
     /// @param deleter      The object used to deallocate ``data``.
     /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
@@ -280,35 +242,10 @@ public:
     /// @post :literal:`get_data() == data`
     /// @post :literal:`has_mutable_data() == true`
     /// @post :literal:`get_mutable_data() == data`
-    template <typename Deleter>
-    void reset(Data* data,
+    template <typename ExtData, typename Deleter>
+    void reset(ExtData* data,
                std::int64_t count,
                Deleter&& deleter,
-               const std::vector<sycl::event>& dependencies = {});
-
-    /// Releases the ownership of the managed memory block and replace it by a pointer to
-    /// externally-allocated mutable memory block. The lifetime of the memory block is managed by
-    /// the array. The memory block is deallocated using a custom deleter object provided by the
-    /// user.
-    ///
-    /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
-    ///                      The expression :literal:`deleter(data)` must be well-formed (can be compiled)
-    ///                      and not throw any exceptions.
-    ///
-    /// @param data         The pointer to the immutable externally-allocated memory block.
-    /// @param count        The number of elements of type ``Data`` in the ``data``.
-    /// @param deleter      The object used to deallocate ``data``.
-    /// @param dependencies Events indicating the availability of the ``data`` for reading or writing.
-    ///
-    /// @pre :literal:`data != nullptr`
-    /// @pre :literal:`count > 0`
-    /// @post :literal:`get_count() == count`
-    /// @post :literal:`get_data() == data`
-    /// @post :literal:`has_mutable_data() == false`
-    template <typename ConstDeleter>
-    void reset(const Data* data,
-               std::int64_t count,
-               ConstDeleter&& deleter,
                const std::vector<sycl::event>& dependencies = {});
 
     /// Releases the ownership of the managed memory block and starts managing the lifetime of the
