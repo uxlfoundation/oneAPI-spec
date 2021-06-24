@@ -111,7 +111,7 @@ The array shall satisfy the following requirements on managing the memory blocks
 
 3. If an array represents immutable data, pointer to the mutable data block shall be ``nullptr``.
 
-4. An array shall use shared ownership semantics to manage lifetime of the stored data blocks:
+4. An array shall use shared ownership semantics to manage lifetime of the stored data block:
 
    - Several array objects may own the same data block;
 
