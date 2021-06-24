@@ -118,7 +118,7 @@ public:
     /// deallocated using a custom deleter object provided by the user.
     ///
     /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
-    ///                 The expression :literal:`deleter(data)` must be well-formed
+    ///                 The expression :literal:`deleter(data)` must be well-formed (can be compiled)
     ///                 and not throw any exceptions.
     ///
     /// @param queue        The SYCL* queue object.
@@ -145,7 +145,7 @@ public:
     /// deallocated using a custom deleter object provided by the user.
     ///
     /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
-    ///                      The expression :literal:`deleter(data)` must be well-formed
+    ///                      The expression :literal:`deleter(data)` must be well-formed (can be compiled)
     ///                      and not throw any exceptions.
     ///
     /// @param queue         The SYCL* queue object.
@@ -237,6 +237,7 @@ public:
     std::int64_t get_size() const noexcept;
 
     /// Provides a read-only access to the elements of an array.
+    /// No bounds checking is performed.
     const Data& operator[](std::int64_t index) const noexcept;
 
     /// Releases the ownership of the managed memory block.
@@ -265,7 +266,7 @@ public:
     /// user.
     ///
     /// @tparam Deleter The type of a deleter used to deallocate the ``data``.
-    ///                 The expression :literal:`deleter(data)` must be well-formed
+    ///                 The expression :literal:`deleter(data)` must be well-formed (can be compiled)
     ///                 and not throw any exceptions.
     ///
     /// @param data         The pointer to the mutable externally-allocated memory block.
@@ -291,7 +292,7 @@ public:
     /// user.
     ///
     /// @tparam ConstDeleter The type of a deleter used to deallocate the ``data``.
-    ///                      The expression :literal:`deleter(data)` must be well-formed
+    ///                      The expression :literal:`deleter(data)` must be well-formed (can be compiled)
     ///                      and not throw any exceptions.
     ///
     /// @param data         The pointer to the immutable externally-allocated memory block.
@@ -312,7 +313,9 @@ public:
 
     /// Releases the ownership of the managed memory block and starts managing the lifetime of the
     /// reference array while storing the pointer to another memory block provided by the user. The
-    /// lifetime of the user-provided memory block is not managed.
+    /// lifetime of the user-provided memory block is not managed. It is the responsibility of the
+    /// programmer to make sure that ``data`` pointer remains valid as long as this array object
+    /// exists.
     ///
     /// @tparam RefData The type of elements in the reference array.
     /// @tparam ExtData Either ``Data`` or ``const Data`` type.

@@ -18,7 +18,7 @@ a storage that:
 
 2. Contains information about the memory block's size.
 
-3. Supports both :term:`immutable <Immutability>` and mutable data.
+3. Represents either :term:`immutable <Immutability>` or mutable data.
 
 4. Provides an ability to change the data state from immutable to
    mutable one.
@@ -101,19 +101,17 @@ Data ownership requirements
 
 The array shall satisfy the following requirements on managing the memory blocks:
 
-1. An array represents either immutable or mutable data.
-
-2. An array shall retain:
+1. An array shall retain:
 
    -  Pointer to the immutable data block;
 
    -  Pointer to the mutable data block.
 
-3. If an array represents mutable data, both pointers shall point to the mutable data block.
+2. If an array represents mutable data, both pointers shall point to the mutable data block.
 
-4. If an array represents immutable data, pointer to the mutable data shall be ``nullptr``.
+3. If an array represents immutable data, pointer to the mutable data block shall be ``nullptr``.
 
-5. An array shall use shared ownership semantics to manage lifetime of the stored data blocks:
+4. An array shall use shared ownership semantics to manage lifetime of the stored data blocks:
 
    - Several arrays objects may own the same data block;
 
@@ -127,7 +125,7 @@ The array shall satisfy the following requirements on managing the memory blocks
    - The data block is deallocated using the deleter object that is provided to array during
      construction.
 
-6. An array object may own no data. In this case, it is called **empty**:
+5. An array object may own no data. In this case, it is called **empty**:
 
    - Pointers to the immutable and mutable data of the empty array shall be ``nullptr``;
    - The data block size shall be ``0``.
@@ -138,38 +136,45 @@ The array shall satisfy the following requirements on managing the memory blocks
 --------------------
 Implementation notes
 --------------------
+A typical array implementation may be organized in the following way:
 
-1. An array implementation holds the following member variables:
+1. An array class has the following member variables:
 
-   - Pointer to the immutable data;
+   - Pointer to the immutable data block;
 
-   - Pointer to the mutable data;
+   - Pointer to the mutable data block;
 
-   - Pointer to the ownership structure;
+   - Pointer to the ownership structure that implements the shared ownership semantics;
 
    - The data block size;
 
 2. The ownership structure is an object that stores:
 
-   - Either a pointer immutable or mutable data block:
-
-     - If an array represents the immutable data, pointer to immutable data;
-
-     - If an array represents the mutable data, pointer to mutable data;
+   - Either a pointer immutable or mutable data block;
 
    - The deleter object;
 
-   - The reference counter (the number of array instances that owns the associated data block);
+   - The reference count (the number of array instances that owns the associated data block);
 
-3. The destructor of an array decrements the reference counter. If that counter reaches zero, the
-   ownership structure deallocates the associated memory block and the ownership structure instance is
-   destoryed itself.
+3. The destructor of an array decrements the reference count. If that count reaches zero, the
+   ownership structure deallocates the associated memory block and the array destroys the ownership
+   structure.
 
-4. If the array object changes its state from immutable to mutable via ``need_mutable_data()``,
-   the reference counter of the ownership structure is decremented. If that counter reaches zero,
-   the ownership structure deallocates the immutable memory block and the ownership structure
-   instance is destoryed itself. The new instance of ownership structure owning the mutable data
-   block is created and replaces the old one.
+4. If the array object changes its state from immutable to mutable, the reference count of the
+   ownership structure is decremented.
+
+   - If that count reaches zero, the ownership structure
+     deallocates the immutable memory block and the array destroys the ownership structure. The new
+     instance of ownership structure owning the mutable data block is created and replaces the old one.
+
+   - If that count greater than zero, the ownership structure is not destroyed. The new
+     instance of ownership structure owning the mutable data block is created and replaces the old
+     one.
+
+.. TODO: Add note regarding thread safety
+
+.. note::
+   Implementer can choose an arbitrary implementation strategy that satisfy an array requirements.
 
 
 .. _programming_interface:
