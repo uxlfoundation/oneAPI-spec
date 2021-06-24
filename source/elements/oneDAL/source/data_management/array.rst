@@ -129,8 +129,8 @@ The array shall satisfy the following requirements on managing the memory blocks
      construction. If no deleter object provided, an array calls the default deallocating
      function that corresponds to the internal memory allocation mechanism.
 
-5. If the managed pointer to the data block is replaced by the other pointer via ``reset()``, an
-   array releases the ownership of the managed pointer and start managing lifetime of the data block
+5. If a managed pointer to the data block is replaced by another pointer via ``reset()``, the
+   array that managed the pointer releases the ownership of it and starts managing the lifetime of the data block
    represented by the other pointer.
 
 6. If an array changes its state from immutable to mutable via ``need_mutable_data()``, it releases
@@ -180,7 +180,7 @@ A typical array implementation may be organized in the following way:
    - If that count is greater than zero, the ownership structure is not destroyed.
 
 5. If a copy of the array object is created, the reference count of the ownership structure is
-   incremented and a pointer to the same ownership structure assigned to the created copy.
+   incremented and a pointer to the same ownership structure is assigned to the created copy.
    The other member variables of an array class are copied as is.
 
 .. TODO: Add note regarding thread safety
