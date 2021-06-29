@@ -33,9 +33,9 @@ matrix :math:`A`:
        :header-rows: 1
  
        * -  :math:`A` = :math:`U^{T}U` for real data, :math:`A = U^{H}U` for complex data
-         -  if upper_lower=\ ``onemkl::uplo::upper`` 
+         -  if upper_lower=\ ``oneapi::mkl::uplo::upper`` 
        * -  :math:`A` = :math:`LL^{T}` for real data, :math:`A = LL^{H}` for complex data
-         -  if upper_lower=\ ``onemkl::uplo::lower`` 
+         -  if upper_lower=\ ``oneapi::mkl::uplo::lower`` 
 
 where :math:`L` is a lower triangular matrix and :math:`U` is upper
 triangular.
@@ -50,7 +50,7 @@ potrf (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void potrf(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void potrf(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -64,11 +64,11 @@ upper_lower
    Indicates whether the upper or lower triangular part of :math:`A` is
    stored and how :math:`A` is factored:
 
-   If upper_lower=\ ``onemkl::uplo::upper``, the array ``a`` stores the
+   If upper_lower=\ ``oneapi::mkl::uplo::upper``, the array ``a`` stores the
    upper triangular part of the matrix :math:`A`, and the strictly lower
    triangular part of the matrix is not referenced.
 
-   If upper_lower=\ ``onemkl::uplo::lower``, the array ``a`` stores the
+   If upper_lower=\ ``oneapi::mkl::uplo::lower``, the array ``a`` stores the
    lower triangular part of the matrix :math:`A`, and the strictly upper
    triangular part of the matrix is not referenced.
 
@@ -138,7 +138,7 @@ potrf (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event potrf(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event potrf(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -152,11 +152,11 @@ upper_lower
    Indicates whether the upper or lower triangular part of :math:`A` is
    stored and how :math:`A` is factored:
 
-   If upper_lower=\ ``onemkl::uplo::upper``, the array ``a`` stores the
+   If upper_lower=\ ``oneapi::mkl::uplo::upper``, the array ``a`` stores the
    upper triangular part of the matrix :math:`A`, and the strictly lower
    triangular part of the matrix is not referenced.
 
-   If upper_lower=\ ``onemkl::uplo::lower``, the array ``a`` stores the
+   If upper_lower=\ ``oneapi::mkl::uplo::lower``, the array ``a`` stores the
    lower triangular part of the matrix :math:`A`, and the strictly upper
    triangular part of the matrix is not referenced.
 

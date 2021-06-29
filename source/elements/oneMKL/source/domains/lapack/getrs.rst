@@ -32,11 +32,11 @@ equations:
        :header-rows: 1
     
        * -     \ :math:`AX = B`\     
-         -     if ``trans``\ =\ ``onemkl::transpose::nontrans``\     
+         -     if ``trans``\ =\ ``oneapi::mkl::transpose::nontrans``\     
        * -     \ :math:`A^TX = B`\     
-         -     if ``trans``\ =\ ``onemkl::transpose::trans``\     
+         -     if ``trans``\ =\ ``oneapi::mkl::transpose::trans``\     
        * -     \ :math:`A^HX = B`\     
-         -     if ``trans``\ =\ ``onemkl::transpose::conjtrans``\     
+         -     if ``trans``\ =\ ``oneapi::mkl::transpose::conjtrans``\     
 
 Before calling this routine, you must call
 :ref:`onemkl_lapack_getrf`
@@ -52,7 +52,7 @@ getrs (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void getrs(cl::sycl::queue &queue, onemkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void getrs(cl::sycl::queue &queue, oneapi::mkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -65,13 +65,13 @@ queue
 trans
    Indicates the form of the equations:
 
-   If ``trans=onemkl::transpose::nontrans``, then :math:`AX = B` is solved
+   If ``trans=oneapi::mkl::transpose::nontrans``, then :math:`AX = B` is solved
    for :math:`X`.
 
-   If ``trans=onemkl::transpose::trans``, then :math:`A^TX = B` is solved
+   If ``trans=oneapi::mkl::transpose::trans``, then :math:`A^TX = B` is solved
    for :math:`X`.
 
-   If ``trans=onemkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   If ``trans=oneapi::mkl::transpose::conjtrans``, then :math:`A^HX = B` is
    solved for :math:`X`.
 
 n
@@ -152,7 +152,7 @@ getrs (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event getrs(cl::sycl::queue &queue, onemkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t *ipiv, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event getrs(cl::sycl::queue &queue, oneapi::mkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t *ipiv, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -165,13 +165,13 @@ queue
 trans
    Indicates the form of the equations:
 
-   If ``trans=onemkl::transpose::nontrans``, then :math:`AX = B` is solved
+   If ``trans=oneapi::mkl::transpose::nontrans``, then :math:`AX = B` is solved
    for :math:`X`.
 
-   If ``trans=onemkl::transpose::trans``, then :math:`A^TX = B` is solved
+   If ``trans=oneapi::mkl::transpose::trans``, then :math:`A^TX = B` is solved
    for :math:`X`.
 
-   If ``trans=onemkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   If ``trans=oneapi::mkl::transpose::conjtrans``, then :math:`A^HX = B` is
    solved for :math:`X`.
 
 n

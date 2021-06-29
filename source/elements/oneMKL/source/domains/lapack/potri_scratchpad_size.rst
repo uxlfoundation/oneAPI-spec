@@ -38,7 +38,7 @@ potri_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t potri_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t lda) 
+      std::int64_t potri_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t lda) 
     }
 
 .. container:: section
@@ -51,9 +51,9 @@ queue
 upper_lower
    Indicates how the input matrix :math:`A` has been    factored:
 
-   If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
+   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
 
-   If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
+   If   ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
 
 n
    Specifies the order of the matrix    :math:`A` (:math:`0 \le n`).

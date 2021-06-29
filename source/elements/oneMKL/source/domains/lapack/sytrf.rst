@@ -49,7 +49,7 @@ sytrf (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void sytrf(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<int_64,1> &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void sytrf(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<int_64,1> &ipiv, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -89,9 +89,9 @@ a
 ipiv
    Buffer, size at least :math:`\max(1, n)`. Contains details of    the interchanges and the block structure of :math:`D`. If   :math:`\text{ipiv}(i)=k>0`, then :math:`d_{ii}` is a :math:`1 \times 1` block, and the   :math:`i`-th row and column of :math:`A` was interchanged with the :math:`k`-th   row and column.
 
-      If ``upper_lower=onemkl::uplo::upper``   and :math:`\text{ipiv}(i)=\text{ipiv}(i-1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i`-1, and (:math:`i-1`)-th row and column of   :math:`A` was interchanged with the :math:`m`-th row and   column.
+      If ``upper_lower=oneapi::mkl::uplo::upper``   and :math:`\text{ipiv}(i)=\text{ipiv}(i-1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i`-1, and (:math:`i-1`)-th row and column of   :math:`A` was interchanged with the :math:`m`-th row and   column.
 
-      If ``upper_lower=onemkl::uplo::lower`` and   :math:`\text{ipiv}(i)=\text{ipiv}(i+1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i+1`, and (:math:`i+1`)-th row and column   of :math:`A` was interchanged with the :math:`m`-th row and column.
+      If ``upper_lower=oneapi::mkl::uplo::lower`` and   :math:`\text{ipiv}(i)=\text{ipiv}(i+1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i+1`, and (:math:`i+1`)-th row and column   of :math:`A` was interchanged with the :math:`m`-th row and column.
 
 scratchpad
    Buffer holding scratchpad memory to be used by routine for storing intermediate results.
@@ -132,7 +132,7 @@ sytrf (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event sytrf(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, int_64 *ipiv, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event sytrf(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, int_64 *ipiv, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -175,9 +175,9 @@ a
 ipiv
    Pointer to array of size at least :math:`\max(1, n)`. Contains details of    the interchanges and the block structure of :math:`D`. If   :math:`\text{ipiv}(i)=k>0`, then :math:`d_{ii}` is a :math:`1 \times 1` block, and the   :math:`i`-th row and column of :math:`A` was interchanged with the :math:`k`-th   row and column.
 
-      If ``upper_lower=onemkl::uplo::upper``   and :math:`\text{ipiv}(i)=\text{ipiv}(i-1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i-1`, and (:math:`i-1`)-th row and column of   :math:`A` was interchanged with the :math:`m`-th row and   column.
+      If ``upper_lower=oneapi::mkl::uplo::upper``   and :math:`\text{ipiv}(i)=\text{ipiv}(i-1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i-1`, and (:math:`i-1`)-th row and column of   :math:`A` was interchanged with the :math:`m`-th row and   column.
       
-      If ``upper_lower=onemkl::uplo::lower`` and   :math:`\text{ipiv}(i)=\text{ipiv}(i+1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i+1`, and (:math:`i+1`)-th row and column   of :math:`A` was interchanged with the :math:`m`-th row and column.
+      If ``upper_lower=oneapi::mkl::uplo::lower`` and   :math:`\text{ipiv}(i)=\text{ipiv}(i+1)=-m<0`, then :math:`D` has a :math:`2 \times 2` block in   rows/columns :math:`i` and :math:`i+1`, and (:math:`i+1`)-th row and column   of :math:`A` was interchanged with the :math:`m`-th row and column.
 
 scratchpad
    Pointer to scratchpad memory to be used by routine for storing intermediate results.

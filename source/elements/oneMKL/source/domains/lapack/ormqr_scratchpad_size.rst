@@ -36,7 +36,7 @@ ormqr_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t ormqr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
+      std::int64_t ormqr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side left_right, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
     }
 
 .. container:: section
@@ -47,17 +47,17 @@ queue
    Device queue where calculations by :ref:`onemkl_lapack_ormqr` function will be performed.
 
 left_right
-   If ``left_right=onemkl::side::left``, :math:`Q` or :math:`Q^{T}` is
+   If ``left_right=oneapi::mkl::side::left``, :math:`Q` or :math:`Q^{T}` is
    applied to :math:`C` from the left.
 
-   If ``left_right=onemkl::side::right``, :math:`Q` or :math:`Q^{T}` is
+   If ``left_right=oneapi::mkl::side::right``, :math:`Q` or :math:`Q^{T}` is
    applied to :math:`C` from the right.
 
 trans
-   If ``trans=onemkl::transpose::trans``, the routine multiplies
+   If ``trans=oneapi::mkl::transpose::trans``, the routine multiplies
    :math:`C` by :math:`Q`.
 
-   If ``trans=onemkl::transpose::nontrans``, the routine multiplies
+   If ``trans=oneapi::mkl::transpose::nontrans``, the routine multiplies
    :math:`C` by :math:`Q^{T}`.
 
 m

@@ -34,9 +34,9 @@ factorization of :math:`A`:
    :header-rows: 1
 
    * -  :math:`A = U^TU` for real data, :math:`A = U^HU` for complex data
-     -  if ``upper_lower=onemkl::uplo::upper``
+     -  if ``upper_lower=oneapi::mkl::uplo::upper``
    * -  :math:`A = LL^T` for real data, :math:`A = LL^H` for complex data
-     -  if ``upper_lower=onemkl::uplo::lower``
+     -  if ``upper_lower=oneapi::mkl::uplo::lower``
 
 where :math:`L` is a lower triangular matrix and :math:`U` is upper
 triangular. The system is solved with multiple right-hand sides
@@ -55,7 +55,7 @@ potrs (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void potrs(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void potrs(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -68,9 +68,9 @@ queue
 upper_lower
    Indicates how the input matrix has been factored:
 
-   If ``upper_lower = onemkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}`U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
+   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}`U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
 
-   If ``upper_lower = onemkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
+   If ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
 
 n
    The order of matrix :math:`A` (:math:`0 \le n`).\
@@ -140,7 +140,7 @@ potrs (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event potrs(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event potrs(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -153,9 +153,9 @@ queue
 upper_lower
    Indicates how the input matrix has been factored:
 
-   If ``upper_lower = onemkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
+   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
 
-   If ``upper_lower = onemkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
+   If ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
 
 n
    The order of matrix :math:`A` (:math:`0 \le n`).\
