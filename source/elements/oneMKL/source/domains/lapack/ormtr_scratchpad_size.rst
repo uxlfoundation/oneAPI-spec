@@ -37,7 +37,7 @@ ormtr_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t ormtr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side left_right, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t ldc) 
+      std::int64_t ormtr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t ldc) 
     }
 
 .. container:: section
@@ -52,20 +52,20 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
         :header-rows: 1
 
         * -  :math:`r = m` 
-          -  if ``left_right = side::left`` 
+          -  if ``side = side::left`` 
         * -  :math:`r = n` 
-          -  if ``left_right = side::right`` 
+          -  if ``side = side::right`` 
 
 queue
    Device queue where calculations by :ref:`onemkl_lapack_ormtr` function will be performed.
 
-left_right
+side
    Must be either ``side::left`` or ``side::right``.
 
-   If ``left_right = side::left``, :math:`Q` or :math:`Q^{T}` is
+   If ``side = side::left``, :math:`Q` or :math:`Q^{T}` is
    applied to :math:`C` from the left.
 
-   If ``left_right = side::right``, :math:`Q` or :math:`Q^{T}` is
+   If ``side = side::right``, :math:`Q` or :math:`Q^{T}` is
    applied to :math:`C` from the right.
 
 upper_lower

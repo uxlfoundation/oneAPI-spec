@@ -36,7 +36,7 @@ unmtr_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t unmtr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side left_right, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t ldc) 
+      std::int64_t unmtr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t lda, std::int64_t ldc) 
     }
 
 .. container:: section
@@ -46,13 +46,13 @@ unmtr_scratchpad_size
 queue
    Device queue where calculations by :ref:`onemkl_lapack_unmtr` function will be performed.
 
-left_right
+side
    Must be either ``side::left`` or ``side::right``.
 
-   If ``left_right=side::left``, :math:`Q` or :math:`Q^{H}` is
+   If ``side=side::left``, :math:`Q` or :math:`Q^{H}` is
    applied to :math:`C` from the left.
 
-   If ``left_right=side::right``, :math:`Q` or :math:`Q^{H}` is
+   If ``side=side::right``, :math:`Q` or :math:`Q^{H}` is
    applied to :math:`C` from the right.
 
 upper_lower

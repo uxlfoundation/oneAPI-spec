@@ -37,7 +37,7 @@ unmqr_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t unmqr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side left_right, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
+      std::int64_t unmqr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
     }
 
 .. container:: section
@@ -47,11 +47,11 @@ unmqr_scratchpad_size
 queue
    Device queue where calculations by :ref:`onemkl_lapack_unmqr` function will be performed.
 
-left_right
-   If ``left_right=oneapi::mkl::side::left``, :math:`Q` or :math:`Q^{H}` is
+side
+   If ``side=oneapi::mkl::side::left``, :math:`Q` or :math:`Q^{H}` is
    applied to :math:`C` from the left.
 
-   If ``left_right=oneapi::mkl::side::right``, :math:`Q` or :math:`Q^{H}` is
+   If ``side=oneapi::mkl::side::right``, :math:`Q` or :math:`Q^{H}` is
    applied to :math:`C` from the right.
 
 trans
