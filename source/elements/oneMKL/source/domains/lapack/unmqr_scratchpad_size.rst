@@ -55,17 +55,17 @@ side
    applied to :math:`C` from the right.
 
 trans
-   If ``trans=oneapi::mkl::transpose::trans``, the routine multiplies
+   If ``trans=oneapi::mkl::transpose::nontrans``, the routine multiplies
    :math:`C` by :math:`Q`.
 
    If ``trans=oneapi::mkl::transpose::conjtrans``, the routine multiplies
    :math:`C` by :math:`Q^H`.
 
 m
-   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
+   The number of rows in the matrix :math:`C` (:math:`0 \le m`).
 
 n
-   The number of columns the matrix :math:`A` (:math:`0 \le n \le m`).
+   The number of columns the matrix :math:`C` (:math:`0 \le n \le m`).
 
 k
    The number of elementary reflectors whose product defines the

@@ -52,15 +52,15 @@ side
    If ``side = oneapi::mkl::side::right``, :math:`Q` or :math:`Q^T` is applied to :math:`C` from the right.
 
 trans
-   If ``trans=oneapi::mkl::transpose::trans``, the routine multiplies :math:`C` by :math:`Q`.
+   If ``trans=oneapi::mkl::transpose::nontrans``, the routine multiplies :math:`C` by :math:`Q`.
 
-   If ``trans=oneapi::mkl::transpose::nontrans``, the routine multiplies :math:`C` by :math:`Q^T`.
+   If ``trans=oneapi::mkl::transpose::trans``, the routine multiplies :math:`C` by :math:`Q^T`.
 
 m
-   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
+   The number of rows in the matrix :math:`C` (:math:`0 \le m`).
 
 n
-   The number of columns in the matrix :math:`A` (:math:`0 \le n \le m`).
+   The number of columns in the matrix :math:`C` (:math:`0 \le n \le m`).
 
 k
    The number of elementary reflectors whose product defines the matrix :math:`Q` (:math:`0 \le k \le n`).
