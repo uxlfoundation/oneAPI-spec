@@ -37,7 +37,7 @@ unmqr_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t unmqr_scratchpad_size(cl::sycl::queue &queue, onemkl::side left_right, onemkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
+      std::int64_t unmqr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc, std::int64_t &scratchpad_size) 
     }
 
 .. container:: section
@@ -47,25 +47,25 @@ unmqr_scratchpad_size
 queue
    Device queue where calculations by :ref:`onemkl_lapack_unmqr` function will be performed.
 
-left_right
-   If ``left_right=onemkl::side::left``, :math:`Q` or :math:`Q^{H}` is
+side
+   If ``side=oneapi::mkl::side::left``, :math:`Q` or :math:`Q^{H}` is
    applied to :math:`C` from the left.
 
-   If ``left_right=onemkl::side::right``, :math:`Q` or :math:`Q^{H}` is
+   If ``side=oneapi::mkl::side::right``, :math:`Q` or :math:`Q^{H}` is
    applied to :math:`C` from the right.
 
 trans
-   If ``trans=onemkl::transpose::trans``, the routine multiplies
+   If ``trans=oneapi::mkl::transpose::nontrans``, the routine multiplies
    :math:`C` by :math:`Q`.
 
-   If ``trans=onemkl::transpose::conjtrans``, the routine multiplies
+   If ``trans=oneapi::mkl::transpose::conjtrans``, the routine multiplies
    :math:`C` by :math:`Q^H`.
 
 m
-   The number of rows in the matrix :math:`A` (:math:`0 \le m`).
+   The number of rows in the matrix :math:`C` (:math:`0 \le m`).
 
 n
-   The number of columns the matrix :math:`A` (:math:`0 \le n \le m`).
+   The number of columns the matrix :math:`C` (:math:`0 \le n \le m`).
 
 k
    The number of elementary reflectors whose product defines the

@@ -38,7 +38,7 @@ trtrs_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t trtrs_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, onemkl::transpose trans, onemkl::diag diag, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t ldb) 
+      std::int64_t trtrs_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, oneapi::mkl::diag diag, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t ldb) 
     }
 
 .. container:: section
@@ -58,17 +58,17 @@ upper_lower
 trans
    Indicates the form of the equations:
 
-   If ``trans=onemkl::transpose::nontrans``, then :math:`AX = B` is solved
+   If ``trans=oneapi::mkl::transpose::nontrans``, then :math:`AX = B` is solved
    for :math:`X`.
 
-   If ``trans=onemkl::transpose::trans``, then :math:`A^TX = B` is solved
+   If ``trans=oneapi::mkl::transpose::trans``, then :math:`A^TX = B` is solved
    for :math:`X`.
 
-   If ``trans=onemkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   If ``trans=oneapi::mkl::transpose::conjtrans``, then :math:`A^HX = B` is
    solved for :math:`X`.
 
 diag
-   If diag = ``onemkl::diag::nonunit``, then :math:`A` is not a    unit triangular matrix.
+   If diag = ``oneapi::mkl::diag::nonunit``, then :math:`A` is not a    unit triangular matrix.
 
    If unit_diag = ``diag::unit``,   then :math:`A` is unit triangular: diagonal elements of :math:`A` are assumed   to be 1 and not referenced in the array ``a``.
 

@@ -40,7 +40,7 @@ potri (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void potri(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void potri(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -53,9 +53,9 @@ queue
 upper_lower
    Indicates how the input matrix :math:`A` has been    factored:
 
-   If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
+   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
 
-   If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
+   If   ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
 
 n
    Specifies the order of the matrix    :math:`A` (:math:`0 \le n`).
@@ -117,7 +117,7 @@ potri (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event potri(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event potri(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -130,9 +130,9 @@ queue
 upper_lower
    Indicates how the input matrix :math:`A` has been    factored:
 
-   If ``upper_lower = onemkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
+   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper   triangle of :math:`A` is stored.
 
-   If   ``upper_lower = onemkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
+   If   ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle of :math:`A` is   stored.
 
 n
    Specifies the order of the matrix    :math:`A` (:math:`0 \le n`).

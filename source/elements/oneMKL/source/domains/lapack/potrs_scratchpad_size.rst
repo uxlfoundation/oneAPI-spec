@@ -38,7 +38,7 @@ potrs_scratchpad_size
 
     namespace oneapi::mkl::lapack {
       template <typename T>
-      std::int64_t potrs_scratchpad_size(cl::sycl::queue &queue, onemkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t ldb) 
+      std::int64_t potrs_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t ldb) 
     }
 
 .. container:: section
@@ -51,9 +51,9 @@ queue
 upper_lower
    Indicates how the input matrix has been factored:
 
-   If ``upper_lower = onemkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A = U^{T}U`   for real data, :math:`A = U^{H}U` for complex data.
+   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A = U^{T}U`   for real data, :math:`A = U^{H}U` for complex data.
 
-   If ``upper_lower = onemkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A = LL^{T}`   for real data, :math:`A = LL^{H}` for complex   data.
+   If ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A = LL^{T}`   for real data, :math:`A = LL^{H}` for complex   data.
 
 n
    The order of matrix :math:`A` (:math:`0 \le n`).

@@ -48,7 +48,7 @@ heevd (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void heevd(cl::sycl::queue &queue, oneapi::mkl::job jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, cl::sycl::buffer<realT,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -127,12 +127,12 @@ This routine shall throw the following exceptions if the associated condition is
 
    If ``info=-i``, the :math:`i`-th parameter had an illegal value.
 
-   If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
+   If ``info=i``, and ``jobz = oneapi::mkl::job::novec``, then the algorithm
    failed to converge; :math:`i` indicates the number of off-diagonal
    elements of an intermediate tridiagonal form which did not
    converge to zero.
 
-   If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm failed
+   If ``info=i``, and ``jobz = oneapi::mkl::job::vec``, then the algorithm failed
    to compute an eigenvalue while working on the submatrix lying in
    rows and columns :math:`\text{info}/(n+1)` through :math:`\text{mod}(\text{info},n+1)`.
 
@@ -148,7 +148,7 @@ heevd (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event heevd(cl::sycl::queue &queue, onemkl::job jobz, onemkl::uplo upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event heevd(cl::sycl::queue &queue, oneapi::mkl::job jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, butter<T,1> &a, std::int64_t lda, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -228,12 +228,12 @@ This routine shall throw the following exceptions if the associated condition is
 
    If ``info=-i``, the :math:`i`-th parameter had an illegal value.
 
-   If ``info=i``, and ``jobz = onemkl::job::novec``, then the algorithm
+   If ``info=i``, and ``jobz = oneapi::mkl::job::novec``, then the algorithm
    failed to converge; :math:`i` indicates the number of off-diagonal
    elements of an intermediate tridiagonal form which did not
    converge to zero.
 
-   If ``info=i``, and ``jobz = onemkl::job::vec``, then the algorithm failed
+   If ``info=i``, and ``jobz = oneapi::mkl::job::vec``, then the algorithm failed
    to compute an eigenvalue while working on the submatrix lying in
    rows and columns :math:`\text{info}/(n+1)` through :math:`\text{mod}(\text{info},n+1)`.
 

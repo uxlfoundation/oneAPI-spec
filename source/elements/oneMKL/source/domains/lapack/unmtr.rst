@@ -31,7 +31,7 @@ when reducing a complex Hermitian matrix :math:`A` to tridiagonal form:
 :math:`A = QTQ^H`. Use this routine after a call to
 :ref:`onemkl_lapack_hetrd`.
 
-Depending on the parameters ``left_right`` and ``trans``, the routine can
+Depending on the parameters ``side`` and ``trans``, the routine can
 form one of the matrix products :math:`QC`, :math:`Q^{H}C`,
 :math:`CQ`, or :math:`CQ^{H}` (overwriting the result on :math:`C`).
 
@@ -45,7 +45,7 @@ unmtr (Buffer Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      void unmtr(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &c, std::int64_t ldc, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+      void unmtr(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &c, std::int64_t ldc, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -60,20 +60,20 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
         :header-rows: 1
 
         * -  :math:`r`\ =\ :math:`m` 
-          -  if ``left_right = side::left`` 
+          -  if ``side = side::left`` 
         * -  :math:`r`\ =\ :math:`n` 
-          -  if ``left_right = side::right`` 
+          -  if ``side = side::right`` 
 
 queue
    The queue where the routine should be executed.
 
-left_right
+side
    Must be either ``side::left`` or ``side::right``.
 
-   If ``left_right=side::left``, :math:`Q` or :math:`Q^{H}` is applied
+   If ``side=side::left``, :math:`Q` or :math:`Q^{H}` is applied
    to :math:`C` from the left.
 
-   If ``left_right=side::right``, :math:`Q` or :math:`Q^{H}` is applied
+   If ``side=side::right``, :math:`Q` or :math:`Q^{H}` is applied
    to :math:`C` from the right.
 
 upper_lower
@@ -130,7 +130,7 @@ scratchpad_size
       
 c
    Overwritten by the product :math:`QC`, :math:`Q^{H}C`,
-   :math:`CQ`, or :math:`CQ^{H}` (as specified by ``left_right`` and
+   :math:`CQ`, or :math:`CQ^{H}` (as specified by ``side`` and
    ``trans``).
 
 scratchpad
@@ -170,7 +170,7 @@ unmtr (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event unmtr(cl::sycl::queue &queue, onemkl::side left_right, onemkl::uplo upper_lower, onemkl::transpose trans, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event unmtr(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -185,20 +185,20 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
         :header-rows: 1
 
         * -  :math:`r`\ =\ :math:`m` 
-          -  if ``left_right = side::left`` 
+          -  if ``side = side::left`` 
         * -  :math:`r`\ =\ :math:`n` 
-          -  if ``left_right = side::right`` 
+          -  if ``side = side::right`` 
 
 queue
    The queue where the routine should be executed.
 
-left_right
+side
    Must be either ``side::left`` or ``side::right``.
 
-   If ``left_right=side::left``, :math:`Q` or :math:`Q^{H}` is applied
+   If ``side=side::left``, :math:`Q` or :math:`Q^{H}` is applied
    to :math:`C` from the left.
 
-   If ``left_right=side::right``, :math:`Q` or :math:`Q^{H}` is applied
+   If ``side=side::right``, :math:`Q` or :math:`Q^{H}` is applied
    to :math:`C` from the right.
 
 upper_lower
@@ -258,7 +258,7 @@ events
       
 c
    Overwritten by the product :math:`QC`, :math:`Q^{H}C`,
-   :math:`CQ`, or :math:`CQ^{H}` (as specified by ``left_right`` and
+   :math:`CQ`, or :math:`CQ^{H}` (as specified by ``side`` and
    trans).
 
 scratchpad
