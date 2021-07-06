@@ -232,11 +232,11 @@ def build(root, target):
     sphinx(root, target)
 
 
-def remove_elements(l, elements):
+def remove_elements(li, elements):
     for e in elements:
-        if e in l:
-            l.remove(e)
-    return l
+        if e in li:
+            li.remove(e)
+    return li
 
 
 @action
@@ -258,8 +258,8 @@ def sort_words(root, target=None):
     with open(join('source', 'spelling_wordlist.txt')) as fin:
         lines = fin.readlines()
     with open(join('source', 'spelling_wordlist.txt'), 'w') as fout:
-        for l in sorted(list(set(lines))):
-            fout.write(l)
+        for li in sorted(list(set(lines))):
+            fout.write(li)
 
 
 commands = {

@@ -9,30 +9,30 @@ exclude: LICENSES|source/elements
 
 repos:
 -   repo: https://github.com/ambv/black
-    rev: stable
+    rev: 21.6b0
     hooks:
     -   id: black
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+    rev: v4.0.1
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: check-yaml
     -   id: check-added-large-files
 -   repo: https://github.com/pycqa/doc8
-    rev: master
+    rev: 0.9.0a1
     hooks:
     -   id: doc8
 -   repo: https://github.com/fsfe/reuse-tool
-    rev: master
+    rev: v0.13.0
     hooks:
     -   id: reuse
 -   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.7.9
+    rev: 3.9.2
     hooks:
     -   id: flake8
 -   repo: https://github.com/pycqa/isort
-    rev: 5.6.3
+    rev: 5.9.1
     hooks:
     -   id: isort
 -   repo: local

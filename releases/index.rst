@@ -70,7 +70,7 @@ Release Notes
 * oneVPL: Updated to 2.4.0
 * oneDAL: Updated some APIs
 * oneMKL: bug fixes
-  
+
 1.1 provisional rev 1
 ~~~~~~~~~~~~~~~~~~~~~
 
