@@ -54,8 +54,11 @@ to the decrementer determine the value by which the internal counter of broadcas
 will be decreased, while negative values determine the value by which the internal
 counter of broadcasts will be increased.
 
-The ``continue_msg`` sent to the decrementer
-decreases the internal counter of broadcasts by one.
+If ``continue_msg`` is used as an argument for the ``DecrementType`` template
+parameter, the ``decrementer``'s port of the ``limiter_node`` also acquires the
+behavior of the ``continue_node``. This behavior requires the number of messages sent to it
+to be equal to the number of connected predecessors before decrementing the
+internal counter of broadcasts by one.
 
 When ``try_put`` call on the decrementer results in
 the new value of the counter of broadcasts to be less than the
