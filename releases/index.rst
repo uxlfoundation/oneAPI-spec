@@ -36,6 +36,9 @@ under development and is labeled *provisional* until it is approved.
   * - Version
     - Date
     - View
+  * - `1.1 provisional rev 2`_
+    - 2021-6-6
+    - `HTML <https://spec.oneapi.com/versions/1.1-provisional-rev-2/>`__ `PDF <https://spec.oneapi.com/versions/1.1-provisional-rev-2/oneAPI-spec.pdf>`__
   * - `1.1 provisional rev 1`_
     - 2021-4-7
     - `HTML <https://spec.oneapi.com/versions/1.1-provisional-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.1-provisional-rev-1/oneAPI-spec.pdf>`__
@@ -61,6 +64,13 @@ under development and is labeled *provisional* until it is approved.
 Release Notes
 -------------
 
+1.1 provisional rev 2
+~~~~~~~~~~~~~~~~~~~~~
+
+* oneVPL: Updated to 2.4.0
+* oneDAL: Updated some APIs
+* oneMKL: bug fixes
+  
 1.1 provisional rev 1
 ~~~~~~~~~~~~~~~~~~~~~
 

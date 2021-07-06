@@ -142,6 +142,18 @@ Doc sources::
   reuse addheader --copyright "Intel Corporation" --year 2020 --license CC-BY-4.0 source/index.rst
 
 
+----------------
+Making a Release
+----------------
+
+1. Update:
+
+   * oneapi-doc.json
+   * releases/index.rst
+
+2. Tag it.
+3. Publish with oneAPI doc repo
+
 .. _`reStructuredText`: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 .. _`Sphinx`: http://www.sphinx-doc.org/en/master/
 .. _`Read the Docs`: https://readthedocs.org/
