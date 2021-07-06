@@ -155,6 +155,16 @@ Release Notes
 oneDNN Graph v0.5
 ~~~~~~~~~~~~~~~~~
 
+Provides more optimization and improves the programming
+experience. The main changes are as follows:
+
+- Support in-place optimization to reduce memory footprint and provide
+  better data locality
+- Support using the partition vector directly for compilation and
+  execution without maintaining a computation graph
+- Provide a special End op to express the multiple uses of a logical
+  tensor, typically for indicating the output tensors of the graph
+
 oneVPL
 ======
 
