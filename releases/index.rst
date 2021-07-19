@@ -37,11 +37,11 @@ under development and is labeled *provisional* until it is approved.
     - Date
     - View
   * - `1.1 provisional rev 2`_
-    - 2021-6-6
-    - `HTML <https://spec.oneapi.com/versions/1.1-provisional-rev-2/>`__ `PDF <https://spec.oneapi.com/versions/1.1-provisional-rev-2/oneAPI-spec.pdf>`__
+    - 2021-7-19
+    - `HTML <https://spec.oneapi.io/versions/1.1-provisional-rev-2/>`__ `PDF <https://spec.oneapi.io/versions/1.1-provisional-rev-2/oneAPI-spec.pdf>`__
   * - `1.1 provisional rev 1`_
     - 2021-4-7
-    - `HTML <https://spec.oneapi.com/versions/1.1-provisional-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.1-provisional-rev-1/oneAPI-spec.pdf>`__
+    - `HTML <https://spec.oneapi.io/versions/1.1-provisional-rev-1/>`__ `PDF <https://spec.oneapi.io/versions/1.1-provisional-rev-1/oneAPI-spec.pdf>`__
 
 
 1.0
@@ -56,10 +56,10 @@ under development and is labeled *provisional* until it is approved.
     - View
   * - `1.0 rev 2`_
     - 2020-10-21
-    - `HTML <https://spec.oneapi.com/versions/1.0-rev-2/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-2/oneAPI-spec.pdf>`__
+    - `HTML <https://spec.oneapi.io/versions/1.0-rev-2/>`__ `PDF <https://spec.oneapi.io/versions/1.0-rev-2/oneAPI-spec.pdf>`__
   * - `1.0 rev 1`_
     - 2020-9-14
-    - `HTML <https://spec.oneapi.com/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.com/versions/1.0-rev-1/oneAPI-spec.pdf>`__
+    - `HTML <https://spec.oneapi.io/versions/1.0-rev-1/>`__ `PDF <https://spec.oneapi.io/versions/1.0-rev-1/oneAPI-spec.pdf>`__
 
 Release Notes
 -------------
@@ -101,7 +101,7 @@ Advanced Ray Tracing
     - View
   * - `oneART v0.5`_
     - 2021-2-18
-    - `HTML <https://spec.oneapi.com/oneart/0.5-rev-1/index.html>`__
+    - `HTML <https://spec.oneapi.io/oneart/0.5-rev-1/index.html>`__
 
 
 Release Notes
@@ -147,7 +147,7 @@ oneDNN Graph
     - View
   * - `oneDNN Graph v0.5`_
     - 2021-4-8
-    - `HTML <https://spec.oneapi.com/onednn-graph/latest/index.html>`__
+    - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
 
 Release Notes
 -------------
@@ -177,10 +177,10 @@ oneVPL
     - View
   * - `oneVPL v2.4.0`_
     - 2021-5-12
-    - `HTML <https://spec.oneapi.com/onevpl/2.4.0/index.html>`__
+    - `HTML <https://spec.oneapi.io/onevpl/2.4.0/index.html>`__
   * - `oneVPL v2.3.1`_
     - 2021-4-8
-    - `HTML <https://spec.oneapi.com/onevpl/2.3.1/index.html>`__
+    - `HTML <https://spec.oneapi.io/onevpl/2.3.1/index.html>`__
 
 Release Notes
 -------------
