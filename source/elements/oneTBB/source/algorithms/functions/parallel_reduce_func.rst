@@ -49,7 +49,7 @@ Requirements:
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
 * The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
-* The ``Reduction`` types must meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_func>`.
+* The ``Reduction`` types must meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_reduction>`.
 
 The function template ``parallel_reduce`` has two forms:
 The functional form is designed to be easy to use in conjunction with lambda expressions.
