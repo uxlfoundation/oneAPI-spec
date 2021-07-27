@@ -34,7 +34,7 @@ Terms
 -----
 
 * ``iterator`` determines the type of the iterator passed into the ``parallel_for_each`` algorithm.
-  (which is ``InputIterator`` or ``decltype(std::begin(c))`` for the overloads which accepts the `Container` template argument)
+  (which is ``decltype(std::begin(c))`` for the overloads which accepts the `Container` template argument or ``InputIterator`` otherwise)
 * ``value_type`` - the type ``std::iterator_traits<iterator>::value_type``.
 * ``reference`` -  the type ``std::iterator_traits<iterator>::reference``.
 
