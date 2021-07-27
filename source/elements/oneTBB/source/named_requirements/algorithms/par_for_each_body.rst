@@ -33,25 +33,25 @@ It should also meet one of the following requirements:
 Terms
 -----
 
-* ``iterator`` determines the type of the iterator passed into ``parallel_for_each`` algorithm
+* ``iterator`` determines the type of the iterator passed into the ``parallel_for_each`` algorithm.
   (which is ``InputIterator`` or ``decltype(std::begin(c))`` for the overloads which accepts the `Container` template argument)
-* ``value_type`` - the type ``std::iterator_traits<iterator>::value_type``
+* ``value_type`` - the type ``std::iterator_traits<iterator>::value_type``.
 * ``reference`` -  the type ``std::iterator_traits<iterator>::reference``.
 
 If the ``iterator`` satisfies `Input iterator` named requirements from [input.iterators]
 ISO C++ Standard section and do not satisfies `Forward iterator` named requirements from
 [forward.iterators] ISO C++ Standard section, `tbb::parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
 requires the ``Body::operator()`` call with an object of type ``const value_type&`` or ``value_type&&`` to be well-formed.
-If both forms are well-formed, an overload with rvalue reference will be preferred.
+If both forms are well-formed, an overload with rvalue reference is preferred.
 
 .. caution::
 
   If the ``Body`` only takes non-const lvalue reference to ``value_type``, named requirements above
-  are violated and the program can be ill-formed.
+  are violated, and the program can be ill-formed.
 
-If the ``iterator`` satisfies `Forward iterator` named requirements from [forward.iterators]
-ISO C++Standard section, ``tbb::parallel_for_each`` requires the ``Body::operator()`` call
-with an object of type ``reference`` to be well-formed.
+If the ``iterator`` meets all of the `Forward iterator` requirements described in the [forward.iterators] section of the 
+ISO C++Standard, ``tbb::parallel_for_each`` requires the ``Body::operator()`` call
+with an object of the ``reference`` type to be well-formed.
 
 Additional elements submitted into ``tbb::parallel_for_each`` through the ``feeder::add`` passes to the ``Body`` as rvalues and therefore the corresponding
 execution of the ``Body`` is required to be well-formed.
