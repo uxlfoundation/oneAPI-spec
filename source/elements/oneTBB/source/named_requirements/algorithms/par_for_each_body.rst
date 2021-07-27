@@ -30,18 +30,28 @@ It should also meet one of the following requirements:
     ``ItemType`` may be optionally passed to ``Body::operator()`` by reference.
     ``const`` and ``volatile`` type qualifiers are also applicable.
 
-ItemType
---------
+Terms
+-----
 
-The argument type ``ItemType`` should either satisfy the *CopyConstructibe*, *MoveConstructibe* or
-both requirements from the ISO C++ [utility.arg.requirements] section.
-If the type is not *CopyConstructibe*, there are additional usage restrictions:
+* ``iterator`` determines the type of the iterator passed into ``parallel_for_each`` algorithm
+  (which is ``InputIterator`` or ``decltype(std::begin(c))`` for the overloads which accepts the `Container` template argument)
+* ``value_type`` - the type ``std::iterator_traits<iterator>::value_type``
+* ``reference`` -  the type ``std::iterator_traits<iterator>::reference``.
 
-* If ``Body::operator()`` accepts an argument by value, or if the ``InputIterator`` type
-  from :doc:`parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>` does
-  not satisfy the `Forward Iterator` requirements from the [forward.iterators] ISO C++ Standard section,
-  dereferencing an ``InputIterator`` must produce an rvalue reference.
-* Additional work items should be passed to the feeder as rvalues, for example, via the ``std::move`` function.
+If the ``iterator`` satisfies `Input iterator` named requirements from [input.iterators]
+ISO C++ Standard section and do not satisfies `Forward iterator` named requirements from
+[forward.iterators] ISO C++ Standard section, `tbb::parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
+requires the ``Body::operator()`` call with an object of type ``const value_type&`` or ``value_type&&`` to be well-formed.
+If both forms are well-formed, an overload with rvalue reference will be preferred.
+
+.. caution::
+
+  If the ``Body`` only takes non-const lvalue reference to ``value_type``, named requirements above
+  are violated and the program can be ill-formed.
+
+If the ``iterator`` satisfies `Forward iterator` named requirements from [forward.iterators]
+ISO C++Standard section, ``tbb::parallel_for_each`` requires the ``Body::operator()`` call
+with an object of type ``reference`` to be well-formed.
 
 See also:
 
