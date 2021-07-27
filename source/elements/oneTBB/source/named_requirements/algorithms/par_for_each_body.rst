@@ -38,20 +38,19 @@ Terms
 * ``value_type`` - the type ``std::iterator_traits<iterator>::value_type``.
 * ``reference`` -  the type ``std::iterator_traits<iterator>::reference``.
 
-If the ``iterator`` satisfies `Input iterator` named requirements from [input.iterators]
-ISO C++ Standard section and do not satisfies `Forward iterator` named requirements from
-[forward.iterators] ISO C++ Standard section, `tbb::parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
-requires the ``Body::operator()`` call with an object of type ``const value_type&`` or ``value_type&&`` to be well-formed.
-If both forms are well-formed, an overload with rvalue reference is preferred.
+``tbb::parallel_for_each`` requires the ``Body::operator()`` call with an object of the ``reference`` type to be well-formed if:
+* If the ``iterator`` meets all of the `Forward iterator` requirements described in the [forward.iterators] section of the 
+ISO C++Standard,
+
+`tbb::parallel_for_each algorhitm <../../algorithms/functions/parallel_for_each_func>`
+requires the Body::operator() call with an object of type const value_type& or value_type&& to be well-formed if:
+* the iterator does not meet all of the Forward iterator requirements described in the [forward.iterators] section of the ISO C++ Standard
+* the iterator meets all of the Input iterator requirements described in the [input.iterators] section of the ISO C++ Standard
 
 .. caution::
 
   If the ``Body`` only takes non-const lvalue reference to ``value_type``, named requirements above
   are violated, and the program can be ill-formed.
-
-If the ``iterator`` meets all of the `Forward iterator` requirements described in the [forward.iterators] section of the 
-ISO C++Standard, ``tbb::parallel_for_each`` requires the ``Body::operator()`` call
-with an object of the ``reference`` type to be well-formed.
 
 Additional elements submitted into ``tbb::parallel_for_each`` through the ``feeder::add`` passes to the ``Body`` as rvalues and therefore the corresponding
 execution of the ``Body`` is required to be well-formed.
