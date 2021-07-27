@@ -53,6 +53,9 @@ If the ``iterator`` satisfies `Forward iterator` named requirements from [forwar
 ISO C++Standard section, ``tbb::parallel_for_each`` requires the ``Body::operator()`` call
 with an object of type ``reference`` to be well-formed.
 
+Additional elements submitted into ``tbb::parallel_for_each`` through the ``feeder::add`` passes to the ``Body`` as rvalues and therefore the corresponding
+execution of the ``Body`` is required to be well-formed.
+
 See also:
 
 * :doc:`parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
