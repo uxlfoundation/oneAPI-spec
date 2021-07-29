@@ -25,7 +25,6 @@ exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 
 project = u'oneAPI Specification'
 copyright = u'2021, Intel Corporation'
-author = u'Intel'
 
 # The short X.Y version
 version = env['oneapi_version']  # noqa: F821
@@ -141,31 +140,6 @@ latex_documents = [
         u'oneAPI Specification',
         u'Intel',
         'manual',
-    ),
-]
-
-
-# -- Options for manual page output ------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, 'oneAPI-spec', u'oneAPI Specification', [author], 1)]
-
-
-# -- Options for Texinfo output ----------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (
-        master_doc,
-        'oneAPI-spec',
-        u'oneAPI Specification',
-        author,
-        'Intel',
-        'Specification for oneAPI software.',
-        'Miscellaneous',
     ),
 ]
 

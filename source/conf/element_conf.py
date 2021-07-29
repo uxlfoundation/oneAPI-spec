@@ -20,7 +20,6 @@
 # -- Project information -----------------------------------------------------
 
 copyright = u'2021, Intel'
-author = u'Intel'
 
 # The short X.Y version
 version = u''
@@ -116,37 +115,6 @@ latex_documents = [
     ),
 ]
 
-# -- Options for manual page output ------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (
-        master_doc,
-        project + '-spec',  # noqa: F821
-        project + u' Specification',  # noqa: F821
-        [author],
-        1,
-    )
-]
-
-
-# -- Options for Texinfo output ----------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (
-        master_doc,
-        project + '-spec',  # noqa: F821
-        project + u' Specification',  # noqa: F821
-        author,
-        'Intel',
-        'Specification for ' + project + ' software.',  # noqa: F821
-        'Miscellaneous',
-    ),
-]
 
 # -- Options for Epub output -------------------------------------------------
 

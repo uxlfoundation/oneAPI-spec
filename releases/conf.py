@@ -23,7 +23,6 @@
 
 project = 'oneAPI Specification Versions'
 copyright = '2021, Intel Corporation'
-author = 'Intel Corporation'
 
 
 # -- General configuration ---------------------------------------------------
