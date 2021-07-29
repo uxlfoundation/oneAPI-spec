@@ -49,10 +49,10 @@ requires the Body::operator() call with an object of type const value_type& or v
 
 .. caution::
 
-  If the ``Body`` only takes non-const lvalue reference to ``value_type``, named requirements above
+  If the ``Body`` only takes non-const lvalue reference to the ``value_type``, the requirements described above
   are violated, and the program can be ill-formed.
 
-Additional elements submitted into ``tbb::parallel_for_each`` through the ``feeder::add`` passes to the ``Body`` as rvalues and therefore the corresponding
+Additional elements submitted into ``tbb::parallel_for_each`` through the ``feeder::add`` are passed to the ``Body`` as rvalues. In this case, the corresponding
 execution of the ``Body`` is required to be well-formed.
 
 See also:
