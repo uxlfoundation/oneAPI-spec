@@ -53,7 +53,7 @@ powx
             sycl::event powx(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
+                    const T *a,
                     T b,
                     T* y,
                     sycl::vector_class<sycl::event> const & depends = {},
