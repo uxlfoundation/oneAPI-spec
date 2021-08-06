@@ -58,8 +58,8 @@ linearfrac
             sycl::event linearfrac(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
-                    T* b,
+                    const T *a,
+                    const T *b,
                     T scalea,
                     T shifta,
                     T scaleb,

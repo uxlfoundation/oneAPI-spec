@@ -53,7 +53,7 @@ sincos
             sycl::event sincos(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
+                    const T *a,
                     T* y,
                     T* z,
                     sycl::vector_class<sycl::event> const & depends = {},

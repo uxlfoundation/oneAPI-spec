@@ -51,7 +51,7 @@ abs
             sycl::event abs(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
+                    const T *a,
                     R* y,
                     sycl::vector_class<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
