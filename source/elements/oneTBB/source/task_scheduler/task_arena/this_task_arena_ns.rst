@@ -21,6 +21,10 @@ with the ``task_arena`` currently used by the calling thread.
             int current_thread_index();
             int max_concurrency();
             template<typename F> auto isolate(F&& f) -> decltype(f());
+            
+            void enqueue(task_handle&& h);
+            
+            template<typename F> void enqueue(F&& f) ;
         }
     }
 
@@ -65,3 +69,19 @@ with the ``task_arena`` currently used by the calling thread.
 
         The object returned by the functor cannot be a reference. ``std::reference_wrapper`` can be used instead.
 
+.. cpp:function:: template<typename F> void enqueue(F&& f)
+  
+    Enqueues a task into the ``task_arena`` currently used by the calling thread to process the specified functor, then immediately returns.
+    The ``F`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    
+    Behavior of this function is identical to ``template<typename F> void task_arena::enqueue(F&& f)`` applied to ``task_arena`` 
+    object constructed with ``attach`` parameter.     
+
+.. cpp:function:: void enqueue(task_handle&& h)   
+     
+    Enqueues a task owned by ``h`` into the ``task_arena`` that is currently used by the calling thread.
+    
+    Behavior of this function is identical to generic version (``template<typename F> void enqueue(F&& f)``) except the parameter type. 
+
+    .. note:: 
+    ``h`` should not be empty to avoid undefined behavior.

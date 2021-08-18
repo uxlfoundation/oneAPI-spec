@@ -54,6 +54,8 @@ A class that represents an explicit, user-managed task scheduler arena.
 
             template<typename F> auto execute(F&& f) -> decltype(f());
             template<typename F> void enqueue(F&& f);
+            
+            void enqueue(task_handle&& h);
         };
 
     } // namespace tbb
@@ -251,6 +253,14 @@ Member functions
         Any number of threads outside of the arena can submit work to the arena and be blocked.
         However, only the maximal number of threads specified for the arena can participate in executing the work.
 
+.. cpp:function:: void enqueue(task_handle&& h)   
+     
+    Enqueues a task owned by ``h`` into the ``task_arena`` for procession.
+ 
+    Behavior of this function is identical to generic version (``template<typename F> void task_arena::enqueue(F&& f)``) except parameter type. 
+
+    .. note:: 
+       ``h`` should not be empty to avoid undefined behavior.
 Example
 -------
 
