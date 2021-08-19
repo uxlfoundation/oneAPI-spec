@@ -34,7 +34,7 @@ Terms
 -----
 
 * ``iterator`` determines the type of the iterator passed into the ``parallel_for_each`` algorithm,
-which is ``decltype(std::begin(c))`` for the overloads that accept the `Container` template argument or ``InputIterator``.
+  which is ``decltype(std::begin(c))`` for the overloads that accept the ``Container`` template argument or ``InputIterator``.
 * ``value_type`` - the type ``std::iterator_traits<iterator>::value_type``.
 * ``reference`` -  the type ``std::iterator_traits<iterator>::reference``.
 
@@ -42,8 +42,9 @@ which is ``decltype(std::begin(c))`` for the overloads that accept the `Containe
 the ``iterator`` meets all of the `Forward iterator` requirements described in the [forward.iterators] section of the 
 ISO C++Standard.
 
-`tbb::parallel_for_each algorhitm <../../algorithms/functions/parallel_for_each_func>`
+`tbb::parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
 requires the Body::operator() call with an object of type const value_type& or value_type&& to be well-formed if:
+
 * the iterator does not meet all of the `Forward iterator` requirements described in the [forward.iterators] section of the ISO C++ Standard
 * the iterator meets all of the `Input iterator` requirements described in the [input.iterators] section of the ISO C++ Standard
 
