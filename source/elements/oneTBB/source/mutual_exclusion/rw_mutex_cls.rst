@@ -7,10 +7,10 @@ rw_mutex
 =============
 **[mutex.rw_mutex]**
 
-A ``rw_mutex`` is a class that models the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`,
-using adaptive approach: the combination of spinlock and waiting on system primitives.
+A ``rw_mutex`` is a class that models :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`
+using an adaptive approach, which is a combination of spinlock and waiting on system primitives.
 The ``rw_mutex`` class satisfies all of the shared mutex requirements described in the [thread.sharedmutex.requirements] section of the ISO C++ standard.
-The ``rw_mutex`` class is unfair reader-writer lock with writer-preference.
+The ``rw_mutex`` class is an unfair reader-writer lock with a writer preference.
 
 .. code:: cpp
 
@@ -48,30 +48,30 @@ The ``rw_mutex`` class is unfair reader-writer lock with writer-preference.
 Member classes
 --------------
 
-.. namespace:: tbb::rw_mutex
+.. namespace:: oneapi::tbb::rw_mutex
 	       
 .. cpp:class:: scoped_lock
 
-    The corresponding scoped-lock class. See the :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`.
+    The corresponding scoped-lock class. See :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`.
 
 Member functions
 ----------------
 
 .. cpp:function:: rw_mutex()
 
-    Constructs unlocked ``rw_mutex``.
+    Constructs an unlocked ``rw_mutex``.
 
 --------------------------------------------------
 
 .. cpp:function:: ~rw_mutex()
 
-    Destroys unlocked ``rw_mutex``.
+    Destroys an unlocked ``rw_mutex``.
 
 --------------------------------------------------
 
 .. cpp:function:: void lock()
 
-    Acquires a lock. It uses adaptive logic for waiting: it blocks after particular time period of busy wait.
+    Acquires a lock. It uses an adaptive logic for waiting, thus it is blocked after a certain time of busy waiting.
 
 --------------------------------------------------
 
@@ -89,7 +89,7 @@ Member functions
 
 .. cpp:function:: void lock_shared()
 
-    Acquires a lock on read. It uses adaptive logic for waiting: it blocks after particular time period of busy wait.
+    Acquires a lock on read. It uses an adaptive logic for waiting, thus it is blocked after a certain time of busy waiting.
 
 --------------------------------------------------
 

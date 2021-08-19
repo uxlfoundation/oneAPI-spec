@@ -7,8 +7,8 @@ mutex
 =====
 **[mutex.mutex]**
 
-A ``mutex`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`,
-using adaptive approach: the combination of spinlock and waiting on system primitives.
+A ``mutex`` is a class that models :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`
+using an adaptive approach, which is a combination of spinlock and waiting on system primitives.
 The ``mutex`` class satisfies all of the mutex requirements described in the [thread.mutex.requirements] section of the ISO C++ standard.
 The ``mutex`` class is not fair or recursive.
 
@@ -42,18 +42,18 @@ The ``mutex`` class is not fair or recursive.
 Member classes
 --------------
 
-.. namespace:: tbb::mutex
+.. namespace:: oneapi::tbb::mutex
 	       
 .. cpp:class:: scoped_lock
 
-    The corresponding ``scoped_lock`` class. See the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`.
+    The corresponding ``scoped_lock`` class. See :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`.
 
 Member functions
 ----------------
 
 .. cpp:function:: mutex()
 
-    Constructs ``mutex`` with unlocked state.
+    Constructs a ``mutex`` with the unlocked state.
 
 --------------------------------------------------
 
@@ -65,7 +65,7 @@ Member functions
 
 .. cpp:function:: void lock()
 
-    Acquires a lock. It uses adaptive logic for waiting: it blocks after particular time period of busy wait.
+    Acquires a lock. It uses adaptive logic for waiting, thus it is blocked after a certain time of busy waiting.
 
 --------------------------------------------------
 
