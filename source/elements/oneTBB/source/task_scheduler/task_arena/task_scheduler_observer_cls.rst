@@ -11,8 +11,9 @@ Class that represents thread interest in task scheduling services.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_scheduler_observer.h>
+    // Defined in header <oneapi/tbb/task_scheduler_observer.h>
 
+    namespace oneapi {
     namespace tbb {
 
        class task_scheduler_observer {
@@ -28,7 +29,8 @@ Class that represents thread interest in task scheduling services.
            virtual void on_scheduler_exit( bool is_worker } {}
        };
 
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 A ``task_scheduler_observer`` permits clients to observe when a thread starts
 and stops processing tasks, either globally or in a certain task scheduler arena.
@@ -106,15 +108,15 @@ The following example sketches the code of an observer that pins oneTBB worker t
 
 .. code:: cpp
 
-    class pinning_observer : public tbb::task_scheduler_observer {
+    class pinning_observer : public oneapi/tbb::task_scheduler_observer {
     public:
         affinity_mask_t m_mask; // HW affinity mask to be used for threads in an arena
-        pinning_observer( tbb::task_arena &a, affinity_mask_t mask )
-            : tbb::task_scheduler_observer(a), m_mask(mask) {
+        pinning_observer( oneapi::tbb::task_arena &a, affinity_mask_t mask )
+            : oneapi::tbb::task_scheduler_observer(a), m_mask(mask) {
             observe(true); // activate the observer
         }
         void on_scheduler_entry( bool worker ) override {
-            set_thread_affinity(tbb::this_task_arena::current_thread_index(), m_mask);
+            set_thread_affinity(oneapi::tbb::this_task_arena::current_thread_index(), m_mask);
         }
         void on_scheduler_exit( bool worker ) override {
             restore_thread_affinity();

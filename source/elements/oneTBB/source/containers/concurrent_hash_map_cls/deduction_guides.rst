@@ -72,18 +72,18 @@ are defined as follows:
 
 .. code:: cpp
 
-    #include <tbb/concurrent_hash_map.h>
+    #include <oneapi/tbb/concurrent_hash_map.h>
     #include <vector>
 
     int main() {
         std::vector<std::pair<const int, float>> v;
 
-        // Deduces chmap1 as tbb::concurrent_hash_map<int, float>
-        tbb::concurrent_hash_map chmap1(v.begin(), v.end());
+        // Deduces chmap1 as oneapi::tbb::concurrent_hash_map<int, float>
+        oneapi::tbb::concurrent_hash_map chmap1(v.begin(), v.end());
 
         std::allocator<std::pair<const int, float>> alloc;
-        // Deduces chmap2 as tbb::concurrent_hash_map<int, float,
+        // Deduces chmap2 as oneapi::tbb::concurrent_hash_map<int, float,
         //                                            tbb_hash_compare<int>,
         //                                            std::allocator<std::pair<const int, float>>>
-        tbb::concurrent_hash_map chmap2(v.begin(), v.end(), alloc);
+        oneapi::tbb::concurrent_hash_map chmap2(v.begin(), v.end(), alloc);
     }

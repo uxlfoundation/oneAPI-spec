@@ -110,7 +110,7 @@ are defined as follows:
 
 .. code:: cpp
 
-    #include <tbb/concurrent_unordered_map.h>
+    #include <oneapi/tbb/concurrent_unordered_map.h>
     #include <vector>
     #include <functional>
 
@@ -120,8 +120,8 @@ are defined as follows:
         std::vector<std::pair<int, float>> v;
 
         // Deduces m1 as concurrent_unordered_multimap<int, float>
-        tbb::concurrent_unordered_multimap m1(v.begin(), v.end());
+        oneapi::tbb::concurrent_unordered_multimap m1(v.begin(), v.end());
 
         // Deduces m2 as concurrent_unordered_multimap<int, float, CustomHasher>;
-        tbb::concurrent_unordered_multimap m2(v.begin(), v.end(), CustomHasher{});
+        oneapi::tbb::concurrent_unordered_multimap m2(v.begin(), v.end(), CustomHasher{});
     }

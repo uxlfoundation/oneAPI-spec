@@ -14,8 +14,9 @@ The ``spin_rw_mutex`` class is unfair spinning reader-writer lock with backoff a
 
 .. code:: cpp
 
-    // Defined in header <tbb/spin_rw_mutex.h>
+    // Defined in header <oneapi/tbb/spin_rw_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class spin_rw_mutex {
         public:
@@ -41,12 +42,13 @@ The ``spin_rw_mutex`` class is unfair spinning reader-writer lock with backoff a
             static constexpr bool is_recursive_mutex = false;
             static constexpr bool is_fair_mutex = false;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member classes
 --------------
 
-.. namespace:: tbb::spin_rw_mutex
+.. namespace:: oneapi::tbb::spin_rw_mutex
 	       
 .. cpp:class:: scoped_lock
 

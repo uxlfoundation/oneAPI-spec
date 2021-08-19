@@ -11,8 +11,9 @@ A class that represents an explicit, user-managed task scheduler arena.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_arena.h>
+    // Defined in header <oneapi/tbb/task_arena.h>
 
+    namespace oneapi {
     namespace tbb {
 
         class task_arena {
@@ -57,6 +58,7 @@ A class that represents an explicit, user-managed task scheduler arena.
         };
 
     } // namespace tbb
+    } // namespace oneapi
 
 A ``task_arena`` class represents a place where threads may share and execute tasks.
 
@@ -117,7 +119,7 @@ Member types and constants
 
     .. note::
 
-        NUMA node ID is considered valid if it was obtained through tbb::info::numa_nodes().
+        NUMA node ID is considered valid if it was obtained through oneapi::tbb::info::numa_nodes().
 
     ``max_concurrency`` - The maximum number of threads that can participate in work processing
     within the ``task_arena`` at the same time.
@@ -259,18 +261,18 @@ to the corresponding NUMA node.
 
 .. code:: cpp
 
-    #include "tbb/task_group.h"
-    #include "tbb/task_arena.h"
+    #include "oneapi/tbb/task_group.h"
+    #include "oneapi/tbb/task_arena.h"
 
     #include <vector>
 
     int main() {
-        std::vector<tbb::numa_node_id> numa_nodes = tbb::info::numa_nodes();
-        std::vector<tbb::task_arena> arenas(numa_nodes.size());
-        std::vector<tbb::task_group> task_groups(numa_nodes.size());
+        std::vector<oneapi::tbb::numa_node_id> numa_nodes = oneapi::tbb::info::numa_nodes();
+        std::vector<oneapi::tbb::task_arena> arenas(numa_nodes.size());
+        std::vector<oneapi::tbb::task_group> task_groups(numa_nodes.size());
 
         for (int i = 0; i < numa_nodes.size(); i++) {
-            arenas[i].initialize(tbb::task_arena::constraints(numa_nodes[i]));
+            arenas[i].initialize(oneapi::tbb::task_arena::constraints(numa_nodes[i]));
         }
 
         for (int i = 0; i < numa_nodes.size(); i++) {

@@ -12,8 +12,9 @@ constructors arguments to define concurrency limit.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -22,6 +23,7 @@ constructors arguments to define concurrency limit.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 ``unlimited`` concurrency allows an unlimited number of invocations of the body to execute concurrently.
 

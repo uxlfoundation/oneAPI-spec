@@ -12,8 +12,9 @@ A template function that returns a reference to a specific input port of a given
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -22,6 +23,7 @@ A template function that returns a reference to a specific input port of a given
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 See also:
 

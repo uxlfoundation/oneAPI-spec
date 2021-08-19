@@ -29,18 +29,18 @@ Where type alias ``iterator_value_t`` defines as follows:
 
 .. code:: cpp
 
-    #include <tbb/concurrent_vector.h>
+    #include <oneapi/tbb/concurrent_vector.h>
     #include <array>
     #include <memory>
 
     int main() {
         std::array<int, 100> arr;
 
-        // Deduces cv1 as tbb::concurrent_vector<int>
-        tbb::concurrent_vector cv1(arr.begin(), arr.end());
+        // Deduces cv1 as oneapi::tbb::concurrent_vector<int>
+        oneapi::tbb::concurrent_vector cv1(arr.begin(), arr.end());
 
         std::allocator<int> alloc;
 
-        // Deduces cv2 as tbb::concurrent_vector<int, std::allocator<int>>
-        tbb::concurrent_vector cv2(arr.begin(), arr.end(), alloc);
+        // Deduces cv2 as oneapi::tbb::concurrent_vector<int, std::allocator<int>>
+        oneapi::tbb::concurrent_vector cv2(arr.begin(), arr.end(), alloc);
     }

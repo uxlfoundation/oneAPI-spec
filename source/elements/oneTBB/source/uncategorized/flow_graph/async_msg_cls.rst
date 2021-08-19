@@ -29,7 +29,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_FLOW_GRAPH_FEATURES 1
-   #include "tbb/flow_graph.h"
+   #include "oneapi/tbb/flow_graph.h"
 
 
 Description
@@ -173,13 +173,13 @@ is used to communicate the result to a downstream ``function_node``.
    
    #include <thread>
    #include <atomic>
-   #include "tbb/flow_graph.h"
-   #include "tbb/concurrent_queue.h"
+   #include "oneapi/tbb/flow_graph.h"
+   #include "oneapi/tbb/concurrent_queue.h"
    
-   using namespace tbb::flow;
+   using namespace oneapi::tbb::flow;
    typedef int input_type;
    typedef int output_type;
-   typedef tbb::flow::async_msg<output_type> async_msg_type;
+   typedef oneapi::tbb::flow::async_msg<output_type> async_msg_type;
    
    
    class AsyncActivity {
@@ -215,17 +215,17 @@ is used to communicate the result to a downstream ``function_node``.
            // performs the work on input converting it to output
        }
    
-       tbb::concurrent_queue<work_type> my_work_queue;
+       oneapi::tbb::concurrent_queue<work_type> my_work_queue;
        std::atomic<bool> my_the_end;
    
        std::thread service_thread;
    };
    
    int main() {
-       tbb::flow::graph g;
+       oneapi::tbb::flow::graph g;
        AsyncActivity async_activity;
    
-      tbb::flow::source_node<async_msg_type> s(g, [&](async_msg_type& v)->bool {
+      oneapi::tbb::flow::source_node<async_msg_type> s(g, [&](async_msg_type& v)->bool {
           /* produce data for async work */
           if ( /* source is not over */ ) {
               async_msg_type msg;
@@ -238,10 +238,10 @@ is used to communicate the result to a downstream ``function_node``.
           return false;
       });
    
-       tbb::flow::function_node<output_type> f( g, unlimited, [](const output_type& v) 
+       oneapi::tbb::flow::function_node<output_type> f( g, unlimited, [](const output_type& v) 
        { /* consume data from async work */ });
    
-       tbb::flow::make_edge( s, f );
+       oneapi::tbb::flow::make_edge( s, f );
        g.wait_for_all();
        return 0;
    }
@@ -253,6 +253,7 @@ Members
 .. code:: cpp
 
      
+   namespace oneapi {
    namespace tbb {
        namespace flow {
    
@@ -274,7 +275,8 @@ Members
            };
    
        }
-   }
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the members of this template class.
 

@@ -14,15 +14,17 @@ with the ``task_arena`` currently used by the calling thread.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_arena.h>
+    // Defined in header <oneapi/tbb/task_arena.h>
 
+    namespace oneapi {
     namespace tbb {
         namespace this_task_arena {
             int current_thread_index();
             int max_concurrency();
             template<typename F> auto isolate(F&& f) -> decltype(f());
         }
-    }
+    } // namespace tbb
+    } // namespace oneapi 
 
 .. cpp:function:: int current_thread_index()
 

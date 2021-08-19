@@ -34,7 +34,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_MEMORY_POOL 1
-   #include "tbb/memory_pool.h"
+   #include "oneapi/tbb/memory_pool.h"
 
 
 Description
@@ -59,9 +59,9 @@ Example
 .. code:: cpp
 
    #define TBB_PREVIEW_MEMORY_POOL 1
-   #include "tbb/memory_pool.h"
+   #include "oneapi/tbb/memory_pool.h"
    ...
-   tbb::memory_pool<std::allocator<char> > my_pool;
+   oneapi::tbb::memory_pool<std::allocator<char> > my_pool;
    void* my_ptr = my_pool.malloc(10);
    my_pool.free(my_ptr);
 
@@ -73,6 +73,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
    template <typename Alloc>
    class memory_pool : no_copy {
@@ -84,7 +85,8 @@ Members
        void free(void* ptr);
        void *realloc(void* ptr, size_t size);
    };
-   }
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the member
 of this template class.

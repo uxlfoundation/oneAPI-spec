@@ -12,8 +12,9 @@ in the incoming tuple.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -32,6 +33,7 @@ in the incoming tuple.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -48,7 +50,7 @@ port and generates a message from each element of the tuple, passing each to the
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::split_node
+.. namespace:: oneapi::tbb::flow::split_node
 
 .. cpp:function:: explicit split_node( graph &g )
 

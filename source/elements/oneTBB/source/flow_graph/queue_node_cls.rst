@@ -11,8 +11,9 @@ A node that forwards messages in a first-in first-out (FIFO) order.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -29,6 +30,7 @@ A node that forwards messages in a first-in first-out (FIFO) order.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -45,7 +47,7 @@ its successor set.
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::queue_node
+.. namespace:: oneapi::tbb::flow::queue_node
 
 .. cpp:function:: explicit queue_node( graph &g )
 

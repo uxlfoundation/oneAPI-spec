@@ -95,7 +95,7 @@ and the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 
-    #include <tbb/concurrent_unordered_set.h>
+    #include <oneapi/tbb/concurrent_unordered_set.h>
     #include <vector>
     #include <functional>
 
@@ -105,8 +105,8 @@ and the type alias ``iterator_value_t`` is defined as follows:
         std::vector<int> v;
 
         // Deduces s1 as concurrent_unordered_multiset<int>
-        tbb::concurrent_unordered_multiset s1(v.begin(), v.end());
+        oneapi::tbb::concurrent_unordered_multiset s1(v.begin(), v.end());
 
         // Deduces s2 as concurrent_unordered_multiset<int, CustomHasher>;
-        tbb::concurrent_unordered_multiset s2(v.begin(), v.end(), CustomHasher{});
+        oneapi::tbb::concurrent_unordered_multiset s2(v.begin(), v.end(), CustomHasher{});
     }

@@ -11,8 +11,9 @@ A node that counts and limits the number of messages that pass through it.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -30,6 +31,7 @@ A node that counts and limits the number of messages that pass through it.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -69,7 +71,7 @@ successors. If it cannot obtain a message from a predecessor, it decrements the 
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::limiter_node
+.. namespace:: oneapi::tbb::flow::limiter_node
 	       
 .. cpp:function:: limiter_node( graph &g, size_t threshold )
 

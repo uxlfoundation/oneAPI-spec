@@ -59,15 +59,15 @@ where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_all
 
 .. code:: cpp
 
-    #include <tbb/concurrent_map.h>
+    #include <oneapi/tbb/concurrent_map.h>
     #include <vector>
 
     int main() {
         std::vector<std::pair<int, float>> v;
 
         // Deduces cm1 as concurrent_map<int, float>
-        tbb::concurrent_map cm1(v.begin(), v.end());
+        oneapi::tbb::concurrent_map cm1(v.begin(), v.end());
 
         // Deduces cm2 as concurrent_map<int, float>
-        tbb::concurrent_map cm2({std::pair(1, 2f), std::pair(2, 3f)});
+        oneapi::tbb::concurrent_map cm2({std::pair(1, 2f), std::pair(2, 3f)});
     }

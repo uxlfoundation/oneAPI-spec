@@ -6,7 +6,7 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``tbb::concurrent_priority_queue`` support class template argument
+Where possible, constructors of ``oneapi::tbb::concurrent_priority_queue`` support class template argument
 deduction (since C++17):
 
 .. code:: cpp
@@ -59,16 +59,16 @@ Where the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
 
-    #include <tbb/concurrent_priority_queue.h>
+    #include <oneapi/tbb/concurrent_priority_queue.h>
     #include <vector>
     #include <functional>
     
     int main() {
         std::vector<int> vec;
         
-        // Deduces cpq1 as tbb::concurrent_priority_queue<int>
-        tbb::concurrent_priority_queue cpq1(vec.begin(), vec.end());
+        // Deduces cpq1 as oneapi::tbb::concurrent_priority_queue<int>
+        oneapi::tbb::concurrent_priority_queue cpq1(vec.begin(), vec.end());
         
-        // Deduces cpq2 as tbb::concurrent_priority_queue<int, std::greater>
-        tbb::concurrent_priority_queue cpq2(vec.begin(), vec.end(), std::greater{});
+        // Deduces cpq2 as oneapi::tbb::concurrent_priority_queue<int, std::greater>
+        oneapi::tbb::concurrent_priority_queue cpq2(vec.begin(), vec.end(), std::greater{});
     }

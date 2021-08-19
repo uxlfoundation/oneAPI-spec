@@ -1,20 +1,20 @@
-#include "tbb/flow_graph.h"
+#include "oneapi/tbb/flow_graph.h"
 
 int main() {
     const int data_limit = 20;
     int count = 0;
 
-    tbb::flow::graph g;
+    oneapi::tbb::flow::graph g;
 
-    tbb::flow::function_node< int, int > data_set_preparation(g,
-        tbb::flow::unlimited, []( int data ) {
+    oneapi::tbb::flow::function_node< int, int > data_set_preparation(g,
+        oneapi::tbb::flow::unlimited, []( int data ) {
             printf("Prepare large data set and keep it inside node storage\n");
             return data;
         });
 
-    tbb::flow::overwrite_node< int > overwrite_storage(g);
+    oneapi::tbb::flow::overwrite_node< int > overwrite_storage(g);
 
-    tbb::flow::source_node<int> data_generator(g,
+    oneapi::tbb::flow::source_node<int> data_generator(g,
         [&]( int& v ) -> bool {
             if ( count < data_limit ) {
                 ++count;
@@ -25,7 +25,7 @@ int main() {
             }
         });
 
-    tbb::flow::function_node< int > process(g, tbb::flow::unlimited,
+    oneapi::tbb::flow::function_node< int > process(g, oneapi::tbb::flow::unlimited,
         [&]( const int& data) {
             int data_from_storage = 0;
             overwrite_storage.try_get(data_from_storage);
@@ -33,8 +33,8 @@ int main() {
             printf("Data to process: %d\n", data);
         });
 
-    tbb::flow::make_edge(data_set_preparation, overwrite_storage);
-    tbb::flow::make_edge(data_generator, process);
+    oneapi::tbb::flow::make_edge(data_set_preparation, overwrite_storage);
+    oneapi::tbb::flow::make_edge(data_generator, process);
 
     data_set_preparation.try_put(1);
     data_generator.activate();

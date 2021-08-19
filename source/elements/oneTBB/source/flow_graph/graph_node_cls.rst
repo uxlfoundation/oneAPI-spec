@@ -11,6 +11,7 @@ A base class for all graph nodes.
 
 .. code:: cpp
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
     
@@ -22,6 +23,7 @@ A base class for all graph nodes.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 The ``graph_node`` class is a base class for all flow graph nodes.
 The virtual destructor allows flow graph nodes to be destroyed through pointers to ``graph_node``.

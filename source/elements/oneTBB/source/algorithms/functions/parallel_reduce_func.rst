@@ -11,29 +11,31 @@ Function template that computes reduction over a range.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_reduce.h>
+    // Defined in header <oneapi/tbb/parallel_reduce.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner);
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body, task_group_context& group);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 A ``partitioner`` type may be one of the following entities:
 
@@ -95,10 +97,10 @@ The following code sums the values in an array.
 
 .. code:: cpp
 
-    #include "tbb/parallel_reduce.h"
-    #include "tbb/blocked_range.h"
+    #include "oneapi/tbb/parallel_reduce.h"
+    #include "oneapi/tbb/blocked_range.h"
 
-    using namespace tbb;
+    using namespace oneapi::tbb;
 
     struct Sum {
         float value;
@@ -136,10 +138,10 @@ expressions and the functional form of ``parallel_reduce``.
 
 .. code:: cpp
 
-    #include "tbb/parallel_reduce.h"
-    #include "tbb/blocked_range.h"
+    #include "oneapi/tbb/parallel_reduce.h"
+    #include "oneapi/tbb/blocked_range.h"
 
-    using namespace tbb;
+    using namespace oneapi::tbb;
 
     float ParallelSum( float array[], size_t n ) {
         return parallel_reduce(

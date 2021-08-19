@@ -11,7 +11,7 @@ Function template that computes a parallel prefix.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_scan.h>
+    // Defined in header <oneapi/tbb/parallel_scan.h>
 
     template<typename Range, typename Body>
     void parallel_scan( const Range& range, Body& body );
@@ -108,7 +108,7 @@ to compute the same result as in the earlier sequential example.
        T get_sum() const { return sum; }
 
        template<typename Tag>
-       void operator()( const tbb::blocked_range<int>& r, Tag ) {
+       void operator()( const oneapi::tbb::blocked_range<int>& r, Tag ) {
            T temp = sum;
            for( int i=r.begin(); i<r.end(); ++i ) {
                temp = temp + z[i];
@@ -117,14 +117,14 @@ to compute the same result as in the earlier sequential example.
            }
            sum = temp;
        }
-       Body( Body& b, tbb::split ) : z(b.z), y(b.y), sum(id) {}
+       Body( Body& b, oneapi::tbb::split ) : z(b.z), y(b.y), sum(id) {}
        void reverse_join( Body& a ) { sum = a.sum + sum; }
        void assign( Body& b ) { sum = b.sum; }
    };
 
    T DoParallelScan( T y[], const T z[], int n ) {
        Body body(y,z);
-       tbb::parallel_scan( tbb::blocked_range<int>(0,n), body );
+       oneapi::tbb::parallel_scan( oneapi::tbb::blocked_range<int>(0,n), body );
        return body.get_sum();
    }
 
@@ -161,10 +161,10 @@ but written using lambda expressions and the functional form of ``parallel_scan`
 .. code:: cpp
 
     T DoParallelScan( T y[], const T z[], int n ) {
-        return tbb::parallel_scan(
-            tbb::blocked_range<int>(0,n),
+        return oneapi::tbb::parallel_scan(
+            oneapi::tbb::blocked_range<int>(0,n),
             id,
-            [](const tbb::blocked_range<int>& r, T sum, bool is_final_scan)->T {
+            [](const oneapi::tbb::blocked_range<int>& r, T sum, bool is_final_scan)->T {
                 T temp = sum;
                 for( int i=r.begin(); i<r.end(); ++i ) {
                     temp = temp + z[i];

@@ -12,8 +12,9 @@ tuple to all of its successors.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
         using tag_value = /*implementation-specific*/;
@@ -67,6 +68,7 @@ tuple to all of its successors.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
