@@ -7,35 +7,47 @@ Deduction guides
 ================
 
 Where possible, constructors of ``concurrent_set`` support class template argument
-deduction (since C++17):
+deduction (since C++17). Copy and move constructors (including constructors with explicit
+``allocator_type`` argument) provides implicitly generated deduction guides. In addition, the following explicit
+deduction guides are provided:
 
 .. code:: cpp
 
     template <typename InputIterator,
               typename Compare = std::less<iterator_value_t<InputIterator>>,
-              typename Allocator = tbb_allocator<iterator_value_t<InputIterator>>>
-    concurrent_set( InputIterator, InputIterator, Compare = Compare(), Allocator = Allocator() )
+              typename Allocator = tbb::tbb_allocator<iterator_value_t<InputIterator>>>
+    concurrent_set( InputIterator, InputIterator,
+                    Compare = Compare(),
+                    Allocator = Allocator() )
     -> concurrent_set<iterator_value_t<InputIterator>,
                       Compare,
                       Allocator>;
 
     template <typename InputIterator,
               typename Allocator>
-    concurrent_set( InputIterator, InputIterator, Allocator )
+    concurrent_set( InputIterator, InputIterator,
+                    Allocator )
     -> concurrent_set<iterator_value_t<InputIterator>,
-                      std::less<iterator_key_t<InputIterator>>,
+                      std::less<iterator_value_t<InputIterator>>,
                       Allocator>;
 
-    template <typename T,
-              typename Compare = std::less<T>,
-              typename Allocator = tbb_allocator<T>>
-    concurrent_set( std::initializer_list<T>, Compare = Compare(), Allocator = Allocator() )
-    -> concurrent_set<T, Compare, Allocator>;
+    template <typename Key,
+              typename Compare = std::less<Key>,
+              typename Allocator = tbb::tbb_allocator<Key>>
+    concurrent_set( std::initializer_list<Key>,
+                    Compare = Compare(),
+                    Allocator = Allocator() )
+    -> concurrent_set<Key,
+                      Compare,
+                      Allocator>;
 
-    template <typename T,
+    template <typename Key,
               typename Allocator>
-    concurrent_set( std::initializer_list<T>, Allocator )
-    -> concurrent_set<T, std::less<Key>, Allocator>;
+    concurrent_set( std::initializer_list<Key>,
+                    Allocator )
+    -> concurrent_set<Key,
+                      std::less<Key>,
+                      Allocator>;
 
 Where the type alias ``iterator_value_t`` is defined as follows:
 
@@ -43,6 +55,12 @@ Where the type alias ``iterator_value_t`` is defined as follows:
 
     template <typename InputIterator>
     using iterator_value_t = typename std::iterator_traits<InputIterator>::value_type;
+
+These deduction guides only participates in overload resolution if all of the following are ``true``:
+
+* The type ``InputIterator`` meets the requirements of  ``InputIterator`` from the [input.iterators] ISO C++ Standard section.
+* The type ``Allocator`` meets the requirements of ``Allocator`` from the [allocator.requirements] ISO C++ Standard section.
+* The type ``Compare`` does not meet the requirements of ``Allocator``.
 
 **Example**
 

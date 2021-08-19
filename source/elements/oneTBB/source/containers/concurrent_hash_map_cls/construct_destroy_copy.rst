@@ -13,7 +13,7 @@ Empty container constructors
 
         concurrent_hash_map();
 
-        explicit concurrent_hash_map( const HashCompare& compare,
+        explicit concurrent_hash_map( const hash_compare_type& compare,
                                       const allocator_type& alloc = allocator_type() );
 
         explicit concurrent_hash_map( const allocator_type& alloc );
@@ -28,7 +28,7 @@ Empty container constructors
 
     .. code:: cpp
 
-        concurrent_hash_map( size_type n, const HashCompare& compare,
+        concurrent_hash_map( size_type n, const hash_compare_type& compare,
                              const allocator_type& alloc = allocator_type() );
 
         concurrent_hash_map( size_type n, const allocator_type& alloc = allocator_type() );
@@ -45,7 +45,7 @@ Constructors from the sequence of elements
 
         template <typename InputIterator>
         concurrent_hash_map( InputIterator first, InputIterator last,
-                             const HashCompare& compare,
+                             const hash_compare_type& compare,
                              const allocator_type& alloc = allocator_type() );
 
         template <typename InputIterator>
@@ -70,7 +70,7 @@ Constructors from the sequence of elements
     .. code:: cpp
 
         concurrent_hash_map( std::initializer_list<value_type> init,
-                             const HashCompare& compare,
+                             const hash_compare_type& compare = hash_compare_type(),
                              const allocator_type& alloc = allocator_type() );
 
     Equivalent to ``concurrent_hash_map(init.begin(), init.end(), compare, alloc)``.
@@ -80,7 +80,7 @@ Constructors from the sequence of elements
     .. code:: cpp
 
         concurrent_hash_map( std::initializer_list<value_type> init,
-                             const allocator_type& alloc = allocator_type() );
+                             const allocator_type& alloc );
 
     Equivalent to ``concurrent_hash_map(init.begin(), init.end(), alloc)``.
 

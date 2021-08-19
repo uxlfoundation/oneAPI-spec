@@ -6,15 +6,19 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_multimap`` support class template argument
-deduction (since C++17):
+Where possible, constructors of ``concurrent_multimap`` support
+class template argument deduction (since C++17). Copy and move constructors (including constructors with explicit
+``allocator_type`` argument) provides implicitly generated deduction guides. In addition, the following explicit
+deduction guides are provided:
 
 .. code:: cpp
 
     template <typename InputIterator,
               typename Compare = std::less<iterator_key_t<InputIterator>>,
               typename Allocator = tbb_allocator<iterator_alloc_value_t<InputIterator>>>
-    concurrent_multimap( InputIterator, InputIterator, Compare = Compare(), Allocator = Allocator() )
+    concurrent_multimap( InputIterator, InputIterator,
+                         Compare = Compare(),
+                         Allocator = Allocator() )
     -> concurrent_multimap<iterator_key_t<InputIterator>,
                            iterator_mapped_t<InputIterator>,
                            Compare,
@@ -22,24 +26,31 @@ deduction (since C++17):
 
     template <typename InputIterator,
               typename Allocator>
-    concurrent_multimap( InputIterator, InputIterator, Allocator )
+    concurrent_multimap( InputIterator, InputIterator,
+                         Allocator )
     -> concurrent_multimap<iterator_key_t<InputIterator>,
                            iterator_mapped_t<InputIterator>,
                            std::less<iterator_key_t<InputIterator>>,
                            Allocator>;
 
-    template <typename Key,
-              typename T,
-              typename Compare = std::less<Key>,
+    template <typename Key, typename T,
+              typename Compare = std::less<std::remove_const_t<Key>>,
               typename Allocator = tbb_allocator<std::pair<const Key, T>>>
-    concurrent_multimap( std::initializer_list<std::pair<Key, T>>, Compare = Compare(), Allocator = Allocator() )
-    -> concurrent_multimap<Key, T, Compare, Allocator>;
+    concurrent_multimap( std::initializer_list<std::pair<Key, T>>,
+                         Compare = Compare(),
+                         Allocator = Allocator() )
+    -> concurrent_multimap<std::remove_const_t<Key>,
+                           T,
+                           Compare,
+                           Allocator>;
 
-    template <typename Key,
-              typename T,
+    template <typename Key, typename T,
               typename Allocator>
     concurrent_multimap( std::initializer_list<std::pair<Key, T>>, Allocator )
-    -> concurrent_multimap<Key, T, std::less<Key>, Allocator>;
+    -> concurrent_multimap<std::remove_const_t<Key>,
+                           T,
+                           std::less<std::remove_const_t<Key>>,
+                           Allocator>;
 
 where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_alloc_value_t`` are defined as follows:
 
@@ -54,6 +65,12 @@ where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_all
     template <typename InputIterator>
     using iterator_alloc_value_t = std::pair<std::add_const_t<iterator_key_t<InputIterator>>,
                                              iterator_mapped_t<InputIterator>>;
+
+These deduction guides only participates in overload resolution if all of the following are ``true``:
+
+* The type ``InputIterator`` meets the requirements of  ``InputIterator`` from the [input.iterators] ISO C++ Standard section.
+* The type ``Allocator`` meets the requirements of ``Allocator`` from the [allocator.requirements] ISO C++ Standard section.
+* The type ``Compare`` does not meet the requirements of ``Allocator``.
 
 **Example**
 

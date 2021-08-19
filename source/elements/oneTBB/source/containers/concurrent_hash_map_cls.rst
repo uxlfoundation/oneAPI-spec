@@ -33,6 +33,7 @@ Class Template Synopsis
                using pointer = typename std::allocator_traits<Allocator>::pointer;
                using const_pointer = typename std::allocator_traits<Allocator>::const_pointer;
 
+               using hash_compare_type = HashCompare;
                using allocator_type = Allocator;
 
                using size_type = <implementation-defined unsigned integer type>;
@@ -50,19 +51,19 @@ Class Template Synopsis
                // Construction, destruction, copying
                concurrent_hash_map();
 
-               explicit concurrent_hash_map( const HashCompare& compare,
+               explicit concurrent_hash_map( const hash_compare_type& compare,
                                              const allocator_type& alloc = allocator_type() );
 
                explicit concurrent_hash_map( const allocator_type& alloc );
 
-               concurrent_hash_map( size_type n, const HashCompare& compare,
+               concurrent_hash_map( size_type n, const hash_compare_type& compare,
                                     const allocator_type& alloc = allocator_type() );
 
                concurrent_hash_map( size_type n, const allocator_type& alloc = allocator_type() );
 
                template <typename InputIterator>
                concurrent_hash_map( InputIterator first, InputIterator last,
-                                    const HashCompare& compare,
+                                    const hash_compare_type& compare,
                                     const allocator_type& alloc = allocator_type() );
 
                template <typename InputIterator>
@@ -70,11 +71,11 @@ Class Template Synopsis
                                     const allocator_type& alloc = allocator_type() );
 
                concurrent_hash_map( std::initializer_list<value_type> init,
-                                    const HashCompare& compare,
+                                    const hash_compare_type& compare = hash_compare_type(),
                                     const allocator_type& alloc = allocator_type() );
 
                concurrent_hash_map( std::initializer_list<value_type> init,
-                                    const allocator_type& alloc = allocator_type() );
+                                    const allocator_type& alloc );
 
                concurrent_hash_map( const concurrent_hash_map& other );
                concurrent_hash_map( const concurrent_hash_map& other,
