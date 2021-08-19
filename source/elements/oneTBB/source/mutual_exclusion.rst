@@ -16,6 +16,8 @@ Mutex Classes
 .. toctree::
     :titlesonly:
 
+    mutual_exclusion/mutex_cls.rst
+    mutual_exclusion/rw_mutex_cls.rst
     mutual_exclusion/spin_mutex_cls.rst
     mutual_exclusion/spin_rw_mutex_cls.rst
     mutual_exclusion/speculative_spin_mutex_cls.rst
