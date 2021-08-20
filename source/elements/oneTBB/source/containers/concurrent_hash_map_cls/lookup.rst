@@ -25,6 +25,26 @@ find
 
     **Returns**: ``true`` if an element with the key equivalent to  ``key`` is found; ``false``, otherwise.
 
+--------------------------
+
+    .. code:: cpp
+
+        template <typename K>
+        bool find( const_accessor& result, const K& key ) const;
+
+        template <typename K>
+        bool find( accessor& result, const K& key );
+
+    If the accessor ``result`` is not empty, releases the ``result``.
+
+    If an element with the key which compares equivalent with ``key`` exists, sets the ``result`` to provide access
+    to this element.
+
+    **Returns**: ``true`` if an element which compares equivalent with ``key`` is found, ``false`` otherwise.
+
+    This overload only participates in overload resolution if qualified-id
+    ``hash_compare_type::is_transparent`` is valid and denotes a type.
+
 count
 -----
 
@@ -32,4 +52,17 @@ count
 
         size_type count( const key_type& key ) const;
 
-    **Returns**: ``1`` if an element with the equivalent to ``key`` exists; ``0``, otherwise.
+    **Returns**: ``1`` if an element with the key equivalent to ``key`` exists; ``0``, otherwise.
+
+--------------------------
+
+    .. code:: cpp
+
+        template <typename K>
+        size_type count( const K& key ) const;
+
+    **Returns**: ``1`` if an element with the key which compares equivalent with ``key`` exists;
+    ``0``, otherwise.
+
+    This overload only participates in overload resolution if qualified-id
+    ``hash_compare_type::is_transparent`` is valid and denotes a type.

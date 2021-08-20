@@ -52,3 +52,21 @@ equal_range
     a pair of iterators ``{f, l}``, where ``f`` is an iterator to this element,
     ``l`` is ``std::next(f)``.
     Otherwise, ``{end(), end()}``.
+
+--------------------------
+
+    .. code:: cpp
+
+        template <typename K>
+        std::pair<iterator, iterator> equal_range( const K& key );
+
+        template <typename K>
+        std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
+
+    If an element with the key which compares equivalent with ``key`` exists in the container,
+    a pair of iterators ``{f, l}``, where ``f`` is an iterator to this element,
+    ``l`` is ``std::next(f)``.
+    Otherwise, ``{end(), end()}``.
+
+    This overload only participates in overload resolution if qualified-id
+    ``hash_compare_type::is_transparent`` is valid and denotes a type.

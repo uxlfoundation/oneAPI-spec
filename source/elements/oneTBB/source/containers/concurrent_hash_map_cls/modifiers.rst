@@ -35,6 +35,32 @@ Inserting values
 
     .. code:: cpp
 
+        template <typename K>
+        bool insert( const_accessor& result, const K& key );
+
+        template <typename K>
+        bool insert( accessor& result, const K& key );
+
+    If the accessor ``result`` is not empty, releases the ``result`` and
+    attempts to insert the value constructed from ``key, mapped_type()`` into the container.
+
+    Sets the ``result`` to provide access to the inserted element or to the element with the key
+    which compares equivalent with ``key``, that was already presented in the container.
+
+    This overload only participates in overload resolution if
+
+    * qualified-id ``hash_compare_type::is_transparent`` is valid and denotes a type,
+    * ``std::is_constructible<key_type, const K&>::value`` is ``true``.
+
+    **Requirements**: the type ``mapped_type`` must meet the ``DefaultConstructible`` requirements
+    from the [defaultconstructible] ISO C++ Standard section.
+
+    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+
+--------------------------
+
+    .. code:: cpp
+
         bool insert( const_accessor& result, const value_type& value );
 
         bool insert( accessor& result, const value_type& value );
@@ -166,6 +192,20 @@ Erasing elements
         bool erase( const key_type& key );
 
     If an element with the key equivalent to  ``key`` exists, removes it from the container.
+
+    **Returns**: ``true`` if an element was removed; ``false``, otherwise.
+
+--------------------------
+
+    .. code:: cpp
+
+        template <typename K>
+        bool erase( const K& key );
+
+    If an element with the key which compares equivalent with ``key`` exists, removes it from the container.
+
+    This overload only participates in overload resolution if qualified-id
+    ``hash_compare_type::is_transparent`` is valid and denotes a type.
 
     **Returns**: ``true`` if an element was removed; ``false``, otherwise.
 
