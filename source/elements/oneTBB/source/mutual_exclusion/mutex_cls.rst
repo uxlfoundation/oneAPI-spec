@@ -8,7 +8,7 @@ mutex
 **[mutex.mutex]**
 
 A ``mutex`` is a class that models :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`
-using an adaptive approach, which is a combination of spinlock and waiting on system primitives.
+using an adaptive approach, it guarantees: that the thread that can't acquire the lock spins before blocking.
 The ``mutex`` class satisfies all of the mutex requirements described in the [thread.mutex.requirements] section of the ISO C++ standard.
 The ``mutex`` class is not fair or recursive.
 

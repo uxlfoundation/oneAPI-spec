@@ -8,7 +8,7 @@ rw_mutex
 **[mutex.rw_mutex]**
 
 A ``rw_mutex`` is a class that models :doc:`ReaderWriterMutex requirement <../named_requirements/mutexes/rw_mutex>`
-using an adaptive approach, which is a combination of spinlock and waiting on system primitives.
+using an adaptive approach, it guarantees: that the thread that can't acquire the lock spins before blocking.
 The ``rw_mutex`` class satisfies all of the shared mutex requirements described in the [thread.sharedmutex.requirements] section of the ISO C++ standard.
 The ``rw_mutex`` class is an unfair reader-writer lock with a writer preference.
 
