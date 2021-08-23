@@ -8,7 +8,7 @@ mutex
 **[mutex.mutex]**
 
 A ``mutex`` is a class that models :doc:`Mutex requirement <../named_requirements/mutexes/mutex>`
-using an adaptive approach, it guarantees: that the thread that can't acquire the lock spins before blocking.
+using an adaptive approach, it guarantees that the thread that cannot acquire the lock spins before blocking.
 The ``mutex`` class satisfies all of the mutex requirements described in the [thread.mutex.requirements] section of the ISO C++ standard.
 The ``mutex`` class is not fair or recursive.
 
@@ -65,7 +65,7 @@ Member functions
 
 .. cpp:function:: void lock()
 
-    Acquires a lock. It uses adaptive logic for waiting, thus it is blocked after a certain time of busy waiting.
+    Acquires a lock. It uses an adaptive logic for waiting, thus it is blocked after a certain time of busy waiting.
 
 --------------------------------------------------
 
