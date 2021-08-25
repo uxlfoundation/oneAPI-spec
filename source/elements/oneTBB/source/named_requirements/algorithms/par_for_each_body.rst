@@ -47,6 +47,7 @@ requires the ``Body::operator()`` call with an object of type ``const value_type
 
 * the iterator meets the `Input iterator` requirements described in the [input.iterators] section of the ISO C++ Standard
 * the iterator does not meet the `Forward iterator` requirements described in the [forward.iterators] section of the ISO C++ Standard
+
 .. caution::
 
   If the ``Body`` only takes non-const lvalue reference to the ``value_type``, the requirements described above
