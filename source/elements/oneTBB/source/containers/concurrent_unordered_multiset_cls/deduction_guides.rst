@@ -6,10 +6,10 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_unordered_multiset`` support
-class template argument deduction (since C++17). Copy and move constructors (including constructors with explicit
-``allocator_type`` argument) provides implicitly generated deduction guides. In addition, the following explicit
-deduction guides are provided:
+If possible, ``concurrent_unordered_multiset`` constructors support class template argument deduction (since C++17).
+Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
+provide implicitly-generated deduction guides.
+In addition, the following explicit deduction guides are provided:
 
 .. code:: cpp
 
@@ -82,7 +82,7 @@ deduction guides are provided:
                                      std::equal_to<T>,
                                      Allocator>;
 
-Where the type ``set_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_multiset``
+Where the ``set_size_type`` type refers to the ``size_type`` member type of the deduced ``concurrent_unordered_multiset``
 and the type alias ``iterator_value_t`` is defined as follows:
 
 .. code:: cpp
@@ -90,12 +90,12 @@ and the type alias ``iterator_value_t`` is defined as follows:
     template <typename InputIterator>
     using iterator_value_t = typename std::iterator_traits<InputIterator>::value_type;
 
-These deduction guides only participates in overload resolution if all of the following are ``true``:
+These deduction guides only participate in the overload resolution if all of the following are ``true``:
 
-* The type ``InputIterator`` meets the requirements of  ``InputIterator`` from the [input.iterators] ISO C++ Standard section.
-* The type ``Allocator`` meets the requirements of ``Allocator`` from the [allocator.requirements] ISO C++ Standard section.
-* The type ``Hash`` does not meet the requirements of ``Allocator``.
-* The type ``KeyEqual`` does not meet the requirements of ``Allocator``.
+* The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
+* The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.
+* The ``Hash`` type does not meet the ``Allocator`` requirements.
+* The ``KeyEqual`` type does not meet the ``Allocator`` requirements.
 
 **Example**
 

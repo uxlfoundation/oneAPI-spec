@@ -6,10 +6,10 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_set`` support class template argument
-deduction (since C++17). Copy and move constructors (including constructors with explicit
-``allocator_type`` argument) provides implicitly generated deduction guides. In addition, the following explicit
-deduction guides are provided:
+If possible, ``concurrent_set`` constructors support class template argument deduction (since C++17).
+Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
+provide implicitly-generated deduction guides.
+In addition, the following explicit deduction guides are provided:
 
 .. code:: cpp
 
@@ -58,9 +58,9 @@ Where the type alias ``iterator_value_t`` is defined as follows:
 
 These deduction guides only participates in overload resolution if all of the following are ``true``:
 
-* The type ``InputIterator`` meets the requirements of  ``InputIterator`` from the [input.iterators] ISO C++ Standard section.
-* The type ``Allocator`` meets the requirements of ``Allocator`` from the [allocator.requirements] ISO C++ Standard section.
-* The type ``Compare`` does not meet the requirements of ``Allocator``.
+* The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
+* The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.
+* The ``Compare`` type does not meet the ``Allocator`` requirements.
 
 **Example**
 

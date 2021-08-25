@@ -6,51 +6,51 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_hash_map`` support
-class template argument deduction (since C++17). Copy and move constructors (including constructors with explicit
-``allocator_type`` argument) provides implicitly generated deduction guides. In addition, the following explicit
-deduction guides are provided:
+If possible, ``concurrent_hash_map`` constructors support class template argument deduction (since C++17).
+Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
+provide implicitly-generated deduction guides.
+In addition, the following explicit deduction guides are provided:
 
 .. code:: cpp
 
     template <typename InputIterator,
               typename HashCompare = tbb_hash_compare<iterator_key_t<InputIterator>>,
-              typename Alloc = tbb_allocator<iterator_alloc_value_t<InputIterator>>>
+              typename Allocator = tbb_allocator<iterator_alloc_value_t<InputIterator>>>
     concurrent_hash_map( InputIterator, InputIterator,
                          HashCompare = HashCompare(),
-                         Alloc = Alloc() )
+                         Allocator = Allocator() )
     -> concurrent_hash_map<iterator_key_t<InputIterator>,
                            iterator_mapped_t<InputIterator>,
                            HashCompare,
-                           Alloc>;
+                           Allocator>;
 
     template <typename InputIterator,
-              typename Alloc>
-    concurrent_hash_map( InputIterator, InputIterator, Alloc )
+              typename Allocator>
+    concurrent_hash_map( InputIterator, InputIterator, Allocator )
     -> concurrent_hash_map<iterator_key_t<InputIterator>,
                            iterator_mapped_t<InputIterator>,
                            tbb_hash_compare<iterator_key_t<InputIterator>>,
-                           Alloc>;
+                           Allocator>;
 
     template <typename Key, typename T,
               typename HashCompare = tbb_hash_compare<std::remove_const_t<Key>>,
-              typename Alloc = tbb_allocator<std::pair<const Key, T>>>
+              typename Allocator = tbb_allocator<std::pair<const Key, T>>>
     concurrent_hash_map( std::initializer_list<std::pair<Key, T>>,
                          HashCompare = HashCompare(),
-                         Alloc = Alloc() )
+                         Allocator = Allocator() )
     -> concurrent_hash_map<std::remove_const_t<Key>,
                            T,
                            HashCompare,
-                           Alloc>;
+                           Allocator>;
 
     template <typename Key, typename T,
-              typename Alloc>
+              typename Allocator>
     concurrent_hash_map( std::initializer_list<std::pair<Key, T>>,
-                         Alloc )
+                         Allocator )
     -> concurrent_hash_map<std::remove_const_t<Key>,
                            T,
                            tbb_hash_compare<std::remove_const_t<Key>>,
-                           Alloc>;
+                           Allocator>;
 
 Where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, and ``iterator_alloc_value_t``
 are defined as follows:
@@ -67,11 +67,11 @@ are defined as follows:
     using iterator_alloc_value_t = std::pair<std::add_const_t<iterator_key_t<InputIterator>,
                                              iterator_mapped_t<InputIterator>>>;
 
-These deduction guides only participates in overload resolution if all of the following are ``true``:
+These deduction guides only participate in the overload resolution if all of the following are ``true``:
 
-* The type ``InputIterator`` meets the requirements of  ``InputIterator`` from the [input.iterators] ISO C++ Standard section.
-* The type ``Alloc`` meets the requirements of ``Allocator`` from the [allocator.requirements] ISO C++ Standard section.
-* The type ``HashCompare`` does not meet the requirements of ``Allocator``.
+* The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
+* The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.
+* The ``HashCompare`` type does not meet the ``Allocator`` requirements.
 
 **Example**
 
