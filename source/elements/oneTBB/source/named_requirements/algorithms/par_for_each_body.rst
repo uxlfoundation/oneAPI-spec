@@ -43,11 +43,10 @@ the ``iterator`` meets all of the `Forward iterator` requirements described in t
 ISO C++ Standard.
 
 `oneapi::tbb::parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
-requires the ``Body::operator()`` call with an object of type ``const value_type&`` or ``value_type&&`` to be well-formed if:
+requires the ``Body::operator()`` call with an object of type ``const value_type&`` or ``value_type&&`` to be well-formed if following requirements are met:
 
-* the iterator does not meet all of the `Forward iterator` requirements described in the [forward.iterators] section of the ISO C++ Standard
 * the iterator meets all of the `Input iterator` requirements described in the [input.iterators] section of the ISO C++ Standard
-
+* the iterator does not meet all of the `Forward iterator` requirements described in the [forward.iterators] section of the ISO C++ Standard
 .. caution::
 
   If the ``Body`` only takes non-const lvalue reference to the ``value_type``, the requirements described above
