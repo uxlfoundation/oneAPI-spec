@@ -39,14 +39,14 @@ Terms
 * ``reference`` -  the type ``std::iterator_traits<iterator>::reference``.
 
 ``oneapi::tbb::parallel_for_each`` requires the ``Body::operator()`` call with an object of the ``reference`` type to be well-formed if
-the ``iterator`` meets all of the `Forward iterator` requirements described in the [forward.iterators] section of the 
+the ``iterator`` meets the `Forward iterator` requirements described in the [forward.iterators] section of the 
 ISO C++ Standard.
 
 `oneapi::tbb::parallel_for_each algorithm <../../algorithms/functions/parallel_for_each_func>`
 requires the ``Body::operator()`` call with an object of type ``const value_type&`` or ``value_type&&`` to be well-formed if following requirements are met:
 
-* the iterator meets all of the `Input iterator` requirements described in the [input.iterators] section of the ISO C++ Standard
-* the iterator does not meet all of the `Forward iterator` requirements described in the [forward.iterators] section of the ISO C++ Standard
+* the iterator meets the `Input iterator` requirements described in the [input.iterators] section of the ISO C++ Standard
+* the iterator does not meet the `Forward iterator` requirements described in the [forward.iterators] section of the ISO C++ Standard
 .. caution::
 
   If the ``Body`` only takes non-const lvalue reference to the ``value_type``, the requirements described above
