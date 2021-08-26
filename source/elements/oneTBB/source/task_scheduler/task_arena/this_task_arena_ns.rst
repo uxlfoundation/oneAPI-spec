@@ -71,17 +71,17 @@ with the ``task_arena`` currently used by the calling thread.
 
 .. cpp:function:: template<typename F> void enqueue(F&& f)
   
-    Enqueues a task into the ``task_arena`` currently used by the calling thread to process the specified functor, then immediately returns.
-    The ``F`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    Enqueues a task into the ``task_arena`` currently used by the calling thread to process the specified functor, then returns immediately.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
     
-    Behavior of this function is identical to ``template<typename F> void task_arena::enqueue(F&& f)`` applied to ``task_arena`` 
+    Behavior of this function is identical to ``template<typename F> void task_arena::enqueue(F&& f)`` applied to the ``task_arena`` 
     object constructed with ``attach`` parameter.     
 
 .. cpp:function:: void enqueue(task_handle&& h)   
      
     Enqueues a task owned by ``h`` into the ``task_arena`` that is currently used by the calling thread.
     
-    Behavior of this function is identical to generic version (``template<typename F> void enqueue(F&& f)``) except the parameter type. 
+    The behavior of this function is identical to the generic version (``template<typename F> void enqueue(F&& f)``), except the parameter type. 
 
     .. note:: 
-    ``h`` should not be empty to avoid undefined behavior.
+    ``h`` should not be empty to avoid an undefined behavior.

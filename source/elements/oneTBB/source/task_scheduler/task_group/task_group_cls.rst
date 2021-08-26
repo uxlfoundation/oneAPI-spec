@@ -60,19 +60,19 @@ Member functions
 
     Creates a deferred task to compute ``f()`` and returns ``task_handle`` pointing to it.
    
-    The task is not scheduled for execution until explicitly requested. For example, with the ``task_group::run`` method.
+    The task is not scheduled for the execution until it is explicitly requested, for example, with the ``task_group::run`` method.
     However, the task is still added into the ``task_group``, thus the ``task_group::wait`` method waits until the ``task_handle`` 
     is either scheduled or destroyed.
     
-    The ``F`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
    
     As an optimization hint, ``F`` might return a ``task_handle``, which task object can be executed next.
    
     .. note::
-       The ``task_handle`` returned by the function must be created with ``*this`` ``task_group``. It means, with the one 
+       The ``task_handle`` returned by the function must be created with ``*this`` ``task_group``. It means with the one 
        for which run method is called, otherwise it is an undefined behavior. 
    
-    **Returns:** ``task_handle`` object pointing to task to compute ``f()``.
+    **Returns:** ``task_handle`` object pointing to a task to compute ``f()``.
 
 .. cpp:function:: template<typename Func> void run( Func&& f )
 
@@ -82,12 +82,12 @@ Member functions
     As an optimization hint, ``F`` might return a ``task_handle``, which task object can be executed next.
 
    .. note::
-       The ``task_handle`` returned by the function must be created with ``*this`` ``task_group``. It means, with the one 
+       The ``task_handle`` returned by the function must be created with ``*this`` ``task_group``. It means with the one 
        for which run method is called, otherwise it is an undefined behavior. 
 
 .. cpp:function:: void run(task_handle&& h)
    
-    Schedules the task object pointed by the ``h`` for execution.
+    Schedules the task object pointed by the ``h`` for the execution.
 
     .. note::
        The failure to satisfy the following conditions leads to undefined behavior:

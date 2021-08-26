@@ -255,12 +255,12 @@ Member functions
 
 .. cpp:function:: void enqueue(task_handle&& h)   
      
-    Enqueues a task owned by ``h`` into the ``task_arena`` for procession.
+    Enqueues a task owned by ``h`` into the ``task_arena`` for processing. 
  
-    Behavior of this function is identical to generic version (``template<typename F> void task_arena::enqueue(F&& f)``) except parameter type. 
+    The behavior of this function is identical to the generic version (``template<typename F> void task_arena::enqueue(F&& f)``), except parameter type. 
 
     .. note:: 
-       ``h`` should not be empty to avoid undefined behavior.
+       ``h`` should not be empty to avoid an undefined behavior.
 Example
 -------
 
