@@ -56,7 +56,7 @@ Where the type alias ``iterator_value_t`` is defined as follows:
     template <typename InputIterator>
     using iterator_value_t = typename std::iterator_traits<InputIterator>::value_type;
 
-These deduction guides only participates in overload resolution if all of the following are ``true``:
+These deduction guides only participate in the overload resolution if the following requirements are met:
 
 * The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
 * The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.

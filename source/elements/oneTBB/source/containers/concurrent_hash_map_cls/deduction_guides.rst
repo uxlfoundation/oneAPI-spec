@@ -67,7 +67,7 @@ are defined as follows:
     using iterator_alloc_value_t = std::pair<std::add_const_t<iterator_key_t<InputIterator>,
                                              iterator_mapped_t<InputIterator>>>;
 
-These deduction guides only participate in the overload resolution if all of the following are ``true``:
+These deduction guides only participate in the overload resolution if the following requirements are met:
 
 * The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
 * The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.

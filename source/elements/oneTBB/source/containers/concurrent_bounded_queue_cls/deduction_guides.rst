@@ -9,7 +9,7 @@ Deduction guides
 If possible, ``concurrent_bounded_queue`` constructors support class template argument deduction (since C++17).
 Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
 provide implicitly-generated deduction guides.
-In addition, the following explicit deduction guides are provided:
+In addition, the following explicit deduction guide is provided:
 
 .. code:: cpp
 
@@ -27,7 +27,7 @@ Where the type alias ``iterator_value_t`` is defined as follows:
     template <typename InputIterator>
     using iterator_value_t = typename std::iterator_traits<InputIterator>::value_type;
 
-These deduction guides only participate in the overload resolution if all of the following are ``true``:
+This deduction guides only participate in the overload resolution if the following requirements are met:
 
 * The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
 * The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.
