@@ -11,6 +11,7 @@ An instance of ``task_handle`` type owns a deferred task object.
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
    
       class task_handle {
@@ -32,6 +33,7 @@ An instance of ``task_handle`` type owns a deferred task object.
       bool operator!=(std::nullptr_t, task_handle const& h) noexcept;
                 
    } // namespace tbb
+   } // namespace oneapi
 
 
 Member Functions
