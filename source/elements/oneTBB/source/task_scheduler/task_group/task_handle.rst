@@ -45,7 +45,7 @@ Member Functions
 
 .. cpp:function:: task_handle(task_handle&& src)
 
-    Constructs ``task_handle`` object with the content of ``src`` using move semantics. ``src`` is left in an empty state.
+    Constructs ``task_handle`` object with the content of ``src`` using move semantics. ``src`` becomes empty after the construction. 
 
 .. cpp:function:: ~task_handle()
 
@@ -53,7 +53,7 @@ Member Functions
 
 .. cpp:function:: task_handle& operator=(task_handle&& src)
 
-    Replaces the content of ``task_handle`` object with the content of ``src`` using move semantics. ``src`` is left in an empty state.
+    Replaces the content of ``task_handle`` object with the content of ``src`` using move semantics. ``src`` becomes empty after the assignment.
     The previously associated task object, if any, is destroyed before the assignment. 
 
     **Returns:** Reference to ``*this``.
