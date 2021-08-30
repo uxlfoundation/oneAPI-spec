@@ -78,6 +78,8 @@ Member Functions
     **Effects**: Releases a reference to the task scheduler referenced by ``this``. Adds a reference to the task scheduler referenced by ``other``.
     In turn, ``other`` releases its reference to the task scheduler.
 
+**Returns**: A reference to ``*this``.
+
 -------------------------------------------------------
 
 .. cpp:function:: explicit operator bool() const noexcept
