@@ -82,3 +82,11 @@ mfxImplementedFunctions
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxPoolPolicyDescription
+------------------------
+
+.. doxygenstruct:: mfxPoolPolicyDescription
+   :project: oneVPL
+   :members:
+   :protected-members:

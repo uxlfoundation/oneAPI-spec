@@ -1,5 +1,5 @@
 /*############################################################################
-  # Copyright (C) 2021 Intel Corporation
+  # Copyright Intel Corporation
   #
   # SPDX-License-Identifier: MIT
   ############################################################################*/
@@ -21,5 +21,7 @@
 #include "mfxpcp.h"
 #include "mfxvp8.h"
 #include "mfxjpeg.h"
+
+#include "mfxsurfacepool.h" 
 
 #endif /* __MFXDEFS_H__ */
