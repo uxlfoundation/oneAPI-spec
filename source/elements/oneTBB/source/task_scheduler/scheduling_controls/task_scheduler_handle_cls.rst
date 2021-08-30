@@ -20,8 +20,6 @@ thread until the completion of all worker threads that were implicitly created b
     namespace oneapi {
         namespace tbb {
 
-            using attach = /* unspecified */
-
             class task_scheduler_handle {
             public:
                 task_scheduler_handle() = default;
@@ -49,7 +47,7 @@ Member Functions
 
 .. cpp:function:: task_scheduler_handle()
 
-    **Effects**: Creates an instance of the ``task_scheduler_handle`` class that does not contain any reference to the task scheduler.
+    **Effects**: Creates an empty instance of the ``task_scheduler_handle`` class that does not contain any reference to the task scheduler.
     
 -------------------------------------------------------
 
@@ -63,7 +61,7 @@ Member Functions
 .. cpp:function:: ~task_scheduler_handle()
 
     **Effects**: Destroys an instance of the ``task_scheduler_handle`` class.
-    Releases a reference to the task scheduler and deactivates an instance of the ``task_scheduler_handle`` class.
+    If not empty, releases a reference to the task scheduler and deactivates an instance of the ``task_scheduler_handle`` class.
 
 -------------------------------------------------------
 
@@ -75,31 +73,30 @@ Member Functions
 
 .. cpp:function:: task_scheduler_handle& operator=(task_scheduler_handle&& other) noexcept
 
-    **Effects**: Releases a reference to the task scheduler referenced by ``this``. Adds a reference to the task scheduler referenced by ``other``.
+    **Effects**: If not empty, releases a reference to the task scheduler referenced by ``this``. Adds a reference to the task scheduler referenced by ``other``.
     In turn, ``other`` releases its reference to the task scheduler.
-
-**Returns**: A reference to ``*this``.
+    **Returns**: A reference to ``*this``.
 
 -------------------------------------------------------
 
 .. cpp:function:: explicit operator bool() const noexcept
 
-    **Returns**: ``true`` if ``this`` references any task scheduler; ``false`` otherwise.
+    **Returns**: ``true`` if ``this`` is not empty and references any task scheduler; ``false`` otherwise.
 
 -------------------------------------------------------
 
 .. cpp:function:: void release()
 
-    **Effects**: Releases a reference to the task scheduler and deactivates an instance of the ``task_scheduler_handle``
-    class. Non-blocking method.
+    **Effects**: If not empty, releases a reference to the task scheduler and deactivates an instance of the ``task_scheduler_handle``
+    class; no effect otherwise. Non-blocking method.
 
 Non-member Functions
 --------------------
 
 .. cpp:function:: void finalize(task_scheduler_handle& handle)
 
-    **Effects**: Blocks the program execution until all worker threads have been completed. Throws the ``oneapi::tbb::unsafe_wait``
-    exception if it is not safe to wait for the completion of the worker threads.
+    **Effects**: If ``handle`` is not empty, blocks the program execution until all worker threads have been completed; no effect otherwise.
+    Throws the ``oneapi::tbb::unsafe_wait`` exception if it is not safe to wait for the completion of the worker threads.
 
 The following conditions should be met for finalization to succeed:
 
@@ -124,8 +121,9 @@ If calls are performed simultaneously, more than one call might succeed.
 
 .. cpp:function:: bool finalize(task_scheduler_handle& handle, const std::nothrow_t&) noexcept
 
-    **Effects**: Blocks the program execution until all worker threads have been completed. Same as above, but returns ``true`` if all worker
-    threads have been completed successfully, or ``false`` if it is not safe to wait for the completion of the worker threads.
+    **Effects**: If ``handle`` is not empty, blocks the program execution until all worker threads have been completed; no effect otherwise.
+    Same as above, but returns ``true`` if all worker threads have been completed successfully, or ``false`` if it is not safe to wait for 
+    the completion of the worker threads.
 
 Examples
 --------

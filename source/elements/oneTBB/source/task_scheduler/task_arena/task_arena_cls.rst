@@ -15,8 +15,6 @@ A class that represents an explicit, user-managed task scheduler arena.
 
     namespace tbb {
 
-        using attach = /* unspecified */
-
         class task_arena {
         public:
             static const int automatic = /* unspecified */;
@@ -26,7 +24,7 @@ A class that represents an explicit, user-managed task scheduler arena.
                 normal = /* unspecified */,
                 high = /* unspecified */
             };
-            struct attach {}; /* Deprecated (compatibility with oneTBB Specification 1.0), use oneapi::tbb::attach */
+
             struct constraints {
                 numa_node_id numa_node;
                 int max_concurrency;
@@ -41,7 +39,6 @@ A class that represents an explicit, user-managed task scheduler arena.
                        priority a_priority = priority::normal);
             task_arena(const task_arena &s);
             explicit task_arena(oneapi::tbb::attach);
-            explicit task_arena(task_arena::attach); /* Deprecated (compatibility with oneTBB Specification 1.0), use oneapi::tbb::attach version */
             ~task_arena();
 
             void initialize();
@@ -50,7 +47,6 @@ A class that represents an explicit, user-managed task scheduler arena.
             void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
                             priority a_priority = priority::normal);
             void initialize(oneapi::tbb::attach);
-            void initialize(task_arena::attach); /* Deprecated (compatibility with oneTBB Specification 1.0), use oneapi::tbb::attach version */
 
             void terminate();
 
@@ -108,14 +104,6 @@ Member types and constants
 
     When passed to a constructor or the ``initialize`` method, the initialized ``task_arena``
     has a raised priority.
-
-.. cpp:struct:: attach
-
-    A tag for constructing a ``task_arena`` with attach.
-
-    .. caution::
-
-        ``struct attach`` is deprecated (compatibility with oneTBB Specification 1.0), use oneapi::tbb::attach
 
 .. cpp:struct:: constraints
 
@@ -177,20 +165,6 @@ Member functions
         Unlike other constructors, this one automatically initializes
         the new ``task_arena`` when connecting to an already existing arena.
 
-.. cpp:function:: explicit task_arena(task_arena::attach)
-
-    Creates an instance of ``task_arena`` that is connected to the internal task arena representation currently used by the calling thread.
-    If no such arena exists yet, creates a ``task_arena`` with default parameters.
-
-    .. note::
-
-        Unlike other constructors, this one automatically initializes
-        the new ``task_arena`` when connecting to an already existing arena.
-
-    .. caution::
-
-        ``struct attach`` is deprecated (compatibility with oneTBB Specification 1.0), use oneapi::tbb::attach version
-
 .. cpp:function:: ~task_arena()
 
     Destroys the ``task_arena`` instance, but the destruction may not be synchronized with any task execution inside this ``task_arena``.
@@ -218,16 +192,6 @@ Member functions
     If an internal task arena representation currently used by the calling thread, the method ignores arena
     parameters and connects ``task_arena`` to that internal task arena representation.
     The method has no effect when called for an already initialized ``task_arena``.
-
-.. cpp:function:: void initialize(task_arena::attach)
-
-    If an internal task arena representation currently used by the calling thread, the method ignores arena
-    parameters and connects ``task_arena`` to that internal task arena representation.
-    The method has no effect when called for an already initialized ``task_arena``.
-
-    .. caution::
-
-        ``struct attach`` is deprecated (compatibility with oneTBB Specification 1.0), use oneapi::tbb::attach version
 
 .. cpp:function:: void terminate()
 
