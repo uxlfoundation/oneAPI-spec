@@ -591,6 +591,9 @@ The ColorFourCC enumerator itemizes color formats.
 .. doxygenenumvalue:: MFX_FOURCC_I420
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_FOURCC_I422
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_FOURCC_NV16
    :project: oneVPL
 
@@ -619,6 +622,9 @@ The ColorFourCC enumerator itemizes color formats.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_FOURCC_I010
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_FOURCC_I210
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_FOURCC_P016
@@ -828,6 +834,12 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_VIDEO_SIGNAL_INFO
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_VIDEO_SIGNAL_INFO_IN
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_VIDEO_SIGNAL_INFO_OUT
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_DOUSE
    :project: oneVPL
 
@@ -960,6 +972,12 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME_IN
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME_OUT
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_EXTBUFF_ENCODED_UNITS_INFO
    :project: oneVPL
 
@@ -1015,6 +1033,15 @@ extended buffers or video processing algorithm identifiers.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_EXTBUFF_AV1_FILM_GRAIN_PARAM
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_AV1_SEGMENTATION
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_ALLOCATION_HINTS
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_UNIVERSAL_TEMPORAL_LAYERS
    :project: oneVPL
 
 
@@ -1165,9 +1192,11 @@ of mfxExtVPPFrameRateConversion structure for more details.
 GeneralConstraintFlags
 ----------------------
 
-The GeneralConstraintFlags enumerator uses bit-ORed values to itemize HEVC
-bitstream indications for specific profiles. Each value indicates for format
-range extensions profiles.
+The GeneralConstraintFlags enumerator uses bit-ORed values to itemize HEVC bitstream 
+indications for specific profiles. Each value indicates for format range extensions profiles. 
+To specify HEVC Main 10 Still Picture profile applications have to set 
+mfxInfoMFX::CodecProfile == MFX_PROFILE_HEVC_MAIN10 and 
+mfxExtHEVCParam::GeneralConstraintFlags == MFX_HEVC_CONSTR_REXT_ONE_PICTURE_ONLY.
 
 .. doxygenenumvalue:: MFX_HEVC_CONSTR_REXT_MAX_12BIT
    :project: oneVPL
@@ -2297,4 +2326,57 @@ mfxHyperMode
 ------------
 
 .. doxygenenum:: mfxHyperMode
+   :project: oneVPL
+
+-----------------------
+mfxPoolAllocationPolicy
+-----------------------
+
+.. doxygenenum:: mfxPoolAllocationPolicy
+   :project: oneVPL
+   
+--------------
+mfxVPPPoolType
+--------------
+
+.. doxygenenum:: mfxVPPPoolType
+   :project: oneVPL
+ 
+------------------------
+mfxAV1SegmentIdBlockSize
+------------------------
+
+The mfxAV1SegmentIdBlockSize enumerator indicates the block size represented by each segment_id in segmentation map.
+
+.. doxygenenum:: mfxAV1SegmentIdBlockSize
+   :project: oneVPL
+
+-----------------
+AV1SegmentFeature
+-----------------
+
+The AV1SegmentFeature enumerator indicates features enabled for the segment.
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_ALT_QINDEX
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_ALT_LF_Y_VERT
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_ALT_LF_Y_HORZ
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_ALT_LF_U
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_ALT_LF_V
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_REFERENCE
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_SKIP
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_GLOBALMV
    :project: oneVPL

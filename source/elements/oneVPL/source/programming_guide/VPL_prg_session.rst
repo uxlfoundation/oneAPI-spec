@@ -176,7 +176,6 @@ will vary according to the OS.
   order, to find the correct implementation library:
 
   #. Directories provided by the environment variable ``LD_LIBRARY_PATH``.
-  #. Content of the :file:`/etc/ld.so.cache` cache file.
   #. Default path :file:`/lib`, then :file:`/usr/lib` or :file:`/lib64`, and then
      :file:`/usr/lib64` on some 64 bit OSs. On Debian: :file:`/usr/lib/x86_64-linux-gnu`.
   #. Current working directory.
@@ -220,200 +219,205 @@ left to right from column to column and concatenate strings by using `.` (dot) a
 
 .. _dsp-conf-prop-table:
 
-.. table:: Dispatcher Configuration Properties
-   :widths: 25 25 30 20
+.. container:: stripe-table
 
-   +---------------------------------------+----------------------------+----------------------+---------------------------+
-   | Structure name                        | Property                   | Value Data Type      | Comment                   |
-   +=======================================+============================+======================+===========================+
-   | :cpp:struct:`mfxImplDescription`      | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .Impl                    |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 | The mode will be used for |
-   |                                       | | .AccelerationMode        |                      | session initilization     |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .ApiVersion              |                      |                           |
-   |                                       | | .Version                 |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .ApiVersion              |                      |                           |
-   |                                       | | .Major                   |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .ApiVersion              |                      |                           |
-   |                                       | | .Minor                   |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .ImplName                |                      | null-terminated string.   |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .License                 |                      | null-terminated string.   |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .Keywords                |                      | null-terminated string.   |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .VendorID                |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .VendorImplID            |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxDeviceDescription    |                      | null-terminated string.   |
-   |                                       | | .device                  |                      |                           |
-   |                                       | | .DeviceID                |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
-   |                                       | | .decoder                 |                      |                           |
-   |                                       | | .CodecID                 |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
-   |                                       | | .decoder                 |                      |                           |
-   |                                       | | .MaxcodecLevel           |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
-   |                                       | | .decoder                 |                      |                           |
-   |                                       | | .decprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
-   |                                       | | .decoder                 |                      |                           |
-   |                                       | | .decprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .decmemdesc              |                      |                           |
-   |                                       | | .MemHandleType           |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
-   |                                       | | .decoder                 |                      | object                    |
-   |                                       | | .decprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .decmemdesc              |                      |                           |
-   |                                       | | .Width                   |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
-   |                                       | | .decoder                 |                      | object                    |
-   |                                       | | .decprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .decmemdesc              |                      |                           |
-   |                                       | | .Height                  |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxDecoderDescription   |                      |                           |
-   |                                       | | .decoder                 |                      |                           |
-   |                                       | | .decprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .decmemdesc              |                      |                           |
-   |                                       | | .ColorFormats            |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxEncoderDescription   |                      |                           |
-   |                                       | | .encoder                 |                      |                           |
-   |                                       | | .CodecID                 |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .mfxEncoderDescription   |                      |                           |
-   |                                       | | .encoder                 |                      |                           |
-   |                                       | | .MaxcodecLevel           |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .mfxEncoderDescription   |                      |                           |
-   |                                       | | .encoder                 |                      |                           |
-   |                                       | | .BiDirectionalPrediction |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxEncoderDescription   |                      |                           |
-   |                                       | | .encoder                 |                      |                           |
-   |                                       | | .encprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxEncoderDescription   |                      |                           |
-   |                                       | | .encoder                 |                      |                           |
-   |                                       | | .encprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .encmemdesc              |                      |                           |
-   |                                       | | .MemHandleType           |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxEncoderDescription   |                      | :cpp:struct:`mfxRange32U` |
-   |                                       | | .encoder                 |                      | object                    |
-   |                                       | | .encprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .encmemdesc              |                      |                           |
-   |                                       | | .Width                   |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxEncoderDescription   |                      | :cpp:struct:`mfxRange32U` |
-   |                                       | | .encoder                 |                      | object                    |
-   |                                       | | .encprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .encmemdesc              |                      |                           |
-   |                                       | | .Height                  |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxEncoderDescription   |                      |                           |
-   |                                       | | .encoder                 |                      |                           |
-   |                                       | | .encprofile              |                      |                           |
-   |                                       | | .Profile                 |                      |                           |
-   |                                       | | .encmemdesc              |                      |                           |
-   |                                       | | .ColorFormats            |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxVPPDescription       |                      |                           |
-   |                                       | | .filter                  |                      |                           |
-   |                                       | | .FilterFourCC            |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
-   |                                       | | .mfxVPPDescription       |                      |                           |
-   |                                       | | .filter                  |                      |                           |
-   |                                       | | .MaxDelayInFrames        |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxVPPDescription       |                      |                           |
-   |                                       | | .filter                  |                      |                           |
-   |                                       | | .memdesc                 |                      |                           |
-   |                                       | | .MemHandleType           |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxVPPDescription       |                      | :cpp:struct:`mfxRange32U` |
-   |                                       | | .filter                  |                      | object                    |
-   |                                       | | .memdesc                 |                      |                           |
-   |                                       | | .Width                   |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
-   |                                       | | .mfxVPPDescription       |                      | :cpp:struct:`mfxRange32U` |
-   |                                       | | .filter                  |                      | object                    |
-   |                                       | | .memdesc                 |                      |                           |
-   |                                       | | .Height                  |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxVPPDescription       |                      |                           |
-   |                                       | | .filter                  |                      |                           |
-   |                                       | | .memdesc                 |                      |                           |
-   |                                       | | .format                  |                      |                           |
-   |                                       | | .InFormat                |                      |                           |
-   |                                       +----------------------------+----------------------+---------------------------+
-   |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
-   |                                       | | .mfxVPPDescription       |                      |                           |
-   |                                       | | .filter                  |                      |                           |
-   |                                       | | .memdesc                 |                      |                           |
-   |                                       | | .format                  |                      |                           |
-   |                                       | | .OutFormats              |                      |                           |
-   +---------------------------------------+----------------------------+----------------------+---------------------------+
-   | :cpp:struct:`mfxImplementedFunctions` | | mfxImplementedFunctions  | MFX_VARIANT_TYPE_PTR | Pointer to the buffer     |
-   |                                       | | .FunctionsName           |                      | with string               |
-   +---------------------------------------+----------------------------+----------------------+---------------------------+
-   | N/A                                   | | DXGIAdapterIndex         | MFX_VARIANT_TYPE_U32 | Adapter index according   |
-   |                                       | |                          |                      | to                        |
-   |                                       | |                          |                      | IDXGIFactory::EnumAdapters|
-   +---------------------------------------+----------------------------+----------------------+---------------------------+
+   .. table:: Dispatcher Configuration Properties
+      :widths: 25 25 30 20
+
+      +---------------------------------------+----------------------------+----------------------+---------------------------+
+      | Structure name                        | Property                   | Value Data Type      | Comment                   |
+      +=======================================+============================+======================+===========================+
+      | :cpp:struct:`mfxImplDescription`      | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .Impl                    |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 | The mode will be used for |
+      |                                       | | .AccelerationMode        |                      | session initilization     |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .ApiVersion              |                      |                           |
+      |                                       | | .Version                 |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .ApiVersion              |                      |                           |
+      |                                       | | .Major                   |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .ApiVersion              |                      |                           |
+      |                                       | | .Minor                   |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .ImplName                |                      | null-terminated string.   |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .License                 |                      | null-terminated string.   |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .Keywords                |                      | null-terminated string.   |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .VendorID                |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .VendorImplID            |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxSurfacePoolMode      |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxDeviceDescription    |                      | null-terminated string.   |
+      |                                       | | .device                  |                      |                           |
+      |                                       | | .DeviceID                |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxDecoderDescription   |                      |                           |
+      |                                       | | .decoder                 |                      |                           |
+      |                                       | | .CodecID                 |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxDecoderDescription   |                      |                           |
+      |                                       | | .decoder                 |                      |                           |
+      |                                       | | .MaxcodecLevel           |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxDecoderDescription   |                      |                           |
+      |                                       | | .decoder                 |                      |                           |
+      |                                       | | .decprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxDecoderDescription   |                      |                           |
+      |                                       | | .decoder                 |                      |                           |
+      |                                       | | .decprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .decmemdesc              |                      |                           |
+      |                                       | | .MemHandleType           |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+      |                                       | | .decoder                 |                      | object                    |
+      |                                       | | .decprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .decmemdesc              |                      |                           |
+      |                                       | | .Width                   |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxDecoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+      |                                       | | .decoder                 |                      | object                    |
+      |                                       | | .decprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .decmemdesc              |                      |                           |
+      |                                       | | .Height                  |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxDecoderDescription   |                      |                           |
+      |                                       | | .decoder                 |                      |                           |
+      |                                       | | .decprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .decmemdesc              |                      |                           |
+      |                                       | | .ColorFormats            |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .CodecID                 |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .MaxcodecLevel           |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .BiDirectionalPrediction |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .encprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .encprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .encmemdesc              |                      |                           |
+      |                                       | | .MemHandleType           |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxEncoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+      |                                       | | .encoder                 |                      | object                    |
+      |                                       | | .encprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .encmemdesc              |                      |                           |
+      |                                       | | .Width                   |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxEncoderDescription   |                      | :cpp:struct:`mfxRange32U` |
+      |                                       | | .encoder                 |                      | object                    |
+      |                                       | | .encprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .encmemdesc              |                      |                           |
+      |                                       | | .Height                  |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .encprofile              |                      |                           |
+      |                                       | | .Profile                 |                      |                           |
+      |                                       | | .encmemdesc              |                      |                           |
+      |                                       | | .ColorFormats            |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxVPPDescription       |                      |                           |
+      |                                       | | .filter                  |                      |                           |
+      |                                       | | .FilterFourCC            |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxVPPDescription       |                      |                           |
+      |                                       | | .filter                  |                      |                           |
+      |                                       | | .MaxDelayInFrames        |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxVPPDescription       |                      |                           |
+      |                                       | | .filter                  |                      |                           |
+      |                                       | | .memdesc                 |                      |                           |
+      |                                       | | .MemHandleType           |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxVPPDescription       |                      | :cpp:struct:`mfxRange32U` |
+      |                                       | | .filter                  |                      | object                    |
+      |                                       | | .memdesc                 |                      |                           |
+      |                                       | | .Width                   |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_PTR | Pointer to the            |
+      |                                       | | .mfxVPPDescription       |                      | :cpp:struct:`mfxRange32U` |
+      |                                       | | .filter                  |                      | object                    |
+      |                                       | | .memdesc                 |                      |                           |
+      |                                       | | .Height                  |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxVPPDescription       |                      |                           |
+      |                                       | | .filter                  |                      |                           |
+      |                                       | | .memdesc                 |                      |                           |
+      |                                       | | .format                  |                      |                           |
+      |                                       | | .InFormat                |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
+      |                                       | | .mfxVPPDescription       |                      |                           |
+      |                                       | | .filter                  |                      |                           |
+      |                                       | | .memdesc                 |                      |                           |
+      |                                       | | .format                  |                      |                           |
+      |                                       | | .OutFormats              |                      |                           |
+      +---------------------------------------+----------------------------+----------------------+---------------------------+
+      | :cpp:struct:`mfxImplementedFunctions` | | mfxImplementedFunctions  | MFX_VARIANT_TYPE_PTR | Pointer to the buffer     |
+      |                                       | | .FunctionsName           |                      | with string               |
+      +---------------------------------------+----------------------------+----------------------+---------------------------+
+      | N/A                                   | | DXGIAdapterIndex         | MFX_VARIANT_TYPE_U32 | Adapter index according   |
+      |                                       | |                          |                      | to                        |
+      |                                       | |                          |                      | IDXGIFactory::EnumAdapters|
+      +---------------------------------------+----------------------------+----------------------+---------------------------+
 
 .. important:: DXGIAdapterNum property is available for Windows only and filters only hardware implementations.
 

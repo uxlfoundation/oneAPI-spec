@@ -230,3 +230,34 @@ The following pseudo code shows how to create a system memory :cpp:struct:`mfx3D
    :start-after: /*beg5*/
    :end-before: /*end5*/
    :lineno-start: 1
+
+----------------
+HDR Tone Mapping
+----------------
+
+oneVPL video processing supports HDR Tone Mapping with Intel HW. The following pseudo code
+shows how to perform HDR Tone Mapping.
+
+The following pseudo code shows HDR to SDR.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg6*/
+   :end-before: /*end6*/
+   :lineno-start: 1
+   
+The following pseudo code shows SDR to HDR.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg7*/
+   :end-before: /*end7*/
+   :lineno-start: 1
+   
+The following pseudo code shows HDR to HDR.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg8*/
+   :end-before: /*end8*/
+   :lineno-start: 1
