@@ -48,7 +48,7 @@ Member functions
 
 .. cpp:function:: task_group(task_group_context& context)
 
-    Constructs an empty ``task_group``, which tasks are associated with the ``context``.
+    Constructs an empty ``task_group``. All tasks added into the ``task_group`` are associated with the ``context``.
 
 .. cpp:function:: ~task_group()
 
