@@ -66,12 +66,6 @@ Member functions
     
     The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
    
-    As an optimization hint, ``F`` might return a ``task_handle``, which task object can be executed next.
-   
-    .. note::
-       The ``task_handle`` returned by the function must be created with ``*this`` ``task_group``. It means with the one 
-       for which run method is called, otherwise it is an undefined behavior. 
-   
     **Returns:** ``task_handle`` object pointing to a task to compute ``f()``.
 
 .. cpp:function:: template<typename Func> void run( Func&& f )
@@ -79,12 +73,6 @@ Member functions
     Adds a task to compute ``f()`` and returns immediately.
     The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
     
-    As an optimization hint, ``F`` might return a ``task_handle``, which task object can be executed next.
-
-   .. note::
-       The ``task_handle`` returned by the function must be created with ``*this`` ``task_group``. It means with the one 
-       for which run method is called, otherwise it is an undefined behavior. 
-
 .. cpp:function:: void run(task_handle&& h)
    
     Schedules the task object pointed by the ``h`` for the execution.
