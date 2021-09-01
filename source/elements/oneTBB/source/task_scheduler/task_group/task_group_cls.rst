@@ -1,5 +1,5 @@
 .. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
-..
+......................................................
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ==========
@@ -19,6 +19,8 @@ Tasks can be dynamically added to the group while it is executing.
         class task_group {
         public:
             task_group();
+            task_group(task_group_context& context);
+            
             ~task_group();
 
             template<typename Func>
@@ -43,6 +45,10 @@ Member functions
 .. cpp:function:: task_group()
 
     Constructs an empty ``task_group``.
+
+.. cpp:function:: task_group(task_group_context& context)
+
+    Constructs an empty ``task_group``. All tasks added into the ``task_group`` are associated with the ``context``.
 
 .. cpp:function:: ~task_group()
 
