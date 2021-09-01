@@ -72,11 +72,11 @@ Non-Member Functions
     bool operator==(task_handle const& h, std::nullptr_t) noexcept
     bool operator==(std::nullptr_t, task_handle const& h) noexcept
 
-    **Returns**: ``true`` if ``h`` is empty, ``false`` otherwise.
+**Returns**: ``true`` if ``h`` is empty, ``false`` otherwise.
 
 .. code:: cpp
 
     bool operator!=(task_handle const& h, std::nullptr_t) noexcept
     bool operator!=(std::nullptr_t, task_handle const& h) noexcept
 
-    **Returns**: ``true`` if ``h`` is not empty, ``false`` otherwise.
+**Returns**: ``true`` if ``h`` is not empty, ``false`` otherwise.
