@@ -15,7 +15,7 @@ Parallel Functions
 .. toctree::
    :titlesonly:
 
-   algorithms/functions/collaborative_call_once.rst
+   algorithms/functions/collaborative_call_once_func.rst
 
    algorithms/functions/parallel_for_func.rst
    algorithms/functions/parallel_reduce_func.rst
