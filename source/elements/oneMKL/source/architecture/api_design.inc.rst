@@ -229,6 +229,32 @@ Each enumeration value comes with two names: A single-character name (the tradit
               -  Index arrays for an input matrix are provided using one-based (Fortran style) index values.  That is, indices start at 1.
 
 
+      .. _onemkl_enum_layout:
+
+      .. rubric:: layout
+         :name: layout
+         :class: sectiontitle
+
+      The ``layout`` type specifies how a dense matrix ``A`` with leading dimension ``lda`` is stored as one dimensional array in memory. 
+      The layouts are traditionally provided in one of two forms: C/C++-style using ``row_major`` layout,
+      or Fortran-style using ``column_major`` layout. The ``layout`` type can take the following values:
+
+      .. container:: tablenoborder
+
+         .. list-table::
+            :header-rows: 1
+
+            * -  Short Name
+              -  Long Name
+              -  Description
+            * -  ``layout::R``
+              -  ``layout::row_major``
+              -  For row major layout, the elements of each row of a dense matrix ``A`` are contiguous in memory while the elements of each column are at distance ``lda`` from the element in the same column and the previous row.
+            * -  ``layout::C``
+              -  ``layout::col_major``
+              -  For column major layout, the elements of each column a dense matrix ``A`` are contiguous in memory while the elements of each row are at distance ``lda`` from the element in the same row and the previous column.
+
+
 .. note::
         :ref:`onemkl_appendix` may contain other API design decisions or recommendations that may be of use to the general developer of oneMKL, but which may not necessarily be part of the oneMKL specification.
 
