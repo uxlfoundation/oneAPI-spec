@@ -13,12 +13,14 @@ Function template that executes function exactly once.
 
     // Defined in header <tbb/collaborative_call_once.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename Func, typename... Args>
-        void collaborative_call_once(collaborative_once_flag& flag, Func&& func, Args&&... args);
+            template<typename Func, typename... Args>
+            void collaborative_call_once(collaborative_once_flag& flag, Func&& func, Args&&... args);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
