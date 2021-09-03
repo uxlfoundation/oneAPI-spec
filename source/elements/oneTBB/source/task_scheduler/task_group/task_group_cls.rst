@@ -25,6 +25,11 @@ Tasks can be dynamically added to the group while it is executing.
 
             template<typename Func>
             void run( Func&& f );
+            
+            template<typename Func>
+            task_handle defer(Func&& f);
+            
+            void run(task_handle&& h);
 
             template<typename Func>
             task_group_status run_and_wait( const Func& f );
@@ -57,10 +62,31 @@ Member functions
     **Requires**: Method ``wait`` must be called before destroying a ``task_group``,
     otherwise, the destructor throws an exception.
 
+.. cpp:function:: template<typename F> task_handle  defer(F&& f)
+
+    Creates a deferred task to compute ``f()`` and returns ``task_handle`` pointing to it.
+   
+    The task is not scheduled for the execution until it is explicitly requested, for example, with the ``task_group::run`` method.
+    However, the task is still added into the ``task_group``, thus the ``task_group::wait`` method waits until the ``task_handle`` 
+    is either scheduled or destroyed.
+    
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
+   
+    **Returns:** ``task_handle`` object pointing to a task to compute ``f()``.
+
 .. cpp:function:: template<typename Func> void run( Func&& f )
 
     Adds a task to compute ``f()`` and returns immediately.
     The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    
+.. cpp:function:: void run(task_handle&& h)
+   
+    Schedules the task object pointed by the ``h`` for the execution.
+
+    .. note::
+       The failure to satisfy the following conditions leads to undefined behavior:
+          * ``h`` is not empty.
+          * ``*this`` is the same ``task_group`` that ``h`` is created with.    
 
 .. cpp:function:: template<typename Func> task_group_status run_and_wait( const Func& f )
 
