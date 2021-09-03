@@ -26,8 +26,8 @@ Inserting values
 
     **Requirements**:
 
-    * the type ``value_type`` must meet the ``EmplaceConstructible`` requirements the from [container.requirements] ISO C++ Standard section.
-    * the type ``mapped_type`` must meet the ``DefaultConstructible`` requirements from the [defaultconstructible] ISO C++ Standard section.
+    * the ``value_type`` type must meet the ``EmplaceConstructible`` requirements the from [container.requirements] ISO C++ Standard section.
+    * the ``mapped_type`` type must meet the ``DefaultConstructible`` requirements from the [defaultconstructible] ISO C++ Standard section.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
@@ -71,7 +71,7 @@ Inserting values
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
     which was already presented in the container.
 
-    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
+    **Requirements**: the ``value_type`` type must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
@@ -84,7 +84,7 @@ Inserting values
 
     Attempts to insert the value ``value`` into the container.
 
-    **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
+    **Requirements**: the ``value_type`` type must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
@@ -105,7 +105,7 @@ Inserting values
 
     ``value`` is left in a valid, but unspecified state.
 
-    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
+    **Requirements**: the ``value_type`` type must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
@@ -118,7 +118,7 @@ Inserting values
 
     Attempts to insert the value ``value`` into the container using move semantics.
 
-    **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
+    **Requirements**: the ``value_type`` type must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
@@ -137,7 +137,7 @@ Inserting sequences of elements
     If the interval ``[first, last)`` contains multiple elements with equal keys,
     it is unspecified which element should be inserted.
 
-    **Requirements**: the type ``InputIterator`` must meet the requirements of `InputIterator`
+    **Requirements**: the ``InputIterator`` type must meet the requirements of `InputIterator`
     from the ``[input.iterators]`` ISO C++ Standard section.
 
 --------------------------
