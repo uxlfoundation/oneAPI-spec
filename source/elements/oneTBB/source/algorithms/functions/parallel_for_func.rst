@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -51,12 +51,14 @@ A ``partitioner`` type may be one of the following entities:
 * ``const static_partitioner&``
 * ``affinity_partitioner&``
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
 * The ``Index`` type must meet the :doc:`ParallelForIndex requirements <../../named_requirements/algorithms/par_for_index>`.
 * The ``Func`` type must meet the :doc:`ParallelForFunc requirements <../../named_requirements/algorithms/par_for_func>`.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 The ``tbb::parallel_for(first, last, step, f)`` overload represents parallel execution of the loop:
 
@@ -64,9 +66,9 @@ The ``tbb::parallel_for(first, last, step, f)`` overload represents parallel exe
 
     for (auto i = first; i < last; i += step) f(i);
 
-The loop must not wrap around. The step value must be positive. If omitted, it is implicitly 1. 
-There is no guarantee that the iterations run in parallel. A deadlock may occur if a lesser 
-iteration waits for a greater iteration. The partitioning strategy is ``auto_partitioner`` when 
+The loop must not wrap around. The step value must be positive. If omitted, it is implicitly 1.
+There is no guarantee that the iterations run in parallel. A deadlock may occur if a lesser
+iteration waits for a greater iteration. The partitioning strategy is ``auto_partitioner`` when
 the parameter is not specified.
 
 The ``parallel_for(range,body,partitioner)`` overload provides a more general form of parallel

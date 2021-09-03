@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -32,11 +32,13 @@ result to all of its successors.
     } // namespace flow
     } // namespace tbb
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The ``Output`` type must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 * The type ``Body`` must meet the :doc:`InputNodeBody requirements <../named_requirements/flow_graph/input_node_body>`.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 This node can have no predecessors. It executes a user-provided ``body`` function object to
 generate messages that are broadcast to all successors. It is a serial node and never calls
@@ -90,7 +92,7 @@ Member functions
 
     Copies the message from the buffer to ``v`` if available, or, if the node is
     in active state, invokes ``body`` to attempt to generate a new message that
-    will be copied into ``v``. 
+    will be copied into ``v``.
 
     **Returns:** ``true`` if a message is copied to ``v``;  ``false``, otherwise.
 

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -43,8 +43,12 @@ Requirements:
 
 * The ``Input`` type must meet the `DefaultConstructible` requirements from [defaultconstructible]
   and the `CopyConstructible` requirements from [copyconstructible] ISO C++ Standard sections.
-* The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
+  Since C++20 this requirement is a constraint.
 * The type ``Body`` must meet the :doc:`AsyncNodeBody requirements <../named_requirements/flow_graph/async_node_body>`.
+  Since C++20 this requirement is a constraint.
+* The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 ``async_node`` executes a user-provided body on incoming messages. The body typically submits the
 messages to an external activity for processing outside of the graph. It is responsibility of
@@ -59,8 +63,8 @@ messages to an external activity for processing outside of the graph. It is resp
 The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and
 :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.
 
-The body object passed to a ``async_node`` is copied. Updates to member variables do not affect the original object used to construct the node. 
-If the state held within a body object must be inspected from outside of the node, 
+The body object passed to a ``async_node`` is copied. Updates to member variables do not affect the original object used to construct the node.
+If the state held within a body object must be inspected from outside of the node,
 the :doc:`copy_body <copy_body_func>` function can be used to obtain an updated copy.
 
 Member types
@@ -77,7 +81,7 @@ Member functions
     async_node( graph &g, size_t concurrency, Body body,
                    node_priority_t priority = no_priority );
 
-Constructs an ``async_node`` that invokes a copy of ``body``. The ``concurrency`` value limits the number of simultaneous 
+Constructs an ``async_node`` that invokes a copy of ``body``. The ``concurrency`` value limits the number of simultaneous
 ``body`` invocations for the node.
 
 This function specifies :doc:`node priority<node_priorities>`.

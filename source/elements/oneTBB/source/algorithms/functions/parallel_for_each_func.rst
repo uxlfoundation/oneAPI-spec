@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -32,11 +32,13 @@ Function template that processes work items in parallel.
 
     } // namespace tbb
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The ``Body`` type must meet the :doc:`ParallelForEachBody requirements <../../named_requirements/algorithms/par_for_each_body>`.
 * The ``InputIterator`` type must meet the `Input Iterator` requirements from the [input.iterators] ISO C++ Standard section.
 * The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 The ``parallel_for_each`` template has two forms.
 

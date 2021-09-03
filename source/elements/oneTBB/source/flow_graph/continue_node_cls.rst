@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -45,9 +45,12 @@ A node that executes a specified body object when triggered.
 Requirements:
 
 * The type ``Output`` must meet the `CopyConstructible` requirements from [copyconstructible] ISO
-  C++ Standard section.
+  C++ Standard section. Since C++20 this requirement is a constraint.
 * The type ``Policy`` can be specified as :doc:`lightweight policy<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`ContinueNodeBody requirements <../named_requirements/flow_graph/continue_node_body>`.
+  Since C++20 this requirement is a constraint.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 A ``continue_node`` is a ``graph_node``, ``receiver<continue_msg>``, and ``sender<Output>``.
 

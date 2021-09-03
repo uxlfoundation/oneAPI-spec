@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -46,4 +46,7 @@ join_node Policies
   a given key, the ``join_node`` removes all matching messages from the input ports,
   constructs a tuple containing the matching messages and attempts to broadcast it to all successors.
   If no successor accepts the tuple, it is saved and will be forwarded on a subsequent ``try_get``.
+  Constraints (since C++20): the ``KHash`` type must meet the :doc:`HashCompare requirements
+  <../named_requirements/containers/hash_compare>`. For more details about the constraints - see
+  [temp.constr] section of the ISO C++20 Standard.
 * ``tag_matching`` - A specialization of ``key_matching`` that accepts keys of type ``tag_value``.

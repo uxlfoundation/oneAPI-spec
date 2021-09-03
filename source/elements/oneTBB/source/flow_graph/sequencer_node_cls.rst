@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -30,12 +30,14 @@ A node that forwards messages in a sequence order.
     } // namespace flow
     } // namespace tbb
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 * The type ``Sequencer`` must meet the :doc:`Sequencer requirements <../named_requirements/flow_graph/sequencer>`
   If ``Sequencer`` instance throws an exception, behavior is undefined.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 ``sequencer_node`` forwards messages in a sequence order to a single successor in its successor set.
 

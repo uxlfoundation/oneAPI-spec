@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -73,10 +73,14 @@ Requirements:
 * The type ``OutputTuple`` must be an instantiation of ``std::tuple``. Each type that the tuple
   stores must meet the `DefaultConstructible` requirements from [defaultconstructible],
   `CopyConstructible` requirements from [copyconstructible] and `CopyAssignable` requirements from
-  [copyassignable] ISO C++ Standard sections.
+  [copyassignable] ISO C++ Standard sections. Since C++20 this requirement is a constraint.
 * The ``JoinPolicy`` type must be specified as one of :doc:`buffering policies <join_node_policies>` for ``join_node``.
 * The ``KHash`` type must meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
+  Since C++20 this requirement is a constraint.
 * The ``Bi`` types must meet the :doc:`JoinNodeFunctionObject requirements <../named_requirements/flow_graph/join_node_func_obj>`.
+  Since C++20 this requirement is a constraint.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 A ``join_node`` is a ``graph_node`` and a ``sender<OutputTuple>``.
 It contains a tuple of input ports, each of which is a ``receiver<Type>`` for each `Type` in

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -28,12 +28,14 @@ A ``partitioner`` type may be one of the following entities:
 * ``const auto_partitioner&``
 * ``const simple_partitioner&``
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The ``Range`` type must meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
 * The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
 * The ``Combine`` type must meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 The function template ``parallel_scan`` computes a parallel prefix, also known as a parallel scan.
 This computation is an advanced concept in parallel computing that is sometimes useful in scenarios

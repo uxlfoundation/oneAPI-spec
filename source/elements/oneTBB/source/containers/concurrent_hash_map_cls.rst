@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -164,13 +164,15 @@ Class Template Synopsis
       } // namespace tbb
 
 Requirements:
-
+* The type ``HashCompare`` must meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
+  Since C++20 this requirement is a constraint.
+* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
+  Since C++20 this requirement is a constraint.
 * The expression ``std::allocator_type<Allocator>::destroy(m, val)``, where ``m`` is an object
   of the type ``Allocator`` and ``val`` is an object of type ``value_type``, must be well-formed.
   Member functions can impose stricter requirements depending on the type of the operation.
-* The type ``HashCompare`` must meet the :doc:`HashCompare requirements <../named_requirements/containers/hash_compare>`.
-* The type ``Allocator`` must meet the ``Allocator`` requirements from the [allocator.requirements] ISO C++ Standard section.
 
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 Member classes
 --------------

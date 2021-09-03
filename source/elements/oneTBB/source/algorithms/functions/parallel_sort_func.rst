@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -27,20 +27,22 @@ Function template that sorts a sequence.
 
     } //  namespace tbb
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The ``RandomAccessIterator`` type must meet the `Random Access Iterators` requirements from
   [random.access.iterators]  and `Swappable` requirements from the [swappable.requirements] ISO C++ Standard section.
 * The ``Compare`` type must meet the `Compare` type requirements from the [alg.sorting] ISO C++ Standard section.
-* The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>` 
-  which iterators must meet the `Random Access Iterators` requirements from [random.access.iterators]  
+* The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`
+  which iterators must meet the `Random Access Iterators` requirements from [random.access.iterators]
   and `Swappable` requirements from the [swappable.requirements] ISO C++ Standard section.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 Sorts a sequence or a container. The sort is neither stable nor deterministic: relative
 ordering of elements with equal keys is not preserved and not guaranteed to repeat if the same
 sequence is sorted again.
 
-A call ``parallel_sort( begin, end, comp )`` sorts the sequence *[begin, end)* using the argument 
+A call ``parallel_sort( begin, end, comp )`` sorts the sequence *[begin, end)* using the argument
 ``comp`` to determine relative orderings.  If ``comp( x, y )`` returns ``true``, *x* appears before
 *y* in the sorted sequence.
 

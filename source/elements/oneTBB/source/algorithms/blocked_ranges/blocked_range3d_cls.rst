@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -47,9 +47,11 @@ A ``blocked_range3d`` is the three-dimensional extension of ``blocked_range2d``.
         };
     }
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The *PageValue*, *RowValue* and *ColValue* must meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 Member types
 ------------

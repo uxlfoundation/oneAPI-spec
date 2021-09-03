@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -51,9 +51,11 @@ to the loop templates ``parallel_for``, ``parallel_reduce``, or ``parallel_scan`
        };
     }
 
-Requirements:
+Requirements (since C++20 - constraints):
 
 * The ``Value`` type must meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`.
+
+For more details about the constraints - see [temp.constr] section of the ISO C++20 Standard.
 
 Member functions
 ----------------
