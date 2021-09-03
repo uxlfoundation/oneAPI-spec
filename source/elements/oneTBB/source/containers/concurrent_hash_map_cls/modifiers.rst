@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -18,18 +18,18 @@ Inserting values
 
         bool insert( accessor& result, const key_type& key );
 
-    If the accessor ``result`` is not empty, releases the ``result`` and
+    If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value constructed from ``key, mapped_type()`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    that was already presented in the container.
+    which was already presented in the container.
 
     **Requirements**:
 
     * the type ``value_type`` must meet the ``EmplaceConstructible`` requirements the from [container.requirements] ISO C++ Standard section.
     * the type ``mapped_type`` must meet the ``DefaultConstructible`` requirements from the [defaultconstructible] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
 --------------------------
 
@@ -41,21 +41,21 @@ Inserting values
         template <typename K>
         bool insert( accessor& result, const K& key );
 
-    If the accessor ``result`` is not empty, releases the ``result`` and
+    If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value constructed from ``key, mapped_type()`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with the key
-    which compares equivalent with ``key``, that was already presented in the container.
+    that compares equivalent to the value ``key``, which was already presented in the container.
 
-    This overload only participates in overload resolution if
+    This overload only participates in the overload resolution if:
 
-    * qualified-id ``hash_compare_type::is_transparent`` is valid and denotes a type,
-    * ``std::is_constructible<key_type, const K&>::value`` is ``true``.
+    * qualified-id ``hash_compare_type::is_transparent`` is valid and denotes a type
+    * ``std::is_constructible<key_type, const K&>::value`` is ``true``
 
-    **Requirements**: the type ``mapped_type`` must meet the ``DefaultConstructible`` requirements
-    from the [defaultconstructible] ISO C++ Standard section.
+    **Requirements**: the ``mapped_type`` type must meet the ``DefaultConstructible`` requirements
+    described in the [defaultconstructible] section of the ISO C++ Standard.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
 --------------------------
 
@@ -65,16 +65,16 @@ Inserting values
 
         bool insert( accessor& result, const value_type& value );
 
-    If the accessor ``result`` is not empty, releases the ``result`` and
+    If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value ``value`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    that was already presented in the container.
+    which was already presented in the container.
 
     **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
 --------------------------
 
@@ -87,7 +87,7 @@ Inserting values
     **Requirements**: the type ``value_type`` must meet the ``CopyInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
 --------------------------
 
@@ -97,18 +97,18 @@ Inserting values
 
         bool insert( accessor& result, value_type&& value );
 
-    If the accessor ``result`` is not empty, releases the ``result`` and
+    If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value ``value`` into the container using move semantics.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    that was already presented in the container.
+    which was already presented in the container.
 
     ``value`` is left in a valid, but unspecified state.
 
     **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
 --------------------------
 
@@ -121,7 +121,7 @@ Inserting values
     **Requirements**: the type ``value_type`` must meet the ``MoveInsertable`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise.
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
 Inserting sequences of elements
 -------------------------------
@@ -159,16 +159,16 @@ Emplacing elements
         template <typename... Args>
         bool emplace( accessor& result, Args&&... args );
 
-    If the accessor ``result`` is not empty, releases the ``result`` and
+    If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert an element constructed in-place from ``args`` into the container.
 
     Sets the ``result`` to provide access to the inserted element or to the element with equal key
-    that was already presented in the container.
+    which was already presented in the container.
 
     **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise
 
 --------------------------
 
@@ -182,7 +182,7 @@ Emplacing elements
     **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements from the
     [container.requirements] ISO C++ Standard section.
 
-    **Returns**: ``true`` if an element was inserted; ``false``, otherwise
+    **Returns**: ``true`` if an element is inserted; ``false`` otherwise
 
 Erasing elements
 ----------------
@@ -193,7 +193,7 @@ Erasing elements
 
     If an element with the key equivalent to  ``key`` exists, removes it from the container.
 
-    **Returns**: ``true`` if an element was removed; ``false``, otherwise.
+    **Returns**: ``true`` if an element is removed; ``false``, otherwise.
 
 --------------------------
 
@@ -202,12 +202,12 @@ Erasing elements
         template <typename K>
         bool erase( const K& key );
 
-    If an element with the key which compares equivalent with ``key`` exists, removes it from the container.
+    If an element with the key that compares equivalent to the value ``key`` exists, removes it from the container.
 
-    This overload only participates in overload resolution if qualified-id
+    This overload only participates in the overload resolution if qualified-id
     ``hash_compare_type::is_transparent`` is valid and denotes a type.
 
-    **Returns**: ``true`` if an element was removed; ``false``, otherwise.
+    **Returns**: ``true`` if an element is removed; ``false``, otherwise.
 
 --------------------------
 
@@ -220,5 +220,5 @@ Erasing elements
 
     **Requirements**: ``item_accessor`` should not be empty.
 
-    **Returns**: ``true`` if an element was removed by the current thread; ``false``
+    **Returns**: ``true`` if an element is removed by the current thread; ``false``
     if it was removed by another thread.
