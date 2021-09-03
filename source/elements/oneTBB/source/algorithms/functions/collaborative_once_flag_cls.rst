@@ -7,23 +7,22 @@ collaborative_once_flag
 =======================
 **[algorithms.collaborative_call_once.collaborative_once_flag]**
 
-Helper structure for ``collaborative_call_once``.
-
-``collaborative_once_flag`` is passed to ``collaborative_call_once`` as the first argument and serves to resolve
-which of the multiple callers under this flag will be the *Winner* and which will collaborate.
+Special class that ``collaborative_call_once`` uses to perform a call only once.
 
 .. code:: cpp
 
-    // Defined in header <tbb/collaborative_call_once.h>
+    // Defined in header <oneapi/tbb/collaborative_call_once.h>
 
-    namespace tbb {
-        
-        class collaborative_once_flag {
-        public:
-            collaborative_once_flag();
-            collaborative_once_flag(const collaborative_once_flag&) = delete;
-        };
-    } // namespace tbb
+    namespace oneapi {
+        namespace tbb {
+            
+            class collaborative_once_flag {
+            public:
+                collaborative_once_flag();
+                collaborative_once_flag(const collaborative_once_flag&) = delete;
+            };
+        } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------

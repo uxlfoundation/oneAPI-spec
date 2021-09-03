@@ -11,7 +11,7 @@ Function template that executes function exactly once.
 
 .. code:: cpp
 
-    // Defined in header <tbb/collaborative_call_once.h>
+    // Defined in header <oneapi/tbb/collaborative_call_once.h>
 
     namespace oneapi {
         namespace tbb {
@@ -38,8 +38,6 @@ calls the ``Func`` object again.
 collaborative_once_flag Class
 -----------------------------
 
-Special class that ``collaborative_call_once`` uses to perform a call only once.
-
 .. toctree::
     :titlesonly:
 
@@ -54,16 +52,16 @@ The following example sketches a class in which the "Lazy initialization" patter
 
 .. code:: cpp
 
-    #include "tbb/collaborative_call_once.h"
+    #include "oneapi/tbb/collaborative_call_once.h"
 
     extern double foo(int i);
 
     class LazyData {
-        tbb::collaborative_once_flag flag;
+        oneapi::tbb::collaborative_once_flag flag;
         double cachedProperty;
     public:
         double getProperty() {
-            tbb::collaborative_call_once(flag, [&] {
+            oneapi::tbb::collaborative_call_once(flag, [&] {
                 // serial part
                 double result{};
 
