@@ -38,8 +38,7 @@ calls the ``Func`` object again.
 collaborative_once_flag Class
 -----------------------------
 
-Helper class that ``collaborative_call_once`` uses to perform a call only once and to connect the *Winner*
-and *Moonlighters* for a collaboration.
+Special class that ``collaborative_call_once`` uses to perform a call only once.
 
 .. toctree::
     :titlesonly:
