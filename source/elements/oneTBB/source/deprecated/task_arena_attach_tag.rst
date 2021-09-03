@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -9,9 +9,9 @@ task_arena::attach
 
     .. caution::
 
-        Deprecated in oneTBB Specification 1.1
+        Deprecated in oneTBB Specification 1.1.
 
-A set of methods for constructing a task_arena with attach.
+A set of methods for constructing a ``task_arena`` with ``attach``.
 
 .. code:: cpp
 
@@ -37,7 +37,7 @@ Member types and constants
 
 .. cpp:struct:: attach
 
-    A tag for constructing a task_arena with attach.
+    A tag for constructing a ``task_arena`` with ``attach``.
 
 Member functions
 ----------------

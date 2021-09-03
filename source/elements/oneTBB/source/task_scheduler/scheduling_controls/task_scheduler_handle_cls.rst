@@ -7,7 +7,7 @@ task_scheduler_handle
 =====================
 **[scheduler.task_scheduler_handle]**
 
-The ``oneapi::tbb::task_scheduler_handle`` class and the ``oneapi::tbb::finalize`` function allow to wait for completion of worker threads.
+The ``oneapi::tbb::task_scheduler_handle`` class and the ``oneapi::tbb::finalize`` function allow user to wait for completion of worker threads.
 
 When the ``oneapi::tbb::finalize`` function is called with an ``oneapi::tbb::task_scheduler_handle`` instance, it blocks the calling
 thread until the completion of all worker threads that were implicitly created by the library.
@@ -47,7 +47,7 @@ Member Functions
 
 .. cpp:function:: task_scheduler_handle()
 
-    **Effects**: Creates an empty instance of the ``task_scheduler_handle`` class that does not contain any reference to the task scheduler.
+    **Effects**: Creates an empty instance of the ``task_scheduler_handle`` class that does not contain any references to the task scheduler.
     
 -------------------------------------------------------
 
@@ -81,7 +81,7 @@ Member Functions
 
 .. cpp:function:: explicit operator bool() const noexcept
 
-    **Returns**: ``true`` if ``this`` is not empty and references any task scheduler; ``false`` otherwise.
+    **Returns**: ``true`` if ``this`` is not empty and refers to some task scheduler; ``false`` otherwise.
 
 -------------------------------------------------------
 
@@ -100,8 +100,8 @@ Non-member Functions
 
 The following conditions should be met for finalization to succeed:
 
-- No active (not yet terminated) instances of class ``task_arena`` exist in the whole program;
-- ``task_scheduler_handle::release`` is called for each other active instance of class ``task_scheduler_handle``, possibly by different application threads.
+- No active, not yet terminated, instances of ``task_arena`` class exist in the whole program.
+- ``task_scheduler_handle::release`` is called for each other active instance of ``task_scheduler_handle`` class, possibly by different application threads.
 
 Under these conditions, it is guaranteed that at least one ``finalize`` call succeeds,
 at which point all worker threads have been completed.
@@ -109,7 +109,7 @@ If calls are performed simultaneously, more than one call might succeed.
 
 .. note::
 
-    If you know how many active ``task_scheduler_handle`` instances exist in the program,
+    If user knows how many active ``task_scheduler_handle`` instances exist in the program,
     it is necessary to ``release`` all but the last one, then call ``finalize`` for
     the last instance.
 

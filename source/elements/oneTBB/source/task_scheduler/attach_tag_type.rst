@@ -8,7 +8,7 @@ attach tag type
 **[scheduler.attach]**
 
 An ``attach`` tag type is specifically used with ``task_arena`` and 
-``task_scheduler_handle`` interfaces. It is guaranteed to be default constructible.
+``task_scheduler_handle`` interfaces. It is guaranteed to be constructible by default.
 
 .. code:: cpp
 
