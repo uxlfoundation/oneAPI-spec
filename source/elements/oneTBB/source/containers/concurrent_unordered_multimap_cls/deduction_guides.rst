@@ -56,7 +56,7 @@ In addition, the following explicit deduction guides are provided:
               typename T,
               typename Hash = std::hash<std::remove_const_t<Key>>,
               typename KeyEqual = std::equal_to<std::remove_const_t<Key>>,
-              typename Allocator>
+              typename Allocator = tbb::tbb_allocator<std::pair<const Key, T>>>
     concurrent_unordered_multimap( std::initializer_list<std::pair<Key, T>>,
                                    map_size_type = {},
                                    Hash = Hash(),
