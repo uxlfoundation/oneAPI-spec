@@ -65,12 +65,18 @@ The following example sketches a class in which the "Lazy initialization" patter
         double getProperty() {
             tbb::collaborative_call_once(flag, [&] {
                 // serial part
-                std::atomic<double> result;
+                double result{};
 
                 // parallel part where threads can collaborate
-                tbb::parallel_for(0, 1000, [&] (int r) {
-                    result += foo(r);
-                });
+                result = oneapi::tbb::parallel_reduce(oneapi::tbb::blocked_range<int>(0, 1000),
+                    [&] (auto r, double r) {
+                        for(int i = r.begin(); i != r.end(); ++i) {
+                            r += foo(i);
+                        }
+                        return r;
+                    },
+                    std::plus<double, double>{}
+                );
 
                 // continue serial part
                 cachedProperty = result;
