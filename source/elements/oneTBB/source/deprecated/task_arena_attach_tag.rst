@@ -49,7 +49,7 @@ Member functions
 
     .. note::
 
-        Unlike other constructors, this one automatically initializes
+        Unlike other ``task_arena`` constructors, this one automatically initializes
         the new ``task_arena`` when connecting to an already existing arena.
 
         
