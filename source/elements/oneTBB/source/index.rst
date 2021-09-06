@@ -40,4 +40,4 @@ oneAPI Threading Building Blocks Specification
    :maxdepth: 2
    :caption: oneTBB Deprecated Interfaces:
 
-   deprecated/task_arena_attach_tag.rst
+   task_arena_attach_tag.rst
