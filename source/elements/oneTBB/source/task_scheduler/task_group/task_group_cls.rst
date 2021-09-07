@@ -24,7 +24,7 @@ Tasks can be dynamically added to the group while it is executing.
             ~task_group();
 
             template<typename Func>
-            void run( Func&& f );
+            void run(Func&& f);
             
             template<typename Func>
             task_handle defer(Func&& f);
@@ -32,7 +32,9 @@ Tasks can be dynamically added to the group while it is executing.
             void run(task_handle&& h);
 
             template<typename Func>
-            task_group_status run_and_wait( const Func& f );
+            task_group_status run_and_wait(const Func& f);
+            
+            task_group_status run_and_wait(task_handle&& h);
 
             task_group_status wait();
             void cancel();
@@ -74,7 +76,7 @@ Member functions
    
     **Returns:** ``task_handle`` object pointing to a task to compute ``f()``.
 
-.. cpp:function:: template<typename Func> void run( Func&& f )
+.. cpp:function:: template<typename Func> void run(Func&& f)
 
     Adds a task to compute ``f()`` and returns immediately.
     The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
@@ -88,10 +90,21 @@ Member functions
           * ``h`` is not empty.
           * ``*this`` is the same ``task_group`` that ``h`` is created with.    
 
-.. cpp:function:: template<typename Func> task_group_status run_and_wait( const Func& f )
+.. cpp:function:: template<typename Func> task_group_status run_and_wait(const Func& f)
 
-    Equivalent to ``{run(f); return wait();}``, but guarantees that ``f()`` runs on the current thread.
+    Equivalent to ``{run(f); return wait();}``.
     The ``Func`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+
+    **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
+
+.. cpp:function::task_group_status run_and_wait(task_handle&& h)
+
+    Equivalent to ``{run(h); return wait();}``.
+
+    .. note::
+       The failure to satisfy the following conditions leads to undefined behavior:
+          * ``h`` is not empty.
+          * ``*this`` is the same ``task_group`` that ``h`` is created with.    
 
     **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
 
