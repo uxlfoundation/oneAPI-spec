@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -261,6 +261,7 @@ Member functions
 
     .. note:: 
        ``h`` should not be empty to avoid an undefined behavior.
+
 Example
 -------
 
