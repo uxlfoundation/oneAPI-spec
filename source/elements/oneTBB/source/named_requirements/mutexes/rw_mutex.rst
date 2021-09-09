@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -100,6 +100,8 @@ The following table summarizes the library classes that model the `ReaderWriterM
     ============================= ============ =============
     .                             **Fair**     **Reentrant**
     ============================= ============ =============
+    ``rw_mutex``                  No           No
+    ----------------------------- ------------ -------------
     ``spin_rw_mutex``             No           No
     ----------------------------- ------------ -------------
     ``speculative_spin_rw_mutex`` No           No
@@ -124,6 +126,7 @@ The following table summarizes the library classes that model the `ReaderWriterM
 
 See also:
 
+* :doc:`rw_mutex <../../mutual_exclusion/rw_mutex_cls>`
 * :doc:`spin_rw_mutex <../../mutual_exclusion/spin_rw_mutex_cls>`
 * :doc:`speculative_spin_rw_mutex <../../mutual_exclusion/speculative_spin_rw_mutex_cls>`
 * :doc:`queuing_rw_mutex <../../mutual_exclusion/queuing_rw_mutex_cls>`
