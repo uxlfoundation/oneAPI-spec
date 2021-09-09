@@ -7,7 +7,7 @@ concurrent_set
 ==============
 **[containers.concurrent_set]**
 
-``tbb::concurrent_set`` is a class template that represents an unordered sequence of unique elements.
+``tbb::concurrent_set`` is a class template that represents a sorted sequence of unique elements.
 It supports concurrent insertion, lookup and traversal, but does not support concurrent erasure.
 
 
