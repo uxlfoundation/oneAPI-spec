@@ -11,53 +11,55 @@ A class that represents an explicit, user-managed task scheduler arena.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_arena.h>
+    // Defined in header <oneapi/tbb/task_arena.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        class task_arena {
-        public:
-            static const int automatic = /* unspecified */;
-            static const int not_initialized = /* unspecified */;
-            enum class priority : /* unspecified type */ {
-                low = /* unspecified */,
-                normal = /* unspecified */,
-                high = /* unspecified */
+            class task_arena {
+            public:
+                static const int automatic = /* unspecified */;
+                static const int not_initialized = /* unspecified */;
+                enum class priority : /* unspecified type */ {
+                    low = /* unspecified */,
+                    normal = /* unspecified */,
+                    high = /* unspecified */
+                };
+
+                struct constraints {
+                    numa_node_id numa_node;
+                    int max_concurrency;
+
+                    constraints(numa_node_id numa_node_       = task_arena::automatic,
+                                int          max_concurrency_ = task_arena::automatic);
+                };
+
+                task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
+                        priority a_priority = priority::normal);
+                task_arena(constraints a_constraints, unsigned reserved_for_masters = 1,
+                        priority a_priority = priority::normal);
+                task_arena(const task_arena &s);
+                explicit task_arena(oneapi::tbb::attach);
+                ~task_arena();
+
+                void initialize();
+                void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
+                                priority a_priority = priority::normal);
+                void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
+                                priority a_priority = priority::normal);
+                void initialize(oneapi::tbb::attach);
+
+                void terminate();
+
+                bool is_active() const;
+                int max_concurrency() const;
+
+                template<typename F> auto execute(F&& f) -> decltype(f());
+                template<typename F> void enqueue(F&& f);
             };
 
-            struct constraints {
-                numa_node_id numa_node;
-                int max_concurrency;
-
-                constraints(numa_node_id numa_node_       = task_arena::automatic,
-                            int          max_concurrency_ = task_arena::automatic);
-            };
-
-            task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
-                       priority a_priority = priority::normal);
-            task_arena(constraints a_constraints, unsigned reserved_for_masters = 1,
-                       priority a_priority = priority::normal);
-            task_arena(const task_arena &s);
-            explicit task_arena(oneapi::tbb::attach);
-            ~task_arena();
-
-            void initialize();
-            void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
-                            priority a_priority = priority::normal);
-            void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
-                            priority a_priority = priority::normal);
-            void initialize(oneapi::tbb::attach);
-
-            void terminate();
-
-            bool is_active() const;
-            int max_concurrency() const;
-
-            template<typename F> auto execute(F&& f) -> decltype(f());
-            template<typename F> void enqueue(F&& f);
-        };
-
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 A ``task_arena`` class represents a place where threads may share and execute tasks.
 

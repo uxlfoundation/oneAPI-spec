@@ -3,7 +3,7 @@
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ==================
-task_arena::attach 
+task_arena::attach
 ==================
 **[deprecated.task_arena_attach_tag]**
 
@@ -15,23 +15,25 @@ A set of methods for constructing a ``task_arena`` with ``attach``.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_arena.h>
+    // Defined in header <oneapi/tbb/task_arena.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        class task_arena {
-        public:
-            // ...
-            struct attach {};
+            class task_arena {
+            public:
+                // ...
+                struct attach {};
 
-            explicit task_arena(task_arena::attach);
-            void initialize(task_arena::attach);
-            // ...
-        };
+                explicit task_arena(task_arena::attach);
+                void initialize(task_arena::attach);
+                // ...
+            };
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
-    
+
 Member types and constants
 --------------------------
 
@@ -52,7 +54,7 @@ Member functions
         Unlike other ``task_arena`` constructors, this one automatically initializes
         the new ``task_arena`` when connecting to an already existing arena.
 
-        
+
 .. cpp:function:: void initialize(task_arena::attach)
 
     If an internal task arena representation currently used by the calling thread, the method ignores arena
