@@ -1,5 +1,5 @@
 .. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
-..
+......................................................
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ===============
@@ -27,6 +27,8 @@ with the ``task_arena`` currently used by the calling thread.
             template<typename F> void enqueue(F&& f) ;
         }
     }
+
+.. namespace:: tbb::this_task_arena
 
 .. cpp:function:: int current_thread_index()
 
