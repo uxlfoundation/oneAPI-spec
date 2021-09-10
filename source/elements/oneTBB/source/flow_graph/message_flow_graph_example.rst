@@ -19,7 +19,7 @@ the figure below.
 Each value enters through the ``broadcast_node<int>`` ``input``. This node broadcasts the value to both
 ``squarer`` and ``cuber``, which calculate ``x*x`` and ``x*x*x``, respectively. The output of each
 of these nodes is put to one of ``join``'s ports. A tuple containing both values is
-created by ``join_node< tuple<int,int> > join`` and forwarded to ``summer``, which adds both
+created by ``join_node<std::tuple<int,int>> join`` and forwarded to ``summer``, which adds both
 values to the running total. Both ``squarer`` and ``cuber`` allow unlimited concurrency, that is they each
 may process multiple values simultaneously. The final ``summer``, which updates a shared total, is only allowed
 to process a single incoming tuple at a time, eliminating the need for a lock around the shared value.
@@ -43,7 +43,7 @@ to process a single incoming tuple at a time, eliminating the need for a lock ar
       int &my_sum;
     public:
       sum( int &s ) : my_sum(s) {}
-      int operator()( tuple< int, int > v ) {
+      int operator()( std::tuple<int, int> v ) {
         my_sum += get<0>(v) + get<1>(v);
         return my_sum;
       }
@@ -56,8 +56,8 @@ to process a single incoming tuple at a time, eliminating the need for a lock ar
       broadcast_node<int> input(g);
       function_node<int,int> squarer( g, unlimited, square() );
       function_node<int,int> cuber( g, unlimited, cube() );
-      join_node< tuple<int,int>, queueing > join( g );
-      function_node<tuple<int,int>,int>
+      join_node<std::tuple<int,int>, queueing> join( g );
+      function_node<std::tuple<int,int>,int>
           summer( g, serial, sum(result) );
 
       make_edge( input, squarer );

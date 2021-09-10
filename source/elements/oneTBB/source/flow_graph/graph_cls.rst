@@ -63,6 +63,10 @@ Member functions
     Resets the graph according to the specified flags.
     Flags to ``reset()`` can be combined with bitwise-``or``.
 
+    .. note::
+
+        ``reset()`` is a thread-unsafe operation, don't call it concurrently.
+
 .. cpp:function:: void cancel()
 
     Cancels all tasks in the graph.

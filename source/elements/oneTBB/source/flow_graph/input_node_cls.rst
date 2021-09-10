@@ -34,7 +34,7 @@ result to all of its successors.
 
 Requirements:
 
-* The ``Output`` type must meet the `CopyConstructible` requirements from [copyconstructible] and
+* The ``Output`` type must meet the `DefaultConstructible` requirements from [defaultconstructible], `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 * The type ``Body`` must meet the :doc:`InputNodeBody requirements <../named_requirements/flow_graph/input_node_body>`.
 

@@ -60,7 +60,7 @@ a reference to a specific input port.
 Member types
 ------------
 
-* ``input_ports_type`` is an alias to a tuple of input ports.
+* ``input_ports_type`` is an alias to a ``std::tuple`` of input ports.
 * ``output_type`` is an alias to the message of type ``tagged_msg``, which is sent to successors.
 
 Member functions
