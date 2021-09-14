@@ -108,7 +108,7 @@ The following example sketches the code of an observer that pins oneTBB worker t
 
 .. code:: cpp
 
-    class pinning_observer : public oneapi/tbb::task_scheduler_observer {
+    class pinning_observer : public oneapi::tbb::task_scheduler_observer {
     public:
         affinity_mask_t m_mask; // HW affinity mask to be used for threads in an arena
         pinning_observer( oneapi::tbb::task_arena &a, affinity_mask_t mask )
