@@ -284,3 +284,9 @@ mfxGUID
    :members:
    :protected-members:
 
+mfxExtAllocationHints
+---------------------
+.. doxygenstruct:: mfxExtAllocationHints
+   :project: oneVPL
+   :members:
+   :protected-members:

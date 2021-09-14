@@ -230,3 +230,135 @@ lut3DConfig.SystemBuffer.Channel[2] = channelB;
 
 /*end5*/
 }
+
+static void prg_vpp6() {
+/*beg6*/
+
+// HDR to SDR (e.g P010 HDR signal -> NV12 SDR signal) in transcoding pipeline
+// Attach input external buffers as the below for HDR input. SDR is by default, hence no
+// extra output external buffer.
+// The input Video Signal Information
+mfxExtVideoSignalInfo inSignalInfo   = {};
+inSignalInfo.Header.BufferId         = MFX_EXTBUFF_VIDEO_SIGNAL_INFO_IN;
+inSignalInfo.Header.BufferSz         = sizeof(mfxExtVideoSignalInfo);
+inSignalInfo.VideoFullRange          = 0; // Limited range P010
+inSignalInfo.ColourPrimaries         = 9; // BT.2020
+inSignalInfo.TransferCharacteristics = 16; // ST2084
+
+// The content Light Level Information
+mfxExtContentLightLevelInfo inContentLight = {};
+inContentLight.Header.BufferId         = MFX_EXTBUFF_CONTENT_LIGHT_LEVEL_INFO;
+inContentLight.Header.BufferSz         = sizeof(mfxExtContentLightLevelInfo);
+inContentLight.MaxContentLightLevel    = 4000; // nits
+inContentLight.MaxPicAverageLightLevel = 1000; // nits
+
+// The mastering display colour volume
+mfxExtMasteringDisplayColourVolume inColourVolume = {};
+inColourVolume.Header.BufferId = MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME_IN;
+inColourVolume.Header.BufferSz = sizeof(mfxExtMasteringDisplayColourVolume);
+// Based on the needs, Please set DisplayPrimaryX/Y[3], WhitePointX/Y, and MaxDisplayMasteringLuminance,
+// MinDisplayMasteringLuminance
+
+mfxExtBuffer *ExtBufferIn[3];
+ExtBufferIn[0] = (mfxExtBuffer *)&inSignalInfo;
+ExtBufferIn[1] = (mfxExtBuffer *)&inContentLight;
+ExtBufferIn[2] = (mfxExtBuffer *)&inColourVolume;
+
+mfxSession session      = (mfxSession)0;
+mfxVideoParam VPPParams = {};
+VPPParams.NumExtParam   = 3;
+VPPParams.ExtParam      = (mfxExtBuffer **)&ExtBufferIn[0];
+MFXVideoVPP_Init(session, &VPPParams);
+
+/*end6*/
+}
+
+static void prg_vpp7() {
+/*beg7*/
+
+// SDR to HDR (e.g NV12 SDR signal -> P010 HDR signal) in transcoding pipeline
+// Attach output external buffers as the below for HDR output. SDR is by default, hence no
+// extra input external buffer.
+// The output Video Signal Information
+mfxExtVideoSignalInfo outSignalInfo   = {};
+outSignalInfo.Header.BufferId        = MFX_EXTBUFF_VIDEO_SIGNAL_INFO_OUT;
+outSignalInfo.Header.BufferSz         = sizeof(mfxExtVideoSignalInfo);
+outSignalInfo.VideoFullRange          = 0; // Limited range P010
+outSignalInfo.ColourPrimaries         = 9; // BT.2020
+outSignalInfo.TransferCharacteristics = 16; // ST2084
+
+// The mastering display colour volume
+mfxExtMasteringDisplayColourVolume outColourVolume = {};
+outColourVolume.Header.BufferId = MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME_OUT;
+outColourVolume.Header.BufferSz = sizeof(mfxExtMasteringDisplayColourVolume);
+// Based on the needs, Please set DisplayPrimaryX/Y[3], WhitePointX/Y, and MaxDisplayMasteringLuminance,
+// MinDisplayMasteringLuminance
+
+mfxExtBuffer *ExtBufferOut[2];
+ExtBufferOut[0] = (mfxExtBuffer *)&outSignalInfo;
+ExtBufferOut[2] = (mfxExtBuffer *)&outColourVolume;
+
+mfxSession session      = (mfxSession)0;
+mfxVideoParam VPPParams = {};
+VPPParams.NumExtParam   = 2;
+VPPParams.ExtParam      = (mfxExtBuffer **)&ExtBufferOut[0];
+MFXVideoVPP_Init(session, &VPPParams);
+/*end7*/
+}
+
+static void prg_vpp8() {
+/*beg8*/
+
+// HDR to HDR (e.g P010 HDR signal -> P010 HDR signal) in transcoding pipeline
+// Attach in/output external buffers as the below for HDR input/output. 
+// The input Video Signal Information
+mfxExtVideoSignalInfo inSignalInfo   = {};
+inSignalInfo.Header.BufferId         = MFX_EXTBUFF_VIDEO_SIGNAL_INFO_IN;
+inSignalInfo.Header.BufferSz         = sizeof(mfxExtVideoSignalInfo);
+inSignalInfo.VideoFullRange          = 0; // Limited range P010
+inSignalInfo.ColourPrimaries         = 9; // BT.2020
+inSignalInfo.TransferCharacteristics = 16; // ST2084
+
+// The content Light Level Information
+mfxExtContentLightLevelInfo inContentLight = {};
+inContentLight.Header.BufferId         = MFX_EXTBUFF_CONTENT_LIGHT_LEVEL_INFO;
+inContentLight.Header.BufferSz         = sizeof(mfxExtContentLightLevelInfo);
+inContentLight.MaxContentLightLevel    = 4000; // nits
+inContentLight.MaxPicAverageLightLevel = 1000; // nits
+
+// The mastering display colour volume
+mfxExtMasteringDisplayColourVolume inColourVolume = {};
+inColourVolume.Header.BufferId = MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME_IN;
+inColourVolume.Header.BufferSz = sizeof(mfxExtMasteringDisplayColourVolume);
+// Based on the needs, Please set DisplayPrimaryX/Y[3], WhitePointX/Y, and MaxDisplayMasteringLuminance,
+// MinDisplayMasteringLuminance
+
+mfxExtVideoSignalInfo outSignalInfo   = {};
+outSignalInfo.Header.BufferId         = MFX_EXTBUFF_VIDEO_SIGNAL_INFO_OUT;
+outSignalInfo.Header.BufferSz         = sizeof(mfxExtVideoSignalInfo);
+outSignalInfo.VideoFullRange          = 0; // Limited range P010
+outSignalInfo.ColourPrimaries         = 9; // BT.2020
+outSignalInfo.TransferCharacteristics = 16; // ST2084
+
+// The mastering display colour volume
+mfxExtMasteringDisplayColourVolume outColourVolume = {};
+outColourVolume.Header.BufferId = MFX_EXTBUFF_MASTERING_DISPLAY_COLOUR_VOLUME_OUT;
+outColourVolume.Header.BufferSz = sizeof(mfxExtMasteringDisplayColourVolume);
+// Based on the needs, Please set DisplayPrimaryX/Y[3], WhitePointX/Y, and MaxDisplayMasteringLuminance,
+// MinDisplayMasteringLuminance
+
+mfxExtBuffer *ExtBuffer[5];
+ExtBuffer[0] = (mfxExtBuffer *)&inSignalInfo;
+ExtBuffer[1] = (mfxExtBuffer *)&inContentLight;
+ExtBuffer[2] = (mfxExtBuffer *)&inColourVolume;
+ExtBuffer[3] = (mfxExtBuffer *)&outSignalInfo;
+ExtBuffer[4] = (mfxExtBuffer *)&outColourVolume;
+
+mfxSession session      = (mfxSession)0;
+mfxVideoParam VPPParams = {};
+VPPParams.NumExtParam   = 5;
+VPPParams.ExtParam      = (mfxExtBuffer **)&ExtBuffer[0];
+MFXVideoVPP_Init(session, &VPPParams);
+
+/*end8*/
+}

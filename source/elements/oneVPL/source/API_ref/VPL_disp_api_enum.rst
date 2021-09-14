@@ -27,4 +27,3 @@ mfxImplType
 
 .. doxygenenum:: mfxImplType
    :project: oneVPL
-

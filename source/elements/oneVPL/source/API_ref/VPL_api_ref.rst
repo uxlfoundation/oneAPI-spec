@@ -18,3 +18,4 @@ oneVPL API Reference
    VPL_defines
    VPL_ref_types
    VPL_disp_api
+   VPL_guids

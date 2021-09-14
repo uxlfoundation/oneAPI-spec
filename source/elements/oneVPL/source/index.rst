@@ -33,4 +33,5 @@ Latest published version of oneVPL specification: `<https://spec.oneapi.com/onev
    Versioning
    appendix/index
    VPL_acronyms
+   VPL_deprecation
    VPL_change_log

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -35,3 +35,9 @@ oneAPI Threading Building Blocks Specification
    mutual_exclusion.rst
    timing.rst
    info_namespace.rst
+
+.. toctree::
+   :maxdepth: 2
+   :caption: oneTBB Deprecated Interfaces:
+
+   deprecated/task_arena_attach_tag.rst

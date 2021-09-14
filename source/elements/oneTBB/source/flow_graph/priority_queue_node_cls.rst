@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -20,7 +20,6 @@ A class template that forwards messages in a priority order.
         template< typename T, typename Compare = std::less<T>>
         class priority_queue_node : public graph_node, public receiver<T>, public sender<T> {
         public:
-            typedef size_t size_type;
             explicit priority_queue_node( graph &g );
             priority_queue_node( const priority_queue_node &src );
             ~priority_queue_node();

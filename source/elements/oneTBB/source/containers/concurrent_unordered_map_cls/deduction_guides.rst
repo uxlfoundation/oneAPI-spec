@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -6,22 +6,40 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_unordered_map`` support
-class template argument deduction (since C++17):
+If possible, ``concurrent_unordered_map`` constructors support class template argument deduction (since C++17).
+Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
+provide implicitly-generated deduction guides.
+In addition, the following explicit deduction guides are provided:
 
 .. code:: cpp
 
     template <typename InputIterator,
               typename Hash = std::hash<iterator_key_t<InputIterator>>,
               typename KeyEqual = std::equal_to<iterator_key_t<InputIterator>>,
-              typename Allocator = tbb_allocator<iterator_alloc_value_t<InputIterator>>>
+              typename Allocator = tbb::tbb_allocator<iterator_alloc_value_t<InputIterator>>>
     concurrent_unordered_map( InputIterator, InputIterator,
-                              map_size_type = /*implementation_defined*/,
-                              Hash = Hash(), KeyEqual = KeyEqual(),
+                              map_size_type = {},
+                              Hash = Hash(),
+                              KeyEqual = KeyEqual(),
                               Allocator = Allocator() )
     -> concurrent_unordered_map<iterator_key_t<InputIterator>,
                                 iterator_mapped_t<InputIterator>,
-                                Hash, KeyEqual, Allocator>;
+                                Hash,
+                                KeyEqual,
+                                Allocator>;
+
+    template <typename InputIterator,
+              typename Hash,
+              typename Allocator>
+    concurrent_unordered_map( InputIterator, InputIterator,
+                              map_size_type,
+                              Hash,
+                              Allocator )
+    -> concurrent_unordered_map<iterator_key_t<InputIterator>,
+                                iterator_mapped_t<InputIterator>,
+                                Hash,
+                                std::equal_to<iterator_key_t<InputIterator>>,
+                                Allocator>;
 
     template <typename InputIterator,
               typename Allocator>
@@ -34,37 +52,18 @@ class template argument deduction (since C++17):
                                 std::equal_to<iterator_key_t<InputIterator>>,
                                 Allocator>;
 
-    template <typename InputIterator,
-              typename Allocator>
-    concurrent_unordered_map( InputIterator, InputIterator, Allocator )
-    -> concurrent_unordered_map<iterator_key_t<InputIterator>,
-                                iterator_mapped_t<InputIterator>,
-                                std::hash<iterator_key_t<InputIterator>>,
-                                std::equal_to<iterator_key_t<InputIterator>>,
-                                Allocator>;
-
-    template <typename InputIterator,
-              typename Hash,
-              typename Allocator>
-    concurrent_unordered_map( InputIterator, InputIterator,
-                              Hash, Allocator )
-    -> concurrent_unordered_map<iterator_key_t<InputIterator>,
-                                iterator_mapped_t<InputIterator>,
-                                Hash,
-                                std::equal_to<iterator_key_t<InputIterator>>,
-                                Allocator>;
-
     template <typename Key,
               typename T,
-              typename Hash = std::hash<Key>,
-              typename KeyEqual = std::equal_to<Key>,
-              typename Allocator = tbb_allocator<std::pair<Key, T>>>
-    concurrent_unordered_map( std::initializer_list<value_type>,
-                              map_size_type = /*implementation-defined*/,
+              typename Hash = std::hash<std::remove_const_t<Key>>,
+              typename KeyEqual = std::equal_to<std::remove_const_t<Key>>,
+              typename Allocator = tbb::tbb_allocator<std::pair<const Key, T>>>
+    concurrent_unordered_map( std::initializer_list<std::pair<Key, T>>,
+                              map_size_type = {},
                               Hash = Hash(),
                               KeyEqual = KeyEqual(),
                               Allocator = Allocator() )
-    -> concurrent_unordered_map<Key, T,
+    -> concurrent_unordered_map<std::remove_const_t<Key>,
+                                T,
                                 Hash,
                                 KeyEqual,
                                 Allocator>;
@@ -72,25 +71,41 @@ class template argument deduction (since C++17):
     template <typename Key,
               typename T,
               typename Allocator>
-    concurrent_unordered_map( std::initializer_list<value_type>,
-                              map_size_type, Allocator )
-    -> concurrent_unordered_map<Key, T,
-                                std::hash<Key>,
-                                std::equal_to<Key>,
+    concurrent_unordered_map( std::initializer_list<std::pair<Key, T>>,
+                              map_size_type,
+                              Allocator )
+    -> concurrent_unordered_map<std::remove_const_t<Key>,
+                                T,
+                                std::hash<std::remove_const_t<Key>>,
+                                std::equal_to<std::remove_const_t<Key>>,
+                                Allocator>;
+
+    template <typename Key,
+              typename T,
+              typename Allocator>
+    concurrent_unordered_map( std::initializer_list<std::pair<Key, T>>,
+                              Allocator )
+    -> concurrent_unordered_map<std::remove_const_t<Key>,
+                                T,
+                                std::hash<std::remove_const_t<Key>>,
+                                std::equal_to<std::remove_const_t<Key>>,
                                 Allocator>;
 
     template <typename Key,
               typename T,
               typename Hash,
               typename Allocator>
-    concurrent_unordered_map( std::initializer_list<value_type>,
-                              map_size_type, Hash, Allocator )
-    -> concurrent_unordered_map<Key, T,
+    concurrent_unordered_map( std::initializer_list<std::pair<Key, T>>,
+                              map_size_type,
+                              Hash,
+                              Allocator )
+    -> concurrent_unordered_map<std::remove_const_t<Key>,
+                                T,
                                 Hash,
-                                std::equal_to<Key>,
+                                std::equal_to<std::remove_const_t<Key>>,
                                 Allocator>;
 
-where the type ``map_size_type`` refers to the ``size_type`` member type of the deduced ``concurrent_unordered_map``
+Where the ``map_size_type`` type refers to the ``size_type`` member type of the deduced ``concurrent_unordered_map``
 and the type aliases ``iterator_key_t``, ``iterator_mapped_t``, and ``iterator_alloc_value_t``
 are defined as follows:
 
@@ -105,6 +120,13 @@ are defined as follows:
     template <typename InputIterator>
     using iterator_alloc_value_t = std::pair<std::add_const_t<iterator_key_t<InputIterator>,
                                              iterator_mapped_t<InputIterator>>>;
+
+These deduction guides only participate in the overload resolution if the following requirements are met:
+
+* The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
+* The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.
+* The ``Hash`` type does not meet the ``Allocator`` requirements.
+* The ``KeyEqual`` type does not meet the ``Allocator`` requirements.
 
 **Example**
 

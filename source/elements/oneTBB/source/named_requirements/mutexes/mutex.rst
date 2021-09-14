@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -106,6 +106,8 @@ The following table summarizes the library classes that model the ``Mutex`` requ
    ============================= ============ =============
    .                             **Fair**     **Reentrant**
    ============================= ============ =============
+   ``mutex``                     No           No
+   ----------------------------- ------------ -------------
    ``spin_mutex``                No           No
    ----------------------------- ------------ -------------
    ``speculative_spin_mutex``    No           No
@@ -123,6 +125,7 @@ See the *oneAPI Threading Building Blocks Developer Guide* for description of th
 
 See also:
 
+* :doc:`mutex <../../mutual_exclusion/mutex_cls>`
 * :doc:`spin_mutex <../../mutual_exclusion/spin_mutex_cls>`
 * :doc:`speculative_spin_mutex <../../mutual_exclusion/speculative_spin_mutex_cls>`
 * :doc:`queuing_mutex <../../mutual_exclusion/queuing_mutex_cls>`

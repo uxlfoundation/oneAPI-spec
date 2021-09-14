@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -67,7 +67,7 @@ used to obtain an updated copy.
 Member types
 ------------
 
-``output_ports_type`` is an alias to a tuple of output ports.
+``output_ports_type`` is an alias to a ``std::tuple`` of output ports.
 
 Member functions
 ----------------
@@ -133,4 +133,4 @@ it.
 
     output_ports_type& output_ports();
 
-**Returns:** a tuple of output ports.
+**Returns:** a ``std::tuple`` of output ports.
