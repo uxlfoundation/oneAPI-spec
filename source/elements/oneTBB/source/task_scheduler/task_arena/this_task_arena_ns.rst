@@ -1,5 +1,5 @@
-.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
-......................................................
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+..
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ===============
@@ -86,4 +86,4 @@ with the ``task_arena`` currently used by the calling thread.
     The behavior of this function is identical to the generic version (``template<typename F> void enqueue(F&& f)``), except the parameter type. 
 
     .. note:: 
-    ``h`` should not be empty to avoid an undefined behavior.
+        ``h`` should not be empty to avoid an undefined behavior.
