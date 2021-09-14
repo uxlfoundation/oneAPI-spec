@@ -52,7 +52,7 @@ erfc
             sycl::event erfc(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
+                    const T *a,
                     T* y,
                     sycl::vector_class<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
@@ -301,4 +301,4 @@ erfc
 
 
 
-.. |image0| image:: ../equations/GUID-0B9A59CC-C914-429D-AF87-93B16DABD291-low.jpg
+.. |image0| image:: ../equations/error_functions_plot.jpg

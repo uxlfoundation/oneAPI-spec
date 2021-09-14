@@ -58,4 +58,7 @@ API
 
 .. doxygendefine::MFX_ACCELERATIONMODESCRIPTION_VERSION
     :project: oneVPL
+
+.. doxygendefine::MFX_POOLPOLICYDESCRIPTION_VERSION
+    :project: oneVPL
    

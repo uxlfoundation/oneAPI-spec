@@ -53,8 +53,8 @@ copysign
             sycl::event copysign(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
-                    T* b,
+                    const T *a,
+                    const T *b,
                     T* y,
                     sycl::vector_class<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -62,6 +62,10 @@ Member functions
 
     Resets the graph according to the specified flags.
     Flags to ``reset()`` can be combined with bitwise-``or``.
+
+    .. note::
+
+        ``reset()`` is a thread-unsafe operation, don't call it concurrently.
 
 .. cpp:function:: void cancel()
 

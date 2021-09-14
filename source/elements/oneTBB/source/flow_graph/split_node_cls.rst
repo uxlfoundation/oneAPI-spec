@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -7,7 +7,7 @@ split_node
 ==========
 **[flow_graph.split_node]**
 
-A ``split_node`` sends each element of the incoming tuple to the output port that matches the element index
+A ``split_node`` sends each element of the incoming ``std::tuple`` to the output port that matches the element index
 in the incoming tuple.
 
 .. code:: cpp
@@ -76,4 +76,4 @@ Member functions
 
 .. cpp:function:: output_ports_type& output_ports()
 
-  **Returns**: a tuple of output ports.
+  **Returns**: a ``std::tuple`` of output ports.

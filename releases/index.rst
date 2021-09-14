@@ -175,6 +175,9 @@ oneVPL
   * - Version
     - Date
     - View
+  * - `oneVPL v2.5.0`_
+    - 2021-8-30
+    - `HTML <https://spec.oneapi.io/onevpl/2.5.0/index.html>`__
   * - `oneVPL v2.4.0`_
     - 2021-5-12
     - `HTML <https://spec.oneapi.io/onevpl/2.4.0/index.html>`__
@@ -184,6 +187,42 @@ oneVPL
 
 Release Notes
 -------------
+
+oneVPL v2.5.0
+~~~~~~~~~~~~~
+
+New in this release:
+
+* Added mfxMediaAdapterType to capability reporting.
+* Added surface pool interface.
+* Helper macro definition to simplify filter properties set up process
+  for dispatcher.
+* Added mfxExtAV1BitstreamParam, mfxExtAV1ResolutionParam and
+  mfxExtAV1TileParam for AV1e.
+* Added MFX_RESOURCE_VA_SURFACE_PTR and MFX_RESOURCE_VA_BUFFER_PTR
+  enumerators.
+* Clarified HEVC Main 10 Still Picture Profile configuration.
+* External Buffer ID of mfxExtVideoSignalInfo and
+  mfxExtMasteringDisplayColourVolume for video processing.
+* New MFX_WRN_ALLOC_TIMEOUT_EXPIRED return status. Indicates that all
+  surfaces are currently in use and timeout set by
+  mfxExtAllocationHints for allocation of new surfaces through
+  functions GetSurfaceForXXX expired.
+* Introduced universal temporal layering structure.
+* Added MFX_RESOURCE_VA_SURFACE_PTR and MFX_RESOURCE_VA_BUFFER_PTR
+  enumerators.
+* Introduced segmentation interface for AV1e, including ext-buffers
+  and enums.
+* Introduced planar I422 and I210 FourCC codes.
+
+Bug Fixes:
+
+* Dispatcher: Removed /etc/ld.so.cache from oneVPL search order.
+* mfxSurfaceArray: CDECL attribute added to the member-functions.
+
+Deprecated:
+
+* mfxExtVPPDenoise extension buffer.
 
 oneVPL v2.4.0
 ~~~~~~~~~~~~~

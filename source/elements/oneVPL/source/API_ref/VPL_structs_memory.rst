@@ -135,3 +135,11 @@ mfxFrameSurfaceInterface
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxSurfacePoolInterface
+------------------------
+
+.. doxygenstruct:: mfxSurfacePoolInterface
+   :project: oneVPL
+   :members:
+   :protected-members:

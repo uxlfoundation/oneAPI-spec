@@ -53,7 +53,7 @@ erfcinv
             sycl::event erfcinv(
                     sycl::queue& exec_queue,
                     std::int64_t n,
-                    T* a,
+                    const T *a,
                     T* y,
                     sycl::vector_class<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
@@ -286,4 +286,4 @@ erfcinv
 
 
 
-.. |image0| image:: ../equations/GUID-8C1F2803-8F8F-4795-BF16-41856C6442CF-low.jpg
+.. |image0| image:: ../equations/inverse_error_functions_plot.jpg

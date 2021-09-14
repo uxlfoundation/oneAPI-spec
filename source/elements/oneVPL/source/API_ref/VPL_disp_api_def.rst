@@ -26,3 +26,37 @@ MFX_STRFIELD_LEN
 ----------------
 .. doxygendefine:: MFX_STRFIELD_LEN
    :project: oneVPL
+
+Helper macro defintions to add property with single value.
+
+MFX_ADD_PROPERTY_U32
+--------------------
+.. doxygendefine:: MFX_ADD_PROPERTY_U32
+   :project: oneVPL
+
+MFX_ADD_PROPERTY_U16
+--------------------
+.. doxygendefine:: MFX_ADD_PROPERTY_U16
+   :project: oneVPL
+
+MFX_ADD_PROPERTY_PTR
+--------------------
+.. doxygendefine:: MFX_ADD_PROPERTY_PTR
+   :project: oneVPL
+
+Helper macro defintions to update existing property.
+
+MFX_UPDATE_PROPERTY_U32
+-----------------------
+.. doxygendefine:: MFX_UPDATE_PROPERTY_U32
+   :project: oneVPL
+
+MFX_UPDATE_PROPERTY_U16
+-----------------------
+.. doxygendefine:: MFX_UPDATE_PROPERTY_U16
+   :project: oneVPL
+
+MFX_UPDATE_PROPERTY_PTR
+-----------------------
+.. doxygendefine:: MFX_UPDATE_PROPERTY_PTR
+   :project: oneVPL

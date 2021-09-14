@@ -7,7 +7,7 @@ concurrent_multiset
 ===================
 **[containers.concurrent_multiset]**
 
-``tbb::concurrent_multiset`` is a class template that represents an unordered sequence of unique elements.
+``tbb::concurrent_multiset`` is a class template that represents an sorted sequence of elements.
 It supports concurrent insertion, lookup, and traversal, but does not support concurrent erasure.
 In this container, multiple equivalent elements can be stored.
 

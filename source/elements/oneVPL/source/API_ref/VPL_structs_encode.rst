@@ -370,3 +370,55 @@ mfxVP9TemporalLayer
    :project: oneVPL
    :members:
    :protected-members:
+
+
+mfxTemporalLayer
+----------------
+
+.. doxygenstruct:: mfxTemporalLayer
+   :project: oneVPL
+   :members:
+   :protected-members:
+   
+   
+mfxExtTemporalLayers
+--------------------
+
+.. doxygenstruct:: mfxExtTemporalLayers
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+
+mfxExtAV1BitstreamParam
+-----------------------
+
+.. doxygenstruct:: mfxExtAV1BitstreamParam
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtAV1ResolutionParam
+------------------------
+
+.. doxygenstruct:: mfxExtAV1ResolutionParam
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtAV1TileParam
+------------------
+
+.. doxygenstruct:: mfxExtAV1TileParam
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtAV1Segmentation
+---------------------
+
+.. doxygenstruct:: mfxExtAV1Segmentation
+   :project: oneVPL
+   :members:
+   :protected-members:
+  

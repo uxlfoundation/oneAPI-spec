@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -60,7 +60,7 @@ Member functions
 .. cpp:function:: overwrite_node( const overwrite_node &src )
 
     Constructs an object of type ``overwrite_node`` that belongs to the graph ``g`` with an invalid
-    internal buffer item. The buffered value and list of successors are not copied from ``src``.
+    internal buffer item. The buffered value and list of successors and predecessors are not copied from ``src``.
 
 .. cpp:function:: ~overwrite_node( )
 
