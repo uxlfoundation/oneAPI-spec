@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -20,13 +20,22 @@ Tasks can be dynamically added to the group while it is executing.
         class task_group {
         public:
             task_group();
+            task_group(task_group_context& context);
+            
             ~task_group();
 
             template<typename Func>
-            void run( Func&& f );
+            void run(Func&& f);
+            
+            template<typename Func>
+            task_handle defer(Func&& f);
+            
+            void run(task_handle&& h);
 
             template<typename Func>
-            task_group_status run_and_wait( const Func& f );
+            task_group_status run_and_wait(const Func& f);
+            
+            task_group_status run_and_wait(task_handle&& h);
 
             task_group_status wait();
             void cancel();
@@ -46,6 +55,10 @@ Member functions
 
     Constructs an empty ``task_group``.
 
+.. cpp:function:: task_group(task_group_context& context)
+
+    Constructs an empty ``task_group``. All tasks added into the ``task_group`` are associated with the ``context``.
+
 .. cpp:function:: ~task_group()
 
     Destroys the ``task_group``.
@@ -53,15 +66,47 @@ Member functions
     **Requires**: Method ``wait`` must be called before destroying a ``task_group``,
     otherwise, the destructor throws an exception.
 
-.. cpp:function:: template<typename Func> void run( Func&& f )
+.. cpp:function:: template<typename F> task_handle  defer(F&& f)
+
+    Creates a deferred task to compute ``f()`` and returns ``task_handle`` pointing to it.
+   
+    The task is not scheduled for the execution until it is explicitly requested, for example, with the ``task_group::run`` method.
+    However, the task is still added into the ``task_group``, thus the ``task_group::wait`` method waits until the ``task_handle`` 
+    is either scheduled or destroyed.
+    
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
+   
+    **Returns:** ``task_handle`` object pointing to a task to compute ``f()``.
+
+.. cpp:function:: template<typename Func> void run(Func&& f)
 
     Adds a task to compute ``f()`` and returns immediately.
     The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    
+.. cpp:function:: void run(task_handle&& h)
+   
+    Schedules the task object pointed by the ``h`` for the execution.
 
-.. cpp:function:: template<typename Func> task_group_status run_and_wait( const Func& f )
+    .. note::
+       The failure to satisfy the following conditions leads to undefined behavior:
+          * ``h`` is not empty.
+          * ``*this`` is the same ``task_group`` that ``h`` is created with.    
 
-    Equivalent to ``{run(f); return wait();}``, but guarantees that ``f()`` runs on the current thread.
+.. cpp:function:: template<typename Func> task_group_status run_and_wait(const Func& f)
+
+    Equivalent to ``{run(f); return wait();}``.
     The ``Func`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+
+    **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
+
+.. cpp:function::task_group_status run_and_wait(task_handle&& h)
+
+    Equivalent to ``{run(h); return wait();}``.
+
+    .. note::
+       The failure to satisfy the following conditions leads to undefined behavior:
+          * ``h`` is not empty.
+          * ``*this`` is the same ``task_group`` that ``h`` is created with.    
 
     **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
 

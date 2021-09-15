@@ -14,17 +14,17 @@ A class that represents an explicit, user-managed task scheduler arena.
     // Defined in header <oneapi/tbb/task_arena.h>
 
     namespace oneapi {
-    namespace tbb {
+        namespace tbb {
 
-        class task_arena {
-        public:
-            static const int automatic = /* unspecified */;
-            static const int not_initialized = /* unspecified */;
-            enum class priority : /* unspecified type */ {
-                low = /* unspecified */,
-                normal = /* unspecified */,
-                high = /* unspecified */
-            };
+            class task_arena {
+            public:
+                static const int automatic = /* unspecified */;
+                static const int not_initialized = /* unspecified */;
+                enum class priority : /* unspecified type */ {
+                    low = /* unspecified */,
+                    normal = /* unspecified */,
+                    high = /* unspecified */
+                };
 
                 struct constraints {
                     numa_node_id numa_node;
@@ -42,23 +42,25 @@ A class that represents an explicit, user-managed task scheduler arena.
                 explicit task_arena(oneapi::tbb::attach);
                 ~task_arena();
 
-            void initialize();
-            void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
-                            priority a_priority = priority::normal);
-            void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
-                            priority a_priority = priority::normal);
+                void initialize();
+                void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
+                                priority a_priority = priority::normal);
+                void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
+                                priority a_priority = priority::normal);
                 void initialize(oneapi::tbb::attach);
 
-            void terminate();
+                void terminate();
 
-            bool is_active() const;
-            int max_concurrency() const;
+                bool is_active() const;
+                int max_concurrency() const;
 
-            template<typename F> auto execute(F&& f) -> decltype(f());
-            template<typename F> void enqueue(F&& f);
-        };
+                template<typename F> auto execute(F&& f) -> decltype(f());
+                template<typename F> void enqueue(F&& f);
 
-    } // namespace tbb
+                void enqueue(task_handle&& h);
+            };
+
+        } // namespace tbb
     } // namespace oneapi
 
 A ``task_arena`` class represents a place where threads may share and execute tasks.
@@ -248,6 +250,15 @@ Member functions
 
         Any number of threads outside of the arena can submit work to the arena and be blocked.
         However, only the maximal number of threads specified for the arena can participate in executing the work.
+
+.. cpp:function:: void enqueue(task_handle&& h)   
+     
+    Enqueues a task owned by ``h`` into the ``task_arena`` for processing. 
+ 
+    The behavior of this function is identical to the generic version (``template<typename F> void task_arena::enqueue(F&& f)``), except parameter type. 
+
+    .. note:: 
+       ``h`` should not be empty to avoid an undefined behavior.
 
 Example
 -------

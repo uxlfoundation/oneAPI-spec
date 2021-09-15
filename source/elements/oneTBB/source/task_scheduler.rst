@@ -47,6 +47,7 @@ Task Group
 
    task_scheduler/task_group/task_group_cls.rst
    task_scheduler/task_group/task_group_status_enum.rst
+   task_scheduler/task_group/task_handle.rst
 
 Task Arena
 ----------
