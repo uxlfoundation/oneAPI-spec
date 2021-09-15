@@ -18,14 +18,16 @@ Its enumerated values and their meanings are as follows:
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_pipeline.h>
+    // Defined in header <oneapi/tbb/parallel_pipeline.h>
+    
+    namespace oneapi {
+        namespace tbb {
 
-    namespace tbb {
+            enum class filter_mode {
+                parallel = /*implementation-defined*/,
+                serial_in_order = /*implementation-defined*/,
+                serial_out_of_order = /*implementation-defined*/
+            };
 
-        enum class filter_mode {
-            parallel = /*implementation-defined*/,
-            serial_in_order = /*implementation-defined*/,
-            serial_out_of_order = /*implementation-defined*/
-        };
-
-    }
+        } // namespace tbb
+    } // namespace oneapi

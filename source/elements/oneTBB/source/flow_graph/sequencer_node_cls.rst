@@ -11,8 +11,9 @@ A node that forwards messages in a sequence order.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -29,6 +30,7 @@ A node that forwards messages in a sequence order.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -53,7 +55,7 @@ user-provided ``Sequencer`` function object.
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::sequencer_node
+.. namespace:: oneapi::tbb::flow::sequencer_node
 
 .. cpp:function:: template<typename Sequencer> \
                   sequencer_node( graph& g, const Sequencer &s )

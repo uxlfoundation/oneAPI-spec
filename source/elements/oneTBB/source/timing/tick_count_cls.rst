@@ -13,6 +13,7 @@ duration ``tick_count::interval_t``, which can be converted to seconds.
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
 
        class tick_count {
@@ -27,6 +28,7 @@ duration ``tick_count::interval_t``, which can be converted to seconds.
        };
 
    } // namespace tbb
+   } // namespace oneapi
 
 ``tick_count()``
   Constructs ``tick_count`` with an unspecified wall clock timestamp.
@@ -56,6 +58,7 @@ A ``tick_count::interval_t`` represents wall clock duration.
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
 
        class tick_count::interval_t {
@@ -70,6 +73,7 @@ A ``tick_count::interval_t`` represents wall clock duration.
        };
 
    } // namespace tbb
+   } // namespace oneapi
 
 
 ``interval_t()``
@@ -103,21 +107,21 @@ These functions provide arithmetic binary operations with wall clock timestamps 
 
 .. code:: cpp
 
-   tbb::tick_count::interval_t operator-( const tbb::tick_count&, const tbb::tick_count& );
-   tbb::tick_count::interval_t operator+( const tbb::tick_count::interval_t&, const tbb::tick_count::interval_t& );
-   tbb::tick_count::interval_t operator-( const tbb::tick_count::interval_t&, const tbb::tick_count::interval_t& );
+   oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count&, const oneapi::tbb::tick_count& );
+   oneapi::tbb::tick_count::interval_t operator+( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& );
+   oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& );
 
 The namespace where these functions are defined is unspecified as long as they may be used in respective binary operation expressions on ``tick_count`` and ``tick_count::interval_t`` objects. 
 For example, an implementation may define the classes and functions in the same unspecified internal namespace, 
-and define  ``tbb::tick_count`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup. 
+and define  ``oneapi::tbb::tick_count`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup. 
 
 
-``tbb::tick_count::interval_t operator-( const tbb::tick_count&, const tbb::tick_count& )``
+``oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count&, const oneapi::tbb::tick_count& )``
   Returns ``interval_t`` representing the duration between two given wall clock timestamps.
 
-``tbb::tick_count::interval_t operator+( const tbb::tick_count::interval_t&, const tbb::tick_count::interval_t& )``
+``oneapi::tbb::tick_count::interval_t operator+( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& )``
   Returns ``interval_t`` representing the sum of two given intervals.
 
-``tbb::tick_count::interval_t operator-( const tbb::tick_count::interval_t&, const tbb::tick_count::interval_t& )``
+``oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& )``
   Returns ``interval_t`` representing the difference of two given intervals.
   

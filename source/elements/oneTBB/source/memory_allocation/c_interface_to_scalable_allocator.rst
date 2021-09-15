@@ -11,7 +11,7 @@ Low-level interface for scalable memory allocation.
 
 .. code:: cpp
 
-    // Defined in header <tbb/scalable_allocator.h>
+    // Defined in header <oneapi/tbb/scalable_allocator.h>
 
     extern "C" {
         // Scalable analogs of C memory allocator

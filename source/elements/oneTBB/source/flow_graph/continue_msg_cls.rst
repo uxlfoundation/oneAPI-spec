@@ -12,8 +12,9 @@ the sender has completed.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -21,3 +22,4 @@ the sender has completed.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi

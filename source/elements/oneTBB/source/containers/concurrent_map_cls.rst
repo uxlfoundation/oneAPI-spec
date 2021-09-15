@@ -7,7 +7,7 @@ concurrent_map
 ==============
 **[containers.concurrent_map]**
 
-``tbb::concurrent_map`` is a class template that represents a sorted associative container.
+``oneapi::tbb::concurrent_map`` is a class template that represents a sorted associative container.
 It stores unique elements and supports concurrent insertion, lookup, and traversal,
 but does not support concurrent erasure.
 
@@ -16,218 +16,220 @@ Class Template Synopsis
 
 .. code:: cpp
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template <typename Key,
-                  typename T,
-                  typename Compare = std::less<Key>,
-                  typename Allocator = tbb_allocator<std::pair<const Key, T>>
-        class concurrent_map {
-        public:
-            using key_type = Key;
-            using mapped_type = T;
-            using value_type = std::pair<const Key, T>;
+            template <typename Key,
+                      typename T,
+                      typename Compare = std::less<Key>,
+                      typename Allocator = tbb_allocator<std::pair<const Key, T>>
+            class concurrent_map {
+            public:
+                using key_type = Key;
+                using mapped_type = T;
+                using value_type = std::pair<const Key, T>;
 
-            using size_type = <implementation-defined unsigned integer type>;
-            using difference_type = <implementation-defined signed integer type>;
+                using size_type = <implementation-defined unsigned integer type>;
+                using difference_type = <implementation-defined signed integer type>;
 
-            using key_compare = Compare;
-            using allocator_type = Allocator;
+                using key_compare = Compare;
+                using allocator_type = Allocator;
 
-            using reference = value_type&;
-            using const_reference = const value_type&;
-            using pointer = std::allocator_traits<Allocator>::pointer;
-            using const_pointer = std::allocator_traits<Allocator>::const_pointer;
+                using reference = value_type&;
+                using const_reference = const value_type&;
+                using pointer = std::allocator_traits<Allocator>::pointer;
+                using const_pointer = std::allocator_traits<Allocator>::const_pointer;
 
-            using iterator = <implementation-defined ForwardIterator>;
-            using const_iterator = <implementation-defined constant ForwardIterator>;
+                using iterator = <implementation-defined ForwardIterator>;
+                using const_iterator = <implementation-defined constant ForwardIterator>;
 
-            using node_type = <implementation-defined node handle>;
+                using node_type = <implementation-defined node handle>;
 
-            using range_type = <implementation-defined range>;
-            using const_range_type = <implementation-defined constant node handle>;
+                using range_type = <implementation-defined range>;
+                using const_range_type = <implementation-defined constant node handle>;
 
-            class value_compare;
+                class value_compare;
 
-            // Construction, destruction, copying
-            concurrent_map();
-            explicit concurrent_map( const key_compare& comp,
-                                    const allocator_type& alloc = allocator_type() );
+                // Construction, destruction, copying
+                concurrent_map();
+                explicit concurrent_map( const key_compare& comp,
+                                        const allocator_type& alloc = allocator_type() );
 
-            explicit concurrent_map( const allocator_type& alloc );
+                explicit concurrent_map( const allocator_type& alloc );
 
-            template <typename InputIterator>
-            concurrent_map( InputIterator first, InputIterator last,
-                            const key_compare& comp = key_compare(),
-                            const allocator_type& alloc = allocator_type() );
+                template <typename InputIterator>
+                concurrent_map( InputIterator first, InputIterator last,
+                                const key_compare& comp = key_compare(),
+                                const allocator_type& alloc = allocator_type() );
 
-            template <typename InputIterator>
-            concurrent_map( InputIterator first, InputIterator last,
+                template <typename InputIterator>
+                concurrent_map( InputIterator first, InputIterator last,
+                                const allocator_type& alloc );
+
+                concurrent_map( std::initializer_list<value_type> init,
+                                const key_compare& comp = key_compare(),
+                                const allocator_type& alloc = allocator_type() );
+
+                concurrent_map( std::initializer_list<value_type> init, const allocator_type& alloc );
+
+                concurrent_map( const concurrent_map& other );
+                concurrent_map( const concurrent_map& other,
                             const allocator_type& alloc );
 
-            concurrent_map( std::initializer_list<value_type> init,
-                            const key_compare& comp = key_compare(),
-                            const allocator_type& alloc = allocator_type() );
+                concurrent_map( concurrent_map&& other );
+                concurrent_map( concurrent_map&& other,
+                                const allocator_type& alloc );
 
-            concurrent_map( std::initializer_list<value_type> init, const allocator_type& alloc );
+                ~concurrent_map();
 
-            concurrent_map( const concurrent_map& other );
-            concurrent_map( const concurrent_map& other,
-                            const allocator_type& alloc );
+                concurrent_map& operator=( const concurrent_map& other );
+                concurrent_map& operator=( concurrent_map&& other );
+                concurrent_map& operator=( std::initializer_list<value_type> init );
 
-            concurrent_map( concurrent_map&& other );
-            concurrent_map( concurrent_map&& other,
-                            const allocator_type& alloc );
+                allocator_type get_allocator() const;
 
-            ~concurrent_map();
+                // Element access
+                value_type& at( const key_type& key );
+                const value_type& at( const key_type& key ) const;
 
-            concurrent_map& operator=( const concurrent_map& other );
-            concurrent_map& operator=( concurrent_map&& other );
-            concurrent_map& operator=( std::initializer_list<value_type> init );
+                value_type& operator[]( const key_type& key );
+                value_type& operator[]( key_type&& key );
 
-            allocator_type get_allocator() const;
+                // Iterators
+                iterator begin();
+                const_iterator begin() const;
+                const_iterator cbegin() const;
 
-            // Element access
-            value_type& at( const key_type& key );
-            const value_type& at( const key_type& key ) const;
+                iterator end();
+                const_iterator end() const;
+                const_iterator cend() const;
 
-            value_type& operator[]( const key_type& key );
-            value_type& operator[]( key_type&& key );
+                // Size and capacity
+                bool empty() const;
+                size_type size() const;
+                size_type max_size() const;
 
-            // Iterators
-            iterator begin();
-            const_iterator begin() const;
-            const_iterator cbegin() const;
+                // Concurrently safe modifiers
+                std::pair<iterator, bool> insert( const value_type& value );
 
-            iterator end();
-            const_iterator end() const;
-            const_iterator cend() const;
+                iterator insert( const_iterator hint, const value_type& value );
 
-            // Size and capacity
-            bool empty() const;
-            size_type size() const;
-            size_type max_size() const;
+                template <typename P>
+                std::pair<iterator, bool> insert( P&& value );
 
-            // Concurrently safe modifiers
-            std::pair<iterator, bool> insert( const value_type& value );
+                template <typename P>
+                iterator insert( const_iterator hint, P&& value );
 
-            iterator insert( const_iterator hint, const value_type& value );
+                std::pair<iterator, bool> insert( value_type&& value );
 
-            template <typename P>
-            std::pair<iterator, bool> insert( P&& value );
+                iterator insert( const_iterator hint, value_type&& value );
 
-            template <typename P>
-            iterator insert( const_iterator hint, P&& value );
+                template <typename InputIterator>
+                void insert( InputIterator first, InputIterator last );
 
-            std::pair<iterator, bool> insert( value_type&& value );
+                void insert( std::initializer_list<value_type> init );
 
-            iterator insert( const_iterator hint, value_type&& value );
+                std::pair<iterator, bool> insert( node_type&& nh );
+                iterator insert( const_iterator hint, node_type&& nh );
 
-            template <typename InputIterator>
-            void insert( InputIterator first, InputIterator last );
+                template <typename... Args>
+                std::pair<iterator, bool> emplace( Args&&... args );
 
-            void insert( std::initializer_list<value_type> init );
+                template <typename... Args>
+                iterator emplace_hint( const_iterator hint, Args&&... args );
 
-            std::pair<iterator, bool> insert( node_type&& nh );
-            iterator insert( const_iterator hint, node_type&& nh );
+                template <typename SrcCompare>
+                void merge( concurrent_map<Key, T, SrcCompare, Allocator>& source );
 
-            template <typename... Args>
-            std::pair<iterator, bool> emplace( Args&&... args );
+                template <typename SrcCompare>
+                void merge( concurrent_map<Key, T, SrcCompare, Allocator>&& source );
 
-            template <typename... Args>
-            iterator emplace_hint( const_iterator hint, Args&&... args );
+                template <typename SrcCompare>
+                void merge( concurrent_multimap<Key, T, SrcCompare, Allocator>& source );
 
-            template <typename SrcCompare>
-            void merge( concurrent_map<Key, T, SrcCompare, Allocator>& source );
+                template <typename SrcCompare>
+                void merge( concurrent_multimap<Key, T, SrcCompare, Allocator>&& source );
 
-            template <typename SrcCompare>
-            void merge( concurrent_map<Key, T, SrcCompare, Allocator>&& source );
+                // Concurrently unsafe modifiers
+                void clear();
 
-            template <typename SrcCompare>
-            void merge( concurrent_multimap<Key, T, SrcCompare, Allocator>& source );
+                iterator unsafe_erase( const_iterator pos );
+                iterator unsafe_erase( iterator pos );
 
-            template <typename SrcCompare>
-            void merge( concurrent_multimap<Key, T, SrcCompare, Allocator>&& source );
+                iterator unsafe_erase( const_iterator first, const_iterator last );
 
-            // Concurrently unsafe modifiers
-            void clear();
+                size_type unsafe_erase( const key_type& key );
 
-            iterator unsafe_erase( const_iterator pos );
-            iterator unsafe_erase( iterator pos );
+                template <typename K>
+                size_type unsafe_erase( const K& key );
 
-            iterator unsafe_erase( const_iterator first, const_iterator last );
+                node_type unsafe_extract( const_iterator pos );
+                node_type unsafe_extract( iterator pos );
 
-            size_type unsafe_erase( const key_type& key );
+                node_type unsafe_extract( const key_type& key );
 
-            template <typename K>
-            size_type unsafe_erase( const K& key );
+                template <typename K>
+                node_type unsafe_extract( const K& key );
 
-            node_type unsafe_extract( const_iterator pos );
-            node_type unsafe_extract( iterator pos );
+                void swap( concurrent_map& other );
 
-            node_type unsafe_extract( const key_type& key );
+                // Lookup
+                size_type count( const key_type& key );
 
-            template <typename K>
-            node_type unsafe_extract( const K& key );
+                template <typename K>
+                size_type count( const K& key );
 
-            void swap( concurrent_map& other );
+                iterator find( const key_type& key );
+                const_iterator find( const key_type& key ) const;
 
-            // Lookup
-            size_type count( const key_type& key );
+                template <typename K>
+                iterator find( const K& key );
 
-            template <typename K>
-            size_type count( const K& key );
+                template <typename K>
+                const_iterator find( const K& key ) const;
 
-            iterator find( const key_type& key );
-            const_iterator find( const key_type& key ) const;
+                bool contains( const key_type& key ) const;
 
-            template <typename K>
-            iterator find( const K& key );
+                template <typename K>
+                bool contains( const K& key ) const;
 
-            template <typename K>
-            const_iterator find( const K& key ) const;
+                std::pair<iterator, iterator> equal_range( const key_type& key );
+                std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
 
-            bool contains( const key_type& key ) const;
+                template <typename K>
+                std::pair<iterator, iterator>  equal_range( const K& key );
+                std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
 
-            template <typename K>
-            bool contains( const K& key ) const;
+                iterator lower_bound( const key_type& key );
+                const_iterator lower_bound( const key_type& key ) const;
 
-            std::pair<iterator, iterator> equal_range( const key_type& key );
-            std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
+                template <typename K>
+                iterator lower_bound( const K& key );
 
-            template <typename K>
-            std::pair<iterator, iterator>  equal_range( const K& key );
-            std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
+                template <typename K>
+                const_iterator lower_bound( const K& key ) const;
 
-            iterator lower_bound( const key_type& key );
-            const_iterator lower_bound( const key_type& key ) const;
+                iterator upper_bound( const key_type& key );
+                const_iterator upper_bound( const key_type& key ) const;
 
-            template <typename K>
-            iterator lower_bound( const K& key );
+                template <typename K>
+                iterator upper_bound( const K& key );
 
-            template <typename K>
-            const_iterator lower_bound( const K& key ) const;
+                template <typename K>
+                const_iterator upper_bound( const K& key ) const;
 
-            iterator upper_bound( const key_type& key );
-            const_iterator upper_bound( const key_type& key ) const;
+                // Observers
+                key_compare key_comp() const;
 
-            template <typename K>
-            iterator upper_bound( const K& key );
+                value_compare value_comp() const;
 
-            template <typename K>
-            const_iterator upper_bound( const K& key ) const;
+                // Parallel iteration
+                range_type range();
+                const_range_type range() const;
+            }; // class concurrent_map
 
-            // Observers
-            key_compare key_comp() const;
-
-            value_compare value_comp() const;
-
-            // Parallel iteration
-            range_type range();
-            const_range_type range() const;
-        }; // class concurrent_map
-
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -265,11 +267,11 @@ Non-member functions
 --------------------
 
 These functions provide binary and lexicographical comparison and swap operations
-on ``tbb::concurrent_map`` objects.
+on ``oneapi::tbb::concurrent_map`` objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_map`` as a type alias for which
+in the same internal namespace and define ``oneapi::tbb::concurrent_map`` as a type alias for which
 the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp

@@ -20,8 +20,9 @@ that ``cache_aligned_allocator`` implicitly adds pad memory. Therefore allocatin
 
 .. code:: cpp
 
-    // Defined in header <tbb/cache_aligned_allocator.h>
+    // Defined in header <oneapi/tbb/cache_aligned_allocator.h>
 
+    namespace oneapi {
     namespace tbb {
         template<typename T> class cache_aligned_allocator {
         public:
@@ -38,7 +39,8 @@ that ``cache_aligned_allocator`` implicitly adds pad memory. Therefore allocatin
             void deallocate(T*, size_type);
             size_type max_size() const noexcept;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member Functions
 ----------------
@@ -75,7 +77,7 @@ These functions provide comparison operations between two ``cache_aligned_alloca
 
 The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``cache_aligned_allocator`` objects.
 For example, an implementation may define the classes and functions in the same unspecified internal namespace,
-and define ``tbb::cache_aligned_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
+and define ``oneapi::tbb::cache_aligned_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
 
 .. cpp:function:: template<typename T, typename U> \
     bool operator==(const cache_aligned_allocator<T>&, const cache_aligned_allocator<U>&) noexcept

@@ -11,29 +11,31 @@ Function template that computes reduction over a range, with deterministic split
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_reduce.h>
+    // Defined in header <oneapi/tbb/parallel_reduce.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
-        template<typename Range, typename Body>
-        void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner);
-        template<typename Range, typename Body>
-        void parallel_deterministic_reduce( const Range& range, Body& body, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_deterministic_reduce( const Range& range, Body& body);
+            template<typename Range, typename Body>
+            void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
+            template<typename Range, typename Body>
+            void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner);
+            template<typename Range, typename Body>
+            void parallel_deterministic_reduce( const Range& range, Body& body, task_group_context& group);
+            template<typename Range, typename Body>
+            void parallel_deterministic_reduce( const Range& range, Body& body);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 A ``partitioner`` type may be one of the following entities:
 

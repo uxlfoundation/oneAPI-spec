@@ -66,15 +66,15 @@ These deduction guides only participate in the overload resolution if the follow
 
 .. code:: cpp
 
-    #include <tbb/concurrent_set.h>
+    #include <oneapi/tbb/concurrent_set.h>
     #include <vector>
 
     int main() {
         std::vector<int> v;
 
         // Deduces cs1 as concurrent_multiset<int>
-        tbb::concurrent_multiset cs1(v.begin(), v.end());
+        oneapi::tbb::concurrent_multiset cs1(v.begin(), v.end());
 
         // Deduces cs2 as concurrent_multiset<int>
-        tbb::concurrent_multiset cs2({1, 2, 3});
+        oneapi::tbb::concurrent_multiset cs2({1, 2, 3});
     }

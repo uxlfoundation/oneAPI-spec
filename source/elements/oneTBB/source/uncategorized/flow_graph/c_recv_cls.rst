@@ -33,7 +33,7 @@ Header
 
 .. code:: cpp
 
-   #include "tbb/flow_graph.h"
+   #include "oneapi/tbb/flow_graph.h"
 
 
 Description
@@ -54,6 +54,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
    namespace flow {
     
@@ -72,8 +73,9 @@ Members
        virtual void execute() = 0;
    };
     
-   }
-   }
+   } // namespace flow
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the
 members of this class.

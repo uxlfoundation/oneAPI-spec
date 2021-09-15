@@ -11,26 +11,28 @@ Function template that processes work items in parallel.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_for_each.h>
+    // Defined in header <oneapi/tbb/parallel_for_each.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename InputIterator, typename Body>
-        void parallel_for_each( InputIterator first, InputIterator last, Body body );
-        template<typename InputIterator, typename Body>
-        void parallel_for_each( InputIterator first, InputIterator last, Body body, task_group_context& group );
+            template<typename InputIterator, typename Body>
+            void parallel_for_each( InputIterator first, InputIterator last, Body body );
+            template<typename InputIterator, typename Body>
+            void parallel_for_each( InputIterator first, InputIterator last, Body body, task_group_context& group );
 
-        template<typename Container, typename Body>
-        void parallel_for_each( Container& c, Body body );
-        template<typename Container, typename Body>
-        void parallel_for_each( Container& c, Body body, task_group_context& group );
+            template<typename Container, typename Body>
+            void parallel_for_each( Container& c, Body body );
+            template<typename Container, typename Body>
+            void parallel_for_each( Container& c, Body body, task_group_context& group );
 
-        template<typename Container, typename Body>
-        void parallel_for_each( const Container& c, Body body );
-        template<typename Container, typename Body>
-        void parallel_for_each( const Container& c, Body body, task_group_context& group );
+            template<typename Container, typename Body>
+            void parallel_for_each( const Container& c, Body body );
+            template<typename Container, typename Body>
+            void parallel_for_each( const Container& c, Body body, task_group_context& group );
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 

@@ -6,7 +6,7 @@
 Deduction guides
 ================
 
-If possible, ``concurrent_priority_queue`` constructors support class template argument deduction (since C++17).
+If possible, ``oneapi::tbb::concurrent_priority_queue`` constructors support class template argument deduction (since C++17).
 Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
 provide implicitly-generated deduction guides.
 In addition, the following explicit deduction guides are provided:
@@ -66,16 +66,16 @@ These deduction guides only participate in the overload resolution if the follow
 
 .. code:: cpp
 
-    #include <tbb/concurrent_priority_queue.h>
+    #include <oneapi/tbb/concurrent_priority_queue.h>
     #include <vector>
     #include <functional>
 
     int main() {
         std::vector<int> vec;
-
-        // Deduces cpq1 as tbb::concurrent_priority_queue<int>
-        tbb::concurrent_priority_queue cpq1(vec.begin(), vec.end());
-
-        // Deduces cpq2 as tbb::concurrent_priority_queue<int, std::greater>
-        tbb::concurrent_priority_queue cpq2(vec.begin(), vec.end(), std::greater{});
+        
+        // Deduces cpq1 as oneapi::tbb::concurrent_priority_queue<int>
+        oneapi::tbb::concurrent_priority_queue cpq1(vec.begin(), vec.end());
+        
+        // Deduces cpq2 as oneapi::tbb::concurrent_priority_queue<int, std::greater>
+        oneapi::tbb::concurrent_priority_queue cpq2(vec.begin(), vec.end(), std::greater{});
     }

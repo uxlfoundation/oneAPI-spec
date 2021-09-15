@@ -17,39 +17,41 @@ A ``blocked_range2d`` meets the :doc:`Range requirements <../../named_requiremen
 
 .. code:: cpp
 
-    // Defined in header <tbb/blocked_range2d.h>
+    // Defined in header <oneapi/tbb/blocked_range2d.h>
+    
+    namespace oneapi {
+        namespace tbb {
 
-    namespace tbb {
+            template<typename RowValue, typename ColValue=RowValue>
+            class blocked_range2d {
+            public:
+                // Types
+                using row_range_type = blocked_range<RowValue>;
+                using col_range_type = blocked_range<ColValue>;
 
-        template<typename RowValue, typename ColValue=RowValue>
-        class blocked_range2d {
-        public:
-            // Types
-            using row_range_type = blocked_range<RowValue>;
-            using col_range_type = blocked_range<ColValue>;
+                // Constructors
+                blocked_range2d(
+                    RowValue row_begin, RowValue row_end,
+                    typename row_range_type::size_type row_grainsize,
+                    ColValue col_begin, ColValue col_end,
+                    typename col_range_type::size_type col_grainsize);
+                blocked_range2d( RowValue row_begin, RowValue row_end,
+                                ColValue col_begin, ColValue col_end );
+                // Splitting constructors
+                blocked_range2d( blocked_range2d& r, split );
+                blocked_range2d( blocked_range2d& r, proportional_split proportion );
 
-            // Constructors
-            blocked_range2d(
-                RowValue row_begin, RowValue row_end,
-                typename row_range_type::size_type row_grainsize,
-                ColValue col_begin, ColValue col_end,
-                typename col_range_type::size_type col_grainsize);
-            blocked_range2d( RowValue row_begin, RowValue row_end,
-                            ColValue col_begin, ColValue col_end );
-            // Splitting constructors
-            blocked_range2d( blocked_range2d& r, split );
-            blocked_range2d( blocked_range2d& r, proportional_split proportion );
+                // Capacity
+                bool empty() const;
 
-            // Capacity
-            bool empty() const;
+                // Access
+                bool is_divisible() const;
+                const row_range_type& rows() const;
+                const col_range_type& cols() const;
+            };
 
-            // Access
-            bool is_divisible() const;
-            const row_range_type& rows() const;
-            const col_range_type& cols() const;
-        };
-
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 

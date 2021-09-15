@@ -76,15 +76,15 @@ These deduction guides only participate in the overload resolution if the follow
 
 .. code:: cpp
 
-  #include <tbb/concurrent_map.h>
+  #include <oneapi/tbb/concurrent_map.h>
   #include <vector>
 
   int main() {
       std::vector<std::pair<int, float>> v;
 
       // Deduces cm1 as concurrent_multimap<int, float>
-      tbb::concurrent_multimap cm1(v.begin(), v.end());
+      oneapi::tbb::concurrent_multimap cm1(v.begin(), v.end());
 
       // Deduces cm2 as concurrent_multimap<int, float>
-      tbb::concurrent_multimap cm2({std::pair(1, 2f), std::pair(2, 3f)});
+      oneapi::tbb::concurrent_multimap cm2({std::pair(1, 2f), std::pair(2, 3f)});
   }

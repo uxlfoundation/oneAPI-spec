@@ -101,7 +101,7 @@ These deduction guides only participate in the overload resolution if the follow
 
 .. code:: cpp
 
-    #include <tbb/concurrent_unordered_set.h>
+    #include <oneapi/tbb/concurrent_unordered_set.h>
     #include <vector>
     #include <functional>
 
@@ -111,8 +111,8 @@ These deduction guides only participate in the overload resolution if the follow
         std::vector<int> v;
 
         // Deduces s1 as concurrent_unordered_multiset<int>
-        tbb::concurrent_unordered_multiset s1(v.begin(), v.end());
+        oneapi::tbb::concurrent_unordered_multiset s1(v.begin(), v.end());
 
         // Deduces s2 as concurrent_unordered_multiset<int, CustomHasher>;
-        tbb::concurrent_unordered_multiset s2(v.begin(), v.end(), CustomHasher{});
+        oneapi::tbb::concurrent_unordered_multiset s2(v.begin(), v.end(), CustomHasher{});
     }

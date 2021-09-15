@@ -11,38 +11,40 @@ Function template that performs parallel iteration over a range of values.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_for.h>
+    // Defined in header <oneapi/tbb/parallel_for.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner, task_group_context& group);
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, const Func& f, task_group_context& group);
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner);
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, const Func& f);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner, task_group_context& group);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, const Func& f, task_group_context& group);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, const Func& f);
 
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner, task_group_context& group);
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, Index step, const Func& f, task_group_context& group);
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner);
-        template<typename Index, typename Func>
-        void parallel_for(Index first, Index last, Index step, const Func& f);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner, task_group_context& group);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, Index step, const Func& f, task_group_context& group);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner);
+            template<typename Index, typename Func>
+            void parallel_for(Index first, Index last, Index step, const Func& f);
 
-        template<typename Range, typename Body>
-        void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_for(const Range& range, const Body& body, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner);
-        template<typename Range, typename Body>
-        void parallel_for(const Range& range, const Body& body);
+            template<typename Range, typename Body>
+            void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner, task_group_context& group);
+            template<typename Range, typename Body>
+            void parallel_for(const Range& range, const Body& body, task_group_context& group);
+            template<typename Range, typename Body>
+            void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner);
+            template<typename Range, typename Body>
+            void parallel_for(const Range& range, const Body& body);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 A ``partitioner`` type may be one of the following entities:
 
@@ -58,7 +60,7 @@ Requirements:
 * The ``Index`` type must meet the :doc:`ParallelForIndex requirements <../../named_requirements/algorithms/par_for_index>`.
 * The ``Func`` type must meet the :doc:`ParallelForFunc requirements <../../named_requirements/algorithms/par_for_func>`.
 
-The ``tbb::parallel_for(first, last, step, f)`` overload represents parallel execution of the loop:
+The ``oneapi::tbb::parallel_for(first, last, step, f)`` overload represents parallel execution of the loop:
 
 .. code:: cpp
 

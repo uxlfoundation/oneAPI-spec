@@ -14,8 +14,9 @@ otherwise, it reverts to using ``std::malloc`` and ``std::free``.
 
 .. code:: cpp
 
-    // Defined in header <tbb/tbb_allocator.h>
+    // Defined in header <oneapi/tbb/tbb_allocator.h>
 
+    namespace oneapi {
     namespace tbb {
         template<typename T> class tbb_allocator {
         public:
@@ -38,12 +39,13 @@ otherwise, it reverts to using ``std::malloc`` and ``std::free``.
 
             static malloc_type allocator_type();
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member Functions
 ----------------
 
-.. namespace:: tbb::tbb_allocator
+.. namespace:: oneapi::tbb::tbb_allocator
 	       
 .. cpp:function:: T* allocate(size_type n)
 
@@ -74,7 +76,7 @@ These functions provide comparison operations between two ``tbb_allocator`` inst
 
 The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``tbb_allocator`` objects.
 For example, an implementation may define the classes and functions in the same unspecified internal namespace
-and define ``tbb::tbb_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
+and define ``oneapi::tbb::tbb_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
 
 .. cpp:function:: template<typename T, typename U> \
     bool operator==(const tbb_allocator<T>&, const tbb_allocator<U>&) noexcept

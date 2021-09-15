@@ -21,35 +21,38 @@ to the loop templates ``parallel_for``, ``parallel_reduce``, or ``parallel_scan`
 
 .. code:: cpp
 
-    // Defined in header <tbb/blocked_range.h>
+    // Defined in header <oneapi/tbb/blocked_range.h>
+    
+    namespace oneapi {
+        namespace tbb {
 
-    namespace tbb {
+            template<typename Value>
+            class blocked_range {
+            public:
+                // types
+                using size_type = size_t;
+                using const_iterator = Value;
 
-        template<typename Value>
-        class blocked_range {
-        public:
-            // types
-            using size_type = size_t;
-            using const_iterator = Value;
+                // constructors
+                blocked_range( Value begin, Value end, size_type grainsize=1 );
+                blocked_range( blocked_range& r, split );
+                blocked_range( blocked_range& r, proportional_split& proportion );
 
-            // constructors
-            blocked_range( Value begin, Value end, size_type grainsize=1 );
-            blocked_range( blocked_range& r, split );
-            blocked_range( blocked_range& r, proportional_split& proportion );
+                // capacity
+                size_type size() const;
+                bool empty() const;
 
-            // capacity
-            size_type size() const;
-            bool empty() const;
+                // access
+                size_type grainsize() const;
+                bool is_divisible() const;
 
-            // access
-            size_type grainsize() const;
-            bool is_divisible() const;
+                // iterators
+                const_iterator begin() const;
+                const_iterator end() const;
+            };
 
-            // iterators
-            const_iterator begin() const;
-            const_iterator end() const;
-       };
-    }
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 

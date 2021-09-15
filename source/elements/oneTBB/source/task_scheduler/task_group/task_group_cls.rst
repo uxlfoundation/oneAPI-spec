@@ -12,8 +12,9 @@ Tasks can be dynamically added to the group while it is executing.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_group.h>
+    // Defined in header <oneapi/tbb/task_group.h>
 
+    namespace oneapi {
     namespace tbb {
 
         class task_group {
@@ -34,11 +35,12 @@ Tasks can be dynamically added to the group while it is executing.
         bool is_current_task_group_canceling();
 
     } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------
 
-.. namespace:: tbb::task_group
+.. namespace:: oneapi::tbb::task_group
 
 .. cpp:function:: task_group()
 

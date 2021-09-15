@@ -11,21 +11,23 @@ Function template that sorts a sequence.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_sort.h>
+    // Defined in header <oneapi/tbb/parallel_sort.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename RandomAccessIterator>
-        void parallel_sort( RandomAccessIterator begin, RandomAccessIterator end );
-        template<typename RandomAccessIterator, typename Compare>
-        void parallel_sort( RandomAccessIterator begin, RandomAccessIterator end, const Compare& comp );
+            template<typename RandomAccessIterator>
+            void parallel_sort( RandomAccessIterator begin, RandomAccessIterator end );
+            template<typename RandomAccessIterator, typename Compare>
+            void parallel_sort( RandomAccessIterator begin, RandomAccessIterator end, const Compare& comp );
 
-        template<typename Container>
-        void parallel_sort( Container& c );
-        template<typename Container>
-        void parallel_sort( Container& c, const Compare& comp );
+            template<typename Container>
+            void parallel_sort( Container& c );
+            template<typename Container>
+            void parallel_sort( Container& c, const Compare& comp );
 
-    } //  namespace tbb
+        } //  namespace tbb
+    } // namespace oneapi
 
 Requirements:
 

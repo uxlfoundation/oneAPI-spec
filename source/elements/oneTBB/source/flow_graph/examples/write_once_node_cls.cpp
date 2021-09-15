@@ -1,9 +1,9 @@
-#include "tbb/flow_graph.h"
+#include "oneapi/tbb/flow_graph.h"
 
 typedef int data_type;
 
 int main() {
-    using namespace tbb::flow;
+    using namespace oneapi::tbb::flow;
 
     graph g;
 

@@ -14,17 +14,17 @@ A class that represents an explicit, user-managed task scheduler arena.
     // Defined in header <oneapi/tbb/task_arena.h>
 
     namespace oneapi {
-        namespace tbb {
+    namespace tbb {
 
-            class task_arena {
-            public:
-                static const int automatic = /* unspecified */;
-                static const int not_initialized = /* unspecified */;
-                enum class priority : /* unspecified type */ {
-                    low = /* unspecified */,
-                    normal = /* unspecified */,
-                    high = /* unspecified */
-                };
+        class task_arena {
+        public:
+            static const int automatic = /* unspecified */;
+            static const int not_initialized = /* unspecified */;
+            enum class priority : /* unspecified type */ {
+                low = /* unspecified */,
+                normal = /* unspecified */,
+                high = /* unspecified */
+            };
 
                 struct constraints {
                     numa_node_id numa_node;
@@ -42,23 +42,23 @@ A class that represents an explicit, user-managed task scheduler arena.
                 explicit task_arena(oneapi::tbb::attach);
                 ~task_arena();
 
-                void initialize();
-                void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
-                                priority a_priority = priority::normal);
-                void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
-                                priority a_priority = priority::normal);
+            void initialize();
+            void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
+                            priority a_priority = priority::normal);
+            void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
+                            priority a_priority = priority::normal);
                 void initialize(oneapi::tbb::attach);
 
-                void terminate();
+            void terminate();
 
-                bool is_active() const;
-                int max_concurrency() const;
+            bool is_active() const;
+            int max_concurrency() const;
 
-                template<typename F> auto execute(F&& f) -> decltype(f());
-                template<typename F> void enqueue(F&& f);
-            };
+            template<typename F> auto execute(F&& f) -> decltype(f());
+            template<typename F> void enqueue(F&& f);
+        };
 
-        } // namespace tbb
+    } // namespace tbb
     } // namespace oneapi
 
 A ``task_arena`` class represents a place where threads may share and execute tasks.
@@ -257,18 +257,18 @@ to the corresponding NUMA node.
 
 .. code:: cpp
 
-    #include "tbb/task_group.h"
-    #include "tbb/task_arena.h"
+    #include "oneapi/tbb/task_group.h"
+    #include "oneapi/tbb/task_arena.h"
 
     #include <vector>
 
     int main() {
-        std::vector<tbb::numa_node_id> numa_nodes = tbb::info::numa_nodes();
-        std::vector<tbb::task_arena> arenas(numa_nodes.size());
-        std::vector<tbb::task_group> task_groups(numa_nodes.size());
+        std::vector<oneapi::tbb::numa_node_id> numa_nodes = oneapi::tbb::info::numa_nodes();
+        std::vector<oneapi::tbb::task_arena> arenas(numa_nodes.size());
+        std::vector<oneapi::tbb::task_group> task_groups(numa_nodes.size());
 
         for (int i = 0; i < numa_nodes.size(); i++) {
-            arenas[i].initialize(tbb::task_arena::constraints(numa_nodes[i]));
+            arenas[i].initialize(oneapi::tbb::task_arena::constraints(numa_nodes[i]));
         }
 
         for (int i = 0; i < numa_nodes.size(); i++) {

@@ -15,7 +15,7 @@ Convention           Explanation                                                
 ==================== ======================================================================================================================================================== ==============================
 *Italic*             Used for introducing new terms, denotation of terms, placeholders, or titles of documents.                                                               The filename consists of the *basename* and the *extension*. For more information, refer to the *TBB Developer Guide*.
 -------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------
-``Monospace``        Indicates directory paths and filenames, commands and command line options, function names, methods, classes, data structures in body text, source code. ``tbb.h``
+``Monospace``        Indicates directory paths and filenames, commands and command line options, function names, methods, classes, data structures in body text, source code. ``oneapi/tbb.h``
                                                                                                                                                                               
                                                                                                                                                                               ``\alt\include``
                                                                                                                                                                               

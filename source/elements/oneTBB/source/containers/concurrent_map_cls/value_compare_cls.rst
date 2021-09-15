@@ -14,21 +14,23 @@ Class Synopsis
 
     .. code:: cpp
 
-        namespace tbb {
+        namespace oneapi {
+            namespace tbb {
 
-            template <typename Key, typename T,
-                      typename Compare, typename Allocator>
-            class concurrent_map<Key, T, Compare, Allocator>::value_compare {
-            protected:
-                key_compare comp;
+                template <typename Key, typename T,
+                          typename Compare, typename Allocator>
+                class concurrent_map<Key, T, Compare, Allocator>::value_compare {
+                protected:
+                    key_compare comp;
 
-                value_compare( key_compare c );
+                    value_compare( key_compare c );
 
-            public:
-                bool operator()( const value_type& lhs, const value_type& rhs ) const;
-            }; // class value_compare
+                public:
+                    bool operator()( const value_type& lhs, const value_type& rhs ) const;
+                }; // class value_compare
 
-        } // namespace tbb
+            } // namespace tbb
+        } // namespace oneapi
 
 Member objects
 --------------

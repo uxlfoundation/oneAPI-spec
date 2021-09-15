@@ -11,14 +11,16 @@ Strongly-typed interface for pipelined execution.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_pipeline.h>
+    // Defined in header <oneapi/tbb/parallel_pipeline.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain );
-        void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain, task_group_context& group );
+            void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain );
+            void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain, task_group_context& group );
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 A ``parallel_pipeline`` algorithm represents pipelined application of a series of filters to a stream of items.
 Each filter operates in a particular mode: parallel, serial in-order, or serial out-of-order.
