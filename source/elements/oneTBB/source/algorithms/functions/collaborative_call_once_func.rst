@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
+.. SPDX-FileCopyrightText: 2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -25,11 +25,11 @@ Function template that executes function exactly once.
 Requirements:
 
 * ``Func`` type must meet the ``Function Objects``
-  requirements from the [function.objects] ISO C++ Standard section.
+  requirements from the [function.objects] section of the ISO C++ Standard section.
 
-Executes the ``Func`` object only once, even if called concurrently. It allows other threads
+Executes the ``Func`` object only once, even if it is called concurrently. It allows other threads
 blocked on the same ``collaborative_once_flag`` to join oneTBB parallel construction called
-inside the ``Func`` object.
+within the ``Func`` object.
 
 In case of the exception thrown from the ``Func`` object, the thread calling the ``Func`` object 
 receives this exception. One of the threads blocked on the same ``collaborative_once_flag``
@@ -47,8 +47,9 @@ collaborative_once_flag Class
 Example
 -------
 
-The following example sketches a class in which the "Lazy initialization" pattern is implemented on the field
-"cachedProperty"
+The following example shows a class in which the "Lazy initialization" pattern is implemented on 
+the "cachedProperty" field.
+
 
 .. code:: cpp
 
