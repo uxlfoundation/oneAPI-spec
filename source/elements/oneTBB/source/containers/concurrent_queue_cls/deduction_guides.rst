@@ -6,7 +6,7 @@
 Deduction guides
 ================
 
-If possible, ``concurrent_queue`` constructors support class template argument deduction (since C++17).
+If possible, ``oneapi::tbb::concurrent_queue`` constructors support class template argument deduction (since C++17).
 Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
 provide implicitly-generated deduction guides.
 In addition, the following explicit deduction guide is provided:
@@ -36,16 +36,16 @@ This deduction guide only participates in the overload resolution if the followi
 
 .. code:: cpp
 
-    #include <tbb/concurrent_queue.h>
+    #include <oneapi/tbb/concurrent_queue.h>
     #include <vector>
     #include <memory>
 
     int main() {
         std::vector<int> vec;
 
-        // Deduces cq1 as tbb::concurrent_queue<int>
-        tbb::concurrent_queue cq1(vec.begin(), vec.end());
+        // Deduces cq1 as oneapi::tbb::concurrent_queue<int>
+        oneapi::tbb::concurrent_queue cq1(vec.begin(), vec.end());
 
-        // Deduces cq2 as tbb::concurrent_queue<int, std::allocator<int>>
-        tbb::concurrent_queue cq2(vec.begin(), vec.end(), std::allocator<int>{})
+        // Deduces cq2 as oneapi::tbb::concurrent_queue<int, std::allocator<int>>
+        oneapi::tbb::concurrent_queue cq2(vec.begin(), vec.end(), std::allocator<int>{})
     }

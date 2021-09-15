@@ -14,8 +14,9 @@ with the ``task_arena`` currently used by the calling thread.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_arena.h>
+    // Defined in header <oneapi/tbb/task_arena.h>
 
+    namespace oneapi {
     namespace tbb {
         namespace this_task_arena {
             int current_thread_index();
@@ -26,7 +27,8 @@ with the ``task_arena`` currently used by the calling thread.
             
             template<typename F> void enqueue(F&& f) ;
         }
-    }
+    } // namespace tbb
+    } // namespace oneapi 
 
 .. namespace:: tbb::this_task_arena
 

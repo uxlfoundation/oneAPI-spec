@@ -14,8 +14,9 @@ A ``combinable`` provides each thread with its own instance of type ``T``.
 
 .. code:: cpp
 
-    // Defined in header <tbb/combinable.h>
+    // Defined in header <oneapi/tbb/combinable.h>
 
+    namespace oneapi {
     namespace tbb {
         template <typename T>
         class combinable {
@@ -41,12 +42,13 @@ A ``combinable`` provides each thread with its own instance of type ``T``.
             template<typename BinaryFunc> T combine(BinaryFunc f);
             template<typename UnaryFunc> void combine_each(UnaryFunc f);
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------
 
-.. namespace:: tbb::combinable
+.. namespace:: oneapi::tbb::combinable
 	       
 .. cpp:function:: combinable()
 

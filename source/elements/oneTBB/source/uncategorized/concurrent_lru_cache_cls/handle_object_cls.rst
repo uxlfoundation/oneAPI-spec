@@ -29,7 +29,7 @@ Header
 
 .. code:: cpp
 
-   #include "tbb/concurrent_lru_cache.h"
+   #include "oneapi/tbb/concurrent_lru_cache.h"
 
 
 Description
@@ -53,6 +53,7 @@ Members and free-standing functions
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
        template <typename key_type,
                  typename value_type,
@@ -80,7 +81,8 @@ Members and free-standing functions
            handle(handle&);
        };
    
-   }
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the
 members of this class.

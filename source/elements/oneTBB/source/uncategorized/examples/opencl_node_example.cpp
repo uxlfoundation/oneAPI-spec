@@ -1,19 +1,19 @@
 #define TBB_PREVIEW_FLOW_GRAPH_NODES 1
 #define TBB_PREVIEW_FLOW_GRAPH_FEATURES 1
 
-#include "tbb/flow_graph_opencl_node.h"
+#include "oneapi/tbb/flow_graph_opencl_node.h"
 
-typedef tbb::flow::opencl_buffer<cl_int> opencl_vector;
+typedef oneapi::tbb::flow::opencl_buffer<cl_int> opencl_vector;
 
 class gpu_device_selector {
 public:
     template <typename DeviceFilter>
-    tbb::flow::opencl_device operator()(tbb::flow::opencl_factory<DeviceFilter>& f) {
+    oneapi::tbb::flow::opencl_device operator()(oneapi::tbb::flow::opencl_factory<DeviceFilter>& f) {
         // Set your GPU device if available to execute kernel on
-        const tbb::flow::opencl_device_list &devices = f.devices();
-        tbb::flow::opencl_device_list::const_iterator it = std::find_if(
+        const oneapi::tbb::flow::opencl_device_list &devices = f.devices();
+        oneapi::tbb::flow::opencl_device_list::const_iterator it = std::find_if(
             devices.cbegin(), devices.cend(),
-            [](const tbb::flow::opencl_device &d) {
+            [](const oneapi::tbb::flow::opencl_device &d) {
             cl_device_type type;
             d.info(CL_DEVICE_TYPE, type);
             return CL_DEVICE_TYPE_GPU == type;
@@ -32,32 +32,32 @@ int main() {
     const int vector_size = 10;
     int sum = 0;
 
-    tbb::flow::graph g;
+    oneapi::tbb::flow::graph g;
 
-    tbb::flow::broadcast_node< opencl_vector > broadcast(g);
+    oneapi::tbb::flow::broadcast_node< opencl_vector > broadcast(g);
 
     // GPU computation part
     gpu_device_selector gpu_selector;
 
-    tbb::flow::opencl_program<> program("vector_operations.cl");
+    oneapi::tbb::flow::opencl_program<> program("vector_operations.cl");
 
-    tbb::flow::opencl_node< std::tuple< opencl_vector > >
+    oneapi::tbb::flow::opencl_node< std::tuple< opencl_vector > >
         vector_cuber(g, program.get_kernel("cuber"), gpu_selector);
 
-    tbb::flow::opencl_node< std::tuple< opencl_vector > >
+    oneapi::tbb::flow::opencl_node< std::tuple< opencl_vector > >
         vector_squarer(g, program.get_kernel("squarer"), gpu_selector);
 
     // Define kernel argument and problem size
-    vector_cuber.set_args(tbb::flow::port_ref<0>);
+    vector_cuber.set_args(oneapi::tbb::flow::port_ref<0>);
     vector_cuber.set_range({{ vector_size }});
-    vector_squarer.set_args(tbb::flow::port_ref<0>);
+    vector_squarer.set_args(oneapi::tbb::flow::port_ref<0>);
     vector_squarer.set_range({{ vector_size }});
 
     // Computation results join
-    tbb::flow::join_node< std::tuple< opencl_vector, opencl_vector > > join_data(g);
+    oneapi::tbb::flow::join_node< std::tuple< opencl_vector, opencl_vector > > join_data(g);
 
     // CPU computation part
-    tbb::flow::function_node< std::tuple< opencl_vector, opencl_vector > >
+    oneapi::tbb::flow::function_node< std::tuple< opencl_vector, opencl_vector > >
         summer( g, 1, [&](const std::tuple< opencl_vector, opencl_vector > &res ) {
             opencl_vector vect_cubed = std::get<0>(res);
             opencl_vector vect_squared = std::get<1>(res);
@@ -70,8 +70,8 @@ int main() {
     // Graph topology
     make_edge( broadcast, vector_cuber );
     make_edge( broadcast, vector_squarer );
-    make_edge( vector_cuber, tbb::flow::input_port<0>(join_data) );
-    make_edge( vector_squarer, tbb::flow::input_port<1>(join_data) );
+    make_edge( vector_cuber, oneapi::tbb::flow::input_port<0>(join_data) );
+    make_edge( vector_squarer, oneapi::tbb::flow::input_port<1>(join_data) );
     make_edge( join_data, summer );
 
     // Data initialization

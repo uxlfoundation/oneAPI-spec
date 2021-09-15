@@ -15,16 +15,18 @@ and return a dummy value that will not be passed to the next filter.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_pipeline.h>
+    // Defined in header <oneapi/tbb/parallel_pipeline.h>
+    
+    namespace oneapi {
+        namespace tbb {
 
-    namespace tbb {
+            class flow_control {
+            public:
+                void stop();
+            };
 
-        class flow_control {
-        public:
-            void stop();
-        };
-
-    }
+        } // namespace tbb
+    } namespace oneapi
 
 Member functions
 ----------------

@@ -268,18 +268,18 @@ to the corresponding NUMA node.
 
 .. code:: cpp
 
-    #include "tbb/task_group.h"
-    #include "tbb/task_arena.h"
+    #include "oneapi/tbb/task_group.h"
+    #include "oneapi/tbb/task_arena.h"
 
     #include <vector>
 
     int main() {
-        std::vector<tbb::numa_node_id> numa_nodes = tbb::info::numa_nodes();
-        std::vector<tbb::task_arena> arenas(numa_nodes.size());
-        std::vector<tbb::task_group> task_groups(numa_nodes.size());
+        std::vector<oneapi::tbb::numa_node_id> numa_nodes = oneapi::tbb::info::numa_nodes();
+        std::vector<oneapi::tbb::task_arena> arenas(numa_nodes.size());
+        std::vector<oneapi::tbb::task_group> task_groups(numa_nodes.size());
 
         for (int i = 0; i < numa_nodes.size(); i++) {
-            arenas[i].initialize(tbb::task_arena::constraints(numa_nodes[i]));
+            arenas[i].initialize(oneapi::tbb::task_arena::constraints(numa_nodes[i]));
         }
 
         for (int i = 0; i < numa_nodes.size(); i++) {

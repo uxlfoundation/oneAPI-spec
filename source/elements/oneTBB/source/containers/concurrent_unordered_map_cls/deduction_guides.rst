@@ -132,7 +132,7 @@ These deduction guides only participate in the overload resolution if the follow
 
 .. code:: cpp
 
-    #include <tbb/concurrent_unordered_map.h>
+    #include <oneapi/tbb/concurrent_unordered_map.h>
     #include <vector>
     #include <functional>
 
@@ -142,8 +142,8 @@ These deduction guides only participate in the overload resolution if the follow
         std::vector<std::pair<int, float>> v;
 
         // Deduces m1 as concurrent_unordered_map<int, float>
-        tbb::concurrent_unordered_map m1(v.begin(), v.end());
+        oneapi::tbb::concurrent_unordered_map m1(v.begin(), v.end());
 
         // Deduces m2 as concurrent_unordered_map<int, float, CustomHasher>;
-        tbb::concurrent_unordered_map m2(v.begin(), v.end(), CustomHasher{});
+        oneapi::tbb::concurrent_unordered_map m2(v.begin(), v.end(), CustomHasher{});
     }

@@ -11,6 +11,7 @@ A base class for all nodes that may receive messages.
 
 .. code:: cpp
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -19,5 +20,6 @@ A base class for all nodes that may receive messages.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 The ``T`` type is a message type.

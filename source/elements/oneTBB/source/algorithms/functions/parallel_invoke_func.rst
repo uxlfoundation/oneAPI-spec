@@ -11,14 +11,17 @@ Function template that evaluates several functions in parallel.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_invoke.h>
+    // Defined in header <oneapi/tbb/parallel_invoke.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename... Functions>
-        void parallel_invoke(Functions&&... fs);
+            template<typename... Functions>
+            void parallel_invoke(Functions&&... fs);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
+
 
 Requirements:
 
@@ -38,7 +41,7 @@ The following example evaluates ``f()``, ``g()``, ``h()``, and ``bar(1)`` in par
 
 .. code:: cpp
 
-    #include "tbb/parallel_invoke.h"
+    #include "oneapi/tbb/parallel_invoke.h"
 
     extern void f();
     extern void bar(int);
@@ -54,5 +57,5 @@ The following example evaluates ``f()``, ``g()``, ``h()``, and ``bar(1)`` in par
         MyFunctor g(2);
         MyFunctor h(3);
 
-        tbb::parallel_invoke(f, g, h, []{bar(1);});
+        oneapi::tbb::parallel_invoke(f, g, h, []{bar(1);});
     }

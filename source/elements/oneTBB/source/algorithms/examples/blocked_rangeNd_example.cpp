@@ -1,10 +1,10 @@
-#include "tbb/tbb_config.h"
+#include "oneapi/tbb/tbb_config.h"
 
 #if __TBB_CPP11_PRESENT && __TBB_CPP11_ARRAY_PRESENT && __TBB_CPP11_TEMPLATE_ALIASES_PRESENT
 #include "blocked_rangeNd_example.h"
 #endif
 
-#include "tbb/tbb_stddef.h"
+#include "oneapi/tbb/tbb_stddef.h"
 #include <vector>
 
 int main() {

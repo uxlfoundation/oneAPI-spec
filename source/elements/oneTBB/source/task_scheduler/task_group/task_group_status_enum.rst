@@ -11,13 +11,15 @@ A ``task_group_status`` type represents the status of a ``task_group``.
 
 .. code:: cpp
 
+    namespace oneapi {
     namespace tbb {
         enum task_group_status {
             not_complete,
             complete,
             canceled
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member constants
 ----------------

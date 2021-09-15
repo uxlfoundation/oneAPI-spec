@@ -19,7 +19,7 @@ It should also meet one of the following requirements:
 
     Process the received item.
 
-.. cpp:function:: Body::operator()( ItemType item, tbb::feeder<ItemType>& feeder ) const
+.. cpp:function:: Body::operator()( ItemType item, oneapi::tbb::feeder<ItemType>& feeder ) const
 
     Process the received item. May invoke the ``feeder.add(T)`` function to spawn additional items.
 

@@ -14,21 +14,23 @@ See the example in the :doc:`parallel_scan <parallel_scan_func>` section for dem
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_scan.h>
+    // Defined in header <oneapi/tbb/parallel_scan.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-       struct pre_scan_tag {
-           static bool is_final_scan();
-           operator bool();
-       };
+           struct pre_scan_tag {
+               static bool is_final_scan();
+               operator bool();
+           };
 
-       struct final_scan_tag {
-           static bool is_final_scan();
-           operator bool();
-       };
+           struct final_scan_tag {
+               static bool is_final_scan();
+               operator bool();
+           };
 
-    }
+        } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------

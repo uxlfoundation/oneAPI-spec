@@ -13,8 +13,9 @@ It is useful for instantiating a template that expects a ReaderWriterMutex, but 
 
 .. code:: cpp
 
-    // Defined in header <tbb/null_rw_mutex.h>
+    // Defined in header <oneapi/tbb/null_rw_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class null_rw_mutex {
         public:
@@ -38,12 +39,13 @@ It is useful for instantiating a template that expects a ReaderWriterMutex, but 
             static constexpr bool is_recursive_mutex = true;
             static constexpr bool is_fair_mutex = true;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member classes
 --------------
 
-.. namespace:: tbb::num_rw_mutex
+.. namespace:: oneapi::tbb::null_rw_mutex
 
 .. cpp:class:: scoped_lock
 

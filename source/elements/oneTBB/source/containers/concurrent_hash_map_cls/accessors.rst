@@ -17,23 +17,25 @@ Member class ``concurrent_hash_map::accessor`` provides read-write access to the
 
 .. code:: cpp
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template <typename Key, typename T, typename HashCompare, typename Allocator>
-        class concurrent_hash_map<Key, T, HashCompare, Allocator>::accessor {
-            using value_type = std::pair<const Key, T>;
+            template <typename Key, typename T, typename HashCompare, typename Allocator>
+            class concurrent_hash_map<Key, T, HashCompare, Allocator>::accessor {
+                using value_type = std::pair<const Key, T>;
 
-            accessor();
-            ~accessor();
+                accessor();
+                ~accessor();
 
-            bool empty() const;
-            value_type& operator*() const;
-            value_type* operator->() const;
+                bool empty() const;
+                value_type& operator*() const;
+                value_type* operator->() const;
 
-            void release();
-        }; // class accessor
+                void release();
+            }; // class accessor
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 ``const_accessor`` member class
 -------------------------------
@@ -42,23 +44,25 @@ Member class ``concurrent_hash_map::const_accessor`` provides read only access t
 
 .. code:: cpp
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template <typename Key, typename T, typename HashCompare, typename Allocator>
-        class concurrent_hash_map<Key, T, HashCompare, Allocator>::const_accessor {
-            using value_type = const std::pair<const Key, T>;
+            template <typename Key, typename T, typename HashCompare, typename Allocator>
+            class concurrent_hash_map<Key, T, HashCompare, Allocator>::const_accessor {
+                using value_type = const std::pair<const Key, T>;
 
-            const_accessor();
-            ~const_accessor();
+                const_accessor();
+                ~const_accessor();
 
-            bool empty() const;
-            value_type& operator*() const;
-            value_type* operator->() const;
+                bool empty() const;
+                value_type& operator*() const;
+                value_type* operator->() const;
 
-            void release();
-        }; // class const_accessor
+                void release();
+            }; // class const_accessor
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------

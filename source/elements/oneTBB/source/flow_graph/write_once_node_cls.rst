@@ -11,8 +11,9 @@ A node that is a buffer of a single item that cannot be overwritten.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -32,6 +33,7 @@ A node that is a buffer of a single item that cannot be overwritten.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -50,7 +52,7 @@ are non-destructive.
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::write_once_mode
+.. namespace:: oneapi::tbb::flow::write_once_mode
 
 .. cpp:function:: explicit write_once_node( graph &g )
 

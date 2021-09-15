@@ -12,13 +12,13 @@ An argument of type ``split`` is used to distinguish a splitting constructor fro
 
 .. code:: cpp
 
-    // Defined in header <tbb/blocked_range.h>
-    // Defined in header <tbb/blocked_range2d.h>
-    // Defined in header <tbb/blocked_range3d.h>
-    // Defined in header <tbb/partitioner.h>
-    // Defined in header <tbb/parallel_for.h>
-    // Defined in header <tbb/parallel_reduce.h>
-    // Defined in header <tbb/parallel_scan.h>
+    // Defined in header <oneapi/tbb/blocked_range.h>
+    // Defined in header <oneapi/tbb/blocked_range2d.h>
+    // Defined in header <oneapi/tbb/blocked_range3d.h>
+    // Defined in header <oneapi/tbb/partitioner.h>
+    // Defined in header <oneapi/tbb/parallel_for.h>
+    // Defined in header <oneapi/tbb/parallel_reduce.h>
+    // Defined in header <oneapi/tbb/parallel_scan.h>
 
     class split;
 

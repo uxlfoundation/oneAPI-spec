@@ -15,8 +15,9 @@ which the message was received.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -35,6 +36,7 @@ which the message was received.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -66,7 +68,7 @@ Member types
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::indexer_node
+.. namespace:: oneapi::tbb::flow::indexer_node
 	       
 .. cpp:function:: indexer_node(graph &g)
 

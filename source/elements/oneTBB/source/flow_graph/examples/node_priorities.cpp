@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cmath>
 
-#include "tbb/tick_count.h"
-#include "tbb/global_control.h"
+#include "oneapi/tbb/tick_count.h"
+#include "oneapi/tbb/global_control.h"
 
-#include "tbb/flow_graph.h"
+#include "oneapi/tbb/flow_graph.h"
 
 void spin_for( double delta_seconds ) {
-    tbb::tick_count start = tbb::tick_count::now();
-    while( (tbb::tick_count::now() - start).seconds() < delta_seconds ) ;
+    oneapi::tbb::tick_count start = oneapi::tbb::tick_count::now();
+    while( (oneapi::tbb::tick_count::now() - start).seconds() < delta_seconds ) ;
 }
 
 static const double unit_of_time = 0.1;
@@ -16,17 +16,17 @@ static const double unit_of_time = 0.1;
 struct Body {
     unsigned factor;
     Body( unsigned times ) : factor( times ) {}
-    void operator()( const tbb::flow::continue_msg& ) {
+    void operator()( const oneapi::tbb::flow::continue_msg& ) {
         // body execution takes 'factor' units of time
         spin_for( factor * unit_of_time );
     }
 };
 
 int main() {
-    using namespace tbb::flow;
+    using namespace oneapi::tbb::flow;
 
     const int max_threads = 2;
-    tbb::global_control control(tbb::global_control::max_allowed_parallelism, max_threads);
+     oneapi::tbb::global_control control(oneapi::tbb::global_control::max_allowed_parallelism, max_threads);
 
     graph g;
 
@@ -51,12 +51,12 @@ int main() {
     make_edge( f2, fe );
     make_edge( f3, fe );
 
-    tbb::tick_count start = tbb::tick_count::now();
+    oneapi::tbb::tick_count start = oneapi::tbb::tick_count::now();
 
     bs.try_put( continue_msg() );
     g.wait_for_all();
 
-    double elapsed = std::floor((tbb::tick_count::now() - start).seconds() / unit_of_time);
+    double elapsed = std::floor((oneapi::tbb::tick_count::now() - start).seconds() / unit_of_time);
 
     std::cout << "Elapsed approximately " << elapsed << " units of time" << std::endl;
 

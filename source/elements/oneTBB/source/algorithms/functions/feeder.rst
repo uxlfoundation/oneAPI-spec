@@ -11,18 +11,20 @@ Inlet into which additional work items for a ``parallel_for_each`` can be fed.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_for_each.h>
+    // Defined in header <oneapi/tbb/parallel_for_each.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename Item>
-        class feeder {
-        public:
-            void add( const Item& item );
-            void add( Item&& item );
-        };
+            template<typename Item>
+            class feeder {
+            public:
+                void add( const Item& item );
+                void add( Item&& item );
+            };
 
-    } // namespace tbb
+        } // namespace tbb
+    } //namespace oneapi
 
 Member functions
 ----------------

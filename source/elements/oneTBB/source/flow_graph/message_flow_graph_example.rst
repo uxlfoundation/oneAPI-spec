@@ -27,9 +27,9 @@ to process a single incoming tuple at a time, eliminating the need for a lock ar
 .. code:: cpp
 
     #include <cstdio>
-    #include "tbb/flow_graph.h"
+    #include "oneapi/tbb/flow_graph.h"
 
-    using namespace tbb::flow;
+    using namespace oneapi::tbb::flow;
 
     struct square {
       int operator()(int v) { return v*v; }

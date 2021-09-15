@@ -1,4 +1,4 @@
-#include <tbb/tbb_stddef.h> // for split tags
+#include <oneapi/tbb/tbb_stddef.h> // for split tags
 
 struct TrivialNaturalRange {
     // restore the default constructor
@@ -10,14 +10,14 @@ struct TrivialNaturalRange {
     bool is_divisible() const { return upper > lower + 1; }
 
     // basic splitting constructor
-    TrivialNaturalRange(TrivialNaturalRange& r, tbb::split) {
+    TrivialNaturalRange(TrivialNaturalRange& r, oneapi::tbb::split) {
         size_t m = r.lower + (r.upper - r.lower) / 2;
         upper = r.upper;
         r.upper = lower = m;
     }
 
     // optional proportional splitting constructor
-    TrivialNaturalRange(TrivialNaturalRange& r, tbb::proportional_split p) {
+    TrivialNaturalRange(TrivialNaturalRange& r, oneapi::tbb::proportional_split p) {
         size_t m = r.lower + ((r.upper - r.lower) * p.left()) / (p.left() + p.right());
         if (m == r.lower)
             m++;

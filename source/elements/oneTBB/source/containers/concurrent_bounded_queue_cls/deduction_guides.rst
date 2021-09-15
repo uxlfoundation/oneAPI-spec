@@ -36,16 +36,16 @@ This deduction guides only participate in the overload resolution if the followi
 
 .. code:: cpp
 
-    #include <tbb/concurrent_queue.h>
+    #include <oneapi/tbb/concurrent_queue.h>
     #include <vector>
     #include <memory>
 
     int main() {
         std::vector<int> vec;
 
-        // Deduces cq1 as tbb::concurrent_bounded_queue<int>
-        tbb::concurrent_bounded_queue cq1(vec.begin(), vec.end());
+        // Deduces cq1 as oneapi::tbb::concurrent_bounded_queue<int>
+        oneapi::tbb::concurrent_bounded_queue cq1(vec.begin(), vec.end());
 
-        // Deduces cq2 as tbb::concurrent_bounded_queue<int, std::allocator<int>>
-        tbb::concurrent_bounded_queue cq2(vec.begin(), vec.end(), std::allocator<int>{})
+        // Deduces cq2 as oneapi::tbb::concurrent_bounded_queue<int, std::allocator<int>>
+        oneapi::tbb::concurrent_bounded_queue cq2(vec.begin(), vec.end(), std::allocator<int>{})
     }

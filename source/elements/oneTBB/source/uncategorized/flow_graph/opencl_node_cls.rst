@@ -40,10 +40,10 @@ Header
 
    #define TBB_PREVIEW_FLOW_GRAPH_NODES 1
    #define TBB_PREVIEW_FLOW_GRAPH_FEATURES 1
-   #include "tbb/flow_graph_opencl_node.h"
+   #include "oneapi/tbb/flow_graph_opencl_node.h"
 
-The ``"flow_graph_opencl_node.h"`` header is not included in ``"tbb/tbb.h"``
-and ``"tbb/flow_graph.h"``.
+The ``"flow_graph_opencl_node.h"`` header is not included in ``"oneapi/tbb/tbb.h"``
+and ``"oneapi/tbb/flow_graph.h"``.
 Due to this, you should include ``"flow_graph_opencl_node.h"`` directly.
 
 Description
@@ -154,6 +154,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
    namespace flow {
    
@@ -195,8 +196,9 @@ Members
        opencl_node( graph &g, const kernel_type& kernel, DeviceSelector d );
    };
    
-   }
-   }
+   } // namespace flow
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the members of this template class. All other
 public members are described in the base ``streaming_node`` class.

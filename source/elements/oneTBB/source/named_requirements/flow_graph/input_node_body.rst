@@ -23,7 +23,7 @@ A type `Body` satisfies `InputNodeBody` if it meets the following requirements:
 
     Destructor.
 
-.. cpp:function:: Output Body::operator()( tbb::flow_control& fc )
+.. cpp:function:: Output Body::operator()( oneapi::tbb::flow_control& fc )
 
     **Requirements:** The type ``Output`` must be the same as the template type argument ``Output`` of the
     ``input_node`` instance in which the ``Body`` object is passed during construction.

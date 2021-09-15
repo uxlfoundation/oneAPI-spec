@@ -28,8 +28,9 @@ For processors that support hardware transactional memory, ``speculative_spin_rw
 
 .. code:: cpp
 
-    // Defined in header <tbb/spin_rw_mutex.h>
+    // Defined in header <oneapi/tbb/spin_rw_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class speculative_spin_rw_mutex {
         public:
@@ -45,12 +46,13 @@ For processors that support hardware transactional memory, ``speculative_spin_rw
             static constexpr bool is_recursive_mutex = false;
             static constexpr bool is_fair_mutex = false;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi 
 
 Member classes
 --------------
 
-.. namespace:: tbb::speculative_spin_rw_mutex
+.. namespace:: oneapi::tbb::speculative_spin_rw_mutex
 	       
 .. cpp:class:: scoped_lock
 

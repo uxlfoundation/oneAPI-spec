@@ -23,17 +23,19 @@ The ``simple_partitioner`` class satisfies the *CopyConstructibe* requirement fr
 
 .. code:: cpp
 
-    // Defined in header <tbb/partitioner.h>
+    // Defined in header <oneapi/tbb/partitioner.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-       class simple_partitioner {
-       public:
-           simple_partitioner() = default;
-           ~simple_partitioner() = default;
-       };
+           class simple_partitioner {
+           public:
+               simple_partitioner() = default;
+               ~simple_partitioner() = default;
+           };
 
-    }
+        } // namespace tbb
+    } // namespace oneapi
 
 See also:
 
