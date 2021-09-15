@@ -13,7 +13,7 @@ A ``blocked_range3d`` is the three-dimensional extension of ``blocked_range2d``.
 
 .. code:: cpp
 
-    namespace oneapi{
+    namespace oneapi {
         namespace tbb {
             template<typename PageValue, typename RowValue=PageValue, typename ColValue=RowValue>
             class blocked_range3d {

@@ -11,7 +11,7 @@ Interfaces to query information about execution environment.
 
 .. code:: cpp
 
-   // Declared in info.h
+   // Declared in header <oneapi/tbb/info.h>
 
     namespace oneapi {
     namespace tbb {
