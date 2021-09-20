@@ -135,7 +135,6 @@ Class Template Synopsis
 
                    bool insert( const_accessor& result, const value_type& value );
                    bool insert( accessor& result, const value_type& value );
-                   
                    bool insert( const_accessor& result, value_type&& value );
                    bool insert( accessor& result, value_type&& value );
 
