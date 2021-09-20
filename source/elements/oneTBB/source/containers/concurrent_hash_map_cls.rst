@@ -185,8 +185,9 @@ Class Template Synopsis
                    range_type range( std::size_t grainsize = 1 );
                    const_range_type range( std::size_t grainsize = 1 ) const;
              }; // class concurrent_hash_map
+
           } // namespace tbb
-      } // namespace oneapi      
+      } // namespace oneapi
 
 Requirements:
 
