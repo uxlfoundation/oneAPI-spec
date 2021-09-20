@@ -17,27 +17,27 @@ Function template that performs parallel iteration over a range of values.
         namespace tbb {
 
             template<typename Index, typename Func>
-            void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner, task_group_context& group);
+            void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner, task_group_context& context);
             template<typename Index, typename Func>
-            void parallel_for(Index first, Index last, const Func& f, task_group_context& group);
+            void parallel_for(Index first, Index last, const Func& f, task_group_context& context);
             template<typename Index, typename Func>
             void parallel_for(Index first, Index last, const Func& f, /* see-below */ partitioner);
             template<typename Index, typename Func>
             void parallel_for(Index first, Index last, const Func& f);
 
             template<typename Index, typename Func>
-            void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner, task_group_context& group);
+            void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner, task_group_context& context);
             template<typename Index, typename Func>
-            void parallel_for(Index first, Index last, Index step, const Func& f, task_group_context& group);
+            void parallel_for(Index first, Index last, Index step, const Func& f, task_group_context& context);
             template<typename Index, typename Func>
             void parallel_for(Index first, Index last, Index step, const Func& f, /* see-below */ partitioner);
             template<typename Index, typename Func>
             void parallel_for(Index first, Index last, Index step, const Func& f);
 
             template<typename Range, typename Body>
-            void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner, task_group_context& group);
+            void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner, task_group_context& context);
             template<typename Range, typename Body>
-            void parallel_for(const Range& range, const Body& body, task_group_context& group);
+            void parallel_for(const Range& range, const Body& body, task_group_context& context);
             template<typename Range, typename Body>
             void parallel_for(const Range& range, const Body& body, /* see-below */ partitioner);
             template<typename Range, typename Body>
@@ -90,7 +90,7 @@ Do not rely on any particular execution order for correctness. However, for effi
 In case of serial execution, ``parallel_for`` performs iterations from left to right in the following sense.
 
 All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this context. By default, the algorithm is executed in a bound context of its own.
 
 **Complexity**
 

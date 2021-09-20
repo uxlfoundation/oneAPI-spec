@@ -17,7 +17,7 @@ Strongly-typed interface for pipelined execution.
         namespace tbb {
 
             void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain );
-            void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain, task_group_context& group );
+            void parallel_pipeline( size_t max_number_of_live_tokens, const filter<void,void>& filter_chain, task_group_context& context );
 
         } // namespace tbb
     } // namespace oneapi
@@ -54,8 +54,8 @@ the first template argument of its second operand.
 The number of items processed in parallel depends on the structure of the pipeline and number of available threads.
 *max_number_of_live_tokens* sets the threshold for concurrently processed items.
 
-If the *group* argument is specified, pipeline's tasks are executed in this group. By default, the algorithm
-is executed in a bound group of its own.
+If the *context* argument is specified, pipeline's tasks are executed in this context. By default, the algorithm
+is executed in a bound context of its own.
 
 Example
 -------

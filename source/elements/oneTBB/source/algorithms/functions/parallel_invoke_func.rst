@@ -32,7 +32,7 @@ Requirements:
 Evaluates each member passed to ``parallel_invoke`` possibly in parallel. Return values are ignored.
 
 The algorithm can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this context. By default, the algorithm is executed in a bound context of its own.
 
 Example
 -------

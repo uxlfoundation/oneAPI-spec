@@ -17,20 +17,20 @@ Function template that computes reduction over a range, with deterministic split
         namespace tbb {
 
             template<typename Range, typename Value, typename Func, typename Reduction>
-            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
+            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& context);
             template<typename Range, typename Value, typename Func, typename Reduction>
             Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
             template<typename Range, typename Value, typename Func, typename Reduction>
-            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
+            Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& context);
             template<typename Range, typename Value, typename Func, typename Reduction>
             Value parallel_deterministic_reduce( const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
             template<typename Range, typename Body>
-            void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
+            void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner, task_group_context& context);
             template<typename Range, typename Body>
             void parallel_deterministic_reduce( const Range& range, Body& body, /* see-below */ partitioner);
             template<typename Range, typename Body>
-            void parallel_deterministic_reduce( const Range& range, Body& body, task_group_context& group);
+            void parallel_deterministic_reduce( const Range& range, Body& body, task_group_context& context);
             template<typename Range, typename Body>
             void parallel_deterministic_reduce( const Range& range, Body& body);
 
