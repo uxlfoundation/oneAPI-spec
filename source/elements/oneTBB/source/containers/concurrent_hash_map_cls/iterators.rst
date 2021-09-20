@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -48,7 +48,21 @@ equal_range
 
         std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
 
-    If an element with the key that is equivalent to ``key`` exists in the container,
-    a pair of iterators ``{f, l}``, where ``f`` is an iterator to this element,
-    ``l`` is ``std::next(f)``.
-    Otherwise, ``{end(), end()}``.
+    **Returns**: a range containing an element that is equivalent to ``key``.
+    If there is no such element in the container, returns ``{end(), end()}`` .
+
+--------------------------
+
+    .. code:: cpp
+
+        template <typename K>
+        std::pair<iterator, iterator> equal_range( const K& key );
+
+        template <typename K>
+        std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
+
+    **Returns**: a range containing an element which compares equivalent to the value ``key``.
+    If there is no such element in the container, returns ``{end(), end()}``.
+
+    This overload only participates in the overload resolution if qualified-id
+    ``hash_compare_type::is_transparent`` is valid and denotes a type.

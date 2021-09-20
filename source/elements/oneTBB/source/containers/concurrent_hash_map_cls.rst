@@ -112,15 +112,29 @@ Class Template Synopsis
                    bool find( const_accessor& result, const key_type& key ) const;
                    bool find( accessor& result, const key_type& key );
 
+                   template <typename K>
+                   bool find( const_accessor& result, const K& key ) const;
+
+                   template <typename K>
+                   bool find( accessor& result, const K& key );
+
                    size_type count( const key_type& key ) const;
+
+                   template <typename K>
+                   size_type count( const K& key ) const;
 
                    // Modifiers
                    bool insert( const_accessor& result, const key_type& key );
                    bool insert( accessor& result, const key_type& key );
 
+                   template <typename K>
+                   bool insert( const_accessor& result, const K& key );
+
+                   template <typename K>
+                   bool insert( accessor& result, const K& key );
+
                    bool insert( const_accessor& result, const value_type& value );
                    bool insert( accessor& result, const value_type& value );
-
                    bool insert( const_accessor& result, value_type&& value );
                    bool insert( accessor& result, value_type&& value );
 
@@ -143,6 +157,9 @@ Class Template Synopsis
 
                    bool erase( const key_type& key );
 
+                   template <typename K>
+                   bool erase( const K& key );
+
                    bool erase( const_accessor& item_accessor );
                    bool erase( accessor& item_accessor );
 
@@ -158,13 +175,19 @@ Class Template Synopsis
                    std::pair<iterator, iterator> equal_range( const key_type& key );
                    std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
 
+                   template <typename K>
+                   std::pair<iterator, iterator> equal_range( const K& key );
+
+                   template <typename K>
+                   std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
+
                    // Parallel iteration
                    range_type range( std::size_t grainsize = 1 );
                    const_range_type range( std::size_t grainsize = 1 ) const;
              }; // class concurrent_hash_map
 
           } // namespace tbb
-      } // namespace oneapi      
+      } // namespace oneapi
 
 Requirements:
 
