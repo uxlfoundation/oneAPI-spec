@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,26 +11,28 @@ Function template that processes work items in parallel.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_for_each.h>
+    // Defined in header <oneapi/tbb/parallel_for_each.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename InputIterator, typename Body>
-        void parallel_for_each( InputIterator first, InputIterator last, Body body );
-        template<typename InputIterator, typename Body>
-        void parallel_for_each( InputIterator first, InputIterator last, Body body, task_group_context& group );
+            template<typename InputIterator, typename Body>
+            void parallel_for_each( InputIterator first, InputIterator last, Body body );
+            template<typename InputIterator, typename Body>
+            void parallel_for_each( InputIterator first, InputIterator last, Body body, task_group_context& context );
 
-        template<typename Container, typename Body>
-        void parallel_for_each( Container& c, Body body );
-        template<typename Container, typename Body>
-        void parallel_for_each( Container& c, Body body, task_group_context& group );
+            template<typename Container, typename Body>
+            void parallel_for_each( Container& c, Body body );
+            template<typename Container, typename Body>
+            void parallel_for_each( Container& c, Body body, task_group_context& context );
 
-        template<typename Container, typename Body>
-        void parallel_for_each( const Container& c, Body body );
-        template<typename Container, typename Body>
-        void parallel_for_each( const Container& c, Body body, task_group_context& group );
+            template<typename Container, typename Body>
+            void parallel_for_each( const Container& c, Body body );
+            template<typename Container, typename Body>
+            void parallel_for_each( const Container& c, Body body, task_group_context& context );
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -46,7 +48,7 @@ sequence [``first,last``). Items may be processed in parallel.
 The container form ``parallel_for_each(c, body)`` is equivalent to ``parallel_for_each(std::begin(c), std::end(c), body)``.
 
 All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this context. By default, the algorithm is executed in a bound context of its own.
 
 feeder Class
 ------------

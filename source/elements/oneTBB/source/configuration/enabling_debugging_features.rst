@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -35,7 +35,7 @@ header files. Define ``TBB_USE_ASSERT`` as ``1`` to enable error checking.
 
 If an error is detected, the library prints an error message on ``stderr`` and
 calls the standard C routine ``abort``. To stop a program when internal error
-checking detects a failure, place a breakpoint on ``tbb::assertion_failure``.
+checking detects a failure, place a breakpoint on ``oneapi::tbb::assertion_failure``.
 
 TBB_USE_PROFILING_TOOLS Macro
 -----------------------------

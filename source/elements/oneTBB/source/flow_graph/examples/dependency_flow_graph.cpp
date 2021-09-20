@@ -1,7 +1,7 @@
 #include <cstdio>
-#include "tbb/flow_graph.h"
+#include "oneapi/tbb/flow_graph.h"
 
-using namespace tbb::flow;
+using namespace oneapi::tbb::flow;
 
 struct body {
     std::string my_name;

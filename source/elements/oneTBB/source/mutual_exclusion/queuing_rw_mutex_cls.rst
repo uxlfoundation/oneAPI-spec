@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,8 +12,9 @@ The ``queuing_rw_mutex`` is not recursive. The ``queuing_rw_mutex`` is fair, thr
 
 .. code:: cpp
 
-    // Defined in header <tbb/queuing_rw_mutex.h>
+    // Defined in header <oneapi/tbb/queuing_rw_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class queuing_rw_mutex {
         public:
@@ -29,12 +30,13 @@ The ``queuing_rw_mutex`` is not recursive. The ``queuing_rw_mutex`` is fair, thr
             static constexpr bool is_recursive_mutex = false;
             static constexpr bool is_fair_mutex = true;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member classes
 --------------
 
-.. namespace:: tbb::queueing_rw_mutex
+.. namespace:: oneapi::tbb::queueing_rw_mutex
 	       
 .. cpp:class:: scoped_lock
 

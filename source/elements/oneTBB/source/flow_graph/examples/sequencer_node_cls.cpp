@@ -1,4 +1,4 @@
-#include "tbb/flow_graph.h"
+#include "oneapi/tbb/flow_graph.h"
 
 struct Message {
     int id;
@@ -6,24 +6,24 @@ struct Message {
 };
 
 int main() {
-    tbb::flow::graph g;
+    oneapi::tbb::flow::graph g;
 
     // Due to parallelism the node can push messages to its successors in any order
-    tbb::flow::function_node< Message, Message > process(g, tbb::flow::unlimited, [] (Message msg) -> Message {
+    oneapi::tbb::flow::function_node< Message, Message > process(g, oneapi::tbb::flow::unlimited, [] (Message msg) -> Message {
         msg.data++;
         return msg; 
     });
 
-    tbb::flow::sequencer_node< Message > ordering(g, [](const Message& msg) -> int {
+    oneapi::tbb::flow::sequencer_node< Message > ordering(g, [](const Message& msg) -> int {
         return msg.id;
     });
 
-    tbb::flow::function_node< Message > writer(g, tbb::flow::serial, [] (const Message& msg) {
+    oneapi::tbb::flow::function_node< Message > writer(g, oneapi::tbb::flow::serial, [] (const Message& msg) {
         printf("Message recieved with id: %d\n", msg.id);
     });
 
-    tbb::flow::make_edge(process, ordering);
-    tbb::flow::make_edge(ordering, writer);
+    oneapi::tbb::flow::make_edge(process, ordering);
+    oneapi::tbb::flow::make_edge(ordering, writer);
 
     for (int i = 0; i < 100; ++i) {
         Message msg = { i, 0 };

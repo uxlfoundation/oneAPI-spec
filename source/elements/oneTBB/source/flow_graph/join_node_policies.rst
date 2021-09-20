@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,8 +12,9 @@ join_node Policies
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -24,6 +25,7 @@ join_node Policies
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 
 * ``queueing`` - As each input port is put to, the incoming message is added to

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -13,8 +13,9 @@ of node execution.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -26,6 +27,7 @@ of node execution.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Each policy class satisfies the `CopyConstructible` requirements from [copyconstructible]
 ISO C++ Standard sections.

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -22,8 +22,9 @@ This value is selected from all currently existing control variables by applying
 
 .. code:: cpp
 
-    // Defined in header <tbb/global_control.h>
+    // Defined in header <oneapi/tbb/global_control.h>
 
+    namespace oneapi {
     namespace tbb {
         class global_control {
         public:
@@ -39,6 +40,7 @@ This value is selected from all currently existing control variables by applying
             static size_t active_value(parameter param);
         };
     } // namespace tbb
+    } // namespace oneapi
 
 Member types and constants
 --------------------------

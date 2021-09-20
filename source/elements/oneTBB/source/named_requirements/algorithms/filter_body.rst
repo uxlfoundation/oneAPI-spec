@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -25,7 +25,7 @@ A type `Body` should meet one of the following requirements depending on the fil
 
 .. namespace:: FirstFilterBody
 
-.. cpp:function:: OutputType Body::operator()( tbb::flow_control fc ) const
+.. cpp:function:: OutputType Body::operator()( oneapi::tbb::flow_control fc ) const
 
     Returns the next item from an input stream. Calls ``fc.stop()`` at the end of an input stream.
 
@@ -45,7 +45,7 @@ A type `Body` should meet one of the following requirements depending on the fil
 
 .. namespace:: SingleFilterBody
 
-.. cpp:function:: void Body::operator()( tbb::flow_control fc ) const
+.. cpp:function:: void Body::operator()( oneapi::tbb::flow_control fc ) const
 
     Processes an element from an input stream. Calls ``fc.stop()`` at the end of an input stream.
 

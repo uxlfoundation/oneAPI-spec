@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,7 +11,7 @@ Low-level interface for scalable memory allocation.
 
 .. code:: cpp
 
-    // Defined in header <tbb/scalable_allocator.h>
+    // Defined in header <oneapi/tbb/scalable_allocator.h>
 
     extern "C" {
         // Scalable analogs of C memory allocator

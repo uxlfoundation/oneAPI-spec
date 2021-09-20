@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,8 +11,9 @@ Class that serves as a handle to a flow graph of nodes and edges.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -32,6 +33,7 @@ Class that serves as a handle to a flow graph of nodes and edges.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 reset_flags enumeration
 -----------------------
@@ -44,10 +46,10 @@ reset_flags enumeration
 Member functions
 ----------------
 
-.. cpp:function:: graph(task_group_context& group )
+.. cpp:function:: graph(task_group_context& context )
 
-    Constructs a graph with no nodes. If ``group`` is specified, the
-    graph tasks are executed in this group. By default, the graph is
+    Constructs a graph with no nodes. If ``context`` is specified, the
+    graph tasks are executed in this context. By default, the graph is
     executed in a bound context of its own.
 
 .. cpp:function:: ~graph()
@@ -62,6 +64,10 @@ Member functions
 
     Resets the graph according to the specified flags.
     Flags to ``reset()`` can be combined with bitwise-``or``.
+
+    .. note::
+
+        ``reset()`` is a thread-unsafe operation, don't call it concurrently.
 
 .. cpp:function:: void cancel()
 

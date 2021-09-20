@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -27,7 +27,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_MEMORY_POOL 1
-   #include "tbb/memory_pool.h"
+   #include "oneapi/tbb/memory_pool.h"
 
 
 Description
@@ -50,9 +50,9 @@ Example
 .. code:: cpp
 
    #define TBB_PREVIEW_MEMORY_POOL 1
-   #include "tbb/memory_pool.h"
+   #include "oneapi/tbb/memory_pool.h"
    ...
-   typedef tbb::memory_pool_allocator<int>
+   typedef oneapi::tbb::memory_pool_allocator<int>
    pool_allocator_t;
    std::list<int, pool_allocator_t>
    my_list(pool_allocator_t( my_pool ));
@@ -65,6 +65,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
    template<typename T>
    class memory_pool_allocator {
@@ -113,7 +114,8 @@ Members
    template<typename T, typename U>
    inline bool operator!=( const memory_pool_allocator<T>& a,
                 const memory_pool_allocator<U>& b);
-   }
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the
 members of this template class.

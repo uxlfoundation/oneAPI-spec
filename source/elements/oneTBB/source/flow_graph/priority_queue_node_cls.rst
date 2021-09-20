@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,15 +11,15 @@ A class template that forwards messages in a priority order.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
         template< typename T, typename Compare = std::less<T>>
         class priority_queue_node : public graph_node, public receiver<T>, public sender<T> {
         public:
-            typedef size_t size_type;
             explicit priority_queue_node( graph &g );
             priority_queue_node( const priority_queue_node &src );
             ~priority_queue_node();
@@ -30,6 +30,7 @@ A class template that forwards messages in a priority order.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -47,7 +48,7 @@ The next message to be forwarded has the largest priority as determined by the `
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::priority_node_queue
+.. namespace:: oneapi::tbb::flow::priority_node_queue
 	       
 .. cpp:function:: explicit priority_queue_node( graph &g )
 

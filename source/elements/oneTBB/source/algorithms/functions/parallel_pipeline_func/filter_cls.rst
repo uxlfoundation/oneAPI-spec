@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -16,33 +16,35 @@ The ``filter`` class should only be used in conjunction with ``parallel_pipeline
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_pipeline.h>
+    // Defined in header <oneapi/tbb/parallel_pipeline.h>
+    
+    namespace oneapi {
+        namespace tbb {
 
-    namespace tbb {
+            template<typename InputType, typename OutputType>
+            class filter {
+            public:
+                filter() = default;
+                filter( const filter& rhs ) = default;
+                filter( filter&& rhs ) = default;
+                void operator=(const filter& rhs) = default;
+                void operator=( filter&& rhs ) = default;
 
-        template<typename InputType, typename OutputType>
-        class filter {
-        public:
-            filter() = default;
-            filter( const filter& rhs ) = default;
-            filter( filter&& rhs ) = default;
-            void operator=(const filter& rhs) = default;
-            void operator=( filter&& rhs ) = default;
+                template<typename Body>
+                filter( filter_mode mode, const Body& body );
 
-            template<typename Body>
-            filter( filter_mode mode, const Body& body );
+                filter& operator&=( const filter<OutputType,OutputType>& right );
 
-            filter& operator&=( const filter<OutputType,OutputType>& right );
+                void clear();
+            }
 
-            void clear();
-        }
+            template<typename T, typename U, typename Body>
+            filter<T,U> make_filter( filter::mode mode, const Body& f );
+            template<typename T, typename V, typename U>
+            filter<T,U> operator&( const filter<T,V>& left, const filter<V,U>& right );
 
-        template<typename T, typename U, typename Body>
-        filter<T,U> make_filter( filter::mode mode, const Body& f );
-        template<typename T, typename V, typename U>
-        filter<T,U> operator&( const filter<T,V>& left, const filter<V,U>& right );
-
-    }
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 

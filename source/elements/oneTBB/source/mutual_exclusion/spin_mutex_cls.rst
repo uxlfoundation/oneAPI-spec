@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -13,8 +13,9 @@ The ``spin_mutex`` class is not fair or recursive.
 
 .. code:: cpp
 
-    // Defined in header <tbb/spin_mutex.h>
+    // Defined in header <oneapi/tbb/spin_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class spin_mutex {
         public:
@@ -34,12 +35,13 @@ The ``spin_mutex`` class is not fair or recursive.
             static constexpr bool is_recursive_mutex = false;
             static constexpr bool is_fair_mutex = false;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi 
 
 Member classes
 --------------
 
-.. namespace:: tbb::spin_mutex
+.. namespace:: oneapi::tbb::spin_mutex
 	       
 .. cpp:class:: scoped_lock
 

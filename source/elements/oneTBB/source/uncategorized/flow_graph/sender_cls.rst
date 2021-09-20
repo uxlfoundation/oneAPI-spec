@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -29,7 +29,7 @@ Header
 
 .. code:: cpp
 
-   #include "tbb/flow_graph.h"
+   #include "oneapi/tbb/flow_graph.h"
 
 
 Description
@@ -55,6 +55,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
    namespace flow {
     
@@ -72,8 +73,9 @@ Members
        virtual bool try_consume( ) { return false; }
    };
     
-   }
-   }
+   } // namespace flow
+   } // namespace tbb
+   } // namespace oneapi
 
 
 The following table provides additional information on the

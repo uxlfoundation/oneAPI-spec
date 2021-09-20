@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -7,7 +7,7 @@ concurrent_priority_queue
 =========================
 **[containers.concurrent_priority_queue]**
 
-``tbb::concurrent_priority_queue`` is a class template for an unbounded priority queue that permits
+``oneapi::tbb::concurrent_priority_queue`` is a class template for an unbounded priority queue that permits
 multiple threads to concurrently push and pop items. Items are popped in a priority order.
 
 Class Template Synopsis
@@ -15,80 +15,82 @@ Class Template Synopsis
 
 .. code:: cpp
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template <typename T, typename Compare = std::less<T>,
-                  typename Allocator = cache_aligned_allocator<T>>
-        class concurrent_priority_queue {
-        public:
-            using value_type = T;
-            using reference = T&;
-            using const_reference = const T&;
-            using size_type = <implementation-defined unsigned integer type>;
-            using difference_type = <implementation-defined signed integer type>;
-            using allocator_type = Allocator;
+            template <typename T, typename Compare = std::less<T>,
+                      typename Allocator = cache_aligned_allocator<T>>
+            class concurrent_priority_queue {
+            public:
+                using value_type = T;
+                using reference = T&;
+                using const_reference = const T&;
+                using size_type = <implementation-defined unsigned integer type>;
+                using difference_type = <implementation-defined signed integer type>;
+                using allocator_type = Allocator;
 
-            concurrent_priority_queue();
-            explicit concurrent_priority_queue( const allocator_type& alloc );
+                concurrent_priority_queue();
+                explicit concurrent_priority_queue( const allocator_type& alloc );
 
-            explicit concurrent_priority_queue( const Compare& compare,
-                                                const allocator_type& alloc = allocator_type() );
+                explicit concurrent_priority_queue( const Compare& compare,
+                                                    const allocator_type& alloc = allocator_type() );
                                                 
-            explicit concurrent_priority_queue( size_type init_capacity, const allocator_type& alloc = allocator_type() );
+                explicit concurrent_priority_queue( size_type init_capacity, const allocator_type& alloc = allocator_type() );
 
-            explicit concurrent_priority_queue( size_type init_capacity, const Compare& compare,
-                                                const allocator_type& alloc = allocator_type() );
+                explicit concurrent_priority_queue( size_type init_capacity, const Compare& compare,
+                                                    const allocator_type& alloc = allocator_type() );
 
-            template <typename InputIterator>
-            concurrent_priority_queue( InputIterator first, InputIterator last,
-                                       const allocator_type& alloc = allocator_type() );
+                template <typename InputIterator>
+                concurrent_priority_queue( InputIterator first, InputIterator last,
+                                           const allocator_type& alloc = allocator_type() );
 
-            template <typename InputIterator>
-            concurrent_priority_queue( InputIterator first, InputIterator last,
-                                       const Compare& compare, const allocator_type& alloc = allocator_type() );
+                template <typename InputIterator>
+                concurrent_priority_queue( InputIterator first, InputIterator last,
+                                           const Compare& compare, const allocator_type& alloc = allocator_type() );
 
-            concurrent_priority_queue( std::initializer_list<value_type> init,
-                                       const allocator_type& alloc = allocator_type() );
+                concurrent_priority_queue( std::initializer_list<value_type> init,
+                                           const allocator_type& alloc = allocator_type() );
 
-            concurrent_priority_queue( std::initializer_list<value_type> init,
-                                       const Compare& compare, const allocator_type& alloc = allocator_type() );
+                concurrent_priority_queue( std::initializer_list<value_type> init,
+                                           const Compare& compare, const allocator_type& alloc = allocator_type() );
 
-            concurrent_priority_queue( const concurrent_priority_queue& other );
-            concurrent_priority_queue( const concurrent_priority_queue& other, const allocator_type& alloc );
+                concurrent_priority_queue( const concurrent_priority_queue& other );
+                concurrent_priority_queue( const concurrent_priority_queue& other, const allocator_type& alloc );
 
-            concurrent_priority_queue( concurrent_priority_queue&& other );
-            concurrent_priority_queue( concurrent_priority_queue&& other, const allocator_type& alloc );
+                concurrent_priority_queue( concurrent_priority_queue&& other );
+                concurrent_priority_queue( concurrent_priority_queue&& other, const allocator_type& alloc );
 
-            ~concurrent_priority_queue();
+                ~concurrent_priority_queue();
 
-            concurrent_priority_queue& operator=( const concurrent_priority_queue& other );
-            concurrent_priority_queue& operator=( concurrent_priority_queue&& other );
-            concurrent_priority_queue& operator=( std::initializer_list<value_type> init );
+                concurrent_priority_queue& operator=( const concurrent_priority_queue& other );
+                concurrent_priority_queue& operator=( concurrent_priority_queue&& other );
+                concurrent_priority_queue& operator=( std::initializer_list<value_type> init );
 
-            template <typename InputIterator>
-            void assign( InputIterator first, InputIterator last );
+                template <typename InputIterator>
+                void assign( InputIterator first, InputIterator last );
 
-            void assign( std::initializer_list<value_type> init );
+                void assign( std::initializer_list<value_type> init );
 
-            void swap( concurrent_priority_queue& other );
+                void swap( concurrent_priority_queue& other );
 
-            allocator_type get_allocator() const;
+                allocator_type get_allocator() const;
 
-            void clear();
+                void clear();
 
-            bool empty() const;
-            size_type size() const;
+                bool empty() const;
+                size_type size() const;
 
-            void push( const value_type& value );
-            void push( value_type&& value );
+                void push( const value_type& value );
+                void push( value_type&& value );
 
-            template <typename... Args>
-            void emplace( Args&&... args );
+                template <typename... Args>
+                void emplace( Args&&... args );
 
-            bool try_pop( value_type& value );
-        }; // class concurrent_priority_queue
+                bool try_pop( value_type& value );
+            }; // class concurrent_priority_queue
 
-    }; // namespace tbb
+        }; // namespace tbb
+    } // namespace oneapi 
 
 Requirements:
 
@@ -111,12 +113,12 @@ Member functions
 Non-member functions
 --------------------
 
-These functions provides binary comparison and swap operations on ``tbb::concurrent_priority_queue``
+These functions provides binary comparison and swap operations on ``oneapi::tbb::concurrent_priority_queue``
 objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_priority_queue`` as a type alias for which
+in the same internal namespace and define ``oneapi::tbb::concurrent_priority_queue`` as a type alias for which
 the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -27,7 +27,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_MEMORY_POOL 1
-    #include "tbb/memory_pool.h"
+    #include "oneapi/tbb/memory_pool.h"
 
 
 Description
@@ -47,10 +47,10 @@ Example
 .. code:: cpp
 
    #define TBB_PREVIEW_MEMORY_POOL 1
-    #include "tbb/memory_pool.h"
+    #include "oneapi/tbb/memory_pool.h"
     ...
     char buf[1024*1024];
-    tbb::fixed_pool my_pool(buf, 1024*1024);
+    oneapi::tbb::fixed_pool my_pool(buf, 1024*1024);
     void* my_ptr = my_pool.malloc(10);
     my_pool.free(my_ptr);}
 
@@ -62,6 +62,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
     class fixed_pool : no_copy {
     public:
@@ -72,7 +73,9 @@ Members
     void free(void* ptr);
     void *realloc(void* ptr, size_t size);
     };
-    }
+   } // namespace tbb
+   } // namespace oneapi
+    
 
 The following table provides additional information on the member
 of this class.

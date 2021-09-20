@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,8 +12,9 @@ It is useful for instantiating a template that expects a Mutex, but no mutual ex
 
 .. code:: cpp
 
-    // Defined in header <tbb/null_mutex.h>
+    // Defined in header <oneapi/tbb/null_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class null_mutex {
         public:
@@ -33,7 +34,8 @@ It is useful for instantiating a template that expects a Mutex, but no mutual ex
             static constexpr bool is_recursive_mutex = true;
             static constexpr bool is_fair_mutex = true;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member classes
 --------------

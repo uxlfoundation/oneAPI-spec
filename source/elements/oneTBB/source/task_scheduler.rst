@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -37,6 +37,7 @@ Scheduling controls
    task_scheduler/scheduling_controls/task_group_context_cls.rst
    task_scheduler/scheduling_controls/global_control_cls.rst
    task_scheduler/scheduling_controls/resumable_tasks.rst
+   task_scheduler/scheduling_controls/task_scheduler_handle_cls.rst
 
 Task Group
 ----------
@@ -46,6 +47,7 @@ Task Group
 
    task_scheduler/task_group/task_group_cls.rst
    task_scheduler/task_group/task_group_status_enum.rst
+   task_scheduler/task_group/task_handle.rst
 
 Task Arena
 ----------
@@ -56,3 +58,12 @@ Task Arena
    task_scheduler/task_arena/task_arena_cls.rst
    task_scheduler/task_arena/this_task_arena_ns.rst
    task_scheduler/task_arena/task_scheduler_observer_cls.rst
+
+Helper types
+------------
+
+.. toctree::
+   :titlesonly:
+
+   task_scheduler/attach_tag_type.rst
+

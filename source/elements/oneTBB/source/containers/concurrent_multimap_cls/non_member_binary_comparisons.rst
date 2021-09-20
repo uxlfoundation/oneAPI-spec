@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -6,7 +6,7 @@
 Non-member binary comparisons
 =============================
 
-Two ``tbb::concurrent_multimap`` objects are equal if they have the same number of elements
+Two ``oneapi::tbb::concurrent_multimap`` objects are equal if they have the same number of elements
 and each element in one container is equal to the element in other container on the same position.
 
 .. code:: cpp

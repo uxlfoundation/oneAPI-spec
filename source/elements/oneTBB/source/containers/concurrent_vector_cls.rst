@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -14,149 +14,151 @@ Class Template Synopsis
 
 .. code:: cpp
 
-    // Defined in header <tbb/concurrent_vector.h>
+    // Defined in header <oneapi/tbb/concurrent_vector.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template <typename T,
-                  typename Allocator = cache_aligned_allocator<T>>
-        class concurrent_vector {
-            using value_type = T;
-            using allocator_type = Allocator;
+            template <typename T,
+                      typename Allocator = cache_aligned_allocator<T>>
+            class concurrent_vector {
+                using value_type = T;
+                using allocator_type = Allocator;
 
-            using size_type = <implementation-defined unsigned integer type>;
-            using difference_type = <implementation-defined signed integer type>;
+                using size_type = <implementation-defined unsigned integer type>;
+                using difference_type = <implementation-defined signed integer type>;
 
-            using reference = value_type&;
-            using const_reference = const value_type&;
+                using reference = value_type&;
+                using const_reference = const value_type&;
 
-            using pointer = typename std::allocator_traits<allocator_type>::pointer;
-            using const_pointer = typename std::allocator_traits<allocator_type>::const_pointer;
+                using pointer = typename std::allocator_traits<allocator_type>::pointer;
+                using const_pointer = typename std::allocator_traits<allocator_type>::const_pointer;
 
-            using iterator = <implementation-defined RandomAccessIterator>;
-            using const_iterator = <implementation-defined constant RandomAccessIterator>;
+                using iterator = <implementation-defined RandomAccessIterator>;
+                using const_iterator = <implementation-defined constant RandomAccessIterator>;
 
-            using reverse_iterator = std::reverse_iterator<iterator>;
-            using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+                using reverse_iterator = std::reverse_iterator<iterator>;
+                using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-            using range_type = <implementation-defined ContainerRange>;
-            using const_range_type = <implementation-defined constant ContainerRange>;
+                using range_type = <implementation-defined ContainerRange>;
+                using const_range_type = <implementation-defined constant ContainerRange>;
 
-            // Construction, destruction, copying
-            concurrent_vector();
-            explicit concurrent_vector( const allocator_type& alloc ) noexcept;
+                // Construction, destruction, copying
+                concurrent_vector();
+                explicit concurrent_vector( const allocator_type& alloc ) noexcept;
 
-            explicit concurrent_vector( size_type count, const value_type& value,
-                                        const allocator_type& alloc = allocator_type() );
+                explicit concurrent_vector( size_type count, const value_type& value,
+                                            const allocator_type& alloc = allocator_type() );
 
-            explicit concurrent_vector( size_type count,
-                                        const allocator_type& alloc = allocator_type() );
+                explicit concurrent_vector( size_type count,
+                                            const allocator_type& alloc = allocator_type() );
 
-            template <typename InputIterator>
-            concurrent_vector( InputIterator first, InputIterator last,
-                               const allocator_type& alloc = allocator_type() );
+                template <typename InputIterator>
+                concurrent_vector( InputIterator first, InputIterator last,
+                                   const allocator_type& alloc = allocator_type() );
 
-            concurrent_vector( std::initializer_list<value_type> init,
-                               const allocator_type& alloc = allocator_type() );
+                concurrent_vector( std::initializer_list<value_type> init,
+                                   const allocator_type& alloc = allocator_type() );
 
-            concurrent_vector( const concurrent_vector& other );
-            concurrent_vector( const concurrent_vector& other, const allocator_type& alloc );
+                concurrent_vector( const concurrent_vector& other );
+                concurrent_vector( const concurrent_vector& other, const allocator_type& alloc );
 
-            concurrent_vector( concurrent_vector&& other ) noexcept;
-            concurrent_vector( concurrent_vector&& other, const allocator_type& alloc );
+                concurrent_vector( concurrent_vector&& other ) noexcept;
+                concurrent_vector( concurrent_vector&& other, const allocator_type& alloc );
 
-            ~concurrent_vector();
+                ~concurrent_vector();
 
-            concurrent_vector& operator=( const concurrent_vector& other );
+                concurrent_vector& operator=( const concurrent_vector& other );
 
-            concurrent_vector& operator=( concurrent_vector&& other ) noexcept(/*See details*/);
+                concurrent_vector& operator=( concurrent_vector&& other ) noexcept(/*See details*/);
 
-            concurrent_vector& operator=( std::initializer_list<value_type> init );
+                concurrent_vector& operator=( std::initializer_list<value_type> init );
 
-            void assign( size_type count, const value_type& value );
+                void assign( size_type count, const value_type& value );
 
-            template <typename InputIterator>
-            void assign( InputIterator first, InputIterator last );
+                template <typename InputIterator>
+                void assign( InputIterator first, InputIterator last );
 
-            void assign( std::initializer_list<value_type> init );
+                void assign( std::initializer_list<value_type> init );
 
-            // Concurrent growth
-            iterator grow_by( size_type delta );
-            iterator grow_by( size_type delta, const value_type& value );
+                // Concurrent growth
+                iterator grow_by( size_type delta );
+                iterator grow_by( size_type delta, const value_type& value );
 
-            template <typename InputIterator>
-            iterator grow_by( InputIterator first, InputIterator last );
+                template <typename InputIterator>
+                iterator grow_by( InputIterator first, InputIterator last );
 
-            iterator grow_by( std::initializer_list<value_type> init );
+                iterator grow_by( std::initializer_list<value_type> init );
 
-            iterator grow_to_at_least( size_type n );
-            iterator grow_to_at_least( size_type n, const value_type& value );
+                iterator grow_to_at_least( size_type n );
+                iterator grow_to_at_least( size_type n, const value_type& value );
 
-            iterator push_back( const value_type& value );
-            iterator push_back( value_type&& value );
+                iterator push_back( const value_type& value );
+                iterator push_back( value_type&& value );
 
-            template <typename... Args>
-            iterator emplace_back( Args&&... args );
+                template <typename... Args>
+                iterator emplace_back( Args&&... args );
 
-            // Element access
-            value_type& operator[]( size_type index );
-            const value_type& operator[]( size_type index ) const;
+                // Element access
+                value_type& operator[]( size_type index );
+                const value_type& operator[]( size_type index ) const;
 
-            value_type& at( size_type index );
-            const value_type& at( size_type index ) const;
+                value_type& at( size_type index );
+                const value_type& at( size_type index ) const;
 
-            value_type& front();
-            const value_type& front() const;
+                value_type& front();
+                const value_type& front() const;
 
-            value_type& back();
-            const value_type& back() const;
+                value_type& back();
+                const value_type& back() const;
 
-            // Iterators
-            iterator begin();
-            const_iterator begin() const;
-            const_iterator cbegin() const;
+                // Iterators
+                iterator begin();
+                const_iterator begin() const;
+                const_iterator cbegin() const;
 
-            iterator end();
-            const_iterator end() const;
-            const_iterator cend() const;
+                iterator end();
+                const_iterator end() const;
+                const_iterator cend() const;
 
-            reverse_iterator rbegin();
-            const_reverse_iterator rbegin() const;
-            const_reverse_iterator crbegin() const;
+                reverse_iterator rbegin();
+                const_reverse_iterator rbegin() const;
+                const_reverse_iterator crbegin() const;
 
-            reverse_iterator rend();
-            const_reverse_iterator rend() const;
-            const_reverse_iterator crend() const;
+                reverse_iterator rend();
+                const_reverse_iterator rend() const;
+                const_reverse_iterator crend() const;
 
-            // Size and capacity
-            size_type size() const noexcept;
+                // Size and capacity
+                size_type size() const noexcept;
 
-            bool empty() const noexcept;
+                bool empty() const noexcept;
 
-            size_type max_size() const noexcept;
+                size_type max_size() const noexcept;
 
-            size_type capacity() const noexcept;
+                size_type capacity() const noexcept;
 
-            // Concurrently unsafe operations
-            void reserve( size_type n );
+                // Concurrently unsafe operations
+                void reserve( size_type n );
 
-            void resize( size_type n );
-            void resize( size_type n, const value_type& value );
+                void resize( size_type n );
+                void resize( size_type n, const value_type& value );
 
-            void shrink_to_fit();
+                void shrink_to_fit();
 
-            void swap( concurrent_vector& other ) noexcept(/*See details*/);
+                void swap( concurrent_vector& other ) noexcept(/*See details*/);
 
-            void clear();
+                void clear();
 
-            allocator_type get_allocator() const;
+                allocator_type get_allocator() const;
 
-            // Parallel iteration
-            range_type range( size_type grainsize = 1 );
-            const_range_type range( size_type grainsize = 1 ) const;
-        }; // class concurrent_vector
+                // Parallel iteration
+                range_type range( size_type grainsize = 1 );
+                const_range_type range( size_type grainsize = 1 ) const;
+            }; // class concurrent_vector
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements
 ------------
@@ -174,7 +176,7 @@ Requirements
 Description
 -----------
 
-``tbb::concurrent_vector`` is a class template that represents a sequence container with the following features:
+``oneapi::tbb::concurrent_vector`` is a class template that represents a sequence container with the following features:
 
 * Multiple threads can concurrently grow the container and append new elements.
 * Random access by index. The index of the first element is zero.
@@ -184,7 +186,7 @@ Exception Safety
 ----------------
 
 Concurrent growing is fundamentally incompatible with ideal exception safety. Nonetheless,
-``tbb::concurrent_vector`` offers a practical level of exception safety.
+``oneapi::tbb::concurrent_vector`` offers a practical level of exception safety.
 
 Growth and vector assignment append a sequence of elements to a vector. If an exception
 occurs, the impact on the vector depends on the cause of the exception:
@@ -235,11 +237,11 @@ Non-member functions
 --------------------
 
 These functions provide binary and lexicographical comparison and swap operations
-on ``tbb::concurrent_vector`` objects.
+on ``oneapi::tbb::concurrent_vector`` objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they can be used in
 respective comparison operations. For example, an implementation can define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_vector`` as a type alias, for which
+in the same internal namespace and define ``oneapi::tbb::concurrent_vector`` as a type alias, for which
 the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp

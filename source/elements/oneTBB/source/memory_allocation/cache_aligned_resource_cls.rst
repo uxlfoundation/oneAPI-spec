@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -14,8 +14,9 @@ See the :doc:`cache_aligned_allocator template class <cache_aligned_allocator_cl
 
 .. code:: cpp
 
-    // Defined in header <tbb/cache_aligned_allocator.h>
+    // Defined in header <oneapi/tbb/cache_aligned_allocator.h>
 
+    namespace oneapi {    
     namespace tbb {
         class cache_aligned_resource {
         public:
@@ -29,7 +30,8 @@ See the :doc:`cache_aligned_allocator template class <cache_aligned_allocator_cl
             void do_deallocate(void* p, size_t n, size_t alignment) override;
             bool do_is_equal(const std::pmr::memory_resource& other) const noexcept override;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member Functions
 ----------------

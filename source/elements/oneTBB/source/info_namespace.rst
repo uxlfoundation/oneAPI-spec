@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,15 +11,17 @@ Interfaces to query information about execution environment.
 
 .. code:: cpp
 
-   // Declared in info.h
+   // Declared in header <oneapi/tbb/info.h>
 
+    namespace oneapi {
     namespace tbb {
         using numa_node_id = /*implementation-defined*/;
         namespace info {
             std::vector<numa_node_id> numa_nodes();
-            int default_concurrency(numa_node_id id = tbb::task_arena::automatic);
+            int default_concurrency(numa_node_id id = oneapi::tbb::task_arena::automatic);
         }
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Types
 -----
@@ -37,7 +39,7 @@ Functions
         If error occurs during system topology parsing, returns vector containing single element
         that equals to ``task_arena::automatic``.
 
-.. cpp:function:: int default_concurrency(numa_node_id id = tbb::task_arena::automatic)
+.. cpp:function:: int default_concurrency(numa_node_id id = oneapi::tbb::task_arena::automatic)
 
     Returns concurrency level of the given NUMA node. If argument is not specified, returns default
     concurrency level for current library configuration.

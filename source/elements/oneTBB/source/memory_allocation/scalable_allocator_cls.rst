@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -14,8 +14,9 @@ Memory allocated by a ``scalable_allocator`` should be freed by a ``scalable_all
 
 .. code:: cpp
 
-    // Defined in header <tbb/scalable_allocator.h>
+    // Defined in header <oneapi/tbb/scalable_allocator.h>
 
+    namespace oneapi {
     namespace tbb {
         template<typename T> class scalable_allocator {
         public:
@@ -31,7 +32,8 @@ Memory allocated by a ``scalable_allocator`` should be freed by a ``scalable_all
             T* allocate(size_type);
             void deallocate(T*, size_type);
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 .. caution::
 
@@ -41,7 +43,7 @@ Memory allocated by a ``scalable_allocator`` should be freed by a ``scalable_all
 Member Functions
 ----------------
 
-.. namespace:: tbb::scalable_allocator
+.. namespace:: oneapi::tbb::scalable_allocator
 
 .. cpp:function:: value_type* allocate(size_type n)
 
@@ -60,6 +62,7 @@ These functions provide comparison operations between two ``scalable_allocator``
 
 .. code:: cpp
 
+    namespace oneapi {
     namespace tbb {
         template<typename T, typename U>
         bool operator==(const scalable_allocator<T>&,
@@ -68,11 +71,12 @@ These functions provide comparison operations between two ``scalable_allocator``
         template<typename T, typename U>
         bool operator!=(const scalable_allocator<T>&,
                         const scalable_allocator<U>&) noexcept;
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 The namespace where these functions are defined is unspecified, as long as they may be used in respective binary operation expressions on ``scalable_allocator`` objects.
 For example, an implementation may define the classes and functions in the same unspecified internal namespace,
-and define ``tbb::scalable_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
+and define ``oneapi::tbb::scalable_allocator`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup.
 
 .. cpp:function:: template<typename T, typename U> \
     bool operator==(const scalable_allocator<T>&, const scalable_allocator<U>&) noexcept

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -33,14 +33,16 @@ The ``auto_partitioner`` class satisfies the *CopyConstructibe* requirement from
 
 .. code:: cpp
 
-    // Defined in header <tbb/partitioner.h>
+    // Defined in header <oneapi/tbb/partitioner.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        class auto_partitioner {
-        public:
-            auto_partitioner() = default;
-            ~auto_partitioner() = default;
-        };
+            class auto_partitioner {
+            public:
+                auto_partitioner() = default;
+                ~auto_partitioner() = default;
+            };
 
-    }
+        } // namespace tbb
+    } // namespace oneapi

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -19,8 +19,9 @@ The ``task_group_context`` carries floating point settings inherited from the pa
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_group.h>
+    // Defined in header <oneapi/tbb/task_group.h>
 
+    namespace oneapi {
     namespace tbb {
 
         class task_group_context {
@@ -46,6 +47,7 @@ The ``task_group_context`` carries floating point settings inherited from the pa
         };
 
     } // namespace tbb;
+    } // namespace oneapi
 
 
 Member types and constants

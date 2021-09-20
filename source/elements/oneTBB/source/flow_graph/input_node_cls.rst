@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,8 +12,9 @@ result to all of its successors.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -31,10 +32,11 @@ result to all of its successors.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
-* The ``Output`` type must meet the `CopyConstructible` requirements from [copyconstructible] and
+* The ``Output`` type must meet the `DefaultConstructible` requirements from [defaultconstructible], `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
 * The type ``Body`` must meet the :doc:`InputNodeBody requirements <../named_requirements/flow_graph/input_node_body>`.
 

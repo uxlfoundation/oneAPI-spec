@@ -1,7 +1,7 @@
-#include "tbb/concurrent_unordered_map.h"
+#include "oneapi/tbb/concurrent_unordered_map.h"
 
 int main() {
-    using Map = tbb::concurrent_unordered_map<int, int>;
+    using Map = oneapi::tbb::concurrent_unordered_map<int, int>;
     Map map = {{1, 1}, {2, 2}, {3, 3}};
 
     // Extract an element from the container

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -22,17 +22,19 @@ The ``affinity_partitioner`` class satisfies the *CopyConstructibe* requirement 
 
 .. code:: cpp
 
-    // Defined in header <tbb/partitioner.h>
+    // Defined in header <oneapi/tbb/partitioner.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-       class affinity_partitioner {
-       public:
-           affinity_partitioner() = default;
-           ~affinity_partitioner() = default;
-       };
+           class affinity_partitioner {
+           public:
+               affinity_partitioner() = default;
+               ~affinity_partitioner() = default;
+           };
 
-    }
+        } // namespace tbb
+    } // namespace oneapi
 
 See also:
 

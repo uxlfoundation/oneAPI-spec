@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -6,15 +6,19 @@
 Deduction guides
 ================
 
-Where possible, constructors of ``concurrent_map`` support class template argument
-deduction (since C++17):
+If possible, ``concurrent_map`` constructors support class template argument deduction (since C++17).
+Copy and move constructors, including constructors with an explicit ``allocator_type`` argument,
+provide implicitly-generated deduction guides.
+In addition, the following explicit deduction guides are provided:
 
 .. code:: cpp
 
     template <typename InputIterator,
               typename Compare = std::less<iterator_key_t<InputIterator>>,
               typename Allocator = tbb_allocator<iterator_alloc_value_t<InputIterator>>>
-    concurrent_map( InputIterator, InputIterator, Compare = Compare(), Allocator = Allocator() )
+    concurrent_map( InputIterator, InputIterator,
+                    Compare = Compare(),
+                    Allocator = Allocator() )
     -> concurrent_map<iterator_key_t<InputIterator>,
                       iterator_mapped_t<InputIterator>,
                       Compare,
@@ -22,24 +26,31 @@ deduction (since C++17):
 
     template <typename InputIterator,
               typename Allocator>
-    concurrent_map( InputIterator, InputIterator, Allocator )
+    concurrent_map( InputIterator, InputIterator,
+                    Allocator )
     -> concurrent_map<iterator_key_t<InputIterator>,
                       iterator_mapped_t<InputIterator>,
                       std::less<iterator_key_t<InputIterator>>,
                       Allocator>;
 
-    template <typename Key,
-              typename T,
-              typename Compare = std::less<Key>,
+    template <typename Key, typename T,
+              typename Compare = std::less<std::remove_const_t<Key>>,
               typename Allocator = tbb_allocator<std::pair<const Key, T>>>
-    concurrent_map( std::initializer_list<std::pair<Key, T>>, Compare = Compare(), Allocator = Allocator() )
-    -> concurrent_map<Key, T, Compare, Allocator>;
+    concurrent_map( std::initializer_list<std::pair<Key, T>>,
+                    Compare = Compare(),
+                    Allocator = Allocator() )
+    -> concurrent_map<std::remove_const_t<Key>,
+                      T,
+                      Compare,
+                      Allocator>;
 
-    template <typename Key,
-              typename T,
+    template <typename Key, typename T,
               typename Allocator>
     concurrent_map( std::initializer_list<std::pair<Key, T>>, Allocator )
-    -> concurrent_map<Key, T, std::less<Key>, Allocator>;
+    -> concurrent_map<std::remove_const_t<Key>,
+                      T,
+                      std::less<std::remove_const_t<Key>>,
+                      Allocator>;
 
 where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_alloc_value_t`` are defined as follows:
 
@@ -55,19 +66,25 @@ where the type aliases ``iterator_key_t``, ``iterator_mapped_t``, ``iterator_all
     using iterator_alloc_value_t = std::pair<std::add_const_t<iterator_key_t<InputIterator>>,
                                              iterator_mapped_t<InputIterator>>;
 
+These deduction guides only participate in the overload resolution if the following requirements are met:
+
+* The ``InputIterator`` type meets the ``InputIterator`` requirements described in the [input.iterators] section of the ISO C++ Standard.
+* The ``Allocator`` type meets the ``Allocator`` requirements described in the [allocator.requirements] section of the ISO C++ Standard.
+* The ``Compare`` type does not meet the ``Allocator`` requirements.
+
 **Example**
 
 .. code:: cpp
 
-    #include <tbb/concurrent_map.h>
+    #include <oneapi/tbb/concurrent_map.h>
     #include <vector>
 
     int main() {
         std::vector<std::pair<int, float>> v;
 
         // Deduces cm1 as concurrent_map<int, float>
-        tbb::concurrent_map cm1(v.begin(), v.end());
+        oneapi::tbb::concurrent_map cm1(v.begin(), v.end());
 
         // Deduces cm2 as concurrent_map<int, float>
-        tbb::concurrent_map cm2({std::pair(1, 2f), std::pair(2, 3f)});
+        oneapi::tbb::concurrent_map cm2({std::pair(1, 2f), std::pair(2, 3f)});
     }

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,8 +12,9 @@ one or more messages that are broadcast to successors.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -38,6 +39,7 @@ one or more messages that are broadcast to successors.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -65,7 +67,7 @@ used to obtain an updated copy.
 Member types
 ------------
 
-``output_ports_type`` is an alias to a tuple of output ports.
+``output_ports_type`` is an alias to a ``std::tuple`` of output ports.
 
 Member functions
 ----------------
@@ -131,4 +133,4 @@ it.
 
     output_ports_type& output_ports();
 
-**Returns:** a tuple of output ports.
+**Returns:** a ``std::tuple`` of output ports.

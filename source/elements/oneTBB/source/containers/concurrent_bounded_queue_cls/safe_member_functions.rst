@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -130,7 +130,7 @@ abort
         void abort();
 
     Wakes up any threads that are waiting on the queue via ``push``, ``pop``, or ``emplace``
-    operations and raises the ``tbb::user_abort`` exception on those threads.
+    operations and raises the ``oneapi::tbb::user_abort`` exception on those threads.
 
 Capacity of the queue
 ---------------------

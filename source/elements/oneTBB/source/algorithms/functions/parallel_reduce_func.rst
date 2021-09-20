@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,29 +11,31 @@ Function template that computes reduction over a range.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_reduce.h>
+    // Defined in header <oneapi/tbb/parallel_reduce.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
-        template<typename Range, typename Value, typename Func, typename Reduction>
-        Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& context);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& context);
+            template<typename Range, typename Value, typename Func, typename Reduction>
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner);
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body, task_group_context& group);
-        template<typename Range, typename Body>
-        void parallel_reduce(const Range& range, Body& body);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& context);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body, task_group_context& context);
+            template<typename Range, typename Body>
+            void parallel_reduce(const Range& range, Body& body);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 A ``partitioner`` type may be one of the following entities:
 
@@ -49,7 +51,7 @@ Requirements:
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
 * The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
-* The ``Reduction`` types must meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_func>`.
+* The ``Reduction`` types must meet ::doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_reduction>`.
 
 The function template ``parallel_reduce`` has two forms:
 The functional form is designed to be easy to use in conjunction with lambda expressions.
@@ -81,7 +83,7 @@ When executed serially ``parallel_reduce`` run sequentially from left to right i
 Sequential execution never invokes the splitting constructor or method join.
 
 All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this context. By default, the algorithm is executed in a bound context of its own.
 
 **Complexity**
 
@@ -95,10 +97,10 @@ The following code sums the values in an array.
 
 .. code:: cpp
 
-    #include "tbb/parallel_reduce.h"
-    #include "tbb/blocked_range.h"
+    #include "oneapi/tbb/parallel_reduce.h"
+    #include "oneapi/tbb/blocked_range.h"
 
-    using namespace tbb;
+    using namespace oneapi::tbb;
 
     struct Sum {
         float value;
@@ -136,10 +138,10 @@ expressions and the functional form of ``parallel_reduce``.
 
 .. code:: cpp
 
-    #include "tbb/parallel_reduce.h"
-    #include "tbb/blocked_range.h"
+    #include "oneapi/tbb/parallel_reduce.h"
+    #include "oneapi/tbb/blocked_range.h"
 
-    using namespace tbb;
+    using namespace oneapi::tbb;
 
     float ParallelSum( float array[], size_t n ) {
         return parallel_reduce(

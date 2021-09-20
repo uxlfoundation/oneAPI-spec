@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -19,7 +19,7 @@ A type `Func` satisfies `SuspendFunc` if it meets the following requirements:
 
     Copy constructor.
 
-.. cpp:function:: void Func::operator()( tbb::task::suspend_point )
+.. cpp:function:: void Func::operator()( oneapi::tbb::task::suspend_point )
 
     Body that accepts the current task execution point to resume later.
 

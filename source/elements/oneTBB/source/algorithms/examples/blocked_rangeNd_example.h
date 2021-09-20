@@ -1,8 +1,8 @@
 #define TBB_PREVIEW_BLOCKED_RANGE_ND 1
-#include "tbb/blocked_rangeNd.h"
+#include "oneapi/tbb/blocked_rangeNd.h"
 
-#include "tbb/parallel_for.h"
-#include "tbb/parallel_reduce.h"
+#include "oneapi/tbb/parallel_for.h"
+#include "oneapi/tbb/parallel_reduce.h"
 
 template<typename Features>
 float kernel3d(const Features& feature_maps, int i, int j, int k,
@@ -21,9 +21,9 @@ template<typename Features, typename Output>
 void convolution3d(const Features& feature_maps, Output& out,
                    int out_length, int out_width, int out_heigth,
                    int kernel_length, int kernel_width, int kernel_height) {
-    using range_t = tbb::blocked_rangeNd<int, 3>;
+    using range_t = oneapi::tbb::blocked_rangeNd<int, 3>;
 
-    tbb::parallel_for(
+    oneapi::tbb::parallel_for(
         range_t({0, out_length}, {0, out_width}, {0, out_heigth}),
         [&](const range_t& out_range) {
             auto out_x = out_range.dim(0);

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -6,7 +6,7 @@
 Size and capacity
 =================
 
-.. namespace:: tbb::enumerable_thread_specific
+.. namespace:: oneapi::tbb::enumerable_thread_specific
 	       
 .. cpp:function:: size_type size() const
 

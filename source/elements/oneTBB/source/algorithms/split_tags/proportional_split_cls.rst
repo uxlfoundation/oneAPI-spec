@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -16,25 +16,27 @@ the class should be split.
 
 .. code:: cpp
 
-    // Defined in header <tbb/blocked_range.h>
-    // Defined in header <tbb/blocked_range2d.h>
-    // Defined in header <tbb/blocked_range3d.h>
-    // Defined in header <tbb/partitioner.h>
-    // Defined in header <tbb/parallel_for.h>
-    // Defined in header <tbb/parallel_reduce.h>
-    // Defined in header <tbb/parallel_scan.h>
+    // Defined in header <oneapi/tbb/blocked_range.h>
+    // Defined in header <oneapi/tbb/blocked_range2d.h>
+    // Defined in header <oneapi/tbb/blocked_range3d.h>
+    // Defined in header <oneapi/tbb/partitioner.h>
+    // Defined in header <oneapi/tbb/parallel_for.h>
+    // Defined in header <oneapi/tbb/parallel_reduce.h>
+    // Defined in header <oneapi/tbb/parallel_scan.h>
 
-    namespace tbb {
-       class proportional_split {
-       public:
-           proportional_split(std::size_t _left = 1, std::size_t _right = 1);
+    namespace oneapi {
+        namespace tbb {
+           class proportional_split {
+           public:
+               proportional_split(std::size_t _left = 1, std::size_t _right = 1);
 
-           std::size_t left() const;
-           std::size_t right() const;
+               std::size_t left() const;
+               std::size_t right() const;
 
-           explicit operator split() const;
-       };
-    }
+               explicit operator split() const;
+           };
+        } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------

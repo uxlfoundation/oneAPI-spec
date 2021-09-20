@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -22,7 +22,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_AGGREGATOR 1
-   #include "tbb/aggregator.h"
+   #include "oneapi/tbb/aggregator.h"
 
 
 Description
@@ -40,6 +40,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
      class aggregator_operation {
       public:
@@ -57,7 +58,8 @@ Members
        aggregator_ext(const handler_type& h);
        void process(aggregator_operation *op);
      };
-   }
+   } // namespace tbb
+   } // namespace oneapi
 
 The following table provides additional information on the
 members of this class.

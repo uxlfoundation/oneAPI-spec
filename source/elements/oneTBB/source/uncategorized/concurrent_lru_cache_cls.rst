@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -27,7 +27,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_CONCURRENT_LRU_CACHE 1
-   #include "tbb/concurrent_lru_cache.h"
+   #include "oneapi/tbb/concurrent_lru_cache.h"
 
 
 Description
@@ -59,6 +59,7 @@ Members
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
        template <typename key_type,
                  typename value_type,
@@ -74,7 +75,8 @@ Members
        private:
            struct handle_move_t; // until C++11
        };
-   }
+   } // namespace tbb 
+   } // namespace oneapi
 
 The following table provides additional information on the
 members of this template class.

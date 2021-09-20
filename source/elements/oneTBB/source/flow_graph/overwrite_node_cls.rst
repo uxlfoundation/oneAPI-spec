@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,8 +11,9 @@ A node that is a buffer of a single item that can be overwritten.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -32,6 +33,7 @@ A node that is a buffer of a single item that can be overwritten.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -50,7 +52,7 @@ non-destructive.
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::overwrite_node
+.. namespace:: oneapi::tbb::flow::overwrite_node
 	       
 .. cpp:function:: explicit overwrite_node( graph &g )
 
@@ -60,7 +62,7 @@ Member functions
 .. cpp:function:: overwrite_node( const overwrite_node &src )
 
     Constructs an object of type ``overwrite_node`` that belongs to the graph ``g`` with an invalid
-    internal buffer item. The buffered value and list of successors are not copied from ``src``.
+    internal buffer item. The buffered value and list of successors and predecessors are not copied from ``src``.
 
 .. cpp:function:: ~overwrite_node( )
 

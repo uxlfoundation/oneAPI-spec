@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -22,8 +22,9 @@ Otherwise, it performs like a ``spin_mutex``, possibly with worse throughput.
 
 .. code:: cpp
 
-    // Defined in header <tbb/spin_mutex.h>
+    // Defined in header <oneapi/tbb/spin_mutex.h>
 
+    namespace oneapi {
     namespace tbb {
         class speculative_spin_mutex {
         public:
@@ -39,12 +40,13 @@ Otherwise, it performs like a ``spin_mutex``, possibly with worse throughput.
             static constexpr bool is_recursive_mutex = false;
             static constexpr bool is_fair_mutex = false;
         };
-    }
+    } // namespace tbb
+    } // namespace oneapi
 
 Member classes
 --------------
 
-.. namespace:: tbb::speculative_spin_mutex
+.. namespace:: oneapi::tbb::speculative_spin_mutex
 	       
 .. cpp:class:: scoped_lock
 

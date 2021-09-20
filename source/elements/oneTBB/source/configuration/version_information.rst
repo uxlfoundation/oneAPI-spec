@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,7 +12,7 @@ version and runtime information.
 
 .. code:: cpp
 
-    // Defined in header <tbb/version.h>
+    // Defined in header <oneapi/tbb/version.h>
 
     #define TBB_VERSION_MAJOR   /*implementation-defined*/
     #define TBB_VERSION_MINOR   /*implementation-defined*/

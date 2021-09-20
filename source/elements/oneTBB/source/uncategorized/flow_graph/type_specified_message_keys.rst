@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -21,7 +21,7 @@ Header
 .. code:: cpp
 
    #define TBB_PREVIEW_FLOW_GRAPH_FEATURES 1
-   #include "tbb/flow_graph.h"
+   #include "oneapi/tbb/flow_graph.h"
 
 
 Description
@@ -37,6 +37,7 @@ key. The default implementation of ``key_from_message`` is
 
 .. code:: cpp
 
+   namespace oneapi {
    namespace tbb {
        namespace flow {
            template <typename K, typename T>
@@ -44,7 +45,8 @@ key. The default implementation of ``key_from_message`` is
                  return t.key();
            }
        }
-   }
+   } // namespace tbb
+   } // namespace oneapi
 
 Where ``T`` is one of the user-provided types in ``OutputTuple``
 used for the ``join_node`` construction and ``K`` is the key type
@@ -82,7 +84,7 @@ Example
 .. code:: cpp
 
    #define TBB_PREVIEW_FLOW_GRAPH_FEATURES 1
-   #include "tbb/flow_graph.h"
+   #include "oneapi/tbb/flow_graph.h"
    #include <cstdio>
    #include <cassert>
    
@@ -100,7 +102,7 @@ Example
    };
    
    int main() {
-       using namespace tbb::flow;
+       using namespace oneapi::tbb::flow;
    
        graph g;
        function_node<int, MyMessage>

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,14 +11,17 @@ Function template that evaluates several functions in parallel.
 
 .. code:: cpp
 
-    // Defined in header <tbb/parallel_invoke.h>
+    // Defined in header <oneapi/tbb/parallel_invoke.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template<typename... Functions>
-        void parallel_invoke(Functions&&... fs);
+            template<typename... Functions>
+            void parallel_invoke(Functions&&... fs);
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
+
 
 Requirements:
 
@@ -29,7 +32,7 @@ Requirements:
 Evaluates each member passed to ``parallel_invoke`` possibly in parallel. Return values are ignored.
 
 The algorithm can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this context. By default, the algorithm is executed in a bound context of its own.
 
 Example
 -------
@@ -38,7 +41,7 @@ The following example evaluates ``f()``, ``g()``, ``h()``, and ``bar(1)`` in par
 
 .. code:: cpp
 
-    #include "tbb/parallel_invoke.h"
+    #include "oneapi/tbb/parallel_invoke.h"
 
     extern void f();
     extern void bar(int);
@@ -54,5 +57,5 @@ The following example evaluates ``f()``, ``g()``, ``h()``, and ``bar(1)`` in par
         MyFunctor g(2);
         MyFunctor h(3);
 
-        tbb::parallel_invoke(f, g, h, []{bar(1);});
+        oneapi::tbb::parallel_invoke(f, g, h, []{bar(1);});
     }

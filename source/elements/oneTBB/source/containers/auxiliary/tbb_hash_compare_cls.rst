@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -7,7 +7,7 @@ tbb_hash_compare
 ================
 **[containers.tbb_hash_compare]**
 
-``tbb::tbb_hash_compare`` is a class template for hash support. Use it with the ``tbb::concurrent_hash_map``
+``oneapi::tbb::tbb_hash_compare`` is a class template for hash support. Use it with the ``oneapi::tbb::concurrent_hash_map``
 associative container to calculate hash codes and compare keys for equality.
 
 ``tbb_hash_compare`` meets the :doc:`HashCompare requirements <../../named_requirements/containers/hash_compare>`.
@@ -17,17 +17,19 @@ Class Template Synopsis
 
 .. code:: cpp
 
-    // Defined in header <tbb/concurrent_hash_map.h>
+    // Defined in header <oneapi/tbb/concurrent_hash_map.h>
 
-    namespace tbb {
+    namespace oneapi {
+        namespace tbb {
 
-        template <typename Key>
-        class tbb_hash_compare {
-            static std::size_t hash( const Key& k );
-            static bool equal( const Key& k1, const Key& k2 );
-        }; // class tbb_hash_compare
+            template <typename Key>
+            class tbb_hash_compare {
+                static std::size_t hash( const Key& k );
+                static bool equal( const Key& k1, const Key& k2 );
+            }; // class tbb_hash_compare
 
-    } // namespace tbb
+        } // namespace tbb
+    } // namespace oneapi
 
 Member functions
 ----------------

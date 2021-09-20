@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,8 +11,9 @@ The class template ``flattened2d`` is an adaptor that provides a flattened view 
 
 .. code:: cpp
 
-    // Defined in header <tbb/enumerable_thread_specific.h>
+    // Defined in header <oneapi/tbb/enumerable_thread_specific.h>
 
+    namespace oneapi {
     namespace tbb {
 
         template<typename Container>
@@ -55,6 +56,7 @@ The class template ``flattened2d`` is an adaptor that provides a flattened view 
             const typename Container::const_iterator last);
 
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -68,7 +70,7 @@ The utility function ``flatten2d`` creates a ``flattened2d`` object from a speci
 Member functions
 ----------------
 
-.. namespace:: tbb::flatten2d
+.. namespace:: oneapi::tbb::flatten2d
 	       
 .. cpp:function:: explicit flattened2d( const Container& c )
 

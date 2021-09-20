@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -14,15 +14,23 @@ with the ``task_arena`` currently used by the calling thread.
 
 .. code:: cpp
 
-    // Defined in header <tbb/task_arena.h>
+    // Defined in header <oneapi/tbb/task_arena.h>
 
+    namespace oneapi {
     namespace tbb {
         namespace this_task_arena {
             int current_thread_index();
             int max_concurrency();
             template<typename F> auto isolate(F&& f) -> decltype(f());
+            
+            void enqueue(task_handle&& h);
+            
+            template<typename F> void enqueue(F&& f) ;
         }
-    }
+    } // namespace tbb
+    } // namespace oneapi 
+
+.. namespace:: tbb::this_task_arena
 
 .. cpp:function:: int current_thread_index()
 
@@ -65,3 +73,19 @@ with the ``task_arena`` currently used by the calling thread.
 
         The object returned by the functor cannot be a reference. ``std::reference_wrapper`` can be used instead.
 
+.. cpp:function:: template<typename F> void enqueue(F&& f)
+  
+    Enqueues a task into the ``task_arena`` currently used by the calling thread to process the specified functor, then returns immediately.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
+    
+    Behavior of this function is identical to ``template<typename F> void task_arena::enqueue(F&& f)`` applied to the ``task_arena`` 
+    object constructed with ``attach`` parameter.     
+
+.. cpp:function:: void enqueue(task_handle&& h)   
+     
+    Enqueues a task owned by ``h`` into the ``task_arena`` that is currently used by the calling thread.
+    
+    The behavior of this function is identical to the generic version (``template<typename F> void enqueue(F&& f)``), except the parameter type. 
+
+    .. note:: 
+        ``h`` should not be empty to avoid an undefined behavior.

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,8 +11,9 @@ A class template for thread local storage (TLS).
 
 .. code:: cpp
 
-    // Defined in header <tbb/enumerable_thread_specific.h>
+    // Defined in header <oneapi/tbb/enumerable_thread_specific.h>
 
+    namespace oneapi {
     namespace tbb {
 
         enum ets_key_usage_type {
@@ -98,6 +99,7 @@ A class template for thread local storage (TLS).
         };
 
     } // namespace tbb
+    } // namespace oneapi
 
 A class template ``enumerable_thread_specific`` provides TLS for elements of type ``T``.
 A class template ``enumerable_thread_specific`` acts as a container by providing iterators and ranges across all of the thread-local elements.
@@ -146,7 +148,7 @@ If no ``ETS_key_usage_type`` parameter type is provided, ``ets_no_key`` is used 
 
 .. cpp:enum:: ets_key_usage_type::ets_suspend_aware
 
-The ``tbb::task::suspend`` function can change the value of the ``enumerable_thread_specific`` object. To avoid this problem,
+The ``oneapi::tbb::task::suspend`` function can change the value of the ``enumerable_thread_specific`` object. To avoid this problem,
 use the ``ets_suspend_aware`` enumeration parameter type.
 The ``local()`` value can be the same for different threads, but no two distinct threads can access the same value simultaneously.
 

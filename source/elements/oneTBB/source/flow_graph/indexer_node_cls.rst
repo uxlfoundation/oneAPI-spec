@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -15,8 +15,9 @@ which the message was received.
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -35,6 +36,7 @@ which the message was received.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -60,13 +62,13 @@ a reference to a specific input port.
 Member types
 ------------
 
-* ``input_ports_type`` is an alias to a tuple of input ports.
+* ``input_ports_type`` is an alias to a ``std::tuple`` of input ports.
 * ``output_type`` is an alias to the message of type ``tagged_msg``, which is sent to successors.
 
 Member functions
 ----------------
 
-.. namespace:: tbb::flow::indexer_node
+.. namespace:: oneapi::tbb::flow::indexer_node
 	       
 .. cpp:function:: indexer_node(graph &g)
 

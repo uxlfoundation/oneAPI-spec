@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,8 +11,9 @@ A ``reset_flags`` enumeration represents flags that can be passed to the ``graph
 
 .. code:: cpp
 
-    // Defined in header <tbb/flow_graph.h>
+    // Defined in header <oneapi/tbb/flow_graph.h>
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -24,6 +25,7 @@ A ``reset_flags`` enumeration represents flags that can be passed to the ``graph
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 Its enumerated values and their meanings are as follows:
 

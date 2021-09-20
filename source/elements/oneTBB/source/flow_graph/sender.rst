@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,6 +11,7 @@ A base class for all nodes that may send messages.
 
 .. code:: cpp
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -19,5 +20,6 @@ A base class for all nodes that may send messages.
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 The ``T`` type is a message type.

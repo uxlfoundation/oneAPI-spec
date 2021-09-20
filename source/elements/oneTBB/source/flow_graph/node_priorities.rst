@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -12,6 +12,7 @@ nodes, guiding threads that execute the graph to prefer nodes with higher priori
 
 .. code:: cpp
 
+    namespace oneapi {
     namespace tbb {
     namespace flow {
 
@@ -21,6 +22,7 @@ nodes, guiding threads that execute the graph to prefer nodes with higher priori
 
     } // namespace flow
     } // namespace tbb
+    } // namespace oneapi
 
 ``function_node``, ``multifunction_node``, ``async_node`` and ``continue_node`` has a constructor
 with parameter of ``node_priority_t`` type, which sets the node priority in the graph: the larger

@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -7,7 +7,7 @@ concurrent_unordered_set
 ========================
 **[containers.concurrent_unordered_set]**
 
-``tbb::concurrent_unordered_set`` is a class template that represents an unordered sequence of unique elements.
+``oneapi::tbb::concurrent_unordered_set`` is a class template that represents an unordered sequence of unique elements.
 It supports concurrent insertion, lookup, and traversal, but does not support concurrent erasure.
 
 Class Template Synopsis
@@ -15,237 +15,239 @@ Class Template Synopsis
 
 .. code:: cpp
 
-    // Defined in header <tbb/concurrent_unordered_set.h>
+    // Defined in header <oneapi/tbb/concurrent_unordered_set.h>
 
-    namespace tbb {
-        template <typename T,
-                  typename Hash = std::hash<Key>,
-                  typename KeyEqual = std::equal_to<Key>,
-                  typename Allocator = tbb_allocator<std::pair<const Key, T>>>
-        class concurrent_unordered_set {
-        public:
-            using key_type = Key;
-            using value_type = Key;
+    namespace oneapi {
+        namespace tbb {
+            template <typename T,
+                      typename Hash = std::hash<Key>,
+                      typename KeyEqual = std::equal_to<Key>,
+                      typename Allocator = tbb_allocator<std::pair<const Key, T>>>
+            class concurrent_unordered_set {
+            public:
+                using key_type = Key;
+                using value_type = Key;
 
-            using size_type = <implementation-defined unsigned integer type>;
-            using difference_type = <implementation-defined signed integer type>;
+                using size_type = <implementation-defined unsigned integer type>;
+                using difference_type = <implementation-defined signed integer type>;
 
-            using hasher = Hash;
-            using key_equal = /*See below*/;
+                using hasher = Hash;
+                using key_equal = /*See below*/;
 
-            using allocator_type = Allocator;
+                using allocator_type = Allocator;
 
-            using reference = value_type&;
-            using const_reference = const value_type&;
+                using reference = value_type&;
+                using const_reference = const value_type&;
 
-            using pointer = typename std::allocator_traits<Allocator>::pointer;
-            using const_pointer = typename std::allocator_traits<Allocator>::const_pointer;
+                using pointer = typename std::allocator_traits<Allocator>::pointer;
+                using const_pointer = typename std::allocator_traits<Allocator>::const_pointer;
 
-            using iterator = <implementation-defined ForwardIterator>;
-            using const_iterator = <implementation-defined constant ForwardIterator>;
+                using iterator = <implementation-defined ForwardIterator>;
+                using const_iterator = <implementation-defined constant ForwardIterator>;
 
-            using local_iterator = <implementation-defined ForwardIterator>;
-            using const_local_iterator = <implementation-defined constant ForwardIterator>;
+                using local_iterator = <implementation-defined ForwardIterator>;
+                using const_local_iterator = <implementation-defined constant ForwardIterator>;
 
-            using node_type = <implementation-defined node handle>;
+                using node_type = <implementation-defined node handle>;
 
-            using range_type = <implementation-defined ContainerRange>;
-            using const_range_type = <implementation-defined constant ContainerRange>;
+                using range_type = <implementation-defined ContainerRange>;
+                using const_range_type = <implementation-defined constant ContainerRange>;
 
-            // Construction, destruction, copying
-            concurrent_unordered_set();
+                // Construction, destruction, copying
+                concurrent_unordered_set();
 
-            explicit concurrent_unordered_set( size_type bucket_count, const hasher& hash = hasher(),
-                                               const key_equal& equal = key_equal(),
-                                               const allocator_type& alloc = allocator_type() );
+                explicit concurrent_unordered_set( size_type bucket_count, const hasher& hash = hasher(),
+                                                   const key_equal& equal = key_equal(),
+                                                   const allocator_type& alloc = allocator_type() );
 
-            concurrent_unordered_set( size_type bucket_count, const allocator_type& alloc );
+                concurrent_unordered_set( size_type bucket_count, const allocator_type& alloc );
 
-            concurrent_unordered_set( size_type bucket_count, const hasher& hash,
-                                      const allocator_type& alloc );
+                concurrent_unordered_set( size_type bucket_count, const hasher& hash,
+                                          const allocator_type& alloc );
 
-            explicit concurrent_unordered_set( const allocator_type& alloc );
+                explicit concurrent_unordered_set( const allocator_type& alloc );
 
-            template <typename InputIterator>
-            concurrent_unordered_set( InputIterator first, InputIterator last,
-                                      size_type bucket_count = /*implementation-defined*/,
-                                      const hasher& hash = hasher(),
-                                      const key_equal& equal = key_equal(),
-                                      const allocator_type& alloc = allocator_type() );
+                template <typename InputIterator>
+                concurrent_unordered_set( InputIterator first, InputIterator last,
+                                          size_type bucket_count = /*implementation-defined*/,
+                                          const hasher& hash = hasher(),
+                                          const key_equal& equal = key_equal(),
+                                          const allocator_type& alloc = allocator_type() );
 
-            template <typename Inputiterator>
-            concurrent_unordered_set( InputIterator first, InputIterator last,
-                                      size_type bucket_count, const allocator_type& alloc );
+                template <typename Inputiterator>
+                concurrent_unordered_set( InputIterator first, InputIterator last,
+                                          size_type bucket_count, const allocator_type& alloc );
 
-            template <typename InputIterator>
-            concurrent_unordered_set( InputIterator first, InputIterator last,
-                                      size_type bucket_count, const hasher& hash,
-                                      const allocator_type& alloc );
+                template <typename InputIterator>
+                concurrent_unordered_set( InputIterator first, InputIterator last,
+                                          size_type bucket_count, const hasher& hash,
+                                          const allocator_type& alloc );
 
-            concurrent_unordered_set( std::initializer_list<value_type> init,
-                                      size_type bucket_count = /*implementation-defined*/,
-                                      const hasher& hash = hasher(),
-                                      const key_equal& equal = key_equal(),
-                                      const allocator_type& alloc = allocator_type() );
+                concurrent_unordered_set( std::initializer_list<value_type> init,
+                                          size_type bucket_count = /*implementation-defined*/,
+                                          const hasher& hash = hasher(),
+                                          const key_equal& equal = key_equal(),
+                                          const allocator_type& alloc = allocator_type() );
 
-            concurrent_unordered_set( std::initializer_list<value_type> init,
-                                      size_type bucket_count, const allocator_type& alloc );
+                concurrent_unordered_set( std::initializer_list<value_type> init,
+                                          size_type bucket_count, const allocator_type& alloc );
 
-            concurrent_unordered_set( std::initializer_list<value_type> init,
-                                      size_type bucket_count, const hasher& hash,
-                                      const allocator_type& alloc );
+                concurrent_unordered_set( std::initializer_list<value_type> init,
+                                          size_type bucket_count, const hasher& hash,
+                                          const allocator_type& alloc );
 
-            concurrent_unordered_set( const concurrent_unordered_set& other );
-            concurrent_unordered_set( const concurrent_unordered_set& other,
-                                      const allocator_type& alloc );
+                concurrent_unordered_set( const concurrent_unordered_set& other );
+                concurrent_unordered_set( const concurrent_unordered_set& other,
+                                          const allocator_type& alloc );
 
-            concurrent_unordered_set( concurrent_unordered_set&& other );
-            concurrent_unordered_set( concurrent_unordered_set&& other,
-                                      const allocator_type& alloc );
+                concurrent_unordered_set( concurrent_unordered_set&& other );
+                concurrent_unordered_set( concurrent_unordered_set&& other,
+                                          const allocator_type& alloc );
 
-            ~concurrent_unordered_set();
+                ~concurrent_unordered_set();
 
-            concurrent_unordered_set& operator=( const concurrent_unordered_set& other );
-            concurrent_unordered_set& operator=( concurrent_unordered_set&& other ) noexcept(/*See details*/);
+                concurrent_unordered_set& operator=( const concurrent_unordered_set& other );
+                concurrent_unordered_set& operator=( concurrent_unordered_set&& other ) noexcept(/*See details*/);
 
-            concurrent_unordered_set& operator=( std::initializer_list<value_type> init );
+                concurrent_unordered_set& operator=( std::initializer_list<value_type> init );
 
-            allocator_type get_allocator() const;
+                allocator_type get_allocator() const;
 
-            // Iterators
-            iterator begin() noexcept;
-            const_iterator begin() const noexcept;
-            const_iterator cbegin() const noexcept;
+                // Iterators
+                iterator begin() noexcept;
+                const_iterator begin() const noexcept;
+                const_iterator cbegin() const noexcept;
 
-            iterator end() noexcept;
-            const_iterator end() const noexcept;
-            const_iterator cend() const noexcept;
+                iterator end() noexcept;
+                const_iterator end() const noexcept;
+                const_iterator cend() const noexcept;
 
-            // Size and capacity
-            bool empty() const noexcept;
-            size_type size() const noexcept;
-            size_type max_size() const noexcept;
+                // Size and capacity
+                bool empty() const noexcept;
+                size_type size() const noexcept;
+                size_type max_size() const noexcept;
 
-            // Concurrently safe modifiers
-            std::pair<iterator, bool> insert( const value_type& value );
-            iterator insert( const_iterator hint, const value_type& value );
+                // Concurrently safe modifiers
+                std::pair<iterator, bool> insert( const value_type& value );
+                iterator insert( const_iterator hint, const value_type& value );
 
-            std::pair<iterator, bool> insert( value_type&& value );
-            iterator insert( const_iterator hint, value_type&& value );
+                std::pair<iterator, bool> insert( value_type&& value );
+                iterator insert( const_iterator hint, value_type&& value );
 
-            template <typename InputIterator>
-            void insert( InputIterator first, InputIterator last );
+                template <typename InputIterator>
+                void insert( InputIterator first, InputIterator last );
 
-            void insert( std::initializer_list<value_type> init );
+                void insert( std::initializer_list<value_type> init );
 
-            std::pair<iterator, bool> insert( node_type&& nh );
-            iterator insert( const_iterator hint, node_type&& nh );
+                std::pair<iterator, bool> insert( node_type&& nh );
+                iterator insert( const_iterator hint, node_type&& nh );
 
-            template <typename... Args>
-            std::pair<iterator, bool> emplace( Args&&... args );
+                template <typename... Args>
+                std::pair<iterator, bool> emplace( Args&&... args );
 
-            template <typename... Args>
-            iterator emplace_hint( const_iterator hint, Args&&... args );
+                template <typename... Args>
+                iterator emplace_hint( const_iterator hint, Args&&... args );
 
-            template <typename SrcHash, typename SrcKeyEqual>
-            void merge( concurrent_unordered_set<T, SrcHash, SrcKeyEqual, Allocator>& source );
+                template <typename SrcHash, typename SrcKeyEqual>
+                void merge( concurrent_unordered_set<T, SrcHash, SrcKeyEqual, Allocator>& source );
 
-            template <typename SrcHash, typename SrcKeyEqual>
-            void merge( concurrent_unordered_set<T, SrcHash, SrcKeyEqual, Allocator>&& source );
+                template <typename SrcHash, typename SrcKeyEqual>
+                void merge( concurrent_unordered_set<T, SrcHash, SrcKeyEqual, Allocator>&& source );
 
-            template <typename SrcHash, typename SrcKeyEqual>
-            void merge( concurrent_unordered_multiset<T, SrcHash, SrcKeyEqual, Allocator>& source );
+                template <typename SrcHash, typename SrcKeyEqual>
+                void merge( concurrent_unordered_multiset<T, SrcHash, SrcKeyEqual, Allocator>& source );
 
-            template <typename SrcHash, typename SrcKeyEqual>
-            void merge( concurrent_unordered_multiset<T, SrcHash, SrcKeyEqual, Allocator>&& source );
+                template <typename SrcHash, typename SrcKeyEqual>
+                void merge( concurrent_unordered_multiset<T, SrcHash, SrcKeyEqual, Allocator>&& source );
 
-            // Concurrently unsafe modifiers
-            void clear() noexcept;
+                // Concurrently unsafe modifiers
+                void clear() noexcept;
 
-            iterator unsafe_erase( const_iterator pos );
-            iterator unsafe_erase( iterator pos );
+                iterator unsafe_erase( const_iterator pos );
+                iterator unsafe_erase( iterator pos );
 
-            iterator unsafe_erase( const_iterator first, const_iterator last );
+                iterator unsafe_erase( const_iterator first, const_iterator last );
 
-            size_type unsafe_erase( const key_type& key );
+                size_type unsafe_erase( const key_type& key );
 
-            template <typename K>
-            size_type unsafe_erase( const K& key );
+                template <typename K>
+                size_type unsafe_erase( const K& key );
 
-            node_type unsafe_extract( const_iterator pos );
-            node_type unsafe_extract( iterator pos );
+                node_type unsafe_extract( const_iterator pos );
+                node_type unsafe_extract( iterator pos );
 
-            node_type unsafe_extract( const key_type& key );
+                node_type unsafe_extract( const key_type& key );
 
-            template <typename K>
-            node_type unsafe_extract( const K& key );
+                template <typename K>
+                node_type unsafe_extract( const K& key );
 
-            void swap( concurrent_unordered_set& other );
+                void swap( concurrent_unordered_set& other );
 
-            // Lookup
-            size_type count( const key_type& key ) const;
+                // Lookup
+                size_type count( const key_type& key ) const;
 
-            template <typename K>
-            size_type count( const K& key ) const;
+                template <typename K>
+                size_type count( const K& key ) const;
 
-            iterator find( const key_type& key );
-            const_iterator find( const key_type& key ) const;
+                iterator find( const key_type& key );
+                const_iterator find( const key_type& key ) const;
 
-            template <typename K>
-            iterator find( const K& key );
+                template <typename K>
+                iterator find( const K& key );
 
-            template <typename K>
-            const_iterator find( const K& key ) const;
+                template <typename K>
+                const_iterator find( const K& key ) const;
 
-            bool contains( const key_type& key ) const;
+                bool contains( const key_type& key ) const;
 
-            template <typename K>
-            bool contains( const K& key ) const;
+                template <typename K>
+                bool contains( const K& key ) const;
 
-            std::pair<iterator, iterator> equal_range( const key_type& key );
-            std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
+                std::pair<iterator, iterator> equal_range( const key_type& key );
+                std::pair<const_iterator, const_iterator> equal_range( const key_type& key ) const;
 
-            template <typename K>
-            std::pair<iterator, iterator> equal_range( const K& key );
+                template <typename K>
+                std::pair<iterator, iterator> equal_range( const K& key );
 
-            template <typename K>
-            std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
+                template <typename K>
+                std::pair<const_iterator, const_iterator> equal_range( const K& key ) const;
 
-            // Bucket interface
-            local_iterator unsafe_begin( size_type n );
-            const_local_iterator unsafe_begin( size_type n ) const;
-            const_local_iterator unsafe_cbegin( size_type n ) const;
+                // Bucket interface
+                local_iterator unsafe_begin( size_type n );
+                const_local_iterator unsafe_begin( size_type n ) const;
+                const_local_iterator unsafe_cbegin( size_type n ) const;
 
-            local_iterator unsafe_end( size_type n );
-            const_local_iterator unsafe_end( size_type n ) const;
-            const_local_iterator unsafe_cend( size_type n ) const;
+                local_iterator unsafe_end( size_type n );
+                const_local_iterator unsafe_end( size_type n ) const;
+                const_local_iterator unsafe_cend( size_type n ) const;
 
-            size_type unsafe_bucket_count() const;
-            size_type unsafe_max_bucket_bount() const;
+                size_type unsafe_bucket_count() const;
+                size_type unsafe_max_bucket_bount() const;
 
-            size_type unsafe_bucket_size( size_type n ) const;
+                size_type unsafe_bucket_size( size_type n ) const;
 
-            size_type unsafe_bucket( const key_type& key ) const;
+                size_type unsafe_bucket( const key_type& key ) const;
 
-            // Hash policy
-            float load_factor() const;
+                // Hash policy
+                float load_factor() const;
 
-            float max_load_factor() const;
-            void max_load_factor( float ml );
+                float max_load_factor() const;
+                void max_load_factor( float ml );
 
-            void rehash( size_type count );
+                void rehash( size_type count );
 
-            void reserve( size_type count );
+                void reserve( size_type count );
 
-            // Observers
-            hasher hash_function() const;
-            key_equal key_eq() const;
+                // Observers
+                hasher hash_function() const;
+                key_equal key_eq() const;
 
-            // Parallel iteration
-            range_type range();
-            const_range_type range() const;
-        }; // class concurrent_unordered_set
-    } // namespace tbb
+                // Parallel iteration
+                range_type range();
+                const_range_type range() const;
+            }; // class concurrent_unordered_set
+        } // namespace tbb
+    } // namespace oneapi
 
 Requirements:
 
@@ -259,7 +261,7 @@ Requirements:
 Description
 -----------
 
-``tbb::concurrent_unordered_set`` is an unordered sequence, which elements are organized into
+``oneapi::tbb::concurrent_unordered_set`` is an unordered sequence, which elements are organized into
 buckets. The value of the hash function ``Hash`` for ``Key`` object determines the number of the bucket
 in which the corresponding element will be placed.
 
@@ -294,11 +296,11 @@ Non-member functions
 --------------------
 
 These functions provide binary comparison and swap operations
-on ``tbb::concurrent_unordered_set`` objects.
+on ``oneapi::tbb::concurrent_unordered_set`` objects.
 
 The exact namespace where these functions are defined is unspecified, as long as they may be used in
 respective comparison operations. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``tbb::concurrent_unordered_set`` as a type alias for which
+in the same internal namespace and define ``oneapi::tbb::concurrent_unordered_set`` as a type alias for which
 the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp
