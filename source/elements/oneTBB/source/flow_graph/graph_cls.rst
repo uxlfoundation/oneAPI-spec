@@ -46,10 +46,10 @@ reset_flags enumeration
 Member functions
 ----------------
 
-.. cpp:function:: graph(task_group_context& group )
+.. cpp:function:: graph(task_group_context& context )
 
-    Constructs a graph with no nodes. If ``group`` is specified, the
-    graph tasks are executed in this group. By default, the graph is
+    Constructs a graph with no nodes. If ``context`` is specified, the
+    graph tasks are executed in this context. By default, the graph is
     executed in a bound context of its own.
 
 .. cpp:function:: ~graph()

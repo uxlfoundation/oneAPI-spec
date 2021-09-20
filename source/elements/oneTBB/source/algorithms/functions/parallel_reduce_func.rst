@@ -17,20 +17,20 @@ Function template that computes reduction over a range.
         namespace tbb {
 
             template<typename Range, typename Value, typename Func, typename Reduction>
-            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& group);
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner, task_group_context& context);
             template<typename Range, typename Value, typename Func, typename Reduction>
             Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, /* see-below */ partitioner);
             template<typename Range, typename Value, typename Func, typename Reduction>
-            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& group);
+            Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction, task_group_context& context);
             template<typename Range, typename Value, typename Func, typename Reduction>
             Value parallel_reduce(const Range& range, const Value& identity, const Func& func, const Reduction& reduction);
 
             template<typename Range, typename Body>
-            void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& group);
+            void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner, task_group_context& context);
             template<typename Range, typename Body>
             void parallel_reduce(const Range& range, Body& body, /* see-below */ partitioner);
             template<typename Range, typename Body>
-            void parallel_reduce(const Range& range, Body& body, task_group_context& group);
+            void parallel_reduce(const Range& range, Body& body, task_group_context& context);
             template<typename Range, typename Body>
             void parallel_reduce(const Range& range, Body& body);
 
@@ -83,7 +83,7 @@ When executed serially ``parallel_reduce`` run sequentially from left to right i
 Sequential execution never invokes the splitting constructor or method join.
 
 All overloads can accept a :doc:`task_group_context <../../task_scheduler/scheduling_controls/task_group_context_cls>` object
-so that the algorithm’s tasks are executed in this group. By default, the algorithm is executed in a bound group of its own.
+so that the algorithm’s tasks are executed in this context. By default, the algorithm is executed in a bound context of its own.
 
 **Complexity**
 
