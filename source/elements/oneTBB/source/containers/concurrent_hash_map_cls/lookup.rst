@@ -52,7 +52,7 @@ count
 
         size_type count( const key_type& key ) const;
 
-    **Returns**: ``1`` if an element with the key equivalent to ``key`` exists; ``0``, otherwise.
+    **Returns**: ``1`` if an element with the key equivalent to ``key`` exists; ``0`` otherwise.
 
 --------------------------
 

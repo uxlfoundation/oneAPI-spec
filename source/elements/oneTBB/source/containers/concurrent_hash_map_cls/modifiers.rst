@@ -21,13 +21,13 @@ Inserting values
     If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value constructed from ``key, mapped_type()`` into the container.
 
-    Sets the ``result`` to provide access to the inserted element or to the element with equal key
+    Sets the ``result`` to provide access to the inserted element or to the element with equal key,
     which was already presented in the container.
 
     **Requirements**:
 
-    * the ``value_type`` type must meet the ``EmplaceConstructible`` requirements the from [container.requirements] ISO C++ Standard section.
-    * the ``mapped_type`` type must meet the ``DefaultConstructible`` requirements from the [defaultconstructible] ISO C++ Standard section.
+    * the ``value_type`` type must meet the ``EmplaceConstructible`` requirements described in the [container.requirements] section of the ISO C++ Standard.
+    * the ``mapped_type`` type must meet the ``DefaultConstructible`` requirements described in the [defaultconstructible] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
@@ -44,7 +44,7 @@ Inserting values
     If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value constructed from ``key, mapped_type()`` into the container.
 
-    Sets the ``result`` to provide access to the inserted element or to the element with the key
+    Sets the ``result`` to provide access to the inserted element or to the element with the key,
     that compares equivalent to the value ``key``, which was already presented in the container.
 
     This overload only participates in the overload resolution if:
@@ -68,11 +68,11 @@ Inserting values
     If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value ``value`` into the container.
 
-    Sets the ``result`` to provide access to the inserted element or to the element with equal key
+    Sets the ``result`` to provide access to the inserted element or to the element with equal key,
     which was already presented in the container.
 
-    **Requirements**: the ``value_type`` type must meet the ``CopyInsertable`` requirements from the
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the ``value_type`` type must meet the ``CopyInsertable`` requirements described in the
+    [container.requirements] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
@@ -84,8 +84,8 @@ Inserting values
 
     Attempts to insert the value ``value`` into the container.
 
-    **Requirements**: the ``value_type`` type must meet the ``CopyInsertable`` requirements from the
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the ``value_type`` type must meet the ``CopyInsertable`` requirements described in the
+    [container.requirements] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
@@ -100,13 +100,13 @@ Inserting values
     If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert the value ``value`` into the container using move semantics.
 
-    Sets the ``result`` to provide access to the inserted element or to the element with equal key
+    Sets the ``result`` to provide access to the inserted element or to the element with equal key,
     which was already presented in the container.
 
     ``value`` is left in a valid, but unspecified state.
 
-    **Requirements**: the ``value_type`` type must meet the ``MoveInsertable`` requirements from the
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the ``value_type`` type must meet the ``MoveInsertable`` requirements described in the
+    [container.requirements] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
@@ -118,8 +118,8 @@ Inserting values
 
     Attempts to insert the value ``value`` into the container using move semantics.
 
-    **Requirements**: the ``value_type`` type must meet the ``MoveInsertable`` requirements from the
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the ``value_type`` type must meet the ``MoveInsertable`` requirements described in the
+    [container.requirements] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise.
 
@@ -138,7 +138,7 @@ Inserting sequences of elements
     it is unspecified which element should be inserted.
 
     **Requirements**: the ``InputIterator`` type must meet the requirements of `InputIterator`
-    from the ``[input.iterators]`` ISO C++ Standard section.
+    described in the ``[input.iterators]`` section of the ISO C++ Standard.
 
 --------------------------
 
@@ -162,11 +162,11 @@ Emplacing elements
     If the ``result`` accessor is not empty, releases the ``result`` and
     attempts to insert an element constructed in-place from ``args`` into the container.
 
-    Sets the ``result`` to provide access to the inserted element or to the element with equal key
+    Sets the ``result`` to provide access to the inserted element or to the element with equal key,
     which was already presented in the container.
 
-    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements from the
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements described in the
+    [container.requirements] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise
 
@@ -179,8 +179,8 @@ Emplacing elements
 
     Attempts to insert an element constructed in-place from ``args`` into the container.
 
-    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements from the
-    [container.requirements] ISO C++ Standard section.
+    **Requirements**: the type ``value_type`` must meet the ``EmplaceConstructible`` requirements described in the
+    [container.requirements] section of the ISO C++ Standard.
 
     **Returns**: ``true`` if an element is inserted; ``false`` otherwise
 
@@ -193,7 +193,7 @@ Erasing elements
 
     If an element with the key equivalent to  ``key`` exists, removes it from the container.
 
-    **Returns**: ``true`` if an element is removed; ``false``, otherwise.
+    **Returns**: ``true`` if an element is removed; ``false`` otherwise.
 
 --------------------------
 
@@ -207,7 +207,7 @@ Erasing elements
     This overload only participates in the overload resolution if qualified-id
     ``hash_compare_type::is_transparent`` is valid and denotes a type.
 
-    **Returns**: ``true`` if an element is removed; ``false``, otherwise.
+    **Returns**: ``true`` if an element is removed; ``false`` otherwise.
 
 --------------------------
 
@@ -221,4 +221,4 @@ Erasing elements
     **Requirements**: ``item_accessor`` should not be empty.
 
     **Returns**: ``true`` if an element is removed by the current thread; ``false``
-    if it was removed by another thread.
+    if it is removed by another thread.
