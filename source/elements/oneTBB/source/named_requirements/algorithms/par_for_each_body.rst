@@ -8,7 +8,7 @@ ParallelForEachBody
 **[req.parallel_for_each_body]**
 
 A type `Body` satisfies `ParallelForBody` if it meets the `Function Objects`
-requirements from the [function.objects] ISO C++ Standard section.
+requirements described in the [function.objects] section of the ISO C++ standard.
 It should also meet one of the following requirements:
 
 ----------------------------------------------------------------

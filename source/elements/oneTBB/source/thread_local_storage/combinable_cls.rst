@@ -106,7 +106,7 @@ Member functions
 
 .. cpp:function:: template<typename BinaryFunc> T combine(BinaryFunc f)
 
-    **Requires**: A ``BinaryFunc`` must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    **Requires**: A ``BinaryFunc`` must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
     Specifically, the type should be an associative binary functor with the signature ``T BinaryFunc(T,T)`` or ``T BinaryFunc(const T&,const T&)``.
     A ``T`` type must be the same as a corresponding template parameter for the ``combinable`` object.
 
@@ -118,7 +118,7 @@ Member functions
 
 .. cpp:function:: template<typename UnaryFunc> void combine_each(UnaryFunc f)
 
-    **Requires**: An ``UnaryFunc`` must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    **Requires**: An ``UnaryFunc`` must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
     Specifically, the type should be an unary functor with the one of the signatures: ``void UnaryFunc(T)``, ``void UnaryFunc(T&)``, or ``void UnaryFunc(const T&)``
     A ``T`` type must be the same as a corresponding template parameter for the ``enumerable_thread_specific`` object.
 

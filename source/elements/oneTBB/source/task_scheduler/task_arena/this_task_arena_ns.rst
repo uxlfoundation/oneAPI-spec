@@ -67,7 +67,7 @@ with the ``task_arena`` currently used by the calling thread.
 
     Runs the specified functor in isolation by restricting the calling thread to process only tasks
     scheduled in the scope of the functor (also called the isolation region). The function returns the value returned by the functor.
-    The ``F`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
 
     .. caution::
 

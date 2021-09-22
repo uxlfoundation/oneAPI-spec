@@ -214,7 +214,7 @@ Member functions
 .. cpp:function:: template<F> void enqueue(F&& f)
 
     Enqueues a task into the ``task_arena`` to process the specified functor and immediately returns.
-    The ``F`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
     The task is scheduled for eventual execution by a worker thread even if no thread ever explicitly waits for the task to complete.
     If the total number of worker threads is zero, a special additional worker thread is created to execute enqueued tasks.
 
@@ -235,7 +235,7 @@ Member functions
 .. cpp:function:: template<F> auto execute(F&& f) -> decltype(f())
 
     Executes the specified functor in the ``task_arena`` and returns the value returned by the functor.
-    The ``F`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
 
     The calling thread joins the ``task_arena`` if possible, and executes the functor.
     Upon return it restores the previous task scheduler state and floating-point settings.
