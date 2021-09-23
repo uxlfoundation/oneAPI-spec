@@ -81,7 +81,7 @@ Member functions
 .. cpp:function:: template<typename Func> void run(Func&& f)
 
     Adds a task to compute ``f()`` and returns immediately.
-    The ``Func`` type must meet the `Function Objects` requirements from [function.objects] ISO C++ Standard section.
+    The ``Func`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
     
 .. cpp:function:: void run(task_handle&& h)
    
@@ -95,7 +95,7 @@ Member functions
 .. cpp:function:: template<typename Func> task_group_status run_and_wait(const Func& f)
 
     Equivalent to ``{run(f); return wait();}``.
-    The ``Func`` type must meet the `Function Objects` requirements from the [function.objects] ISO C++ Standard section.
+    The ``Func`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
 
     **Returns**: The status of ``task_group``. See :doc:`task_group_status <task_group_status_enum>`.
 

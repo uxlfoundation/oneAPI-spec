@@ -24,8 +24,8 @@ Function template that executes function exactly once.
 
 Requirements:
 
-* ``Func`` type must meet the ``Function Objects``
-  requirements from the [function.objects] section of the ISO C++ Standard section.
+* ``Func`` type must meet the `Function Objects` 
+  requirements described in the [function.objects] section of the ISO C++ standard.
 
 Executes the ``Func`` object only once, even if it is called concurrently. It allows other threads
 blocked on the same ``collaborative_once_flag`` to join oneTBB parallel construction called
