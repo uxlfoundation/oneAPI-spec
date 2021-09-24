@@ -4,9 +4,9 @@
 
 .. _oneart-section:
 
-====================
-Advanced Ray Tracing
-====================
+===========================
+oneART Advanced Ray Tracing
+===========================
 
 .. include:: overview.inc.rst
 
