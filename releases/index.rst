@@ -24,6 +24,9 @@ oneAPI Specification
 
 The latest approved specification is 1.0. The 1.1 specification is
 under development and is labeled *provisional* until it is approved.
+Releases are listed below. See GitHub_ for the latest build.
+
+.. _GitHub: https://github.com/oneapi-src/oneapi-spec
 
 
 1.1
