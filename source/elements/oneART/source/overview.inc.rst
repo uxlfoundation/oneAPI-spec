@@ -6,8 +6,8 @@ Advanced ray tracing defines a set of ray tracing and high-fidelity
 rendering and computation routines for use in a wide variety of 3D
 graphics uses including, film and television photorealistic visual
 effects and animation rendering, scientific visualization,
-high-performance computing computations, gaming, and more. Advanced
-ray tracing is designed to allow cooperative execution on a wide
+high-performance computing computations, gaming, and more. oneART is 
+designed to allow cooperative execution on a wide
 variety of computational devices: CPUs, GPUs, FPGAs, and other
 accelerators, termed “XPU” computation. The functionality is
 subdivided into several domains: geometric ray tracing computations,
@@ -18,5 +18,5 @@ highly capable, easy to use rendering engine.
 
 The individual components and their APIs are described.  Other design
 considerations and related components that are not necessarily part of
-the advanced ray tracing specification but that are worth mentioning
+the oneART specification but that are worth mentioning
 will be discussed in the appendix.
