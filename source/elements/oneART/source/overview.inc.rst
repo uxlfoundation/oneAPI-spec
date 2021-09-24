@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-Advanced ray tracing defines a set of ray tracing and high-fidelity
+oneART Advanced Ray Tracing defines a set of ray tracing and high-fidelity
 rendering and computation routines for use in a wide variety of 3D
 graphics uses including, film and television photorealistic visual
 effects and animation rendering, scientific visualization,
