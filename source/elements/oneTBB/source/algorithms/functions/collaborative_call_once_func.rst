@@ -75,9 +75,9 @@ the "cachedProperty" field.
                             val += foo(i);
                         }
                         return val;
-                },
+                    },
                     std::plus<double>{}
-            );
+                );
 
                 // continue serial part
                 cachedProperty = result;
