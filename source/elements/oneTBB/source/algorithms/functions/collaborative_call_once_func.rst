@@ -69,7 +69,7 @@ the "cachedProperty" field.
                 double result{};
 
                 // parallel part where threads can collaborate
-                result = oneapi::tbb::parallel_reduce(oneapi::tbb::blocked_range<int>(0, 1000), 0.f,
+                result = oneapi::tbb::parallel_reduce(oneapi::tbb::blocked_range<int>(0, 1000), 0.,
                     [] (auto r, double val) {
                         for(int i = r.begin(); i != r.end(); ++i) {
                             val += foo(i);
