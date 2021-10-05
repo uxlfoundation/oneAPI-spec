@@ -54,6 +54,8 @@ the "cachedProperty" field.
 .. code:: cpp
 
     #include "oneapi/tbb/collaborative_call_once.h"
+    #include "oneapi/tbb/parallel_reduce.h"
+    #include "oneapi/tbb/blocked_range.h"
 
     extern double foo(int i);
 
@@ -67,14 +69,14 @@ the "cachedProperty" field.
                 double result{};
 
                 // parallel part where threads can collaborate
-                result = oneapi::tbb::parallel_reduce(oneapi::tbb::blocked_range<int>(0, 1000),
-                    [&] (auto r, double r) {
+                result = oneapi::tbb::parallel_reduce(oneapi::tbb::blocked_range<int>(0, 1000), 0.,
+                    [] (auto r, double val) {
                         for(int i = r.begin(); i != r.end(); ++i) {
-                            r += foo(i);
+                            val += foo(i);
                         }
-                        return r;
+                        return val;
                     },
-                    std::plus<double, double>{}
+                    std::plus<double>{}
                 );
 
                 // continue serial part
