@@ -22,9 +22,9 @@ Function template that sorts a sequence.
             void parallel_sort( RandomAccessIterator begin, RandomAccessIterator end, const Compare& comp );
 
             template<typename Container>
-            void parallel_sort( Container& c );
+            void parallel_sort( Container&& c );
             template<typename Container>
-            void parallel_sort( Container& c, const Compare& comp );
+            void parallel_sort( Container&& c, const Compare& comp );
 
         } //  namespace tbb
     } // namespace oneapi
@@ -49,9 +49,9 @@ A call ``parallel_sort( begin, end, comp )`` sorts the sequence *[begin, end)* u
 A call ``parallel_sort( begin, end )`` is equivalent to ``parallel_sort( begin, end, comp )``, where `comp`
 uses `operator<` to determine relative orderings.
 
-A call ``parallel_sort( c, comp )`` is equivalent to ``parallel_sort( std::begin(c), std::end(c), comp )``.
+A call ``parallel_sort( c, comp )`` is equivalent to ``parallel_sort(std::begin(std::forward<C>(c)), std::end(std::forward<C>(c)), comp )``.
 
-A call ``parallel_sort( c )`` is equivalent to ``parallel_sort( c, comp )``, where `comp` uses `operator<`
+A call ``parallel_sort( c )`` is equivalent to ``parallel_sort( std::forward<C>(c), comp )``, where `comp` uses `operator<`
 to determine relative orderings.
 
 **Complexity**
