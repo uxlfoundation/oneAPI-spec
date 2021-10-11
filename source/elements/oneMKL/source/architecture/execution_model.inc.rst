@@ -75,9 +75,9 @@ Synchronization When Using USM APIs
 
 When USM pointers are used as input to, or output from, a oneMKL routine, it becomes the calling application's responsibility to manage possible asynchronicity.
 
-To help the calling application, all oneMKL routines with at least one USM pointer argument also take an optional reference to a list of *input events*, of type ``sycl::vector_class<sycl::event>``, and have a return value of type ``sycl::event`` representing computation completion::
+To help the calling application, all oneMKL routines with at least one USM pointer argument also take an optional reference to a list of *input events*, of type ``std::vector<sycl::event>``, and have a return value of type ``sycl::event`` representing computation completion::
 
-    sycl::event mkl::domain::routine(..., sycl::vector_class<sycl::event> &in_events = {});
+    sycl::event mkl::domain::routine(..., std::vector<sycl::event> &in_events = {});
 
 The routine shall ensure that all input events (if the list is present and non-empty) have occurred before any USM pointers are accessed. Likewise, the routine's output event shall not be complete until the routine has finished accessing all USM pointer arguments.
 

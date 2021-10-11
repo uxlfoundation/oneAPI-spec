@@ -99,7 +99,7 @@ min_max (USM version)
         const dataset<ObservationsLayout, Type*>& data,
         Type* min,
         Type* max,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

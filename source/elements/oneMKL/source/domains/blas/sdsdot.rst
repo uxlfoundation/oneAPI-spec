@@ -128,7 +128,7 @@ sdsdot (USM Version)
                           const float *y,
                           std::int64_t incy,
                           float *result,
-                          const sycl::vector_class<sycl::event> &dependencies = {})
+                          const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -141,7 +141,7 @@ sdsdot (USM Version)
                           const float *y,
                           std::int64_t incy,
                           float *result,
-                          const sycl::vector_class<sycl::event> &dependencies = {})
+                          const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

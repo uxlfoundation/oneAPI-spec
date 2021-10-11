@@ -163,7 +163,7 @@ hpr2 (USM Version)
                         const T *y,
                         std::int64_t incy,
                         T *a,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -177,7 +177,7 @@ hpr2 (USM Version)
                         const T *y,
                         std::int64_t incy,
                         T *a,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

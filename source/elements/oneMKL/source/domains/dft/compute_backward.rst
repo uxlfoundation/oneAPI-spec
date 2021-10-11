@@ -154,7 +154,7 @@ compute_backward (USM version)
       template <typename descriptor_type, typename data_type>
       sycl::event compute_backward( descriptor_type                               &desc,
                                     data_type                                     *inout,
-                                    const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+                                    const std::vector<cl::sycl::event> &dependencies = {});
    }
 
 .. rubric:: Syntax (In-place transform, using ``config_param::COMPLEX_STORAGE=config_value::REAL_REAL`` :ref:`data format<onemkl_dft_complex_storage>` )
@@ -167,7 +167,7 @@ compute_backward (USM version)
       sycl::event compute_backward(descriptor_type                               &desc,
                                    data_type                                     *inout_re,
                                    data_type                                     *inout_im,
-                                   const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+                                   const std::vector<cl::sycl::event> &dependencies = {});
 
    }
 
@@ -182,7 +182,7 @@ compute_backward (USM version)
       sycl::event compute_backward( descriptor_type                               &desc,
                                     input_type                                    *in,
                                     output_type                                   *out,
-                                    const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+                                    const std::vector<cl::sycl::event> &dependencies = {});
 
    }
 
@@ -199,7 +199,7 @@ compute_backward (USM version)
                                     input_type                                    *in_im,
                                     output_type                                   *out_re,
                                     output_type                                   *out_im,
-                                    const cl::sycl::vector_class<cl::sycl::event> &dependencies = {});
+                                    const std::vector<cl::sycl::event> &dependencies = {});
 
    }
 

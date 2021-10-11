@@ -77,7 +77,7 @@ generate (USM version)
 
     namespace oneapi::mkl::rng {
     template<typename DistrType, typename EngineType>
-    sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const sycl::vector_class<sycl::event> & dependencies);
+    sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const std::vector<sycl::event> & dependencies);
     }
 
 .. container:: section

@@ -56,7 +56,7 @@ atan2pi
                     const T *a,
                     const T *b,
                     T* y,
-                    sycl::vector_class<sycl::event> const & depends = {},
+                    std::vector<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
 
             } // namespace oneapi::mkl::vm

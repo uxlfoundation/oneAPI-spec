@@ -131,7 +131,7 @@ trsv (USM version)
                         oneapi::mkl::sparse::matrix_handle_t  A_handle,
                         fp                                    *x,
                         fp                                    *y
-                        const sycl::vector_class<sycl::event> &dependencies = {});
+                        const std::vector<sycl::event> &dependencies = {});
 
    }
 

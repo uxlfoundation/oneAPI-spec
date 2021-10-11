@@ -143,7 +143,7 @@ trmv (USM version)
                         fp                                    *x,
                         fp                                    beta,
                         fp                                    *y
-                        const sycl::vector_class<sycl::event> &dependencies = {});
+                        const std::vector<sycl::event> &dependencies = {});
 
    }
 

@@ -175,7 +175,7 @@ rotmg (USM Version)
                          T *x1,
                          T *y1,
                          T *param,
-                         const sycl::vector_class<sycl::event> &dependencies = {})
+                         const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -186,7 +186,7 @@ rotmg (USM Version)
                          T *x1,
                          T *y1,
                          T *param,
-                         const sycl::vector_class<sycl::event> &dependencies = {})
+                         const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

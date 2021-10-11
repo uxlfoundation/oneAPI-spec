@@ -95,7 +95,7 @@ skewness (USM version)
         sycl::event skewness(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
         Type* skewness,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

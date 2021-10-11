@@ -65,7 +65,7 @@ linearfrac
                     T scaleb,
                     T shiftb,
                     T* y,
-                    sycl::vector_class<sycl::event> const & depends = {},
+                    std::vector<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
                     oneapi::mkl::vm::error_handler<T> errhandler = {});
 

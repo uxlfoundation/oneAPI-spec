@@ -111,7 +111,7 @@ raw_moment (USM version)
         Type* raw_moment_2 = nullptr,
         Type* raw_moment_3 = nullptr,
         Type* raw_moment_4 = nullptr,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section
