@@ -148,7 +148,7 @@ ormrq (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event ormrq(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event ormrq(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

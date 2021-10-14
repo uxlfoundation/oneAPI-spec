@@ -110,7 +110,7 @@ raw_sum (USM version)
         Type* raw_sum_2 = nullptr,
         Type* raw_sum_3 = nullptr,
         Type* raw_sum_4 = nullptr,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

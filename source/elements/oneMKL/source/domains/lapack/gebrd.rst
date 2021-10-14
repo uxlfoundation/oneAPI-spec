@@ -172,7 +172,7 @@ gebrd (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event gebrd(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, RealT *d, RealT *e, T *tauq, T *taup, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event gebrd(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, RealT *d, RealT *e, T *tauq, T *taup, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

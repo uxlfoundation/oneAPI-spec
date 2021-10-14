@@ -188,7 +188,7 @@ hegvd (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event hegvd(cl::sycl::queue &queue, std::int64_t itype, oneapi::mkl::job jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *b, std::int64_t ldb, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event hegvd(cl::sycl::queue &queue, std::int64_t itype, oneapi::mkl::job jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *b, std::int64_t ldb, RealT *w, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

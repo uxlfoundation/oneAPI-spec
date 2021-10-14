@@ -99,7 +99,7 @@ variation with provided mean (USM version)
         Type* mean,
         const dataset<ObservationsLayout, Type*>& data,
         Type* variation,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

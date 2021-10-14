@@ -95,7 +95,7 @@ variation (USM version)
         sycl::event variation(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
         Type* variation,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

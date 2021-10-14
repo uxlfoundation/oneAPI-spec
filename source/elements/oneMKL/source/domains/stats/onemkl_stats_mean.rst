@@ -95,7 +95,7 @@ mean (USM version)
         sycl::event mean(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
         Type* mean,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

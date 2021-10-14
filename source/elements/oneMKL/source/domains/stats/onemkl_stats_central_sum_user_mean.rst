@@ -109,7 +109,7 @@ central_sum with provided mean  (USM version)
         Type* central_sum_2,
         Type* central_sum_3 = nullptr,
         Type* central_sum_4 = nullptr,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

@@ -138,7 +138,7 @@ The total number of problems to solve, ``batch_size``, is a sum of sizes of all 
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event geqrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event geqrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, T **tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -226,7 +226,7 @@ The routine does not form the matrices :math:`Q_i` explicitly. Instead, :math:`Q
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      sycl::event geqrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      sycl::event geqrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

@@ -157,7 +157,7 @@ rot (USM Version)
                        std::int64_t incy,
                        T_scalar c,
                        T_scalar s,
-                       const sycl::vector_class<sycl::event> &dependencies = {})
+                       const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -170,7 +170,7 @@ rot (USM Version)
                        std::int64_t incy,
                        T_scalar c,
                        T_scalar s,
-                       const sycl::vector_class<sycl::event> &dependencies = {})
+                       const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

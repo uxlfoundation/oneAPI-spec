@@ -56,7 +56,7 @@ sincos
                     const T *a,
                     T* y,
                     T* z,
-                    sycl::vector_class<sycl::event> const & depends = {},
+                    std::vector<sycl::event> const & depends = {},
                     oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
                     oneapi::mkl::vm::error_handler<T> errhandler = {});
 

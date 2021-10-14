@@ -63,7 +63,10 @@ oneMKL uses the following DPC++ data types:
 * SYCL buffer ``sycl::buffer`` for buffer-based memory access. See :ref:`onemkl_buffers` for more details.
 * Unified Shared Memory (USM) for pointer-based memory access. See :ref:`onemkl_usm` for more details.
 * SYCL event ``sycl::event`` for output event synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
-* Vector of SYCL events ``sycl::vector_class<sycl::event>`` for input events synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
+* Vector of SYCL events ``std::vector<sycl::event>`` for input events synchronization in oneMKL routines with USM pointers. See :ref:`onemkl_synchronization_with_usm` for more details.
+
+.. note::
+    The class ``sycl::vector_class`` has been removed from SYCL 2020 and the standard class ``std::vector`` should be used instead for vector of SYCL events in oneMKL routines with USM pointers
 
 .. _onemkl_datatypes:
 

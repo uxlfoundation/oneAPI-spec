@@ -95,7 +95,7 @@ kurtosis (USM version)
         sycl::event kurtosis(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
         Type* kurtosis,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

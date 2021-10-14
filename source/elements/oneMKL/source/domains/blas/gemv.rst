@@ -185,7 +185,7 @@ gemv (USM Version)
                         T beta,
                         T *y,
                         std::int64_t incy,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -202,7 +202,7 @@ gemv (USM Version)
                         T beta,
                         T *y,
                         std::int64_t incy,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

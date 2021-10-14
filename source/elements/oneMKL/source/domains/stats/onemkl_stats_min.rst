@@ -94,7 +94,7 @@ min (USM version)
         sycl::event min(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
         Type* min,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

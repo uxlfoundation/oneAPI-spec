@@ -310,7 +310,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               std::int64_t *ldc,
                               std::int64_t group_count,
                               std::int64_t *group_size,
-                              const sycl::vector_class<sycl::event> &dependencies = {})
+                              const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -331,7 +331,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               std::int64_t *ldc,
                               std::int64_t group_count,
                               std::int64_t *group_size,
-                              const sycl::vector_class<sycl::event> &dependencies = {})
+                              const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section
@@ -486,7 +486,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               std::int64_t ldc,
                               std::int64_t stridec,
                               std::int64_t batch_size,
-                              const sycl::vector_class<sycl::event> &dependencies = {})
+                              const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -509,7 +509,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               std::int64_t ldc,
                               std::int64_t stridec,
                               std::int64_t batch_size,
-                              const sycl::vector_class<sycl::event> &dependencies = {})
+                              const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

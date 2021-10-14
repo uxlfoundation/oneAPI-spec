@@ -148,7 +148,7 @@ syevd (USM Version)
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event syevd(cl::sycl::queue &queue, jobz jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *w, T *scratchpad, std::int64_t scratchpad_size, const cl::sycl::vector_class<cl::sycl::event> &events = {})
+      cl::sycl::event syevd(cl::sycl::queue &queue, jobz jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *w, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

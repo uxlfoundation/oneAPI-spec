@@ -167,7 +167,7 @@ tbsv (USM Version)
                         std::int64_t lda,
                         T *x,
                         std::int64_t incx,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -182,7 +182,7 @@ tbsv (USM Version)
                         std::int64_t lda,
                         T *x,
                         std::int64_t incx,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

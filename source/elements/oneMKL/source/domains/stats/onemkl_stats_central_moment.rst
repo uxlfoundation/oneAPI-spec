@@ -105,7 +105,7 @@ central_moment (USM version)
         sycl::event central_moment(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data, Type* central_moment_2,
         Type* central_moment_3 = nullptr, Type* central_moment_4 = nullptr,
-        const sycl::vector_class<sycl::event> &dependencies = {});
+        const std::vector<sycl::event> &dependencies = {});
     }
 
 .. container:: section

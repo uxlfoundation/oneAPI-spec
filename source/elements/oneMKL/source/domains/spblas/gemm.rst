@@ -139,7 +139,7 @@ gemm (USM version)
                         const fp                              beta, 
                         const fp                              *C, 
                         const std::int64_t                    ldc,
-                        const sycl::vector_class<sycl::event> &dependencies = {});
+                        const std::vector<sycl::event>        &dependencies = {});
 
    }
 

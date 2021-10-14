@@ -135,7 +135,7 @@ scal (USM Version)
                         T_scalar alpha,
                         T *x,
                         std::int64_t incx,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -145,7 +145,7 @@ scal (USM Version)
                         T_scalar alpha,
                         T *x,
                         std::int64_t incx,
-                        const sycl::vector_class<sycl::event> &dependencies = {})
+                        const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section
