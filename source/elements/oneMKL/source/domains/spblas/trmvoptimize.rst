@@ -101,7 +101,7 @@ optimize_trmv (USM version)
                                  oneapi::mkl::transpose               transpose_val,
                                  oneapi::mkl::diag                    diag_val,
                                  oneapi::mkl::sparse::matrix_handle_t handle,
-                                 std::vector<sycl::event>      &dependencies);
+                                 std::vector<sycl::event>             &dependencies);
    }
 
 .. container:: section

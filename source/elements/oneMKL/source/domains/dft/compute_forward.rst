@@ -158,7 +158,7 @@ compute_forward (USM version)
       template <typename descriptor_type, typename data_type>
       sycl::event compute_forward( descriptor_type                               &desc,
                                    data_type                                     *inout,
-                                   const std::vector<cl::sycl::event> &dependencies = {});
+                                   const std::vector<cl::sycl::event>            &dependencies = {});
    }
 
 
@@ -172,7 +172,7 @@ compute_forward (USM version)
       sycl::event compute_forward(descriptor_type                               &desc,
                                   data_type                                     *inout_re,
                                   data_type                                     *inout_im,
-                                  const std::vector<cl::sycl::event> &dependencies = {});
+                                  const std::vector<cl::sycl::event>            &dependencies = {});
 
    }
 
@@ -190,7 +190,7 @@ compute_forward (USM version)
       sycl::event compute_forward( descriptor_type                               &desc,
                                    input_type                                    *in,
                                    output_type                                   *out,
-                                   const std::vector<cl::sycl::event> &dependencies = {});
+                                   const std::vector<cl::sycl::event>            &dependencies = {});
 
    }
 
@@ -207,7 +207,7 @@ compute_forward (USM version)
                                    input_type                                    *in_im,
                                    output_type                                   *out_re,
                                    output_type                                   *out_im,
-                                   const std::vector<cl::sycl::event> &dependencies = {});
+                                   const std::vector<cl::sycl::event>            &dependencies = {});
 
    }
 

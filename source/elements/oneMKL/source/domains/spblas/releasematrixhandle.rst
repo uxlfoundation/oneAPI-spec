@@ -27,7 +27,7 @@ before releasing any data in case of USM.
    namespace oneapi::mkl::sparse {
 
       void release_matrix_handle (oneapi::mkl::sparse::matrix_handle_t  handle,
-                                  const std::vector<sycl::event> &dependencies = {});
+                                  const std::vector<sycl::event>        &dependencies = {});
 
    }
 

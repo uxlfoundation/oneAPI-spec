@@ -141,7 +141,7 @@ gemvdot (USM version)
                            fp                                    beta,
                            fp                                    *y,
                            fp                                    *d,
-                           const std::vector<sycl::event> &dependencies = {});
+                           const std::vector<sycl::event>        &dependencies = {});
 
    }
 

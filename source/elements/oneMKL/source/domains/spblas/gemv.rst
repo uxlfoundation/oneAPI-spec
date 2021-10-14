@@ -127,7 +127,7 @@ gemv (USM version)
                         const fp                              *x, 
                         const fp                              beta, 
                         const fp                              *y, 
-                        const std::vector<sycl::event> &dependencies = {});
+                        const std::vector<sycl::event>        &dependencies = {});
 
    }
 
