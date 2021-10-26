@@ -51,7 +51,7 @@ uses `operator<` to determine relative orderings.
 
 A call ``parallel_sort( c, comp )`` is equivalent to ``parallel_sort( std::begin(c), std::end(c), comp )``.
 
-A call ``parallel_sort( c )`` is equivalent to ``parallel_sort( std::forward<C>(c), comp )``, where `comp` uses `operator<`
+A call ``parallel_sort( c )`` is equivalent to ``parallel_sort( c, comp )``, where `comp` uses `operator<`
 to determine relative orderings.
 
 **Complexity**
