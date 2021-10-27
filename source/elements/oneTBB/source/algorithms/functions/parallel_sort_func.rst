@@ -32,7 +32,7 @@ Function template that sorts a sequence.
 Requirements:
 
 * The ``RandomAccessIterator`` type must meet the `Random Access Iterators` requirements from
-  [random.access.iterators]  and `Swappable` requirements from the [swappable.requirements] ISO C++ Standard section.
+  [random.access.iterators]  and `ValueSwappable` requirements from the [swappable.requirements] ISO C++ Standard section.
 * The ``Compare`` type must meet the `Compare` type requirements from the [alg.sorting] ISO C++ Standard section.
 * The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>` 
   which iterators must meet the `Random Access Iterators` requirements from [random.access.iterators]  
