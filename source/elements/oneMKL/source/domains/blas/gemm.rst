@@ -53,6 +53,10 @@ op(``X``) = ``X``\ :sup:`H`,
        -  ``half`` 
        -  ``half`` 
        -  ``half`` 
+     * -  ``float``
+       -  ``bfloat16``
+       -  ``bfloat16``
+       -  ``float``
      * -  ``float`` 
        -  ``float`` 
        -  ``float`` 
