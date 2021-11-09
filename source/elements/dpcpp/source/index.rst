@@ -51,34 +51,32 @@ required if covered by newer C++ or SYCL versions directly.
            implementations above SYCL 2020
    :name: Extensions Table
 
-   ===========================  ========================  ====================  ====================  ====================  =============
-   Feature                      Where defined             CPU                   GPU                   FPGA                  Test [#test]_
-   ===========================  ========================  ====================  ====================  ====================  =============
-   `Accessor properties`_       DPC++ extension           Required [#aprop]_    Required [#aprop]_    Required [#aprop]_    NA [#na]_
-   `Device-side assert`_        DPC++ extension           Required              Required              Required              NA [#na]_
-   `CXX standard library`_      DPC++ extension           Required              Required              Not required [#tmp]_  NA [#na]_
-   `Data flow pipes`_           DPC++ extension           Not required          Not required          Required              `fpga_tests <https://github.com/intel/llvm/tree/sycl/sycl/test/fpga_tests>`__
-   `Enqueued barriers`_         DPC++ extension           Required              Required              Required              NA [#na]_
-   `Extended atomics`_          DPC++ extension           Required              Required              Required              NA [#na]_
-   `Filter selector`_           DPC++ extension           Required              Required              Required              NA [#na]_
-   `FPGA LSU controls`_         DPC++ extension           Not required          Not required          Required              NA [#na]_
-   `FPGA memory channel`_       DPC++ extension           Not required          Not required          Required              NA [#na]_
-   `FPGA register`_             DPC++ extension           Not required          Not required          Required              NA [#na]_
-   `FPGA selector`_             DPC++ extension           Required              Required              Required              NA [#na]_
-   `GPU device info`_           DPC++ extension           Required              Required              Required              NA [#na]_
-   `Level zero backend`_        DPC++ extension           Not required          Not required          Not required          NA [#na]_
-   `Local memory allocations`_  DPC++ extension           Required              Required              Required              NA [#na]_
-   `Pinned memory property`_             DPC++ extension           Required              Required              Required              NA [#na]_
-   `Platform context`_          DPC++ extension           Required              Required              Required              NA [#na]_
-   `Restrict all arguments`_    DPC++ extension           Required              Required              Required              NA [#na]_
-   `Sub-group mask`_            DPC++ extension           Required              Required              Not required          NA [#na]_
-   ===========================  ========================  ====================  ====================  ====================  =============
+   ===========================  ====================  ====================  ====================  =============
+   Feature                      CPU                   GPU                   FPGA                  Test [#test]_
+   ===========================  ====================  ====================  ====================  =============
+   `Accessor properties`_       Required              Required              Required              NA [#na]_
+   `CXX standard library`_      Required              Required              Not required [#tmp]_  NA [#na]_
+   `Data flow pipes`_           Not required          Not required          Required              `fpga_tests <https://github.com/intel/llvm/tree/sycl/sycl/test/fpga_tests>`__
+   `Enqueued barriers`_         Required              Required              Required              NA [#na]_
+   `Extended atomics`_          Required              Required              Required              NA [#na]_
+   `Filter selector`_           Required              Required              Required              NA [#na]_
+   `FPGA LSU controls`_         Not required          Not required          Required              NA [#na]_
+   `FPGA memory channel`_       Not required          Not required          Required              NA [#na]_
+   `FPGA register`_             Not required          Not required          Required              NA [#na]_
+   `FPGA selector`_             Required              Required              Required              NA [#na]_
+   `GPU device info`_           Required              Required              Required              NA [#na]_
+   `Level zero backend`_        Required [#lzero]_    Required [#lzero]_    Required [#lzero]_    NA [#na]_
+   `Local memory allocations`_  Required              Required              Required              NA [#na]_
+   `Pinned memory property`_    Required              Required              Required              NA [#na]_
+   `Platform context`_          Required              Required              Required              NA [#na]_
+   `Restrict all arguments`_    Required              Required              Required              NA [#na]_
+   `Sub-group mask`_            Required              Required              Required              NA [#na]_
+   ===========================  ====================  ====================  ====================  =============
 
 
 ..   ==========================  ================  ================  ====================  =============
 
 .. _`Accessor properties`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/accessor_properties
-.. _`Device-side assert`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/Assert/SYCL_ONEAPI_ASSERT.asciidoc
 .. _`CXX standard library`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/C-CXX-StandardLibrary
 .. _`Data flow pipes`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/DataFlowPipes
 .. _`Enqueued barriers`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/EnqueueBarrier
@@ -100,8 +98,8 @@ required if covered by newer C++ or SYCL versions directly.
 .. [#test] Test directory within `extension tests`_
 .. [#na] Not yet available.
 .. [#tmp] Likely to be required in the future
+.. [#lzero] Required if the device backend is Level Zero.
 
-.. [#aprop] DPC++ requirement is for the general property mechanism, and not specific properties within it
 
 Detailed API and Language Descriptions
 --------------------------------------
