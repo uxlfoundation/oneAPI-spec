@@ -118,7 +118,7 @@ A brief summary of the extensions is as follows:
    used when describing algorithms for spatial architectures such as FPGAs. 
 -  Enqueued barriers - simplifies dependence creation and tracking for some common programming patterns by allowing
    coarser grained synchronization within a queue without manual creation of fine grained dependencies.
--  Extended atomics - additional *atomic_ref* features beyond what is required by SYCL 2020.
+-  Extended atomics - adds *atomic_accessor* on top of SYCL 2020 atomics.
 -  Filter selector - adds a device selector which consumes a string of filter definitions, and that can be used to
    easily restrict the set of devices which are passed to the usual device selection mechanisms.
 -  FPGA LSU controls - tuning controls for FPGA load/store operations.
