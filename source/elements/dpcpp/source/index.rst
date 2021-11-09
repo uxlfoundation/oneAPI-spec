@@ -110,7 +110,6 @@ are described in the `SYCL Extensions`_ repository.
 A brief summary of the extensions is as follows:
 
 -  Accessor properties - compile-time accessor properties that are visible to the compiler.
--  Device-side assert - allows device code to call *assert()*, which when triggered prints a message and aborts the host application.
 -  CXX standard library - enable subset of the C and C++ standard libraries in device code.
 -  Data flow pipes - enable efficient First-In, First-Out (FIFO) communication in DPC++, a mechanism commonly
    used when describing algorithms for spatial architectures such as FPGAs. 
