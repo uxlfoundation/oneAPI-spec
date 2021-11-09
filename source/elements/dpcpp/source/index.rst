@@ -76,10 +76,10 @@ required if covered by newer C++ or SYCL versions directly.
 
 ..   ==========================  ================  ================  ====================  =============
 
-.. _`Accessor properties`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/accessor_properties
-.. _`CXX standard library`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/C-CXX-StandardLibrary
-.. _`Data flow pipes`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/DataFlowPipes
-.. _`Enqueued barriers`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/EnqueueBarrier
+.. _`Accessor properties`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/accessor_properties/SYCL_ONEAPI_accessor_properties.asciidoc
+.. _`CXX standard library`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/C-CXX-StandardLibrary/C-CXX-StandardLibrary.rst
+.. _`Data flow pipes`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/DataFlowPipes/data_flow_pipes.asciidoc
+.. _`Enqueued barriers`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/EnqueueBarrier/enqueue_barrier.asciidoc
 .. _`Extended atomics`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/ExtendedAtomics/SYCL_INTEL_extended_atomics.asciidoc
 .. _`Filter selector`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/FilterSelector/FilterSelector.adoc
 .. _`FPGA LSU controls`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/IntelFPGA/FPGALsu.md
@@ -91,7 +91,7 @@ required if covered by newer C++ or SYCL versions directly.
 .. _`Local memory allocations`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/LocalMemory/LocalMemory.asciidoc
 .. _`Pinned memory property`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/UsePinnedMemoryProperty/UsePinnedMemoryPropery.adoc
 .. _`Platform context`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/PlatformContext/PlatformContext.adoc
-.. _`Restrict all arguments`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/KernelRestrictAll
+.. _`Restrict all arguments`: https://github.com/intel/llvm/tree/sycl/sycl/doc/extensions/KernelRestrictAll/SYCL_INTEL_kernel_restrict_all.asciidoc
 .. _`Sub-group mask`: https://github.com/intel/llvm/blob/sycl/sycl/doc/extensions/SubGroupMask/SubGroupMask.asciidoc
 
 
