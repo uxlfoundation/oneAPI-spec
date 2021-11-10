@@ -4,9 +4,9 @@
 
 .. _oneart-section:
 
-======
-oneART
-======
+===========
+Ray Tracing
+===========
 
 Overview
 --------
