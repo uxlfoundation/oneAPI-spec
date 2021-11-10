@@ -184,6 +184,25 @@ of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter
    If ``alpha`` = 0, matrix ``B`` is set to zero and the matrices ``A``
    and ``B`` do not need to be initialized before calling ``trsm_batch``.
 
+.. container:: section
+
+   .. rubric:: Throws
+
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
+
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
+   
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
+
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
 
 trsm_batch (USM Version)
 ---------------------------
@@ -499,28 +518,6 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
    .. rubric:: Return Values
 
    Output event to wait on to ensure computation is complete.
-
-   **Parent topic:** :ref:`blas-like-extensions`
-.. container:: section
-
-   .. rubric:: Throws
-
-   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
-
-   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
-       
-   
-   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
-       
-
-   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
-       
-
-   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
-       
-
-   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
-      
 
 .. container:: section
 
