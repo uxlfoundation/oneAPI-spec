@@ -78,7 +78,7 @@ release working surface after :cpp:func:`MFXVideoDECODE_DecodeFrameAsync` call.
                  reference counter of working surface returned by 
                  :cpp:func:`MFXMemory_GetSurfaceForDecode`.
                  After :cpp:func:`MFXVideoCORE_SyncOperation` to decrease
-                 reference counter of ouput surface returned by 
+                 reference counter of output surface returned by 
                  :cpp:func:`MFXVideoDECODE_DecodeFrameAsync`.
 
 .. literalinclude:: ../snippets/prg_decoding.c

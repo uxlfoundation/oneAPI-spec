@@ -18,7 +18,7 @@ the hardware.
 ISPC compiles a C-based SPMD programming language to run on the 
 SIMD units of CPUs and GPUs; it frequently provides a 3x or more 
 speedup on architectures with 4-wide vector SSE units and 5x-6x on 
-archituctures with 8-wide AVX vector units, without any of the difficulty 
+architectures with 8-wide AVX vector units, without any of the difficulty 
 of writing intrinsics code. Parallelization across multiple cores is 
 also supported by ispc, making it possible to write programs that 
 achieve performance improvement that scales by both number of 

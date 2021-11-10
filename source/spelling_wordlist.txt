@@ -21,6 +21,7 @@ Bilinear
 Bratley
 Broadwell
 BufferId
+Catmul
 Cheng
 Cholesky
 Coddington
@@ -45,6 +46,7 @@ DirectX
 Dror
 Elementwise
 Elkhart
+Embree
 Emplaces
 Enqueues
 Enum
@@ -135,6 +137,7 @@ Wichmann
 Widevine
 Winograd
 Workstreams
+Xeon
 Yu
 Zhang
 accessor
@@ -143,8 +146,11 @@ acos
 acosh
 acospi
 activations
+adaptively
 adaptor
 addr
+affine
+affinitized
 alg
 allgatherv
 alloc
@@ -172,9 +178,11 @@ attr
 axpy
 backend
 backends
+backlight
 backoff
 balancer
 bcast
+benchmarking
 bernoulli
 bfloat
 bfp
@@ -258,6 +266,7 @@ deallocate
 deallocated
 deallocates
 deallocation
+deallocations
 deblocking
 decompositions
 deconvolution
@@ -399,6 +408,7 @@ idx
 ifscalea
 ifscaleb
 im
+incrementing
 incx
 incy
 init
@@ -522,6 +532,7 @@ nondeterministically
 nonnegative
 nontrans
 nonunit
+normals
 notational
 nrhs
 nrm
@@ -550,6 +561,7 @@ ormqr
 ormtr
 orthonormal
 overscan
+oversubscription
 paddings
 parallelization
 parallelize
@@ -560,6 +572,7 @@ partitioner
 partitioners
 performant
 philox
+photorealistic
 pipelined
 pipelining
 pmr
@@ -606,6 +619,7 @@ recoding
 recodings
 recv
 relu
+renderer
 repartition
 representable
 req
@@ -658,6 +672,7 @@ sobol
 softmax
 sortable
 spblas
+specular
 splittable
 splitter
 spmv
@@ -716,6 +731,7 @@ tbsv
 telecine
 templated
 templating
+texel
 tgamma
 th
 topologies
@@ -754,6 +770,7 @@ unmark
 unmarks
 unmqr
 unmtr
+unnormalized
 unregister
 uplo
 upsampling
@@ -762,6 +779,8 @@ ust
 vaapi
 variadic
 variates
+vectorizes
+vectorizing
 verifications
 viewable
 vpl

@@ -197,7 +197,7 @@ See Section `rtcCollide <#rtccollide>`__ for a detailed description of
 how to set up collision detection.
 
 Seen tutorial `Collision Detection <#collision-detection>`__ for a
-complete example of collsion detection being used on a simple cloth
+complete example of collision detection being used on a simple cloth
 solver.
 
 Miscellaneous
@@ -1974,7 +1974,7 @@ array of single precision ``x``, ``y``, ``z`` floating point coordinates
 from the size of that buffer. The vertex buffer can be at most 16 GB
 large.
 
-The parametrization of a triangle uses the first vertex ``p0`` as base
+The parameterization of a triangle uses the first vertex ``p0`` as base
 point, the vector ``p1 - p0`` as u-direction and the vector ``p2 - p0``
 as v-direction. Thus vertex attributes ``t0,t1,t2`` can be linearly
 interpolated over the triangle the following way:
@@ -2053,8 +2053,8 @@ buffer can be at most 16 GB large.
 A quad is internally handled as a pair of two triangles ``v0,v1,v3`` and
 ``v2,v3,v1``, with the ``u'``/``v'`` coordinates of the second triangle
 corrected by ``u = 1-u'`` and ``v = 1-v'`` to produce a quad
-parametrization where ``u`` and ``v`` are in the range 0 to 1. Thus the
-parametrization of a quad uses the first vertex ``p0`` as base point,
+parameterization where ``u`` and ``v`` are in the range 0 to 1. Thus the
+parameterization of a quad uses the first vertex ``p0`` as base point,
 and the vector ``p1 - p0`` as ``u``-direction, and ``p3 - p0`` as
 v-direction. Thus vertex attributes ``t0,t1,t2,t3`` can be bilinearly
 interpolated over the quadrilateral the following way:
@@ -2066,8 +2066,8 @@ interpolated over the quadrilateral the following way:
 Mixed triangle/quad meshes are supported by encoding a triangle as a
 quad, which can be achieved by replicating the last triangle vertex
 (``v0,v1,v2`` -> ``v0,v1,v2,v2``). This way the second triangle is a
-line (which can never get hit), and the parametrization of the first
-triangle is compatible with the standard triangle parametrization.
+line (which can never get hit), and the parameterization of the first
+triangle is compatible with the standard triangle parameterization.
 
 A quad whose vertices are laid out counter-clockwise has its geometry
 normal pointing upwards outside the front face, like illustrated in the
@@ -2297,18 +2297,18 @@ Also see tutorial `Subdivision
 Geometry <tutorials.html#subdivision-geometry>`__ for an example of how
 to create subdivision surfaces.
 
-Parametrization
-^^^^^^^^^^^^^^^
+Parameterization
+^^^^^^^^^^^^^^^^
 
-The parametrization for subdivision faces is different for
+The parameterization for subdivision faces is different for
 quadrilaterals and non-quadrilateral faces.
 
-The parametrization of a quadrilateral face uses the first vertex ``p0``
+The parameterization of a quadrilateral face uses the first vertex ``p0``
 as base point, and the vector ``p1 - p0`` as u-direction and ``p3 - p0``
 as v-direction.
 
-The parametrization for all other face types (with number of vertices
-not equal 4), have a special parametrization where the subpatch ID ``n``
+The parameterization for all other face types (with number of vertices
+not equal 4), have a special parameterization where the subpatch ID ``n``
 (of the ``n``-th quadrilateral that would be obtained by a single
 subdivision step) and the local hit location inside this quadrilateral
 are encoded in the UV coordinates. The following code extracts the
@@ -2515,14 +2515,14 @@ the index buffer (left segment exists if segment(id-1)+1 == segment(id)
 and right segment exists if segment(id+1)-1 == segment(id)).
 
 A left neighbor segment is assumed to end at the start vertex of the
-current segement, and to start at the previous vertex in the vertex
+current segment, and to start at the previous vertex in the vertex
 buffer. Similarly, the right neighbor segment is assumed to start at the
 end vertex of the current segment, and to end at the next vertex in the
 vertex buffer.
 
 Only when the left and right bits are properly specified the current
 segment can properly attach to the left and/or right neighbor, otherwise
-the touching area may not get rendererd properly.
+the touching area may not get rendered properly.
 
 Bézier Basis
 ''''''''''''
@@ -2545,7 +2545,7 @@ through any of the control points directly. A big advantage of this
 basis is that 3 control points can be shared for two continuous
 neighboring curve segments, e.g. the curves (p0,p1,p2,p3) and
 (p1,p2,p3,p4) are C1 continuous. This feature make this basis a good
-choise to construct continuous multi-segment curves, as memory
+choice to construct continuous multi-segment curves, as memory
 consumption can be kept minimal.
 
 Hermite Basis
@@ -2559,7 +2559,7 @@ go through the first and second control point, and the first order
 derivative at the begin and end matches exactly the value specified in
 the tangent buffer. When connecting two segments continuously, the end
 point and tangent of the previous segment can be shared. Different
-versions of Catmull-Rom splines can be easily constructed usig the
+versions of Catmull-Rom splines can be easily constructed using the
 Hermite basis, by calculating a proper tangent buffer from the control
 points.
 
@@ -3776,7 +3776,7 @@ buffers, e.g. ``RTC_FORMAT_UINT3`` for triangle meshes.
 
 The ``RTC_FORMAT_FLOAT/2/3/4...`` format are used to specify that data
 buffers store single precision floating point values, or vectors there
-of (size 2,3,4, etc.). This format is typcally used to specify to format
+of (size 2,3,4, etc.). This format is typically used to specify to format
 of vertex buffers, e.g. the ``RTC_FORMAT_FLOAT3`` type for vertex
 buffers of triangle meshes.
 
@@ -4846,7 +4846,7 @@ be transformed into instance space which can be more efficient. If there
 is no instance transform, the similarity scale is 1.
 
 The callback function will potentially be called for primitives outside
-the query domain for two resons: First, the callback is invoked for all
+the query domain for two reasons: First, the callback is invoked for all
 primitives inside a BVH leaf node since no geometry data of primitives
 is determined internally and therefore individual primitives are not
 culled (only their (aggregated) bounding boxes). Second, in case non
@@ -4854,9 +4854,9 @@ similarity transformations are used, the resulting ellipsoidal query
 domain (in instance space) is approximated by its axis aligned bounding
 box internally and therefore inner nodes that do not intersect the
 original domain might intersect the approximative bounding box which
-results in unneccessary callbacks. In any case, the callbacks are
+results in unnecessary callbacks. In any case, the callbacks are
 conservative, i.e. if a primitive is inside the query domain a callback
-will be invoked but the reverse is not neccessarily true.
+will be invoked but the reverse is not necessarily true.
 
 For efficiency, the radius of the ``query`` object can be decreased (in
 world space) inside the callback function to improve culling of geometry
@@ -5039,7 +5039,7 @@ For correct results, the transformation matrices for all time steps must
 be set either using ``rtcSetGeometryTransform`` or
 ``rtcSetGeometryTransformQuaternion``. Mixing both representations is
 not allowed. Spherical linear interpolation will be used, iff the
-transformation matizes are set with
+transformation matrices are set with
 ``rtcSetGeometryTransformQuaternion``.
 
 For an example of this feature see the tutorial `Quaternion Motion
@@ -6884,7 +6884,7 @@ For ``rtcIntersect4`` the ray packet must be aligned to 16 bytes, for
 The ``rtcIntersect4``, ``rtcIntersect8`` and ``rtcIntersect16``
 functions may change the ray packet size and ray order when calling back
 into intersect filter functions or user geometry callbacks. Under some
-conditions the application can assume packets to stay intakt, which can
+conditions the application can assume packets to stay intact, which can
 determined by querying the
 ``RTC_DEVICE_PROPERTY_NATIVE_RAY4_SUPPORTED``,
 ``RTC_DEVICE_PROPERTY_NATIVE_RAY8_SUPPORTED``,
@@ -7646,7 +7646,7 @@ reference implementation of point queries with user defined instancing).
 
 The context is an necessary argument to
 `rtcPointQuery <#rtcpointquery>`__ and Embree internally uses the
-topmost instance tranformation of the stack to transform the point query
+topmost instance transformation of the stack to transform the point query
 into instance space.
 
 EXIT STATUS
@@ -7753,7 +7753,7 @@ has to be taken when the instance transformation contains anisotropic
 scaling or sheering. In these cases distance computations have to be
 performed in world space to ensure correctness and the ellipsoidal query
 domain (in instance space) will be approximated with its axis aligned
-bounding box interally. Therefore, the callback function might be
+bounding box internally. Therefore, the callback function might be
 invoked even for primitives in inner BVH nodes that do not intersect the
 query domain. See
 `rtcSetGeometryPointQueryFunction <#rtcsetgeometrypointqueryfunction>`__
@@ -7764,7 +7764,7 @@ The point query structure must be aligned to 16 bytes.
 SUPPORTED PRIMITIVES
 ^^^^^^^^^^^^^^^^^^^^
 
-Currenly, all primitive types are supported by the point query API
+Currently, all primitive types are supported by the point query API
 except of points (see
 `RTC_GEOMETRY_TYPE_POINT <#rtc_geometry_type_point>`__), curves (see
 `RTC_GEOMETRY_TYPE_CURVE <#rtc_geometry_type_curve>`__) and sudivision
