@@ -7,7 +7,7 @@ To access the Open VKL API you first need to include the Open VKL header. For C9
 
    #include <openvkl/openvkl.h>
 
-For the Intel SPMD Program Compiler (ISPC):
+For the Intel® Implicit SPMD Program Compiler (Intel® ISPC):
 
 ::
 
@@ -15,33 +15,33 @@ For the Intel SPMD Program Compiler (ISPC):
 
 This documentation will discuss the C99/C++ API. The ISPC version has the same functionality and flavor. Looking at the headers, the ``vklTutorialISPC`` example, and this documentation should be enough to figure it out.
 
-Initialization and shutdown
----------------------------
+Device initialization and shutdown
+----------------------------------
 
-To use the API, one of the implemented backends must be loaded. Currently the only one that exists is the ISPC driver. ISPC in the name here just refers to the implementation language – it can also be used from the C99/C++ APIs. To load the module that implements the ISPC driver:
-
-::
-
-   vklLoadModule("ispc_driver");
-
-The driver then needs to be instantiated:
+To use the API, one of the implemented backends must be loaded. Currently the only one that exists is the CPU device. To load the module that implements the CPU device:
 
 ::
 
-   VKLDriver driver = vklNewDriver("ispc");
+   vklLoadModule("cpu_device");
 
-By default, the ISPC driver selects the maximum supported SIMD width (and associated ISA) for the system. Optionally, a specific width may be requested using the ``ispc_4``, ``ispc_8``, or ``ispc_16`` driver names. Note that the system must support the given width (SSE4.1 for 4-wide, AVX for 8-wide, and AVX512 for 16-wide).
-
-Once a driver is created, you can call
+The device then needs to be instantiated:
 
 ::
 
-   void vklDriverSetInt(VKLDriver, const char *name, int val);
-   void vklDriverSetString(VKLDriver, const char *name, const char *val);
+   VKLDevice device = vklNewDevice("cpu");
 
-to set parameters on the driver. The following parameters are understood by all drivers:
+By default, the CPU device selects the maximum supported SIMD width (and associated ISA) for the system. Optionally, a specific width may be requested using the ``cpu_4``, ``cpu_8``, or ``cpu_16`` device names. Note that the system must support the given width (SSE4.1 for 4-wide, AVX for 8-wide, and AVX512 for 16-wide).
 
-.. table:: Parameters shared by all drivers.
+Once a device is created, you can call
+
+::
+
+   void vklDeviceSetInt(VKLDevice, const char *name, int val);
+   void vklDeviceSetString(VKLDevice, const char *name, const char *val);
+
+to set parameters on the device. The following parameters are understood by all devices:
+
+.. table:: Parameters shared by all devices.
 
    +--------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Type   | Name           | Description                                                                                                                                                           |
@@ -57,42 +57,34 @@ to set parameters on the driver. The following parameters are understood by all 
    | int    | flushDenormals | sets the ``Flush to Zero`` and ``Denormals are Zero`` mode of the MXCSR control and status register (default: 1); see Performance Recommendations section for details |
    +--------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Once parameters are set, the driver must be committed with
+Once parameters are set, the device must be committed with
 
 ::
 
-   vklCommitDriver(driver);
+   vklCommitDevice(device);
 
-Finally, to use the newly committed driver, you must call
+The newly committed device is then ready to use. Users may change parameters on a device after initialization. In this case the device would need to be re-committed.
 
-::
+All Open VKL objects are associated with a device. A device handle must be explicitly provided when creating volume and data objects, via ``vklNewVolume()`` and ``vklNewData()`` respectively. Other object types are automatically associated with a device via transitive dependency on a volume.
 
-   vklSetCurrentDriver(driver);
-
-Users can change parameters on a driver after initialization. In this case the driver would need to be re-committed. If changes are made to the driver that is already set as the current driver, it does not need to be set as current again. The currently set driver can be retrieved at any time by calling
+Open VKL provides vector-wide versions for several APIs. To determine the native vector width for a given device, call:
 
 ::
 
-   VKLDriver driver = vklGetCurrentDriver();
+   int width = vklGetNativeSIMDWidth(VKLDevice device);
 
-Open VKL provides vector-wide versions for several APIs. To determine the native vector width for the given driver, call:
-
-::
-
-   int width = vklGetNativeSIMDWidth();
-
-When the application is finished with Open VKL or shutting down, call the shutdown function:
+When the application is finished with an Open VKL device or shutting down, release the device via:
 
 ::
 
-   vklShutdown();
+   vklReleaseDevice(VKLDevice device);
 
 Environment variables
 ~~~~~~~~~~~~~~~~~~~~~
 
-The generic driver parameters can be overridden via environment variables for easy changes to Open VKL’s behavior without needing to change the application (variables are prefixed by convention with “``OPENVKL_``”):
+The generic device parameters can be overridden via environment variables for easy changes to Open VKL’s behavior without needing to change the application (variables are prefixed by convention with “``OPENVKL_``”):
 
-.. table:: Environment variables understood by all drivers.
+.. table:: Environment variables understood by all devices.
 
    +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | Variable                | Description                                                                                                                                                           |
@@ -108,7 +100,9 @@ The generic driver parameters can be overridden via environment variables for ea
    | OPENVKL_FLUSH_DENORMALS | sets the ``Flush to Zero`` and ``Denormals are Zero`` mode of the MXCSR control and status register (default: 1); see Performance Recommendations section for details |
    +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Note that these environment variables take precedence over values set through the ``vklDriverSet*()`` functions.
+Note that these environment variables take precedence over values set through the ``vklDeviceSet*()`` functions.
+
+Additionally, the CPU device’s default SIMD width can be overriden at run time with the ``OPENVKL_CPU_DEVICE_DEFAULT_WIDTH`` environment variable. Legal values are 4, 8, or 16. This setting is only applicable when the generic ``cpu`` device is instantiated; if a specific width is requested via the ``cpu_[4,8,16]`` device names then the environment variable is ignored.
 
 Error handling and log messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -137,13 +131,13 @@ These error codes are either directly returned by some API functions, or are rec
 
 ::
 
-   VKLError vklDriverGetLastErrorCode(VKLDriver);
+   VKLError vklDeviceGetLastErrorCode(VKLDevice);
 
 A more descriptive error message can be queried by calling
 
 ::
 
-   const char* vklDriverGetLastErrorMsg(VKLDriver);
+   const char* vklDeviceGetLastErrorMsg(VKLDevice);
 
 Alternatively, the application can also register a callback function of type
 
@@ -155,7 +149,7 @@ via
 
 ::
 
-   void vklDriverSetErrorCallback(VKLDriver, VKLErrorFunc, void *);
+   void vklDeviceSetErrorCallback(VKLDevice, VKLErrorFunc, void *);
 
 to get notified when errors occur. Applications may be interested in messages which Open VKL emits, whether for debugging or logging events. Applications can register a callback function of type
 
@@ -167,9 +161,9 @@ via
 
 ::
 
-   void vklDriverSetLogCallback(VKLDriver, VKLLogCallback, void *);
+   void vklDeviceSetLogCallback(VKLDevice, VKLLogCallback, void *);
 
-which Open VKL will use to emit log messages. Applications can clear either callback by passing ``nullptr`` instead of an actual function pointer. By default, Open VKL uses ``cout`` and ``cerr`` to emit log and error messages, respectively. The last parameter to ``vklDriverSetErrorCallback`` and ``vklDriverSetLogCallback`` is a user data pointer. Open VKL passes this pointer to the callback functions as the first parameter. Note that in addition to setting the above callbacks, this behavior can be changed via the driver parameters and environment variables described previously.
+which Open VKL will use to emit log messages. Applications can clear either callback by passing ``nullptr`` instead of an actual function pointer. By default, Open VKL uses ``cout`` and ``cerr`` to emit log and error messages, respectively. The last parameter to ``vklDeviceSetErrorCallback`` and ``vklDeviceSetLogCallback`` is a user data pointer. Open VKL passes this pointer to the callback functions as the first parameter. Note that in addition to setting the above callbacks, this behavior can be changed via the device parameters and environment variables described previously.
 
 Basic data types
 ----------------
@@ -236,8 +230,6 @@ In general, modifiable parameters to objects are modified using ``vklSet...`` fu
    void vklSetString(VKLObject object, const char *name, const char *s);
    void vklSetVoidPtr(VKLObject object, const char *name, void *v);
 
-The exception to this rule is the ``VKLValueSelector`` object (described in the iterators section below), which has object-specific set methods. The reason for this is to align the C99/C++ API with the ISPC API, which can’t use a parameter method due to language limitations.
-
 After parameters have been set, ``vklCommit`` must be called on the object to make them take effect.
 
 Open VKL uses reference counting to manage the lifetime of all objects. Therefore one cannot explicitly “delete” any object. Instead, one can indicate the application does not need or will not access the given object anymore by calling
@@ -255,19 +247,68 @@ Large data is passed to Open VKL via a ``VKLData`` handle created with ``vklNewD
 
 ::
 
-   VKLData vklNewData(size_t numItems,
+   VKLData vklNewData(VKLDevice device,
+                      size_t numItems,
                       VKLDataType dataType,
                       const void *source,
                       VKLDataCreationFlags dataCreationFlags,
                       size_t byteStride);
-
-Types accepted are listed in ``VKLDataType.h``; basic types (``UCHAR``, ``INT``, ``UINT``, ``LONG``, ``ULONG``, ``FLOAT``) exist as both scalar and chunked formats. The types accepted vary per volume at the moment; read the volume section below for specifics.
 
 Data objects can be created as Open VKL owned (``dataCreationFlags = VKL_DATA_DEFAULT``), in which the library will make a copy of the data for its use, or shared (``dataCreationFlags = VKL_DATA_SHARED_BUFFER``), which will try to use the passed pointer for usage. The library is allowed to copy data when a volume is committed.
 
 The distance between consecutive elements in ``source`` is given in bytes with ``byteStride``. If the provided ``byteStride`` is zero, then it will be determined automatically as ``sizeof(type)``. Open VKL owned data will be compacted into a naturally-strided array on copy, regardless of the original ``byteStride``.
 
 As with other object types, when data objects are no longer needed they should be released via ``vklRelease``.
+
+The enum type ``VKLDataType`` describes the different element types that can be represented in Open VKL. The types accepted vary per volume; see the volume section for specifics. Valid constants are listed in the table below.
+
+.. table:: Valid named constants for ``VKLDataType``.
+
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | Type/Name                  | Description                                                                                  |
+   +============================+==============================================================================================+
+   | VKL_DEVICE                 | API device object reference                                                                  |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_DATA                   | data reference                                                                               |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_OBJECT                 | generic object reference                                                                     |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_VOLUME                 | volume object reference                                                                      |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_STRING                 | C-style zero-terminated character string                                                     |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_CHAR, VKL_VEC[234]C    | 8 bit signed character scalar and [234]-element vector                                       |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_UCHAR, VKL_VEC[234]UC  | 8 bit unsigned character scalar and [234]-element vector                                     |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_SHORT, VKL_VEC[234]S   | 16 bit unsigned integer scalar and [234]-element vector                                      |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_USHORT, VKL_VEC[234]US | 16 bit unsigned integer scalar and [234]-element vector                                      |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_INT, VKL_VEC[234]I     | 32 bit signed integer scalar and [234]-element vector                                        |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_UINT, VKL_VEC[234]UI   | 32 bit unsigned integer scalar and [234]-element vector                                      |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_LONG, VKL_VEC[234]L    | 64 bit signed integer scalar and [234]-element vector                                        |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_ULONG, VKL_VEC[234]UL  | 64 bit unsigned integer scalar and [234]-element vector                                      |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_HALF, VKL_VEC[234]H    | 16 bit half precision floating-point scalar and [234]-element vector (IEEE 754 ``binary16``) |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_FLOAT, VKL_VEC[234]F   | 32 bit single precision floating-point scalar and [234]-element vector                       |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_DOUBLE, VKL_VEC[234]D  | 64 bit double precision floating-point scalar and [234]-element vector                       |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_BOX[1234]I             | 32 bit integer box (lower + upper bounds)                                                    |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_BOX[1234]F             | 32 bit single precision floating-point box (lower + upper bounds)                            |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_LINEAR[23]F            | 32 bit single precision floating-point linear transform ([23] vectors)                       |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_AFFINE[23]F            | 32 bit single precision floating-point affine transform (linear transform plus translation)  |
+   +----------------------------+----------------------------------------------------------------------------------------------+
+   | VKL_VOID_PTR               | raw memory address                                                                           |
+   +----------------------------+----------------------------------------------------------------------------------------------+
 
 Observers
 ---------
@@ -292,11 +333,12 @@ To access the underlying data, an observer must first be mapped using
 
    const void * vklMapObserver(VKLObserver observer);
 
-If this fails, the function returns ``NULL``. ``vklMapObserver`` may fail on observers that are already mapped. On success, the application may query the underlying type and the number of elements in the buffer using
+If this fails, the function returns ``NULL``. ``vklMapObserver`` may fail on observers that are already mapped. On success, the application may query the underlying type, element size in bytes, and the number of elements in the buffer using
 
 ::
 
    VKLDataType vklGetObserverElementType(VKLObserver observer);
+   size_t vklGetObserverElementSize(VKLObserver observer);
    size_t vklGetObserverNumElements(VKLObserver observer);
 
 On failure, these functions return ``VKL_UNKNOWN`` and ``0``, respectively. Possible data types are defined by the volume that provides the observer , as are the semantics of the observation. See section ‘Volume types’ for details.
@@ -318,7 +360,11 @@ The observer API is not thread safe, and these functions should not be called co
 Volume types
 ------------
 
-Open VKL currently supports structured volumes on regular and spherical grids; unstructured volumes with tetrahedral, wedge, pyramid, and hexaderal primitive types; adaptive mesh refinement (AMR) volumes; sparse VDB volumes; and particle volumes. These volumes are created with ``vklNewVolume`` with the appropriate type string.
+Open VKL currently supports structured volumes on regular and spherical grids; unstructured volumes with tetrahedral, wedge, pyramid, and hexaderal primitive types; adaptive mesh refinement (AMR) volumes; sparse VDB volumes; and particle volumes. Volumes are created with ``vklNewVolume`` with a device and appropriate type string:
+
+::
+
+   VKLVolume vklNewVolume(VKLDevice device, const char *type);
 
 In addition to the usual ``vklSet...()`` and ``vklCommit()`` APIs, the volume bounding box can be queried:
 
@@ -332,11 +378,11 @@ The number of attributes in a volume can also be queried:
 
    unsigned int vklGetNumAttributes(VKLVolume volume);
 
-Finally, the value range of the volume (first attribute only) can be queried:
+Finally, the value range of the volume for a given attribute can be queried:
 
 ::
 
-   vkl_range1f vklGetValueRange(VKLVolume volume);
+   vkl_range1f vklGetValueRange(VKLVolume volume, unsigned int attributeIndex);
 
 Structured Volumes
 ~~~~~~~~~~~~~~~~~~
@@ -350,53 +396,62 @@ A common type of structured volumes are regular grids, which are created by pass
 
 .. table:: Configuration parameters for structured regular (``"structuredRegular"``) volumes.
 
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | Type              | Name                             | Default           | Description                                                                                |
-   +===================+==================================+===================+============================================================================================+
-   | vec3i             | dimensions                       |                   | number of voxels in each dimension :math:`(x, y, z)`                                       |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | VKLData VKLData[] | data                             |                   | VKLData object(s) of voxel data, supported types are:                                      |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   |                   |                                  |                   | ``VKL_UCHAR``                                                                              |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   |                   |                                  |                   | ``VKL_SHORT``                                                                              |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   |                   |                                  |                   | ``VKL_USHORT``                                                                             |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   |                   |                                  |                   | ``VKL_FLOAT``                                                                              |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   |                   |                                  |                   | ``VKL_DOUBLE``                                                                             |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   |                   |                                  |                   | Multiple attributes are supported through passing an array of VKLData objects.             |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | vec3f             | gridOrigin                       | :math:`(0, 0, 0)` | origin of the grid in object space                                                         |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | vec3f             | gridSpacing                      | :math:`(1, 1, 1)` | size of the grid cells in object space                                                     |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | int               | temporallyStructuredNumTimesteps |                   | for temporally structured variation, number of timesteps per voxel                         |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | uint32[] uint64[] | temporallyUnstructuredIndices    |                   | for temporally unstructured variation, indices to ``data`` time series beginning per voxel |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
-   | float[]           | temporallyUnstructuredTimes      |                   | for temporally unstructured variation, time values corresponding to values in ``data``     |
-   +-------------------+----------------------------------+-------------------+--------------------------------------------------------------------------------------------+
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Type              | Name                             | Default                          | Description                                                                                                                                                                                                                            |
+   +===================+==================================+==================================+========================================================================================================================================================================================================================================+
+   | vec3i             | dimensions                       |                                  | number of voxels in each dimension :math:`(x, y, z)`                                                                                                                                                                                   |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | VKLData VKLData[] | data                             |                                  | VKLData object(s) of voxel data, supported types are:                                                                                                                                                                                  |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | ``VKL_UCHAR``                                                                                                                                                                                                                          |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | ``VKL_SHORT``                                                                                                                                                                                                                          |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | ``VKL_USHORT``                                                                                                                                                                                                                         |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | ``VKL_HALF``                                                                                                                                                                                                                           |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | ``VKL_FLOAT``                                                                                                                                                                                                                          |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | ``VKL_DOUBLE``                                                                                                                                                                                                                         |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                   |                                  |                                  | Multiple attributes are supported through passing an array of VKLData objects.                                                                                                                                                         |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | vec3f             | gridOrigin                       | :math:`(0, 0, 0)`                | origin of the grid in object space                                                                                                                                                                                                     |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | vec3f             | gridSpacing                      | :math:`(1, 1, 1)`                | size of the grid cells in object space                                                                                                                                                                                                 |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32            | temporalFormat                   | ``VKL_TEMPORAL_FORMAT_CONSTANT`` | The temporal format for this volume. Use ``VKLTemporalFormat`` for named constants. Structured regular volumes support ``VKL_TEMPORAL_FORMAT_CONSTANT``, ``VKL_TEMPORAL_FORMAT_STRUCTURED``, and ``VKL_TEMPORAL_FORMAT_UNSTRUCTURED``. |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | int               | temporallyStructuredNumTimesteps |                                  | For temporally structured variation, number of timesteps per voxel. Only valid if ``temporalFormat`` is ``VKL_TEMPORAL_FORMAT_STRUCTURED``.                                                                                            |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32[] uint64[] | temporallyUnstructuredIndices    |                                  | For temporally unstructured variation, indices to ``data`` time series beginning per voxel. Only valid if ``temporalFormat`` is ``VKL_TEMPORAL_FORMAT_UNSTRUCTURED``.                                                                  |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float[]           | temporallyUnstructuredTimes      |                                  | For temporally unstructured variation, time values corresponding to values in ``data``. Only valid if ``temporalFormat`` is ``VKL_TEMPORAL_FORMAT_UNSTRUCTURED``.                                                                      |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float[]           | background                       | ``VKL_BACKGROUND_UNDEFINED``     | For each attribute, the value that is returned when sampling an undefined region outside the volume domain.                                                                                                                            |
+   +-------------------+----------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Structured regular volumes support two forms of temporal variation: temporally structured and temporally unstructured. When one of these modes is enabled, the volume can be sampled at different times. In both modes, time is assumed to vary between zero and one. This can be useful for implementing renderers with motion blur, for example.
-
-Temporally structured variation is configured through the ``temporallyStructuredNumTimesteps`` parameter. This specifies how many time steps (at least two) are provided for all voxels. Therefore, for a volume with dimensions :math:`(x, y, z)`, each attribute must have :math:`x*y*z * temporallyStructuredNumTimesteps` values provided in its ``data`` array. The values are assumed evenly spaced over times :math:`[0, 1]`.
-
-Temporally unstructured variation is configured through the ``temporallyUnstructuredIndices`` and ``temporallyUnstructuredTimes`` parameters, and supports differing time step counts and sample times per voxel. ``temporallyUnstructuredIndices`` specifies the index ranges for each voxel’s values in ``data``, such that values for the the :math:`i`\ th voxel can be found in the indices :math:`[temporallyUnstructuredIndices[i], temporallyUnstructuredIndices[i+1])`. Therefore ``temporallyUnstructuredIndices`` must have :math:`x*y*z + 1` values. ``temporallyUnstructuredTimes`` specifies the times corresponding to the sample values in each attribute’s ``data`` array; the time values for each voxel must be between zero and one and strictly increasing: :math:`t0 < t1 < ... < tN`. To return a value at sample time t, :math:`t0 <= t <= tN`, Open VKL will interpolate linearly from the two nearest time steps. Time values outside this range are clamped :math:`[t0, tN]`.
+Structured regular volumes support temporally structured and temporally unstructured temporal variation. See section ‘Temporal Variation’ for more detail.
 
 The following additional parameters can be set both on ``"structuredRegular"`` volumes and their sampler objects. Sampler object parameters default to volume parameters.
 
 .. table:: Configuration parameters for structured regular (``"structuredRegular"``) volumes and their sampler objects.
 
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Type | Name           | Default                  | Description                                                                                                       |
-   +======+================+==========================+===================================================================================================================+
-   | int  | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   +--------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Type   | Name           | Default                  | Description                                                                                                       |
+   +========+================+==========================+===================================================================================================================+
+   | int    | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
+   +--------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int    | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
+   +--------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+
+Reconstruction filters
+''''''''''''''''''''''
+
+Structured regular volumes support the filter types ``VKL_FILTER_NEAREST``, ``VKL_FILTER_TRILINEAR``, and ``VKL_FILTER_TRICUBIC`` for both ``filter`` and ``gradientFilter``.
+
+Note that when ``gradientFilter`` is set to ``VKL_FILTER_NEAREST``, gradients are always :math:`(0, 0, 0)`.
 
 Structured Spherical Volumes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -410,29 +465,33 @@ Structured spherical volumes are also supported, which are created by passing a 
 
 .. table:: Configuration parameters for structured spherical (``"structuredSpherical"``) volumes.
 
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   | Type              | Name        | Default           | Description                                                                     |
-   +===================+=============+===================+=================================================================================+
-   | vec3i             | dimensions  |                   | number of voxels in each dimension :math:`(r, \theta, \phi)`                    |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   | VKLData VKLData[] | data        |                   | VKLData object(s) of voxel data, supported types are:                           |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   |                   |             |                   | ``VKL_UCHAR``                                                                   |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   |                   |             |                   | ``VKL_SHORT``                                                                   |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   |                   |             |                   | ``VKL_USHORT``                                                                  |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   |                   |             |                   | ``VKL_FLOAT``                                                                   |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   |                   |             |                   | ``VKL_DOUBLE``                                                                  |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   |                   |             |                   | Multiple attributes are supported through passing an array of VKLData objects.  |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   | vec3f             | gridOrigin  | :math:`(0, 0, 0)` | origin of the grid in units of :math:`(r, \theta, \phi)`; angles in degrees     |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
-   | vec3f             | gridSpacing | :math:`(1, 1, 1)` | size of the grid cells in units of :math:`(r, \theta, \phi)`; angles in degrees |
-   +-------------------+-------------+-------------------+---------------------------------------------------------------------------------+
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   | Type              | Name        | Default                      | Description                                                                                                 |
+   +===================+=============+==============================+=============================================================================================================+
+   | vec3i             | dimensions  |                              | number of voxels in each dimension :math:`(r, \theta, \phi)`                                                |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   | VKLData VKLData[] | data        |                              | VKLData object(s) of voxel data, supported types are:                                                       |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | ``VKL_UCHAR``                                                                                               |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | ``VKL_SHORT``                                                                                               |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | ``VKL_USHORT``                                                                                              |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | ``VKL_HALF``                                                                                                |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | ``VKL_FLOAT``                                                                                               |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | ``VKL_DOUBLE``                                                                                              |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   |                   |             |                              | Multiple attributes are supported through passing an array of VKLData objects.                              |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   | vec3f             | gridOrigin  | :math:`(0, 0, 0)`            | origin of the grid in units of :math:`(r, \theta, \phi)`; angles in degrees                                 |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   | vec3f             | gridSpacing | :math:`(1, 1, 1)`            | size of the grid cells in units of :math:`(r, \theta, \phi)`; angles in degrees                             |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
+   | float[]           | background  | ``VKL_BACKGROUND_UNDEFINED`` | For each attribute, the value that is returned when sampling an undefined region outside the volume domain. |
+   +-------------------+-------------+------------------------------+-------------------------------------------------------------------------------------------------------------+
 
 These grid parameters support flexible specification of spheres, hemispheres, spherical shells, spherical wedges, and so forth. The grid extents (computed as :math:`[gridOrigin, gridOrigin + (dimensions - 1) * gridSpacing]`) however must be constrained such that:
 
@@ -444,13 +503,13 @@ The following additional parameters can be set both on ``"structuredSpherical"``
 
 .. table:: Configuration parameters for structured spherical (``"structuredSpherical"``) volumes and their sampler objects.
 
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Type | Name           | Default                  | Description                                                                                                       |
-   +======+================+==========================+===================================================================================================================+
-   | int  | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
-   +------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   +--------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Type   | Name           | Default                  | Description                                                                                                       |
+   +========+================+==========================+===================================================================================================================+
+   | int    | filter         | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
+   +--------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int    | gradientFilter | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
+   +--------+----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
 
 Adaptive Mesh Refinement (AMR) Volumes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -467,21 +526,23 @@ AMR volumes are created by passing the type string ``"amr"`` to ``vklNewVolume``
 
 .. table:: Configuration parameters for AMR (``"amr"``) volumes.
 
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-   | Type      | Name         | Default           | Description                                                                                                                          |
-   +===========+==============+===================+======================================================================================================================================+
-   | float[]   | cellWidth    |                   | [data] array of each level’s cell width                                                                                              |
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-   | box3i[]   | block.bounds |                   | [data] array of each block’s bounds (in voxels)                                                                                      |
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-   | int[]     | block.level  |                   | [data] array of each block’s refinement level                                                                                        |
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-   | VKLData[] | block.data   |                   | [data] array of each block’s VKLData object containing the actual scalar voxel data. Currently only ``VKL_FLOAT`` data is supported. |
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-   | vec3f     | gridOrigin   | :math:`(0, 0, 0)` | origin of the grid in object space                                                                                                   |
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
-   | vec3f     | gridSpacing  | :math:`(1, 1, 1)` | size of the grid cells in object space                                                                                               |
-   +-----------+--------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | Type      | Name         | Default                      | Description                                                                                                                          |
+   +===========+==============+==============================+======================================================================================================================================+
+   | float[]   | cellWidth    |                              | [data] array of each level’s cell width                                                                                              |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | box3i[]   | block.bounds |                              | [data] array of each block’s bounds (in voxels)                                                                                      |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | int[]     | block.level  |                              | [data] array of each block’s refinement level                                                                                        |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | VKLData[] | block.data   |                              | [data] array of each block’s VKLData object containing the actual scalar voxel data. Currently only ``VKL_FLOAT`` data is supported. |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | vec3f     | gridOrigin   | :math:`(0, 0, 0)`            | origin of the grid in object space                                                                                                   |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | vec3f     | gridSpacing  | :math:`(1, 1, 1)`            | size of the grid cells in object space                                                                                               |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | float     | background   | ``VKL_BACKGROUND_UNDEFINED`` | The value that is returned when sampling an undefined region outside the volume domain.                                              |
+   +-----------+--------------+------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
 
 Note that the ``gridOrigin`` and ``gridSpacing`` parameters act just like the structured volume equivalent, but they only modify the root (coarsest level) of refinement.
 
@@ -489,23 +550,25 @@ The following additional parameters can be set both on ``"amr"`` volumes and the
 
 .. table:: Configuration parameters for AMR (``"AMR"``) volumes and their sampler objects.
 
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   | Type             | Name   | Default             | Description                                              |
-   +==================+========+=====================+==========================================================+
-   | ``VKLAMRMethod`` | method | ``VKL_AMR_CURRENT`` | ``VKLAMRMethod`` sampling method. Supported methods are: |
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   |                  |        |                     | ``VKL_AMR_CURRENT``                                      |
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   |                  |        |                     | ``VKL_AMR_FINEST``                                       |
-   +------------------+--------+---------------------+----------------------------------------------------------+
-   |                  |        |                     | ``VKL_AMR_OCTANT``                                       |
-   +------------------+--------+---------------------+----------------------------------------------------------+
+   +------------------+-----------+---------------------+----------------------------------------------------------+
+   | Type             | Name      | Default             | Description                                              |
+   +==================+===========+=====================+==========================================================+
+   | ``VKLAMRMethod`` | method    | ``VKL_AMR_CURRENT`` | ``VKLAMRMethod`` sampling method. Supported methods are: |
+   +------------------+-----------+---------------------+----------------------------------------------------------+
+   |                  |           |                     | ``VKL_AMR_CURRENT``                                      |
+   +------------------+-----------+---------------------+----------------------------------------------------------+
+   |                  |           |                     | ``VKL_AMR_FINEST``                                       |
+   +------------------+-----------+---------------------+----------------------------------------------------------+
+   |                  |           |                     | ``VKL_AMR_OCTANT``                                       |
+   +------------------+-----------+---------------------+----------------------------------------------------------+
 
 Open VKL’s AMR implementation was designed to cover Berger-Colella [1] and Chombo [2] AMR data. The ``method`` parameter above determines the interpolation method used when sampling the volume.
 
 -  ``VKL_AMR_CURRENT`` finds the finest refinement level at that cell and interpolates through this “current” level
 -  ``VKL_AMR_FINEST`` will interpolate at the closest existing cell in the volume-wide finest refinement level regardless of the sample cell’s level
 -  ``VKL_AMR_OCTANT`` interpolates through all available refinement levels at that cell. This method avoids discontinuities at refinement level boundaries at the cost of performance
+
+Gradients are computed using finite differences, using the ``method`` defined on the sampler.
 
 Details and more information can be found in the publication for the implementation [3].
 
@@ -530,51 +593,43 @@ For pyramid cells, each cell is formed by a group of five indices into the verti
 
 To maintain VTK data compatibility, the ``index`` array may be specified with cell sizes interleaved with vertex indices in the following format: :math:`n, id_1, ..., id_n, m, id_1, ..., id_m`. This alternative ``index`` array layout can be enabled through the ``indexPrefixed`` flag (in which case, the ``cell.type`` parameter should be omitted).
 
-A binary bounding volume hierarchy (BVH) is used internally to accelerate interval iteration. Intervals are found by intersecting BVH nodes up to a maximum level of the tree, configurable by the ``maxIteratorDepth`` parameter. Larger values of ``maxIteratorDepth`` lead to smaller individual intervals (up to leaf node intersections), yielding potentially more efficient space-skipping behavior and tighter bounds on returned interval metadata.
+Gradients are computed using finite differences.
 
 Unstructured volumes are created by passing the type string ``"unstructured"`` to ``vklNewVolume``, and have the following parameters:
 
 .. table:: Configuration parameters for unstructured (``"unstructured"``) volumes.
 
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Type                | Name               | Default | Description                                                                                                                                             |
-   +=====================+====================+=========+=========================================================================================================================================================+
-   | vec3f[]             | vertex.position    |         | [data] array of vertex positions                                                                                                                        |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | float[]             | vertex.data        |         | [data] array of vertex data values to be sampled                                                                                                        |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | uint32[] / uint64[] | index              |         | [data] array of indices (into the vertex array(s)) that form cells                                                                                      |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | bool                | indexPrefixed      | false   | indicates that the ``index`` array is provided in a VTK-compatible format, where the indices of each cell are prefixed with the number of vertices      |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | uint32[] / uint64[] | cell.index         |         | [data] array of locations (into the index array), specifying the first index of each cell                                                               |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | float[]             | cell.data          |         | [data] array of cell data values to be sampled                                                                                                          |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | uint8[]             | cell.type          |         | [data] array of cell types (VTK compatible). Supported types are:                                                                                       |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   |                     |                    |         | ``VKL_TETRAHEDRON``                                                                                                                                     |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   |                     |                    |         | ``VKL_HEXAHEDRON``                                                                                                                                      |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   |                     |                    |         | ``VKL_WEDGE``                                                                                                                                           |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   |                     |                    |         | ``VKL_PYRAMID``                                                                                                                                         |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | bool                | hexIterative       | false   | hexahedron interpolation method, defaults to fast non-iterative version which could have rendering inaccuracies may appear if hex is not parallelepiped |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | bool                | precomputedNormals | false   | whether to accelerate by precomputing, at a cost of 12 bytes/face                                                                                       |
-   +---------------------+--------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-The following additional parameters can be set both on ``unstructured`` volumes and their sampler objects (sampler object parameters default to volume parameters).
-
-.. table:: Configuration parameters for unstructured (``"unstructured"``) volumes and their sampler objects.
-
-   +------+------------------+---------+--------------------------------------------------------------------------+
-   | Type | Name             | Default | Description                                                              |
-   +======+==================+=========+==========================================================================+
-   | int  | maxIteratorDepth | 6       | Do not descend further than to this BVH depth during interval iteration. |
-   +------+------------------+---------+--------------------------------------------------------------------------+
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Type                | Name               | Default                      | Description                                                                                                                                             |
+   +=====================+====================+==============================+=========================================================================================================================================================+
+   | vec3f[]             | vertex.position    |                              | [data] array of vertex positions                                                                                                                        |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float[]             | vertex.data        |                              | [data] array of vertex data values to be sampled                                                                                                        |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32[] / uint64[] | index              |                              | [data] array of indices (into the vertex array(s)) that form cells                                                                                      |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | bool                | indexPrefixed      | false                        | indicates that the ``index`` array is provided in a VTK-compatible format, where the indices of each cell are prefixed with the number of vertices      |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32[] / uint64[] | cell.index         |                              | [data] array of locations (into the index array), specifying the first index of each cell                                                               |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float[]             | cell.data          |                              | [data] array of cell data values to be sampled                                                                                                          |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint8[]             | cell.type          |                              | [data] array of cell types (VTK compatible). Supported types are:                                                                                       |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                     |                    |                              | ``VKL_TETRAHEDRON``                                                                                                                                     |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                     |                    |                              | ``VKL_HEXAHEDRON``                                                                                                                                      |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                     |                    |                              | ``VKL_WEDGE``                                                                                                                                           |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   |                     |                    |                              | ``VKL_PYRAMID``                                                                                                                                         |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | bool                | hexIterative       | false                        | hexahedron interpolation method, defaults to fast non-iterative version which could have rendering inaccuracies may appear if hex is not parallelepiped |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | bool                | precomputedNormals | false                        | whether to accelerate by precomputing, at a cost of 12 bytes/face                                                                                       |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float               | background         | ``VKL_BACKGROUND_UNDEFINED`` | The value that is returned when sampling an undefined region outside the volume domain.                                                                 |
+   +---------------------+--------------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 VDB Volumes
 ~~~~~~~~~~~
@@ -606,37 +661,57 @@ VDB volumes are created by passing the type string ``"vdb"`` to ``vklNewVolume``
 
 .. table:: Configuration parameters for VDB (``"vdb"``) volumes.
 
-   +-----------+---------------+------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Type      | Name          | Default                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-   +===========+===============+====================================+============================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-   | float[]   | indexToObject | 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 | An array of 12 values of type ``float`` that define the transformation from index space to object space. In index space, the grid is an axis-aligned regular grid, and leaf voxels have size (1,1,1). The first 9 values are interpreted as a row-major linear transformation matrix. The last 3 values are the translation of the grid origin.                                                                                                                            |
-   +-----------+---------------+------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | uint32[]  | node.format   |                                    | For each input node, the data format. Currently supported are ``VKL_FORMAT_TILE`` for tiles, and ``VKL_FORMAT_CONSTANT_ZYX`` for nodes that are dense regular grids.                                                                                                                                                                                                                                                                                                       |
-   +-----------+---------------+------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | uint32[]  | node.level    |                                    | For each input node, the level on which this node exists. Tiles may exist on levels [1, ``VKL_VDB_NUM_LEVELS-1``], all other nodes may only exist on level ``VKL_VDB_NUM_LEVELS-1``.                                                                                                                                                                                                                                                                                       |
-   +-----------+---------------+------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | vec3i[]   | node.origin   |                                    | For each input node, the node origin index.                                                                                                                                                                                                                                                                                                                                                                                                                                |
-   +-----------+---------------+------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | VKLData[] | node.data     |                                    | For each input node, the attribute data. Single-attribute volumes may have one array provided per node, while multi-attribute volumes require an array per attribute for each node. Nodes with format ``VKL_FORMAT_TILE`` are expected to have single-entry arrays per attribute. Nodes with format ``VKL_FORMAT_CONSTANT_ZYX`` are expected to have arrays with ``vklVdbLevelNumVoxels(level[i])`` entries per attribute. Only ``VKL_FLOAT`` data is currently supported. |
-   +-----------+---------------+------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Type      | Name                                  | Default                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   +===========+=======================================+====================================+=================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+   | float[]   | indexToObject                         | 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 | An array of 12 values of type ``float`` that define the transformation from index space to object space. In index space, the grid is an axis-aligned regular grid, and leaf voxels have size (1,1,1). The first 9 values are interpreted as a row-major linear transformation matrix. The last 3 values are the translation of the grid origin.                                                                                                                                                                                                 |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32[]  | node.format                           |                                    | For each input node, the data format. Currently supported are ``VKL_FORMAT_TILE`` for tiles, and ``VKL_FORMAT_DENSE_ZYX`` for nodes that are dense regular grids.                                                                                                                                                                                                                                                                                                                                                                               |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32[]  | node.level                            |                                    | For each input node, the level on which this node exists. Tiles may exist on levels [1, ``VKL_VDB_NUM_LEVELS-1``], all other nodes may only exist on level ``VKL_VDB_NUM_LEVELS-1``.                                                                                                                                                                                                                                                                                                                                                            |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | vec3i[]   | node.origin                           |                                    | For each input node, the node origin index.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | VKLData[] | node.data                             |                                    | For each input node, the attribute data. Single-attribute volumes may have one array provided per node, while multi-attribute volumes require an array per attribute for each node. Nodes with format ``VKL_FORMAT_TILE`` are expected to have single-entry arrays per attribute. Nodes with format ``VKL_FORMAT_DENSE_ZYX`` are expected to have arrays with ``vklVdbLevelNumVoxels(level[i])`` entries per attribute. ``VKL_HALF`` and ``VKL_FLOAT`` data is currently supported; all nodes for a given attribute must be the same data type. |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | uint32[]  | node.temporalFormat                   | ``VKL_TEMPORAL_FORMAT_CONSTANT``   | The temporal format for this volume. Use ``VKLTemporalFormat`` for named constants. VDB volumes support ``VKL_TEMPORAL_FORMAT_CONSTANT``, ``VKL_TEMPORAL_FORMAT_STRUCTURED``, and ``VKL_TEMPORAL_FORMAT_UNSTRUCTURED``.                                                                                                                                                                                                                                                                                                                         |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | int[]     | node.temporallyStructuredNumTimesteps |                                    | For temporally structured variation, number of timesteps per voxel. Only valid if ``temporalFormat`` is ``VKL_TEMPORAL_FORMAT_STRUCTURED``.                                                                                                                                                                                                                                                                                                                                                                                                     |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | VKLData[] | node.temporallyUnstructuredIndices    |                                    | For temporally unstructured variation, beginning per voxel. Supported data types for each node are ``VKL_UINT`` and ``VKL_ULONG``. Only valid if ``temporalFormat`` is ``VKL_TEMPORAL_FORMAT_UNSTRUCTURED``.                                                                                                                                                                                                                                                                                                                                    |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | VKLData[] | node.temporallyUnstructuredTimes      |                                    | For temporally unstructured variation, time values corresponding to values in ``node.data``. For each node, the data must be of type ``VKL_FLOAT``. Only valid if ``temporalFormat`` is ``VKL_TEMPORAL_FORMAT_UNSTRUCTURED``.                                                                                                                                                                                                                                                                                                                   |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float[]   | background                            | ``VKL_BACKGROUND_UNDEFINED``       | For each attribute, the value that is returned when sampling an undefined region outside the volume domain.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   +-----------+---------------------------------------+------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The level, origin, format, and data parameters must have the same size, and there must be at least one valid node or ``commit()`` will fail.
+
+VDB volumes support temporally structured and temporally unstructured temporal variation. See section ‘Temporal Variation’ for more detail.
 
 The following additional parameters can be set both on ``vdb`` volumes and their sampler objects (sampler object parameters default to volume parameters).
 
 .. table:: Configuration parameters for VDB (``"vdb"``) volumes and their sampler objects.
 
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | Type | Name             | Default                  | Description                                                                                                       |
-   +======+==================+==========================+===================================================================================================================+
-   | int  | filter           | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | gradientFilter   | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | maxSamplingDepth | ``VKL_VDB_NUM_LEVELS``-1 | Do not descend further than to this depth during sampling.                                                        |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
-   | int  | maxIteratorDepth | ``VKL_VDB_NUM_LEVELS``-2 | Do not descend further than to this depth during iteration.                                                       |
-   +------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   +--------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | Type   | Name             | Default                  | Description                                                                                                       |
+   +========+==================+==========================+===================================================================================================================+
+   | int    | filter           | ``VKL_FILTER_TRILINEAR`` | The filter used for reconstructing the field. Use ``VKLFilter`` for named constants.                              |
+   +--------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int    | gradientFilter   | ``filter``               | The filter used for reconstructing the field during gradient computations. Use ``VKLFilter`` for named constants. |
+   +--------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+   | int    | maxSamplingDepth | ``VKL_VDB_NUM_LEVELS``-1 | Do not descend further than to this depth during sampling.                                                        |
+   +--------+------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------+
+
+VDB volume objects support the following observers:
+
+.. table:: Observers supported by VDB (``"vdb"``) volumes.
+
+   +-----------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Name      | Buffer Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   +===========+=============+====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+   | InnerNode | float[]     | Return an array of bounding boxes, along with value ranges, of inner nodes in the data structure. The bounding box is given in object space. For a volume with M attributes, the entries in this array are (6+2*M)-tuples ``(minX, minY, minZ, maxX, maxY, maxZ, lower_0, upper_0, lower_1, upper_1, ...)``. This is in effect a low resolution representation of the volume. The InnerNode observer can be parametrized using ``int maxDepth`` to control the depth at which inner nodes are returned. Note that the observer will also return leaf nodes or tiles at lower levels if they exist. |
+   +-----------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 VDB sampler objects support the following observers:
 
@@ -648,6 +723,15 @@ VDB sampler objects support the following observers:
    | LeafNodeAccess | uint32[]    | This observer returns an array with as many entries as input nodes were passed. If the input node i was accessed during traversal, then the ith entry in this array has a nonzero value. This can be used for on-demand loading of leaf nodes. |
    +----------------+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+.. _reconstruction-filters-1:
+
+Reconstruction filters
+^^^^^^^^^^^^^^^^^^^^^^
+
+VDB volumes support the filter types ``VKL_FILTER_NEAREST``, ``VKL_FILTER_TRILINEAR``, and ``VKL_FILTER_TRICUBIC`` for both ``filter`` and ``gradientFilter``.
+
+Note that when ``gradientFilter`` is set to ``VKL_FILTER_NEAREST``, gradients are always :math:`(0, 0, 0)`.
+
 Major differences to OpenVDB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -655,7 +739,7 @@ Major differences to OpenVDB
 
 -  VDB volumes in Open VKL are read-only once committed, and designed for rendering only. Authoring or manipulating datasets is not in the scope of this implementation.
 
--  The only supported field type is ``VKL_FLOAT`` at this point. Other field types may be supported in the future.
+-  The only supported field types are ``VKL_HALF`` and ``VKL_FLOAT`` at this point. Other field types may be supported in the future. Note that multi-attribute volumes may be used to represent multi-component (e.g. vector) fields.
 
 -  The root level in Open VKL has a single node with resolution 64^3 (cp. [1]. OpenVDB uses a hash map, instead).
 
@@ -670,7 +754,7 @@ Loading OpenVDB .vdb files
 
 Files generated with OpenVDB can be loaded easily since Open VKL ``vdb`` volumes implement the same leaf data layout. This means that OpenVDB leaf data pointers can be passed to Open VKL using shared data buffers, avoiding copy operations.
 
-An example of this can be found in ``vdb_util/include/openvkl/OpenVdbGrid.h``, where the class ``OpenVdbFloatGrid`` encapsulates the necessary operations. This class is also accessible through the ``vklExamples`` application using the ``-file`` and ``-field`` command line arguments.
+An example of this can be found in ``utility/vdb/include/openvkl/utility/vdb/OpenVdbGrid.h``, where the class ``OpenVdbFloatGrid`` encapsulates the necessary operations. This class is also accessible through the ``vklExamples`` application using the ``-file`` and ``-field`` command line arguments.
 
 To use this example feature, compile Open VKL with ``OpenVDB_ROOT`` pointing to the OpenVDB prefix.
 
@@ -685,11 +769,9 @@ phi(P) = w \* exp( -0.5 \* ((P - p) / r)^2 )
 
 where P is the particle position, p is the sample position, r is the radius and w is the weight.
 
-At each sample, the scalar field value is then computed as the sum of each radial basis function phi, for each particle that overlaps it.
+At each sample, the scalar field value is then computed as the sum of each radial basis function phi, for each particle that overlaps it. Gradients are similarly computed, based on the summed analytical contributions of each contributing particle.
 
 The Open VKL implementation is similar to direct evaluation of samples in Reda et al.[2]. It uses an Embree-built BVH with a custom traversal, similar to the method in [1].
-
-Similar to unstructured volumes, a binary BVH is used internally to accelerate interval iteration. Intervals are found by intersecting BVH nodes up to a maximum level of the tree, configurable by the ``maxIteratorDepth`` parameter.
 
 Particle volumes are created by passing the type string ``"particle"`` to ``vklNewVolume``, and have the following parameters:
 
@@ -711,19 +793,22 @@ Particle volumes are created by passing the type string ``"particle"`` to ``vklN
    | bool    | estimateValueRanges     | true    | Enable heuristic estimation of value ranges which are used in internal acceleration structures for interval and hit iterators, as well as for determining the volume’s overall value range. When set to ``false``, the user *must* specify ``clampMaxCumulativeValue``, and all value ranges will be assumed [0, ``clampMaxCumulativeValue``]. Disabling this may improve volume commit time, but will make interval and hit iteration less efficient. |
    +---------+-------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-The following additional parameters can be set both on ``particle`` volumes and their sampler objects (sampler object parameters default to volume parameters).
-
-.. table:: Configuration parameters for particle (``"particle"``) volumes and their sampler objects.
-
-   +------+------------------+---------+--------------------------------------------------------------------------+
-   | Type | Name             | Default | Description                                                              |
-   +======+==================+=========+==========================================================================+
-   | int  | maxIteratorDepth | 6       | Do not descend further than to this BVH depth during interval iteration. |
-   +------+------------------+---------+--------------------------------------------------------------------------+
-
 1. Knoll, A., Wald, I., Navratil, P., Bowen, A., Reda, K., Papka, M.E. and Gaither, K. (2014), RBF Volume Ray Casting on Multicore and Manycore CPUs. Computer Graphics Forum, 33: 71-80. doi:10.1111/cgf.12363
 
 2. K. Reda, A. Knoll, K. Nomura, M. E. Papka, A. E. Johnson and J. Leigh, “Visualizing large-scale atomistic simulations in ultra-resolution immersive environments,” 2013 IEEE Symposium on Large-Scale Data Analysis and Visualization (LDAV), Atlanta, GA, 2013, pp. 59-65.
+
+Temporal Variation
+------------------
+
+Open VKL supports two types of temporal variation: temporally structured and temporally unstructured. When one of these modes is enabled, the volume can be sampled at different times. In both modes, time is assumed to vary between zero and one. This can be useful for implementing renderers with motion blur, for example.
+
+Temporal variation is generally configured through a parameter ``temporalFormat``, which accepts constants from the ``VKLTemporalFormat`` enum, though not all modes may be supported by all volumes. On volumes that expect multiple input nodes, the parameter is an array ``node.temporalFormat``, and must provide one value per node. Multiple attributes in a voxel share the same temporal configuration. Please refer to the individual volume sections above to find out supported for each volume type.
+
+``temporalFormat`` defaults to ``VKL_TEMPORAL_FORMAT_CONSTANT`` for all volume types. This means that no temporal variation is present in the data.
+
+Temporally structured variation is configured by setting ``temporalFormat`` to ``VKL_TEMPORAL_FORMAT_STRUCTURED``. In this mode, the volume expects an additional parameter ``[node.]temporallyStructuredNumTimesteps``, which specifies how many time steps are provided for all voxels, and must be at least 2. A volume, or node, with :math:`N` voxels expects :math:`N * temporallyStructuredNumTimesteps` values for each attribute. The values are assumed evenly spaced over times :math:`[0, 1]`: :math:`\{0, 1/(N-1), ..., 1\}`
+
+Temporally unstructured variation supports differing time step counts and sample times per voxel. For :math:`N` input voxels, ``temporallyUnstructuredIndices`` is an array of :math:`N+1` indices. Voxel :math:`i` has :math:`N_i = [temporallyUnstructuredIndices[i+1]-temporallyUnstructuredIndices[i])` temporal samples starting at index :math:`temporallyUnstructuredIndices[i]`. ``temporallyUnstructuredTimes`` specifies the times corresponding to the sample values; the time values for each voxel must be between zero and one and strictly increasing: :math:`t0 < t1 < ... < tN`. To return a value at sample time t, :math:`t0 <= t <= tN`, Open VKL will interpolate linearly from the two nearest time steps. Time values outside this range are clamped to :math:`[t0, tN]`.
 
 Sampler Objects
 ---------------
@@ -739,7 +824,7 @@ Sampler objects may then be parametrized with traversal parameters. Available pa
 Sampling
 --------
 
-The scalar API takes a volume and coordinate, and returns a float value. NaN is returned for probe points outside the volume. The attribute index selects the scalar attribute of interest; not all volumes support multiple attributes. The time value, which must be between 0 and 1, specifies the sampling time. For temporally constant volumes, this value has no effect.
+The scalar API takes a volume and coordinate, and returns a float value. The volume’s background value (by default ``VKL_BACKGROUND_UNDEFINED``) is returned for probe points outside the volume. The attribute index selects the scalar attribute of interest; not all volumes support multiple attributes. The time value, which must be between 0 and 1, specifies the sampling time. For temporally constant volumes, this value has no effect.
 
 ::
 
@@ -748,7 +833,7 @@ The scalar API takes a volume and coordinate, and returns a float value. NaN is 
                           unsigned int attributeIndex,
                           float time);
 
-Vector versions allow sampling at 4, 8, or 16 positions at once. Depending on the machine type and Open VKL driver implementation, these can give greater performance. An active lane mask ``valid`` is passed in as an array of integers; set 0 for lanes to be ignored, -1 for active lanes. An array of time values corresponding to each object coordinate may be provided; a ``NULL`` value indicates all times are zero.
+Vector versions allow sampling at 4, 8, or 16 positions at once. Depending on the machine type and Open VKL device implementation, these can give greater performance. An active lane mask ``valid`` is passed in as an array of integers; set 0 for lanes to be ignored, -1 for active lanes. An array of time values corresponding to each object coordinate may be provided; a ``NULL`` value indicates all times are zero.
 
 ::
 
@@ -784,7 +869,7 @@ A stream version allows sampling an arbitrary number of positions at once. While
                             unsigned int attributeIndex,
                             const float *times);
 
-All of the above sampling APIs can be used, regardless of the driver’s native SIMD width.
+All of the above sampling APIs can be used, regardless of the device’s native SIMD width.
 
 Sampling Multiple Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -860,7 +945,7 @@ The ``M * N`` sampled values are populated in the ``samples`` array in an array-
               ...,
               s_0,N-1, s_1,N-1, ..., s_M-1,N-1]
 
-All of the above sampling APIs can be used, regardless of the driver’s native SIMD width.
+All of the above sampling APIs can be used, regardless of the device’s native SIMD width.
 
 Gradients
 ---------
@@ -910,60 +995,72 @@ Finally, a stream version is provided:
                             unsigned int attributeIndex,
                             const float *times);
 
-All of the above gradient APIs can be used, regardless of the driver’s native SIMD width.
+All of the above gradient APIs can be used, regardless of the device’s native SIMD width.
 
 Iterators
 ---------
 
-Open VKL has APIs to search for particular volume values along a ray. Queries can be for ranges of volume values (``vklIterateInterval``) or for particular values (``vklIterateHit``). Only the first volume attribute is currently considered in the iterator APIs.
+Open VKL has APIs to search for particular volume values along a ray. Queries can be for ranges of volume values (``vklIterateInterval``) or for particular values (``vklIterateHit``).
 
-The desired values are set in a ``VKLValueSelector``, which needs to be created, filled in with values, and then committed.
-
-::
-
-   VKLValueSelector vklNewValueSelector(VKLVolume volume);
-
-   void vklValueSelectorSetRanges(VKLValueSelector valueSelector,
-                                  size_t numRanges,
-                                  const vkl_range1f *ranges);
-
-   void vklValueSelectorSetValues(VKLValueSelector valueSelector,
-                                  size_t numValues,
-                                  const float *values);
-
-To query an interval, a ``VKLIntervalIterator`` of scalar or vector width must be initialized with ``vklInitIntervalIterator``.
+Interval iterators require a context object to define the sampler and parameters related to iteration behavior. An interval iterator context is created via
 
 ::
 
-   VKLIntervalIterator vklInitIntervalIterator(VKLSampler sampler,
+   VKLIntervalIteratorContext vklNewIntervalIteratorContext(VKLSampler sampler);
+
+The parameters understood by interval iterator contexts are defined in the table below.
+
+.. table:: Configuration parameters for interval iterator contexts.
+
+   +---------------+------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Type          | Name                   | Default     | Description                                                                                                                                                                                                                                                                             |
+   +===============+========================+=============+=========================================================================================================================================================================================================================================================================================+
+   | int           | attributeIndex         | 0           | Defines the volume attribute of interest.                                                                                                                                                                                                                                               |
+   +---------------+------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | vkl_range1f[] | valueRanges            | [-inf, inf] | Defines the value ranges of interest. Intervals not containing any of these values ranges may be skipped during iteration.                                                                                                                                                              |
+   +---------------+------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | float         | intervalResolutionHint | 0.5         | A value in the range [0, 1] affecting the resolution (size) of returned intervals. A value of 0 yields the lowest resolution (largest) intervals while 1 gives the highest resolution (smallest) intervals. This value is only a hint; it may not impact behavior for all volume types. |
+   +---------------+------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Most volume types support the ``intervalResolutionHint`` parameter that can impact the size of intervals returned duration iteration. These include ``amr``, ``particle``, ``structuredRegular``, ``unstructured``, and ``vdb`` volumes. In all cases a value of 1.0 yields the highest resolution (smallest) intervals possible, while a value of 0.0 gives the lowest resolution (largest) intervals. In general, smaller intervals will have tighter bounds on value ranges, and more efficient space skipping behavior than larger intervals, which can be beneficial for some rendering methods.
+
+For ``structuredRegular``, ``unstructured``, and ``vdb`` volumes, a value of 1.0 will enable elementary cell iteration, such that each interval spans an individual voxel / cell intersection. Note that interval iteration can be significantly slower in this case.
+
+As with other objects, the interval iterator context must be committed before being used.
+
+To query an interval, a ``VKLIntervalIterator`` of scalar or vector width must be initialized with ``vklInitIntervalIterator``. Time value(s) may be provided to specify the sampling time. These values must be between 0 and 1; for the vector versions, a ``NULL`` value indicates all times are zero. For temporally constant volumes, the time values have no effect.
+
+::
+
+   VKLIntervalIterator vklInitIntervalIterator(VKLIntervalIteratorContext context,
                                                const vkl_vec3f *origin,
                                                const vkl_vec3f *direction,
                                                const vkl_range1f *tRange,
-                                               VKLValueSelector valueSelector,
+                                               float time,
                                                void *buffer);
 
    VKLIntervalIterator4 vklInitIntervalIterator4(const int *valid,
-                                                 VKLSampler sampler,
+                                                 VKLIntervalIteratorContext context,
                                                  const vkl_vvec3f4 *origin,
                                                  const vkl_vvec3f4 *direction,
                                                  const vkl_vrange1f4 *tRange,
-                                                 VKLValueSelector valueSelector,
+                                                 const float *times,
                                                  void *buffer);
 
    VKLIntervalIterator8 vklInitIntervalIterator8(const int *valid,
-                                                 VKLSampler sampler,
+                                                 VKLIntervalIteratorContext context,
                                                  const vkl_vvec3f8 *origin,
                                                  const vkl_vvec3f8 *direction,
                                                  const vkl_vrange1f8 *tRange,
-                                                 VKLValueSelector valueSelector,
+                                                 const float *times,
                                                  void *buffer);
 
    VKLIntervalIterator16 vklInitIntervalIterator16(const int *valid,
-                                                   VKLSampler sampler,
+                                                   VKLIntervalIteratorContext context,
                                                    const vkl_vvec3f16 *origin,
                                                    const vkl_vvec3f16 *direction,
                                                    const vkl_vrange1f16 *tRange,
-                                                   VKLValueSelector valueSelector,
+                                                   const float *times,
                                                    void *buffer);
 
 Open VKL places the iterator struct into a user-provided buffer, and the returned handle is essentially a pointer into this buffer. This means that the iterator handle must not be used after the buffer ceases to exist. Copying iterator buffers is currently not supported.
@@ -972,17 +1069,17 @@ The required size, in bytes, of the buffer can be queried with
 
 ::
 
-   size_t vklGetIntervalIteratorSize(VKLSampler sampler);
+   size_t vklGetIntervalIteratorSize(VKLIntervalIteratorContext context);
 
-   size_t vklGetIntervalIteratorSize4(VKLSampler sampler);
+   size_t vklGetIntervalIteratorSize4(VKLIntervalIteratorContext context);
 
-   size_t vklGetIntervalIteratorSize8(VKLSampler sampler);
+   size_t vklGetIntervalIteratorSize8(VKLIntervalIteratorContext context);
 
-   size_t vklGetIntervalIteratorSize16(VKLSampler sampler);
+   size_t vklGetIntervalIteratorSize16(VKLIntervalIteratorContext context);
 
 The values these functions return may change depending on the parameters set on ``sampler``.
 
-Open VKL also provides a conservative maximum size over all volume types as a preprocessor definition (``VKL_MAX_INTERVAL_ITERATOR_SIZE``). This is particularly useful for stack-based allocation in ISPC. Open VKL will attempt to detect the native vector width using ``TARGET_WIDTH``, which is defined in recent versions of ISPC.
+Open VKL also provides a conservative maximum size over all volume types as a preprocessor definition (``VKL_MAX_INTERVAL_ITERATOR_SIZE``). For ISPC use cases, Open VKL will attempt to detect the native vector width using ``TARGET_WIDTH``, which is defined in recent versions of ISPC, to provide a less conservative size.
 
 Intervals can then be processed by calling ``vklIterateInterval`` as long as the returned lane masks indicates that the iterator is still within the volume:
 
@@ -1038,56 +1135,74 @@ The intervals returned have a t-value range, a value range, and a ``nominalDelta
      float nominalDeltaT[16];
    } VKLInterval16;
 
-Querying for particular values is done using a ``VKLHitIterator`` in much the same fashion. This API could be used, for example, to find isosurfaces. In contrast to interval iterators, time value(s) may be provided to specify the sampling time. These values must be between 0 and 1; for the vector versions, a ``NULL`` value indicates all times are zero. For temporally constant volumes, the time values have no effect. Again, a user allocated buffer must be provided, and a ``VKLHitIterator`` of the desired width must be initialized:
+Querying for particular values is done using a ``VKLHitIterator`` in much the same fashion. This API could be used, for example, to find isosurfaces. As with interval iterators, time value(s) may be provided to specify the sampling time. These values must be between 0 and 1; for the vector versions, a ``NULL`` value indicates all times are zero. For temporally constant volumes, the time values have no effect.
+
+Hit iterators similarly require a context object to define the sampler and other iteration parameters. A hit iterator context is created via
 
 ::
 
-   VKLHitIterator vklInitHitIterator(VKLSampler sampler,
+   VKLHitIteratorContext vklNewHitIteratorContext(VKLSampler sampler);
+
+The parameters understood by hit iterator contexts are defined in the table below.
+
+.. table:: Configuration parameters for hit iterator contexts.
+
+   +-----------+----------------+---------+-------------------------------------------+
+   | Type      | Name           | Default | Description                               |
+   +===========+================+=========+===========================================+
+   | int       | attributeIndex | 0       | Defines the volume attribute of interest. |
+   +-----------+----------------+---------+-------------------------------------------+
+   | float[]   | values         |         | Defines the value(s) of interest.         |
+   +-----------+----------------+---------+-------------------------------------------+
+
+The hit iterator context must be committed before being used.
+
+Again, a user allocated buffer must be provided, and a ``VKLHitIterator`` of the desired width must be initialized:
+
+::
+
+   VKLHitIterator vklInitHitIterator(VKLHitIteratorContext context,
                                      const vkl_vec3f *origin,
                                      const vkl_vec3f *direction,
                                      const vkl_range1f *tRange,
                                      float time,
-                                     VKLValueSelector valueSelector,
                                      void *buffer);
 
    VKLHitIterator4 vklInitHitIterator4(const int *valid,
-                            VKLSampler sampler,
+                            VKLHitIteratorContext context,
                             const vkl_vvec3f4 *origin,
                             const vkl_vvec3f4 *direction,
                             const vkl_vrange1f4 *tRange,
                             const float *times,
-                            VKLValueSelector valueSelector,
                             void *buffer);
 
    VKLHitIterator8 vklInitHitIterator8(const int *valid,
-                            VKLSampler sampler,
+                            VKLHitIteratorContext context,
                             const vkl_vvec3f8 *origin,
                             const vkl_vvec3f8 *direction,
                             const vkl_vrange1f8 *tRange,
                             const float *times,
-                            VKLValueSelector valueSelector,
                             void *buffer);
 
    VKLHitIterator16 vklInitHitIterator16(const int *valid,
-                             VKLSampler sampler,
+                             VKLHitIteratorContext context,
                              const vkl_vvec3f16 *origin,
                              const vkl_vvec3f16 *direction,
                              const vkl_vrange1f16 *tRange,
                              const float *times,
-                             VKLValueSelector valueSelector,
                              void *buffer);
 
 Buffer size can be queried with
 
 ::
 
-   size_t vklGetHitIteratorSize(VKLSampler sampler);
+   size_t vklGetHitIteratorSize(VKLHitIteratorContext context);
 
-   size_t vklGetHitIteratorSize4(VKLSampler sampler);
+   size_t vklGetHitIteratorSize4(VKLHitIteratorContext context);
 
-   size_t vklGetHitIteratorSize8(VKLSampler sampler);
+   size_t vklGetHitIteratorSize8(VKLHitIteratorContext context);
 
-   size_t vklGetHitIteratorSize16(VKLSampler sampler);
+   size_t vklGetHitIteratorSize16(VKLHitIteratorContext context);
 
 Open VKL also provides the macro ``VKL_MAX_HIT_ITERATOR_SIZE`` as a conservative estimate.
 
@@ -1112,7 +1227,7 @@ Hits are then queried by looping a call to ``vklIterateHit`` as long as the retu
                         VKLHit16 *hit,
                         int *result);
 
-Returned hits consist of a t-value, a volume value (equal to one of the requested values specified in the value selector), and an (object space) epsilon value estimating the error of the intersection:
+Returned hits consist of a t-value, a volume value (equal to one of the requested values specified in the context), and an (object space) epsilon value estimating the error of the intersection:
 
 ::
 
@@ -1152,7 +1267,7 @@ Performance Recommendations
 MXCSR control and status register
 ---------------------------------
 
-It is strongly recommended to have the ``Flush to Zero`` and ``Denormals are Zero`` mode of the MXCSR control and status register enabled for each thread before calling the sampling, gradient, or interval API functions. Otherwise, under some circumstances special handling of denormalized floating point numbers can significantly reduce application and Open VKL performance. The driver parameter ``flushDenormals`` or environment variable ``OPENVKL_FLUSH_DENORMALS`` can be used to toggle this mode; by default it is enabled. Alternatively, when using Open VKL together with the Intel® Threading Building Blocks, it is sufficient to execute the following code at the beginning of the application main thread (before the creation of the ``tbb::task_scheduler_init`` object):
+It is strongly recommended to have the ``Flush to Zero`` and ``Denormals are Zero`` mode of the MXCSR control and status register enabled for each thread before calling the sampling, gradient, or interval API functions. Otherwise, under some circumstances special handling of denormalized floating point numbers can significantly reduce application and Open VKL performance. The device parameter ``flushDenormals`` or environment variable ``OPENVKL_FLUSH_DENORMALS`` can be used to toggle this mode; by default it is enabled. Alternatively, when using Open VKL together with the Intel® Threading Building Blocks, it is sufficient to execute the following code at the beginning of the application main thread (before the creation of the ``tbb::task_scheduler_init`` object):
 
 ::
 
@@ -1184,17 +1299,24 @@ In C++, variable length arrays are not part of the standard. Here, users may rel
 
    #include <alloca.h>
    const size_t bufferSize = vklGetIntervalIteratorSize(sampler);
-   char *buffer = alloca(bufferSize);
+   void *buffer = alloca(bufferSize);
+
+Similarly for ISPC, variable length arrays are not supported, but ``alloca`` may be used:
+
+::
+
+   const uniform size_t bufferSize = vklGetIntervalIteratorSizeV(sampler);
+   void *uniform buffer = alloca(bufferSize);
 
 Users should understand the implications of ``alloca``. In particular, ``alloca`` does check available stack space and may result in stack overflow. ``buffer`` also becomes invalid at the end of the scope. As one consequence, it cannot be returned from a function. On Windows, ``_malloca`` is a safer option that performs additional error checking, but requires the use of ``_freea``.
 
-In ISPC, variable length or ``alloca`` do not exist. Applications may instead rely on the ``VKL_MAX_INTERVAL_ITERATOR_SIZE`` and ``VKL_MAX_HIT_ITERATOR_SIZE`` macros:
+Applications may instead rely on the ``VKL_MAX_INTERVAL_ITERATOR_SIZE`` and ``VKL_MAX_HIT_ITERATOR_SIZE`` macros. For example, in ISPC:
 
 ::
 
    uniform unsigned int8 buffer[VKL_MAX_INTERVAL_ITERATOR_SIZE];
 
-These values are majorants over all drivers and volume types. Note that Open VKL attempts to detect the target SIMD width using ``TARGET_WIDTH``, returning smaller buffer sizes for narrow architectures. However, Open VKL may fall back to the largest buffer size over all targets.
+These values are majorants over all devices and volume types. Note that Open VKL attempts to detect the target SIMD width using ``TARGET_WIDTH``, returning smaller buffer sizes for narrow architectures. However, Open VKL may fall back to the largest buffer size over all targets.
 
 Multi-attribute Volume Data Layout
 ----------------------------------
@@ -1218,31 +1340,34 @@ For volume attributes that are sampled simultaneously (e.g. using ``vklComputeS
 
    std::vector<VKLData> attributes;
 
-   attributes.push_back(vklNewData(velocities.size(),
+   attributes.push_back(vklNewData(device,
+                                   velocities.size(),
                                    VKL_FLOAT,
                                    &velocities[0].x,
                                    VKL_DATA_SHARED_BUFFER,
                                    sizeof(vkl_vec3f)));
 
-   attributes.push_back(vklNewData(velocities.size(),
+   attributes.push_back(vklNewData(device,
+                                   velocities.size(),
                                    VKL_FLOAT,
                                    &velocities[0].y,
                                    VKL_DATA_SHARED_BUFFER,
                                    sizeof(vkl_vec3f)));
 
-   attributes.push_back(vklNewData(velocities.size(),
+   attributes.push_back(vklNewData(device,
+                                   velocities.size(),
                                    VKL_FLOAT,
                                    &velocities[0].z,
                                    VKL_DATA_SHARED_BUFFER,
                                    sizeof(vkl_vec3f)));
 
    VKLData attributesData =
-       vklNewData(attributes.size(), VKL_DATA, attributes.data());
+       vklNewData(device, attributes.size(), VKL_DATA, attributes.data());
 
    for (auto &attribute : attributes)
      vklRelease(attribute);
 
-   VKLVolume volume = vklNewVolume("structuredRegular");
+   VKLVolume volume = vklNewVolume(device, "structuredRegular");
 
    vklSetData(volume, "data", attributesData);
    vklRelease(attributesData);
