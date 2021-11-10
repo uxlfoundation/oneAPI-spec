@@ -10,6 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
+      with:
+        python-verson: '3.9'
     - name: Install prerequisites
       run: |
           sudo apt-get update -qq
