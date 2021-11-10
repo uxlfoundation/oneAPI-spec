@@ -21,7 +21,7 @@ from os.path import join
 repo_root = '..'
 exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())
 
-extensions += ['notfound.extension']
+extensions += ['notfound.extension']  # noqa: F821
 
 # -- Project information -----------------------------------------------------
 
