@@ -73,7 +73,7 @@ Release Notes
 1.1 rev 1
 ~~~~~~~~~
 
-Changes since 1.0 rev 2
+Changes since 1.0
 
 * Ray Tracing: Added
 
@@ -114,6 +114,8 @@ Changes since 1.0 rev 2
 
 * DPC++
 
+* oneVPL
+
 1.1 provisional rev 2
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -149,16 +151,42 @@ oneIPL
   * - Version
     - Date
     - View
-  * - `oneART v0.5`_
-    - 2021-2-18
-    - `HTML <https://spec.oneapi.io/oneart/0.5-rev-1/index.html>`__
+  * - `oneIPL v0.5`_
+    - 2021-10-8
+    - `HTML <https://spec.oneapi.io/oneipl/latest/index.html>`__
 
 
 Release Notes
 -------------
 
-Ray Tracing v0.5
-~~~~~~~~~~~~~~~~
+oneIPL v0.5
+~~~~~~~~~~~
+
+Initial release
+
+
+oneDTL
+======
+
+.. list-table::
+  :widths: 30 20 50
+  :header-rows: 1
+
+  * - Version
+    - Date
+    - View
+  * - `oneDTL v0.5`_
+    - 2021-11-10
+    - `HTML <https://spec.oneapi.io/onedtl/latest/index.html>`__
+
+
+Release Notes
+-------------
+
+oneDTL v0.5
+~~~~~~~~~~~
+
+Initial release
 
 
 Ray Tracing
