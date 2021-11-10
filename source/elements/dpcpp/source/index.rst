@@ -150,11 +150,10 @@ until the release notes are available).
 Testing
 -------
 
-A DPC++ implementation must pass:
-
-  1. The `extension tests`_ for any extension implemented from the `Extensions Table`_.
-     Each extension in the `Extensions Table`_ lists the name of the directory that contains
-     corresponding tests, within the `extension tests`_ tree.
+A DPC++ implementation must pass the `extension tests`_ for any
+extension implemented from the `Extensions Table`_.  Each extension in
+the `Extensions Table`_ lists the name of the directory that contains
+corresponding tests, within the `extension tests`_ tree.
 
 Acknowledgment
 ---------------
