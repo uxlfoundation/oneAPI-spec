@@ -39,6 +39,9 @@ Releases are listed below. See GitHub_ for the latest build.
   * - Version
     - Date
     - View
+  * - `1.1 rev 1`_
+    - 2021-11-12
+    - `HTML <https://spec.oneapi.io/versions/1.1-rev-1/>`__ `PDF <https://spec.oneapi.io/versions/1.1-rev-1/oneAPI-spec.pdf>`__
   * - `1.1 provisional rev 2`_
     - 2021-7-19
     - `HTML <https://spec.oneapi.io/versions/1.1-provisional-rev-2/>`__ `PDF <https://spec.oneapi.io/versions/1.1-provisional-rev-2/oneAPI-spec.pdf>`__
@@ -67,6 +70,52 @@ Releases are listed below. See GitHub_ for the latest build.
 Release Notes
 -------------
 
+1.1 rev 1
+~~~~~~~~~
+
+Changes since 1.0
+
+* Ray Tracing: Added
+
+  * Ray tracing capabilities have been added to the oneAPI
+    specification providing software developers across the industry
+    the ability to “write once” for high-fidelity ray-traced
+    computations across multiple vendors’ systems and
+    accelerators. Standardizing these interfaces provides
+    well-designed, tried and true APIs and options for a broad set of
+    compute and rendering infrastructure development.
+
+  * The ray tracing functionality is subdivided into several
+    domains within the oneAPI Specification:
+
+    * Geometric ray tracing computations
+    * Volumetric computation and rendering
+    * Image denoising
+    * Scalable rendering and visualization infrastructure
+
+  * The set of Ray Tracing APIs include the following, which
+    are in active use via the Intel® oneAPI Rendering Toolkit:
+
+    * Embree
+    * Open Volume Kernel Library
+    * Open Image Denoise
+    * OSPRay
+  
+* oneMKL:
+
+  Introduces additional batched APIs for dense linear algebra. Sparse
+  matrix-dense matrix product has been extended to support both row
+  and column major layout for the dense matrix. The input USM pointers
+  in the vector math APIs are now const qualified. To align with
+  changes in SYCL 2020, all oneMKL USM APIs were updated to take an
+  (optional) std::vector of input events instead of
+  sycl::vector_class. Other changes include minor clarifications and
+  bug fixes.
+
+* DPC++
+
+* oneVPL
+
 1.1 provisional rev 2
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -77,7 +126,7 @@ Release Notes
 1.1 provisional rev 1
 ~~~~~~~~~~~~~~~~~~~~~
 
-* Advanced Ray Tracing: ART was added to oneAPI specification
+* Ray Tracing: added to oneAPI specification
 * VPL: Updated to 2.3.1
 * Level Zero: Updated to 1.1.2
 * oneDNN: Added graph API
@@ -92,8 +141,8 @@ Release Notes
 
 * Initial release
 
-Advanced Ray Tracing
-====================
+oneIPL
+======
 
 .. list-table::
   :widths: 30 20 50
@@ -102,7 +151,55 @@ Advanced Ray Tracing
   * - Version
     - Date
     - View
-  * - `oneART v0.5`_
+  * - `oneIPL v0.5`_
+    - 2021-10-8
+    - `HTML <https://spec.oneapi.io/oneipl/latest/index.html>`__
+
+
+Release Notes
+-------------
+
+oneIPL v0.5
+~~~~~~~~~~~
+
+Initial release
+
+
+oneDTL
+======
+
+.. list-table::
+  :widths: 30 20 50
+  :header-rows: 1
+
+  * - Version
+    - Date
+    - View
+  * - `oneDTL v0.5`_
+    - 2021-11-10
+    - `HTML <https://spec.oneapi.io/onedtl/latest/index.html>`__
+
+
+Release Notes
+-------------
+
+oneDTL v0.5
+~~~~~~~~~~~
+
+Initial release
+
+
+Ray Tracing
+===========
+
+.. list-table::
+  :widths: 30 20 50
+  :header-rows: 1
+
+  * - Version
+    - Date
+    - View
+  * - `Ray Tracing v0.5`_
     - 2021-2-18
     - `HTML <https://spec.oneapi.io/oneart/0.5-rev-1/index.html>`__
 
@@ -110,10 +207,10 @@ Advanced Ray Tracing
 Release Notes
 -------------
 
-oneART v0.5
-~~~~~~~~~~~
+Ray Tracing v0.5
+~~~~~~~~~~~~~~~~
 
-* Advanced ray tracing capabilities have been added to the oneAPI
+* Ray tracing capabilities have been added to the oneAPI
   specification providing software developers across the industry the
   ability to “write once” for high-fidelity ray-traced computations
   across multiple vendors’ systems and accelerators. Standardizing
@@ -121,7 +218,7 @@ oneART v0.5
   options for a broad set of compute and rendering infrastructure
   development.
 
-* The advanced ray tracing functionality is subdivided into several
+* The ray tracing functionality is subdivided into several
   domains within the oneAPI Specification:
 
   * Geometric ray tracing computations
@@ -129,7 +226,7 @@ oneART v0.5
   * Image denoising
   * Scalable rendering and visualization infrastructure
 
-* The set of Advanced Ray Tracing APIs include the following, which
+* The set of Ray Tracing APIs include the following, which
   are in active use via the Intel® oneAPI Rendering Toolkit:
 
   * Embree
@@ -148,12 +245,21 @@ oneDNN Graph
   * - Version
     - Date
     - View
+  * - `oneDNN Graph v0.8`_
+    - 2021-11-8
+    - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
   * - `oneDNN Graph v0.5`_
     - 2021-4-8
     - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
 
 Release Notes
 -------------
+
+oneDNN Graph v0.8
+~~~~~~~~~~~~~~~~~
+
+Introduces int8 inference support.
+
 
 oneDNN Graph v0.5
 ~~~~~~~~~~~~~~~~~
