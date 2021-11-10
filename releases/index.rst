@@ -100,7 +100,7 @@ Changes since 1.0
     * Open Volume Kernel Library
     * Open Image Denoise
     * OSPRay
-  
+
 * oneMKL:
 
   Introduces additional batched APIs for dense linear algebra. Sparse

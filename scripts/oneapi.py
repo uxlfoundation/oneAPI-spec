@@ -107,7 +107,7 @@ def sphinx(root, target):
     sphinx_args = '-N'
     if not cl_args.verbose:
         sphinx_args += ' -q'
-    if cl_args.j:
+    if not cl_args.serial:
         sphinx_args += ' -j auto'
     if cl_args.a:
         sphinx_args += ' -a'
@@ -301,7 +301,7 @@ def main():
     parser.add_argument('--branch')
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--dry-run', action='store_true')
-    parser.add_argument('-j', action='store_true')
+    parser.add_argument('--serial', action='store_true')
     parser.add_argument('-W', action='store_true')
     parser.add_argument(
         '-a', action='store_true', help='sphinx -a (build all files)'
