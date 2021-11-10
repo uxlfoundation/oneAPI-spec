@@ -20,4 +20,9 @@
 - :ref:`oneVPL-section`: Algorithms for accelerated video processing
 - :ref:`oneMKL-section`: High performance math routines for science,
   engineering, and financial applications
-- :ref:`oneART-section`: A set of advanced ray tracing and high-fidelity rendering and computation routines for use in a wide variety of 3D graphics uses including, film and television photorealistic visual effects and animation rendering, scientific visualization, high-performance computing computations, gaming, and more. 
+- :ref:`oneART-section`: A set of advanced ray tracing and
+  high-fidelity rendering and computation routines for use in a wide
+  variety of 3D graphics uses including, film and television
+  photorealistic visual effects and animation rendering, scientific
+  visualization, high-performance computing computations, gaming, and
+  more.

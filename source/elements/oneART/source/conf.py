@@ -21,7 +21,7 @@ import sys
 from os.path import join
 
 
-project = 'oneART'
+project = 'Ray Tracing'
 
 repo_root = join('..', '..', '..', '..')
 exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())

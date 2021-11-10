@@ -265,19 +265,6 @@ A configuration string (``config`` argument) can be passed to the device
 construction. This configuration string can be ``NULL`` to use the
 default configuration.
 
-When creating the device, Embree reads configurations for the device
-from the following locations in order:
-
-1) ``config`` string passed to the ``rtcNewDevice`` function
-2) ``.embree3`` file in the application folder
-3) ``.embree3`` file in the home folder
-
-Settings performed later overwrite previous settings. This way the
-configuration for the application can be changed globally (either
-through the ``rtcNewDevice`` call or through the ``.embree3`` file in
-the application folder), and each user has the option to modify the
-configuration to fit their needs.
-
 The following configuration is supported:
 
 -  ``threads=[int]``: Specifies a number of build threads to use. A
@@ -315,9 +302,6 @@ The following configuration is supported:
    pages on Windows. This option has an effect only under Windows and is
    ignored on other platforms. See Section [Huge Page Support] for more
    details.
-
--  ``ignore_config_files=[0/1]``: When set to 1, configuration files are
-   ignored. Default is 0.
 
 -  ``verbose=[0,1,2,3]``: Sets the verbosity of the output. When set to
    0, no output is printed by Embree, when set to a higher level more
@@ -1189,11 +1173,15 @@ The ``rtcGetGeometry`` function returns the geometry that is bound to
 the specified geometry ID (``geomID`` argument) for the specified scene
 (``scene`` argument). This function just looks up the handle and does
 *not* increment the reference count. If you want to get ownership of the
-handle, you need to additionally call ``rtcRetainGeometry``. For this
-reason, this function is fast and can be used during rendering. However,
-it is generally recommended to store the geometry handle inside the
-application’s geometry representation and look up the geometry handle
-from that representation directly.
+handle, you need to additionally call ``rtcRetainGeometry``.
+
+This function is not thread safe and thus can be used during rendering.
+However, it is generally recommended to store the geometry handle inside
+the application’s geometry representation and look up the geometry
+handle from that representation directly.
+
+If you need a thread safe version of this function please use
+`rtcGetGeometryThreadSafe <#rtcgetgeometrythreadsafe>`__.
 
 EXIT STATUS
 ^^^^^^^^^^^
@@ -1205,7 +1193,59 @@ SEE ALSO
 ^^^^^^^^
 
 `rtcAttachGeometry <#rtcattachgeometry>`__,
-`rtcAttachGeometryByID <#rtcattachgeometrybyid>`__
+`rtcAttachGeometryByID <#rtcattachgeometrybyid>`__,
+`rtcGetGeometryThreadSafe <#rtcgetgeometrythreadsafe>`__
+
+.. raw:: latex
+
+   \pagebreak
+
+rtcGetGeometryThreadSafe
+------------------------
+
+NAME
+^^^^
+
+.. code:: cpp
+
+   rtcGetGeometryThreadSafe - returns the geometry bound to
+     the specified geometry ID
+
+SYNOPSIS
+^^^^^^^^
+
+.. code:: cpp
+
+   #include <embree3/rtcore.h>
+
+   RTCGeometry rtcGetGeometryThreadSafe(RTCScene scene, unsigned int geomID);
+
+DESCRIPTION
+^^^^^^^^^^^
+
+The ``rtcGetGeometryThreadSafe`` function returns the geometry that is
+bound to the specified geometry ID (``geomID`` argument) for the
+specified scene (``scene`` argument). This function just looks up the
+handle and does *not* increment the reference count. If you want to get
+ownership of the handle, you need to additionally call
+``rtcRetainGeometry``.
+
+This function is thread safe and should NOT get used during rendering.
+If you need a fast non-thread safe version during rendering please use
+the `rtcGetGeometry <#rtcgetgeometry>`__ function.
+
+EXIT STATUS
+^^^^^^^^^^^
+
+On failure ``NULL`` is returned and an error code is set that can be
+queried using ``rtcGetDeviceError``.
+
+SEE ALSO
+^^^^^^^^
+
+`rtcAttachGeometry <#rtcattachgeometry>`__,
+`rtcAttachGeometryByID <#rtcattachgeometrybyid>`__,
+`rtcGetGeometry <#rtcgetgeometry>`__
 
 .. raw:: latex
 
@@ -1555,7 +1595,7 @@ flags are:
    more details.
 
 Multiple flags can be enabled using an ``or`` operation,
-e.g. \ ``RTC_SCENE_FLAG_COMPACT | RTC_SCENE_FLAG_ROBUST``.
+e.g. ``RTC_SCENE_FLAG_COMPACT | RTC_SCENE_FLAG_ROBUST``.
 
 EXIT STATUS
 ^^^^^^^^^^^
@@ -1948,7 +1988,7 @@ A triangle whose vertices are laid out counter-clockwise has its
 geometry normal pointing upwards outside the front face, like
 illustrated in the following picture:
 
-|image0|
+.. image:: images/triangle_uv.png
 
 For multi-segment motion blur, the number of time steps must be first
 specified using the ``rtcSetGeometryTimeStepCount`` call. Then a vertex
@@ -2033,7 +2073,7 @@ A quad whose vertices are laid out counter-clockwise has its geometry
 normal pointing upwards outside the front face, like illustrated in the
 following picture.
 
-|image1|
+.. image:: images/quad_uv.png
 
 For multi-segment motion blur, the number of time steps must be first
 specified using the ``rtcSetGeometryTimeStepCount`` call. Then a vertex
@@ -3590,8 +3630,8 @@ required.
 
 Sharing buffers can significantly reduce the memory required by the
 application, thus we recommend using this feature. When enabling the
-``RTC_SCENE_COMPACT`` scene flag, the spatial index structures index
-into the vertex buffer, resulting in even higher memory savings.
+``RTC_SCENE_FLAG_COMPACT`` scene flag, the spatial index structures
+index into the vertex buffer, resulting in even higher memory savings.
 
 EXIT STATUS
 ^^^^^^^^^^^
@@ -3732,7 +3772,7 @@ buffers provided to Embree using the
 The ``RTC_FORMAT_UINT/2/3/4`` format are used to specify that data
 buffers store unsigned integers, or unsigned integer vectors of size 2,3
 or 4. This format has typically to get used when specifying index
-buffers, e.g. \ ``RTC_FORMAT_UINT3`` for triangle meshes.
+buffers, e.g. ``RTC_FORMAT_UINT3`` for triangle meshes.
 
 The ``RTC_FORMAT_FLOAT/2/3/4...`` format are used to specify that data
 buffers store single precision floating point values, or vectors there
@@ -5442,7 +5482,7 @@ half edge belonging to the specified face (``faceID`` argument). For
 instance in the following example the first half edge of face ``f1`` is
 ``e4``.
 
-|image2|
+.. image:: images/half_edges.png
 
 This function can only be used for subdivision geometries. As all
 topologies of a subdivision geometry share the same face buffer the
@@ -5504,7 +5544,7 @@ specified half edge (``edgeID`` argument) belongs to. For instance in
 the following example the face ``f1`` is returned for edges ``e4``,
 ``e5``, ``e6``, and ``e7``.
 
-|image3|
+.. image:: images/half_edges.png
 
 This function can only be used for subdivision geometries. As all
 topologies of a subdivision geometry share the same face buffer the
@@ -5558,7 +5598,7 @@ The ``rtcGetGeometryNextHalfEdge`` function returns the ID of the next
 half edge of the specified half edge (``edgeID`` argument). For instance
 in the following example the next half edge of ``e10`` is ``e11``.
 
-|image4|
+.. image:: images/half_edges.png
 
 This function can only be used for subdivision geometries. As all
 topologies of a subdivision geometry share the same face buffer the
@@ -5613,7 +5653,7 @@ previous half edge of the specified half edge (``edgeID`` argument). For
 instance in the following example the previous half edge of ``e6`` is
 ``e5``.
 
-|image5|
+.. image:: images/half_edges.png
 
 This function can only be used for subdivision geometries. As all
 topologies of a subdivision geometry share the same face buffer the
@@ -5669,7 +5709,7 @@ opposite half edge of the specified half edge (``edgeID`` argument) in
 the specified topology (``topologyID`` argument). For instance in the
 following example the opposite half edge of ``e6`` is ``e16``.
 
-|image6|
+.. image:: images/half_edges.png
 
 An opposite half edge does not exist if the specified half edge has
 either no neighboring face, or more than 2 neighboring faces. In these
@@ -8294,13 +8334,7 @@ SEE ALSO
 .. raw:: latex
 
    \pagebreak
+
+.. raw:: latex
+
    \pagebreak
-
-.. |image0| image:: images/triangle_uv.png
-.. |image1| image:: images/quad_uv.png
-.. |image2| image:: images/half_edges.png
-.. |image3| image:: images/half_edges.png
-.. |image4| image:: images/half_edges.png
-.. |image5| image:: images/half_edges.png
-.. |image6| image:: images/half_edges.png
-
