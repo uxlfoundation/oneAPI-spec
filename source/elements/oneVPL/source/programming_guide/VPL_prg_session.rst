@@ -162,7 +162,7 @@ will vary according to the OS.
 * On Windows, the dispatcher searches the following locations, in the specified
   order, to find the correct implementation library:
 
-  #. The :file:`Driver Store` directory for all avialable adapters.
+  #. The :file:`Driver Store` directory for all available adapters.
      All types of graphics drivers can install libraries in this directory. `Learn more about Driver Store <https://docs.microsoft.com/en-us/windows-hardware/drivers/install/driver-store>`__.
      Applicable only for Intel implementations.
   #. The directory of the exe file of the current process.
@@ -577,7 +577,7 @@ library. The sequence diagram below demonstrates the approach.
    participant "MediaSDK (legacy)" as M
    A -> D: MFXLoad
    activate D
-   D -> D: Search for the avialable runtimes
+   D -> D: Search for the available runtimes
    A -> D: MFXCreateConfig
    
    note left of D
@@ -643,7 +643,7 @@ environmental variable with the file name of the log file.
 Examples of Dispathcer's Usage
 ------------------------------
 
-This code illustrates simple usage of dispathcer to load first avialable
+This code illustrates simple usage of dispathcer to load first available
 library:
 
 .. literalinclude:: ../snippets/prg_disp.c
@@ -652,7 +652,7 @@ library:
    :end-before: /*end1*/
    :lineno-start: 1
 
-This code illustrates simple usage of dispathcer to load first avialable HW
+This code illustrates simple usage of dispathcer to load first available HW
 accelerated library:
 
 .. literalinclude:: ../snippets/prg_disp.c
@@ -705,7 +705,7 @@ implemented:
    :lineno-start: 1
 
 --------------------------------------------------------------
-How To Search For The Avialable encoder/decoder implementation
+How To Search For The Available encoder/decoder implementation
 --------------------------------------------------------------
 
 The :ref:`CodecFormatFourCC <codec-format-fourcc>` enum specifies codec's FourCC
@@ -723,14 +723,14 @@ This code illustrates decoder's implementation search procedure:
    :lineno-start: 1
 
 ---------------------------------------------------------
-How To Search For The Avialable VPP Filter implementation
+How To Search For The Available VPP Filter implementation
 ---------------------------------------------------------
 
 Each VPP filter identified by the filter ID. Filter ID is defined by
 corresponding to the filter extension buffer ID value which is defined in a form
 of fourCC value.
 Filter ID values are subset of the general :ref:`ExtendedBufferID <extendedbufferid>`
-enum. The :ref:`table <vpp-filters-ids>` references avialable IDs of VPP filters
+enum. The :ref:`table <vpp-filters-ids>` references available IDs of VPP filters
 to search. Application needs to assign this value to the field of
 :cpp:member:`mfxVPPDescription::filter::FilterFourCC` to search for the needed
 VPP filter.
@@ -807,7 +807,7 @@ oneVPL implementation on |intel_r| platforms with X\ :sup:`e` architecture and |
 
 oneVPL supersedes |msdk_full_name| and partially binary compartible with
 |msdk_full_name|. Both oneVPL and |msdk_full_name| includes own dispatcher and
-implementation. Coexistance of oneVPL and |msdk_full_name| dispatchers and
+implementation. Coexistence of oneVPL and |msdk_full_name| dispatchers and
 implementations on single system is allowed until |msdk_full_name| is not EOL.
 
 Usage of the following combinations of dispatchers and implementations within

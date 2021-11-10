@@ -1154,7 +1154,7 @@ The emission side is determined by the cross product of ``edge1``\ ×\ ``edge2``
 Cylinder Light
 ~~~~~~~~~~~~~~
 
-The cylinder light is a cylinderical, procedural area light source emitting uniformly outwardly into the space beyond the boundary. It is created by passing the type string “``cylinder``” to ``ospNewLight``. The cylinder light supports ``OSP_INTENSITY_QUANTITY_POWER``, ``OSP_INTENSITY_QUANTITY_INTENSITY`` and ``OSP_INTENSITY_QUANTITY_RADIANCE`` (default) as ``intensityQuantity`` parameter. In addition to the `general parameters <#lights>`__ understood by all lights the cylinder light supports the following special parameters:
+The cylinder light is a cylindrical, procedural area light source emitting uniformly outwardly into the space beyond the boundary. It is created by passing the type string “``cylinder``” to ``ospNewLight``. The cylinder light supports ``OSP_INTENSITY_QUANTITY_POWER``, ``OSP_INTENSITY_QUANTITY_INTENSITY`` and ``OSP_INTENSITY_QUANTITY_RADIANCE`` (default) as ``intensityQuantity`` parameter. In addition to the `general parameters <#lights>`__ understood by all lights the cylinder light supports the following special parameters:
 
 .. table:: Special parameters accepted by the cylinder light.
 
