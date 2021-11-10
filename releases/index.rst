@@ -199,7 +199,7 @@ Ray Tracing
   * - Version
     - Date
     - View
-  * - `oneART v0.5`_
+  * - `Ray Tracing v0.5`_
     - 2021-2-18
     - `HTML <https://spec.oneapi.io/oneart/0.5-rev-1/index.html>`__
 
@@ -250,6 +250,7 @@ oneDNN Graph
     - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
   * - `oneDNN Graph v0.5`_
     - 2021-4-8
+    - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
 
 Release Notes
 -------------
