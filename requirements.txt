@@ -8,7 +8,7 @@
 breathe
 git+https://github.com/fsfe/reuse-tool.git
 pre-commit
-Sphinx
+Sphinx==4.2.0
 # waiting for pypi release for fix for parallel read
 git+https://github.com/readthedocs/sphinx-notfound-page.git
 # Waiting for release of: https://github.com/executablebooks/sphinx-book-theme/commit/0bdacc0a5e0a01ca5b4476651d1a80821b9b5d67
