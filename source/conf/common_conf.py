@@ -23,14 +23,12 @@ sys.path.insert(
 )
 
 extensions = [
-    'notfound.extension',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
-    #    'sphinx.ext.imgconverter',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.graphviz',
@@ -41,7 +39,6 @@ extensions = [
     'sphinx_substitution_extensions',
     'sphinxcontrib.plantuml',
     'breathe',
-    #      'vplapi',
     'dalapi',  # oneDAL API generator
 ]
 
