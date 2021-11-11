@@ -13,7 +13,7 @@ oneDNN
 ######
 
 |dnn_full_name| (oneDNN) is a performance library containing building blocks
-for for deep learning applications and frameworks. oneDNN supports:
+for deep learning applications and frameworks. oneDNN supports:
 
 * CNN primitives (Convolutions, Inner product, Pooling, etc.)
 * RNN primitives (LSTM, Vanilla, RNN, GRU)
