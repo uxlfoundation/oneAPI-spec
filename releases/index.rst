@@ -114,7 +114,29 @@ Changes since 1.0
 
 * DPC++
 
+  The new extensions listed as part of oneAPI 1.1 include simplified
+  device selection through text-based filtering, a default context for
+  each platform to simplify common coding patterns, interoperability
+  with devices that use Level Zero as a backend, an easier to use
+  kernel-scope local memory allocation mechanism, GPU-specific
+  information queries, FPGA-specific performance tuning controls, and
+  a sub-group mask feature.
+
+  DPC++ features that were incorporated into the SYCL 2020 spec were
+  removed from this document.
+
 * oneVPL
+
+  New AV1 encode features. Enabled support for planar I422, I210, and
+  BGR formats. Added surface pool interface for surface management.
+
+* Level Zero
+
+  Updates included significantly improved image processing
+  functionality, better interoperability with other APIs and operating
+  systems, new extensions for floating-point atomics and additional
+  subgroup operations, and extensions to tune and optimize the way
+  memory is allocated and kernels are scheduled on specific devices.
 
 1.1 provisional rev 2
 ~~~~~~~~~~~~~~~~~~~~~
