@@ -62,8 +62,7 @@ Member types and constants
 
     **Selection rule**: maximum
 
-    Set stack size for threads created by the library, including working threads in the task scheduler
-    and threads controlled by thread wrapper classes.
+    Set stack size for working threads created by the library.
 
 .. cpp:enum:: parameter::terminate_on_exception
 
