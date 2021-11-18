@@ -20,6 +20,7 @@ Special class that ``collaborative_call_once`` uses to perform a call only once.
             public:
                 collaborative_once_flag();
                 collaborative_once_flag(const collaborative_once_flag&) = delete;
+                collaborative_once_flag& operator=(const collaborative_once_flag&) = delete;
             };
         } // namespace tbb
     } // namespace oneapi
