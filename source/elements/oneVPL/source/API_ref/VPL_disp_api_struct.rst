@@ -83,6 +83,14 @@ mfxImplementedFunctions
    :members:
    :protected-members:
 
+mfxExtendedDeviceId
+-------------------
+
+.. doxygenstruct:: mfxExtendedDeviceId
+   :project: oneVPL
+   :members:
+   :protected-members:
+
 mfxPoolPolicyDescription
 ------------------------
 

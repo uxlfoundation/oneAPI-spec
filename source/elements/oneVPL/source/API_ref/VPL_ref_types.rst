@@ -77,3 +77,6 @@ Typedefs
 
 .. doxygentypedef:: mfxSyncPoint
    :project: oneVPL
+
+.. doxygentypedef:: mfxExtRefListCtrl
+   :project: oneVPL

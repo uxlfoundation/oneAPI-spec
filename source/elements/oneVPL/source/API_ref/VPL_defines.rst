@@ -61,4 +61,7 @@ API
 
 .. doxygendefine::MFX_POOLPOLICYDESCRIPTION_VERSION
     :project: oneVPL
+
+.. doxygendefine::MFX_EXTENDEDDEVICEID_VERSION
+    :project: oneVPL
    

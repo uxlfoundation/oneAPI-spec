@@ -789,6 +789,69 @@ The ErrorTypes enumerator uses bit-ORed values to itemize bitstream error types.
 .. doxygenenumvalue:: MFX_ERROR_FRAME_GAP
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP0_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP1_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP2_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP3_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP4_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP5_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP6_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP7_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP8_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP9_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP10_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP11_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP12_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP13_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_APP14_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_DQT_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_SOF0_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_DHT_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_DRI_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_SOS_MARKER
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ERROR_JPEG_UNKNOWN_MARKER
+   :project: oneVPL
+
 .. _extendedbufferid:
 
 ----------------
@@ -811,9 +874,6 @@ extended buffers or video processing algorithm identifiers.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_AUXDATA
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_EXTBUFF_VPP_DENOISE
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_EXTBUFF_VPP_DENOISE2
@@ -1044,6 +1104,8 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_UNIVERSAL_TEMPORAL_LAYERS
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_UNIVERSAL_REFLIST_CTRL
+   :project: oneVPL
 
 ----------------
 ExtMemBufferType
@@ -1883,6 +1945,12 @@ PlatformCodeName
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_PLATFORM_XEHP_SDV
+    :project: oneVPL   
+
+.. doxygenenumvalue:: MFX_PLATFORM_DG2
+    :project: oneVPL   
+
+.. doxygenenumvalue:: MFX_PLATFORM_ATS_M
     :project: oneVPL   
 
 .. doxygenenumvalue:: MFX_PLATFORM_KEEMBAY
