@@ -13,6 +13,34 @@ This section describes the API evolution from version to version.
    :depth: 1
 
 -----------
+Version 2.6
+-----------
+
+New in this release:
+
+* New development practice to treat some new API features as experimental was introduced.
+  All new experimental API is wrapped with ONE_EXPERIMENTAL macro.
+* Experimental API: introduced MFX_HANDLE_PXP_CONTEXT to support protected content.
+* Experimental API: introduced CPUEncToolsProcessing hint to run adaptive encoding tools on CPU.
+* Experimental API: extended device ID reporting to cover multi-adapter cases.
+* Experimental API: introduced common alias for mfxExtAVCRefListCtrl
+* Experimental API: mfxExtDecodeErrorReport ErrorTypes enum extended with new JPEG/MJPEG decode error report.
+* Clarified LowPower flag meaning.
+* Described that mfxExtThreadsParam can be attached to mfxInitializationParam during session initialization.
+* Refined description of the MFXVideoDECODE_VPP_DecodeFrameAsync function.
+* New dispatcher's config filter property: MediaAdapterType.
+* Marked all deprecated fields as MFX_DEPRECATED.
+* Introduced priority loading option for custom libraries. 
+* Clarified AV1 encoder behavior about writing of IVF headers.
+* Removed outdated note about loading priority of |msdk_full_name|. For loading details see 
+  :ref:`onevpl_coexistense`.
+* Spelled out mfxVariant type usage for strings.
+* New product names for platforms:
+
+    * Code name DG2,
+    * Code name ATS-M.
+
+-----------
 Version 2.5
 -----------
 

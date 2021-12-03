@@ -183,6 +183,12 @@ will vary according to the OS.
      user-defined search folders which are provided by `ONEVPL_SEARCH_PATH`
      enviromental variable.
 
+.. important:: To prioritize loading of custom oneVPL library, users may set environment variable
+               `ONEVPL_PRIORITY_PATH` with the path to the user-defined folder. 
+               All libraries found in the ONEVPL_PRIORITY_PATH have the same priority 
+               (higher than any others, and HW/SW or API version rules are not applied) and 
+               should be loaded/filtered according to :cpp:func:`MFXSetConfigFilterProperty`.
+
 When oneVPL dispatcher searchers for the legacy |msdk_full_name|
 implementation it uses :ref:`legacy dispatcher search order <legacy_search_order>`.
 
@@ -203,11 +209,6 @@ Internally, the dispatcher works as follows:
    the dispatcher obtains addresses of each oneVPL function. See the
    :ref:`Exported Functions/API Version table <export-func-version-table-2x>` for
    the list of functions to export.
-
-.. note:: For backward compatibility with |msdk_full_name|, the dispatcher will
-          first try to load |msdk_full_name| if API version 1.x was requested.
-          If loading fails, the dispatcher will search for the implementation with
-          highest 2.x API version and load that version.
 
 ------------------------------------------
 oneVPL Dispatcher Configuration Properties
@@ -267,6 +268,11 @@ left to right from column to column and concatenate strings by using `.` (dot) a
       |                                       | | .mfxDeviceDescription    |                      | null-terminated string.   |
       |                                       | | .device                  |                      |                           |
       |                                       | | .DeviceID                |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxDeviceDescription    |                      |                           |
+      |                                       | | .device                  |                      |                           |
+      |                                       | | .MediaAdapterType        |                      |                           |
       |                                       +----------------------------+----------------------+---------------------------+
       |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
       |                                       | | .mfxDecoderDescription   |                      |                           |
@@ -419,7 +425,7 @@ left to right from column to column and concatenate strings by using `.` (dot) a
       |                                       | |                          |                      | IDXGIFactory::EnumAdapters|
       +---------------------------------------+----------------------------+----------------------+---------------------------+
 
-.. important:: DXGIAdapterNum property is available for Windows only and filters only hardware implementations.
+.. important:: DXGIAdapterIndex property is available for Windows only and filters only hardware implementations.
 
 Examples of the property name strings:
 
@@ -443,6 +449,8 @@ influence on the implementation selection. They are used during the
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
    * - :cpp:type:`mfxHDL`
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_PTR`
+   * - :cpp:type:`NumThread`
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
 
 ------------------------------
 oneVPL Dispatcher Interactions
@@ -743,8 +751,6 @@ VPP filter.
 
    * - **Filter ID**
      - **Description**
-   * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DENOISE`
-     - Denoise filter (deprecated in 2.2)
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_DENOISE2`
      - Denoise filter
    * - :cpp:enumerator:`MFX_EXTBUFF_VPP_MCTF`
@@ -800,6 +806,8 @@ shared library:
    :start-after: /*beg5*/
    :end-before: /*end5*/
    :lineno-start: 1
+
+.. _onevpl_coexistense:
 
 -----------------------------------------------------------------------------------------------------------
 oneVPL implementation on |intel_r| platforms with X\ :sup:`e` architecture and |msdk_full_name| Coexistence 

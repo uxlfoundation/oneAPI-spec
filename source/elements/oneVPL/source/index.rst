@@ -31,6 +31,7 @@ Latest published version of oneVPL specification: `<https://spec.oneapi.com/onev
    VPL_summary
    API_ref/VPL_api_ref
    Versioning
+   Experimental
    appendix/index
    VPL_acronyms
    VPL_deprecation

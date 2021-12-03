@@ -39,32 +39,33 @@ def check_definition_list_item(def_node):
     return None
 
 def process_function_nodes(app, doctree, fromdocname):
-    for section in doctree.traverse(nodes.section, descend=True):
-        for n in section:
-            type_of_section = type_of_node(n)
-            if type_of_section == 'title':
-                title_text = n[0]
-                if(title_text.startswith("MFX")): # this is function description section
-                    # lets search for the `Since` term
-                    isFunction = False
-                    hasVersion = False
-                    version = None
-                    functionName = title_text
-                    for k in n.traverse(condition=None, include_self=True, descend=True, siblings=True):
-                        node_type = type_of_node(k)
-                        if node_type == 'desc':
-                            if k.hasattr('desctype'):
-                                if k.get('desctype') == 'function':
-                                    isFunction = True
-                                else:
-                                    continue
-                        if node_type == 'definition_list_item':
-                            tmp = check_definition_list_item(k)
-                            if tmp:
-                                version = tmp
-                                hasVersion = True
-                    if isFunction and not hasVersion:
-                        logger.warning("Function {} doesn't have min API version defined".format(functionName))
+    if fromdocname.find("VPL_") >= 0:
+        for section in doctree.traverse(nodes.section, descend=True):
+            for n in section:
+                type_of_section = type_of_node(n)
+                if type_of_section == 'title':
+                    title_text = n[0]
+                    if(title_text.startswith("MFX")): # this is function description section
+                        # lets search for the `Since` term
+                        isFunction = False
+                        hasVersion = False
+                        version = None
+                        functionName = title_text
+                        for k in n.traverse(condition=None, include_self=True, descend=True, siblings=True):
+                            node_type = type_of_node(k)
+                            if node_type == 'desc':
+                                if k.hasattr('desctype'):
+                                    if k.get('desctype') == 'function':
+                                        isFunction = True
+                                    else:
+                                        continue
+                            if node_type == 'definition_list_item':
+                                tmp = check_definition_list_item(k)
+                                if tmp:
+                                    version = tmp
+                                    hasVersion = True
+                        if isFunction and not hasVersion:
+                            logger.warning("Function {} doesn't have min API version defined".format(functionName))
 
 def setup(app):
     app.connect('doctree-resolved', process_function_nodes)
