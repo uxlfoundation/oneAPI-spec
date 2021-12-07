@@ -53,6 +53,17 @@ Class Template Synopsis
 
                 ~concurrent_queue();
 
+                concurrent_queue& operator=( const concurrent_queue& other );
+                concurrent_queue& operator=( concurrent_queue&& other );
+                concurrent_queue& operator=( std::initializer_list<value_type> init );
+
+                template <typename InputIterator>
+                void assign( InputIterator first, InputIterator last );
+
+                void assign( std::initializer_list<value_type> init );
+
+                void swap( concurrent_queue& other );
+
                 void push( const value_type& value );
                 void push( value_type&& value );
 
@@ -96,6 +107,37 @@ Member functions
     concurrent_queue_cls/safe_member_functions.rst
     concurrent_queue_cls/unsafe_member_functions.rst
     concurrent_queue_cls/iterators.rst
+
+Non-member functions
+--------------------
+
+This function provides swap operation on ``oneapi::tbb::concurrent_queue``
+objects.
+
+The exact namespace where this function is defined is unspecified, as long as it may be used in
+respective operation. For example, an implementation may define the classes and functions
+in the same internal namespace and define ``oneapi::tbb::concurrent_queue`` as a type alias for which
+the non-member functions are reachable only via argument-dependent lookup.
+
+.. code:: cpp
+
+    template <typename T, typename Allocator>
+    void swap( concurrent_queue<T, Allocator>& lhs,
+               concurrent_queue<T, Allocator>& rhs );
+
+    template <typename T, typename Allocator>
+    bool operator==( const concurrent_queue<T, Allocator>& lhs,
+                     const concurrent_queue<T, Allocator>& rhs );
+
+    template <typename T, typename Allocator>
+    bool operator!=( const concurrent_queue<T, Allocator>& lhs,
+                     const concurrent_queue<T, Allocator>& rhs );  
+
+.. toctree::
+    :maxdepth: 1
+
+    concurrent_queue_cls/non_member_swap.rst
+    concurrent_queue_cls/non_member_binary_comparisons.rst
 
 Other
 -----

@@ -34,3 +34,16 @@ clear
         void clear();
 
     Removes all elements from the container.
+
+swap
+----
+
+    .. code:: cpp
+
+        void swap( concurrent_queue& other );
+
+    Swaps contents of ``*this`` and ``other``.
+
+    Swaps allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_swap::value`` is ``true``.
+
+    Otherwise if ``get_allocator() != other.get_allocator()`` the behavior is undefined.
