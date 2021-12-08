@@ -27,11 +27,15 @@ A class that represents an explicit, user-managed task scheduler arena.
                 };
 
                 struct constraints {
-                    numa_node_id numa_node;
-                    int max_concurrency;
+                    constraints& set_numa_id(numa_node_id id);
+                    constraints& set_max_concurrency(int maximal_concurrency);
+                    constraints& set_core_type(core_type_id id);
+                    constraints& set_max_threads_per_core(int threads_number);
 
-                    constraints(numa_node_id numa_node_       = task_arena::automatic,
-                                int          max_concurrency_ = task_arena::automatic);
+                    numa_node_id numa_id = task_arena::automatic;
+                    int max_concurrency = task_arena::automatic;
+                    core_type_id core_type = task_arena::automatic;
+                    int max_threads_per_core = task_arena::automatic;
                 };
 
                 task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
@@ -113,8 +117,12 @@ Member types and constants
 
     Represents limitations applied to threads within ``task_arena``.
 
-    ``numa_node`` - An integral logical index uniquely identifying a NUMA node.
-    All threads joining the ``task_arena`` are bound to this NUMA node.
+    Member objects
+    ^^^^^^^^^^^^^^
+
+    ``numa_id`` - An integral logical index uniquely identifying a NUMA node.
+    If set to non-automatic value, then this NUMA node will be considered as preferred for all the
+    threads within the arena.
 
     .. note::
 
@@ -122,6 +130,35 @@ Member types and constants
 
     ``max_concurrency`` - The maximum number of threads that can participate in work processing
     within the ``task_arena`` at the same time.
+
+    ``core_type`` - An integral logical index uniquely identifying a core type.
+    If set to non-automatic value, then this core type will be considered as preferred for all the
+    threads within the arena.
+
+    .. note::
+
+        core type ID is considered valid if it was obtained through ``tbb::info::core_types()``.
+
+    ``core_type`` - The maximum number of threads that can be scheduled to one core simultaneously.
+
+    Member Functions
+    ^^^^^^^^^^^^^^^^
+
+    .. cpp:function:: constraints& set_numa_id(numa_node_id id)
+
+        Sets the `numa_id` to the provided ``id``. Returns the updated constraints object.
+
+    .. cpp:function:: constraints& set_max_concurrency(int maximal_concurrency)
+
+        Sets the `max_concurrency` to the provided ``maximal_concurrency``. Returns the updated constraints object.
+
+    .. cpp:function:: constraints& set_core_type(core_type_id id)
+
+        Sets the `core_type` to the provided ``id``. Returns the updated constraints object.
+
+    .. cpp:function:: constraints& set_max_threads_per_core(int threads_number)
+
+        Sets the `max_threads_per_core` to the provided ``threads_number``. Returns the updated constraints object.
 
 Member functions
 ----------------
