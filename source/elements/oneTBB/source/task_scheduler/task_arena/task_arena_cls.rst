@@ -139,7 +139,7 @@ Member types and constants
 
         core type ID is considered valid if it was obtained through ``tbb::info::core_types()``.
 
-    ``core_type`` - The maximum number of threads that can be scheduled to one core simultaneously.
+    ``max_threads_per_core`` - The maximum number of threads that can be scheduled to one core simultaneously.
 
     Member Functions
     ^^^^^^^^^^^^^^^^
