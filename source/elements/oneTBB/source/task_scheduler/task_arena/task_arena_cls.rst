@@ -27,6 +27,9 @@ A class that represents an explicit, user-managed task scheduler arena.
                 };
 
                 struct constraints {
+                    constraints(numa_node_id numa_node_       = task_arena::automatic,
+                                int          max_concurrency_ = task_arena::automatic);
+
                     constraints& set_numa_id(numa_node_id id);
                     constraints& set_max_concurrency(int maximal_concurrency);
                     constraints& set_core_type(core_type_id id);
@@ -117,10 +120,9 @@ Member types and constants
 
     Represents limitations applied to threads within ``task_arena``.
 
-    Member objects
-    ^^^^^^^^^^^^^^
+.. cpp:member:: numa_node_id constraints::numa_id
 
-    ``numa_id`` - An integral logical index uniquely identifying a NUMA node.
+    An integral logical index uniquely identifying a NUMA node.
     If set to non-automatic value, then this NUMA node will be considered as preferred for all the
     threads within the arena.
 
@@ -128,10 +130,14 @@ Member types and constants
 
         NUMA node ID is considered valid if it was obtained through tbb::info::numa_nodes().
 
-    ``max_concurrency`` - The maximum number of threads that can participate in work processing
+.. cpp:member:: int constraints::max_concurrency
+
+    The maximum number of threads that can participate in work processing
     within the ``task_arena`` at the same time.
 
-    ``core_type`` - An integral logical index uniquely identifying a core type.
+.. cpp:member:: core_type_id constraints::core_type
+
+    An integral logical index uniquely identifying a core type.
     If set to non-automatic value, then this core type will be considered as preferred for all the
     threads within the arena.
 
@@ -139,26 +145,33 @@ Member types and constants
 
         core type ID is considered valid if it was obtained through ``tbb::info::core_types()``.
 
-    ``max_threads_per_core`` - The maximum number of threads that can be scheduled to one core simultaneously.
+.. cpp:member:: int constraints::max_threads_per_core
 
-    Member Functions
-    ^^^^^^^^^^^^^^^^
+    The maximum number of threads that can be scheduled to one core simultaneously.
 
-    .. cpp:function:: constraints& set_numa_id(numa_node_id id)
+.. cpp:function:: constraints::constraints(numa_node_id numa_node_ = task_arena::automatic, int max_concurrency_ = task_arena::automatic)
 
-        Sets the `numa_id` to the provided ``id``. Returns the updated constraints object.
+    Constructs the constriants object with the provided `numa_id` and `max_concurrency` settings.
 
-    .. cpp:function:: constraints& set_max_concurrency(int maximal_concurrency)
+    .. note::
 
-        Sets the `max_concurrency` to the provided ``maximal_concurrency``. Returns the updated constraints object.
+        To allow using the C++20 designated initialization the constructor is removed for the C++20 and later standard.
 
-    .. cpp:function:: constraints& set_core_type(core_type_id id)
+.. cpp:function:: constraints& constraints::set_numa_id(numa_node_id id)
 
-        Sets the `core_type` to the provided ``id``. Returns the updated constraints object.
+    Sets the `numa_id` to the provided ``id``. Returns the updated constraints object.
 
-    .. cpp:function:: constraints& set_max_threads_per_core(int threads_number)
+.. cpp:function:: constraints& constraints::set_max_concurrency(int maximal_concurrency)
 
-        Sets the `max_threads_per_core` to the provided ``threads_number``. Returns the updated constraints object.
+    Sets the `max_concurrency` to the provided ``maximal_concurrency``. Returns the updated constraints object.
+
+.. cpp:function:: constraints& constraints::set_core_type(core_type_id id)
+
+    Sets the `core_type` to the provided ``id``. Returns the updated constraints object.
+
+.. cpp:function:: constraints& constraints::set_max_threads_per_core(int threads_number)
+
+    Sets the `max_threads_per_core` to the provided ``threads_number``. Returns the updated constraints object.
 
 Member functions
 ----------------
