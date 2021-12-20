@@ -120,6 +120,8 @@ Member types and constants
 
     Represents limitations applied to threads within ``task_arena``.
 
+    Starting from C++20 this class should be an aggregate type to support the designated initialization.
+
 .. cpp:member:: numa_node_id constraints::numa_id
 
     An integral logical index uniquely identifying a NUMA node.
@@ -155,7 +157,7 @@ Member types and constants
 
     .. note::
 
-        Starting from C++20 this constructor does not exist.
+        To support designated initialization this constructor is omitted starting from C++20. Aggregate initialization is supposed to be used instead.
 
 .. cpp:function:: constraints& constraints::set_numa_id(numa_node_id id)
 
