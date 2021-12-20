@@ -122,7 +122,7 @@ If calls are performed simultaneously, more than one call might succeed.
 .. cpp:function:: bool finalize(task_scheduler_handle& handle, const std::nothrow_t&) noexcept
 
     **Effects**: If ``handle`` is not empty, blocks the program execution until all worker threads have been completed; otherwise, does nothing.
-    The behavior is the same as finalize(handle); however, ``false`` is returned instead of exception  or ``true`` if no exception.
+    The behavior is the same as ``finalize(handle)`` however, ``false`` is returned instead of exception  or ``true`` if no exception.
 
 Examples
 --------
