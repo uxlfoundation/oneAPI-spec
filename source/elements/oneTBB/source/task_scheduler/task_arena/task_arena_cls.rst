@@ -151,11 +151,11 @@ Member types and constants
 
 .. cpp:function:: constraints::constraints(numa_node_id numa_node_ = task_arena::automatic, int max_concurrency_ = task_arena::automatic)
 
-    Constructs the constriants object with the provided `numa_id` and `max_concurrency` settings.
+    Constructs the constraints object with the provided `numa_id` and `max_concurrency` settings.
 
     .. note::
 
-        To allow using the C++20 designated initialization the constructor is removed for the C++20 and later standard.
+        Starting from C++20 this constructor does not exist.
 
 .. cpp:function:: constraints& constraints::set_numa_id(numa_node_id id)
 
