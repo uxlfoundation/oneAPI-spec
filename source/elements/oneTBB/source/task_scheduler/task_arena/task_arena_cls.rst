@@ -159,19 +159,19 @@ Member types and constants
 
 .. cpp:function:: constraints& constraints::set_numa_id(numa_node_id id)
 
-    Sets the `numa_id` to the provided ``id``. Returns the updated constraints object.
+    Sets the `numa_id` to the provided ``id``. Returns the reference to the updated constraints object.
 
 .. cpp:function:: constraints& constraints::set_max_concurrency(int maximal_concurrency)
 
-    Sets the `max_concurrency` to the provided ``maximal_concurrency``. Returns the updated constraints object.
+    Sets the `max_concurrency` to the provided ``maximal_concurrency``. Returns the reference to the updated constraints object.
 
 .. cpp:function:: constraints& constraints::set_core_type(core_type_id id)
 
-    Sets the `core_type` to the provided ``id``. Returns the updated constraints object.
+    Sets the `core_type` to the provided ``id``. Returns the reference to the updated constraints object.
 
 .. cpp:function:: constraints& constraints::set_max_threads_per_core(int threads_number)
 
-    Sets the `max_threads_per_core` to the provided ``threads_number``. Returns the updated constraints object.
+    Sets the `max_threads_per_core` to the provided ``threads_number``. Returns the reference to the updated constraints object.
 
 Member functions
 ----------------
