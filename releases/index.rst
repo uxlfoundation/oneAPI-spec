@@ -348,9 +348,8 @@ New in this release:
 * Marked all deprecated fields as MFX_DEPRECATED.
 * Introduced priority loading option for custom libraries.
 * Clarified AV1 encoder behavior about writing of IVF headers.
-* Removed outdated note about loading priority of |msdk_full_name|.
-  For loading details see
-  :ref:`onevpl_coexistense`.
+* Removed outdated note about loading priority of Intel Media Software
+  Development Kit
 * Spelled out mfxVariant type usage for strings.
 * New product names for platforms:
 
