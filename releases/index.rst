@@ -267,6 +267,9 @@ oneDNN Graph
   * - Version
     - Date
     - View
+  * - `oneDNN Graph v0.9`_
+    - 2021-12-28
+    - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
   * - `oneDNN Graph v0.8`_
     - 2021-11-8
     - `HTML <https://spec.oneapi.io/onednn-graph/latest/index.html>`__
@@ -276,6 +279,13 @@ oneDNN Graph
 
 Release Notes
 -------------
+
+oneDNN Graph v0.9
+~~~~~~~~~~~~~~~~~
+
+- Introduced bf16 inference support.
+- Introduced multi-head attention (MHA) fusion supported by oneDNN Graph
+  compiler with optimized code generation (experimental).
 
 oneDNN Graph v0.8
 ~~~~~~~~~~~~~~~~~
