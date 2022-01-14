@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2022 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -11,10 +11,10 @@ DPC++
 Overview
 --------
 
-|dpcpp_full_name| (DPC++) is the direct programming language and
-associated direct programming APIs of oneAPI.  It provides the
+Data Parallel C++ (DPC++) is an LLVM project to implement SYCL that provides direct programming
+capabilities for C++ programmers, and oneAPI libraries such as oneMKL.  It provides the
 features needed to define data parallel functions and to launch them
-on devices.  The language is comprised of the following components:
+on devices.  DPC++ is made up of the following components:
 
 - C++.  Every DPC++ program is also a C++ program.  A
   compliant DPC++ implementation must support the C++17 Core Language
