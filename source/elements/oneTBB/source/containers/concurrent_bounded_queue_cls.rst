@@ -132,7 +132,7 @@ objects.
 
 The exact namespace where this function is defined is unspecified, as long as it may be used in
 respective operation. For example, an implementation may define the classes and functions
-in the same internal namespace and define ``oneapi::tbb::concurrent_queue`` as a type alias for which
+in the same internal namespace and define ``oneapi::tbb::concurrent_bounded_queue`` as a type alias for which
 the non-member functions are reachable only via argument-dependent lookup.
 
 .. code:: cpp
