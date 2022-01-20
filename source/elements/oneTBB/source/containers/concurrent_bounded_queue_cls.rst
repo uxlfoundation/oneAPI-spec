@@ -45,6 +45,9 @@ Class Template Synopsis
                 concurrent_bounded_queue( InputIterator first, InputIterator last,
                                           const allocator_type& alloc = allocator_type() );
 
+                concurrent_bounded_queue( std::initializer_list<value_type> init,
+                                          const allocator_type& alloc = allocator_type() );
+
                 concurrent_bounded_queue( const concurrent_bounded_queue& other );
                 concurrent_bounded_queue( const concurrent_bounded_queue& other,
                                           const allocator_type& alloc );
@@ -127,7 +130,7 @@ Member functions
 Non-member functions
 --------------------
 
-This function provides swap operation on ``oneapi::tbb::concurrent_queue``
+These functions provides binary comparison and swap operations on ``oneapi::tbb::concurrent_bounded_queue``
 objects.
 
 The exact namespace where this function is defined is unspecified, as long as it may be used in

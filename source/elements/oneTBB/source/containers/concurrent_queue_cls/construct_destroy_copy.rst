@@ -18,7 +18,7 @@ Empty container constructors
     Constructs an empty ``concurrent_queue``. If provided, uses the allocator ``alloc`` to
     allocate the memory.
 
-Constructor from the sequence of elements
+Constructors from the sequence of elements
 ------------------------------------------
 
     .. code:: cpp
@@ -32,6 +32,13 @@ Constructor from the sequence of elements
 
     **Requirements**: the type ``InputIterator`` must meet the `InputIterator` requirements from the
     ``[input.iterators]`` ISO C++ Standard section.
+
+    .. code:: cpp
+
+        concurrent_queue( std::initializer_list<value_type> init,
+                          const allocator_type& alloc = allocator_type() );
+
+    Equivalent to ``concurrent_queue(init.begin(), init.end(), alloc)``.
 
 Copying constructors
 --------------------
