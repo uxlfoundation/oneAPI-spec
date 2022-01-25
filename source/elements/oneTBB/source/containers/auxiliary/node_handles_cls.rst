@@ -67,17 +67,13 @@ Member functions
 Constructors
 ~~~~~~~~~~~~
 
-    .. code:: cpp
-
-        node-handle();
+.. cpp:function:: node-handle();
 
     Constructs an empty node handle.
 
 -----------------------------------------------------------------------------
 
-    .. code:: cpp
-
-        node-handle( node-handle&& other );
+.. cpp:function::  node-handle( node-handle&& other );
 
     Constructs a node handle that takes ownership of the node from ``other``.
 
@@ -86,9 +82,7 @@ Constructors
 Assignment
 ~~~~~~~~~~
 
-    .. code:: cpp
-
-        node-handle& operator=( node-handle&& other );
+.. cpp:function:: node-handle& operator=( node-handle&& other );
 
     Transfers ownership of the node from ``other`` to ``*this``.
     If ``*this`` was not empty before transferring, destroys and deallocates the stored node.
@@ -101,18 +95,14 @@ Assignment
 Destructor
 ~~~~~~~~~~
 
-    .. code:: cpp
-
-        ~node-handle();
+.. cpp:function:: ~node-handle();
 
     Destroys the node handle. If it is not empty, destroys and deallocates the owned node.
 
 Swap
 ~~~~
 
-    .. code:: cpp
-
-        void swap( node-handle& other )
+.. cpp:function:: void swap( node-handle& other )
 
     Exchanges the nodes owned by ``*this`` and ``other``.
 
@@ -121,26 +111,20 @@ Swap
 State
 ~~~~~
 
-    .. code:: cpp
-
-        bool empty() const;
+.. cpp:function:: bool empty() const;
 
     **Returns**: ``true`` if the node handle is empty, ``false`` otherwise.
 
 -----------------------------------------------------------------------------
 
-    .. code:: cpp
-
-        explicit operator bool() const;
+.. cpp:function:: explicit operator bool() const;
 
     Equivalent to ``!empty()``.
 
 Access to the stored element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    .. code:: cpp
-
-        key_type& key() const;
+.. cpp:function:: key_type& key() const;
 
     Available only for map node handles.
 
@@ -150,9 +134,7 @@ Access to the stored element
 
 -----------------------------------------------------------------------------
 
-    .. code:: cpp
-
-        mapped_type& mapped() const;
+.. cpp:function:: mapped_type& mapped() const;
 
     Available only for map node handles.
 
@@ -162,9 +144,7 @@ Access to the stored element
 
 -----------------------------------------------------------------------------
 
-    .. code:: cpp
-
-        value_type& value() const;
+.. cpp:function:: value_type& value() const;
 
     Available only for set node handles.
 
@@ -175,9 +155,7 @@ Access to the stored element
 get_allocator
 ~~~~~~~~~~~~~
 
-    .. code:: cpp
-
-        allocator_type get_allocator() const;
+.. cpp:function:: allocator_type get_allocator() const;
 
     **Returns**: a copy of the allocator stored in the node handle.
 
