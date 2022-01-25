@@ -73,11 +73,7 @@ Member types
 Member functions
 ----------------
 
-.. code:: cpp
-
-    template<typename Body>
-    async_node( graph &g, size_t concurrency, Body body,
-                   node_priority_t priority = no_priority );
+.. cpp:function:: template<typename Body> async_node( graph &g, size_t concurrency, Body body, node_priority_t priority = no_priority );
 
 Constructs an ``async_node`` that invokes a copy of ``body``. The ``concurrency`` value limits the number of simultaneous 
 ``body`` invocations for the node.
@@ -86,11 +82,7 @@ This function specifies :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    template<typename Body>
-    async_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(),
-                   node_priority_t priority = no_priority );
+.. cpp:function:: template<typename Body> async_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(), node_priority_t priority = no_priority );
 
 Constructs a ``async_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
 to ``body`` can be made concurrently.
@@ -99,9 +91,7 @@ This function specifies a :doc:`policy<functional_node_policies>` and :doc:`node
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    async_node( const async_node &src )
+.. cpp:function:: async_node( const async_node &src )
 
 Constructs an ``async_node`` that has the same initial state that ``src`` had when it was
 constructed. The ``async_node`` that is constructed has a reference to the same ``graph``
@@ -114,17 +104,13 @@ construction of ``src`` do not affect the body of the new ``async_node.``
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    gateway_type& gateway()
+.. cpp:function:: gateway_type& gateway()
 
 Returns reference to the ``gateway_type`` interface.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_put( const input_type& v )
+.. cpp:function:: bool try_put( const input_type& v )
 
 If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
 Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
@@ -134,8 +120,6 @@ it.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_get( output_type& v )
+.. cpp:function:: bool try_get( output_type& v )
 
 **Returns**: ``false``
