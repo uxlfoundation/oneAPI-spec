@@ -30,22 +30,22 @@ duration ``tick_count::interval_t``, which can be converted to seconds.
    } // namespace tbb
    } // namespace oneapi
 
-``tick_count()``
+.. cpp:function:: tick_count()
   Constructs ``tick_count`` with an unspecified wall clock timestamp.
 
-``tick_count( const tick_count& )``
+.. cpp:function:: tick_count( const tick_count& )
   Constructs ``tick_count`` with the timestamp of the given ``tick_count``.
 
-``~tick_count()``
+.. cpp:function:: ~tick_count()
   Destructor.
 
-``tick_count& operator=( const tick_count& )``
+.. cpp:function:: tick_count& operator=( const tick_count& )
   Assigns the timestamp of one ``tick_count`` to another.
 
-``static tick_count now()``
+.. cpp:function:: static tick_count now()
   Returns a ``tick_count`` object that represents the current wall clock timestamp.
 
-``static double resolution()``
+.. cpp:function:: static double resolution()
   Returns the resolution of the clock used by ``tick_count``, in seconds.
 
 
@@ -76,25 +76,25 @@ A ``tick_count::interval_t`` represents wall clock duration.
    } // namespace oneapi
 
 
-``interval_t()``
+.. cpp:function:: interval_t()
   Constructs ``interval_t`` representing zero time duration.
 
-``explicit interval_t( double )``
+.. cpp:function:: explicit interval_t( double )
   Constructs ``interval_t`` representing the specified number of seconds.
 
-``~interval_t()``
+.. cpp:function:: ~interval_t()
   Destructor.
 
-``interval_t& operator=( const interval_t& )``
+.. cpp:function:: interval_t& operator=( const interval_t& )
   Assigns the wall clock duration of one ``interval_t`` to another.
 
-``interval_t& operator+=( const interval_t& )``
+.. cpp:function:: interval_t& operator+=( const interval_t& )
   Increases the duration to the given ``interval_t``, and returns ``*this``.
 
-``interval_t& operator-=( const interval_t& )``
+.. cpp:function:: interval_t& operator-=( const interval_t& )
   Decreases the duration to the given ``interval_t``, and returns ``*this``.
 
-``double seconds() const``
+.. cpp:function:: double seconds() const
   Returns the duration measured in seconds.
 
 
@@ -116,12 +116,12 @@ For example, an implementation may define the classes and functions in the same 
 and define  ``oneapi::tbb::tick_count`` as a type alias for which the non-member functions are reachable only via argument-dependent lookup. 
 
 
-``oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count&, const oneapi::tbb::tick_count& )``
+.. cpp:function:: oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count&, const oneapi::tbb::tick_count& )
   Returns ``interval_t`` representing the duration between two given wall clock timestamps.
 
-``oneapi::tbb::tick_count::interval_t operator+( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& )``
+.. cpp:function:: oneapi::tbb::tick_count::interval_t operator+( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& )
   Returns ``interval_t`` representing the sum of two given intervals.
 
-``oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& )``
+.. cpp:function:: oneapi::tbb::tick_count::interval_t operator-( const oneapi::tbb::tick_count::interval_t&, const oneapi::tbb::tick_count::interval_t& )
   Returns ``interval_t`` representing the difference of two given intervals.
   
