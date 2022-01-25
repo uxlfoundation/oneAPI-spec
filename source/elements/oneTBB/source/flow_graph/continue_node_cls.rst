@@ -109,7 +109,9 @@ This function specifies :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
-.. cpp:function:: template<typename Body> continue_node( graph &g, int number_of_predecessors, Body body, Policy /*unspecified*/ = Policy(), node_priority_t priority = no_priority );
+.. cpp:function:: template<typename Body> continue_node( graph &g, int number_of_predecessors, Body body, Policy = Policy(), node_priority_t priority = no_priority );
+
+Where ``Policy`` is unspecified.
 
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
 ``number_of_predecessors``.
