@@ -60,15 +60,11 @@ Requirements:
 Member types
 ------------
 
-.. code:: cpp
-
-    using row_range_type = blocked_range<RowValue>;
+.. cpp:type:: using row_range_type = blocked_range<RowValue>;
 
 The type of the row values.
 
-.. code:: cpp
-
-    using col_range_type = blocked_range<ColValue>;
+.. cpp:type:: using col_range_type = blocked_range<ColValue>;
 
 The type of the column values.
 
@@ -91,16 +87,11 @@ the given grain sizes for the rows and columns.
 space that contains all value pairs of the form ``(i, j)``, where ``i`` ranges from ``'a'`` to
 ``'z'`` with a grain size of 3, and ``j`` ranges from 0 to 9 with a grain size of 2.
 
-.. code:: cpp
-
-    blocked_range2d(RowValue row_begin, RowValue row_end,
-                    ColValue col_begin, ColValue col_end);
+.. cpp:function:: blocked_range2d(RowValue row_begin, RowValue row_end, ColValue col_begin, ColValue col_end);
 
 Same as ``blocked_range2d(row_begin,row_end,1,col_begin,col_end,1)``.
 
-.. code:: cpp
-
-    blocked_range2d(blocked_range2d& range, split);
+.. cpp:function:: blocked_range2d(blocked_range2d& range, split);
 
 Basic splitting constructor.
 
@@ -112,9 +103,7 @@ be the remainder. Each subrange has the same grain size as the original ``range`
 either by rows or columns. The choice of which axis to split is intended to cause, after repeated splitting, the
 subranges to approach the aspect ratio of the respective row and column grain sizes.
 
-.. code:: cpp
-
-    blocked_range2d(blocked_range2d& range, proportional_split proportion);
+.. cpp:function:: blocked_range2d(blocked_range2d& range, proportional_split proportion);
 
 Proportional splitting constructor.
 
@@ -125,31 +114,23 @@ across one of its axes. The choice of which axis to split is made in the same wa
 constructor; then, proportional splitting is done for the chosen axis. The second axis and the grain sizes for
 each subrange remain the same as in the original range.
 
-.. code:: cpp
-
-    bool empty() const;
+.. cpp:function:: bool empty() const;
 
 **Effects**: Determines if range is empty.
 
 **Returns:** ``rows().empty()||cols().empty()``
 
-.. code:: cpp
-
-    bool is_divisible() const;
+.. cpp:function:: bool is_divisible() const;
 
 **Effects**: Determines if range can be split into subranges.
 
 **Returns:** ``rows().is_divisible()||cols().is_divisible()``
 
-.. code:: cpp
-
-    const row_range_type& rows() const;
+.. cpp:function:: const row_range_type& rows() const;
 
 **Returns:**  Range containing the rows of the value space.
 
-.. code:: cpp
-
-    const col_range_type& cols() const;
+.. cpp:function:: const col_range_type& cols() const;
 
 **Returns:**  Range containing the columns of the value space.
 
