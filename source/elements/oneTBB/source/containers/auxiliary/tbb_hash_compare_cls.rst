@@ -34,17 +34,13 @@ Class Template Synopsis
 Member functions
 ----------------
 
-.. code:: cpp
-
-    static std::size_t hash( const Key& k );
+.. cpp:function:: static std::size_t hash( const Key& k );
 
 **Returns**: a hash code for a key ``k``.
 
 ---------------------
 
-.. code:: cpp
-
-    static bool equal( const Key& k1, const Key& k2 );
+.. cpp:function:: static bool equal( const Key& k1, const Key& k2 );
 
 Equivalent to ``k1 == k2``.
 
