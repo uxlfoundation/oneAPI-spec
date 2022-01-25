@@ -107,9 +107,7 @@ Member types
 Member functions
 ----------------
 
-.. code:: cpp
-
-    explicit join_node( graph &g );
+.. cpp:function:: explicit join_node( graph &g );
 
 Constructs an empty ``join_node`` that belongs to the graph ``g``.
 
@@ -151,9 +149,7 @@ the tags for the input ports ``0`` through ``N``.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    join_node( const join_node &src )
+.. cpp:function:: join_node( const join_node &src )
 
 Creates a ``join_node`` that has the same initial state that
 ``src`` had at its construction. The list of predecessors,
@@ -161,9 +157,7 @@ messages in the input ports, and successors are not copied.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    input_ports_type &input_ports( )
+.. cpp:function:: input_ports_type &input_ports( )
 
 **Returns**: a ``std::tuple`` of receivers. Each element inherits values from ``receiver<T>``, where
 ``T`` is the type of message expected at that input. Each tuple element can be used like any
@@ -171,9 +165,7 @@ other ``receiver<T>``. The behavior of the ports is based on the selected ``join
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_get( output_type &v )
+.. cpp:function:: bool try_get( output_type &v )
 
 Attempts to generate a tuple based on the buffering policy of the ``join_node``.
 
@@ -183,9 +175,7 @@ Otherwise, it returns ``false``.
 Non-Member Types
 ----------------
 
-.. code:: cpp
-
-    using tag_value = /*implementation-specific*/;
+.. cpp:type:: using tag_value = /*implementation-specific*/;
 
 ``tag_value`` is an unsigned integral type for defining the ``tag_matching`` policy.
 
