@@ -81,7 +81,9 @@ Use this function to specify :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
-.. cpp:function:: template<typename Body> multifunction_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(), node_priority_t priority = no_priority );
+.. cpp:function:: template<typename Body> multifunction_node( graph &g, size_t concurrency, Body body, Policy = Policy(), node_priority_t priority = no_priority );
+
+Where ``Policy`` is unspecified.
 
 Constructs a ``multifunction_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
 to ``body`` can be made concurrently.
