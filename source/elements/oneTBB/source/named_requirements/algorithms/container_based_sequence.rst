@@ -13,11 +13,10 @@ A type `C` satisfies `ContainerBasedSequence` if it meets the following requirem
 
 **ContainerBasedSequence Requirements: Pseudo-Signature, Semantics**
 
-    .. note::
+.. note::
 
-         In this page ``c`` is an object of type (possibly ``const``) ``C``.
-
-         Templates that use the named requirement can impose stricter requirements on the iterator concept.
+   In this page ``c`` is an object of type (possibly ``const``) ``C``.
+   Templates that use the named requirement can impose stricter requirements on the iterator concept.
 
 .. cpp:function:: std::begin(c)
 
