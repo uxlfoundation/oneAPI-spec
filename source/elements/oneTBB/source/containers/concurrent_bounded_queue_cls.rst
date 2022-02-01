@@ -45,6 +45,9 @@ Class Template Synopsis
                 concurrent_bounded_queue( InputIterator first, InputIterator last,
                                           const allocator_type& alloc = allocator_type() );
 
+                concurrent_bounded_queue( std::initializer_list<value_type> init,
+                                          const allocator_type& alloc = allocator_type() );
+
                 concurrent_bounded_queue( const concurrent_bounded_queue& other );
                 concurrent_bounded_queue( const concurrent_bounded_queue& other,
                                           const allocator_type& alloc );
@@ -55,6 +58,17 @@ Class Template Synopsis
 
                 ~concurrent_bounded_queue();
 
+                concurrent_bounded_queue& operator=( const concurrent_bounded_queue& other );
+                concurrent_bounded_queue& operator=( concurrent_bounded_queue&& other );
+                concurrent_bounded_queue& operator=( std::initializer_list<value_type> init );
+
+                template <typename InputIterator>
+                void assign( InputIterator first, InputIterator last );
+
+                void assign( std::initializer_list<value_type> init );
+
+                void swap( concurrent_bounded_queue& other );
+                
                 allocator_type get_allocator() const;
 
                 void push( const value_type& value );
@@ -113,6 +127,37 @@ Member functions
     concurrent_bounded_queue_cls/unsafe_member_functions.rst
     concurrent_bounded_queue_cls/iterators.rst
 
+Non-member functions
+--------------------
+
+These functions provides binary comparison and swap operations on ``oneapi::tbb::concurrent_bounded_queue``
+objects.
+
+The exact namespace where this function is defined is unspecified, as long as it may be used in
+respective operation. For example, an implementation may define the classes and functions
+in the same internal namespace and define ``oneapi::tbb::concurrent_bounded_queue`` as a type alias for which
+the non-member functions are reachable only via argument-dependent lookup.
+
+.. code:: cpp
+
+    template <typename T, typename Allocator>
+    void swap( concurrent_bounded_queue<T, Allocator>& lhs,
+               concurrent_bounded_queue<T, Allocator>& rhs );
+
+    template <typename T, typename Allocator>
+    bool operator==( const concurrent_bounded_queue<T, Allocator>& lhs,
+                     const concurrent_bounded_queue<T, Allocator>& rhs );
+
+    template <typename T, typename Allocator>
+    bool operator!=( const concurrent_bounded_queue<T, Allocator>& lhs,
+                     const concurrent_bounded_queue<T, Allocator>& rhs );  
+
+.. toctree::
+    :maxdepth: 1
+
+    concurrent_bounded_queue_cls/non_member_swap.rst
+    concurrent_bounded_queue_cls/non_member_binary_comparisons.rst
+    
 Other
 -----
 
