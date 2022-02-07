@@ -56,6 +56,10 @@ with the behavior defined by the ``lightweight`` policy. For example, if the def
 ``Policy`` is ``queueing``, specifying ``lightweight`` as the ``Policy`` value is equivalent to
 specifying ``queueing_lightweight``.
 
+The ``lightweight`` policy requires a function call ``operator()`` of a node's
+body be ``noexcept``. If it is not the case, specifying ``lightweight`` policy
+to the node has no effect.
+
 Example
 ~~~~~~~
 
