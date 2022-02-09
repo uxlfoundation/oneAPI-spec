@@ -54,7 +54,6 @@ Requirements:
 
 * The *PageValue*, *RowValue* and *ColValue* must meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
 
-c
 
 See also:
 
