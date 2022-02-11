@@ -61,7 +61,7 @@ m
   Number of rows in the matrices :math:`A_i` (:math:`0 \le m`).
 
 n
-  Number of columns in the matrices :math:`A_i` (:math:`0 \le n`).
+  Number of columns in the matrices :math:`A_i` (:math:`0 \le n \le m`).
 
 k
   Number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k \le n`).
@@ -258,7 +258,7 @@ m
   Number of rows in the matrices :math:`A_i` (:math:`0 \le m`).
 
 n
-  Number of columns in the matrices :math:`A_i` (:math:`0 \le n`).
+  Number of columns in the matrices :math:`A_i` (:math:`0 \le n \le m`).
 
 k
   Number of elementary reflectors whose product defines the matrices :math:`Q_i` (:math:`0 \le k \le n`).
