@@ -81,7 +81,7 @@ m
    The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
 n
-   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
+   The number of columns in the matrix :math:`A` (:math:`0 \le n \le m`).
 
 k
    The number of elementary reflectors whose product defines the
@@ -161,7 +161,7 @@ m
    The number of rows in the matrix :math:`A` (:math:`0 \le m`).
 
 n
-   The number of columns in the matrix :math:`A` (:math:`0 \le n`).
+   The number of columns in the matrix :math:`A` (:math:`0 \le n \le m`).
 
 k
    The number of elementary reflectors whose product defines the
