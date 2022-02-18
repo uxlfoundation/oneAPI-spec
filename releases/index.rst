@@ -176,10 +176,20 @@ oneIPL
   * - `oneIPL v0.5`_
     - 2021-10-8
     - `HTML <https://spec.oneapi.io/oneipl/latest/index.html>`__
+  * - `oneIPL v0.6`_
+    - 2022-02-18
+    - `HTML <https://spec.oneapi.io/oneipl/latest/index.html>`__
 
 
 Release Notes
 -------------
+
+oneIPL v0.6
+~~~~~~~~~~~
+
+* Color coding changed to memory layout in image API
+* Image parameters access moved to image API
+* Minor API change for gaussian and normalize
 
 oneIPL v0.5
 ~~~~~~~~~~~
