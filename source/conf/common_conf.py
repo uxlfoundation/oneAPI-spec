@@ -40,6 +40,7 @@ extensions = [
     'sphinxcontrib.plantuml',
     'breathe',
     'dalapi',  # oneDAL API generator
+    'vplapi',
 ]
 
 with open(join(repo_root, 'oneapi-doc.json')) as fin:  # noqa: F821

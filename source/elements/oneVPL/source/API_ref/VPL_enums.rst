@@ -672,6 +672,9 @@ The ColorFourCC enumerator itemizes color formats.
 .. doxygenenumvalue:: MFX_FOURCC_BGRP
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_FOURCC_XYUV
+   :project: oneVPL
+
 -----------
 ContentInfo
 -----------
@@ -1107,6 +1110,9 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_UNIVERSAL_REFLIST_CTRL
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_ENCODESTATS
+   :project: oneVPL
+
 ----------------
 ExtMemBufferType
 ----------------
@@ -1299,6 +1305,8 @@ Pictures) sequence.
 
 .. doxygenenumvalue:: MFX_GOP_STRICT
    :project: oneVPL
+
+.. _gpu_copy:
 
 -------
 GPUCopy
@@ -1944,6 +1952,9 @@ PlatformCodeName
 .. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_P 
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_N 
+   :project: oneVPL
+
 .. doxygenenumvalue:: MFX_PLATFORM_XEHP_SDV
     :project: oneVPL   
 
@@ -2447,4 +2458,30 @@ The AV1SegmentFeature enumerator indicates features enabled for the segment.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_AV1_SEGMENT_FEATURE_GLOBALMV
+   :project: oneVPL
+
+--------------------------
+mfxEncodeBlkStatsMemLayout
+--------------------------
+
+.. doxygenenum:: mfxEncodeBlkStatsMemLayout
+   :project: oneVPL
+
+------------------
+mfxEncodeStatsMode
+------------------
+
+.. doxygenenum:: mfxEncodeStatsMode
+   :project: oneVPL
+
+----------------
+EncodeStatsLevel
+----------------
+
+Flags to specify what statistics will be reported by the implementation.
+
+.. doxygenenumvalue:: MFX_ENCODESTATS_LEVEL_BLK
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ENCODESTATS_LEVEL_FRAME
    :project: oneVPL
