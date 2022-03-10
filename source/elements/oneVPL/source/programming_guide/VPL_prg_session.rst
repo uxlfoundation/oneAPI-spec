@@ -162,7 +162,7 @@ will vary according to the OS.
 * On Windows, the dispatcher searches the following locations, in the specified
   order, to find the correct implementation library:
 
-  #. The :file:`Driver Store` directory for all available adapters.
+  #. The :file:`Driver Store` directory for all avialable adapters.
      All types of graphics drivers can install libraries in this directory. `Learn more about Driver Store <https://docs.microsoft.com/en-us/windows-hardware/drivers/install/driver-store>`__.
      Applicable only for Intel implementations.
   #. The directory of the exe file of the current process.
@@ -337,6 +337,11 @@ left to right from column to column and concatenate strings by using `.` (dot) a
       |                                       | | .encoder                 |                      |                           |
       |                                       | | .BiDirectionalPrediction |                      |                           |
       |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .ReportedStats           |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
       |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
       |                                       | | .mfxEncoderDescription   |                      |                           |
       |                                       | | .encoder                 |                      |                           |
@@ -441,16 +446,26 @@ influence on the implementation selection. They are used during the
 
 .. list-table:: Dispatcher's Special Properties
    :header-rows: 1
-   :widths: 50 50
+   :widths: auto
 
-   * - **Property**
+   * - **Property Name**
+     - **Property Value**
      - **Value data type**
-   * - :cpp:enum:`mfxHandleType`
+   * - mfxHandleType
+     - :cpp:enum:`mfxHandleType`
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
-   * - :cpp:type:`mfxHDL`
+   * - mfxHDL
+     - :cpp:type:`mfxHDL`
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_PTR`
-   * - :cpp:type:`NumThread`
+   * - NumThread
+     - Unsigned fixed-point integer value
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
+   * - DeviceCopy
+     - :ref:`Device copy <gpu_copy>`
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U16`
+   * - ExtBuffer
+     - Pointer to the extension buffer
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_PTR`
 
 ------------------------------
 oneVPL Dispatcher Interactions

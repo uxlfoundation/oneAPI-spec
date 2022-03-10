@@ -65,3 +65,9 @@ API
 .. doxygendefine::MFX_EXTENDEDDEVICEID_VERSION
     :project: oneVPL
    
+.. doxygendefine::MFX_ENCODESTATSCONTAINER_VERSION
+    :project: oneVPL
+
+.. doxygendefine::MFX_REFINTERFACE_VERSION
+    :project: oneVPL
+    

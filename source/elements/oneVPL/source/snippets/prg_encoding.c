@@ -443,5 +443,145 @@ for (;;) {
 
 /* close encoder */
 MFXVideoENCODE_Close(session);
-/*end4*/
 }
+/*end4*/
+
+#include "mfxencodestats.h"
+
+static void AttachBuffer(mfxBitstream* bs, mfxExtEncodeStatsOutput* stats)
+{
+   UNUSED_PARAM(bs);
+   UNUSED_PARAM(stats);
+   return;
+}
+
+static void prg_encoding5() {
+/*beg5*/
+mfxExtEncodeStatsOutput stats;
+stats.EncodeStatsFlags = MFX_ENCODESTATS_LEVEL_FRAME|MFX_ENCODESTATS_LEVEL_BLK; // or MFX_ENCODESTATS_LEVEL_DEFAULT can be used
+AttachBuffer(bits, &stats);
+
+/* perform encoding and gathering stats. */
+sts = MFXVideoENCODE_EncodeFrameAsync(session, NULL, surface, bits, &syncp);
+if (sts == MFX_ERR_NONE) {
+   /* to synchronize everything. */
+   MFXVideoCORE_SyncOperation(session, syncp, INFINITE);
+   /* process stats */
+
+   /* release memory */
+   stats.EncodeStatsContainer->RefInterface.Release(&stats.EncodeStatsContainer->RefInterface);
+   
+}
+
+}
+/*end5*/
+
+static void prg_encoding6() {
+/*beg6*/
+mfxExtEncodeStatsOutput stats_frame;
+mfxExtEncodeStatsOutput stats_blk;
+stats_frame.EncodeStatsFlags = MFX_ENCODESTATS_LEVEL_FRAME;
+stats_blk.EncodeStatsFlags = MFX_ENCODESTATS_LEVEL_BLK;
+AttachBuffer(bits, &stats_frame);
+AttachBuffer(bits, &stats_blk);
+
+/* perform encoding and gathering stats. */
+sts = MFXVideoENCODE_EncodeFrameAsync(session, NULL, surface, bits, &syncp);
+
+if (MFX_ERR_NONE == sts) {
+   /* to synchronize bitstream. */
+   stats_frame.EncodeStatsContainer->SynchronizeBitstream(&stats_frame.EncodeStatsContainer->RefInterface, INFINITE);
+   
+   /* to synchronize frame level statistics. */
+   stats_frame.EncodeStatsContainer->SynchronizeStatistics(&stats_frame.EncodeStatsContainer->RefInterface, INFINITE);
+   
+   /* to synchronize block level statistics. */
+   stats_blk.EncodeStatsContainer->SynchronizeStatistics(&stats_blk.EncodeStatsContainer->RefInterface, INFINITE);
+
+   /* process stats */
+
+   stats_frame.EncodeStatsContainer->RefInterface.Release(&stats_frame.EncodeStatsContainer->RefInterface);
+   stats_blk.EncodeStatsContainer->RefInterface.Release(&stats_blk.EncodeStatsContainer->RefInterface);
+
+}
+
+}
+/*end6*/
+
+static void prg_encoding7() {
+/*beg7*/
+mfxExtEncodeStatsOutput stats;
+stats.EncodeStatsFlags = MFX_ENCODESTATS_LEVEL_FRAME|MFX_ENCODESTATS_LEVEL_BLK; // or MFX_ENCODESTATS_LEVEL_DEFAULT can be used
+AttachBuffer(bits, &stats);
+
+/* perform encoding and gathering stats. */
+sts = MFXVideoENCODE_EncodeFrameAsync(session, NULL, surface, bits, &syncp);
+if (MFX_ERR_NONE == sts) {
+   /* to synchronize bitstream. */
+   stats.EncodeStatsContainer->SynchronizeBitstream(&stats.EncodeStatsContainer->RefInterface, INFINITE);
+   
+   /* to synchronize frame and block level statistics. */
+   stats.EncodeStatsContainer->SynchronizeStatistics(&stats.EncodeStatsContainer->RefInterface, INFINITE);
+   
+   /* process stats */
+
+   /* release memory */
+   stats.EncodeStatsContainer->RefInterface.Release(&stats.EncodeStatsContainer->RefInterface);
+}
+
+}
+/*end7*/
+
+#if defined(LINUX32) || defined(LINUX64)
+
+#include<pthread.h>
+
+pthread_t pt[3];
+
+static void* SynchronizeBitstream(void *args)
+{
+   mfxExtEncodeStats *stats = (mfxExtEncodeStatsOutput*)args;
+   stats->EncodeStatsContainer->SynchronizeBitstream(&stats->EncodeStatsContainer->RefInterface, INFINITE);
+   stats->EncodeStatsContainer->RefInterface.Release(&stats->EncodeStatsContainer->RefInterface);
+   pthread_exit(NULL);
+   return NULL;
+}
+
+static void* SynchronizeStats(void *args)
+{
+   mfxExtEncodeStats *stats = (mfxExtEncodeStats*)args;
+   stats->EncodeStatsContainer->SynchronizeStatistics(&stats->EncodeStatsContainer->RefInterface, INFINITE);
+   stats->EncodeStatsContainer->RefInterface.Release(&stats->EncodeStatsContainer->RefInterface);
+   pthread_exit(NULL);
+   return NULL;
+}
+
+static void prg_encoding8() {
+/*beg8*/
+mfxExtEncodeStats stats_frame;
+mfxExtEncodeStats stats_blk;
+stats_frame.EncodeStatsFlags = MFX_ENCODESTATS_LEVEL_FRAME;
+stats_blk.EncodeStatsFlags = MFX_ENCODESTATS_LEVEL_BLK;
+AttachBuffer(bits, &stats_frame);
+AttachBuffer(bits, &stats_blk);
+
+/* perform encoding and gathering stats. */
+MFXVideoENCODE_EncodeFrameAsync(session, NULL, surface, bits, &syncp);
+
+if (MFX_ERR_NONE) {
+
+   /* thread to synchronize frame level statistics. */
+   pthread_create(&(pt[0]), NULL, &SynchronizeStats, (void*)&stats_frame);
+
+   /* thread to synchronize block level statistics. */
+   pthread_create(&(pt[1]), NULL, &SynchronizeStats, (void*)&stats_blk);
+
+   /* thread to synchronize bitstream. */
+   pthread_create(&(pt[2]), NULL, &SynchronizeBitstream, (void*)stats_frame);
+
+}
+
+}
+/*end8*/
+#endif
+

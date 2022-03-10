@@ -13,6 +13,35 @@ This section describes the API evolution from version to version.
    :depth: 1
 
 -----------
+Version 2.7
+-----------
+
+New in this release:
+
+* :cpp:member:`mfxExtVppAuxData::RepeatedFrame` flag is actual again and returned back from deprecation state.
+* Clarified GPUCopy control behavior.
+* Introduced MFX_FOURCC_XYUV FourCC for non-alpha packed 4:4:4 format.
+* Notice added to the :cpp:member:`mfxFrameSurfaceInterface::OnComplete` to claify when
+  library can call this callback.
+* New product names for platforms:
+
+    * Code name Alder Lake N.
+
+* Annotated missed aliases  :cpp:type:`mfxExtHEVCRefListCtrl`,  :cpp:type:`mfxExtHEVCRefLists`, :cpp:type:`mfxExtHEVCTemporalLayers`.
+* New dispatcher's config properties:
+
+    * Pass through extension buffer to :cpp:struct:`mfxInitializationParam`.
+    * Select host or device responsible for the memory copy between host and device.
+
+* Refined description of struct `mfxExtMasteringDisplayColourVolume` and `mfxExtContentLightLevelInfo` for HDR SEI decoder usage.
+* Experimental API: introduced interface to get statistics after encode.
+
+Bug Fixes:
+
+* Fixed missprint in the :cpp:struct:`mfxExtDeviceAffinityMask` description.
+* MFXVideoENCODE_Query description fixed for query mode 1.
+
+-----------
 Version 2.6
 -----------
 

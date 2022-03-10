@@ -36,13 +36,22 @@ The following is a list of experimental interfaces, starting from API version
      -
    * - :cpp:type:`mfxExtRefListCtrl`
      - 2.6
-     -
-     -
+     - 2.7
+     - Moved to production
    * - Extended enum for :cpp:member:`mfxExtDecodeErrorReport::ErrorTypes`
      - 2.6
-     -
-     -
+     - 2.7
+     - Moved to production
    * - :cpp:enumerator:`mfxHandleType::MFX_HANDLE_PXP_CONTEXT`
      - 2.6
+     - 2.7
+     - Moved to production
+   * - :cpp:struct:`mfxRefInterface`
+     - 2.7
      -
      -
+   * - All definitions in mfxencodestats.h
+     - 2.7
+     -
+     -
+

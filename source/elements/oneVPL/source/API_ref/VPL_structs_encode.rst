@@ -177,14 +177,6 @@ mfxExtCodingOptionVPS
    :members:
    :protected-members:
 
-mfxExtContentLightLevelInfo
----------------------------
-
-.. doxygenstruct:: mfxExtContentLightLevelInfo
-   :project: oneVPL
-   :members:
-   :protected-members:
-
 mfxExtDirtyRect
 ---------------
 
@@ -257,14 +249,6 @@ mfxExtInsertHeaders
    :members:
    :protected-members:
    :undoc-members:
-
-mfxExtMasteringDisplayColourVolume
-----------------------------------
-
-.. doxygenstruct:: mfxExtMasteringDisplayColourVolume
-   :project: oneVPL
-   :members:
-   :protected-members:
 
 mfxExtMBDisableSkipMap
 ----------------------
@@ -413,7 +397,7 @@ mfxExtAV1TileParam
    :project: oneVPL
    :members:
    :protected-members:
-
+   
 mfxExtAV1Segmentation
 ---------------------
 
@@ -421,4 +405,105 @@ mfxExtAV1Segmentation
    :project: oneVPL
    :members:
    :protected-members:
-  
+
+mfxCTUHeader
+------------
+
+.. doxygenstruct:: mfxCTUHeader
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxCUInfo
+---------
+
+.. doxygenstruct:: mfxCUInfo
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxCTUInfo
+----------
+
+.. doxygenstruct:: mfxCTUInfo
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxMBInfo
+---------
+
+.. doxygenstruct:: mfxMBInfo
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxEncodeBlkStats
+-----------------
+
+.. doxygenstruct:: mfxEncodeBlkStats
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxEncodeHighLevelStats
+-----------------------
+
+.. doxygenstruct:: mfxEncodeHighLevelStats
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxEncodeFrameStats
+-------------------
+
+.. doxygentypedef:: mfxEncodeFrameStats
+   :project: oneVPL
+
+mfxEncodeSliceStats
+-------------------
+
+.. doxygenstruct:: mfxEncodeSliceStats
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxEncodeTileStats
+------------------
+
+.. doxygentypedef:: mfxEncodeTileStats
+   :project: oneVPL
+
+mfxEncodeStatsContainer
+-----------------------
+
+.. doxygenstruct:: mfxEncodeStatsContainer
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtEncodeStatsOutput
+-----------------------
+
+.. doxygenstruct:: mfxExtEncodeStatsOutput
+   :project: oneVPL
+   :members:
+   :protected-members:
+   
+mfxExtHEVCRefListCtrl
+---------------------
+
+.. doxygentypedef:: mfxExtHEVCRefListCtrl
+   :project: oneVPL
+
+mfxExtHEVCRefLists
+------------------
+
+.. doxygentypedef:: mfxExtHEVCRefLists
+   :project: oneVPL
+
+mfxExtHEVCTemporalLayers
+------------------------
+
+.. doxygentypedef:: mfxExtHEVCTemporalLayers
+   :project: oneVPL
