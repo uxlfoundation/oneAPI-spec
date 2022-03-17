@@ -15,4 +15,5 @@ This section describes the Data Parallel C++ (DPC++) interface.
 .. include:: rng/random_number_generators.inc.rst
 .. include:: stats/stats.inc.rst
 .. include:: vm/vector_math.inc.rst
+.. include:: data_fitting/data-fitting.inc.rst
 

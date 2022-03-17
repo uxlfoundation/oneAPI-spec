@@ -16,17 +16,18 @@ oneMKL namespaces
 
 The oneMKL library uses C++ namespaces to organize routines by mathematical domain.  All oneMKL objects and routines shall be contained within the ``oneapi::mkl`` base namespace.  The individual oneMKL domains use a secondary namespace layer as follows:
 
-========================  =======================================================================================================
-namespace                 oneMKL domain or content
-========================  =======================================================================================================
-``oneapi::mkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
-``oneapi::mkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. The oneapi::mkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
-``oneapi::mkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
-``oneapi::mkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
-``oneapi::mkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
-``oneapi::mkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
-``oneapi::mkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
-========================  =======================================================================================================
+=========================================== =========================================================================
+namespace                                   oneMKL domain or content
+=========================================== =========================================================================
+``oneapi::mkl``                             oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
+``oneapi::mkl::blas``                       Dense linear algebra routines from BLAS and BLAS like extensions. The oneapi::mkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
+``oneapi::mkl::lapack``                     Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
+``oneapi::mkl::sparse``                     Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
+``oneapi::mkl::dft``                        Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
+``oneapi::mkl::rng``                        Random number generator routines. See :ref:`onemkl_rng`
+``oneapi::mkl::vm``                         Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
+``oneapi::mkl::experimental::data_fitting`` Data fitting routines, e.g. interpolate. See :ref:`data_fitting`
+=========================================== =========================================================================
 
 .. note::
    :name: Implementation Requirement
