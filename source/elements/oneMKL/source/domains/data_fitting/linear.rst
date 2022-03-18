@@ -3,10 +3,6 @@
 Linear Spline
 =============
 
-.. contents::
-    :local:
-    :depth: 1
-
 Linear spline is a spline whose degree is equal to 1.
 
 It's described by the following polynomial
@@ -26,7 +22,7 @@ where
   c_{2,i} = \left[ x_i, x_{i+1} \right]f,
 
 .. math::
-  i = 1, \cdots, n-1.
+  i = 1, \dots, n-1.
 
 Header File
 -----------

@@ -3,10 +3,6 @@
 Cubic Splines
 =============
 
-.. contents::
-    :local:
-    :depth: 2
-
 Cubic splines are splines whose degree is equal to 3.
 
 Cubic splines are described by the following polynomial
@@ -20,9 +16,9 @@ where
   x \in \left[ x_i, x_{i+1} \right),
 
 .. math::
-  i = 1,\cdots , n-1.
+  i = 1,\dots , n-1.
 
-There are a lot of different types of cubic splines: Hermite, natural, Akima, Bessel.
+There are many different kinds of cubic splines: Hermite, natural, Akima, Bessel.
 However, the current version of DPC++ API supports only one type: Hermite.
 
 Header File
@@ -42,7 +38,7 @@ Namespace
 Hermite Spline
 --------------
 
-Coefficients of Hermite spline are calculated using the following formulas:
+The coefficients of Hermite spline are calculated using the following formulas:
 
 .. math::
   c_{1,i} = f\left( x_i \right),

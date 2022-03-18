@@ -26,7 +26,7 @@ namespace                                   oneMKL domain or content
 ``oneapi::mkl::dft``                        Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
 ``oneapi::mkl::rng``                        Random number generator routines. See :ref:`onemkl_rng`
 ``oneapi::mkl::vm``                         Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
-``oneapi::mkl::experimental::data_fitting`` Data fitting routines, e.g. interpolate. See :ref:`data_fitting`
+``oneapi::mkl::experimental::data_fitting`` Data fitting routines, e.g. interpolation. See :ref:`data_fitting`
 =========================================== =========================================================================
 
 .. note::

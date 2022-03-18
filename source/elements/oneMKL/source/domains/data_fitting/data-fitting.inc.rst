@@ -3,7 +3,7 @@
 Data Fitting
 ============
 
-|IONE-MKL| provides spline-based interpolation capabilities that can be used for
+oneMKL provides spline-based interpolation capabilities that can be used for
 spline construction (Linear, Cubic, Quadratic etc.),
 to perform cell-search operations, and to approximate functions,
 function derivatives, or integrals.

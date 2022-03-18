@@ -3,21 +3,17 @@
 Interpolate Function
 ====================
 
-.. contents::
-    :local:
-    :depth: 1
-
 Interpolate function performs computations of function and derivatives values at interpolation sites.
 
-If the sites do not belong to interpolation interval ``[a, b]``, the library uses:
+If the sites do not belong to interpolation interval ``[a, b)``, the library uses:
 
   - interpolant :math:`I_0` coefficients computed for interval :math:`[x_0, x_1)` for the
     computations at the sites to the left of ``a``.
   - interpolant :math:`I_{n-2}` coefficients computed for interval
     :math:`[x_{n-2}, x_{n-1})` for the computations at the sites to the right of ``b``.
 
-Interpolation algorithm depends on interpolant's type (e.g., for cubic spline
-interpoilation evaluation of third-order polynomial is performed to obtain function values).
+Interpolation algorithm depends on interpolant's type (e.g., for a cubic spline,
+the evaluation of a third-order polynomial is performed to obtain the resulting interpolant value).
 
 Header File
 -----------
@@ -31,7 +27,7 @@ Namespace
 
 .. code:: cpp
 
-  oneapi::mkl::experimental::data_fitiing
+  oneapi::mkl::experimental::data_fitting
 
 Syntax
 ------
@@ -61,7 +57,7 @@ Syntax
 
   template <typename Interpolant>
   sycl::event interpolate(
-      sycl::queue& q,
+      sycl::queue& queue,
       const Interpolant& interpolant,
       typename Interpolant::fp_type* sites,
       std::int64_t n_sites,
@@ -72,7 +68,7 @@ Syntax
 
   template <typename Interpolant>
   sycl::event interpolate(
-      sycl::queue& q,
+      sycl::queue& queue,
       const Interpolant& interpolant,
       typename Interpolant::fp_type* sites,
       std::int64_t n_sites,
@@ -94,13 +90,13 @@ Returns the SYCL event of the submitted task.
    (function values is considered as a zero derivative) which are indicated in
    ``der_indicator`` (each bit corresponds to certain derivative starting from lower bit)
    using the SYCL queue associated with ``interpolant``.
-#. Performs computations of function values only using ``q`` as an input argument
+#. Performs computations of function values only using ``queue`` as an input argument
    that should be created from the same context and device as the SYCL queue
    associated with ``interpolant``.
 #. Performs computations of certain derivatives
    (function values is considered as a zero derivative) which are indicated in
    ``der_indicator`` (each bit corresponds to certain derivative starting from lower bit)
-   using ``q`` as an input argument that should be created from
+   using ``queue`` as an input argument that should be created from
    the same context and device as the SYCL queue associated with ``interpolant``.
 
 Follow the :ref:`examples` section to see examples of the interpolation function usage.

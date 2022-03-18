@@ -3,10 +3,6 @@
 Splines
 =======
 
-.. contents::
-    :local:
-    :depth: 1
-
 Header File
 -----------
 
@@ -36,12 +32,12 @@ Common API for All Spline Types
       using spline_type = SplineType;
 
       spline(
-        const sycl::queue& q,
+        const sycl::queue& queue,
         std::int64_t ny = 1);
 
       spline(
-        const sycl::device& dev,
-        const sycl::context& ctx,
+        const sycl::device& device,
+        const sycl::context& context,
         std::int64_t ny = 1);
 
       ~spline();
@@ -82,10 +78,10 @@ that operates with the ``T`` data type. ``ST`` is a type of spline.
 
    * - Constructor
      - Description
-   * - ``spline(const sycl::queue& q, std::int64_t ny = 1);``
-     - Create an object with the ``q`` SYCL queue and ``ny`` number of functions.
-   * - ``spline(const sycl::device& dev, const sycl::context& ctx, std::int64_t ny = 1);``
-     - Create an object using the ``dev`` SYCL device, the ``ctx`` context
+   * - ``spline(const sycl::queue& queue, std::int64_t ny = 1);``
+     - Create an object with the ``queue`` SYCL queue and ``ny`` number of functions.
+   * - ``spline(const sycl::device& device, const sycl::context& context, std::int64_t ny = 1);``
+     - Create an object using the ``device`` SYCL device, the ``context`` context
        and ``ny`` number of functions.
 
 .. list-table::
@@ -97,26 +93,25 @@ that operates with the ``T`` data type. ``ST`` is a type of spline.
      - Set partition values that are specified by the ``input_data`` memory pointer and ``nx`` partition values.
        Users can provide ``PartitionHint`` to specify the layout of data.
        Default layout is ``non_uniform``.
-       If ``uniform`` is specified, ``nx`` must equals to ``2`` and
-       ``input_data`` must contain only 2 values the left and the right borders of partition.
+       If ``uniform`` is specified, ``nx`` must be equal to ``2`` and
+       ``input_data`` must contain only 2 values corresponding to the left and the right borders
+       of the sub-interval defined by the partition.
        Otherwise, behavior is undefined.
        If ``input_data`` layout doesn't satisfy ``PartitionHint``, behavior is undefined.
        Returns a reference to the spline object for which partitions are set.
 
-       Example, for ``uniform``. Let :math:`\left\{ i \right\}_{i=1,\cdots,n}` is a partition.
+       Example, for ``uniform``. Let :math:`\left\{ i \right\}_{i=1,\dots,n}` be a partition.
        So, ``input_data`` must contain only 2 values: 1, ``n``.
    * - ``spline& set_function_values(FpType* input_data, function_hint FunctionHint = storage_hint::row_major);``
      - Set function values that are specified by the ``input_data`` memory pointer.
-       Number of function values must equals to ``ny * nx`` elements.
-       Users can provide ``FunctionHint`` to specify the layout of data.
-       Default layout is ``row_major``.
+       Number of function values must be ``ny * nx`` elements.
+       Users can provide a ``FunctionHint`` to specify the layout of data with a default value of ``row_major``.
        If ``input_data`` layout doesn't satisfy ``FunctionHint``, behavior is undefined.
        Returns a reference to the spline object for which function values are set.
    * - ``spline& set_coefficients(FpType* data, coefficient_hint CoeffHint = storage_hint::row_major);``
      - Set coefficients that are specified by the ``data`` memory pointer.
        Number of coefficients in the memory must equals to the return value of ``get_required_coeffs_size()``.
-       Users can provide ``CoeffHint`` to specify the layout of data.
-       Default layout is ``row_major``.
+       Users can provide a ``CoeffHint`` to specify the layout of data with a default value of ``row_major``.
        If ``data`` layout doesn't satisfy ``CoeffHint``, behavior is undefined.
        Returns a reference to the spline object for which coefficients are set.
    * - ``bool is_initialized() const;``
