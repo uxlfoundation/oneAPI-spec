@@ -37,12 +37,14 @@ Common API for All Spline Types
 
       spline(
         const sycl::queue& queue,
-        std::int64_t ny = 1);
+        std::int64_t ny = 1,
+        bool were_coeffs_computed = false);
 
       spline(
         const sycl::device& device,
         const sycl::context& context,
-        std::int64_t ny = 1);
+        std::int64_t ny = 1,
+        bool were_coeffs_computed = false);
 
       ~spline();
 
@@ -82,11 +84,17 @@ that operates with the ``T`` data type. ``ST`` is a type of spline.
 
    * - Constructor
      - Description
-   * - ``spline(const sycl::queue& queue, std::int64_t ny = 1);``
+   * - ``spline(const sycl::queue& queue, std::int64_t ny = 1, bool were_coeffs_computed = false);``
      - Create an object with the ``queue`` SYCL queue and ``ny`` number of functions.
-   * - ``spline(const sycl::device& device, const sycl::context& context, std::int64_t ny = 1);``
+       If spline coeficients were already computed, provide ``true`` as a 3-rd argument.
+       ``were_coeffs_computed == false`` by default.
+       It means that it needs to call ``construct`` to compute spline coefficients.
+   * - ``spline(const sycl::device& device, const sycl::context& context, std::int64_t ny = 1, bool were_coeffs_computed = false);``
      - Create an object using the ``device`` SYCL device, the ``context`` context
        and ``ny`` number of functions.
+       If spline coeficients were already computed, provide ``true`` as a 3-rd argument.
+       ``were_coeffs_computed == false`` by default.
+       It means that it needs to call ``construct`` to compute spline coefficients.
 
 .. list-table::
    :header-rows: 1
@@ -117,13 +125,14 @@ that operates with the ``T`` data type. ``ST`` is a type of spline.
        Number of coefficients in the memory must equals to the return value of ``get_required_coeffs_size()``.
        Users can provide a ``CoeffHint`` to specify the layout of data with a default value of ``row_major``.
        If ``data`` layout doesn't satisfy ``CoeffHint``, behavior is undefined.
+       If ``were_coeffs_computed == false``, ``data`` will be rewritten during ``construct``.
        Returns a reference to the spline object for which coefficients are set.
    * - ``bool is_initialized() const;``
      - Returns ``true`` if all required data are set (for example, partitions, function values, coefficients).
    * - ``std::int64_t get_required_coeffs_size() const;``
      - Returns amount of memory that is required for coefficients storage.
    * - ``sycl::event construct(const std::vector<sycl::event>& dependencies = {});``
-     - Constructs the spline (calculates spline coefficients).
+     - Constructs the spline (calculates spline coefficients if ``were_coeffs_computed == false``).
        The function submits a SYCL kernel and returns the SYCL event to wait on to ensure computation is complete.
        ``dependencies`` is a list of SYCL events to wait for before starting computations.
 
