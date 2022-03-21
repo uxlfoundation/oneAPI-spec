@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _data-fitting:
+.. _data_fitting:
 
 Data Fitting
 ============
