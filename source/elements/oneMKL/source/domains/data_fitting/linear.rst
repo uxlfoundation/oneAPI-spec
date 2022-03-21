@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2022 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. _linear:
 
 Linear Spline
