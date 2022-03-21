@@ -38,7 +38,7 @@ The scalars :math:`c_{j,i}, j=1,\dots,k, i=1,\dots,n` are called spline **coeffi
 
 Given an interpolant spline of :math:`f(x)` on a partition of :math:`[a,b)`,
 the interpolant function can be evaluated at any point in the interval :math:`[a,b)` or
-outside it (see :ref:`interpoate` for details). Such points to evaluate the interpolant at
+outside it (see :ref:`interpolate` for details). Such points to evaluate the interpolant at
 will be referred to as **interpolation sites** or simply **sites**.
 Sites can correspond to partition points, but are not required to be.
 
