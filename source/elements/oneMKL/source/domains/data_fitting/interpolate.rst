@@ -41,9 +41,9 @@ Syntax
   template <typename Interpolant>
   sycl::event interpolate(
       Interpolant& interpolant,
-      typename Interpolant::fp_type* sites,
+      typename Interpolant::value_type* sites,
       std::int64_t n_sites,
-      typename Interpolant::fp_type* results,
+      typename Interpolant::value_type* results,
       const std::vector<sycl::event>& dependencies,
       interpolate_hint ResultHint = interpolate_hint::funcs_sites_ders,
       site_hint SiteHint = site_hint::non_uniform); // (1)
@@ -51,9 +51,9 @@ Syntax
   template <typename Interpolant>
   sycl::event interpolate(
       Interpolant& interpolant,
-      typename Interpolant::fp_type* sites,
+      typename Interpolant::value_type* sites,
       std::int64_t n_sites,
-      typename Interpolant::fp_type* results,
+      typename Interpolant::value_type* results,
       std::bitset<32> derivatives_indicator,
       const std::vector<sycl::event>& dependencies = {},
       interpolate_hint ResultHint = interpolate_hint::funcs_sites_ders,
@@ -63,9 +63,9 @@ Syntax
   sycl::event interpolate(
       sycl::queue& queue,
       const Interpolant& interpolant,
-      typename Interpolant::fp_type* sites,
+      typename Interpolant::value_type* sites,
       std::int64_t n_sites,
-      typename Interpolant::fp_type* results,
+      typename Interpolant::value_type* results,
       const std::vector<sycl::event>& dependencies,
       interpolate_hint ResultHint = interpolate_hint::funcs_sites_ders,
       site_hint SiteHint = site_hint::non_uniform); // (3)
@@ -74,9 +74,9 @@ Syntax
   sycl::event interpolate(
       sycl::queue& queue,
       const Interpolant& interpolant,
-      typename Interpolant::fp_type* sites,
+      typename Interpolant::value_type* sites,
       std::int64_t n_sites,
-      typename Interpolant::fp_type* results,
+      typename Interpolant::value_type* results,
       std::bitset<32> derivatives_indicator,
       const std::vector<sycl::event>& dependencies = {},
       interpolate_hint ResultHint = interpolate_hint::funcs_sites_ders,

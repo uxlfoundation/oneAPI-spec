@@ -62,11 +62,11 @@ Common API for All Spline Types
 
       spline& set_function_values(
         FpType* input_data,
-        function_hint FunctionHint = storage_hint::row_major);
+        function_hint FunctionHint = function_hint::row_major);
 
       spline& set_coefficients(
         FpType* data,
-        coefficient_hint CoeffHint = storage_hint::row_major);
+        coefficient_hint CoeffHint = coefficient_hint::row_major);
 
       bool is_initialized() const;
 
