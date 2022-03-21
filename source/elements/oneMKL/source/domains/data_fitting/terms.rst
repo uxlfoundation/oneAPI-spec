@@ -11,6 +11,8 @@ Assume we need to interpolate a function ``f(x)`` on the ``[a, b)`` interval usi
 We define a **partition** of `[a, b)` to be a collection of :math:`n` points
 (**partition points**) :math:`\left\{ x_{i}\right}, i = 1, \dots, n` such as
 :math:`a = x_1 < x_2 < \dots < x_n = b`.
+In general when there is no condition with respect to the distances between the :math:`x_i`,
+the partition is referred to as a **non-uniform partition**.
 
 Spline has ``k`` degree if it can be expressed by the following polynomial:
 
@@ -50,7 +52,7 @@ Mathematical Notation in the Data Fitting Component
      - Mathematical Notation
    * - Partition
      - :math:`\left\{ x_i \right\}_{i=1,\dots,n}`,
-       where :math:`a = x1 < x2< \dots < xn = b`.
+       where :math:`a = x_1 < x_2 < \dots < x_n = b`.
    * - Uniform partition
      - Partition :math:`\left\{ x_i \right\}_{i=1,\dots,n}`
        which meets the following condition:
@@ -59,13 +61,13 @@ Mathematical Notation in the Data Fitting Component
    * - Quasi-uniform partition
      - Partition :math:`\left\{ x_i \right\}_{i=1,\dots,n}`
        which meets the constraint with a constant ``C`` defined as:
-       :math:`1 \le M / m \le C`,
+       :math:`1 \le M_max / M_min \le C`,
 
        where
 
-       :math:`M = \text{max}_{i=1,\dots,n-1} (x_{i+1} - x_i)`,
+       :math:`M_max = \text{max}_{i=1,\dots,n-1} (x_{i+1} - x_i)`,
 
-       :math:`m = \text{min}_{i=1,\dots,n-1} (x_{i+1} - x_i)`,
+       :math:`M_min = \text{min}_{i=1,\dots,n-1} (x_{i+1} - x_i)`,
    * - Vector-valued function of dimension ``m``
      - :math:`f(x) = (f_1(x),\dots, f_m(x))`.
    * - A ``d``-order derivative of function ``f(x)`` at point ``t``
@@ -298,6 +300,7 @@ Some type of splines requires boundary conditions to be set.
 The following types are supported:
 
  - Free end (:math:`f^{(2)}(x_1) = f^{(2)}(x_n) = 0`).
+ - Not-a-knot.
  - Periodic.
  - First derivative.
  - Second Derivative.
@@ -308,6 +311,7 @@ The following types are supported:
 
   enum class bc_type {
     free_end,
+    not_a_knot,
     first_left_der,
     first_right_der,
     second_left_der,

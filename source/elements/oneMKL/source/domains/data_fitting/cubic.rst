@@ -82,5 +82,3 @@ To create a cubic Hermite spline object use the following:
     /*SYCL queue object*/q,
     /*number of spline functions*/ny
   );
-
-Follow the :ref:`examples` section to see more complicated examples.

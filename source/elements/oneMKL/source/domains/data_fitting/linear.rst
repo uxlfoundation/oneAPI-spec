@@ -58,5 +58,3 @@ To create a linear spline object use the following:
     /*SYCL queue object*/q,
     /*number of spline functions*/ny
   );
-
-Follow the :ref:`examples` section to see more complicated examples.

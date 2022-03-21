@@ -50,7 +50,7 @@ Syntax
       typename Interpolant::fp_type* sites,
       std::int64_t n_sites,
       typename Interpolant::fp_type* results,
-      std::bitset<32> der_indicator,
+      std::bitset<32> derivatives_indicator,
       const std::vector<sycl::event>& dependencies = {},
       interpolate_hint ResultHint = interpolate_hint::funcs_sites_ders,
       site_hint SiteHint = site_hint::non_uniform); // (2)
@@ -73,7 +73,7 @@ Syntax
       typename Interpolant::fp_type* sites,
       std::int64_t n_sites,
       typename Interpolant::fp_type* results,
-      std::bitset<32> der_indicator,
+      std::bitset<32> derivatives_indicator,
       const std::vector<sycl::event>& dependencies = {},
       interpolate_hint ResultHint = interpolate_hint::funcs_sites_ders,
       site_hint SiteHint = site_hint::non_uniform); // (4)
@@ -88,15 +88,13 @@ Returns the SYCL event of the submitted task.
    associated with ``interpolant``.
 #. Performs computations of certain derivatives
    (function values is considered as a zero derivative) which are indicated in
-   ``der_indicator`` (each bit corresponds to certain derivative starting from lower bit)
+   ``derivatives_indicator`` (each bit corresponds to certain derivative starting from lower bit)
    using the SYCL queue associated with ``interpolant``.
 #. Performs computations of function values only using ``queue`` as an input argument
    that should be created from the same context and device as the SYCL queue
    associated with ``interpolant``.
 #. Performs computations of certain derivatives
    (function values is considered as a zero derivative) which are indicated in
-   ``der_indicator`` (each bit corresponds to certain derivative starting from lower bit)
+   ``derivatives_indicator`` (each bit corresponds to certain derivative starting from lower bit)
    using ``queue`` as an input argument that should be created from
    the same context and device as the SYCL queue associated with ``interpolant``.
-
-Follow the :ref:`examples` section to see examples of the interpolation function usage.

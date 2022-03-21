@@ -27,4 +27,3 @@ Interpolate function:
    data_fitting/terms
    data_fitting/splines
    data_fitting/interpolate
-   data_fitting/examples
