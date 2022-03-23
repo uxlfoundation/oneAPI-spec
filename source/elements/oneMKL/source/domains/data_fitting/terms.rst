@@ -13,7 +13,7 @@ Glossary
 Assume we need to interpolate a function ``f(x)`` on the ``[a, b)`` interval using splines.
 
 We define a **partition** of `[a, b)` to be a collection of :math:`n` points
-(**partition points**) :math:`\left\{ x_{i}\right}, i = 1, \dots, n` such as
+(**partition points**) :math:`\left\{ x_{i}\right\}, i = 1, \dots, n` such as
 :math:`a = x_1 < x_2 < \dots < x_n = b`.
 In general when there is no condition with respect to the distances between the :math:`x_i`,
 the partition is referred to as a **non-uniform partition**.
