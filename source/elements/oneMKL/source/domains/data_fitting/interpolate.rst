@@ -88,6 +88,9 @@ If ``results`` layout doesn't satisfy ``ResultHint`` and/or
 ``sites`` layout doesn't satisfy ``SiteHint``, behavior is undefined.
 Returns the SYCL event of the submitted task.
 
+Interfaces (3) and (4) can be useful when users try to interpolate over different parts of ``sites``
+using different ``queue`` objects.
+
 #. Performs computations of function values only using the SYCL queue
    associated with ``interpolant``.
 #. Performs computations of certain derivatives

@@ -46,6 +46,10 @@ outside it (see :ref:`interpolate` for details). Such points to evaluate the int
 will be referred to as **interpolation sites** or simply **sites**.
 Sites can correspond to partition points, but are not required to be.
 
+.. image:: img_data_fitting.png
+   :width: 600
+   :alt: Data Fitting terminology picture
+
 Mathematical Notation in the Data Fitting Component
 ---------------------------------------------------
 

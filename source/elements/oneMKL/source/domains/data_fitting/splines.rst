@@ -89,12 +89,14 @@ that operates with the ``T`` data type. ``ST`` is a type of spline.
        If spline coeficients were already computed, provide ``true`` as a 3-rd argument.
        ``were_coeffs_computed == false`` by default.
        It means that it needs to call ``construct`` to compute spline coefficients.
+       This constructor is useful when users want to pass SYCL queue, not SYCL device and SYCL context.
    * - ``spline(const sycl::device& device, const sycl::context& context, std::int64_t ny = 1, bool were_coeffs_computed = false);``
      - Create an object using the ``device`` SYCL device, the ``context`` context
        and ``ny`` number of functions.
        If spline coeficients were already computed, provide ``true`` as a 3-rd argument.
        ``were_coeffs_computed == false`` by default.
        It means that it needs to call ``construct`` to compute spline coefficients.
+       This constructor is useful for cases mentioned in :ref:`interpolate`.
 
 .. list-table::
    :header-rows: 1
