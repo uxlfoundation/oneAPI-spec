@@ -421,7 +421,7 @@ typedef struct mfxEncodeStatsContainer {
      MFX_ERR_ABORTED            If the specified asynchronous function aborted due to data dependency on a previous asynchronous function that did not complete. \n
      MFX_ERR_UNKNOWN            Any internal error.
     */
-    mfxStatus (MFX_CDECL *SynchronizeBitstream)(mfxRefInterface*  interface, mfxU32 wait);
+    mfxStatus (MFX_CDECL *SynchronizeBitstream)(mfxRefInterface*  ref_interface, mfxU32 wait);
     mfxHDL    reserved[4];
     mfxU32    reserved1[2];
     mfxU32                       DisplayOrder;       /*< To which frame number statistics belong. */
