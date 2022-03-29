@@ -10,20 +10,24 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
-      with:
-        python-verson: '3.10'
     - name: Install prerequisites
       run: |
           sudo apt-get update -qq
           xargs -a ubuntu-packages.txt sudo apt install -qq
           python -m pip install --quiet --upgrade pip
           pip install --quiet -r requirements.txt
-    - name: Builds and checks
+    - name: Checks
       run: |
-          ONEAPI_DRAFT=true pre-commit run --all
+          pre-commit run --all
           mkdir -p build/reuse
           # ignore fail for reuse
           reuse lint > build/reuse/lint.txt || true
+    - name: Build
+      env:
+        ONEAPI_DRAFT: true
+      run: |
+        python scripts/oneapi.py -W html
+        python scripts/oneapi.py -W latexpdf
     - name: Archive build directory
       uses: actions/upload-artifact@v1
       with:

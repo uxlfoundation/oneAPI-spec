@@ -35,17 +35,3 @@ repos:
     rev: 5.9.1
     hooks:
     -   id: isort
--   repo: local
-    hooks:
-    - id: sphinx-html
-      name: sphinx-html
-      entry: python scripts/oneapi.py -W html
-      language: system
-      pass_filenames: false
-      always_run: true
-    - id: sphinx-pdf
-      name: sphinx-pdf
-      entry: python scripts/oneapi.py -W latexpdf
-      language: system
-      pass_filenames: false
-      always_run: true
