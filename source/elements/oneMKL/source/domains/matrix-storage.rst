@@ -360,7 +360,7 @@ Matrix Storage
                 }
             }
 
-         - Using matrices stored with column major layout,
+         - Using matrices stored with row major layout,
 
          ::
 
