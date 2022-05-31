@@ -37,7 +37,8 @@ imatcopy_batch (Buffer Version)
 -------------------------------
 
 .. rubric:: Description
-        
+
+The buffer version of ``imatcopy_batch`` supports only the strided API.
 The operation for the strided API is defined as:
 ::
 
@@ -150,16 +151,36 @@ parameter.
       Output buffer, overwritten by ``batch_size`` matrix matrix transposition
       operations of the form ``alpha`` * op(``AB``).
 
+.. container:: section
 
+   .. rubric:: Throws
 
+   This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-
+   :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+       
    
+   :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+       
 
+   :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+       
+
+   :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+      
+
+.. _onemkl_blas_imatcopy_batch_usm:
    
 imatcopy_batch (USM Version)
 ----------------------------
 
+.. rubric:: Description
+
+The USM version of ``imatcopy_batch`` supports the group API and the strided API.
+            
 The operation for the group API is defined as:
 ::
 
@@ -167,24 +188,31 @@ The operation for the group API is defined as:
    for i = 0 … group_count – 1
        m,n, alpha, lda, ldb and group_size at position i in their respective arrays
        for j = 0 … group_size – 1
-           AB is a matrix at position idx in AB_array
+           AB is a matrix at position idx in ab_array
            AB = alpha * op(AB)
            idx := idx + 1
        end for
    end for
 
+The operation for the strided API is defined as:
+::
+
+   for i = 0 … batch_size – 1
+       AB is a matrix at offset i * stride in ab_array
+       AB = alpha * op(AB)
+   end for
+   
 where:
 
-- ``op(X)`` is one of ``op(X) = X``, ``op(X) = X'``, or
-  ``op(X) = conjg(X')``
-- ``alpha`` is a scalar
-- AB is a matrix to be transformed in place
+op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
-The strided API is available with USM pointers or buffer arguments for the
-input and output arrays, while the group API is available only with USM
-pointers.
+``alpha`` is a scalar,
 
-For the strided API, the single buffer or array AB contains all the matrices
+``AB`` is a matrix to be transformed in place,
+
+and ``AB`` is ``m`` x ``n``.
+
+For the strided API, the single  array AB contains all the matrices
 to be transformed in place. The locations of the individual matrices within
 the buffer or array are given by stride lengths, while the number of
 matrices is given by the ``batch_size`` parameter.
@@ -194,43 +222,11 @@ represents a matrix stored at the address pointed to by ``ab_array``.
 The number of entries in ``ab_array`` is ``total_batch_count`` = the sum of
 all the ``group_size`` entries.
 
-API
-***
-
-Syntax
-------
-
-**Strided API**
-
-USM arrays:
-
-.. code-block::
-
-   event imatcopy_batch(queue &queue,
-      transpose trans,
-      std::int64_t m,
-      std::int64_t n,
-      T alpha,
-      const T *ab,
-      std::int64_t lda,
-      std::int64_t ldb,
-      std::int64_t stride,
-      std::int64_t batch_size,
-      const vector_class<event> &dependencies = {});
-
-Buffer arrays:
-
-.. code-block::
-
-   void imatcopy_batch(queue &queue, transpose trans,
-      std::int64_t m, std::int64_t n, T alpha,
-      cl::sycl::buffer<T, 1> &ab, std::int64_t lda,
-      std::int64_t ldb, std::int64_t stride,
-      std::int64_t batch_size);
-
 **Group API**
 
-.. code-block::
+.. rubric:: Syntax
+
+.. code-block:: cpp
 
    event imatcopy_batch(queue &queue, const transpose *trans_array,
                         const std::int64_t *m_array,
@@ -241,60 +237,23 @@ Buffer arrays:
                         std::int64_t group_count,
                         const std::int64_t *groupsize,
                         const vector_class<event> &dependencies = {});
+   }
+.. code-block:: cpp
 
-Input Parameters
-----------------
+   event imatcopy_batch(queue &queue, const transpose *trans_array,
+                        const std::int64_t *m_array,
+                        const std::int64_t *n_array,
+                        const T *alpha_array, T **ab_array,
+                        const std::int64_t *lda_array,
+                        const std::int64_t *ldb_array,
+                        std::int64_t group_count,
+                        const std::int64_t *groupsize,
+                        const vector_class<event> &dependencies = {});
+   }
 
-**Strided API**
+.. container:: secion
 
-trans
-   Specifies ``op(AB)``, the transposition operation applied to the
-   matrices AB.
-
-m
-   Number of rows for each matrix AB on input. Must be at least 0.
-
-n
-   Number of columns for each matrix AB on input. Must be at least 0.
-
-alpha
-   Scaling factor for the matrix transpose or copy operation.
-
-ab
-   Buffer holding the matrices AB. Must have size at least
-   ``stride*batch_size``.
-
-lda
-   Leading dimension of the AB matrices on input. If matrices are stored
-   using column major layout, ``lda`` must be at least ``m``. If matrices
-   are stored using row major layout, ``lda`` must be at least ``n``. 
-   Must be positive.
-
-ldb
-   Leading dimension of the AB matrices on output. If matrices are stored
-   using column major layout, ``ldb`` must be at least ``m`` if AB is not
-   transposed or ``n`` if AB is transposed. If matrices are stored using
-   row major layout, ``ldb`` must be at least ``n`` if AB is not transposed
-   or at least ``m`` if AB is transposed. Must be positive.
-
-stride
-   Stride between the different AB matrices. It must be at least
-   ``max(ldb,lda)*max(ka, kb)``, where:
-
-   - ``ka`` is ``m`` if column major layout is used or ``n`` if row major
-      layout is used
-
-   - ``kb`` is ``n`` if column major layout is used and  AB is not
-      transposed, or ``m`` otherwise
-
-batch_size
-   Specifies the number of matrices to transpose or copy.
-
-dependencies
-   List of events to wait for before starting computation, if any.
-   If omitted, defaults to no dependencies.
-
-**Group API**
+   .. rubric:: Input Parameters
 
 trans_array
    Array of size ``group_count``. Each element ``i`` in the array specifies
@@ -345,18 +304,107 @@ dependencies
    List of events to wait for before starting computation, if any.
    If omitted, defaults to no dependencies.
 
-Output Parameters
------------------
+.. container:: section
 
-**Strided API**
-
-ab
-   Output buffer, overwritten by ``batch_size`` matrix multiply operations
-   of the form ``alpha*op(AB)``.
-
-**Group API**
+   .. reubric:: Output Parameter
 
 ab_array
    Output array of pointers to AB matrices, overwritten by
    ``total_batch_count`` matrix transpose or copy operations of the form
    ``alpha*op(AB)``.
+
+
+**Strided API**
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       event imatcopy_batch(queue &queue,
+                            transpose trans,
+                            std::int64_t m,
+                            std::int64_t n,
+                            T alpha,
+                            const T *ab,
+                            std::int64_t lda,
+                            std::int64_t ldb,
+                            std::int64_t stride,
+                            std::int64_t batch_size,
+                            const vector_class<event> &dependencies = {});
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       event imatcopy_batch(queue &queue,
+                            transpose trans,
+                            std::int64_t m,
+                            std::int64_t n,
+                            T alpha,
+                            const T *ab,
+                            std::int64_t lda,
+                            std::int64_t ldb,
+                            std::int64_t stride,
+                            std::int64_t batch_size,
+                            const vector_class<event> &dependencies = {});
+
+.. container:: section
+
+   .. reubric:: Input Parameters
+
+trans
+   Specifies ``op(AB)``, the transposition operation applied to the
+   matrices AB.
+
+m
+   Number of rows for each matrix AB on input. Must be at least 0.
+
+n
+   Number of columns for each matrix AB on input. Must be at least 0.
+
+alpha
+   Scaling factor for the matrix transpose or copy operation.
+
+ab
+   Buffer holding the matrices AB. Must have size at least
+   ``stride*batch_size``.
+
+lda
+   Leading dimension of the AB matrices on input. If matrices are stored
+   using column major layout, ``lda`` must be at least ``m``. If matrices
+   are stored using row major layout, ``lda`` must be at least ``n``. 
+   Must be positive.
+
+ldb
+   Leading dimension of the AB matrices on output. If matrices are stored
+   using column major layout, ``ldb`` must be at least ``m`` if AB is not
+   transposed or ``n`` if AB is transposed. If matrices are stored using
+   row major layout, ``ldb`` must be at least ``n`` if AB is not transposed
+   or at least ``m`` if AB is transposed. Must be positive.
+
+stride
+   Stride between the different AB matrices. It must be at least
+   ``max(ldb,lda)*max(ka, kb)``, where:
+
+   - ``ka`` is ``m`` if column major layout is used or ``n`` if row major
+      layout is used
+
+   - ``kb`` is ``n`` if column major layout is used and  AB is not
+      transposed, or ``m`` otherwise
+
+batch_size
+   Specifies the number of matrices to transpose or copy.
+
+dependencies
+   List of events to wait for before starting computation, if any.
+   If omitted, defaults to no dependencies.
+
+.. container:: section
+
+   .. reubric:: Output Parameter
+
+ab_array
+   Output buffer, overwritten by ``batch_size`` matrix multiply operations
+   of the form ``alpha*op(AB)``.
+
+
+
+
+
