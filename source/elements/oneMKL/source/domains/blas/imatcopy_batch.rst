@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _imatcopy_batch:
+.. _onemkl_blas_imatcopy_batch:
 
 imatcopy_batch
 ==============
@@ -30,7 +30,7 @@ groups of matrices. Each group contains matrices with the same parameters.
       * -  ``std::complex<float>`` 
       * -  ``std::complex<double>`` 
 
-.. _onemkl_blas_imatcopy_batch:
+.. _onemkl_blas_imatcopy_batch_buffer:
 
 imatcopy_batch (Buffer Version)
 -------------------------------
