@@ -115,7 +115,7 @@ parameter.
       used, and at least ``n`` if row-major layout is used.
 
    ldb
-      The leading dimension of the matrices``B``. It must be positive.
+      The leading dimension of the matrices ``B``. It must be positive.
 
       .. list-table::
          :header-rows: 1
@@ -148,7 +148,7 @@ parameter.
    .. rubric:: Output Parameters
 
    ab_array
-      Output buffer, overwritten by ``batch_size`` matrix matrix transposition
+      Output buffer, overwritten by ``batch_size`` matrix copy or transposition
       operations of the form ``alpha`` * op(``AB``).
 
 .. container:: section
@@ -217,7 +217,7 @@ and ``AB`` is ``m`` x ``n``.
 
 For the group API, the matrices are given by arrays of pointers. AB
 represents a matrix stored at the address pointed to by ``ab_array``.
-The number of entries in ``ab_array`` is give by:
+The number of entries in ``ab_array`` is given by:
 
 .. math::
 
@@ -383,7 +383,7 @@ matrices is given by the ``batch_size`` parameter.
       Scaling factor for the matrix transpose or copy operation.
 
    ab
-      Buffer holding the matrices AB. Must have size at least
+      Array holding the matrices AB. Must have size at least
       ``stride*batch_size``.
 
    lda
@@ -420,9 +420,9 @@ matrices is given by the ``batch_size`` parameter.
 
    .. rubric:: Output Parameters
 
-   ab_array
-      Output buffer, overwritten by ``batch_size`` matrix multiply operations
-      of the form ``alpha*op(AB)``.
+   ab
+      Output array, overwritten by ``batch_size`` matrix transposition or copy
+      operations of the form ``alpha*op(AB)``.
 
 .. container:: section
       
