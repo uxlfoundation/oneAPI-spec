@@ -131,14 +131,20 @@ parameter.
            - ``ldb`` must be at least ``m``.
 
    stride
-      Stride between different ``AB`` matrices. It must be at least 
-      ``max(ldb,lda)*max(ka, kb)``, where:
+      Stride between different ``AB`` matrices.
 
-      - ``ka`` is ``m`` if column major layout is used or ``n`` if row major
-         layout is used
+      .. list-table::
+         :header-rows: 1
 
-      - ``kb`` is ``n`` if column major layout is used and AB is not
-         transposed, or ``m`` otherwise
+         * -
+           - ``AB`` not transposed
+           - ``AB`` transposed
+         * - Column major
+           - ``stride`` must be at least ``max(lda*m, ldb*m)``.
+           - ``stride`` must be at least ``max(lda*m, ldb*n)``.
+         * - Row major
+           - ``stride`` must be at least ``max(lda*n, ldb*n)``.
+           - ``stride`` must be at least ``max(lda*n, ldb*m)``.
 
    batch_size
       Specifies the number of matrix transposition or copy operations to perform.
@@ -318,7 +324,7 @@ matrices is given by the ``batch_size`` parameter.
 
 .. container:: section
 
-   .. reubric:: Output Parameters
+   .. rubric:: Output Parameters
 
    ab_array
       Output array of pointers to AB matrices, overwritten by

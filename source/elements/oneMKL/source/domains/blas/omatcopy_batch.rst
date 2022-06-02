@@ -365,7 +365,7 @@ the ``batch_size`` parameter.
 
 .. container:: section
 
-   .. reubric:: Output Parameters
+   .. rubric:: Output Parameters
 
    b_array
       Output array of pointers to B matrices, overwritten by
