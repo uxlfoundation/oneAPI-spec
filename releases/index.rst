@@ -22,7 +22,7 @@ specification that it supports.
 oneAPI Specification
 ====================
 
-The latest approved specification is 1.0. The 1.1 specification is
+The latest approved specification is 1.1. The 1.2 specification is
 under development and is labeled *provisional* until it is approved.
 Releases are listed below. See GitHub_ for the latest build.
 
