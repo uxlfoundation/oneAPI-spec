@@ -17,29 +17,9 @@ The ``omatadd`` routine performs an out-of-place scaled
 matrix addition with optional transposes in the arguments.
 The operation is defined as:
 
-``omatadd`` supports the following precisions:
-
-   .. list-table::
-      :header-rows: 1
-
-      * -  T 
-      * -  ``float`` 
-      * -  ``double`` 
-      * -  ``std::complex<float>`` 
-      * -  ``std::complex<double>`` 
-
-.. _onemkl_blas_omatadd_buffer:
-
-omatadd (Buffer Version)
--------------------------------
-
-.. rubric:: Description
-
-The operation of ``omatadd`` is defined as:
-
 .. math::
 
-      C \leftarrow alpha*op(A) + beta*op(B)
+      C \leftarrow \alpha * op(A) + \beta * op(B)
 
 where:
 
@@ -55,29 +35,57 @@ op(``X``) is one of op(``X``) = ``X``, or op(``X``) = ``X``\ :sup:`T`, or op(``X
 
 and ``B`` is ``m`` x ``n`` if the ``op(B)`` is not transposed or ``n`` by ``m`` if it is.
 
+``omatadd`` supports the following precisions:
+
+   .. list-table::
+      :header-rows: 1
+
+      * -  T 
+      * -  ``float`` 
+      * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
+
+.. _onemkl_blas_omatadd_buffer:
+
+omatadd (Buffer Version)
+------------------------
 
 .. rubric:: Syntax
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       void omatadd(sycl::queue &queue, oneapi::mkl::transpose transa,
+       void omatadd(sycl::queue &queue,
+                    oneapi::mkl::transpose transa,
                     oneapi::mkl::transpose transb,
-                    std::int64_t m, std::int64_t n,
-                    T alpha, sycl::buffer<T, 1> &a, std::int64_t lda,
-                    T beta, sycl::buffer<T, 1> &b, std::int64_t ldb,
-                    sycl::buffer<T, 1> &c, std::int64_t ldc)
-                          std::int64_t batch_size);
+                    std::int64_t m,
+                    std::int64_t n,
+                    T alpha,
+                    sycl::buffer<T, 1> &a,
+                    std::int64_t lda,
+                    T beta,
+                    sycl::buffer<T, 1> &b,
+                    std::int64_t ldb,
+                    sycl::buffer<T, 1> &c,
+                    std::int64_t ldc)
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       void omatadd(sycl::queue &queue, oneapi::mkl::transpose transa,
+       void omatadd(sycl::queue &queue,
+                    oneapi::mkl::transpose transa,
                     oneapi::mkl::transpose transb,
-                    std::int64_t m, std::int64_t n,
-                    T alpha, sycl::buffer<T, 1> &a, std::int64_t lda,
-                    T beta, sycl::buffer<T, 1> &b, std::int64_t ldb,
-                    sycl::buffer<T, 1> &c, std::int64_t ldc)
+                    std::int64_t m,
+                    std::int64_t n,
+                    T alpha,
+                    sycl::buffer<T, 1> &a,
+                    std::int64_t lda,
+                    T beta,
+                    sycl::buffer<T, 1> &b,
+                    std::int64_t ldb,
+                    sycl::buffer<T, 1> &c,
+                    std::int64_t ldc)
    }
 
 .. container:: section
@@ -223,31 +231,6 @@ and ``B`` is ``m`` x ``n`` if the ``op(B)`` is not transposed or ``n`` by ``m`` 
    
 omatadd (USM Version)
 ---------------------
-
-.. rubric:: Description
-
-The operation of ``omatadd`` is defined as:
-
-.. math::
-
-      C \leftarrow alpha*op(A) + beta*op(B)
-
-where:
-
-op(``X``) is one of op(``X``) = ``X``, or op(``X``) = ``X``\ :sup:`T`, or op(``X``) = ``X``\ :sup:`H`
-
-``alpha`` and ``beta`` are scalars,
-
-``A`` and ``B`` are input matrices while ``C`` is an output matrix,
-
-``C`` is ``m`` x ``n``,
-
-``A`` is ``m`` x ``n`` if the ``op(A)`` is not transposed or ``n`` by ``m`` if it is,
-
-and ``B`` is ``m`` x ``n`` if the ``op(B)`` is not transposed or ``n`` by ``m`` if it is.
-
-
-**API**
 
 .. rubric:: Syntax
 

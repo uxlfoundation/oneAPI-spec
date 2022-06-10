@@ -74,28 +74,42 @@ matrices in each buffer is given by the ``batch_size`` parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       void omatadd_batch(queue &queue, transpose transa,
-                          transpose transb,
-                          std::int64_t m, std::int64_t n,
-                          T alpha, cl::sycl::buffer<T, 1> &a,
-                          std::int64_t lda, std::int64_t stride_a,
-                          T beta, cl::sycl::buffer<T, 1> &b,
-                          std::int64_t ldb, std::int64_t stride_b,
-                          cl::sycl::buffer<T, 1> &c, std::int64_t ldc,
+       void omatadd_batch(sycl::queue &queue,
+                          oneapi::mkl::transpose transa,
+                          oneapi::mkl::transpose transb,
+                          std::int64_t m,
+                          std::int64_t n,
+                          T alpha,
+                          sycl::buffer<T, 1> &a,
+                          std::int64_t lda,
+                          std::int64_t stride_a,
+                          T beta,
+                          sycl::buffer<T, 1> &b,
+                          std::int64_t ldb,
+                          std::int64_t stride_b,
+                          sycl::buffer<T, 1> &c,
+                          std::int64_t ldc,
                           std::int64_t stride_c,
                           std::int64_t batch_size);
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       void omatadd_batch(queue &queue, transpose transa,
-                          transpose transb,
-                          std::int64_t m, std::int64_t n,
-                          T alpha, cl::sycl::buffer<T, 1> &a,
-                          std::int64_t lda, std::int64_t stride_a,
-                          T beta, cl::sycl::buffer<T, 1> &b,
-                          std::int64_t ldb, std::int64_t stride_b,
-                          cl::sycl::buffer<T, 1> &c, std::int64_t ldc,
+       void omatadd_batch(sycl::queue &queue,
+                          oneapi::mkl::transpose transa,
+                          oneapi::mkl::transpose transb,
+                          std::int64_t m,
+                          std::int64_t n,
+                          T alpha,
+                          sycl::buffer<T, 1> &a,
+                          std::int64_t lda,
+                          std::int64_t stride_a,
+                          T beta,
+                          sycl::buffer<T, 1> &b,
+                          std::int64_t ldb,
+                          std::int64_t stride_b,
+                          sycl::buffer<T, 1> &c,
+                          std::int64_t ldc,
                           std::int64_t stride_c,
                           std::int64_t batch_size);
    }
@@ -203,13 +217,13 @@ matrices in each buffer is given by the ``batch_size`` parameter.
       ``stride_c`` * ``batch_size``.
 
    ldc
-      Leading dimension of the C matrices. If matrices are stored using
+      Leading dimension of the ``C`` matrices. If matrices are stored using
       column major layout, ``ldc`` must be at least ``m``. If matrices are
       stored using row major layout, ``ldc`` must be at least ``n``. Must be
       positive.
 
    stride_c
-      Stride between the different C matrices. If matrices are stored using
+      Stride between the different ``C`` matrices. If matrices are stored using
       column major layout, ``stride_c`` must be at least ``ldc*n``. If matrices
       are stored using row major layout, ``stride_c`` must be at least
       ``ldc*m``.
@@ -297,46 +311,46 @@ matrices in each buffer is given by the ``batch_size`` parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       event omatadd_batch(queue &queue,
-           transpose transa,
-           transpose transb,
-           std::int64_t m,
-           std::int64_t n,
-           T alpha,
-           const T *a,
-           std::int64_t lda,
-           std::int64_t stride_a,
-           T beta,
-           T *b,
-           std::int64_t ldb,
-           std::int64_t stride_b,
-           T *c,
-           std::int64_t ldc,
-           std::int64_t stride_c,
-           std::int64_t batch_size,
-           const std::vector<event> &dependencies = {});
+       sycl::event omatadd_batch(sycl::queue &queue,
+                                 oneapi::mkl::transpose transa,
+                                 oneapi::mkl::transpose transb,
+                                 std::int64_t m,
+                                 std::int64_t n,
+                                 T alpha,
+                                 const T *a,
+                                 std::int64_t lda,
+                                 std::int64_t stride_a,
+                                 T beta,
+                                 T *b,
+                                 std::int64_t ldb,
+                                 std::int64_t stride_b,
+                                 T *c,
+                                 std::int64_t ldc,
+                                 std::int64_t stride_c,
+                                 std::int64_t batch_size,
+                                 const std::vector<sycl::event> &dependencies = {});
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       event omatadd_batch(queue &queue,
-           transpose transa,
-           transpose transb,
-           std::int64_t m,
-           std::int64_t n,
-           T alpha,
-           const T *a,
-           std::int64_t lda,
-           std::int64_t stride_a,
-           T beta,
-           T *b,
-           std::int64_t ldb,
-           std::int64_t stride_b,
-           T *c,
-           std::int64_t ldc,
-           std::int64_t stride_c,
-           std::int64_t batch_size,
-           const std::vector<event> &dependencies = {});
+       sycl::event omatadd_batch(sycl::queue &queue,
+                                 oneapi::mkl::transpose transa,
+                                 oneapi::mkl::transpose transb,
+                                 std::int64_t m,
+                                 std::int64_t n,
+                                 T alpha,
+                                 const T *a,
+                                 std::int64_t lda,
+                                 std::int64_t stride_a,
+                                 T beta,
+                                 T *b,
+                                 std::int64_t ldb,
+                                 std::int64_t stride_b,
+                                 T *c,
+                                 std::int64_t ldc,
+                                 std::int64_t stride_c,
+                                 std::int64_t batch_size,
+                                 const std::vector<sycl::event> &dependencies = {});
    }
 
 .. container:: section
@@ -442,13 +456,13 @@ matrices in each buffer is given by the ``batch_size`` parameter.
       ``stride_c`` * ``batch_size``.
 
    ldc
-      Leading dimension of the C matrices. If matrices are stored using
+      Leading dimension of the ``C`` matrices. If matrices are stored using
       column major layout, ``ldc`` must be at least ``m``. If matrices are
       stored using row major layout, ``ldc`` must be at least ``n``. Must be
       positive.
 
    stride_c
-      Stride between the different C matrices. If matrices are stored using
+      Stride between the different ``C`` matrices. If matrices are stored using
       column major layout, ``stride_c`` must be at least ``ldc*n``. If matrices
       are stored using row major layout, ``stride_c`` must be at least
       ``ldc*m``.

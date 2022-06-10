@@ -72,22 +72,34 @@ each buffer is given by the ``batch_size`` parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       void omatcopy_batch(queue &queue, transpose trans,
-                           std::int64_t m, std::int64_t n,
-                           T alpha, cl::sycl::buffer<T, 1> &a,
-                           std::int64_t lda, std::int64_t stride_a,
-                           cl::sycl::buffer<T, 1> &b, std::int64_t ldb,
-                           std::int64_t stride_b, std::int64_t batch_size);
+       void omatcopy_batch(sycl::queue &queue,
+                           oneapi::mkl::transpose trans,
+                           std::int64_t m,
+                           std::int64_t n,
+                           T alpha,
+                           sycl::buffer<T, 1> &a,
+                           std::int64_t lda,
+                           std::int64_t stride_a,
+                           sycl::buffer<T, 1> &b,
+                           std::int64_t ldb,
+                           std::int64_t stride_b,
+                           std::int64_t batch_size);
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       void omatcopy_batch(queue &queue, transpose trans,
-                           std::int64_t m, std::int64_t n,
-                           T alpha, cl::sycl::buffer<T, 1> &a,
-                           std::int64_t lda, std::int64_t stride_a,
-                           cl::sycl::buffer<T, 1> &b, std::int64_t ldb,
-                           std::int64_t stride_b, std::int64_t batch_size);
+       void omatcopy_batch(sycl::queue &queue,
+                           oneapi::mkl::transpose trans,
+                           std::int64_t m,
+                           std::int64_t n,
+                           T alpha,
+                           sycl::buffer<T, 1> &a,
+                           std::int64_t lda,
+                           std::int64_t stride_a,
+                           sycl::buffer<T, 1> &b,
+                           std::int64_t ldb,
+                           std::int64_t stride_b,
+                           std::int64_t batch_size);
    }
 
 .. container:: section
@@ -104,12 +116,11 @@ each buffer is given by the ``batch_size`` parameter.
    m
       Number of rows for each matrix ``A``. Must be at least zero.
 
-
    n
       Number of columns for each matrix ``A``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix transpositions or copies.
+      Scaling factor for the matrix transposition or copy operations.
 
    a
       Buffer holding the input matrices ``A`` with size ``stride_a`` * ``batch_size``.
@@ -120,7 +131,7 @@ each buffer is given by the ``batch_size`` parameter.
       used, and at least ``n`` if row-major layout is used.
 
    stride_a
-      Stride between the different A matrices. If matrices are stored using
+      Stride between the different ``A`` matrices. If matrices are stored using
       column major layout, ``stride_a`` must be at least ``lda*n``. If matrices
       are stored using row major layout, ``stride_a`` must be at least
       ``lda*m``.
@@ -259,28 +270,34 @@ the ``batch_size`` parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       event omatcopy_batch(queue &queue, const transpose *trans_array,
-                            const std::int64_t *m_array,
-                            const std::int64_t *n_array,
-                            const T *alpha_array, const T **a_array,
-                            const std::int64_t *lda_array, T **b_array,
-                            const std::int64_t *ldb_array,
-                            std::int64_t group_count,
-                            const std::int64_t *groupsize,
-                            const vector_class<event> &dependencies = {});
+       sycl::event omatcopy_batch(sycl::queue &queue,
+                                  const oneapi::mkl::transpose *trans_array,
+                                  const std::int64_t *m_array,
+                                  const std::int64_t *n_array,
+                                  const T *alpha_array,
+                                  const T **a_array,
+                                  const std::int64_t *lda_array,
+                                  T **b_array,
+                                  const std::int64_t *ldb_array,
+                                  std::int64_t group_count,
+                                  const std::int64_t *groupsize,
+                                  const std::vector<sycl::event> &dependencies = {});
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       event omatcopy_batch(queue &queue, const transpose *trans_array,
-                            const std::int64_t *m_array,
-                            const std::int64_t *n_array,
-                            const T *alpha_array, const T **a_array,
-                            const std::int64_t *lda_array, T **b_array,
-                            const std::int64_t *ldb_array,
-                            std::int64_t group_count,
-                            const std::int64_t *groupsize,
-                            const vector_class<event> &dependencies = {});
+       sycl::event omatcopy_batch(sycl::queue &queue,
+                                  const oneapi::mkl::transpose *trans_array,
+                                  const std::int64_t *m_array,
+                                  const std::int64_t *n_array,
+                                  const T *alpha_array,
+                                  const T **a_array,
+                                  const std::int64_t *lda_array,
+                                  T **b_array,
+                                  const std::int64_t *ldb_array,
+                                  std::int64_t group_count,
+                                  const std::int64_t *groupsize,
+                                  const std::vector<sycl::event> &dependencies = {});
    }
 
 .. container:: secion
@@ -398,7 +415,7 @@ the ``batch_size`` parameter.
            std::int64_t ldb,
            std::int64_t stride_b,
            std::int64_t batch_size,
-           const vector_class<event> &dependencies = {});
+           const std::vector<sycl::event> &dependencies = {});
    }
 .. code-block:: cpp
 
@@ -421,6 +438,9 @@ the ``batch_size`` parameter.
 .. container:: section
 
    .. rubric:: Input Parameters
+
+   queue
+      The queue where the routine will be executed.
 
    trans
       Specifies ``op(A)``, the transposition operation applied to the

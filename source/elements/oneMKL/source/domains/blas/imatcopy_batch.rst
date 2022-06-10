@@ -69,19 +69,29 @@ parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       void imatcopy_batch(queue &queue, transpose trans,
-                           std::int64_t m, std::int64_t n, T alpha,
-                           cl::sycl::buffer<T, 1> &ab, std::int64_t lda,
-                           std::int64_t ldb, std::int64_t stride,
+       void imatcopy_batch(sycl::queue &queue,
+                           oneapi::mkl::transpose trans,
+                           std::int64_t m,
+                           std::int64_t n,
+                           T alpha,
+                           cl::sycl::buffer<T, 1> &ab,
+                           std::int64_t lda,
+                           std::int64_t ldb,
+                           std::int64_t stride,
                            std::int64_t batch_size);
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       void imatcopy_batch(queue &queue, transpose trans,
-                           std::int64_t m, std::int64_t n, T alpha,
-                           cl::sycl::buffer<T, 1> &ab, std::int64_t lda,
-                           std::int64_t ldb, std::int64_t stride,
+       void imatcopy_batch(sycl::queue &queue,
+                           oneapi::mkl::transpose trans,
+                           std::int64_t m,
+                           std::int64_t n,
+                           T alpha,
+                           cl::sycl::buffer<T, 1> &ab,
+                           std::int64_t lda,
+                           std::int64_t ldb,
+                           std::int64_t stride,
                            std::int64_t batch_size);
    }
 
@@ -97,11 +107,11 @@ parameter.
       matrices ``AB``. See :ref:`onemkl_datatypes` for more details.
 
    m
-      Number of rows of ``AB``. Must be at least zero.
+      Number of rows of each matrix ``AB`` on input. Must be at least zero.
 
 
    n
-      Number of columns of ``AB``. Must be at least zero.
+      Number of columns of each matrix ``AB`` on input. Must be at least zero.
 
    alpha
       Scaling factor for the matrix transpositions or copies.
@@ -110,12 +120,12 @@ parameter.
       Buffer holding the input matrices ``AB`` with size ``stride`` * ``batch_size``.
 
    lda
-      The leading dimension of the matrices ``A``. It must be
+      The leading dimension of the matrices ``AB`` on input. It must be
       positive, and must be at least ``m`` if column major layout is
       used, and at least ``n`` if row-major layout is used.
 
    ldb
-      The leading dimension of the matrices ``B``. It must be positive.
+      The leading dimension of the matrices ``AB`` on output. It must be positive.
 
       .. list-table::
          :header-rows: 1
@@ -242,28 +252,32 @@ matrices is given by the ``batch_size`` parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       event imatcopy_batch(queue &queue, const transpose *trans_array,
+       event imatcopy_batch(sycl::queue &queue,
+                            const oneapi::mkl::transpose *trans_array,
                             const std::int64_t *m_array,
                             const std::int64_t *n_array,
-                            const T *alpha_array, T **ab_array,
+                            const T *alpha_array,
+                            T **ab_array,
                             const std::int64_t *lda_array,
                             const std::int64_t *ldb_array,
                             std::int64_t group_count,
                             const std::int64_t *groupsize,
-                            const vector_class<event> &dependencies = {});
+                            const std::vector<sycl::event> &dependencies = {});
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       event imatcopy_batch(queue &queue, const transpose *trans_array,
+       event imatcopy_batch(sycl::queue &queue,
+                            const oneapi::mkl::transpose *trans_array,
                             const std::int64_t *m_array,
                             const std::int64_t *n_array,
-                            const T *alpha_array, T **ab_array,
+                            const T *alpha_array,
+                            T **ab_array,
                             const std::int64_t *lda_array,
                             const std::int64_t *ldb_array,
                             std::int64_t group_count,
                             const std::int64_t *groupsize,
-                            const vector_class<event> &dependencies = {});
+                            const std::vector<sycl::event> &dependencies = {});
    }
 
 .. container:: secion
@@ -345,51 +359,54 @@ matrices is given by the ``batch_size`` parameter.
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::column_major {
-       event imatcopy_batch(queue &queue,
-                            transpose trans,
-                            std::int64_t m,
-                            std::int64_t n,
-                            T alpha,
-                            const T *ab,
-                            std::int64_t lda,
-                            std::int64_t ldb,
-                            std::int64_t stride,
-                            std::int64_t batch_size,
-                            const vector_class<event> &dependencies = {});
+       sycl::event imatcopy_batch(sycl::queue &queue,
+                                  oneapi::mkl::transpose trans,
+                                  std::int64_t m,
+                                  std::int64_t n,
+                                  T alpha,
+                                  const T *ab,
+                                  std::int64_t lda,
+                                  std::int64_t ldb,
+                                  std::int64_t stride,
+                                  std::int64_t batch_size,
+                                  const std::vector<sycl::event> &dependencies = {});
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
-       event imatcopy_batch(queue &queue,
-                            transpose trans,
-                            std::int64_t m,
-                            std::int64_t n,
-                            T alpha,
-                            const T *ab,
-                            std::int64_t lda,
-                            std::int64_t ldb,
-                            std::int64_t stride,
-                            std::int64_t batch_size,
-                            const vector_class<event> &dependencies = {});
+       sycl::event imatcopy_batch(sycl::queue &queue,
+                                  oneapi::mkl::transpose trans,
+                                  std::int64_t m,
+                                  std::int64_t n,
+                                  T alpha,
+                                  const T *ab,
+                                  std::int64_t lda,
+                                  std::int64_t ldb,
+                                  std::int64_t stride,
+                                  std::int64_t batch_size,
+                                  const std::vector<sycl::event> &dependencies = {});
 
 .. container:: section
 
    .. rubric:: Input Parameters
+
+   queue
+      The queue where the routine should be executed.
 
    trans
       Specifies ``op(AB)``, the transposition operation applied to the
       matrices AB.
 
    m
-      Number of rows for each matrix AB on input. Must be at least 0.
+      Number of rows for each matrix ``AB`` on input. Must be at least 0.
 
    n
-      Number of columns for each matrix AB on input. Must be at least 0.
+      Number of columns for each matrix ``AB`` on input. Must be at least 0.
 
    alpha
       Scaling factor for the matrix transpose or copy operation.
 
    ab
-      Array holding the matrices AB. Must have size at least
+      Array holding the matrices ``AB``. Must have size at least
       ``stride*batch_size``.
 
    lda
@@ -406,14 +423,20 @@ matrices is given by the ``batch_size`` parameter.
       or at least ``m`` if AB is transposed. Must be positive.
 
    stride
-      Stride between the different AB matrices. It must be at least
-      ``max(ldb,lda)*max(ka, kb)``, where:
+      Stride between different ``AB`` matrices.
 
-      - ``ka`` is ``m`` if column major layout is used or ``n`` if row major
-         layout is used
+      .. list-table::
+         :header-rows: 1
 
-      - ``kb`` is ``n`` if column major layout is used and  AB is not
-         transposed, or ``m`` otherwise
+         * -
+           - ``AB`` not transposed
+           - ``AB`` transposed
+         * - Column major
+           - ``stride`` must be at least ``max(lda*m, ldb*m)``.
+           - ``stride`` must be at least ``max(lda*m, ldb*n)``.
+         * - Row major
+           - ``stride`` must be at least ``max(lda*n, ldb*n)``.
+           - ``stride`` must be at least ``max(lda*n, ldb*m)``.
 
    batch_size
       Specifies the number of matrices to transpose or copy.
