@@ -21,6 +21,19 @@ groups of matrices. Each group contains matrices with the same parameters.
 
 The matrices are always in a strided format for this API.
 
+   .. list-table::
+      :header-rows: 1
+
+      * -
+        - strided API
+        - group API
+      * - Buffer memory
+        - supported
+        - not supported
+      * - USM pointers
+        - supported
+        - not supported
+
 ``omatadd_batch`` supports the following precisions:
 
    .. list-table::
@@ -38,6 +51,8 @@ omatadd_batch (Buffer Version)
 ------------------------------
 
 .. rubric:: Description
+
+The buffer version of ``omatcopy_batch`` supports only the strided API.
 
 The operation of ``omatadd_batch`` is defined as:
 ::
