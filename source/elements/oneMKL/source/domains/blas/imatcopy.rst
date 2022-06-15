@@ -21,7 +21,7 @@ The operation is defined as:
 
 .. math::
 
-      AB \leftarrow \alpha * op(AB)
+      C \leftarrow \alpha * op(C)
 
 where:
 
@@ -29,9 +29,9 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
 ``alpha`` is a scalar,
 
-``AB`` is a matrix to be transformed in place,
+``C`` is a matrix to be transformed in place,
 
-and ``AB`` is ``m`` x ``n`` on input.
+and ``C`` is ``m`` x ``n`` on input.
 
 ``imatcopy`` supports the following precisions:
 
@@ -59,9 +59,9 @@ imatcopy (Buffer Version)
                      std::int64_t m,
                      std::int64_t n,
                      T alpha,
-                     sycl::buffer<T, 1> &ab,
-                     std::int64_t lda,
-                     std::int64_t ldb);
+                     sycl::buffer<T, 1> &matrix_in_out,
+                     std::int64_t ld_in,
+                     std::int64_t ld_out);
    }
 .. code-block:: cpp
 
@@ -71,9 +71,9 @@ imatcopy (Buffer Version)
                      std::int64_t m,
                      std::int64_t n,
                      T alpha,
-                     sycl::buffer<T, 1> &ab,
-                     std::int64_t lda,
-                     std::int64_t ldb);
+                     sycl::buffer<T, 1> &matrix_in_out,
+                     std::int64_t ld_in,
+                     std::int64_t ld_out);
    }
 
 .. container:: section
@@ -84,20 +84,20 @@ imatcopy (Buffer Version)
       The queue where the routine should be executed.
 
    trans
-      Specifies op(``AB``), the transposition operation applied to the
-      matrix ``AB``. See :ref:`onemkl_datatypes` for more details.
+      Specifies op(``C``), the transposition operation applied to the
+      matrix ``C``. See :ref:`onemkl_datatypes` for more details.
 
    m
-      Number of rows of ``AB`` on input. Must be at least zero.
+      Number of rows of ``C`` on input. Must be at least zero.
 
    n
-      Number of columns of ``AB`` on input. Must be at least zero.
+      Number of columns of ``C`` on input. Must be at least zero.
 
    alpha
       Scaling factor for the matrix transposition or copy.
 
-   ab
-      Buffer holding the input/output matrix ``AB``. Must have size as follows:
+   matrix_in_out
+      Buffer holding the input/output matrix ``C``. Must have size as follows:
 
       .. list-table::
          :header-rows: 1
@@ -106,19 +106,19 @@ imatcopy (Buffer Version)
            - ``trans`` = ``transpose::nontrans``
            - ``trans`` = ``transpose::trans`` or ``trans`` = ``transpose::conjtrans``
          * - Column major
-           - Size of array ``ab`` must be at least max(``lda``, ``ldb``) * ``n``
-           - Size of array ``ab`` must be at least max(``lda``*``n``, ``ldb``*``m``)
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``, ``ld_out``) * ``n``
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``*``n``, ``ld_out``*``m``)
          * - Row major
-           - Size of array ``ab`` must be at least max(``lda``, ``ldb``) * ``m``
-           - Size of array ``ab`` must be at least max(``lda``*``m``, ``ldb``*``n``)
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``, ``ld_out``) * ``m``
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``*``m``, ``ld_out``*``n``)
 
-   lda
-      The leading dimension of the matrix ``AB`` on input. It must be
+   ld_in
+      The leading dimension of the matrix ``C`` on input. It must be
       positive, and must be at least ``m`` if column major layout is
       used, and at least ``n`` if row-major layout is used.
 
-   ldb
-      The leading dimension of the matrix ``AB`` on output. It must be positive.
+   ld_out
+      The leading dimension of the matrix ``C`` on output. It must be positive.
 
       .. list-table::
          :header-rows: 1
@@ -127,18 +127,18 @@ imatcopy (Buffer Version)
            - ``trans`` = ``transpose::nontrans``
            - ``trans`` = ``transpose::trans`` or ``trans`` = ``transpose::conjtrans``
          * - Column major
-           - ``ldb`` must be at least ``m``.
-           - ``ldb`` must be at least ``n``.
+           - ``ld_out`` must be at least ``m``.
+           - ``ld_out`` must be at least ``n``.
          * - Row major
-           - ``ldb`` must be at least ``n``.
-           - ``ldb`` must be at least ``m``.
+           - ``ld_out`` must be at least ``n``.
+           - ``ld_out`` must be at least ``m``.
 
 .. container:: section
 
    .. rubric:: Output Parameters
 
-   ab
-      Output buffer, overwritten by ``alpha`` * op(``AB``).
+   matrix_in_out
+      Output buffer, overwritten by ``alpha`` * op(``C``).
 
 .. container:: section
 
@@ -179,9 +179,9 @@ imatcopy (USM Version)
                             std::int64_t m,
                             std::int64_t n,
                             T alpha,
-                            const T *ab,
-                            std::int64_t lda,
-                            std::int64_t ldb,
+                            const T *matrix_in_out,
+                            std::int64_t ld_in,
+                            std::int64_t ld_out,
                             const std::vector<sycl::event> &dependencies = {});
 .. code-block:: cpp
 
@@ -191,9 +191,9 @@ imatcopy (USM Version)
                             std::int64_t m,
                             std::int64_t n,
                             T alpha,
-                            const T *ab,
-                            std::int64_t lda,
-                            std::int64_t ldb,
+                            const T *matrix_in_out,
+                            std::int64_t ld_in,
+                            std::int64_t ld_out,
                             const std::vector<sycl::event> &dependencies = {});
 
 .. container:: section
@@ -204,20 +204,20 @@ imatcopy (USM Version)
       The queue where the routine will be executed.
 
    trans
-      Specifies op(``AB``), the transposition operation applied to the
-      matrix ``AB``.
+      Specifies op(``C``), the transposition operation applied to the
+      matrix ``C``.
 
    m
-      Number of rows for the matrix ``AB`` on input. Must be at least zero.
+      Number of rows for the matrix ``C`` on input. Must be at least zero.
 
    n
-      Number of columns for the matrix ``AB`` on input. Must be at least zero.
+      Number of columns for the matrix ``C`` on input. Must be at least zero.
 
    alpha
       Scaling factor for the matrix transpose or copy operation.
 
-   ab
-         Pointer to input/output matrix ``AB``. Must have size as follows:
+   matrix_in_out
+         Pointer to input/output matrix ``C``. Must have size as follows:
 
       .. list-table::
          :header-rows: 1
@@ -226,20 +226,20 @@ imatcopy (USM Version)
            - ``trans`` = ``transpose::nontrans``
            - ``trans`` = ``transpose::trans`` or ``trans`` = ``transpose::conjtrans``
          * - Column major
-           - Size of array ``ab`` must be at least max(``lda``, ``ldb``) * ``n``
-           - Size of array ``ab`` must be at least max(``lda``*``n``, ``ldb``*``m``)
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``, ``ld_out``) * ``n``
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``*``n``, ``ld_out``*``m``)
          * - Row major
-           - Size of array ``ab`` must be at least max(``lda``, ``ldb``) * ``m``
-           - Size of array ``ab`` must be at least max(``lda``*``m``, ``ldb``*``n``)
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``, ``ld_out``) * ``m``
+           - Size of array ``matrix_in_out`` must be at least max(``ld_in``*``m``, ``ld_out``*``n``)
 
-   lda
-      Leading dimension of the matrix ``AB`` on input. If matrices are stored
-      using column major layout, ``lda`` must be at least ``m``. If matrices
-      are stored using row major layout, ``lda`` must be at least ``n``. 
+   ld_in
+      Leading dimension of the matrix ``C`` on input. If matrices are stored
+      using column major layout, ``ld_in`` must be at least ``m``. If matrices
+      are stored using row major layout, ``ld_in`` must be at least ``n``. 
       Must be positive.
 
-   ldb
-      Leading dimension of the matrix ``AB`` on output. Must be positive.
+   ld_out
+      Leading dimension of the matrix ``C`` on output. Must be positive.
 
       .. list-table::
          :header-rows: 1
@@ -248,11 +248,11 @@ imatcopy (USM Version)
            - ``trans`` = ``transpose::nontrans``
            - ``trans`` = ``transpose::trans`` or ``trans`` = ``transpose::conjtrans``
          * - Column major
-           - ``ldb`` must be at least ``m``.
-           - ``ldb`` must be at least ``n``.
+           - ``ld_out`` must be at least ``m``.
+           - ``ld_out`` must be at least ``n``.
          * - Row major
-           - ``ldb`` must be at least ``n``.
-           - ``ldb`` must be at least ``m``.
+           - ``ld_out`` must be at least ``n``.
+           - ``ld_out`` must be at least ``m``.
 
    dependencies
       List of events to wait for before starting computation, if any.
@@ -262,8 +262,8 @@ imatcopy (USM Version)
 
    .. rubric:: Output Parameters
 
-   ab
-      Pointer to output matrix ``AB`` overwritten by ``alpha`` * op(``AB``).
+   matrix_in_out
+      Pointer to output matrix ``C`` overwritten by ``alpha`` * op(``C``).
 
 .. container:: section
       

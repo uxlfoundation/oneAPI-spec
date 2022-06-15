@@ -63,8 +63,8 @@ The operation for the strided API is defined as:
 ::
 
    for i = 0 … batch_size – 1
-       AB is a matrix at offset i * stride in ab_array
-       AB = alpha * op(AB)
+       C is a matrix at offset i * stride in matrix_array_in_out
+       C = alpha * op(C)
    end for
 
 where:
@@ -73,13 +73,13 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
 ``alpha`` is a scalar,
 
-``AB`` is a matrix to be transformed in place,
+``C`` is a matrix to be transformed in place,
 
-and ``AB`` is ``m`` x ``n``.
+and ``C`` is ``m`` x ``n``.
 
-The ``ab_array`` buffer contains all the input matrices. The stride
+The ``matrix_array_in_out`` buffer contains all the input matrices. The stride
 between matrices is given by the ``stride`` parameter. The total
-number of matrices in ``ab_array`` is given by the ``batch_size``
+number of matrices in ``matrix_array_in_out`` is given by the ``batch_size``
 parameter.
 
 **Strided API**
@@ -94,9 +94,9 @@ parameter.
                            std::int64_t m,
                            std::int64_t n,
                            T alpha,
-                           cl::sycl::buffer<T, 1> &ab,
-                           std::int64_t lda,
-                           std::int64_t ldb,
+                           sycl::buffer<T, 1> &matrix_array_in_out,
+                           std::int64_t ld_in,
+                           std::int64_t ld_out,
                            std::int64_t stride,
                            std::int64_t batch_size);
    }
@@ -108,9 +108,9 @@ parameter.
                            std::int64_t m,
                            std::int64_t n,
                            T alpha,
-                           cl::sycl::buffer<T, 1> &ab,
-                           std::int64_t lda,
-                           std::int64_t ldb,
+                           sycl::buffer<T, 1> &matrix_array_in_out,
+                           std::int64_t ld_in,
+                           std::int64_t ld_out,
                            std::int64_t stride,
                            std::int64_t batch_size);
    }
@@ -123,58 +123,58 @@ parameter.
       The queue where the routine should be executed.
 
    trans
-      Specifies op(``AB``), the transposition operation applied to the
-      matrices ``AB``. See :ref:`onemkl_datatypes` for more details.
+      Specifies op(``C``), the transposition operation applied to the
+      matrices ``C``. See :ref:`onemkl_datatypes` for more details.
 
    m
-      Number of rows of each matrix ``AB`` on input. Must be at least zero.
+      Number of rows of each matrix ``C`` on input. Must be at least zero.
 
 
    n
-      Number of columns of each matrix ``AB`` on input. Must be at least zero.
+      Number of columns of each matrix ``C`` on input. Must be at least zero.
 
    alpha
       Scaling factor for the matrix transpositions or copies.
 
-   ab_array
-      Buffer holding the input matrices ``AB`` with size ``stride`` * ``batch_size``.
+   matrix_array_in_out
+      Buffer holding the input matrices ``C`` with size ``stride`` * ``batch_size``.
 
-   lda
-      The leading dimension of the matrices ``AB`` on input. It must be
+   ld_in
+      The leading dimension of the matrices ``C`` on input. It must be
       positive, and must be at least ``m`` if column major layout is
       used, and at least ``n`` if row-major layout is used.
 
-   ldb
-      The leading dimension of the matrices ``AB`` on output. It must be positive.
+   ld_out
+      The leading dimension of the matrices ``C`` on output. It must be positive.
 
       .. list-table::
          :header-rows: 1
 
          * -
-           - ``AB`` not transposed
-           - ``AB`` transposed
+           - ``C`` not transposed
+           - ``C`` transposed
          * - Column major
-           - ``ldb`` must be at least ``m``.
-           - ``ldb`` must be at least ``n``.
+           - ``ld_out`` must be at least ``m``.
+           - ``ld_out`` must be at least ``n``.
          * - Row major
-           - ``ldb`` must be at least ``n``.
-           - ``ldb`` must be at least ``m``.
+           - ``ld_out`` must be at least ``n``.
+           - ``ld_out`` must be at least ``m``.
 
    stride
-      Stride between different ``AB`` matrices.
+      Stride between different ``C`` matrices.
 
       .. list-table::
          :header-rows: 1
 
          * -
-           - ``AB`` not transposed
-           - ``AB`` transposed
+           - ``C`` not transposed
+           - ``C`` transposed
          * - Column major
-           - ``stride`` must be at least ``max(lda*m, ldb*m)``.
-           - ``stride`` must be at least ``max(lda*m, ldb*n)``.
+           - ``stride`` must be at least ``max(ld_in*m, ld_out*m)``.
+           - ``stride`` must be at least ``max(ld_in*m, ld_out*n)``.
          * - Row major
-           - ``stride`` must be at least ``max(lda*n, ldb*n)``.
-           - ``stride`` must be at least ``max(lda*n, ldb*m)``.
+           - ``stride`` must be at least ``max(ld_in*n, ld_out*n)``.
+           - ``stride`` must be at least ``max(ld_in*n, ld_out*m)``.
 
    batch_size
       Specifies the number of matrix transposition or copy operations to perform.
@@ -183,9 +183,9 @@ parameter.
 
    .. rubric:: Output Parameters
 
-   ab_array
+   matrix_array_in_out
       Output buffer, overwritten by ``batch_size`` matrix copy or transposition
-      operations of the form ``alpha`` * op(``AB``).
+      operations of the form ``alpha`` * op(``C``).
 
 .. container:: section
 
@@ -225,10 +225,10 @@ The operation for the group API is defined as:
 
    idx = 0
    for i = 0 … group_count – 1
-       m,n, alpha, lda, ldb and group_size at position i in their respective arrays
+       m,n, alpha, ld_in, ld_out and group_size at position i in their respective arrays
        for j = 0 … group_size – 1
-           AB is a matrix at position idx in ab_array
-           AB = alpha * op(AB)
+           C is a matrix at position idx in matrix_array_in_out
+           C = alpha * op(C)
            idx := idx + 1
        end for
    end for
@@ -237,8 +237,8 @@ The operation for the strided API is defined as:
 ::
 
    for i = 0 … batch_size – 1
-       AB is a matrix at offset i * stride in ab_array
-       AB = alpha * op(AB)
+       C is a matrix at offset i * stride in matrix_array_in_out
+       C = alpha * op(C)
    end for
    
 where:
@@ -247,19 +247,19 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
 ``alpha`` is a scalar,
 
-``AB`` is a matrix to be transformed in place,
+``C`` is a matrix to be transformed in place,
 
-and ``AB`` is ``m`` x ``n``.
+and ``C`` is ``m`` x ``n``.
 
-For the group API, the matrices are given by arrays of pointers. AB
-represents a matrix stored at the address pointed to by ``ab_array``.
-The number of entries in ``ab_array`` is given by:
+For the group API, the matrices are given by arrays of pointers. ``C``
+represents a matrix stored at the address pointed to by ``matrix_array_in_out``.
+The number of entries in ``matrix_array_in_out`` is given by:
 
 .. math::
 
       total\_batch\_count = \sum_{i=0}^{group\_count-1}group\_size[i]    
 
-For the strided API, the single array AB contains all the matrices
+For the strided API, the single array C contains all the matrices
 to be transformed in place. The locations of the individual matrices within
 the buffer or array are given by stride lengths, while the number of
 matrices is given by the ``batch_size`` parameter.
@@ -277,9 +277,9 @@ matrices is given by the ``batch_size`` parameter.
                             const std::int64_t *m_array,
                             const std::int64_t *n_array,
                             const T *alpha_array,
-                            T **ab_array,
-                            const std::int64_t *lda_array,
-                            const std::int64_t *ldb_array,
+                            T **matrix_array_in_out,
+                            const std::int64_t *ld_in_array,
+                            const std::int64_t *ld_out_array,
                             std::int64_t group_count,
                             const std::int64_t *groupsize,
                             const std::vector<sycl::event> &dependencies = {});
@@ -292,9 +292,9 @@ matrices is given by the ``batch_size`` parameter.
                             const std::int64_t *m_array,
                             const std::int64_t *n_array,
                             const T *alpha_array,
-                            T **ab_array,
-                            const std::int64_t *lda_array,
-                            const std::int64_t *ldb_array,
+                            T **matrix_array_in_out,
+                            const std::int64_t *ld_in_array,
+                            const std::int64_t *ld_out_array,
                             std::int64_t group_count,
                             const std::int64_t *groupsize,
                             const std::vector<sycl::event> &dependencies = {});
@@ -309,38 +309,38 @@ matrices is given by the ``batch_size`` parameter.
 
    trans_array
       Array of size ``group_count``. Each element ``i`` in the array specifies
-      ``op(AB)`` the transposition operation applied to the matrices AB.
+      ``op(C)`` the transposition operation applied to the matrices C.
 
    m_array
-      Array of size ``group_count`` of number of rows of AB on input. Each
+      Array of size ``group_count`` of number of rows of C on input. Each
       must be at least 0.
 
    n_array
-      Array of size ``group_count`` of number of columns of AB on input. Each
+      Array of size ``group_count`` of number of columns of C on input. Each
       must be at least 0.
 
    alpha_array
       Array of size ``group_count`` containing scaling factors for the matrix
       transpositions or copies.
 
-   ab_array
+   matrix_array_in_out
       Array of size ``total_batch_count``, holding pointers to arrays used to
-      store AB matrices.
+      store C matrices.
 
-   lda_array
+   ld_in_array
       Array of size ``group_count``. The leading dimension of the matrix input
-      AB. If matrices are stored using column major layout, ``lda_array[i]``
+      ``C``. If matrices are stored using column major layout, ``ld_in_array[i]``
       must be at least ``m_array[i]``. If matrices are stored using row major
-      layout, ``lda_array[i]`` must be at least ``n_array[i]``.
+      layout, ``ld_in_array[i]`` must be at least ``n_array[i]``.
       Must be positive.
 
-   ldb_array
+   ld_out_array
       Array of size ``group_count``. The leading dimension of the output matrix
-      AB. Each entry ``ldb_array[i]`` must be positive and at least:
+      ``C``. Each entry ``ld_out_array[i]`` must be positive and at least:
 
-      - ``m_array[i]`` if column major layout is used and AB is not transposed
+      - ``m_array[i]`` if column major layout is used and ``C`` is not transposed
 
-      - ``m_array[i]`` if row major layout is used and AB is transposed (AB')
+      - ``m_array[i]`` if row major layout is used and ``C`` is transposed
 
       - ``n_array[i]`` otherwise
 
@@ -360,10 +360,10 @@ matrices is given by the ``batch_size`` parameter.
 
    .. rubric:: Output Parameters
 
-   ab_array
-      Output array of pointers to AB matrices, overwritten by
+   matrix_array_in_out
+      Output array of pointers to ``C`` matrices, overwritten by
       ``total_batch_count`` matrix transpose or copy operations of the form
-      ``alpha*op(AB)``.
+      ``alpha*op(C)``.
 
 .. container:: section
 
@@ -384,9 +384,9 @@ matrices is given by the ``batch_size`` parameter.
                                   std::int64_t m,
                                   std::int64_t n,
                                   T alpha,
-                                  const T *ab,
-                                  std::int64_t lda,
-                                  std::int64_t ldb,
+                                  const T *matrix_array_in_out,
+                                  std::int64_t ld_in,
+                                  std::int64_t ld_out,
                                   std::int64_t stride,
                                   std::int64_t batch_size,
                                   const std::vector<sycl::event> &dependencies = {});
@@ -398,9 +398,9 @@ matrices is given by the ``batch_size`` parameter.
                                   std::int64_t m,
                                   std::int64_t n,
                                   T alpha,
-                                  const T *ab,
-                                  std::int64_t lda,
-                                  std::int64_t ldb,
+                                  const T *matrix_array_in_out,
+                                  std::int64_t ld_in,
+                                  std::int64_t ld_out,
                                   std::int64_t stride,
                                   std::int64_t batch_size,
                                   const std::vector<sycl::event> &dependencies = {});
@@ -413,50 +413,50 @@ matrices is given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    trans
-      Specifies ``op(AB)``, the transposition operation applied to the
-      matrices AB.
+      Specifies ``op(C)``, the transposition operation applied to the
+      matrices C.
 
    m
-      Number of rows for each matrix ``AB`` on input. Must be at least 0.
+      Number of rows for each matrix ``C`` on input. Must be at least 0.
 
    n
-      Number of columns for each matrix ``AB`` on input. Must be at least 0.
+      Number of columns for each matrix ``C`` on input. Must be at least 0.
 
    alpha
       Scaling factor for the matrix transpose or copy operation.
 
-   ab
-      Array holding the matrices ``AB``. Must have size at least
+   matrix_array_in_out
+      Array holding the matrices ``C``. Must have size at least
       ``stride*batch_size``.
 
-   lda
-      Leading dimension of the AB matrices on input. If matrices are stored
-      using column major layout, ``lda`` must be at least ``m``. If matrices
-      are stored using row major layout, ``lda`` must be at least ``n``. 
+   ld_in
+      Leading dimension of the ``C`` matrices on input. If matrices are stored
+      using column major layout, ``ld_in`` must be at least ``m``. If matrices
+      are stored using row major layout, ``ld_in`` must be at least ``n``. 
       Must be positive.
 
-   ldb
-      Leading dimension of the AB matrices on output. If matrices are stored
-      using column major layout, ``ldb`` must be at least ``m`` if AB is not
-      transposed or ``n`` if AB is transposed. If matrices are stored using
-      row major layout, ``ldb`` must be at least ``n`` if AB is not transposed
-      or at least ``m`` if AB is transposed. Must be positive.
+   ld_out
+      Leading dimension of the ``C`` matrices on output. If matrices are stored
+      using column major layout, ``ld_out`` must be at least ``m`` if ``C`` is not
+      transposed or ``n`` if ``C`` is transposed. If matrices are stored using
+      row major layout, ``ld_out`` must be at least ``n`` if ``C`` is not transposed
+      or at least ``m`` if ``C`` is transposed. Must be positive.
 
    stride
-      Stride between different ``AB`` matrices.
+      Stride between different ``C`` matrices within ``matrix_array_in_out``.
 
       .. list-table::
          :header-rows: 1
 
          * -
-           - ``AB`` not transposed
-           - ``AB`` transposed
+           - ``C`` not transposed
+           - ``C`` transposed
          * - Column major
-           - ``stride`` must be at least ``max(lda*m, ldb*m)``.
-           - ``stride`` must be at least ``max(lda*m, ldb*n)``.
+           - ``stride`` must be at least ``max(ld_in*m, ld_out*m)``.
+           - ``stride`` must be at least ``max(ld_in*m, ld_out*n)``.
          * - Row major
-           - ``stride`` must be at least ``max(lda*n, ldb*n)``.
-           - ``stride`` must be at least ``max(lda*n, ldb*m)``.
+           - ``stride`` must be at least ``max(ld_in*n, ld_out*n)``.
+           - ``stride`` must be at least ``max(ld_in*n, ld_out*m)``.
 
    batch_size
       Specifies the number of matrices to transpose or copy.
@@ -469,9 +469,9 @@ matrices is given by the ``batch_size`` parameter.
 
    .. rubric:: Output Parameters
 
-   ab
+   matrix_array_in_out
       Output array, overwritten by ``batch_size`` matrix transposition or copy
-      operations of the form ``alpha*op(AB)``.
+      operations of the form ``alpha*op(C)``.
 
 .. container:: section
       
