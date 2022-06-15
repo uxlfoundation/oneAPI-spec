@@ -19,7 +19,7 @@ copies or transpositions. They are batched versions of :ref:`onemkl_blas_imatcop
 but the ``imatcopy_batch`` routines perform their operations with
 groups of matrices. Each group contains matrices with the same parameters.
 
-There is a *strided API*, in wich the matrices in a batch are a set
+There is a *strided API*, in which the matrices in a batch are a set
 distance away from each other in memory and in which all matrices
 share the same parameters (for example matrix size), and a more
 flexible *group API* where each group of matrices has the same
