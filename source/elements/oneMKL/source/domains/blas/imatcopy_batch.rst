@@ -64,7 +64,7 @@ The operation for the strided API is defined as:
 
    for i = 0 … batch_size – 1
        C is a matrix at offset i * stride in matrix_array_in_out
-       C = alpha * op(C)
+       C := alpha * op(C)
    end for
 
 where:
@@ -228,7 +228,7 @@ The operation for the group API is defined as:
        m,n, alpha, ld_in, ld_out and group_size at position i in their respective arrays
        for j = 0 … group_size – 1
            C is a matrix at position idx in matrix_array_in_out
-           C = alpha * op(C)
+           C := alpha * op(C)
            idx := idx + 1
        end for
    end for
@@ -238,7 +238,7 @@ The operation for the strided API is defined as:
 
    for i = 0 … batch_size – 1
        C is a matrix at offset i * stride in matrix_array_in_out
-       C = alpha * op(C)
+       C := alpha * op(C)
    end for
    
 where:

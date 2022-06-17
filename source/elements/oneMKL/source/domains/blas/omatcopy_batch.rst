@@ -64,7 +64,7 @@ The operation for the strided API is defined as:
 
    for i = 0 … batch_size – 1
        A and B are matrices at offset i * stridea in a and i * strideb in b
-       B = alpha * op(A)
+       B := alpha * op(A)
    end for
 
 where:
@@ -243,7 +243,7 @@ The operation for the group API is defined as:
        m, n, alpha, lda, ldb and group_size at position i in their respective arrays
        for j = 0 … group_size – 1
            A and B are matrices at position idx in their respective arrays
-           B = alpha * op(A)
+           B := alpha * op(A)
            idx := idx + 1
        end for
    end for
@@ -253,9 +253,9 @@ The operation for the strided API is defined as:
 
    for i = 0 … batch_size – 1
        A and B are matrices at offset i * stridea in a and i * strideb in b
-       B = alpha * op(A)
+       B := alpha * op(A)
    end for
-   
+
 where:
 
 op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,

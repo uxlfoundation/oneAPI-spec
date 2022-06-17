@@ -61,7 +61,7 @@ The operation of ``omatadd_batch`` is defined as:
        A is a matrix at offset i * stridea in a
        B is a matrix at offset i * strideb in b
        C is a matrix at offset i * stridec in c
-       C = alpha * op(A) + beta * op(B)
+       C := alpha * op(A) + beta * op(B)
    end for
 
 where:
@@ -295,7 +295,7 @@ The operation for the strided API is defined as:
        A is a matrix at offset i * stridea in a
        B is a matrix at offset i * strideb in b
        C is a matrix at offset i * stridec in c
-       C = alpha * op(A) + beta * op(B)
+       C := alpha * op(A) + beta * op(B)
    end for
    
 where:
