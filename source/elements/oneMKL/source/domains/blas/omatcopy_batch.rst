@@ -24,7 +24,10 @@ distance away from each other in memory and in which all matrices
 share the same parameters (for example matrix size), and a more
 flexible *group API* where each group of matrices has the same
 parameters but the user may provide multiple groups that have
-different parameters.
+different parameters. The group API argument structure is better
+suited to USM pointers than to ``sycl::buffer`` arguments, so we
+only implement it for USM inputs. The strided API works with both USM
+and buffer memory.
 
    .. list-table::
       :header-rows: 1
