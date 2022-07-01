@@ -32,6 +32,8 @@ where:
       :header-rows: 1
 
       * -  T 
+      * -  ``half`` 
+      * -  ``bfloat16`` 
       * -  ``float`` 
       * -  ``double`` 
       * -  ``std::complex<float>`` 

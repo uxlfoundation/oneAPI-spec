@@ -26,6 +26,10 @@ The ``dot`` routines perform a dot product between two vectors:
 
       * -  T 
         -  T_res 
+      * -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 

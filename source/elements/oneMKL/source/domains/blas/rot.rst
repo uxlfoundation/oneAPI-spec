@@ -35,6 +35,10 @@ the sum of two of these scalar-vector products as follow:
 
       * -  T 
         -  T_scalar 
+      * -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 

@@ -32,6 +32,10 @@ where:
 
       * -  T 
         -  T_scalar 
+      * -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 
