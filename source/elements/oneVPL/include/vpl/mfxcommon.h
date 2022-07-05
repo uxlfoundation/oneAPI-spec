@@ -550,10 +550,10 @@ typedef struct {
     mfxU32           LUIDValid;                     /*!< Boolean value that will be 1 if DeviceLUID contains a valid LUID
                                                          and LUIDDeviceNodeMask contains a valid node mask,
                                                          and 0 if they do not. */
-    mfxU32           DRMRenderNodeNum;              /*!< Number of the DRM render node from the path /dev/dri/RenderD<num>.
+    mfxU32           DRMRenderNodeNum;              /*!< Number of the DRM render node from the path /dev/dri/RenderD\<num\>.
                                                          Value equals to 0 means that this field doesn't contain valid DRM Render
                                                          Node number.*/
-    mfxU32           DRMPrimaryNodeNum;             /*!< Number of the DRM primary node from the path /dev/dri/card<num>.
+    mfxU32           DRMPrimaryNodeNum;             /*!< Number of the DRM primary node from the path /dev/dri/card\<num\>.
                                                          Value equals to 0x7FFFFFFF means that this field doesn't contain valid DRM Primary
                                                          Node number.*/
     mfxU8            reserved1[20];                 /*!< Reserved for future use. */
