@@ -30,6 +30,10 @@ where:
 
       * -  T 
         -  T_res 
+      * -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 
