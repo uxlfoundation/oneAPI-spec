@@ -7,7 +7,7 @@ spin_mutex
 ==========
 **[mutex.spin_mutex]**
 
-A ``spin_mutext`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>` using a spin lock.
+A ``spin_mutex`` is a class that models the :doc:`Mutex requirement <../named_requirements/mutexes/mutex>` using a spin lock.
 The ``spin_mutex`` class satisfies all requirements of mutex type from the [thread.mutex.requirements] ISO C++ section.
 The ``spin_mutex`` class is not fair or recursive.
 
