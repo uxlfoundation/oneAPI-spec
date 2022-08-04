@@ -19,7 +19,15 @@ additions. They are batched versions of :ref:`onemkl_blas_omatadd`,
 but the ``omatadd_batch`` routines perform their operations with
 groups of matrices. Each group contains matrices with the same parameters.
 
-The matrices are always in a strided format for this API.
+There is a *strided API*, in which the matrices in a batch are a set
+distance away from each other in memory and in which all matrices
+share the same parameters (for example matrix size), and a more
+flexible *group API* where each group of matrices has the same
+parameters but the user may provide multiple groups that have
+different parameters. The group API argument structure is better
+suited to USM pointers than to ``sycl::buffer`` arguments, so we
+only implement it for USM inputs. The strided API works with both USM
+and buffer memory.
 
    .. list-table::
       :header-rows: 1
@@ -32,7 +40,7 @@ The matrices are always in a strided format for this API.
         - not supported
       * - USM pointers
         - supported
-        - not supported
+        - supported
 
 ``omatadd_batch`` supports the following precisions:
 
@@ -83,6 +91,8 @@ The ``a`` and ``b`` buffers contain all the input matrices while the
 individual matrices within the buffer are given by the ``stride_a``,
 ``stride_b``, and ``stride_c`` parameters, while the total number of
 matrices in each buffer is given by the ``batch_size`` parameter.
+
+**Strided API**
 
 .. rubric:: Syntax
 
@@ -282,11 +292,24 @@ matrices in each buffer is given by the ``batch_size`` parameter.
 .. _onemkl_blas_omatadd_batch_usm:
    
 omatadd_batch (USM Version)
-----------------------------
+---------------------------
 
 .. rubric:: Description
 
-The matrices are always in a strided format for this API.
+The USM version of ``omatadd_batch`` supports the group API and the strided API.
+
+The operation for the group API is defined as:
+::
+
+   idx = 0
+   for i = 0 … group_count – 1
+       m, n, alpha, beta, lda, ldb, ldc and group_size at position i in their respective arrays
+       for j = 0 … group_size – 1
+           A, B and C are matrices at position idx in their respective arrays
+           C := alpha * op(A) + beta * op(B)
+           idx := idx + 1
+       end for
+   end for
 
 The operation for the strided API is defined as:
 ::
@@ -297,7 +320,7 @@ The operation for the strided API is defined as:
        C is a matrix at offset i * stridec in c
        C := alpha * op(A) + beta * op(B)
    end for
-   
+
 where:
 
 op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
@@ -312,14 +335,214 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
 and ``B`` is ``m`` x ``n`` if the ``op(B)`` is not transposed or ``n`` by ``m`` if it is.
 
-The ``a`` and ``b`` arrays contain all the input matrices while the
-``c`` array contains all the output matrices. The locations of the
-individual matrices within the buffer are given by the ``stride_a``,
+For the group API, the matrices are given by arrays of pointers. A, B, and C
+represent matrices stored at addresses pointed to by ``a_array``, ``b_array``,
+and ``c_array`` respectively. The number of entries in ``a_array``, ``b_array``,
+and ``c_array`` is given by:
+
+.. math::
+
+      total\_batch\_count = \sum_{i=0}^{group\_count-1}group\_size[i]    
+
+For the strided API, the ``a`` and ``b`` arrays contain all the input matrices
+while the ``c`` array contains all the output matrices. The locations of the
+individual matrices within the array are given by the ``stride_a``,
 ``stride_b``, and ``stride_c`` parameters, while the total number of
-matrices in each buffer is given by the ``batch_size`` parameter.
+matrices in each array is given by the ``batch_size`` parameter.
 
 
-**API**
+**Group API**
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::column_major {
+       sycl::event omatadd_batch(sycl::queue &queue,
+                                 const oneapi::mkl::transpose *transa_array,
+                                 const oneapi::mkl::transpose *transb_array,
+                                 const std::int64_t *m_array,
+                                 const std::int64_t *n_array,
+                                 const T *alpha_array,
+                                 const T **a_array,
+                                 const std::int64_t *lda_array,
+                                 const T *beta_array,
+                                 const T **b_array,
+                                 const std::int64_t *ldb_array,
+                                 const T **c_array,
+                                 const std::int64_t *ldc_array,
+                                 std::int64_t group_count,
+                                 const std::int64_t *groupsize,
+                                 const std::vector<sycl::event> &dependencies = {});
+   }
+.. code-block:: cpp
+
+   namespace oneapi::mkl::blas::row_major {
+       sycl::event omatadd_batch(sycl::queue &queue,
+                                 const oneapi::mkl::transpose *transa_array,
+                                 const oneapi::mkl::transpose *transb_array,
+                                 const std::int64_t *m_array,
+                                 const std::int64_t *n_array,
+                                 const T *alpha_array,
+                                 const T **a_array,
+                                 const std::int64_t *lda_array,
+                                 const T *beta_array,
+                                 const T **b_array,
+                                 const std::int64_t *ldb_array,
+                                 const T **c_array,
+                                 const std::int64_t *ldc_array,
+                                 std::int64_t group_count,
+                                 const std::int64_t *groupsize,
+                                 const std::vector<sycl::event> &dependencies = {});
+   }
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+   queue
+      The queue where the routine should be executed.
+
+   transa_array
+      Array of size ``group_count``. Each element ``i`` in the array specifies
+      ``op(A)`` the transposition operation applied to the matrices A.
+
+   transb_array
+      Array of size ``group_count``. Each element ``i`` in the array specifies
+      ``op(B)`` the transposition operation applied to the matrices B.
+
+   m_array
+      Array of size ``group_count`` of number of rows of ``C``. Each
+      must be at least 0.
+
+   n_array
+      Array of size ``group_count`` of number of columns of ``C``. Each
+      must be at least 0.
+
+   alpha_array
+      Array of size ``group_count`` containing scaling factors for the matrices
+      ``A``.
+
+   a_array
+      Array of size ``total_batch_count``, holding pointers to arrays used to
+      store ``A`` matrices. The array allocated for each ``A`` matrix of the group
+      ``i`` must be of size at least:
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``transa[i]`` = ``transpose::nontrans``
+           - ``transa[i]`` = ``transpose::trans`` or ``transa[i]`` = ``transpose::conjtrans``
+         * - Column major
+           - ``lda_array[i]`` * ``n_array[i]``
+           - ``lda_array[i]`` * ``m_array[i]``
+         * - Row major
+           - ``lda_array[i]`` * ``m_array[i]``
+           - ``lda_array[i]`` * ``n_array[i]``
+
+   lda_array
+      Array of size ``group_count`` of leading dimension of the A matrices.
+      All must be positive and satisfy:
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``transa[i]`` = ``transpose::nontrans``
+           - ``transa[i]`` = ``transpose::trans`` or ``transa`` = ``transpose::conjtrans``
+         * - Column major
+           - ``lda_array[i]`` must be at least ``m_array[i]``.
+           - ``lda_array[i]`` must be at least ``n_array[i]``.
+         * - Row major
+           - ``lda_array[i]`` must be at least ``n_array[i]``.
+           - ``lda_array[i]`` must be at least ``m_array[i]``.
+
+   beta_array
+      Array of size ``group_count`` containing scaling factors for the matrices
+      ``B``.
+
+   b_array
+      Array of size ``total_batch_count`` of pointers used to store the B matrices.
+      The array allocated for each B matrix of the group ``i`` must be of size at least:
+ 
+      .. list-table::
+         :header-rows: 1
+     
+         * -
+           - ``transb[i]`` = ``transpose::nontrans``
+           - ``transb[i]`` = ``transpose::trans`` or ``transb[i]`` = ``transpose::conjtrans``
+         * - Column major
+           - ``ldb_array[i]`` * ``n_array[i]``
+           - ``ldb_array[i]`` * ``m_array[i]``
+         * - Row major
+           - ``ldb_array[i]`` * ``m_array[i]``
+           - ``ldb_array[i]`` * ``n_array[i]``
+
+   ldb_array
+      Array of size ``group_count``. The leading dimension of ``B`` matrices.
+      All must be positive and satisfy:
+
+      .. list-table::
+         :header-rows: 1
+
+         * -
+           - ``transb[i]`` = ``transpose::nontrans``
+           - ``transb[i]`` = ``transpose::trans`` or ``transb[i]`` = ``transpose::conjtrans``
+         * - Column major
+           - ``ldb_array[i]`` must be at least ``m_array[i]``.
+           - ``ldb_array[i]`` must be at least ``n_array[i]``.
+         * - Row major
+           - ``ldb_array[i]`` must be at least ``n_array[i]``.
+           - ``ldb_array[i]`` must be at least ``m_array[i]``.
+
+   c_array
+      Array of size ``total_batch_count`` of pointers used to store the ``C`` output
+      matrices. The array allocated for each C matrix of the group ``i`` must be of size
+      at least:
+ 
+      .. list-table::
+
+         * - Column major
+           - ``ldc_array[i]`` * ``n_array[i]``
+         * - Row major
+           - ``ldc_array[i]`` * ``m_array[i]``
+
+   ldc_array
+      Array of size ``group_count``. The leading dimension of the ``C`` matrices. If
+      matrices are stored using column major layout, ``ldc_array[i]`` must be at least
+      ``m_array[i]``. If matrices are stored using row major layout, ``ldc_array[i]``
+      must be at least ``n_array[i]``. All entries must be positive.
+
+   group_count
+      Number of groups. Must be at least 0.
+
+   group_size
+      Array of size ``group_count``. The element ``group_size[i]`` is the
+      number of matrices in the group ``i``. Each element in ``group_size``
+      must be at least 0.
+
+   dependencies
+      List of events to wait for before starting computation, if any.
+      If omitted, defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+   c_array
+      Output array of pointers to C matrices, overwritten by
+      ``total_batch_count`` matrix addition operations of the form
+      ``alpha*op(A) + beta*op(B)``.
+
+.. container:: section
+
+   .. rubric:: Return Values
+
+   Output event to wait on to ensure computation is complete.
+
+
+**Strided API**
 
 .. rubric:: Syntax
 

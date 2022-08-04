@@ -110,7 +110,7 @@ omatadd (Buffer Version)
       Number of columns for the result matrix ``C``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrices ``A``.
+      Scaling factor for the matrix ``A``.
 
    a
       Buffer holding the input matrix ``A``.
@@ -148,8 +148,7 @@ omatadd (Buffer Version)
       Scaling factor for the matrix ``B``.
 
    b
-      Buffer holding the input matrix ``B``. Must have size at least
-      ``stride_b`` * ``batch_size``.
+      Buffer holding the input matrix ``B``. Must have size at least:
 
       .. list-table::
          :header-rows: 1

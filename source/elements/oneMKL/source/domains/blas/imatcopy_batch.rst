@@ -303,7 +303,7 @@ matrices is given by the ``batch_size`` parameter.
                             const std::vector<sycl::event> &dependencies = {});
    }
 
-.. container:: secion
+.. container:: section
 
    .. rubric:: Input Parameters
 

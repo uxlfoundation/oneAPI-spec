@@ -323,7 +323,7 @@ the ``batch_size`` parameter.
                                   const std::vector<sycl::event> &dependencies = {});
    }
 
-.. container:: secion
+.. container:: section
 
    .. rubric:: Input Parameters
 
@@ -332,10 +332,10 @@ the ``batch_size`` parameter.
 
    trans_array
       Array of size ``group_count``. Each element ``i`` in the array specifies
-      ``op(AB)`` the transposition operation applied to the matrices A.
+      ``op(A)`` the transposition operation applied to the matrices A.
 
    m_array
-      Array of size ``group_count`` of number of rows of At. Each
+      Array of size ``group_count`` of number of rows of A. Each
       must be at least 0.
 
    n_array
@@ -358,8 +358,8 @@ the ``batch_size`` parameter.
 
    b_array
       Array of size ``total_batch_count`` of pointers used to store B matrices.
-      If matrices are stored using column major layout, the array allocated
-      for each B matrix of the group ``i`` must be of size at least:
+      The array allocated for each B matrix of the group ``i`` must be of size
+      at least:
  
       .. list-table::
          :header-rows: 1
