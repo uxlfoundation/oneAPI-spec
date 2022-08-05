@@ -41,6 +41,8 @@ BLAS-like Extensions
            -     Computes an in-place matrix transposition or copy.
          * -     :ref:`onemkl_blas_omatcopy`
            -     Computes an out-of-place matrix transposition or copy.
+         * -     :ref:`onemkl_blas_omatcopy2`
+           -     Computes a two-strided out-of-place matrix transposition or copy.
          * -     :ref:`onemkl_blas_omatadd`
            -     Computes scaled matrix addition with possibly transposed arguments.
          * -     :ref:`onemkl_blas_imatcopy_batch`
