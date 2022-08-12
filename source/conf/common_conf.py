@@ -53,8 +53,6 @@ env = {
 
 prolog_template = string.Template(
     r"""
-.. |dpcpp_full_name| replace:: oneAPI Data Parallel C++
-.. |dpcpp_version| replace:: $oneapi_version
 .. |dpl_full_name| replace:: oneAPI DPC++ Library
 .. |dpl_version| replace:: $oneapi_version
 .. |ccl_full_name| replace:: oneAPI Collective Communications Library
