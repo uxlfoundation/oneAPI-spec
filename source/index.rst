@@ -20,7 +20,7 @@ for creating parallel applications:
 
    introduction
    architecture
-   elements/dpcpp/source/index
+   elements/sycl/source/index
    elements/oneDPL/source/index
    elements/oneDNN/source/index
    elements/oneCCL/source/index

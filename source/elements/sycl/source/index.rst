@@ -2,11 +2,11 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onedpcpp-section:
+.. _sycl-section:
 
-=====
-DPC++
-=====
+====
+SYCL
+====
 
 Overview
 --------
