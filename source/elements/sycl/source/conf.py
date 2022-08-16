@@ -21,7 +21,7 @@ import sys
 from os.path import join
 
 
-project = 'dpcpp'
+project = 'sycl'
 
 repo_root = join('..', '..', '..', '..')
 exec(open(join(repo_root, 'source', 'conf', 'common_conf.py')).read())

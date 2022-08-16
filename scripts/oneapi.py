@@ -284,7 +284,7 @@ dirs = [
     'oneMKL',
     'oneTBB',
     'oneVPL',
-    'dpcpp',
+    'sycl',
     'l0',
     'oneDPL',
     'oneDNN',
