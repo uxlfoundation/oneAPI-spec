@@ -101,5 +101,5 @@ geam (USM Version)
    }
 
 
-   **Parent topic:** :ref:`blas-like-extensions`
+**Parent topic:** :ref:`blas-like-extensions`
 

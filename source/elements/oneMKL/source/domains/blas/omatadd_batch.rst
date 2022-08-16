@@ -92,6 +92,14 @@ individual matrices within the buffer are given by the ``stride_a``,
 ``stride_b``, and ``stride_c`` parameters, while the total number of
 matrices in each buffer is given by the ``batch_size`` parameter.
 
+In general, the ``a``, ``b``, and ``c`` buffers should not overlap in
+memory, with the exception of the following in-place operations:
+
+   - ``a`` and ``c`` may point to the same memory if ``beta`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(A)`` is non-transpose and all the ``A`` matrices have the same parameters as all the respective ``C`` matrices;
+
+   - ``b`` and ``c`` may point to the same memory if ``alpha`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(B)`` is non-transpose and all the the ``B`` matrices have the same parameters as all the respective ``C`` matrices.
+
+
 **Strided API**
 
 .. rubric:: Syntax
@@ -335,7 +343,7 @@ op(X) is one of op(X) = X, or op(X) = X\ :sup:`T`, or op(X) = X\ :sup:`H`,
 
 and ``B`` is ``m`` x ``n`` if the ``op(B)`` is not transposed or ``n`` by ``m`` if it is.
 
-For the group API, the matrices are given by arrays of pointers. A, B, and C
+For the group API, the matrices are given by arrays of pointers. ``A``, ``B``, and ``C``
 represent matrices stored at addresses pointed to by ``a_array``, ``b_array``,
 and ``c_array`` respectively. The number of entries in ``a_array``, ``b_array``,
 and ``c_array`` is given by:
@@ -349,6 +357,14 @@ while the ``c`` array contains all the output matrices. The locations of the
 individual matrices within the array are given by the ``stride_a``,
 ``stride_b``, and ``stride_c`` parameters, while the total number of
 matrices in each array is given by the ``batch_size`` parameter.
+
+In general, the batches of matrices indicated by ``a``, ``b``, and ``c``
+should not overlap in memory, with the exception of the the following
+in-place operations:
+
+   - ``a`` and ``c`` may point to the same memory if ``beta`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(A)`` is non-transpose and all the ``A`` matrices have identical parameters as all the respective ``C`` matrices;
+
+   - ``b`` and ``c`` may point to the same memory if ``alpha`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(B)`` is non-transpose and all the the ``B`` matrices have identical parameters as all the respective ``C`` matrices.
 
 
 **Group API**
