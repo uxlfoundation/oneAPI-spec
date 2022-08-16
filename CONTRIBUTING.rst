@@ -88,7 +88,8 @@ Work with a Local Copy
 ----------------------
 
 For bigger edits you will need a local version of the tools. See
-:ref:`Build the Specification <build_spec>` for instructions.
+`Build the Specification <README.rst#build-the-specification>`_
+for instructions.
 
 -------------
 Editing Tools
