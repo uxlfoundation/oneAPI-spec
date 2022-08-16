@@ -95,9 +95,9 @@ matrices in each buffer is given by the ``batch_size`` parameter.
 In general, the ``a``, ``b``, and ``c`` buffers should not overlap in
 memory, with the exception of the following in-place operations:
 
-   - ``a`` and ``c`` may point to the same memory if ``beta`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(A)`` is non-transpose and all the ``A`` matrices have the same parameters as all the respective ``C`` matrices;
+   - ``a`` and ``c`` may point to the same memory if ``op(A)`` is non-transpose and all the ``A`` matrices have the same parameters as all the respective ``C`` matrices;
 
-   - ``b`` and ``c`` may point to the same memory if ``alpha`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(B)`` is non-transpose and all the the ``B`` matrices have the same parameters as all the respective ``C`` matrices.
+   - ``b`` and ``c`` may point to the same memory if ``op(B)`` is non-transpose and all the ``B`` matrices have the same parameters as all the respective ``C`` matrices.
 
 
 **Strided API**
@@ -362,9 +362,9 @@ In general, the batches of matrices indicated by ``a``, ``b``, and ``c``
 should not overlap in memory, with the exception of the the following
 in-place operations:
 
-   - ``a`` and ``c`` may point to the same memory if ``beta`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(A)`` is non-transpose and all the ``A`` matrices have identical parameters as all the respective ``C`` matrices;
+   - ``a`` and ``c`` may point to the same memory if ``op(A)`` is non-transpose and all the ``A`` matrices have identical parameters as all the respective ``C`` matrices;
 
-   - ``b`` and ``c`` may point to the same memory if ``alpha`` is zero (equivalent to :ref:`onemkl_blas_imatcopy_batch`), or if ``op(B)`` is non-transpose and all the the ``B`` matrices have identical parameters as all the respective ``C`` matrices.
+   - ``b`` and ``c`` may point to the same memory if ``op(B)`` is non-transpose and all the the ``B`` matrices have identical parameters as all the respective ``C`` matrices.
 
 
 **Group API**

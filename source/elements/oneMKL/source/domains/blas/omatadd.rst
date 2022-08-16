@@ -38,9 +38,9 @@ and ``B`` is ``m`` x ``n`` if the ``op(B)`` is not transposed or ``n`` by ``m`` 
 In general, ``A``, ``B``, and ``C`` should not overlap in memory, with the exception of
 the following in-place operations:
 
-   - ``A`` and ``C`` may point to the same memory if ``beta`` is zero (equivalent to :ref:`onemkl_blas_imatcopy`), or if ``op(A)`` is non-transpose and ``lda`` = ``ldc``;
+   - ``A`` and ``C`` may point to the same memory if ``op(A)`` is non-transpose and ``lda`` = ``ldc``;
 
-   - ``B`` and ``C`` may point to the same memory if ``alpha`` is zero (equivalent to :ref:`onemkl_blas_imatcopy`), or if ``op(B)`` is non-transpose and ``ldB`` = ``ldc``.
+   - ``B`` and ``C`` may point to the same memory if ``op(B)`` is non-transpose and ``ldB`` = ``ldc``.
 
 
 ``omatadd`` supports the following precisions:
