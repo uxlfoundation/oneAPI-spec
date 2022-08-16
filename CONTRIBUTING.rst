@@ -115,7 +115,7 @@ Create a New Version Number
 -----------------------------
 
 Change version in `<oneapi-doc.json>`__ and update the table in
-`<source/versions.rst>`__.
+`<releases/index.rst>`__.
 
 ------------
 More Reading
