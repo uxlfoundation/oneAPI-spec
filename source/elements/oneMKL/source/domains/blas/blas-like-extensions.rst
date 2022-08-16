@@ -45,12 +45,16 @@ BLAS-like Extensions
            -     Computes a two-strided out-of-place matrix transposition or copy.
          * -     :ref:`onemkl_blas_omatadd`
            -     Computes scaled matrix addition with possibly transposed arguments.
+         * -     :ref:`onemkl_blas_geam`
+           -     Alias for ``omatadd``.
          * -     :ref:`onemkl_blas_imatcopy_batch`
            -     Computes groups of in-place matrix transposition or copy operations.
          * -     :ref:`onemkl_blas_omatcopy_batch`
            -     Computes groups of out-of-place matrix transposition or copy operations.
          * -     :ref:`onemkl_blas_omatadd_batch`
            -     Computes groups of scaled matrix additions.
+         * -     :ref:`onemkl_blas_geam_batch`
+           -     Alias for ``omatadd_batch``.
  
 
 
@@ -69,11 +73,14 @@ BLAS-like Extensions
     trsm_batch
     gemmt
     gemm_bias
+    imatcopy
+    omatcopy
+    omatcopy2
+    omatadd
+    geam
     imatcopy_batch
     omatcopy_batch
     omatadd_batch
-    imatcopy
-    omatcopy
-    omatadd
+    geam_batch
 
 **Parent topic:** :ref:`onemkl_blas`

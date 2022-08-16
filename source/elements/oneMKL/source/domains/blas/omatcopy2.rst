@@ -202,7 +202,7 @@ omatcopy2 (Buffer Version)
 .. _onemkl_blas_omatcopy2_usm:
    
 omatcopy2 (USM Version)
-----------------------
+-----------------------
 
 .. rubric:: Syntax
 
