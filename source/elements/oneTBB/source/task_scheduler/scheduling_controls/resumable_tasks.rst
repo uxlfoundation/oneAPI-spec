@@ -23,6 +23,7 @@ Requirements:
 
 The ``oneapi::tbb::task::suspend`` function called within a running task suspends execution of the task and switches the thread to participate in other oneTBB parallel work.
 This function accepts a user callable object with the current execution context ``oneapi::tbb::task::suspend_point`` as an argument.
+The user-specified callable object is executed by the calling thread.
 
 The ``oneapi::tbb::task::suspend_point`` context tag must be passed to the ``oneapi::tbb::task::resume`` function to trigger a program execution at the suspended point.
 The ``oneapi::tbb::task::resume`` function can be called at any point of an application, even on a separate thread.
