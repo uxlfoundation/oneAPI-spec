@@ -5,7 +5,7 @@
 .. _onemkl_stats_overview:
 
 Summary Statistics
-===================
+==================
 
 .. rubric:: Definitions
 

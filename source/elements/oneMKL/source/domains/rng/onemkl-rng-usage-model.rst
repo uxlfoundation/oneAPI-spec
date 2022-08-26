@@ -14,7 +14,7 @@ A typical algorithm for random number generators is as follows:
 
 1. Create and initialize the object for basic random number generator.
 
-    -  Use the skip_ahead or leapfrog function if it is required (used in parallel with random number generation for Host and CPU devices).
+    -  Use the `skip_ahead` or `leapfrog` function if it is required (used in parallel with random number generation for Host and CPU devices).
 
 2. Create and initialize the object for distribution generator.
 

@@ -5,7 +5,7 @@
 .. _onemkl_rng_overview:
 
 Random Number Generators (RNG)
-===============================
+==============================
 
 .. rubric:: Definitions
 
