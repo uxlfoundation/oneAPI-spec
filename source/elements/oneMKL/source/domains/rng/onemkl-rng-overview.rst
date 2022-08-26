@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_overview:
 
-Random Number Generators (RNG) Overview
-=======================================
+Random Number Generators (RNG)
+===============================
 
 .. rubric:: Definitions
 
@@ -62,3 +62,15 @@ The RNG domain also contains two types of free functions:
 Engine classes work with both generation and service routines. Distribution classes are used in
 generation routines only. Refer to the :ref:`onemkl_rng_usage_model`
 section for the description of typical RNG scenario.
+
+.. toctree::
+   :hidden:
+
+   onemkl-rng-usage-model.rst
+   generate-routine.rst
+   engines-basic-random-number-generators.rst
+   service-routines.rst
+   distributions.rst
+   bibliography.rst
+
+**Parent topic:** :ref:`onemkl_rng`

@@ -4,8 +4,8 @@
 
 .. _onemkl_stats_overview:
 
-Summary Statistics Overview
-===========================
+Summary Statistics
+===================
 
 .. rubric:: Definitions
 
@@ -20,3 +20,13 @@ The oneMKL Summary Statistics domains consists of:
       *  Minimum and maximum
 
 Refer to :ref:`onemkl_stats_usage_model`.
+
+.. toctree::
+	:hidden:
+
+	onemkl_stats_usage_model.rst
+	onemkl_stats_dataset.rst
+	onemkl_stats_routines.rst
+	onemkl_stats_service_routines.rst
+
+**Parent topic:** :ref:`onemkl_stats`
