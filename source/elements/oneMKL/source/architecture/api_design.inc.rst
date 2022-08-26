@@ -16,27 +16,28 @@ oneMKL namespaces
 
 The oneMKL library uses C++ namespaces to organize routines by mathematical domain.  All oneMKL objects and routines shall be contained within the ``oneapi::mkl`` base namespace.  The individual oneMKL domains use a secondary namespace layer as follows:
 
-========================  =======================================================================================================
-namespace                 oneMKL domain or content
-========================  =======================================================================================================
-``oneapi::mkl``           oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
-``oneapi::mkl::blas``     Dense linear algebra routines from BLAS and BLAS like extensions. The oneapi::mkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
-``oneapi::mkl::lapack``   Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
-``oneapi::mkl::sparse``   Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
-``oneapi::mkl::dft``      Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
-``oneapi::mkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
-``oneapi::mkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
-========================  =======================================================================================================
+=========================================== =========================================================================
+namespace                                   oneMKL domain or content
+=========================================== =========================================================================
+``oneapi::mkl``                             oneMKL base namespace, contains general oneMKL data types, objects, exceptions and routines
+``oneapi::mkl::blas``                       Dense linear algebra routines from BLAS and BLAS like extensions. The oneapi::mkl::blas namespace should contain two namespaces column_major and row_major to support both matrix layouts. See :ref:`onemkl_blas`
+``oneapi::mkl::lapack``                     Dense linear algebra routines from LAPACK and LAPACK like extensions. See :ref:`onemkl_lapack`
+``oneapi::mkl::sparse``                     Sparse linear algebra routines from Sparse BLAS and Sparse Solvers. See :ref:`onemkl_sparse_linear_algebra`
+``oneapi::mkl::dft``                        Discrete and fast Fourier transformations. See :ref:`onemkl_dft`
+``oneapi::mkl::rng``                        Random number generator routines. See :ref:`onemkl_rng`
+``oneapi::mkl::vm``                         Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
+``oneapi::mkl::experimental::data_fitting`` Data fitting routines, e.g. interpolation. See :ref:`data_fitting`
+=========================================== =========================================================================
 
 .. note::
    :name: Implementation Requirement
 
-   Inside each oneMKL domain, there are many routines, classes, enums and objects defined which constitute the breadth and scope of that oneMKL domain.  
+   Inside each oneMKL domain, there are many routines, classes, enums and objects defined which constitute the breadth and scope of that oneMKL domain.
    It is permitted for a library implementation of the oneMKL specification to implement either all, one or more than one of the domains in oneMKL. However, within an implementation of a specific domain, all relevant routines, classes, enums and objects (including those relevant enums and objects which live outside a particular domain in the general ``oneapi::mkl`` namespace must be both declared and defined in the library so that an application that uses that domain could build and link against that library implementation successfully.
 
-   It is however acceptable to throw the runtime exception :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>` inside of the routines or class member functions in that domain that have not been fully implemented.  
-   For instance, a library may choose to implement the oneMKL BLAS functionality and in particular may choose to implement only the :ref:`onemkl_blas_gemm` api for their library, in which case they must also include all the other blas namespaced routines and throw the :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>` exception inside all the others.  
-   
+   It is however acceptable to throw the runtime exception :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>` inside of the routines or class member functions in that domain that have not been fully implemented.
+   For instance, a library may choose to implement the oneMKL BLAS functionality and in particular may choose to implement only the :ref:`onemkl_blas_gemm` api for their library, in which case they must also include all the other blas namespaced routines and throw the :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>` exception inside all the others.
+
    In such a case, the implemented routines in such a library should be communicated clearly and easily understood by users of that library.
 
 
@@ -73,7 +74,7 @@ oneMKL uses the following DPC++ data types:
 oneMKL defined datatypes
 ++++++++++++++++++++++++
 
-oneMKL dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``oneapi::mkl`` namespace.  
+oneMKL dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``oneapi::mkl`` namespace.
 
 Each enumeration value comes with two names: A single-character name (the traditional BLAS/LAPACK character) and a longer, more descriptive name. The two names are exactly equivalent and may be used interchangeably.
 
@@ -238,7 +239,7 @@ Each enumeration value comes with two names: A single-character name (the tradit
          :name: layout
          :class: sectiontitle
 
-      The ``layout`` type specifies how a dense matrix ``A`` with leading dimension ``lda`` is stored as one dimensional array in memory. 
+      The ``layout`` type specifies how a dense matrix ``A`` with leading dimension ``lda`` is stored as one dimensional array in memory.
       The layouts are traditionally provided in one of two forms: C/C++-style using ``row_major`` layout,
       or Fortran-style using ``column_major`` layout. The ``layout`` type can take the following values:
 
