@@ -40,7 +40,7 @@ Engines (Basic Random Number Generators)
          * -                      \ :ref:`onemkl_rng_mt19937`\
            -     Mersenne Twister pseudorandom number generator       ``MT19937``\ :ref:`[Matsumoto98] <onemkl_rng_bibliography>`      with period length 2\ :sup:`19937`-1 of the produced sequence
          * -                      \ :ref:`onemkl_rng_mt2203`\
-           -     Set of 6024 Mersenne Twister pseudorandom number       generators      ``MT2203``\ `[Matsumoto98] <onemkl_rng_bibliography>`,      :ref:`[Matsumoto00] <onemkl_rng_bibliography>`.      Each of them generates a sequence of period length equal to      2\ :sup:`2203`-1. Parameters of the generators provide mutual      independence of the corresponding sequences.
+           -     Set of 6024 Mersenne Twister pseudorandom number       generators      ``MT2203``\ :ref:`[Matsumoto98] <onemkl_rng_bibliography>`,      :ref:`[Matsumoto00] <onemkl_rng_bibliography>`.      Each of them generates a sequence of period length equal to      2\ :sup:`2203`-1. Parameters of the generators provide mutual      independence of the corresponding sequences.
          * -                      \ :ref:`onemkl_rng_sfmt19937`\
            -     SIMD-oriented Fast Mersenne Twister pseudorandom       number generator      ``SFMT19937``\ :ref:`[Saito08] <onemkl_rng_bibliography>`      with a period length equal to 2\ :sup:`19937`-1 of the produced      sequence.
          * -                      \ :ref:`onemkl_rng_sobol`\

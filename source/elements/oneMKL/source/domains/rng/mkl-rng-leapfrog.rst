@@ -33,7 +33,7 @@ leapfrog
 
     namespace oneapi::mkl::rng {
     template<typename EngineType>
-    void oneapi::mkl::rng::leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride);
+    void leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride);
     }
 
 .. container:: section
@@ -61,16 +61,16 @@ leapfrog
 .. code-block:: cpp
 
     // Creating 3 identical engines
-    mkl::rng::mcg31m1 engine_1(queue, seed);
+    oneapi::mkl::rng::mcg31m1 engine_1(queue, seed);
 
-    mkl::rng::mcg31m1 engine_2(engine_1);
-    mkl::rng::mcg31m1 engine_3(engine_1);
+    oneapi::mkl::rng::mcg31m1 engine_2(engine_1);
+    oneapi::mkl::rng::mcg31m1 engine_3(engine_1);
 
 
     // Leapfrogging the states of engines
-    mkl::rng::leapfrog(engine_1, 0 , 3);
-    mkl::rng::leapfrog(engine_2, 1 , 3);
-    mkl::rng::leapfrog(engine_3, 2 , 3);
+    oneapi::mkl::rng::leapfrog(engine_1, 0 , 3);
+    oneapi::mkl::rng::leapfrog(engine_2, 1 , 3);
+    oneapi::mkl::rng::leapfrog(engine_3, 2 , 3);
     // Generating random numbers
 
 

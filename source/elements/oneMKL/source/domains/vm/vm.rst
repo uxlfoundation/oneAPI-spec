@@ -9,14 +9,6 @@ Vector Math
 
 .. container::
 
-
-   oneMKL Vector Mathematics functions (VM) compute a mathematical
-   function of each of the vector elements. VM includes a set of
-   functions (arithmetic, power, trigonometric, exponential,
-   hyperbolic, special, and rounding) that operate on vectors of real
-   and complex numbers.
-
-
    Application programs that improve performance with VM include
    nonlinear programming software, computation of integrals, financial
    calculations, computer graphics, and many others.
@@ -46,8 +38,10 @@ Vector Math
 .. toctree::
     :hidden:
 
-    vm/special-value-notations
-    vm/vm-mathematical-functions
-    vm/vm-service-functions
-    vm/vm-exceptions
-    vm/bibliography
+    special-value-notations.rst
+    vm-mathematical-functions.rst
+    vm-service-functions.rst
+    vm-exceptions.rst
+    bibliography.rst
+
+**Parent topic:** :ref:`onemkl_vm_inc`

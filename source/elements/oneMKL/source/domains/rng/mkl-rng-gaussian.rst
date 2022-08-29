@@ -156,7 +156,7 @@ class gaussian
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`stddev \leq` static_cast<RealType>(0.0)
+                Exception is thrown when `stddev` :math:`\leq` `static_cast<RealType>(0.0)`
 
 .. container:: section
 
