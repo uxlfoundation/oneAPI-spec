@@ -40,7 +40,7 @@ the following in-place operations:
 
    - ``A`` and ``C`` may point to the same memory if ``op(A)`` is non-transpose and ``lda`` = ``ldc``;
 
-   - ``B`` and ``C`` may point to the same memory if ``op(B)`` is non-transpose and ``ldB`` = ``ldc``.
+   - ``B`` and ``C`` may point to the same memory if ``op(B)`` is non-transpose and ``ldb`` = ``ldc``.
 
 
 ``omatadd`` supports the following precisions:
