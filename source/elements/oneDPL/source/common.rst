@@ -5,6 +5,6 @@
 Namespaces
 ----------
 
-oneDPL uses :code:`namespace oneapi::dpl` for all its functionality including Parallel STL algorithms,
+oneDPL uses :code:`namespace oneapi::dpl` for all its functionality including Parallel algorithms,
 oneDPL execution policies, etc. For the subset of the standard C++ library for kernels, the standard class
 and function names are also aliased in :code:`namespace oneapi::dpl`.
