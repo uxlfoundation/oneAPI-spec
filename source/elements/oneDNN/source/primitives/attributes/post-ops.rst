@@ -80,8 +80,8 @@ The intermediate result of the :math:`\operatorname{Op}(...)` is not
 preserved.
 
 The :math:`scale` factor is supported in :ref:`int8
-<attributes-quantization-label>` inference only. For all other cases the scale
-must be `1.0`.
+<int8-quantization-label>` inference only. For all other cases the
+scale must be `1.0`.
 
 .. _post_ops_sum-label:
 
@@ -93,11 +93,11 @@ and is appended using |post_ops::append_sum| function. The
 |post_ops::kind| returns |primitive::kind::sum| for such
 a post-op.
 
-Prior to accumulating the result, the existing value us multiplied by scale.
-The scale parameter can be used in The :math:`scale` factor is supported in
-:ref:`int8 <attributes-quantization-label>` inference only and should be used
-only when the result and the existing data have different magnitudes.  For all
-other cases the scale must be `1.0`.
+Prior to accumulating the result, the existing value is multiplied by
+scale.  The :math:`scale` factor is supported in :ref:`int8
+<attributes-quantization-label>` inference only and should be used
+only when the result and the existing data have different magnitudes.
+For all other cases the scale must be `1.0`.
 
 Additionally, the sum post-op can reinterpret the destination values as a
 different data type of the same size. This may be used to, for example,
