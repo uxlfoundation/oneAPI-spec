@@ -465,6 +465,39 @@ Consider the following example of a convolution with :math:`\tanh` post-op:
 - And the post-ops scale for :math:`\tanh` is set to
   :math:`scale\_tanh\_post\_op = \frac{1}{scale_{\dst}}`.
 
+.. _attributes_fpmath_mode-label:
+
+Implicit downconversions and floating-point math mode
+================================
+
+oneDNN provides |primitive_attr::set_fpmath_mode| to allow implicit
+downconversions from fp32 to lower accuracy datatypes during primitive
+execution. For some applications, it allows to speedup computations
+without noticeable impact on accuracy.
+
+The |primitive_attr::set_fpmath_mode| primitive attribute specifies
+which implicit down-conversions are allowed for that given
+primitive. Only down-conversions from f32 to narrower data-types (f16,
+bf16, or tf32) are currently allowed. Furthermore these
+down-conversions are allowed only during computation, and do not
+affect the storage datatype (which must remain f32).
+
+The |primitive_attr::set_fpmath_mode| primitive attribute can take 3 types of values:
+- the `strict` mode disables any down-conversion (default).
+- the `any` mode allows all conversions from f32 to a smaller
+  floating-point datatype (f16, bf16, or tf32).
+- a specific datatype (f16, bf16, or tf32) which specifically allows
+  down-conversion only from f32 to a datatype at least as accurate as
+  the specified data-type (at least same number of exponent and
+  mantissa bits).
+
+The default value for this attribute shall be `strict`. However, it is
+allowed to expose global functions or environment variables to change
+this default value.
+
+This attribute is ignored if a primitive computation data-type is
+integral.
+
 .. _attributes_error_handling-link:
 
 ********************************
