@@ -37,6 +37,20 @@ BLAS-like Extensions
                  only the upper or lower triangular part of the result matrix.
          * -     :ref:`onemkl_blas_gemm_bias`   
            -     Computes a matrix-matrix product using general integer matrices with bias
+         * -     :ref:`onemkl_blas_imatcopy`
+           -     Computes an in-place matrix transposition or copy.
+         * -     :ref:`onemkl_blas_omatcopy`
+           -     Computes an out-of-place matrix transposition or copy.
+         * -     :ref:`onemkl_blas_omatcopy2`
+           -     Computes a two-strided out-of-place matrix transposition or copy.
+         * -     :ref:`onemkl_blas_omatadd`
+           -     Computes scaled matrix addition with possibly transposed arguments.
+         * -     :ref:`onemkl_blas_imatcopy_batch`
+           -     Computes groups of in-place matrix transposition or copy operations.
+         * -     :ref:`onemkl_blas_omatcopy_batch`
+           -     Computes groups of out-of-place matrix transposition or copy operations.
+         * -     :ref:`onemkl_blas_omatadd_batch`
+           -     Computes groups of scaled matrix additions.
  
 
 
@@ -55,5 +69,12 @@ BLAS-like Extensions
     trsm_batch
     gemmt
     gemm_bias
+    imatcopy
+    omatcopy
+    omatcopy2
+    omatadd
+    imatcopy_batch
+    omatcopy_batch
+    omatadd_batch
 
 **Parent topic:** :ref:`onemkl_blas`
