@@ -26,7 +26,7 @@ The library is comprised of the following components:
 
 - :doc:`SYCL Kernels API <sycl_kernels_api>`:
 
-  * A subset of the `C++ standard`_ library which you can use with
+  * A subset of the `C++ standard`_ library which can be used with
     buffers and data parallel kernels.
 
   * Support of random number generation including engines and distributions.
