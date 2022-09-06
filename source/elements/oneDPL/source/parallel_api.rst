@@ -638,3 +638,5 @@ If no comparator is provided, :code:`operator<` is used to determine when the se
 than an element in the range being searched.
 
 The elements e of [start, end) must be partitioned with respect to the comparator used.
+
+.. _`C++ Standard`: https://isocpp.org/std/the-standard
