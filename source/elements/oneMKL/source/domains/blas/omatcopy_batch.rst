@@ -8,7 +8,7 @@ omatcopy_batch
 ==============
 
 Computes a group of out-of-place scaled matrix transpose or copy operations
-using general matrices.
+using general dense matrices.
 
 .. _onemkl_blas_omatcopy_batch_description:
 
@@ -26,7 +26,7 @@ flexible *group API* where each group of matrices has the same
 parameters but the user may provide multiple groups that have
 different parameters. The group API argument structure is better
 suited to USM pointers than to ``sycl::buffer`` arguments, so we
-only implement it for USM inputs. The strided API works with both USM
+only specify it for USM inputs. The strided API works with both USM
 and buffer memory.
 
    .. list-table::

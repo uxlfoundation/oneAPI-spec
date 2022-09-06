@@ -8,7 +8,7 @@ omatcopy2
 =========
 
 Computes two-strided scaling and out-of-place transposition or copying of general
-matrices.
+dense matrices.
 
 .. _onemkl_blas_omatcopy2_description:
 

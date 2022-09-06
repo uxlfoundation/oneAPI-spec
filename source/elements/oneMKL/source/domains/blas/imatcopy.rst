@@ -8,7 +8,7 @@ imatcopy
 ========
 
 Computes an in-place scaled matrix transpose or copy operation
-using a general matrix.
+using a general dense matrix.
 
 .. _onemkl_blas_imatcopy_description:
 
@@ -205,7 +205,7 @@ imatcopy (USM Version)
 
    trans
       Specifies op(``C``), the transposition operation applied to the
-      matrix ``C``.
+      matrix ``C``. See :ref:`onemkl_datatypes` for more details.
 
    m
       Number of rows for the matrix ``C`` on input. Must be at least zero.

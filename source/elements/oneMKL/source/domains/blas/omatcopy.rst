@@ -8,7 +8,7 @@ omatcopy
 ========
 
 Computes an out-of-place scaled matrix transpose or copy operation
-using a general matrix.
+using a general dense matrix.
 
 .. _onemkl_blas_omatcopy_description:
 
@@ -217,8 +217,8 @@ omatcopy (USM Version)
       The queue where the routine will be executed.
 
    trans
-      Specifies op(``A``), the transposition operation applied to matrix ``A``.
-      See :ref:`onemkl_datatypes` for more details.
+      Specifies op(``A``), the transposition operation applied to the
+      matrix ``A``. See :ref:`onemkl_datatypes` for more details.
 
    m
       Number of rows for the matrix ``A``. Must be at least zero.

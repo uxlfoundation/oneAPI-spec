@@ -7,7 +7,7 @@
 omatadd
 =======
 
-Computes a sum of two general matrices, with optional transposes.
+Computes a sum of two general dense matrices, with optional transposes.
 
 .. _onemkl_blas_omatadd_description:
 
@@ -105,11 +105,11 @@ omatadd (Buffer Version)
 
    transa
       Specifies op(``A``), the transposition operation applied to the
-      matrices ``A``. See :ref:`onemkl_datatypes` for more details.
+      matrix ``A``. See :ref:`onemkl_datatypes` for more details.
 
    transb
       Specifies op(``B``), the transposition operation applied to the
-      matrices ``B``. See :ref:`onemkl_datatypes` for more details.
+      matrix ``B``. See :ref:`onemkl_datatypes` for more details.
 
    m
       Number of rows for the result matrix ``C``. Must be at least zero.
@@ -287,11 +287,11 @@ omatadd (USM Version)
 
    transa
       Specifies op(``A``), the transposition operation applied to the
-      matrices ``A``. See :ref:`onemkl_datatypes` for more details.
+      matrix ``A``. See :ref:`onemkl_datatypes` for more details.
 
    transb
       Specifies op(``B``), the transposition operation applied to the
-      matrices ``B``. See :ref:`onemkl_datatypes` for more details.
+      matrix ``B``. See :ref:`onemkl_datatypes` for more details.
 
    m
       Number of rows for the result matrix ``C``. Must be at least zero.
