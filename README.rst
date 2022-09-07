@@ -101,6 +101,10 @@ Build the pdf version wit the following command::
 
 The generated PDF will be located at build/latexpdf/oneAPI-spec.pdf.
 
+Spell check::
+
+  python oneapi.doc. --verbose spelling
+
 --
 CI
 --
