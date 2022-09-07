@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2022 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -15,23 +15,28 @@ implementing data parallel algorithms.
 
 The library is comprised of the following components:
 
-- A subset of the `C++ standard`_ library which you can use with
-  buffers and data parallel kernels.
+- :doc:`Parallel API <parallel_api>`:
 
-- Parallel STL algorithms, complemented with execution
-  policies and companion APIs for running on oneAPI devices.
-  (See :doc:`Extensions to Parallel STL <pstl>`.)
+  * Parallel algorithms, complemented with execution
+    policies and companion APIs for running on oneAPI devices.
 
-- Extensions: an additional set of library classes and functions that
-  are known to be useful in practice but are not yet included into
-  C++ or SYCL specifications. (See :doc:`Specific API of oneDPL <extensions>`.)
+  * An additional set of library classes and functions that
+    are known to be useful in practice but are not yet included into
+    C++ or SYCL specifications. 
 
+- :doc:`SYCL Kernels API <sycl_kernels_api>`:
+
+  * A subset of the `C++ standard`_ library which can be used with
+    buffers and data parallel kernels.
+
+  * Support of random number generation including engines and distributions.
+
+  * Various utilities in addition to C++ standard functionality.
 
 .. toctree::
 
    common.rst
-   stdlib.rst
-   pstl.rst
-   extensions.rst
+   parallel_api.rst
+   sycl_kernels_api.rst
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
