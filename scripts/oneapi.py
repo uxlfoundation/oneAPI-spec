@@ -9,7 +9,6 @@ import os
 import os.path
 import shutil
 import subprocess
-from distutils.dir_util import copy_tree as copy_tree_update
 from functools import wraps
 from os.path import join
 
@@ -72,18 +71,6 @@ def rm(dir):
     if cl_args.dry_run:
         return
     shutil.rmtree(dir, ignore_errors=True)
-
-
-def copytree(src, dst, dirs_exist_ok=False):
-    log('cp -r', src, dst)
-    if cl_args.dry_run:
-        return
-    # dirs_exist_ok needs python 3.8 or later, use copy_tree_update
-    # for now
-    if dirs_exist_ok:
-        copy_tree_update(src, dst)
-    else:
-        shutil.copytree(src, dst)
 
 
 def copy(src, dst):

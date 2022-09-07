@@ -48,7 +48,7 @@ Example
 -------
 
 The following example shows a class in which the "Lazy initialization" pattern is implemented on 
-the "cachedProperty" field.
+the ``cachedProperty`` field.
 
 
 .. code:: cpp
