@@ -101,20 +101,6 @@ Build the pdf version wit the following command::
 
 The generated PDF will be located at build/latexpdf/oneAPI-spec.pdf.
 
-Docker
-------
-
-You can build a **Docker container** image with the following command::
-
-   python scripts/oneapi.py dockerbuild
-
-The tag will be rscohn2/oneapi-spec.  The script copies your proxy settings in
-the invoking shell so it will work inside the firewall.
-
-You can run a docker container with the following command::
-
-    python scripts/oneapi.py dockerrun
-
 --
 CI
 --
