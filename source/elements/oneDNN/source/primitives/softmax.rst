@@ -20,6 +20,8 @@ variable names follow the standard :ref:`conventions-label`.
 Forward
 *******
 
+When the specified algorithm is softmax:
+
 .. math::
 
        \dst(\overline{ou}, c, \overline{in}) =
@@ -28,7 +30,27 @@ Forward
            {
                \sum\limits_{ic}
                    e^{\src(\overline{ou}, ic, \overline{in}) - \nu(\overline{ou}, \overline{in})}
-           },
+           }.
+
+When the specified algorithm is logsoftmax, the following numerically stable formula is used:
+
+.. math::
+
+    \dst(\overline{ou}, c, \overline{in}) =
+        \ln\left({\frac
+        {
+            e^{\src(\overline{ou}, c, \overline{in}) - \nu(\overline{ou}, \overline{in})}
+        }
+        {
+            \sum\limits_{ic}
+                e^{\src(\overline{ou}, ic, \overline{in}) - \nu(\overline{ou}, \overline{in})}
+        }}\right) =
+        \left(\src(\overline{ou}, c, \overline{in}) - \nu(\overline{ou}, \overline{in})\right)
+            - \ln\left(
+                    \sum\limits_{ic}
+                    e^{\src(\overline{ou}, ic, \overline{in}) - \nu(\overline{ou}, \overline{in})}
+                 \right)
+
 
 where
 

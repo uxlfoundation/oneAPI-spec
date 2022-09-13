@@ -3348,11 +3348,15 @@ struct softmax_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
+        /// @param aalgorithm Softmax algorithm kind: either
+        ///     #dnnl::algorithm::softmax_accurate,
+        ///     or #dnnl::algorithm::softmax_log.
         /// @param src_desc Source memory descriptor.
         /// @param dst_desc Destination memory descriptor.
         /// @param softmax_axis Axis over which softmax is computed.
-        desc(prop_kind aprop_kind, const memory::desc &src_desc,
-                const memory::desc &dst_desc, int softmax_axis);
+        desc(prop_kind aprop_kind, algorithm aalgorithm,
+                const memory::desc &src_desc, const memory::desc &dst_desc,
+                int softmax_axis);
     };
 
     /// Primitive descriptor for a softmax forward propagation primitive.
@@ -3413,11 +3417,14 @@ struct softmax_backward : public primitive {
         /// Constructs a descriptor for a softmax backward propagation
         /// primitive.
         ///
+        /// @param aalgorithm Softmax algorithm kind: either
+        ///     #dnnl::algorithm::softmax_accurate,
+        ///     or #dnnl::algorithm::softmax_log.
         /// @param diff_src_desc Diff source memory descriptor.
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param dst_desc Destination memory descriptor.
         /// @param softmax_axis Axis over which softmax is computed.
-        desc(const memory::desc &diff_src_desc,
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
                 const memory::desc &diff_dst_desc, const memory::desc &dst_desc,
                 int softmax_axis);
     };
@@ -3483,161 +3490,6 @@ struct softmax_backward : public primitive {
 };
 
 /// @} dnnl_api_softmax
-
-/// @addtogroup dnnl_api_logsoftmax LogSoftmax
-///
-/// A primitive to perform logsoftmax.
-///
-/// @{
-
-/// Logsoftmax forward propagation primitive.
-struct logsoftmax_forward : public primitive {
-    /// Descriptor for a logsoftmax forward propagation primitive.
-    struct desc {
-        /// Default constructor. Produces an empty object.
-        desc();
-
-        /// Constructs a descriptor for a logsoftmax forward propagation
-        /// primitive.
-        ///
-        /// @param aprop_kind Propagation kind. Possible values are
-        ///     #dnnl::prop_kind::forward_training, and
-        ///     #dnnl::prop_kind::forward_inference.
-        /// @param src_desc Source memory descriptor.
-        /// @param dst_desc Destination memory descriptor.
-        /// @param logsoftmax_axis Axis over which softmax is computed.
-        desc(prop_kind aprop_kind, const memory::desc &src_desc,
-                const memory::desc &dst_desc, int logsoftmax_axis);
-    };
-
-    /// Primitive descriptor for a logsoftmax forward propagation primitive.
-    struct primitive_desc : public dnnl::primitive_desc {
-        /// Default constructor. Produces an empty object.
-        primitive_desc();
-
-        /// Constructs a primitive descriptor for a logsoftmax forward
-        /// propagation primitive.
-        ///
-        /// @param adesc descriptor for a logsoftmax forward propagation
-        ///     primitive.
-        /// @param aengine Engine to use.
-        /// @param allow_empty A flag signifying whether construction is
-        ///     allowed to fail without throwing an exception. In this case an
-        ///     empty object will be produced. This flag is optional and
-        ///     defaults to false.
-        primitive_desc(const desc &adesc, const engine &aengine,
-                bool allow_empty = false);
-
-        /// Constructs a primitive descriptor for a logsoftmax forward
-        /// propagation primitive.
-        ///
-        /// @param adesc Descriptor for a logsoftmax forward propagation
-        ///     primitive.
-        /// @param aengine Engine to use.
-        /// @param attr Primitive attributes to use.
-        /// @param allow_empty A flag signifying whether construction is
-        ///     allowed to fail without throwing an exception. In this case an
-        ///     empty object will be produced. This flag is optional and
-        ///     defaults to false.
-        primitive_desc(const desc &adesc, const primitive_attr &attr,
-                const engine &aengine, bool allow_empty = false);
-
-        /// @copydoc dnnl::primitive_desc_base::src_desc()const
-        memory::desc src_desc() const;
-
-        /// @copydoc dnnl::primitive_desc_base::dst_desc()const
-        memory::desc dst_desc() const;
-    };
-
-    /// Default constructor. Produces an empty object.
-    logsoftmax_forward();
-
-    /// Constructs a logsoftmax forward propagation primitive.
-    /// @param pd Primitive descriptor for a logsoftmax forward propagation
-    ///     primitive.
-    logsoftmax_forward(const primitive_desc &pd);
-};
-
-/// Logsoftmax backward propagation primitive.
-struct logsoftmax_backward : public primitive {
-    /// Descriptor for a logsoftmax backward propagation primitive.
-    struct desc {
-        /// Default constructor. Produces an empty object.
-        desc();
-
-        /// Constructs a descriptor for a logsoftmax backward propagation
-        /// primitive.
-        ///
-        /// @param diff_src_desc Diff source memory descriptors.
-        /// @param diff_dst_desc Diff destination memory descriptors.
-        /// @param dst_desc Destination memory descriptor.
-        /// @param logsoftmax_axis Axis over which softmax is computed.
-        desc(const memory::desc &diff_src_desc,
-                const memory::desc &diff_dst_desc, const memory::desc &dst_desc,
-                int logsoftmax_axis);
-    };
-
-    /// Primitive descriptor for a logsoftmax backward propagation primitive.
-    struct primitive_desc : public dnnl::primitive_desc {
-        /// Default constructor. Produces an empty object.
-        primitive_desc();
-
-        /// Constructs a primitive descriptor for a logsoftmax backward
-        /// propagation primitive.
-        ///
-        /// @param adesc Descriptor for a logsoftmax backward propagation
-        ///     primitive.
-        /// @param aengine Engine to use.
-        /// @param hint_fwd_pd Primitive descriptor for a logsoftmax forward
-        ///     propagation primitive. It is used as a hint for deciding which
-        ///     memory format to use.
-        /// @param allow_empty A flag signifying whether construction is
-        ///     allowed to fail without throwing an exception. In this case an
-        ///     empty object will be produced. This flag is optional and
-        ///     defaults to false.
-        primitive_desc(const desc &adesc, const engine &aengine,
-                const logsoftmax_forward::primitive_desc &hint_fwd_pd,
-                bool allow_empty = false);
-
-        /// Constructs a primitive descriptor for a logsoftmax backward
-        /// propagation primitive.
-        ///
-        /// @param adesc Descriptor for a logsoftmax backward propagation
-        ///     primitive.
-        /// @param attr Primitive attributes to use.
-        /// @param aengine Engine to use.
-        /// @param hint_fwd_pd Primitive descriptor for a logsoftmax forward
-        ///     propagation primitive. It is used as a hint for deciding which
-        ///     memory format to use.
-        /// @param allow_empty A flag signifying whether construction is
-        ///     allowed to fail without throwing an exception. In this case an
-        ///     empty object will be produced. This flag is optional and
-        ///     defaults to false.
-        primitive_desc(const desc &adesc, const primitive_attr &attr,
-                const engine &aengine,
-                const logsoftmax_forward::primitive_desc &hint_fwd_pd,
-                bool allow_empty = false);
-
-        /// @copydoc dnnl::primitive_desc_base::dst_desc()const
-        memory::desc dst_desc() const;
-
-        /// @copydoc dnnl::primitive_desc_base::diff_src_desc()const
-        memory::desc diff_src_desc() const;
-
-        /// @copydoc dnnl::primitive_desc_base::dst_desc()const
-        memory::desc diff_dst_desc() const;
-    };
-
-    /// Default constructor. Produces an empty object.
-    logsoftmax_backward();
-
-    /// Constructs a logsoftmax backward propagation primitive.
-    /// @param pd Primitive descriptor for a logsoftmax backward propagation
-    ///     primitive.
-    logsoftmax_backward(const primitive_desc &pd);
-};
-
-/// @} dnnl_api_logsoftmax
 
 /// @addtogroup dnnl_api_batch_normalization Batch Normalization
 ///
