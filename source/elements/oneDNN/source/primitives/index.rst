@@ -123,6 +123,7 @@ The sequence of actions to create a primitive is:
    lrn.rst
    matmul.rst
    pooling.rst
+   prelu.rst
    reorder.rst
    resampling.rst
    rnn.rst

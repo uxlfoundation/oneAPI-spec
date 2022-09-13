@@ -72,6 +72,8 @@ struct primitive {
         softmax,
         /// A pooling primitive.
         pooling,
+        /// A PReLU primitive.
+        prelu,
         /// An LRN primitive.
         lrn,
         /// A batch normalization primitive.
@@ -3156,6 +3158,180 @@ struct pooling_backward : public primitive {
 };
 
 /// @} dnnl_api_pooling
+
+/// @addtogroup dnnl_api_prelu PReLU
+///
+/// PReLU primitive
+/// A primitive to perform PReLU (leaky ReLU with trainable alpha parameter)
+///
+/// @{
+
+/// PReLU forward propagation primitive.
+struct prelu_forward : public primitive {
+    /// Descriptor for a PReLU forward propagation primitive.
+    struct desc {
+        /// Default constructor. Produces an empty object.
+        desc();
+
+        /// Constructs a descriptor for a PReLU forward propagation
+        /// primitive.
+        ///
+        /// @param aprop_kind Propagation kind. Possible values are
+        ///     #dnnl::prop_kind::forward_training, and
+        ///     #dnnl::prop_kind::forward_inference.
+        /// @param src_desc Source memory descriptors.
+        /// @param dst_desc Destination memory descriptors.
+        /// @param weight_desc Alpha parameters memory descriptor.
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &dst_desc, const memory::desc &weight_desc)
+    };
+
+    /// Primitive descriptor for a PReLU forward propagation primitive.
+    struct primitive_desc : public dnnl::primitive_desc {
+        /// Default constructor. Produces an empty object.
+        primitive_desc();
+
+        /// Constructs a primitive descriptor for a PReLU forward
+        /// propagation primitive.
+        ///
+        /// @param adesc Descriptor for a PReLU forward propagation
+        ///     primitive.
+        /// @param aengine Engine to use.
+        /// @param allow_empty A flag signifying whether construction is
+        ///     allowed to fail without throwing an exception. In this case an
+        ///     empty object will be produced. This flag is optional and
+        ///     defaults to false.
+        primitive_desc(const desc &adesc, const engine &aengine,
+                bool allow_empty = false);
+
+        /// Constructs a primitive descriptor for a PReLU forward
+        /// propagation primitive.
+        ///
+        /// @param adesc Descriptor for a PReLU forward propagation
+        ///     primitive.
+        /// @param aengine Engine to use.
+        /// @param attr Primitive attributes to use.
+        /// @param allow_empty A flag signifying whether construction is
+        ///     allowed to fail without throwing an exception. In this case an
+        ///     empty object will be produced. This flag is optional and
+        ///     defaults to false.
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false);
+
+        /// @copydoc dnnl::primitive_desc_base::src_desc()const
+        memory::desc src_desc() const { return base::src_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::dst_desc()const
+        memory::desc dst_desc() const { return base::dst_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::weights_desc()const
+        memory::desc weights_desc() const { return base::weights_desc(0); }
+    };
+
+    /// Default constructor. Produces an empty object.
+    prelu_forward() = default;
+
+    /// Constructs a prelu forward propagation primitive.
+    /// @param pd Primitive descriptor for a prelu forward propagation
+    ///     primitive.
+    prelu_forward(const primitive_desc &pd) : primitive(pd) {}
+};
+
+/// PReLU backward propagation primitive.
+struct prelu_backward : public primitive {
+    /// Descriptor for a PReLU backward propagation primitive.
+    struct desc {
+        /// Constructs a descriptor for a PReLU backward propagation
+        /// primitive.
+        ///
+        /// @param data_desc Source memory descriptors.
+        /// @param weight_desc Alpha parameters memory descriptor.
+        /// @param diff_data_desc Diff source and destination memory
+        ///     descriptors.
+        /// @param diff_weights_desc Diff alpha parameters memory descriptor.
+        desc(const memory::desc &src_desc, const memory::desc &weights_desc,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc,
+                const memory::desc &diff_weights_desc);
+    };
+
+    /// Primitive descriptor for prelu backward propagation.
+    struct primitive_desc : public dnnl::primitive_desc {
+        /// Default constructor. Produces an empty object.
+        primitive_desc() = default;
+
+        /// Constructs a primitive descriptor for a PReLU backward
+        /// propagation primitive.
+        ///
+        /// @param adesc Descriptor for a PReLU backward propagation
+        ///     primitive.
+        /// @param aengine Engine to use.
+        /// @param hint_fwd_pd Primitive descriptor for a PReLU forward
+        ///     propagation primitive. It is used as a hint for deciding which
+        ///     memory format to use.
+        /// @param allow_empty A flag signifying whether construction is
+        ///     allowed to fail without throwing an exception. In this case an
+        ///     empty object will be produced. This flag is optional and
+        ///     defaults to false.
+        primitive_desc(const desc &adesc, const engine &aengine,
+                const prelu_forward::primitive_desc &hint_fwd_pd,
+                bool allow_empty = false);
+
+        /// Constructs a primitive descriptor for a PReLU backward
+        /// propagation primitive.
+        ///
+        /// @param adesc Descriptor for a PReLU backward propagation
+        ///     primitive.
+        /// @param attr Primitive attributes to use.
+        /// @param aengine Engine to use.
+        /// @param hint_fwd_pd Primitive descriptor for a PReLU forward
+        ///     propagation primitive. It is used as a hint for deciding which
+        ///     memory format to use.
+        /// @param allow_empty A flag signifying whether construction is
+        ///     allowed to fail without throwing an exception. In this case an
+        ///     empty object will be produced. This flag is optional and
+        ///     defaults to false.
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine,
+                const prelu_forward::primitive_desc &hint_fwd_pd,
+                bool allow_empty = false);
+
+        /// @copydoc dnnl::primitive_desc_base::src_desc()const
+        memory::desc src_desc() const { return base::src_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::diff_src_desc()const
+        memory::desc diff_src_desc() const { return base::diff_src_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::diff_dst_desc()const
+        memory::desc diff_dst_desc() const { return base::diff_dst_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::weights_desc()const
+        memory::desc weights_desc() const { return base::weights_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::diff_weights_desc()const
+        memory::desc diff_weights_desc() const {
+            return base::diff_weights_desc(0);
+        }
+    };
+
+    /// Default constructor. Produces an empty object.
+    prelu_backward() = default;
+
+    /// Constructs a prelu backward propagation primitive.
+    /// @param pd Primitive descriptor for a prelu backward propagation
+    ///     primitive.
+    prelu_backward(const primitive_desc &pd) : primitive(pd) {}
+
+    /// Constructs a prelu backward propagation primitive from a cache blob.
+    /// @param pd Primitive descriptor for a prelu backward propagation
+    ///     primitive.
+    /// @param cache_blob Cache blob.
+    prelu_backward(
+            const primitive_desc &pd, const std::vector<uint8_t> &cache_blob)
+        : primitive(pd, cache_blob) {}
+};
+
+/// @} dnnl_api_prelu
 
 /// @addtogroup dnnl_api_eltwise Eltwise
 ///
