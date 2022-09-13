@@ -2835,14 +2835,15 @@ struct lrn_forward : public primitive {
         /// @param aalgorithm LRN algorithm kind: either
         ///     #dnnl::algorithm::lrn_across_channels, or
         ///     #dnnl::algorithm::lrn_within_channel.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptors.
+        /// @param dst_desc Destination memory descriptors.
         /// @param local_size Regularization local size.
         /// @param alpha The alpha regularization parameter.
         /// @param beta The beta regularization parameter.
         /// @param k The k regularization parameter.
         desc(prop_kind aprop_kind, algorithm aalgorithm,
-                const memory::desc &data_desc, memory::dim local_size,
-                float alpha, float beta, float k = 1.f);
+                const memory::desc &src_desc, const memory::desc &dst_desc,
+                memory::dim local_size, float alpha, float beta, float k = 1.f);
     };
 
     /// Primitive descriptor for an LRN forward propagation primitive.
@@ -2903,15 +2904,16 @@ struct lrn_backward : public primitive {
         /// @param aalgorithm LRN algorithm kind: either
         ///     #dnnl::algorithm::lrn_across_channels, or
         ///     #dnnl::algorithm::lrn_within_channel.
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source destination memory descriptor.
+        /// @param diff_dst_desc Diff diff destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
         /// @param local_size Regularization local size.
         /// @param alpha The alpha regularization parameter.
         /// @param beta The beta regularization parameter.
         /// @param k The k regularization parameter.
-        desc(algorithm aalgorithm, const memory::desc &data_desc,
-                const memory::desc &diff_data_desc, memory::dim local_size,
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, memory::dim local_size,
                 float alpha, float beta, float k = 1.f);
     };
 
@@ -3185,13 +3187,15 @@ struct eltwise_forward : public primitive {
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source and destination memory descriptors.
+        /// @param dst_desc Destination memory descriptors.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         desc(prop_kind aprop_kind, algorithm aalgorithm,
-                const memory::desc &data_desc, float alpha = 0, float beta = 0);
+                const memory::desc &src_desc, const memory::desc &dst_desc,
+                float alpha = 0, float beta = 0);
     };
 
     /// Primitive descriptor for an elementwise forward propagation primitive.
@@ -3252,14 +3256,15 @@ struct eltwise_backward : public primitive {
         /// primitive.
         ///
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param diff_data_desc Diff source and destination memory
-        ///     descriptors.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
-        desc(algorithm aalgorithm, const memory::desc &diff_data_desc,
+        desc(algorithm aalgorithm, const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc,
                 const memory::desc &data_desc, float alpha = 0, float beta = 0);
     };
 
@@ -3337,17 +3342,17 @@ struct softmax_forward : public primitive {
     struct desc {
         /// Default constructor. Produces an empty object.
         desc();
-
         /// Constructs a descriptor for a softmax forward propagation
         /// primitive.
         ///
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param softmax_axis Axis over which softmax is computed.
-        desc(prop_kind aprop_kind, const memory::desc &data_desc,
-                int softmax_axis);
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &dst_desc, int softmax_axis);
     };
 
     /// Primitive descriptor for a softmax forward propagation primitive.
@@ -3408,11 +3413,12 @@ struct softmax_backward : public primitive {
         /// Constructs a descriptor for a softmax backward propagation
         /// primitive.
         ///
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
-        /// @param data_desc Destination memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param softmax_axis Axis over which softmax is computed.
-        desc(const memory::desc &diff_data_desc, const memory::desc &data_desc,
+        desc(const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, const memory::desc &dst_desc,
                 int softmax_axis);
     };
 
@@ -3497,10 +3503,11 @@ struct logsoftmax_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param logsoftmax_axis Axis over which softmax is computed.
-        desc(prop_kind aprop_kind, const memory::desc &data_desc,
-                int logsoftmax_axis);
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &dst_desc, int logsoftmax_axis);
     };
 
     /// Primitive descriptor for a logsoftmax forward propagation primitive.
@@ -3561,11 +3568,12 @@ struct logsoftmax_backward : public primitive {
         /// Constructs a descriptor for a logsoftmax backward propagation
         /// primitive.
         ///
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptors.
-        /// @param data_desc Destination memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptors.
+        /// @param diff_dst_desc Diff destination memory descriptors.
+        /// @param dst_desc Destination memory descriptor.
         /// @param logsoftmax_axis Axis over which softmax is computed.
-        desc(const memory::desc &diff_data_desc, const memory::desc &data_desc,
+        desc(const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, const memory::desc &dst_desc,
                 int logsoftmax_axis);
     };
 
@@ -3663,11 +3671,13 @@ struct batch_normalization_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptors.
+        /// @param dst_desc Destination memory descriptors.
         /// @param epsilon Batch normalization epsilon parameter.
         /// @param flags Batch normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind aprop_kind, const memory::desc &data_desc, float epsilon,
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &dst_desc, float epsilon,
                 normalization_flags flags);
     };
 
@@ -3744,15 +3754,15 @@ struct batch_normalization_backward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
         ///     (diffs for all parameters are computed in this case).
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
         /// @param epsilon Batch normalization epsilon parameter.
         /// @param flags Batch normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind aprop_kind, const memory::desc &diff_data_desc,
-                const memory::desc &data_desc, float epsilon,
-                normalization_flags flags);
+        desc(prop_kind aprop_kind, const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, const memory::desc &src_desc,
+                float epsilon, normalization_flags flags);
     };
 
     /// Primitive descriptor for a batch normalization backward propagation
@@ -3866,27 +3876,15 @@ struct layer_normalization_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param stat_desc Statistics memory descriptors.
         /// @param epsilon Layer normalization epsilon parameter.
         /// @param flags Layer normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind aprop_kind, const memory::desc &data_desc,
-                const memory::desc &stat_desc, float epsilon,
-                normalization_flags flags);
-
-        /// Constructs a descriptor for layer normalization forward
-        /// propagation primitive.
-        ///
-        /// @param aprop_kind Propagation kind. Possible values are
-        ///     #dnnl::prop_kind::forward_training, and
-        ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptor.
-        /// @param epsilon Layer normalization epsilon parameter.
-        /// @param flags Layer normalization flags (@ref
-        ///     dnnl::normalization_flags).
-        desc(prop_kind aprop_kind, const memory::desc &data_desc, float epsilon,
-                normalization_flags flags);
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &dst_desc, const memory::desc &stat_desc,
+                float epsilon, normalization_flags flags);
     };
 
     /// Primitive descriptor for a layer normalization forward propagation
@@ -3960,31 +3958,16 @@ struct layer_normalization_backward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
         ///     (diffs for all parameters are computed in this case).
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
         /// @param stat_desc Statistics memory descriptors.
         /// @param epsilon Layer normalization epsilon parameter.
         /// @param flags Layer normalization flags (@ref
         ///     dnnl::normalization_flags).
-        desc(prop_kind aprop_kind, const memory::desc &diff_data_desc,
-                const memory::desc &data_desc, const memory::desc &stat_desc,
-                float epsilon, normalization_flags flags);
-
-        /// Constructs a descriptor for layer normalization backward
-        /// propagation primitive.
-        ///
-        /// @param aprop_kind Propagation kind. Possible values are
-        ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
-        ///     (diffs for all parameters are computed in this case).
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
-        /// @param data_desc Source memory descriptor.
-        /// @param epsilon Layer normalization epsilon parameter.
-        /// @param flags Layer normalization flags (@ref
-        ///     dnnl::normalization_flags).
-        desc(prop_kind aprop_kind, const memory::desc &diff_data_desc,
-                const memory::desc &data_desc, float epsilon,
+        desc(prop_kind aprop_kind, const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, const memory::desc &src_desc,
+                const memory::desc &stat_desc, float epsilon,
                 normalization_flags flags);
     };
 
@@ -5949,11 +5932,12 @@ struct shuffle_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param axis The axis along which the data is shuffled.
         /// @param group_size Shuffle group size.
-        desc(prop_kind aprop_kind, const memory::desc &data_desc, int axis,
-                int group_size);
+        desc(prop_kind aprop_kind, const memory::desc &src_desc,
+                const memory::desc &dst_desc, int axis, int group_size);
     };
 
     /// Primitive descriptor for a shuffle forward propagation primitive.
@@ -6000,11 +5984,12 @@ struct shuffle_backward : public primitive {
         /// Constructs a descriptor for a shuffle backward propagation
         /// primitive.
         ///
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param axis The axis along which the data is shuffled.
         /// @param group_size Shuffle group size.
-        desc(const memory::desc &diff_data_desc, int axis, int group_size);
+        desc(const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, int axis, int group_size);
     };
 
     /// Primitive descriptor for a shuffle backward propagation primitive.

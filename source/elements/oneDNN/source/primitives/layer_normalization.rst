@@ -134,13 +134,7 @@ Operation Details
    the |use_global_stats| flag. For the backward propagation, the mean and
    variance are always input parameters.
 
-3. The memory format and data type for ``src`` and ``dst`` are assumed to be
-   the same, and in the API they are typically referred to as ``data`` (e.g.,
-   see ``data_desc`` in dnnl::layer_normalization_forward::desc::desc()). The
-   same is true for ``diff_src`` and ``diff_dst``. The corresponding memory
-   descriptors are referred to as ``diff_data_desc``.
-
-4. Both forward and backward propagation support in-place operations, meaning
+3. Both forward and backward propagation support in-place operations, meaning
    that :math:`\src` can be used as input and output for forward propagation,
    and :math:`\diffdst` can be used as input and output for backward
    propagation. In case of an in-place operation, the original data will be

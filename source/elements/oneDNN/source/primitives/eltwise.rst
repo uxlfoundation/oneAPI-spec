@@ -164,10 +164,7 @@ Operation Details
    unused by the algorithm.
 
 2. The memory format and data type for :math:`\src` and :math:`\dst` are
-   assumed to be the same, and in the API are typically denoted as ``data``
-   (for example |eltwise_forward::desc::desc| has a ``data_desc``
-   argument). The same holds for :math:`\diffsrc` and :math:`\diffdst`. The
-   corresponding memory descriptors are denoted as ``diff_data_desc``.
+   assumed to be the same. The same holds for :math:`\diffsrc` and :math:`\diffdst`.
 
 3. Both forward and backward propagation support in-place operations, meaning
    that :math:`\src` can be used as input and output for forward propagation,
