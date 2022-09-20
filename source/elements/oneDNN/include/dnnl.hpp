@@ -3333,6 +3333,90 @@ struct prelu_backward : public primitive {
 
 /// @} dnnl_api_prelu
 
+/// @addtogroup dnnl_api_reduction Reduction
+///
+/// A primitive to compute reduction operation on data tensor
+/// using min, max, mul, sum, mean and norm_lp operations.
+///
+/// @{
+
+/// Reduction.
+struct reduction : public primitive {
+    /// Descriptor for reduction.
+    struct desc {
+        dnnl_reduction_desc_t data;
+
+        /// Default constructor. Produces an empty object.
+        desc() = default;
+
+        /// Constructs a descriptor for a reduction primitive using algorithm
+        /// specific parameters, source and destination memory descriptors.
+        ///
+        /// @note
+        ///     Destination memory descriptor may be initialized with
+        ///     #dnnl::memory::format_tag::any value of @p format_tag.
+        ///
+        /// @param aalgorithm reduction algorithm kind. Possible values:
+        ///     #dnnl_reduction_max, #dnnl_reduction_min, #dnnl_reduction_sum,
+        ///     #dnnl_reduction_mul, #dnnl_reduction_mean,
+        ///     #dnnl_reduction_norm_lp_max, #dnnl_reduction_norm_lp_sum,
+        ///     #dnnl_reduction_norm_lp_power_p_max,
+        ///     #dnnl_reduction_norm_lp_power_p_sum.
+        /// @param p algorithm specific parameter.
+        /// @param eps algorithm specific parameter.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
+        desc(algorithm aalgorithm, const memory::desc &src_desc,
+                const memory::desc &dst_desc, float p, float eps);
+    };
+
+    /// Primitive descriptor for a reduction primitive.
+    struct primitive_desc : public dnnl::primitive_desc {
+        /// Default constructor. Produces an empty object.
+        primitive_desc() = default;
+
+        /// Constructs a primitive descriptor for a reduction primitive.
+        ///
+        /// @param adesc Descriptor for a reduction primitive.
+        /// @param aengine Engine to use.
+        /// @param allow_empty A flag signifying whether construction is
+        ///     allowed to fail without throwing an exception. In this case an
+        ///     empty object will be produced. This flag is optional and
+        ///     defaults to false.
+        primitive_desc(const desc &adesc, const engine &aengine,
+                bool allow_empty = false);
+
+        /// Constructs a primitive descriptor for a reduction primitive.
+        ///
+        /// @param adesc Descriptor for a reduction primitive.
+        /// @param aengine Engine to use.
+        /// @param attr Primitive attributes to use.
+        /// @param allow_empty A flag signifying whether construction is
+        ///     allowed to fail without throwing an exception. In this case an
+        ///     empty object will be produced. This flag is optional and
+        ///     defaults to false.
+        primitive_desc(const desc &adesc, const primitive_attr &attr,
+                const engine &aengine, bool allow_empty = false)
+            : dnnl::primitive_desc(
+                    &adesc.data, &attr, aengine, nullptr, allow_empty) {}
+
+        /// @copydoc dnnl::primitive_desc_base::src_desc()const
+        memory::desc src_desc() const { return base::src_desc(0); }
+
+        /// @copydoc dnnl::primitive_desc_base::dst_desc()const
+        memory::desc dst_desc() const { return base::dst_desc(0); }
+    };
+
+    /// Default constructor. Produces an empty object.
+    reduction() = default;
+
+    /// Constructs a reduction primitive.
+    /// @param pd Primitive descriptor for a reduction primitive.
+    reduction(const primitive_desc &pd)
+};
+
+/// @} dnnl_api_reduction
+
 /// @addtogroup dnnl_api_eltwise Eltwise
 ///
 /// A primitive to perform elementwise operations such as the
