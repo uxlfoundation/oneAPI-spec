@@ -81,7 +81,11 @@ preserved.
 
 The :math:`scale` factor is supported in :ref:`int8
 <int8-quantization-label>` inference only. For all other cases the
-scale must be `1.0`.
+scale must be `1.0` (default value).
+The scale parameter is set to :math:`1.0` by default, and can be set
+using the |primitive_attr::set_scales| attribute for the argument
+|DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|.
+
 
 .. _post_ops_sum-label:
 
@@ -97,7 +101,10 @@ Prior to accumulating the result, the existing value is multiplied by
 scale.  The :math:`scale` factor is supported in :ref:`int8
 <attributes-quantization-label>` inference only and should be used
 only when the result and the existing data have different magnitudes.
-For all other cases the scale must be `1.0`.
+For all other cases the scale must be `1.0` (default value).
+The scale parameter is set to :math:`1.0` by default, and can be set
+using the |primitive_attr::set_scales| attribute for the argument
+|DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|.
 
 Additionally, the sum post-op can reinterpret the destination values as a
 different data type of the same size. This may be used to, for example,
@@ -130,10 +137,8 @@ This pattern is pretty common for the CNN topologies of the ResNet family.
 .. code:: cpp
 
    dnnl::post_ops po;
-   po.append_sum(
-           /* scale = */ 1.f);
+   po.append_sum();
    po.append_eltwise(
-           /* scale     = */ 1.f,
            /* algorithm = */ dnnl::algorithm::eltwise_relu,
            /* neg slope = */ 0.f,
            /* unused for ReLU */ 0.f);

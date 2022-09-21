@@ -1087,7 +1087,7 @@ struct post_ops {
 
     /// Appends an accumulation (sum) post-op. Prior to accumulating the
     /// result, the previous value would be multiplied by a scaling factor
-    /// @p scale.
+    /// @p scale provided as execution argument.
     ///
     /// The kind of this post-op is #dnnl::primitive::kind::sum.
     ///
@@ -1113,8 +1113,7 @@ struct post_ops {
     ///
     /// @param scale Scaling factor.
     /// @param data_type Data type.
-    void append_sum(float scale = 1.f,
-            memory::data_type data_type = memory::data_type::undef);
+    void append_sum(memory::data_type data_type = memory::data_type::undef);
 
     /// Returns the parameters of an accumulation (sum) post-op.
     ///
@@ -1143,8 +1142,7 @@ struct post_ops {
     /// @param aalgorithm Elementwise algorithm.
     /// @param alpha Alpha parameter for the elementwise algorithm.
     /// @param beta Beta parameter for the elementwise algorithm.
-    void append_eltwise(
-            float scale, algorithm aalgorithm, float alpha, float beta);
+    void append_eltwise(algorithm aalgorithm, float alpha, float beta);
 
     /// Returns parameters of an elementwise post-up.
     ///
@@ -1153,8 +1151,8 @@ struct post_ops {
     /// @param aalgorithm Output elementwise algorithm kind.
     /// @param alpha Output alpha parameter for the elementwise algorithm.
     /// @param beta Output beta parameter for the elementwise algorithm.
-    void get_params_eltwise(int index, float &scale, algorithm &aalgorithm,
-            float &alpha, float &beta) const;
+    void get_params_eltwise(
+            int index, algorithm &aalgorithm, float &alpha, float &beta) const;
 };
 
 /// Primitive attributes.
@@ -1170,35 +1168,20 @@ struct primitive_attr {
     /// @param mode Specified scratchpad mode.
     void set_scratchpad_mode(scratchpad_mode mode);
 
-    /// Returns output scaling factors correspondence mask and values.
+    /// Returns scaling factors correspondence mask for a given
+    /// memory argument.
     ///
+    /// @param arg Parameter argument index as passed to the
+    ///     primitive::execute() call.
     /// @param mask Scaling factors correspondence mask that defines the
-    ///     correspondence between the output tensor dimensions and the @p
-    ///     scales vector. The set i-th bit indicates that a dedicated output
-    ///     scaling factor is used for each index along that dimension. The
-    ///     mask value of 0 implies a common output scaling factor for the
-    ///     whole output tensor.
-    /// @param scales Vector of output scaling factors.
-    void get_output_scales(int &mask, std::vector<float> &scales) const;
+    ///     correspondence between the arg tensor dimensions and the
+    ///     scales vector.
+    void get_scales(int arg, int &mask) const;
 
-    /// Sets output scaling factors correspondence mask and values.
+    /// Sets scaling factors correspondance mask for a given memory
+    /// argument.
     ///
-    /// Example usage:
-    /// @code
-    ///     int mb = 32, oc = 32,
-    ///         oh = 14, ow = 14; // convolution output params
-    ///     // unique output scales per output channel
-    ///     vector<float> scales = { ... };
-    ///     int oc_dim = 1; // mb_dim = 0, channel_dim = 1, height_dim = 2, ...
-    ///
-    ///     // construct a convolution descriptor
-    ///     dnnl::convolution::desc conv_d;
-    ///
-    ///     dnnl::primitive_attr attr;
-    ///     attr.set_output_scales(attr, oc, 1 << oc_dim, scales);
-    ///
-    ///     dnnl::primitive_desc conv_pd(conv_d, attr, engine);
-    /// @endcode
+    /// @sa dnnl::primitive_attr::set_scales
     ///
     /// @note
     ///     The order of dimensions does not depend on how elements are laid
@@ -1206,66 +1189,29 @@ struct primitive_attr {
     ///     - for a 2D CNN activations tensor the order is always (n, c)
     ///     - for a 4D CNN activations tensor the order is always (n, c, h, w)
     ///     - for a 5D CNN weights tensor the order is always
-    ///        (g, oc, ic, kh, kw)
-    ///
-    /// @param mask Defines the correspondence between the output tensor
-    ///     dimensions and the @p scales vector. The set i-th bit indicates
-    ///     that a dedicated scaling factor is used for each index along that
-    ///     dimension. Set the mask to 0 to use a common output scaling factor
-    ///     for the whole output tensor.
-    /// @param scales Constant vector of output scaling factors. If the
-    ///     scaling factors are known at the time of this call, the following
-    ///     equality must hold:
-    ///     \f$scales.size() = \prod\limits_{d \in mask} output.dims[d].\f$
-    ///     Violations can only be detected when the attributes
-    ///     are used to create a primitive descriptor.
-    ///     If the scaling factors are not known at the time of the call,
-    ///     this vector must contain a single #DNNL_RUNTIME_F32_VAL value and
-    ///     the output scaling factors must be passed at execution time as an
-    ///     argument with index #DNNL_ARG_ATTR_OUTPUT_SCALES.
-    void set_output_scales(int mask, const std::vector<float> &scales);
-    /// Returns scaling factors correspondence mask and values for a given
-    /// memory argument.
     ///
     /// @param arg Parameter argument index as passed to the
     ///     primitive::execute() call.
     /// @param mask Scaling factors correspondence mask that defines the
-    ///     correspondence between the output tensor dimensions and the @p
-    ///     scales vector. The set i-th bit indicates that a dedicated scaling
+    ///     correspondence between the @p arg tensor dimensions and the
+    ///     scales vector. Setting the i-th bit indicates that a dedicated scaling
     ///     factor is used for each index along that dimension. Set the mask to
-    ///     0 to use a common scaling factor for the whole output tensor.
-    /// @param scales Output vector of scaling factors.
-    void get_scales(int arg, int &mask, std::vector<float> &scales) const;
-
-    /// Sets scaling factors for primitive operations for a given memory
-    /// argument.
-    ///
-    /// @sa dnnl::primitive_attr::set_output_scales
-    ///
-    /// @param arg Parameter argument index as passed to the
-    ///     primitive::execute() call.
-    /// @param mask Scaling factors correspondence mask that defines the
-    ///     correspondence between the tensor dimensions and the @p scales
-    ///     vector. The set i-th bit indicates that a dedicated scaling factor
-    ///     is used for each index along that dimension. Set the mask to 0 to
-    ///     use a common scaling factor for the whole output tensor.
-    /// @param scales Constant vector of scaling factors. The following equality
-    ///     must hold:
-    ///     \f$scales.size() = \prod\limits_{d \in mask} argument.dims[d].\f$
-    void set_scales(int arg, int mask, const std::vector<float> &scales);
+    ///     0 to use a common scaling factor for the whole tensor.
+    ///     The scales must be passed at execution time as an argument with index
+    ///     #DNNL_ARG_ATTR_SCALES.
+    void set_scales(int arg, int mask);
 
     /// Returns zero points correspondence mask and values.
     ///
     /// @param arg Parameter argument index as passed to the
     ///     primitive::execute() call.
     /// @param mask Zero points correspondence mask that defines the
-    ///     correspondence between the output tensor dimensions and the @p
-    ///     zero_points vector. The set i-th bit indicates that a dedicated
+    ///     correspondence between the @p arg tensor dimensions and the @p
+    ///     zero_points vector. Setting the i-th bit indicates that a dedicated
     ///     zero point is used for each index along that dimension. Set the
-    ///     mask to 0 to use a common zero point for the whole output tensor.
-    /// @param zero_points Output vector of zero points.
+    ///     mask to 0 to use a common zero point for the whole tensor.
     void get_zero_points(
-            int arg, int &mask, std::vector<int32_t> &zero_points) const;
+            int arg, int &mask) const;
 
     /// Sets zero points for primitive operations for a given memory argument.
     ///
@@ -1278,13 +1224,7 @@ struct primitive_attr {
     ///     zero_points vector. The set i-th bit indicates that a dedicated
     ///     zero point is used for each index along that dimension. Set the
     ///     mask to 0 to use a common zero point for the whole output tensor.
-    /// @param zero_points Constant vector of zero points. If the zero points
-    ///     are known at the time of this call, the following equality must
-    ///     hold: \f$zero\_points.size() = \prod\limits_{d \in mask}
-    ///     argument.dims[d].\f$ If the zero points are not known at the time
-    ///     of the call, this vector must contain a single
-    ///     #DNNL_RUNTIME_F32_VAL value and the zero points must be passed at
-    ///     execution time as an argument with index
+    ///     The zero points must be passed at execution time as an argument with index
     ///     #DNNL_ARG_ATTR_ZERO_POINTS.
     void set_zero_points(
             int arg, int mask, const std::vector<int32_t> &zero_points);

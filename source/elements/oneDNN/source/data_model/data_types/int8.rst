@@ -27,16 +27,17 @@ Quantization Model
 ==================
 
 For each int8 tensor, the oneDNN library allows to specify scaling
-factors and a zero-points (also refered to as quantization
+factors and zero-points (also refered to as quantization
 parameters), and assumes the following mathematical relationship:
 
 .. math::
 
     x_{f32}[:] = scale_{f32} \cdot (x_{int8}[:] - 0_{x_{int8}})
 
-where :math:`scale_{f32}` is a *scaling factor* and :math:`[:]` is
-used to denote elementwise application of the formula to the
-arrays. In order to provide best performance, oneDNN does not
+where :math:`scale_{f32}` is a *scaling factor* in float format,
+:math:`0_{x_{int8}}` is the zero point in int32 format, and
+:math:`[:]` is used to denote elementwise application of the formula
+to the arrays. In order to provide best performance, oneDNN does not
 compute those scaling factors and zero-points as part of primitive
 computation. Those should be provided by the user through the
 :ref:`attribute mecanism<attributes-quantization-label>`.
@@ -45,7 +46,7 @@ These quantization parameters can either be computed ahead of time
 using calibration tools (*static* quantization) or at runtime based on
 the actual minimum and maximum values of a tensor (*dynamic*
 quantization). Either method can be used in conjuction with oneDNN, as
-the quantization parameters are passed to the oneDNN primitives
+the quantization parameters are passed to the oneDNN primitives at
 execution time.
 
 To support int8 quantization, primitives should be created and
@@ -64,15 +65,16 @@ executed as follow:
 
    For performance reasons, each primitive implementation can support
    only a subset of quantization parameter masks. For example,
-   convolution typically does not support zero-points for weights, and
-   does not support per-channel scaling factor for activation.
+   convolution typically supports per-channel scales (no zero-point)
+   for weights, and per-tensor scaling factor and zero-point for
+   activation.
 
 .. note::
 
    Some primitives might use quantization parameters in order to
-   dequantize/quantize intermediate values.  This is for example the
+   dequantize/quantize intermediate values. This is for example the
    case for the :ref:`rnn-label` primitive, which will dequantize
-   before applying non linear functions, and will requantize because
+   before applying non linear functions, and will requantize before
    executing matrix multiplication operations.
 
 
@@ -92,17 +94,18 @@ undefined (e.g. when converting `s32` to int8). However, it is highly
 encouraged for implementations to saturate values.
 
 When multiple operations are fused in a single primitive using the
-:ref:`post-op mecanism<post_ops-label>`, it might be necessary to
-apply new quantization parameters between each of these operations.
-This can be achieved using the :ref:`binary
-post-ops<post_ops_binary-label>`.
+:ref:`post-op mecanism<post_ops-label>`, those are assumed to be
+computed in f32 precision. As a result the destination quantization
+parameters are applied after the post-ops as follow:
 
-.. note::
+.. math::
 
-   During post-ops computation, conversions to f32 might happen. In
-   particular, it happens before applying scaling factors which are
-   f32 values, or before some :ref:`element-wise
-   functions<post_ops_eltwise-label>`.
+   \dst[:] = post\_ops(OP(src[:], weights[:], ...)) / scale_{\dst} + zp_{\dst}
+
+Quantizing/dequantizing values between post-operations can still be
+achieved using one of :ref:`eltwise post-ops<post_ops_eltwise-label>`,
+:ref:`binary post-ops<post_ops_binary-label>`, or the scale parameter
+of the appropriate post-operation.
 
 
 Example: Convolution Quantization Workflow
@@ -126,23 +129,21 @@ zero_point_{\dst}`. Mathematically, the computations are:
 
    \dst_{int8}[:] =
       \operatorname{f32\_to\_int8}(
-         output\_scale \cdot
-         \operatorname{s32\_to\_f32}(conv_{s32}(\src_{int8}, \weights_{int8}))
-	   - \src\_zp \cdot comp\_s32
-      ) + \dst\_zp,
+         scale_{\src} \cdot scale_{\weights} \cdot
+         \operatorname{s32\_to\_f32}(conv_{s32}(\src_{int8}, \weights_{int8})
+	   - \src\_zp \cdot comp\_s32) / scale_{\dst}
+           + \dst\_zp )
       
 where
-
-- :math:`output\_scale := \frac{scale_{\src} \cdot scale_{\weights}}{scale_{\dst}}`;
 
 - :math:`conv_{s32}` is just a regular convolution which takes source and
   weights with int8 data type and compute the result in int32 data type (int32
   is chosen to avoid overflows during the computations);
 
-- :math:`comp\s32 = \sum_{k}` a compensation term to account for the
-  fact that `\src` has a non-zero zero point. This term is computed by
-  the oneDNN library and can typically be computed ahead of time, for
-  example during weights reorder.
+- :math:`comp\s32` is a compensation term to account for
+  `\src` non-zero zero point. This term is computed by the oneDNN
+  library and can typically be pre-computed ahead of time, for example
+  during weights reorder.
 
 - :math:`\operatorname{f32\_to\_s8}()` converts an `f32` value to `s8` with
   potential saturation if the values are out of the range of the int8 data
@@ -151,15 +152,6 @@ where
 - :math:`\operatorname{s32\_to\_f32}()` converts an `int8` value to
   `f32` with potential rounding. This conversion is typically
   necessary to apply `f32` scaling factors.
-
-.. todo: put precomputing output_scales as a remark/optimization, in a
-    separate note/sub-section.
-
-Note that in order to perform the operation, one doesn't need to know the exact
-scaling factors for all the tensors; it is enough to know only the
-`output\_scale`. The library utilizes this fact: a user needs to provide only
-this one extra parameter to the convolution primitive (see the
-:ref:`output_scaling-label` section below).
 
 
 Per-Channel Scaling
@@ -171,15 +163,13 @@ support per-output-channel scaling factors for the weights, meaning that the
 actual convolution computations would need to scale different output channels
 differently.
 
-Let :math:`\alpha` denote scales:
+- :math:`\src_{f32}(n, ic, ih, iw) = scale_{\src} \cdot \src_{int8}(n, ic, ih, iw)`
 
-- :math:`\src_{f32}(n, ic, ih, iw) = \alpha_{\src} \cdot \src_{int8}(n, ic, ih, iw)`
-
-- :math:`\weights_{f32}(oc, ic, kh, kw) = \alpha_{\weights}(oc) \cdot \weights_{int8}(oc, ic, kh, kw)`
+- :math:`\weights_{f32}(oc, ic, kh, kw) = scale_{\weights}(oc) \cdot \weights_{int8}(oc, ic, kh, kw)`
 
 - :math:`\dst_{f32}(n, oc, oh, ow) = scale_{\dst} \cdot \dst_{int8}(n, oc, oh, ow)`
 
-Note that now the weights' scaling factor depends on the :math:`oc`.
+Note that now the weights' scaling factor depends on :math:`oc`.
 
 To compute the :math:`\dst_{int8}` we need to perform the following:
 
@@ -187,16 +177,9 @@ To compute the :math:`\dst_{int8}` we need to perform the following:
 
     \dst_{int8}(n, oc, oh, ow) =
         \operatorname{f32\_to\_int8}(
-            output\_scale(oc) \cdot
+            \frac{scale_{\src} \cdot scale_{\weights}(oc)}{scale_{\dst}} \cdot
             conv_{s32}(\src_{int8}, \weights_{int8})|_{(n, oc, oh, ow)}
-        ),
-
-where
-
-.. math::
-
-   output\_scale(oc) :=
-    \frac{\alpha_{\src} \cdot \alpha_{\weights}(oc)}{\alpha_{\dst}}.
+        ).
 
 The user is responsible for preparing quantized weights accordingly. To do that,
 oneDNN provides reorders that can perform per-channel scaling:
@@ -205,15 +188,8 @@ oneDNN provides reorders that can perform per-channel scaling:
 
     \weights_{int8}(oc, ic, kh, kw) =
         \operatorname{f32\_to\_int8}(
-            output\_scale(oc) \cdot
-            \weights_{f32}(oc, ic, kh, kw)
-        ),
-
-where
-
-.. math::
-
-   output\_scale(oc) := \frac{1}{\alpha_{\weights}(oc_{})}.
+            \weights_{f32}(oc, ic, kh, kw) / weights_scale(oc)
+        ).
 
 The :ref:`attributes-quantization-label` describes what kind of quantization
 model oneDNN supports.
