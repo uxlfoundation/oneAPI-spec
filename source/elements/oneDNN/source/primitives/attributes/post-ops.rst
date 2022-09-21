@@ -14,7 +14,16 @@ Post-ops
 
 *Post-ops* are operations that are appended after a primitive.  They are
 implemented using the :ref:`attributes-link` mechanism. If there are multiple
-post-ops, the are executed in the order they have been appended.
+post-ops, they are executed in the order they have been appended as follow:
+
+.. math::
+
+   \dst = po[n](po[n-1] (...(po[0](OP()))))
+
+.. note::
+
+   Post-ops does not preserve intermediate data during
+   computation. This typically makes them suitable for inference only.
 
 The post-ops are represented by |post_ops| which is copied once it
 is attached to the attributes using |primitive_attr::set_post_ops|
@@ -46,8 +55,8 @@ creation function to take effect. Below is a simple sketch:
    :ref:`attributes_error_handling-link`.
 
 .. note::
-    Post-ops do not change memory format of the operation destination memory
-    object.
+   Post-ops do not change memory format of the operation destination memory
+   object.
 
 The post-op objects can be inspected using the |post_ops::kind|
 function that takes an index of the post-op to inspect (that must be less than
@@ -120,6 +129,41 @@ with
 
 .. math::
     \dst[:] = scale \cdot as_data_type(\dst[:]) + \operatorname{Op}(...)
+
+.. _post_ops_binary-label:
+
+Binary post-ops
+============================
+
+The binary post-op replaces:
+.. math::
+
+   \dst[:] = \operatorname{Op}(...)
+
+with
+
+.. math::
+
+   \dst[:] = \operatorname{binary}(\operatorname{Op}(...), scale[:] \cdot Source\_1[:])
+
+The binary post-op supports the same algorithms and broadcast semantic
+as the :ref:`binary primitive<primitive_binary-link>`.
+
+Furthermore, the binary post-op scale parameter is set to :math:`1.0`
+by default, and can be set using the |primitive_attr::set_scales|
+attribute for the argument |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)
+\| DNNL_ARG_SRC_1|. For example:
+
+.. code:: cpp
+
+   primitive_attr attr;
+   post_ops p_ops;
+   p_ops.append_binary(algorithm::binary_add, summand_md);
+
+   attr.set_post_ops(p_ops);
+   attr.set_scales(DNNL_ARG_ATTR_MULTIPLE_POST_OP(0) | DNNL_ARG_SRC_1,
+           /* mask */ 0);
+
 
 Examples of Chained Post-ops
 ============================

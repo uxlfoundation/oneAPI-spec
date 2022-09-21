@@ -6,6 +6,8 @@
 
 .. include:: /elements/oneDNN/source/replacements.inc.rst
 
+.. _primitive_binary-link:
+
 ######
 Binary
 ######
