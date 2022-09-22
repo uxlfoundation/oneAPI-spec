@@ -47,7 +47,7 @@ rotmg (Buffer Version)
                   sycl::buffer<T,1> &d1,
                   sycl::buffer<T,1> &d2,
                   sycl::buffer<T,1> &x1,
-                  sycl::buffer<T,1> &y1,
+                  sycl::buffer<T,1>  y1,
                   sycl::buffer<T,1> &param)
    }
 .. code-block:: cpp
@@ -57,7 +57,7 @@ rotmg (Buffer Version)
                   sycl::buffer<T,1> &d1,
                   sycl::buffer<T,1> &d2,
                   sycl::buffer<T,1> &x1,
-                  sycl::buffer<T,1> &y1,
+                  sycl::buffer<T,1>  y1,
                   sycl::buffer<T,1> &param)
    }
 
@@ -173,7 +173,7 @@ rotmg (USM Version)
                          T *d1,
                          T *d2,
                          T *x1,
-                         T *y1,
+                         T  y1,
                          T *param,
                          const std::vector<sycl::event> &dependencies = {})
    }
@@ -184,7 +184,7 @@ rotmg (USM Version)
                          T *d1,
                          T *d2,
                          T *x1,
-                         T *y1,
+                         T  y1,
                          T *param,
                          const std::vector<sycl::event> &dependencies = {})
    }
