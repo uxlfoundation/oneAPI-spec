@@ -160,8 +160,8 @@
 /// Gradient (diff) of the bias tensor argument.
 #define DNNL_ARG_DIFF_BIAS 169
 
-/// Output scaling factors provided at execution time.
-#define DNNL_ARG_ATTR_OUTPUT_SCALES 513
+/// Scaling factors provided at execution time.
+#define DNNL_ARG_ATTR_SCALES 513
 
 /// Starting index for source arguments for primitives that take a variable
 /// number of source arguments.

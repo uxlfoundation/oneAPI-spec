@@ -86,8 +86,6 @@ struct primitive {
         rnn,
         /// A binary primitive.
         binary,
-        /// A logsoftmax primitive.
-        logsoftmax,
         /// A matmul (matrix multiplication) primitive.
         matmul,
         /// A resampling primitive.
@@ -276,10 +274,48 @@ enum class algorithm {
     binary_max,
     /// Binary min
     binary_min,
+    /// Binary div
+    binary_div,
+    /// Binary sub
+    binary_sub,
+    /// Binary greater than or equal
+    binary_ge,
+    /// Binary greater than
+    binary_gt,
+    /// Binary less than or equal
+    binary_le,
+    /// Binary less than
+    binary_lt,
+    /// Binary equal
+    binary_eq,
+    /// Binary not equal
+    binary_ne,
     /// Nearest Neighbor resampling method
     resampling_nearest,
     /// Linear (Bilinear, Trilinear) resampling method
     resampling_linear,
+    /// Reduction using max operation
+    reduction_max,
+    /// Reduction using min operation
+    reduction_min,
+    /// Reduction using sum operation
+    reduction_sum,
+    /// Reduction using mul operation
+    reduction_mul,
+    /// Reduction using mean operation
+    reduction_mean,
+    /// Reduction using norm_lp_max operation
+    reduction_norm_lp_max,
+    /// Reduction using norm_lp_sum operation
+    reduction_norm_lp_sum,
+    /// Reduction using norm_lp_power_p_max operation
+    reduction_norm_lp_power_p_max,
+    /// Reduction using norm_lp_power_p_sum operation
+    reduction_norm_lp_power_p_sum,
+    /// Softmax, numerically stable
+    softmax_accurate = dnnl_softmax_accurate,
+    /// LogSoftmax, numerically stable
+    softmax_log = dnnl_softmax_log,
 };
 
 /// @} dnnl_api_attributes
@@ -1111,7 +1147,6 @@ struct post_ops {
     ///     This post-op executes in-place and does not change the
     ///     destination layout.
     ///
-    /// @param scale Scaling factor.
     /// @param data_type Data type.
     void append_sum(memory::data_type data_type = memory::data_type::undef);
 
@@ -1138,7 +1173,6 @@ struct post_ops {
     /// of `dst[:] <- op(...)`, where eltwise_op is configured with the given
     /// parameters.
     ///
-    /// @param scale Scaling factor.
     /// @param aalgorithm Elementwise algorithm.
     /// @param alpha Alpha parameter for the elementwise algorithm.
     /// @param beta Beta parameter for the elementwise algorithm.
@@ -1147,7 +1181,6 @@ struct post_ops {
     /// Returns parameters of an elementwise post-up.
     ///
     /// @param index Index of the post-op.
-    /// @param scale Output scaling factor.
     /// @param aalgorithm Output elementwise algorithm kind.
     /// @param alpha Output alpha parameter for the elementwise algorithm.
     /// @param beta Output beta parameter for the elementwise algorithm.
@@ -1206,12 +1239,11 @@ struct primitive_attr {
     /// @param arg Parameter argument index as passed to the
     ///     primitive::execute() call.
     /// @param mask Zero points correspondence mask that defines the
-    ///     correspondence between the @p arg tensor dimensions and the @p
-    ///     zero_points vector. Setting the i-th bit indicates that a dedicated
-    ///     zero point is used for each index along that dimension. Set the
-    ///     mask to 0 to use a common zero point for the whole tensor.
-    void get_zero_points(
-            int arg, int &mask) const;
+    ///     correspondence between the @p arg tensor dimensions and the
+    ///     vector of zero_points. Setting the i-th bit indicates that a
+    ///     dedicated zero point is used for each index along that dimension.
+    ///     Set the mask to 0 to use a common zero point for the whole tensor.
+    void get_zero_points(int arg, int &mask) const;
 
     /// Sets zero points for primitive operations for a given memory argument.
     ///
@@ -1226,8 +1258,7 @@ struct primitive_attr {
     ///     mask to 0 to use a common zero point for the whole output tensor.
     ///     The zero points must be passed at execution time as an argument with index
     ///     #DNNL_ARG_ATTR_ZERO_POINTS.
-    void set_zero_points(
-            int arg, int mask, const std::vector<int32_t> &zero_points);
+    void set_zero_points(int arg, int mask);
 
     /// Returns post-ops previously set via set_post_ops().
     ///
@@ -3159,13 +3190,13 @@ struct prelu_forward : public primitive {
                 const engine &aengine, bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
-        memory::desc src_desc() const { return base::src_desc(0); }
+        memory::desc src_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::dst_desc()const
-        memory::desc dst_desc() const { return base::dst_desc(0); }
+        memory::desc dst_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::weights_desc()const
-        memory::desc weights_desc() const { return base::weights_desc(0); }
+        memory::desc weights_desc() const;
     };
 
     /// Default constructor. Produces an empty object.
@@ -3184,10 +3215,10 @@ struct prelu_backward : public primitive {
         /// Constructs a descriptor for a PReLU backward propagation
         /// primitive.
         ///
-        /// @param data_desc Source memory descriptors.
-        /// @param weight_desc Alpha parameters memory descriptor.
-        /// @param diff_data_desc Diff source and destination memory
-        ///     descriptors.
+        /// @param src_desc Source memory descriptors.
+        /// @param weights_desc Alpha parameters memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param diff_weights_desc Diff alpha parameters memory descriptor.
         desc(const memory::desc &src_desc, const memory::desc &weights_desc,
                 const memory::desc &diff_src_desc,
@@ -3237,16 +3268,16 @@ struct prelu_backward : public primitive {
                 bool allow_empty = false);
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
-        memory::desc src_desc() const { return base::src_desc(0); }
+        memory::desc src_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::diff_src_desc()const
-        memory::desc diff_src_desc() const { return base::diff_src_desc(0); }
+        memory::desc diff_src_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::diff_dst_desc()const
-        memory::desc diff_dst_desc() const { return base::diff_dst_desc(0); }
+        memory::desc diff_dst_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::weights_desc()const
-        memory::desc weights_desc() const { return base::weights_desc(0); }
+        memory::desc weights_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::diff_weights_desc()const
         memory::desc diff_weights_desc() const {
@@ -3284,8 +3315,6 @@ struct prelu_backward : public primitive {
 struct reduction : public primitive {
     /// Descriptor for reduction.
     struct desc {
-        dnnl_reduction_desc_t data;
-
         /// Default constructor. Produces an empty object.
         desc() = default;
 
@@ -3297,11 +3326,15 @@ struct reduction : public primitive {
         ///     #dnnl::memory::format_tag::any value of @p format_tag.
         ///
         /// @param aalgorithm reduction algorithm kind. Possible values:
-        ///     #dnnl_reduction_max, #dnnl_reduction_min, #dnnl_reduction_sum,
-        ///     #dnnl_reduction_mul, #dnnl_reduction_mean,
-        ///     #dnnl_reduction_norm_lp_max, #dnnl_reduction_norm_lp_sum,
-        ///     #dnnl_reduction_norm_lp_power_p_max,
-        ///     #dnnl_reduction_norm_lp_power_p_sum.
+        ///     #dnnl::algorithm::reduction_max,
+        ///     #dnnl::algorithm::reduction_min,
+        ///     #dnnl::algorithm::reduction_sum,
+        ///     #dnnl::algorithm::reduction_mul,
+        ///     #dnnl::algorithm::reduction_mean,
+        ///     #dnnl::algorithm::reduction_norm_lp_max,
+        ///     #dnnl::algorithm::reduction_norm_lp_sum,
+        ///     #dnnl::algorithm::reduction_norm_lp_power_p_max,
+        ///     #dnnl::algorithm::reduction_norm_lp_power_p_sum.
         /// @param p algorithm specific parameter.
         /// @param eps algorithm specific parameter.
         /// @param src_desc Source memory descriptor.
@@ -3341,10 +3374,10 @@ struct reduction : public primitive {
                     &adesc.data, &attr, aengine, nullptr, allow_empty) {}
 
         /// @copydoc dnnl::primitive_desc_base::src_desc()const
-        memory::desc src_desc() const { return base::src_desc(0); }
+        memory::desc src_desc() const;
 
         /// @copydoc dnnl::primitive_desc_base::dst_desc()const
-        memory::desc dst_desc() const { return base::dst_desc(0); }
+        memory::desc dst_desc() const;
     };
 
     /// Default constructor. Produces an empty object.
@@ -3458,7 +3491,7 @@ struct eltwise_backward : public primitive {
         /// @param aalgorithm Elementwise algorithm kind.
         /// @param diff_src_desc Diff source memory descriptor.
         /// @param diff_dst_desc Diff destination memory descriptors.
-        /// @param src_desc Source memory descriptor.
+        /// @param data_desc Source or destination memory descriptor.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
