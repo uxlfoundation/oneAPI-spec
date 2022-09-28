@@ -28,9 +28,7 @@ Base Class for Primitives
 Base Class for Primitives Descriptors
 *************************************
 
-There is no common base class for operation descriptors because they are very
-different between different primitives. However, there is a common base class
-for primitive descriptors.
+There is a common base class for primitive descriptors.
 
 .. doxygenstruct:: dnnl::primitive_desc_base
    :project: oneDNN

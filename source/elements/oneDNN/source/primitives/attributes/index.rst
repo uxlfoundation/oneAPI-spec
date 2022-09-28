@@ -273,17 +273,6 @@ channel scaling.
 
    dnnl::memory::desc dst_conv_s8_any_md(...);  // ditto
 
-   // Create a convolution operation descriptor
-   dnnl::convolution_forward::desc conv_d(
-           dnnl::prop_kind::forward_inference,
-           dnnl::algorithm::convolution_direct,
-           src_conv_s8_any_md,                     // what's important is that
-           wei_conv_s8_any_md,                     // we specified that we want
-           dst_conv_s8_any_md,                     // computations in s8
-           strides, padding_l, padding_r,
-           dnnl::padding_kind::zero
-           );
-
    // prepare the attributes for the convolution
    dnnl::primitive_attr attr;
    const int data_mask = 0; // scale and zero-point per tensor for source and destination
@@ -302,10 +291,14 @@ channel scaling.
 
    // create a convolution primitive descriptor
    auto conv_pd = dnnl::convolution_forward::primitive_desc(
-           conv_d, // general (non-customized) operation descriptor
-           attr,   // the attributes describe the quantization flow
-           engine);
-
+           dnnl::prop_kind::forward_inference,
+           dnnl::algorithm::convolution_direct,
+           src_conv_s8_any_md,                     // what's important is that
+           wei_conv_s8_any_md,                     // we specified that we want
+           dst_conv_s8_any_md,                     // computations in s8
+           strides, padding_l, padding_r,
+           dnnl::padding_kind::zero
+           attr);   // the attributes describe the quantization flow
 
 .. _attributes_fpmath_mode-label:
 

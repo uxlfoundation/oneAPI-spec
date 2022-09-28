@@ -168,10 +168,10 @@ Primitive input/output Execution argument index
 Operation Details
 *****************
 
-1. The |eltwise_forward::desc::desc| and
-   |eltwise_backward::desc::desc| constructors take both parameters
-   :math:`\alpha`, and :math:`\beta`. These parameters are ignored if they are
-   unused by the algorithm.
+1. The |eltwise_forward::primtive_desc| and
+   |eltwise_backward::primitive_desc| constructors take both
+   parameters :math:`\alpha`, and :math:`\beta`. These parameters are
+   ignored if they are unused by the algorithm.
 
 2. The memory format and data type for :math:`\src` and :math:`\dst` are
    assumed to be the same. The same holds for :math:`\diffsrc` and :math:`\diffdst`.
