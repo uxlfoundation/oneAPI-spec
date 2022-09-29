@@ -204,28 +204,28 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event axpy_batch(sycl::queue &queue,
-                              std::int64_t *n,
-                              T *alpha,
+                              const std::int64_t *n,
+                              const T *alpha,
                               const T **x,
-                              std::int64_t *incx,
+                              const std::int64_t *incx,
                               T **y,
-                              std::int64_t *incy,
+                              const std::int64_t *incy,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event axpy_batch(sycl::queue &queue,
-                              std::int64_t *n,
-                              T *alpha,
+                              const std::int64_t *n,
+                              const T *alpha,
                               const T **x,
-                              std::int64_t *incx,
+                              const std::int64_t *incx,
                               T **y,
-                              std::int64_t *incy,
+                              const std::int64_t *incy,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 

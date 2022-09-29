@@ -29,7 +29,7 @@ where ``x`` is a vector with ``n`` elements.
       :header-rows: 1
 
       * -  T 
-        -  T_res 
+        -  Tres 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 
@@ -53,7 +53,7 @@ asum (Buffer Version)
                  std::int64_t n,
                  sycl::buffer<T,1> &x,
                  std::int64_t incx,
-                 sycl::buffer<T_res,1> &result)
+                 sycl::buffer<Tres,1> &result)
    }
 .. code-block:: cpp
 
@@ -62,7 +62,7 @@ asum (Buffer Version)
                  std::int64_t n,
                  sycl::buffer<T,1> &x,
                  std::int64_t incx,
-                 sycl::buffer<T_res,1> &result)
+                 sycl::buffer<Tres,1> &result)
    }
 
 .. container:: section
@@ -126,7 +126,7 @@ asum (USM Version)
                         std::int64_t n,
                         const T *x,
                         std::int64_t incx,
-                        T_res *result,
+                        Tres *result,
                         const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -136,7 +136,7 @@ asum (USM Version)
                         std::int64_t n,
                         const T *x,
                         std::int64_t incx,
-                        T_res *result,
+                        Tres *result,
                         const std::vector<sycl::event> &dependencies = {})
    }
 

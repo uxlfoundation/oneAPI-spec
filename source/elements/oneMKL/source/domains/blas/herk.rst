@@ -36,7 +36,7 @@ Here op(``A``) is ``n`` x ``k``, and ``C`` is ``n`` x ``n``.
       :header-rows: 1
 
       * -  T 
-        -  T_real 
+        -  Treal 
       * -  ``std::complex<float>`` 
         -  ``float`` 
       * -  ``std::complex<double>`` 
@@ -57,10 +57,10 @@ herk (Buffer Version)
                  onemkl::transpose trans,
                  std::int64_t n,
                  std::int64_t k,
-                 T_real alpha,
+                 Treal alpha,
                  sycl::buffer<T,1> &a,
                  std::int64_t lda,
-                 T_real beta,
+                 Treal beta,
                  sycl::buffer<T,1> &c,
                  std::int64_t ldc)
    }
@@ -72,10 +72,10 @@ herk (Buffer Version)
                  onemkl::transpose trans,
                  std::int64_t n,
                  std::int64_t k,
-                 T_real alpha,
+                 Treal alpha,
                  sycl::buffer<T,1> &a,
                  std::int64_t lda,
-                 T_real beta,
+                 Treal beta,
                  sycl::buffer<T,1> &c,
                  std::int64_t ldc)
    }
@@ -204,11 +204,11 @@ herk (USM Version)
                         onemkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
-                        T_real alpha,
-                        const T* a,
+                        Treal alpha,
+                        const T *a,
                         std::int64_t lda,
-                        T_real beta,
-                        T* c,
+                        Treal beta,
+                        T *c,
                         std::int64_t ldc,
                         const std::vector<sycl::event> &dependencies = {})
    }
@@ -220,11 +220,11 @@ herk (USM Version)
                         onemkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
-                        T_real alpha,
-                        const T* a,
+                        Treal alpha,
+                        const T *a,
                         std::int64_t lda,
-                        T_real beta,
-                        T* c,
+                        Treal beta,
+                        T *c,
                         std::int64_t ldc,
                         const std::vector<sycl::event> &dependencies = {})
    }

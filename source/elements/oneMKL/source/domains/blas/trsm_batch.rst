@@ -275,38 +275,38 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              onemkl::side *left_right,
-                              onemkl::uplo *upper_lower,
-                              onemkl::transpose *trans,
-                              onemkl::diag *unit_diag,
-                              std::int64_t *m,
-                              std::int64_t *n,
-                              T *alpha,
+                              const onemkl::side *left_right,
+                              const onemkl::uplo *upper_lower,
+                              const onemkl::transpose *trans,
+                              const onemkl::diag *unit_diag,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               T **b,
-                              std::int64_t *ldb,
+                              const std::int64_t *ldb,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              onemkl::side *left_right,
-                              onemkl::uplo *upper_lower,
-                              onemkl::transpose *trans,
-                              onemkl::diag *unit_diag,
-                              std::int64_t *m,
-                              std::int64_t *n,
-                              T *alpha,
+                              const onemkl::side *left_right,
+                              const onemkl::uplo *upper_lower,
+                              const onemkl::transpose *trans,
+                              const onemkl::diag *unit_diag,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               T **b,
-                              std::int64_t *ldb,
+                              const std::int64_t *ldb,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 
