@@ -200,9 +200,9 @@ trmm (USM Version)
                         std::int64_t m,
                         std::int64_t n,
                         T alpha,
-                        const T* a,
+                        const T *a,
                         std::int64_t lda,
-                        T* b,
+                        T *b,
                         std::int64_t ldb,
                         const std::vector<sycl::event> &dependencies = {})
    }
@@ -216,9 +216,9 @@ trmm (USM Version)
                         std::int64_t m,
                         std::int64_t n,
                         T alpha,
-                        const T* a,
+                        const T *a,
                         std::int64_t lda,
-                        T* b,
+                        T *b,
                         std::int64_t ldb,
                         const std::vector<sycl::event> &dependencies = {})
    }

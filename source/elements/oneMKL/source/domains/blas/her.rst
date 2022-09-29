@@ -34,7 +34,7 @@ where:
       :header-rows: 1
 
       * -  T 
-        -  Ts 
+        -  Treal 
       * -  ``std::complex<float>`` 
         -  ``float`` 
       * -  ``std::complex<double>`` 
@@ -53,7 +53,7 @@ her (Buffer Version)
        void her(sycl::queue &queue,
                 onemkl::uplo upper_lower,
                 std::int64_t n,
-                Ts alpha,
+                Treal alpha,
                 sycl::buffer<T,1> &x,
                 std::int64_t incx,
                 sycl::buffer<T,1> &a,
@@ -65,7 +65,7 @@ her (Buffer Version)
        void her(sycl::queue &queue,
                 onemkl::uplo upper_lower,
                 std::int64_t n,
-                Ts alpha,
+                Treal alpha,
                 sycl::buffer<T,1> &x,
                 std::int64_t incx,
                 sycl::buffer<T,1> &a,
@@ -151,7 +151,7 @@ her (USM Version)
        sycl::event her(sycl::queue &queue,
                        onemkl::uplo upper_lower,
                        std::int64_t n,
-                       Ts alpha,
+                       Treal alpha,
                        const T *x,
                        std::int64_t incx,
                        T *a,
@@ -164,7 +164,7 @@ her (USM Version)
        sycl::event her(sycl::queue &queue,
                        onemkl::uplo upper_lower,
                        std::int64_t n,
-                       Ts alpha,
+                       Treal alpha,
                        const T *x,
                        std::int64_t incx,
                        T *a,

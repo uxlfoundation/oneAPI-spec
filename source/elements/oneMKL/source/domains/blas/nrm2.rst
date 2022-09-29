@@ -29,7 +29,7 @@ where:
       :header-rows: 1
 
       * -  T 
-        -  T_res 
+        -  Tres 
       * -  ``half`` 
         -  ``half`` 
       * -  ``bfloat16`` 
@@ -57,7 +57,7 @@ nrm2 (Buffer Version)
                  std::int64_t n,
                  sycl::buffer<T,1> &x,
                  std::int64_t incx,
-                 sycl::buffer<T_res,1> &result)
+                 sycl::buffer<Tres,1> &result)
    }
 .. code-block:: cpp
 
@@ -66,7 +66,7 @@ nrm2 (Buffer Version)
                  std::int64_t n,
                  sycl::buffer<T,1> &x,
                  std::int64_t incx,
-                 sycl::buffer<T_res,1> &result)
+                 sycl::buffer<Tres,1> &result)
    }
 
 .. container:: section
@@ -130,7 +130,7 @@ nrm2 (USM Version)
                         std::int64_t n,
                         const T *x,
                         std::int64_t incx,
-                        T_res *result,
+                        Tres *result,
                         const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -140,7 +140,7 @@ nrm2 (USM Version)
                         std::int64_t n,
                         const T *x,
                         std::int64_t incx,
-                        T_res *result,
+                        Tres *result,
                         const std::vector<sycl::event> &dependencies = {})
    }
 

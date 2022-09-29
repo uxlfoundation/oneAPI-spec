@@ -179,7 +179,7 @@ imatcopy (USM Version)
                             std::int64_t m,
                             std::int64_t n,
                             T alpha,
-                            const T *matrix_in_out,
+                            T *matrix_in_out,
                             std::int64_t ld_in,
                             std::int64_t ld_out,
                             const std::vector<sycl::event> &dependencies = {});
@@ -191,7 +191,7 @@ imatcopy (USM Version)
                             std::int64_t m,
                             std::int64_t n,
                             T alpha,
-                            const T *matrix_in_out,
+                            T *matrix_in_out,
                             std::int64_t ld_in,
                             std::int64_t ld_out,
                             const std::vector<sycl::event> &dependencies = {});

@@ -45,26 +45,16 @@ op(``A``) is ``m`` x ``k``, op(``B``) is ``k`` x ``n``, and
   .. list-table:: 
      :header-rows: 1
 
-     * -  Ts 
-       -  Ta 
+     * -  Ta 
        -  Tb 
-       -  Tc 
-     * -  ``float`` 
+     * -  ``std::uint8_t`` 
        -  ``std::uint8_t`` 
+     * -  ``std::int8_t`` 
        -  ``std::uint8_t`` 
-       -  ``std::int32_t`` 
-     * -  ``float`` 
+     * -  ``std::uint8_t`` 
        -  ``std::int8_t`` 
-       -  ``std::uint8_t`` 
-       -  ``std::int32_t`` 
-     * -  ``float`` 
-       -  ``std::uint8_t`` 
+     * -  ``std::int8_t`` 
        -  ``std::int8_t`` 
-       -  ``std::int32_t`` 
-     * -  ``float`` 
-       -  ``std::int8_t`` 
-       -  ``std::int8_t`` 
-       -  ``std::int32_t`` 
 
 .. _onemkl_blas_gemm_bias_buffer:
 
@@ -83,17 +73,17 @@ gemm_bias (Buffer Version)
                       std::int64_t m,
                       std::int64_t n,
                       std::int64_t k,
-                      Ts alpha,
+                      float alpha,
                       sycl::buffer<Ta,1> &a,
                       std::int64_t lda,
                       Ta ao,
                       sycl::buffer<Tb,1> &b,
                       std::int64_t ldb,
                       Tb bo,
-                      Ts beta,
-                      sycl::buffer<Tc,1> &c,
+                      float beta,
+                      sycl::buffer<std::int32_t,1> &c,
                       std::int64_t ldc,
-                      sycl::buffer<Tc,1> &co)
+                      sycl::buffer<std::int32_t,1> &co)
    }
 .. code-block:: cpp
 
@@ -105,17 +95,17 @@ gemm_bias (Buffer Version)
                       std::int64_t m,
                       std::int64_t n,
                       std::int64_t k,
-                      Ts alpha,
+                      float alpha,
                       sycl::buffer<Ta,1> &a,
                       std::int64_t lda,
                       Ta ao,
                       sycl::buffer<Tb,1> &b,
                       std::int64_t ldb,
                       Tb bo,
-                      Ts beta,
-                      sycl::buffer<Tc,1> &c,
+                      float beta,
+                      sycl::buffer<std::int32_t,1> &c,
                       std::int64_t ldc,
-                      sycl::buffer<Tc,1> &co)
+                      sycl::buffer<std::int32_t,1> &co)
    }
       
 .. container:: section
@@ -321,17 +311,17 @@ gemm_bias (USM Version)
                              std::int64_t m,
                              std::int64_t n,
                              std::int64_t k,
-                             Ts alpha,
+                             float alpha,
                              const Ta *a,
                              std::int64_t lda,
                              Ta ao,
                              const Tb *b,
                              std::int64_t ldb,
                              Tb bo,
-                             Ts beta,
-                             Tc *c,
+                             float beta,
+                             std::int32_t *c,
                              std::int64_t ldc,
-                             const Tc *co,
+                             const std::int32_t *co,
                              const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -344,17 +334,17 @@ gemm_bias (USM Version)
                              std::int64_t m,
                              std::int64_t n,
                              std::int64_t k,
-                             Ts alpha,
+                             float alpha,
                              const Ta *a,
                              std::int64_t lda,
                              Ta ao,
                              const Tb *b,
                              std::int64_t ldb,
                              Tb bo,
-                             Ts beta,
-                             Tc *c,
+                             float beta,
+                             std::int32_t *c,
                              std::int64_t ldc,
-                             const Tc *co,
+                             const std::int32_t *co,
                              const std::vector<sycl::event> &dependencies = {})
    }
       

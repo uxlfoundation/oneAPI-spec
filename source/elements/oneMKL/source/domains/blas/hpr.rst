@@ -34,7 +34,7 @@ where:
       :header-rows: 1
 
       * -  T 
-        -  Ts 
+        -  Treal 
       * -  ``std::complex<float>`` 
         -  ``float`` 
       * -  ``std::complex<double>`` 
@@ -53,7 +53,7 @@ hpr (Buffer Version)
        void hpr(sycl::queue &queue,
                 onemkl::uplo upper_lower,
                 std::int64_t n,
-                Ts alpha,
+                Treal alpha,
                 sycl::buffer<T,1> &x,
                 std::int64_t incx,
                 sycl::buffer<T,1> &a)
@@ -64,7 +64,7 @@ hpr (Buffer Version)
        void hpr(sycl::queue &queue,
                 onemkl::uplo upper_lower,
                 std::int64_t n,
-                Ts alpha,
+                Treal alpha,
                 sycl::buffer<T,1> &x,
                 std::int64_t incx,
                 sycl::buffer<T,1> &a)
@@ -148,7 +148,7 @@ hpr (USM Version)
        sycl::event hpr(sycl::queue &queue,
                        onemkl::uplo upper_lower,
                        std::int64_t n,
-                       Ts alpha,
+                       Treal alpha,
                        const T *x,
                        std::int64_t incx,
                        T *a,
@@ -160,7 +160,7 @@ hpr (USM Version)
        sycl::event hpr(sycl::queue &queue,
                        onemkl::uplo upper_lower,
                        std::int64_t n,
-                       Ts alpha,
+                       Treal alpha,
                        const T *x,
                        std::int64_t incx,
                        T *a,

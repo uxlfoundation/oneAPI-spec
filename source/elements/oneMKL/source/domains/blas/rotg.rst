@@ -34,7 +34,7 @@ The parameter ``z`` is defined such that if \|\ ``a``\ \| >
       :header-rows: 1
 
       * -  T 
-        -  T_res 
+        -  Tc 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 
@@ -57,7 +57,7 @@ rotg (Buffer Version)
        void rotg(sycl::queue &queue,
                  sycl::buffer<T,1> &a,
                  sycl::buffer<T,1> &b,
-                 sycl::buffer<T_real,1> &c,
+                 sycl::buffer<Tc,1> &c,
                  sycl::buffer<T,1> &s)
    }
 .. code-block:: cpp
@@ -66,7 +66,7 @@ rotg (Buffer Version)
        void rotg(sycl::queue &queue,
                  sycl::buffer<T,1> &a,
                  sycl::buffer<T,1> &b,
-                 sycl::buffer<T_real,1> &c,
+                 sycl::buffer<Tc,1> &c,
                  sycl::buffer<T,1> &s)
    }
 
@@ -137,7 +137,7 @@ rotg (USM Version)
        sycl::event rotg(sycl::queue &queue,
                         T *a,
                         T *b,
-                        T_real *c,
+                        Tc *c,
                         T *s,
                         const std::vector<sycl::event> &dependencies = {})
    }
@@ -147,7 +147,7 @@ rotg (USM Version)
        sycl::event rotg(sycl::queue &queue,
                         T *a,
                         T *b,
-                        T_real *c,
+                        Tc *c,
                         T *s,
                         const std::vector<sycl::event> &dependencies = {})
    }
