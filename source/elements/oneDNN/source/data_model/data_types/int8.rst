@@ -51,6 +51,7 @@ execution time.
 
 To support int8 quantization, primitives should be created and
 executed as follow:
+
 - during primitive creation, if one or multiple inputs are int8
   (signed or not), then the primitive will behave as a quantized
   integer operation.
@@ -60,7 +61,7 @@ executed as follow:
 - finally, during primitive execution, the user must provide the
   actual quantization parameters as arguments to the execute function.
   Scales shall be f32 values, and zero-points shall be int32 values.
-  
+
 .. note::
 
    For performance reasons, each primitive implementation can support
