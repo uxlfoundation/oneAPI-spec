@@ -162,7 +162,7 @@ quantization. This process is explained in more details in the
 :ref:`int8-quantization-label` section.
 
 Quantization Attributes (scales and zero-points)
-========================
+================================================
 
 oneDNN provides |primitive_attr::set_scales| and
 |primitive_attr::set_zero_points| for setting the quantization
