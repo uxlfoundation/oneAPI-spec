@@ -345,7 +345,8 @@ enum class normalization_flags : unsigned {
     /// propagation of type #dnnl::prop_kind::backward, the library computes
     /// their derivatives. If not specified, the scale and shift parameters
     /// are not used by the library in any way.
-    use_scale_shift,
+    use_scale,
+    use_shift,
 
     /// Fuse normalization with ReLU. On training, normalization will require
     /// the workspace to implement backward propagation. On inference, the

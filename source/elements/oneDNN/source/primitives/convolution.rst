@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 .. _convolution-label:
 
@@ -273,13 +273,13 @@ post-ops are supported:
 | forward     | post-op   | :any:`Sum <dnnl::post_ops::append_sum>`                       | Adds the operation result to the destination tensor instead of overwriting it |                        |
 +-------------+-----------+---------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
 
-The primitive supports dynamic quantization via run-time output scales. That
-means a user could configure attributes with output scales set to the
-|DNNL_RUNTIME_F32_VAL| wildcard value instead of the actual scales,
-if the scales are not known at the primitive descriptor creation stage. In
-this case, the user must provide the scales as an additional input memory
-object with argument |DNNL_ARG_ATTR_OUTPUT_SCALES| during the
-execution stage.
+The primitive supports dynamic quantization via run-time scales. That
+means a user could configure the scales and zero-point attributes at
+the primitive descriptor creation stage. The user must then provide
+the scales and zero-points as an additional input memory objects with
+argument |DNNL_ARG_ATTR_SCALES| and |DNNL_ARG_ATTR_ZERO_POINTS| during
+the execution stage (more details are provided in the
+:ref:`attributes-quantization-label` section).
 
 .. note::
 

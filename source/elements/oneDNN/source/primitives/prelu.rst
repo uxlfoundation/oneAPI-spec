@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 #####
 Prelu
@@ -52,16 +52,17 @@ For no broadcast case, results are calculated using formula:
 
 .. math::
 
-   \begin{align}
-    \mbox{diff_src}(n, c, h, w) &=
+    \diffsrc(n, c, h, w) &=
         \begin{cases}
-        \mbox{diff_dst}(n, c, h, w)  & \mbox{if } \src(n, c, h, w) > 0 \\
-        \mbox{diff_dst}(n, c, h, w) \cdot \weights(n, c, h, w) &
-        \mbox{if } \src(n, c, h, w) \leq 0
+        \diffdst(n, c, h, w)  & if \src(n, c, h, w) > 0 \\
+        \diffdst(n, c, h, w) \cdot \weights(n, c, h, w) &
+        if  \src(n, c, h, w) \leq 0
         \end{cases}\\\\
-    \mbox{diff_weights}(n, c, h, w) &=
-        \min(\src(n, c, h, w), 0) \cdot \mbox{diff_dst}(n, c, h, w)
-    \end{align}
+
+.. math::
+
+   \diffweights(n, c, h, w) =
+        \min(\src(n, c, h, w), 0) \cdot \diffdst(n, c, h, w)
 
 *******************
 Execution Arguments

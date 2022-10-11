@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 ########
 Bfloat16

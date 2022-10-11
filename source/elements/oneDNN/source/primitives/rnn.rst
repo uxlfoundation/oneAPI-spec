@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 .. _rnn-label:
 
@@ -86,7 +86,7 @@ The RNN API provides six cell functions:
 - :ref:`AUGRU <augru-label>`, a three-gate gated recurrent unit cell
   with the attention update gate,
 
-- :ref:`Linear-before-reset AUGRU<lbr_agru-label>`, a three-gate
+- :ref:`Linear-before-reset AUGRU<lbr_augru-label>`, a three-gate
   recurrent unit cell with the linear layer before the reset gate and
   the attention update gate.
 
@@ -321,6 +321,7 @@ implicitly require the order of the gates to be :math:`u`, :math:`r`,
    \cdot h_{t,l-1} + U_u \cdot h_{t-1, l} + B_u)`, and :math:`1 – \sigma(a) =
    \sigma(-a)`.
 
+.. _augru-label:
 
 AUGRU
 =====
@@ -351,6 +352,9 @@ mathematical definition of these gates.
 
 where :math:`W_*` are in \weightslayer, :math:`U_*` are in
 \weightsiter, and :math:`B_*` are stored in \bias.
+
+.. _lbr_augru-label:
+
 
 Linear-Before-Reset AUGRU
 =========================

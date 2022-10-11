@@ -122,7 +122,8 @@
 
 .. |normalization_flags_none| replace:: :any:`none <dnnl::normalization_flags::none>`
 .. |use_global_stats| replace:: :any:`use_global_stats <dnnl::normalization_flags::use_global_stats>`
-.. |use_scaleshift| replace:: :any:`use_scaleshift <dnnl::normalization_flags::use_scaleshift>`
+.. |use_scale| replace:: :any:`use_scale <dnnl::normalization_flags::use_scale>`
+.. |use_shift| replace:: :any:`use_shift <dnnl::normalization_flags::use_shift>`
 .. |fuse_norm_relu| replace:: :any:`fuse_norm_relu <dnnl::normalization_flags::fuse_norm_relu>`
 
 .. |_normalization_flags_none| replace:: :any:`dnnl::normalization_flags::none`
@@ -152,6 +153,7 @@
 .. |eltwise_abs| replace:: :any:`eltwise_abs <dnnl::algorithm::eltwise_abs>`
 .. |eltwise_bounded_relu| replace:: :any:`eltwise_bounded_relu <dnnl::algorithm::eltwise_bounded_relu>`
 .. |eltwise_clip| replace:: :any:`eltwise_clip <dnnl::algorithm::eltwise_clip>`
+.. |eltwise_clip_use_dst_for_bwd| replace:: :any:`eltwise_clip_use_dst_for_bwd <dnnl::algorithm::eltwise_clip_use_dst_for_bwd>`
 .. |eltwise_elu_use_dst_for_bwd| replace:: :any:`eltwise_elu_use_dst_for_bwd <dnnl::algorithm::eltwise_elu_use_dst_for_bwd>`
 .. |eltwise_elu| replace:: :any:`eltwise_elu <dnnl::algorithm::eltwise_elu>`
 .. |eltwise_exp_use_dst_for_bwd| replace:: :any:`eltwise_exp_use_dst_for_bwd <dnnl::algorithm::eltwise_exp_use_dst_for_bwd>`
@@ -159,10 +161,13 @@
 .. |eltwise_gelu_erf| replace:: :any:`eltwise_gelu_erf <dnnl::algorithm::eltwise_gelu_erf>`
 .. |eltwise_gelu_tanh| replace:: :any:`eltwise_gelu_tanh <dnnl::algorithm::eltwise_gelu_tanh>`
 .. |eltwise_gelu| replace:: :any:`eltwise_gelu <dnnl::algorithm::eltwise_gelu>`
+.. |eltwise_hardsigmoid| replace:: :any:`eltwise_hardsigmoid <dnnl::algorithm::eltwise_hardsigmoid>`
+.. |eltwise_hardswish| replace:: :any:`eltwise_hardswish <dnnl::algorithm::eltwise_hardswish>`
 .. |eltwise_linear| replace:: :any:`eltwise_linear <dnnl::algorithm::eltwise_linear>`
 .. |eltwise_logistic_use_dst_for_bwd| replace:: :any:`eltwise_logistic_use_dst_for_bwd <dnnl::algorithm::eltwise_logistic_use_dst_for_bwd>`
 .. |eltwise_logistic| replace:: :any:`eltwise_logistic <dnnl::algorithm::eltwise_logistic>`
 .. |eltwise_log| replace:: :any:`eltwise_log <dnnl::algorithm::eltwise_log>`
+.. |eltwise_mish| replace:: :any:`eltwise_mish <dnnl::algorithm::eltwise_mish>`
 .. |eltwise_pow| replace:: :any:`eltwise_pow <dnnl::algorithm::eltwise_pow>`
 .. |eltwise_relu_use_dst_for_bwd| replace:: :any:`eltwise_relu_use_dst_for_bwd <dnnl::algorithm::eltwise_relu_use_dst_for_bwd>`
 .. |eltwise_relu| replace:: :any:`eltwise_relu <dnnl::algorithm::eltwise_relu>`
@@ -236,6 +241,10 @@
 .. |_vanilla_lstm| replace:: :any:`dnnl::algorithm::vanilla_lstm`
 .. |_vanilla_rnn| replace:: :any:`dnnl::algorithm::vanilla_rnn`
 
+.. |DNNL_ARG_ATTR_MULTIPLE_POST_OP| replace:: :c:macro:`DNNL_ARG_ATTR_MULTIPLE_POST_OP`
+.. |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)| replace:: :c:macro:`DNNL_ARG_ATTR_MULTIPLE_POST_OP`
+.. |DNNL_ARG_ATTR_SCALES| replace:: :c:macro:`DNNL_ARG_ATTR_SCALES`
+.. |DNNL_ARG_ATTR_ZERO_POINTS| replace:: :c:macro:`DNNL_ARG_ATTR_ZERO_POINTS`
 .. |DNNL_ARG_SRC_0| replace:: :c:macro:`DNNL_ARG_SRC_0`
 .. |DNNL_ARG_SRC| replace:: :c:macro:`DNNL_ARG_SRC`
 .. |DNNL_ARG_SRC_LAYER| replace:: :c:macro:`DNNL_ARG_SRC_LAYER`
@@ -254,7 +263,8 @@
 .. |DNNL_ARG_DST_ITER_C| replace:: :c:macro:`DNNL_ARG_DST_ITER_C`
 .. |DNNL_ARG_WEIGHTS_0| replace:: :c:macro:`DNNL_ARG_WEIGHTS_0`
 .. |DNNL_ARG_WEIGHTS| replace:: :c:macro:`DNNL_ARG_WEIGHTS`
-.. |DNNL_ARG_SCALE_SHIFT| replace:: :c:macro:`DNNL_ARG_SCALE_SHIFT`
+.. |DNNL_ARG_SCALE| replace:: :c:macro:`DNNL_ARG_SCALE`
+.. |DNNL_ARG_SHIFT| replace:: :c:macro:`DNNL_ARG_SHIFT`
 .. |DNNL_ARG_WEIGHTS_LAYER| replace:: :c:macro:`DNNL_ARG_WEIGHTS_LAYER`
 .. |DNNL_ARG_WEIGHTS_1| replace:: :c:macro:`DNNL_ARG_WEIGHTS_1`
 .. |DNNL_ARG_WEIGHTS_ITER| replace:: :c:macro:`DNNL_ARG_WEIGHTS_ITER`
@@ -281,17 +291,16 @@
 .. |DNNL_ARG_DIFF_DST_ITER_C| replace:: :c:macro:`DNNL_ARG_DIFF_DST_ITER_C`
 .. |DNNL_ARG_DIFF_WEIGHTS_0| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_0`
 .. |DNNL_ARG_DIFF_WEIGHTS| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS`
-.. |DNNL_ARG_DIFF_SCALE_SHIFT| replace:: :c:macro:`DNNL_ARG_DIFF_SCALE_SHIFT`
+.. |DNNL_ARG_DIFF_SCALE| replace:: :c:macro:`DNNL_ARG_DIFF_SCALE`
+.. |DNNL_ARG_DIFF_SHIFT| replace:: :c:macro:`DNNL_ARG_DIFF_SHIFT`
 .. |DNNL_ARG_DIFF_WEIGHTS_LAYER| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_LAYER`
 .. |DNNL_ARG_DIFF_WEIGHTS_1| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_1`
 .. |DNNL_ARG_DIFF_WEIGHTS_ITER| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_ITER`
 .. |DNNL_ARG_DIFF_WEIGHTS_PEEPHOLE| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_PEEPHOLE`
 .. |DNNL_ARG_DIFF_WEIGHTS_PROJECTION| replace:: :c:macro:`DNNL_ARG_DIFF_WEIGHTS_PROJECTION`
 .. |DNNL_ARG_DIFF_BIAS| replace:: :c:macro:`DNNL_ARG_DIFF_BIAS`
-.. |DNNL_ARG_ATTR_OUTPUT_SCALES| replace:: :c:macro:`DNNL_ARG_ATTR_OUTPUT_SCALES`
 .. |DNNL_ARG_MULTIPLE_SRC| replace:: :c:macro:`DNNL_ARG_MULTIPLE_SRC`
 .. |DNNL_ARG_MULTIPLE_DST| replace:: :c:macro:`DNNL_ARG_MULTIPLE_DST`
-.. |DNNL_ARG_ATTR_ZERO_POINTS| replace:: :c:macro:`DNNL_ARG_ATTR_ZERO_POINTS`
 .. |DNNL_RUNTIME_DIM_VAL| replace:: :c:macro:`DNNL_RUNTIME_DIM_VAL`
 .. |DNNL_RUNTIME_SIZE_VAL| replace:: :c:macro:`DNNL_RUNTIME_SIZE_VAL`
 .. |DNNL_RUNTIME_F32_VAL| replace:: :c:macro:`DNNL_RUNTIME_F32_VAL`
@@ -300,22 +309,25 @@
 .. |algorithm::convolution_auto| replace:: :any:`dnnl::algorithm::convolution_auto`
 .. |algorithm::convolution_direct| replace:: :any:`dnnl::algorithm::convolution_direct`
 .. |algorithm::convolution_winograd| replace:: :any:`dnnl::algorithm::convolution_winograd`
-.. |batch_normalization_forward::desc::desc| replace:: :any:`dnnl::batch_normalization_forward::desc::desc`
+.. |augru_backward::primitive_desc| replace:: :any:`dnnl::augru_backward::primitive_desc`
+.. |augru_forward::primitive_desc| replace:: :any:`dnnl::augru_forward::primitive_desc`
+.. |batch_normalization_forward::primitive_desc| replace:: :any:`dnnl::batch_normalization_forward::primitive_desc`
 .. |concat| replace:: :any:`dnnl::concat`
-.. |convolution_forward::desc| replace:: :any:`dnnl::convolution_forward::desc`
 .. |convolution_forward::primitive_desc| replace:: :any:`dnnl::convolution_forward::primitive_desc`
 .. |convolution_forward| replace:: :any:`dnnl::convolution_forward`
-.. |eltwise_backward::desc::desc| replace:: :any:`dnnl::eltwise_backward::desc::desc`
-.. |eltwise_forward::desc::desc| replace:: :any:`dnnl::eltwise_forward::desc::desc`
+.. |eltwise_backward::primitive_desc| replace:: :any:`dnnl::eltwise_backward::primitive_desc`
+.. |eltwise_forward::primitive_desc| replace:: :any:`dnnl::eltwise_forward::primitive_desc`
 .. |engine| replace:: :any:`dnnl::engine`
 .. |error| replace:: :any:`dnnl::error`
-.. |gru_backward::desc| replace:: :any:`dnnl::gru_backward::desc`
-.. |gru_forward::desc| replace:: :any:`dnnl::gru_forward::desc`
-.. |layer_normalization_forward::desc::desc| replace:: :any:`dnnl::layer_normalization_forward::desc::desc`
-.. |lbr_gru_backward::desc| replace:: :any:`dnnl::lbr_gru_backward::desc`
-.. |lbr_gru_forward::desc| replace:: :any:`dnnl::lbr_gru_forward::desc`
-.. |lstm_backward::desc| replace:: :any:`dnnl::lstm_backward::desc`
-.. |lstm_forward::desc| replace:: :any:`dnnl::lstm_forward::desc`
+.. |gru_backward::primitive_desc| replace:: :any:`dnnl::gru_backward::primitive_desc`
+.. |gru_forward::primitive_desc| replace:: :any:`dnnl::gru_forward::primitive_desc`
+.. |layer_normalization_forward::primitive_desc| replace:: :any:`dnnl::layer_normalization_forward::primtive_desc`
+.. |lbr_augru_backward::primitive_desc| replace:: :any:`dnnl::lbr_augru_backward::primitive_desc`
+.. |lbr_augru_forward::primitive_desc| replace:: :any:`dnnl::lbr_augru_forward::primitive_desc`
+.. |lbr_gru_backward::primitive_desc| replace:: :any:`dnnl::lbr_gru_backward::primitive_desc`
+.. |lbr_gru_forward::primitive_desc| replace:: :any:`dnnl::lbr_gru_forward::primitive_desc`
+.. |lstm_backward::primitive_desc| replace:: :any:`dnnl::lstm_backward::primitive_desc`
+.. |lstm_forward::primitive_desc| replace:: :any:`dnnl::lstm_forward::primitive_desc`
 .. |memory::data_type::s32| replace:: :any:`dnnl::memory::data_type::s32`
 .. |memory::desc::get_size| replace:: :any:`dnnl::memory::desc::get_size`
 .. |memory::desc::permute_axes| replace:: :any:`dnnl::memory::desc::permute_axes`
@@ -338,9 +350,12 @@
 .. |primitive::execute| replace:: :any:`dnnl::primitive::execute`
 .. |primitive::kind::eltwise| replace:: :any:`dnnl::primitive::kind::eltwise`
 .. |primitive::kind::sum| replace:: :any:`dnnl::primitive::kind::sum`
-.. |primitive_attr::set_output_scales| replace:: :any:`dnnl::primitive_attr::set_output_scales`
+.. |primitive_attr::set_fpmath_mode| replace:: :any:`dnnl::primitive_attr::set_fpmath_mode`
+.. |primitive_attr::set_scales| replace:: :any:`dnnl::primitive_attr::set_scales`
 .. |primitive_attr::set_post_ops| replace:: :any:`dnnl::primitive_attr::set_post_ops`
 .. |primitive_attr::set_scratchpad_mode| replace:: :any:`dnnl::primitive_attr::set_scratchpad_mode`
+.. |primitive_attr::set_zero_points| replace:: :any:`dnnl::primitive_attr::set_zero_points`
+
 .. |primitive_desc::next_impl| replace:: :any:`dnnl::primitive_desc::next_impl`
 .. |primitive_desc_base| replace:: :any:`dnnl::primitive_desc_base`
 .. |primitive_desc| replace:: :any:`dnnl::primitive_desc`
@@ -348,12 +363,12 @@
 .. |reorder| replace:: :any:`dnnl::reorder`
 .. |rnn_primitive_desc_base| replace:: :any:`dnnl::rnn_primitive_desc_base`
 .. |scratchpad_mode::user| replace:: :any:`dnnl::scratchpad_mode::user`
-.. |shuffle_forward::desc::desc| replace:: :any:`dnnl::shuffle_forward::desc::desc`
+.. |shuffle_forward::primitive_desc| replace:: :any:`dnnl::shuffle_forward::primitive_desc`
 .. |stream::flags| replace:: :any:`dnnl::stream::flags`
 .. |stream| replace:: :any:`dnnl::stream`
 .. |sum| replace:: :any:`dnnl::sum`
-.. |vanilla_rnn_backward::desc| replace:: :any:`dnnl::vanilla_rnn_backward::desc`
-.. |vanilla_rnn_forward::desc| replace:: :any:`dnnl::vanilla_rnn_forward::desc`
+.. |vanilla_rnn_backward::primitive_desc| replace:: :any:`dnnl::vanilla_rnn_backward::primitive_desc`
+.. |vanilla_rnn_forward::primitive_desc| replace:: :any:`dnnl::vanilla_rnn_forward::primitive_desc`
 
 .. |sycl_interop::get_buffer| replace:: :any:`dnnl::sycl_interop::get_buffer`
 .. |sycl_interop::set_buffer| replace:: :any:`dnnl::sycl_interop::set_buffer`

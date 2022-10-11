@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 .. _layer_normalization-label:
 
@@ -34,12 +34,10 @@ Forward
 
 where
 
- - :math:`\gamma(c), \beta(c)` are optional scale and shift for a channel (see
+- :math:`\gamma(c), \beta(c)` are optional scale and shift for a channel (see
   the |use_scale| and |use_shift| flag),
-
 - :math:`\mu(t, n), \sigma^2(t, n)` are mean and variance (see
   |use_global_stats| flag), and
-
 - :math:`\varepsilon` is a constant to improve numerical stability.
 
 Mean and variance are computed at runtime or provided by a user. When mean and

@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 .. _eltwise-link:
 
@@ -168,7 +168,7 @@ Primitive input/output Execution argument index
 Operation Details
 *****************
 
-1. The |eltwise_forward::primtive_desc| and
+1. The |eltwise_forward::primitive_desc| and
    |eltwise_backward::primitive_desc| constructors take both
    parameters :math:`\alpha`, and :math:`\beta`. These parameters are
    ignored if they are unused by the algorithm.

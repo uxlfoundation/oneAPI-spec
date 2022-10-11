@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 #####################
 Matrix Multiplication
@@ -146,19 +146,13 @@ The following attributes and post-ops are supported:
 | Post-op   | :any:`Sum <dnnl::post_ops::append_sum>`                        | Adds the operation result to the destination tensor instead of overwriting it |                        |
 +-----------+----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
 
-To facilitate dynamic quantization, the primitive should support run-time
-output scales. That means a user could configure attributes with output scales
-set to the |DNNL_RUNTIME_F32_VAL| wildcard value instead of the actual scales,
-if the scales are not known at the primitive descriptor creation stage. In
-this case, the user must provide the scales as an additional input memory
-object with argument |DNNL_ARG_ATTR_OUTPUT_SCALES| during the execution stage.
-
-Similarly to run-time output scales, the primitive supports run-time zero
-points. The wildcard value for zero points is |DNNL_RUNTIME_S32_VAL|. During
-the execution stage, the corresponding memory object needs to be passed in the
-argument with index set to (``DNNL_ARG_ATTR_ZERO_POINTS |
-DNNL_ARG_${MEMORY}``). For instance, source tensor zero points memory argument
-would be passed with index (``DNNL_ARG_ATTR_ZERO_POINTS | DNNL_ARG_SRC``).
+The primitive supports dynamic quantization via run-time scales. That
+means a user could configure the scales and zero-point attributes at
+the primitive descriptor creation stage. The user must then provide
+the scales and zero-points as an additional input memory objects with
+argument |DNNL_ARG_ATTR_SCALES| and |DNNL_ARG_ATTR_ZERO_POINTS| during
+the execution stage (more details are provided in the
+:ref:`attributes-quantization-label` section).
 
 ***
 API

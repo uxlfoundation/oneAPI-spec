@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 Local Response Normalization
 ----------------------------
@@ -16,7 +16,7 @@ standard :ref:`conventions-label`.
 Forward
 ~~~~~~~
 
-LRN `across channels <#dnnl_lrn_across_channels>`__:
+LRN with algorithm |lrn_across_channels|:
 
 .. math::
 
@@ -28,7 +28,7 @@ LRN `across channels <#dnnl_lrn_across_channels>`__:
            \cdot
            \src(n, c, h, w),
 
-LRN `within channel <#dnnl_lrn_within_channel>`__:
+LRN with algorithm |lrn_within_channel|:
 
 .. math::
 

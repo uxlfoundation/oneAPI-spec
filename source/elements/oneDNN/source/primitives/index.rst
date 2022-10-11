@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 ##########
 Primitives
@@ -100,7 +100,6 @@ The sequence of actions to create a primitive is:
    eltwise.rst
    inner-product.rst
    layer_normalization.rst
-   logsoftmax.rst
    lrn.rst
    matmul.rst
    pooling.rst

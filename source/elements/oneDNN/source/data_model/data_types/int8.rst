@@ -141,7 +141,7 @@ where
   weights with int8 data type and compute the result in int32 data type (int32
   is chosen to avoid overflows during the computations);
 
-- :math:`comp\s32` is a compensation term to account for
+- :math:`comp\_s32` is a compensation term to account for
   `\src` non-zero zero point. This term is computed by the oneDNN
   library and can typically be pre-computed ahead of time, for example
   during weights reorder.

@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 .. _post_ops-label:
 
@@ -151,8 +151,8 @@ as the :ref:`binary primitive<primitive_binary-link>`.
 
 Furthermore, the binary post-op scale parameter is set to :math:`1.0`
 by default, and can be set using the |primitive_attr::set_scales|
-attribute for the argument |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)
-\| DNNL_ARG_SRC_1|. For example:
+attribute for the argument |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|
+| |DNNL_ARG_SRC_1|. For example:
 
 .. code:: cpp
 

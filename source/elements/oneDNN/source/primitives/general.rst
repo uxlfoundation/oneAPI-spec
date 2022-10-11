@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 ##################
 Common Definitions
@@ -127,7 +127,10 @@ Execution argument indices
 .. doxygendefine:: DNNL_ARG_WEIGHTS
    :project: oneDNN
 
-.. doxygendefine:: DNNL_ARG_SCALE_SHIFT
+.. doxygendefine:: DNNL_ARG_SCALE
+   :project: oneDNN
+
+.. doxygendefine:: DNNL_ARG_SHIFT
    :project: oneDNN
 
 .. doxygendefine:: DNNL_ARG_WEIGHTS_LAYER
@@ -202,7 +205,10 @@ Execution argument indices
 .. doxygendefine:: DNNL_ARG_DIFF_WEIGHTS
    :project: oneDNN
 
-.. doxygendefine:: DNNL_ARG_DIFF_SCALE_SHIFT
+.. doxygendefine:: DNNL_ARG_DIFF_SCALE
+   :project: oneDNN
+
+.. doxygendefine:: DNNL_ARG_DIFF_SHIFT
    :project: oneDNN
 
 .. doxygendefine:: DNNL_ARG_DIFF_WEIGHTS_LAYER
@@ -217,13 +223,13 @@ Execution argument indices
 .. doxygendefine:: DNNL_ARG_DIFF_BIAS
    :project: oneDNN
 
-.. doxygendefine:: DNNL_ARG_ATTR_OUTPUT_SCALES
-   :project: oneDNN
-
 .. doxygendefine:: DNNL_ARG_MULTIPLE_SRC
    :project: oneDNN
 
 .. doxygendefine:: DNNL_ARG_MULTIPLE_DST
+   :project: oneDNN
+
+.. doxygendefine:: DNNL_ARG_ATTR_SCALES
    :project: oneDNN
 
 .. doxygendefine:: DNNL_ARG_ATTR_ZERO_POINTS

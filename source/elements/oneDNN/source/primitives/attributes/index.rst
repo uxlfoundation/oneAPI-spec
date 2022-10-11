@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 .. _attributes-link:
 
@@ -196,7 +196,7 @@ When using :ref:`post_ops-label`, the same
 used to pass quantization parameters to a given post-ops arguments.
 
 Example 1: weights quantization with per-output-channel scaling
--------------------------------------------------------------------------
+---------------------------------------------------------------
 
 .. code:: cpp
 
@@ -302,8 +302,9 @@ channel scaling.
 
 .. _attributes_fpmath_mode-label:
 
+*****************************************************
 Implicit downconversions and floating-point math mode
-================================
+*****************************************************
 
 oneDNN provides |primitive_attr::set_fpmath_mode| to allow implicit
 downconversions from fp32 to lower accuracy datatypes during primitive
@@ -318,6 +319,7 @@ down-conversions are allowed only during computation, and do not
 affect the storage datatype (which must remain f32).
 
 The |primitive_attr::set_fpmath_mode| primitive attribute can take 3 types of values:
+
 - the `strict` mode disables any down-conversion (default).
 - the `any` mode allows all conversions from f32 to a smaller
   floating-point datatype (f16, bf16, or tf32).
