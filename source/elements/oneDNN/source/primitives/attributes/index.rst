@@ -164,18 +164,18 @@ quantization. This process is explained in more details in the
 Quantization Attributes (scales and zero-points)
 ================================================
 
-oneDNN provides |primitive_attr::set_scales| and
-|primitive_attr::set_zero_points| for setting the quantization
+oneDNN provides |primitive_attr::set_scales_mask| and
+|primitive_attr::set_zero_points_mask| for setting the quantization
 parameter for a given argument of a primitive.
 
 The primitives may not support passing quantization parameters if
 source (and weights) tensors are not of the int8 data type. In other
 words, convolution operating on the single precision floating point
-data type may not scale or shift the output result.
+data type may not scale and/or shift its inputs and outputs.
 
 Broadcast semantic for quantization parameters is handled through
-masks that are explicitly passed to the |primitive_attr::set_scales|
-and |primitive_attr::set_zero_points| methods.  For example, if the
+masks that are explicitly passed to the |primitive_attr::set_scales_mask|
+and |primitive_attr::set_zero_points_mask| methods.  For example, if the
 primitive destination is a :math:`D_0 \times ... \times D_{n-1}`
 tensor and we want to have a scale per :math:`d_i` dimension (where
 :math:`0 \le d_i < n`), then :math:`mask = \sum \limits_{d_i} 2^{d_i}`
@@ -192,7 +192,7 @@ setting.
 
 
 When using :ref:`post_ops-label`, the same
-|primitive_attr::set_scales| and |primitive_attr::set_zero_points| are
+|primitive_attr::set_scales_mask| and |primitive_attr::set_zero_points_mask| are
 used to pass quantization parameters to a given post-ops arguments.
 
 Example 1: weights quantization with per-output-channel scaling
@@ -225,7 +225,7 @@ Example 1: weights quantization with per-output-channel scaling
    dnnl::primitive_attr attr;
    const int quantization_mask = 0
        | (1 << 0);  // scale per  OC dimension, which is the dim #0
-   attr.set_scales(DNNL_ARG_DST, quantization_mask);
+   attr.set_scales_mask(DNNL_ARG_DST, quantization_mask);
 
    // create reorder that would perform:
    //   wei_s8(oc, ic, kh, kw) <- wei_f32(oc, ic, kh, kw) / scale(oc)
@@ -281,13 +281,13 @@ channel scaling.
                    // (   OC, IC, KH, KW)
                    //      0   1   2   3
 
-   attr.set_scales(DNNL_ARG_SRC, data_mask);
-   attr.set_zero_points(DNNL_ARG_SRC, data_mask);
+   attr.set_scales_mask(DNNL_ARG_SRC, data_mask);
+   attr.set_zero_points_mask(DNNL_ARG_SRC, data_mask);
 
-   attr.set_scales(DNNL_ARG_WEIGHTS, wei_mask);
+   attr.set_scales_mask(DNNL_ARG_WEIGHTS, wei_mask);
 
-   attr.set_scales(DNNL_ARG_DST, data_mask);
-   attr.set_zero_points(DNNL_ARG_DST, data_mask);
+   attr.set_scales_mask(DNNL_ARG_DST, data_mask);
+   attr.set_zero_points_mask(DNNL_ARG_DST, data_mask);
 
    // create a convolution primitive descriptor
    auto conv_pd = dnnl::convolution_forward::primitive_desc(

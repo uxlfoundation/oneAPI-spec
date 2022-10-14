@@ -1211,6 +1211,31 @@ struct post_ops {
     /// @param beta Output beta parameter for the elementwise algorithm.
     void get_params_eltwise(
             int index, algorithm &aalgorithm, float &alpha, float &beta) const;
+
+    /// Appends a binary post-op.
+    ///
+    /// The kind of this post operation is #dnnl::primitive::kind::binary.
+    ///
+    /// In the simplest case when the binary is the only post operation, the
+    /// computations would be:
+    ///
+    ///     dst[:] <- binary_op (dst[:], another_input[:])
+    ///
+    /// where binary_op is configured with the given parameters. binary_op
+    /// supports broadcast semantics for a second operand.
+    ///
+    /// @param aalgorithm Binary algorithm for the post-op.
+    /// @param src1_desc Memory descriptor of a second operand.
+
+    void append_binary(algorithm aalgorithm, const memory::desc &src1_desc);
+
+    /// Returns the parameters of a binary post-op.
+    ///
+    /// @param index Index of the binary post-op.
+    /// @param aalgorithm Output binary algorithm kind.
+    /// @param src1_desc Output memory descriptor of a second operand.
+    void get_params_binary(
+            int index, algorithm &aalgorithm, memory::desc &src1_desc) const;
 };
 
 /// Primitive attributes.
@@ -1239,15 +1264,12 @@ struct primitive_attr {
     ///
     /// @param arg Parameter argument index as passed to the
     ///     primitive::execute() call.
-    /// @param mask Scaling factors correspondence mask that defines the
-    ///     correspondence between the arg tensor dimensions and the
-    ///     scales vector.
-    void get_scales(int arg, int &mask) const;
+    int get_scales_mask(int arg) const;
 
     /// Sets scaling factors correspondance mask for a given memory
     /// argument.
     ///
-    /// @sa dnnl::primitive_attr::set_scales
+    /// @sa dnnl::primitive_attr::set_scales_mask
     ///
     /// @note
     ///     The order of dimensions does not depend on how elements are laid
@@ -1265,18 +1287,7 @@ struct primitive_attr {
     ///     0 to use a common scaling factor for the whole tensor.
     ///     The scales must be passed at execution time as an argument with index
     ///     #DNNL_ARG_ATTR_SCALES.
-    void set_scales(int arg, int mask);
-
-    /// Returns zero points correspondence mask and values.
-    ///
-    /// @param arg Parameter argument index as passed to the
-    ///     primitive::execute() call.
-    /// @param mask Zero points correspondence mask that defines the
-    ///     correspondence between the @p arg tensor dimensions and the
-    ///     vector of zero_points. Setting the i-th bit indicates that a
-    ///     dedicated zero point is used for each index along that dimension.
-    ///     Set the mask to 0 to use a common zero point for the whole tensor.
-    void get_zero_points(int arg, int &mask) const;
+    void set_scales_mask(int arg, int mask);
 
     /// Sets zero points for primitive operations for a given memory argument.
     ///
@@ -1291,7 +1302,7 @@ struct primitive_attr {
     ///     mask to 0 to use a common zero point for the whole output tensor.
     ///     The zero points must be passed at execution time as an argument with index
     ///     #DNNL_ARG_ATTR_ZERO_POINTS.
-    void set_zero_points(int arg, int mask);
+    void set_zero_points_mask(int arg, int mask);
 
     /// Returns post-ops previously set via set_post_ops().
     ///

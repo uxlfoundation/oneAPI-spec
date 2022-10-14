@@ -92,7 +92,7 @@ The :math:`scale` factor is supported in :ref:`int8
 <int8-quantization-label>` inference only. For all other cases the
 scale must be `1.0` (default value).
 The scale parameter is set to :math:`1.0` by default, and can be set
-using the |primitive_attr::set_scales| attribute for the argument
+using the |primitive_attr::set_scales_mask| attribute for the argument
 |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|.
 
 
@@ -112,7 +112,7 @@ scale.  The :math:`scale` factor is supported in :ref:`int8
 only when the result and the existing data have different magnitudes.
 For all other cases the scale must be `1.0` (default value).
 The scale parameter is set to :math:`1.0` by default, and can be set
-using the |primitive_attr::set_scales| attribute for the argument
+using the |primitive_attr::set_scales_mask| attribute for the argument
 |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|.
 
 Additionally, the sum post-op can reinterpret the destination values as a
@@ -150,7 +150,7 @@ The binary post-op supports the same algorithms and broadcast semantic
 as the :ref:`binary primitive<primitive_binary-link>`.
 
 Furthermore, the binary post-op scale parameter is set to :math:`1.0`
-by default, and can be set using the |primitive_attr::set_scales|
+by default, and can be set using the |primitive_attr::set_scales_mask|
 attribute for the argument |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|
 | |DNNL_ARG_SRC_1|. For example:
 
@@ -161,7 +161,7 @@ attribute for the argument |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|
    p_ops.append_binary(algorithm::binary_add, summand_md);
 
    attr.set_post_ops(p_ops);
-   attr.set_scales(DNNL_ARG_ATTR_MULTIPLE_POST_OP(0) | DNNL_ARG_SRC_1,
+   attr.set_scales_mask(DNNL_ARG_ATTR_MULTIPLE_POST_OP(0) | DNNL_ARG_SRC_1,
            /* mask */ 0);
 
 

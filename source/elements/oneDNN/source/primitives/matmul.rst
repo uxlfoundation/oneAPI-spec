@@ -134,17 +134,19 @@ Attributes and Post-ops
 Attributes and post-ops enable modifying the behavior of the MatMul primitive.
 The following attributes and post-ops are supported:
 
-+-----------+----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| Type      | Operation                                                      | Description                                                                   | Restrictions           |
-+===========+================================================================+===============================================================================+========================+
-| Attribute | :any:`Output scales <dnnl::primitive_attr::set_output_scales>` | Scales the result by given scale factor(s)                                    |                        |
-+-----------+----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| Attribute | :any:`Zero points <dnnl::primitive_attr::set_zero_points>`     | Sets zero point(s) for the corresponding tensors                              | Int8 computations only |
-+-----------+----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| Post-op   | :any:`Eltwise <dnnl::post_ops::append_eltwise>`                | Applies an elementwise operation to the result                                |                        |
-+-----------+----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| Post-op   | :any:`Sum <dnnl::post_ops::append_sum>`                        | Adds the operation result to the destination tensor instead of overwriting it |                        |
-+-----------+----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
++-----------+-----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Type      | Operation                                                       | Description                                                                   | Restrictions           |
++===========+=================================================================+===============================================================================+========================+
+| Attribute | :any:`Scales <dnnl::primitive_attr::set_scales_mask>`           | Sets scale(s) for the corresponding tensor(s)                                 |                        |
++-----------+-----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Attribute | :any:`Zero points <dnnl::primitive_attr::set_zero_points_mask>` | Sets zero point(s) for the corresponding tensors                              | Int8 computations only |
++-----------+-----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Post-op   | :any:`Eltwise <dnnl::post_ops::append_eltwise>`                 | Applies an elementwise operation to the result                                |                        |
++-----------+---------------------------------------------------------------------+---------------------------------------------------------------------------+------------------------+
+| Post-op   | :any:`Binary <dnnl::post_ops::append_binary>`                       | Applies a binary operation to the result                                  |                        |
++-----------+-----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Post-op   | :any:`Sum <dnnl::post_ops::append_sum>`                         | Adds the operation result to the destination tensor instead of overwriting it |                        |
++-----------+-----------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
 
 The primitive supports dynamic quantization via run-time scales. That
 means a user could configure the scales and zero-point attributes at

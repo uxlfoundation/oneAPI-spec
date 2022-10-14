@@ -105,9 +105,17 @@ meaning associated with any of the dimensions of a tensor.
 Attributes and Post-ops
 ***********************
 
-Attributes and post-ops enable modifying the behavior of the reduction
-primitive.  The reduction primitive should support :ref:`quantization
-attributes<attributes-quantization-label>` and :ref:`post_ops-label`.
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Type      | Operation                                                           | Description                                                                   | Restrictions           |
++===========+=====================================================================+===============================================================================+========================+
+| Attribute | :any:`Scales <dnnl::primitive_attr::set_scales_mask>`               | Sets scale(s) for the corresponding tensor(s)                                 | Int8 computations only |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Attribute | :any:`Zero points <dnnl::primitive_attr::set_zero_points_mask>`     | Sets zero point(s) for the corresponding tensors                              | Int8 computations only |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| post-op   | :any:`Eltwise <dnnl::post_ops::append_eltwise>`                     | Applies an elementwise operation to the result                                |                        |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| post-op   | :any:`Binary <dnnl::post_ops::append_binary>`                       | Applies a binary operation to the result                                      |                        |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
 
 ***
 API
