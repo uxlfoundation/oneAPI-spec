@@ -32,10 +32,10 @@ parameters), and assumes the following mathematical relationship:
 
 .. math::
 
-    x_{f32}[:] = scale_{f32} \cdot (x_{int8}[:] - 0_{x_{int8}})
+    x_{f32}[:] = scale_{x} \cdot (x_{int8}[:] - zp_{x})
 
-where :math:`scale_{f32}` is a *scaling factor* in float format,
-:math:`0_{x_{int8}}` is the zero point in int32 format, and
+where :math:`scale_{x}` is a *scaling factor* in float format,
+:math:`zp_{x}` is the zero point in int32 format, and
 :math:`[:]` is used to denote elementwise application of the formula
 to the arrays. In order to provide best performance, oneDNN does not
 compute those scaling factors and zero-points as part of primitive
@@ -114,9 +114,9 @@ Example: Convolution Quantization Workflow
 
 Consider a convolution without bias. The tensors are represented as:
 
-- :math:`\src_{f32}[:] = scale_{\src} \cdot (\src_{int8}[:] - \src_zp)`
+- :math:`\src_{f32}[:] = scale_{\src} \cdot (\src_{int8}[:] - zp_{\src})`
 - :math:`\weights_{f32}[:] = scale_{\weights} \cdot \weights_{int8}[:]`
-- :math:`\dst_{f32}[:] = scale_{\dst} \cdot (\dst_{int8}[:] - \dst_zp)`
+- :math:`\dst_{f32}[:] = scale_{\dst} \cdot (\dst_{int8}[:] - zp_{\dst})`
 
 Here the :math:`\src_{f32}, \weights_{f32}, \dst_{f32}` are not
 computed at all, the whole work happens with int8 tensors.So the task
@@ -132,8 +132,8 @@ zero_point_{\dst}`. Mathematically, the computations are:
       \operatorname{f32\_to\_int8}(
          scale_{\src} \cdot scale_{\weights} \cdot
          \operatorname{s32\_to\_f32}(conv_{s32}(\src_{int8}, \weights_{int8})
-	   - \src\_zp \cdot comp\_s32) / scale_{\dst}
-           + \dst\_zp )
+	   - zp_{\src} \cdot comp_{s32}) / scale_{\dst}
+           + zp_{\dst} )
       
 where
 
@@ -141,7 +141,7 @@ where
   weights with int8 data type and compute the result in int32 data type (int32
   is chosen to avoid overflows during the computations);
 
-- :math:`comp\_s32` is a compensation term to account for
+- :math:`comp_{s32}` is a compensation term to account for
   `\src` non-zero zero point. This term is computed by the oneDNN
   library and can typically be pre-computed ahead of time, for example
   during weights reorder.
@@ -189,7 +189,7 @@ oneDNN provides reorders that can perform per-channel scaling:
 
     \weights_{int8}(oc, ic, kh, kw) =
         \operatorname{f32\_to\_int8}(
-            \weights_{f32}(oc, ic, kh, kw) / weights_scale(oc)
+            \weights_{f32}(oc, ic, kh, kw) / scale_{weights}(oc)
         ).
 
 The :ref:`attributes-quantization-label` describes what kind of quantization
