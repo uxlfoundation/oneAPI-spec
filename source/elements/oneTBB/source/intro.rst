@@ -21,12 +21,13 @@ specific types. Generic programming makes oneTBB flexible yet efficient
 through customizing APIs to specific needs of an application.
 
 Here is the list of specific requirements for oneTBB implementations:
-* An implementation should use the C++11 version of the standard and should not require newer versions except where explicitly specified; it also should not require any non-standard
-language extensions.
+
+* An implementation should use the C++11 version of the standard and should not require newer versions except where explicitly specified; 
+  it also should not require any non-standard language extensions.
 * An implementation can use platform-specific APIs if they are compatible
-with the C++ execution and memory models. For example, a platform-specific
-implementation of threads can be used if that implementation provides
-the same execution guarantees as C++ threads.
+  with the C++ execution and memory models. For example, a platform-specific
+  implementation of threads can be used if that implementation provides
+  the same execution guarantees as C++ threads.
 * An implementation should support execution on single-core and multi-core CPUs,
-including those that provide simultaneous multithreading capabilities.
+  including those that provide simultaneous multithreading capabilities.
 * On CPU, an implementation should support nested parallelism to enable building larger parallel components from smaller ones. 
