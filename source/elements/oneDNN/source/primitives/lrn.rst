@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 Local Response Normalization
 ----------------------------
@@ -16,7 +16,7 @@ standard :ref:`conventions-label`.
 Forward
 ~~~~~~~
 
-LRN `across channels <#dnnl_lrn_across_channels>`__:
+LRN with algorithm |lrn_across_channels|:
 
 .. math::
 
@@ -28,7 +28,7 @@ LRN `across channels <#dnnl_lrn_across_channels>`__:
            \cdot
            \src(n, c, h, w),
 
-LRN `within channel <#dnnl_lrn_within_channel>`__:
+LRN with algorithm |lrn_within_channel|:
 
 .. math::
 
@@ -77,12 +77,6 @@ Operation Details
    the backward pass. To check whether a workspace is required, query the LRN
    primitive descriptor for the workspace. Success indicates that the
    workspace is required and its description will be returned.
-
-2. The memory format and data type for ``src`` and ``dst`` are assumed to be
-   the same, and in the API are typically referred to as ``data`` (e.g., see
-   ``data_desc`` in dnnl::lrn_forward::desc::desc()). The same holds for
-   ``diff_src`` and ``diff_dst``. The corresponding memory descriptors are
-   referred to as ``diff_data_desc``.
 
 *****************
 Data Type Support

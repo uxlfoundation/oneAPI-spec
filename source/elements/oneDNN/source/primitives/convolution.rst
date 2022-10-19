@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 .. _convolution-label:
 
@@ -258,28 +258,32 @@ convolution primitive is optimized for.
 Post-ops and Attributes
 ***********************
 
-Post-ops and attributes enable you to modify the behavior of the convolution
-primitive by applying the output scale to the result of the primitive and by
-chaining certain operations after the primitive. The following attributes and
-post-ops are supported:
+Post-ops and attributes enable you to modify the behavior of the
+convolution primitive by applying quantization parameters to the
+result of the primitive and by chaining certain operations after the
+primitive. The following attributes and post-ops are supported:
 
-+-------------+-----------+---------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| Propagation | Type      | Operation                                                     | Description                                                                   | Restrictions           |
-+=============+===========+===============================================================+===============================================================================+========================+
-| forward     | attribute | :any:`Output scale <dnnl::primitive_attr::set_output_scales>` | Scales the result of convolution by given scale factor(s)                     | int8 convolutions only |
-+-------------+-----------+---------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| forward     | post-op   | :any:`Eltwise <dnnl::post_ops::append_eltwise>`               | Applies an elementwise operation to the result                                |                        |
-+-------------+-----------+---------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
-| forward     | post-op   | :any:`Sum <dnnl::post_ops::append_sum>`                       | Adds the operation result to the destination tensor instead of overwriting it |                        |
-+-------------+-----------+---------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Type      | Operation                                                           | Description                                                                   | Restrictions           |
++===========+=====================================================================+===============================================================================+========================+
+| Attribute | :any:`Scales <dnnl::primitive_attr::set_scales_mask>`               | Sets scale(s) for the corresponding tensor(s)                                 | Int8 computations only |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| Attribute | :any:`Zero points <dnnl::primitive_attr::set_zero_points_mask>`     | Sets zero point(s) for the corresponding tensors                              | Int8 computations only |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| post-op   | :any:`Eltwise <dnnl::post_ops::append_eltwise>`                     | Applies an elementwise operation to the result                                |                        |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| post-op   | :any:`Binary <dnnl::post_ops::append_binary>`                       | Applies a binary operation to the result                                      |                        |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
+| post-op   | :any:`Sum <dnnl::post_ops::append_sum>`                             | Adds the operation result to the destination tensor instead of overwriting it |                        |
++-----------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+------------------------+
 
-The primitive supports dynamic quantization via run-time output scales. That
-means a user could configure attributes with output scales set to the
-|DNNL_RUNTIME_F32_VAL| wildcard value instead of the actual scales,
-if the scales are not known at the primitive descriptor creation stage. In
-this case, the user must provide the scales as an additional input memory
-object with argument |DNNL_ARG_ATTR_OUTPUT_SCALES| during the
-execution stage.
+The primitive supports dynamic quantization via run-time scales. That
+means a user could configure the scales and zero-point attributes at
+the primitive descriptor creation stage. The user must then provide
+the scales and zero-points as an additional input memory objects with
+argument |DNNL_ARG_ATTR_SCALES| and |DNNL_ARG_ATTR_ZERO_POINTS| during
+the execution stage (more details are provided in the
+:ref:`attributes-quantization-label` section).
 
 .. note::
 
@@ -299,12 +303,6 @@ f32 and bf16 convolution eltwise, sum, sum -> eltwise
 int8 convolution         eltwise, sum, sum -> eltwise, eltwise -> sum
 ======================== ============================================
 
-The attributes and post-ops take effect in the following sequence:
-
-- Output scale attribute,
-
-- Post-ops, in order they were attached.
-
 The operations during attributes and post-ops applying are done in single
 precision floating point data type. The conversion to the actual destination
 data type happens just before the actual storing.
@@ -319,7 +317,6 @@ Consider the following pseudo code:
 ::
 
        attribute attr;
-       attr.set_output_scale(alpha);
        attr.set_post_ops({
                { sum={scale=beta} },
                { eltwise={scale=gamma, type=tanh, alpha=ignore, beta=ignored }

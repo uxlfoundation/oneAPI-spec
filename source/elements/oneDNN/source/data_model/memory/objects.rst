@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 ##############################
 Memory Descriptors and Objects
@@ -18,10 +18,10 @@ Memory descriptor is an engine-agnostic logical description of data (number of
 dimensions, dimension sizes, and data type), and, optionally, the information
 about the physical format of data in memory. If this information is not known
 yet, a memory descriptor can be created with format tag set to |_any|. This
-allows compute-intensive primitives to chose the most appropriate format for
-the computations.  The user is then responsible for reordering their data into
-the new format if the formats do not match. See
-:ref:`memory_format_propagation-label`.
+allows compute-intensive primitives to chose the most appropriate physical
+format for the computations.  The user is then responsible for reordering
+their data into the proper format they do not match. See
+:ref:`memory_format_propagation-label` for more details.
 
 A memory descriptor can be initialized either by specifying dimensions, and
 memory format tag or strides for each of them.
@@ -54,6 +54,15 @@ computations with this memory. For example:
   is no clear definition on what the output values should be.
 
 Data handle of a zero-volume memory is never accessed.
+
+.. note::
+
+   Some primitives support implicit broadcast semantic when a given
+   tensor has a dimensions set to 1 (similar to NumPY broadcast
+   semantic). In particular, if an operation expects two tensors
+   with same dimensions, and one of the descriptors has some dimension
+   set to 1, that dimension will be implicitly broadcasted to match
+   the other tensor dimension.
 
 .. rubric:: API
 
