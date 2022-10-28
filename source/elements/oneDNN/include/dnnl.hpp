@@ -3115,7 +3115,8 @@ struct lrn_forward : public primitive {
         /// @param aalgorithm LRN algorithm kind: either
         ///     #dnnl::algorithm::lrn_across_channels, or
         ///     #dnnl::algorithm::lrn_within_channel.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param local_size Regularization local size.
         /// @param alpha The alpha regularization parameter.
         /// @param beta The beta regularization parameter.
@@ -3127,8 +3128,9 @@ struct lrn_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                algorithm aalgorithm, const memory::desc &data_desc,
-                memory::dim local_size, float alpha, float beta, float k,
+                algorithm aalgorithm, const memory::desc &src_desc,
+                const memory::desc &dst_desc, memory::dim local_size,
+                float alpha, float beta, float k,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
@@ -3183,9 +3185,9 @@ struct lrn_backward : public primitive {
         /// @param aalgorithm LRN algorithm kind: either
         ///     #dnnl::algorithm::lrn_across_channels, or
         ///     #dnnl::algorithm::lrn_within_channel.
-        /// @param data_desc Source and destination memory descriptors.
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
         /// @param local_size Regularization local size.
         /// @param alpha The alpha regularization parameter.
         /// @param beta The beta regularization parameter.
@@ -3200,9 +3202,9 @@ struct lrn_backward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, algorithm aalgorithm,
-                const memory::desc &data_desc,
-                const memory::desc &diff_data_desc, memory::dim local_size,
-                float alpha, float beta, float k,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, const memory::desc &src_desc,
+                memory::dim local_size, float alpha, float beta, float k,
                 const lrn_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
@@ -3450,8 +3452,9 @@ struct prelu_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
         /// @param weight_desc Alpha parameters memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param attr Primitive attributes to use. Attributes are optional
         ///     and default to empty attributes.
         /// @param allow_empty A flag signifying whether construction is
@@ -3459,7 +3462,8 @@ struct prelu_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                const memory::desc &data_desc, const memory::desc &weight_desc,
+                const memory::desc &src_desc, const memory::desc &weight_desc,
+                const memory::desc &dst_desc,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
@@ -3493,11 +3497,11 @@ struct prelu_backward : public primitive {
         /// primitive.
         ///
         /// @param aengine Engine to use.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
         /// @param weight_desc Alpha parameters memory descriptor.
-        /// @param diff_data_desc Diff source and destination memory
-        ///     descriptors.
+        /// @param diff_src_desc Diff source memory descriptor.
         /// @param diff_weights_desc Diff alpha parameters memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param hint_fwd_pd Primitive descriptor for a PReLU
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -3507,10 +3511,11 @@ struct prelu_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const engine &aengine, const memory::desc &data_desc,
+        primitive_desc(const engine &aengine, const memory::desc &src_desc,
                 const memory::desc &weight_desc,
-                const memory::desc &diff_data_desc,
+                const memory::desc &diff_src_desc,
                 const memory::desc &diff_weights_desc,
+                const memory::desc &diff_dst_desc,
                 const prelu_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
@@ -3643,7 +3648,8 @@ struct eltwise_forward : public primitive {
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param attr Primitive attributes to use. Attributes are optional
         ///     and default to empty attributes.
         /// @param allow_empty A flag signifying whether construction is
@@ -3651,7 +3657,8 @@ struct eltwise_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                algorithm aalgorithm, const memory::desc &data_desc,
+                algorithm aalgorithm, const memory::desc &src_desc,
+                const memory::desc &dst_desc,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
@@ -3663,7 +3670,8 @@ struct eltwise_forward : public primitive {
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param attr Primitive attributes to use. Attributes are optional
@@ -3673,8 +3681,9 @@ struct eltwise_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                algorithm aalgorithm, const memory::desc &data_desc,
-                float alpha, const primitive_attr &attr = default_attr(),
+                algorithm aalgorithm, const memory::desc &src_desc,
+                const memory::desc &dst_desc, float alpha,
+                const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
         /// Constructs a primitive descriptor for an elementwise forward
@@ -3685,7 +3694,8 @@ struct eltwise_forward : public primitive {
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
@@ -3697,8 +3707,8 @@ struct eltwise_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                algorithm aalgorithm, const memory::desc &data_desc,
-                float alpha, float beta,
+                algorithm aalgorithm, const memory::desc &src_desc,
+                const memory::desc &dst_desc, float alpha, float beta,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
@@ -3744,9 +3754,12 @@ struct eltwise_backward : public primitive {
         ///
         /// @param aengine Engine to use.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param diff_data_desc Diff source and destination memory
-        ///     descriptors.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param data_desc Destination memory descriptor if one of the
+        ///     "use_dst_for_bwd" algorithms are used (such as
+        ///     #dnnl_eltwise_relu_use_dst_for_bwd), source memory descriptor
+        ///     otherwise.
         /// @param hint_fwd_pd Primitive descriptor for an elementwise
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -3757,7 +3770,8 @@ struct eltwise_backward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, algorithm aalgorithm,
-                const memory::desc &diff_data_desc,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc,
                 const memory::desc &data_desc,
                 const eltwise_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
@@ -3768,9 +3782,12 @@ struct eltwise_backward : public primitive {
         ///
         /// @param aengine Engine to use.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param diff_data_desc Diff source and destination memory
-        ///     descriptors.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param data_desc Destination memory descriptor if one of the
+        ///     "use_dst_for_bwd" algorithms are used (such as
+        ///     #dnnl_eltwise_relu_use_dst_for_bwd), source memory descriptor
+        ///     otherwise.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param hint_fwd_pd Primitive descriptor for an elementwise
@@ -3783,7 +3800,8 @@ struct eltwise_backward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, algorithm aalgorithm,
-                const memory::desc &diff_data_desc,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc,
                 const memory::desc &data_desc, float alpha,
                 const eltwise_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
@@ -3794,9 +3812,12 @@ struct eltwise_backward : public primitive {
         ///
         /// @param aengine Engine to use.
         /// @param aalgorithm Elementwise algorithm kind.
-        /// @param diff_data_desc Diff source and destination memory
-        ///     descriptors.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param data_desc Destination memory descriptor if one of the
+        ///     "use_dst_for_bwd" algorithms are used (such as
+        ///     #dnnl_eltwise_relu_use_dst_for_bwd), source memory descriptor
+        ///     otherwise.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.
@@ -3811,7 +3832,8 @@ struct eltwise_backward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, algorithm aalgorithm,
-                const memory::desc &diff_data_desc,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc,
                 const memory::desc &data_desc, float alpha, float beta,
                 const eltwise_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
@@ -4014,7 +4036,8 @@ struct batch_normalization_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptors.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param epsilon Batch normalization epsilon parameter.
         /// @param flags Batch normalization flags (@ref
         ///     dnnl::normalization_flags).
@@ -4025,8 +4048,8 @@ struct batch_normalization_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                const memory::desc &data_desc, float epsilon,
-                normalization_flags flags,
+                const memory::desc &src_desc, const memory::desc &dst_desc,
+                float epsilon, normalization_flags flags,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
@@ -4085,9 +4108,9 @@ struct batch_normalization_backward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::backward_data and #dnnl::prop_kind::backward
         ///     (diffs for all parameters are computed in this case).
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
-        /// @param data_desc Source memory descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
         /// @param epsilon Batch normalization epsilon parameter.
         /// @param flags Batch normalization flags (@ref
         ///     dnnl::normalization_flags).
@@ -4101,9 +4124,9 @@ struct batch_normalization_backward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                const memory::desc &diff_data_desc,
-                const memory::desc &data_desc, float epsilon,
-                normalization_flags flags,
+                const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, const memory::desc &src_desc,
+                float epsilon, normalization_flags flags,
                 const batch_normalization_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
@@ -6835,7 +6858,8 @@ struct shuffle_forward : public primitive {
         /// @param aprop_kind Propagation kind. Possible values are
         ///     #dnnl::prop_kind::forward_training, and
         ///     #dnnl::prop_kind::forward_inference.
-        /// @param data_desc Source and destination memory descriptor.
+        /// @param src_desc Source memory descriptor.
+        /// @param dst_desc Destination memory descriptor.
         /// @param axis The axis along which the data is shuffled.
         /// @param group_size Shuffle group size.
         /// @param attr Primitive attributes to use. Attributes are optional
@@ -6845,7 +6869,8 @@ struct shuffle_forward : public primitive {
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
         primitive_desc(const engine &aengine, prop_kind aprop_kind,
-                const memory::desc &data_desc, int axis, int group_size,
+                const memory::desc &src_desc, const memory::desc &dst_desc,
+                int axis, int group_size,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
 
@@ -6885,8 +6910,8 @@ struct shuffle_backward : public primitive {
         /// primitive.
         ///
         /// @param aengine Engine to use.
-        /// @param diff_data_desc Diff source and diff destination memory
-        ///     descriptor.
+        /// @param diff_src_desc Diff source memory descriptor.
+        /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param axis The axis along which the data is shuffled.
         /// @param group_size Shuffle group size.
         /// @param hint_fwd_pd Primitive descriptor for a shuffle forward
@@ -6898,8 +6923,8 @@ struct shuffle_backward : public primitive {
         ///     allowed to fail without throwing an exception. In this case an
         ///     empty object will be produced. This flag is optional and
         ///     defaults to false.
-        primitive_desc(const engine &aengine,
-                const memory::desc &diff_data_desc, int axis, int group_size,
+        primitive_desc(const engine &aengine, const memory::desc &diff_src_desc,
+                const memory::desc &diff_dst_desc, int axis, int group_size,
                 const shuffle_forward::primitive_desc &hint_fwd_pd,
                 const primitive_attr &attr = default_attr(),
                 bool allow_empty = false);
