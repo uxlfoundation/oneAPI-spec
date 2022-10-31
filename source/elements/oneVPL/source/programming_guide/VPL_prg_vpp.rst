@@ -259,3 +259,20 @@ The following pseudo code shows HDR to HDR.
    :start-after: /*beg8*/
    :end-before: /*end8*/
    :lineno-start: 1
+
+-----------------------
+Camera RAW acceleration
+-----------------------
+
+oneVPL supports camera raw format processing with Intel HW. The following pseudo code
+shows how to perform camera raw hardware acceleration. For pipeline processing initialization,
+the application needs to attach the camera structures to the :cpp:struct:`mfxVideoParam` structure
+and call the :cpp:func:`MFXVideoVPP_Init` function.
+
+The following pseudo code shows camera raw processing.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg9*/
+   :end-before: /*end9*/
+   :lineno-start: 1

@@ -382,7 +382,7 @@ memory allocation model and returns array of processed frames through
    :end-before: /*end1*/
    :lineno-start: 1
 
-It's possible that different video processing channels may have diffrent
+It's possible that different video processing channels may have different
 latency:
 
 .. literalinclude:: ../snippets/prg_decoding_vpp.c

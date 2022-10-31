@@ -13,6 +13,28 @@ This section describes the API evolution from version to version.
    :depth: 1
 
 -----------
+Version 2.8
+-----------
+
+New in this release:
+
+* Introduced :cpp:enumerator:`MFX_FOURCC_ABGR16F` FourCC for 16-bit float point (per channel) 4:4:4 ABGR format.
+* Clarified the :cpp:member:`mfxExtMasteringDisplayColourVolume::DisplayPrimariesX`, :cpp:member:`mfxExtMasteringDisplayColourVolume::DisplayPrimariesY` for the video processing usage.
+* Added :cpp:enumerator:`MFX_CONTENT_NOISY_VIDEO` in ContentInfo definition.
+* Added Camera Processing API for Camera RAW data.
+* Introduced hint to disable external video frames caching for GPU copy.
+* Clarified usage of :cpp:member:`mfxExtMasteringDisplayColourVolume::InsertPayloadToggle` and
+  :cpp:member:`mfxExtContentLightLevelInfo::InsertPayloadToggle` during decode operations.
+* Fixed multiple spelling errors.
+* Experimental API: introduced :cpp:member:`mfxExtMBQP::Pitch` value for QP map defined in :cpp:struct:`mfxExtMBQP`.
+* Clarified when :cpp:func:`MFXEnumImplementations` may be called for implementation capabilities query.
+* Added table with filenames included in the dispatcher's search process.
+
+Bug Fixes:
+
+* Fixed :ref:`Experimental API table <experimental-api-table>` to note that :cpp:type:`mfxExtRefListCtrl` and :cpp:enumerator:`MFX_EXTBUFF_UNIVERSAL_REFLIST_CTRL` were moved to production in version 2.8.
+
+-----------
 Version 2.7
 -----------
 
@@ -21,7 +43,7 @@ New in this release:
 * :cpp:member:`mfxExtVppAuxData::RepeatedFrame` flag is actual again and returned back from deprecation state.
 * Clarified GPUCopy control behavior.
 * Introduced MFX_FOURCC_XYUV FourCC for non-alpha packed 4:4:4 format.
-* Notice added to the :cpp:member:`mfxFrameSurfaceInterface::OnComplete` to claify when
+* Notice added to the :cpp:member:`mfxFrameSurfaceInterface::OnComplete` to clarify when
   library can call this callback.
 * New product names for platforms:
 
@@ -111,7 +133,7 @@ Version 2.4
 * Added QueryInterface function to mfxFrameSurfaceInterface.
 * Added AdaptiveRef and alias for ExtBrcAdaptiveLTR.
 * Added MFX_FOURCC_BGRP FourCC for Planar BGR format.
-* Enviromental variables to control dispatcher's logger.
+* Environmental variables to control dispatcher's logger.
 
 -----------
 Version 2.3
