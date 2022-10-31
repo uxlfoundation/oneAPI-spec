@@ -43,10 +43,12 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main' }}
       run: |
           cd gh-pages
-          rm -rf *
           touch .nojekyll
-          cp -r ../build/html/* .
-          cp ../build/latex/*.pdf .
+          rm -rf spec
+          mkdir spec
+          cd spec
+          cp -r ../../build/html/* .
+          cp ../../build/latex/*.pdf .
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
