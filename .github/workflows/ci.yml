@@ -5,34 +5,26 @@
 on: [push, pull_request]
 
 jobs:
-  ci:
+  build:
     runs-on: ubuntu-latest
+    image: ghcr.io/sphinx-doc/sphinx:5.3.0
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
     - name: Install prerequisites
       run: |
-          sudo apt-get update -qq
-          xargs -a ubuntu-packages.txt sudo apt install -qq
-          python -m pip install --quiet --upgrade pip
-          pip install --quiet -r requirements.txt
+          pip install sphinx-book-theme pre-commit
     - name: Checks
       run: |
           pre-commit run --all
-          mkdir -p build/reuse
-          # ignore fail for reuse
-          reuse lint > build/reuse/lint.txt || true
     - name: Build
-      env:
-        ONEAPI_DRAFT: true
       run: |
-        python scripts/oneapi.py -W html
-        python scripts/oneapi.py -W latexpdf
+        make html
     - name: Archive build directory
       uses: actions/upload-artifact@v1
       with:
-          name: build
-          path: build
+          name: _build
+          path: _build
     - name: Checkout gh-pages
       if: ${{ github.ref == 'refs/heads/main' }}
       uses: actions/checkout@v2
@@ -43,12 +35,8 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main' }}
       run: |
           cd gh-pages
-          touch .nojekyll
-          rm -rf spec
-          mkdir spec
-          cd spec
-          cp -r ../../build/html/* .
-          cp ../../build/latex/*.pdf .
+          rm -rf release-notes
+          cp -r _build/html release-notes
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
