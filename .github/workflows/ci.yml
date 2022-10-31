@@ -8,8 +8,8 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
     - name: Install prerequisites
       run: |
           sudo apt-get update -qq
@@ -29,13 +29,13 @@ jobs:
         python scripts/oneapi.py -W html
         python scripts/oneapi.py -W latexpdf
     - name: Archive build directory
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
           name: build
           path: build
     - name: Checkout gh-pages
       if: ${{ github.ref == 'refs/heads/main' }}
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         ref: gh-pages
         path: gh-pages
