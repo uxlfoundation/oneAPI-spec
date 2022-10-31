@@ -7,8 +7,16 @@ Parallel API
 
 For all C++ algorithms accepting execution policies (as defined by `C++ Standard`_), oneDPL provides
 an implementation for oneAPI devices via :code:`oneapi::dpl::execution::device_policy`. These algorithms
-must be capable of processing data in SYCL buffers (passed via :code:`oneapi::dpl::begin/end`)
-and in unified shared memory (USM).
+must be capable of processing data in the host memory, SYCL buffers (passed via :code:`oneapi::dpl::begin/end`)
+and in Unified Shared Memory (USM).
+
+Data placement support
+++++++++++++++++++++++
+
+oneDPL provides C++ algorithms accepting the random aceess iterators, which point to data lying in the host memory,
+SYCL buffers, SYCL Unified Shared Memory (USM), which in its turn may be shared memory or just device memory.
+When data placed in the host memory, oneDPL algorithm might do implicit transfering data to a device before exeucution.
+SYCL provides special API to manage SYCL Unified Shared Memory and copyng data to.
 
 oneDPL extends Parallel STL with the following APIs.
 
