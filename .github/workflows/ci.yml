@@ -10,7 +10,6 @@ jobs:
     container: ghcr.io/sphinx-doc/sphinx:5.3.0
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
     - name: Install prerequisites
       run: |
           pip install sphinx-book-theme pre-commit
