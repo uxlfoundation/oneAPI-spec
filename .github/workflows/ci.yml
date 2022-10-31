@@ -21,13 +21,13 @@ jobs:
       run: |
         make html
     - name: Archive build directory
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
           name: _build
           path: _build
     - name: Checkout gh-pages
       if: ${{ github.ref == 'refs/heads/main' }}
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         ref: gh-pages
         path: gh-pages
