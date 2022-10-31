@@ -14,6 +14,7 @@ jobs:
     - name: Install prerequisites
       run: |
           pip install sphinx-book-theme pre-commit
+          apt install -y git
     - name: Checks
       run: |
           pre-commit run --all
