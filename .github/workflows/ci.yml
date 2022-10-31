@@ -7,7 +7,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    image: ghcr.io/sphinx-doc/sphinx:5.3.0
+    container: ghcr.io/sphinx-doc/sphinx:5.3.0
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
