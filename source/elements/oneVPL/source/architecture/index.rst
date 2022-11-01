@@ -20,7 +20,7 @@ oneVPL functions fall into the following categories:
       Functions that perform video processing on raw video frames
       
    DECODE_VPP
-      Functions that perfom combined operations of decoding and video processing
+      Functions that perform combined operations of decoding and video processing
 
    CORE
       Auxiliary functions for synchronization

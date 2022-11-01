@@ -16,9 +16,10 @@ filter, or any other underlying features are mandatory for the implementation.
 The oneVPL API is designed such that users have several options
 to discover capabilities exposed by the implementation:
 
-#. Before session creation: Users can get a list of supported encoders, decoders,
+#. Before or after session creation: Users can get a list of supported encoders, decoders,
    VPP filters, correspondent color formats, and memory types with the help of
-   the :cpp:func:`MFXEnumImplementations` function.
+   the :cpp:func:`MFXEnumImplementations` function. For more details, see
+   :ref:`oneVPL Dispatcher Interactions <onevpl-dispatcher-interactions>`.
 #. After session is created: Users can call **Query** functions to obtain
    low level implementation capabilities.
 
@@ -189,7 +190,7 @@ All implementations must implement the APIs listed in the
 If the implementation exposes any encoder, decoder, or VPP filter, it must
 implement the corresponding mandatory APIs, as described in the
 :ref:`Mandatory Encode <mandatory-enc-apis-table>`, :ref:`Decode <mandatory-dec-apis-table>`,
-:ref:`VPP <mandatory-vpp-apis-table>` abd :ref:`Decode+VPP <mandatory-dec-vpp-apis-table>` APIs
+:ref:`VPP <mandatory-vpp-apis-table>` and :ref:`Decode+VPP <mandatory-dec-vpp-apis-table>` APIs
 tables:
 
 .. _mandatory-enc-apis-table:
