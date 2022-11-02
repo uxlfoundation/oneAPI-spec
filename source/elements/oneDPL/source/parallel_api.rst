@@ -14,9 +14,9 @@ Data placement support
 ++++++++++++++++++++++
 
 oneDPL provides C++ algorithms accepting the random aceess iterators, which point to data lying in the host memory,
-SYCL buffers, SYCL Unified Shared Memory (USM), which in its turn may be shared memory or just device memory.
+SYCL buffers or SYCL Unified Shared Memory (USM), which in its turn may be shared memory or device memory.
 When data placed in the host memory, oneDPL algorithm might do implicit transfering data to a device before exeucution.
-SYCL provides special API to manage SYCL Unified Shared Memory and copyng data to.
+SYCL provides special API to manage SYCL Unified Shared Memory and copying data to.
 
 oneDPL extends Parallel STL with the following APIs.
 
