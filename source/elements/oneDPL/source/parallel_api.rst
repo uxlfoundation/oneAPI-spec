@@ -5,17 +5,18 @@
 Parallel API
 ------------
 
-oneDPL provides the set of algorithms with execution policies as defined by `C++ Standard`_.
-All those algorithms work with *C++ standard like execution policies* and with *DPC++
+oneDPL provides the set of algorithms with execution policies as defined by the `C++ Standard`_.
+All those algorithms work with *C++ Standard aligned execution policies* and with *DPC++
 execution policies*.
 
-??? Why is this important (from spec perspective)??? oneDPL extends Parallel STL with the following APIs.
+oneDPL extends the C++ Standard like API with `SYCL`_ buffer wrappers, iterators and additional
+parallel algortithms.
 
-C++ standard like execution policies
-++++++++++++++++++++++++++++++++++++
+C++ Standard aligned execution policies
++++++++++++++++++++++++++++++++++++++++
 
-oneDPL has its own set of execution policies and utilities that represent similar to
-C++ standard functionality
+oneDPL has its own set of execution policies and utilities that represent functionality aligned with
+C++ Standard:
 
 .. code:: cpp
 
@@ -44,13 +45,13 @@ C++ standard functionality
     }
   }
 
-Please see C++ standard :code:`<execution>` header for more information.
+Please see C++ Standard :code:`<execution>` header for more information.
 
 DPC++ Execution Policy
 ++++++++++++++++++++++
 
-A DPC++ execution policy specifies where and how an algorithm runs. The API is expressed via
-:code:`oneapi::dpl::execution::device_policy` class.
+A DPC++ execution policy class :code:`oneapi::dpl::execution::device_policy` specifies
+where and how an algorithm runs.
 
 .. code:: cpp
 
@@ -104,12 +105,14 @@ device_policy class
   };
 
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
-to run algorithms on a DPC++ compliant device. When algorithm is being run with ``device_policy``
-it is capable of processing data with SYCL buffers (passed via :code:`oneapi::dpl::begin/end`)
-or in unified shared memory (USM).
+to run algorithms on a DPC++ compliant device. When an algorithm runs with ``device_policy``
+it is capable of processing SYCL buffers (passed via :code:`oneapi::dpl::begin/end`),
+data in the host memory or data in Unified Shared Memory (USM), inlcuding USM device memory.
+When data is placed in the host memory, it shall be passed to the algorithms as random access
+iterators. oneDPL algorithm might do implicit transfering data to a device before execution.
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
-is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to. 
+is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to.
 
 .. code:: cpp
 
@@ -677,3 +680,4 @@ than an element in the range being searched.
 The elements e of [start, end) must be partitioned with respect to the comparator used.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
+.. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
