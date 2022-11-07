@@ -3656,8 +3656,8 @@ struct eltwise_backward : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param data_desc Destination memory descriptor if one of the
         ///     "use_dst_for_bwd" algorithms are used (such as
-        ///     #dnnl_eltwise_relu_use_dst_for_bwd), source memory descriptor
-        ///     otherwise.
+        ///     #dnnl::algorithm::eltwise_relu_use_dst_for_bwd), source
+        ///     memory descriptor otherwise.
         /// @param hint_fwd_pd Primitive descriptor for an elementwise
         ///     forward propagation primitive. It is used as a hint for
         ///     deciding which memory format to use.
@@ -3684,8 +3684,8 @@ struct eltwise_backward : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param data_desc Destination memory descriptor if one of the
         ///     "use_dst_for_bwd" algorithms are used (such as
-        ///     #dnnl_eltwise_relu_use_dst_for_bwd), source memory descriptor
-        ///     otherwise.
+        ///     #dnnl::algorithm::eltwise_relu_use_dst_for_bwd), source
+        ///     memory descriptor otherwise.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param hint_fwd_pd Primitive descriptor for an elementwise
@@ -3714,8 +3714,8 @@ struct eltwise_backward : public primitive {
         /// @param diff_dst_desc Diff destination memory descriptor.
         /// @param data_desc Destination memory descriptor if one of the
         ///     "use_dst_for_bwd" algorithms are used (such as
-        ///     #dnnl_eltwise_relu_use_dst_for_bwd), source memory descriptor
-        ///     otherwise.
+        ///     #dnnl::algorithm::eltwise_relu_use_dst_for_bwd), source
+        ///     memory descriptor otherwise.
         /// @param alpha The alpha parameter for the elementwise operation.
         ///     Specific meaning depends on the algorithm.
         /// @param beta The beta parameter for the elementwise operation.

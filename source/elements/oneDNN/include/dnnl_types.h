@@ -168,9 +168,15 @@
 
 
 /// Scaling factors provided at execution time.
-#define DNNL_ARG_ATTR_SCALES 513
+#define DNNL_ARG_ATTR_SCALES 4096
 /// Zero points provided at execution time.
-#define DNNL_ARG_ATTR_ZERO_POINTS 4096
+#define DNNL_ARG_ATTR_ZERO_POINTS 8192
+
+/// Starting point for post operation arguments.
+#define DNNL_ARG_ATTR_MULTIPLE_POST_OP_BASE 32768
+/// Arguments for a binary post operation.
+#define DNNL_ARG_ATTR_MULTIPLE_POST_OP(idx) \
+    (DNNL_ARG_ATTR_MULTIPLE_POST_OP_BASE * ((idx) + 1))
 
 /// Starting index for source arguments for primitives that take a variable
 /// number of source arguments.
