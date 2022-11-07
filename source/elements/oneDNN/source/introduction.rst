@@ -106,15 +106,26 @@ On the logical level, the library provides the following abstractions:
 | Implementation           | Memory object     | Primitive            |
 +--------------------------+-------------------+----------------------+
 
+***************
+Graph Extension
+***************
+
+The graph extension is a high level abstraction in oneDNN that allows to work with a
+computation graph instead of individual primitives. This approach allows to
+make operation fusion:
+
+* transparent: the integration efforts are reduced by abstracting engine-aware
+  fusion logic.
+
+* scalable: no integration code change is necessary to benefit from new fusion
+  patterns enabled in the oneDNN implementation.
+
+The programming model for the graph extension is detailed in the
+:ref:`graph programming model section <graph_programming_model-label>`.
+
 *****************
 General API notes
 *****************
-
-There are certain assumptions on how oneDNN objects behave:
-
-- Memory and operation descriptors behave similarly to trivial types.
-
-- All other objects behave like shared pointers. Copying is always shallow.
 
 oneDNN objects can be *empty* in which case they are not valid for any use.
 Memory descriptors are special in this regard, as their empty versions are
