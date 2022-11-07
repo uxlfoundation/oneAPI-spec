@@ -81,16 +81,8 @@ On the logical level, the library provides the following abstractions:
   format any (|memory::format_tag::any|) indicates that the actual format will
   be defined later.
 
-* Operation descriptors (one for each supported primitive) describe the most
-  basic properties of an operation without specifying, for example, which engine
-  will be used to compute them. For example, convolution descriptor describes
-  shapes of source, destination, and weights tensors, propagation kind (forward,
-  backward with respect to data or weights), and other
-  implementation-independent parameters.
-
 * Primitive descriptors (|primitive_desc_base| is the base class and each of the
-  supported primitives have their own version) are at an abstraction level in
-  between operation descriptors and primitives and can be used to inspect
+  supported primitives have their own version) can be used to inspect
   details of a specific primitive implementation like expected memory formats
   via queries to implement memory format propagation (see :ref:`Memory format
   propagation <memory_format_propagation-label>`) without having to fully
@@ -99,9 +91,7 @@ On the logical level, the library provides the following abstractions:
 +--------------------------+-------------------+----------------------+
 | Abstraction level        | Memory object     | Primitive objects    |
 +==========================+===================+======================+
-| Logical description      | Memory descriptor | Operation descriptor |
-+--------------------------+-------------------+----------------------+
-| Intermediate description | N/A               | Primitive descriptor |
+| Logical description      | Memory descriptor | Primitive descriptor |
 +--------------------------+-------------------+----------------------+
 | Implementation           | Memory object     | Primitive            |
 +--------------------------+-------------------+----------------------+

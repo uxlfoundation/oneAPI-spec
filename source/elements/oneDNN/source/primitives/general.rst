@@ -34,8 +34,7 @@ There is a common base class for primitive descriptors.
    :project: oneDNN
    :members:
 
-It is further derived from to provide base class for all primitives that have
-operation descriptors.
+It is further derived from to provide base class for all primitives.
 
 .. doxygenstruct:: dnnl::primitive_desc
    :project: oneDNN
