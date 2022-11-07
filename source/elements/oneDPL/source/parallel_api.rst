@@ -5,17 +5,52 @@
 Parallel API
 ------------
 
-For all C++ algorithms accepting execution policies (as defined by `C++ Standard`_), oneDPL provides
-an implementation for oneAPI devices via :code:`oneapi::dpl::execution::device_policy`. These algorithms
-must be capable of processing data in SYCL buffers (passed via :code:`oneapi::dpl::begin/end`)
-and in unified shared memory (USM).
+oneDPL provides the set of algorithms with execution policies as defined by `C++ Standard`_.
+All those algorithms work with *C++ standard like execution policies* and with *DPC++
+execution policies*.
 
-oneDPL extends Parallel STL with the following APIs.
+??? Why is this important (from spec perspective)??? oneDPL extends Parallel STL with the following APIs.
+
+C++ standard like execution policies
+++++++++++++++++++++++++++++++++++++
+
+oneDPL has its own set of execution policies and utilities that represent similar to
+C++ standard functionality
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/execution>
+
+  namespace oneapi {
+    namespace dpl {
+      namespace execution {
+
+        class sequenced_policy { /*unspecified*/ };
+        class parallel_policy { /*unspecified*/ };
+        class parallel_unsequenced_policy { /*unspecified*/ };
+        class unsequenced_policy { /*unspecified*/ };
+
+        inline constexpr sequenced_policy seq { /*unspecified*/ };
+        inline constexpr parallel_policy par { /*unspecified*/ };
+        inline constexpr parallel_unsequenced_policy par_unseq { /*unspecified*/ };
+        inline constexpr unsequenced_policy unseq { /*unspecified*/ };
+
+        template <class T>
+        struct is_execution_policy;
+
+        template <class T>
+        inline constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
+      }
+    }
+  }
+
+Please see C++ standard :code:`<execution>` header for more information.
 
 DPC++ Execution Policy
 ++++++++++++++++++++++
 
-A DPC++ execution policy specifies where and how an algorithm runs.
+A DPC++ execution policy specifies where and how an algorithm runs. The API is expressed via
+:code:`oneapi::dpl::execution::device_policy` class.
 
 .. code:: cpp
 
@@ -69,7 +104,9 @@ device_policy class
   };
 
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
-to run algorithms on a DPC++ compliant device.
+to run algorithms on a DPC++ compliant device. When algorithm is being run with ``device_policy``
+it is capable of processing data with SYCL buffers (passed via :code:`oneapi::dpl::begin/end`)
+or in unified shared memory (USM).
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
 is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to. 
