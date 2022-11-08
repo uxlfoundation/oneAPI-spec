@@ -48,9 +48,9 @@ of a predecessor to handle this.
 Lightweight
 -----------
 
-This policy suggests that the node body takes little time to process, as a non-binging hint for
-an implementation to reduce overheads associated with the node execution. Any applied optimization
-must have no observable side effects on the node and graph execution.
+This policy allows to specify that the node body takes little time to process, as a non-binding hint
+for an implementation to reduce overheads associated with the node execution. Any optimization applied
+by an implementation must have no observable side effects on the node and graph execution.
 
 When combined with another policy, the ``lightweight`` policy results in extending the behavior
 of that other policy with the optimization hint. This rule automatically applies to functional nodes
