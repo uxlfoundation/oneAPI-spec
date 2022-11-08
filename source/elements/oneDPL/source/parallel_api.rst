@@ -9,14 +9,14 @@ oneDPL provides the set of algorithms with execution policies as defined by the 
 All those algorithms work with *C++ Standard aligned execution policies* and with *DPC++
 execution policies*.
 
-oneDPL extends the C++ Standard like API with `SYCL`_ buffer wrappers, iterators and additional
-parallel algortithms.
+Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special iterators, and
+a set of non-standard parallel algortithms.
 
 C++ Standard aligned execution policies
 +++++++++++++++++++++++++++++++++++++++
 
-oneDPL has its own set of execution policies and utilities that represent functionality aligned with
-C++ Standard:
+oneDPL has the set of execution policies and related utilities that are semantically aligned
+with the C++ Standard:
 
 .. code:: cpp
 
@@ -45,7 +45,7 @@ C++ Standard:
     }
   }
 
-Please see C++ Standard :code:`<execution>` header for more information.
+See "Execution policies" in the `C++ Standard`_ for more information.
 
 DPC++ Execution Policy
 ++++++++++++++++++++++
@@ -107,9 +107,11 @@ device_policy class
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
 to run algorithms on a DPC++ compliant device. When an algorithm runs with ``device_policy``
 it is capable of processing SYCL buffers (passed via :code:`oneapi::dpl::begin/end`),
-data in the host memory or data in Unified Shared Memory (USM), inlcuding USM device memory.
-When data is placed in the host memory, it shall be passed to the algorithms as random access
-iterators. oneDPL algorithm might do implicit transfering data to a device before execution.
+data in the host memory and data in Unified Shared Memory (USM), including USM device memory.
+Data placed in the host memory and USM can only be passed to oneDPL algorithms
+as pointers and random access iterators. The way to transfer data from the host memory
+to a device and back is unspecified; per-element data movement to/from a temporary storage
+is a possible valid implementation.
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
 is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to.
