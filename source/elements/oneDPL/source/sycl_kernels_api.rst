@@ -8,8 +8,8 @@ SYCL Kernels API
 Supported C++ Standard Library APIs and Algorithms
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-oneDPL defines a subset of the `C++ Standard`_ library APIs for use in DPC++ kernels. These APIs
-can be employed in SYCL kernels similarly to how they are employed in code for a typical
+oneDPL defines a subset of the `C++ Standard`_ library APIs for use in SYCL kernels. These APIs
+can be employed in the kernels similarly to how they are employed in code for a typical
 CPU-based platform.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
@@ -18,23 +18,23 @@ Random Number Generation
 ++++++++++++++++++++++++
 
 oneDPL provides a subset of the standard C++ pseudo-random number generation functionality
-suitable to use within SYCL kernels in the :code:`<oneapi/dpl/random>` header. 
+suitable to use within SYCL kernels. The APIs are defined in the :code:`<oneapi/dpl/random>` header. 
 
 Supported functionality:
 ------------------------
-- Engines:
+- Engine class templates:
    - ``linear_congruential_engine``
    - ``subtract_with_carry_engine``
-- Engine adaptors:
+- Engine adaptor class templates:
    - ``discard_block_engine``
-- Standard engines and engine adaptors with predefined parameters:
+- Engines and engine adaptors with predefined parameters:
    - ``minstd_rand0``
    - ``minstd_rand``
    - ``ranlux24_base``
    - ``ranlux48_base``
    - ``ranlux24``
    - ``ranlux48``
-- Distributions:
+- Distribution class templates:
    - ``uniform_int_distribution``
    - ``uniform_real_distribtuon``
    - ``normal_distribution``
