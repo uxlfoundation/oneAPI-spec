@@ -359,6 +359,8 @@ iterator instances to determine their position relative to each other.
         permutation_iterator(const SourceIterator& input1, const IndexMap& input2,
                              std::size_t index = 0);
 
+        SourceIterator base() const;
+
         reference operator*() const;
         reference operator[](difference_type i) const;
 
@@ -421,6 +423,8 @@ using the source iterator and index map provided.
         using value_type = typename std::remove_reference<reference>::type;
         using pointer = typename std::iterator_traits<Iterator>::pointer;
 
+        Iterator base() const;
+
         transform_iterator(Iterator it, UnaryFunc unary_func);
         transform_iterator(const transform_iterator& input);
         transform_iterator& operator=(const transform_iterator& input);
@@ -478,6 +482,8 @@ using the source iterator and unary function object provided.
         using reference = /* unspecified tuple of reference types */;
         using pointer =
             std::tuple<typename std::iterator_traits<Iterators>::pointer...>;
+
+        std::tuple<Iterators...> base() const;
 
         zip_iterator();
         explicit zip_iterator(Iterators... args);
