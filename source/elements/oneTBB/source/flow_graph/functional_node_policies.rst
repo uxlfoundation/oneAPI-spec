@@ -48,17 +48,17 @@ of a predecessor to handle this.
 Lightweight
 -----------
 
-This policy helps to reduce the overhead associated with the execution scheduling of the node.
+This policy suggests that the node body takes little time to process, as a non-binging hint for
+an implementation to reduce overheads associated with the node execution. Any applied optimization
+must have no observable side effects on the node and graph execution.
 
-For functional nodes that have a default value for the ``Policy`` template parameter, specifying
-the ``lightweight`` policy results in extending the behavior of the default value of ``Policy``
-with the behavior defined by the ``lightweight`` policy. For example, if the default value of
+When combined with another policy, the ``lightweight`` policy results in extending the behavior
+of that other policy with the optimization hint. This rule automatically applies to functional nodes
+that have a default value for the ``Policy`` template parameter. For example, if the default value of
 ``Policy`` is ``queueing``, specifying ``lightweight`` as the ``Policy`` value is equivalent to
 specifying ``queueing_lightweight``.
 
-The ``lightweight`` policy requires a function call ``operator()`` of a node's
-body be ``noexcept``. If it is not the case, specifying ``lightweight`` policy
-to the node has no effect.
+The function call ``operator()`` of a node body must be ``noexcept`` for lightweight policies to have effect.
 
 Example
 ~~~~~~~
