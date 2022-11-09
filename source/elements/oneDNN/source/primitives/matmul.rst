@@ -18,7 +18,7 @@ tensors with optional bias addition. Variable names follow the standard
 .. math::
 
        \dst(m, n) =
-           \sum_{k=0}^{K} \left(
+           \sum_{k=0}^{K - 1} \left(
                \src(m, k) \cdot \weights(k, n)
            \right) +
            \bias(m, n)
@@ -29,7 +29,7 @@ multiplication operations, in which case the tensors must be 3D:
 .. math::
 
        \dst(mb, m, n) =
-           \sum_{k=0}^{K} \left(
+           \sum_{k=0}^{K - 1} \left(
                \src(mb, m, k) \cdot \weights(mb, k, n)
            \right) +
            \bias(mb, m, n)

@@ -345,7 +345,7 @@ recognize the subgraph pattern explicitly and convert to fused op. Depending on
 oneDNN Graph implementation capability, the partition may include more or fewer
 operations.
 
-.. image:: resources/int8_programming.PNG
+.. image:: resources/int8_programming.png
 
 For bf16, oneDNN Graph provides the |typecast| operation, which can
 convert an f32 tensor to bf16 or f16, and vice versa. All oneDNN Graph
@@ -356,7 +356,7 @@ precision. If users first typecast from f32 to bf16 and convert back,
 oneDNN Graph implementation does the exact data type conversions
 underneath.
 
-.. image:: resources/bf16_programming.PNG
+.. image:: resources/bf16_programming.png
 
 -----------------
 General API notes
