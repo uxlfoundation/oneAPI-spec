@@ -8,10 +8,10 @@
 MatMul
 ######
 
-MatMul operation computes the product of two tensors with optional bias
-addition The variable names follow the standard @ref
-dev_guide_conventions, typically taking 2D input tensors as an example,
-the formula is below:
+MatMul operation computes the product of two tensors with optional
+bias addition The variable names follow the standard
+:ref:`conventions-label`, typically taking 2D input tensors as an
+example, the formula is below:
 
 .. math::
 

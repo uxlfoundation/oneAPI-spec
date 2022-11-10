@@ -9,14 +9,14 @@ ReduceL2
 ########
 
 ReduceL2 operation performs the reduction with finding the L2 norm
-(square root of sum of squares) on a given src data along dimensions
+(square root of sum of squares) on a given \src data along dimensions
 specified by axes.
 
 Take channel axis = 0 and keep_dims = True as an example:
 
 .. math::
     
-    \dst_{0,\cdots,\cdots} = \sqrt{\sum\limits_{i}{src_{i,\cdots,\cdots}^2}} ,i \in [0,channelNum-1] 
+    \dst_{0,\cdots,\cdots} = \sqrt{\sum\limits_{i}{\src_{i,\cdots,\cdots}^2}} ,i \in [0,channelNum-1]
 
 Operation Attributes
 ********************

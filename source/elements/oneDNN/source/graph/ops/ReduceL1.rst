@@ -9,14 +9,14 @@ ReduceL1
 ########
 
 ReduceL1 operation performs the reduction with finding the L1 norm (sum
-of absolute values) on a given src data along dimensions specified by
+of absolute values) on a given \src data along dimensions specified by
 axes.
 
 Take channel axis = 0 and keep_dims = True as an example:
 
 .. math::
     
-    \dst_{0,\cdots,\cdots} = \sum\limits*\ {i}|src_{i,\cdots,\cdots}\| ,i \in [0,channelNum-1] 
+    \dst_{0,\cdots,\cdots} = \sum\limits_{i}|\src_{i,\cdots,\cdots}\| ,i \in [0,channelNum-1]
 
 Operation Attributes
 ********************

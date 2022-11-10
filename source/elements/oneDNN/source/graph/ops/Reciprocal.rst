@@ -13,8 +13,8 @@ exponent(power) equals to -1. Reciprocal of 0 is infinity.
 
 .. math::
     
-    dst = \begin{cases} src^{-1} & \text{if}\ src \neq 0  \\
-       inf & \text{if}\ src = 0 \end{cases}
+    \dst = \begin{cases} \src^{-1} & \text{if}\ \src \neq 0  \\
+       \infty & \text{if}\ \src = 0 \end{cases}
 
 
 

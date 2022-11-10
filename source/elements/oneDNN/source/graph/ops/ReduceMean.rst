@@ -8,13 +8,13 @@
 ReduceMean
 ##########
 ReduceMean operation performs the reduction with finding the arithmetic
-mean on a given src data along dimensions specified by axes.
+mean on a given \src data along dimensions specified by axes.
 
 Take channel axis = 0 and keep_dims = True as an example:
 
 .. math::
   
-  \dst_{0,\cdots,\cdots} = \frac{{\sum\limits_{i}{src_{i,\cdots,\cdots}}}}{channelNum} ,i \in [0,channelNum-1] 
+  \dst_{0,\cdots,\cdots} = \frac{1}{channelNum} \cdot \sum\limits_{i}{\src_{i,\cdots,\cdots}} ,i \in [0,channelNum-1]
 
 Operation Attributes
 ********************

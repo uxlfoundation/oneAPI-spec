@@ -9,12 +9,11 @@ Softmax
 #######
 
 Softmax operation applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
     
-    \dst_i = \frac{exp(src_i)}{\sum_{j=1}^{C} exp(src_j)}
+    \dst_i = \frac{e^{(\src_i)}}{\sum_{j=1}^{C} e^{\src_j}}
 
 where \$ C \$ is a size of tensor along axis dimension.
 

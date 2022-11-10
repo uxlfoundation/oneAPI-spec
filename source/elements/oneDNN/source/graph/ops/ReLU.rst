@@ -9,13 +9,12 @@ ReLU
 ####
 
 ReLU applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
   
-  dst = \begin{cases} src & \text{if}\ src > 0 \\
-       0 & \text{if}\ src \leq 0 \end{cases}
+  \dst = \begin{cases} \src & \text{if}\ \src > 0 \\
+       0 & \text{if}\ \src \leq 0 \end{cases}
 
 
 

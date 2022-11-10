@@ -24,7 +24,7 @@ For per-channel quantization, taking channel axis = 1 as an example:
 
 .. math::
 
-   dst_{\cdots,i,\cdots,\cdots} =
+   \dst_{\cdots,i,\cdots,\cdots} =
        round(\src_{\cdots,i,\cdots,\cdots} / scale_i + zp_i),
        i \in {[0, ic-1]} 
 

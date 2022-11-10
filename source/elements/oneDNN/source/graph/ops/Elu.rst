@@ -9,15 +9,12 @@ Elu
 ###
 
 Elu operation applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
- dst =
 
-
-   \begin{cases} \alpha(e^{src} - 1) & \text{if}\ src < 0 \\
-       src & \text{if}\ src \ge 0 \end{cases}
+   \dst = \begin{cases} \alpha(e^{\src} - 1) & \text{if}\ \src < 0 \\
+       \src & \text{if}\ \src \ge 0 \end{cases}
 
 
 

@@ -8,13 +8,13 @@
 GELU
 ####
 
-GELU operation applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions): 
+GELU operation applies following formula on every element of \src
+tensor (the variable names follow the standard
+:ref:`conventions-label`):
 
 .. math::
 
-   dst = 0.5 \* src \* (1.0 + erf(src) / \sqrt2) 
+   \dst = 0.5  \src \cdot (1.0 + erf(\src) / \sqrt2)
 
 Operation Attributes
 ********************

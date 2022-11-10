@@ -9,13 +9,13 @@ ReduceMax
 #########
 
 ReduceMax operation performs the reduction with finding the maximum
-value on a given src data along dimensions specified by axes.
+value on a given \src data along dimensions specified by axes.
 
 Take channel axis = 0 and keep_dims = True as an example:
 
 .. math::
     
-    \dst_{0,\cdots,\cdots} = \max{src*\ {i,\cdots,\cdots}} ,i \in [0,channelNum-1] 
+    \dst_{0,\cdots,\cdots} = \max{\src_{i,\cdots,\cdots}} ,i \in [0,channelNum-1]
 
 Operation Attributes
 ********************

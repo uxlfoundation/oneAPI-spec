@@ -23,7 +23,7 @@ For per-channel de-quantization, taking channel axis = 1 as an example:
 
 .. math::
 
-   \dst_{\cdots,i,\cdots,\cdots} = (\src\_{\cdots,i,\cdots,\cdots}
+   \dst_{\cdots,i,\cdots,\cdots} = (\src_{\cdots,i,\cdots,\cdots}
    - zps_i) \times scale_i, i \in {[0, ic-1]}
 
 

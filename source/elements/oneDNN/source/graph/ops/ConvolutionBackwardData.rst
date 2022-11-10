@@ -72,7 +72,7 @@ and :math:`dst\_h` be height dimension of
 
 .. math::
  
-   total\_padding\_h = SH \times (src_h - 1) + ((KH -1 ) \times DH + 1) - dst_h + output\_padding\_h
+   total\_padding_h = SH \times (src_h - 1) + ((KH -1 ) \times DH + 1) - \dst_h + output\_padding_h
 
 
 If |attr_auto_pad| attribute is specified as ``valid``:
@@ -83,12 +83,12 @@ If |attr_auto_pad| attribute is specified as ``valid``:
 If |attr_auto_pad| attribute is specified as ``same_lower``:
 
 .. math::
- PD_L = floor(total_padding / 2) \\ PD_R = total_padding - PD_L 
+ PD_L = floor(total\_padding / 2) \\ PD_R = total\_padding - PD_L
 
 If |attr_auto_pad| attribute is specified as ``same_upper``:
 
 .. math::
- PD_L = total_padding - PD_R \\ PD_R = floor(total_padding / 2) 
+ PD_L = total\_padding - PD_R \\ PD_R = floor(total\_padding / 2)
 
 where:
 

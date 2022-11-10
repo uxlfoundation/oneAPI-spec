@@ -35,9 +35,9 @@ Mean and variance are computed at runtime or provided by a user. When
 mean and variance are computed at runtime, the following formulas are
 used:
 
--  :math:`\mu(t, n) = rac{1}{C} \sum\limits_{c} \src(t, n, c)_{}`,
+-  :math:`\mu(t, n) = \frac{1}{C} \sum\limits_{c} \src(t, n, c)_{}`,
 
--  :math:`\sigma^2(t, n) = rac{1}{C} \sum\limits_{c} {}_{} (\src(t, n, c) - \mu(t, n))^2`.
+-  :math:`\sigma^2(t, n) = \frac{1}{C} \sum\limits_{c} {}_{} (\src(t, n, c) - \mu(t, n))^2`.
 
 Operation Attributes
 ********************

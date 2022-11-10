@@ -12,7 +12,11 @@ MishBackward operation computes gradient for Mish.
 
 .. math::
     
-    dst & = diff_{dst} * \frac{e^{src} * \omega}{\delta^{2}}, where \\
+    \dst & = \diffdst * \frac{e^{\src} * \omega}{\delta^{2}}
+
+where
+
+.. math::
     \omega & = e^{3\src} + 4 * e^{2\src} + e^{\src} * (4 * \src + 6) + 4 * (\src + 1) \\
     \delta & = e^{2\src} + 2 * e^{\src} + 2 
 

@@ -9,12 +9,11 @@ SoftPlus
 ########
 
 SoftPlus operation applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
     
-    dst = 1 / beta \* \ln(e^{beta*src} + 1.0)
+    \dst = 1 / \operatorname{beta} \* \ln(e^{\operatorname{beta}*\src} + 1.0)
 
 
 Operation Attributes

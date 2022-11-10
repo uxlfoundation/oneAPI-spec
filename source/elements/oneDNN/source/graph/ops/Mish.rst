@@ -13,7 +13,7 @@ based on the following mathematical formula:
 
 .. math::
     
-    dst = src * \tanh(SoftPlus(src)) = src * \tanh(\ln(1 + e^{src})) 
+    \dst = \src * \tanh(\operatorname{SoftPlus}(src)) = \src * \tanh(\ln(1 + e^{\src}))
 
 Operation Attributes
 ********************

@@ -8,16 +8,11 @@
 StaticTranspose
 ###############
 
-StaticTranspose operation rearranges the dimensions of
-\src. \dst may have a different memory layout
-from \src. StaticTranspose operation is not guaranteed to
-return a view or a copy of \src when \dst is
-in-placed with the \src.
-
-.. math::
-
-   \dst[\src(order[0]), \src(order[1]),\cdots, \src(order[N-1])] = \src[\src(0), \src(1),\cdots, \src(N-1)]
-
+StaticTranspose operation rearranges the dimensions of \src with
+respect to the permutation described by ``order``. \dst may have a
+different memory layout from \src. StaticTranspose operation is not
+guaranteed to return a view or a copy of \src when \dst is in-placed
+with the \src.
 
 
 Operation Attributes

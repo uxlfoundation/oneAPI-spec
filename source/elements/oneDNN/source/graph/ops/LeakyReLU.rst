@@ -17,13 +17,12 @@ Unlike @ref dev_guide_op_prelu, the coefficient :math:`\alpha` is
 constant and defined before training.
 
 LeakyReLU operation applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
  
-   dst = \begin{cases} src & \text{if}\ src \ge 0 \\
-       \alpha src & \text{if}\ src < 0 \end{cases}
+   \dst = \begin{cases} \src & \text{if}\ \src \ge 0 \\
+       \alpha \src & \text{if}\ \src < 0 \end{cases}
 
 
 

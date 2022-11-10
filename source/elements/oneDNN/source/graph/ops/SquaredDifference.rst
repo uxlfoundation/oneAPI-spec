@@ -20,7 +20,7 @@ SquaredDifference does the following with the input tensors:
 
 .. math::
     
-    dst_i = (\src\_1_i - \src\_2_i)^2 
+    \dst_i = (\src\_1_i - \src\_2_i)^2
 
 Operation Attributes
 ********************

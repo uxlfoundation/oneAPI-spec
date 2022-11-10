@@ -12,11 +12,9 @@ PReLU operation performs element-wise parametric ReLU operation on a
 given input tensor, based on the following mathematical formula:
 
 .. math::
- dst =
 
-
-   \begin{cases} src & \text{if}\ src \ge 0 \\
-       \alpha src & \text{if}\ src < 0 \end{cases}
+   \dst = \begin{cases} \src & \text{if}\ \src \ge 0 \\
+       \alpha \src & \text{if}\ \src < 0 \end{cases}
 
 
 

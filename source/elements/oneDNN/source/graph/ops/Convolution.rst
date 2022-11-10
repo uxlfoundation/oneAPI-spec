@@ -87,9 +87,9 @@ primitive :ref:`convolution-label`.
 
 Here:
 
--  :math:`OH = \left\lfloor{rac{IH - KH + PH_L + PH_R}{SH}} \right\rfloor + 1,`
+-  :math:`OH = \left\lfloor{\frac{IH - KH + PH_L + PH_R}{SH}} \right\rfloor + 1,`
 
--  :math:`OW = \left\lfloor{rac{IW - KW + PW_L + PW_R}{SW}} \right\rfloor + 1.`
+-  :math:`OW = \left\lfloor{\frac{IW - KW + PW_L + PW_R}{SW}} \right\rfloor + 1.`
 
 Convolution with Groups
 =======================
@@ -106,9 +106,9 @@ The attribute |attr_groups| is set to :math:`>1`.
 
 where
 
--  :math:`IC_G = rac{IC}{G}`,
+-  :math:`IC_G = \frac{IC}{G}`,
 
--  :math:`OC_G = rac{OC}{G}`, and
+-  :math:`OC_G = \frac{OC}{G}`, and
 
 -  :math:`oc_g \in [0, OC_G).`
 
@@ -127,10 +127,10 @@ The attribute |attr_dilations| contains the element which is :math:`>1`.
 
 Here:
 
--  :math:`OH = \left\lfloor{rac{IH - DKH + PH_L + PH_R}{SH}}  \right\rfloor + 1,`
+-  :math:`OH = \left\lfloor{\frac{IH - DKH + PH_L + PH_R}{SH}}  \right\rfloor + 1,`
    where :math:`DKH = 1 + (KH - 1) \cdot DH`, and
 
--  :math:`OW = \left\lfloor{rac{IW - DKW + PW_L + PW_R}{SW}}  \right\rfloor + 1,`
+-  :math:`OW = \left\lfloor{\frac{IW - DKW + PW_L + PW_R}{SW}}  \right\rfloor + 1,`
    where :math:`DKW = 1 + (KW - 1) \cdot DW`.
 
 Operation Attributes

@@ -13,7 +13,7 @@ Variable names follow the standard :ref:`conventions-label`.
 
 .. math::
  
-   \dst(n, c, oh, ow) = \max\limits\_{kh, kw} 
+   \dst(n, c, oh, ow) = \max\limits_{kh, kw}
       \left( \src(n, c, oh \cdot SH + kh \cdot (DH + 1) - PH_L,
       ow \cdot SW + kw \cdot (DW + 1) - PW_L) \right)
 

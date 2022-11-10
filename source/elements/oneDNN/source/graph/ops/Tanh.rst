@@ -9,12 +9,11 @@ Tanh
 ####
 
 Tanh operation applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
     
-    \dst = tanh(\src) 
+    \dst = \tanh(\src)
 
 Operation Attributes
 ********************
