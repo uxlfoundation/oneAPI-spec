@@ -305,7 +305,7 @@ Stream
 ------
 
 *Stream* (|stream|) encapsulate execution context tied to a particular
- engine.
+engine.
 
 -----------------------
 Low Precision Support
