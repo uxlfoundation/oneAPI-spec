@@ -172,14 +172,15 @@ aliases. Some examples for CNNs and RNNs:
 Optimized Format 'any'
 **********************
 
-Another kind of format that oneDNN supports is an opaque *optimized* memory
-format that cannot be created directly from |strides| and |dimensions| arrays. A
-memory descriptor for an optimized memory format can only be created by passing
-|any| when creating certain operation descriptors, using them to create
-corresponding primitive descriptors and then querying them for memory
-descriptors. Data in plain memory format should then be reordered into the data
-in optimized data format before computations. Since reorders are expensive, the
-optimized memory format needs to be propagated through computations graph.
+Another kind of format that oneDNN supports is an opaque *optimized*
+memory format that cannot be created directly from |strides| and
+|dimensions| arrays. A memory descriptor for an optimized memory
+format can only be created by passing |any| when creating certain
+primitive descriptor. That primitive descriptor can then querying them
+for memory descriptors. Data in plain memory format should then be
+reordered into the data in optimized data format before
+computations. Since reorders are expensive, the optimized memory
+format needs to be propagated through computations graph.
 
 Optimized formats can employ padding, blocking and other data transformations to
 keep data in layout optimal for a certain architecture. This means that it in
@@ -217,7 +218,7 @@ there primitives for backward computations you should use |_any| memory format
 tag as well.
 
 Below is the short summary when to use and not to use memory format |any| during
-operation description initialization:
+primitive descriptor construction:
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+

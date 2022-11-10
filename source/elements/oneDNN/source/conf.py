@@ -57,7 +57,8 @@ imgmath_latex_preamble = '''\\newcommand{\\src}{\\operatorname{src}}
 \\newcommand{\\diffdstiterc}{\\operatorname{diff\\_dst\\_iter\\_c}}
 \\newcommand{\\diffgamma}{\\operatorname{diff\\_\\gamma}}
 \\newcommand{\\diffbeta}{\\operatorname{diff\\_\\beta}}
-\\newcommand{\\workspace}{\\operatorname{workspace}}'''
+\\newcommand{\\workspace}{\\operatorname{workspace}}
+\\newcommand{\\srcshape}{\\operatorname{src\\_shape}}'''
 
 mathjax3_config = {
 'tex': {
@@ -92,7 +93,8 @@ mathjax3_config = {
         'diffdstiterc': '\\operatorname{diff\\_dst\\_iter\\_c}',
         'diffgamma': '\\operatorname{diff\\_\\gamma}',
         'diffbeta': '\\operatorname{diff\\_\\beta}',
-        'workspace': '\\operatorname{workspace}'
+        'workspace': '\\operatorname{workspace}',
+        'srcshape': '\\operatorname{src\\_shape}'
         }
     }
 }

@@ -35,6 +35,7 @@ for deep learning applications and frameworks. oneDNN supports:
    execution_model/index.rst
    data_model/index.rst
    primitives/index.rst
+   graph/index.rst
 
 **************************
 Open Source Implementation
