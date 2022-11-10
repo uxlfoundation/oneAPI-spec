@@ -296,9 +296,9 @@ Engine
 ------
 
 *Engine* (|engine|) are an abstraction of a computational device. The
- graph extension additionally allows to create an engine with specific
- host/device allocators to conveniently manage memory inside the Graph
- API calls.
+graph extension additionally allows to create an engine with specific
+host/device allocators to conveniently manage memory inside the Graph
+API calls.
 
 ------
 Stream
