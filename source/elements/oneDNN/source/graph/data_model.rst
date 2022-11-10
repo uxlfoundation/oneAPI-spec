@@ -41,7 +41,7 @@ it's suggested to refer to the definition page of each operation.
         8-bit unsigned integer.
 
 
-oneDNN Graph supports both public layout and opaque layout. When the
+oneDNN Graph supports both public layout and |opaque| layout. When the
 |layout_type| of logical tensor is |strided|, it means that the tensor
 layout is public which the user can identify each tensor element in the physical
 memory.

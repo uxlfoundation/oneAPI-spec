@@ -4,6 +4,7 @@
 
 .. include:: ../../replacements.inc.rst
 
+.. _op_typecast-label:
 
 TypeCast
 ########
@@ -56,5 +57,5 @@ bf16, f16 f32
 f32       bf16, f16
 ========= =========
 
-@note This operation is to support `mixed
-precision <@ref%20dev_guide_graph_mixed_precision_model>`__ computation.
+@note This operation is to support :ref:`mixed
+precision<graph_quantization_model-label>` computation.

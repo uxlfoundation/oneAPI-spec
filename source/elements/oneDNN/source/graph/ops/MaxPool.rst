@@ -9,7 +9,7 @@ MaxPool
 #######
 
 MaxPool operation performs the computation following the below formulas.
-Variable names follow the standard @ref dev_guide_conventions.
+Variable names follow the standard :ref:`conventions-label`.
 
 .. math::
  

@@ -4,6 +4,7 @@
 
 .. include:: ../../replacements.inc.rst
 
+.. _op_quantize-label:
 
 Quantize
 ########
@@ -103,5 +104,5 @@ Src Dst
 f32 s8, u8
 === ======
 
-@note This operation is to support `int8
-quantization <@ref%20dev_guide_graph_int8_quantization_model>`__ model.
+@note This operation is to support :ref:`int8
+quantization<graph_quantization_model-label>` model.

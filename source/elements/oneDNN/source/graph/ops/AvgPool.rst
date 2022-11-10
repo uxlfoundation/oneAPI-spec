@@ -9,7 +9,7 @@ AvgPool
 #######
 
 AvgPool operation performs the computation following the below formulas.
-Variable names follow the standard @ref dev_guide_conventions.
+Variable names follow the standard :ref:`conventions-label`.
 
 .. math::
 
@@ -121,6 +121,9 @@ Operation Attributes
 
 Execution Arguments
 *******************
+
+The inputs and outputs must be provided according to the below index order
+when constructing an operation.
 
 Inputs
 ======

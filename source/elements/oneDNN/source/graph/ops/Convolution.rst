@@ -11,7 +11,7 @@ Convolution
 
 Convolution operation performs the convolution between src tensor and
 weight tensor, which is defined as by the following formulas. Variable
-names follow the standard @ref dev_guide_conventions.
+names follow the standard :ref:`conventions-label`.
 
 Let \src, \weights and
 \dst tensors have shape
@@ -77,7 +77,7 @@ Regular Convolution
 ===================
 
 This is the same as the formula in `Convolution
-primitive <@ref%20dev_guide_convolution>`__.
+primitive :ref:`convolution-label`.
 
 .. math::
 

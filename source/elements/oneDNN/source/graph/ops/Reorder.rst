@@ -18,10 +18,10 @@ conversion between:
 
 Reorder operation does not support layout conversion cross different
 backends or different engines. Unlike `reorder
-primitive <@ref%20dev_guide_reorder>`__, Reorder operation cannot be
+primitive :ref:`reorder-label`, Reorder operation cannot be
 used to cast the data type from \src to \dst.
-Please check the usage of `TypeCast <@ref%20dev_guide_op_typecast>`__
-and `Dequantize <@ref%20dev_guide_op_dequantize>`__ operation.
+Please check the usage of `TypeCast :ref:`op_typecast-label`
+and `Dequantize :ref:`op_dequantize-label` operation.
 
 Operation Attributes
 ********************

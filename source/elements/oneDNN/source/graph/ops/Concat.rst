@@ -10,7 +10,7 @@ Concat
 
 Concat operation concatenates :math:`N` tensors over ``axis``
 (here designated :math:`C`) and is defined as (the variable names
-follow the standard @ref dev_guide_conventions):
+follow the standard :ref:`conventions-label`):
 
 .. math::
 

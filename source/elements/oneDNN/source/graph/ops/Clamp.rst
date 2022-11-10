@@ -10,10 +10,10 @@ Clamp
 
 Clamp operation represents clipping activation function, it applies
 following formula on every element of \src tensor (the
-variable names follow the standard @ref dev_guide_conventions):
+variable names follow the standard :ref:`conventions-label`):
 
 .. math::
- clamp(src_i) = min(max(src_i, min_value), max_value)
+ clamp(src_i) = min(max(src_i, min\_value), max\_value)
 
 
 Operation Attributes

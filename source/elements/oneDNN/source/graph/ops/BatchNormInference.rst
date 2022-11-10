@@ -9,7 +9,7 @@ BatchNormInference
 ##################
 
 The formula is the same as `Batch Normalization
-primitive <@ref%20dev_guide_batch_normalization>`__ like below.
+primitive :ref:`batch_normalization-label` like below.
 
 .. math::
 
@@ -55,6 +55,9 @@ Operation Attributes
 
 Execution Arguments
 *******************
+
+The inputs and outputs must be provided according to the below index order
+when constructing an operation.
 
 Inputs
 ======

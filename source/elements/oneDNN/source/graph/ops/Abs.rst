@@ -10,8 +10,7 @@ Abs
 
 Abs operation performs element-wise the absolute value with given
 tensor, it applies following formula on every element of
-\src tensor (the variable names follow the standard @ref
-dev_guide_conventions):
+\src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
 

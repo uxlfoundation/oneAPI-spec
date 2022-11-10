@@ -10,7 +10,7 @@ Exp
 
 Exp operation is an exponential element-wise activation function, it
 applies following formula on every element of \src tensor
-(the variable names follow the standard @ref dev_guide_conventions):
+(the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
 

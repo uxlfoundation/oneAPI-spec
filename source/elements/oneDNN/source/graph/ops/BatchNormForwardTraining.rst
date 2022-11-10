@@ -14,9 +14,9 @@ training mode.
 Mean and variance are computed at runtime, the following formulas are
 used:
 
--  :math:`\mu(c) = rac{1}{NHW} \sum\limits_{nhw} \src(n, c, h, w)_{}`,
+-  :math:`\mu(c) = \frac{1}{NHW} \sum\limits_{nhw} \src(n, c, h, w)_{}`,
 
--  :math:`\sigma^2(c) = rac{1}{NHW} \sum\limits_{nhw} {}_{} (\src(n, c, h, w) - \mu(c))^2`.
+-  :math:`\sigma^2(c) = \frac{1}{NHW} \sum\limits_{nhw} {}_{} (\src(n, c, h, w) - \mu(c))^2`.
 
 Operation Attributes
 ********************
@@ -52,6 +52,9 @@ Operation Attributes
 
 Execution Arguments
 *******************
+
+The inputs and outputs must be provided according to the below index order
+when constructing an operation.
 
 Inputs
 ======

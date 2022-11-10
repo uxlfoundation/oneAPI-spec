@@ -307,6 +307,8 @@ Stream
 *Stream* (|stream|) encapsulate execution context tied to a particular
 engine.
 
+.. _graph_quantization_model-label:
+
 -----------------------
 Low Precision Support
 -----------------------

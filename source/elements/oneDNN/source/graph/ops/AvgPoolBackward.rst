@@ -105,6 +105,9 @@ Operation Attributes
 Execution Arguments
 *******************
 
+The inputs and outputs must be provided according to the below index order
+when constructing an operation.
+
 Inputs
 ======
 

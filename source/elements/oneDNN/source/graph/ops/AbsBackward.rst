@@ -12,9 +12,9 @@ AbsBackward operation computes gradient for Abs operation.
 
 .. math::
 
-   dst =
-   \begin{cases} diff\_dst & \text{if}\ src > 0 \\
-       -diff\_dst & \text{if}\ src < 0 \\
+   \dst =
+   \begin{cases} \diffdst & \text{if}\ src > 0 \\
+       -\diffdst & \text{if}\ src < 0 \\
        0 & \text{if}\ src = 0 \\
        \end{cases}
 
@@ -28,6 +28,9 @@ AbsBackward operation does not support any attribute.
 Execution Arguments
 *******************
 
+The inputs and outputs must be provided according to the below index order
+when constructing an operation.
+
 Inputs
 ======
 
@@ -35,8 +38,8 @@ Inputs
 ===== ============= ====================
 Index Argument Name Required or Optional
 ===== ============= ====================
-0     ``src``       Required
-1     ``diff_dst``  Required
+0     \src          Required
+1     \diff_dst     Required
 ===== ============= ====================
 
 Outputs
@@ -46,7 +49,7 @@ Outputs
 ===== ============= ====================
 Index Argument Name Required or Optional
 ===== ============= ====================
-0     ``diff_src``  Required
+0     \diff_src     Required
 ===== ============= ====================
 
 
