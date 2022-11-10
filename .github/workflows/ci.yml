@@ -9,30 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-    - name: Install prerequisites
+    - name: Install ubuntu prerequisites
       run: |
-          sudo apt-get update -qq
-          xargs -a ubuntu-packages.txt sudo apt install -qq
-          python -m pip install --quiet --upgrade pip
-          pip install --quiet -r requirements.txt
+        sudo apt update -qq
+        xargs -a ubuntu-packages.txt sudo apt install -qq
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    - name: Install python prerequisites
+      run: pip install --quiet -r requirements.txt
     - name: Checks
       run: |
-          pre-commit run --all
-          mkdir -p build/reuse
-          # ignore fail for reuse
-          reuse lint > build/reuse/lint.txt || true
-    - name: Build
+        pre-commit run --all
+        mkdir -p build/reuse
+        # ignore fail for reuse
+        reuse lint > build/reuse/lint.txt || true
+    - name: Build html
       env:
         ONEAPI_DRAFT: true
       run: |
         python scripts/oneapi.py -W html
+    - name: Build pdf
+      env:
+        ONEAPI_DRAFT: true
+      run: |
         python scripts/oneapi.py -W latexpdf
-    - name: Archive build directory
-      uses: actions/upload-artifact@v3
-      with:
-          name: build
-          path: build
+    #- name: Archive build directory
+    #  uses: actions/upload-artifact@v3
+    #  with:
+    #    name: build
+    #    path: build
     - name: Checkout gh-pages
       if: ${{ github.ref == 'refs/heads/main' }}
       uses: actions/checkout@v3
@@ -42,15 +49,15 @@ jobs:
     - name: Publish to github pages
       if: ${{ github.ref == 'refs/heads/main' }}
       run: |
-          cd gh-pages
-          touch .nojekyll
-          rm -rf spec
-          mkdir spec
-          cd spec
-          cp -r ../../build/html/* .
-          cp ../../build/latex/*.pdf .
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit --reset-author --amend -m "Update from github actions"
-          git push --force origin gh-pages
+        cd gh-pages
+        touch .nojekyll
+        rm -rf spec
+        mkdir spec
+        cd spec
+        cp -r ../../build/html/* .
+        cp ../../build/latex/*.pdf .
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit --reset-author --amend -m "Update from github actions"
+        git push --force origin gh-pages
