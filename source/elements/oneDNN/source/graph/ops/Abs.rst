@@ -17,7 +17,7 @@ dev_guide_conventions):
 
    dst = \begin{cases}
       src  & \text{if}\ src \ge 0 \\
-      -src & \text{if}\ src \lt 0
+      -src & \text{if}\ src < 0
       \end{cases}
 
 

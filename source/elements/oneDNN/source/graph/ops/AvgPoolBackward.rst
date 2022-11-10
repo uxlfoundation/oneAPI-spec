@@ -8,9 +8,8 @@
 AvgPoolBackward
 ###############
 
-AvgPoolBackward operation accepts :math:`\diffdst` tensor and
-:math:`\srcshape` tensor (optional), and calculates
-:math:`\diffsrc` tensor.
+AvgPoolBackward operation accepts \diffdst tensor and \srcshape tensor
+(optional), and calculates \diffsrc tensor.
 
 Operation Attributes
 ********************
@@ -117,9 +116,9 @@ Index Argument Name Required or Optional
 1     ``src_shape`` Optional
 ===== ============= ====================
 
-@note Either ``src_shape`` input or ``src_shape`` attribute should be
+@note Either ``src_shape`` input or |attr_src_shape| attribute should be
 provided. If both provided, ``src_shape`` input will precede over
-``src_shape`` attribute.
+|attr_src_shape| attribute.
 
 Outputs
 =======

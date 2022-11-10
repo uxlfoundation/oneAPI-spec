@@ -14,7 +14,11 @@ applies following formula on every element of \src tensor
 
 .. math::
 
-   dst = e^{src}  ## Operation Attributes
+   dst = e^{src}
+
+
+Operation Attributes
+********************
 
 Exp operation does not support any attribute.
 
