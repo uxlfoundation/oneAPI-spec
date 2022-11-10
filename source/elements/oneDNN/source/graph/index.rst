@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _llga-section:
+.. _graph-section:
 
 ===============
 Graph extension
@@ -18,6 +18,7 @@ executed as fused operations.
 .. toctree::
    :maxdepth: 1
 
+   general.rst
    programming_model.rst
    data_model.rst
    ops/index.rst

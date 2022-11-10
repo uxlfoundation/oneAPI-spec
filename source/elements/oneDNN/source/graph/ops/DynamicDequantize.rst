@@ -11,7 +11,7 @@ DynamicDequantize
 DynamicDequantize operation converts a quantized (s8 or u8) tensor to a
 f32 tensor. It supports both per-tensor and per-channel asymmetric
 linear de-quantization. Rounding mode is library-implementation defined.
-Unlike the @ref dev_guide_op_dequantize, DynamicDequantize takes scales
+Unlike the :ref:`op_dequantize-label`, DynamicDequantize takes scales
 and zero-points as operator src tensors.
 
 For per-tensor de-quantization

@@ -4,6 +4,7 @@
 
 .. include:: ../../replacements.inc.rst
 
+.. _op_prelu-label:
 
 PReLU
 #####

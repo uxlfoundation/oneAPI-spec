@@ -13,7 +13,7 @@ LayerNorm performs a layer normalization operation on
 
 The layerNorm operation performs normalization from ``begin_norm_axis``
 to last dimension of the data tensor. It is defined by the following
-formulas which is the same as @ref dev_guide_layer_normalization.
+formulas which is the same as :ref:`layer_normalization-label`.
 
 .. math::
 

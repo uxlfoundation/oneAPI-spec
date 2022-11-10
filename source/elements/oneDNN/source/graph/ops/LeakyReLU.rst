@@ -13,7 +13,7 @@ has a small slope for negative values with which LeakyReLU can produce
 small, non-zero, and constant gradients with respect to the negative
 values. The slope is also called the coefficient of leakage.
 
-Unlike @ref dev_guide_op_prelu, the coefficient :math:`\alpha` is
+Unlike :ref:`op_prelu-label`, the coefficient :math:`\alpha` is
 constant and defined before training.
 
 LeakyReLU operation applies following formula on every element of
