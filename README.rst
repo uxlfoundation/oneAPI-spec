@@ -6,7 +6,7 @@
 oneAPI Specifications
 =====================
 
-.. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
+.. image:: https://github.com/oneapi-src/oneAPI-spec/actions/workflows/ci.yml/badge.svg
    :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
 
 .. image:: https://api.reuse.software/badge/github.com/oneapi-src/oneapi-spec
