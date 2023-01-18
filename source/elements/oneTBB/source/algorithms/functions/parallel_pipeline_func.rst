@@ -69,7 +69,7 @@ by [ *first* , *last* ).
         float sum=0;
         parallel_pipeline( /*max_number_of_live_token=*/16,
             make_filter<void,float*>(
-                filter::serial_in_order,
+                filter_mode::serial_in_order,
                 [&](flow_control& fc)-> float*{
                     if( first<last ) {
                         return first++;
