@@ -9,7 +9,7 @@ task_group
 
 A ``task_group`` represents the concurrent execution of a group of tasks.
 You can dynamically add tasks to the group while it is executing. 
-The thread executing ``task_group::wait()`` can participate in other tasks that
+The thread executing ``task_group::wait()`` might participate in other tasks that
 are not related to the particular ``task_group``.
 
 
