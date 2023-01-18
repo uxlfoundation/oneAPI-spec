@@ -1,5 +1,5 @@
 doxygen
-enchant
+enchant-2
 git
 graphviz
 inkscape
