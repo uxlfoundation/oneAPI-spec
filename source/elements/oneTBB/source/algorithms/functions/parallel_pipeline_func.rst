@@ -69,7 +69,7 @@ by [ *first* , *last* ).
         float sum=0;
         parallel_pipeline( /*max_number_of_live_token=*/16,
             make_filter<void,float*>(
-                filter::serial,
+                filter::serial_in_order,
                 [&](flow_control& fc)-> float*{
                     if( first<last ) {
                         return first++;
@@ -80,11 +80,11 @@ by [ *first* , *last* ).
                 }
             ) &
             make_filter<float*,float>(
-                filter::parallel,
+                filter_mode::parallel,
                 [](float* p){return (*p)*(*p);} 
             ) &
             make_filter<float,void>(
-                filter::serial,
+                filter::serial_in_order,
                 [&](float x) {sum+=x;}
             )
         );
