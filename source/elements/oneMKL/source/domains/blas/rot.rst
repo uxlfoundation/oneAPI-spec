@@ -46,8 +46,8 @@ If ``s`` is a complex type, the operation is defined as:
    :header-rows: 1
 
    * -  T
-     -  T_scalarC
-     -  T_scalarS
+     -  Tc
+     -  Ts
    * -  ``sycl::half``
      -  ``sycl::half``
      -  ``sycl::half``
@@ -89,8 +89,8 @@ rot (Buffer Version)
                 std::int64_t incx,
                 sycl::buffer<T,1> &y,
                 std::int64_t incy,
-                T_scalarC c,
-                T_scalarS s)
+                Tc c,
+                Ts s)
    }
 .. code-block:: cpp
 
@@ -101,8 +101,8 @@ rot (Buffer Version)
                 std::int64_t incx,
                 sycl::buffer<T,1> &y,
                 std::int64_t incy,
-                T_scalarC c,
-                T_scalarS s)
+                Tc c,
+                Ts s)
    }
 
 .. container:: section
@@ -184,8 +184,8 @@ rot (USM Version)
                        std::int64_t incx,
                        T *y,
                        std::int64_t incy,
-                       T_scalarC c,
-                       T_scalarS s,
+                       Tc c,
+                       Ts s,
                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -197,8 +197,8 @@ rot (USM Version)
                        std::int64_t incx,
                        T *y,
                        std::int64_t incy,
-                       T_scalarC c,
-                       T_scalarS s,
+                       Tc c,
+                       Ts s,
                        const std::vector<sycl::event> &dependencies = {})
    }
 

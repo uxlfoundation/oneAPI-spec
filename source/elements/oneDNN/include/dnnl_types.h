@@ -70,9 +70,6 @@
 /// A special mnemonic for primitives that have a single weights
 /// argument. Alias for #DNNL_ARG_WEIGHTS_0.
 #define DNNL_ARG_WEIGHTS DNNL_ARG_WEIGHTS_0
-/// A special mnemonic for scale and shift argument of normalization
-/// primitives. Alias for #DNNL_ARG_WEIGHTS_0.
-#define DNNL_ARG_SCALE_SHIFT DNNL_ARG_WEIGHTS_0
 /// A special mnemonic for RNN weights applied to the layer input. An
 /// alias for #DNNL_ARG_WEIGHTS_0.
 #define DNNL_ARG_WEIGHTS_LAYER DNNL_ARG_WEIGHTS_0
@@ -90,6 +87,10 @@
 #define DNNL_ARG_MEAN 49
 /// Variance values tensor argument.
 #define DNNL_ARG_VARIANCE 50
+/// Scale values argument of normalization primitives.
+#define DNNL_ARG_SCALE 51
+/// Shift values argument of normalization primitives.
+#define DNNL_ARG_SHIFT 52
 
 /// Workspace tensor argument. Workspace is used to pass information
 /// from forward propagation to backward propagation computations.
@@ -160,8 +161,22 @@
 /// Gradient (diff) of the bias tensor argument.
 #define DNNL_ARG_DIFF_BIAS 169
 
-/// Output scaling factors provided at execution time.
-#define DNNL_ARG_ATTR_OUTPUT_SCALES 513
+/// Scale gradient argument of normalization primitives.
+#define DNNL_ARG_DIFF_SCALE 255
+/// Shift gradient argument of normalization primitives.
+#define DNNL_ARG_DIFF_SHIFT 256
+
+
+/// Scaling factors provided at execution time.
+#define DNNL_ARG_ATTR_SCALES 4096
+/// Zero points provided at execution time.
+#define DNNL_ARG_ATTR_ZERO_POINTS 8192
+
+/// Starting point for post operation arguments.
+#define DNNL_ARG_ATTR_MULTIPLE_POST_OP_BASE 32768
+/// Arguments for a binary post operation.
+#define DNNL_ARG_ATTR_MULTIPLE_POST_OP(idx) \
+    (DNNL_ARG_ATTR_MULTIPLE_POST_OP_BASE * ((idx) + 1))
 
 /// Starting index for source arguments for primitives that take a variable
 /// number of source arguments.
@@ -169,9 +184,6 @@
 /// Starting index for destination arguments for primitives that produce a
 /// variable number of destination arguments.
 #define DNNL_ARG_MULTIPLE_DST 2048
-
-/// Zero points provided at execution time.
-#define DNNL_ARG_ATTR_ZERO_POINTS 4096
 
 /// A wildcard value for dimensions that are unknown at a primitive creation
 /// time.

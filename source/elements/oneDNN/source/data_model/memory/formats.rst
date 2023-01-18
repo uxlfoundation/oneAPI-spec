@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 .. |N| replace:: :math:`N`
 .. |C| replace:: :math:`C`
@@ -172,14 +172,15 @@ aliases. Some examples for CNNs and RNNs:
 Optimized Format 'any'
 **********************
 
-Another kind of format that oneDNN supports is an opaque *optimized* memory
-format that cannot be created directly from |strides| and |dimensions| arrays. A
-memory descriptor for an optimized memory format can only be created by passing
-|any| when creating certain operation descriptors, using them to create
-corresponding primitive descriptors and then querying them for memory
-descriptors. Data in plain memory format should then be reordered into the data
-in optimized data format before computations. Since reorders are expensive, the
-optimized memory format needs to be propagated through computations graph.
+Another kind of format that oneDNN supports is an opaque *optimized*
+memory format that cannot be created directly from |strides| and
+|dimensions| arrays. A memory descriptor for an optimized memory
+format can only be created by passing |any| when creating certain
+primitive descriptor. That primitive descriptor can then querying them
+for memory descriptors. Data in plain memory format should then be
+reordered into the data in optimized data format before
+computations. Since reorders are expensive, the optimized memory
+format needs to be propagated through computations graph.
 
 Optimized formats can employ padding, blocking and other data transformations to
 keep data in layout optimal for a certain architecture. This means that it in
@@ -197,12 +198,14 @@ Memory Format Propagation
 Memory format propagation is one of the central notions that needs to be
 well-understood to use oneDNN correctly.
 
-Convolution and inner product primitives choose the memory format when you
-create them with the placeholder memory format |any| for input or output. The
-memory format chosen is based on different circumstances such as hardware and
-convolution parameters. Using the placeholder |any| memory format is the
-recommended practice for convolutions, since they are the most compute-intensive
-operations in most topologies where they are present.
+Convolution, matmul, RNN and inner product primitives choose the
+memory format when you create them with the placeholder memory format
+|any| for input or output. The memory format chosen is based on
+different circumstances such as hardware and convolution
+parameters. Using the placeholder |any| memory format is the
+recommended practice for convolutions, since they are the most
+compute-intensive operations in most topologies where they are
+present.
 
 Other primitives, such as Elementwise, LRN, batch normalization and other, on
 forward propagation should use the same memory format as the preceding layer
@@ -215,12 +218,13 @@ there primitives for backward computations you should use |_any| memory format
 tag as well.
 
 Below is the short summary when to use and not to use memory format |any| during
-operation description initialization:
+primitive descriptor construction:
+
 
 +-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | Primitive Kinds                                                                                                                   | Forward Propagation                                                                          | Backward Propagation                                                       | No Propagation                                                                               |
 +===================================================================================================================================+==============================================================================================+============================================================================+==============================================================================================+
-| **Compute intensive**: (De-)convolution, Inner product, RNN                                                                       | Use |any|                                                                                    | Use |any|                                                                  | N/A                                                                                          |
+| **Compute intensive**: (De-)convolution, Matmul, Inner product, RNN                                                               | Use |any|                                                                                    | Use |any|                                                                  | N/A                                                                                          |
 +-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
 | **Memory-bandwidth limited**: Pooling, Layer and Batch Normalization, Local Response Normalization, Elementwise, Shuffle, Softmax | Use memory format from preceding layer for source tensors, and |any| for destination tensors | Use |any| for gradient tensors, and actual memory formats for data tensors | N/A                                                                                          |
 +-----------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+

@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 #######
 Shuffle
@@ -85,12 +85,6 @@ Primitive input/output Execution argument index
 *****************
 Operation Details
 *****************
-
-1. The memory format and data type for ``src`` and ``dst`` are assumed to be
-   the same, and in the API are typically referred as ``data`` (e.g., see
-   ``data_desc`` in |shuffle_forward::desc::desc|). The same holds
-   for ``diff_src`` and ``diff_dst``. The corresponding memory descriptors are
-   referred to as ``diff_data_desc``.
 
 ******************
 Data Types Support

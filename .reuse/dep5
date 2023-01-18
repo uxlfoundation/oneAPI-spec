@@ -23,6 +23,10 @@ Files: source/elements/oneDNN/source/_static/*.jpg source/elements/oneDNN/source
 Copyright: 2020 Intel Corporation
 License: CC-BY-4.0
 
+Files: source/elements/oneDNN/source/graph/resources/*.jpg source/elements/oneDNN/source/graph/resources/*.png
+Copyright: 2020 Intel Corporation
+License: CC-BY-4.0
+
 Files: source/elements/oneDNN/source/*.cpp
 Copyright: 2020 Intel Corporation
 License: MIT

@@ -8,10 +8,10 @@ int main() {
     function_node< int, int > add( g, unlimited, [](const int &v) {
         return v+1;
     } );
-    function_node< int, int, lightweight > multiply( g, unlimited, [](const int &v) {
+    function_node< int, int, lightweight > multiply( g, unlimited, [](const int &v) noexcept {
         return v*2;
     } );
-    function_node< int, int, lightweight > cube( g, unlimited, [](const int &v) {
+    function_node< int, int, lightweight > cube( g, unlimited, [](const int &v) noexcept {
         return v*v*v;
     } );
 

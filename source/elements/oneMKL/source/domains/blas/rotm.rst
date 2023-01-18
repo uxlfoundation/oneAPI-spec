@@ -179,7 +179,7 @@ rotm (USM Version)
                         std::int64_t incx,
                         T *y,
                         std::int64_t incy,
-                        T *param,
+                        const T *param,
                         const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -191,7 +191,7 @@ rotm (USM Version)
                         std::int64_t incx,
                         T *y,
                         std::int64_t incy,
-                        T *param,
+                        const T *param,
                         const std::vector<sycl::event> &dependencies = {})
    }
    

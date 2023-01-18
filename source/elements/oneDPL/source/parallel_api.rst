@@ -5,17 +5,53 @@
 Parallel API
 ------------
 
-For all C++ algorithms accepting execution policies (as defined by `C++ Standard`_), oneDPL provides
-an implementation for oneAPI devices via :code:`oneapi::dpl::execution::device_policy`. These algorithms
-must be capable of processing data in SYCL buffers (passed via :code:`oneapi::dpl::begin/end`)
-and in unified shared memory (USM).
+oneDPL provides the set of algorithms with execution policies as defined by the `C++ Standard`_.
+All those algorithms work with *C++ Standard aligned execution policies* and with *DPC++
+execution policies*.
 
-oneDPL extends Parallel STL with the following APIs.
+Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special iterators, and
+a set of non-standard parallel algortithms.
+
+C++ Standard aligned execution policies
++++++++++++++++++++++++++++++++++++++++
+
+oneDPL has the set of execution policies and related utilities that are semantically aligned
+with the C++ Standard:
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/execution>
+
+  namespace oneapi {
+    namespace dpl {
+      namespace execution {
+
+        class sequenced_policy { /*unspecified*/ };
+        class parallel_policy { /*unspecified*/ };
+        class parallel_unsequenced_policy { /*unspecified*/ };
+        class unsequenced_policy { /*unspecified*/ };
+
+        inline constexpr sequenced_policy seq { /*unspecified*/ };
+        inline constexpr parallel_policy par { /*unspecified*/ };
+        inline constexpr parallel_unsequenced_policy par_unseq { /*unspecified*/ };
+        inline constexpr unsequenced_policy unseq { /*unspecified*/ };
+
+        template <class T>
+        struct is_execution_policy;
+
+        template <class T>
+        inline constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
+      }
+    }
+  }
+
+See "Execution policies" in the `C++ Standard`_ for more information.
 
 DPC++ Execution Policy
 ++++++++++++++++++++++
 
-A DPC++ execution policy specifies where and how an algorithm runs.
+A DPC++ execution policy class :code:`oneapi::dpl::execution::device_policy` specifies
+where and how an algorithm runs.
 
 .. code:: cpp
 
@@ -69,10 +105,16 @@ device_policy class
   };
 
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
-to run algorithms on a DPC++ compliant device.
+to run algorithms on a DPC++ compliant device. When an algorithm runs with ``device_policy``
+it is capable of processing SYCL buffers (passed via :code:`oneapi::dpl::begin/end`),
+data in the host memory and data in Unified Shared Memory (USM), including USM device memory.
+Data placed in the host memory and USM can only be passed to oneDPL algorithms
+as pointers and random access iterators. The way to transfer data from the host memory
+to a device and back is unspecified; per-element data movement to/from a temporary storage
+is a possible valid implementation.
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
-is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to. 
+is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to.
 
 .. code:: cpp
 
@@ -317,6 +359,8 @@ iterator instances to determine their position relative to each other.
         permutation_iterator(const SourceIterator& input1, const IndexMap& input2,
                              std::size_t index = 0);
 
+        SourceIterator base() const;
+
         reference operator*() const;
         reference operator[](difference_type i) const;
 
@@ -379,6 +423,8 @@ using the source iterator and index map provided.
         using value_type = typename std::remove_reference<reference>::type;
         using pointer = typename std::iterator_traits<Iterator>::pointer;
 
+        Iterator base() const;
+
         transform_iterator(Iterator it, UnaryFunc unary_func);
         transform_iterator(const transform_iterator& input);
         transform_iterator& operator=(const transform_iterator& input);
@@ -436,6 +482,8 @@ using the source iterator and unary function object provided.
         using reference = /* unspecified tuple of reference types */;
         using pointer =
             std::tuple<typename std::iterator_traits<Iterators>::pointer...>;
+
+        std::tuple<Iterators...> base() const;
 
         zip_iterator();
         explicit zip_iterator(Iterators... args);
@@ -640,3 +688,4 @@ than an element in the range being searched.
 The elements e of [start, end) must be partitioned with respect to the comparator used.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
+.. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html

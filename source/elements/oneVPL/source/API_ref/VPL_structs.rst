@@ -51,6 +51,11 @@ Structure Reference
       :start-after: struct_decode_vpp_begin:
       :end-before: struct_decode_vpp_end:
 
+:ref:`struct_camera`
+   .. include:: VPL_structs_camera.rst
+      :start-after: struct_camera_begin:
+      :end-before: struct_camera_end:
+
 .. toctree::
    :maxdepth: 1
    :hidden:
@@ -64,6 +69,7 @@ Structure Reference
    VPL_structs_vpp
    VPL_structs_protected
    VPL_structs_decode_vpp
+   VPL_structs_camera
 
 
 

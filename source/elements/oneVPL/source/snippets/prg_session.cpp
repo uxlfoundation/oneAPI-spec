@@ -116,9 +116,9 @@ mfxSession def_session;
 
 loader = mfxLoader();
 
-// Create session from the first avialable implementation.
+// Create session from the first available implementation.
 // That's why we no any filters need to be set.
-// First avialable implementation has index equal to the 0.
+// First available implementation has index equal to the 0.
 MFXCreateSession(loader, 0, &def_session);
 
 // Get and print out OS path to the loaded shared library

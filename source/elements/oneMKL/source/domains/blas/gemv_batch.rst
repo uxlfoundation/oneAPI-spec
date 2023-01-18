@@ -251,38 +251,38 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              onemkl::transpose *trans,
-                              std::int64_t *m,
-                              std::int64_t *n,
-                              T *alpha,
+                              const onemkl::transpose *trans,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               const T **x,
-                              std::int64_t *incx,
-                              T *beta,
+                              const std::int64_t *incx,
+                              const T *beta,
                               T **y,
-                              std::int64_t *incy,
+                              const std::int64_t *incy,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              onemkl::transpose *trans,
-                              std::int64_t *m,
-                              std::int64_t *n,
-                              T *alpha,
+                              const onemkl::transpose *trans,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               const T **x,
-                              std::int64_t *incx,
-                              T *beta,
+                              const std::int64_t *incx,
+                              const T *beta,
                               T **y,
-                              std::int64_t *incy,
+                              const std::int64_t *incy,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 

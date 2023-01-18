@@ -80,7 +80,9 @@ included in oneVPL:
 
 - **User plugins architecture.** oneVPL enables robust video acceleration through
   API implementations of many different video processing frameworks. Support of
-  a SDK user plugin framework is obsolete.
+  a |msdk_full_name| user plugin framework is obsolete. |msdk_full_name| RAW acceleration (Camera API)
+  which is implemented as plugin is also obsolete, oneVPL enables RAW acceleration (Camera
+  API) through oneVPL runtime such as oneVPL GPU runtime.
 
 - **External buffer memory management.** A set of callback functions to replace
   internal memory allocation is obsolete.
@@ -97,6 +99,17 @@ included in oneVPL:
 
 - **Surface Type Neutral Transcoding.** Opaque memory support is removed and 
   replaced with internal memory allocation concept.   
+
+- **Raw Acceleration.** |msdk_full_name| RAW acceleration (Camera API) which is
+  implemented as plugin is obsolete, replaced by oneVPL and oneVPL runtime implementation.
+  OneVPL reused most of |msdk_full_name| Camera API, but oneVPL camera API is not backward
+  compatible with |msdk_full_name| camera API due to obsolete plugin mechanism in oneVPL 
+  and a few difference between oneVPL and |msdk_full_name|. The major difference between oneVPL 
+  and |msdk_full_name| are listed:
+  1) mfxCamGammaParam and mfxExtCamGammaCorrection are removed in oneVPL; 2) Added
+  reserved bytes in mfxExtCamHotPixelRemoval, mfxCamVignetteCorrectionParam and
+  mfxCamVignetteCorrectionElement for future extension; 3) Changed CCM from mfxF64
+  to mfxF32 in mfxExtCamColorCorrection3x3 and added more reserved bytes.
 
 .. _deprecated-api:
 
@@ -191,6 +204,6 @@ simplification of existing applications migration to oneVPL:
 
 - mfxvideo++.h
 
-.. important:: |msdk_full_name| obsolette API removed from those header files.
+.. important:: |msdk_full_name| obsolete API removed from those header files.
    Code compiled with the oneVPL API headers will generate a compile and/or
    link error when attempting to use a removed API.

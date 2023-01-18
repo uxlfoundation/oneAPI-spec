@@ -57,22 +57,18 @@ iamax (Buffer Version)
    namespace oneapi::mkl::blas::column_major {
        void iamax(sycl::queue &queue,
                   std::int64_t n,
-                  sycl::buffer<T,
-                  1> &x,
+                  sycl::buffer<T,1> &x,
                   std::int64_t incx,
-                  sycl::buffer<std::int64_t,
-                  1> &result)
+                  sycl::buffer<std::int64_t,1> &result)
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
        void iamax(sycl::queue &queue,
                   std::int64_t n,
-                  sycl::buffer<T,
-                  1> &x,
+                  sycl::buffer<T,1> &x,
                   std::int64_t incx,
-                  sycl::buffer<std::int64_t,
-                  1> &result)
+                  sycl::buffer<std::int64_t,1> &result)
    }
 
 .. container:: section
@@ -136,7 +132,7 @@ iamax (USM Version)
                          std::int64_t n,
                          const T *x,
                          std::int64_t incx,
-                         T_res *result,
+                         std::int64_t *result,
                          const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -146,7 +142,7 @@ iamax (USM Version)
                          std::int64_t n,
                          const T *x,
                          std::int64_t incx,
-                         T_res *result,
+                         std::int64_t *result,
                          const std::vector<sycl::event> &dependencies = {})
    }
 

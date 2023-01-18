@@ -248,34 +248,34 @@ in ``a`` and ``x`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              onemkl::mkl::side *left_right,
-                              std::int64_t *m,
-                              std::int64_t *n,
+                              const onemkl::mkl::side *left_right,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               const T **x,
-                              std::int64_t *incx,
+                              const std::int64_t *incx,
                               T **c,
-                              std::int64_t *ldc,
+                              const std::int64_t *ldc,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              onemkl::mkl::side *left_right,
-                              std::int64_t *m,
-                              std::int64_t *n,
+                              const onemkl::mkl::side *left_right,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               const T **x,
-                              std::int64_t *incx,
+                              const std::int64_t *incx,
                               T **c,
-                              std::int64_t *ldc,
+                              const std::int64_t *ldc,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 

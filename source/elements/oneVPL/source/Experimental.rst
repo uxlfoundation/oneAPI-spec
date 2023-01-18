@@ -7,8 +7,8 @@ oneVPL Experimental API
 =======================
 
 All API entries defined under the ONEVPL_EXPERIMENTAL macro are considered as
-expiremental. Backward compatibility is not guaranteed for these features.
-Future presense is not guaranteed as well.
+experimental. Backward compatibility is not guaranteed for these features.
+Future presence is not guaranteed as well.
 
 By default, experimental API is turned off in the header files. To enable
 it, need to define ONEVPL_EXPERIMENTAL macro during the application
@@ -17,6 +17,7 @@ compilation stage.
 The following is a list of experimental interfaces, starting from API version
 2.6.
 
+.. _experimental-api-table:
 
 .. list-table:: Experimental API
    :header-rows: 1
@@ -36,7 +37,11 @@ The following is a list of experimental interfaces, starting from API version
      -
    * - :cpp:type:`mfxExtRefListCtrl`
      - 2.6
-     - 2.7
+     - 2.8
+     - Moved to production
+   * - :cpp:enumerator:`MFX_EXTBUFF_UNIVERSAL_REFLIST_CTRL`
+     - 2.6
+     - 2.8
      - Moved to production
    * - Extended enum for :cpp:member:`mfxExtDecodeErrorReport::ErrorTypes`
      - 2.6
@@ -52,6 +57,26 @@ The following is a list of experimental interfaces, starting from API version
      -
    * - All definitions in mfxencodestats.h
      - 2.7
+     -
+     -
+   * - :cpp:enumerator:`MFX_FOURCC_ABGR16F` FourCC definition
+     - 2.8
+     -
+     -
+   * - :cpp:enumerator:`MFX_CONTENT_NOISY_VIDEO` ContentInfo definition
+     - 2.8
+     -
+     -
+   * - Camera Processing API for RAW acceleration
+     - 2.8
+     -
+     -
+   * - Hint to disable external video frames caching for GPU copy
+     - 2.8
+     -
+     -
+   * - :cpp:member:`mfxExtMBQP::Pitch`
+     - 2.8
      -
      -
 

@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 .. _post_ops-label:
 
@@ -14,7 +14,16 @@ Post-ops
 
 *Post-ops* are operations that are appended after a primitive.  They are
 implemented using the :ref:`attributes-link` mechanism. If there are multiple
-post-ops, the are executed in the order they have been appended.
+post-ops, they are executed in the order they have been appended as follow:
+
+.. math::
+
+   \dst = po[n](po[n-1] (...(po[0](OP()))))
+
+.. note::
+
+   Post-ops does not preserve intermediate data during
+   computation. This typically makes them suitable for inference only.
 
 The post-ops are represented by |post_ops| which is copied once it
 is attached to the attributes using |primitive_attr::set_post_ops|
@@ -46,8 +55,8 @@ creation function to take effect. Below is a simple sketch:
    :ref:`attributes_error_handling-link`.
 
 .. note::
-    Post-ops do not change memory format of the operation destination memory
-    object.
+   Post-ops do not change memory format of the operation destination memory
+   object.
 
 The post-op objects can be inspected using the |post_ops::kind|
 function that takes an index of the post-op to inspect (that must be less than
@@ -80,8 +89,12 @@ The intermediate result of the :math:`\operatorname{Op}(...)` is not
 preserved.
 
 The :math:`scale` factor is supported in :ref:`int8
-<attributes-quantization-label>` inference only. For all other cases the scale
-must be `1.0`.
+<int8-quantization-label>` inference only. For all other cases the
+scale must be `1.0` (default value).
+The scale parameter is set to :math:`1.0` by default, and can be set
+using the |primitive_attr::set_scales_mask| attribute for the argument
+|DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|.
+
 
 .. _post_ops_sum-label:
 
@@ -93,11 +106,14 @@ and is appended using |post_ops::append_sum| function. The
 |post_ops::kind| returns |primitive::kind::sum| for such
 a post-op.
 
-Prior to accumulating the result, the existing value us multiplied by scale.
-The scale parameter can be used in The :math:`scale` factor is supported in
-:ref:`int8 <attributes-quantization-label>` inference only and should be used
-only when the result and the existing data have different magnitudes.  For all
-other cases the scale must be `1.0`.
+Prior to accumulating the result, the existing value is multiplied by
+scale.  The :math:`scale` factor is supported in :ref:`int8
+<attributes-quantization-label>` inference only and should be used
+only when the result and the existing data have different magnitudes.
+For all other cases the scale must be `1.0` (default value).
+The scale parameter is set to :math:`1.0` by default, and can be set
+using the |primitive_attr::set_scales_mask| attribute for the argument
+|DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|.
 
 Additionally, the sum post-op can reinterpret the destination values as a
 different data type of the same size. This may be used to, for example,
@@ -113,6 +129,41 @@ with
 
 .. math::
     \dst[:] = scale \cdot as_data_type(\dst[:]) + \operatorname{Op}(...)
+
+.. _post_ops_binary-label:
+
+Binary post-ops
+============================
+
+The binary post-op replaces:
+.. math::
+
+   \dst[:] = \operatorname{Op}(...)
+
+with
+
+.. math::
+
+   \dst[:] = \operatorname{binary}(\operatorname{Op}(...), scale[:] \cdot Source\_1[:])
+
+The binary post-op supports the same algorithms and broadcast semantic
+as the :ref:`binary primitive<primitive_binary-link>`.
+
+Furthermore, the binary post-op scale parameter is set to :math:`1.0`
+by default, and can be set using the |primitive_attr::set_scales_mask|
+attribute for the argument |DNNL_ARG_ATTR_MULTIPLE_POST_OP(po_index)|
+| |DNNL_ARG_SRC_1|. For example:
+
+.. code:: cpp
+
+   primitive_attr attr;
+   post_ops p_ops;
+   p_ops.append_binary(algorithm::binary_add, summand_md);
+
+   attr.set_post_ops(p_ops);
+   attr.set_scales_mask(DNNL_ARG_ATTR_MULTIPLE_POST_OP(0) | DNNL_ARG_SRC_1,
+           /* mask */ 0);
+
 
 Examples of Chained Post-ops
 ============================
@@ -130,10 +181,8 @@ This pattern is pretty common for the CNN topologies of the ResNet family.
 .. code:: cpp
 
    dnnl::post_ops po;
-   po.append_sum(
-           /* scale = */ 1.f);
+   po.append_sum();
    po.append_eltwise(
-           /* scale     = */ 1.f,
            /* algorithm = */ dnnl::algorithm::eltwise_relu,
            /* neg slope = */ 0.f,
            /* unused for ReLU */ 0.f);

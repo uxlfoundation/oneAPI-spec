@@ -675,6 +675,9 @@ The ColorFourCC enumerator itemizes color formats.
 .. doxygenenumvalue:: MFX_FOURCC_XYUV
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_FOURCC_ABGR16F
+   :project: oneVPL
+
 -----------
 ContentInfo
 -----------
@@ -688,6 +691,9 @@ The ContentInfo enumerator itemizes content types for the encoding session.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_CONTENT_NON_VIDEO_SCREEN
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_CONTENT_NOISY_VIDEO
    :project: oneVPL
 
 ----------
