@@ -6,7 +6,7 @@
 oneAPI Specifications
 =====================
 
-.. image:: https://github.com/oneapi-src/oneapi-spec/workflows/CI/badge.svg
+.. image:: https://github.com/oneapi-src/oneAPI-spec/actions/workflows/ci.yml/badge.svg
    :target: https://github.com/oneapi-src/oneapi-spec/actions?query=workflow%3ACI
 
 .. image:: https://api.reuse.software/badge/github.com/oneapi-src/oneapi-spec
@@ -14,15 +14,13 @@ oneAPI Specifications
    :alt: REUSE status
 
 This repository contains the sources for the `oneAPI
-Specification`_. For the latest build from main branch, see `HTML
-<https://oneapi-src.github.io/oneAPI-spec>`__ and `PDF
-<https://rscohn2.github.io/oneAPI-spec/oneAPI-spec.pdf>`__.
+Specification`_. For the latest build from main branch, see HTML_ and
+PDF_.
 
-For more information about oneAPI, see `oneapi.com
-<https://oneapi.com>`__. For information about future releases of the
-oneAPI specification, see the `oneAPI Specification Roadmap
-<roadmap.rst>`__.  To be notified about new releases, become a
-release-only watcher of this repo.
+For more information about oneAPI, see `oneapi.io`_.  For information
+about future releases of the oneAPI specification, see the roadmap_.
+To be notified about new releases, become a release-only watcher of
+this repo.
 
 The document is written using `reStructuredText`_ and built with
 `Sphinx`_ using a theme provided by `Read the Docs`_.
@@ -101,19 +99,9 @@ Build the pdf version wit the following command::
 
 The generated PDF will be located at build/latexpdf/oneAPI-spec.pdf.
 
-Docker
-------
+Spell check::
 
-You can build a **Docker container** image with the following command::
-
-   python scripts/oneapi.py dockerbuild
-
-The tag will be rscohn2/oneapi-spec.  The script copies your proxy settings in
-the invoking shell so it will work inside the firewall.
-
-You can run a docker container with the following command::
-
-    python scripts/oneapi.py dockerrun
+  python oneapi.doc. --verbose spelling
 
 --
 CI
@@ -157,5 +145,9 @@ Making a Release
 .. _`reStructuredText`: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 .. _`Sphinx`: http://www.sphinx-doc.org/en/master/
 .. _`Read the Docs`: https://readthedocs.org/
-.. _`oneAPI Specification`: https://spec.oneapi.com
+.. _`oneAPI Specification`: https://oneapi.io/spec
 .. _reuse: https://pypi.org/project/reuse/
+.. _HTML: https://oneapi-src.github.io/oneAPI-spec/spec/
+.. _PDF: https://oneapi-src.github.io/oneAPI-spec/spec/oneAPI-spec.pdf
+.. _`oneapi.io`: https://oneapi.io
+.. _roadmap: roadmap.rst

@@ -15,10 +15,10 @@ Performs rotation of points in the plane.
 
 Given two vectors ``x`` and ``y`` of ``n`` elements, the ``rot`` routines
 compute four scalar-vector products and update the input vectors with
-the sum of two of these scalar-vector products as follow:
+the sum of two of these scalar-vector products as follows:
 
 .. math::
-  
+
    \left[\begin{array}{c}
       x\\y
    \end{array}\right]
@@ -28,21 +28,50 @@ the sum of two of these scalar-vector products as follow:
       -s*x + c*y
    \end{array}\right]
 
+If ``s`` is a complex type, the operation is defined as:
+
+.. math::
+   \left[\begin{array}{c}
+      x\\y
+   \end{array}\right]
+   \leftarrow
+   \left[\begin{array}{c}
+       \phantom{-}c*x + s*y\\
+       -conj(s)*x + c*y
+   \end{array}\right]
+
 ``rot`` supports the following precisions.
 
-   .. list-table:: 
-      :header-rows: 1
+.. list-table:: 
+   :header-rows: 1
 
-      * -  T 
-        -  T_scalar 
-      * -  ``float`` 
-        -  ``float`` 
-      * -  ``double`` 
-        -  ``double`` 
-      * -  ``std::complex<float>`` 
-        -  ``float`` 
-      * -  ``std::complex<double>`` 
-        -  ``double`` 
+   * -  T
+     -  Tc
+     -  Ts
+   * -  ``sycl::half``
+     -  ``sycl::half``
+     -  ``sycl::half``
+   * -  ``oneapi::mkl::bfloat16``
+     -  ``oneapi::mkl::bfloat16``
+     -  ``oneapi::mkl::bfloat16``
+   * -  ``float``
+     -  ``float``
+     -  ``float``
+   * -  ``double``
+     -  ``double``
+     -  ``double``
+   * -  ``std::complex<float>``
+     -  ``float``
+     -  ``std::complex<float>``
+   * -  ``std::complex<double>``
+     -  ``double``
+     -  ``std::complex<double>``
+   * -  ``std::complex<float>``
+     -  ``float``
+     -  ``float``
+   * -  ``std::complex<double>``
+     -  ``double``
+     -  ``double``
 
 .. _onemkl_blas_rot_buffer:
 
@@ -60,8 +89,8 @@ rot (Buffer Version)
                 std::int64_t incx,
                 sycl::buffer<T,1> &y,
                 std::int64_t incy,
-                T_scalar c,
-                T_scalar s)
+                Tc c,
+                Ts s)
    }
 .. code-block:: cpp
 
@@ -72,8 +101,8 @@ rot (Buffer Version)
                 std::int64_t incx,
                 sycl::buffer<T,1> &y,
                 std::int64_t incy,
-                T_scalar c,
-                T_scalar s)
+                Tc c,
+                Ts s)
    }
 
 .. container:: section
@@ -155,8 +184,8 @@ rot (USM Version)
                        std::int64_t incx,
                        T *y,
                        std::int64_t incy,
-                       T_scalar c,
-                       T_scalar s,
+                       Tc c,
+                       Ts s,
                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -168,8 +197,8 @@ rot (USM Version)
                        std::int64_t incx,
                        T *y,
                        std::int64_t incy,
-                       T_scalar c,
-                       T_scalar s,
+                       Tc c,
+                       Ts s,
                        const std::vector<sycl::event> &dependencies = {})
    }
 

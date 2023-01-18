@@ -6,7 +6,7 @@ Software Architecture
 =====================
 
 oneAPI provides a common developer interface across a range of data
-parallel accelerators (see the figure below).  Programmers use DPC++
+parallel accelerators (see the figure below).  Programmers use SYCL
 for both API programming and direct programming.  The capabilities of
 a oneAPI platform are determined by the Level Zero interface, which
 provides system software a common abstraction for a oneAPI device.
@@ -89,7 +89,7 @@ API Programming Example
 
 API programming requires the programmer to specify the target device and the
 memory communication strategy.  In the following example, we call the
-oneMKL matrix multiply routine, GEMM.  We are writing in DPC++ and
+oneMKL matrix multiply routine, GEMM.  We are writing in SYCL and
 omitting irrelevant details.
 
 We create a queue initialized with a *gpu_selector* to specify that we
@@ -136,7 +136,7 @@ With direct programming, we specify the target device and the memory
 communication strategy, as we do for API programming.  In addition, we
 must define and submit a command group to perform the computation.
 In the following example, we write a simple data parallel matrix
-multiply.  We are writing in DPC++ and omitting irrelevant
+multiply.  We are writing in SYCL and omitting irrelevant
 details.
 
 We create a queue initialized with a *gpu_selector* to specify that the

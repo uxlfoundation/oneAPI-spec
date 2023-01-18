@@ -14,15 +14,13 @@ int main() {
 
     oneapi::tbb::flow::overwrite_node< int > overwrite_storage(g);
 
-    oneapi::tbb::flow::source_node<int> data_generator(g,
-        [&]( int& v ) -> bool {
+    oneapi::tbb::flow::input_node< int > data_generator(g,
+        [&]( oneapi::tbb::flow_control& fc ) -> int {
             if ( count < data_limit ) {
-                ++count;
-                v = count;
-                return true;
-            } else {
-                return false;
+                return ++count;
             }
+            fc.stop();
+            return {};
         });
 
     oneapi::tbb::flow::function_node< int > process(g, oneapi::tbb::flow::unlimited,

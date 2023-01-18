@@ -157,7 +157,8 @@ spr2 (USM Version)
                         std::int64_t incx,
                         const T *y,
                         std::int64_t incy,
-                        T *a)
+                        T *a,
+                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
@@ -170,7 +171,8 @@ spr2 (USM Version)
                         std::int64_t incx,
                         const T *y,
                         std::int64_t incy,
-                        T *a)
+                        T *a,
+                        const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section

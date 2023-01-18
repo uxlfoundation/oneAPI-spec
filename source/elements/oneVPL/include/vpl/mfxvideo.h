@@ -303,7 +303,7 @@ mfxStatus MFX_CDECL MFXMemory_GetSurfaceForDecode(mfxSession session, mfxFrameSu
    @brief
      Works in either of four modes:
 
-     @li If the @p in parameter is zero, the function returns the class configurability in the output structure. The output structure has a non-zero value in each field that the implementation can configure using Init.
+     @li If the @p in parameter is zero, the function returns the class configurability in the output structure. The application must set to zero the fields it wants to check for support. If the field is supported, function sets non-zero value to this field, otherwise it would be ignored. It indicates that the SDK implementation can configure the field with Init.
 
      @li If the @p in parameter is non-zero, the function checks the validity of the fields in the input structure. Then the function returns the corrected values in
      the output structure. If there is insufficient information to determine the validity or correction is impossible, the function zeroes the fields.
@@ -971,7 +971,7 @@ mfxStatus MFX_CDECL MFXVideoVPP_RunFrameVPPAsync(mfxSession session, mfxFrameSur
    @return
    MFX_ERR_NONE The output frame is ready after synchronization. \n
    MFX_ERR_MORE_DATA Need more input frames before VPP can produce an output. \n
-   MFX_ERR_MEMORY_ALLOC The function failed to allocate output videoframe. \n
+   MFX_ERR_MEMORY_ALLOC The function failed to allocate output video frame. \n
 
    MFX_ERR_DEVICE_LOST  Hardware device was lost.
    \verbatim embed:rst
@@ -991,7 +991,7 @@ mfxStatus MFX_CDECL MFXVideoVPP_ProcessFrameAsync(mfxSession session, mfxFrameSu
    but application has to provide array of pointers to mfxVideoChannelParam and num_channel_param - number of channels. Application is responsible for    
    memory allocation for mfxVideoChannelParam parameters and for each channel it should specify channel IDs:    
    mfxVideoChannelParam::mfxFrameInfo::ChannelId. ChannelId should be unique value within one session. ChannelID equals to the 0
-   is reserved for the orginal decoded frame.
+   is reserved for the original decoded frame.
    The application can attach mfxExtInCrops to mfxVideoChannelParam::ExtParam to annotate input video frame if it wants to enable 
    letterboxing operation.
    @param[in] session SDK session handle.

@@ -260,12 +260,12 @@ gemmt (USM Version)
                          std::int64_t n,
                          std::int64_t k,
                          T alpha,
-                         const T* a,
+                         const T *a,
                          std::int64_t lda,
-                         const T* b,
+                         const T *b,
                          std::int64_t ldb,
                          T beta,
-                         T* c,
+                         T *c,
                          std::int64_t ldc,
                          const std::vector<sycl::event> &dependencies = {})
    }
@@ -279,12 +279,12 @@ gemmt (USM Version)
                          std::int64_t n,
                          std::int64_t k,
                          T alpha,
-                         const T* a,
+                         const T *a,
                          std::int64_t lda,
-                         const T* b,
+                         const T *b,
                          std::int64_t ldb,
                          T beta,
-                         T* c,
+                         T *c,
                          std::int64_t ldc,
                          const std::vector<sycl::event> &dependencies = {})
    }

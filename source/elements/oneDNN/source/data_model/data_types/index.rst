@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../../replacements.inc.rst
 
 .. _data_types-label:
 
@@ -24,6 +24,13 @@ Moreover, single-precision floating-point data type is often used for
 intermediate results in the mixed precision computations because it provides
 better accuracy. For example, the elementwise primitive and elementwise
 post-ops always use it internally.
+
+.. note::
+
+   Implicit downconversion can be enabled in order to speedup
+   computations, and are controlled using the :ref:`fpmath mode
+   controls<attributes_fpmath_mode-label>`
+
 
 oneDNN uses the following enumeration to refer to data types it supports:
 

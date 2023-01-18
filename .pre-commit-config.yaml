@@ -9,22 +9,22 @@ exclude: LICENSES|source/elements
 
 repos:
 -   repo: https://github.com/ambv/black
-    rev: 21.6b0
+    rev: 22.3.0
     hooks:
     -   id: black
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.1.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: check-yaml
     -   id: check-added-large-files
 -   repo: https://github.com/pycqa/doc8
-    rev: 0.9.0a1
+    rev: 0.10.1
     hooks:
     -   id: doc8
 -   repo: https://github.com/fsfe/reuse-tool
-    rev: v0.13.0
+    rev: v0.14.0
     hooks:
     -   id: reuse
 -   repo: https://gitlab.com/pycqa/flake8
@@ -32,20 +32,6 @@ repos:
     hooks:
     -   id: flake8
 -   repo: https://github.com/pycqa/isort
-    rev: 5.9.1
+    rev: 5.10.1
     hooks:
     -   id: isort
--   repo: local
-    hooks:
-    - id: sphinx-html
-      name: sphinx-html
-      entry: python scripts/oneapi.py -W html
-      language: system
-      pass_filenames: false
-      always_run: true
-    - id: sphinx-pdf
-      name: sphinx-pdf
-      entry: python scripts/oneapi.py -W latexpdf
-      language: system
-      pass_filenames: false
-      always_run: true

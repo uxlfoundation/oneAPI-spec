@@ -73,8 +73,3 @@ The following is a list of deprecated interfaces, starting from API version 2.0.
      -
      - Field is not filled by the library
      - No change
-   * - :cpp:member:`mfxExtVppAuxData::RepeatedFrame`
-     - 2.0
-     -
-     - Field is not filled by the library
-     - No change

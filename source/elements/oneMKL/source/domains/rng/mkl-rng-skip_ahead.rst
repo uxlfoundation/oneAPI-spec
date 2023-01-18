@@ -33,7 +33,7 @@ skip_ahead
 
     namespace oneapi::mkl::rng {
     template<typename EngineType>
-    void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::uint64_t num_to_skip);
+    void skip_ahead(EngineType& engine, std::uint64_t num_to_skip);
     }
 
 .. container:: section

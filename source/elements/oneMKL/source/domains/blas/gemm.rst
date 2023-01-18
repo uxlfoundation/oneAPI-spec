@@ -41,22 +41,38 @@ op(``X``) = ``X``\ :sup:`H`,
    .. list-table:: 
      :header-rows: 1
 
-     * -  Ts 
-       -  Ta 
-       -  Tb 
-       -  Tc 
-     * -  ``float`` 
+     * - | Ta
+         | (A matrix) 
+       - | Tb
+         | (B matrix) 
+       - | Tc 
+         | (C matrix) 
+       - | Ts
+         | (alpha/beta) 
+     * -  ``std::int8_t`` 
+       -  ``std::int8_t`` 
+       -  ``std::int32_t`` 
+       -  ``float`` 
+     * -  ``std::int8_t`` 
+       -  ``std::int8_t`` 
+       -  ``float`` 
+       -  ``float`` 
+     * -  ``half`` 
        -  ``half`` 
-       -  ``half`` 
+       -  ``float`` 
        -  ``float`` 
      * -  ``half`` 
        -  ``half`` 
        -  ``half`` 
        -  ``half`` 
-     * -  ``float``
-       -  ``bfloat16``
-       -  ``bfloat16``
-       -  ``float``
+     * -  ``bfloat16`` 
+       -  ``bfloat16`` 
+       -  ``float`` 
+       -  ``float`` 
+     * -  ``bfloat16`` 
+       -  ``bfloat16`` 
+       -  ``bfloat16`` 
+       -  ``float`` 
      * -  ``float`` 
        -  ``float`` 
        -  ``float`` 
@@ -238,7 +254,7 @@ gemm (Buffer Version)
    ldc
       The leading dimension of ``C``. It must be positive and at least
       ``m`` if column major layout is used to store matrices or at
-      least ``n`` if column major layout is used to store matrices.
+      least ``n`` if row major layout is used to store matrices.
 
 .. container:: section
 
@@ -448,7 +464,7 @@ gemm (USM Version)
    ldc
       The leading dimension of ``C``. It must be positive and at least
       ``m`` if column major layout is used to store matrices or at
-      least ``n`` if column major layout is used to store matrices.
+      least ``n`` if row major layout is used to store matrices.
 
    dependencies
       List of events to wait for before starting computation, if any.

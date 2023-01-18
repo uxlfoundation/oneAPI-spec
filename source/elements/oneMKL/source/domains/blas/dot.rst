@@ -25,7 +25,11 @@ The ``dot`` routines perform a dot product between two vectors:
       :header-rows: 1
 
       * -  T 
-        -  T_res 
+        -  Tres 
+      * -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 
@@ -57,7 +61,7 @@ dot (Buffer Version)
                 std::int64_t incx,
                 sycl::buffer<T,1> &y,
                 std::int64_t incy,
-                sycl::buffer<T_res,1> &result)
+                sycl::buffer<Tres,1> &result)
    }
 .. code-block:: cpp
 
@@ -68,7 +72,7 @@ dot (Buffer Version)
                 std::int64_t incx,
                 sycl::buffer<T,1> &y,
                 std::int64_t incy,
-                sycl::buffer<T_res,1> &result)
+                sycl::buffer<Tres,1> &result)
    }
 
 .. container:: section
@@ -141,7 +145,7 @@ dot (USM Version)
                        std::int64_t incx,
                        const T *y,
                        std::int64_t incy,
-                       T_res *result,
+                       Tres *result,
                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -153,7 +157,7 @@ dot (USM Version)
                        std::int64_t incx,
                        const T *y,
                        std::int64_t incy,
-                       T_res *result,
+                       Tres *result,
                        const std::vector<sycl::event> &dependencies = {})
    }
 

@@ -13,6 +13,9 @@
 #include "mfxdefs.h"
 #include "mfxvideo.h"
 #include "mfxmvc.h"
+#ifdef ONEVPL_EXPERIMENTAL
+#include "mfxcamera.h"
+#endif
 
 /* These macro required for code compilation. */
 #define INFINITE 0x7FFFFFFF
@@ -361,4 +364,37 @@ VPPParams.ExtParam      = (mfxExtBuffer **)&ExtBuffer[0];
 MFXVideoVPP_Init(session, &VPPParams);
 
 /*end8*/
+}
+
+static void prg_vpp9() {
+/*beg9*/
+#ifdef ONEVPL_EXPERIMENTAL
+// Camera Raw Format
+mfxExtCamPipeControl pipeControl = {};
+pipeControl.Header.BufferId      = MFX_EXTBUF_CAM_PIPECONTROL;
+pipeControl.Header.BufferSz      = sizeof(mfxExtCamPipeControl);
+pipeControl.RawFormat            = (mfxU16)MFX_CAM_BAYER_BGGR;
+
+// Black level correction
+mfxExtCamBlackLevelCorrection blackLevelCorrection   = {};
+blackLevelCorrection.Header.BufferId                 = MFX_EXTBUF_CAM_BLACK_LEVEL_CORRECTION;
+blackLevelCorrection.Header.BufferSz                 = sizeof(mfxExtCamBlackLevelCorrection);
+mfxU16 black_level_B = 16, black_level_G0 = 16, black_level_G1 = 16, black_level_R = 16;
+// Initialize the value for black level B, G0, G1, R as needed
+blackLevelCorrection.B  = black_level_B;
+blackLevelCorrection.G0 = black_level_G0;
+blackLevelCorrection.G1 = black_level_G1;
+blackLevelCorrection.R  = black_level_R;
+
+mfxExtBuffer *ExtBufferIn[2];
+ExtBufferIn[0] = (mfxExtBuffer *)&pipeControl;
+ExtBufferIn[1] = (mfxExtBuffer *)&blackLevelCorrection;
+
+mfxSession session      = (mfxSession)0;
+mfxVideoParam VPPParams = {};
+VPPParams.NumExtParam   = 2;
+VPPParams.ExtParam      = (mfxExtBuffer **)&ExtBufferIn[0];
+MFXVideoVPP_Init(session, &VPPParams);
+#endif
+/*end9*/
 }

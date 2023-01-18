@@ -4,7 +4,7 @@
 
 .. default-domain:: cpp
 
-.. include:: /elements/oneDNN/source/replacements.inc.rst
+.. include:: ../replacements.inc.rst
 
 .. _layer_normalization-label:
 
@@ -35,11 +35,9 @@ Forward
 where
 
 - :math:`\gamma(c), \beta(c)` are optional scale and shift for a channel (see
-  the |use_scaleshift| flag),
-
+  the |use_scale| and |use_shift| flag),
 - :math:`\mu(t, n), \sigma^2(t, n)` are mean and variance (see
   |use_global_stats| flag), and
-
 - :math:`\varepsilon` is a constant to improve numerical stability.
 
 Mean and variance are computed at runtime or provided by a user. When mean and
@@ -55,14 +53,14 @@ The :math:`\gamma(c)` and :math:`\beta(c)` tensors are considered learnable.
 Difference Between Forward Training and Forward Inference
 =========================================================
 
-If mean and variance are computed at runtime (i.e., |use_global_stats| is not
-set), they become outputs for the propagation kind |forward_training| (because
-they would be required during the backward propagation). Data layout for mean
-and variance must be specified during initialization of the layer
-normalization descriptor by passing the memory descriptor for statistics
-(e.g., by passing ``stat_desc`` in
-|layer_normalization_forward::desc::desc|). Mean and variance are
-not exposed for the propagation kind |forward_inference|.
+If mean and variance are computed at runtime (i.e., |use_global_stats|
+is not set), they become outputs for the propagation kind
+|forward_training| (because they would be required during the backward
+propagation). Data layout for mean and variance must be specified
+during initialization of the layer normalization descriptor by passing
+the memory descriptor for statistics (e.g., by passing ``stat_desc``
+in |layer_normalization_forward::primitive_desc|). Mean and variance
+are not exposed for the propagation kind |forward_inference|.
 
 ********
 Backward
@@ -74,8 +72,8 @@ The backward propagation computes :math:`\diffsrc(t, n, c)`,
 :math:`\sigma^2(t, n)`, :math:`\gamma(c) ^*`, and :math:`\beta(c) ^*`.
 
 The tensors marked with an asterisk are used only when the primitive is
-configured to use :math:`\gamma(c)`, and :math:`\beta(c)` (i.e.,
-|use_scaleshift| is set).
+configured to use :math:`\gamma(c)`, and :math:`\beta(c)` (i.e.
+|use_scale| and |use_shift| is set).
 
 *******************
 Execution Arguments
@@ -84,17 +82,21 @@ Execution Arguments
 Depending on the flags and propagation kind, the layer normalization primitive
 requires different inputs and outputs. For clarity, a summary is shown below.
 
-+----------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
-|                                        | |forward_inference|                                                                                  | |forward_training|                                                                                   | |backward|                                                                                                                                                        | |backward_data|        |
-+========================================+======================================================================================================+======================================================================================================+===================================================================================================================================================================+========================+
-| |normalization_flags_none|             | *In*: :math:`\src`  *Out*: :math:`\dst`                                                              | *In*: :math:`\src`  *Out*: :math:`\dst`, :math:`\mu`, :math:`\sigma^2`                               | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\diffsrc`                                                                       | Same as for |backward| |
-+----------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
-| |use_global_stats|                     | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\dst`                                | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\dst`                                | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\diffsrc`                                                                       | Same as for |backward| |
-+----------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
-| |use_scaleshift|                       | *In*: :math:`\src`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst`                                | *In*: :math:`\src`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst`, :math:`\mu`, :math:`\sigma^2` | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\diffsrc`, :math:`\diffgamma`, :math:`\diffbeta` | Not supported          |
-+----------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
-| |use_global_stats| \| |use_scaleshift| | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst` | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst` | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\diffsrc`, :math:`\diffgamma`, :math:`\diffbeta` | Not supported          |
-+----------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
+|                                                  | |forward_inference|                                                                                  | |forward_training|                                                                                   | |backward|                                                                                                                                                        | |backward_data|        |
++==================================================+======================================================================================================+======================================================================================================+===================================================================================================================================================================+========================+
+| |normalization_flags_none|                       | *In*: :math:`\src`  *Out*: :math:`\dst`                                                              | *In*: :math:`\src`  *Out*: :math:`\dst`, :math:`\mu`, :math:`\sigma^2`                               | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\diffsrc`                                                                       | Same as for |backward| |
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
+| |use_global_stats|                               | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\dst`                                | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\dst`                                | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2` *Out*: :math:`\diffsrc`                                                                       | Same as for |backward| |
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
+| |use_scale|                                      | *In*: :math:`\src`, :math:`\gamma` *Out*: :math:`\dst`                                               | *In*: :math:`\src`, :math:`\gamma` *Out*: :math:`\dst`, :math:`\mu`, :math:`\sigma^2`                | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma` *Out*: :math:`\diffsrc`, :math:`\diffgamma`                                   | Not supported          |
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
+| |use_shift|                                      | *In*: :math:`\src`, :math:`\beta` *Out*: :math:`\dst`                                                | *In*: :math:`\src`, :math:`\beta` *Out*: :math:`\dst`, :math:`\mu`, :math:`\sigma^2`                 | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\beta` *Out*: :math:`\diffsrc`, :math:`\diffbeta`                                     | Not supported          |
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
+| |use_scale| \| |use_shift|                       | *In*: :math:`\src`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst`                                | *In*: :math:`\src`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst`, :math:`\mu`, :math:`\sigma^2` | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\diffsrc`, :math:`\diffgamma`, :math:`\diffbeta` | Not supported          |
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
+| |use_global_stats| \| |use_scale| \| |use_shift| | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst` | *In*: :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\dst` | *In*: :math:`\diffdst`, :math:`\src`, :math:`\mu`, :math:`\sigma^2`, :math:`\gamma`, :math:`\beta` *Out*: :math:`\diffsrc`, :math:`\diffgamma`, :math:`\diffbeta` | Not supported          |
++--------------------------------------------------+------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------+
 
 When executed, the inputs and outputs should be mapped to an execution
 argument index as specified by the following table.
@@ -103,23 +105,25 @@ argument index as specified by the following table.
 Primitive input/output                          Execution argument index
 =============================================== =========================
 :math:`\src`                                    |DNNL_ARG_SRC|
-:math:`\gamma, \beta`                           |DNNL_ARG_SCALE_SHIFT|
+:math:`\gamma, \beta`                           |DNNL_ARG_SCALE|
+:math:`\beta`                                   |DNNL_ARG_SHIFT|
 mean (:math:`\mu`)                              |DNNL_ARG_MEAN|
 variance (:math:`\sigma`)                       |DNNL_ARG_VARIANCE|
 :math:`\dst`                                    |DNNL_ARG_DST|
 :math:`\diffdst`                                |DNNL_ARG_DIFF_DST|
 :math:`\diffsrc`                                |DNNL_ARG_DIFF_SRC|
-:math:`\diffgamma`, :math:`\diffbeta`           |DNNL_ARG_DIFF_SCALE_SHIFT|
+:math:`\diffgamma`                              |DNNL_ARG_DIFF_SCALE|
+:math:`\diffbeta`                               |DNNL_ARG_DIFF_SHIFT|
 =============================================== =========================
 
 *****************
 Operation Details
 *****************
 
-1. The different flavors of the primitive are partially controlled by the
-   ``flags`` parameter that is passed to the operation descriptor
+1. The different flavors of the primitive are partially controlled by
+   the ``flags`` parameter that is passed to the primitive descriptor
    initialization function (e.g.,
-   |layer_normalization_forward::desc::desc|). Multiple flags can
+   |layer_normalization_forward::primitive_desc|). Multiple flags can
    be combined using the bitwise OR operator (``|``).
 
 2. For forward propagation, the mean and variance might be either computed at
@@ -128,13 +132,7 @@ Operation Details
    the |use_global_stats| flag. For the backward propagation, the mean and
    variance are always input parameters.
 
-3. The memory format and data type for ``src`` and ``dst`` are assumed to be
-   the same, and in the API they are typically referred to as ``data`` (e.g.,
-   see ``data_desc`` in dnnl::layer_normalization_forward::desc::desc()). The
-   same is true for ``diff_src`` and ``diff_dst``. The corresponding memory
-   descriptors are referred to as ``diff_data_desc``.
-
-4. Both forward and backward propagation support in-place operations, meaning
+3. Both forward and backward propagation support in-place operations, meaning
    that :math:`\src` can be used as input and output for forward propagation,
    and :math:`\diffdst` can be used as input and output for backward
    propagation. In case of an in-place operation, the original data will be
@@ -153,12 +151,12 @@ The layer normalization supports the following combinations of data types.
    Here we abbreviate data types names for readability. For example, |_f32| is
    abbreviated to |f32|.
 
-================== ==================== ============================
-Propagation        Source / Destination Mean / Variance / ScaleShift
-================== ==================== ============================
+================== ==================== ===============================
+Propagation        Source / Destination Mean / Variance / Scale / Shift
+================== ==================== ===============================
 forward / backward |f32|                |f32|
 forward            |f16|                |f32|
-================== ==================== ============================
+================== ==================== ===============================
 
 *******************
 Data Representation

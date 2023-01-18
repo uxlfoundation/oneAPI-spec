@@ -30,3 +30,5 @@ exec(open(join(repo_root, 'source', 'conf', 'element_conf.py')).read())
 cpp_id_attributes = ['MFX_CDECL', 'MFX_DEPRECATED']
 
 c_id_attributes = ['MFX_CDECL', 'MFX_DEPRECATED']
+
+spelling_word_list_filename=['../../../spelling_wordlist.txt','spelling_wordlist_vpl.txt']

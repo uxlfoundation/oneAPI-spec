@@ -132,7 +132,7 @@ iamin (USM Version)
                          std::int64_t n,
                          const T *x,
                          std::int64_t incx,
-                         T_res *result,
+                         std::int64_t *result,
                          const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -142,7 +142,7 @@ iamin (USM Version)
                          std::int64_t n,
                          const T *x,
                          std::int64_t incx,
-                         T_res *result,
+                         std::int64_t *result,
                          const std::vector<sycl::event> &dependencies = {})
    }
 

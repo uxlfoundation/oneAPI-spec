@@ -254,36 +254,36 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event syrk_batch(sycl::queue &queue,
-                              uplo *upper_lower,
-                              transpose *trans,
-                              std::int64_t *n,
-                              std::int64_t *k,
-                              T *alpha,
+                              const uplo *upper_lower,
+                              const transpose *trans,
+                              const std::int64_t *n,
+                              const std::int64_t *k,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
-                              T *beta,
+                              const std::int64_t *lda,
+                              const T *beta,
                               T **c,
-                              std::int64_t *ldc,
+                              const std::int64_t *ldc,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event syrk_batch(sycl::queue &queue,
-                              uplo *upper_lower,
-                              transpose *trans,
-                              std::int64_t *n,
-                              std::int64_t *k,
-                              T *alpha,
+                              const uplo *upper_lower,
+                              const transpose *trans,
+                              const std::int64_t *n,
+                              const std::int64_t *k,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
-                              T *beta,
+                              const std::int64_t *lda,
+                              const T *beta,
                               T **c,
-                              std::int64_t *ldc,
+                              const std::int64_t *ldc,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
    }
 

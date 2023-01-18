@@ -18,7 +18,7 @@ Empty container constructors
     Constructs an empty ``concurrent_queue``. If provided, uses the allocator ``alloc`` to
     allocate the memory.
 
-Constructor from the sequence of elements
+Constructors from the sequence of elements
 ------------------------------------------
 
     .. code:: cpp
@@ -32,6 +32,13 @@ Constructor from the sequence of elements
 
     **Requirements**: the type ``InputIterator`` must meet the `InputIterator` requirements from the
     ``[input.iterators]`` ISO C++ Standard section.
+
+    .. code:: cpp
+
+        concurrent_queue( std::initializer_list<value_type> init,
+                          const allocator_type& alloc = allocator_type() );
+
+    Equivalent to ``concurrent_queue(init.begin(), init.end(), alloc)``.
 
 Copying constructors
 --------------------
@@ -68,6 +75,7 @@ Moving constructors
 
     The behavior is undefined in case of concurrent operations with ``other``.
 
+
 Destructor
 ----------
 
@@ -79,3 +87,65 @@ Destructor
     deallocates the used storage.
 
     The behavior is undefined in case of concurrent operations with ``*this``.
+
+Assignment operators
+--------------------
+
+    .. code:: cpp
+
+        concurrent_queue& operator=( const concurrent_queue& other );
+
+    Replaces all elements in ``*this`` by the copies of the elements in ``other``.
+
+    Copy-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value``
+    is ``true``.
+
+    The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
+
+    **Returns**: a reference to ``*this``.
+
+    .. code:: cpp
+
+        concurrent_queue& operator=( concurrent_queue&& other );
+
+    Replaces all elements in ``*this`` by the elements in  ``other`` using move semantics.
+
+    ``other`` is left in a valid, but unspecified state.
+
+    Move-assigns allocators if ``std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value``
+    is ``true``.
+
+    The behavior is undefined in case of concurrent operations with ``*this`` and ``other``.
+
+    **Returns**: a reference to ``*this``.
+
+    .. code:: cpp
+
+        concurrent_queue& operator=( std::initializer_list<value_type> init );
+
+    Replaces all elements in ``*this`` by the elements in ``init``.
+
+    The behavior is undefined in case of concurrent operations with ``*this``.
+
+    **Returns**: a reference to ``*this``.
+
+assign
+------
+
+    .. code:: cpp
+
+        template <typename InputIterator>
+        void assign( InputIterator first, InputIterator last );
+
+    Replaces all elements in ``*this`` be the elements in the half-open interval ``[first, last)``.
+
+    The behavior is undefined in case of concurrent operations with ``*this``.
+
+    **Requirements**: the type ``InputIterator`` must meet the `InputIterator` requirements from the
+    ``[input.iterators]`` ISO C++ Standard section.
+
+    .. code:: cpp
+
+        void assign( std::initializer_list<value_type> init );
+
+    Equivalent to ``assign(init.begin(), init.end())``.

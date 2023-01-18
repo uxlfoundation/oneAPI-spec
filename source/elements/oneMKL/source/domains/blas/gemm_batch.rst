@@ -22,12 +22,54 @@ operation perform a matrix-matrix product with general matrices.
    .. list-table:: 
       :header-rows: 1
 
-      * -  T 
-      * -  ``half``
+      * - | Ta
+          | (A matrix) 
+        - | Tb
+          | (B matrix) 
+        - | Tc 
+          | (C matrix) 
+        - | Ts
+          | (alpha/beta) 
+      * -  ``std::int8_t`` 
+        -  ``std::int8_t`` 
+        -  ``std::int32_t`` 
+        -  ``float`` 
+      * -  ``std::int8_t`` 
+        -  ``std::int8_t`` 
+        -  ``float`` 
+        -  ``float`` 
+      * -  ``half`` 
+        -  ``half`` 
+        -  ``float`` 
+        -  ``float`` 
+      * -  ``half`` 
+        -  ``half`` 
+        -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
+        -  ``float`` 
+        -  ``float`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
+        -  ``bfloat16`` 
+        -  ``float`` 
       * -  ``float`` 
+        -  ``float`` 
+        -  ``float`` 
+        -  ``float`` 
       * -  ``double`` 
+        -  ``double`` 
+        -  ``double`` 
+        -  ``double`` 
       * -  ``std::complex<float>`` 
+        -  ``std::complex<float>`` 
+        -  ``std::complex<float>`` 
+        -  ``std::complex<float>`` 
       * -  ``std::complex<double>`` 
+        -  ``std::complex<double>`` 
+        -  ``std::complex<double>`` 
+        -  ``std::complex<double>`` 
 
 .. _onemkl_blas_gemm_batch_buffer:
 
@@ -193,7 +235,7 @@ of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` par
    ldc
       The leading dimension of the matrices ``C``. It must be positive and at least
       ``m`` if column major layout is used to store matrices or at
-      least ``n`` if column major layout is used to store matrices.
+      least ``n`` if row major layout is used to store matrices.
 
    stridec
       Stride between different ``C`` matrices. Must be at least
@@ -316,21 +358,21 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              onemkl::transpose *transa,
-                              onemkl::transpose *transb,
-                              std::int64_t *m,
-                              std::int64_t *n,
-                              std::int64_t *k,
-                              T *alpha,
+                              const onemkl::transpose *transa,
+                              const onemkl::transpose *transb,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
+                              const std::int64_t *k,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               const T **b,
-                              std::int64_t *ldb,
-                              T *beta,
+                              const std::int64_t *ldb,
+                              const T *beta,
                               T **c,
-                              std::int64_t *ldc,
+                              const std::int64_t *ldc,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
 
        sycl::event gemm_batch(sycl::queue &queue,
@@ -355,21 +397,21 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              onemkl::transpose *transa,
-                              onemkl::transpose *transb,
-                              std::int64_t *m,
-                              std::int64_t *n,
-                              std::int64_t *k,
-                              T *alpha,
+                              const onemkl::transpose *transa,
+                              const onemkl::transpose *transb,
+                              const std::int64_t *m,
+                              const std::int64_t *n,
+                              const std::int64_t *k,
+                              const T *alpha,
                               const T **a,
-                              std::int64_t *lda,
+                              const std::int64_t *lda,
                               const T **b,
-                              std::int64_t *ldb,
-                              T *beta,
+                              const std::int64_t *ldb,
+                              const T *beta,
                               T **c,
-                              std::int64_t *ldc,
+                              const std::int64_t *ldc,
                               std::int64_t group_count,
-                              std::int64_t *group_size,
+                              const std::int64_t *group_size,
                               const std::vector<sycl::event> &dependencies = {})
 
        sycl::event gemm_batch(sycl::queue &queue,
@@ -670,7 +712,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
    ldc
       The leading dimension of the matrices ``C``. It must be positive and at least
       ``m`` if column major layout is used to store matrices or at
-      least ``n`` if column major layout is used to store matrices.
+      least ``n`` if row major layout is used to store matrices.
 
    stridec
       Stride between different ``C`` matrices.

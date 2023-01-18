@@ -28,8 +28,9 @@ session. To avoid memory leaks, always call :cpp:func:`MFXClose` after
 
 .. important:: For backward compatibility with existent |msdk_full_name|
                applications oneVPL session can be created and initialized by
-               the legacy dispacther through :cpp:func:`MFXInit` or
-               :cpp:func:`MFXInitEx` calls.
+               the legacy dispatcher through :cpp:func:`MFXInit` or
+               :cpp:func:`MFXInitEx` calls. In this case, the reported API version
+               will be 1.255 on |intel_r| platforms with X\ :sup:`e` architecture.
 
 The application can initialize a session as a software-based session
 (:cpp:enumerator:`MFX_IMPL_SOFTWARE`) or a hardware-based session
@@ -167,10 +168,10 @@ will vary according to the OS.
      Applicable only for Intel implementations.
   #. The directory of the exe file of the current process.
   #. Current working directory.
-  #. `PATH` enviromental variable.
+  #. `PATH` environmental variable.
   #. For backward compatibility with older spec versions, dispatcher also checks
      user-defined search folders which are provided by `ONEVPL_SEARCH_PATH`
-     enviromental variable.
+     environmental variable.
 
 * On Linux, the dispatcher searches the following locations, in the specified
   order, to find the correct implementation library:
@@ -181,7 +182,7 @@ will vary according to the OS.
   #. Current working directory.
   #. For backward compatibility with older spec versions, dispatcher also checks
      user-defined search folders which are provided by `ONEVPL_SEARCH_PATH`
-     enviromental variable.
+     environmental variable.
 
 .. important:: To prioritize loading of custom oneVPL library, users may set environment variable
                `ONEVPL_PRIORITY_PATH` with the path to the user-defined folder. 
@@ -200,8 +201,17 @@ implementation.
 
 Internally, the dispatcher works as follows:
 
-#. Dispatcher loads any shared library with `libvpl*` prefix in the library name
-   in the given search folders.
+#. Dispatcher loads all shared libraries in the given search folders, whose names
+   match any of the patterns in the following table:
+
+   ================== ================== ================= =========================================
+   Windows 64-bit     Windows 32-bit     Linux 64-bit      Description
+   ================== ================== ================= =========================================
+   libvpl\*.dll       libvpl\*.dll       libvpl\*.so\*     Runtime library for any platform
+   libmfx64-gen.dll   libmfx32-gen.dll   libmfx-gen.so.1.2 Runtime library for oneVPL for |intel_r| platforms with X\ :sup:`e` architecture
+   libmfxhw64.dll     libmfxhw32.dll     libmfxhw64.so.1   Runtime library for |msdk_full_name|
+   ================== ================== ================= =========================================
+
 #. For each loaded library, the dispatcher tries to resolve address of the
    :cpp:func:`MFXQueryImplsDescription` function to collect the implementation's
    capabilities.
@@ -232,7 +242,7 @@ left to right from column to column and concatenate strings by using `.` (dot) a
       |                                       | | .Impl                    |                      |                           |
       |                                       +----------------------------+----------------------+---------------------------+
       |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 | The mode will be used for |
-      |                                       | | .AccelerationMode        |                      | session initilization     |
+      |                                       | | .AccelerationMode        |                      | session initialization    |
       |                                       +----------------------------+----------------------+---------------------------+
       |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
       |                                       | | .ApiVersion              |                      |                           |
@@ -336,6 +346,11 @@ left to right from column to column and concatenate strings by using `.` (dot) a
       |                                       | | .mfxEncoderDescription   |                      |                           |
       |                                       | | .encoder                 |                      |                           |
       |                                       | | .BiDirectionalPrediction |                      |                           |
+      |                                       +----------------------------+----------------------+---------------------------+
+      |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U16 |                           |
+      |                                       | | .mfxEncoderDescription   |                      |                           |
+      |                                       | | .encoder                 |                      |                           |
+      |                                       | | .ReportedStats           |                      |                           |
       |                                       +----------------------------+----------------------+---------------------------+
       |                                       | | mfxImplDescription       | MFX_VARIANT_TYPE_U32 |                           |
       |                                       | | .mfxEncoderDescription   |                      |                           |
@@ -441,23 +456,35 @@ influence on the implementation selection. They are used during the
 
 .. list-table:: Dispatcher's Special Properties
    :header-rows: 1
-   :widths: 50 50
+   :widths: auto
 
-   * - **Property**
+   * - **Property Name**
+     - **Property Value**
      - **Value data type**
-   * - :cpp:enum:`mfxHandleType`
+   * - mfxHandleType
+     - :cpp:enum:`mfxHandleType`
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
-   * - :cpp:type:`mfxHDL`
+   * - mfxHDL
+     - :cpp:type:`mfxHDL`
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_PTR`
-   * - :cpp:type:`NumThread`
+   * - NumThread
+     - Unsigned fixed-point integer value
      - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U32`
+   * - DeviceCopy
+     - :ref:`Device copy <gpu_copy>`
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_U16`
+   * - ExtBuffer
+     - Pointer to the extension buffer
+     - :cpp:enumerator:`mfxVariantType::MFX_VARIANT_TYPE_PTR`
+
+.. _onevpl-dispatcher-interactions:
 
 ------------------------------
 oneVPL Dispatcher Interactions
 ------------------------------
 
-This sequence diagram visualize how application communcates with implementations
-via the dispacher.
+This sequence diagram visualize how application communicates with implementations
+via the dispatcher.
 
 Dispatcher API
     This API is implemented in the dispatcher.
@@ -490,6 +517,11 @@ Implementation API
       A -> D: MFXCreateConfig()
       A -> D: MFXSetConfigProperty()
       A -> D: MFXEnumImplementations()
+
+      note right of A
+      MFXEnumImplementations() may also be called
+      after MFXCreateSession().
+      end note
 
       Activate I1
 
@@ -574,7 +606,7 @@ Implementation API
    deactivate D
    @enduml
 
-The oneVPL dispacther is capable to load and initialize |msdk_full_name| legacy
+The oneVPL dispatcher is capable to load and initialize |msdk_full_name| legacy
 library. The sequence diagram below demonstrates the approach.
 
 .. uml::
@@ -627,7 +659,7 @@ library. The sequence diagram below demonstrates the approach.
    deactivate D
    @enduml
 
-.. important:: The dispacther doesn't filter and report
+.. important:: The dispatcher doesn't filter and report
                :cpp:struct:`mfxDeviceDescription`,
                :cpp:struct:`mfxDecoderDescription`,
                :cpp:struct:`mfxEncoderDescription`,
@@ -648,10 +680,10 @@ To redirect log output to the desired file, set the `ONEVPL_DISPATCHER_LOG_FILE`
 environmental variable with the file name of the log file.
 
 ------------------------------
-Examples of Dispathcer's Usage
+Examples of Dispatcher's Usage
 ------------------------------
 
-This code illustrates simple usage of dispathcer to load first available
+This code illustrates simple usage of dispatcher to load first available
 library:
 
 .. literalinclude:: ../snippets/prg_disp.c
@@ -660,7 +692,7 @@ library:
    :end-before: /*end1*/
    :lineno-start: 1
 
-This code illustrates simple usage of dispathcer to load first available HW
+This code illustrates simple usage of dispatcher to load first available HW
 accelerated library:
 
 .. literalinclude:: ../snippets/prg_disp.c
@@ -736,7 +768,7 @@ How To Search For The Available VPP Filter implementation
 
 Each VPP filter identified by the filter ID. Filter ID is defined by
 corresponding to the filter extension buffer ID value which is defined in a form
-of fourCC value.
+of FourCC value.
 Filter ID values are subset of the general :ref:`ExtendedBufferID <extendedbufferid>`
 enum. The :ref:`table <vpp-filters-ids>` references available IDs of VPP filters
 to search. Application needs to assign this value to the field of
@@ -796,7 +828,7 @@ Sessions can be created from different implementations, each implementations can
 be located in different shared libraries. To get path of the shared library with
 the implementation from which session can be or was created, application can use
 :cpp:func:`MFXEnumImplementations` and pass :cpp:enumerator:`MFX_IMPLCAPS_IMPLPATH`
-value as the outpt data request.
+value as the output data request.
 
 This code illustrates collection and print out path of implementations's
 shared library:
@@ -813,7 +845,7 @@ shared library:
 oneVPL implementation on |intel_r| platforms with X\ :sup:`e` architecture and |msdk_full_name| Coexistence 
 -----------------------------------------------------------------------------------------------------------
 
-oneVPL supersedes |msdk_full_name| and partially binary compartible with
+oneVPL supersedes |msdk_full_name| and is partially binary compatible with
 |msdk_full_name|. Both oneVPL and |msdk_full_name| includes own dispatcher and
 implementation. Coexistence of oneVPL and |msdk_full_name| dispatchers and
 implementations on single system is allowed until |msdk_full_name| is not EOL.

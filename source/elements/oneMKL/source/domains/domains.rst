@@ -12,7 +12,7 @@ This section describes the Data Parallel C++ (DPC++) interface.
 .. include:: dense_linear_algebra.inc.rst
 .. include:: sparse_linear_algebra.inc.rst
 .. include:: discrete_fourier_transforms.inc.rst
-.. include:: rng/random_number_generators.inc.rst
-.. include:: stats/stats.inc.rst
-.. include:: vm/vector_math.inc.rst
+.. include:: random_number_generators.inc.rst
+.. include:: stats.inc.rst
+.. include:: vector_math.inc.rst
 

@@ -79,7 +79,7 @@ lda
   Leading dimension of :math:`A_i`.
 
 stride_a
-  Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
 ipiv
   ``ipiv`` array, as returned by the Strided API of the :ref:`onemkl_lapack_getrf_batch_buffer` function.
@@ -93,6 +93,9 @@ b
 ldb
   Leading dimension of :math:`B_i`.
 
+stride_b
+  Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
+  
 batch_size
   Specifies the number of problems in a batch.
 
@@ -291,7 +294,7 @@ lda
   Leading dimension of :math:`A_i`.
 
 stride_a  
-  Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
+  Stride between the beginnings of matrices :math:`A_i` inside the batch array ``a``.
 
 ipiv
   ``ipiv`` array, as returned by getrf_batch (USM) function.
@@ -305,6 +308,9 @@ b
 ldb
   Leading dimensions of :math:`B_i`.
 
+stride_b  
+  Stride between the beginnings of matrices :math:`B_i` inside the batch array ``b``.
+  
 batch_size
   Number of problems in a batch.
 

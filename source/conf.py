@@ -26,7 +26,7 @@ extensions += ['notfound.extension']  # noqa: F821
 # -- Project information -----------------------------------------------------
 
 project = u'oneAPI Specification'
-copyright = u'2021, Intel Corporation'
+copyright = u'2022, Intel Corporation'
 
 # The short X.Y version
 version = env['oneapi_version']  # noqa: F821

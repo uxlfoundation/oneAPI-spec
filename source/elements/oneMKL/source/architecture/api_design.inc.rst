@@ -99,10 +99,10 @@ Each enumeration value comes with two names: A single-character name (the tradit
               -  Do not transpose or conjugate the matrix.
             * -  ``transpose::T``
               -  ``transpose::trans``
-              -  Transpose the matrix.
+              -  Transpose the matrix (without complex conjugation).
             * -  ``transpose::C``
               -  ``transpose::conjtrans``
-              -  Perform Hermitian transpose (transpose and conjugate). Only applicable to complex matrices.
+              -  Perform Hermitian transpose (transpose and conjugate). Is the same as ``transpose::trans`` for real matrices.
 
       .. _onemkl_enum_uplo:
 

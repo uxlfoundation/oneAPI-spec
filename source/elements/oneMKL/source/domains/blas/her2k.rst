@@ -46,7 +46,7 @@ The inner dimension of both matrix multiplications is ``k``.
       :header-rows: 1
 
       * -  T 
-        -  T_real 
+        -  Treal 
       * -  ``std::complex<float>`` 
         -  ``float`` 
       * -  ``std::complex<double>`` 
@@ -72,7 +72,7 @@ her2k (Buffer Version)
                   std::int64_t lda,
                   sycl::buffer<T,1> &b,
                   std::int64_t ldb,
-                  T_real beta,
+                  Treal beta,
                   sycl::buffer<T,1> &c,
                   std::int64_t ldc)
    }
@@ -89,7 +89,7 @@ her2k (Buffer Version)
                   std::int64_t lda,
                   sycl::buffer<T,1> &b,
                   std::int64_t ldb,
-                  T_real beta,
+                  Treal beta,
                   sycl::buffer<T,1> &c,
                   std::int64_t ldc)
    }
@@ -254,12 +254,12 @@ her2k (USM Version)
                          std::int64_t n,
                          std::int64_t k,
                          T alpha,
-                         const T* a,
+                         const T *a,
                          std::int64_t lda,
-                         const T* b,
+                         const T *b,
                          std::int64_t ldb,
-                         T_real beta,
-                         T* c,
+                         Treal beta,
+                         T *c,
                          std::int64_t ldc,
                          const std::vector<sycl::event> &dependencies = {})
    }
@@ -272,12 +272,12 @@ her2k (USM Version)
                          std::int64_t n,
                          std::int64_t k,
                          T alpha,
-                         const T* a,
+                         const T *a,
                          std::int64_t lda,
-                         const T* b,
+                         const T *b,
                          std::int64_t ldb,
-                         T_real beta,
-                         T* c,
+                         Treal beta,
+                         T *c,
                          std::int64_t ldc,
                          const std::vector<sycl::event> &dependencies = {})
    }

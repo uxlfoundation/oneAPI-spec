@@ -31,7 +31,11 @@ where:
       :header-rows: 1
 
       * -  T 
-        -  T_scalar 
+        -  Ts 
+      * -  ``half`` 
+        -  ``half`` 
+      * -  ``bfloat16`` 
+        -  ``bfloat16`` 
       * -  ``float`` 
         -  ``float`` 
       * -  ``double`` 
@@ -57,7 +61,7 @@ scal (Buffer Version)
    namespace oneapi::mkl::blas::column_major {
        void scal(sycl::queue &queue,
                  std::int64_t n,
-                 T_scalar alpha,
+                 Ts alpha,
                  sycl::buffer<T,1> &x,
                  std::int64_t incx)
    }
@@ -66,7 +70,7 @@ scal (Buffer Version)
    namespace oneapi::mkl::blas::row_major {
        void scal(sycl::queue &queue,
                  std::int64_t n,
-                 T_scalar alpha,
+                 Ts alpha,
                  sycl::buffer<T,1> &x,
                  std::int64_t incx)
    }
@@ -132,7 +136,7 @@ scal (USM Version)
    namespace oneapi::mkl::blas::column_major {
        sycl::event scal(sycl::queue &queue,
                         std::int64_t n,
-                        T_scalar alpha,
+                        Ts alpha,
                         T *x,
                         std::int64_t incx,
                         const std::vector<sycl::event> &dependencies = {})
@@ -142,7 +146,7 @@ scal (USM Version)
    namespace oneapi::mkl::blas::row_major {
        sycl::event scal(sycl::queue &queue,
                         std::int64_t n,
-                        T_scalar alpha,
+                        Ts alpha,
                         T *x,
                         std::int64_t incx,
                         const std::vector<sycl::event> &dependencies = {})

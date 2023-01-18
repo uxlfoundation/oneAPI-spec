@@ -290,3 +290,27 @@ mfxExtAllocationHints
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxRefInterface
+---------------
+.. doxygenstruct:: mfxRefInterface
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtMasteringDisplayColourVolume
+----------------------------------
+
+.. doxygenstruct:: mfxExtMasteringDisplayColourVolume
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+
+mfxExtContentLightLevelInfo
+---------------------------
+
+.. doxygenstruct:: mfxExtContentLightLevelInfo
+   :project: oneVPL
+   :members:
+   :protected-members:
