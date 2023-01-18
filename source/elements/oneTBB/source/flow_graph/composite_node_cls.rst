@@ -121,11 +121,11 @@ Member functions
 
 .. cpp:function:: input_ports_type& input_ports()
 
-    **Returns**: A ``std::tuple`` of ``receivers``. Each element is a
-    reference to the actual node or input port that was aliased to
-    that position in ``set_external_ports()``.
+   **Returns**: A ``std::tuple`` of ``receivers``. Each element is a
+   reference to the actual node or input port that was aliased to
+   that position in ``set_external_ports()``.
 
-  .. caution::
+   .. caution::
 
     Calling ``input_ports()`` without a prior call to ``set_external_ports()``
     results in undefined behavior.

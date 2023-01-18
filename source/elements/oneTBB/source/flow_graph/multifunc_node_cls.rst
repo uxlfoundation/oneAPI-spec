@@ -72,11 +72,7 @@ Member types
 Member functions
 ----------------
 
-.. code:: cpp
-
-    template<typename Body>
-    multifunction_node( graph &g, size_t concurrency, Body body,
-                        node_priority_t priority = no_priority );
+.. cpp:function:: template<typename Body> multifunction_node( graph &g, size_t concurrency, Body body, node_priority_t priority = no_priority );
 
 Constructs a ``multifunction_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
 to ``body`` can be made concurrently.
@@ -85,11 +81,9 @@ Use this function to specify :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
+.. cpp:function:: template<typename Body> multifunction_node( graph &g, size_t concurrency, Body body, Policy = Policy(), node_priority_t priority = no_priority );
 
-    template<typename Body>
-    multifunction_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(),
-                        node_priority_t priority = no_priority );
+Where ``Policy`` is unspecified.
 
 Constructs a ``multifunction_node`` that invokes a copy of ``body``. Most ``concurrency`` calls
 to ``body`` can be made concurrently.
@@ -98,9 +92,7 @@ Use this function to specify a :doc:`policy<functional_node_policies>` and :doc:
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    multifunction_node( const multifunction_node &src )
+.. cpp:function:: multifunction_node( const multifunction_node &src )
 
 Constructs a ``multifunction_node`` that has the same initial
 state that ``other`` had when it was constructed. The
@@ -117,9 +109,7 @@ construction of ``other`` do not affect the body of the new
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_put( const input_type &v )
+.. cpp:function:: bool try_put( const input_type &v )
 
 If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
 Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
@@ -129,8 +119,6 @@ it.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    output_ports_type& output_ports();
+.. cpp:function:: output_ports_type& output_ports();
 
 **Returns:** a ``std::tuple`` of output ports.

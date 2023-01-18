@@ -76,11 +76,7 @@ used to obtain an updated copy.
 Member functions
 -----------------
 
-.. code:: cpp
-
-    template<typename Body>
-    continue_node( graph &g, Body body, node_priority_t priority = no_priority );
-
+.. cpp:function:: template<typename Body> continue_node( graph &g, Body body, node_priority_t priority = no_priority );
 
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to 0.
 
@@ -113,11 +109,9 @@ This function specifies :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
+.. cpp:function:: template<typename Body> continue_node( graph &g, int number_of_predecessors, Body body, Policy = Policy(), node_priority_t priority = no_priority );
 
-    template<typename Body>
-    continue_node( graph &g, int number_of_predecessors, Body body,
-                   Policy /*unspecified*/ = Policy(), node_priority_t priority = no_priority );
+Where ``Policy`` is unspecified.
 
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
 ``number_of_predecessors``.
@@ -126,19 +120,14 @@ This function specifies :doc:`lightweight policy<functional_node_policies>` and 
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    template<typename Body>
-    continue_node( graph &g, int number_of_predecessors, Body body );
+.. cpp:function:: template<typename Body> continue_node( graph &g, int number_of_predecessors, Body body );
 
 Constructs a ``continue_node`` that invokes ``body``. The internal threshold is set to
 ``number_of_predecessors``.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    continue_node( const continue_node &src )
+.. cpp:function:: continue_node( const continue_node &src )
 
 Constructs a ``continue_node`` that has the same initial state that ``src`` had after its
 construction. It does not copy the current count of ``try_puts`` received, or the current
@@ -152,9 +141,7 @@ at its construction.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_put( const Input &v )
+.. cpp:function:: bool try_put( const Input &v )
 
 Increments the count of ``try_put()`` calls received. If the incremented count is equal to the
 number of known predecessors, performs the ``body`` function object execution. It does not wait
@@ -164,9 +151,7 @@ for the execution of the body to complete.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_get( Output &v )
+.. cpp:function:: bool try_get( Output &v )
 
 **Returns**: ``false``
 

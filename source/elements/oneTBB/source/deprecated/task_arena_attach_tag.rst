@@ -7,9 +7,8 @@ task_arena::attach
 ==================
 **[deprecated.task_arena_attach_tag]**
 
-    .. caution::
-
-        Deprecated in oneTBB Specification 1.1.
+.. caution::
+   Deprecated in oneTBB Specification 1.1.
 
 A set of methods for constructing a ``task_arena`` with ``attach``.
 

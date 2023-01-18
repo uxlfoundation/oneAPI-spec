@@ -65,11 +65,7 @@ inspected from outside of the node, the :doc:`copy_body <copy_body_func>` functi
 Member functions
 ----------------
 
-.. code:: cpp
-
-    template<typename Body>
-    function_node( graph &g, size_t concurrency, Body body,
-                   node_priority_t priority = no_priority );
+.. cpp:function:: template<typename Body> function_node( graph &g, size_t concurrency, Body body, node_priority_t priority = no_priority );
 
 Constructs a ``function_node`` that invokes a copy of ``body``. Most of ``concurrency`` calls
 to ``body`` can be made concurrently.
@@ -78,11 +74,9 @@ Use this function to specify :doc:`node priority<node_priorities>`.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
+.. cpp:function:: template<typename Body> function_node( graph &g, size_t concurrency, Body body, Policy = Policy(), node_priority_t priority = no_priority );
 
-    template<typename Body>
-    function_node( graph &g, size_t concurrency, Body body, Policy /*unspecified*/ = Policy(),
-                   node_priority_t priority = no_priority );
+Where ``Policy`` is unspecified.
 
 Constructs a ``function_node`` that invokes a copy of ``body``. Most of ``concurrency`` calls
 to ``body`` can be made concurrently.
@@ -91,9 +85,7 @@ Use this function to specify :doc:`policy<functional_node_policies>` and :doc:`n
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    function_node( const function_node &src )
+.. cpp:function:: function_node( const function_node &src )
 
 Constructs a ``function_node`` that has the same initial state that ``src`` had when it was
 constructed. The ``function_node`` that is constructed has a reference to the same ``graph``
@@ -106,9 +98,7 @@ construction of ``src`` do not affect the body of the new ``function_node.``
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_put( const Input &v )
+.. cpp:function:: bool try_put( const Input &v )
 
 If the concurrency limit allows, executes the user-provided body on the incoming message ``v``.
 Otherwise, depending on the policy of the node, either queues the incoming message ``v`` or rejects
@@ -118,9 +108,7 @@ it.
 
 ----------------------------------------------------------------
 
-.. code:: cpp
-
-    bool try_get( Output &v )
+.. cpp:function:: bool try_get( Output &v )
 
 **Returns:** ``false``
 

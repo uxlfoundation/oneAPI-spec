@@ -13,7 +13,7 @@ that holds key-value pairs with unique keys and supports concurrent insertion, l
 Class Template Synopsis
 -----------------------
 
-   .. code:: cpp
+.. code:: cpp
 
       // Defined in header <oneapi/tbb/concurrent_hash_map.h>
 
