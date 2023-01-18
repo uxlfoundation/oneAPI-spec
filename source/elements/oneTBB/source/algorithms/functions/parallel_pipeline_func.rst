@@ -84,7 +84,7 @@ by [ *first* , *last* ).
                 [](float* p){return (*p)*(*p);} 
             ) &
             make_filter<float,void>(
-                filter::serial_in_order,
+                filter_mode::serial_in_order,
                 [&](float x) {sum+=x;}
             )
         );
