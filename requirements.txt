@@ -6,7 +6,6 @@
 #  versions
 
 breathe
-git+https://github.com/fsfe/reuse-tool.git
 pre-commit
 six
 Sphinx
