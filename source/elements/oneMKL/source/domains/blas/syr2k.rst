@@ -103,7 +103,7 @@ syr2k (Buffer Version)
       The queue where the routine should be executed.
 
    upper_lower
-      Specifies whether ``A``'s data is stored in its upper or lower
+      Specifies whether ``C``'s data is stored in its upper or lower
       triangle. See :ref:`onemkl_datatypes` for more details.
 
    trans
@@ -290,7 +290,7 @@ syr2k (USM Version)
       The queue where the routine should be executed.
 
    upper_lower
-      Specifies whether ``A``'s data is stored in its upper or lower
+      Specifies whether ``C``'s data is stored in its upper or lower
       triangle. See :ref:`onemkl_datatypes` for more details.
 
    trans
