@@ -13,7 +13,8 @@ Matrix Storage
 
    The oneMKL BLAS and LAPACK routines for DPC++ use several matrix and
    vector storage formats. These are the same formats used in
-   traditional Fortran BLAS/LAPACK.
+   traditional Fortran BLAS/LAPACK. LAPACK routines support and require
+   column major layout.
 
    .. container:: section
 
