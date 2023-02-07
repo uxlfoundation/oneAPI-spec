@@ -6,7 +6,8 @@
 #  versions
 
 breathe
-pre-commit
+graphviz
+lxml
 six
 Sphinx
 sphinx-notfound-page
@@ -14,9 +15,7 @@ sphinx-book-theme
 sphinx-prompt
 sphinx_substitution_extensions
 sphinx_tabs
+sphinxcontrib.plantuml
 sphinxcontrib-spelling
 sphinxcontrib-svg2pdfconverter
 sphinxmark
-graphviz
-lxml
-sphinxcontrib.plantuml

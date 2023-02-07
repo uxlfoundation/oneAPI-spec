@@ -9,7 +9,18 @@ on:
   pull_request:
 
 jobs:
-  ci:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    - name: Checks
+      uses: pre-commit/action@v3.0.0
+
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -17,18 +28,15 @@ jobs:
       run: |
         sudo apt update -qq
         xargs -a ubuntu-packages.txt sudo apt install -qq
+        curl -s https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz -o /tmp/dox.tgz
+        sudo tar zxf /tmp/dox.tgz -C /usr/local
+        sudo ln -s /usr/local/doxygen*/bin/* /usr/bin
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
         cache: 'pip'
     - name: Install python prerequisites
       run: pip install --quiet -r requirements.txt
-    - name: Checks
-      run: |
-        pre-commit run --all
-        mkdir -p build/reuse
-        # ignore fail for reuse
-        reuse lint > build/reuse/lint.txt || true
     - name: Build html
       env:
         ONEAPI_DRAFT: true
@@ -39,27 +47,34 @@ jobs:
         ONEAPI_DRAFT: true
       run: |
         python scripts/oneapi.py -W latexpdf
-    #- name: Archive build directory
-    #  uses: actions/upload-artifact@v3
-    #  with:
-    #    name: build
-    #    path: build
+    - name: Build website
+      run: |
+        mkdir -p site/spec
+        touch site/.nojekyll
+        cp -r build/html/* site/spec
+        cp build/latex/*.pdf site/spec
+    - name: Archive site
+      uses: actions/upload-artifact@v3
+      with:
+        name: site
+        path: site
+
+  publish_site:
+    if: ${{ github.ref == 'refs/heads/main' }}
     - name: Checkout gh-pages
-      if: ${{ github.ref == 'refs/heads/main' }}
       uses: actions/checkout@v3
       with:
         ref: gh-pages
+        path: gh-pages
+    - name: Retrieve site
+      uses: actions/checkout@v3
+      with:
+        name: site
         path: gh-pages
     - name: Publish to github pages
       if: ${{ github.ref == 'refs/heads/main' }}
       run: |
         cd gh-pages
-        touch .nojekyll
-        rm -rf spec
-        mkdir spec
-        cd spec
-        cp -r ../../build/html/* .
-        cp ../../build/latex/*.pdf .
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
