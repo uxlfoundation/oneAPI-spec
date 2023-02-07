@@ -8,7 +8,7 @@ LAPACK Routines
 +++++++++++++++
 
 oneMKL provides a DPC++ interface to select routines from the Linear Algebra PACKage (LAPACK), as well as several LAPACK-like extension routines.
-LAPACK routines support and require column major layout of matrices.
+LAPACK routines require column major layout of matrices.
 
 .. include:: lapack-linear-equation-routines.inc.rst
 .. include:: lapack-singular-value-eigenvalue-routines.inc.rst
