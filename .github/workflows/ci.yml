@@ -60,6 +60,7 @@ jobs:
         path: site
 
   publish_site:
+    needs: [checks, build]
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
@@ -69,12 +70,11 @@ jobs:
         ref: gh-pages
         path: gh-pages
     - name: Retrieve site
-      uses: actions/checkout@v3
+      uses: actions/download-artifact@v3
       with:
         name: site
         path: gh-pages
     - name: Publish to github pages
-      if: ${{ github.ref == 'refs/heads/main' }}
       run: |
         cd gh-pages
         git config user.name github-actions
