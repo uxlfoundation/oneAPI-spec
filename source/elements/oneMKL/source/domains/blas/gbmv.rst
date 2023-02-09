@@ -135,7 +135,7 @@ gbmv (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    beta
       Scaling factor for vector ``y``.
@@ -273,7 +273,7 @@ gbmv (USM Version)
       :ref:`matrix-storage` for more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    beta
       Scaling factor for vector ``y``.

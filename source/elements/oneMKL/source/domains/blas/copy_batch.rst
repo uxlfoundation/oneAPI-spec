@@ -98,19 +98,19 @@ where:
       Buffer holding input vectors ``X`` with size ``stridex`` * ``batch_size``.
 
    incx 
-      Stride of vector ``X``.
+      Stride of vector ``X``. Must not be zero.
 
    stridex 
-      Stride between different ``X`` vectors.
+      Stride between different ``X`` vectors. Must be at least zero.
 
    y
       Buffer holding input/output vectors ``Y`` with size ``stridey`` * ``batch_size``.
 
    incy 
-      Stride of vector ``Y``.
+      Stride of vector ``Y``. Must not be zero.
    
    stridey 
-      Stride between different ``Y`` vectors.
+      Stride between different ``Y`` vectors. Must be at least (1 + (``n``-1)*abs(``incy``)).
 
    batch_size 
       Specifies the number of ``copy`` operations to perform.
@@ -233,7 +233,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
       See :ref:`matrix-storage` for more details.
 
    incx
-      Array of ``group_count`` integers. ``incx[i]`` specifies the stride of vector ``X`` in group ``i``.
+      Array of ``group_count`` integers. ``incx[i]`` specifies the stride of vector ``X`` in group ``i``. Must not be zero.
  
    y
       Array of pointers to input/output vectors ``Y`` with size ``total_batch_count``.
@@ -241,7 +241,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
       See :ref:`matrix-storage` for more details.
 
    incy
-      Array of ``group_count`` integers. ``incy[i]`` specifies the stride of vector ``Y`` in group ``i``.
+      Array of ``group_count`` integers. ``incy[i]`` specifies the stride of vector ``Y`` in group ``i``. Must not be zero.
 
    group_count
       Number of groups. Must be at least 0.
@@ -314,19 +314,19 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
       Pointer to input vectors ``X`` with size ``stridex`` * ``batch_size``.
 
    incx 
-      Stride of vector ``X``.
+      Stride of vector ``X``. Must not be zero.
    
    stridex 
-      Stride between different ``X`` vectors.
+      Stride between different ``X`` vectors. Must be at least zero.
 
    y
       Pointer to input/output vectors ``Y`` with size ``stridey`` * ``batch_size``.
 
    incy 
-      Stride of vector ``Y``.
+      Stride of vector ``Y``. Must not be zero.
    
    stridey 
-      Stride between different ``Y`` vectors.
+      Stride between different ``Y`` vectors. Must be at least (1 + (``n``-1)*abs(``incy``)).
 
    batch_size 
       Specifies the number of ``copy`` operations to perform.

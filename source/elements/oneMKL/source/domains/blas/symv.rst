@@ -107,7 +107,7 @@ symv (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    y
       Buffer holding input/output vector ``y``. The buffer must be of
@@ -115,7 +115,7 @@ symv (Buffer Version)
       for more details.
 
    incy
-      Stride of vector ``y``.
+      Stride of vector ``y``. Must not be zero.
 
 .. container:: section
 
@@ -217,7 +217,7 @@ symv (USM Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    y
       Pointer to input/output vector ``y``. The array holding
@@ -226,7 +226,7 @@ symv (USM Version)
       more details.
 
    incy
-      Stride of vector ``y``.
+      Stride of vector ``y``. Must not be zero.
 
    dependencies
       List of events to wait for before starting computation, if any.

@@ -115,7 +115,7 @@ tbmv (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
 .. container:: section
 
@@ -223,7 +223,7 @@ tbmv (USM Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    dependencies
       List of events to wait for before starting computation, if any.

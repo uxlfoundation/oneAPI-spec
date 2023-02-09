@@ -96,7 +96,7 @@ syr2 (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    y
       Buffer holding input/output vector ``y``. The buffer must be of
@@ -104,7 +104,7 @@ syr2 (Buffer Version)
       for more details.
 
    incy
-      Stride of vector ``y``.
+      Stride of vector ``y``. Must not be zero.
 
    a
       Buffer holding input matrix ``A``. Must have size at least
@@ -207,7 +207,7 @@ syr2 (USM Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    y
       Pointer to input/output vector ``y``. The array holding
@@ -216,7 +216,7 @@ syr2 (USM Version)
       more details.
 
    incy
-      Stride of vector ``y``.
+      Stride of vector ``y``. Must not be zero.
 
    a
       Pointer to input matrix ``A``. The array holding input matrix
