@@ -240,7 +240,7 @@ of an unspecified type that satisfies the following requirements:
 When invoking an algorithm, the buffer passed to ``begin`` should be the same
 as the buffer passed to ``end``. Otherwise, the behavior is undefined.
 
-``sycl::mode_tag_t`` and ``sycl::property::noinit`` parameters allow to specify
+SYCL deduction tags and ``sycl::no_init`` property allow to specify
 an access mode to be used for accessing the buffer by algorithms.
 The mode serves as a hint, and can be overridden depending on semantics of the algorithm.
 When invoking an algorithm, the same access mode arguments should be used
@@ -251,9 +251,9 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
       using namespace oneapi;
       auto buf_begin = dpl::begin(buf, sycl::write_only);
       auto buf_end_1 = dpl::end(buf, sycl::write_only);
-      auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::noinit);
-      dpl::fill(dpl::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
-      dpl::fill(dpl::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
+      auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init);
+      dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
+      dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
 
 Iterators
 +++++++++
