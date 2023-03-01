@@ -7,7 +7,7 @@ graph
 =====
 **[flow_graph.graph]**
 
-Class that serves as a handle to a flow graph of nodes and edges.
+Class that serves as a handle to a flow graph of nodes and edges. The user must ensure that the graph object’s lifetime exceeds the lifetimes of all nodes added to the graph and any activity associated with the graph.
 
 .. code:: cpp
 
