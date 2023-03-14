@@ -37,6 +37,8 @@ where:
       * -  T 
       * -  ``float`` 
       * -  ``double`` 
+      * -  ``std::complex<float>`` 
+      * -  ``std::complex<double>`` 
 
 .. _onemkl_blas_syr_buffer:
 
