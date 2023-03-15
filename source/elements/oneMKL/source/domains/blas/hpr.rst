@@ -112,7 +112,7 @@ hpr (Buffer Version)
       triangular part of the Hermitian matrix ``A`` if
       ``upper_lower``\ \=\ ``lower``.
 
-      The imaginary parts of the diagonal elements are set to zero.
+      If ``alpha`` is zero, ``A`` matrix is unchanged, otherwise imaginary parts of the diagonal elements are set to zero.
 
 .. container:: section
 
@@ -215,7 +215,7 @@ hpr (USM Version)
       triangular part of the Hermitian matrix ``A`` if
       ``upper_lower``\ \=\ ``lower``.
 
-      The imaginary parts of the diagonal elements are set to zero.
+      If ``alpha`` is zero, ``A`` matrix is unchanged, otherwise imaginary parts of the diagonal elements are set to zero.
 
 .. container:: section
 

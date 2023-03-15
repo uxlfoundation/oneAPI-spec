@@ -124,7 +124,7 @@ her2 (Buffer Version)
       lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower``\ \=\ ``lower``.
 
-      The imaginary parts of the diagonal elements are set to zero.
+      If ``alpha`` is zero, ``A`` matrix is unchanged, otherwise imaginary parts of the diagonal elements are set to zero.
 
 .. container:: section
 
@@ -242,7 +242,7 @@ her2 (USM Version)
       lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower``\ \=\ ``lower``.
 
-      The imaginary parts of the diagonal elements are set to zero.
+      If ``alpha`` is zero, ``A`` matrix is unchanged, otherwise imaginary parts of the diagonal elements are set to zero.
 
 .. container:: section
 
