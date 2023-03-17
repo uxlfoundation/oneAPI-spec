@@ -109,7 +109,7 @@ trsv (Buffer Version)
       See :ref:`matrix-storage` for more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
 .. container:: section
 
@@ -211,7 +211,7 @@ trsv (USM Version)
       :ref:`matrix-storage` for more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    dependencies
       List of events to wait for before starting computation, if any.

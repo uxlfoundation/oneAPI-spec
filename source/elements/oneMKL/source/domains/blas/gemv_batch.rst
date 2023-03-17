@@ -134,13 +134,13 @@ parameter.
       ``n`` if row major layout is used.
 
    stridea
-      Stride between different ``A`` matrices.
+      Stride between different ``A`` matrices. Must be at least zero.
 
    x
       Buffer holding the input vectors ``X`` with size ``stridex`` * ``batch_size``.
 
    incx
-      The stride of the vector ``X``. It must be positive.
+      The stride of the vector ``X``.  Must not be zero.
 
    stridex
       Stride between different consecutive ``X`` vectors, must be at least 0.
@@ -152,12 +152,10 @@ parameter.
       Buffer holding input/output vectors ``Y`` with size ``stridey`` * ``batch_size``.
 
    incy
-      Stride between two consecutive elements of the ``y`` vectors.
+      Stride between two consecutive elements of the ``Y`` vectors. Must not be zero.
 
    stridey
-      Stride between two consecutive ``Y`` vectors. Must be at least
-      (1 + (len-1)*abs(incy)) where ``len`` is ``m`` if the matrix ``A``
-      is non transpose or ``n`` otherwise.
+      Stride between two consecutive ``Y`` vectors. Must be at least (1 + (``m`` - 1)*abs(``incy``)) if layout is column major or (1 + (``n`` - 1)*abs(``incy``)) if row major layout is used.
 
    batch_size
       Specifies the number of matrix-vector operations to perform.
@@ -328,8 +326,8 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    incx
       Array of ``group_count`` integers. ``incx[i]`` specifies the
-      stride of ``X`` for every vector in group ``i``. All
-      entries must be positive.
+      stride of ``X`` for every vector in group ``i``. Must not
+      be zero.
              
    beta
       Array of ``group_count`` scalar elements. ``beta[i]`` specifies
@@ -343,10 +341,8 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    incy
       Array of ``group_count`` integers. ``incy[i]`` specifies the
-      leading dimension of ``Y`` for every vector in group ``i``.  All
-      entries must be positive and ``incy[i]`` must be at least
-      ``m[i]`` if column major layout is used or at
-      least ``n[i]`` if row major layout is used.
+      leading dimension of ``Y`` for every vector in group ``i``. Must
+      not be zero.
 
    group_count
       Specifies the number of groups. Must be at least 0.
@@ -450,13 +446,13 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       ``n`` if row major layout is used.
 
    stridea
-      Stride between different ``A`` matrices.
+      Stride between different ``A`` matrices. Must be at least zero.
 
    x
       Pointer to the input vectors ``X`` with size ``stridex`` * ``batch_size``.
 
    incx
-      Stride of the vector ``X``. It must be positive.
+      Stride of the vector ``X``. Must not be zero.
 
    stridex
       Stride between different consecutive ``X`` vectors, must be at least 0.
@@ -468,12 +464,10 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       Pointer to the input/output vectors ``Y`` with size ``stridey`` * ``batch_size``.
 
    incy
-      Stride between two consecutive elements of the ``y`` vectors.
+      Stride between two consecutive elements of the ``y`` vectors. Must not be zero.
 
    stridey
-      Stride between two consecutive ``Y`` vectors. Must be at least
-      (1 + (len-1)*abs(incy)) where ``len`` is ``m`` if the matrix ``A``
-      is non transpose or ``n`` otherwise.
+      Stride between two consecutive ``Y`` vectors. Must be at least (1 + (``m`` - 1)*abs(``incy``)) if layout is column major or (1 + (``n`` - 1)*abs(``incy``)) if row major layout is used.
 
    batch_size
       Specifies the number of matrix-vector operations to perform.
