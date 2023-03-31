@@ -27,3 +27,9 @@ mfxImplType
 
 .. doxygenenum:: mfxImplType
    :project: oneVPL
+
+mfxAutoSelectImplType
+---------------------
+
+.. doxygenenum:: mfxAutoSelectImplType
+   :project: oneVPL

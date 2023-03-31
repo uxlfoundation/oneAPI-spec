@@ -398,3 +398,29 @@ MFXVideoVPP_Init(session, &VPPParams);
 #endif
 /*end9*/
 }
+
+static void run_your_GPU_kernel(mfxFrameSurface1 *surface)
+{
+    UNUSED_PARAM(surface);
+    return;
+}
+
+static void prg_vpp10() {
+/*beg10*/
+#ifdef ONEVPL_EXPERIMENTAL
+mfxExtSyncSubmission syncSubmit = {};
+syncSubmit.Header.BufferId      = MFX_EXTBUFF_SYNCSUBMISSION;
+syncSubmit.Header.BufferSz      = sizeof(mfxExtSyncSubmission);
+
+mfxFrameSurface1 in;
+mfxFrameSurface1 out;
+out.Data.ExtParam = (mfxExtBuffer **)&syncSubmit;
+out.Data.NumExtParam=1;
+sts=MFXVideoVPP_RunFrameVPPAsync(session,&in,&out,NULL,&syncp);
+if (MFX_ERR_NONE == sts) {
+    MFXVideoCORE_SyncOperation(session, *syncSubmit.SubmissionSyncPoint, INFINITE);
+    run_your_GPU_kernel(&out);
+}
+#endif
+/*end10*/
+}
