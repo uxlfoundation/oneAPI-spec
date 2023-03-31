@@ -1119,6 +1119,15 @@ extended buffers or video processing algorithm identifiers.
 .. doxygenenumvalue:: MFX_EXTBUFF_ENCODESTATS
    :project: oneVPL
 
+.. doxygenenumvalue:: MFX_EXTBUFF_SYNCSUBMISSION
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_TUNE_ENCODE_QUALITY
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_EXTBUFF_VPP_PERC_ENC_PREFILTER
+   :project: oneVPL
+
 ----------------
 ExtMemBufferType
 ----------------
@@ -1894,87 +1903,6 @@ The PicType enumerator itemizes picture type.
 .. doxygenenumvalue:: MFX_PICTYPE_BOTTOMFIELD
    :project: oneVPL
 
-----------------
-PlatformCodeName
-----------------
-
-.. doxygenenumvalue:: MFX_PLATFORM_UNKNOWN
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_SANDYBRIDGE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_IVYBRIDGE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_HASWELL
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_BAYTRAIL
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_BROADWELL
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_CHERRYTRAIL
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_SKYLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_APOLLOLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_KABYLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_GEMINILAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_COFFEELAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_CANNONLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_ICELAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_JASPERLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_ELKHARTLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_TIGERLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_ROCKETLAKE
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_S 
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_P 
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_ALDERLAKE_N 
-   :project: oneVPL
-
-.. doxygenenumvalue:: MFX_PLATFORM_XEHP_SDV
-    :project: oneVPL   
-
-.. doxygenenumvalue:: MFX_PLATFORM_DG2
-    :project: oneVPL   
-
-.. doxygenenumvalue:: MFX_PLATFORM_ATS_M
-    :project: oneVPL   
-
-.. doxygenenumvalue:: MFX_PLATFORM_KEEMBAY
-   :project: oneVPL
-
-    
-
 --------
 PRefType
 --------
@@ -1989,6 +1917,31 @@ management when GopRefDist=1.
    :project: oneVPL
 
 .. doxygenenumvalue:: MFX_P_REF_PYRAMID
+   :project: oneVPL
+
+-----------
+TuneQuality
+-----------
+
+The TuneQuality enumerator specifies tuning option for encode. Multiple tuning options 
+can be combined using bit mask.
+
+.. doxygenenumvalue:: MFX_ENCODE_TUNE_DEFAULT
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ENCODE_TUNE_PSNR
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ENCODE_TUNE_SSIM
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ENCODE_TUNE_MS_SSIM
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ENCODE_TUNE_VMAF
+   :project: oneVPL
+
+.. doxygenenumvalue:: MFX_ENCODE_TUNE_PERCEPTUAL
    :project: oneVPL
 
 ---------

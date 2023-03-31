@@ -110,6 +110,8 @@ will vary according to the OS.
   #. SDK installation folder.
 
 
+.. _onevpl-dispatcher:
+
 -----------------
 oneVPL Dispatcher
 -----------------
@@ -438,6 +440,10 @@ left to right from column to column and concatenate strings by using `.` (dot) a
       | N/A                                   | | DXGIAdapterIndex         | MFX_VARIANT_TYPE_U32 | Adapter index according   |
       |                                       | |                          |                      | to                        |
       |                                       | |                          |                      | IDXGIFactory::EnumAdapters|
+      +---------------------------------------+----------------------------+----------------------+---------------------------+
+      | N/A                                   | | AutoSelectImpl           | MFX_VARIANT_TYPE_PTR | Pointer to a struct for   |
+      |                                       | |                          |                      | automatic implementation  |
+      |                                       | |                          |                      | :ref:`selection<auto_sel>`|
       +---------------------------------------+----------------------------+----------------------+---------------------------+
 
 .. important:: DXGIAdapterIndex property is available for Windows only and filters only hardware implementations.
@@ -818,6 +824,35 @@ This code illustrates VPP mirror filter implementation search procedure:
    :language: c++
    :start-after: /*beg4*/
    :end-before: /*end4*/
+   :lineno-start: 1
+
+.. _auto_sel:
+
+-------------------------------------------------------------
+How To Select Implementation Automatically From Device Handle
+-------------------------------------------------------------
+
+Starting from API 2.9 applications may request the dispatcher to load an implementation
+corresponding to a hardware acceleration device which has already been initialized
+by the application. The application must initialize a structure of type
+:cpp:struct:`mfxAutoSelectImplDeviceHandle` with the appropriate acceleration mode, 
+handle type, and hardware device handle. Then this structure must be passed to the
+dispatcher by calling :cpp:func:`MFXSetConfigFilterProperty` with property name
+'AutoSelectImpl' and property value of type MFX_VARIANT_TYPE_PTR, pointing to the
+:cpp:struct:`mfxAutoSelectImplDeviceHandle` structure.
+
+This is currently an experimental API. Backward compatibility and future presence is
+not guaranteed. Applications should check the error codes returned from
+:cpp:func:`MFXSetConfigFilterProperty` and :cpp:func:`MFXCreateSession` to check
+whether the feature is supported and a suitable implementation was found.
+
+This code illustrates automatic implementation selection using an application-provided
+hardware device handle:
+
+.. literalinclude:: ../snippets/prg_disp.c
+   :language: c++
+   :start-after: /*beg5*/
+   :end-before: /*end5*/
    :lineno-start: 1
 
 -------------------------------------------------------------

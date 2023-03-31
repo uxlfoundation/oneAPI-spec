@@ -4,12 +4,14 @@
 
 # additional entries for oneVPL
 AllocationPolicy
+AutoSelectImpl
 altref
 BitDepthChroma
 BitDepthLuma
 Bitfield
 bitrates
 BitstreamParam
+candela
 cbr
 ChannelId
 ChromaFormat
@@ -40,6 +42,7 @@ DLutVideoBuffer
 doesn
 Downscaling
 dri
+extDeviceUUID
 FeatureEnabled
 FFFFFFF
 FilmGrainParam
@@ -60,6 +63,7 @@ IDR
 Ign
 Impl
 impls
+isn
 itu
 Kbps
 Keem
@@ -75,6 +79,8 @@ mfxAccelerationMode
 mfxAccelerationModeDescription
 mfxAdapterInfo
 mfxAdaptersInfo
+mfxAutoSelectImplType
+mfxAutoSelectImplDeviceHandle
 mfxAV
 mfxBitstream
 mfxBRCFrameCtrl
@@ -179,9 +185,11 @@ mfxExtPartialBitstreamParam
 mfxExtPictureTimingSEI
 mfxExtPredWeightTable
 mfxExtRefListCtrl
+mfxExtSyncSubmission
 mfxExtTemporalLayers
 mfxExtThreadsParam
 mfxExtTimeCode
+mfxExtTuneEncodeQuality
 mfxExtVideoSignalInfo
 mfxExtVP
 mfxExtVPP
@@ -198,6 +206,7 @@ mfxExtVPPFrameRateConversion
 mfxExtVPPImageStab
 mfxExtVppMctf
 mfxExtVPPMirroring
+mfxExtVPPPercEncPrefilter
 mfxExtVPPProcAmp
 mfxExtVPPRotation
 mfxExtVPPScaling
@@ -264,6 +273,7 @@ nLx
 nRepack
 nRx
 NumBit
+NumSubDevices
 NumUnitsEncoded
 Nx
 NxN
@@ -272,6 +282,7 @@ NxnT
 OR'ed
 piecewise
 pred
+prefilter
 Qm
 QP
 quantizer
@@ -290,11 +301,13 @@ SkipFrame
 structs
 subblock
 subblocks
+syncpoint
 TargetUsage
 TemporalLayer
 TemporalLayers
 TileParam
 tri
+TuneQuality
 Typedefs
 utf
 vaCreateSurfaces
