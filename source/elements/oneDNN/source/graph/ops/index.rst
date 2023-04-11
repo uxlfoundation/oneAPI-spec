@@ -40,6 +40,8 @@ subset of the operation set.
    Exp.rst
    GELU.rst
    GELUBackward.rst
+   HardSigmoid.rst
+   HardSigmoidBackward.rst
    HardSwish.rst
    HardSwishBackward.rst
    Interpolate.rst
