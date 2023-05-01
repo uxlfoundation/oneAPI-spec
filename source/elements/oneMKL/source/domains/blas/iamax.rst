@@ -18,8 +18,8 @@ has the maximum absolute value of all elements in vector ``x`` (real
 variants), or such that (\|Re(``x[i]``)\| + \|Im(``x[i]``)\|) is maximal
 (complex variants).
 
-The index is zero-based if ``base`` is set to ``index_base::zero`` (default)
-or one-based if it is set to ``index_base::one``.
+The index is zero-based if ``base`` is set to ``oneapi::mkl::index_base::zero`` (default)
+or one-based if it is set to ``oneapi::mkl::index_base::one``.
 
 If either ``n`` or ``incx`` is not positive, the routine returns
 ``0``, regardless of the base of the index selected.
@@ -56,7 +56,7 @@ iamax (Buffer Version)
                   sycl::buffer<T,1> &x,
                   std::int64_t incx,
                   sycl::buffer<std::int64_t,1> &result,
-                  index_base base = index_base::zero)
+                  oneapi::mkl::index_base base = oneapi::mkl::index_base::zero)
    }
 .. code-block:: cpp
 
@@ -66,7 +66,7 @@ iamax (Buffer Version)
                   sycl::buffer<T,1> &x,
                   std::int64_t incx,
                   sycl::buffer<std::int64_t,1> &result,
-                  index_base base = index_base::zero)
+                  oneapi::mkl::index_base base = oneapi::mkl::index_base::zero)
    }
 
 .. container:: section
@@ -135,6 +135,7 @@ iamax (USM Version)
                          const T *x,
                          std::int64_t incx,
                          std::int64_t *result,
+                         oneapi::mkl::index_base base = oneapi::mkl::index_base::zero,
                          const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -145,6 +146,7 @@ iamax (USM Version)
                          const T *x,
                          std::int64_t incx,
                          std::int64_t *result,
+                         oneapi::mkl::index_base base = oneapi::mkl::index_base::zero,
                          const std::vector<sycl::event> &dependencies = {})
    }
 
