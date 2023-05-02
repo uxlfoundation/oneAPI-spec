@@ -18,8 +18,11 @@ has the maximum absolute value of all elements in vector ``x`` (real
 variants), or such that (\|Re(``x[i]``)\| + \|Im(``x[i]``)\|) is maximal
 (complex variants).
 
-If either ``n`` or ``incx`` are not positive, the routine returns
-``0``.
+The index is zero-based if ``base`` is set to ``oneapi::mkl::index_base::zero`` (default)
+or one-based if it is set to ``oneapi::mkl::index_base::one``.
+
+If either ``n`` or ``incx`` is not positive, the routine returns
+``0``, regardless of the base of the index selected.
 
 If more than one vector element is found with the same largest
 absolute value, the index of the first one encountered is returned.
@@ -38,13 +41,6 @@ index of the first ``NaN``.
       * -  ``std::complex<float>`` 
       * -  ``std:complex<double>`` 
 
-.. container:: Note
-
-   .. rubric:: Note
-      :class: NoteTipHead
-
-   The index is zero-based.
-
 .. _onemkl_blas_iamax_buffer:
 
 iamax (Buffer Version)
@@ -59,7 +55,8 @@ iamax (Buffer Version)
                   std::int64_t n,
                   sycl::buffer<T,1> &x,
                   std::int64_t incx,
-                  sycl::buffer<std::int64_t,1> &result)
+                  sycl::buffer<std::int64_t,1> &result,
+                  oneapi::mkl::index_base base = oneapi::mkl::index_base::zero)
    }
 .. code-block:: cpp
 
@@ -68,7 +65,8 @@ iamax (Buffer Version)
                   std::int64_t n,
                   sycl::buffer<T,1> &x,
                   std::int64_t incx,
-                  sycl::buffer<std::int64_t,1> &result)
+                  sycl::buffer<std::int64_t,1> &result,
+                  oneapi::mkl::index_base base = oneapi::mkl::index_base::zero)
    }
 
 .. container:: section
@@ -89,12 +87,16 @@ iamax (Buffer Version)
    incx
       The stride of vector ``x``.
 
+   base
+      Indicates how the output value is indexed. If omitted, defaults to zero-based
+      indexing.
+
 .. container:: section
 
    .. rubric:: Output Parameters
 
    result
-      The buffer where the zero-based index ``i`` of the maximal element
+      The buffer where the index ``i`` of the maximal element
       is stored.
 
 .. container:: section
@@ -133,6 +135,7 @@ iamax (USM Version)
                          const T *x,
                          std::int64_t incx,
                          std::int64_t *result,
+                         oneapi::mkl::index_base base = oneapi::mkl::index_base::zero,
                          const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -143,6 +146,7 @@ iamax (USM Version)
                          const T *x,
                          std::int64_t incx,
                          std::int64_t *result,
+                         oneapi::mkl::index_base base = oneapi::mkl::index_base::zero,
                          const std::vector<sycl::event> &dependencies = {})
    }
 
@@ -165,6 +169,10 @@ iamax (USM Version)
    incx
       The stride of vector ``x``.
 
+   base
+      Indicates how the output value is indexed. If omitted, defaults to zero-based
+      indexing.
+
    dependencies
       List of events to wait for before starting computation, if any.
       If omitted, defaults to no dependencies.
@@ -174,7 +182,7 @@ iamax (USM Version)
    .. rubric:: Output Parameters
 
    result
-      The pointer to where the zero-based index ``i`` of the maximal
+      The pointer to where the index ``i`` of the maximal
       element is stored.
 
 .. container:: section
