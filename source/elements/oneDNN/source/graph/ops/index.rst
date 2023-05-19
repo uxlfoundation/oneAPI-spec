@@ -75,6 +75,7 @@ subset of the operation set.
    ReduceSum.rst
    Reorder.rst
    Round.rst
+   Select.rst
    Sigmoid.rst
    SigmoidBackward.rst
    SoftPlus.rst
