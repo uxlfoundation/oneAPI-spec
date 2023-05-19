@@ -99,10 +99,10 @@ Index Argument Name Required or Optional
 1     ``axes``      Optional
 ===== ============= ====================
 
-@note ``axes`` is an 1-D tensor specifying the axis along which the
-reduction is performed. 1D tensor of unique elements. The range of
-elements is [-r, r-1], where r is the rank of src tensor. Exactly one of
-attribute axes and the second input tensor axes should be available.
+@note ``axes`` is a 1-D tensor specifying the axis along which the reduction is 
+performed. 1D tensor of unique elements. The range of elements is [-r, r-1], 
+where r is the rank of src tensor. Exactly one of attribute axes and the second 
+input tensor axes should be available.
 
 Outputs
 =======
@@ -115,7 +115,7 @@ Index Argument Name Required or Optional
 ===== ============= ====================
 
 @note The result of ReduceMin function applied to src tensor. shape[i] =
-shapeOf(data)[i] for all i that is not in the list of axes from the
+shapeOf[data](i) for all i that is not in the list of axes from the
 second input. For dimensions from axes, shape[i] == 1 if keep_dims ==
 True, or i-th dimension is removed from the dst otherwise.
 
@@ -125,10 +125,10 @@ Supported Data Types
 
 ReduceMin operation supports the following data type combinations.
 
-================== ====
-Source/Destination Axes
-================== ====
-f32                s32
-bf16               s32
-f16                s32
-================== ====
+==== ==== ====
+Src  Dst  Axes
+==== ==== ====
+f32  f32  s32
+bf16 bf16 s32
+f16  f16  s32
+==== ==== ====

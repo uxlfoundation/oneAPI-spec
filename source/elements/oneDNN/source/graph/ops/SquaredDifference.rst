@@ -12,15 +12,15 @@ SquaredDifference operation performs element-wise subtraction operation
 with two given tensors applying multi-directional broadcast rules, after
 that each result of the subtraction is squared.
 
-Before performing arithmetic operation, :math:`src_1` and
-:math:`src_2` are broadcasted if their shapes are different and
+Before performing arithmetic operation, :math:`src_0` and
+:math:`src_1` are broadcasted if their shapes are different and
 ``auto_broadcast`` attributes is not ``none``. Broadcasting is performed
 according to ``auto_broadcast`` value. After broadcasting
 SquaredDifference does the following with the input tensors:
 
 .. math::
     
-    \dst_i = (\src\_1_i - \src\_2_i)^2
+    \dst_i = (\src\_0_i - \src\_1_i)^2
 
 Operation Attributes
 ********************
@@ -50,8 +50,8 @@ Inputs
 ===== ============= ====================
 Index Argument Name Required or Optional
 ===== ============= ====================
-0     ``src_1``     Required
-1     ``src_2``     Required
+0     ``src_0``     Required
+1     ``src_1``     Required
 ===== ============= ====================
 
 Outputs
@@ -71,7 +71,7 @@ SquaredDifference operation supports the following data type
 combinations.
 
 ===== ===== ====
-Src_1 Src_2 Dst
+Src_0 Src_1 Dst
 ===== ===== ====
 f32   f32   f32
 bf16  bf16  bf16
