@@ -36,7 +36,7 @@ Supported functionality:
    - ``ranlux48``
 - Distribution class templates:
    - ``uniform_int_distribution``
-   - ``uniform_real_distribtuon``
+   - ``uniform_real_distribution``
    - ``normal_distribution``
    - ``exponential_distribution``
    - ``bernoulli_distribution``
