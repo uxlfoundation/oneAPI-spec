@@ -1,19 +1,36 @@
-.. SPDX-FileCopyrightText: 2020-2022 Intel Corporation
+.. SPDX-FileCopyrightText: 2023 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
-
 .. include:: ../../replacements.inc.rst
 
 
-Minimum
-#######
+Select
+######
 
-Minimum operation performs element-wise minimum operation with two given
-tensors applying multi-directional broadcast rules.
+Select operation returns a tensor filled with the elements from the second or
+the third input, depending on the condition (the first input) value.
 
 .. math::
+    \dst[i] = cond[i] ? \src\_0[i] : \src\_1[i]
 
-   \dst(\overline{x}) = \min(\src\_0(\overline{x}), \src\_1(\overline{x})) 
+Broadcasting is supported.
+
+If the auto_broadcast attribute is not none, the select operation takes a
+two-step broadcast before performing the selection:
+
+- **Step 1**: Input tensors \src\_0 and \src\_1 are broadcasted to dst_shape
+  according to the Numpy broadcast rules.
+
+- **Step 2**: Then, the cond tensor will be one-way broadcasted to the
+  dst_shape of broadcasted \src\_0 and \src\_1. To be more specific, we align
+  the two shapes to the right and compare them from right to left. Each 
+  dimension should be either equal or the dimension of cond should be 1.
+
+- **example**:
+
+  - cond={4, 5}, dst_shape={2, 3, 4, 5} => dst = {2, 3, 4, 5}
+  - cond={3, 1, 5}, dst_shape={2, 3, 4, 5} => dst = {2, 3, 4, 5}
+  - cond={3,5}, dst_shape={2, 3, 4, 5} => dst = invalid_shape
 
 Operation Attributes
 ********************
@@ -30,6 +47,7 @@ Operation Attributes
 |                   | tensors           |            |            |             |
 +-------------------+-------------------+------------+------------+-------------+
 
+
 Execution Arguments
 *******************
 
@@ -43,15 +61,15 @@ Inputs
 ===== ============= ====================
 Index Argument Name Required or Optional
 ===== ============= ====================
-0     ``src_0``     Required
-1     ``src_1``     Required
+0     ``cond``      Required
+1     ``src_0``     Required
+2     ``src_1``     Required
 ===== ============= ====================
 
-@note Both src shapes should match and no auto-broadcasting is allowed
-if ``auto_broadcast`` attributes is ``none``. ``src_0`` and ``src_1``
-shapes can be different and auto-broadcasting is allowed if
-``auto_broadcast`` attributes is ``numpy``. Broadcasting is performed
-according to auto_broadcast value.
+@note All input shapes should match and no broadcasting is allowed if the
+`auto_broadcast` attribute is set to `none`, or can be broadcasted according to 
+the  broadcasting rules mentioned above if `auto_broadcast` attribute set to 
+`numpy`.
 
 Outputs
 =======
@@ -63,16 +81,15 @@ Index Argument Name Required or Optional
 0     ``dst``       Required
 ===== ============= ====================
 
-
 Supported Data Types
 ********************
 
-Minimum operation supports the following data type combinations.
+Select operation supports the following data type combinations.
 
-============= ====
-Src_0 / Src_1 Dst
-============= ====
-f32           f32
-bf16          bf16
-f16           f16
-============= ====
+======= ===== ===== ====
+Cond    Src_0 Src_1 Dst 
+======= ===== ===== ====
+boolean f32   f32   f32
+boolean bf16  bf16  bf16
+boolean f16   f16   f16 
+======= ===== ===== ====

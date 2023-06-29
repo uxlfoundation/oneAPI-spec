@@ -39,6 +39,9 @@ it's suggested to refer to the definition page of each operation.
     
     u8
         8-bit unsigned integer.
+    
+    boolean
+        Boolean data type. Size is C++ implementation defined.
 
 
 oneDNN Graph supports both public layout and |opaque| layout. When the

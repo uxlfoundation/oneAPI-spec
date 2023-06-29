@@ -39,7 +39,7 @@ Inputs
 Index Argument Name Required or Optional
 ===== ============= ====================
 0     ``diff_dst``  Required
-1     ``src``       Required
+1     ``dst``       Required
 ===== ============= ====================
 
 Outputs
@@ -56,13 +56,12 @@ Index Argument Name Required or Optional
 Supported Data Types
 ********************
 
-LogSoftmaxBackward operation supports the following data type
-combinations.
+LogSoftmaxBackward operation supports the following data type combinations.
 
-==== ====
-Src  Dst
-==== ====
-f32  f32
-bf16 bf16
-f16  f16
-==== ====
+======== ==== ========
+Diff_dst Dst  Diff_src
+======== ==== ========
+f32      f32  f32
+bf16     bf16 bf16
+f16      f16  f16
+======== ==== ========
