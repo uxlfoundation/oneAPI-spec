@@ -60,6 +60,7 @@ subset of the operation set.
    Mish.rst
    MishBackward.rst
    Multiply.rst
+   Pow.rst
    PReLU.rst
    PReLUBackward.rst
    Quantize.rst
