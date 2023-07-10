@@ -114,7 +114,7 @@ factors. The function :ref:`onemkl_dft_descriptor_commit` does this work
 after use of the function :ref:`onemkl_dft_descriptor_set_value` to set values 
 of all necessary parameters.
 
-The copy constructor is a deep copy of the constructor.
+The copy constructor performs a deep copy of the descriptor.
 
 .. rubric:: Syntax (one-dimensional transform)
 
