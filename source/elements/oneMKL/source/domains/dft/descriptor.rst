@@ -44,9 +44,9 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
 
           descriptor(descriptor&&);
 
-          descriptor& descriptor::operator=(const descriptor&);
+          descriptor& operator=(const descriptor&);
 
-          descriptor& descriptor::operator=(descriptor&&);
+          descriptor& operator=(descriptor&&);
 
           ~descriptor();
       
@@ -114,7 +114,7 @@ factors. The function :ref:`onemkl_dft_descriptor_commit` does this work
 after use of the function :ref:`onemkl_dft_descriptor_set_value` to set values 
 of all necessary parameters.
 
-The copy constructor copies by value.
+The copy constructor is a deep copy of the constructor.
 
 .. rubric:: Syntax (one-dimensional transform)
 
@@ -196,8 +196,7 @@ The copy constructor copies by value.
 Descriptor class assignment operators
 +++++++++++++++++++++++++++++++++++++
 
-The assignment operators allow assignment operations.
-The copy assignment operator results in a copy by value.
+The copy assignment operator results in a deep copy.
 
 .. rubric:: Copy assignment
 
