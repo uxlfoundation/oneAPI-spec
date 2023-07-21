@@ -39,7 +39,15 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
           
           // Syntax for d-dimensional DFT
           descriptor(std::vector<std::int64_t> dimensions);
-          
+
+          descriptor(const descriptor&);
+
+          descriptor(descriptor&&);
+
+          descriptor& operator=(const descriptor&);
+
+          descriptor& operator=(descriptor&&);
+
           ~descriptor();
       
       
@@ -78,6 +86,8 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
          -     Description   
        * -     :ref:`constructors<onemkl_dft_descriptor_constructor>`
          -     Initialize descriptor for 1-dimensional or N-dimensional transformations
+       * -     :ref:`assignment operators<onemkl_dft_descriptor_assignment_operator>`
+         -     Assignment operator.
        * -     :ref:`onemkl_dft_descriptor_set_value`
          -     Sets one particular configuration parameter with the specified configuration value.
        * -     :ref:`onemkl_dft_descriptor_get_value`
@@ -104,6 +114,8 @@ factors. The function :ref:`onemkl_dft_descriptor_commit` does this work
 after use of the function :ref:`onemkl_dft_descriptor_set_value` to set values 
 of all necessary parameters.
 
+The copy constructor performs a deep copy of the descriptor.
+
 .. rubric:: Syntax (one-dimensional transform)
 
 .. code-block:: cpp
@@ -127,6 +139,28 @@ of all necessary parameters.
 
    }
 
+.. rubric:: Copy constructor
+
+.. code-block:: cpp
+   
+   namespace oneapi::mkl::dft {
+
+      template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
+      descriptor<prec,dom>(const descriptor<prec,dom>& other);
+
+   }
+
+.. rubric:: Move constructor
+
+.. code-block:: cpp
+   
+   namespace oneapi::mkl::dft {
+
+      template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
+      descriptor<prec,dom>(descriptor<prec,dom>&& other);
+
+   }
+
 
 .. container:: section
 
@@ -137,6 +171,9 @@ of all necessary parameters.
 
    dimensions
       vector of :math:`d\geq 0` dimensions(lengths) of data for a d-dimensional transform.
+
+   other
+      another descriptor of the same type to copy or move
 
 .. container:: section
 
@@ -154,6 +191,54 @@ of all necessary parameters.
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
 
+.. _onemkl_dft_descriptor_assignment_operator:
+
+Descriptor class assignment operators
++++++++++++++++++++++++++++++++++++++
+
+The copy assignment operator results in a deep copy.
+
+.. rubric:: Copy assignment
+
+.. code-block:: cpp
+   
+   namespace oneapi::mkl::dft {
+
+      template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
+      descriptor<prec,dom>& descriptor<prec,dom>::operator=(const descriptor<prec,dom>& other);
+
+   }
+
+.. rubric:: Move assignment
+
+.. code-block:: cpp
+   
+   namespace oneapi::mkl::dft {
+
+      template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
+      descriptor<prec,dom>& descriptor<prec,dom>::operator=(descriptor<prec,dom>&& other);
+
+   }
+
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+   other
+      The descriptor to copy or move from.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   The assignment opererator shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+
+   :ref:`oneapi::mkl::host_bad_alloc()<onemkl_exception_host_bad_alloc>`
+      If any memory allocations on host have failed, for instance due to insufficient memory.
+   
+
+**Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
 .. _onemkl_dft_descriptor_set_value:
 
