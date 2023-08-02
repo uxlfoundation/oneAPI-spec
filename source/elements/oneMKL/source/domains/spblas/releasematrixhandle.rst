@@ -26,8 +26,9 @@ before releasing any data in case of USM.
 
    namespace oneapi::mkl::sparse {
 
-      void release_matrix_handle (oneapi::mkl::sparse::matrix_handle_t  handle,
-                                  const std::vector<sycl::event>        &dependencies = {});
+      sycl::event release_matrix_handle (sycl::queue                           &queue,
+                                         oneapi::mkl::sparse::matrix_handle_t  *handle,
+                                         const std::vector<sycl::event>        &dependencies = {});
 
    }
 
@@ -36,16 +37,32 @@ before releasing any data in case of USM.
 
     .. rubric:: Input parameter
 
+    queue
+       The SYCL command queue which will be used for SYCL kernels execution.
 
     handle
-       Handle to object containing sparse matrix and other internal
-       data. Created using one of the
+       The address of the sparse::matrix_handle_t ``handle`` object to be released, containing sparse matrix and other internal
+       data. Initialized with oneapi::mkl::sparse::init_matrix_handle routine, and filled with user data using one of the
        oneapi::mkl::sparse::set_<sparse_matrix_type>_structure routines.
 
     dependencies
        List of events that ``handle`` depends on.
        The call waits on the events(if any) before resetting the ``handle`` to default values.
 
+.. container:: section
+
+    .. rubric:: Output parameters
+
+    handle
+       The address of the sparse::matrix_handle_t ``handle`` that will be scheduled to be updated to point to a null object
+       and the passed in handle will be scheduled for deallocation and cleanup.
+
+.. container:: section
+
+    .. rubric:: Return Values
+
+    sycl::event
+       SYCL event which can be waited upon or added as a dependency for the completion of the deallocation and cleanup routines.
 
 .. container:: section
 
