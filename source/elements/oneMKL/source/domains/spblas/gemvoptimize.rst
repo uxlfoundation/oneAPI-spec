@@ -17,65 +17,6 @@ and performs optimizations. Optimized data is then stored in
 the handle.
 
 
-.. _onemkl_sparse_optimize_gemv_buffer:
-
-optimize_gemv (Buffer version)
-------------------------------
-
-.. rubric:: Syntax
-
-.. code-block:: cpp
-
-   namespace oneapi::mkl::sparse {
-
-      void optimize_gemv (sycl::queue                          &queue,
-                          oneapi::mkl::transpose               transpose_val,
-                          oneapi::mkl::sparse::matrix_handle_t handle);
-
-   }
-
-.. container:: section
-
-    .. rubric:: Input Parameters
-
-    queue
-         Specifies the SYCL command queue which will be used for SYCL
-         kernels execution.
-
-
-    transpose_val
-         Specifies operation ``op()`` on input matrix. The possible options
-         are described in :ref:`onemkl_enum_transpose` enum class.
-
-
-    handle
-       Handle to object containing sparse matrix and other internal
-       data. Created using the
-       oneapi::mkl::sparse::set_csr_data routine.
-
-
-.. container:: section
-
-    .. rubric:: Throws
-         :class: sectiontitle
-
-    This routine shall throw the following exceptions if the associated condition is detected.
-    An implementation may throw additional implementation-specific exception(s)
-    in case of error conditions not covered here.
-
-    | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
-    | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
-    | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
-    | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
-    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
-    | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
-    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
-
-.. _onemkl_sparse_optimize_gemv_usm:
-
-optimize_gemv (USM version)
----------------------------
-
 .. rubric:: Syntax
 
 .. code-block:: cpp
@@ -85,7 +26,7 @@ optimize_gemv (USM version)
       sycl::event optimize_gemv (sycl::queue                          &queue,
                                  oneapi::mkl::transpose               transpose_val,
                                  oneapi::mkl::sparse::matrix_handle_t handle,
-                                 std::vector<sycl::event>             &dependencies);
+                                 std::vector<sycl::event>             &dependencies = {});
 
    }
 
@@ -112,6 +53,14 @@ optimize_gemv (USM version)
     dependencies
        List of events that oneapi::mkl::sparse::optimize_gemv routine depends on.
 
+
+.. container:: section
+
+    .. rubric:: Output Parameters
+         :class: sectiontitle
+
+    handle
+        Handle might be updated with some internal optimized data by this routine.
 
 .. container:: section
 
