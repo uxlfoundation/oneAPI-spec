@@ -24,9 +24,28 @@ The oneapi::mkl::sparse::init_matrix_handle function initializes the
 
    namespace oneapi::mkl::sparse {
 
-      void init_matrix_handle (oneapi::mkl::sparse::matrix_handle_t *handle);
+      void init_matrix_handle (oneapi::mkl::sparse::matrix_handle_t *p_handle);
 
    }
+
+
+.. container:: section
+
+    .. rubric:: Input parameter
+
+    p_handle
+       The address of the sparse::matrix_handle_t ``p_handle`` object to be initialized.
+       This initialization routine must only be called on an uninitialized matrix_handle_t object.
+
+
+.. container:: section
+
+    .. rubric:: Output parameters
+
+    p_handle
+       On return, the address is updated to point to a newly allocated and initialized matrix_handle_t object
+       that can be filled and used to perform sparse BLAS operations.
+
 
 .. container:: section
 
