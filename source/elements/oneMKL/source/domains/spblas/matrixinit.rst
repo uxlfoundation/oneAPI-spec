@@ -31,7 +31,7 @@ The oneapi::mkl::sparse::init_matrix_handle function initializes the
 
 .. container:: section
 
-    .. rubric:: Input parameter
+    .. rubric:: Input parameters
 
     p_handle
        The address of the sparse::matrix_handle_t ``p_handle`` object to be initialized.

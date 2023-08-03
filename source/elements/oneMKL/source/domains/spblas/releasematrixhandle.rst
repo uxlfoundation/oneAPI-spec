@@ -35,7 +35,7 @@ before releasing any data in case of USM.
 .. container:: section
 
 
-    .. rubric:: Input parameter
+    .. rubric:: Input parameters
 
     queue
        The SYCL command queue which will be used for SYCL kernels execution.
