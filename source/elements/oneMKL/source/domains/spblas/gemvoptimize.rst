@@ -26,7 +26,7 @@ the handle.
       sycl::event optimize_gemv (sycl::queue                          &queue,
                                  oneapi::mkl::transpose               transpose_val,
                                  oneapi::mkl::sparse::matrix_handle_t handle,
-                                 std::vector<sycl::event>             &dependencies = {});
+                                 const std::vector<sycl::event>       &dependencies = {});
 
    }
 
