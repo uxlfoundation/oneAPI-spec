@@ -72,7 +72,7 @@ class mrg32k3a
 
         * - Routine
           - Description
-        * - `sycl::queue queue, std::uint32_t seed = default_seed`_
+        * - `mrg32k3a(sycl::queue queue, std::uint32_t seed = default_seed)`_
           - Constructor for common seed initialization of the engine
         * - `mrg32k3a(sycl::queue queue, std::initializer_list<std::uint32_t> seed)`_
           - Constructor for extended seed initialization of the engine
@@ -89,11 +89,11 @@ class mrg32k3a
 
     .. rubric:: Constructors
 
-    .. _`sycl::queue queue, std::uint32_t seed = default_seed`:
+    .. _`mrg32k3a(sycl::queue queue, std::uint32_t seed = default_seed)`:
 
     .. code-block:: cpp
     
-        mrg32k3a::sycl::queue queue, std::uint32_t seed = default_seed
+        mrg32k3a::mrg32k3a(sycl::queue queue, std::uint32_t seed = default_seed)
 
     .. container:: section
 

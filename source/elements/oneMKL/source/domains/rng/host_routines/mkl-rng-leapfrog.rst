@@ -76,4 +76,4 @@ leapfrog
 
 **Parent topic:** :ref:`onemkl_rng_service_routines`
 
-.. |image0| image:: ../equations/rng-leapfrog.png
+.. |image0| image:: ../../equations/rng-leapfrog.png

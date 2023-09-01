@@ -24,8 +24,6 @@ Distributions
 
 
     _`Table Continuous Distribution Generators`
-
-
    .. container:: tablenoborder
 
 
@@ -142,7 +140,7 @@ Distributions
          * -           \ :ref:`onemkl_rng_beta`\
            -     `oneapi::mkl::rng::beta_method::cja_accurate`
                
-   **Parent topic:** :ref:`onemkl_rng`
+   **Parent topic:** :ref:`onemkl_rng_manual_offload_routines`
 
 
 

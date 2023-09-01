@@ -108,4 +108,4 @@ USM-based example
 
 You can also use USM with raw pointers by using the sycl::malloc_shared/malloc_device functions.
 
-**Parent topic:** :ref:`onemkl_rng`
+**Parent topic:** :ref:`onemkl_rng_manual_offload_routines`

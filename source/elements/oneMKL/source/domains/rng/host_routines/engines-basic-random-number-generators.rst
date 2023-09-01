@@ -72,7 +72,7 @@ Engines (Basic Random Number Generators)
    [:ref:`Coddington94 <onemkl_rng_bibliography>`].
 
 
-   **Parent topic:** :ref:`onemkl_rng`
+   **Parent topic:** :ref:`onemkl_rng_manual_offload_routines`
 
 
 .. container::

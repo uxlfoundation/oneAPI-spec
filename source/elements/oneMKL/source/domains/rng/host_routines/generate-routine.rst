@@ -14,7 +14,7 @@ Generate Routine
       Entry point to obtain random numbers from a given engine with
       proper statistics of a given distribution.
 
-   **Parent topic:** :ref:`onemkl_rng`
+   **Parent topic:** :ref:`onemkl_rng_manual_offload_routines`
 
 .. toctree::
     :hidden:
