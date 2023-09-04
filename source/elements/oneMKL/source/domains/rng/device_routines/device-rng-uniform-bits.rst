@@ -11,7 +11,7 @@ Generates uniformly distributed bits in 32/64-bit chunks.
 
 .. rubric:: Description
 
-The ``uniform_bits`` class object is used in ``generate`` and ``generate_single`` functions to generate uniformly distributed bits 
+The ``uniform_bits`` class object is used in ``generate`` and function to generate uniformly distributed bits 
 in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is uniformly distributed. This distribution 
 is supported for philox4x32x10 and mcg59 engines. When generating 64-bit chunks, twice as much engine offset needs to 
 be provided.
@@ -62,40 +62,3 @@ class uniform_bits
             The type which defines type of generated random numbers.
 
 **Parent topic:** :ref:`onemkl_device_rng_distributions`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Template Parameters
--------------------
-
-.. list-table::
-
-   * - ``typename UIntType = std::uint32_t``
-     - Type of the produced values. The specific values are as follows:
-
-       ``std::uint32_t``
-
-       ``std::uint64_t``
-
-**Parent topic:** :ref:`onemkl_device_rng_distributions`

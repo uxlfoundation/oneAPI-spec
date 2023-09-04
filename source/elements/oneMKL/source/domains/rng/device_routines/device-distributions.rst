@@ -7,11 +7,10 @@
 Device Distributions
 ====================
 
-
-oneMKL RNG routines are used to generate random numbers with different types of distribution. Each function group is 
+oneMKL RNG routines are used to generate random numbers with different types of distributions. Each function group is 
 introduced below by the type of underlying distribution and contains a short description of its functionality, as well 
 as specifications of the call sequence and the explanation of input and output parameters. The Device Continuous 
-Distribution Generators table and Device Discrete Distribution Generators table list the random number generator routines 
+Distribution Generators table and Device Discrete Distribution Generators table list random number generator routines 
 with data types and output distributions, and sets correspondence between data types of the generator routines and the 
 basic random number generators.
 

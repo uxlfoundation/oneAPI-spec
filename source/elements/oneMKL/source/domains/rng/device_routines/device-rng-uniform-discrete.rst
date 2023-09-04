@@ -12,7 +12,7 @@ Generates random numbers uniformly distributed over the interval ``[a, b)``.
 
 .. rubric:: Description
 
-The ``uniform`` class object is used in ``generate`` and ``generate_single`` functions 
+The ``uniform`` class object is used in ``generate`` and function 
 to provide random numbers uniformly distributed over the interval ``[a, b)``, where ``a, b`` are the left and right 
 bounds of the interval respectively, and :math:`a, b \in Z ; a < b`.
 

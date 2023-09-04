@@ -11,18 +11,19 @@ Generates Bernoulli distributed random values.
 
 .. rubric:: Description
 
-The ``bernoulli`` class object is used in the ``generate`` and ``generate_single`` functions
+The ``bernoulli`` class object is used in the ``generate`` and function
 to provide Bernoulli distributed random numbers with probability ``p`` of a single trial success,
 where :math:`p \in R; 0 \leq p \leq 1`.
 
-A variate is called Bernoulli distributed if after a trial it is equal to 1 with probability of success ``p``
-and to ``0`` with probability ``1 - p``.
-
 The probability distribution is given by:
 
-``P(X=1) = p``
+.. math::
 
-``P(X=0) = 1 - p``
+    P(X = 1) = p
+
+.. math::
+
+    P(X = 0) = 1 - p
 
 The cumulative distribution function is as follows:
 

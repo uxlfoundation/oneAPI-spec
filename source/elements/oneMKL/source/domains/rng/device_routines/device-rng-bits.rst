@@ -11,7 +11,7 @@ Generates bits of underlying engine (BRNG) integer recurrence.
 
 .. rubric:: Description
 
-The ``bits`` class object is used in ``generate`` and ``generate_single`` functions to provide integer 
+The ``bits`` class object is used in ``generate`` and function to provide integer 
 random values. Each integer can be treated as a vector of several bits. In a truly random generator, these 
 bits are random, while in pseudorandom generators this randomness can be violated. 
 See :ref:`VS Notes<onemkl_device_rng_bibliography>` for details.
@@ -40,7 +40,8 @@ class bits
 
         typename UIntType
             Type of the produced values. Supported types:
-                * ``std::uint32_t``
+                * ``std::uint32_t`` for philox4x32x10, mrg32k3a and mcg31m1 engines.
+                * ``std::uint64_t`` for mcg59.
 
 .. container:: section
 

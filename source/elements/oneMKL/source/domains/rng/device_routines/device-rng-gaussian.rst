@@ -11,7 +11,7 @@ Generates normally distributed random numbers.
 
 .. rubric:: Description
 
-The ``gaussian`` class object is used in the ``generate`` and ``generate_single`` functions function to provide 
+The ``gaussian`` class object is used in the ``generate`` and function to provide 
 random numbers with normal (Gaussian) distribution with mean (``a``) and standard deviation
 (``stddev``, :math:`\sigma` ), where :math:`a, \sigma \in \mathbb{R}; \sigma > 0`
 

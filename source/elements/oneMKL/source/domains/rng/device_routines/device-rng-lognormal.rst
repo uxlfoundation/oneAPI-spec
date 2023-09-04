@@ -12,7 +12,7 @@ Generates lognormally distributed random numbers.
 
 .. rubric:: Description
 
-The ``lognormal`` class object is used in the ``generate`` and ``generate_single`` functions to provide 
+The ``lognormal`` class object is used in the ``generate`` and function to provide 
 random numbers with average of distribution (``m``, ``a``) and standard deviation (``s``, :math:`\sigma`) of
 subject normal distribution, displacement (``displ``, ``b``), and scalefactor (``scale``, :math:`\beta`), where
 :math:`a, \sigma, b, \beta \in \mathbb{R}; \sigma > 0, \beta > 0`.

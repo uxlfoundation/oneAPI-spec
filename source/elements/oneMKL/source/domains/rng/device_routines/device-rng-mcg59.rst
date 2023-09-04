@@ -7,7 +7,7 @@
 mcg59
 =====
 
-The 59-bit multiplicative congruential pseudorandom number generator MCG(13\ :sup:`13`, 2\ :sup:`59`)
+The 59-bit multiplicative congruential pseudorandom number generator MCG(:math:`13^{13}, 2^{59}`)
 from NAG Numerical Libraries.
 
 .. rubric:: Description

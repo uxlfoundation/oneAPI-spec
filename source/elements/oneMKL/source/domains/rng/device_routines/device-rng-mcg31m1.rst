@@ -7,7 +7,7 @@
 mcg31m1
 =======
 
-The 31-bit multiplicative congruential pseudorandom number generator MCG(1132489760, 2\ :sup:`32`-1) :ref:`[L'Ecuyer99a] <onemkl_device_rng_bibliography>`.
+The 31-bit multiplicative congruential pseudorandom number generator MCG(:math:`1132489760, 2^{32}-1`) :ref:`[L'Ecuyer99a] <onemkl_device_rng_bibliography>`.
 
 .. rubric:: Description
 

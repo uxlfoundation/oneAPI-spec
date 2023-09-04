@@ -7,61 +7,46 @@
 generate
 ========
 
+.. rubric:: Description
 
 Entry point to obtain random numbers from a given engine with proper statistics of a given distribution.
 
-
-.. contents::
-    :local:
-    :depth: 1
-
-API
-***
-
-
-Syntax
-------
+.. rubric:: Syntax
 
 .. code-block:: cpp
 
-   template<typename Distr, typename Engine>
-   auto generate(Distr& distr, Engine& engine) ->
-     typename std::conditional<Engine::vec_size == 1, typename Distr::result_type,
-                               sycl::vec<typename Distr::result_type, Engine::vec_size>>::type
+   namespace oneapi::mkl::rng::device {
+     template<typename Distr, typename Engine>
+     auto generate(Distr& distr, Engine& engine) ->
+       typename std::conditional<Engine::vec_size == 1, typename Distr::result_type,
+                                 sycl::vec<typename Distr::result_type, Engine::vec_size>>::type
+   }
 
+.. container:: section
 
-Include Files
--------------
+    .. rubric:: Template Parameters
 
-- ``oneapi/mkl/rng/device.hpp``
+    Distr
+        Type of distribution which is used for random number generation.
 
+    Engine
+        Type of engine which is used for random number generation.
 
-Input Parameters
-----------------
+.. container:: section
 
-.. list-table::
-      :header-rows: 1
+    .. rubric:: Input Parameters
 
-      * - Name
-        - Type
-        - Description
-      * - distr
-        - Distr&
-        - Distribution object. See :ref:`onemkl_device_rng_distributions` for details.
-      * - engine
-        - Engine&
-        - Engine object. See :ref:`onemkl_device_rng_engines` for details.
+    distr
+        Distribution object. See :ref:`onemkl_device_rng_distributions` for details.
 
+    engine
+        Engine object. See :ref:`onemkl_device_rng_engines` for details.
 
-Output Parameters
------------------
+.. container:: section
 
-.. list-table::
-      :header-rows: 1
+    .. rubric:: Return Value
 
-      * - Name
-        - Type
-        - Description
-      * - result
-        - ``sycl::vec<typename Distr::result_type``, ``Engine::vec_size>`` or typename ``Distr::result_type``
-        - Function returns ``sycl::vec`` of type specified by the Distribution object and vector size specified by the Engine object filled with random numbers or a scalar random number in case ``vec_size`` =1.
+    Returns `Distr::result_type` if `Engine::vec_size == 1` or `sycl::vec<typename Distr::result_type, Engine::vec_size>` 
+    with generated random numbers.
+
+**Parent topic:** :ref:`onemkl_device_rng_generate_routines`

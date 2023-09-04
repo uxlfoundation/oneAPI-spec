@@ -11,7 +11,7 @@ Generates Poisson distributed random values.
 
 .. rubric:: Description
 
-The ``poisson`` class object is used in the ``generate`` and ``generate_single`` functions
+The ``poisson`` class object is used in the ``generate`` and function
 to provide Poisson distributed random numbers with distribution parameter λ, where :math:`\lambda \in R; \lambda > 0`.
 
 

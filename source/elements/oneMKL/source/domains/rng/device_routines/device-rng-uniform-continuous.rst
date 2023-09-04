@@ -12,9 +12,10 @@ Generates random numbers with uniform distribution.
 
 .. rubric:: Description
 
-The class object is used in ``generate`` and ``generate_single`` functions to provide random numbers uniformly 
+The class object is used in ``generate`` function to provide random numbers uniformly 
 distributed over the interval [``a``, ``b``), where ``a``, ``b`` are the left and right bounds of the interval, 
-respectively, and ``a``, ``b∈R`` ; ``a`` < ``b``.
+respectively, and :math:`a, b \in R ; a < b`
+``a``, ``b∈R`` ; ``a`` < ``b``.
 
 
 The probability density function is given by:

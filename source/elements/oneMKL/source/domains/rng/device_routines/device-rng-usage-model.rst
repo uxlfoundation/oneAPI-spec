@@ -39,7 +39,7 @@ Example of Scalar Random Numbers Generation
         // Prepare an array for random numbers
         std::vector<float> r(n);
 
-        sycl::buffer<float, 1> r_buf(r.data(), r.size());
+        sycl::buffer<floats> r_buf(r.data(), r.size());
         // Submit a kernel to generate on device
         queue.submit([&](sycl::handler& cgh) {
             auto r_acc = r_buf.template get_access<sycl::access::mode::write>(cgh);
@@ -82,7 +82,7 @@ Example of Vector Random Numbers Generation
         // Prepare an array for random numbers
         std::vector<float> r(n);
 
-        sycl::buffer<float, 1> r_buf(r.data(), r.size());
+        sycl::buffer<float> r_buf(r.data(), r.size());
         // Submit a kernel to generate on device
         sycl::queue{}.submit([&](sycl::handler& cgh) {
             auto r_acc = r_buf.template get_access<sycl::access::mode::write>(cgh);

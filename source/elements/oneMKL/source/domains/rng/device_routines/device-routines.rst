@@ -26,8 +26,8 @@ The main purpose of Device routines is to make them callable from your DPC++ ker
 RNG domain contains two classes types:
 
    -  Engines (basic random number generators) classes, which holds
-      the state of generator and is a source of i.i.d. random. Refer to
-      :ref:`onemkl_device_rng_engines`
+      the state of generator and is a source of independent and identically distributed random variables. 
+      Refer to :ref:`onemkl_rng_engines_basic_random_number_generators`
       for a detailed description.
    -  Distribution classes templates (transformation classes) for different types of statistical
       distributions, for example, uniform, normal (Gaussian), binomial,

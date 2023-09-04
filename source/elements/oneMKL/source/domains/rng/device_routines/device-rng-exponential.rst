@@ -12,7 +12,7 @@ Generates exponentially distributed random numbers.
 
 .. rubric:: Description
 
-The ``exponential`` class object is used in the ``generate`` and ``generate_single`` functions to provide 
+The ``exponential`` class object is used in the ``generate`` function to provide 
 random numbers with exponential distribution that has displacement :math:`a` and scalefactor :math:`\beta`,
 where :math:`a, \beta \in R ; \beta > 0`.
 
