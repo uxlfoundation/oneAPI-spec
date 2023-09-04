@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_engines_basic_random_number_generators:
 
-Engines (Basic Random Number Generators)
-========================================
+Host Engines (Basic Random Number Generators)
+=============================================
 
 
 .. container::

@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_device_rng_uniform_lognormal:
+.. _onemkl_device_rng_lognormal:
 
 lognormal
 =========
@@ -56,7 +56,7 @@ class lognormal
         using method_type = Method;
         using result_type = RealType;
   
-        lognormal() : lognormal((RealType)0.0, (RealType)1.0, (RealType) 0.0, (RealType)1.0){}
+        lognormal();
         explicit lognormal(RealType m, RealType s, RealType displ = (RealType)0.0, RealType scale = (RealType)1.0);
   
         RealType m() const;
@@ -86,7 +86,7 @@ class lognormal
                 * ``oneapi::mkl::rng::device::lognormal_method::by_default``
                 * ``oneapi::mkl::rng::device::lognormal_method::box_muller2``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_uniform_continuous_distributions_method>`.
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`.
 
 
 .. container:: section
@@ -177,7 +177,7 @@ class lognormal
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`s \leq` static_cast<RealType>(0.0), or :math:`scale \leq` static_cast<RealType>(0.0)
+                Exception is thrown when :math:`s \leq 0`, or :math:`scale \leq 0`
 
 .. container:: section
 

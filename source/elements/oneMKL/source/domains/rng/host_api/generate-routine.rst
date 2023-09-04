@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_generate_routine:
 
-Generate Routine
-================
+Host Generate Routine
+=====================
 
 .. container::
 

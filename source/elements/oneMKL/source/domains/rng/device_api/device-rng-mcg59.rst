@@ -39,7 +39,7 @@ class mcg59
        static constexpr std::uint32_t default_seed = 1;
        static constexpr std::int32_t vec_size = VecSize;
        
-       mcg59() : mcg59(default_seed) {}
+       mcg59();
        mcg59(std::uint32_t seed, std::uint64_t offset = 0);
        mcg59(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0);
      };

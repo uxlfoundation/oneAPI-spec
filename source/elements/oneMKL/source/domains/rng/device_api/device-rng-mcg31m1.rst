@@ -7,7 +7,7 @@
 mcg31m1
 =======
 
-The 31-bit multiplicative congruential pseudorandom number generator MCG(:math:`1132489760, 2^{32}-1`) :ref:`[L'Ecuyer99a] <onemkl_device_rng_bibliography>`.
+The 31-bit multiplicative congruential pseudorandom number generator MCG(:math:`1132489760, 2^{32}-1`) :ref:`[L'Ecuyer99a] <onemkl_rng_bibliography>`.
 
 .. rubric:: Description
 
@@ -43,7 +43,7 @@ class mcg31m1
        static constexpr std::uint32_t default_seed = 1;
        static constexpr std::int32_t vec_size = VecSize;
        
-       mcg31m1() : mcg31m1(default_seed) {}
+       mcg31m1();
        mcg31m1(std::uint32_t seed, std::uint64_t offset = 0);
        mcg31m1(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0);
      };

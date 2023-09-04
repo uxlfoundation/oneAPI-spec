@@ -2,41 +2,43 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_device_rng_poisson:
+.. _onemkl_device_rng_bernoulli:
 
-poisson
-=======
+bernoulli
+=========
 
-Generates Poisson distributed random values.
+Generates Bernoulli distributed random values.
 
 .. rubric:: Description
 
-The ``poisson`` class object is used in the ``generate`` and function
-to provide Poisson distributed random numbers with distribution parameter λ, where :math:`\lambda \in R; \lambda > 0`.
-
+The ``bernoulli`` class object is used in the ``generate`` and function
+to provide Bernoulli distributed random numbers with probability ``p`` of a single trial success,
+where :math:`p \in R; 0 \leq p \leq 1`.
 
 The probability distribution is given by:
 
 .. math::
 
-   P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+    P(X = 1) = p
 
-:math:`k \in \{0, 1, 2, \ldots \}`.
+.. math::
+
+    P(X = 0) = 1 - p
 
 The cumulative distribution function is as follows:
 
 .. math::
 
-   F_{\lambda}(x) =
+   F_p(x) =
    \begin{cases}
-      \sum_{k=0}^{\lfloor x \rfloor} \frac{\lambda^k e^{-\lambda}}{k!}, & x \geq 0 \\
-      0, & x < 0
-   \end{cases},
-   x \in R
+      0, & x < 0 \\
+      1 - p, & 0 \leq x < 1, x \in R \\
+      1, & x \geq 1
+   \end{cases}
 
 
-class poisson
--------------
+class bernoulli
+---------------
 
 .. rubric:: Syntax
 
@@ -44,15 +46,15 @@ class poisson
 
    namespace oneapi::mkl::rng::device {
      template<typename IntType, typename Method>
-     class poisson {
+     class bernoulli {
      public:
        using method_type = Method;
        using result_type = IntType;
 
-       poisson(): poisson(0.5){} 
-       explicit poisson(double lambda);
+       bernoulli();
+       explicit bernoulli(float p);
        
-       double lambda() const;
+       float p() const;
      };
    }
 
@@ -70,11 +72,11 @@ class poisson
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::poisson_method::by_default
+        typename Method = oneapi::mkl::rng::bernoulli_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::device::poisson_method::by_default``
-                * ``oneapi::mkl::rng::device::poisson_method::devroye``
+                * ``oneapi::mkl::rng::bernoulli_method::by_default``
+                * ``oneapi::mkl::rng::bernoulli_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -87,12 +89,12 @@ class poisson
 
         * - Routine
           - Description
-        * - `poisson()`_
+        * - `bernoulli()`_
           - Default constructor
-        * - `explicit poisson(double lambda)`_
+        * - `explicit bernoulli(float p)`_
           - Constructor with parameters
-        * - `double lambda() const`_
-          - Method to obtain distribution parameter
+        * - `float p() const`_
+          - Method to obtain probability `p`
 
 .. container:: section
 
@@ -102,7 +104,7 @@ class poisson
 
         .. code-block:: cpp
 
-            poisson::method_type = Method
+            bernoulli::method_type = Method
 
         .. container:: section
 
@@ -114,7 +116,7 @@ class poisson
 
         .. code-block:: cpp
 
-            poisson::result_type = IntType
+            bernoulli::result_type = IntType
 
         .. container:: section
 
@@ -128,38 +130,38 @@ class poisson
 
     .. container:: section
 
-        .. _`poisson()`:
+        .. _`bernoulli()`:
 
         .. code-block:: cpp
 
-            poisson::poisson()
+            bernoulli::bernoulli()
 
         .. container:: section
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as `lambda` = 0.5.
+            Default constructor for distribution, parameters set as `p` = 0.5f.
 
     .. container:: section
 
-        .. _`explicit poisson(double lambda)`:
+        .. _`explicit bernoulli(float p)`:
 
         .. code-block:: cpp
 
-            explicit poisson::poisson(double lambda)
+            explicit bernoulli::bernoulli(float p)
 
         .. container:: section
 
             .. rubric:: Description
 
-            Constructor with parameters. `lambda` is a distribution parameter.
+            Constructor with parameters. `p` is a probability.
 
         .. container:: section
 
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`lambda \leq 0.0`
+                Exception is thrown when `p > 1`, or `p < 0`
 
 .. container:: section
 
@@ -167,16 +169,17 @@ class poisson
 
     .. container:: section
 
-        .. _`double lambda() const`:
+        .. _`float p() const`:
 
         .. code-block:: cpp
 
-            double poisson::lambda() const
+            float bernoulli::p() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `lambda`.
+            Returns the distribution parameter `p` - probability.
 
 **Parent topic:** :ref:`onemkl_device_rng_distributions`
+

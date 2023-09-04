@@ -19,16 +19,16 @@ oneMKL RNG provides following device pseudorandom number generators:
      -  Description
 
    * -  :ref:`onemkl_device_rng_mrg32k3a`
-     -  The combined multiple recursive pseudorandom number generator ``MRG32k3a`` [:ref:`L'Ecuyer99 <onemkl_device_rng_bibliography>`]
+     -  The combined multiple recursive pseudorandom number generator ``MRG32k3a`` [:ref:`L'Ecuyer99 <onemkl_rng_bibliography>`]
 
    * -  :ref:`onemkl_device_rng_philox4x32x10`
-     -  Philox4x32-10 counter-based pseudorandom number generator with a period of :math:`2^{128}` ``PHILOX4X32X10`` [:ref:`Salmon11 <onemkl_device_rng_bibliography>`]
+     -  Philox4x32-10 counter-based pseudorandom number generator with a period of :math:`2^{128}` ``PHILOX4X32X10`` [:ref:`Salmon11 <onemkl_rng_bibliography>`]
 
    * -  :ref:`onemkl_device_rng_mcg31m1`
-     -  The 31-bit multiplicative congruential pseudorandom number generator MCG(:math:`1132489760, 2^{32}-1`) :ref:`[L'Ecuyer99a] <onemkl_device_rng_bibliography>`.
+     -  The 31-bit multiplicative congruential pseudorandom number generator MCG(:math:`1132489760, 2^{32}-1`) :ref:`[L'Ecuyer99a] <onemkl_rng_bibliography>`.
 
    * -  :ref:`onemkl_device_rng_mcg59`
-     -  The 59-bit multiplicative congruential pseudorandom number generator MCG(:math:`13^{13}, 2^{59}`) from NAG Numerical Libraries :ref:`[NAG] <onemkl_device_rng_bibliography>`.
+     -  The 59-bit multiplicative congruential pseudorandom number generator MCG(:math:`13^{13}, 2^{59}`) from NAG Numerical Libraries :ref:`[NAG] <onemkl_rng_bibliography>`.
 
 **Parent topic:** :ref:`onemkl_device_rng_routines`
 

@@ -16,7 +16,7 @@ in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is
 is supported for philox4x32x10 and mcg59 engines. When generating 64-bit chunks, twice as much engine offset needs to 
 be provided.
 
-``UIntType`` denotes the chunk size and can be ``std::uint32_t``, ``std::uint64_t``. See :ref:`VS Notes<onemkl_device_rng_bibliography>` for details.
+``UIntType`` denotes the chunk size and can be ``std::uint32_t``, ``std::uint64_t``. See :ref:`VS Notes<onemkl_rng_bibliography>` for details.
 
 
 class uniform_bits

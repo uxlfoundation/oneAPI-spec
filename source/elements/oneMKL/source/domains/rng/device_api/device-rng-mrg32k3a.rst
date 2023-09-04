@@ -12,7 +12,7 @@ The combined multiple recursive pseudorandom number generator MRG32k3a.
 .. rubric:: Description
 
 MRG32k3a engine is a 32-bit combined multiple recursive generator with two components of order 3
-[:ref:`L'Ecuyer99a<onemkl_device_rng_bibliography>`]. MRG32k3a combined generator meets the requirements for 
+[:ref:`L'Ecuyer99a<onemkl_rng_bibliography>`]. MRG32k3a combined generator meets the requirements for 
 modern RNGs, such as good multidimensional uniformity, or a long period (:math:`p \approx 2^{191}`).
 
 
@@ -48,7 +48,7 @@ class mrg32k3a
        static constexpr std::uint32_t default_seed = 1;
        static constexpr std::int32_t vec_size = VecSize;
    
-       mrg32k3a() : mrg32k3a(default_seed) {}
+       mrg32k3a();
        mrg32k3a(std::uint32_t seed, std::uint64_t offset = 0);
        mrg32k3a(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0);
        mrg32k3a(std::uint32_t seed, std::initializer_list<std::uint64_t> offset);

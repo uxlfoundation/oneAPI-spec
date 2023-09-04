@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_service_routines:
 
-Service Routines
-================
+Host Service Routines
+=====================
 
 
 .. container::

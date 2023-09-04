@@ -35,10 +35,21 @@ In computational statistics, random variate generation is usually made in two st
       in order to generate (or imitate) random variates and random
       vectors from arbitrary distributions.
 
+
+.. rubric:: Execution Models
+
+RNG domain supports two execution models:
+
+   #. :ref:`Host API<onemkl_rng_manual_offload_routines>`, which is aligned with the rest of oneMKL domains 
+      :ref:`onemkl_member_functions`.
+   #. :ref:`Device API<onemkl_device_rng_routines>`, which is specific for RNG domain. These APIs 
+      are designed to be callable from the User's kernels as well as Host code.
+
+
 .. toctree::
    :hidden:
 
-   host_routines/manual-offload-routines.rst
-   device_routines/device-routines.rst
+   host_api/rng-host-routines.rst
+   device_api/device-routines.rst
 
 **Parent topic:** :ref:`onemkl_rng`

@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_manual_offload_routines:
 
-Manual Offload RNG Routines
-==============================
+Random Number Generators Host Routines
+======================================
 
 .. rubric:: Structure
 
@@ -43,6 +43,6 @@ section for the description of typical RNG scenario.
    engines-basic-random-number-generators.rst
    service-routines.rst
    distributions.rst
-   bibliography.rst
+   ../bibliography.rst
 
 **Parent topic:** :ref:`onemkl_rng`

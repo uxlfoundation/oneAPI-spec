@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_device_rng_uniform_exponential:
+.. _onemkl_device_rng_exponential:
 
 exponential
 ===========
@@ -54,7 +54,7 @@ class exponential
        using method_type = Method;
        using result_type = RealType;
   
-       exponential(): exponential((RealType)0.0, (RealType)1.0){}
+       exponential();
        explicit exponential(RealType a, RealType beta);
   
        RealType a() const;
@@ -84,7 +84,7 @@ class exponential
                 * ``oneapi::mkl::rng::device::exponential_method::icdf``
                 * ``oneapi::mkl::rng::device::exponential_method::icdf_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_uniform_continuous_distributions_method>`.
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`.
 
 
 .. container:: section
@@ -170,7 +170,7 @@ class exponential
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`beta \leq` static_cast<RealType>(0.0)
+                Exception is thrown when :math:`beta \leq 0`
 
 .. container:: section
 

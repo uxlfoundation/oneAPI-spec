@@ -55,7 +55,7 @@ class uniform
        using method_type = Method;
        using result_type = Type;
   
-       uniform(): uniform(static_cast<Type>(0.0), static_cast<Type>(1.0)){}
+       uniform();
        explicit uniform(Type a, Type b);
   
        Type a() const;
@@ -85,7 +85,7 @@ class uniform
                 * ``oneapi::mkl::rng::device::uniform_method::standard``
                 * ``oneapi::mkl::rng::device::uniform_method::accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_uniform_continuous_distributions_method>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`
 
 
 .. container:: section

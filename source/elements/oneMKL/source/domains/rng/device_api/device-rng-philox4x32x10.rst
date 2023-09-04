@@ -7,7 +7,7 @@
 philox4x32x10
 =============
 
-A Philox4x32-10 counter-based pseudorandom number generator [:ref:`Salmon11<onemkl_device_rng_bibliography>`].
+A Philox4x32-10 counter-based pseudorandom number generator [:ref:`Salmon11<onemkl_rng_bibliography>`].
 
 .. rubric:: Description
 
@@ -58,7 +58,7 @@ class philox4x32x10
        static constexpr std::uint64_t default_seed = 1;
        static constexpr std::int32_t vec_size = VecSize;
   
-       philox4x32x10() : philox4x32x10(default_seed) {}
+       philox4x32x10();
        philox4x32x10(std::uint64_t seed, std::uint64_t offset = 0);
        philox4x32x10(std::initializer_list<std::uint64_t> seed, std::uint64_t offset = 0); 
        philox4x32x10(std::uint64_t seed, std::initializer_list<std::uint64_t> offset);

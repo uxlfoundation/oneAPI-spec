@@ -2,7 +2,7 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_device_rng_uniform_gaussian:
+.. _onemkl_device_rng_gaussian:
 
 gaussian
 ========
@@ -63,7 +63,7 @@ class gaussian
         using method_type = Method;
         using result_type = RealType;
   
-        gaussian(): gaussian((RealType)0.0, (RealType)1.0){}
+        gaussian();
         explicit gaussian(RealType mean, RealType stddev);
   
         RealType mean() const;
@@ -91,7 +91,7 @@ class gaussian
                 * ``oneapi::mkl::rng::device::gaussian_method::by_default``
                 * ``oneapi::mkl::rng::device::gaussian_method::box_muller2``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_uniform_continuous_distributions_method>`
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`
 
 .. container:: section
 
@@ -176,7 +176,7 @@ class gaussian
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when `stddev` :math:`\leq` `static_cast<RealType>(0.0)`
+                Exception is thrown when `stddev` :math:`\leq 0`
 
 .. container:: section
 

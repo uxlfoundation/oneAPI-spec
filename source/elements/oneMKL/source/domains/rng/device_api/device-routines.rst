@@ -7,7 +7,7 @@
 Random Number Generators Device Routines
 ========================================
 
-The main purpose of Device routines is to make them callable from your DPC++ kernels; however, there are no limitations to be called from the Host. For example:
+The main purpose of Device routines is to make them callable from your SYCL kernels; however, there are no limitations to be called from the Host. For example:
 
 .. code-block::
 
@@ -57,6 +57,6 @@ section for the description of typical RNG scenario.
    device-engines.rst
    device-distributions.rst
    device-service-routines.rst
-   device-bibliography.rst
+   ../bibliography.rst
 
 **Parent topic:** :ref:`onemkl_rng`

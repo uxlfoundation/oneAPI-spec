@@ -10,7 +10,7 @@ Device Distributions
 oneMKL RNG routines are used to generate random numbers with different types of distributions. Each function group is 
 introduced below by the type of underlying distribution and contains a short description of its functionality, as well 
 as specifications of the call sequence and the explanation of input and output parameters. The Device Continuous 
-Distribution Generators table and Device Discrete Distribution Generators table list random number generator routines 
+Distribution Generators table and Device Discrete Distribution Generators table mention random number generator routines 
 with data types and output distributions, and sets correspondence between data types of the generator routines and the 
 basic random number generators.
 
@@ -24,20 +24,20 @@ basic random number generators.
      -     BRNG Data Type
      -     Description
    * -     :ref:`onemkl_device_rng_uniform_continuous`
-     -     s, d
-     -     s, d
+     -     float, double
+     -     float, double
      -     Uniform continuous distribution on the interval [``a,b``)
-   * -     :ref:`onemkl_device_rng_uniform_gaussian`
-     -     s, d
-     -     s, d
+   * -     :ref:`onemkl_device_rng_gaussian`
+     -     float, double
+     -     float, double
      -     Normal (Gaussian) distribution
-   * -     :ref:`onemkl_device_rng_uniform_exponential`
-     -     s, d
-     -     s, d
+   * -     :ref:`onemkl_device_rng_exponential`
+     -     float, double
+     -     float, double
      -     Exponential distribution
-   * -     :ref:`onemkl_device_rng_uniform_lognormal`
-     -     s, d
-     -     s, d
+   * -     :ref:`onemkl_device_rng_lognormal`
+     -     float, double
+     -     float, double
      -     Lognormal distribution
 
 
@@ -51,29 +51,27 @@ basic random number generators.
      -     BRNG Data Type
      -     Description
    * -     :ref:`onemkl_device_rng_uniform_discrete`
-     -     i
-     -     s
+     -     integer
+     -     float
      -     Uniform discrete distribution on the interval [``a,b``)
    * -     :ref:`onemkl_device_rng_bits`
-     -     i
-     -     i
-     -     Bits of underlying BRNG integer recurrence
+     -     integer
+     -     integer
+     -     Bits of underlying BRNG integer sequence
    * -     :ref:`onemkl_device_rng_uniform_bits`
-     -     i
-     -     i
-     -     Uniformly distributed bits in 32-bit chunks
-   * -
-     -     i
-     -     i
-     -     Uniformly distributed bits in 64-bit chunks
+     -     integer
+     -     integer
+     -     Uniformly distributed bits in 32/64-bit chunks
    * -     :ref:`onemkl_device_rng_poisson`
-     -     i
-     -     i
+     -     integer
+     -     integer
      -     Poisson distribution
    * -     :ref:`onemkl_device_rng_bernoulli`
-     -     i
-     -     i
+     -     integer
+     -     integer
      -     Bernoulli distribution
+
+`NOTE:` In case of ``integer`` check desired distribution for supported data types.
 
 **Parent topic:** :ref:`onemkl_device_rng_routines`
 

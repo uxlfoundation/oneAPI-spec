@@ -7,14 +7,13 @@
 bits
 ====
 
-Generates bits of underlying engine (BRNG) integer recurrence.
+Generates bits of underlying engine (BRNG) integer sequence.
 
 .. rubric:: Description
 
 The ``bits`` class object is used in ``generate`` and function to provide integer 
-random values. Each integer can be treated as a vector of several bits. In a truly random generator, these 
-bits are random, while in pseudorandom generators this randomness can be violated. 
-See :ref:`VS Notes<onemkl_device_rng_bibliography>` for details.
+random values. Each integer can be treated as a vector of several bits. In pseudorandom generators 
+this randomness can be violated. See :ref:`VS Notes<onemkl_rng_bibliography>` for details.
 
 
 class bits
