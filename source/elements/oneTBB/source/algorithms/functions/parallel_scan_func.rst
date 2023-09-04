@@ -32,6 +32,8 @@ Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
+* The ``Value`` type must meet the `CopyConstructible` requirements from [copyconstructible] and
+  `CopyAssignable` requirements from [copyassignable] ISO C++ Standard sections.
 * The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
 * The ``Combine`` type must meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
 
@@ -183,4 +185,3 @@ See also:
 
 * :doc:`blocked_range class <../../algorithms/blocked_ranges/blocked_range_cls>`
 * :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
-

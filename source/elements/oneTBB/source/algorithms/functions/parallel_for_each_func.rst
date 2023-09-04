@@ -39,6 +39,9 @@ Requirements:
 * The ``Body`` type must meet the :doc:`ParallelForEachBody requirements <../../named_requirements/algorithms/par_for_each_body>`.
 * The ``InputIterator`` type must meet the `Input Iterator` requirements from the [input.iterators] ISO C++ Standard section.
 * The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`.
+* If ``InputIterator`` does not meet the `Forward Iterator` requirements from the [forward.iterators] ISO C++ Standard section,
+  the type ``std::iterator_traits<InputIterator>::value_type`` should be constructible from ``std::iterator_traits<InputIterator>::reference``.
+* ``decltype(std::declval<Container>().begin())`` should meet the same requirements as ``InputIterator``.
 
 The ``parallel_for_each`` template has two forms.
 

@@ -24,22 +24,22 @@ A type `Value` satisfies `BlockedRangeValue` if it meets the following requireme
 .. cpp:function:: void operator=( const Value& )
 
     Assignment.
-    
+
     .. note::
 
          The return type ``void`` in the pseudo-signature denotes that
          ``operator=`` is not required to return a value. The actual ``operator=``
          can return a value, which will be ignored by ``blocked_range`` .
 
-.. cpp:function:: bool operator<( const Value& i, const Value& j )
+.. cpp:function:: friend bool operator<( const Value& i, const Value& j )
 
     Value *i* precedes value *j*.
 
-.. cpp:function:: D operator-( const Value& i, const Value& j )
+.. cpp:function:: friend D operator-( const Value& i, const Value& j )
 
     Number of values in range ``[i,j)``.
 
-.. cpp:function:: Value operator+( const Value& i, D k )
+.. cpp:function:: friend Value operator+( const Value& i, D k )
 
     *k*-th value after *i*.
 
