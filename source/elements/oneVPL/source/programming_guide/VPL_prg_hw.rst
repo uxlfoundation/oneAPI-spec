@@ -50,8 +50,16 @@ Work with Multiple Media Devices
 If your system has multiple graphics adapters, you may need hints on which
 adapter is better suited to process a particular workload. The legacy mode of
 oneVPL provides a helper API to select the most suitable adapter for your
-workload based on the provided workload description. The following example shows
-workload initialization on a discrete adapter:
+workload based on the provided workload description.
+
+.. important:: :cpp:func:`MFXQueryAdapters`, :cpp:func:`MFXQueryAdaptersDecode`,
+               and :cpp:func:`MFXQueryAdaptersNumber` are deprecated starting
+               from API 2.9. Applications should use :cpp:func:`MFXEnumImplementations`
+               and :cpp:func:`MFXSetConfigFilterProperty` to query adapter
+               capabilities and to select a suitable adapter for the input workload.
+
+The following example shows workload initialization on a discrete adapter
+in legacy mode:
 
 
 .. literalinclude:: ../snippets/prg_hw.cpp

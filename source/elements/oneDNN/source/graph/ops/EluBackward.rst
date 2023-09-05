@@ -25,7 +25,7 @@ Operation Attributes
 +----------------+-------------+------------+--------------+-------------+
 | |attr_use_dst| | If true,    | bool       | ``true``     | Optional    |
 |                | use         |            | (default),   |             |
-|                | \diffsrc    |            | ``false``    |             |
+|                | \dst        |            | ``false``    |             |
 |                | of Elu      |            |              |             |
 |                | operation   |            |              |             |
 |                | to          |            |              |             |
@@ -47,12 +47,12 @@ Inputs
 ======
 
 
-===== ============= ====================
-Index Argument Name Required or Optional
-===== ============= ====================
-0     ``src``       Required
-1     ``diff_dst``  Required
-===== ============= ====================
+===== ================= ====================
+Index Argument Name     Required or Optional
+===== ================= ====================
+0     ``src`` / ``dst`` Required
+1     ``diff_dst``      Required
+===== ================= ====================
 
 Outputs
 =======
@@ -70,10 +70,10 @@ Supported Data Types
 
 EluBackward operation supports the following data type combinations.
 
-==== ======== ========
-Src  Diff_dst Diff_src
-==== ======== ========
-f32  f32      f32
-f16  f16      f16
-bf16 bf16     bf16
-==== ======== ========
+========= ======== ========
+Src / Dst Diff_dst Diff_src
+========= ======== ========
+f32       f32      f32
+f16       f16      f16
+bf16      bf16     bf16
+========= ======== ========

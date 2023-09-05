@@ -271,3 +271,11 @@ mfxVPPStat
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxExtVPPPercEncPrefilter
+-------------------------
+
+.. doxygenstruct:: mfxExtVPPPercEncPrefilter
+   :project: oneVPL
+   :members:
+   :protected-members:

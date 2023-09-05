@@ -120,7 +120,7 @@ gemv (Buffer Version)
       1)*abs(``incx``)). See :ref:`matrix-storage` for more details.
 
    incx
-      The stride of vector ``x``.
+      The stride of vector ``x``. Must not be zero.
 
    beta
       The scaling factor for vector ``y``.
@@ -133,7 +133,7 @@ gemv (Buffer Version)
       :ref:`matrix-storage` for more details.
 
    incy
-      The stride of vector ``y``.
+      The stride of vector ``y``. Must not be zero.
 
 .. container:: section
 
@@ -248,7 +248,7 @@ gemv (USM Version)
       more details.
 
    incx
-      The stride of vector ``x``.
+      The stride of vector ``x``. Must not be zero.
 
    beta
       The scaling factor for vector ``y``.
@@ -262,7 +262,7 @@ gemv (USM Version)
       more details.
 
    incy
-      The stride of vector ``y``.
+      The stride of vector ``y``. Must not be zero.
 
    dependencies
       List of events to wait for before starting computation, if any.
