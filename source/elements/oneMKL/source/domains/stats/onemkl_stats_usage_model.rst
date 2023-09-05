@@ -33,8 +33,8 @@ USM-based example
         constexpr std::size_t n_observations = 1000;
         constexpr std::size_t n_dims = 3;
 
-        // allocate USM memory for the dataset of the size n_observations * n_dims and fill it with any data
-        // allocate USM memory for the mean output of the size n_dims
+        // allocate Unified Shared Memory for the dataset of the size n_observations * n_dims and fill it with any data
+        // allocate Unified Shared Memory for the mean output of the size n_dims
 
         // create oneapi::mkl::stats::dataset
         auto dataset = oneapi::mkl::stats::make_dataset<oneapi::mkl::stats::layout::row_major>(n_dims, n_observations, dataset_ptr);
