@@ -31,9 +31,18 @@ A ``partitioner`` type may be one of the following entities:
 Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
+
+Until C++17:
+
 * The ``Body`` type must meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
 * The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
 * The ``Combine`` type must meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
+
+Since C++17:
+
+* The ``Body`` type must meet the :doc:`Cpp17ParallelScanBody requirements <../../named_requirements/algorithms/cpp17_par_scan_body>`.
+* The ``Scan`` type must meet the :doc:`Cpp17ParallelScanFunc requirements <../../named_requirements/algorithms/cpp17_par_scan_func>`.
+* The ``Combine`` type must meet the :doc:`Cpp17ParallelScanCombine requirements <../../named_requirements/algorithms/cpp17_par_scan_combine>`.
 
 The function template ``parallel_scan`` computes a parallel prefix, also known as a parallel scan.
 This computation is an advanced concept in parallel computing that is sometimes useful in scenarios
@@ -183,4 +192,3 @@ See also:
 
 * :doc:`blocked_range class <../../algorithms/blocked_ranges/blocked_range_cls>`
 * :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
-

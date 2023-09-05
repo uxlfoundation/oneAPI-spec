@@ -49,9 +49,18 @@ A ``partitioner`` type may be one of the following entities:
 Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
+
+Until C++17:
+
 * The ``Body`` type must meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
 * The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
 * The ``Reduction`` types must meet :doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_reduction>`.
+
+Until C++17:
+
+* The ``Body`` type must meet the :doc:`Cpp17ParallelReduceBody requirements <../../named_requirements/algorithms/cpp17_par_reduce_body>`.
+* The ``Func`` type must meet the :doc:`Cpp17ParallelReduceFunc requirements <../../named_requirements/algorithms/cpp17_par_reduce_func>`.
+* The ``Reduction`` types must meet :doc:`Cpp17ParallelReduceReduction requirements <../../named_requirements/algorithms/cpp17_par_reduce_reduction>`.
 
 The function template ``parallel_reduce`` has two forms:
 The functional form is designed to be easy to use in conjunction with lambda expressions.
@@ -161,4 +170,3 @@ expressions and the functional form of ``parallel_reduce``.
 See also:
 
 * :ref:`Partitioners <Partitioners>`
-

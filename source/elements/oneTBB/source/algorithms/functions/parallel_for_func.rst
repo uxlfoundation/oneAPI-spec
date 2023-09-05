@@ -56,9 +56,17 @@ A ``partitioner`` type may be one of the following entities:
 Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
-* The ``Body`` type must meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
 * The ``Index`` type must meet the :doc:`ParallelForIndex requirements <../../named_requirements/algorithms/par_for_index>`.
+
+Until C++17:
+
+* The ``Body`` type must meet the :doc:`ParallelForBody requirements <../../named_requirements/algorithms/par_for_body>`.
 * The ``Func`` type must meet the :doc:`ParallelForFunc requirements <../../named_requirements/algorithms/par_for_func>`.
+
+Since C++17:
+
+* The ``Body`` type must meet the :doc:`Cpp17ParallelForBody requirements <../../named_requirements/algorithms/cpp17_par_for_body>`.
+* The ``Func`` type must meet the :doc:`Cpp17ParallelForFunc requirements <../../named_requirements/algorithms/cpp17_par_for_func>`.
 
 The ``oneapi::tbb::parallel_for(first, last, step, f)`` overload represents parallel execution of the loop:
 
@@ -66,9 +74,9 @@ The ``oneapi::tbb::parallel_for(first, last, step, f)`` overload represents para
 
     for (auto i = first; i < last; i += step) f(i);
 
-The loop must not wrap around. The step value must be positive. If omitted, it is implicitly 1. 
-There is no guarantee that the iterations run in parallel. A deadlock may occur if a lesser 
-iteration waits for a greater iteration. The partitioning strategy is ``auto_partitioner`` when 
+The loop must not wrap around. The step value must be positive. If omitted, it is implicitly 1.
+There is no guarantee that the iterations run in parallel. A deadlock may occur if a lesser
+iteration waits for a greater iteration. The partitioning strategy is ``auto_partitioner`` when
 the parameter is not specified.
 
 The ``parallel_for(range,body,partitioner)`` overload provides a more general form of parallel
@@ -100,4 +108,3 @@ the space complexity is *O(P log(N))*, where *N* is the size of the range and *P
 See also:
 
 * :ref:`Partitioners <Partitioners>`
-
