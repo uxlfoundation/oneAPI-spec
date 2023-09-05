@@ -66,8 +66,8 @@ Example of Vector Random Numbers Generation
                 oneapi::mkl::rng::device::philox4x32x10<vec_size> engine(seed, idx * vec_size);
                 // Create a distribution object
                 oneapi::mkl::rng::device::uniform<float> distr;
-                // Call generate function to obtain sycl::vec<float, vec_size> with random numbers
-                auto res = oneapi::mkl::rng::device::generate(distr, engine);
+                // Call generate function to obtain random numbers
+                sycl::vec<float, vec_size> res = oneapi::mkl::rng::device::generate(distr, engine);
                 // ...
             });
         });
