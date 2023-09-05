@@ -50,6 +50,8 @@ Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
+* The ``Value`` type must meet the `CopyConstructible` requirements from the [copyconstructible] section and
+  `CopyAssignable` requirements from the [copyassignable] section of the ISO C++ Standard.
 * The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
 * The ``Reduction`` types must meet :doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_reduction>`.
 
