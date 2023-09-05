@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_service_routines:
 
-Service Routines
-================
+Host Service Routines
+=====================
 
 
 .. container::
@@ -26,7 +26,7 @@ Service Routines
 
 
 
-      **Parent topic:** :ref:`onemkl_rng`
+      **Parent topic:** :ref:`onemkl_rng_manual_offload_routines`
 
 .. toctree::
     :hidden:

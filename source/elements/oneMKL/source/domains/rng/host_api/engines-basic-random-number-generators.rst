@@ -4,8 +4,8 @@
 
 .. _onemkl_rng_engines_basic_random_number_generators:
 
-Engines (Basic Random Number Generators)
-========================================
+Host Engines (Basic Random Number Generators)
+=============================================
 
 
 .. container::
@@ -72,7 +72,7 @@ Engines (Basic Random Number Generators)
    [:ref:`Coddington94 <onemkl_rng_bibliography>`].
 
 
-   **Parent topic:** :ref:`onemkl_rng`
+   **Parent topic:** :ref:`onemkl_rng_manual_offload_routines`
 
 
 .. container::

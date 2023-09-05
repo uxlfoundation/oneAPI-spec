@@ -108,7 +108,7 @@ skip_ahead (Interface with a partitioned number of skipped elements)
     oneapi::mkl::rng::mrg32k3a engine_1(queue, seed);
 
     // To skip 2^64 elements in the random stream number of skipped elements should be
-    /represented as num_to_skip = 2^64 = 0 + 1 * 2^64
+    // represented as num_to_skip = 2^64 = 0 + 1 * 2^64
     std::initializer_list<std::uint64_t> num_to_skip = {0, 1};
 
     // Creating the 2nd engine based on 1st. Skipping by 2^64
@@ -118,4 +118,4 @@ skip_ahead (Interface with a partitioned number of skipped elements)
 
 **Parent topic:** :ref:`onemkl_rng_service_routines`
 
-.. |image0| image:: ../equations/rng-skip-ahead.png
+.. |image0| image:: ../../equations/rng-skip-ahead.png
