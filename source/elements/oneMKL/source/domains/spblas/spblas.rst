@@ -31,6 +31,8 @@ Sparse BLAS
            -     Optimize routine for trmv
          * -     :ref:`onemkl_sparse_optimize_trsv`
            -     Optimize routine for trsv
+         * -     :ref:`onemkl_sparse_optimize_gemm`
+           -     Optimize routine for gemm
          * -     :ref:`onemkl_sparse_gemv`
            -     Sparse matrix-dense vector product using a general sparse matrix
          * -     :ref:`onemkl_sparse_gemvdot`
@@ -56,6 +58,7 @@ Sparse BLAS
     releasematrixhandle
     setcsrstructure
     gemm
+    gemmoptimize
     gemv
     gemvdot
     gemvoptimize
