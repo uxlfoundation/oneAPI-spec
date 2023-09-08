@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2023 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
