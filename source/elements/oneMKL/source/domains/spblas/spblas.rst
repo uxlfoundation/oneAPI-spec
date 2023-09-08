@@ -27,6 +27,8 @@ Sparse BLAS
            -     Fills the internal CSR data structure
          * -     :ref:`onemkl_sparse_optimize_gemv`
            -     Optimize routine for gemv
+         * -     :ref:`onemkl_sparse_optimize_symv`
+           -     Optimize routine for symv
          * -     :ref:`onemkl_sparse_optimize_trmv`
            -     Optimize routine for trmv
          * -     :ref:`onemkl_sparse_optimize_trsv`
@@ -63,6 +65,7 @@ Sparse BLAS
     gemvdot
     gemvoptimize
     symv
+    symvoptimize
     trmv
     trmvoptimize
     trsv
