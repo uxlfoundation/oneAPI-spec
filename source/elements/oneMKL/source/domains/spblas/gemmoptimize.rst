@@ -16,6 +16,17 @@ The oneapi::mkl::sparse::optimize_gemm routine analyzes matrix structure
 and performs optimizations. Optimized data is then stored in
 the handle.
 
+In contrast to other optimization routines in Sparse BLAS domain,
+which are done only based on Sparse matrix structure,
+two version of ``optimize_gemm`` routines are listed here for preparing optimizations
+for oneapi::mkl::sparse::gemm routine,
+since we might perform optimizations for oneapi::mkl::sparse::gemm
+with respect to the shape and layout of the given dense matrix
+as well as based on sparse matrix structure only.
+If user wants to run multiple times oneapi::mkl::sparse::gemm with the same shape and layout
+of input dense matrix :math:`B`, then the latter version of ``optimize_gemm`` routine might
+give further performance optimization specific to the input dense matrix as well as
+the given sparse matrix.
 
 .. _onemkl_sparse_optimize_gemm_A:
 
