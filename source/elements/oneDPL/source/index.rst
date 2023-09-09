@@ -15,7 +15,7 @@ implementing data parallel algorithms.
 
 .. note::
     Unless specified otherwise, in this document the `C++ standard`_ refers to
-    ISO/IEC 14882:2017 Programming languages — C++, commonly known as C++17. 
+    ISO/IEC 14882:2017 Programming languages - C++, commonly known as C++17. 
 
 The library is comprised of the following components:
 
