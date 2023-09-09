@@ -13,6 +13,10 @@ specified in the `C++ standard`_, with extensions to support data parallelism
 and offloading to devices, and with extensions to simplify its usage for 
 implementing data parallel algorithms.
 
+.. note::
+    Unless specified otherwise, in this document the `C++ standard`_ refers to
+    ISO/IEC 14882:2017 Programming languages — C++, commonly known as C++17. 
+
 The library is comprised of the following components:
 
 - :doc:`Parallel API <parallel_api>`:
@@ -26,12 +30,12 @@ The library is comprised of the following components:
 
 - :doc:`SYCL Kernels API <sycl_kernels_api>`:
 
-  * A subset of the `C++ standard`_ library which can be used with
+  * A subset of the C++ standard library which can be used with
     buffers and data parallel kernels.
 
   * Support of random number generation including engines and distributions.
 
-  * Various utilities in addition to C++ standard functionality.
+  * Various utilities in addition to the C++ standard functionality.
 
 .. toctree::
 
