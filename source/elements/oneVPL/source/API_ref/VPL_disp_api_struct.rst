@@ -98,3 +98,11 @@ mfxPoolPolicyDescription
    :project: oneVPL
    :members:
    :protected-members:
+
+extDeviceUUID
+-------------
+
+.. doxygenstruct:: extDeviceUUID
+   :project: oneVPL
+   :members:
+   :protected-members:

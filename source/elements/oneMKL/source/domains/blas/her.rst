@@ -94,7 +94,7 @@ her (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    a
       Buffer holding input matrix ``A``. Must have size at least
@@ -115,7 +115,7 @@ her (Buffer Version)
       lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower``\ \ =\ ``lower``.
 
-      The imaginary parts of the diagonal elements are set to zero.
+      If ``alpha`` is zero, ``A`` matrix is unchanged, otherwise imaginary parts of the diagonal elements are set to zero.
 
 .. container:: section
 
@@ -195,7 +195,7 @@ her (USM Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    a
       Pointer to input matrix ``A``. The array holding input matrix
@@ -220,7 +220,7 @@ her (USM Version)
       lower triangular part of the Hermitian matrix ``A`` if
       ``upper_lower``\ \=\ ``lower``.
 
-      The imaginary parts of the diagonal elements are set to zero.
+      If ``alpha`` is zero, ``A`` matrix is unchanged, otherwise imaginary parts of the diagonal elements are set to zero.
 
 .. container:: section
 

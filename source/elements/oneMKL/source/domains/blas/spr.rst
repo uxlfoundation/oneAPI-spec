@@ -89,7 +89,7 @@ spr (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    a
       Buffer holding input matrix ``A``. Must have size at least
@@ -183,7 +183,7 @@ spr (USM Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    a
       Pointer to input matrix ``A``. The array holding input matrix

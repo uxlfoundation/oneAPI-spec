@@ -84,4 +84,12 @@ mfxInitializationParam
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxAutoSelectImplDeviceHandle
+-----------------------------
+
+.. doxygenstruct:: mfxAutoSelectImplDeviceHandle
+   :project: oneVPL
+   :members:
+   :protected-members:
    

@@ -13,6 +13,27 @@ This section describes the API evolution from version to version.
    :depth: 1
 
 -----------
+Version 2.9
+-----------
+
+New in this release:
+
+* Deprecated :cpp:member:`mfxExtCodingOption2::BitrateLimit`.
+* Added note that applications must call MFXVideoENCODE_Query() to check for support of :cpp:struct:`mfxExtChromaLocInfo` and :cpp:struct:`mfxExtHEVCRegion` extension buffers.
+* Added AV1 HDR metadata description and further clarified :cpp:struct:`mfxExtMasteringDisplayColourVolume` and :cpp:struct:`mfxExtContentLightLevelInfo`.
+* Added deprecation messages to the functions :cpp:func:`MFXQueryAdapters`, :cpp:func:`MFXQueryAdaptersDecode`, and :cpp:func:`MFXQueryAdaptersNumber`.
+  Applications should use the process described in :ref:`oneVPL Dispatcher <onevpl-dispatcher>` to enumerate and select adapters.
+* Fixed multiple spelling errors.
+* Added extension buffer :cpp:struct:`mfxExtSyncSubmission` to return submission synchronization sync point.
+* Added extension buffer :cpp:struct:`mfxExtVPPPercEncPrefilter` to control perceptual encoding prefilter.
+* Deprecated :cpp:member:`mfxPlatform::CodeName` and corresponding enum values.
+* Added :cpp:member:`mfxExtendedDeviceId::RevisionID` and :cpp:struct:`extDeviceUUID` to be aligned across multiple domains including compute and specify device UUID accordingly.
+* Added extension buffer :cpp:struct:`mfxExtTuneEncodeQuality` and correspondent enumeration to specify encoding tuning option.
+* Updated description of :cpp:func:`MFXEnumImplementations` to clarify that the input :cpp:type:`mfxImplCapsDeliveryFormat` determines the type of structure returned.
+* Updated mfxvideo++.h to use MFXLoad API.
+* Added :cpp:struct:`mfxAutoSelectImplDeviceHandle` and :cpp:type:`mfxAutoSelectImplType` for automatically selecting a suitable implementation based on application-provided device handle.
+
+-----------
 Version 2.8
 -----------
 

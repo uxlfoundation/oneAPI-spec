@@ -101,7 +101,7 @@ spmv (Buffer Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
    
    beta
       Scaling factor for vector ``y``.
@@ -112,7 +112,7 @@ spmv (Buffer Version)
       for more details.
 
    incy
-      Stride of vector ``y``.
+      Stride of vector ``y``. Must not be zero.
 
 .. container:: section
 
@@ -209,7 +209,7 @@ spmv (USM Version)
       more details.
 
    incx
-      Stride of vector ``x``.
+      Stride of vector ``x``. Must not be zero.
 
    beta
       Scaling factor for vector ``y``.
@@ -221,7 +221,7 @@ spmv (USM Version)
       more details.
 
    incy
-      Stride of vector ``y``.
+      Stride of vector ``y``. Must not be zero.
 
    dependencies
       List of events to wait for before starting computation, if any.

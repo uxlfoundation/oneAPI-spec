@@ -5,10 +5,10 @@
 .. include:: ../../replacements.inc.rst
 
 
-Softmax
+SoftMax
 #######
 
-Softmax operation applies following formula on every element of
+SoftMax operation applies the following formula on every element of
 \src tensor (the variable names follow the standard :ref:`conventions-label`):
 
 .. math::
@@ -20,16 +20,16 @@ where \$ C \$ is a size of tensor along axis dimension.
 Operation Attributes
 ********************
 
-+-------------+-------------+------------+-----------+-------------+
-|  Attribute  | Description | Value Type | Supported | Required or |
-|    Name     |             |            |  Values   |  Optional   |
-+=============+=============+============+===========+=============+
-| |attr_axis| | Represents  | s64        | Arbitrary | Optional    |
-|             | the axis of |            | s64 value |             |
-|             | which the   |            | (``1`` in |             |
-|             | Softmax is  |            | default)  |             |
-|             | calculated. |            |           |             |
-+-------------+-------------+------------+-----------+-------------+
++-------------+---------------+------------+-----------+-------------+
+|  Attribute  | Description   | Value Type | Supported | Required or |
+|    Name     |               |            |  Values   |  Optional   |
++=============+===============+============+===========+=============+
+| |attr_axis| | Represents    | s64        | Arbitrary | Optional    |
+|             | the axis from |            | s64 value |             |
+|             | which the     |            | (``1`` in |             |
+|             | SoftMax is    |            | default)  |             |
+|             | calculated.   |            |           |             |
++-------------+---------------+------------+-----------+-------------+
 
 Execution Arguments
 *******************
@@ -61,7 +61,7 @@ Index Argument Name Required or Optional
 Supported Data Types
 ********************
 
-Softmax operation supports the following data type combinations.
+SoftMax operation supports the following data type combinations.
 
 ==== ====
 Src  Dst

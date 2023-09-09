@@ -125,10 +125,10 @@ Supported Data Types
 
 ReduceMax operation supports the following data type combinations.
 
-================== ====
-Source/Destination Axes
-================== ====
-f32                s32
-bf16               s32
-f16                s32
-================== ====
+==== ==== ====
+Src  Dst  Axes
+==== ==== ====
+f32  f32  s32
+bf16 bf16 s32
+f16  f16  s32
+==== ==== ====

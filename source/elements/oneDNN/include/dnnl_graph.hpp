@@ -115,6 +115,10 @@ inline dnnl::engine make_engine_with_allocator(dnnl::engine::kind kind,
 
 /// Logical tensor object
 struct logical_tensor {
+  /// Integer type for representing dimension sizes and indices.
+  using dim = dnnl_dim_t;
+  /// Vector of dimensions. Implementations are free to force a limit on the
+  /// vector's length.
   using dims = std::vector<dim>;
 
   /// Data Type
@@ -431,6 +435,8 @@ struct op {
     Exp ,
     GELU ,
     GELUBackward ,
+    HardSigmoid ,
+    HardSigmoidBackward ,
     HardSwish ,
     HardSwishBackward ,
     Interpolate ,

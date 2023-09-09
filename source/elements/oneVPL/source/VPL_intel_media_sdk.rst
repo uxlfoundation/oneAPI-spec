@@ -102,7 +102,7 @@ included in oneVPL:
 
 - **Raw Acceleration.** |msdk_full_name| RAW acceleration (Camera API) which is
   implemented as plugin is obsolete, replaced by oneVPL and oneVPL runtime implementation.
-  OneVPL reused most of |msdk_full_name| Camera API, but oneVPL camera API is not backward
+  oneVPL reused most of |msdk_full_name| Camera API, but oneVPL camera API is not backward
   compatible with |msdk_full_name| camera API due to obsolete plugin mechanism in oneVPL 
   and a few difference between oneVPL and |msdk_full_name|. The major difference between oneVPL 
   and |msdk_full_name| are listed:

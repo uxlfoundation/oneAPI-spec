@@ -314,3 +314,19 @@ mfxExtContentLightLevelInfo
    :project: oneVPL
    :members:
    :protected-members:
+
+mfxExtSyncSubmission
+--------------------
+
+.. doxygenstruct:: mfxExtSyncSubmission
+   :project: oneVPL
+   :members:
+   :protected-members:
+
+mfxExtTuneEncodeQuality
+-----------------------
+
+.. doxygenstruct:: mfxExtTuneEncodeQuality
+   :project: oneVPL
+   :members:
+   :protected-members:

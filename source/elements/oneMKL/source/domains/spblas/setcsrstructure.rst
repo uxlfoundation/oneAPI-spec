@@ -31,7 +31,8 @@ set_csr_data (Buffer version)
 
    namespace oneapi::mkl::sparse {
 
-      void set_csr_data (oneapi::mkl::sparse::matrix_handle_t  handle,
+      void set_csr_data (sycl::queue                           &queue,
+                         oneapi::mkl::sparse::matrix_handle_t  handle,
                          intType                               num_rows,
                          intType                               num_cols,
                          oneapi::mkl::index_base               index,
@@ -44,6 +45,9 @@ set_csr_data (Buffer version)
 .. container:: section
 
     .. rubric:: Input Parameters
+
+    queue
+         The SYCL command queue which will be used for SYCL kernel execution.
 
     handle
          Handle to object containing sparse matrix and other internal
@@ -122,19 +126,24 @@ set_csr_data (USM version)
 
    namespace oneapi::mkl::sparse {
 
-      void set_csr_data (oneapi::mkl::sparse::matrix_handle_t  handle,
-                         intType                               num_rows,
-                         intType                               num_cols,
-                         oneapi::mkl::index_base               index,
-                         intType                               *row_ptr,
-                         intType                               *col_ind,
-                         fp                                    *val);
+      sycl::event set_csr_data (sycl::queue                           &queue,
+                                oneapi::mkl::sparse::matrix_handle_t  handle,
+                                intType                               num_rows,
+                                intType                               num_cols,
+                                oneapi::mkl::index_base               index,
+                                intType                               *row_ptr,
+                                intType                               *col_ind,
+                                fp                                    *val,
+                                const std::vector<sycl::event>        &dependencies = {});
 
    }
 
 .. container:: section
 
     .. rubric:: Input Parameters
+
+    queue
+         The SYCL command queue which will be used for SYCL kernel execution.
 
     handle
          Handle to object containing sparse matrix and other internal
@@ -173,6 +182,9 @@ set_csr_data (USM version)
          non-zero elements of the input matrix. Refer to
          :ref:`onemkl_sparse_csr` format for detailed description of ``val``
 
+    dependencies
+         A vector of type const std::vector<sycl::event> & containing the list of events
+         that the oneapi::mkl::sparse::set_csr_data routine depends on.
 
 .. container:: section
 
@@ -180,10 +192,18 @@ set_csr_data (USM version)
          :class: sectiontitle
 
 
-handle
-     Handle to object containing sparse matrix and other internal
-     data for subsequent SYCL Sparse BLAS operations.
+    handle
+         Handle to object containing sparse matrix and other internal
+         data for subsequent SYCL Sparse BLAS operations.
 
+.. container:: section
+
+    .. rubric:: Return Values
+         :class: sectiontitle
+
+    sycl::event
+         A sycl::event that can be used to track the completion of asynchronous events
+         that were enqueued during the API call that continue the chain of events from the input dependencies.
 
 .. container:: section
 

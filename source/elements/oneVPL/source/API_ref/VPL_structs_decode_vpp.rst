@@ -6,7 +6,7 @@
 .. _struct_decode_vpp:
 
 ======================
-DECODDE_VPP Structures
+DECODE_VPP Structures
 ======================
 
 .. _struct_decode_vpp_begin:

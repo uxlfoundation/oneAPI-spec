@@ -276,3 +276,16 @@ The following pseudo code shows camera raw processing.
    :start-after: /*beg9*/
    :end-before: /*end9*/
    :lineno-start: 1
+
+-------------------------------
+Task submission synchronization
+-------------------------------
+
+oneVPL can return synchronization object - syncpoint to notify application about
+submission a task to the GPU. The following example demonstrates the approach.
+
+.. literalinclude:: ../snippets/prg_vpp.c
+   :language: c++
+   :start-after: /*beg10*/
+   :end-before: /*end10*/
+   :lineno-start: 1

@@ -79,4 +79,67 @@ The following is a list of experimental interfaces, starting from API version
      - 2.8
      -
      -
-
+   * - :cpp:struct:`mfxExtSyncSubmission`
+     - 2.9
+     -
+     -
+   * - :cpp:struct:`mfxExtVPPPercEncPrefilter`
+     - 2.9
+     -
+     -
+   * - :cpp:member:`mfxExtendedDeviceId::RevisionID`
+     - 2.9
+     -
+     -
+   * - :cpp:struct:`extDeviceUUID`
+     - 2.9
+     -
+     -
+   * - :cpp:struct:`mfxExtTuneEncodeQuality`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_ENCODE_TUNE_DEFAULT`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_ENCODE_TUNE_PSNR`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_ENCODE_TUNE_SSIM`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_ENCODE_TUNE_MS_SSIM`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_ENCODE_TUNE_VMAF`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_ENCODE_TUNE_PERCEPTUAL`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_EXTBUFF_TUNE_ENCODE_QUALITY`
+     - 2.9
+     -
+     -
+   * - :cpp:struct:`mfxAutoSelectImplDeviceHandle`
+     - 2.9
+     -
+     -
+   * - :cpp:type:`mfxAutoSelectImplType`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_AUTO_SELECT_IMPL_TYPE_UNKNOWN`
+     - 2.9
+     -
+     -
+   * - :cpp:enumerator:`MFX_AUTO_SELECT_IMPL_TYPE_DEVICE_HANDLE`
+     - 2.9
+     -
+     -

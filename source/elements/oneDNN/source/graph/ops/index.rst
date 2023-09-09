@@ -40,6 +40,8 @@ subset of the operation set.
    Exp.rst
    GELU.rst
    GELUBackward.rst
+   HardSigmoid.rst
+   HardSigmoidBackward.rst
    HardSwish.rst
    HardSwishBackward.rst
    Interpolate.rst
@@ -58,6 +60,7 @@ subset of the operation set.
    Mish.rst
    MishBackward.rst
    Multiply.rst
+   Pow.rst
    PReLU.rst
    PReLUBackward.rst
    Quantize.rst
@@ -73,6 +76,7 @@ subset of the operation set.
    ReduceSum.rst
    Reorder.rst
    Round.rst
+   Select.rst
    Sigmoid.rst
    SigmoidBackward.rst
    SoftPlus.rst
