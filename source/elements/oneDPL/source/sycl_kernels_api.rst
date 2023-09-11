@@ -99,7 +99,7 @@ Similarly, for a distribution ``d`` of a type ``D`` that is a template instantia
 - ``D::scalar_type`` is the same as ``sycl::vec<Type,N>::element_type``,
 - ``D::min()`` and ``D::max()`` return a value of ``D::scalar_type``, and ``D::min() <= D::max()``,
 - ``operator()`` of a distribution returns a ``sycl::vec<Type,N>`` filled with random values
-in the closed interval ``[D::min(), D::max()]``;
+  in the closed interval ``[D::min(), D::max()]``;
 
 The following engines and engine adaptors with predefined parameters are defined:
 
