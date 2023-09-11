@@ -19,9 +19,9 @@ the handle.
 In contrast to other optimization routines in Sparse BLAS domain
 which are done solely based on the sparse matrix pattern, 
 two versions of the ``sparse::optimize_gemm`` routine are provided for preparing different
- optimizations for ``sparse::gemm`` routine.  In particular, if the shape
- of the dense matrix right hand side, :math:`B`, is unknown or widely varying in 
- subsequent calls to ``sparse::gemm`` then a user might reasonably
+optimizations for ``sparse::gemm`` routine.  In particular, if the shape
+of the dense matrix right hand side, :math:`B`, is unknown or widely varying in 
+subsequent calls to ``sparse::gemm`` then a user might reasonably
 only wish to perform optimizations for ``:sparse::gemm`` with respect 
 to the sparse matrix structure.  However, if one or more particular shapes of :math:`B` 
 is available, then each :math:`B` shape can be provided as an additional hint 
