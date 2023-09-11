@@ -17,16 +17,18 @@ and performs optimizations. Optimized data is then stored in
 the handle.
 
 In contrast to other optimization routines in Sparse BLAS domain,
-which are done only based on Sparse matrix structure,
-two version of ``optimize_gemm`` routines are listed here for preparing optimizations
-for oneapi::mkl::sparse::gemm routine,
-since we might perform optimizations for oneapi::mkl::sparse::gemm
-with respect to the shape and layout of the given dense matrix
-as well as based on sparse matrix structure only.
-If user wants to run multiple times oneapi::mkl::sparse::gemm with the same shape and layout
-of input dense matrix :math:`B`, then the latter version of ``optimize_gemm`` routine might
-give further performance optimization specific to the input dense matrix as well as
-the given sparse matrix.
+which are done solely based on the sparse matrix pattern, 
+two versions of ``sparse::optimize_gemm`` routines are provided for preparing different
+ optimizations for ``sparse::gemm`` routine.  In particular, if the shape
+ of the dense matrix right hand side, :math:`B`, is unknown or widely varying in 
+ subsequent calls to ``sparse::gemm`` then a user might reasonably
+only wish to perform optimizations for ``:sparse::gemm`` with respect 
+to the sparse matrix structure, but if one or more particular shapes of :math:`B` 
+is available, then each :math:`B` shape can be provided as an additional hint 
+along with the sparse matrix pattern in the call to ``sparse::optimize_gemm``.  This 
+second version of the API with :math:`B` shape should be callable one or 
+more times and may allow libraries to provide more targeted performance 
+optimizations.
 
 .. _onemkl_sparse_optimize_gemm_A:
 
