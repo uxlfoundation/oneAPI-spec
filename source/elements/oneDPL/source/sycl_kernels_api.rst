@@ -63,7 +63,10 @@ The following deviations from the `C++ Standard`_ may apply:
 Extensions:
 -----------
 
-As an extension to the `C++ Standard`_, ``sycl::vec<Type, N>`` can be used as the data type template parameter for engines, engine adaptors, and distributions, where ``Type`` is one of data types supported by the corresponding class template in the standard. For such template instantiations, the ``result_type`` is also defined to ``sycl::vec<Type, N>``.
+As an extension to the `C++ Standard`_, ``sycl::vec<Type, N>`` can be used as the data type template parameter for
+engines, engine adaptors, and distributions, where ``Type`` is one of data types supported by the corresponding
+class template in the standard. For such template instantiations, the ``result_type`` is also defined to
+``sycl::vec<Type, N>``.
 
 Engines, engine adaptors, and distributions additionally define ``scalar_type``, equivalent to the following:
 
@@ -77,21 +80,26 @@ The ``scalar_type`` is used instead of ``result_type`` in all contexts where a s
 - the input parameters of constructors,
 - the return value type of ``min()`` and ``max()`` methods, etc.
 
-Since ``scalar_type`` is the same as ``result_type`` except for template instantiations with ``sycl::vec``, class templates still meet the applicable requirements of the `C++ Standard`_.
+Since ``scalar_type`` is the same as ``result_type`` except for template instantiations with ``sycl::vec``,
+class templates still meet the applicable requirements of the `C++ Standard`_.
 
-When instantiated with ``sycl::vec<Type,N>``, ``linear_congruential_engine`` and ``subtract_with_carry_engine`` may not formally satisfy the uniform random bit generator requirements defined by the `C++ Standard`_. Instead, the following alternative requirements apply: for an engine object ``g`` of type ``G``,
+When instantiated with ``sycl::vec<Type,N>``, ``linear_congruential_engine`` and ``subtract_with_carry_engine`` may not
+formally satisfy the uniform random bit generator requirements defined by the `C++ Standard`_. Instead, the following
+alternative requirements apply: for an engine object ``g`` of type ``G``,
 
 - ``G::scalar_type`` is an unsigned integral type same as ``sycl::vec<Type,N>::element_type``,
 - ``G::min()`` and ``G::max()`` return a value of ``G::scalar_type``,
 - for each index ``i`` in the range [0, ``N``), ``G::min() <= g()[i]`` and ``g()[i] <= G::max()``.
 
-Effectively, these engines satisfy the standard uniform random bit generator requirements for each element of a ``sycl::vec`` returned by their ``operator()``.
+Effectively, these engines satisfy the standard uniform random bit generator requirements for each element
+of a ``sycl::vec`` returned by their ``operator()``.
 
 Similarly, for a distribution ``d`` of a type ``D`` that is a template instantiated with ``sycl::vec<Type,N>``,
 
 - ``D::scalar_type`` is the same as ``sycl::vec<Type,N>::element_type``,
 - ``D::min()`` and ``D::max()`` return a value of ``D::scalar_type``, and ``D::min() <= D::max()``,
-- ``operator()`` of a distribution returns a ``sycl::vec<Type,N>`` filled with random values in the closed interval ``[D::min(), D::max()]``;
+- ``operator()`` of a distribution returns a ``sycl::vec<Type,N>`` filled with random values
+in the closed interval ``[D::min(), D::max()]``;
 
 The following engines and engine adaptors with predefined parameters are defined:
 
@@ -115,7 +123,8 @@ The following engines and engine adaptors with predefined parameters are defined
     template <int N>
     using ranlux48_vec = discard_block_engine<ranlux48_base_vec<N>, 389, 11>;
 
-Except for producing a ``sycl::vec`` of random values per invocation, the behavior of these engines is equivalent to the corresponding scalar engines, as described in the following table.
+Except for producing a ``sycl::vec`` of random values per invocation, the behavior of these engines is equivalent to
+the corresponding scalar engines, as described in the following table.
 
 .. container:: tablenoborder
 
