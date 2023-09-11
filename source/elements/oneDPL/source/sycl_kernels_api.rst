@@ -89,12 +89,12 @@ alternative requirements apply: for an engine object ``g`` of type ``G``,
 
 - ``G::scalar_type`` is an unsigned integral type same as ``sycl::vec<Type,N>::element_type``,
 - ``G::min()`` and ``G::max()`` return a value of ``G::scalar_type``,
-- for each index ``i`` in the range [0, ``N``), ``G::min() <= g()[i]`` and ``g()[i] <= G::max()``.
+- for each index ``i`` in the range [``0``, ``N``), ``G::min() <= g()[i]`` and ``g()[i] <= G::max()``.
 
-Effectively, these engines satisfy the standard uniform random bit generator requirements for each element
+Effectively, these engines satisfy the standard *uniform random bit generator* requirements for each element
 of a ``sycl::vec`` returned by their ``operator()``.
 
-Similarly, for a distribution ``d`` of a type ``D`` that is a template instantiated with ``sycl::vec<Type,N>``,
+Similarly, for a distribution object ``d`` of a type ``D`` that is a template instantiated with ``sycl::vec<Type,N>``:
 
 - ``D::scalar_type`` is the same as ``sycl::vec<Type,N>::element_type``,
 - ``D::min()`` and ``D::max()`` return a value of ``D::scalar_type``, and ``D::min() <= D::max()``,
@@ -124,7 +124,7 @@ The following engines and engine adaptors with predefined parameters are defined
     using ranlux48_vec = discard_block_engine<ranlux48_base_vec<N>, 389, 11>;
 
 Except for producing a ``sycl::vec`` of random values per invocation, the behavior of these engines is equivalent to
-the corresponding scalar engines, as described in the following table.
+the corresponding scalar engines, as described in the following table:
 
 .. container:: tablenoborder
 
