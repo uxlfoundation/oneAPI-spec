@@ -172,7 +172,6 @@ todo_include_todos = True
 breathe_projects = {
     "oneCCL": "elements/oneCCL/doxygen/xml",
     "oneDNN": "elements/oneDNN/doxygen/xml",
-    "oneVPL": "elements/oneVPL/doxygen/xml",
 }
 breathe_default_project = 'oneAPI'
 

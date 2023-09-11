@@ -25,9 +25,6 @@ language = 'en'
 sys.path.insert(
     0, abspath(join(repo_root, 'source', 'elements', 'oneDAL'))  # noqa: F821
 )
-sys.path.insert(
-    0, abspath(join(repo_root, 'source', 'elements', 'oneVPL'))  # noqa: F821
-)
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -47,7 +44,6 @@ extensions = [
     'sphinxcontrib.plantuml',
     'breathe',
     'dalapi',  # oneDAL API generator
-    'vplapi',
 ]
 
 with open(join(repo_root, 'oneapi-doc.json')) as fin:  # noqa: F821
@@ -55,7 +51,6 @@ with open(join(repo_root, 'oneapi-doc.json')) as fin:  # noqa: F821
 
 env = {
     'oneapi_version': cfg['version'],
-    'vpl_spec_version': cfg['vpl_version'],
 }
 
 prolog_template = string.Template(
@@ -73,8 +68,6 @@ prolog_template = string.Template(
 .. |l0_full_name| replace:: oneAPI Level Zero
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
 .. |tbb_version| replace:: $oneapi_version
-.. |vpl_full_name| replace:: oneAPI Video Processing Library
-.. |vpl_version| replace:: $vpl_spec_version
 .. |mkl_full_name| replace:: oneAPI Math Kernel Library
 .. |mkl_version| replace:: $oneapi_version
 .. include:: <isonum.txt>

@@ -229,20 +229,6 @@ def remove_elements(li, elements):
 
 
 @action
-def update_oneart(root, target=None):
-    for component in ['embree', 'ospray']:
-        copy(
-            f'repos/{component}/doc/{component}-spec.rst',
-            'source/elements/oneART/source',
-        )
-    for component in ['oidn', 'openvkl']:
-        copy(
-            f'repos/{component}/doc/tmp/{component}-spec.rst',
-            'source/elements/oneART/source',
-        )
-
-
-@action
 def sort_words(root, target=None):
     with open(join('source', 'spelling_wordlist.txt')) as fin:
         lines = fin.readlines()
@@ -262,7 +248,6 @@ commands = {
     'singlehtml': build,
     'prep': prep,
     'sort-words': sort_words,
-    'update-oneart': update_oneart,
 }
 
 dirs = [
@@ -270,7 +255,6 @@ dirs = [
     'oneDAL',
     'oneMKL',
     'oneTBB',
-    'oneVPL',
     'sycl',
     'l0',
     'oneDPL',
