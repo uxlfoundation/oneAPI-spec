@@ -11,7 +11,7 @@ All those algorithms work with *C++ Standard aligned execution policies* and wit
 execution policies*.
 
 Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special iterators, and
-a set of non-standard parallel algortithms.
+a set of non-standard parallel algorithms.
 
 C++ Standard aligned execution policies
 +++++++++++++++++++++++++++++++++++++++
