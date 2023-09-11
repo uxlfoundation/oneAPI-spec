@@ -5,7 +5,8 @@
 Parallel API
 ------------
 
-oneDPL provides the set of algorithms with execution policies as defined by the `C++ Standard`_.
+oneDPL provides the set of parallel algorithms as defined by the `C++ Standard`_,
+including parallel algorithms added in the 6th edition known as C++20.
 All those algorithms work with *C++ Standard aligned execution policies* and with *DPC++
 execution policies*.
 
@@ -16,7 +17,7 @@ C++ Standard aligned execution policies
 +++++++++++++++++++++++++++++++++++++++
 
 oneDPL has the set of execution policies and related utilities that are semantically aligned
-with the C++ Standard:
+with the `C++ Standard`_, 6th edition (C++20):
 
 .. code:: cpp
 
