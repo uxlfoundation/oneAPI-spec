@@ -39,10 +39,10 @@ symv (Buffer version)
 
       void symv (sycl::queue                          &queue,
                  oneapi::mkl::uplo                    uplo_val,
-                 fp                                   alpha,
+                 const fp                             alpha,
                  oneapi::mkl::sparse::matrix_handle_t A_handle,
                  sycl::buffer<fp, 1>                  &x,
-                 fp                                   beta,
+                 const fp                             beta,
                  sycl::buffer<fp, 1>                  &y);
 
    }
@@ -125,10 +125,10 @@ symv (USM version)
 
       sycl::event symv (sycl::queue                           &queue,
                         oneapi::mkl::uplo                     uplo_val,
-                        fp                                    alpha,
+                        const fp                              alpha,
                         oneapi::mkl::sparse::matrix_handle_t  A_handle,
-                        fp                                    *x,
-                        fp                                    beta,
+                        const fp                              *x,
+                        const fp                              beta,
                         fp                                    *y,
                         const std::vector<sycl::event>        &dependencies = {});
 
