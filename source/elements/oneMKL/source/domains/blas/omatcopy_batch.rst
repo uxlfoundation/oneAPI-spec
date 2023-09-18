@@ -430,7 +430,7 @@ the ``batch_size`` parameter.
            transpose trans,
            std::int64_t m,
            std::int64_t n,
-           T alpha,
+           value_or_pointer<T> alpha,
            const T *a,
            std::int64_t lda,
            std::int64_t stride_a,
@@ -447,7 +447,7 @@ the ``batch_size`` parameter.
            transpose trans,
            std::int64_t m,
            std::int64_t n,
-           T alpha,
+           value_or_pointer<T> alpha,
            const T *a,
            std::int64_t lda,
            std::int64_t stride_a,
@@ -476,7 +476,7 @@ the ``batch_size`` parameter.
       Number of columns for each matrix B. Must be at least 0.
 
    alpha
-      Scaling factor for the matrix transpose or copy operation.
+      Scaling factor for the matrix transpose or copy operation. See :ref:`value_or_pointer` for more details.
 
    a
       Array holding the matrices A. Must have size at least

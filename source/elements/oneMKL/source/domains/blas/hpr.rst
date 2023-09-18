@@ -148,7 +148,7 @@ hpr (USM Version)
        sycl::event hpr(sycl::queue &queue,
                        onemkl::uplo upper_lower,
                        std::int64_t n,
-                       Treal alpha,
+                       value_or_pointer<Treal> alpha,
                        const T *x,
                        std::int64_t incx,
                        T *a,
@@ -160,7 +160,7 @@ hpr (USM Version)
        sycl::event hpr(sycl::queue &queue,
                        onemkl::uplo upper_lower,
                        std::int64_t n,
-                       Treal alpha,
+                       value_or_pointer<Treal> alpha,
                        const T *x,
                        std::int64_t incx,
                        T *a,
@@ -181,7 +181,7 @@ hpr (USM Version)
       Number of rows and columns of ``A``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix-vector product.
+      Scaling factor for the matrix-vector product. See :ref:`value_or_pointer` for more details.
 
    x
       Pointer to input vector ``x``. The array holding input vector

@@ -136,7 +136,7 @@ scal (USM Version)
    namespace oneapi::mkl::blas::column_major {
        sycl::event scal(sycl::queue &queue,
                         std::int64_t n,
-                        Ts alpha,
+                        value_or_pointer<Ts> alpha,
                         T *x,
                         std::int64_t incx,
                         const std::vector<sycl::event> &dependencies = {})
@@ -146,7 +146,7 @@ scal (USM Version)
    namespace oneapi::mkl::blas::row_major {
        sycl::event scal(sycl::queue &queue,
                         std::int64_t n,
-                        Ts alpha,
+                        value_or_pointer<Ts> alpha,
                         T *x,
                         std::int64_t incx,
                         const std::vector<sycl::event> &dependencies = {})
@@ -163,7 +163,7 @@ scal (USM Version)
       Number of elements in vector ``x``.
 
    alpha
-      Specifies the scalar ``alpha``.
+      Specifies the scalar ``alpha``. See :ref:`value_or_pointer` for more details.
 
    x
       Pointer to the input vector ``x``. The array must be of size at

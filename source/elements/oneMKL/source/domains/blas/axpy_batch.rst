@@ -292,7 +292,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
    namespace oneapi::mkl::blas::column_major {
        sycl::event axpy_batch(sycl::queue &queue,
                               std::int64_t n,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *x,
                               std::int64_t incx,
                               std::int64_t stridex,
@@ -307,7 +307,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
    namespace oneapi::mkl::blas::row_major {
        sycl::event axpy_batch(sycl::queue &queue,
                               std::int64_t n,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *x,
                               std::int64_t incx,
                               std::int64_t stridex,
@@ -329,7 +329,7 @@ The total number of vectors in ``x`` and ``y`` are given by the ``batch_size`` p
       Number of elements in ``X`` and ``Y``.
 
    alpha
-       Specifies the scalar ``alpha``.
+       Specifies the scalar ``alpha``. See :ref:`value_or_pointer` for more details.
 
    x
       Pointer to input vectors ``X`` with size ``stridex`` * ``batch_size``.

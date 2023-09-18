@@ -111,6 +111,9 @@ symv (Buffer Version)
    incx
       Stride of vector ``x``. Must not be zero.
 
+   beta
+      Scaling factor for the vector ``y``.
+
    y
       Buffer holding input/output vector ``y``. The buffer must be of
       size at least (1 + (``n`` - 1)*abs(``incy``)). See :ref:`matrix-storage`
@@ -160,12 +163,12 @@ symv (USM Version)
        sycl::event symv(sycl::queue &queue,
                         onemkl::uplo upper_lower,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         const T *x,
                         std::int64_t incx,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *y,
                         std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
@@ -176,12 +179,12 @@ symv (USM Version)
        sycl::event symv(sycl::queue &queue,
                         onemkl::uplo upper_lower,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         const T *x,
                         std::int64_t incx,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *y,
                         std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
@@ -201,7 +204,7 @@ symv (USM Version)
       Number of rows and columns of ``A``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix-vector product.
+      Scaling factor for the matrix-vector product. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``. The array holding input matrix
@@ -220,6 +223,9 @@ symv (USM Version)
 
    incx
       Stride of vector ``x``. Must not be zero.
+
+   beta
+      Scaling factor for the vector ``y``. See :ref:`value_or_pointer` for more details.
 
    y
       Pointer to input/output vector ``y``. The array holding

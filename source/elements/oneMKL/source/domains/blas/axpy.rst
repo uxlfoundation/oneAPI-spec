@@ -138,7 +138,7 @@ axpy (USM Version)
    namespace oneapi::mkl::blas::column_major {
        sycl::event axpy(sycl::queue &queue,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *x,
                         std::int64_t incx,
                         T *y,
@@ -150,7 +150,7 @@ axpy (USM Version)
    namespace oneapi::mkl::blas::row_major {
        sycl::event axpy(sycl::queue &queue,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *x,
                         std::int64_t incx,
                         T *y,
@@ -169,7 +169,7 @@ axpy (USM Version)
       Number of elements in vector ``x``.
 
    alpha
-      Specifies the scalar alpha.
+      Specifies the scalar alpha. See :ref:`value_or_pointer` for more details.
 
    x
       Pointer to the input vector ``x``. The array holding the vector

@@ -593,14 +593,14 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               std::int64_t m,
                               std::int64_t n,
                               std::int64_t k,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *a,
                               std::int64_t lda,
                               std::int64_t stridea,
                               const T *b,
                               std::int64_t ldb,
                               std::int64_t strideb,
-                              T beta,
+                              value_or_pointer<T> beta,
                               T *c,
                               std::int64_t ldc,
                               std::int64_t stridec,
@@ -616,14 +616,14 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               std::int64_t m,
                               std::int64_t n,
                               std::int64_t k,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *a,
                               std::int64_t lda,
                               std::int64_t stridea,
                               const T *b,
                               std::int64_t ldb,
                               std::int64_t strideb,
-                              T beta,
+                              value_or_pointer<T> beta,
                               T *c,
                               std::int64_t ldc,
                               std::int64_t stridec,
@@ -657,7 +657,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
       least zero.
 
    alpha
-      Scaling factor for the matrix-matrix products.
+      Scaling factor for the matrix-matrix products. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrices ``A`` with size ``stridea`` * ``batch_size``.
@@ -704,7 +704,7 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
       Stride between different ``B`` matrices.
 
    beta
-      Scaling factor for the matrices ``C``.
+      Scaling factor for the matrices ``C``. See :ref:`value_or_pointer` for more details.
 
    c
       Pointer to input/output matrices ``C`` with size ``stridec`` * ``batch_size``.
