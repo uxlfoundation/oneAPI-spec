@@ -62,9 +62,7 @@ Scalar Arguments in BLAS
 
       The USM version of oneMKL BLAS routines use a templated
       ``value_or_pointer<T>`` wrapper to enable either pointers or values
-      to be passed to routines that take a scalar parameter. This type is in
-      the ``oneapi::mkl::`` namespace and defined in the header file
-      ``oneapi/mkl/types.hpp``.
+      to be passed to routines that take a scalar parameter.
 
       In general, users should not explicitly use this type in their
       code. There is no need to construct an object of type
