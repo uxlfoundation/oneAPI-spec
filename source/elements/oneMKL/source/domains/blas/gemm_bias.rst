@@ -311,14 +311,14 @@ gemm_bias (USM Version)
                              std::int64_t m,
                              std::int64_t n,
                              std::int64_t k,
-                             float alpha,
+                             value_or_pointer<float> alpha,
                              const Ta *a,
                              std::int64_t lda,
                              Ta ao,
                              const Tb *b,
                              std::int64_t ldb,
                              Tb bo,
-                             float beta,
+                             value_or_pointer<float> beta,
                              std::int32_t *c,
                              std::int64_t ldc,
                              const std::int32_t *co,
@@ -334,14 +334,14 @@ gemm_bias (USM Version)
                              std::int64_t m,
                              std::int64_t n,
                              std::int64_t k,
-                             float alpha,
+                             value_or_pointer<float> alpha,
                              const Ta *a,
                              std::int64_t lda,
                              Ta ao,
                              const Tb *b,
                              std::int64_t ldb,
                              Tb bo,
-                             float beta,
+                             value_or_pointer<float> beta,
                              std::int32_t *c,
                              std::int64_t ldc,
                              const std::int32_t *co,
@@ -385,7 +385,7 @@ gemm_bias (USM Version)
       at least zero.
  
    alpha
-      Scaling factor for the matrix-matrix product.
+      Scaling factor for the matrix-matrix product. See :ref:`value_or_pointer` for more details.
  
    a
       Pointer to input matrix ``A``.
@@ -470,7 +470,7 @@ gemm_bias (USM Version)
       Specifies the scalar offset value for matrix ``B``.
  
    beta
-      Scaling factor for matrix ``C``.
+      Scaling factor for matrix ``C``. See :ref:`value_or_pointer` for more details.
  
    c
       Pointer to input/output matrix ``C``. It must have a

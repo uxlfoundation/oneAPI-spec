@@ -386,7 +386,7 @@ matrices is given by the ``batch_size`` parameter.
                                   oneapi::mkl::transpose trans,
                                   std::int64_t m,
                                   std::int64_t n,
-                                  T alpha,
+                                  value_or_pointer<T> alpha,
                                   const T *matrix_array_in_out,
                                   std::int64_t ld_in,
                                   std::int64_t ld_out,
@@ -400,7 +400,7 @@ matrices is given by the ``batch_size`` parameter.
                                   oneapi::mkl::transpose trans,
                                   std::int64_t m,
                                   std::int64_t n,
-                                  T alpha,
+                                  value_or_pointer<T> alpha,
                                   const T *matrix_array_in_out,
                                   std::int64_t ld_in,
                                   std::int64_t ld_out,
@@ -426,7 +426,7 @@ matrices is given by the ``batch_size`` parameter.
       Number of columns for each matrix ``C`` on input. Must be at least 0.
 
    alpha
-      Scaling factor for the matrix transpose or copy operation.
+      Scaling factor for the matrix transpose or copy operation. See :ref:`value_or_pointer` for more details.
 
    matrix_array_in_out
       Array holding the matrices ``C``. Must have size at least

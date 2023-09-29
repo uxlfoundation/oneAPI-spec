@@ -410,7 +410,7 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
                               onemkl::diag unit_diag,
                               std::int64_t m,
                               std::int64_t n,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *a,
                               std::int64_t lda,
                               std::int64_t stridea,
@@ -430,7 +430,7 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
                               onemkl::diag unit_diag,
                               std::int64_t m,
                               std::int64_t n,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *a,
                               std::int64_t lda,
                               std::int64_t stridea,
@@ -471,7 +471,7 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
       Number of columns of the ``B`` matrices. Must be at least zero.
 
    alpha
-      Scaling factor for the solutions.
+      Scaling factor for the solutions. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrices ``A`` with size ``stridea`` * ``batch_size``.

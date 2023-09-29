@@ -173,7 +173,7 @@ rotmg (USM Version)
                          T *d1,
                          T *d2,
                          T *x1,
-                         T  y1,
+                         value_or_pointer<T>  y1,
                          T *param,
                          const std::vector<sycl::event> &dependencies = {})
    }
@@ -184,7 +184,7 @@ rotmg (USM Version)
                          T *d1,
                          T *d2,
                          T *x1,
-                         T  y1,
+                         value_or_pointer<T>  y1,
                          T *param,
                          const std::vector<sycl::event> &dependencies = {})
    }
@@ -208,7 +208,7 @@ rotmg (USM Version)
       Pointer to the ``x``-coordinate of the input vector.
 
    y1
-      Scalar specifying the ``y``-coordinate of the input vector.
+      Scalar specifying the ``y``-coordinate of the input vector. See :ref:`value_or_pointer` for more details.
 
    dependencies
       List of events to wait for before starting computation, if any.
