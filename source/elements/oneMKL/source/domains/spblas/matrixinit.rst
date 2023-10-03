@@ -24,19 +24,22 @@ The oneapi::mkl::sparse::init_matrix_handle function initializes the
 
    namespace oneapi::mkl::sparse {
 
-      void init_matrix_handle (oneapi::mkl::sparse::matrix_handle_t *p_handle);
+      void init_matrix_handle (sycl::queue                          &queue,
+                               oneapi::mkl::sparse::matrix_handle_t *p_handle);
 
    }
 
-
 .. container:: section
 
+
     .. rubric:: Input parameters
+
+    queue
+       The SYCL command queue which will be used for SYCL kernels execution.
 
     p_handle
        The address of the sparse::matrix_handle_t ``p_handle`` object to be initialized.
        This initialization routine must only be called on an uninitialized matrix_handle_t object.
-
 
 .. container:: section
 

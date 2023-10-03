@@ -47,7 +47,7 @@ before releasing any data in case of USM.
 
     dependencies
        List of events that ``p_handle`` depends on.
-       The call waits on the events(if any) before resetting the ``p_handle`` to default values.
+       The call waits on the events (if any) before resetting the ``p_handle`` to default values.
 
 .. container:: section
 
