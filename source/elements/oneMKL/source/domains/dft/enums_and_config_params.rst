@@ -126,7 +126,6 @@ config_param
          WORKSPACE,
          ORDERING,
          TRANSPOSE,
-         PACKED_FORMAT,
          COMMIT_STATUS
       };
 
@@ -173,8 +172,6 @@ config_param
         -   Some FFT algorithms apply an explicit permutation stage that can be time consuming.  The value of ``config_value::ORDERED`` (default) applies the data ordering for all transformations.  The value of ``config_value::BACKWARD_SCRAMBLED`` applies ordering for forward transform, but allows backward transform to have scrambled data if it gives a performance advantage. 
       * -   TRANSPOSE
         -   A boolean value to indicate providing the transposition of output results (for multi-dimensional transforms). Default value is ``false``.
-      * -   :ref:`PACKED_FORMAT<onemkl_dft_conjugate_even_storage>`
-        -   Packing format for complex domain data storage of finite conjugate-even sequences from real-to-complex or complex-to-real transformations.
       * -   COMMIT_STATUS
         -   Read-only value indicates whether the descriptor is ready for computation after a successful :ref:`onemkl_dft_descriptor_commit`.  Value of ``config_value::COMMITTED`` indicates a successful call to :ref:`onemkl_dft_descriptor_commit`.  A value of ``config_value::UNCOMMITTED`` (default) is set after descriptor constructor call and before successful call to :ref:`onemkl_dft_descriptor_commit`.
 
@@ -199,7 +196,6 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
          //     config_param::REAL_STORAGE and 
          //     config_param::CONJUGATE_EVEN_STORAGE
          COMPLEX_COMPLEX,
-         REAL_COMPLEX,
          REAL_REAL,
 
          // for config_param::PLACEMENT
@@ -213,11 +209,7 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
          // Allow/avoid certain usages
          ALLOW,
          AVOID,
-         NONE,
-
-         // for config_param::PACKED_FORMAT for storing conjugate-even finite sequence in real containers
-         CCE_FORMAT
-
+         NONE
       };
 
 
