@@ -9,11 +9,7 @@ Storage Formats
 
 Depending on the value of the :ref:`onemkl_dft_enum_domain` template value, the implementation of the DFT supports several storage schemes for input and output data. (See ``Charles Van Loan, Computational Frameworks for the Fast Fourier Transform , SIAM, Philadelphia, 1992`` for motivation of these schemes).
 
-The data elements are placed within contiguous memory blocks, defined with generalized strides (see :ref:`onemkl_dft_config_strides`). For multiple transforms, all sets of data should be located within the same memory block, and the data sets should be placed at the same distance from each other (see :ref:`NUMBER_OF TRANSFORMS<onemkl_dft_config_number_of_transforms>` and ``:config_param::FWD_DISTANCE``, ``config_param::BWD_DISTANCE`` ).
-
-The input data and strides sizes are stored and offsets counted in terms of elements of the data type (complex or real) based on the storage format and :ref:`forward domain<onemkl_dft_enum_domain>` as seen in :ref:`Element types for complex-to-complex transformation and COMPLEX_STORAGE <onemkl_dft_config_data_element_types_complex>`, :ref:`Element types for real-to-complex transformations and REAL_STORAGE<onemkl_dft_config_data_element_types_real>` and :ref:`Element types for real-to-complex transformations and CONJUGATE_EVEN_STORAGE<onemkl_dft_config_data_element_types_conjugate_even>`.
-
-
+The data elements are placed within contiguous memory blocks, defined with generalized strides (see :ref:`onemkl_dft_config_data_layouts`). For multiple transforms, all sets of data should be located within the same memory block, and the data sets should be placed at the same distance from each other (see :ref:`NUMBER_OF TRANSFORMS<onemkl_dft_config_number_of_transforms>` and ``:config_param::FWD_DISTANCE``, ``config_param::BWD_DISTANCE`` ).
 
 .. _onemkl_dft_complex_storage:
 
@@ -255,23 +251,6 @@ The following code illustrates usage of the ``config_value::COMPLEX_COMPLEX`` st
    // for k2=0,n2/2:      Z{k1,k2,m} = AZ[os[0] + k1*os[1] + k2*os[2] + m*odist]
    // for k2=n2/2+1,n2-1: Z{k1,k2,m} = conj(AZ[os[0] + (n1-k1)%n1*os[1] 
    //                                                + (n2-k2)%n2*os[2] + m*odist])
-
-For the backward transform, the input and output parameters and layouts exchange roles.  Set the strides describing the layout in the backward/forward domain as input/output strides, respectively. For example:
-
-.. code-block:: cpp
-   
-   // ...
-   descr.set_value(config_param::INPUT_STRIDES,  fwd_domain_strides);
-   descr.set_value(config_param::OUTPUT_STRIDES, bwd_domain_strides);
-   descr.commit(queue);
-   compute_forward(descr, ...);
-   // ...
-   descr.set_value(config_param::INPUT_STRIDES,  bwd_domain_strides);
-   descr.set_value(config_param::OUTPUT_STRIDES, fwd_domain_strides);
-   descr.commit(queue);
-   compute_backward(descr, ...);
-
-
 
 
 **Parent topic** :ref:`onemkl_dft_enums`
