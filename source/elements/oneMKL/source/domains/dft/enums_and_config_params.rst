@@ -153,11 +153,11 @@ config_param
       * -   :ref:`NUMBER_OF_TRANSFORMS<onemkl_dft_config_number_of_transforms>`
         -   If you need to perform a large number of identical DFTs, you can do this in a single call to a compute_forward function with the value of this equal to the actual number of the transforms. Takes a value of ``std::int64_t`` with default value of 1.
       * -   :ref:`onemkl_dft_complex_storage`
-        -   Specifies the data storage format for :ref:`onemkl_dft_enum_domain` with value of ``COMPLEX``. 
-      * -   :ref:`onemkl_dft_real_storage`
-        -   Specifies the data storage format for :ref:`onemkl_dft_enum_domain` with value of ``REAL``.
-      * -   :ref:`onemkl_dft_conjugate_even_storage`
-        -   Specifies the data storage format using conjugate-even symmetry of the data which allows to store only half of the mathematical results.
+        -   Specifies the forward- and backward-domain data storage format for descriptors of ``COMPLEX`` template :ref:`onemkl_dft_enum_domain`.
+      * -   :ref:`REAL_STORAGE<onemkl_dft_real_and_conjugate_even_storage>`
+        -   Specifies the forward-domain data storage format for descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`.
+      * -   :ref:`CONJUGATE_EVEN_STORAGE<onemkl_dft_real_and_conjugate_even_storage>`
+        -   Specifies the backward-domain data storage format for descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`.
       * -   PLACEMENT
         -   Choose between in-place (value is ``config_value::INPLACE``) and out-of-place (value is ``config_value::NOT_INPLACE``) transformations. For in-place transformation, the computational functions overwrite the input data with the output results.  The default is ``config_value::INPLACE``.  When the configuration parameter is set to ``config_value::NOT_INPLACE``, the input and output data sets must have no common elements.
       * -   :ref:`FWD_STRIDES<onemkl_dft_config_data_layouts>`
@@ -214,8 +214,7 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
 
          // Allow/avoid certain usages
          ALLOW,
-         AVOID,
-         NONE
+         AVOID
       };
 
 
@@ -227,6 +226,6 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
 
    config_params/scaling_factor
    config_params/number_of_transforms
-   config_params/storage_formats
    config_params/data_layouts
+   config_params/storage_formats
 
