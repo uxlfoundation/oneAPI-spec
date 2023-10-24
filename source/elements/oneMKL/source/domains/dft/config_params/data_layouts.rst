@@ -139,7 +139,7 @@ backward domain). Equivalently,
 - for descriptors such that the :ref:`assumed elemementary type<onemkl_dft_config_data_element_types>` is identical in forward and backward domains, the offset, stride(s) (and distances, if relevant) must be equal in forward and backward domain;
 - for descriptors assuming :ref:`different elemementary types<onemkl_dft_config_data_element_types>` in forward and backward domain, let :math:`\beta` and :math:`\gamma` be the sizes of the :ref:`elementary data type assumed<onemkl_dft_config_data_element_types>` in forward and backward domain, respectively (:math:`\beta \neq \gamma`). Then,
 
-    - no offset may be used in either domain: :math:`s^{\text{fwd}}_{0} = s^{\text{bwd}}_{0} = 0`;
+    - offsets must satisfy :math:`\beta s^{\text{fwd}}_{0} = \gamma s^{\text{bwd}}_{0}`;
     - if :math:`d > 1`, strides must satisfy :math:`\beta s^{\text{fwd}}_{j} = \gamma s^{\text{bwd}}_{j}, \forall 1 \leq j < d`;
     - if :math:`M > 1`, distances must satisfy :math:`\beta l^{\text{fwd}} = \gamma l^{\text{bwd}}`.
 
