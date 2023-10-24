@@ -10,11 +10,15 @@ Configuration of Data Layouts
 The DFT interface provides the configuration parameters
 ``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``) and
 ``config_param::FWD_DISTANCE`` (resp. ``config_param::BWD_DISTANCE``) to define
-the data layouts used in forward (resp. backward) domain. Considering the
-:math:`m`-th (:math:`m \geq 0`) :math:`d`-dimensional
-:math:`n_{1}\times n_{2} \times\dots\times n_d` data set :math:`X` in forward
-(resp. backward) domain, those configuration parameters describe that a
-particular element :math:`X^{m}_{k_{1}, k_{2}, \dots, k_d }` is located at index
+the data layouts used in forward (resp. backward) domain. Considering
+:math:`M` (:math:`M \geq 1`) :math:`d`-dimensional
+:math:`n_{1}\times n_{2} \times\dots\times n_d` data set(s) :math:`X^{m}`
+(:math:`0 \leq m < M`) in forward (resp. backward) domain, those configuration
+parameters describe that a particular element of multi-index
+:math:`\left(k_{1}, k_{2}, \dots, k_d\right)` (see
+:ref:`here below<onemkl_dft_data_layout_nonredundant_valid_range>` for the
+range of values of such multi-indices), *i.e.*,
+:math:`X^{m}_{k_{1}, k_{2}, \dots, k_d }`, is located at index
 
 .. math::
     s_0 + k_1*s_1 + k_2*s_2 + \dots + k_d*s_d + m*l
@@ -109,9 +113,11 @@ as expressed in :eq:`eq_idx_data_layout` corresponding to two different
 :math:`(d+1)`-tuples :math:`(m, k_{1}, k_{2}, \dots, k_d)` within valid range,
 *i.e.*, such that
 
+.. _onemkl_dft_data_layout_nonredundant_valid_range:
+
 - :math:`0 \leq m < M` wherein :math:`M` is the :ref:`number of transforms<onemkl_dft_config_number_of_transforms>`;
 
-- :math:`0 \leq k_j < n_j`, :math:`1 \leq j < d`;
+- :math:`0 \leq k_j < n_j`, :math:`1 \leq j < d` if :math:`d > 1` ;
 
 - :math:`0 \leq k_d < n_d`, for descriptors of ``COMPLEX`` template :ref:`onemkl_dft_enum_domain` or for forward data of descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`;
 
