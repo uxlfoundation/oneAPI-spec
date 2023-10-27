@@ -4,34 +4,50 @@
 
 .. _onemkl_dft_enums:
 
-Configuration Parameters and Enums
+DFT-related scoped enumeration types
 ------------------------------------
 
-The following enum classes are defined in the ``oneapi::mkl::dft`` namespace which are used for configuring the discrete Fourier transform problem in the :ref:`onemkl_dft_descriptor` class prior to a call to :ref:`onemkl_dft_descriptor_commit`.  
+The following scoped enumeration types, defined in the ``oneapi::mkl::dft``
+namespace, are used for constructing and configuring objects of the
+:ref:`descriptor<onemkl_dft_descriptor>` class consistently with the DFT(s) they
+are meant to define.
 
 .. list-table::
       :header-rows: 1
+      :widths: 24 73
 
-      * -   enum class 
+      * -   Scoped enumeration type
         -   Description
       * -   :ref:`onemkl_dft_enum_precision`
-        -   The floating-point precision in which the transform is carried out. Used as a template argument for :ref:`onemkl_dft_descriptor` class.
+        -   Represents the precision of the floating-point data format and of
+            the floating-point arithmetic to be used for the desired DFT
+            calculations. A template parameter ``prec`` of this type is used for
+            the :ref:`descriptor<onemkl_dft_descriptor>` class.
       * -   :ref:`onemkl_dft_enum_domain`
-        -   The forward domain data type for dft transformation. Used as a template argument for :ref:`onemkl_dft_descriptor` class.
+        -   Represents the type of forward domain for the desired DFT(s). A
+            template parameter ``dom`` of this type is used for the
+            :ref:`descriptor<onemkl_dft_descriptor>` class.
       * -   :ref:`onemkl_dft_enum_config_param`
-        -   The configuration parameters to specify the DFT transformation desired.  These can be set and retrieved via the :ref:`onemkl_dft_descriptor_set_value` and :ref:`onemkl_dft_descriptor_get_value` functions.
+        -   Represents configuration parameters for objects of the
+            :ref:`descriptor<onemkl_dft_descriptor>` class. The configuration
+            value associated with the (resp. writable) configuration parameters
+            can be retrieved (resp. set) via the object's
+            :ref:`onemkl_dft_descriptor_get_value` (resp.
+            :ref:`onemkl_dft_descriptor_set_value`) member function.
       * -   :ref:`onemkl_dft_enum_config_value`
-        -   Some possible enum values that the :ref:`onemkl_dft_enum_config_param` configuration parameters can take on.
-
-
-
+        -   Represents the possible configuration values for some of the
+            :ref:`configuration parameters<onemkl_dft_enum_config_param>` that
+            may take only a few determined, non-numeric values.
 
 .. _onemkl_dft_enum_precision:
 
 precision
 +++++++++
 
-The floating-point precision in which the transform is to be carried out.  The data must be presented in this precision, the computation is carried out in this precision, and the result is delivered in this precision.
+This scoped enumeration type represents the precision of the floating-point
+format to be used for the desired DFT(s). The same precision is to be used for
+the user-provided data, the computation being carried out by oneMKL and the
+results delivered by oneMKL.
 
 .. container:: section
  
@@ -46,21 +62,25 @@ The floating-point precision in which the transform is to be carried out.  The d
 
    .. list-table::
       :header-rows: 1
+      :widths: 24 73
 
       * -   Value
         -   Description
       * -   SINGLE
-        -   data and transforms are executed using single (fp32) precision
+        -   Single-precision floating-point format (FP32) is used for data
+            representation and arithmetic operations.
       * -   DOUBLE
-        -   data and transforms are executed using double (fp64) precision
-
+        -   Double-precision floating-point format (FP64) is used for data
+            representation and arithmetic operations.
 
 .. _onemkl_dft_enum_domain:
 
 domain
 ++++++
 
-The discrete Fourier transform supports forward transformations on input sequences of two domains, from the forward domain to the backward domain. The backward transformation operates on input sequences from the backward domain to the forward domain.  This ``domain`` value defines the forward domain and the backward domain is always implied to be complex-valued.
+This scoped enumeration type represents the type of forward domain for the
+desired DFTs (as explained in the :ref:`introduction<onemkl_dft_definitions>`,
+the backward domain type is always complex).
 
 .. container:: section
 
@@ -75,19 +95,16 @@ The discrete Fourier transform supports forward transformations on input sequenc
    
    .. list-table::
       :header-rows: 1
+      :widths: 24 73
 
       * -   Value
-        -   Forward domain
-        -   Backward domain
         -   Description
       * -   REAL
-        -   real-valued
-        -   complex-valued
-        -   Forward transformation is real-to-complex, backward transform is complex-to-real.
+        -   The forward domain is the set of real :math:`d`-dimensional periodic
+            sequences.
       * -   COMPLEX
-        -   complex-valued
-        -   complex-valued
-        -   Forward and backward transformations are complex-to-complex.
+        -   The forward domain is the set of complex :math:`d`-dimensional
+            periodic sequences.
 
 
 .. _onemkl_dft_enum_config_param:
@@ -95,25 +112,27 @@ The discrete Fourier transform supports forward transformations on input sequenc
 config_param
 ++++++++++++
 
+This scoped enumeration type represents configuration parameters for objects of
+the :ref:`descriptor<onemkl_dft_descriptor>` class.
+
 .. container:: section
 
    .. code:: cpp
       
       enum class config_param {
-
+         // read-only parameters:
          FORWARD_DOMAIN,
          DIMENSION,
          LENGTHS,
          PRECISION,
-         
+         COMMIT_STATUS,
+         // writable parameters:
          FORWARD_SCALE,
          BACKWARD_SCALE,
          
          NUMBER_OF_TRANSFORMS,
          
          COMPLEX_STORAGE,
-         REAL_STORAGE,
-         CONJUGATE_EVEN_STORAGE,
          
          PLACEMENT,
 
@@ -125,82 +144,148 @@ config_param
          FWD_DISTANCE,
          BWD_DISTANCE,
          
-         WORKSPACE,
-         ORDERING,
-         TRANSPOSE,
-         COMMIT_STATUS
+         WORKSPACE
       };
 
-   Many of the config_param enum's will take values in :ref:`onemkl_dft_enum_config_value` or other ``std::int64_t``, ``std::vector<std::int64_t>``, or floating-point :ref:`onemkl_dft_enum_precision` values as specified in the following table.
+   Configuration parameters represented by ``config_param::FORWARD_DOMAIN`` and
+   ``config_param::PRECISION`` are associated with configuration values of type
+   :ref:`domain<onemkl_dft_enum_domain>` and
+   :ref:`precision<onemkl_dft_enum_precision>` respectively. Other
+   configuration parameters are associated with configuration values of type
+   :ref:`onemkl_dft_enum_config_value` or of a native type like
+   ``std::int64_t``, ``std::vector<std::int64_t>``, ``float`` or ``double``.
+   This is further specified in the following table.
 
    .. list-table::
       :header-rows: 1
+      :widths: 10 50 40
 
-      * -   Value
-        -   Description
+      * -   | Value of ``config_param``
+            |
+        -   | Represented configuration parameter(s)
+            |
+        -   | Type of associated configuration value
+            | [default value]
       * -   FORWARD_DOMAIN
-        -   Read-only value of forward :ref:`onemkl_dft_enum_domain` set at :ref:`onemkl_dft_descriptor` construction time. 
+        -   Type of forward domain, set at construction time as the
+            specialization value of :ref:`onemkl_dft_enum_domain` template
+            parameter ``dom``. This parameter is read-only.
+        -   | :ref:`onemkl_dft_enum_domain`
+            | [``dom``]
       * -   DIMENSION
-        -   Read-only value of the dimension of the transformation. Value is a positive integer of type ``std::int64_t`` set at :ref:`onemkl_dft_descriptor` construction.
+        -   Value of the dimension :math:`d` of the desired DFTs, set at
+            construction time. This parameter is read-only.
+        -   | ``std::int64_t``
+            | [:math:`d`]
       * -   LENGTHS
-        -   For a one-dimensional transform, the transform length is specified by a positive integer value represented in an integer scalar (``std::int64_t``). For multi-dimensional (:math:`\geq 2`) transform, the lengths of each of the dimensions are supplied in an integer vector (``std::vector<std::int64_t>``) at :ref:`onemkl_dft_descriptor` construction time.
+        -   Values :math:`\lbrace n_1, \ldots, n_d\rbrace` of the periods (or
+            "lengths") of the desired DFT, set at construction time. This
+            parameter is read-only.
+        -   | ``std::vector<std::int64_t>`` of size :math:`d` or, if :math:`d = 1`, ``std::int64_t``
+            | [``std::vector<int64_t>({n_1,...,n_d})``]
       * -   PRECISION
-        -   Read-only value of :ref:`onemkl_dft_enum_precision` set at :ref:`onemkl_dft_descriptor` construction time. 
-      * -   :ref:`FORWARD_SCALE<onemkl_dft_config_scale>`
-        -   The forward transform is associated with a scale factor, :math:`\sigma`, of real floating-point type :ref:`onemkl_dft_enum_precision`, the default value is 1.0.
-      * -   :ref:`BACKWARD_SCALE<onemkl_dft_config_scale>`
-        -   The backward transform is associated with a scale factor, :math:`\sigma`, of real floating-point type :ref:`onemkl_dft_enum_precision`, the default value is 1.0.
-      * -   :ref:`NUMBER_OF_TRANSFORMS<onemkl_dft_config_number_of_transforms>`
-        -   If you need to perform a large number of identical DFTs, you can do this in a single call to a compute_forward function with the value of this equal to the actual number of the transforms. Takes a value of ``std::int64_t`` with default value of 1.
-      * -   :ref:`onemkl_dft_complex_storage`
-        -   Specifies the forward- and backward-domain data storage format for descriptors of ``COMPLEX`` template :ref:`onemkl_dft_enum_domain`.
-      * -   :ref:`REAL_STORAGE<onemkl_dft_real_and_conjugate_even_storage>`
-        -   Specifies the forward-domain data storage format for descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`.
-      * -   :ref:`CONJUGATE_EVEN_STORAGE<onemkl_dft_real_and_conjugate_even_storage>`
-        -   Specifies the backward-domain data storage format for descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`.
-      * -   PLACEMENT
-        -   Choose between in-place (value is ``config_value::INPLACE``) and out-of-place (value is ``config_value::NOT_INPLACE``) transformations. For in-place transformation, the computational functions overwrite the input data with the output results.  The default is ``config_value::INPLACE``.  When the configuration parameter is set to ``config_value::NOT_INPLACE``, the input and output data sets must have no common elements.
-      * -   :ref:`FWD_STRIDES<onemkl_dft_config_data_layouts>`
-        -   Defines the data layout in the forward domain. The value for a :math:`d`-dimensional transform is a :math:`(d+1)`-long vector of type ``std::vector<std::int64_t>`` containing the offset and stride(s) for the forward-domain data. See :ref:`onemkl_dft_config_data_layouts` for more details and default values.
-      * -   :ref:`BWD_STRIDES<onemkl_dft_config_data_layouts>`
-        -   Defines the data layout in the backward domain. The value for a :math:`d`-dimensional transform is a :math:`(d+1)`-long vector of type ``std::vector<std::int64_t>`` containing the offset and stride(s) for the backward-domain data. See :ref:`onemkl_dft_config_data_layouts` for more details and default values.
-      * -   :ref:`INPUT_STRIDES<onemkl_dft_config_data_layouts>` (deprecated)
-        -   Defines the input data layout. The value for a :math:`d`-dimensional transform is a :math:`(d+1)`-long vector of type ``std::vector<std::int64_t>`` containing the offset and stride(s) for the input data. See :ref:`onemkl_dft_config_data_layouts` for more details and default values
-      * -   :ref:`OUTPUT_STRIDES<onemkl_dft_config_data_layouts>` (deprecated)
-        -   Defines the output data layout. The value for a :math:`d`-dimensional transform is a :math:`(d+1)`-long vector of type ``std::vector<std::int64_t>`` containing the offset and stride(s) for the output data. See :ref:`onemkl_dft_config_data_layouts` for more details and default values
-      * -   :ref:`FWD_DISTANCE<onemkl_dft_config_data_layouts>`
-        -   If computing multiple (batched) transforms, this parameter specifies the distance (in elements) between the first data elements of consecutive data sets in the forward domain. Provided in type ``std::int64_t``, the default value is 0.
-      * -   :ref:`BWD_DISTANCE<onemkl_dft_config_data_layouts>`
-        -   If computing multiple (batched) transforms, this parameter specifies the distance (in elements) between the first data elements of consecutive data sets in the backward domain. Provided in type ``std::int64_t``, the default value is 0.
-      * -   WORKSPACE
-        -   Some FFT algorithm computation steps require a scratch space for permutations or other purposes.  To manage the use of auxiliary storage, set to ``config_value::ALLOW`` to permit the use of auxiliary storage and ``config_value::AVOID`` to avoid using auxiliary storage if possible.
-      * -   ORDERING
-        -   Some FFT algorithms apply an explicit permutation stage that can be time consuming.  The value of ``config_value::ORDERED`` (default) applies the data ordering for all transformations.  The value of ``config_value::BACKWARD_SCRAMBLED`` applies ordering for forward transform, but allows backward transform to have scrambled data if it gives a performance advantage. 
-      * -   TRANSPOSE
-        -   A boolean value to indicate providing the transposition of output results (for multi-dimensional transforms). Default value is ``false``.
+        -   Floating-point precision to be considered by and used for the DFT
+            calculation(s), set at construction time as the specialization value
+            of :ref:`onemkl_dft_enum_precision` template parameter ``prec``.
+            This parameter is read-only.
+        -   | :ref:`onemkl_dft_enum_precision`
+            | [``prec``]
       * -   COMMIT_STATUS
-        -   Read-only value indicates whether the descriptor is ready for computation after a successful :ref:`onemkl_dft_descriptor_commit`.  Value of ``config_value::COMMITTED`` indicates a successful call to :ref:`onemkl_dft_descriptor_commit`.  A value of ``config_value::UNCOMMITTED`` (default) is set after descriptor constructor call and before successful call to :ref:`onemkl_dft_descriptor_commit`.
+        -   Status flag indicating whether the object is ready for computations
+            after a successful call to :ref:`onemkl_dft_descriptor_commit`. This
+            parameter is read-only.
+        -   | :ref:`onemkl_dft_enum_config_value` (possible values are self-explanatory ``config_value::COMMITTED`` or ``config_value::UNCOMMITTED``).
+            | [``config_value::UNCOMMITTED``]
+      * -   FORWARD_SCALE
+        -   Value of :math:`\sigma` for the forward DFT.
+        -   | ``float`` (resp. ``double``) for single-precision (resp. double-precision) descriptors
+            | [1.0]
+      * -   BACKWARD_SCALE
+        -   Value of :math:`\sigma` for the backward DFT.
+        -   | ``float`` (resp. ``double``) for single-precision (resp. double-precision) descriptors
+            | [1.0]
+      * -   :ref:`NUMBER_OF_TRANSFORMS<onemkl_dft_num_dft_data_layouts_batched_dfts>`
+        -   Value of :math:`M`. This is relevant (and *must* be set) for
+            batched DFT(s), *i.e.*, if :math:`M > 1`.
+        -   | ``std::int64_t``
+            | [1]
+      * -   :ref:`COMPLEX_STORAGE<onemkl_dft_complex_storage>`
+        -   Data storage type used (relevant for complex descriptors only).
+        -   | :ref:`onemkl_dft_enum_config_value` (possible values are ``config_value::COMPLEX_COMPLEX`` or ``config_value::REAL_REAL``)
+            | [``config_value::COMPLEX_COMPLEX``]
+      * -   PLACEMENT
+        -   | Parameter specifying whether the DFT calculations should be done in-place (results overwriting the input data) or out-of-place (input and output in separate data containers having no common elements).
+            | Note: even for out-of-place configurations, some implementations may not preserve the original input data.
+        -   | :ref:`onemkl_dft_enum_config_value` (possible values are self-explanatory ``config_value::INPLACE`` or ``config_value::NOT_INPLACE``)
+            | [``config_value::INPLACE``]
+      * -   :ref:`FWD_STRIDES<onemkl_dft_fwd_bwd_strides>`
+        -   Offset and strides defining the layout within a given data sequence
+            in the forward domain.
+        -   | ``std::vector<std::int64_t>`` of size :math:`(d+1)`
+            | [defined :ref:`here<onemkl_dft_fwd_bwd_strides>`]
+      * -   :ref:`BWD_STRIDES<onemkl_dft_fwd_bwd_strides>`
+        -   Offset and strides defining the layout within a given data sequence
+            in the backward domain.
+        -   | ``std::vector<std::int64_t>`` of size :math:`(d+1)`
+            | [defined :ref:`here<onemkl_dft_fwd_bwd_strides>`]
+      * -   :ref:`INPUT_STRIDES<onemkl_dft_io_strides_deprecated>` (deprecated)
+        -   Offset and strides defining the layout within a given *input* data
+            sequence.
+        -   | ``std::vector<std::int64_t>`` of size :math:`(d+1)`
+            | [``std::vector<std::int64_t>(d+1, 0)``]
+      * -   :ref:`OUTPUT_STRIDES<onemkl_dft_io_strides_deprecated>` (deprecated)
+        -   Offset and strides defining the layout within a given *output* data
+            sequence.
+        -   | ``std::vector<std::int64_t>`` of size :math:`(d+1)`
+            | [``std::vector<std::int64_t>(d+1, 0)``]
+      * -   :ref:`FWD_DISTANCE<onemkl_dft_num_dft_data_layouts_batched_dfts>`
+        -   Distance (in number of elements) between forward-domain entries
+            :math:`\left(\cdot\right)^{m}_{k_1, k_2, \ldots, k_d}` and
+            :math:`\left(\cdot\right)^{m + 1}_{k_1, k_2, \ldots, k_d}` for all
+            :math:`0\leq m < M - 1` and
+            :math:`\left(k_1, k_2, \ldots, k_d\right)` in
+            :ref:`valid range<onemkl_dft_elementary_range_of_indices>`. This is
+            relevant (and *must* be set) for batched DFT(s), *i.e.*, if
+            :math:`M > 1`.
+        -   | ``std::int64_t``
+            | [0]
+      * -   :ref:`BWD_DISTANCE<onemkl_dft_num_dft_data_layouts_batched_dfts>`
+        -   Distance (in number of elements) between backward-domain entries
+            :math:`\left(\cdot\right)^{m}_{k_1, k_2, \ldots, k_d}` and
+            :math:`\left(\cdot\right)^{m + 1}_{k_1, k_2, \ldots, k_d}` for all
+            :math:`0\leq m < M - 1` and
+            :math:`\left(k_1, k_2, \ldots, k_d\right)` in
+            :ref:`valid range<onemkl_dft_elementary_range_of_indices>`. This is
+            relevant (and *must* be set) for batched DFT(s), *i.e.*, if
+            :math:`M > 1`.
+        -   | ``std::int64_t``
+            | [0]
+      * -   WORKSPACE
+        -   Flag notifying if oneMKL is allowed to use algorithms that may
+            require additional memory compared to other (possibly less
+            performant) alternatives, or if it should avoid it, if possible.
+        -   | :ref:`onemkl_dft_enum_config_value` (possible values are self-explanatory ``config_value::ALLOW`` or ``config_value::AVOID``)
+            | [``config_value::ALLOW``]
 
 .. _onemkl_dft_enum_config_value:
 
 config_value
 ++++++++++++
 
-These are some of the non-integer/floating-point values that the :ref:`onemkl_dft_enum_config_param` configuration parameters can take on.
+This scoped enumeration type represents possible non-numeric configuration
+values associated with some
+:ref:`configuration parameters<onemkl_dft_enum_config_param>`.
 
 .. container:: section
 
    .. code:: cpp
       
       enum class config_value {
-
          // for config_param::COMMIT_STATUS
          COMMITTED,
          UNCOMMITTED,
 
          // for config_param::COMPLEX_STORAGE,
-         //     config_param::REAL_STORAGE and 
-         //     config_param::CONJUGATE_EVEN_STORAGE
          COMPLEX_COMPLEX,
          REAL_REAL,
 
@@ -208,24 +293,16 @@ These are some of the non-integer/floating-point values that the :ref:`onemkl_df
          INPLACE,
          NOT_INPLACE,
 
-         // for config_param::ORDERING
-         ORDERED,
-         BACKWARD_SCRAMBLED,
-
-         // Allow/avoid certain usages
+         // for config_param::WORKSPACE
          ALLOW,
          AVOID
       };
-
-
 
 **Parent topic:** :ref:`onemkl_dft`
 
 .. toctree::
    :hidden:
 
-   config_params/scaling_factor
    config_params/number_of_transforms
    config_params/data_layouts
    config_params/storage_formats
-
