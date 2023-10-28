@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2023 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -8,159 +8,274 @@ Configuration of Data Layouts
 -----------------------------
 
 The DFT interface provides the configuration parameters
-``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``) and
-``config_param::FWD_DISTANCE`` (resp. ``config_param::BWD_DISTANCE``) to define
-the data layouts used in forward (resp. backward) domain. Considering
-:math:`M` (:math:`M \geq 1`) :math:`d`-dimensional
-:math:`n_{1}\times n_{2} \times\dots\times n_d` data set(s) :math:`X^{m}`
-(:math:`0 \leq m < M`) in forward (resp. backward) domain, those configuration
-parameters describe that a particular element of multi-index
-:math:`\left(k_{1}, k_{2}, \dots, k_d\right)` (see
-:ref:`here below<onemkl_dft_data_layout_nonredundant_valid_range>` for the
-range of values of such multi-indices), *i.e.*,
-:math:`X^{m}_{k_{1}, k_{2}, \dots, k_d }`, is located at index
+``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``)
+to define the data layout locating entries of relevant data sequences in
+forward (resp. backward) domain. In case of batched transforms, *i.e.*, if
+:math:`M > 1` is configured by setting ``config_param::NUMBER_OF_TRANSFORMS``
+accordingly, ``config_param::FWD_DISTANCE`` (resp.
+``config_param::BWD_DISTANCE``) completes the description of the data layout by
+specifying the distances between successive data sequences in forward (resp.
+backward) domain.
+
+Using the notations from the :ref:`introduction<onemkl_dft_definitions>` and the
+superscript :math:`\text{fwd}` (resp. :math:`\text{bwd}`) for data sequences
+belonging to forward (resp. backward) domain, for any :math:`m` and multi-index
+:math:`\left(k_1, k_2, \ldots, k_d\right)` within :ref:`valid
+range<onemkl_dft_elementary_range_of_indices>`, the corresponding entry
+:math:`\left(\cdot\right)^{m}_{k_{1}, k_{2}, \dots, k_d }` - or the real or
+imaginary part thereof - of the relevant data sequence is located at index
 
 .. math::
-    s_0 + k_1*s_1 + k_2*s_2 + \dots + k_d*s_d + m*l
+    s^{\text{xwd}}_0 + k_1\ s^{\text{xwd}}_1 + k_2\ s^{\text{xwd}}_2 + \dots + k_d\ s^{\text{xwd}}_d + m\ l^{\text{xwd}}
     :label: eq_idx_data_layout
 
-of the corresponding data container (``sycl::buffer`` or USM pointer) provided
-to the compute function, the data type of which is (possibly implicitly
-re-interpreted) as documented in the
-:ref:`table<onemkl_dft_config_data_element_types>` below. In the index
-expression :eq:`eq_idx_data_layout`,
+of the corresponding data container (``sycl::buffer`` object or
+device-accessible USM allocation) provided to the compute function, the base
+data type of which is (possibly implicitly re-interpreted) as documented in the
+:ref:`table<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`
+below. In the index expression :eq:`eq_idx_data_layout`,
+:math:`\text{x} = \text{f}` (resp. :math:`\text{x} = \text{b}`) for entries of
+forward-domain (resp. backward-domain) data sequences and
 
-- :math:`s_j`, :math:`0 \leq j \leq d` represents the :ref:`generalized strides and offset<onemkl_dft_fwd_bwd_strides>` within :math:`d`-dimensional data sets in forward (resp. backward) domain, in number of elements of the :ref:`relevant elementary data type<onemkl_dft_config_data_element_types>`;
+- :math:`s^{\text{xwd}}_j`, :math:`\forall j \in \lbrace 0, \ldots, d\rbrace`
+  represents the :ref:`offset and generalized
+  strides<onemkl_dft_fwd_bwd_strides>` defining the locations of entries within
+  each :math:`d`-dimensional data sequence in forward (resp. backward) domain if
+  :math:`\text{x} = \text{f}` (resp. if :math:`\text{x} = \text{b}`), counted in
+  number of elements of the relevant :ref:`implicitly-assumed elementary data
+  type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`;
+- :math:`l^{\text{xwd}}` represents the
+  :ref:`distance<onemkl_dft_num_dft_data_layouts_batched_dfts>` between successive
+  :math:`d`-dimensional data sequences in forward (resp. backward) domain if
+  :math:`\text{x} = \text{f}` (resp. if :math:`\text{x} = \text{b}`), counted
+  in number of elements of the relevant :ref:`implicitly-assumed elementary data
+  type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`.
 
-- :math:`l` represents the :ref:`distance<onemkl_dft_fwd_bwd_distance>` between successive :math:`d`-dimensional data sets in forward (resp. backward) domain, in number of elements of the :ref:`relevant elementary data type<onemkl_dft_config_data_element_types>`;
+.. note::
+    All data sequences (or respective real and imaginary parts thereof if
+    separately stored) must belong to the same block allocation, as a
+    consequence of the generalized index :eq:`eq_idx_data_layout`.
 
-.. container:: section
+.. _onemkl_dft_config_data_implicitly_assumed_elementary_data_type:
 
-   .. _onemkl_dft_config_data_element_types:
+.. rubric:: Implicitly-assumed elementary data type 
 
-   .. rubric:: Elementary data type assumed by descriptors depending on their type and configuration (precision matching the :ref:`descriptor's<onemkl_dft_enum_precision>`)
+When reading or writing an element at index :eq:`eq_idx_data_layout` of any
+user-provided data container used at compute time, a
+:ref:`descriptor<onemkl_dft_descriptor>` object may re-interpret the base data
+type of that data container into an implicitly-assumed elementary data type.
+That implicitly-assumed data type depends on the object type, *i.e.*, on the
+specialization values used for the template parameters when instantiating the
+:ref:`descriptor<onemkl_dft_descriptor>` class, and, in case of complex
+descriptors, on the configuration value set for its configuration parameter
+``config_param::COMPLEX_STORAGE``. The table below lists the implicitly-assumed
+data type in either domain (last 2 columns) based on the object type and
+its configuration value for ``config_param::COMPLEX_STORAGE`` (first 2 columns).
 
-   .. list-table::
-        :header-rows: 1
-        :class: longtable
+.. list-table::
+    :header-rows: 1
+    :class: longtable
 
-        * -   Descriptor configuration
-          -   Element type of forward data
-          -   Element type of backward data
-        * -   ``COMPLEX`` template :ref:`onemkl_dft_enum_domain` and :ref:`onemkl_dft_complex_storage_complex_complex`
-          -   Complex
-          -   Complex
-        * -   ``COMPLEX`` template :ref:`onemkl_dft_enum_domain` and :ref:`onemkl_dft_complex_storage_real_real`
-          -   Real
-          -   Real
-        * -   ``REAL`` template :ref:`onemkl_dft_enum_domain`, :ref:`onemkl_dft_real_storage_real_real` and :ref:`onemkl_dft_conjugate_even_storage_complex_complex`
-          -   Real
-          -   Complex
+    * -   Object type
+      -   Configuration value for configuration paramer ``config_param::COMPLEX_STORAGE``
+      -   Implicitly-assumed elementary data type in forward domain
+      -   Implicitly-assumed elementary data type in backward domain
+    * -   ``descriptor<precision::SINGLE, domain::COMPLEX>``
+      -   ``config_value::COMPLEX_COMPLEX``
+      -   ``std::complex<float>``
+      -   ``std::complex<float>``
+    * -   ``descriptor<precision::DOUBLE, domain::COMPLEX>``
+      -   ``config_value::COMPLEX_COMPLEX``
+      -   ``std::complex<double>``
+      -   ``std::complex<double>``
+    * -   ``descriptor<precision::SINGLE, domain::COMPLEX>``
+      -   ``config_value::REAL_REAL``
+      -   ``float``
+      -   ``float``
+    * -   ``descriptor<precision::DOUBLE, domain::COMPLEX>``
+      -   ``config_value::REAL_REAL``
+      -   ``double``
+      -   ``double``
+    * -   ``descriptor<precision::SINGLE, domain::REAL>``
+      -   irrelevant
+      -   ``float``
+      -   ``std::complex<float>``
+    * -   ``descriptor<precision::DOUBLE, domain::REAL>``
+      -   irrelevant
+      -   ``double``
+      -   ``std::complex<double>``
 
+.. _onemkl_dft_num_dft_data_layouts_batched_dfts:
+
+.. rubric:: Configuring data layouts for batched transforms
+
+The value :math:`l^{\text{xwd}}` in :eq:`eq_idx_data_layout` above is
+communicated as an ``std::int64_t`` configuration value, set for the
+configuration parameter ``config_param::FWD_DISTANCE`` if :math:`\text{x} =
+\text{f}` (resp. ``config_param::BWD_DISTANCE`` if :math:`\text{x} = \text{b}`).
+This value is irrelevant for unbatched transforms, *i.e.*, for descriptors set
+to handle a number of transforms :math:`M` equal to :math:`1` (default behavior).
+
+In case of batched transforms, the number :math:`M > 1` of desired DFTs *must*
+be set explicitly as an ``std::int64_t`` configuration value for the
+configuration parameter ``config_param::NUMBER_OF_TRANSFORMS``. In that case,
+the configuration parameters ``config_param::FWD_DISTANCE`` and
+``config_param::BWD_DISTANCE`` *must also* be set explicitly since their default
+configuration values of :math:`0` would break the :ref:`consistency
+requirements<onemkl_dft_data_layout_requirements>` for any :math:`M > 1`.
 
 .. _onemkl_dft_fwd_bwd_strides:
 
-.. rubric:: FWD_STRIDE and BWD_STRIDES
+.. rubric:: Configuring strides in forward and backward domains
 
-The values :math:`s_0, s_1, \dots, s_d` in :eq:`eq_idx_data_layout` here above
-are communicated as elements, in that order, of a :math:`(d+1)`-long
-``std::vector<std::int64_t>`` value for the configuration parameter
-``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``). The element
-:math:`s_0` represents an absolute offset (or "displacement") in the data set(s)
-while the subsequent element(s) :math:`s_j\ (j > 0)` are generalized strides.
+The values :math:`s^{\text{xwd}}_0, s^{\text{xwd}}_1, \dots, s^{\text{xwd}}_d`
+in :eq:`eq_idx_data_layout` above are communicated as elements, in that order,
+of a :math:`(d+1)`-long ``std::vector<std::int64_t>`` configuration value, set
+for the configuration parameter ``config_param::FWD_STRIDES`` if
+:math:`\text{x} = \text{f}` (resp. ``config_param::BWD_STRIDES`` if
+:math:`\text{x} = \text{b}`). The element :math:`s^{\text{xwd}}_0` represents an
+absolute offset (or "displacement") in the data sets while the subsequent
+elements :math:`s^{\text{xwd}}_j\ (j > 0)` are generalized strides to be
+considered along dimensions :math:`j \in \lbrace 1, \ldots, d\rbrace`.
 
 The default values set for the forward and backward strides correspond to the
 data layout configurations for unbatched, in-place transforms using unit stride
-along the leading dimension with no offset (and minimal padding in forward
-domain in case of descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`,
-aligning with the :ref:`requirements for in-place
-transforms<onemkl_dft_data_layout_requirements>`). In other words, the default
-values are :math:`s_0 = 0`, :math:`s_d = 1` and, for multi-dimensional
-transforms, *i.e.*, if :math:`d > 1`,
+along the last dimension with no offset (and minimal padding in forward
+domain in case of real descriptors, aligning with the :ref:`requirements for
+in-place transforms<onemkl_dft_data_layout_requirements>`). In other words, the
+default values are :math:`s^{\text{fwd}}_0 = s^{\text{bwd}}_0 = 0`,
+:math:`s^{\text{fwd}}_d = s^{\text{bwd}}_d = 1` and, for :math:`d`-dimensional
+DFTs with :math:`d > 1`,
 
-- :math:`s_{d-1} = n_{d}` for descriptors of ``COMPLEX`` template :ref:`onemkl_dft_enum_domain`;
-
-- :math:`s_{d-1} = \alpha \left(\lfloor \frac{n_{d}}{2} \rfloor + 1\right)`, wherein :math:`\alpha = 2` (resp. :math:`\alpha = 1`) for forward (resp. backward) strides, of descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`;
-
-and :math:`s_k = n_{k+1} * s_{k+1}` for :math:`1 \leq k < d - 1` if :math:`d > 2`.
-
-.. _onemkl_dft_fwd_bwd_distance:
-
-.. rubric:: FWD_DISTANCE and BWD_DISTANCE
-
-The value :math:`l` in :eq:`eq_idx_data_layout` here above is communicated as an
-``std::int64_t`` value for the configuration parameter
-``config_param::FWD_DISTANCE`` (resp. ``config_param::BWD_DISTANCE``). This
-configuration parameter is irrelevant for unbatched transforms, *i.e.*, for
-descriptors set to handle a
-:ref:`number of transforms<onemkl_dft_config_number_of_transforms>` equal to
-:math:`1` (default value). The configuration parameters
-``config_param::FWD_DISTANCE`` and ``config_param::BWD_DISTANCE`` must be set
-for descriptors configured to compute more than one transform, *i.e.*, if the
-:ref:`number of transforms<onemkl_dft_config_number_of_transforms>` is larger
-than :math:`1`. The default values for ``config_param::FWD_DISTANCE`` and
-``config_param::BWD_DISTANCE`` are :math:`0` regardless of the descriptor's
-nature.
+- :math:`s^{\text{fwd}}_{d-1} = s^{\text{bwd}}_{d-1} = n_{d}` for complex
+  descriptors;
+- :math:`s^{\text{bwd}}_{d-1} = \lfloor \frac{n_{d}}{2} \rfloor + 1`, and
+  :math:`s^{\text{fwd}}_{d-1} = 2 s^{\text{bwd}}_{d-1}` for real descriptors;
+- if :math:`d > 2`, :math:`s^{\text{xwd}}_k = n_{k+1} s^{\text{xwd}}_{k+1}`
+  for :math:`k \in \lbrace 1, \ldots, d - 2\rbrace` (for
+  :math:`\text{x} = \text{f}` and :math:`\text{x} = \text{b}`).
 
 .. _onemkl_dft_data_layout_requirements:
 
 .. rubric:: General consistency requirements
 
-In general, the distance and strides must be set so that every index value
-:eq:`eq_idx_data_layout` corresponds to a *unique* (relevant) data point in the
-data set under consideration. In other words, there must not be one index value
-as expressed in :eq:`eq_idx_data_layout` corresponding to two different
-:math:`(d+1)`-tuples :math:`(m, k_{1}, k_{2}, \dots, k_d)` within valid range,
-*i.e.*, such that
+In general, the distances and strides must be set so that every index value
+:eq:`eq_idx_data_layout` corresponds to a *unique* entry of the data sequences
+under consideration. In other words, there must not be one index value as
+expressed in :eq:`eq_idx_data_layout` that corresponds to two different
+:math:`(d+1)`-tuples :math:`(m, k_{1}, k_{2}, \dots, k_d)` that are both within
+the :ref:`elementary range of indices considered by
+oneMKL<onemkl_dft_elementary_range_of_indices>`.
 
-.. _onemkl_dft_data_layout_nonredundant_valid_range:
-
-- :math:`0 \leq m < M` wherein :math:`M` is the :ref:`number of transforms<onemkl_dft_config_number_of_transforms>`;
-
-- :math:`0 \leq k_j < n_j`, :math:`1 \leq j < d` if :math:`d > 1` ;
-
-- :math:`0 \leq k_d < n_d`, for descriptors of ``COMPLEX`` template :ref:`onemkl_dft_enum_domain` or for forward data of descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`;
-
-- :math:`0 \leq k_d \leq \lfloor\frac{n_d}{2}\rfloor`, for backward data of descriptors of ``REAL`` template :ref:`onemkl_dft_enum_domain`.
-
-Additionally, for in-place transforms (``PLACEMENT=INPLACE``), the forward and
-backward data layouts must be configured *consistently* with one another: the
-memory address(es) of leading element(s) along the last dimension must be
-identical in forward and backward domain. Specifically, considering any
-:math:`(d+1)`-tuple :math:`(m, k_{1}, k_{2}, \dots, k_{d-1}, 0)` within valid
-range (as developed above), the memory address of the element of corresponding
-index value :eq:`eq_idx_data_layout` in forward domain (considering the
-:ref:`implicitly assumed type<onemkl_dft_config_data_element_types>` in forward
+Additionally, for in-place transforms (configuration value
+``config_value::INPLACE`` associated with configuration parameter
+``config_param::PLACEMENT``), the forward and backward data layouts must abide
+by following "*consistency requirement*": the memory address(es) of leading
+entry(ies) along the last dimension must be identical in forward and backward
+domain. Specifically, considering any :math:`(d+1)`-tuple
+:math:`(m, k_{1}, k_{2}, \dots, k_{d-1}, 0)` within :ref:`valid
+range<onemkl_dft_elementary_range_of_indices>`, the memory address of the
+element of corresponding index value :eq:`eq_idx_data_layout` in forward domain
+(considering the :ref:`implicitly assumed
+type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>` in forward
 domain) must be identical to the memory address of the element of corresponding
 index value :eq:`eq_idx_data_layout` in backward domain (considering the
-:ref:`implicitly assumed type<onemkl_dft_config_data_element_types>` in
+:ref:`implicitly assumed
+type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>` in
 backward domain). Equivalently,
 
-- for descriptors such that the :ref:`assumed elemementary type<onemkl_dft_config_data_element_types>` is identical in forward and backward domains, the offset, stride(s) (and distances, if relevant) must be equal in forward and backward domain;
-- for descriptors assuming :ref:`different elemementary types<onemkl_dft_config_data_element_types>` in forward and backward domain, let :math:`\beta` and :math:`\gamma` be the sizes of the :ref:`elementary data type assumed<onemkl_dft_config_data_element_types>` in forward and backward domain, respectively (:math:`\beta \neq \gamma`). Then,
-
-    - offsets must satisfy :math:`\beta s^{\text{fwd}}_{0} = \gamma s^{\text{bwd}}_{0}`;
-    - if :math:`d > 1`, strides must satisfy :math:`\beta s^{\text{fwd}}_{j} = \gamma s^{\text{bwd}}_{j}, \forall 1 \leq j < d`;
-    - if :math:`M > 1`, distances must satisfy :math:`\beta l^{\text{fwd}} = \gamma l^{\text{bwd}}`.
+- for complex descriptors, the offset, stride(s) (and distances, if relevant)
+  must be equal in forward and backward domain;
+- for real descriptors, offsets and strides must satisfy
+  :math:`s^{\text{fwd}}_{j} = 2 s^{\text{bwd}}_{j}\ \forall j \in \lbrace 0,
+  \ldots, d - 1\rbrace` (note that :math:`0 \leq j < d`) and distances, if
+  relevant, must satisfy :math:`l^{\text{fwd}} = 2 l^{\text{bwd}}`. Note that
+  this leads to some data padding being required in forward domain if unit
+  strides are used along the last dimension in forward and backward domains.
 
 .. _onemkl_dft_io_strides_deprecated:
 
-.. rubric:: INPUT_STRIDES and OUTPUT_STRIDES (deprecated)
+.. rubric:: Configuring strides for input and output data [deprecated, **not** recommended]
 
-The deprecated ``config_param::INPUT_STRIDES`` (resp.
-``config_param::OUTPUT_STRIDES``) configuration parameter operates similarly to
-the ``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``)
-parameter specified :ref:`here above<onemkl_dft_fwd_bwd_strides>`, when
-configuring a descriptor for a *forward* DFT. When configuring a descriptor for
-a *backward* (inverse) DFT, the deprecated ``config_param::INPUT_STRIDES`` (resp.
-``config_param::OUTPUT_STRIDES``) configuration parameter operates similarly to
-the ``config_param::BWD_STRIDES`` (resp. ``config_param::FWD_STRIDES``)
-parameter specified :ref:`here above<onemkl_dft_fwd_bwd_strides>`.
+Instead of specifying strides by domain, one may choose to specify the strides
+for input and output data sequences. Let
+:math:`s^{\text{x}}_{j}, \ j \in \lbrace 0, 1, \ldots, d\rbrace` be the stride
+values for input (resp. output) data sequences if :math:`\text{x} = \text{i}`
+(resp. :math:`\text{x} = \text{o}`). Such
+:math:`s^{\text{x}}_0, s^{\text{x}}_1, \dots, s^{\text{x}}_d` values may be
+communicated as elements, in that order, of a :math:`(d+1)`-long
+``std::vector<std::int64_t>`` configuration value, set for the (deprecated)
+configuration parameter ``config_param::INPUT_STRIDES`` if
+:math:`\text{x} = \text{i}` (resp. ``config_param::OUTPUT_STRIDES`` if
+:math:`\text{x} = \text{o}`).
+
+The values of :math:`s^{\text{i}}_{j}` and :math:`s^{\text{o}}_{j}` are to be
+used and considered by oneMKL if and only if
+:math:`s^{\text{fwd}}_{j} = s^{\text{fwd}}_{j} = 0, \forall j \in \lbrace 0, 1, \ldots, d\rbrace`.
+In such a case, :ref:`descriptor<onemkl_dft_descriptor>` objects must consider
+the data layouts corresponding to the two compute directions separately. As
+detailed above, relevant data sequence entries are accessed as element of data
+containers (``sycl::buffer`` objects or device-accessible USM allocations)
+provided to the compute function, the base data type of which is (possibly
+implicitly re-interpreted) as documented in :ref:`this
+table<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`. If using
+input and output strides, for any :math:`m` and multi-index
+:math:`\left(k_1, k_2, \ldots, k_d\right)` within :ref:`valid
+range<onemkl_dft_elementary_range_of_indices>`, the index to be used when
+accessing a data sequence entry - or part thereof - in forward domain is
+
+.. math::
+    s^{\text{x}}_0 + k_1\ s^{\text{x}}_1 + k_2\ s^{\text{x}}_2 + \dots + k_d\ s^{\text{x}}_d + m\ l^{\text{fwd}}
+
+where :math:`\text{x} = \text{i}` (resp. :math:`\text{x} = \text{o}`) for
+forward (resp. backward) DFT(s). Similarly, the index to be used when accessing
+a data sequence entry - or part thereof - in backward domain is
+
+.. math::
+    s^{\text{x}}_0 + k_1\ s^{\text{x}}_1 + k_2\ s^{\text{x}}_2 + \dots + k_d\ s^{\text{x}}_d + m\ l^{\text{bwd}}
+
+where :math:`\text{x} = \text{o}` (resp. :math:`\text{x} = \text{i}`) for
+forward (resp. backward) DFT(s).
+
+As a consequence, configuring :ref:`descriptor<onemkl_dft_descriptor>` objects
+using these deprecated configuration parameters makes their configuration
+possibly direction-dependent (if different stride values are to be used in
+forward and backward domains). Since the intended compute direction is unknown
+to the :ref:`descriptor<onemkl_dft_descriptor>` object when
+:ref:`committing<onemkl_dft_descriptor_commit>` it, every direction that results
+in a :ref:`consistent data layout<onemkl_dft_data_layout_requirements>` in
+forward and backward domains must be supported by successfully committed
+:ref:`descriptor<onemkl_dft_descriptor>` objects.
+
+.. note::
+    For :ref:`descriptor<onemkl_dft_descriptor>` objects with strides configured
+    via these deprecated configuration parameters, the :ref:`consistency
+    requirements<onemkl_dft_data_layout_requirements>` may be satisfied for only
+    one of the two compute directions, *i.e.*, for only one of the forward or
+    backward DFT(s). Such a configuration should not cause an exception to be
+    thrown by the descriptor's :ref:`onemkl_dft_descriptor_commit` member
+    function but the behavior of oneMKL is undefined if using that object for
+    the compute direction that does not align with the :ref:`consistency
+    requirements<onemkl_dft_data_layout_requirements>`.
+
+.. note::
+    Setting either of ``config_param::INPUT_STRIDES`` or
+    ``config_param::OUTPUT_STRIDES`` triggers any default or previously-set
+    values for ``config_param::FWD_STRIDES`` and ``config_param::BWD_STRIDES``
+    to reset to ``std::vector<std::int64_t>(d+1, 0)`` values, and vice versa.
+    This default behavior prevents mix-and-matching usage of either of
+    ``config_param::INPUT_STRIDES`` or ``config_param::OUTPUT_STRIDES`` with
+    either of ``config_param::FWD_STRIDES`` or ``config_param::BWD_STRIDES``,
+    which is **not** to be supported. If such a configuration is attempted, an
+    exception is to be thrown at commit time due to invalid configuration, as
+    the stride values that were implicitly reset surely invalidate the
+    :ref:`consistency requirements<onemkl_dft_data_layout_requirements>` for any
+    non-trivial DFT.
 
 If specifying the data layout strides using these deprecated configuration
 parameters and if the strides differ in forward and backward domain, the
-descriptor *must* be re-configured and re-committed for computing the DFT in the
-:ref:`reverse direction<onemkl_dft_formula>` as shown below.
+descriptor *must* be re-configured and re-committed for computing the DFT in
+the reverse direction as shown below.
 
 .. code-block:: cpp
 
@@ -174,14 +289,6 @@ descriptor *must* be re-configured and re-committed for computing the DFT in the
    desc.set_value(config_param::OUTPUT_STRIDES, fwd_domain_strides);
    desc.commit(queue);
    compute_backward(desc, ...);
-
-Setting either of ``config_param::FWD_STRIDES`` or ``config_param::BWD_STRIDES``
-triggers any previously-set values for ``config_param::INPUT_STRIDES`` or
-``config_param::OUTPUT_STRIDES`` to be wiped out, and vice versa. As a
-consequence, mix-and-matching either of ``config_param::INPUT_STRIDES`` or
-``config_param::OUTPUT_STRIDES`` with either of ``config_param::FWD_STRIDES`` or
-``config_param::BWD_STRIDES`` is **not** to be supported and would result in an
-exception being thrown at commit time due to invalid configuration, if attempted.
 
 The ``config_param::INPUT_STRIDES`` and ``config_param::OUTPUT_STRIDES``
 parameters are deprecated. A warning message "{IN,OUT}PUT_STRIDES are deprecated:

@@ -15,9 +15,8 @@ In any case, the data elements are expected to be within contiguous memory
 blocks and defined with generalized strides therein
 (see :ref:`onemkl_dft_config_data_layouts`). For multiple transforms, all data
 sets should be located within the same memory block, and they should be placed
-at the same distance from each other (see
-:ref:`NUMBER_OF TRANSFORMS<onemkl_dft_config_number_of_transforms>`,
-:ref:`onemkl_dft_fwd_bwd_distance`).
+at the same distance from each other
+(see :ref:`onemkl_dft_num_dft_fwd_and_bwd_distance`).
 
 .. _onemkl_dft_complex_storage:
 

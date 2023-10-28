@@ -303,6 +303,5 @@ values associated with some
 .. toctree::
    :hidden:
 
-   config_params/number_of_transforms
    config_params/data_layouts
    config_params/storage_formats
