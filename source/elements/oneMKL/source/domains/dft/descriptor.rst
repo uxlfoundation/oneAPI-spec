@@ -4,27 +4,48 @@
 
 .. _onemkl_dft_descriptor:
 
-descriptor
-==========
+The ``descriptor`` class
+========================
 
-The descriptor class defines a discrete Fourier transform problem to be computed.
+Objects of the ``descriptor`` class define DFT(s) to be computed.
 
 .. rubric:: Description
 
-The discrete Fourier transform problem is defined through the use of the ``oneapi::mkl::dft::descriptor`` class which lives in the ``oneapi::mkl::dft::`` namespace. The enum and config_param values associated with the descriptor class can be found in :ref:`onemkl_dft_enums` including :ref:`onemkl_dft_enum_precision`, :ref:`onemkl_dft_enum_domain` and :ref:`onemkl_dft_enum_config_param`. The descriptor class allows to set several configuration parameters using set_value (and query using get_value) and then upon call to :ref:`onemkl_dft_descriptor_commit` with a ``sycl::queue``, is ready to be used in computations on the specified device.  
+Any desired (batched) DFT is to be fully determined by an object of the
+``oneapi::mkl::dft::descriptor`` class, defined in the ``oneapi::mkl::dft``
+namespace. The scoped enumeration types :ref:`onemkl_dft_enum_precision`,
+:ref:`onemkl_dft_enum_domain`, :ref:`onemkl_dft_enum_config_param` and
+:ref:`onemkl_dft_enum_config_value` defined in the same namespace (and the
+corresponding ranges of values) are relevant to the definition and
+configurations of objects of the ``descriptor`` class. The ``descriptor`` class
+allows to set several (resp. query all) configuration parameters for (resp.
+from) any of its instances by using their
+:ref:`onemkl_dft_descriptor_set_value` (resp.
+:ref:`onemkl_dft_descriptor_get_value`) member function.
 
-This class is then passed to a :ref:`onemkl_dft_compute_forward` or :ref:`onemkl_dft_compute_backward` function along with the data for the actual transformation to be applied. 
+Invoking the member function :ref:`onemkl_dft_descriptor_commit` of an object of
+the ``descriptor`` class effectively commits that object to the desired  DFT
+calculations, as configured and determined by that very object, on the specified
+device encapsulated by the ``sycl::queue`` object required by that function.
+
+The desired forward (resp. backward) DFT calculations may then be computed by
+passing such a committed ``descriptor`` object to the
+:ref:`onemkl_dft_compute_forward` (resp. :ref:`onemkl_dft_compute_backward`)
+function (defined in the ``oneapi::mkl::dft`` namespace as well), along with the
+relevant data containers (``sycl::buffer`` object(s) or pointer(s) to a
+device-accessible USM allocation) for the  desired DFT(s). This function makes
+the ``descriptor`` object enqueue the operations relevant for the desired
+calculations to the ``sycl::queue`` object it was given when committing it.
 
 .. note::
-   The :ref:`onemkl_dft_compute_forward` and :ref:`onemkl_dft_compute_backward` functions may need to be able to access the internals of the descriptor to apply the transform, this could be done for instance, by labeling them as friend functions of the descriptor class.
-
-
-descriptor class
-----------------
+   The :ref:`onemkl_dft_compute_forward` and :ref:`onemkl_dft_compute_backward`
+   functions may need to be able to access the internals of the ``descriptor``
+   object to compute the desired transform(s), this could be done for instance,
+   by labeling them as friend functions of the ``descriptor`` class.
 
 .. rubric:: Syntax
 
-The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
+The ``descriptor`` class is defined in the ``oneapi::mkl::dft`` namespace.
 
 .. code-block:: cpp
 
@@ -34,11 +55,11 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
       class descriptor {
        public:
           
-          // Syntax for 1-dimensional DFT
-          descriptor(std::int64_t length);
+          // Constructor for 1-dimensional DFT
+          descriptor(std::int64_t length); // d = 1;
           
-          // Syntax for d-dimensional DFT
-          descriptor(std::vector<std::int64_t> dimensions);
+          // Constructor for d-dimensional DFT
+          descriptor(std::vector<std::int64_t> lengths); // d = lengths.size();
 
           descriptor(const descriptor&);
 
@@ -51,9 +72,9 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
           ~descriptor();
       
       
-          void set_value(config_param param, ...);
+          void set_value(oneapi::mkl::dft::config_param param, ...);
           
-          void get_value(config_param param, ...);
+          void get_value(oneapi::mkl::dft::config_param param, ...);
       
           void commit(sycl::queue &queue);
       
@@ -63,58 +84,73 @@ The descriptor class lives in the ``oneapi::mkl::dft`` namespace.
    }
 	
 
-.. container:: section
+.. _onemkl_dft_descriptor_template_parameters:
 
-   .. rubric:: Descriptor class template parameters
-      
-   :ref:`onemkl_dft_enum_precision` prec
-      Specifies the floating-point precision in which the transform is to be carried out.
+.. rubric:: Descriptor class template parameters
 
-   :ref:`onemkl_dft_enum_domain` dom
-      Specifies the forward domain for the transformations.
+:ref:`onemkl_dft_enum_precision` prec
+  Specifies the floating-point precision in which the user-provided data is to
+  be provided, the transform is to be carried out and the results are to be
+  returned. The possible specialization values are
+  ``oneapi::mkl::dft::precision::SINGLE`` and
+  ``oneapi::mkl::dft::precision::DOUBLE``. Objects of the ``descriptor`` class
+  specialized with :ref:`onemkl_dft_enum_precision` template parameter ``prec``
+  as value ``oneapi::mkl::dft::precision::SINGLE`` (resp.
+  ``oneapi::mkl::dft::precision::DOUBLE``) are referred to as "single-precision
+  descriptors" (resp. "double-precision descriptors").
 
-.. container:: section
+:ref:`onemkl_dft_enum_domain` dom
+  Specifies the forward domain of the transform. The possible specialization
+  values are ``oneapi::mkl::dft::domain::COMPLEX`` and
+  ``oneapi::mkl::dft::domain::REAL``. Objects of the ``descriptor`` class
+  specialized with :ref:`onemkl_dft_enum_domain` template parameter ``dom`` as
+  value ``oneapi::mkl::dft::precision::COMPLEX`` (resp.
+  ``oneapi::mkl::dft::precision::REAL``) are referred to as "complex
+  descriptors" (resp. "real descriptors").
 
-   .. _onemkl_dft_descriptor_member_table:
+.. _onemkl_dft_descriptor_member_table:
 
-   .. rubric:: Descriptor class member functions
+.. rubric:: Descriptor class member functions
 
-   .. list-table:: 
-       :header-rows: 1
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
 
-       * -     Routines
-         -     Description   
-       * -     :ref:`constructors<onemkl_dft_descriptor_constructor>`
-         -     Initialize descriptor for 1-dimensional or N-dimensional transformations
-       * -     :ref:`assignment operators<onemkl_dft_descriptor_assignment_operator>`
-         -     Assignment operator.
-       * -     :ref:`onemkl_dft_descriptor_set_value`
-         -     Sets one particular configuration parameter with the specified configuration value.
-       * -     :ref:`onemkl_dft_descriptor_get_value`
-         -     Gets the configuration value of one particular configuration parameter.
-       * -     :ref:`onemkl_dft_descriptor_commit`
-         -     Performs all initialization for the actual FFT computation.
-
+   * -     Routines
+     -     Description
+   * -     :ref:`constructors<onemkl_dft_descriptor_constructor>`
+     -     Creates and default-initializes a ``descriptor`` object for a
+           :math:`d`-dimensional DFT of user-defined length(s)
+           :math:`\lbrace n_1, \ldots, n_d\rbrace`.
+   * -     :ref:`assignment operators<onemkl_dft_descriptor_assignment_operator>`
+     -     Self-explanatory.
+   * -     :ref:`onemkl_dft_descriptor_set_value`
+     -     Sets a configuration value for a specific configuration parameter.
+   * -     :ref:`onemkl_dft_descriptor_get_value`
+     -     Queries the configuration value associated with a particular
+           configuration parameter.
+   * -     :ref:`onemkl_dft_descriptor_commit`
+     -     Commits the ``descriptor`` object to enqueue the operations relevant
+           to the (batched) DFT(s) it determines to a given, user-provided
+           ``sycl::queue`` object; completes all initialization work relevant to
+           and required by the chosen, device-compliant implementation for the
+           particular DFT, as defined by the ``descriptor`` object.
 
 .. _onemkl_dft_descriptor_constructor:
 
 Descriptor class constructors
 ++++++++++++++++++++++++++++++
 
-The constructors for the discrete Fourier transform ``descriptor`` class with default 
-configuration settings for a given precision, forward :ref:`onemkl_dft_enum_domain` type 
-and dimension of the transform.
+The constructors allocate memory for the ``descriptor`` object and instantiate
+it with all the relevant default configuration settings (which may depend on the
+specialization values used for the :ref:`onemkl_dft_enum_precision` template
+parameter ``prec`` and for the :ref:`onemkl_dft_enum_domain` template parameter
+``dom``). The constructors do not perform any significant initialization work as
+changes in the object's configuration(s) may be operated thereafter (via its
+:ref:`onemkl_dft_descriptor_set_value` member function) and modify significantly
+the nature of that work.
 
-The constructors allocate memory for the descriptor data
-structure and instantiate it with all the default
-configuration settings for the precision, (forward) :ref:`onemkl_dft_enum_domain`, and
-dimensions of the transform. The constructors do not perform any
-significant computational work, such as computation of twiddle
-factors. The function :ref:`onemkl_dft_descriptor_commit` does this work 
-after use of the function :ref:`onemkl_dft_descriptor_set_value` to set values 
-of all necessary parameters.
-
-The copy constructor performs a deep copy of the descriptor.
+The copy constructor performs a deep copy of ``descriptor`` objects.
 
 .. rubric:: Syntax (one-dimensional transform)
 
@@ -128,14 +164,14 @@ The copy constructor performs a deep copy of the descriptor.
    }
 
 
-.. rubric:: Syntax (multi-dimensional transform)
+.. rubric:: Syntax (:math:`d`-dimensional transform with :math:`d > 0`)
 
 .. code-block:: cpp
    
    namespace oneapi::mkl::dft {
 
       template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
-      descriptor<prec,dom>(std::vector<std::int64_t> dimensions);
+      descriptor<prec,dom>(std::vector<std::int64_t> lengths);
 
    }
 
@@ -167,25 +203,34 @@ The copy constructor performs a deep copy of the descriptor.
    .. rubric:: Input Parameters
 
    length
-      dimension(length) of data for a 1-dimensional transform.
+      Length :math:`n_1 > 0` of the data sequence(s) for one-dimensional
+      transform(s).
 
-   dimensions
-      vector of :math:`d\geq 0` dimensions(lengths) of data for a d-dimensional transform.
+   lengths
+      Vector of :math:`d > 0` lengths :math:`\lbrace n_1, \ldots, n_d\rbrace`
+      of the data sequence(s) for :math:`d`-dimensional transform(s). The values
+      are to be provided in that order and such that
+      :math:`n_j > 0,\ \forall j \in \lbrace 1, \ldots, d \rbrace`.
 
    other
-      another descriptor of the same type to copy or move
+      Another ``descriptor`` object of the same type to copy or move.
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The `descriptor()` constructor shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   The ``descriptor::descriptor()`` constructors shall throw the following
+   exception if the associated condition is detected. An implementation may
+   throw additional implementation-specific exception(s) in case of error
+   conditions not covered here:
 
    :ref:`oneapi::mkl::host_bad_alloc()<onemkl_exception_host_bad_alloc>`
-      If any memory allocations on host have failed, for instance due to insufficient memory.
+      If any memory allocations on host have failed, for instance due to
+      insufficient memory.
 
    :ref:`oneapi::mkl::unimplemented()<onemkl_exception_unimplemented>`
-      If length of ``dimensions`` vector is larger than is supported by the library implementation.
+      If the dimension :math:`d`, *i.e.*, the size of vector ``lentghs``, is
+      larger than what is supported by the library implementation.
    
 
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
@@ -226,37 +271,43 @@ The copy assignment operator results in a deep copy.
    .. rubric:: Input Parameters
 
    other
-      The descriptor to copy or move from.
+      The ``descriptor`` object to copy or move from.
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The assignment opererator shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   The assignment opererators shall throw the following exceptions if the
+   associated condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here:
 
    :ref:`oneapi::mkl::host_bad_alloc()<onemkl_exception_host_bad_alloc>`
-      If any memory allocations on host have failed, for instance due to insufficient memory.
-   
+      If any memory allocations on host have failed, for instance due to
+      insufficient memory.
 
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
 .. _onemkl_dft_descriptor_set_value:
 
 set_value
-++++++++++
++++++++++
 
-Sets DFT configuration values before :ref:`onemkl_dft_descriptor_commit`.
+The ``set_value`` member function of the ``descriptor`` class sets a
+configuration value corresponding to a (read-write) configuration parameter for
+the DFT(s) that a ``descriptor`` object defines. This function is to be used as
+many times as required for all the necessary configuration parameters to be set
+prior to committing the ``descriptor`` object (by calling its member function
+:ref:`onemkl_dft_descriptor_commit`).
 
-
-.. rubric:: Description
-
-This function sets one particular configuration parameter with
-the specified configuration value. Each configuration parameter
-is a named constant, and the configuration value must have the
-corresponding type, which can be a named constant or a native
-type. For available configuration parameters and the
-corresponding configuration values, see :ref:`onemkl_dft_enum_config_param`.
-All calls to ``set_param`` must be done before :ref:`onemkl_dft_descriptor_commit`.
+This function requires and expects exactly **two** arguments: it sets the
+configuration value (second argument) corresponding to the configuration
+parameter (first argument) ``param`` of type ``oneapi::mkl::dft::config_param``.
+The type of the configuration value (second argument) to be set depends on the
+value of ``param``: it can be ``oneapi::mkl::dft::domain``,
+``oneapi::mkl::dft::precision``, ``oneapi::mkl::dft::config_value`` or a native
+type like ``std::int64_t`` or ``float`` (more details available
+:ref:`here<onemkl_dft_enum_config_param>`).
 
 .. rubric:: Syntax
 
@@ -265,7 +316,7 @@ All calls to ``set_param`` must be done before :ref:`onemkl_dft_descriptor_commi
    namespace oneapi::mkl::dft {
 
       template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
-      void descriptor<prec,dom>::set_value(config_param param, ...);
+      void descriptor<prec,dom>::set_value(oneapi::mkl::dft::config_param param, ...);
 
    }
 
@@ -274,23 +325,31 @@ All calls to ``set_param`` must be done before :ref:`onemkl_dft_descriptor_commi
    .. rubric:: Input Parameters
 
    param
-      The enum value of :ref:`onemkl_dft_enum_config_param` to be set.
+      One of the possible values of type :ref:`onemkl_dft_enum_config_param`
+      representing the (writable) configuraton parameter to be set.
 
    ...
-      The corresponding value or container corresponding to the specific parameter. Defined in :ref:`onemkl_dft_enum_config_param`.
+      An element of the appropriate type for the configuration value
+      corresponding to the targeted configuration
+      parameter ``param`` (appropriate type defined
+      :ref:`here<onemkl_dft_enum_config_param>`).
 
-   
 .. container:: section
 
    .. rubric:: Throws
 
-   The `descriptor::set_value()` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   The ``descriptor::set_value()`` routine shall throw the following exceptions
+   if the associated condition is detected. An implementation may throw
+   additional implementation-specific exception(s) in case of error conditions
+   not covered here:
 
    :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
-      If the provided :ref:`onemkl_dft_enum_config_param` or config_value is not valid.
+      If the provided :ref:`onemkl_dft_enum_config_param` and/or configuration
+      value is not valid.
 
    :ref:`oneapi::mkl::unimplemented()<onemkl_exception_unimplemented>`
-      If the provided :ref:`onemkl_dft_enum_config_param` or config_value is valid, but not supported by the library implementation.
+      If the provided :ref:`onemkl_dft_enum_config_param` and configuration
+      value are valid, but not supported by the library implementation.
  
    
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
@@ -299,18 +358,20 @@ All calls to ``set_param`` must be done before :ref:`onemkl_dft_descriptor_commi
 .. _onemkl_dft_descriptor_get_value:
 
 get_value
-++++++++++
++++++++++
 
-Retrieves current DFT configuration values.
+The ``get_value`` member function of the ``descriptor`` class queries the
+configuration value corresponding to any configuration parameter for the DFT
+that a ``descriptor`` object defines.
 
-.. rubric:: Description
-
-This function gets one particular configuration parameter with
-the specified configuration value. Each configuration parameter
-is a named constant, and the configuration value must have the
-corresponding type, which can be a named constant or a native
-type. For available configuration parameters and the
-corresponding configuration values, see :ref:`onemkl_dft_enum_config_param`.
+This function requires and expects exactly **two** arguments: it returns the
+configuration value (into the element pointed by the second argument)
+corresponding to the queried configuration parameter (first argument) ``param``
+of type ``oneapi::mkl::dft::config_param``. The type of the second argument
+depends on the value of ``param``: it is  a pointer to a writable element of
+type ``oneapi::mkl::dft::domain``, ``oneapi::mkl::dft::precision``,
+``oneapi::mkl::dft::config_value`` or a native type like ``std::int64_t`` or
+``float`` (more details available :ref:`here<onemkl_dft_enum_config_param>`).
 
 .. rubric:: Syntax
 
@@ -319,7 +380,7 @@ corresponding configuration values, see :ref:`onemkl_dft_enum_config_param`.
    namespace oneapi::mkl::dft {
 
       template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
-      void descriptor<prec,dom>::get_value(config_param param, ...);
+      void descriptor<prec,dom>::get_value(oneapi::mkl::dft::config_param param, ...);
 
    }
 
@@ -328,50 +389,49 @@ corresponding configuration values, see :ref:`onemkl_dft_enum_config_param`.
    .. rubric:: Input Parameters
 
    param
-      The enum value of :ref:`onemkl_dft_enum_config_param` to be retrieved.
+      One of the possible values of type :ref:`onemkl_dft_enum_config_param`
+      representing the configuraton parameter being queried.
 
    ...
-      The corresponding value or container corresponding to the specific parameter. Defined in :ref:`onemkl_dft_enum_config_param`.
+      A pointer to a writable element of the appropriate type for the
+      configuration value corresponding to the queried configuration
+      parameter ``param`` (appropriate type of pointed element defined
+      :ref:`here<onemkl_dft_enum_config_param>`).
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The `descriptor::get_value()` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   The ``descriptor::get_value()`` routine shall throw the following exceptions
+   if the associated condition is detected. An implementation may throw
+   additional implementation-specific exception(s) in case of error conditions
+   not covered here:
    
    :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
-      If the requested :ref:`onemkl_dft_enum_config_param` is not correct.
-
-
+      If the requested :ref:`onemkl_dft_enum_config_param` is not valid.
 
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
-
-
 
 .. _onemkl_dft_descriptor_commit:
 
 commit
-+++++++
+++++++
 
-Finalizes DFT descriptor after all configuration parameters have been set.
+The ``commit`` member function commits a ``descriptor`` object to the DFT
+calculations it defines consistently with its configuration settings, by
+completing all the initialization work (*e.g.*, algorithm selection, algorithm
+tuning, choice of factorization, memory allocations, calculation of twiddle
+factors, etc.) required by the chosen implementation for the desired DFT(s) on
+the targeted device. Objects of the ``descriptor`` class **must** be committed
+prior to using them in any call to :ref:`onemkl_dft_compute_forward` or
+:ref:`onemkl_dft_compute_backward` (which trigger actual DFT calculations).
 
-.. rubric:: Description
-
-This function completes initialization of a previously created
-descriptor, which is required before the descriptor can be used
-for FFT computations. Typically, committing the
-descriptor performs all initialization that is required for the
-actual FFT computation on the device specified through input queue. 
-The initialization performed by the function may involve exploring different
-factorizations of the input length to find the optimal
-computation method.
-
-All calls to the :ref:`onemkl_dft_descriptor_set_value` function to change configuration
-parameters of a descriptor need to happen after the constructor call for 
-the :ref:`onemkl_dft_descriptor` class and before a call to :ref:`onemkl_dft_descriptor_commit`.
-Typically, a commit function call is immediately followed by a computation 
-function call (see :ref:`onemkl_dft_compute_forward` or :ref:`onemkl_dft_compute_backward`)
-
+As specified :ref:`above<onemkl_dft_descriptor_set_value>`, all required
+configuration parameters must be set before this function is called. Any change
+in configuration operated on a ``descriptor`` object via a call to its
+:ref:`onemkl_dft_descriptor_set_value` member function *after* it was committed
+may not be successfully reflected by that object unless its ``commit`` member
+function is called again.
 
 .. rubric:: Syntax
 
@@ -381,7 +441,6 @@ function call (see :ref:`onemkl_dft_compute_forward` or :ref:`onemkl_dft_compute
 
       template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
       void descriptor<prec,dom>::commit(sycl::queue& queue);
-
    }
 
 .. container:: section
@@ -389,31 +448,29 @@ function call (see :ref:`onemkl_dft_compute_forward` or :ref:`onemkl_dft_compute
    .. rubric:: Input Parameters
 
    queue 
-      Valid DPC++ queue specifying the device and context on which the transformation will be executed.
+      Valid ``sycl::queue`` object to which the operations relevant to the
+      desired DFT(s) are to be enqueued.
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The following oneMKL exceptions may be thrown in this function:
-
-   The `descriptor::commit()` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   The ``descriptor::commit()`` routine shall throw the following exceptions if
+   the associated condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here (if the ``descriptor`` object's configuration was found to be
+   inconsistent, for instance):
    
    :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
       If the queue is found to be invalid in any way.
 
    :ref:`oneapi::mkl::host_bad_alloc()<onemkl_exception_host_bad_alloc>`
-      If any host side only memory allocations fail, for instance due to lack of memory.
+      If any host side only memory allocations fail, for instance due to lack of
+      memory.
 
    :ref:`oneapi::mkl::device_bad_alloc()<onemkl_exception_device_bad_alloc>`
       If any device or shared memory allocation fail.
  
-
-
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
-
 **Parent topic:** :ref:`onemkl_dft`
-
-
-   

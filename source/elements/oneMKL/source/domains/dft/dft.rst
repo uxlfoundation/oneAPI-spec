@@ -224,8 +224,8 @@ The table below summarizes the object and functions relevant to computing DFTs
 .. toctree::
     :hidden:
 
-    enums_and_config_params
     descriptor
+    enums_and_config_params
     compute_forward
     compute_backward
 
