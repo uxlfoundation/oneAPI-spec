@@ -40,13 +40,13 @@ forward-domain (resp. backward-domain) data sequences and
 - :math:`s^{\text{xwd}}_j`, :math:`\forall j \in \lbrace 0, \ldots, d\rbrace`
   represents the :ref:`offset and generalized
   strides<onemkl_dft_fwd_bwd_strides>` defining the locations of entries within
-  each :math:`d`-dimensional data sequence in forward (resp. backward) domain if
-  :math:`\text{x} = \text{f}` (resp. if :math:`\text{x} = \text{b}`), counted in
-  number of elements of the relevant :ref:`implicitly-assumed elementary data
-  type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`;
+  each :math:`d`-dimensional data sequence in the forward (resp. backward)
+  domain if :math:`\text{x} = \text{f}` (resp. if :math:`\text{x} = \text{b}`),
+  counted in number of elements of the relevant :ref:`implicitly-assumed
+  elementary data type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`;
 - :math:`l^{\text{xwd}}` represents the
   :ref:`distance<onemkl_dft_num_dft_data_layouts_batched_dfts>` between successive
-  :math:`d`-dimensional data sequences in forward (resp. backward) domain if
+  :math:`d`-dimensional data sequences in the forward (resp. backward) domain if
   :math:`\text{x} = \text{f}` (resp. if :math:`\text{x} = \text{b}`), counted
   in number of elements of the relevant :ref:`implicitly-assumed elementary data
   type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`.
