@@ -212,7 +212,7 @@ configuration parameter ``config_param::INPUT_STRIDES`` if
 
 The values of :math:`s^{\text{i}}_{j}` and :math:`s^{\text{o}}_{j}` are to be
 used and considered by oneMKL if and only if
-:math:`s^{\text{fwd}}_{j} = s^{\text{fwd}}_{j} = 0, \forall j \in \lbrace 0, 1, \ldots, d\rbrace`.
+:math:`s^{\text{fwd}}_{j} = s^{\text{bwd}}_{j} = 0, \forall j \in \lbrace 0, 1, \ldots, d\rbrace`.
 In such a case, :ref:`descriptor<onemkl_dft_descriptor>` objects must consider
 the data layouts corresponding to the two compute directions separately. As
 detailed above, relevant data sequence entries are accessed as element of data
