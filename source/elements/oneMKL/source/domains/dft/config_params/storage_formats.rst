@@ -40,15 +40,19 @@ These two behaviors are further specified and illustrated below.
 .. rubric:: ``config_value::COMPLEX_COMPLEX`` for ``config_param::COMPLEX_STORAGE``
 
 For complex descriptors with parameter ``config_param::COMPLEX_STORAGE`` set to
-``config_value::COMPLEX_COMPLEX``, forward- and backward-domain data sequences
-are read/stored from/in a single data container (device-accessible USM
-allocation or ``sycl::buffer``). Any relevant entry
+``config_value::COMPLEX_COMPLEX``, each of forward- and backward-domain data
+sequences must belong to a single data container (device-accessible USM
+allocation or ``sycl::buffer`` object). Any relevant entry
 :math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` is accessed/stored from/in
 a data container provided at compute time at the index value expressed in eq.
 :eq:`eq_idx_data_layout` (from :ref:`this page<onemkl_dft_config_data_layouts>`)
 of that data container, whose elementary data type is (possibly implicitly
 re-interpreted as) ``std::complex<float>`` (resp. ``std::complex<double>``) for
-single-precision (resp. double-precision) descriptors.
+single-precision (resp. double-precision) descriptors. The same unique data
+container is to be used for forward- and backward-domain data sequences for
+in-place transforms (for :ref:`descriptor<onemkl_dft_descriptor>` objects with
+configuration value ``config_value::INPLACE`` for configuration parameter
+``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::COMPLEX_COMPLEX``
 set for configuration parameter ``config_param::COMPLEX_STORAGE``, in the
@@ -93,7 +97,12 @@ a (separate) data container provided at compute time at the index value
 expressed in eq. :eq:`eq_idx_data_layout` (from :ref:`this
 page<onemkl_dft_config_data_layouts>`) of that data container, whose elementary
 data type is (possibly implicitly re-interpreted as) ``float`` (resp.
-``double``) for single-precision (resp. double-precision) descriptors.
+``double``) for single-precision (resp. double-precision) descriptors. The same
+two data containers are to be used for real and imaginary parts of forward- and
+backward-domain data sequences for in-place transforms
+(for :ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
+``config_value::INPLACE`` for configuration parameter
+``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::REAL_REAL``
 set for configuration parameter ``config_param::COMPLEX_STORAGE``, in the
