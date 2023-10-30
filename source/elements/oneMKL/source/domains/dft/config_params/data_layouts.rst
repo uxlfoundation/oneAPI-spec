@@ -169,10 +169,11 @@ oneMKL<onemkl_dft_elementary_range_of_indices>`.
 
 Additionally, for in-place transforms (configuration value
 ``config_value::INPLACE`` associated with configuration parameter
-``config_param::PLACEMENT``), the forward and backward data layouts must abide
-by following "*consistency requirement*": the memory address(es) of leading
-entry(ies) along the last dimension must be identical in forward and backward
-domain. Specifically, considering any :math:`(d+1)`-tuple
+``config_param::PLACEMENT``), the smallest stride value must be associated with
+the same dimension in forward and backward domains and the data layouts must
+abide by following "*consistency requirement*": the memory address(es) of
+leading entry(ies) along the last dimension must be identical in forward and
+backward domains. Specifically, considering any :math:`(d+1)`-tuple
 :math:`(m, k_{1}, k_{2}, \dots, k_{d-1}, 0)` within :ref:`valid
 range<onemkl_dft_elementary_range_of_indices>`, the memory address of the
 element of corresponding index value :eq:`eq_idx_data_layout` in forward domain
