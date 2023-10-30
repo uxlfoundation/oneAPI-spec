@@ -9,12 +9,12 @@ Configuration of Data Layouts
 
 The DFT interface provides the configuration parameters
 ``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``)
-to define the data layout locating entries of relevant data sequences in
+to define the data layout locating entries of relevant data sequences in the
 forward (resp. backward) domain. In case of batched transforms, *i.e.*, if
 :math:`M > 1` is configured by setting ``config_param::NUMBER_OF_TRANSFORMS``
 accordingly, ``config_param::FWD_DISTANCE`` (resp.
 ``config_param::BWD_DISTANCE``) completes the description of the data layout by
-specifying the distances between successive data sequences in forward (resp.
+specifying the distances between successive data sequences in the forward (resp.
 backward) domain.
 
 Using the notations from the :ref:`introduction<onemkl_dft_definitions>` and the
