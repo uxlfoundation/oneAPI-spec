@@ -239,7 +239,9 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
         -   | ``std::vector<std::int64_t>`` of size :math:`(d+1)`
             | [``std::vector<std::int64_t>(d+1, 0)``]
       * -   :ref:`FWD_DISTANCE<onemkl_dft_num_dft_data_layouts_batched_dfts>`
-        -   Distance (in number of elements) between forward-domain entries
+        -   Distance in number of elements of
+            :ref:`implicitly-assumed data type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`
+            between forward-domain entries
             :math:`\left(\cdot\right)^{m}_{k_1, k_2, \ldots, k_d}` and
             :math:`\left(\cdot\right)^{m + 1}_{k_1, k_2, \ldots, k_d}` for all
             :math:`0\leq m < M - 1` and
@@ -250,7 +252,9 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
         -   | ``std::int64_t``
             | [0]
       * -   :ref:`BWD_DISTANCE<onemkl_dft_num_dft_data_layouts_batched_dfts>`
-        -   Distance (in number of elements) between backward-domain entries
+        -   Distance in number of elements of
+            :ref:`implicitly-assumed data type<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`
+            between backward-domain entries
             :math:`\left(\cdot\right)^{m}_{k_1, k_2, \ldots, k_d}` and
             :math:`\left(\cdot\right)^{m + 1}_{k_1, k_2, \ldots, k_d}` for all
             :math:`0\leq m < M - 1` and
