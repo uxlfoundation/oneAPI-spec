@@ -110,8 +110,8 @@ elementary range
 Additional constraints for data in backward domain of real DFTs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Finally, note that the conjugate symmetry relation further constraints some of
-the entries (or pairs thereof) in backward domain's data sequences for real
+Finally, note that the conjugate symmetry relation further constrains some of
+the entries (or pairs thereof) in the backward domain's data sequences for real
 DFTs. Specifically, for any of the :math:`M` sequences,
 
 - the imaginary part must be :math:`0` for any entry of multi-index
