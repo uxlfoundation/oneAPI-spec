@@ -141,7 +141,7 @@ The ``descriptor`` class is defined in the ``oneapi::mkl::dft`` namespace.
 Descriptor class constructors
 ++++++++++++++++++++++++++++++
 
-The constructors allocate memory for the ``descriptor`` object and instantiate
+The constructors for the ``descriptor`` object instantiate
 it with all the relevant default configuration settings (which may depend on the
 specialization values used for the :ref:`onemkl_dft_enum_precision` template
 parameter ``prec`` and for the :ref:`onemkl_dft_enum_domain` template parameter
