@@ -108,13 +108,13 @@ compute_backward (Buffer version)
    inout_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``, complex descriptor configured for in-place operations with
+      by ``desc``. Only with complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``, complex descriptor configured for in-place
+      configured by ``desc``. Only with complex descriptors configured for in-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    in
@@ -126,13 +126,13 @@ compute_backward (Buffer version)
    in_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant backward-domain data sequences,
-      as configured by ``desc``, complex descriptor configured for out-of-place
+      as configured by ``desc``. Only with complex descriptors configured for out-of-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    in_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant backward-domain data
-      sequences, as configured by ``desc``, complex descriptor configured for
+      sequences, as configured by ``desc``. Only with complex descriptors configured for
       out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
 
@@ -149,13 +149,13 @@ compute_backward (Buffer version)
    inout_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``, complex descriptor configured for in-place operations with
+      by ``desc``. Only with complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``, complex descriptor configured for in-place
+      configured by ``desc``. Only with complex descriptors configured for in-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    out
@@ -167,13 +167,13 @@ compute_backward (Buffer version)
    out_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant forward-domain data sequences,
-      as configured by ``desc``, complex descriptor configured for out-of-place
+      as configured by ``desc``. Only with complex descriptors configured for out-of-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    out_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant forward-domain data
-      sequences, as configured by ``desc``, complex descriptor configured for
+      sequences, as configured by ``desc``. Only with complex descriptors configured for
       out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
 .. container:: section
@@ -267,13 +267,13 @@ compute_backward (USM version)
    inout_re
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``, complex descriptor configured for in-place operations with
+      by ``desc``. Only with complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``, complex descriptor configured for in-place
+      configured by ``desc``. Only with complex descriptors configured for in-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    in
@@ -285,13 +285,13 @@ compute_backward (USM version)
    in_re
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant backward-domain data sequences,
-      as configured by ``desc``, complex descriptor configured for out-of-place
+      as configured by ``desc``. Only with complex descriptors configured for out-of-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    in_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant backward-domain data
-      sequences, as configured by ``desc``, complex descriptor configured for
+      sequences, as configured by ``desc``. Only with complex descriptors configured for
       out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    dependencies
@@ -312,13 +312,13 @@ compute_backward (USM version)
    inout_re
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as
-      configured by ``desc``, complex descriptor configured for in-place
+      configured by ``desc``. Only with complex descriptors configured for in-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``, complex descriptor configured for in-place
+      configured by ``desc``. Only with complex descriptors configured for in-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    out
@@ -330,13 +330,13 @@ compute_backward (USM version)
    out_re
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant forward-domain data sequences,
-      as configured by ``desc``, complex descriptor configured for out-of-place
+      as configured by ``desc``. Only with complex descriptors configured for out-of-place
       operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
    out_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant forward-domain data
-      sequences, as configured by ``desc``, complex descriptor configured for
+      sequences, as configured by ``desc``. Only with complex descriptors configured for
       out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
 
 .. container:: section
