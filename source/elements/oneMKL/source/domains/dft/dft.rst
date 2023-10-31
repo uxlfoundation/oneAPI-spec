@@ -163,8 +163,8 @@ user-provided, device-accessible data.
 
   - must be successfully committed prior to providing them to any compute
     function;
-  - must be re-committed to account for any change in configuration that is
-    operated after it was already successfully committed;
+  - must be re-committed to account for any change in configuration after
+    it was already successfully committed;
   - deliver best performance for DFT calculations when created, configured and
     comitted outside applications' hotpath(s) that use them multiple times for
     identically-configured (batched) DFTs. :ref:`onemkl_dft_compute_forward`
