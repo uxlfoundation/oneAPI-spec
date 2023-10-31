@@ -48,10 +48,16 @@ a data container provided at compute time at the index value expressed in eq.
 :eq:`eq_idx_data_layout` (from :ref:`this page<onemkl_dft_config_data_layouts>`)
 of that data container, whose elementary data type is (possibly implicitly
 re-interpreted as) ``std::complex<float>`` (resp. ``std::complex<double>``) for
-single-precision (resp. double-precision) descriptors. The same unique data
-container is to be used for forward- and backward-domain data sequences for
-in-place transforms (for :ref:`descriptor<onemkl_dft_descriptor>` objects with
-configuration value ``config_value::INPLACE`` for configuration parameter
+single-precision (resp. double-precision) descriptors.
+
+The same unique data container is to be used for forward- and backward-domain
+data sequences for in-place transforms (for
+:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
+``config_value::INPLACE`` for configuration parameter
+``config_param::PLACEMENT``). Two separate data containers sharing no common
+elements are to be used for out-of-place transforms (for
+:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
+``config_value::NOT_INPLACE`` for configuration parameter
 ``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::COMPLEX_COMPLEX``
@@ -96,11 +102,16 @@ imaginary parts of any relevant complex entry
 expressed in eq. :eq:`eq_idx_data_layout` (from :ref:`this
 page<onemkl_dft_config_data_layouts>`) of their respective data containers, whose elementary
 data type is (possibly implicitly re-interpreted as) ``float`` (resp.
-``double``) for single-precision (resp. double-precision) descriptors. The same
-two data containers are to be used for real and imaginary parts of forward- and
-backward-domain data sequences for in-place transforms
-(for :ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
+``double``) for single-precision (resp. double-precision) descriptors.
+
+The same two data containers are to be used for real and imaginary parts of
+forward- and backward-domain data sequences for in-place transforms (for
+:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
 ``config_value::INPLACE`` for configuration parameter
+``config_param::PLACEMENT``). Four separate data containers sharing no common
+elements are to be used for out-of-place transforms (for
+:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
+``config_value::NOT_INPLACE`` for configuration parameter
 ``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::REAL_REAL``
