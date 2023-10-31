@@ -372,6 +372,12 @@ type ``oneapi::mkl::dft::domain``, ``oneapi::mkl::dft::precision``,
 ``oneapi::mkl::dft::config_value`` or a native type like ``std::int64_t`` or
 ``float`` (more details available :ref:`here<onemkl_dft_enum_config_param>`).
 
+.. note::
+   The value returned by ``get_value`` corresponds to the latest value set for
+   the corresponding configuration parameter being  queried or the
+   corresponding default value if that parameter was not set or if it is not
+   writable, even if that value was set after the descriptor was committed.
+
 .. rubric:: Syntax
 
 .. code-block:: cpp
