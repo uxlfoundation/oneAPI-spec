@@ -30,8 +30,8 @@ are meant to define.
       * -   :ref:`onemkl_dft_enum_config_param`
         -   Represents configuration parameters for objects of the
             :ref:`descriptor<onemkl_dft_descriptor>` class. The configuration
-            value associated with the (resp. writable) configuration parameters
-            can be retrieved (resp. set) via the object's
+            values associated with the configuration parameters
+            can be retrieved (resp. set, for writable parameters) via the object's
             :ref:`onemkl_dft_descriptor_get_value` (resp.
             :ref:`onemkl_dft_descriptor_set_value`) member function.
       * -   :ref:`onemkl_dft_enum_config_value`
