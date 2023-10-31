@@ -123,7 +123,7 @@ The ``descriptor`` class is defined in the ``oneapi::mkl::dft`` namespace.
            :math:`d`-dimensional DFT of user-defined length(s)
            :math:`\lbrace n_1, \ldots, n_d\rbrace`.
    * -     :ref:`assignment operators<onemkl_dft_descriptor_assignment_operator>`
-     -     Self-explanatory.
+     -     Performs a deep copy of or moves the argument.
    * -     :ref:`onemkl_dft_descriptor_set_value`
      -     Sets a configuration value for a specific configuration parameter.
    * -     :ref:`onemkl_dft_descriptor_get_value`
