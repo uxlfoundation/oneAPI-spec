@@ -251,7 +251,7 @@ compute_backward (USM version)
 
 .. container:: section
 
-   .. rubric:: Input Parameter
+   .. rubric:: Input Parameters
 
    :ref:`desc<onemkl_dft_descriptor>`
       A fully configured and committed object of the
