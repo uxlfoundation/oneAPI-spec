@@ -217,7 +217,7 @@ used and considered by oneMKL if and only if
 are set and ``config_param::FWD_STRIDES`` and ``config_param::BWD_STRIDES`` are not. See note below.)
 In such a case, :ref:`descriptor<onemkl_dft_descriptor>` objects must consider
 the data layouts corresponding to the two compute directions separately. As
-detailed above, relevant data sequence entries are accessed as element of data
+detailed above, relevant data sequence entries are accessed as elements of data
 containers (``sycl::buffer`` objects or device-accessible USM allocations)
 provided to the compute function, the base data type of which is (possibly
 implicitly re-interpreted) as documented in :ref:`this
