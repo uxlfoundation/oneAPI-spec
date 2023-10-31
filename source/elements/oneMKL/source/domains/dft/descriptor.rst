@@ -430,7 +430,7 @@ As specified :ref:`above<onemkl_dft_descriptor_set_value>`, all required
 configuration parameters must be set before this function is called. Any change
 in configuration operated on a ``descriptor`` object via a call to its
 :ref:`onemkl_dft_descriptor_set_value` member function *after* it was committed
-may not be successfully reflected by that object unless its ``commit`` member
+results in an undefined state not suitable for computation until this ``commit`` member
 function is called again.
 
 .. rubric:: Syntax
