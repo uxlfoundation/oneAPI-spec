@@ -18,7 +18,7 @@ namespace. The scoped enumeration types :ref:`onemkl_dft_enum_precision`,
 :ref:`onemkl_dft_enum_config_value` defined in the same namespace (and the
 corresponding ranges of values) are relevant to the definition and
 configurations of objects of the ``descriptor`` class. The ``descriptor`` class
-allows to set several (resp. query all) configuration parameters for (resp.
+allows the user to set several (resp. query all) configuration parameters for (resp.
 from) any of its instances by using their
 :ref:`onemkl_dft_descriptor_set_value` (resp.
 :ref:`onemkl_dft_descriptor_get_value`) member function.
