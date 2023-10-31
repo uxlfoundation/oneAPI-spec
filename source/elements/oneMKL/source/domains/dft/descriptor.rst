@@ -33,7 +33,7 @@ passing such a committed ``descriptor`` object to the
 :ref:`onemkl_dft_compute_forward` (resp. :ref:`onemkl_dft_compute_backward`)
 function (defined in the ``oneapi::mkl::dft`` namespace as well), along with the
 relevant data containers (``sycl::buffer`` object(s) or pointer(s) to a
-device-accessible USM allocation) for the  desired DFT(s). This function makes
+device-accessible USM allocations) for the  desired DFT(s). This function makes
 the ``descriptor`` object enqueue the operations relevant for the desired
 calculations to the ``sycl::queue`` object it was given when committing it.
 
