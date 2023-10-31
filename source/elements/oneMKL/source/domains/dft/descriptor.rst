@@ -229,7 +229,7 @@ The copy constructor performs a deep copy of ``descriptor`` objects.
       insufficient memory.
 
    :ref:`oneapi::mkl::unimplemented()<onemkl_exception_unimplemented>`
-      If the dimension :math:`d`, *i.e.*, the size of vector ``lentghs``, is
+      If the dimension :math:`d`, *i.e.*, the size of vector ``lengths``, is
       larger than what is supported by the library implementation.
    
 
