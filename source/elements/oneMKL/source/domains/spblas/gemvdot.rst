@@ -45,10 +45,10 @@ gemvdot (Buffer version)
 
       void gemvdot (sycl::queue                          &queue,
                     oneapi::mkl::transpose               transpose_val,
-                    fp                                   alpha,
+                    const fp                             alpha,
                     oneapi::mkl::sparse::matrix_handle_t A_handle,
                     sycl::buffer<fp, 1>                  &x,
-                    fp                                   beta,
+                    const fp                             beta,
                     sycl::buffer<fp, 1>                  &y,
                     sycl::buffer<fp, 1>                  &d);
 
@@ -135,10 +135,10 @@ gemvdot (USM version)
 
       sycl::event gemvdot (sycl::queue                           &queue,
                            oneapi::mkl::transpose                transpose_val,
-                           fp                                    alpha,
+                           const fp                              alpha,
                            oneapi::mkl::sparse::matrix_handle_t  A_handle,
-                           fp                                    *x,
-                           fp                                    beta,
+                           const fp                              *x,
+                           const fp                              beta,
                            fp                                    *y,
                            fp                                    *d,
                            const std::vector<sycl::event>        &dependencies = {});

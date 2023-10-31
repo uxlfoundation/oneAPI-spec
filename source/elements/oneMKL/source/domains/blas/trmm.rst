@@ -199,7 +199,7 @@ trmm (USM Version)
                         onemkl::diag unit_diag,
                         std::int64_t m,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         T *b,
@@ -215,7 +215,7 @@ trmm (USM Version)
                         onemkl::diag unit_diag,
                         std::int64_t m,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         T *b,
@@ -256,7 +256,7 @@ trmm (USM Version)
       must be at least zero.
 
    alpha
-      Scaling factor for the matrix-matrix product.
+      Scaling factor for the matrix-matrix product. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``. Must have size at least

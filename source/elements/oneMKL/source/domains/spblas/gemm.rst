@@ -191,7 +191,7 @@ gemm (USM version)
                         const std::int64_t                    columns, 
                         const std::int64_t                    ldb, 
                         const fp                              beta, 
-                        const fp                              *C, 
+                        fp                                    *C,
                         const std::int64_t                    ldc,
                         const std::vector<sycl::event>        &dependencies = {});
 

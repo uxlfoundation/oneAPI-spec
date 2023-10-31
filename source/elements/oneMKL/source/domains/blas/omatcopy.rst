@@ -187,7 +187,7 @@ omatcopy (USM Version)
                             oneapi::mkl::transpose trans,
                             std::int64_t m,
                             std::int64_t n,
-                            T alpha,
+                            value_or_pointer<T> alpha,
                             const T *a,
                             std::int64_t lda,
                             T *b,
@@ -201,7 +201,7 @@ omatcopy (USM Version)
                             oneapi::mkl::transpose trans,
                             std::int64_t m,
                             std::int64_t n,
-                            T alpha,
+                            value_or_pointer<T> alpha,
                             const T *a,
                             std::int64_t lda,
                             T *b,
@@ -227,7 +227,7 @@ omatcopy (USM Version)
       Number of columns for the matrix ``A``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix transposition or copy.
+      Scaling factor for the matrix transposition or copy. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``. Must have size at least

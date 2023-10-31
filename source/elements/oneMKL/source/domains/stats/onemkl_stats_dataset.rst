@@ -30,10 +30,7 @@ structure dataset (Buffer version)
 
     	explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_,
                     sycl::buffer<Type, 1> observations_, sycl::buffer<Type, 1> weights_ = {0},
-                    sycl::buffer<std::int64_t, 1> indices_ = {0}) :
-                    n_dims(n_dims_), n_observations(n_observations_),
-                    observations(observations_),
-                    weights(weights_), indices(indices_) {};
+                    sycl::buffer<std::int64_t, 1> indices_ = {0});
 
     	std::int64_t n_dims;
     	std::int64_t n_observations;
@@ -91,7 +88,7 @@ structure dataset (Buffer version)
             explicit dataset::dataset(std::int64_t n_dims_, std::int64_t n_observations_,
                 sycl::buffer<Type, 1> observations_,
                 sycl::buffer<Type, 1> weights_ = {0},
-                sycl::buffer<std::int64_t, 1> indices_ = {0})
+                sycl::buffer<std::int64_t, 1> indices_ = {0});
 
         .. container:: section
 
@@ -102,8 +99,8 @@ structure dataset (Buffer version)
             	* `n_dims_` is the number of dimensions
             	* `n_observations_` is the number of observations
             	* `observations_` is the matrix of observations
-            	* `weights_` is an optional parameter, represents array of weights for observations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
-            	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
+            	* `weights_` is an optional parameter, represents an array of weights for observations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
+            	* `indices_` is an optional parameter, represents an array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
 
         .. container:: section
 
@@ -125,10 +122,7 @@ structure dataset (USM version)
     template<layout ObservationsLayout, typename Type>
 	struct dataset<Type*, ObservationsLayout> {
     	explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_, Type* observations_,
-                    Type* weights_ = nullptr, std::int64_t* indices_ = nullptr) :
-                    n_dims(n_dims_), n_observations(n_observations_),
-                    observations(observations_),
-                    weights(weights_), indices(indices_) {};
+                    Type* weights_ = nullptr, std::int64_t* indices_ = nullptr);
 
     	std::int64_t n_dims;
     	std::int64_t n_observations;
@@ -186,7 +180,7 @@ structure dataset (USM version)
             explicit dataset::dataset(std::int64_t n_dims_, std::int64_t n_observations_,
                 Type* observations_,
                 Type* weights_ = nullptr,
-                std::int64_t* indices_ = nullptr)
+                std::int64_t* indices_ = nullptr);
 
         .. container:: section
 
@@ -197,8 +191,8 @@ structure dataset (USM version)
             	* `n_dims_` is the number of dimensions
             	* `n_observations_` is the number of observations
             	* `observations_` is the matrix of observations
-            	* `weights_` is an optional parameter, represents array of weights for observations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
-            	* `indices_` is an optional parameter, represents array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
+            	* `weights_` is an optional parameter, represents an array of weights for observations (of size `n_observations`). If the parameter is not specified, each observation is assigned a weight equal 1.
+            	* `indices_` is an optional parameter, represents an array of dimensions that are processed (of size `n_dims`). If the parameter is not specified, all dimensions are processed.
 
         .. container:: section
 

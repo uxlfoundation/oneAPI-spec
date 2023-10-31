@@ -811,6 +811,7 @@ zgebrd
 ≥
 ﬁ
 ﬂ
-parmeterizes
+parameterizes
 QNaN
 decrementing
+deallocating

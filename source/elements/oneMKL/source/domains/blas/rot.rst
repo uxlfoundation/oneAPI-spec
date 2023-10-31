@@ -184,8 +184,8 @@ rot (USM Version)
                        std::int64_t incx,
                        T *y,
                        std::int64_t incy,
-                       Tc c,
-                       Ts s,
+                       value_or_pointer<Tc> c,
+                       value_or_pointer<Ts> s,
                        const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
@@ -197,8 +197,8 @@ rot (USM Version)
                        std::int64_t incx,
                        T *y,
                        std::int64_t incy,
-                       Tc c,
-                       Ts s,
+                       value_or_pointer<Tc> c,
+                       value_or_pointer<Ts> s,
                        const std::vector<sycl::event> &dependencies = {})
    }
 
@@ -231,10 +231,10 @@ rot (USM Version)
       Stride of vector ``y``.
 
    c
-      Scaling factor.
+      Scaling factor. See :ref:`value_or_pointer` for more details.
 
    s
-      Scaling factor.
+      Scaling factor. See :ref:`value_or_pointer` for more details.
 
    dependencies
       List of events to wait for before starting computation, if any.

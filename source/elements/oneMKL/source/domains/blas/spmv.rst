@@ -155,11 +155,11 @@ spmv (USM Version)
        sycl::event spmv(sycl::queue &queue,
                         onemkl::uplo upper_lower,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         const T *x,
                         std::int64_t incx,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *y,
                         std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
@@ -170,11 +170,11 @@ spmv (USM Version)
        sycl::event spmv(sycl::queue &queue,
                         onemkl::uplo upper_lower,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         const T *x,
                         std::int64_t incx,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *y,
                         std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
@@ -194,7 +194,7 @@ spmv (USM Version)
       Number of rows and columns of ``A``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix-vector product.
+      Scaling factor for the matrix-vector product. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``. The array holding input matrix
@@ -212,7 +212,7 @@ spmv (USM Version)
       Stride of vector ``x``. Must not be zero.
 
    beta
-      Scaling factor for vector ``y``.
+      Scaling factor for vector ``y``. See :ref:`value_or_pointer` for more details.
 
    y
       Pointer to input/output vector ``y``. The array holding

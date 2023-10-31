@@ -39,10 +39,10 @@ trmv (Buffer version)
                  oneapi::mkl::uplo                    uplo_val
                  oneapi::mkl::transpose               transpose_val,
                  oneapi::mkl::diag                    diag_val
-                 fp                                   alpha,
+                 const fp                             alpha,
                  oneapi::mkl::sparse::matrix_handle_t A_handle,
                  sycl::buffer<fp, 1>                  &x,
-                 fp                                   beta,
+                 const fp                             beta,
                  sycl::buffer<fp, 1>                  &y);
 
    }
@@ -138,10 +138,10 @@ trmv (USM version)
                         oneapi::mkl::uplo                     uplo_val
                         oneapi::mkl::transpose                transpose_val,
                         oneapi::mkl::diag                     diag_val
-                        fp                                    alpha,
+                        const fp                              alpha,
                         oneapi::mkl::sparse::matrix_handle_t  A_handle,
-                        fp                                    *x,
-                        fp                                    beta,
+                        const fp                              *x,
+                        const fp                              beta,
                         fp                                    *y
                         const std::vector<sycl::event>        &dependencies = {});
 

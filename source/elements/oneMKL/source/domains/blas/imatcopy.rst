@@ -178,7 +178,7 @@ imatcopy (USM Version)
                             oneapi::mkl::transpose trans,
                             std::int64_t m,
                             std::int64_t n,
-                            T alpha,
+                            value_or_pointer<T> alpha,
                             T *matrix_in_out,
                             std::int64_t ld_in,
                             std::int64_t ld_out,
@@ -190,7 +190,7 @@ imatcopy (USM Version)
                             oneapi::mkl::transpose trans,
                             std::int64_t m,
                             std::int64_t n,
-                            T alpha,
+                            value_or_pointer<T> alpha,
                             T *matrix_in_out,
                             std::int64_t ld_in,
                             std::int64_t ld_out,
@@ -214,7 +214,7 @@ imatcopy (USM Version)
       Number of columns for the matrix ``C`` on input. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix transpose or copy operation.
+      Scaling factor for the matrix transpose or copy operation. See :ref:`value_or_pointer` for more details.
 
    matrix_in_out
          Pointer to input/output matrix ``C``. Must have size as follows:

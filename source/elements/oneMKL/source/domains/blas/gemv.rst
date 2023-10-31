@@ -177,12 +177,12 @@ gemv (USM Version)
                         onemkl::transpose trans,
                         std::int64_t m,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         const T *x,
                         std::int64_t incx,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *y,
                         std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
@@ -194,12 +194,12 @@ gemv (USM Version)
                         onemkl::transpose trans,
                         std::int64_t m,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         const T *x,
                         std::int64_t incx,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *y,
                         std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
@@ -227,7 +227,7 @@ gemv (USM Version)
       of ``n`` must be at least zero.
 
    alpha
-      Scaling factor for the matrix-vector product.
+      Scaling factor for the matrix-vector product. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to the input matrix ``A``. Must have a size of at
@@ -251,7 +251,7 @@ gemv (USM Version)
       The stride of vector ``x``. Must not be zero.
 
    beta
-      The scaling factor for vector ``y``.
+      The scaling factor for vector ``y``. See :ref:`value_or_pointer` for more details.
 
    y
       Pointer to input/output vector ``y``. The length ``len`` of

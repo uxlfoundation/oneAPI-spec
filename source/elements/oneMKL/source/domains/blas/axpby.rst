@@ -127,9 +127,9 @@ axpby (USM Version)
    namespace oneapi::mkl::blas::column_major {
        sycl::event axpby(sycl::queue &queue,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *x, std::int64_t incx,
-                        const T beta,
+                        value_or_pointer<T> beta,
                         T *y, std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
    }
@@ -138,9 +138,9 @@ axpby (USM Version)
    namespace oneapi::mkl::blas::row_major {
        sycl::event axpby(sycl::queue &queue,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *x, std::int64_t incx,
-                        const T beta,
+                        value_or_pointer<T> beta,
                         T *y, std::int64_t incy,
                         const std::vector<sycl::event> &dependencies = {})
    }
@@ -156,10 +156,10 @@ axpby (USM Version)
       Number of elements in vector ``x`` and ``y``.
 
    alpha
-      Specifies the scalar alpha.
+      Specifies the scalar alpha. See :ref:`value_or_pointer` for more details.
 
    beta
-      Specifies the scalar beta.
+      Specifies the scalar beta. See :ref:`value_or_pointer` for more details.
 
    x
       Pointer to the input vector ``x``. The allocated memory must be

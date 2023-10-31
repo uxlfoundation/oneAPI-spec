@@ -177,14 +177,14 @@ tensors with the same id should be identical at the graph construction time.
 Once the graph is fully described, |finalize| should be called. This
 prevents any other operation from being added, and allows to call
 |get_partitions| in order to get the set of partitions for that
-graph. The graph doesn’t hold any meaning to the user after
+graph. The graph does not hold any meaning to the user after
 partitioning and should freed by the user.
 
 All the OPs added to the graph will be contained in one of the returned
 partitions. If an OP is not supported by the oneDNN Graph API implementation,
 the corresponding partition will be marked as “not supported”. Users can check
 the supporting status of a partition via the |is_supported|. Partitions
-should not form cyclic dependence within the graph. If user doesn’t pass a
+should not form cyclic dependence within the graph. If user does not pass a
 complete graph, it is the user's responsibility to detect any dependence cycle
 between the partitions and operations not passing to oneDNN Graph implementation.
 

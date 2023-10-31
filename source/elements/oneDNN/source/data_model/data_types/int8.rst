@@ -19,7 +19,7 @@ acceptable) accuracy.
 Workflow
 ********
 
-oneDNN support symmetric and assymetric quantization models.
+oneDNN support symmetric and asymmetric quantization models.
 
 .. _int8-quantization-label:
 
@@ -27,7 +27,7 @@ Quantization Model
 ==================
 
 For each int8 tensor, the oneDNN library allows to specify scaling
-factors and zero-points (also refered to as quantization
+factors and zero-points (also referred to as quantization
 parameters), and assumes the following mathematical relationship:
 
 .. math::
