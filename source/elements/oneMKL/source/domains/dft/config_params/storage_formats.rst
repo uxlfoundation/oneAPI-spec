@@ -55,7 +55,7 @@ configuration value ``config_value::INPLACE`` for configuration parameter
 ``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::COMPLEX_COMPLEX``
-set for configuration parameter ``config_param::COMPLEX_STORAGE``, in the
+for configuration parameter ``config_param::COMPLEX_STORAGE``, in the
 context of in-place, single-precision (fp32) calculations of :math:`M`
 three-dimensional :math:`n_1 \times n_2 \times n_3` complex transforms, using
 identical (default) strides and distances in forward and backward domains, with
