@@ -267,7 +267,7 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
       * -   WORKSPACE
         -   Flag notifying if oneMKL is allowed to use algorithms that may
             require additional memory compared to other (possibly less
-            performant) alternatives, or if it should avoid it, if possible.
+            performant) alternatives, or if additional memory should be avoided, if possible.
         -   | :ref:`onemkl_dft_enum_config_value` (possible values are self-explanatory ``config_value::ALLOW`` or ``config_value::AVOID``)
             | [``config_value::ALLOW``]
 
