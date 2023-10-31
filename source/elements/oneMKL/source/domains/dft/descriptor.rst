@@ -304,8 +304,7 @@ This function requires and expects exactly **two** arguments: it sets the
 configuration value (second argument) corresponding to the configuration
 parameter (first argument) ``param`` of type ``oneapi::mkl::dft::config_param``.
 The type of the configuration value (second argument) to be set depends on the
-value of ``param``: it can be ``oneapi::mkl::dft::domain``,
-``oneapi::mkl::dft::precision``, ``oneapi::mkl::dft::config_value`` or a native
+value of ``param``: it can be ``oneapi::mkl::dft::config_value`` or a native
 type like ``std::int64_t`` or ``float`` (more details available
 :ref:`here<onemkl_dft_enum_config_param>`).
 
