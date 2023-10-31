@@ -168,7 +168,7 @@ user-provided, device-accessible data.
   - deliver best performance for DFT calculations when created, configured and
     comitted outside applications' hotpath(s) that use them multiple times for
     identically-configured (batched) DFTs. :ref:`onemkl_dft_compute_forward`
-    and/or :ref:`onemkl_dft_compute_backward` should be the only DFT-related
+    and/or :ref:`onemkl_dft_compute_backward` should be the only oneMKL DFT-related
     routines invoked in programs' hotpaths.
 
 Summary table
