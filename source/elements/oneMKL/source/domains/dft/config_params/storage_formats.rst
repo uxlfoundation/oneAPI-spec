@@ -19,7 +19,7 @@ Complex descriptors
 
 For a complex descriptor, the configuration parameter
 ``config_param::COMPLEX_STORAGE`` specifies how the entries of the complex data
-sequences it expects and produces are stored. If that configuration parameter is
+sequences it consumes and produces are stored. If that configuration parameter is
 associated with a configuration value ``config_value::COMPLEX_COMPLEX`` (default
 behavior), those entries are accessed and stored as ``std::complex<float>``
 (resp. ``std::complex<double>``) elements of a single data container
