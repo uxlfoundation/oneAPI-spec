@@ -242,8 +242,8 @@ forward (resp. backward) DFT(s).
 
 As a consequence, configuring :ref:`descriptor<onemkl_dft_descriptor>` objects
 using these deprecated configuration parameters makes their configuration
-possibly direction-dependent (if different stride values are to be used in
-forward and backward domains). Since the intended compute direction is unknown
+direction-dependent when different stride values are used in
+forward and backward domains. Since the intended compute direction is unknown
 to the :ref:`descriptor<onemkl_dft_descriptor>` object when
 :ref:`committing<onemkl_dft_descriptor_commit>` it, every direction that results
 in a :ref:`consistent data layout<onemkl_dft_data_layout_requirements>` in
