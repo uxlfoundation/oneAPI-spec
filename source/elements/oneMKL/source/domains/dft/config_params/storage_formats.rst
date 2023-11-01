@@ -141,7 +141,7 @@ USM allocations.
     //   = ZR[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
     // and the imaginary part of entry {m;k1,k2,k3}
     //   = ZI[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
-    compute_forward(desc, ZR, ZI); // complex-to-complex in-place DFT
+    compute_forward<decltype(desc), float>(desc, ZR, ZI); // complex-to-complex in-place DFT
     // in backward domain: the real part of entry {m;k1,k2,k3}
     //   = ZR[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
     // and the imaginary part of entry {m;k1,k2,k3}
