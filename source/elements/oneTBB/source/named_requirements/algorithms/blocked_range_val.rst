@@ -24,7 +24,6 @@ A type `Value` satisfies `BlockedRangeValue` if it meets the following requireme
 .. cpp:function:: void operator=( const Value& )
 
     Assignment.
-
     .. note::
 
          The return type ``void`` in the pseudo-signature denotes that
