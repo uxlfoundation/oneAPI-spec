@@ -33,31 +33,31 @@ A type `Index` satisfies `ParallelForIndex` if it meets the following requiremen
 
     Adjust ``*this`` to the next value.
 
-.. cpp:function:: friend bool operator<( const Index& i, const Index& j )
+.. cpp:function:: bool operator<( const Index& i, const Index& j )
 
     Value of *i* precedes value of *j*.
 
-.. cpp:function:: friend bool operator<=( const Index& i, const Index& j )
+.. cpp:function:: bool operator<=( const Index& i, const Index& j )
 
     Value of *i* precedes or equal to the value of *j*.
 
-.. cpp:function:: friend D operator-( const Index& i, const Index& j )
+.. cpp:function:: D operator-( const Index& i, const Index& j )
 
     Number of values in range ``[i,j)``.
 
-.. cpp:function:: friend Index operator+( const Index& i, const Index& j )
+.. cpp:function:: Index operator+( const Index& i, const Index& j )
 
     Sum of *i* and *j* values.
 
-.. cpp:function:: friend Index operator+( const Index& i, D k )
+.. cpp:function:: Index operator+( const Index& i, D k )
 
     *k*-th value after *i*.
 
-.. cpp:function:: friend Index operator*( const Index& i, const Index& j )
+.. cpp:function:: Index operator*( const Index& i, const Index& j )
 
     Multiplication of *i* and *j* values.
 
-.. cpp:function:: friend Index operator/( const Index& i, const Index& j )
+.. cpp:function:: Index operator/( const Index& i, const Index& j )
 
     Quotient of *i* and *j* values.
 
