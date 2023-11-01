@@ -142,9 +142,7 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
          OUTPUT_STRIDES, // deprecated
          
          FWD_DISTANCE,
-         BWD_DISTANCE,
-         
-         WORKSPACE
+         BWD_DISTANCE
       };
 
    Configuration parameters represented by ``config_param::FORWARD_DOMAIN`` and
@@ -264,12 +262,6 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
             :math:`M > 1`.
         -   | ``std::int64_t``
             | [0]
-      * -   WORKSPACE
-        -   Flag notifying if oneMKL is allowed to use algorithms that may
-            require additional memory compared to other (possibly less
-            performant) alternatives, or if additional memory should be avoided, if possible.
-        -   | :ref:`onemkl_dft_enum_config_value` (possible values are self-explanatory ``config_value::ALLOW`` or ``config_value::AVOID``)
-            | [``config_value::ALLOW``]
 
 .. _onemkl_dft_enum_config_value:
 
@@ -295,11 +287,7 @@ values associated with some
 
          // for config_param::PLACEMENT
          INPLACE,
-         NOT_INPLACE,
-
-         // for config_param::WORKSPACE
-         ALLOW,
-         AVOID
+         NOT_INPLACE
       };
 
 **Parent topic:** :ref:`onemkl_dft`
