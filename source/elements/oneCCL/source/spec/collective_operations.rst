@@ -15,6 +15,7 @@ oneCCL specification defines the following collective communication operations:
 - `Broadcast`_
 - `Reduce`_
 - `ReduceScatter`_
+- `PointToPoint`_
 
 These operations are collective, meaning that all participants (ranks) of oneCCL communicator should make a call.
 The order of collective operation calls should be the same across all ranks.
@@ -396,6 +397,142 @@ deps
     an optional vector of the events that the operation should depend on
 return ``event``
     an object to track the progress of the operation
+
+
+.. _PointToPoint:
+
+Point-To-Point Operations
+*************************
+
+OneCCL specification defines the following point-to-point operations:
+
+* Send
+* Recv
+
+In point-to-point communication, two ranks participate in the communication so when a process sends data to a peer rank, 
+the peer rank needs to post a ``recv`` call with the same datatype and count as the sending rank. 
+
+The current specification only supports blocking ``send`` and ``recv`` and does not support for multiple ``send``
+and ``receive`` operations to proceed concurrently. 
+
+In the ``send`` operation, the peer specifies the destination process, while in the recv operation peer specifies the source process. 
+
+As with the collective operations, the communicator can perform communication operations on host or device memory buffers 
+depending on the device used to create the communicator. Additionally, communication operations accept an execution 
+context (stream) and may accept a vector of events on which the communication operation should depend, that is, input dependencies. 
+The output event object provides the ability to track the operation's progress.
+
+.. note:: Support for the handling of input events is optional.
+
+BufferType is used below to define the C++ type of elements in communication operations' data buffers 
+(``buf``, ``send_buf``, and ``recv_buf``). At least the following types should be supported: ``[u]int{8/16/32/64}_t, float, double``. 
+The explicit datatype parameter enable data types that cannot be inferred from the function arguments.
+For more information, see Custom Datatypes.
+
+The communication operation accepts a stream object. If a communicator is created from ``native_device_type``, 
+then the stream translates to ``native_stream_type`` created from the corresponding device.
+
+The communication operation may accept attribute objects. If that parameter is missed, then the default attribute object is used 
+(``default_<operation_name>_attr``). The default attribute object is provided by the library.
+For more information, see Operation Attributes. 
+
+If the arguments provided to a communication operation call do not comply with the requirements of the operation, 
+the behavior is undefined, unless otherwise specified.
+
+Send
+^^^^
+
+A blocking point-to-point communication operation that sends the data in a buf to a peer rank. 
+
+.. code:: cpp
+
+   template <class BufferType,
+   event CCL_API send(BufferType *buf,
+                      size_t count,
+                      int peer,
+                      const communicator &comm,
+                      const stream &stream,
+                      const pt2pt_attr &attr = default_pt2pt_attr,
+                      const vector_class<event>& deps = {});
+
+   event CCL_API send(void *buf,    
+                      size_t count,             
+                      datatype dtype, 
+                      int peer, 
+                      const communicator &comm, 
+                      const stream &stream, 
+                      const pt2pt_attr &attr = default_pt2pt_attr, 
+                      const vector_class<event> &deps = {}); 
+ 
+buf
+	the buffer with count elements of ``dtype`` that contains the data to be sent 
+count
+	the number of elements of type dtype in buf 
+dtype
+	the datatype of elements in buf 
+	must be skipped if ``BufferType`` can be inferred
+	otherwise must be passed explicitly
+peer
+	the destination rank
+comm
+	the communicator that defines a group of ranks for the operation
+stream
+	the stream associated with the operation 
+attr
+	optional attributes to customize the operation 
+deps
+	an optional vector of the events that the operation should depend on 
+	
+return event
+	an object to track the progress of the operation 
+
+Recv
+^^^^^
+
+A blocking point-to-point communication operation that receives the data in a buf from a peer rank.
+
+.. code:: cpp
+
+   template <class BufferType,
+             event CCL_API recv(BufferType *buf,
+                      size_t count,
+                      int peer,
+                      const communicator &comm,
+                      const stream &stream,
+                      const pt2pt_attr &attr = default_pt2pt_attr,
+                      const vector_class<event> &deps = {});
+
+   event CCL_API send(void *buf,    
+                      size_t count,             
+                      datatype dtype, 
+                      int peer, 
+                      const communicator &comm, 
+                      const stream &stream, 
+                      const pt2pt_attr &attr = default_pt2pt_attr, 
+                      const vector_class<event> &deps = {}); 
+
+buf [out]
+	the buffer with count elements of dtype that contains the data to be sent
+count
+	the number of elements of type dtype in buf
+dtype
+	the datatype of elements in buf
+	must be skipped if ``BufferType`` can be inferred
+	otherwise must be passed explicitly
+peer
+	the destination rank
+comm
+	the communicator that defines a group of ranks for the operation
+stream
+	The stream associated with the operation
+attr
+	optional attributes to customize the operation
+deps
+	an optional vector of the events that the operation should depend on
+
+return event
+	object to track the progress of the operation
+
 
 
 .. note::
