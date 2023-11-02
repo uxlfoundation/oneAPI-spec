@@ -33,7 +33,11 @@ Requirements:
 * The ``Range`` type must meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
 * The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
+  Alternatively, since C++17 a pointer to const member function in ``Range`` returning ``Value`` and taking ``const Value&`` and ``bool``
+  as arguments might be used as a ``Scan``.
 * The ``Combine`` type must meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
+  Alternatively, since C++17 a pointer to const member function in ``Value`` returning ``Value`` and taking ``const Value&``
+  as an argument might be used as a ``Combine``.
 
 The function template ``parallel_scan`` computes a parallel prefix, also known as a parallel scan.
 This computation is an advanced concept in parallel computing that is sometimes useful in scenarios
@@ -183,4 +187,3 @@ See also:
 
 * :doc:`blocked_range class <../../algorithms/blocked_ranges/blocked_range_cls>`
 * :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
-

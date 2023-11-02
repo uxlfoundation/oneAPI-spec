@@ -37,6 +37,7 @@ Function template that processes work items in parallel.
 Requirements:
 
 * The ``Body`` type must meet the :doc:`ParallelForEachBody requirements <../../named_requirements/algorithms/par_for_each_body>`.
+  Alternatively, since C++17 a pointer to member function in ``Index`` might be used as a ``Body``.
 * The ``InputIterator`` type must meet the `Input Iterator` requirements from the [input.iterators] ISO C++ Standard section.
 * The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`.
 
