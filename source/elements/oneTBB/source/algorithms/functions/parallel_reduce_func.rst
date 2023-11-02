@@ -51,11 +51,11 @@ Requirements:
 * The ``Range`` type must meet the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelReduceBody requirements <../../named_requirements/algorithms/par_reduce_body>`.
 * The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
-  Alternatively, since C++17 a pointer to const member function in ``Range`` returning ``Value`` and taking ``const Value&``
-  as an argument might be used as a ``Func``.
+  Alternatively, since C++17 a pointer to a const member function in ``Range`` taking ``const Value&`` argument and returning ``Value``
+  might be used as a ``Func``.
 * The ``Reduction`` types must meet :doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_reduction>`.
-  Alternatively, since C++17 a pointer to const member function in ``Value`` returning ``Value`` and taking ``const Value&``
-  as an argument might be used as a ``Reduction``.
+  Alternatively, since C++17 a pointer to a const member function in ``Value`` taking ``const Value&`` argument and returning ``Value``
+  might be used as a ``Reduction``.
 
 The function template ``parallel_reduce`` has two forms:
 The functional form is designed to be easy to use in conjunction with lambda expressions.
