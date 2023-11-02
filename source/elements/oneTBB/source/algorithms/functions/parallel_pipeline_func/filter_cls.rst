@@ -50,7 +50,7 @@ Requirements:
 
 * If `InputType` is ``void``, a ``Body`` type must meet the :doc:`FirstFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
 * If `OutputType` is ``void``, a ``Body`` type must meet the :doc:`LastFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-  Alternatively, since C++17 a pointer to member function in ``InputType`` returning ``OutputType`` might be used as a ``Body``.
+  Alternatively, since C++17 a pointer to a member function in ``InputType`` returning ``void`` might be used as a ``Body``.
 * If `InputType` and `OutputType` are not ``void``, a ``Body`` type must meet the :doc:`MiddleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
   Alternatively, since C++17 a pointer to member function in ``InputType`` returning ``OutputType`` might be used as a ``Body``.
 * If `InputType` and `OutputType` are ``void``, a ``Body`` type must meet the :doc:`SingleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
