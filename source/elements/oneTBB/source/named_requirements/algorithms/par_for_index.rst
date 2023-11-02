@@ -64,6 +64,9 @@ A type `Index` satisfies `ParallelForIndex` if it meets the following requiremen
 ``D`` is the type of the expression ``j-i``. It can be any integral type that is convertible to ``size_t``.
 Examples that model the Index requirements are integral types and pointers.
 
+**_NOTE:_** It is recommended to use integral types as ``ParallelForIndex``. See ``[basic.fundamental]``
+ISO C++ Standard section for information about integral types.
+
 See also:
 
 * :doc:`parallel_for algorithm <../../algorithms/functions/parallel_for_func>`
