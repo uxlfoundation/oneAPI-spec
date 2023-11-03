@@ -15,6 +15,8 @@ it may be preferable to provide an external workspace (``config_param::WORKSPACE
 * To reduce the number of GPU mallocs / frees
 * To reduce memory consumption
 
+For some backends and configurations, ``config_param::WORKSPACE_EXTERNAL`` may reduce performance.
+
 A typical workflow for using ``config_param::WORKSPACE_EXTERNAL`` is given in the section :ref:`onemkl_dft_typical_usage_of_workspace_external`.
 
 WORKSPACE_PLACEMENT
