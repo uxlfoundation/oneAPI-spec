@@ -53,7 +53,9 @@ Requirements:
 * The ``Value`` type must meet the `CopyConstructible` requirements from the [copyconstructible] section and
   `CopyAssignable` requirements from the [copyassignable] section of the ISO C++ Standard.
 * The ``Func`` type must meet the :doc:`ParallelReduceFunc requirements <../../named_requirements/algorithms/par_reduce_func>`.
+  Since C++17, ``Func`` may also be a pointer to a const member function in ``Range`` that takes ``const Value&`` argument and returns ``Value``.
 * The ``Reduction`` types must meet :doc:`ParallelReduceReduction requirements <../../named_requirements/algorithms/par_reduce_reduction>`.
+  Since C++17, ``Reduction`` may also be a pointer to a const member function in ``Value`` that takes ``const Value&`` argument and returns ``Value``.
 
 The function template ``parallel_reduce`` has two forms:
 The functional form is designed to be easy to use in conjunction with lambda expressions.
@@ -163,4 +165,3 @@ expressions and the functional form of ``parallel_reduce``.
 See also:
 
 * :ref:`Partitioners <Partitioners>`
-

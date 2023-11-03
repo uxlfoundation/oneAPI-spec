@@ -7,7 +7,7 @@ filter
 ======
 **[algorithms.parallel_pipeline.filter]**
 
-A ``filter`` class template represents a strongly-typed filter in a ``parallel_pipeline`` algorithm, 
+A ``filter`` class template represents a strongly-typed filter in a ``parallel_pipeline`` algorithm,
 with its template parameters specifying the filter input and output types.
 A ``filter`` can be constructed from a functor or by composing two ``filter`` objects with
 ``operator&()``. The same ``filter`` object can be reused in multiple ``&`` expressions.
@@ -17,7 +17,7 @@ The ``filter`` class should only be used in conjunction with ``parallel_pipeline
 .. code:: cpp
 
     // Defined in header <oneapi/tbb/parallel_pipeline.h>
-    
+
     namespace oneapi {
         namespace tbb {
 
@@ -48,9 +48,12 @@ The ``filter`` class should only be used in conjunction with ``parallel_pipeline
 
 Requirements:
 
-* If `InputType` is ``void``, a ``Body`` type must meet the :doc:`StartFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-* If `OutputType` is ``void``, a ``Body`` type must meet the :doc:`OutputFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+* If `InputType` is ``void``, a ``Body`` type must meet the :doc:`FirstFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+* If `OutputType` is ``void``, a ``Body`` type must meet the :doc:`LastFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+  Since C++17, ``Body`` may also be a pointer to a member function in ``InputType``.
 * If `InputType` and `OutputType` are not ``void``, a ``Body`` type must meet the :doc:`MiddleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
+  Since C++17, ``Body`` may also be a pointer to a member function in ``InputType`` that returns ``OutputType``
+  or a pointer to a data member in ``InputType`` of type ``OutputType``.
 * If `InputType` and `OutputType` are ``void``, a ``Body`` type must meet the :doc:`SingleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
 
 filter_mode Enumeration
