@@ -199,10 +199,10 @@ syrk (USM Version)
                         onemkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *c,
                         std::int64_t ldc,
                         const std::vector<sycl::event> &dependencies = {})
@@ -215,10 +215,10 @@ syrk (USM Version)
                         onemkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
-                        T beta,
+                        value_or_pointer<T> beta,
                         T *c,
                         std::int64_t ldc,
                         const std::vector<sycl::event> &dependencies = {})
@@ -249,7 +249,7 @@ syrk (USM Version)
       least zero.
 
    alpha
-      Scaling factor for the rank-k update.
+      Scaling factor for the rank-k update. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``.
@@ -290,7 +290,7 @@ syrk (USM Version)
            - ``lda`` must be at least ``n``.
 
    beta
-      Scaling factor for matrix ``C``.
+      Scaling factor for matrix ``C``. See :ref:`value_or_pointer` for more details.
 
    c
       Pointer to input/output matrix ``C``. Must have size at least

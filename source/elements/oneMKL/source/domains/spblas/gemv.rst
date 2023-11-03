@@ -126,7 +126,7 @@ gemv (USM version)
                         oneapi::mkl::sparse::matrix_handle_t  A_handle, 
                         const fp                              *x, 
                         const fp                              beta, 
-                        const fp                              *y, 
+                        fp                                    *y,
                         const std::vector<sycl::event>        &dependencies = {});
 
    }

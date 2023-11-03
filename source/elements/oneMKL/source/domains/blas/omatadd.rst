@@ -249,10 +249,10 @@ omatadd (USM Version)
                            oneapi::mkl::transpose transb,
                            std::int64_t m,
                            std::int64_t n,
-                           T alpha,
+                           value_or_pointer<T> alpha,
                            const T *a,
                            std::int64_t lda,
-                           T beta,
+                           value_or_pointer<T> beta,
                            const T *b,
                            std::int64_t ldb,
                            T *c,
@@ -267,10 +267,10 @@ omatadd (USM Version)
                            oneapi::mkl::transpose transb,
                            std::int64_t m,
                            std::int64_t n,
-                           T alpha,
+                           value_or_pointer<T> alpha,
                            const T *a,
                            std::int64_t lda,
-                           T beta,
+                           value_or_pointer<T> beta,
                            const T *b,
                            std::int64_t ldb,
                            T *c,
@@ -300,7 +300,7 @@ omatadd (USM Version)
       Number of columns for the result matrix ``C``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrix ``A``.
+      Scaling factor for the matrix ``A``. See :ref:`value_or_pointer` for more details.
 
    a
       Array holding the input matrix ``A``.
@@ -335,7 +335,7 @@ omatadd (USM Version)
            - ``lda`` must be at least ``m``.
 
    beta
-      Scaling factor for the matrices ``B``.
+      Scaling factor for the matrices ``B``. See :ref:`value_or_pointer` for more details.
 
    b
       Array holding the input matrices ``B``.

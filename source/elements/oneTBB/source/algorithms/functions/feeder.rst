@@ -33,10 +33,13 @@ Member functions
 
     Adds item to a collection of work items to be processed.
 
+    **Requirements**: The ``Item`` type must meet the `CopyConstructible` requirements from the [copyconstructible] section of the ISO C++ Standard.
+
 .. cpp:function:: void add( Item&& item )
 
     Same as the above but uses the move constructor of ``Item``, if available.
-
+ 
+    **Requirements**: The ``Item`` type must meet the `MoveConstructible` requirements from the [moveconstructible] section of the ISO C++ Standard.
 
 .. caution::
 

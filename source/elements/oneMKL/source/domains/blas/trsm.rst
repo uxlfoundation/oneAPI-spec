@@ -198,7 +198,7 @@ trsm (USM Version)
                         onemkl::diag unit_diag,
                         std::int64_t m,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         T *b,
@@ -215,7 +215,7 @@ trsm (USM Version)
                         onemkl::diag unit_diag,
                         std::int64_t m,
                         std::int64_t n,
-                        T alpha,
+                        value_or_pointer<T> alpha,
                         const T *a,
                         std::int64_t lda,
                         T *b,
@@ -255,7 +255,7 @@ trsm (USM Version)
       must be at least zero.
 
    alpha
-      Scaling factor for the solution.
+      Scaling factor for the solution. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``. Must have size at least

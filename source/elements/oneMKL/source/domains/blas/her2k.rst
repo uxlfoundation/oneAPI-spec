@@ -253,12 +253,12 @@ her2k (USM Version)
                          onemkl::transpose trans,
                          std::int64_t n,
                          std::int64_t k,
-                         T alpha,
+                         value_or_pointer<T> alpha,
                          const T *a,
                          std::int64_t lda,
                          const T *b,
                          std::int64_t ldb,
-                         Treal beta,
+                         value_or_pointer<Treal> beta,
                          T *c,
                          std::int64_t ldc,
                          const std::vector<sycl::event> &dependencies = {})
@@ -271,12 +271,12 @@ her2k (USM Version)
                          onemkl::transpose trans,
                          std::int64_t n,
                          std::int64_t k,
-                         T alpha,
+                         value_or_pointer<T> alpha,
                          const T *a,
                          std::int64_t lda,
                          const T *b,
                          std::int64_t ldb,
-                         Treal beta,
+                         value_or_pointer<Treal> beta,
                          T *c,
                          std::int64_t ldc,
                          const std::vector<sycl::event> &dependencies = {})
@@ -307,7 +307,7 @@ her2k (USM Version)
       ``k`` must be at least equal to zero.
 
    alpha
-      Complex scaling factor for the rank-2k update.
+      Complex scaling factor for the rank-2k update. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to input matrix ``A``.
@@ -387,7 +387,7 @@ her2k (USM Version)
            - ``ldb`` must be at least ``k``.
 
    beta
-      Real scaling factor for matrix ``C``.
+      Real scaling factor for matrix ``C``. See :ref:`value_or_pointer` for more details.
 
    c
       Pointer to input/output matrix ``C``. Must have size at least

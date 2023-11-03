@@ -82,11 +82,6 @@ trsv (Buffer version)
         equal to the number of columns of  matrix :math:`\text{op}(A)`.
 
 
-   y
-        SYCL memory object containing an array of size at least
-        equal to the number of rows of matrix :math:`\text{op}(A)`.
-
-
 .. container:: section
 
 
@@ -129,7 +124,7 @@ trsv (USM version)
                         oneapi::mkl::transpose                transpose_val,
                         oneapi::mkl::diag                     diag_val
                         oneapi::mkl::sparse::matrix_handle_t  A_handle,
-                        fp                                    *x,
+                        const fp                              *x,
                         fp                                    *y
                         const std::vector<sycl::event>        &dependencies = {});
 
@@ -169,11 +164,6 @@ trsv (USM version)
    x
         Device-accessible USM object containing an array of size at least
         equal to the number of columns of matrix :math:`\text{op}(A)`.
-
-
-   y
-        Device-accessible USM object containing an array of size at least
-        equal to the number of rows of matrix :math:`\text{op}(A)`.
 
 
    dependencies

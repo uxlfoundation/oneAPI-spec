@@ -570,11 +570,11 @@ in-place operations:
                                  oneapi::mkl::transpose transb,
                                  std::int64_t m,
                                  std::int64_t n,
-                                 T alpha,
+                                 value_or_pointer<T> alpha,
                                  const T *a,
                                  std::int64_t lda,
                                  std::int64_t stride_a,
-                                 T beta,
+                                 value_or_pointer<T> beta,
                                  T *b,
                                  std::int64_t ldb,
                                  std::int64_t stride_b,
@@ -592,11 +592,11 @@ in-place operations:
                                  oneapi::mkl::transpose transb,
                                  std::int64_t m,
                                  std::int64_t n,
-                                 T alpha,
+                                 value_or_pointer<T> alpha,
                                  const T *a,
                                  std::int64_t lda,
                                  std::int64_t stride_a,
-                                 T beta,
+                                 value_or_pointer<T> beta,
                                  T *b,
                                  std::int64_t ldb,
                                  std::int64_t stride_b,
@@ -629,7 +629,7 @@ in-place operations:
       Number of columns for the result matrix ``C``. Must be at least zero.
 
    alpha
-      Scaling factor for the matrices ``A``.
+      Scaling factor for the matrices ``A``. See :ref:`value_or_pointer` for more details.
 
    a
       Array holding the input matrices ``A``. Must have size at least ``stride_a`` * ``batch_size``.
@@ -667,7 +667,7 @@ in-place operations:
            - ``stride_a`` must be at least ``lda*n``.
 
    beta
-      Scaling factor for the matrices ``B``.
+      Scaling factor for the matrices ``B``. See :ref:`value_or_pointer` for more details.
 
    b
       Array holding the input matrices ``B``. Must have size at least

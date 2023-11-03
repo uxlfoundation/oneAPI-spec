@@ -32,6 +32,8 @@ Requirements:
 
 * The ``Range`` type must meet the :doc:`Range requirement <../../named_requirements/algorithms/range>`.
 * The ``Body`` type must meet the :doc:`ParallelScanBody requirements <../../named_requirements/algorithms/par_scan_body>`.
+* The ``Value`` type must meet the `CopyConstructible` requirements from the [copyconstructible] section and
+  `CopyAssignable` requirements from the [copyassignable] section of the ISO C++ Standard.
 * The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
   Alternatively, since C++17 a pointer to a const member function in ``Range`` taking ``const Value&`` and ``bool`` arguments and
   returning ``Value`` might be used as a ``Scan``.

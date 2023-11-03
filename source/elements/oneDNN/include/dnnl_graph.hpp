@@ -136,6 +136,8 @@ struct logical_tensor {
     s8,
     /// 8-bit unsigned integer.
     u8,
+    /// Boolean data type. Size is C++ implementation defined.
+    boolean
   };
 
   /// Layout type
@@ -455,6 +457,7 @@ struct op {
     Mish ,
     MishBackward ,
     Multiply ,
+    Pow ,
     PReLU ,
     PReLUBackward ,
     Quantize ,
@@ -470,6 +473,7 @@ struct op {
     ReLUBackward ,
     Reorder ,
     Round ,
+    Select ,
     Sigmoid ,
     SigmoidBackward ,
     SoftMax ,

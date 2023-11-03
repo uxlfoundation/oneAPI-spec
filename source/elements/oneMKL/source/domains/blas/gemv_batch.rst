@@ -380,14 +380,14 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
                               onemkl::transpose trans,
                               std::int64_t m,
                               std::int64_t n,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *a,
                               std::int64_t lda,
                               std::int64_t stridea,
                               const T *x,
                               std::int64_t incx,
                               std::int64_t stridex,
-                              T beta,
+                              value_or_pointer<T> beta,
                               T *y,
                               std::int64_t incy,
                               std::int64_t stridey,
@@ -401,14 +401,14 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
                               onemkl::transpose trans,
                               std::int64_t m,
                               std::int64_t n,
-                              T alpha,
+                              value_or_pointer<T> alpha,
                               const T *a,
                               std::int64_t lda,
                               std::int64_t stridea,
                               const T *x,
                               std::int64_t incx,
                               std::int64_t stridex,
-                              T beta,
+                              value_or_pointer<T> beta,
                               T *y,
                               std::int64_t incy,
                               std::int64_t stridey,
@@ -435,7 +435,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       Number of columns of op(``A``). Must be at least zero.
 
    alpha
-      Scaling factor for the matrix-vector products.
+      Scaling factor for the matrix-vector products. See :ref:`value_or_pointer` for more details.
 
    a
       Pointer to the input matrices ``A`` with size ``stridea`` * ``batch_size``.
@@ -458,7 +458,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       Stride between different consecutive ``X`` vectors, must be at least 0.
 
    beta
-      Scaling factor for the vector ``Y``.
+      Scaling factor for the vector ``Y``. See :ref:`value_or_pointer` for more details.
 
    y
       Pointer to the input/output vectors ``Y`` with size ``stridey`` * ``batch_size``.

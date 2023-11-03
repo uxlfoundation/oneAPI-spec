@@ -10,7 +10,7 @@ on:
 
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v4
@@ -21,7 +21,7 @@ jobs:
       uses: pre-commit/action@v3.0.0
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v3
     - name: Install ubuntu prerequisites
@@ -62,7 +62,7 @@ jobs:
   publish_site:
     needs: [checks, build]
     if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
     - name: Checkout gh-pages
       uses: actions/checkout@v3
