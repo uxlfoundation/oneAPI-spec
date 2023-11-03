@@ -57,6 +57,7 @@ Usage of ``WORKSPACE_EXTERNAL`` typically involves the following order of operat
 #. The required workspace size is queried.
 #. A workspace of sufficient size is provided to the descriptor.
 #. Compute functions following the type of external workspace provided are called.
+#. The user is responsible for freeing the external workspace.
 
 This is shown in the following example code:
 

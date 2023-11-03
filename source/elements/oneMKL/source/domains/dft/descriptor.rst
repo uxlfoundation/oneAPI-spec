@@ -434,7 +434,7 @@ Set the workspace for when ``config_param::WORKSPACE_PLACEMENT`` is set to ``con
 This function sets the workspace to use when computing DFTs for when an
 external workspace is set. 
 This function may only be called after the descriptor has been committed.
-The provided workspace must be equal to or larger than the required 
+The size of the provided workspace must be equal to or larger than the required 
 workspace size obtained by calling ``descriptor<prec, dom>::get_value(config_param::WORKSPACE_EXTERNAL_BYTES_REQUIRED, &workspaceBytes)``.
 
 A descriptor where ``WORKSPACE_EXTERNAL`` is specified is not a valid descriptor 
