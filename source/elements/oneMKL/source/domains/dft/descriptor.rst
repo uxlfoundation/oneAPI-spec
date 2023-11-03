@@ -446,14 +446,12 @@ calls must also use ``sycl::buffer`` for their arguments. Likewise, a USM
 allocated workspace must only be used with USM compute calls.
 Failing to do this will result in an invalid descriptor for compute calls.
 
-If the workspace provided is a USM allocation shared amongst multiple kernels,
-it must be ensured that the kernels sharing this workspace do not use it simultaneously.
+If the workspace is a USM allocation, the user must not use it for other purposes
+in parallel whilst the DFT `compute_forward` or `compute_backward` are in progress.
 
 This function can be called on committed descriptors where the workspace placement
 is not ``config_value::WORKSPACE_EXTERNAL``. The provided workspace may or may not
 be used in compute calls. However, the aforementioned restrictions will still apply.
-
-Calling this function multiple times on a committed descriptor is undefined behavior.
 
 .. rubric:: Syntax (buffer workspace)
 
