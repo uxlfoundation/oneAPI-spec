@@ -35,11 +35,11 @@ Requirements:
 * The ``Value`` type must meet the `CopyConstructible` requirements from the [copyconstructible] section and
   `CopyAssignable` requirements from the [copyassignable] section of the ISO C++ Standard.
 * The ``Scan`` type must meet the :doc:`ParallelScanFunc requirements <../../named_requirements/algorithms/par_scan_func>`.
-  Alternatively, since C++17 a pointer to a const member function in ``Range`` taking ``const Value&`` and ``bool`` arguments and
-  returning ``Value`` might be used as a ``Scan``.
+  Since C++17, ``Scan`` may also be a pointer to a const member function in ``Range`` that takes ``const Value&`` and ``bool`` arguments and
+  returns ``Value``.
 * The ``Combine`` type must meet the :doc:`ParallelScanCombine requirements <../../named_requirements/algorithms/par_scan_combine>`.
-  Alternatively, since C++17 a pointer to a const member function in ``Value`` taking ``const Value&`` argument and returning ``Value``
-  might be used as a ``Combine``.
+  Since C++17, ``Combine`` may also be a pointer to a const member function in ``Value`` that takes ``const Value&`` argument
+  and returns ``Value``.
 
 The function template ``parallel_scan`` computes a parallel prefix, also known as a parallel scan.
 This computation is an advanced concept in parallel computing that is sometimes useful in scenarios

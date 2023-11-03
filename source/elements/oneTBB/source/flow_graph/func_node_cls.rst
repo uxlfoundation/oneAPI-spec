@@ -47,8 +47,8 @@ Requirements:
   [copyconstructible] ISO C++ Standard section.
 * The type ``Policy`` may be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`FunctionNodeBody requirements <../named_requirements/flow_graph/function_node_body>`.
-  Alternatively, since C++17 a pointer to a const member function in ``Input`` returning ``Output`` or
-  a pointer to a data member in ``Input`` of type ``Output`` might be used as a ``Body``.
+  Since C++17, ``Body`` may also be a pointer to a const member function in ``Input`` that returns ``Output`` or
+  a pointer to a data member in ``Input`` of type ``Output``.
 
 ``function_node`` has a user-settable concurrency limit. It can be set to one of :doc:`predefined values <predefined_concurrency_limits>`.
 The user can also provide a value of type ``std::size_t`` to limit concurrency to a value between 1 and :doc:`tbb::flow::unlimited <predefined_concurrency_limits>`.

@@ -36,9 +36,9 @@ Requirements:
 
 * The type ``T`` must meet the `CopyConstructible` requirements from [copyconstructible] and
   `CopyAssignable`  requirements from [copyassignable] ISO C++ Standard sections.
-* The type ``Sequencer`` must meet the :doc:`Sequencer requirements <../named_requirements/flow_graph/sequencer>`
-  Alternatively, since C++17 a pointer to a const member function in ``T`` returning ``size_t`` or
-  a pointer to a data member of type ``size_t`` in ``T`` might be used as a ``Sequencer``.
+* The type ``Sequencer`` must meet the :doc:`Sequencer requirements <../named_requirements/flow_graph/sequencer>`.
+  Since C++17, ``Sequencer`` may also be a pointer to a const member function in ``T`` that returns ``size_t`` or
+  a pointer to a data member in ``T`` of type ``size_t``.
   If ``Sequencer`` instance throws an exception, behavior is undefined.
 
 ``sequencer_node`` forwards messages in a sequence order to a single successor in its successor set.

@@ -47,8 +47,7 @@ Requirements:
   and the `CopyConstructible` requirements from [copyconstructible] ISO C++ Standard sections.
 * The type ``Policy`` can be specified as :doc:`lightweight, queueing and rejecting policies<functional_node_policies>` or defaulted.
 * The type ``Body`` must meet the :doc:`AsyncNodeBody requirements <../named_requirements/flow_graph/async_node_body>`.
-  Alternatively, since C++17 a pointer to a const member function in ``Input`` taking ``gateway_type&``
-  as an argument might be used as a ``Body``.
+  Since C++17, ``Body`` may also be a pointer to a const member function in ``Input`` that takes ``gateway_type&`` argument.
 
 ``async_node`` executes a user-provided body on incoming messages. The body typically submits the
 messages to an external activity for processing outside of the graph. It is responsibility of

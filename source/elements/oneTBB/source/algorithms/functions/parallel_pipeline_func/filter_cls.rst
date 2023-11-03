@@ -50,9 +50,10 @@ Requirements:
 
 * If `InputType` is ``void``, a ``Body`` type must meet the :doc:`FirstFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
 * If `OutputType` is ``void``, a ``Body`` type must meet the :doc:`LastFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-  Alternatively, since C++17 a pointer to a member function in ``InputType`` might be used as a ``Body``.
+  Since C++17, ``Body`` may also be a pointer to a member function in ``InputType``.
 * If `InputType` and `OutputType` are not ``void``, a ``Body`` type must meet the :doc:`MiddleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
-  Alternatively, since C++17 a pointer to a member function in ``InputType`` returning ``OutputType`` might be used as a ``Body``.
+  Since C++17, ``Body`` may also be a pointer to a member function in ``InputType`` that returns ``OutputType`` or a pointer to a data member in ``InputType``
+  of type ``OutputType``.
 * If `InputType` and `OutputType` are ``void``, a ``Body`` type must meet the :doc:`SingleFilterBody requirements <../../../named_requirements/algorithms/filter_body>`.
 
 filter_mode Enumeration
