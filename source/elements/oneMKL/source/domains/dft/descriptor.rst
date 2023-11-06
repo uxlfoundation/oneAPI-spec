@@ -133,7 +133,7 @@ The ``descriptor`` class is defined in the ``oneapi::mkl::dft`` namespace.
      -     Queries the configuration value associated with a particular
            configuration parameter.
    * -     :ref:`onemkl_dft_descriptor_set_workspace`
-     -     Set the external workspace to use when ``config_param::WORKSPACE_PLACEMENT`` is ``config_value::WORKSPACE_EXTERNAL``.
+     -     Sets the external workspace to use when ``config_param::WORKSPACE_PLACEMENT`` is set to ``config_value::WORKSPACE_EXTERNAL``.
    * -     :ref:`onemkl_dft_descriptor_commit`
      -     Commits the ``descriptor`` object to enqueue the operations relevant
            to the (batched) DFT(s) it determines to a given, user-provided

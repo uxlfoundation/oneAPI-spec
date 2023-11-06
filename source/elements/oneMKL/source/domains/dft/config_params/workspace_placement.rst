@@ -57,7 +57,7 @@ Typical usage of ``WORKSPACE_EXTERNAL``
 
 Usage of ``config_value::WORKSPACE_EXTERNAL`` typically involves the following order of operations:
 
-#. ``config_value::WORKSPACE_EXTERNAL`` is set for the uncommitted descriptor.
+#. ``config_value::WORKSPACE_EXTERNAL`` is set for the uncommitted descriptor's ``config_param::WORKSPACE_EXTERNAL``.
 #. The descriptor is committed.
 #. The required workspace size is queried.
 #. A workspace of sufficient size is provided to the descriptor.
