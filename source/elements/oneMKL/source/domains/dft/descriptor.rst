@@ -480,7 +480,7 @@ be used in compute calls. However, the aforementioned restrictions will still ap
    .. rubric:: Input Parameters
 
    workspaceBuf
-      A workspace buffer where ``scalar_type`` is the floating-point type according to ``prec``. This buffer must be sufficiently large or an exception will be thrown.
+      A workspace buffer where ``scalar_type`` is the floating-point type according to ``prec``. This buffer must be sufficiently large or an exception will be thrown. A sub-buffer cannot be used.
 
    workspaceUSM
       A workspace USM allocation where ``scalar_type`` is the floating-point type according to ``prec``. This allocation must be accessible on the device on which the descriptor is committed. It is assumed that this USM allocation is sufficiently large. The pointer is expected to be aligned to ``scalar_type``.
@@ -492,7 +492,7 @@ be used in compute calls. However, the aforementioned restrictions will still ap
    The ``descriptor::set_workspace()`` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
    
    :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
-      If the provided buffer ``workspaceBuf`` is not sufficiently large, or if the provided USM allocation ``workspaceUSM`` is ``nullptr`` when an external workspace of size greater than zero is required.
+      If the provided buffer ``workspaceBuf`` is not sufficiently large or is a sub-buffer, or if the provided USM allocation ``workspaceUSM`` is ``nullptr`` when an external workspace of size greater than zero is required.
 
    :ref:`oneapi::mkl::uninitialized()<onemkl_exception_uninitialized>`
       If ``set_workspace`` is called before the descriptor is committed.
