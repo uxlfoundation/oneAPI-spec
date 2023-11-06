@@ -448,7 +448,7 @@ allocated workspace must only be used with USM compute calls.
 Failing to do this will result in an invalid descriptor for compute calls.
 
 If the workspace is a USM allocation, the user must not use it for other purposes
-in parallel whilst the DFT `compute_forward` or `compute_backward` are in progress.
+in parallel whilst the DFT ``compute_forward`` or ``compute_backward`` are in progress.
 
 This function can be called on committed descriptors where the workspace placement
 is not ``config_value::WORKSPACE_EXTERNAL``. The provided workspace may or may not
@@ -489,7 +489,7 @@ be used in compute calls. However, the aforementioned restrictions will still ap
 
    .. rubric:: Throws
 
-   The `descriptor::set_workspace()` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   The ``descriptor::set_workspace()`` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
    
    :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
       If the provided buffer ``workspaceBuf`` is not sufficiently large, or if the provided USM allocation ``workspaceUSM`` is ``nullptr`` when an external workspace of size greater than zero is required.

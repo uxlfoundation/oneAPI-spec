@@ -19,7 +19,7 @@ for the following reasons:
 
 For some backends and configurations, ``config_value::WORKSPACE_EXTERNAL`` may reduce performance.
 
-A typical workflow for using ``config_value::WORKSPACE_EXTERNAL`` is given in the section :ref:`onemkl_dft_typical_usage_of_workspace_external`.
+A typical workflow for using ``config_value::WORKSPACE_EXTERNAL`` is given in the section :ref:`below<onemkl_dft_typical_usage_of_workspace_external>`.
 
 WORKSPACE_PLACEMENT
 +++++++++++++++++++

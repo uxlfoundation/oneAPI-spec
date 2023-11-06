@@ -268,7 +268,7 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
       * -   :ref:`WORKSPACE_PLACEMENT<onemkl_dft_config_workspace_placement>`
         -   Some FFT algorithm computation steps require a scratch space for permutations or other purposes. 
             This parameter controls whether this scratch space is automatically allocated or provided by the user.
-        -   | :ref:`onemkl_dft_config_workspace_placement` (possible values are ``config_value::WORKSPACE_AUTOMATIC`` or ``config_value::WORKSPACE_EXTERNAL``).
+        -   | :ref:`onemkl_dft_enum_config_value` (possible values are ``config_value::WORKSPACE_AUTOMATIC`` or ``config_value::WORKSPACE_EXTERNAL``).
             | [``config_value::WORKSPACE_AUTOMATIC``]
       * -   WORKSPACE_EXTERNAL_BYTES
         -   The required minimum external workspace size for use by :ref:`set_workspace<onemkl_dft_descriptor_set_workspace>`.
