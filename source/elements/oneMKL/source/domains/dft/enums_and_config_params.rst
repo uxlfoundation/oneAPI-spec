@@ -145,7 +145,7 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
          BWD_DISTANCE,
 
          WORKSPACE_PLACEMENT,
-         WORKSPACE_EXTERNAL_BYTES_REQUIRED
+         WORKSPACE_EXTERNAL_BYTES
       };
 
    Configuration parameters represented by ``config_param::FORWARD_DOMAIN`` and
@@ -270,8 +270,8 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
             This parameter controls whether this scratch space is automatically allocated or provided by the user.
         -   | :ref:`onemkl_dft_config_workspace_placement` (possible values are ``config_value::WORKSPACE_AUTOMATIC`` or ``config_value::WORKSPACE_EXTERNAL``).
             | [``config_value::WORKSPACE_AUTOMATIC``]
-      * -   WORKSPACE_EXTERNAL_BYTES_REQUIRED
-        -   The required external workspace size in bytes when ``WORKSPACE_PLACEMENT`` is set to :ref:`config_value::WORKSPACE_EXTERNAL<onemkl_dft_config_value_workspace_automatic>`. 
+      * -   WORKSPACE_EXTERNAL_BYTES
+        -   The required minimum external workspace size for use by :ref:`set_workspace<onemkl_dft_descriptor_set_workspace>`.
             A read-only value.
         -   | ``std::int64_t``
 

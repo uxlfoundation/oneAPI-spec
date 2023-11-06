@@ -76,7 +76,7 @@ This is shown in the following example code:
    desc.commit(myQueue);
    // 3. Query the required workspace size
    std::int64_t workspaceBytes{0};
-   desc.get_value(mkl::dft::config_param::WORKSPACE_EXTERNAL_BYTES_REQUIRED, &workspaceBytes);
+   desc.get_value(mkl::dft::config_param::WORKSPACE_EXTERNAL_BYTES, &workspaceBytes);
    // Obtain a sufficiently large USM allocation or buffer. For this example, a USM allocation is used.
    float* workspaceUsm = sycl::malloc_device<float>(workspaceBytes / sizeof(float), myQueue);
    // 4. Set the workspace
