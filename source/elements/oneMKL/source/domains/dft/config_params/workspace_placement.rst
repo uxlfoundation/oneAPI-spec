@@ -9,15 +9,17 @@ Workspace placement
 
 DFT implementations often require temporary storage for intermediate data whilst computing DFTs.
 This temporary storage is referred to as a *workspace*.
-Whilst this is managed automatically by default (``config_param::WORKSPACE_AUTOMATIC``), 
-it may be preferable to provide an external workspace (``config_param::WORKSPACE_EXTERNAL``) for the following reasons:
+Whilst this is managed automatically by default (``config_value::WORKSPACE_AUTOMATIC`` 
+set for ``config_param::WORKSPACE_PLACEMENT``), it may be preferable to provide an external 
+workspace (``config_value::WORKSPACE_EXTERNAL`` set for ``config_param::WORKSPACE_PLACEMENT``) 
+for the following reasons:
 
-* To reduce the number of GPU mallocs / frees
-* To reduce memory consumption
+* to reduce the number of GPU mallocs / frees;
+* to reduce memory consumption.
 
-For some backends and configurations, ``config_param::WORKSPACE_EXTERNAL`` may reduce performance.
+For some backends and configurations, ``config_value::WORKSPACE_EXTERNAL`` may reduce performance.
 
-A typical workflow for using ``config_param::WORKSPACE_EXTERNAL`` is given in the section :ref:`onemkl_dft_typical_usage_of_workspace_external`.
+A typical workflow for using ``config_value::WORKSPACE_EXTERNAL`` is given in the section :ref:`onemkl_dft_typical_usage_of_workspace_external`.
 
 WORKSPACE_PLACEMENT
 +++++++++++++++++++
@@ -43,8 +45,9 @@ When set to ``config_value::WORKSPACE_AUTOMATIC`` the user does not need to prov
 The configuration ``config_param::WORKSPACE_PLACEMENT`` can be set to 
 ``config_value::WORKSPACE_EXTERNAL`` to allow the workspace to be set manually. 
 
-When a descriptor is committed with ``config_value::WORKSPACE_EXTERNAL`` set, 
-the user must provide an external workspace. 
+When a descriptor is committed with ``config_value::WORKSPACE_EXTERNAL`` set 
+for ``config_param::WORKSPACE_PLACEMENT``, the user must provide an external 
+workspace before calling any compute function.
 See :ref:`onemkl_dft_descriptor_set_workspace` and :ref:`onemkl_dft_typical_usage_of_workspace_external`.
 
 .. _onemkl_dft_typical_usage_of_workspace_external:
@@ -52,9 +55,9 @@ See :ref:`onemkl_dft_descriptor_set_workspace` and :ref:`onemkl_dft_typical_usag
 Typical usage of ``WORKSPACE_EXTERNAL``
 +++++++++++++++++++++++++++++++++++++++
 
-Usage of ``WORKSPACE_EXTERNAL`` typically involves the following order of operations:
+Usage of ``config_value::WORKSPACE_EXTERNAL`` typically involves the following order of operations:
 
-#. ``WORKSPACE_EXTERNAL`` is set for the uncommitted descriptor.
+#. ``config_value::WORKSPACE_EXTERNAL`` is set for the uncommitted descriptor.
 #. The descriptor is committed.
 #. The required workspace size is queried.
 #. A workspace of sufficient size is provided to the descriptor.

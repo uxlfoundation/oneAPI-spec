@@ -427,7 +427,7 @@ type ``oneapi::mkl::dft::domain``, ``oneapi::mkl::dft::precision``,
 set_workspace
 +++++++++++++
 
-Set the workspace for when ``config_param::WORKSPACE_PLACEMENT`` is set to ``config_value::WORKSPACE_EXTERNAL``.
+Sets the workspace for when ``config_param::WORKSPACE_PLACEMENT`` is set to ``config_value::WORKSPACE_EXTERNAL``.
 
 .. rubric:: Description
 
@@ -437,8 +437,9 @@ This function may only be called after the descriptor has been committed.
 The size of the provided workspace must be equal to or larger than the required 
 workspace size obtained by calling ``descriptor<prec, dom>::get_value(config_param::WORKSPACE_EXTERNAL_BYTES, &workspaceBytes)``.
 
-A descriptor where ``WORKSPACE_EXTERNAL`` is specified is not a valid descriptor 
-for compute calls until this function has been successfully called.
+A descriptor where ``config_value::WORKSPACE_EXTERNAL`` is specified for 
+``config_param::WORKSPACE_PLACEMENT`` is not a valid descriptor for compute 
+calls until this function has been successfully called.
 
 The type of workspace must match the compute calls for which it is used.
 That is, if the workspace is provided as a ``sycl::buffer``, the compute
@@ -479,10 +480,10 @@ be used in compute calls. However, the aforementioned restrictions will still ap
    .. rubric:: Input Parameters
 
    workspaceBuf
-      A workspace buffer where ``scalar_type`` is the floating point type according to ``prec``. This buffer must be sufficiently large or an exception will be thrown.
+      A workspace buffer where ``scalar_type`` is the floating-point type according to ``prec``. This buffer must be sufficiently large or an exception will be thrown.
 
    workspaceUSM
-      A workspace USM allocation where ``scalar_type`` is the floating point type according to ``prec``. This allocation must be accessible on the device on which the descriptor is committed. It is assumed that this USM allocation is sufficiently large. The pointer is expected to be aligned to ``scalar_type``.
+      A workspace USM allocation where ``scalar_type`` is the floating-point type according to ``prec``. This allocation must be accessible on the device on which the descriptor is committed. It is assumed that this USM allocation is sufficiently large. The pointer is expected to be aligned to ``scalar_type``.
 
 .. container:: section
 
