@@ -26,21 +26,17 @@ WORKSPACE_PLACEMENT
 
 For ``config_param::WORKSPACE_PLACEMENT``, valid configuration values are ``config_value::WORKSPACE_AUTOMATIC`` and ``config_value::WORKSPACE_EXTERNAL``.
 
-.. container:: section
+.. _onemkl_dft_config_value_workspace_automatic:
 
-  .. _onemkl_dft_config_value_workspace_automatic:
-
-  .. rubric:: WORKSPACE_AUTOMATIC
+.. rubric:: WORKSPACE_AUTOMATIC
 
 The default value for the ``config_param::WORKSPACE_PLACEMENT`` is ``config_value::WORKSPACE_AUTOMATIC``. 
 
 When set to ``config_value::WORKSPACE_AUTOMATIC`` the user does not need to provide an external workspace. The workspace will be automatically managed by the backend library.
 
-.. container:: section
+.. _onemkl_dft_config_value_workspace_external:
 
-  .. _onemkl_dft_config_value_workspace_external:
-
-  .. rubric:: WORKSPACE_EXTERNAL
+.. rubric:: WORKSPACE_EXTERNAL
 
 The configuration ``config_param::WORKSPACE_PLACEMENT`` can be set to 
 ``config_value::WORKSPACE_EXTERNAL`` to allow the workspace to be set manually. 
