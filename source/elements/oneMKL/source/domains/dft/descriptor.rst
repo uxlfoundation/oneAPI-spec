@@ -277,7 +277,7 @@ The copy assignment operator results in a deep copy.
 
    .. rubric:: Throws
 
-   The assignment opererators shall throw the following exceptions if the
+   The assignment operators shall throw the following exceptions if the
    associated condition is detected. An implementation may throw additional
    implementation-specific exception(s) in case of error conditions not covered
    here:
@@ -325,7 +325,7 @@ type like ``std::int64_t`` or ``float`` (more details available
 
    param
       One of the possible values of type :ref:`onemkl_dft_enum_config_param`
-      representing the (writable) configuraton parameter to be set.
+      representing the (writable) configuration parameter to be set.
 
    ...
       An element of the appropriate type for the configuration value
@@ -395,7 +395,7 @@ type ``oneapi::mkl::dft::domain``, ``oneapi::mkl::dft::precision``,
 
    param
       One of the possible values of type :ref:`onemkl_dft_enum_config_param`
-      representing the configuraton parameter being queried.
+      representing the configuration parameter being queried.
 
    ...
       A pointer to a writable element of the appropriate type for the
