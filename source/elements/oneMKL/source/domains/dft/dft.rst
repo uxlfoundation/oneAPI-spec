@@ -56,7 +56,7 @@ forward domains:
 
 Similarly, we refer to DFTs of complex (resp. real) forward domain as "complex
 DFTs" (resp. "real DFTs"). Regardless of the type of forward domain, the
-backward domain's data sequences are alway complex.
+backward domain's data sequences are always complex.
 
 The calculation of the same DFT for several, *i.e.*, :math:`M > 1`, data sets of
 the same type of forward domain, using the same precision is referred to as a
@@ -151,7 +151,7 @@ relevant configuration setting (*e.g.*, the number :math:`M` of sequences to
 consider in case of a batched DFT). Once configured as desired, the
 :ref:`onemkl_dft_descriptor_commit` member function of ``desc``, requiring a
 ``sycl::queue`` object ``Q``, may be invoked. The successful completion of the
-latter makes ``desc`` comitted to the desired (batched) DFT *as configured*, for
+latter makes ``desc`` committed to the desired (batched) DFT *as configured*, for
 the particular device and context encapsulated by ``Q``. The
 :ref:`onemkl_dft_compute_forward` (resp. :ref:`onemkl_dft_compute_backward`)
 function may then be called and provided with ``desc`` to enqueue operations
@@ -166,7 +166,7 @@ user-provided, device-accessible data.
   - must be re-committed to account for any change in configuration after
     it was already successfully committed;
   - deliver best performance for DFT calculations when created, configured and
-    comitted outside applications' hotpath(s) that use them multiple times for
+    committed outside applications' hotpath(s) that use them multiple times for
     identically-configured (batched) DFTs. :ref:`onemkl_dft_compute_forward`
     and/or :ref:`onemkl_dft_compute_backward` should be the only oneMKL DFT-related
     routines invoked in programs' hotpaths.

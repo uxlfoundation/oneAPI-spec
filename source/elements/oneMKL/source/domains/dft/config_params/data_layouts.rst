@@ -77,7 +77,7 @@ its configuration value for ``config_param::COMPLEX_STORAGE`` (first 2 columns).
     :class: longtable
 
     * -   Object type
-      -   Configuration value for configuration paramer ``config_param::COMPLEX_STORAGE``
+      -   Configuration value for configuration parameter ``config_param::COMPLEX_STORAGE``
       -   Implicitly-assumed elementary data type in forward domain
       -   Implicitly-assumed elementary data type in backward domain
     * -   ``descriptor<precision::SINGLE, domain::COMPLEX>``
