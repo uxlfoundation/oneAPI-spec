@@ -14,7 +14,7 @@ set for ``config_param::WORKSPACE_PLACEMENT``), it may be preferable to provide 
 workspace (``config_value::WORKSPACE_EXTERNAL`` set for ``config_param::WORKSPACE_PLACEMENT``) 
 for the following reasons:
 
-* to reduce the number of GPU mallocs / frees;
+* to reduce the number of mallocs / frees;
 * to reduce memory consumption.
 
 For some backends and configurations, ``config_value::WORKSPACE_EXTERNAL`` may reduce performance.
