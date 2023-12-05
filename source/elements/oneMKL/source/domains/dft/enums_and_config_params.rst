@@ -272,7 +272,7 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
             | [``config_value::WORKSPACE_AUTOMATIC``]
       * -   WORKSPACE_EXTERNAL_BYTES
         -   The required minimum external workspace size for use by :ref:`set_workspace<onemkl_dft_descriptor_set_workspace>`.
-            A read-only value.
+            A read-only value, on committed descriptors only.
         -   | ``std::int64_t``
 
 
