@@ -142,7 +142,10 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
          OUTPUT_STRIDES, // deprecated
          
          FWD_DISTANCE,
-         BWD_DISTANCE
+         BWD_DISTANCE,
+
+         WORKSPACE_PLACEMENT,
+         WORKSPACE_EXTERNAL_BYTES
       };
 
    Configuration parameters represented by ``config_param::FORWARD_DOMAIN`` and
@@ -262,6 +265,16 @@ the :ref:`descriptor<onemkl_dft_descriptor>` class.
             :math:`M > 1`.
         -   | ``std::int64_t``
             | [0]
+      * -   :ref:`WORKSPACE_PLACEMENT<onemkl_dft_config_workspace_placement>`
+        -   Some FFT algorithm computation steps require a scratch space for permutations or other purposes. 
+            This parameter controls whether this scratch space is automatically allocated or provided by the user.
+        -   | :ref:`onemkl_dft_enum_config_value` (possible values are ``config_value::WORKSPACE_AUTOMATIC`` or ``config_value::WORKSPACE_EXTERNAL``).
+            | [``config_value::WORKSPACE_AUTOMATIC``]
+      * -   WORKSPACE_EXTERNAL_BYTES
+        -   The required minimum external workspace size for use by :ref:`set_workspace<onemkl_dft_descriptor_set_workspace>`.
+            A read-only value, on committed descriptors only.
+        -   | ``std::int64_t``
+
 
 .. _onemkl_dft_enum_config_value:
 
@@ -288,6 +301,10 @@ values associated with some
          // for config_param::PLACEMENT
          INPLACE,
          NOT_INPLACE
+         
+         // For config_param::WORKSPACE_PLACEMENT
+         WORKSPACE_AUTOMATIC,
+         WORKSPACE_EXTERNAL,
       };
 
 **Parent topic:** :ref:`onemkl_dft`
@@ -297,3 +314,4 @@ values associated with some
 
    config_params/data_layouts
    config_params/storage_formats
+   config_params/workspace_placement

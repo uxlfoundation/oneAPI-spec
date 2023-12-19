@@ -75,6 +75,9 @@ The ``descriptor`` class is defined in the ``oneapi::mkl::dft`` namespace.
           void set_value(oneapi::mkl::dft::config_param param, ...);
           
           void get_value(oneapi::mkl::dft::config_param param, ...);
+         
+          void set_workspace(sycl::buffer<scalar_type, 1> &workspaceBuf);
+          void set_workspace(scalar_type* workspaceUSM);
       
           void commit(sycl::queue &queue);
       
@@ -129,6 +132,8 @@ The ``descriptor`` class is defined in the ``oneapi::mkl::dft`` namespace.
    * -     :ref:`onemkl_dft_descriptor_get_value`
      -     Queries the configuration value associated with a particular
            configuration parameter.
+   * -     :ref:`onemkl_dft_descriptor_set_workspace`
+     -     Sets the external workspace to use when ``config_param::WORKSPACE_PLACEMENT`` is set to ``config_value::WORKSPACE_EXTERNAL``.
    * -     :ref:`onemkl_dft_descriptor_commit`
      -     Commits the ``descriptor`` object to enqueue the operations relevant
            to the (batched) DFT(s) it determines to a given, user-provided
@@ -414,6 +419,84 @@ type ``oneapi::mkl::dft::domain``, ``oneapi::mkl::dft::precision``,
    
    :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
       If the requested :ref:`onemkl_dft_enum_config_param` is not valid.
+
+**Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
+
+.. _onemkl_dft_descriptor_set_workspace:
+
+set_workspace
++++++++++++++
+
+Sets the workspace for when ``config_param::WORKSPACE_PLACEMENT`` is set to ``config_value::WORKSPACE_EXTERNAL``.
+
+.. rubric:: Description
+
+This function sets the workspace to use when computing DFTs for when an
+external workspace is set. 
+This function may only be called after the descriptor has been committed.
+The size of the provided workspace must be equal to or larger than the required 
+workspace size obtained by calling ``descriptor<prec, dom>::get_value(config_param::WORKSPACE_EXTERNAL_BYTES, &workspaceBytes)``.
+
+A descriptor where ``config_value::WORKSPACE_EXTERNAL`` is specified for 
+``config_param::WORKSPACE_PLACEMENT`` is not a valid descriptor for compute 
+calls until this function has been successfully called.
+
+The type of workspace must match the compute calls for which it is used.
+That is, if the workspace is provided as a ``sycl::buffer``, the compute
+calls must also use ``sycl::buffer`` for their arguments. Likewise, a USM
+allocated workspace must only be used with USM compute calls.
+Failing to do this will result in an invalid descriptor for compute calls.
+
+If the workspace is a USM allocation, the user must not use it for other purposes
+in parallel whilst the DFT ``compute_forward`` or ``compute_backward`` are in progress.
+
+This function can be called on committed descriptors where the workspace placement
+is not ``config_value::WORKSPACE_EXTERNAL``. The provided workspace may or may not
+be used in compute calls. However, the aforementioned restrictions will still apply.
+
+.. rubric:: Syntax (buffer workspace)
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
+      void descriptor<prec,dom>::set_workspace(sycl::buffer<scalar_type, 1> &workspaceBuf);
+   }
+
+.. rubric:: Syntax (USM workspace)
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <oneapi::mkl::dft::precision prec, oneapi::mkl::dft::domain dom>
+      void descriptor<prec,dom>::set_workspace(scalar_type* workspaceUSM);
+
+   }
+
+.. container:: section
+
+   .. rubric:: Input Parameters
+
+   workspaceBuf
+      A workspace buffer where ``scalar_type`` is the floating-point type according to ``prec``. This buffer must be sufficiently large or an exception will be thrown. A sub-buffer cannot be used.
+
+   workspaceUSM
+      A workspace USM allocation where ``scalar_type`` is the floating-point type according to ``prec``. This allocation must be accessible on the device on which the descriptor is committed. It is assumed that this USM allocation is sufficiently large. The pointer is expected to be aligned to ``scalar_type``.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   The ``descriptor::set_workspace()`` routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here:
+   
+   :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
+      If the provided buffer ``workspaceBuf`` is not sufficiently large or is a sub-buffer, or if the provided USM allocation ``workspaceUSM`` is ``nullptr`` when an external workspace of size greater than zero is required.
+
+   :ref:`oneapi::mkl::uninitialized()<onemkl_exception_uninitialized>`
+      If ``set_workspace`` is called before the descriptor is committed.
+
 
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
