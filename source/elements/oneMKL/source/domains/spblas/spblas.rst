@@ -25,6 +25,8 @@ Sparse BLAS
            -     Release the sparse matrix handle
          * -     :ref:`onemkl_sparse_set_csr_data`
            -     Fills the internal CSR data structure
+         * -     :ref:`onemkl_sparse_set_coo_data`
+           -     Fills the internal COO data structure
          * -     :ref:`onemkl_sparse_optimize_gemv`
            -     Optimize routine for gemv
          * -     :ref:`onemkl_sparse_optimize_symv`
@@ -59,6 +61,7 @@ Sparse BLAS
     matrixinit
     releasematrixhandle
     setcsrstructure
+    setcoostructure
     gemm
     gemmoptimize
     gemv

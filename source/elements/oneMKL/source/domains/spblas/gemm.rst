@@ -27,7 +27,7 @@ where :math:`\alpha` and :math:`\beta` are scalars, :math:`A` is a sparse matrix
 
 and :math:`\text{op}(A)` is an ``m``-by-``k`` matrix , :math:`\text{op}(B)` is an ``k``-by-``columns`` matrix, and :math:`C` is an ``m``-by-``columns`` matrix.
 
-Dense matrix storage is in either row-major or column-major format. Sparse matrix formats are compressed sparse row (CSR) formats. 
+Dense matrix storage is in either row-major or column-major format. Sparse matrix formats are compressed sparse row (CSR) or coordinate (COO) formats.
 
 
 .. _onemkl_sparse_gemm_buffer:
@@ -87,7 +87,9 @@ gemm (Buffer version)
 
 
     A_handle
-         Handle to object containing sparse matrix, :math:`A`. Created using the oneapi::mkl::sparse::set_csr_data routine.
+         Handle to object containing sparse matrix, :math:`A`. Created using
+         one of ``oneapi::mkl::sparse::set_csr_data`` or
+         ``oneapi::mkl::sparse::set_coo_data`` routines.
 
 
     B
@@ -227,11 +229,13 @@ gemm (USM version)
 
 
     A_handle
-         Handle to object containing sparse matrix, :math:`A`. Created using the oneapi::mkl::sparse::set_csr_data routine.
+         Handle to object containing sparse matrix, :math:`A`. Created using
+         one of ``oneapi::mkl::sparse::set_csr_data`` or
+         ``oneapi::mkl::sparse::set_coo_data`` routines.
 
 
     B 
-         The dense matrix in the sparse-dense matrix product. A device accessible USM object containing an array of size:
+         The input dense matrix :math:`B` in the sparse matrix-dense matrix product. :math:`B` is a device accessible one-dimensional USM object containing an array of size:
 
       .. list-table::
          :header-rows: 1
