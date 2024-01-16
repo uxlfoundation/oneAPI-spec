@@ -74,8 +74,9 @@ gemvdot (Buffer version)
 
 
     A_handle
-       Handle to object containing sparse matrix :math:`A`. Created using the
-       oneapi::mkl::sparse::set_csr_data routine.
+       Handle to object containing sparse matrix, :math:`A`. Created using
+       one of ``oneapi::mkl::sparse::set_csr_data`` or
+       ``oneapi::mkl::sparse::set_coo_data`` routines.
 
 
     x
@@ -164,8 +165,9 @@ gemvdot (USM version)
 
 
     A_handle
-       Handle to object containing sparse matrix :math:`A`. Created using the
-       oneapi::mkl::sparse::set_csr_data routine.
+       Handle to object containing sparse matrix, :math:`A`. Created using
+       one of ``oneapi::mkl::sparse::set_csr_data`` or
+       ``oneapi::mkl::sparse::set_coo_data`` routines.
 
 
     x

@@ -46,8 +46,8 @@ the handle.
 
     handle
        Handle to object containing sparse matrix and other internal
-       data. Created using the
-       oneapi::mkl::sparse::set_csr_data routine.
+       data. Created using one of ``oneapi::mkl::sparse::set_csr_data`` or
+       ``oneapi::mkl::sparse::set_coo_data`` routines.
 
 
     dependencies
