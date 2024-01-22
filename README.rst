@@ -13,6 +13,9 @@ oneAPI Specifications
    :target: https://api.reuse.software/info/github.com/oneapi-src/oneapi-spec
    :alt: REUSE status
 
+.. image:: https://www.bestpractices.dev/projects/8323/badge
+   :target: https://www.bestpractices.dev/projects/8323
+
 This repository contains the sources for the `oneAPI
 Specification`_. For the latest build from main branch, see HTML_ and
 PDF_.
