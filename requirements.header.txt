@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
+# This file is generated with:
+#
+# rm -rf venv
+# python -m venv venv
+# source venv/bin/activate
+# pip install -r requirements.base.txt
+# cp requirements.header.txt requirements.txt
+# pip freeze >> requirements.txt
+#
+# Add this header, including copyright back
+#
