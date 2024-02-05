@@ -15,18 +15,18 @@ jobs:
   checks:
     runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
-    - uses: actions/checkout@b4ffde6
-    - uses: actions/setup-python@0a5c615
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+    - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c
       with:
         python-version: '3.10'
         cache: 'pip'
     - name: Checks
-      uses: pre-commit/action@646c83f
+      uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507
 
   build:
     runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
-    - uses: actions/checkout@b4ffde6
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
     - name: Install ubuntu prerequisites
       run: |
         sudo apt update -qq
@@ -34,7 +34,7 @@ jobs:
         curl -s https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz -o /tmp/dox.tgz
         sudo tar zxf /tmp/dox.tgz -C /usr/local
         sudo ln -s /usr/local/doxygen*/bin/* /usr/bin
-    - uses: actions/setup-python@0a5c615
+    - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c
       with:
         python-version: '3.10'
         cache: 'pip'
@@ -57,7 +57,7 @@ jobs:
         cp -r build/html/* site/spec
         cp build/latex/*.pdf site/spec
     - name: Archive site
-      uses: actions/upload-artifact@26f96df
+      uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8
       with:
         name: site
         path: site
@@ -68,12 +68,12 @@ jobs:
     runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
     - name: Checkout gh-pages
-      uses: actions/checkout@b4ffde6
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
         ref: gh-pages
         path: gh-pages
     - name: Retrieve site
-      uses: actions/download-artifact@6b208ae
+      uses: actions/download-artifact@6b208ae046db98c579e8a3aa621ab581ff575935
       with:
         name: site
         path: gh-pages
