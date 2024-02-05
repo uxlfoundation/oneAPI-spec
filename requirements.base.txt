@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+
+# This is the minimal set of components required and using the latest
+#  versions
+
+breathe
+graphviz
+lxml
+six
+Sphinx
+sphinx-notfound-page
+sphinx-book-theme
+sphinx-prompt
+sphinx_substitution_extensions
+sphinx_tabs
+sphinxcontrib.plantuml
+sphinxcontrib-spelling
+sphinxcontrib-svg2pdfconverter
+sphinxmark
