@@ -8,6 +8,7 @@
 breathe
 graphviz
 lxml
+pre-commit
 six
 Sphinx
 sphinx-notfound-page
