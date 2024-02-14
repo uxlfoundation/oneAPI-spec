@@ -19,11 +19,11 @@ for a square matrix:
 
 .. math::
 
-      \text{op}(A) y \leftarrow x
+      \text{op}(A) \cdot y \leftarrow \alpha \cdot x
 
 where: ``A`` is a triangular sparse matrix of size ``m`` rows by
 ``m`` columns, op is a matrix modifier for matrix ``A``, ``x`` and ``y`` are dense vectors of length at least
-``m``.
+``m``, and :math:`\alpha` is a scalar value.
 
 .. _onemkl_sparse_trsv_buffer:
 
@@ -37,9 +37,10 @@ trsv (Buffer version)
    namespace oneapi::mkl::sparse {
 
       void trsv (sycl::queue                          &queue,
-                 oneapi::mkl::uplo                    uplo_val
-                 oneapi::mkl::transpose               transpose_val,
-                 oneapi::mkl::diag                    diag_val
+                 oneapi::mkl::uplo                    uplo_val,
+                 oneapi::mkl::transpose               opA,
+                 oneapi::mkl::diag                    diag_val,
+                 const fp                             alpha,
                  oneapi::mkl::sparse::matrix_handle_t A_handle,
                  sycl::buffer<fp, 1>                  &x,
                  sycl::buffer<fp, 1>                  &y);
@@ -62,7 +63,7 @@ trsv (Buffer version)
         described in :ref:`onemkl_enum_uplo` enum class.
 
 
-   transpose_val
+   opA
          Specifies operation ``op()`` on input matrix. The possible options
          are described in :ref:`onemkl_enum_transpose` enum class.
 
@@ -70,6 +71,10 @@ trsv (Buffer version)
    diag_val
             Specifies if the diagonal is unit or not. The possible options
             are described in :ref:`onemkl_enum_diag` enum class.
+
+
+   alpha
+        Specifies the scalar, :math:`\alpha`.
 
 
    A_handle
@@ -121,12 +126,13 @@ trsv (USM version)
    namespace oneapi::mkl::sparse {
 
       sycl::event trsv (sycl::queue                           &queue,
-                        oneapi::mkl::uplo                     uplo_val
-                        oneapi::mkl::transpose                transpose_val,
-                        oneapi::mkl::diag                     diag_val
+                        oneapi::mkl::uplo                     uplo_val,
+                        oneapi::mkl::transpose                opA,
+                        oneapi::mkl::diag                     diag_val,
+                        const fp                              alpha,
                         oneapi::mkl::sparse::matrix_handle_t  A_handle,
                         const fp                              *x,
-                        fp                                    *y
+                        fp                                    *y,
                         const std::vector<sycl::event>        &dependencies = {});
 
    }
@@ -147,7 +153,7 @@ trsv (USM version)
         described in :ref:`onemkl_enum_uplo` enum class.
 
 
-   transpose_val
+   opA
          Specifies operation ``op()`` on input matrix. The possible options
          are described in :ref:`onemkl_enum_transpose` enum class.
 
@@ -155,6 +161,10 @@ trsv (USM version)
    diag_val
             Specifies if the diagonal is unit or not. The possible options
             are described in :ref:`onemkl_enum_diag` enum class.
+
+
+   alpha
+        Specifies the scalar, :math:`\alpha`.
 
 
    A_handle
