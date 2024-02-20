@@ -44,4 +44,4 @@ Detailed API Descriptions
 
 The detailed specification can be found online in the specification_.
 
-.. _specification: https://spec.oneapi.com/level-zero/latest/index.html
+.. _specification: https://spec.oneapi.io/level-zero/latest/index.html
