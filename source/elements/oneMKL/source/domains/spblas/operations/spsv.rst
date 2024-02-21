@@ -1,0 +1,333 @@
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
+.. _onemkl_sparse_spsv_header:
+
+spsv
+====
+
+Solves a system of linear equations for a triangular sparse matrix.
+
+.. rubric:: Description and Assumptions
+
+The ``oneapi::mkl::sparse::spsv`` routine solves a system of linear equations
+for a square matrix:
+
+.. math::
+
+      \text{op}(A) \cdot y \leftarrow \alpha \cdot x
+
+where :math:`\alpha` is a scalar, :math:`A` is a triangular sparse matrix, :math:`x` and :math:`y` are
+dense vectors, :math:`\text{op}()` is a matrix modifier for :math:`A` using the
+following description:
+
+.. math::
+
+    \text{op}(A) = \begin{cases} A,& \text{oneapi::mkl::transpose::nontrans}\\
+                                 A^{T},& \text{oneapi::mkl::transpose::trans}\\
+                                 A^{H},& \text{oneapi::mkl::transpose::conjtrans}
+                   \end{cases}
+
+and :math:`\text{op}(A)` is an ``m``-by-``m`` matrix , :math:`x` and :math:`y`
+are vectors of size ``m``.
+
+.. _onemkl_sparse_spsv_descr:
+
+spsv_descr
+----------
+
+.. rubric:: Definition
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+       struct spsv_descr;
+       using spsv_descr_t = spsv_descr*;
+   }
+
+.. container:: section
+
+   .. rubric:: Description
+
+   Defines ``spsv_descr_t`` as an opaque pointer to the incomplete type
+   ``spsv_descr``. Each backend may provide a different implementation of the
+   type ``spsv_descr``.
+
+.. _onemkl_sparse_init_spsv_descr:
+
+init_spsv_descr
+---------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+       void init_spsv_descr (sycl::queue                       &queue,
+                             oneapi::mkl::sparse::spsv_descr_t *p_spsv_descr);
+
+   }
+
+.. container:: section
+
+   .. rubric:: Input parameters
+
+   queue
+      The SYCL command queue which will be used for SYCL kernels execution.
+
+   p_spsv_descr
+      The address of the ``p_spsv_descr`` object to be initialized. Must only be
+      called on an uninitialized ``spsv_descr_t`` object.
+
+.. container:: section
+
+   .. rubric:: Output parameters
+
+   p_spsv_descr
+      On return, the address is updated to point to a newly allocated and
+      initialized ``spsv_descr_t`` object that can be used to perform spsv.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This function shall throw the following exceptions if the associated
+   condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here.
+
+   | :ref:`oneapi::mkl::host_bad_alloc<onemkl_exception_host_bad_alloc>`
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+.. _onemkl_sparse_release_spsv_descr:
+
+release_spsv_descr
+------------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+       void release_spsv_descr (sycl::queue                       &queue,
+                                oneapi::mkl::sparse::spsv_descr_t spsv_descr);
+
+   }
+
+.. container:: section
+
+   .. rubric:: Input parameters
+
+   queue
+      The SYCL command queue which will be used for SYCL kernels execution.
+
+   spsv_descr
+      Descriptor initialized with ``init_spsv_descr``.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This function shall throw the following exceptions if the associated
+   condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here.
+
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+.. _onemkl_sparse_spsv_alg:
+
+spsv_alg
+--------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+       enum class spsv_alg {
+           default_alg,
+       };
+
+   }
+
+.. list-table::
+   :header-rows: 1
+   :widths: 10 30 45
+
+   * - Value
+     - Description
+     - Backend equivalent
+   * - ``default_alg``
+     - Default algorithm.
+     - | MKL: N/A
+       | cuSPARSE: ``CUSPARSE_SPSV_ALG_DEFAULT``
+       | rocSPARSE: ``rocsparse_spsv_alg_default``
+
+.. _onemkl_sparse_spsv:
+
+spsv
+----
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+       void spsv_buffer_size(
+           sycl::queue                                &queue,
+           oneapi::mkl::transpose                     opA,
+           void*                                      alpha,
+           oneapi::mkl::sparse::matrix_view           A_view,
+           oneapi::mkl::sparse::matrix_handle_t       A_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
+           oneapi::mkl::sparse::spsv_alg              alg,
+           oneapi::mkl::sparse::spsv_descr_t          spsv_descr,
+           std::size_t                                &temp_buffer_size,
+       );
+
+       void spsv_optimize(
+           sycl::queue                                &queue,
+           oneapi::mkl::transpose                     opA,
+           void*                                      alpha,
+           oneapi::mkl::sparse::matrix_view           A_view,
+           oneapi::mkl::sparse::matrix_handle_t       A_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
+           oneapi::mkl::sparse::spsv_alg              alg,
+           oneapi::mkl::sparse::spsv_descr_t          spsv_descr,
+           sycl::buffer<std::uint8_t, 1>              workspace,
+       );
+
+       sycl::event spsv_optimize(
+           sycl::queue                                &queue,
+           oneapi::mkl::transpose                     opA,
+           void*                                      alpha,
+           oneapi::mkl::sparse::matrix_view           A_view,
+           oneapi::mkl::sparse::matrix_handle_t       A_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
+           oneapi::mkl::sparse::spsv_alg              alg,
+           oneapi::mkl::sparse::spsv_descr_t          spsv_descr,
+           void*                                      workspace,
+           const std::vector<sycl::event>             &dependencies = {},
+       );
+
+       sycl::event spsv(
+           sycl::queue                                &queue,
+           oneapi::mkl::transpose                     opA,
+           void*                                      alpha,
+           oneapi::mkl::sparse::matrix_view           A_view,
+           oneapi::mkl::sparse::matrix_handle_t       A_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
+           oneapi::mkl::sparse::spsv_alg              alg,
+           oneapi::mkl::sparse::spsv_descr_t          spsv_descr,
+           const std::vector<sycl::event>             &dependencies = {},
+       );
+
+   }
+
+.. container:: section
+
+   .. rubric:: Notes
+
+   - ``spsv_buffer_size`` and ``spsv_optimize`` must be called at least once before ``spsv``
+     with the same arguments. ``spsv`` can then be called multiple times.
+   - The data of the handles can be reset-ed before each call to ``spsv``.
+   - ``spsv_optimize`` and ``spsv`` are asynchronous.
+   - The algorithm defaults to ``spsv_alg::default_alg`` if a backend does not
+     support the provided algorithm.
+
+   .. rubric:: Input Parameters
+
+   queue
+      The SYCL command queue which will be used for SYCL kernels execution.
+
+   opA
+      Specifies operation ``op()`` on the input matrix. The possible options are
+      described in :ref:`onemkl_enum_transpose` enum class.
+
+   alpha
+      Host or USM pointer representing :math:`\alpha`. The USM allocation can be
+      on the host or device.
+
+   A_view
+      Specifies which part of the handle should be read as described by
+      :ref:`onemkl_sparse_matrix_view`.
+
+   A_handle
+      Sparse matrix handle object representing :math:`A`.
+
+   x_handle
+      Dense vector handle object representing :math:`x`.
+
+   y_handle
+      Dense vector handle object representing :math:`y`.
+
+   alg
+      Specifies the :ref:`spsv algorithm<onemkl_sparse_spsv_alg>` to use.
+
+   spsv_descr
+      Initialized :ref:`spsv descriptor<onemkl_sparse_spsv_descr>`.
+
+   temp_buffer_size
+      Output buffer size in bytes.
+
+   workspace
+      Workspace buffer or USM pointer, must be at least of size
+      ``temp_buffer_size`` bytes. If it is a buffer, its lifetime is extended
+      until the :ref:`spsv descriptor<onemkl_sparse_spsv_descr>` is released. If
+      it is a USM pointer, it must not be free'd until ``spsv`` has completed.
+      The data must be accessible on the device.
+
+   dependencies
+      List of events to depend on before starting asynchronous tasks that access
+      data on the device. Defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+   temp_buffer_size
+      Output buffer size in bytes. A temporary workspace of this size must be
+      allocated to perform the specified spsv.
+
+   y_handle
+      Dense vector handle object representing :math:`y`, result of the ``spsv``
+      operation.
+
+.. container:: section
+
+   .. rubric:: Return Values
+
+   Output event that can be waited upon or added as a dependency for the
+   completion of the function.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   These functions shall throw the following exceptions if the associated
+   condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here.
+
+   | :ref:`oneapi::mkl::computation_error<onemkl_exception_computation_error>`
+   | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+**Parent topic:** :ref:`onemkl_spblas`

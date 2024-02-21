@@ -1,0 +1,176 @@
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
+..
+.. SPDX-License-Identifier: CC-BY-4.0
+
+.. _onemkl_sparse_set_dense_matrix_data:
+
+set_dense_matrix_data
+=====================
+
+Reset the data of a ``dense_matrix_handle_t`` object.
+
+.. rubric:: Description and Assumptions
+
+The ``oneapi::mkl::sparse::set_dense_matrix_data`` function sets new data to the
+``dense_matrix_handle_t`` object with the provided data.
+
+In the case of buffers, the reference count of the provided buffer is
+incremented which extends the lifetime of the underlying buffer until the
+``dmhandle`` is destroyed with ``destroy_dense_matrix`` or the data is reset
+with ``set_dense_matrix_data``.
+
+In the case of USM, the object does not take ownership of the data.
+
+Also see :ref:`onemkl_sparse_create_dense_matrix`.
+
+.. _onemkl_sparse_set_dense_matrix_data_buffer:
+
+set_dense_matrix_data (Buffer version)
+--------------------------------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+       template <typename fpType>
+       void set_dense_matrix_data (sycl::queue                                &queue,
+                                   oneapi::mkl::sparse::dense_matrix_handle_t dmhandle,
+                                   std::int64_t                               num_rows,
+                                   std::int64_t                               num_cols,
+                                   std::int64_t                               ld,
+                                   layout                                     dense_layout,
+                                   sycl::buffer<fpType, 1>                    &val);
+
+   }
+
+.. container:: section
+
+   .. rubric:: Template parameters
+
+   fpType
+      See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
+      a different type than what was used when creating the
+      ``dense_matrix_handle_t``.
+
+.. container:: section
+
+   .. rubric:: Input parameters
+
+   queue
+      The SYCL command queue which will be used for SYCL kernels execution.
+
+   dmhandle
+      Handle already initialized with :ref:`onemkl_sparse_create_dense_matrix`.
+
+   num_rows
+      Number of rows of the provided data ``val``. Must be at least 0.
+
+   num_cols
+      Number of columns of the provided data ``val``. Must be at least 0.
+
+   ld
+      Leading dimension of the provided data ``val``. Must be at least
+      ``num_rows`` if column major layout is used or at least ``num_cols`` if
+      row major layout is used.
+
+   dense_layout
+      Specify whether the data uses row major or column major.
+
+   val
+      Buffer of length ``ld*num_cols`` if column major is used or
+      ``ld*num_rows`` if row major is used. Holds the data to initialize
+      ``dmhandle`` with.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This function shall throw the following exceptions if the associated
+   condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here.
+
+   | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+.. _onemkl_sparse_set_dense_matrix_data_usm:
+
+set_dense_matrix_data (USM version)
+-----------------------------------
+
+.. rubric:: Syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::sparse {
+
+       template <typename fpType>
+       void set_dense_matrix_data (sycl::queue                                &queue,
+                                   oneapi::mkl::sparse::dense_matrix_handle_t dmhandle,
+                                   std::int64_t                               num_rows,
+                                   std::int64_t                               num_cols,
+                                   std::int64_t                               ld,
+                                   layout                                     dense_layout,
+                                   fpType                                     *val);
+
+   }
+
+.. container:: section
+
+   .. rubric:: Template parameters
+
+   fpType
+      See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
+      a different type than what was used when creating the
+      ``dense_matrix_handle_t``.
+
+.. container:: section
+
+   .. rubric:: Input parameters
+
+   queue
+      The SYCL command queue which will be used for SYCL kernels execution.
+
+   dmhandle
+      Handle already initialized with :ref:`onemkl_sparse_create_dense_matrix`.
+
+   num_rows
+      Number of rows of the provided data ``val``. Must be at least 0.
+
+   num_cols
+      Number of columns of the provided data ``val``. Must be at least 0.
+
+   ld
+      Leading dimension of the provided data ``val``. Must be at least
+      ``num_rows`` if column major layout is used or at least ``num_cols`` if
+      row major layout is used.
+
+   dense_layout
+      Specify whether the data uses row major or column major.
+
+   val
+      USM pointer of length ``ld*num_cols`` if column major is used or
+      ``ld*num_rows`` if row major is used. Holds the data to initialize
+      ``dmhandle`` with. The data must be accessible on the device.
+
+.. container:: section
+
+   .. rubric:: Throws
+
+   This function shall throw the following exceptions if the associated
+   condition is detected. An implementation may throw additional
+   implementation-specific exception(s) in case of error conditions not covered
+   here.
+
+   | :ref:`oneapi::mkl::device_bad_alloc<onemkl_exception_device_bad_alloc>`
+   | :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+   | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
+   | :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+   | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
+
+**Parent topic:** :ref:`onemkl_sparse_data_handles`

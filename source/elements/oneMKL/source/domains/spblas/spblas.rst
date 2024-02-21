@@ -1,79 +1,40 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
 .. _onemkl_spblas:
 
 Sparse BLAS
----------------
+===========
 
 .. container::
 
-   Sparse BLAS Routines provide basic operations on sparse vectors and matrices
+   Sparse BLAS routines provide basic operations on sparse vectors and matrices.
 
 .. container:: tablenoborder
 
+   .. list-table::
+      :header-rows: 1
 
-      .. list-table::
-         :header-rows: 1
-
-         * -     Routines
-           -     Description
-         * -     :ref:`onemkl_sparse_init_matrix_handle`
-           -     Initialize the sparse matrix handle
-         * -     :ref:`onemkl_sparse_release_matrix_handle`
-           -     Release the sparse matrix handle
-         * -     :ref:`onemkl_sparse_set_csr_data`
-           -     Fills the internal CSR data structure
-         * -     :ref:`onemkl_sparse_set_coo_data`
-           -     Fills the internal COO data structure
-         * -     :ref:`onemkl_sparse_optimize_gemv`
-           -     Optimize routine for gemv
-         * -     :ref:`onemkl_sparse_optimize_symv`
-           -     Optimize routine for symv
-         * -     :ref:`onemkl_sparse_optimize_trmv`
-           -     Optimize routine for trmv
-         * -     :ref:`onemkl_sparse_optimize_trsv`
-           -     Optimize routine for trsv
-         * -     :ref:`onemkl_sparse_optimize_gemm`
-           -     Optimize routine for gemm
-         * -     :ref:`onemkl_sparse_gemv`
-           -     Sparse matrix-dense vector product using a general sparse matrix
-         * -     :ref:`onemkl_sparse_gemvdot`
-           -     Sparse matrix-dense vector product followed by dot product
-         * -     :ref:`onemkl_sparse_symv`
-           -     Sparse matrix-dense vector product using a symmetric sparse matrix
-         * -     :ref:`onemkl_sparse_trmv`
-           -     Sparse matrix-dense vector product using a triangular sparse matrix
-         * -     :ref:`onemkl_sparse_trsv`
-           -     Solving a linear system with a triangular sparse matrix
-         * -     :ref:`onemkl_sparse_gemm`
-           -     Sparse matrix-dense matrix product using a general sparse matrix
-
-
-.. container::
-
-     - :ref:`onemkl_sparse_format_descriptions`
+      * - Routines and Objects
+        - Description
+      * - :ref:`onemkl_sparse_data_handles`
+        - Matrix and vector handle types
+      * - :ref:`onemkl_sparse_spsv_header`
+        - Solve a linear system with a triangular sparse matrix
+      * - :ref:`onemkl_sparse_spmv_header`
+        - Compute the product of a sparse matrix with a dense vector
+      * - :ref:`onemkl_sparse_spmm_header`
+        - Compute the product of a sparse matrix with a dense matrix
 
 .. toctree::
-    :hidden:
+   :hidden:
 
-    matrixinit
-    releasematrixhandle
-    setcsrstructure
-    setcoostructure
-    gemm
-    gemmoptimize
-    gemv
-    gemvdot
-    gemvoptimize
-    symv
-    symvoptimize
-    trmv
-    trmvoptimize
-    trsv
-    trsvoptimize
-    supported-types
-    format-descriptions
+   data_types/data_handles
+   operations/spsv
+   operations/spmv
+   operations/spmm
+   matrix_view
+   supported-types
 
 **Parent topic:** :ref:`onemkl_sparse_linear_algebra`

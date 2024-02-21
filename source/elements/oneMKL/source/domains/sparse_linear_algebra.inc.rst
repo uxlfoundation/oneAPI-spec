@@ -23,9 +23,10 @@ Sparse Linear Algebra
    In the execution stage, multiple routine calls can take advantage of the analysis
    stage data in order to improve performance.
 
+.. TODO: Reword and remove onemkl_sparse_matrix_handle_t
 
    In order to save information in between calls to Sparse BLAS computation routines,
-   the :ref:`onemkl_sparse_matrix_handle_t` type is introduced, that is essentially
+   the ``onemkl_sparse_matrix_handle_t`` type is introduced, that is essentially
    an opaque pointer, used to store data related to initial sparse matrix
    and data obtained during analysis stage.
 
