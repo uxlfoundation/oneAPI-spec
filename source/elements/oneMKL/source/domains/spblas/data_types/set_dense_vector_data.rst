@@ -94,7 +94,7 @@ set_dense_vector_data (USM version)
    namespace oneapi::mkl::sparse {
 
        template <typename fpType>
-       void set_dense_vector_data (sycl::queue                              &queue,
+       void set_dense_vector_data (sycl::queue                                &queue,
                                    oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
                                    std::int64_t                               size,
                                    fpType                                     *val);
