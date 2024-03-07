@@ -50,16 +50,16 @@ create_coo_matrix (Buffer version)
 
    namespace oneapi::mkl::sparse {
 
-       template <typename fpType, typename intType>
+       template <typename dataType, typename indexType>
        void create_coo_matrix (sycl::queue                          &queue,
                                oneapi::mkl::sparse::matrix_handle_t *p_smhandle,
                                std::int64_t                         num_rows,
                                std::int64_t                         num_cols,
                                std::int64_t                         nnz,
                                index_base                           index,
-                               sycl::buffer<intType, 1>             &row_ind,
-                               sycl::buffer<intType, 1>             &col_ind,
-                               sycl::buffer<fpType, 1>              &val);
+                               sycl::buffer<indexType, 1>           &row_ind,
+                               sycl::buffer<indexType, 1>           &col_ind,
+                               sycl::buffer<dataType, 1>            &val);
 
    }
 
@@ -67,10 +67,10 @@ create_coo_matrix (Buffer version)
 
    .. rubric:: Template parameters
 
-   fpType
+   dataType
       See :ref:`supported template types<onemkl_sparse_supported_types>`.
 
-   intType
+   indexType
       See :ref:`supported template types<onemkl_sparse_supported_types>`.
 
 .. container:: section
@@ -148,16 +148,16 @@ create_coo_matrix (USM version)
 
    namespace oneapi::mkl::sparse {
 
-       template <typename fpType, typename intType>
+       template <typename dataType, typename indexType>
        void create_coo_matrix (sycl::queue                          &queue,
                                oneapi::mkl::sparse::matrix_handle_t *p_smhandle,
                                std::int64_t                         num_rows,
                                std::int64_t                         num_cols,
                                std::int64_t                         nnz,
                                index_base                           index,
-                               intType                              *row_ind,
-                               intType                              *col_ind,
-                               fpType                               *val);
+                               indexType                            *row_ind,
+                               indexType                            *col_ind,
+                               dataType                             *val);
 
    }
 
@@ -165,10 +165,10 @@ create_coo_matrix (USM version)
 
    .. rubric:: Template parameters
 
-   fpType
+   dataType
       See :ref:`supported template types<onemkl_sparse_supported_types>`.
 
-   intType
+   indexType
       See :ref:`supported template types<onemkl_sparse_supported_types>`.
 
 .. container:: section

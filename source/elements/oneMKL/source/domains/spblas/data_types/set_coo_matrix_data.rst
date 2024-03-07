@@ -34,16 +34,16 @@ set_coo_matrix_data (Buffer version)
 
    namespace oneapi::mkl::sparse {
 
-       template <typename fpType, typename intType>
+       template <typename dataType, typename indexType>
        void set_coo_matrix_data (sycl::queue                          &queue,
                                  oneapi::mkl::sparse::matrix_handle_t smhandle,
                                  std::int64_t                         num_rows,
                                  std::int64_t                         num_cols,
                                  std::int64_t                         nnz,
                                  index_base                           index,
-                                 sycl::buffer<intType, 1>             &row_ind,
-                                 sycl::buffer<intType, 1>             &col_ind,
-                                 sycl::buffer<fpType, 1>              &val);
+                                 sycl::buffer<indexType, 1>           &row_ind,
+                                 sycl::buffer<indexType, 1>           &col_ind,
+                                 sycl::buffer<dataType, 1>            &val);
 
    }
 
@@ -51,11 +51,11 @@ set_coo_matrix_data (Buffer version)
 
    .. rubric:: Template parameters
 
-   fpType
+   dataType
       See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
       a different type than what was used when creating the ``matrix_handle_t``.
 
-   intType
+   indexType
       See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
       a different type than what was used when creating the ``matrix_handle_t``.
 
@@ -124,16 +124,16 @@ set_coo_matrix_data (USM version)
 
    namespace oneapi::mkl::sparse {
 
-       template <typename fpType, typename intType>
+       template <typename dataType, typename indexType>
        void set_coo_matrix_data (sycl::queue                          &queue,
                                  oneapi::mkl::sparse::matrix_handle_t smhandle,
                                  std::int64_t                         num_rows,
                                  std::int64_t                         num_cols,
                                  std::int64_t                         nnz,
                                  index_base                           index,
-                                 intType                              *row_ind,
-                                 intType                              *col_ind,
-                                 fpType                               *val);
+                                 indexType                            *row_ind,
+                                 indexType                            *col_ind,
+                                 dataType                             *val);
 
    }
 
@@ -141,11 +141,11 @@ set_coo_matrix_data (USM version)
 
    .. rubric:: Template parameters
 
-   fpType
+   dataType
       See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
       a different type than what was used when creating the ``matrix_handle_t``.
 
-   intType
+   indexType
       See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
       a different type than what was used when creating the ``matrix_handle_t``.
 

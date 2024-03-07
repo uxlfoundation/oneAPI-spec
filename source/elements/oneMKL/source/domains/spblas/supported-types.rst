@@ -7,22 +7,28 @@
 Supported template types
 ========================
 
-.. container::
+.. container:: tablenoborder
 
-   .. container:: tablenoborder
+   .. list-table::
+      :header-rows: 1
 
-      .. list-table::
-         :header-rows: 1
+      * -  Data Types ``<dataType>``
+        -  Integer Types ``<indexType>``
+      * -  ``float``
+        -  ``std::int32_t``
+      * -  ``double``
+        -  ``std::int64_t``
+      * -  ``std::complex<float>``
+        -   
+      * -  ``std::complex<double>``
+        -   
 
-         * -  Data Types <fpType> 
-           -  Integer Types <intType> 
-         * -  ``float`` 
-           -  ``std::int32_t`` 
-         * -  ``double`` 
-           -  ``std::int64_t`` 
-         * -  ``std::complex<float>`` 
-           -    
-         * -  ``std::complex<double>`` 
-           -    
+``dataType`` is used to describe the precision (i.e. number of bits) and domain
+(i.e. real or complex) of the :ref:`data handles <onemkl_sparse_data_handles>`
+and the operations using them.
+
+``indexType`` is used to describe the range of integer types such as indices,
+offsets or sizes of the :ref:`data handles <onemkl_sparse_data_handles>` and the
+operations using them.
 
 **Parent topic:** :ref:`onemkl_spblas`

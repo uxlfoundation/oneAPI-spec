@@ -34,11 +34,11 @@ set_dense_vector_data (Buffer version)
 
    namespace oneapi::mkl::sparse {
 
-       template <typename fpType>
+       template <typename dataType>
        void set_dense_vector_data (sycl::queue                                &queue,
                                    oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
                                    std::int64_t                               size,
-                                   sycl::buffer<fpType, 1>                    &val);
+                                   sycl::buffer<dataType, 1>                  &val);
 
    }
 
@@ -46,7 +46,7 @@ set_dense_vector_data (Buffer version)
 
    .. rubric:: Template parameters
 
-   fpType
+   dataType
       See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
       a different type than what was used when creating the
       ``dense_vector_handle_t``.
@@ -93,11 +93,11 @@ set_dense_vector_data (USM version)
 
    namespace oneapi::mkl::sparse {
 
-       template <typename fpType>
+       template <typename dataType>
        void set_dense_vector_data (sycl::queue                                &queue,
                                    oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
                                    std::int64_t                               size,
-                                   fpType                                     *val);
+                                   dataType                                   *val);
 
    }
 
@@ -105,7 +105,7 @@ set_dense_vector_data (USM version)
 
    .. rubric:: Template parameters
 
-   fpType
+   dataType
       See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
       a different type than what was used when creating the
       ``dense_vector_handle_t``.
