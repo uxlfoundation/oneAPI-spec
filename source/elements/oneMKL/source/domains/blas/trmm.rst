@@ -570,10 +570,10 @@ ldb
    Leading dimension of matrix ``B``. It must be positive and at least ``m`` if column major layout or at least ``n`` if row major layout is used.
 
 beta
-   Scaling factor for matrix ``C``.
+   Scaling factor for matrix ``C``. See :ref:`value_or_pointer` for more details.
 
 c
-   Pointer to input/output matrix ``C``. Mst have size at least
+   Pointer to input/output matrix ``C``. Must have size at least
    ``ldc``\ \*\ ``n`` if column major layout or at least ``ldc``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
 
 ldc
