@@ -248,61 +248,61 @@ trsm (Buffer Version)
 
    .. rubric:: Input Parameters
 
-queue
-   The queue where the routine should be executed.
+   queue
+      The queue where the routine should be executed.
 
-left_right
-   Specifies whether ``A`` is on the left side of the matrix solve
-   (``side::left``) or on the right side (``side::right``). See :ref:`onemkl_datatypes` for more details.
+   left_right
+      Specifies whether ``A`` is on the left side of the matrix solve
+      (``side::left``) or on the right side (``side::right``). See :ref:`onemkl_datatypes` for more details.
 
-upper_lower
-   Specifies whether the matrix ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
+   upper_lower
+      Specifies whether the matrix ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
-trans
-   Specifies op(``A``), the transposition operation applied to matrix ``A``. See :ref:`onemkl_datatypes` for more details.
+   trans
+      Specifies op(``A``), the transposition operation applied to matrix ``A``. See :ref:`onemkl_datatypes` for more details.
 
-unit_diag
-   Specifies whether ``A`` is assumed to be unit triangular (all diagonal elements are 1). See :ref:`onemkl_datatypes` for more details.
+   unit_diag
+      Specifies whether ``A`` is assumed to be unit triangular (all diagonal elements are 1). See :ref:`onemkl_datatypes` for more details.
 
-m
-   Specifices the number of rows of ``B``. The value of ``m`` must be at least zero.
+   m
+      Specifices the number of rows of ``B``. The value of ``m`` must be at least zero.
 
-n
-   Specifies the Number of columns of ``B``. The value of ``n`` must be at least zero.
+   n
+      Specifies the Number of columns of ``B``. The value of ``n`` must be at least zero.
 
-alpha
-   Scaling factor for the solution.
+   alpha
+      Scaling factor for the solution.
 
-a
-   Buffer holding input matrix ``A``. Must have size at least
-   ``lda``\ \*\ ``m`` if ``left_right`` = ``side::left`` or ``lda``\ \*\ ``n`` if ``left_right`` = ``side::right``. See :ref:`matrix-storage` for more details.
+   a
+      Buffer holding input matrix ``A``. Must have size at least
+      ``lda``\ \*\ ``m`` if ``left_right`` = ``side::left`` or ``lda``\ \*\ ``n`` if ``left_right`` = ``side::right``. See :ref:`matrix-storage` for more details.
 
-lda
-   Leading dimension of ``A``. Must be at least ``m`` if ``left_right`` = ``side::left`` or at least ``n`` if ``left_right`` = ``side::right``. Must be positive.
+   lda
+      Leading dimension of ``A``. Must be at least ``m`` if ``left_right`` = ``side::left`` or at least ``n`` if ``left_right`` = ``side::right``. Must be positive.
 
-b
-   Buffer holding input matrix ``B``. Must have size at least
-   ``ldb``\ \*\ ``n`` if column major layout or at least ``ldb``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
+   b
+      Buffer holding input matrix ``B``. Must have size at least
+      ``ldb``\ \*\ ``n`` if column major layout or at least ``ldb``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
 
-ldb
-   Leading dimension of matrix ``B``. It must be positive and at least ``m`` if column major layout or at least ``n`` if row major layout is used.
+   ldb
+      Leading dimension of matrix ``B``. It must be positive and at least ``m`` if column major layout or at least ``n`` if row major layout is used.
 
-beta
-   Scaling factor for matrix ``C``.
+   beta
+      Scaling factor for matrix ``C``.
 
-c
-   Buffer holding input/output matrix ``C``. Size of the buffer must be at least
-   ``ldc``\ \*\ ``n`` if column major layout or at least ``ldc``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
+   c
+      Buffer holding input/output matrix ``C``. Size of the buffer must be at least
+      ``ldc``\ \*\ ``n`` if column major layout or at least ``ldc``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
 
-ldc
-   Leading dimension of matrix ``C``. Must be at least ``m`` if column major layout or at least ``n`` if row major layout is used. Must be positive.
+   ldc
+      Leading dimension of matrix ``C``. Must be at least ``m`` if column major layout or at least ``n`` if row major layout is used. Must be positive.
 
 .. container:: section
 
    .. rubric:: Output Parameters
 
-c
-   Output buffer overwritten by solution matrix ``X`` + ``beta``\ \*\ ``C``.
+   c
+      Output buffer overwritten by solution matrix ``X`` + ``beta``\ \*\ ``C``.
 
 .. container:: section
 
@@ -525,65 +525,65 @@ trsm (USM Version)
 
    .. rubric:: Input Parameters
 
-queue
-   The queue where the routine should be executed.
+   queue
+      The queue where the routine should be executed.
 
-left_right
-   Specifies whether ``A`` is on the left side of the matrix solve
-   (``side::left``) or on the right side (``side::right``). See :ref:`onemkl_datatypes` for more details.
+   left_right
+      Specifies whether ``A`` is on the left side of the matrix solve
+      (``side::left``) or on the right side (``side::right``). See :ref:`onemkl_datatypes` for more details.
 
-upper_lower
-   Specifies whether the matrix ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
+   upper_lower
+      Specifies whether the matrix ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
-trans
-   Specifies op(``A``), the transposition operation applied to matrix ``A``. See :ref:`onemkl_datatypes` for more details.
+   trans
+      Specifies op(``A``), the transposition operation applied to matrix ``A``. See :ref:`onemkl_datatypes` for more details.
 
-unit_diag
-   Specifies whether ``A`` is assumed to be unit triangular (all diagonal elements are 1). See :ref:`onemkl_datatypes` for more details.
+   unit_diag
+      Specifies whether ``A`` is assumed to be unit triangular (all diagonal elements are 1). See :ref:`onemkl_datatypes` for more details.
 
-m
-   Specifices the number of rows of ``B``. The value of ``m`` must be at least zero.
+   m
+      Specifices the number of rows of ``B``. The value of ``m`` must be at least zero.
 
-n
-   Specifies the Number of columns of ``B``. The value of ``n`` must be at least zero.
+   n
+      Specifies the Number of columns of ``B``. The value of ``n`` must be at least zero.
 
-alpha
-   Scaling factor for the solution. See :ref:`value_or_pointer` for more details.
+   alpha
+      Scaling factor for the solution. See :ref:`value_or_pointer` for more details.
 
-a
-   Pointer to input matrix ``A``. Must have size at least
-   ``lda``\ \*\ ``m`` if ``left_right`` = ``side::left`` or ``lda``\ \*\ ``n`` if ``left_right`` = ``side::right``. See :ref:`matrix-storage` for more details.
+   a
+      Pointer to input matrix ``A``. Must have size at least
+      ``lda``\ \*\ ``m`` if ``left_right`` = ``side::left`` or ``lda``\ \*\ ``n`` if ``left_right`` = ``side::right``. See :ref:`matrix-storage` for more details.
 
-lda
-   Leading dimension of ``A``. Must be at least ``m`` if ``left_right`` = ``side::left`` or at least ``n`` if ``left_right`` = ``side::right``. Must be positive.
+   lda
+      Leading dimension of ``A``. Must be at least ``m`` if ``left_right`` = ``side::left`` or at least ``n`` if ``left_right`` = ``side::right``. Must be positive.
 
-b
-   Pointer to input matrix ``B``. Must have size at least
-   ``ldb``\ \*\ ``n`` if column major layout or at least ``ldb``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
+   b
+      Pointer to input matrix ``B``. Must have size at least
+      ``ldb``\ \*\ ``n`` if column major layout or at least ``ldb``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
 
-ldb
-   Leading dimension of matrix ``B``. It must be positive and at least ``m`` if column major layout or at least ``n`` if row major layout is used.
+   ldb
+      Leading dimension of matrix ``B``. It must be positive and at least ``m`` if column major layout or at least ``n`` if row major layout is used.
 
-beta
-   Scaling factor for matrix ``C``. See :ref:`value_or_pointer` for more details.
+   beta
+      Scaling factor for matrix ``C``. See :ref:`value_or_pointer` for more details.
 
-c
-   Pointer to input/output matrix ``C``. Must have size at least
-   ``ldc``\ \*\ ``n`` if column major layout or at least ``ldc``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
+   c
+      Pointer to input/output matrix ``C``. Must have size at least
+      ``ldc``\ \*\ ``n`` if column major layout or at least ``ldc``\ \*\ ``m`` if row major layout is used. See :ref:`matrix-storage` for more details.
 
-ldc
-   Leading dimension of matrix ``C``. Must be at least ``m`` if column major layout or at least ``n`` if row major layout is used. Must be positive.
+   ldc
+      Leading dimension of matrix ``C``. Must be at least ``m`` if column major layout or at least ``n`` if row major layout is used. Must be positive.
 
-dependencies
-   List of events to wait for before starting computation, if any.
-   If omitted, defaults to no dependencies.
+   dependencies
+      List of events to wait for before starting computation, if any.
+      If omitted, defaults to no dependencies.
 
 .. container:: section
 
    .. rubric:: Output Parameters
 
-c
-   Pointer to the output matrix, overwritten by the solution matrix ``X`` + ``beta``\ \*\ ``C``.
+   c
+      Pointer to the output matrix, overwritten by the solution matrix ``X`` + ``beta``\ \*\ ``C``.
 
 .. container:: section
 
