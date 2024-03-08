@@ -122,7 +122,7 @@ trmm (Buffer Version)
       Specifies whether ``A`` is on the left side of the multiplication
       (``side::left``) or on the right side (``side::right``). See :ref:`onemkl_datatypes` for more details.
 
-   uplo
+   upper_lower
       Specifies whether the matrix ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
    trans
@@ -385,7 +385,7 @@ trmm (USM Version)
       multiplication (``side::left``) or on the right side
       (``side::right``). See :ref:`onemkl_datatypes` for more details.
 
-   uplo
+   upper_lower
       Specifies whether the matrix ``A`` is upper or lower
       triangular. See :ref:`onemkl_datatypes` for more details.
 

@@ -120,7 +120,7 @@ trsm (Buffer Version)
       Specifies whether ``A`` multiplies ``X`` on the left
       (``side::left``) or on the right (``side::right``). See :ref:`onemkl_datatypes` for more details.
 
-   uplo
+   upper_lower
       Specifies whether the matrix ``A`` is upper or lower triangular. See :ref:`onemkl_datatypes` for more details.
 
    trans
@@ -381,7 +381,7 @@ trsm (USM Version)
       Specifies whether ``A`` multiplies ``X`` on the left
       (``side::left``) or on the right (``side::right``). See :ref:`onemkl_datatypes` for more details.
 
-   uplo
+   upper_lower
       Specifies whether the matrix ``A`` is upper or lower
       triangular. See :ref:`onemkl_datatypes` for more details.
 
