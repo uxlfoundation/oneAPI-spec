@@ -349,7 +349,8 @@ spmm
       ``temp_buffer_size`` bytes. If it is a buffer, its lifetime is extended
       until the :ref:`spmm descriptor<onemkl_sparse_spmm_descr>` is released. If
       it is a USM pointer, it must not be free'd until ``spmm`` has completed.
-      The data must be accessible on the device.
+      The data must be accessible on the device and the address aligned on the
+      size of the handles' data type.
 
    dependencies
       List of events to depend on before starting asynchronous tasks that access
