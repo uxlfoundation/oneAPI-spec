@@ -11,6 +11,11 @@ There are a variety of matrix storage formats available for representing sparse
 matrices. Two popular formats are the coordinate (COO) format, and the
 Compressed Sparse Row (CSR) format.
 
+In this specification, "non-zero" elements or "non-zero" entries refer to
+explicitly defined elements or entries which may take any value supported by the
+the `:ref:data type<onemkl_sparse_supported_types>`. Undefined elements or
+entries are implicitly zeros.
+
 .. container:: section
 
    .. _onemkl_sparse_coo:
@@ -18,8 +23,8 @@ Compressed Sparse Row (CSR) format.
    .. rubric:: COO
 
    The COO format is the simplest sparse matrix format, represented by three
-   arrays, ``row_ind``, ``col_ind`` and ``val``, and an ``index`` parameter.
-   Each non-zero element, ``i`` in the sparse matrix is represented by its row
+   arrays, ``row_ind``, ``col_ind`` and ``val``, and an ``index`` parameter. The
+   ``i``-th defined element in the sparse matrix is represented by its row
    index, column index, and value, that is, (``row_ind[i]``, ``col_ind[i]``,
    ``val[i]``). The entries need not be in a sorted order.
 
@@ -32,9 +37,8 @@ Compressed Sparse Row (CSR) format.
          * - num_cols
            - Number of columns in the sparse matrix.
          * - nnz
-           - Number of non-zero entries in the sparse matrix (which may include
-             explicit zeros). This is also the length of the ``row_ind``,
-             ``col_ind`` and ``val`` arrays.
+           - Number of non-zero entries in the sparse matrix. This is also the
+             length of the ``row_ind``, ``col_ind`` and ``val`` arrays.
          * - index
            - Parameter that is used to specify whether the matrix has zero or
              one-based indexing.
@@ -97,9 +101,8 @@ one-based indexing):
          * - num_cols
            - Number of columns in the sparse matrix.
          * - nnz
-           - Number of non-zero entries in the sparse matrix (which may include
-             explicit zeros). This is also the length of the ``col_ind`` and
-             ``val`` arrays.
+           - Number of non-zero entries in the sparse matrix. This is also the
+             length of the ``col_ind`` and ``val`` arrays.
          * - index
            - Parameter that is used to specify whether the matrix has zero or
              one-based indexing.
@@ -117,7 +120,7 @@ one-based indexing):
              ``val`` array that is first non-zero element in a row ``j`` of
              ``A``. Note that this position is equal to ``row_ptr[j] - index``.
              Last element of the ``row_ptr`` array (``row_ptr[num_rows]``)
-             stores the sum of, number of nonzero elements and ``index``
+             stores the sum of, number of non-zero elements and ``index``
              (``nnz + index``).
 
 A sparse matrix can be represented in a CSR format in a following way (assuming
