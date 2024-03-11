@@ -316,7 +316,8 @@ spmm
 
    alpha
       Host or USM pointer representing :math:`\alpha`. The USM allocation can be
-      on the host or device.
+      on the host or device. Must be of the same type than the handles' data
+      type.
 
    A_view
       Specifies which part of the handle should be read as described by
@@ -330,7 +331,8 @@ spmm
 
    beta
       Host or USM pointer representing :math:`\beta`. The USM allocation can be
-      on the host or device.
+      on the host or device. Must be of the same type than the handles' data
+      type.
 
    C_handle
       Dense matrix handle object representing :math:`C`.
