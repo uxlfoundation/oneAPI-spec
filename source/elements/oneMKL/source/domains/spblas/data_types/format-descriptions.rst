@@ -9,7 +9,7 @@ Sparse storage formats
 
 There are a variety of matrix storage formats available for representing sparse
 matrices. Two popular formats are the coordinate (COO) format, and the
-compressed sparse row (CSR) format.
+Compressed Sparse Row (CSR) format.
 
 .. container:: section
 
