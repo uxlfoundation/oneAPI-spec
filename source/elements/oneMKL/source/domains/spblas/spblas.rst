@@ -20,20 +20,20 @@ Sparse BLAS
         - Description
       * - :ref:`onemkl_sparse_data_handles`
         - Matrix and vector handle types
-      * - :ref:`onemkl_sparse_spsv_header`
-        - Solve a triangular sparse linear system
-      * - :ref:`onemkl_sparse_spmv_header`
-        - Compute the product of a sparse matrix with a dense vector
       * - :ref:`onemkl_sparse_spmm_header`
         - Compute the product of a sparse matrix with a dense matrix
+      * - :ref:`onemkl_sparse_spmv_header`
+        - Compute the product of a sparse matrix with a dense vector
+      * - :ref:`onemkl_sparse_spsv_header`
+        - Solve a triangular sparse linear system
 
 .. toctree::
    :hidden:
 
    data_types/data_handles
-   operations/spsv
-   operations/spmv
    operations/spmm
+   operations/spmv
+   operations/spsv
    matrix_view
    supported-types
 
