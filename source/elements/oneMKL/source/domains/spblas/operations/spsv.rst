@@ -25,8 +25,8 @@ following description:
 .. math::
 
     \text{op}(A) = \begin{cases} A,& \text{oneapi::mkl::transpose::nontrans}\\
-                                 A^{T},& \text{oneapi::mkl::transpose::trans}\\
-                                 A^{H},& \text{oneapi::mkl::transpose::conjtrans}
+                                 A^\mathsf{T},& \text{oneapi::mkl::transpose::trans}\\
+                                 A^\mathsf{H},& \text{oneapi::mkl::transpose::conjtrans}
                    \end{cases}
 
 and :math:`\text{op}(A)` is an ``m``-by-``m`` matrix , :math:`x` and :math:`y`
