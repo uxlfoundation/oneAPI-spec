@@ -21,7 +21,7 @@ Sparse BLAS
       * - :ref:`onemkl_sparse_data_handles`
         - Matrix and vector handle types
       * - :ref:`onemkl_sparse_spsv_header`
-        - Solve a linear system with a triangular sparse matrix
+        - Solve a triangular sparse linear system
       * - :ref:`onemkl_sparse_spmv_header`
         - Compute the product of a sparse matrix with a dense vector
       * - :ref:`onemkl_sparse_spmm_header`

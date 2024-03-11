@@ -7,7 +7,8 @@
 spsv
 ====
 
-Solves a system of linear equations for a triangular sparse matrix.
+Solves a system of linear equations where the coefficients are described by a
+triangular sparse matrix.
 
 .. rubric:: Description and Assumptions
 
@@ -18,9 +19,9 @@ for a square matrix:
 
       \text{op}(A) \cdot y \leftarrow \alpha \cdot x
 
-where :math:`\alpha` is a scalar, :math:`A` is a triangular sparse matrix, :math:`x` and :math:`y` are
-dense vectors, :math:`\text{op}()` is a matrix modifier for :math:`A` using the
-following description:
+where :math:`\alpha` is a scalar, :math:`A` is a triangular sparse matrix,
+:math:`x` and :math:`y` are dense vectors, :math:`\text{op}()` is a matrix
+modifier for :math:`A` using the following description:
 
 .. math::
 
