@@ -7,7 +7,7 @@
 destroy_sparse_matrix
 =====================
 
-Destroys a ``sparse_matrix_handle_t`` object.
+Destroys a ``matrix_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
@@ -24,8 +24,8 @@ If a USM pointer was provided, the data is not free'd.
 
    namespace oneapi::mkl::sparse {
 
-       void destroy_sparse_matrix (sycl::queue                                 &queue,
-                                   oneapi::mkl::sparse::sparse_matrix_handle_t smhandle);
+       void destroy_sparse_matrix (sycl::queue                          &queue,
+                                   oneapi::mkl::sparse::matrix_handle_t smhandle);
 
    }
 

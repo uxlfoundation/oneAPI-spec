@@ -39,7 +39,7 @@ Matrix properties
 set_matrix_property
 -------------------
 
-Set a property to a ``sparse_matrix_handle_t`` object.
+Set a property to a ``matrix_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
@@ -52,9 +52,9 @@ matrix handle. The property provides stronger guarantees than a :ref:`onemkl_spa
 
    namespace oneapi::mkl::sparse {
 
-       bool set_matrix_property (sycl::queue                                 &queue,
-                                 oneapi::mkl::sparse::sparse_matrix_handle_t smhandle,
-                                 matrix_property                             property_value);
+       bool set_matrix_property (sycl::queue                          &queue,
+                                 oneapi::mkl::sparse::matrix_handle_t smhandle,
+                                 matrix_property                      property_value);
 
    }
 
