@@ -15,9 +15,9 @@ The ``oneapi::mkl::sparse::create_coo_matrix`` function initializes the
 ``matrix_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
-incremented which extends the lifetime of the underlying buffer until the
-``smhandle`` is destroyed with ``destroy_sparse_matrix`` or the data is reset with
-``set_coo_matrix_data``.
+incremented which extends the lifetime of the underlying buffer until the sparse
+matrix handle is destroyed with ``destroy_sparse_matrix`` or the data is reset
+with ``set_coo_matrix_data``.
 
 In the case of USM, the object does not take ownership of the data.
 

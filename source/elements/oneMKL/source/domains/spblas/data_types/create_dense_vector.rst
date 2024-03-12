@@ -15,8 +15,8 @@ The ``oneapi::mkl::sparse::create_dense_vector`` function initializes the
 ``dense_vector_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
-incremented which extends the lifetime of the underlying buffer until the
-``dvhandle`` is destroyed with ``destroy_dense_vector`` or the data is reset
+incremented which extends the lifetime of the underlying buffer until the dense
+vector handle is destroyed with ``destroy_dense_vector`` or the data is reset
 with ``set_dense_vector_data``.
 
 In the case of USM, the object does not take ownership of the data.

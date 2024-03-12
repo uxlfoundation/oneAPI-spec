@@ -15,8 +15,8 @@ The ``oneapi::mkl::sparse::create_dense_matrix`` function initializes the
 ``dense_matrix_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
-incremented which extends the lifetime of the underlying buffer until the
-``dmhandle`` is destroyed with ``destroy_dense_matrix`` or the data is reset
+incremented which extends the lifetime of the underlying buffer until the dense
+matrix handle is destroyed with ``destroy_dense_matrix`` or the data is reset
 with ``set_dense_matrix_data``.
 
 In the case of USM, the object does not take ownership of the data.
