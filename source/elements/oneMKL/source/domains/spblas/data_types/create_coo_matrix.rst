@@ -99,19 +99,19 @@ create_coo_matrix (Buffer version)
       in :ref:`onemkl_enum_index_base` enum class.
 
    row_ind
-      Buffer of length ``nnz`` containing the row indices in ``index``-based
-      numbering. Refer to :ref:`onemkl_sparse_coo` format for detailed
-      description of ``row_ind``.
+      Buffer of length at least ``nnz`` containing the row indices in
+      ``index``-based numbering. Refer to :ref:`onemkl_sparse_coo` format for
+      detailed description of ``row_ind``.
 
    col_ind
-      Buffer of length ``nnz`` containing the column indices in ``index``-based
-      numbering. Refer to :ref:`onemkl_sparse_coo` format for detailed
-      description of ``col_ind``.
+      Buffer of length at least ``nnz`` containing the column indices in
+      ``index``-based numbering. Refer to :ref:`onemkl_sparse_coo` format for
+      detailed description of ``col_ind``.
 
    val
-      Buffer of length ``nnz`` containing non-zero elements (and possibly
-      explicit zeros) of the input matrix. Refer to :ref:`onemkl_sparse_coo`
-      format for detailed description of ``val``.
+      Buffer of length at least ``nnz`` containing non-zero elements (and
+      possibly explicit zeros) of the input matrix. Refer to
+      :ref:`onemkl_sparse_coo` format for detailed description of ``val``.
 
 .. container:: section
 
@@ -197,22 +197,22 @@ create_coo_matrix (USM version)
       in :ref:`onemkl_enum_index_base` enum class.
 
    row_ind
-      USM pointer of length ``nnz`` containing the row indices in
+      USM pointer of length at least ``nnz`` containing the row indices in
       ``index``-based numbering. Refer to :ref:`onemkl_sparse_coo` format for
       detailed description of ``row_ind``. The data must be accessible on the
       device.
 
    col_ind
-      USM pointer of length ``nnz`` containing the column indices in
+      USM pointer of length at least ``nnz`` containing the column indices in
       ``index``-based numbering. Refer to :ref:`onemkl_sparse_coo` format for
       detailed description of ``col_ind``. The data must be accessible on the
       device.
 
    val
-      USM pointer of length ``nnz`` containing non-zero elements (and possibly
-      explicit zeros) of the input matrix. Refer to :ref:`onemkl_sparse_coo`
-      format for detailed description of ``val``. The data must be accessible on
-      the device.
+      USM pointer of length at least ``nnz`` containing non-zero elements (and
+      possibly explicit zeros) of the input matrix. Refer to
+      :ref:`onemkl_sparse_coo` format for detailed description of ``val``. The
+      data must be accessible on the device.
 
 .. container:: section
 

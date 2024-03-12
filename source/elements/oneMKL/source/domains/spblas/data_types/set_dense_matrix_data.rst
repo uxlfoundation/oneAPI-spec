@@ -79,9 +79,8 @@ set_dense_matrix_data (Buffer version)
       Specify whether the data uses row major or column major.
 
    val
-      Buffer of length ``ld*num_cols`` if column major is used or
-      ``ld*num_rows`` if row major is used. Holds the data to initialize
-      ``dmhandle`` with.
+      Buffer of length at least ``ld*num_cols`` if column major is used or
+      ``ld*num_rows`` if row major is used.
 
 .. container:: section
 
@@ -154,9 +153,9 @@ set_dense_matrix_data (USM version)
       Specify whether the data uses row major or column major.
 
    val
-      USM pointer of length ``ld*num_cols`` if column major is used or
-      ``ld*num_rows`` if row major is used. Holds the data to initialize
-      ``dmhandle`` with. The data must be accessible on the device.
+      USM pointer of length at least ``ld*num_cols`` if column major is used or
+      ``ld*num_rows`` if row major is used. The data must be accessible on the
+      device.
 
 .. container:: section
 

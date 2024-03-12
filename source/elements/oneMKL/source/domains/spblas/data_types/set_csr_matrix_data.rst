@@ -84,18 +84,18 @@ set_csr_matrix_data (Buffer version)
       in :ref:`onemkl_enum_index_base` enum class.
 
    row_ptr
-      Buffer of length ``num_rows+1``. Refer to :ref:`onemkl_sparse_csr` format
-      for detailed description of ``row_ptr``.
+      Buffer of length at least ``num_rows+1``. Refer to
+      :ref:`onemkl_sparse_csr` format for detailed description of ``row_ptr``.
 
    col_ind
-      Buffer of length ``nnz`` containing the column indices in ``index``-based
-      numbering. Refer to :ref:`onemkl_sparse_csr` format for detailed
-      description of ``col_ind``.
+      Buffer of length at least ``nnz`` containing the column indices in
+      ``index``-based numbering. Refer to :ref:`onemkl_sparse_csr` format for
+      detailed description of ``col_ind``.
 
    val
-      Buffer of length ``nnz`` containing non-zero elements (and possibly
-      explicit zeros) of the input matrix. Refer to :ref:`onemkl_sparse_csr`
-      format for detailed description of ``val``.
+      Buffer of length at least ``nnz`` containing non-zero elements (and
+      possibly explicit zeros) of the input matrix. Refer to
+      :ref:`onemkl_sparse_csr` format for detailed description of ``val``.
 
 .. container:: section
 
@@ -173,21 +173,21 @@ set_csr_matrix_data (USM version)
       in :ref:`onemkl_enum_index_base` enum class.
 
    row_ptr
-      USM pointer of length ``num_rows+1``. Refer to :ref:`onemkl_sparse_csr`
-      format for detailed description of ``row_ptr``. The data must be
-      accessible on the device.
+      USM pointer of length at least ``num_rows+1``. Refer to
+      :ref:`onemkl_sparse_csr` format for detailed description of ``row_ptr``.
+      The data must be accessible on the device.
 
    col_ind
-      USM pointer of length ``nnz`` containing the column indices in
+      USM pointer of length at least ``nnz`` containing the column indices in
       ``index``-based numbering. Refer to :ref:`onemkl_sparse_csr` format for
       detailed description of ``col_ind``. The data must be accessible on the
       device.
 
    val
-      USM pointer of length ``nnz`` containing non-zero elements (and possibly
-      explicit zeros) of the input matrix. Refer to :ref:`onemkl_sparse_csr`
-      format for detailed description of ``val``. The data must be accessible on
-      the device.
+      USM pointer of length at least ``nnz`` containing non-zero elements (and
+      possibly explicit zeros) of the input matrix. Refer to
+      :ref:`onemkl_sparse_csr` format for detailed description of ``val``. The
+      data must be accessible on the device.
 
 .. container:: section
 

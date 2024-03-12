@@ -65,7 +65,7 @@ set_dense_vector_data (Buffer version)
       Number of elements of the provided data ``val``. Must be at least 0.
 
    val
-      Buffer of length ``size``.
+      Buffer of length at least ``size``.
 
 .. container:: section
 
@@ -124,7 +124,8 @@ set_dense_vector_data (USM version)
       Number of elements of the provided data ``val``. Must be at least 0.
 
    val
-      USM pointer of length ``size``. The data must be accessible on the device.
+      USM pointer of length at least ``size``. The data must be accessible on
+      the device.
 
 .. container:: section
 
