@@ -61,7 +61,7 @@ create_dense_vector (Buffer version)
       called on an uninitialized ``dense_vector_handle_t`` object.
 
    size
-      Number of elements of the provided data ``val``. Must be at least 0.
+      Number of elements of the provided data ``val``. Must be at least 1.
 
    val
       Buffer of length at least ``size``. Holds the data to initialize
@@ -129,7 +129,7 @@ create_dense_vector (USM version)
       called on an uninitialized ``dense_vector_handle_t`` object.
 
    size
-      Number of elements of the provided data ``val``. Must be at least 0.
+      Number of elements of the provided data ``val``. Must be at least 1.
 
    val
       USM pointer of length at least ``size``. Holds the data to initialize

@@ -124,6 +124,14 @@ create_coo_matrix (Buffer version)
 
 .. container:: section
 
+   .. rubric:: Notes
+
+   - The parameters ``num_rows``, ``num_cols`` and ``nnz`` may be zero if and
+     only if ``row_ind``, ``col_ind`` and ``val`` are zero-sized, otherwise they
+     must be strictly greater than zero.
+
+.. container:: section
+
    .. rubric:: Throws
 
    This function shall throw the following exceptions if the associated
@@ -222,6 +230,14 @@ create_coo_matrix (USM version)
       On return, the address is updated to point to a newly allocated and
       initialized ``matrix_handle_t`` object that can be filled and used to
       perform sparse BLAS operations.
+
+.. container:: section
+
+   .. rubric:: Notes
+
+   - The parameters ``num_rows``, ``num_cols`` and ``nnz`` may be zero if and
+     only if ``row_ind``, ``col_ind`` and ``val`` are null pointers, otherwise
+     they must be strictly greater than zero.
 
 .. container:: section
 

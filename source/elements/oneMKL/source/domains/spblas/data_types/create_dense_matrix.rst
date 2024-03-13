@@ -64,10 +64,10 @@ create_dense_matrix (Buffer version)
       called on an uninitialized ``dense_matrix_handle_t`` object.
 
    num_rows
-      Number of rows of the provided data ``val``. Must be at least 0.
+      Number of rows of the provided data ``val``. Must be at least 1.
 
    num_cols
-      Number of columns of the provided data ``val``. Must be at least 0.
+      Number of columns of the provided data ``val``. Must be at least 1.
 
    ld
       Leading dimension of the provided data ``val``. Must be at least
@@ -147,10 +147,10 @@ create_dense_matrix (USM version)
       called on an uninitialized ``dense_matrix_handle_t`` object.
 
    num_rows
-      Number of rows of the provided data ``val``. Must be at least 0.
+      Number of rows of the provided data ``val``. Must be at least 1.
 
    num_cols
-      Number of columns of the provided data ``val``. Must be at least 0.
+      Number of columns of the provided data ``val``. Must be at least 1.
 
    ld
       Leading dimension of the provided data ``val``. Must be at least

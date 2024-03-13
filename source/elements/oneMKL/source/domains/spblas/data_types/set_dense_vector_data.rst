@@ -121,7 +121,7 @@ set_dense_vector_data (USM version)
       Handle already initialized with :ref:`onemkl_sparse_create_dense_vector`.
 
    size
-      Number of elements of the provided data ``val``. Must be at least 0.
+      Number of elements of the provided data ``val``. Must be at least 1.
 
    val
       USM pointer of length at least ``size``. The data must be accessible on

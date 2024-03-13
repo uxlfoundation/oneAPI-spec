@@ -139,10 +139,10 @@ set_dense_matrix_data (USM version)
       Handle already initialized with :ref:`onemkl_sparse_create_dense_matrix`.
 
    num_rows
-      Number of rows of the provided data ``val``. Must be at least 0.
+      Number of rows of the provided data ``val``. Must be at least 1.
 
    num_cols
-      Number of columns of the provided data ``val``. Must be at least 0.
+      Number of columns of the provided data ``val``. Must be at least 1.
 
    ld
       Leading dimension of the provided data ``val``. Must be at least

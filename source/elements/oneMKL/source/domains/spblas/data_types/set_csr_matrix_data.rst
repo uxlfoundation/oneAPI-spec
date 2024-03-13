@@ -99,6 +99,14 @@ set_csr_matrix_data (Buffer version)
 
 .. container:: section
 
+   .. rubric:: Notes
+
+   - The parameters ``num_rows``, ``num_cols`` and ``nnz`` may be zero if and
+     only if ``row_ptr``, ``col_ind`` and ``val`` are zero-sized, otherwise they
+     must be strictly greater than zero.
+
+.. container:: section
+
    .. rubric:: Throws
 
    This function shall throw the following exceptions if the associated
@@ -188,6 +196,14 @@ set_csr_matrix_data (USM version)
       possibly explicit zeros) of the input matrix. Refer to
       :ref:`onemkl_sparse_csr` format for detailed description of ``val``. The
       data must be accessible on the device.
+
+.. container:: section
+
+   .. rubric:: Notes
+
+   - The parameters ``num_rows``, ``num_cols`` and ``nnz`` may be zero if and
+     only if ``row_ptr``, ``col_ind`` and ``val`` are null pointers, otherwise
+     they must be strictly greater than zero.
 
 .. container:: section
 
