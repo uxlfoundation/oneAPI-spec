@@ -163,7 +163,8 @@ create_dense_matrix (USM version)
    val
       USM pointer of length at least ``ld*num_cols`` if column major is used or
       ``ld*num_rows`` if row major is used. Holds the data to initialize
-      ``p_dmhandle`` with. The data must be accessible on the device.
+      ``p_dmhandle`` with. The data must be accessible on the device. Using a
+      USM pointer with a smaller allocated memory size is undefined behavior.
 
 .. container:: section
 

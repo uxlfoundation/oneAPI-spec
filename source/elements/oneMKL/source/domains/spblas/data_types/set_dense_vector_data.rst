@@ -125,7 +125,8 @@ set_dense_vector_data (USM version)
 
    val
       USM pointer of length at least ``size``. The data must be accessible on
-      the device.
+      the device. Using a USM pointer with a smaller allocated memory size is
+      undefined behavior.
 
 .. container:: section
 

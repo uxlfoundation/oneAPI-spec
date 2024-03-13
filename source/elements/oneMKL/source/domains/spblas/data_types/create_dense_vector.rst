@@ -133,7 +133,8 @@ create_dense_vector (USM version)
 
    val
       USM pointer of length at least ``size``. Holds the data to initialize
-      ``p_dvhandle`` with. The data must be accessible on the device.
+      ``p_dvhandle`` with. The data must be accessible on the device. Using a
+      USM pointer with a smaller allocated memory size is undefined behavior.
 
 .. container:: section
 

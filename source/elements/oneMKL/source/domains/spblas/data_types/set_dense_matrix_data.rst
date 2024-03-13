@@ -155,7 +155,8 @@ set_dense_matrix_data (USM version)
    val
       USM pointer of length at least ``ld*num_cols`` if column major is used or
       ``ld*num_rows`` if row major is used. The data must be accessible on the
-      device.
+      device. Using a USM pointer with a smaller allocated memory size is
+      undefined behavior.
 
 .. container:: section
 

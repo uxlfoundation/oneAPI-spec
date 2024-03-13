@@ -195,7 +195,8 @@ set_csr_matrix_data (USM version)
       USM pointer of length at least ``nnz`` containing non-zero elements (and
       possibly explicit zeros) of the input matrix. Refer to
       :ref:`onemkl_sparse_csr` format for detailed description of ``val``. The
-      data must be accessible on the device.
+      data must be accessible on the device. Using a USM pointer with a smaller
+      allocated memory size is undefined behavior.
 
 .. container:: section
 
