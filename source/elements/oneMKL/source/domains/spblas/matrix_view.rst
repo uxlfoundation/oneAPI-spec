@@ -32,11 +32,7 @@ matrix_descr
 
    .. rubric:: Description
 
-   The matrix descriptor is an optional property that can optimize some
-   operations.
-
-   TODO: Clarify are triangular operations going to require a triangular
-   matrix_descr or should it be ignored?
+   The matrix descriptor describes how an operation should interpret the data.
 
    .. list-table::
       :header-rows: 1
@@ -91,7 +87,7 @@ matrix_view
    The ``uplo_view`` member is only used if ``type_view`` is ``symmetric``,
    ``hermitian`` or ``triangular``.
 
-   The ``diag_view`` member is only used if ``type_view`` is ``diagonal``.
+   The ``diag_view`` member is ignored if ``type_view`` is ``general``.
 
    .. rubric:: Syntax
 
