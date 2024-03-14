@@ -29,9 +29,9 @@ Matrix properties
       * - Value
         - Description
       * - ``symmetric``
-        - Guarantees that the matrix is symmetric, meaning it must be square and
-          its transpose is equal to itself. TODO: Confirm whether the user can
-          only provide half of the data in this case?
+        - Guarantees that the user-provided matrix data are symmetric, meaning
+          the matrix is square, the user data contain both lower and upper
+          triangular regions, and that its transpose is equal to itself.
       * - ``sorted``
         - Guarantees that the column indices are sorted for a given row. Only
           available for the CSR format. TODO: Confirm the description.
