@@ -42,8 +42,10 @@ spmm_descr
 .. code-block:: cpp
 
    namespace oneapi::mkl::sparse {
+
        struct spmm_descr;
        using spmm_descr_t = spmm_descr*;
+
    }
 
 .. container:: section

@@ -2,10 +2,10 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_sparse_set_matrix_property:
+.. _onemkl_sparse_set_matrix_properties:
 
-set_matrix_property
-===================
+set_matrix_properties
+=====================
 
 Matrix properties
 -----------------
@@ -14,13 +14,19 @@ Matrix properties
 
    .. code:: cpp
 
-      enum class matrix_property {
-          symmetric,
-          sorted,
-      };
+      namespace oneapi::mkl::sparse {
 
-   TODO: Clarify are the properties meant to be used as a bit mask so multiple
-   properties can be set?
+          enum matrix_property : std::int32_t {
+             symmetric = 1 << 0,
+             sorted    = 1 << 1,
+          };
+
+      }
+
+   Matrix properties are optional and "strong" guarantees. Unlike
+   :ref:`onemkl_sparse_matrix_view`, the user must ensure that the handle's data
+   holds all the given properties. A property can be set to optimize some
+   operations.
 
    .. list-table::
       :header-rows: 1
@@ -36,15 +42,15 @@ Matrix properties
         - Guarantees that the column indices are sorted for a given row. Only
           available for the CSR format. TODO: Confirm the description.
 
-set_matrix_property
--------------------
+set_matrix_properties
+---------------------
 
-Set a property to a ``matrix_handle_t`` object.
+Set properties to a ``matrix_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::set_matrix_property`` function sets a property to a
-matrix handle. The property provides stronger guarantees than a :ref:`onemkl_sparse_matrix_view`.
+The ``oneapi::mkl::sparse::set_matrix_properties`` function sets properties to a
+matrix handle.
 
 .. rubric:: Syntax
 
@@ -52,9 +58,9 @@ matrix handle. The property provides stronger guarantees than a :ref:`onemkl_spa
 
    namespace oneapi::mkl::sparse {
 
-       bool set_matrix_property (sycl::queue                          &queue,
-                                 oneapi::mkl::sparse::matrix_handle_t smhandle,
-                                 matrix_property                      property_value);
+       bool set_matrix_properties (sycl::queue                          &queue,
+                                   oneapi::mkl::sparse::matrix_handle_t smhandle,
+                                   std::int32_t                         properties_mask);
 
    }
 
@@ -68,14 +74,16 @@ matrix handle. The property provides stronger guarantees than a :ref:`onemkl_spa
    smhandle
       Initialized sparse matrix handle.
 
-   property_value
-      Matrix property to set.
+   properties_mask
+      Matrix properties to set. The mask must be composed of one or multiple
+      values from ``oneapi::mkl::sparse::matrix_property`` combined with the
+      bitwise-or operator ``|``. Properties can be reset with a mask of 0.
 
 .. container:: section
 
    .. rubric:: Return Values
 
-   Return whether the property was set to the backend's handle. A backend may
+   Return whether the properties were set to the backend's handle. A backend may
    not have equivalent properties.
 
 .. container:: section

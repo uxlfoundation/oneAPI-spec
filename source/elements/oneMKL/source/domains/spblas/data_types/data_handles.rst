@@ -97,7 +97,7 @@ Sparse matrix handle
    - :ref:`onemkl_sparse_create_csr_matrix`
    - :ref:`onemkl_sparse_set_coo_matrix_data`
    - :ref:`onemkl_sparse_set_csr_matrix_data`
-   - :ref:`onemkl_sparse_set_matrix_property`
+   - :ref:`onemkl_sparse_set_matrix_properties`
    - :ref:`onemkl_sparse_destroy_sparse_matrix`
 
    See a description of the supported :ref:`sparse formats<onemkl_sparse_format_descriptions>`.
@@ -116,7 +116,7 @@ Sparse matrix handle
    destroy_dense_vector
    destroy_dense_matrix
    destroy_sparse_matrix
-   set_matrix_property
+   set_matrix_properties
    format-descriptions
 
 **Parent topic:** :ref:`onemkl_spblas`

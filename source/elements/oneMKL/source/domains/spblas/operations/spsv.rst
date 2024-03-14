@@ -43,8 +43,10 @@ spsv_descr
 .. code-block:: cpp
 
    namespace oneapi::mkl::sparse {
+
        struct spsv_descr;
        using spsv_descr_t = spsv_descr*;
+
    }
 
 .. container:: section
