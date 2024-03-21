@@ -13,7 +13,7 @@ Sparse Linear Algebra
    Algebra routines using SYCL.
 
    :ref:`onemkl_spblas` provides basic operations on sparse vectors and
-   matrices, and separates them into three stages: query of the external
+   matrices. Most operations are split into three stages: query of the external
    workspace size, optimization stage and execution. For a given configuration,
    the first two stages would typically be called once for a set of input
    arguments and the execution stage may be called multiple times. During the
