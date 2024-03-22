@@ -349,12 +349,14 @@ spmm
       Output buffer size in bytes.
 
    workspace
-      Workspace buffer or USM pointer, must be at least of size
-      ``temp_buffer_size`` bytes. If it is a buffer, its lifetime is extended
-      until the :ref:`spmm descriptor<onemkl_sparse_spmm_descr>` is released. If
-      it is a USM pointer, it must not be free'd until ``spmm`` has completed.
-      The data must be accessible on the device and the address aligned on the
-      size of the handles' data type.
+      | Workspace buffer or USM pointer, must be at least of size
+        ``temp_buffer_size`` bytes and the address aligned on the size of the
+        handles' data type.
+      | If it is a buffer, its lifetime is extended until the :ref:`spmm
+        descriptor<onemkl_sparse_spmm_descr>` is released. The workspace cannot
+        be a sub-buffer.
+      | If it is a USM pointer, it must not be free'd until ``spmm`` has
+        completed. The data must be accessible on the device.
 
    dependencies
       List of events to depend on before starting asynchronous tasks that access
