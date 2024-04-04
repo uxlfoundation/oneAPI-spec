@@ -200,8 +200,7 @@ spmv
            oneapi::mkl::sparse::dense_vector_handle_t y_handle,
            oneapi::mkl::sparse::spmv_alg              alg,
            oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
-           std::size_t                                &temp_buffer_size,
-       );
+           std::size_t                                &temp_buffer_size);
 
        void spmv_optimize(
            sycl::queue                                &queue,
@@ -214,8 +213,7 @@ spmv
            oneapi::mkl::sparse::dense_vector_handle_t y_handle,
            oneapi::mkl::sparse::spmv_alg              alg,
            oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
-           sycl::buffer<std::uint8_t, 1>              workspace,
-       );
+           sycl::buffer<std::uint8_t, 1>              workspace);
 
        sycl::event spmv_optimize(
            sycl::queue                                &queue,
@@ -229,8 +227,7 @@ spmv
            oneapi::mkl::sparse::spmv_alg              alg,
            oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
            void*                                      workspace,
-           const std::vector<sycl::event>             &dependencies = {},
-       );
+           const std::vector<sycl::event>             &dependencies = {});
 
        sycl::event spmv(
            sycl::queue                                &queue,
@@ -243,8 +240,7 @@ spmv
            oneapi::mkl::sparse::dense_vector_handle_t y_handle,
            oneapi::mkl::sparse::spmv_alg              alg,
            oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
-           const std::vector<sycl::event>             &dependencies = {},
-       );
+           const std::vector<sycl::event>             &dependencies = {});
 
    }
 

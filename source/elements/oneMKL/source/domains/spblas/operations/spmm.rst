@@ -203,8 +203,7 @@ spmm
            oneapi::mkl::sparse::dense_matrix_handle_t C_handle,
            oneapi::mkl::sparse::spmm_alg              alg,
            oneapi::mkl::sparse::spmm_descr_t          spmm_descr,
-           std::size_t                                &temp_buffer_size,
-       );
+           std::size_t                                &temp_buffer_size);
 
        void spmm_optimize(
            sycl::queue                                &queue,
@@ -218,8 +217,7 @@ spmm
            oneapi::mkl::sparse::dense_matrix_handle_t C_handle,
            oneapi::mkl::sparse::spmm_alg              alg,
            oneapi::mkl::sparse::spmm_descr_t          spmm_descr,
-           sycl::buffer<std::uint8_t, 1>              workspace,
-       );
+           sycl::buffer<std::uint8_t, 1>              workspace);
 
        sycl::event spmm_optimize(
            sycl::queue                                &queue,
@@ -234,8 +232,7 @@ spmm
            oneapi::mkl::sparse::spmm_alg              alg,
            oneapi::mkl::sparse::spmm_descr_t          spmm_descr,
            void*                                      workspace,
-           const std::vector<sycl::event>             &dependencies = {},
-       );
+           const std::vector<sycl::event>             &dependencies = {});
 
        sycl::event spmm(
            sycl::queue                                &queue,
@@ -249,8 +246,7 @@ spmm
            oneapi::mkl::sparse::dense_matrix_handle_t C_handle,
            oneapi::mkl::sparse::spmm_alg              alg,
            oneapi::mkl::sparse::spmm_descr_t          spmm_descr,
-           const std::vector<sycl::event>             &dependencies = {},
-       );
+           const std::vector<sycl::event>             &dependencies = {});
 
    }
 
