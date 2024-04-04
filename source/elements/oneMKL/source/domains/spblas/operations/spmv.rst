@@ -157,6 +157,7 @@ spmv_alg
 
        enum class spmv_alg {
            default_alg,
+           no_optimize_alg,
            coo_alg1,
            coo_alg2,
            csr_alg1,
@@ -166,43 +167,16 @@ spmv_alg
 
    }
 
-.. list-table::
-   :header-rows: 1
-   :widths: 10 30 45
+.. container:: section
 
-   * - Value
-     - Description
-     - Backend equivalent
-   * - ``default_alg``
-     - Default algorithm.
-     - | MKL: N/A
-       | cuSPARSE: ``CUSPARSE_SPMV_ALG_DEFAULT``
-       | rocSPARSE: ``rocsparse_spmv_alg_default``
-   * - ``coo_alg1``
-     - Default algorithm for COO format.
-     - | MKL: N/A
-       | cuSPARSE: ``CUSPARSE_SPMV_COO_ALG1``
-       | rocSPARSE: ``rocsparse_spmv_alg_coo``
-   * - ``coo_alg2``
-     - Deterministic algorithm for COO format.
-     - | MKL: N/A
-       | cuSPARSE: ``CUSPARSE_SPMV_COO_ALG2``
-       | rocSPARSE: ``rocsparse_spmv_alg_coo_atomic``
-   * - ``csr_alg1``
-     - Default algorithm for CSR format.
-     - | MKL: N/A
-       | cuSPARSE: ``CUSPARSE_SPMV_CSR_ALG1``
-       | rocSPARSE: ``rocsparse_spmv_alg_csr_adaptive``
-   * - ``csr_alg2``
-     - Deterministic algorithm for CSR format.
-     - | MKL: N/A
-       | cuSPARSE: ``CUSPARSE_SPMV_CSR_ALG2``
-       | rocSPARSE: ``rocsparse_spmv_alg_csr_stream``
-   * - ``csr_alg3``
-     - LRB variant of the algorithm for CSR format.
-     - | MKL: N/A
-       | cuSPARSE: N/A
-       | rocSPARSE: ``rocsparse_spmv_alg_csr_lrb``
+   .. rubric:: Description
+
+   These algorithm enums are provided in case backends would like to implement
+   various different algorithms for the operation. Behavior of the algorithms
+   (e.g., bitwise reproducibility, atomics usage) and the preconditions to using
+   specific algorithms (e.g. sortedness of matrix arrays) is
+   implementation-defined and must be documented in the library implementing the
+   oneAPI specification.
 
 .. _onemkl_sparse_spmv:
 

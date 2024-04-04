@@ -158,22 +158,21 @@ spsv_alg
 
        enum class spsv_alg {
            default_alg,
+           no_optimize_alg,
        };
 
    }
 
-.. list-table::
-   :header-rows: 1
-   :widths: 10 30 45
+.. container:: section
 
-   * - Value
-     - Description
-     - Backend equivalent
-   * - ``default_alg``
-     - Default algorithm.
-     - | MKL: N/A
-       | cuSPARSE: ``CUSPARSE_SPSV_ALG_DEFAULT``
-       | rocSPARSE: ``rocsparse_spsv_alg_default``
+   .. rubric:: Description
+
+   These algorithm enums are provided in case backends would like to implement
+   various different algorithms for the operation. Behavior of the algorithms
+   (e.g., bitwise reproducibility, atomics usage) and the preconditions to using
+   specific algorithms (e.g. sortedness of matrix arrays) is
+   implementation-defined and must be documented in the library implementing the
+   oneAPI specification.
 
 .. _onemkl_sparse_spsv:
 
