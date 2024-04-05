@@ -84,8 +84,8 @@ matrix_view
    See :ref:`onemkl_sparse_matrix_descriptor`, :ref:`onemkl_enum_uplo` and
    :ref:`onemkl_enum_diag` fot a description of the members.
 
-   The ``uplo_view`` member is only used if ``type_view`` is ``symmetric``,
-   ``hermitian`` or ``triangular``.
+   The ``uplo_view`` member is ignored if ``type_view`` is ``general`` or
+   ``diagonal``.
 
    The ``diag_view`` member is ignored if ``type_view`` is ``general``.
 
