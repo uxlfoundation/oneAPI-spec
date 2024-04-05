@@ -116,8 +116,9 @@ release_spmm_descr
 
    namespace oneapi::mkl::sparse {
 
-       void release_spmm_descr (sycl::queue                       &queue,
-                                oneapi::mkl::sparse::spmm_descr_t spmm_descr);
+       sycl::event release_spmm_descr (sycl::queue                       &queue,
+                                       oneapi::mkl::sparse::spmm_descr_t spmm_descr,
+                                       const std::vector<sycl::event>    &dependencies = {});
 
    }
 
@@ -130,6 +131,17 @@ release_spmm_descr
 
    spmm_descr
       Descriptor initialized with ``init_spmm_descr``.
+
+   dependencies
+      List of events to depend on before starting asynchronous tasks that access
+      data on the device. Defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Return Values
+
+   Output event that can be waited upon or added as a dependency for the
+   completion of the function.
 
 .. container:: section
 

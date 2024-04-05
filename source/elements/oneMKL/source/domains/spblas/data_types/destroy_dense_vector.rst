@@ -24,8 +24,9 @@ If a USM pointer was provided, the data is not free'd.
 
    namespace oneapi::mkl::sparse {
 
-       void destroy_dense_vector (sycl::queue                                &queue,
-                                  oneapi::mkl::sparse::dense_vector_handle_t dvhandle);
+       sycl::event destroy_dense_vector (sycl::queue                                &queue,
+                                         oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
+                                         const std::vector<sycl::event>             &dependencies = {});
 
    }
 
@@ -38,6 +39,17 @@ If a USM pointer was provided, the data is not free'd.
 
    dvhandle
       Handle initialized with :ref:`onemkl_sparse_create_dense_vector`.
+
+   dependencies
+      List of events to depend on before starting asynchronous tasks that access
+      data on the device. Defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Return Values
+
+   Output event that can be waited upon or added as a dependency for the
+   completion of the function.
 
 .. container:: section
 

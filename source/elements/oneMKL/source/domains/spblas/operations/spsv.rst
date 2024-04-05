@@ -117,8 +117,9 @@ release_spsv_descr
 
    namespace oneapi::mkl::sparse {
 
-       void release_spsv_descr (sycl::queue                       &queue,
-                                oneapi::mkl::sparse::spsv_descr_t spsv_descr);
+       sycl::event release_spsv_descr (sycl::queue                       &queue,
+                                       oneapi::mkl::sparse::spsv_descr_t spsv_descr,
+                                       const std::vector<sycl::event>    &dependencies = {});
 
    }
 
@@ -131,6 +132,17 @@ release_spsv_descr
 
    spsv_descr
       Descriptor initialized with ``init_spsv_descr``.
+
+   dependencies
+      List of events to depend on before starting asynchronous tasks that access
+      data on the device. Defaults to no dependencies.
+
+.. container:: section
+
+   .. rubric:: Return Values
+
+   Output event that can be waited upon or added as a dependency for the
+   completion of the function.
 
 .. container:: section
 
