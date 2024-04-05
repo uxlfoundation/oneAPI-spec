@@ -16,11 +16,15 @@ product defined as:
 
 .. math::
 
-      y \leftarrow \alpha \cdot \text{op}(A) \cdot x + \beta \cdot y
+   y \leftarrow \alpha \cdot \text{op}(A) \cdot x + \beta \cdot y
 
-where :math:`\alpha` and :math:`\beta` are scalars, :math:`A` is a sparse
-matrix, :math:`x` and :math:`y` are dense vectors, :math:`\text{op}()` is a
-matrix modifier for :math:`A` using the following description:
+
+| where:
+|   :math:`\alpha` and :math:`\beta` are scalars,
+|   :math:`x` is a dense vector of size ``n``,
+|   :math:`y` is a dense vector of size ``m``,
+|   :math:`\text{op}(A)` is a transformed sparse matrix of size ``m``-by-``n``,
+|   :math:`\text{op}()` is the transform operation using the following description:
 
 .. math::
 
@@ -28,9 +32,6 @@ matrix modifier for :math:`A` using the following description:
                                  A^\mathsf{T},& \text{oneapi::mkl::transpose::trans}\\
                                  A^\mathsf{H},& \text{oneapi::mkl::transpose::conjtrans}
                    \end{cases}
-
-and :math:`\text{op}(A)` is an ``m``-by-``n`` matrix , :math:`x` is a vector of
-size ``n`` and :math:`y` is a vector of size ``m``.
 
 .. _onemkl_sparse_spmv_descr:
 

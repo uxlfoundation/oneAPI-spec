@@ -17,11 +17,14 @@ for a square matrix:
 
 .. math::
 
-      \text{op}(A) \cdot y \leftarrow \alpha \cdot x
+   \text{op}(A) \cdot y \leftarrow \alpha \cdot x
 
-where :math:`\alpha` is a scalar, :math:`A` is a triangular sparse matrix,
-:math:`x` and :math:`y` are dense vectors, :math:`\text{op}()` is a matrix
-modifier for :math:`A` using the following description:
+
+| where:
+|   :math:`\alpha` is a scalar,
+|   :math:`x` and :math:`y` are dense vectors of size ``m``,
+|   :math:`\text{op}(A)` is a transformed sparse matrix of size ``m``-by-``m``,
+|   :math:`\text{op}()` is the transform operation using the following description:
 
 .. math::
 
@@ -29,9 +32,6 @@ modifier for :math:`A` using the following description:
                                  A^\mathsf{T},& \text{oneapi::mkl::transpose::trans}\\
                                  A^\mathsf{H},& \text{oneapi::mkl::transpose::conjtrans}
                    \end{cases}
-
-and :math:`\text{op}(A)` is an ``m``-by-``m`` matrix , :math:`x` and :math:`y`
-are vectors of size ``m``.
 
 .. _onemkl_sparse_spsv_descr:
 

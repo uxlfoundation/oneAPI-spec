@@ -18,9 +18,13 @@ product defined as:
 
    C \leftarrow \alpha \cdot \text{op}(A) \cdot \text{op}(B) + \beta \cdot C
 
-where :math:`\alpha` and :math:`\beta` are scalars, :math:`A` is a sparse
-matrix, :math:`B` and :math:`C` are dense matrices, :math:`\text{op}()` is a
-matrix modifier for :math:`A` and :math:`B` using the following description:
+
+| where:
+|   :math:`\alpha` and :math:`\beta` are scalars,
+|   :math:`C` is a dense matrix of size ``m``-by-``n``,
+|   :math:`\text{op}(A)` is a transformed sparse matrix of size ``m``-by-``k``,
+|   :math:`\text{op}(B)` is a transformed dense matrix of size ``k``-by-``n``,
+|   :math:`\text{op}()` is the transform operation using the following description:
 
 .. math::
 
@@ -28,9 +32,6 @@ matrix modifier for :math:`A` and :math:`B` using the following description:
                                  A^\mathsf{T},& \text{oneapi::mkl::transpose::trans}\\
                                  A^\mathsf{H},& \text{oneapi::mkl::transpose::conjtrans}
                    \end{cases}
-
-and :math:`\text{op}(A)` is an ``m``-by-``k`` matrix , :math:`\text{op}(B)` is
-an ``k``-by-``n`` matrix, and :math:`C` is an ``m``-by-``n`` matrix.
 
 .. _onemkl_sparse_spmm_descr:
 
