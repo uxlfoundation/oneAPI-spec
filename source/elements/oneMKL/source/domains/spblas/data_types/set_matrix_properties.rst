@@ -39,8 +39,12 @@ Matrix properties
           the matrix is square, the user data contain both lower and upper
           triangular regions, and that its transpose is equal to itself.
       * - ``sorted``
-        - Guarantees that the column indices are sorted for a given row. Only
-          available for the CSR format. TODO: Confirm the description.
+        - | Guarantees that the user-provided matrix data has some sorting
+            property.
+          | For CSR this guarantees that the column indices are sorted in
+            ascending order for a given row.
+          | For COO this guarantees that that the row indices are sorted in
+            ascending order.
 
 set_matrix_properties
 ---------------------
