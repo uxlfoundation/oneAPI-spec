@@ -28,14 +28,9 @@ addition (sparse matrix + sparse matrix = sparse matrix), and multiplication of
 two sparse matrices, the number of non-zero elements in the output sparse matrix
 is not known in advance and must be calculated as part of the operation API.
 Such APIs are currently not a part of the current oneMKL Specification, but will
-be added in the future. Therefore, it is important for the ``create_coo_matrix``
-API to be able to handle multiple calls to build the sparse matrix as function
-arguments become known and arrays are allocated with the correct sizes. In
-particular, the ``create_coo_matrix`` API must handle the case where the number
-of non-zero elements in the matrix are unknown and the matrix arrays are
-``nullptr`` or zero-sized ``sycl::buffer`` objects as applicable. This behavior
-is currently left to be implementation-defined, but may be clarified in the
-oneMKL Specification in the future.
+be added in the future. This behavior is currently left to be
+implementation-defined, but may be clarified in the oneMKL Specification in the
+future.
 
 See :ref:`onemkl_sparse_matrix_handle`.
 
