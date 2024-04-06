@@ -200,7 +200,7 @@ spsv
        void spsv_buffer_size(
            sycl::queue                                &queue,
            oneapi::mkl::transpose                     opA,
-           void*                                      alpha,
+           const void*                                alpha,
            oneapi::mkl::sparse::matrix_view           A_view,
            oneapi::mkl::sparse::matrix_handle_t       A_handle,
            oneapi::mkl::sparse::dense_vector_handle_t x_handle,
@@ -212,7 +212,7 @@ spsv
        void spsv_optimize(
            sycl::queue                                &queue,
            oneapi::mkl::transpose                     opA,
-           void*                                      alpha,
+           const void*                                alpha,
            oneapi::mkl::sparse::matrix_view           A_view,
            oneapi::mkl::sparse::matrix_handle_t       A_handle,
            oneapi::mkl::sparse::dense_vector_handle_t x_handle,
@@ -224,7 +224,7 @@ spsv
        sycl::event spsv_optimize(
            sycl::queue                                &queue,
            oneapi::mkl::transpose                     opA,
-           void*                                      alpha,
+           const void*                                alpha,
            oneapi::mkl::sparse::matrix_view           A_view,
            oneapi::mkl::sparse::matrix_handle_t       A_handle,
            oneapi::mkl::sparse::dense_vector_handle_t x_handle,
@@ -237,7 +237,7 @@ spsv
        sycl::event spsv(
            sycl::queue                                &queue,
            oneapi::mkl::transpose                     opA,
-           void*                                      alpha,
+           const void*                                alpha,
            oneapi::mkl::sparse::matrix_view           A_view,
            oneapi::mkl::sparse::matrix_handle_t       A_handle,
            oneapi::mkl::sparse::dense_vector_handle_t x_handle,
