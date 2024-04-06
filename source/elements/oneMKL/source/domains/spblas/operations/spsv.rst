@@ -315,8 +315,8 @@ spsv
    .. rubric:: Output Parameters
 
    temp_buffer_size
-      Output buffer size in bytes. A temporary workspace of this size must be
-      allocated to perform the specified spsv.
+      Output buffer size in bytes. A temporary workspace of at least this size
+      must be allocated to perform the specified spsv.
 
    y_handle
       Dense vector handle object representing :math:`y`, result of the ``spsv``

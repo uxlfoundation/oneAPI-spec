@@ -328,8 +328,8 @@ spmv
    .. rubric:: Output Parameters
 
    temp_buffer_size
-      Output buffer size in bytes. A temporary workspace of this size must be
-      allocated to perform the specified spmv.
+      Output buffer size in bytes. A temporary workspace of at least this size
+      must be allocated to perform the specified spmv.
 
    y_handle
       Dense vector handle object representing :math:`y`, result of the ``spmv``

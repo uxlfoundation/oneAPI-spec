@@ -338,8 +338,8 @@ spmm
    .. rubric:: Output Parameters
 
    temp_buffer_size
-      Output buffer size in bytes. A temporary workspace of this size must be
-      allocated to perform the specified spmm.
+      Output buffer size in bytes. A temporary workspace of at least this size
+      must be allocated to perform the specified spmm.
 
    C_handle
       Dense matrix handle object representing :math:`C`, result of the ``spmm``
