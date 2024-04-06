@@ -324,10 +324,10 @@ spmm
         ``temp_buffer_size`` bytes and the address aligned on the size of the
         handles' data type.
       | If it is a buffer, its lifetime is extended until the :ref:`spmm
-        descriptor<onemkl_sparse_spmm_descr>` is released. The workspace cannot
-        be a sub-buffer.
-      | If it is a USM pointer, it must not be free'd until ``spmm`` has
-        completed. The data must be accessible on the device.
+        descriptor<onemkl_sparse_spmm_descr>` is released or the workspace is
+        reset by ``spmm_optimize``. The workspace cannot be a sub-buffer.
+      | If it is a USM pointer, it must not be free'd until the corresponding
+        ``spmm`` has completed. The data must be accessible on the device.
 
    dependencies
       List of events to depend on before starting asynchronous tasks that access
