@@ -2,16 +2,16 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_sparse_destroy_sparse_matrix:
+.. _onemkl_sparse_release_sparse_matrix:
 
-destroy_sparse_matrix
+release_sparse_matrix
 =====================
 
 Destroys a ``matrix_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::destroy_sparse_matrix`` function frees the resources
+The ``oneapi::mkl::sparse::release_sparse_matrix`` function frees the resources
 allocated for the handle.
 
 If a buffer was provided, its reference count is decremented.
@@ -24,7 +24,7 @@ If a USM pointer was provided, the data is not free'd.
 
    namespace oneapi::mkl::sparse {
 
-       sycl::event destroy_sparse_matrix (sycl::queue                          &queue,
+       sycl::event release_sparse_matrix (sycl::queue                          &queue,
                                           oneapi::mkl::sparse::matrix_handle_t smhandle,
                                           const std::vector<sycl::event>       &dependencies = {});
 
@@ -38,8 +38,8 @@ If a USM pointer was provided, the data is not free'd.
       The SYCL command queue which will be used for SYCL kernels execution.
 
    smhandle
-      Handle initialized with :ref:`onemkl_sparse_create_csr_matrix` or
-      :ref:`onemkl_sparse_create_coo_matrix`.
+      Handle initialized with :ref:`onemkl_sparse_init_csr_matrix` or
+      :ref:`onemkl_sparse_init_coo_matrix`.
 
    dependencies
       List of events to depend on before starting asynchronous tasks that access

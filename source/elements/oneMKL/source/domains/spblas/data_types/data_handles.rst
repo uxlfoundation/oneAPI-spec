@@ -33,9 +33,9 @@ Dense vector handle
 
    See related functions:
 
-   - :ref:`onemkl_sparse_create_dense_vector`
+   - :ref:`onemkl_sparse_init_dense_vector`
    - :ref:`onemkl_sparse_set_dense_vector_data`
-   - :ref:`onemkl_sparse_destroy_dense_vector`
+   - :ref:`onemkl_sparse_release_dense_vector`
 
 .. _onemkl_sparse_dense_matrix_handle:
 
@@ -63,9 +63,9 @@ Dense matrix handle
 
    See related functions:
 
-   - :ref:`onemkl_sparse_create_dense_matrix`
+   - :ref:`onemkl_sparse_init_dense_matrix`
    - :ref:`onemkl_sparse_set_dense_matrix_data`
-   - :ref:`onemkl_sparse_destroy_dense_matrix`
+   - :ref:`onemkl_sparse_release_dense_matrix`
 
 .. _onemkl_sparse_matrix_handle:
 
@@ -93,29 +93,29 @@ Sparse matrix handle
 
    See related functions:
 
-   - :ref:`onemkl_sparse_create_coo_matrix`
-   - :ref:`onemkl_sparse_create_csr_matrix`
+   - :ref:`onemkl_sparse_init_coo_matrix`
+   - :ref:`onemkl_sparse_init_csr_matrix`
    - :ref:`onemkl_sparse_set_coo_matrix_data`
    - :ref:`onemkl_sparse_set_csr_matrix_data`
    - :ref:`onemkl_sparse_set_matrix_properties`
-   - :ref:`onemkl_sparse_destroy_sparse_matrix`
+   - :ref:`onemkl_sparse_release_sparse_matrix`
 
    See a description of the supported :ref:`sparse formats<onemkl_sparse_format_descriptions>`.
 
 .. toctree::
    :hidden:
 
-   create_dense_vector
-   create_dense_matrix
-   create_coo_matrix
-   create_csr_matrix
+   init_dense_vector
+   init_dense_matrix
+   init_coo_matrix
+   init_csr_matrix
+   release_dense_vector
+   release_dense_matrix
+   release_sparse_matrix
    set_dense_vector_data
    set_dense_matrix_data
    set_coo_matrix_data
    set_csr_matrix_data
-   destroy_dense_vector
-   destroy_dense_matrix
-   destroy_sparse_matrix
    set_matrix_properties
    format-descriptions
 

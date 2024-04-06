@@ -16,12 +16,12 @@ The ``oneapi::mkl::sparse::set_csr_matrix_data`` function sets new data to the
 
 In the case of buffers, the reference count of the provided buffer is
 incremented which extends the lifetime of the underlying buffer until the
-``smhandle`` is destroyed with ``destroy_sparse_matrix`` or the data is reset with
-``set_csr_matrix_data``.
+``smhandle`` is destroyed with ``release_sparse_matrix`` or the data is reset
+with ``set_csr_matrix_data``.
 
 In the case of USM, the object does not take ownership of the data.
 
-Also see :ref:`onemkl_sparse_create_csr_matrix`.
+Also see :ref:`onemkl_sparse_init_csr_matrix`.
 
 .. _onemkl_sparse_set_csr_matrix_data_buffer:
 
@@ -67,7 +67,7 @@ set_csr_matrix_data (Buffer version)
       The SYCL command queue which will be used for SYCL kernels execution.
 
    smhandle
-      Handle already initialized with :ref:`onemkl_sparse_create_csr_matrix`.
+      Handle already initialized with :ref:`onemkl_sparse_init_csr_matrix`.
 
    num_rows
       Number of rows of the provided data ``val``. Must be at least 0.
@@ -163,7 +163,7 @@ set_csr_matrix_data (USM version)
       The SYCL command queue which will be used for SYCL kernels execution.
 
    smhandle
-      Handle already initialized with :ref:`onemkl_sparse_create_csr_matrix`.
+      Handle already initialized with :ref:`onemkl_sparse_init_csr_matrix`.
 
    num_rows
       Number of rows of the provided data ``val``. Must be at least 0.

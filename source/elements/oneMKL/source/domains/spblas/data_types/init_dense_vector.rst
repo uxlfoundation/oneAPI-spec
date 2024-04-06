@@ -2,31 +2,31 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_sparse_create_dense_vector:
+.. _onemkl_sparse_init_dense_vector:
 
-create_dense_vector
-===================
+init_dense_vector
+=================
 
 Initializes a ``dense_vector_handle_t`` object with the provided data.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::create_dense_vector`` function initializes the
+The ``oneapi::mkl::sparse::init_dense_vector`` function initializes the
 ``dense_vector_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
 incremented which extends the lifetime of the underlying buffer until the dense
-vector handle is destroyed with ``destroy_dense_vector`` or the data is reset
+vector handle is destroyed with ``release_dense_vector`` or the data is reset
 with ``set_dense_vector_data``.
 
 In the case of USM, the object does not take ownership of the data.
 
 See :ref:`onemkl_sparse_dense_vector_handle`.
 
-.. _onemkl_sparse_create_dense_vector_buffer:
+.. _onemkl_sparse_init_dense_vector_buffer:
 
-create_dense_vector (Buffer version)
-------------------------------------
+init_dense_vector (Buffer version)
+----------------------------------
 
 .. rubric:: Syntax
 
@@ -35,10 +35,10 @@ create_dense_vector (Buffer version)
    namespace oneapi::mkl::sparse {
 
        template <typename dataType>
-       void create_dense_vector (sycl::queue                                &queue,
-                                 oneapi::mkl::sparse::dense_vector_handle_t *p_dvhandle,
-                                 std::int64_t                               size,
-                                 sycl::buffer<dataType, 1>                  &val);
+       void init_dense_vector (sycl::queue                                &queue,
+                               oneapi::mkl::sparse::dense_vector_handle_t *p_dvhandle,
+                               std::int64_t                               size,
+                               sycl::buffer<dataType, 1>                  &val);
 
    }
 
@@ -90,10 +90,10 @@ create_dense_vector (Buffer version)
    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
-.. _onemkl_sparse_create_dense_vector_usm:
+.. _onemkl_sparse_init_dense_vector_usm:
 
-create_dense_vector (USM version)
----------------------------------
+init_dense_vector (USM version)
+-------------------------------
 
 .. rubric:: Syntax
 
@@ -102,10 +102,10 @@ create_dense_vector (USM version)
    namespace oneapi::mkl::sparse {
 
        template <typename dataType>
-       void create_dense_vector (sycl::queue                                &queue,
-                                 oneapi::mkl::sparse::dense_vector_handle_t *p_dvhandle,
-                                 std::int64_t                               size,
-                                 dataType                                   *val);
+       void init_dense_vector (sycl::queue                                &queue,
+                               oneapi::mkl::sparse::dense_vector_handle_t *p_dvhandle,
+                               std::int64_t                               size,
+                               dataType                                   *val);
 
    }
 

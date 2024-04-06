@@ -2,16 +2,16 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_sparse_destroy_dense_vector:
+.. _onemkl_sparse_release_dense_matrix:
 
-destroy_dense_vector
+release_dense_matrix
 ====================
 
-Destroys a ``dense_vector_handle_t`` object.
+Destroys a ``dense_matrix_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::destroy_dense_vector`` function frees the resources
+The ``oneapi::mkl::sparse::release_dense_matrix`` function frees the resources
 allocated for the handle.
 
 If a buffer was provided, its reference count is decremented.
@@ -24,8 +24,8 @@ If a USM pointer was provided, the data is not free'd.
 
    namespace oneapi::mkl::sparse {
 
-       sycl::event destroy_dense_vector (sycl::queue                                &queue,
-                                         oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
+       sycl::event release_dense_matrix (sycl::queue                                &queue,
+                                         oneapi::mkl::sparse::dense_matrix_handle_t dmhandle,
                                          const std::vector<sycl::event>             &dependencies = {});
 
    }
@@ -37,8 +37,8 @@ If a USM pointer was provided, the data is not free'd.
    queue
       The SYCL command queue which will be used for SYCL kernels execution.
 
-   dvhandle
-      Handle initialized with :ref:`onemkl_sparse_create_dense_vector`.
+   dmhandle
+      Handle initialized with :ref:`onemkl_sparse_init_dense_matrix`.
 
    dependencies
       List of events to depend on before starting asynchronous tasks that access

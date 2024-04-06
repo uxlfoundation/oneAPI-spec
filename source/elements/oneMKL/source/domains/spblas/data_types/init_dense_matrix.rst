@@ -2,31 +2,31 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_sparse_create_dense_matrix:
+.. _onemkl_sparse_init_dense_matrix:
 
-create_dense_matrix
-===================
+init_dense_matrix
+=================
 
 Initializes a ``dense_matrix_handle_t`` object with the provided data.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::create_dense_matrix`` function initializes the
+The ``oneapi::mkl::sparse::init_dense_matrix`` function initializes the
 ``dense_matrix_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
 incremented which extends the lifetime of the underlying buffer until the dense
-matrix handle is destroyed with ``destroy_dense_matrix`` or the data is reset
+matrix handle is destroyed with ``release_dense_matrix`` or the data is reset
 with ``set_dense_matrix_data``.
 
 In the case of USM, the object does not take ownership of the data.
 
 See :ref:`onemkl_sparse_dense_matrix_handle`.
 
-.. _onemkl_sparse_create_dense_matrix_buffer:
+.. _onemkl_sparse_init_dense_matrix_buffer:
 
-create_dense_matrix (Buffer version)
-------------------------------------
+init_dense_matrix (Buffer version)
+----------------------------------
 
 .. rubric:: Syntax
 
@@ -35,13 +35,13 @@ create_dense_matrix (Buffer version)
    namespace oneapi::mkl::sparse {
 
        template <typename dataType>
-       void create_dense_matrix (sycl::queue                                &queue,
-                                 oneapi::mkl::sparse::dense_matrix_handle_t *p_dmhandle,
-                                 std::int64_t                               num_rows,
-                                 std::int64_t                               num_cols,
-                                 std::int64_t                               ld,
-                                 layout                                     dense_layout,
-                                 sycl::buffer<dataType, 1>                  &val);
+       void init_dense_matrix (sycl::queue                                &queue,
+                               oneapi::mkl::sparse::dense_matrix_handle_t *p_dmhandle,
+                               std::int64_t                               num_rows,
+                               std::int64_t                               num_cols,
+                               std::int64_t                               ld,
+                               layout                                     dense_layout,
+                               sycl::buffer<dataType, 1>                  &val);
 
    }
 
@@ -105,10 +105,10 @@ create_dense_matrix (Buffer version)
    | :ref:`oneapi::mkl::unimplemented<onemkl_exception_unimplemented>`
    | :ref:`oneapi::mkl::unsupported_device<onemkl_exception_unsupported_device>`
 
-.. _onemkl_sparse_create_dense_matrix_usm:
+.. _onemkl_sparse_init_dense_matrix_usm:
 
-create_dense_matrix (USM version)
----------------------------------
+init_dense_matrix (USM version)
+-------------------------------
 
 .. rubric:: Syntax
 
@@ -117,13 +117,13 @@ create_dense_matrix (USM version)
    namespace oneapi::mkl::sparse {
 
        template <typename dataType>
-       void create_dense_matrix (sycl::queue                                &queue,
-                                 oneapi::mkl::sparse::dense_matrix_handle_t *p_dmhandle,
-                                 std::int64_t                               num_rows,
-                                 std::int64_t                               num_cols,
-                                 std::int64_t                               ld,
-                                 layout                                     dense_layout,
-                                 dataType                                   *val);
+       void init_dense_matrix (sycl::queue                                &queue,
+                               oneapi::mkl::sparse::dense_matrix_handle_t *p_dmhandle,
+                               std::int64_t                               num_rows,
+                               std::int64_t                               num_cols,
+                               std::int64_t                               ld,
+                               layout                                     dense_layout,
+                               dataType                                   *val);
 
    }
 

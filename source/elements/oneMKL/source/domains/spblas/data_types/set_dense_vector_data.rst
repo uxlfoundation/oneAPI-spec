@@ -16,12 +16,12 @@ The ``oneapi::mkl::sparse::set_dense_vector_data`` function sets new data to the
 
 In the case of buffers, the reference count of the provided buffer is
 incremented which extends the lifetime of the underlying buffer until the
-``dvhandle`` is destroyed with ``destroy_dense_vector`` or the data is reset
+``dvhandle`` is destroyed with ``release_dense_vector`` or the data is reset
 with ``set_dense_vector_data``.
 
 In the case of USM, the object does not take ownership of the data.
 
-Also see :ref:`onemkl_sparse_create_dense_vector`.
+Also see :ref:`onemkl_sparse_init_dense_vector`.
 
 .. _onemkl_sparse_set_dense_vector_data_buffer:
 
@@ -59,7 +59,7 @@ set_dense_vector_data (Buffer version)
       The SYCL command queue which will be used for SYCL kernels execution.
 
    dvhandle
-      Handle already initialized with :ref:`onemkl_sparse_create_dense_vector`.
+      Handle already initialized with :ref:`onemkl_sparse_init_dense_vector`.
 
    size
       Number of elements of the provided data ``val``. Must be at least 0.
@@ -117,7 +117,7 @@ set_dense_vector_data (USM version)
       The SYCL command queue which will be used for SYCL kernels execution.
 
    dvhandle
-      Handle already initialized with :ref:`onemkl_sparse_create_dense_vector`.
+      Handle already initialized with :ref:`onemkl_sparse_init_dense_vector`.
 
    size
       Number of elements of the provided data ``val``. Must be at least 1.
