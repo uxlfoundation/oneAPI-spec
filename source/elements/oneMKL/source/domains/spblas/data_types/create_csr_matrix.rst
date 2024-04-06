@@ -7,7 +7,8 @@
 create_csr_matrix
 =================
 
-Initializes a ``matrix_handle_t`` object with the provided CSR data.
+Initializes a ``matrix_handle_t`` object with the provided Compressed Sparse Row
+(CSR) data.
 
 .. rubric:: Description and Assumptions
 
@@ -26,11 +27,10 @@ the number of non-zero elements in the sparse matrix as an argument. However, in
 certain math operations where the output is a sparse matrix, e.g., sparse matrix
 addition (sparse matrix + sparse matrix = sparse matrix), and multiplication of
 two sparse matrices, the number of non-zero elements in the output sparse matrix
-is not known in advance and must be calculated as part of the operation API.
-Such APIs are currently not a part of the current oneMKL Specification, but will
-be added in the future. This behavior is currently left to be
-implementation-defined, but may be clarified in the oneMKL Specification in the
-future.
+are not known in advance and must be calculated as part of the operation API.
+Such APIs are currently not part of the oneMKL Specification, but will be added
+in the future. This behavior is currently left to be implementation-defined, but
+may be clarified in the oneMKL Specification in the future.
 
 See :ref:`onemkl_sparse_matrix_handle`.
 

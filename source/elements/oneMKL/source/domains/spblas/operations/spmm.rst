@@ -7,12 +7,12 @@
 spmm
 ====
 
-Computes a sparse matrix-dense matrix product.
+Computes a sparse matrix by dense matrix product.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::spmm`` routine computes a sparse matrix-dense matrix
-product defined as:
+The ``oneapi::mkl::sparse::spmm`` routine computes a sparse matrix by dense
+matrix product defined as:
 
 .. math::
 

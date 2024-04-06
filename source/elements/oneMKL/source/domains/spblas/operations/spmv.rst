@@ -7,12 +7,12 @@
 spmv
 ====
 
-Computes a sparse matrix-dense vector product.
+Computes a sparse matrix by dense vector product.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::spmv`` routine computes a sparse matrix-dense vector
-product defined as:
+The ``oneapi::mkl::sparse::spmv`` routine computes a sparse matrix by dense
+vector product defined as:
 
 .. math::
 

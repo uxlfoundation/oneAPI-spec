@@ -82,7 +82,7 @@ matrix_view
    be read without changing the matrix's data.
 
    See :ref:`onemkl_sparse_matrix_descriptor`, :ref:`onemkl_enum_uplo` and
-   :ref:`onemkl_enum_diag` fot a description of the members.
+   :ref:`onemkl_enum_diag` for a description of the members.
 
    The ``uplo_view`` member is ignored if ``type_view`` is ``general`` or
    ``diagonal``.
