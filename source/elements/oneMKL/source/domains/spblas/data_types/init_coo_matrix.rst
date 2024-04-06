@@ -85,8 +85,8 @@ init_coo_matrix (Buffer version)
       Number of columns of the provided data ``val``. Must be at least 0.
 
    nnz
-      Number of non-zero entries in the matrix (which may include explicit
-      zeros). Must be at least 0.
+      The number of explicit entries, also known as Number of Non-Zero elements.
+      Must be at least 0.
 
    index
       Indicates how input arrays are indexed. The possible options are described
@@ -103,9 +103,10 @@ init_coo_matrix (Buffer version)
       detailed description of ``col_ind``.
 
    val
-      Buffer of length at least ``nnz`` containing non-zero elements (and
-      possibly explicit zeros) of the input matrix. Refer to
-      :ref:`onemkl_sparse_coo` format for detailed description of ``val``.
+      Buffer of length at least ``nnz``. Contains the data of the input matrix
+      which is not implicitly zero. The remaining input values are implicit
+      zeros. Refer to :ref:`onemkl_sparse_coo` format for detailed description
+      of ``val``.
 
 .. container:: section
 
@@ -190,8 +191,8 @@ init_coo_matrix (USM version)
       Number of columns of the provided data ``val``. Must be at least 0.
 
    nnz
-      Number of non-zero entries in the matrix (which may include explicit
-      zeros). Must be at least 0.
+      The number of explicit entries, also known as Number of Non-Zero elements.
+      Must be at least 0.
 
    index
       Indicates how input arrays are indexed. The possible options are described
@@ -210,11 +211,11 @@ init_coo_matrix (USM version)
       device.
 
    val
-      USM pointer of length at least ``nnz`` containing non-zero elements (and
-      possibly explicit zeros) of the input matrix. Refer to
-      :ref:`onemkl_sparse_coo` format for detailed description of ``val``. The
-      data must be accessible on the device. Using a USM pointer with a smaller
-      allocated memory size is undefined behavior.
+      USM pointer of length at least ``nnz``. Contains the data of the input
+      matrix which is not implicitly zero. The remaining input values are
+      implicit zeros. Refer to :ref:`onemkl_sparse_coo` format for detailed
+      description of ``val``. The data must be accessible on the device. Using a
+      USM pointer with a smaller allocated memory size is undefined behavior.
 
 .. container:: section
 
