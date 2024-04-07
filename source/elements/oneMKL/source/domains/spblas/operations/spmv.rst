@@ -261,8 +261,10 @@ spmv
 
    .. rubric:: Notes
 
-   - ``spmv_buffer_size`` and ``spmv_optimize`` must be called at least once before ``spmv``
-     with the same arguments. ``spmv`` can then be called multiple times.
+   - ``spmv_buffer_size`` and ``spmv_optimize`` must be called at least once
+     before ``spmv`` with the same arguments. ``spmv`` can then be called
+     multiple times. Calling ``spmv_optimize`` on the same descriptor can reset
+     some of the descriptor's data such as the ``workspace``.
    - The data of the handles can be reset-ed before each call to ``spmv``.
    - ``spmv_optimize`` and ``spmv`` are asynchronous.
    - The algorithm defaults to ``spmv_alg::default_alg`` if a backend does not

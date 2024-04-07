@@ -267,8 +267,10 @@ spmm
 
    .. rubric:: Notes
 
-   - ``spmm_buffer_size`` and ``spmm_optimize`` must be called at least once before ``spmm``
-     with the same arguments. ``spmm`` can then be called multiple times.
+   - ``spmm_buffer_size`` and ``spmm_optimize`` must be called at least once
+     before ``spmm`` with the same arguments. ``spmm`` can then be called
+     multiple times. Calling ``spmm_optimize`` on the same descriptor can reset
+     some of the descriptor's data such as the ``workspace``.
    - The data of the handles can be reset-ed before each call to ``spmm``.
    - ``spmm_optimize`` and ``spmm`` are asynchronous.
    - The algorithm defaults to ``spmm_alg::default_alg`` if a backend does not
