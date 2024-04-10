@@ -24,6 +24,9 @@ jobs:
       uses: pre-commit/action@v3.0.1
 
   build:
+    permissions:
+      # needed for upload-artifact
+      actions: write
     runs-on: ${{ github.repository_owner == 'oneapi-src' && 'intel-ubuntu-latest' || 'ubuntu-latest' }}
     steps:
     - uses: actions/checkout@v4.1.2
