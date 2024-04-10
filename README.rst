@@ -126,11 +126,11 @@ Use the reuse_ tool
 
 Code examples::
 
-  reuse addheader --copyright "Intel Corporation" --year 2020 --license MIT source/examples/host-task.cpp
+  reuse addheader --copyright "Constributors to the oneapi-spec project" --license MIT source/examples/host-task.cpp
 
 Doc sources::
 
-  reuse addheader --copyright "Intel Corporation" --year 2020 --license CC-BY-4.0 source/index.rst
+  reuse addheader --copyright "Constributors to the oneapi-spec project" --license CC-BY-4.0 source/index.rst
 
 
 ----------------
