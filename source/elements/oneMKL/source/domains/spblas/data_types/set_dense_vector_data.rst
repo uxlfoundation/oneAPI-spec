@@ -38,7 +38,7 @@ set_dense_vector_data (Buffer version)
        void set_dense_vector_data (sycl::queue                                &queue,
                                    oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
                                    std::int64_t                               size,
-                                   sycl::buffer<dataType, 1>                  &val);
+                                   sycl::buffer<dataType, 1>                  val);
 
    }
 

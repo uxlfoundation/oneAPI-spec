@@ -41,9 +41,9 @@ set_coo_matrix_data (Buffer version)
                                  std::int64_t                         num_cols,
                                  std::int64_t                         nnz,
                                  index_base                           index,
-                                 sycl::buffer<indexType, 1>           &row_ind,
-                                 sycl::buffer<indexType, 1>           &col_ind,
-                                 sycl::buffer<dataType, 1>            &val);
+                                 sycl::buffer<indexType, 1>           row_ind,
+                                 sycl::buffer<indexType, 1>           col_ind,
+                                 sycl::buffer<dataType, 1>            val);
 
    }
 

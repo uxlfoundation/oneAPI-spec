@@ -41,7 +41,7 @@ init_dense_matrix (Buffer version)
                                std::int64_t                               num_cols,
                                std::int64_t                               ld,
                                layout                                     dense_layout,
-                               sycl::buffer<dataType, 1>                  &val);
+                               sycl::buffer<dataType, 1>                  val);
 
    }
 
