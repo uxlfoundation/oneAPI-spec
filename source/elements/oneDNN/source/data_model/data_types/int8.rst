@@ -40,7 +40,7 @@ where :math:`scale_{x}` is a *scaling factor* in float format,
 to the arrays. In order to provide best performance, oneDNN does not
 compute those scaling factors and zero-points as part of primitive
 computation. Those should be provided by the user through the
-:ref:`attribute mecanism<attributes-quantization-label>`.
+:ref:`attribute mechanism<attributes-quantization-label>`.
 
 These quantization parameters can either be computed ahead of time
 using calibration tools (*static* quantization) or at runtime based on
