@@ -117,10 +117,10 @@ parameter.
       matrices ``A``. See :ref:`onemkl_datatypes` for more details.
 
    m
-      Number of rows of op(``A``). Must be at least zero.
+      Number of rows of ``A``. Must be at least zero.
 
    n
-      Number of columns of op(``A``). Must be at least zero.
+      Number of columns of ``A``. Must be at least zero.
 
    alpha
       Scaling factor for the matrix-vector products.
@@ -297,11 +297,11 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    m
       Array of ``group_count`` integers. ``m[i]`` specifies the
-      number of rows of op(``A``) for every matrix in group ``i``. All entries must be at least zero.
+      number of rows of ``A`` for every matrix in group ``i``. All entries must be at least zero.
 
    n
       Array of ``group_count`` integers. ``n[i]`` specifies the
-      number of columns of op(``A``) for every matrix in group ``i``. All entries must be at least zero.
+      number of columns of ``A`` for every matrix in group ``i``. All entries must be at least zero.
 
    alpha
       Array of ``group_count`` scalar elements. ``alpha[i]`` specifies
@@ -429,10 +429,10 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       matrices ``A``. See :ref:`onemkl_datatypes` for more details.
 
    m
-      Number of rows of op(``A``). Must be at least zero.
+      Number of rows of ``A``. Must be at least zero.
 
    n
-      Number of columns of op(``A``). Must be at least zero.
+      Number of columns of ``A``. Must be at least zero.
 
    alpha
       Scaling factor for the matrix-vector products. See :ref:`value_or_pointer` for more details.
