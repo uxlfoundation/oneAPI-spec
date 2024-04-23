@@ -79,42 +79,8 @@ and so on specified in `RFC 2119`_.
 Contribution Guidelines
 =======================
 
-This specification is a continuation of Intel’s decades-long history
-of working with standards groups and industry/academia initiatives
-such as The Khronos Group, to create and define specifications in an
-open and fair process to achieve interoperability and
-interchangeability. oneAPI is intended to be an open specification and
-we encourage you to help us make it better. Your feedback is optional,
-but to enable Intel to incorporate any feedback you may provide to
-this specification, and to further upstream your feedback to other
-standards bodies, including The Khronos Group SYCL specification,
-please submit your feedback under the terms and conditions below. Any
-contribution of your feedback to the oneAPI Specification does not
-prohibit you from also contributing your feedback directly to other
-standard bodies, including The Khronos Group under their respective
-submission policies.
-
-Contribute to the oneAPI Specification by opening issues in the oneAPI
-Specification `GitHub repository
-<https://github.com/oneapi-src/oneapi-spec>`__.
-
-Sign your work
---------------
-
-Please include a signed-off-by tag in every contribution of your
-feedback. By including a signed-off-by tag, you agree that: (a) you
-have a right to license your feedback to Intel; (b) Intel will be free
-to use, disclose, reproduce, modify, license, or otherwise distribute
-your feedback at its sole discretion without any obligations or
-restrictions of any kind, including without limitation, intellectual
-property rights or licensing obligations; and (c) your feedback will
-be public and that a record of your feedback may be maintained
-indefinitely.
-
-If you agree to the above, every contribution of your feedback must
-include the following line using your real name and email address:
-Signed-off-by: Joe Smith joe.smith@email.com
-
+See Contributing_.
 
 .. [*]: Other names and brands may be claimed as the property of others.
 .. _`RFC 2119`: https://tools.ietf.org/html/rfc2119
+.. _Contributing: https://github.com/uxlfoundation/CONTRIBUTING.rst

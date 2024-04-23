@@ -18,10 +18,6 @@ The overall specification also has a core team and lead. The **oneAPI
 core team** is responsible for issues that involve multiple oneAPI
 elements and provides general oversight.
 
-`Technical advisory boards
-<https://github.com/oneapi-src/oneapi-tab>`__ review topics related to
-specifications and provide feedback. There may be overlap between core
-team and technical advisory board.
 
 
 Decision Making
@@ -60,12 +56,3 @@ Governance Changes
 Governance is intended to be informal and low overhead while
 encouraging broad participation from the community. oneAPI core team
 may change governance as the community evolves.
-
-
-Code of Conduct
-===============
-
-We follow `Contributor Covenant
-<https://www.contributor-covenant.org>`__. Contact a core team member
-or `oneAPI leadership <mailto:oneapi@intel.com>`__ with questions or
-to report an issue.

@@ -6,11 +6,11 @@
 oneAPI Specifications
 =====================
 
-.. image:: https://github.com/oneapi-src/oneAPI-spec/actions/workflows/pr.yml/badge.svg
-   :target: https://github.com/oneapi-src/oneapi-spec/actions/workflows/pr.yml
+.. image:: https://github.com/uxlfoundation/oneAPI-spec/actions/workflows/pr.yml/badge.svg
+   :target: https://github.com/uxlfoundation/oneapi-spec/actions/workflows/pr.yml
 
-.. image:: https://api.reuse.software/badge/github.com/oneapi-src/oneapi-spec
-   :target: https://api.reuse.software/info/github.com/oneapi-src/oneapi-spec
+.. image:: https://api.reuse.software/badge/github.com/uxlfoundation/oneapi-spec
+   :target: https://api.reuse.software/info/github.com/uxlfoundation/oneapi-spec
    :alt: REUSE status
 
 .. image:: https://www.bestpractices.dev/projects/8323/badge
@@ -150,7 +150,7 @@ Making a Release
 .. _`Read the Docs`: https://readthedocs.org/
 .. _`oneAPI Specification`: https://oneapi.io/spec
 .. _reuse: https://pypi.org/project/reuse/
-.. _HTML: https://oneapi-src.github.io/oneAPI-spec/spec/
-.. _PDF: https://oneapi-src.github.io/oneAPI-spec/spec/oneAPI-spec.pdf
+.. _HTML: https://uxlfoundation.github.io/oneAPI-spec/spec/
+.. _PDF: https://uxlfoundation.github.io/oneAPI-spec/spec/oneAPI-spec.pdf
 .. _`oneapi.io`: https://oneapi.io
 .. _roadmap: roadmap.rst
