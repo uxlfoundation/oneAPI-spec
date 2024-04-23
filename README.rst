@@ -7,10 +7,10 @@ oneAPI Specifications
 =====================
 
 .. image:: https://github.com/uxlfoundation/oneAPI-spec/actions/workflows/pr.yml/badge.svg
-   :target: https://github.com/uxlfoundation/oneapi-spec/actions/workflows/pr.yml
+   :target: https://github.com/uxlfoundation/oneAPI-spec/actions/workflows/pr.yml
 
-.. image:: https://api.reuse.software/badge/github.com/uxlfoundation/oneapi-spec
-   :target: https://api.reuse.software/info/github.com/uxlfoundation/oneapi-spec
+.. image:: https://api.reuse.software/badge/github.com/uxlfoundation/oneAPI-spec
+   :target: https://api.reuse.software/info/github.com/uxlfoundation/oneAPI-spec
    :alt: REUSE status
 
 .. image:: https://www.bestpractices.dev/projects/8323/badge
