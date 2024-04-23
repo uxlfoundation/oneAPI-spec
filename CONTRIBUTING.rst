@@ -36,12 +36,12 @@ Submit a Change
 ---------------
 
 * For questions, feature requests, or to report a bug, submit an
-  `issue <https://github.com/oneapi-src/oneAPI-spec/issues>`__.
+  `issue <https://github.com/uxlfoundation/oneAPI-spec/issues>`__.
 * For changes to the document build infrastructure or minor editing of
   the text, please submit a `pull request
-  <https://github.com/oneapi-src/oneAPI-spec/pulls>`__.
+  <https://github.com/uxlfoundation/oneAPI-spec/pulls>`__.
 * For significant changes to the specification, submit an `issue
-  <https://github.com/oneapi-src/oneAPI-spec/issues>`__. Make sure to
+  <https://github.com/uxlfoundation/oneAPI-spec/issues>`__. Make sure to
 
   * include "RFC" in the title,
   * explain your proposed change and the motivation for the change.

@@ -86,7 +86,7 @@ html_theme = 'sphinx_book_theme'
 # documentation.
 #
 html_theme_options = {
-    'repository_url': 'https://github.com/oneapi-src/oneapi-spec',
+    'repository_url': 'https://github.com/uxlfoundation/oneapi-spec',
     'path_to_docs': 'source',
     'use_issues_button': True,
     'use_edit_page_button': True,
