@@ -2,10 +2,6 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-- :ref:`sycl-section`: oneAPI's core language for programming
-  accelerators and multiprocessors. SYCL allows developers to reuse
-  code across hardware targets (CPUs and accelerators such as GPUs and
-  FPGAs) and tune for a specific architecture
 - :ref:`oneDPL-section`: A companion to the DPC++ Compiler for
   programming oneAPI devices with APIs from C++ standard library,
   Parallel STL, and extensions.
