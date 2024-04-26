@@ -275,6 +275,8 @@ spmm
    - ``spmm_optimize`` and ``spmm`` are asynchronous.
    - The algorithm defaults to ``spmm_alg::default_alg`` if a backend does not
      support the provided algorithm.
+   - The container type of all the handles and ``workspace`` must be consistent
+     and use either USM pointers or SYCL buffers.
 
    .. rubric:: Input Parameters
 
@@ -291,8 +293,8 @@ spmm
 
    alpha
       Host or USM pointer representing :math:`\alpha`. The USM allocation can be
-      on the host or device. Must be of the same type than the handles' data
-      type.
+      on the host or device. Must be a host pointer if SYCL buffers are used.
+      Must be of the same type than the handles' data type.
 
    A_view
       Specifies which part of the handle should be read as described by
@@ -306,8 +308,8 @@ spmm
 
    beta
       Host or USM pointer representing :math:`\beta`. The USM allocation can be
-      on the host or device. Must be of the same type than the handles' data
-      type.
+      on the host or device. Must be a host pointer if SYCL buffers are used.
+      Must be of the same type than the handles' data type.
 
    C_handle
       Dense matrix handle object representing :math:`C`.
