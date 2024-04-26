@@ -42,7 +42,7 @@ The strided API operation is defined as:
 
    for i = 0 … batch_size – 1
        A and B are matrices at offset i * stridea and i * strideb in a and b.
-       if (left_right == onemkl::side::left) then
+       if (left_right == oneapi::mkl::side::left) then
            compute X such that op(A) * X = alpha * B
        else
            compute X such that X * op(A) = alpha * B
@@ -77,10 +77,10 @@ of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter
 
    namespace oneapi::mkl::blas::column_major {
        void trsm_batch(sycl::queue &queue,
-                       onemkl::side left_right,
-                       onemkl::uplo upper_lower,
-                       onemkl::transpose trans,
-                       onemkl::diag unit_diag,
+                       oneapi::mkl::side left_right,
+                       oneapi::mkl::uplo upper_lower,
+                       oneapi::mkl::transpose trans,
+                       oneapi::mkl::diag unit_diag,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -96,10 +96,10 @@ of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter
 
    namespace oneapi::mkl::blas::row_major {
        void trsm_batch(sycl::queue &queue,
-                       onemkl::side left_right,
-                       onemkl::uplo upper_lower,
-                       onemkl::transpose trans,
-                       onemkl::diag unit_diag,
+                       oneapi::mkl::side left_right,
+                       oneapi::mkl::uplo upper_lower,
+                       oneapi::mkl::transpose trans,
+                       oneapi::mkl::diag unit_diag,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -218,7 +218,7 @@ The group API operation is defined as:
    for i = 0 … group_count – 1
        for j = 0 … group_size – 1
            A and B are matrices in a[idx] and b[idx]
-           if (left_right == onemkl::side::left) then
+           if (left_right == oneapi::mkl::side::left) then
                compute X such that op(A) * X = alpha[i] * B
            else
                compute X such that X * op(A) = alpha[i] * B
@@ -234,7 +234,7 @@ The strided API operation is defined as:
 
    for i = 0 … batch_size – 1
        A and B are matrices at offset i * stridea and i * strideb in a and b.
-       if (left_right == onemkl::side::left) then
+       if (left_right == oneapi::mkl::side::left) then
            compute X such that op(A) * X = alpha * B
        else
            compute X such that X * op(A) = alpha * B
@@ -275,10 +275,10 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              const onemkl::side *left_right,
-                              const onemkl::uplo *upper_lower,
-                              const onemkl::transpose *trans,
-                              const onemkl::diag *unit_diag,
+                              const oneapi::mkl::side *left_right,
+                              const oneapi::mkl::uplo *upper_lower,
+                              const oneapi::mkl::transpose *trans,
+                              const oneapi::mkl::diag *unit_diag,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -294,10 +294,10 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              const onemkl::side *left_right,
-                              const onemkl::uplo *upper_lower,
-                              const onemkl::transpose *trans,
-                              const onemkl::diag *unit_diag,
+                              const oneapi::mkl::side *left_right,
+                              const oneapi::mkl::uplo *upper_lower,
+                              const oneapi::mkl::transpose *trans,
+                              const oneapi::mkl::diag *unit_diag,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -318,20 +318,20 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    left_right
-      Array of ``group_count`` ``onemkl::side`` values. ``left_right[i]`` specifies whether ``A`` multiplies
+      Array of ``group_count`` ``oneapi::mkl::side`` values. ``left_right[i]`` specifies whether ``A`` multiplies
       ``X`` on the left (``side::left``) or on the right
       (``side::right``) for every ``trsm`` operation in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    upper_lower
-      Array of ``group_count`` ``onemkl::uplo`` values. ``upper_lower[i]`` specifies whether ``A`` is upper or lower
+      Array of ``group_count`` ``oneapi::mkl::uplo`` values. ``upper_lower[i]`` specifies whether ``A`` is upper or lower
       triangular for every matrix in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    trans
-      Array of ``group_count`` ``onemkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used
+      Array of ``group_count`` ``oneapi::mkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used
       for every ``trsm`` operation in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    unit_diag
-      Array of ``group_count`` ``onemkl::diag`` values. ``unit_diag[i]`` specifies whether ``A`` is assumed to
+      Array of ``group_count`` ``oneapi::mkl::diag`` values. ``unit_diag[i]`` specifies whether ``A`` is assumed to
       be unit triangular (all diagonal elements are 1) for every matrix in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    m
@@ -404,10 +404,10 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              onemkl::side left_right,
-                              onemkl::uplo upper_lower,
-                              onemkl::transpose trans,
-                              onemkl::diag unit_diag,
+                              oneapi::mkl::side left_right,
+                              oneapi::mkl::uplo upper_lower,
+                              oneapi::mkl::transpose trans,
+                              oneapi::mkl::diag unit_diag,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,
@@ -424,10 +424,10 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              onemkl::side left_right,
-                              onemkl::uplo upper_lower,
-                              onemkl::transpose trans,
-                              onemkl::diag unit_diag,
+                              oneapi::mkl::side left_right,
+                              oneapi::mkl::uplo upper_lower,
+                              oneapi::mkl::transpose trans,
+                              oneapi::mkl::diag unit_diag,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,

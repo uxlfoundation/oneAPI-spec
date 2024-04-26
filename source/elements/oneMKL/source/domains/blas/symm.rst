@@ -62,8 +62,8 @@ symm (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void symm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -79,8 +79,8 @@ symm (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void symm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -205,8 +205,8 @@ symm (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event symm(sycl::queue &queue,
-                        onemkl::side left_right,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::side left_right,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t m,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
@@ -223,8 +223,8 @@ symm (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event symm(sycl::queue &queue,
-                        onemkl::side left_right,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::side left_right,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t m,
                         std::int64_t n,
                         value_or_pointer<T> alpha,

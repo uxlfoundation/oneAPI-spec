@@ -48,7 +48,7 @@ spr (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void spr(sycl::queue &queue,
-                onemkl::uplo upper_lower,
+                oneapi::mkl::uplo upper_lower,
                 std::std::int64_t n,
                 T alpha,
                 sycl::buffer<T,1> &x,
@@ -59,7 +59,7 @@ spr (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void spr(sycl::queue &queue,
-                onemkl::uplo upper_lower,
+                oneapi::mkl::uplo upper_lower,
                 std::std::int64_t n,
                 T alpha,
                 sycl::buffer<T,1> &x,
@@ -139,7 +139,7 @@ spr (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event spr(sycl::queue &queue,
-                       onemkl::uplo upper_lower,
+                       oneapi::mkl::uplo upper_lower,
                        std::int64_t n,
                        value_or_pointer<T> alpha,
                        const T *x,
@@ -151,7 +151,7 @@ spr (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event spr(sycl::queue &queue,
-                       onemkl::uplo upper_lower,
+                       oneapi::mkl::uplo upper_lower,
                        std::int64_t n,
                        value_or_pointer<T> alpha,
                        const T *x,

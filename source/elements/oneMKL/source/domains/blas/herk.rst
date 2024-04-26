@@ -53,8 +53,8 @@ herk (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void herk(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
                  std::int64_t n,
                  std::int64_t k,
                  Treal alpha,
@@ -68,8 +68,8 @@ herk (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void herk(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
                  std::int64_t n,
                  std::int64_t k,
                  Treal alpha,
@@ -200,8 +200,8 @@ herk (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event herk(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
                         value_or_pointer<Treal> alpha,
@@ -216,8 +216,8 @@ herk (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event herk(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
                         value_or_pointer<Treal> alpha,

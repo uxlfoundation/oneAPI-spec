@@ -55,7 +55,7 @@ gbmv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void gbmv(sycl::queue &queue,
-                 onemkl::transpose trans,
+                 oneapi::mkl::transpose trans,
                  std::int64_t m,
                  std::int64_t n,
                  std::int64_t kl,
@@ -73,7 +73,7 @@ gbmv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void gbmv(sycl::queue &queue,
-                 onemkl::transpose trans,
+                 oneapi::mkl::transpose trans,
                  std::int64_t m,
                  std::int64_t n,
                  std::int64_t kl,
@@ -190,7 +190,7 @@ gbmv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gbmv(sycl::queue &queue,
-                        onemkl::transpose trans,
+                        oneapi::mkl::transpose trans,
                         std::int64_t m,
                         std::int64_t n,
                         std::int64_t kl,
@@ -209,7 +209,7 @@ gbmv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gbmv(sycl::queue &queue,
-                        onemkl::transpose trans,
+                        oneapi::mkl::transpose trans,
                         std::int64_t m,
                         std::int64_t n,
                         std::int64_t kl,

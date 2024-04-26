@@ -82,10 +82,10 @@ trmm (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void trmm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose transa,
-                 onemkl::diag unit_diag,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose transa,
+                 oneapi::mkl::diag unit_diag,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -98,10 +98,10 @@ trmm (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void trmm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose transa,
-                 onemkl::diag unit_diag,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose transa,
+                 oneapi::mkl::diag unit_diag,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -210,10 +210,10 @@ trmm (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void trmm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_diag,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_diag,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -230,10 +230,10 @@ trmm (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void trmm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_diag,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_diag,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -342,10 +342,10 @@ trmm (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event trmm(sycl::queue &queue,
-                        onemkl::side left_right,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose transa,
-                        onemkl::diag unit_diag,
+                        oneapi::mkl::side left_right,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose transa,
+                        oneapi::mkl::diag unit_diag,
                         std::int64_t m,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
@@ -359,10 +359,10 @@ trmm (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event trmm(sycl::queue &queue,
-                        onemkl::side left_right,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose transa,
-                        onemkl::diag unit_diag,
+                        oneapi::mkl::side left_right,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose transa,
+                        oneapi::mkl::diag unit_diag,
                         std::int64_t m,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
@@ -487,10 +487,10 @@ trmm (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        void trmm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_diag,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_diag,
                  std::int64_t m,
                  std::int64_t n,
                  value_or_pointer<T> alpha,
@@ -508,10 +508,10 @@ trmm (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        void trmm(sycl::queue &queue,
-                 onemkl::side left_right,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_diag,
+                 oneapi::mkl::side left_right,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_diag,
                  std::int64_t m,
                  std::int64_t n,
                  value_or_pointer<T> alpha,

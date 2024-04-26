@@ -52,9 +52,9 @@ tbmv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void tbmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_nonunit,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_nonunit,
                  std::int64_t n,
                  std::int64_t k,
                  sycl::buffer<T,1> &a,
@@ -66,9 +66,9 @@ tbmv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void tbmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_nonunit,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_nonunit,
                  std::int64_t n,
                  std::int64_t k,
                  sycl::buffer<T,1> &a,
@@ -156,9 +156,9 @@ tbmv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event tbmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
-                        onemkl::diag unit_nonunit,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
+                        oneapi::mkl::diag unit_nonunit,
                         std::int64_t n,
                         std::int64_t k,
                         const T *a,
@@ -171,9 +171,9 @@ tbmv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event tbmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
-                        onemkl::diag unit_nonunit,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
+                        oneapi::mkl::diag unit_nonunit,
                         std::int64_t n,
                         std::int64_t k,
                         const T *a,

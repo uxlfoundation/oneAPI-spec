@@ -68,7 +68,7 @@ parameter.
 
    namespace oneapi::mkl::blas::column_major {
        void gemv_batch(sycl::queue &queue,
-                       onemkl::transpose trans,
+                       oneapi::mkl::transpose trans,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -88,7 +88,7 @@ parameter.
 
    namespace oneapi::mkl::blas::row_major {
        void gemv_batch(sycl::queue &queue,
-                       onemkl::transpose trans,
+                       oneapi::mkl::transpose trans,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -249,7 +249,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              const onemkl::transpose *trans,
+                              const oneapi::mkl::transpose *trans,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -268,7 +268,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              const onemkl::transpose *trans,
+                              const oneapi::mkl::transpose *trans,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -292,7 +292,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       The queue where the routine should be executed.
 
    trans
-      Array of ``group_count`` ``onemkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
+      Array of ``group_count`` ``oneapi::mkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
       the matrix-vector product in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    m
@@ -377,7 +377,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              onemkl::transpose trans,
+                              oneapi::mkl::transpose trans,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,
@@ -398,7 +398,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              onemkl::transpose trans,
+                              oneapi::mkl::transpose trans,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,

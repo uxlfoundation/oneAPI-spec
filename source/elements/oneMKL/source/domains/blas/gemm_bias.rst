@@ -67,9 +67,9 @@ gemm_bias (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void gemm_bias(sycl::queue &queue,
-                      onemkl::transpose transa,
-                      onemkl::transpose transb,
-                      onemkl::offset offset_type,
+                      oneapi::mkl::transpose transa,
+                      oneapi::mkl::transpose transb,
+                      oneapi::mkl::offset offset_type,
                       std::int64_t m,
                       std::int64_t n,
                       std::int64_t k,
@@ -89,9 +89,9 @@ gemm_bias (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void gemm_bias(sycl::queue &queue,
-                      onemkl::transpose transa,
-                      onemkl::transpose transb,
-                      onemkl::offset offset_type,
+                      oneapi::mkl::transpose transa,
+                      oneapi::mkl::transpose transb,
+                      oneapi::mkl::offset offset_type,
                       std::int64_t m,
                       std::int64_t n,
                       std::int64_t k,
@@ -305,9 +305,9 @@ gemm_bias (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemm_bias(sycl::queue &queue,
-                             onemkl::transpose transa,
-                             onemkl::transpose transb,
-                             onemkl::offset offset_type,
+                             oneapi::mkl::transpose transa,
+                             oneapi::mkl::transpose transb,
+                             oneapi::mkl::offset offset_type,
                              std::int64_t m,
                              std::int64_t n,
                              std::int64_t k,
@@ -328,9 +328,9 @@ gemm_bias (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemm_bias(sycl::queue &queue,
-                             onemkl::transpose transa,
-                             onemkl::transpose transb,
-                             onemkl::offset offset_type,
+                             oneapi::mkl::transpose transa,
+                             oneapi::mkl::transpose transb,
+                             oneapi::mkl::offset offset_type,
                              std::int64_t m,
                              std::int64_t n,
                              std::int64_t k,
