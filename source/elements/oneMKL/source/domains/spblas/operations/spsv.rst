@@ -256,7 +256,7 @@ spsv
      before ``spsv`` with the same arguments. ``spsv`` can then be called
      multiple times. Calling ``spsv_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
-   - The data of the handles can be reset-ed before each call to ``spsv``.
+   - The data of the dense handle ``x_handle`` can be reset-ed before each call to ``spsv``.
    - ``spsv_optimize`` and ``spsv`` are asynchronous.
    - The algorithm defaults to ``spsv_alg::default_alg`` if a backend does not
      support the provided algorithm.
