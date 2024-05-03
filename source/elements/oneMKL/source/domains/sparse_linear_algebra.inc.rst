@@ -22,7 +22,8 @@ Sparse Linear Algebra
    structure changes to enable a more optimized algorithm. User-provided matrix
    data remain unmodified if such optimizations are made. In the execution
    stage, multiple routine calls can take advantage of the optimization stage
-   data in order to improve performance.
+   data in order to improve performance. Each operation has a descriptor type
+   that is used to carry information across the different stages.
 
 .. toctree::
    :hidden:
