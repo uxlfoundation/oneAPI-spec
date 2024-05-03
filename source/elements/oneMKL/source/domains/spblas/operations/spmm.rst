@@ -272,7 +272,7 @@ spmm
      multiple times. Calling ``spmm_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
    - The data of the sparse handle ``A_handle`` can be reset-ed before each call
-     to ``spmm`` as long as the sparisty pattern stays the same. The data of the
+     to ``spmm`` as long as the sparsity pattern stays the same. The data of the
      dense handles ``B_handle`` and ``C_handle`` can be reset-ed before each
      call to ``spmm``.
    - ``spmm_optimize`` and ``spmm`` are asynchronous.

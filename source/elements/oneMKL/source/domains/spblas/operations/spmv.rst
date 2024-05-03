@@ -266,7 +266,7 @@ spmv
      multiple times. Calling ``spmv_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
    - The data of the sparse handle ``A_handle`` can be reset-ed before each call
-     to ``spmv`` as long as the sparisty pattern stays the same. The data of the
+     to ``spmv`` as long as the sparsity pattern stays the same. The data of the
      dense handles ``x_handle`` and ``y_handle`` can be reset-ed before each
      call to ``spmv``.
    - ``spmv_optimize`` and ``spmv`` are asynchronous.
