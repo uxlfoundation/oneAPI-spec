@@ -25,8 +25,8 @@ Matrix properties
 
    Matrix properties are optional and "strong" guarantees. Unlike
    :ref:`onemkl_sparse_matrix_view`, the user must ensure that the handle's data
-   holds all the given properties. A property can be set to optimize some
-   operations.
+   holds all the given properties. A property can be set as a hint for backends
+   to optimize some operations.
 
    .. list-table::
       :header-rows: 1
