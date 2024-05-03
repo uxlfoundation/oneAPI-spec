@@ -26,7 +26,10 @@ entries are implicitly zeros.
    arrays, ``row_ind``, ``col_ind`` and ``val``, and an ``index`` parameter. The
    ``i``-th defined element in the sparse matrix is represented by its row
    index, column index, and value, that is, (``row_ind[i]``, ``col_ind[i]``,
-   ``val[i]``). The entries need not be in a sorted order.
+   ``val[i]``). The entries need not be in a sorted order, though performance of
+   Sparse BLAS operations may be improved if they are sorted in some logical
+   way, for instance by row index and then column index subordinate to each row
+   set.
 
    .. container:: tablenoborder
 
