@@ -312,7 +312,7 @@ spsv
 
    dependencies
       List of events to depend on before starting asynchronous tasks that access
-      data on the device. Defaults to no dependencies.
+      data on the device. Ignored if buffers are used. Defaults to no dependencies.
 
 .. container:: section
 
@@ -331,7 +331,7 @@ spsv
    .. rubric:: Return Values
 
    Output event that can be waited upon or added as a dependency for the
-   completion of the function.
+   completion of the function. May be an empty event if buffers are used.
 
 .. container:: section
 
