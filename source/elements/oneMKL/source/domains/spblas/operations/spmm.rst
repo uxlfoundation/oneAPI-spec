@@ -273,10 +273,9 @@ spmm
      before ``spmm`` with the same arguments. ``spmm`` can then be called
      multiple times. Calling ``spmm_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
-   - The data of the sparse handle ``A_handle`` can be reset-ed before each call
-     to ``spmm`` as long as the sparsity pattern stays the same. The data of the
-     dense handles ``B_handle`` and ``C_handle`` can be reset-ed before each
-     call to ``spmm``.
+   - The data of the dense handles ``B_handle`` and ``C_handle`` and the scalars
+     ``alpha`` and ``beta`` can be reset before each call to ``spmm``. Changing
+     the data of the sparse handle ``A_handle`` is undefined behavior.
    - ``spmm_optimize`` and ``spmm`` are asynchronous.
    - The algorithm defaults to ``spmm_alg::default_alg`` if a backend does not
      support the provided algorithm.
