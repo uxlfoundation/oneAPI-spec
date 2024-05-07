@@ -43,8 +43,8 @@ Matrix properties
             property.
           | For CSR this guarantees that the column indices are sorted in
             ascending order for a given row.
-          | For COO this guarantees that that the row indices are sorted in
-            ascending order.
+          | For COO this guarantees that the indices are sorted by row then by
+          column in ascending order.
 
 set_matrix_property
 -------------------
