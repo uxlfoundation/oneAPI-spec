@@ -55,7 +55,9 @@ spmm_descr
 
    Defines ``spmm_descr_t`` as an opaque pointer to the incomplete type
    ``spmm_descr``. Each backend may provide a different implementation of the
-   type ``spmm_descr``.
+   type ``spmm_descr``. The ``spmm_descr_t`` object persists through the various
+   stages of the spmm operation to house relevant state, optimizations and
+   workspaces.
 
 .. _onemkl_sparse_init_spmm_descr:
 

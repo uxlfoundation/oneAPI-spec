@@ -55,7 +55,9 @@ spsv_descr
 
    Defines ``spsv_descr_t`` as an opaque pointer to the incomplete type
    ``spsv_descr``. Each backend may provide a different implementation of the
-   type ``spsv_descr``.
+   type ``spsv_descr``. The `spsv_descr_t` object persists through the various
+   stages of the spsv operation to house relevant state, optimizations and
+   workspaces.
 
 .. _onemkl_sparse_init_spsv_descr:
 

@@ -55,7 +55,9 @@ spmv_descr
 
    Defines ``spmv_descr_t`` as an opaque pointer to the incomplete type
    ``spmv_descr``. Each backend may provide a different implementation of the
-   type ``spmv_descr``.
+   type ``spmv_descr``. The ``spmv_descr_t`` object persists through the various
+   stages of the spmv operation to house relevant state, optimizations and
+   workspaces.
 
 .. _onemkl_sparse_init_spmv_descr:
 
