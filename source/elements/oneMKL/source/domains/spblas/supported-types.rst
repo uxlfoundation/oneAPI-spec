@@ -1,42 +1,34 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
 .. _onemkl_sparse_supported_types:
 
-Supported Types
-===============
+Supported template types
+========================
 
+.. container:: tablenoborder
 
-.. container::
+   .. list-table::
+      :header-rows: 1
 
+      * -  Data Types ``<dataType>``
+        -  Integer Types ``<indexType>``
+      * -  ``float``
+        -  ``std::int32_t``
+      * -  ``double``
+        -  ``std::int64_t``
+      * -  ``std::complex<float>``
+        -   
+      * -  ``std::complex<double>``
+        -   
 
-   .. container:: tablenoborder
+``dataType`` is used to describe the precision (i.e. number of bits) and domain
+(i.e. real or complex) of the :ref:`data handles <onemkl_sparse_data_handles>`
+and the operations using them.
 
+``indexType`` is used to describe the range of integer types such as indices,
+offsets or sizes of the :ref:`data handles <onemkl_sparse_data_handles>` and the
+operations using them.
 
-      .. list-table:: 
-         :header-rows: 1
-
-         * -  Data Types <fp> 
-           -  Integer Types <intType> 
-         * -  ``float`` 
-           -  ``std::int32_t`` 
-         * -  ``double`` 
-           -  ``std::int64_t`` 
-         * -  ``std::complex<float>`` 
-           -    
-         * -  ``std::complex<double>`` 
-           -    
-
-
-General descriptions
---------------------
-
-.. _onemkl_sparse_matrix_handle_t:
-
-.. rubric:: matrix_handle_t
-   :name: matrix_handle_t
-
-Type for the ``handle`` that can be used to store information about the initial sparse
-matrix (represented in a sparse format) and data created/obtained during the analysis
-stage to be used in the execution stage.
+**Parent topic:** :ref:`onemkl_spblas`
