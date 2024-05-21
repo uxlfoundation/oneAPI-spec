@@ -41,7 +41,7 @@ pydata-sphinx-theme==0.15.2
 pyenchant==3.2.2
 Pygments==2.17.2
 PyYAML==6.0.1
-requests==2.31.0
+requests==2.32.0
 six==1.16.0
 snowballstemmer==2.2.0
 soupsieve==2.5
