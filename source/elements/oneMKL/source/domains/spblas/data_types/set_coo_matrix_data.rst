@@ -52,12 +52,12 @@ set_coo_matrix_data (Buffer version)
    .. rubric:: Template parameters
 
    dataType
-      See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
-      a different type than what was used when creating the ``matrix_handle_t``.
+      See :ref:`supported template types<onemkl_sparse_supported_types>`. Must
+      be the same type than what was used when creating the ``matrix_handle_t``.
 
    indexType
-      See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
-      a different type than what was used when creating the ``matrix_handle_t``.
+      See :ref:`supported template types<onemkl_sparse_supported_types>`. Must
+      be the same type than what was used when creating the ``matrix_handle_t``.
 
 .. container:: section
 

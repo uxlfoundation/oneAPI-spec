@@ -302,7 +302,9 @@ spmm
 
    A_view
       Specifies which part of the handle should be read as described by
-      :ref:`onemkl_sparse_matrix_view`.
+      :ref:`onemkl_sparse_matrix_view`. The ``type_view`` field must be
+      ``matrix_descr::general`` and the ``uplo_view`` and ``diag_view`` fields
+      are ignored.
 
    A_handle
       Sparse matrix handle object representing :math:`A`.
