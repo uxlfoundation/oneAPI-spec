@@ -45,7 +45,6 @@ class mcg31m1
        
        mcg31m1();
        mcg31m1(std::uint32_t seed, std::uint64_t offset = 0);
-       mcg31m1(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0);
      };
    }
 
@@ -71,8 +70,6 @@ class mcg31m1
           - Default constructor
         * - `mcg31m1(std::uint32_t seed, std::uint64_t offset = 0)`_
           - Constructor for common seed initialization of the engine and common number of skipped elements
-        * - `mcg31m1(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0)`_
-          - Constructor for extended seed initialization of the engine and common number of skipped elements
 
 .. container:: section
 
@@ -89,23 +86,6 @@ class mcg31m1
     .. code-block:: cpp
     
         mcg31m1::mcg31m1(std::uint32_t seed, std::uint64_t offset = 0)
-
-    .. container:: section
-
-        .. rubric:: Input Parameters
-
-        seed
-            The initial conditions of the generator state, assume :math:`x_0 = seed \ mod \ 0x7FFFFFFF`, 
-            if :math:`x_0 = 0`, assume :math:`x_0 = 1`.
-        
-        offset
-            Number of skipped elements.
-            
-    .. _`mcg31m1(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0)`:
-
-    .. code-block:: cpp
-    
-        mcg31m1::mcg31m1(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0)
 
     .. container:: section
 

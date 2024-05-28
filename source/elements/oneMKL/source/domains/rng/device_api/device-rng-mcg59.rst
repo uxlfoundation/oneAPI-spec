@@ -40,8 +40,7 @@ class mcg59
        static constexpr std::int32_t vec_size = VecSize;
        
        mcg59();
-       mcg59(std::uint32_t seed, std::uint64_t offset = 0);
-       mcg59(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0);
+       mcg59(std::uint64_t seed, std::uint64_t offset = 0);
      };
    }
 
@@ -65,10 +64,8 @@ class mcg59
           - Description
         * - `mcg59()`_
           - Default constructor
-        * - `mcg59(std::uint32_t seed, std::uint64_t offset = 0)`_
+        * - `mcg59(std::uint64_t seed, std::uint64_t offset = 0)`_
           - Constructor for common seed initialization of the engine and common number of skipped elements
-        * - `mcg59(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0)`_
-          - Constructor for extended seed initialization of the engine and common number of skipped elements
 
 .. container:: section
 
@@ -80,28 +77,11 @@ class mcg59
     
         mcg59::mcg59()
 
-    .. _`mcg59(std::uint32_t seed, std::uint64_t offset = 0)`:
+    .. _`mcg59(std::uint64_t seed, std::uint64_t offset = 0)`:
 
     .. code-block:: cpp
     
-        mcg59::mcg59(std::uint32_t seed, std::uint64_t offset = 0)
-
-    .. container:: section
-
-        .. rubric:: Input Parameters
-
-        seed
-            The initial conditions of the generator state, assume :math:`x_0 = seed \ mod \ 2^{59}`, 
-            if :math:`x_0 = 0`, assume :math:`x_0 = 1`.
-        
-        offset
-            Number of skipped elements.
-            
-    .. _`mcg59(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0)`:
-
-    .. code-block:: cpp
-    
-        mcg59::mcg59(std::initializer_list<std::uint32_t> seed, std::uint64_t offset = 0)
+        mcg59::mcg59(std::uint64_t seed, std::uint64_t offset = 0)
 
     .. container:: section
 
