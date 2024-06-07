@@ -567,15 +567,16 @@ as defined by the `C++ Standard`_.
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_bins,
         ValueType first_bin_min_val, ValueType last_bin_max_val, OutputIt histogram_first)
 
-:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end]`
+:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end)`
 into :code:`num_bins` bins stored in a sequence which starts with :code:`histogram_first`. The
-input sequence is mapped into evenly divided bins between :code:`first_bin_min_val` and 
-:code:`last_bin_max_val` such that an input element ``a`` maps to a bin index ``i`` such that
-``i = floor((a - first_bin_min_val) / ((last_bin_max_val - first_bin_min_val) / num_bins)))``.
-The histogram operation counts the number of elements mapped to each bin and stores the count in
-the sequnce which starts with :code:`histogram_first`. Input values which do not map to a defined
-bin are skipped silently. The user must provide sufficient output data to store each bin, and the
-type of the output sequence must be sufficient to store the counts of the histogram without overflow.
+elements of :code:`[start, end)` are mapped into evenly divided bins between :code:`first_bin_min_val`
+and :code:`last_bin_max_val` such that an input element :code:`*(start + i)` maps to a bin index
+:code:`j` such that
+:code:`j = floor((*(start + i) - first_bin_min_val) / ((last_bin_max_val - first_bin_min_val) / num_bins)))`.
+The histogram operation counts the number of elements mapped to each bin and stores the count into
+:code:`*(histogram_first + j)` within the sequence :code:`[histogram_first, histogram_first + num_bins)`.
+Input values which do not map to a defined bin are skipped silently. Sufficient output data to store each
+bin must be provided, and :code:`Size` must be sufficient to store the counts of the histogram without overflow.
 All input and output sequences must be ``RandomAccessIterators``.
 
 
@@ -586,15 +587,16 @@ All input and output sequences must be ``RandomAccessIterators``.
     histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
               InputIt2 boundary_end, OutputIt histogram_first)
 
-:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end]`
+:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end)`
 into :code:`num_bins` bins stored in a sequence which starts with :code:`histogram_first`. The
-input sequence is mapped into bins as defined by their boundaries in
-:code:`[boundary_start, boundary_end]` such that an input element ``a`` maps to a bin index ``i``
-if and only if ``boundary_start[i] <= a < boundary_start[i + 1]``.
-The histogram operation counts the number of elements mapped to each bin and stores the count in
-the sequnce which starts with :code:`histogram_first`. Input values which do not map to a defined
-bin are skipped silently. The user must provide sufficient output data to store each bin, and the
-type of the output sequence must be sufficient to store the counts of the histogram without overflow.
+elements of :code:`[start, end)` are  mapped into bins as defined by their boundaries in
+:code:`[boundary_start, boundary_end)` such that an input element :code:`*(start + i)` maps to a bin
+index :code:`j` if and only if
+:code:`(boundary_start[j] <= *(start + i)) && (*(start + i) < boundary_start[j + 1])`.
+The histogram operation counts the number of elements mapped to each bin and stores the count into
+:code:`*(histogram_first + j)` within the sequence :code:`[histogram_first, histogram_first + num_bins)`.
+Input values which do not map to a defined bin are skipped silently. Sufficient output data to store each
+bin must be provided, and :code:`Size` must be sufficient to store the counts of the histogram without overflow.
 All input and output sequences must be ``RandomAccessIterators``.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
