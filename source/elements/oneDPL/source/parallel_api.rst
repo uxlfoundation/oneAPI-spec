@@ -561,6 +561,42 @@ comparator and their associated values maintain the relative order as in the ori
 ``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
 as defined by the `C++ Standard`_.
+    template <typename Policy, typename InputIt, typename Size, typename OutputIt,
+        typename ValueType>
+    OutputIt
+    histogram(Policy&& exec, InputIt start, InputIt end, Size num_bins,
+        ValueType first_bin_min_val, ValueType last_bin_max_val, OutputIt histogram_first)
+
+:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end]`
+into :code:`num_bins` bins stored in a sequence which starts with :code:`histogram_first`. The
+input sequence is mapped into evenly divided bins between :code:`first_bin_min_val` and 
+:code:`last_bin_max_val` such that an input element ``a`` maps to a bin index ``i`` such that
+``i = floor((a - first_bin_min_val) / ((last_bin_max_val - first_bin_min_val) / num_bins)))``.
+The histogram operation counts the number of elements mapped to each bin and stores the count in
+the sequnce which starts with :code:`histogram_first`. Input values which do not map to a defined
+bin are skipped silently. The user must provide sufficient output data to store each bin, and the
+type of the output sequence must be sufficient to store the counts of the histogram without overflow.
+All input and output sequences must be ``RandomAccessIterators``.
+
+
+.. code:: cpp
+
+    template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
+    OutputIt
+    histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
+              InputIt2 boundary_end, OutputIt histogram_first)
+
+:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end]`
+into :code:`num_bins` bins stored in a sequence which starts with :code:`histogram_first`. The
+input sequence is mapped into bins as defined by their boundaries in
+:code:`[boundary_start, boundary_end]` such that an input element ``a`` maps to a bin index ``i``
+if and only if ``boundary_start[i] <= a < boundary_start[i + 1]``.
+The histogram operation counts the number of elements mapped to each bin and stores the count in
+the sequnce which starts with :code:`histogram_first`. Input values which do not map to a defined
+bin are skipped silently. The user must provide sufficient output data to store each bin, and the
+type of the output sequence must be sufficient to store the counts of the histogram without overflow.
+All input and output sequences must be ``RandomAccessIterators``.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
+ 
