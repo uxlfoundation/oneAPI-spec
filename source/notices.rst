@@ -1,5 +1,5 @@
 .. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
-.. SPDX-FileCopyrightText: Contributors to the oneapi-spec project.
+.. SPDX-FileCopyrightText: The UXL Foundation Contributors.
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
