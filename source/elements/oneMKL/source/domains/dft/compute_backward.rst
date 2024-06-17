@@ -324,13 +324,13 @@ compute_backward (USM version)
       defining the real parts of all the relevant data sequences, as configured
       by ``desc``. ``data_type`` must be single or double precision
       floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``.  must be single or double precision
+      configured by ``desc``. ``data_type``  must be single or double precision
       floating-point, as described by the descriptor's precision. Only with
       complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.

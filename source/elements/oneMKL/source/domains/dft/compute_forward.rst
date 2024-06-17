@@ -107,17 +107,19 @@ compute_forward (Buffer version)
 
    inout_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
-      defining the real parts of all the relevant data sequences, as
-      configured by ``desc``. ``data_type`` must be single or double precision floating-point, as 
-      described by the descriptor's precision. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      defining the real parts of all the relevant data sequences, as configured
+      by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. ``data_type`` must be single or double precision floating-point, as 
-      described by the descriptor's precision. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    in
       ``sycl::buffer`` object of sufficient capacity to store the elements
