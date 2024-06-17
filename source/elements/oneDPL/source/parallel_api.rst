@@ -521,30 +521,30 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 
 .. code:: cpp
 
-    template <class Policy, class InputIt, class OutputIt, class UnaryOp, class UnaryPredicate>
-    OutputIt
-    transform_if(Policy&& policy, InputIt start, InputIt end, OutputIt result, UnaryOp op,
-        UnaryPredicate pred);                                                               // (1)
+  template <class Policy, class InputIt, class OutputIt, class UnaryOp, class UnaryPredicate>
+  OutputIt
+  transform_if(Policy&& policy, InputIt start, InputIt end, OutputIt result, UnaryOp op,
+      UnaryPredicate pred);                                                               // (1)
 
-    template <class Policy, class InputIt1, class InputIt2, class OutputIt, class BinaryOp, 
-        class BinaryPredicate>
-    OutputIt
-    transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
-        BinaryOp op, BinaryPredicate pred);                                                 // (2)
+  template <class Policy, class InputIt1, class InputIt2, class OutputIt, class BinaryOp, 
+      class BinaryPredicate>
+  OutputIt
+  transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
+      BinaryOp op, BinaryPredicate pred);                                                 // (2)
 
 1.
 :code:`oneapi::dpl::transform_if` evaluates the unary predicate :code:`pred` for each position
 :code:`i` of the sequence :code:`[start, end)` and if :code:`pred(start[i]) == true`, it
 performs the unary operation :code:`op(start[i])` and stores the result into :code:`result[i]`.
 If :code:`pred(start[i]) == false`, the data element :code:`result[i]` is not modified from
-the its initial value.
+its initial value.
 
 2.
 :code:`oneapi::dpl::transform_if` evaluates the binary predicate :code:`pred` for each position
 :code:`i` of the sequence :code:`[start1, end1)` and if :code:`pred(start1[i], start2[i]) == true`, it
 performs the binary operation :code:`op(start1[i], start2[i])` and stores the result into :code:`result[i]`.
 If :code:`pred(start1[i], start2[i]) == false`, the data element :code:`result[i]` is not modified from
-the its initial value.
+its initial value.
 
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
