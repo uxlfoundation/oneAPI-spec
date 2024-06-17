@@ -591,4 +591,3 @@ maps into a bin :code:`histogram_first[j]` where
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
- 
