@@ -535,14 +535,14 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 1.
 :code:`oneapi::dpl::transform_if` evaluates the unary predicate :code:`pred` for each position
 :code:`i` of the sequence :code:`[start, end)` and if :code:`pred(start[i]) == true`, it
-performs the unary operation :code:`op(start[i]))` and stores the result into :code:`result[i]`.
+performs the unary operation :code:`op(start[i])` and stores the result into :code:`result[i]`.
 If :code:`pred(start[i]) == false`, the data element :code:`result[i]` is not modified from
 the its initial value.
 
 2.
 :code:`oneapi::dpl::transform_if` evaluates the binary predicate :code:`pred` for each position
 :code:`i` of the sequence :code:`[start1, end1)` and if :code:`pred(start1[i], start2[i]) == true`, it
-performs the binary operation :code:`op(start1[i], start1[i])` and stores the result into :code:`result[i]`.
+performs the binary operation :code:`op(start1[i], start2[i])` and stores the result into :code:`result[i]`.
 If :code:`pred(start1[i], start2[i]) == false`, the data element :code:`result[i]` is not modified from
 the its initial value.
 
