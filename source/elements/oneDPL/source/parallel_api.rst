@@ -565,12 +565,12 @@ as defined by the `C++ Standard`_.
         typename ValueType>
     OutputIt
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_bins,
-        ValueType first_bin_min_val, ValueType last_bin_max_val, OutputIt histogram_first) // (1)
+        ValueType first_bin_min_val, ValueType last_bin_max_val, OutputIt histogram_first); // (1)
 
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
-              InputIt2 boundary_end, OutputIt histogram_first)                             // (2)
+              InputIt2 boundary_end, OutputIt histogram_first);                             // (2)
 
 :code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end)`,
 which counts the number of elements which map to a each of a set of bins and stores the count into
