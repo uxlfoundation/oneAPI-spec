@@ -579,12 +579,12 @@ to a defined bin are skipped silently. Sufficient output data to store each bin 
 and :code:`Size` must be sufficient to store the counts of the histogram without overflow.
 All input and output sequences must be ``RandomAccessIterators``.
 
-(1) The elements of :code:`[start, end)` are mapped into evenly divided bins between
+1. The elements of :code:`[start, end)` are mapped into evenly divided bins between
 :code:`first_bin_min_val` and :code:`last_bin_max_val` such that an input element :code:`start[i]`
 maps into a bin :code:`histogram_first[j]` where
 :code:`j = floor((start[i] - first_bin_min_val) / ((last_bin_max_val - first_bin_min_val) / num_bins)))`.
 
-(2) The elements of :code:`[start, end)` are mapped into bins as defined by bin boundaries in
+2. The elements of :code:`[start, end)` are mapped into bins as defined by bin boundaries in
 :code:`[boundary_start, boundary_end)` such that an input element :code:`start[i]` maps to a bin
 :code:`histogram_first[j]` if and only if
 :code:`(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])`.
