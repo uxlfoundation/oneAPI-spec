@@ -27,5 +27,5 @@ for creating parallel applications:
    elements/oneDAL/source/index
    elements/oneTBB/source/nested-index
    elements/oneMKL/source/index
-   Releases <https://spec.oneapi.io/releases/index.html>
+   Releases <https://oneapi-spec.uxlfoundation.org/>
    notices
