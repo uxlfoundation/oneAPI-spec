@@ -372,7 +372,7 @@ in ``a`` and ``x`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              oneapi::mkl::mkl::side left_right,
+                              oneapi::mkl::side left_right,
                               std::int64_t m,
                               std::int64_t n,
                               const T *a,
