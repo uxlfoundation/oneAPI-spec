@@ -49,7 +49,7 @@ hpmv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void hpmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t n,
                  T alpha,
                  sycl::buffer<T,1> &a,
@@ -63,7 +63,7 @@ hpmv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void hpmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t n,
                  T alpha,
                  sycl::buffer<T,1> &a,
@@ -156,7 +156,7 @@ hpmv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event hpmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
                         const T *a,
@@ -171,7 +171,7 @@ hpmv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event hpmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
                         const T *a,

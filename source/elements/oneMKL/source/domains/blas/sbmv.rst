@@ -50,7 +50,7 @@ sbmv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void sbmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t n,
                  std::int64_t k,
                  T alpha,
@@ -66,7 +66,7 @@ sbmv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void sbmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t n,
                  std::int64_t k,
                  T alpha,
@@ -166,7 +166,7 @@ sbmv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event sbmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t n,
                         std::int64_t k,
                         value_or_pointer<T> alpha,
@@ -183,7 +183,7 @@ sbmv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event sbmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t n,
                         std::int64_t k,
                         value_or_pointer<T> alpha,

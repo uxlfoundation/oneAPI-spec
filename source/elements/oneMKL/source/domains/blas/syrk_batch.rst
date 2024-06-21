@@ -67,8 +67,8 @@ of matrices in ``a`` and ``c`` buffers is given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        void syrk_batch(sycl::queue &queue,
-                       onemkl::uplo upper_lower,
-                       onemkl::transpose trans,
+                       oneapi::mkl::uplo upper_lower,
+                       oneapi::mkl::transpose trans,
                        std::int64_t n,
                        std::int64_t k,
                        T alpha,
@@ -85,8 +85,8 @@ of matrices in ``a`` and ``c`` buffers is given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        void syrk_batch(sycl::queue &queue,
-                       onemkl::uplo upper_lower,
-                       onemkl::transpose trans,
+                       oneapi::mkl::uplo upper_lower,
+                       oneapi::mkl::transpose trans,
                        std::int64_t n,
                        std::int64_t k,
                        T alpha,
@@ -295,12 +295,12 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    upper_lower
-      Array of ``group_count`` ``onemkl::upper_lower``
+      Array of ``group_count`` ``oneapi::mkl::upper_lower``
       values. ``upper_lower[i]`` specifies whether data in C for every
       matrix in group ``i`` is in upper or lower triangle.
 
    trans
-      Array of ``group_count`` ``onemkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
+      Array of ``group_count`` ``oneapi::mkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
       the rank-k update in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    n

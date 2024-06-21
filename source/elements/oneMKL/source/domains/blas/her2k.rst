@@ -63,8 +63,8 @@ her2k (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void her2k(sycl::queue &queue,
-                  onemkl::uplo upper_lower,
-                  onemkl::transpose trans,
+                  oneapi::mkl::uplo upper_lower,
+                  oneapi::mkl::transpose trans,
                   std::int64_t n,
                   std::int64_t k,
                   T alpha,
@@ -80,8 +80,8 @@ her2k (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void her2k(sycl::queue &queue,
-                  onemkl::uplo upper_lower,
-                  onemkl::transpose trans,
+                  oneapi::mkl::uplo upper_lower,
+                  oneapi::mkl::transpose trans,
                   std::int64_t n,
                   std::int64_t k,
                   T alpha,
@@ -249,8 +249,8 @@ her2k (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event her2k(sycl::queue &queue,
-                         onemkl::uplo upper_lower,
-                         onemkl::transpose trans,
+                         oneapi::mkl::uplo upper_lower,
+                         oneapi::mkl::transpose trans,
                          std::int64_t n,
                          std::int64_t k,
                          value_or_pointer<T> alpha,
@@ -267,8 +267,8 @@ her2k (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event her2k(sycl::queue &queue,
-                         onemkl::uplo upper_lower,
-                         onemkl::transpose trans,
+                         oneapi::mkl::uplo upper_lower,
+                         oneapi::mkl::transpose trans,
                          std::int64_t n,
                          std::int64_t k,
                          value_or_pointer<T> alpha,

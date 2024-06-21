@@ -52,9 +52,9 @@ trmv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void trmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_nonunit,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_nonunit,
                  std::int64_t n,
                  sycl::buffer<T,1> &a,
                  std::int64_t lda,
@@ -65,9 +65,9 @@ trmv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void trmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_nonunit,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_nonunit,
                  std::int64_t n,
                  sycl::buffer<T,1> &a,
                  std::int64_t lda,
@@ -150,9 +150,9 @@ trmv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event trmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
-                        onemkl::diag unit_nonunit,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
+                        oneapi::mkl::diag unit_nonunit,
                         std::int64_t n,
                         const T *a,
                         std::int64_t lda,
@@ -164,9 +164,9 @@ trmv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event trmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
-                        onemkl::diag unit_nonunit,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
+                        oneapi::mkl::diag unit_nonunit,
                         std::int64_t n,
                         const T *a,
                         std::int64_t lda,

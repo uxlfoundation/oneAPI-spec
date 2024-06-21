@@ -111,8 +111,8 @@ of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` par
 
    namespace oneapi::mkl::blas::column_major {
        void gemm_batch(sycl::queue &queue,
-                       onemkl::transpose transa,
-                       onemkl::transpose transb,
+                       oneapi::mkl::transpose transa,
+                       oneapi::mkl::transpose transb,
                        std::int64_t m,
                        std::int64_t n,
                        std::int64_t k,
@@ -133,8 +133,8 @@ of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` par
 
    namespace oneapi::mkl::blas::row_major {
        void gemm_batch(sycl::queue &queue,
-                       onemkl::transpose transa,
-                       onemkl::transpose transb,
+                       oneapi::mkl::transpose transa,
+                       oneapi::mkl::transpose transb,
                        std::int64_t m,
                        std::int64_t n,
                        std::int64_t k,
@@ -358,8 +358,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              const onemkl::transpose *transa,
-                              const onemkl::transpose *transb,
+                              const oneapi::mkl::transpose *transa,
+                              const oneapi::mkl::transpose *transb,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const std::int64_t *k,
@@ -376,8 +376,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               const std::vector<sycl::event> &dependencies = {})
 
        sycl::event gemm_batch(sycl::queue &queue,
-                              const sycl::span<onemkl::transpose> &transa,
-                              const sycl::span<onemkl::transpose> &transb,
+                              const sycl::span<oneapi::mkl::transpose> &transa,
+                              const sycl::span<oneapi::mkl::transpose> &transb,
                               const sycl::span<std::int64_t> &m,
                               const sycl::span<std::int64_t> &n,
                               const sycl::span<std::int64_t> &k,
@@ -397,8 +397,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              const onemkl::transpose *transa,
-                              const onemkl::transpose *transb,
+                              const oneapi::mkl::transpose *transa,
+                              const oneapi::mkl::transpose *transb,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const std::int64_t *k,
@@ -415,8 +415,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               const std::vector<sycl::event> &dependencies = {})
 
        sycl::event gemm_batch(sycl::queue &queue,
-                              const sycl::span<onemkl::transpose> &transa,
-                              const sycl::span<onemkl::transpose> &transb,
+                              const sycl::span<oneapi::mkl::transpose> &transa,
+                              const sycl::span<oneapi::mkl::transpose> &transb,
                               const sycl::span<std::int64_t> &m,
                               const sycl::span<std::int64_t> &n,
                               const sycl::span<std::int64_t> &k,
@@ -441,11 +441,11 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    transa
-      Array or span of ``group_count`` ``onemkl::transpose`` values. ``transa[i]`` specifies the form of op(``A``) used in
+      Array or span of ``group_count`` ``oneapi::mkl::transpose`` values. ``transa[i]`` specifies the form of op(``A``) used in
       the matrix multiplication in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    transb
-      Array or span of ``group_count`` ``onemkl::transpose`` values. ``transb[i]`` specifies the form of op(``B``) used in
+      Array or span of ``group_count`` ``oneapi::mkl::transpose`` values. ``transb[i]`` specifies the form of op(``B``) used in
       the matrix multiplication in group ``i``. See :ref:`onemkl_datatypes` for more details.
 
    m
@@ -588,8 +588,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              onemkl::transpose transa,
-                              onemkl::transpose transb,
+                              oneapi::mkl::transpose transa,
+                              oneapi::mkl::transpose transb,
                               std::int64_t m,
                               std::int64_t n,
                               std::int64_t k,
@@ -611,8 +611,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              onemkl::transpose transa,
-                              onemkl::transpose transb,
+                              oneapi::mkl::transpose transa,
+                              oneapi::mkl::transpose transb,
                               std::int64_t m,
                               std::int64_t n,
                               std::int64_t k,

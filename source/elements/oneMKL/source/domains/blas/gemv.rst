@@ -52,7 +52,7 @@ gemv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void gemv(sycl::queue &queue,
-                 onemkl::transpose trans,
+                 oneapi::mkl::transpose trans,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -68,7 +68,7 @@ gemv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void gemv(sycl::queue &queue,
-                 onemkl::transpose trans,
+                 oneapi::mkl::transpose trans,
                  std::int64_t m,
                  std::int64_t n,
                  T alpha,
@@ -174,7 +174,7 @@ gemv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemv(sycl::queue &queue,
-                        onemkl::transpose trans,
+                        oneapi::mkl::transpose trans,
                         std::int64_t m,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
@@ -191,7 +191,7 @@ gemv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemv(sycl::queue &queue,
-                        onemkl::transpose trans,
+                        oneapi::mkl::transpose trans,
                         std::int64_t m,
                         std::int64_t n,
                         value_or_pointer<T> alpha,

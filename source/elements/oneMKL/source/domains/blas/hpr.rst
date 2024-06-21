@@ -51,7 +51,7 @@ hpr (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void hpr(sycl::queue &queue,
-                onemkl::uplo upper_lower,
+                oneapi::mkl::uplo upper_lower,
                 std::int64_t n,
                 Treal alpha,
                 sycl::buffer<T,1> &x,
@@ -62,7 +62,7 @@ hpr (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void hpr(sycl::queue &queue,
-                onemkl::uplo upper_lower,
+                oneapi::mkl::uplo upper_lower,
                 std::int64_t n,
                 Treal alpha,
                 sycl::buffer<T,1> &x,
@@ -146,7 +146,7 @@ hpr (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event hpr(sycl::queue &queue,
-                       onemkl::uplo upper_lower,
+                       oneapi::mkl::uplo upper_lower,
                        std::int64_t n,
                        value_or_pointer<Treal> alpha,
                        const T *x,
@@ -158,7 +158,7 @@ hpr (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event hpr(sycl::queue &queue,
-                       onemkl::uplo upper_lower,
+                       oneapi::mkl::uplo upper_lower,
                        std::int64_t n,
                        value_or_pointer<Treal> alpha,
                        const T *x,

@@ -48,7 +48,7 @@ her2 (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void her2(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t n,
                  T alpha,
                  sycl::buffer<T,1> &x,
@@ -62,7 +62,7 @@ her2 (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void her2(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
+                 oneapi::mkl::uplo upper_lower,
                  std::int64_t n,
                  T alpha,
                  sycl::buffer<T,1> &x,
@@ -158,7 +158,7 @@ her2 (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event her2(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
                         const T *x,
@@ -173,7 +173,7 @@ her2 (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event her2(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
+                        oneapi::mkl::uplo upper_lower,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
                         const T *x,

@@ -52,9 +52,9 @@ tpmv (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void tpmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_nonunit,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_nonunit,
                  std::int64_t n,
                  sycl::buffer<T,1> &a,
                  sycl::buffer<T,1> &x,
@@ -64,9 +64,9 @@ tpmv (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void tpmv(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
-                 onemkl::diag unit_nonunit,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
+                 oneapi::mkl::diag unit_nonunit,
                  std::int64_t n,
                  sycl::buffer<T,1> &a,
                  sycl::buffer<T,1> &x,
@@ -144,9 +144,9 @@ tpmv (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event tpmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
-                        onemkl::diag unit_nonunit,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
+                        oneapi::mkl::diag unit_nonunit,
                         std::int64_t n,
                         const T *a,
                         T *x,
@@ -157,9 +157,9 @@ tpmv (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event tpmv(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
-                        onemkl::diag unit_nonunit,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
+                        oneapi::mkl::diag unit_nonunit,
                         std::int64_t n,
                         const T *a,
                         T *x,

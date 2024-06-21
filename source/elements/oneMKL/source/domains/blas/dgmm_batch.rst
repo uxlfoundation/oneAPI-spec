@@ -63,7 +63,7 @@ of matrices in ``a`` and ``x`` buffers is given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        void dgmm_batch(sycl::queue &queue,
-                       onemkl::mkl::side left_right,
+                       oneapi::mkl::side left_right,
                        std::int64_t m,
                        std::int64_t n,
                        sycl::buffer<T,1> &a,
@@ -81,7 +81,7 @@ of matrices in ``a`` and ``x`` buffers is given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        void dgmm_batch(sycl::queue &queue,
-                       onemkl::mkl::side left_right,
+                       oneapi::mkl::side left_right,
                        std::int64_t m,
                        std::int64_t n,
                        sycl::buffer<T,1> &a,
@@ -248,7 +248,7 @@ in ``a`` and ``x`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              const onemkl::mkl::side *left_right,
+                              const oneapi::mkl::side *left_right,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T **a,
@@ -265,7 +265,7 @@ in ``a`` and ``x`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              const onemkl::mkl::side *left_right,
+                              const oneapi::mkl::side *left_right,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T **a,
@@ -372,7 +372,7 @@ in ``a`` and ``x`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              onemkl::mkl::side left_right,
+                              oneapi::mkl::side left_right,
                               std::int64_t m,
                               std::int64_t n,
                               const T *a,
@@ -391,7 +391,7 @@ in ``a`` and ``x`` are given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event dgmm_batch(sycl::queue &queue,
-                              onemkl::mkl::side left_right,
+                              oneapi::mkl::side left_right,
                               std::int64_t m,
                               std::int64_t n,
                               const T *a,

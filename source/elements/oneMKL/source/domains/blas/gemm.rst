@@ -101,8 +101,8 @@ gemm (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void gemm(sycl::queue &queue,
-                 onemkl::transpose transa,
-                 onemkl::transpose transb,
+                 oneapi::mkl::transpose transa,
+                 oneapi::mkl::transpose transb,
                  std::int64_t m,
                  std::int64_t n,
                  std::int64_t k,
@@ -119,8 +119,8 @@ gemm (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void gemm(sycl::queue &queue,
-                 onemkl::transpose transa,
-                 onemkl::transpose transb,
+                 oneapi::mkl::transpose transa,
+                 oneapi::mkl::transpose transb,
                  std::int64_t m,
                  std::int64_t n,
                  std::int64_t k,
@@ -303,8 +303,8 @@ gemm (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemm(sycl::queue &queue,
-                        onemkl::transpose transa,
-                        onemkl::transpose transb,
+                        oneapi::mkl::transpose transa,
+                        oneapi::mkl::transpose transb,
                         std::int64_t m,
                         std::int64_t n,
                         std::int64_t k,
@@ -322,8 +322,8 @@ gemm (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemm(sycl::queue &queue,
-                        onemkl::transpose transa,
-                        onemkl::transpose transb,
+                        oneapi::mkl::transpose transa,
+                        oneapi::mkl::transpose transb,
                         std::int64_t m,
                         std::int64_t n,
                         std::int64_t k,

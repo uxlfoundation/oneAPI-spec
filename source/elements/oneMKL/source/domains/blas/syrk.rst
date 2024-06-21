@@ -53,8 +53,8 @@ syrk (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void syrk(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
                  std::int64_t n,
                  std::int64_t k,
                  T alpha,
@@ -68,8 +68,8 @@ syrk (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void syrk(sycl::queue &queue,
-                 onemkl::uplo upper_lower,
-                 onemkl::transpose trans,
+                 oneapi::mkl::uplo upper_lower,
+                 oneapi::mkl::transpose trans,
                  std::int64_t n,
                  std::int64_t k,
                  T alpha,
@@ -195,8 +195,8 @@ syrk (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event syrk(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
                         value_or_pointer<T> alpha,
@@ -211,8 +211,8 @@ syrk (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event syrk(sycl::queue &queue,
-                        onemkl::uplo upper_lower,
-                        onemkl::transpose trans,
+                        oneapi::mkl::uplo upper_lower,
+                        oneapi::mkl::transpose trans,
                         std::int64_t n,
                         std::int64_t k,
                         value_or_pointer<T> alpha,

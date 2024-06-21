@@ -56,9 +56,9 @@ gemmt (Buffer Version)
 
    namespace oneapi::mkl::blas::column_major {
        void gemmt(sycl::queue &queue,
-                  onemkl::uplo upper_lower,
-                  onemkl::transpose transa,
-                  onemkl::transpose transb,
+                  oneapi::mkl::uplo upper_lower,
+                  oneapi::mkl::transpose transa,
+                  oneapi::mkl::transpose transb,
                   std::int64_t n,
                   std::int64_t k,
                   T alpha,
@@ -74,9 +74,9 @@ gemmt (Buffer Version)
 
    namespace oneapi::mkl::blas::row_major {
        void gemmt(sycl::queue &queue,
-                  onemkl::uplo upper_lower,
-                  onemkl::transpose transa,
-                  onemkl::transpose transb,
+                  oneapi::mkl::uplo upper_lower,
+                  oneapi::mkl::transpose transa,
+                  oneapi::mkl::transpose transb,
                   std::int64_t n,
                   std::int64_t k,
                   T alpha,
@@ -254,9 +254,9 @@ gemmt (USM Version)
 
    namespace oneapi::mkl::blas::column_major {
        sycl::event gemmt(sycl::queue &queue,
-                         onemkl::uplo upper_lower,
-                         onemkl::transpose transa,
-                         onemkl::transpose transb,
+                         oneapi::mkl::uplo upper_lower,
+                         oneapi::mkl::transpose transa,
+                         oneapi::mkl::transpose transb,
                          std::int64_t n,
                          std::int64_t k,
                          value_or_pointer<T> alpha,
@@ -273,9 +273,9 @@ gemmt (USM Version)
 
    namespace oneapi::mkl::blas::row_major {
        sycl::event gemmt(sycl::queue &queue,
-                         onemkl::uplo upper_lower,
-                         onemkl::transpose transa,
-                         onemkl::transpose transb,
+                         oneapi::mkl::uplo upper_lower,
+                         oneapi::mkl::transpose transa,
+                         oneapi::mkl::transpose transb,
                          std::int64_t n,
                          std::int64_t k,
                          value_or_pointer<T> alpha,
