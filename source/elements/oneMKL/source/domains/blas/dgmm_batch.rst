@@ -81,7 +81,7 @@ of matrices in ``a`` and ``x`` buffers is given by the ``batch_size`` parameter.
 
    namespace oneapi::mkl::blas::row_major {
        void dgmm_batch(sycl::queue &queue,
-                       oneapi::mkl::mkl::side left_right,
+                       oneapi::mkl::side left_right,
                        std::int64_t m,
                        std::int64_t n,
                        sycl::buffer<T,1> &a,
