@@ -103,7 +103,6 @@ at least one of the following:
  * :code:`Iter` is a valid :code:`counting_iterator`
  * :code:`Iter` is a valid :code:`discard_iterator`
  * :code:`Iter` is a valid :code:`zip_iterator`
- * :code:`Iter` is a valid :code:`std::reverse_iterator<It>` where :code:`It` satisfies :code:`ValidParallelIteratorSource`
 
 .. code:: cpp
 
@@ -243,7 +242,6 @@ The :code:`IndexMap` must satisfy at least one of the following:
  * :code:`IndexMap` is a valid :code:`permutation_iterator`
  * :code:`IndexMap` is a valid :code:`transform_iterator`
  * :code:`IndexMap` is a valid :code:`counting_iterator`
- * :code:`IndexMap` is a valid :code:`std::reverse_iterator<Iter>` where :code:`Iter` is a valid non-functor :code:`IndexMap` type
  * :code:`IndexMap` is a functor with a signature equivalent to :code:`T operator()(const T&) const` where
    :code:`T` is a `std::iterator_traits<SourceIterator>::difference_type`
 
