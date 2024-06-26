@@ -236,7 +236,7 @@ to the index of the source iterator. The arithmetic and comparison operators of
 iterator instances to determine their position in the index map. :code:`SourceIterator` must satisfy
 :code:`ValidParallelIteratorSource`.
 
-The :code:`IndexMap` must satisfy at least one of the following:
+The type :code:`IndexMap` must satisfy at least one of the following:
  * :code:`IndexMap` satisfies the C++ named requirement :code:`LegacyRandomAccessIterator`
  * :code:`IndexMap` is the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
  * :code:`IndexMap` is a valid :code:`permutation_iterator`
