@@ -44,7 +44,13 @@ If the arguments provided to a communication operation call do not comply to the
 Allgatherv
 **********
 
-Allgatherv is a collective communication operation that collects data from all the ranks within a communicator into a single buffer. Different ranks may contribute segments of different sizes. The resulting data in the output buffer must be the same for each rank.
+Allgatherv is a collective communication operation that collects data from all
+the ranks within a communicator into a single buffer. Different ranks may
+contribute segments of different sizes. The resulting data in the output buffer
+must be the same for each rank.
+
+Allgatherv is in place when  ``send_buf == recv_buf + rank_offset``, where
+``rank_offset = sum (recv_counts[i])``, for all ``i < rank``.
 
 .. code:: cpp
 
@@ -100,7 +106,11 @@ return ``event``
 Allreduce
 *********
 
-Allreduce is a collective communication operation that performs the global reduction operation on values from all ranks of communicator and distributes the result back to all ranks.
+Allreduce is a collective communication operation that performs the global
+reduction operation on values from all ranks of communicator and distributes
+the result back to all ranks.
+
+Allreduce is in-place when ``send_buf == recv_buf``.
 
 .. code:: cpp
 
@@ -291,8 +301,11 @@ return ``event``
 Reduce
 ******
 
-Reduce is a collective communication operation that performs the global reduction operation
-on values from all ranks of the communicator and returns the result to the root rank.
+Reduce is a collective communication operation that performs the global
+reduction operation on values from all ranks of the communicator and returns
+the result to the root rank.
+
+Reduce is in-place when ``send_buf == recv_buf``.
 
 .. code:: cpp
 
@@ -350,8 +363,11 @@ return ``event``
 ReduceScatter
 **************
 
-Reduce-scatter is a collective communication operation that performs the global reduction operation
-on values from all ranks of the communicator and scatters the result in blocks back to all ranks.
+Reduce-scatter is a collective communication operation that performs the global
+reduction operation on values from all ranks of the communicator and scatters
+the result in blocks back to all ranks.
+
+ReduceScatter is in-place when ``recv_buf == send_buf + rank * recv_count``
 
 .. code:: cpp
 
