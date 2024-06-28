@@ -107,15 +107,19 @@ compute_forward (Buffer version)
 
    inout_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
-      defining the real parts of all the relevant data sequences, as
-      configured by ``desc``. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      defining the real parts of all the relevant data sequences, as configured
+      by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    in
       ``sycl::buffer`` object of sufficient capacity to store the elements
@@ -149,14 +153,18 @@ compute_forward (Buffer version)
    inout_re
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. Only with complex descriptors configured for in-place operations with
+      by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    out
       ``sycl::buffer`` object of sufficient capacity to store the elements
@@ -267,14 +275,18 @@ compute_forward (USM version)
    inout_re
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. Only with complex descriptors configured for in-place operations with
+      by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    in
       Pointer to USM allocation of sufficient capacity to store the elements
@@ -312,14 +324,18 @@ compute_forward (USM version)
    inout_re
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. Only with complex descriptors configured for in-place operations with
+      by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
       :ref:`onemkl_dft_complex_storage_real_real`.
 
    inout_im
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be single or double precision
+      floating-point, as described by the descriptor's precision. Only with
+      complex descriptors configured for in-place operations with
+      :ref:`onemkl_dft_complex_storage_real_real`.
 
    out
       Pointer to USM allocation of sufficient capacity to store the elements
