@@ -688,5 +688,35 @@ than an element in the range being searched.
 
 The elements e of [start, end) must be partitioned with respect to the comparator used.
 
+.. code:: cpp
+
+  template <class Policy, class InputIt, class OutputIt, class UnaryOp, class UnaryPredicate>
+  OutputIt
+  transform_if(Policy&& policy, InputIt start, InputIt end, OutputIt result, UnaryOp op,
+      UnaryPredicate pred);                                                               // (1)
+
+  template <class Policy, class InputIt1, class InputIt2, class OutputIt, class BinaryOp, 
+      class BinaryPredicate>
+  OutputIt
+  transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
+      BinaryOp op, BinaryPredicate pred);                                                 // (2)
+
+:code:`oneapi::dpl::transform_if`
+
+1.
+evaluates the unary predicate :code:`pred` for each position :code:`i` of the sequence
+:code:`[start, end)` and if :code:`pred(start[i]) == true`, it performs the unary operation
+:code:`op(start[i])` and stores the result into :code:`result[i]`. If
+:code:`pred(start[i]) == false`, the data element :code:`result[i]` is not modified from its
+initial value.
+
+2.
+evaluates the binary predicate :code:`pred` for each position :code:`i` of the sequence
+:code:`[start1, end1)` and if :code:`pred(start1[i], start2[i]) == true`, it performs the
+binary operation :code:`op(start1[i], start2[i])` and stores the result into :code:`result[i]`.
+If :code:`pred(start1[i], start2[i]) == false`, the data element :code:`result[i]` is not
+modified from its initial value.
+
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
