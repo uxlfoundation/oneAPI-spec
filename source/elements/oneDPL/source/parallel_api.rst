@@ -688,5 +688,35 @@ than an element in the range being searched.
 
 The elements e of [start, end) must be partitioned with respect to the comparator used.
 
+.. code:: cpp
+
+    template <typename Policy, typename InputIt, typename Size, typename OutputIt,
+        typename ValueType>
+    OutputIt
+    histogram(Policy&& exec, InputIt start, InputIt end, Size num_bins,
+        ValueType first_bin_min_val, ValueType last_bin_max_val, OutputIt histogram_first); // (1)
+
+    template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
+    OutputIt
+    histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
+              InputIt2 boundary_end, OutputIt histogram_first);                             // (2)
+
+:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end)`,
+which counts the number of elements that map to each of a set of bins and stores the count into
+a sequence in :code:`[histogram_first, histogram_first + num_bins)`. Input values that do not map
+to a defined bin are skipped silently. Sufficient output data to store each count must be provided,
+and :code:`Size` must be sufficient to store the counts of the histogram without overflow.
+All input and output sequences must be ``RandomAccessIterators``.
+
+1. The elements of :code:`[start, end)` are mapped into evenly divided bins between
+:code:`first_bin_min_val` and :code:`last_bin_max_val` such that an input element :code:`start[i]`
+maps into a bin :code:`histogram_first[j]` where
+:code:`j = floor((start[i] - first_bin_min_val) / ((last_bin_max_val - first_bin_min_val) / num_bins)))`.
+
+2. The elements of :code:`[start, end)` are mapped into bins as defined by bin boundaries in
+:code:`[boundary_start, boundary_end)` such that an input element :code:`start[i]` maps to a bin
+:code:`histogram_first[j]` if and only if
+:code:`(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])`.
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
