@@ -65,7 +65,7 @@ where and how an algorithm runs.
         template <typename KernelName = /*unspecified*/>
         class device_policy;
 
-        device_policy<> dpcpp_default;
+        inline device_policy<> dpcpp_default;
 
         template <typename KernelName = /*unspecified*/>
         device_policy<KernelName>
