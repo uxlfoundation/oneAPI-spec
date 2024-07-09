@@ -19,7 +19,7 @@ Babel==2.14.0
 beautifulsoup4==4.12.3
 bottle==0.12.25
 breathe==4.35.0
-certifi==2024.2.2
+certifi==2024.7.4
 cfgv==3.4.0
 charset-normalizer==3.3.2
 distlib==0.3.8
