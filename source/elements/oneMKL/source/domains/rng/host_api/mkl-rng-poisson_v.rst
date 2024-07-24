@@ -119,17 +119,17 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
     .. container:: section
 
-        .. _`explicit poisson_v(std::vector<double> lambda)`:
+        .. _`explicit poisson_v(SequenceContainerOrView<double> lambda)`:
 
         .. code-block:: cpp
 
-            explicit poisson_v::poisson_v(std::vector<double> lambda)
+            explicit poisson_v::poisson_v(SequenceContainerOrView<double> lambda)
 
         .. container:: section
 
             .. rubric:: Description
 
-            Constructor with parameters. `lambda` is a distribution parameter.
+            Constructor with parameters. ``lambda`` is a distribution parameter.
 
         .. container:: section
 
@@ -144,16 +144,16 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
     .. container:: section
 
-        .. _`std::vector<double> lambda() const`:
+        .. _`SequenceContainerOrView<double> lambda() const`:
 
         .. code-block:: cpp
 
-            double poisson_v::lambda() const
+            SequenceContainerOrView<double> poisson_v::lambda() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `lambda`.
+            Returns the distribution parameter ``lambda``.
 
-**Parent topic:** :ref:`onemkl_rng_distributions`
+**Parent topic:** :ref:`onemkl_rng_distributions`
