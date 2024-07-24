@@ -13,7 +13,8 @@ Class is used for generation of Poisson distributed integer types random numbers
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`\lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide
+n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`\lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
 
 The probability distribution is given by:
 
@@ -32,8 +33,8 @@ The cumulative distribution function is as follows:
 class poisson_v
 ---------------
 
-Let `VectorOrSpan` be a type that can be a `std::vector` or `sycl::span`.
-It's implementation defined which type `VectorOrSpan` represents: `std::vector` or `sycl::span`.
+Let ``VectorOrSpan`` be a type that can be a ``std::vector`` or ``sycl::span``.
+It's implementation defined which type ``VectorOrSpan`` represents: ``std::vector`` or ``sycl::span``.
 
 .. rubric:: Syntax
 
