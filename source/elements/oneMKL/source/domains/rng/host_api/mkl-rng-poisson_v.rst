@@ -33,8 +33,8 @@ The cumulative distribution function is as follows:
 class poisson_v
 ---------------
 
-Let ``VectorOrSpan`` be a type that can be a ``std::vector`` or ``sycl::span``.
-It's implementation defined which type ``VectorOrSpan`` represents: ``std::vector`` or ``sycl::span``.
+Let ``SequenceContainerOrView`` be a type that can be one of C++ Sequence containers or C++ Views (``span``, ``mdspan``).
+It's implementation defined which type ``SequenceContainerOrView`` represents.
 
 .. rubric:: Syntax
 
@@ -46,8 +46,8 @@ It's implementation defined which type ``VectorOrSpan`` represents: ``std::vecto
     public:
         using method_type = Method;
         using result_type = IntType;
-        explicit poisson_v(VectorOrSpan<double> lambda);
-        VectorOrSpan<double> lambda() const;
+        explicit poisson_v(SequenceContainerOrView<double> lambda);
+        SequenceContainerOrView<double> lambda() const;
     };
     }
 
@@ -80,9 +80,9 @@ It's implementation defined which type ``VectorOrSpan`` represents: ``std::vecto
 
         * - Routine
           - Description
-        * - `explicit poisson_v(VectorOrSpan<double> lambda)`_
+        * - `explicit poisson_v(SequenceContainerOrView<double> lambda)`_
           - Constructor with parameters
-        * - `VectorOrSpan<double> lambda() const`_
+        * - `SequenceContainerOrView<double> lambda() const`_
           - Method to obtain distribution parameter
 
 .. container:: section
