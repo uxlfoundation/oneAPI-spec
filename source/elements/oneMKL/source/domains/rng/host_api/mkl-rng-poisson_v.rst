@@ -32,6 +32,9 @@ The cumulative distribution function is as follows:
 class poisson_v
 ---------------
 
+Let `VectorOrSpan` be a type that can be a `std::vector` or `sycl::span`.
+It's implementation defined which type `VectorOrSpan` represents: `std::vector` or `sycl::span`.
+
 .. rubric:: Syntax
 
 .. code-block:: cpp
@@ -42,8 +45,8 @@ class poisson_v
     public:
         using method_type = Method;
         using result_type = IntType;
-        explicit poisson_v(std::vector<double> lambda);
-        std::vector<double> lambda() const;
+        explicit poisson_v(VectorOrSpan<double> lambda);
+        VectorOrSpan<double> lambda() const;
     };
     }
 
@@ -76,9 +79,9 @@ class poisson_v
 
         * - Routine
           - Description
-        * - `explicit poisson_v(std::vector<double> lambda)`_
+        * - `explicit poisson_v(VectorOrSpan<double> lambda)`_
           - Constructor with parameters
-        * - `std::vector<double> lambda() const`_
+        * - `VectorOrSpan<double> lambda() const`_
           - Method to obtain distribution parameter
 
 .. container:: section
