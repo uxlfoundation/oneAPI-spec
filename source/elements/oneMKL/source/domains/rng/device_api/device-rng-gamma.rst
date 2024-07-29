@@ -69,14 +69,8 @@ class gamma
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::gamma_method::by_default
-            Generation method. The specific values are as follows:
-
-                * ``oneapi::mkl::rng::device::gamma_method::by_default``
-                * ``oneapi::mkl::rng::device::gamma_method::marsaglia``
-                * ``oneapi::mkl::rng::device::gamma_method::marsaglia_accurate``
-
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`.
+        typename Method
+            Generation method. The type is unspecified.
 
 
 .. container:: section

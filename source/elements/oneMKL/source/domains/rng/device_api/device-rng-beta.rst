@@ -72,14 +72,8 @@ class beta
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::beta_method::by_default
-            Generation method. The specific values are as follows:
-
-                * ``oneapi::mkl::rng::device::beta_method::by_default``
-                * ``oneapi::mkl::rng::device::beta_method::cja``
-                * ``oneapi::mkl::rng::device::beta_method::cja_accurate``
-
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`.
+        typename Method
+            Generation method. The type is unspecified.
 
 
 .. container:: section
