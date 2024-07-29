@@ -7,11 +7,11 @@
 Device Distributions
 ====================
 
-oneMKL RNG routines are used to generate random numbers with different types of distributions. Each function group is 
-introduced below by the type of underlying distribution and contains a short description of its functionality, as well 
-as specifications of the call sequence and the explanation of input and output parameters. The Device Continuous 
-Distribution Generators table and Device Discrete Distribution Generators table mention random number generator routines 
-with data types and output distributions, and sets correspondence between data types of the generator routines and the 
+oneMKL RNG routines are used to generate random numbers with different types of distributions. Each function group is
+introduced below by the type of underlying distribution and contains a short description of its functionality, as well
+as specifications of the call sequence and the explanation of input and output parameters. The Device Continuous
+Distribution Generators table and Device Discrete Distribution Generators table mention random number generator routines
+with data types and output distributions, and sets correspondence between data types of the generator routines and the
 basic random number generators.
 
 **Device Continuous Distribution Generators**
@@ -39,6 +39,14 @@ basic random number generators.
      -     float, double
      -     float, double
      -     Lognormal distribution
+   * -     :ref:`onemkl_device_rng_beta`
+     -     float, double
+     -     float, double
+     -     Beta distribution
+   * -     :ref:`onemkl_device_rng_gamma`
+     -     float, double
+     -     float, double
+     -     Gamma distribution
 
 
 **Device Discrete Distribution Generators**
@@ -89,4 +97,6 @@ basic random number generators.
    device-rng-uniform-bits.rst
    device-rng-poisson.rst
    device-rng-bernoulli.rst
+   device-rng-beta.rst
+   device-rng-gamma.rst
 
