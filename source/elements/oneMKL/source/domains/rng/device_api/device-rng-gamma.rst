@@ -1,20 +1,19 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_rng_gamma:
+.. _onemkl_device_rng_gamma:
 
 gamma
 =====
 
-Class is used for generation of gamma distributed real types random numbers.
 
-.. _onemkl_rng_gamma_description:
+Generates gamma distributed random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>`
-function to provide random numbers gamma distributed with shape :math:`\alpha`,
+The ``gamma`` class object is used in the ``generate`` function to provide
+random numbers with gamma distribution that has shape :math:`\alpha`,
 displacement :math:`a`, and scale parameter :math:`\beta`, where
 :math:`a, \alpha, \beta \in R; \alpha > 0; \beta > 0`.
 
@@ -30,7 +29,6 @@ The cumulative distribution function is as follows:
 
     F_{a, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} \int^x_a\frac{1}{\Gamma(\alpha)\beta^{\alpha}}(y - a)^{\alpha - 1}e^{-(y - a) / \beta}dy, x \ge a \\ 0, x < a \end{array}\right.
 
-.. _onemkl_rng_gamma_syntax:
 
 class gamma
 -----------
@@ -39,19 +37,23 @@ class gamma
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
-    template<typename RealType = float, typename Method = gamma_method::by_default>
-    class gamma {
-    public:
-        using method_type = Method;
-        using result_type = RealType;
-        gamma();
-        explicit gamma(RealType alpha, RealType a, RealType beta);
-        RealType alpha() const;
-        RealType a() const;
-        RealType beta() const;
-    };
-    }
+   namespace oneapi::mkl::rng::device {
+     template<typename RealType, typename Method>
+     class gamma {
+     public:
+       using method_type = Method;
+       using result_type = RealType;
+
+       gamma();
+       explicit gamma(RealType alpha, RealType a, RealType beta);
+
+       RealType alpha() const;
+       RealType a() const;
+       RealType beta() const;
+       std::size_t count_skipped_numbers() const;
+     };
+   }
+
 
 .. container:: section
 
@@ -61,19 +63,21 @@ class gamma
 
         typename RealType
             Type of the produced values. Supported types:
+
                 * ``float``
                 * ``double``
 
     .. container:: section
 
         typename Method = oneapi::mkl::rng::gamma_method::by_default
-            Transformation method, which will be used for generation. Supported types:
+            Generation method. The specific values are as follows:
 
-                * ``oneapi::mkl::rng::gamma_method::by_default``
-                * ``oneapi::mkl::rng::gamma_method::marsaglia``
-                * ``oneapi::mkl::rng::gamma_method::marsaglia_accurate``
+                * ``oneapi::mkl::rng::device::gamma_method::by_default``
+                * ``oneapi::mkl::rng::device::gamma_method::marsaglia``
+                * ``oneapi::mkl::rng::device::gamma_method::marsaglia_accurate``
 
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
+            See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`.
+
 
 .. container:: section
 
@@ -93,7 +97,10 @@ class gamma
         * - `RealType a() const`_
           - Method to obtain displacement value
         * - `RealType beta() const`_
-          - Method to obtain scale value
+          - Method to obtain scale parameter
+        * - `size_t count_skipped_numbers() const`_
+          - Method to obtain amount of random numbers that were rejected during
+            the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
 
 .. container:: section
 
@@ -139,11 +146,12 @@ class gamma
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as `alpha` = 1.0, `a` = 0.0, and `beta` = 1.0.
+            Default constructor for distribution, parameters set as
+            ``alpha`` = 1.0, ``a`` = 0.0, ``beta`` = 1.0.
 
     .. container:: section
 
-        .. _`explicit gamma(RealType alpha, RealType a, RealType beta)`:
+        .. _`explicit gamma(RealType a, RealType beta)`:
 
         .. code-block:: cpp
 
@@ -153,14 +161,14 @@ class gamma
 
             .. rubric:: Description
 
-            Constructor with parameters. `alpha` is a shape value, `a` is a displacement value, `beta` is a scale parameter.
+            Constructor with parameters. ``alpha`` is a shape, ``a`` is a displacement, ``beta`` is a scale parameter.
 
         .. container:: section
 
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`alpha \leq` static_cast<RealType>(0.0), or :math:`beta \leq` static_cast<RealType>(0.0)
+                Exception is thrown when :math:`alpha \leq 0` or :math:`beta \leq 0`
 
 .. container:: section
 
@@ -178,7 +186,7 @@ class gamma
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `alpha` - shape value.
+            Returns the distribution parameter ``alpha`` - shape.
 
     .. container:: section
 
@@ -192,7 +200,7 @@ class gamma
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `a` - displacement value.
+            Returns the distribution parameter ``a`` - displacement.
 
     .. container:: section
 
@@ -206,6 +214,21 @@ class gamma
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `beta` - scale parameter.
+            Returns the distribution parameter ``beta`` - scale parameter value.
 
-**Parent topic:** :ref:`onemkl_rng_distributions`
+    .. container:: section
+
+        .. _`size_t count_skipped_numbers() const`:
+
+        .. code-block:: cpp
+
+            std::size_t gamma::count_skipped_numbers() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the amount of random numbers that were rejected during
+            the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
+
+**Parent topic:** :ref:`onemkl_device_rng_distributions`

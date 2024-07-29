@@ -12,7 +12,7 @@ Generates exponentially distributed random numbers.
 
 .. rubric:: Description
 
-The ``exponential`` class object is used in the ``generate`` function to provide
+The ``exponential`` class object is used in the ``generate`` function to provide 
 random numbers with exponential distribution that has displacement :math:`a` and scalefactor :math:`\beta`,
 where :math:`a, \beta \in R ; \beta > 0`.
 
@@ -53,10 +53,10 @@ class exponential
      public:
        using method_type = Method;
        using result_type = RealType;
-
+  
        exponential();
        explicit exponential(RealType a, RealType beta);
-
+  
        RealType a() const;
        RealType beta() const;
      };
@@ -113,7 +113,7 @@ class exponential
 
         .. code-block:: cpp
 
-            exponential::method_type = Method
+            lognormal::method_type = Method
 
         .. container:: section
 
@@ -125,7 +125,7 @@ class exponential
 
         .. code-block:: cpp
 
-            exponential::result_type = RealType
+            lognormal::result_type = RealType
 
         .. container:: section
 
@@ -204,4 +204,4 @@ class exponential
 
             Returns the distribution parameter `beta` - scalefactor value.
 
-**Parent topic:** :ref:`onemkl_device_rng_distributions`
+**Parent topic:** :ref:`onemkl_device_rng_distributions`

@@ -12,7 +12,7 @@ Generates Poisson distributed random values.
 .. rubric:: Description
 
 The ``poisson`` class object is used in the ``generate`` and function
-to provide Poisson distributed random numbers with distribution parameter λ, where :math:`\lambda \in R; \lambda > 0`.
+to provide Poisson distributed random numbers with distribution parameter :math:`\lambda`, where :math:`\lambda \in R; \lambda > 0`.
 
 
 The probability distribution is given by:
@@ -51,7 +51,7 @@ class poisson
 
        poisson();
        explicit poisson(double lambda);
-       
+
        double lambda() const;
      };
    }
