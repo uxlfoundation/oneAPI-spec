@@ -13,7 +13,10 @@ Class is used for generation of beta distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`, displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`. :math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>`
+function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`,
+displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`.
+:math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -90,9 +93,9 @@ class beta
         * - `explicit beta(RealType p, RealType q, RealType a, RealType b)`_
           - Constructor with parameters
         * - `RealType p() const`_
-          - Method to obtain shape `p`
+          - Method to obtain shape ``p``
         * - `RealType q() const`_
-          - Method to obtain shape `q`
+          - Method to obtain shape ``q``
         * - `RealType a() const`_
           - Method to obtain displacement :math:`\alpha`
         * - `RealType b() const`_
@@ -142,7 +145,7 @@ class beta
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as `p` = 1.0, `q` = 0.0, :math:`\alpha` = 1.0, :math:`\beta` = 1.0.
+            Default constructor for distribution, parameters set as ``p`` = 1.0, ``q`` = 0.0, :math:`\alpha` = 1.0, :math:`\beta` = 1.0.
 
     .. container:: section
 
@@ -156,7 +159,7 @@ class beta
 
             .. rubric:: Description
 
-            Constructor with parameters. `p` and `q` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scalefactor.
+            Constructor with parameters. ``p`` and ``q`` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scalefactor.
 
         .. container:: section
 
@@ -181,7 +184,7 @@ class beta
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `p` - shape.
+            Returns the distribution parameter ``p`` - shape.
 
     .. container:: section
 
@@ -195,7 +198,7 @@ class beta
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `q` - shape.
+            Returns the distribution parameter ``q`` - shape.
 
     .. container:: section
 

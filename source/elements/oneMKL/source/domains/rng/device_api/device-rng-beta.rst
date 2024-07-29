@@ -1,47 +1,39 @@
-.. SPDX-FileCopyrightText: 2023 Intel Corporation
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_device_rng_exponential:
+.. _onemkl_device_rng_beta:
 
-exponential
-===========
+beta
+====
 
 
-Generates exponentially distributed random numbers.
+Generates beta distributed random numbers.
 
 .. rubric:: Description
 
-The ``exponential`` class object is used in the ``generate`` function to provide 
-random numbers with exponential distribution that has displacement :math:`a` and scalefactor :math:`\beta`,
-where :math:`a, \beta \in R ; \beta > 0`.
+The ``beta`` class object is used in the ``generate`` function to provide
+random numbers with beta distribution that has shape parameters :math:`p` and :math:`q`,
+displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`.
+:math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
 
-
-The probability density function is given by:
+The probability distribution is given by:
 
 .. math::
 
-   f_{a, \beta}(x) =
-   \begin{cases}
-      \frac{1}{\beta} \exp (-\frac{(x-a)}{\beta}), & x \geq a \\
-      0, & x < a
-   \end{cases},
-   - \infty < x < + \infty
+    f_{p, q, \alpha, \beta}(x) = \left\{ \begin{array}{rcl} \frac{1}{B(p, q) * \beta^{p + q - 1}}(x - a)^{p - 1}*(\beta + \alpha - x)^{q - 1}, \alpha \leq x < \alpha + \beta \\ 0, x < \alpha, x \ge \alpha + \beta \end{array}\right.
 
 The cumulative distribution function is as follows:
 
 .. math::
 
-   F_{a, \beta}(x) =
-   \begin{cases}
-      1 - \exp (-\frac{(x-a)}{\beta}), & x \geq a \\
-      0, & x < a
-   \end{cases},
-   - \infty < x < + \infty
+    F_{a, b}(x) = \left\{ \begin{array}{rcl} 0, x < \alpha \\ \int^x_{\alpha}\frac{1}{B(p, q) * \beta^{p + q - 1}}(y - \alpha)^{p - 1}*(\beta + \alpha - y)^{q - 1}dy, \alpha \leq x < \alpha + \beta, x \in R \\ 1, x \ge \alpha + \beta \end{array}\right.
 
 
-class exponential
------------------
+Where :math:`B(p, 1)` is the complete beta function.
+
+class beta
+----------
 
 .. rubric:: Syntax
 
@@ -49,16 +41,19 @@ class exponential
 
    namespace oneapi::mkl::rng::device {
      template<typename RealType, typename Method>
-     class exponential {
+     class beta {
      public:
        using method_type = Method;
        using result_type = RealType;
-  
-       exponential();
-       explicit exponential(RealType a, RealType beta);
-  
+
+       beta();
+       explicit beta(RealType p, RealType q, RealType a, RealType b);
+
+       RealType p() const;
+       RealType q() const;
        RealType a() const;
-       RealType beta() const;
+       RealType b() const;
+       std::size_t count_rejected_numbers() const;
      };
    }
 
@@ -77,12 +72,12 @@ class exponential
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::exponential_method::by_default
+        typename Method = oneapi::mkl::rng::beta_method::by_default
             Generation method. The specific values are as follows:
 
-                * ``oneapi::mkl::rng::device::exponential_method::by_default``
-                * ``oneapi::mkl::rng::device::exponential_method::icdf``
-                * ``oneapi::mkl::rng::device::exponential_method::icdf_accurate``
+                * ``oneapi::mkl::rng::device::beta_method::by_default``
+                * ``oneapi::mkl::rng::device::beta_method::cja``
+                * ``oneapi::mkl::rng::device::beta_method::cja_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemkl_device_rng_distributions_method>`.
 
@@ -96,14 +91,21 @@ class exponential
 
         * - Routine
           - Description
-        * - `exponential()`_
+        * - `beta()`_
           - Default constructor
-        * - `explicit exponential(RealType a, RealType beta)`_
+        * - `explicit beta(RealType p, RealType q, RealType a, RealType b)`_
           - Constructor with parameters
+        * - `RealType p() const`_
+          - Method to obtain shape ``p``
+        * - `RealType q() const`_
+          - Method to obtain shape ``q``
         * - `RealType a() const`_
-          - Method to obtain displacement value
-        * - `RealType beta() const`_
-          - Method to obtain scalefactor
+          - Method to obtain displacement :math:`\alpha`
+        * - `RealType b() const`_
+          - Method to obtain scale parameter :math:`\beta`
+        * - `size_t count_rejected_numbers() const`_
+          - Method to obtain amount of random numbers that were rejected during
+            the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
 
 .. container:: section
 
@@ -113,7 +115,7 @@ class exponential
 
         .. code-block:: cpp
 
-            lognormal::method_type = Method
+            beta::method_type = Method
 
         .. container:: section
 
@@ -125,7 +127,7 @@ class exponential
 
         .. code-block:: cpp
 
-            lognormal::result_type = RealType
+            beta::result_type = RealType
 
         .. container:: section
 
@@ -139,38 +141,39 @@ class exponential
 
     .. container:: section
 
-        .. _`exponential()`:
+        .. _`beta()`:
 
         .. code-block:: cpp
 
-            exponential::exponential()
+            beta::beta()
 
         .. container:: section
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as `a` = 0.0, `beta` = 1.0.
+            Default constructor for distribution, parameters set as
+            ``p`` = 1.0, ``q`` = 0.0, :math:`\alpha` = 1.0, :math:`\beta` = 1.0.
 
     .. container:: section
 
-        .. _`explicit exponential(RealType a, RealType beta)`:
+        .. _`explicit beta(RealType p, RealType q, RealType a, RealType b)`:
 
         .. code-block:: cpp
 
-            explicit exponential::exponential(RealType a, RealType beta)
+            explicit beta::beta(RealType p, RealType q, RealType a, RealType b)
 
         .. container:: section
 
             .. rubric:: Description
 
-            Constructor with parameters. `a` is a displacement, `beta` is a scalefactor.
+            Constructor with parameters. ``p`` and ``q`` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scale parameter.
 
         .. container:: section
 
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`beta \leq 0`
+                Exception is thrown when :math:`p \leq 0`, or :math:`q \leq 0`, or :math:`\beta \leq 0`
 
 .. container:: section
 
@@ -178,30 +181,73 @@ class exponential
 
     .. container:: section
 
+        .. _`RealType p() const`:
+
+        .. code-block:: cpp
+
+            RealType beta::p() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the distribution parameter ``p`` - shape.
+
+    .. container:: section
+
+        .. _`RealType q() const`:
+
+        .. code-block:: cpp
+
+            RealType beta::q() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the distribution parameter ``q`` - shape.
+
+    .. container:: section
+
         .. _`RealType a() const`:
 
         .. code-block:: cpp
 
-            RealType exponential::a() const
+            RealType beta::a() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `a` - displacement.
+            Returns the distribution parameter :math:`\alpha` - displacement.
 
     .. container:: section
 
-        .. _`RealType beta() const`:
+        .. _`RealType b() const`:
 
         .. code-block:: cpp
 
-            RealType exponential::beta() const
+            RealType beta::b() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `beta` - scalefactor value.
+            Returns the distribution parameter :math:`\beta` - scale parameter value.
 
-**Parent topic:** :ref:`onemkl_device_rng_distributions`
+    .. container:: section
+
+        .. _`size_t count_rejected_numbers() const`:
+
+        .. code-block:: cpp
+
+            std::size_t beta::count_rejected_numbers() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the amount of random numbers that were rejected during
+            the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
+
+**Parent topic:** :ref:`onemkl_device_rng_distributions`

@@ -151,7 +151,7 @@ class gamma
 
     .. container:: section
 
-        .. _`explicit gamma(RealType a, RealType beta)`:
+        .. _`explicit gamma(RealType alpha, RealType a, RealType beta)`:
 
         .. code-block:: cpp
 
