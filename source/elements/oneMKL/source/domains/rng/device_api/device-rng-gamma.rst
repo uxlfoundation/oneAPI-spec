@@ -50,7 +50,7 @@ class gamma
        RealType alpha() const;
        RealType a() const;
        RealType beta() const;
-       std::size_t count_skipped_numbers() const;
+       std::size_t count_rejected_numbers() const;
      };
    }
 
@@ -98,7 +98,7 @@ class gamma
           - Method to obtain displacement value
         * - `RealType beta() const`_
           - Method to obtain scale parameter
-        * - `size_t count_skipped_numbers() const`_
+        * - `size_t count_rejected_numbers() const`_
           - Method to obtain amount of random numbers that were rejected during
             the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
 
@@ -218,11 +218,11 @@ class gamma
 
     .. container:: section
 
-        .. _`size_t count_skipped_numbers() const`:
+        .. _`size_t count_rejected_numbers() const`:
 
         .. code-block:: cpp
 
-            std::size_t gamma::count_skipped_numbers() const
+            std::size_t gamma::count_rejected_numbers() const
 
         .. container:: section
 
