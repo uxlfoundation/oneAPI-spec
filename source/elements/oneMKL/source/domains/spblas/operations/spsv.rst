@@ -261,6 +261,8 @@ spsv
    - The data of the dense handle ``x_handle`` and scalar ``alpha`` can be reset
      before each call to ``spsv``. Changing the data of the sparse handle
      ``A_handle`` is undefined behavior.
+   - The data must be available on the device when calling ``spsv_optimize`` by
+     using event dependencies if needed.
    - ``spsv_optimize`` and ``spsv`` are asynchronous.
    - The algorithm defaults to ``spsv_alg::default_alg`` if a backend does not
      support the provided algorithm.

@@ -276,6 +276,8 @@ spmm
    - The data of the dense handles ``B_handle`` and ``C_handle`` and the scalars
      ``alpha`` and ``beta`` can be reset before each call to ``spmm``. Changing
      the data of the sparse handle ``A_handle`` is undefined behavior.
+   - The data must be available on the device when calling ``spmm_optimize`` by
+     using event dependencies if needed.
    - ``spmm_optimize`` and ``spmm`` are asynchronous.
    - The algorithm defaults to ``spmm_alg::default_alg`` if a backend does not
      support the provided algorithm.
