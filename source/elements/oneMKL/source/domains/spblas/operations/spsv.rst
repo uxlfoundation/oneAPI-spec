@@ -261,6 +261,8 @@ spsv
    - The data of the dense handle ``x_handle`` and scalar ``alpha`` can be reset
      before each call to ``spsv``. Changing the data of the sparse handle
      ``A_handle`` is undefined behavior.
+   - The data must be available on the device when calling ``spsv_optimize`` by
+     using event dependencies if needed.
    - ``spsv_optimize`` and ``spsv`` are asynchronous.
    - The algorithm defaults to ``spsv_alg::default_alg`` if a backend does not
      support the provided algorithm.
@@ -283,8 +285,8 @@ spsv
 
    A_view
       Specifies which part of the handle should be read as described by
-      :ref:`onemkl_sparse_matrix_view`. ``A_view.type_view`` must be
-      ``matrix_descr::triangular`` or ``matrix_descr::diagonal``.
+      :ref:`onemkl_sparse_matrix_view`. The ``type_view`` field must be
+      ``matrix_descr::triangular``.
 
    A_handle
       Sparse matrix handle object representing :math:`A`.

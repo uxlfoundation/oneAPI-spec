@@ -47,9 +47,8 @@ set_dense_vector_data (Buffer version)
    .. rubric:: Template parameters
 
    dataType
-      See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
-      a different type than what was used when creating the
-      ``dense_vector_handle_t``.
+      See :ref:`supported template types<onemkl_sparse_supported_types>`. Must
+      be the same type as was used when creating the ``dense_vector_handle_t``.
 
 .. container:: section
 
@@ -105,9 +104,8 @@ set_dense_vector_data (USM version)
    .. rubric:: Template parameters
 
    dataType
-      See :ref:`supported template types<onemkl_sparse_supported_types>`. Can be
-      a different type than what was used when creating the
-      ``dense_vector_handle_t``.
+      See :ref:`supported template types<onemkl_sparse_supported_types>`. Must
+      be the same type as was used when creating the ``dense_vector_handle_t``.
 
 .. container:: section
 

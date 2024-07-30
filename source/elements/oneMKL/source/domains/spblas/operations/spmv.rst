@@ -270,6 +270,8 @@ spmv
    - The data of the dense handles ``x_handle`` and ``y_handle`` and the scalars
      ``alpha`` and ``beta`` can be reset before each call to ``spmv``. Changing
      the data of the sparse handle ``A_handle`` is undefined behavior.
+   - The data must be available on the device when calling ``spmv_optimize`` by
+     using event dependencies if needed.
    - ``spmv_optimize`` and ``spmv`` are asynchronous.
    - The algorithm defaults to ``spmv_alg::default_alg`` if a backend does not
      support the provided algorithm.
@@ -292,7 +294,11 @@ spmv
 
    A_view
       Specifies which part of the handle should be read as described by
-      :ref:`onemkl_sparse_matrix_view`.
+      :ref:`onemkl_sparse_matrix_view`. The ``type_view`` field cannot be
+      ``matrix_descr::diagonal``. The ``diag_view`` field can be ``diag::unit``
+      if and only if ``type_view`` is ``matrix_descr::triangular``. The
+      ``type_view`` field cannot be ``matrix_descr::symmetric`` nor
+      ``matrix_descr::hermitian`` if ``opA`` is ``transpose::conjtrans``.
 
    A_handle
       Sparse matrix handle object representing :math:`A`.

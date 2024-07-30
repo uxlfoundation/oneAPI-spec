@@ -84,10 +84,8 @@ matrix_view
    See :ref:`onemkl_sparse_matrix_descriptor`, :ref:`onemkl_enum_uplo` and
    :ref:`onemkl_enum_diag` for a description of the members.
 
-   The ``uplo_view`` member is ignored if ``type_view`` is ``general`` or
-   ``diagonal``.
-
-   The ``diag_view`` member is ignored if ``type_view`` is ``general``.
+   Each operation documents which combination of ``type_view``, ``uplo_view``
+   and ``diag_view`` are valid.
 
    .. rubric:: Syntax
 
@@ -123,8 +121,5 @@ matrix_view
       Initializes the ``matrix_view`` with the provided ``matrix_descr``. By default
       the other members are initialized to the same value as the default
       constructor.
-
-      If the ``matrix_desc`` is ``diagonal``, ``diag_view`` is initialized to
-      ``diag::unit``.
 
 **Parent topic:** :ref:`onemkl_spblas`
