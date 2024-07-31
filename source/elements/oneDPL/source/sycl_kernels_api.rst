@@ -56,7 +56,6 @@ Limitations:
 The following deviations from the `C++ Standard`_ may apply:
 
 - ``random_device`` and ``seed_seq`` classes and related APIs in other classes are not required;
-- ``operator>>()``, ``operator<<()``, ``operator==()`` are not required;
 - specifying the size of a random number engine's state is not required;
 - distributions are only required to operate with floating point types applicable to supported SYCL devices.
 
