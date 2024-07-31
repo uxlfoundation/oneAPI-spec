@@ -146,7 +146,7 @@ class beta
             .. rubric:: Description
 
             Default constructor for distribution, parameters set as
-            ``p`` = 1.0, ``q`` = 0.0, :math:`\alpha` = 1.0, :math:`\beta` = 1.0.
+            ``p`` = 1.0, ``q`` = 1.0, :math:`\alpha` = 0.0, :math:`\beta` = 1.0.
 
     .. container:: section
 
