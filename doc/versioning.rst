@@ -37,11 +37,11 @@ Increment the:
    incompatible API changes, including removing APIs.
 
 2. MINOR version when adding minor functionality and API changes
-   that are backwards compatible.
+   that are backwards compatible. Supported values: 0-99 [1]
 
 3. REVISION when making backwards compatible bug fixes or any editing
    change in the document, including minor changes such as correcting
-   typos. Initial REVISION is 1.
+   typos. Initial REVISION is 1. Supported values: 1-99 [1]
 
 The distinction between major and minor functionality is determined by
 the core group. Latest REVISION is implicit because REVISIONs do not
@@ -81,3 +81,14 @@ Example
   | oneAPI provisional 1.1 rev 2
   | oneAPI provisional 1.1 rev 3
   | oneAPI 1.1 rev 1
+
+Programmatic versioning
+=======================
+
+The specification version as mentioned above can be used programatically by appending all digits of the specification version in the format of <MAJOR><MINOR><REVISION>. MINOR and REVISION version use two digits. This versioning can be used to check the compatibility of the implementation with the specification version.
+
+Example
+  | oneAPI 1.1 rev 1 will be represented as a numerical value of 10101
+  | oneAPI 1.2 rev 1 will be represented as a numerical value of 10102
+
+[1] MINOR and REVISION values are limited to double digits to allow programmatic comparison of versions.
