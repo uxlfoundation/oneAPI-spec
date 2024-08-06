@@ -96,7 +96,7 @@ The implementation is required to define a macro with the numerical value of the
 
 Example
   | #define ONEAPI_SPEC_VERSION 10101
-  | #define oneTBB_SPEC_VERSION ONEAPI_SPEC_VERSION
+  | #define ONETBB_SPEC_VERSION ONEAPI_SPEC_VERSION
   | #define ONEMKL_SPEC_VERSION ONEAPI_SPEC_VERSION
 
 [1] MINOR and REVISION values are limited to double digits to allow programmatic comparison of versions.
