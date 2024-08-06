@@ -89,6 +89,7 @@ The specification version as mentioned above can be used programatically by appe
 
 Example
   | oneAPI 1.1 rev 1 will be represented as a numerical value of 10101
-  | oneAPI 1.2 rev 1 will be represented as a numerical value of 10102
+  | oneAPI 1.2 rev 1 will be represented as a numerical value of 10201
+  | oneAPI 1.2 rev 2 will be represented as a numerical value of 10202
 
 [1] MINOR and REVISION values are limited to double digits to allow programmatic comparison of versions.
