@@ -95,7 +95,9 @@ Example
 The implementation is required to define a macro with the numerical value of the specification version. The macro name should be `ONEAPI_SPEC_VERSION` and the value should be the numerical value of the specification version. The components within the specification, can implement their own macro with the numerical value of the specification version. The macro name should be `<COMPONENT>_SPEC_VERSION` and the value should be the numerical value of the specification version.
 
 Example
+
 .. code-block:: c
+
   #define ONEAPI_SPEC_VERSION 10101
   #define ONETBB_SPEC_VERSION ONEAPI_SPEC_VERSION
   #define ONEMKL_SPEC_VERSION ONEAPI_SPEC_VERSION
