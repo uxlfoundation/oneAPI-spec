@@ -26,6 +26,9 @@ The probability distribution is given by:
 class multinomial
 -----------------
 
+Let ``SequenceContainerOrView`` be a type that can be one of C++ Sequence containers or C++ Views (``span``, ``mdspan``).
+It's implementation defined which type ``SequenceContainerOrView`` represents.
+
 .. rubric:: Syntax
 
 .. code-block:: cpp
@@ -36,9 +39,9 @@ class multinomial
     public:
         using method_type = Method;
         using result_type = IntType;
-        explicit multinomial(double ntrial, std::vector<double> p);
+        explicit multinomial(double ntrial, SequenceContainerOrView<double> p);
         std::int32_t ntrial() const;
-        std::vector<double> p() const;
+        SequenceContainerOrView<double> p() const;
     };
     }
 
@@ -72,12 +75,12 @@ class multinomial
 
         * - Routine
           - Description
-        * - `explicit multinomial(double ntrial, std::vector<double> p)`_
+        * - `explicit multinomial(double ntrial, SequenceContainerOrView<double> p)`_
           - Constructor with parameters
         * - `std::int32_t ntrial() const`_
           - Method to obtain number of independent trials
-        * - `std::vector<double> p() const`_
-          - Method to obtain probability vector of possible outcomes
+        * - `SequenceContainerOrView<double> p() const`_
+          - Method to obtain a probability parameter of possible outcomes
 
 .. container:: section
 
@@ -113,17 +116,17 @@ class multinomial
 
     .. container:: section
 
-        .. _`explicit multinomial(double ntrial, std::vector<double> p)`:
+        .. _`explicit multinomial(double ntrial, SequenceContainerOrView<double> p)`:
 
         .. code-block:: cpp
 
-            explicit multinomial::multinomial(double ntrial, std::vector<double> p)
+            explicit multinomial::multinomial(double ntrial, SequenceContainerOrView<double> p)
 
         .. container:: section
 
             .. rubric:: Description
 
-            Constructor with parameters. `ntrial` is a number of independent trials, `p` is a probability vector.
+            Constructor with parameters. ``ntrial`` is a number of independent trials, ``p`` is a probability parameter.
 
         .. container:: section
 
@@ -152,11 +155,11 @@ class multinomial
 
     .. container:: section
 
-        .. _`std::vector<double> p() const`:
+        .. _`SequenceContainerOrView<double> p() const`:
 
         .. code-block:: cpp
 
-            std::vector<double> multinomial::p() const
+            SequenceContainerOrView<double> multinomial::p() const
 
         .. container:: section
 
