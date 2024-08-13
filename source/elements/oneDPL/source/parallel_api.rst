@@ -451,5 +451,9 @@ than an element in the range being searched.
 
 The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
 
+.. toctree::
+
+   parallel_api/parallel_range_api.rst
+   
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
