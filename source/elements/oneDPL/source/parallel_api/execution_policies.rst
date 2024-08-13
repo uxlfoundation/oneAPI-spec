@@ -42,7 +42,7 @@ Device Execution Policy
 +++++++++++++++++++++++
 
 A device execution policy class :code:`oneapi::dpl::execution::device_policy` specifies
-where and how an algorithm runs.
+the `SYCL`_ device and queue to run oneDPL algorithms.
 
 .. code:: cpp
 
@@ -72,7 +72,7 @@ where and how an algorithm runs.
     }
   }
 
-``dpcpp_default`` is a predefined execution policy object to run algorithms on the default SYCL device.
+``dpcpp_default`` is a predefined execution policy object to run algorithms on the default `SYCL`_ device.
 
 device_policy class
 ^^^^^^^^^^^^^^^^^^^
