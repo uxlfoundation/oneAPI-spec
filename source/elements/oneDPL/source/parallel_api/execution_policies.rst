@@ -38,10 +38,10 @@ with the `C++ Standard`_, 6th edition (C++20):
 
 See "Execution policies" in the `C++ Standard`_ for more information.
 
-DPC++ Execution Policy
-++++++++++++++++++++++
+Device Execution Policy
++++++++++++++++++++++++
 
-A DPC++ execution policy class :code:`oneapi::dpl::execution::device_policy` specifies
+A device execution policy class :code:`oneapi::dpl::execution::device_policy` specifies
 where and how an algorithm runs.
 
 .. code:: cpp
@@ -72,7 +72,7 @@ where and how an algorithm runs.
     }
   }
 
-``dpcpp_default`` is a predefined execution policy object to run algorithms on the default DPC++ device.
+``dpcpp_default`` is a predefined execution policy object to run algorithms on the default SYCL device.
 
 device_policy class
 ^^^^^^^^^^^^^^^^^^^
@@ -96,7 +96,7 @@ device_policy class
   };
 
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
-to run algorithms on a DPC++ compliant device. When an algorithm runs with ``device_policy``
+to run algorithms on a SYCL device. When an algorithm runs with ``device_policy``
 it is capable of processing SYCL buffers (passed via :code:`oneapi::dpl::begin/end`),
 data in the host memory and data in Unified Shared Memory (USM), including USM device memory.
 Data placed in the host memory and USM can only be passed to oneDPL algorithms
@@ -105,7 +105,7 @@ to a device and back is unspecified; per-element data movement to/from a tempora
 is a possible valid implementation.
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
-is to explicitly provide a name for DPC++ kernels executed by an algorithm the policy is passed to.
+is to explicitly provide a name for SYCL kernels executed by an algorithm the policy is passed to.
 
 .. code:: cpp
 

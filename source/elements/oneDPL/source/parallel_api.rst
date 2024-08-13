@@ -7,8 +7,8 @@ Parallel API
 
 oneDPL provides the set of parallel algorithms as defined by the `C++ Standard`_,
 including parallel algorithms added in the 6th edition known as C++20.
-All those algorithms work with *C++ Standard aligned execution policies* and with *DPC++
-execution policies*.
+All those algorithms work with *C++ Standard aligned execution policies* and with
+*device execution policies*.
 
 Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special iterators, and
 a set of non-standard parallel algorithms.
@@ -56,7 +56,7 @@ Buffer wrappers
   }
 
 ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are helper functions
-for passing DPC++ buffers to oneDPL algorithms.
+for passing SYCL buffers to oneDPL algorithms.
 These functions accept a buffer and return an object
 of an unspecified type that satisfies the following requirements:
 
