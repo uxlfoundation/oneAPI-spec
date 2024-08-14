@@ -688,5 +688,39 @@ than an element in the range being searched.
 
 The elements e of [start, end) must be partitioned with respect to the comparator used.
 
+.. code:: cpp
+
+    template<typename Policy, typename InputKeyIt, typename InputValueIt,
+        typename Comparator =
+            std::less<typename std::iterator_traits<InputIt>::value_type>>
+    void
+    sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
+                InputValueIt values_first, Comparator comp =
+                    std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
+
+:code:`oneapi::dpl::sort_by_key` sorts a sequence of keys in the range :code:`[keys_first, keys_last)`
+and permutes a sequnce of values in the range
+:code:`[values_first, values_first + distance(keys_first, keys_last))` according to the sorted order of the keys.
+The order of equal keys is not guaranteed to be preserved.
+
+If no comparator is provided, the keys are sorted with respect to :code:`std::less`.
+
+.. code:: cpp
+
+    template<typename Policy, typename InputKeyIt, typename InputValueIt,
+      typename Comparator =
+          std::less<typename std::iterator_traits<InputIt>::value_type>>
+    void
+    stable_sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
+                InputValueIt values_first, Comparator comp =
+                    std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
+
+:code:`oneapi::dpl::stable_sort_by_key` sorts a sequence of keys in the range :code:`[keys_first, keys_last)`
+and permutes a sequnce of values in the range
+:code:`[values_first, values_first + distance(keys_first, keys_last))` according to the sorted order of the keys.
+The order of equal keys is guaranteed to be preserved.
+
+If no comparator is provided, the keys are sorted with respect to :code:`std::less`.
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
