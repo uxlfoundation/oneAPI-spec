@@ -703,7 +703,7 @@ and permutes a sequnce of values in the range
 :code:`[values_first, values_first + distance(keys_first, keys_last))` according to the sorted order of the keys.
 The order of equal keys is not guaranteed to be preserved.
 
-If no comparator is provided, the keys are sorted with respect to :code:`std::less`.
+If no comparator is provided, the keys are sorted with respect to :code:`std::less{}`.
 
 .. code:: cpp
 
@@ -720,7 +720,7 @@ and permutes a sequnce of values in the range
 :code:`[values_first, values_first + distance(keys_first, keys_last))` according to the sorted order of the keys.
 The order of equal keys is guaranteed to be preserved.
 
-If no comparator is provided, the keys are sorted with respect to :code:`std::less`.
+If no comparator is provided, the keys are sorted with respect to :code:`std::less{}`.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
