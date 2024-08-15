@@ -572,9 +572,9 @@ as defined by the `C++ Standard`_.
     histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
               InputIt2 boundary_end, OutputIt histogram_first);                             // (2)
 
-:code:`oneapi::dpl::histogram` performs a histogram operation over the data in :code:`[start, end)`,
-which counts the number of elements that map to each of a set of bins and stores the count into
-a sequence in :code:`[histogram_first, histogram_first + num_bins)`. Input values that do not map
+:code:`oneapi::dpl::histogram` computes the histogram over the data in :code:`[start, end)`
+by counting the number of elements that map to each of a set of bins and storing the counts into
+:code:`[histogram_first, histogram_first + num_bins)`. Input values that do not map
 to a defined bin are skipped silently. Sufficient output data to store each count must be provided,
 and :code:`Size` must be sufficient to store the counts of the histogram without overflow.
 All input and output sequences must be ``RandomAccessIterators``.
