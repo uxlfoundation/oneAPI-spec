@@ -521,13 +521,14 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 
 .. code:: cpp
 
-  template <class Policy, class InputIt, class OutputIt, class UnaryOp, class UnaryPredicate>
+  template <typename Policy, typename InputIt, typename OutputIt, typename UnaryOp,
+      typename UnaryPredicate>
   OutputIt
   transform_if(Policy&& policy, InputIt start, InputIt end, OutputIt result, UnaryOp op,
       UnaryPredicate pred);                                                               // (1)
 
-  template <class Policy, class InputIt1, class InputIt2, class OutputIt, class BinaryOp, 
-      class BinaryPredicate>
+  template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt, 
+      typename BinaryOp, typename BinaryPredicate>
   OutputIt
   transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
       BinaryOp op, BinaryPredicate pred);                                                 // (2)
