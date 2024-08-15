@@ -537,7 +537,6 @@ by counting the number of elements that map to each of a set of bins and storing
 :code:`[histogram_first, histogram_first + num_bins)`. Input values that do not map
 to a defined bin are skipped silently. Sufficient output data to store each count must be provided,
 and :code:`Size` must be sufficient to store the counts of the histogram without overflow.
-All input and output sequences must be ``RandomAccessIterators``.
 
 1. The elements of :code:`[start, end)` are mapped into evenly divided bins between
 :code:`first_bin_min_val` and :code:`last_bin_max_val` such that an input element :code:`start[i]`
