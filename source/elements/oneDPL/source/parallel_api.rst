@@ -584,13 +584,13 @@ histogram without overflow.
 :code:`bin_size = (last_bin_max_val - first_bin_min_val) / num_bins` as represented by a real
 number without rounding or truncation. An input element maps to a bin :code:`histogram_first[j]`
 if and only if
-:code:`!(start[i] < first_bin_min_val + j * bin_size) && (start[i] < first_bin_min_val + (j + 1) * bin_size)`.
+:code:`(first_bin_min_val + j * bin_size <= start[i]) && (start[i] < first_bin_min_val + (j + 1) * bin_size)`.
 `ValueType` must be an arithmetic type. The value type of :code:`InputIt` must be an arithmetic type.
 
 2. The elements of :code:`[start, end)` are mapped into bins as defined by bin boundaries in
 :code:`[boundary_start, boundary_end)` such that an input element :code:`start[i]` maps to a bin
 :code:`histogram_first[j]` if and only if
-:code:`!(start[i] < boundary_start[j]) && (start[i] < boundary_start[j + 1])`.  The value types
+:code:`(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])`.  The value types
 of :code:`InputIt1` and :code:`InputIt2` must be arithmetic types. The elements of 
 :code:`[boundary_start,boundary_end)` must be sorted with respect to :code:`operator<`.
 
