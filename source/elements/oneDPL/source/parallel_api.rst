@@ -533,7 +533,8 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
   transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
       BinaryOp op, BinaryPredicate pred);                                                 // (2)
 
-:code:`oneapi::dpl::transform_if`
+:code:`oneapi::dpl::transform_if` applies a given function to the elements of the input sequence(s) that
+satisfy a given predicate, and stores the result to the output. Depending on the arguments, the algorithm
 
 1.
 evaluates the unary predicate :code:`pred` for each position :code:`i` of the sequence
