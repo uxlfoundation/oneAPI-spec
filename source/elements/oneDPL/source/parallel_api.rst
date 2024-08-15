@@ -718,7 +718,7 @@ If no comparator is provided, the keys are sorted with respect to :code:`std::le
 :code:`oneapi::dpl::stable_sort_by_key` sorts a sequence of keys in the range :code:`[keys_first, keys_last)`,
 and permutes a sequence of values in the range
 :code:`[values_first, values_first + distance(keys_first, keys_last))` to match the order of the sorted keys.
-The order of equal keys is guaranteed to be preserved.
+The order of equal keys is preserved.
 
 If no comparator is provided, the keys are sorted with respect to :code:`std::less{}`.
 
