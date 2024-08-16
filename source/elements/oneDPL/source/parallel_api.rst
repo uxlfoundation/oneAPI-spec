@@ -524,7 +524,7 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
     template <typename Policy, typename InputIt, typename Size, typename OutputIt,
         typename ValueType>
     OutputIt
-    histogram(Policy&& exec, InputIt start, InputIt end, Size num_bins,
+    histogram(Policy&& exec, InputIt start, InputIt end, Size num_intervals,
         ValueType first_interval_begin, ValueType last_interval_end, OutputIt histogram_first); // (1)
 
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
@@ -534,13 +534,13 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 
 :code:`oneapi::dpl::histogram` computes the histogram over the data in :code:`[start, end)`
 by counting the number of elements that map to each of a set of bins and storing the counts into
-:code:`[histogram_first, histogram_first + num_bins)`. Input values that do not map to a defined
+:code:`[histogram_first, histogram_first + num_intervals)`. Input values that do not map to a defined
 bin are skipped silently. The value type of :code:`OutputIt` must be an integral type of sufficient
 size to store the counts of the histogram without overflow.
 
-1. The elements of :code:`[start, end)` are mapped into :code:`num_bins` bins that evenly divide the range
+1. The elements of :code:`[start, end)` are mapped into :code:`num_intervals` bins that evenly divide the range
    :code:`[first_interval_begin, last_interval_end)`. Each bin is of size
-   :code:`bin_size = (last_interval_end - first_interval_begin) / num_bins` as represented by a real
+   :code:`bin_size = (last_interval_end - first_interval_begin) / num_intervals` as represented by a real
    number without rounding or truncation. An input element maps to a bin :code:`histogram_first[j]`
    if and only if
    :code:`(first_interval_begin + j * bin_size <= start[i]) && (start[i] < first_interval_begin + (j + 1) * bin_size)`.
