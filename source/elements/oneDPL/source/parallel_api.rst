@@ -574,7 +574,7 @@ as defined by the `C++ Standard`_.
 
 :code:`oneapi::dpl::histogram` computes the histogram over the data in :code:`[start, end)`
 by counting the number of elements that map to each of a set of bins and storing the counts into
-:code:`[histogram_first, histogram_first + num_intervals)`. Input values that do not map to a defined
+the output sequence starting from :code:`histogram_first`. Input values that do not map to a defined
 bin are skipped silently. The value type of :code:`OutputIt` must be an integral type of sufficient
 size to store the counts of the histogram without overflow.
 
