@@ -96,7 +96,7 @@ Let us define a named requirement, :code:`ValidParallelIteratorSource`, to descr
 types that can be used as source for oneDPL's iterators as described below.
 The type :code:`Iter` satisfies the :code:`ValidParallelIteratorSource` named requirement if it satisfies
 at least one of the following:
- * :code:`Iter` satisfies the C++ named requirement :code:`LegacyRandomAccessIterator`
+ * :code:`Iter` is a random access iterator
  * :code:`Iter` is the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
  * :code:`Iter` is a valid :code:`permutation_iterator`
  * :code:`Iter` is a valid :code:`transform_iterator`
@@ -237,7 +237,7 @@ iterator instances to determine their position in the index map. :code:`SourceIt
 :code:`ValidParallelIteratorSource`.
 
 The type :code:`IndexMap` must satisfy at least one of the following:
- * :code:`IndexMap` satisfies the C++ named requirement :code:`LegacyRandomAccessIterator`
+ * :code:`IndexMap` is a random access iterator
  * :code:`IndexMap` is the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
  * :code:`IndexMap` is a valid :code:`permutation_iterator`
  * :code:`IndexMap` is a valid :code:`transform_iterator`
