@@ -94,7 +94,7 @@ in ``namespace oneapi::dpl``.
 
 Let us define a named requirement, :code:`AdaptingIteratorSource`, to describe valid random access iterator-like
 types that can be used as source for oneDPL iterators as described below.
-The type :code:`Iter` satisfies the :code:`AdaptingIteratorSource` named requirement if is any of the following:
+The type :code:`Iter` satisfies the :code:`AdaptingIteratorSource` named requirement if it is any of the following:
 
  * a random access iterator
  * the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
