@@ -92,18 +92,17 @@ Iterators
 The oneDPL iterators are defined in the ``<oneapi/dpl/iterator>`` header,
 in ``namespace oneapi::dpl``.
 
-Let us define a named requirement, :code:`ValidParallelIteratorSource`, to describe valid random access iterator-like
-types that can be used as source for oneDPL's iterators as described below.
-The type :code:`Iter` satisfies the :code:`ValidParallelIteratorSource` named requirement if it satisfies
-at least one of the following:
+Let us define a named requirement, :code:`AdaptingIteratorSource`, to describe valid random access iterator-like
+types that can be used as source for oneDPL iterators as described below.
+The type :code:`Iter` satisfies the :code:`AdaptingIteratorSource` named requirement if is any of the following:
 
- * :code:`Iter` is a random access iterator
- * :code:`Iter` is the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
- * :code:`Iter` is a valid :code:`permutation_iterator`
- * :code:`Iter` is a valid :code:`transform_iterator`
- * :code:`Iter` is a valid :code:`counting_iterator`
- * :code:`Iter` is a valid :code:`discard_iterator`
- * :code:`Iter` is a valid :code:`zip_iterator`
+ * a random access iterator
+ * the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
+ * a :code:`permutation_iterator`
+ * a :code:`transform_iterator`
+ * a :code:`counting_iterator`
+ * a :code:`discard_iterator`
+ * a :code:`zip_iterator`
 
 .. code:: cpp
 
@@ -235,17 +234,17 @@ is defined by either another iterator or a functor that maps the ``permutation_i
 to the index of the source iterator. The arithmetic and comparison operators of
 ``permutation_iterator`` behave as if applied to integer counter values maintained by the
 iterator instances to determine their position in the index map. :code:`SourceIterator` must satisfy
-:code:`ValidParallelIteratorSource`.
+:code:`AdaptingIteratorSource`.
 
-The type :code:`IndexMap` must satisfy at least one of the following:
+The type :code:`IndexMap` must be one of the following:
 
- * :code:`IndexMap` is a random access iterator
- * :code:`IndexMap` is the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
- * :code:`IndexMap` is a valid :code:`permutation_iterator`
- * :code:`IndexMap` is a valid :code:`transform_iterator`
- * :code:`IndexMap` is a valid :code:`counting_iterator`
- * :code:`IndexMap` is a functor with a signature equivalent to :code:`T operator()(const T&) const` where
-   :code:`T` is a `std::iterator_traits<SourceIterator>::difference_type`
+ * a random access iterator
+ * the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
+ * a :code:`permutation_iterator`
+ * a :code:`transform_iterator`
+ * a :code:`counting_iterator`
+ * a functor with a signature equivalent to :code:`T operator()(const T&) const` where :code:`T` is a
+   :code:`std::iterator_traits<SourceIterator>::difference_type`
 
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
@@ -316,7 +315,7 @@ element of the source iterator; dereference operations cannot be used to modify 
 the source iterator unless the unary function result includes a reference to the element. The
 arithmetic and comparison operators of ``transform_iterator`` behave as if applied to the
 source iterator itself. The template type :code:`Iterator` must satisfy
-:code:`ValidParallelIteratorSource`.
+:code:`AdaptingIteratorSource`.
 
 .. code:: cpp
 
@@ -375,7 +374,7 @@ the value returned from ``zip_iterator`` is a tuple of the values returned by de
 source iterators over which the ``zip_iterator`` is defined.  The arithmetic operators of
 ``zip_iterator`` update the source iterators of a ``zip_iterator`` instance as though the
 operation were applied to each of these iterators. The types :code:`T` within the template pack 
-:code:`Iterators...` must satisfy :code:`ValidParallelIteratorSource`.
+:code:`Iterators...` must satisfy :code:`AdaptingIteratorSource`.
 
 .. code:: cpp
 
