@@ -536,7 +536,8 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 by counting the number of elements that map to each of a set of bins and storing the counts into
 the output sequence starting from :code:`histogram_first`. Input values that do not map to a defined
 bin are skipped silently. The value type of :code:`OutputIt` must be an integral type of sufficient
-size to store the counts of the histogram without overflow.
+size to store the counts of the histogram without overflow. The return value is an iterator targeting
+past the last element of the output sequence starting from :code:`histogram_first`.
 
 1. The elements of :code:`[start, end)` are mapped into :code:`num_intervals` bins that evenly divide the range
    :code:`[first_interval_begin, last_interval_end)`. Each bin is of size
