@@ -538,17 +538,17 @@ by counting the number of elements that map to each of a set of bins and storing
 bin are skipped silently. The value type of :code:`OutputIt` must be an integral type of sufficient
 size to store the counts of the histogram without overflow.
 
-1. The elements of :code:`[start, end)` are mapped into bins which are evenly divided between
-   :code:`first_interval_begin` and :code:`last_interval_end`. Each bin is of size
+1. The elements of :code:`[start, end)` are mapped into :code:`num_bins` bins that evenly divide the range
+   :code:`[first_interval_begin, last_interval_end)`. Each bin is of size
    :code:`bin_size = (last_interval_end - first_interval_begin) / num_bins` as represented by a real
    number without rounding or truncation. An input element maps to a bin :code:`histogram_first[j]`
    if and only if
    :code:`(first_interval_begin + j * bin_size <= start[i]) && (start[i] < first_interval_begin + (j + 1) * bin_size)`.
    `ValueType` must be an arithmetic type. The value type of :code:`InputIt` must be an arithmetic type.
 
-2. The elements of :code:`[start, end)` are mapped into bins as defined by bin boundaries in
-   :code:`[boundary_start, boundary_end)` such that an input element :code:`start[i]` maps to a bin
-   :code:`histogram_first[j]` if and only if
+2. The elements of :code:`[start, end)` are mapped into :code:`(boundary_end - boundary_start - 1)`
+   bins as defined by bin boundaries in :code:`[boundary_start, boundary_end)` such that an input 
+   element :code:`start[i]` maps to a bin :code:`histogram_first[j]` if and only if
    :code:`(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])`.  The value types
    of :code:`InputIt1` and :code:`InputIt2` must be arithmetic types. The elements of 
    :code:`[boundary_start, boundary_end)` must be sorted with respect to :code:`operator<`.
