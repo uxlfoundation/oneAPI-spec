@@ -525,7 +525,7 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
         typename ValueType>
     OutputIt
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_bins,
-        ValueType first_bin_min_val, ValueType last_bin_max_val, OutputIt histogram_first); // (1)
+        ValueType first_interval_begin, ValueType last_interval_end, OutputIt histogram_first); // (1)
 
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
     OutputIt
@@ -540,11 +540,11 @@ value type of :code:`OutputIt` must be an integral type sufficient to store the 
 histogram without overflow.
 
 1. The elements of :code:`[start, end)` are mapped into bins which are evenly divided between
-:code:`first_bin_min_val` and :code:`last_bin_max_val`. Each bin is of size
-:code:`bin_size = (last_bin_max_val - first_bin_min_val) / num_bins` as represented by a real
+:code:`first_interval_begin` and :code:`last_interval_end`. Each bin is of size
+:code:`bin_size = (last_interval_end - first_interval_begin) / num_bins` as represented by a real
 number without rounding or truncation. An input element maps to a bin :code:`histogram_first[j]`
 if and only if
-:code:`(first_bin_min_val + j * bin_size <= start[i]) && (start[i] < first_bin_min_val + (j + 1) * bin_size)`.
+:code:`(first_interval_begin + j * bin_size <= start[i]) && (start[i] < first_interval_begin + (j + 1) * bin_size)`.
 `ValueType` must be an arithmetic type. The value type of :code:`InputIt` must be an arithmetic type.
 
 2. The elements of :code:`[start, end)` are mapped into bins as defined by bin boundaries in
@@ -552,7 +552,7 @@ if and only if
 :code:`histogram_first[j]` if and only if
 :code:`(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])`.  The value types
 of :code:`InputIt1` and :code:`InputIt2` must be arithmetic types. The elements of 
-:code:`[boundary_start,boundary_end)` must be sorted with respect to :code:`operator<`.
+:code:`[boundary_start, boundary_end)` must be sorted with respect to :code:`operator<`.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
