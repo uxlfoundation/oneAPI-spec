@@ -96,13 +96,13 @@ Let us define a named requirement, :code:`AdaptingIteratorSource`, to describe v
 types that can be used as source for oneDPL iterators as described below.
 The type :code:`Iter` satisfies the :code:`AdaptingIteratorSource` named requirement if it is any of the following:
 
- * a random access iterator
- * the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
- * a :code:`permutation_iterator`
- * a :code:`transform_iterator`
- * a :code:`counting_iterator`
- * a :code:`discard_iterator`
- * a :code:`zip_iterator`
+ * A random access iterator
+ * The unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
+ * A :code:`permutation_iterator`
+ * A :code:`transform_iterator`
+ * A :code:`counting_iterator`
+ * A :code:`discard_iterator`
+ * A :code:`zip_iterator`
 
 .. code:: cpp
 
@@ -238,12 +238,12 @@ iterator instances to determine their position in the index map. :code:`SourceIt
 
 The type :code:`IndexMap` must be one of the following:
 
- * a random access iterator
- * the unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
- * a :code:`permutation_iterator`
- * a :code:`transform_iterator`
- * a :code:`counting_iterator`
- * a functor with a signature equivalent to :code:`T operator()(const T&) const` where :code:`T` is a
+ * A random access iterator
+ * The unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
+ * A :code:`permutation_iterator`
+ * A :code:`transform_iterator`
+ * A :code:`counting_iterator`
+ * A functor with a signature equivalent to :code:`T operator()(const T&) const` where :code:`T` is a
    :code:`std::iterator_traits<SourceIterator>::difference_type`
 
 
