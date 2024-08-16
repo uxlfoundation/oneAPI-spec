@@ -3,10 +3,10 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-Execution policies
+Execution Policies
 ------------------
 
-C++ Standard aligned execution policies
+C++ Standard Aligned Execution Policies
 +++++++++++++++++++++++++++++++++++++++
 
 oneDPL has the set of execution policies and related utilities that are semantically aligned
@@ -44,7 +44,7 @@ See "Execution policies" in the `C++ Standard`_ for more information.
 Device Execution Policy
 +++++++++++++++++++++++
 
-A device execution policy class :code:`oneapi::dpl::execution::device_policy` specifies
+A device execution policy class ``oneapi::dpl::execution::device_policy`` specifies
 the `SYCL`_ device and queue to run oneDPL algorithms.
 
 .. code:: cpp
@@ -77,7 +77,7 @@ the `SYCL`_ device and queue to run oneDPL algorithms.
 
 ``dpcpp_default`` is a predefined execution policy object to run algorithms on the default `SYCL`_ device.
 
-device_policy class
+device_policy Class
 ^^^^^^^^^^^^^^^^^^^
 
 .. code:: cpp
@@ -100,7 +100,7 @@ device_policy class
 
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
 to run algorithms on a SYCL device. When an algorithm runs with ``device_policy``
-it is capable of processing SYCL buffers (passed via :code:`oneapi::dpl::begin/end`),
+it is capable of processing SYCL buffers (passed via ``oneapi::dpl::begin/end``),
 data in the host memory and data in Unified Shared Memory (USM), including USM device memory.
 Data placed in the host memory and USM can only be passed to oneDPL algorithms
 as pointers and random access iterators. The way to transfer data from the host memory
@@ -148,7 +148,7 @@ Return the queue the policy is associated with.
 
 Allow implicit conversion of the policy to a ``sycl::queue`` object.
 
-make_device_policy function
+make_device_policy Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``make_device_policy`` function templates simplify ``device_policy`` creation.
