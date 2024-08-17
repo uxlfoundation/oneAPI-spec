@@ -698,12 +698,12 @@ The elements e of [start, end) must be partitioned with respect to the comparato
                 InputValueIt values_first, Comparator comp =
                     std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
 
-:code:`oneapi::dpl::sort_by_key` sorts a sequence of keys in the range :code:`[keys_first, keys_last)`,
+``oneapi::dpl::sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
 and permutes a sequence of values in the range
-:code:`[values_first, values_first + distance(keys_first, keys_last))` to match the order of the sorted keys.
+``[values_first, values_first + distance(keys_first, keys_last))`` to match the order of the sorted keys.
 The order of equal keys is not guaranteed to be preserved.
 
-If no comparator is provided, the keys are sorted with respect to :code:`std::less{}`.
+If no comparator is provided, the keys are sorted with respect to ``std::less{}``.
 
 .. code:: cpp
 
@@ -715,12 +715,12 @@ If no comparator is provided, the keys are sorted with respect to :code:`std::le
                 InputValueIt values_first, Comparator comp =
                     std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
 
-:code:`oneapi::dpl::stable_sort_by_key` sorts a sequence of keys in the range :code:`[keys_first, keys_last)`,
+``oneapi::dpl::stable_sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
 and permutes a sequence of values in the range
-:code:`[values_first, values_first + distance(keys_first, keys_last))` to match the order of the sorted keys.
+``[values_first, values_first + distance(keys_first, keys_last))`` to match the order of the sorted keys.
 The order of equal keys is preserved.
 
-If no comparator is provided, the keys are sorted with respect to :code:`std::less{}`.
+If no comparator is provided, the keys are sorted with respect to ``std::less{}``.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
