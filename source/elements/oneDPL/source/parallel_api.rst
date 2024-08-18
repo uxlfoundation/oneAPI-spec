@@ -471,8 +471,9 @@ true, otherwise it is set to false.
 If no comparator is provided, ``operator<`` is used to determine when the search value is less
 than an element in the range being searched.
 
-The elements e of [start, end) must be partitioned with respect to the comparator used. For all
-elements e in [start, end) and a given search value v in [value_first, value_last) comp(e, v) implies !comp(v, e).
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used. For all
+elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_first, value_last)``,
+``comp(e, v)`` implies ``!comp(v, e)``.
 
 .. code:: cpp
 
@@ -494,7 +495,7 @@ provided. That lowest index is then assigned to the corresponding element in
 If no comparator is provided, ``operator<`` is used to determine when the search value is less
 than an element in the range being searched.
 
-The elements e of [start, end) must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
 
 .. code:: cpp
 
@@ -516,7 +517,7 @@ comparator provided. That highest index is then assigned to the corresponding el
 If no comparator is provided, ``operator<`` is used to determine when the search value is less
 than an element in the range being searched.
 
-The elements e of [start, end) must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
