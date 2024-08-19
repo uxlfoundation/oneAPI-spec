@@ -19,10 +19,10 @@ Random Number Generation
 ++++++++++++++++++++++++
 
 oneDPL provides a subset of the standard C++ pseudo-random number generation functionality
-suitable to use within SYCL kernels. The APIs are defined in the :code:`<oneapi/dpl/random>` header.
+suitable to use within SYCL kernels. The APIs are defined in the ``<oneapi/dpl/random>`` header.
 
-Supported functionality:
-------------------------
+Supported Functionality
+-----------------------
 
 - Engine class templates:
    - ``linear_congruential_engine``
@@ -50,8 +50,8 @@ Supported functionality:
 
 ``linear_congruential_engine`` and ``subtract_with_carry_engine`` satisfy the uniform random bit generator requirements.
 
-Limitations:
-------------
+Limitations
+-----------
 
 The following deviations from the `C++ Standard`_ may apply:
 
@@ -59,8 +59,8 @@ The following deviations from the `C++ Standard`_ may apply:
 - specifying the size of a random number engine's state is not required;
 - distributions are only required to operate with floating point types applicable to supported SYCL devices.
 
-Extensions:
------------
+Extensions
+----------
 
 As an extension to the `C++ Standard`_, ``sycl::vec<Type, N>`` can be used as the data type template parameter for
 engines, engine adaptors, and distributions, where ``Type`` is one of data types supported by the corresponding
@@ -156,7 +156,7 @@ the corresponding scalar engines, as described in the following table:
 Function Objects
 ++++++++++++++++
 
-The oneDPL function objects are defined in the :code:`<oneapi/dpl/functional>` header.
+The oneDPL function objects are defined in the ``<oneapi/dpl/functional>`` header.
 
 .. code:: cpp
 
@@ -171,5 +171,5 @@ The oneDPL function objects are defined in the :code:`<oneapi/dpl/functional>` h
     }
     }
 
-The :code:`oneapi::dpl::identity` class implements an identity operation. Its function operator
+The ``oneapi::dpl::identity`` class implements an identity operation. Its function operator
 receives an instance of a type and returns the argument unchanged.

@@ -17,7 +17,7 @@ a set of non-standard parallel algorithms.
 
    parallel_api/execution_policies.rst
 
-Buffer wrappers
+Buffer Wrappers
 +++++++++++++++
 
 .. code:: cpp
@@ -89,8 +89,8 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
 Iterators
 +++++++++
 
-The oneDPL iterators are defined in the :code:`<oneapi/dpl/iterator>` header,
-in :code:`namespace oneapi::dpl`.
+The oneDPL iterators are defined in the ``<oneapi/dpl/iterator>`` header,
+in ``namespace oneapi::dpl``.
 
 .. code:: cpp
 
@@ -129,10 +129,10 @@ in :code:`namespace oneapi::dpl`.
         bool operator>=(const counting_iterator& it) const;
     };
 
-:code:`counting_iterator` is a random access iterator-like type that represents an integer counter.
-When dereferenced, :code:`counting_iterator` provides an Integral rvalue equal to the value of the
+``counting_iterator`` is a random access iterator-like type that represents an integer counter.
+When dereferenced, ``counting_iterator`` provides an Integral rvalue equal to the value of the
 counter; dereference operations cannot be used to modify the counter. The arithmetic and comparison
-operators of :code:`counting_iterator` behave as if applied to the values of Integral type
+operators of ``counting_iterator`` behave as if applied to the values of Integral type
 representing the counters of the iterator instances passed to the operators.
 
 .. code:: cpp
@@ -169,10 +169,10 @@ representing the counters of the iterator instances passed to the operators.
         bool operator>(const discard_iterator& it) const;
     };
 
-:code:`discard_iterator` is a random access iterator-like type that, when dereferenced, provides an
+``discard_iterator`` is a random access iterator-like type that, when dereferenced, provides an
 lvalue that may be assigned an arbitrary value. The assignment has no effect on the
-:code:`discard_iterator` instance; the write is discarded. The arithmetic and comparison operators
-of :code:`discard_iterator` behave as if applied to integer counter values maintained by the
+``discard_iterator`` instance; the write is discarded. The arithmetic and comparison operators
+of ``discard_iterator`` behave as if applied to integer counter values maintained by the
 iterator instances to determine their position relative to each other.
 
 .. code:: cpp
@@ -216,19 +216,19 @@ iterator instances to determine their position relative to each other.
         bool operator>=(const permutation_iterator& it) const;
     };
 
-:code:`permutation_iterator` is a random access iterator-like type whose dereferenced value set is
+``permutation_iterator`` is a random access iterator-like type whose dereferenced value set is
 defined by the source iterator provided, and whose iteration order over the dereferenced value set
-is defined by either another iterator or a functor that maps the :code:`permutation_iterator` index
+is defined by either another iterator or a functor that maps the ``permutation_iterator`` index
 to the index of the source iterator. The arithmetic and comparison operators of
-:code:`permutation_iterator` behave as if applied to integer counter values maintained by the
+``permutation_iterator`` behave as if applied to integer counter values maintained by the
 iterator instances to determine their position in the index map.
 
-:code:`permutation_iterator::operator*` uses the counter value of the instance on which
+``permutation_iterator::operator*`` uses the counter value of the instance on which
 it is invoked to index into the index map. The corresponding value in the map is then used
 to index into the value set defined by the source iterator. The resulting lvalue is returned
 as the result of the operator.
 
-:code:`permutation_iterator::operator[]` uses the parameter :code:`i` 
+``permutation_iterator::operator[]`` uses the parameter ``i``
 to index into the index map. The corresponding value in the map is then used
 to index into the value set defined by the source iterator. The resulting lvalue is returned
 as the result of the operator.
@@ -239,7 +239,7 @@ as the result of the operator.
     permutation_iterator<SourceIterator, IndexMap>
     make_permutation_iterator(SourceIterator source, IndexMap map);
 
-:code:`make_permutation_iterator` constructs and returns an instance of :code:`permutation_iterator`
+``make_permutation_iterator`` constructs and returns an instance of ``permutation_iterator``
 using the source iterator and index map provided.
 
 .. code:: cpp
@@ -284,12 +284,12 @@ using the source iterator and index map provided.
         bool operator>=(const transform_iterator& it) const;
     };
 
-:code:`transform_iterator` is a random access iterator-like type whose dereferenced value set is
+``transform_iterator`` is a random access iterator-like type whose dereferenced value set is
 defined by the unary function and source iterator provided. When dereferenced,
-:code:`transform_iterator` provides the result of the unary function applied to the corresponding
+``transform_iterator`` provides the result of the unary function applied to the corresponding
 element of the source iterator; dereference operations cannot be used to modify the elements of
 the source iterator unless the unary function result includes a reference to the element. The
-arithmetic and comparison operators of :code:`transform_iterator` behave as if applied to the
+arithmetic and comparison operators of ``transform_iterator`` behave as if applied to the
 source iterator itself.
 
 .. code:: cpp
@@ -298,7 +298,7 @@ source iterator itself.
     transform_iterator<UnaryFunc, Iterator>
     make_transform_iterator(Iterator, UnaryFunc);
 
-:code:`make_transform_iterator` constructs and returns an instance of :code:`transform_iterator`
+``make_transform_iterator`` constructs and returns an instance of ``transform_iterator``
 using the source iterator and unary function object provided.
 
 .. code:: cpp
@@ -344,10 +344,10 @@ using the source iterator and unary function object provided.
         bool operator>=(const zip_iterator& it) const;
     };
 
-:code:`zip_iterator` is an iterator-like type defined over one or more iterators. When dereferenced,
-the value returned from :code:`zip_iterator` is a tuple of the values returned by dereferencing the
-source iterators over which the :code:`zip_iterator` is defined.  The arithmetic operators of
-:code:`zip_iterator` update the source iterators of a :code:`zip_iterator` instance as though the
+``zip_iterator`` is an iterator-like type defined over one or more iterators. When dereferenced,
+the value returned from ``zip_iterator`` is a tuple of the values returned by dereferencing the
+source iterators over which the ``zip_iterator`` is defined. The arithmetic operators of
+``zip_iterator`` update the source iterators of a ``zip_iterator`` instance as though the
 operation were applied to each of these iterators.
 
 .. code:: cpp
@@ -356,14 +356,14 @@ operation were applied to each of these iterators.
     zip_iterator<Iterators...>
     make_zip_iterator(Iterators...);
 
-:code:`make_zip_iterator` constructs and returns an instance of :code:`zip_iterator`
+``make_zip_iterator`` constructs and returns an instance of ``zip_iterator``
 using the set of source iterators provided.
 
 Parallel Algorithms
 +++++++++++++++++++
 
-The parallel algorithms are defined in the :code:`<oneapi/dpl/algorithm>` header,
-in :code:`namespace oneapi::dpl`.
+The parallel algorithms are defined in the ``<oneapi/dpl/algorithm>`` header,
+in ``namespace oneapi::dpl``.
 
 .. code:: cpp
 
@@ -383,17 +383,17 @@ in :code:`namespace oneapi::dpl`.
         BinaryOp binary_op =
             std::plus<typename std::iterator_traits<InputValueIt>::value_type>());
 
-:code:`oneapi::dpl::exclusive_scan_by_segment` performs partial prefix scans by applying the
-:code:`binary_op` operation to a sequence of values. Each partial scan applies to a contiguous
+``oneapi::dpl::exclusive_scan_by_segment`` performs partial prefix scans by applying the
+``binary_op`` operation to a sequence of values. Each partial scan applies to a contiguous
 subsequence determined by the keys associated with the values being equal according to the
-:code:`binary_pred` predicate, and the first element of each scan is the initial value provided.
+``binary_pred`` predicate, and the first element of each scan is the initial value provided.
 The return value is an iterator targeting the end of the result sequence.
 
-The initial value used if one is not provided is an instance of the :code:`value_type` of the
-:code:`InputValueIt` iterator type initialized to 0. If no binary predicate is provided for the
-comparison of keys an instance of :code:`std::equal_to` with the :code:`value_type` of the
-:code:`InputKeyIt` iterator type is used.  Finally, an instance of :code:`std::plus` with the
-:code:`value_type` of the :code:`InputValueIt` iterator type is used if no binary operator is
+The initial value used if one is not provided is an instance of the ``value_type`` of the
+``InputValueIt`` iterator type initialized to 0. If no binary predicate is provided for the
+comparison of keys an instance of ``std::equal_to`` with the ``value_type`` of the
+``InputKeyIt`` iterator type is used. Finally, an instance of ``std::plus`` with the
+``value_type`` of the ``InputValueIt`` iterator type is used if no binary operator is
 provided to combine the elements of the value subsequences.
 
 .. code:: cpp
@@ -412,15 +412,15 @@ provided to combine the elements of the value subsequences.
         BinaryOp binary_op =
             std::plus<typename std::iterator_traits<InputValueIt>::value_type>());
 
-:code:`oneapi::dpl::inclusive_scan_by_segment` performs partial prefix scans by applying the
-:code:`binary_op` operation to a sequence of values. Each partial scan applies to a contiguous
+``oneapi::dpl::inclusive_scan_by_segment`` performs partial prefix scans by applying the
+``binary_op`` operation to a sequence of values. Each partial scan applies to a contiguous
 subsequence determined by the keys associated with the values being equal according to the
-:code:`binary_pred` predicate. The return value is an iterator targeting the end of the result
+``binary_pred`` predicate. The return value is an iterator targeting the end of the result
 sequence.
 
-If no binary predicate is provided for the comparison of keys an instance of :code:`std::equal_to`
-with the :code:`value_type` of the :code:`InputKeyIt` iterator type is used.  An instance of
-:code:`std::plus` with the :code:`value_type` of the :code:`InputValueIt` iterator type is used if
+If no binary predicate is provided for the comparison of keys an instance of ``std::equal_to``
+with the ``value_type`` of the ``InputKeyIt`` iterator type is used. An instance of
+``std::plus`` with the ``value_type`` of the ``InputValueIt`` iterator type is used if
 no binary operator is provided to combine the elements of the value subsequences.
 
 .. code:: cpp
@@ -440,16 +440,16 @@ no binary operator is provided to combine the elements of the value subsequences
         BinaryOp binary_op =
             std::plus<typename std::iterator_traits<InputValueIt>::value_type>());
 
-:code:`oneapi::dpl::reduce_by_segment` performs partial reductions on a sequence of values. Each
-reduction is computed with the :code:`binary_op` operation for a contiguous subsequence of values
-determined by the associated keys being equal according to the :code:`binary_pred` predicate.
-For each subsequence the first of the equal keys is stored into :code:`keys_result` and the computed
-reduction is stored into :code:`values_result`. The return value is a pair of
+``oneapi::dpl::reduce_by_segment`` performs partial reductions on a sequence of values. Each
+reduction is computed with the ``binary_op`` operation for a contiguous subsequence of values
+determined by the associated keys being equal according to the ``binary_pred`` predicate.
+For each subsequence the first of the equal keys is stored into ``keys_result`` and the computed
+reduction is stored into ``values_result``. The return value is a pair of
 iterators holding the end of the resulting sequences.
 
-If no binary predicate is provided for the comparison of keys an instance of :code:`std::equal_to`
-with the :code:`value_type` of the :code:`InputKeyIt` iterator type is used. An instance of
-:code:`std::plus` with the :code:`value_type` of the :code:`InputValueIt` iterator type is used to
+If no binary predicate is provided for the comparison of keys an instance of ``std::equal_to``
+with the ``value_type`` of the ``InputKeyIt`` iterator type is used. An instance of
+``std::plus`` with the ``value_type`` of the ``InputValueIt`` iterator type is used to
 combine the values in each subsequence identified if a binary operator is not provided.
 
 .. code:: cpp
@@ -463,16 +463,17 @@ combine the values in each subsequence identified if a binary operator is not pr
         Comparator comp =
             std::less<typename std::iterator_traits<InputIt1>::value_type>());
 
-:code:`oneapi::dpl::binary_search` performs a binary search over the data in :code:`[start, end)`
-for each value in :code:`[value_first, value_last)`.  If the value exists in the data searched then
-the corresponding element in :code:`[result, result + distance(value_first, value_last))` is set to
+``oneapi::dpl::binary_search`` performs a binary search over the data in ``[start, end)``
+for each value in ``[value_first, value_last)``. If the value exists in the data searched then
+the corresponding element in ``[result, result + distance(value_first, value_last))`` is set to
 true, otherwise it is set to false.
 
-If no comparator is provided, :code:`operator<` is used to determine when the search value is less
+If no comparator is provided, ``operator<`` is used to determine when the search value is less
 than an element in the range being searched.
 
-The elements e of [start, end) must be partitioned with respect to the comparator used. For all
-elements e in [start, end) and a given search value v in [value_first, value_last) comp(e, v) implies !comp(v, e).
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used. For all
+elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_first, value_last)``,
+``comp(e, v)`` implies ``!comp(v, e)``.
 
 .. code:: cpp
 
@@ -485,16 +486,16 @@ elements e in [start, end) and a given search value v in [value_first, value_las
         Comparator comp =
             std::less<typename std::iterator_traits<InputIt1>::value_type>());
 
-:code:`oneapi::dpl::lower_bound` performs a binary search over the data in :code:`[start, end)` for
-each value in :code:`[value_first, value_last)` to find the lowest index at which the search value
-could be inserted in :code:`[start, end)` without violating the ordering defined by the comparator
+``oneapi::dpl::lower_bound`` performs a binary search over the data in ``[start, end)`` for
+each value in ``[value_first, value_last)`` to find the lowest index at which the search value
+could be inserted in ``[start, end)`` without violating the ordering defined by the comparator
 provided. That lowest index is then assigned to the corresponding element in
-:code:`[result, result + distance(value_first, value_last))`.
+``[result, result + distance(value_first, value_last))``.
 
-If no comparator is provided, :code:`operator<` is used to determine when the search value is less
+If no comparator is provided, ``operator<`` is used to determine when the search value is less
 than an element in the range being searched.
 
-The elements e of [start, end) must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
 
 .. code:: cpp
 
@@ -507,16 +508,16 @@ The elements e of [start, end) must be partitioned with respect to the comparato
         Comparator comp =
             std::less<typename std::iterator_traits<InputIt1>::value_type>());
 
-:code:`oneapi::dpl::upper_bound` performs a binary search over the data in :code:`[start, end)`
-for each value in :code:`[value_first, value_last)` to find the highest index at which the search
-value could be inserted in :code:`[start, end)` without violating the ordering defined by the
+``oneapi::dpl::upper_bound`` performs a binary search over the data in ``[start, end)``
+for each value in ``[value_first, value_last)`` to find the highest index at which the search
+value could be inserted in ``[start, end)`` without violating the ordering defined by the
 comparator provided. That highest index is then assigned to the corresponding element in
-:code:`[result, result + distance(value_first, value_last))`.
+``[result, result + distance(value_first, value_last))``.
 
-If no comparator is provided, :code:`operator<` is used to determine when the search value is less
+If no comparator is provided, ``operator<`` is used to determine when the search value is less
 than an element in the range being searched.
 
-The elements e of [start, end) must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
