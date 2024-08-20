@@ -225,8 +225,8 @@ from its template argument and should be used with ``std::decay<T>`` or similar 
    The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
    while ``oneapi::dpl::is_execution_policy`` has been added later to better align with the C++ standard.
    
-   For new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended.
-   Those in ``namespace oneapi::dpl::execution`` are provided for backward compatibility and might get deprecated.
+   For new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended. Those
+   in ``namespace oneapi::dpl::execution`` are provided for backward compatibility and may be deprecated in the future.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
