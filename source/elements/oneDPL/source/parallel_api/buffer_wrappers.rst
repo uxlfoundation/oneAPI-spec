@@ -42,7 +42,7 @@ Buffer Wrappers
   }
 
 ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are helper functions
-for passing SYCL buffers to oneDPL algorithms.
+for passing `SYCL`_ buffers to oneDPL algorithms.
 These functions accept a buffer and return an object
 of an unspecified type that satisfies the following requirements:
 
@@ -71,3 +71,5 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
       auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init);
       dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
       dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
+
+.. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
