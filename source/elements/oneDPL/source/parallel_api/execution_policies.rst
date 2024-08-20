@@ -183,7 +183,7 @@ argument. If no policy object is provided, the new policy is constructed from ``
 Execution Policy Type Trait
 +++++++++++++++++++++++++++
 
-oneDPL provides type trait utilities to detect at compile time its execution policy types for the purpose of
+oneDPL provides type trait utilities to detect its execution policy types at compile time for the purpose of
 function overload resolution:
 
 .. code:: cpp
@@ -219,13 +219,13 @@ are defined.
 ``is_execution_policy<T>`` must have the characteristics of ``std::true_type`` if ``T`` is one of the above specified
 or implementation-defined execution policy types, otherwise it must have the characteristics of ``std::false_type``.
 Following the C++ Standard, ``is_execution_policy<T>`` does not automatically strip references and cv-qualifiers 
-from its template argument and should be used with ``std::decay<T>`` or similar type transformation utilities.
+from its template argument. *[Hint: Use it with* ``std::decay<T>`` *or similar type transformation utilities.]*
 
 .. note::
    The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
    while ``oneapi::dpl::is_execution_policy`` has been added later to better align with the C++ standard.
    
-   For new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended. Those
+   For writing new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended. Those
    in ``namespace oneapi::dpl::execution`` are provided for backward compatibility and may be deprecated in the future.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
