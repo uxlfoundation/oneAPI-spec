@@ -85,14 +85,24 @@ Example
 Programmatic versioning
 =======================
 
-The specification version as mentioned above can be used programatically by appending all digits of the specification version in the format of <MAJOR><MINOR><REVISION>. MINOR and REVISION version use two digits. This versioning can be used to check the compatibility of the implementation with the specification version.
+The specification version as mentioned above can be used programatically
+by appending all digits of the specification version in the format of
+<MAJOR><MINOR><REVISION>. MINOR and REVISION version use two digits.
+This versioning can be used to check the compatibility of the implementation
+with the specification version.
 
 Example
   | oneAPI 1.1 rev 1 will be represented as a numerical value of 10101
   | oneAPI 1.2 rev 1 will be represented as a numerical value of 10201
   | oneAPI 1.2 rev 2 will be represented as a numerical value of 10202
 
-The implementation is required to define a macro with the numerical value of the specification version. The macro name should be `ONEAPI_SPEC_VERSION` and the value should be the numerical value of the specification version. The components within the specification, can implement their own macro with the numerical value of the specification version. The macro name should be `<COMPONENT>_SPEC_VERSION` and the value should be the numerical value of the specification version.
+The implementation is required to define a macro with the numerical value
+of the specification version. The macro name should be `ONEAPI_SPEC_VERSION`
+and the value should be the numerical value of the specification version.
+The components within the specification can implement their own macro
+with the numerical value of the specification version. The macro name should be
+`<COMPONENT>_SPEC_VERSION` and the value should be the numerical value
+of the specification version.
 
 Example
 
@@ -103,4 +113,5 @@ Example
   #define ONEMKL_SPEC_VERSION ONEAPI_SPEC_VERSION
 
 
-[1] MINOR and REVISION values are limited to double digits to allow programmatic comparison of versions.
+[1] MINOR and REVISION values are limited to double digits to allow programmatic
+comparison of versions.
