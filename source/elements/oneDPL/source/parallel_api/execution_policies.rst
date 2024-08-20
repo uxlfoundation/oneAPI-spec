@@ -9,8 +9,7 @@ Execution Policies
 C++ Standard Aligned Execution Policies
 +++++++++++++++++++++++++++++++++++++++
 
-oneDPL has the set of execution policies and related utilities that are semantically aligned
-with the `C++ Standard`_, 6th edition (C++20):
+oneDPL has the set of execution policies semantically aligned with the `C++ Standard`_, 6th edition (C++20):
 
 .. code:: cpp
 
@@ -30,16 +29,15 @@ with the `C++ Standard`_, 6th edition (C++20):
         inline constexpr parallel_unsequenced_policy par_unseq { /*unspecified*/ };
         inline constexpr unsequenced_policy unseq { /*unspecified*/ };
 
-        template <class T>
-        struct is_execution_policy;
-
-        template <class T>
-        inline constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
       }
     }
   }
 
 See "Execution policies" in the `C++ Standard`_ for more information.
+
+.. note::
+   The ``std::is_execution_policy`` type trait resolves to ``std::false_type`` for oneDPL execution policies.
+   Implementations and programs should instead use the `oneDPL type trait <Execution Policy Type Trait>`_.
 
 Device Execution Policy
 +++++++++++++++++++++++
@@ -179,6 +177,54 @@ as the template argument, otherwise unspecified.
 
 Return a policy object constructed from ``policy``, with a new kernel name provided as the template
 argument. If no policy object is provided, the new policy is constructed from ``dpcpp_default``.
+
+Execution Policy Type Trait
++++++++++++++++++++++++++++
+
+oneDPL provides type trait utilities to detect at compile time its execution policy types for the purpose of
+function overload resolution:
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/execution>
+
+  namespace oneapi {
+    namespace dpl {
+
+      namespace execution {
+
+        template <class T>
+        struct is_execution_policy { /*see below*/ };
+
+        template <class T>
+        inline constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
+
+      }
+
+      template <class T>
+      struct is_execution_policy { /*see below*/ };
+
+      template <class T>
+      inline constexpr bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
+
+    }
+  }
+
+``oneapi::dpl::is_execution_policy`` and ``oneapi::dpl::execution::is_execution_policy`` must be treated as name aliases
+to the same class template. It is unspecified in which namespace the underlying class template and its specializations
+are defined.
+
+``is_execution_policy<T>`` must have the characteristics of ``std::true_type`` if ``T`` is one of the above specified
+or implementation-defined execution policy types, otherwise it must have the characteristics of ``std::false_type``.
+Following the C++ Standard, ``is_execution_policy<T>`` does not automatically strip references and cv-qualifiers 
+from its template argument and should be used with ``std::decay<T>`` or similar type transformation utilities.
+
+.. note::
+   The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
+   while ``oneapi::dpl::is_execution_policy`` has been added later to better align with the C++ standard.
+   
+   For new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended.
+   Those in ``namespace oneapi::dpl::execution`` are provided for backward compatibility and might get deprecated.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
