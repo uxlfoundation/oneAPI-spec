@@ -371,7 +371,7 @@ using the source iterator and unary function object provided.
 
 ``zip_iterator`` is an iterator-like type defined over one or more iterators. When dereferenced,
 the value returned from ``zip_iterator`` is a tuple of the values returned by dereferencing the
-source iterators over which the ``zip_iterator`` is defined.  The arithmetic operators of
+source iterators over which the ``zip_iterator`` is defined. The arithmetic operators of
 ``zip_iterator`` update the source iterators of a ``zip_iterator`` instance as though the
 operation were applied to each of these iterators. The types ``T`` within the template pack 
 ``Iterators...`` must satisfy ``AdaptingIteratorSource``.
