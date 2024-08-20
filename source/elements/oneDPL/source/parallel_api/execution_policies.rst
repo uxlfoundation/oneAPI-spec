@@ -37,7 +37,7 @@ See "Execution policies" in the `C++ Standard`_ for more information.
 
 .. note::
    The ``std::is_execution_policy`` type trait resolves to ``std::false_type`` for oneDPL execution policies.
-   Implementations and programs should instead use the `oneDPL type trait <Execution Policy Type Trait>`_.
+   Implementations and programs should instead use the :ref:`oneDPL type trait <exec-policy-type-trait>`_.
 
 Device Execution Policy
 +++++++++++++++++++++++
@@ -177,6 +177,8 @@ as the template argument, otherwise unspecified.
 
 Return a policy object constructed from ``policy``, with a new kernel name provided as the template
 argument. If no policy object is provided, the new policy is constructed from ``dpcpp_default``.
+
+.. _exec-policy-type-trait:
 
 Execution Policy Type Trait
 +++++++++++++++++++++++++++
