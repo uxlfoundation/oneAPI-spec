@@ -92,17 +92,17 @@ Iterators
 The oneDPL iterators are defined in the ``<oneapi/dpl/iterator>`` header,
 in ``namespace oneapi::dpl``.
 
-Let us define a named requirement, :code:`AdaptingIteratorSource`, to describe valid random access iterator-like
+Let us define a named requirement, ``AdaptingIteratorSource``, to describe valid random access iterator-like
 types that can be used as source for oneDPL iterators as described below.
-The type :code:`Iter` satisfies the :code:`AdaptingIteratorSource` named requirement if it is any of the following:
+The type ``Iter`` satisfies the ``AdaptingIteratorSource`` named requirement if it is any of the following:
 
  * A random access iterator
- * The unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
- * A :code:`permutation_iterator`
- * A :code:`transform_iterator`
- * A :code:`counting_iterator`
- * A :code:`discard_iterator`
- * A :code:`zip_iterator`
+ * The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+ * A ``permutation_iterator``
+ * A ``transform_iterator``
+ * A ``counting_iterator``
+ * A ``discard_iterator``
+ * A ``zip_iterator``
 
 .. code:: cpp
 
@@ -233,18 +233,18 @@ defined by the source iterator provided, and whose iteration order over the dere
 is defined by either another iterator or a functor that maps the ``permutation_iterator`` index
 to the index of the source iterator. The arithmetic and comparison operators of
 ``permutation_iterator`` behave as if applied to integer counter values maintained by the
-iterator instances to determine their position in the index map. :code:`SourceIterator` must satisfy
-:code:`AdaptingIteratorSource`.
+iterator instances to determine their position in the index map. ``SourceIterator`` must satisfy
+``AdaptingIteratorSource``.
 
-The type :code:`IndexMap` must be one of the following:
+The type ``IndexMap`` must be one of the following:
 
  * A random access iterator
- * The unspecified iterator-like type returned by :code:`oneapi::dpl::begin` or :code:`oneapi::dpl::end`
- * A :code:`permutation_iterator`
- * A :code:`transform_iterator`
- * A :code:`counting_iterator`
- * A functor with a signature equivalent to :code:`T operator()(const T&) const` where :code:`T` is a
-   :code:`std::iterator_traits<SourceIterator>::difference_type`
+ * The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+ * A ``permutation_iterator``
+ * A ``transform_iterator``
+ * A ``counting_iterator``
+ * A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
+   ``std::iterator_traits<SourceIterator>::difference_type``
 
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
@@ -314,8 +314,8 @@ defined by the unary function and source iterator provided. When dereferenced,
 element of the source iterator; dereference operations cannot be used to modify the elements of
 the source iterator unless the unary function result includes a reference to the element. The
 arithmetic and comparison operators of ``transform_iterator`` behave as if applied to the
-source iterator itself. The template type :code:`Iterator` must satisfy
-:code:`AdaptingIteratorSource`.
+source iterator itself. The template type ``Iterator`` must satisfy
+``AdaptingIteratorSource``.
 
 .. code:: cpp
 
@@ -373,8 +373,8 @@ using the source iterator and unary function object provided.
 the value returned from ``zip_iterator`` is a tuple of the values returned by dereferencing the
 source iterators over which the ``zip_iterator`` is defined.  The arithmetic operators of
 ``zip_iterator`` update the source iterators of a ``zip_iterator`` instance as though the
-operation were applied to each of these iterators. The types :code:`T` within the template pack 
-:code:`Iterators...` must satisfy :code:`AdaptingIteratorSource`.
+operation were applied to each of these iterators. The types ``T`` within the template pack 
+``Iterators...`` must satisfy ``AdaptingIteratorSource``.
 
 .. code:: cpp
 
