@@ -37,7 +37,7 @@ See "Execution policies" in the `C++ Standard`_ for more information.
 
 .. note::
    The ``std::is_execution_policy`` type trait resolves to ``std::false_type`` for oneDPL execution policies.
-   Implementations and programs should instead use the :ref:`oneDPL type trait <exec-policy-type-trait>`_.
+   Implementations and programs should instead use the :ref:`oneDPL type trait <exec-policy-type-trait>`.
 
 Device Execution Policy
 +++++++++++++++++++++++
