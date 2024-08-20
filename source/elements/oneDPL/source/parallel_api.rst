@@ -533,22 +533,22 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
   transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
       BinaryOp op, BinaryPredicate pred);                                                 // (2)
 
-:code:`oneapi::dpl::transform_if` applies a given function to the elements of the input sequence(s) that
+``oneapi::dpl::transform_if`` applies a given function to the elements of the input sequence(s) that
 satisfy a given predicate, and stores the result to the output. Depending on the arguments, the algorithm:
 
-1. Evaluates the unary predicate :code:`pred` for each position :code:`i` of the sequence
-   :code:`[start, end)` and if :code:`pred(start[i]) == true`, it performs the unary operation
-   :code:`op(start[i])` and stores the result into :code:`result[i]`. If
-   :code:`pred(start[i]) == false`, the data element :code:`result[i]` is not modified from its
+1. Evaluates the unary predicate ``pred`` for each position ``i`` of the sequence
+   ``[start, end)`` and if ``pred(start[i]) == true``, it performs the unary operation
+   ``op(start[i])`` and stores the result into ``result[i]``. If
+   ``pred(start[i]) == false``, the data element ``result[i]`` is not modified from its
    initial value. The return value is an iterator targeting past the last considered element of
-   the output sequence, that is, :code:`result + (end - start)`.
+   the output sequence, that is, ``result + (end - start)``.
 
-2. Evaluates the binary predicate :code:`pred` for each position :code:`i` of the sequence
-   :code:`[start1, end1)` and if :code:`pred(start1[i], start2[i]) == true`, it performs the
-   binary operation :code:`op(start1[i], start2[i])` and stores the result into :code:`result[i]`.
-   If :code:`pred(start1[i], start2[i]) == false`, the data element :code:`result[i]` is not
+2. Evaluates the binary predicate ``pred`` for each position ``i`` of the sequence
+   ``[start1, end1)`` and if ``pred(start1[i], start2[i]) == true``, it performs the
+   binary operation ``op(start1[i], start2[i])`` and stores the result into ``result[i]``.
+   If ``pred(start1[i], start2[i]) == false``, the data element ``result[i]`` is not
    modified from its initial value. The return value is an iterator targeting past the last
-   considered element of the output sequence, that is, :code:`result + (end1 - start1)`.
+   considered element of the output sequence, that is, ``result + (end1 - start1)``.
 
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
