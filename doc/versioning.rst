@@ -96,22 +96,17 @@ Example
   | oneAPI 1.2 rev 1 will be represented as a numerical value of 10201
   | oneAPI 1.2 rev 2 will be represented as a numerical value of 10202
 
-The implementation is required to define a macro with the numerical value
-of the specification version. The macro name should be `ONEAPI_SPEC_VERSION`
-and the value should be the numerical value of the specification version.
-The components within the specification can implement their own macro
-with the numerical value of the specification version. The macro name should be
-`<COMPONENT>_SPEC_VERSION` and the value should be the numerical value
-of the specification version.
+The implementation must define a macro with its name following the scheme,
+`<COMPONENT>_SPEC_VERSION` and having the numerical value of the specification
+version, for each component.
 
 Example
 
 .. code-block:: c
 
-  #define ONEAPI_SPEC_VERSION 10101
-  #define ONETBB_SPEC_VERSION ONEAPI_SPEC_VERSION
-  #define ONEMKL_SPEC_VERSION ONEAPI_SPEC_VERSION
+  #define ONETBB_SPEC_VERSION 10201
+  #define ONEMKL_SPEC_VERSION 10101
 
 
-[1] MINOR and REVISION values are limited to double digits to allow programmatic
+[1] MINOR and REVISION values are limited to double digits to allow numerical
 comparison of versions.
