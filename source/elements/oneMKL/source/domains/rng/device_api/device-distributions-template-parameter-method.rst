@@ -20,12 +20,12 @@ Distributions Template Parameter Method
    * -  ``uniform_method::standard``
         ``uniform_method::accurate``
      -  ``uniform``
-     -   Standard method. ``uniform_method::accurate`` checks for additional ``float`` and ``double`` data types. 
-         For ``integer`` data types, it uses ``double`` as a ``BRNG`` data type (``float`` ``BRNG`` data type is used in 
+     -   Standard method. ``uniform_method::accurate`` checks for additional ``float`` and ``double`` data types.
+         For ``integer`` data types, it uses ``double`` as a ``BRNG`` data type (``float`` ``BRNG`` data type is used in
          ``uniform_method::standard`` method on GPU).
    * -  ``gaussian_method::box_muller2``
      -  ``gaussian``
-     -  Generates normally distributed random numbers `x1` and `x2` through the pair of uniformly distributed numbers `u1` and `u2` according to 
+     -  Generates normally distributed random numbers `x1` and `x2` through the pair of uniformly distributed numbers `u1` and `u2` according to
         the formulas: :math:`x_1 = \sqrt{-2 \ln u_1} \sin {2 \pi u_2}`\ :math:`x_2 = \sqrt{-2 \ln u_1} \cos {2 \pi u_2}`\
    * -  ``exponential_method::icdf``
         ``exponential_method::icdf_accurate``
@@ -33,9 +33,9 @@ Distributions Template Parameter Method
      -  Inverse cumulative distribution function (ICDF) method.
    * -  ``lognormal_method::box_muller2``
      -  ``lognormal``
-     -  Normally distributed random numbers `x1` and `x2` are produced through the pair of uniformly distributed numbers `u1` and `u2` according to the formulas: 
-        :math:`x_1 = -2 \ln u_1 \sin {2 \pi u_2}`\       \ :math:`x_2 = -2 \ln u_1 \cos {2 \pi u_2}`\   
-        
+     -  Normally distributed random numbers `x1` and `x2` are produced through the pair of uniformly distributed numbers `u1` and `u2` according to the formulas:
+        :math:`x_1 = -2 \ln u_1 \sin {2 \pi u_2}`\       \ :math:`x_2 = -2 \ln u_1 \cos {2 \pi u_2}`\
+
         Then `x1` and `x2` are converted to lognormal distribution.
    * -  ``bernoulli_method::icdf``
      -  ``bernoulli``
@@ -49,4 +49,4 @@ Distributions Template Parameter Method
         * Left exponential tail
         * Right exponential tail
 
-`NOTE:` Methods provided for exposition purposes. 
+`NOTE:` Methods provided for exposition purposes.
