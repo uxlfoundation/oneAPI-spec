@@ -26,6 +26,9 @@ The probability density function is given by:
 class gaussian_mv
 -----------------
 
+Let ``SequenceContainerOrView`` be a type that can be one of C++ Sequence containers or C++ Views (``span``, ``mdspan``).
+It's implementation defined which type ``SequenceContainerOrView`` represents.
+
 .. rubric:: Syntax
 
 .. code-block:: cpp
@@ -36,10 +39,10 @@ class gaussian_mv
     public:
         using method_type = Method;
         using result_type = RealType;
-        explicit gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix);
+        explicit gaussian_mv(std::uint32_t dimen, SequenceContainerOrView<RealType> mean, SequenceContainerOrView<RealType> matrix);
         std::int32_t dimen() const;
-        std::vector<RealType> mean() const;
-        std::vector<RealType> matrix() const;
+        SequenceContainerOrView<RealType> mean() const;
+        SequenceContainerOrView<RealType> matrix() const;
     };
     }
 
@@ -85,13 +88,13 @@ class gaussian_mv
 
         * - Routine
           - Description
-        * - `explicit gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)`_
+        * - `explicit gaussian_mv(std::uint32_t dimen, SequenceContainerOrView<RealType> mean, SequenceContainerOrView<RealType> matrix)`_
           - Constructor with parameters
         * - `std::int32_t dimen() const`_
           - Method to obtain number of dimensions in output random vectors
-        * - `std::vector<double> mean() const`_
+        * - `SequenceContainerOrView<double> mean() const`_
           - Method to obtain mean vector `a` of dimension d.
-        * - `std::vector<double> matrix() const`_
+        * - `SequenceContainerOrView<double> matrix() const`_
           - Method to obtain variance-covariance matrix `C`
 
 .. container:: section
@@ -128,17 +131,17 @@ class gaussian_mv
 
     .. container:: section
 
-        .. _`explicit gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)`:
+        .. _`explicit gaussian_mv(std::uint32_t dimen, SequenceContainerOrView<RealType> mean, SequenceContainerOrView<RealType> matrix)`:
 
         .. code-block:: cpp
 
-            explicit gaussian_mv::gaussian_mv(std::uint32_t dimen, std::vector<RealType> mean, std::vector<RealType> matrix)
+            explicit gaussian_mv::gaussian_mv(std::uint32_t dimen, SequenceContainerOrView<RealType> mean, SequenceContainerOrView<RealType> matrix)
 
         .. container:: section
 
             .. rubric:: Description
 
-            Constructor with parameters. `dimen` is the number of dimensions, `mean` is a mean vector, `matrix` is a variance-covariance matrix.
+            Constructor with parameters. ``dimen`` is the number of dimensions, ``mean`` is a mean vector, ``matrix`` is a variance-covariance matrix.
 
         .. container:: section
 
@@ -167,11 +170,11 @@ class gaussian_mv
 
     .. container:: section
 
-        .. _`std::vector<double> mean() const`:
+        .. _`SequenceContainerOrView<double> mean() const`:
 
         .. code-block:: cpp
 
-            std::vector<double> gaussian_mv::mean() const
+            SequenceContainerOrView<double> gaussian_mv::mean() const
 
         .. container:: section
 
@@ -181,11 +184,11 @@ class gaussian_mv
 
     .. container:: section
 
-        .. _`std::vector<double> matrix() const`:
+        .. _`SequenceContainerOrView<double> matrix() const`:
 
         .. code-block:: cpp
 
-            std::vector<double> gaussian_mv::matrix() const
+            SequenceContainerOrView<double> gaussian_mv::matrix() const
 
         .. container:: section
 
@@ -193,4 +196,4 @@ class gaussian_mv
 
             Returns the variance-covariance matrix.
 
-**Parent topic:** :ref:`onemkl_rng_distributions`
+**Parent topic:** :ref:`onemkl_rng_distributions`
