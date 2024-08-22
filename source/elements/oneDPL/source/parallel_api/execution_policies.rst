@@ -219,7 +219,7 @@ are defined.
 ``is_execution_policy<T>`` must have the characteristics of ``std::true_type`` if ``T`` is one of the above specified
 or implementation-defined execution policy types, otherwise it must have the characteristics of ``std::false_type``.
 Following the C++ Standard, ``is_execution_policy<T>`` does not automatically strip references and cv-qualifiers 
-from its template argument. *[Hint: Use it with* ``std::decay_t<T>`` *or similar type transformation utilities.]*
+from its template argument. [*Note*: Use it with ``std::decay_t<T>`` or similar type transformation utilities. -- *end note*]
 
 .. note::
    The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
