@@ -33,47 +33,58 @@ Whole Sequence Operations
   namespace oneapi::dpl::ranges {
   
     // all_of
-    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
-               && std::ranges::sized_range<R>
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
       bool all_of(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
     // any_of
-    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
-               && std::ranges::sized_range<R>
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
       bool any_of(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
     // none_of
-    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
-               && std::ranges::sized_range<R>
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
       bool none_of(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
     // for_each
-    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = std::identity,
-              std::indirectly_unary_invocable< std::projected< std::ranges::iterator_t<R>, Proj > > Fun>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
-               && std::ranges::sized_range<R>
-      std::ranges::borrowed_iterator_t<R> for_each(ExecutionPolicy&& pol, R&& r, Fun f, Proj proj = {});
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirectly_unary_invocable< std::projected<std::ranges::iterator_t<R>, Proj> > Fn>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        for_each(ExecutionPolicy&& pol, R&& r, Fn f, Proj proj = {});
 
     // count
-    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = std::identity,
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
               typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
-               && std::ranges::sized_range<R>
-               && std::indirect_binary_predicate<std::ranges::equal_to, std::projected< std::ranges::iterator_t<R>, Proj >, const T*>
-      std::ranges::range_difference_t<R> count(ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirect_binary_predicate<std::ranges::equal_to,
+                                              std::projected<std::ranges::iterator_t<R>, Proj>,
+                                              const T*>
+      std::ranges::range_difference_t<R>
+        count(ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
 
     // count_if
-    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
-               && std::ranges::sized_range<R>
-      std::ranges::range_difference_t<R> count_if(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::range_difference_t<R>
+        count_if(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
   }
 
