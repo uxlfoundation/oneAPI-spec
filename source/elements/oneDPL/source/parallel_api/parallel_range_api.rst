@@ -23,5 +23,59 @@ The following differences to the standard C++ range algorithms apply:
 - For a given algorithm, at least one of the input ranges as well as the output range must be bounded.
 - ``for_each`` does not return its function object.
 
+Whole Sequence Operations
++++++++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/ranges>
+
+  namespace oneapi::dpl::ranges {
+  
+    // all_of
+    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = identity,
+              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+               && std::ranges::sized_range<R>
+      bool all_of(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // any_of
+    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = identity,
+              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+               && std::ranges::sized_range<R>
+      bool any_of(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // none_of
+    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = identity,
+              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+               && std::ranges::sized_range<R>
+      bool none_of(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // for_each
+    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = identity,
+              indirectly_unary_invocable< std::projected< std::ranges::iterator_t<R>, Proj > > Fun>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+               && std::ranges::sized_range<R>
+      borrowed_iterator_t<R> for_each(ExecutionPolicy&& pol, R&& r, Fun f, Proj proj = {});
+
+    // count
+    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = identity,
+              typename T = projected_value_t<std::ranges::iterator_t<R>, Proj>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+               && std::ranges::sized_range<R>
+               && indirect_binary_predicate<ranges::equal_to, std::projected< std::ranges::iterator_t<R>, Proj >, const T*>
+      range_difference_t<R> count(ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
+
+    // count_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R, typename Proj = identity,
+              std::indirect_unary_predicate< std::projected< std::ranges::iterator_t<R>, Proj > > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+               && std::ranges::sized_range<R>
+      range_difference_t<R> count_if(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+  }
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
