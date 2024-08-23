@@ -71,9 +71,9 @@ Whole Sequence Operations
               typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
-               std::indirect_binary_predicate<std::ranges::equal_to,
-                                              std::projected<std::ranges::iterator_t<R>, Proj>,
-                                              const T*>
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T* >
       std::ranges::range_difference_t<R>
         count(ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
 
@@ -85,6 +85,78 @@ Whole Sequence Operations
                std::ranges::sized_range<R>
       std::ranges::range_difference_t<R>
         count_if(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+  }
+
+Element Search Operations
++++++++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/ranges>
+
+  namespace oneapi::dpl::ranges {
+
+    // find
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T* >
+      std::ranges::borrowed_iterator_t<R>
+        find(ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
+
+    // find_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        find_if(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // find_if_not
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        find_if_not(ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // adjacent_find
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_binary_predicate< std::projected<iterator_t<R>, Proj>,
+                                              std::projected<iterator_t<R>, Proj> >
+                    Pred = std::ranges::equal_to>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        adjacent_find(ExecutionPolicy&& pol, R&& r, Pred pred = {}, Proj proj = {});
+
+    // min_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        min_element(ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // max_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        max_element(ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
   }
 
