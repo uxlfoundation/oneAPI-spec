@@ -521,11 +521,12 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 
 .. code:: cpp
 
-    template <typename Policy, typename InputIt, typename Size, typename OutputIt,
-        typename ValueType>
+    template <typename Policy, typename InputIt, typename Size, typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_intervals,
-        ValueType first_interval_begin, ValueType last_interval_end, OutputIt histogram_first); // (1)
+        typename ::std::iterator_traits<InputIt>::value_type first_interval_begin,
+        typename ::std::iterator_traits<InputIt>::value_type last_interval_end,
+        OutputIt histogram_first); // (1)
 
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
     OutputIt
@@ -545,7 +546,7 @@ past the last element of the output sequence starting from ``histogram_first``.
    number without rounding or truncation. An input element ``start[i]`` maps to a bin
    ``histogram_first[j]`` if and only if
    ``(first_interval_begin + j * bin_size <= start[i]) && (start[i] < first_interval_begin + (j + 1) * bin_size)``.
-   `ValueType` must be an arithmetic type. The value type of ``InputIt`` must be an arithmetic type.
+   The value type of ``InputIt`` must be an arithmetic type.
 
 2. The elements of ``[start, end)`` are mapped into ``(boundary_end - boundary_start - 1)``
    bins defined by the values in ``[boundary_start, boundary_end)``. An input 
