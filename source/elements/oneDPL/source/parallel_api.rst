@@ -451,5 +451,37 @@ than an element in the range being searched.
 
 The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
 
+.. code:: cpp
+
+  template <typename Policy, typename InputIt, typename OutputIt, typename UnaryOp,
+      typename UnaryPredicate>
+  OutputIt
+  transform_if(Policy&& policy, InputIt start, InputIt end, OutputIt result, UnaryOp op,
+      UnaryPredicate pred);                                                               // (1)
+
+  template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt, 
+      typename BinaryOp, typename BinaryPredicate>
+  OutputIt
+  transform_if(Policy&& policy, InputIt1 start1, InputIt1 end1, InputIt2 start2, OutputIt result,
+      BinaryOp op, BinaryPredicate pred);                                                 // (2)
+
+``oneapi::dpl::transform_if`` applies a given function to the elements of the input sequence(s) that
+satisfy a given predicate, and stores the result to the output. Depending on the arguments, the algorithm:
+
+1. Evaluates the unary predicate ``pred`` for each position ``i`` of the sequence
+   ``[start, end)`` and if ``pred(start[i]) == true``, it performs the unary operation
+   ``op(start[i])`` and stores the result into ``result[i]``. If
+   ``pred(start[i]) == false``, the data element ``result[i]`` is not modified from its
+   initial value. The return value is an iterator targeting past the last considered element of
+   the output sequence, that is, ``result + (end - start)``.
+
+2. Evaluates the binary predicate ``pred`` for each position ``i`` of the sequence
+   ``[start1, end1)`` and if ``pred(start1[i], start2[i]) == true``, it performs the
+   binary operation ``op(start1[i], start2[i])`` and stores the result into ``result[i]``.
+   If ``pred(start1[i], start2[i]) == false``, the data element ``result[i]`` is not
+   modified from its initial value. The return value is an iterator targeting past the last
+   considered element of the output sequence, that is, ``result + (end1 - start1)``.
+
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
