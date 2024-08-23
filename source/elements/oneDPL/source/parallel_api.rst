@@ -24,6 +24,18 @@ Iterators
 The oneDPL iterators are defined in the ``<oneapi/dpl/iterator>`` header,
 in ``namespace oneapi::dpl``.
 
+Let us define a named requirement, ``AdaptingIteratorSource``, to describe valid random access iterator-like
+types that can be used as source for oneDPL iterators as described below.
+The type ``Iter`` satisfies the ``AdaptingIteratorSource`` named requirement if it is any of the following:
+
+ * A random access iterator
+ * The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+ * A ``permutation_iterator``
+ * A ``transform_iterator``
+ * A ``counting_iterator``
+ * A ``discard_iterator``
+ * A ``zip_iterator``
+
 .. code:: cpp
 
     template <typename Integral>
@@ -153,7 +165,19 @@ defined by the source iterator provided, and whose iteration order over the dere
 is defined by either another iterator or a functor that maps the ``permutation_iterator`` index
 to the index of the source iterator. The arithmetic and comparison operators of
 ``permutation_iterator`` behave as if applied to integer counter values maintained by the
-iterator instances to determine their position in the index map.
+iterator instances to determine their position in the index map. ``SourceIterator`` must satisfy
+``AdaptingIteratorSource``.
+
+The type ``IndexMap`` must be one of the following:
+
+ * A random access iterator
+ * The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+ * A ``permutation_iterator``
+ * A ``transform_iterator``
+ * A ``counting_iterator``
+ * A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
+   ``std::iterator_traits<SourceIterator>::difference_type``
+
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
 it is invoked to index into the index map. The corresponding value in the map is then used
@@ -222,7 +246,8 @@ defined by the unary function and source iterator provided. When dereferenced,
 element of the source iterator; dereference operations cannot be used to modify the elements of
 the source iterator unless the unary function result includes a reference to the element. The
 arithmetic and comparison operators of ``transform_iterator`` behave as if applied to the
-source iterator itself.
+source iterator itself. The template type ``Iterator`` must satisfy
+``AdaptingIteratorSource``.
 
 .. code:: cpp
 
@@ -280,7 +305,8 @@ using the source iterator and unary function object provided.
 the value returned from ``zip_iterator`` is a tuple of the values returned by dereferencing the
 source iterators over which the ``zip_iterator`` is defined. The arithmetic operators of
 ``zip_iterator`` update the source iterators of a ``zip_iterator`` instance as though the
-operation were applied to each of these iterators.
+operation were applied to each of these iterators. The types ``T`` within the template pack 
+``Iterators...`` must satisfy ``AdaptingIteratorSource``.
 
 .. code:: cpp
 
