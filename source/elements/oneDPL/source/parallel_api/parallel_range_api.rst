@@ -130,8 +130,8 @@ Element Search Operations
     // adjacent_find
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              std::indirect_binary_predicate< std::projected<iterator_t<R>, Proj>,
-                                              std::projected<iterator_t<R>, Proj> >
+              std::indirect_binary_predicate< std::projected<std::ranges::iterator_t<R>, Proj>,
+                                              std::projected<std::ranges::iterator_t<R>, Proj> >
                     Pred = std::ranges::equal_to>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R>
@@ -141,7 +141,7 @@ Element Search Operations
     // min_element
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<iterator_t<R>, Proj> >
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
                     Comp = std::ranges::less>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R>
@@ -151,7 +151,7 @@ Element Search Operations
     // max_element
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<iterator_t<R>, Proj> >
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
                     Comp = std::ranges::less>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R>
