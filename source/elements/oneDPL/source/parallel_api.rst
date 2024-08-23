@@ -524,9 +524,9 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
     template <typename Policy, typename InputIt, typename Size, typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_intervals,
-        typename ::std::iterator_traits<InputIt>::value_type first_interval_begin,
-        typename ::std::iterator_traits<InputIt>::value_type last_interval_end,
-        OutputIt histogram_first); // (1)
+              typename std::iterator_traits<InputIt>::value_type first_interval_begin,
+              typename std::iterator_traits<InputIt>::value_type last_interval_end,
+              OutputIt histogram_first); // (1)
 
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
     OutputIt
