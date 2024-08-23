@@ -299,9 +299,9 @@ spmm
       Host or USM pointer representing :math:`\alpha`. The USM allocation can be
       on the host or device. The requirements are:
 
-      * Must use the same kind of memory than ``beta``.
+      * Must use the same kind of memory as ``beta``.
       * Must be a host pointer if SYCL buffers are used.
-      * Must be of the same type than the handles' data type.
+      * Must be of the same type as the handles' data type.
 
    A_view
       Specifies which part of the handle should be read as described by
@@ -317,9 +317,9 @@ spmm
       Host or USM pointer representing :math:`\beta`. The USM allocation can be
       on the host or device. The requirements are:
 
-      * Must use the same kind of memory than ``alpha``.
+      * Must use the same kind of memory as ``alpha``.
       * Must be a host pointer if SYCL buffers are used.
-      * Must be of the same type than the handles' data type.
+      * Must be of the same type as the handles' data type.
 
    C_handle
       Dense matrix handle object representing :math:`C`.
