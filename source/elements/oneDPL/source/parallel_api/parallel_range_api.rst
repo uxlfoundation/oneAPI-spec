@@ -31,7 +31,7 @@ Whole Sequence Operations
   // Defined in <oneapi/dpl/ranges>
 
   namespace oneapi::dpl::ranges {
-  
+
     // all_of
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
@@ -202,6 +202,57 @@ Sequence Search and Comparison
       std::ranges::borrowed_subrange_t<R>
         search_n(ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> count,
                  const T& value, Pred pred = {}, Proj proj = {});
+
+  }
+
+Sorting and Merge
++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/ranges>
+
+  namespace oneapi::dpl::ranges {
+
+    // sort
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Comp = std::ranges::less, typename Proj = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::sortable<std::ranges::iterator_t<R>, Comp, Proj>
+      std::ranges::borrowed_iterator_t<R>
+        sort(ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // stable_sort
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Comp = std::ranges::less, typename Proj = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::sortable<std::ranges::iterator_t<R>, Comp, Proj>
+      std::ranges::borrowed_iterator_t<R>
+        stable_sort(ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // is_sorted
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      bool is_sorted(ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // merge
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
+              typename Comp = std::ranges::less, typename Proj1 = std::identity,
+              typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::ranges::sized_range<OutR> &&
+               std::mergeable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                              std::ranges::iterator_t<OutR>, Comp, Proj1, Proj2>
+      std::ranges::merge_result<std::ranges::borrowed_iterator_t<R1>,
+                                std::ranges::borrowed_iterator_t<R2>,
+                                std::ranges::borrowed_iterator_t<OutR>>
+        merge(R1&& r1, R2&& r2, OutR&& result, Comp comp = {}, Proj1 proj1 = {}, Proj2 proj2 = {});
 
   }
 
