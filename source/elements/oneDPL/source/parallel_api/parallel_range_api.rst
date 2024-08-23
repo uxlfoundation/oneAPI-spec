@@ -160,5 +160,50 @@ Element Search Operations
 
   }
 
+Sequence Search and Comparison
+++++++++++++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/ranges>
+
+  namespace oneapi::dpl::ranges {
+
+    // equal
+    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+             std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+             typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               (std::ranges::sized_range<R1> || std::ranges::sized_range<R2>) &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      bool equal(ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                 Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // search
+    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+             std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+             typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      std::ranges::borrowed_subrange_t<R1>
+        search(ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+               Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // search_n
+    template<typename ExecutionPolicy, std::ranges::random_access_range R,
+             typename Pred = std::ranges::equal_to, typename Proj = std::identity,
+             typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R>, const T*, Pred, Proj >
+      std::ranges::borrowed_subrange_t<R>
+        search_n(ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> count,
+                 const T& value, Pred pred = {}, Proj proj = {});
+
+  }
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
