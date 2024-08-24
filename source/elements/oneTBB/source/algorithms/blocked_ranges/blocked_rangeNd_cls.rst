@@ -3,7 +3,7 @@
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ===============
-blocked_range3d
+blocked_rangeNd
 ===============
 **[algorithms.blocked_range3d]**
 
@@ -18,7 +18,7 @@ Therefore, blocked_rangeNd<int,2> is a specialisation of blocked_range2d where b
 
     namespace oneapi {
         namespace tbb {
-            template<typename Value, unsigned int N, typename = detail::make_index_sequence<N>>
+            template<typename Value, unsigned int N>
             class blocked_rangeNd {
             public:
                 // Types
@@ -62,9 +62,9 @@ The type of the page values.
 
 .. code:: cpp
 
-    using page_range_type = blocked_range<PageValue>;
+    using dim_range_type = blocked_range<PageValue>;
 
-The type of the values in one direction out of the N dimensions.
+The type of the values in one dimension out of the N dimensions.
 
 Member functions
 ----------------
@@ -94,8 +94,6 @@ space that contains all value pairs of the form ``(i, j, k, l)``, where ``i`` ra
 ``j`` ranges from 2 to 6 with a grain size of 1, and so forth.
     
 
-Basic splitting constructor.
-
 .. code:: cpp
 
     blocked_rangeNd( blocked_rangeNd& range, split );
@@ -112,7 +110,7 @@ subranges of approximately square/cubic/hypercubic shape if all grain sizes are 
 
 .. code:: cpp
 
-    blocked_rangeNd( blocked_range3d& range, proportional_split proportion );
+    blocked_rangeNd( blocked_rangeNd& range, proportional_split proportion );
 
 Proportional splitting constructor.
 
@@ -129,7 +127,7 @@ each subrange remain the same as in the original range.
 
 **Effects**: Determines if range is empty.
 
-**Returns:** ``pages.empty()||rows().empty()||cols().empty()``
+**Returns:** Any one-dimensional range hosted is empty.
 
 .. code:: cpp
 
@@ -141,7 +139,7 @@ each subrange remain the same as in the original range.
 
 .. code:: cpp
 
-    const page_range_type& dim(int) const;
+    const dim_range_type& dim(int) const;
 
 **Returns:**  Range containing the range of the value space along axis specified by argument.
 
