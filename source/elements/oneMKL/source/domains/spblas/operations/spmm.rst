@@ -273,6 +273,14 @@ spmm
      before ``spmm`` with the same arguments. ``spmm`` can then be called
      multiple times. Calling ``spmm_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
+   - In the general case, not calling the functions in the order specified above
+     is undefined behavior. Not calling ``spmm_buffer_size`` or
+     ``spmm_optimize`` at least once will throw an
+     :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+     exception. Calling ``spmm`` with arguments not matching ``spmm_optimize``
+     will throw an
+     :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+     exception, unless stated otherwise.
    - The data of the dense handles ``B_handle`` and ``C_handle`` and the scalars
      ``alpha`` and ``beta`` can be reset before each call to ``spmm``. Changing
      the data of the sparse handle ``A_handle`` is undefined behavior.
