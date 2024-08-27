@@ -41,7 +41,7 @@ Therefore, blocked_rangeNd<int,2> is a specialisation of blocked_range2d where b
 
                 // Access
                 bool is_divisible() const;
-                static constexpr unsigned int ndims();
+                static constexpr unsigned int dim_count();
                 const tbb::blocked_range<value_type>& dim(unsigned int dimension) const;
             };
 
@@ -137,6 +137,12 @@ each subrange remain the same as in the original range.
 **Effects**: Determines if the range can be split into subranges.
 
 **Returns:** any dim(int) returns is_divisible().
+
+.. code:: cpp
+
+   static constexpr unsigned int dim_count();
+
+**Returns:** Number of dimensions specified by the template argument ``N``.
 
 .. code:: cpp
 
