@@ -63,7 +63,7 @@ The type of the page values.
 
 .. code:: cpp
 
-    using dim_range_type = blocked_range<PageValue>;
+    using dim_range_type = blocked_range<Value>;
 
 The type of the values in one dimension out of the N dimensions.
 
