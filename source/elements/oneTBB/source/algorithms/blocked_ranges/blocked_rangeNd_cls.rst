@@ -1,11 +1,12 @@
 .. SPDX-FileCopyrightText: 2019-2024 Intel Corporation
+.. SPDX-FileCopyrightText: Contributors to the oneAPI Specification project.
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ===============
 blocked_rangeNd
 ===============
-**[algorithms.blocked_range3d]**
+**[algorithms.blocked_rangeNd]**
 
 Class template that represents a recursively divisible N-dimensional half-open interval.
 
@@ -49,7 +50,7 @@ Therefore, blocked_rangeNd<int,2> is a specialisation of blocked_range2d where b
 
 Requirements:
 
-* The *Value* must meet the :doc:`blocked_range requirements <../../named_requirements/algorithms/blocked_range_val>`
+* The *Value* must meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`
 
 Member types
 ------------
@@ -141,7 +142,7 @@ each subrange remain the same as in the original range.
 
     const dim_range_type& dim(int) const;
 
-**Returns:**  Range containing the range of the value space along axis specified by argument.
+**Returns:**  Range containing the range of the value space along dimension specified by argument.
 
 See also:
 
