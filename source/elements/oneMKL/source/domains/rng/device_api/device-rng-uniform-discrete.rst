@@ -12,8 +12,9 @@ Generates random numbers uniformly distributed over the interval ``[a, b)``.
 
 .. rubric:: Description
 
-The ``uniform`` class object is used in ``generate`` and function 
-to provide random numbers uniformly distributed over the interval ``[a, b)``, where ``a, b`` are the left and right 
+The ``uniform`` class object is used in ``generate`` and function
+to provide random numbers uniformly distributed over the interval ``[a, b)``,
+where ``a, b`` are the left and right
 bounds of the interval respectively, and :math:`a, b \in Z ; a < b`.
 
 
@@ -53,7 +54,7 @@ class uniform
 
        uniform();
        explicit uniform(Type a, Type b);
-       
+
        Type a() const;
        Type b() const;
      };
@@ -71,6 +72,8 @@ class uniform
 
                 * ``std::int32_t``
                 * ``std::uint32_t``
+                * ``std::int64_t``
+                * ``std::uint64_t``
 
     .. container:: section
 
@@ -174,4 +177,4 @@ class uniform
 
             Returns the distribution parameter `b` - right bound.
 
-**Parent topic:** :ref:`onemkl_device_rng_distributions`
+**Parent topic:** :ref:`onemkl_device_rng_distributions`
