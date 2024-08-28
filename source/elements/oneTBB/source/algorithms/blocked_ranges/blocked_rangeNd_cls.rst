@@ -29,9 +29,8 @@ Therefore, blocked_rangeNd<int,2> is a specialisation of blocked_range2d where b
                 // Constructors
                 blocked_rangeNd(const dim_range_type<Is>&... args);
                 blocked_rangeNd(
-                  Value begin[N],
-                  Value end[N],
-                  typename tbb::blocked_range<value_type>::size_type grainsize
+                  Value size[N], 
+                  typename tbb::blocked_range<value_type>::size_type grainsize = 1
                 );
                 blocked_rangeNd(blocked_rangeNd& r, proportional_split proportion); 
                 blocked_rangeNd(blocked_rangeNd& r, split proportion); 
@@ -82,17 +81,16 @@ The number of args has to match N.
 .. code:: cpp
 
     blocked_rangeNd(
-      Value begin[N],
-      Value end[N],
-      typename tbb::blocked_range<value_type>::size_type grainsize
+      Value size[N],
+      typename tbb::blocked_range<value_type>::size_type grainsize = 1
     );
 
 **Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
-The space is the half-open Cartesian product of ranges with ``[begin[0], end[0]) x [begin[1], end[1]) x ...`` each having the same grain size.
+The space is the half-open Cartesian product of ranges with ``[0, size[0]) x [0, size[1]) x ...`` each having the same grain size.
 
-**Example:**  The statement ``blocked_rangeNd<int,4> r( {1,2,3,4}, {5,6,7,8}, 4 );`` constructs a four-dimensional
-space that contains all value pairs of the form ``(i, j, k, l)``, where ``i`` ranges from 1 to 5 with a grain size of 1,
-``j`` ranges from 2 to 6 with a grain size of 1, and so forth.
+**Example:**  The statement ``blocked_rangeNd<int,4> r( {5,6,7,8}, 4 );`` constructs a four-dimensional
+space that contains all value pairs of the form ``(i, j, k, l)``, where ``i`` ranges from 0 (included) to 5 (excluded) with a grain size of 4,
+``j`` ranges from 0 to 6 with a grain size of 4, and so forth.
     
 
 .. code:: cpp
