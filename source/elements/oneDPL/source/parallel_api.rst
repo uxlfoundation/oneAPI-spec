@@ -561,8 +561,11 @@ comparator and their associated values maintain the relative order as in the ori
 ``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
 as defined by the `C++ Standard`_.
-    template <typename Policy, typename InputIt, typename Size, typename OutputIt,
-        typename ValueType>
+
+.. code:: cpp
+
+    template <typename Policy, typename InputIt, typename Size, typename ValueType,
+              typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_intervals,
         ValueType first_interval_begin, ValueType last_interval_end, OutputIt histogram_first); // (1)
@@ -570,7 +573,7 @@ as defined by the `C++ Standard`_.
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
-              InputIt2 boundary_end, OutputIt histogram_first);                             // (2)
+              InputIt2 boundary_end, OutputIt histogram_first);                                 // (2)
 
 ``oneapi::dpl::histogram`` computes the histogram over the data in ``[start, end)``
 by counting the number of elements that map to each of a set of bins and storing the counts into
