@@ -530,7 +530,7 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
     template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
-              InputIt2 boundary_end, OutputIt histogram_first);                             // (2)
+              InputIt2 boundary_end, OutputIt histogram_first);                                 // (2)
 
 ``oneapi::dpl::histogram`` computes the histogram over the data in ``[start, end)``
 by counting the number of elements that map to each of a set of bins and storing the counts into
