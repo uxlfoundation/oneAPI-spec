@@ -33,7 +33,7 @@ Therefore, blocked_rangeNd<int,2> is a specialisation of blocked_range2d where b
                   typename tbb::blocked_range<value_type>::size_type grainsize = 1
                 );
                 blocked_rangeNd(blocked_rangeNd& r, proportional_split proportion); 
-                blocked_rangeNd(blocked_rangeNd& r, split proportion); 
+                blocked_rangeNd(blocked_rangeNd& r, split); 
                
                 // Capacity
                 bool empty() const;
@@ -140,7 +140,7 @@ each subrange remain the same as in the original range.
 
    static constexpr unsigned int dim_count();
 
-**Returns:** Number of dimensions specified by the template argument ``N``.
+**Returns:** Number of dimensions, as specified by the class template argument ``N``.
 
 .. code:: cpp
 
