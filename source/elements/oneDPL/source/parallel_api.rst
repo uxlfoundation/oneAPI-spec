@@ -697,7 +697,7 @@ The elements e of [start, end) must be partitioned with respect to the comparato
         InputValueIt values_first,
         Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>{});
 
-``oneapi::dpl::sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
+``oneapi::dpl::sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``
 and simultaneously permutes associated values at the same positions in the range
 ``[values_first, values_first + std::distance(keys_first, keys_last))``
 to match the order of the sorted keys.
@@ -705,8 +705,9 @@ to match the order of the sorted keys.
 Sorting is unstable. That means, keys that do not precede one another according to the given comparator
 and their associated values might be ordered arbitrarily relative to each other.
 
-`comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
-for the equivalent parameter of `std::sort`.
+``comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
+for the equivalent parameter of ``std::sort``.
+If no ``comp`` object is provided, the keys are sorted with respect to ``std::less``.
 
 .. code:: cpp
 
@@ -717,7 +718,7 @@ for the equivalent parameter of `std::sort`.
         InputValueIt values_first,
         Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>());
 
-``oneapi::dpl::stable_sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
+``oneapi::dpl::stable_sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``
 and simultaneously permutes associated values at the same positions in the range
 ``[values_first, values_first + std::distance(keys_first, keys_last))``
 to match the order of the sorted keys.
@@ -725,8 +726,9 @@ to match the order of the sorted keys.
 Sorting is stable. That means, keys that do not precede one another according to the given comparator
 and their associated values maintain their relative order as in the original sequences.
 
-`comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
-for the equivalent parameter of `std::sort`.
+``comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
+for the equivalent parameter of ``std::sort``.
+If no ``comp`` object is provided, the keys are sorted with respect to ``std::less``.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
