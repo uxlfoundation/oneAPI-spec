@@ -703,7 +703,8 @@ and simultaneously permutes associated values at the same positions in the range
 ``[values_first, values_first + std::distance(keys_first, keys_last))``
 to match the order of the sorted keys.
 
-The order of equal keys is not guaranteed to be preserved.
+Sorting is unstable. That means, keys that do not precede one another according to the given comparator
+and their associated values might be ordered arbitrarily relative to each other.
 
 `comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
 for the equivalent parameter of `std::sort`.
@@ -723,7 +724,8 @@ and simultaneously permutes associated values at the same positions in the range
 ``[values_first, values_first + std::distance(keys_first, keys_last))``
 to match the order of the sorted keys.
 
-The order of equal keys is preserved.
+Sorting is stable. That means, keys that do not precede one another according to the given comparator
+and their associated values maintain their relative order as in the original sequences.
 
 `comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
 for the equivalent parameter of `std::sort`.
