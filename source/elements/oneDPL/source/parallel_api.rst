@@ -705,8 +705,8 @@ to match the order of the sorted keys.
 Sorting is unstable. That means, keys that do not precede one another according to the given comparator
 and their associated values might be ordered arbitrarily relative to each other.
 
-`InputKeyIt` and `InputValueIt` must meet the requirements of
-`ValueSwappable` defined by the `C++ Standard`_.
+``InputKeyIt`` and ``InputValueIt`` must meet the requirements of
+``ValueSwappable`` defined by the `C++ Standard`_.
 
 ``comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
 for the ``Compare`` parameter of ``std::sort``.
@@ -729,8 +729,8 @@ to match the order of the sorted keys.
 Sorting is stable. That means, keys that do not precede one another according to the given comparator
 and their associated values maintain their relative order as in the original sequences.
 
-`InputKeyIt` and `InputValueIt` must meet the requirements of
-`ValueSwappable` defined by the `C++ Standard`_.
+``InputKeyIt`` and ``InputValueIt`` must meet the requirements of
+``ValueSwappable`` defined by the `C++ Standard`_.
 
 ``comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
 for the ``Compare`` parameter of ``std::sort``.
