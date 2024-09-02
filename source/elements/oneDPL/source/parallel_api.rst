@@ -695,7 +695,7 @@ The elements e of [start, end) must be partitioned with respect to the comparato
     void
     sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
         InputValueIt values_first,
-        Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>{});
+        Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>());
 
 ``oneapi::dpl::sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``
 and simultaneously permutes associated values at the same positions in the range
