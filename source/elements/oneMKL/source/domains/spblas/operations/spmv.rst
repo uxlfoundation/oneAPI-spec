@@ -269,7 +269,7 @@ spmv
      some of the descriptor's data such as the ``workspace``.
    - In the general case, not calling the functions in the order specified above
      is undefined behavior. Not calling ``spmv_buffer_size`` or
-     ``spmv_optimize`` at least once will throw an
+     ``spmv_optimize`` at least once with a given descriptor will throw an
      :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
      exception. Calling ``spmv`` with arguments not matching ``spmv_optimize``
      will throw an
