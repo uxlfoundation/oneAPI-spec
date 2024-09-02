@@ -698,9 +698,12 @@ The elements e of [start, end) must be partitioned with respect to the comparato
                 InputValueIt values_first, Comparator comp =
                     std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
 
-``oneapi::dpl::sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
-and permutes a sequence of values in the range
-``[values_first, values_first + distance(keys_first, keys_last))`` to match the order of the sorted keys.
+``oneapi::dpl::sort_by_key`` sorts a sequence of keys within the range ``[keys_first, keys_last)``.
+It also permutes the corresponding sequence of values within the range
+``[values_first, values_first + distance(keys_first, keys_last))``.
+Each key is associated with a corresponding value,
+and this association is maintained throughout the sorting process.
+
 The order of equal keys is not guaranteed to be preserved.
 
 If no comparator is provided, the keys are sorted with respect to ``std::less{}``.
@@ -715,9 +718,12 @@ If no comparator is provided, the keys are sorted with respect to ``std::less{}`
                 InputValueIt values_first, Comparator comp =
                     std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
 
-``oneapi::dpl::stable_sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
-and permutes a sequence of values in the range
-``[values_first, values_first + distance(keys_first, keys_last))`` to match the order of the sorted keys.
+``oneapi::dpl::stable_sort_by_key`` sorts a sequence of keys within the range ``[keys_first, keys_last)``.
+It also permutes the corresponding sequence of values within the range
+``[values_first, values_first + distance(keys_first, keys_last))``.
+Each key is associated with a corresponding value,
+and this association is maintained throughout the sorting process.
+
 The order of equal keys is preserved.
 
 If no comparator is provided, the keys are sorted with respect to ``std::less{}``.
