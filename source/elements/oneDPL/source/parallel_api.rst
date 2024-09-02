@@ -706,7 +706,9 @@ and this association is maintained throughout the sorting process.
 
 The order of equal keys is not guaranteed to be preserved.
 
-If no comparator is provided, the keys are sorted with respect to ``std::less{}``.
+``comp`` is a function object,
+which satisfies the ``Compare`` named requirement defined by the `C++ Standard`_.
+If no ``comp`` object is provided, the keys are sorted with respect to ``std::less{}``.
 
 .. code:: cpp
 
@@ -726,7 +728,9 @@ and this association is maintained throughout the sorting process.
 
 The order of equal keys is preserved.
 
-If no comparator is provided, the keys are sorted with respect to ``std::less{}``.
+``comp`` is a function object,
+which satisfies the ``Compare`` named requirement defined by the `C++ Standard`_.
+If no ``comp`` object is provided, the keys are sorted with respect to ``std::less{}``.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
