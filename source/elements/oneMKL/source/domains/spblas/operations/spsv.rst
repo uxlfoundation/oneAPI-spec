@@ -294,7 +294,8 @@ spsv
    A_view
       Specifies which part of the handle should be read as described by
       :ref:`onemkl_sparse_matrix_view`. The ``type_view`` field must be
-      ``matrix_descr::triangular``.
+      ``matrix_descr::triangular``. The ``diag_view`` field can be
+      ``diag::nonunit`` or ``diag::unit``.
 
    A_handle
       Sparse matrix handle object representing :math:`A`.
