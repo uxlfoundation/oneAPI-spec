@@ -706,7 +706,7 @@ Sorting is unstable. That means, keys that do not precede one another according 
 and their associated values might be ordered arbitrarily relative to each other.
 
 ``comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
-for the equivalent parameter of ``std::sort``.
+for the ``Compare`` parameter of ``std::sort``.
 If no ``comp`` object is provided, the keys are sorted with respect to ``std::less``.
 
 .. code:: cpp
@@ -727,7 +727,7 @@ Sorting is stable. That means, keys that do not precede one another according to
 and their associated values maintain their relative order as in the original sequences.
 
 ``comp`` is a function object that satisfies the requirements defined by the `C++ Standard`_
-for the equivalent parameter of ``std::sort``.
+for the ``Compare`` parameter of ``std::sort``.
 If no ``comp`` object is provided, the keys are sorted with respect to ``std::less``.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
