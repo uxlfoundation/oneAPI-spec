@@ -691,12 +691,11 @@ The elements e of [start, end) must be partitioned with respect to the comparato
 .. code:: cpp
 
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
-        typename Comparator =
-            std::less<typename std::iterator_traits<InputIt>::value_type>>
+        typename Comparator = std::less<typename std::iterator_traits<InputIt>::value_type>>
     void
     sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
-                InputValueIt values_first, Comparator comp =
-                    std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
+        InputValueIt values_first,
+        Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>{});
 
 ``oneapi::dpl::sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
 and simultaneously permutes associated values at the same positions in the range
@@ -712,12 +711,11 @@ for the equivalent parameter of `std::sort`.
 .. code:: cpp
 
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
-      typename Comparator =
-          std::less<typename std::iterator_traits<InputIt>::value_type>>
+        typename Comparator = std::less<typename std::iterator_traits<InputIt>::value_type>>
     void
     stable_sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
-                InputValueIt values_first, Comparator comp =
-                    std::less<typename std::iterator_traits<InputKeyIt>::value_type>());
+        InputValueIt values_first,
+        Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>());
 
 ``oneapi::dpl::stable_sort_by_key`` sorts a sequence of keys in the range ``[keys_first, keys_last)``,
 and simultaneously permutes associated values at the same positions in the range
