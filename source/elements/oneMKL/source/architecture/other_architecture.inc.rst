@@ -21,6 +21,7 @@ The implementation must define a macro, `ONEMKL_SPEC_VERSION` as having the nume
 The specification version can be created by appending all digits of the specification version in the format of <MAJOR><MINOR>. MINOR version always uses two digits. This version can be used to check the compatibility of the implementation with the specification version.
 
 Version Example
+
   | oneAPI 1.1 rev 1 will be represented as a numerical value of 101
   | oneAPI 1.2 rev 1 will be represented as a numerical value of 102
   | oneAPI 1.2 rev 2 will be represented as a numerical value of 102
