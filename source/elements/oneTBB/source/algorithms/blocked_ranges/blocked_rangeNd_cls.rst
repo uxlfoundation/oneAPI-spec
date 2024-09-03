@@ -25,7 +25,7 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialisation of ``blocked_range2d``
                 // Types
                 using value_type = Value;
                 using dim_range_type = blocked_range<value_type>;
-                using size_type = dim_range_type::size_type;
+                using size_type = typename dim_range_type::size_type;
 
                 // Constructors
                 blocked_rangeNd(const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/);
@@ -66,7 +66,7 @@ The type that represents one out of the N dimensions.
 
 .. code:: cpp
 
-    using size_type = dim_range_type::size_type;
+    using size_type = typename dim_range_type::size_type;
 
 The type for measuring the size of a dimension.
 
