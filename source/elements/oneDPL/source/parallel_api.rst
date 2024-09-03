@@ -700,14 +700,15 @@ The elements e of [start, end) must be partitioned with respect to the comparato
 ``oneapi::dpl::sort_by_key`` sorts the sequence of keys ``[keys_first, keys_last)``
 and simultaneously permutes associated values at the same positions in the range
 ``[values_first, values_first + std::distance(keys_first, keys_last))``
-to match the order of the sorted keys.
+to match the order of the sorted keys. That is, a key and its associated value
+will have the same index in their respective sequences after sorting.
 
 Keys are sorted with respect to the provided comparator object ``comp``. That means, for any
 two iterators ``i`` and ``j`` to the sorted sequence of keys such that ``i`` precedes ``j``,
 ``comp(*j, *i) == false``.
 If no ``comp`` object is provided, keys are sorted with respect to ``std::less``.
 
-Sorting is unstable. That means, keys, which do not precede one another with respect to the given 
+Sorting is unstable. That means, keys, which do not precede one another with respect to the given
 comparator, and their associated values might be ordered arbitrarily relative to each other.
 
 ``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
@@ -726,14 +727,15 @@ as defined by the `C++ Standard`_.
 ``oneapi::dpl::stable_sort_by_key`` sorts the sequence of keys ``[keys_first, keys_last)``
 and simultaneously permutes associated values at the same positions in the range
 ``[values_first, values_first + std::distance(keys_first, keys_last))``
-to match the order of the sorted keys.
+to match the order of the sorted keys. That is, a key and its associated value
+will have the same index in their respective sequences after sorting.
 
 Keys are sorted with respect to the provided comparator object ``comp``. That means, for any
 two iterators ``i`` and ``j`` to the sorted sequence of keys such that ``i`` precedes ``j``,
 ``comp(*j, *i) == false``.
 If no ``comp`` object is provided, keys are sorted with respect to ``std::less``.
 
-Sorting is stable. That means, keys, which do not precede one another with respect to the given 
+Sorting is stable. That means, keys, which do not precede one another with respect to the given
 comparator, and their associated values maintain the relative order as in the original sequences.
 
 ``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
