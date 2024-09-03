@@ -13,12 +13,13 @@ Class template that represents a recursively divisible N-dimensional half-open i
 A ``blocked_rangeNd`` is the N-dimensional extension of ``blocked_range``, ``blocked_range2d`` and ``blocked_range3d``.
 We can interpret it as a Cartesian product of N instances of ``blocked_range``.
 Different to ``blocked_range2d`` and ``blocked_range3d``, all ranges have to be specified over the same type ``Value``.
-Therefore, ``blocked_rangeNd<int,2>`` is a specialisation of ``blocked_range2d`` where both dimensions have int type.
+Therefore, ``blocked_rangeNd<int,2>`` is a specialisation of ``blocked_range2d`` where both dimensions are of type ``int``.
 
 .. code:: cpp
 
     namespace oneapi {
         namespace tbb {
+
             template<typename Value, unsigned int N>
             class blocked_rangeNd {
             public:
@@ -32,7 +33,7 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialisation of ``blocked_range2d``
                 blocked_rangeNd(value_type size[N], size_type grainsize = 1);
                 blocked_rangeNd(blocked_rangeNd& r, split); 
                 blocked_rangeNd(blocked_rangeNd& r, proportional_split proportion); 
-               
+
                 // Capacity
                 static constexpr unsigned int dim_count();
                 bool empty() const;
@@ -87,7 +88,7 @@ The constructor must take exactly N arguments which types match to ``const dim_r
 .. note::
     A variadic template constructor ``template <typename... Dims> blocked_rangeNd( const Dims&... dims )``,
     even if constrained by the size and type requirements for its parameter pack ``Dims``, would not
-    be fully compliant because types in ``Dims`` would not be deducible for arguments specified as
+    be fully compliant because types in ``Dims`` would not be deductible for arguments specified as
     braced initialization lists, and so expressions like ``blocked_rangeNd<int, 4>{{0,1},{0,2},{0,3},{0,4}}``
     would fail to compile.
 
@@ -114,8 +115,9 @@ Basic splitting constructor.
 
 **Effects**: Partitions ``range`` into two subranges. The newly constructed ``blocked_rangeNd`` is approximately
 the half of the original ``range``, and ``range`` is updated to be the remainder.
-Each subrange has the same grain size as the original ``range``. Splitting is done in any dimension.
-The choice of which axis to split is intended to cause, after repeated splitting, 
+Splitting is done in one dimension, while other dimensions and the grain sizes for
+each subrange remain the same as in the original ``range``.
+The choice of which dimension to split is intended to cause, after repeated splitting, 
 subranges of approximately square/cubic/hypercubic shape if all grain sizes are the same.
 
 .. code:: cpp
@@ -126,10 +128,10 @@ Proportional splitting constructor.
 
 **Requirements**: ``is_divisible()`` is true.
 
-**Effects**: Partitions ``range`` into two subranges in the given ``proportion``
-across one of its axes. The choice of which axis to split is made in the same way as for the basic splitting
-constructor; then, proportional splitting is done for the chosen axis. The second axis and the grain sizes for
-each subrange remain the same as in the original range.
+**Effects**: Partitions ``range`` into two subranges in the given ``proportion`` across one of its dimensions.
+The choice of which dimenstion to split is made in the same way as for the basic splitting constructor;
+then, proportional splitting is done for the chosen one. Other dimensions and the grain sizes for
+each subrange remain the same as in the original ``range``.
 
 .. code:: cpp
 
@@ -143,7 +145,7 @@ each subrange remain the same as in the original range.
 
 **Effects**: Determines if range is empty.
 
-**Returns:** Any one-dimensional range hosted is empty.
+**Returns:** True if any of the range dimensions is empty; false, otherwise.
 
 .. code:: cpp
 
@@ -151,13 +153,15 @@ each subrange remain the same as in the original range.
 
 **Effects**: Determines if the range can be split into subranges.
 
-**Returns:** any dim(int) returns is_divisible().
+**Returns:** True if for any of the range dimensions ``is_divisible()`` is true; false, otherwise.
 
 .. code:: cpp
 
     const dim_range_type& dim(unsigned int dimension) const;
 
-**Returns:**  Range containing the value space along the dimension specified by the argument.
+**Requirements**: 0 <= ``dimension`` < N.
+
+**Returns:**  ``blocked_range`` containing the value space along the dimension specified by the argument.
 
 See also:
 
