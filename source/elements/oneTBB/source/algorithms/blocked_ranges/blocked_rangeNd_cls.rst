@@ -28,7 +28,7 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialisation of ``blocked_range2d``
                 using size_type = dim_range_type::size_type;
 
                 // Constructors
-                blocked_rangeNd(const dim_range_type<Is>&... args);
+                blocked_rangeNd(const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/);
                 blocked_rangeNd(value_type size[N], size_type grainsize = 1);
                 blocked_rangeNd(blocked_rangeNd& r, split); 
                 blocked_rangeNd(blocked_rangeNd& r, proportional_split proportion); 
@@ -75,12 +75,21 @@ Member functions
 
 .. code:: cpp
 
-    blocked_rangeNd( const dim_range_type<Is>&... args );
+    blocked_rangeNd( const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/ );
 
 **Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
-The space is the half-open Cartesian product of ranges each having its own grain size.
-The number of args has to match N.
+The space is the half-open Cartesian product of ranges ``dim0 x ...`` each having its own grain size.
+The constructor must take exactly N arguments which types match to ``const dim_range_type&``.
 
+**Example:** For ``blocked_rangeNd<int,4>``, this constructor is equivalent to
+``blocked_rangeNd( const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>& )``.
+
+.. note::
+    A variadic template constructor ``template <typename... Dims> blocked_rangeNd( const Dims&... dims )``,
+    even if constrained by the size and type requirements for its parameter pack ``Dims``, would not
+    be fully compliant because types in ``Dims`` would not be deducible for arguments specified as
+    braced initialization lists, and so expressions like ``blocked_rangeNd<int, 4>{{0,1},{0,2},{0,3},{0,4}}``
+    would fail to compile.
 
 .. code:: cpp
 
