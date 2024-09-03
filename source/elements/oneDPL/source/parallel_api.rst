@@ -708,8 +708,8 @@ two iterators ``i`` and ``j`` to the sorted sequence of keys such that ``i`` pre
 ``comp(*j, *i) == false``.
 If no ``comp`` object is provided, keys are sorted with respect to ``std::less``.
 
-Sorting is unstable. That means, keys, which do not precede one another with respect to the given
-comparator, and their associated values might be ordered arbitrarily relative to each other.
+Sorting is unstable. That means, keys which do not precede one another with respect to the given
+comparator and their associated values might be ordered arbitrarily relative to each other.
 
 ``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
@@ -735,8 +735,8 @@ two iterators ``i`` and ``j`` to the sorted sequence of keys such that ``i`` pre
 ``comp(*j, *i) == false``.
 If no ``comp`` object is provided, keys are sorted with respect to ``std::less``.
 
-Sorting is stable. That means, keys, which do not precede one another with respect to the given
-comparator, and their associated values maintain the relative order as in the original sequences.
+Sorting is stable. That means, keys which do not precede one another with respect to the given
+comparator and their associated values maintain the relative order as in the original sequences.
 
 ``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
