@@ -690,11 +690,11 @@ The elements e of [start, end) must be partitioned with respect to the comparato
 
 .. code:: cpp
 
-    template<typename Policy, typename InputKeyIt, typename InputValueIt,
+    template<typename Policy, typename KeyIt, typename ValueIt,
         typename Comparator = std::less<typename std::iterator_traits<InputIt>::value_type>>
     void
-    sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
-        InputValueIt values_first,
+    sort_by_key(Policy&& policy, KeyIt keys_first, KeyIt keys_last,
+        ValueIt values_first,
         Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>());
 
 ``oneapi::dpl::sort_by_key`` sorts the sequence of keys ``[keys_first, keys_last)``
@@ -710,17 +710,17 @@ If no ``comp`` object is provided, keys are sorted with respect to ``std::less``
 Sorting is unstable. That means, keys, which do not precede one another with respect to the given 
 comparator, and their associated values might be ordered arbitrarily relative to each other.
 
-``InputKeyIt`` and ``InputValueIt`` must satisfy the requirements of ``ValueSwappable``,
+``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
 as defined by the `C++ Standard`_.
 
 .. code:: cpp
 
-    template<typename Policy, typename InputKeyIt, typename InputValueIt,
+    template<typename Policy, typename KeyIt, typename ValueIt,
         typename Comparator = std::less<typename std::iterator_traits<InputIt>::value_type>>
     void
-    stable_sort_by_key(Policy&& policy, InputKeyIt keys_first, InputKeyIt keys_last,
-        InputValueIt values_first,
+    stable_sort_by_key(Policy&& policy, KeyIt keys_first, KeyIt keys_last,
+        ValueIt values_first,
         Comparator comp = std::less<typename std::iterator_traits<InputIt>::value_type>());
 
 ``oneapi::dpl::stable_sort_by_key`` sorts the sequence of keys ``[keys_first, keys_last)``
@@ -736,7 +736,7 @@ If no ``comp`` object is provided, keys are sorted with respect to ``std::less``
 Sorting is stable. That means, keys, which do not precede one another with respect to the given 
 comparator, and their associated values maintain the relative order as in the original sequences.
 
-``InputKeyIt`` and ``InputValueIt`` must satisfy the requirements of ``ValueSwappable``,
+``KeyIt`` and ``ValueIt`` must satisfy the requirements of ``ValueSwappable``,
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
 as defined by the `C++ Standard`_.
 
