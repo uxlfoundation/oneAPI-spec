@@ -10,10 +10,10 @@ blocked_rangeNd
 
 Class template that represents a recursively divisible N-dimensional half-open interval.
 
-A ``blocked_rangeNd`` is the N-dimensional extension of ``blocked_range``, ``blocked_range2d`` and ``blocked_range3d``.
-We can interpret it as a Cartesian product of N instances of ``blocked_range``.
-Different to ``blocked_range2d`` and ``blocked_range3d``, all ranges have to be specified over the same type ``Value``.
-Therefore, ``blocked_rangeNd<int,2>`` is a specialisation of ``blocked_range2d`` where both dimensions are of type ``int``.
+A ``blocked_rangeNd`` is the N-dimensional extension of ``blocked_range``, ``blocked_range2d``, and ``blocked_range3d``.
+You can interpret it as a Cartesian product of N instances of ``blocked_range``.
+Unlike ``blocked_range2d`` and ``blocked_range3d``, all ranges must be specified over the same ``Value`` type.
+Therefore, ``blocked_rangeNd<int,2>`` is a specialization of ``blocked_range2d`` where both dimensions are ``int``.
 
 .. code:: cpp
 
@@ -80,7 +80,7 @@ Member functions
 
 **Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
 The space is the half-open Cartesian product of ranges ``dim0 x ...`` each having its own grain size.
-The constructor must take exactly N arguments which types match to ``const dim_range_type&``.
+The constructor must take exactly N arguments, which types match ``const dim_range_type&``.
 
 **Example:** For ``blocked_rangeNd<int,4>``, this constructor is equivalent to
 ``blocked_rangeNd( const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>& )``.
@@ -100,7 +100,7 @@ The constructor must take exactly N arguments which types match to ``const dim_r
 The space is the half-open Cartesian product of ranges ``[0, size[0]) x [0, size[1]) x ...``
 each having the same grain size.
 
-**Example:**  The statement ``blocked_rangeNd<int,4> r( {5,6,7,8}, 4 );`` constructs a four-dimensional
+**Example:**  The ``blocked_rangeNd<int,4> r( {5,6,7,8}, 4 );`` statement constructs a four-dimensional
 space that contains all value pairs of the form ``(i, j, k, l)``, where ``i`` ranges from 0 (included)
 to 5 (excluded) with a grain size of 4, ``j`` ranges from 0 to 6 with a grain size of 4, and so forth.
     
@@ -161,7 +161,7 @@ each subrange remain the same as in the original ``range``.
 
 **Requirements**: 0 <= ``dimension`` < N.
 
-**Returns:**  ``blocked_range`` containing the value space along the dimension specified by the argument.
+**Returns:** ``blocked_range`` containing the value space along the dimension specified by the argument.
 
 See also:
 
