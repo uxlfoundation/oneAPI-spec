@@ -48,7 +48,8 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialization of ``blocked_range2d``
 
 Requirements:
 
-* The *Value* must meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`
+* ``N`` must be greater than 0.
+* The *Value* must meet the :doc:`BlockedRangeValue requirements <../../named_requirements/algorithms/blocked_range_val>`.
 
 Member types
 ------------
@@ -79,16 +80,17 @@ Member functions
     blocked_rangeNd( const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/ );
 
 **Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
-The space is the half-open Cartesian product of ranges ``dim0 x ...`` each having its own grain size.
+The space is the half-open Cartesian product of one-dimensional ranges ``dim0 x ...``.
 The constructor must take exactly N arguments, which types match ``const dim_range_type&``.
 
 **Example:** For ``blocked_rangeNd<int,4>``, this constructor is equivalent to
 ``blocked_rangeNd( const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>& )``.
 
 .. note::
-    A variadic template constructor ``template <typename... Dims> blocked_rangeNd( const Dims&... dims )``,
-    even if constrained by the size and type requirements for its parameter pack ``Dims``, would not
-    be fully compliant because types in ``Dims`` would not be deductible for arguments specified as
+    This constructor cannot be substituted with a variadic template constructor
+    ``template <typename... Dims> blocked_rangeNd( const Dims&... dims )``, even if the latter
+    is constrained by the size and type requirements for the parameter pack ``Dims``.
+    That is because the types in ``Dims`` could not be automatically deduced from arguments specified as
     braced initialization lists, and so expressions like ``blocked_rangeNd<int, 4>{{0,1},{0,2},{0,3},{0,4}}``
     would fail to compile.
 
@@ -101,9 +103,8 @@ The space is the half-open Cartesian product of ranges ``[0, size[0]) x [0, size
 each having the same grain size.
 
 **Example:**  The ``blocked_rangeNd<int,4> r( {5,6,7,8}, 4 );`` statement constructs a four-dimensional
-space that contains all value pairs of the form ``(i, j, k, l)``, where ``i`` ranges from 0 (included)
+space that contains all value tuples ``(i, j, k, l)``, where ``i`` ranges from 0 (included)
 to 5 (excluded) with a grain size of 4, ``j`` ranges from 0 to 6 with a grain size of 4, and so forth.
-    
 
 .. code:: cpp
 
@@ -115,10 +116,13 @@ Basic splitting constructor.
 
 **Effects**: Partitions ``range`` into two subranges. The newly constructed ``blocked_rangeNd`` is approximately
 the half of the original ``range``, and ``range`` is updated to be the remainder.
-Splitting is done in one dimension, while other dimensions and the grain sizes for
+Splitting is done across one dimension, while other dimensions and the grain sizes for
 each subrange remain the same as in the original ``range``.
-The choice of which dimension to split is intended to cause, after repeated splitting, 
-subranges of approximately square/cubic/hypercubic shape if all grain sizes are the same.
+
+.. note::
+    It is recommended to split across the dimension with the biggest size-to-grainsize ratio,
+    so that, after repeated splitting, subranges become of approximately square/cubic/hypercubic shape
+    if all grain sizes are the same.
 
 .. code:: cpp
 
@@ -129,23 +133,23 @@ Proportional splitting constructor.
 **Requirements**: ``is_divisible()`` is true.
 
 **Effects**: Partitions ``range`` into two subranges in the given ``proportion`` across one of its dimensions.
-The choice of which dimenstion to split is made in the same way as for the basic splitting constructor;
-then, proportional splitting is done for the chosen one. Other dimensions and the grain sizes for
-each subrange remain the same as in the original ``range``.
+The effect is similar to the basic splitting constructor, except for proportional splitting of the selected
+dimension, as specified for :doc:`blocked_range <blocked_range_cls>`.
+Other dimensions and the grain sizes for each subrange remain the same as in the original ``range``.
 
 .. code:: cpp
 
    static constexpr unsigned int dim_count();
 
-**Returns:** The number of dimensions, as specified by the class template argument ``N``.
+**Returns:** The number of dimensions set by the class template argument ``N``.
 
 .. code:: cpp
 
     bool empty() const;
 
-**Effects**: Determines if range is empty.
+**Effects**: Determines if the range is empty.
 
-**Returns:** True if any of the range dimensions is empty; false, otherwise.
+**Returns:** True if for any of the range dimensions ``empty()`` is true; false, otherwise.
 
 .. code:: cpp
 
