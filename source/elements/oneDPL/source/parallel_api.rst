@@ -562,5 +562,40 @@ comparator and their associated values maintain the relative order as in the ori
 and ``Comparator`` must satisfy the requirements for the ``Compare`` parameter of ``std::sort``,
 as defined by the `C++ Standard`_.
 
+.. code:: cpp
+
+    template <typename Policy, typename InputIt, typename Size, typename ValueType,
+        typename OutputIt>
+    OutputIt
+    histogram(Policy&& exec, InputIt start, InputIt end, Size num_intervals,
+        ValueType first_interval_begin, ValueType last_interval_end, OutputIt histogram_first); // (1)
+
+    template <typename Policy, typename InputIt1, typename InputIt2, typename OutputIt>
+    OutputIt
+    histogram(Policy&& exec, InputIt1 start, InputIt1 end, InputIt2 boundary_start,
+              InputIt2 boundary_end, OutputIt histogram_first);                                 // (2)
+
+``oneapi::dpl::histogram`` computes the histogram over the data in ``[start, end)``
+by counting the number of elements that map to each of a set of bins and storing the counts into
+the output sequence starting from ``histogram_first``. Input values that do not map to a defined
+bin are skipped silently. The value type of ``OutputIt`` must be an integral type of sufficient
+size to store the counts of the histogram without overflow. The return value is an iterator targeting
+past the last element of the output sequence starting from ``histogram_first``.
+
+1. The elements of ``[start, end)`` are mapped into ``num_intervals`` bins that evenly divide the range
+   ``[first_interval_begin, last_interval_end)``. Each bin is of size
+   ``bin_size = (last_interval_end - first_interval_begin) / num_intervals`` as represented by a real
+   number without rounding or truncation. An input element ``start[i]`` maps to a bin
+   ``histogram_first[j]`` if and only if
+   ``(first_interval_begin + j * bin_size <= start[i]) && (start[i] < first_interval_begin + (j + 1) * bin_size)``.
+   Both `ValueType` and the value type of ``InputIt`` must be arithmetic types.
+
+2. The elements of ``[start, end)`` are mapped into ``std::distance(boundary_start, boundary_end) - 1)``
+   bins defined by the values in ``[boundary_start, boundary_end)``. An input 
+   element ``start[i]`` maps to a bin ``histogram_first[j]`` if and only if
+   ``(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])``.  The value types
+   of ``InputIt1`` and ``InputIt2`` must be arithmetic types. The values in
+   ``[boundary_start, boundary_end)`` must be sorted with respect to ``operator<``.
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
