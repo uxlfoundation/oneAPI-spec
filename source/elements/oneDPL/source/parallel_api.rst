@@ -590,7 +590,7 @@ past the last element of the output sequence starting from ``histogram_first``.
    ``(first_interval_begin + j * bin_size <= start[i]) && (start[i] < first_interval_begin + (j + 1) * bin_size)``.
    `ValueType` must be an arithmetic type. The value type of ``InputIt`` must be an arithmetic type.
 
-2. The elements of ``[start, end)`` are mapped into ``(boundary_end - boundary_start - 1)``
+2. The elements of ``[start, end)`` are mapped into ``std::distance(boundary_start, boundary_end) - 1)``
    bins defined by the values in ``[boundary_start, boundary_end)``. An input 
    element ``start[i]`` maps to a bin ``histogram_first[j]`` if and only if
    ``(boundary_start[j] <= start[i]) && (start[i] < boundary_start[j + 1])``.  The value types
