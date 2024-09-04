@@ -508,7 +508,6 @@ satisfy a given predicate, and stores the result to the output. Depending on the
    modified from its initial value. The return value is an iterator targeting past the last
    considered element of the output sequence, that is, ``result + (end1 - start1)``.
 
-
 .. code:: cpp
 
     template<typename Policy, typename KeyIt, typename ValueIt,
