@@ -1,20 +1,19 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2024 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemkl_rng_beta:
+.. _onemkl_device_rng_beta:
 
 beta
 ====
 
-Class is used for generation of beta distributed real types random numbers.
 
-.. _onemkl_rng_beta_description:
+Generates beta distributed random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>`
-function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`,
+The ``beta`` class object is used in the ``generate`` function to provide
+random numbers with beta distribution that has shape parameters :math:`p` and :math:`q`,
 displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`.
 :math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
 
@@ -33,8 +32,6 @@ The cumulative distribution function is as follows:
 
 Where :math:`B(p, 1)` is the complete beta function.
 
-.. _onemkl_rng_beta_syntax:
-
 class beta
 ----------
 
@@ -42,20 +39,24 @@ class beta
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
-    template<typename RealType = float, typename Method = beta_method::by_default>
-    class beta {
-    public:
-        using method_type = Method;
-        using result_type = RealType;
-        beta();
-        explicit beta(RealType p, RealType q, RealType a, RealType b);
-        RealType p() const;
-        RealType q() const;
-        RealType a() const;
-        RealType b() const;
-    };
-    }
+   namespace oneapi::mkl::rng::device {
+     template<typename RealType, typename Method>
+     class beta {
+     public:
+       using method_type = Method;
+       using result_type = RealType;
+
+       beta();
+       explicit beta(RealType p, RealType q, RealType a, RealType b);
+
+       RealType p() const;
+       RealType q() const;
+       RealType a() const;
+       RealType b() const;
+       std::size_t count_rejected_numbers() const;
+     };
+   }
+
 
 .. container:: section
 
@@ -65,19 +66,15 @@ class beta
 
         typename RealType
             Type of the produced values. Supported types:
+
                 * ``float``
                 * ``double``
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::beta_method::by_default
-            Transformation method, which will be used for generation. Supported types:
+        typename Method
+            Generation method. The type is unspecified.
 
-                * ``oneapi::mkl::rng::beta_method::by_default``
-                * ``oneapi::mkl::rng::beta_method::cja``
-                * ``oneapi::mkl::rng::beta_method::cja_accurate``
-
-            See description of the methods in :ref:`Distributions methods template parameter<onemkl_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
 .. container:: section
 
@@ -99,7 +96,10 @@ class beta
         * - `RealType a() const`_
           - Method to obtain displacement :math:`\alpha`
         * - `RealType b() const`_
-          - Method to obtain scalefactor :math:`\beta`
+          - Method to obtain scale parameter :math:`\beta`
+        * - `size_t count_rejected_numbers() const`_
+          - Method to obtain amount of random numbers that were rejected during
+            the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
 
 .. container:: section
 
@@ -145,7 +145,8 @@ class beta
 
             .. rubric:: Description
 
-            Default constructor for distribution, parameters set as ``p`` = 1.0, ``q`` = 0.0, :math:`\alpha` = 1.0, :math:`\beta` = 1.0.
+            Default constructor for distribution, parameters set as
+            ``p`` = 1.0, ``q`` = 1.0, :math:`\alpha` = 0.0, :math:`\beta` = 1.0.
 
     .. container:: section
 
@@ -159,14 +160,14 @@ class beta
 
             .. rubric:: Description
 
-            Constructor with parameters. ``p`` and ``q`` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scalefactor.
+            Constructor with parameters. ``p`` and ``q`` are shapes, :math:`\alpha` is a displacement, :math:`\beta` is a scale parameter.
 
         .. container:: section
 
             .. rubric:: Throws
 
             oneapi::mkl::invalid_argument
-                Exception is thrown when :math:`p \leq 0.0f`, or :math:`q \leq 0.0f`, or :math:`\beta \leq 0.0f`
+                Exception is thrown when :math:`p \leq 0`, or :math:`q \leq 0`, or :math:`\beta \leq 0`
 
 .. container:: section
 
@@ -226,6 +227,21 @@ class beta
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter :math:`\beta` - scalefactor.
+            Returns the distribution parameter :math:`\beta` - scale parameter value.
 
-**Parent topic:** :ref:`onemkl_rng_distributions`
+    .. container:: section
+
+        .. _`size_t count_rejected_numbers() const`:
+
+        .. code-block:: cpp
+
+            std::size_t beta::count_rejected_numbers() const
+
+        .. container:: section
+
+            .. rubric:: Return Value
+
+            Returns the amount of random numbers that were rejected during
+            the last ``generate`` function call. If no ``generate`` calls, ``0`` is returned.
+
+**Parent topic:** :ref:`onemkl_device_rng_distributions`

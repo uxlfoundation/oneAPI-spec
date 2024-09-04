@@ -13,7 +13,8 @@ Class is used for generation of Poisson distributed integer types random numbers
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`\lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
+The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemkl_rng_generate>` function to provide
+n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`\lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
 
 The probability distribution is given by:
 
@@ -32,6 +33,9 @@ The cumulative distribution function is as follows:
 class poisson_v
 ---------------
 
+Let ``SequenceContainerOrView`` be a type that can be one of C++ Sequence containers or C++ Views (``span``, ``mdspan``).
+It's implementation defined which type ``SequenceContainerOrView`` represents.
+
 .. rubric:: Syntax
 
 .. code-block:: cpp
@@ -42,8 +46,8 @@ class poisson_v
     public:
         using method_type = Method;
         using result_type = IntType;
-        explicit poisson_v(std::vector<double> lambda);
-        std::vector<double> lambda() const;
+        explicit poisson_v(SequenceContainerOrView<double> lambda);
+        SequenceContainerOrView<double> lambda() const;
     };
     }
 
@@ -76,9 +80,9 @@ class poisson_v
 
         * - Routine
           - Description
-        * - `explicit poisson_v(std::vector<double> lambda)`_
+        * - `explicit poisson_v(SequenceContainerOrView<double> lambda)`_
           - Constructor with parameters
-        * - `std::vector<double> lambda() const`_
+        * - `SequenceContainerOrView<double> lambda() const`_
           - Method to obtain distribution parameter
 
 .. container:: section
@@ -115,17 +119,17 @@ class poisson_v
 
     .. container:: section
 
-        .. _`explicit poisson_v(std::vector<double> lambda)`:
+        .. _`explicit poisson_v(SequenceContainerOrView<double> lambda)`:
 
         .. code-block:: cpp
 
-            explicit poisson_v::poisson_v(std::vector<double> lambda)
+            explicit poisson_v::poisson_v(SequenceContainerOrView<double> lambda)
 
         .. container:: section
 
             .. rubric:: Description
 
-            Constructor with parameters. `lambda` is a distribution parameter.
+            Constructor with parameters. ``lambda`` is a distribution parameter.
 
         .. container:: section
 
@@ -140,16 +144,16 @@ class poisson_v
 
     .. container:: section
 
-        .. _`std::vector<double> lambda() const`:
+        .. _`SequenceContainerOrView<double> lambda() const`:
 
         .. code-block:: cpp
 
-            double poisson_v::lambda() const
+            SequenceContainerOrView<double> poisson_v::lambda() const
 
         .. container:: section
 
             .. rubric:: Return Value
 
-            Returns the distribution parameter `lambda`.
+            Returns the distribution parameter ``lambda``.
 
-**Parent topic:** :ref:`onemkl_rng_distributions`
+**Parent topic:** :ref:`onemkl_rng_distributions`
