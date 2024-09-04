@@ -565,7 +565,7 @@ as defined by the `C++ Standard`_.
 .. code:: cpp
 
     template <typename Policy, typename InputIt, typename Size, typename ValueType,
-              typename OutputIt>
+        typename OutputIt>
     OutputIt
     histogram(Policy&& exec, InputIt start, InputIt end, Size num_intervals,
         ValueType first_interval_begin, ValueType last_interval_end, OutputIt histogram_first); // (1)
