@@ -30,7 +30,7 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialization of ``blocked_range2d``
 
                 // Constructors
                 blocked_rangeNd(const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/);
-                blocked_rangeNd(value_type size[N], size_type grainsize = 1);
+                blocked_rangeNd(const value_type (&size)[N], size_type grainsize = 1);
                 blocked_rangeNd(blocked_rangeNd& r, split); 
                 blocked_rangeNd(blocked_rangeNd& r, proportional_split proportion); 
 
@@ -96,7 +96,7 @@ The constructor must take exactly N arguments, which types match ``const dim_ran
 
 .. code:: cpp
 
-    blocked_rangeNd( value_type size[N], size_type grainsize = 1 );
+    blocked_rangeNd( const value_type (&size)[N], size_type grainsize = 1 );
 
 **Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
 The space is the half-open Cartesian product of ranges ``[0, size[0]) x [0, size[1]) x ...``
