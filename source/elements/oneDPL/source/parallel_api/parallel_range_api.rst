@@ -28,7 +28,7 @@ Whole Sequence Operations
 
 .. code:: cpp
 
-  // Defined in <oneapi/dpl/ranges>
+  // Defined in <oneapi/dpl/algorithm>
 
   namespace oneapi::dpl::ranges {
 
@@ -93,7 +93,7 @@ Element Search Operations
 
 .. code:: cpp
 
-  // Defined in <oneapi/dpl/ranges>
+  // Defined in <oneapi/dpl/algorithm>
 
   namespace oneapi::dpl::ranges {
 
@@ -165,7 +165,7 @@ Sequence Search and Comparison
 
 .. code:: cpp
 
-  // Defined in <oneapi/dpl/ranges>
+  // Defined in <oneapi/dpl/algorithm>
 
   namespace oneapi::dpl::ranges {
 
@@ -210,7 +210,7 @@ Sorting and Merge
 
 .. code:: cpp
 
-  // Defined in <oneapi/dpl/ranges>
+  // Defined in <oneapi/dpl/algorithm>
 
   namespace oneapi::dpl::ranges {
 
@@ -261,7 +261,7 @@ Mutating Operations
 
 .. code:: cpp
 
-  // Defined in <oneapi/dpl/ranges>
+  // Defined in <oneapi/dpl/algorithm>
 
   namespace oneapi::dpl::ranges {
 
