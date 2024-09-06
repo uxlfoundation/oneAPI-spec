@@ -258,9 +258,19 @@ spsv
      before ``spsv`` with the same arguments. ``spsv`` can then be called
      multiple times. Calling ``spsv_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
+   - In the general case, not calling the functions in the order specified above
+     is undefined behavior. Not calling ``spsv_buffer_size`` or
+     ``spsv_optimize`` at least once with a given descriptor will throw an
+     :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+     exception. Calling ``spsv`` with arguments not matching ``spsv_optimize``
+     will throw an
+     :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+     exception, unless stated otherwise.
    - The data of the dense handle ``x_handle`` and scalar ``alpha`` can be reset
      before each call to ``spsv``. Changing the data of the sparse handle
      ``A_handle`` is undefined behavior.
+   - The data must be available on the device when calling ``spsv_optimize`` by
+     using event dependencies if needed.
    - ``spsv_optimize`` and ``spsv`` are asynchronous.
    - The algorithm defaults to ``spsv_alg::default_alg`` if a backend does not
      support the provided algorithm.
@@ -283,8 +293,9 @@ spsv
 
    A_view
       Specifies which part of the handle should be read as described by
-      :ref:`onemkl_sparse_matrix_view`. ``A_view.type_view`` must be
-      ``matrix_descr::triangular`` or ``matrix_descr::diagonal``.
+      :ref:`onemkl_sparse_matrix_view`. The ``type_view`` field must be
+      ``matrix_descr::triangular``. The ``diag_view`` field can be
+      ``diag::nonunit`` or ``diag::unit``.
 
    A_handle
       Sparse matrix handle object representing :math:`A`.
