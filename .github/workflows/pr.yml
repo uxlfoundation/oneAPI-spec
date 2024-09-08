@@ -78,7 +78,7 @@ jobs:
         ref: gh-pages
         path: gh-pages
     - name: Retrieve site
-      uses: actions/download-artifact@v4.1.4
+      uses: actions/download-artifact@v4.1.7
       with:
         name: site
         path: gh-pages
