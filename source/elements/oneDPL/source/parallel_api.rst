@@ -10,6 +10,9 @@ including parallel algorithms added in the 6th edition known as C++20.
 All those algorithms work with *C++ Standard aligned execution policies* and with
 *device execution policies*.
 
+oneDPL also provides *parallel range algorithms*: variations of C++20 range-based algorithms
+that take a oneDPL execution policy.
+
 Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special iterators, and
 a set of non-standard parallel algorithms.
 
