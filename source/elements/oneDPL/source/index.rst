@@ -38,6 +38,7 @@ The library is comprised of the following components:
   * Various utilities in addition to the C++ standard functionality.
 
 .. toctree::
+   :titlesonly:
 
    common.rst
    parallel_api.rst

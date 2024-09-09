@@ -267,9 +267,19 @@ spmv
      before ``spmv`` with the same arguments. ``spmv`` can then be called
      multiple times. Calling ``spmv_optimize`` on the same descriptor can reset
      some of the descriptor's data such as the ``workspace``.
+   - In the general case, not calling the functions in the order specified above
+     is undefined behavior. Not calling ``spmv_buffer_size`` or
+     ``spmv_optimize`` at least once with a given descriptor will throw an
+     :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
+     exception. Calling ``spmv`` with arguments not matching ``spmv_optimize``
+     will throw an
+     :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+     exception, unless stated otherwise.
    - The data of the dense handles ``x_handle`` and ``y_handle`` and the scalars
      ``alpha`` and ``beta`` can be reset before each call to ``spmv``. Changing
      the data of the sparse handle ``A_handle`` is undefined behavior.
+   - The data must be available on the device when calling ``spmv_optimize`` by
+     using event dependencies if needed.
    - ``spmv_optimize`` and ``spmv`` are asynchronous.
    - The algorithm defaults to ``spmv_alg::default_alg`` if a backend does not
      support the provided algorithm.
@@ -287,12 +297,17 @@ spmv
 
    alpha
       Host or USM pointer representing :math:`\alpha`. The USM allocation can be
-      on the host or device. Must be a host pointer if SYCL buffers are used.
-      Must be of the same type than the handles' data type.
+      on the host or device. The requirements are:
+
+      * Must use the same kind of memory as ``beta``.
+      * Must be a host pointer if SYCL buffers are used.
+      * Must be of the same type as the handles' data type.
 
    A_view
       Specifies which part of the handle should be read as described by
-      :ref:`onemkl_sparse_matrix_view`.
+      :ref:`onemkl_sparse_matrix_view`. The ``type_view`` field cannot be
+      ``matrix_descr::diagonal``. The ``diag_view`` field can be ``diag::unit``
+      if and only if ``type_view`` is ``matrix_descr::triangular``.
 
    A_handle
       Sparse matrix handle object representing :math:`A`.
@@ -302,8 +317,11 @@ spmv
 
    beta
       Host or USM pointer representing :math:`\beta`. The USM allocation can be
-      on the host or device. Must be a host pointer if SYCL buffers are used.
-      Must be of the same type than the handles' data type.
+      on the host or device. The requirements are:
+
+      * Must use the same kind of memory as ``alpha``.
+      * Must be a host pointer if SYCL buffers are used.
+      * Must be of the same type as the handles' data type.
 
    y_handle
       Dense vector handle object representing :math:`y`.
