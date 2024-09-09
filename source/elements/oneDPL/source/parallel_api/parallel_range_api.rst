@@ -10,10 +10,12 @@ These algorithms execute according to a oneDPL execution policy supplied as the 
 oneDPL algorithms.
 
 The oneDPL parallel range algorithms rely on the functionality of C++20 and are not available in the code
-compiled for earlier editions of the standard.
+compiled for earlier editions of the C++ standard.
 
 The parallel range algorithms reside in ``namespace oneapi::dpl::ranges``. Same as the range algorithm functions
-defined by the `C++ standard` in ``namespace std::ranges``, they cannot be found by argument-dependent name lookup.
+defined by the C++ standard in ``namespace std::ranges``, they cannot be found by argument-dependent name lookup
+and cannot be called with explicitly specified template arguments. [*Note*: A typical implementation uses
+predefined function objects which static function call operators have the required signatures. -- *end note*]
 
 The following differences to the standard C++ range algorithms apply:
 
