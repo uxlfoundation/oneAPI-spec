@@ -14,6 +14,7 @@ Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special ite
 a set of non-standard parallel algorithms.
 
 .. toctree::
+   :titlesonly:
 
    parallel_api/execution_policies.rst
    parallel_api/buffer_wrappers.rst
