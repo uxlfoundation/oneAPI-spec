@@ -9,7 +9,6 @@
   primitives for deep learning frameworks
 - :ref:`oneCCL-section`: Communication primitives for scaling deep
   learning frameworks across multiple devices
-- :ref:`l0-section`: System interface for oneAPI languages and libraries
 - :ref:`oneDAL-section`: Algorithms for accelerated data science
 - :ref:`oneTBB-section`: Library for adding thread-based parallelism
   to complex applications on multiprocessors
