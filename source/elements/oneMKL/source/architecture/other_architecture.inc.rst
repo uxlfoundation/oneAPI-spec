@@ -25,7 +25,7 @@ The macros for each domain are listed as follows:
   | ONEMKL_RNG_SPEC_VERSION
   | ONEMKL_VM_SPEC_VERSION
 
-The specification version can be created by appending all digits of the specification version in the format of <MAJOR><MINOR>. MINOR version always uses two digits. This version can be used to check the compatibility of the implementation with the specification version.
+The specification version can be created by appending all digits of the specification version in the format of <MAJOR><MINOR>. MINOR version always uses two digits. This version can be used to check the compatibility of the implementation with the specification version. Note that the revision is not included here because it reflects changes only for the specification document without affecting the implementation.
 
 Version Example
 
