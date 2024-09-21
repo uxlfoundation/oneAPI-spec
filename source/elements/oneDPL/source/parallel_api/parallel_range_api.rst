@@ -2,12 +2,12 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-Parallel Ranges API
--------------------
+Parallel Range Algorithms
+-------------------------
 
-oneDPL provides variations of algorithms that work with ranges defined in the `C++ Standard`_, 6th edition (C++20).
-These algorithms execute according to a oneDPL execution policy supplied as the first argument, similarly to other
-oneDPL algorithms.
+oneDPL provides variations of algorithms that work with ranges defined in the `C++ Standard`_, 6th edition (C++20)
+and newer. These algorithms execute according to a oneDPL execution policy supplied as the first argument,
+similarly to other oneDPL algorithms.
 
 The oneDPL parallel range algorithms rely on the functionality of C++20 and are not available in the code
 compiled for earlier editions of the C++ standard.
@@ -19,11 +19,15 @@ predefined function objects which static function call operators have the requir
 
 The following differences to the standard C++ range algorithms apply:
 
+- Parallel range algorithms cannot be used in constant expressions.
 - The execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
 - Both input and output ranges must support random access.
 - For a given algorithm, at least one of the input ranges as well as the output range must be bounded.
 - ``for_each`` does not return its function object.
+
+Except for these differences, the signatures of parallel range algorithms correspond to the working draft
+of the next edition of the C++ standard (C++26).
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
