@@ -197,7 +197,7 @@ function overload resolution:
       struct is_execution_policy { /*see below*/ };
 
       template <class T>
-      inline constexpr bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
+      constexpr bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
 
       namespace execution {
 
@@ -205,10 +205,9 @@ function overload resolution:
         struct is_execution_policy { /*see below*/ };
 
         template <class T>
-        inline constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
+        constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
 
       }
-
     }
   }
 
@@ -216,17 +215,17 @@ function overload resolution:
 to the same class template. It is unspecified in which namespace the underlying class template and its specializations
 are defined.
 
-``is_execution_policy<T>`` must have the characteristics of ``std::true_type`` if ``T`` is one of the above specified
-or implementation-defined execution policy types, otherwise it must have the characteristics of ``std::false_type``.
-Following the C++ Standard, ``is_execution_policy<T>`` does not automatically strip references and cv-qualifiers 
-from its template argument. [*Note*: Use it with ``std::decay_t<T>`` or similar type transformation utilities. -- *end note*]
-
 .. note::
    The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
    while ``oneapi::dpl::is_execution_policy`` has been added later to better align with the C++ standard.
    
    For writing new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended. Those
    in ``namespace oneapi::dpl::execution`` are provided for backward compatibility and may be deprecated in the future.
+
+``is_execution_policy<T>`` must have the characteristics of ``std::true_type`` if ``T`` is one of the above specified or
+implementation-defined oneDPL execution policy types, otherwise it must have the characteristics of ``std::false_type``.
+Following the C++ Standard, ``is_execution_policy<T>`` does not automatically strip references and cv-qualifiers from
+its template argument. [*Note*: Use it with ``std::decay_t<T>`` or similar type transformation utilities. -- *end note*]
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
