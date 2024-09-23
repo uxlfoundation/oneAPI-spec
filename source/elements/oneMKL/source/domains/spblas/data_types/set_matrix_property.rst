@@ -19,6 +19,7 @@ Matrix properties
           enum class matrix_property {
              symmetric,
              sorted,
+             sorted_by_rows,
           };
 
       }
@@ -39,12 +40,20 @@ Matrix properties
           the matrix is square, the user data contain both lower and upper
           triangular regions, and that its transpose is equal to itself.
       * - ``sorted``
-        - | Guarantees that the user-provided matrix data has some sorting
-            property.
+        - | Guarantees that the user-provided matrix data is fully sorted.
           | For CSR this guarantees that the column indices are sorted in
             ascending order for a given row.
           | For COO this guarantees that the indices are sorted by row then by
             column in ascending order.
+      * - ``sorted_by_rows``
+        - | Guarantees that the user-provided matrix data is partially sorted.
+            Has no effect if the property ``sorted`` is set.
+          | For COO this guarantees that the indices are sorted by row in
+            ascending order. The column indices within a row do not need to be
+            sorted.
+          | Setting this property for a matrix using the CSR format will throw an
+            :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+            exception.
 
 set_matrix_property
 -------------------
