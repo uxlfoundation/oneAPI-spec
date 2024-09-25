@@ -26,6 +26,7 @@ namespace                 oneMKL domain or content
 ``oneapi::mkl::dft``      Discrete Fourier Transforms. See :ref:`onemkl_dft`
 ``oneapi::mkl::rng``      Random number generator routines. See :ref:`onemkl_rng`
 ``oneapi::mkl::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemkl_vm`
+``oneapi::mkl::stats``    Routines that compute basic statistical estimates for single and double precision multi-dimensional datasets. See :ref:`onemkl_stats`
 ========================  =======================================================================================================
 
 .. note::
