@@ -29,31 +29,51 @@ Matrix properties
    holds all the given properties. A property can be set as a hint for backends
    to optimize some operations. Multiple properties can be set to the same handle.
 
+symmetric
+^^^^^^^^^
+
+Guarantees that the user-provided matrix data are symmetric, meaning the matrix
+is square, the user data contain both lower and upper triangular regions, and
+that its transpose is equal to itself.
+
+sorted
+^^^^^^
+
+Guarantees that the user-provided matrix data is fully sorted. The table below
+details the property for each matrix format:
+
    .. list-table::
       :header-rows: 1
       :widths: 20 80
 
-      * - Value
+      * - Matrix format
         - Description
-      * - ``symmetric``
-        - Guarantees that the user-provided matrix data are symmetric, meaning
-          the matrix is square, the user data contain both lower and upper
-          triangular regions, and that its transpose is equal to itself.
-      * - ``sorted``
-        - | Guarantees that the user-provided matrix data is fully sorted.
-          | For CSR this guarantees that the column indices are sorted in
-            ascending order for a given row.
-          | For COO this guarantees that the indices are sorted by row then by
-            column in ascending order.
-      * - ``sorted_by_rows``
-        - | Guarantees that the user-provided matrix data is partially sorted.
-            Has no effect if the property ``sorted`` is set.
-          | For COO this guarantees that the indices are sorted by row in
-            ascending order. The column indices within a row do not need to be
-            sorted.
-          | Setting this property for a matrix using the CSR format will throw an
-            :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
-            exception.
+      * - CSR
+        - Guarantees that the column indices are sorted in ascending order for
+          a given row.
+      * - COO
+        - Guarantees that the indices are sorted by row then by column in
+          ascending order.
+
+sorted_by_rows
+^^^^^^^^^^^^^^
+
+Guarantees that the user-provided matrix data is partially sorted. The table below
+details the property for each matrix format:
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 20 80
+
+      * - Matrix format
+        - Description
+      * - CSR
+        - Setting this property for a matrix using the CSR format will throw an
+          :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+          exception.
+      * - COO
+        - Guarantees that the indices are sorted by row in ascending order.
+          The column indices within a row do not need to be sorted.
 
 set_matrix_property
 -------------------
