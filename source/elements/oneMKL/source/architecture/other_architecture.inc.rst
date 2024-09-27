@@ -47,6 +47,7 @@ Macro Example
   // For oneAPI 1.3 rev 1
   #define ONEMKL_VM_SPEC_VERSION 103
 
+Versioning details are defined here: https://github.com/uxlfoundation/oneAPI-spec/blob/main/doc/versioning.rst#provisional-versions
 
 .. _onemkl_pre_post_conditions:
 
