@@ -63,9 +63,8 @@ does not include the rest of the elements.
 Specification version approval
 ==============================
 
-The oneAPI specification must be approved by its `core team
-<core-teams.rst>`__. Element specifications must be approved by its
-core team and the oneAPI spec core team.  Updates which only change
+Element specifications must be approved by its
+core team.  Updates which only change
 the revision may be approved by the leads.
 
 
