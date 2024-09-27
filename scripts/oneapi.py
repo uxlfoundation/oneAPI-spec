@@ -253,7 +253,6 @@ dirs = [
     'oneDAL',
     'oneMKL',
     'oneTBB',
-    'l0',
     'oneDPL',
     'oneDNN',
 ]

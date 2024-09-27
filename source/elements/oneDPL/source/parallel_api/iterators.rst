@@ -13,13 +13,13 @@ Let us define a named requirement, ``AdaptingIteratorSource``, to describe valid
 types that can be used as source for oneDPL iterators as described below.
 The type ``Iter`` satisfies the ``AdaptingIteratorSource`` named requirement if it is any of the following:
 
- * A random access iterator
- * The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
- * A ``permutation_iterator``
- * A ``transform_iterator``
- * A ``counting_iterator``
- * A ``discard_iterator``
- * A ``zip_iterator``
+* A random access iterator
+* The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+* A ``permutation_iterator``
+* A ``transform_iterator``
+* A ``counting_iterator``
+* A ``discard_iterator``
+* A ``zip_iterator``
 
 .. code:: cpp
 
@@ -155,13 +155,13 @@ iterator instances to determine their position in the index map. ``SourceIterato
 
 The type ``IndexMap`` must be one of the following:
 
- * A random access iterator
- * The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
- * A ``permutation_iterator``
- * A ``transform_iterator``
- * A ``counting_iterator``
- * A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
-   ``std::iterator_traits<SourceIterator>::difference_type``
+* A random access iterator
+* The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+* A ``permutation_iterator``
+* A ``transform_iterator``
+* A ``counting_iterator``
+* A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
+  ``std::iterator_traits<SourceIterator>::difference_type``
 
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which

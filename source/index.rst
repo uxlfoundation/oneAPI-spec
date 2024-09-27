@@ -23,7 +23,6 @@ for creating parallel applications:
    elements/oneDPL/source/index
    elements/oneDNN/source/index
    elements/oneCCL/source/index
-   elements/l0/source/index
    elements/oneDAL/source/index
    elements/oneTBB/source/nested-index
    elements/oneMKL/source/index
