@@ -33,7 +33,7 @@ Version Macros
 
 oneTBB defines macros related to versioning, as described below.
 
-* ``ONETBB_SPEC_VERSION`` macro defined to the decimal literal which value equals to
+* ``ONETBB_SPEC_VERSION`` macro defined to the decimal literal whose value equals to
   ``x * 100 + y``, where ``x`` is the major version and ``y`` is the minor version
   of the latest specification of oneTBB fully supported by the implementation.
 * ``TBB_VERSION_MAJOR`` macro defined to integral value that represents major library version.
