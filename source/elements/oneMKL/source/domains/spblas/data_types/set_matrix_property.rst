@@ -68,7 +68,7 @@ details the property for each matrix format:
       * - Matrix format
         - Description
       * - CSR
-        - Setting this property for a matrix using the CSR format will throw an
+        - Setting this property for a matrix using the CSR format will throw a
           :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
           exception.
       * - COO
