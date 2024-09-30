@@ -37,8 +37,8 @@ if that is available. -- *end example*]
 Version Information
 +++++++++++++++++++
 
-A oneDPL implementation must define a preprocessor macro representing the version
-of the oneDPL specification that the implementation is compliant with.
+A oneDPL implementation must define the following preprocessor macro representing
+the version of the oneDPL specification that the implementation is compliant with.
 
 .. code:: cpp
 
@@ -46,7 +46,7 @@ of the oneDPL specification that the implementation is compliant with.
 
   #define ONEDPL_SPEC_VERSION /*implementation-defined*/
 
-The ``ONEDPL_SPEC_VERSION`` macro must be defined to the decimal literal which value equals to
+The ``ONEDPL_SPEC_VERSION`` macro must be defined to the decimal literal whose value equals to
 *major-spec-version* * 100 + *minor-spec-version*, where *major-spec-version* and *minor-spec-version*
 are the major and the minor versions of the latest fully supported specification.
 [*Example*: ``#define ONEDPL_SPEC_VERSION 104`` for the oneDPL specification 1.4.  -- *end example*]
