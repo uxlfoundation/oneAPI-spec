@@ -141,11 +141,11 @@ and ``dom`` of the ``descriptor`` class template, respectively. Once ``desc`` is
 created, the length(s) :math:`\lbrace n_1, n_2, \ldots, n_d\rbrace` (and the
 dimension :math:`d`) cannot be changed, as they are read-only parameters. Other
 configuration details for the DFT under consideration may be specified by
-invoking the
-:ref:`configuration-setting member function<onemkl_dft_descriptor_set_value>` of
-``desc`` for every relevant configuration setting (*e.g.*, the number :math:`M`
-of sequences to consider in case of a batched DFT). Once configured as desired,
-``desc`` must be initialized for computation by using its
+invoking the appropriate
+:ref:`configuration-setting member function(s)<onemkl_dft_descriptor_set_value>`
+of ``desc`` for every relevant configuration parameter (*e.g.*, the number
+:math:`M` of sequences to consider in case of a batched DFT). Once configured
+as desired, ``desc`` must be initialized for computation by using its
 :ref:`committing member function<onemkl_dft_descriptor_commit>`, which requires
 a ``sycl::queue`` object ``Q``. The successful completion of the latter makes
 ``desc`` ready to compute the desired DFT *as configured*, for the particular
@@ -199,11 +199,11 @@ relevant to computing DFTs.
                  definition of any configuration parameter or its associated
                  value, for any instance of a ``descriptor`` class.
          * -     ``descriptor::set_value``
-           -     A member function to
+           -     Member functions to
                  :ref:`set (writable) configuration parameters<onemkl_dft_descriptor_set_value>`
                  for any instance of a ``descriptor`` class.
          * -     ``descriptor::get_value``
-           -     A member function to
+           -     Member functions to
                  :ref:`query configuration parameters<onemkl_dft_descriptor_get_value>`
                  from any instance of a ``descriptor`` class.
          * -     ``descriptor::commit``

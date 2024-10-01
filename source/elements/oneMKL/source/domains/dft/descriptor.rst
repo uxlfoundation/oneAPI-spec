@@ -21,7 +21,7 @@ The :ref:`scoped enumeration types<onemkl_dft_enums>` ``precision``, ``domain``,
 corresponding ranges of values) are relevant to the definition and
 configurations of such objects. Users can set several (resp. query all)
 configuration parameters for (resp. from) any ``descriptor`` object by using
-its ``set_value`` (resp. ``get_value``) member function.
+its ``set_value`` (resp. ``get_value``) member functions.
 
 Invoking the ``commit`` member function of a ``descriptor`` object effectively
 commits it to the desired DFT calculations (as it defines it) on the specific
@@ -69,11 +69,32 @@ desired calculations to the ``sycl::queue`` object it was given when committing 
           descriptor& operator=(descriptor&&);
 
           ~descriptor();
-      
-      
+
+          void set_value(config_param param, config_value value);
+          void set_value(config_param param, std::int64_t value);
+          void set_value(config_param param, real_scalar_t value);
+          [[deprecated("Use set_value(config_param, const std::vector<std::int64_t>&) instead.")]]
+          void set_value(config_param param, const std::int64_t* value);
+          void set_value(config_param param, const std::vector<std::int64_t>& value);
+          template <typename T, std::enable_if_t<std::is_integral_v<T>, bool> = true>
+          void set_value(config_param param, T value) {
+              set_value(param, static_cast<std::int64_t>(value));
+          }
+          template <typename T, std::enable_if_t<std::is_floating_point_v<T>, bool> = true>
+          void set_value(config_param param, T value) {
+              set_value(param, static_cast<real_scalar_t>(value));
+          }
+          [[deprecated("This set_value member function is deprecated.")]]
           void set_value(config_param param, ...);
-          
-          void get_value(config_param param, ...);
+
+          void get_value(config_param param, config_value* value_ptr) const;
+          void get_value(config_param param, domain* value_ptr) const;
+          void get_value(config_param param, precision* value_ptr) const;
+          void get_value(config_param param, std::int64_t* value_ptr) const;
+          void get_value(config_param param, real_scalar_t* value_ptr) const;
+          void get_value(config_param param, std::vector<std::int64_t>* value_ptr) const;
+          [[deprecated("This get_value member function is deprecated.")]]
+          void get_value(config_param param, ...) const;
          
           void set_workspace(sycl::buffer<real_scalar_t, 1> &workspaceBuf);
           void set_workspace(real_scalar_t* workspaceUSM);
@@ -116,17 +137,17 @@ desired calculations to the ``sycl::queue`` object it was given when committing 
    * -     Routines
      -     Description
    * -     :ref:`constructors<onemkl_dft_descriptor_constructors>`
-     -     Creates a ``descriptor`` object. The parameterized constructors
+     -     Create a ``descriptor`` object. The parameterized constructors
            enable the (one-time) definition of the length(s)
            :math:`\lbrace n_1, \ldots, n_d\rbrace` (the dimension :math:`d` is
            deduced accordingly). The parameterized constructors default-initialize
            the object; copy and move constructors do not.
    * -     :ref:`assignment operators<onemkl_dft_descriptor_assignment_operators>`
-     -     Performs a deep copy of or moves the argument.
-   * -     ``set_value`` :ref:`member function<onemkl_dft_descriptor_set_value>`
-     -     Sets a configuration value for a specific configuration parameter.
-   * -     ``get_value`` :ref:`member function<onemkl_dft_descriptor_get_value>`
-     -     Queries the configuration value associated with a particular
+     -     Perform a deep copy of or moves the argument.
+   * -     ``set_value`` :ref:`member functions<onemkl_dft_descriptor_set_value>`
+     -     Set a configuration value for a specific configuration parameter.
+   * -     ``get_value`` :ref:`member functions<onemkl_dft_descriptor_get_value>`
+     -     Query the configuration value associated with a particular
            configuration parameter.
    * -     ``set_workspace`` :ref:`member function<onemkl_dft_descriptor_set_workspace>`
      -     Equips the ``descriptor`` object with an external workspace.
@@ -147,8 +168,8 @@ all the relevant default configuration settings (which may depend on the
 specialization values for ``prec`` and ``dom``). The constructors do not perform
 any significant initialization work as changes in the object's configuration(s)
 may be operated thereafter (via its ``set_value``
-:ref:`member function<onemkl_dft_descriptor_set_value>`) and modify significantly
-the nature of that work.
+:ref:`member functions<onemkl_dft_descriptor_set_value>`) and modify
+significantly the nature of that work.
 
 The copy constructor performs a deep copy of ``descriptor`` objects.
 
@@ -223,7 +244,7 @@ without copying them.
    .. rubric:: Throws
 
    The constructors shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
@@ -293,25 +314,121 @@ The copy assignment operator results in a deep copy.
 
 .. _onemkl_dft_descriptor_set_value:
 
-``set_value`` member function
-+++++++++++++++++++++++++++++
+``set_value`` member functions
+++++++++++++++++++++++++++++++
 
-The ``set_value`` member function of any ``descriptor`` object sets a
+The ``set_value`` member functions of any ``descriptor`` object set a
 configuration value corresponding to a (read-write) configuration parameter for
-the DFT(s) that it defines. This function is to be used as many times as
+the DFT(s) that it defines. These functions are to be used as many times as
 required for all the necessary configuration parameters to be set prior to
 committing the object (by calling its ``commit``
 :ref:`member function<onemkl_dft_descriptor_commit>`).
 
-This function requires and expects exactly **two** arguments: it sets the
-configuration value (second argument) corresponding to the configuration
-parameter (first argument) ``param`` of type ``config_param``. The expected type
-of the configuration value (second argument) depends on ``param``: it can be
-``config_value`` or a native type like ``std::int64_t`` or ``float`` (more
-details available in the :ref:`section<onemkl_dft_enum_config_param>` dedicated
-to the ``config_param`` type and its values).
+All these functions require and expect exactly **two** arguments: they set the
+given configuration value (second argument) for a desired configuration
+parameter (first argument), represented by ``param`` of type ``config_param``.
+The expected type of the associated configuration value (second argument)
+depends on ``param`` and is specified in the
+:ref:`section<onemkl_dft_enum_config_param>` dedicated to the ``config_param``
+type and its enumerators (unless a deprecated version is used). The expected
+type of configuration value determines which of the ``set_value`` overloads is
+to be used for a specific value of ``param``.
 
-.. rubric:: Syntax
+.. rubric:: Syntax for integer-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::set_value(config_param param, std::int64_t value);
+   }
+
+This version of ``set_value`` supports the following values of ``param``:
+
+- ``config_param::NUMBER_OF_TRANSFORMS``;
+- ``config_param::FWD_DISTANCE``;
+- ``config_param::BWD_DISTANCE``.
+
+.. rubric:: Syntax for real-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::set_value(config_param param, real_scalar_t value);
+   }
+
+This version of ``set_value`` supports the following values of ``param``:
+
+- ``config_param::FORWARD_SCALE``;
+- ``config_param::BACKWARD_SCALE``.
+
+
+.. rubric:: Syntax for vector-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::set_value(config_param param, const std::vector<std::int64_t>& value);
+   }
+
+This version of ``set_value`` supports the following values of ``param``:
+
+- ``config_param::FWD_STRIDES``;
+- ``config_param::BWD_STRIDES``;
+- ``config_param::INPUT_STRIDES`` (deprecated);
+- ``config_param::OUTPUT_STRIDES`` (deprecated).
+
+``value`` must be a vector of :math:`\left(d+1\right)` ``std::int64_t`` elements.
+More information about setting strides may be found in the page dedicated to
+the :ref:`configuration of data layouts<onemkl_dft_config_data_layouts>`.
+
+.. rubric:: Syntax for parameters associated with non-numeric values
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::set_value(config_param param, config_value value);
+   }
+
+This version of ``set_value`` supports the following values of ``param``:
+
+- ``config_param::COMPLEX_STORAGE``;
+- ``config_param::PLACEMENT``;
+- ``config_param::WORKSPACE_PLACEMENT``.
+
+.. rubric:: Deprecated syntax for vector-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::set_value(config_param param, const std::int64_t* value);
+   }
+
+This version of ``set_value`` supports the following values of ``param``:
+
+- ``config_param::FWD_STRIDES``;
+- ``config_param::BWD_STRIDES``;
+- ``config_param::INPUT_STRIDES`` (deprecated);
+- ``config_param::OUTPUT_STRIDES`` (deprecated);
+
+and behaves as if redirecting to
+``set_value(param, std::vector<std::int64_t>(value, d + 1))``. As a consequence,
+``value`` must be a valid pointer to :math:`\left(d+1\right)` contiguous
+``std::int64_t`` elements.
+
+This version is deprecated and it is recommended to use the alternative version
+recommended by the compile-time deprecation warning.
+
+.. rubric:: Deprecated variadic syntax 
 
 .. code-block:: cpp
 
@@ -322,6 +439,19 @@ to the ``config_param`` type and its values).
 
    }
 
+This version supports all values of ``param`` corresponding to a writable
+configuration parameter. The variadic argument list must contain a unique
+element. When reading the latter (after default argument promotions of variadic
+arguments, if applicable), oneMKL *assumes* that it is
+
+- an ``std::int64_t`` value if ``param`` is any of ``config_param::NUMBER_OF_TRANSFORMS``, ``config_param::FWD_DISTANCE``, or ``config_param::BWD_DISTANCE``;
+- a ``double`` value if ``param`` is any of ``FORWARD_SCALE``, ``BACKWARD_SCALE``;
+- a ``config_value`` value if ``param`` is any of ``config_param::COMPLEX_STORAGE``, ``config_param::PLACEMENT``, or ``config_param::WORKSPACE_PLACEMENT``;
+- an ``std::int64_t*`` value (address of the first of :math:`\left(d + 1\right)` contiguous ``std::int64_t`` values) if ``param`` is any of ``config_param::FWD_STRIDES``, ``config_param::BWD_STRIDES``, ``config_param::INPUT_STRIDES``, or ``config_param::OUTPUT_STRIDES``.
+
+This variadic function is deprecated; it may emit runtime deprecation warnings
+to inform about the recommended alternative.
+
 .. container:: section
 
    .. rubric:: Input Parameters
@@ -330,51 +460,54 @@ to the ``config_param`` type and its values).
       One of the possible values of type ``config_param`` representing the
       (writable) configuration parameter to be set.
 
+   ``value``
+      The value to be set for the targeted configuration parameter. The type of
+      this input argument depends on ``param`` as specified above.
+
    ``...``
-      An element of the appropriate type for the configuration value
-      corresponding to the targeted configuration
-      parameter ``param`` (appropriate types are listed in the
-      :ref:`section<onemkl_dft_enum_config_param>` dedicated to
-      the ``config_param`` type and its values).
+      The value to be set for the targeted configuration parameter, passed as
+      a variadic argument list of **one** element. This usage is deprecated.
+      Note the type assumed by oneMKL when reading that value (specified above).
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The ``set_value`` member function shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   The ``set_value`` member functions shall throw the following
+   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
    ``oneapi::mkl::invalid_argument()``
-      If the provided ``param`` and/or configuration value are/is not valid.
+      - If the provided ``param`` corresponds to a read-only configuration parameter;
+      - If the overloaded version being used does not support ``param``;
+      - If the provided ``param`` and/or configuration value are/is not valid.
 
    ``oneapi::mkl::unimplemented()``
       If the provided ``param`` and configuration value are valid, but not
       supported by the library implementation.
- 
-   
+
 **Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
 
 
 .. _onemkl_dft_descriptor_get_value:
 
-``get_value`` member function
-+++++++++++++++++++++++++++++
+``get_value`` member functions
+++++++++++++++++++++++++++++++
 
-The ``get_value`` member function of any ``descriptor`` object queries the
-configuration value corresponding to any configuration parameter for the DFT
-that it defines.
+The ``get_value`` member functions of any ``descriptor`` object query the
+configuration value corresponding to a configuration parameter for the DFT that
+it defines. The ``get_value`` member functions do not modify the calling object.
 
-This function requires and expects exactly **two** arguments: it returns the
+These functions require and expect exactly **two** arguments: they return the
 configuration value (into the element pointed by the second argument)
 corresponding to the queried configuration parameter (first argument) ``param``
-of type ``config_param``. The type of the second argument
-depends on the value of ``param``: it is  a pointer to a writable element of
-type ``domain``, ``precision``, ``config_value`` or a native type like
-``std::int64_t`` or ``float`` (more details available in the
+of type ``config_param``. The second argument is a valid *pointer* to a
+configuration value whose type corresponds to ``param``, as specified in the
 :ref:`section<onemkl_dft_enum_config_param>` dedicated to the ``config_param``
-type and its values).
+type and its enumerators (unless a deprecated version is used). The expected
+type of configuration value determines which of the ``get_value`` overloads is
+to be used for a specific value of ``param``.
 
 .. note::
    When querying the value associated with a writable configuration parameter,
@@ -382,16 +515,143 @@ type and its values).
    was set after committing the descriptor. If the value was never set
    explicitly, the corresponding default value is returned.
 
-.. rubric:: Syntax
+.. rubric:: Syntax for querying the kind of forward domain
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <precision prec, domain dom>
-      void descriptor<prec,dom>::get_value(config_param param, ...);
+      void descriptor<prec,dom>::get_value(config_param param, domain* value_ptr) const;
+   }
+
+This version of ``get_value`` supports only ``config_param::FORWARD_DOMAIN`` for
+``param``.
+
+.. rubric:: Syntax for querying the considered floating-point format
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::get_value(config_param param, precision* value_ptr) const;
+   }
+
+This version of ``get_value`` supports only ``config_param::PRECISION`` for
+``param``.
+
+.. rubric:: Syntax for integer-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::get_value(config_param param, std::int64_t* value_ptr) const;
+   }
+
+This version of ``get_value`` supports the following values of ``param``:
+
+- ``config_param::NUMBER_OF_TRANSFORMS``;
+- ``config_param::FWD_DISTANCE``;
+- ``config_param::BWD_DISTANCE``;
+- ``config_param::DIMENSION``;
+- ``config_param::WORKSPACE_EXTERNAL_BYTES`` (requires the calling object to be committed);
+- ``config_param::LENGTHS`` (deprecated usage if :math:`d > 1`, :math:`d` contiguous ``std::int64_t`` written by oneMKL)
+- ``config_param::INPUT_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
+- ``config_param::OUTPUT_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
+- ``config_param::FWD_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
+- ``config_param::BWD_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
+
+Using this version for querying configuration values encapsulating more than one
+``std::int64_t`` values is deprecated. A runtime deprecation warning may be
+emitted to inform about the recommended alternative in such cases.
+
+.. rubric:: Syntax for real-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::get_value(config_param param, real_scalar_t* value_ptr) const;
+   }
+
+This version of ``get_value`` supports the following values of ``param``:
+
+- ``config_param::FORWARD_SCALE``;
+- ``config_param::BACKWARD_SCALE``.
+
+Note that ``real_scalar_t`` is defined as ``float`` (resp. ``double``) for
+single-precision (resp. double-precision) descriptors.
+
+.. rubric:: Syntax for vector-valued parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::get_value(config_param param, std::vector<std::int64_t>* value_ptr) const;
+   }
+
+This version of ``get_value`` supports the following values of ``param``:
+
+- ``config_param::NUMBER_OF_TRANSFORMS`` (requires ``value_ptr->size() == 1``);
+- ``config_param::FWD_DISTANCE`` (requires ``value_ptr->size() == 1``);
+- ``config_param::BWD_DISTANCE`` (requires ``value_ptr->size() == 1``);
+- ``config_param::DIMENSION`` (requires ``value_ptr->size() == 1``);
+- ``config_param::WORKSPACE_EXTERNAL_BYTES`` (requires ``value_ptr->size() == 1``);
+- ``config_param::LENGTHS`` (requires ``value_ptr->size() == d``);
+- ``config_param::INPUT_STRIDES`` (requires ``value_ptr->size() == d + 1``);
+- ``config_param::OUTPUT_STRIDES`` (requires ``value_ptr->size() == d + 1``);
+- ``config_param::FWD_STRIDES`` (requires ``value_ptr->size() == d + 1``);
+- ``config_param::BWD_STRIDES`` (requires ``value_ptr->size() == d + 1``).
+
+.. rubric:: Syntax for other non-numeric parameters
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::get_value(config_param param, config_value* value_ptr) const;
+   }
+
+This version of ``get_value`` supports the following values of ``param``:
+
+- ``config_param::COMMIT_STATUS``;
+- ``config_param::COMPLEX_STORAGE``;
+- ``config_param::PLACEMENT``;
+- ``config_param::WORKSPACE_PLACEMENT``.
+
+.. rubric:: Deprecated variadic syntax
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <precision prec, domain dom>
+      void descriptor<prec,dom>::get_value(config_param param, ...) const;
 
    }
+
+This version supports all values of ``param``. The variadic argument list must
+contain a unique element. When reading the latter (after default argument
+promotions of variadic arguments, if applicable), oneMKL assumes that it is of
+type
+
+- ``domain*`` if ``param`` is ``config_param::FORWARD_DOMAIN``;
+- ``precision*`` if ``param`` is ``config_param::PRECISION``;
+- ``std::int64_t*`` if ``param`` is any of ``config_param::NUMBER_OF_TRANSFORMS``, ``config_param::FWD_DISTANCE``, ``config_param::BWD_DISTANCE``, ``config_param::DIMENSION``, ``config_param::WORKSPACE_EXTERNAL_BYTES``, ``config_param::LENGTHS``, ``config_param::INPUT_STRIDES``, ``config_param::OUTPUT_STRIDES``, ``config_param::FWD_STRIDES``, or ``config_param::BWD_STRIDES``;
+- ``float*`` (resp. ``double*``) if ``param`` is any of ``config_param::FORWARD_SCALE`` or ``config_param::BACKWARD_SCALE``, for single-precision (resp. double-precision) descriptors;
+- ``config_value*`` if ``param`` is any of ``config::param::COMMIT_STATUS``, ``config::param::COMPLEX_STORAGE``, ``config::param::PLACEMENT``, or ``config::param::WORKSPACE_PLACEMENT``.
+
+This variadic function is deprecated and behaves as if redirecting to the
+overloaded non-variadic overloaded alternative (possibly deprecated itself) that
+is consistent with that assumed type. It may emit runtime deprecation warnings
+to inform about the recommended alternative.
 
 .. container:: section
 
@@ -401,24 +661,38 @@ type and its values).
       One of the possible values of type ``config_param`` representing the
       configuration parameter being queried.
 
+.. container:: section
+
+   .. rubric:: Output Parameters
+
+   ``value_ptr``
+      A valid *pointer* to a configuration value (or configuration values) in
+      which oneMKL is allowed to write (return) the queried value(s). The type
+      of this input argument depends on ``param`` as specified above.
+
    ``...``
-      A pointer to a writable element of the appropriate type for the
-      configuration value corresponding to the queried configuration
-      parameter ``param`` (appropriate types are listed in the
-      :ref:`section<onemkl_dft_enum_config_param>` dedicated to
-      the ``config_param`` type and its values).
+      A valid *pointer* to a configuration value (or configuration values),
+      passed as a variadic argument list of **one** element. This usage is
+      deprecated. Note the type assumed by oneMKL when accessing that pointer
+      (specified above)
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The ``get_value`` member function shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   The ``get_value`` member functions shall throw the following
+   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
    
    ``oneapi::mkl::invalid_argument()``
-      If the queried ``param`` is not valid.
+      - If the overloaded version being used does not support ``param``;
+      - If ``value_ptr`` is ``nullptr``;
+      - If ``value_ptr->size()`` is not as expected when querying a vector-valued parameter.
+
+   ``oneapi::mkl::uninitialized``
+      If ``param`` is ``config_param::WORKSPACE_EXTERNAL_BYTES`` and the
+      calling object is not committed.
 
    ``oneapi::mkl::unimplemented()``
       If the queried ``param`` is valid, but not supported by the library
@@ -439,7 +713,7 @@ This function may only be called after the ``descriptor`` object has been
 committed. The size of the provided workspace must be equal to or larger than
 the required workspace size, *i.e.*, the configuration value associated with
 ``config_param::WORKSPACE_EXTERNAL_BYTES`` (queryable via the ``get_value``
-member function).
+member function for integer-valued parameters).
 
 A ``descriptor`` object where ``config_value::WORKSPACE_EXTERNAL`` is specified
 for  ``config_param::WORKSPACE_PLACEMENT`` is not a valid object for compute
@@ -500,7 +774,7 @@ be used in compute calls. However, the aforementioned restrictions will still ap
    .. rubric:: Throws
 
    The ``set_workspace`` member function shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
    
@@ -561,7 +835,7 @@ called again.
    .. rubric:: Throws
 
    The ``commit`` member function shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here (if the
    ``descriptor`` object's configuration was found to be inconsistent, for
