@@ -4,8 +4,11 @@
 
 .. _onemkl_dft_config_data_layouts:
 
-Configuration of Data Layouts
+Configuration of data layouts
 -----------------------------
+
+The usage of prepended namespace specifiers ``oneapi::mkl::dft`` is
+omitted below for conciseness.
 
 The DFT interface provides the configuration parameters
 ``config_param::FWD_STRIDES`` (resp. ``config_param::BWD_STRIDES``)
@@ -22,8 +25,8 @@ superscript :math:`\text{fwd}` (resp. :math:`\text{bwd}`) for data sequences
 belonging to forward (resp. backward) domain, for any :math:`m` and multi-index
 :math:`\left(k_1, k_2, \ldots, k_d\right)` within :ref:`valid
 range<onemkl_dft_elementary_range_of_indices>`, the corresponding entry
-:math:`\left(\cdot\right)^{m}_{k_{1}, k_{2}, \dots, k_d }` - or the real or
-imaginary part thereof - of the relevant data sequence is located at index
+:math:`\left(\cdot\right)^{m}_{k_{1}, k_{2}, \dots, k_d }` – or the real or
+imaginary part thereof – of the relevant data sequence is located at index
 
 .. math::
     s^{\text{xwd}}_0 + k_1\ s^{\text{xwd}}_1 + k_2\ s^{\text{xwd}}_2 + \dots + k_d\ s^{\text{xwd}}_d + m\ l^{\text{xwd}}
@@ -61,13 +64,13 @@ forward-domain (resp. backward-domain) data sequences and
 .. rubric:: Implicitly-assumed elementary data type 
 
 When reading or writing an element at index :eq:`eq_idx_data_layout` of any
-user-provided data container used at compute time, a
-:ref:`descriptor<onemkl_dft_descriptor>` object may re-interpret the base data
-type of that data container into an implicitly-assumed elementary data type.
+user-provided data container used at compute time, a ``descriptor`` object may
+re-interpret the base data type of that data container into an
+implicitly-assumed elementary data type.
 That implicitly-assumed data type depends on the object type, *i.e.*, on the
 specialization values used for the template parameters when instantiating the
-:ref:`descriptor<onemkl_dft_descriptor>` class, and, in case of complex
-descriptors, on the configuration value set for its configuration parameter
+``descriptor`` :ref:`class template<onemkl_dft_descriptor>`, and, in case of
+complex descriptors, on the configuration value set for its configuration parameter
 ``config_param::COMPLEX_STORAGE``. The table below lists the implicitly-assumed
 data type in either domain (last 2 columns) based on the object type and
 its configuration value for ``config_param::COMPLEX_STORAGE`` (first 2 columns).
@@ -213,26 +216,27 @@ configuration parameter ``config_param::INPUT_STRIDES`` if
 The values of :math:`s^{\text{i}}_{j}` and :math:`s^{\text{o}}_{j}` are to be
 used and considered by oneMKL if and only if
 :math:`s^{\text{fwd}}_{j} = s^{\text{bwd}}_{j} = 0, \forall j \in \lbrace 0, 1, \ldots, d\rbrace`.
-(This will happen automatically if ``config_param::INPUT_STRIDES`` and ``config_param::OUTPUT_STRIDES``
-are set and ``config_param::FWD_STRIDES`` and ``config_param::BWD_STRIDES`` are not. See note below.)
-In such a case, :ref:`descriptor<onemkl_dft_descriptor>` objects must consider
-the data layouts corresponding to the two compute directions separately. As
-detailed above, relevant data sequence entries are accessed as elements of data
-containers (``sycl::buffer`` objects or device-accessible USM allocations)
-provided to the compute function, the base data type of which is (possibly
-implicitly re-interpreted) as documented in :ref:`this
-table<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`. If using
-input and output strides, for any :math:`m` and multi-index
+This will happen automatically if ``config_param::INPUT_STRIDES`` and
+``config_param::OUTPUT_STRIDES`` are set and ``config_param::FWD_STRIDES`` and
+``config_param::BWD_STRIDES`` are not (see note below).
+In such a case, ``descriptor`` objects must consider the data layouts
+corresponding to the two compute directions separately. As detailed above,
+relevant data sequence entries are accessed as elements of data containers
+(``sycl::buffer`` objects or device-accessible USM allocations) provided to the
+compute function, the base data type of which is (possibly implicitly re-interpreted)
+as documented in the above
+:ref:`table<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`. If
+using input and output strides, for any :math:`m` and multi-index
 :math:`\left(k_1, k_2, \ldots, k_d\right)` within :ref:`valid
 range<onemkl_dft_elementary_range_of_indices>`, the index to be used when
-accessing a data sequence entry - or part thereof - in forward domain is
+accessing a data sequence entry – or part thereof – in forward domain is
 
 .. math::
     s^{\text{x}}_0 + k_1\ s^{\text{x}}_1 + k_2\ s^{\text{x}}_2 + \dots + k_d\ s^{\text{x}}_d + m\ l^{\text{fwd}}
 
 where :math:`\text{x} = \text{i}` (resp. :math:`\text{x} = \text{o}`) for
 forward (resp. backward) DFT(s). Similarly, the index to be used when accessing
-a data sequence entry - or part thereof - in backward domain is
+a data sequence entry – or part thereof – in backward domain is
 
 .. math::
     s^{\text{x}}_0 + k_1\ s^{\text{x}}_1 + k_2\ s^{\text{x}}_2 + \dots + k_d\ s^{\text{x}}_d + m\ l^{\text{bwd}}
@@ -240,32 +244,31 @@ a data sequence entry - or part thereof - in backward domain is
 where :math:`\text{x} = \text{o}` (resp. :math:`\text{x} = \text{i}`) for
 forward (resp. backward) DFT(s).
 
-As a consequence, configuring :ref:`descriptor<onemkl_dft_descriptor>` objects
-using these deprecated configuration parameters makes their configuration
-direction-dependent when different stride values are used in
-forward and backward domains. Since the intended compute direction is unknown
-to the :ref:`descriptor<onemkl_dft_descriptor>` object when
+As a consequence, configuring ``descriptor`` objects using these deprecated
+configuration parameters makes their configuration direction-dependent when
+different stride values are used in forward and backward domains. Since the
+intended compute direction is unknown to the object when
 :ref:`committing<onemkl_dft_descriptor_commit>` it, every direction that results
 in a :ref:`consistent data layout<onemkl_dft_data_layout_requirements>` in
-forward and backward domains must be supported by successfully committed
-:ref:`descriptor<onemkl_dft_descriptor>` objects.
+forward and backward domains must be supported by successfully-committed
+``descriptor`` objects.
 
 .. note::
-    For :ref:`descriptor<onemkl_dft_descriptor>` objects with strides configured
-    via these deprecated configuration parameters, the :ref:`consistency
-    requirements<onemkl_dft_data_layout_requirements>` may be satisfied for only
-    one of the two compute directions, *i.e.*, for only one of the forward or
-    backward DFT(s). Such a configuration should not cause an exception to be
-    thrown by the descriptor's :ref:`onemkl_dft_descriptor_commit` member
-    function but the behavior of oneMKL is undefined if using that object for
-    the compute direction that does not align with the :ref:`consistency
-    requirements<onemkl_dft_data_layout_requirements>`.
+    For ``descriptor`` objects with strides configured via these deprecated
+    configuration parameters, the
+    :ref:`consistency requirements<onemkl_dft_data_layout_requirements>` may be
+    satisfied for only one of the two compute directions, *i.e.*, for only one
+    of the forward or backward DFT(s). Such a configuration should not cause an
+    exception to be thrown by the descriptor's ``commit``
+    :ref:`member function<onemkl_dft_descriptor_commit>` but the behavior of
+    oneMKL is undefined if using that object for the compute direction that does
+    not align with the :ref:`consistency requirements<onemkl_dft_data_layout_requirements>`.
 
 .. note::
     Setting either of ``config_param::INPUT_STRIDES`` or
     ``config_param::OUTPUT_STRIDES`` triggers any default or previously-set
     values for ``config_param::FWD_STRIDES`` and ``config_param::BWD_STRIDES``
-    to reset to ``std::vector<std::int64_t>(d+1, 0)`` values, and vice versa.
+    to reset to ``std::vector<std::int64_t>(d+1, 0)``, and vice versa.
     This default behavior prevents mix-and-matching usage of either of
     ``config_param::INPUT_STRIDES`` or ``config_param::OUTPUT_STRIDES`` with
     either of ``config_param::FWD_STRIDES`` or ``config_param::BWD_STRIDES``,
@@ -282,14 +285,15 @@ the reverse direction as shown below.
 
 .. code-block:: cpp
 
+   namespace dft = oneapi::mkl::dft;
    // ...
-   desc.set_value(config_param::INPUT_STRIDES,  fwd_domain_strides);
-   desc.set_value(config_param::OUTPUT_STRIDES, bwd_domain_strides);
+   desc.set_value(dft::config_param::INPUT_STRIDES,  fwd_domain_strides);
+   desc.set_value(dft::config_param::OUTPUT_STRIDES, bwd_domain_strides);
    desc.commit(queue);
    compute_forward(desc, ...);
    // ...
-   desc.set_value(config_param::INPUT_STRIDES,  bwd_domain_strides);
-   desc.set_value(config_param::OUTPUT_STRIDES, fwd_domain_strides);
+   desc.set_value(dft::config_param::INPUT_STRIDES,  bwd_domain_strides);
+   desc.set_value(dft::config_param::OUTPUT_STRIDES, fwd_domain_strides);
    desc.commit(queue);
    compute_backward(desc, ...);
 
