@@ -1,10 +1,14 @@
 .. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
+.. SPDX-FileCopyrightText: Contributors to the oneAPI Specification project.
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ==============================================
 oneAPI Threading Building Blocks Specification
 ==============================================
+**[spec.version]**
+
+**Version**: |tbb_version|.
 
 .. toctree::
    :maxdepth: 2
