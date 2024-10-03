@@ -147,9 +147,9 @@ of ``desc`` for every relevant configuration parameter (*e.g.*, the number
 :math:`M` of sequences to consider in case of a batched DFT). Once configured
 as desired, ``desc`` must be initialized for computation by using its
 :ref:`committing member function<onemkl_dft_descriptor_commit>`, which requires
-a ``sycl::queue`` object ``Q``. The successful completion of the latter makes
+a ``sycl::queue`` object. The successful completion of that operation makes
 ``desc`` ready to compute the desired DFT *as configured*, for the particular
-device and context encapsulated by ``Q``. ``desc`` may then be used with
+device and context encapsulated by the latter. ``desc`` may then be used with
 user-provided, device-accessible data, in a
 ``oneapi::mkl::dft::compute_forward`` (resp.
 ``oneapi::mkl::dft::compute_backward``) function to enqueue operations relevant
