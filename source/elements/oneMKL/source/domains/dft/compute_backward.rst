@@ -4,378 +4,393 @@
 
 .. _onemkl_dft_compute_backward:
 
-compute_backward
-================
+The ``compute_backward`` function templates
+===========================================
 
-This function computes the backward DFT(s), as defined by an instantiation of
-the :ref:`descriptor<onemkl_dft_descriptor>` class, on user-provided data.
+The ``oneapi::mkl::dft::compute_backward`` function templates enable the
+computation of backward DFT(s), as defined by a (committed)
+``oneapi::mkl::dft::descriptor`` object, on user-provided data. These function
+templates are declared in the ``oneapi::mkl::dft`` namespace; the usage of
+prepended namespace specifiers ``oneapi::mkl::dft`` is omitted below for conciseness.
 
 .. _onemkl_dft_compute_backward_description:
 
 .. rubric:: Description
 
-Given a successfully committed :ref:`descriptor<onemkl_dft_descriptor>` object
-whose configuration is not inconsistent with backward DFT calculations, this
-function computes the backward transform defined by that object.
+Given a successfully-committed ``descriptor`` object whose configuration is not
+inconsistent with backward DFT calculations, the backward DFT it defines can be
+computed using a specialization of (some of) the ``compute_backward`` function
+templates.
 
-The ``compute_backward`` function requires a successfully committed object of
-the :ref:`descriptor<onemkl_dft_descriptor>` class and one, two or four "data
-container" arguments (depending on the configuration of the
-:ref:`descriptor<onemkl_dft_descriptor>` object). If using (pointers to) USM
-allocations as data containers, this function may also be provided with an
+The ``compute_backward`` functions require a successfully-committed ``descriptor``
+object and one, two or four "data container" arguments (depending on the
+configuration of the ``descriptor`` object). If using USM allocations as data
+containers, these functions may also be provided with an
 ``std::vector<sycl::event>`` object collecting dependencies to be observed by
-the desired DFT calculations and return a ``sycl::event`` tracking the
-progress of the DFT calculations enqueued by this function.
+the desired DFT calculations and return a ``sycl::event`` instance tracking the
+progress of the enqueued DFT calculations.
 
 .. note::
-   The compute_backward function may need to access the internals and
-   private/protected members of the :ref:`descriptor<onemkl_dft_descriptor>`
-   class.  This could be done, for instance, by labeling it as a friend function
-   to the :ref:`descriptor<onemkl_dft_descriptor>` class.
+   The ``compute_backward`` functions may need to access the internals and
+   private/protected members of (some) ``descriptor`` classes.  This could be
+   done, for instance, by labeling them as friend functions to the
+   ``descriptor`` :ref:`class template<onemkl_dft_descriptor>`.
 
 .. onemkl_dft_compute_backward_buffer:
 
-compute_backward (Buffer version)
----------------------------------
+``compute_backward`` (Buffer versions)
+--------------------------------------
 
-.. rubric:: Syntax (in-place transform, except for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (in-place transform, except for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <typename descriptor_type, typename data_type>
-      void compute_backward( descriptor_type              &desc,
-                             sycl::buffer<data_type, 1>   &inout);
+      void compute_backward(descriptor_type              &desc,
+                            sycl::buffer<data_type, 1>   &inout);
    }
 
 
-.. rubric:: Syntax (in-place transform, for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (in-place transform, for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <typename descriptor_type typename data_type>
-      void compute_backward( descriptor_type              &desc,
-                             sycl::buffer<data_type, 1>   &inout_re,
-                             sycl::buffer<data_type, 1>   &inout_im);
+      void compute_backward(descriptor_type              &desc,
+                            sycl::buffer<data_type, 1>   &inout_re,
+                            sycl::buffer<data_type, 1>   &inout_im);
    }
 
 
-.. rubric:: Syntax (out-of-place transform, except for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (out-of-place transform, except for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
    
       template <typename descriptor_type, typename input_type, typename output_type>
-      void compute_backward( descriptor_type              &desc,
-                             sycl::buffer<input_type, 1>  &in,
-                             sycl::buffer<output_type, 1> &out);
+      void compute_backward(descriptor_type              &desc,
+                            sycl::buffer<input_type, 1>  &in,
+                            sycl::buffer<output_type, 1> &out);
    }
 
-.. rubric:: Syntax (out-of-place transform, for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (out-of-place transform, for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <typename descriptor_type, typename input_type, typename output_type>
-      void compute_backward( descriptor_type              &desc,
-                             sycl::buffer<input_type, 1>  &in_re,
-                             sycl::buffer<input_type, 1>  &in_im,
-                             sycl::buffer<output_type, 1> &out_re,
-                             sycl::buffer<output_type, 1> &out_im);
+      void compute_backward(descriptor_type              &desc,
+                            sycl::buffer<input_type, 1>  &in_re,
+                            sycl::buffer<input_type, 1>  &in_im,
+                            sycl::buffer<output_type, 1> &out_re,
+                            sycl::buffer<output_type, 1> &out_im);
    }
-
 
 .. container:: section
 
    .. rubric:: Input Parameters
 
-   :ref:`desc<onemkl_dft_descriptor>`
-      A fully configured and committed object of the
-      :ref:`descriptor<onemkl_dft_descriptor>` class, whose configuration is not
-      inconsistent with backward DFT calculations.
+   ``desc``
+      A fully-configured and committed ``descriptor`` object, whose
+      configuration is not inconsistent with backward DFT calculations.
 
-   inout
+   ``inout``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining all the relevant data sequences, as configured by ``desc``
-      (configured for in-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      (configured for in-place operations and not with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``, if complex).
 
-   inout_re
+   ``inout_re``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. ``data_type`` must be single or double precision floating-point, as 
-      described by the descriptor's precision. Only with complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      by ``desc``. ``data_type`` must be ``float`` or ``double``,
+      consistently with the ``desc``'s configuration value for
+      ``config_param::PRECISION``. Only with complex descriptors configured for
+      in-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   inout_im
+   ``inout_im``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. ``data_type`` must be single or double precision floating-point, as 
-      described by the descriptor's precision. Only with complex descriptors configured for in-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be ``float`` or ``double``,
+      consistently with the ``desc``'s configuration value for
+      ``config_param::PRECISION``. Only with complex descriptors configured for
+      in-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   in
+   ``in``
       ``sycl::buffer`` object of sufficient capacity to store the elements
-      defining all the relevant backward-domain data sequences, as configured by
-      ``desc`` (configured for out-of-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      defining all the relevant backward-domain data sequences, as
+      configured by ``desc`` (configured for out-of-place operations and not
+      with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``,
+      if complex).
 
-   in_re
+   ``in_re``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant backward-domain data sequences,
-      as configured by ``desc``. Only with complex descriptors configured for out-of-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      as configured by ``desc``. Only with complex descriptors configured for
+      out-of-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   in_im
+   ``in_im``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant backward-domain data
-      sequences, as configured by ``desc``. Only with complex descriptors configured for
-      out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
-
+      sequences, as configured by ``desc``. Only with complex descriptors
+      configured for out-of-place operations with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``.
 
 .. container:: section
 
    .. rubric:: Output Parameters
 
-   inout
+   ``inout``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining all the relevant data sequences, as configured by ``desc``
-      (configured for in-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      (configured for in-place operations and not with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``, if complex).
 
-   inout_re
+   ``inout_re``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. ``data_type`` must be single or double precision
-      floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      by ``desc``. ``data_type`` must be ``float`` or ``double``,
+      consistently with the ``desc``'s configuration value for
+      ``config_param::PRECISION``. Only with complex descriptors configured for
+      in-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   inout_im
+   ``inout_im``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. ``data_type`` must be single or double precision
-      floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be ``float`` or ``double``,
+      consistently with the ``desc``'s configuration value for
+      ``config_param::PRECISION``. Only with complex descriptors configured for
+      in-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   out
+   ``out``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining all the relevant forward-domain data sequences, as configured by
       ``desc`` (configured for out-of-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``, if complex).
 
-   out_re
+   ``out_re``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the real parts of all the relevant forward-domain data sequences,
-      as configured by ``desc``. Only with complex descriptors configured for out-of-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      as configured by ``desc``. Only with complex descriptors configured for
+      out-of-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   out_im
+   ``out_im``
       ``sycl::buffer`` object of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant forward-domain data
-      sequences, as configured by ``desc``. Only with complex descriptors configured for
-      out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      sequences, as configured by ``desc``. Only with complex descriptors configured
+      for out-of-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The ``oneapi::mkl::dft::compute_backward`` routine shall throw the following
-   exceptions if the associated condition is detected. An implementation may
-   throw additional implementation-specific exception(s) in case of error
-   conditions not covered here:
+   The ``compute_backward`` functions shall throw the following
+   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   detected. An implementation may throw additional implementation-specific
+   exception(s) in case of error conditions not covered here:
 
-   :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
-      If the provided :ref:`descriptor<onemkl_dft_descriptor>` object ``desc``
-      is invalid, for instance, if its configuration value associated with
-      configuration parameter ``config_param::COMMIT_STATUS`` is not
-      ``config_param::COMMITTED``.
+   ``oneapi::mkl::invalid_argument()``
+      If ``desc`` is invalid. For instance, if its configuration value
+      associated with configuration parameter ``config_param::COMMIT_STATUS`` is
+      not ``config_param::COMMITTED``.
 
 .. onemkl_dft_compute_backward_usm:
 
-compute_backward (USM version)
-------------------------------
+``compute_backward`` (USM versions)
+-----------------------------------
 
-.. rubric:: Syntax (in-place transform, except for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
-
-.. code-block:: cpp
-
-   namespace oneapi::mkl::dft {
-
-      template <typename descriptor_type, typename data_type>
-      sycl::event compute_backward( descriptor_type                               &desc,
-                                    data_type                                     *inout,
-                                    const std::vector<sycl::event>                &dependencies = {});
-   }
-
-.. rubric:: Syntax (in-place transform, for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (in-place transform, except for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <typename descriptor_type, typename data_type>
-      sycl::event compute_backward( descriptor_type                               &desc,
-                                    data_type                                     *inout_re,
-                                    data_type                                     *inout_im,
-                                    const std::vector<sycl::event>                &dependencies = {});
+      sycl::event compute_backward(descriptor_type                &desc,
+                                   data_type                      *inout,
+                                   const std::vector<sycl::event> &dependencies = {});
    }
 
-.. rubric:: Syntax (out-of-place transform, except for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (in-place transform, for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
+
+.. code-block:: cpp
+
+   namespace oneapi::mkl::dft {
+
+      template <typename descriptor_type, typename data_type>
+      sycl::event compute_backward(descriptor_type                &desc,
+                                   data_type                      *inout_re,
+                                   data_type                      *inout_im,
+                                   const std::vector<sycl::event> &dependencies = {});
+   }
+
+.. rubric:: Syntax (out-of-place transform, except for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <typename descriptor_type, typename input_type, typename output_type>
-      sycl::event compute_backward( descriptor_type                               &desc,
-                                    input_type                                    *in,
-                                    output_type                                   *out,
-                                    const std::vector<sycl::event>                &dependencies = {});
+      sycl::event compute_backward(descriptor_type                &desc,
+                                   input_type                     *in,
+                                   output_type                    *out,
+                                   const std::vector<sycl::event> &dependencies = {});
    }
 
-.. rubric:: Syntax (out-of-place transform, for complex descriptors with :ref:`onemkl_dft_complex_storage_real_real`)
+.. rubric:: Syntax (out-of-place transform, for complex descriptors with ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``)
 
 .. code-block:: cpp
 
    namespace oneapi::mkl::dft {
 
       template <typename descriptor_type, typename input_type, typename output_type>
-      sycl::event compute_backward( descriptor_type                               &desc,
-                                    input_type                                    *in_re,
-                                    input_type                                    *in_im,
-                                    output_type                                   *out_re,
-                                    output_type                                   *out_im,
-                                    const std::vector<sycl::event>                &dependencies = {});
+      sycl::event compute_backward(descriptor_type                &desc,
+                                   input_type                     *in_re,
+                                   input_type                     *in_im,
+                                   output_type                    *out_re,
+                                   output_type                    *out_im,
+                                   const std::vector<sycl::event> &dependencies = {});
    }
 
 .. container:: section
 
    .. rubric:: Input Parameters
 
-   :ref:`desc<onemkl_dft_descriptor>`
-      A fully configured and committed object of the
-      :ref:`descriptor<onemkl_dft_descriptor>` class, whose configuration is not
-      inconsistent with backward DFT calculations.
+   ``desc``
+      A fully-configured and committed ``descriptor`` object, whose
+      configuration is not inconsistent with backward DFT calculations.
 
-   inout
+   ``inout``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining all the relevant data sequences, as configured by ``desc``
-      (configured for in-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      (configured for in-place operations and not with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``, if complex).
+      
 
-   inout_re
+   ``inout_re``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. ``data_type`` must be single or double precision
-      floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      by ``desc``. ``data_type`` must be ``float`` or ``double``, consistently
+      with the ``desc``'s configuration value for ``config_param::PRECISION``.
+      Only with complex descriptors configured for in-place operations with
+      ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``.
 
-   inout_im
+   ``inout_im``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. ``data_type`` must be single or double precision
-      floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be ``float`` or ``double``,
+      consistently with the ``desc``'s configuration value for
+      ``config_param::PRECISION``. Only with complex descriptors configured for
+      in-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   in
+   ``in``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining all the relevant backward-domain data sequences, as configured by
       ``desc`` (configured for out-of-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``, if complex).
 
-   in_re
+   ``in_re``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant backward-domain data sequences,
-      as configured by ``desc``. Only with complex descriptors configured for out-of-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      as configured by ``desc``. Only with complex descriptors configured for
+      out-of-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   in_im
+   ``in_im``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant backward-domain data
-      sequences, as configured by ``desc``. Only with complex descriptors configured for
-      out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      sequences, as configured by ``desc``. Only with complex descriptors
+      configured for out-of-place operations with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``.
 
-   dependencies
+   ``dependencies``
       An ``std::vector<sycl::event>`` object collecting the events returned by
-      previously enqueued tasks that must be finished before this transform can
-      be calculated.
+      previously enqueued tasks that must be finished before the desired
+      transform can be calculated.
 
 .. container:: section
 
    .. rubric:: Output Parameters
 
-   inout
+   ``inout``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining all the relevant data sequences, as configured by ``desc``
-      (configured for in-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      (configured for in-place operations and not with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``, if complex).
 
-   inout_re
+   ``inout_re``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant data sequences, as configured
-      by ``desc``. ``data_type`` must be single or double precision
-      floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      by ``desc``. ``data_type`` must be ``float`` or ``double``, consistently
+      with the ``desc``'s configuration value for ``config_param::PRECISION``.
+      Only with complex descriptors configured for in-place operations with
+      ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``.
 
-   inout_im
+   ``inout_im``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant data sequences, as
-      configured by ``desc``. ``data_type``  must be single or double precision
-      floating-point, as described by the descriptor's precision. Only with
-      complex descriptors configured for in-place operations with
-      :ref:`onemkl_dft_complex_storage_real_real`.
+      configured by ``desc``. ``data_type`` must be ``float`` or ``double``,
+      consistently with the ``desc``'s configuration value for
+      ``config_param::PRECISION``. Only with complex descriptors configured for
+      in-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   out
+   ``out``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining all the relevant forward-domain data sequences, as configured by
       ``desc`` (configured for out-of-place operations and not with
-      :ref:`onemkl_dft_complex_storage_real_real`, if complex).
+      ``config_value::REAL_REAL`` for ``config_param::COMPLEX_STORAGE``, if complex).
 
-   out_re
+   ``out_re``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the real parts of all the relevant forward-domain data sequences,
-      as configured by ``desc``. Only with complex descriptors configured for out-of-place
-      operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      as configured by ``desc``. Only with complex descriptors configured for
+      out-of-place operations with ``config_value::REAL_REAL`` for
+      ``config_param::COMPLEX_STORAGE``.
 
-   out_im
+   ``out_im``
       Pointer to USM allocation of sufficient capacity to store the elements
       defining the imaginary parts of all the relevant forward-domain data
-      sequences, as configured by ``desc``. Only with complex descriptors configured for
-      out-of-place operations with :ref:`onemkl_dft_complex_storage_real_real`.
+      sequences, as configured by ``desc``. Only with complex descriptors
+      configured for out-of-place operations with ``config_value::REAL_REAL``
+      for ``config_param::COMPLEX_STORAGE``.
 
 .. container:: section
 
    .. rubric:: Throws
 
-   The ``oneapi::mkl::dft::compute_backward()`` routine shall throw the following
-   exceptions if the associated condition is detected. An implementation may
-   throw additional implementation-specific exception(s) in case of error
-   conditions not covered here:
+   The ``compute_backward`` functions shall throw the following
+   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   detected. An implementation may throw additional implementation-specific
+   exception(s) in case of error conditions not covered here:
 
-   :ref:`oneapi::mkl::invalid_argument()<onemkl_exception_invalid_argument>`
-      If the provided :ref:`descriptor<onemkl_dft_descriptor>` object ``desc``
-      is invalid, for instance, if its configuration value associated with
-      configuration parameter ``config_param::COMMIT_STATUS`` is not
-      ``config_param::COMMITTED``. It will also be thrown if any required
+   ``oneapi::mkl::invalid_argument()``
+      If ``desc`` is invalid. For instance, if its configuration value
+      associated with configuration parameter ``config_param::COMMIT_STATUS`` is
+      not ``config_param::COMMITTED``. It will also be thrown if any required
       input/output pointer is ``nullptr``.
 
 .. container:: section
 
    .. rubric:: Return Values
 
-   This function returns a ``sycl::event`` object that allows to track progress
-   of the backward DFT, and can be passed as a dependency to other routines that
-   may depend on the result of the backward transform(s) before proceeding with
-   other operations.
+   These functions return a ``sycl::event`` object that enables tracking
+   progress of the backward DFT, and that can be passed as a dependency to other
+   routines, which may depend on the result of the backward transform(s) before
+   proceeding with other operations.
 
 **Parent topic:** :ref:`onemkl_dft`
