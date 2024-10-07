@@ -41,10 +41,10 @@ with the `C++ Standard`_, 6th edition (C++20):
 
 See "Execution policies" in the `C++ Standard`_ for more information.
 
-Device Execution Policy
-+++++++++++++++++++++++
+Device Execution Policies
++++++++++++++++++++++++++
 
-A device execution policy class ``oneapi::dpl::execution::device_policy`` specifies
+The device execution policy class ``oneapi::dpl::execution::device_policy`` specifies
 the `SYCL`_ device and queue to run oneDPL algorithms.
 
 .. code:: cpp
@@ -75,8 +75,6 @@ the `SYCL`_ device and queue to run oneDPL algorithms.
       }
     }
   }
-
-``dpcpp_default`` is a predefined execution policy object to run algorithms on the default SYCL device.
 
 device_policy Class
 ^^^^^^^^^^^^^^^^^^^
@@ -116,8 +114,7 @@ A policy instance constructed as or assigned a copy of another instance is assoc
 a ``sycl::queue`` that compares equal, as defined by `SYCL`_, to the queue of that other instance.
 A policy instance constructed as or assigned a move of another instance is associated with the queue
 of that other instance without copying it. It is unspecified whether the original policy is associated
-with any queue after the move. [*Note*: The predefined ``dpcpp_default`` policy object is immutable
-(``const``) and cannot be moved. -- *end note*]
+with any queue after the move.
 
 .. code:: cpp
 
@@ -156,6 +153,13 @@ Return the queue the policy is associated with.
   operator sycl::queue() const
 
 Allow implicit conversion of the policy to a ``sycl::queue`` object.
+
+Predefined Device Policy
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+``dpcpp_default`` is a predefined execution policy object to run algorithms on the default SYCL device.
+It is a global immutable (``const``) instance of type ``device_policy<>``.
+[*Note*: ``dpcpp_default`` can be copied but cannot be moved. -- *end note*]
 
 make_device_policy Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
