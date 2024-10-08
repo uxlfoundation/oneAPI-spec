@@ -44,8 +44,7 @@ See "Execution policies" in the `C++ Standard`_ for more information.
 Device Execution Policies
 +++++++++++++++++++++++++
 
-The device execution policy class ``oneapi::dpl::execution::device_policy`` specifies
-the `SYCL`_ device and queue to run oneDPL algorithms.
+A device execution policy represents a `SYCL`_ device and queue to run oneDPL algorithms.
 
 .. code:: cpp
 
