@@ -260,10 +260,10 @@ spsv
      some of the descriptor's data such as the ``workspace``.
    - In the general case, not calling the functions in the order specified above
      is undefined behavior. Not calling ``spsv_buffer_size`` or
-     ``spsv_optimize`` at least once with a given descriptor will throw an
+     ``spsv_optimize`` at least once with a given descriptor will throw a
      :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
      exception. Calling ``spsv`` with arguments not matching ``spsv_optimize``
-     will throw an
+     will throw a
      :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
      exception, unless stated otherwise.
    - The data of the dense handle ``x_handle`` and scalar ``alpha`` can be reset
