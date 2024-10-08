@@ -4,16 +4,16 @@
 .. SPDX-License-Identifier: CC-BY-4.0
 
 ===============
-blocked_rangeNd
+blocked_nd_range
 ===============
-**[algorithms.blocked_rangeNd]**
+**[algorithms.blocked_nd_range]**
 
 Class template that represents a recursively divisible N-dimensional half-open interval.
 
-A ``blocked_rangeNd`` is the N-dimensional extension of ``blocked_range``, ``blocked_range2d``, and ``blocked_range3d``.
+A ``blocked_nd_range`` is the N-dimensional extension of ``blocked_range``, ``blocked_range2d``, and ``blocked_range3d``.
 You can interpret it as a Cartesian product of N instances of ``blocked_range``.
 Unlike ``blocked_range2d`` and ``blocked_range3d``, all ranges must be specified over the same ``Value`` type.
-Therefore, ``blocked_rangeNd<int,2>`` is a specialization of ``blocked_range2d`` where both dimensions are ``int``.
+Therefore, ``blocked_nd_range<int,2>`` is analogous to ``blocked_range2d<int,int>``.
 
 .. code:: cpp
 
@@ -21,7 +21,7 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialization of ``blocked_range2d``
         namespace tbb {
 
             template<typename Value, unsigned int N>
-            class blocked_rangeNd {
+            class blocked_nd_range {
             public:
                 // Types
                 using value_type = Value;
@@ -29,10 +29,10 @@ Therefore, ``blocked_rangeNd<int,2>`` is a specialization of ``blocked_range2d``
                 using size_type = typename dim_range_type::size_type;
 
                 // Constructors
-                blocked_rangeNd(const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/);
-                blocked_rangeNd(const value_type (&size)[N], size_type grainsize = 1);
-                blocked_rangeNd(blocked_rangeNd& r, split); 
-                blocked_rangeNd(blocked_rangeNd& r, proportional_split proportion); 
+                blocked_nd_range(const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/);
+                blocked_nd_range(const value_type (&size)[N], size_type grainsize = 1);
+                blocked_nd_range(blocked_nd_range& r, split); 
+                blocked_nd_range(blocked_nd_range& r, proportional_split proportion); 
 
                 // Capacity
                 static constexpr unsigned int dim_count();
@@ -77,44 +77,44 @@ Member functions
 
 .. code:: cpp
 
-    blocked_rangeNd( const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/ );
+    blocked_nd_range( const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/ );
 
-**Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
+**Effects:**  Constructs a ``blocked_nd_range`` representing an N-dimensional space of values.
 The space is the half-open Cartesian product of one-dimensional ranges ``dim0 x ...``.
 The constructor must take exactly N arguments, which types match ``const dim_range_type&``.
 
-**Example:** For ``blocked_rangeNd<int,4>``, this constructor is equivalent to
-``blocked_rangeNd( const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>& )``.
+**Example:** For ``blocked_nd_range<int,4>``, this constructor is equivalent to
+``blocked_nd_range( const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>&, const blocked_range<int>& )``.
 
 .. note::
     This constructor cannot be substituted with a variadic template constructor
-    ``template <typename... Dims> blocked_rangeNd( const Dims&... dims )``, even if the latter
+    ``template <typename... Dims> blocked_nd_range( const Dims&... dims )``, even if the latter
     is constrained by the size and type requirements for the parameter pack ``Dims``.
     That is because the types in ``Dims`` could not be automatically deduced from arguments specified as
-    braced initialization lists, and so expressions like ``blocked_rangeNd<int, 4>{{0,1},{0,2},{0,3},{0,4}}``
+    braced initialization lists, and so expressions like ``blocked_nd_range<int, 4>{{0,1},{0,2},{0,3},{0,4}}``
     would fail to compile.
 
 .. code:: cpp
 
-    blocked_rangeNd( const value_type (&size)[N], size_type grainsize = 1 );
+    blocked_nd_range( const value_type (&size)[N], size_type grainsize = 1 );
 
-**Effects:**  Constructs a ``blocked_rangeNd`` representing an N-dimensional space of values.
+**Effects:**  Constructs a ``blocked_nd_range`` representing an N-dimensional space of values.
 The space is the half-open Cartesian product of ranges ``[0, size[0]) x [0, size[1]) x ...``
 each having the same grain size.
 
-**Example:**  The ``blocked_rangeNd<int,4> r( {5,6,7,8}, 4 );`` statement constructs a four-dimensional
+**Example:**  The ``blocked_nd_range<int,4> r( {5,6,7,8}, 4 );`` statement constructs a four-dimensional
 space that contains all value tuples ``(i, j, k, l)``, where ``i`` ranges from 0 (included)
 to 5 (excluded) with a grain size of 4, ``j`` ranges from 0 to 6 with a grain size of 4, and so forth.
 
 .. code:: cpp
 
-    blocked_rangeNd( blocked_rangeNd& range, split );
+    blocked_nd_range( blocked_nd_range& range, split );
 
 Basic splitting constructor.
 
 **Requirements**: ``is_divisible()`` is true.
 
-**Effects**: Partitions ``range`` into two subranges. The newly constructed ``blocked_rangeNd`` is approximately
+**Effects**: Partitions ``range`` into two subranges. The newly constructed ``blocked_nd_range`` is approximately
 the half of the original ``range``, and ``range`` is updated to be the remainder.
 Splitting is done across one dimension, while other dimensions and the grain sizes for
 each subrange remain the same as in the original ``range``.
@@ -126,7 +126,7 @@ each subrange remain the same as in the original ``range``.
 
 .. code:: cpp
 
-    blocked_rangeNd( blocked_rangeNd& range, proportional_split proportion );
+    blocked_nd_range( blocked_nd_range& range, proportional_split proportion );
 
 Proportional splitting constructor.
 

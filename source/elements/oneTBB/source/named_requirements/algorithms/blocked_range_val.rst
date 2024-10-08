@@ -52,6 +52,6 @@ See also:
 * :doc:`blocked_range class <../../algorithms/blocked_ranges/blocked_range_cls>`
 * :doc:`blocked_range2d class <../../algorithms/blocked_ranges/blocked_range2d_cls>`
 * :doc:`blocked_range3d class <../../algorithms/blocked_ranges/blocked_range3d_cls>`
-* :doc:`blocked_rangeNd class <../../algorithms/blocked_ranges/blocked_rangeNd_cls>`
+* :doc:`blocked_nd_range class <../../algorithms/blocked_ranges/blocked_nd_range_cls>`
 * :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
 * :doc:`parallel_for algorithm <../../algorithms/functions/parallel_for_func>`
