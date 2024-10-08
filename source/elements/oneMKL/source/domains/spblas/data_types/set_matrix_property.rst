@@ -52,8 +52,8 @@ details the property for each matrix format:
         - Guarantees that the column indices are sorted in ascending order for
           a given row.
       * - COO
-        - Guarantees that the indices are sorted by row then by column in
-          ascending order.
+        - Guarantees that the indices are sorted by rows then by columns within
+          rows in ascending order.
 
 sorted_by_rows
 ^^^^^^^^^^^^^^
@@ -72,7 +72,7 @@ details the property for each matrix format:
           :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
           exception.
       * - COO
-        - Guarantees that the indices are sorted by row in ascending order.
+        - Guarantees that the indices are sorted by rows in ascending order.
           The column indices within a row do not need to be sorted.
 
 set_matrix_property
