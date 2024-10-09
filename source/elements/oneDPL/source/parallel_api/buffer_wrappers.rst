@@ -50,15 +50,14 @@ which type satisfies the following requirements but is otherwise unspecified:
 - It is comparable with ``operator==`` and ``operator!=``.
 - It provides the ``get_buffer()`` method that returns the SYCL buffer, which an object was built over.
 - The expressions ``a + n`` and ``a - n``, where ``a`` is a buffer position object and ``n``
-  is an integer value, are valid and evaluate to a buffer position object representing
-  a position in the buffer that follows or precedes the position of ``a`` by ``n``.
+  is an integer value, are valid and evaluate to a buffer position object such that
+  the corresponding position in the buffer follows (precedes) that of ``a`` by ``n``.
   If this new position is out of the buffer bounds, the behavior is undefined.
 - The expression ``a - b``, where ``a`` and ``b`` are buffer position objects,
   is valid and evaluates to an integer value ``n`` such that ``a == b + n``.
 
-These operations are only valid for objects built over the same SYCL buffer.
-If an expression operates with buffer position objects that are not built
-over the same buffer, the behavior is undefined.
+If these operators and expressions are applied to buffer position objects that are not built
+over the same SYCL buffer, the behavior is undefined.
 
 When invoking an algorithm, the buffer passed to ``begin`` should be the same
 as the buffer passed to ``end``. Otherwise, the behavior is undefined.
@@ -72,6 +71,11 @@ in expressions with other objects built over the same buffer.
    sycl::buffer buf {/*...*/};
    auto pos = dpl::find(dpl::execution::dpcpp_default, dpl::begin(buf), dpl::end(buf), value);
    int value_index = (pos == dpl::end(buf)) ? -1 : (pos - dpl::begin(buf));
+
+.. note::
+   Though buffer position objects substitute for iterators as arguments and return values
+   of oneDPL algorithms, they cannot be used as iterators in other contexts, including dereference,
+   as their type does not satisfy the C++ standard requirements for an iterator.
 
 SYCL deduction tags (the ``TagT`` parameters) and ``sycl::property::no_init`` 
 allow to specify an access mode to be used by algorithms for accessing a SYCL buffer.
