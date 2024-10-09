@@ -43,8 +43,8 @@ Buffer Wrappers
 
 ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are helper functions
 for passing `SYCL`_ buffers to oneDPL algorithms.
-These functions accept a SYCL buffer and return an object of an unspecified type
-(referred below as *buffer position object*) that satisfies the following requirements:
+These functions accept a SYCL buffer and return a *buffer position object*,
+which type satisfies the following requirements but is otherwise unspecified:
 
 - It is copy-constructible and copy-assignable.
 - It is comparable with ``operator==`` and ``operator!=``.
@@ -86,9 +86,9 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
    auto policy = dpl::execution::dpcpp_default;
 
    auto buf_begin = dpl::begin(buf, sycl::write_only);
-   auto buf_end_1 = dpl::end(buf, sycl::write_only); // matches begin()
+   auto buf_end_1 = dpl::end(buf, sycl::write_only); // arguments match begin()
    dpl::fill(policy, buf_begin, buf_end_1, 42);      // OK
-   auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init); // does not match begin()
+   auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init); // arguments do not match
    dpl::fill(policy, buf_begin, buf_end_2, 42);                     // undefined behavior
 
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
