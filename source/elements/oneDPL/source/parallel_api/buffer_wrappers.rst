@@ -46,7 +46,7 @@ for passing `SYCL`_ buffers to oneDPL algorithms.
 These functions accept a SYCL buffer and return an object of an unspecified type
 (referred below as *buffer position object*) that satisfies the following requirements:
 
-- It is ``CopyConstructible`` and ``CopyAssignable``.
+- It is copy-constructible and copy-assignable.
 - It is comparable with ``operator==`` and ``operator!=``.
 - It provides the ``get_buffer()`` method that returns the SYCL buffer, which an object was built over.
 - The expressions ``a + n`` and ``a - n``, where ``a`` is a buffer position object and ``n``
@@ -83,10 +83,12 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
 
    namespace dpl = oneapi::dpl;
    sycl::buffer buf {/*...*/};
+   auto policy = dpl::execution::dpcpp_default;
+
    auto buf_begin = dpl::begin(buf, sycl::write_only);
-   auto buf_end_1 = dpl::end(buf, sycl::write_only);
-   auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init);
-   dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
-   dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
+   auto buf_end_1 = dpl::end(buf, sycl::write_only); // matches begin()
+   dpl::fill(policy, buf_begin, buf_end_1, 42);      // OK
+   auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init); // does not match begin()
+   dpl::fill(policy, buf_begin, buf_end_2, 42);                     // undefined behavior
 
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
