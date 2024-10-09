@@ -3,9 +3,9 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-===============
+================
 blocked_nd_range
-===============
+================
 **[algorithms.blocked_nd_range]**
 
 Class template that represents a recursively divisible N-dimensional half-open interval.
