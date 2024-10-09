@@ -57,7 +57,7 @@ A device execution policy represents a `SYCL`_ device and queue to run oneDPL al
         template <typename KernelName = /*unspecified*/>
         class device_policy;
 
-        const device_policy<> dpcpp_default;
+        inline const device_policy<> dpcpp_default;
 
         template <typename KernelName = /*unspecified*/>
         device_policy<KernelName>
