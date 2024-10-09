@@ -34,7 +34,7 @@ class r250
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     class r250 {
     public:
         static constexpr std::uint32_t default_seed = 1;
@@ -92,7 +92,7 @@ class r250
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid sycl::queue object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume :math:`x_{-250} = seed`. If :math:`seed = 0`, assume :math:`seed = 1`. Other values in state are initialized according to recurrent correlation :math:`x_{n+1} = 69069x_{n}(mod \ 2 ^ {32})`. Then the values :math:`x_{7k-247}, k = 0, 1, ..., 31` are interpreted as a binary matrix of size 32 x 32 and diagonal bits are set to 0, the under-diagonal bits to 0.
@@ -108,7 +108,7 @@ class r250
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state

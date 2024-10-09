@@ -36,7 +36,7 @@ class mcg31m1
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<std::int32_t VecSize = 1>
      class mcg31m1 {
      public:

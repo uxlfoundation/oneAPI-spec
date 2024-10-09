@@ -27,17 +27,17 @@ sinh
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event sinh(
                     sycl::queue& exec_queue,
                     std::int64_t n,
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -47,7 +47,7 @@ sinh
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event sinh(
                     sycl::queue& exec_queue,
@@ -55,10 +55,10 @@ sinh
                     const T *a,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -120,10 +120,10 @@ sinh
            -  
          * - a > overflow
            - +∞
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - a < -overflow
            - -∞
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - +∞
            - +∞
            -  
@@ -218,7 +218,7 @@ sinh
 
 
    - The complex sinh(a) function sets the VM status code to
-      oneapi::mkl::vm::status::overflow in the case of overflow, that is, when RE(a),
+      oneapi::math::vm::status::overflow in the case of overflow, that is, when RE(a),
       IM(a) are finite non-zero numbers, but the real or imaginary part
       of the exact result is so large that it does not meet the target
       precision.
@@ -256,7 +256,7 @@ sinh
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -289,7 +289,7 @@ sinh
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

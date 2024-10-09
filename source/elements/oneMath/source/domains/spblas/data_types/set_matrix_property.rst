@@ -14,7 +14,7 @@ Matrix properties
 
    .. code:: cpp
 
-      namespace oneapi::mkl::sparse {
+      namespace oneapi::math::sparse {
 
           enum class matrix_property {
              symmetric,
@@ -82,17 +82,17 @@ Set a property to a ``matrix_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::set_matrix_property`` function sets a property to a
+The ``oneapi::math::sparse::set_matrix_property`` function sets a property to a
 matrix handle.
 
 .. rubric:: Syntax
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        bool set_matrix_property (sycl::queue                          &queue,
-                                 oneapi::mkl::sparse::matrix_handle_t smhandle,
+                                 oneapi::math::sparse::matrix_handle_t smhandle,
                                  matrix_property                      property);
 
    }
@@ -126,9 +126,9 @@ matrix handle.
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

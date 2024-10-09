@@ -39,7 +39,7 @@ The routine computes the LU factorizations of general :math:`m \times n` matrice
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       void getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
     }
 
@@ -93,13 +93,13 @@ ipiv
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::lapack::batch_error<onemath_lapack_exception_batch_error>`
+:ref:`oneapi::math::lapack::batch_error<onemath_lapack_exception_batch_error>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
  
    The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -130,7 +130,7 @@ The routine computes the batch of LU factorizations of general :math:`m \times n
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       cl::sycl::event getrf_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, T **a, std::int64_t *lda, std::int64_t **ipiv, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
@@ -190,13 +190,13 @@ Output event to wait on to ensure computation is complete.
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::lapack::batch_error<onemath_lapack_exception_batch_error>`
+:ref:`oneapi::math::lapack::batch_error<onemath_lapack_exception_batch_error>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
    The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -218,7 +218,7 @@ The routine computes the LU factorizations of general :math:`m \times n` matrice
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       cl::sycl::event getrf_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     };
 
@@ -281,13 +281,13 @@ Output event to wait on to ensure computation is complete.
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::lapack::batch_error<onemath_lapack_exception_batch_error>`
+:ref:`oneapi::math::lapack::batch_error<onemath_lapack_exception_batch_error>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
    The ``info`` code of the problem can be obtained by `info()` method of exception object:
     

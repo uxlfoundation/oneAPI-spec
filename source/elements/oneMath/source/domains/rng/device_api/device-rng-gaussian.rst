@@ -56,7 +56,7 @@ class gaussian
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename RealType, typename Method>
      class gaussian {
      public:
@@ -88,8 +88,8 @@ class gaussian
         typename Method
             Generation method. The specific values are as follows:
 
-                * ``oneapi::mkl::rng::device::gaussian_method::by_default``
-                * ``oneapi::mkl::rng::device::gaussian_method::box_muller2``
+                * ``oneapi::math::rng::device::gaussian_method::by_default``
+                * ``oneapi::math::rng::device::gaussian_method::box_muller2``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_device_rng_distributions_method>`
 
@@ -175,7 +175,7 @@ class gaussian
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when `stddev` :math:`\leq 0`
 
 .. container:: section

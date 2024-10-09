@@ -27,7 +27,7 @@ pow
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event pow(
                     sycl::queue& exec_queue,
@@ -35,10 +35,10 @@ pow
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& b,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -48,7 +48,7 @@ pow
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event pow(
                     sycl::queue& exec_queue,
@@ -57,10 +57,10 @@ pow
                     const T *b,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -112,27 +112,27 @@ pow
          * - +0
            - neg. odd integer
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - -0
            - neg. odd integer
            - -∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - +0
            - neg. even integer
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - -0
            - neg. even integer
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - +0
            - neg. non-integer
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - -0
            - neg. non-integer
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - -0
            - pos. odd integer
            - +0
@@ -240,7 +240,7 @@ pow
          * - a < +0
            - non-integer
            - QNAN
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - \|a\| < 1
            - -∞
            - +∞
@@ -248,11 +248,11 @@ pow
          * - +0
            - -∞
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - -0
            - -∞
            - +∞
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - \|a\| > 1
            - -∞
            - +0
@@ -324,7 +324,7 @@ pow
          * - Big finite value\*
            - Big finite value\*
            - +/-∞
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - QNAN
            - QNAN
            - QNAN
@@ -354,7 +354,7 @@ pow
    #. Returns ∞ in the result.
 
 
-   #. Sets the VM status code to ``oneapi::mkl::vm::status::overflow``.
+   #. Sets the VM status code to ``oneapi::math::vm::status::overflow``.
 
 
    Overflow in a complex function occurs (supported in the HA/LA
@@ -362,14 +362,14 @@ pow
    are finite numbers, but the real or imaginary part of the computed
    result is so large that it does not fit the target precision. In this
    case, the function returns ∞ in that part of the result, and sets the
-   VM status code to ``oneapi::mkl::vm::status::overflow`` (overriding any possible
-   ``oneapi::mkl::vm::status::accuracy_warning`` status).
+   VM status code to ``oneapi::math::vm::status::overflow`` (overriding any possible
+   ``oneapi::math::vm::status::accuracy_warning`` status).
 
 
    The complex double precision versions of this function are
    implemented in the EP accuracy mode only. If used in HA or LA mode,
    the functions set the VM status code to
-   ``oneapi::mkl::vm::status::accuracy_warning``.
+   ``oneapi::math::vm::status::accuracy_warning``.
 
 
 .. container:: section
@@ -402,7 +402,7 @@ pow
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -439,7 +439,7 @@ pow
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

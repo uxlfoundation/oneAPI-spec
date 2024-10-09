@@ -37,7 +37,7 @@ class gamma
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename RealType, typename Method>
      class gamma {
      public:
@@ -161,7 +161,7 @@ class gamma
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`alpha \leq 0` or :math:`beta \leq 0`
 
 .. container:: section

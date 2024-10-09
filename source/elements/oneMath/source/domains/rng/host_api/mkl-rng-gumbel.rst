@@ -13,7 +13,7 @@ Class is used for generation of Gumbel distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers Gumbel distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers Gumbel distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -36,7 +36,7 @@ class gumbel
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = gumbel_method::by_default>
     class gumbel {
     public:
@@ -62,11 +62,11 @@ class gumbel
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::gumbel_method::by_default
+        typename Method = oneapi::math::rng::gumbel_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::gumbel_method::by_default``
-                * ``oneapi::mkl::rng::gumbel_method::icdf``
+                * ``oneapi::math::rng::gumbel_method::by_default``
+                * ``oneapi::math::rng::gumbel_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -152,7 +152,7 @@ class gumbel
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section

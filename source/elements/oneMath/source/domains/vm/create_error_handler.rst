@@ -27,16 +27,16 @@ create_error_handler
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
-            oneapi::mkl::vm::error_handler<T> create_error_handler(
-                sycl::buffer<oneapi::mkl::vm::status, 1> & status_array,
+            oneapi::math::vm::error_handler<T> create_error_handler(
+                sycl::buffer<oneapi::math::vm::status, 1> & status_array,
                 int64_t length = 1,
-                oneapi::mkl::vm::status status = oneapi::mkl::vm::status::not_defined,
+                oneapi::math::vm::status status = oneapi::math::vm::status::not_defined,
                 T fixup = {},
                 bool copysign = false);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
       USM API:
@@ -45,16 +45,16 @@ create_error_handler
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
-            oneapi::mkl::vm::error_handler<T> create_error_handler(
-                oneapi::mkl::vm::status* status_array,
+            oneapi::math::vm::error_handler<T> create_error_handler(
+                oneapi::math::vm::status* status_array,
                 int64_t length = 1,
-                oneapi::mkl::vm::status status = oneapi::mkl::vm::status::not_defined,
+                oneapi::math::vm::status status = oneapi::math::vm::status::not_defined,
                 T fixup = {},
                 bool copysign = false);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
     ``create_error_handler`` supports the following precisions.
@@ -129,26 +129,26 @@ create_error_handler
               - Description
             * - Successful Execution
               -
-            * - ``oneapi::mkl::vm::status::success``
+            * - ``oneapi::math::vm::status::success``
               - VM function execution completed successfully
-            * - ``oneapi::mkl::vm::status::not_defined``
+            * - ``oneapi::math::vm::status::not_defined``
               - VM status not defined
             * - Warnings
               -
-            * - ``oneapi::mkl::vm::status::accuracy_warning``
+            * - ``oneapi::math::vm::status::accuracy_warning``
               - VM function execution completed successfully in a different
                 accuracy mode
             * - Computational Errors
               -
-            * - ``oneapi::mkl::vm::status::errdom``
+            * - ``oneapi::math::vm::status::errdom``
               - Values are out of a range of definition producing invalid
                 (QNaN) result
-            * - ``oneapi::mkl::vm::status::sing``
+            * - ``oneapi::math::vm::status::sing``
               - Values cause divide-by-zero (singularity) computational errors and produce
                 and invalid (QNaN or Inf) result
-            * - ``oneapi::mkl::vm::status::overflow``
+            * - ``oneapi::math::vm::status::overflow``
               - An overflow happened during the calculation process
-            * - ``oneapi::mkl::vm::status::underflow``
+            * - ``oneapi::math::vm::status::underflow``
               - An underflow happened during the calculation process
 
 
@@ -185,7 +185,7 @@ create_error_handler
 
       status_code
          Status code to match and fix the results. This is an optional argument,
-         default value is ``oneapi::mkl::vm::status::not_defined``.
+         default value is ``oneapi::math::vm::status::not_defined``.
 
 
       fixup

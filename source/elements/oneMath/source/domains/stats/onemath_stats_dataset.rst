@@ -24,7 +24,7 @@ structure dataset (Buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<layout ObservationsLayout, typename Type>
 	struct dataset<ObservationsLayout, sycl::buffer<Type, 1>> {
 
@@ -56,11 +56,11 @@ structure dataset (Buffer version)
 
     .. container:: section
 
-        oneapi::mkl::stats::layout ObservationsLayout
+        oneapi::math::stats::layout ObservationsLayout
             Type of the multi-dimensional data layout. Supported types:
 
-                * ``oneapi::mkl::stats::layout::row_major``
-                * ``oneapi::mkl::stats::layout::col_major``
+                * ``oneapi::math::stats::layout::row_major``
+                * ``oneapi::math::stats::layout::col_major``
 
 .. container:: section
 
@@ -106,7 +106,7 @@ structure dataset (Buffer version)
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when `n_dims_` :math:`\leq 0`, or `n_observations_` :math:`\leq 0`, or `observations_.get_count() == 0`
 
 .. _onemath_stats_dataset_syntax_usm:
@@ -118,7 +118,7 @@ structure dataset (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<layout ObservationsLayout, typename Type>
 	struct dataset<Type*, ObservationsLayout> {
     	explicit dataset(std::int64_t n_dims_, std::int64_t n_observations_, Type* observations_,
@@ -148,11 +148,11 @@ structure dataset (USM version)
 
     .. container:: section
 
-        oneapi::mkl::stats::layout ObservationsLayout
+        oneapi::math::stats::layout ObservationsLayout
             Type of the multi-dimensional data layout. Supported types:
 
-                * ``oneapi::mkl::stats::layout::row_major``
-                * ``oneapi::mkl::stats::layout::col_major``
+                * ``oneapi::math::stats::layout::row_major``
+                * ``oneapi::math::stats::layout::col_major``
 
 .. container:: section
 
@@ -198,7 +198,7 @@ structure dataset (USM version)
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when `n_dims_` :math:`\leq 0`, or `n_observations_` :math:`\leq 0`, or `observations_ == nullptr`
 
 **Parent topic:** :ref:`onemath_stats`

@@ -49,9 +49,9 @@ syr2 (Buffer Version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void syr2(sycl::queue &queue,
-                 oneapi::mkl::uplo upper_lower,
+                 oneapi::math::uplo upper_lower,
                  std::int64_t n,
                  T alpha,
                  sycl::buffer<T,1> &x,
@@ -63,9 +63,9 @@ syr2 (Buffer Version)
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void syr2(sycl::queue &queue,
-                 oneapi::mkl::uplo upper_lower,
+                 oneapi::math::uplo upper_lower,
                  std::int64_t n,
                  T alpha,
                  sycl::buffer<T,1> &x,
@@ -133,19 +133,19 @@ syr2 (Buffer Version)
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_syr2_usm:
@@ -157,9 +157,9 @@ syr2 (USM Version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event syr2(sycl::queue &queue,
-                        oneapi::mkl::uplo upper_lower,
+                        oneapi::math::uplo upper_lower,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
                         const T *x,
@@ -172,9 +172,9 @@ syr2 (USM Version)
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event syr2(sycl::queue &queue,
-                        oneapi::mkl::uplo upper_lower,
+                        oneapi::math::uplo upper_lower,
                         std::int64_t n,
                         value_or_pointer<T> alpha,
                         const T *x,
@@ -255,20 +255,20 @@ syr2 (USM Version)
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-level-2-routines`

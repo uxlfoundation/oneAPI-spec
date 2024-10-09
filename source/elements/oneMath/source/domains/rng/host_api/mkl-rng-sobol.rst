@@ -35,7 +35,7 @@ class sobol
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     class sobol {
     public:
         static constexpr std::uint32_t default_dimensions_number = 1;
@@ -93,7 +93,7 @@ class sobol
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         dimensions
             Number of dimensions. If :math:`dimen < 1` or :math:`dimen > 40`, assume :math:`dimen = 1`.
@@ -109,7 +109,7 @@ class sobol
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         direction_numbers
             If you want to generate quasi-random vectors of greater dimension or obtain another sequence, you can register a set of your own direction_numbers. The number of dimensions corresponds to direction_numbers.size() / 32.

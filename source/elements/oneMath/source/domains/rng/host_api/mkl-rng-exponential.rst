@@ -13,7 +13,7 @@ Class is used for generation of exponentially distributed real types random numb
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers exponentially distributed with displacement :math:`a` and scalefactor :math:`\beta`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers exponentially distributed with displacement :math:`a` and scalefactor :math:`\beta`, where :math:`a, \beta \in R; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -36,7 +36,7 @@ class exponential
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = exponential_method::by_default>
     class exponential {
     public:
@@ -62,12 +62,12 @@ class exponential
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::exponential_method::by_default
+        typename Method = oneapi::math::rng::exponential_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::exponential_method::by_default``
-                * ``oneapi::mkl::rng::exponential_method::icdf``
-                * ``oneapi::mkl::rng::exponential_method::icdf_accurate``
+                * ``oneapi::math::rng::exponential_method::by_default``
+                * ``oneapi::math::rng::exponential_method::icdf``
+                * ``oneapi::math::rng::exponential_method::icdf_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -153,7 +153,7 @@ class exponential
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`beta \leq` static_cast<RealType>(0.0)
 
 .. container:: section

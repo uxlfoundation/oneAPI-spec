@@ -42,7 +42,7 @@ class poisson
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename IntType, typename Method>
      class poisson {
      public:
@@ -70,11 +70,11 @@ class poisson
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::poisson_method::by_default
+        typename Method = oneapi::math::rng::poisson_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::device::poisson_method::by_default``
-                * ``oneapi::mkl::rng::device::poisson_method::devroye``
+                * ``oneapi::math::rng::device::poisson_method::by_default``
+                * ``oneapi::math::rng::device::poisson_method::devroye``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -158,7 +158,7 @@ class poisson
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`lambda \leq 0`
 
 .. container:: section

@@ -13,7 +13,7 @@ Class is used for generation of hypergeometrically distributed integer types ran
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers hypergeometrically distributed with lot size :math:`l`, size of sampling :math:`s`, and number of marked elements in the lot :math:`m`, where :math:`l, m, s \in N \bigcup \{0\}; l \ge max (s, m)`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers hypergeometrically distributed with lot size :math:`l`, size of sampling :math:`s`, and number of marked elements in the lot :math:`m`, where :math:`l, m, s \in N \bigcup \{0\}; l \ge max (s, m)`.
 
 Consider a lot of :math:`l` elements comprising :math:`m` marked and :math:`l` - :math:`m` unmarked elements. A trial sampling without replacement of exactly :math:`s` elements from this lot helps to define the hypergeometric distribution, which is the probability that the group of :math:`s` elements contains exactly :math:`k` marked elements.
 
@@ -38,7 +38,7 @@ class hypergeometric
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = hypergeometric_method::by_default>
     class hypergeometric {
     public:
@@ -65,11 +65,11 @@ class hypergeometric
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::hypergeometric_method::by_default
+        typename Method = oneapi::math::rng::hypergeometric_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::hypergeometric_method::by_default``
-                * ``oneapi::mkl::rng::hypergeometric_method::h2pe``
+                * ``oneapi::math::rng::hypergeometric_method::by_default``
+                * ``oneapi::math::rng::hypergeometric_method::h2pe``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -157,7 +157,7 @@ class hypergeometric
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`s < 0`, or :math:`m < 0`, or :math:`l < (s > m ? s : m)`
 
 .. container:: section

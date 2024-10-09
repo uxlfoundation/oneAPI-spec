@@ -13,7 +13,7 @@ Entry point to compute max values.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::max function is used to compute a max values arrays (max value for each dataset's dimension).
+The oneapi::math::stats::max function is used to compute a max values arrays (max value for each dataset's dimension).
 
 :ref:`onemath_stats_max` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ max (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         void max(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -48,7 +48,7 @@ max (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -77,7 +77,7 @@ max (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when max.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_max_usm:
@@ -89,7 +89,7 @@ max (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event max(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
@@ -104,7 +104,7 @@ max (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -136,7 +136,7 @@ max (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when max == nullptr, or dataset object is invalid
 
 .. container:: section

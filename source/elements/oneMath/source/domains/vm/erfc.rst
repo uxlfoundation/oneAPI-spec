@@ -27,17 +27,17 @@ erfc
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event erfc(
                     sycl::queue& exec_queue,
                     std::int64_t n,
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -47,7 +47,7 @@ erfc
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event erfc(
                     sycl::queue& exec_queue,
@@ -55,10 +55,10 @@ erfc
                     const T *a,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -173,7 +173,7 @@ erfc
            - Status code
          * - a > underflow
            - +0
-           - ``oneapi::mkl::vm::status::underflow``
+           - ``oneapi::math::vm::status::underflow``
          * - +∞
            - +0
            -  
@@ -216,7 +216,7 @@ erfc
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -249,7 +249,7 @@ erfc
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

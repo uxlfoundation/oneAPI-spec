@@ -34,9 +34,9 @@ unmrq_scratchpad_size
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t unmrq_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc)
+      std::int64_t unmrq_scratchpad_size(cl::sycl::queue &queue, oneapi::math::side side, oneapi::math::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t ldc)
     }
 
 .. container:: section
@@ -47,12 +47,12 @@ queue
    Device queue where calculations by the unmrq function will be performed.
 
 side
-   If ``side = oneapi::mkl::side::left``, :math:`Q` or :math:`Q^T` is applied to :math:`C` from the left. If ``side = oneapi::mkl::side::right``, :math:`Q` or :math:`Q^T` is applied to :math:`C` from the right.
+   If ``side = oneapi::math::side::left``, :math:`Q` or :math:`Q^T` is applied to :math:`C` from the left. If ``side = oneapi::math::side::right``, :math:`Q` or :math:`Q^T` is applied to :math:`C` from the right.
 
 trans
-   If ``trans=oneapi::mkl::transpose::nontrans``, the routine multiplies :math:`C` by :math:`Q`.
+   If ``trans=oneapi::math::transpose::nontrans``, the routine multiplies :math:`C` by :math:`Q`.
 
-   If ``trans=oneapi::mkl::transpose::conjtrans``, the routine multiplies :math:`C` by :math:`Q^H`.
+   If ``trans=oneapi::math::transpose::conjtrans``, the routine multiplies :math:`C` by :math:`Q^H`.
 
 m
    The number of rows in the matrix :math:`C` (:math:`0 \le m`).
@@ -75,11 +75,11 @@ ldc
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
    Exception is thrown in case of incorrect supplied argument value.
    Position of wrong argument can be determined by `info()` method of exception object.

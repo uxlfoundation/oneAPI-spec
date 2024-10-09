@@ -13,7 +13,7 @@ Entry point to compute min and max values.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::min_max function is used to compute min and max arrays (min and max values for each dataset's dimension).
+The oneapi::math::stats::min_max function is used to compute min and max arrays (min and max values for each dataset's dimension).
 
 :ref:`onemath_stats_min_max` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ min_max (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         void min_max(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -49,7 +49,7 @@ min_max (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -81,7 +81,7 @@ min_max (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when min.get_count() == 0, or max.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_min_max_usm:
@@ -93,7 +93,7 @@ min_max (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event min_max(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
@@ -109,7 +109,7 @@ min_max (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -144,7 +144,7 @@ min_max (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when min == nullptr, or max == nullptr, or dataset object is invalid
 
 .. container:: section

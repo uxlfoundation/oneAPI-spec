@@ -13,7 +13,7 @@ Entry point to compute raw sums up to the 4th order.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::raw_sum function is used to compute an array of raw sums up to the 4th order (raw sums for each dataset's dimension).
+The oneapi::math::stats::raw_sum function is used to compute an array of raw sums up to the 4th order (raw sums for each dataset's dimension).
 
 :ref:`onemath_stats_raw_sum` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ raw_sum (Buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         void raw_sum(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -51,8 +51,8 @@ raw_sum (Buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -90,7 +90,7 @@ raw_sum (Buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when sum.get_count() == 0 & raw_sum_2.get_count() == 0 & raw_sum_3.get_count() == 0 & raw_sum_4.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_raw_sum_usm:
@@ -102,7 +102,7 @@ raw_sum (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event raw_sum(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
@@ -120,8 +120,8 @@ raw_sum (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -162,7 +162,7 @@ raw_sum (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when sum == nullptr & raw_sum_2 == nullptr & raw_sum_3 == nullptr & raw_sum_4 == nullptr, or dataset object is invalid
 
 .. container:: section

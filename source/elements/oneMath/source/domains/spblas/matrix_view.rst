@@ -16,7 +16,7 @@ matrix_descr
 
 .. code:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        enum class matrix_descr {
            general,
@@ -60,7 +60,7 @@ matrix_view
 
 .. code:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        struct matrix_view {
            matrix_descr type_view = matrix_descr::general;
@@ -91,7 +91,7 @@ matrix_view
 
    .. code-block:: cpp
 
-      namespace oneapi::mkl::sparse {
+      namespace oneapi::math::sparse {
 
           matrix_view::matrix_view () = default;
 
@@ -108,7 +108,7 @@ matrix_view
 
    .. code-block:: cpp
 
-      namespace oneapi::mkl::sparse {
+      namespace oneapi::math::sparse {
 
           matrix_view::matrix_view(matrix_descr type_view);
 

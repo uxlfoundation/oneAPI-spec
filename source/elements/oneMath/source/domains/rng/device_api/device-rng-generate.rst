@@ -15,7 +15,7 @@ Entry point to obtain random numbers from a given engine with proper statistics 
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename Distr, typename Engine>
      auto generate(Distr& distr, Engine& engine) ->
        typename std::conditional<Engine::vec_size == 1, typename Distr::result_type,

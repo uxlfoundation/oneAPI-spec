@@ -24,13 +24,13 @@ set_mode
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
-                oneapi::mkl::vm::mode set_mode(
+                oneapi::math::vm::mode set_mode(
                     sycl::queue& exec_queue,
-                    oneapi::mkl::vm::mode new_mode);
+                    oneapi::math::vm::mode new_mode);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
       .. rubric:: Description
@@ -51,17 +51,17 @@ set_mode
            - Description
          * - Accuracy Control
            -
-         * - ``oneapi::mkl::vm::mode::ha``
+         * - ``oneapi::math::vm::mode::ha``
            - High accuracy versions of VM functions.
-         * - ``oneapi::mkl::vm::mode::la``
+         * - ``oneapi::math::vm::mode::la``
            - Low accuracy versions of VM functions.
-         * - ``oneapi::mkl::vm::mode::ep``
+         * - ``oneapi::math::vm::mode::ep``
            - Enhanced performance accuracy versions of VM functions.
-         * - ``oneapi::mkl::vm::mode::not_defined``
+         * - ``oneapi::math::vm::mode::not_defined``
            - VM mode not defined. This has no effect.
 
       The assumed value of the ``mode`` parameter for a new queue, if ``set_mode``
-      is not called is ``oneapi::mkl::vm::mode::ha``.
+      is not called is ``oneapi::math::vm::mode::ha``.
 
 
 

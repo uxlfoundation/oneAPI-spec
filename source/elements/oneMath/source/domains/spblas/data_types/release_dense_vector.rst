@@ -11,7 +11,7 @@ Destroys a ``dense_vector_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::release_dense_vector`` function frees the resources
+The ``oneapi::math::sparse::release_dense_vector`` function frees the resources
 allocated for the handle.
 
 If a buffer was provided, its reference count is decremented.
@@ -22,10 +22,10 @@ If a USM pointer was provided, the data is not free'd.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        sycl::event release_dense_vector (sycl::queue                                &queue,
-                                         oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
+                                         oneapi::math::sparse::dense_vector_handle_t dvhandle,
                                          const std::vector<sycl::event>             &dependencies = {});
 
    }
@@ -60,8 +60,8 @@ If a USM pointer was provided, the data is not free'd.
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

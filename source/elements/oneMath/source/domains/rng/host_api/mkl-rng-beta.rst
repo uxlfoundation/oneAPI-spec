@@ -13,7 +13,7 @@ Class is used for generation of beta distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>`
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>`
 function to provide random numbers beta distributed with shape parameters :math:`p` and :math:`q`,
 displacement :math:`\alpha` and scale parameter :math:`(b, \beta)`, where :math:`p`, :math:`q`.
 :math:`\alpha`, :math:`\beta` :math:`\in R; p > 0; q > 0; \beta > 0`.
@@ -42,7 +42,7 @@ class beta
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = beta_method::by_default>
     class beta {
     public:
@@ -70,12 +70,12 @@ class beta
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::beta_method::by_default
+        typename Method = oneapi::math::rng::beta_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::beta_method::by_default``
-                * ``oneapi::mkl::rng::beta_method::cja``
-                * ``oneapi::mkl::rng::beta_method::cja_accurate``
+                * ``oneapi::math::rng::beta_method::by_default``
+                * ``oneapi::math::rng::beta_method::cja``
+                * ``oneapi::math::rng::beta_method::cja_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -165,7 +165,7 @@ class beta
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`p \leq 0.0f`, or :math:`q \leq 0.0f`, or :math:`\beta \leq 0.0f`
 
 .. container:: section

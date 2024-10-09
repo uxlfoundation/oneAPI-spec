@@ -11,7 +11,7 @@ Initializes a ``dense_matrix_handle_t`` object with the provided data.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::init_dense_matrix`` function initializes the
+The ``oneapi::math::sparse::init_dense_matrix`` function initializes the
 ``dense_matrix_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
@@ -32,11 +32,11 @@ init_dense_matrix (Buffer version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType>
        void init_dense_matrix (sycl::queue                                &queue,
-                               oneapi::mkl::sparse::dense_matrix_handle_t *p_dmhandle,
+                               oneapi::math::sparse::dense_matrix_handle_t *p_dmhandle,
                                std::int64_t                               num_rows,
                                std::int64_t                               num_cols,
                                std::int64_t                               ld,
@@ -100,10 +100,10 @@ init_dense_matrix (Buffer version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_init_dense_matrix_usm:
 
@@ -114,11 +114,11 @@ init_dense_matrix (USM version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType>
        void init_dense_matrix (sycl::queue                                &queue,
-                               oneapi::mkl::sparse::dense_matrix_handle_t *p_dmhandle,
+                               oneapi::math::sparse::dense_matrix_handle_t *p_dmhandle,
                                std::int64_t                               num_rows,
                                std::int64_t                               num_cols,
                                std::int64_t                               ld,
@@ -183,9 +183,9 @@ init_dense_matrix (USM version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

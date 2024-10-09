@@ -28,7 +28,7 @@ minmag
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event minmag(
                     sycl::queue& exec_queue,
@@ -36,9 +36,9 @@ minmag
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& b,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -48,7 +48,7 @@ minmag
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event minmag(
                     sycl::queue& exec_queue,
@@ -57,9 +57,9 @@ minmag
                     const T *b,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined);
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -158,7 +158,7 @@ minmag
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    USM API:
@@ -188,7 +188,7 @@ minmag
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
 .. container:: section

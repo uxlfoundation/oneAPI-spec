@@ -13,7 +13,7 @@ Entry point to compute min values.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::min function is used to compute min arrays (min value for each dataset's dimension).
+The oneapi::math::stats::min function is used to compute min arrays (min value for each dataset's dimension).
 
 :ref:`onemath_stats_min` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ min (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = fast, typename Type, layout ObservationsLayout>
         void min(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -48,7 +48,7 @@ min (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -77,7 +77,7 @@ min (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when min.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_min_usm:
@@ -89,7 +89,7 @@ min (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = fast, typename Type, layout ObservationsLayout>
         sycl::event min(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
@@ -104,7 +104,7 @@ min (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -136,7 +136,7 @@ min (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when min == nullptr, or dataset object is invalid
 
 .. container:: section

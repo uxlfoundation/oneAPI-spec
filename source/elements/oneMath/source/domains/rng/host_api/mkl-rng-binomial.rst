@@ -13,7 +13,7 @@ Class is used for generation of binomially distributed integer types random numb
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers binomially distributed with a number of independent Bernoulli trials :math:`m`, and with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p \leq 1, m \in N`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers binomially distributed with a number of independent Bernoulli trials :math:`m`, and with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p \leq 1, m \in N`.
 
 A binomially distributed variate represents the number of successes in :math:`m` independent Bernoulli trials with probability of a single trial success :math:`p`.
 
@@ -39,7 +39,7 @@ class binomial
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = binomial_method::by_default>
     class binomial {
     public:
@@ -64,11 +64,11 @@ class binomial
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::binomial_method::by_default
+        typename Method = oneapi::math::rng::binomial_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::binomial_method::by_default``
-                * ``oneapi::mkl::rng::binomial_method::btpe``
+                * ``oneapi::math::rng::binomial_method::by_default``
+                * ``oneapi::math::rng::binomial_method::btpe``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -154,7 +154,7 @@ class binomial
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`p > 1.0`, or :math:`p < 0.0`, or :math:`ntrial < 1`
 
 .. container:: section

@@ -11,7 +11,7 @@ Reset the data of a ``dense_vector_handle_t`` object.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::set_dense_vector_data`` function sets new data to the
+The ``oneapi::math::sparse::set_dense_vector_data`` function sets new data to the
 ``dense_vector_handle_t`` object.
 
 In the case of buffers, the reference count of the provided buffer is
@@ -32,11 +32,11 @@ set_dense_vector_data (Buffer version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType>
        void set_dense_vector_data (sycl::queue                                &queue,
-                                   oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
+                                   oneapi::math::sparse::dense_vector_handle_t dvhandle,
                                    std::int64_t                               size,
                                    sycl::buffer<dataType, 1>                  val);
 
@@ -75,10 +75,10 @@ set_dense_vector_data (Buffer version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_set_dense_vector_data_usm:
 
@@ -89,11 +89,11 @@ set_dense_vector_data (USM version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType>
        void set_dense_vector_data (sycl::queue                                &queue,
-                                   oneapi::mkl::sparse::dense_vector_handle_t dvhandle,
+                                   oneapi::math::sparse::dense_vector_handle_t dvhandle,
                                    std::int64_t                               size,
                                    dataType                                   *val);
 
@@ -134,9 +134,9 @@ set_dense_vector_data (USM version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

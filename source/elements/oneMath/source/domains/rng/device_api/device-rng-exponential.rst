@@ -47,7 +47,7 @@ class exponential
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename RealType, typename Method>
      class exponential {
      public:
@@ -77,12 +77,12 @@ class exponential
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::exponential_method::by_default
+        typename Method = oneapi::math::rng::exponential_method::by_default
             Generation method. The specific values are as follows:
 
-                * ``oneapi::mkl::rng::device::exponential_method::by_default``
-                * ``oneapi::mkl::rng::device::exponential_method::icdf``
-                * ``oneapi::mkl::rng::device::exponential_method::icdf_accurate``
+                * ``oneapi::math::rng::device::exponential_method::by_default``
+                * ``oneapi::math::rng::device::exponential_method::icdf``
+                * ``oneapi::math::rng::device::exponential_method::icdf_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_device_rng_distributions_method>`.
 
@@ -169,7 +169,7 @@ class exponential
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`beta \leq 0`
 
 .. container:: section

@@ -13,7 +13,7 @@ Class is used for generation of uniformly distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers uniformly distributed over the interval :math:`[a, b)`, where :math:`a`, :math:`b` are the left and right bounds of the
 interval, respectively, and :math:`a, b \in R; a < b`
 
 The probability distribution is given by:
@@ -38,7 +38,7 @@ class uniform
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = uniform_method::by_default>
     class uniform {
     public:
@@ -64,12 +64,12 @@ class uniform
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::uniform_method::by_default
+        typename Method = oneapi::math::rng::uniform_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::uniform_method::by_default``
-                * ``oneapi::mkl::rng::uniform_method::standard``
-                * ``oneapi::mkl::rng::uniform_method::accurate``
+                * ``oneapi::math::rng::uniform_method::by_default``
+                * ``oneapi::math::rng::uniform_method::standard``
+                * ``oneapi::math::rng::uniform_method::accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`
 
@@ -155,7 +155,7 @@ class uniform
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`a \ge b`
 
 .. container:: section

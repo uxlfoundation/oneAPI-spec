@@ -13,7 +13,7 @@ Class is used for generation of negative binomially distributed integer types ra
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers negative binomially distributed with distribution parameters :math:`a` and :math:`p`, where :math:`p, a \in R; 0 \leq p \leq 1, a > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers negative binomially distributed with distribution parameters :math:`a` and :math:`p`, where :math:`p, a \in R; 0 \leq p \leq 1, a > 0`.
 
 The probability distribution is given by:
 
@@ -37,7 +37,7 @@ class negative_binomial
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = negative_binomial_method::by_default>
     class negative_binomial {
     public:
@@ -63,11 +63,11 @@ class negative_binomial
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::negative_binomial_method::by_default
+        typename Method = oneapi::math::rng::negative_binomial_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::negative_binomial_method::by_default``
-                * ``oneapi::mkl::rng::negative_binomial_method::nbar``
+                * ``oneapi::math::rng::negative_binomial_method::by_default``
+                * ``oneapi::math::rng::negative_binomial_method::nbar``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -153,7 +153,7 @@ class negative_binomial
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`p \ge 1.0`, or :math:`p \leq 0.0`, or :math:`a \leq 0.0`
 
 .. container:: section

@@ -28,7 +28,7 @@ fmod
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event fmod(
                     sycl::queue& exec_queue,
@@ -36,10 +36,10 @@ fmod
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& b,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -49,7 +49,7 @@ fmod
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event fmod(
                     sycl::queue& exec_queue,
@@ -58,10 +58,10 @@ fmod
                     const T *b,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -112,11 +112,11 @@ fmod
          * - ``a`` not NAN
            - ±0
            - NAN
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - ±∞
            - ``b`` not NAN
            - NAN
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - ±0
            - ``b``\ ≠ 0, not NAN
            - ±0
@@ -167,7 +167,7 @@ fmod
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -204,7 +204,7 @@ fmod
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

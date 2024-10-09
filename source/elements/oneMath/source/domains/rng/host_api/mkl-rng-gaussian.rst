@@ -13,7 +13,7 @@ Class is used for generation of normally distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers normally distributed with mean :math:`(mean, a)` and standard deviation :math:`(stddev, \sigma)`, where :math:`a, \sigma \in R; \sigma > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers normally distributed with mean :math:`(mean, a)` and standard deviation :math:`(stddev, \sigma)`, where :math:`a, \sigma \in R; \sigma > 0`.
 
 The probability distribution is given by:
 
@@ -37,7 +37,7 @@ class gaussian
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = gaussian_method::by_default>
     class gaussian {
     public:
@@ -63,13 +63,13 @@ class gaussian
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::gaussian_method::by_default
+        typename Method = oneapi::math::rng::gaussian_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::gaussian_method::by_default``
-                * ``oneapi::mkl::rng::gaussian_method::box_muller``
-                * ``oneapi::mkl::rng::gaussian_method::box_muller2``
-                * ``oneapi::mkl::rng::gaussian_method::icdf``
+                * ``oneapi::math::rng::gaussian_method::by_default``
+                * ``oneapi::math::rng::gaussian_method::box_muller``
+                * ``oneapi::math::rng::gaussian_method::box_muller2``
+                * ``oneapi::math::rng::gaussian_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`
 
@@ -155,7 +155,7 @@ class gaussian
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when `stddev` :math:`\leq` `static_cast<RealType>(0.0)`
 
 .. container:: section

@@ -11,7 +11,7 @@ Initializes a ``dense_vector_handle_t`` object with the provided data.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::init_dense_vector`` function initializes the
+The ``oneapi::math::sparse::init_dense_vector`` function initializes the
 ``dense_vector_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
@@ -32,11 +32,11 @@ init_dense_vector (Buffer version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType>
        void init_dense_vector (sycl::queue                                &queue,
-                               oneapi::mkl::sparse::dense_vector_handle_t *p_dvhandle,
+                               oneapi::math::sparse::dense_vector_handle_t *p_dvhandle,
                                std::int64_t                               size,
                                sycl::buffer<dataType, 1>                  val);
 
@@ -85,10 +85,10 @@ init_dense_vector (Buffer version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_init_dense_vector_usm:
 
@@ -99,11 +99,11 @@ init_dense_vector (USM version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType>
        void init_dense_vector (sycl::queue                                &queue,
-                               oneapi::mkl::sparse::dense_vector_handle_t *p_dvhandle,
+                               oneapi::math::sparse::dense_vector_handle_t *p_dvhandle,
                                std::int64_t                               size,
                                dataType                                   *val);
 
@@ -153,9 +153,9 @@ init_dense_vector (USM version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

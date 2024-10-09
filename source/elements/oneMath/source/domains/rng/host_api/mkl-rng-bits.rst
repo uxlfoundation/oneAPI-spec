@@ -13,7 +13,7 @@ Class is used for generation of underlying engine integer recurrence.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide integer random numbers. Each integer can be treated as a vector of several bits. In a truly random generator, these bits are random, while in pseudorandom generators this randomness can be violated.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide integer random numbers. Each integer can be treated as a vector of several bits. In a truly random generator, these bits are random, while in pseudorandom generators this randomness can be violated.
 
 class bits
 ----------
@@ -22,7 +22,7 @@ class bits
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename UIntType = std::uint32_t>
     class bits {
     public:

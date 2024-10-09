@@ -13,7 +13,7 @@ Entry point to create a dataset from the provided parameters.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::make_dataset function is used to create a dataset from the provided storage of the observations matrix, the number of dimensions and observations, and other parameters.
+The oneapi::math::stats::make_dataset function is used to create a dataset from the provided storage of the observations matrix, the number of dimensions and observations, and other parameters.
 
 :ref:`onemath_stats_make_dataset` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ make_dataset (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<layout ObservationsLayout = layout::row_major, typename Type>
         dataset<sycl::buffer<Type, 1>, ObservationsLayout> make_dataset(
         std::int64_t n_dims,
@@ -77,7 +77,7 @@ make_dataset (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when :math: `n_dims \leq 0`, or :math: `n_observations \leq 0`, or observations.get_count() == 0
 
 .. container:: section
@@ -96,7 +96,7 @@ make_dataset (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<layout ObservationsLayout = layout::row_major, typename Type>
         dataset<Type*, ObservationsLayout> make_dataset(std::nt64_t
         n_dims, std::int64_t n_observations,
@@ -136,7 +136,7 @@ make_dataset (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when :math:`n\_dims \leq 0`, or :math:`n\_observations \leq 0`, or observations == nullptr
 
 .. container:: section

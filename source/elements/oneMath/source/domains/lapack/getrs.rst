@@ -32,11 +32,11 @@ equations:
        :header-rows: 1
     
        * -     \ :math:`AX = B`\     
-         -     if ``trans``\ =\ ``oneapi::mkl::transpose::nontrans``\     
+         -     if ``trans``\ =\ ``oneapi::math::transpose::nontrans``\     
        * -     \ :math:`A^TX = B`\     
-         -     if ``trans``\ =\ ``oneapi::mkl::transpose::trans``\     
+         -     if ``trans``\ =\ ``oneapi::math::transpose::trans``\     
        * -     \ :math:`A^HX = B`\     
-         -     if ``trans``\ =\ ``oneapi::mkl::transpose::conjtrans``\     
+         -     if ``trans``\ =\ ``oneapi::math::transpose::conjtrans``\     
 
 Before calling this routine, you must call
 :ref:`onemath_lapack_getrf`
@@ -51,8 +51,8 @@ getrs (Buffer Version)
       
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      void getrs(cl::sycl::queue &queue, oneapi::mkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    namespace oneapi::math::lapack {
+      void getrs(cl::sycl::queue &queue, oneapi::math::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<std::int64_t,1> &ipiv, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -65,13 +65,13 @@ queue
 trans
    Indicates the form of the equations:
 
-   If ``trans=oneapi::mkl::transpose::nontrans``, then :math:`AX = B` is solved
+   If ``trans=oneapi::math::transpose::nontrans``, then :math:`AX = B` is solved
    for :math:`X`.
 
-   If ``trans=oneapi::mkl::transpose::trans``, then :math:`A^TX = B` is solved
+   If ``trans=oneapi::math::transpose::trans``, then :math:`A^TX = B` is solved
    for :math:`X`.
 
-   If ``trans=oneapi::mkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   If ``trans=oneapi::math::transpose::conjtrans``, then :math:`A^HX = B` is
    solved for :math:`X`.
 
 n
@@ -121,17 +121,17 @@ scratchpad
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -151,8 +151,8 @@ getrs (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event getrs(cl::sycl::queue &queue, oneapi::mkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t *ipiv, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event getrs(cl::sycl::queue &queue, oneapi::math::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t *ipiv, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -165,13 +165,13 @@ queue
 trans
    Indicates the form of the equations:
 
-   If ``trans=oneapi::mkl::transpose::nontrans``, then :math:`AX = B` is solved
+   If ``trans=oneapi::math::transpose::nontrans``, then :math:`AX = B` is solved
    for :math:`X`.
 
-   If ``trans=oneapi::mkl::transpose::trans``, then :math:`A^TX = B` is solved
+   If ``trans=oneapi::math::transpose::trans``, then :math:`A^TX = B` is solved
    for :math:`X`.
 
-   If ``trans=oneapi::mkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   If ``trans=oneapi::math::transpose::conjtrans``, then :math:`A^HX = B` is
    solved for :math:`X`.
 
 n
@@ -224,17 +224,17 @@ scratchpad
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 

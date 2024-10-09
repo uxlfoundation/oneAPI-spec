@@ -53,9 +53,9 @@ imatcopy (Buffer Version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void imatcopy(sycl::queue &queue,
-                     oneapi::mkl::transpose trans,
+                     oneapi::math::transpose trans,
                      std::int64_t m,
                      std::int64_t n,
                      T alpha,
@@ -65,9 +65,9 @@ imatcopy (Buffer Version)
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void imatcopy(sycl::queue &queue,
-                     oneapi::mkl::transpose trans,
+                     oneapi::math::transpose trans,
                      std::int64_t m,
                      std::int64_t n,
                      T alpha,
@@ -149,19 +149,19 @@ imatcopy (Buffer Version)
    implementation-specific exception(s) in case of error conditions
    not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_imatcopy_usm:
@@ -173,9 +173,9 @@ imatcopy (USM Version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event imatcopy(sycl::queue &queue,
-                            oneapi::mkl::transpose trans,
+                            oneapi::math::transpose trans,
                             std::int64_t m,
                             std::int64_t n,
                             value_or_pointer<T> alpha,
@@ -185,9 +185,9 @@ imatcopy (USM Version)
                             const std::vector<sycl::event> &dependencies = {});
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event imatcopy(sycl::queue &queue,
-                            oneapi::mkl::transpose trans,
+                            oneapi::math::transpose trans,
                             std::int64_t m,
                             std::int64_t n,
                             value_or_pointer<T> alpha,
@@ -280,19 +280,19 @@ imatcopy (USM Version)
    implementation-specific exception(s) in case of error conditions
    not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
 
 
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`

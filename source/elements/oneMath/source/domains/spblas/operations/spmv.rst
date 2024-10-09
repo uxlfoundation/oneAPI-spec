@@ -11,7 +11,7 @@ Computes a sparse matrix by dense vector product.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::spmv`` routine computes a sparse matrix by dense
+The ``oneapi::math::sparse::spmv`` routine computes a sparse matrix by dense
 vector product defined as:
 
 .. math::
@@ -28,9 +28,9 @@ vector product defined as:
 
 .. math::
 
-    \text{op}(A) = \begin{cases} A,& \text{oneapi::mkl::transpose::nontrans}\\
-                                 A^\mathsf{T},& \text{oneapi::mkl::transpose::trans}\\
-                                 A^\mathsf{H},& \text{oneapi::mkl::transpose::conjtrans}
+    \text{op}(A) = \begin{cases} A,& \text{oneapi::math::transpose::nontrans}\\
+                                 A^\mathsf{T},& \text{oneapi::math::transpose::trans}\\
+                                 A^\mathsf{H},& \text{oneapi::math::transpose::conjtrans}
                    \end{cases}
 
 .. _onemath_sparse_spmv_descr:
@@ -42,7 +42,7 @@ spmv_descr
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        struct spmv_descr;
        using spmv_descr_t = spmv_descr*;
@@ -68,10 +68,10 @@ init_spmv_descr
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        void init_spmv_descr (sycl::queue                       &queue,
-                             oneapi::mkl::sparse::spmv_descr_t *p_spmv_descr);
+                             oneapi::math::sparse::spmv_descr_t *p_spmv_descr);
 
    }
 
@@ -103,10 +103,10 @@ init_spmv_descr
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_release_spmv_descr:
 
@@ -117,10 +117,10 @@ release_spmv_descr
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        sycl::event release_spmv_descr (sycl::queue                       &queue,
-                                       oneapi::mkl::sparse::spmv_descr_t spmv_descr,
+                                       oneapi::math::sparse::spmv_descr_t spmv_descr,
                                        const std::vector<sycl::event>    &dependencies = {});
 
    }
@@ -155,9 +155,9 @@ release_spmv_descr
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_spmv_alg:
 
@@ -168,7 +168,7 @@ spmv_alg
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        enum class spmv_alg {
            default_alg,
@@ -202,59 +202,59 @@ spmv
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        void spmv_buffer_size(
            sycl::queue                                &queue,
-           oneapi::mkl::transpose                     opA,
+           oneapi::math::transpose                     opA,
            const void*                                alpha,
-           oneapi::mkl::sparse::matrix_view           A_view,
-           oneapi::mkl::sparse::matrix_handle_t       A_handle,
-           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::math::sparse::matrix_view           A_view,
+           oneapi::math::sparse::matrix_handle_t       A_handle,
+           oneapi::math::sparse::dense_vector_handle_t x_handle,
            const void*                                beta,
-           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
-           oneapi::mkl::sparse::spmv_alg              alg,
-           oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
+           oneapi::math::sparse::dense_vector_handle_t y_handle,
+           oneapi::math::sparse::spmv_alg              alg,
+           oneapi::math::sparse::spmv_descr_t          spmv_descr,
            std::size_t                                &temp_buffer_size);
 
        void spmv_optimize(
            sycl::queue                                &queue,
-           oneapi::mkl::transpose                     opA,
+           oneapi::math::transpose                     opA,
            const void*                                alpha,
-           oneapi::mkl::sparse::matrix_view           A_view,
-           oneapi::mkl::sparse::matrix_handle_t       A_handle,
-           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::math::sparse::matrix_view           A_view,
+           oneapi::math::sparse::matrix_handle_t       A_handle,
+           oneapi::math::sparse::dense_vector_handle_t x_handle,
            const void*                                beta,
-           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
-           oneapi::mkl::sparse::spmv_alg              alg,
-           oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
+           oneapi::math::sparse::dense_vector_handle_t y_handle,
+           oneapi::math::sparse::spmv_alg              alg,
+           oneapi::math::sparse::spmv_descr_t          spmv_descr,
            sycl::buffer<std::uint8_t, 1>              workspace);
 
        sycl::event spmv_optimize(
            sycl::queue                                &queue,
-           oneapi::mkl::transpose                     opA,
+           oneapi::math::transpose                     opA,
            const void*                                alpha,
-           oneapi::mkl::sparse::matrix_view           A_view,
-           oneapi::mkl::sparse::matrix_handle_t       A_handle,
-           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::math::sparse::matrix_view           A_view,
+           oneapi::math::sparse::matrix_handle_t       A_handle,
+           oneapi::math::sparse::dense_vector_handle_t x_handle,
            const void*                                beta,
-           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
-           oneapi::mkl::sparse::spmv_alg              alg,
-           oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
+           oneapi::math::sparse::dense_vector_handle_t y_handle,
+           oneapi::math::sparse::spmv_alg              alg,
+           oneapi::math::sparse::spmv_descr_t          spmv_descr,
            void*                                      workspace,
            const std::vector<sycl::event>             &dependencies = {});
 
        sycl::event spmv(
            sycl::queue                                &queue,
-           oneapi::mkl::transpose                     opA,
+           oneapi::math::transpose                     opA,
            const void*                                alpha,
-           oneapi::mkl::sparse::matrix_view           A_view,
-           oneapi::mkl::sparse::matrix_handle_t       A_handle,
-           oneapi::mkl::sparse::dense_vector_handle_t x_handle,
+           oneapi::math::sparse::matrix_view           A_view,
+           oneapi::math::sparse::matrix_handle_t       A_handle,
+           oneapi::math::sparse::dense_vector_handle_t x_handle,
            const void*                                beta,
-           oneapi::mkl::sparse::dense_vector_handle_t y_handle,
-           oneapi::mkl::sparse::spmv_alg              alg,
-           oneapi::mkl::sparse::spmv_descr_t          spmv_descr,
+           oneapi::math::sparse::dense_vector_handle_t y_handle,
+           oneapi::math::sparse::spmv_alg              alg,
+           oneapi::math::sparse::spmv_descr_t          spmv_descr,
            const std::vector<sycl::event>             &dependencies = {});
 
    }
@@ -270,10 +270,10 @@ spmv
    - In the general case, not calling the functions in the order specified above
      is undefined behavior. Not calling ``spmv_buffer_size`` or
      ``spmv_optimize`` at least once with a given descriptor will throw an
-     :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
+     :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
      exception. Calling ``spmv`` with arguments not matching ``spmv_optimize``
      will throw a
-     :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+     :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
      exception, unless stated otherwise.
    - The data of the dense handles ``x_handle`` and ``y_handle`` and the scalars
      ``alpha`` and ``beta`` can be reset before each call to ``spmv``. Changing
@@ -377,11 +377,11 @@ spmv
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::computation_error<onemath_exception_computation_error>`
-   | :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::computation_error<onemath_exception_computation_error>`
+   | :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_spblas`

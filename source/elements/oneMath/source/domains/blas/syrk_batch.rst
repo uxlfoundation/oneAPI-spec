@@ -65,10 +65,10 @@ of matrices in ``a`` and ``c`` buffers is given by the ``batch_size`` parameter.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void syrk_batch(sycl::queue &queue,
-                       oneapi::mkl::uplo upper_lower,
-                       oneapi::mkl::transpose trans,
+                       oneapi::math::uplo upper_lower,
+                       oneapi::math::transpose trans,
                        std::int64_t n,
                        std::int64_t k,
                        T alpha,
@@ -83,10 +83,10 @@ of matrices in ``a`` and ``c`` buffers is given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void syrk_batch(sycl::queue &queue,
-                       oneapi::mkl::uplo upper_lower,
-                       oneapi::mkl::transpose trans,
+                       oneapi::math::uplo upper_lower,
+                       oneapi::math::transpose trans,
                        std::int64_t n,
                        std::int64_t k,
                        T alpha,
@@ -181,19 +181,19 @@ of matrices in ``a`` and ``c`` buffers is given by the ``batch_size`` parameter.
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_syrk_batch_usm:
@@ -252,7 +252,7 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
    
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event syrk_batch(sycl::queue &queue,
                               const uplo *upper_lower,
                               const transpose *trans,
@@ -270,7 +270,7 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event syrk_batch(sycl::queue &queue,
                               const uplo *upper_lower,
                               const transpose *trans,
@@ -295,12 +295,12 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    upper_lower
-      Array of ``group_count`` ``oneapi::mkl::upper_lower``
+      Array of ``group_count`` ``oneapi::math::upper_lower``
       values. ``upper_lower[i]`` specifies whether data in C for every
       matrix in group ``i`` is in upper or lower triangle.
 
    trans
-      Array of ``group_count`` ``oneapi::mkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
+      Array of ``group_count`` ``oneapi::math::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
       the rank-k update in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    n
@@ -383,7 +383,7 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event syrk_batch(sycl::queue &queue,
                               uplo upper_lower,
                               transpose trans,
@@ -402,7 +402,7 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event syrk_batch(sycl::queue &queue,
                               uplo upper_lower,
                               transpose trans,
@@ -510,20 +510,20 @@ in ``a`` and ``c`` are given by the ``batch_size`` parameter.
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`

@@ -34,9 +34,9 @@ factorization of :math:`A`:
    :header-rows: 1
 
    * -  :math:`A = U^TU` for real data, :math:`A = U^HU` for complex data
-     -  if ``upper_lower=oneapi::mkl::uplo::upper``
+     -  if ``upper_lower=oneapi::math::uplo::upper``
    * -  :math:`A = LL^T` for real data, :math:`A = LL^H` for complex data
-     -  if ``upper_lower=oneapi::mkl::uplo::lower``
+     -  if ``upper_lower=oneapi::math::uplo::lower``
 
 where :math:`L` is a lower triangular matrix and :math:`U` is upper
 triangular. The system is solved with multiple right-hand sides
@@ -54,8 +54,8 @@ potrs (Buffer Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      void potrs(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    namespace oneapi::math::lapack {
+      void potrs(cl::sycl::queue &queue, oneapi::math::uplo upper_lower, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -68,9 +68,9 @@ queue
 upper_lower
    Indicates how the input matrix has been factored:
 
-   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}`U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
+   If ``upper_lower = oneapi::math::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}`U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
 
-   If ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
+   If ``upper_lower = oneapi::math::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
 
 n
    The order of matrix :math:`A` (:math:`0 \le n`).\
@@ -110,17 +110,17 @@ scratchpad
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -139,8 +139,8 @@ potrs (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event potrs(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event potrs(cl::sycl::queue &queue, oneapi::math::uplo upper_lower, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -153,9 +153,9 @@ queue
 upper_lower
    Indicates how the input matrix has been factored:
 
-   If ``upper_lower = oneapi::mkl::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
+   If ``upper_lower = oneapi::math::uplo::upper``, the upper triangle   :math:`U` of :math:`A` is stored, where :math:`A` = :math:`U^{T}U`   for real data, :math:`A` = :math:`U^{H}U` for complex data.
 
-   If ``upper_lower = oneapi::mkl::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
+   If ``upper_lower = oneapi::math::uplo::lower``, the lower triangle   :math:`L` of :math:`A` is stored, where :math:`A` = :math:`LL^{T}`   for real data, :math:`A` = :math:`LL^{H}` for complex   data.
 
 n
    The order of matrix :math:`A` (:math:`0 \le n`).\
@@ -198,17 +198,17 @@ scratchpad
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 

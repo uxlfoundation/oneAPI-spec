@@ -33,7 +33,7 @@ To compute the whole :math:`m \times m` matrix :math:`Q`, use:
 
 ::
 
-   oneapi::mkl::lapack::ungbr(queue, generate::q, m, m, n, a, ...)
+   oneapi::math::lapack::ungbr(queue, generate::q, m, m, n, a, ...)
 
 (note that the buffer ``a`` must have at least :math:`m` columns).
 
@@ -41,13 +41,13 @@ To form the :math:`n` leading columns of :math:`Q` if :math:`m > n`, use:
 
 ::
 
-   oneapi::mkl::lapack::ungbr(queue, generate::q, m, n, n, a, ...)
+   oneapi::math::lapack::ungbr(queue, generate::q, m, n, n, a, ...)
 
 To compute the whole :math:`n \times n` matrix :math:`P^{T}`, use:
 
 ::
 
-   oneapi::mkl::lapack::ungbr(queue, generate::p, n, n, m, a, ...)
+   oneapi::math::lapack::ungbr(queue, generate::p, n, n, m, a, ...)
 
 (note that the array ``a`` must have at least :math:`n` rows).
 
@@ -55,7 +55,7 @@ To form the :math:`m` leading rows of :math:`P^{T}` if :math:`m < n`, use:
 
 ::
 
-   oneapi::mkl::lapack::ungbr(queue, generate::p, m, n, m, a, ...)
+   oneapi::math::lapack::ungbr(queue, generate::p, m, n, m, a, ...)
 
 ungbr (Buffer Version)
 ----------------------
@@ -66,8 +66,8 @@ ungbr (Buffer Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      void ungbr(cl::sycl::queue &queue, oneapi::mkl::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    namespace oneapi::math::lapack {
+      void ungbr(cl::sycl::queue &queue, oneapi::math::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -143,17 +143,17 @@ scratchpad
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -170,8 +170,8 @@ ungbr (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event ungbr(cl::sycl::queue &queue, oneapi::mkl::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event ungbr(cl::sycl::queue &queue, oneapi::math::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -250,17 +250,17 @@ scratchpad
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 

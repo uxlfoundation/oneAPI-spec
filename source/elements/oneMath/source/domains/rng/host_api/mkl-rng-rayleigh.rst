@@ -13,7 +13,7 @@ Class is used for generation of Rayleigh distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers Rayleigh distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers Rayleigh distributed with displacement :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`.
 
 The Rayleigh distribution is a special case of the :ref:`onemath_rng_weibull` distribution, where the shape parameter `\alpha` = 2 .
 
@@ -38,7 +38,7 @@ class rayleigh
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = rayleigh_method::by_default>
     class rayleigh {
     public:
@@ -64,12 +64,12 @@ class rayleigh
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::rayleigh_method::by_default
+        typename Method = oneapi::math::rng::rayleigh_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::rayleigh_method::by_default``
-                * ``oneapi::mkl::rng::rayleigh_method::icdf``
-                * ``oneapi::mkl::rng::rayleigh_method::icdf_accurate``
+                * ``oneapi::math::rng::rayleigh_method::by_default``
+                * ``oneapi::math::rng::rayleigh_method::icdf``
+                * ``oneapi::math::rng::rayleigh_method::icdf_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -155,7 +155,7 @@ class rayleigh
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section

@@ -15,11 +15,11 @@ The main purpose of Device routines is to make them callable from your SYCL kern
 
    queue.submit([&](sycl::handler& cgh) {
      cgh.parallel_for(range,[=](...) {
-        oneapi::mkl::rng::device::routine(...); // calling routine from user's kernel code
+        oneapi::math::rng::device::routine(...); // calling routine from user's kernel code
      });
    });
 
-   oneapi::mkl::rng::device::routine(...); // calling routine from host
+   oneapi::math::rng::device::routine(...); // calling routine from host
 
 .. rubric:: Structure
 

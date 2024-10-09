@@ -13,7 +13,7 @@ Class is used for generation of multivariate normally distributed real types ran
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide n random numbers :math:`d`-variate normally distributed, with mean :math:`a` and variance-covariance matrix :math:`C`, where :math:`a \in R^d;` :math:`C` is dxd symmetric positive matrix.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide n random numbers :math:`d`-variate normally distributed, with mean :math:`a` and variance-covariance matrix :math:`C`, where :math:`a \in R^d;` :math:`C` is dxd symmetric positive matrix.
 
 The probability density function is given by:
 
@@ -33,7 +33,7 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = std::int32_t, layout Layout = layout::packed, typename Method = gaussian_mv_method::by_default>
     class gaussian_mv {
     public:
@@ -61,21 +61,21 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
     .. container:: section
 
-        oneapi::mkl::rng::layout Layout
+        oneapi::math::rng::layout Layout
             Matrix layout:
-                * ``oneapi::mkl::rng::layout::full``
-                * ``oneapi::mkl::rng::layout::packed``
-                * ``oneapi::mkl::rng::layout::diagonal``
+                * ``oneapi::math::rng::layout::full``
+                * ``oneapi::math::rng::layout::packed``
+                * ``oneapi::math::rng::layout::diagonal``
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::gaussian_mv_method::by_default
+        typename Method = oneapi::math::rng::gaussian_mv_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::gaussian_mv_method::by_default``
-                * ``oneapi::mkl::rng::gaussian_mv_method::box_muller``
-                * ``oneapi::mkl::rng::gaussian_mv_method::box_muller2``
-                * ``oneapi::mkl::rng::gaussian_mv_method::icdf``
+                * ``oneapi::math::rng::gaussian_mv_method::by_default``
+                * ``oneapi::math::rng::gaussian_mv_method::box_muller``
+                * ``oneapi::math::rng::gaussian_mv_method::box_muller2``
+                * ``oneapi::math::rng::gaussian_mv_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -147,7 +147,7 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`mean.size() \leq 0`, or :math:`matrix.size() \leq 0`
 
 .. container:: section

@@ -13,7 +13,7 @@ Class is used for generation of Bernoulli distributed integer types random numbe
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers Bernoulli distributed with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p; p \leq 1`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers Bernoulli distributed with probability :math:`p` of a single trial success, where :math:`p \in R; 0 \leq p; p \leq 1`.
 
 The probability distribution is given by:
 
@@ -40,7 +40,7 @@ class bernoulli
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = bernoulli_method::by_default>
     class bernoulli {
     public:
@@ -65,11 +65,11 @@ class bernoulli
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::bernoulli_method::by_default
+        typename Method = oneapi::math::rng::bernoulli_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::bernoulli_method::by_default``
-                * ``oneapi::mkl::rng::bernoulli_method::icdf``
+                * ``oneapi::math::rng::bernoulli_method::by_default``
+                * ``oneapi::math::rng::bernoulli_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -153,7 +153,7 @@ class bernoulli
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when `p > 1.0f`, or `p < 0.0f`
 
 .. container:: section

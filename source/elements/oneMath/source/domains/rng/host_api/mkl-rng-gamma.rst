@@ -13,7 +13,7 @@ Class is used for generation of gamma distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>`
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>`
 function to provide random numbers gamma distributed with shape :math:`\alpha`,
 displacement :math:`a`, and scale parameter :math:`\beta`, where
 :math:`a, \alpha, \beta \in R; \alpha > 0; \beta > 0`.
@@ -39,7 +39,7 @@ class gamma
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = gamma_method::by_default>
     class gamma {
     public:
@@ -66,12 +66,12 @@ class gamma
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::gamma_method::by_default
+        typename Method = oneapi::math::rng::gamma_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::gamma_method::by_default``
-                * ``oneapi::mkl::rng::gamma_method::marsaglia``
-                * ``oneapi::mkl::rng::gamma_method::marsaglia_accurate``
+                * ``oneapi::math::rng::gamma_method::by_default``
+                * ``oneapi::math::rng::gamma_method::marsaglia``
+                * ``oneapi::math::rng::gamma_method::marsaglia_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -159,7 +159,7 @@ class gamma
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`alpha \leq` static_cast<RealType>(0.0), or :math:`beta \leq` static_cast<RealType>(0.0)
 
 .. container:: section

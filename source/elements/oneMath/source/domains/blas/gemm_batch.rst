@@ -109,10 +109,10 @@ of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` par
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void gemm_batch(sycl::queue &queue,
-                       oneapi::mkl::transpose transa,
-                       oneapi::mkl::transpose transb,
+                       oneapi::math::transpose transa,
+                       oneapi::math::transpose transb,
                        std::int64_t m,
                        std::int64_t n,
                        std::int64_t k,
@@ -131,10 +131,10 @@ of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` par
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void gemm_batch(sycl::queue &queue,
-                       oneapi::mkl::transpose transa,
-                       oneapi::mkl::transpose transb,
+                       oneapi::math::transpose transa,
+                       oneapi::math::transpose transb,
                        std::int64_t m,
                        std::int64_t n,
                        std::int64_t k,
@@ -265,19 +265,19 @@ of matrices in ``a``, ``b`` and ``c`` buffers is given by the ``batch_size`` par
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_gemm_batch_usm:
@@ -356,10 +356,10 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
    
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              const oneapi::mkl::transpose *transa,
-                              const oneapi::mkl::transpose *transb,
+                              const oneapi::math::transpose *transa,
+                              const oneapi::math::transpose *transb,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const std::int64_t *k,
@@ -376,8 +376,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               const std::vector<sycl::event> &dependencies = {})
 
        sycl::event gemm_batch(sycl::queue &queue,
-                              const sycl::span<oneapi::mkl::transpose> &transa,
-                              const sycl::span<oneapi::mkl::transpose> &transb,
+                              const sycl::span<oneapi::math::transpose> &transa,
+                              const sycl::span<oneapi::math::transpose> &transb,
                               const sycl::span<std::int64_t> &m,
                               const sycl::span<std::int64_t> &n,
                               const sycl::span<std::int64_t> &k,
@@ -395,10 +395,10 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              const oneapi::mkl::transpose *transa,
-                              const oneapi::mkl::transpose *transb,
+                              const oneapi::math::transpose *transa,
+                              const oneapi::math::transpose *transb,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const std::int64_t *k,
@@ -415,8 +415,8 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
                               const std::vector<sycl::event> &dependencies = {})
 
        sycl::event gemm_batch(sycl::queue &queue,
-                              const sycl::span<oneapi::mkl::transpose> &transa,
-                              const sycl::span<oneapi::mkl::transpose> &transb,
+                              const sycl::span<oneapi::math::transpose> &transa,
+                              const sycl::span<oneapi::math::transpose> &transb,
                               const sycl::span<std::int64_t> &m,
                               const sycl::span<std::int64_t> &n,
                               const sycl::span<std::int64_t> &k,
@@ -441,11 +441,11 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    transa
-      Array or span of ``group_count`` ``oneapi::mkl::transpose`` values. ``transa[i]`` specifies the form of op(``A``) used in
+      Array or span of ``group_count`` ``oneapi::math::transpose`` values. ``transa[i]`` specifies the form of op(``A``) used in
       the matrix multiplication in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    transb
-      Array or span of ``group_count`` ``oneapi::mkl::transpose`` values. ``transb[i]`` specifies the form of op(``B``) used in
+      Array or span of ``group_count`` ``oneapi::math::transpose`` values. ``transb[i]`` specifies the form of op(``B``) used in
       the matrix multiplication in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    m
@@ -586,10 +586,10 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              oneapi::mkl::transpose transa,
-                              oneapi::mkl::transpose transb,
+                              oneapi::math::transpose transa,
+                              oneapi::math::transpose transb,
                               std::int64_t m,
                               std::int64_t n,
                               std::int64_t k,
@@ -609,10 +609,10 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event gemm_batch(sycl::queue &queue,
-                              oneapi::mkl::transpose transa,
-                              oneapi::mkl::transpose transb,
+                              oneapi::math::transpose transa,
+                              oneapi::math::transpose transb,
                               std::int64_t m,
                               std::int64_t n,
                               std::int64_t k,
@@ -751,20 +751,20 @@ in ``a``, ``b`` and ``c`` are given by the ``batch_size`` parameter.
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`

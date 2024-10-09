@@ -16,7 +16,7 @@ Dense vector handle
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        struct dense_vector_handle;
        using dense_vector_handle_t = dense_vector_handle*;
@@ -46,7 +46,7 @@ Dense matrix handle
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        struct dense_matrix_handle;
        using dense_matrix_handle_t = dense_matrix_handle*;
@@ -76,7 +76,7 @@ Sparse matrix handle
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        struct matrix_handle;
        using matrix_handle_t = matrix_handle*;

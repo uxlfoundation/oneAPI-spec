@@ -13,7 +13,7 @@ Class is used for generation of uniformly distributed bits in 32/64-bit chunks.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide uniformly distributed bits in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is uniformly distributed. Can be not supported by the specific engine.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide uniformly distributed bits in 32/64-bit chunks. It is designed to ensure each bit in the 32/64-bit chunk is uniformly distributed. Can be not supported by the specific engine.
 
 class uniform_bits
 ------------------
@@ -22,7 +22,7 @@ class uniform_bits
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename UIntType = std::uint32_t>
     class uniform_bits {
     public:

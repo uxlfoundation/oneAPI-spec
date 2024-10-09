@@ -13,7 +13,7 @@ Proceed state of engine by the leapfrog method.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::rng::leapfrog function generates random numbers in an engine with non-unit stride. This feature is particularly useful in distributing random numbers from the original stream across the stride buffers without generating the original random sequence with subsequent manual distribution. see `Figure "Leapfrog Method" <#rng_leapfrog>`__.
+oneapi::math::rng::leapfrog function generates random numbers in an engine with non-unit stride. This feature is particularly useful in distributing random numbers from the original stream across the stride buffers without generating the original random sequence with subsequent manual distribution. see `Figure "Leapfrog Method" <#rng_leapfrog>`__.
 
 .. container:: figtop
     :name: rng_leapfrog
@@ -31,7 +31,7 @@ leapfrog
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename EngineType>
     void leapfrog(EngineType& engine, std::uint64_t idx, std::uint64_t stride);
     }
@@ -61,16 +61,16 @@ leapfrog
 .. code-block:: cpp
 
     // Creating 3 identical engines
-    oneapi::mkl::rng::mcg31m1 engine_1(queue, seed);
+    oneapi::math::rng::mcg31m1 engine_1(queue, seed);
 
-    oneapi::mkl::rng::mcg31m1 engine_2(engine_1);
-    oneapi::mkl::rng::mcg31m1 engine_3(engine_1);
+    oneapi::math::rng::mcg31m1 engine_2(engine_1);
+    oneapi::math::rng::mcg31m1 engine_3(engine_1);
 
 
     // Leapfrogging the states of engines
-    oneapi::mkl::rng::leapfrog(engine_1, 0 , 3);
-    oneapi::mkl::rng::leapfrog(engine_2, 1 , 3);
-    oneapi::mkl::rng::leapfrog(engine_3, 2 , 3);
+    oneapi::math::rng::leapfrog(engine_1, 0 , 3);
+    oneapi::math::rng::leapfrog(engine_2, 1 , 3);
+    oneapi::math::rng::leapfrog(engine_3, 2 , 3);
     // Generating random numbers
 
 

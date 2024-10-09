@@ -23,12 +23,12 @@ get_mode
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
-                oneapi::mkl::vm::mode get_mode(
+                oneapi::math::vm::mode get_mode(
                     sycl::queue& exec_queue);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -47,13 +47,13 @@ get_mode
            - Description
          * - Accuracy Control
            -
-         * - ``oneapi::mkl::vm::mode::ha``
+         * - ``oneapi::math::vm::mode::ha``
            - High accuracy versions of VM functions.
-         * - ``oneapi::mkl::vm::mode::la``
+         * - ``oneapi::math::vm::mode::la``
            - Low accuracy versions of VM functions.
-         * - ``oneapi::mkl::vm::mode::ep``
+         * - ``oneapi::math::vm::mode::ep``
            - Enhanced performance accuracy versions of VM functions.
-         * - ``oneapi::mkl::vm::mode::not_defined``
+         * - ``oneapi::math::vm::mode::not_defined``
            - VM mode not defined. It means that no special provisions
              for accuracy have been made for this queue.
              See :ref:`onemath_vm_setmode` for details.

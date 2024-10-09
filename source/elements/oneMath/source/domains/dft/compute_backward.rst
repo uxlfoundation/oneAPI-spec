@@ -45,7 +45,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type, typename data_type>
       void compute_backward(descriptor_type              &desc,
@@ -57,7 +57,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type typename data_type>
       void compute_backward(descriptor_type              &desc,
@@ -70,7 +70,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
    
       template <typename descriptor_type, typename input_type, typename output_type>
       void compute_backward(descriptor_type              &desc,
@@ -82,7 +82,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type, typename input_type, typename output_type>
       void compute_backward(descriptor_type              &desc,
@@ -216,7 +216,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type, typename data_type>
       sycl::event compute_backward(descriptor_type                &desc,
@@ -228,7 +228,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type, typename data_type>
       sycl::event compute_backward(descriptor_type                &desc,
@@ -241,7 +241,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type, typename input_type, typename output_type>
       sycl::event compute_backward(descriptor_type                &desc,
@@ -254,7 +254,7 @@ progress of the enqueued DFT calculations.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <typename descriptor_type, typename input_type, typename output_type>
       sycl::event compute_backward(descriptor_type                &desc,

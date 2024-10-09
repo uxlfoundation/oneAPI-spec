@@ -54,11 +54,11 @@ gemmt (Buffer Version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void gemmt(sycl::queue &queue,
-                  oneapi::mkl::uplo upper_lower,
-                  oneapi::mkl::transpose transa,
-                  oneapi::mkl::transpose transb,
+                  oneapi::math::uplo upper_lower,
+                  oneapi::math::transpose transa,
+                  oneapi::math::transpose transb,
                   std::int64_t n,
                   std::int64_t k,
                   T alpha,
@@ -72,11 +72,11 @@ gemmt (Buffer Version)
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void gemmt(sycl::queue &queue,
-                  oneapi::mkl::uplo upper_lower,
-                  oneapi::mkl::transpose transa,
-                  oneapi::mkl::transpose transb,
+                  oneapi::math::uplo upper_lower,
+                  oneapi::math::transpose transa,
+                  oneapi::math::transpose transb,
                   std::int64_t n,
                   std::int64_t k,
                   T alpha,
@@ -228,19 +228,19 @@ gemmt (Buffer Version)
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_gemmt_usm:
@@ -252,11 +252,11 @@ gemmt (USM Version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event gemmt(sycl::queue &queue,
-                         oneapi::mkl::uplo upper_lower,
-                         oneapi::mkl::transpose transa,
-                         oneapi::mkl::transpose transb,
+                         oneapi::math::uplo upper_lower,
+                         oneapi::math::transpose transa,
+                         oneapi::math::transpose transb,
                          std::int64_t n,
                          std::int64_t k,
                          value_or_pointer<T> alpha,
@@ -271,11 +271,11 @@ gemmt (USM Version)
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event gemmt(sycl::queue &queue,
-                         oneapi::mkl::uplo upper_lower,
-                         oneapi::mkl::transpose transa,
-                         oneapi::mkl::transpose transb,
+                         oneapi::math::uplo upper_lower,
+                         oneapi::math::transpose transa,
+                         oneapi::math::transpose transb,
                          std::int64_t n,
                          std::int64_t k,
                          value_or_pointer<T> alpha,
@@ -444,20 +444,20 @@ gemmt (USM Version)
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`

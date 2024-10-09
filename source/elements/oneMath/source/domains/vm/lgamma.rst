@@ -28,17 +28,17 @@ lgamma
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event lgamma(
                     sycl::queue& exec_queue,
                     std::int64_t n,
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -48,7 +48,7 @@ lgamma
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event lgamma(
                     sycl::queue& exec_queue,
@@ -56,10 +56,10 @@ lgamma
                     const T *a,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -88,7 +88,7 @@ lgamma
    writes them to the output vector ``y``. Precision overflow thresholds
    for the lgamma function are beyond the scope of this document. If the
    result does not meet the target precision, the function sets the VM
-   status code to ``oneapi::mkl::vm::status::overflow``.
+   status code to ``oneapi::math::vm::status::overflow``.
 
 
    .. container:: tablenoborder
@@ -108,13 +108,13 @@ lgamma
            -  
          * - +0
            - +∞
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - -0
            - +∞
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - negative integer
            - +∞
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - -∞
            - +∞
            -  
@@ -123,7 +123,7 @@ lgamma
            -  
          * - a > overflow
            - +∞
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - QNAN
            - QNAN
            -  
@@ -160,7 +160,7 @@ lgamma
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -193,7 +193,7 @@ lgamma
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

@@ -13,7 +13,7 @@ Entry point to compute central moments up to the 4th order.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::central_moment function is used to compute an array of central moments up to the 4th order (central moments for each dataset's dimension).
+The oneapi::math::stats::central_moment function is used to compute an array of central moments up to the 4th order (central moments for each dataset's dimension).
 
 :ref:`onemath_stats_central_moment` supports the following precisions for data:
 
@@ -34,8 +34,8 @@ central_moment (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
-    template<method Method = oneapi::mkl::stats::method::fast, typename Type,
+    namespace oneapi::math::stats {
+    template<method Method = oneapi::math::stats::method::fast, typename Type,
         layout ObservationsLayout>
         void central_moment(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -51,8 +51,8 @@ central_moment (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -87,7 +87,7 @@ central_moment (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when central_moment_2.get_count() == 0 & central_moment_3.get_count() == 0 & central_moment_4.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_central_moment_usm:
@@ -100,7 +100,7 @@ central_moment (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event central_moment(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data, Type* central_moment_2,
@@ -115,8 +115,8 @@ central_moment (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -155,7 +155,7 @@ central_moment (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when central_moment_2 == nullptr & central_moment_3 == nullptr & central_moment_4 == nullptr, or dataset object is invalid
 
 .. container:: section
