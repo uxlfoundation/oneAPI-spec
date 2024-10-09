@@ -496,7 +496,7 @@ microarchitecture
 middleware
 minibatch
 minmag
-mkl
+onemath
 modf
 moveassignable
 mrg

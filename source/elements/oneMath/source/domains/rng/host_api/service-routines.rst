@@ -31,5 +31,5 @@ Host Service Routines
 .. toctree::
     :hidden:
 
-    mkl-rng-leapfrog
-    mkl-rng-skip_ahead
+    onemath-rng-leapfrog
+    onemath-rng-skip_ahead
