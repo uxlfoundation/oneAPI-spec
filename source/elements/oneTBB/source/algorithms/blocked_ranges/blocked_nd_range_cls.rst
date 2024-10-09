@@ -30,7 +30,7 @@ Therefore, ``blocked_nd_range<int,2>`` is analogous to ``blocked_range2d<int,int
 
                 // Constructors
                 blocked_nd_range(const dim_range_type& dim0 /*, ... - exactly N parameters of the same type*/);
-                blocked_nd_range(const value_type (&size)[N], size_type grainsize = 1);
+                blocked_nd_range(const value_type (&dim_size)[N], size_type grainsize = 1);
                 blocked_nd_range(blocked_nd_range& r, split); 
                 blocked_nd_range(blocked_nd_range& r, proportional_split proportion); 
 
@@ -91,15 +91,15 @@ The constructor must take exactly N arguments, which types match ``const dim_ran
     ``template <typename... Dims> blocked_nd_range( const Dims&... dims )``, even if the latter
     is constrained by the size and type requirements for the parameter pack ``Dims``.
     That is because the types in ``Dims`` could not be automatically deduced from arguments specified as
-    braced initialization lists, and so expressions like ``blocked_nd_range<int, 4>{{0,1},{0,2},{0,3},{0,4}}``
+    braced initialization lists, and so expressions like ``blocked_nd_range<int,4>{{0,1},{0,2},{0,3},{0,4}}``
     would fail to compile.
 
 .. code:: cpp
 
-    blocked_nd_range( const value_type (&size)[N], size_type grainsize = 1 );
+    blocked_nd_range( const value_type (&dim_size)[N], size_type grainsize = 1 );
 
 **Effects:**  Constructs a ``blocked_nd_range`` representing an N-dimensional space of values.
-The space is the half-open Cartesian product of ranges ``[0, size[0]) x [0, size[1]) x ...``
+The space is the half-open Cartesian product of ranges ``[0, dim_size[0]) x [0, dim_size[1]) x ...``
 each having the same grain size.
 
 **Example:**  The ``blocked_nd_range<int,4> r( {5,6,7,8}, 4 );`` statement constructs a four-dimensional
