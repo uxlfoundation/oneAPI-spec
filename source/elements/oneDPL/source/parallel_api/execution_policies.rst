@@ -197,7 +197,7 @@ function overload resolution:
       struct is_execution_policy { /*see below*/ };
 
       template <class T>
-      constexpr bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
+      constexpr inline bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
 
       namespace execution {
 
@@ -205,7 +205,7 @@ function overload resolution:
         struct is_execution_policy { /*see below*/ };
 
         template <class T>
-        constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
+        constexpr inline bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
 
       }
     }
@@ -219,7 +219,7 @@ are defined.
    The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
    while ``oneapi::dpl::is_execution_policy`` has been added later to better align with the C++ standard.
    
-   For writing new code, use of the type trait utilities in ``namespace oneapi::dpl`` is strongly recommended. Those
+   For new code, use of the type trait utilities in ``namespace oneapi::dpl`` is highly recommended. Those
    in ``namespace oneapi::dpl::execution`` are provided for backward compatibility and may be deprecated in the future.
 
 ``is_execution_policy<T>`` must have the characteristics of ``std::true_type`` if ``T`` is one of the above specified or
