@@ -89,7 +89,7 @@ API Programming Example
 
 API programming requires the programmer to specify the target device and the
 memory communication strategy.  In the following example, we call the
-oneMKL matrix multiply routine, GEMM.  We are writing in SYCL and
+oneMath matrix multiply routine, GEMM.  We are writing in SYCL and
 omitting irrelevant details.
 
 We create a queue initialized with a *gpu_selector* to specify that we
