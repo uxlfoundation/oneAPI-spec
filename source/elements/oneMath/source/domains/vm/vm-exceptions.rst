@@ -16,7 +16,7 @@ Exceptions
     +----------------------------------+------------------------------------+
     |  exception                       |   when thrown                      |
     +----------------------------------+------------------------------------+
-    | oneapi::mkl::invalid_argument    | buffer API:                        |
+    | oneapi::math::invalid_argument    | buffer API:                        |
     |                                  |  n < 0;                            |
     |                                  |                                    |
     |                                  |  y.get_count() < n;                |
@@ -29,13 +29,13 @@ Exceptions
     |                                  |                                    |
     |                                  |  any pointer argument is nullptr   |
     +----------------------------------+------------------------------------+
-    | oneapi::mkl::host_bad_alloc      | USM API:                           |
+    | oneapi::math::host_bad_alloc      | USM API:                           |
     |                                  |  when internal copying to and      |
     |                                  |  from  host memory is used         |
     |                                  |  and corresponding allocation      |
     |                                  |  fails                             |
     +----------------------------------+------------------------------------+
-    | oneapi::mkl::device_bad_alloc    | USM API:                           |
+    | oneapi::math::device_bad_alloc    | USM API:                           |
     |                                  |  when internal copying to and      |
     |                                  |  from device memory is used        |
     |                                  |  and corresponding allocation      |

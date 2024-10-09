@@ -66,9 +66,9 @@ parameter.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void gemv_batch(sycl::queue &queue,
-                       oneapi::mkl::transpose trans,
+                       oneapi::math::transpose trans,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -86,9 +86,9 @@ parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void gemv_batch(sycl::queue &queue,
-                       oneapi::mkl::transpose trans,
+                       oneapi::math::transpose trans,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -174,19 +174,19 @@ parameter.
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_gemv_batch_usm:
@@ -247,9 +247,9 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
    
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              const oneapi::mkl::transpose *trans,
+                              const oneapi::math::transpose *trans,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -266,9 +266,9 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              const oneapi::mkl::transpose *trans,
+                              const oneapi::math::transpose *trans,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -292,7 +292,7 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
       The queue where the routine should be executed.
 
    trans
-      Array of ``group_count`` ``oneapi::mkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
+      Array of ``group_count`` ``oneapi::math::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used in
       the matrix-vector product in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    m
@@ -375,9 +375,9 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              oneapi::mkl::transpose trans,
+                              oneapi::math::transpose trans,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,
@@ -396,9 +396,9 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event gemv_batch(sycl::queue &queue,
-                              oneapi::mkl::transpose trans,
+                              oneapi::math::transpose trans,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,
@@ -492,20 +492,20 @@ total number of vectors in ``x`` and ``y`` and matrices in ``A`` are given by th
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`

@@ -41,7 +41,7 @@ class mrg32k3a
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<std::int32_t VecSize = 1>
      class mrg32k3a {
      public:

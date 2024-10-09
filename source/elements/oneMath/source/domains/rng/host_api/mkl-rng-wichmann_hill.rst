@@ -41,7 +41,7 @@ class wichmann_hill
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     class wichmann_hill {
     public:
         static constexpr std::uint32_t default_seed = 1;
@@ -107,7 +107,7 @@ class wichmann_hill
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. Assume :math:`x_0=seed \ mod \ m_1, y_0 = z_0 = w_0 = 1`. If :math:`x_0 = 0`, assume :math:`x_0 = 1`.
@@ -123,7 +123,7 @@ class wichmann_hill
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state. Assume :math:`x_0=seed \ mod \ m_1, y_0 = z_0 = w_0 = 1`. If :math:`x_0 = 0`, assume :math:`x_0 = 1`.
@@ -135,7 +135,7 @@ class wichmann_hill
 
         .. rubric:: Throws
 
-        oneapi::mkl::invalid_argument
+        oneapi::math::invalid_argument
             Exception is thrown when :math:`idx > 273`
 
     .. _`wichmann_hill(sycl::queue& queue, std::initializer_list<std::uint32_t> seed)`:
@@ -149,7 +149,7 @@ class wichmann_hill
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume:
@@ -177,7 +177,7 @@ class wichmann_hill
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume:

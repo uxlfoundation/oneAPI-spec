@@ -36,9 +36,9 @@ trtrs_scratchpad_size
          
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t trtrs_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, oneapi::mkl::diag diag, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t ldb) 
+      std::int64_t trtrs_scratchpad_size(cl::sycl::queue &queue, oneapi::math::uplo upper_lower, oneapi::math::transpose trans, oneapi::math::diag diag, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t ldb) 
     }
 
 .. container:: section
@@ -58,17 +58,17 @@ upper_lower
 trans
    Indicates the form of the equations:
 
-   If ``trans=oneapi::mkl::transpose::nontrans``, then :math:`AX = B` is solved
+   If ``trans=oneapi::math::transpose::nontrans``, then :math:`AX = B` is solved
    for :math:`X`.
 
-   If ``trans=oneapi::mkl::transpose::trans``, then :math:`A^TX = B` is solved
+   If ``trans=oneapi::math::transpose::trans``, then :math:`A^TX = B` is solved
    for :math:`X`.
 
-   If ``trans=oneapi::mkl::transpose::conjtrans``, then :math:`A^HX = B` is
+   If ``trans=oneapi::math::transpose::conjtrans``, then :math:`A^HX = B` is
    solved for :math:`X`.
 
 diag
-   If diag = ``oneapi::mkl::diag::nonunit``, then :math:`A` is not a    unit triangular matrix.
+   If diag = ``oneapi::math::diag::nonunit``, then :math:`A` is not a    unit triangular matrix.
 
    If unit_diag = ``diag::unit``,   then :math:`A` is unit triangular: diagonal elements of :math:`A` are assumed   to be 1 and not referenced in the array ``a``.
 
@@ -90,11 +90,11 @@ ldb
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
    Exception is thrown in case of incorrect supplied argument value.
    Position of wrong argument can be determined by `info()` method of exception object.

@@ -24,13 +24,13 @@ set_status
 
       .. code-block:: cpp
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
-                oneapi::mkl::vm::status set_status(
+                oneapi::math::vm::status set_status(
                     sycl::queue& exec_queue,
-                    oneapi::mkl::vm::status new_status);
+                    oneapi::math::vm::status new_status);
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
       .. rubric:: Description
@@ -54,23 +54,23 @@ set_status
            - Description
          * - Successful Execution
            -
-         * - ``oneapi::mkl::vm::status::success``
+         * - ``oneapi::math::vm::status::success``
            - VM function execution completed successfully
-         * - ``oneapi::mkl::vm::status::not_defined``
+         * - ``oneapi::math::vm::status::not_defined``
            - VM status not defined
          * - Warnings
            -
-         * - ``oneapi::mkl::vm::status::accuracy_warning``
+         * - ``oneapi::math::vm::status::accuracy_warning``
            - VM function execution completed successfully in a different accuracy mode
          * - Computational status codes
            -
-         * - ``oneapi::mkl::vm::status::errdom``
+         * - ``oneapi::math::vm::status::errdom``
            - Values are out of a range of definition producing invalid (QNaN) result
-         * - ``oneapi::mkl::vm::status::sing``
+         * - ``oneapi::math::vm::status::sing``
            - Values cause divide-by-zero (singularity) computational errors and produce and invalid (QNaN or Inf) result
-         * - ``oneapi::mkl::vm::status::overflow``
+         * - ``oneapi::math::vm::status::overflow``
            - An overflow happened during the calculation process
-         * - ``oneapi::mkl::vm::status::underflow``
+         * - ``oneapi::math::vm::status::underflow``
            - An underflow happened during the calculation process
 
 

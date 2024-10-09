@@ -11,7 +11,7 @@ Initializes a ``matrix_handle_t`` object with the provided COO data.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::init_coo_matrix`` function initializes the
+The ``oneapi::math::sparse::init_coo_matrix`` function initializes the
 ``matrix_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
@@ -21,7 +21,7 @@ with ``set_coo_matrix_data``.
 
 In the case of USM, the object does not take ownership of the data.
 
-The ``oneapi::mkl::sparse::init_coo_matrix`` function defined below takes in the
+The ``oneapi::math::sparse::init_coo_matrix`` function defined below takes in the
 number of non-zero elements in the sparse matrix as an argument. However, in
 certain math operations where the output is a sparse matrix, e.g., sparse matrix
 addition (sparse matrix + sparse matrix = sparse matrix), and multiplication of
@@ -42,11 +42,11 @@ init_coo_matrix (Buffer version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType, typename indexType>
        void init_coo_matrix (sycl::queue                          &queue,
-                             oneapi::mkl::sparse::matrix_handle_t *p_smhandle,
+                             oneapi::math::sparse::matrix_handle_t *p_smhandle,
                              std::int64_t                         num_rows,
                              std::int64_t                         num_cols,
                              std::int64_t                         nnz,
@@ -134,10 +134,10 @@ init_coo_matrix (Buffer version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_init_coo_matrix_usm:
 
@@ -148,11 +148,11 @@ init_coo_matrix (USM version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType, typename indexType>
        void init_coo_matrix (sycl::queue                          &queue,
-                             oneapi::mkl::sparse::matrix_handle_t *p_smhandle,
+                             oneapi::math::sparse::matrix_handle_t *p_smhandle,
                              std::int64_t                         num_rows,
                              std::int64_t                         num_cols,
                              std::int64_t                         nnz,
@@ -243,9 +243,9 @@ init_coo_matrix (USM version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

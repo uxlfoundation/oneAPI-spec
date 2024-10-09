@@ -13,7 +13,7 @@ Class is used for generation of lognormally distributed real types random number
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers lognormally distributed with mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers lognormally distributed with mean :math:`(m, a)` and standard deviation :math:`(s, \sigma)` of subject normal distribution, displacement :math:`(displ, b)`, and scalefactor :math:`(scale, \beta)`, where :math:`a, \sigma, b, \beta \in R; \sigma > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -36,7 +36,7 @@ class lognormal
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = lognormal_method::by_default>
     class lognormal {
     public:
@@ -64,14 +64,14 @@ class lognormal
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::lognormal_method::by_default
+        typename Method = oneapi::math::rng::lognormal_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::lognormal_method::by_default``
-                * ``oneapi::mkl::rng::lognormal_method::box_muller2``
-                * ``oneapi::mkl::rng::lognormal_method::icdf``
-                * ``oneapi::mkl::rng::lognormal_method::box_muller2_accurate``
-                * ``oneapi::mkl::rng::lognormal_method::icdf_accurate``
+                * ``oneapi::math::rng::lognormal_method::by_default``
+                * ``oneapi::math::rng::lognormal_method::box_muller2``
+                * ``oneapi::math::rng::lognormal_method::icdf``
+                * ``oneapi::math::rng::lognormal_method::box_muller2_accurate``
+                * ``oneapi::math::rng::lognormal_method::icdf_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -161,7 +161,7 @@ class lognormal
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`s \leq` static_cast<RealType>(0.0), or :math:`scale \leq` static_cast<RealType>(0.0)
 
 .. container:: section

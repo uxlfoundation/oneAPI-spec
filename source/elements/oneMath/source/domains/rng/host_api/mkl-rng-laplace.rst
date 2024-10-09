@@ -13,7 +13,7 @@ Class is used for generation of Laplace distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers Laplace distributed with mean value (or average) :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`. The scalefactor value determines the standard deviation as :math:`\sigma = \beta\sqrt{2}`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers Laplace distributed with mean value (or average) :math:`a`, and scalefactor :math:`(b, \beta)`, where :math:`a, \beta \in R; \beta > 0`. The scalefactor value determines the standard deviation as :math:`\sigma = \beta\sqrt{2}`.
 
 The probability distribution is given by:
 
@@ -60,11 +60,11 @@ class laplace
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::laplace_method::by_default
+        typename Method = oneapi::math::rng::laplace_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::laplace_method::by_default``
-                * ``oneapi::mkl::rng::laplace_method::icdf``
+                * ``oneapi::math::rng::laplace_method::by_default``
+                * ``oneapi::math::rng::laplace_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -150,7 +150,7 @@ class laplace
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`b \leq` static_cast<RealType>(0.0)
 
 .. container:: section

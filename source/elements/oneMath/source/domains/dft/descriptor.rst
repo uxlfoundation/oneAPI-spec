@@ -45,7 +45,7 @@ desired calculations to the ``sycl::queue`` object it was given when committing 
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       class descriptor {
@@ -180,7 +180,7 @@ without copying them.
 
 .. code-block:: cpp
    
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       descriptor<prec,dom>::descriptor(std::int64_t length);
@@ -192,7 +192,7 @@ without copying them.
 
 .. code-block:: cpp
    
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       descriptor<prec,dom>::descriptor(std::vector<std::int64_t> lengths);
@@ -203,7 +203,7 @@ without copying them.
 
 .. code-block:: cpp
    
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       descriptor<prec,dom>::descriptor(const descriptor<prec,dom>& other);
@@ -214,7 +214,7 @@ without copying them.
 
 .. code-block:: cpp
    
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       descriptor<prec,dom>::descriptor(descriptor<prec,dom>&& other);
@@ -271,7 +271,7 @@ The copy assignment operator results in a deep copy.
 
 .. code-block:: cpp
    
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       descriptor<prec,dom>& descriptor<prec,dom>::operator=(const descriptor<prec,dom>& other);
@@ -282,7 +282,7 @@ The copy assignment operator results in a deep copy.
 
 .. code-block:: cpp
    
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       descriptor<prec,dom>& descriptor<prec,dom>::operator=(descriptor<prec,dom>&& other);
@@ -338,7 +338,7 @@ to be used for a specific value of ``param``.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_value(config_param param, std::int64_t value);
@@ -519,7 +519,7 @@ to be used for a specific value of ``param``.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, domain* value_ptr) const;
@@ -736,7 +736,7 @@ be used in compute calls. However, the aforementioned restrictions will still ap
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_workspace(sycl::buffer<real_scalar_t, 1> &workspaceBuf);
@@ -746,7 +746,7 @@ be used in compute calls. However, the aforementioned restrictions will still ap
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_workspace(real_scalar_t* workspaceUSM);
@@ -816,7 +816,7 @@ called again.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::commit(sycl::queue& queue);

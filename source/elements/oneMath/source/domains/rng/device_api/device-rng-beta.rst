@@ -39,7 +39,7 @@ class beta
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename RealType, typename Method>
      class beta {
      public:
@@ -166,7 +166,7 @@ class beta
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`p \leq 0`, or :math:`q \leq 0`, or :math:`\beta \leq 0`
 
 .. container:: section

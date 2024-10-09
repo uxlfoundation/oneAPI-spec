@@ -34,7 +34,7 @@ class mcg31m1
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     class mcg31m1 {
     public:
         static constexpr std::uint32_t default_seed = 1;
@@ -88,7 +88,7 @@ class mcg31m1
         .. rubric:: Input Parameters
 
         queue
-            Valid sycl::queue object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid sycl::queue object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
         seed
             The initial conditions of the generator state, assume :math:`x_0 = seed \ mod \ 0x7FFFFFFF`, if :math:`x_0 = 0`, assume :math:`x_0 = 1`.

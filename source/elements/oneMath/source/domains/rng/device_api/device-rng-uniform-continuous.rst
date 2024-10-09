@@ -48,7 +48,7 @@ class uniform
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename Type = float, typename Method = uniform_method::by_default>
      class uniform {
      public:
@@ -81,9 +81,9 @@ class uniform
         typename Method
             Generation method. The specific values are as follows:
 
-                * ``oneapi::mkl::rng::device::uniform_method::by_default``
-                * ``oneapi::mkl::rng::device::uniform_method::standard``
-                * ``oneapi::mkl::rng::device::uniform_method::accurate``
+                * ``oneapi::math::rng::device::uniform_method::by_default``
+                * ``oneapi::math::rng::device::uniform_method::standard``
+                * ``oneapi::math::rng::device::uniform_method::accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_device_rng_distributions_method>`
 
@@ -170,7 +170,7 @@ class uniform
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`a \ge b`
 
 .. container:: section

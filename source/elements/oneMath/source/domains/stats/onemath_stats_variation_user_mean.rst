@@ -13,7 +13,7 @@ Entry point to compute variation with the provided mean values.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::variation function is used to compute an array of variation (variation for each dataset's dimension) with the provided mean values.
+The oneapi::math::stats::variation function is used to compute an array of variation (variation for each dataset's dimension) with the provided mean values.
 
 :ref:`onemath_stats_variation_user_mean` supports the following precisions for data:
 
@@ -27,14 +27,14 @@ The oneapi::mkl::stats::variation function is used to compute an array of variat
 
 .. _onemath_stats_variation_user_mean_buffer:
 
-oneapi::mkl::stats::variation (buffer version)
+oneapi::math::stats::variation (buffer version)
 ----------------------------------------------
 
 .. rubric:: Syntax
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         void variation(sycl::queue& queue, sycl::buffer<Type, 1> mean,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -48,7 +48,7 @@ oneapi::mkl::stats::variation (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -81,7 +81,7 @@ oneapi::mkl::stats::variation (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when variation.get_count() == 0, or mean.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_variation_user_mean_usm:
@@ -93,7 +93,7 @@ variation with provided mean (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event variation(sycl::queue& queue,
         Type* mean,
@@ -109,7 +109,7 @@ variation with provided mean (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -144,7 +144,7 @@ variation with provided mean (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when variation == nullptr, or mean == nullptr, or dataset object is invalid
 
 .. container:: section

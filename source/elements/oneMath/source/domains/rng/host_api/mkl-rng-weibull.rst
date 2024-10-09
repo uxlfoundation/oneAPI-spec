@@ -13,7 +13,7 @@ Class is used for generation of Weibull distributed real types random numbers.
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers Weibull distributed with displacement :math:`a`, scalefactor :math:`\beta`, and shape :math:`\alpha`, where :math:`a, \beta, \alpha \in R; \alpha > 0; \beta > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers Weibull distributed with displacement :math:`a`, scalefactor :math:`\beta`, and shape :math:`\alpha`, where :math:`a, \beta, \alpha \in R; \alpha > 0; \beta > 0`.
 
 The probability distribution is given by:
 
@@ -36,7 +36,7 @@ class weibull
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = weibull_method::by_default>
     class weibull {
     public:
@@ -63,12 +63,12 @@ class weibull
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::weibull_method::by_default
+        typename Method = oneapi::math::rng::weibull_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::weibull_method::by_default``
-                * ``oneapi::mkl::rng::weibull_method::icdf``
-                * ``oneapi::mkl::rng::weibull_method::icdf_accurate``
+                * ``oneapi::math::rng::weibull_method::by_default``
+                * ``oneapi::math::rng::weibull_method::icdf``
+                * ``oneapi::math::rng::weibull_method::icdf_accurate``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -156,7 +156,7 @@ class weibull
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`alpha \leq` static_cast<RealType>(0.0), or :math:`beta \leq` static_cast<RealType>(0.0)
 
 .. container:: section

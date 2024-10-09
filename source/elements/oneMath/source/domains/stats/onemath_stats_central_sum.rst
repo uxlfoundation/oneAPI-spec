@@ -13,7 +13,7 @@ Entry point to compute central sums up to the 4th order.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::central_sum function is used to compute an array of central sums up to the 4th order (central sums for each dataset's dimension).
+The oneapi::math::stats::central_sum function is used to compute an array of central sums up to the 4th order (central sums for each dataset's dimension).
 
 :ref:`onemath_stats_central_sum` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ central_sum (Buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         void central_sum(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -50,8 +50,8 @@ central_sum (Buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -86,7 +86,7 @@ central_sum (Buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when central_sum_2.get_count() == 0 & central_sum_3.get_count() == 0 & central_sum_4.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_central_sum_usm:
@@ -98,7 +98,7 @@ central_sum (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event central_sum(
         sycl::queue& queue,
@@ -116,8 +116,8 @@ central_sum (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -155,7 +155,7 @@ central_sum (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when central_sum_2 == nullptr & central_sum_3 == nullptr & central_sum_4 == nullptr, or dataset object is invalid
 
 .. container:: section

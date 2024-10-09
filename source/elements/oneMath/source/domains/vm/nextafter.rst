@@ -30,7 +30,7 @@ nextafter
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event nextafter(
                     sycl::queue& exec_queue,
@@ -38,10 +38,10 @@ nextafter
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& b,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -51,7 +51,7 @@ nextafter
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event nextafter(
                     sycl::queue& exec_queue,
@@ -60,10 +60,10 @@ nextafter
                     const T *b,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -102,9 +102,9 @@ nextafter
          * - Arguments/Results
            - Status code
          * - Input vector argument element is finite and the corresponding result vector element value is infinite
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - Result vector element value is subnormal or zero, and different from the corresponding input vector argument element
-           - ``oneapi::mkl::vm::status::underflow``
+           - ``oneapi::math::vm::status::underflow``
 
 
 
@@ -143,7 +143,7 @@ nextafter
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -180,7 +180,7 @@ nextafter
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

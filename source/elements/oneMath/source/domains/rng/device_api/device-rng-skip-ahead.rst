@@ -25,7 +25,7 @@ skip_ahead
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename Engine>
      void skip_ahead (Engine& engine, std::uint64_t num_to_skip)
    }
@@ -52,7 +52,7 @@ skip_ahead
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename Engine>
      void skip_ahead (Engine& engine, std::initializer_list<std::uint64_t> num_to_skip)
    }

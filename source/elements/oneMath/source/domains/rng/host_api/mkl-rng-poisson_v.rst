@@ -13,7 +13,7 @@ Class is used for generation of Poisson distributed integer types random numbers
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide
 n random numbers Poisson distributed, with distribution parameter :math:`\lambda_i`, where :math:`\lambda_i \in R; \lambda_i > 0; i = 1, ... , n`.
 
 The probability distribution is given by:
@@ -40,7 +40,7 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = poisson_v_method::by_default>
     class poisson_v {
     public:
@@ -63,11 +63,11 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::poisson_v_method::by_default
+        typename Method = oneapi::math::rng::poisson_v_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::poisson_v_method::by_default``
-                * ``oneapi::mkl::rng::poisson_v_method::gaussian_icdf_based``
+                * ``oneapi::math::rng::poisson_v_method::by_default``
+                * ``oneapi::math::rng::poisson_v_method::gaussian_icdf_based``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -135,7 +135,7 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`lambda.size() \leq 1`
 
 .. container:: section

@@ -28,7 +28,7 @@ linearfrac
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event linearfrac(
                     sycl::queue& exec_queue,
@@ -40,10 +40,10 @@ linearfrac
                     T scaleb,
                     T shiftb,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -53,7 +53,7 @@ linearfrac
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event linearfrac(
                     sycl::queue& exec_queue,
@@ -66,10 +66,10 @@ linearfrac
                     T shiftb,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -105,7 +105,7 @@ linearfrac
    The linearfrac function is implemented in the EP accuracy mode only,
    therefore no special values are defined for this function. If used in
    HA or LA mode, linearfrac sets the VM status code to
-   ``oneapi::mkl::vm::status::accuracy_warning``. Correctness is guaranteed within the
+   ``oneapi::math::vm::status::accuracy_warning``. Correctness is guaranteed within the
    threshold limitations defined for each input parameter (see the table
    below); otherwise, the behavior is unspecified.
 
@@ -204,7 +204,7 @@ linearfrac
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -257,7 +257,7 @@ linearfrac
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

@@ -24,7 +24,7 @@ class nondeterministic
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     class nondeterministic {
     public:
         nondeterministic(sycl::queue queue);
@@ -76,7 +76,7 @@ class nondeterministic
         .. rubric:: Input Parameters
 
         queue
-            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
+            Valid ``sycl::queue`` object, calls of the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` routine submits kernels in this queue to obtain random numbers from a given engine.
 
 
     .. _`nondeterministic(const nondeterministic& other)`:

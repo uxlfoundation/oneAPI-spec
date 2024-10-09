@@ -27,14 +27,14 @@ Scalar Arguments in BLAS
           float *alpha_ptr = sycl::malloc_shared<float>(1, queue);
           float *beta_ptr = sycl::malloc_shared<float>(1, queue);
           // fill alpha_ptr and beta_ptr with desired values
-          oneapi::mkl::blas::column_major::gemv(queue, trans, m, n, alpha_ptr, lda, x, incx, beta_ptr,
+          oneapi::math::blas::column_major::gemv(queue, trans, m, n, alpha_ptr, lda, x, incx, beta_ptr,
                                                 y, incy).wait();
 
       or with literal values:
 
         .. code-block::
 
-          oneapi::mkl::blas::column_major::gemv(queue, trans, m, n, 2, lda, x, incx, 2.7,
+          oneapi::math::blas::column_major::gemv(queue, trans, m, n, 2, lda, x, incx, 2.7,
                                                 y, incy).wait();
 
       Users can even mix scalar and pointer parameters in a single call:
@@ -42,7 +42,7 @@ Scalar Arguments in BLAS
         .. code-block::
 
           float *alpha_ptr = sycl::malloc_shared<float>(1, queue);
-          oneapi::mkl::blas::column_major::gemv(queue, trans, m, n, alpha_ptr, lda, x, incx, 2.7,
+          oneapi::math::blas::column_major::gemv(queue, trans, m, n, alpha_ptr, lda, x, incx, 2.7,
                                              y, incy).wait();
 
       Pointers provided for scalar parameters may be SYCL-managed pointers

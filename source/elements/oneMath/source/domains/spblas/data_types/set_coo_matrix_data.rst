@@ -11,7 +11,7 @@ Reset the data of a ``matrix_handle_t`` object with the provided COO data.
 
 .. rubric:: Description and Assumptions
 
-The ``oneapi::mkl::sparse::set_coo_matrix_data`` function sets new data to the
+The ``oneapi::math::sparse::set_coo_matrix_data`` function sets new data to the
 ``matrix_handle_t`` object with the provided data.
 
 In the case of buffers, the reference count of the provided buffer is
@@ -32,11 +32,11 @@ set_coo_matrix_data (Buffer version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType, typename indexType>
        void set_coo_matrix_data (sycl::queue                          &queue,
-                                 oneapi::mkl::sparse::matrix_handle_t smhandle,
+                                 oneapi::math::sparse::matrix_handle_t smhandle,
                                  std::int64_t                         num_rows,
                                  std::int64_t                         num_cols,
                                  std::int64_t                         nnz,
@@ -116,10 +116,10 @@ set_coo_matrix_data (Buffer version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 .. _onemath_sparse_set_coo_matrix_data_usm:
 
@@ -130,11 +130,11 @@ set_coo_matrix_data (USM version)
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::sparse {
+   namespace oneapi::math::sparse {
 
        template <typename dataType, typename indexType>
        void set_coo_matrix_data (sycl::queue                          &queue,
-                                 oneapi::mkl::sparse::matrix_handle_t smhandle,
+                                 oneapi::math::sparse::matrix_handle_t smhandle,
                                  std::int64_t                         num_rows,
                                  std::int64_t                         num_cols,
                                  std::int64_t                         nnz,
@@ -217,9 +217,9 @@ set_coo_matrix_data (USM version)
    implementation-specific exception(s) in case of error conditions not covered
    here.
 
-   | :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
-   | :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
-   | :ref:`oneapi::mkl::uninitialized<onemath_exception_uninitialized>`
-   | :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   | :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
+   | :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
+   | :ref:`oneapi::math::uninitialized<onemath_exception_uninitialized>`
+   | :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
 **Parent topic:** :ref:`onemath_sparse_data_handles`

@@ -49,7 +49,7 @@ class lognormal
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename RealType, typename Method>
      class lognormal {
      public:
@@ -80,11 +80,11 @@ class lognormal
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::lognormal_method::by_default
+        typename Method = oneapi::math::rng::lognormal_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::device::lognormal_method::by_default``
-                * ``oneapi::mkl::rng::device::lognormal_method::box_muller2``
+                * ``oneapi::math::rng::device::lognormal_method::by_default``
+                * ``oneapi::math::rng::device::lognormal_method::box_muller2``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_device_rng_distributions_method>`.
 
@@ -176,7 +176,7 @@ class lognormal
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`s \leq 0`, or :math:`scale \leq 0`
 
 .. container:: section

@@ -42,7 +42,7 @@ The strided API operation is defined as:
 
    for i = 0 … batch_size – 1
        A and B are matrices at offset i * stridea and i * strideb in a and b.
-       if (left_right == oneapi::mkl::side::left) then
+       if (left_right == oneapi::math::side::left) then
            compute X such that op(A) * X = alpha * B
        else
            compute X such that X * op(A) = alpha * B
@@ -75,12 +75,12 @@ of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void trsm_batch(sycl::queue &queue,
-                       oneapi::mkl::side left_right,
-                       oneapi::mkl::uplo upper_lower,
-                       oneapi::mkl::transpose trans,
-                       oneapi::mkl::diag unit_diag,
+                       oneapi::math::side left_right,
+                       oneapi::math::uplo upper_lower,
+                       oneapi::math::transpose trans,
+                       oneapi::math::diag unit_diag,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -94,12 +94,12 @@ of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void trsm_batch(sycl::queue &queue,
-                       oneapi::mkl::side left_right,
-                       oneapi::mkl::uplo upper_lower,
-                       oneapi::mkl::transpose trans,
-                       oneapi::mkl::diag unit_diag,
+                       oneapi::math::side left_right,
+                       oneapi::math::uplo upper_lower,
+                       oneapi::math::transpose trans,
+                       oneapi::math::diag unit_diag,
                        std::int64_t m,
                        std::int64_t n,
                        T alpha,
@@ -190,19 +190,19 @@ of matrices in ``a`` and ``b`` buffers are given by the ``batch_size`` parameter
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
 trsm_batch (USM Version)
 ---------------------------
@@ -218,7 +218,7 @@ The group API operation is defined as:
    for i = 0 … group_count – 1
        for j = 0 … group_size – 1
            A and B are matrices in a[idx] and b[idx]
-           if (left_right == oneapi::mkl::side::left) then
+           if (left_right == oneapi::math::side::left) then
                compute X such that op(A) * X = alpha[i] * B
            else
                compute X such that X * op(A) = alpha[i] * B
@@ -234,7 +234,7 @@ The strided API operation is defined as:
 
    for i = 0 … batch_size – 1
        A and B are matrices at offset i * stridea and i * strideb in a and b.
-       if (left_right == oneapi::mkl::side::left) then
+       if (left_right == oneapi::math::side::left) then
            compute X such that op(A) * X = alpha * B
        else
            compute X such that X * op(A) = alpha * B
@@ -273,12 +273,12 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
       
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              const oneapi::mkl::side *left_right,
-                              const oneapi::mkl::uplo *upper_lower,
-                              const oneapi::mkl::transpose *trans,
-                              const oneapi::mkl::diag *unit_diag,
+                              const oneapi::math::side *left_right,
+                              const oneapi::math::uplo *upper_lower,
+                              const oneapi::math::transpose *trans,
+                              const oneapi::math::diag *unit_diag,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -292,12 +292,12 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              const oneapi::mkl::side *left_right,
-                              const oneapi::mkl::uplo *upper_lower,
-                              const oneapi::mkl::transpose *trans,
-                              const oneapi::mkl::diag *unit_diag,
+                              const oneapi::math::side *left_right,
+                              const oneapi::math::uplo *upper_lower,
+                              const oneapi::math::transpose *trans,
+                              const oneapi::math::diag *unit_diag,
                               const std::int64_t *m,
                               const std::int64_t *n,
                               const T *alpha,
@@ -318,20 +318,20 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
       The queue where the routine should be executed.
 
    left_right
-      Array of ``group_count`` ``oneapi::mkl::side`` values. ``left_right[i]`` specifies whether ``A`` multiplies
+      Array of ``group_count`` ``oneapi::math::side`` values. ``left_right[i]`` specifies whether ``A`` multiplies
       ``X`` on the left (``side::left``) or on the right
       (``side::right``) for every ``trsm`` operation in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    upper_lower
-      Array of ``group_count`` ``oneapi::mkl::uplo`` values. ``upper_lower[i]`` specifies whether ``A`` is upper or lower
+      Array of ``group_count`` ``oneapi::math::uplo`` values. ``upper_lower[i]`` specifies whether ``A`` is upper or lower
       triangular for every matrix in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    trans
-      Array of ``group_count`` ``oneapi::mkl::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used
+      Array of ``group_count`` ``oneapi::math::transpose`` values. ``trans[i]`` specifies the form of op(``A``) used
       for every ``trsm`` operation in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    unit_diag
-      Array of ``group_count`` ``oneapi::mkl::diag`` values. ``unit_diag[i]`` specifies whether ``A`` is assumed to
+      Array of ``group_count`` ``oneapi::math::diag`` values. ``unit_diag[i]`` specifies whether ``A`` is assumed to
       be unit triangular (all diagonal elements are 1) for every matrix in group ``i``. See :ref:`onemath_datatypes` for more details.
 
    m
@@ -402,12 +402,12 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              oneapi::mkl::side left_right,
-                              oneapi::mkl::uplo upper_lower,
-                              oneapi::mkl::transpose trans,
-                              oneapi::mkl::diag unit_diag,
+                              oneapi::math::side left_right,
+                              oneapi::math::uplo upper_lower,
+                              oneapi::math::transpose trans,
+                              oneapi::math::diag unit_diag,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,
@@ -422,12 +422,12 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event trsm_batch(sycl::queue &queue,
-                              oneapi::mkl::side left_right,
-                              oneapi::mkl::uplo upper_lower,
-                              oneapi::mkl::transpose trans,
-                              oneapi::mkl::diag unit_diag,
+                              oneapi::math::side left_right,
+                              oneapi::math::uplo upper_lower,
+                              oneapi::math::transpose trans,
+                              oneapi::math::diag unit_diag,
                               std::int64_t m,
                               std::int64_t n,
                               value_or_pointer<T> alpha,
@@ -525,20 +525,20 @@ in ``a`` and ``b`` are given by the ``batch_size`` parameter.
 
    This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`

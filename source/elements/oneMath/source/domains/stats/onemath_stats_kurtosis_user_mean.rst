@@ -13,7 +13,7 @@ Entry point to compute kurtosis with the provided mean values.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::kurtosis function is used to compute an array of kurtosis (kurtosis for each dataset's dimension) with the provided mean values.
+The oneapi::math::stats::kurtosis function is used to compute an array of kurtosis (kurtosis for each dataset's dimension) with the provided mean values.
 
 :ref:`onemath_stats_kurtosis_user_mean` supports the following precisions for data:
 
@@ -34,12 +34,12 @@ kurtosis with provided mean (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type,
         layout ObservationsLayout>
-        void oneapi::mkl::stats::kurtosis(sycl::queue& queue,
+        void oneapi::math::stats::kurtosis(sycl::queue& queue,
         sycl::buffer<Type, 1> mean,
-        const oneapi::mkl::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data,
+        const oneapi::math::stats::dataset<sycl::buffer<Type, 1>, ObservationsLayout>& data,
         sycl::buffer<Type, 1> kurtosis);
     }
 
@@ -50,7 +50,7 @@ kurtosis with provided mean (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -82,7 +82,7 @@ kurtosis with provided mean (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when kurtosis.get_count() == 0, or mean.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_kurtosis_user_mean_usm:
@@ -94,7 +94,7 @@ kurtosis with provided mean (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = fast, typename Type, layout ObservationsLayout>
         sycl::event kurtosis(sycl::queue& queue,
         Type* mean,
@@ -110,7 +110,7 @@ kurtosis with provided mean (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
+        *  ``oneapi::math::stats::method::fast``
 
     Type
         Data precision.
@@ -145,7 +145,7 @@ kurtosis with provided mean (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when kurtosis == nullptr, or mean == nullptr, or dataset object is invalid
 
 .. container:: section

@@ -13,7 +13,7 @@ Entry point to compute kurtosis.
 
 .. rubric:: Description and Assumptions
 
-The oneapi::mkl::stats::kurtosis function is used to compute a kurtosis array (kurtosis for each dataset's dimension).
+The oneapi::math::stats::kurtosis function is used to compute a kurtosis array (kurtosis for each dataset's dimension).
 
 :ref:`onemath_stats_kurtosis` supports the following precisions for data:
 
@@ -34,7 +34,7 @@ kurtosis (buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
         template<method Method = method::fast, typename Type, layout ObservationsLayout>
         void kurtosis(sycl::queue& queue,
         const dataset<ObservationsLayout, sycl::buffer<Type, 1>>& data,
@@ -48,8 +48,8 @@ kurtosis (buffer version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -78,7 +78,7 @@ kurtosis (buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when kurtosis.get_count() == 0, or dataset object is invalid
 
 .. _onemath_stats_kurtosis_usm:
@@ -90,7 +90,7 @@ kurtosis (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::stats {
+    namespace oneapi::math::stats {
     template<method Method = method::fast, typename Type, layout ObservationsLayout>
         sycl::event kurtosis(sycl::queue& queue,
         const dataset<ObservationsLayout, Type*>& data,
@@ -105,8 +105,8 @@ kurtosis (USM version)
     Method
         Method which is used for estimate computation. The specific values are as follows:
 
-        *  ``oneapi::mkl::stats::method::fast``
-        *  ``oneapi::mkl::stats::method::one_pass``
+        *  ``oneapi::math::stats::method::fast``
+        *  ``oneapi::math::stats::method::one_pass``
 
     Type
         Data precision.
@@ -138,7 +138,7 @@ kurtosis (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when kurtosis == nullptr, or dataset object is invalid
 
 .. container:: section

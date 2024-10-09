@@ -27,17 +27,17 @@ ln
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event ln(
                     sycl::queue& exec_queue,
                     std::int64_t n,
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -47,7 +47,7 @@ ln
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event ln(
                     sycl::queue& exec_queue,
@@ -55,10 +55,10 @@ ln
                     const T *a,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -101,16 +101,16 @@ ln
            -  
          * - a <+0
            - QNAN
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - +0
            - -∞
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - -0
            - -∞
-           - ``oneapi::mkl::vm::status::sing``
+           - ``oneapi::math::vm::status::sing``
          * - -∞
            - QNAN
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - +∞
            - +∞
            -  
@@ -224,7 +224,7 @@ ln
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -257,7 +257,7 @@ ln
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

@@ -34,9 +34,9 @@ orgbr_scratchpad_size
          
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t orgbr_scratchpad_size(cl::sycl::queue &queue, oneapi::mkl::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t &scratchpad_size) 
+      std::int64_t orgbr_scratchpad_size(cl::sycl::queue &queue, oneapi::math::generate gen, std::int64_t m, std::int64_t n, std::int64_t k, std::int64_t lda, std::int64_t &scratchpad_size) 
     }
 
 .. container:: section
@@ -85,11 +85,11 @@ lda
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
    Exception is thrown in case of incorrect supplied argument value.
    Position of wrong argument can be determined by `info()` method of exception object.

@@ -13,7 +13,7 @@ Entry point to obtain random numbers from a given engine with proper statistics 
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::rng::generate function produces random numbers sequence from the given engine object and applied transformation from a given distribution object.
+oneapi::math::rng::generate function produces random numbers sequence from the given engine object and applied transformation from a given distribution object.
 
 .. _onemath_rng_generate_buffer:
 
@@ -24,7 +24,7 @@ generate (Buffer version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename DistrType, typename EngineType>
     void generate (const DistrType& distr, EngineType& engine, std::int64_t n, sycl::buffer<typename DistrType::result_type, 1>& r);
     }
@@ -63,7 +63,7 @@ generate (Buffer version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when n > r.get_count(), or n < 0
 
 .. _onemath_rng_generate_usm:
@@ -75,7 +75,7 @@ generate (USM version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename DistrType, typename EngineType>
     sycl::event generate (const DistrType& distr, EngineType& engine, std::int64_t n, typename DistrType::result_type* r, const std::vector<sycl::event> & dependencies);
     }
@@ -117,7 +117,7 @@ generate (USM version)
 
     .. rubric:: Throws
 
-    oneapi::mkl::invalid_argument
+    oneapi::math::invalid_argument
         Exception is thrown when r == nullptr, or n < 0
 
 .. container:: section

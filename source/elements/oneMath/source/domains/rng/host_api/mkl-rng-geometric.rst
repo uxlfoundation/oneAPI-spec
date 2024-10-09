@@ -13,7 +13,7 @@ Class is used for generation of geometrically distributed integer types random n
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers geometrically distributed with probability :math:`p` of a single success trial, where :math:`p \in R; 0 < p < 1`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers geometrically distributed with probability :math:`p` of a single success trial, where :math:`p \in R; 0 < p < 1`.
 
 The probability distribution is given by:
 
@@ -36,7 +36,7 @@ class geometric
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = geometric_method::by_default>
     class geometric {
     public:
@@ -61,11 +61,11 @@ class geometric
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::geometric_method::by_default
+        typename Method = oneapi::math::rng::geometric_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::geometric_method::by_default``
-                * ``oneapi::mkl::rng::geometric_method::icdf``
+                * ``oneapi::math::rng::geometric_method::by_default``
+                * ``oneapi::math::rng::geometric_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -149,7 +149,7 @@ class geometric
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`p \ge 1.0f`, or :math:`p \leq 0.0f`
 
 .. container:: section

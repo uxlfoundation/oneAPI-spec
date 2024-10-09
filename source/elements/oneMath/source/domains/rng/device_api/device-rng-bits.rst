@@ -23,7 +23,7 @@ class bits
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename UIntType = std::uint32_t>
      class bits {
        using result_type = UIntType;

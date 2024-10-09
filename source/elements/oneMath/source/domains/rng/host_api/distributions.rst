@@ -128,19 +128,19 @@ Host Distributions
          * -     Distribution
            -     Method
          * -           \ :ref:`onemath_rng_uniform_continuous`\
-           -     `oneapi::mkl::rng::unform_method::accurate`
+           -     `oneapi::math::rng::unform_method::accurate`
          * -           \ :ref:`onemath_rng_exponential`\
-           -     `oneapi::mkl::rng::exponential_method::icdf_accurate`
+           -     `oneapi::math::rng::exponential_method::icdf_accurate`
          * -           \ :ref:`onemath_rng_weibull`\
-           -     `oneapi::mkl::rng::weibull_method::icdf_accurate`
+           -     `oneapi::math::rng::weibull_method::icdf_accurate`
          * -           \ :ref:`onemath_rng_rayleigh`\
-           -     `oneapi::mkl::rng::rayleigh_method::icdf_accurate`
+           -     `oneapi::math::rng::rayleigh_method::icdf_accurate`
          * -           \ :ref:`onemath_rng_lognormal`\
-           -     `oneapi::mkl::rng::lognormal_method::box_muller2_accurate`, `oneapi::mkl::rng::lognormal_method::icdf_accurate`
+           -     `oneapi::math::rng::lognormal_method::box_muller2_accurate`, `oneapi::math::rng::lognormal_method::icdf_accurate`
          * -           \ :ref:`onemath_rng_gamma`\
-           -     `oneapi::mkl::rng::gamma_method::marsaglia_accurate`
+           -     `oneapi::math::rng::gamma_method::marsaglia_accurate`
          * -           \ :ref:`onemath_rng_beta`\
-           -     `oneapi::mkl::rng::beta_method::cja_accurate`
+           -     `oneapi::math::rng::beta_method::cja_accurate`
                
    **Parent topic:** :ref:`onemath_rng_manual_offload_routines`
 

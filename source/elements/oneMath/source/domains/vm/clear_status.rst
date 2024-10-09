@@ -11,7 +11,7 @@ clear_status
 .. container::
 
 
-   Resets the global VM status to ``oneapi::mkl::vm::status::success`` and returns the
+   Resets the global VM status to ``oneapi::math::vm::status::success`` and returns the
    previous VM status code.
 
 
@@ -25,12 +25,12 @@ clear_status
       .. code-block:: cpp
 
 
-                namespace oneapi::mkl::vm {
+                namespace oneapi::math::vm {
 
-                    oneapi::mkl::vm::status clear_status(
+                    oneapi::math::vm::status clear_status(
                         sycl::queue& exec_queue);
 
-                } // namespace oneapi::mkl::vm
+                } // namespace oneapi::math::vm
 
 
       .. rubric:: Description
@@ -38,7 +38,7 @@ clear_status
 
 
       The clear_status function sets the VM status code to
-      ``oneapi::mkl::vm::status::success`` and returns the previous VM status code
+      ``oneapi::math::vm::status::success`` and returns the previous VM status code
       for a given queue.
 
 
@@ -55,23 +55,23 @@ clear_status
            - Description
          * - Successful Execution
            -
-         * - ``oneapi::mkl::vm::status::success``
+         * - ``oneapi::math::vm::status::success``
            - VM function execution completed successfully
-         * - ``oneapi::mkl::vm::status::not_defined``
+         * - ``oneapi::math::vm::status::not_defined``
            - VM status not defined
          * - Warnings
            -
-         * - ``oneapi::mkl::vm::status::accuracy_warning``
+         * - ``oneapi::math::vm::status::accuracy_warning``
            - VM function execution completed successfully in a different accuracy mode
          * - Computational status codes
            -
-         * - ``oneapi::mkl::vm::status::errdom``
+         * - ``oneapi::math::vm::status::errdom``
            - Values are out of a range of definition producing invalid (QNaN) result
-         * - ``oneapi::mkl::vm::status::sing``
+         * - ``oneapi::math::vm::status::sing``
            - Values cause divide-by-zero (singularity) computational errors and produce and invalid (QNaN or Inf) result
-         * - ``oneapi::mkl::vm::status::overflow``
+         * - ``oneapi::math::vm::status::overflow``
            - An overflow happened during the calculation process
-         * - ``oneapi::mkl::vm::status::underflow``
+         * - ``oneapi::math::vm::status::underflow``
            - An underflow happened during the calculation process
 
 

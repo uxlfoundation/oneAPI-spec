@@ -13,7 +13,7 @@ Proceed state of engine by the skip-ahead method.
 
 .. rubric:: Description and Assumptions
 
-oneapi::mkl::rng::skip_ahead function changes the current state of the engine so that with the further call of the generator the output subsequence begins with the specified offset see `Figure "Block-Splitting Method" <#rng_block_splitting>`__.
+oneapi::math::rng::skip_ahead function changes the current state of the engine so that with the further call of the generator the output subsequence begins with the specified offset see `Figure "Block-Splitting Method" <#rng_block_splitting>`__.
 
 .. container:: figtop
     :name: rng_block_splitting
@@ -31,7 +31,7 @@ skip_ahead
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename EngineType>
     void skip_ahead(EngineType& engine, std::uint64_t num_to_skip);
     }
@@ -58,15 +58,15 @@ skip_ahead
 .. code-block:: cpp
 
     // Creating 3 identical engines
-    oneapi::mkl::rng::mcg31m1 engine_1(queue, seed);
-    oneapi::mkl::rng::mcg31m1 engine_2(engine_1);
-    oneapi::mkl::rng::mcg31m1 engine_3(engine_2);
+    oneapi::math::rng::mcg31m1 engine_1(queue, seed);
+    oneapi::math::rng::mcg31m1 engine_2(engine_1);
+    oneapi::math::rng::mcg31m1 engine_3(engine_2);
 
     // Skipping ahead by 7 elements the 2nd engine
-    oneapi::mkl::rng::skip_ahead(engine_2, 7);
+    oneapi::math::rng::skip_ahead(engine_2, 7);
 
     // Skipping ahead by 14 elements the 3rd engine
-    oneapi::mkl::rng::skip_ahead(engine_3, 14);
+    oneapi::math::rng::skip_ahead(engine_3, 14);
 
 
 .. _onemath_rng_skip_ahead_ex:
@@ -78,9 +78,9 @@ skip_ahead (Interface with a partitioned number of skipped elements)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename EngineType>
-    void oneapi::mkl::rng::skip_ahead(EngineType& engine, std::initializer_list<std::uint64_t> num_to_skip);
+    void oneapi::math::rng::skip_ahead(EngineType& engine, std::initializer_list<std::uint64_t> num_to_skip);
     }
 
 .. container:: section
@@ -105,15 +105,15 @@ skip_ahead (Interface with a partitioned number of skipped elements)
 .. code-block:: cpp
 
     // Creating the first engine
-    oneapi::mkl::rng::mrg32k3a engine_1(queue, seed);
+    oneapi::math::rng::mrg32k3a engine_1(queue, seed);
 
     // To skip 2^64 elements in the random stream number of skipped elements should be
     // represented as num_to_skip = 2^64 = 0 + 1 * 2^64
     std::initializer_list<std::uint64_t> num_to_skip = {0, 1};
 
     // Creating the 2nd engine based on 1st. Skipping by 2^64
-    oneapi::mkl::rng::mrg32k3a engine_2(engine_1);
-    oneapi::mkl::rng::skip_ahead(engine_2, num_to_skip);
+    oneapi::math::rng::mrg32k3a engine_2(engine_1);
+    oneapi::math::rng::skip_ahead(engine_2, num_to_skip);
 
 
 **Parent topic:** :ref:`onemath_rng_service_routines`

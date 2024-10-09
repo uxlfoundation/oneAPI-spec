@@ -27,7 +27,7 @@ sincos
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event sincos(
                     sycl::queue& exec_queue,
@@ -35,10 +35,10 @@ sincos
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& y,
                     sycl::buffer<T,1>& z,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -48,7 +48,7 @@ sincos
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event sincos(
                     sycl::queue& exec_queue,
@@ -57,10 +57,10 @@ sincos
                     T* y,
                     T* z,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -118,11 +118,11 @@ sincos
          * - +∞
            - QNAN
            - QNAN
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - -∞
            - QNAN
            - QNAN
-           - ``oneapi::mkl::vm::status::errdom``
+           - ``oneapi::math::vm::status::errdom``
          * - QNAN
            - QNAN
            - QNAN
@@ -161,7 +161,7 @@ sincos
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -194,7 +194,7 @@ sincos
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

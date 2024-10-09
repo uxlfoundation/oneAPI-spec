@@ -42,8 +42,8 @@ unmqr (Buffer Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      void unmqr(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &c, std::int64_t ldc, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    namespace oneapi::math::lapack {
+      void unmqr(cl::sycl::queue &queue, oneapi::math::side side, oneapi::math::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &tau, cl::sycl::buffer<T,1> &c, std::int64_t ldc, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -54,17 +54,17 @@ queue
     The queue where the routine should be executed.
 
 side
-    If ``side = oneapi::mkl::side::left``, :math:`Q` or :math:`Q^{H}` is applied
+    If ``side = oneapi::math::side::left``, :math:`Q` or :math:`Q^{H}` is applied
     to :math:`C` from the left.
 
-    If ``side = oneapi::mkl::side::right``, :math:`Q` or :math:`Q^{H}` is
+    If ``side = oneapi::math::side::right``, :math:`Q` or :math:`Q^{H}` is
     applied to :math:`C` from the right.
 
 trans
-    If ``trans = oneapi::mkl::transpose::nontrans``, the routine multiplies
+    If ``trans = oneapi::math::transpose::nontrans``, the routine multiplies
     :math:`C` by :math:`Q`.
 
-    If ``trans = oneapi::mkl::transpose::conjtrans``, the routine multiplies :math:`C`
+    If ``trans = oneapi::math::transpose::conjtrans``, the routine multiplies :math:`C`
     by :math:`Q^{H}`.
 
 m
@@ -77,9 +77,9 @@ k
     The number of elementary reflectors whose product defines the
     matrix :math:`Q` 
 
-    If ``side = oneapi::mkl::side::left``, :math:`0 \le k \le m`
+    If ``side = oneapi::math::side::left``, :math:`0 \le k \le m`
 
-    If ``side = oneapi::mkl::side::right``, :math:`0 \le k \le n`
+    If ``side = oneapi::math::side::right``, :math:`0 \le k \le n`
 
 a
     The buffer ``a`` as returned by :ref:`onemath_lapack_geqrf`.
@@ -120,17 +120,17 @@ scratchpad
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
     Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -147,8 +147,8 @@ unmqr (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event unmqr(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event unmqr(cl::sycl::queue &queue, oneapi::math::side side, oneapi::math::transpose trans, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -159,17 +159,17 @@ queue
     The queue where the routine should be executed.
 
 side
-    If ``side = oneapi::mkl::side::left``, :math:`Q` or :math:`Q^{H}` is applied
+    If ``side = oneapi::math::side::left``, :math:`Q` or :math:`Q^{H}` is applied
     to :math:`C` from the left.
 
-    If ``side = oneapi::mkl::side::right``, :math:`Q` or :math:`Q^{H}` is
+    If ``side = oneapi::math::side::right``, :math:`Q` or :math:`Q^{H}` is
     applied to :math:`C` from the right.
 
 trans
-    If ``trans = oneapi::mkl::transpose::nontrans``, the routine multiplies
+    If ``trans = oneapi::math::transpose::nontrans``, the routine multiplies
     :math:`C` by :math:`Q`.
 
-    If ``trans = oneapi::mkl::transpose::conjtrans``, the routine multiplies :math:`C`
+    If ``trans = oneapi::math::transpose::conjtrans``, the routine multiplies :math:`C`
     by :math:`Q^{H}`.
 
 m
@@ -182,9 +182,9 @@ k
     The number of elementary reflectors whose product defines the
     matrix :math:`Q`
 
-    If ``side = oneapi::mkl::side::left``, :math:`0 \le k \le m`
+    If ``side = oneapi::math::side::left``, :math:`0 \le k \le m`
 
-    If ``side = oneapi::mkl::side::right``, :math:`0 \le k \le n`
+    If ``side = oneapi::math::side::right``, :math:`0 \le k \le n`
 
 a
     The pointer to ``a`` as returned by :ref:`onemath_lapack_geqrf`.
@@ -228,17 +228,17 @@ scratchpad
 
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
     Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 

@@ -27,17 +27,17 @@ exp
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event exp(
                     sycl::queue& exec_queue,
                     std::int64_t n,
                     sycl::buffer<T,1>& a,
                     sycl::buffer<T,1>& y,
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -47,7 +47,7 @@ exp
       .. code-block:: cpp
 
 
-            namespace oneapi::mkl::vm {
+            namespace oneapi::math::vm {
 
             sycl::event exp(
                     sycl::queue& exec_queue,
@@ -55,10 +55,10 @@ exp
                     const T *a,
                     T* y,
                     std::vector<sycl::event> const & depends = {},
-                    oneapi::mkl::vm::mode mode = oneapi::mkl::vm::mode::not_defined,
-                    oneapi::mkl::vm::error_handler<T> errhandler = {});
+                    oneapi::math::vm::mode mode = oneapi::math::vm::mode::not_defined,
+                    oneapi::math::vm::error_handler<T> errhandler = {});
 
-            } // namespace oneapi::mkl::vm
+            } // namespace oneapi::math::vm
 
 
 
@@ -120,10 +120,10 @@ exp
            -  
          * - a > overflow
            - +∞
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - a < underflow
            - +0
-           - ``oneapi::mkl::vm::status::overflow``
+           - ``oneapi::math::vm::status::overflow``
          * - +∞
            - +∞
            -  
@@ -218,7 +218,7 @@ exp
 
 
    - The complex exp(z) function sets the VM status code to
-      ``oneapi::mkl::vm::status::overflow`` in the case of overflow, 
+      ``oneapi::math::vm::status::overflow`` in the case of overflow, 
       that is, when both ``RE(z)`` and ``IM(z)`` are finite non-zero
       numbers, but the real or imaginary part of the exact  result
       is so large that it does not meet the target precision.
@@ -251,7 +251,7 @@ exp
       Overrides the global VM mode setting for this function call. See
       :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler
@@ -284,7 +284,7 @@ exp
       Overrides the global VM mode setting for this function call. See
       the :ref:`onemath_vm_setmode`
       function for possible values and their description. This is an
-      optional parameter. The default value is ``oneapi::mkl::vm::mode::not_defined``.
+      optional parameter. The default value is ``oneapi::math::vm::mode::not_defined``.
 
 
    errhandler

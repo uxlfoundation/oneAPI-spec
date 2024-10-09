@@ -44,8 +44,8 @@ sygvd (Buffer Version)
          
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      void sygvd(cl::sycl::queue &queue, std::int64_t itype, oneapi::mkl::job jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
+    namespace oneapi::math::lapack {
+      void sygvd(cl::sycl::queue &queue, std::int64_t itype, oneapi::math::job jobz, oneapi::math::uplo upper_lower, std::int64_t n, cl::sycl::buffer<T,1> &a, std::int64_t lda, cl::sycl::buffer<T,1> &b, std::int64_t ldb, cl::sycl::buffer<T,1> &w, cl::sycl::buffer<T,1> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -141,17 +141,17 @@ scratchpad
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -159,12 +159,12 @@ This routine shall throw the following exceptions if the associated condition is
 
    For :math:`\text{info} \le n`:
 
-      If :math:`\text{info}=i`, and ``jobz = oneapi::mkl::job::novec``, then the algorithm
+      If :math:`\text{info}=i`, and ``jobz = oneapi::math::job::novec``, then the algorithm
       failed to converge; :math:`i` indicates the number of off-diagonal
       elements of an intermediate tridiagonal form which did not
       converge to zero.
 
-      If :math:`\text{info}=i`, and ``jobz = oneapi::mkl::job::vec``, then the algorithm
+      If :math:`\text{info}=i`, and ``jobz = oneapi::math::job::vec``, then the algorithm
       failed to compute an eigenvalue while working on the submatrix
       lying in rows and columns :math:`\text{info}/(n+1)` through
       :math:`\text{mod}(\text{info},n+1)`.
@@ -187,8 +187,8 @@ sygvd (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event sygvd(cl::sycl::queue &queue, std::int64_t itype, oneapi::mkl::job jobz, oneapi::mkl::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *w, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event sygvd(cl::sycl::queue &queue, std::int64_t itype, oneapi::math::job jobz, oneapi::math::uplo upper_lower, std::int64_t n, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *w, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -287,17 +287,17 @@ scratchpad
          
 This routine shall throw the following exceptions if the associated condition is detected. An implementation may throw additional implementation-specific exception(s) in case of error conditions not covered here.
 
-:ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+:ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
 
-:ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+:ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
 
-:ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+:ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
 
-:ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+:ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
 
-:ref:`oneapi::mkl::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
+:ref:`oneapi::math::lapack::invalid_argument<onemath_lapack_exception_invalid_argument>`
 
-:ref:`oneapi::mkl::lapack::computation_error<onemath_lapack_exception_computation_error>`
+:ref:`oneapi::math::lapack::computation_error<onemath_lapack_exception_computation_error>`
 
    Exception is thrown in case of problems during calculations. The ``info`` code of the problem can be obtained by `info()` method of exception object:
 
@@ -305,12 +305,12 @@ This routine shall throw the following exceptions if the associated condition is
 
    For :math:`\text{info} \le n`:
 
-      If :math:`\text{info}=i`, and ``jobz = oneapi::mkl::job::novec``, then the algorithm
+      If :math:`\text{info}=i`, and ``jobz = oneapi::math::job::novec``, then the algorithm
       failed to converge; :math:`i` indicates the number of off-diagonal
       elements of an intermediate tridiagonal form which did not
       converge to zero.
 
-      If :math:`\text{info}=i`, and ``jobz = oneapi::mkl::job::vec``, then the algorithm
+      If :math:`\text{info}=i`, and ``jobz = oneapi::math::job::vec``, then the algorithm
       failed to compute an eigenvalue while working on the submatrix
       lying in rows and columns :math:`\text{info}/(n+1)` through
       :math:`\text{mod}(\text{info},n+1)`.

@@ -13,7 +13,7 @@ Class is used for generation of chi-square distributed real types random numbers
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide random numbers chi-square distributed with :math:`n` degrees of freedom, :math:`n \in N; n > 0`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide random numbers chi-square distributed with :math:`n` degrees of freedom, :math:`n \in N; n > 0`.
 
 The probability distribution is given by:
 
@@ -37,7 +37,7 @@ class chi_square
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename RealType = float, typename Method = chi_square_method::by_default>
     class chi_square {
     public:
@@ -62,11 +62,11 @@ class chi_square
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::chi_square_method::by_default
+        typename Method = oneapi::math::rng::chi_square_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::chi_square_method::by_default``
-                * ``oneapi::mkl::rng::chi_square_method::gamma_based``
+                * ``oneapi::math::rng::chi_square_method::by_default``
+                * ``oneapi::math::rng::chi_square_method::gamma_based``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -150,7 +150,7 @@ class chi_square
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`n < 1`
 
 .. container:: section

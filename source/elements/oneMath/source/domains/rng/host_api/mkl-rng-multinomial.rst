@@ -13,7 +13,7 @@ Class is used for generation of multinomially distributed integer types random n
 
 .. rubric:: Description
 
-The class object is used in the :ref:`oneapi::mkl::rng::generate()<onemath_rng_generate>` function to provide `n` random numbers multinomially distributed, with independent trials :math:`(ntrial, m)` and possible mutually exclusive outcomes :math:`k`, with corresponding probabilities :math:`p_i`, where :math:`p_i \in R; 0 \leq p_i \leq 1; m, k \in N`.
+The class object is used in the :ref:`oneapi::math::rng::generate()<onemath_rng_generate>` function to provide `n` random numbers multinomially distributed, with independent trials :math:`(ntrial, m)` and possible mutually exclusive outcomes :math:`k`, with corresponding probabilities :math:`p_i`, where :math:`p_i \in R; 0 \leq p_i \leq 1; m, k \in N`.
 
 The probability distribution is given by:
 
@@ -33,7 +33,7 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::rng {
+    namespace oneapi::math::rng {
     template<typename IntType = std::int32_t, typename Method = multinomial_method::by_default>
     class multinomial {
     public:
@@ -58,11 +58,11 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::multinomial_method::by_default
+        typename Method = oneapi::math::rng::multinomial_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::multinomial_method::by_default``
-                * ``oneapi::mkl::rng::multinomial_method::poisson_icdf_based``
+                * ``oneapi::math::rng::multinomial_method::by_default``
+                * ``oneapi::math::rng::multinomial_method::poisson_icdf_based``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -132,7 +132,7 @@ It's implementation defined which type ``SequenceContainerOrView`` represents.
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when :math:`ntrial < 0`, or :math:`p.size() < 1`
 
 .. container:: section

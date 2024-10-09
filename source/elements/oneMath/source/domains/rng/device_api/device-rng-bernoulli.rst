@@ -44,7 +44,7 @@ class bernoulli
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::rng::device {
+   namespace oneapi::math::rng::device {
      template<typename IntType, typename Method>
      class bernoulli {
      public:
@@ -76,11 +76,11 @@ class bernoulli
 
     .. container:: section
 
-        typename Method = oneapi::mkl::rng::bernoulli_method::by_default
+        typename Method = oneapi::math::rng::bernoulli_method::by_default
             Transformation method, which will be used for generation. Supported types:
 
-                * ``oneapi::mkl::rng::bernoulli_method::by_default``
-                * ``oneapi::mkl::rng::bernoulli_method::icdf``
+                * ``oneapi::math::rng::bernoulli_method::by_default``
+                * ``oneapi::math::rng::bernoulli_method::icdf``
 
             See description of the methods in :ref:`Distributions methods template parameter<onemath_rng_distributions_template_parameter_mkl_rng_method_values>`.
 
@@ -164,7 +164,7 @@ class bernoulli
 
             .. rubric:: Throws
 
-            oneapi::mkl::invalid_argument
+            oneapi::math::invalid_argument
                 Exception is thrown when `p > 1`, or `p < 0`
 
 .. container:: section

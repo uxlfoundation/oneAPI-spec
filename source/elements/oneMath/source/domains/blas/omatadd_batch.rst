@@ -106,10 +106,10 @@ memory, with the exception of the following in-place operations:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        void omatadd_batch(sycl::queue &queue,
-                          oneapi::mkl::transpose transa,
-                          oneapi::mkl::transpose transb,
+                          oneapi::math::transpose transa,
+                          oneapi::math::transpose transb,
                           std::int64_t m,
                           std::int64_t n,
                           T alpha,
@@ -127,10 +127,10 @@ memory, with the exception of the following in-place operations:
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        void omatadd_batch(sycl::queue &queue,
-                          oneapi::mkl::transpose transa,
-                          oneapi::mkl::transpose transb,
+                          oneapi::math::transpose transa,
+                          oneapi::math::transpose transb,
                           std::int64_t m,
                           std::int64_t n,
                           T alpha,
@@ -282,19 +282,19 @@ memory, with the exception of the following in-place operations:
    implementation-specific exception(s) in case of error conditions
    not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
        
    
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
 .. _onemath_blas_omatadd_batch_usm:
@@ -373,10 +373,10 @@ in-place operations:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event omatadd_batch(sycl::queue &queue,
-                                 const oneapi::mkl::transpose *transa_array,
-                                 const oneapi::mkl::transpose *transb_array,
+                                 const oneapi::math::transpose *transa_array,
+                                 const oneapi::math::transpose *transb_array,
                                  const std::int64_t *m_array,
                                  const std::int64_t *n_array,
                                  const T *alpha_array,
@@ -393,10 +393,10 @@ in-place operations:
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event omatadd_batch(sycl::queue &queue,
-                                 const oneapi::mkl::transpose *transa_array,
-                                 const oneapi::mkl::transpose *transb_array,
+                                 const oneapi::math::transpose *transa_array,
+                                 const oneapi::math::transpose *transb_array,
                                  const std::int64_t *m_array,
                                  const std::int64_t *n_array,
                                  const T *alpha_array,
@@ -564,10 +564,10 @@ in-place operations:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::column_major {
+   namespace oneapi::math::blas::column_major {
        sycl::event omatadd_batch(sycl::queue &queue,
-                                 oneapi::mkl::transpose transa,
-                                 oneapi::mkl::transpose transb,
+                                 oneapi::math::transpose transa,
+                                 oneapi::math::transpose transb,
                                  std::int64_t m,
                                  std::int64_t n,
                                  value_or_pointer<T> alpha,
@@ -586,10 +586,10 @@ in-place operations:
    }
 .. code-block:: cpp
 
-   namespace oneapi::mkl::blas::row_major {
+   namespace oneapi::math::blas::row_major {
        sycl::event omatadd_batch(sycl::queue &queue,
-                                 oneapi::mkl::transpose transa,
-                                 oneapi::mkl::transpose transb,
+                                 oneapi::math::transpose transa,
+                                 oneapi::math::transpose transb,
                                  std::int64_t m,
                                  std::int64_t n,
                                  value_or_pointer<T> alpha,
@@ -752,19 +752,19 @@ in-place operations:
    implementation-specific exception(s) in case of error conditions
    not covered here.
 
-   :ref:`oneapi::mkl::invalid_argument<onemath_exception_invalid_argument>`
+   :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
 
 
-   :ref:`oneapi::mkl::unsupported_device<onemath_exception_unsupported_device>`
+   :ref:`oneapi::math::unsupported_device<onemath_exception_unsupported_device>`
        
 
-   :ref:`oneapi::mkl::host_bad_alloc<onemath_exception_host_bad_alloc>`
+   :ref:`oneapi::math::host_bad_alloc<onemath_exception_host_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::device_bad_alloc<onemath_exception_device_bad_alloc>`
+   :ref:`oneapi::math::device_bad_alloc<onemath_exception_device_bad_alloc>`
        
 
-   :ref:`oneapi::mkl::unimplemented<onemath_exception_unimplemented>`
+   :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
    **Parent topic:** :ref:`blas-like-extensions`
