@@ -19,4 +19,4 @@ Host Generate Routine
 .. toctree::
     :hidden:
 
-    mkl-rng-generate
+    onemath-rng-generate

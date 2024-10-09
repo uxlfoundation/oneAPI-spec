@@ -68,8 +68,8 @@ prolog_template = string.Template(
 .. |l0_full_name| replace:: oneAPI Level Zero
 .. |tbb_full_name| replace:: oneAPI Threading Building Blocks
 .. |tbb_version| replace:: $oneapi_version
-.. |mkl_full_name| replace:: oneAPI Math Kernel Library
-.. |mkl_version| replace:: $oneapi_version
+.. |onemath_full_name| replace:: oneAPI Math Kernel Library
+.. |onemath_version| replace:: $oneapi_version
 .. include:: <isonum.txt>
 .. |regsup| replace:: :supsub:`reg`
 .. |intel_r| replace:: Intel\ :supsub:`reg`

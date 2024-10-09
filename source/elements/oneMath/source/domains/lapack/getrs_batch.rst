@@ -38,9 +38,9 @@ The buffer version of ``getrs_batch`` supports only the strided API.
 **Strided API**
 
  | The routine solves for the following systems of linear equations :math:`X_i`: 
- | :math:`A_iX_i = B_i`, if ``trans=mkl::transpose::nontrans``
- | :math:`A_i^TX_i = B_i`, if ``trans=mkl::transpose::trans``
- | :math:`A_i^HX_i = B_i`, if ``trans=mkl::transpose::conjtrans``
+ | :math:`A_iX_i = B_i`, if ``trans=onemath::transpose::nontrans``
+ | :math:`A_i^TX_i = B_i`, if ``trans=onemath::transpose::trans``
+ | :math:`A_i^HX_i = B_i`, if ``trans=onemath::transpose::conjtrans``
  | Before calling this routine, the Strided API of the :ref:`onemath_lapack_getrf_batch_buffer` function should be called to compute the LU factorizations of :math:`A_i`.
 
 .. container:: section
@@ -50,7 +50,7 @@ The buffer version of ``getrs_batch`` supports only the strided API.
 .. code-block:: cpp
 
     namespace oneapi::math::lapack {
-      void getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+      void getrs_batch(cl::sycl::queue &queue, onemath::transpose trans, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<std::int64_t> &ipiv, std::int64_t stride_ipiv, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -62,9 +62,9 @@ queue
 
 trans
  | Form of the equations:
- | If ``trans = mkl::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`Xi`.
- | If ``trans = mkl::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = mkl::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`Xi`.
+ | If ``trans = onemath::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
 
 n
   Order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n`).
@@ -150,9 +150,9 @@ The USM version of ``getrs_batch`` supports the group API and strided API.
 **Group API**
 
  | The routine solves the following systems of linear equations for :math:`X_i` (:math:`i \in \{1...batch\_size\}`):
- | :math:`A_iX_i = B_i`, if ``trans=mkl::transpose::nontrans``
- | :math:`A_i^TX_i = B_i`, if ``trans=mkl::transpose::trans``
- | :math:`A_i^HX_i = B_i`, if ``trans=mkl::transpose::conjtrans``
+ | :math:`A_iX_i = B_i`, if ``trans=onemath::transpose::nontrans``
+ | :math:`A_i^TX_i = B_i`, if ``trans=onemath::transpose::trans``
+ | :math:`A_i^HX_i = B_i`, if ``trans=onemath::transpose::conjtrans``
  | Before calling this routine, call the Group API of the :ref:`onemath_lapack_getrf_batch_usm` function to compute the LU factorizations of :math:`A_i`.
  | Total number of problems to solve, ``batch_size``, is a sum of sizes of all of the groups of parameters as provided by ``group_sizes`` array.
 
@@ -161,7 +161,7 @@ The USM version of ``getrs_batch`` supports the group API and strided API.
 .. code-block:: cpp
 
     namespace oneapi::math::lapack {
-      cl::sycl::event getrs_batch(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, std::int64_t **ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+      cl::sycl::event getrs_batch(cl::sycl::queue &queue, onemath::transpose *trans, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, std::int64_t **ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -173,9 +173,9 @@ queue
 
 trans
  | Array of ``group_count`` parameters :math:`trans_g` indicating the form of the equations for the group :math:`g`:
- | If ``trans = mkl::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = mkl::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = mkl::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
 
 n
   Array of ``group_count`` parameters :math:`n_g` specifying the order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
@@ -253,9 +253,9 @@ This routine shall throw the following exceptions if the associated condition is
 **Strided API**
 
  | The routine solves the following systems of linear equations for :math:`X_i`:
- | :math:`A_iX_i = B_i`, if ``trans=mkl::transpose::nontrans``
- | :math:`A_i^TX_i = B_i`, if ``trans=mkl::transpose::trans``
- | :math:`A_i^HX_i = B_i`, if ``trans=mkl::transpose::conjtrans``
+ | :math:`A_iX_i = B_i`, if ``trans=onemath::transpose::nontrans``
+ | :math:`A_i^TX_i = B_i`, if ``trans=onemath::transpose::trans``
+ | :math:`A_i^HX_i = B_i`, if ``trans=onemath::transpose::conjtrans``
  | Before calling this routine, the Strided API of the :ref:`onemath_lapack_getrf_batch` function should be called to compute the LU factorizations of :math:`A_i`.
 
 .. container:: section
@@ -265,7 +265,7 @@ This routine shall throw the following exceptions if the associated condition is
 .. code-block:: cpp
 
     namespace oneapi::math::lapack {
-      cl::sycl::event getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+      cl::sycl::event getrs_batch(cl::sycl::queue &queue, onemath::transpose trans, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     };
 
 .. container:: section
@@ -277,9 +277,9 @@ queue
 
 trans
  | Form of the equations:
- | If ``trans = mkl::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = mkl::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = mkl::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = onemath::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
 
 n
   Order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n`).

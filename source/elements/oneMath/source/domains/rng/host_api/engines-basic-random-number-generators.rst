@@ -128,17 +128,17 @@ Host Engines (Basic Random Number Generators)
 .. toctree::
     :hidden:
 
-    mkl-rng-default_engine
-    mkl-rng-mrg32k3a
-    mkl-rng-philox4x32x10
-    mkl-rng-mcg31m1
-    mkl-rng-mcg59
-    mkl-rng-r250
-    mkl-rng-wichmann_hill
-    mkl-rng-mt19937
-    mkl-rng-sfmt19937
-    mkl-rng-mt2203
-    mkl-rng-ars5
-    mkl-rng-sobol
-    mkl-rng-niederreiter
-    mkl-rng-nondeterministic
+    onemath-rng-default_engine
+    onemath-rng-mrg32k3a
+    onemath-rng-philox4x32x10
+    onemath-rng-mcg31m1
+    onemath-rng-mcg59
+    onemath-rng-r250
+    onemath-rng-wichmann_hill
+    onemath-rng-mt19937
+    onemath-rng-sfmt19937
+    onemath-rng-mt2203
+    onemath-rng-ars5
+    onemath-rng-sobol
+    onemath-rng-niederreiter
+    onemath-rng-nondeterministic
