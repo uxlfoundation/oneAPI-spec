@@ -44,11 +44,11 @@ Buffer Wrappers
 ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are helper functions
 for passing `SYCL`_ buffers to oneDPL algorithms.
 These functions accept a SYCL buffer and return an object of an unspecified type
-(referred below as *buffer position*) that satisfies the following requirements:
+(referred below as *buffer position object*) that satisfies the following requirements:
 
 - It is ``CopyConstructible`` and ``CopyAssignable``.
-- It is comparable with operators ``==`` and ``!=``.
-- It provides the ``get_buffer()`` method that returns the SYCL buffer, over which an object was built.
+- It is comparable with ``operator==`` and ``operator!=``.
+- It provides the ``get_buffer()`` method that returns the SYCL buffer, which an object was built over.
 - The expressions ``a + n`` and ``a - n``, where ``a`` is a buffer position object and ``n``
   is an integer value, are valid and evaluate to a buffer position object representing
   a position in the buffer that follows or precedes the position of ``a`` by ``n``.
@@ -71,7 +71,7 @@ in expressions with other objects built over the same buffer.
    namespace dpl = oneapi::dpl; // see "Namespaces"
    sycl::buffer buf {/*...*/};
    auto pos = dpl::find(dpl::execution::dpcpp_default, dpl::begin(buf), dpl::end(buf), value);
-   int value_index = (pos == dpl::end(buf))? -1 : pos - dpl::begin(buf);
+   int value_index = (pos == dpl::end(buf)) ? -1 : (pos - dpl::begin(buf));
 
 SYCL deduction tags (the ``TagT`` parameters) and ``sycl::property::no_init`` 
 allow to specify an access mode to be used by algorithms for accessing a SYCL buffer.
