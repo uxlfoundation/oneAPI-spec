@@ -43,33 +43,57 @@ Buffer Wrappers
 
 ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are helper functions
 for passing `SYCL`_ buffers to oneDPL algorithms.
-These functions accept a buffer and return an object
-of an unspecified type that satisfies the following requirements:
+These functions accept a SYCL buffer and return a *buffer position object*,
+which type satisfies the following requirements but is otherwise unspecified:
 
-- it is ``CopyConstructible``, ``CopyAssignable``, and comparable
-  with operators ``==`` and ``!=``;
-- the following expressions are valid: ``a + n``, ``a - n``,
-  ``a - b``, where ``a`` and ``b`` are objects of the type,
-  and ``n`` is an integer value;
-- it provides the ``get_buffer()`` method that returns the buffer
-  passed to the ``begin`` or ``end`` function.
+- It is copy-constructible and copy-assignable.
+- It is comparable with ``operator==`` and ``operator!=``.
+- It provides the ``get_buffer()`` method that for a buffer position object returns the SYCL buffer,
+  which the object was built over.
+- The expressions ``a + n`` and ``a - n``, where ``a`` is a buffer position object and ``n``
+  is an integer value, are valid and evaluate to a buffer position object such that
+  the corresponding position in the buffer follows (precedes) that of ``a`` by ``n``.
+  If this new position is out of the buffer bounds, the behavior is undefined.
+- The expression ``a - b``, where ``a`` and ``b`` are buffer position objects,
+  is valid and evaluates to an integer value ``n`` such that ``a == b + n``.
+
+If these operators and expressions are applied to buffer position objects that are not built
+over the same SYCL buffer, the behavior is undefined.
 
 When invoking an algorithm, the buffer passed to ``begin`` should be the same
 as the buffer passed to ``end``. Otherwise, the behavior is undefined.
 
+An algorithm may return a buffer position object, which can then be compared and used
+in expressions with other objects built over the same buffer.
+
+.. code:: cpp
+
+   namespace dpl = oneapi::dpl; // see "Namespaces"
+   sycl::buffer buf {/*...*/};
+   auto pos = dpl::find(dpl::execution::dpcpp_default, dpl::begin(buf), dpl::end(buf), value);
+   int value_index = (pos == dpl::end(buf)) ? -1 : (pos - dpl::begin(buf));
+
+.. note::
+   Though buffer position objects substitute for iterators as arguments and return values
+   of oneDPL algorithms, they cannot be used as iterators in other contexts, including dereference,
+   as their type does not satisfy the C++ standard requirements for an iterator.
+
 SYCL deduction tags (the ``TagT`` parameters) and ``sycl::property::no_init`` 
-allow to specify an access mode to be used by algorithms for accessing the buffer.
+allow to specify an access mode to be used by algorithms for accessing a SYCL buffer.
 The mode serves as a hint, and can be overridden depending on semantics of the algorithm.
 When invoking an algorithm, the same access mode arguments should be used
 for ``begin`` and ``end``. Otherwise, the behavior is undefined.
 
 .. code:: cpp
-      
-      using namespace oneapi;
-      auto buf_begin = dpl::begin(buf, sycl::write_only);
-      auto buf_end_1 = dpl::end(buf, sycl::write_only);
-      auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init);
-      dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_1, 42); // allowed
-      dpl::fill(dpl::execution::dpcpp_default, buf_begin, buf_end_2, 42); // not allowed
+
+   namespace dpl = oneapi::dpl;
+   sycl::buffer buf {/*...*/};
+   auto policy = dpl::execution::dpcpp_default;
+
+   auto buf_begin = dpl::begin(buf, sycl::write_only);
+   auto buf_end_1 = dpl::end(buf, sycl::write_only); // arguments match begin()
+   dpl::fill(policy, buf_begin, buf_end_1, 42);      // OK
+   auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init); // arguments do not match
+   dpl::fill(policy, buf_begin, buf_end_2, 42);                     // undefined behavior
 
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
