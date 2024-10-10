@@ -1,4 +1,5 @@
 .. SPDX-FileCopyrightText: 2019-2022 Intel Corporation
+.. SPDX-FileCopyrightText: Contributors to the oneAPI Specification project.
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -7,6 +8,8 @@
 ======
 oneDPL
 ======
+
+This is the specification of |dpl_full_name|, part of the oneAPI Specification version |dpl_version|.
 
 The |dpl_full_name| (oneDPL) provides the functionality
 specified in the `C++ standard`_, with extensions to support data parallelism
