@@ -48,7 +48,8 @@ which type satisfies the following requirements but is otherwise unspecified:
 
 - It is copy-constructible and copy-assignable.
 - It is comparable with ``operator==`` and ``operator!=``.
-- It provides the ``get_buffer()`` method that returns the SYCL buffer, which an object was built over.
+- It provides the ``get_buffer()`` method that for a buffer position object returns the SYCL buffer,
+  which the object was built over.
 - The expressions ``a + n`` and ``a - n``, where ``a`` is a buffer position object and ``n``
   is an integer value, are valid and evaluate to a buffer position object such that
   the corresponding position in the buffer follows (precedes) that of ``a`` by ``n``.
