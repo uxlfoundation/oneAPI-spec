@@ -197,7 +197,7 @@ function overload resolution:
       struct is_execution_policy { /*see below*/ };
 
       template <class T>
-      constexpr inline bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
+      inline constexpr bool is_execution_policy_v = oneapi::dpl::is_execution_policy<T>::value;
 
       namespace execution {
 
@@ -205,7 +205,7 @@ function overload resolution:
         struct is_execution_policy { /*see below*/ };
 
         template <class T>
-        constexpr inline bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
+        inline constexpr bool is_execution_policy_v = oneapi::dpl::execution::is_execution_policy<T>::value;
 
       }
     }
