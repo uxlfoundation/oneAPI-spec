@@ -211,9 +211,9 @@ function overload resolution:
     }
   }
 
-``oneapi::dpl::is_execution_policy`` and ``oneapi::dpl::execution::is_execution_policy`` must be treated as name aliases
-to the same class template. It is unspecified in which namespace the underlying class template and its specializations
-are defined.
+``oneapi::dpl::is_execution_policy`` and ``oneapi::dpl::execution::is_execution_policy`` must be treated
+as name aliases to the same class template. It is unspecified, which namespace contains the class template
+definition and its specializations.
 
 .. note::
    The ``oneapi::dpl::execution::is_execution_policy`` class originated in the oneDPL specification version 1.0,
