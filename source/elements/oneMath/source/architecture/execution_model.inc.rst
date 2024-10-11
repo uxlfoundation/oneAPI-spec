@@ -7,7 +7,7 @@
 Execution Model
 ---------------
 
-This section describes the execution environment common to all oneMath functionality. The execution environment includes how data is provided to computational routines in :ref:`onemath_queues`, support for several devices in :ref:`onemath_device_usage`, synchronous and asynchronous execution models in :ref:`onemath_asynchronous_synchronous_execution` and :ref:`onemath_host_thread_safety`.  
+This section describes the execution environment common to all oneMath functionality. The execution environment includes how data is provided to computational routines in :ref:`onemath_queues`, support for several devices in :ref:`onemath_device_usage`, synchronous and asynchronous execution models in :ref:`onemath_asynchronous_synchronous_execution` and :ref:`onemath_host_thread_safety`.
 
 .. _onemath_queues:
 

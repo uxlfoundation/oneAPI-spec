@@ -23,55 +23,55 @@ BLAS Level 2 Routines
 
          * -     Routines
            -     Description  
-         * -     :ref:`onemath_blas_gbmv`   
+         * -     :ref:`onemath_blas_gbmv`
            -     Matrix-vector product using a general band matrix         
-         * -     :ref:`onemath_blas_gemv`   
+         * -     :ref:`onemath_blas_gemv`
            -     Matrix-vector product using a general matrix     
-         * -     :ref:`onemath_blas_ger`   
+         * -     :ref:`onemath_blas_ger`
            -     Rank-1 update of a general matrix     
-         * -     :ref:`onemath_blas_gerc`   
+         * -     :ref:`onemath_blas_gerc`
            -     Rank-1 update of a conjugated general matrix     
-         * -     :ref:`onemath_blas_geru`   
+         * -     :ref:`onemath_blas_geru`
            -     Rank-1 update of a general matrix, unconjugated          
-         * -     :ref:`onemath_blas_hbmv`   
+         * -     :ref:`onemath_blas_hbmv`
            -     Matrix-vector product using a Hermitian band matrix          
          * -     :ref:`onemath_blas_hemv`
            -     Matrix-vector product using a Hermitian matrix          
-         * -     :ref:`onemath_blas_her`   
+         * -     :ref:`onemath_blas_her`
            -     Rank-1 update of a Hermitian matrix     
-         * -     :ref:`onemath_blas_her2`   
+         * -     :ref:`onemath_blas_her2`
            -     Rank-2 update of a Hermitian matrix     
-         * -     :ref:`onemath_blas_hpmv`   
+         * -     :ref:`onemath_blas_hpmv`
            -     Matrix-vector product using a Hermitian packed matrix          
-         * -     :ref:`onemath_blas_hpr`   
+         * -     :ref:`onemath_blas_hpr`
            -     Rank-1 update of a Hermitian packed matrix     
-         * -     :ref:`onemath_blas_hpr2`   
+         * -     :ref:`onemath_blas_hpr2`
            -     Rank-2 update of a Hermitian packed matrix     
-         * -     :ref:`onemath_blas_sbmv`   
+         * -     :ref:`onemath_blas_sbmv`
            -     Matrix-vector product using symmetric band matrix          
-         * -     :ref:`onemath_blas_spmv`   
+         * -     :ref:`onemath_blas_spmv`
            -     Matrix-vector product using a symmetric packed matrix          
-         * -     :ref:`onemath_blas_spr`   
+         * -     :ref:`onemath_blas_spr`
            -     Rank-1 update of a symmetric packed matrix     
-         * -     :ref:`onemath_blas_spr2`   
+         * -     :ref:`onemath_blas_spr2`
            -     Rank-2 update of a symmetric packed matrix     
-         * -     :ref:`onemath_blas_symv`   
+         * -     :ref:`onemath_blas_symv`
            -     Matrix-vector product using a symmetric matrix          
-         * -     :ref:`onemath_blas_syr`   
+         * -     :ref:`onemath_blas_syr`
            -     Rank-1 update of a symmetric matrix     
-         * -     :ref:`onemath_blas_syr2`   
+         * -     :ref:`onemath_blas_syr2`
            -     Rank-2 update of a symmetric matrix     
-         * -     :ref:`onemath_blas_tbmv`   
+         * -     :ref:`onemath_blas_tbmv`
            -     Matrix-vector product using a triangular band matrix          
-         * -     :ref:`onemath_blas_tbsv`   
+         * -     :ref:`onemath_blas_tbsv`
            -     Solution of a linear system of equations with a triangular band matrix    
-         * -     :ref:`onemath_blas_tpmv`   
+         * -     :ref:`onemath_blas_tpmv`
            -     Matrix-vector product using a triangular packed matrix          
-         * -     :ref:`onemath_blas_tpsv`   
+         * -     :ref:`onemath_blas_tpsv`
            -     Solution of a linear system of equations with a triangular packed matrix    
-         * -     :ref:`onemath_blas_trmv`   
+         * -     :ref:`onemath_blas_trmv`
            -     Matrix-vector product using a triangular matrix          
-         * -     :ref:`onemath_blas_trsv`   
+         * -     :ref:`onemath_blas_trsv`
            -     Solution of a linear system of equations with a triangular matrix    
 
 
