@@ -106,12 +106,12 @@ is a possible valid implementation.
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
 is to explicitly provide a name for SYCL kernels executed by an algorithm the policy is passed to.
 
-The ``device_policy`` type is copy constructible, copy assignable, move constructible and move assignable.
+The ``device_policy`` type is copy-constructible, copy-assignable, move-constructible and move-assignable.
 A policy instance constructed as or assigned a copy of another instance is associated with
 a ``sycl::queue`` that compares equal, as defined by `SYCL`_, to the queue of that other instance.
 A policy instance constructed as or assigned a move of another instance is associated with the queue
-of that other instance without copying it. It is unspecified whether the original policy is associated
-with any queue after the move.
+of that other instance without copying it. It is unspecified whether the moved-from policy instance
+is associated with any queue after the move.
 
 .. code:: cpp
 
