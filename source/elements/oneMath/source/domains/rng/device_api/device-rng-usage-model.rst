@@ -5,7 +5,7 @@
 .. _onemath_device_rng_usage_model:
 
 oneMath RNG Device Usage Model
-=============================
+==============================
 
 .. contents::
     :local:

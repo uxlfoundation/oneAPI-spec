@@ -28,7 +28,7 @@ The oneapi::math::stats::variation function is used to compute an array of varia
 .. _onemath_stats_variation_user_mean_buffer:
 
 oneapi::math::stats::variation (buffer version)
-----------------------------------------------
+-----------------------------------------------
 
 .. rubric:: Syntax
 

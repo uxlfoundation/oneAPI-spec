@@ -5,7 +5,7 @@
 .. _onemath_rng_usage_model:
 
 oneMath RNG Host Usage Model
-===========================
+============================
 
 
 .. rubric:: Description

@@ -28,7 +28,7 @@ The oneapi::math::stats::raw_moment function is used to compute array of raw mom
 .. _onemath_stats_raw_moment_buffer:
 
 oneapi::math::stats::raw_moment (buffer version)
------------------------------------------------
+------------------------------------------------
 
 .. rubric:: Syntax
 

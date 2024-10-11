@@ -26,16 +26,16 @@ BLAS-like Extensions
 
          * -     Routines
            -     Description     
-         * -     :ref:`onemath_blas_axpy_batch`   
+         * -     :ref:`onemath_blas_axpy_batch`
            -     Computes groups of vector-scalar products added to a vector.
-         * -     :ref:`onemath_blas_gemm_batch`   
+         * -     :ref:`onemath_blas_gemm_batch`
            -     Computes groups of matrix-matrix products with general matrices.   
-         * -     :ref:`onemath_blas_trsm_batch`   
+         * -     :ref:`onemath_blas_trsm_batch`
            -     Solves a triangular matrix equation for a group of matrices.   
-         * -     :ref:`onemath_blas_gemmt`   
+         * -     :ref:`onemath_blas_gemmt`
            -     Computes a matrix-matrix product with general matrices, but updates
                  only the upper or lower triangular part of the result matrix.
-         * -     :ref:`onemath_blas_gemm_bias`   
+         * -     :ref:`onemath_blas_gemm_bias`
            -     Computes a matrix-matrix product using general integer matrices with bias
          * -     :ref:`onemath_blas_imatcopy`
            -     Computes an in-place matrix transposition or copy.

@@ -31,11 +31,11 @@ namespace                 oneMath domain or content
 .. note::
    :name: Implementation Requirement
 
-   Inside each oneMath domain, there are many routines, classes, enums and objects defined which constitute the breadth and scope of that oneMath domain.  
+   Inside each oneMath domain, there are many routines, classes, enums and objects defined which constitute the breadth and scope of that oneMath domain.
    It is permitted for a library implementation of the oneMath specification to implement either all, one or more than one of the domains in oneMath. However, within an implementation of a specific domain, all relevant routines, classes, enums and objects (including those relevant enums and objects which live outside a particular domain in the general ``oneapi::math`` namespace must be both declared and defined in the library so that an application that uses that domain could build and link against that library implementation successfully.
 
-   It is however acceptable to throw the runtime exception :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>` inside of the routines or class member functions in that domain that have not been fully implemented.  
-   For instance, a library may choose to implement the oneMath BLAS functionality and in particular may choose to implement only the :ref:`onemath_blas_gemm` api for their library, in which case they must also include all the other blas namespaced routines and throw the :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>` exception inside all the others.  
+   It is however acceptable to throw the runtime exception :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>` inside of the routines or class member functions in that domain that have not been fully implemented.
+   For instance, a library may choose to implement the oneMath BLAS functionality and in particular may choose to implement only the :ref:`onemath_blas_gemm` api for their library, in which case they must also include all the other blas namespaced routines and throw the :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>` exception inside all the others.
    
    In such a case, the implemented routines in such a library should be communicated clearly and easily understood by users of that library.
 
@@ -71,9 +71,9 @@ oneMath uses the following DPC++ data types:
 .. _onemath_datatypes:
 
 oneMath defined datatypes
-++++++++++++++++++++++++
++++++++++++++++++++++++++
 
-oneMath dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``oneapi::math`` namespace.  
+oneMath dense and sparse linear algebra routines use scoped enum types as type-safe replacements for the traditional character arguments used in C/Fortran implementations of BLAS and LAPACK. These types all belong to the ``oneapi::math`` namespace.
 
 Each enumeration value comes with two names: A single-character name (the traditional BLAS/LAPACK character) and a longer, more descriptive name. The two names are exactly equivalent and may be used interchangeably.
 

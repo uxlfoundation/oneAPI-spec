@@ -5,7 +5,7 @@
 .. _onemath_stats_usage_model:
 
 oneMath Summary Statistics Usage Model
-=====================================
+======================================
 
 
 .. rubric:: Description
