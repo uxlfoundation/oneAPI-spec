@@ -10,10 +10,14 @@ blocked_nd_range
 
 Class template that represents a recursively divisible N-dimensional half-open interval.
 
-A ``blocked_nd_range`` is the N-dimensional extension of ``blocked_range``, ``blocked_range2d``, and ``blocked_range3d``.
+A ``blocked_nd_range`` is the N-dimensional extension of ``blocked_range``.
 You can interpret it as a Cartesian product of N instances of ``blocked_range``.
-Unlike ``blocked_range2d`` and ``blocked_range3d``, all ranges must be specified over the same ``Value`` type.
-Therefore, ``blocked_nd_range<int,2>`` is analogous to ``blocked_range2d<int,int>``.
+It meets the :doc:`Range requirements <../../named_requirements/algorithms/range>`.
+
+Unlike ``blocked_range2d`` and ``blocked_range3d``, all dimensions of ``blocked_nd_range`` must be specified
+over the same ``Value`` type. The class constructors also differ from those of ``blocked_range2d/3d``.
+Different naming patterns indicate the distinction between the classes.
+For example, ``blocked_nd_range<int,2>`` is analogous but not identical to ``blocked_range2d<int,int>``.
 
 .. code:: cpp
 
