@@ -39,11 +39,10 @@ See "Execution policies" in the `C++ Standard`_ for more information.
    The ``std::is_execution_policy`` type trait resolves to ``std::false_type`` for oneDPL execution policies.
    Implementations and programs should instead use the :ref:`oneDPL type trait <exec-policy-type-trait>`.
 
-Device Execution Policy
-+++++++++++++++++++++++
+Device Execution Policies
++++++++++++++++++++++++++
 
-A device execution policy class ``oneapi::dpl::execution::device_policy`` specifies
-the `SYCL`_ device and queue to run oneDPL algorithms.
+A device execution policy represents a `SYCL`_ device and queue to run oneDPL algorithms.
 
 .. code:: cpp
 
@@ -56,7 +55,7 @@ the `SYCL`_ device and queue to run oneDPL algorithms.
         template <typename KernelName = /*unspecified*/>
         class device_policy;
 
-        const device_policy<> dpcpp_default;
+        inline const device_policy<> dpcpp_default;
 
         template <typename KernelName = /*unspecified*/>
         device_policy<KernelName>
@@ -69,11 +68,10 @@ the `SYCL`_ device and queue to run oneDPL algorithms.
         template <typename NewKernelName, typename OldKernelName>
         device_policy<NewKernelName>
         make_device_policy( const device_policy<OldKernelName>& = dpcpp_default );
+
       }
     }
   }
-
-``dpcpp_default`` is a predefined execution policy object to run algorithms on the default `SYCL`_ device.
 
 device_policy Class
 ^^^^^^^^^^^^^^^^^^^
@@ -99,14 +97,21 @@ device_policy Class
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
 to run algorithms on a SYCL device. When an algorithm runs with ``device_policy``
 it is capable of processing SYCL buffers (passed via ``oneapi::dpl::begin/end``),
-data in the host memory and data in Unified Shared Memory (USM), including USM device memory.
-Data placed in the host memory and USM can only be passed to oneDPL algorithms
+data in the host memory and data in Unified Shared Memory (USM), including device USM.
+Data placed in the host memory and USM can be passed to oneDPL algorithms
 as pointers and random access iterators. The way to transfer data from the host memory
 to a device and back is unspecified; per-element data movement to/from a temporary storage
 is a possible valid implementation.
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
 is to explicitly provide a name for SYCL kernels executed by an algorithm the policy is passed to.
+
+The ``device_policy`` type is copy-constructible, copy-assignable, move-constructible and move-assignable.
+A policy instance constructed as or assigned a copy of another instance is associated with
+a ``sycl::queue`` that compares equal, as defined by `SYCL`_, to the queue of that other instance.
+A policy instance constructed as or assigned a move of another instance is associated with the queue
+of that other instance without copying it. It is unspecified whether the moved-from policy instance
+is associated with any queue after the move.
 
 .. code:: cpp
 
@@ -119,8 +124,8 @@ Construct a policy object associated with a queue created with the default devic
   template <typename OtherName>
   device_policy( const device_policy<OtherName>& policy )
 
-Construct a policy object associated with the same queue as ``policy``, by changing
-the kernel name of the given policy to ``kernel_name`` defined for the new policy.
+Construct a policy object as if by copying ``policy`` and changing
+the kernel name to ``kernel_name`` defined for the new policy.
 
 .. code:: cpp
 
@@ -145,6 +150,13 @@ Return the queue the policy is associated with.
   operator sycl::queue() const
 
 Allow implicit conversion of the policy to a ``sycl::queue`` object.
+
+Predefined Device Policy
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+``dpcpp_default`` is a predefined execution policy object to run algorithms on the default SYCL device.
+It is a global immutable (``const``) instance of type ``device_policy<>``.
+[*Note*: ``dpcpp_default`` can be copied but cannot be moved. -- *end note*]
 
 make_device_policy Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
