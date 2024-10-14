@@ -1,4 +1,5 @@
 .. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
+.. SPDX-FileCopyrightText: Contributors to the oneAPI Specification project.
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -14,6 +15,8 @@ version and runtime information.
 
     // Defined in header <oneapi/tbb/version.h>
 
+    #define ONETBB_SPEC_VERSION /*implementation-defined*/
+
     #define TBB_VERSION_MAJOR   /*implementation-defined*/
     #define TBB_VERSION_MINOR   /*implementation-defined*/
     #define TBB_VERSION_STRING  /*implementation-defined*/
@@ -25,16 +28,21 @@ version and runtime information.
     const char* TBB_runtime_version();
     int TBB_runtime_interface_version();
 
-**Version Macros**
+Version Macros
+--------------
 
 oneTBB defines macros related to versioning, as described below.
 
+* ``ONETBB_SPEC_VERSION`` macro defined to the decimal literal whose value equals to
+  ``x * 100 + y``, where ``x`` is the major version and ``y`` is the minor version
+  of the latest specification of oneTBB fully supported by the implementation.
 * ``TBB_VERSION_MAJOR`` macro defined to integral value that represents major library version.
 * ``TBB_VERSION_MINOR`` macro defined to integral value that represents minor library version.
 * ``TBB_VERSION_STRING`` macro defined to the string representation of the full library version.
-* ``TBB_INTERFACE_VERSION`` macro defined to current interface version. The value is a decimal
-  numeral of the form ``xyyz`` where ``x`` is the major interface version number and ``y`` is the
-  minor interface version number. This macro is increased in each release.
+* ``TBB_INTERFACE_VERSION`` macro defined to a decimal literal for the current interface version.
+  The value of the literal equals to ``x * 1000 + y * 10 + z`` where ``x`` is the major interface
+  version number, ``y`` is the minor interface version number, and ``z`` is a decimal digit.
+  This macro is increased in each release.
 * ``TBB_INTERFACE_VERSION_MAJOR`` macro defined to ``TBB_INTERFACE_VERSION/1000``, which is the
   major interface version number.
 * ``TBB_INTERFACE_VERSION_MINOR`` macro defined to ``TBB_INTERFACE_VERSION%1000/10``, which is the
