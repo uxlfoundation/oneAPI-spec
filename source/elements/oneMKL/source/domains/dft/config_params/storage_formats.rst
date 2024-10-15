@@ -7,10 +7,13 @@
 Data storage
 ============
 
-The data storage convention observed by a
-:ref:`descriptor<onemkl_dft_descriptor>` object depends on whether it is a real
-or complex descriptor and, in case of complex descriptors, on the configuration
-value associated with configuration parameter ``config_param::COMPLEX_STORAGE``.
+The usage of prepended namespace specifiers ``oneapi::mkl::dft`` is
+omitted below for conciseness.
+
+The data storage convention observed by a ``descriptor`` object depends on
+whether it is a real or complex descriptor and, in case of complex descriptors,
+on the configuration value associated with configuration parameter
+``config_param::COMPLEX_STORAGE``.
 
 .. _onemkl_dft_complex_storage:
 
@@ -24,14 +27,12 @@ associated with a configuration value ``config_value::COMPLEX_COMPLEX`` (default
 behavior), those entries are accessed and stored as ``std::complex<float>``
 (resp. ``std::complex<double>``) elements of a single data container
 (device-accessible USM allocation or ``sycl::buffer`` object) if the
-:ref:`descriptor<onemkl_dft_descriptor>` object is a single-precision (resp.
-double-precision) descriptor. If the configuration value
-``config_value::REAL_REAL`` is used instead, the real and imaginary parts of
-those entries are accessed and stored as ``float`` (resp. ``double``) elements
-of two separate, non-overlapping data containers (device-accessible USM
-allocations or ``sycl::buffer`` objects) if the
-:ref:`descriptor<onemkl_dft_descriptor>` object is a single-precision (resp.
-double-precision) descriptor.
+``descriptor`` object is a single-precision (resp. double-precision) descriptor.
+If the configuration value ``config_value::REAL_REAL`` is used instead, the real
+and imaginary parts of those entries are accessed and stored as ``float`` (resp.
+``double``) elements of two separate, non-overlapping data containers
+(device-accessible USM allocations or ``sycl::buffer`` objects) if the
+``descriptor`` object is a single-precision (resp. double-precision) descriptor.
 
 These two behaviors are further specified and illustrated below.
 
@@ -45,20 +46,19 @@ sequences must belong to a single data container (device-accessible USM
 allocation or ``sycl::buffer`` object). Any relevant entry
 :math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` is accessed/stored from/in
 a data container provided at compute time at the index value expressed in eq.
-:eq:`eq_idx_data_layout` (from :ref:`this page<onemkl_dft_config_data_layouts>`)
+:eq:`eq_idx_data_layout` (see the page dedicated to the
+:ref:`configuration of data layout<onemkl_dft_config_data_layouts>`)
 of that data container, whose elementary data type is (possibly implicitly
 re-interpreted as) ``std::complex<float>`` (resp. ``std::complex<double>``) for
 single-precision (resp. double-precision) descriptors.
 
 The same unique data container is to be used for forward- and backward-domain
-data sequences for in-place transforms (for
-:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
-``config_value::INPLACE`` for configuration parameter
+data sequences for in-place transforms (for ``descriptor`` objects with
+configuration value ``config_value::INPLACE`` for configuration parameter
 ``config_param::PLACEMENT``). Two separate data containers sharing no common
-elements are to be used for out-of-place transforms (for
-:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
-``config_value::NOT_INPLACE`` for configuration parameter
-``config_param::PLACEMENT``).
+elements are to be used for out-of-place transforms (for ``descriptor`` objects
+with configuration value ``config_value::NOT_INPLACE`` for configuration
+parameter ``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::COMPLEX_COMPLEX``
 for configuration parameter ``config_param::COMPLEX_STORAGE``, in the
@@ -84,8 +84,8 @@ USM allocations.
 
     // initialize forward-domain data such that entry {m;k1,k2,k3}
     //   = Z[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
-    compute_forward(desc, Z); // complex-to-complex in-place DFT
-    // in backward domain: entry {m;k1,k2,k3}
+    auto ev = compute_forward(desc, Z); // complex-to-complex in-place DFT
+    // Upon completion of ev, in backward domain: entry {m;k1,k2,k3}
     //   = Z[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
 
 .. _onemkl_dft_complex_storage_real_real:
@@ -98,21 +98,20 @@ read/stored from/in two different, non-overlapping data containers
 (device-accessible USM allocations or ``sycl::buffer`` objects) encapsulating
 the real and imaginary parts of the relevant entries separately. The real and
 imaginary parts of any relevant complex entry
-:math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` are both stored at the index value
-expressed in eq. :eq:`eq_idx_data_layout` (from :ref:`this
-page<onemkl_dft_config_data_layouts>`) of their respective data containers, whose elementary
-data type is (possibly implicitly re-interpreted as) ``float`` (resp.
-``double``) for single-precision (resp. double-precision) descriptors.
+:math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` are both stored at the
+index value expressed in eq. :eq:`eq_idx_data_layout` (see the page dedicated to
+the :ref:`configuration of data layout<onemkl_dft_config_data_layouts>`) of
+their respective data containers, whose elementary data type is (possibly
+implicitly re-interpreted as) ``float`` (resp. ``double``) for single-precision
+(resp. double-precision) descriptors.
 
 The same two data containers are to be used for real and imaginary parts of
 forward- and backward-domain data sequences for in-place transforms (for
-:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
-``config_value::INPLACE`` for configuration parameter
-``config_param::PLACEMENT``). Four separate data containers sharing no common
-elements are to be used for out-of-place transforms (for
-:ref:`descriptor<onemkl_dft_descriptor>` objects with configuration value
-``config_value::NOT_INPLACE`` for configuration parameter
-``config_param::PLACEMENT``).
+``descriptor`` objects with configuration value ``config_value::INPLACE`` for
+configuration parameter ``config_param::PLACEMENT``). Four separate data
+containers sharing no common elements are to be used for out-of-place transforms
+(for ``descriptor`` objects with configuration value ``config_value::NOT_INPLACE``
+for configuration parameter ``config_param::PLACEMENT``).
 
 The following snippet illustrates the usage of ``config_value::REAL_REAL``
 set for configuration parameter ``config_param::COMPLEX_STORAGE``, in the
@@ -141,8 +140,8 @@ USM allocations.
     //   = ZR[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
     // and the imaginary part of entry {m;k1,k2,k3}
     //   = ZI[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
-    compute_forward<decltype(desc), float>(desc, ZR, ZI); // complex-to-complex in-place DFT
-    // in backward domain: the real part of entry {m;k1,k2,k3}
+    auto ev = compute_forward<decltype(desc), float>(desc, ZR, ZI); // complex-to-complex in-place DFT
+    // Upon completion of ev, in backward domain: the real part of entry {m;k1,k2,k3}
     //   = ZR[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
     // and the imaginary part of entry {m;k1,k2,k3}
     //   = ZI[ strides[0] + k1*strides[1] + k2*strides[2] + k3*strides[3] + m*dist ]
@@ -156,14 +155,13 @@ Real descriptors observe only one type of data storage. Any relevant (real)
 entry :math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` of a data sequence
 in forward domain is accessed and stored as a ``float`` (resp. ``double``)
 element of a single data container (device-accessible USM allocation or
-``sycl::buffer`` object) if the :ref:`descriptor<onemkl_dft_descriptor>` object
-is a single-precision (resp. double-precision) descriptor. Any relevant
-(complex) entry :math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` of a data
-sequence in backward domain is accessed and stored as a ``std::complex<float>``
-(resp. ``std::complex<double>``) element of a single data container
-(device-accessible USM allocation or ``sycl::buffer`` object) if the
-:ref:`descriptor<onemkl_dft_descriptor>` object is a single-precision (resp.
-double-precision) descriptor.
+``sycl::buffer`` object) if the ``descriptor`` object is a single-precision
+(resp. double-precision) descriptor. Any relevant (complex) entry
+:math:`\left(\cdot\right)^{m}_{k_1, k_2,\dots ,k_d}` of a data sequence in
+backward domain is accessed and stored as a ``std::complex<float>`` (resp.
+``std::complex<double>``) element of a single data container (device-accessible
+USM allocation or ``sycl::buffer`` object) if the
+``descriptor`` object is a single-precision (resp. double-precision) descriptor.
 
 The following snippet illustrates the usage of a real, single-precision
 descriptor (and the corresponding data storage) for the in-place,
@@ -190,12 +188,13 @@ forward and backward domains, with USM allocations.
 
     // initialize forward-domain data such that real entry {m;k1,k2,k3}
     //   = data[ fwd_strides[0] + k1*fwd_strides[1] + k2*fwd_strides[2] + k3*fwd_strides[3] + m*fwd_dist ]
-    compute_forward(desc, data); // real-to-complex in-place DFT
-    // in backward domain, the implicitly-assumed type is complex so, considering
+    auto ev = compute_forward(desc, data); // real-to-complex in-place DFT
+    // In backward domain, the implicitly-assumed type is complex so, consider
     //   std::complex<float>* complex_data = static_cast<std::complex<float>*>(data);
-    //   we have entry {m;k1,k2,k3}
+    // upon completion of ev, the backward-domain entry {m;k1,k2,k3} is
     //   = complex_data[ bwd_strides[0] + k1*bwd_strides[1] + k2*bwd_strides[2] + k3*bwd_strides[3] + m*bwd_dist ]
     //   for 0 <= k3 <= n3/2.
-    //   Note: if n3/2 < k3 < n3, entry {m;k1,k2,k3} = std::conj(entry {m;n1-k1,n2-k2,n3-k3})
+    //   Note: if n3/2 < k3 < n3, entry {m;k1,k2,k3} is not stored explicitly
+    //   since it is equal to std::conj(entry {m;n1-k1,n2-k2,n3-k3})
 
 **Parent topic** :ref:`onemkl_dft_enums`
