@@ -39,6 +39,7 @@ Types that meet the :doc:`Range requirements <named_requirements/algorithms/rang
    algorithms/blocked_ranges/blocked_range_cls.rst
    algorithms/blocked_ranges/blocked_range2d_cls.rst
    algorithms/blocked_ranges/blocked_range3d_cls.rst
+   algorithms/blocked_ranges/blocked_nd_range_cls.rst
 
 .. _Partitioners:
 

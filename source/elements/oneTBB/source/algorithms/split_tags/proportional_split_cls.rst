@@ -19,6 +19,7 @@ the class should be split.
     // Defined in header <oneapi/tbb/blocked_range.h>
     // Defined in header <oneapi/tbb/blocked_range2d.h>
     // Defined in header <oneapi/tbb/blocked_range3d.h>
+    // Defined in header <oneapi/tbb/blocked_nd_range.h>
     // Defined in header <oneapi/tbb/partitioner.h>
     // Defined in header <oneapi/tbb/parallel_for.h>
     // Defined in header <oneapi/tbb/parallel_reduce.h>
