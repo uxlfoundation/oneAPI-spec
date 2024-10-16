@@ -7,16 +7,16 @@
 The ``descriptor`` class template
 =================================
 
-Instances of any ``oneapi::mkl::dft::descriptor`` class define DFT(s) to be
-computed. The usage of prepended namespace specifiers ``oneapi::mkl::dft`` is
+Instances of any ``oneapi::math::dft::descriptor`` class define DFT(s) to be
+computed. The usage of prepended namespace specifiers ``oneapi::math::dft`` is
 omitted below for conciseness.
 
 Description
 +++++++++++
 
 Any desired DFT is fully defined by an instance of a specialization of the
-``descriptor`` class template, declared in the ``oneapi::mkl::dft`` namespace.
-The :ref:`scoped enumeration types<onemkl_dft_enums>` ``precision``, ``domain``,
+``descriptor`` class template, declared in the ``oneapi::math::dft`` namespace.
+The :ref:`scoped enumeration types<onemath_dft_enums>` ``precision``, ``domain``,
 ``config_param`` and ``config_value`` defined in the same namespace (and the
 corresponding ranges of values) are relevant to the definition and
 configurations of such objects. Users can set several (resp. query all)
@@ -29,7 +29,7 @@ device encapsulated by the ``sycl::queue`` object required by that function.
 
 The desired forward (resp. backward) DFT calculations may then be computed by
 passing such a committed ``descriptor`` object to a ``compute_forward`` (resp.
-``compute_backward``) function (defined in the ``oneapi::mkl::dft`` namespace as
+``compute_backward``) function (defined in the ``oneapi::math::dft`` namespace as
 well), along with the relevant data containers (``sycl::buffer`` object(s) or
 pointer(s) to a device-accessible USM allocations) for the  desired DFT(s). This
 function makes the ``descriptor`` object enqueue the operations relevant for the
@@ -136,29 +136,29 @@ desired calculations to the ``sycl::queue`` object it was given when committing 
 
    * -     Routines
      -     Description
-   * -     :ref:`constructors<onemkl_dft_descriptor_constructors>`
+   * -     :ref:`constructors<onemath_dft_descriptor_constructors>`
      -     Create a ``descriptor`` object. The parameterized constructors
            enable the (one-time) definition of the length(s)
            :math:`\lbrace n_1, \ldots, n_d\rbrace` (the dimension :math:`d` is
            deduced accordingly). The parameterized constructors default-initialize
            the object; copy and move constructors do not.
-   * -     :ref:`assignment operators<onemkl_dft_descriptor_assignment_operators>`
+   * -     :ref:`assignment operators<onemath_dft_descriptor_assignment_operators>`
      -     Perform a deep copy of or moves the argument.
-   * -     ``set_value`` :ref:`member functions<onemkl_dft_descriptor_set_value>`
+   * -     ``set_value`` :ref:`member functions<onemath_dft_descriptor_set_value>`
      -     Set a configuration value for a specific configuration parameter.
-   * -     ``get_value`` :ref:`member functions<onemkl_dft_descriptor_get_value>`
+   * -     ``get_value`` :ref:`member functions<onemath_dft_descriptor_get_value>`
      -     Query the configuration value associated with a particular
            configuration parameter.
-   * -     ``set_workspace`` :ref:`member function<onemkl_dft_descriptor_set_workspace>`
+   * -     ``set_workspace`` :ref:`member function<onemath_dft_descriptor_set_workspace>`
      -     Equips the ``descriptor`` object with an external workspace.
-   * -     ``commit`` :ref:`member function<onemkl_dft_descriptor_commit>`
+   * -     ``commit`` :ref:`member function<onemath_dft_descriptor_commit>`
      -     Commits the ``descriptor`` object to enqueue the operations relevant
            to the DFT(s) it determines to a given, user-provided ``sycl::queue``
            object; completes all initialization work relevant to and required by
            the chosen, device-compliant implementation for the particular DFT,
            as defined by the ``descriptor`` object.
 
-.. _onemkl_dft_descriptor_constructors:
+.. _onemath_dft_descriptor_constructors:
 
 Constructors
 ++++++++++++
@@ -168,7 +168,7 @@ all the relevant default configuration settings (which may depend on the
 specialization values for ``prec`` and ``dom``). The constructors do not perform
 any significant initialization work as changes in the object's configuration(s)
 may be operated thereafter (via its ``set_value``
-:ref:`member functions<onemkl_dft_descriptor_set_value>`) and modify
+:ref:`member functions<onemath_dft_descriptor_set_value>`) and modify
 significantly the nature of that work.
 
 The copy constructor performs a deep copy of ``descriptor`` objects.
@@ -244,15 +244,15 @@ without copying them.
    .. rubric:: Throws
 
    The constructors shall throw the following
-   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
-   ``oneapi::mkl::host_bad_alloc()``
+   ``oneapi::math::host_bad_alloc()``
       If any memory allocations on host have failed, for instance due to
       insufficient memory.
 
-   ``oneapi::mkl::unimplemented()``
+   ``oneapi::math::unimplemented()``
       If the dimension :math:`d`, *i.e.*, the size of ``lengths``, is larger
       than what is supported by the library implementation.
    
@@ -260,7 +260,7 @@ without copying them.
 **Descriptor class member table:** :ref:`onemath_dft_descriptor_member_table`
 
 
-.. _onemkl_dft_descriptor_assignment_operators:
+.. _onemath_dft_descriptor_assignment_operators:
 
 Assignment operators
 ++++++++++++++++++++
@@ -302,11 +302,11 @@ The copy assignment operator results in a deep copy.
    .. rubric:: Throws
 
    The assignment operators shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exception<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
-   ``oneapi::mkl::host_bad_alloc()``
+   ``oneapi::math::host_bad_alloc()``
       If any memory allocations on host have failed, for instance due to
       insufficient memory.
 
@@ -322,14 +322,14 @@ configuration value corresponding to a (read-write) configuration parameter for
 the DFT(s) that it defines. These functions are to be used as many times as
 required for all the necessary configuration parameters to be set prior to
 committing the object (by calling its ``commit``
-:ref:`member function<onemkl_dft_descriptor_commit>`).
+:ref:`member function<onemath_dft_descriptor_commit>`).
 
 All these functions require and expect exactly **two** arguments: they set the
 given configuration value (second argument) for a desired configuration
 parameter (first argument), represented by ``param`` of type ``config_param``.
 The expected type of the associated configuration value (second argument)
 depends on ``param`` and is specified in the
-:ref:`section<onemkl_dft_enum_config_param>` dedicated to the ``config_param``
+:ref:`section<onemath_dft_enum_config_param>` dedicated to the ``config_param``
 type and its enumerators (unless a deprecated version is used). The expected
 type of configuration value determines which of the ``set_value`` overloads is
 to be used for a specific value of ``param``.
@@ -354,7 +354,7 @@ This version of ``set_value`` supports the following values of ``param``:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_value(config_param param, real_scalar_t value);
@@ -370,7 +370,7 @@ This version of ``set_value`` supports the following values of ``param``:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_value(config_param param, const std::vector<std::int64_t>& value);
@@ -385,13 +385,13 @@ This version of ``set_value`` supports the following values of ``param``:
 
 ``value`` must be a vector of :math:`\left(d+1\right)` ``std::int64_t`` elements.
 More information about setting strides may be found in the page dedicated to
-the :ref:`configuration of data layouts<onemkl_dft_config_data_layouts>`.
+the :ref:`configuration of data layouts<onemath_dft_config_data_layouts>`.
 
 .. rubric:: Syntax for parameters associated with non-numeric values
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_value(config_param param, config_value value);
@@ -407,7 +407,7 @@ This version of ``set_value`` supports the following values of ``param``:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_value(config_param param, const std::int64_t* value);
@@ -432,7 +432,7 @@ recommended by the compile-time deprecation warning.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::set_value(config_param param, ...);
@@ -442,7 +442,7 @@ recommended by the compile-time deprecation warning.
 This version supports all values of ``param`` corresponding to a writable
 configuration parameter. The variadic argument list must contain a unique
 element. When reading the latter (after default argument promotions of variadic
-arguments, if applicable), oneMKL *assumes* that it is
+arguments, if applicable), oneMath *assumes* that it is
 
 - an ``std::int64_t`` value if ``param`` is any of ``config_param::NUMBER_OF_TRANSFORMS``, ``config_param::FWD_DISTANCE``, or ``config_param::BWD_DISTANCE``;
 - a ``double`` value if ``param`` is any of ``FORWARD_SCALE``, ``BACKWARD_SCALE``;
@@ -467,27 +467,27 @@ to inform about the recommended alternative.
    ``...``
       The value to be set for the targeted configuration parameter, passed as
       a variadic argument list of **one** element. This usage is deprecated.
-      Note the type assumed by oneMKL when reading that value (specified above).
+      Note the type assumed by oneMath when reading that value (specified above).
 
 .. container:: section
 
    .. rubric:: Throws
 
    The ``set_value`` member functions shall throw the following
-   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
-   ``oneapi::mkl::invalid_argument()``
+   ``oneapi::math::invalid_argument()``
       - If the provided ``param`` corresponds to a read-only configuration parameter;
       - If the overloaded version being used does not support ``param``;
       - If the provided ``param`` and/or configuration value are/is not valid.
 
-   ``oneapi::mkl::unimplemented()``
+   ``oneapi::math::unimplemented()``
       If the provided ``param`` and configuration value are valid, but not
       supported by the library implementation.
 
-**Descriptor class member table:** :ref:`onemkl_dft_descriptor_member_table`
+**Descriptor class member table:** :ref:`onemath_dft_descriptor_member_table`
 
 
 .. _onemath_dft_descriptor_get_value:
@@ -504,7 +504,7 @@ configuration value (into the element pointed by the second argument)
 corresponding to the queried configuration parameter (first argument) ``param``
 of type ``config_param``. The second argument is a valid *pointer* to a
 configuration value whose type corresponds to ``param``, as specified in the
-:ref:`section<onemkl_dft_enum_config_param>` dedicated to the ``config_param``
+:ref:`section<onemath_dft_enum_config_param>` dedicated to the ``config_param``
 type and its enumerators (unless a deprecated version is used). The expected
 type of configuration value determines which of the ``get_value`` overloads is
 to be used for a specific value of ``param``.
@@ -532,7 +532,7 @@ This version of ``get_value`` supports only ``config_param::FORWARD_DOMAIN`` for
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, precision* value_ptr) const;
@@ -545,7 +545,7 @@ This version of ``get_value`` supports only ``config_param::PRECISION`` for
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, std::int64_t* value_ptr) const;
@@ -558,11 +558,11 @@ This version of ``get_value`` supports the following values of ``param``:
 - ``config_param::BWD_DISTANCE``;
 - ``config_param::DIMENSION``;
 - ``config_param::WORKSPACE_EXTERNAL_BYTES`` (requires the calling object to be committed);
-- ``config_param::LENGTHS`` (deprecated usage if :math:`d > 1`, :math:`d` contiguous ``std::int64_t`` written by oneMKL)
-- ``config_param::INPUT_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
-- ``config_param::OUTPUT_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
-- ``config_param::FWD_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
-- ``config_param::BWD_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMKL);
+- ``config_param::LENGTHS`` (deprecated usage if :math:`d > 1`, :math:`d` contiguous ``std::int64_t`` written by oneMath)
+- ``config_param::INPUT_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMath);
+- ``config_param::OUTPUT_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMath);
+- ``config_param::FWD_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMath);
+- ``config_param::BWD_STRIDES`` (deprecated usage, :math:`\left(d+1\right)` contiguous ``std::int64_t`` written by oneMath);
 
 Using this version for querying configuration values encapsulating more than one
 ``std::int64_t`` values is deprecated. A runtime deprecation warning may be
@@ -572,7 +572,7 @@ emitted to inform about the recommended alternative in such cases.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, real_scalar_t* value_ptr) const;
@@ -590,7 +590,7 @@ single-precision (resp. double-precision) descriptors.
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, std::vector<std::int64_t>* value_ptr) const;
@@ -613,7 +613,7 @@ This version of ``get_value`` supports the following values of ``param``:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, config_value* value_ptr) const;
@@ -630,7 +630,7 @@ This version of ``get_value`` supports the following values of ``param``:
 
 .. code-block:: cpp
 
-   namespace oneapi::mkl::dft {
+   namespace oneapi::math::dft {
 
       template <precision prec, domain dom>
       void descriptor<prec,dom>::get_value(config_param param, ...) const;
@@ -639,7 +639,7 @@ This version of ``get_value`` supports the following values of ``param``:
 
 This version supports all values of ``param``. The variadic argument list must
 contain a unique element. When reading the latter (after default argument
-promotions of variadic arguments, if applicable), oneMKL assumes that it is of
+promotions of variadic arguments, if applicable), oneMath assumes that it is of
 type
 
 - ``domain*`` if ``param`` is ``config_param::FORWARD_DOMAIN``;
@@ -667,13 +667,13 @@ to inform about the recommended alternative.
 
    ``value_ptr``
       A valid *pointer* to a configuration value (or configuration values) in
-      which oneMKL is allowed to write (return) the queried value(s). The type
+      which oneMath is allowed to write (return) the queried value(s). The type
       of this input argument depends on ``param`` as specified above.
 
    ``...``
       A valid *pointer* to a configuration value (or configuration values),
       passed as a variadic argument list of **one** element. This usage is
-      deprecated. Note the type assumed by oneMKL when accessing that pointer
+      deprecated. Note the type assumed by oneMath when accessing that pointer
       (specified above)
 
 .. container:: section
@@ -681,20 +681,20 @@ to inform about the recommended alternative.
    .. rubric:: Throws
 
    The ``get_value`` member functions shall throw the following
-   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
    
-   ``oneapi::mkl::invalid_argument()``
+   ``oneapi::math::invalid_argument()``
       - If the overloaded version being used does not support ``param``;
       - If ``value_ptr`` is ``nullptr``;
       - If ``value_ptr->size()`` is not as expected when querying a vector-valued parameter.
 
-   ``oneapi::mkl::uninitialized``
+   ``oneapi::math::uninitialized``
       If ``param`` is ``config_param::WORKSPACE_EXTERNAL_BYTES`` and the
       calling object is not committed.
 
-   ``oneapi::mkl::unimplemented()``
+   ``oneapi::math::unimplemented()``
       If the queried ``param`` is valid, but not supported by the library
       implementation.
 
@@ -774,18 +774,18 @@ be used in compute calls. However, the aforementioned restrictions will still ap
    .. rubric:: Throws
 
    The ``set_workspace`` member function shall throw the following
-   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
    
-   ``oneapi::mkl::invalid_argument()``
+   ``oneapi::math::invalid_argument()``
       If the provided buffer ``workspaceBuf`` is not sufficiently large or is a
       sub-buffer, or if the provided USM allocation ``workspaceUSM`` is
       ``nullptr`` when an external workspace of size greater than zero is
       required, or if the provided USM allocation ``workspaceUSM`` is not
       accessible by the device.
 
-   ``oneapi::mkl::uninitialized()``
+   ``oneapi::math::uninitialized()``
       If ``set_workspace`` is called before the descriptor is committed.
 
 
@@ -835,20 +835,20 @@ called again.
    .. rubric:: Throws
 
    The ``commit`` member function shall throw the following
-   :ref:`exceptions<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exceptions<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here (if the
    ``descriptor`` object's configuration was found to be inconsistent, for
    instance):
    
-   ``oneapi::mkl::invalid_argument()``
+   ``oneapi::math::invalid_argument()``
       If ``queue`` is found to be invalid in any way.
 
-   ``oneapi::mkl::host_bad_alloc()``
+   ``oneapi::math::host_bad_alloc()``
       If any host side only memory allocations fail, for instance due to lack of
       memory.
 
-   ``oneapi::mkl::device_bad_alloc()``
+   ``oneapi::math::device_bad_alloc()``
       If any device or shared memory allocation fail.
  
 **Descriptor class member table:** :ref:`onemath_dft_descriptor_member_table`

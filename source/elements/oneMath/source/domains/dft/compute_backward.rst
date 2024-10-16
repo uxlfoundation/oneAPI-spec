@@ -7,11 +7,11 @@
 The ``compute_backward`` function templates
 ===========================================
 
-The ``oneapi::mkl::dft::compute_backward`` function templates enable the
+The ``oneapi::math::dft::compute_backward`` function templates enable the
 computation of backward DFT(s), as defined by a (committed)
-``oneapi::mkl::dft::descriptor`` object, on user-provided data. These function
-templates are declared in the ``oneapi::mkl::dft`` namespace; the usage of
-prepended namespace specifiers ``oneapi::mkl::dft`` is omitted below for conciseness.
+``oneapi::math::dft::descriptor`` object, on user-provided data. These function
+templates are declared in the ``oneapi::math::dft`` namespace; the usage of
+prepended namespace specifiers ``oneapi::math::dft`` is omitted below for conciseness.
 
 .. _onemath_dft_compute_backward_description:
 
@@ -34,7 +34,7 @@ progress of the enqueued DFT calculations.
    The ``compute_backward`` functions may need to access the internals and
    private/protected members of (some) ``descriptor`` classes.  This could be
    done, for instance, by labeling them as friend functions to the
-   ``descriptor`` :ref:`class template<onemkl_dft_descriptor>`.
+   ``descriptor`` :ref:`class template<onemath_dft_descriptor>`.
 
 .. onemath_dft_compute_backward_buffer:
 
@@ -198,11 +198,11 @@ progress of the enqueued DFT calculations.
    .. rubric:: Throws
 
    The ``compute_backward`` functions shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exception<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
-   ``oneapi::mkl::invalid_argument()``
+   ``oneapi::math::invalid_argument()``
       If ``desc`` is invalid. For instance, if its configuration value
       associated with configuration parameter ``config_param::COMMIT_STATUS`` is
       not ``config_param::COMMITTED``.
@@ -374,11 +374,11 @@ progress of the enqueued DFT calculations.
    .. rubric:: Throws
 
    The ``compute_backward`` functions shall throw the following
-   :ref:`exception<onemkl_common_exceptions>` if the associated condition is
+   :ref:`exception<onemath_common_exceptions>` if the associated condition is
    detected. An implementation may throw additional implementation-specific
    exception(s) in case of error conditions not covered here:
 
-   ``oneapi::mkl::invalid_argument()``
+   ``oneapi::math::invalid_argument()``
       If ``desc`` is invalid. For instance, if its configuration value
       associated with configuration parameter ``config_param::COMMIT_STATUS`` is
       not ``config_param::COMMITTED``. It will also be thrown if any required
