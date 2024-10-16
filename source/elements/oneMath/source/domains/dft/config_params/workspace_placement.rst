@@ -7,7 +7,7 @@
 Workspace placement
 -------------------
 
-The usage of prepended namespace specifiers ``oneapi::mkl::dft`` is
+The usage of prepended namespace specifiers ``oneapi::math::dft`` is
 omitted below for conciseness.
 
 DFT implementations often require temporary storage for intermediate data whilst computing DFTs.
@@ -25,7 +25,7 @@ For some backends and configurations, externally-managed workspaces may reduce
 performance.
 
 A typical workflow for using externally-managed workspaces is given
-:ref:`below<onemkl_dft_typical_usage_of_workspace_external>`.
+:ref:`below<onemath_dft_typical_usage_of_workspace_external>`.
 
 Automatically- and externally-managed workspaces
 ++++++++++++++++++++++++++++++++++++++++++++++++
@@ -55,8 +55,8 @@ When a descriptor is committed with ``config_value::WORKSPACE_EXTERNAL`` set
 for ``config_param::WORKSPACE_PLACEMENT``, the user must provide an external 
 workspace before calling any compute function.
 More details can be found in the section dedicated to the ``set_workspace``
-:ref:`member function<onemkl_dft_descriptor_set_workspace>` and in the typical
-usage illustrated :ref:`below<onemkl_dft_typical_usage_of_workspace_external>`.
+:ref:`member function<onemath_dft_descriptor_set_workspace>` and in the typical
+usage illustrated :ref:`below<onemath_dft_typical_usage_of_workspace_external>`.
 
 .. _onemath_dft_typical_usage_of_workspace_external:
 
@@ -77,7 +77,7 @@ This is shown in the following example code:
 
 .. code-block:: cpp
 
-   namespace dft = oneapi::mkl::dft;
+   namespace dft = oneapi::math::dft;
    // Create a descriptor
    dft::descriptor<dft::precision::SINGLE, dom> desc(n);
    // 1. Set the workspace placement to WORKSPACE_EXTERNAL

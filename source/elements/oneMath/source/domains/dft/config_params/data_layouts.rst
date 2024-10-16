@@ -7,7 +7,7 @@
 Configuration of data layouts
 -----------------------------
 
-The usage of prepended namespace specifiers ``oneapi::mkl::dft`` is
+The usage of prepended namespace specifiers ``oneapi::math::dft`` is
 omitted below for conciseness.
 
 The DFT interface provides the configuration parameters
@@ -24,7 +24,7 @@ Using the notations from the :ref:`introduction<onemath_dft_definitions>` and th
 superscript :math:`\text{fwd}` (resp. :math:`\text{bwd}`) for data sequences
 belonging to forward (resp. backward) domain, for any :math:`m` and multi-index
 :math:`\left(k_1, k_2, \ldots, k_d\right)` within :ref:`valid
-range<onemkl_dft_elementary_range_of_indices>`, the corresponding entry
+range<onemath_dft_elementary_range_of_indices>`, the corresponding entry
 :math:`\left(\cdot\right)^{m}_{k_{1}, k_{2}, \dots, k_d }` – or the real or
 imaginary part thereof – of the relevant data sequence is located at index
 
@@ -69,7 +69,7 @@ re-interpret the base data type of that data container into an
 implicitly-assumed elementary data type.
 That implicitly-assumed data type depends on the object type, *i.e.*, on the
 specialization values used for the template parameters when instantiating the
-``descriptor`` :ref:`class template<onemkl_dft_descriptor>`, and, in case of
+``descriptor`` :ref:`class template<onemath_dft_descriptor>`, and, in case of
 complex descriptors, on the configuration value set for its configuration parameter
 ``config_param::COMPLEX_STORAGE``. The table below lists the implicitly-assumed
 data type in either domain (last 2 columns) based on the object type and
@@ -225,10 +225,10 @@ relevant data sequence entries are accessed as elements of data containers
 (``sycl::buffer`` objects or device-accessible USM allocations) provided to the
 compute function, the base data type of which is (possibly implicitly re-interpreted)
 as documented in the above
-:ref:`table<onemkl_dft_config_data_implicitly_assumed_elementary_data_type>`. If
+:ref:`table<onemath_dft_config_data_implicitly_assumed_elementary_data_type>`. If
 using input and output strides, for any :math:`m` and multi-index
 :math:`\left(k_1, k_2, \ldots, k_d\right)` within :ref:`valid
-range<onemkl_dft_elementary_range_of_indices>`, the index to be used when
+range<onemath_dft_elementary_range_of_indices>`, the index to be used when
 accessing a data sequence entry – or part thereof – in forward domain is
 
 .. math::
@@ -248,21 +248,21 @@ As a consequence, configuring ``descriptor`` objects using these deprecated
 configuration parameters makes their configuration direction-dependent when
 different stride values are used in forward and backward domains. Since the
 intended compute direction is unknown to the object when
-:ref:`committing<onemkl_dft_descriptor_commit>` it, every direction that results
-in a :ref:`consistent data layout<onemkl_dft_data_layout_requirements>` in
+:ref:`committing<onemath_dft_descriptor_commit>` it, every direction that results
+in a :ref:`consistent data layout<onemath_dft_data_layout_requirements>` in
 forward and backward domains must be supported by successfully-committed
 ``descriptor`` objects.
 
 .. note::
     For ``descriptor`` objects with strides configured via these deprecated
     configuration parameters, the
-    :ref:`consistency requirements<onemkl_dft_data_layout_requirements>` may be
+    :ref:`consistency requirements<onemath_dft_data_layout_requirements>` may be
     satisfied for only one of the two compute directions, *i.e.*, for only one
     of the forward or backward DFT(s). Such a configuration should not cause an
     exception to be thrown by the descriptor's ``commit``
-    :ref:`member function<onemkl_dft_descriptor_commit>` but the behavior of
-    oneMKL is undefined if using that object for the compute direction that does
-    not align with the :ref:`consistency requirements<onemkl_dft_data_layout_requirements>`.
+    :ref:`member function<onemath_dft_descriptor_commit>` but the behavior of
+    oneMath is undefined if using that object for the compute direction that does
+    not align with the :ref:`consistency requirements<onemath_dft_data_layout_requirements>`.
 
 .. note::
     Setting either of ``config_param::INPUT_STRIDES`` or
@@ -285,7 +285,7 @@ the reverse direction as shown below.
 
 .. code-block:: cpp
 
-   namespace dft = oneapi::mkl::dft;
+   namespace dft = oneapi::math::dft;
    // ...
    desc.set_value(dft::config_param::INPUT_STRIDES,  fwd_domain_strides);
    desc.set_value(dft::config_param::OUTPUT_STRIDES, bwd_domain_strides);
