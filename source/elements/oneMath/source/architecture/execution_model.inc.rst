@@ -24,7 +24,7 @@ Non-Member Functions
 
 Each oneMath non-member computational routine takes a ``sycl::queue`` reference as its first parameter::
 
-    onemath::domain::routine(sycl::queue &q, ...);
+    math::domain::routine(sycl::queue &q, ...);
 
 All computation performed by the routine shall be done on the hardware device(s) associated with this queue, with possible aid from the host, unless otherwise specified.
 In the case of an ordered queue, all computation shall also be ordered with respect to other kernels as if enqueued on that queue.
@@ -77,7 +77,7 @@ When USM pointers are used as input to, or output from, a oneMath routine, it be
 
 To help the calling application, all oneMath routines with at least one USM pointer argument also take an optional reference to a list of *input events*, of type ``std::vector<sycl::event>``, and have a return value of type ``sycl::event`` representing computation completion::
 
-    sycl::event onemath::domain::routine(..., std::vector<sycl::event> &in_events = {});
+    sycl::event math::domain::routine(..., std::vector<sycl::event> &in_events = {});
 
 The routine shall ensure that all input events (if the list is present and non-empty) have occurred before any USM pointers are accessed. Likewise, the routine's output event shall not be complete until the routine has finished accessing all USM pointer arguments.
 

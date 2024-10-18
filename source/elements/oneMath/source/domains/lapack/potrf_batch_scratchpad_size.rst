@@ -36,7 +36,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
     namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t potrf_batch_scratchpad_size(cl::sycl::queue &queue, onemath::uplo *uplo, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
+      std::int64_t potrf_batch_scratchpad_size(cl::sycl::queue &queue, math::uplo *uplo, std::int64_t *n, std::int64_t *lda, std::int64_t group_count, std::int64_t *group_sizes)
     }
 
 .. container:: section
@@ -49,8 +49,8 @@ queue
 uplo
  | Array of ``group_count`` :math:`\text{uplo}_g` parameters.
  | Each of :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
- | If :math:`\text{uplo}_g` is ``onemath::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
- | If :math:`\text{uplo}_g` is ``onemath::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+ | If :math:`\text{uplo}_g` is ``math::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+ | If :math:`\text{uplo}_g` is ``math::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
  | Array of ``group_count`` :math:`n_g` parameters.
@@ -99,7 +99,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
     namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t potrf_batch_scratchpad_size(cl::sycl::queue &queue, onemath::uplo uplo, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size)
+      std::int64_t potrf_batch_scratchpad_size(cl::sycl::queue &queue, math::uplo uplo, std::int64_t n, std::int64_t lda, std::int64_t stride_a, std::int64_t batch_size)
     };
 
 .. container:: section
@@ -110,8 +110,8 @@ queue
   Device queue where calculations will be performed.
 uplo
  | Indicates whether the upper or lower triangular part of :math:`A_i` is stored and how :math:`A_i` is factored:
- | If ``uplo = onemath::uplo::upper``, the array ``a`` stores the upper triangular parts of the matrices :math:`A_i`,
- | If ``uplo = onemath::uplo::lower``, the array ``a`` stores the lower triangular parts of the matrices :math:`A_i`.
+ | If ``uplo = math::uplo::upper``, the array ``a`` stores the upper triangular parts of the matrices :math:`A_i`,
+ | If ``uplo = math::uplo::lower``, the array ``a`` stores the lower triangular parts of the matrices :math:`A_i`.
 
 n
   Order of the matrices :math:`A_i`, (:math:`0 \le n`).

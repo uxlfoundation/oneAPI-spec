@@ -36,7 +36,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
     namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t getrs_batch_scratchpad_size(cl::sycl::queue &queue, onemath::transpose *trans, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
+      std::int64_t getrs_batch_scratchpad_size(cl::sycl::queue &queue, math::transpose *trans, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
     }
 
 .. container:: section
@@ -48,9 +48,9 @@ queue
 
 trans
  | Array of ``group_count`` parameters :math:`\text{trans}_g` indicating the form of the equations for the group :math:`g`:
- | If ``trans = onemath::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = onemath::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = onemath::transpose::conjtrans``, then :math:`A_iHX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = math::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = math::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = math::transpose::conjtrans``, then :math:`A_iHX_i = B_i` is solved for :math:`X_i`.
 
 n
   Array of ``group_count`` parameters :math:`n_g` specifying the order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n_g`) belonging to group :math:`g`.
@@ -103,7 +103,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
     namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t getrs_batch_scratchpad_size(cl::sycl::queue &queue, onemath::transpose trans, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size)
+      std::int64_t getrs_batch_scratchpad_size(cl::sycl::queue &queue, math::transpose trans, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t stride_ipiv, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size)
     };
 
 .. container:: section
@@ -115,9 +115,9 @@ queue
 
 trans
  | Indicates the form of the equations:
- | ``If trans = onemath::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = onemath::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
- | If ``trans = onemath::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
+ | ``If trans = math::transpose::nontrans``, then :math:`A_iX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = math::transpose::trans``, then :math:`A_i^TX_i = B_i` is solved for :math:`X_i`.
+ | If ``trans = math::transpose::conjtrans``, then :math:`A_i^HX_i = B_i` is solved for :math:`X_i`.
 
 n
   Order of the matrices :math:`A_i` and the number of rows in matrices :math:`B_i` (:math:`0 \le n`).

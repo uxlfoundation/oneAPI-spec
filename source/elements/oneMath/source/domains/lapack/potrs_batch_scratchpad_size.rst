@@ -36,7 +36,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
     namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t potrs_batch_scratchpad_size(cl::sycl::queue &queue, onemath::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
+      std::int64_t potrs_batch_scratchpad_size(cl::sycl::queue &queue, math::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, std::int64_t *lda, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes)
     }
 
 .. container:: section
@@ -49,8 +49,8 @@ queue
 uplo
  | Array of ``group_count`` :math:`\text{uplo}_g` parameters.
  | Each of :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
- | If :math:`\text{uplo}_g` is ``onemath::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
- | If :math:`\text{uplo}_g` is ``onemath::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+ | If :math:`\text{uplo}_g` is ``math::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+ | If :math:`\text{uplo}_g` is ``math::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
  | Array of ``group_count`` :math:`n_g` parameters.
@@ -106,7 +106,7 @@ Computes the number of elements of type ``T`` the scratchpad memory should able 
 
     namespace oneapi::math::lapack {
       template <typename T>
-      std::int64_t potrs_batch_scratchpad_size(cl::sycl::queue &queue, onemath::uplo uplo, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size)
+      std::int64_t potrs_batch_scratchpad_size(cl::sycl::queue &queue, math::uplo uplo, std::int64_t n, std::int64_t nrhs, std::int64_t lda, std::int64_t stride_a, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size)
     };
 
 .. container:: section
@@ -117,8 +117,8 @@ queue
   Device queue where calculations will be performed.
 uplo
  | Indicates how the input matrices have been factored:
- | If ``uplo = onemath::uplo::upper``, the upper triangle :math:`U_i` of :math:`A_i` is stored, where :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data.
- | If ``uplo = onemath::uplo::lower``, the upper triangle :math:`L_i` of :math:`A_i` is stored, where :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data.
+ | If ``uplo = math::uplo::upper``, the upper triangle :math:`U_i` of :math:`A_i` is stored, where :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data.
+ | If ``uplo = math::uplo::lower``, the upper triangle :math:`L_i` of :math:`A_i` is stored, where :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data.
 
 n
   Order of matrices :math:`A_i` (:math:`0 \le n`).
