@@ -9,7 +9,7 @@ Sparse Linear Algebra
 
 .. container::
 
-   The oneAPI Math Kernel Library provides a C++ interface to a set of Sparse
+   The oneAPI Math Library provides a C++ interface to a set of Sparse
    Linear Algebra routines using SYCL.
 
    :ref:`onemath_spblas` provides basic operations on sparse vectors and
