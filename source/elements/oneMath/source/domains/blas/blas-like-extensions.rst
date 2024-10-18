@@ -11,8 +11,8 @@ BLAS-like Extensions
 .. container::
 
 
-   oneAPI Math Kernel Library DPC++ provides additional routines to
-   extend the functionality of the BLAS routines. These include routines
+   oneAPI Math Library DPC++ provides additional routines to extend
+   the functionality of the BLAS routines. These include routines
    to compute many independent vector-vector and matrix-matrix operations.
 
    The following table lists the BLAS-like extensions with their descriptions.
