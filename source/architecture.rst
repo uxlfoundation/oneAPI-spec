@@ -117,7 +117,7 @@ Otherwise this is the standard GEMM C++ interface.
       buffer<double, 1> b{B, range<1>{N*P}};
       buffer<double, 1> c{C, range<1>{M*P}};
 
-      onemath::transpose nT = onemath::transpose::nontrans;
+      math::transpose nT = math::transpose::nontrans;
       // Syntax
       //   void gemm(queue &exec_queue, transpose transa, transpose transb,
       //             int64_t m, int64_t n, int64_t k, T alpha,
@@ -125,7 +125,7 @@ Otherwise this is the standard GEMM C++ interface.
       //             buffer<T,1> &b, int64_t ldb, T beta,
       //             buffer<T,1> &c, int64_t ldc);
       // call gemm
-      onemath::blas::gemm(q, nT, nT, M, P, N, 1.0, a, M, b, N, 0.0, c, M);
+      math::blas::gemm(q, nT, nT, M, P, N, 1.0, a, M, b, N, 0.0, c, M);
   }
   // when we exit the block, the buffer destructor will write result back to C.
 

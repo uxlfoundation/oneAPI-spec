@@ -38,8 +38,8 @@ The buffer version of ``potrs_batch`` supports only the strided API.
 **Strided API**
 
  | The routine solves for :math:`X_i` the systems of linear equations :math:`A_iX_i = B_i` with a symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, given the Cholesky factorization of :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
- | :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data if ``uplo = onemath::uplo::upper``,
- | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = onemath::uplo::lower``,
+ | :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data if ``uplo = math::uplo::upper``,
+ | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = math::uplo::lower``,
  | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular.
  | The systems are solved with multiple right-hand sides stored in the columns of the matrices :math:`B_i`.
  | Before calling this routine, matrices :math:`A_i` should be factorized by call to the Strided API of the :ref:`onemath_lapack_potrf_batch_buffer` function.
@@ -51,7 +51,7 @@ The buffer version of ``potrs_batch`` supports only the strided API.
 .. code-block:: cpp
 
     namespace oneapi::math::lapack {
-      void potrs_batch(cl::sycl::queue &queue, onemath::uplo uplo, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
+      void potrs_batch(cl::sycl::queue &queue, math::uplo uplo, std::int64_t n, std::int64_t nrhs, cl::sycl::buffer<T> &a, std::int64_t lda, std::int64_t stride_a, cl::sycl::buffer<T> &b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, cl::sycl::buffer<T> &scratchpad, std::int64_t scratchpad_size)
     }
 
 .. container:: section
@@ -63,8 +63,8 @@ queue
 
 uplo
  | Indicates how the input matrices have been factored:
- | If ``uplo = onemath::uplo::upper``, the upper triangle :math:`U_i` of :math:`A_i` is stored, where :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data.
- | If ``uplo = onemath::uplo::lower``, the upper triangle :math:`L_i` of :math:`A_i` is stored, where :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data.
+ | If ``uplo = math::uplo::upper``, the upper triangle :math:`U_i` of :math:`A_i` is stored, where :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data.
+ | If ``uplo = math::uplo::lower``, the upper triangle :math:`L_i` of :math:`A_i` is stored, where :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data.
 
 n
   The order of matrices :math:`A_i` (:math:`0 \le n`).
@@ -150,7 +150,7 @@ The USM version of ``potrs_batch`` supports the group API and strided API.
 .. code-block:: cpp
 
     namespace oneapi::math::lapack {
-      cl::sycl::event potrs_batch(cl::sycl::queue &queue, onemath::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+      cl::sycl::event potrs_batch(cl::sycl::queue &queue, math::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -163,8 +163,8 @@ queue
 uplo  
  | Array of ``group_count`` :math:`\text{uplo}_g` parameters.
  | Each of :math:`\text{uplo}_g` indicates whether the upper or lower triangular parts of the input matrices are provided:
- | If :math:`\text{uplo}_g` is ``onemath::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
- | If :math:`\text{uplo}_g` is ``onemath::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
+ | If :math:`\text{uplo}_g` is ``math::uplo::upper``, input matrices from array ``a`` belonging to group :math:`g` store the upper triangular parts,
+ | If :math:`\text{uplo}_g` is ``math::uplo::lower``, input matrices from array ``a`` belonging to group :math:`g` store the lower triangular parts.
 
 n
  | Array of ``group_count`` :math:`n_g` parameters.
@@ -243,8 +243,8 @@ This routine shall throw the following exceptions if the associated condition is
 **Strided API**
 
  | The routine solves for :math:`X_i` the systems of linear equations :math:`A_iX_i = B_i` with a symmetric positive-definite or, for complex data, Hermitian positive-definite matrices :math:`A_i`, given the Cholesky factorization of :math:`A_i`, :math:`i \in \{1...batch\_size\}`:
- | :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data if ``uplo = onemath::uplo::upper``,
- | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = onemath::uplo::lower``,
+ | :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data if ``uplo = math::uplo::upper``,
+ | :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data if ``uplo = math::uplo::lower``,
  | where :math:`L_i` is a lower triangular matrix and :math:`U_i` is upper triangular.
  | The systems are solved with multiple right-hand sides stored in the columns of the matrices :math:`B_i`.
  | Before calling this routine, matrices :math:`A_i` should be factorized by call to the Strided API of the :ref:`onemath_lapack_potrf_batch_usm` function.
@@ -256,7 +256,7 @@ This routine shall throw the following exceptions if the associated condition is
 .. code-block:: cpp
 
     namespace oneapi::math::lapack {
-      cl::sycl::event potrs_batch(cl::sycl::queue &queue, onemath::uplo uplo, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+      cl::sycl::event potrs_batch(cl::sycl::queue &queue, math::uplo uplo, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     };
 
 .. container:: section
@@ -268,8 +268,8 @@ queue
 
 uplo
  | Indicates how the input matrices have been factored:
- | If ``uplo = onemath::uplo::upper``, the upper triangle :math:`U_i` of :math:`A_i` is stored, where :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data.
- | If ``uplo = onemath::uplo::lower``, the upper triangle :math:`L_i` of :math:`A_i` is stored, where :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data.
+ | If ``uplo = math::uplo::upper``, the upper triangle :math:`U_i` of :math:`A_i` is stored, where :math:`A_i = U_i^TU_i` for real data, :math:`A_i = U_i^HU_i` for complex data.
+ | If ``uplo = math::uplo::lower``, the upper triangle :math:`L_i` of :math:`A_i` is stored, where :math:`A_i = L_iL_i^T` for real data, :math:`A_i = L_iL_i^H` for complex data.
 
 n
   The order of matrices :math:`A_i` (:math:`0 \le n`).
