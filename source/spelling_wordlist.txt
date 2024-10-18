@@ -496,7 +496,7 @@ microarchitecture
 middleware
 minibatch
 minmag
-mkl
+onemath
 modf
 moveassignable
 mrg
@@ -547,11 +547,11 @@ oneCCL
 oneDAL
 oneDNN
 oneDPL
-oneMKL
+oneMath
 oneTBB
 oneVPL
 oneapi
-onemkl
+onemath
 opencl
 oqueueing
 orgbr

@@ -12,5 +12,5 @@
 - :ref:`oneDAL-section`: Algorithms for accelerated data science
 - :ref:`oneTBB-section`: Library for adding thread-based parallelism
   to complex applications on multiprocessors
-- :ref:`oneMKL-section`: High performance math routines for science,
+- :ref:`oneMath-section`: High performance math routines for science,
   engineering, and financial applications
