@@ -16,7 +16,7 @@ for creating parallel applications:
 
 .. toctree::
    :hidden:
-   :maxdepth: 3
+   :maxdepth: 4
 
    introduction
    architecture
