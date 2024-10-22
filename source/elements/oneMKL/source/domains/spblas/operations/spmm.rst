@@ -275,10 +275,10 @@ spmm
      some of the descriptor's data such as the ``workspace``.
    - In the general case, not calling the functions in the order specified above
      is undefined behavior. Not calling ``spmm_buffer_size`` or
-     ``spmm_optimize`` at least once with a given descriptor will throw an
+     ``spmm_optimize`` at least once with a given descriptor will throw a
      :ref:`oneapi::mkl::uninitialized<onemkl_exception_uninitialized>`
      exception. Calling ``spmm`` with arguments not matching ``spmm_optimize``
-     will throw an
+     will throw a
      :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
      exception, unless stated otherwise.
    - The data of the dense handles ``B_handle`` and ``C_handle`` and the scalars
