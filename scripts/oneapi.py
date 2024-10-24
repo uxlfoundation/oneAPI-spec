@@ -251,7 +251,7 @@ commands = {
 dirs = [
     'oneCCL',
     'oneDAL',
-    'oneMKL',
+    'oneMath',
     'oneTBB',
     'oneDPL',
     'oneDNN',

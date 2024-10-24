@@ -35,7 +35,7 @@ Files: source/elements/oneDAL/source/*.cpp
 Copyright: 2020 Intel Corporation
 License: MIT
 
-Files: source/elements/oneMKL/source/domains/equations/*.png source/elements/oneMKL/source/domains/equations/*.gif source/elements/oneMKL/source/domains/equations/*.jpg
+Files: source/elements/oneMath/source/domains/equations/*.png source/elements/oneMath/source/domains/equations/*.gif source/elements/oneMath/source/domains/equations/*.jpg
 Copyright: 2020 Intel Corporation
 License: CC-BY-4.0
 
