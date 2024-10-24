@@ -11,7 +11,7 @@ LAPACK-like Extensions Routines
 .. container::
 
 
-   oneAPI Math Library DPC++ provides additional routines to extend
+   |onemath_full_name| DPC++ provides additional routines to extend
    the functionality of the LAPACK routines. These include routines
    to compute many independent factorizations, linear equation solutions, and similar.
    The following table lists the LAPACK-like Extensions routine groups.
