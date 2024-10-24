@@ -80,7 +80,6 @@ LSTM
 Levitan
 Lognormal
 MByte
-MKL
 Matsumoto
 Mersenne
 Multinomial
@@ -496,7 +495,6 @@ microarchitecture
 middleware
 minibatch
 minmag
-onemath
 modf
 moveassignable
 mrg
