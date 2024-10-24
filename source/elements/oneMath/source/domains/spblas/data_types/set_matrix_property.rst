@@ -69,7 +69,7 @@ details the property for each matrix format:
         - Description
       * - CSR
         - Setting this property for a matrix using the CSR format will throw a
-          :ref:`oneapi::mkl::invalid_argument<onemkl_exception_invalid_argument>`
+          :ref:`oneapi::math::invalid_argument<onemath_exception_invalid_argument>`
           exception.
       * - COO
         - Guarantees that the indices are sorted by rows in ascending order.
