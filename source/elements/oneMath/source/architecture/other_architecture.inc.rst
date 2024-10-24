@@ -18,13 +18,13 @@ Each oneMath domain must define a preprocessor macro to represent the version of
 
 The macros for each domain are listed as follows:
 
-  | ONEMKL_BLAS_SPEC_VERSION
-  | ONEMKL_LAPACK_SPEC_VERSION
-  | ONEMKL_SPBLAS_SPEC_VERSION
-  | ONEMKL_DFT_SPEC_VERSION
-  | ONEMKL_RNG_SPEC_VERSION
-  | ONEMKL_STATS_SPEC_VERSION
-  | ONEMKL_VM_SPEC_VERSION
+  | ONEMATH_BLAS_SPEC_VERSION
+  | ONEMATH_LAPACK_SPEC_VERSION
+  | ONEMATH_SPBLAS_SPEC_VERSION
+  | ONEMATH_DFT_SPEC_VERSION
+  | ONEMATH_RNG_SPEC_VERSION
+  | ONEMATH_STATS_SPEC_VERSION
+  | ONEMATH_VM_SPEC_VERSION
 
 The specification version can be created by appending all digits of the specification version in the format of <MAJOR><MINOR>. MINOR version always uses two digits. This version can be used to check the compatibility of the implementation with the specification version. Note that the revision is not included here because it reflects changes only for the specification document without affecting the implementation. If the implementation is not compliant with any release of the specification, then the macro must have a numerical value of `000`.
 
@@ -39,13 +39,13 @@ Macro Example
 .. code-block:: c
 
   // For oneAPI 1.2 rev 1
-  #define ONEMKL_BLAS_SPEC_VERSION 102
+  #define ONEMATH_BLAS_SPEC_VERSION 102
 
   // For oneAPI 1.2 rev 2
-  #define ONEMKL_DFT_SPEC_VERSION 102
+  #define ONEMATH_DFT_SPEC_VERSION 102
 
   // For oneAPI 1.3 rev 1
-  #define ONEMKL_VM_SPEC_VERSION 103
+  #define ONEMATH_VM_SPEC_VERSION 103
 
 Versioning details are defined here: https://github.com/uxlfoundation/oneAPI-spec/blob/main/doc/versioning.rst#provisional-versions
 
