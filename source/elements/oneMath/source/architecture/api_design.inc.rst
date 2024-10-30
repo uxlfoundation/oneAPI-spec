@@ -26,6 +26,7 @@ namespace                 oneMath domain or content
 ``oneapi::math::dft``      Discrete Fourier Transforms. See :ref:`onemath_dft`
 ``oneapi::math::rng``      Random number generator routines. See :ref:`onemath_rng`
 ``oneapi::math::vm``       Vector mathematics routines, e.g. trigonometric, exponential functions acting on elements of a vector. See :ref:`onemath_vm`
+``oneapi::math::stats``    Routines that compute basic statistical estimates for single and double precision multi-dimensional datasets. See :ref:`onemath_stats`
 ========================  =======================================================================================================
 
 .. note::

@@ -15,6 +15,7 @@ An argument of type ``split`` is used to distinguish a splitting constructor fro
     // Defined in header <oneapi/tbb/blocked_range.h>
     // Defined in header <oneapi/tbb/blocked_range2d.h>
     // Defined in header <oneapi/tbb/blocked_range3d.h>
+    // Defined in header <oneapi/tbb/blocked_nd_range.h>
     // Defined in header <oneapi/tbb/partitioner.h>
     // Defined in header <oneapi/tbb/parallel_for.h>
     // Defined in header <oneapi/tbb/parallel_reduce.h>
