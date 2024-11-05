@@ -150,7 +150,7 @@ The USM version of ``potrs_batch`` supports the group API and strided API.
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event potrs_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, T **a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+      cl::sycl::event potrs_batch(cl::sycl::queue &queue, mkl::uplo *uplo, std::int64_t *n, std::int64_t *nrhs, const T * const *a, std::int64_t *lda, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -256,7 +256,7 @@ This routine shall throw the following exceptions if the associated condition is
 .. code-block:: cpp
 
     namespace oneapi::mkl::lapack {
-      cl::sycl::event potrs_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, std::int64_t stride_a, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+      cl::sycl::event potrs_batch(cl::sycl::queue &queue, mkl::uplo uplo, std::int64_t n, std::int64_t nrhs, const T *a, std::int64_t lda, std::int64_t stride_a, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     };
 
 .. container:: section
