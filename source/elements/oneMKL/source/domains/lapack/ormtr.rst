@@ -54,7 +54,7 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
 .. container:: tablenoborder
 
      .. list-table:: 
-        :header-rows: 1
+        :header-rows: 0
 
         * -  :math:`r = m` 
           -  if ``side = side::left`` 
@@ -97,7 +97,7 @@ a
    The buffer ``a`` as returned by   :ref:`onemkl_lapack_sytrd`.
 
 lda
-   The leading dimension of ``a`` :math:`(\max(1, r) \le \text{lda})`.
+   The leading dimension of ``a`` :math:`(\text{lda} \ge \max(1, r))`.
 
 tau
    The buffer ``tau`` as returned by a :ref:`onemkl_lapack_sytrd`. The
@@ -108,7 +108,7 @@ c
    must be at least :math:`\max(1, n)`.
 
 ldc
-   The leading dimension of ``c`` :math:`(\max(1, n) \le \text{ldc})`.
+   The leading dimension of ``c`` :math:`(\text{ldc} \ge \max(1, m))`.
 
 scratchpad_size
    Size of scratchpad memory as a number of floating point elements of type ``T``.
@@ -171,7 +171,7 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
 .. container:: tablenoborder
 
      .. list-table:: 
-        :header-rows: 1
+        :header-rows: 0
 
         * -  :math:`r = m` 
           -  if ``side = side::left`` 
@@ -213,7 +213,7 @@ a
    The pointer to ``a`` as returned by   :ref:`onemkl_lapack_sytrd`.
 
 lda
-   The leading dimension of ``a`` :math:`(\max(1, r) \le \text{lda})`.
+   The leading dimension of ``a`` :math:`(\text{lda} \ge \max(1, r))`.
 
 tau
    The buffer ``tau`` as returned by   :ref:`onemkl_lapack_sytrd`. The
@@ -224,7 +224,7 @@ c
    must be at least :math:`\max(1, n)`.
 
 ldc
-   The leading dimension of ``c`` :math:`(\max(1, n) \le \text{ldc})`.
+   The leading dimension of ``c`` :math:`(\text{ldc} \ge \max(1, m))`.
 
 scratchpad_size
    Size of scratchpad memory as a number of floating point elements of type ``T``.

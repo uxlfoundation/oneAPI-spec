@@ -43,6 +43,18 @@ unmtr_scratchpad_size
 
   .. rubric:: Input Parameters
 
+In the descriptions below, ``r`` denotes the order of :math:`Q`:
+
+.. container:: tablenoborder
+
+     .. list-table::
+        :header-rows: 0
+
+        * -  :math:`r = m`
+          -  if ``side = side::left``
+        * -  :math:`r = n`
+          -  if ``side = side::right``
+
 queue
    Device queue where calculations by :ref:`onemkl_lapack_unmtr` function will be performed.
 
@@ -81,10 +93,10 @@ k
    matrix :math:`Q` (:math:`0 \le k \le n`).
 
 lda
-   The leading dimension of :math:`a` :math:`(\max(1,r) \le \text{lda})`.
+   The leading dimension of :math:`a` :math:`(\text{lda} \ge \max(1,r))`.
 
 ldc
-   The leading dimension of :math:`c` :math:`(\max(1,n) \le \text{ldc})`.
+   The leading dimension of :math:`c` :math:`(\text{ldc} \ge \max(1,m))`.
 
 .. container:: section
 

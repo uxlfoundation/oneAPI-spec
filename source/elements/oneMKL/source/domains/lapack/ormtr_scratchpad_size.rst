@@ -48,13 +48,13 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
 
 .. container:: tablenoborder
 
-     .. list-table:: 
-        :header-rows: 1
+     .. list-table::
+        :header-rows: 0
 
-        * -  :math:`r = m` 
-          -  if ``side = side::left`` 
-        * -  :math:`r = n` 
-          -  if ``side = side::right`` 
+        * -  :math:`r = m`
+          -  if ``side = side::left``
+        * -  :math:`r = n`
+          -  if ``side = side::right``
 
 queue
    Device queue where calculations by :ref:`onemkl_lapack_ormtr` function will be performed.
@@ -89,10 +89,10 @@ n
    The number of rows in the matrix :math:`C` :math:`(n \ge 0)`.
 
 lda
-   The leading dimension of ``a`` :math:`(\max(1, r) \le \text{lda})`.
+   The leading dimension of ``a`` :math:`(\text{lda} \ge \max(1, r))`.
 
 ldc
-   The leading dimension of ``c`` :math:`(\max(1, n) \le \text{ldc})`.
+   The leading dimension of ``c`` :math:`(\text{ldc} \ge \max(1, m))`.
 
 .. container:: section
 
