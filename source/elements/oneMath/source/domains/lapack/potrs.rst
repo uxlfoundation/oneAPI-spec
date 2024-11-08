@@ -139,8 +139,8 @@ potrs (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::math::lapack {
-      cl::sycl::event potrs(cl::sycl::queue &queue, oneapi::math::uplo upper_lower, std::int64_t n, std::int64_t nrhs, T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event potrs(cl::sycl::queue &queue, oneapi::mkl::uplo upper_lower, std::int64_t n, std::int64_t nrhs, const T *a, std::int64_t lda, T *b, std::int64_t ldb, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

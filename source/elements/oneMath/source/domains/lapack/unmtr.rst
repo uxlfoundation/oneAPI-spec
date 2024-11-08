@@ -57,7 +57,7 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
 .. container:: tablenoborder
 
      .. list-table:: 
-        :header-rows: 1
+        :header-rows: 0
 
         * -  :math:`r`\ =\ :math:`m` 
           -  if ``side = side::left`` 
@@ -106,7 +106,7 @@ a
    :ref:`onemath_lapack_hetrd`.
 
 lda
-   The leading dimension of ``a`` :math:`(\max(1,r) \le \text{lda})`.
+   The leading dimension of ``a`` :math:`(\text{lda} \ge \max(1,r))`.
 
 tau
    The buffer ``tau`` as returned by
@@ -118,7 +118,7 @@ c
    must be at least :math:`\max(1,n)`.
 
 ldc
-   The leading dimension of ``c`` :math:`(\max(1,n) \le \text{ldc})`.
+   The leading dimension of ``c`` :math:`(\text{ldc} \ge \max(1,m))`.
 
 scratchpad_size
    Size of scratchpad memory as a number of floating point elements of type ``T``.
@@ -169,8 +169,8 @@ unmtr (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::math::lapack {
-      cl::sycl::event unmtr(cl::sycl::queue &queue, oneapi::math::side side, oneapi::math::uplo upper_lower, oneapi::math::transpose trans, std::int64_t m, std::int64_t n, T *a, std::int64_t lda, T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::mkl::lapack {
+      cl::sycl::event unmtr(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, const T *a, std::int64_t lda, const T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -182,7 +182,7 @@ In the descriptions below, ``r`` denotes the order of :math:`Q`:
 .. container:: tablenoborder
 
      .. list-table:: 
-        :header-rows: 1
+        :header-rows: 0
 
         * -  :math:`r`\ =\ :math:`m` 
           -  if ``side = side::left`` 
@@ -231,7 +231,7 @@ a
    :ref:`onemath_lapack_hetrd`.
 
 lda
-   The leading dimension of ``a`` :math:`(\max(1,r) \le \text{lda})`.
+   The leading dimension of ``a`` :math:`(\text{lda} \ge \max(1,r))`.
 
 tau
    The pointer to ``tau`` as returned by
@@ -243,7 +243,7 @@ c
    must be at least :math:`\max(1,n)`.
 
 ldc
-   The leading dimension of ``c`` :math:`(\max(1,n) \le \text{ldc})`.
+   The leading dimension of ``c`` :math:`(\text{ldc} \ge \max(1,m))`.
 
 scratchpad_size
    Size of scratchpad memory as a number of floating point elements of type ``T``.
