@@ -155,7 +155,7 @@ The USM version of ``ungqr_batch`` supports the group API and strided API.
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       cl::sycl::event ungqr_batch(cl::sycl::queue &queue, std::int64_t *m, std::int64_t *n, std::int64_t *k, T **a, std::int64_t *lda, const T * const *tau, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
@@ -253,7 +253,7 @@ This routine shall throw the following exceptions if the associated condition is
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
+    namespace oneapi::math::lapack {
       cl::sycl::event ungqr_batch(cl::sycl::queue &queue, std::int64_t m, std::int64_t n, std::int64_t k, T *a, std::int64_t lda, std::int64_t stride_a, const T *tau, std::int64_t stride_tau, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     };
 

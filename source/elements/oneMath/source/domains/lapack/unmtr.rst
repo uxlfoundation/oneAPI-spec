@@ -169,8 +169,8 @@ unmtr (USM Version)
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event unmtr(cl::sycl::queue &queue, oneapi::mkl::side side, oneapi::mkl::uplo upper_lower, oneapi::mkl::transpose trans, std::int64_t m, std::int64_t n, const T *a, std::int64_t lda, const T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event unmtr(cl::sycl::queue &queue, oneapi::math::side side, oneapi::math::uplo upper_lower, oneapi::math::transpose trans, std::int64_t m, std::int64_t n, const T *a, std::int64_t lda, const T *tau, T *c, std::int64_t ldc, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section

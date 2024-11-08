@@ -160,8 +160,8 @@ The USM version of ``getrs_batch`` supports the group API and strided API.
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event getrs_batch(cl::sycl::queue &queue, mkl::transpose *trans, std::int64_t *n, std::int64_t *nrhs, const T * const *a, std::int64_t *lda, const std::int64_t * const *ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event getrs_batch(cl::sycl::queue &queue, math::transpose *trans, std::int64_t *n, std::int64_t *nrhs, const T * const *a, std::int64_t *lda, const std::int64_t * const *ipiv, T **b, std::int64_t *ldb, std::int64_t group_count, std::int64_t *group_sizes, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     }
 
 .. container:: section
@@ -264,8 +264,8 @@ This routine shall throw the following exceptions if the associated condition is
 
 .. code-block:: cpp
 
-    namespace oneapi::mkl::lapack {
-      cl::sycl::event getrs_batch(cl::sycl::queue &queue, mkl::transpose trans, std::int64_t n, std::int64_t nrhs, const T *a, std::int64_t lda, std::int64_t stride_a, const std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
+    namespace oneapi::math::lapack {
+      cl::sycl::event getrs_batch(cl::sycl::queue &queue, math::transpose trans, std::int64_t n, std::int64_t nrhs, const T *a, std::int64_t lda, std::int64_t stride_a, const std::int64_t *ipiv, std::int64_t stride_ipiv, T *b, std::int64_t ldb, std::int64_t stride_b, std::int64_t batch_size, T *scratchpad, std::int64_t scratchpad_size, const std::vector<cl::sycl::event> &events = {})
     };
 
 .. container:: section
