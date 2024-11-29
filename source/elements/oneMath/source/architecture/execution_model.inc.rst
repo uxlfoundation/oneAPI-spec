@@ -77,7 +77,7 @@ When USM pointers are used as input to, or output from, a oneMath routine, it be
 
 To help the calling application, all oneMath routines with at least one USM pointer argument also take an optional reference to a list of *input events*, of type ``std::vector<sycl::event>``, and have a return value of type ``sycl::event`` representing computation completion::
 
-    sycl::event math::domain::routine(..., std::vector<sycl::event> &in_events = {});
+    sycl::event math::domain::routine(..., const std::vector<sycl::event> &in_events = {});
 
 The routine shall ensure that all input events (if the list is present and non-empty) have occurred before any USM pointers are accessed. Likewise, the routine's output event shall not be complete until the routine has finished accessing all USM pointer arguments.
 
