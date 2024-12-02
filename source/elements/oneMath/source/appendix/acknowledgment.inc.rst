@@ -6,6 +6,6 @@
 
 Acknowledgment
 ---------------
-The oneMath `Technical Advisory Board <https://github.com/oneapi-src/oneAPI-tab>`__ members
+The oneMath `Special Interest Group <https://github.com/uxlfoundation/foundation/tree/main/math>`__ members
 provided valuable feedback to the specification and are thanked for their contributions.
 
