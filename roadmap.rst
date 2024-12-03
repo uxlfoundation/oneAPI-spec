@@ -267,7 +267,7 @@ feedback.
   - Future
 
     - Content?
-- oneMKL
+- oneMath
 
   - New
   - Future
@@ -342,7 +342,7 @@ Date       Milestone
 
   - 80% content
 
-- oneMKL
+- oneMath
 
   - USM support
   - Skeleton of spec, breadown by domain
@@ -412,7 +412,7 @@ Date       Milestone
 
   - Updates deferred to 0.8.5_
 
-- oneMKL
+- oneMath
 
   - All domains complete
   - Finalized BLAS, LAPACK domains
@@ -497,7 +497,7 @@ Elements
 
 - oneVPL
 
-- oneMKL
+- oneMath
 
   - finalize FFT, sparse BLAS, RNG, and VM domains
 

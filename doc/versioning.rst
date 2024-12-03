@@ -7,7 +7,7 @@ Specification versioning
 ========================
 
 This document describes the versioning of the specification for oneAPI
-elements (e.g. oneMKL, oneVPL) and for oneAPI, which includes all the
+elements (e.g. oneMath, oneVPL) and for oneAPI, which includes all the
 elements. Specification versioning is independent of oneAPI product
 versioning.
 
