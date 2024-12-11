@@ -78,6 +78,10 @@ basic random number generators.
      -     integer
      -     integer
      -     Bernoulli distribution
+   * -     :ref:`onemath_device_rng_geometric`
+     -     integer
+     -     float
+     -     Geometric distribution
 
 `NOTE:` In case of ``integer`` check desired distribution for supported data types.
 
@@ -97,6 +101,7 @@ basic random number generators.
    device-rng-uniform-bits.rst
    device-rng-poisson.rst
    device-rng-bernoulli.rst
+   device-rng-geometric.rst
    device-rng-beta.rst
    device-rng-gamma.rst
 
