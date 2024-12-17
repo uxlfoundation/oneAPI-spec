@@ -49,4 +49,5 @@ Distributions Template Parameter Method
         * Left exponential tail
         * Right exponential tail
 
-`NOTE:` Methods provided for exposition purposes.
+.. note::
+   Methods provided for exposition purposes.
