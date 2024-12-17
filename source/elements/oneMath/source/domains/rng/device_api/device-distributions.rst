@@ -60,7 +60,7 @@ basic random number generators.
      -     Description
    * -     :ref:`onemath_device_rng_uniform_discrete`
      -     integer
-     -     float
+     -     floating point
      -     Uniform discrete distribution on the interval [``a,b``)
    * -     :ref:`onemath_device_rng_bits`
      -     integer
@@ -80,10 +80,15 @@ basic random number generators.
      -     Bernoulli distribution
    * -     :ref:`onemath_device_rng_geometric`
      -     integer
-     -     float
+     -     floating point
      -     Geometric distribution
 
-`NOTE:` In case of ``integer`` check desired distribution for supported data types.
+.. note::
+   In case of ``integer`` check desired distribution for supported data types.
+
+.. note::
+   Internal data type ``floating point`` size may vary depending on integer 
+   data type size. 
 
 **Parent topic:** :ref:`onemath_device_rng_routines`
 
