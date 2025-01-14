@@ -33,7 +33,7 @@ Class that represents thread interest in task scheduling services.
     } // namespace oneapi
 
 A ``task_scheduler_observer`` permits clients to observe when a thread starts
-and stops processing tasks, either globally or in a certain task scheduler arena.
+and stops processing tasks in a certain task scheduler arena.
 You typically derive your own observer class from ``task_scheduler_observer``, and override
 virtual methods ``on_scheduler_entry`` or ``on_scheduler_exit``.
 Observation can be enabled and disabled for an observer instance; it is disabled on creation.
