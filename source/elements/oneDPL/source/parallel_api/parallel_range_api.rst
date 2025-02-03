@@ -24,6 +24,8 @@ The following differences to the standard C++ range algorithms apply:
 - Output data sequences are defined as ranges, not iterators.
 - Both input and output ranges must support random access.
 - For a given algorithm, at least one of the input ranges as well as the output range must be bounded.
+- For algorithms with bounded output ranges, processing may not need to go over all the input data. In that case,
+  the returned value usually contains iterators pointing to the positions past the last processed elements.
 - ``for_each`` does not return its function object.
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
