@@ -258,7 +258,8 @@ Sorting and Merge
       std::ranges::merge_result<std::ranges::borrowed_iterator_t<R1>,
                                 std::ranges::borrowed_iterator_t<R2>,
                                 std::ranges::borrowed_iterator_t<OutR>>
-        merge (R1&& r1, R2&& r2, OutR&& result, Comp comp = {}, Proj1 proj1 = {}, Proj2 proj2 = {});
+        merge (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
+               Proj1 proj1 = {}, Proj2 proj2 = {});
 
   }
 
