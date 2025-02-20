@@ -8,6 +8,7 @@ Collective Operations
 
 oneCCL specification defines the following collective communication operations:
 
+- `Allgather`_
 - `Allgatherv`_
 - `Allreduce`_
 - `Alltoallv`_
@@ -38,6 +39,65 @@ The communication operation may accept attribute object. If that parameter is mi
     See also: :doc:`operation_attributes`
 
 If the arguments provided to a communication operation call do not comply to the requirements of the operation, the behavior is undefined unless it is specified otherwise.
+
+
+.. _Allgather:
+
+Allgather
+*********
+
+Allgather is a collective communication operation that collects the ``send_count`` elements from all the ranks within the communicator and places the results into ``recv_buf``, in such a way that data from rank ``i`` can be found at offset rank ``i * count``. The resulting data in the output ``recv_buf`` buffer is the same for each rank. 
+
+
+Allgather is in place when ``sendbuff == recvbuff + rank * send_count``. 
+
+.. code:: cpp
+     template<class BufferType> 
+event ccl::allgather(const BufferType* send_buf, 
+                     BufferType* recv_buf, 
+                     size_t send_count, 
+                     const communicator& comm, 
+                     const stream& stream, 
+                     const allgather_attr& attr = default_allgather_attr, 
+                     const vector_class<event>& deps = {}); 
+
+event ccl::allgather(const void* send_buf, 
+                     void* recv_buf, 
+                     size_t send_count, 
+                     datatype dtype,  
+        const communicator& comm, 
+                      const stream& stream, 
+                      const allgather_attr& attr = default_allgather_attr, 
+                      const vector_class<event>& deps = {}); 
+
+
+
+send_buf 
+    The buffer with send_count elements of BufferType that stores local data to be gathered 
+
+recv_buf [out] 
+    The buffer to store gathered result of BufferTuype, must be large enough to hold values from all ranks, i.e., size should be equal do BufferType * send_count 
+
+send_count 
+    The number of elements of type BufferType in send_buf 
+
+dtype 
+    The datatype of elements in send_buf and recv_buf must be skipped if BufferType can be inferred otherwise must be passed explicitly 
+
+comm 
+    The communicator that defines a group of ranks for the operation 
+
+stream 
+    The stream associated with the operation  
+
+attr 
+    Optional attributes to customize the operation 
+
+deps 
+    An optional vector of the events that the operation should depend on 
+
+return event 
+    An object to track the progress of the operation 
 
 .. _Allgatherv:
 
@@ -250,50 +310,53 @@ return ``event``
 Broadcast
 *********
 
-Broadcast is a collective communication operation that broadcasts data
-from one rank of communicator (denoted as root) to all other ranks.
+Broadcast is a collective communication operation that broadcasts data from one rank of communicator (denoted as root) to all other ranks.
+
+Broadcast is in-place if send_buf == recv_buf 
 
 .. code:: cpp
 
-    template <class BufferType>
-    event ccl::broadcast(BufferType* buf,
-                         size_t count,
-                         int root,
-                         const communicator& comm,
-                         const stream& stream,
-                         const broadcast_attr& attr = default_broadcast_attr,
-                         const vector_class<event>& deps = {});
+    template <class BufferType> 
+event ccl::broadcast(BufferType*send_buf, 
+                     BufferType*recv_buf, 
+                     size_t count, 
+                     int root, 
+                     const communicator& comm, 
+                     const stream& stream, 
+                     const broadcast_attr& attr = default_broadcast_attr, 
+                     const vector_class<event>& deps = {}); 
+ 
+event ccl::broadcast(void* send_buf, 
+          void* recv_buf 
+                     size_t count, 
+                     datatype dtype, 
+                     int root, 
+                     const communicator& comm, 
+                     const stream& stream, 
+                     const broadcast_attr& attr = default_broadcast_attr, 
+                     const vector_class<event>& deps = {}); 
+ 
 
-    event ccl::broadcast(void* buf,
-                         size_t count,
-                         datatype dtype,
-                         int root,
-                         const communicator& comm,
-                         const stream& stream,
-                         const broadcast_attr& attr = default_broadcast_attr,
-                         const vector_class<event>& deps = {});
-
-buf [in,out]
-    | the buffer with ``count`` elements of ``BufferType``
-    | serves as ``send_buf`` for root and as ``recv_buf`` for other ranks
+send_buf [in,out]
+    The buffer with ``count`` elements of ``BufferType`` serves as ``send_buf`` for root and as ``recv_buf`` for other ranks
 count
-    the number of elements of type ``BufferType`` in ``buf``
+    The number of elements of type ``BufferType`` in ``buf``
 root
-    the rank that broadcasts ``buf``
+    The rank that broadcasts ``buf``
 dtype
-    | the datatype of elements in ``buf``
+     The datatype of elements in ``buf``
     | must be skipped if ``BufferType`` can be inferred
     | otherwise must be passed explicitly
 comm
-    the communicator that defines a group of ranks for the operation
+    The communicator that defines a group of ranks for the operation
 stream
-    the stream associated with the operation
+    The stream associated with the operation
 attr
-    optional attributes to customize the operation
+    Optional attributes to customize the operation
 deps
-    an optional vector of the events that the operation should depend on
+    An optional vector of the events that the operation should depend on
 return ``event``
-    an object to track the progress of the operation
+    An object to track the progress of the operation
 
 
 .. _Reduce:
