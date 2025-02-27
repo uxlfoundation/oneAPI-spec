@@ -52,6 +52,7 @@ Allgather is a collective communication operation that collects the ``send_count
 Allgather is in place when ``sendbuff == recvbuff + rank * send_count``. 
 
 .. code:: cpp
+
      template<class BufferType> 
 event ccl::allgather(const BufferType* send_buf, 
                      BufferType* recv_buf, 
