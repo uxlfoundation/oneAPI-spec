@@ -54,22 +54,22 @@ Allgather is in place when ``sendbuff == recvbuff + rank * send_count``.
 .. code:: cpp
 
      template<class BufferType> 
-event ccl::allgather(const BufferType* send_buf, 
-                     BufferType* recv_buf, 
-                     size_t send_count, 
-                     const communicator& comm, 
-                     const stream& stream, 
-                     const allgather_attr& attr = default_allgather_attr, 
-                     const vector_class<event>& deps = {}); 
+     event ccl::allgather(const BufferType* send_buf, 
+                          BufferType* recv_buf, 
+                          size_t send_count, 
+                          const communicator& comm, 
+                          const stream& stream, 
+                          const allgather_attr& attr = default_allgather_attr, 
+                          const vector_class<event>& deps = {}); 
 
-event ccl::allgather(const void* send_buf, 
-                     void* recv_buf, 
-                     size_t send_count, 
-                     datatype dtype,  
-        const communicator& comm, 
-                      const stream& stream, 
-                      const allgather_attr& attr = default_allgather_attr, 
-                      const vector_class<event>& deps = {}); 
+     event ccl::allgather(const void* send_buf, 
+                          void* recv_buf, 
+                          size_t send_count, 
+                          datatype dtype,  
+                          const communicator& comm, 
+                          const stream& stream, 
+                          const allgather_attr& attr = default_allgather_attr, 
+                          const vector_class<event>& deps = {}); 
 
 
 
@@ -318,24 +318,24 @@ Broadcast is in-place if send_buf == recv_buf
 .. code:: cpp
 
     template <class BufferType> 
-event ccl::broadcast(BufferType*send_buf, 
-                     BufferType*recv_buf, 
-                     size_t count, 
-                     int root, 
-                     const communicator& comm, 
-                     const stream& stream, 
-                     const broadcast_attr& attr = default_broadcast_attr, 
-                     const vector_class<event>& deps = {}); 
+    event ccl::broadcast(BufferType*send_buf, 
+                         BufferType*recv_buf, 
+                         size_t count, 
+                         int root, 
+                         const communicator& comm, 
+                         const stream& stream, 
+                         const broadcast_attr& attr = default_broadcast_attr, 
+                         const vector_class<event>& deps = {}); 
  
-event ccl::broadcast(void* send_buf, 
-          void* recv_buf 
-                     size_t count, 
-                     datatype dtype, 
-                     int root, 
-                     const communicator& comm, 
-                     const stream& stream, 
-                     const broadcast_attr& attr = default_broadcast_attr, 
-                     const vector_class<event>& deps = {}); 
+     event ccl::broadcast(void* send_buf, 
+                          void* recv_buf 
+                          size_t count, 
+                          datatype dtype, 
+                          int root, 
+                          const communicator& comm, 
+                          const stream& stream, 
+                          const broadcast_attr& attr = default_broadcast_attr, 
+                          const vector_class<event>& deps = {}); 
  
 
 send_buf [in,out]
