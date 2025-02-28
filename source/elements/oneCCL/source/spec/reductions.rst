@@ -16,6 +16,7 @@ oneCCL specification defines the following reduction operations for :ref:`Allred
         prod   = /* unspecified */,
         min    = /* unspecified */,
         max    = /* unspecified */,
+        avg    = /* unspecified */,  
         custom = /* unspecified */
     };
 
@@ -27,6 +28,8 @@ reduction::min
     elementwise min
 reduction::max
     elementwise max
+reduction::avg
+    arithmethic average
 reduction::custom
     | specify user-defined reduction operation
     | the actual reduction function must be passed through ``reduction_fn`` operation attribute
