@@ -346,8 +346,8 @@ root
     The rank that broadcasts ``buf``
 dtype
      The datatype of elements in ``buf``
-    | must be skipped if ``BufferType`` can be inferred
-    | otherwise must be passed explicitly
+     | must be skipped if ``BufferType`` can be inferred
+     | otherwise must be passed explicitly
 comm
     The communicator that defines a group of ranks for the operation
 stream
