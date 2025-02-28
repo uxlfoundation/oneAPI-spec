@@ -80,10 +80,10 @@ recv_buf [out]
     The buffer to store gathered result of BufferTuype, must be large enough to hold values from all ranks, i.e., size should be equal do BufferType * send_count 
 
 send_count 
-    The number of elements of type BufferType in send_buf 
+    The number of elements of type BufferType in send_buf 
 
 dtype 
-    The datatype of elements in send_buf and recv_buf must be skipped if BufferType can be inferred otherwise must be passed explicitly 
+    The datatype of elements in send_buf and recv_buf must be skipped if BufferType can be inferred otherwise must be passed explicitly 
 
 comm 
     The communicator that defines a group of ranks for the operation 
