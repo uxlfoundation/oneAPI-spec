@@ -71,4 +71,4 @@ class count_engine_adaptor
         * - ``const Engine& base() const``
           - Returns the underlying engine.
 
-**Parent topic:** :ref:`_onemath_device_rng_adaptors`
+**Parent topic:** :ref:`onemath_device_rng_adaptors`
