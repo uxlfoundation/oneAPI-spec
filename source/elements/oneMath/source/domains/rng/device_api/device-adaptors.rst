@@ -18,7 +18,7 @@ oneMath RNG provides following device engine adaptors:
    * -  Routine
      -  Description
 
-   * -  :ref:`_onemath_device_rng_count_engine_adaptor`
+   * -  :ref:`onemath_device_rng_count_engine_adaptor`
      -  Provide a method to count how many random numbers were taken from an
         engine during the ``generate`` call
 
