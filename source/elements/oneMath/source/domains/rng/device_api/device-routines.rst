@@ -63,4 +63,4 @@ section for the description of typical RNG scenario.
    device-service-routines.rst
    ../bibliography.rst
 
-**Parent topic:** :ref:`onemath_rng`
+**Parent topic:** :ref:`onemath_rng_overview`
