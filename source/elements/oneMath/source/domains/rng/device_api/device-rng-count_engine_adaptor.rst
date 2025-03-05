@@ -71,4 +71,24 @@ class count_engine_adaptor
         * - ``const Engine& base() const``
           - Returns the underlying engine.
 
+.. rubric:: Example
+
+.. code-block:: cpp
+
+    namespace rng_device = oneapi::math::rng::device;
+
+    sycl::event my_event = q.parallel_for({n}, [=](std::size_t idx) {
+        // Some code...
+
+        rng_device::count_engine_adaptor<rng_device::mcg59<VecSize>> adaptor(seed, idx);
+        r[idx] = rng_device::generate(distr, adaptor);
+
+        consumed[idx] = adaptor.get_count();
+
+        // continue work with engine if needed
+        auto engine = adaptor.base();
+        // ...
+    });
+
+
 **Parent topic:** :ref:`onemath_device_rng_adaptors`
