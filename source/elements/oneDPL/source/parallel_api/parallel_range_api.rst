@@ -25,8 +25,8 @@ The following differences to the standard C++ range algorithms apply:
 - Both input and output ranges must support random access.
 - As a rule, both input and output ranges must be sized.
 
-  - Exceptions are binary ``transform``, ``equal``, and ``mismatch``, where only one of the input ranges
-    must be sized, and the other one is supposed to be infinite.
+  - Exceptions are binary ``transform``, ``equal``, and ``mismatch``, where at least one of the input ranges
+    must be sized, and if a range is not sized it is supposed to be infinite.
     [*Note*: An example of an infinite range is ``std::views::repeat`` with no bound. -- *end note*]
 
 - For algorithms with bounded output ranges, processing may not need to go over all the input data.
