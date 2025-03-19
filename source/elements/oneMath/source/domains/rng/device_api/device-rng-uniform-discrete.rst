@@ -70,6 +70,10 @@ class uniform
         typename Type
             Type of the produced values. Supported types:
 
+                * ``std::int8_t``
+                * ``std::uint8_t``
+                * ``std::int16_t``
+                * ``std::uint16_t``
                 * ``std::int32_t``
                 * ``std::uint32_t``
                 * ``std::int64_t``
