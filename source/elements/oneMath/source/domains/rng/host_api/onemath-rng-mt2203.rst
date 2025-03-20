@@ -240,4 +240,4 @@ class mt2203
 
 **Parent topic:** :ref:`onemath_rng_engines_basic_random_number_generators`
 
-.. _`the following reference`: https://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/DC/dc.html
+.. _`the following tool`: https://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/DC/dc.html
