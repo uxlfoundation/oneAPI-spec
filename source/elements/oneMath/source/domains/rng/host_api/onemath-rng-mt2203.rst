@@ -8,7 +8,7 @@ mt2203
 ======
 
 The mt2203 engine is the set of Mersenne Twister pseudorandom number generators MT2203 [:ref:`Matsumoto98 <onemath_rng_bibliography>`], [:ref:`Matsumoto00 <onemath_rng_bibliography>`].
-Coefficients are obtained by `the following tool`_. The amount of engines in the set (denoted `n_engines`) is implementation defined.
+Coefficients are obtained by `the following tool`_. The amount of generators in the set (denoted `n_engines`) is implementation defined.
 
 .. _onemath_rng_mt2203_description:
 
