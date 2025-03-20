@@ -40,7 +40,7 @@ Host Engines (Basic Random Number Generators)
          * -                      \ :ref:`onemath_rng_mt19937`\
            -     Mersenne Twister pseudorandom number generator       ``MT19937``\ :ref:`[Matsumoto98] <onemath_rng_bibliography>`      with period length 2\ :sup:`19937`-1 of the produced sequence
          * -                      \ :ref:`onemath_rng_mt2203`\
-           -     Set of 6024 Mersenne Twister pseudorandom number       generators      ``MT2203``\ :ref:`[Matsumoto98] <onemath_rng_bibliography>`,      :ref:`[Matsumoto00] <onemath_rng_bibliography>`.      Each of them generates a sequence of period length equal to      2\ :sup:`2203`-1. Parameters of the generators provide mutual      independence of the corresponding sequences.
+           -     Set of Mersenne Twister pseudorandom number       generators      ``MT2203``\ :ref:`[Matsumoto98] <onemath_rng_bibliography>`,      :ref:`[Matsumoto00] <onemath_rng_bibliography>`.      Each of them generates a sequence of period length equal to      2\ :sup:`2203`-1. Parameters of the generators provide mutual      independence of the corresponding sequences.
          * -                      \ :ref:`onemath_rng_sfmt19937`\
            -     SIMD-oriented Fast Mersenne Twister pseudorandom       number generator      ``SFMT19937``\ :ref:`[Saito08] <onemath_rng_bibliography>`      with a period length equal to 2\ :sup:`19937`-1 of the produced      sequence.
          * -                      \ :ref:`onemath_rng_sobol`\
@@ -62,8 +62,8 @@ Host Engines (Basic Random Number Generators)
    description of these functions can be found in the :ref:`onemath_rng_service_routines` section.
 
 
-   In addition, the MT2203 pseudorandom number generator is a set of 6024
-   generators designed to create up to 6024 independent random
+   In addition, the MT2203 pseudorandom number generator is a set of
+   generators designed to create independent random
    sequences, which might be used in parallel Monte Carlo simulations.
    Another generator that has the same feature is Wichmann-Hill. It
    allows creating up to 273 independent random streams. The properties
@@ -107,7 +107,7 @@ Host Engines (Basic Random Number Generators)
       SFMT19937 [Saito08] with a period length equal to
       2\ :sup:`19937`-1 of the produced sequence.
    -  :ref:`onemath_rng_mt2203`
-      Set of 6024 Mersenne Twister pseudorandom number generators MT2203
+      Set of Mersenne Twister pseudorandom number generators MT2203
       [Matsumoto98], [Matsumoto00]. Each of them generates a sequence of
       period length equal to 2\ :sup:`2203`-1. Parameters of the
       generators provide mutual independence of the corresponding
