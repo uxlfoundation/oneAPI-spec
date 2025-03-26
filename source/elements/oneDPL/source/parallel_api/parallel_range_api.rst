@@ -47,7 +47,7 @@ of parallel range algorithms.
 
    // C++20 analogue of std::projected_value_t; exposition only
    template<typename I, typename Proj>
-   using projected-value-type = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
+   using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
@@ -94,7 +94,7 @@ Whole Sequence Operations
     // count
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              typename T = projected-value-type<std::ranges::iterator_t<R>, Proj>>
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirect_binary_predicate< std::ranges::equal_to,
@@ -126,7 +126,7 @@ Element Search Operations
     // find
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              typename T = projected-value-type<std::ranges::iterator_t<R>, Proj>>
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirect_binary_predicate< std::ranges::equal_to,
@@ -221,7 +221,7 @@ Sequence Search and Comparison
     // search_n
     template<typename ExecutionPolicy, std::ranges::random_access_range R,
              typename Pred = std::ranges::equal_to, typename Proj = std::identity,
-             typename T = projected-value-type<std::ranges::iterator_t<R>, Proj>>
+             typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirectly_comparable< std::ranges::iterator_t<R>, const T*, Pred, Proj >
