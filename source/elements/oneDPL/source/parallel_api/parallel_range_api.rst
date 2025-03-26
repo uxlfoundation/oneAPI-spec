@@ -37,7 +37,7 @@ The following differences to the standard C++ range algorithms apply:
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
 
-Auxiliary definitions
+Auxiliary Definitions
 +++++++++++++++++++++
 
 The following auxiliary entities are only defined for the purpose of exposition, to aid the specification
