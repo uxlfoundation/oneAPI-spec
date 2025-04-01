@@ -7,8 +7,8 @@
 Count Engine Adaptor
 ====================
 
-``count_engine_adaptor`` is a random number engine adaptor that counts how many
-random numbers were taken from an engine during the ``generate`` call.
+``count_engine_adaptor`` is a random number engine adaptor that counts how many times
+random 32 bits were taken from the engine during the ``generate`` call.
 
 .. rubric:: Description
 
