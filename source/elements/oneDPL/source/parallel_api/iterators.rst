@@ -3,6 +3,8 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. _iterators:
+
 Iterators
 ---------
 
@@ -301,3 +303,116 @@ operation were applied to each of these iterators. The types ``T`` within the te
 
 ``make_zip_iterator`` constructs and returns an instance of ``zip_iterator``
 using the set of source iterators provided.
+
+.. _iterators-passed-directly:
+
+Customization Point for "Passed Directly" Iterators
+---------------------------------------------------
+
+Iterator types should be "passed directly" to SYCL kernels when they are inherently accessible on the device when using
+an algorithm with a ``device_policy``, like in the case of SYCL USM shared or device memory, or when the iterator type
+is something like a ``counting_iterator`` or ``discard_iterator`` that does not require any data to be copied to the
+device. An example of an iterator type that should not be "passed directly" is a ``std::vector`` iterator, which
+requires the data to be copied to the device in some way prior to usage in a SYCL kernel within algorithms used with a
+``device_policy``.
+
+oneDPL provides a mechanism to define whether custom iterator types should be "passed directly" to SYCL kernels.
+This is achieved using the ``is_passed_directly_in_onedpl_device_policies``Argument-Dependent Lookup (ADL) customization
+point and the public trait ``is_passed_directly_to_device[_v]``.
+
+ADL Customization Point: ``is_passed_directly_in_onedpl_device_policies``
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+A free function ``is_passed_directly_in_onedpl_device_policies(IteratorT)`` may be defined which accepts some argument
+of type ``IteratorT`` and returns a type with the characteristics of ``std::true_type`` if ``IteratorT`` should be
+"passed directly" to the SYCL kernels, or alternatively returns a type with the characteristics of ``std::false_type``
+otherwise. The function must be defined in one of the valid search locations for the ADL lookup, which includes the
+namespace of the definition of the iterator type ``IteratorT``.
+
+The function ``is_passed_directly_in_onedpl_device_policies`` is used by oneDPL to determine whether the iterator type
+should be "passed directly" to SYCL kernels by interrogating it's return type at compile time only. It shall not be
+called by oneDPL outside a ``decltype`` context to determine the return type.  This means that overloads may be provided
+as forward declaration only, without a body defined. ADL lookup is used to determine function overload to use according
+to the rules in the C++ Standard. Therefore, derived iterator types without an overload for their exact type will match
+to their most specific derived-from iterator type if such an overload exists.
+
+The default implementation of ``is_passed_directly_in_onedpl_device_policies`` marks the following iterators as
+"passed directly":
+* Pointers (to handle USM pointers)
+* Iterators with ``using is_passed_directly = std::true_type`` trait
+* Iterators to USM shared allocated ``std::vector``-s when the allocator type is knowable from the iterator type
+* ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` is "passed directly"
+
+oneDPL defines the "passed directly" behavior for its custom iterators as follows:
+* ``counting_iterator`` and ``discard_iterator``: Always "passed directly".
+* ``permutation_iterator``: "Passed directly" if both its source iterator and its index map are "passed directly".
+* ``transform_iterator``: "Passed directly" if its source iterator is "passed directly".
+* ``zip_iterator``: "Passed directly" if all base iterators are "passed directly".
+
+Public Trait: ``is_passed_directly_to_device``
+++++++++++++++++++++++++++++++++++++++++++++++
+
+The public trait ``oneapi::dpl::is_passed_directly_to_device`` can be used to query whether an iterator type is
+"passed directly". It is defined as follows:
+
+.. code:: cpp
+
+    namespace oneapi
+    {
+    namespace dpl
+    {
+        template <typename T>
+        struct is_passed_directly_to_device; // Evaluates to a type with the characteristics of std::true_type
+                                             // if T is "passed directly" to SYCL kernels, otherwise with the
+                                             // characteristics of std::false_type.
+
+        template <typename T>
+        inline constexpr bool is_passed_directly_to_device_v = is_passed_directly_to_device<T>::value;
+    } // namespace dpl
+    } // namespace oneapi
+
+Examples
+++++++++
+
+Simple Examples:
+.. code:: cpp
+
+    namespace user
+    {
+        struct my_pass_dir_iterator
+        {
+            /* unspecified user definition of a "passed directly" iterator */
+        };
+
+        std::true_type
+        is_passed_directly_in_onedpl_device_policies(const my_pass_dir_iterator&);
+
+        struct my_non_pass_dir_iterator
+        {
+            /* unspecified user definition of a non "passed directly" iterator */
+        };
+
+        std::false_type
+        is_passed_directly_in_onedpl_device_policies(const my_non_pass_dir_iterator&);
+    }
+
+    // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
+    // oneapi::dpl::is_passed_directly_to_device_v<user::my_non_pass_dir_iterator> will evaluate to `false``
+
+Example with base iterators as a hidden friend:
+.. code:: cpp
+    template <typename It1, typename It2>
+    struct iterator_pair
+    {
+        It1 first;
+        It2 second;
+        friend auto is_passed_directly_in_onedpl_device_policies(const iterator_pair&) ->
+            std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
+                             oneapi::dpl::is_passed_directly_to_device<It2>>;
+    };
+
+    // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_pass_dir_iterator>> will evaluate to `true``
+    // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_non_pass_dir_iterator>> will evaluate to `false``
+
+
+.. _`C++ Standard`: https://isocpp.org/std/the-standard
