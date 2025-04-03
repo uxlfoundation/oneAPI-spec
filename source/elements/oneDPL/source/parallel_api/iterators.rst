@@ -316,8 +316,8 @@ iterator type that should not be "passed directly" is a ``std::vector`` iterator
 to the device in some way prior to usage in a SYCL kernel within algorithms used with a ``device_policy``.
 
 oneDPL provides a mechanism to define whether custom iterator types should be "passed directly" to SYCL kernels.
-This is achieved using the ``is_passed_directly_in_onedpl_device_policies`` Argument-Dependent Lookup (ADL) customization
-point and the public trait ``is_passed_directly_to_device[_v]``.
+This is achieved using the ``is_passed_directly_in_onedpl_device_policies`` Argument-Dependent Lookup (ADL) 
+customization point and the public trait ``is_passed_directly_to_device[_v]``.
 
 ADL Customization Point: ``is_passed_directly_in_onedpl_device_policies``
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -332,8 +332,8 @@ The function ``is_passed_directly_in_onedpl_device_policies`` is used by oneDPL 
 should be "passed directly" to SYCL kernels by interrogating its return type at compile time only. It shall not be
 called by oneDPL outside a ``decltype`` context to determine the return type. This means that overloads may be provided
 as forward declarations only, without a body defined. ADL lookup is used to determine which function overload to use
-according to the rules in the C++ Standard. Therefore, derived iterator types without an overload for their exact type
-will match their most specific base iterator type if such an overload exists.
+according to the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact
+type will match their most specific base iterator type if such an overload exists.
 
 The default implementation of ``is_passed_directly_in_onedpl_device_policies`` marks the following iterators as
 "passed directly":
