@@ -353,7 +353,7 @@ oneDPL defines the "passed directly" behavior for its custom iterators as follow
 
 
 Public Trait: ``is_passed_directly_to_device[_v]``
-++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The public trait ``oneapi::dpl::is_passed_directly_to_device[_v]`` can be used to query whether an iterator type is
 "passed directly" to SYCL kernels. The trait is defined in ``<oneapi/dpl/iterator>``.
