@@ -376,9 +376,9 @@ refers to "device accessible content", otherwise it evaluates to ``false``.
 Device Copyability of Iterators
 +++++++++++++++++++++++++++++++
 
-Iterators referring to "device accessible content" used as input or output with algorithms using a ``device_policy``
-must also be SYCL device-copyable as defined by the SYCL Specification. oneDPL provides specializations for
-``sycl::is_device_copyable`` for each of its provide iterator types.
+Iterators that refer to "device accessible content" and are used as input or output with algorithms using a
+``device_policy`` must also be SYCL device-copyable, as defined by the SYCL Specification. oneDPL provides
+specializations of ``sycl::is_device_copyable`` for each of its provided iterator types.
 
 The rules are as follows:
 * ``counting_iterator``: Always device-copyable.
