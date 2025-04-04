@@ -312,19 +312,20 @@ Iterator Compatibility with Device Policies
 The iterators described here are compatible with algorithms when using a ``device_policy``, but some additional
 considerations apply. Iterators used with algorithms using a ``device_policy`` must be SYCL device-copyable as defined
 by the `SYCL`_ Specification. oneDPL provides specializations for each iterator type of ``sycl::is_device_copyable``.
-Those rules are as follows:
+
+The rules are as follows:
 * ``counting_iterator``: Always device-copyable.
 * ``discard_iterator``: Always device-copyable.
-* ``permutation_iterator``: Device-copyable if both the source iterator and index map are device-copyable.
+* ``permutation_iterator``: Device-copyable if both the source iterator and the index map are device-copyable.
 * ``transform_iterator``: Device-copyable if the source iterator is device-copyable.
 * ``zip_iterator``: Device-copyable if all base iterators are device-copyable.
 
-To use algorithms with a ``device_policy`` efficiently, minimizing unnecessary data movement is very important. Toward
-this end, oneDPL provides a mechanism to define whether custom iterator types are of "device accessible content".
+To use algorithms with a ``device_policy`` efficiently, minimizing unnecessary data movement is very important. To
+support this, oneDPL provides a mechanism to define whether custom iterator types are of "device accessible content."
 
 Users may provide their own custom iterators as input to algorithms with a ``device_policy``, but they must ensure that
-the iterators are ``sycl::is_device_copyable``, and should also ensure that the iterators are
-of "device accessible content" if they are to be used efficiently.
+the iterators are ``sycl::is_device_copyable``. Additionally, for best performance, users should ensure that the
+iterators are of "device accessible content", and are marked as such using the customization point described below.
 
 Customization Point for Iterators of Device Accessible Content
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
