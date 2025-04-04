@@ -392,7 +392,7 @@ Example
     static_assert(oneapi::dpl::is_passed_directly_to_device_v<usr::pass_dir_it> == true);
     static_assert(oneapi::dpl::is_passed_directly_to_device_v<usr::no_pass_dir_it> == false);
 
-    //Example with base iterators as a hidden friend
+    // Example with base iterators and ADL overload as a hidden friend
     template <typename It1, typename It2>
     struct it_pair
     {
