@@ -365,14 +365,12 @@ The public trait ``oneapi::dpl::is_passed_directly_to_device[_v]`` can be used t
 ``oneapi::dpl::is_passed_directly_to_device_v<T>`` is a ``constexpr bool`` that evaluates to ``true`` if ``T`` can be
 "passed directly" to SYCL kernels, otherwise it evaluates to ``false``.
 
-Examples
-++++++++
-
-Simple Examples
+Example
++++++++
 
 .. code:: cpp
 
-    namespace user
+    namespace usr
     {
         struct pass_dir_it
         {
@@ -382,34 +380,31 @@ Simple Examples
         std::true_type
         is_passed_directly_in_onedpl_device_policies(pass_dir_it);
 
-        struct non_pass_dir_it
+        struct no_pass_dir_it
         {
             /* unspecified user definition of a non "passed directly" iterator */
         };
 
         std::false_type
-        is_passed_directly_in_onedpl_device_policies(non_pass_dir_it);
+        is_passed_directly_in_onedpl_device_policies(no_pass_dir_it);
     }
 
-  // oneapi::dpl::is_passed_directly_to_device_v<user::pass_dir_it> == true`
-  // oneapi::dpl::is_passed_directly_to_device_v<user::non_pass_dir_it> == false`
+    static_assert(oneapi::dpl::is_passed_directly_to_device_v<usr::pass_dir_it> == true);
+    static_assert(oneapi::dpl::is_passed_directly_to_device_v<usr::no_pass_dir_it> == false);
 
-Example with base iterators as a hidden friend
-
-.. code:: cpp
-
+    //Example with base iterators as a hidden friend
     template <typename It1, typename It2>
-    struct iterator_pair
+    struct it_pair
     {
         It1 first;
         It2 second;
-        friend auto is_passed_directly_in_onedpl_device_policies(iterator_pair) ->
+        friend auto is_passed_directly_in_onedpl_device_policies(it_pair) ->
             std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
                              oneapi::dpl::is_passed_directly_to_device<It2>>;
     };
 
-  // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::pass_dir_it, user::pass_dir_it>> == `true``
-  // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::pass_dir_it, user::non_pass_dir_it>> == `false``
+    static_assert(oneapi::dpl::is_passed_directly_to_device_v<it_pair<usr::pass_dir_it, usr::pass_dir_it>> == true);
+    static_assert(oneapi::dpl::is_passed_directly_to_device_v<it_pair<usr::pass_dir_it, usr::no_pass_dir_it>> == false);
 
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
