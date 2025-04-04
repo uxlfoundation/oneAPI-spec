@@ -386,7 +386,7 @@ Simple Examples
     };
 
     std::true_type
-    is_passed_directly_in_onedpl_device_policies(const my_pass_dir_iterator&);
+    is_passed_directly_in_onedpl_device_policies(my_pass_dir_iterator);
 
     struct my_non_pass_dir_iterator
     {
@@ -394,7 +394,7 @@ Simple Examples
     };
 
     std::false_type
-    is_passed_directly_in_onedpl_device_policies(const my_non_pass_dir_iterator&);
+    is_passed_directly_in_onedpl_device_policies(my_non_pass_dir_iterator);
   }
 
   // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
@@ -408,7 +408,7 @@ Example with base iterators as a hidden friend
   {
     It1 first;
     It2 second;
-    friend auto is_passed_directly_in_onedpl_device_policies(const iterator_pair&) ->
+    friend auto is_passed_directly_in_onedpl_device_policies(iterator_pair) ->
         std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
                             oneapi::dpl::is_passed_directly_to_device<It2>>;
   };
