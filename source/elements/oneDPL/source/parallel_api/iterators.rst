@@ -306,26 +306,29 @@ using the set of source iterators provided.
 
 .. _iterators-device-accessible:
 
-Iterators of Device Accessible Content with Device Policies
------------------------------------------------------------
+Device Accessible Content Iterators with Device Policies
+--------------------------------------------------------
 
 Iterator are, by default, not assumed to refer to content which is accessible on the device which requires the content
-to be copied to the device prior to being used inside a `SYCL`_ kernel. We say that iterators are of "device accessible
-content" when they can inherently be dereferenced on the device in a SYCL kernel. When using algorithms with a 
-``device_policy``, iterators of "device accessible content" avoid unnecessary data movement when provided as input or
-output arguments.
+to be copied to the device prior to being used inside a `SYCL`_ kernel. We define that iterators to be  "device
+accessible content iterators" when they can inherently be dereferenced on the device in a SYCL kernel. When using oneDPL
+algorithms with a ``device_policy``, "device accessible content iterators" avoid unnecessary data movement when provided
+as input or output arguments.
 
-Examples of iterators of "device accessible content" include SYCL USM shared or device memory, or iterator types like
+Examples of "device accessible content iterators" include SYCL USM shared or device memory, or iterator types like
 ``counting_iterator`` or ``discard_iterator`` that do not require any data to be copied to the device to be used in a
 SYCL kernel. An example of an iterator which does not refer to "device accessible content" is a ``std::vector``
 iterator, which requires the data to be copied to the device in some way prior to usage in a SYCL kernel within
 algorithms used with a ``device_policy``.
 
-oneDPL provides a mechanism to define whether custom iterator types are of "device accessible content" to SYCL kernels.
+oneDPL provides a mechanism to define whether custom iterators are "device accessible content iterators" by defining
+a Argument-Dependent Lookup (ADL) customization point, ``is_onedpl_device_accessible_content_iterator``. This allows
+users to define rules for their own iterators to be "device accessible content iterators" or not. oneDPL also defines a
+public trait, ``is_device_accessible_content_iterator[_v]`` to indicate whether an iterator is a "device accessible
+content iterator".
+
 oneDPL queries this information at compile time to determine how to handle the iterator type when passed to algorithms
-with a ``device_policy``. This is important because it allows oneDPL to avoid unnecessary data movement. This is
-achieved using the ``is_onedpl_device_accessible_content_iterator`` Argument-Dependent Lookup (ADL) customization point
-and the public trait ``is_device_accessible_content_iterator[_v]``.
+with a ``device_policy``. This is important because it allows oneDPL to avoid unnecessary data movement.
 
 ADL Customization Point: ``is_onedpl_device_accessible_content_iterator``
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -343,28 +346,29 @@ declarations only, without a body defined. ADL lookup is used to determine which
 the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match
 their most specific base iterator type if such an overload exists.
 
-The default implementation of ``is_onedpl_device_accessible_content_iterator`` marks the following iterators referring
-to "device accessible content":
+The default implementation of ``is_onedpl_device_accessible_content_iterator`` marks the following iterators as to
+"device accessible content iterators":
 * Pointers (to handle USM pointers)
 * Iterators with the ``using is_passed_directly = std::true_type`` trait
 * Iterators to USM shared allocated ``std::vector``-s when the allocator type is knowable from the iterator type
 * ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` refers to "device accessible content"
 
-oneDPL defines its provided iterators as referring to "device accessible content" as follows:
-* ``counting_iterator`` and ``discard_iterator``: Always refer to "device accessible content".
-* ``permutation_iterator``:  Refers to "device accessible content" if both its source iterator and its index map refer
-to "device accessible content".
-* ``transform_iterator``:  Refers to "device accessible content" if its source iterator refers to "device accessible
-content".
-* ``zip_iterator``:  Refers to "device accessible content" if all base iterators refer to to "device accessible
-content".
+oneDPL defines rules for the provided iterators as follows:
+* ``counting_iterator``: Always a "device accessible content iterator"
+* ``discard_iterator``: Always a "device accessible content iterator"
+* ``permutation_iterator``:  "Device accessible content iterator" if both its source iterator and its index map are 
+"device accessible content iterators"
+* ``transform_iterator``:  "Device accessible content iterator" if its source iterator is a "device accessible content
+iterator"
+* ``zip_iterator``:  "Device accessible content iterator" if all base iterators are "device accessible content
+iterators"
 
 
 Public Trait: ``oneapi::dpl::is_device_accessible_content_iterator[_v]``
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The public trait ``oneapi::dpl::is_device_accessible_content_iterator[_v]`` can be used to query whether an iterator
-refers to "device accessible content". The trait is defined in ``<oneapi/dpl/iterator>``.
+is a "device accessible content iterator". The trait is defined in ``<oneapi/dpl/iterator>``.
 
 ``oneapi::dpl::is_device_accessible_content_iterator<T>`` evaluates to a type with the characteristics of
 ``std::true_type`` if ``T``  refers to "device accessible content", otherwise it evaluates to a type with the
@@ -376,9 +380,9 @@ refers to "device accessible content", otherwise it evaluates to ``false``.
 Device Copyability of Iterators
 +++++++++++++++++++++++++++++++
 
-Iterators that refer to "device accessible content" and are used as input or output with algorithms using a
-``device_policy`` must also be SYCL device-copyable, as defined by the SYCL Specification. oneDPL provides
-specializations of ``sycl::is_device_copyable`` for each of its provided iterator types.
+"Device accessible content iterators" which are used as input or output with algorithms using a ``device_policy`` must
+also be SYCL device-copyable, as defined by the SYCL Specification. oneDPL provides specializations of
+``sycl::is_device_copyable`` for each of its provided iterator types.
 
 The rules are as follows:
 * ``counting_iterator``: Always device-copyable.
