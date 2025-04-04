@@ -397,8 +397,8 @@ Simple Examples
     is_passed_directly_in_onedpl_device_policies(const my_non_pass_dir_iterator&);
   }
 
-    // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
-    // oneapi::dpl::is_passed_directly_to_device_v<user::my_non_pass_dir_iterator> will evaluate to `false``
+  // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
+  // oneapi::dpl::is_passed_directly_to_device_v<user::my_non_pass_dir_iterator> will evaluate to `false``
 
 Example with base iterators as a hidden friend
 
@@ -413,8 +413,8 @@ Example with base iterators as a hidden friend
                             oneapi::dpl::is_passed_directly_to_device<It2>>;
   };
 
-    // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_pass_dir_iterator>> will evaluate to `true``
-    // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_non_pass_dir_iterator>> will evaluate to `false``
+  // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_pass_dir_iterator>> will evaluate to `true``
+  // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_non_pass_dir_iterator>> will evaluate to `false``
 
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
