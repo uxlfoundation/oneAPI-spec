@@ -357,19 +357,19 @@ The public trait ``oneapi::dpl::is_passed_directly_to_device`` can be used to qu
 
 .. code:: cpp
 
-    namespace oneapi
-    {
-    namespace dpl
-    {
-        template <typename T>
-        struct is_passed_directly_to_device; // Evaluates to a type with the characteristics of std::true_type
-                                             // if T is "passed directly" to SYCL kernels, otherwise with the
-                                             // characteristics of std::false_type.
+  namespace oneapi
+  {
+  namespace dpl
+  {
+    template <typename T>
+    struct is_passed_directly_to_device; // Evaluates to a type with the characteristics of std::true_type
+                                            // if T is "passed directly" to SYCL kernels, otherwise with the
+                                            // characteristics of std::false_type.
 
-        template <typename T>
-        inline constexpr bool is_passed_directly_to_device_v = is_passed_directly_to_device<T>::value;
-    } // namespace dpl
-    } // namespace oneapi
+    template <typename T>
+    inline constexpr bool is_passed_directly_to_device_v = is_passed_directly_to_device<T>::value;
+  } // namespace dpl
+  } // namespace oneapi
 
 Examples
 ++++++++
@@ -377,39 +377,39 @@ Examples
 Simple Examples:
 .. code:: cpp
 
-    namespace user
+  namespace user
+  {
+    struct my_pass_dir_iterator
     {
-        struct my_pass_dir_iterator
-        {
-            /* unspecified user definition of a "passed directly" iterator */
-        };
+      /* unspecified user definition of a "passed directly" iterator */
+    };
 
-        std::true_type
-        is_passed_directly_in_onedpl_device_policies(const my_pass_dir_iterator&);
+    std::true_type
+    is_passed_directly_in_onedpl_device_policies(const my_pass_dir_iterator&);
 
-        struct my_non_pass_dir_iterator
-        {
-            /* unspecified user definition of a non "passed directly" iterator */
-        };
+    struct my_non_pass_dir_iterator
+    {
+        /* unspecified user definition of a non "passed directly" iterator */
+    };
 
-        std::false_type
-        is_passed_directly_in_onedpl_device_policies(const my_non_pass_dir_iterator&);
-    }
+    std::false_type
+    is_passed_directly_in_onedpl_device_policies(const my_non_pass_dir_iterator&);
+  }
 
     // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
     // oneapi::dpl::is_passed_directly_to_device_v<user::my_non_pass_dir_iterator> will evaluate to `false``
 
 Example with base iterators as a hidden friend:
 .. code:: cpp
-    template <typename It1, typename It2>
-    struct iterator_pair
-    {
-        It1 first;
-        It2 second;
-        friend auto is_passed_directly_in_onedpl_device_policies(const iterator_pair&) ->
-            std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
-                             oneapi::dpl::is_passed_directly_to_device<It2>>;
-    };
+  template <typename It1, typename It2>
+  struct iterator_pair
+  {
+    It1 first;
+    It2 second;
+    friend auto is_passed_directly_in_onedpl_device_policies(const iterator_pair&) ->
+        std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
+                            oneapi::dpl::is_passed_directly_to_device<It2>>;
+  };
 
     // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_pass_dir_iterator>> will evaluate to `true``
     // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_non_pass_dir_iterator>> will evaluate to `false``
