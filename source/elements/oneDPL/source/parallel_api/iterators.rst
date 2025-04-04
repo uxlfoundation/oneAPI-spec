@@ -304,66 +304,74 @@ operation were applied to each of these iterators. The types ``T`` within the te
 ``make_zip_iterator`` constructs and returns an instance of ``zip_iterator``
 using the set of source iterators provided.
 
-.. _iterators-passed-directly:
+.. _iterators-device-accessible:
 
-Customization Point for "Passed Directly" Iterators
----------------------------------------------------
+Customization Point for Iterators of Device Accessible Content
+--------------------------------------------------------------
 
-Iterator types can be "passed directly" to `SYCL`_ kernels when they can inherently be dereferenced on the device while
-using an algorithm with a ``device_policy``. Examples of iterators which can be "passed directly" include SYCL USM
-shared or device memory, or iterator types like ``counting_iterator`` or ``discard_iterator`` that do not require any
-data to be copied to the device. An example of an iterator type that cannot be "passed directly" is a ``std::vector``
+Iterator are, by default, not assumed to refer to content which is accessible on the device which requires the content
+to be copied to the device prior to being used inside a `SYCL`_ kernel. We say that iterators are of "device accessible
+content" when they can inherently be dereferenced on the device in a SYCL kernel. When using algorithms with a 
+``device_policy``, iterators of "device accessible content" avoid unnecessary data movement when provided as input or
+output arguments.
+
+Examples of iterators of "device accessible content" include SYCL USM shared or device memory, or iterator types like
+``counting_iterator`` or ``discard_iterator`` that do not require any data to be copied to the device to be used in a
+SYCL kernel. An example of an iterator which does not refer to "device accessible content" is a ``std::vector``
 iterator, which requires the data to be copied to the device in some way prior to usage in a SYCL kernel within
 algorithms used with a ``device_policy``.
 
-oneDPL provides a mechanism to define whether custom iterator types can be "passed directly" to SYCL kernels.  oneDPL
-queries this information at compile time to determine how to handle the iterator type when passed to algorithms with a
-``device_policy``. This is important because it allows oneDPL to avoid unnecessary data movement. This is achieved using
-the ``is_passed_directly_in_onedpl_device_policies`` Argument-Dependent Lookup (ADL) customization point and the public
-trait ``is_passed_directly_to_device[_v]``.
+oneDPL provides a mechanism to define whether custom iterator types are of "device accessible content" to SYCL kernels.
+oneDPL queries this information at compile time to determine how to handle the iterator type when passed to algorithms
+with a ``device_policy``. This is important because it allows oneDPL to avoid unnecessary data movement. This is
+achieved using the ``is_onedpl_device_accessible_content_iterator`` Argument-Dependent Lookup (ADL) customization point
+and the public trait ``is_device_accessible_content_iterator[_v]``.
 
-ADL Customization Point: ``is_passed_directly_in_onedpl_device_policies``
+ADL Customization Point: ``is_onedpl_device_accessible_content_iterator``
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-A free function ``is_passed_directly_in_onedpl_device_policies(IteratorT)`` may be defined, which accepts an argument
-of type ``IteratorT`` and returns a type with the characteristics of ``std::true_type`` if ``IteratorT`` can be
-"passed directly" to SYCL kernels, or alternatively returns a type with the characteristics of ``std::false_type``
+A free function ``is_onedpl_device_accessible_content_iterator(IteratorT)`` may be defined, which accepts an argument
+of type ``IteratorT`` and returns a type with the characteristics of ``std::true_type`` if ``IteratorT`` refers to
+"device accessible content", or alternatively returns a type with the characteristics of ``std::false_type``
 otherwise. The function must be defined in one of the valid search locations for ADL lookup, which includes the
 namespace of the definition of the iterator type ``IteratorT``.
 
-The function ``is_passed_directly_in_onedpl_device_policies`` may be used by oneDPL to determine whether the iterator
-type can be "passed directly" to SYCL kernels by interrogating its return type at compile time only. It shall not be
-called by oneDPL outside a ``decltype`` context to determine the return type. This means that overloads may be provided
-as forward declarations only, without a body defined. ADL lookup is used to determine which function overload to use
-according to the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact
-type will match their most specific base iterator type if such an overload exists.
+The function ``is_onedpl_device_accessible_content_iterator`` may be used by oneDPL to determine the iterator refers to
+"device accessible content" by interrogating its return type at compile time only. It shall not be called by oneDPL
+outside a ``decltype`` context to determine the return type. This means that overloads may be provided as forward
+declarations only, without a body defined. ADL lookup is used to determine which function overload to use according to
+the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match
+their most specific base iterator type if such an overload exists.
 
-The default implementation of ``is_passed_directly_in_onedpl_device_policies`` marks the following iterators as
-"passed directly":
+The default implementation of ``is_onedpl_device_accessible_content_iterator`` marks the following iterators referring
+to "device accessible content":
 * Pointers (to handle USM pointers)
 * Iterators with the ``using is_passed_directly = std::true_type`` trait
 * Iterators to USM shared allocated ``std::vector``-s when the allocator type is knowable from the iterator type
-* ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` is "passed directly"
+* ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` refers to "device accessible content"
 
-oneDPL defines the "passed directly" behavior for its custom iterators as follows:
-* ``counting_iterator`` and ``discard_iterator``: Always "passed directly".
-* ``permutation_iterator``: "Passed directly" if both its source iterator and its index map are "passed directly".
-* ``transform_iterator``: "Passed directly" if its source iterator is "passed directly".
-* ``zip_iterator``: "Passed directly" if all base iterators are "passed directly".
+oneDPL defines its provided iterators as referring to "device accessible content" as follows:
+* ``counting_iterator`` and ``discard_iterator``: Always refer to "device accessible content".
+* ``permutation_iterator``:  Refers to "device accessible content" if both its source iterator and its index map refer
+to "device accessible content".
+* ``transform_iterator``:  Refers to "device accessible content" if its source iterator refers to "device accessible
+content".
+* ``zip_iterator``:  Refers to "device accessible content" if all base iterators refer to to "device accessible
+content".
 
 
-Public Trait: ``is_passed_directly_to_device[_v]``
+Public Trait: ``oneapi::dpl::is_device_accessible_content_iterator[_v]``
 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The public trait ``oneapi::dpl::is_passed_directly_to_device[_v]`` can be used to query whether an iterator type is
-"passed directly" to SYCL kernels. The trait is defined in ``<oneapi/dpl/iterator>``.
+The public trait ``oneapi::dpl::is_device_accessible_content_iterator[_v]`` can be used to query whether an iterator
+refers to "device accessible content". The trait is defined in ``<oneapi/dpl/iterator>``.
 
-``oneapi::dpl::is_passed_directly_to_device<T>`` evaluates to a type with the characteristics of ``std::true_type`` if
-``T`` can be "passed directly" to SYCL kernels, otherwise it evaluates to a type with the characteristics of
-``std::false_type``.
+``oneapi::dpl::is_device_accessible_content_iterator<T>`` evaluates to a type with the characteristics of
+``std::true_type`` if ``T``  refers to "device accessible content", otherwise it evaluates to a type with the
+characteristics of ``std::false_type``.
 
-``oneapi::dpl::is_passed_directly_to_device_v<T>`` is a ``constexpr bool`` that evaluates to ``true`` if ``T`` can be
-"passed directly" to SYCL kernels, otherwise it evaluates to ``false``.
+``oneapi::dpl::is_device_accessible_content_iterator<T>`` is a ``constexpr bool`` that evaluates to ``true`` if ``T``
+refers to "device accessible content", otherwise it evaluates to ``false``.
 
 Example
 +++++++
@@ -372,25 +380,25 @@ Example
 
     namespace usr
     {
-        struct pass_dir_it
+        struct accessible_it
         {
-        /* unspecified user definition of a "passed directly" iterator */
+        /* unspecified user definition of a iterator which refers to "device accessible content" */
         };
 
         std::true_type
-        is_passed_directly_in_onedpl_device_policies(pass_dir_it);
+        is_onedpl_device_accessible_content_iterator(accessible_it);
 
-        struct no_pass_dir_it
+        struct inaccessible_it
         {
-            /* unspecified user definition of a non "passed directly" iterator */
+            /* unspecified user definition of iterator which doesn't refer to "device accessible content" */
         };
 
         std::false_type
-        is_passed_directly_in_onedpl_device_policies(no_pass_dir_it);
+        is_onedpl_device_accessible_content_iterator(inaccessible_it);
     }
 
-    static_assert(oneapi::dpl::is_passed_directly_to_device_v<usr::pass_dir_it> == true);
-    static_assert(oneapi::dpl::is_passed_directly_to_device_v<usr::no_pass_dir_it> == false);
+    static_assert(oneapi::dpl::is_device_accessible_content_iterator<usr::accessible_it> == true);
+    static_assert(oneapi::dpl::is_device_accessible_content_iterator<usr::inaccessible_it> == false);
 
     // Example with base iterators and ADL overload as a hidden friend
     template <typename It1, typename It2>
@@ -398,13 +406,13 @@ Example
     {
         It1 first;
         It2 second;
-        friend auto is_passed_directly_in_onedpl_device_policies(it_pair) ->
-            std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
-                             oneapi::dpl::is_passed_directly_to_device<It2>>;
+        friend auto is_onedpl_device_accessible_content_iterator(it_pair) ->
+            std::conjunction<oneapi::dpl::is_device_accessible_content_iterator<It1>,
+                             oneapi::dpl::is_device_accessible_content_iterator<It2>>;
     };
 
-    static_assert(oneapi::dpl::is_passed_directly_to_device_v<it_pair<usr::pass_dir_it, usr::pass_dir_it>> == true);
-    static_assert(oneapi::dpl::is_passed_directly_to_device_v<it_pair<usr::pass_dir_it, usr::no_pass_dir_it>> == false);
+    static_assert(oneapi::dpl::is_device_accessible_content_iterator<it_pair<usr::accessible_it, usr::accessible_it>> == true);
+    static_assert(oneapi::dpl::is_device_accessible_content_iterator<it_pair<usr::accessible_it, usr::inaccessible_it>> == false);
 
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
