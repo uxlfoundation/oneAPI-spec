@@ -306,32 +306,11 @@ using the set of source iterators provided.
 
 .. _iterators-device-accessible:
 
-Iterator Compatibility with Device Policies
--------------------------------------------
-
-The iterators described here are compatible with algorithms when using a ``device_policy``, but some additional
-considerations apply. Iterators used with algorithms using a ``device_policy`` must be SYCL device-copyable as defined
-by the `SYCL`_ Specification. oneDPL provides specializations for each iterator type of ``sycl::is_device_copyable``.
-
-The rules are as follows:
-* ``counting_iterator``: Always device-copyable.
-* ``discard_iterator``: Always device-copyable.
-* ``permutation_iterator``: Device-copyable if both the source iterator and the index map are device-copyable.
-* ``transform_iterator``: Device-copyable if the source iterator is device-copyable.
-* ``zip_iterator``: Device-copyable if all base iterators are device-copyable.
-
-To use algorithms with a ``device_policy`` efficiently, minimizing unnecessary data movement is very important. To
-support this, oneDPL provides a mechanism to define whether custom iterator types are of "device accessible content."
-
-Users may provide their own custom iterators as input to algorithms with a ``device_policy``, but they must ensure that
-the iterators are ``sycl::is_device_copyable``. Additionally, for best performance, users should ensure that the
-iterators are of "device accessible content", and are marked as such using the customization point described below.
-
-Customization Point for Iterators of Device Accessible Content
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Iterators of Device Accessible Content with Device Policies
+-----------------------------------------------------------
 
 Iterator are, by default, not assumed to refer to content which is accessible on the device which requires the content
-to be copied to the device prior to being used inside a SYCL kernel. We say that iterators are of "device accessible
+to be copied to the device prior to being used inside a `SYCL`_ kernel. We say that iterators are of "device accessible
 content" when they can inherently be dereferenced on the device in a SYCL kernel. When using algorithms with a 
 ``device_policy``, iterators of "device accessible content" avoid unnecessary data movement when provided as input or
 output arguments.
@@ -349,7 +328,7 @@ achieved using the ``is_onedpl_device_accessible_content_iterator`` Argument-Dep
 and the public trait ``is_device_accessible_content_iterator[_v]``.
 
 ADL Customization Point: ``is_onedpl_device_accessible_content_iterator``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 A free function ``is_onedpl_device_accessible_content_iterator(IteratorT)`` may be defined, which accepts an argument
 of type ``IteratorT`` and returns a type with the characteristics of ``std::true_type`` if ``IteratorT`` refers to
@@ -382,7 +361,7 @@ content".
 
 
 Public Trait: ``oneapi::dpl::is_device_accessible_content_iterator[_v]``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The public trait ``oneapi::dpl::is_device_accessible_content_iterator[_v]`` can be used to query whether an iterator
 refers to "device accessible content". The trait is defined in ``<oneapi/dpl/iterator>``.
@@ -394,8 +373,23 @@ characteristics of ``std::false_type``.
 ``oneapi::dpl::is_device_accessible_content_iterator<T>`` is a ``constexpr bool`` that evaluates to ``true`` if ``T``
 refers to "device accessible content", otherwise it evaluates to ``false``.
 
+Device Copyability of Iterators
++++++++++++++++++++++++++++++++
+
+Iterators referring to "device accessible content" used as input or output with algorithms using a ``device_policy``
+must also be SYCL device-copyable as defined by the SYCL Specification. oneDPL provides specializations for
+``sycl::is_device_copyable`` for each of its provide iterator types.
+
+The rules are as follows:
+* ``counting_iterator``: Always device-copyable.
+* ``discard_iterator``: Always device-copyable.
+* ``permutation_iterator``: Device-copyable if both the source iterator and the index map are device-copyable.
+* ``transform_iterator``: Device-copyable if the source iterator is device-copyable.
+* ``zip_iterator``: Device-copyable if all base iterators are device-copyable.
+
 Example
-^^^^^^^
++++++++
+
 The following example shows how to define a ADL overload for a simple user defined iterator.  It also shows an example
 for a more complicated case which uses a hidden friend to provide the ADL overload within the definition of the
 iterator.
@@ -438,7 +432,6 @@ iterator.
 
     static_assert(oneapi::dpl::is_device_accessible_content_iterator<it_pair<usr::accessible_it, usr::accessible_it>> == true);
     static_assert(oneapi::dpl::is_device_accessible_content_iterator<it_pair<usr::accessible_it, usr::inaccessible_it>> == false);
-
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
