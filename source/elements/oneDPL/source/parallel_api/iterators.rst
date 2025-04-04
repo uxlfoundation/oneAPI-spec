@@ -309,7 +309,7 @@ using the set of source iterators provided.
 Customization Point for "Passed Directly" Iterators
 ---------------------------------------------------
 
-Iterator types can be "passed directly" to SYCL kernels when they can inherently be dereferenced on the device while
+Iterator types can be "passed directly" to `SYCL`_ kernels when they can inherently be dereferenced on the device while
 using an algorithm with a ``device_policy``. Examples of iterators which can be "passed directly" include SYCL USM
 shared or device memory, or iterator types like ``counting_iterator`` or ``discard_iterator`` that do not require any
 data to be copied to the device. An example of an iterator type that cannot be "passed directly" is a ``std::vector``
@@ -408,3 +408,4 @@ Example
 
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
+.. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
