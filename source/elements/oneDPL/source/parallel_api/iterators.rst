@@ -378,24 +378,24 @@ Simple Examples
 
 .. code:: cpp
 
-  namespace user
-  {
-    struct my_pass_dir_iterator
+    namespace user
     {
-      /* unspecified user definition of a "passed directly" iterator */
-    };
+        struct my_pass_dir_iterator
+        {
+        /* unspecified user definition of a "passed directly" iterator */
+        };
 
-    std::true_type
-    is_passed_directly_in_onedpl_device_policies(my_pass_dir_iterator);
+        std::true_type
+        is_passed_directly_in_onedpl_device_policies(my_pass_dir_iterator);
 
-    struct my_non_pass_dir_iterator
-    {
-        /* unspecified user definition of a non "passed directly" iterator */
-    };
+        struct my_non_pass_dir_iterator
+        {
+            /* unspecified user definition of a non "passed directly" iterator */
+        };
 
-    std::false_type
-    is_passed_directly_in_onedpl_device_policies(my_non_pass_dir_iterator);
-  }
+        std::false_type
+        is_passed_directly_in_onedpl_device_policies(my_non_pass_dir_iterator);
+    }
 
   // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
   // oneapi::dpl::is_passed_directly_to_device_v<user::my_non_pass_dir_iterator> will evaluate to `false``
@@ -403,15 +403,16 @@ Simple Examples
 Example with base iterators as a hidden friend
 
 .. code:: cpp
-  template <typename It1, typename It2>
-  struct iterator_pair
-  {
-    It1 first;
-    It2 second;
-    friend auto is_passed_directly_in_onedpl_device_policies(iterator_pair) ->
-        std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
-                            oneapi::dpl::is_passed_directly_to_device<It2>>;
-  };
+
+    template <typename It1, typename It2>
+    struct iterator_pair
+    {
+        It1 first;
+        It2 second;
+        friend auto is_passed_directly_in_onedpl_device_policies(iterator_pair) ->
+            std::conjunction<oneapi::dpl::is_passed_directly_to_device<It1>,
+                             oneapi::dpl::is_passed_directly_to_device<It2>>;
+    };
 
   // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_pass_dir_iterator>> will evaluate to `true``
   // oneapi::dpl::is_passed_directly_to_device_v<iterator_pair<user::my_pass_dir_iterator, user::my_non_pass_dir_iterator>> will evaluate to `false``
