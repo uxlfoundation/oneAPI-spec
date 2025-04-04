@@ -374,7 +374,8 @@ The public trait ``oneapi::dpl::is_passed_directly_to_device`` can be used to qu
 Examples
 ++++++++
 
-Simple Examples:
+Simple Examples
+
 .. code:: cpp
 
   namespace user
@@ -399,7 +400,8 @@ Simple Examples:
     // oneapi::dpl::is_passed_directly_to_device_v<user::my_pass_dir_iterator> will evaluate to `true``
     // oneapi::dpl::is_passed_directly_to_device_v<user::my_non_pass_dir_iterator> will evaluate to `false``
 
-Example with base iterators as a hidden friend:
+Example with base iterators as a hidden friend
+
 .. code:: cpp
   template <typename It1, typename It2>
   struct iterator_pair
