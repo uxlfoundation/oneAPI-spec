@@ -349,7 +349,6 @@ their most specific base iterator type if such an overload exists.
 The default implementation of ``is_onedpl_device_accessible_content_iterator`` marks the following iterators as to
 "device accessible content iterators":
 * Pointers (to handle USM pointers)
-* Iterators with the ``using is_passed_directly = std::true_type`` trait
 * Iterators to USM shared allocated ``std::vector``-s when the allocator type is knowable from the iterator type
 * ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` refers to "device accessible content"
 
