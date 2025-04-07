@@ -99,9 +99,9 @@ to run algorithms on a SYCL device. When an algorithm runs with ``device_policy`
 it is capable of processing SYCL buffers (passed via ``oneapi::dpl::begin/end``),
 data in the host memory and data in Unified Shared Memory (USM), including device USM.
 Data placed in the host memory and USM can be passed to oneDPL algorithms
-as pointers and random access iterators, please see :ref:`iterators <iterators>`. The way to transfer data from the host
-memory to a device and back is unspecified; per-element data movement to/from a temporary storage
-is a possible valid implementation.
+as pointers and random access iterators, including :doc:`oneDPL iterators <iterators>`. The way to transfer data from
+the host memory to a device and back is unspecified; per-element data movement to/from a temporary storage is a possible
+valid implementation.
 
 The ``KernelName`` template parameter, also aliased as ``kernel_name`` within the class template,
 is to explicitly provide a name for SYCL kernels executed by an algorithm the policy is passed to.
