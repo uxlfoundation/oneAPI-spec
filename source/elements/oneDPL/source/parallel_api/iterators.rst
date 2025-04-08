@@ -346,8 +346,8 @@ Customization For User Defined Iterators
 ++++++++++++++++++++++++++++++++++++++++
 
 oneDPL provides a mechanism to indicate whether custom iterators are "device accessible content iterators" by defining
-an Argument-Dependent Lookup (ADL) customization point, ``is_onedpl_device_accessible_content_iterator``. oneDPL also
-defines a public trait, ``is_device_accessible_content_iterator[_v]`` to indicate whether an iterator is a "device
+an Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_device_accessible_content_iterator``. oneDPL
+also defines a public trait, ``is_device_accessible_content_iterator[_v]`` to indicate whether an iterator is a "device
 accessible content iterator".
 
 oneDPL queries this information at compile time to determine how to handle iterator types when they are passed to
@@ -358,16 +358,14 @@ ADL Customization Point: ``is_onedpl_device_accessible_content_iterator``
 
 A free function ``is_onedpl_device_accessible_content_iterator(IteratorT)`` may be defined, which accepts an argument
 of type ``IteratorT`` and returns a type with the characteristics of ``std::true_type`` if ``IteratorT`` refers to
-"device accessible content", or alternatively returns a type with the characteristics of ``std::false_type``
-otherwise. The function must be defined in one of the valid search locations for ADL lookup, which includes the
-namespace of the definition of the iterator type ``IteratorT``.
+"device accessible content", or otherwise returns a type with the characteristics of ``std::false_type``. The function
+must be discoverable by ADL.
 
 The function ``is_onedpl_device_accessible_content_iterator`` may be used by oneDPL to determine if the iterator refers
-to "device accessible content" by interrogating its return type at compile-time only. It shall not be called by oneDPL
-outside a ``decltype`` context to determine the return type. Overloads may be provided as forward declarations only,
-without a body defined. ADL lookup is used to determine which function overload to use according to the rules in the
-`C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match their most
-specific base iterator type if such an overload exists.
+to "device accessible content" by interrogating its return type at compile-time only. Overloads may be provided as
+forward declarations only, without a body defined. ADL is used to determine which function overload to use according to
+the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match
+their most specific base iterator type if such an overload exists.
 
 The default implementation of ``is_onedpl_device_accessible_content_iterator`` marks the following iterators as to
 "device accessible content iterators":
@@ -380,15 +378,21 @@ The default implementation of ``is_onedpl_device_accessible_content_iterator`` m
 Public Trait: ``oneapi::dpl::is_device_accessible_content_iterator[_v]``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The public trait ``oneapi::dpl::is_device_accessible_content_iterator[_v]`` can be used to query whether an iterator
-is a "device accessible content iterator". The trait is defined in ``<oneapi/dpl/iterator>``.
+The following class template and variable template are defined in ``<oneapi/dpl/iterator>`` inside the namespace
+``oneapi::dpl``:
+
+.. code:: cpp
+    template <typename T>
+    struct is_device_accessible_content_iterator;
+
+    template <typename T>
+    inline constexpr bool is_device_accessible_content_iterator_v =
+        is_device_accessible_content_iterator<T>::value;
 
 ``oneapi::dpl::is_device_accessible_content_iterator<T>`` evaluates to a type with the characteristics of
 ``std::true_type`` if ``T``  refers to "device accessible content", otherwise it evaluates to a type with the
 characteristics of ``std::false_type``.
 
-``oneapi::dpl::is_device_accessible_content_iterator<T>`` is a ``constexpr bool`` that evaluates to ``true`` if ``T``
-refers to "device accessible content", otherwise it evaluates to ``false``.
 
 
 
@@ -396,9 +400,9 @@ refers to "device accessible content", otherwise it evaluates to ``false``.
 Example
 ^^^^^^^
 
-The following example shows how to define a ADL overload for a simple user defined iterator.  It also shows an example
-for a more complicated case which uses a hidden friend to provide the ADL overload within the definition of the
-iterator.
+The following example shows how to define a customization for `is_device_accessible_content_iterator` trait for a simple
+user defined iterator.  It also shows a more complicated example where the customization is defined as a hidden friend
+of the iterator class.
 
 .. code:: cpp
 
