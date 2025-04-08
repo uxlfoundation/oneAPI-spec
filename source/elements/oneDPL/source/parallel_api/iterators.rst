@@ -381,12 +381,12 @@ The following class template and variable template are defined in ``<oneapi/dpl/
 ``oneapi::dpl``:
 
 .. code:: cpp
-    template <typename T>
-    struct is_device_accessible_content_iterator;
 
-    template <typename T>
-    inline constexpr bool is_device_accessible_content_iterator_v =
-        is_device_accessible_content_iterator<T>::value;
+template <typename T>
+struct is_device_accessible_content_iterator{ /* see below */ };
+
+template <typename T>
+inline constexpr bool is_device_accessible_content_iterator_v = is_device_accessible_content_iterator<T>::value;
 
 ``template <typename T> oneapi::dpl::is_device_accessible_content_iterator<T>`` evaluates to a type with the 
 characteristics of ``std::true_type`` if ``T``  refers to "device accessible content", otherwise it evaluates to a type
