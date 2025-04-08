@@ -7,19 +7,21 @@
 mt2203
 ======
 
-The mt2203 engine is the set of 6024 Mersenne Twister pseudorandom number generators MT2203 [:ref:`Matsumoto98 <onemath_rng_bibliography>`], [:ref:`Matsumoto00 <onemath_rng_bibliography>`].
+The mt2203 engine is the set of Mersenne Twister pseudorandom number generators MT2203 [:ref:`Matsumoto98 <onemath_rng_bibliography>`], [:ref:`Matsumoto00 <onemath_rng_bibliography>`].
+Coefficients are obtained by `the following tool`_. The amount of generators in the set (denoted `n_engines`) is implementation defined.
 
 .. _onemath_rng_mt2203_description:
 
 .. rubric:: Description
 
-The set of 6024 basic pseudorandom number generators MT2203 is a natural addition to the MT19937 generator. MT2203 generators are intended for use in large scale Monte Carlo simulations performed on multi-processor computer systems.
+The set of basic pseudorandom number generators MT2203 is a natural addition to the MT19937 generator.
+MT2203 generators are intended for use in large scale Monte Carlo simulations performed on multi-processor computer systems.
 
 .. container:: section
 
     .. rubric:: Generation algorithm
 
-    For :math:`j = 1,..., 6024`:
+    For :math:`j = 1,..., n_engines`:
 
     :math:`x_{n, j} =x_{n - (69 - 34), j} \oplus ( (x_{n - 69, j} \& 0xFFFFFFE0) | (x_{n + 69 + 1, j} \& 0x1F) ) A_{j}`
 
@@ -140,14 +142,14 @@ class mt2203
             The initial conditions of the generator state. The initialization algorithm described in [:ref:`MT2203 <onemath_rng_bibliography>`].
 
         engine_idx
-            The index of the set 1, ..., 6024.
+            The index of the set 1, ..., n_engines.
 
     .. container:: section
 
         .. rubric:: Throws
 
         oneapi::math::invalid_argument
-            Exception is thrown when :math:`idx > 6024`
+            Exception is thrown when :math:`idx > n_engines`
 
     .. _`mt2203(sycl::queue queue, std::initializer_list<std::uint32_t> seed)`:
 
@@ -182,7 +184,7 @@ class mt2203
             The initial conditions of the generator state. The initialization algorithm described in [:ref:`MT2203 <onemath_rng_bibliography>`].
 
         engine_idx
-            The index of the set 1, ..., 6024.
+            The index of the set 1, ..., n_engines.
 
     .. _`mt2203(const mt2203& other)`:
 
@@ -237,3 +239,5 @@ class mt2203
             Valid ``mt2203`` r-value object. The ``queue`` and state of the other engine is moved to the current engine.
 
 **Parent topic:** :ref:`onemath_rng_engines_basic_random_number_generators`
+
+.. _`the following tool`: https://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/DC/dc.html
