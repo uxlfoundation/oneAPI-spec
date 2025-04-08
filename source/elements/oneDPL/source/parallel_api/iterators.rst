@@ -86,7 +86,7 @@ counter; dereference operations cannot be used to modify the counter. The arithm
 operators of ``counting_iterator`` behave as if applied to the values of Integral type
 representing the counters of the iterator instances passed to the operators.
 
-``counting_iterator`` are always SYCL device-copyable, and are always "device accessible content iterators".
+``counting_iterator`` are SYCL device-copyable, and are "device accessible content iterators".
 
 .. code:: cpp
 
@@ -128,7 +128,7 @@ lvalue that may be assigned an arbitrary value. The assignment has no effect on 
 of ``discard_iterator`` behave as if applied to integer counter values maintained by the
 iterator instances to determine their position relative to each other.
 
-``discard_iterator`` are always SYCL device-copyable, and are always "device accessible content iterators".
+``discard_iterator`` are SYCL device-copyable, and are "device accessible content iterators".
 
 .. code:: cpp
 
@@ -201,7 +201,7 @@ to index into the value set defined by the source iterator. The resulting lvalue
 as the result of the operator.
 
 ``permutation_iterator`` are SYCL device-copyable if both the ``SourceIterator`` and the ``IndexMap``
-are SYCL device-copyable, and are always "device accessible content iterators" if both the ``SourceIterator``
+are SYCL device-copyable, and are "device accessible content iterators" if both the ``SourceIterator``
 and the ``IndexMap`` are "device accessible content iterators".
 
 .. code:: cpp
@@ -265,7 +265,7 @@ source iterator itself. The template type ``Iterator`` must satisfy
 ``AdaptingIteratorSource``.
 
 ``transform_iterator`` is SYCL device-copyable if the source iterator is SYCL device-copyable, and
-is always "device accessible content iterator" if the source iterator is a "device accessible
+is "device accessible content iterator" if the source iterator is a "device accessible
 content iterator".
 
 .. code:: cpp
@@ -328,7 +328,7 @@ operation were applied to each of these iterators. The types ``T`` within the te
 ``Iterators...`` must satisfy ``AdaptingIteratorSource``.
 
 ``zip_iterator`` is SYCL device-copyable if all the source iterators are SYCL device-copyable, and
-is always "device accessible content iterator" if all the source iterators are "device accessible
+is "device accessible content iterator" if all the source iterators are "device accessible
 content iterators".
 
 .. code:: cpp
