@@ -357,9 +357,9 @@ ADL Customization Point: ``is_onedpl_device_accessible_content_iterator``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A free function ``is_onedpl_device_accessible_content_iterator(IteratorT)`` may be defined, which accepts an argument
-of type ``IteratorT`` and returns a type with the characteristics of ``std::true_type`` if ``IteratorT`` refers to
-"device accessible content", or otherwise returns a type with the characteristics of ``std::false_type``. The function
-must be discoverable by ADL.
+of type ``IteratorT`` and returns a type with the base characteristic of ``std::true_type`` if ``IteratorT`` refers to
+"device accessible content", or otherwise returns a type with the base characteristic of ``std::false_type``. The
+function must be discoverable by ADL.
 
 The function ``is_onedpl_device_accessible_content_iterator`` may be used by oneDPL to determine if the iterator refers
 to "device accessible content" by interrogating its return type at compile-time only. Overloads may be provided as
@@ -388,9 +388,9 @@ The following class template and variable template are defined in ``<oneapi/dpl/
     template <typename T>
     inline constexpr bool is_device_accessible_content_iterator_v = is_device_accessible_content_iterator<T>::value;
 
-``template <typename T> oneapi::dpl::is_device_accessible_content_iterator<T>`` evaluates to a type with the 
-characteristics of ``std::true_type`` if ``T``  refers to "device accessible content", otherwise it evaluates to a type
-with the characteristics of ``std::false_type``.
+``template <typename T> oneapi::dpl::is_device_accessible_content_iterator`` is a type which has the base characteristic
+of ``std::true_type`` if ``T``  refers to "device accessible content", otherwise it has the base characteristic of
+``std::false_type``.
 
 
 
@@ -409,7 +409,7 @@ of the iterator class.
     {
         struct accessible_it
         {
-        /* unspecified user definition of a iterator which refers to "device accessible content" */
+            /* unspecified user definition of a iterator which refers to "device accessible content" */
         };
 
         std::true_type
