@@ -10,19 +10,19 @@ Iterators
 
 Requirements For Iterator Use With Device Policies
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-Iterator are, by default, not assumed to refer to content which is accessible on the device which requires the content
-to be copied to the device prior to being used inside a `SYCL`_ kernel. We define iterators to be "device accessible
-content iterators" when they can inherently be dereferenced on the device in a SYCL kernel. When using oneDPL algorithms
-with a ``device_policy``, "device accessible content iterators" avoid unnecessary data movement when provided as input
-or output arguments.
+Iterator are, by default, not assumed to refer to content which is accessible on the device which requires that content
+to be copied to the device prior to being used inside a `SYCL`_ kernel. We define iterators to be "indirectly device
+accessible iterators" when they can inherently be dereferenced on the device in a SYCL kernel. When using oneDPL
+algorithms with a ``device_policy``, "indirectly device accessible iterators" avoid unnecessary data movement when
+provided as input or output arguments.
 
-Examples of "device accessible content iterators" include SYCL USM shared or device memory, or iterator types like
+Examples of "indirectly device accessible iterators" include SYCL USM shared or device memory, or iterator types like
 ``counting_iterator`` or ``discard_iterator`` that do not require any data to be copied to the device to be used in a
-SYCL kernel. An example of an iterator which does not refer to "device accessible content" is a ``std::vector``
+SYCL kernel. An example of an iterator which does not refer to "indirectly device accessible" is a ``std::vector``
 iterator, which requires the data to be copied to the device in some way prior to usage in a SYCL kernel within
 algorithms used with a ``device_policy``.
 
-When used as input or output with algorithms using a ``device_policy`` "device accessible content iterators" must also
+When used as input or output with algorithms using a ``device_policy`` "indirectly device accessible iterators" must also
 be SYCL device-copyable, as defined by the SYCL Specification.
 
 oneDPL Iterators
@@ -86,7 +86,7 @@ counter; dereference operations cannot be used to modify the counter. The arithm
 operators of ``counting_iterator`` behave as if applied to the values of Integral type
 representing the counters of the iterator instances passed to the operators.
 
-``counting_iterator`` is SYCL device-copyable, and is a "device accessible content iterator".
+``counting_iterator`` is SYCL device-copyable, and is an "indirectly device accessible iterator".
 
 .. code:: cpp
 
@@ -128,7 +128,7 @@ lvalue that may be assigned an arbitrary value. The assignment has no effect on 
 of ``discard_iterator`` behave as if applied to integer counter values maintained by the
 iterator instances to determine their position relative to each other.
 
-``discard_iterator`` is SYCL device-copyable, and is a "device accessible content iterator".
+``discard_iterator`` is SYCL device-copyable, and is an "indirectly device accessible iterator".
 
 .. code:: cpp
 
@@ -201,8 +201,8 @@ to index into the value set defined by the source iterator. The resulting lvalue
 as the result of the operator.
 
 ``permutation_iterator`` is SYCL device-copyable if both the ``SourceIterator`` and the ``IndexMap``
-are SYCL device-copyable. ``permutation_iterator`` is a "device accessible content iterator" if both the
-``SourceIterator`` and the ``IndexMap`` are "device accessible content iterators".
+are SYCL device-copyable. ``permutation_iterator`` is an "indirectly device accessible iterator" if both the
+``SourceIterator`` and the ``IndexMap`` are "indirectly device accessible iterators".
 
 .. code:: cpp
 
@@ -265,8 +265,7 @@ source iterator itself. The template type ``Iterator`` must satisfy
 ``AdaptingIteratorSource``.
 
 ``transform_iterator`` is SYCL device-copyable if the source iterator is SYCL device-copyable, and
-is "device accessible content iterator" if the source iterator is a "device accessible
-content iterator".
+is "indirectly device accessible iterator" if the source iterator is an "indirectly device accessible iterators".
 
 .. code:: cpp
 
@@ -328,8 +327,7 @@ operation were applied to each of these iterators. The types ``T`` within the te
 ``Iterators...`` must satisfy ``AdaptingIteratorSource``.
 
 ``zip_iterator`` is SYCL device-copyable if all the source iterators are SYCL device-copyable, and
-is a "device accessible content iterator" if all the source iterators are "device accessible
-content iterators".
+is an "indirectly device accessible iterator" if all the source iterators are "indirectly device accessible iterators".
 
 .. code:: cpp
 
@@ -345,36 +343,36 @@ using the set of source iterators provided.
 Customization For User Defined Iterators
 ++++++++++++++++++++++++++++++++++++++++
 
-oneDPL provides a mechanism to indicate whether custom iterators are "device accessible content iterators" by defining
-an Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_device_accessible_content_iterator``. oneDPL
-also defines a public trait, ``is_device_accessible_content_iterator[_v]`` to indicate whether an iterator is a "device
-accessible content iterator".
+oneDPL provides a mechanism to indicate whether custom iterators are "indirectly device accessible iterators" by defining
+an Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_indirectly_device_accessible``. oneDPL
+also defines a public trait, ``is_indirectly_device_accessible[_v]`` to indicate whether an iterator is an
+"indirectly device accessible iterators".
 
 oneDPL queries this information at compile time to determine how to handle iterator types when they are passed to
 algorithms with a ``device_policy`` to avoid unnecessary data movement.
 
-ADL Customization Point: ``is_onedpl_device_accessible_content_iterator``
+ADL Customization Point: ``is_onedpl_indirectly_device_accessible``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A free function ``is_onedpl_device_accessible_content_iterator(IteratorT)`` may be defined, which accepts an argument
+A free function ``is_onedpl_indirectly_device_accessible(IteratorT)`` may be defined, which accepts an argument
 of type ``IteratorT`` and returns a type with the base characteristic of ``std::true_type`` if ``IteratorT`` refers to
-"device accessible content", or otherwise returns a type with the base characteristic of ``std::false_type``. The
+"indirectly device accessible", or otherwise returns a type with the base characteristic of ``std::false_type``. The
 function must be discoverable by ADL.
 
-The function ``is_onedpl_device_accessible_content_iterator`` may be used by oneDPL to determine if the iterator refers
-to "device accessible content" by interrogating its return type at compile-time only. Overloads may be provided as
+The function ``is_onedpl_indirectly_device_accessible`` may be used by oneDPL to determine if the iterator refers
+to "indirectly device accessible" by interrogating its return type at compile-time only. Overloads may be provided as
 forward declarations only, without a body defined. ADL is used to determine which function overload to use according to
 the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match
 their most specific base iterator type if such an overload exists.
 
-The default implementation of ``is_onedpl_device_accessible_content_iterator`` marks the following iterators as to
-"device accessible content iterators":
+The default implementation of ``is_onedpl_indirectly_device_accessible`` marks the following iterators as to
+"indirectly device accessible iterators":
 * Pointers (to handle USM pointers)
-* ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` refers to "device accessible content"
+* ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` refers to "indirectly device accessible"
 
 
 
-Public Trait: ``oneapi::dpl::is_device_accessible_content_iterator[_v]``
+Public Trait: ``oneapi::dpl::is_indirectly_device_accessible[_v]``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following class template and variable template are defined in ``<oneapi/dpl/iterator>`` inside the namespace
@@ -383,13 +381,13 @@ The following class template and variable template are defined in ``<oneapi/dpl/
 .. code:: cpp
 
     template <typename T>
-    struct is_device_accessible_content_iterator{ /* see below */ };
+    struct is_indirectly_device_accessible{ /* see below */ };
 
     template <typename T>
-    inline constexpr bool is_device_accessible_content_iterator_v = is_device_accessible_content_iterator<T>::value;
+    inline constexpr bool is_indirectly_device_accessible_v = is_indirectly_device_accessible<T>::value;
 
-``template <typename T> oneapi::dpl::is_device_accessible_content_iterator`` is a type which has the base characteristic
-of ``std::true_type`` if ``T``  refers to "device accessible content", otherwise it has the base characteristic of
+``template <typename T> oneapi::dpl::is_indirectly_device_accessible`` is a type which has the base characteristic
+of ``std::true_type`` if ``T``  refers to "indirectly device accessible", otherwise it has the base characteristic of
 ``std::false_type``.
 
 
@@ -399,7 +397,7 @@ of ``std::true_type`` if ``T``  refers to "device accessible content", otherwise
 Example
 ^^^^^^^
 
-The following example shows how to define a customization for `is_device_accessible_content_iterator` trait for a simple
+The following example shows how to define a customization for `is_indirectly_device_accessible` trait for a simple
 user defined iterator.  It also shows a more complicated example where the customization is defined as a hidden friend
 of the iterator class.
 
@@ -409,24 +407,24 @@ of the iterator class.
     {
         struct accessible_it
         {
-            /* unspecified user definition of a iterator which refers to "device accessible content" */
+            /* unspecified user definition of a iterator which refers to "indirectly device accessible" */
         };
 
         std::true_type
-        is_onedpl_device_accessible_content_iterator(accessible_it);
+        is_onedpl_indirectly_device_accessible(accessible_it);
 
         struct inaccessible_it
         {
-            /* unspecified user definition of iterator which doesn't refer to "device accessible content" */
+            /* unspecified user definition of iterator which doesn't refer to "indirectly device accessible" */
         };
 
         // This could be omitted. It would rely upon the default implementation with the same result
         std::false_type
-        is_onedpl_device_accessible_content_iterator(inaccessible_it);
+        is_onedpl_indirectly_device_accessible(inaccessible_it);
     }
 
-    static_assert(oneapi::dpl::is_device_accessible_content_iterator<usr::accessible_it> == true);
-    static_assert(oneapi::dpl::is_device_accessible_content_iterator<usr::inaccessible_it> == false);
+    static_assert(oneapi::dpl::is_indirectly_device_accessible<usr::accessible_it> == true);
+    static_assert(oneapi::dpl::is_indirectly_device_accessible<usr::inaccessible_it> == false);
 
     // Example with base iterators and ADL overload as a hidden friend
     template <typename It1, typename It2>
@@ -434,13 +432,13 @@ of the iterator class.
     {
         It1 first;
         It2 second;
-        friend auto is_onedpl_device_accessible_content_iterator(it_pair) ->
-            std::conjunction<oneapi::dpl::is_device_accessible_content_iterator<It1>,
-                             oneapi::dpl::is_device_accessible_content_iterator<It2>>;
+        friend auto is_onedpl_indirectly_device_accessible(it_pair) ->
+            std::conjunction<oneapi::dpl::is_indirectly_device_accessible<It1>,
+                             oneapi::dpl::is_indirectly_device_accessible<It2>>;
     };
 
-    static_assert(oneapi::dpl::is_device_accessible_content_iterator<it_pair<usr::accessible_it, usr::accessible_it>> == true);
-    static_assert(oneapi::dpl::is_device_accessible_content_iterator<it_pair<usr::accessible_it, usr::inaccessible_it>> == false);
+    static_assert(oneapi::dpl::is_indirectly_device_accessible<it_pair<usr::accessible_it, usr::accessible_it>> == true);
+    static_assert(oneapi::dpl::is_indirectly_device_accessible<it_pair<usr::accessible_it, usr::inaccessible_it>> == false);
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
