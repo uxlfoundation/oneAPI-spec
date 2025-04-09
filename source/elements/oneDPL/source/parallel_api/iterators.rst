@@ -22,8 +22,8 @@ SYCL kernel. An example of an iterator which does not refer to "indirectly devic
 iterator, which requires the data to be copied to the device in some way prior to usage in a SYCL kernel within
 algorithms used with a ``device_policy``.
 
-When used as input or output with algorithms using a ``device_policy`` "indirectly device accessible iterators" must also
-be SYCL device-copyable, as defined by the SYCL Specification.
+When used as input or output with algorithms using a ``device_policy`` "indirectly device accessible iterators" must
+also be SYCL device-copyable, as defined by the SYCL Specification.
 
 oneDPL Iterators
 ++++++++++++++++
@@ -343,9 +343,9 @@ using the set of source iterators provided.
 Customization For User Defined Iterators
 ++++++++++++++++++++++++++++++++++++++++
 
-oneDPL provides a mechanism to indicate whether custom iterators are "indirectly device accessible iterators" by defining
-an Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_indirectly_device_accessible``. oneDPL
-also defines a public trait, ``is_indirectly_device_accessible[_v]`` to indicate whether an iterator is an
+oneDPL provides a mechanism to indicate whether custom iterators are "indirectly device accessible iterators" by
+defining an Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_indirectly_device_accessible``.
+oneDPL also defines a public trait, ``is_indirectly_device_accessible[_v]`` to indicate whether an iterator is an
 "indirectly device accessible iterators".
 
 oneDPL queries this information at compile time to determine how to handle iterator types when they are passed to
