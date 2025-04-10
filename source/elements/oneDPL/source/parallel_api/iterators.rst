@@ -338,6 +338,17 @@ is an "indirectly device accessible iterator" if all the source iterators are "i
 ``make_zip_iterator`` constructs and returns an instance of ``zip_iterator``
 using the set of source iterators provided.
 
+Other Supported Iterators
++++++++++++++++++++++++++
+``std::reverse_iterator<IteratorT>`` is an ``AdaptingIteratorSource`` if ``IteratorT`` is an ``AdaptingIteratorSource``.
+``std::reverse_iterator<IteratorT>`` is an "indirectly device accessible iterator" if ``IteratorT`` is an "indirectly
+device accessible iterator". The SYCL device-copyable requirement of ``std::reverse_iterator<IteratorT>`` for use in
+algorithms with a ``device_policy`` relies upon the trivial copyability of ``IteratorT`` and the specific implementation
+of ``std::reverse_iterator``. oneDPL does not specialize ``sycl::is_device_copyable`` for ``std::reverse_iterator``.
+
+Pointers are assumed to be USM shared or device memory pointers and are "indirectly device accessible iterators".
+Pointers are trivially copyable and therefore SYCL device-copyable.
+
 .. _iterators-device-accessible:
 
 Customization For User Defined Iterators
@@ -365,12 +376,11 @@ forward declarations only, without a body defined. ADL is used to determine whic
 the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match
 their most specific base iterator type if such an overload exists.
 
-The default implementation of ``is_onedpl_indirectly_device_accessible`` marks the following iterators as to
-"indirectly device accessible iterators":
+If no other overload is found, the default implementation of ``is_onedpl_indirectly_device_accessible`` is used.
+The default implementation of ``is_onedpl_indirectly_device_accessible`` returns ``std::true_type`` for the following
+iterator types, and ``std::false_type`` for all other iterator types:
 * Pointers (to handle USM pointers)
-* ``std::reverse_iterator<IteratorT>`` when ``IteratorT`` refers to "indirectly device accessible"
-
-
+* ``std::reverse_iterator<IteratorT>`` where ``IteratorT`` is an "indirectly device accessible iterator"
 
 Public Trait: ``oneapi::dpl::is_indirectly_device_accessible[_v]``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
