@@ -23,11 +23,31 @@ The following differences to the standard C++ range algorithms apply:
 - The execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
 - Both input and output ranges must support random access.
-- For a given algorithm, at least one of the input ranges as well as the output range must be bounded.
+- As a rule, both input and output ranges must be sized.
+
+  - Exceptions are binary ``transform``, ``equal``, and ``mismatch``, where at least one of the input ranges
+    must be sized, and if a range is not sized it is supposed to be infinite.
+    [*Note*: An example of an infinite range is ``std::views::repeat`` with no bound. -- *end note*]
+
+- For algorithms with bounded output ranges, processing may not need to go over all the input data.
+  In that case, the returned value usually contains iterators pointing to the positions past the last elements
+  processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
+
+Auxiliary Definitions
++++++++++++++++++++++
+
+The following auxiliary entities are only defined for the purpose of exposition, to aid the specification
+of parallel range algorithms.
+
+.. code:: cpp
+
+   // C++20 analogue of std::projected_value_t; exposition only
+   template<typename I, typename Proj>
+   using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
@@ -74,7 +94,7 @@ Whole Sequence Operations
     // count
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirect_binary_predicate< std::ranges::equal_to,
@@ -106,7 +126,7 @@ Element Search Operations
     // find
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirect_binary_predicate< std::ranges::equal_to,
@@ -297,7 +317,7 @@ Sequence Search and Comparison
     // search_n
     template<typename ExecutionPolicy, std::ranges::random_access_range R,
              typename Pred = std::ranges::equal_to, typename Proj = std::identity,
-             typename T = std::projected_value_t<std::ranges::iterator_t<R>, Proj>>
+             typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirectly_comparable< std::ranges::iterator_t<R>, const T*, Pred, Proj >

@@ -12,7 +12,7 @@ Random Number Generators Host Routines
 RNG domain contains two classes types:
 
    -  Engines (basic random number generators) classes, which holds
-      the state of generator and is a source of independent and identically distributed random variables. 
+      the state of generator and is a source of independent and identically distributed random variables.
       Refer to :ref:`onemath_rng_engines_basic_random_number_generators`
       for a detailed description.
    -  Distribution classes templates (transformation classes) for different types of statistical
@@ -45,4 +45,4 @@ section for the description of typical RNG scenario.
    distributions.rst
    ../bibliography.rst
 
-**Parent topic:** :ref:`onemath_rng`
+**Parent topic:** :ref:`onemath_rng_overview`

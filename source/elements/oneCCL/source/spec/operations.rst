@@ -16,3 +16,4 @@ This section covers communication operations defined by oneCCL specification.
    collective_operations.rst
    operation_attributes.rst
    operation_progress.rst
+   group_calls.rst
