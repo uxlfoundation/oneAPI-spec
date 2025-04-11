@@ -207,8 +207,8 @@ as the result of the operator.
 are SYCL device-copyable. ``permutation_iterator`` is "indirectly device accessible" if both the
 ``SourceIterator`` and the ``IndexMap`` are "indirectly device accessible".
 
-are SYCL device-copyable. ``permutation_iterator`` is an "indirectly device accessible iterator" if both the
-``SourceIterator`` and the ``IndexMap`` are "indirectly device accessible iterators".
+When using ``permutation_iterator`` in combination with an algorithm with a ``device_policy``, ``SourceIterator`` must
+be "indirectly device accessible".
 
 .. code:: cpp
 
