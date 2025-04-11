@@ -400,10 +400,6 @@ The following class template and variable template are defined in ``<oneapi/dpl/
 of ``std::true_type`` if ``T`` represents "indirectly device accessible" content, otherwise it has the base
 characteristic of ``std::false_type``.
 
-
-
-
-
 Example
 ^^^^^^^
 
