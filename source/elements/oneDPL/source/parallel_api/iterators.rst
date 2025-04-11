@@ -376,12 +376,6 @@ forward declarations only, without a body defined. ADL is used to determine whic
 the rules in the `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match
 their most specific base iterator type if such an overload exists.
 
-If no other overload is found, the default implementation of ``is_onedpl_indirectly_device_accessible`` is used.
-The default implementation of ``is_onedpl_indirectly_device_accessible`` returns ``std::true_type`` for the following
-iterator types, and ``std::false_type`` for all other iterator types:
-* Pointers (to handle USM pointers)
-* ``std::reverse_iterator<IteratorT>`` where ``IteratorT`` is an "indirectly device accessible iterator"
-
 Public Trait: ``oneapi::dpl::is_indirectly_device_accessible[_v]``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
