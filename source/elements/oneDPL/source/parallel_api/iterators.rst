@@ -10,23 +10,25 @@ Iterators
 
 Requirements For Iterator Use With Device Policies
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-Iterator are, by default, not assumed to refer to content which is accessible on the device which requires that content
-to be copied to the device prior to being used inside a `SYCL`_ kernel. We define the term "indirectly device
-accessible" to mean representing data which is accessible on the device within a SYCL kernel. "Indirectly device
-accessible iterators" are iterators which can inherently be dereferenced on the device within a SYCL kernel.
-:doc:`*buffer position objects* <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
-iterators, but they are "indirectly device accessible" because they represent data which is accessible on the device.
-When using oneDPL algorithms with a ``device_policy``, "indirectly device accessible" types avoid unnecessary data
-movement when provided as input or output arguments.
+Iterators are not assumed to refer to content that is accessible on the device by default. Without direct knowledge
+that content is accessible on the device, oneDPL algorithms must copy the content to the device before being used inside
+a `SYCL`_ kernel, and then back from the device afterward. We define the term "indirectly device accessible" to mean 
+representing content that is accessible on the device within a SYCL kernel. "Indirectly device accessible iterators"
+are iterators that can inherently be dereferenced on the device within a SYCL kernel.
 
 Examples of "indirectly device accessible" iterators include SYCL USM shared or device memory, or iterator types like
 ``counting_iterator`` or ``discard_iterator`` that do not require any data to be copied to the device to be used in a
-SYCL kernel. An example of an iterator type which is not "indirectly device accessible" is a ``std::vector`` iterator,
-with a host allocator which requires the data to be copied to the device in some way prior to usage in a SYCL kernel
+SYCL kernel. An example of an iterator type that is not "indirectly device accessible" is a ``std::vector`` iterator
+with a host allocator, which requires the data to be copied to the device in some way before usage in a SYCL kernel
 within algorithms used with a ``device_policy``.
 
-"Indirectly device accessible" types which are iterators must also be SYCL device-copyable to be used as input or output
-for oneDPL algorithms using a ``device_policy``.
+:doc:`*buffer position objects* <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
+iterators, but they are "indirectly device accessible" because they represent data that is accessible on the device.
+When using oneDPL algorithms with a ``device_policy``, "indirectly device accessible" types avoid unnecessary data
+movement when provided as input or output arguments.
+
+"Indirectly device accessible iterators" must also be SYCL device-copyable to be used as input or output for oneDPL
+algorithms using a ``device_policy``.
 
 oneDPL Iterators
 ++++++++++++++++
