@@ -98,3 +98,10 @@ Bibliography
 
          [FIPS-197]
             Federal Information Processing Standards Publication 197, ADVANCED ENCRYPTION STANDARD (AES)
+
+         [pcg2014]
+            Melissa E. O'Neill. PCG: A Family of Simple Fast Space-Efficient Statistically 
+            Good Algorithms for Random Number Generation.
+
+
+            https://www.cs.hmc.edu/tr/hmc-cs-2014-0905.pdf
