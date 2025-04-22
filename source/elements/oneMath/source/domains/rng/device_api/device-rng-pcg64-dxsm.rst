@@ -22,7 +22,7 @@ PCG64 DXSM uses `double xorshift multiply` output function and has a period of :
 
     :math:`hi_n = x_n \gg 64`
 
-    :math:`lo_n = \land \left(2^{64} - 1\right) \lor 1`
+    :math:`lo_n = x_n \land \left(2^{64} - 1\right) \lor 1`
     
     :math:`hi_n = hi_n \oplus (hi_n \gg 32)`
     
