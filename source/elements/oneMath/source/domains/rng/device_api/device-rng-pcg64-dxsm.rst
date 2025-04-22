@@ -30,7 +30,7 @@ PCG64 DXSM uses `double xorshift multiply` output function and has a period of :
     
     :math:`hi_n = hi_n \oplus (hi_n \gg 48)`
     
-    :math:`u_n = hi_n \times lo_n`
+    :math:`u_n = hi_n \cdot lo_n`
 
     :math:`a = \text{0xDA942042E4DD58B5}, b = \text{0x5851F42D4C957F2D14057B7EF767814F}`
 
