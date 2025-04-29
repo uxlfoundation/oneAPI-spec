@@ -20,7 +20,7 @@ predefined function objects which static function call operators have the requir
 The following differences to the standard C++ range algorithms apply:
 
 - Parallel range algorithms cannot be used in constant expressions.
-- The execution policy parameter is added.
+- The oneDPL execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
 - Both input and output ranges must support random access.
 - As a rule, both input and output ranges must be sized.
@@ -30,7 +30,7 @@ The following differences to the standard C++ range algorithms apply:
     [*Note*: An example of an infinite range is ``std::views::repeat`` with no bound. -- *end note*]
 
 - For algorithms with bounded output ranges, processing may not need to go over all the input data.
-  In that case, the returned value usually contains iterators pointing to the positions past the last elements
+  In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
 
