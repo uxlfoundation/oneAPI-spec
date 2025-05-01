@@ -14,10 +14,9 @@ Iterators and iterator-like types may or may not refer to content accessible wit
 The term *indirectly device accessible* refers to a type that represents content accessible on a device.
 An *indirectly device accessible iterator* is such a type that can also be dereferenced within a SYCL kernel.
 
-Examples of *indirectly device accessible iterators* include SYCL USM shared or device memory pointers, as well as
-iterator types like ``counting_iterator`` or ``discard_iterator``, which can inherently be used in a SYCL kernel. An
-example of an iterator type that is not *indirectly device accessible* is a ``std::vector`` iterator with a host
-allocator, as it cannot inherently be used in a SYCL kernel.
+An example of *indirectly device accessible iterators* include SYCL USM shared pointers which can inherently be used in
+a SYCL kernel. An example of an iterator type that is not *indirectly device accessible* is a ``std::vector`` iterator
+with a host allocator because dereferencing it within a SYCL kernel would result in undefined behavior.
 
 :doc:`*buffer position objects* <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
 iterators. However, they are *indirectly device accessible* because they represent data accessible on the device.
