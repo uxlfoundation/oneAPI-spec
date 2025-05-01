@@ -397,7 +397,7 @@ source iterator component types. Refer to the example below.
 Example
 ^^^^^^^
 
-The following example shows how to define a customization for `is_indirectly_device_accessible` trait for a simple
+The following example shows how to define a customization for ``is_indirectly_device_accessible`` trait for a simple
 user defined iterator.  It also shows a more complicated example where the customization is defined as a hidden friend
 of the iterator class.
 
