@@ -10,9 +10,9 @@ Iterators
 
 Requirements For Iterator Use With Device Policies
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-Iterators and iterator-like types may or may not refer to content accessible on the device. The term *indirectly device
-accessible* refers to a type that represents content accessible on the device within a `SYCL`_ kernel. *Indirectly
-device accessible iterators* are iterators that can inherently be dereferenced on the device within a SYCL kernel.
+Iterators and iterator-like types may or may not refer to content accessible within a `SYCL`_ kernel on a device.
+The term *indirectly device accessible* refers to a type that represents content accessible on a device.
+An *indirectly device accessible iterator* is such a type that can also be dereferenced within a SYCL kernel.
 
 Examples of *indirectly device accessible iterators* include SYCL USM shared or device memory pointers, as well as
 iterator types like ``counting_iterator`` or ``discard_iterator``, which can inherently be used in a SYCL kernel. An
@@ -384,6 +384,7 @@ Applications may define a free function ``is_onedpl_indirectly_device_accessible
 type ``T`` and returns a type with the base characteristic of ``std::true_type`` if ``T`` is *indirectly device accessible*,
 otherwise returns a type with the base characteristic of ``std::false_type``. The function must be discoverable by
 argument-dependent lookup (ADL). It may be provided as a forward declaration only, without defining a body.
+
 The return type of ``is_onedpl_indirectly_device_accessible`` is examined at compile time to determine if ``T`` is
 *indirectly device accessible*. The function overload to use must be selected with argument-dependent lookup.
 [*Note*: Therefore, according to the rules in the `C++ Standard`_, a derived type for which there is no
