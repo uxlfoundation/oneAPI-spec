@@ -371,6 +371,10 @@ of ``std::reverse_iterator``.
 Pointers are assumed to be USM shared or device memory pointers and are *indirectly device accessible*.
 Pointers are trivially copyable and therefore SYCL device-copyable.
 
+Whether or not ``std::vector::iterator`` are *indirectly device accessible* is implementation defined, and may depend on
+the allocator used to create the vector. The SYCL device-copyable requirement ``std::vector::iterator`` for use in
+algorithms with a ``device_policy`` relies upon the trivial copyability of the specific implementation of the iterator.
+
 .. _iterators-device-accessible:
 
 Customization For User Defined Iterators
