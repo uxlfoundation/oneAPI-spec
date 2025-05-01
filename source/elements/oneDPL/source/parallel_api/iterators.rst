@@ -369,7 +369,7 @@ Other Supported Iterators
 ``std::reverse_iterator<IteratorT>`` is an *indirectly device accessible iterator* if ``IteratorT`` is an *indirectly
 device accessible iterator*. The SYCL device-copyable requirement of ``std::reverse_iterator<IteratorT>`` for use in
 algorithms with a ``device_policy`` relies upon the trivial copyability of ``IteratorT`` and the specific implementation
-of ``std::reverse_iterator``. oneDPL does not specialize ``sycl::is_device_copyable`` for ``std::reverse_iterator``.
+of ``std::reverse_iterator``. 
 
 Pointers are assumed to be USM shared or device memory pointers and are *indirectly device accessible*.
 Pointers are trivially copyable and therefore SYCL device-copyable.
