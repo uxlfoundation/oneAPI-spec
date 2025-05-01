@@ -216,7 +216,6 @@ The type ``IndexMap`` must be one of the following:
 * A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
   ``std::iterator_traits<SourceIterator>::difference_type``
 
-
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
 it is invoked to index into the index map. The corresponding value in the map is then used
 to index into the value set defined by the source iterator. The resulting lvalue is returned
