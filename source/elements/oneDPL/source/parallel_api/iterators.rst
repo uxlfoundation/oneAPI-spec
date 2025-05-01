@@ -366,12 +366,8 @@ Pointers are assumed to be USM shared or device memory pointers when used in com
 ``device_policy`` and are *indirectly device accessible*. Pointers are trivially copyable and therefore SYCL
 device-copyable.
 
-``std::reverse_iterator<IteratorT>`` is an ``AdaptingIteratorSource`` if ``IteratorT`` is an ``AdaptingIteratorSource``.
-``std::reverse_iterator<IteratorT>`` is an *indirectly device accessible iterator* if ``IteratorT`` is an *indirectly
-device accessible iterator*.
-
-Whether or not ``std::vector::iterator`` are *indirectly device accessible* is implementation defined, and may depend on
-the allocator used to create the vector, as well as the specific implementation of ``std::vector``.
+It is implementation defined whether other iterators are *indirectly device accessible*, including iterator types from
+the `C++ Standard`_.
 
 .. _iterators-device-accessible:
 
@@ -387,7 +383,7 @@ body.
 
 The return type of ``is_onedpl_indirectly_device_accessible`` is examined at compile time to determine if ``T`` is
 *indirectly device accessible*. The function overload to use must be selected with argument-dependent lookup.
-[*Note*: Therefore, according to the rules in the `C++ Standard`_, a derived type for which there is no
+[*Note*: Therefore, according to the rules in the C++ Standard, a derived type for which there is no
 function overload will match its most specific base type for which an overload exists. -- *end note*]
 
 Once ``is_onedpl_indirectly_device_accessible(T)`` is defined, the public trait
