@@ -360,14 +360,14 @@ device accessible* if all the source iterators are *indirectly device accessible
 ``make_zip_iterator`` constructs and returns an instance of ``zip_iterator``
 using the set of source iterators provided.
 
-Other Supported Iterators
-+++++++++++++++++++++++++
+Other Iterators
++++++++++++++++
+Pointers are assumed to be USM shared or device memory pointers and are *indirectly device accessible*.
+Pointers are trivially copyable and therefore SYCL device-copyable.
+
 ``std::reverse_iterator<IteratorT>`` is an ``AdaptingIteratorSource`` if ``IteratorT`` is an ``AdaptingIteratorSource``.
 ``std::reverse_iterator<IteratorT>`` is an *indirectly device accessible iterator* if ``IteratorT`` is an *indirectly
 device accessible iterator*.
-
-Pointers are assumed to be USM shared or device memory pointers and are *indirectly device accessible*.
-Pointers are trivially copyable and therefore SYCL device-copyable.
 
 Whether or not ``std::vector::iterator`` are *indirectly device accessible* is implementation defined, and may depend on
 the allocator used to create the vector, as well as the specific implementation of ``std::vector``.
