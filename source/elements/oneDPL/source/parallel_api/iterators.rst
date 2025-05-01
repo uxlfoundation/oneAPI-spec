@@ -10,23 +10,24 @@ Iterators
 
 Requirements For Iterator Use With Device Policies
 ++++++++++++++++++++++++++++++++++++++++++++++++++
-Iterators and iterator-like types may or may not refer to device accessible content. The term *indirectly device
-accessible* describes a type representing content that is accessible on the device within a `SYCL`_ kernel. *Indirectly
+Iterators and iterator-like types may or may not refer to content accessible on the device. The term *indirectly device
+accessible* refers to a type that represents content accessible on the device within a `SYCL`_ kernel. *Indirectly
 device accessible iterators* are iterators that can inherently be dereferenced on the device within a SYCL kernel.
 
-Examples of *indirectly device accessible iterators* include SYCL USM shared or device memory, or iterator types like
-``counting_iterator`` or ``discard_iterator`` that can be used inherently in a SYCL kernel. An example of an iterator
-type that is not *indirectly device accessible* is a ``std::vector`` iterator with a host allocator, which cannot be
-used inherently in a SYCL kernel.
+Examples of *indirectly device accessible iterators* include SYCL USM shared or device memory pointers, as well as
+iterator types like ``counting_iterator`` or ``discard_iterator``, which can inherently be used in a SYCL kernel. An
+example of an iterator type that is not *indirectly device accessible* is a ``std::vector`` iterator with a host
+allocator, as it cannot inherently be used in a SYCL kernel.
 
 :doc:`*buffer position objects* <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
-iterators, but they are *indirectly device accessible* because they represent data that is accessible on the device.
+iterators. However, they are *indirectly device accessible* because they represent data accessible on the device.
 
-When passed to oneDPL algorithms with a ``device_policy``, *indirectly device accessible iterator* types which are also
-random access iterators and satisfy *SYCL device-copyable* must not result in data movement beyond what is required by
-the semantics of the algorithm and what would be required to use the type directly within a SYCL kernel. *indirectly
-device accessible* *buffer position objects* must not result in data movement beyond what is required by the semantics
-of the algorithm and what would be required by using an accessor to the buffer within a SYCL kernel.
+When passed to oneDPL algorithms with a ``device_policy``, *indirectly device accessible iterator* types that are also
+random access iterators and satisfy *SYCL device-copyable* must not cause unnecessary data movement beyond what is
+required by the algorithm's semantics and what would be required to use the type directly within a SYCL kernel.
+*Indirectly device accessible* *buffer position objects* must not cause unnecessary data movement beyond what is
+required by the algorithm's semantics and what would be required by using an accessor to the buffer within a SYCL
+kernel.
 
 Public Trait: ``oneapi::dpl::is_indirectly_device_accessible[_v]``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -389,14 +390,14 @@ otherwise returns a type with the base characteristic of ``std::false_type``. Th
 
 The function ``is_onedpl_indirectly_device_accessible(T)`` may only be used to determine if ``T`` is *indirectly device
 accessible* by interrogating its return type at compile-time. Overloads may be provided as forward declarations only,
-without a body defined. ADL is used to determine which function overload to use according to the rules in the
+without defining a body. ADL is used to determine which function overload to use according to the rules in the
 `C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match their most
 specific base iterator type if such an overload exists.
 
 Once ``is_onedpl_indirectly_device_accessible(T)`` is defined, the public trait
-``template<typename T> oneapi::dpl::is_indirectly_device_accessible[_v]`` will report the appropriate value. The public
-trait may be used to define the return type of ``is_onedpl_indirectly_device_accessible(T)`` by applying it to any 
-source iterator component types. See the example below.
+``template<typename T> oneapi::dpl::is_indirectly_device_accessible[_v]`` will return the appropriate value. This public
+trait can also be used to define the return type of ``is_onedpl_indirectly_device_accessible(T)`` by applying it to any 
+source iterator component types. Refer to the example below.
 
 Example
 ^^^^^^^
