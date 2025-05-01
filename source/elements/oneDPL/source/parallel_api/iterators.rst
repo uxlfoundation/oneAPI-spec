@@ -197,8 +197,14 @@ defined by the source iterator provided, and whose iteration order over the dere
 is defined by either another iterator or a functor that maps the ``permutation_iterator`` index
 to the index of the source iterator. The arithmetic and comparison operators of
 ``permutation_iterator`` behave as if applied to integer counter values maintained by the
-iterator instances to determine their position in the index map. ``SourceIterator`` must satisfy
-``AdaptingIteratorSource``.
+iterator instances to determine their position in the index map. 
+
+``permutation_iterator`` is SYCL device-copyable if both the ``SourceIterator`` and the ``IndexMap``
+are SYCL device-copyable. ``permutation_iterator`` is *indirectly device accessible* if both the
+``SourceIterator`` and the ``IndexMap`` are *indirectly device accessible*.
+
+``SourceIterator`` must satisfy ``AdaptingIteratorSource``. When using ``permutation_iterator`` in combination with an
+algorithm with a ``device_policy``, ``SourceIterator`` must be *indirectly device accessible*.
 
 The type ``IndexMap`` must be one of the following:
 
@@ -220,13 +226,6 @@ as the result of the operator.
 to index into the index map. The corresponding value in the map is then used
 to index into the value set defined by the source iterator. The resulting lvalue is returned
 as the result of the operator.
-
-``permutation_iterator`` is SYCL device-copyable if both the ``SourceIterator`` and the ``IndexMap``
-are SYCL device-copyable. ``permutation_iterator`` is *indirectly device accessible* if both the
-``SourceIterator`` and the ``IndexMap`` are *indirectly device accessible*.
-
-When using ``permutation_iterator`` in combination with an algorithm with a ``device_policy``, ``SourceIterator`` must
-be *indirectly device accessible*.
 
 .. code:: cpp
 
