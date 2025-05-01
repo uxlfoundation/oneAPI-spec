@@ -43,7 +43,7 @@ The following class template and variable template are defined in ``<oneapi/dpl/
     inline constexpr bool is_indirectly_device_accessible_v = is_indirectly_device_accessible<T>::value;
 
 ``template <typename T> oneapi::dpl::is_indirectly_device_accessible`` is a type which has the base characteristic
-of ``std::true_type`` if ``T`` is *indirectly device accessible*, otherwise it has the base characteristic of
+of ``std::true_type`` if ``T`` is *indirectly device accessible*. Otherwise, it has the base characteristic of
 ``std::false_type``.
 
 oneDPL Iterators
@@ -378,9 +378,10 @@ Customization For User Defined Iterators
 oneDPL provides a mechanism to indicate whether custom iterators are *indirectly device accessible*.
 
 Applications may define a free function ``is_onedpl_indirectly_device_accessible(T)``, which accepts an argument of
-type ``T`` and returns a type with the base characteristic of ``std::true_type`` if ``T`` is *indirectly device accessible*,
-otherwise returns a type with the base characteristic of ``std::false_type``. The function must be discoverable by
-argument-dependent lookup (ADL). It may be provided as a forward declaration only, without defining a body.
+type ``T`` and returns a type with the base characteristic of ``std::true_type`` if ``T`` is *indirectly device
+accessible*. Otherwise, it returns a type with the base characteristic of ``std::false_type``. The function must be
+discoverable by argument-dependent lookup (ADL). It may be provided as a forward declaration only, without defining a
+body.
 
 The return type of ``is_onedpl_indirectly_device_accessible`` is examined at compile time to determine if ``T`` is
 *indirectly device accessible*. The function overload to use must be selected with argument-dependent lookup.
