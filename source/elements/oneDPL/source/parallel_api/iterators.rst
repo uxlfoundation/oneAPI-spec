@@ -378,21 +378,16 @@ Pointers are trivially copyable and therefore SYCL device-copyable.
 
 Customization For User Defined Iterators
 ++++++++++++++++++++++++++++++++++++++++
-oneDPL provides a mechanism to indicate whether custom iterators are *indirectly device accessible* by defining an
-Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_indirectly_device_accessible``.
+oneDPL provides a mechanism to indicate whether custom iterators are *indirectly device accessible*.
 
-ADL-based Customization Point: ``is_onedpl_indirectly_device_accessible``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-A free function ``is_onedpl_indirectly_device_accessible(T)`` may be defined, which accepts an argument of type ``T``
-and returns a type with the base characteristic of ``std::true_type`` if ``T`` is *indirectly device accessible*, or
-otherwise returns a type with the base characteristic of ``std::false_type``. The function must be discoverable by ADL.
-
-The function ``is_onedpl_indirectly_device_accessible(T)`` may only be used to determine if ``T`` is *indirectly device
-accessible* by interrogating its return type at compile-time. Overloads may be provided as forward declarations only,
-without defining a body. ADL is used to determine which function overload to use according to the rules in the
-`C++ Standard`_. Therefore, derived iterator types without an overload for their exact type will match their most
-specific base iterator type if such an overload exists.
+Applications may define a free function ``is_onedpl_indirectly_device_accessible(T)``, which accepts an argument of
+type ``T`` and returns a type with the base characteristic of ``std::true_type`` if ``T`` is *indirectly device accessible*,
+otherwise returns a type with the base characteristic of ``std::false_type``. The function must be discoverable by
+argument-dependent lookup (ADL). It may be provided as a forward declaration only, without defining a body.
+The return type of ``is_onedpl_indirectly_device_accessible`` is examined at compile time to determine if ``T`` is
+*indirectly device accessible*. The function overload to use must be selected with argument-dependent lookup.
+[*Note*: Therefore, according to the rules in the `C++ Standard`_, a derived type for which there is no
+function overload will match its most specific base type for which an overload exists. -- *end note*]
 
 Once ``is_onedpl_indirectly_device_accessible(T)`` is defined, the public trait
 ``template<typename T> oneapi::dpl::is_indirectly_device_accessible[_v]`` will return the appropriate value. This public
@@ -412,7 +407,7 @@ of the iterator class.
     {
         struct accessible_it
         {
-            /* unspecified user definition of a *indirectly device accessible iterator" */
+            /* user definition of an indirectly device accessible iterator */
         };
 
         std::true_type
@@ -420,10 +415,10 @@ of the iterator class.
 
         struct inaccessible_it
         {
-            /* unspecified user definition of iterator  which is not "indirectly device accessible" */
+            /* user definition of an iterator which is not indirectly device accessible */
         };
 
-        // The following could be omitted. The default overload would provide the same result.
+        // The following could be omitted, as returning std::false_type matches the default behavior.
         std::false_type
         is_onedpl_indirectly_device_accessible(inaccessible_it);
     }
