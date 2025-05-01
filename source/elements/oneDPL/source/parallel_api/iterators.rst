@@ -379,7 +379,7 @@ Pointers are trivially copyable and therefore SYCL device-copyable.
 Customization For User Defined Iterators
 ++++++++++++++++++++++++++++++++++++++++
 oneDPL provides a mechanism to indicate whether custom iterators are *indirectly device accessible* by defining an
- Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_indirectly_device_accessible``.
+Argument-Dependent Lookup (ADL) based customization point, ``is_onedpl_indirectly_device_accessible``.
 
 ADL-based Customization Point: ``is_onedpl_indirectly_device_accessible``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
