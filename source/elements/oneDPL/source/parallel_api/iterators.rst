@@ -362,8 +362,9 @@ using the set of source iterators provided.
 
 Other Iterators
 +++++++++++++++
-Pointers are assumed to be USM shared or device memory pointers and are *indirectly device accessible*.
-Pointers are trivially copyable and therefore SYCL device-copyable.
+Pointers are assumed to be USM shared or device memory pointers when used in combination with an algorithm with a
+``device_policy`` and are *indirectly device accessible*. Pointers are trivially copyable and therefore SYCL
+device-copyable.
 
 ``std::reverse_iterator<IteratorT>`` is an ``AdaptingIteratorSource`` if ``IteratorT`` is an ``AdaptingIteratorSource``.
 ``std::reverse_iterator<IteratorT>`` is an *indirectly device accessible iterator* if ``IteratorT`` is an *indirectly
