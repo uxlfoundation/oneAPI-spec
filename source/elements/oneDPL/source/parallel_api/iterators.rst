@@ -28,8 +28,8 @@ required by the algorithm's semantics and what would be required to use the type
 required by the algorithm's semantics and what would be required by using an accessor to the buffer within a SYCL
 kernel.
 
-Public Trait: ``oneapi::dpl::is_indirectly_device_accessible[_v]``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Indirect Device Accessibility Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following class template and variable template are defined in ``<oneapi/dpl/iterator>`` inside the namespace
 ``oneapi::dpl``:
