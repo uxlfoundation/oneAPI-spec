@@ -20,7 +20,7 @@ predefined function objects which static function call operators have the requir
 The following differences to the standard C++ range algorithms apply:
 
 - Parallel range algorithms cannot be used in constant expressions.
-- The execution policy parameter is added.
+- The oneDPL execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
 - Both input and output ranges must support random access.
 - As a rule, both input and output ranges must be sized.
@@ -30,7 +30,7 @@ The following differences to the standard C++ range algorithms apply:
     [*Note*: An example of an infinite range is ``std::views::repeat`` with no bound. -- *end note*]
 
 - For algorithms with bounded output ranges, processing may not need to go over all the input data.
-  In that case, the returned value usually contains iterators pointing to the positions past the last elements
+  In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
 
@@ -153,6 +153,18 @@ Element Search Operations
       std::ranges::borrowed_iterator_t<R>
         find_if_not (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
+    // find_first_of
+    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+             std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+             typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      std::ranges::borrowed_iterator_t<R1>
+        find_first_of (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                       Proj1 proj1 = {}, Proj2 proj2 = {});
+
     // adjacent_find
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
@@ -163,6 +175,54 @@ Element Search Operations
                std::ranges::sized_range<R>
       std::ranges::borrowed_iterator_t<R>
         adjacent_find (ExecutionPolicy&& pol, R&& r, Pred pred = {}, Proj proj = {});
+
+  }
+
+Minimum and Maximum
++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // min
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
+                                                  std::ranges::range_value_t<R>* >
+      std::ranges::range_value_t<R>
+        min (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // max
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
+                                                  std::ranges::range_value_t<R>* >
+      std::ranges::range_value_t<R>
+        max (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+
+    // minmax
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
+                                                  std::ranges::range_value_t<R>* >
+      std::ranges::minmax_result<std::ranges::range_value_t<R>>
+        minmax (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
     // min_element
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
@@ -184,6 +244,16 @@ Element Search Operations
       std::ranges::borrowed_iterator_t<R>
         max_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
+    // minmax_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::minmax_element_result<std::ranges::borrowed_iterator_t<R>>
+        minmax_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
   }
 
 Sequence Search and Comparison
@@ -204,6 +274,32 @@ Sequence Search and Comparison
                std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
                                            Pred, Proj1, Proj2 >
       bool equal (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                  Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // mismatch
+    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+             std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+             typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               (std::ranges::sized_range<R1> || std::ranges::sized_range<R2>) &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      std::ranges::mismatch_result<std::ranges::borrowed_iterator_t<R1>,
+                                   std::ranges::borrowed_iterator_t<R2>>
+        mismatch (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                  Proj1 proj1 = {}, Proj2 proj2 = {});
+                  
+
+    // find_end
+    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+             std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+             typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      std::ranges::borrowed_subrange_t<R1>
+        find_end (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
                   Proj1 proj1 = {}, Proj2 proj2 = {});
 
     // search
@@ -265,6 +361,16 @@ Sorting and Merge
                std::ranges::sized_range<R>
       bool is_sorted (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
+    // is_sorted_until
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        is_sorted_until (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
     // merge
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
               std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
@@ -283,8 +389,8 @@ Sorting and Merge
 
   }
 
-Mutating Operations
-+++++++++++++++++++
+Copying Mutating Operations
++++++++++++++++++++++++++++
 
 .. code:: cpp
 
@@ -312,6 +418,16 @@ Mutating Operations
       std::ranges::copy_if_result<std::ranges::borrowed_iterator_t<R>,
                                   std::ranges::borrowed_iterator_t<OutR>>
         copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
+
+    // move
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_movable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::move_result<std::ranges::borrowed_iterator_t<R>,
+                               std::ranges::borrowed_iterator_t<OutR>>
+        move (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
     // transform (unary)
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
@@ -341,6 +457,72 @@ Mutating Operations
                                            std::ranges::borrowed_iterator_t<OutR>>
         transform (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Fn binary_op,
                    Proj1 proj1 = {}, Proj2 proj2 = {});
+
+  }
+
+In-place Mutating Operations
+++++++++++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // fill
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename T = std::ranges::range_value_t<R>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_writable<std::ranges::iterator_t<R>, const T&>
+      std::ranges::borrowed_iterator_t<R>
+        fill (ExecutionPolicy&& pol, R&& r, const T& value);
+  
+    // replace
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              typename T1 = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>, typename T2 = T1>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_writable<std::ranges::iterator_t<R>, const T2&> &&
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T1* >
+      std::ranges::borrowed_iterator_t<R>
+        replace (ExecutionPolicy&& pol, R&& r, const T1& old_value, const T2& new_value,
+                 Proj proj = {});
+
+    // replace_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_writable<std::ranges::iterator_t<R>, const T&>
+      std::ranges::borrowed_iterator_t<R>
+        replace_if (ExecutionPolicy&& pol, R&& r, Pred pred, const T& new_value, Proj proj = {});
+
+    // remove
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R> &&
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T* >
+      std::ranges::borrowed_subrange_t<R>
+        remove (ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
+
+    // remove_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        remove_if (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
   }
 
