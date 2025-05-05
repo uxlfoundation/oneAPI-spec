@@ -18,7 +18,7 @@ An example of *indirectly device accessible iterators* include SYCL USM shared p
 a SYCL kernel. An example of an iterator type that is not *indirectly device accessible* is a random access iterator
 referring to host allocated data because dereferencing it within a SYCL kernel would result in undefined behavior.
 
-:doc:`*buffer position objects* <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
+:doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
 iterators. However, they are *indirectly device accessible* because they represent data accessible on the device.
 
 When passed to oneDPL algorithms with a ``device_policy``, *indirectly device accessible iterator* types that are also
@@ -28,8 +28,8 @@ required by the algorithm's semantics and what would be required to use the type
 required by the algorithm's semantics and what would be required by using an accessor to the buffer within a SYCL
 kernel.
 
-Indirect Device Accessibility Trait
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Indirect Device Accessibility Type Trait
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following class template and variable template are defined in ``<oneapi/dpl/iterator>`` inside the namespace
 ``oneapi::dpl``:
@@ -434,8 +434,10 @@ of the iterator class.
                              oneapi::dpl::is_indirectly_device_accessible<It2>>;
     };
 
-    static_assert(oneapi::dpl::is_indirectly_device_accessible<it_pair<usr::accessible_it, usr::accessible_it>> == true);
-    static_assert(oneapi::dpl::is_indirectly_device_accessible<it_pair<usr::accessible_it, usr::inaccessible_it>> == false);
+    static_assert(oneapi::dpl::is_indirectly_device_accessible<
+                                    it_pair<usr::accessible_it, usr::accessible_it>> == true);
+    static_assert(oneapi::dpl::is_indirectly_device_accessible<
+                                    it_pair<usr::accessible_it, usr::inaccessible_it>> == false);
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
