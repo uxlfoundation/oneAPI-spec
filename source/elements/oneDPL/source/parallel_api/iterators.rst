@@ -14,17 +14,17 @@ Iterators and iterator-like types may or may not refer to content accessible wit
 The term *indirectly device accessible* refers to a type that represents content accessible on a device.
 An *indirectly device accessible iterator* is such a type that can also be dereferenced within a SYCL kernel.
 
-An example of *indirectly device accessible iterators* include SYCL USM shared pointers which can inherently be used in
-a SYCL kernel. An example of an iterator type that is not *indirectly device accessible* is a random access iterator
+An example of indirectly device accessible iterators include SYCL USM shared pointers which can inherently be used in
+a SYCL kernel. An example of an iterator type that is not indirectly device accessible is a random access iterator
 referring to host allocated data because dereferencing it within a SYCL kernel would result in undefined behavior.
 
 :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end`` are not
-iterators. However, they are *indirectly device accessible* because they represent data accessible on the device.
+iterators. However, they are indirectly device accessible because they represent data accessible on the device.
 
-When passed to oneDPL algorithms with a ``device_policy``, *indirectly device accessible iterator* types that are also
+When passed to oneDPL algorithms with a ``device_policy``, indirectly device accessible iterator types that are also
 random access iterators and satisfy *SYCL device-copyable* must not cause unnecessary data movement beyond what is
 required by the algorithm's semantics and what would be required to use the type directly within a SYCL kernel.
-*Indirectly device accessible* *buffer position objects* must not cause unnecessary data movement beyond what is
+Indirectly device accessible buffer position objects must not cause unnecessary data movement beyond what is
 required by the algorithm's semantics and what would be required by using an accessor to the buffer within a SYCL
 kernel.
 
@@ -43,7 +43,7 @@ The following class template and variable template are defined in ``<oneapi/dpl/
     inline constexpr bool is_indirectly_device_accessible_v = is_indirectly_device_accessible<T>::value;
 
 ``template <typename T> oneapi::dpl::is_indirectly_device_accessible`` is a type which has the base characteristic
-of ``std::true_type`` if ``T`` is *indirectly device accessible*. Otherwise, it has the base characteristic of
+of ``std::true_type`` if ``T`` is indirectly device accessible. Otherwise, it has the base characteristic of
 ``std::false_type``.
 
 oneDPL Iterators
@@ -107,7 +107,7 @@ counter; dereference operations cannot be used to modify the counter. The arithm
 operators of ``counting_iterator`` behave as if applied to the values of Integral type
 representing the counters of the iterator instances passed to the operators.
 
-``counting_iterator`` is SYCL device-copyable, and is an *indirectly device accessible iterator*.
+``counting_iterator`` is SYCL device-copyable, and is an indirectly device accessible iterator.
 
 .. code:: cpp
 
@@ -149,7 +149,7 @@ lvalue that may be assigned an arbitrary value. The assignment has no effect on 
 of ``discard_iterator`` behave as if applied to integer counter values maintained by the
 iterator instances to determine their position relative to each other.
 
-``discard_iterator`` is SYCL device-copyable, and is an *indirectly device accessible iterator*.
+``discard_iterator`` is SYCL device-copyable, and is an indirectly device accessible iterator.
 
 .. code:: cpp
 
@@ -200,11 +200,11 @@ to the index of the source iterator. The arithmetic and comparison operators of
 iterator instances to determine their position in the index map. 
 
 ``permutation_iterator`` is SYCL device-copyable if both the ``SourceIterator`` and the ``IndexMap``
-are SYCL device-copyable. ``permutation_iterator`` is *indirectly device accessible* if both the
-``SourceIterator`` and the ``IndexMap`` are *indirectly device accessible*.
+are SYCL device-copyable. ``permutation_iterator`` is indirectly device accessible if both the
+``SourceIterator`` and the ``IndexMap`` are indirectly device accessible.
 
 ``SourceIterator`` must satisfy ``AdaptingIteratorSource``. When using ``permutation_iterator`` in combination with an
-algorithm with a ``device_policy``, ``SourceIterator`` must be *indirectly device accessible*.
+algorithm with a ``device_policy``, ``SourceIterator`` must be indirectly device accessible.
 
 The type ``IndexMap`` must be one of the following:
 
@@ -287,7 +287,7 @@ source iterator itself. The template type ``Iterator`` must satisfy
 ``AdaptingIteratorSource``.
 
 ``transform_iterator`` is SYCL device-copyable if the source iterator is SYCL device-copyable, and
-is *indirectly device accessible* if the source iterator is *indirectly device accessible*.
+is indirectly device accessible if the source iterator is indirectly device accessible.
 
 .. code:: cpp
 
@@ -348,8 +348,8 @@ source iterators over which the ``zip_iterator`` is defined. The arithmetic oper
 operation were applied to each of these iterators. The types ``T`` within the template pack 
 ``Iterators...`` must satisfy ``AdaptingIteratorSource``.
 
-``zip_iterator`` is SYCL device-copyable if all the source iterators are SYCL device-copyable, and is *indirectly
-device accessible* if all the source iterators are *indirectly device accessible*.
+``zip_iterator`` is SYCL device-copyable if all the source iterators are SYCL device-copyable, and is indirectly
+device accessible if all the source iterators are indirectly device accessible.
 
 .. code:: cpp
 
@@ -363,26 +363,26 @@ using the set of source iterators provided.
 Other Iterators
 +++++++++++++++
 Pointers are assumed to be USM shared or device memory pointers when used in combination with an algorithm with a
-``device_policy`` and are *indirectly device accessible*. Pointers are trivially copyable and therefore SYCL
+``device_policy`` and are indirectly device accessible. Pointers are trivially copyable and therefore SYCL
 device-copyable.
 
-It is implementation defined whether other iterators are *indirectly device accessible*, including iterator types from
+It is implementation defined whether other iterators are indirectly device accessible, including iterator types from
 the `C++ Standard`_.
 
 .. _iterators-device-accessible:
 
 Customization For User Defined Iterators
 ++++++++++++++++++++++++++++++++++++++++
-oneDPL provides a mechanism to indicate whether custom iterators are *indirectly device accessible*.
+oneDPL provides a mechanism to indicate whether custom iterators are indirectly device accessible.
 
 Applications may define a free function ``is_onedpl_indirectly_device_accessible(T)``, which accepts an argument of
-type ``T`` and returns a type with the base characteristic of ``std::true_type`` if ``T`` is *indirectly device
-accessible*. Otherwise, it returns a type with the base characteristic of ``std::false_type``. The function must be
+type ``T`` and returns a type with the base characteristic of ``std::true_type`` if ``T`` is indirectly device
+accessible. Otherwise, it returns a type with the base characteristic of ``std::false_type``. The function must be
 discoverable by argument-dependent lookup (ADL). It may be provided as a forward declaration only, without defining a
 body.
 
 The return type of ``is_onedpl_indirectly_device_accessible`` is examined at compile time to determine if ``T`` is
-*indirectly device accessible*. The function overload to use must be selected with argument-dependent lookup.
+indirectly device accessible. The function overload to use must be selected with argument-dependent lookup.
 [*Note*: Therefore, according to the rules in the C++ Standard, a derived type for which there is no
 function overload will match its most specific base type for which an overload exists. -- *end note*]
 
