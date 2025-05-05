@@ -42,7 +42,7 @@ The following class template and variable template are defined in ``<oneapi/dpl/
     template <typename T>
     inline constexpr bool is_indirectly_device_accessible_v = is_indirectly_device_accessible<T>::value;
 
-``template <typename T> oneapi::dpl::is_indirectly_device_accessible`` is a type which has the base characteristic
+``template <typename T> oneapi::dpl::is_indirectly_device_accessible`` is a template which has the base characteristic
 of ``std::true_type`` if ``T`` is indirectly device accessible. Otherwise, it has the base characteristic of
 ``std::false_type``.
 
