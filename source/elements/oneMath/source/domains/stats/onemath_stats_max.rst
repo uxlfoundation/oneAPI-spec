@@ -25,6 +25,17 @@ The oneapi::math::stats::max function is used to compute a max values arrays (ma
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of maximum values:
+
+:math:`\max(X) = \left( \text{max}_1(X), \; \dots, \text{max}_p(X) \right)`
+
+Where:
+
+:math:`i = 1, \dots, p`
+
+
 .. _onemath_stats_max_buffer:
 
 max (buffer version)

@@ -25,6 +25,21 @@ The oneapi::math::stats::min_max function is used to compute min and max arrays 
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of maximum values:
+
+:math:`\max(X) = \left( \text{max}_1(X), \; \dots, \text{max}_p(X) \right)`
+
+Vector of minimum values:
+
+:math:`\min(X) = \left( \text{min}_1(X), \; \dots, \text{min}_p(X) \right)`
+
+Where:
+
+:math:`i = 1, \dots, p`
+
+
 .. _onemath_stats_min_max_buffer:
 
 min_max (buffer version)

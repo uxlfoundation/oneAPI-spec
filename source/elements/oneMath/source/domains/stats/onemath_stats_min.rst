@@ -25,6 +25,17 @@ The oneapi::math::stats::min function is used to compute min arrays (min value f
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of minimum values:
+
+:math:`\min(X) = \left( \text{min}_1(X), \; \dots, \text{min}_p(X) \right)`
+
+Where:
+
+:math:`i = 1, \dots, p`
+
+
 .. _onemath_stats_min_buffer:
 
 min (buffer version)

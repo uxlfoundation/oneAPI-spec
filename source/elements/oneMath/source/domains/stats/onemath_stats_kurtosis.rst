@@ -25,6 +25,17 @@ The oneapi::math::stats::kurtosis function is used to compute a kurtosis array (
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of kurtosis values:
+
+:math:`B(X) = \left( B_1(X), \; ..., B_p(X) \right), \; B_i = \frac{C^{(4)}_i(X)}{V^2_i(X)} - 3`
+
+Where:
+
+:math:`i = 1, \dots, p`
+
+
 .. _onemath_stats_kurtosis_buffer:
 
 kurtosis (buffer version)
