@@ -62,9 +62,12 @@ A class that represents an explicit, user-managed task scheduler arena.
                 int max_concurrency() const;
 
                 template<typename F> auto execute(F&& f) -> decltype(f());
-                template<typename F> void enqueue(F&& f);
 
+                template<typename F> void enqueue(F&& f);
+                template<typename F> void enqueue(F&& f, task_group& tg);
                 void enqueue(task_handle&& h);
+
+                task_group_status task_arena::wait_for(task_group& tg);
             };
 
         } // namespace tbb
@@ -263,6 +266,25 @@ Member functions
     Returns the concurrency level of the ``task_arena``.
     Does not require the ``task_arena`` to be initialized and does not perform initialization.
 
+.. cpp:function:: template<F> auto execute(F&& f) -> decltype(f())
+
+    Executes the specified functor in the ``task_arena`` and returns the value returned by the functor.
+    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
+
+    The calling thread joins the ``task_arena`` if possible, and executes the functor.
+    Upon return it restores the previous task scheduler state and floating-point settings.
+
+    If joining the ``task_arena`` is not possible, the call wraps the functor into a task,
+    enqueues it into the arena, waits using an OS kernel synchronization object
+    for another opportunity to join, and finishes after the task completion.
+
+    An exception thrown in the functor will be captured and re-thrown from ``execute``.
+
+    .. note::
+
+        Any number of threads outside of the arena can submit work to the arena and be blocked.
+        However, only the maximal number of threads specified for the arena can participate in executing the work.
+
 .. cpp:function:: template<F> void enqueue(F&& f)
 
     Enqueues a task into the ``task_arena`` to process the specified functor and immediately returns.
@@ -284,33 +306,27 @@ Member functions
 
         An exception thrown and not caught in the functor results in undefined behavior.
 
-.. cpp:function:: template<F> auto execute(F&& f) -> decltype(f())
+.. cpp:function:: template<F> void enqueue(F&& f, task_group& tg)
 
-    Executes the specified functor in the ``task_arena`` and returns the value returned by the functor.
-    The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
+    Adds a task to process the specified functor into ``tg`` and enqueues it into the ``task_arena``.
 
-    The calling thread joins the ``task_arena`` if possible, and executes the functor.
-    Upon return it restores the previous task scheduler state and floating-point settings.
-
-    If joining the ``task_arena`` is not possible, the call wraps the functor into a task,
-    enqueues it into the arena, waits using an OS kernel synchronization object
-    for another opportunity to join, and finishes after the task completion.
-
-    An exception thrown in the functor will be captured and re-thrown from ``execute``.
-
-    .. note::
-
-        Any number of threads outside of the arena can submit work to the arena and be blocked.
-        However, only the maximal number of threads specified for the arena can participate in executing the work.
+    The behavior of this function is equivalent to ``this->enqueue( tg.defer(std::forward<F>(f)) )``.
 
 .. cpp:function:: void enqueue(task_handle&& h)   
      
     Enqueues a task owned by ``h`` into the ``task_arena`` for processing. 
  
-    The behavior of this function is identical to the generic version (``template<typename F> void task_arena::enqueue(F&& f)``), except parameter type. 
+    The behavior of this function is equivalent to the generic version (``template<typename F> void task_arena::enqueue(F&& f)``), except parameter type. 
 
     .. note:: 
        ``h`` should not be empty to avoid an undefined behavior.
+
+.. cpp:function:: task_group_status task_arena::wait_for(task_group& tg)
+
+    Waits for all tasks in ``tg`` to complete or be cancelled, while possibly executing tasks in the ``task_arena``.
+    Returns the status of ``tg`` once waiting is complete.
+
+    The behavior of this function is equivalent to ``this->execute([&tg]{ return tg.wait(); })``.
 
 Example
 -------
@@ -335,17 +351,13 @@ to the corresponding NUMA node.
         }
 
         for (int i = 0; i < numa_nodes.size(); i++) {
-            arenas[i].execute([&task_groups, i] {
-                task_groups[i].run([] {
-                    /* executed by the thread pinned to specified NUMA node */
-                });
-            });
+            arenas[i].enqueue([]{
+                /* executed by a thread pinned to the specified NUMA node */
+            }, task_groups[i]);
         }
 
         for (int i = 0; i < numa_nodes.size(); i++) {
-            arenas[i].execute([&task_groups, i] {
-                task_groups[i].wait();
-            });
+            arenas[i].wait_for(task_groups[i]);
         }
 
         return 0;
