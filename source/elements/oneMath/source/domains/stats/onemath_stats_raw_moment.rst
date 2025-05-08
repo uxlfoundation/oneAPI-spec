@@ -25,6 +25,17 @@ The oneapi::math::stats::raw_moment function is used to compute array of raw mom
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of raw moments values:
+
+:math:`R^k(X) = \left( R^k_1(X), \; \dots, R^k_p(X) \right), \; R^k_i(X) = \frac{1}W \sum_{j=1}^n \omega_j x_{ij}^k`
+
+Where:
+
+:math:`W = \sum_{j=1}^n \omega_j, \; j = 1, \dots, p`
+
+
 .. _onemath_stats_raw_moment_buffer:
 
 oneapi::math::stats::raw_moment (buffer version)

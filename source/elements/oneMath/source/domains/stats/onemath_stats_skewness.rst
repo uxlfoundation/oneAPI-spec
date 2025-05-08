@@ -25,6 +25,17 @@ The oneapi::math::stats::skewness function is used to compute a skewness array (
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of skewness values:
+
+:math:`\Gamma(X) = \left( \Gamma_1(X), \; \dots, \Gamma_p(X) \right), \; \Gamma_i(X) = \frac{C^{(3)}_i(X)}{V^{1.5}_i(X)}`
+
+Where:
+
+:math:`i = 1, \dots, p`
+
+
 .. _onemath_stats_skewness_buffer:
 
 skewness (buffer version)

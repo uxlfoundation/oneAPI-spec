@@ -25,6 +25,17 @@ The oneapi::math::stats::raw_sum function is used to compute an array of raw sum
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of raw sums:
+
+:math:`S^k(X) = \left( S^k_1(X), \; \dots, S^k_p(X) \right), \; S_i^k(X) = \sum_{j=1}^n \omega_j x^k_{ij}`
+
+Where:
+
+:math:`i = 1, \dots, p, \; k = 1, 2, 3, 4`
+
+
 .. _onemath_stats_raw_sum_buffer:
 
 raw_sum (Buffer version)

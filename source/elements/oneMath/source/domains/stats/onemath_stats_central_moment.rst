@@ -25,6 +25,17 @@ The oneapi::math::stats::central_moment function is used to compute an array of 
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of central moments:
+
+:math:`C^k(X) = \left( C^k_1(X), \; ..., C^k_p(X) \right), \; C_i^k(X) =  \frac{1}{W} \sum_{j=1}^{n} \omega_j \left( x_{ij} - M_i(X) \right)^k`
+
+Where:
+
+:math:`W = \sum_{j=1}^n \omega_j, \, i = 1, \dots, p, \; k = 2, 3, 4`
+
+
 .. _onemath_stats_central_moment_buffer:
 
 central_moment (buffer version)
