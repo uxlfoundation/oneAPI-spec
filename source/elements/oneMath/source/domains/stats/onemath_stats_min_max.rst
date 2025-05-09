@@ -29,11 +29,11 @@ The oneapi::math::stats::min_max function is used to compute min and max arrays 
 
 Vector of maximum values:
 
-:math:`\max(X) = \left( \text{max}_1(X), \; \dots, \text{max}_p(X) \right)`
+:math:`\max(X) = \left( {\max}_1(X), \; \dots, {\max}_p(X) \right)`
 
 Vector of minimum values:
 
-:math:`\min(X) = \left( \text{min}_1(X), \; \dots, \text{min}_p(X) \right)`
+:math:`\min(X) = \left( {\min}_1(X), \; \dots, {\min}_p(X) \right)`
 
 Where:
 

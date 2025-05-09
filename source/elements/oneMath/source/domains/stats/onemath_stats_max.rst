@@ -29,7 +29,7 @@ The oneapi::math::stats::max function is used to compute a max values arrays (ma
 
 Vector of maximum values:
 
-:math:`\max(X) = \left( \text{max}_1(X), \; \dots, \text{max}_p(X) \right)`
+:math:`\max(X) = \left( {\max}_1(X), \; \dots, {\max}_p(X) \right)`
 
 Where:
 
