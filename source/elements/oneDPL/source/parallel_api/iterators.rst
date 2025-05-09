@@ -429,9 +429,13 @@ of the iterator class.
     {
         It1 first;
         It2 second;
-        friend auto is_onedpl_indirectly_device_accessible(it_pair) ->
+        friend auto
+        is_onedpl_indirectly_device_accessible(it_pair) ->
             std::conjunction<oneapi::dpl::is_indirectly_device_accessible<It1>,
-                             oneapi::dpl::is_indirectly_device_accessible<It2>>;
+                             oneapi::dpl::is_indirectly_device_accessible<It2>>
+        {
+            return {};
+        }
     };
 
     static_assert(oneapi::dpl::is_indirectly_device_accessible<
