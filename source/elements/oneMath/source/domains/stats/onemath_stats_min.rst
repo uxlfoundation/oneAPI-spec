@@ -29,7 +29,7 @@ The oneapi::math::stats::min function is used to compute min arrays (min value f
 
 Vector of minimum values:
 
-:math:`\min(X) = \left( \text{min}_1(X), \; \dots, \text{min}_p(X) \right)`
+:math:`\min(X) = \left( {\min}_1(X), \; \dots, {\min}_p(X) \right)`
 
 Where:
 
