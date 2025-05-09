@@ -33,7 +33,7 @@ Vector of raw moments values:
 
 Where:
 
-:math:`W = \sum_{j=1}^n \omega_j, \; j = 1, \dots, p`
+:math:`W = \sum_{j=1}^n \omega_j, \; j = 1, \dots, p; k = 1, 2, 3, 4`
 
 
 .. _onemath_stats_raw_moment_buffer:
