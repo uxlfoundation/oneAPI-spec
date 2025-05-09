@@ -33,7 +33,7 @@ Vector of mean values:
 
 Where:
 
-:math:`W = \sum_{j=1}^n \omega_j, \; j = 1, \dots, p`
+:math:`W = \sum_{j=1}^n \omega_j, \; i = 1, \dots, p`
 
 
 .. _onemath_stats_mean_buffer:
