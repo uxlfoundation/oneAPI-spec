@@ -29,7 +29,7 @@ The oneapi::math::stats::central_sum function is used to compute an array of cen
 
 Vector of central sums:
 
-:math:`S^k(X) = \left( S^k_1(X), \; ..., S^k_p(X) \right), \; S^k_i(X) = \sum_{j=1}^{n} \omega_j \left( x_{ij} - S_i(X) \right)^k`
+:math:`S^k(X) = \left( S^k_1(X), \; \dots, S^k_p(X) \right), \; S^k_i(X) = \sum_{j=1}^{n} \omega_j \left( x_{ij} - S_i(X) \right)^k`
 
 Where:
 
