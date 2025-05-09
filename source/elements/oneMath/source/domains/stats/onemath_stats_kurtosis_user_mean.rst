@@ -29,7 +29,7 @@ The oneapi::math::stats::kurtosis function is used to compute an array of kurtos
 
 Vector of kurtosis values:
 
-:math:`B(X) = \left( B_1(X), \; \dots, B_p(X) \right), \; B_i = \frac{C^{(4)}_i(X)}{V^2_i(X)} - 3`
+:math:`B(X) = \left( B_1(X), \; \dots, B_p(X) \right), \; B_i(X) = \frac{C^{(4)}_i(X)}{V^2_i(X)} - 3`
 
 Where:
 
