@@ -25,6 +25,17 @@ The oneapi::math::stats::variation function is used to compute a variation array
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of variation coefficients:
+
+:math:`VC(X) = \left( VC_1(X), \; \dots, VC_p(X) \right), \; VC_i(X) = \frac{V^{0.5}_i(X)}{M_i(X)}`
+
+Where:
+
+:math:`i = 1, \dots, p`
+
+
 .. _onemath_stats_variation_buffer:
 
 variation (buffer version)
