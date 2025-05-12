@@ -21,11 +21,12 @@ with the ``task_arena`` currently used by the calling thread.
         namespace this_task_arena {
             int current_thread_index();
             int max_concurrency();
+
             template<typename F> auto isolate(F&& f) -> decltype(f());
             
+            template<typename F> void enqueue(F&& f);
+            template<typename F> void enqueue(F&& f, task_group& tg);
             void enqueue(task_handle&& h);
-            
-            template<typename F> void enqueue(F&& f) ;
         }
     } // namespace tbb
     } // namespace oneapi 
@@ -77,15 +78,21 @@ with the ``task_arena`` currently used by the calling thread.
   
     Enqueues a task into the ``task_arena`` currently used by the calling thread to process the specified functor, then returns immediately.
     The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
-    
-    Behavior of this function is identical to ``template<typename F> void task_arena::enqueue(F&& f)`` applied to the ``task_arena`` 
-    object constructed with ``attach`` parameter.     
+
+    Behavior of this function is equivalent to ``template<typename F> void task_arena::enqueue(F&& f)`` applied to the ``task_arena`` 
+    object constructed with ``attach`` parameter.
+
+.. cpp:function:: template<typename F> void enqueue(F&& f, task_group& tg)
+  
+    Adds a task to process the specified functor into ``tg`` and enqueues it into the ``task_arena`` currently used by the calling thread.
+
+    The behavior of this function is equivalent to ``this_task_arena::enqueue( tg.defer(std::forward<F>(f)) )``.
 
 .. cpp:function:: void enqueue(task_handle&& h)   
      
     Enqueues a task owned by ``h`` into the ``task_arena`` that is currently used by the calling thread.
     
-    The behavior of this function is identical to the generic version (``template<typename F> void enqueue(F&& f)``), except the parameter type. 
+    The behavior of this function is equivalent to the generic version (``template<typename F> void enqueue(F&& f)``), except the parameter type. 
 
     .. note:: 
         ``h`` should not be empty to avoid an undefined behavior.
