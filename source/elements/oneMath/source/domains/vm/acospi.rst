@@ -114,7 +114,7 @@ acospi
          * - +∞
            - QNAN
            - ``oneapi::math::vm::status::errdom``
-         * - - ∞
+         * - -∞
            - QNAN
            - ``oneapi::math::vm::status::errdom``
          * - QNAN

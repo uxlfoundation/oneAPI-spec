@@ -80,7 +80,7 @@ cbrt
       :class: sectiontitle
 
 
-   The cbrt(a)function computes a cube root of vector elements.
+   The `cbrt(a)` function computes a cube root of vector elements.
 
 
    .. container:: tablenoborder
@@ -109,9 +109,6 @@ cbrt
            -  
          * - SNAN
            - QNAN
-           -  
-         * - +0
-           - +0
            -  
 
 

@@ -97,10 +97,10 @@ expm1
            - Result
            - Status code
          * - +0
-           - +1
+           - +0
            -  
          * - -0
-           - +1
+           - -0
            -  
          * - a > overflow
            - +∞
@@ -109,7 +109,7 @@ expm1
            - +∞
            -  
          * - -∞
-           - -0
+           - -1
            -  
          * - QNAN
            - QNAN
