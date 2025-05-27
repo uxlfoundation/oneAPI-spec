@@ -25,6 +25,17 @@ The oneapi::math::stats::mean function is used to compute a mean array (mean val
         * - ``double``
 
 
+.. rubric:: Mathematical Notation
+
+Vector of mean values:
+
+:math:`M(X) = \left( M_1(X), \; \dots, M_p(X) \right), \; M_i(X) = \frac{1}{W} \sum_{j=1}^n \omega_j x_{ij}`
+
+Where:
+
+:math:`W = \sum_{j=1}^n \omega_j, \; i = 1, \dots, p`
+
+
 .. _onemath_stats_mean_buffer:
 
 mean (buffer version)
