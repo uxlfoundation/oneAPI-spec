@@ -100,7 +100,7 @@ tanpi
            - +0
            -  
          * - -0
-           - +0
+           - -0
            -  
          * - ``n``, even integer
            - \*copysign(0.0, ``n``)
