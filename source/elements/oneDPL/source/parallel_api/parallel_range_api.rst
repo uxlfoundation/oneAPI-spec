@@ -516,7 +516,7 @@ In-place Mutating Operations
     requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
         && std::permutable<std::ranges::iterator_t<R>> && std::ranges::sized_range<R>
     std::ranges::borrowed_iterator_t<R>
-    reverse (ExecutionPolicy&& pol, _R&& r);
+    reverse (ExecutionPolicy&& pol, R&& r);
 
     // remove
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
