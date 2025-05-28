@@ -429,6 +429,14 @@ Copying Mutating Operations
                                std::ranges::borrowed_iterator_t<OutR>>
         move (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
+    // swap_ranges
+    template<typename ExecutionPolicy, std::ranges::random_access_range R1, std::ranges::random_access_range R2>
+    requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+        && std::ranges::sized_range<R1> && std::ranges::sized_range<R2>
+        && std::indirectly_swappable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>>
+    std::ranges::swap_ranges_result<std::ranges::borrowed_iterator_t<R1>, std::ranges::borrowed_iterator_t<R2>>
+    swap_ranges (ExecutionPolicy&& pol, R1&& r1, R2&& r2);
+
     // transform (unary)
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR, std::copy_constructible Fn,
@@ -502,6 +510,13 @@ In-place Mutating Operations
                std::indirectly_writable<std::ranges::iterator_t<R>, const T&>
       std::ranges::borrowed_iterator_t<R>
         replace_if (ExecutionPolicy&& pol, R&& r, Pred pred, const T& new_value, Proj proj = {});
+
+    //reverse
+    template<typename ExecutionPolicy, std::ranges::random_access_range R>
+    requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>>
+        && std::permutable<std::ranges::iterator_t<R>> && std::ranges::sized_range<R>
+    std::ranges::borrowed_iterator_t<R>
+    reverse (ExecutionPolicy&& pol, _R&& r);
 
     // remove
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
