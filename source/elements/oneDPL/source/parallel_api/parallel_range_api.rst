@@ -288,7 +288,7 @@ Sequence Search and Comparison
                                    std::ranges::borrowed_iterator_t<R2>>
         mismatch (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
                   Proj1 proj1 = {}, Proj2 proj2 = {});
-                  
+
 
     // find_end
     template<typename ExecutionPolicy, std::ranges::random_access_range R1,
@@ -387,6 +387,80 @@ Sorting and Merge
         merge (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
                Proj1 proj1 = {}, Proj2 proj2 = {});
 
+  }
+
+Set operations
+++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // set_union
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
+              typename Comp = std::ranges::less, typename Proj1 = std::identity,
+              typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::ranges::sized_range<OutR> &&
+               std::mergeable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                              std::ranges::iterator_t<OutR>, Comp, Proj1, Proj2>
+      std::ranges::set_union_result<std::ranges::borrowed_iterator_t<R1>,
+                                    std::ranges::borrowed_iterator_t<R2>,
+                                    std::ranges::borrowed_iterator_t<OutR>>
+        set_union (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
+                   Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // set_intersection
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
+              typename Comp = std::ranges::less, typename Proj1 = std::identity,
+              typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::ranges::sized_range<OutR> &&
+               std::mergeable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                              std::ranges::iterator_t<OutR>, Comp, Proj1, Proj2>
+      std::ranges::set_intersection_result<std::ranges::borrowed_iterator_t<R1>,
+                                           std::ranges::borrowed_iterator_t<R2>,
+                                           std::ranges::borrowed_iterator_t<OutR>>
+        set_intersection (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
+                          Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // set_difference
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
+              typename Comp = std::ranges::less, typename Proj1 = std::identity,
+              typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::ranges::sized_range<OutR> &&
+               std::mergeable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                              std::ranges::iterator_t<OutR>, Comp, Proj1, Proj2>
+      std::ranges::set_difference_result<std::ranges::borrowed_iterator_t<R1>,
+                                         std::ranges::borrowed_iterator_t<R2>,
+                                         std::ranges::borrowed_iterator_t<OutR>>
+        set_difference (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
+                        Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // set_symmetric_difference
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
+              typename Comp = std::ranges::less, typename Proj1 = std::identity,
+              typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::ranges::sized_range<OutR> &&
+               std::mergeable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                              std::ranges::iterator_t<OutR>, Comp, Proj1, Proj2>
+      std::ranges::set_symmetric_difference_result<std::ranges::borrowed_iterator_t<R1>,
+                                                   std::ranges::borrowed_iterator_t<R2>,
+                                                   std::ranges::borrowed_iterator_t<OutR>>
+        set_symmetric_difference (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result,
+                                 Comp comp = {}, Proj1 proj1 = {}, Proj2 proj2 = {});
   }
 
 Copying Mutating Operations
