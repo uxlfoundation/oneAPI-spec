@@ -398,6 +398,18 @@ Set operations
 
   namespace oneapi::dpl::ranges {
 
+    // includes
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2,
+              typename Proj1 = std::identity, typename Proj2 = std::identity>
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R1>, Proj1>,
+                                               std::projected<std::ranges::iterator_t<R2>, Proj2> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+              std::ranges::sized_range<R1> && std::ranges::sized_range<R2>
+      bool includes (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Comp comp = {},
+                     Proj1 proj1 = {}, Proj2 proj2 = {});
+
     // set_union
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
               std::ranges::random_access_range R2, std::ranges::random_access_range OutR,
