@@ -478,6 +478,15 @@ In-place Mutating Operations
       std::ranges::borrowed_iterator_t<R>
         fill (ExecutionPolicy&& pol, R&& r, const T& value);
 
+    // partition
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        partition (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
     // replace
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
