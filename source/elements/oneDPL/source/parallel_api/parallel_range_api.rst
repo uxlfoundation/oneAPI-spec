@@ -38,6 +38,7 @@ The following differences to the standard serial C++ range algorithms apply:
   rather than ``std::ranges::reverse_copy_result``.
   The semantics of the returned value are as specified in
   `P3709R2 <https://isocpp.org/files/papers/P3709R2.html>`_.
+- ``destroy`` is not marked with ``noexcept``.
 
 [*Note*: These oneDPL algorithms mostly match the semantics of the parallel range algorithms in the C++26 working draft.
 -- *end note*]
@@ -320,7 +321,7 @@ Sequence Search and Comparison
                                    std::ranges::borrowed_iterator_t<R2>>
         mismatch (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
                   Proj1 proj1 = {}, Proj2 proj2 = {});
-                  
+
 
     // find_end
     template<typename ExecutionPolicy, std::ranges::random_access_range R1,
