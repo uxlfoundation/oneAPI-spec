@@ -429,47 +429,6 @@ Copying Mutating Operations
                                std::ranges::borrowed_iterator_t<OutR>>
         move (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
-    // partition_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-          std::ranges::random_access_range OutR1, std::ranges::random_access_range OutR2,
-          typename Proj = std::identity,
-          std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-           std::ranges::sized_range<R> && std::ranges::sized_range<OutR1> &&
-           std::ranges::sized_range<OutR2> &&
-           std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR1>> &&
-           std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR2>>
-      std::ranges::partition_copy_result<std::ranges::borrowed_iterator_t<R>,
-                                         std::ranges::borrowed_iterator_t<OutR1>,
-                                         std::ranges::borrowed_iterator_t<OutR2>>
-      partition_copy (ExecutionPolicy&& pol, R&& r, OutR1&& out_true_r, OutR2&& out_false_r,
-                      Pred pred, Proj proj = {});
-
-    // remove_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR, typename Proj = std::identity,
-              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>> &&
-               std::indirect_binary_predicate< std::ranges::equal_to,
-                                               std::projected<std::ranges::iterator_t<R>, Proj>,
-                                               const T* >
-      std::ranges::remove_copy_result<std::ranges::borrowed_iterator_t<R>,
-                                      std::ranges::borrowed_iterator_t<OutR>>
-        remove_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, const T& value, Proj proj = {});
-
-    // remove_copy_if
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::remove_copy_if_result<std::ranges::borrowed_iterator_t<R>,
-                                         std::ranges::borrowed_iterator_t<OutR>>
-        remove_copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
-
     // reverse_copy
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR>
@@ -479,17 +438,6 @@ Copying Mutating Operations
       std::ranges::reverse_copy_result<std::ranges::borrowed_iterator_t<R>,
                                        std::ranges::borrowed_iterator_t<OutR>>
         reverse_copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
-
-    // rotate_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::rotate_copy_result<std::ranges::borrowed_iterator_t<R>,
-                                      std::ranges::borrowed_iterator_t<OutR>>
-        rotate_copy (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
-                     OutR&& result);
 
     // transform (unary)
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
