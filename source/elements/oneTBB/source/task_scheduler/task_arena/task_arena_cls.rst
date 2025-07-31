@@ -1,4 +1,5 @@
 .. SPDX-FileCopyrightText: 2019-2021 Intel Corporation
+.. SPDX-FileCopyrightText: 2025 UXL Foundation Contributors
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
