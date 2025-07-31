@@ -65,7 +65,7 @@ with the ``task_arena`` currently used by the calling thread.
     If the thread has not yet initialized the task scheduler, returns the concurrency level
     determined automatically for the hardware configuration.
 
-.. cpp:function:: template<F> auto isolate(F&& f) -> decltype(f())
+.. cpp:function:: template<typename F> auto isolate(F&& f) -> decltype(f())
 
     Runs the specified functor in isolation by restricting the calling thread to process only tasks
     scheduled in the scope of the functor (also called the isolation region). The function returns the value returned by the functor.

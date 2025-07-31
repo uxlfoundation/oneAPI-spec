@@ -267,7 +267,7 @@ Member functions
     Returns the concurrency level of the ``task_arena``.
     Does not require the ``task_arena`` to be initialized and does not perform initialization.
 
-.. cpp:function:: template<F> auto execute(F&& f) -> decltype(f())
+.. cpp:function:: template<typename F> auto execute(F&& f) -> decltype(f())
 
     Executes the specified functor in the ``task_arena`` and returns the value returned by the functor.
     The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
@@ -286,7 +286,7 @@ Member functions
         Any number of threads outside of the arena can submit work to the arena and be blocked.
         However, only the maximal number of threads specified for the arena can participate in executing the work.
 
-.. cpp:function:: template<F> void enqueue(F&& f)
+.. cpp:function:: template<typename F> void enqueue(F&& f)
 
     Enqueues a task into the ``task_arena`` to process the specified functor and immediately returns.
     The ``F`` type must meet the `Function Objects` requirements described in the [function.objects] section of the ISO C++ standard.
@@ -307,7 +307,7 @@ Member functions
 
         An exception thrown and not caught in the functor results in undefined behavior.
 
-.. cpp:function:: template<F> void enqueue(F&& f, task_group& tg)
+.. cpp:function:: template<typename F> void enqueue(F&& f, task_group& tg)
 
     Adds a task to process the specified functor into ``tg`` and enqueues it into the ``task_arena``.
 
