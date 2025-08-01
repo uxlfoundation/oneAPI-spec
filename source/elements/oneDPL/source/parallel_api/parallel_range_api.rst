@@ -33,8 +33,8 @@ The following differences to the standard C++ range algorithms apply:
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
-- ``reverse_copy_truncated_result`` alias used by ``reverse_copy`` resides in ``namespace oneapi::dpl::ranges``
-  instead of ``namespace std::ranges``.
+- ``reverse_copy`` returns ``std::ranges::in_in_out_result`` rather than its alias,
+  ``std::ranges::reverse_copy_truncated_result``.
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
@@ -42,19 +42,14 @@ of the next edition of the C++ standard (C++26).
 Auxiliary Definitions
 +++++++++++++++++++++
 
-The following auxiliary entities are defined to aid the specification of parallel range algorithms.
+The following auxiliary entities are only defined for the purpose of exposition, to aid the specification
+of parallel range algorithms.
 
 .. code:: cpp
 
    // C++20 analogue of std::projected_value_t; exposition only
    template<typename I, typename Proj>
    using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
-
-  // C++20 analogue of std::ranges::reverse_copy_truncated_result
-  namespace oneapi::dpl::ranges {
-    template<typename I, typename O>
-    using reverse_copy_truncated_result = std::ranges::in_in_out_result<I, I, O>;
-  }
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
@@ -442,8 +437,9 @@ Copying Mutating Operations
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
                std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      oneapi::dpl::ranges::reverse_copy_truncated_result<std::ranges::borrowed_iterator_t<R>,
-                                                         std::ranges::borrowed_iterator_t<OutR>>
+      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<OutR>>
         reverse_copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
     // transform (unary)
