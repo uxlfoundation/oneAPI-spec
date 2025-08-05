@@ -52,35 +52,30 @@ of parallel range algorithms.
 .. code:: cpp
 
    // C++20 analogue of std::projected_value_t; exposition only
-   template<typename I, typename Proj>
+   template <typename I, typename Proj>
    using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
 
-  // Extension of C++20 exposition-only special memory concepts as defined in [special.mem.concepts]
-  template<typename S, typename I>
-  concept no-throw-sized-sentinel-for = // exposition only
-    no-throw-sentinel-for<S, I> &&
-    std::sized_sentinel_for<S, I>;
+  // C++20 analogue of nothrow-random-access-range proposed for C++26 in P3179R9; exposition only
+  template <typename R>
+  concept nothrow-random-access-range =
+    std::ranges::random_access_range<R> &&
+    std::is_lvalue_reference_v<std::iter_reference_t<I>> &&
+    std::same_as<std::remove_cvref_t<std::iter_reference_t<I>>, std::iter_value_t<I>> &&
+    std::sized_sentinel_for<std::ranges::sentinel_t<R>, std::ranges::iterator_t<R>>;
 
-  template<typename I>
-  concept no-throw-bidirectional-iterator = // exposition only
-    no-throw-forward-iterator<I> &&
-    std::bidirectional_iterator<I>;
+Semantic Requirements
+~~~~~~~~~~~~~~~~~~~~
 
-  template<typename I>
-  concept no-throw-random-access-iterator = // exposition only
-    no-throw-bidirectional-iterator<I> &&
-    std::random_access_iterator<I> &&
-    no-throw-sized-sentinel-for<I, I>;
+A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown from:
 
-  template<typename R>
-  concept no-throw-bidirectional-range = // exposition only
-    no-throw-forward-range<R> &&
-    no-throw-bidirectional-iterator<std::ranges::iterator_t<R>>;
-
-  template<typename R>
-  concept no-throw-random-access-range = // exposition only
-    no-throw-bidirectional-range<R> &&
-    no-throw-random-access-iterator<std::ranges::iterator_t<R>>;
+- increment, decrement, copy construction, move construction, copy assignment, move assignment,
+  comparisons or indirection through valid iterators of type ``std::ranges::iterator_t<R>``;
+- ``-`` operator, copy construction, move construction, copy assignment, move assignment,
+  or comparisons between valid values of type ``std::ranges::iterator_t<R>`` and ``std::ranges::sentinel_t<R>``;
+- ``-``, ``+``, ``-=``, ``+=``, ``[]`` operators on valid values of type
+  ``std::ranges::iterator_t<R>`` and ``std::iter_difference_t<std::ranges::iterator_t<R>>``;
+- calls to ``std::ranges::begin()``, ``std::ranges::end()`` and ``std::ranges::size()``
+  on an object of type ``R``.
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
@@ -619,7 +614,7 @@ Uninitialized Memory Algorithms
   namespace oneapi::dpl::ranges {
 
     // uninitialized_default_construct
-    template <typename ExecutionPolicy, /*no-throw-random-access-range*/ R>
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::default_initializable<std::ranges::range_value_t<R>>
@@ -627,7 +622,7 @@ Uninitialized Memory Algorithms
         uninitialized_default_construct (ExecutionPolicy&& pol, R&& r);
 
     // uninitialized_value_construct
-    template <typename ExecutionPolicy, /*no-throw-random-access-range*/ R>
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::default_initializable<std::ranges::range_value_t<R>>
@@ -635,7 +630,7 @@ Uninitialized Memory Algorithms
         uninitialized_value_construct (ExecutionPolicy&& pol, R&& r, const std::ranges::range_value_t<R>& value);
 
     // uninitialized_copy
-    template <typename ExecutionPolicy, std::random_access_range IR, /*no-throw-random-access-range*/ OR>
+    template <typename ExecutionPolicy, std::random_access_range IR, /*nothrow-random-access-range*/ OR>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<IR> && std::ranges::sized_range<OR> &&
                std::constructible_from<std::ranges::range_value_t<OR>, std::ranges::range_reference_t<IR>>
@@ -645,7 +640,7 @@ Uninitialized Memory Algorithms
 
     // uninitialized_move
     template <typename ExecutionPolicy, std::ranges::random_access_range IR,
-              /*no-throw-random-access-range*/ OR>
+              /*nothrow-random-access-range*/ OR>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<IR> && std::ranges::sized_range<OR> &&
                std::constructible_from<std::ranges::range_value_t<OR>, std::ranges::range_reference_t<IR>>
@@ -654,7 +649,7 @@ Uninitialized Memory Algorithms
         uninitialized_move (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
 
     // uninitialized_fill
-    template <typename ExecutionPolicy, /*no-throw-random-access-range*/ R,
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R,
               typename T>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
@@ -663,7 +658,7 @@ Uninitialized Memory Algorithms
         uninitialized_fill (ExecutionPolicy&& pol, R&& r, const T& value);
 
     // destroy
-    template <typename ExecutionPolicy, /*no-throw-random-access-range*/ R>
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::destructible<std::ranges::range_value_t<R>>
