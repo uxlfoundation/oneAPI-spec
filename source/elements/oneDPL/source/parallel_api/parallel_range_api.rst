@@ -34,7 +34,8 @@ The following differences to the standard C++ range algorithms apply:
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
 - ``reverse_copy`` returns ``std::ranges::in_in_out_result`` rather than its alias,
-  ``std::ranges::reverse_copy_truncated_result``.
+  ``std::ranges::reverse_copy_truncated_result``, which is proposed for C++26 in
+  [P3709R2](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3709r2.html).
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
