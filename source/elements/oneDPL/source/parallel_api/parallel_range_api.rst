@@ -64,7 +64,7 @@ of parallel range algorithms.
     std::sized_sentinel_for<std::ranges::sentinel_t<R>, std::ranges::iterator_t<R>>;
 
 Semantic Requirements
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown from:
 
