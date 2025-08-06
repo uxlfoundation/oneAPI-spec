@@ -33,6 +33,9 @@ The following differences to the standard C++ range algorithms apply:
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
+- ``reverse_copy`` returns ``std::ranges::in_in_out_result`` rather than the alias,
+  ``std::ranges::reverse_copy_truncated_result``, which is proposed for C++26 in
+  `P3709R2 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3709r2.html>`_.
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
@@ -429,6 +432,17 @@ Copying Mutating Operations
                                std::ranges::borrowed_iterator_t<OutR>>
         move (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
+    // reverse_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<OutR>>
+        reverse_copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
+
     // transform (unary)
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR, std::copy_constructible Fn,
@@ -457,6 +471,18 @@ Copying Mutating Operations
                                            std::ranges::borrowed_iterator_t<OutR>>
         transform (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Fn binary_op,
                    Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // unique_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Proj = std::identity,
+              std::indirect_equivalence_relation<std::projected<std::ranges::iterator_t<R>, Proj>>
+                    Comp = std::ranges::equal_to>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::unique_copy_result<std::ranges::borrowed_iterator_t<R>,
+                                      std::ranges::borrowed_iterator_t<OutR>>
+        unique_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, Comp comp = {}, Proj proj = {});
 
   }
 
