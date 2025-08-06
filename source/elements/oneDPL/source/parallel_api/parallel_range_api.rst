@@ -475,7 +475,7 @@ Copying Mutating Operations
     // unique_copy
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR, typename Proj = std::identity,
-              std::indirect_equivalence_relation< std::projected<std::ranges::iterator_t<R>, Proj> >
+              std::indirect_equivalence_relation<std::projected<std::ranges::iterator_t<R>, Proj>>
                     Comp = std::ranges::equal_to>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
