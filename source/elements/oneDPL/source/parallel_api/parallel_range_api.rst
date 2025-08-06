@@ -60,7 +60,8 @@ of parallel range algorithms.
   concept nothrow-random-access-range =
     std::ranges::random_access_range<R> &&
     std::is_lvalue_reference_v<std::iter_reference_t<std::ranges::iterator_t<R>>> &&
-    std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>, std::iter_value_t<std::ranges::iterator_t<R>>> &&
+    std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>,
+                 std::iter_value_t<std::ranges::iterator_t<R>>> &&
     std::sized_sentinel_for<std::ranges::sentinel_t<R>, std::ranges::iterator_t<R>>;
 
 Semantic Requirements
