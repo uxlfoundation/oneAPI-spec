@@ -33,7 +33,7 @@ The following differences to the standard C++ range algorithms apply:
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
-- ``reverse_copy`` returns ``std::ranges::in_in_out_result`` rather than its alias,
+- ``reverse_copy`` returns ``std::ranges::in_in_out_result`` rather than the alias,
   ``std::ranges::reverse_copy_truncated_result``, which is proposed for C++26 in
   `P3709R2 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3709r2.html>`_.
 
