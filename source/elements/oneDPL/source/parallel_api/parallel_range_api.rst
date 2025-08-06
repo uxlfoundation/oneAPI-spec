@@ -33,7 +33,9 @@ The following differences to the standard C++ range algorithms apply:
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
-- ``destroy`` is not marked with ``noexcept``.
+- ``destroy`` is not marked with ``noexcept``, unlike how it is specified in the
+  `P3179R9 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3179r9.html#modify_memory_syn>`_
+  proposal for C++26.
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
