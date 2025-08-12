@@ -32,10 +32,10 @@ The following differences to the standard C++ serial range algorithms apply:
 - For algorithms with bounded output ranges, processing may not need to go over all the input data.
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
-- ``for_each`` does not return its function object.
-- ``reverse_copy`` returns ``std::ranges::in_in_out_result`` rather than the alias,
-  ``std::ranges::reverse_copy_truncated_result``, which is proposed for C++26 in
-  `P3709R2 <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3709r2.html>`_.
+- The return type of ``reverse_copy`` is ``std::ranges::in_in_out_result``
+  rather than ``std::ranges::reverse_copy_result``.
+  The semantics of the returned value are as specified in
+  `P3709R2 <https://isocpp.org/files/papers/P3709R2.html>`_.
 
 Except for these differences, the signatures of parallel range algorithms correspond to the working draft
 of the next edition of the C++ standard (C++26).
