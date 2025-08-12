@@ -17,7 +17,7 @@ defined by the C++ standard in ``namespace std::ranges``, they cannot be found b
 and cannot be called with explicitly specified template arguments. [*Note*: A typical implementation uses
 predefined function objects which static function call operators have the required signatures. -- *end note*]
 
-The following differences to the standard C++ range algorithms apply:
+The following differences to the standard C++ serial range algorithms apply:
 
 - Parallel range algorithms cannot be used in constant expressions.
 - The oneDPL execution policy parameter is added.
