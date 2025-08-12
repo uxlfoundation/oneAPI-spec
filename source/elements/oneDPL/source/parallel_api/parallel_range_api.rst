@@ -61,8 +61,7 @@ of parallel range algorithms.
     std::ranges::random_access_range<R> &&
     std::is_lvalue_reference_v<std::iter_reference_t<std::ranges::iterator_t<R>>> &&
     std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>,
-                 std::iter_value_t<std::ranges::iterator_t<R>>> &&
-    std::sized_sentinel_for<std::ranges::sentinel_t<R>, std::ranges::iterator_t<R>>;
+                 std::iter_value_t<std::ranges::iterator_t<R>>>;
 
 Semantic Requirements
 ~~~~~~~~~~~~~~~~~~~~~
@@ -72,7 +71,7 @@ A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown 
 - increment, decrement, copy construction, move construction, copy assignment, move assignment,
   comparisons or indirection through valid iterators of type ``std::ranges::iterator_t<R>``;
 - ``-`` operator, copy construction, move construction, copy assignment, move assignment,
-  or comparisons between valid values of type ``std::ranges::iterator_t<R>`` and ``std::ranges::sentinel_t<R>``;
+  or comparisons between valid values of type ``std::ranges::iterator_t<R>``;
 - ``-``, ``+``, ``-=``, ``+=``, ``[]`` operators on valid values of type
   ``std::ranges::iterator_t<R>`` and ``std::iter_difference_t<std::ranges::iterator_t<R>>``;
 - calls to ``std::ranges::begin()``, ``std::ranges::end()`` and ``std::ranges::size()``
