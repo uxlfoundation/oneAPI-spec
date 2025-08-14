@@ -17,8 +17,9 @@ defined by the C++ standard in ``namespace std::ranges``, they cannot be found b
 and cannot be called with explicitly specified template arguments. [*Note*: A typical implementation uses
 predefined function objects which static function call operators have the required signatures. -- *end note*]
 
-The following differences to the standard C++ range algorithms apply:
+The following differences to the standard serial C++ range algorithms apply:
 
+- Allow list initialization of value parameters, as in the working draft of the next C++ standard edition (C++26)
 - Parallel range algorithms cannot be used in constant expressions.
 - The oneDPL execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
@@ -33,9 +34,6 @@ The following differences to the standard C++ range algorithms apply:
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
-
-Except for these differences, the signatures of parallel range algorithms correspond to the working draft
-of the next edition of the C++ standard (C++26).
 
 Auxiliary Definitions
 +++++++++++++++++++++
