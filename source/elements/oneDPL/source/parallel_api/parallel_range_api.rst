@@ -35,6 +35,9 @@ The following differences to the standard serial C++ range algorithms apply:
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
 
+[*Note*: These oneDPL algorithms mostly match the semantics of the parallel range algorithms in the C++26 working draft.
+-- *end note*]
+
 Auxiliary Definitions
 +++++++++++++++++++++
 
