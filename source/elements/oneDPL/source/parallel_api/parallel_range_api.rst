@@ -19,7 +19,7 @@ predefined function objects which static function call operators have the requir
 
 The following differences to the standard serial C++ range algorithms apply:
 
-- Allow list initialization of value parameters, as in the working draft of the next C++ standard edition (C++26)
+- Allow list initialization of value parameters, as in the working draft of the next C++ standard edition (C++26).
 - Parallel range algorithms cannot be used in constant expressions.
 - The oneDPL execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
