@@ -289,7 +289,6 @@ Sequence Search and Comparison
         mismatch (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
                   Proj1 proj1 = {}, Proj2 proj2 = {});
 
-
     // find_end
     template<typename ExecutionPolicy, std::ranges::random_access_range R1,
              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
@@ -401,7 +400,7 @@ Set operations
     // includes
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
               std::ranges::random_access_range R2,
-              typename Proj1 = std::identity, typename Proj2 = std::identity>
+              typename Proj1 = std::identity, typename Proj2 = std::identity,
               std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R1>, Proj1>,
                                                std::projected<std::ranges::iterator_t<R2>, Proj2> >
                     Comp = std::ranges::less>
