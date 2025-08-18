@@ -628,10 +628,12 @@ Uninitialized Memory Algorithms
         uninitialized_value_construct (ExecutionPolicy&& pol, R&& r);
 
     // uninitialized_copy
-    template <typename ExecutionPolicy, std::random_access_range IR, /*nothrow-random-access-range*/ OR>
+    template <typename ExecutionPolicy, std::random_access_range IR,
+              /*nothrow-random-access-range*/ OR>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<IR> && std::ranges::sized_range<OR> &&
-               std::constructible_from<std::ranges::range_value_t<OR>, std::ranges::range_reference_t<IR>>
+               std::constructible_from<std::ranges::range_value_t<OR>,
+                                       std::ranges::range_reference_t<IR>>
       std::ranges::uninitialized_copy_result<std::ranges::borrowed_iterator_t<IR>,
                                              std::ranges::borrowed_iterator_t<OR>>
         uninitialized_copy (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
@@ -641,7 +643,8 @@ Uninitialized Memory Algorithms
               /*nothrow-random-access-range*/ OR>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<IR> && std::ranges::sized_range<OR> &&
-               std::constructible_from<std::ranges::range_value_t<OR>, std::ranges::range_rvalue_reference_t<IR>>
+               std::constructible_from<std::ranges::range_value_t<OR>,
+                                       std::ranges::range_rvalue_reference_t<IR>>
       std::ranges::uninitialized_move_result<std::ranges::borrowed_iterator_t<IR>,
                                              std::ranges::borrowed_iterator_t<OR>>
         uninitialized_move (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
