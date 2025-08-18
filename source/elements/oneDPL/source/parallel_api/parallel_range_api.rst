@@ -17,7 +17,7 @@ defined by the C++ standard in ``namespace std::ranges``, they cannot be found b
 and cannot be called with explicitly specified template arguments. [*Note*: A typical implementation uses
 predefined function objects which static function call operators have the required signatures. -- *end note*]
 
-The following differences to the standard C++ serial range algorithms apply:
+The following differences to the standard C++ range algorithms apply:
 
 - Parallel range algorithms cannot be used in constant expressions.
 - The oneDPL execution policy parameter is added.
@@ -32,6 +32,7 @@ The following differences to the standard C++ serial range algorithms apply:
 - For algorithms with bounded output ranges, processing may not need to go over all the input data.
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
+- ``for_each`` does not return its function object.
 - The return type of ``reverse_copy`` is ``std::ranges::in_in_out_result``
   rather than ``std::ranges::reverse_copy_result``.
   The semantics of the returned value are as specified in
