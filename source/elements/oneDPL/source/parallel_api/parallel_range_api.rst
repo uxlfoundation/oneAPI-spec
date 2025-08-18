@@ -55,16 +55,14 @@ of parallel range algorithms.
    template <typename I, typename Proj>
    using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
 
-  // C++20 analogue of nothrow-random-access-range proposed for C++26 in P3179R9; exposition only
+  // C++20 analogue of nothrow-random-access-range in the C++26 working draft; exposition only
+  // Semantic requirements are listed further below
   template <typename R>
   concept nothrow-random-access-range =
     std::ranges::random_access_range<R> &&
     std::is_lvalue_reference_v<std::iter_reference_t<std::ranges::iterator_t<R>>> &&
     std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>,
                  std::iter_value_t<std::ranges::iterator_t<R>>>;
-
-Semantic Requirements
-~~~~~~~~~~~~~~~~~~~~~
 
 A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown from:
 
@@ -627,7 +625,7 @@ Uninitialized Memory Algorithms
                std::ranges::sized_range<R> &&
                std::default_initializable<std::ranges::range_value_t<R>>
       std::ranges::borrowed_iterator_t<R>
-        uninitialized_value_construct (ExecutionPolicy&& pol, R&& r, const std::ranges::range_value_t<R>& value);
+        uninitialized_value_construct (ExecutionPolicy&& pol, R&& r);
 
     // uninitialized_copy
     template <typename ExecutionPolicy, std::random_access_range IR, /*nothrow-random-access-range*/ OR>
@@ -649,8 +647,7 @@ Uninitialized Memory Algorithms
         uninitialized_move (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
 
     // uninitialized_fill
-    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R,
-              typename T>
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R, typename T>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::constructible_from<std::ranges::range_value_t<R>, const T&>
