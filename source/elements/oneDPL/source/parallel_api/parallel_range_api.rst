@@ -64,9 +64,12 @@ of parallel range algorithms.
     std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>,
                  std::iter_value_t<std::ranges::iterator_t<R>>>;
 
-A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown from
-any operation on an object of type ``std::ranges::iterator_t<R>``
-required by the ``std::random_access_iterator`` concept.
+A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown from:
+
+- any operation on an object of type ``std::ranges::iterator_t<R>``
+  required by the ``std::random_access_iterator`` concept;
+- calls to ``std::ranges::begin()``, ``std::ranges::end()`` and ``std::ranges::size()``
+  on an object of type ``R``.
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
