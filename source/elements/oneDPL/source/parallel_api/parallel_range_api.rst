@@ -478,7 +478,7 @@ In-place Mutating Operations
                std::indirectly_writable<std::ranges::iterator_t<R>, const T&>
       std::ranges::borrowed_iterator_t<R>
         fill (ExecutionPolicy&& pol, R&& r, const T& value);
-  
+
     // replace
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
@@ -524,6 +524,33 @@ In-place Mutating Operations
                std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
       std::ranges::borrowed_subrange_t<R>
         remove_if (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // reverse
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_iterator_t<R>
+        reverse (ExecutionPolicy&& pol, R&& r);
+
+    // swap_ranges
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_swappable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>>
+      std::ranges::swap_ranges_result<std::ranges::borrowed_iterator_t<R1>,
+                                      std::ranges::borrowed_iterator_t<R2>>
+        swap_ranges (ExecutionPolicy&& pol, R1&& r1, R2&& r2);
+
+    // unique
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_equivalence_relation< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::equal_to>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        unique (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
   }
 
