@@ -311,7 +311,6 @@ Sequence Search and Comparison
         mismatch (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
                   Proj1 proj1 = {}, Proj2 proj2 = {});
 
-
     // find_end
     template<typename ExecutionPolicy, std::ranges::random_access_range R1,
              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
