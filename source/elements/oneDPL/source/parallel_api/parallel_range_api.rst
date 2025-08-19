@@ -646,7 +646,8 @@ Uninitialized Memory Algorithms
         uninitialized_move (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
 
     // uninitialized_fill
-    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R, typename T>
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R,
+              typename T = std::ranges::range_value_t<R>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::constructible_from<std::ranges::range_value_t<R>, const T&>
