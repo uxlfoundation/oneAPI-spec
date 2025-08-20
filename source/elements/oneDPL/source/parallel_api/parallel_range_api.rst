@@ -660,6 +660,7 @@ Uninitialized Memory Algorithms
                std::destructible<std::ranges::range_value_t<R>>
       std::ranges::borrowed_iterator_t<R>
         destroy (ExecutionPolicy&& pol, R&& r);
+
   }
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
