@@ -38,6 +38,7 @@ The following differences to the standard serial C++ range algorithms apply:
   rather than ``std::ranges::reverse_copy_result``.
   The semantics of the returned value are as specified in
   `P3709R2 <https://isocpp.org/files/papers/P3709R2.html>`_.
+- ``destroy`` is not marked with ``noexcept``.
 
 [*Note*: These oneDPL algorithms mostly match the semantics of the parallel range algorithms in the C++26 working draft.
 -- *end note*]
@@ -51,8 +52,24 @@ of parallel range algorithms.
 .. code:: cpp
 
    // C++20 analogue of std::projected_value_t; exposition only
-   template<typename I, typename Proj>
+   template <typename I, typename Proj>
    using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
+
+  // C++20 analogue of nothrow-random-access-range in the C++26 working draft; exposition only
+  // Semantic requirements are listed further below
+  template <typename R>
+  concept nothrow-random-access-range =
+    std::ranges::random_access_range<R> &&
+    std::is_lvalue_reference_v<std::iter_reference_t<std::ranges::iterator_t<R>>> &&
+    std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>,
+                 std::iter_value_t<std::ranges::iterator_t<R>>>;
+
+A type ``R`` models ``nothrow-random-access-range`` if no exceptions are thrown from:
+
+- any operation on an object of type ``std::ranges::iterator_t<R>``
+  required by the ``std::random_access_iterator`` concept;
+- calls to ``std::ranges::begin()``, ``std::ranges::end()`` and ``std::ranges::size()``
+  on an object of type ``R``.
 
 Whole Sequence Operations
 +++++++++++++++++++++++++
@@ -293,7 +310,6 @@ Sequence Search and Comparison
                                    std::ranges::borrowed_iterator_t<R2>>
         mismatch (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
                   Proj1 proj1 = {}, Proj2 proj2 = {});
-                  
 
     // find_end
     template<typename ExecutionPolicy, std::ranges::random_access_range R1,
@@ -578,6 +594,72 @@ In-place Mutating Operations
                std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
       std::ranges::borrowed_subrange_t<R>
         unique (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+  }
+
+Uninitialized Memory Algorithms
++++++++++++++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/memory>
+
+  namespace oneapi::dpl::ranges {
+
+    // uninitialized_default_construct
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::default_initializable<std::ranges::range_value_t<R>>
+      std::ranges::borrowed_iterator_t<R>
+        uninitialized_default_construct (ExecutionPolicy&& pol, R&& r);
+
+    // uninitialized_value_construct
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::default_initializable<std::ranges::range_value_t<R>>
+      std::ranges::borrowed_iterator_t<R>
+        uninitialized_value_construct (ExecutionPolicy&& pol, R&& r);
+
+    // uninitialized_copy
+    template <typename ExecutionPolicy, std::random_access_range IR,
+              /*nothrow-random-access-range*/ OR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<IR> && std::ranges::sized_range<OR> &&
+               std::constructible_from<std::ranges::range_value_t<OR>,
+                                       std::ranges::range_reference_t<IR>>
+      std::ranges::uninitialized_copy_result<std::ranges::borrowed_iterator_t<IR>,
+                                             std::ranges::borrowed_iterator_t<OR>>
+        uninitialized_copy (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
+
+    // uninitialized_move
+    template <typename ExecutionPolicy, std::ranges::random_access_range IR,
+              /*nothrow-random-access-range*/ OR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<IR> && std::ranges::sized_range<OR> &&
+               std::constructible_from<std::ranges::range_value_t<OR>,
+                                       std::ranges::range_rvalue_reference_t<IR>>
+      std::ranges::uninitialized_move_result<std::ranges::borrowed_iterator_t<IR>,
+                                             std::ranges::borrowed_iterator_t<OR>>
+        uninitialized_move (ExecutionPolicy&& pol, IR&& in_range, OR&& out_range);
+
+    // uninitialized_fill
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R,
+              typename T = std::ranges::range_value_t<R>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::constructible_from<std::ranges::range_value_t<R>, const T&>
+      std::ranges::borrowed_iterator_t<R>
+        uninitialized_fill (ExecutionPolicy&& pol, R&& r, const T& value);
+
+    // destroy
+    template <typename ExecutionPolicy, /*nothrow-random-access-range*/ R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::destructible<std::ranges::range_value_t<R>>
+      std::ranges::borrowed_iterator_t<R>
+        destroy (ExecutionPolicy&& pol, R&& r);
 
   }
 
