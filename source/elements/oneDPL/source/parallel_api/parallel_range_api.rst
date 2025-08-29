@@ -474,7 +474,6 @@ Set operations
                std::mergeable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
                               std::ranges::iterator_t<OutR>, Comp, Proj1, Proj2>
       std::ranges::set_difference_result<std::ranges::borrowed_iterator_t<R1>,
-                                         std::ranges::borrowed_iterator_t<R2>,
                                          std::ranges::borrowed_iterator_t<OutR>>
         set_difference (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
                         Proj1 proj1 = {}, Proj2 proj2 = {});
