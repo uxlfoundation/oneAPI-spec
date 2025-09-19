@@ -22,9 +22,14 @@ an array to be sorted. A type ``T`` would be *sortable* if:
 
 You can write a sorting template function in C++ that sorts an array of any type that is *sortable*.
 
+.. _pseudo_signatures:
+
+Pseudo-Signatures
+-----------------
+
 Two approaches for defining named requirements are *valid expressions* and *pseudo-signatures*.
 The ISO C++ standard follows the valid *expressions* approach, which shows what the usage pattern looks like for a requirement.
-It has the drawback of relegating important details to notational conventions. This document uses
+It has the drawback of relegating important details to notational conventions. This document mostly uses
 pseudo-signatures because they are concise and can be cut-and-pasted for an initial implementation.
 
 For example, the table below shows pseudo-signatures for a *sortable* type ``T``:
@@ -43,12 +48,18 @@ For example, the table below shows pseudo-signatures for a *sortable* type ``T``
 
 ---------------------------------------------------------------------------------------------
 
+A pseudo-signature describes how an implementation interacts with a type or a function.
 A real signature may differ from the pseudo-signature that it implements in ways where implicit
-conversions would deal with the difference. For an example type ``U``, the real signature that
-implements ``operator<`` in the table above can be expressed as ``int operator<( U x, U y )``,
-because C++ permits implicit conversion from ``int`` to ``bool``, and implicit conversion from ``U``
-to (``const U&``). Similarly, the real signature ``bool operator<( U& x, U& y )`` is acceptable
-because C++ permits implicit addition of a const qualifier to a reference type.
+conversions would deal with the difference: function parameters need to implicitly convert
+from the ones in the pseudo-signature, and return value needs to implicitly convert to the one
+in the pseudo-signature.
+
+For an example type ``U``, the real signature that implements ``operator<`` in the table above 
+can be expressed as ``int operator<( U x, U y )``, because C++ permits implicit conversion from
+``int`` to ``bool``, and implicit conversion from ``const U&`` to ``U`` if the type is copyable.
+For a counter-example, the real signature ``bool operator<( U& x, U& y )`` is not acceptable
+because C++ does not permit implicit removal of a const qualifier from a type, and so the code
+would not compile if the implementation attempts to pass a const object to the function.
 
 Algorithms
 ----------
@@ -81,7 +92,6 @@ Mutexes
 
 Containers
 ----------
-
 .. toctree::
    :titlesonly:
 
