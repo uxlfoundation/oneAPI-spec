@@ -34,8 +34,8 @@ The following differences to the standard serial C++ range algorithms apply:
   In that case, the returned value contains iterators pointing to the positions past the last elements
   processed according to the algorithm semantics.
 - ``for_each`` does not return its function object.
-- The return type of ``reverse_copy`` is ``std::ranges::in_in_out_result``
-  rather than ``std::ranges::reverse_copy_result``.
+- The return type of ``reverse_copy`` and ``rotate_copy`` is ``std::ranges::in_in_out_result``
+  rather than ``std::ranges::reverse_copy_result`` and ``std::ranges::rotate_copy_result``, respectively.
   The semantics of the returned value are as specified in
   `P3709R2 <https://isocpp.org/files/papers/P3709R2.html>`_.
 - ``destroy`` is not marked with ``noexcept``.
@@ -546,6 +546,18 @@ Copying Mutating Operations
                                     std::ranges::borrowed_iterator_t<OutR>>
         reverse_copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
+    // rotate_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<OutR>>
+        rotate_copy (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
+                     OutR&& result);
+
     // transform (unary)
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR, std::copy_constructible Fn,
@@ -659,6 +671,13 @@ In-place Mutating Operations
                std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
       std::ranges::borrowed_iterator_t<R>
         reverse (ExecutionPolicy&& pol, R&& r);
+
+    // rotate
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        rotate (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle);
 
     // swap_ranges
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
