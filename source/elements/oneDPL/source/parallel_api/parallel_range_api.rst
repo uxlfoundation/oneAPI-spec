@@ -653,6 +653,20 @@ In-place Mutating Operations
       std::ranges::borrowed_subrange_t<R>
         remove_if (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
+    // shift_left
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        shift_left (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> n);
+
+    // shift_right
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        shift_right (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> n);
+
     // reverse
     template <typename ExecutionPolicy, std::ranges::random_access_range R>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
