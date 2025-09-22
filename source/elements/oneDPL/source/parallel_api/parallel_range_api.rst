@@ -495,6 +495,58 @@ Set operations
                                  Comp comp = {}, Proj1 proj1 = {}, Proj2 proj2 = {});
   }
 
+Partition operations
+++++++++++++++++++++
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // is_partitioned
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      bool is_partitioned (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // partition
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        partition (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // stable_partition
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        stable_partition (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // partition_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR1, std::ranges::random_access_range OutR2,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR1> &&
+               std::ranges::sized_range<OutR2> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR1>> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR2>>
+      std::ranges::partition_copy_result<std::ranges::borrowed_iterator_t<R>,
+                                         std::ranges::borrowed_iterator_t<OutR1>,
+                                         std::ranges::borrowed_iterator_t<OutR2>>
+        partition_copy (ExecutionPolicy&& pol, R&& r, OutR1&& out_true_r, OutR2&& out_false_r,
+                        Pred pred, Proj proj = {});
+  }
+
 Copying Mutating Operations
 +++++++++++++++++++++++++++
 
