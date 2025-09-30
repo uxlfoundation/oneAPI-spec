@@ -24,13 +24,16 @@ iterators. However, they are indirectly device accessible because they represent
 When passed to oneDPL algorithms with a ``device_policy``, indirectly device accessible iterator types that are also
 random access iterators and satisfy *SYCL device-copyable* must not cause unnecessary data movement beyond what is
 required by the algorithm's semantics and what would be required to use the type directly within a SYCL kernel.
-Indirectly device accessible buffer position objects must not cause unnecessary data movement beyond what is
-required by the algorithm's semantics and what would be required by using an accessor to the buffer within a SYCL
-kernel. With the oneDPL iterators defined below and any custom-defined iterator types, individual rules are defined for
+
+When passed to oneDPL algorithms with a ``device_policy``, indirectly device accessible buffer position objects must not
+cause unnecessary data movement beyond what is required by the algorithm's semantics and what would be required by using
+an accessor to the buffer within a SYCL kernel.
+
+With the oneDPL iterators defined below and any custom-defined iterator types, individual rules are defined for
 when they are indirectly device accessible. These iterators may be composed of a mix of buffer position objects, random
-access iterators, or other oneDPL iterators. When using these indirectly device accessible oneDPL iterators with a
-``device_policy``, they must not cause unnecessary data movement beyond what is required by the algorithm's semantics
-and what would be required by using the components directly within a SYCL kernel.
+access iterators, or other oneDPL or custom iterators. When such a type is indirectly accessible and used in oneDPL
+algorithms with a ``device_policy``, it must not add unnecessary data movement beyond what is required by the
+algorithm's semantics and what would be required by using the components directly within a SYCL kernel.
 
 Indirect Device Accessibility Type Trait
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
