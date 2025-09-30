@@ -33,8 +33,8 @@ For the oneDPL iterators defined below and any custom-defined iterator types, in
 indirectly device accessible as expressed by the `is_indirectly_device_accessible` type trait. These iterators may be
 composed of a mix of buffer position objects, random access iterators, or other oneDPL or custom iterators. When such a
 type is indirectly device accessible and used in oneDPL algorithms with a ``device_policy``, it must not add unnecessary
- data movement beyond what is required by the algorithm's semantics and what would be required by using the components
- directly within a SYCL kernel.
+data movement beyond what is required by the algorithm's semantics and what would be required by using the components
+directly within a SYCL kernel.
 
 Indirect Device Accessibility Type Trait
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
