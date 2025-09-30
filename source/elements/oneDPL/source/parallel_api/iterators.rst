@@ -26,7 +26,11 @@ random access iterators and satisfy *SYCL device-copyable* must not cause unnece
 required by the algorithm's semantics and what would be required to use the type directly within a SYCL kernel.
 Indirectly device accessible buffer position objects must not cause unnecessary data movement beyond what is
 required by the algorithm's semantics and what would be required by using an accessor to the buffer within a SYCL
-kernel.
+kernel. With the oneDPL iterators defined below and any custom defined iterator types, individual rules are defined for
+when they are indirectly device accessible. These iterators may be composed of a mix of buffer position objects, random
+access iterators or other oneDPL iterators. When using these indirectly device accessible oneDPL iterators with a
+``device_policy``, they must not cause unnecessary data movement beyond what is required by the algorithm's semantics
+and what would be required by using the components directly within a SYCL kernel.
 
 Indirect Device Accessibility Type Trait
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -52,12 +56,12 @@ oneDPL Iterators
 The oneDPL iterators are defined in the ``<oneapi/dpl/iterator>`` header,
 in ``namespace oneapi::dpl``.
 
-Let us define a named requirement, ``AdaptingIteratorSource``, to describe valid random access iterator-like
+Let us define a named requirement, ``AdaptingIteratorSource``, to describe random access iterator-like
 types that can be used as source for oneDPL iterators as described below.
 The type ``Iter`` satisfies the ``AdaptingIteratorSource`` named requirement if it is any of the following:
 
 * A random access iterator
-* The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
 * A ``permutation_iterator``
 * A ``transform_iterator``
 * A ``counting_iterator``
@@ -209,7 +213,7 @@ algorithm with a ``device_policy``, ``SourceIterator`` must be indirectly device
 The type ``IndexMap`` must be one of the following:
 
 * A random access iterator
-* The unspecified iterator-like type returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
+* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
 * A ``permutation_iterator``
 * A ``transform_iterator``
 * A ``counting_iterator``
