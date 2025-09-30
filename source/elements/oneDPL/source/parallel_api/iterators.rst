@@ -29,11 +29,12 @@ When passed to oneDPL algorithms with a ``device_policy``, indirectly device acc
 cause unnecessary data movement beyond what is required by the algorithm's semantics and what would be required by using
 an accessor to the buffer within a SYCL kernel.
 
-With the oneDPL iterators defined below and any custom-defined iterator types, individual rules are defined for
-when they are indirectly device accessible. These iterators may be composed of a mix of buffer position objects, random
-access iterators, or other oneDPL or custom iterators. When such a type is indirectly accessible and used in oneDPL
-algorithms with a ``device_policy``, it must not add unnecessary data movement beyond what is required by the
-algorithm's semantics and what would be required by using the components directly within a SYCL kernel.
+For the oneDPL iterators defined below and any custom-defined iterator types, individual rules define when they are
+indirectly device accessible as expressed by the `is_indirectly_device_accessible` type trait. These iterators may be
+composed of a mix of buffer position objects, random access iterators, or other oneDPL or custom iterators. When such a
+type is indirectly device accessible and used in oneDPL algorithms with a ``device_policy``, it must not add unnecessary
+ data movement beyond what is required by the algorithm's semantics and what would be required by using the components
+ directly within a SYCL kernel.
 
 Indirect Device Accessibility Type Trait
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
