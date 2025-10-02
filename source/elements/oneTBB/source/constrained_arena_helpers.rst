@@ -33,5 +33,6 @@ Functions
     allows to reserve a number of slots in each created ``task_arena`` for application threads.
 
     .. note::
+
         If error occurs during system topology parsing, returns ``std::vector`` containing single
         ``task_arena`` object equivalent to ``task_arena(other_constraints, reserved_slots)``.
