@@ -40,26 +40,8 @@ tuple to all of its successors.
             explicit join_node( graph &g );
             join_node( const join_node &src );
 
-            template<typename B0, typename B1>
-            join_node( graph &g, B0 b0, B1 b1 );
-            template<typename B0, typename B1, typename B2>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2 );
-            template<typename B0, typename B1, typename B2, typename B3>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B4>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B5>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B5, typename B6>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B5, typename B6, typename B6>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B5, typename B6, typename B7>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B5, typename B6, typename B7, typename B8>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7, B8 b8 );
-            template<typename B0, typename B1, typename B2, typename B3, typename B5, typename B6, typename B7, typename B8, typename B9>
-            join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7, B8 b8, B9 b9 );
+            template <typename B0, typename... BN>
+            join_node( graph &g, B0 b0, BN... bn );
 
             input_ports_type &input_ports( );
 
@@ -119,31 +101,15 @@ Constructs an empty ``join_node`` that belongs to the graph ``g``.
 
 .. code:: cpp
 
-    template<typename B0, typename B1>
-    join_node( graph &g, B0 b0, B1 b1 );
-    template<typename B0, typename B1, typename B2>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2 );
-    template<typename B0, typename B1, , typename B2, typename B3>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B4>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B5>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B5, typename B6>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B5, typename B6, typename B6>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B5, typename B6, typename B7>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B5, typename B6, typename B7, typename B8>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7, B8 b8 );
-    template<typename B0, typename B1, , typename B2, typename B3, typename B5, typename B6, typename B7, typename B8, typename B9>
-    join_node( graph &g, B0 b0, B1 b1, B2 b2, B3 b3, B4 b4, B5 b5, B6 b6, B7 b7, B8 b8, B9 b9 );
+    template <typename B0, typename B1, typename... BN>
+    join_node( graph &g, B0 b0, B1 b1, BN... bn );
 
 A constructor only available in the ``key_matching`` specialization of ``join_node``.
 
 Creates a ``join_node`` that uses the function objects ``b0``, ``b1``, ... , ``bN`` to determine
 the tags for the input ports ``0`` through ``N``.
+
+**Constraints:**: only participates in overload resolution if ``std::tuple_size<OutputTuple>::value`` is ``2 + sizeof...(BN)``.
 
 .. caution::
 
