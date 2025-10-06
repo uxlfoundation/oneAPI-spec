@@ -167,14 +167,15 @@ Predefined Device Policies
 It is a global immutable (``const``) instance of type ``device_policy<>``.
 [*Note*: ``dpcpp_default`` can be copied but cannot be moved. -- *end note*]
 
-``dpdefault``, ``dpgpu``, and `dpcpu`` are variable templates for creating ``device_policy`` objects,
+``dpdefault``, ``dpgpu``, and ``dpcpu`` are variable templates for creating ``device_policy`` objects,
 possibly with explicit kernel names, to run algorithms on the default SYCL device, a GPU device,
 and a CPU device, respectively. An object instantiated from one of these templates is a global
 immutable ``device_policy`` object. It is associated with a SYCL queue constructed with
 the SYCL device selector that corresponds to the used variable template.
 [*Example*: ``dpgpu<>`` is associated with a queue created by ``sycl::gpu_selector_v``. -- *end example*]
 
-Creation or use of a `dpgpu` or a `dpcpu` policy object can throw ``sycl::exception`` if no appropriate device is found.
+Creation or use of a ``dpgpu`` or a ``dpcpu`` policy object can throw ``sycl::exception``
+if no appropriate device is found.
 
 make_device_policy Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
