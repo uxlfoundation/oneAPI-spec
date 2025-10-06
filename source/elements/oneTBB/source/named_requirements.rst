@@ -10,9 +10,9 @@ Named Requirements
 This section describes named requirements used in the oneTBB Specification.
 
 A *named requirement* is a set of requirements on a type. The requirements may be syntactic or semantic.
-The *named_requirement* term is similar to “Requirements on types and expressions” term which is defined
-by the ISO C++ Standard (chapter “Library Introduction”) or `“Named Requirements” section <https://en.cppreference.com/w/cpp/named_req>`_
-on the cppreference.com site.
+The *named requirement* term is similar to “Requirements on types and expressions” term which is defined
+by the ISO C++ Standard (chapter “Library Introduction”) or
+`“Named Requirements” section <https://en.cppreference.com/w/cpp/named_req>`_ on the cppreference.com site.
 
 For example, the named requirement of *sortable* could be defined as a set of requirements that enable
 an array to be sorted. A type ``T`` would be *sortable* if:
@@ -49,16 +49,17 @@ For example, the table below shows pseudo-signatures for a *sortable* type ``T``
 ---------------------------------------------------------------------------------------------
 
 A pseudo-signature describes how an implementation interacts with a type or a function.
-A real signature may differ from the pseudo-signature that it implements in ways where implicit
-conversions would deal with the difference: function parameters need to implicitly convert
-from the ones in the pseudo-signature, and return value needs to implicitly convert to the one
+A real signature (after template instantiation, if applicable) may differ from the pseudo-signature
+that it implements in ways where implicit
+conversions would deal with the difference: its function parameter types need to implicitly convert
+from the ones in the pseudo-signature, and the return value type needs to implicitly convert to the one
 in the pseudo-signature.
 
 For an example type ``U``, the real signature that implements ``operator<`` in the table above 
 can be expressed as ``int operator<( U x, U y )``, because C++ permits implicit conversion from
-``int`` to ``bool``, and implicit conversion from ``const U&`` to ``U`` if the type is copyable.
+``int`` to ``bool``, and implicit conversion from ``const U&`` to ``U`` if the type is copy-constructible.
 For a counter-example, the real signature ``bool operator<( U& x, U& y )`` is not acceptable
-because C++ does not permit implicit removal of a const qualifier from a type, and so the code
+because C++ does not permit implicit removal of a ``const`` qualifier from a type, and so the code
 would not compile if the implementation attempts to pass a const object to the function.
 
 Algorithms
