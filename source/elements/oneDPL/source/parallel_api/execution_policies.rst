@@ -174,8 +174,8 @@ immutable ``device_policy`` object. It is associated with a SYCL queue construct
 the SYCL device selector that corresponds to the used variable template.
 [*Example*: ``dpgpu<>`` is associated with a queue created by ``sycl::gpu_selector_v``. -- *end example*]
 
-Creation or use of a ``dpgpu`` or a ``dpcpu`` policy object can throw ``sycl::exception``
-if no appropriate device is found.
+Construction of predefined device policies must not throw exceptions.
+Use of a ``dpgpu`` or a ``dpcpu`` policy object can throw ``sycl::exception`` if no appropriate device is found.
 
 make_device_policy Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
