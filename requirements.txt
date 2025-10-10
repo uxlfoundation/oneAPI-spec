@@ -29,7 +29,7 @@ graphviz==0.20.1
 identify==2.5.33
 idna==3.7
 imagesize==1.4.1
-Jinja2==3.1.5
+Jinja2==3.1.6
 lxml==5.1.0
 MarkupSafe==2.1.5
 nodeenv==1.8.0
