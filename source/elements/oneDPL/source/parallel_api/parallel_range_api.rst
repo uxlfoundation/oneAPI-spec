@@ -8,6 +8,8 @@ Parallel Range Algorithms
 oneDPL provides variations of algorithms that work with ranges defined in the `C++ Standard`_, 6th edition (C++20)
 and newer. These algorithms execute according to a oneDPL execution policy supplied as the first argument,
 similarly to other oneDPL algorithms.
+[*Note*: These algorithms mostly match the semantics of the parallel range algorithms in the working draft
+of the next C++ standard edition (C++26). -- *end note*]
 
 The oneDPL parallel range algorithms rely on the functionality of C++20 and are not available in the code
 compiled for earlier editions of the C++ standard.
@@ -19,7 +21,7 @@ predefined function objects which static function call operators have the requir
 
 The following differences to the standard serial C++ range algorithms apply:
 
-- List initialization of value parameters is enabled, as in the working draft of the next C++ standard edition (C++26).
+- List initialization of value parameters is enabled, as in the C++26 working draft.
 - Parallel range algorithms cannot be used in constant expressions.
 - The oneDPL execution policy parameter is added.
 - Output data sequences are defined as ranges, not iterators.
@@ -40,9 +42,6 @@ The following differences to the standard serial C++ range algorithms apply:
   `P3709R2 <https://isocpp.org/files/papers/P3709R2.html>`_.
 - ``destroy`` is not marked with ``noexcept``.
 
-[*Note*: These oneDPL algorithms mostly match the semantics of the parallel range algorithms in the C++26 working draft.
--- *end note*]
-
 Auxiliary Definitions
 +++++++++++++++++++++
 
@@ -58,7 +57,7 @@ of parallel range algorithms.
   // C++20 analogue of nothrow-random-access-range in the C++26 working draft; exposition only
   // Semantic requirements are listed further below
   template <typename R>
-  concept nothrow-random-access-range =
+  concept /*nothrow-random-access-range*/ =
     std::ranges::random_access_range<R> &&
     std::is_lvalue_reference_v<std::iter_reference_t<std::ranges::iterator_t<R>>> &&
     std::same_as<std::remove_cvref_t<std::iter_reference_t<std::ranges::iterator_t<R>>>,
