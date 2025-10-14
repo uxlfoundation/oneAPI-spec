@@ -25,9 +25,9 @@ When passed to oneDPL algorithms with a ``device_policy``, indirectly device acc
 random access iterators and satisfy *SYCL device-copyable* must not cause unnecessary data movement beyond what is
 required by the algorithm's semantics and what would be required to use the type directly within a SYCL kernel.
 
-When passed to oneDPL algorithms with a ``device_policy``, indirectly device accessible buffer position objects must not
-cause unnecessary data movement beyond what is required by the algorithm's semantics and what would be required by using
-an accessor to the buffer within a SYCL kernel.
+Similarly, when passed to oneDPL algorithms with a ``device_policy``, buffer position objects must not cause
+unnecessary data movement beyond what is required by the algorithm's semantics and what would be required
+by using an accessor to the buffer within a SYCL kernel.
 
 For the oneDPL iterators defined below and any custom-defined iterator types, individual rules define when they are
 indirectly device accessible as expressed by the `is_indirectly_device_accessible` type trait. These iterators may be
