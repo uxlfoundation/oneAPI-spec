@@ -29,12 +29,9 @@ Similarly, when passed to oneDPL algorithms with a ``device_policy``, buffer pos
 unnecessary data movement beyond what is required by the algorithm's semantics and what would be required
 by using an accessor to the buffer within a SYCL kernel.
 
-For the oneDPL iterators defined below and any custom-defined iterator types, individual rules define when they are
-indirectly device accessible as expressed by the `is_indirectly_device_accessible` type trait. These iterators may be
-composed of a mix of buffer position objects, random access iterators, or other oneDPL or custom iterators. When such a
-type is indirectly device accessible and used in oneDPL algorithms with a ``device_policy``, it must not add unnecessary
-data movement beyond what is required by the algorithm's semantics and what would be required by using the components
-directly within a SYCL kernel.
+For indirectly device accessible types composed of multiple source components like the oneDPL iterators below, the same
+rules apply: they must not cause unnecessary data movement beyond what is required by the algorithm's semantics and what
+would be required by to use the individual components within a SYCL kernel.
 
 Indirect Device Accessibility Type Trait
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -228,7 +225,7 @@ The type ``IndexMap`` must be one of the following:
 * :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
 
 If the ``IndexMap`` is a buffer wrapper, the resulting type will be a buffer wrapper, not an iterator and cannot be
-directly dereferenced (see :doc:`Buffer position objects <buffer_wrappers>`).
+directly dereferenced, (see :doc:`Buffer position objects <buffer_wrappers>`).
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
 it is invoked to index into the index map. The corresponding value in the map is then used
