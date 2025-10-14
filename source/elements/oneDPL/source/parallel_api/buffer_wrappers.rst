@@ -3,8 +3,8 @@
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-Buffer Wrappers
----------------
+Buffer Position Objects
+-----------------------
 
 .. code:: cpp
 
@@ -95,5 +95,15 @@ for ``begin`` and ``end``. Otherwise, the behavior is undefined.
    dpl::fill(policy, buf_begin, buf_end_1, 42);      // OK
    auto buf_end_2 = dpl::end(buf, sycl::write_only, sycl::no_init); // arguments do not match
    dpl::fill(policy, buf_begin, buf_end_2, 42);                     // undefined behavior
+
+
+Buffer Wrappers
+---------------
+
+A *buffer wrapper* is an iterator-like category of types that is either a buffer position object returned by
+``oneapi::dpl::begin`` or ``oneapi::dpl::end`` or a type composed of at least one buffer position object. A buffer
+wrapper has the same capabilities and limitations as buffer position objects returned by ``oneapi::dpl::begin`` and
+``oneapi::dpl::end``. As described in the `iterators page, <iterators>`, buffer wrappers can be used as source types
+for oneDPL iterators, and the resulting type is also a buffer wrapper.
 
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html

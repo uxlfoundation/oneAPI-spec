@@ -65,12 +65,15 @@ types that can be used as source for oneDPL iterators as described below.
 The type ``Iter`` satisfies the ``AdaptingIteratorSource`` named requirement if it is any of the following:
 
 * A random access iterator
-* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
 * A ``permutation_iterator``
 * A ``transform_iterator``
 * A ``counting_iterator``
 * A ``discard_iterator``
 * A ``zip_iterator``
+* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
+
+If the ``AdaptingIteratorSource`` is a buffer wrapper, the resulting type will be a buffer wrapper, not an iterator, and
+cannot be directly dereferenced (see :doc:`Buffer position objects <buffer_wrappers>`).
 
 .. code:: cpp
 
@@ -217,12 +220,15 @@ algorithm with a ``device_policy``, ``SourceIterator`` must be indirectly device
 The type ``IndexMap`` must be one of the following:
 
 * A random access iterator
-* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` or ``oneapi::dpl::end``
 * A ``permutation_iterator``
 * A ``transform_iterator``
 * A ``counting_iterator``
 * A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
   ``std::iterator_traits<SourceIterator>::difference_type``
+* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
+
+If the ``IndexMap`` is a buffer wrapper, the resulting type will be a buffer wrapper, not an iterator and cannot be
+directly dereferenced (see :doc:`Buffer position objects <buffer_wrappers>`).
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
 it is invoked to index into the index map. The corresponding value in the map is then used
