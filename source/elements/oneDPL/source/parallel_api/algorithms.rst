@@ -6,10 +6,13 @@
 Parallel Algorithms
 -------------------
 
-oneDPL parallel algorithms are defined in the ``<oneapi/dpl/algorithm>`` header,
-in ``namespace oneapi::dpl``.
-These include functions analogous to the algorithms with execution policies defined
-in the `C++ Standard`_, 5th and 6th editions (C++17/20), as well as several additional algorithms.
+oneDPL parallel algorithms are function templates analogous to the algorithms with execution policies defined
+in the `C++ Standard`_, 5th and 6th editions (C++17/20), as well as additional non-standard function templates.
+
+oneDPL parallel algorithms reside in ``namespace oneapi::dpl``.
+Standard-aligned algorithms are defined in the ``<oneapi/dpl/algorithm>``, ``<oneapi/dpl/numeric>``,
+and ``<oneapi/dpl/memory>`` header files, aligned with how the `C++ Standard`_ places the respective functions
+into the standard header files.
 
 The parallel algorithms execute according to a oneDPL execution policy supplied as the first argument.
 
@@ -19,7 +22,8 @@ as in the working draft of the next C++ standard edition (C++26).
 Additional Algorithms
 +++++++++++++++++++++
 
-In addition to the standard aligned parallel algorithms, oneDPL provides the following algorithm functions.
+In addition to the standard-aligned parallel algorithms, oneDPL provides the following algorithm functions,
+defined in the ``<oneapi/dpl/algorithm>`` header.
 
 .. code:: cpp
 

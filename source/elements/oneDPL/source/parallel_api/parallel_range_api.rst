@@ -52,7 +52,8 @@ of parallel range algorithms.
 
    // C++20 analogue of std::projected_value_t; exposition only
    template <typename I, typename Proj>
-   using /*projected-value-type*/ = std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
+   using /*projected-value-type*/ =
+       std::remove_cvref_t<std::invoke_result_t<Proj&, std::iter_value_t<I>&>>;
 
   // C++20 analogue of nothrow-random-access-range in the C++26 working draft; exposition only
   // Semantic requirements are listed further below
