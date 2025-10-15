@@ -96,7 +96,7 @@ device_policy Class
 
 An object of the ``device_policy`` type is associated with a ``sycl::queue`` that is used
 to run algorithms on a SYCL device. When an algorithm runs with ``device_policy``
-it is capable of processing SYCL buffers (passed via the  ``oneapi::dpl::begin/end``
+it is capable of processing SYCL buffers (passed via ``oneapi::dpl::begin/end`` or other
 :doc:`buffer wrappers <buffer_wrappers>`), data in the host memory and data in Unified Shared Memory (USM), including
 device USM. Data placed in the host memory and USM can be passed to oneDPL algorithms
 as pointers and random access iterators, including :doc:`oneDPL iterators <iterators>`. The way to transfer data from

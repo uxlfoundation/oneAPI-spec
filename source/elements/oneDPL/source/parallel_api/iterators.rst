@@ -29,9 +29,8 @@ Similarly, when passed to oneDPL algorithms with a ``device_policy``, buffer pos
 unnecessary data movement beyond what is required by the algorithm's semantics and what would be required
 by using an accessor to the buffer within a SYCL kernel.
 
-For indirectly device accessible types composed of multiple source components like the oneDPL iterators below, the same
-rules apply: they must not cause unnecessary data movement beyond what is required by the algorithm's semantics and what
-would be required by to use the individual components within a SYCL kernel.
+The same requirement to prevent excessive data movements equally applies to indirectly device accessible types
+composed of one or more source components, such as the oneDPL iterators.
 
 Indirect Device Accessibility Type Trait
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -67,10 +66,10 @@ The type ``Iter`` satisfies the ``AdaptingIteratorSource`` named requirement if 
 * A ``counting_iterator``
 * A ``discard_iterator``
 * A ``zip_iterator``
-* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
+* A :doc:`buffer position object <buffer_wrappers>` type returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
 
-If the ``AdaptingIteratorSource`` is a buffer wrapper, the resulting type will be a buffer wrapper, not an iterator, and
-cannot be directly dereferenced (see :doc:`Buffer position objects <buffer_wrappers>`).
+If ``AdaptingIteratorSource`` is a buffer wrapper, a type built upon that also becomes a buffer wrapper, 
+not an iterator, and cannot be directly dereferenced (see :doc:`Buffer wrappers <buffer_wrappers>`).
 
 .. code:: cpp
 
@@ -222,10 +221,10 @@ The type ``IndexMap`` must be one of the following:
 * A ``counting_iterator``
 * A functor with a signature equivalent to ``T operator()(const T&) const`` where ``T`` is a
   ``std::iterator_traits<SourceIterator>::difference_type``
-* :doc:`Buffer position objects <buffer_wrappers>` returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
+* A :doc:`buffer position objects <buffer_wrappers>` type returned by ``oneapi::dpl::begin`` and ``oneapi::dpl::end``
 
-If the ``IndexMap`` is a buffer wrapper, the resulting type will be a buffer wrapper, not an iterator and cannot be
-directly dereferenced, (see :doc:`Buffer position objects <buffer_wrappers>`).
+If the ``IndexMap`` is a buffer wrapper, the `permutation_iterator` built upon that will be a buffer wrapper, not an
+iterator and cannot be directly dereferenced (see :doc:`Buffer position objects <buffer_wrappers>`).
 
 ``permutation_iterator::operator*`` uses the counter value of the instance on which
 it is invoked to index into the index map. The corresponding value in the map is then used
