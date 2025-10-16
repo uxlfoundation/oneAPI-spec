@@ -108,10 +108,12 @@ The following engines and engine adaptors with predefined parameters are defined
 .. code:: cpp
 
     template <int N>
-    using minstd_rand0_vec = linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 16807, 0, 2147483647>;
+    using minstd_rand0_vec =
+        linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 16807, 0, 2147483647>;
 
     template <int N>
-    using minstd_rand_vec = linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 48271, 0, 2147483647>;
+    using minstd_rand_vec =
+        linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 48271, 0, 2147483647>;
 
     template <int N>
     using ranlux24_base_vec = subtract_with_carry_engine<sycl::vec<uint_fast32_t, N>, 24, 10, 24>;
@@ -125,13 +127,12 @@ The following engines and engine adaptors with predefined parameters are defined
     template <int N>
     using ranlux48_vec = discard_block_engine<ranlux48_base_vec<N>, 389, 11>;
 
-    template <int N>
-    using philox4x32_vec =
-        philox_engine<sycl::vec<uint_fast32_t, N>, 32, 4, 10, 0xCD9E8D57, 0x9E3779B9, 0xD2511F53, 0xBB67AE85>;
+    using philox4x32_vec = philox_engine<sycl::vec<uint_fast32_t, N>, 32, 4, 10, 0xCD9E8D57, 0x9E3779B9,
+                                         0xD2511F53, 0xBB67AE85>;
 
     template <int N>
-    using philox4x64_vec = philox_engine<sycl::vec<uint_fast64_t, N>, 64, 4, 10, 0xCA5A826395121157, 0x9E3779B97F4A7C15,
-                                        0xD2E7470EE14C6C93, 0xBB67AE8584CAA73B>;
+    using philox4x64_vec = philox_engine<sycl::vec<uint_fast64_t, N>, 64, 4, 10, 0xCA5A826395121157,
+                                         0x9E3779B97F4A7C15, 0xD2E7470EE14C6C93, 0xBB67AE8584CAA73B>;
 
 Except for producing a ``sycl::vec`` of random values per invocation, the behavior of these engines is equivalent to
 the corresponding scalar engines, as described in the following table:
