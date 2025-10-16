@@ -51,8 +51,9 @@ Supported Functionality
    - ``cauchy_distribution``
    - ``extreme_value_distribution``
 
-[*Note*: The ``philox_engine`` class template and the corresponding predefined engines match the respective API
-in the working draft of the next C++ standard edition (C++26). -- *end note*]
+.. note::
+   The ``philox_engine`` class template and the corresponding predefined engines match the respective API
+   in the working draft of the next C++ standard edition (C++26).
 
 ``linear_congruential_engine``, ``subtract_with_carry_engine``, and ``philox_engine`` satisfy the uniform random bit generator requirements.
 
