@@ -130,8 +130,9 @@ The following engines and engine adaptors with predefined parameters are defined
     template <int N>
     using ranlux48_vec = discard_block_engine<ranlux48_base_vec<N>, 389, 11>;
 
-    using philox4x32_vec = philox_engine<sycl::vec<uint_fast32_t, N>, 32, 4, 10, 0xCD9E8D57, 0x9E3779B9,
-                                         0xD2511F53, 0xBB67AE85>;
+    template <int N>
+    using philox4x32_vec = philox_engine<sycl::vec<uint_fast32_t, N>, 32, 4, 10, 0xCD9E8D57,
+                                         0x9E3779B9, 0xD2511F53, 0xBB67AE85>;
 
     template <int N>
     using philox4x64_vec = philox_engine<sycl::vec<uint_fast64_t, N>, 64, 4, 10, 0xCA5A826395121157,
