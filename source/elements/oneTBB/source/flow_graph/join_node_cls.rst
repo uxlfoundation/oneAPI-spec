@@ -101,15 +101,15 @@ Constructs an empty ``join_node`` that belongs to the graph ``g``.
 
 .. code:: cpp
 
-    template <typename B0, typename B1, typename... BN>
-    join_node( graph &g, B0 b0, B1 b1, BN... bn );
+    template <typename B0, typename... BN>
+    join_node( graph &g, B0 b0, BN... bn );
 
 A constructor only available in the ``key_matching`` specialization of ``join_node``.
 
-Creates a ``join_node`` that uses the function objects ``b0``, ``b1``, ... , ``bN`` to determine
+Creates a ``join_node`` that uses the function objects ``b0``, ... , ``bN`` to determine
 the tags for the input ports ``0`` through ``N``.
 
-**Constraints:**: only participates in overload resolution if ``std::tuple_size<OutputTuple>::value`` is ``2 + sizeof...(BN)``.
+**Constraints:**: only participates in overload resolution if ``std::tuple_size<OutputTuple>::value`` is ``1 + sizeof...(BN)``.
 
 .. caution::
 
