@@ -416,6 +416,7 @@ Sorting and Merge
       std::ranges::borrowed_iterator_t<R>
         inplace_merge (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
                        Comp comp = {}, Proj proj = {});
+  }
 
 Set operations
 ++++++++++++++
