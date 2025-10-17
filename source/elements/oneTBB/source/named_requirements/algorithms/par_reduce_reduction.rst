@@ -13,11 +13,11 @@ A type `Reduction` satisfies `ParallelReduceReduction` if it meets the following
 
 **ParallelReduceReduction Requirements: Pseudo-Signature, Semantics**
 
-.. cpp:function:: Value Reduction::operator()(const Value& x, const Value& y) const
+.. cpp:function:: Value Reduction::operator()(Value&& x, Value&& y) const
 
-    Combines results ``x`` and ``y``.
-    ``Value`` type must be the same as a corresponding template parameter for the 
-    :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>` algorithm.
+    Combines the results ``x`` and ``y``.
+    The ``Value`` type must be the same as the corresponding template parameter for the 
+    :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`.
 
 See also:
 
