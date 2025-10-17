@@ -19,9 +19,15 @@ It should also meet one of the following requirements:
 
     Process the received item.
 
+----------------------------------------------------------------
+
+.. cpp:function:: void Body::operator()( ReferenceType item, oneapi::tbb::feeder<ItemType>& feeder ) const
+
 .. cpp:function:: void Body::operator()( ItemType&& item, oneapi::tbb::feeder<ItemType>& feeder ) const
 
     Process the received item. May invoke the ``feeder.add`` function to spawn additional items.
+    
+    The ``Body::operator()`` must accept both ``ReferenceType`` and ``ItemType&&`` values as the first argument.
 
 -----------------------------------------------------------------
 
