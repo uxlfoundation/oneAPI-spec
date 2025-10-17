@@ -348,8 +348,8 @@ Sequence Search and Comparison
 
   }
 
-Sorting and Merge
-+++++++++++++++++
+Sorting, Merge, and Heap Operations
++++++++++++++++++++++++++++++++++++
 
 .. code:: cpp
 
