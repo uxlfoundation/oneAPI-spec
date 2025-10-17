@@ -416,6 +416,7 @@ Sorting and Merge
       std::ranges::borrowed_iterator_t<R>
         inplace_merge (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
                        Comp comp = {}, Proj proj = {});
+
   }
 
 Set operations
@@ -501,6 +502,7 @@ Set operations
                                                    std::ranges::borrowed_iterator_t<OutR>>
         set_symmetric_difference (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result,
                                  Comp comp = {}, Proj1 proj1 = {}, Proj2 proj2 = {});
+
   }
 
 Copying Mutating Operations
