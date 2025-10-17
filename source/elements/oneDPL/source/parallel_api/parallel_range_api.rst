@@ -373,6 +373,31 @@ Sorting and Merge
       std::ranges::borrowed_iterator_t<R>
         stable_sort (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
+    // partial_sort
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Comp = std::ranges::less, typename Proj = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::sortable<std::ranges::iterator_t<R>, Comp, Proj>
+      std::ranges::borrowed_iterator_t<R>
+        partial_sort (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
+                      Comp comp = {}, Proj proj = {});
+
+    // partial_sort_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, typename Comp = std::ranges::less,
+              typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>> &&
+               std::sortable<std::ranges::iterator_t<R2>, Comp, Proj2> &&
+               std::indirect_strict_weak_order<Comp,
+                                               std::projected<std::ranges::iterator_t<R1>, Proj1>,
+                                               std::projected<std::ranges::iterator_t<R2>, Proj2> >
+      std::ranges::partial_sort_copy_result<std::ranges::borrowed_iterator_t<R1>,
+                                            std::ranges::borrowed_iterator_t<R2>>
+        partial_sort_copy (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Comp comp = {},
+                           Proj1 proj1 = {}, Proj2 proj2 = {});
+
     // is_sorted
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
@@ -408,30 +433,6 @@ Sorting and Merge
         merge (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Comp comp = {},
                Proj1 proj1 = {}, Proj2 proj2 = {});
 
-    // partial_sort
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Comp = std::ranges::less, typename Proj = std::identity>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::sortable<std::ranges::iterator_t<R>, Comp, Proj>
-      std::ranges::borrowed_iterator_t<R>
-        partial_sort (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
-                      Comp comp = {}, Proj proj = {});
-
-    // partial_sort_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
-              std::ranges::random_access_range R2, typename Comp = std::ranges::less,
-              typename Proj1 = std::identity, typename Proj2 = std::identity>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>> &&
-               std::sortable<std::ranges::iterator_t<R2>, Comp, Proj2> &&
-               std::indirect_strict_weak_order<Comp,
-                                               std::projected<std::ranges::iterator_t<R1>, Proj1>,
-                                               std::projected<std::ranges::iterator_t<R2>, Proj2> >
-      std::ranges::partial_sort_copy_result<std::ranges::borrowed_iterator_t<R1>,
-                                            std::ranges::borrowed_iterator_t<R2>>
-        partial_sort_copy (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Comp comp = {},
-                           Proj1 proj1 = {}, Proj2 proj2 = {});
   }
 
 Set operations
