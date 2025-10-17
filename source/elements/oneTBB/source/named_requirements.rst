@@ -32,6 +32,12 @@ The ISO C++ standard follows the valid *expressions* approach, which shows what 
 It has the drawback of relegating important details to notational conventions. This document mostly uses
 pseudo-signatures because they are concise and can be cut-and-pasted for an initial implementation.
 
+A pseudo-signature describes how an implementation interacts with a type or a function.
+A real function signature (after template instantiation, if applicable) may differ from the pseudo-signature
+that it implements in ways where implicit conversions would deal with the difference,
+transforming function parameter types from the ones in the pseudo-signature to the real signature,
+and transforming the actual return value type to the one in the pseudo-signature.
+
 For example, the table below shows pseudo-signatures for a *sortable* type ``T``:
 
 ---------------------------------------------------------------------------------------------
@@ -40,27 +46,26 @@ For example, the table below shows pseudo-signatures for a *sortable* type ``T``
 
 .. cpp:function:: bool operator<(const T& x, const T& y)
 
-  Compare x and y.
+  Compare ``x`` and ``y``.
 
 .. cpp:function:: void swap(T& x, T& y)
 
-  Swap x and y.
+  Swap ``x`` and ``y``.
 
 ---------------------------------------------------------------------------------------------
-
-A pseudo-signature describes how an implementation interacts with a type or a function.
-A real signature (after template instantiation, if applicable) may differ from the pseudo-signature
-that it implements in ways where implicit
-conversions would deal with the difference: its function parameter types need to implicitly convert
-from the ones in the pseudo-signature, and the return value type needs to implicitly convert to the one
-in the pseudo-signature.
 
 For an example type ``U``, the real signature that implements ``operator<`` in the table above 
 can be expressed as ``int operator<( U x, U y )``, because C++ permits implicit conversion from
 ``int`` to ``bool``, and implicit conversion from ``const U&`` to ``U`` if the type is copy-constructible.
 For a counter-example, the real signature ``bool operator<( U& x, U& y )`` is not acceptable
-because C++ does not permit implicit removal of a ``const`` qualifier from a type, and so the code
-would not compile if the implementation attempts to pass a const object to the function.
+because C++ does not permit implicit removal of the ``const`` qualifier from a type, and so the code
+would not compile if the implementation attempts to pass a constant object to the function.
+
+Besides pseudo-signatures, semantic requirements also need to be met by real types and functions.
+For example, while ``std::pair<U,U> swap(U x, U y)`` fits the pseudo-signature for *Sortable*
+via implicit conversion of references to values and implicit drop of the returned value
+(ignored by a library implementation), it is unable to swap the actual variables passed to the function
+and therefore does not meet the semantic requirements of *Sortable*.
 
 Algorithms
 ----------
