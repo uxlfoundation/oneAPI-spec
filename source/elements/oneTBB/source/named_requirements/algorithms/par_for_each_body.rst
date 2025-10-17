@@ -7,13 +7,15 @@ ParallelForEachBody
 ===================
 **[req.parallel_for_each_body]**
 
-A type `Body` satisfies `ParallelForBody` if it meets the `Function Objects`
-requirements described in the [function.objects] section of the ISO C++ standard.
-It should also meet one of the following requirements:
+A type `Body` satisfies `ParallelForEachBody` if it meets the `Function Objects`
+requirements described in the [function.objects] section of the ISO C++ standard,
+as well as it meets exactly one of the following two requirements for ``operator()``:
 
 ----------------------------------------------------------------
 
 **ParallelForEachBody Requirements: Pseudo-Signature, Semantics**
+
+Variant 1:
 
 .. cpp:function:: void Body::operator()( ReferenceType item ) const
 
@@ -21,9 +23,10 @@ It should also meet one of the following requirements:
 
 ----------------------------------------------------------------
 
-.. cpp:function:: void Body::operator()( ReferenceType item, oneapi::tbb::feeder<ItemType>& feeder ) const
+Variant 2:
 
-.. cpp:function:: void Body::operator()( ItemType&& item, oneapi::tbb::feeder<ItemType>& feeder ) const
+.. cpp:function:: void Body::operator()( ReferenceType item, oneapi::tbb::feeder<ItemType>& feeder ) const
+                  void Body::operator()( ItemType&& item, oneapi::tbb::feeder<ItemType>& feeder ) const
 
     Process the received item. May invoke the ``feeder.add`` function to spawn additional items.
     
@@ -31,12 +34,13 @@ It should also meet one of the following requirements:
 
 -----------------------------------------------------------------
 
-where ``ItemType`` is ``std::iterator_traits<InputIterator>::value_type`` for the type of the iterator
-the ``parallel_for_each`` algorithm operates with, and ``ReferenceType`` is
+where
 
-* ``std::iterator_traits<InputIterator>::reference`` if the iterator type is a forward iterator
-  as described in the [forward.iterators] section of the ISO C++ Standard;
-* otherwise, ``ItemType&&``.
+* ``ItemType`` is ``std::iterator_traits<Iterator>::value_type`` for the type of the iterator
+  the ``parallel_for_each`` algorithm operates with, and
+* ``ReferenceType`` is``std::iterator_traits<Iterator>::reference`` if the iterator type is a forward iterator
+  as described in the [forward.iterators] section of the ISO C++ Standard,
+* otherwise, ``ReferenceType`` is ``ItemType&&``.
 
 .. note::
 
