@@ -69,23 +69,22 @@ and therefore does not meet the semantic requirements of *Sortable*.
 
 The following table provides guidance for the types of parameters used in pseudo-signatures.
 
-================  ================================  =============================
-Pseudo-signature  General semantics                 Alternative real parameters
-parameter        
-================  ================================  =============================
-``const T& x``    The function is not supposed      ``T x``
-                  to modify the argument.           ``auto& x``
-                                                    ``auto&& x``, forwarding reference
+==========================  ================================  =============================
+Pseudo-signature parameter  General semantics                 Alternative real parameters
+==========================  ================================  =============================
+``const T& x``              The function is not supposed      - ``T x``
+                            to modify the argument.           - ``auto& x``
+                                                              - ``auto&& x``, forwarding reference
 
-``T& x``          The argument is a lvalue.         ``const T& x``
-                  The function can or is            ``T x``
-                  supposed to modify the argument.  ``auto& x``
-                                                    ``auto&& x``, forwarding reference
+``T& x``                    The argument is a lvalue.         - ``const T& x``
+                            The function can or is            - ``T x``
+                            supposed to modify the argument.  - ``auto& x``
+                                                              - ``auto&& x``, forwarding reference
 
-``T&& x``         The argument is a rvalue. The     - ``const T& x``
-                  function can use the argument     - ``T x``
-                  as a source in move operations.   - ``auto&& x``, forwarding reference
-================  ================================  =============================
+``T&& x``                   The argument is a rvalue. The     - ``const T& x``
+                            function can use the argument     - ``T x``
+                            as a source in move operations.   - ``auto&& x``, forwarding reference
+==========================  ================================  =============================
 
 Algorithms
 ----------
