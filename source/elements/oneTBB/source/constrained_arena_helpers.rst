@@ -24,13 +24,14 @@ Helper interfaces to create and manage multiple ``task_arena`` objects with cons
 Functions
 ---------
 
-.. cpp:function:: std::vector<oneapi::tbb::task_arena> create_numa_task_arenas(oneapi::tbb::task_arena::constraints other_constraints = {}, unsigned reserved_slots = 0)
+.. cpp:function:: std::vector<oneapi::tbb::task_arena> create_numa_task_arenas(oneapi::tbb::task_arena::constraints constraints = {}, unsigned reserved_slots = 0)
 
-    Returns a ``std::vector`` of ``task_arena`` objects, each bound to a separate NUMA node.
+    Returns a ``std::vector`` of non-initialized ``task_arena`` objects, each bound to a separate NUMA node.
     The number of created ``task_arena`` is equal to the number of NUMA nodes available on the system.
-    It optionally takes additional ``other_constraints`` argument to be applied to each created
-    ``task_arena``, ignoring ``numa_id`` value. The second optional ``reserved_slots`` argument
-    allows to reserve a number of slots in each created ``task_arena`` for application threads.
+    Additional ``constraints`` argument can be specified to further limit the threads joined
+    the ``task_arena`` objects. The ``numa_id`` value in the ``constraints`` argument is
+    ignored. The ``reserved_slots`` argument allows reserving specified number of slots in
+    ``task_arena`` objects for application threads.
 
     .. note::
 
