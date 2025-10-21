@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2025 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
@@ -9,7 +9,6 @@
 .. toctree::
    :maxdepth: 2
 
-   constrained_arena_helpers.rst
    memory_allocation.rst
    mutual_exclusion.rst
    timing.rst
