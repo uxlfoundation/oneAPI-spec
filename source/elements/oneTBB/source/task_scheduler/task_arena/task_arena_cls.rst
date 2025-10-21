@@ -333,7 +333,7 @@ Member functions
     The behavior of this function is equivalent to ``this->execute([&tg]{ return tg.wait(); })``.
 
 Non-member Functions
----------
+--------------------
 
 .. cpp:function:: std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints = {}, unsigned reserved_slots = 0)
 
