@@ -209,7 +209,7 @@ The exact signature of this deduction guide is unspecified.
 **Constraints:**: Participates in overload resolution only if the number of braced-init-lists provided is more than ``1`` and each list contains
 ``2`` or ``3`` elements of the same type, corresponding to ``blocked_range`` constructors with 2 and 3 arguments, respectively.
 
-**Example:**: ``blocked_nd_range range({0, 100}, {0, 100, 50})`` should deduce ``range`` as ``blocked_nd_range<int, 3>``.
+**Example:**: ``blocked_nd_range range({0, 100}, {0, 100, 50})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
 
 
 .. code:: cpp
