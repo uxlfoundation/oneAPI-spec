@@ -339,15 +339,13 @@ Non-member Functions
 
     Returns a ``std::vector`` of non-initialized ``task_arena`` objects, each bound to a separate NUMA node.
     The number of created ``task_arena`` is equal to the number of NUMA nodes on the system,
-    as determined by ``tbb::info::numa_nodes()``.
+    as determined by ``tbb::info::numa_nodes()``. If an error occurs during system information discovery,
+    returns a ``std::vector`` containing a single ``task_arena`` object created as ``task_arena(constraints, reserved_slots)``.
 
     Additional ``constraints`` argument can be specified to further limit the threads joined
     the ``task_arena`` objects. The ``numa_id`` value in the ``constraints`` argument is
     ignored. The ``reserved_slots`` argument allows reserving specified number of slots in
     ``task_arena`` objects for application threads.
-
-    If an error occurs during system information discovery, returns a ``std::vector`` containing a single
-    ``task_arena`` object created as ``task_arena(constraints, reserved_slots)``.
 
 Example
 -------
