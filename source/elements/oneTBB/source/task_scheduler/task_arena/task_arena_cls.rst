@@ -364,15 +364,15 @@ to the corresponding NUMA node.
 
     int main() {
         std::vector<oneapi::tbb::task_arena> arenas = oneapi::tbb::create_numa_task_arenas();
-        std::vector<oneapi::tbb::task_group> task_groups(numa_nodes.size());
+        std::vector<oneapi::tbb::task_group> task_groups(arenas.size());
 
-        for (int i = 0; i < numa_nodes.size(); i++) {
+        for (int i = 0; i < arenas.size(); i++) {
             arenas[i].enqueue([]{
                 /* executed by a thread pinned to the specified NUMA node */
             }, task_groups[i]);
         }
 
-        for (int i = 0; i < numa_nodes.size(); i++) {
+        for (int i = 0; i < arenas.size(); i++) {
             arenas[i].wait_for(task_groups[i]);
         }
 
