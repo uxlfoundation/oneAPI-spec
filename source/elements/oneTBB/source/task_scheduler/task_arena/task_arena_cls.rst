@@ -342,10 +342,12 @@ Non-member Functions
     as determined by ``tbb::info::numa_nodes()``. If an error occurs during system information discovery,
     returns a ``std::vector`` containing a single ``task_arena`` object created as ``task_arena(constraints, reserved_slots)``.
 
-    Additional ``constraints`` argument can be specified to further limit the threads joined
-    the ``task_arena`` objects. The ``numa_id`` value in the ``constraints`` argument is
-    ignored. The ``reserved_slots`` argument allows reserving specified number of slots in
-    ``task_arena`` objects for application threads.
+    The ``constraints`` argument can be specified to further limit threads joining
+    the ``task_arena`` objects. The ``numa_id`` value in ``constraints`` is automatically
+    replaced with a separate value for each created arena.
+    
+    The ``reserved_slots`` argument allows reserving a specified number of slots in
+    each ``task_arena`` object for application threads. By default, no slots are reserved.
 
 Example
 -------
