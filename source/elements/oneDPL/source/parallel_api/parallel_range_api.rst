@@ -384,6 +384,31 @@ Sorting, Merge, and Heap Operations
       std::ranges::borrowed_iterator_t<R>
         stable_sort (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
+    // partial_sort
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Comp = std::ranges::less, typename Proj = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::sortable<std::ranges::iterator_t<R>, Comp, Proj>
+      std::ranges::borrowed_iterator_t<R>
+        partial_sort (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
+                      Comp comp = {}, Proj proj = {});
+
+    // partial_sort_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Comp = std::ranges::less,
+              typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>> &&
+               std::sortable<std::ranges::iterator_t<OutR>, Comp, Proj2> &&
+               std::indirect_strict_weak_order<Comp,
+                                               std::projected<std::ranges::iterator_t<R>, Proj1>,
+                                               std::projected<std::ranges::iterator_t<OutR>, Proj2> >
+      std::ranges::partial_sort_copy_result<std::ranges::borrowed_iterator_t<R>,
+                                            std::ranges::borrowed_iterator_t<OutR>>
+        partial_sort_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, Comp comp = {},
+                           Proj1 proj1 = {}, Proj2 proj2 = {});
+
     // is_sorted
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
