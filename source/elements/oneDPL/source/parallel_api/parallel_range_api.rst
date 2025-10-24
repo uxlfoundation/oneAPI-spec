@@ -497,6 +497,7 @@ Set operations
 
 Partition operations
 ++++++++++++++++++++
+
 .. code:: cpp
 
   // Defined in <oneapi/dpl/algorithm>
@@ -516,8 +517,7 @@ Partition operations
               typename Proj = std::identity,
               std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> &&
-               std::permutable<std::ranges::iterator_t<R>>
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
       std::ranges::borrowed_subrange_t<R>
         partition (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
@@ -545,6 +545,7 @@ Partition operations
                                          std::ranges::borrowed_iterator_t<OutR2>>
         partition_copy (ExecutionPolicy&& pol, R&& r, OutR1&& out_true_r, OutR2&& out_false_r,
                         Pred pred, Proj proj = {});
+
   }
 
 Copying Mutating Operations
