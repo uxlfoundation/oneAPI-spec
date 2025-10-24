@@ -342,7 +342,8 @@ Non-member Functions
     as determined by ``tbb::info::numa_nodes()``.
     
     If an error occurs during system information discovery,
-    returns a ``std::vector`` containing a single ``task_arena`` object created as ``task_arena(constraints, reserved_slots)``.
+    returns a ``std::vector`` containing a single ``task_arena`` object created as 
+    ``task_arena(constraints.set_numa_id(task_arena::automatic), reserved_slots)``.
 
     The ``constraints`` argument can be specified to apply additional limitations to threads in
     the ``task_arena`` objects. For each created arena, the ``numa_id`` value in ``constraints``
