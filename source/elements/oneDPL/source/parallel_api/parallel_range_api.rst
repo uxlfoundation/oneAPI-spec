@@ -348,8 +348,8 @@ Sequence Search and Comparison
 
   }
 
-Sorting and Merge
-+++++++++++++++++
+Sorting, Merge, and Heap Operations
++++++++++++++++++++++++++++++++++++
 
 .. code:: cpp
 
@@ -416,6 +416,25 @@ Sorting and Merge
       std::ranges::borrowed_iterator_t<R>
         inplace_merge (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle,
                        Comp comp = {}, Proj proj = {});
+
+    // is_heap
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      bool is_heap (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // is_heap_until
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        is_heap_until (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
   }
 
