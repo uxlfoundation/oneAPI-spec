@@ -288,7 +288,7 @@ Sequence Search and Comparison
   namespace oneapi::dpl::ranges {
 
     // equal
-    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
              typename Proj1 = std::identity, typename Proj2 = std::identity>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
@@ -299,7 +299,7 @@ Sequence Search and Comparison
                   Proj1 proj1 = {}, Proj2 proj2 = {});
 
     // mismatch
-    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
              typename Proj1 = std::identity, typename Proj2 = std::identity>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
@@ -312,7 +312,7 @@ Sequence Search and Comparison
                   Proj1 proj1 = {}, Proj2 proj2 = {});
 
     // find_end
-    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
              typename Proj1 = std::identity, typename Proj2 = std::identity>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
@@ -324,7 +324,7 @@ Sequence Search and Comparison
                   Proj1 proj1 = {}, Proj2 proj2 = {});
 
     // search
-    template<typename ExecutionPolicy, std::ranges::random_access_range R1,
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
              typename Proj1 = std::identity, typename Proj2 = std::identity>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
@@ -336,7 +336,7 @@ Sequence Search and Comparison
                 Proj1 proj1 = {}, Proj2 proj2 = {});
 
     // search_n
-    template<typename ExecutionPolicy, std::ranges::random_access_range R,
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
              typename Pred = std::ranges::equal_to, typename Proj = std::identity,
              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
@@ -346,6 +346,17 @@ Sequence Search and Comparison
         search_n (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> count,
                   const T& value, Pred pred = {}, Proj proj = {});
 
+    // lexicographical_compare
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, typename Proj1 = std::identity,
+              typename Proj2 = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R1>, Proj1>,
+                                               std::projected<std::ranges::iterator_t<R2>, Proj2> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2>
+      bool lexicographical_compare (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Comp comp = {},
+                                   Proj1 proj1 = {}, Proj2 proj2 = {});
   }
 
 Sorting, Merge, and Heap Operations
