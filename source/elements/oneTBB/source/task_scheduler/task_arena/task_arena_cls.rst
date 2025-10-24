@@ -338,13 +338,15 @@ Non-member Functions
 .. cpp:function:: std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints = {}, unsigned reserved_slots = 0)
 
     Returns a ``std::vector`` of non-initialized ``task_arena`` objects, each bound to a separate NUMA node.
-    The number of created ``task_arena`` is equal to the number of NUMA nodes on the system,
-    as determined by ``tbb::info::numa_nodes()``. If an error occurs during system information discovery,
+    The number of created ``task_arena`` instances is equal to the number of NUMA nodes on the system,
+    as determined by ``tbb::info::numa_nodes()``.
+    
+    If an error occurs during system information discovery,
     returns a ``std::vector`` containing a single ``task_arena`` object created as ``task_arena(constraints, reserved_slots)``.
 
-    The ``constraints`` argument can be specified to further limit threads joining
-    the ``task_arena`` objects. The ``numa_id`` value in ``constraints`` is automatically
-    replaced with a separate value for each created arena.
+    The ``constraints`` argument can be specified to apply additional limitations to threads in
+    the ``task_arena`` objects. For each created arena, the ``numa_id`` value in ``constraints``
+    is automatically set to the corresponding NUMA node ID from ``tbb::info::numa_nodes()``.
     
     The ``reserved_slots`` argument allows reserving a specified number of slots in
     each ``task_arena`` object for application threads. By default, no slots are reserved.
