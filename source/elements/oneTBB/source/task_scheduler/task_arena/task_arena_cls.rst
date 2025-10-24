@@ -43,9 +43,9 @@ A class that represents an explicit, user-managed task scheduler arena.
                 };
 
                 task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
-                        priority a_priority = priority::normal);
+                           priority a_priority = priority::normal);
                 task_arena(constraints a_constraints, unsigned reserved_for_masters = 1,
-                        priority a_priority = priority::normal);
+                           priority a_priority = priority::normal);
                 task_arena(const task_arena &s);
                 explicit task_arena(oneapi::tbb::attach);
                 ~task_arena();
@@ -70,6 +70,9 @@ A class that represents an explicit, user-managed task scheduler arena.
 
                 task_group_status task_arena::wait_for(task_group& tg);
             };
+
+            std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints = {},
+                                                            unsigned reserved_slots = 0);
 
         } // namespace tbb
     } // namespace oneapi
@@ -329,6 +332,26 @@ Member functions
 
     The behavior of this function is equivalent to ``this->execute([&tg]{ return tg.wait(); })``.
 
+Non-member Functions
+--------------------
+
+.. cpp:function:: std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints = {}, unsigned reserved_slots = 0)
+
+    Returns a ``std::vector`` of non-initialized ``task_arena`` objects, each bound to a separate NUMA node.
+    The number of created ``task_arena`` instances is equal to the number of NUMA nodes on the system,
+    as determined by ``tbb::info::numa_nodes()``.
+    
+    If an error occurs during system information discovery,
+    returns a ``std::vector`` containing a single ``task_arena`` object created as 
+    ``task_arena(constraints.set_numa_id(task_arena::automatic), reserved_slots)``.
+
+    The ``constraints`` argument can be specified to apply additional limitations to threads in
+    the ``task_arena`` objects. For each created arena, the ``numa_id`` value in ``constraints``
+    is automatically set to the corresponding NUMA node ID from ``tbb::info::numa_nodes()``.
+    
+    The ``reserved_slots`` argument allows reserving a specified number of slots in
+    each ``task_arena`` object for application threads. By default, no slots are reserved.
+
 Example
 -------
 
@@ -343,21 +366,16 @@ to the corresponding NUMA node.
     #include <vector>
 
     int main() {
-        std::vector<oneapi::tbb::numa_node_id> numa_nodes = oneapi::tbb::info::numa_nodes();
-        std::vector<oneapi::tbb::task_arena> arenas(numa_nodes.size());
-        std::vector<oneapi::tbb::task_group> task_groups(numa_nodes.size());
+        std::vector<oneapi::tbb::task_arena> arenas = oneapi::tbb::create_numa_task_arenas();
+        std::vector<oneapi::tbb::task_group> task_groups(arenas.size());
 
-        for (int i = 0; i < numa_nodes.size(); i++) {
-            arenas[i].initialize(oneapi::tbb::task_arena::constraints(numa_nodes[i]));
-        }
-
-        for (int i = 0; i < numa_nodes.size(); i++) {
+        for (int i = 0; i < arenas.size(); i++) {
             arenas[i].enqueue([]{
                 /* executed by a thread pinned to the specified NUMA node */
             }, task_groups[i]);
         }
 
-        for (int i = 0; i < numa_nodes.size(); i++) {
+        for (int i = 0; i < arenas.size(); i++) {
             arenas[i].wait_for(task_groups[i]);
         }
 
