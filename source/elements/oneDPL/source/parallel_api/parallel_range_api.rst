@@ -209,17 +209,6 @@ Element Search Operations
                                                const T* >
       bool contains (ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
 
-    // contains_subrange
-    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
-              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
-              typename Proj1 = std::identity, typename Proj2 = std::identity>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
-               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
-                                           Pred, Proj1, Proj2 >
-      bool contains_subrange (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
-                              Proj1 proj1 = {}, Proj2 proj2 = {});
-
     // find_last
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
@@ -250,27 +239,6 @@ Element Search Operations
       std::ranges::borrowed_subrange_t<R>
         find_last_if_not (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
-    // starts_with
-    template < typename ExecutionPolicy, std::ranges::random_access_range R1,
-              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
-              typename Proj1 = std::identity, typename Proj2 = std::identity>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
-               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
-                                           Pred, Proj1, Proj2 >
-      bool starts_with (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
-                        Proj1 proj1 = {}, Proj2 proj2 = {});
-
-    // ends_with
-    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
-              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
-              typename Proj1 = std::identity, typename Proj2 = std::identity>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
-               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
-                                           Pred, Proj1, Proj2 >
-      bool ends_with (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
-                      Proj1 proj1 = {}, Proj2 proj2 = {});
   }
 
 Minimum and Maximum
@@ -430,6 +398,39 @@ Sequence Search and Comparison
                std::ranges::sized_range<R1> && std::ranges::sized_range<R2>
       bool lexicographical_compare (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Comp comp = {},
                                    Proj1 proj1 = {}, Proj2 proj2 = {});
+    // contains_subrange
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+              typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      bool contains_subrange (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                              Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // starts_with
+    template < typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+              typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      bool starts_with (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                        Proj1 proj1 = {}, Proj2 proj2 = {});
+
+    // ends_with
+    template <typename ExecutionPolicy, std::ranges::random_access_range R1,
+              std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
+              typename Proj1 = std::identity, typename Proj2 = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R1> && std::ranges::sized_range<R2> &&
+               std::indirectly_comparable< std::ranges::iterator_t<R1>, std::ranges::iterator_t<R2>,
+                                           Pred, Proj1, Proj2 >
+      bool ends_with (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Pred pred = {},
+                      Proj1 proj1 = {}, Proj2 proj2 = {});
+
   }
 
 Sorting, Merge, and Heap Operations
