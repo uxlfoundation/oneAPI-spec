@@ -42,7 +42,8 @@ Requirements:
 * If ``InputIterator`` type does not meet the `Forward Iterator` requirements from the [forward.iterators] section of the ISO C++ Standard,
   the ``std::iterator_traits<InputIterator>::value_type`` type must be constructible from ``std::iterator_traits<InputIterator>::reference``.
 * The ``Container`` type must meet the :doc:`ContainerBasedSequence requirements <../../named_requirements/algorithms/container_based_sequence>`.
-* The type returned by ``Container::begin()`` must meet the same requirements as the ``InputIterator`` type above.
+* The type returned by ``std::begin`` and ``std::end`` applied to a ``Container`` object
+  must meet the same requirements as the ``InputIterator`` type above.
 
 The ``parallel_for_each`` template has two forms.
 
