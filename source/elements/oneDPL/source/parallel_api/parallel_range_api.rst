@@ -398,6 +398,7 @@ Sequence Search and Comparison
                std::ranges::sized_range<R1> && std::ranges::sized_range<R2>
       bool lexicographical_compare (ExecutionPolicy&& pol, R1&& r1, R2&& r2, Comp comp = {},
                                    Proj1 proj1 = {}, Proj2 proj2 = {});
+
     // contains_subrange
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
               std::ranges::random_access_range R2, typename Pred = std::ranges::equal_to,
