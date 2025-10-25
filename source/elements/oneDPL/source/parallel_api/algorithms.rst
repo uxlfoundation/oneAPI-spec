@@ -6,11 +6,30 @@
 Parallel Algorithms
 -------------------
 
-The parallel algorithms are defined in the ``<oneapi/dpl/algorithm>`` header,
-in ``namespace oneapi::dpl``.
+oneDPL parallel algorithms are function templates analogous to the algorithms with execution policies defined
+in the `C++ Standard`_, 5th and 6th editions (C++17/20), as well as additional non-standard function templates.
+
+oneDPL parallel algorithms reside in ``namespace oneapi::dpl``.
+Standard-aligned algorithms are defined in the ``<oneapi/dpl/algorithm>``, ``<oneapi/dpl/numeric>``,
+and ``<oneapi/dpl/memory>`` header files, aligned with how the `C++ Standard`_ places the respective functions
+into the standard header files.
+
+The parallel algorithms execute according to a oneDPL execution policy supplied as the first argument.
+
+Where applicable, oneDPL supports list initialization of value parameters of the algorithms,
+as in the working draft of the next C++ standard edition (C++26).
+
+Additional Algorithms
++++++++++++++++++++++
+
+In addition to the standard-aligned parallel algorithms, oneDPL provides the following algorithm functions.
+
+For compatibility with the previous versions of the specification, besides their indicated header files
+all these algorithms are defined in ``<oneapi/dpl/algorithm>``. [*Note*: This may be deprecated in the future. -- *end note*]
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
         typename OutputValueIt,
         typename T = typename std::iterator_traits<InputValueIt>::value_type,
@@ -42,6 +61,7 @@ provided to combine the elements of the value subsequences.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
         typename OutputValueIt,
         typename BinaryPredcate =
@@ -69,6 +89,7 @@ no binary operator is provided to combine the elements of the value subsequences
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
         typename OutputKeyIt, typename OutputValueIt,
         typename BinaryPredcate =
@@ -98,6 +119,7 @@ combine the values in each subsequence identified if a binary operator is not pr
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename InputIt1, typename InputIt2, typename OutputIt,
         typename Comparator =
             std::less<typename std::iterator_traits<InputIt>::value_type>>
@@ -121,6 +143,7 @@ elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_fi
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename InputIt1, typename InputIt2, typename OutputIt,
         typename Comparator =
             std::less<typename std::iterator_traits<InputIt>::value_type>>
@@ -143,6 +166,7 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename InputIt1, typename InputIt2, typename OutputIt,
         typename Comparator =
             std::less<typename std::iterator_traits<InputIt>::value_type>>
@@ -165,6 +189,7 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
   template <typename Policy, typename InputIt, typename OutputIt, typename UnaryOp,
       typename UnaryPredicate>
   OutputIt
@@ -196,6 +221,7 @@ satisfy a given predicate, and stores the result to the output. Depending on the
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename KeyIt, typename ValueIt,
         typename Comparator = std::less<typename std::iterator_traits<KeyIt>::value_type>>
     void
@@ -223,6 +249,7 @@ as defined by the `C++ Standard`_.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename KeyIt, typename ValueIt,
         typename Comparator = std::less<typename std::iterator_traits<KeyIt>::value_type>>
     void
@@ -250,6 +277,7 @@ as defined by the `C++ Standard`_.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template <typename Policy, typename InputIt, typename Size, typename ValueType,
         typename OutputIt>
     OutputIt
