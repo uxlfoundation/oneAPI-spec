@@ -762,6 +762,37 @@ Copying Mutating Operations
                                          std::ranges::borrowed_iterator_t<OutR>>
         remove_copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
 
+    // replace_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Proj = std::identity,
+              typename T1 = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>,
+              typename T2 = std::ranges::range_value_t<OutR>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>> &&
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T1* > &&
+               std::indirectly_writable<std::ranges::iterator_t<OutR>, const T2&>
+      std::ranges::replace_copy_result<std::ranges::borrowed_iterator_t<R>,
+                                       std::ranges::borrowed_iterator_t<OutR>>
+        replace_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, const T1& old_value,
+                      const T2& new_value, Proj proj = {});
+
+    // replace_copy_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR,
+              class T = std::ranges::range_value_t<OutR>, typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred,
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>> &&
+               std::indirectly_writable<std::ranges::iterator_t<OutR>, const T&>
+      std::ranges::replace_copy_if_result<std::ranges::borrowed_iterator_t<R>,
+                                          std::ranges::borrowed_iterator_t<OutR>>
+        replace_copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, const T& new_value,
+                         Proj proj = {});
+
     // reverse_copy
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR>
