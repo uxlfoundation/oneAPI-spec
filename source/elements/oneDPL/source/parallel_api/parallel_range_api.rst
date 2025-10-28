@@ -8,8 +8,9 @@ Parallel Range Algorithms
 oneDPL provides variations of algorithms that work with ranges defined in the `C++ Standard`_, 6th edition (C++20)
 and newer. These algorithms execute according to a oneDPL execution policy supplied as the first argument,
 similarly to other oneDPL algorithms.
-[*Note*: These algorithms mostly match the semantics of the parallel range algorithms in the working draft
-of the next C++ standard edition (C++26). -- *end note*]
+[*Note*: These algorithms mostly match the semantics of the
+`parallel range algorithms <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2025/p3179r9.html>`_
+in the working draft of the next C++ standard edition (C++26). -- *end note*]
 
 The oneDPL parallel range algorithms rely on the functionality of C++20 and are not available in the code
 compiled for earlier editions of the C++ standard.
