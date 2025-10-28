@@ -18,7 +18,7 @@ used as iterators in other contexts, including dereference, as these types do no
 requirements for an iterator.
 
 Buffer Position Objects
------------------------
++++++++++++++++++++++++
 
 .. code:: cpp
 
