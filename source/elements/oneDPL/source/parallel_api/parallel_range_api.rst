@@ -686,6 +686,15 @@ Partition operations
         partition_copy (ExecutionPolicy&& pol, R&& r, OutR1&& out_true_r, OutR2&& out_false_r,
                         Pred pred, Proj proj = {});
 
+    // nth_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Comp = std::ranges::less, typename Proj = std::identity>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::sortable<std::ranges::iterator_t<R>, Comp, Proj>
+      std::ranges::borrowed_iterator_t<R>
+        nth_element (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> nth,
+                     Comp comp = {}, Proj proj = {});
+
   }
 
 Copying Mutating Operations
