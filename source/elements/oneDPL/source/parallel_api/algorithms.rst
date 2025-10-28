@@ -16,8 +16,9 @@ into the standard header files.
 
 The parallel algorithms execute according to a oneDPL execution policy supplied as the first argument.
 
-Where applicable, oneDPL supports list initialization of value parameters of the algorithms,
-as in the working draft of the next C++ standard edition (C++26).
+Where applicable, oneDPL supports
+`list initialization of value parameters <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2248r8.html>`_
+of the algorithms, as in the working draft of the next C++ standard edition (C++26).
 
 Additional Algorithms
 +++++++++++++++++++++
