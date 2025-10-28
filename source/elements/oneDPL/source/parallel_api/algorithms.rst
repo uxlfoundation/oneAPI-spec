@@ -131,13 +131,11 @@ combine the values in each subsequence identified if a binary operator is not pr
 
 ``oneapi::dpl::binary_search`` performs a binary search over the data in ``[start, end)``
 for each value in ``[value_first, value_last)``. If the value exists in the data searched then
-the corresponding element in ``[result, result + distance(value_first, value_last))`` is set to
+the corresponding element in ``[result, result + std::distance(value_first, value_last))`` is set to
 true, otherwise it is set to false.
 
-If no comparator is provided, ``operator<`` is used to determine when the search value is less
-than an element in the range being searched.
-
-The elements of ``[start, end)`` must be partitioned with respect to the comparator used. For all
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used,
+or with respect to ``std::less`` if no comparator is provided. For all
 elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_first, value_last)``,
 ``comp(e, v)`` implies ``!comp(v, e)``.
 
@@ -157,12 +155,10 @@ elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_fi
 each value in ``[value_first, value_last)`` to find the lowest index at which the search value
 could be inserted in ``[start, end)`` without violating the ordering defined by the comparator
 provided. That lowest index is then assigned to the corresponding element in
-``[result, result + distance(value_first, value_last))``.
+``[result, result + std::distance(value_first, value_last))``.
 
-If no comparator is provided, ``operator<`` is used to determine when the search value is less
-than an element in the range being searched.
-
-The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used,
+or with respect to ``std::less`` if no comparator is provided.
 
 .. code:: cpp
 
@@ -180,12 +176,10 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 for each value in ``[value_first, value_last)`` to find the highest index at which the search
 value could be inserted in ``[start, end)`` without violating the ordering defined by the
 comparator provided. That highest index is then assigned to the corresponding element in
-``[result, result + distance(value_first, value_last))``.
+``[result, result + std::distance(value_first, value_last))``.
 
-If no comparator is provided, ``operator<`` is used to determine when the search value is less
-than an element in the range being searched.
-
-The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used,
+or with respect to ``std::less`` if no comparator is provided.
 
 .. code:: cpp
 
