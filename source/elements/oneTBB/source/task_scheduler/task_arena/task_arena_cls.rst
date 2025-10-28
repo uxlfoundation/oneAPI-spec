@@ -42,18 +42,18 @@ A class that represents an explicit, user-managed task scheduler arena.
                     int max_threads_per_core = task_arena::automatic;
                 };
 
-                task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1,
+                task_arena(int max_concurrency = automatic, unsigned reserved_slots = 1,
                            priority a_priority = priority::normal);
-                task_arena(constraints a_constraints, unsigned reserved_for_masters = 1,
+                task_arena(constraints constraints_, unsigned reserved_slots = 1,
                            priority a_priority = priority::normal);
                 task_arena(const task_arena &s);
                 explicit task_arena(oneapi::tbb::attach);
                 ~task_arena();
 
                 void initialize();
-                void initialize(int max_concurrency, unsigned reserved_for_masters = 1,
+                void initialize(int max_concurrency, unsigned reserved_slots = 1,
                                 priority a_priority = priority::normal);
-                void initialize(constraints a_constraints, unsigned reserved_for_masters = 1,
+                void initialize(constraints constraints_, unsigned reserved_slots = 1,
                                 priority a_priority = priority::normal);
                 void initialize(oneapi::tbb::attach);
 
@@ -71,7 +71,7 @@ A class that represents an explicit, user-managed task scheduler arena.
                 task_group_status task_arena::wait_for(task_group& tg);
             };
 
-            std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints = {},
+            std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints_ = {},
                                                             unsigned reserved_slots = 0);
 
         } // namespace tbb
@@ -185,28 +185,28 @@ Member types and constants
 Member functions
 ----------------
 
-.. cpp:function:: task_arena(int max_concurrency = automatic, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
+.. cpp:function:: task_arena(int max_concurrency = automatic, unsigned reserved_slots = 1, priority a_priority = priority::normal)
 
     Creates a ``task_arena`` with a certain concurrency limit (``max_concurrency``) and priority
     (``a_priority``).  Some portion of the limit can be reserved for application threads with
-    ``reserved_for_masters``.  The amount for reservation cannot exceed the limit.
+    ``reserved_slots``.  The amount for reservation cannot exceed the limit.
 
     .. caution::
 
-        If ``max_concurrency`` and ``reserved_for_masters`` are
+        If ``max_concurrency`` and ``reserved_slots`` are
         explicitly set to be equal and greater than 1, oneTBB worker threads will never
         join the arena. As a result, the execution guarantee for enqueued tasks is not valid
         in such arena. Do not use ``task_arena::enqueue()`` with an arena set to have no worker threads.
 
-.. cpp:function:: task_arena(constraints a_constraints, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
+.. cpp:function:: task_arena(constraints constraints_, unsigned reserved_slots = 1, priority a_priority = priority::normal)
 
-    Creates a ``task_arena`` with a certain constraints(``a_constraints``) and priority
+    Creates a ``task_arena`` with a certain constraints(``constraints_``) and priority
     (``a_priority``).  Some portion of the limit can be reserved for application threads with
-    ``reserved_for_masters``.  The amount for reservation cannot exceed the concurrency limit specified in ``constraints``.
+    ``reserved_slots``.  The amount for reservation cannot exceed the concurrency limit specified in ``constraints``.
 
     .. caution::
 
-        If ``constraints::max_concurrency`` and ``reserved_for_masters`` are
+        If ``constraints::max_concurrency`` and ``reserved_slots`` are
         explicitly set to be equal and greater than 1, oneTBB worker threads will never
         join the arena. As a result, the execution guarantee for enqueued tasks is not valid
         in such arena. Do not use ``task_arena::enqueue()`` with an arena set to have no worker threads.
@@ -242,11 +242,11 @@ Member functions
 
         After the call to ``initialize``, the arena parameters are fixed and cannot be changed.
 
-.. cpp:function:: void initialize(int max_concurrency, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
+.. cpp:function:: void initialize(int max_concurrency, unsigned reserved_slots = 1, priority a_priority = priority::normal)
 
     Same as above, but overrides previous arena parameters.
 
-.. cpp:function:: void initialize(constraints a_constraints, unsigned reserved_for_masters = 1, priority a_priority = priority::normal)
+.. cpp:function:: void initialize(constraints constraints_, unsigned reserved_slots = 1, priority a_priority = priority::normal)
 
     Same as above.
 
@@ -335,7 +335,7 @@ Member functions
 Non-member Functions
 --------------------
 
-.. cpp:function:: std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints = {}, unsigned reserved_slots = 0)
+.. cpp:function:: std::vector<task_arena> create_numa_task_arenas(task_arena::constraints constraints_ = {}, unsigned reserved_slots = 0)
 
     Returns a ``std::vector`` of non-initialized ``task_arena`` objects, each bound to a separate NUMA node.
     The number of created ``task_arena`` instances is equal to the number of NUMA nodes on the system,
@@ -343,10 +343,10 @@ Non-member Functions
     
     If an error occurs during system information discovery,
     returns a ``std::vector`` containing a single ``task_arena`` object created as 
-    ``task_arena(constraints.set_numa_id(task_arena::automatic), reserved_slots)``.
+    ``task_arena(constraints_.set_numa_id(task_arena::automatic), reserved_slots)``.
 
-    The ``constraints`` argument can be specified to apply additional limitations to threads in
-    the ``task_arena`` objects. For each created arena, the ``numa_id`` value in ``constraints``
+    The ``constraints_`` argument can be specified to apply additional limitations to threads in
+    the ``task_arena`` objects. For each created arena, the ``numa_id`` value in ``constraints_``
     is automatically set to the corresponding NUMA node ID from ``tbb::info::numa_nodes()``.
     
     The ``reserved_slots`` argument allows reserving a specified number of slots in
