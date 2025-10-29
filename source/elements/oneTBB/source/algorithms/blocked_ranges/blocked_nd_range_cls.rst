@@ -52,13 +52,13 @@ For example, ``blocked_nd_range<int,2>`` is analogous but not identical to ``blo
             blocked_nd_range(blocked_range<Value>, blocked_range<Values>...)
             -> blocked_nd_range<Value, 1 + sizeof...(Values)>;
 
-            template <typename Value>
-            blocked_nd_range(/*a set of braced-init-lists of Value objects*/)
-            -> blocked_nd_range<Value, /*number of braced-init-lists*/>;
-
             template <typename Value, unsigned int N>
             blocked_nd_range(const Value (&)[N], typename blocked_nd_range<Value, N>::size_type = 1)
             -> blocked_nd_range<Value, N>;
+
+            template </*see-below*/>
+            blocked_nd_range(/*see-below*/)
+            -> blocked_nd_range</*see-below*/>;
         } // namespace tbb
     } // namespace oneapi        
 
@@ -198,27 +198,41 @@ Deduction Guides
 
 .. code:: cpp
 
-    template <typename Value>
-    blocked_nd_range(/*a set of braced-init-lists of Value objects*/)
-    -> blocked_nd_range<Value, /*number of braced-init-lists*/>;
-
-**Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as braced-init-lists to the ``blocked_nd_range`` constructor.
-
-The exact signature of this deduction guide is unspecified.
-
-**Constraints:**: Participates in overload resolution only if the number of braced-init-lists provided is more than ``1`` and each list contains
-``2`` or ``3`` elements of the same type, corresponding to ``blocked_range`` constructors with 2 and 3 arguments, respectively.
-
-**Example:**: ``blocked_nd_range range({0, 100}, {0, 100, 50})`` should deduce ``range`` as ``blocked_nd_range<int, 3>``.
-
-
-.. code:: cpp
-
     template <typename Value, unsigned int N>
     blocked_nd_range(const Value (&)[N], typename blocked_nd_range<Value, N>::size_type = 1)
     -> blocked_nd_range<Value, N>;
 
 **Effects:**: Enables deduction from a single C array object indicating a set of dimension sizes.
+
+.. code:: cpp
+
+    template </*see-below*/>
+    blocked_nd_range(/*see-below*/)
+    -> blocked_nd_range(/*see-below*/);
+
+**Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as braced-init-lists to the ``blocked_nd_range`` constructor.
+
+**Example**: ``blocked_nd_range range({0, 100}, {0, 100, 50})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
+
+This deduction guide should have one of the signatures below:
+
+    .. code:: cpp
+
+        template <typename Value, typename... Values>
+        blocked_nd_range(std::initializer_list<Value>, std::initializer_list<Values>...)
+        -> blocked_nd_range<Value, 1 + sizeof...(Values)>;
+
+    **Constraints:** Participates in overload resolution only if ``sizeof...(Values) > 0`` and all types in ``Values`` are the same as ``Value``.
+
+    or
+
+    .. code:: cpp
+
+        template <typename Value, unsigned int... Ns>
+        blocked_nd_range(const Value (&... dim)[Ns])
+        -> blocked_nd_range<Value, sizeof...(Ns)>;
+
+    **Constraints:** Participates in overload resolution only if ``sizeof...(Ns) > 1`` and ``N == 2`` or ``N == 3`` for each ``N`` in ``Ns``.
 
 In addition to the explicit deduction guides above, the implementation shall provide implicit or explicit deduction guides for copy constructor,
 move constructor and constructors taking ``split`` and ``proportional_split`` arguments.
