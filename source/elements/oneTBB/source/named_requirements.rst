@@ -62,7 +62,7 @@ because C++ does not permit implicit removal of the ``const`` qualifier from a t
 would not compile if the implementation attempts to pass a constant object to the function.
 
 Besides pseudo-signatures, semantic requirements also need to be met by real types and functions.
-For example, while ``std::pair<U,U> swap(U x, U y)`` fits the pseudo-signature for *Sortable*
+For example, while ``std::pair<U, U> swap(U x, U y)`` fits the pseudo-signature for *Sortable*
 via implicit conversion of references to values and implicit drop of the returned value
 (ignored by a library implementation), it is unable to swap the actual variables passed to the function
 and therefore does not meet the semantic requirements of *Sortable*.

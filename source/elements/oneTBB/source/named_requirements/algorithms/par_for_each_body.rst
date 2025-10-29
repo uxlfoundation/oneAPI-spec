@@ -15,7 +15,7 @@ as well as it meets exactly one of the following two requirements for ``operator
 
 **ParallelForEachBody Requirements: Pseudo-Signature, Semantics**
 
-Variant 1:
+Alternative 1:
 
 .. cpp:function:: void Body::operator()( ReferenceType item ) const
 
@@ -23,7 +23,7 @@ Variant 1:
 
 ----------------------------------------------------------------
 
-Variant 2:
+Alternative 2:
 
 .. cpp:function:: void Body::operator()( ReferenceType item, oneapi::tbb::feeder<ItemType>& feeder ) const
                   void Body::operator()( ItemType&& item, oneapi::tbb::feeder<ItemType>& feeder ) const
@@ -44,8 +44,7 @@ where
 .. note::
 
     The usual rules for :ref:`pseudo-signatures <pseudo_signatures>` apply.
-    Therefore, ``Body::operator()`` may optionally take items by value.
-    ``const`` and ``volatile`` type qualifiers are also applicable.
+    Therefore, ``Body::operator()`` may optionally take items by value or by ``const`` reference.
 
 See also:
 
