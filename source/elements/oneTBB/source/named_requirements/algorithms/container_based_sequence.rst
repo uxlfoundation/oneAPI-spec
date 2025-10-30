@@ -8,7 +8,7 @@ ContainerBasedSequence
 **[req.container_based_sequence]**
 
 A type `C` satisfies `ContainerBasedSequence` if the following expressions are valid
-for an object ``c`` of type (possibly ``const``) ``C``:
+for a (possibly ``const``) object ``c`` of the type ``C``:
 
 ----------------------------------------------------------------
 

@@ -54,10 +54,10 @@ For example, the table below shows pseudo-signatures for a *sortable* type ``T``
 
 ---------------------------------------------------------------------------------------------
 
-For an example type ``U``, the real signature that implements ``operator<`` in the table above 
+For a given type ``U``, the real signature that implements ``operator<`` in the table above 
 can be expressed as ``int operator<( U x, U y )``, because C++ permits implicit conversion from
 ``int`` to ``bool``, and implicit conversion from ``const U&`` to ``U`` if the type is copy-constructible.
-For a counter-example, the real signature ``bool operator<( U& x, U& y )`` is not acceptable
+As a counter-example, the real signature ``bool operator<( U& x, U& y )`` is not acceptable
 because C++ does not permit implicit removal of the ``const`` qualifier from a type, and so the code
 would not compile if the implementation attempts to pass a constant object to the function.
 
@@ -73,18 +73,23 @@ The following table provides guidance for the types of parameters used in pseudo
 Pseudo-signature parameter  General semantics                 Alternative real parameters
 ==========================  ================================  =============================
 ``const T& x``              The function is not supposed      - ``T x``
-                            to modify the argument.           - ``auto& x``
-                                                              - ``auto&& x``, forwarding reference
+                            to modify the argument.           - ``U& x``
+                                                              - ``U&& x``
+                                                              
+                                                              where ``U`` is a template type parameter or ``auto``
 
 ``T& x``                    The argument is a lvalue.         - ``const T& x``
                             The function can or is            - ``T x``
-                            supposed to modify the argument.  - ``auto& x``
-                                                              - ``auto&& x``, forwarding reference
+                            supposed to modify the argument.  - ``U& x``
+                                                              - ``U&& x``
 
 ``T&& x``                   The argument is a rvalue. The     - ``const T& x``
                             function can use the argument     - ``T x``
-                            as a source in move operations.   - ``auto&& x``, forwarding reference
+                            as a source in move operations.   - ``U&& x``
 ==========================  ================================  =============================
+
+In practice, alternatives might depend on the semantic requirements as well as type properties,
+such as availability of copy- or move-constructors.
 
 Algorithms
 ----------
