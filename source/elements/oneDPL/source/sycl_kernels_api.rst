@@ -27,6 +27,7 @@ Supported Functionality
 - Engine class templates:
    - ``linear_congruential_engine``
    - ``subtract_with_carry_engine``
+   - ``philox_engine``
 - Engine adaptor class templates:
    - ``discard_block_engine``
 - Engines and engine adaptors with predefined parameters:
@@ -36,6 +37,8 @@ Supported Functionality
    - ``ranlux48_base``
    - ``ranlux24``
    - ``ranlux48``
+   - ``philox4x32``
+   - ``philox4x64``
 - Distribution class templates:
    - ``uniform_int_distribution``
    - ``uniform_real_distribution``
@@ -48,7 +51,11 @@ Supported Functionality
    - ``cauchy_distribution``
    - ``extreme_value_distribution``
 
-``linear_congruential_engine`` and ``subtract_with_carry_engine`` satisfy the uniform random bit generator requirements.
+.. note::
+   The ``philox_engine`` class template and the corresponding predefined engines match the respective API
+   in the working draft of the next C++ standard edition (C++26).
+
+``linear_congruential_engine``, ``subtract_with_carry_engine``, and ``philox_engine`` satisfy the uniform random bit generator requirements.
 
 Limitations
 -----------
@@ -82,7 +89,7 @@ The ``scalar_type`` is used instead of ``result_type`` in all contexts where a s
 Since ``scalar_type`` is the same as ``result_type`` except for template instantiations with ``sycl::vec``,
 class templates still meet the applicable requirements of the `C++ Standard`_.
 
-When instantiated with ``sycl::vec<Type,N>``, ``linear_congruential_engine`` and ``subtract_with_carry_engine`` may not
+When instantiated with ``sycl::vec<Type,N>``, ``linear_congruential_engine``, ``subtract_with_carry_engine``, and ``philox_engine`` may not
 formally satisfy the uniform random bit generator requirements defined by the `C++ Standard`_. Instead, the following
 alternative requirements apply: for an engine object ``g`` of type ``G``,
 
@@ -105,10 +112,12 @@ The following engines and engine adaptors with predefined parameters are defined
 .. code:: cpp
 
     template <int N>
-    using minstd_rand0_vec = linear_congruential_engine<sycl::vec<::std::uint_fast32_t, N>, 16807, 0, 2147483647>;
+    using minstd_rand0_vec =
+        linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 16807, 0, 2147483647>;
 
     template <int N>
-    using minstd_rand_vec = linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 48271, 0, 2147483647>;
+    using minstd_rand_vec =
+        linear_congruential_engine<sycl::vec<uint_fast32_t, N>, 48271, 0, 2147483647>;
 
     template <int N>
     using ranlux24_base_vec = subtract_with_carry_engine<sycl::vec<uint_fast32_t, N>, 24, 10, 24>;
@@ -121,6 +130,14 @@ The following engines and engine adaptors with predefined parameters are defined
 
     template <int N>
     using ranlux48_vec = discard_block_engine<ranlux48_base_vec<N>, 389, 11>;
+
+    template <int N>
+    using philox4x32_vec = philox_engine<sycl::vec<uint_fast32_t, N>, 32, 4, 10, 0xCD9E8D57,
+                                         0x9E3779B9, 0xD2511F53, 0xBB67AE85>;
+
+    template <int N>
+    using philox4x64_vec = philox_engine<sycl::vec<uint_fast64_t, N>, 64, 4, 10, 0xCA5A826395121157,
+                                         0x9E3779B97F4A7C15, 0xD2E7470EE14C6C93, 0xBB67AE8584CAA73B>;
 
 Except for producing a ``sycl::vec`` of random values per invocation, the behavior of these engines is equivalent to
 the corresponding scalar engines, as described in the following table:
@@ -151,7 +168,12 @@ the corresponding scalar engines, as described in the following table:
          * -     ``ranlux48_vec``
            -     ``ranlux48``
            -     1112339016
-
+         * -     ``philox4x32_vec``
+           -     ``philox4x32``
+           -     1955073260
+         * -     ``philox4x64_vec``
+           -     ``philox4x64``
+           -     3409172418970261260
 
 Function Objects
 ++++++++++++++++

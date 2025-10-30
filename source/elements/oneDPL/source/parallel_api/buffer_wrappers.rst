@@ -6,6 +6,20 @@
 Buffer Wrappers
 ---------------
 
+A *buffer wrapper* is an iterator-like type for processing data in `SYCL`_ buffers with oneDPL algorithms.
+It is either the type of a *buffer position object* returned by
+``oneapi::dpl::begin`` or ``oneapi::dpl::end`` or a type composed of at least one buffer position object,
+with the same capabilities and limitations as buffer position objects.
+Buffer wrappers can be used as source types for :doc:`oneDPL iterators <iterators>`, and the resulting type is also a
+buffer wrapper.
+
+Buffer wrappers substitute for iterators as arguments and return values of oneDPL algorithms, however they cannot be
+used as iterators in other contexts, including dereference, as these types do not fully satisfy the C++ standard
+requirements for an iterator.
+
+Buffer Position Objects
++++++++++++++++++++++++
+
 .. code:: cpp
 
   // Defined in <oneapi/dpl/iterator>
@@ -48,14 +62,18 @@ which type satisfies the following requirements but is otherwise unspecified:
 
 - It is copy-constructible and copy-assignable.
 - It is comparable with ``operator==`` and ``operator!=``.
-- It provides the ``get_buffer()`` method that for a buffer position object returns the SYCL buffer,
-  which the object was built over.
 - The expressions ``a + n`` and ``a - n``, where ``a`` is a buffer position object and ``n``
   is an integer value, are valid and evaluate to a buffer position object such that
   the corresponding position in the buffer follows (precedes) that of ``a`` by ``n``.
   If this new position is out of the buffer bounds, the behavior is undefined.
 - The expression ``a - b``, where ``a`` and ``b`` are buffer position objects,
   is valid and evaluates to an integer value ``n`` such that ``a == b + n``.
+- It provides the ``get_buffer()`` method that for a buffer position object returns the SYCL buffer,
+  which the object was built over.
+
+.. note:: 
+   Only buffer position objects are required to support the ``get_buffer()`` method, other buffer wrappers
+   composed of buffer position objects are not required to support this method.
 
 If these operators and expressions are applied to buffer position objects that are not built
 over the same SYCL buffer, the behavior is undefined.
@@ -73,10 +91,6 @@ in expressions with other objects built over the same buffer.
    auto pos = dpl::find(dpl::execution::dpcpp_default, dpl::begin(buf), dpl::end(buf), value);
    int value_index = (pos == dpl::end(buf)) ? -1 : (pos - dpl::begin(buf));
 
-.. note::
-   Though buffer position objects substitute for iterators as arguments and return values
-   of oneDPL algorithms, they cannot be used as iterators in other contexts, including dereference,
-   as their type does not satisfy the C++ standard requirements for an iterator.
 
 SYCL deduction tags (the ``TagT`` parameters) and ``sycl::property::no_init`` 
 allow to specify an access mode to be used by algorithms for accessing a SYCL buffer.
