@@ -88,7 +88,7 @@ Pseudo-signature parameter  General semantics                 Alternative real p
                             as a source in move operations.   - ``U&& x``
 ==========================  ================================  =============================
 
-In practice, alternatives might depend on the semantic requirements as well as type properties,
+In practice, suitable alternatives might depend on the semantic requirements as well as type properties,
 such as availability of copy- or move-constructors.
 
 Algorithms

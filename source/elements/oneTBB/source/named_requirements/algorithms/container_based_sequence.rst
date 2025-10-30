@@ -8,7 +8,7 @@ ContainerBasedSequence
 **[req.container_based_sequence]**
 
 A type `C` satisfies `ContainerBasedSequence` if the following expressions are valid
-for a (possibly ``const``) object ``c`` of the type ``C``:
+for a (possibly const) object ``c`` of the type `C`:
 
 ----------------------------------------------------------------
 
@@ -26,7 +26,7 @@ for a (possibly ``const``) object ``c`` of the type ``C``:
 
 .. note::
 
-   Templates that use ``ContainerBasedSequence`` may impose stricter requirements on the iterator type
+   Templates that use `ContainerBasedSequence` may impose stricter requirements on the iterator type
    returned by ``std::begin``/``std::end``.
 
 See also:
