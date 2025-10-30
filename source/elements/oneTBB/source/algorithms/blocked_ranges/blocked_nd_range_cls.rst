@@ -57,7 +57,7 @@ For example, ``blocked_nd_range<int,2>`` is analogous but not identical to ``blo
             -> blocked_nd_range<Value, N>;
 
             template <typename Value, /*a template parameter pack*/... Xs>
-            blocked_nd_range(/*a type deducible from a braced-enclosed initializer list*/)
+            blocked_nd_range(/*a type deducible from a braced-enclosed initializer list of Value objects*/)
             -> blocked_nd_range<Value, sizeof...(Xs)>; // see below
         } // namespace tbb
     } // namespace oneapi        
@@ -207,7 +207,7 @@ Deduction Guides
 .. code:: cpp
 
     template <typename Value, /*a template parameter pack*/... Xs>
-    blocked_nd_range(/*a type deducible from a braced-enclosed initializer list*/)
+    blocked_nd_range(/*a type deducible from a braced-enclosed initializer list of Value objects*/)
     -> blocked_nd_range<Value, sizeof...(Xs)>;
 
 **Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as brace-enclosed initializer lists to the ``blocked_nd_range`` constructor.
