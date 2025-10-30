@@ -25,6 +25,6 @@ a set of non-standard parallel algorithms.
    parallel_api/iterators.rst
    parallel_api/algorithms.rst
    parallel_api/parallel_range_api.rst
-   
+
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html

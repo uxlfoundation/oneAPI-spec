@@ -6,11 +6,31 @@
 Parallel Algorithms
 -------------------
 
-The parallel algorithms are defined in the ``<oneapi/dpl/algorithm>`` header,
-in ``namespace oneapi::dpl``.
+oneDPL parallel algorithms are function templates analogous to the algorithms with execution policies defined
+in the `C++ Standard`_, 5th and 6th editions (C++17/20), as well as additional non-standard function templates.
+
+oneDPL parallel algorithms reside in ``namespace oneapi::dpl``.
+Standard-aligned algorithms are defined in the ``<oneapi/dpl/algorithm>``, ``<oneapi/dpl/numeric>``,
+and ``<oneapi/dpl/memory>`` header files, aligned with how the `C++ Standard`_ places the respective functions
+into the standard header files.
+
+The parallel algorithms execute according to a oneDPL execution policy supplied as the first argument.
+
+Where applicable, oneDPL supports
+`list initialization of value parameters <https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2248r8.html>`_
+of the algorithms, as in the working draft of the next C++ standard edition (C++26).
+
+Additional Algorithms
++++++++++++++++++++++
+
+In addition to the standard-aligned parallel algorithms, oneDPL provides the following algorithm functions.
+
+For compatibility with the previous versions of the specification, besides their indicated header files
+all these algorithms are defined in ``<oneapi/dpl/algorithm>``. [*Note*: This may be deprecated in the future. -- *end note*]
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
         typename OutputValueIt,
         typename T = typename std::iterator_traits<InputValueIt>::value_type,
@@ -42,6 +62,7 @@ provided to combine the elements of the value subsequences.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
         typename OutputValueIt,
         typename BinaryPredcate =
@@ -69,6 +90,7 @@ no binary operator is provided to combine the elements of the value subsequences
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template<typename Policy, typename InputKeyIt, typename InputValueIt,
         typename OutputKeyIt, typename OutputValueIt,
         typename BinaryPredcate =
@@ -98,6 +120,7 @@ combine the values in each subsequence identified if a binary operator is not pr
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename InputIt1, typename InputIt2, typename OutputIt,
         typename Comparator =
             std::less<typename std::iterator_traits<InputIt>::value_type>>
@@ -109,18 +132,17 @@ combine the values in each subsequence identified if a binary operator is not pr
 
 ``oneapi::dpl::binary_search`` performs a binary search over the data in ``[start, end)``
 for each value in ``[value_first, value_last)``. If the value exists in the data searched then
-the corresponding element in ``[result, result + distance(value_first, value_last))`` is set to
+the corresponding element in ``[result, result + std::distance(value_first, value_last))`` is set to
 true, otherwise it is set to false.
 
-If no comparator is provided, ``operator<`` is used to determine when the search value is less
-than an element in the range being searched.
-
-The elements of ``[start, end)`` must be partitioned with respect to the comparator used. For all
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used,
+or with respect to ``std::less`` if no comparator is provided. For all
 elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_first, value_last)``,
 ``comp(e, v)`` implies ``!comp(v, e)``.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename InputIt1, typename InputIt2, typename OutputIt,
         typename Comparator =
             std::less<typename std::iterator_traits<InputIt>::value_type>>
@@ -134,15 +156,14 @@ elements ``e`` in ``[start, end)`` and a given search value ``v`` in ``[value_fi
 each value in ``[value_first, value_last)`` to find the lowest index at which the search value
 could be inserted in ``[start, end)`` without violating the ordering defined by the comparator
 provided. That lowest index is then assigned to the corresponding element in
-``[result, result + distance(value_first, value_last))``.
+``[result, result + std::distance(value_first, value_last))``.
 
-If no comparator is provided, ``operator<`` is used to determine when the search value is less
-than an element in the range being searched.
-
-The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used,
+or with respect to ``std::less`` if no comparator is provided.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename InputIt1, typename InputIt2, typename OutputIt,
         typename Comparator =
             std::less<typename std::iterator_traits<InputIt>::value_type>>
@@ -156,15 +177,14 @@ The elements of ``[start, end)`` must be partitioned with respect to the compara
 for each value in ``[value_first, value_last)`` to find the highest index at which the search
 value could be inserted in ``[start, end)`` without violating the ordering defined by the
 comparator provided. That highest index is then assigned to the corresponding element in
-``[result, result + distance(value_first, value_last))``.
+``[result, result + std::distance(value_first, value_last))``.
 
-If no comparator is provided, ``operator<`` is used to determine when the search value is less
-than an element in the range being searched.
-
-The elements of ``[start, end)`` must be partitioned with respect to the comparator used.
+The elements of ``[start, end)`` must be partitioned with respect to the comparator used,
+or with respect to ``std::less`` if no comparator is provided.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
   template <typename Policy, typename InputIt, typename OutputIt, typename UnaryOp,
       typename UnaryPredicate>
   OutputIt
@@ -196,6 +216,7 @@ satisfy a given predicate, and stores the result to the output. Depending on the
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename KeyIt, typename ValueIt,
         typename Comparator = std::less<typename std::iterator_traits<KeyIt>::value_type>>
     void
@@ -223,6 +244,7 @@ as defined by the `C++ Standard`_.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/algorithm>
     template<typename Policy, typename KeyIt, typename ValueIt,
         typename Comparator = std::less<typename std::iterator_traits<KeyIt>::value_type>>
     void
@@ -250,6 +272,7 @@ as defined by the `C++ Standard`_.
 
 .. code:: cpp
 
+    // Defined in <oneapi/dpl/numeric>
     template <typename Policy, typename InputIt, typename Size, typename ValueType,
         typename OutputIt>
     OutputIt
