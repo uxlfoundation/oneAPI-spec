@@ -28,7 +28,7 @@ Pseudo-Signatures
 -----------------
 
 Two approaches for defining named requirements are *valid expressions* and *pseudo-signatures*.
-The ISO C++ standard follows the valid *expressions* approach, which shows what the usage pattern looks like for a requirement.
+The ISO C++ standard follows the *valid expressions* approach, which shows what the usage pattern looks like for a requirement.
 It has the drawback of relegating important details to notational conventions. This document mostly uses
 pseudo-signatures because they are concise and can be cut-and-pasted for an initial implementation.
 
@@ -78,12 +78,12 @@ Pseudo-signature parameter  General semantics                 Alternative real p
                                                               
                                                               where ``U`` is a template type parameter or ``auto``
 
-``T& x``                    The argument is a lvalue.         - ``const T& x``
+``T& x``                    The argument is an lvalue.        - ``const T& x``
                             The function can or is            - ``T x``
                             supposed to modify the argument.  - ``U& x``
                                                               - ``U&& x``
 
-``T&& x``                   The argument is a rvalue. The     - ``const T& x``
+``T&& x``                   The argument is an rvalue. The    - ``const T& x``
                             function can use the argument     - ``T x``
                             as a source in move operations.   - ``U&& x``
 ==========================  ================================  =============================

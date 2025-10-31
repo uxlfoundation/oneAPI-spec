@@ -9,7 +9,7 @@ ParallelForEachBody
 
 A type `Body` satisfies `ParallelForEachBody` if it meets the `Function Objects`
 requirements described in the [function.objects] section of the ISO C++ standard,
-as well as it meets exactly one of the following two requirements for ``operator()``:
+as well as meets exactly one of the following two alternative requirements for ``operator()``:
 
 ----------------------------------------------------------------
 
