@@ -215,7 +215,7 @@ Deduction Guides
 
 **Example**: ``blocked_nd_range range({0, 10}, {0, 10, 5})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
 
-This deduction guide should have one of the signatures below:
+This deduction guide should be implemented as one of the following alternatives:
 
     .. code:: cpp
 
