@@ -212,7 +212,7 @@ Deduction Guides
 
 **Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as brace-enclosed initializer lists to the ``blocked_nd_range`` constructor.
 
-**Example**: ``blocked_nd_range range({0, 100}, {0, 100, 50})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
+**Example**: ``blocked_nd_range range({0, 10}, {0, 10, 5})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
 
 This deduction guide should have one of the signatures below:
 
