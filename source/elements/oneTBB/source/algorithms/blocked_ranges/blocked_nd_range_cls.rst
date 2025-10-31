@@ -59,6 +59,7 @@ For example, ``blocked_nd_range<int,2>`` is analogous but not identical to ``blo
             template <typename Value, /*a template parameter pack*/... Xs>
             blocked_nd_range(/*a type deducible from a braced-enclosed initializer list of Value objects*/... args)
             -> blocked_nd_range<Value, sizeof...(args)>; // see below
+
         } // namespace tbb
     } // namespace oneapi        
 
