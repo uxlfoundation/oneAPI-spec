@@ -376,7 +376,7 @@ to the corresponding NUMA node.
         }
 
         arenas[0].execute([] {
-            /* parallel work */
+            /* executed by the main thread pinned to the NUMA node for arenas[0] */
         });
 
         for (int i = 1; i < arenas.size(); i++) {
