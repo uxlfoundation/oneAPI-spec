@@ -208,7 +208,7 @@ Deduction Guides
 .. code:: cpp
 
     template <typename Value, /*a template parameter pack*/... Xs>
-    blocked_nd_range(/*a type deducible from a braced-enclosed initializer list of Value objects*/... args)
+    blocked_nd_range(/*a type deducible from a braced initialization list of Value objects*/... args)
     -> blocked_nd_range<Value, sizeof...(args)>;
 
 **Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as brace-enclosed initializer lists to the ``blocked_nd_range`` constructor.
