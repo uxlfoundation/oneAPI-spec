@@ -238,6 +238,10 @@ or
 In addition to the explicit deduction guides above, the implementation shall provide implicit or explicit deduction guides for copy constructor,
 move constructor and constructors taking ``split`` and ``proportional_split`` arguments.
 
+.. note::
+
+    If a single braced initialization list is provided, it is interpreted as a C array of dimension sizes, not as a ``blocked_range``.
+
 See also:
 
 * :doc:`blocked_range <blocked_range_cls>`
