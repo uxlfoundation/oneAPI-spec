@@ -67,29 +67,28 @@ via implicit conversion of references to values and implicit drop of the returne
 (ignored by a library implementation), it is unable to swap the actual variables passed to the function
 and therefore does not meet the semantic requirements of *Sortable*.
 
-The following table provides guidance for the types of parameters used in pseudo-signatures.
+The following table provides guidance for the types of parameters used in pseudo-signatures
+and potential alternatives in real signatures. In practice, suitable alternatives might depend
+on the semantic requirements as well as type properties, such as availability of copy- or move-constructors.
 
 ==========================  ================================  =============================
 Pseudo-signature parameter  General semantics                 Alternative real parameters
 ==========================  ================================  =============================
-``const T& x``              The function is not supposed      - ``T x``
-                            to modify the argument.           - ``U& x``
-                                                              - ``U&& x``
-                                                              
-                                                              where ``U`` is a template type parameter or ``auto``
+``const T& a``              The function is not supposed      - ``T a``
+                            to modify the argument.           - ``X& a``, ``auto& a``
+                                                              - ``X&& a``, ``auto&& a``
 
-``T& x``                    The argument is an lvalue.        - ``const T& x``
-                            The function can or is            - ``T x``
-                            supposed to modify the argument.  - ``U& x``
-                                                              - ``U&& x``
+                                                              where ``X`` is a template type parameter
 
-``T&& x``                   The argument is an rvalue. The    - ``const T& x``
-                            function can use the argument     - ``T x``
-                            as a source in move operations.   - ``U&& x``
+``T& a``                    The argument is an lvalue.        - ``const T& a``
+                            The function can or is            - ``T a``
+                            supposed to modify the argument.  - ``X& a``, ``auto& a``
+                                                              - ``X&& a``, ``auto&& a``
+
+``T&& a``                   The argument is an rvalue. The    - ``const T& a``
+                            function can use the argument     - ``T a``
+                            as a source in move operations.   - ``X&& a``, ``auto&& a``
 ==========================  ================================  =============================
-
-In practice, suitable alternatives might depend on the semantic requirements as well as type properties,
-such as availability of copy- or move-constructors.
 
 Algorithms
 ----------
