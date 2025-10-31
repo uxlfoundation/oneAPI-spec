@@ -211,7 +211,7 @@ Deduction Guides
     blocked_nd_range(/*a type deducible from a braced initialization list of Value objects*/... args)
     -> blocked_nd_range<Value, sizeof...(args)>;
 
-**Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as brace-enclosed initializer lists to the ``blocked_nd_range`` constructor.
+**Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as braced initialization lists to the ``blocked_nd_range`` constructor.
 
 **Example**: ``blocked_nd_range range({0, 10}, {0, 10, 5})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
 
