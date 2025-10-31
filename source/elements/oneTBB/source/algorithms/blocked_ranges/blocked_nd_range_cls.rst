@@ -213,6 +213,10 @@ Deduction Guides
 
 **Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as braced initialization lists to the ``blocked_nd_range`` constructor.
 
+.. note::
+
+    If a single braced initialization list is provided, it is interpreted as a C array of dimension sizes, not as a ``blocked_range``.
+
 **Example**: ``blocked_nd_range range({0, 10}, {0, 10, 5})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
 
 This deduction guide should be implemented as one of the following alternatives:
@@ -237,10 +241,6 @@ or
 
 In addition to the explicit deduction guides above, the implementation shall provide implicit or explicit deduction guides for copy constructor,
 move constructor and constructors taking ``split`` and ``proportional_split`` arguments.
-
-.. note::
-
-    If a single braced initialization list is provided, it is interpreted as a C array of dimension sizes, not as a ``blocked_range``.
 
 See also:
 
