@@ -16,18 +16,18 @@ for a (possibly const) object ``c`` of the type `C`:
 
 .. cpp:function:: std::begin(c)
 
-    Returns an input iterator to the beginning of the sequence represented by ``c``.
+    Returns an iterator to the beginning of the sequence represented by ``c``.
 
 .. cpp:function:: std::end(c)
 
-    Returns an input iterator one past the end of the sequence represented by ``c``.
+    Returns an iterator one past the end of the sequence represented by ``c``.
 
 ----------------------------------------------------------------
 
 .. note::
 
-   Templates that use `ContainerBasedSequence` may impose stricter requirements on the iterator type
-   returned by ``std::begin``/``std::end``.
+   The category of an iterator returned by ``std::begin``/``std::end`` is determined by
+   a template that uses `ContainerBasedSequence`.
 
 See also:
 
