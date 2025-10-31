@@ -78,7 +78,7 @@ Pseudo-signature parameter  General semantics                 Alternative real p
                             to modify the argument.           - ``X& a``, ``auto& a``
                                                               - ``X&& a``, ``auto&& a``
 
-                                                              where ``X`` is a template type parameter
+                                                              Here and below ``X`` is a template type parameter.
 
 ``T& a``                    The argument is an lvalue.        - ``const T& a``
                             The function can or is            - ``T a``
