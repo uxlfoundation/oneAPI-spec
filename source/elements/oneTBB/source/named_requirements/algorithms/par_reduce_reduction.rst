@@ -22,4 +22,4 @@ A type `Reduction` satisfies `ParallelReduceReduction` if it meets the following
 See also:
 
 * :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
-* :doc:`parallel_determinstic_reduce algorithm <../../algorithms/functions/parallel_deterministic_reduce_func>`
+* :doc:`parallel_deterministic_reduce algorithm <../../algorithms/functions/parallel_deterministic_reduce_func>`

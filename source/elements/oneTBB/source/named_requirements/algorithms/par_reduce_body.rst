@@ -34,4 +34,4 @@ A type `Body` satisfies `ParallelReduceBody` if it meets the following requireme
 See also:
 
 * :doc:`parallel_reduce algorithm <../../algorithms/functions/parallel_reduce_func>`
-* :doc:`parallel_determinstic_reduce algorithm <../../algorithms/functions/parallel_deterministic_reduce_func>`
+* :doc:`parallel_deterministic_reduce algorithm <../../algorithms/functions/parallel_deterministic_reduce_func>`
