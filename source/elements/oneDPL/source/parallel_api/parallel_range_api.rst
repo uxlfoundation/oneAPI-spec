@@ -496,6 +496,96 @@ Sequence Reordering
 
   }
 
+Sequence Filtering
+++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // copy_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::copy_if_result<std::ranges::borrowed_iterator_t<R>,
+                                  std::ranges::borrowed_iterator_t<OutR>>
+        copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
+
+    // remove
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R> &&
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T* >
+      std::ranges::borrowed_subrange_t<R>
+        remove (ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
+
+    // remove_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        remove_if (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
+
+    // remove_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Proj = std::identity,
+              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>> &&
+               std::indirect_binary_predicate< std::ranges::equal_to,
+                                               std::projected<std::ranges::iterator_t<R>, Proj>,
+                                               const T* >
+      std::ranges::remove_copy_result<std::ranges::borrowed_iterator_t<R>,
+                                      std::ranges::borrowed_iterator_t<OutR>>
+        remove_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, const T& value, Proj proj = {});
+
+    // remove_copy_if
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Proj = std::identity,
+              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::remove_copy_if_result<std::ranges::borrowed_iterator_t<R>,
+                                         std::ranges::borrowed_iterator_t<OutR>>
+        remove_copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
+
+    // unique
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_equivalence_relation< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::equal_to>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        unique (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // unique_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR, typename Proj = std::identity,
+              std::indirect_equivalence_relation<std::projected<std::ranges::iterator_t<R>, Proj>>
+                    Comp = std::ranges::equal_to>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::unique_copy_result<std::ranges::borrowed_iterator_t<R>,
+                                      std::ranges::borrowed_iterator_t<OutR>>
+        unique_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, Comp comp = {}, Proj proj = {});
+
+  }
+
 Sorting, Merge, and Heap Operations
 +++++++++++++++++++++++++++++++++++
 
@@ -778,17 +868,6 @@ Copying Mutating Operations
                                std::ranges::borrowed_iterator_t<OutR>>
         copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
 
-    // copy_if
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::copy_if_result<std::ranges::borrowed_iterator_t<R>,
-                                  std::ranges::borrowed_iterator_t<OutR>>
-        copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
-
     // move
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR>
@@ -798,31 +877,6 @@ Copying Mutating Operations
       std::ranges::move_result<std::ranges::borrowed_iterator_t<R>,
                                std::ranges::borrowed_iterator_t<OutR>>
         move (ExecutionPolicy&& pol, R&& r, OutR&& result);
-
-    // remove_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR, typename Proj = std::identity,
-              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>> &&
-               std::indirect_binary_predicate< std::ranges::equal_to,
-                                               std::projected<std::ranges::iterator_t<R>, Proj>,
-                                               const T* >
-      std::ranges::remove_copy_result<std::ranges::borrowed_iterator_t<R>,
-                                      std::ranges::borrowed_iterator_t<OutR>>
-        remove_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, const T& value, Proj proj = {});
-
-    // remove_copy_if
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR, typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::remove_copy_if_result<std::ranges::borrowed_iterator_t<R>,
-                                         std::ranges::borrowed_iterator_t<OutR>>
-        remove_copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, Proj proj = {});
 
     // replace_copy
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
@@ -884,18 +938,6 @@ Copying Mutating Operations
         transform (ExecutionPolicy&& pol, R1&& r1, R2&& r2, OutR&& result, Fn binary_op,
                    Proj1 proj1 = {}, Proj2 proj2 = {});
 
-    // unique_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR, typename Proj = std::identity,
-              std::indirect_equivalence_relation<std::projected<std::ranges::iterator_t<R>, Proj>>
-                    Comp = std::ranges::equal_to>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::unique_copy_result<std::ranges::borrowed_iterator_t<R>,
-                                      std::ranges::borrowed_iterator_t<OutR>>
-        unique_copy (ExecutionPolicy&& pol, R&& r, OutR&& result, Comp comp = {}, Proj proj = {});
-
   }
 
 In-place Mutating Operations
@@ -941,27 +983,6 @@ In-place Mutating Operations
       std::ranges::borrowed_iterator_t<R>
         replace_if (ExecutionPolicy&& pol, R&& r, Pred pred, const T& new_value, Proj proj = {});
 
-    // remove
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R> &&
-               std::indirect_binary_predicate< std::ranges::equal_to,
-                                               std::projected<std::ranges::iterator_t<R>, Proj>,
-                                               const T* >
-      std::ranges::borrowed_subrange_t<R>
-        remove (ExecutionPolicy&& pol, R&& r, const T& value, Proj proj = {});
-
-    // remove_if
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
-      std::ranges::borrowed_subrange_t<R>
-        remove_if (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
-
     // swap_ranges
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
               std::ranges::random_access_range R2>
@@ -971,16 +992,6 @@ In-place Mutating Operations
       std::ranges::swap_ranges_result<std::ranges::borrowed_iterator_t<R1>,
                                       std::ranges::borrowed_iterator_t<R2>>
         swap_ranges (ExecutionPolicy&& pol, R1&& r1, R2&& r2);
-
-    // unique
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_equivalence_relation< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::equal_to>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
-      std::ranges::borrowed_subrange_t<R>
-        unique (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
   }
 
