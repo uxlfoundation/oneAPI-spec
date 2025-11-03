@@ -209,7 +209,6 @@ Minimum and Maximum
       std::ranges::range_value_t<R>
         max (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
-
     // minmax
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
