@@ -7,25 +7,27 @@ ContainerBasedSequence
 ======================
 **[req.container_based_sequence]**
 
-A type `C` satisfies `ContainerBasedSequence` if it meets the following requirements:
+A type `C` satisfies `ContainerBasedSequence` if the following expressions are valid
+for a (possibly const) object ``c`` of the type `C`:
 
 ----------------------------------------------------------------
 
-**ContainerBasedSequence Requirements: Pseudo-Signature, Semantics**
-
-    .. note::
-
-         In this page ``c`` is an object of type (possibly ``const``) ``C``.
-
-         Templates that use the named requirement can impose stricter requirements on the iterator concept.
+**ContainerBasedSequence Requirements: Expression, Semantics**
 
 .. cpp:function:: std::begin(c)
 
-    Returns an input iterator to the beginning of the sequence represented by ``c``.
+    Returns an iterator to the beginning of the sequence represented by ``c``.
 
 .. cpp:function:: std::end(c)
 
-    Returns an input iterator one past the end of the sequence represented by ``c``.
+    Returns an iterator one past the end of the sequence represented by ``c``.
+
+----------------------------------------------------------------
+
+.. note::
+
+   The category of an iterator returned by ``std::begin``/``std::end`` is determined by
+   a template that uses `ContainerBasedSequence`.
 
 See also:
 

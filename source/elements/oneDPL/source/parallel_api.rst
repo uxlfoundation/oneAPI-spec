@@ -14,9 +14,6 @@ All those algorithms work with *C++ Standard aligned execution policies* and wit
 oneDPL also provides *parallel range algorithms*: variations of C++20 range-based algorithms
 that take a oneDPL execution policy.
 
-For all parallel algorithms (including ones with ranges) oneDPL implements list-initialization, where applicable,
-as described in `P2248R8`_ proposal that is accepted for C++26.
-
 Additionally, oneDPL provides wrapper functions for `SYCL`_ buffers, special iterators, and
 a set of non-standard parallel algorithms.
 
@@ -31,4 +28,3 @@ a set of non-standard parallel algorithms.
 
 .. _`C++ Standard`: https://isocpp.org/std/the-standard
 .. _`SYCL`: https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html
-.. _`P2248R8`: https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2248r8.html

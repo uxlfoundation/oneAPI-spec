@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: 2019-2024 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2025 Intel Corporation
 .. SPDX-FileCopyrightText: Contributors to the oneAPI Specification project.
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
@@ -45,7 +45,20 @@ For example, ``blocked_nd_range<int,2>`` is analogous but not identical to ``blo
                 // Access
                 bool is_divisible() const;
                 const dim_range_type& dim(unsigned int dimension) const;
-            };
+            }; // class blocked_nd_range
+
+            // Deduction Guides
+            template <typename Value, typename... Values>
+            blocked_nd_range(blocked_range<Value>, blocked_range<Values>...)
+            -> blocked_nd_range<Value, 1 + sizeof...(Values)>;
+
+            template <typename Value, unsigned int N>
+            blocked_nd_range(const Value (&)[N], typename blocked_nd_range<Value, N>::size_type = 1)
+            -> blocked_nd_range<Value, N>;
+
+            template <typename Value, /*a template parameter pack*/... Xs>
+            blocked_nd_range(/*a type deducible from a braced initialization list of Value objects*/... args)
+            -> blocked_nd_range<Value, sizeof...(args)>; // see below
 
         } // namespace tbb
     } // namespace oneapi        
@@ -171,9 +184,66 @@ Other dimensions and the grain sizes for each subrange remain the same as in the
 
 **Returns:** ``blocked_range`` containing the value space along the dimension specified by the argument.
 
+Deduction Guides
+----------------
+
+.. code:: cpp
+
+    template <typename Value, typename... Values>
+    blocked_nd_range(blocked_range<Value>, blocked_range<Values>...)
+    -> blocked_nd_range<Value, 1 + sizeof...(Values)>;
+
+**Effects:**: Enables deduction when a set of ``blocked_range`` objects is passed to the ``blocked_nd_range`` constructor.
+
+**Constraints:**: Participates in overload resolution only if all of the types in ``Values`` are same as ``Value``.
+
+.. code:: cpp
+
+    template <typename Value, unsigned int N>
+    blocked_nd_range(const Value (&)[N], typename blocked_nd_range<Value, N>::size_type = 1)
+    -> blocked_nd_range<Value, N>;
+
+**Effects:**: Enables deduction from a single C array object indicating a set of dimension sizes.
+
+.. code:: cpp
+
+    template <typename Value, /*a template parameter pack*/... Xs>
+    blocked_nd_range(/*a type deducible from a braced initialization list of Value objects*/... args)
+    -> blocked_nd_range<Value, sizeof...(args)>;
+
+**Effects:**: Enables deduction when a set of ``blocked_range`` objects is provided as braced initialization lists to the ``blocked_nd_range`` constructor.
+
+.. note::
+
+    If a single braced initialization list is provided, it is interpreted as a C array of dimension sizes, not as a ``blocked_range``.
+
+**Example**: ``blocked_nd_range range({0, 10}, {0, 10, 5})`` should deduce ``range`` as ``blocked_nd_range<int, 2>``.
+
+This deduction guide should be implemented as one of the following alternatives:
+
+    .. code:: cpp
+
+        template <typename Value, typename... Values>
+        blocked_nd_range(std::initializer_list<Value>, std::initializer_list<Values>...)
+        -> blocked_nd_range<Value, 1 + sizeof...(Values)>;
+
+    **Constraints:** Participates in overload resolution only if ``sizeof...(Values) > 0`` and all types in ``Values`` are the same as ``Value``.
+
+or
+
+    .. code:: cpp
+
+        template <typename Value, unsigned int... Ns>
+        blocked_nd_range(const Value (&... dim)[Ns])
+        -> blocked_nd_range<Value, sizeof...(Ns)>;
+
+    **Constraints:** Participates in overload resolution only if ``sizeof...(Ns) > 1`` and ``N == 2`` or ``N == 3`` for each ``N`` in ``Ns``.
+
+In addition to the explicit deduction guides above, the implementation shall provide implicit or explicit deduction guides for copy constructor,
+move constructor and constructors taking ``split`` and ``proportional_split`` arguments.
+
 See also:
 
 * :doc:`blocked_range <blocked_range_cls>`
 * :doc:`blocked_range2d <blocked_range2d_cls>`
 * :doc:`blocked_range3d <blocked_range3d_cls>`
-
