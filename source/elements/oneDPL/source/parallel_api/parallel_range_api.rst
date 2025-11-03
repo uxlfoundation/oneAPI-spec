@@ -137,6 +137,84 @@ Whole Sequence Operations
 
   }
 
+Minimum and Maximum
++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // min
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
+                                                  std::ranges::range_value_t<R>* >
+      std::ranges::range_value_t<R>
+        min (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // max
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
+                                                  std::ranges::range_value_t<R>* >
+      std::ranges::range_value_t<R>
+        max (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+
+    // minmax
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> &&
+               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
+                                                  std::ranges::range_value_t<R>* >
+      std::ranges::minmax_result<std::ranges::range_value_t<R>>
+        minmax (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // min_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        min_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // max_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::borrowed_iterator_t<R>
+        max_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+    // minmax_element
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              typename Proj = std::identity,
+              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
+                    Comp = std::ranges::less>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R>
+      std::ranges::minmax_element_result<std::ranges::borrowed_iterator_t<R>>
+        minmax_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
+
+  }
+
 Element Search Operations
 +++++++++++++++++++++++++
 
@@ -239,84 +317,6 @@ Element Search Operations
                std::ranges::sized_range<R>
       std::ranges::borrowed_subrange_t<R>
         find_last_if_not (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
-
-  }
-
-Minimum and Maximum
-+++++++++++++++++++
-
-.. code:: cpp
-
-  // Defined in <oneapi/dpl/algorithm>
-
-  namespace oneapi::dpl::ranges {
-
-    // min
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::less>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> &&
-               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
-                                                  std::ranges::range_value_t<R>* >
-      std::ranges::range_value_t<R>
-        min (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
-
-    // max
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::less>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> &&
-               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
-                                                  std::ranges::range_value_t<R>* >
-      std::ranges::range_value_t<R>
-        max (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
-
-
-    // minmax
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::less>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> &&
-               std::indirectly_copyable_storable< std::ranges::iterator_t<R>,
-                                                  std::ranges::range_value_t<R>* >
-      std::ranges::minmax_result<std::ranges::range_value_t<R>>
-        minmax (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
-
-    // min_element
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::less>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R>
-      std::ranges::borrowed_iterator_t<R>
-        min_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
-
-    // max_element
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::less>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R>
-      std::ranges::borrowed_iterator_t<R>
-        max_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
-
-    // minmax_element
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              typename Proj = std::identity,
-              std::indirect_strict_weak_order< std::projected<std::ranges::iterator_t<R>, Proj> >
-                    Comp = std::ranges::less>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R>
-      std::ranges::minmax_element_result<std::ranges::borrowed_iterator_t<R>>
-        minmax_element (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
 
   }
 
