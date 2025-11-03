@@ -435,6 +435,67 @@ Sequence Search and Comparison
 
   }
 
+Sequence Reordering
++++++++++++++++++++
+
+.. code:: cpp
+
+  // Defined in <oneapi/dpl/algorithm>
+
+  namespace oneapi::dpl::ranges {
+
+    // shift_left
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        shift_left (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> n);
+
+    // shift_right
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        shift_right (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> n);
+
+    // rotate
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_subrange_t<R>
+        rotate (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle);
+
+    // rotate_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<OutR>>
+        rotate_copy (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle, OutR&& result);
+
+    // reverse
+    template <typename ExecutionPolicy, std::ranges::random_access_range R>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
+      std::ranges::borrowed_iterator_t<R>
+        reverse (ExecutionPolicy&& pol, R&& r);
+
+    // reverse_copy
+    template <typename ExecutionPolicy, std::ranges::random_access_range R,
+              std::ranges::random_access_range OutR>
+      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
+               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
+               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
+      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<R>,
+                                    std::ranges::borrowed_iterator_t<OutR>>
+        reverse_copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
+
+  }
+
 Sorting, Merge, and Heap Operations
 +++++++++++++++++++++++++++++++++++
 
@@ -794,17 +855,6 @@ Copying Mutating Operations
         replace_copy_if (ExecutionPolicy&& pol, R&& r, OutR&& result, Pred pred, const T& new_value,
                          Proj proj = {});
 
-    // reverse_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
-                                    std::ranges::borrowed_iterator_t<R>,
-                                    std::ranges::borrowed_iterator_t<OutR>>
-        reverse_copy (ExecutionPolicy&& pol, R&& r, OutR&& result);
-
     // transform (unary)
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               std::ranges::random_access_range OutR, std::copy_constructible Fn,
@@ -912,13 +962,6 @@ In-place Mutating Operations
       std::ranges::borrowed_subrange_t<R>
         remove_if (ExecutionPolicy&& pol, R&& r, Pred pred, Proj proj = {});
 
-    // reverse
-    template <typename ExecutionPolicy, std::ranges::random_access_range R>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
-      std::ranges::borrowed_iterator_t<R>
-        reverse (ExecutionPolicy&& pol, R&& r);
-
     // swap_ranges
     template <typename ExecutionPolicy, std::ranges::random_access_range R1,
               std::ranges::random_access_range R2>
@@ -938,49 +981,6 @@ In-place Mutating Operations
                std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
       std::ranges::borrowed_subrange_t<R>
         unique (ExecutionPolicy&& pol, R&& r, Comp comp = {}, Proj proj = {});
-
-  }
-
-Sequence Reordering
-+++++++++++++++++++
-
-.. code:: cpp
-
-  // Defined in <oneapi/dpl/algorithm>
-
-  namespace oneapi::dpl::ranges {
-
-    // shift_left
-    template <typename ExecutionPolicy, std::ranges::random_access_range R>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
-      std::ranges::borrowed_subrange_t<R>
-        shift_left (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> n);
-
-    // shift_right
-    template <typename ExecutionPolicy, std::ranges::random_access_range R>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
-      std::ranges::borrowed_subrange_t<R>
-        shift_right (ExecutionPolicy&& pol, R&& r, std::ranges::range_difference_t<R> n);
-
-    // rotate
-    template <typename ExecutionPolicy, std::ranges::random_access_range R>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::permutable<std::ranges::iterator_t<R>>
-      std::ranges::borrowed_subrange_t<R>
-        rotate (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle);
-
-    // rotate_copy
-    template <typename ExecutionPolicy, std::ranges::random_access_range R,
-              std::ranges::random_access_range OutR>
-      requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
-               std::ranges::sized_range<R> && std::ranges::sized_range<OutR> &&
-               std::indirectly_copyable<std::ranges::iterator_t<R>, std::ranges::iterator_t<OutR>>
-      std::ranges::in_in_out_result<std::ranges::borrowed_iterator_t<R>,
-                                    std::ranges::borrowed_iterator_t<R>,
-                                    std::ranges::borrowed_iterator_t<OutR>>
-        rotate_copy (ExecutionPolicy&& pol, R&& r, std::ranges::iterator_t<R> middle, OutR&& result);
 
   }
 
