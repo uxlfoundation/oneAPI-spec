@@ -514,7 +514,8 @@ Sequence Transformation
     // replace
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              typename T1 = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>, typename T2 = T1>
+              typename T1 = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>,
+              typename T2 = std::ranges::range_value_t<R>>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
                std::indirectly_writable<std::ranges::iterator_t<R>, const T2&> &&
@@ -528,7 +529,7 @@ Sequence Transformation
     // replace_if
     template <typename ExecutionPolicy, std::ranges::random_access_range R,
               typename Proj = std::identity,
-              typename T = /*projected-value-type*/<std::ranges::iterator_t<R>, Proj>,
+              typename T = std::ranges::range_value_t<R>,
               std::indirect_unary_predicate< std::projected<std::ranges::iterator_t<R>, Proj> > Pred>
       requires oneapi::dpl::is_execution_policy_v<std::remove_cvref_t<ExecutionPolicy>> &&
                std::ranges::sized_range<R> &&
