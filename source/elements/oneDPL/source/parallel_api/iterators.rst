@@ -315,13 +315,12 @@ using the source iterator and unary function object provided.
     {
       public:
         using difference_type = typename std::make_signed<std::size_t>::type;
-        using value_type =
-            std::tuple<typename std::iterator_traits<Iterators>::value_type...>;
+        using value_type = /* unspecified tuple of value types */;
         using reference = /* unspecified tuple of reference types */;
         using pointer =
             std::tuple<typename std::iterator_traits<Iterators>::pointer...>;
 
-        std::tuple<Iterators...> base() const;
+        /* returns unspecified tuple of source Iterators */ base() const;
 
         zip_iterator();
         explicit zip_iterator(Iterators... args);
@@ -352,11 +351,12 @@ using the source iterator and unary function object provided.
     };
 
 ``zip_iterator`` is an iterator-like type defined over one or more iterators. When dereferenced,
-the value returned from ``zip_iterator`` is a tuple of the values returned by dereferencing the
+the value returned from ``zip_iterator`` is an unspecified tuple type of the values returned by dereferencing the
 source iterators over which the ``zip_iterator`` is defined. The arithmetic operators of
 ``zip_iterator`` update the source iterators of a ``zip_iterator`` instance as though the
-operation were applied to each of these iterators. The types ``T`` within the template pack 
-``Iterators...`` must satisfy ``AdaptingIteratorSource``.
+operation were applied to each of these iterators. The types ``T`` within the template pack
+``Iterators...`` must satisfy ``AdaptingIteratorSource``. Member function `base()` returns an unspecified tuple of
+the source iterators.
 
 ``zip_iterator`` is SYCL device-copyable if all the source iterators are SYCL device-copyable, and is indirectly
 device accessible if all the source iterators are indirectly device accessible.
