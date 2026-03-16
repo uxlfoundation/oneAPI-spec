@@ -24,6 +24,9 @@ BLAS Level 3 Routines
            -     Description     
          * -     :ref:`onemath_blas_gemm`
            -     Computes a matrix-matrix product with general matrices.   
+         * -     :ref:`onemath_blas_gemmtr`
+           -     Computes a matrix-matrix product with general matrices, but updates
+                 only the upper or lower triangular part of the result matrix.
          * -     :ref:`onemath_blas_hemm`
            -     Computes a matrix-matrix product where one input matrix is Hermitian and one is general.   
          * -     :ref:`onemath_blas_herk`
@@ -47,6 +50,7 @@ BLAS Level 3 Routines
     :hidden:
 
     gemm
+    gemmtr
     hemm
     herk
     her2k

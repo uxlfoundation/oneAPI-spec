@@ -366,6 +366,7 @@ gebrd
 gelu
 gemm
 gemmt
+gemmtr
 gemt
 gemv
 gemvOptimize

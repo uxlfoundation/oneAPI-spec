@@ -1,22 +1,20 @@
-.. SPDX-FileCopyrightText: 2019-2020 Intel Corporation
+.. SPDX-FileCopyrightText: 2019-2026 Intel Corporation
 ..
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. _onemath_blas_gemmt:
+.. _onemath_blas_gemmtr:
 
-gemmt
-=====
-
-.. warning:: gemmt has been deprecated. Use level 3 :ref:`onemath_blas_gemmtr` instead.
+gemmtr
+======
 
 Computes a matrix-matrix product with general matrices, but updates
 only the upper or lower triangular part of the result matrix.
 
-.. _onemath_blas_gemmt_description:
+.. _onemath_blas_gemmtr_description:
 
 .. rubric:: Description
 
-The gemmt routines compute a scalar-matrix-matrix product and add
+The gemmtr routines compute a scalar-matrix-matrix product and add
 the result to the upper or lower part of a scalar-matrix product,
 with general matrices. The operation is defined as:
 
@@ -36,7 +34,7 @@ op(``X``) = ``X``\ :sup:`H`,
 op(``A``) is ``n`` x ``k``, op(``B``) is ``k`` x ``n``, and
 ``C`` is ``n`` x ``n``.
 
-``gemmt`` supports the following precisions.
+``gemmtr`` supports the following precisions.
 
    .. list-table:: 
       :header-rows: 1
@@ -47,48 +45,48 @@ op(``A``) is ``n`` x ``k``, op(``B``) is ``k`` x ``n``, and
       * -  ``std::complex<float>`` 
       * -  ``std::complex<double>`` 
 
-.. _onemath_blas_gemmt_buffer:
+.. _onemath_blas_gemmtr_buffer:
 
-gemmt (Buffer Version)
-----------------------
+gemmtr (Buffer Version)
+-----------------------
 
 .. rubric:: Syntax
 
 .. code-block:: cpp
 
    namespace oneapi::math::blas::column_major {
-       void gemmt(sycl::queue &queue,
-                  oneapi::math::uplo upper_lower,
-                  oneapi::math::transpose transa,
-                  oneapi::math::transpose transb,
-                  std::int64_t n,
-                  std::int64_t k,
-                  T alpha,
-                  sycl::buffer<T,1> &a,
-                  std::int64_t lda,
-                  sycl::buffer<T,1> &b,
-                  std::int64_t ldb,
-                  T beta,
-                  sycl::buffer<T,1> &c,
-                  std::int64_t ldc)
+       void gemmtr(sycl::queue &queue,
+                   oneapi::math::uplo upper_lower,
+                   oneapi::math::transpose transa,
+                   oneapi::math::transpose transb,
+                   std::int64_t n,
+                   std::int64_t k,
+                   T alpha,
+                   sycl::buffer<T,1> &a,
+                   std::int64_t lda,
+                   sycl::buffer<T,1> &b,
+                   std::int64_t ldb,
+                   T beta,
+                   sycl::buffer<T,1> &c,
+                   std::int64_t ldc)
    }
 .. code-block:: cpp
 
    namespace oneapi::math::blas::row_major {
-       void gemmt(sycl::queue &queue,
-                  oneapi::math::uplo upper_lower,
-                  oneapi::math::transpose transa,
-                  oneapi::math::transpose transb,
-                  std::int64_t n,
-                  std::int64_t k,
-                  T alpha,
-                  sycl::buffer<T,1> &a,
-                  std::int64_t lda,
-                  sycl::buffer<T,1> &b,
-                  std::int64_t ldb,
-                  T beta,
-                  sycl::buffer<T,1> &c,
-                  std::int64_t ldc)
+       void gemmtr(sycl::queue &queue,
+                   oneapi::math::uplo upper_lower,
+                   oneapi::math::transpose transa,
+                   oneapi::math::transpose transb,
+                   std::int64_t n,
+                   std::int64_t k,
+                   T alpha,
+                   sycl::buffer<T,1> &a,
+                   std::int64_t lda,
+                   sycl::buffer<T,1> &b,
+                   std::int64_t ldb,
+                   T beta,
+                   sycl::buffer<T,1> &c,
+                   std::int64_t ldc)
    }
 
 .. container:: section
@@ -222,7 +220,7 @@ gemmt (Buffer Version)
    .. rubric:: Notes
 
    If ``beta`` = 0, matrix ``C`` does not need to be initialized
-   before calling gemmt.
+   before calling gemmtr.
 
 .. container:: section
 
@@ -245,50 +243,50 @@ gemmt (Buffer Version)
    :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
-.. _onemath_blas_gemmt_usm:
+.. _onemath_blas_gemmtr_usm:
 
-gemmt (USM Version)
--------------------
+gemmtr (USM Version)
+--------------------
 
 .. rubric:: Syntax
 
 .. code-block:: cpp
 
    namespace oneapi::math::blas::column_major {
-       sycl::event gemmt(sycl::queue &queue,
-                         oneapi::math::uplo upper_lower,
-                         oneapi::math::transpose transa,
-                         oneapi::math::transpose transb,
-                         std::int64_t n,
-                         std::int64_t k,
-                         value_or_pointer<T> alpha,
-                         const T *a,
-                         std::int64_t lda,
-                         const T *b,
-                         std::int64_t ldb,
-                         value_or_pointer<T> beta,
-                         T *c,
-                         std::int64_t ldc,
-                         const std::vector<sycl::event> &dependencies = {})
+       sycl::event gemmtr(sycl::queue &queue,
+                          oneapi::math::uplo upper_lower,
+                          oneapi::math::transpose transa,
+                          oneapi::math::transpose transb,
+                          std::int64_t n,
+                          std::int64_t k,
+                          value_or_pointer<T> alpha,
+                          const T *a,
+                          std::int64_t lda,
+                          const T *b,
+                          std::int64_t ldb,
+                          value_or_pointer<T> beta,
+                          T *c,
+                          std::int64_t ldc,
+                          const std::vector<sycl::event> &dependencies = {})
    }
 .. code-block:: cpp
 
    namespace oneapi::math::blas::row_major {
-       sycl::event gemmt(sycl::queue &queue,
-                         oneapi::math::uplo upper_lower,
-                         oneapi::math::transpose transa,
-                         oneapi::math::transpose transb,
-                         std::int64_t n,
-                         std::int64_t k,
-                         value_or_pointer<T> alpha,
-                         const T *a,
-                         std::int64_t lda,
-                         const T *b,
-                         std::int64_t ldb,
-                         value_or_pointer<T> beta,
-                         T *c,
-                         std::int64_t ldc,
-                         const std::vector<sycl::event> &dependencies = {})
+       sycl::event gemmtr(sycl::queue &queue,
+                          oneapi::math::uplo upper_lower,
+                          oneapi::math::transpose transa,
+                          oneapi::math::transpose transb,
+                          std::int64_t n,
+                          std::int64_t k,
+                          value_or_pointer<T> alpha,
+                          const T *a,
+                          std::int64_t lda,
+                          const T *b,
+                          std::int64_t ldb,
+                          value_or_pointer<T> beta,
+                          T *c,
+                          std::int64_t ldc,
+                          const std::vector<sycl::event> &dependencies = {})
    }
 
 .. container:: section
@@ -432,7 +430,7 @@ gemmt (USM Version)
    .. rubric:: Notes
 
    If ``beta`` = 0, matrix ``C`` does not need to be initialized
-   before calling gemmt.
+   before calling gemmtr.
 
 .. container:: section
 
@@ -462,4 +460,4 @@ gemmt (USM Version)
    :ref:`oneapi::math::unimplemented<onemath_exception_unimplemented>`
       
 
-   **Parent topic:** :ref:`blas-like-extensions`
+   **Parent topic:** :ref:`blas-level-3-routines`

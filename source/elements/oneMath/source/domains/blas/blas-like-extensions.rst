@@ -32,8 +32,10 @@ BLAS-like Extensions
            -     Computes groups of matrix-matrix products with general matrices.   
          * -     :ref:`onemath_blas_trsm_batch`
            -     Solves a triangular matrix equation for a group of matrices.   
-         * -     :ref:`onemath_blas_gemmt`
-           -     Computes a matrix-matrix product with general matrices, but updates
+         * -     :ref:`onemath_blas_gemmt` (deprecated)
+           -     **gemmt has been deprecated. Use level 3** :ref:`onemath_blas_gemmtr` **instead.**
+
+                 Computes a matrix-matrix product with general matrices, but updates
                  only the upper or lower triangular part of the result matrix.
          * -     :ref:`onemath_blas_gemm_bias`
            -     Computes a matrix-matrix product using general integer matrices with bias
