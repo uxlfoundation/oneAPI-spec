@@ -39,7 +39,7 @@ platformdirs==4.2.0
 pre-commit==3.6.0
 pydata-sphinx-theme==0.15.2
 pyenchant==3.2.2
-Pygments==2.17.2
+Pygments==2.20.0
 PyYAML==6.0.1
 requests==2.32.4
 six==1.16.0
