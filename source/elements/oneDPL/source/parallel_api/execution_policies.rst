@@ -56,6 +56,15 @@ A device execution policy represents a `SYCL`_ device and queue to run oneDPL al
         class device_policy;
 
         inline const device_policy<> dpcpp_default;
+        
+        template <typename KernelName = /*unspecified*/>
+        const device_policy<KernelName> dpdefault;
+
+        template <typename KernelName = /*unspecified*/>
+        const device_policy<KernelName> dpgpu;
+
+        template <typename KernelName = /*unspecified*/>
+        const device_policy<KernelName> dpcpu;
 
         template <typename KernelName = /*unspecified*/>
         device_policy<KernelName>
@@ -151,12 +160,22 @@ Return the queue the policy is associated with.
 
 Allow implicit conversion of the policy to a ``sycl::queue`` object.
 
-Predefined Device Policy
-^^^^^^^^^^^^^^^^^^^^^^^^
+Predefined Device Policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``dpcpp_default`` is a predefined execution policy object to run algorithms on the default SYCL device.
 It is a global immutable (``const``) instance of type ``device_policy<>``.
 [*Note*: ``dpcpp_default`` can be copied but cannot be moved. -- *end note*]
+
+``dpdefault``, ``dpgpu``, and ``dpcpu`` are variable templates for creating ``device_policy`` objects,
+possibly with explicit kernel names, to run algorithms on the default SYCL device, a GPU device,
+and a CPU device, respectively. An object instantiated from one of these templates is a global
+immutable ``device_policy`` object. It is associated with a SYCL queue constructed with
+the SYCL device selector that corresponds to the used variable template.
+[*Example*: ``dpgpu<>`` is associated with a queue created by ``sycl::gpu_selector_v``. -- *end example*]
+
+Construction of predefined device policies must not throw exceptions.
+Use of a ``dpgpu`` or a ``dpcpu`` policy object can throw ``sycl::exception`` if no appropriate device is found.
 
 make_device_policy Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
