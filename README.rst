@@ -6,24 +6,24 @@
 oneAPI Specifications
 =====================
 
-.. image:: https://github.com/uxlfoundation/oneAPI-spec/actions/workflows/pr.yml/badge.svg
-   :target: https://github.com/uxlfoundation/oneAPI-spec/actions/workflows/pr.yml
+.. important::
 
-.. image:: https://api.reuse.software/badge/github.com/uxlfoundation/oneAPI-spec
-   :target: https://api.reuse.software/info/github.com/uxlfoundation/oneAPI-spec
-   :alt: REUSE status
+   **This repository is retired. The oneAPI specification has moved to a dynamic specification.**
 
-.. image:: https://www.bestpractices.dev/projects/8323/badge
-   :target: https://www.bestpractices.dev/projects/8323
+   Start with the `oneAPI specification on the UXL Foundation website <https://uxlfoundation.org/specifications/oneapi/technical-overview/>`__.
+   The website maintains shared concepts and project relationships. Each project's
+   published documentation is the canonical source for its current APIs,
+   requirements, compatibility and supported configurations.
 
-This repository contains the sources for the `oneAPI
-Specification`_. For the latest build from main branch, see HTML_ and
-PDF_.
+   See the `oneAPI libraries and specification elements <https://uxlfoundation.org/specifications/oneapi/specification-elements/>`__
+   for links to the projects and their documentation. Propose changes and report
+   issues in the relevant project repository.
 
-For more information about oneAPI, see `oneapi.io`_.  For information
-about future releases of the oneAPI specification, see the roadmap_.
-To be notified about new releases, become a release-only watcher of
-this repo.
+   This repository is archived for historical reference. Its bundled specifications,
+   releases and open discussions are historical records, not the current specification.
+   No further releases or contributions are planned here.
+
+The instructions below describe how to build and maintain historical snapshots.
 
 The document is written using `reStructuredText`_ and built with
 `Sphinx`_ using a theme provided by `Read the Docs`_.
@@ -45,7 +45,8 @@ See `LICENSE <LICENSE.rst>`__ for more information.
 Contribute
 ----------
 
-See `CONTRIBUTING <CONTRIBUTING.rst>`__ for more information.
+For current contributions, follow the project links on the UXL website above.
+The `former contribution guide <CONTRIBUTING.rst>`__ is retained as a historical record.
 
 .. _build_spec:
 

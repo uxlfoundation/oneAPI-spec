@@ -6,6 +6,25 @@
 How to Contribute
 =================
 
+.. important::
+
+   **This repository is retired. The oneAPI specification has moved to a dynamic specification.**
+
+   Start with the `oneAPI specification on the UXL Foundation website <https://uxlfoundation.org/specifications/oneapi/technical-overview/>`__.
+   The website maintains shared concepts and project relationships. Each project's
+   published documentation is the canonical source for its current APIs,
+   requirements, compatibility and supported configurations.
+
+   See the `oneAPI libraries and specification elements <https://uxlfoundation.org/specifications/oneapi/specification-elements/>`__
+   for links to the projects and their documentation. Propose changes and report
+   issues in the relevant project repository.
+
+   This repository is archived for historical reference. Its bundled specifications,
+   releases and open discussions are historical records, not the current specification.
+   No further releases or contributions are planned here.
+
+**Historical documentation follows.**
+
 This specification is a continuation of Intel’s decades-long history
 of working with standards groups and industry/academia initiatives
 such as The Khronos Group, to create and define specifications in an
